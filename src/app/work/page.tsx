@@ -37,7 +37,7 @@ import {
 } from "@/components/work-layer-cards";
 import portfolioData from "@/content/work_portfolio.json";
 import adjudicationData from "@/content/work_adjudication.json";
-import projectIndex from "@/../backlog/3_bfl_boundary_first_ux/bfl_project_index_seed_v0_1.json";
+import projectIndex from "@/content/project_index.json";
 import { ATLAS_HREF, ATLAS_LIST_HREF } from "@/lib/site-navigation";
 import {
   claimEvidenceVitals,

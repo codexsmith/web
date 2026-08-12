@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import projectIndex from "../../backlog/3_bfl_boundary_first_ux/bfl_project_index_seed_v0_1.json";
+import projectIndex from "../content/project_index.json";
 import adjudicationData from "../content/work_adjudication.json";
 import collaborationRegistry from "../content/collaboration_instances.json";
 import governanceBindings from "../content/governance_bindings.json";

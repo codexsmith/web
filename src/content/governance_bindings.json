@@ -14,7 +14,7 @@
     {
       "id": "binding-seed-project-index",
       "appliesToType": "seed-project",
-      "appliesToSource": "backlog/3_bfl_boundary_first_ux/bfl_project_index_seed_v0_1.json#projects",
+      "appliesToSource": "src/content/project_index.json#projects",
       "sourcePaths": ["identity.portfolioGovernance", "identity.evidenceArchitecture"],
       "authorityBoundary": "Seed-project visibility does not imply a named steward, approved next gate, funding, completion, or canonical promotion.",
       "requiredClosure": "Attach steward, next gate, output disposition, evidence status, and replacement history before canonical promotion.",
