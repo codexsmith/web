@@ -50,13 +50,13 @@ export default function MethodsPage() {
       <section className="scroll-mt-32 border-b border-border px-5 py-14 sm:px-8 sm:py-20" id="method-stack">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               {firstText(stack.title)}
             </p>
             <h2 className="mt-4 font-serif text-4xl font-semibold sm:text-6xl">
               {firstText(stack.headline)}
             </h2>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-foreground/70">
+            <p className="mt-6 max-w-3xl text-base leading-8 text-foreground-muted">
               {firstText(stack.purpose)}
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function MethodsPage() {
               <article className="bg-card p-6 sm:p-8" id={firstText(layer.id)} key={firstText(layer.id)}>
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
-                    <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                       {String(index + 1).padStart(2, "0")} · {firstText(layer.role)}
                     </p>
                     <h3 className="mt-3 font-serif text-3xl font-semibold">
@@ -80,10 +80,10 @@ export default function MethodsPage() {
                 <p className="mt-6 font-serif text-xl font-semibold leading-8">
                   {firstText(layer.question)}
                 </p>
-                <p className="mt-4 text-sm leading-7 text-foreground/70">
+                <p className="mt-4 text-sm leading-7 text-foreground-muted">
                   {firstText(layer.oneLine)}
                 </p>
-                <p className="mt-6 border-t border-border pt-4 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-muted-foreground">
+                <p className="mt-6 border-t border-border pt-4 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-foreground-muted">
                   Status · {firstText(layer.status)}
                 </p>
               </article>
@@ -107,7 +107,7 @@ export default function MethodsPage() {
               const [verb, ...body] = step.split(" — ");
               return (
                 <li className="bg-primary p-5" key={step}>
-                  <span className="font-mono text-[9px] text-primary-foreground/50">
+                  <span className="font-mono text-[9px] text-primary-foreground-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-3 font-serif text-xl font-semibold capitalize">
@@ -126,7 +126,7 @@ export default function MethodsPage() {
       <section className="scroll-mt-32 border-b border-border px-5 py-14 sm:px-8 sm:py-20" id="glossary">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Public glossary
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -143,11 +143,11 @@ export default function MethodsPage() {
                   <span className="block font-serif text-xl font-semibold">
                     {firstText(item.term)}
                   </span>
-                  <span className="mt-2 block font-mono text-[8px] font-semibold uppercase leading-4 tracking-[0.11em] text-muted-foreground">
+                  <span className="mt-2 block font-mono text-[8px] font-semibold uppercase leading-4 tracking-[0.11em] text-foreground-muted">
                     {humanizeStatus(item.status)}
                   </span>
                 </dt>
-                <dd className="text-sm leading-7 text-foreground/70">
+                <dd className="text-sm leading-7 text-foreground-muted">
                   {firstText(item.definition)}
                 </dd>
               </div>
@@ -159,7 +159,7 @@ export default function MethodsPage() {
       <section className="scroll-mt-32 px-5 py-14 sm:px-8 sm:py-20" id="next-step">
         <div className="mx-auto grid max-w-7xl gap-8 border border-border bg-card p-6 sm:p-9 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
-            <CircleDot aria-hidden="true" className="h-5 w-5 text-muted-foreground" />
+            <CircleDot aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
             <h2 className="mt-4 max-w-4xl font-serif text-3xl font-semibold sm:text-4xl">
               {firstText(asRecord(methodsPage.closing).headline)}
             </h2>

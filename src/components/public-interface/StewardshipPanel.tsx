@@ -31,7 +31,7 @@ export function StewardshipPanel({
             className={`font-mono text-[9px] font-semibold uppercase tracking-[0.18em] ${
               inverse
                 ? "text-primary-foreground/58"
-                : "text-muted-foreground"
+                : "text-foreground-muted"
             }`}
           >
             {firstText(
@@ -55,7 +55,7 @@ export function StewardshipPanel({
             className={`border-l-2 pl-4 text-sm leading-7 ${
               inverse
                 ? "border-accent text-primary-foreground/74"
-                : "border-accent text-foreground/70"
+                : "border-accent text-foreground-muted"
             }`}
             key={principle}
           >

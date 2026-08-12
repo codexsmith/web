@@ -81,7 +81,7 @@ export default function VisualGrammarPage() {
       <section className="border-b border-border bg-card/55 px-5 py-12 sm:px-8 sm:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] lg:items-end">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               How to read the set
             </p>
             <p className="mt-4 max-w-4xl font-serif text-3xl font-semibold leading-snug sm:text-4xl">
@@ -108,8 +108,8 @@ export default function VisualGrammarPage() {
       <section className="border-b border-border bg-card/55 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
           <div>
-            <ImageOff aria-hidden="true" className="h-7 w-7 text-muted-foreground" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <ImageOff aria-hidden="true" className="h-7 w-7 text-foreground-muted" />
+            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Source and design status
             </p>
             <h2 className="mt-3 max-w-xl font-serif text-4xl font-semibold sm:text-5xl">
@@ -117,7 +117,7 @@ export default function VisualGrammarPage() {
             </h2>
           </div>
           <div className="border border-border bg-background p-6 sm:p-8">
-            <p className="text-base leading-8 text-foreground/72">
+            <p className="text-base leading-8 text-foreground-muted">
               {visualGrammar.sourceImagePolicy.note}
             </p>
             <dl className="mt-7 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2">
@@ -128,7 +128,7 @@ export default function VisualGrammarPage() {
                 ["Design origin", "Project-native structure"],
               ].map(([term, detail]) => (
                 <div className="bg-card/55 p-5" key={term}>
-                  <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                  <dt className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                     {term}
                   </dt>
                   <dd className="mt-2 text-sm font-semibold leading-6">
@@ -152,7 +152,7 @@ export default function VisualGrammarPage() {
         <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end">
           <div>
             <ShieldCheck aria-hidden="true" className="h-7 w-7" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/60">
+            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               Semantic firewalls
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">

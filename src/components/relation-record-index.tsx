@@ -76,7 +76,7 @@ export function RecordLensesNavigation({
           <span className="block whitespace-nowrap text-[11px] tracking-[0.15em]">
             Record lenses
           </span>
-          <span className="mt-0.5 block whitespace-nowrap text-[8px] tracking-[0.1em] text-muted-foreground">
+          <span className="mt-0.5 block whitespace-nowrap text-[8px] tracking-[0.1em] text-foreground-muted">
             Counts show records
           </span>
         </span>
@@ -107,7 +107,7 @@ export function RecordLensesNavigation({
                     className={`shrink-0 ${
                       isCurrent
                         ? "text-background/68"
-                        : "text-muted-foreground"
+                        : "text-foreground-muted"
                     }`}
                   >
                     {count}
@@ -145,7 +145,7 @@ function RelationRecordGroups({
             contained ? "" : "mt-5"
           } border border-border bg-card px-3 py-3 sm:px-4`}
         >
-          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
             Shared by all {projection} records
           </p>
           <dl className="mt-2 grid gap-x-6 gap-y-2 text-[11px] leading-5 md:grid-cols-2">
@@ -178,20 +178,20 @@ function RelationRecordGroups({
                   <span className="font-serif text-lg font-semibold leading-tight">
                     {group.label}
                   </span>
-                  <span className="shrink-0 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">
+                  <span className="shrink-0 font-mono text-[9px] uppercase tracking-[0.1em] text-foreground-muted">
                     {group.records.length}{" "}
                     {group.records.length === 1 ? "record" : "records"}
                   </span>
                 </span>
                 <ChevronDown
                   aria-hidden="true"
-                  className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
+                  className="h-4 w-4 shrink-0 text-foreground-muted transition-transform group-open:rotate-180"
                 />
               </summary>
               <div className="border-t border-border">
                 {groupSharedBoundaries.length > 0 && (
                   <div className="border-b border-border bg-background/55 px-3 py-3 sm:px-4">
-                    <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                       Shared within this domain
                     </p>
                     <dl className="mt-2 grid gap-x-6 gap-y-2 text-[11px] leading-5 md:grid-cols-2">
@@ -231,9 +231,9 @@ function RelationRecordGroups({
                         <div className="flex items-start justify-between gap-3">
                           <FileText
                             aria-hidden="true"
-                            className="mt-1 h-4 w-4 shrink-0 text-muted-foreground"
+                            className="mt-1 h-4 w-4 shrink-0 text-foreground-muted"
                           />
-                          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
+                          <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-foreground-muted">
                             {record.status}
                           </span>
                         </div>
@@ -241,7 +241,7 @@ function RelationRecordGroups({
                           {record.label}
                         </h3>
                         {record.summary && (
-                          <p className="mt-1.5 text-xs leading-5 text-foreground/70">
+                          <p className="mt-1.5 text-xs leading-5 text-foreground-muted">
                             {record.summary}
                           </p>
                         )}
@@ -255,7 +255,7 @@ function RelationRecordGroups({
                             ))}
                           </dl>
                         )}
-                        <p className="mt-3 break-words border-t border-border/70 pt-3 font-mono text-[9px] leading-4 text-muted-foreground">
+                        <p className="mt-3 break-words border-t border-border/70 pt-3 font-mono text-[9px] leading-4 text-foreground-muted">
                           <span className="font-semibold uppercase tracking-[0.1em]">
                             Source
                           </span>{" "}
@@ -302,14 +302,14 @@ export function RelationProjectionSection({
       id={projection}
     >
       <div className="mx-auto max-w-7xl">
-        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
           {collapsible && "Primary evidence content · "}
           {count} records across {groups.length} domains
         </p>
         <h2 className="mt-2 font-serif text-3xl font-semibold capitalize sm:text-4xl">
           {projection}
         </h2>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-foreground/70">
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-foreground-muted">
           {projectionDescriptions[projection]}
         </p>
 
@@ -323,13 +323,13 @@ export function RelationProjectionSection({
                 <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.14em]">
                   Work records by domain
                 </span>
-                <span className="mt-0.5 block text-[11px] text-muted-foreground">
+                <span className="mt-0.5 block text-[11px] text-foreground-muted">
                   {count} records · {groups.length} domain groups
                 </span>
               </span>
               <ChevronDown
                 aria-hidden="true"
-                className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open/work:rotate-180"
+                className="h-5 w-5 shrink-0 text-foreground-muted transition-transform group-open/work:rotate-180"
               />
             </summary>
             <div className="border-t border-border p-3 sm:p-4">

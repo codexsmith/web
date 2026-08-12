@@ -114,12 +114,12 @@ export default function SearchPage() {
           >
             <Search
               aria-hidden="true"
-              className="h-5 w-5 shrink-0 text-muted-foreground"
+              className="h-5 w-5 shrink-0 text-foreground-muted"
             />
             <input
               autoComplete="off"
               autoFocus
-              className="h-14 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground sm:h-16 sm:text-lg"
+              className="h-14 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-foreground-muted sm:h-16 sm:text-lg"
               id="graph-search"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Try “repair”, “mathematics”, or “public trust”"
@@ -129,7 +129,7 @@ export default function SearchPage() {
             {query && (
               <button
                 aria-label="Clear search"
-                className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-sm p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-sm p-2 text-foreground-muted transition-colors hover:bg-muted hover:text-foreground"
                 onClick={() => setQuery("")}
                 type="button"
               >
@@ -148,7 +148,7 @@ export default function SearchPage() {
             </h2>
             <p
               aria-live="polite"
-              className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground"
+              className="font-mono text-[11px] uppercase tracking-widest text-foreground-muted"
             >
               {totalResults} {totalResults === 1 ? "match" : "matches"}
             </p>
@@ -162,22 +162,22 @@ export default function SearchPage() {
                   href="/publications/civilizational-mechanics"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-border bg-background">
-                    <BookOpen className="h-5 w-5 text-muted-foreground" />
+                    <BookOpen className="h-5 w-5 text-foreground-muted" />
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                    <span className="block font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
                       Publication · v0.1
                     </span>
                     <span className="mt-1 block font-serif text-xl font-semibold leading-tight">
                       Civilizational Mechanics
                     </span>
-                    <span className="mt-2 line-clamp-3 block text-sm leading-6 text-muted-foreground">
+                    <span className="mt-2 line-clamp-3 block text-sm leading-6 text-foreground-muted">
                       A public pathway from displaced consequence and
                       institutional agency to representational revision and
                       repair.
                     </span>
                   </span>
-                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-foreground-muted transition-transform group-hover:translate-x-1" />
                 </Link>
               ) : null}
               {results.map((node) => {
@@ -196,20 +196,20 @@ export default function SearchPage() {
                     type="button"
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-border bg-background">
-                      <Icon className="h-5 w-5 text-muted-foreground" />
+                      <Icon className="h-5 w-5 text-foreground-muted" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                      <span className="block font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
                         {eyebrow}
                       </span>
                       <span className="mt-1 block font-serif text-xl font-semibold leading-tight">
                         {node.label}
                       </span>
-                      <span className="mt-2 line-clamp-3 block text-sm leading-6 text-muted-foreground">
+                      <span className="mt-2 line-clamp-3 block text-sm leading-6 text-foreground-muted">
                         {node.short}
                       </span>
                     </span>
-                    <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-foreground-muted transition-transform group-hover:translate-x-1" />
                   </button>
                 );
               })}
@@ -219,7 +219,7 @@ export default function SearchPage() {
               <h3 className="font-serif text-2xl font-semibold">
                 No matching public record yet.
               </h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              <p className="mt-2 text-sm leading-6 text-foreground-muted">
                 Try a broader term or search a related concept.
               </p>
               <button

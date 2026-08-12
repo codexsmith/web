@@ -45,8 +45,8 @@ export default function GovernancePage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.68fr)_minmax(0,1.32fr)]">
             <div>
-              <Scale aria-hidden="true" className="h-7 w-7 text-muted-foreground" />
-              <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <Scale aria-hidden="true" className="h-7 w-7 text-foreground-muted" />
+              <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 Institutional commitments
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -60,7 +60,7 @@ export default function GovernancePage() {
             <ol className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
               {asStringArray(governance.commitments).map((commitment, index) => (
                 <li className="bg-card p-5" key={commitment}>
-                  <span className="font-mono text-[9px] text-muted-foreground">
+                  <span className="font-mono text-[9px] text-foreground-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <p className="mt-3 text-sm font-medium leading-7">
@@ -78,7 +78,7 @@ export default function GovernancePage() {
           <StewardshipPanel stewardship={stewardship} />
           <div className="mt-5 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
             <article className="bg-background p-5">
-              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                 Present reality
               </p>
               <p className="mt-3 text-sm font-medium leading-7">
@@ -86,7 +86,7 @@ export default function GovernancePage() {
               </p>
             </article>
             <article className="bg-background p-5 md:col-span-2">
-              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                 Public position
               </p>
               <p className="mt-3 text-sm font-medium leading-7">
@@ -105,16 +105,16 @@ export default function GovernancePage() {
           <div className="flex items-start gap-4">
             <ShieldCheck
               aria-hidden="true"
-              className="mt-1 h-6 w-6 shrink-0 text-muted-foreground"
+              className="mt-1 h-6 w-6 shrink-0 text-foreground-muted"
             />
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                 Durable governance bindings
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
                 Every work type keeps an explicit authority boundary.
               </h2>
-              <p className="mt-4 max-w-4xl text-sm leading-7 text-foreground/70">
+              <p className="mt-4 max-w-4xl text-sm leading-7 text-foreground-muted">
                 These bindings name which canonical governance sources apply.
                 They do not manufacture adoption, ownership, evidence, or
                 operation records.
@@ -127,7 +127,7 @@ export default function GovernancePage() {
                 className="border border-border bg-card p-5"
                 key={binding.id}
               >
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                   {binding.status}
                 </p>
                 <h3 className="mt-3 font-serif text-2xl font-semibold">
@@ -156,7 +156,7 @@ export default function GovernancePage() {
       <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Claim discipline
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -166,7 +166,7 @@ export default function GovernancePage() {
           <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {Object.entries(firewalls).map(([domain, boundary]) => (
               <article className="border border-border bg-card p-5" key={domain}>
-                <ShieldCheck aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
+                <ShieldCheck aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
                 <h3 className="mt-4 font-serif text-xl font-semibold">
                   {humanizeStatus(domain)}
                 </h3>

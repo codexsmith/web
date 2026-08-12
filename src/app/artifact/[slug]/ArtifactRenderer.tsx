@@ -28,7 +28,7 @@ const Mermaid = ({ chart }: { chart: string }) => {
     });
   }, [chart]);
 
-  if (!svg) return <div className="animate-pulse h-32 bg-muted rounded-md flex items-center justify-center font-mono text-sm text-muted-foreground">Loading diagram...</div>;
+  if (!svg) return <div className="animate-pulse h-32 bg-muted rounded-md flex items-center justify-center font-mono text-sm text-foreground-muted">Loading diagram...</div>;
   
   return (
     <div 

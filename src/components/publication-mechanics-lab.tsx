@@ -179,7 +179,7 @@ function NestedInteriorsView() {
     <div className="grid gap-7 lg:grid-cols-[minmax(17rem,0.65fr)_minmax(0,1.35fr)]">
       <div>
         <label
-          className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+          className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted"
           htmlFor="burden-example"
         >
           Choose a displaced burden
@@ -207,7 +207,7 @@ function NestedInteriorsView() {
           Trace the transfer
           <ChevronRight className="ml-2 h-4 w-4" />
         </button>
-        <p className="mt-5 text-sm leading-7 text-foreground/70">
+        <p className="mt-5 text-sm leading-7 text-foreground-muted">
           The burden does not disappear when it crosses the operating boundary.
           It enters another interior with its own finite repair capacity.
         </p>
@@ -221,13 +221,13 @@ function NestedInteriorsView() {
           <div className="border border-border bg-background p-4 text-sm font-semibold">
             Source · {burden.source}
           </div>
-          <div className="flex min-h-11 items-center justify-center font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+          <div className="flex min-h-11 items-center justify-center font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
             {traced ? "burden crosses boundary ↓" : "transfer not yet traced ↓"}
           </div>
           <div className="border border-border bg-[color-mix(in_srgb,var(--accent)_18%,var(--card))] p-4 text-sm font-semibold">
             Receiver · {burden.receiver}
           </div>
-          <div className="ml-5 border-l-2 border-accent pl-4 text-sm leading-6 text-foreground/72">
+          <div className="ml-5 border-l-2 border-accent pl-4 text-sm leading-6 text-foreground-muted">
             Constrained capacity · {burden.capacity}
           </div>
         </div>
@@ -396,7 +396,7 @@ function BoundaryAccountingView() {
     <div className="grid gap-7 lg:grid-cols-[minmax(17rem,0.65fr)_minmax(0,1.35fr)]">
       <div>
         <label
-          className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+          className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted"
           htmlFor="accounting-example"
         >
           Decision example
@@ -417,7 +417,7 @@ function BoundaryAccountingView() {
           ))}
         </select>
         <fieldset className="mt-5">
-          <legend className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <legend className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
             Include inside the accounting boundary
           </legend>
           <div className="mt-3 grid gap-2">
@@ -451,7 +451,7 @@ function BoundaryAccountingView() {
       <div className="border border-border bg-card p-4 sm:p-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
               Represented result
             </p>
             <p className="mt-2 font-serif text-5xl font-semibold">
@@ -470,7 +470,7 @@ function BoundaryAccountingView() {
                 className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border p-3 text-sm ${
                   flow.included
                     ? "border-foreground bg-background"
-                    : "border-dashed border-border bg-muted/35 text-foreground/65"
+                    : "border-dashed border-border bg-muted/35 text-foreground-muted"
                 }`}
                 key={flow.id}
               >
@@ -599,7 +599,7 @@ function AgencyRateView() {
     <div className="grid gap-7 lg:grid-cols-[minmax(17rem,0.65fr)_minmax(0,1.35fr)]">
       <div>
         <label
-          className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+          className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted"
           htmlFor="agency-speed"
         >
           Institutional cadence · {speed}/10
@@ -891,14 +891,14 @@ function RootLensesView({
         </svg>
         <figcaption className="border-t border-border pt-4">
           <p className="font-serif text-2xl font-semibold">{selected.title}</p>
-          <p className="mt-3 text-sm leading-7 text-foreground/72">
+          <p className="mt-3 text-sm leading-7 text-foreground-muted">
             {selected.quote}
           </p>
         </figcaption>
       </figure>
 
       <div>
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
           Choose the primary severance
         </p>
         <div className="mt-3 grid gap-2">
@@ -1033,7 +1033,7 @@ function BoundaryCycleView() {
             <p className="font-serif text-2xl font-semibold">
               {selectedStage.label}
             </p>
-            <p className="mt-2 text-sm leading-6 text-foreground/70">
+            <p className="mt-2 text-sm leading-6 text-foreground-muted">
               {selectedStage.description}
             </p>
           </figcaption>
@@ -1058,7 +1058,7 @@ function BoundaryCycleView() {
       </div>
 
       <div>
-        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
           Four-question audit
         </p>
         <div className="mt-3 grid gap-4">
@@ -1088,7 +1088,7 @@ function BoundaryCycleView() {
           className={`mt-5 flex items-start gap-3 border p-4 text-sm leading-6 ${
             complete
               ? "border-foreground bg-primary text-primary-foreground"
-              : "border-border bg-card text-foreground/70"
+              : "border-border bg-card text-foreground-muted"
           }`}
         >
           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
@@ -1182,7 +1182,7 @@ function RepairRouterView({
     <div className="grid gap-8">
       <div className="grid gap-6 lg:grid-cols-2">
         <fieldset>
-          <legend className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <legend className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
             1 · Diagnose the primary severance
           </legend>
           <div className="mt-3 grid gap-2">
@@ -1205,10 +1205,10 @@ function RepairRouterView({
         </fieldset>
 
         <fieldset>
-          <legend className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <legend className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
             2 · Select the repair route
           </legend>
-          <p className="mt-3 text-sm leading-6 text-foreground/70">
+          <p className="mt-3 text-sm leading-6 text-foreground-muted">
             Recommended from this lens:{" "}
             <strong>
               {routes.find((route) => route.id === recommendedRouteId)?.title}
@@ -1238,7 +1238,7 @@ function RepairRouterView({
       <div className="border border-border bg-card p-5 sm:p-7">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
               3 · Supply local closure fields
             </p>
             <h3 className="mt-2 font-serif text-3xl font-semibold">
@@ -1278,7 +1278,7 @@ function RepairRouterView({
       <div className="grid gap-5 border border-border bg-primary p-5 text-primary-foreground sm:p-7 lg:grid-cols-[minmax(0,1fr)_auto]">
         <div>
           <p
-            className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground/60"
+            className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground-muted"
             id="repair-packet-label"
           >
             4 · Repair packet
@@ -1376,7 +1376,7 @@ export function PublicationMechanicsLab() {
           role="region"
         >
           <div className="mb-7 border-b border-border pb-5">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
               {activeOption.label}
             </p>
             <p className="mt-2 text-sm leading-6 text-foreground/68">

@@ -113,7 +113,7 @@ export default async function ArtifactPage({ params }: ArtifactPageProps) {
           aria-label="Artifact context"
           className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3"
         >
-          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
             Library artifact
           </span>
           <span className="flex flex-wrap gap-4 text-sm">
@@ -161,7 +161,7 @@ export default async function ArtifactPage({ params }: ArtifactPageProps) {
 
         {metadata.public_summary && (
           <div className="mb-12 rounded-sm border-l-2 border-primary bg-card/50 p-6">
-            <div className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground mb-3">Public Summary</div>
+            <div className="font-mono text-[11px] uppercase tracking-widest text-foreground-muted mb-3">Public Summary</div>
             <p className="text-lg font-serif italic text-foreground leading-relaxed">{metadata.public_summary}</p>
           </div>
         )}

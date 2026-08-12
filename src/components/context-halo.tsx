@@ -773,8 +773,8 @@ export function SemanticMapLegend({
           <ListTree className="h-4 w-4" />
           Semantic legend
         </span>
-        <span className="text-muted-foreground group-open:hidden">Open</span>
-        <span className="hidden text-muted-foreground group-open:inline">Close</span>
+        <span className="text-foreground-muted group-open:hidden">Open</span>
+        <span className="hidden text-foreground-muted group-open:inline">Close</span>
       </summary>
       <div
         className={`grid gap-5 border-t border-border p-4 ${
@@ -782,7 +782,7 @@ export function SemanticMapLegend({
         }`}
       >
         <div>
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted">
             Hue · domain family
           </p>
           <ul className="mt-3 grid gap-2">
@@ -803,7 +803,7 @@ export function SemanticMapLegend({
         </div>
         {surface === "map" ? (
           <div>
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted">
               Shape · entity type
           </p>
           <ul className="mt-3 grid grid-cols-2 gap-2">
@@ -825,7 +825,7 @@ export function SemanticMapLegend({
           </div>
         ) : null}
       </div>
-      <p className="border-t border-border px-4 py-3 text-sm leading-5 text-muted-foreground">
+      <p className="border-t border-border px-4 py-3 text-sm leading-5 text-foreground-muted">
         {surface === "map"
           ? "Angle shows facet affinity. Radius shows structural distance. Edge weight shows relationship strength; edge style shows relationship type; opacity shows current prominence."
           : "The left rule preserves each node's domain family. Stage placement shows conceptual dependency, and the visible role label preserves object type without relying on color alone."}

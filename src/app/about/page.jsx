@@ -109,19 +109,19 @@ function StatementCard({ item, category }) {
         <span className="rounded-full border border-border bg-background px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.16em]">
           {category}
         </span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-muted-foreground">
+        <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-foreground-muted">
           Classified
         </span>
       </div>
       <h3 className="mt-5 font-serif text-2xl font-semibold leading-8">
         {asString(item.statement)}
       </h3>
-      <p className="mt-4 text-sm leading-7 text-foreground/70">
+      <p className="mt-4 text-sm leading-7 text-foreground-muted">
         {asString(item.summary)}
       </p>
       <dl className="mt-6 grid gap-3 border-t border-border/60 pt-5 text-xs">
         <div className="grid grid-cols-[6.5rem_1fr] gap-3">
-          <dt className="font-mono uppercase tracking-wider text-muted-foreground">
+          <dt className="font-mono uppercase tracking-wider text-foreground-muted">
             Secondary role
           </dt>
           <dd>
@@ -131,13 +131,13 @@ function StatementCard({ item, category }) {
           </dd>
         </div>
         <div className="grid grid-cols-[6.5rem_1fr] gap-3">
-          <dt className="font-mono uppercase tracking-wider text-muted-foreground">
+          <dt className="font-mono uppercase tracking-wider text-foreground-muted">
             Binding
           </dt>
           <dd>Formal adoption not yet recorded</dd>
         </div>
         <div className="grid grid-cols-[6.5rem_1fr] gap-3">
-          <dt className="font-mono uppercase tracking-wider text-muted-foreground">
+          <dt className="font-mono uppercase tracking-wider text-foreground-muted">
             Operation
           </dt>
           <dd>Evidence record not yet available</dd>
@@ -265,7 +265,7 @@ export default function AboutPage() {
 
       <section className="border-b border-border px-5 py-10 sm:px-8">
         <div className="mx-auto max-w-7xl">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
             Institutional stage — stated as a sequence, not a single claim
           </p>
           <ol className="mt-6 grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-4">
@@ -282,7 +282,7 @@ export default function AboutPage() {
               ["Bounded horizon", asString(vision.longHorizon)],
             ].map(([label, value], index) => (
               <li className="relative bg-card p-5 sm:p-6" key={label}>
-                <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")} · {label}
                 </span>
                 <p className="mt-4 text-sm font-medium leading-7">{value}</p>
@@ -292,7 +292,7 @@ export default function AboutPage() {
               </li>
             ))}
           </ol>
-          <ul className="mt-5 grid gap-2 text-sm text-foreground/70 md:grid-cols-2">
+          <ul className="mt-5 grid gap-2 text-sm text-foreground-muted md:grid-cols-2">
             {currentFacts.map((fact) => (
               <li
                 className="flex gap-3 border-l-2 border-accent pl-3 leading-6"
@@ -311,13 +311,13 @@ export default function AboutPage() {
           <section className="px-5 py-14 sm:px-8 sm:py-20">
             <div className="mx-auto max-w-7xl">
               <div className="max-w-4xl">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                   Institutional closure map
                 </p>
                 <h2 className="mt-3 font-serif text-4xl font-semibold">
                   The lab is inside the system it evaluates.
                 </h2>
-                <p className="mt-5 text-base leading-8 text-foreground/70">
+                <p className="mt-5 text-base leading-8 text-foreground-muted">
                   Select a closure layer to see what it binds. Classification,
                   adoption, operation, evidence, and audit remain separate
                   statuses.
@@ -347,7 +347,7 @@ export default function AboutPage() {
                           className={`mt-0.5 block text-xs ${
                             activeClosure === section.id
                               ? "text-background/65"
-                              : "text-muted-foreground"
+                              : "text-foreground-muted"
                           }`}
                         >
                           {section.description}
@@ -360,7 +360,7 @@ export default function AboutPage() {
               <div className="mt-8 border border-border bg-card p-6 sm:p-8">
                 <div className="flex items-start justify-between gap-5">
                   <div>
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                       Selected closure layer
                     </p>
                     <h2 className="mt-2 font-serif text-4xl font-semibold capitalize">
@@ -375,7 +375,7 @@ export default function AboutPage() {
                 {activeClosure === "purpose" && (
                   <div className="mt-8 space-y-7">
                     <div>
-                      <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                      <p className="font-mono text-[9px] uppercase tracking-wider text-foreground-muted">
                         Mission
                       </p>
                       <p className="mt-2 font-serif text-3xl font-semibold">
@@ -383,7 +383,7 @@ export default function AboutPage() {
                       </p>
                     </div>
                     <div>
-                      <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                      <p className="font-mono text-[9px] uppercase tracking-wider text-foreground-muted">
                         Method
                       </p>
                       <p className="mt-2 text-lg font-medium leading-8">
@@ -391,10 +391,10 @@ export default function AboutPage() {
                       </p>
                     </div>
                     <div>
-                      <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                      <p className="font-mono text-[9px] uppercase tracking-wider text-foreground-muted">
                         Vision
                       </p>
-                      <p className="mt-2 text-sm leading-7 text-foreground/70">
+                      <p className="mt-2 text-sm leading-7 text-foreground-muted">
                         {asString(vision.public)}
                       </p>
                     </div>
@@ -408,7 +408,7 @@ export default function AboutPage() {
                         className="border border-border bg-background p-4"
                         key={asString(item.id)}
                       >
-                        <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                        <p className="font-mono text-[9px] uppercase tracking-wider text-foreground-muted">
                           {category}
                         </p>
                         <p className="mt-2 font-serif text-lg font-semibold">
@@ -426,7 +426,7 @@ export default function AboutPage() {
                         Responsibility may be distributed, but it may not be
                         dissolved.
                       </p>
-                      <p className="mt-5 text-base leading-8 text-foreground/70">
+                      <p className="mt-5 text-base leading-8 text-foreground-muted">
                         {asString(governance.researchDoctrine)}
                       </p>
                     </div>
@@ -437,7 +437,7 @@ export default function AboutPage() {
                           className="border border-border bg-background p-4"
                           key={asString(item.id)}
                         >
-                          <Scale className="h-4 w-4 text-muted-foreground" />
+                          <Scale className="h-4 w-4 text-foreground-muted" />
                           <h3 className="mt-3 font-serif text-lg font-semibold">
                             {asString(item.title)}
                           </h3>
@@ -449,7 +449,7 @@ export default function AboutPage() {
                     </div>
 
                     <div>
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                         Consequential authority should remain
                       </p>
                       <ul className="mt-4 flex flex-wrap gap-2">
@@ -471,7 +471,7 @@ export default function AboutPage() {
 
                 {activeClosure === "gates" && (
                   <div className="mt-8">
-                    <p className="text-sm leading-7 text-foreground/70">
+                    <p className="text-sm leading-7 text-foreground-muted">
                       {asString(evidence.principle)}
                     </p>
                     <ol className="mt-6 grid gap-2 sm:grid-cols-3">
@@ -480,7 +480,7 @@ export default function AboutPage() {
                           className="border border-border bg-background p-3"
                           key={asString(item.id)}
                         >
-                          <span className="font-mono text-[9px] text-muted-foreground">
+                          <span className="font-mono text-[9px] text-foreground-muted">
                             {String(index + 1).padStart(2, "0")}
                           </span>
                           <span className="mt-1 block text-sm font-semibold">
@@ -498,13 +498,13 @@ export default function AboutPage() {
                 {activeClosure === "standing" && (
                   <div className="mt-8 space-y-8">
                     <div className="border-l-2 border-accent pl-5">
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                         Working doctrine
                       </p>
                       <p className="mt-3 font-serif text-3xl font-semibold">
                         {asString(noUndeclaredWe.statement)}
                       </p>
-                      <p className="mt-3 text-sm leading-7 text-foreground/70">
+                      <p className="mt-3 text-sm leading-7 text-foreground-muted">
                         Collective voice should make the speaker, participants,
                         authority, represented parties, material dissent,
                         affected nonparticipants, and review path legible.
@@ -543,7 +543,7 @@ export default function AboutPage() {
                             <span className="font-semibold">
                               {asString(item.label)}
                             </span>
-                            <span className="mt-2 block text-xs leading-5 text-muted-foreground">
+                            <span className="mt-2 block text-xs leading-5 text-foreground-muted">
                               {asString(item.description)}
                             </span>
                           </Link>
@@ -559,7 +559,7 @@ export default function AboutPage() {
                       <p className="font-serif text-3xl font-semibold">
                         Repair is a capability, not an emergency promise.
                       </p>
-                      <p className="mt-5 text-base leading-8 text-foreground/70">
+                      <p className="mt-5 text-base leading-8 text-foreground-muted">
                         Claims, policies, products, publications, and
                         collaborations must preserve visible routes for
                         criticism, qualification, replacement, withdrawal, and
@@ -573,7 +573,7 @@ export default function AboutPage() {
                           className="border border-border bg-background p-3"
                           key={item}
                         >
-                          <span className="font-mono text-[10px] text-muted-foreground">
+                          <span className="font-mono text-[10px] text-foreground-muted">
                             {String(index + 1).padStart(2, "0")}
                           </span>
                           <span className="mt-2 block text-sm font-semibold leading-5">
@@ -623,13 +623,13 @@ export default function AboutPage() {
                 {activeClosure === "continuity" && (
                   <div className="mt-8 space-y-8">
                     <div>
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                         Founder provenance without founder finality
                       </p>
                       <p className="mt-3 font-serif text-3xl font-semibold">
                         {asString(founder.summary)}
                       </p>
-                      <p className="mt-4 text-sm leading-7 text-foreground/70">
+                      <p className="mt-4 text-sm leading-7 text-foreground-muted">
                         The founder may be historically indispensable without
                         becoming the permanent court of final appeal. Origin is
                         provenance; claims still require evidence, criticism,
@@ -646,7 +646,7 @@ export default function AboutPage() {
                           <p className="font-semibold">
                             {asString(item.title)}
                           </p>
-                          <p className="mt-1 text-sm leading-6 text-foreground/70">
+                          <p className="mt-1 text-sm leading-6 text-foreground-muted">
                             {asString(item.body)}
                           </p>
                         </div>
@@ -655,10 +655,10 @@ export default function AboutPage() {
 
                     <div>
                       <div className="flex flex-wrap items-center justify-between gap-3">
-                        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                           Self-application mechanisms
                         </p>
-                        <span className="rounded-full border border-border bg-background px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        <span className="rounded-full border border-border bg-background px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                           Proposed policy framework
                         </span>
                       </div>
@@ -679,7 +679,7 @@ export default function AboutPage() {
                       </div>
                     </div>
 
-                    <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-foreground-muted">
                       Continuity goal · {asString(founder.continuityGoal)}
                     </p>
                   </div>
@@ -692,14 +692,14 @@ export default function AboutPage() {
             <div className="mx-auto max-w-7xl">
               <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
                 <div>
-                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                     Institutional covenant
                   </p>
                   <h2 className="mt-3 max-w-3xl font-serif text-4xl font-semibold sm:text-5xl">
                     Category is visible. Missing force remains missing.
                   </h2>
                 </div>
-                <p className="max-w-md text-sm leading-7 text-foreground/70">
+                <p className="max-w-md text-sm leading-7 text-foreground-muted">
                   {asString(guidelines.status)}
                 </p>
               </div>
@@ -721,7 +721,7 @@ export default function AboutPage() {
             <nav
               aria-label="Institutional sections"
             >
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                 Direct institutional index
               </p>
               <div className="mt-4 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -801,13 +801,13 @@ export default function AboutPage() {
                   id={id}
                   key={id}
                 >
-                  <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                  <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                     {title}
                   </p>
                   <h2 className="mt-3 font-serif text-3xl font-semibold sm:text-4xl">
                     {title}
                   </h2>
-                  <p className="mt-5 max-w-4xl text-base leading-8 text-foreground/72 sm:text-lg sm:leading-9">
+                  <p className="mt-5 max-w-4xl text-base leading-8 text-foreground-muted sm:text-lg sm:leading-9">
                     {body || "No public summary is currently recorded."}
                   </p>
                 </section>
@@ -822,7 +822,7 @@ export default function AboutPage() {
       <section className="bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary-foreground/60">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-primary-foreground-muted">
               Public operating boundary
             </p>
             <h2 className="mt-3 max-w-3xl font-serif text-4xl font-semibold sm:text-5xl">

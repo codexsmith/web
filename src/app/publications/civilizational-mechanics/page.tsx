@@ -50,10 +50,10 @@ function StepCard({ card, order }: { card: PublicationCard; order: number }) {
     >
       <div className="p-5 sm:p-7">
         <div className="flex items-center justify-between gap-4">
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
             {card.kicker}
           </span>
-          <span className="font-mono text-[11px] font-semibold text-muted-foreground">
+          <span className="font-mono text-[11px] font-semibold text-foreground-muted">
             {String(order + 1).padStart(2, "0")}
           </span>
         </div>
@@ -63,7 +63,7 @@ function StepCard({ card, order }: { card: PublicationCard; order: number }) {
         <blockquote className="mt-4 border-l-2 border-accent pl-4 text-base font-medium leading-7 text-foreground/82">
           {card.quote}
         </blockquote>
-        <p className="mt-5 text-sm leading-7 text-foreground/70">
+        <p className="mt-5 text-sm leading-7 text-foreground-muted">
           {card.summary}
         </p>
       </div>
@@ -84,10 +84,10 @@ function StepCard({ card, order }: { card: PublicationCard; order: number }) {
             ],
           ].map(([label, body]) => (
             <div className="bg-card p-5 sm:p-6" key={label}>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                 {label}
               </p>
-              <p className="mt-3 text-sm leading-7 text-foreground/72">
+              <p className="mt-3 text-sm leading-7 text-foreground-muted">
                 {body}
               </p>
             </div>
@@ -145,12 +145,12 @@ export default async function CivilizationalMechanicsPage({
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground underline-offset-4 hover:underline"
+              className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted underline-offset-4 hover:underline"
               href="/publications"
             >
               Publications
             </Link>
-            <span aria-hidden="true" className="text-muted-foreground">
+            <span aria-hidden="true" className="text-foreground-muted">
               /
             </span>
             <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em]">
@@ -166,21 +166,21 @@ export default async function CivilizationalMechanicsPage({
                 {hero.headline}
               </p>
             </div>
-            <p className="max-w-2xl text-sm font-medium leading-7 text-foreground/70 sm:text-base">
+            <p className="max-w-2xl text-sm font-medium leading-7 text-foreground-muted sm:text-base">
               Trace displaced consequence, diagnose broken return paths, and
               select bounded repairs through a public learning route.
             </p>
           </div>
           <div className="mt-7 grid overflow-hidden border border-primary bg-primary text-primary-foreground lg:grid-cols-[minmax(0,0.85fr)_minmax(20rem,1.15fr)] lg:items-center">
             <div className="p-4 sm:p-5">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-foreground/60">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-foreground-muted">
                 Root pattern
               </p>
               <p className="mt-2 font-serif text-xl font-semibold sm:text-2xl">
                 Capacity to act − required return path = exported consequence
               </p>
             </div>
-            <p className="border-t border-primary-foreground/20 p-4 text-xs leading-6 text-primary-foreground/70 sm:p-5 sm:text-sm lg:border-l lg:border-t-0">
+            <p className="border-t border-primary-foreground/20 p-4 text-xs leading-6 text-primary-foreground-secondary sm:p-5 sm:text-sm lg:border-l lg:border-t-0">
               {claimCeiling}
             </p>
           </div>
@@ -266,7 +266,7 @@ export default async function CivilizationalMechanicsPage({
                   key={phase.id}
                 >
                   <div className="mb-5 grid gap-3 border-b border-border pb-5 sm:grid-cols-[4rem_minmax(0,1fr)]">
-                    <span className="font-mono text-[11px] font-semibold text-muted-foreground">
+                    <span className="font-mono text-[11px] font-semibold text-foreground-muted">
                       Phase {String(phaseIndex + 1).padStart(2, "0")}
                     </span>
                     <div>
@@ -309,8 +309,8 @@ export default async function CivilizationalMechanicsPage({
             {rootCards.map((card, index) => (
               <article className="bg-background p-6 sm:p-8" key={card.id}>
                 <div className="flex items-center justify-between gap-4">
-                  <CircleDot className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-mono text-[11px] text-muted-foreground">
+                  <CircleDot className="h-4 w-4 text-foreground-muted" />
+                  <span className="font-mono text-[11px] text-foreground-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
@@ -345,7 +345,7 @@ export default async function CivilizationalMechanicsPage({
                 key={route.id}
               >
                 <summary className="grid min-h-14 cursor-pointer list-none grid-cols-[2.25rem_minmax(0,1fr)_1.5rem] items-center gap-3 px-5 py-4 sm:px-6">
-                  <span className="font-mono text-[11px] font-semibold text-muted-foreground">
+                  <span className="font-mono text-[11px] font-semibold text-foreground-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span className="font-serif text-xl font-semibold sm:text-2xl">
@@ -361,13 +361,13 @@ export default async function CivilizationalMechanicsPage({
                     ["Outputs", route.outputs],
                   ].map(([label, values]) => (
                     <div className="bg-card p-5 sm:p-6" key={label as string}>
-                      <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                      <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                         {label as string}
                       </p>
                       <ul className="mt-4 grid gap-2">
                         {(values as string[]).map((value) => (
                           <li
-                            className="grid grid-cols-[1rem_1fr] gap-2 text-sm leading-6 text-foreground/72"
+                            className="grid grid-cols-[1rem_1fr] gap-2 text-sm leading-6 text-foreground-muted"
                             key={value}
                           >
                             <span aria-hidden="true">·</span>
@@ -379,7 +379,7 @@ export default async function CivilizationalMechanicsPage({
                   ))}
                 </div>
                 <div className="border-t border-border bg-primary p-5 text-primary-foreground sm:p-6">
-                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground/60">
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground-muted">
                     Closure test
                   </p>
                   <p className="mt-3 text-sm leading-7 text-primary-foreground/78">

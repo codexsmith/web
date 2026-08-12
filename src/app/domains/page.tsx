@@ -20,7 +20,7 @@ export default function DomainsPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <React.Suspense fallback={<div className="p-8 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">Loading architecture...</div>}>
+      <React.Suspense fallback={<div className="p-8 font-mono text-[11px] uppercase tracking-widest text-foreground-muted">Loading architecture...</div>}>
         <DomainArchitectureTree
           nodes={nodes}
           onExploreNode={handleExploreNode}

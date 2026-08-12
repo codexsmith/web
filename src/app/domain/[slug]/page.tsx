@@ -121,7 +121,7 @@ export default function DomainPage() {
     return (
       <main className="flex min-h-screen items-center justify-center bg-background px-6 text-foreground">
         <div className="w-full max-w-xl rounded-sm border border-border bg-card p-8 shadow-sm">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground/70">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
             Domain not found
           </p>
           <h1 className="mt-3 font-serif text-4xl font-semibold">
@@ -172,7 +172,7 @@ export default function DomainPage() {
               <NodeIcon aria-hidden="true" className="h-5 w-5" />
             </span>
             <div className="min-w-0">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                 Research domain
                 {architectureStage
                   ? ` · Stage ${String(architectureStageNumber).padStart(2, "0")} of ${String(DOMAIN_ARCHITECTURE_STAGES.length).padStart(2, "0")} · ${architectureStage.title}`
@@ -181,7 +181,7 @@ export default function DomainPage() {
               <h1 className="mt-2 font-serif text-4xl font-semibold leading-tight [overflow-wrap:anywhere] sm:text-5xl">
                 {node.label}
               </h1>
-              <p className="mt-3 max-w-4xl text-base font-medium leading-7 text-foreground/72 sm:text-lg sm:leading-8">
+              <p className="mt-3 max-w-4xl text-base font-medium leading-7 text-foreground-muted sm:text-lg sm:leading-8">
                 {node.short}
               </p>
             </div>
@@ -220,7 +220,7 @@ export default function DomainPage() {
               initiallyOpen={true}
               title="Overview"
             >
-              <p className="text-lg font-medium leading-8 text-foreground/85 sm:text-xl sm:leading-9">
+              <p className="text-lg font-medium leading-8 text-foreground-secondary sm:text-xl sm:leading-9">
                 {node.body}
               </p>
               <DomainFacetsSection
@@ -243,10 +243,10 @@ export default function DomainPage() {
                       className="rounded-sm border border-border bg-background p-5"
                       key={`${takeaway}-${index}`}
                     >
-                      <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground/65">
+                      <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                         Insight {String(index + 1).padStart(2, "0")}
                       </span>
-                      <p className="mt-3 text-[15px] font-medium leading-6 text-foreground/85">
+                      <p className="mt-3 text-[15px] font-medium leading-6 text-foreground-secondary">
                         {takeaway}
                       </p>
                     </li>
@@ -281,7 +281,7 @@ export default function DomainPage() {
               >
                 <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
                   <div className="max-w-3xl">
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                       Stage {String(architectureStageNumber).padStart(2, "0")} of{" "}
                       {String(DOMAIN_ARCHITECTURE_STAGES.length).padStart(
                         2,
@@ -346,7 +346,7 @@ export default function DomainPage() {
                       ),
                     )}
                   >
-                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                       Previous in stage
                     </span>
                     <span className="mt-1 block text-sm font-semibold">
@@ -368,7 +368,7 @@ export default function DomainPage() {
                       ),
                     )}
                   >
-                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                       Next in stage
                     </span>
                     <span className="mt-1 block text-sm font-semibold">

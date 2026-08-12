@@ -38,14 +38,14 @@ export function PublicRecordContent() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-4xl">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 Institutional record index
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
                 What exists, what is working, and what remains to be built.
               </h2>
             </div>
-            <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
               {records.length} declared records
             </span>
           </div>
@@ -60,10 +60,10 @@ export function PublicRecordContent() {
                   key={firstText(record.id)}
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <span className="font-mono text-[9px] text-muted-foreground">
+                    <span className="font-mono text-[9px] text-foreground-muted">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="max-w-44 text-right font-mono text-[8px] font-semibold uppercase leading-4 tracking-[0.11em] text-muted-foreground">
+                    <span className="max-w-44 text-right font-mono text-[8px] font-semibold uppercase leading-4 tracking-[0.11em] text-foreground-muted">
                       {humanizeStatus(status)}
                     </span>
                   </div>
@@ -76,7 +76,7 @@ export function PublicRecordContent() {
           </div>
 
           <div className="mt-8 border border-border bg-card p-5 sm:p-6">
-            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
               Required record metadata
             </p>
             <ul className="mt-4 flex flex-wrap gap-2">
@@ -93,8 +93,8 @@ export function PublicRecordContent() {
       <section className="border-b border-border bg-card/50 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
           <div>
-            <CircleDot aria-hidden="true" className="h-5 w-5 text-muted-foreground" />
-            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <CircleDot aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Citation policy
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -107,7 +107,7 @@ export function PublicRecordContent() {
           <ol className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
             {asStringArray(citation.rules).map((rule, index) => (
               <li className="bg-background p-4" key={rule}>
-                <span className="font-mono text-[8px] text-muted-foreground">
+                <span className="font-mono text-[8px] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <p className="mt-2 text-xs font-medium leading-6">{rule}</p>

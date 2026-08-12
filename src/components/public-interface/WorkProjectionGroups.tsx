@@ -19,7 +19,7 @@ export function WorkProjectionGroups() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               One graph · multiple public projections
             </p>
             <h2
@@ -30,10 +30,10 @@ export function WorkProjectionGroups() {
             </h2>
           </div>
           <div>
-            <p className="text-sm leading-7 text-foreground/70">
+            <p className="text-sm leading-7 text-foreground-muted">
               {firstText(policy.rule)}
             </p>
-            <p className="mt-3 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-muted-foreground">
+            <p className="mt-3 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-foreground-muted">
               {firstText(policy.caseStudyStatus)}
             </p>
           </div>
@@ -66,19 +66,19 @@ export function WorkProjectionGroups() {
               >
                 <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden">
                   <div className="grid grid-cols-[2rem_1fr] items-center gap-4">
-                    <span className="font-mono text-[9px] text-muted-foreground">
+                    <span className="font-mono text-[9px] text-foreground-muted">
                       {String(groupIndex + 1).padStart(2, "0")}
                     </span>
                     <span>
                       <span className="block font-serif text-2xl font-semibold sm:text-3xl">
                         {firstText(group.label)}
                       </span>
-                      <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+                      <span className="mt-1 block text-xs leading-5 text-foreground-muted">
                         {firstText(group.description)}
                       </span>
                     </span>
                   </div>
-                  <span className="flex shrink-0 items-center gap-3 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  <span className="flex shrink-0 items-center gap-3 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                     {entities.length} records
                     <span
                       aria-hidden="true"
@@ -98,7 +98,7 @@ export function WorkProjectionGroups() {
                       key={firstText(entity.id)}
                     >
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                        <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                           {asStringArray(entity.entityTypes)
                             .map((status) => humanizeStatus(status))
                             .join(" · ")}
@@ -115,7 +115,7 @@ export function WorkProjectionGroups() {
                       </p>
                       <dl className="mt-auto grid grid-cols-2 gap-3 border-t border-border pt-4 text-[9px]">
                         <div>
-                          <dt className="font-mono uppercase tracking-[0.1em] text-muted-foreground">
+                          <dt className="font-mono uppercase tracking-[0.1em] text-foreground-muted">
                             Lifecycle
                           </dt>
                           <dd className="mt-1 font-medium">
@@ -125,7 +125,7 @@ export function WorkProjectionGroups() {
                           </dd>
                         </div>
                         <div>
-                          <dt className="font-mono uppercase tracking-[0.1em] text-muted-foreground">
+                          <dt className="font-mono uppercase tracking-[0.1em] text-foreground-muted">
                             Operating state
                           </dt>
                           <dd className="mt-1 font-medium">
@@ -135,7 +135,7 @@ export function WorkProjectionGroups() {
                           </dd>
                         </div>
                       </dl>
-                      <span className="mt-4 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-muted-foreground group-hover/card:text-foreground">
+                      <span className="mt-4 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted group-hover/card:text-foreground">
                         Open source domain
                         <ArrowRight
                           aria-hidden="true"
@@ -152,7 +152,7 @@ export function WorkProjectionGroups() {
 
         <div className="mt-8 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
           <article className="bg-card p-6">
-            <CircleDot aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
+            <CircleDot aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
             <h3 className="mt-4 font-serif text-2xl font-semibold">Case studies</h3>
             <p className="mt-3 text-sm leading-7 text-foreground/68">
               {firstText(policy.caseStudyStatus)} The empty state is deliberate: a case needs a bounded record, evidence, and an explicit claim ceiling.

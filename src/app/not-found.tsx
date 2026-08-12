@@ -18,13 +18,13 @@ export default function NotFound() {
       <SiteHeader />
       <section className="flex flex-1 items-center border-b border-border px-5 py-20 sm:px-8">
         <div className="mx-auto w-full max-w-4xl">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
             404 · Record not found
           </p>
           <h1 className="mt-5 max-w-3xl font-serif text-5xl font-semibold leading-none tracking-tight sm:text-7xl">
             This path does not resolve to a public record.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-foreground/70">
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-foreground-muted">
             The record may have moved, remain unpublished, or never have been
             part of the public corpus.
           </p>

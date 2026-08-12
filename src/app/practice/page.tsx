@@ -42,7 +42,7 @@ export default function PracticePage() {
           <ol className="grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 xl:grid-cols-7">
             {steps.map((step, index) => (
               <li className="bg-background p-5" key={firstText(step.verb)}>
-                <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h2 className="mt-5 font-serif text-2xl font-semibold">
@@ -60,7 +60,7 @@ export default function PracticePage() {
       <section className="border-b border-border bg-card/50 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Related layers, distinct jobs
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -71,18 +71,18 @@ export default function PracticePage() {
             {methodCards.map((card, index) => (
               <article className="bg-background p-6" key={firstText(card.label)}>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                     {firstText(card.verb)}
                   </span>
-                  <CircleDot aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
+                  <CircleDot aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
                 </div>
                 <h3 className="mt-6 font-serif text-2xl font-semibold">
                   {firstText(card.label)}
                 </h3>
-                <p className="mt-4 text-sm leading-7 text-foreground/70">
+                <p className="mt-4 text-sm leading-7 text-foreground-muted">
                   {firstText(card.line)}
                 </p>
-                <span className="mt-6 block font-mono text-[9px] text-muted-foreground">
+                <span className="mt-6 block font-mono text-[9px] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")} / {methodCards.length}
                 </span>
               </article>
@@ -94,7 +94,7 @@ export default function PracticePage() {
       <section className="px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 border border-border bg-card p-6 sm:p-9 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Public impact rule
             </p>
             <p className="mt-4 max-w-4xl font-serif text-3xl font-semibold leading-tight">

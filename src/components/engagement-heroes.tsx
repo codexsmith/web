@@ -28,13 +28,13 @@ export function EngagementHeroes({
     >
       <div className="mx-auto max-w-7xl">
         <div className="max-w-4xl">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
             {context === "work" ? "Ways to engage" : "Institutional relationships"}
           </p>
           <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
             {heading}
           </h2>
-          <p className="mt-5 max-w-3xl text-base leading-8 text-foreground/70">
+          <p className="mt-5 max-w-3xl text-base leading-8 text-foreground-muted">
             {intro}
           </p>
         </div>
@@ -44,11 +44,11 @@ export function EngagementHeroes({
             <div>
               <div className="flex items-center justify-between gap-4">
                 <Handshake className="h-8 w-8" aria-hidden="true" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary-foreground/55">
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary-foreground-muted">
                   Shared work · bounded relation
                 </span>
               </div>
-              <p className="mt-12 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-foreground/55">
+              <p className="mt-12 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-foreground-muted">
                 Collaborate
               </p>
               <h3 className="mt-3 max-w-xl font-serif text-4xl font-semibold sm:text-5xl">
@@ -92,18 +92,18 @@ export function EngagementHeroes({
           <article className="flex min-h-[30rem] flex-col justify-between bg-card p-6 sm:p-9 lg:p-12">
             <div>
               <div className="flex items-center justify-between gap-4">
-                <Building2 className="h-8 w-8 text-muted-foreground" aria-hidden="true" />
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+                <Building2 className="h-8 w-8 text-foreground-muted" aria-hidden="true" />
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-foreground-muted">
                   Architecture · risk · delivery
                 </span>
               </div>
-              <p className="mt-12 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="mt-12 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                 Enterprise practice
               </p>
               <h3 className="mt-3 max-w-xl font-serif text-4xl font-semibold sm:text-5xl">
                 Consequential systems need visible failure boundaries.
               </h3>
-              <p className="mt-6 max-w-xl text-base leading-8 text-foreground/70">
+              <p className="mt-6 max-w-xl text-base leading-8 text-foreground-muted">
                 Apply Boundary First to one bounded architecture, workflow, or
                 delivery problem where hidden coupling, false closure, or
                 displaced repair creates material risk.

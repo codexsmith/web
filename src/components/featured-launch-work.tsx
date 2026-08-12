@@ -45,7 +45,7 @@ export function FeaturedLaunchWork() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(20rem,0.65fr)] lg:items-end lg:justify-between">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Software · analysis · products
             </p>
             <h2
@@ -55,7 +55,7 @@ export function FeaturedLaunchWork() {
               Available now—and building in public.
             </h2>
           </div>
-          <p className="text-base leading-8 text-foreground/70">
+          <p className="text-base leading-8 text-foreground-muted">
             Current offers sit beside developing systems with their maturity
             left visible. Availability is an operating promise; prominence is
             not evidence of universal proof.
@@ -65,18 +65,18 @@ export function FeaturedLaunchWork() {
         <div className="mt-9 grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-2">
           <article className="flex min-h-[30rem] flex-col bg-background p-6 sm:p-8 lg:p-10">
             <div className="flex items-start justify-between gap-5">
-              <Wrench className="h-7 w-7 text-muted-foreground" aria-hidden="true" />
+              <Wrench className="h-7 w-7 text-foreground-muted" aria-hidden="true" />
               <span className="border border-foreground/20 bg-card px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em]">
                 {systemsAudit.status}
               </span>
             </div>
-            <p className="mt-8 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="mt-8 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
               {systemsAudit.category}
             </p>
             <h3 className="mt-3 font-serif text-4xl font-semibold">
               {systemsAudit.title}
             </h3>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-foreground/72">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-foreground-muted">
               {systemsAudit.summary}
             </p>
             <p className="mt-4 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground/66">
@@ -90,7 +90,7 @@ export function FeaturedLaunchWork() {
 
           <article className="flex min-h-[30rem] flex-col bg-primary p-6 text-primary-foreground sm:p-8 lg:p-10">
             <div className="flex items-start justify-between gap-5">
-              <Layers3 className="h-7 w-7 text-primary-foreground/70" aria-hidden="true" />
+              <Layers3 className="h-7 w-7 text-primary-foreground-secondary" aria-hidden="true" />
               <span className="border border-primary-foreground/30 bg-primary-foreground/[0.08] px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em]">
                 {boundaryFirstChess.status}
               </span>
@@ -133,7 +133,7 @@ export function FeaturedLaunchWork() {
         <div className="grid gap-px border-x border-b border-border bg-border sm:grid-cols-2 xl:grid-cols-4">
           {featuredWork.map((item) => (
             <article className="flex min-h-72 flex-col bg-background p-5 sm:p-6" key={item.id}>
-              <p className="font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.14em] text-muted-foreground">
+              <p className="font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.14em] text-foreground-muted">
                 {item.category}
               </p>
               <h3 className="mt-3 font-serif text-2xl font-semibold">

@@ -57,7 +57,7 @@ export function SceneVisualizer({
 
   return (
     <div className="flex min-h-[30rem] flex-col">
-      <div className="flex items-center justify-between gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-primary-foreground/70">
+      <div className="flex items-center justify-between gap-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-primary-foreground-secondary">
         <span>{scene.visualMode?.replaceAll("-", " ") ?? "Scene"}</span>
         <span>
           {sceneNodes.length > 0
@@ -83,7 +83,7 @@ export function SceneVisualizer({
               key={term}
             >
               <Icon className="h-4 w-4" aria-hidden="true" />
-              <span className="mt-2 block font-mono text-[10px] font-semibold uppercase leading-4 tracking-[0.08em] text-primary-foreground/80">
+              <span className="mt-2 block font-mono text-[10px] font-semibold uppercase leading-4 tracking-[0.08em] text-primary-foreground-secondary">
                 {term}
               </span>
             </div>
@@ -242,7 +242,7 @@ function NodeCard({
         />
       </span>
       <span className="min-w-0">
-        <span className="block font-mono text-[9px] font-semibold uppercase leading-3 tracking-[0.1em] text-primary-foreground/60">
+        <span className="block font-mono text-[9px] font-semibold uppercase leading-3 tracking-[0.1em] text-primary-foreground-muted">
           {asString(node.role, node.virtual ? "Concept" : "Record")}
         </span>
         <strong
@@ -286,7 +286,7 @@ function NodeGrid({
 }) {
   if (nodes.length === 0) {
     return (
-      <div className="grid w-full place-items-center border border-dashed border-primary-foreground/30 p-10 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-primary-foreground/65">
+      <div className="grid w-full place-items-center border border-dashed border-primary-foreground/30 p-10 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-primary-foreground-muted">
         This scene is conceptual; continue to reveal its records.
       </div>
     );
@@ -315,7 +315,7 @@ function SingleConsequence() {
     >
       <div className="w-full max-w-md">
         <div className="mx-auto w-fit border border-primary-foreground/35 bg-primary-foreground/[0.07] px-6 py-4 text-center">
-          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-primary-foreground/60">
+          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-primary-foreground-muted">
             Representation
           </span>
           <strong className="mt-1 block font-serif text-xl">
@@ -323,7 +323,7 @@ function SingleConsequence() {
           </strong>
         </div>
         <ArrowDown
-          className="mx-auto my-4 h-5 w-5 text-primary-foreground/55"
+          className="mx-auto my-4 h-5 w-5 text-primary-foreground-muted"
           aria-hidden="true"
         />
         <div className="grid grid-cols-2 gap-3">
@@ -333,14 +333,14 @@ function SingleConsequence() {
             </span>
             <span className="mt-2 block text-xs">Visible · governable</span>
           </div>
-          <div className="border border-dashed border-primary-foreground/45 p-4 text-center text-primary-foreground/65">
+          <div className="border border-dashed border-primary-foreground/45 p-4 text-center text-primary-foreground-muted">
             <span className="font-mono text-[10px] font-bold uppercase tracking-[0.12em]">
               Excluded
             </span>
             <span className="mt-2 block text-xs">Hidden · displaced</span>
           </div>
         </div>
-        <div className="mt-3 border-l-2 border-amber-300/70 bg-amber-200/10 px-4 py-3 text-sm text-primary-foreground/80">
+        <div className="mt-3 border-l-2 border-amber-300/70 bg-amber-200/10 px-4 py-3 text-sm text-primary-foreground-secondary">
           Excluded consequence returns as defect, burden, risk, or harm.
         </div>
       </div>
@@ -367,11 +367,11 @@ function FourQuestionWheel() {
             className="border border-primary-foreground/30 bg-primary-foreground/[0.06] p-4"
             key={term}
           >
-            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-primary-foreground/60">
+            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-primary-foreground-muted">
               0{index + 1}
             </span>
             <strong className="mt-2 block font-serif text-lg">{term}</strong>
-            <span className="mt-1 block text-xs text-primary-foreground/70">
+            <span className="mt-1 block text-xs text-primary-foreground-secondary">
               {question}
             </span>
           </div>
@@ -399,7 +399,7 @@ function LineageRoots({
       aria-label="Foundational lineages converging on Boundary First"
     >
       <div className="mx-auto w-fit border border-primary-foreground/35 bg-primary px-5 py-3 text-center">
-        <span className="font-mono text-[9px] uppercase tracking-[0.13em] text-primary-foreground/60">
+        <span className="font-mono text-[9px] uppercase tracking-[0.13em] text-primary-foreground-muted">
           Present synthesis
         </span>
         <strong className="mt-1 block font-serif text-lg">
@@ -444,7 +444,7 @@ function ConvergenceDiagram({
         ))}
       </div>
       <ArrowRight
-        className="mx-auto h-5 w-5 rotate-90 text-primary-foreground/55 sm:rotate-0"
+        className="mx-auto h-5 w-5 rotate-90 text-primary-foreground-muted sm:rotate-0"
         aria-hidden="true"
       />
       {target && (
@@ -494,7 +494,7 @@ function DualPractice({
           />
         ))}
       </div>
-      <p className="mx-auto mt-4 max-w-sm text-center text-xs leading-5 text-primary-foreground/65">
+      <p className="mx-auto mt-4 max-w-sm text-center text-xs leading-5 text-primary-foreground-muted">
         Independent inquiry and operational practice expose the same
         representational failure from different sides.
       </p>
@@ -536,7 +536,7 @@ function HubDiagram({
       </div>
       {center && !center.virtual && (
         <Link
-          className="mx-auto mt-3 flex w-fit items-center gap-2 font-mono text-[9px] font-bold uppercase tracking-[0.11em] text-primary-foreground/70 hover:text-primary-foreground"
+          className="mx-auto mt-3 flex w-fit items-center gap-2 font-mono text-[9px] font-bold uppercase tracking-[0.11em] text-primary-foreground-secondary hover:text-primary-foreground"
           href={`/domain/${center.id}`}
           onClick={() => onNodeClick(center.id)}
         >
@@ -562,7 +562,7 @@ function NodeCycle({
       <div className="grid grid-cols-2 gap-2">
         {nodes.slice(0, 4).map((node, index) => (
           <div className="relative" key={node.id}>
-            <span className="absolute right-2 top-2 z-10 font-mono text-[9px] text-primary-foreground/45">
+            <span className="absolute right-2 top-2 z-10 font-mono text-[9px] text-primary-foreground-muted">
               0{index + 1}
             </span>
             <NodeCard
@@ -605,7 +605,7 @@ function FixedCycle({
             >
               <div className="flex items-center justify-between">
                 <Icon className="h-4 w-4" aria-hidden="true" />
-                <span className="font-mono text-[9px] text-primary-foreground/45">
+                <span className="font-mono text-[9px] text-primary-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
@@ -637,7 +637,7 @@ function Pipeline({ items }: { items: string[] }) {
             className="relative border border-primary-foreground/28 bg-primary-foreground/[0.06] p-3"
             key={item}
           >
-            <span className="font-mono text-[9px] text-primary-foreground/45">
+            <span className="font-mono text-[9px] text-primary-foreground-muted">
               {String(index + 1).padStart(2, "0")}
             </span>
             <strong className="mt-2 block font-serif text-base">
@@ -645,14 +645,14 @@ function Pipeline({ items }: { items: string[] }) {
             </strong>
             {index < items.length - 1 && (
               <ArrowRight
-                className="absolute -right-2.5 top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 bg-primary text-primary-foreground/60 sm:block"
+                className="absolute -right-2.5 top-1/2 z-10 hidden h-4 w-4 -translate-y-1/2 bg-primary text-primary-foreground-muted sm:block"
                 aria-hidden="true"
               />
             )}
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center justify-center gap-2 border-t border-primary-foreground/30 pt-3 font-mono text-[9px] font-bold uppercase tracking-[0.11em] text-primary-foreground/65">
+      <div className="mt-3 flex items-center justify-center gap-2 border-t border-primary-foreground/30 pt-3 font-mono text-[9px] font-bold uppercase tracking-[0.11em] text-primary-foreground-muted">
         <FileCheck2 className="h-4 w-4" aria-hidden="true" />
         Authority follows evidence; proximity does not promote a claim
       </div>

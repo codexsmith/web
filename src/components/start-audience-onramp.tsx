@@ -8,7 +8,7 @@ export function StartAudienceOnramp() {
       href="/audience"
     >
       <span className="min-w-0">
-        <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors group-hover:text-primary-foreground/65">
+        <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-foreground-muted transition-colors group-hover:text-primary-foreground-muted">
           Optional on-ramp
         </span>
         <span className="mt-1 block text-sm font-semibold leading-5">

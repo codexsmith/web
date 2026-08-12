@@ -149,8 +149,8 @@ export default function WorkPage() {
       <section className="border-b border-border bg-card/55 px-5 py-12 sm:px-8 sm:py-16">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
           <div>
-            <BookOpen className="h-7 w-7 text-muted-foreground" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <BookOpen className="h-7 w-7 text-foreground-muted" />
+            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Publication · v0.1
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -158,7 +158,7 @@ export default function WorkPage() {
             </h2>
           </div>
           <div>
-            <p className="max-w-3xl text-base leading-8 text-foreground/70">
+            <p className="max-w-3xl text-base leading-8 text-foreground-muted">
               A public learning pathway from displaced consequence and
               institutional agency through Boundary First mechanics,
               representational evolution, and eight typed routes to repair.
@@ -194,7 +194,7 @@ export default function WorkPage() {
           <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
             <div className="bg-primary p-6 text-primary-foreground sm:p-9 lg:p-12">
               <Wrench className="h-7 w-7" />
-              <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/60">
+              <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
                 {systemsAudit.status}
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -214,26 +214,26 @@ export default function WorkPage() {
               </p>
               <div className="mt-8 grid gap-8 lg:grid-cols-2">
                 <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                     Working inputs
                   </h3>
                   <ul className="mt-4 space-y-3">
                     {systemsAudit.inputs.map((input) => (
                       <li className="flex gap-3 text-sm leading-6" key={input}>
-                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-foreground-muted" aria-hidden="true" />
                         {input}
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                     Engagement boundaries
                   </h3>
                   <ul className="mt-4 space-y-3">
                     {systemsAudit.boundaries.map((boundary) => (
                       <li className="flex gap-3 text-sm leading-6" key={boundary}>
-                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-foreground-muted" aria-hidden="true" />
                         {boundary}
                       </li>
                     ))}
@@ -241,7 +241,7 @@ export default function WorkPage() {
                 </div>
               </div>
 
-              <h3 className="mt-9 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <h3 className="mt-9 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                 Concrete outputs
               </h3>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -250,7 +250,7 @@ export default function WorkPage() {
                     className="flex gap-3 border border-border bg-card p-4 text-sm leading-6"
                     key={deliverable}
                   >
-                    <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                    <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-foreground-muted" />
                     {deliverable}
                   </div>
                 ))}
@@ -279,7 +279,7 @@ export default function WorkPage() {
 
           <aside className="grid border-x border-b border-border bg-card p-6 sm:p-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-10" aria-labelledby="ai-audit-track-title">
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                 {systemsAudit.relatedTrack.status}
               </p>
               <h3 className="mt-2 font-serif text-2xl font-semibold" id="ai-audit-track-title">
@@ -287,7 +287,7 @@ export default function WorkPage() {
               </h3>
             </div>
             <div>
-              <p className="text-sm leading-7 text-foreground/70">
+              <p className="text-sm leading-7 text-foreground-muted">
                 {systemsAudit.relatedTrack.description}
               </p>
               <Link className="mt-5 inline-flex min-h-10 items-center font-mono text-[10px] font-semibold uppercase tracking-[0.13em] hover:underline" href={systemsAudit.relatedTrack.href}>
@@ -303,8 +303,8 @@ export default function WorkPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
             <div className="bg-background p-6 sm:p-9 lg:p-12">
-              <Layers3 className="h-7 w-7 text-muted-foreground" aria-hidden="true" />
-              <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <Layers3 className="h-7 w-7 text-foreground-muted" aria-hidden="true" />
+              <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 {boundaryFirstChess.status}
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -375,7 +375,7 @@ export default function WorkPage() {
 
       <section className="scroll-mt-32 border-b border-border bg-card/50 px-5 py-12 sm:px-8 sm:py-16" id="work-types">
         <div className="mx-auto max-w-7xl">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
             Typed work objects
           </p>
           <nav
@@ -390,8 +390,8 @@ export default function WorkPage() {
                 key={label}
               >
                 <span className="flex items-start justify-between gap-4">
-                  <Icon className="h-6 w-6 text-muted-foreground" />
-                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                  <Icon className="h-6 w-6 text-foreground-muted" />
+                  <ArrowRight className="h-4 w-4 text-foreground-muted transition-transform group-hover:translate-x-1" />
                 </span>
                 <h2 className="mt-4 font-serif text-2xl font-semibold">
                   {label}
@@ -399,7 +399,7 @@ export default function WorkPage() {
                 <p className="mt-3 text-sm leading-6 text-foreground/68">
                   {description}
                 </p>
-                <span className="mt-auto pt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground group-hover:text-foreground">
+                <span className="mt-auto pt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted group-hover:text-foreground">
                   {action}
                 </span>
               </Link>
@@ -411,13 +411,13 @@ export default function WorkPage() {
       <section className="scroll-mt-32 px-5 py-14 sm:px-8 sm:py-20" id="promotion">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Promotion sequence
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
               One ladder, domain-specific gates.
             </h2>
-            <p className="mt-5 text-base leading-8 text-foreground/70">
+            <p className="mt-5 text-base leading-8 text-foreground-muted">
               {asString(evidence.promotionRule)}
             </p>
           </div>
@@ -428,10 +428,10 @@ export default function WorkPage() {
                 key={asString(stage.id)}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                     Gate {String(index + 1).padStart(2, "0")}
                   </span>
-                  <CircleDot className="h-4 w-4 text-muted-foreground" />
+                  <CircleDot className="h-4 w-4 text-foreground-muted" />
                 </div>
                 <h3 className="mt-4 font-serif text-2xl font-semibold">
                   {asString(stage.label)}
@@ -449,7 +449,7 @@ export default function WorkPage() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
           <div>
             <ShieldCheck className="h-8 w-8" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/60">
+            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               Product stewardship gate
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold">
@@ -473,7 +473,7 @@ export default function WorkPage() {
                 className="flex gap-3 border border-primary-foreground/35 bg-primary-foreground/[0.08] p-4 text-sm leading-6"
                 key={record}
               >
-                <span className="font-mono text-primary-foreground/45">+</span>
+                <span className="font-mono text-primary-foreground-muted">+</span>
                 {record}
               </div>
             ))}
@@ -484,7 +484,7 @@ export default function WorkPage() {
       {lifecycle.length > 0 && (
         <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
           <div className="mx-auto max-w-7xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Portfolio lifecycle
             </p>
             <div className="mt-7 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
@@ -493,7 +493,7 @@ export default function WorkPage() {
                   className="border border-border bg-card p-5"
                   key={asString(stage.id)}
                 >
-                  <span className="font-mono text-[11px] text-muted-foreground">
+                  <span className="font-mono text-[11px] text-foreground-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-2 font-serif text-xl font-semibold">
@@ -514,13 +514,13 @@ export default function WorkPage() {
       <section className="scroll-mt-32 border-b border-border bg-card/50 px-5 py-14 sm:px-8 sm:py-20" id="projects">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Provisional project index
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
               Six bounded projects, with missing records left visible.
             </h2>
-            <p className="mt-5 text-base leading-8 text-foreground/70">
+            <p className="mt-5 text-base leading-8 text-foreground-muted">
               These records come from the reviewed migration seed. They are
               useful for navigation, but they are not promoted as complete
               operational records: stewardship and next-gate decisions remain
@@ -539,7 +539,7 @@ export default function WorkPage() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 Active work context
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold">

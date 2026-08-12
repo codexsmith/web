@@ -100,32 +100,32 @@ export function WorkCard({
     <article className={`flex flex-col justify-between border border-border bg-card p-5 transition-colors hover:bg-muted/50 ${shapeClass}`}>
       <div>
         <div className="flex items-center gap-2">
-          <Icon className="h-4 w-4 text-muted-foreground" />
-          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-muted-foreground">
+          <Icon className="h-4 w-4 text-foreground-muted" />
+          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-foreground-muted">
             Recommended {item.recommendedEntityType}
           </span>
         </div>
         <div className="mt-4">
           <h3 className="font-serif text-2xl font-semibold leading-tight">{item.sourceData.title}</h3>
-          <p className="mt-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/80">
+          <p className="mt-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">
             {metaString}
           </p>
         </div>
-        <p className="mt-4 line-clamp-3 text-sm leading-6 text-foreground/75">
+        <p className="mt-4 line-clamp-3 text-sm leading-6 text-foreground-muted">
           {item.sourceData.description}
         </p>
         
         {item.sourceData.publicValue && item.sourceData.publicValue.length > 0 && (
           <div className="mt-4 border-t border-border/50 pt-4">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Value Proposition</p>
-            <ul className="mt-2 list-inside list-disc text-sm text-foreground/70">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-foreground-muted">Value Proposition</p>
+            <ul className="mt-2 list-inside list-disc text-sm text-foreground-muted">
               <li className="line-clamp-1">{item.sourceData.publicValue[0]}</li>
             </ul>
           </div>
         )}
 
         <Link
-          className="group/link mt-5 inline-flex min-h-10 items-center font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+          className="group/link mt-5 inline-flex min-h-10 items-center font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
           href={sourceHref}
         >
           Open source domain
@@ -139,20 +139,20 @@ export function WorkCard({
         </summary>
         <dl className="mt-4 grid gap-3 text-sm leading-6">
           <div>
-            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Adjudication</dt>
+            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Adjudication</dt>
             <dd className="mt-1">
               {adjudication
                 ? adjudication.decision.replace(/-/g, " ")
                 : "Not recorded"}
             </dd>
             {adjudication && (
-              <dd className="mt-1 text-foreground/65">
+              <dd className="mt-1 text-foreground-muted">
                 {adjudication.rationale}
               </dd>
             )}
           </div>
           <div>
-            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Recommended class</dt>
+            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Recommended class</dt>
             <dd className="mt-1">
               {item.recommendedClass.replace(/-/g, " ")}
               {item.classificationConfidence
@@ -161,18 +161,18 @@ export function WorkCard({
             </dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Migration boundary</dt>
+            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Migration boundary</dt>
             <dd className="mt-1">{item.migrationStatus ?? "Source retained pending adjudication."}</dd>
           </div>
           {item.sourceRef && (
             <div>
-              <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Source record</dt>
+              <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Source record</dt>
               <dd className="mt-1 break-words font-mono text-xs">{item.sourceRef}</dd>
             </div>
           )}
           {item.sourceData.relationships && item.sourceData.relationships.length > 0 && (
             <div>
-              <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Declared relationships</dt>
+              <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Declared relationships</dt>
               <dd className="mt-1">{item.sourceData.relationships.join(", ")}</dd>
             </div>
           )}
@@ -193,7 +193,7 @@ export function ProjectCard({ project }: { project: SeedProject }) {
   return (
     <article className="flex h-full min-w-0 flex-col border border-border bg-card p-5 [overflow-wrap:anywhere] sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <span className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+        <span className="inline-flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
           <Box className="h-4 w-4" aria-hidden="true" />
           Seed project · {project.portfolioStanding}
         </span>
@@ -204,43 +204,43 @@ export function ProjectCard({ project }: { project: SeedProject }) {
       <h3 className="mt-4 font-serif text-2xl font-semibold leading-tight">
         {project.title}
       </h3>
-      <p className="mt-3 text-sm leading-6 text-foreground/72">
+      <p className="mt-3 text-sm leading-6 text-foreground-muted">
         {project.summary}
       </p>
       <dl className="mt-5 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4 border-t border-border pt-4 text-sm leading-6 [&>div]:min-w-0 [&_dd]:min-w-0">
         <div>
-          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Objective</dt>
+          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Objective</dt>
           <dd className="mt-1">{project.objective}</dd>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Phase</dt>
+            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Phase</dt>
             <dd className="mt-1 capitalize">{project.projectPhase.replace(/-/g, " ")}</dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Steward</dt>
+            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Steward</dt>
             <dd className="mt-1">{project.steward ?? "Not recorded"}</dd>
           </div>
         </div>
         <div>
-          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Outputs</dt>
+          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Outputs</dt>
           <dd className="mt-1">{project.producesEntityRefs.length > 0 ? project.producesEntityRefs.join(", ") : "No output records attached"}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Canonical context</dt>
+          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Canonical context</dt>
           <dd className="mt-1">{project.canonicalNodeRefs.join(", ")}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Source records</dt>
+          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Source records</dt>
           <dd className="mt-1 break-words font-mono text-xs">{project.sourceRefs.join(", ")}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Next gate</dt>
+          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Next gate</dt>
           <dd className="mt-1">Not recorded in the seed; promotion remains pending review.</dd>
         </div>
       </dl>
       <Link
-        className="group/link mt-auto inline-flex min-h-11 items-center border-t border-border pt-5 font-mono text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+        className="group/link mt-auto inline-flex min-h-11 items-center border-t border-border pt-5 font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
         href={contextHref}
       >
         Open canonical context

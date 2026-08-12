@@ -90,7 +90,7 @@ export default function CollaborationPage() {
       <section className="border-b border-border px-5 py-12 sm:px-8 sm:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Lifecycle
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold">
@@ -100,7 +100,7 @@ export default function CollaborationPage() {
           <ol className="mt-9 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-4 xl:grid-cols-7">
             {lifecycle.map((stage, index) => (
               <li className="bg-card p-4 sm:p-5" key={asString(stage.id)}>
-                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-3 font-serif text-lg font-semibold">
@@ -119,7 +119,7 @@ export default function CollaborationPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-7 lg:grid-cols-[minmax(0,0.8fr)_minmax(20rem,0.45fr)] lg:items-end lg:justify-between">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 Working collaboration doctrine
               </p>
               <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold sm:text-5xl">
@@ -127,7 +127,7 @@ export default function CollaborationPage() {
                 work accountable.
               </h2>
             </div>
-            <p className="border-l-2 border-accent pl-5 text-sm leading-7 text-foreground/70">
+            <p className="border-l-2 border-accent pl-5 text-sm leading-7 text-foreground-muted">
               {asString(collaboration.status)}
             </p>
           </div>
@@ -138,13 +138,13 @@ export default function CollaborationPage() {
                 className="bg-background p-5 sm:p-6"
                 key={asString(principle.id)}
               >
-                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 font-serif text-2xl font-semibold leading-8">
                   {asString(principle.title)}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-foreground/70">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   {asString(principle.body)}
                 </p>
               </article>
@@ -156,7 +156,7 @@ export default function CollaborationPage() {
       <section className="px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[18rem_minmax(0,1fr)]">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Nine collaboration modes
             </p>
             <div
@@ -198,7 +198,7 @@ export default function CollaborationPage() {
           >
             <div className="flex items-start justify-between gap-5">
               <div>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                   Collaboration mode
                 </p>
                 <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold sm:text-5xl">
@@ -209,13 +209,13 @@ export default function CollaborationPage() {
                 <CircleDot className="h-5 w-5" />
               </span>
             </div>
-            <p className="mt-7 max-w-4xl text-lg font-medium leading-8 text-foreground/72">
+            <p className="mt-7 max-w-4xl text-lg font-medium leading-8 text-foreground-muted">
               {asString(activeMode.purpose)}
             </p>
 
             <div className="mt-9 grid gap-8 md:grid-cols-2">
               <div>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.17em] text-muted-foreground">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.17em] text-foreground-muted">
                   Typical outputs
                 </p>
                 <ul className="mt-4 grid gap-2">
@@ -224,18 +224,18 @@ export default function CollaborationPage() {
                       className="flex items-center gap-3 border border-border bg-background p-3 text-sm font-medium"
                       key={output}
                     >
-                      <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
+                      <CheckCircle2 className="h-4 w-4 text-foreground-muted" />
                       {output}
                     </li>
                   ))}
                 </ul>
               </div>
               <div>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.17em] text-muted-foreground">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.17em] text-foreground-muted">
                   Promotion boundary
                 </p>
                 <div className="mt-4 border-l-2 border-accent pl-5">
-                  <p className="text-sm leading-7 text-foreground/72">
+                  <p className="text-sm leading-7 text-foreground-muted">
                     The relationship creates contact, evidence, criticism, or
                     capacity. It does not automatically create authority,
                     endorsement, authorship, ownership, or canonical status.
@@ -260,13 +260,13 @@ export default function CollaborationPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 Role and authority firewall
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold">
                 A declared relation does not silently become another.
               </h2>
-              <p className="mt-5 text-base leading-8 text-foreground/70">
+              <p className="mt-5 text-base leading-8 text-foreground-muted">
                 Roles answer who is present. Authority, authorship, review,
                 ownership, funding, maintenance, and endorsement remain separate
                 edges.
@@ -285,7 +285,7 @@ export default function CollaborationPage() {
                   >
                     ≠
                   </span>
-                  <span className="text-foreground/65">{right}</span>
+                  <span className="text-foreground-muted">{right}</span>
                 </div>
               ))}
             </div>
@@ -297,7 +297,7 @@ export default function CollaborationPage() {
                 className="border border-border bg-background p-5"
                 key={asString(role.id)}
               >
-                <Scale className="h-5 w-5 text-muted-foreground" />
+                <Scale className="h-5 w-5 text-foreground-muted" />
                 <h3 className="mt-4 font-serif text-xl font-semibold">
                   {asString(role.label)}
                 </h3>
@@ -313,7 +313,7 @@ export default function CollaborationPage() {
       <section className="border-b border-border bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(18rem,0.68fr)_minmax(0,1.32fr)]">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/60">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               Evidence, not endorsement
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -322,7 +322,7 @@ export default function CollaborationPage() {
             <p className="mt-6 text-base leading-8 text-primary-foreground/72">
               {asString(evidenceStandard.principle)}
             </p>
-            <p className="mt-6 border-l-2 border-primary-foreground/50 pl-5 text-sm leading-7 text-primary-foreground/70">
+            <p className="mt-6 border-l-2 border-primary-foreground/50 pl-5 text-sm leading-7 text-primary-foreground-secondary">
               {asString(evidenceStandard.promotionRule)}
             </p>
           </div>
@@ -333,7 +333,7 @@ export default function CollaborationPage() {
                 className="grid grid-cols-[2.25rem_1fr] gap-3 bg-primary p-4 text-sm leading-6 sm:p-5"
                 key={item}
               >
-                <span className="font-mono text-[11px] text-primary-foreground/55">
+                <span className="font-mono text-[11px] text-primary-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span>{item}</span>
@@ -346,7 +346,7 @@ export default function CollaborationPage() {
       <section className="px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.7fr)]">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Ways to enter
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold">
@@ -378,18 +378,18 @@ export default function CollaborationPage() {
 
           <aside className="border border-border bg-primary p-6 text-primary-foreground sm:p-8 lg:sticky lg:top-28 lg:self-start">
             <ShieldCheck className="h-7 w-7" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-foreground/60">
+            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-foreground-muted">
               Public promise
             </p>
             <p className="mt-3 font-serif text-2xl font-semibold leading-9">
               {asString(collaboration.publicPromise)}
             </p>
             <div className="mt-7 border-t border-primary-foreground/25 pt-6">
-              <p className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/60">
+              <p className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
                 <LockKeyhole className="h-4 w-4" />
                 Visibility boundary
               </p>
-              <p className="mt-3 text-sm leading-7 text-primary-foreground/70">
+              <p className="mt-3 text-sm leading-7 text-primary-foreground-secondary">
                 {asString(asRecord(collaboration.ux).visibilityBoundary)}
               </p>
             </div>
@@ -400,7 +400,7 @@ export default function CollaborationPage() {
       <section className="border-t border-border bg-card px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Public collaboration record
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -411,7 +411,7 @@ export default function CollaborationPage() {
 
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             <article className="border border-border bg-background p-5 sm:p-7">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                 What the public record names
               </p>
               <div className="mt-5 grid gap-2 sm:grid-cols-2">
@@ -420,11 +420,11 @@ export default function CollaborationPage() {
                     className="flex items-center gap-3 border border-border bg-card p-3 text-sm font-medium"
                     key={field}
                   >
-                    <Eye className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    <Eye className="h-4 w-4 shrink-0 text-foreground-muted" />
                     <span className="capitalize">{field}</span>
                   </div>
                 ))}
-                <div className="flex items-center gap-3 border border-dashed border-border bg-card p-3 text-sm text-muted-foreground">
+                <div className="flex items-center gap-3 border border-dashed border-border bg-card p-3 text-sm text-foreground-muted">
                   <LockKeyhole className="h-4 w-4 shrink-0" />
                   Protected fields marked
                 </div>
@@ -432,7 +432,7 @@ export default function CollaborationPage() {
             </article>
 
             <article className="border border-border bg-background p-5 sm:p-7">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
                 How the work closes
               </p>
               <ol className="mt-5 grid gap-3">
@@ -441,7 +441,7 @@ export default function CollaborationPage() {
                     className="grid grid-cols-[2.25rem_1fr] gap-3 border-b border-border/70 pb-3 text-sm leading-6 last:border-b-0 last:pb-0"
                     key={condition}
                   >
-                    <span className="font-mono text-[11px] text-muted-foreground">
+                    <span className="font-mono text-[11px] text-foreground-muted">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span>{condition}</span>
@@ -452,9 +452,9 @@ export default function CollaborationPage() {
           </div>
 
           <div className="mt-5 grid gap-4 border border-dashed border-border bg-background p-5 sm:grid-cols-[auto_1fr] sm:items-start sm:p-6">
-            <LockKeyhole className="h-5 w-5 text-muted-foreground" />
+            <LockKeyhole className="h-5 w-5 text-foreground-muted" />
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                 Scope boundary
               </p>
               <p className="mt-2 max-w-5xl text-sm leading-7 text-foreground/68">
@@ -465,14 +465,14 @@ export default function CollaborationPage() {
 
           <div className="mt-5 border border-border bg-primary p-5 text-primary-foreground sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/65">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
                 Operational instances
               </p>
               <span className="border border-primary-foreground/30 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em]">
                 {collaborationRegistry.instances.length} public records
               </span>
             </div>
-            <p className="mt-3 max-w-4xl text-sm leading-7 text-primary-foreground/75">
+            <p className="mt-3 max-w-4xl text-sm leading-7 text-primary-foreground-secondary">
               No public operational collaboration instances are currently
               recorded. The framework above describes how a future instance
               must be bounded; it is not evidence that a collaboration exists.
@@ -484,7 +484,7 @@ export default function CollaborationPage() {
       <section className="bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 lg:flex-row lg:items-end">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary-foreground/60">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-primary-foreground-muted">
               Put work under pressure
             </p>
             <h2 className="mt-3 max-w-3xl font-serif text-4xl font-semibold sm:text-5xl">

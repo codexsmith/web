@@ -18,7 +18,7 @@ export function SectionJumpNavigation({
       className="sticky top-16 z-30 border-y border-border bg-background/95 shadow-sm backdrop-blur-xl sm:top-20"
     >
       <div className="mx-auto flex min-h-12 max-w-7xl snap-x items-center gap-3 overflow-x-auto px-5 py-1.5 sm:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <span className="shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
           {label}
         </span>
         <span aria-hidden="true" className="h-4 w-px shrink-0 bg-border" />

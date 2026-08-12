@@ -40,22 +40,22 @@ export default function HelpPage() {
 
       <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
             Begin at the scale carrying the consequence
           </p>
           <div className="mt-7 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
             {scales.map((scale, index) => (
               <article className="bg-card p-6 sm:p-8" key={firstText(scale.id)}>
-                <p className="font-mono text-[9px] text-muted-foreground">
+                <p className="font-mono text-[9px] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </p>
                 <h2 className="mt-4 font-serif text-3xl font-semibold">
                   {firstText(scale.label)}
                 </h2>
-                <p className="mt-4 text-sm font-medium leading-7 text-foreground/72">
+                <p className="mt-4 text-sm font-medium leading-7 text-foreground-muted">
                   {firstText(scale.promise)}
                 </p>
-                <p className="mt-6 border-t border-border pt-5 text-xs leading-6 text-muted-foreground">
+                <p className="mt-6 border-t border-border pt-5 text-xs leading-6 text-foreground-muted">
                   {firstText(scale.publicLine)}
                 </p>
               </article>
@@ -67,7 +67,7 @@ export default function HelpPage() {
       <section className="border-b border-border bg-card/45 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Mission-aligned problem spaces
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -81,14 +81,14 @@ export default function HelpPage() {
                 href={`/mission#${firstText(item.id)}`}
                 key={firstText(item.id)}
               >
-                <CircleDot aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
+                <CircleDot aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
                 <h3 className="mt-5 font-serif text-2xl font-semibold">
                   {firstText(item.label)}
                 </h3>
                 <p className="mt-3 text-sm leading-7 text-foreground/68">
                   {firstText(item.humanPromise)}
                 </p>
-                <span className="mt-auto inline-flex items-center pt-6 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-muted-foreground group-hover:text-foreground">
+                <span className="mt-auto inline-flex items-center pt-6 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-foreground-muted group-hover:text-foreground">
                   Inspect the mission record
                   <ArrowRight
                     aria-hidden="true"

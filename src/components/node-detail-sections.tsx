@@ -70,7 +70,7 @@ function StructuredValue({
   depth?: number;
 }) {
   if (value === null || value === undefined) {
-    return <span className="text-sm italic text-muted-foreground">Not specified</span>;
+    return <span className="text-sm italic text-foreground-muted">Not specified</span>;
   }
 
   if (typeof value === "boolean") {
@@ -107,7 +107,7 @@ function StructuredValue({
     }
 
     return (
-      <p className="min-w-0 whitespace-pre-wrap text-sm leading-6 text-muted-foreground [overflow-wrap:anywhere]">
+      <p className="min-w-0 whitespace-pre-wrap text-sm leading-6 text-foreground-muted [overflow-wrap:anywhere]">
         {value}
       </p>
     );
@@ -115,7 +115,7 @@ function StructuredValue({
 
   if (Array.isArray(value)) {
     if (value.length === 0) {
-      return <p className="text-sm italic text-muted-foreground">No entries currently listed.</p>;
+      return <p className="text-sm italic text-foreground-muted">No entries currently listed.</p>;
     }
 
     const containsStructuredItems = value.some((item) => isRecord(item) || Array.isArray(item));
@@ -123,7 +123,7 @@ function StructuredValue({
       return (
         <ul className="space-y-2">
           {value.map((item, index) => (
-            <li className="flex gap-2.5 text-sm leading-6 text-muted-foreground" key={`${String(item)}-${index}`}>
+            <li className="flex gap-2.5 text-sm leading-6 text-foreground-muted" key={`${String(item)}-${index}`}>
               <span aria-hidden="true" className="mt-[0.65rem] h-1 w-1 shrink-0 rounded-full bg-accent" />
               <StructuredValue
                 currentNodeId={currentNodeId}
@@ -161,7 +161,7 @@ function StructuredValue({
   if (isRecord(value)) {
     const entries = Object.entries(value);
     if (entries.length === 0) {
-      return <p className="text-sm italic text-muted-foreground">No fields currently listed.</p>;
+      return <p className="text-sm italic text-foreground-muted">No fields currently listed.</p>;
     }
 
     return (
@@ -171,7 +171,7 @@ function StructuredValue({
             className={depth === 0 ? "min-w-0 border-b border-border/25 pb-4 last:border-0 last:pb-0" : "min-w-0"}
             key={key}
           >
-            <dt className="mb-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <dt className="mb-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
               {fieldLabel(key)}
             </dt>
             <dd className="min-w-0">
@@ -189,7 +189,7 @@ function StructuredValue({
     );
   }
 
-  return <span className="text-sm text-muted-foreground">{String(value)}</span>;
+  return <span className="text-sm text-foreground-muted">{String(value)}</span>;
 }
 
 function DataSection({
@@ -273,7 +273,7 @@ export function NodeDetailSections({
       {!hideMetadata && (
         <div className="flex items-center justify-between pb-3">
           <h2 className="font-serif text-2xl font-semibold text-foreground">Schema details</h2>
-          <span className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+          <span className="font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
             {sourceFields.length} fields
           </span>
         </div>

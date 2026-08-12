@@ -53,7 +53,7 @@ export default function BusinessLandingPage() {
         >
           <div className="mx-auto max-w-7xl">
             <div className="mb-12">
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-foreground-muted">
                 Enterprise capabilities
               </p>
               <h2 className="mt-3 font-serif text-3xl font-semibold sm:text-4xl">
@@ -67,7 +67,7 @@ export default function BusinessLandingPage() {
                 <h3 className="mt-5 font-serif text-xl font-semibold">
                   Risk Mitigation
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   Identify and secure failure modes before they manifest in
                   production environments.
                 </p>
@@ -78,7 +78,7 @@ export default function BusinessLandingPage() {
                 <h3 className="mt-5 font-serif text-xl font-semibold">
                   Performance Scaling
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   Optimize systems for high-throughput and low-latency under
                   extreme load conditions.
                 </p>
@@ -89,7 +89,7 @@ export default function BusinessLandingPage() {
                 <h3 className="mt-5 font-serif text-xl font-semibold">
                   Strategic Alignment
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   Align technical architecture directly with core business
                   objectives and constraints.
                 </p>
@@ -102,7 +102,7 @@ export default function BusinessLandingPage() {
           <div className="mx-auto max-w-7xl">
             <div className="grid overflow-hidden border border-border bg-border lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
               <div className="bg-primary p-6 text-primary-foreground sm:p-9 lg:p-12">
-                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary-foreground/60">
+                <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary-foreground-muted">
                   Institutional position
                 </p>
                 <h2 className="mt-4 font-serif text-4xl font-semibold sm:text-5xl">
@@ -160,14 +160,14 @@ export default function BusinessLandingPage() {
         <section className="px-5 py-16 sm:px-8 sm:py-24">
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)]">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-foreground-muted">
                 What sets this apart
               </p>
               <h2 className="mt-3 font-serif text-3xl font-semibold sm:text-4xl">
                 Research-grade foundations. Production-grade delivery.
               </h2>
             </div>
-            <div className="space-y-6 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
+            <div className="space-y-6 text-base leading-8 text-foreground-muted sm:text-lg sm:leading-9">
               <p>
                 Enterprise consulting from Boundary First Labs is backed by a
                 working research program spanning mathematics, systems theory,
@@ -177,8 +177,8 @@ export default function BusinessLandingPage() {
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-sm border border-border bg-card p-5">
-                  <Network className="h-5 w-5 text-muted-foreground" />
-                  <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                  <Network className="h-5 w-5 text-foreground-muted" />
+                  <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
                     Method
                   </p>
                   <p className="mt-2 text-sm font-medium leading-6 text-foreground">
@@ -187,8 +187,8 @@ export default function BusinessLandingPage() {
                   </p>
                 </div>
                 <div className="rounded-sm border border-border bg-card p-5">
-                  <Layers3 className="h-5 w-5 text-muted-foreground" />
-                  <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+                  <Layers3 className="h-5 w-5 text-foreground-muted" />
+                  <p className="mt-3 font-mono text-[11px] uppercase tracking-widest text-foreground-muted">
                     Deliverable
                   </p>
                   <p className="mt-2 text-sm font-medium leading-6 text-foreground">
@@ -208,13 +208,13 @@ export default function BusinessLandingPage() {
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary-foreground/65">
+              <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-primary-foreground-muted">
                 Get started
               </p>
               <h2 className="mt-3 max-w-3xl font-serif text-4xl font-semibold sm:text-5xl">
                 Bring one consequential system into view.
               </h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-primary-foreground/70">
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-primary-foreground-secondary">
                 The method and working material are developed; the audit is
                 configured around your actual system, access boundary, and
                 decision need when requested.

@@ -66,7 +66,7 @@ export function VisualGrammarDiagram({
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-7 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-end">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Diagram {diagram.number} / {diagram.eyebrow}
             </p>
             <h2
@@ -75,11 +75,11 @@ export function VisualGrammarDiagram({
             >
               {diagram.title}
             </h2>
-            <p className="mt-5 max-w-2xl font-serif text-xl font-semibold leading-snug text-foreground/75 sm:text-2xl">
+            <p className="mt-5 max-w-2xl font-serif text-xl font-semibold leading-snug text-foreground-muted sm:text-2xl">
               {diagram.proposition}
             </p>
           </div>
-          <p className="max-w-2xl text-base leading-8 text-foreground/70 lg:justify-self-end">
+          <p className="max-w-2xl text-base leading-8 text-foreground-muted lg:justify-self-end">
             {diagram.description}
           </p>
         </div>
@@ -110,7 +110,7 @@ export function VisualGrammarDiagram({
                 {index < diagram.path.length - 1 ? (
                   <span
                     aria-hidden="true"
-                    className="flex h-12 w-12 shrink-0 items-center justify-center text-muted-foreground lg:h-full lg:w-10"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center text-foreground-muted lg:h-full lg:w-10"
                   >
                     <ArrowDown className="h-5 w-5 lg:hidden" />
                     <ArrowRight className="hidden h-5 w-5 lg:block" />
@@ -136,8 +136,8 @@ export function VisualGrammarDiagram({
           </section>
 
           <section className="bg-background p-6 sm:p-8">
-            <Check aria-hidden="true" className="h-6 w-6 text-muted-foreground" />
-            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <Check aria-hidden="true" className="h-6 w-6 text-foreground-muted" />
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
               {diagram.feedback.preserved.label}
             </p>
             <StepSequence steps={diagram.feedback.preserved.steps} />
@@ -145,7 +145,7 @@ export function VisualGrammarDiagram({
 
           <section className="bg-primary p-6 text-primary-foreground sm:p-8">
             <RotateCcw aria-hidden="true" className="h-6 w-6" />
-            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/60">
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
               {diagram.feedback.contested.label}
             </p>
             <StepSequence steps={diagram.feedback.contested.steps} />
@@ -157,17 +157,17 @@ export function VisualGrammarDiagram({
             <RotateCcw aria-hidden="true" className="h-4 w-4" />
           </div>
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
               {diagram.feedback.returnLabel} / {roleLabel(diagram.feedback.returnToRole)}
             </p>
-            <p className="mt-1 max-w-4xl text-sm leading-7 text-foreground/72">
+            <p className="mt-1 max-w-4xl text-sm leading-7 text-foreground-muted">
               {diagram.feedback.returnDescription}
             </p>
           </div>
         </div>
 
         <figcaption
-          className="mt-6 max-w-5xl border-l border-border pl-4 text-sm leading-7 text-muted-foreground"
+          className="mt-6 max-w-5xl border-l border-border pl-4 text-sm leading-7 text-foreground-muted"
           id={summaryId}
         >
           <span className="font-semibold text-foreground">Text equivalent.</span>{" "}

@@ -36,26 +36,26 @@ export default function PeoplePage() {
       <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
           <div>
-            <UsersRound aria-hidden="true" className="h-8 w-8 text-muted-foreground" />
-            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <UsersRound aria-hidden="true" className="h-8 w-8 text-foreground-muted" />
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Present reality
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
               {firstText(formation.currentReality)}
             </h2>
-            <p className="mt-5 text-base leading-8 text-foreground/70">
+            <p className="mt-5 text-base leading-8 text-foreground-muted">
               {firstText(formation.nearTermInstitutionalGoal)}
             </p>
           </div>
 
           <div className="border border-border bg-card p-6 sm:p-8">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
               Not yet claimed
             </p>
             <ul className="mt-6 grid gap-3 sm:grid-cols-2">
               {asStringArray(formation.notYetClaimed).map((item) => (
                 <li className="flex gap-3 border border-border bg-background p-4 text-sm leading-6" key={item}>
-                  <Check aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-muted-foreground" />
+                  <Check aria-hidden="true" className="mt-1 h-4 w-4 shrink-0 text-foreground-muted" />
                   {item}
                 </li>
               ))}
@@ -70,7 +70,7 @@ export default function PeoplePage() {
       <section className="border-b border-border bg-card/50 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Participation posture
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">

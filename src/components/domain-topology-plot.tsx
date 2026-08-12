@@ -95,13 +95,13 @@ export function DomainTopologyPlot({
           </span>
           <ArrowRight
             aria-hidden="true"
-            className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+            className="h-4 w-4 shrink-0 text-foreground-muted transition-transform group-hover:translate-x-0.5"
           />
         </span>
-        <span className="mt-1 block font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+        <span className="mt-1 block font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-muted">
           {record.relationType}
         </span>
-        <span className="mt-2 block text-sm leading-5 text-foreground/70">
+        <span className="mt-2 block text-sm leading-5 text-foreground-muted">
           {record.summary}
         </span>
       </button>
@@ -110,7 +110,7 @@ export function DomainTopologyPlot({
 
   return (
     <div>
-      <p className="max-w-3xl text-sm font-medium leading-6 text-muted-foreground">
+      <p className="max-w-3xl text-sm font-medium leading-6 text-foreground-muted">
         Direction, inverse views, and reciprocal relations come from the shared
         semantic registry. Each group begins with a bounded preview; expand
         only the group you need.
@@ -138,7 +138,7 @@ export function DomainTopologyPlot({
                 <div className="flex items-center gap-2">
                   <Icon
                     aria-hidden="true"
-                    className="h-4 w-4 text-muted-foreground"
+                    className="h-4 w-4 text-foreground-muted"
                   />
                   <h3
                     className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em]"
@@ -150,7 +150,7 @@ export function DomainTopologyPlot({
                     {group.records.length}
                   </span>
                 </div>
-                <p className="mt-2 text-sm leading-5 text-muted-foreground">
+                <p className="mt-2 text-sm leading-5 text-foreground-muted">
                   {group.description}
                 </p>
               </div>
@@ -159,7 +159,7 @@ export function DomainTopologyPlot({
               </ul>
               {remainingRecords.length ? (
                 <details className="group/more border-t border-border/50">
-                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground marker:content-none hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-muted marker:content-none hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
                     Show {remainingRecords.length} more
                     <Plus
                       aria-hidden="true"

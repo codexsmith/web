@@ -34,20 +34,20 @@ export function SiteFooter() {
                 Boundary First Labs
               </span>
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-7 text-primary-foreground/65">
+            <p className="mt-4 max-w-sm text-sm leading-7 text-primary-foreground-muted">
               {phase12Launch.identity.compactStatement}
             </p>
           </div>
 
           <div>
-            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground/50">
+            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground-muted">
               Learn
             </h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <Link
                   href="/learn"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Guided introduction
                 </Link>
@@ -55,7 +55,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href={START_HREF}
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   People, Problem, Repair
                 </Link>
@@ -63,7 +63,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/publications"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Publications
                 </Link>
@@ -71,7 +71,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/language"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Language registry
                 </Link>
@@ -80,14 +80,14 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground/50">
+            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground-muted">
               Explore
             </h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <Link
                   href={ATLAS_HREF}
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Atlas map
                 </Link>
@@ -95,7 +95,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href={ATLAS_LIST_HREF}
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Atlas list
                 </Link>
@@ -103,7 +103,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href={DOMAINS_HREF}
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Domains
                 </Link>
@@ -111,7 +111,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/search"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Search
                 </Link>
@@ -120,14 +120,14 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground/50">
+            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground-muted">
               Work
             </h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <Link
                   href="/work#systems-audit"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Systems Audit
                 </Link>
@@ -135,7 +135,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/work#boundary-first-chess"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Boundary First Chess
                 </Link>
@@ -143,7 +143,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/work"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Work &amp; Evidence
                 </Link>
@@ -151,7 +151,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/work#engage"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Ways to engage
                 </Link>
@@ -159,7 +159,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/methods"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Methods
                 </Link>
@@ -168,14 +168,14 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground/50">
+            <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground-muted">
               Laboratory
             </h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <Link
                   href="/about"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   About the lab
                 </Link>
@@ -183,7 +183,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/mission"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Mission
                 </Link>
@@ -191,7 +191,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href="/governance"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Governance
                 </Link>
@@ -199,7 +199,7 @@ export function SiteFooter() {
               <li>
                 <Link
                   href={ATLAS_EVIDENCE_HREF}
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Public record
                 </Link>
@@ -207,7 +207,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href="mailto:contact@boundaryfirst.com"
-                  className="inline-flex min-h-10 items-center text-primary-foreground/70 transition-colors hover:text-primary-foreground"
+                  className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Contact
                 </a>
@@ -217,7 +217,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/15 pt-8 sm:flex-row">
-          <p className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground/45">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground-muted">
             &copy; {new Date().getFullYear()} Boundary First Labs. All rights
             reserved.
           </p>

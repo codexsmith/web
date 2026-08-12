@@ -52,7 +52,7 @@ export function EvidenceVitalsBar({
         <header className="bg-card/70 p-4 sm:p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                 {eyebrow}
               </p>
               <h2 className="mt-2 font-serif text-xl font-semibold leading-tight">
@@ -77,7 +77,7 @@ export function EvidenceVitalsBar({
               />
             </button>
           </div>
-          <p className="mt-2 font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.11em] text-foreground/65 md:hidden">
+          <p className="mt-2 font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.11em] text-foreground-muted md:hidden">
             {mobileSummary}
           </p>
           {description ? (
@@ -86,7 +86,7 @@ export function EvidenceVitalsBar({
             </p>
           ) : null}
           {stamp ? (
-            <p className="mt-3 hidden font-mono text-[10px] uppercase leading-5 tracking-[0.11em] text-muted-foreground md:block">
+            <p className="mt-3 hidden font-mono text-[10px] uppercase leading-5 tracking-[0.11em] text-foreground-muted md:block">
               {stamp}
             </p>
           ) : null}
@@ -100,7 +100,7 @@ export function EvidenceVitalsBar({
         >
           {items.map((item) => (
             <div className={`p-4 sm:p-5 ${toneClasses[item.tone]}`} key={item.id}>
-              <dt className="font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.13em] text-muted-foreground">
+              <dt className="font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.13em] text-foreground-muted">
                 {item.label}
               </dt>
               <dd className="mt-2 font-serif text-3xl font-semibold leading-none">

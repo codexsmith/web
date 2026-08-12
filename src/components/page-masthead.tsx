@@ -38,8 +38,8 @@ export function PageMasthead({
               <p
                 className={`font-mono text-[10px] font-semibold uppercase tracking-[0.2em] ${
                   inverse
-                    ? "text-primary-foreground/60"
-                    : "text-muted-foreground"
+                    ? "text-primary-foreground-muted"
+                    : "text-foreground-muted"
                 }`}
               >
                 {eyebrow}
@@ -76,7 +76,7 @@ export function PageMasthead({
                   className={`max-w-3xl text-sm font-medium leading-7 sm:text-base ${
                     inverse
                       ? "text-primary-foreground/72"
-                      : "text-foreground/70"
+                      : "text-foreground-muted"
                   }`}
                 >
                   {description}

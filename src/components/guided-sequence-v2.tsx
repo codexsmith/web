@@ -116,17 +116,17 @@ export function GuidedSequenceV2({
           <div className="min-w-0 overflow-hidden border-b border-border/60 px-5 py-3 sm:px-8 sm:py-4 lg:px-10">
             <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
               <div className="flex flex-wrap items-baseline gap-x-2">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   Guided introduction
                 </p>
-                <p className="text-sm leading-6 text-foreground/70">
+                <p className="text-sm leading-6 text-foreground-muted">
                   Fifteen short scenes from consequence to repair.
                 </p>
               </div>
               <p className="hidden">
                 About 8-10 minutes · every scene has a stable URL
               </p>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                 8-10 minutes
               </p>
             </div>
@@ -146,7 +146,7 @@ export function GuidedSequenceV2({
                     className={`flex min-h-10 items-center gap-2 whitespace-nowrap rounded-sm border px-3 text-left transition-colors ${
                       item.number === activeScene
                         ? "border-foreground bg-foreground text-background"
-                        : "border-transparent text-muted-foreground hover:border-border hover:bg-card hover:text-foreground"
+                        : "border-transparent text-foreground-muted hover:border-border hover:bg-card hover:text-foreground"
                     }`}
                     onClick={() => changeScene(item.number)}
                     type="button"
@@ -170,12 +170,12 @@ export function GuidedSequenceV2({
                   <h1 className="max-w-4xl font-serif text-4xl font-semibold leading-[1.02] tracking-tight sm:text-5xl lg:text-[3.5rem]">
                     {scene.title}
                   </h1>
-                  <p className="mt-4 max-w-3xl text-lg font-medium leading-8 text-foreground/70 sm:text-xl sm:leading-9">
+                  <p className="mt-4 max-w-3xl text-lg font-medium leading-8 text-foreground-muted sm:text-xl sm:leading-9">
                     {scene.body}
                   </p>
                   {scene.question && (
-                    <p className="mt-5 max-w-3xl border-t border-border/60 pt-4 text-sm leading-6 text-foreground/65">
-                      <span className="mr-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                    <p className="mt-5 max-w-3xl border-t border-border/60 pt-4 text-sm leading-6 text-foreground-muted">
+                      <span className="mr-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                         Next question
                       </span>
                       {scene.question}
@@ -254,7 +254,7 @@ export function GuidedSequenceV2({
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Previous
               </button>
-              <span className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
+              <span className="hidden items-center gap-2 text-sm text-foreground-muted sm:flex">
                 <BookOpen className="h-4 w-4" />
                 Scene {activeScene + 1} of {scenes.length}
               </span>

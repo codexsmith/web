@@ -179,13 +179,13 @@ export function DomainRecordJumpNav({
       <nav aria-label="On this page shortcuts" className="px-3 py-2 sm:px-4">
         <details className="group sm:hidden" ref={mobileMenuRef}>
           <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 rounded-sm px-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] marker:content-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-            <span className="text-muted-foreground">Sections</span>
+            <span className="text-foreground-muted">Sections</span>
             <span className="ml-auto truncate text-right text-foreground">
               {activeLabel}
             </span>
             <ChevronDown
               aria-hidden="true"
-              className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
+              className="h-4 w-4 shrink-0 text-foreground-muted transition-transform group-open:rotate-180"
             />
           </summary>
           <ol className="grid grid-cols-2 gap-1 border-t border-border/50 pt-2">
@@ -226,12 +226,12 @@ export function DomainRecordJumpNav({
                     "flex min-h-11 items-center gap-2 border-b-2 px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     isActive
                       ? "border-foreground bg-muted text-foreground"
-                      : "border-transparent text-foreground/70 hover:border-border hover:bg-muted/60 hover:text-foreground",
+                      : "border-transparent text-foreground-muted hover:border-border hover:bg-muted/60 hover:text-foreground",
                   )}
                   href={`#${item.id}`}
                   onClick={(event) => handleSectionClick(event, item.id)}
                 >
-                  <span aria-hidden="true" className="text-muted-foreground">
+                  <span aria-hidden="true" className="text-foreground-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span>{item.label}</span>

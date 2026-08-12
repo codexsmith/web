@@ -586,7 +586,7 @@ export default function BoundaryFirstConnectedPrototype() {
               <span aria-hidden="true" className="hidden text-border sm:inline">
                 /
               </span>
-              <span className="hidden truncate text-sm font-semibold text-muted-foreground sm:block">
+              <span className="hidden truncate text-sm font-semibold text-foreground-muted sm:block">
                 {active?.label}
               </span>
             </div>
@@ -605,7 +605,7 @@ export default function BoundaryFirstConnectedPrototype() {
               }
               className="flex min-w-0 flex-1 snap-x items-center gap-2 overflow-x-auto border-b border-border px-3 py-2 [scrollbar-width:none] sm:px-6 md:border-b-0 [&::-webkit-scrollbar]:hidden"
             >
-              <span className="hidden shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground md:block">
+              <span className="hidden shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-foreground-muted md:block">
                 {mapMode === "atlas" ? "Highlight" : "Context lens"}
               </span>
               {(mapMode === "atlas" ? globalAtlasProjections : projections).map(
@@ -652,7 +652,7 @@ export default function BoundaryFirstConnectedPrototype() {
             className={`${
               mapMode === "halo"
                 ? "hidden"
-                : "absolute left-6 top-5 z-10 hidden font-mono text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground pointer-events-auto xl:block"
+                : "absolute left-6 top-5 z-10 hidden font-mono text-xs font-semibold uppercase tracking-[0.1em] text-foreground-muted pointer-events-auto xl:block"
             }`}
           >
             <Link className="hover:text-foreground transition-colors" href="/">
@@ -743,7 +743,7 @@ export default function BoundaryFirstConnectedPrototype() {
               isCompactFocus ? "xl:p-6" : "xl:p-8"
             }`}
           >
-            <div className="mb-5 flex items-center justify-between gap-4 text-muted-foreground">
+            <div className="mb-5 flex items-center justify-between gap-4 text-foreground-muted">
               <span className="font-mono text-xs font-semibold uppercase tracking-[0.08em]">
                 {isFacetFocusSelection
                   ? "Selected facet"
@@ -763,10 +763,10 @@ export default function BoundaryFirstConnectedPrototype() {
                 <h1 className="font-serif text-2xl font-semibold leading-tight text-foreground">
                   {active?.label}
                 </h1>
-                <p className="mt-3 text-[15px] font-medium leading-6 text-foreground/80">
+                <p className="mt-3 text-[15px] font-medium leading-6 text-foreground-secondary">
                   {active?.short}
                 </p>
-                <p className="mt-4 text-sm leading-6 text-muted-foreground">
+                <p className="mt-4 text-sm leading-6 text-foreground-muted">
                   Select a labeled facet on the map for its status and source
                   context, or open the record for the complete content tree.
                 </p>
@@ -791,7 +791,7 @@ export default function BoundaryFirstConnectedPrototype() {
                   {selectedRelation.label}
                 </h1>
                 <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-                  <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                  <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
                     Facet of {active.label}
                   </span>
                   <span
@@ -806,7 +806,7 @@ export default function BoundaryFirstConnectedPrototype() {
                 <p className="mt-5 text-[17px] font-medium leading-7 text-foreground sm:text-lg">
                   {selectedRelation.summary}
                 </p>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                <p className="mt-3 text-sm leading-6 text-foreground-muted">
                   This facet remains selected on the ring. Choose another facet
                   to compare its brief, or open relation context when you want
                   to inspect what surrounds it.
@@ -816,19 +816,19 @@ export default function BoundaryFirstConnectedPrototype() {
 
                 <dl className="grid gap-5">
                   <div>
-                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
                       Placement
                     </dt>
-                    <dd className="mt-1.5 text-sm font-medium leading-6 text-foreground/85">
+                    <dd className="mt-1.5 text-sm font-medium leading-6 text-foreground-secondary">
                       {selectedRelation.belonging ||
                         `Declared facet of ${active.label}`}
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
                       Content state
                     </dt>
-                    <dd className="mt-1.5 text-sm font-medium leading-6 text-foreground/85">
+                    <dd className="mt-1.5 text-sm font-medium leading-6 text-foreground-secondary">
                       {selectedRelation.definitionStatus
                         ? `${selectedRelation.definitionStatus.replace(
                             /-/g,
@@ -844,15 +844,15 @@ export default function BoundaryFirstConnectedPrototype() {
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
                       Claim boundary
                     </dt>
-                    <dd className="mt-1.5 text-sm leading-6 text-foreground/80">
+                    <dd className="mt-1.5 text-sm leading-6 text-foreground-secondary">
                       {selectedRelation.authority}
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
                       Evidence
                       {selectedRelation.evidenceStatus
                         ? ` · ${selectedRelation.evidenceStatus.replace(
@@ -861,15 +861,15 @@ export default function BoundaryFirstConnectedPrototype() {
                           )}`
                         : ""}
                     </dt>
-                    <dd className="mt-1.5 text-sm leading-6 text-foreground/80">
+                    <dd className="mt-1.5 text-sm leading-6 text-foreground-secondary">
                       {selectedRelation.evidence}
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
                       Closure and repair
                     </dt>
-                    <dd className="mt-1.5 text-sm leading-6 text-foreground/80">
+                    <dd className="mt-1.5 text-sm leading-6 text-foreground-secondary">
                       {selectedRelation.closure}
                     </dd>
                   </div>
@@ -921,7 +921,7 @@ export default function BoundaryFirstConnectedPrototype() {
                   </h1>
                 ) : null}
                 {isAtlasNodeSelected ? (
-                  <p className="mb-4 text-[15px] font-medium leading-6 text-foreground/75">
+                  <p className="mb-4 text-[15px] font-medium leading-6 text-foreground-muted">
                     {active?.short}
                   </p>
                 ) : null}
@@ -954,7 +954,7 @@ export default function BoundaryFirstConnectedPrototype() {
                       </Link>
                     </div>
                     <button
-                      className="inline-flex min-h-8 items-center justify-center text-center font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                      className="inline-flex min-h-8 items-center justify-center text-center font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-foreground-muted underline-offset-4 hover:text-foreground hover:underline"
                       onClick={showFullAtlas}
                       type="button"
                     >
@@ -971,10 +971,10 @@ export default function BoundaryFirstConnectedPrototype() {
                         .slice(0, 6)
                         .map((item, index) => (
                           <li
-                            className="grid grid-cols-[1.75rem_1fr] gap-2 text-[15px] leading-6 text-foreground/85"
+                            className="grid grid-cols-[1.75rem_1fr] gap-2 text-[15px] leading-6 text-foreground-secondary"
                             key={`${item}-${index}`}
                           >
-                            <span className="font-mono text-[11px] font-semibold text-muted-foreground">
+                            <span className="font-mono text-[11px] font-semibold text-foreground-muted">
                               {String(index + 1).padStart(2, "0")}
                             </span>
                             <span>{item}</span>
@@ -990,7 +990,7 @@ export default function BoundaryFirstConnectedPrototype() {
                   <div className="mb-2 grid gap-2">
                     {(selectedRelation?.targetOptions?.length ?? 0) > 1 ? (
                       <div className="mb-2 grid gap-2 border-b border-border/60 pb-4">
-                        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+                        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
                           Related domains
                         </p>
                         {selectedRelation?.targetOptions?.map((target) => (
@@ -1018,7 +1018,7 @@ export default function BoundaryFirstConnectedPrototype() {
                       {projectionContent.action}
                     </Link>
                     <Link
-                      className="inline-flex min-h-10 items-center justify-center text-center font-mono text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground underline-offset-4 hover:underline"
+                      className="inline-flex min-h-10 items-center justify-center text-center font-mono text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted underline-offset-4 hover:underline"
                       href={mapMode === "atlas" ? "/search" : "/domains"}
                     >
                       {mapMode === "atlas"

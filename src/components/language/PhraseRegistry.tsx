@@ -78,7 +78,7 @@ export function PhraseRegistry({
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Public phrase registry
             </p>
             <h2
@@ -88,7 +88,7 @@ export function PhraseRegistry({
               Browse the language with its limits attached.
             </h2>
           </div>
-          <p className="max-w-2xl text-base leading-8 text-foreground/70 lg:justify-self-end">
+          <p className="max-w-2xl text-base leading-8 text-foreground-muted lg:justify-self-end">
             A phrase is not cleared merely because it is memorable. Filter by
             register, then open any record to inspect the source, channel,
             ambiguity, claim ceiling, and replacement trigger that travel with
@@ -132,10 +132,10 @@ export function PhraseRegistry({
           </div>
 
           <label className="mt-4 flex min-h-12 items-center gap-3 border border-border bg-background px-4">
-            <Search aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
+            <Search aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
             <span className="sr-only">Search governed phrases</span>
             <input
-              className="min-w-0 flex-1 bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground"
+              className="min-w-0 flex-1 bg-transparent py-3 text-sm outline-none placeholder:text-foreground-muted"
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search phrase, meaning, ambiguity, or channel"
               type="search"
@@ -146,7 +146,7 @@ export function PhraseRegistry({
 
         <p
           aria-live="polite"
-          className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
+          className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted"
         >
           Showing {filteredPhrases.length} of {phrases.length} governed phrases
         </p>
@@ -168,11 +168,11 @@ export function PhraseRegistry({
                     <span className="border border-border bg-card px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.13em]">
                       {register?.label}
                     </span>
-                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-muted-foreground">
+                    <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-foreground-muted">
                       {useClassLabels[phrase.useClass]}
                     </span>
                     {phrase.priority && (
-                      <span className="ml-auto font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-muted-foreground">
+                      <span className="ml-auto font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-foreground-muted">
                         {phrase.priority}
                       </span>
                     )}
@@ -181,10 +181,10 @@ export function PhraseRegistry({
                   <h3 className="mt-6 font-serif text-3xl font-semibold leading-tight sm:text-4xl">
                     {phrase.phrase}
                   </h3>
-                  <p className="mt-5 text-sm leading-7 text-foreground/72">
+                  <p className="mt-5 text-sm leading-7 text-foreground-muted">
                     {phrase.meaning}
                   </p>
-                  <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                  <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                     {phrase.id} · {statusLabels[phrase.status]}
                   </p>
 
@@ -194,30 +194,30 @@ export function PhraseRegistry({
                     </summary>
                     <div className="mt-5 space-y-6 text-sm leading-7">
                       <div>
-                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                           Claim ceiling
                         </h4>
-                        <p className="mt-2 text-foreground/72">
+                        <p className="mt-2 text-foreground-muted">
                           {phrase.claimCeiling}
                         </p>
                       </div>
 
                       <div className="grid gap-5 sm:grid-cols-2">
                         <div>
-                          <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                          <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                             Permitted channels
                           </h4>
-                          <ul className="mt-2 space-y-1 text-foreground/72">
+                          <ul className="mt-2 space-y-1 text-foreground-muted">
                             {phrase.allowedChannels.map((channel) => (
                               <li key={channel}>{channel}</li>
                             ))}
                           </ul>
                         </div>
                         <div>
-                          <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                          <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                             Restricted contexts
                           </h4>
-                          <ul className="mt-2 space-y-1 text-foreground/72">
+                          <ul className="mt-2 space-y-1 text-foreground-muted">
                             {phrase.restrictedContexts.map((context) => (
                               <li key={context}>{context}</li>
                             ))}
@@ -226,10 +226,10 @@ export function PhraseRegistry({
                       </div>
 
                       <div>
-                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                           Known ambiguity
                         </h4>
-                        <ul className="mt-2 space-y-2 text-foreground/72">
+                        <ul className="mt-2 space-y-2 text-foreground-muted">
                           {phrase.knownAmbiguities.map((ambiguity) => (
                             <li key={ambiguity}>— {ambiguity}</li>
                           ))}
@@ -237,10 +237,10 @@ export function PhraseRegistry({
                       </div>
 
                       <div>
-                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                           Provenance
                         </h4>
-                        <ul className="mt-2 space-y-2 text-foreground/72">
+                        <ul className="mt-2 space-y-2 text-foreground-muted">
                           {phraseSources.map((source) => (
                             <li key={source.id}>
                               {source.publicRoute ? (
@@ -253,7 +253,7 @@ export function PhraseRegistry({
                               ) : (
                                 source.label
                               )}
-                              <span className="text-muted-foreground">
+                              <span className="text-foreground-muted">
                                 {" "}· {source.preservationStatus}
                               </span>
                             </li>
@@ -262,14 +262,14 @@ export function PhraseRegistry({
                       </div>
 
                       <div>
-                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                        <h4 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                           Replacement trigger
                         </h4>
-                        <p className="mt-2 text-foreground/72">
+                        <p className="mt-2 text-foreground-muted">
                           {phrase.replacement.trigger}
                         </p>
                         {phrase.decisionId && (
-                          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.13em] text-muted-foreground">
+                          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.13em] text-foreground-muted">
                             Open decision · {phrase.decisionId}
                           </p>
                         )}
@@ -289,7 +289,7 @@ export function PhraseRegistry({
             })}
           </div>
         ) : (
-          <div className="mt-5 border border-border bg-card p-8 text-sm leading-7 text-muted-foreground">
+          <div className="mt-5 border border-border bg-card p-8 text-sm leading-7 text-foreground-muted">
             No governed phrase matches this register and search. Clear the
             search or choose another register.
           </div>

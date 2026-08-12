@@ -34,7 +34,7 @@ export function AtlasListExperience() {
       <div className="border-b border-border bg-card/70 px-5 py-3 sm:px-8">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
               Research Atlas
             </p>
             <p className="mt-1 text-xs leading-5 text-foreground/68">
@@ -98,7 +98,7 @@ export function AtlasListExperience() {
       <section aria-labelledby="atlas-list-title" className="pt-12 sm:pt-16">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Indexed research architecture
             </p>
             <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold leading-[1.02] tracking-tight sm:text-5xl" id="atlas-list-title">
@@ -115,7 +115,7 @@ export function AtlasListExperience() {
           <React.Suspense
             fallback={
               <div className="mx-auto max-w-6xl px-5 py-8 sm:px-8">
-                <p className="flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                <p className="flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                   <CircleDot aria-hidden="true" className="h-3.5 w-3.5" />
                   Loading Atlas list
                 </p>

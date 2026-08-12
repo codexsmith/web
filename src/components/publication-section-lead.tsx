@@ -24,7 +24,7 @@ export function PublicationSectionLead({
       <div>
         <div
           className={`flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] ${
-            inverse ? "text-primary-foreground/60" : "text-muted-foreground"
+            inverse ? "text-primary-foreground-muted" : "text-foreground-muted"
           }`}
         >
           {Icon ? <Icon aria-hidden="true" className="h-4 w-4" /> : null}
@@ -36,7 +36,7 @@ export function PublicationSectionLead({
       </div>
       <p
         className={`max-w-3xl text-sm leading-7 sm:text-base ${
-          inverse ? "text-primary-foreground/72" : "text-foreground/70"
+          inverse ? "text-primary-foreground/72" : "text-foreground-muted"
         }`}
       >
         {description}

@@ -42,7 +42,7 @@ export function DomainRecordSection({
           {Icon ? (
             <Icon
               aria-hidden="true"
-              className="h-5 w-5 shrink-0 text-muted-foreground"
+              className="h-5 w-5 shrink-0 text-foreground-muted"
             />
           ) : null}
           <Heading className="font-serif text-xl font-medium text-foreground">
@@ -51,13 +51,13 @@ export function DomainRecordSection({
         </span>
         <span className="flex shrink-0 items-center gap-3">
           {count ? (
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground sm:text-[11px]">
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted sm:text-[11px]">
               {count}
             </span>
           ) : null}
           <Plus
             aria-hidden="true"
-            className="h-5 w-5 text-muted-foreground transition-transform group-open:rotate-45"
+            className="h-5 w-5 text-foreground-muted transition-transform group-open:rotate-45"
           />
         </span>
       </summary>

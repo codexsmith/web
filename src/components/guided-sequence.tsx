@@ -204,10 +204,10 @@ export function GuidedSequence({ initialScene = 0 }: { initialScene?: number }) 
         <div className="mx-auto grid min-h-[38rem] w-full min-w-0 max-w-[96rem] grid-cols-[minmax(0,1fr)] lg:grid-cols-[17rem_minmax(0,1fr)]">
           <aside className="min-w-0 overflow-hidden border-b border-border/60 px-5 py-5 lg:border-b-0 lg:border-r lg:px-6 lg:py-6">
             <StartAudienceOnramp />
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
               Guided first passage
             </p>
-            <p className="mt-2 max-w-xs text-sm leading-6 text-foreground/70">
+            <p className="mt-2 max-w-xs text-sm leading-6 text-foreground-muted">
               Learn the legend before revealing the atlas.
             </p>
             <ol className="mt-4 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 [scrollbar-width:none] lg:grid lg:gap-1 lg:overflow-visible [&::-webkit-scrollbar]:hidden">
@@ -219,7 +219,7 @@ export function GuidedSequence({ initialScene = 0 }: { initialScene?: number }) 
                     className={`flex min-h-10 min-w-10 items-center gap-3 rounded-sm border px-3 text-left transition-colors lg:w-full ${
                       item.number === activeScene
                         ? "border-foreground bg-foreground text-background"
-                        : "border-transparent text-muted-foreground hover:border-border hover:bg-card hover:text-foreground"
+                        : "border-transparent text-foreground-muted hover:border-border hover:bg-card hover:text-foreground"
                     }`}
                     onClick={() => changeScene(item.number)}
                     type="button"
@@ -242,14 +242,14 @@ export function GuidedSequence({ initialScene = 0 }: { initialScene?: number }) 
                     <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card font-mono text-[11px] font-semibold">
                       {String(scene.number).padStart(2, "0")}
                     </span>
-                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                       {scene.eyebrow}
                     </p>
                   </div>
                   <h1 className="mt-6 max-w-4xl font-serif text-4xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.25rem]">
                     {scene.title}
                   </h1>
-                  <p className="mt-4 max-w-3xl text-lg font-medium leading-8 text-foreground/70 sm:text-xl sm:leading-9">
+                  <p className="mt-4 max-w-3xl text-lg font-medium leading-8 text-foreground-muted sm:text-xl sm:leading-9">
                     {scene.body}
                   </p>
                   {scene.terms && (
@@ -289,7 +289,7 @@ export function GuidedSequence({ initialScene = 0 }: { initialScene?: number }) 
               <div className="relative overflow-hidden border-t border-border bg-primary p-5 text-primary-foreground sm:p-7 lg:border-l lg:border-t-0 lg:p-8">
                 <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_center,transparent_0,transparent_1.5rem,currentColor_1.55rem,transparent_1.65rem)] [background-size:5rem_5rem]" />
                 <div className="relative flex min-h-[30rem] flex-col justify-between">
-                  <div className="flex items-center justify-between gap-4 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-foreground/75">
+                  <div className="flex items-center justify-between gap-4 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-foreground-secondary">
                     <span>Context at this scale</span>
                     <span>{sceneNodes.length} records</span>
                   </div>
@@ -308,7 +308,7 @@ export function GuidedSequence({ initialScene = 0 }: { initialScene?: number }) 
                             <Icon className="h-5 w-5" />
                           </span>
                           <span className="min-w-0">
-                            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-foreground/75">
+                            <span className="block font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-primary-foreground-secondary">
                               {asString(node.role, `Record ${index + 1}`)}
                             </span>
                             <span className="mt-1 block font-serif text-lg font-semibold">{node.label}</span>
@@ -328,7 +328,7 @@ export function GuidedSequence({ initialScene = 0 }: { initialScene?: number }) 
                       return (
                         <div className="border-t border-primary-foreground/30 pt-3" key={term}>
                           <Icon className="h-4 w-4" />
-                          <span className="mt-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-primary-foreground/80">
+                          <span className="mt-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-primary-foreground-secondary">
                             {term}
                           </span>
                         </div>
@@ -349,7 +349,7 @@ export function GuidedSequence({ initialScene = 0 }: { initialScene?: number }) 
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Previous
               </button>
-              <span className="hidden items-center gap-2 text-sm text-muted-foreground sm:flex">
+              <span className="hidden items-center gap-2 text-sm text-foreground-muted sm:flex">
                 <BookOpen className="h-4 w-4" />
                 Scene {activeScene + 1} of {scenes.length}
               </span>

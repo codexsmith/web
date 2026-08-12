@@ -43,7 +43,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
               <span className="block font-serif text-lg font-semibold tracking-wide sm:text-xl">
                 Boundary First Labs
               </span>
-              <span className="hidden font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground xl:block">
+              <span className="hidden font-mono text-[11px] uppercase tracking-[0.22em] text-foreground-muted xl:block">
                 Consequence, governance, repair
               </span>
             </span>
@@ -51,7 +51,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
 
           <nav
             aria-label="Primary navigation"
-            className="hidden items-center gap-5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground md:flex"
+            className="hidden items-center gap-5 font-mono text-[11px] uppercase tracking-widest text-foreground-muted md:flex"
           >
             {desktopNavItems.map((item) => (
               <Link
@@ -80,7 +80,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
           {/* Mobile menu button */}
           <button
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-border p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-border p-2 text-foreground-muted transition-colors hover:bg-muted hover:text-foreground md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             type="button"
           >
@@ -111,7 +111,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
               <span className="font-serif text-lg font-semibold">Navigate</span>
               <button
                 aria-label="Close menu"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm p-2 text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm p-2 text-foreground-muted hover:bg-muted hover:text-foreground"
                 onClick={() => setMobileOpen(false)}
                 type="button"
               >
@@ -128,7 +128,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
                   className={`rounded-sm px-4 py-3 font-mono text-[11px] uppercase tracking-widest transition-colors hover:bg-muted ${
                     isActive(item.href)
                       ? "bg-muted text-foreground"
-                      : "text-muted-foreground"
+                      : "text-foreground-muted"
                   }`}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -141,7 +141,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
                 className={`mt-2 flex min-h-12 items-center justify-center gap-2 rounded-sm border border-border px-4 py-3 text-center font-mono text-[11px] uppercase tracking-widest transition-colors hover:bg-muted ${
                   isActive("/search")
                     ? "bg-muted text-foreground"
-                    : "text-muted-foreground"
+                    : "text-foreground-muted"
                 }`}
                 href="/search"
                 onClick={() => setMobileOpen(false)}

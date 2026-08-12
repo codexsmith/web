@@ -48,7 +48,7 @@ export default function MissionPage() {
       >
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.92fr)_minmax(24rem,1.08fr)] lg:items-center">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Human consequence
             </p>
             <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight sm:text-6xl">
@@ -67,22 +67,22 @@ export default function MissionPage() {
 
       <section className="border-b border-border bg-card/45 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
             Three scales of help
           </p>
           <div className="mt-7 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
             {scales.map((scale, index) => (
               <article className="bg-background p-6 sm:p-7" key={firstText(scale.id)}>
-                <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h2 className="mt-4 font-serif text-3xl font-semibold">
                   {firstText(scale.label)}
                 </h2>
-                <p className="mt-4 text-sm font-medium leading-7 text-foreground/72">
+                <p className="mt-4 text-sm font-medium leading-7 text-foreground-muted">
                   {firstText(scale.promise)}
                 </p>
-                <p className="mt-6 border-t border-border pt-5 text-xs leading-6 text-muted-foreground">
+                <p className="mt-6 border-t border-border pt-5 text-xs leading-6 text-foreground-muted">
                   {firstText(scale.publicLine)}
                 </p>
               </article>
@@ -95,7 +95,7 @@ export default function MissionPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 Mission ledger
               </p>
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -115,7 +115,7 @@ export default function MissionPage() {
                 >
                   <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 py-4 [&::-webkit-details-marker]:hidden">
                     <span className="grid grid-cols-[2rem_1fr] items-center gap-3">
-                      <span className="font-mono text-[9px] text-muted-foreground">
+                      <span className="font-mono text-[9px] text-foreground-muted">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <span className="font-serif text-xl font-semibold sm:text-2xl">
@@ -124,20 +124,20 @@ export default function MissionPage() {
                     </span>
                     <span
                       aria-hidden="true"
-                      className="font-mono text-lg text-muted-foreground transition-transform group-open:rotate-45"
+                      className="font-mono text-lg text-foreground-muted transition-transform group-open:rotate-45"
                     >
                       +
                     </span>
                   </summary>
                   <div className="grid gap-6 pb-8 pl-11 lg:grid-cols-2">
                     <div>
-                      <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                      <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                         Human promise
                       </p>
                       <p className="mt-2 text-sm font-medium leading-7">
                         {firstText(mission.humanPromise)}
                       </p>
-                      <p className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                      <p className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                         Failure pattern
                       </p>
                       <p className="mt-2 text-sm leading-7 text-foreground/68">
@@ -146,10 +146,10 @@ export default function MissionPage() {
                     </div>
                     <div className="grid gap-5 sm:grid-cols-2">
                       <div>
-                        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                           Operations
                         </p>
-                        <ul className="mt-3 space-y-2 text-xs leading-6 text-foreground/72">
+                        <ul className="mt-3 space-y-2 text-xs leading-6 text-foreground-muted">
                           {asStringArray(mission.boundaryFirstOperation).map(
                             (operation) => (
                               <li className="flex gap-2" key={operation}>
@@ -164,10 +164,10 @@ export default function MissionPage() {
                         </ul>
                       </div>
                       <div>
-                        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                           Public outputs
                         </p>
-                        <ul className="mt-3 space-y-2 text-xs leading-6 text-foreground/72">
+                        <ul className="mt-3 space-y-2 text-xs leading-6 text-foreground-muted">
                           {asStringArray(mission.publicOutputs).map((output) => (
                             <li className="flex gap-2" key={output}>
                               <ShieldCheck
@@ -180,7 +180,7 @@ export default function MissionPage() {
                         </ul>
                       </div>
                     </div>
-                    <p className="border-l-2 border-accent pl-4 text-xs leading-6 text-muted-foreground lg:col-span-2">
+                    <p className="border-l-2 border-accent pl-4 text-xs leading-6 text-foreground-muted lg:col-span-2">
                       Claim posture · {firstText(mission.claimPosture)}
                     </p>
                   </div>
@@ -200,7 +200,7 @@ export default function MissionPage() {
       <section className="border-b border-border bg-card/55 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Claim boundaries
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold">
@@ -210,7 +210,7 @@ export default function MissionPage() {
           <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {Object.entries(claimFirewalls).map(([domain, boundary]) => (
               <article className="border border-border bg-background p-5" key={domain}>
-                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   {humanizeStatus(domain)}
                 </p>
                 <p className="mt-3 text-xs leading-6 text-foreground/68">

@@ -272,7 +272,7 @@ export function DomainArchitectureTree({
                     Search domain names, roles, descriptions, and facets
                   </span>
                   <input
-                    className="h-10 w-full rounded-full border border-border bg-background py-2 pl-4 pr-11 text-sm font-medium text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
+                    className="h-10 w-full rounded-full border border-border bg-background py-2 pl-4 pr-11 text-sm font-medium text-foreground placeholder:text-foreground-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
                     defaultValue={query}
                     key={query}
                     name="q"
@@ -300,7 +300,7 @@ export function DomainArchitectureTree({
               <h2 className="font-serif text-xl font-semibold">
                 No domains match this view.
               </h2>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              <p className="mt-2 text-sm leading-6 text-foreground-muted">
                 Clear or broaden the filters to return to the complete indexed
                 architecture.
               </p>
@@ -347,24 +347,24 @@ export function DomainArchitectureTree({
                         <span className="block font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-foreground">
                           {stage.title}
                         </span>
-                        <span className="mt-1 block text-xs text-muted-foreground sm:hidden">
+                        <span className="mt-1 block text-xs text-foreground-muted sm:hidden">
                           {hasActiveFilters
                             ? `${stageNodes.length} of ${allStageNodes.length} branches`
                             : `${stageNodes.length} branches`}
                         </span>
                       </span>
-                      <span className="hidden text-sm leading-6 text-muted-foreground sm:block">
+                      <span className="hidden text-sm leading-6 text-foreground-muted sm:block">
                         {stage.description}
                       </span>
                       <span className="flex items-center gap-3">
-                        <span className="hidden font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground md:inline">
+                        <span className="hidden font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-foreground-muted md:inline">
                           {hasActiveFilters
                             ? `${stageNodes.length} of ${allStageNodes.length} branches`
                             : `${stageNodes.length} branches`}
                         </span>
                         <ChevronDown
                           aria-hidden="true"
-                          className={`h-4 w-4 text-muted-foreground transition-transform ${
+                          className={`h-4 w-4 text-foreground-muted transition-transform ${
                             isOpen ? "rotate-180" : ""
                           }`}
                         />
@@ -421,12 +421,12 @@ export function DomainArchitectureTree({
                                   </span>
                                   <ArrowRight
                                     aria-hidden="true"
-                                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover/link:translate-x-0.5 group-hover/link:text-foreground"
+                                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-foreground-muted transition-transform group-hover/link:translate-x-0.5 group-hover/link:text-foreground"
                                   />
                                 </Link>
                                 <button
                                   aria-label={`View ${node.label} in the graph`}
-                                  className="flex min-h-9 items-center gap-2 border-t border-border px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-foreground"
+                                  className="flex min-h-9 items-center gap-2 border-t border-border px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-foreground-muted transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-foreground"
                                   onClick={() => onExploreNode(node.id)}
                                   type="button"
                                 >

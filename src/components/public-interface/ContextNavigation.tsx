@@ -67,7 +67,7 @@ export function ContextNavigation({
       className="border-b border-border bg-card/70 px-5 sm:px-8"
     >
       <div className="mx-auto flex max-w-7xl items-center gap-5 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <span className="shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        <span className="shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
           {section.label}
         </span>
         <span aria-hidden="true" className="h-4 w-px shrink-0 bg-border" />
@@ -80,7 +80,7 @@ export function ContextNavigation({
                 className={`inline-flex min-h-9 items-center px-3 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] transition-colors ${
                   active
                     ? "bg-primary text-primary-foreground"
-                    : "text-foreground/65 hover:bg-background hover:text-foreground"
+                    : "text-foreground-muted hover:bg-background hover:text-foreground"
                 }`}
                 href={link.href}
                 key={link.href}

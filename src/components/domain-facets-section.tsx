@@ -22,7 +22,7 @@ export function DomainFacetsSection({
       id="facets"
       title="Facets"
     >
-      <p className="max-w-3xl text-sm font-medium leading-6 text-foreground/70">
+      <p className="max-w-3xl text-sm font-medium leading-6 text-foreground-muted">
         Declared subdomains and interfaces that bound this record. Expand only
         when you need the detailed scope, evidence, and product posture of each
         facet.
@@ -44,12 +44,12 @@ export function DomainFacetsSection({
               key={facetName}
             >
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
-                <span className="mt-1.5 shrink-0 font-mono text-[11px] font-semibold text-muted-foreground">
+                <span className="mt-1.5 shrink-0 font-mono text-[11px] font-semibold text-foreground-muted">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                    <h4 className="font-serif text-xl font-semibold text-foreground/90">
+                    <h4 className="font-serif text-xl font-semibold text-foreground-secondary">
                       <a
                         className="group inline-flex min-h-11 items-center gap-2"
                         href={`#${facetSlug}`}
@@ -57,12 +57,12 @@ export function DomainFacetsSection({
                         {facetName}
                         <Link2
                           aria-hidden="true"
-                          className="h-4 w-4 text-muted-foreground opacity-55 transition-opacity group-hover:opacity-100"
+                          className="h-4 w-4 text-foreground-muted opacity-55 transition-opacity group-hover:opacity-100"
                         />
                       </a>
                     </h4>
                     {facetRecord?.stage ? (
-                      <span className="rounded-sm border border-border bg-background px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground/70">
+                      <span className="rounded-sm border border-border bg-background px-2 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-foreground-muted">
                         {facetRecord.stage.replace("-", " ")}
                       </span>
                     ) : null}
@@ -71,7 +71,7 @@ export function DomainFacetsSection({
                     <div className="mt-2 space-y-3">
                       {description.split("\n\n").map((paragraph, paragraphIndex) => (
                         <p
-                          className="text-[15px] font-medium leading-6 text-foreground/75"
+                          className="text-[15px] font-medium leading-6 text-foreground-muted"
                           key={`${facetSlug}-${paragraphIndex}`}
                         >
                           {paragraph}
@@ -79,13 +79,13 @@ export function DomainFacetsSection({
                       ))}
                     </div>
                   ) : null}
-                  <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                  <p className="mt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                     {facetRecord?.belonging ??
                       `Declared facet of ${node.label}`}
                   </p>
                   {targetOptions.length ? (
                     <div className="mt-4 flex flex-wrap items-center gap-2">
-                      <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                         Related {targetOptions.length === 1 ? "domain" : "domains"}
                       </span>
                       {targetOptions.map((target) => (
@@ -100,7 +100,7 @@ export function DomainFacetsSection({
                       ))}
                     </div>
                   ) : null}
-                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-border/40 pt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t border-border/40 pt-4 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-muted">
                     <span>
                       Evidence ·{" "}
                       {evidenceRefs.length

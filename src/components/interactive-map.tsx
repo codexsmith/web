@@ -676,7 +676,7 @@ export function InteractiveMap({
       {isLoading && (
         <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/92 px-6 text-center backdrop-blur-sm">
           <div className="h-16 w-16 animate-pulse rounded-full border-2 border-border bg-card" />
-          <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
             Preparing the Atlas
           </p>
           <p className="mt-2 max-w-sm text-sm leading-6 text-foreground/68">

@@ -82,14 +82,14 @@ export default function LanguageRegistryPage() {
       <section className="border-b border-border bg-card/55 px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.9fr)] lg:items-end">
           <div>
-            <Tags aria-hidden="true" className="h-7 w-7 text-muted-foreground" />
-            <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <Tags aria-hidden="true" className="h-7 w-7 text-foreground-muted" />
+            <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Working canonical meaning · Version {languageSystem.version}
             </p>
             <blockquote className="mt-4 max-w-4xl font-serif text-4xl font-semibold leading-tight sm:text-6xl">
               {languageSystem.canonicalMeaning}
             </blockquote>
-            <p className="mt-7 max-w-3xl text-base leading-8 text-foreground/70">
+            <p className="mt-7 max-w-3xl text-base leading-8 text-foreground-muted">
               {languageSystem.stewardshipPrinciple}
             </p>
           </div>
@@ -115,15 +115,15 @@ export default function LanguageRegistryPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-end">
             <div>
-              <ShieldCheck aria-hidden="true" className="h-7 w-7 text-muted-foreground" />
-              <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              <ShieldCheck aria-hidden="true" className="h-7 w-7 text-foreground-muted" />
+              <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
                 Editorial promotion gates
               </p>
               <h2 className="mt-3 max-w-xl font-serif text-4xl font-semibold sm:text-5xl">
                 A phrase earns reach one gate at a time.
               </h2>
             </div>
-            <p className="max-w-2xl text-base leading-8 text-foreground/70 lg:justify-self-end">
+            <p className="max-w-2xl text-base leading-8 text-foreground-muted lg:justify-self-end">
               Public memorability never bypasses research or promotion review.
               Each gate names the evidence and stewardship needed before a line
               can travel farther.
@@ -133,13 +133,13 @@ export default function LanguageRegistryPage() {
           <ol className="mt-9 grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-3">
             {languageSystem.reviewGates.map((gate, index) => (
               <li className="bg-background p-6 sm:p-8" key={gate.id}>
-                <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   {String(index + 1).padStart(2, "0")} · {gate.id}
                 </span>
                 <h3 className="mt-4 font-serif text-3xl font-semibold">
                   {gate.label}
                 </h3>
-                <ul className="mt-5 space-y-3 text-sm leading-7 text-foreground/70">
+                <ul className="mt-5 space-y-3 text-sm leading-7 text-foreground-muted">
                   {gate.checks.map((check) => (
                     <li className="border-l border-border pl-3" key={check}>
                       {check}
@@ -153,7 +153,7 @@ export default function LanguageRegistryPage() {
           <div className="mt-9 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {languageSystem.editorialChecklist.map((item) => (
               <article className="bg-background p-5 sm:p-6" key={item.id}>
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                   {item.id}
                 </p>
                 <h3 className="mt-3 font-serif text-2xl font-semibold">
@@ -171,14 +171,14 @@ export default function LanguageRegistryPage() {
       <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
           <div>
-            <GitBranch aria-hidden="true" className="h-7 w-7 text-muted-foreground" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+            <GitBranch aria-hidden="true" className="h-7 w-7 text-foreground-muted" />
+            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
               Succession and retirement
             </p>
             <h2 className="mt-3 max-w-xl font-serif text-4xl font-semibold sm:text-5xl">
               Prune without rewriting the past.
             </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-foreground/70">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-foreground-muted">
               A corrected phrase receives a new record. The old wording remains
               discoverable with its prior status, rationale, and successor so
               editorial improvement does not become provenance loss.
@@ -186,13 +186,13 @@ export default function LanguageRegistryPage() {
           </div>
 
           <div className="border border-border bg-card/55 p-6 sm:p-8">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
               Append-only replacement rules
             </p>
             <ol className="mt-5 space-y-4">
               {languageSystem.replacementPolicy.rules.map((rule, index) => (
                 <li className="flex gap-4 text-sm leading-7" key={rule}>
-                  <span className="font-mono text-[10px] text-muted-foreground">
+                  <span className="font-mono text-[10px] text-foreground-muted">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span>{rule}</span>
@@ -213,7 +213,7 @@ export default function LanguageRegistryPage() {
       <section className="bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:items-end">
           <div>
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/60">
+            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               Present claim ceiling
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold">

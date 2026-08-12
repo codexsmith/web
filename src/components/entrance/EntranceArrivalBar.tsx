@@ -46,10 +46,10 @@ export function EntranceArrivalBar() {
     <aside className="border-b border-border bg-card/60" aria-label="Entrance context">
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-5 py-4 sm:px-8 lg:flex-row lg:items-center">
         <div>
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
             You arrived through {current.label}
           </p>
-          <p className="mt-1 text-sm text-foreground/70">
+          <p className="mt-1 text-sm text-foreground-muted">
             This record belongs to the shared corpus. Continue through the same
             lens or try another beginning.
           </p>

@@ -35,10 +35,10 @@ export function EntranceSwitcher({
     <section className="border-b border-border bg-card/55 text-foreground">
       <div className="mx-auto max-w-7xl px-5 py-4 sm:px-8">
         <div className="flex items-center justify-between gap-6">
-          <p className="whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <p className="whitespace-nowrap font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
             Boundary First entrance · {ENTRANCE_MILESTONE_LABELS[milestone]}
           </p>
-          <p className="hidden whitespace-nowrap text-right font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground xl:block">
+          <p className="hidden whitespace-nowrap text-right font-mono text-[9px] uppercase tracking-[0.1em] text-foreground-muted xl:block">
             {ENTRANCE_INVARIANT}
           </p>
         </div>
@@ -65,7 +65,7 @@ export function EntranceSwitcher({
                     className={`font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${
                       active
                         ? "text-primary-foreground/62"
-                        : "text-muted-foreground"
+                        : "text-foreground-muted"
                     }`}
                   >
                     {String(route.presentationOrder + 1).padStart(2, "0")} · {route.bridge}
