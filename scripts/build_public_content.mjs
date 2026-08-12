@@ -22,6 +22,10 @@ function stableJson(value) {
 }
 
 if (!existsSync(sourcePath)) {
+  if (existsSync(join(outputDirectory, "manifest.json"))) {
+    console.log(`[public-content] Content master missing (${sourceRelativePath}). Using existing projections.`);
+    process.exit(0);
+  }
   fail(`Content master is missing: ${sourceRelativePath}`);
 }
 
