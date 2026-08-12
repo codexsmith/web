@@ -66,12 +66,12 @@ export function ContextNavigation({
       aria-label={`${section.label} section`}
       className="border-b border-border bg-card/70 px-5 sm:px-8"
     >
-      <div className="mx-auto flex max-w-7xl items-center gap-5 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="mx-auto flex max-w-7xl items-center gap-5 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex-wrap md:overflow-visible">
         <span className="shrink-0 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
           {section.label}
         </span>
-        <span aria-hidden="true" className="h-4 w-px shrink-0 bg-border" />
-        <div className="flex min-w-max items-center gap-1">
+        <span aria-hidden="true" className="hidden h-4 w-px shrink-0 bg-border md:block" />
+        <div className="flex min-w-max items-center gap-1 md:min-w-0 md:flex-wrap">
           {section.links.map((link) => {
             const active = activeHref === link.href;
             return (

@@ -41,11 +41,11 @@ export function WorkProjectionGroups() {
 
         <nav
           aria-label="Work projection groups"
-          className="mt-8 flex gap-2 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex gap-2 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:overflow-visible lg:grid-cols-3 xl:grid-cols-4"
         >
           {groups.map((group, index) => (
             <a
-              className="inline-flex min-h-10 min-w-max items-center border border-border bg-card px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] hover:bg-muted"
+              className="flex min-h-10 min-w-max items-center justify-center border border-border bg-card px-4 text-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] hover:bg-muted md:min-w-0 md:whitespace-normal"
               href={`#work-${firstText(group.id)}`}
               key={firstText(group.id)}
             >

@@ -51,7 +51,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
 
           <nav
             aria-label="Primary navigation"
-            className="hidden items-center gap-5 font-mono text-[11px] uppercase tracking-widest text-foreground-muted md:flex"
+            className="hidden items-center gap-5 font-mono text-[11px] uppercase tracking-widest text-foreground-muted lg:flex"
           >
             {desktopNavItems.map((item) => (
               <Link
@@ -80,7 +80,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
           {/* Mobile menu button */}
           <button
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-border p-2 text-foreground-muted transition-colors hover:bg-muted hover:text-foreground md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-border p-2 text-foreground-muted transition-colors hover:bg-muted hover:text-foreground lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             type="button"
           >
@@ -95,7 +95,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
 
       {/* Mobile drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-foreground/20 backdrop-blur-sm"
