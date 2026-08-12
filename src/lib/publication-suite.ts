@@ -1,5 +1,5 @@
-import publicationContentData from "../../backlog/1_bfl_publication_suite_v0_1/bfl_public_web_content_pack_v0_1.json";
-import publicationPathwayData from "../../backlog/1_bfl_publication_suite_v0_1/bfl_civilizational_mechanics_learning_pathway_v0_1.json";
+import publicationContentData from "../content/publication_content.json";
+import publicationPathwayData from "../content/publication_pathway.json";
 
 export type PublicationHero = {
   eyebrow: string;

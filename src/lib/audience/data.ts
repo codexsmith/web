@@ -1,4 +1,4 @@
-import rawDataset from "../../../backlog/2_boundary-first-audience-router/data/audience.nodes.json";
+import rawDataset from "../../content/audience_nodes.json";
 import canonicalNodeData from "../../content/nodes.json";
 import { publicationContent } from "../publication-suite";
 import { domainHref } from "../site-navigation";
