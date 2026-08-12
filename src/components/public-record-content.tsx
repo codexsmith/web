@@ -132,7 +132,7 @@ export function PublicRecordContent() {
           </div>
           <Link
             className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-primary"
-            href="mailto:contact@boundaryfirst.com?subject=Public%20record%20challenge"
+            href="mailto:nsc319@gmail.com?subject=Public%20record%20challenge"
           >
             Submit a challenge
             <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />

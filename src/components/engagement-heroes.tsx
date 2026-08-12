@@ -82,7 +82,7 @@ export function EngagementHeroes({
               </Link>
               <a
                 className="inline-flex min-h-12 items-center border border-primary-foreground/35 px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]"
-                href="mailto:contact@boundaryfirst.com?subject=Bounded%20collaboration%20inquiry"
+                href="mailto:nsc319@gmail.com?subject=Bounded%20collaboration%20inquiry"
               >
                 <Mail className="mr-2 h-4 w-4" /> Start a conversation
               </a>
@@ -128,7 +128,7 @@ export function EngagementHeroes({
               </Link>
               <a
                 className="inline-flex min-h-12 items-center border border-border bg-background px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em]"
-                href="mailto:contact@boundaryfirst.com?subject=Enterprise%20practice%20inquiry"
+                href="mailto:nsc319@gmail.com?subject=Enterprise%20practice%20inquiry"
               >
                 <ShieldCheck className="mr-2 h-4 w-4" /> Discuss a bounded need
               </a>

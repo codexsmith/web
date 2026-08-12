@@ -75,7 +75,7 @@ export default function CollaborationPage() {
         actions={
           <a
             className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
-            href="mailto:contact@boundaryfirst.com?subject=Bounded%20collaboration%20inquiry"
+            href="mailto:nsc319@gmail.com?subject=Bounded%20collaboration%20inquiry"
           >
             Propose a collaboration <ArrowRight className="ml-2 h-4 w-4" />
           </a>
@@ -243,7 +243,7 @@ export default function CollaborationPage() {
                 </div>
                 <a
                   className="mt-7 inline-flex min-h-11 items-center border border-border bg-background px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                  href={`mailto:contact@boundaryfirst.com?subject=${encodeURIComponent(
+                  href={`mailto:nsc319@gmail.com?subject=${encodeURIComponent(
                     asString(activeMode.label),
                   )}%20inquiry`}
                 >
@@ -367,7 +367,7 @@ export default function CollaborationPage() {
                   </p>
                   <a
                     className="mt-5 inline-flex items-center font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                    href="mailto:contact@boundaryfirst.com"
+                    href="mailto:nsc319@gmail.com"
                   >
                     Begin here <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </a>
@@ -495,7 +495,7 @@ export default function CollaborationPage() {
           <div className="flex flex-wrap gap-3">
             <a
               className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
-              href="mailto:contact@boundaryfirst.com?subject=Collaboration%20inquiry"
+              href="mailto:nsc319@gmail.com?subject=Collaboration%20inquiry"
             >
               Start an inquiry <ArrowRight className="ml-2 h-4 w-4" />
             </a>

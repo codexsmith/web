@@ -62,7 +62,7 @@ const structuredData = {
       "@id": `${siteOrigin}/#organization`,
       name: "Boundary First Labs",
       url: siteOrigin,
-      email: "contact@boundaryfirst.com",
+      email: "nsc319@gmail.com",
       description: phase12Launch.identity.fullStatement,
     },
     {
