@@ -23,11 +23,12 @@ export function SiteFooter() {
               href="/"
               className="flex min-h-10 items-center gap-3 transition-opacity hover:opacity-75"
             >
-              <span className="flex h-10 w-12 items-center justify-center text-primary-foreground">
+              <span className="flex h-12 w-12 items-center justify-center text-primary-foreground">
                 <CosmicShoreMark
                   aria-hidden="true"
-                  className="h-10 w-10"
+                  className="h-12 w-12"
                   surface="dark"
+                  variant="compact"
                 />
               </span>
               <span className="font-serif text-lg font-semibold">

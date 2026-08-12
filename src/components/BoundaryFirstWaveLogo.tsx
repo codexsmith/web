@@ -17,6 +17,8 @@ export type BoundaryFirstWaveLogoProps = Omit<
   /** Accessible label. Set decorative=true to hide the mark from assistive tech. */
   title?: string;
   decorative?: boolean;
+  /** Selects the viewBox framing. Standard includes wide original whitespace; compact is tightly cropped. */
+  variant?: "standard" | "compact";
 };
 
 type LogoStyle = CSSProperties & {
@@ -49,6 +51,7 @@ export function BoundaryFirstWaveLogo({
   spark,
   title = "Boundary First Labs",
   decorative = false,
+  variant = "standard",
   className,
   style,
   ...svgProps
@@ -69,7 +72,7 @@ export function BoundaryFirstWaveLogo({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 847 653"
+      viewBox={variant === "compact" ? "180 82 516 544" : "0 0 847 653"}
       className={className}
       style={logoStyle}
       role={decorative ? undefined : "img"}

@@ -36,8 +36,8 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
             className="flex items-center gap-3 transition-opacity hover:opacity-75"
             href="/"
           >
-            <span className="flex h-10 w-10 items-center justify-center text-foreground">
-              <CosmicShoreMark aria-hidden="true" className="h-10 w-10" />
+            <span className="flex h-12 w-12 items-center justify-center text-foreground">
+              <CosmicShoreMark aria-hidden="true" variant="compact" className="h-12 w-12" />
             </span>
             <span>
               <span className="block font-serif text-lg font-semibold tracking-wide sm:text-xl">
