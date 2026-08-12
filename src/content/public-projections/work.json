@@ -1,0 +1,1855 @@
+{
+  "projectionVersion": "1.0.0",
+  "kind": "work",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "payload": {
+    "sourceStatus": "migration-seed-requires-human-adjudication",
+    "sourcePrinciple": "No source payload is deleted or rewritten. Each original portfolio item is preserved verbatim under sourceData while a recommended public entity type is proposed.",
+    "entityCount": 24,
+    "projectionPolicy": {
+      "rule": "The groups below are public projections over one work graph. They do not alter entity identity, standing, lifecycle, or source provenance.",
+      "caseStudyStatus": "No case study is promoted until a bounded case record and evidence gate are present."
+    },
+    "groups": [
+      {
+        "id": "programs-methods",
+        "label": "Programs & methods",
+        "description": "Governed methods, professional instruments, and active development programs.",
+        "entityIds": [
+          "corpus-forge",
+          "corpus-forge-workbench",
+          "bfe-workbench",
+          "agency-audit-platform",
+          "claim-evidence-ledger"
+        ],
+        "entities": [
+          {
+            "id": "corpus-forge",
+            "titleRefs": [
+              "phr_e0d9d8e813af"
+            ],
+            "title": [
+              "Corpus Forge"
+            ],
+            "entityTypes": [
+              "program"
+            ],
+            "classes": [
+              "method-and-product-program"
+            ],
+            "shelves": [
+              "professional-tools"
+            ],
+            "productTypeRefs": [
+              "phr_af7a93ba95db"
+            ],
+            "productType": [
+              "research operations and corpus stewardship workbench"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "low",
+            "lifecycleStages": [
+              "testbed"
+            ],
+            "operatingStates": [
+              "active-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "operational internal workflow moving toward product"
+            ],
+            "descriptionRefs": [
+              "phr_8ea76ce4fdc7"
+            ],
+            "description": [
+              "A workbench for turning notes, documents, conversations, models, and experiments into a traceable, versioned research system through ingestion, source preservation, claim extraction, artifact classification, contradiction tracking, maturity control, provenance, review gates, and replacement documents."
+            ],
+            "publicValueRefs": [
+              "phr_16b093dc126e",
+              "phr_e17e40f17a60",
+              "phr_b7e262008cd4"
+            ],
+            "publicValue": [
+              "Turns unstructured bodies of work into traceable and criticizable knowledge systems.",
+              "Preserves provenance, maturity, dependency, and replacement history.",
+              "Provides infrastructure for responsible publication and institutional memory."
+            ],
+            "incomePotentialRefs": [
+              "phr_f03830c1bca0",
+              "phr_8760826efcff",
+              "phr_1cc0b3ce5faa"
+            ],
+            "incomePotential": [
+              "Professional subscriptions.",
+              "Corpus cleanup and research services.",
+              "Institutional licensing, hosting, and consulting."
+            ],
+            "relationships": [
+              "corpus-forge-workbench",
+              "claim-evidence-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[corpus-forge]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            },
+            "migrationNotes": [
+              "Overloaded source entry: separate the Corpus Forge method/program from any maintained Workbench product."
+            ]
+          },
+          {
+            "id": "corpus-forge-workbench",
+            "titleRefs": [
+              "phr_e94fa21557c3"
+            ],
+            "title": [
+              "Integrated Corpus Forge Workbench"
+            ],
+            "aliases": [
+              "Corpus Forge Mini-Workbench",
+              "Integrated Research Chatbot"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "professional-tool"
+            ],
+            "shelves": [
+              "professional-tools"
+            ],
+            "productTypeRefs": [
+              "phr_6d246e93c9bb"
+            ],
+            "productType": [
+              "AI-assisted research and authoring environment"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "active-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "active product concept"
+            ],
+            "descriptionRefs": [
+              "phr_f9392660d0be"
+            ],
+            "description": [
+              "An integrated workspace in which chat, source material, documents, claim ledgers, citations, and structured corpus transformations remain connected. Conversation can refine the durable corpus instead of disappearing into a chat transcript."
+            ],
+            "publicValueRefs": [
+              "phr_2b1c9ebfbc64",
+              "phr_1cab2e831de0",
+              "phr_d258f1496f8d"
+            ],
+            "publicValue": [
+              "Keeps AI assistance tied to sources, provenance, and durable artifacts.",
+              "Allows claims and revisions to move directly into governed research structures.",
+              "Makes the workbench rather than the chat interface the center of knowledge production."
+            ],
+            "incomePotentialRefs": [
+              "phr_25a6f9bc705d",
+              "phr_6e246ff02551",
+              "phr_f7f057e80e12"
+            ],
+            "incomePotential": [
+              "Professional and team subscriptions.",
+              "Hosted research workspaces.",
+              "Institutional integration and custom workflows."
+            ],
+            "relationships": [
+              "corpus-forge",
+              "claim-evidence-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[corpus-forge-workbench]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            },
+            "designConstraintRefs": [
+              "phr_1031d8111c57"
+            ],
+            "designConstraint": [
+              "The chatbot is not the product; the durable and governed transformation of the corpus is the product."
+            ]
+          },
+          {
+            "id": "bfe-workbench",
+            "titleRefs": [
+              "phr_bd931b9d63da"
+            ],
+            "title": [
+              "Boundary-First Engineering Workbench"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "professional-tool"
+            ],
+            "shelves": [
+              "professional-tools"
+            ],
+            "productTypeRefs": [
+              "phr_3daecee967b1"
+            ],
+            "productType": [
+              "software and systems design workbench"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "seed"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "method-to-product opportunity"
+            ],
+            "descriptionRefs": [
+              "phr_af68fe01eedc"
+            ],
+            "description": [
+              "A professional environment for extracting actors, permissions, domain objects, inputs, outputs, boundaries, invariants, admissibility rules, failure modes, interfaces, closure conditions, and repair ownership before architecture hardens."
+            ],
+            "publicValueRefs": [
+              "phr_48cf1fd9a0c9",
+              "phr_905cfef388da",
+              "phr_c12bc0c7c043"
+            ],
+            "publicValue": [
+              "Makes domain assumptions and responsibility structures visible before implementation.",
+              "Produces inspectable domain maps, contracts, decision logs, risk ledgers, and executable skeletons.",
+              "Reduces costly architectural drift and hidden failure."
+            ],
+            "incomePotentialRefs": [
+              "phr_c682f404cf82",
+              "phr_a73f450a7069",
+              "phr_99ded175c00d"
+            ],
+            "incomePotential": [
+              "Professional subscriptions and team licensing.",
+              "Training, facilitation, and consulting.",
+              "Enterprise workflow and documentation integrations."
+            ],
+            "relationships": [
+              "agency-audit-platform",
+              "claim-evidence-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[bfe-workbench]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "agency-audit-platform",
+            "titleRefs": [
+              "phr_8820c8da814f"
+            ],
+            "title": [
+              "Agency Audit Platform"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "professional-tool"
+            ],
+            "shelves": [
+              "professional-tools"
+            ],
+            "productTypeRefs": [
+              "phr_63d62f8b05ef"
+            ],
+            "productType": [
+              "AI, software, and institutional governance assessment tool"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "bounded-prototype"
+            ],
+            "operatingStates": [
+              "pilot-intake"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "developed framework awaiting pilots"
+            ],
+            "descriptionRefs": [
+              "phr_dddafb961f77"
+            ],
+            "description": [
+              "A structured assessment platform for determining who can act, who authorized the action, what meaningful options remain, who can challenge or reverse it, who bears the consequence, and who owns repair."
+            ],
+            "publicValueRefs": [
+              "phr_7c921b73e21d",
+              "phr_f98bf20bed11",
+              "phr_0f9c362a0d49"
+            ],
+            "publicValue": [
+              "Makes delegated agency and responsibility chains inspectable.",
+              "Supports governance review of AI, software, organizations, and institutional processes.",
+              "Turns Constructive Humanist Agentics into a repeatable assessment practice."
+            ],
+            "incomePotentialRefs": [
+              "phr_17388b542b74",
+              "phr_c39da7de9162",
+              "phr_2d593fe4af66"
+            ],
+            "incomePotential": [
+              "Assessments, workshops, and governance consulting.",
+              "Professional software subscriptions.",
+              "Assurance, compliance, and institutional licensing."
+            ],
+            "relationships": [
+              "bfe-workbench",
+              "claim-evidence-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[agency-audit-platform]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "claim-evidence-ledger",
+            "titleRefs": [
+              "phr_4215af6e1293"
+            ],
+            "title": [
+              "Claim and Evidence Ledger"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "professional-tool"
+            ],
+            "shelves": [
+              "professional-tools"
+            ],
+            "productTypeRefs": [
+              "phr_82b9475dda53"
+            ],
+            "productType": [
+              "research, policy, and governance evidence infrastructure"
+            ],
+            "portfolioStanding": "emerging",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "bounded-prototype"
+            ],
+            "operatingStates": [
+              "active-development"
+            ],
+            "sourceStatuses": [
+              "emerging"
+            ],
+            "sourceStages": [
+              "module partially embodied in Corpus Forge"
+            ],
+            "descriptionRefs": [
+              "phr_173327987091"
+            ],
+            "description": [
+              "A focused system for tracking claims, sources, evidence, assumptions, counterevidence, maturity, ownership, review, supersession, and permitted public wording."
+            ],
+            "publicValueRefs": [
+              "phr_079ac0d43e60",
+              "phr_b60aa22235d2",
+              "phr_dff73356b110"
+            ],
+            "publicValue": [
+              "Prevents claims from silently outrunning their evidence.",
+              "Supports traceable correction and responsible public communication.",
+              "Provides a smaller independent product surface extracted from Corpus Forge."
+            ],
+            "incomePotentialRefs": [
+              "phr_328192a6fbab",
+              "phr_95aa8ae59579",
+              "phr_5ea67239719b"
+            ],
+            "incomePotential": [
+              "Team subscriptions.",
+              "Policy, research, assurance, and investigative deployments.",
+              "API and workflow integrations."
+            ],
+            "relationships": [
+              "corpus-forge",
+              "corpus-forge-workbench",
+              "bfe-workbench",
+              "agency-audit-platform"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[claim-evidence-ledger]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          }
+        ]
+      },
+      {
+        "id": "public-products",
+        "label": "Public products & utilities",
+        "description": "Candidate public instruments organized by the needs they may serve, not by implied availability.",
+        "entityIds": [
+          "projectr",
+          "youtube-knowledge-explorer",
+          "cross-platform-bookshelf",
+          "constructive-media-protocol",
+          "barter-capacity-exchange",
+          "barter-ledger",
+          "need-capacity-map",
+          "child-safe-video-calling",
+          "family-presence-mode",
+          "single-purpose-phone-modes"
+        ],
+        "entities": [
+          {
+            "id": "projectr",
+            "titleRefs": [
+              "phr_921413e77eff"
+            ],
+            "title": [
+              "Projectr"
+            ],
+            "aliases": [
+              "Projector"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "platform"
+            ],
+            "shelves": [
+              "platforms"
+            ],
+            "productTypeRefs": [
+              "phr_9c5ca36adbd7"
+            ],
+            "productType": [
+              "constructive media network and structured knowledge platform"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "developed concept and architecture"
+            ],
+            "descriptionRefs": [
+              "phr_36a6882a81fa"
+            ],
+            "description": [
+              "A constructive media network for creating, sharing, revising, and coordinating projects, plans, goals, procedures, learning paths, evidence, progress, and reusable public knowledge. Its primary objects are constructive and revisable rather than disposable posts."
+            ],
+            "publicValueRefs": [
+              "phr_caf205f2b6b3",
+              "phr_2b0e0c9f8b31",
+              "phr_d539704f5f06"
+            ],
+            "publicValue": [
+              "Turns attention into structured agency and reusable knowledge.",
+              "Supports collaborative planning, learning, documentation, and public problem solving.",
+              "Creates a durable home for constructive media rather than engagement-only media."
+            ],
+            "incomePotentialRefs": [
+              "phr_bd072a53bfba",
+              "phr_3c9f72ba85bc",
+              "phr_bfe34b42f1fd"
+            ],
+            "incomePotential": [
+              "Subscriptions for advanced workspaces and organizational use.",
+              "Institutional hosting and knowledge-network services.",
+              "Creator, education, community, and enterprise tooling."
+            ],
+            "relationships": [
+              "constructive-media-protocol",
+              "youtube-knowledge-explorer",
+              "cross-platform-bookshelf"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[projectr]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "youtube-knowledge-explorer",
+            "titleRefs": [
+              "phr_5d510177a93a"
+            ],
+            "title": [
+              "YouTube Knowledge Explorer"
+            ],
+            "aliases": [
+              "YouTube learning wrapper"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "public-utility"
+            ],
+            "shelves": [
+              "public-utilities"
+            ],
+            "productTypeRefs": [
+              "phr_0dc22162db54"
+            ],
+            "productType": [
+              "learning wrapper and educational media tool"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "bounded product concept"
+            ],
+            "descriptionRefs": [
+              "phr_ce8310d5781d"
+            ],
+            "description": [
+              "A learning layer over YouTube that turns playlists, channels, and selected videos into structured learning paths with notes, dependencies, progress, summaries, and explicit reasons for what to watch next."
+            ],
+            "publicValueRefs": [
+              "phr_4337936896c7",
+              "phr_553009ab2e3e",
+              "phr_cba278140aac"
+            ],
+            "publicValue": [
+              "Converts video feeds into navigable learning environments.",
+              "Helps teachers, creators, families, and independent learners organize durable knowledge.",
+              "Provides an accessible on-ramp into the larger Projectr ecosystem."
+            ],
+            "incomePotentialRefs": [
+              "phr_62f70da5b0d7",
+              "phr_9eb095af01bb",
+              "phr_e861ab2f1daf"
+            ],
+            "incomePotential": [
+              "Consumer subscription tiers.",
+              "Creator and educator course-packaging tools.",
+              "School, library, and organizational licensing."
+            ],
+            "relationships": [
+              "projectr",
+              "cross-platform-bookshelf"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[youtube-knowledge-explorer]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "cross-platform-bookshelf",
+            "titleRefs": [
+              "phr_5d6d9554394f"
+            ],
+            "title": [
+              "Cross-Platform Bookshelf"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "public-utility"
+            ],
+            "shelves": [
+              "public-utilities"
+            ],
+            "productTypeRefs": [
+              "phr_9caf71768ed7"
+            ],
+            "productType": [
+              "personal knowledge and media organizer"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "recurring concept"
+            ],
+            "descriptionRefs": [
+              "phr_7b7ed1af1982"
+            ],
+            "description": [
+              "A structured bookshelf for videos, articles, podcasts, books, documents, and courses that preserves why an item was saved, where it belongs, the user's intended use, progress, relationships, and resulting knowledge or action."
+            ],
+            "publicValueRefs": [
+              "phr_b41871f2f3b6",
+              "phr_4411f7e8dbf5",
+              "phr_96955647c816"
+            ],
+            "publicValue": [
+              "Preserves learning intent instead of merely accumulating links.",
+              "Connects media consumption to projects, goals, and action.",
+              "Reduces fragmentation across platforms and formats."
+            ],
+            "incomePotentialRefs": [
+              "phr_d5eadb972599",
+              "phr_7874c8551171",
+              "phr_cc654cfde7dd"
+            ],
+            "incomePotential": [
+              "Consumer subscriptions.",
+              "Premium synchronization and knowledge-organization tools.",
+              "Education and organizational deployments."
+            ],
+            "relationships": [
+              "projectr",
+              "youtube-knowledge-explorer"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[cross-platform-bookshelf]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "constructive-media-protocol",
+            "titleRefs": [
+              "phr_4169e5d434b4"
+            ],
+            "title": [
+              "Constructive Media Protocol"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "protocol-infrastructure"
+            ],
+            "shelves": [
+              "platforms"
+            ],
+            "productTypeRefs": [
+              "phr_07a9961bc5b1"
+            ],
+            "productType": [
+              "constructive knowledge and media infrastructure"
+            ],
+            "portfolioStanding": "emerging",
+            "classificationConfidence": "medium",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "emerging"
+            ],
+            "sourceStages": [
+              "research and architecture concept"
+            ],
+            "descriptionRefs": [
+              "phr_9be37012ccf1"
+            ],
+            "description": [
+              "A protocol layer for identifying, attributing, versioning, relating, transporting, forking, correcting, rewarding, and preserving constructive media and public knowledge across systems."
+            ],
+            "publicValueRefs": [
+              "phr_3786e9e17bb5",
+              "phr_3315948f967d",
+              "phr_b50066fd74c7"
+            ],
+            "publicValue": [
+              "Makes constructive knowledge portable, composable, and correctable.",
+              "Preserves attribution, lineage, and revision across platform boundaries.",
+              "Provides infrastructure for durable public knowledge rather than isolated content silos."
+            ],
+            "incomePotentialRefs": [
+              "phr_0894d4db1518",
+              "phr_1fcb5fe54f63",
+              "phr_37738df077bd"
+            ],
+            "incomePotential": [
+              "Infrastructure services and hosted implementations.",
+              "Institutional and platform licensing.",
+              "Developer tools and protocol support."
+            ],
+            "relationships": [
+              "projectr",
+              "claim-evidence-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[constructive-media-protocol]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "barter-capacity-exchange",
+            "titleRefs": [
+              "phr_2081c808dead"
+            ],
+            "title": [
+              "Barter and Capacity Exchange"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "platform"
+            ],
+            "shelves": [
+              "platforms"
+            ],
+            "productTypeRefs": [
+              "phr_123433f23444"
+            ],
+            "productType": [
+              "civic-economic exchange network"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "emerging architecture"
+            ],
+            "descriptionRefs": [
+              "phr_23ca8746524b"
+            ],
+            "description": [
+              "A structured exchange network for matching underused goods, services, time, tools, space, transport, care, expertise, inventory, and productive capacity to represented human and organizational need."
+            ],
+            "publicValueRefs": [
+              "phr_6a12d1f461ef",
+              "phr_ab7f37cb4485",
+              "phr_93810d2d0d47"
+            ],
+            "publicValue": [
+              "Makes underused capacity and unmet need mutually legible.",
+              "Supports exchange where conventional money is absent, scarce, or an incomplete representation of value.",
+              "Creates public-interest infrastructure for neighborhoods, mutual-aid groups, nonprofits, and small organizations."
+            ],
+            "incomePotentialRefs": [
+              "phr_be49d88efd4b",
+              "phr_e2829841f704",
+              "phr_d94d04970504"
+            ],
+            "incomePotential": [
+              "Institutional hosting and service contracts.",
+              "Transaction, matching, or administrative service fees where appropriate.",
+              "Municipal, nonprofit, cooperative, and community deployments."
+            ],
+            "relationships": [
+              "barter-ledger",
+              "need-capacity-map"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[barter-capacity-exchange]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "barter-ledger",
+            "titleRefs": [
+              "phr_9c3098a76d9b"
+            ],
+            "title": [
+              "Barter Ledger"
+            ],
+            "aliases": [
+              "Barter Bit"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "platform-infrastructure"
+            ],
+            "shelves": [
+              "platforms"
+            ],
+            "productTypeRefs": [
+              "phr_38f6b62d5df5"
+            ],
+            "productType": [
+              "accounting, provenance, credit, and settlement layer"
+            ],
+            "portfolioStanding": "emerging",
+            "classificationConfidence": "medium",
+            "lifecycleStages": [
+              "seed"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "emerging"
+            ],
+            "sourceStages": [
+              "exploratory architecture"
+            ],
+            "descriptionRefs": [
+              "phr_2075ab50e8e7"
+            ],
+            "description": [
+              "A durable accounting layer for exchange, reciprocal obligation, contribution, portable reputation, mutual credit, and settlement. Blockchain is treated as one possible implementation rather than the product's purpose."
+            ],
+            "publicValueRefs": [
+              "phr_c1d15e5db9bb",
+              "phr_2953357eef5a",
+              "phr_d921898b105f"
+            ],
+            "publicValue": [
+              "Creates legible and durable exchange records.",
+              "Supports trust, reciprocity, and contribution accounting across communities.",
+              "Allows the ledger architecture to be selected by the invariants of the exchange system."
+            ],
+            "incomePotentialRefs": [
+              "phr_acfdd49f001f",
+              "phr_9f15e5a6d2ca",
+              "phr_32be20278404"
+            ],
+            "incomePotential": [
+              "Hosted ledger and settlement services.",
+              "Institutional and cooperative deployments.",
+              "Integration and governance consulting."
+            ],
+            "relationships": [
+              "barter-capacity-exchange",
+              "need-capacity-map",
+              "cryptonium"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[barter-ledger]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            },
+            "designConstraintRefs": [
+              "phr_9f78d4ff04cc"
+            ],
+            "designConstraint": [
+              "Choose the ledger that preserves the economic invariant; do not invent an economic invariant to justify the ledger."
+            ]
+          },
+          {
+            "id": "need-capacity-map",
+            "titleRefs": [
+              "phr_628de913094d"
+            ],
+            "title": [
+              "Need and Capacity Map"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "public-utility"
+            ],
+            "shelves": [
+              "public-utilities"
+            ],
+            "productTypeRefs": [
+              "phr_ac47a887db12"
+            ],
+            "productType": [
+              "public-interest matching and coordination tool"
+            ],
+            "portfolioStanding": "emerging",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "emerging"
+            ],
+            "sourceStages": [
+              "candidate first product wedge"
+            ],
+            "descriptionRefs": [
+              "phr_329b9116a576"
+            ],
+            "description": [
+              "A bounded tool for representing underused resources, unmet needs, matching constraints, and trusted organizations capable of closing the gap before attempting to build a complete alternative economic system."
+            ],
+            "publicValueRefs": [
+              "phr_250e8e627b38",
+              "phr_c92055f7b672",
+              "phr_3fbe1a0b1d75"
+            ],
+            "publicValue": [
+              "Provides immediate coordination value without requiring a new currency.",
+              "Supports neighborhood, nonprofit, school, disaster-response, and mutual-aid use.",
+              "Generates evidence about what a larger exchange system must preserve."
+            ],
+            "incomePotentialRefs": [
+              "phr_d0d052fb5622",
+              "phr_2330d6c40f8a",
+              "phr_9e4b3fb4855b"
+            ],
+            "incomePotential": [
+              "Institutional hosting and local deployments.",
+              "Public-interest grants and service contracts.",
+              "Integration with resource-management and civic systems."
+            ],
+            "relationships": [
+              "barter-capacity-exchange",
+              "barter-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[need-capacity-map]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "child-safe-video-calling",
+            "titleRefs": [
+              "phr_980500f9b1e5"
+            ],
+            "title": [
+              "Child-Safe Video Calling"
+            ],
+            "aliases": [
+              "TotCall",
+              "NanaMode",
+              "LittleLine",
+              "SafeCall"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "public-utility"
+            ],
+            "shelves": [
+              "public-utilities"
+            ],
+            "productTypeRefs": [
+              "phr_b7f8d1cff5ee"
+            ],
+            "productType": [
+              "bounded mobile communication utility"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "clearly shaped product concept"
+            ],
+            "descriptionRefs": [
+              "phr_2009e5cb2528"
+            ],
+            "description": [
+              "A video-call environment that allows a caregiver to hand a young child a live call without exposing the rest of the phone or allowing random touches to hang up, change settings, open applications, send messages, or make purchases."
+            ],
+            "publicValueRefs": [
+              "phr_30febf59cdb5",
+              "phr_862cf76bd705",
+              "phr_f5017d7ca536"
+            ],
+            "publicValue": [
+              "Preserves safe family connection for children too young to operate a general-purpose phone.",
+              "Demonstrates safety through explicit negative capability and bounded interaction.",
+              "Creates an accessible consumer example of boundary-first interface design."
+            ],
+            "incomePotentialRefs": [
+              "phr_721c3ca41457",
+              "phr_9c4c2666dd52",
+              "phr_711041a11381"
+            ],
+            "incomePotential": [
+              "Consumer purchase or subscription.",
+              "Family plan and caregiver features.",
+              "Partnerships with communication, accessibility, and family-service providers."
+            ],
+            "relationships": [
+              "family-presence-mode",
+              "single-purpose-phone-modes"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[child-safe-video-calling]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            },
+            "designConstraintRefs": [
+              "phr_cda29c8fa8cd"
+            ],
+            "designConstraint": [
+              "The child receives the intended human connection while irrelevant operational control remains inaccessible."
+            ]
+          },
+          {
+            "id": "family-presence-mode",
+            "titleRefs": [
+              "phr_ce609e72b608"
+            ],
+            "title": [
+              "Family Presence Mode"
+            ],
+            "entityTypes": [
+              "product-family"
+            ],
+            "classes": [
+              "accessibility-communication"
+            ],
+            "shelves": [
+              "public-utilities"
+            ],
+            "productTypeRefs": [
+              "phr_a9512d096e16"
+            ],
+            "productType": [
+              "caregiver-mediated communication and accessibility environment"
+            ],
+            "portfolioStanding": "emerging",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "emerging"
+            ],
+            "sourceStages": [
+              "product-family extension"
+            ],
+            "descriptionRefs": [
+              "phr_a84e306e9bfa"
+            ],
+            "description": [
+              "A reduced and trusted communication environment for children, elderly users, people with cognitive or motor impairments, hospitalized family members, and others who need human connection without general-device complexity."
+            ],
+            "publicValueRefs": [
+              "phr_0e2ad511270d",
+              "phr_289467518005",
+              "phr_c9c9c92abe06"
+            ],
+            "publicValue": [
+              "Expands safe communication beyond the child-use case.",
+              "Preserves human presence while removing irrelevant operational complexity.",
+              "Supports accessibility, caregiving, and remote family connection."
+            ],
+            "incomePotentialRefs": [
+              "phr_179f4d35ef23",
+              "phr_5ded7b3bf5af",
+              "phr_ad4eafd5fcfa"
+            ],
+            "incomePotential": [
+              "Consumer and family subscriptions.",
+              "Healthcare, eldercare, and accessibility partnerships.",
+              "Licensed communication modes for device or platform providers."
+            ],
+            "relationships": [
+              "child-safe-video-calling",
+              "single-purpose-phone-modes"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[family-presence-mode]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "single-purpose-phone-modes",
+            "titleRefs": [
+              "phr_8532b552973c"
+            ],
+            "title": [
+              "Single-Purpose Phone Modes"
+            ],
+            "entityTypes": [
+              "product-family"
+            ],
+            "classes": [
+              "bounded-interaction-framework"
+            ],
+            "shelves": [
+              "public-utilities"
+            ],
+            "productTypeRefs": [
+              "phr_8c839c27d29f"
+            ],
+            "productType": [
+              "bounded mobile interaction framework"
+            ],
+            "portfolioStanding": "emerging",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "emerging"
+            ],
+            "sourceStages": [
+              "reusable product pattern"
+            ],
+            "descriptionRefs": [
+              "phr_d5ae4e9f584c"
+            ],
+            "description": [
+              "A framework for temporarily turning a general-purpose phone into a bounded appliance for one trusted activity, such as emergency contact, medical instruction, school pickup, elder check-in, navigation, appointments, tickets, or household tasks."
+            ],
+            "publicValueRefs": [
+              "phr_0aecc2d0a0ac",
+              "phr_b9c4ee929cde",
+              "phr_be3991253d7d"
+            ],
+            "publicValue": [
+              "Reduces accidental action, confusion, distraction, and misuse.",
+              "Creates accessible interfaces for users who do not need the full device surface.",
+              "Provides a reusable architecture for a family of small public-value applications."
+            ],
+            "incomePotentialRefs": [
+              "phr_63e355917b5d",
+              "phr_85ee66e03c97",
+              "phr_50169978c7d8"
+            ],
+            "incomePotential": [
+              "Consumer utility applications.",
+              "Enterprise and institutional mode licensing.",
+              "OEM or mobile-platform partnerships."
+            ],
+            "relationships": [
+              "child-safe-video-calling",
+              "family-presence-mode"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[single-purpose-phone-modes]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          }
+        ]
+      },
+      {
+        "id": "research-programs",
+        "label": "Research programs & testbeds",
+        "description": "Research-heavy programs and public on-ramps whose maturity remains visible.",
+        "entityIds": [
+          "boundary-first-chess-software",
+          "weather-at-home",
+          "boundary-first-soccer"
+        ],
+        "entities": [
+          {
+            "id": "boundary-first-chess-software",
+            "titleRefs": [
+              "phr_3a2dd90e4e36"
+            ],
+            "title": [
+              "Boundary-First Chess Software"
+            ],
+            "entityTypes": [
+              "product-family"
+            ],
+            "classes": [
+              "educational-software"
+            ],
+            "shelves": [
+              "technical-assets-testbeds"
+            ],
+            "productTypeRefs": [
+              "phr_0801f1c28fd2"
+            ],
+            "productType": [
+              "educational analysis, interactive examples, and game-learning software"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "mature manuscript with software opportunities"
+            ],
+            "descriptionRefs": [
+              "phr_d6e683e5bf78"
+            ],
+            "description": [
+              "Interactive software derived from Boundary-First Chess, including position and move classifiers, worked examples, teaching tools, curriculum, and possible analysis interfaces that make boundary reasoning visible in a familiar game."
+            ],
+            "publicValueRefs": [
+              "phr_afef2d663701",
+              "phr_410bcd6dce7d",
+              "phr_cdd01c8227c9"
+            ],
+            "publicValue": [
+              "Provides an accessible on-ramp into boundary reasoning.",
+              "Improves chess pedagogy for beginners and casual viewers.",
+              "Creates a public demonstration of representational mechanics in use."
+            ],
+            "incomePotentialRefs": [
+              "phr_4a5bb671dfed",
+              "phr_22710e9dbdb9",
+              "phr_d820dce0d82c"
+            ],
+            "incomePotential": [
+              "Digital products and educational subscriptions.",
+              "Courses, curriculum, and workshops.",
+              "Publishing, licensing, and analysis tools."
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[boundary-first-chess-software]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            },
+            "migrationNotes": [
+              "Source describes a family of software opportunities; concrete products should be split only when separately scoped."
+            ]
+          },
+          {
+            "id": "weather-at-home",
+            "titleRefs": [
+              "phr_bb395bd2666b"
+            ],
+            "title": [
+              "Weather@Home and Boundary-First Weather"
+            ],
+            "entityTypes": [
+              "program"
+            ],
+            "classes": [
+              "research-and-product-program"
+            ],
+            "shelves": [
+              "technical-assets-testbeds"
+            ],
+            "productTypeRefs": [
+              "phr_3da8f4d3600d"
+            ],
+            "productType": [
+              "local weather modeling, simulation, sensing, and public infrastructure"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "low",
+            "lifecycleStages": [
+              "seed"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "research-heavy product lane"
+            ],
+            "descriptionRefs": [
+              "phr_a38fad0b9971"
+            ],
+            "description": [
+              "A product and research lane spanning local forecasting, simulation, environmental sensing, distributed computation, and public weather infrastructure shaped by boundary-aware modeling."
+            ],
+            "publicValueRefs": [
+              "phr_970156c76d52",
+              "phr_e7e99124a3a5",
+              "phr_815014262228"
+            ],
+            "publicValue": [
+              "Improves local environmental legibility and public access to weather intelligence.",
+              "Provides a demanding testbed for dynamic models, uncertainty, and infrastructure.",
+              "Connects foundational research to an immediate public-interest domain."
+            ],
+            "incomePotentialRefs": [
+              "phr_73c368b4f16c",
+              "phr_3c4d27bf7eed",
+              "phr_bcfd62c2bcf6"
+            ],
+            "incomePotential": [
+              "Data, modeling, and forecasting services.",
+              "Public-sector, research, and infrastructure partnerships.",
+              "Software, sensing, and specialized deployments."
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[weather-at-home]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            },
+            "migrationNotes": [
+              "Source describes a research-heavy product lane; likely requires program plus one or more concrete product/testbed entities."
+            ]
+          },
+          {
+            "id": "boundary-first-soccer",
+            "titleRefs": [
+              "phr_790b71fff190"
+            ],
+            "title": [
+              "Boundary-First Soccer"
+            ],
+            "entityTypes": [
+              "project"
+            ],
+            "classes": [
+              "research-and-on-ramp-project"
+            ],
+            "shelves": [
+              "incubator"
+            ],
+            "productTypeRefs": [
+              "phr_514aa5f7e6c4"
+            ],
+            "productType": [
+              "spatial game analysis and educational software"
+            ],
+            "portfolioStanding": "candidate",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "seed"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "candidate"
+            ],
+            "sourceStages": [
+              "early extension concept"
+            ],
+            "descriptionRefs": [
+              "phr_9be5d8c3308f"
+            ],
+            "description": [
+              "A possible extension of boundary-first analysis into spatial pressure, possession, closure, transition, and team shape in soccer."
+            ],
+            "publicValueRefs": [
+              "phr_3fc8ce6d3044",
+              "phr_4157d6326b6b",
+              "phr_fadbcaa489e7"
+            ],
+            "publicValue": [
+              "Tests whether the chess pedagogy transports into a dynamic team domain.",
+              "Offers a familiar public on-ramp into spatial and collective boundary reasoning.",
+              "Could generate comparative evidence for the wider discipline."
+            ],
+            "incomePotentialRefs": [
+              "phr_795485539ab1",
+              "phr_b3399bf62715",
+              "phr_b1629163aae0"
+            ],
+            "incomePotential": [
+              "Educational media and analysis tools.",
+              "Coaching and training products.",
+              "Publishing and licensing."
+            ],
+            "relationships": [
+              "boundary-first-chess-software"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[boundary-first-soccer]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            },
+            "migrationNotes": [
+              "Present as an early research/on-ramp project, not as an available product."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "selected-software",
+        "label": "Selected software work",
+        "description": "Technical assets retained as a selected software record, not promoted as current products.",
+        "entityIds": [
+          "secure-multistream-video-storage",
+          "cryptonium",
+          "macro-deck-dashboard",
+          "terminal-workspace-manager"
+        ],
+        "entities": [
+          {
+            "id": "secure-multistream-video-storage",
+            "titleRefs": [
+              "phr_3936d75e6d23"
+            ],
+            "title": [
+              "Secure Multistream Video Storage"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "technical-infrastructure"
+            ],
+            "shelves": [
+              "technical-assets-testbeds"
+            ],
+            "productTypeRefs": [
+              "phr_17fc4d1a8239"
+            ],
+            "productType": [
+              "cloud video storage, encoding, and replay infrastructure"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "medium",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "needs-inventory"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "previously architected technical asset"
+            ],
+            "descriptionRefs": [
+              "phr_4f9899bf9feb"
+            ],
+            "description": [
+              "A technical system for efficiently encoding, storing, securing, and replaying multiple synchronized video streams through an encoder core, durable container, API, SDK, benchmark suite, and replay module."
+            ],
+            "publicValueRefs": [
+              "phr_bc29e55e6b2f",
+              "phr_85121d589423",
+              "phr_b673b7f15f38"
+            ],
+            "publicValue": [
+              "Improves the storage and retrieval of synchronized media evidence and experiences.",
+              "Creates a concrete systems-engineering asset with benchmarkable performance.",
+              "Can support safety, research, media, and institutional recording use cases."
+            ],
+            "incomePotentialRefs": [
+              "phr_4a707a8c236e",
+              "phr_447a372e8b3b",
+              "phr_dabac45695b5"
+            ],
+            "incomePotential": [
+              "Licensing or acquisition by cloud, storage, or media providers.",
+              "SDK and infrastructure licensing.",
+              "Technical consulting and integration."
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[secure-multistream-video-storage]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "cryptonium",
+            "titleRefs": [
+              "phr_797222d038c8"
+            ],
+            "title": [
+              "Cryptonium"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "technical-infrastructure"
+            ],
+            "shelves": [
+              "technical-assets-testbeds"
+            ],
+            "productTypeRefs": [
+              "phr_0cb66a46e417"
+            ],
+            "productType": [
+              "secure document signing, provenance, and trusted storage"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "medium",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "needs-inventory"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "prior architecture requiring current asset review"
+            ],
+            "descriptionRefs": [
+              "phr_e3716544d511"
+            ],
+            "description": [
+              "A cryptographic signing and storage system for authorship, authorization, tamper evidence, institutional records, publication lineage, and legally consequential documents."
+            ],
+            "publicValueRefs": [
+              "phr_bfa9d2c811ed",
+              "phr_5e46ba286565",
+              "phr_2714f703f03a"
+            ],
+            "publicValue": [
+              "Strengthens document provenance, authorization, and tamper evidence.",
+              "Supports trustworthy institutional records and publication lineage.",
+              "Provides a technical bridge between provenance doctrine and executable infrastructure."
+            ],
+            "incomePotentialRefs": [
+              "phr_3ef194cccc82",
+              "phr_facf9fa4a6b4",
+              "phr_8db5c342ad63"
+            ],
+            "incomePotential": [
+              "Enterprise and institutional licensing.",
+              "Document workflow and compliance integrations.",
+              "Secure storage and signing services."
+            ],
+            "relationships": [
+              "barter-ledger",
+              "claim-evidence-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[cryptonium]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "macro-deck-dashboard",
+            "titleRefs": [
+              "phr_689c18de24d3"
+            ],
+            "title": [
+              "Macro-Deck Control Dashboard"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "technical-utility"
+            ],
+            "shelves": [
+              "technical-assets-testbeds"
+            ],
+            "productTypeRefs": [
+              "phr_d09873ba378e"
+            ],
+            "productType": [
+              "desktop and mobile automation utility"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "medium",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "needs-inventory"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "prior implementation concept requiring inventory"
+            ],
+            "descriptionRefs": [
+              "phr_94fee2e33ff5"
+            ],
+            "description": [
+              "A customizable control surface containing buttons, switches, knobs, timers, scripts, status widgets, and automation triggers for personal or professional workflows."
+            ],
+            "publicValueRefs": [
+              "phr_dd0b614ea411",
+              "phr_320776aae8a0",
+              "phr_e3b9f74e6238"
+            ],
+            "publicValue": [
+              "Makes complex workflows visible and directly controllable.",
+              "Supports accessibility, productivity, and custom operational environments.",
+              "Provides a bounded utility with a clear engineering surface."
+            ],
+            "incomePotentialRefs": [
+              "phr_6db9bfcd67f3",
+              "phr_e1527da7c19e",
+              "phr_8792e3dd9b7f"
+            ],
+            "incomePotential": [
+              "Consumer and professional application sales.",
+              "Premium templates and integrations.",
+              "Specialized enterprise or accessibility deployments."
+            ],
+            "relationships": [
+              "terminal-workspace-manager"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[macro-deck-dashboard]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "terminal-workspace-manager",
+            "titleRefs": [
+              "phr_79d6c311c178"
+            ],
+            "title": [
+              "Windows Terminal Workspace Manager"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "developer-utility"
+            ],
+            "shelves": [
+              "technical-assets-testbeds"
+            ],
+            "productTypeRefs": [
+              "phr_49ff15c458c4"
+            ],
+            "productType": [
+              "developer continuity utility"
+            ],
+            "portfolioStanding": "confirmed",
+            "classificationConfidence": "medium",
+            "lifecycleStages": [
+              "governed-concept"
+            ],
+            "operatingStates": [
+              "needs-inventory"
+            ],
+            "sourceStatuses": [
+              "confirmed"
+            ],
+            "sourceStages": [
+              "prior concept or implementation requiring inventory"
+            ],
+            "descriptionRefs": [
+              "phr_1ce6f842f4c8"
+            ],
+            "description": [
+              "A developer utility for preserving and restoring terminal tabs, directories, commands, labels, themes, and project layouts so meaningful work can resume with less reconstruction."
+            ],
+            "publicValueRefs": [
+              "phr_16f8b7fcab83",
+              "phr_affe7e0fba9b",
+              "phr_ec9ff0ff2d31"
+            ],
+            "publicValue": [
+              "Preserves operational context across interrupted work.",
+              "Reduces setup friction and state loss for developers.",
+              "Demonstrates the portfolio's broader interest in continuity and recoverable working state."
+            ],
+            "incomePotentialRefs": [
+              "phr_15b64d10b3bd",
+              "phr_7b576751c569",
+              "phr_1f74df102875"
+            ],
+            "incomePotential": [
+              "Consumer utility sales.",
+              "Premium workspace synchronization.",
+              "Developer-team licensing."
+            ],
+            "relationships": [
+              "macro-deck-dashboard"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[terminal-workspace-manager]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          }
+        ]
+      },
+      {
+        "id": "research-queue",
+        "label": "Research queue",
+        "description": "Aligned candidates that remain seeds until scope, stewardship, and evidence gates are recorded.",
+        "entityIds": [
+          "home-boundary-maintenance-os",
+          "infrastructure-maintenance-ledger"
+        ],
+        "entities": [
+          {
+            "id": "home-boundary-maintenance-os",
+            "titleRefs": [
+              "phr_1fe074af9a30"
+            ],
+            "title": [
+              "Home Boundary Maintenance OS"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "consumer-utility"
+            ],
+            "shelves": [
+              "incubator"
+            ],
+            "productTypeRefs": [
+              "phr_70dfb434cff0"
+            ],
+            "productType": [
+              "household maintenance and continuity system"
+            ],
+            "portfolioStanding": "candidate",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "seed"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "candidate"
+            ],
+            "sourceStages": [
+              "aligned portfolio concept not yet confirmed as active asset"
+            ],
+            "descriptionRefs": [
+              "phr_514119a405e6"
+            ],
+            "description": [
+              "A household system for tracking assets, maintenance intervals, warranties, repairs, replacement parts, service history, inspections, and early failure signals."
+            ],
+            "publicValueRefs": [
+              "phr_617e3131bbe2",
+              "phr_0c2aeb2f7e8b",
+              "phr_83642901d870"
+            ],
+            "publicValue": [
+              "Makes household maintenance state and responsibility legible.",
+              "Supports prevention, continuity, and repair rather than crisis response.",
+              "Applies boundary-first maintenance principles to ordinary life."
+            ],
+            "incomePotentialRefs": [
+              "phr_d5eadb972599",
+              "phr_f52118932f46",
+              "phr_6ab9ddd5588e"
+            ],
+            "incomePotential": [
+              "Consumer subscriptions.",
+              "Home-service and warranty partnerships.",
+              "Property-management licensing."
+            ],
+            "relationships": [
+              "infrastructure-maintenance-ledger"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[home-boundary-maintenance-os]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          },
+          {
+            "id": "infrastructure-maintenance-ledger",
+            "titleRefs": [
+              "phr_4efb074c4bb9"
+            ],
+            "title": [
+              "Infrastructure Maintenance Ledger"
+            ],
+            "entityTypes": [
+              "product"
+            ],
+            "classes": [
+              "institutional-tool"
+            ],
+            "shelves": [
+              "incubator"
+            ],
+            "productTypeRefs": [
+              "phr_4ebf3a4448c7"
+            ],
+            "productType": [
+              "public and institutional infrastructure accountability tool"
+            ],
+            "portfolioStanding": "candidate",
+            "classificationConfidence": "high",
+            "lifecycleStages": [
+              "seed"
+            ],
+            "operatingStates": [
+              "concept-development"
+            ],
+            "sourceStatuses": [
+              "candidate"
+            ],
+            "sourceStages": [
+              "aligned portfolio concept not yet confirmed as active asset"
+            ],
+            "descriptionRefs": [
+              "phr_feb73ddc941c"
+            ],
+            "description": [
+              "A system for tracing infrastructure assets, condition, deferred maintenance, budgets, inspections, ownership, consequence, and repair responsibility."
+            ],
+            "publicValueRefs": [
+              "phr_711f17d1819b",
+              "phr_72af0dd6432a",
+              "phr_33d3229552f4"
+            ],
+            "publicValue": [
+              "Makes deferred maintenance and responsibility visible.",
+              "Connects public spending, asset condition, and repair history.",
+              "Supports institutional memory and public accountability."
+            ],
+            "incomePotentialRefs": [
+              "phr_5bc67ae821b2",
+              "phr_e9dad48c884f",
+              "phr_fa774411b395"
+            ],
+            "incomePotential": [
+              "Municipal and institutional deployments.",
+              "Public infrastructure consulting and data services.",
+              "Asset-management integrations."
+            ],
+            "relationships": [
+              "home-boundary-maintenance-os"
+            ],
+            "provenance": {
+              "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#products-testbeds.softwarePortfolio[infrastructure-maintenance-ledger]",
+              "migrationStatus": "extracted-non-destructively; canonical source retained"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "boundary-first.collaboration-instances.v1",
+  "status": "no-public-operational-instances-recorded",
+  "sourceFramework": "identity.collaboration",
+  "protectedFieldPolicy": "A protected value must be represented by an explicit protected-field marker, not silent omission.",
+  "instances": []
+}

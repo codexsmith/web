@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "boundary-first.cyoa.fixtures.v1",
+  "bindingId": "bfl-cyoa-adaptive-onramps",
+  "validRoutes": [
+    {
+      "path": [],
+      "expectedState": "choose-world",
+      "expectedOnrampId": null,
+      "expectedChoiceId": null
+    },
+    {
+      "path": ["engineering"],
+      "expectedState": "name-trouble",
+      "expectedOnrampId": "onramp:engineering",
+      "expectedChoiceId": null
+    },
+    {
+      "path": ["engineering", "handoff"],
+      "expectedState": "cross-bridge",
+      "expectedOnrampId": "onramp:engineering",
+      "expectedChoiceId": "choice:engineering-handoff",
+      "expectedConceptIds": ["boundary", "ownership", "closure", "repair"],
+      "expectedDestinationNodeId": "bfe"
+    },
+    {
+      "path": ["research", "ruler"],
+      "expectedState": "cross-bridge",
+      "expectedOnrampId": "onramp:research",
+      "expectedChoiceId": "choice:research-ruler",
+      "expectedConceptIds": ["gauge", "measurement", "representation", "invariant"],
+      "expectedDestinationNodeId": "representational-mechanics"
+    },
+    {
+      "path": ["learning", "metaphor"],
+      "expectedState": "cross-bridge",
+      "expectedOnrampId": "onramp:learning",
+      "expectedChoiceId": "choice:learning-metaphor",
+      "expectedConceptIds": ["on-ramp", "typing", "claim-ceiling", "formalization"],
+      "expectedDestinationNodeId": "formal-grammars"
+    }
+  ],
+  "invalidRoutes": [
+    ["unknown"],
+    ["software", "ruler"],
+    ["engineering", "handoff", "extra"]
+  ]
+}

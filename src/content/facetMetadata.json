@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "1.0",
+  "defaultTargetPolicy": "none",
+  "facets": {
+    "identity--boundary-theory": {
+      "targetNodeIds": ["boundary-theory"]
+    },
+    "identity--distinction-space": {
+      "targetNodeIds": ["distinction-space"]
+    },
+    "identity--contexture-system-formalization": {
+      "targetNodeIds": ["contexture", "system"],
+      "definition": "This branch joins Contexture's composable local structures with System's process and persistence semantics. The two records remain separate so structural inclusion is not confused with dynamics."
+    },
+    "identity--representational-mechanics": {
+      "targetNodeIds": ["representational-mechanics"]
+    },
+    "identity--formal-grammars": {
+      "targetNodeIds": ["formal-grammars"]
+    },
+    "identity--corpus-forge-research-operations": {
+      "targetNodeIds": ["corpus-forge", "corpus"],
+      "definition": "This branch connects the operational forge that transforms source material with the corpus record that governs provenance, promotion, correction, and continuity."
+    },
+    "identity--mathematics-formal-structures": {
+      "targetNodeIds": ["mathematics"]
+    },
+    "identity--physics-physical-regimes": {
+      "targetNodeIds": ["physics"]
+    },
+    "identity--computational-machine-intelligence-research": {
+      "targetNodeIds": ["computational-systems"]
+    },
+    "identity--software-engineering-applied-computer-science": {
+      "targetNodeIds": ["software-engineering-practice"]
+    },
+    "identity--responsible-publication-stewardship": {
+      "targetNodeIds": ["corpus", "governance-institutions"],
+      "definition": "Responsible publication and stewardship joins corpus-level provenance and correction duties to institutional authority, standing, and continuity. It does not treat publication as evidence or institutional placement as endorsement."
+    },
+    "identity--software-products-public-infrastructure": {
+      "targetNodeIds": ["products-testbeds"]
+    },
+    "identity--public-philosophy-satire-speaking": {
+      "targetNodeIds": ["public-philosophy-satire"]
+    },
+    "identity--engineering-governance-institutional-continuity": {
+      "targetNodeIds": ["bfe", "governance-institutions"],
+      "definition": "This branch connects boundary-first engineering practice with the governance and continuity obligations that make consequence-bearing systems maintainable and contestable."
+    },
+    "identity--finance-capital-economic-systems": {
+      "targetNodeIds": ["finance-capital"]
+    },
+    "identity--law-constitutional-systems-public-trust": {
+      "targetNodeIds": ["law-public-trust"]
+    },
+    "identity--infrastructure-civilizational-repair": {
+      "targetNodeIds": ["infrastructure-repair"]
+    },
+    "identity--systems-criticism-public-diagnosis": {
+      "targetNodeIds": ["systems-criticism"]
+    },
+    "identity--practice-services-institutional-partnerships": {
+      "targetNodeIds": ["bfe", "products-testbeds"],
+      "definition": "This branch locates services and partnerships where methods are applied, tested, and maintained. Practice evidence remains distinct from theoretical validation and from institutional endorsement."
+    },
+    "identity--ecology-labor-material-substrate": {
+      "targetNodeIds": ["positions"],
+      "definition": "This branch keeps ecological limits, labor conditions, household continuity, and material capacity inside the system boundary rather than treating them as externalities."
+    },
+    "identity--evidence-evaluation-replication": {
+      "targetNodeIds": ["corpus"],
+      "definition": "This branch covers source provenance, evaluation, criticism, replication, and correction as separate operations in the evidence lifecycle."
+    },
+    "identity--human-factors-accessible-interaction": {
+      "targetNodeIds": ["constructive-humanist-agentics"],
+      "definition": "This branch treats human capacity, accessibility, contestability, and embodied interaction as design constraints on delegated or amplified agency."
+    },
+    "identity--portfolio-governance-product-stewardship": {
+      "targetNodeIds": ["products-testbeds", "governance-institutions"],
+      "definition": "This branch connects product lifecycle decisions to declared ownership, maintenance, retirement, and public-consequence duties."
+    },
+    "boundary-theory--distinction-space": {
+      "targetNodeIds": ["distinction-space"]
+    },
+    "boundary-theory--contexture": {
+      "targetNodeIds": ["contexture"]
+    },
+    "boundary-theory--system": {
+      "targetNodeIds": ["system"]
+    },
+    "boundary-theory--distinction": {
+      "targetNodeIds": ["distinction-theory"]
+    },
+    "boundary-theory--admissibility": {
+      "targetNodeIds": ["admissibility-theory"]
+    },
+    "boundary-theory--emergence": {
+      "targetNodeIds": ["emergence-theory"]
+    },
+    "representational-mechanics--formal-grammar-design": {
+      "targetNodeIds": ["formal-grammars"]
+    },
+    "mathematics--mathematical-physics": {
+      "targetNodeIds": ["physics"],
+      "definition": "Mathematical physics is the interface where formal structures are tested against physical regimes, models, and invariants. The linked Physics record supplies the physical research context without collapsing the two disciplines."
+    },
+    "physics--mathematical-physics": {
+      "targetNodeIds": ["mathematics"],
+      "definition": "Mathematical physics is the interface where physical regimes are expressed and challenged through formal structure. The linked Mathematics record supplies that apparatus without substituting proof for empirical adequacy."
+    },
+    "corpus--corpus-forge": {
+      "targetNodeIds": ["corpus-forge"]
+    }
+  }
+}

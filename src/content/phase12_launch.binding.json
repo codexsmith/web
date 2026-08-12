@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "boundary-first.phase12-launch.v1",
+  "version": "2026-08-11",
+  "status": "product-owner-approved-active",
+  "source": {
+    "path": "backlog/12_full_circle/product_owner_vision.md",
+    "authority": "product-owner direction for public identity, launch priority, portfolio availability, and the 2026-08-11 Laboratory terminology refinement",
+    "supersedes": "Phase 10 launch-spine copy where the two sources conflict",
+    "doesNotSupersede": "canonical research definitions, evidence, proof, provenance, or operational verification"
+  },
+  "identity": {
+    "headline": "Make the hidden structure explicit.",
+    "fullStatement": "Boundary First Labs is an independent public-interest research and engineering laboratory. Centered on consequence, governance, and repair, BFL researches consequential and public systems for the public good by making hidden structure explicit across software, AI, mathematics, scientific computation, and institutional systems.",
+    "heroLead": "Boundary First Labs is an independent public-interest research and engineering laboratory centered on consequence, governance, and repair.",
+    "heroSupport": "We research consequential and public systems for the public good, developing tools for complex systems that must remain understandable, accountable, governable, reconstructible, and repairable as they grow.",
+    "domainLine": "Across software, AI, mathematics, scientific computation, and institutional systems.",
+    "compactStatement": "An independent public-interest research and engineering laboratory for consequential and public systems.",
+    "methodTriad": [
+      "Research the structure.",
+      "Build the representation.",
+      "Preserve what matters."
+    ],
+    "domains": [
+      "Software",
+      "AI",
+      "Mathematics",
+      "Scientific computation",
+      "Institutional systems"
+    ]
+  },
+  "systemsAudit": {
+    "id": "boundary-first-systems-audit",
+    "title": "Boundary First Systems Audit",
+    "category": "Service · systems analysis",
+    "status": "Available on request",
+    "summary": "A founder-led technical intervention for consequential software and AI systems where the difficult problem extends beyond implementation.",
+    "availabilityNote": "The method and working material are developed. Each audit is configured and produced against the actual system when requested rather than sold as a static, off-the-shelf report.",
+    "idealFor": "Teams with systems that technically work but are no longer fully understood—or where hidden assumptions, ownership, dependencies, and consequence paths now obstruct safe delivery or repair.",
+    "successCondition": "An engagement succeeds when the team can inspect a shared actual-system map, distinguish known facts from assumptions, identify named defects and owners, and act on a prioritized repair or delivery path.",
+    "inputs": [
+      "A bounded consequential system or product slice",
+      "Available code, architecture, requirements, and operating records",
+      "Access to the people who build, operate, govern, or depend on it",
+      "Known constraints, incidents, uncertainties, and desired decisions"
+    ],
+    "deliverables": [
+      "Actual-system boundary and context map",
+      "Assumption, ownership, and institutional-knowledge map",
+      "Architecture, dependency, and data-boundary findings",
+      "Constraint, failure-path, and consequence analysis",
+      "Concrete defect analysis",
+      "Prioritized path toward repair or delivery"
+    ],
+    "boundaries": [
+      "Scope, access, privacy, evidence, schedule, and success conditions are agreed before work begins.",
+      "The audit does not substitute for legal advice, regulatory certification, a security penetration test, or an enterprise-wide transformation unless separately scoped.",
+      "Findings distinguish observed system state, supplied records, analysis, assumptions, and recommendations."
+    ],
+    "primaryAction": {
+      "label": "Request a systems audit",
+      "href": "mailto:contact@boundaryfirst.com?subject=Boundary%20First%20Systems%20Audit%20inquiry"
+    },
+    "secondaryAction": {
+      "label": "Review the service contract",
+      "href": "/work#systems-audit"
+    },
+    "relatedTrack": {
+      "title": "AI Consequence-Loop Audit",
+      "status": "Focused audit track",
+      "description": "A bounded application of the Systems Audit to one AI-assisted workflow or product slice, concentrating on authority, false closure, evidence, escalation, and repair loops.",
+      "href": "/artifact/consequence-bearing-development-and-ai-repair-loops"
+    }
+  },
+  "boundaryFirstChess": {
+    "id": "boundary-first-chess",
+    "title": "Boundary First Chess",
+    "category": "Education · analysis · product",
+    "status": "Available / Launching",
+    "summary": "Boundary First reasoning applied to chess strategy, position evaluation, planning, and decision-making in a constrained, testable environment.",
+    "availabilityNote": "The body of work is mature enough to engage now while its public product forms continue to launch.",
+    "currentForms": [
+      "A complete full-length manuscript",
+      "Game reviews and individual instruction available by inquiry"
+    ],
+    "launchingForms": [
+      "Digital publication",
+      "Training material",
+      "Analysis tools"
+    ],
+    "futureBoundary": "Maintained standalone software remains a distinct future product track; its maturity is not implied by the availability of the current Chess work.",
+    "claimBoundary": "Chess is both a standalone product and an accessible demonstration of Boundary First reasoning. It is a bounded testbed, not proof that every result transports universally.",
+    "primaryAction": {
+      "label": "Ask about Boundary First Chess",
+      "href": "mailto:contact@boundaryfirst.com?subject=Boundary%20First%20Chess%20inquiry"
+    },
+    "secondaryAction": {
+      "label": "See Chess on Work",
+      "href": "/work#boundary-first-chess"
+    }
+  },
+  "featuredWork": [
+    {
+      "id": "civilizational-mechanics",
+      "title": "Civilizational Mechanics",
+      "category": "Publication · systems analysis",
+      "status": "Public release · v0.1",
+      "summary": "A public learning pathway through displaced consequence, institutional agency, representational evolution, and typed routes to repair.",
+      "action": {
+        "label": "Read the publication",
+        "href": "/publications/civilizational-mechanics"
+      }
+    },
+    {
+      "id": "corpus-forge",
+      "title": "Corpus Forge",
+      "category": "Research operations · software",
+      "status": "Operational internal workflow · developing toward product",
+      "summary": "A traceable, versioned research system for source preservation, claim extraction, contradiction tracking, maturity control, provenance, and review.",
+      "action": {
+        "label": "Inspect the governed inventory",
+        "href": "/work#portfolio"
+      }
+    },
+    {
+      "id": "agency-audit-platform",
+      "title": "Agency Audit Platform",
+      "category": "Governance analysis · tooling",
+      "status": "Developed framework · awaiting pilots",
+      "summary": "A structured assessment of who can act, who authorized action, what options remain, who bears consequence, and who owns repair.",
+      "action": {
+        "label": "Inspect the governed inventory",
+        "href": "/work#portfolio"
+      }
+    },
+    {
+      "id": "claim-evidence-ledger",
+      "title": "Claim and Evidence Ledger",
+      "category": "Evidence infrastructure · software",
+      "status": "Emerging · partially embodied in Corpus Forge",
+      "summary": "A focused system for tracking claims, sources, assumptions, counterevidence, maturity, ownership, review, supersession, and permitted public wording.",
+      "action": {
+        "label": "Inspect the governed inventory",
+        "href": "/work#portfolio"
+      }
+    }
+  ]
+}

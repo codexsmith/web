@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "boundary-first.institutional-register-summary.v1",
+  "status": "working-register-snapshot; not an adoption or operation register",
+  "source": "backlog/3_bfl_boundary_first_ux/Later/bfl_institutional_core_content_register_v0_1.json",
+  "generated": "2026-07-26",
+  "counts": {
+    "coreRecords": 651,
+    "sourceStated": 630,
+    "explicitlyProposed": 21,
+    "operationallyVerified": 0,
+    "needsAdjudication": 521,
+    "exactDuplicatesNeedingCanonicalSource": 130,
+    "candidateCanonicalClusters": 8
+  },
+  "boundary": "The register inventories source-backed language. It does not establish formal adoption, ownership, effective dates, operating evidence, audit, or successful implementation."
+}
