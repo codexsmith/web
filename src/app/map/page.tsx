@@ -436,37 +436,140 @@ export default function BoundaryFirstConnectedPrototype() {
   }
 
   function clearFacetSelection() {
-    if (!active) return;
+    if (!active || mapMode !== "focus") return;
     setSelectedRelation(null);
     setUrlRelationId(null);
     commitMapState({
       projection: "domains",
       mode: "focus",
       nodeId: active.id,
-      relationId: null,
     });
   }
 
-  function selectRelation(entity: HaloEntity) {
+  function showFullAtlas() {
+    const overviewId = ATLAS_OVERVIEW_NODE_ID;
+    const nextProjection = projection;
+    setActiveNodeId(overviewId);
+    setMapMode("atlas");
+    setProjection(nextProjection);
+    setSelectedRelation(null);
+    setUrlRelationId(null);
+    commitMapState({
+      projection: nextProjection,
+      mode: "atlas",
+      nodeId: overviewId,
+    });
+  }
+
+  function inspectRelation(entity: HaloEntity) {
+    setMapMode("halo");
     setSelectedRelation(entity);
     setUrlRelationId(entity.id);
     commitMapState({
       projection,
-      mode: mapMode,
+      mode: "halo",
       nodeId: activeNodeId ?? ATLAS_OVERVIEW_NODE_ID,
       relationId: entity.id,
     });
+    window.requestAnimationFrame(() => {
+      if (window.innerWidth >= 1280) return;
+      const details = document.getElementById("map-selection-details");
+      if (!details) return;
+      const rect = details.getBoundingClientRect();
+      if (rect.top >= window.innerHeight || rect.bottom <= 0) {
+        details.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
   }
 
-  function clearRelation() {
-    setSelectedRelation(null);
-    setUrlRelationId(null);
+  function inspectFacet(facet: string, parentId: string) {
+    const parent = nodes.find((node) => node.id === parentId);
+    if (!parent) return;
+    const facetSlug = facet
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+    const entity = buildFacetHaloEntity(
+      parent,
+      parent.facets.find((candidate) => candidate === facet) ?? facet,
+    );
+    if (entity.id !== `facet-${parentId}-${facetSlug}`) return;
+
+    setActiveNodeId(parentId);
+    setMapMode("focus");
+    setProjection("domains");
+    setSelectedRelation(entity);
+    setUrlRelationId(entity.id);
     commitMapState({
-      projection,
-      mode: mapMode,
-      nodeId: activeNodeId ?? ATLAS_OVERVIEW_NODE_ID,
-      relationId: null,
+      projection: "domains",
+      mode: "focus",
+      nodeId: parentId,
+      relationId: entity.id,
     });
+
+    window.requestAnimationFrame(() => {
+      if (window.innerWidth >= 1280) return;
+      document
+        .getElementById("map-selection-details")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
+  function renderMapScalePills() {
+    const pillClass =
+      "inline-flex min-h-10 min-w-10 items-center justify-center gap-2 rounded-full border border-border bg-background px-2 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-foreground transition-colors hover:bg-muted min-[360px]:px-3";
+    return (
+      <div
+        aria-label="Atlas navigation"
+        className="flex shrink-0 items-center gap-2"
+        role="group"
+      >
+        <AtlasViewSwitch
+          current="map"
+          listHref={
+            active && activeNodeId !== ATLAS_OVERVIEW_NODE_ID
+              ? atlasListHref(active.id, active.architectureStage)
+              : undefined
+          }
+        />
+
+        {mapMode !== "atlas" && (
+          <button
+            aria-label="Global atlas"
+            className={pillClass}
+            onClick={showFullAtlas}
+            type="button"
+          >
+            <Globe2 aria-hidden="true" className="h-3.5 w-3.5" />
+            <span className="hidden min-[360px]:inline">Global</span>
+          </button>
+        )}
+
+        {mapMode !== "focus" && (
+          <button
+            aria-label="Facet focus"
+            className={pillClass}
+            onClick={() => showFocusMap()}
+            type="button"
+          >
+            <Hexagon aria-hidden="true" className="h-3.5 w-3.5" />
+            <span className="hidden min-[360px]:inline">Facets</span>
+          </button>
+        )}
+
+        {mapMode !== "halo" && (
+          <button
+            aria-label="Open relation map"
+            className={pillClass}
+            onClick={() => showContextHalo()}
+            type="button"
+          >
+            <Network aria-hidden="true" className="h-3.5 w-3.5" />
+            <span className="hidden min-[360px]:inline">Relation map</span>
+          </button>
+        )}
+      </div>
+    );
   }
 
   return (
@@ -476,275 +579,459 @@ export default function BoundaryFirstConnectedPrototype() {
       <div className="relative z-40">
         {mapMode === "focus" ? (
           <div className="flex flex-col border-b border-border bg-card md:min-h-14 md:flex-row md:items-center md:justify-between md:gap-3">
-            <div className="flex items-center gap-3 px-4 py-2.5 sm:px-5 md:min-w-0 md:px-6">
-              <button
-                aria-label="Back to the full research atlas"
-                className="shrink-0 rounded-sm border border-border bg-background px-2.5 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                onClick={() => router.push("/map")}
-                type="button"
-              >
-                Atlas
-              </button>
-              <span aria-hidden="true" className="text-foreground-muted">
+            <div className="flex min-h-12 min-w-0 items-center gap-3 border-b border-border px-3 md:border-b-0 sm:px-6">
+              <span className="shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-foreground">
+                Domain map
+              </span>
+              <span aria-hidden="true" className="hidden text-border sm:inline">
                 /
               </span>
-              <span className="truncate font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
-                {active?.label ?? "Domain"}
+              <span className="hidden truncate text-sm font-semibold text-foreground-muted sm:block">
+                {active?.label}
               </span>
             </div>
-            <div className="min-w-0 border-t border-border md:border-l md:border-t-0">
-              <div className="flex gap-1 overflow-x-auto px-4 py-2 sm:px-5 md:px-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {active?.facets.map((facet, index) => {
-                  const facetId = `facet-${active.id}-${slugifyFacet(facet)}`;
-                  const selected = selectedRelation?.id === facetId;
-                  return (
-                    <button
-                      aria-pressed={selected}
-                      className={`shrink-0 rounded-sm border px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.11em] transition-colors ${
-                        selected
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-background hover:bg-muted"
-                      }`}
-                      key={facet}
-                      onClick={() =>
-                        selected
-                          ? clearFacetSelection()
-                          : selectRelation(buildFacetHaloEntity(active, facet))
-                      }
-                      type="button"
-                    >
-                      {String(index + 1).padStart(2, "0")} · {facet}
-                    </button>
-                  );
-                })}
-              </div>
+            <div className="overflow-x-auto px-3 py-2 sm:px-6">
+              {renderMapScalePills()}
             </div>
           </div>
-        ) : (
-          <div className="border-b border-border bg-card">
-            <div className="mx-auto flex max-w-[100rem] flex-col gap-3 px-4 py-3 sm:px-5 lg:flex-row lg:items-center lg:justify-between lg:px-6">
-              <div className="flex min-w-0 items-center gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-background">
-                  {mapMode === "atlas" ? (
-                    <Globe2 className="h-4 w-4" aria-hidden="true" />
-                  ) : (
-                    <Network className="h-4 w-4" aria-hidden="true" />
-                  )}
-                </span>
-                <div className="min-w-0">
-                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-foreground-muted">
-                    {mapMode === "atlas" ? "Research Atlas" : "Relation context"}
-                  </p>
-                  <p className="truncate text-xs font-medium leading-5 text-foreground-muted">
-                    {mapMode === "atlas"
-                      ? "One governed corpus, viewed spatially."
-                      : active?.label ?? "Selected domain"}
-                  </p>
-                </div>
-              </div>
-              <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center lg:justify-end">
-                <AtlasViewSwitch current="map" />
-                <div className="flex min-w-0 gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                  {globalAtlasProjections.map((item) => (
-                    <button
-                      aria-pressed={item.id === projection}
-                      className={`shrink-0 rounded-sm border px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.11em] transition-colors ${
-                        item.id === projection
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-background hover:bg-muted"
-                      }`}
-                      key={item.id}
-                      onClick={() => chooseProjection(item.id)}
-                      type="button"
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+        ) : null}
+        {mapMode !== "focus" ? (
+          <div className="border-b border-border bg-card md:flex md:min-h-14 md:items-center">
+            <nav
+              aria-label={
+                mapMode === "atlas"
+                  ? "Global atlas lenses"
+                  : "Relation context lenses"
+              }
+              className="flex min-w-0 flex-1 snap-x items-center gap-2 overflow-x-auto border-b border-border px-3 py-2 [scrollbar-width:none] sm:px-6 md:border-b-0 [&::-webkit-scrollbar]:hidden"
+            >
+              <span className="hidden shrink-0 font-mono text-xs font-semibold uppercase tracking-[0.1em] text-foreground-muted md:block">
+                {mapMode === "atlas" ? "Highlight" : "Context lens"}
+              </span>
+              {(mapMode === "atlas" ? globalAtlasProjections : projections).map(
+                (item) => (
+                  <button
+                    aria-label={`${
+                      item.id === "domains" && mapMode !== "atlas"
+                        ? "All relations"
+                        : item.label
+                    } lens`}
+                    aria-pressed={projection === item.id}
+                    className={`min-h-10 shrink-0 snap-start touch-manipulation rounded-full border px-4 py-2 font-mono text-xs font-semibold uppercase tracking-[0.08em] transition-colors ${
+                      projection === item.id
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border bg-background hover:bg-muted"
+                    }`}
+                    key={item.id}
+                    onClick={() => chooseProjection(item.id)}
+                    type="button"
+                  >
+                    {item.id === "domains" && mapMode !== "atlas"
+                      ? "All"
+                      : item.label}
+                  </button>
+                ),
+              )}
+            </nav>
+            <div className="shrink-0 overflow-x-auto px-3 py-2 sm:px-6">
+              {renderMapScalePills()}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
 
-      <section className="relative bg-background" id="atlas-map">
-        <div
-          className={`mx-auto grid max-w-[100rem] ${
-            isCompactFocus
-              ? "min-h-[calc(100svh-8rem)] grid-cols-1"
-              : "min-h-[calc(100svh-8rem)] grid-cols-1 xl:grid-cols-[minmax(0,1.42fr)_minmax(22rem,0.58fr)]"
-          }`}
-        >
-          <div className="relative min-h-[34rem] min-w-0 border-b border-border bg-card xl:border-b-0 xl:border-r">
-            <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-3 border-b border-border/70 bg-background/92 px-4 py-2.5 backdrop-blur-sm sm:px-5">
-              <div className="min-w-0">
-                <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.13em] text-foreground-muted">
-                  {projectionContent.eyebrow}
-                </p>
-                <p className="mt-1 truncate text-xs font-medium text-foreground-muted">
-                  {progressLabel}
-                </p>
-              </div>
-              {mapMode !== "atlas" ? (
-                <div className="flex shrink-0 gap-2">
-                  {mapMode !== "focus" ? (
-                    <button
-                      className="inline-flex min-h-10 items-center rounded-sm border border-border bg-background px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.11em] hover:bg-muted"
-                      onClick={() => showFocusMap()}
-                      type="button"
-                    >
-                      <Hexagon className="mr-2 h-3.5 w-3.5" aria-hidden="true" />
-                      Focus
-                    </button>
-                  ) : null}
-                  {mapMode !== "halo" ? (
-                    <button
-                      className="inline-flex min-h-10 items-center rounded-sm border border-border bg-background px-3 font-mono text-[10px] font-semibold uppercase tracking-[0.11em] hover:bg-muted"
-                      onClick={() => showContextHalo()}
-                      type="button"
-                    >
-                      <Network className="mr-2 h-3.5 w-3.5" aria-hidden="true" />
-                      Relations
-                    </button>
-                  ) : null}
+      <section
+        className={`relative w-full bg-background xl:overflow-hidden ${
+          mapMode === "halo"
+            ? "xl:h-[max(52rem,calc(100dvh-8.5rem))]"
+            : "xl:h-[calc(100dvh-8.5rem)]"
+        }`}
+      >
+        <div className="relative z-0 w-full overflow-hidden border-b border-border/40 xl:absolute xl:inset-0 xl:h-auto xl:border-b-0 h-[30rem] sm:h-[36rem]">
+          <div
+            className={`${
+              mapMode === "halo"
+                ? "hidden"
+                : "absolute left-6 top-5 z-10 hidden font-mono text-xs font-semibold uppercase tracking-[0.1em] text-foreground-muted pointer-events-auto xl:block"
+            }`}
+          >
+            <Link className="hover:text-foreground transition-colors" href="/">
+              Start
+            </Link>{" "}
+            › Atlas{" "}
+            {activeNodeId !== ATLAS_OVERVIEW_NODE_ID
+              ? `› ${active?.title}`
+              : ""}
+          </div>
+          {mapMode === "halo" && active ? (
+            <ContextHalo
+              active={active}
+              nodes={nodes}
+              onInspectRelation={inspectRelation}
+              onOpenRecord={() => router.push(`/domain/${active.id}`)}
+              projection={projection}
+              selectedRelationId={selectedRelation?.id ?? null}
+            />
+          ) : (
+            <>
+              <InteractiveMap
+                nodes={nodes}
+                activeNodeId={
+                  mapMode === "atlas" && activeNodeId === ATLAS_OVERVIEW_NODE_ID
+                    ? null
+                    : activeNodeId
+                }
+                setActiveNodeId={(id) => {
+                  if (id) selectAtlasNode(id);
+                }}
+                className={`h-full w-full ${
+                  isCompactFocus
+                    ? "xl:w-[calc(100%_-_22rem)] 2xl:w-[calc(100%_-_24rem)]"
+                    : "xl:w-[calc(100%_-_28rem)] 2xl:w-[calc(100%_-_32rem)]"
+                }`}
+                isTruncated={mapMode === "focus"}
+                setIsTruncated={(isTruncated) => {
+                  if (isTruncated) {
+                    showFocusMap();
+                  } else {
+                    showFullAtlas();
+                  }
+                }}
+                onInspectFacet={mapMode === "focus" ? inspectFacet : undefined}
+                onExploreDomain={(id) => router.push(`/domain/${id}`)}
+                projection={projection}
+                selectedFacetId={
+                  isFacetFocusSelection ? selectedRelation?.id ?? null : null
+                }
+              />
+              {mapMode === "atlas" ? (
+                <div className="absolute bottom-4 left-4 z-20 hidden lg:block">
+                  <SemanticMapLegend />
                 </div>
               ) : null}
+            </>
+          )}
+        </div>
+
+        <aside
+          className={`relative z-10 flex w-full scroll-mt-4 flex-col p-3 pb-6 sm:p-4 xl:pointer-events-none xl:absolute xl:inset-y-0 xl:right-0 ${
+            mapMode === "halo" ? "xl:justify-start" : "xl:justify-center"
+          } ${
+            isCompactFocus
+              ? "xl:max-w-[22rem] xl:p-5 2xl:max-w-[24rem] 2xl:p-6"
+              : "xl:max-w-[28rem] xl:p-8 2xl:max-w-[32rem] 2xl:p-10"
+          }`}
+          id="map-selection-details"
+        >
+          {!isCompactFocus &&
+          !selectedRelation &&
+          !isAtlasNodeSelected &&
+          projection !== "domains" ? (
+            <h1 className="sr-only">Research Atlas</h1>
+          ) : null}
+          <p aria-live="polite" className="sr-only">
+            {selectedRelation
+              ? `${selectedRelation.label} selected. ${selectedRelation.summary}`
+              : isCompactFocus
+                ? `${active?.label}. ${active?.short}`
+                : isAtlasNodeSelected
+                  ? `${active?.label} selected. ${active?.short}`
+                  : `${projectionContent.eyebrow}. ${projectionContent.summary}`}
+          </p>
+          <div
+            className={`pointer-events-auto rounded-sm border border-border bg-card/95 p-5 shadow-xl backdrop-blur-md sm:p-6 xl:max-h-[calc(100dvh-10rem)] xl:overflow-y-auto ${
+              isCompactFocus ? "xl:p-6" : "xl:p-8"
+            }`}
+          >
+            <div className="mb-5 flex items-center justify-between gap-4 text-foreground-muted">
+              <span className="font-mono text-xs font-semibold uppercase tracking-[0.08em]">
+                {isFacetFocusSelection
+                  ? "Selected facet"
+                  : isCompactFocus || isAtlasNodeSelected
+                    ? active?.id === "identity"
+                      ? "Selected steward"
+                      : "Selected domain"
+                    : projectionContent.eyebrow}
+              </span>
+              <span className="font-mono text-xs font-semibold uppercase tracking-[0.08em]">
+                {progressLabel}
+              </span>
             </div>
 
-            <div className="h-full min-h-[34rem] pt-[4.15rem]">
-              {mapMode === "halo" && active ? (
-                <ContextHalo
-                  active={active}
-                  className="h-full min-h-[30rem]"
-                  nodes={nodes}
-                  onSelectEntity={selectRelation}
-                  projection={projection}
-                  selectedEntityId={selectedRelation?.id ?? null}
-                />
-              ) : (
-                <InteractiveMap
-                  activeNodeId={activeNodeId}
-                  className="h-full min-h-[30rem]"
-                  isTruncated={mapMode === "focus"}
-                  nodes={nodes}
-                  onExploreDomain={mapMode === "atlas" ? selectAtlasNode : showFocusMap}
-                  onInspectFacet={(facet, parentId) => {
-                    const parent = nodes.find((node) => node.id === parentId);
-                    if (!parent) return;
-                    const entity = buildFacetHaloEntity(parent, facet);
-                    setSelectedRelation(entity);
-                    setUrlRelationId(entity.id);
-                    setActiveNodeId(parentId);
-                    setMapMode("focus");
-                    setProjection("domains");
-                    commitMapState({
-                      projection: "domains",
-                      mode: "focus",
-                      nodeId: parentId,
-                      relationId: entity.id,
-                    });
-                  }}
-                  projection={projection}
-                  selectedFacetId={
-                    selectedRelation?.kind === "facet"
-                      ? selectedRelation.id
-                      : null
-                  }
-                  setActiveNodeId={setActiveNodeId}
-                />
-              )}
-            </div>
-          </div>
-
-          {!isCompactFocus ? (
-            <aside
-              className="min-w-0 bg-background"
-              id="map-selection-details"
-            >
-              <div className="sticky top-0 flex min-h-[34rem] flex-col p-5 sm:p-7 xl:top-20 xl:max-h-[calc(100svh-5rem)] xl:overflow-y-auto">
-                <div>
-                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
-                    {projectionContent.eyebrow}
-                  </p>
-                  <h1 className="mt-3 font-serif text-3xl font-semibold leading-tight sm:text-4xl">
-                    {selectedRelation?.label ??
-                      (mapMode === "atlas" && !isAtlasNodeSelected
-                        ? "Research Atlas"
-                        : active?.label ?? "Research Atlas")}
-                  </h1>
-                  <p className="mt-5 text-sm leading-7 text-foreground-muted">
-                    {projectionContent.summary}
-                  </p>
+            {isCompactFocus ? (
+              <>
+                <h1 className="font-serif text-2xl font-semibold leading-tight text-foreground">
+                  {active?.label}
+                </h1>
+                <p className="mt-3 text-[15px] font-medium leading-6 text-foreground-secondary">
+                  {active?.short}
+                </p>
+                <p className="mt-4 text-sm leading-6 text-foreground-muted">
+                  Select a labeled facet on the map for its status and source
+                  context, or open the record for the complete content tree.
+                </p>
+                <div className="mt-6 grid gap-2">
+                  <Link
+                    className="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-foreground px-5 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-85"
+                    href={active ? `/domain/${active.id}` : "/domains"}
+                  >
+                    Read the domain record
+                  </Link>
+                  <Link
+                    className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-border bg-transparent px-5 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-foreground transition-colors hover:bg-muted"
+                    href="/domains"
+                  >
+                    Browse the domain tree
+                  </Link>
+                </div>
+              </>
+            ) : isFacetFocusSelection && active && selectedRelation ? (
+              <>
+                <h1 className="font-serif text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+                  {selectedRelation.label}
+                </h1>
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+                  <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
+                    Facet of {active.label}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="hidden h-3 w-px bg-border sm:block"
+                  />
+                  <span className="rounded-full border border-border bg-background px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground">
+                    {selectedRelation.status}
+                  </span>
                 </div>
 
-                {projectionContent.items.length > 0 ? (
-                  <ul className="mt-7 grid gap-2 border-t border-border pt-5">
-                    {projectionContent.items.slice(0, 8).map((item) => (
-                      <li
-                        className="flex gap-3 text-sm leading-6 text-foreground-muted"
-                        key={item}
-                      >
-                        <span aria-hidden="true">·</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
+                <p className="mt-5 text-[17px] font-medium leading-7 text-foreground sm:text-lg">
+                  {selectedRelation.summary}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-foreground-muted">
+                  This facet remains selected on the ring. Choose another facet
+                  to compare its brief, or open relation context when you want
+                  to inspect what surrounds it.
+                </p>
 
-                <div className="mt-7 flex flex-wrap gap-2">
-                  <Link
-                    className="inline-flex min-h-11 items-center bg-primary px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-foreground"
-                    href={projectionContent.href}
+                <div className="my-6 h-px bg-border/60" />
+
+                <dl className="grid gap-5">
+                  <div>
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
+                      Placement
+                    </dt>
+                    <dd className="mt-1.5 text-sm font-medium leading-6 text-foreground-secondary">
+                      {selectedRelation.belonging ||
+                        `Declared facet of ${active.label}`}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
+                      Content state
+                    </dt>
+                    <dd className="mt-1.5 text-sm font-medium leading-6 text-foreground-secondary">
+                      {selectedRelation.definitionStatus
+                        ? `${selectedRelation.definitionStatus.replace(
+                            /-/g,
+                            " ",
+                          )} definition`
+                        : selectedRelation.status}
+                      {selectedRelation.stage
+                        ? ` · ${selectedRelation.stage.replace(
+                            /-/g,
+                            " ",
+                          )} stage`
+                        : ""}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
+                      Claim boundary
+                    </dt>
+                    <dd className="mt-1.5 text-sm leading-6 text-foreground-secondary">
+                      {selectedRelation.authority}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
+                      Evidence
+                      {selectedRelation.evidenceStatus
+                        ? ` · ${selectedRelation.evidenceStatus.replace(
+                            /-/g,
+                            " ",
+                          )}`
+                        : ""}
+                    </dt>
+                    <dd className="mt-1.5 text-sm leading-6 text-foreground-secondary">
+                      {selectedRelation.evidence}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
+                      Closure and repair
+                    </dt>
+                    <dd className="mt-1.5 text-sm leading-6 text-foreground-secondary">
+                      {selectedRelation.closure}
+                    </dd>
+                  </div>
+                </dl>
+
+                <div className="-mx-5 -mb-5 mt-7 grid gap-2 border-t border-border bg-card/95 px-5 pb-5 pt-4 backdrop-blur-md sm:-mx-6 sm:-mb-6 sm:px-6 sm:pb-6 xl:sticky xl:-bottom-8 xl:-mx-8 xl:-mb-8 xl:px-8 xl:pb-8">
+                  <button
+                    className="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-foreground px-5 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-85"
+                    onClick={() => showContextHalo(active.id)}
+                    type="button"
                   >
-                    {projectionContent.action}
-                  </Link>
-                  {selectedRelation ? (
+                    Inspect facet relations
+                  </button>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Link
+                      className="inline-flex min-h-11 items-center justify-center rounded-sm border border-border bg-transparent px-3 text-center font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-foreground transition-colors hover:bg-muted"
+                      href={
+                        selectedRelation.recordHref ??
+                        `/domain/${active.id}#${slugifyFacet(
+                          selectedRelation.label,
+                        )}`
+                      }
+                    >
+                      Open facet section
+                    </Link>
                     <button
-                      className="inline-flex min-h-11 items-center border border-border bg-background px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] hover:bg-muted"
-                      onClick={clearRelation}
+                      className="inline-flex min-h-11 items-center justify-center rounded-sm border border-border bg-transparent px-3 text-center font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-foreground transition-colors hover:bg-muted"
+                      onClick={clearFacetSelection}
                       type="button"
                     >
                       Clear selection
                     </button>
-                  ) : null}
-                  {mapMode === "atlas" && isAtlasNodeSelected && active ? (
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {selectedRelation || isAtlasNodeSelected ? (
+                  <h1 className="mb-3 font-serif text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+                    {selectedRelation?.label ?? active?.label}
+                  </h1>
+                ) : null}
+                {!selectedRelation &&
+                !isAtlasNodeSelected &&
+                mapMode === "atlas" &&
+                projection === "domains" ? (
+                  <h1 className="mb-3 font-serif text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
+                    {atlasHierarchyBinding.projection.title}
+                  </h1>
+                ) : null}
+                {isAtlasNodeSelected ? (
+                  <p className="mb-4 text-[15px] font-medium leading-6 text-foreground-muted">
+                    {active?.short}
+                  </p>
+                ) : null}
+                <p className="text-lg font-medium leading-7 text-foreground sm:text-xl sm:leading-8">
+                  {projectionContent.summary}
+                </p>
+
+                {isAtlasNodeSelected && active ? (
+                  <div className="mt-6 grid gap-2">
                     <button
-                      className="inline-flex min-h-11 items-center border border-border bg-background px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] hover:bg-muted"
+                      className="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-foreground px-5 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-85"
                       onClick={() => showFocusMap(active.id)}
                       type="button"
                     >
-                      Focus this domain
+                      Focus facets
                     </button>
-                  ) : null}
-                </div>
-
-                {mapMode === "atlas" && !selectedRelation ? (
-                  <div className="mt-auto pt-8">
-                    <SemanticMapLegend compact projection={projection} />
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        className="inline-flex min-h-11 items-center justify-center rounded-sm border border-border bg-transparent px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-foreground transition-colors hover:bg-muted"
+                        onClick={() => showContextHalo(active.id)}
+                        type="button"
+                      >
+                        Relations
+                      </button>
+                      <Link
+                        className="inline-flex min-h-11 items-center justify-center rounded-sm border border-border bg-transparent px-3 font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-foreground transition-colors hover:bg-muted"
+                        href={`/domain/${active.id}`}
+                      >
+                        Open record
+                      </Link>
+                    </div>
+                    <button
+                      className="inline-flex min-h-8 items-center justify-center text-center font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-foreground-muted underline-offset-4 hover:text-foreground hover:underline"
+                      onClick={showFullAtlas}
+                      type="button"
+                    >
+                      Clear selection
+                    </button>
                   </div>
                 ) : null}
-              </div>
-            </aside>
-          ) : null}
-        </div>
-      </section>
 
-      {mapMode === "atlas" ? (
-        <section className="border-t border-border bg-card/55 px-5 py-5 sm:px-8">
-          <div className="mx-auto flex max-w-[100rem] flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-3xl text-sm leading-6 text-foreground-muted">
-              The map is one representation of the public corpus. Use the list
-              whenever a spatial view adds cognitive load instead of context.
-            </p>
-            <Link
-              className="inline-flex min-h-11 shrink-0 items-center border border-border bg-background px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] hover:bg-muted"
-              href={atlasListHref({ view: projection })}
-            >
-              Browse as a list
-            </Link>
+                {projectionContent.items.length ? (
+                  <>
+                    <div className="my-7 h-px bg-border/50" />
+                    <ul className="mb-8 grid gap-2">
+                      {projectionContent.items
+                        .slice(0, 6)
+                        .map((item, index) => (
+                          <li
+                            className="grid grid-cols-[1.75rem_1fr] gap-2 text-[15px] leading-6 text-foreground-secondary"
+                            key={`${item}-${index}`}
+                          >
+                            <span className="font-mono text-[11px] font-semibold text-foreground-muted">
+                              {String(index + 1).padStart(2, "0")}
+                            </span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                    </ul>
+                  </>
+                ) : (
+                  <div className="my-7 h-px bg-border/50" />
+                )}
+
+                {mapMode !== "focus" && !isAtlasNodeSelected ? (
+                  <div className="mb-2 grid gap-2">
+                    {(selectedRelation?.targetOptions?.length ?? 0) > 1 ? (
+                      <div className="mb-2 grid gap-2 border-b border-border/60 pb-4">
+                        <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-foreground-muted">
+                          Related domains
+                        </p>
+                        {selectedRelation?.targetOptions?.map((target) => (
+                          <Link
+                            className="inline-flex min-h-10 items-center justify-between rounded-sm border border-border bg-background px-3 text-sm font-semibold transition-colors hover:bg-muted"
+                            href={target.recordHref}
+                            key={target.id}
+                            onClick={() => setActiveNodeId(target.id)}
+                          >
+                            <span>{target.label}</span>
+                            <span aria-hidden="true">→</span>
+                          </Link>
+                        ))}
+                      </div>
+                    ) : null}
+                    <Link
+                      className="w-full inline-flex min-h-12 items-center justify-center rounded-sm border border-border bg-transparent px-5 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-foreground hover:bg-muted transition-colors"
+                      href={projectionContent.href}
+                      onClick={() => {
+                        if (selectedRelation?.sourceId) {
+                          setActiveNodeId(selectedRelation.sourceId);
+                        }
+                      }}
+                    >
+                      {projectionContent.action}
+                    </Link>
+                    <Link
+                      className="inline-flex min-h-10 items-center justify-center text-center font-mono text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted underline-offset-4 hover:underline"
+                      href={mapMode === "atlas" ? "/search" : "/domains"}
+                    >
+                      {mapMode === "atlas"
+                        ? "Search public records"
+                        : "Browse domain index"}
+                    </Link>
+                  </div>
+                ) : null}
+              </>
+            )}
           </div>
-        </section>
-      ) : null}
+        </aside>
+      </section>
     </main>
   );
 }
