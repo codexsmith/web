@@ -128,14 +128,14 @@ export function WorkCard({
           className="group/link mt-5 inline-flex min-h-10 items-center font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
           href={sourceHref}
         >
-          Open source domain
+          Open work context
           <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
         </Link>
       </div>
 
       <details className="group mt-6 border-t border-border pt-4">
         <summary className="inline-flex min-h-9 cursor-pointer list-none items-center justify-center border border-border bg-background px-3 font-mono text-[10px] font-semibold uppercase tracking-widest transition-colors hover:bg-foreground hover:text-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground">
-          Inspect source details
+          Inspect standing
         </summary>
         <dl className="mt-4 grid gap-3 text-sm leading-6">
           <div>
@@ -161,15 +161,11 @@ export function WorkCard({
             </dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Migration boundary</dt>
-            <dd className="mt-1">{item.migrationStatus ?? "Source retained pending adjudication."}</dd>
+            <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Claim boundary</dt>
+            <dd className="mt-1 text-foreground-muted">
+              Classification and lifecycle labels are current working standing, not proof of deployment, adoption, or external validation.
+            </dd>
           </div>
-          {item.sourceRef && (
-            <div>
-              <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Source record</dt>
-              <dd className="mt-1 break-words font-mono text-xs">{item.sourceRef}</dd>
-            </div>
-          )}
           {item.sourceData.relationships && item.sourceData.relationships.length > 0 && (
             <div>
               <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Declared relationships</dt>
@@ -227,12 +223,8 @@ export function ProjectCard({ project }: { project: SeedProject }) {
           <dd className="mt-1">{project.producesEntityRefs.length > 0 ? project.producesEntityRefs.join(", ") : "No output records attached"}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Canonical context</dt>
-          <dd className="mt-1">{project.canonicalNodeRefs.join(", ")}</dd>
-        </div>
-        <div>
-          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Source records</dt>
-          <dd className="mt-1 break-words font-mono text-xs">{project.sourceRefs.join(", ")}</dd>
+          <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Context</dt>
+          <dd className="mt-1">{primaryContext ? primaryContext.replace(/-/g, " ") : "Work portfolio"}</dd>
         </div>
         <div>
           <dt className="font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted">Next gate</dt>
@@ -243,7 +235,7 @@ export function ProjectCard({ project }: { project: SeedProject }) {
         className="group/link mt-auto inline-flex min-h-11 items-center border-t border-border pt-5 font-mono text-[10px] font-semibold uppercase tracking-widest text-foreground-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground"
         href={contextHref}
       >
-        Open canonical context
+        Open work context
         <ArrowRight className="ml-2 h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1" />
       </Link>
     </article>
