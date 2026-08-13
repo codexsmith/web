@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { GraphProvider } from "@/app/context/GraphContext";
 import { GuidedSequenceV2 } from "@/components/guided-sequence-v2";
 import introConfig from "@/content/introductory_experience_v0_5.json";
 
@@ -32,5 +33,5 @@ export default async function LearnScenePage({
   const initialScene = steps.findIndex((candidate) => candidate.id === scene);
   if (initialScene <= 0) notFound();
 
-  return <GuidedSequenceV2 initialScene={initialScene} />;
+  return <GraphProvider><GuidedSequenceV2 initialScene={initialScene} /></GraphProvider>;
 }

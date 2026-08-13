@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GraphProvider } from "../context/GraphContext";
 
 export const metadata: Metadata = {
   title: "Research Atlas",
@@ -14,5 +15,5 @@ export default function MapLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return <GraphProvider>{children}</GraphProvider>;
 }

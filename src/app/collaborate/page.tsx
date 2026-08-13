@@ -11,7 +11,7 @@ import {
   Scale,
   ShieldCheck,
 } from "lucide-react";
-import { useGraph } from "../context/GraphContext";
+import { useIdentity } from "../context/IdentityContext";
 import {
   asRecord,
   asRecordArray,
@@ -45,8 +45,7 @@ const featuredPrincipleIds = new Set([
 ]);
 
 export default function CollaborationPage() {
-  const { nodes } = useGraph();
-  const identity = nodes.find((node) => node.id === "identity");
+  const identity = useIdentity();
   const participation = asRecord(identity?.participation);
   const collaboration = asRecord(identity?.collaboration);
   const modes = asRecordArray(collaboration.collaborationModes);

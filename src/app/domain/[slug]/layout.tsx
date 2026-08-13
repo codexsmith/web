@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import graphNodesData from "../../context/graphNodes.json";
+import { GraphProvider } from "../../context/GraphContext";
 
 type PublicGraphNode = {
   id: string;
@@ -44,5 +45,5 @@ export async function generateMetadata({
 }
 
 export default function DomainLayout({ children }: DomainLayoutProps) {
-  return children;
+  return <GraphProvider>{children}</GraphProvider>;
 }

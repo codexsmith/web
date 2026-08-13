@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { GraphProvider } from "../context/GraphContext";
 
 export const metadata: Metadata = {
   title: "Search",
@@ -15,5 +16,5 @@ export default function SearchLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return <GraphProvider>{children}</GraphProvider>;
 }

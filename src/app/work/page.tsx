@@ -13,7 +13,7 @@ import {
   ShieldCheck,
   Wrench,
 } from "lucide-react";
-import { useGraph } from "../context/GraphContext";
+import { useIdentity } from "../context/IdentityContext";
 import {
   asRecord,
   asRecordArray,
@@ -91,8 +91,7 @@ const objectGrammar = [
 ];
 
 export default function WorkPage() {
-  const { nodes } = useGraph();
-  const identity = nodes.find((node) => node.id === "identity");
+  const identity = useIdentity();
   const evidence = asRecord(identity?.evidenceArchitecture);
   const portfolio = asRecord(identity?.portfolioGovernance);
   const stages = asRecordArray(evidence.stages);

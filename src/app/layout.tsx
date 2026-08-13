@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { GraphProvider } from "./context/GraphContext";
+import { IdentityProvider } from "./context/IdentityContext";
+import { getIdentityNode } from "@/lib/graph-data";
 import { getSiteOrigin } from "@/lib/site";
 import { phase12Launch } from "@/lib/phase12-launch";
 
@@ -82,6 +83,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const identity = getIdentityNode();
+
   return (
     <html
       lang="en"
@@ -95,7 +98,7 @@ export default function RootLayout({
           }}
           type="application/ld+json"
         />
-        <GraphProvider>{children}</GraphProvider>
+        <IdentityProvider identity={identity}>{children}</IdentityProvider>
       </body>
     </html>
   );

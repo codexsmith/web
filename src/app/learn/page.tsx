@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { GraphProvider } from "@/app/context/GraphContext";
 import { GuidedSequenceV2 } from "@/components/guided-sequence-v2";
 import introConfig from "@/content/introductory_experience_v0_5.json";
 
@@ -28,5 +29,5 @@ export default async function LearnPage({ searchParams }: PageProps<"/learn">) {
   if (params.scene !== undefined && initialScene > 0) {
     redirect(`/learn/${introConfig.experiences[0].steps[initialScene].id}`);
   }
-  return <GuidedSequenceV2 initialScene={0} />;
+  return <GraphProvider><GuidedSequenceV2 initialScene={0} /></GraphProvider>;
 }

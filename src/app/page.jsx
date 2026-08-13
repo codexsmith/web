@@ -1,3 +1,4 @@
+import { GraphProvider } from "@/app/context/GraphContext";
 import { GuidedSequence } from "@/components/guided-sequence";
 import { GuidedSequenceV2 } from "@/components/guided-sequence-v2";
 import { SplashEntranceHome } from "@/components/entrance/SplashEntranceHome";
@@ -24,9 +25,9 @@ export default async function Home({ searchParams }) {
   if (params?.scene !== undefined || params?.version) {
     const initialScene = parseInitialScene(params?.scene);
     return params?.version === "v1" ? (
-      <GuidedSequence initialScene={initialScene} />
+      <GraphProvider><GuidedSequence initialScene={initialScene} /></GraphProvider>
     ) : (
-      <GuidedSequenceV2 initialScene={initialScene} />
+      <GraphProvider><GuidedSequenceV2 initialScene={initialScene} /></GraphProvider>
     );
   }
 

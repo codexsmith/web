@@ -9,7 +9,7 @@ import {
   Scale,
   ShieldCheck,
 } from "lucide-react";
-import { useGraph } from "../context/GraphContext";
+import { useIdentity } from "../context/IdentityContext";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageMasthead } from "@/components/page-masthead";
@@ -148,10 +148,9 @@ function StatementCard({ item, category }) {
 }
 
 export default function AboutPage() {
-  const { nodes } = useGraph();
+  const identity = useIdentity();
   const [view, setView] = useState("closure");
   const [activeClosure, setActiveClosure] = useState("purpose");
-  const identity = nodes.find((node) => node.id === "identity") ?? nodes[0];
 
   const institution = asRecord(identity?.institution);
   const stage = asRecord(identity?.institutionalStage);
