@@ -1,8 +1,4 @@
-"use client";
-
-import { useId, useMemo, useState } from "react";
-import { ChevronDown } from "lucide-react";
-import type { EvidenceVital, EvidenceVitalTone } from "@/lib/evidence-vitals";
+import type { EvidenceVital } from "@/lib/evidence-vitals";
 
 type EvidenceVitalsBarProps = {
   className?: string;
@@ -14,105 +10,74 @@ type EvidenceVitalsBarProps = {
   title: string;
 };
 
-const toneClasses: Record<EvidenceVitalTone, string> = {
-  standard: "bg-background",
-  bounded: "bg-card/70",
-  caution: "bg-accent/10",
-};
+function numberFor(items: readonly EvidenceVital[], id: string) {
+  const value = Number(items.find((item) => item.id === id)?.value ?? 0);
+  return Number.isFinite(value) ? value : 0;
+}
 
 export function EvidenceVitalsBar({
   className = "",
   description,
-  eyebrow = "Evidence context",
+  eyebrow = "Evidence status",
   items,
-  layout = "inline",
   stamp,
   title,
 }: EvidenceVitalsBarProps) {
-  const [expanded, setExpanded] = useState(false);
-  const panelId = useId();
-  const mobileSummary = useMemo(() => {
-    const prioritized = items.filter((item) => item.mobilePriority);
-    return (prioritized.length > 0 ? prioritized : items)
-      .slice(0, 2)
-      .map((item) => `${item.value} ${item.label.toLocaleLowerCase()}`)
-      .join(" / ");
-  }, [items]);
-  const layoutClasses =
-    layout === "inline"
-      ? "md:grid-cols-[minmax(13rem,0.72fr)_minmax(0,2.28fr)]"
-      : "grid-cols-1";
+  const researchBody = !items.some((item) => item.id === "source-stated");
+  const operational =
+    numberFor(items, "operationally-verified") > 0 ||
+    (researchBody && numberFor(items, "bounded-cases") > 0);
+  const standing = operational ? "Operational" : "Recorded";
 
   return (
-    <section
-      aria-label={title}
-      className={`overflow-hidden border border-border bg-border ${className}`}
-    >
-      <div className={`grid gap-px ${layoutClasses}`}>
-        <header className="bg-card/70 p-4 sm:p-5">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
-                {eyebrow}
-              </p>
-              <h2 className="mt-2 font-serif text-xl font-semibold leading-tight">
-                {title}
-              </h2>
-            </div>
-            <button
-              aria-controls={panelId}
-              aria-expanded={expanded}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center border border-border bg-background md:hidden"
-              onClick={() => setExpanded((current) => !current)}
-              type="button"
-            >
-              <span className="sr-only">
-                {expanded ? "Collapse" : "Expand"} {title}
-              </span>
-              <ChevronDown
-                aria-hidden="true"
-                className={`h-4 w-4 transition-transform ${
-                  expanded ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-          </div>
-          <p className="mt-2 font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.11em] text-foreground-muted md:hidden">
-            {mobileSummary}
-          </p>
-          {description ? (
-            <p className="mt-3 hidden text-xs leading-6 text-foreground/66 md:block">
-              {description}
-            </p>
-          ) : null}
-          {stamp ? (
-            <p className="mt-3 hidden font-mono text-[10px] uppercase leading-5 tracking-[0.11em] text-foreground-muted md:block">
-              {stamp}
-            </p>
-          ) : null}
-        </header>
+    <details className={`group border border-border bg-card ${className}`}>
+      <summary className="flex min-h-14 cursor-pointer list-none flex-wrap items-center justify-between gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden sm:px-5">
+        <span className="flex flex-wrap items-center gap-2">
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
+            {eyebrow}
+          </span>
+          <span className="border border-border bg-background px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">
+            {standing}
+          </span>
+          <span className="border border-border bg-accent/10 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">
+            Evidence pending
+          </span>
+          <span className="text-xs font-medium text-foreground/72">{title}</span>
+        </span>
+        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+          <span className="group-open:hidden">Inspect boundaries +</span>
+          <span className="hidden group-open:inline">Close boundaries -</span>
+        </span>
+      </summary>
 
-        <dl
-          className={`${
-            expanded ? "grid" : "hidden"
-          } grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-px bg-border md:grid`}
-          id={panelId}
-        >
+      <div className="border-t border-border px-4 py-5 sm:px-5">
+        {description ? (
+          <p className="max-w-4xl text-xs leading-6 text-foreground/68">
+            {description}
+          </p>
+        ) : null}
+        <p className="mt-3 max-w-4xl text-xs leading-6 text-foreground/68">
+          Evidence status records current standing only. It does not raise the claim ceiling or imply independent verification.
+        </p>
+        <dl className="mt-5 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item) => (
-            <div className={`p-4 sm:p-5 ${toneClasses[item.tone]}`} key={item.id}>
-              <dt className="font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.13em] text-foreground-muted">
+            <div className="bg-background p-4" key={item.id}>
+              <dt className="font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.12em] text-foreground-muted">
                 {item.label}
               </dt>
-              <dd className="mt-2 font-serif text-3xl font-semibold leading-none">
-                {item.value}
-              </dd>
-              <p className="mt-3 text-xs leading-5 text-foreground/64">
+              <dd className="mt-1 font-serif text-2xl font-semibold">{item.value}</dd>
+              <p className="mt-2 text-xs leading-5 text-foreground/64">
                 {item.detail}
               </p>
             </div>
           ))}
         </dl>
+        {stamp ? (
+          <p className="mt-3 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-foreground-muted">
+            {stamp}
+          </p>
+        ) : null}
       </div>
-    </section>
+    </details>
   );
 }
