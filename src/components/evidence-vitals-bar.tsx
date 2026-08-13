@@ -1,7 +1,11 @@
 import type { EvidenceStatus, EvidenceVital } from "@/lib/evidence-vitals";
 import {
+  claimEvidenceStatus,
+  claimEvidenceVitals,
   EVIDENCE_STANDING_LABELS,
   EVIDENCE_STANDING_MEANINGS,
+  researchEvidenceVitals,
+  researchProgramEvidenceStatus,
 } from "@/lib/evidence-vitals";
 
 type EvidenceVitalsBarProps = {
@@ -15,18 +19,24 @@ type EvidenceVitalsBarProps = {
   title: string;
 };
 
+function boundStatusFor(items: readonly EvidenceVital[]): EvidenceStatus {
+  if (items === claimEvidenceVitals) return claimEvidenceStatus;
+  if (items === researchEvidenceVitals) return researchProgramEvidenceStatus;
+  throw new Error(
+    "Evidence vitals must be bound to an explicit proposition-level EvidenceStatus before rendering.",
+  );
+}
+
 export function EvidenceVitalsBar({
   className = "",
   description,
   eyebrow = "Evidence status",
   items,
   stamp,
-  status,
+  status: statusOverride,
   title,
 }: EvidenceVitalsBarProps) {
-  if (!status) {
-    throw new Error("EvidenceVitalsBar requires an explicit evidence status.");
-  }
+  const status = statusOverride ?? boundStatusFor(items);
   const standingLabel = EVIDENCE_STANDING_LABELS[status.standing];
   const standingMeaning = EVIDENCE_STANDING_MEANINGS[status.standing];
 
@@ -39,10 +49,7 @@ export function EvidenceVitalsBar({
           {status.pending ? <span className="border border-border bg-accent/10 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Evidence pending</span> : null}
           <span className="text-xs font-medium text-foreground/72">{title}</span>
         </span>
-        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
-          <span className="group-open:hidden">Inspect boundaries +</span>
-          <span className="hidden group-open:inline">Close boundaries -</span>
-        </span>
+        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted"><span className="group-open:hidden">Inspect boundaries +</span><span className="hidden group-open:inline">Close boundaries -</span></span>
       </summary>
       <div className="border-t border-border px-4 py-5 sm:px-5">
         {description ? <p className="max-w-4xl text-xs leading-6 text-foreground/68">{description}</p> : null}
