@@ -85,7 +85,7 @@ export default function HelpPage() {
                 <h3 className="mt-5 font-serif text-2xl font-semibold">
                   {firstText(item.label)}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-foreground/68">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   {firstText(item.humanPromise)}
                 </p>
                 <span className="mt-auto inline-flex items-center pt-6 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-foreground-muted group-hover:text-foreground">
@@ -104,7 +104,7 @@ export default function HelpPage() {
       <section className="bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/58">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               A bounded next step
             </p>
             <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold sm:text-5xl">

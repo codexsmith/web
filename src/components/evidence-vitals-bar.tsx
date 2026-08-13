@@ -81,7 +81,7 @@ export function EvidenceVitalsBar({
             {mobileSummary}
           </p>
           {description ? (
-            <p className="mt-3 hidden text-xs leading-6 text-foreground/66 md:block">
+            <p className="mt-3 hidden text-xs leading-6 text-foreground-muted md:block">
               {description}
             </p>
           ) : null}
@@ -106,7 +106,7 @@ export function EvidenceVitalsBar({
               <dd className="mt-2 font-serif text-3xl font-semibold leading-none">
                 {item.value}
               </dd>
-              <p className="mt-3 text-xs leading-5 text-foreground/64">
+              <p className="mt-3 text-xs leading-5 text-foreground-muted">
                 {item.detail}
               </p>
             </div>

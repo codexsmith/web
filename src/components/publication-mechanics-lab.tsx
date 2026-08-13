@@ -458,7 +458,7 @@ function BoundaryAccountingView() {
               {representedResult}
             </p>
           </div>
-          <p className="max-w-xs text-right text-sm leading-6 text-foreground/68">
+          <p className="max-w-xs text-right text-sm leading-6 text-foreground-muted">
             Illustrative units only. A lower result may be a more truthful
             representation.
           </p>
@@ -632,7 +632,7 @@ function AgencyRateView() {
               className="flex items-center justify-between gap-4 border-b border-border py-3 text-sm"
               key={label}
             >
-              <span className="text-foreground/68">{label}</span>
+              <span className="text-foreground-muted">{label}</span>
               <span className="font-semibold">{value}</span>
             </div>
           ))}
@@ -1379,7 +1379,7 @@ export function PublicationMechanicsLab() {
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
               {activeOption.label}
             </p>
-            <p className="mt-2 text-sm leading-6 text-foreground/68">
+            <p className="mt-2 text-sm leading-6 text-foreground-muted">
               {activeOption.short}
             </p>
           </div>

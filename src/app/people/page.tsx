@@ -94,7 +94,7 @@ export default function PeoplePage() {
             ].map(([title, body]) => (
               <article className="bg-background p-6" key={title}>
                 <h3 className="font-serif text-2xl font-semibold">{title}</h3>
-                <p className="mt-4 text-sm leading-7 text-foreground/68">{body}</p>
+                <p className="mt-4 text-sm leading-7 text-foreground-muted">{body}</p>
               </article>
             ))}
           </div>

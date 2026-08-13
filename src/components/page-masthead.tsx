@@ -61,7 +61,7 @@ export function PageMasthead({
             {deck ? (
               <p
                 className={`mt-3 max-w-3xl font-serif text-xl font-semibold leading-snug sm:text-2xl ${
-                  inverse ? "text-primary-foreground/78" : "text-foreground/76"
+                  inverse ? "text-primary-foreground-secondary" : "text-foreground-muted"
                 }`}
               >
                 {deck}
@@ -75,7 +75,7 @@ export function PageMasthead({
                 <p
                   className={`max-w-3xl text-sm font-medium leading-7 sm:text-base ${
                     inverse
-                      ? "text-primary-foreground/72"
+                      ? "text-primary-foreground-secondary"
                       : "text-foreground-muted"
                   }`}
                 >

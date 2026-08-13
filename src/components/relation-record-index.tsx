@@ -152,7 +152,7 @@ function RelationRecordGroups({
             {projectionSharedBoundaries.map((field) => (
               <div key={field.key}>
                 <dt className="font-semibold">{field.label}</dt>
-                <dd className="mt-0.5 text-foreground/68">{field.value}</dd>
+                <dd className="mt-0.5 text-foreground-muted">{field.value}</dd>
               </div>
             ))}
           </dl>
@@ -198,7 +198,7 @@ function RelationRecordGroups({
                       {groupSharedBoundaries.map((field) => (
                         <div key={field.key}>
                           <dt className="font-semibold">{field.label}</dt>
-                          <dd className="mt-0.5 text-foreground/68">
+                          <dd className="mt-0.5 text-foreground-muted">
                             {field.value}
                           </dd>
                         </div>

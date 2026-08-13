@@ -108,13 +108,13 @@ export default function BusinessLandingPage() {
                 <h2 className="mt-4 font-serif text-4xl font-semibold sm:text-5xl">
                   People make the value. People are not overhead.
                 </h2>
-                <p className="mt-6 text-base leading-8 text-primary-foreground/74">
+                <p className="mt-6 text-base leading-8 text-primary-foreground-secondary">
                   People are the source. People are the destination.
                   Institutions are the means.
                 </p>
               </div>
               <div className="bg-background p-6 sm:p-9 lg:p-12">
-                <p className="text-base leading-8 text-foreground/74">
+                <p className="text-base leading-8 text-foreground-muted">
                   Enterprise practice should distinguish a legitimate cost
                   category from a complete account of the people and capacities
                   that make operation possible. A local saving is incomplete

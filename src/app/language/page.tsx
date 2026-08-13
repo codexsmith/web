@@ -159,7 +159,7 @@ export default function LanguageRegistryPage() {
                 <h3 className="mt-3 font-serif text-2xl font-semibold">
                   {item.label}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-foreground/68">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   {item.requirement}
                 </p>
               </article>
@@ -221,7 +221,7 @@ export default function LanguageRegistryPage() {
             </h2>
           </div>
           <div>
-            <p className="text-base leading-8 text-primary-foreground/76">
+            <p className="text-base leading-8 text-primary-foreground-secondary">
               {languageSystem.claimCeiling}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">

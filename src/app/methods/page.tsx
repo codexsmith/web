@@ -95,7 +95,7 @@ export default function MethodsPage() {
       <section className="scroll-mt-32 border-b border-border bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20" id="practice-cycle">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/58">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               Recursive practice cycle
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
@@ -113,7 +113,7 @@ export default function MethodsPage() {
                   <h3 className="mt-3 font-serif text-xl font-semibold capitalize">
                     {verb.toLowerCase()}
                   </h3>
-                  <p className="mt-2 text-xs leading-6 text-primary-foreground/68">
+                  <p className="mt-2 text-xs leading-6 text-primary-foreground-muted">
                     {body.join(" — ")}
                   </p>
                 </li>
@@ -132,7 +132,7 @@ export default function MethodsPage() {
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
               Terms carry their status with them.
             </h2>
-            <p className="mt-5 text-sm leading-7 text-foreground/68">
+            <p className="mt-5 text-sm leading-7 text-foreground-muted">
               A working term may be useful without being complete. The public interface keeps core language, working language, and provisional formalization distinguishable.
             </p>
           </div>
@@ -163,7 +163,7 @@ export default function MethodsPage() {
             <h2 className="mt-4 max-w-4xl font-serif text-3xl font-semibold sm:text-4xl">
               {firstText(asRecord(methodsPage.closing).headline)}
             </h2>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-foreground/68">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-foreground-muted">
               {firstText(asRecord(methodsPage.closing).body)}
             </p>
           </div>

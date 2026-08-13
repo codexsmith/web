@@ -28,7 +28,7 @@ export function AtlasListExperience() {
   }
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground">
       <SiteHeader variant="minimal" />
 
       <div className="border-b border-border bg-card/70 px-5 py-3 sm:px-8">
@@ -37,7 +37,7 @@ export function AtlasListExperience() {
             <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
               Research Atlas
             </p>
-            <p className="mt-1 text-xs leading-5 text-foreground/68">
+            <p className="mt-1 text-xs leading-5 text-foreground-muted">
               One governed record set, with a spatial map and a traditional list.
             </p>
           </div>
@@ -49,8 +49,8 @@ export function AtlasListExperience() {
         <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.68fr)] lg:items-end">
           <div>
             <div className="flex items-center gap-3">
-              <ListTree aria-hidden="true" className="h-6 w-6 text-primary-foreground/68" />
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/58">
+              <ListTree aria-hidden="true" className="h-6 w-6 text-primary-foreground-muted" />
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
                 List view · non-graph interface
               </p>
             </div>
@@ -59,14 +59,14 @@ export function AtlasListExperience() {
             </h1>
           </div>
           <div>
-            <p className="text-base leading-8 text-primary-foreground/76">
+            <p className="text-base leading-8 text-primary-foreground-secondary">
               Browse the same public domain records as a conventional index,
               grouped by architecture stage. Open a record directly, or move
               into the map only when spatial relations add useful context.
             </p>
             <dl className="mt-7 grid grid-cols-2 gap-px overflow-hidden border border-primary-foreground/20 bg-primary-foreground/20">
               <div className="bg-primary p-4">
-                <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-primary-foreground/52">
+                <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-primary-foreground-muted">
                   Public records
                 </dt>
                 <dd className="mt-2 font-serif text-3xl font-semibold">
@@ -74,7 +74,7 @@ export function AtlasListExperience() {
                 </dd>
               </div>
               <div className="bg-primary p-4">
-                <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-primary-foreground/52">
+                <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-primary-foreground-muted">
                   Architecture stages
                 </dt>
                 <dd className="mt-2 font-serif text-3xl font-semibold">
@@ -104,7 +104,7 @@ export function AtlasListExperience() {
             <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold leading-[1.02] tracking-tight sm:text-5xl" id="atlas-list-title">
               Browse every public domain record.
             </h2>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-foreground/68">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-foreground-muted">
               Search names, roles, descriptions, and facets. Every record links
               to its readable page and retains a direct path into graph relations.
             </p>

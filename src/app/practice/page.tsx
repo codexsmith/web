@@ -48,7 +48,7 @@ export default function PracticePage() {
                 <h2 className="mt-5 font-serif text-2xl font-semibold">
                   {firstText(step.verb)}
                 </h2>
-                <p className="mt-3 text-xs leading-6 text-foreground/68">
+                <p className="mt-3 text-xs leading-6 text-foreground-muted">
                   {firstText(step.body)}
                 </p>
               </li>

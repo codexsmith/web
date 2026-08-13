@@ -199,16 +199,16 @@ export default function WorkPage() {
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
                 {systemsAudit.title}
               </h2>
-              <p className="mt-6 text-base leading-8 text-primary-foreground/76">
+              <p className="mt-6 text-base leading-8 text-primary-foreground-secondary">
                 {systemsAudit.summary}
               </p>
-              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-7 text-primary-foreground/68">
+              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-7 text-primary-foreground-muted">
                 {systemsAudit.availabilityNote}
               </p>
             </div>
 
             <div className="bg-background p-6 sm:p-9 lg:p-12">
-              <p className="max-w-3xl text-lg leading-8 text-foreground/76">
+              <p className="max-w-3xl text-lg leading-8 text-foreground-muted">
                 {systemsAudit.idealFor}
               </p>
               <div className="mt-8 grid gap-8 lg:grid-cols-2">
@@ -254,7 +254,7 @@ export default function WorkPage() {
                   </div>
                 ))}
               </div>
-              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground/68">
+              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground-muted">
                 <span className="font-semibold text-foreground">Success condition: </span>
                 {systemsAudit.successCondition}
               </p>
@@ -309,10 +309,10 @@ export default function WorkPage() {
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
                 {boundaryFirstChess.title}
               </h2>
-              <p className="mt-6 text-base leading-8 text-foreground/74">
+              <p className="mt-6 text-base leading-8 text-foreground-muted">
                 {boundaryFirstChess.summary}
               </p>
-              <p className="mt-5 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground/68">
+              <p className="mt-5 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground-muted">
                 {boundaryFirstChess.availabilityNote}
               </p>
             </div>
@@ -320,12 +320,12 @@ export default function WorkPage() {
             <div className="bg-primary p-6 text-primary-foreground sm:p-9 lg:p-12">
               <div className="grid gap-8 sm:grid-cols-2">
                 <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/58">
+                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
                     Current forms
                   </h3>
                   <ul className="mt-4 space-y-3">
                     {boundaryFirstChess.currentForms.map((form) => (
-                      <li className="flex gap-3 text-sm leading-6 text-primary-foreground/78" key={form}>
+                      <li className="flex gap-3 text-sm leading-6 text-primary-foreground-secondary" key={form}>
                         <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                         {form}
                       </li>
@@ -333,12 +333,12 @@ export default function WorkPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/58">
+                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
                     Launching forms
                   </h3>
                   <ul className="mt-4 space-y-3">
                     {boundaryFirstChess.launchingForms.map((form) => (
-                      <li className="flex gap-3 text-sm leading-6 text-primary-foreground/78" key={form}>
+                      <li className="flex gap-3 text-sm leading-6 text-primary-foreground-secondary" key={form}>
                         <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                         {form}
                       </li>
@@ -346,10 +346,10 @@ export default function WorkPage() {
                   </ul>
                 </div>
               </div>
-              <p className="mt-8 border-t border-primary-foreground/20 pt-6 text-sm leading-7 text-primary-foreground/72">
+              <p className="mt-8 border-t border-primary-foreground/20 pt-6 text-sm leading-7 text-primary-foreground-secondary">
                 {boundaryFirstChess.futureBoundary}
               </p>
-              <p className="mt-4 text-xs leading-6 text-primary-foreground/58">
+              <p className="mt-4 text-xs leading-6 text-primary-foreground-muted">
                 {boundaryFirstChess.claimBoundary}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -395,7 +395,7 @@ export default function WorkPage() {
                 <h2 className="mt-4 font-serif text-2xl font-semibold">
                   {label}
                 </h2>
-                <p className="mt-3 text-sm leading-6 text-foreground/68">
+                <p className="mt-3 text-sm leading-6 text-foreground-muted">
                   {description}
                 </p>
                 <span className="mt-auto pt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted group-hover:text-foreground">
@@ -435,7 +435,7 @@ export default function WorkPage() {
                 <h3 className="mt-4 font-serif text-2xl font-semibold">
                   {asString(stage.label)}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-foreground/68">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   {asString(stage.description)}
                 </p>
               </li>
@@ -498,7 +498,7 @@ export default function WorkPage() {
                   <h3 className="mt-2 font-serif text-xl font-semibold">
                     {asString(stage.label)}
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-foreground/68">
+                  <p className="mt-3 text-sm leading-6 text-foreground-muted">
                     {asString(stage.description)}
                   </p>
                 </article>

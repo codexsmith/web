@@ -64,7 +64,7 @@ export function EntranceSwitcher({
                   <span
                     className={`font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${
                       active
-                        ? "text-primary-foreground/62"
+                        ? "text-primary-foreground-muted"
                         : "text-foreground-muted"
                     }`}
                   >
@@ -84,8 +84,8 @@ export function EntranceSwitcher({
                 <span
                   className={`mt-1 block text-xs leading-5 ${
                     active
-                      ? "text-primary-foreground/72"
-                      : "text-foreground/68"
+                      ? "text-primary-foreground-secondary"
+                      : "text-foreground-muted"
                   }`}
                 >
                   {route.question}

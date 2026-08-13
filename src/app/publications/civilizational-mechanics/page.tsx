@@ -60,7 +60,7 @@ function StepCard({ card, order }: { card: PublicationCard; order: number }) {
         <h3 className="mt-4 font-serif text-3xl font-semibold leading-tight">
           {card.title}
         </h3>
-        <blockquote className="mt-4 border-l-2 border-accent pl-4 text-base font-medium leading-7 text-foreground/82">
+        <blockquote className="mt-4 border-l-2 border-accent pl-4 text-base font-medium leading-7 text-foreground-secondary">
           {card.quote}
         </blockquote>
         <p className="mt-5 text-sm leading-7 text-foreground-muted">
@@ -162,7 +162,7 @@ export default async function CivilizationalMechanicsPage({
               <h1 className="font-serif text-4xl font-semibold leading-none tracking-tight sm:text-6xl">
                 Civilizational Mechanics
               </h1>
-              <p className="mt-3 max-w-3xl font-serif text-xl font-semibold leading-snug text-foreground/76 sm:text-2xl">
+              <p className="mt-3 max-w-3xl font-serif text-xl font-semibold leading-snug text-foreground-muted sm:text-2xl">
                 {hero.headline}
               </p>
             </div>
@@ -273,7 +273,7 @@ export default async function CivilizationalMechanicsPage({
                       <h3 className="font-serif text-2xl font-semibold">
                         {phase.label}
                       </h3>
-                      <p className="mt-2 text-sm leading-6 text-foreground/68">
+                      <p className="mt-2 text-sm leading-6 text-foreground-muted">
                         {phase.purpose}
                       </p>
                     </div>
@@ -317,7 +317,7 @@ export default async function CivilizationalMechanicsPage({
                 <h3 className="mt-5 font-serif text-2xl font-semibold">
                   {card.title}
                 </h3>
-                <blockquote className="mt-4 text-sm font-medium leading-7 text-foreground/76">
+                <blockquote className="mt-4 text-sm font-medium leading-7 text-foreground-muted">
                   {card.quote}
                 </blockquote>
               </article>
@@ -382,7 +382,7 @@ export default async function CivilizationalMechanicsPage({
                   <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-primary-foreground-muted">
                     Closure test
                   </p>
-                  <p className="mt-3 text-sm leading-7 text-primary-foreground/78">
+                  <p className="mt-3 text-sm leading-7 text-primary-foreground-secondary">
                     {route.closureTest}
                   </p>
                 </div>

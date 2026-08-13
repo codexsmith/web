@@ -440,7 +440,7 @@ export default function AboutPage() {
                           <h3 className="mt-3 font-serif text-lg font-semibold">
                             {asString(item.title)}
                           </h3>
-                          <p className="mt-2 text-sm leading-6 text-foreground/68">
+                          <p className="mt-2 text-sm leading-6 text-foreground-muted">
                             {asString(item.body)}
                           </p>
                         </article>
@@ -521,7 +521,7 @@ export default function AboutPage() {
                           <h3 className="font-serif text-lg font-semibold">
                             {asString(item.title)}
                           </h3>
-                          <p className="mt-2 text-sm leading-6 text-foreground/68">
+                          <p className="mt-2 text-sm leading-6 text-foreground-muted">
                             {asString(item.body)}
                           </p>
                         </article>
@@ -591,7 +591,7 @@ export default function AboutPage() {
                           <h3 className="font-serif text-lg font-semibold">
                             {asString(item.title)}
                           </h3>
-                          <p className="mt-2 text-sm leading-6 text-foreground/68">
+                          <p className="mt-2 text-sm leading-6 text-foreground-muted">
                             {asString(item.body)}
                           </p>
                         </article>
@@ -670,7 +670,7 @@ export default function AboutPage() {
                             <h3 className="font-serif text-lg font-semibold">
                               {asString(item.title)}
                             </h3>
-                            <p className="mt-2 text-sm leading-6 text-foreground/68">
+                            <p className="mt-2 text-sm leading-6 text-foreground-muted">
                               {asString(item.body)}
                             </p>
                           </article>

@@ -100,7 +100,7 @@ export function PublicRecordContent() {
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
               {firstText(citation.headline)}
             </h2>
-            <p className="mt-5 text-sm leading-7 text-foreground/68">
+            <p className="mt-5 text-sm leading-7 text-foreground-muted">
               {firstText(citation.purpose)}
             </p>
           </div>
@@ -120,19 +120,19 @@ export function PublicRecordContent() {
       <section className="bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20" id="challenges">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/58">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               Challenge and correction route
             </p>
             <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold sm:text-5xl">
               A criticism needs somewhere durable to land.
             </h2>
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-primary-foreground/72">
+            <p className="mt-5 max-w-3xl text-sm leading-7 text-primary-foreground-secondary">
               The full challenge-and-response register remains to be built. Until then, submissions should identify the affected page or record, the disputed claim or omission, and the evidence or consequence that warrants review.
             </p>
           </div>
           <Link
             className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-primary"
-            href="mailto:nsc319@gmail.com?subject=Public%20record%20challenge"
+            href="mailto:contact@boundaryfirstlabs.com?subject=Public%20record%20challenge"
           >
             Submit a challenge
             <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />

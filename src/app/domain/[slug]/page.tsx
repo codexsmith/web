@@ -207,7 +207,7 @@ export default function DomainPage() {
                 initiallyOpen={true}
                 title="Core Thesis"
               >
-                <p className="text-[15px] font-medium leading-6 text-foreground/78">
+                <p className="text-[15px] font-medium leading-6 text-foreground-muted">
                   {node.coreThesis}
                 </p>
               </DomainRecordSection>
@@ -289,7 +289,7 @@ export default function DomainPage() {
                       )}{" "}
                       · {architectureStage.title}
                     </p>
-                    <p className="mt-1 text-sm leading-6 text-foreground/68">
+                    <p className="mt-1 text-sm leading-6 text-foreground-muted">
                       {architectureStage.description}
                     </p>
                   </div>

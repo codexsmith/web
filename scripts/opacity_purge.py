@@ -1,43 +1,53 @@
-import os
-import re
+from __future__ import annotations
 
-def main():
-    src_dir = r"h:\Boundary First Institute\Webpage\src"
-    
-    # Replacement logic
-    replacements = [
-        # Primary Foreground (inverse text)
-        (r"text-primary-foreground/(?:70|75|80|85|90)\b", "text-primary-foreground-secondary"),
-        (r"text-primary-foreground/(?:30|40|45|50|55|60|65)\b", "text-primary-foreground-muted"),
-        
-        # Muted Foreground (which fails WCAG AA natively, map to new solid semantic muted)
-        (r"text-muted-foreground(?:/[0-9]+)?\b", "text-foreground-muted"),
-        
-        # Standard Foreground (dark ink)
-        (r"text-foreground/(?:80|85|90)\b", "text-foreground-secondary"),
-        (r"text-foreground/(?:40|45|50|55|60|65|70|72|75)\b", "text-foreground-muted"),
-    ]
-    
-    files_changed = 0
-    
-    for root, dirs, files in os.walk(src_dir):
-        for file in files:
-            if file.endswith((".tsx", ".ts", ".jsx", ".js")):
-                path = os.path.join(root, file)
-                with open(path, "r", encoding="utf-8") as f:
-                    content = f.read()
-                    
-                original = content
-                for pattern, repl in replacements:
-                    content = re.sub(pattern, repl, content)
-                    
-                if original != content:
-                    with open(path, "w", encoding="utf-8") as f:
-                        f.write(content)
-                    files_changed += 1
-                    print(f"Updated {os.path.relpath(path, src_dir)}")
-                    
-    print(f"Total files updated: {files_changed}")
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+SOURCE_EXTENSIONS = {".js", ".jsx", ".ts", ".tsx", ".mdx"}
+
+MUTED_RE = re.compile(r"(?<![\w-])text-muted-foreground(?:/\d+)?\b")
+STANDARD_RE = re.compile(r"(?<![\w-])text-foreground/(\d+)\b")
+INVERSE_RE = re.compile(r"(?<![\w-])text-primary-foreground/(\d+)\b")
+
+
+def normalize_text_utilities(content: str) -> str:
+    content = MUTED_RE.sub("text-foreground-muted", content)
+    content = INVERSE_RE.sub(
+        lambda match: (
+            "text-primary-foreground-secondary"
+            if int(match.group(1)) >= 70
+            else "text-primary-foreground-muted"
+        ),
+        content,
+    )
+    return STANDARD_RE.sub(
+        lambda match: (
+            "text-foreground-secondary"
+            if int(match.group(1)) >= 80
+            else "text-foreground-muted"
+        ),
+        content,
+    )
+
+
+def main() -> None:
+    changed = []
+    for path in sorted(SRC.rglob("*")):
+        if not path.is_file() or path.suffix not in SOURCE_EXTENSIONS:
+            continue
+        before = path.read_text(encoding="utf-8")
+        after = normalize_text_utilities(before)
+        if after == before:
+            continue
+        path.write_text(after, encoding="utf-8")
+        changed.append(path.relative_to(ROOT).as_posix())
+
+    print(f"Normalized text utilities in {len(changed)} files")
+    for path in changed:
+        print(f"  {path}")
+
 
 if __name__ == "__main__":
     main()

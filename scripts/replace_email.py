@@ -1,23 +1,32 @@
-import os
+from __future__ import annotations
 
-def replace_in_file(filepath):
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    new_content = content.replace('contact@boundaryfirst.com', 'nsc319@gmail.com')
-    
-    if new_content != content:
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"Updated {filepath}")
+from pathlib import Path
 
-def main():
-    directory = r"h:\Boundary First Institute\Webpage\src"
-    
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            if file.endswith(('.ts', '.tsx', '.json', '.js', '.jsx')):
-                replace_in_file(os.path.join(root, file))
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+CANONICAL_EMAIL = "contact@boundaryfirstlabs.com"
+LEGACY_EMAILS = ("contact@boundaryfirst.com", "nsc319@gmail.com")
+SOURCE_EXTENSIONS = {".js", ".jsx", ".ts", ".tsx", ".json", ".mdx"}
 
-if __name__ == '__main__':
+
+def main() -> None:
+    changed = []
+    for path in sorted(SRC.rglob("*")):
+        if not path.is_file() or path.suffix not in SOURCE_EXTENSIONS:
+            continue
+        before = path.read_text(encoding="utf-8")
+        after = before
+        for legacy_email in LEGACY_EMAILS:
+            after = after.replace(legacy_email, CANONICAL_EMAIL)
+        if after == before:
+            continue
+        path.write_text(after, encoding="utf-8")
+        changed.append(path.relative_to(ROOT).as_posix())
+
+    print(f"Canonicalized public contact email in {len(changed)} files")
+    for path in changed:
+        print(f"  {path}")
+
+
+if __name__ == "__main__":
     main()

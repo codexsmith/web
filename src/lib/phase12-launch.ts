@@ -74,7 +74,7 @@ export type Phase12Launch = {
 
 function validateAction(action: LaunchAction) {
   const isInternal = action.href.startsWith("/") && !action.href.startsWith("//");
-  const isContact = action.href.startsWith("mailto:nsc319@gmail.com");
+  const isContact = action.href.startsWith("mailto:contact@boundaryfirstlabs.com");
 
   if (!action.label.trim() || (!isInternal && !isContact)) {
     throw new Error(`Invalid Phase 12 launch action: ${action.label}`);

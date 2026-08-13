@@ -170,7 +170,7 @@ export default function GovernancePage() {
                 <h3 className="mt-4 font-serif text-xl font-semibold">
                   {humanizeStatus(domain)}
                 </h3>
-                <p className="mt-3 text-xs leading-6 text-foreground/68">
+                <p className="mt-3 text-xs leading-6 text-foreground-muted">
                   {firstText(boundary)}
                 </p>
               </article>
@@ -182,13 +182,13 @@ export default function GovernancePage() {
       <section className="bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20" id="challenge">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/58">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
               Criticism is maintenance
             </p>
             <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold sm:text-5xl">
               {firstText(challenge.headline)}
             </h2>
-            <p className="mt-5 max-w-3xl text-sm leading-7 text-primary-foreground/72">
+            <p className="mt-5 max-w-3xl text-sm leading-7 text-primary-foreground-secondary">
               {firstText(challenge.body)}
             </p>
           </div>

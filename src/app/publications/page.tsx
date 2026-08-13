@@ -155,7 +155,7 @@ export default function PublicationsPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
             <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/58">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
                 Working public argument · Version {executableDistinctions.version}
               </p>
               <h2
@@ -167,7 +167,7 @@ export default function PublicationsPage() {
               <blockquote className="mt-7 border-l-2 border-accent pl-5 text-xl font-medium leading-8 text-primary-foreground-secondary sm:text-2xl sm:leading-9">
                 {executableDistinctions.thesis}
               </blockquote>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-primary-foreground/72">
+              <p className="mt-6 max-w-2xl text-base leading-8 text-primary-foreground-secondary">
                 {executableDistinctions.summary}
               </p>
               <Link
@@ -206,7 +206,7 @@ export default function PublicationsPage() {
             <ol className="mt-4 grid gap-px overflow-hidden border border-primary-foreground/20 bg-primary-foreground/20 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
               {executableDistinctions.consequencePath.map((step, index) => (
                 <li
-                  className="bg-primary px-4 py-4 text-sm font-medium leading-6 text-primary-foreground/82"
+                  className="bg-primary px-4 py-4 text-sm font-medium leading-6 text-primary-foreground-secondary"
                   key={step}
                 >
                   <span className="mr-2 font-mono text-[10px] text-primary-foreground-muted">
@@ -216,7 +216,7 @@ export default function PublicationsPage() {
                 </li>
               ))}
             </ol>
-            <p className="mt-5 max-w-4xl font-mono text-[10px] uppercase leading-5 tracking-[0.12em] text-primary-foreground/56">
+            <p className="mt-5 max-w-4xl font-mono text-[10px] uppercase leading-5 tracking-[0.12em] text-primary-foreground-muted">
               {executableDistinctions.claimCeiling}
             </p>
           </div>
@@ -239,7 +239,7 @@ export default function PublicationsPage() {
               >
                 {crossDomainResearchProgram.title}
               </h2>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/74">
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground-muted">
                 {crossDomainResearchProgram.objective}
               </p>
               <blockquote className="mt-7 max-w-3xl border-l-2 border-accent pl-5 text-base leading-8 text-foreground-muted">
@@ -277,7 +277,7 @@ export default function PublicationsPage() {
                   <h3 className="mt-3 font-serif text-xl font-semibold">
                     {grade.label}
                   </h3>
-                  <p className="mt-3 text-xs leading-6 text-foreground/66">
+                  <p className="mt-3 text-xs leading-6 text-foreground-muted">
                     {grade.criterion}
                   </p>
                 </li>
@@ -335,7 +335,7 @@ export default function PublicationsPage() {
               <h2 className="mt-7 max-w-3xl font-serif text-4xl font-semibold sm:text-6xl">
                 Civilizational Mechanics
               </h2>
-              <blockquote className="mt-6 max-w-3xl border-l-2 border-accent pl-5 text-xl font-medium leading-8 text-foreground/82 sm:text-2xl sm:leading-9">
+              <blockquote className="mt-6 max-w-3xl border-l-2 border-accent pl-5 text-xl font-medium leading-8 text-foreground-secondary sm:text-2xl sm:leading-9">
                 Civilization is an executable representation that must learn to
                 revise itself before it fails beneath its own model.
               </blockquote>
@@ -481,7 +481,7 @@ export default function PublicationsPage() {
                   </h2>
                 </div>
                 <div className="bg-background p-6 sm:p-9 lg:p-12">
-                  <p className="text-base leading-8 text-foreground/74">
+                  <p className="text-base leading-8 text-foreground-muted">
                     {description}
                   </p>
                   <div className="mt-7 border-l-2 border-accent pl-4">
@@ -546,7 +546,7 @@ export default function PublicationsPage() {
             </h2>
           </div>
           <div>
-            <p className="text-base leading-8 text-primary-foreground/76">
+            <p className="text-base leading-8 text-primary-foreground-secondary">
               {claimCeiling}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">

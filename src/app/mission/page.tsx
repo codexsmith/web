@@ -54,10 +54,10 @@ export default function MissionPage() {
             <h2 className="mt-4 font-serif text-4xl font-semibold leading-tight sm:text-6xl">
               {firstText(socialMission.headline)}
             </h2>
-            <p className="mt-6 text-lg font-medium leading-8 text-foreground/74">
+            <p className="mt-6 text-lg font-medium leading-8 text-foreground-muted">
               {firstText(socialMission.coreProposition)}
             </p>
-            <blockquote className="mt-7 border-l-2 border-accent pl-5 text-base leading-8 text-foreground/68">
+            <blockquote className="mt-7 border-l-2 border-accent pl-5 text-base leading-8 text-foreground-muted">
               {firstText(socialMission.humanTranslationOfPrimaryHeadline)}
             </blockquote>
           </div>
@@ -101,7 +101,7 @@ export default function MissionPage() {
               <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
                 Human promise, structural defect, public response.
               </h2>
-              <p className="mt-5 text-sm leading-7 text-foreground/68">
+              <p className="mt-5 text-sm leading-7 text-foreground-muted">
                 {firstText(socialMission.impactRule)}
               </p>
             </div>
@@ -140,7 +140,7 @@ export default function MissionPage() {
                       <p className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
                         Failure pattern
                       </p>
-                      <p className="mt-2 text-sm leading-7 text-foreground/68">
+                      <p className="mt-2 text-sm leading-7 text-foreground-muted">
                         {firstText(mission.failurePattern)}
                       </p>
                     </div>
@@ -213,7 +213,7 @@ export default function MissionPage() {
                 <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                   {humanizeStatus(domain)}
                 </p>
-                <p className="mt-3 text-xs leading-6 text-foreground/68">
+                <p className="mt-3 text-xs leading-6 text-foreground-muted">
                   {firstText(boundary)}
                 </p>
               </article>

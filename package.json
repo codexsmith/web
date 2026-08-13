@@ -15,7 +15,9 @@
     "graph:check": "python scripts/build_graph_context.py --check",
     "graph:dry-run": "python scripts/build_graph_context.py --dry-run",
     "graph:test": "python -m unittest scripts/test_build_graph_context.py",
-    "test:ui": "vitest"
+    "test:ui": "vitest",
+    "ui:normalize": "python scripts/opacity_purge.py && python scripts/replace_email.py",
+    "ui:check": "python scripts/check_ui_stabilization.py"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",

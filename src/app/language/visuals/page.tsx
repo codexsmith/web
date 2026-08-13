@@ -160,7 +160,7 @@ export default function VisualGrammarPage() {
             </h2>
           </div>
           <div>
-            <ul className="space-y-3 text-sm leading-7 text-primary-foreground/78">
+            <ul className="space-y-3 text-sm leading-7 text-primary-foreground-secondary">
               {visualGrammar.safeguards.map((safeguard) => (
                 <li
                   className="border-l border-primary-foreground/30 pl-4"
@@ -170,7 +170,7 @@ export default function VisualGrammarPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-7 border-t border-primary-foreground/20 pt-7 text-base leading-8 text-primary-foreground/76">
+            <p className="mt-7 border-t border-primary-foreground/20 pt-7 text-base leading-8 text-primary-foreground-secondary">
               {visualGrammar.claimCeiling}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">

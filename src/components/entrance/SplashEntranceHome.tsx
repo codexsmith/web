@@ -103,13 +103,13 @@ export function SplashEntranceHome() {
             >
               {identity.headline}
             </h1>
-            <p className="mt-5 max-w-3xl text-base font-medium leading-7 text-primary-foreground/84 sm:mt-7 sm:text-xl sm:leading-9">
+            <p className="mt-5 max-w-3xl text-base font-medium leading-7 text-primary-foreground-secondary sm:mt-7 sm:text-xl sm:leading-9">
               {identity.heroLead}
             </p>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-primary-foreground/68 sm:text-base sm:leading-8">
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-primary-foreground-muted sm:text-base sm:leading-8">
               {identity.heroSupport} {identity.domainLine}
             </p>
-            <p className="mt-4 max-w-3xl font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.13em] text-primary-foreground/58">
+            <p className="mt-4 max-w-3xl font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.13em] text-primary-foreground-muted">
               {identity.methodTriad.join(" ")}
             </p>
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
@@ -127,7 +127,7 @@ export function SplashEntranceHome() {
                 Work with BFL
               </Link>
               <a
-                className="inline-flex min-h-12 items-center px-2 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-primary-foreground/72 hover:text-primary-foreground"
+                className="inline-flex min-h-12 items-center px-2 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-primary-foreground-secondary hover:text-primary-foreground"
                 href="#featured-work"
               >
                 See featured work
@@ -189,7 +189,7 @@ export function SplashEntranceHome() {
                     <h3 className="mt-3 font-serif text-3xl font-semibold">
                       {route.question}
                     </h3>
-                    <p className="mt-4 text-sm leading-7 text-foreground/68">
+                    <p className="mt-4 text-sm leading-7 text-foreground-muted">
                       {route.description}
                     </p>
                     <p className="mt-7 border-t border-border pt-4 text-sm font-medium leading-6 text-foreground-secondary">
@@ -274,7 +274,7 @@ export function SplashEntranceHome() {
                   <p className="mt-6 max-w-2xl text-base font-medium leading-8 text-foreground-muted sm:text-lg">
                     {firstText(socialMission.coreProposition)}
                   </p>
-                  <p className="mt-5 max-w-2xl border-l-2 border-accent pl-5 text-sm leading-7 text-foreground/66">
+                  <p className="mt-5 max-w-2xl border-l-2 border-accent pl-5 text-sm leading-7 text-foreground-muted">
                     {firstText(socialMission.humanTranslationOfPrimaryHeadline)}
                   </p>
                 </div>
@@ -325,7 +325,7 @@ export function SplashEntranceHome() {
         >
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-end">
             <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/58">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
                 {worldClassLanguage.websiteSection.eyebrow}
               </p>
               <h2
@@ -340,10 +340,10 @@ export function SplashEntranceHome() {
               <blockquote className="border-l-2 border-accent pl-5 text-xl font-medium leading-8 text-primary-foreground-secondary sm:text-2xl sm:leading-9">
                 {worldClassLanguage.publicTriad[0]}
               </blockquote>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-primary-foreground/72">
+              <p className="mt-6 max-w-2xl text-base leading-8 text-primary-foreground-secondary">
                 {worldClassLanguage.websiteSection.description}
               </p>
-              <p className="mt-5 max-w-2xl font-mono text-[10px] uppercase leading-5 tracking-[0.12em] text-primary-foreground/56">
+              <p className="mt-5 max-w-2xl font-mono text-[10px] uppercase leading-5 tracking-[0.12em] text-primary-foreground-muted">
                 {worldClassLanguage.claimCeiling}
               </p>
               <div className="mt-7 flex flex-wrap gap-3">

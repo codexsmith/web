@@ -36,7 +36,7 @@ export function PublicationSectionLead({
       </div>
       <p
         className={`max-w-3xl text-sm leading-7 sm:text-base ${
-          inverse ? "text-primary-foreground/72" : "text-foreground-muted"
+          inverse ? "text-primary-foreground-secondary" : "text-foreground-muted"
         }`}
       >
         {description}

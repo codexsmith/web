@@ -679,7 +679,7 @@ export function InteractiveMap({
           <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
             Preparing the Atlas
           </p>
-          <p className="mt-2 max-w-sm text-sm leading-6 text-foreground/68">
+          <p className="mt-2 max-w-sm text-sm leading-6 text-foreground-muted">
             The map is arranging the public records. You can browse the same
             material as a list now.
           </p>

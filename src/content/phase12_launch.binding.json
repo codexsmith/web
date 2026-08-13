@@ -58,7 +58,7 @@
     ],
     "primaryAction": {
       "label": "Request a systems audit",
-      "href": "mailto:nsc319@gmail.com?subject=Boundary%20First%20Systems%20Audit%20inquiry"
+      "href": "mailto:contact@boundaryfirstlabs.com?subject=Boundary%20First%20Systems%20Audit%20inquiry"
     },
     "secondaryAction": {
       "label": "Review the service contract",
@@ -91,7 +91,7 @@
     "claimBoundary": "Chess is both a standalone product and an accessible demonstration of Boundary First reasoning. It is a bounded testbed, not proof that every result transports universally.",
     "primaryAction": {
       "label": "Ask about Boundary First Chess",
-      "href": "mailto:nsc319@gmail.com?subject=Boundary%20First%20Chess%20inquiry"
+      "href": "mailto:contact@boundaryfirstlabs.com?subject=Boundary%20First%20Chess%20inquiry"
     },
     "secondaryAction": {
       "label": "See Chess on Work",

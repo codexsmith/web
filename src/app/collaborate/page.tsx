@@ -74,7 +74,7 @@ export default function CollaborationPage() {
         actions={
           <a
             className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
-            href="mailto:nsc319@gmail.com?subject=Bounded%20collaboration%20inquiry"
+            href="mailto:contact@boundaryfirstlabs.com?subject=Bounded%20collaboration%20inquiry"
           >
             Propose a collaboration <ArrowRight className="ml-2 h-4 w-4" />
           </a>
@@ -105,7 +105,7 @@ export default function CollaborationPage() {
                 <h3 className="mt-3 font-serif text-lg font-semibold">
                   {asString(stage.label)}
                 </h3>
-                <p className="mt-2 text-xs leading-5 text-foreground/66">
+                <p className="mt-2 text-xs leading-5 text-foreground-muted">
                   {asString(stage.description)}
                 </p>
               </li>
@@ -242,7 +242,7 @@ export default function CollaborationPage() {
                 </div>
                 <a
                   className="mt-7 inline-flex min-h-11 items-center border border-border bg-background px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                  href={`mailto:nsc319@gmail.com?subject=${encodeURIComponent(
+                  href={`mailto:contact@boundaryfirstlabs.com?subject=${encodeURIComponent(
                     asString(activeMode.label),
                   )}%20inquiry`}
                 >
@@ -300,7 +300,7 @@ export default function CollaborationPage() {
                 <h3 className="mt-4 font-serif text-xl font-semibold">
                   {asString(role.label)}
                 </h3>
-                <p className="mt-3 text-sm leading-7 text-foreground/68">
+                <p className="mt-3 text-sm leading-7 text-foreground-muted">
                   {asString(role.boundary)}
                 </p>
               </article>
@@ -318,7 +318,7 @@ export default function CollaborationPage() {
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
               Collaboration puts the work under pressure.
             </h2>
-            <p className="mt-6 text-base leading-8 text-primary-foreground/72">
+            <p className="mt-6 text-base leading-8 text-primary-foreground-secondary">
               {asString(evidenceStandard.principle)}
             </p>
             <p className="mt-6 border-l-2 border-primary-foreground/50 pl-5 text-sm leading-7 text-primary-foreground-secondary">
@@ -361,12 +361,12 @@ export default function CollaborationPage() {
                   <h3 className="font-serif text-xl font-semibold">
                     {asString(path.label)}
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-foreground/68">
+                  <p className="mt-3 text-sm leading-6 text-foreground-muted">
                     {asString(path.description)}
                   </p>
                   <a
                     className="mt-5 inline-flex items-center font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                    href="mailto:nsc319@gmail.com"
+                    href="mailto:contact@boundaryfirstlabs.com"
                   >
                     Begin here <ArrowRight className="ml-2 h-3.5 w-3.5" />
                   </a>
@@ -456,7 +456,7 @@ export default function CollaborationPage() {
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
                 Scope boundary
               </p>
-              <p className="mt-2 max-w-5xl text-sm leading-7 text-foreground/68">
+              <p className="mt-2 max-w-5xl text-sm leading-7 text-foreground-muted">
                 {asString(collaboration.scopeBoundary)}
               </p>
             </div>
@@ -494,7 +494,7 @@ export default function CollaborationPage() {
           <div className="flex flex-wrap gap-3">
             <a
               className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-primary"
-              href="mailto:nsc319@gmail.com?subject=Collaboration%20inquiry"
+              href="mailto:contact@boundaryfirstlabs.com?subject=Collaboration%20inquiry"
             >
               Start an inquiry <ArrowRight className="ml-2 h-4 w-4" />
             </a>

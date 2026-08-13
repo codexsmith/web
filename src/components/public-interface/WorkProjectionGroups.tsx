@@ -110,7 +110,7 @@ export function WorkProjectionGroups() {
                       <h3 className="mt-5 font-serif text-2xl font-semibold">
                         {firstText(entity.title)}
                       </h3>
-                      <p className="mt-3 text-xs leading-6 text-foreground/68">
+                      <p className="mt-3 text-xs leading-6 text-foreground-muted">
                         {firstText(entity.description)}
                       </p>
                       <dl className="mt-auto grid grid-cols-2 gap-3 border-t border-border pt-4 text-[9px]">
@@ -154,12 +154,12 @@ export function WorkProjectionGroups() {
           <article className="bg-card p-6">
             <CircleDot aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
             <h3 className="mt-4 font-serif text-2xl font-semibold">Case studies</h3>
-            <p className="mt-3 text-sm leading-7 text-foreground/68">
+            <p className="mt-3 text-sm leading-7 text-foreground-muted">
               {firstText(policy.caseStudyStatus)} The empty state is deliberate: a case needs a bounded record, evidence, and an explicit claim ceiling.
             </p>
           </article>
           <article className="bg-primary p-6 text-primary-foreground">
-            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-primary-foreground/58">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-primary-foreground-muted">
               Ways to work with us
             </p>
             <h3 className="mt-4 font-serif text-2xl font-semibold">

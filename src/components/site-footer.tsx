@@ -207,7 +207,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="mailto:nsc319@gmail.com"
+                  href="mailto:contact@boundaryfirstlabs.com"
                   className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground"
                 >
                   Contact

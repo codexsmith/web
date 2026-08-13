@@ -79,7 +79,7 @@ export function FeaturedLaunchWork() {
             <p className="mt-5 max-w-2xl text-base leading-8 text-foreground-muted">
               {systemsAudit.summary}
             </p>
-            <p className="mt-4 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground/66">
+            <p className="mt-4 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground-muted">
               {systemsAudit.availabilityNote}
             </p>
             <div className="mt-auto flex flex-wrap gap-3 pt-8">
@@ -95,16 +95,16 @@ export function FeaturedLaunchWork() {
                 {boundaryFirstChess.status}
               </span>
             </div>
-            <p className="mt-8 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/58">
+            <p className="mt-8 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
               {boundaryFirstChess.category}
             </p>
             <h3 className="mt-3 font-serif text-4xl font-semibold">
               {boundaryFirstChess.title}
             </h3>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-primary-foreground/76">
+            <p className="mt-5 max-w-2xl text-base leading-8 text-primary-foreground-secondary">
               {boundaryFirstChess.summary}
             </p>
-            <ul className="mt-5 grid gap-2 text-sm leading-6 text-primary-foreground/72 sm:grid-cols-2">
+            <ul className="mt-5 grid gap-2 text-sm leading-6 text-primary-foreground-secondary sm:grid-cols-2">
               {boundaryFirstChess.currentForms.map((form) => (
                 <li className="flex gap-3" key={form}>
                   <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -139,10 +139,10 @@ export function FeaturedLaunchWork() {
               <h3 className="mt-3 font-serif text-2xl font-semibold">
                 {item.title}
               </h3>
-              <p className="mt-2 font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.12em] text-foreground/62">
+              <p className="mt-2 font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.12em] text-foreground-muted">
                 {item.status}
               </p>
-              <p className="mt-4 text-sm leading-7 text-foreground/68">
+              <p className="mt-4 text-sm leading-7 text-foreground-muted">
                 {item.summary}
               </p>
               <Link
