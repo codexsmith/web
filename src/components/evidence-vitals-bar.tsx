@@ -1,33 +1,31 @@
-import type { EvidenceVital } from "@/lib/evidence-vitals";
+import type { EvidenceStatus, EvidenceVital } from "@/lib/evidence-vitals";
+import {
+  EVIDENCE_STANDING_LABELS,
+  EVIDENCE_STANDING_MEANINGS,
+} from "@/lib/evidence-vitals";
 
 type EvidenceVitalsBarProps = {
   className?: string;
   description?: string;
   eyebrow?: string;
-  items: readonly EvidenceVital[];
+  items?: readonly EvidenceVital[];
   layout?: "inline" | "stacked";
   stamp?: string;
+  status: EvidenceStatus;
   title: string;
 };
-
-function numberFor(items: readonly EvidenceVital[], id: string) {
-  const value = Number(items.find((item) => item.id === id)?.value ?? 0);
-  return Number.isFinite(value) ? value : 0;
-}
 
 export function EvidenceVitalsBar({
   className = "",
   description,
   eyebrow = "Evidence status",
-  items,
+  items = [],
   stamp,
+  status,
   title,
 }: EvidenceVitalsBarProps) {
-  const researchBody = !items.some((item) => item.id === "source-stated");
-  const operational =
-    numberFor(items, "operationally-verified") > 0 ||
-    (researchBody && numberFor(items, "bounded-cases") > 0);
-  const standing = operational ? "Operational" : "Recorded";
+  const standingLabel = EVIDENCE_STANDING_LABELS[status.standing];
+  const standingMeaning = EVIDENCE_STANDING_MEANINGS[status.standing];
 
   return (
     <details className={`group border border-border bg-card ${className}`}>
@@ -37,11 +35,13 @@ export function EvidenceVitalsBar({
             {eyebrow}
           </span>
           <span className="border border-border bg-background px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">
-            {standing}
+            {standingLabel}
           </span>
-          <span className="border border-border bg-accent/10 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">
-            Evidence pending
-          </span>
+          {status.pending ? (
+            <span className="border border-border bg-accent/10 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">
+              Evidence pending
+            </span>
+          ) : null}
           <span className="text-xs font-medium text-foreground/72">{title}</span>
         </span>
         <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
@@ -56,25 +56,112 @@ export function EvidenceVitalsBar({
             {description}
           </p>
         ) : null}
-        <p className="mt-3 max-w-4xl text-xs leading-6 text-foreground/68">
-          Evidence status records current standing only. It does not raise the claim ceiling or imply independent verification.
-        </p>
-        <dl className="mt-5 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {items.map((item) => (
-            <div className="bg-background p-4" key={item.id}>
-              <dt className="font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.12em] text-foreground-muted">
-                {item.label}
+
+        <dl className="mt-4 grid gap-4 text-xs leading-6 sm:grid-cols-2">
+          <div>
+            <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Standing
+            </dt>
+            <dd className="mt-1 text-foreground/72">
+              {standingLabel}. {standingMeaning}
+            </dd>
+          </div>
+          <div>
+            <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Applies to
+            </dt>
+            <dd className="mt-1 text-foreground/72">{status.appliesTo}</dd>
+          </div>
+          <div className="sm:col-span-2">
+            <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Claim ceiling
+            </dt>
+            <dd className="mt-1 text-foreground/72">{status.claimCeiling}</dd>
+          </div>
+          {status.boundaryConditions?.length ? (
+            <div className="sm:col-span-2">
+              <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+                Boundary conditions
               </dt>
-              <dd className="mt-1 font-serif text-2xl font-semibold">{item.value}</dd>
-              <p className="mt-2 text-xs leading-5 text-foreground/64">
-                {item.detail}
-              </p>
+              <dd className="mt-1">
+                <ul className="list-disc space-y-1 pl-4 text-foreground/72">
+                  {status.boundaryConditions.map((condition) => (
+                    <li key={condition}>{condition}</li>
+                  ))}
+                </ul>
+              </dd>
             </div>
-          ))}
+          ) : null}
+          {status.pending ? (
+            <div className="sm:col-span-2">
+              <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+                Pending gate · {EVIDENCE_STANDING_LABELS[status.pending.target]}
+              </dt>
+              <dd className="mt-1 text-foreground/72">{status.pending.gate}</dd>
+            </div>
+          ) : null}
+          {status.withdrawal ? (
+            <div className="sm:col-span-2">
+              <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+                Withdrawal
+              </dt>
+              <dd className="mt-1 text-foreground/72">
+                {status.withdrawal.date} · {status.withdrawal.reason}
+                {status.withdrawal.supersededBy
+                  ? ` · Superseded by ${status.withdrawal.supersededBy}`
+                  : ""}
+              </dd>
+            </div>
+          ) : null}
         </dl>
-        {stamp ? (
-          <p className="mt-3 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-foreground-muted">
-            {stamp}
+
+        {items.length > 0 ? (
+          <dl className="mt-5 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {items.map((item) => (
+              <div className="bg-background p-4" key={item.id}>
+                <dt className="font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.12em] text-foreground-muted">
+                  {item.label}
+                </dt>
+                <dd className="mt-1 font-serif text-2xl font-semibold">{item.value}</dd>
+                <p className="mt-2 text-xs leading-5 text-foreground/64">
+                  {item.detail}
+                </p>
+              </div>
+            ))}
+          </dl>
+        ) : null}
+
+        {status.publicReferences?.length ? (
+          <div className="mt-5 border-t border-border pt-4">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Named / external references
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-xs">
+              {status.publicReferences.map((reference) => (
+                <li key={`${reference.kind}:${reference.label}`}>
+                  {reference.href ? (
+                    <a
+                      className="underline decoration-border underline-offset-4 hover:decoration-foreground"
+                      href={reference.href}
+                      rel={reference.kind === "external" ? "noreferrer" : undefined}
+                      target={reference.kind === "external" ? "_blank" : undefined}
+                    >
+                      {reference.label}
+                    </a>
+                  ) : (
+                    reference.label
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+
+        {status.lastReviewed || stamp ? (
+          <p className="mt-4 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-foreground-muted">
+            {[status.lastReviewed ? `Reviewed ${status.lastReviewed}` : null, stamp]
+              .filter(Boolean)
+              .join(" · ")}
           </p>
         ) : null}
       </div>
