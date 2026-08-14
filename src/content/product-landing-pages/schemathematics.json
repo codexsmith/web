@@ -1,0 +1,63 @@
+{
+  "slug": "schemathematics",
+  "title": "Schemathematics",
+  "status": "research-program-draft",
+  "visibility": "public",
+  "pageType": "public-formal-research-program",
+  "hero": {
+    "eyebrow": "FORMAL RESEARCH",
+    "headline": "What does the object do?",
+    "support": "Schemathematics studies how formal structures are represented, differentiated, composed, transformed, and made intelligible across schemas. It treats the schema itself as a consequential mathematical carrier rather than as passive notation."
+  },
+  "definition": "Schemathematics is the formal study of schemas as lawful generators and carriers of objects, transformations, admissibility conditions, invariants, defects, provenance, and repair.",
+  "coreQuestions": [
+    "What structure must exist for this object to do what it does?",
+    "Which distinction does the object introduce?",
+    "Which transformations are admissible?",
+    "What remains invariant across equivalent or alternative representations?",
+    "Which dependency edges are required to reconstruct the object without hidden jumps?",
+    "What does one representation expose that another suppresses or makes expensive?"
+  ],
+  "program": {
+    "representation": "Express formal objects through typed operative profiles rather than names alone.",
+    "comparison": "Compare neighboring structures by the constraints, transformations, and invariants that differentiate them.",
+    "composition": "Study when local schemas compose lawfully and where hidden loss appears at interfaces.",
+    "transport": "Track what survives admissible movement between representations.",
+    "computation": "Test whether structured schema representations improve mathematical navigation, derivation, discrimination, and machine reasoning.",
+    "pedagogy": "Treat unexplained conceptual jumps as candidate missing dependency edges rather than as unavoidable abstraction."
+  },
+  "validation": [
+    "Formal fidelity: preserve accepted definitions and required conditions.",
+    "Differentiating power: make neighboring structures easier to distinguish.",
+    "Dependency clarity: expose which prior distinctions are required.",
+    "Transformational utility: show which operations and invariants become available.",
+    "Pedagogical transfer: allow reconstruction without hidden conceptual jumps.",
+    "Equivalence burden: reduce to established formal machinery when that machinery already carries the required structure."
+  ],
+  "researchHypotheses": [
+    "Formal objects can be indexed by operative profiles containing entity type, admissibility conditions, lawful transformations, invariants, closure properties, provenance, and boundary structure.",
+    "Operationally equivalent representations may remain asymmetric in visibility, cognitive cost, and computational usefulness.",
+    "Cross-domain discovery may improve when objects are matched by operative profile rather than terminology alone.",
+    "Structured Schemathematics representations may improve mathematical navigation and reasoning relative to vector-only retrieval, but this remains an empirical hypothesis."
+  ],
+  "claimBoundary": {
+    "safe": [
+      "Schemathematics is a current Boundary First Labs research framing and formalization program.",
+      "Its objects and hypotheses can be tested independently of Boundary Theory as a whole.",
+      "Existing category theory, type theory, topology, logic, formal methods, knowledge representation, and related mathematics must be imported where they already solve the problem."
+    ],
+    "notYetEstablished": [
+      "That Schemathematics is a new mathematical field in the priority sense.",
+      "That it improves theorem proving or mathematical AI without benchmark evidence.",
+      "That any proposed Boundary First primitive is necessary when an established formalism is sufficient."
+    ]
+  },
+  "cta": {
+    "label": "Try to reduce the machinery"
+  },
+  "notes": [
+    "Current canon: Schemathematics powers Representational Mechanics and sits within the formal apparatus of Boundary Theory.",
+    "Public page should foreground comparison, formal fidelity, and falsifiability rather than novelty claims.",
+    "Source basis includes the Schemathematics Atlas first pass and Research Deployment Packet."
+  ]
+}
