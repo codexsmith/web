@@ -15,9 +15,11 @@ const navigation = {
       { label: "Overview", href: "/work" },
       { label: "Index", href: "/work/index" },
       { label: "Capabilities", href: "/work/capabilities" },
+      { label: "Sandboxes", href: "/sandbox" },
       { label: "How we help", href: "/help" },
       { label: "How we work", href: "/practice" },
       { label: "Methods", href: "/methods" },
+      { label: "Outreach", href: "/outreach" },
       { label: "Collaborate", href: "/collaborate" },
       { label: "Inquire", href: "/inquire?intent=work" },
       { label: "Start another path", href: START_HREF },
@@ -38,6 +40,8 @@ const navigation = {
   explore: {
     label: "Explore",
     links: [
+      { label: "Research", href: "/research" },
+      { label: "Representation lab", href: "/sandbox/representation-lab" },
       { label: "Domain architecture", href: "/domains" },
       { label: "Map view", href: "/map" },
       { label: "List view", href: "/map/refined" },

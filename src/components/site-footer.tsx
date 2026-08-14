@@ -44,6 +44,8 @@ export function SiteFooter() {
             links={[
               ["Research entrance", "/research"],
               ["Evidence", "/evidence"],
+              ["Sandbox registry", "/sandbox"],
+              ["Representation lab", "/sandbox/representation-lab"],
               ["Domains", DOMAINS_HREF],
               ["Atlas map", ATLAS_HREF],
               ["Atlas list", ATLAS_LIST_HREF],
@@ -59,6 +61,7 @@ export function SiteFooter() {
               ["Institutional trust", "/trust"],
               ["Accessibility", "/accessibility"],
               ["People", "/people"],
+              ["Outreach projections", "/outreach"],
             ]}
           />
           <div>
