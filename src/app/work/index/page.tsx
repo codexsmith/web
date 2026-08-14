@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Filter, Search } from "lucide-react";
+import { ProductLandingDirectory } from "@/components/product-landing/ProductLandingDirectory";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ContextNavigation } from "@/components/public-interface/ContextNavigation";
@@ -9,7 +10,7 @@ import { getWorkKinds, workRecords, type WorkKind } from "@/lib/work-records";
 export const metadata: Metadata = {
   title: "Work Index",
   description:
-    "A filterable index of Boundary First Labs work records across projects, products, services, artifacts, and provisional portfolio objects.",
+    "A filterable index of Boundary First Labs work records across projects, products, services, artifacts, provisional portfolio objects, and active public programs.",
   alternates: { canonical: "/work/index" },
 };
 
@@ -50,10 +51,12 @@ export default async function WorkIndexPage({ searchParams }: WorkIndexProps) {
             Browse the work without traversing the ontology.
           </h1>
           <p className="mt-7 max-w-3xl text-lg leading-8 text-foreground-muted">
-            This index projects the retained portfolio, project register, and governed launch records through one common Work grammar. Provisional records remain visibly provisional.
+            This index projects the retained portfolio, project register, governed launch records, and active public programs through one common Work grammar. Provisional records remain visibly provisional.
           </p>
         </div>
       </section>
+
+      <ProductLandingDirectory group="work" />
 
       <section className="border-b border-border bg-card/55 px-5 py-6 sm:px-8">
         <form className="mx-auto grid max-w-7xl gap-3 md:grid-cols-[minmax(0,1fr)_13rem_13rem_auto]" method="get">
