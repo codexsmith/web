@@ -92,7 +92,7 @@ function main() {
   }
 
   requireText(errors, "src/lib/site-navigation.ts", 'export const START_HREF = "/software"');
-  for (const label of ["Software", "Work", "Research", "Institute", "Collaborate"]) {
+  for (const label of ["Software", "Work", "Research", "Laboratory", "Collaborate"]) {
     requireText(errors, "src/lib/site-navigation.ts", `label: "${label}"`);
   }
   requireText(errors, "src/lib/site-navigation.ts", '"/research": ["/research", "/evidence", "/theory", "/sandbox"');
