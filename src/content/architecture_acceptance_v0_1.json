@@ -3,12 +3,12 @@
   "status": "implementation-review-pending",
   "statement": "New outer layers improve legibility while retained inner layers preserve depth over one canonical body of work.",
   "visitorDisclosureSequence": [
-    "Institution",
-    "Software",
+    "Laboratory",
+    "Practice",
     "Method",
     "Evidence",
     "Research",
-    "Theory"
+    "Formal core"
   ],
   "institutionalPromotionSequence": [
     "Artifact",
@@ -20,7 +20,7 @@
   ],
   "invariants": [
     "Do not flatten or discard the retained inner corpus.",
-    "Do not require theory before institution, recognizable practice, or method.",
+    "Do not require theory before the laboratory, recognizable practice, or method.",
     "Prefer examples before ontology.",
     "Project the same governed objects into multiple public contexts rather than duplicating claims.",
     "Keep evidence standing and claim ceilings explicit without turning every interface into a disclaimer wall.",
@@ -32,10 +32,10 @@
       "id": "institution-legible",
       "outcome": "A new visitor can understand what Boundary First Labs is without learning the theory taxonomy.",
       "state": "implemented-review-pending",
-      "note": "The root is an institutional vestibule; deeper taxonomy remains behind explicit routes.",
+      "note": "The root presents the laboratory before deeper taxonomy and formalism.",
       "evidence": [
-        { "label": "Institutional vestibule", "href": "/" },
-        { "label": "About the lab", "href": "/about" }
+        { "label": "Laboratory entrance", "href": "/" },
+        { "label": "About the laboratory", "href": "/about" }
       ]
     },
     {
@@ -79,7 +79,7 @@
         { "label": "Evidence grammar", "href": "/evidence" },
         { "label": "Work index", "href": "/work/index" },
         { "label": "Sandbox registry", "href": "/sandbox" },
-        { "label": "Institutional trust", "href": "/trust" }
+        { "label": "Laboratory trust", "href": "/trust" }
       ]
     },
     {
@@ -94,9 +94,9 @@
     },
     {
       "id": "purpose-bypass",
-      "outcome": "A visitor can bypass the Software path for research, institutional verification, collaboration, or direct corpus exploration.",
+      "outcome": "A visitor can bypass the Software path for research, laboratory verification, collaboration, or direct corpus exploration.",
       "state": "implemented-review-pending",
-      "note": "The primary shell retains direct Work, Research, Institute, and Collaborate entrances alongside Software.",
+      "note": "The primary shell retains direct Work, Research, Laboratory, and Collaborate entrances alongside Software.",
       "evidence": [
         { "label": "Research", "href": "/research" },
         { "label": "Trust", "href": "/trust" },
