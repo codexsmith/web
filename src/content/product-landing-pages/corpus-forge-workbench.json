@@ -1,0 +1,25 @@
+{
+  "slug": "corpus-forge-workbench",
+  "title": "Corpus Forge Workbench",
+  "status": "draft",
+  "visibility": "private",
+  "pageType": "recovered-product-landing",
+  "hero": {
+    "eyebrow": "CORPUS FORGE WORKBENCH",
+    "headline": "The chatbot is not the product.",
+    "support": "The product is the durable, governed transformation of a corpus: sources, claims, contradictions, citations, decisions, revisions, and artifacts that remain connected after the conversation ends."
+  },
+  "sections": [
+    {"heading":"From chat to governed work","body":"Conversation becomes an interface into a durable research system rather than a transient container for decisions."},
+    {"heading":"Preserve provenance","body":"Sources, extracted claims, counterevidence, maturity, ownership, review, and supersession remain inspectable."},
+    {"heading":"Keep contradictions alive","body":"Disagreement is recorded and adjudicated instead of silently averaged away."},
+    {"heading":"Promote deliberately","body":"Notes become claims, claims become artifacts, and artifacts become public only through explicit review gates."},
+    {"heading":"Research operations as product","body":"The workbench connects chat, source material, documents, claim ledgers, citations, replacement history, and structured corpus transformations."}
+  ],
+  "cta":{"label":"Inspect the workbench"},
+  "notes":[
+    "Recovered from the earlier eight-page landing-page set.",
+    "Current portfolio distinguishes Corpus Forge as a method/program from Corpus Forge Workbench as a maintained product surface.",
+    "Keep private until reconciled with the active Corpus Forge product page and current routing vocabulary."
+  ]
+}
