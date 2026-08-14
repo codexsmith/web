@@ -6,6 +6,10 @@ import {
   isNavigationItemActive,
 } from "../src/lib/site-navigation";
 import {
+  PRODUCT_LANDING_NAVIGATION,
+  getProductLandingNavigationForGroup,
+} from "../src/lib/product-landing-navigation";
+import {
   getHeldProductLandingEntries,
   getProductLandingSitemapPaths,
   getPublicProductLandingEntries,
@@ -64,6 +68,32 @@ describe("public architecture navigation contracts", () => {
     expect(isNavigationItemActive("/publications", "/work")).toBe(true);
     expect(isNavigationItemActive("/trust/architecture", "/about")).toBe(true);
     expect(isNavigationItemActive("/accessibility", "/about")).toBe(true);
+  });
+
+  it("orients public landing routes to Software, Work, or Research without exposing bridges", () => {
+    expect(PRODUCT_LANDING_NAVIGATION).toHaveLength(10);
+    expect(getProductLandingNavigationForGroup("software")).toHaveLength(3);
+    expect(getProductLandingNavigationForGroup("research")).toHaveLength(3);
+    expect(getProductLandingNavigationForGroup("work")).toHaveLength(4);
+    expect(PRODUCT_LANDING_NAVIGATION.some((item) => item.href.startsWith("/bridge/"))).toBe(false);
+
+    for (const item of PRODUCT_LANDING_NAVIGATION) {
+      expect(isNavigationItemActive(item.href, `/${item.group}`), item.href).toBe(true);
+    }
+  });
+
+  it("mounts the public landing directory in the three parent discovery surfaces", () => {
+    const surfaces = [
+      ["src/app/software/page.tsx", 'group="software"'],
+      ["src/app/research/page.tsx", 'group="research"'],
+      ["src/app/work/index/page.tsx", 'group="work"'],
+    ] as const;
+
+    for (const [file, marker] of surfaces) {
+      const source = fs.readFileSync(path.join(process.cwd(), file), "utf8");
+      expect(source, file).toContain("ProductLandingDirectory");
+      expect(source, file).toContain(marker);
+    }
   });
 
   it("keeps the homepage depth map connected to guided learning scenes", () => {
