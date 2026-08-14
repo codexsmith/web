@@ -1,0 +1,52 @@
+{
+  "version": "0.1.0",
+  "kind": "product-landing-page-registry",
+  "root": "src/content/product-landing-pages",
+  "description": "Content-only registry for Boundary First Labs product, program, standard, and collaboration landing pages. Rendering and route resolution are intentionally separate concerns.",
+  "pages": [
+    {
+      "id": "boundary-first-ux",
+      "slug": "boundary-first-ux",
+      "pageType": "public-standard",
+      "visibility": "public",
+      "status": "launch-candidate",
+      "file": "boundary-first-ux.json"
+    },
+    {
+      "id": "software-before-code",
+      "slug": "software-before-code",
+      "pageType": "public-engineering-method",
+      "visibility": "public",
+      "status": "working-public-method",
+      "file": "software-before-code.json"
+    },
+    {
+      "id": "boundary-first-weather",
+      "slug": "weather",
+      "pageType": "public-research-program",
+      "visibility": "public",
+      "status": "pilot-ready-research-program",
+      "file": "boundary-first-weather.json"
+    },
+    {
+      "id": "ground-news",
+      "slug": "bridge/ground-news",
+      "pageType": "collaboration-bridge",
+      "visibility": "unlisted",
+      "status": "draft",
+      "file": "ground-news.json"
+    },
+    {
+      "id": "constitutional-law-and-jurisprudence",
+      "slug": "law",
+      "pageType": "public-legal-research-program",
+      "visibility": "public",
+      "status": "working-public-research-program",
+      "file": "constitutional-law-and-jurisprudence.json"
+    }
+  ],
+  "routingPolicy": {
+    "implemented": false,
+    "notes": "Do not infer public navigation or indexing solely from file presence. UI, route resolution, sitemap behavior, robots behavior, and unlisted-page handling will be implemented in a separate pass."
+  }
+}
