@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, CircleDashed, Network } from "lucide-react";
+import { ArrowRight, CircleDashed, Network } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import acceptance from "@/content/architecture_acceptance_v0_1.json";
@@ -94,13 +94,12 @@ export default function ArchitectureAcceptancePage() {
             {criteria.map((criterion) => (
               <article className="bg-background p-6" key={criterion.id}>
                 <div className="flex items-start gap-3">
-                  {criterion.state.startsWith("implemented") ? (
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-foreground-muted" aria-hidden="true" />
-                  ) : (
-                    <CircleDashed className="mt-0.5 h-4 w-4 shrink-0 text-foreground-muted" aria-hidden="true" />
-                  )}
+                  <CircleDashed className="mt-0.5 h-4 w-4 shrink-0 text-foreground-muted" aria-hidden="true" />
                   <div>
-                    <h3 className="font-serif text-2xl font-semibold leading-8">{criterion.outcome}</h3>
+                    <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.11em] text-foreground-muted">
+                      {criterion.state.replaceAll("-", " ")}
+                    </p>
+                    <h3 className="mt-2 font-serif text-2xl font-semibold leading-8">{criterion.outcome}</h3>
                     <p className="mt-3 text-sm leading-7 text-foreground-muted">{criterion.note}</p>
                   </div>
                 </div>
