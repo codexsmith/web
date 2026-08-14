@@ -20,8 +20,18 @@ function fail(message) {
   throw new Error(message);
 }
 
+function normalizeRenderedHtml(html) {
+  return html
+    .replaceAll("&amp;", "&")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#x27;", "'")
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">");
+}
+
 function includesText(html, text) {
-  return html.toLowerCase().includes(text.toLowerCase());
+  return normalizeRenderedHtml(html).toLowerCase().includes(text.toLowerCase());
 }
 
 function requireText(html, text, context) {
