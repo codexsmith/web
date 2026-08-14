@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "id": "boundary-first-chess",
+  "slug": "chess",
+  "title": "Boundary-First Chess",
+  "pageType": "public-practitioner-doctrine",
+  "status": "working-public-doctrine",
+  "visibility": "public",
+  "hero": {
+    "eyebrow": "BOUNDARY-FIRST CHESS",
+    "headline": "See the position before you calculate the move.",
+    "support": "A practical language for reading chess through constrained possibility, reachable states, pressure, boundaries, closure, defects, and repair."
+  },
+  "sections": [
+    {"heading":"The board is a possibility space","body":"A position is not only a list of pieces. It is a structured set of reachable states shaped by legal movement, pressure, protection, access, time, and consequence."},
+    {"heading":"Pressure changes what is reachable","body":"Threats and constraints matter because they contract or redirect the opponent's admissible future states."},
+    {"heading":"Good moves preserve continuation","body":"A locally attractive action is only useful if the resulting position retains the invariants and options required for the next phase."},
+    {"heading":"Closure is earned","body":"Winning material, gaining space, or creating an attack becomes meaningful when the advantage can be stabilized, promoted, or converted."},
+    {"heading":"A public on-ramp","body":"Chess makes Boundary First reasoning visible in a bounded world where rules, state, consequence, and counterfactuals can be inspected directly."}
+  ],
+  "proof": {
+    "built": ["Complete Boundary-First Chess manuscript draft", "Worked explanatory grammar and teaching examples"],
+    "claimBoundary": "The framework is offered for teaching, analysis, and falsification; it does not claim superiority to established chess instruction without comparative evidence."
+  },
+  "cta":{"label":"Put it on a board"}
+}
