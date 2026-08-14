@@ -1,0 +1,59 @@
+name: Review gate
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: review-gate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check generated public content
+        run: npm run content:check
+
+      - name: Check graph context
+        run: npm run graph:check
+
+      - name: Test graph builder
+        run: npm run graph:test
+
+      - name: Check UI stabilization invariants
+        run: npm run ui:check
+
+      - name: Check outer architecture contracts
+        run: npm run architecture:check
+
+      - name: Test public architecture navigation contracts
+        run: npm run test:contracts
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
