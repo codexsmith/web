@@ -1,0 +1,164 @@
+{
+  "id": "ground-news",
+  "slug": "bridge/ground-news",
+  "pageType": "collaboration-bridge",
+  "status": "draft",
+  "visibility": "unlisted",
+  "program": {
+    "name": "Comparative Representation Initiative",
+    "shortName": "CRI",
+    "collaborationTitle": "Ground News × Boundary First Labs",
+    "primaryDomain": "Representational Mechanics",
+    "secondaryDomains": ["Political Analysis", "Boundary First UX", "Political Mechanics Audit", "Corpus Forge"],
+    "workingTitle": "Beyond the Bias Bar",
+    "oneLine": "Ground News shows that coverage differs. Boundary First Labs is developing an instrument for identifying what kind of difference is present."
+  },
+  "renderPolicy": {
+    "selfContained": true,
+    "requireClickThroughForUnderstanding": false,
+    "inlineMethod": true,
+    "inlinePilot": true,
+    "inlineBackground": true,
+    "inlineEvidenceStanding": true,
+    "showGlobalNavigation": false,
+    "allowSearchEngines": false,
+    "includeInSitemap": false,
+    "includeInSiteNavigation": false
+  },
+  "audience": {
+    "name": "Ground News",
+    "type": "organization",
+    "segments": ["product", "methodology", "data", "research", "media literacy", "editorial systems"]
+  },
+  "pageIntent": {
+    "purpose": "Present a bounded applied-research and product-development collaboration around article- and story-level representational divergence.",
+    "desiredOutcome": "Review of a proof of concept followed, if useful, by a small validation pilot.",
+    "primaryAsk": "Evaluate the instrument, not the theory.",
+    "doNotLeadAs": ["vendor", "political advocacy organization", "replacement bias-rating service", "AI truth classifier", "creator sponsorship proposal"]
+  },
+  "hero": {
+    "eyebrow": "GROUND NEWS × BOUNDARY FIRST LABS",
+    "title": "You already show that coverage differs. Let's show readers how.",
+    "deck": "Ground News makes the comparative news landscape visible. Boundary First Labs is developing an article-level representational instrument for distinguishing whether matched coverage diverges through event boundary, agency, causal history, consequence, evidence, ideological markedness, or the range of responses treated as possible.",
+    "pullQuote": "The interesting question is not only where a source sits on a spectrum. It is what world the article makes visible.",
+    "primaryCta": { "label": "See the comparison", "target": "flagship-demo" },
+    "secondaryCta": { "label": "Review the pilot", "target": "pilot" }
+  },
+  "executiveBrief": {
+    "title": "Why I sent you this",
+    "summary": "Ground News has already solved several of the hardest infrastructure problems in comparative news: discovering common stories, grouping coverage, preserving source context, and making asymmetric attention visible. We are not proposing to rebuild any of that. We are interested in the analytic layer immediately underneath it."
+  },
+  "whyGroundNews": {
+    "title": "Why Ground News",
+    "summary": "The fit is structural, not promotional.",
+    "points": [
+      "Your product already creates matched sets of competing representations of a common event.",
+      "You already expose provenance and source-level context rather than pretending every article is context-free.",
+      "Blindspot analysis already demonstrates that absence and asymmetric attention can themselves be informative.",
+      "Your product encourages comparison rather than demanding that one centralized authority decide what the reader should believe.",
+      "That makes Ground News unusually compatible with a method whose first obligation is to make representational differences inspectable rather than hide them inside one score."
+    ]
+  },
+  "sharedProblem": {
+    "title": "What a bias bar cannot tell you by itself",
+    "summary": "A political coordinate tells us something about the source. It does not fully describe the representation constructed by a particular article.",
+    "dimensions": ["Event boundary", "Agency", "Causality", "Consequence", "Evidence", "Markedness", "Admissibility"],
+    "callout": "Coverage can diverge even when the central facts overlap."
+  },
+  "bflContribution": {
+    "title": "Representational Mechanics",
+    "summary": "Representational Mechanics studies how structure is preserved, selected, compressed, transported, omitted, reframed, and repaired when the same underlying object appears in different representations.",
+    "principle": "Every finite account must compress reality. Compression is not automatically bias or deception. The analytic question is what the compression preserves and what it removes."
+  },
+  "representationalProfile": {
+    "title": "Seven dimensions of representational divergence",
+    "notation": "Rᵢ = ⟨Bᵢ, Aᵢ, Cᵢ, Kᵢ, Eᵢ, Mᵢ, Uᵢ⟩",
+    "dimensions": [
+      { "id": "B", "name": "Boundary", "plainLanguage": "Where does this story begin and end?" },
+      { "id": "A", "name": "Agency", "plainLanguage": "Who gets to act?" },
+      { "id": "C", "name": "Causality", "plainLanguage": "What caused what?" },
+      { "id": "K", "name": "Consequence", "plainLanguage": "What happens downstream?" },
+      { "id": "E", "name": "Evidence", "plainLanguage": "What kind of knowledge is being claimed?" },
+      { "id": "M", "name": "Markedness", "plainLanguage": "What has to carry an ideological label?" },
+      { "id": "U", "name": "Admissibility", "plainLanguage": "What responses are allowed to seem possible?" }
+    ],
+    "divergence": {
+      "notation": "Δ(Rᵢ,Rⱼ) = ⟨dB,dA,dC,dK,dE,dM,dU⟩",
+      "principle": "Keep divergence multidimensional. Do not immediately collapse it into another universal score."
+    }
+  },
+  "flagshipDemo": {
+    "id": "flagship-demo",
+    "kind": "embedded-comparison",
+    "title": "Same event. Different represented worlds.",
+    "subtitle": "Start where Ground News already starts: a matched story cluster.",
+    "interaction": ["See the coverage", "Hold the event constant", "Reveal the boundary", "Reveal agency", "Trace causality", "Trace consequence", "Inspect evidence", "Compare admissibility", "See the divergence vector"],
+    "desiredReaction": "Oh. The difference isn't just left versus right.",
+    "closingLine": "The articles may disagree about facts. They may also disagree about what the event is."
+  },
+  "workedExampleTemplate": {
+    "clusterTypes": ["balanced", "left-blindspot", "right-blindspot"],
+    "perClusterOutputs": ["existing Ground News signals", "representational profile for selected articles", "dimension-by-dimension divergence", "one visual divergence map", "short explanatory narrative", "alternative interpretation", "limitations", "statement of incremental value, if any"],
+    "rule": "Show Ground News the method operating on material they already recognize before asking them to imagine a partnership."
+  },
+  "methodDiscipline": {
+    "title": "An instrument has to be reproducible",
+    "rules": ["Predeclare the dimensions.", "Define inclusion rules and counterexamples.", "Preserve disagreements rather than silently reconciling them.", "Double-code a meaningful subset of the pilot.", "Measure agreement separately by dimension.", "Freeze a versioned codebook before final measurement.", "Allow computational assistance to propose annotations, never to masquerade as hidden ground truth.", "Keep observed facts, measurements, inferences and hypotheses separate."]
+  },
+  "pilot": {
+    "id": "pilot",
+    "title": "A deliberately small validation pilot",
+    "scope": { "clusters": "20–30", "jurisdiction": "United States", "language": "English", "domains": "3–5", "doubleCodedMinimum": "20%", "initialDimensions": ["Boundary", "Agency", "Causality", "Admissibility"] },
+    "researchQuestions": ["Can trained coders identify these representational dimensions consistently?", "Do the dimensions explain differences not already captured by publication-level metadata?", "Which dimensions account for the greatest divergence within mixed-source clusters?", "Which dimensions are too subjective or redundant to retain?"],
+    "outputs": ["codebook", "versioned corpus manifest", "annotated sample", "reliability report", "representational divergence maps", "comparison with existing product signals", "product implications memo", "limitations and counterexamples", "go / revise / stop recommendation"],
+    "failureIsUseful": "If the dimensions cannot be coded reliably or add little beyond existing Ground News features, the pilot should say so and stop or simplify."
+  },
+  "claimDiscipline": {
+    "title": "Keep conclusions typed",
+    "classes": ["Observed", "Measured", "Inference", "Hypothesis", "Institutional position"]
+  },
+  "productOpportunities": {
+    "title": "If the instrument survives, what could it become?",
+    "items": ["Why These Headlines Differ", "Representational Divergence Map", "Richer Blindspot Analysis", "Agency Map", "Causal Depth", "Consequence Horizon", "Evidence Modality", "Reader Comparison Prompts"],
+    "principle": "These are product hypotheses, not promised features."
+  },
+  "politicalMechanics": {
+    "title": "The deeper research branch",
+    "chain": ["Pressure", "Representation", "Coalition", "Policy", "Personnel", "Money", "Administration", "Consequence", "Repair"],
+    "governingQuestion": "What did the actor represent, what could the actor actually alter, what did the actor choose to preserve, and where did the consequences finally land?",
+    "boundary": "This is future research and should not be bundled into the initial pilot."
+  },
+  "overtonResearch": {
+    "title": "A later question, not the opening claim",
+    "question": "Can representational data distinguish movement of actors within a political coordinate system from movement of the coordinate system's own operative center and boundaries?",
+    "claimFirewall": "The initial collaboration must permit any rightward-, leftward-, expansion-, contraction-, or issue-specific movement hypothesis to fail."
+  },
+  "collaboration": {
+    "title": "Start small enough that the method can fail",
+    "paths": ["Review one worked cluster", "Compare product questions", "Validate 20–30 clusters", "Prototype the surviving dimensions", "Publish what survives"],
+    "primaryAsk": { "label": "Try to break the instrument", "description": "Review a worked comparison and tell us where it is useful, redundant, subjective or wrong." }
+  },
+  "claimFirewall": {
+    "title": "What this project does not claim",
+    "items": ["It does not replace Ground News's source-level ratings.", "It does not determine which political side is correct.", "It does not assume every framing difference is deceptive.", "It does not reduce representational divergence to another universal scalar bias score.", "It does not present AI-generated annotation as neutral ground truth.", "It does not begin from a predetermined conclusion about movement of the U.S. political spectrum.", "It does not assume U.S. left-right coordinates transfer directly to other political systems.", "It does not claim the seven dimensions are already validated."]
+  },
+  "closing": {
+    "eyebrow": "THE PROPOSAL IN ONE SENTENCE",
+    "title": "You built the comparative map. We'd like to test an instrument for reading its structure.",
+    "body": "Ground News has already made an important boundary visible: the same event can produce materially different news representations. Boundary First Labs proposes a small, auditable experiment to determine whether those differences can be decomposed into reproducible dimensions that make comparison more useful without taking judgment away from the reader.",
+    "finalLine": "Don't give readers another answer. Give them a better instrument for seeing the difference."
+  },
+  "internal": {
+    "relationshipType": "prospective applied-research collaborator",
+    "priority": "high",
+    "outreachPosture": "show-before-ask",
+    "firstGate": "three-cluster proof of concept",
+    "doNotLeadWith": ["Overton-window hypothesis", "full Boundary Theory", "universal political model", "vendor pitch", "funding request", "data-access request"]
+  },
+  "metadata": {
+    "owner": "Boundary First Labs",
+    "createdAt": "2026-08-14",
+    "updatedAt": "2026-08-14",
+    "tags": ["ground-news", "representational-mechanics", "comparative-representation", "political-analysis", "media-literacy", "collaboration"]
+  }
+}
