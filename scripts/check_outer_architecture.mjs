@@ -8,6 +8,7 @@ const acceptancePath = path.join(
   "content",
   "architecture_acceptance_v0_1.json",
 );
+const PAGE_EXTENSIONS = ["tsx", "ts", "jsx", "js"];
 
 function fail(errors, message) {
   errors.push(message);
@@ -18,9 +19,11 @@ function read(relativePath) {
 }
 
 function routeExists(route) {
-  if (route === "/") return fs.existsSync(path.join(SRC, "app", "page.jsx"));
   const clean = route.split(/[?#]/, 1)[0].replace(/^\//, "");
-  return fs.existsSync(path.join(SRC, "app", clean, "page.tsx"));
+  const routeDirectory = clean ? path.join(SRC, "app", clean) : path.join(SRC, "app");
+  return PAGE_EXTENSIONS.some((extension) =>
+    fs.existsSync(path.join(routeDirectory, `page.${extension}`)),
+  );
 }
 
 function requireText(errors, relativePath, text) {
@@ -99,7 +102,7 @@ function main() {
   requireText(errors, "src/lib/inquiry.ts", "source");
   requireText(errors, "src/lib/inquiry.ts", "record");
   requireText(errors, "src/app/trust/page.tsx", 'href="/trust/architecture"');
-  requireText(errors, "src/app/trust/architecture/page.tsx", "implemented-review-pending");
+  requireText(errors, "src/app/trust/architecture/page.tsx", "criterion.state");
   requireText(errors, "src/app/trust/architecture/page.tsx", "CircleDashed");
 
   const vercelPath = path.join(ROOT, "vercel.json");
