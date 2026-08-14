@@ -1,0 +1,54 @@
+{
+  "slug": "bridge/topos-institute",
+  "title": "Topos Institute Research Bridge",
+  "status": "draft",
+  "visibility": "unlisted",
+  "pageType": "research-collaboration-bridge",
+  "relationshipStatus": "exploratory-no-affiliation",
+  "audience": {
+    "type": "institution",
+    "name": "Topos Institute"
+  },
+  "hero": {
+    "eyebrow": "FORMAL SYSTEMS",
+    "headline": "Which structure survives the translation?",
+    "support": "Boundary First Labs is developing Schemathematics and related representational machinery under a strict reduction rule: import mature formalism where it is sufficient, expose the residual defect where it is not, and do not mistake new vocabulary for new mathematics."
+  },
+  "bridge": {
+    "bflSide": [
+      "Schemathematics as an operational study of formal structures across schemas.",
+      "Representational Mechanics as the study of preservation, distortion, transport, and repair across representations.",
+      "Admissibility constraints governing what may be introduced, forgotten, compressed, or reconstructed.",
+      "Categorical/compositional computation as an open research direction rather than an established contribution."
+    ],
+    "sharedResearchSurface": [
+      "Structure-preserving maps and compositional systems.",
+      "Finding the right abstraction for systems whose local representations must compose.",
+      "The relationship between formal equivalence and operational asymmetry.",
+      "Whether Boundary First constructs reduce cleanly to existing categorical systems theory, applied category theory, type-theoretic, or formal-methods machinery."
+    ]
+  },
+  "candidateExperiment": {
+    "title": "Reduction before invention",
+    "steps": [
+      "Select one Schemathematics object or Boundary First invariant contract.",
+      "Represent it using the strongest relevant established categorical machinery.",
+      "Identify exact equivalences and non-equivalences.",
+      "Measure whether any claimed residual defect remains after the translation.",
+      "Retire the Boundary First primitive if the mature formalism already carries the necessary structure."
+    ],
+    "successCondition": "A useful result includes clean reduction. The collaboration is successful if it tells us what not to invent."
+  },
+  "firstAsk": "Try to reduce the proposed machinery to established category-theoretic or compositional systems language and identify the smallest residue, if any, that survives.",
+  "claimBoundary": [
+    "This page does not imply Topos Institute endorsement, partnership, affiliation, or review.",
+    "Schemathematics is a research program with an active novelty burden, not a declared replacement for category theory or existing formal methods.",
+    "Categorical Turing Machines and related compositional computation work remain open research directions.",
+    "Any claim of novelty must follow documented attempted reduction against established mathematics."
+  ],
+  "cta": {"label": "Try to reduce the machinery"},
+  "notes": [
+    "Use as an unlisted direct-outreach page only.",
+    "Research Deployment Packet routing: formal systems + mathematical knowledge; compositional computation / representation / distinction-space variants."
+  ]
+}
