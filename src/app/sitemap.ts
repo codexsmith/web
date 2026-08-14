@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import artifactsIndexData from "./context/artifactsIndex.json";
 import graphNodesData from "./context/graphNodes.json";
 import introConfig from "@/content/introductory_experience_v0_5.json";
+import { getProductLandingSitemapPaths } from "@/lib/product-landing-routing";
 import { getSiteOrigin } from "@/lib/site";
 import { ATLAS_EVIDENCE_HREF } from "@/lib/site-navigation";
 
@@ -77,6 +78,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
     changeFrequency: "monthly" as const,
   }));
+  const productLandingRoutes = getProductLandingSitemapPaths().map((pathname) => ({
+    url: `${baseUrl}${pathname}`,
+    priority: 0.7,
+    changeFrequency: "monthly" as const,
+  }));
 
   return [
     ...staticRoutes.map((route) => ({
@@ -87,5 +93,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...learnSceneRoutes,
     ...domainRoutes,
     ...artifactRoutes,
+    ...productLandingRoutes,
   ];
 }
