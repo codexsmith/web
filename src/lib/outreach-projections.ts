@@ -1,4 +1,4 @@
-import { buildInquiryHref } from "@/lib/inquiry-context";
+import { buildInquiryHref } from "@/lib/inquiry";
 
 export type OutreachProjection = {
   id: string;
