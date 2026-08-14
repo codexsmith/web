@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "id": "corpus-forge",
+  "slug": "corpus-forge",
+  "title": "Corpus Forge",
+  "pageType": "public-research-operations-program",
+  "status": "active-development",
+  "visibility": "public",
+  "hero": {
+    "eyebrow": "CORPUS FORGE",
+    "headline": "Turn a body of work into a system that can remember, disagree, mature, and repair itself.",
+    "support": "A research-operations method for transforming notes, documents, conversations, models, experiments, and revisions into a traceable corpus with provenance, claim status, contradiction handling, review gates, and replacement history."
+  },
+  "sections": [
+    {"heading":"Preserve the source","body":"Ingestion begins by retaining provenance and source boundaries so later synthesis remains reconstructible."},
+    {"heading":"Extract candidate structure","body":"Claims, concepts, artifacts, dependencies, contradictions, evidence, and open questions become explicit objects rather than remaining buried in prose."},
+    {"heading":"Keep maturity visible","body":"A note, hypothesis, working result, reviewed artifact, and public claim are different states and should not silently collapse into one another."},
+    {"heading":"Record replacement","body":"Knowledge systems need supersession and correction paths so improvement does not erase why a prior representation existed."},
+    {"heading":"Human promotion gates","body":"AI and automation may accelerate transformation, but consequential promotion into the durable corpus remains reviewable and attributable."}
+  ],
+  "relationship": {
+    "workbench": "Corpus Forge Workbench is the maintained software/product expression of this method and program.",
+    "ledger": "Claim and Evidence Ledger is a focused product surface extracted from the wider governance model."
+  },
+  "cta":{"label":"Forge a bounded corpus"}
+}
