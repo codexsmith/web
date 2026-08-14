@@ -120,7 +120,10 @@
   ],
   "validation": {
     "automatedGate": "npm run architecture:check",
-    "scope": "The automated gate verifies structural route presence, traversal wiring, canonical acceptance data, and selected navigation contracts. It does not prove usability, correctness of claims, or cold-reader comprehension.",
+    "runtimeGate": "npm run acceptance:runtime",
+    "runtimeStatus": "verified",
+    "runtimeEvidence": "All eight Definition-of-Done route/content contracts have been exercised against a built production Next server in CI.",
+    "scope": "The structural gate verifies route presence, traversal wiring, canonical acceptance data, and selected navigation contracts. The runtime gate verifies successful production rendering, key content and links, disclosure traversal, contextual inquiry state, purpose bypasses, and retained-corpus reachability. Neither gate proves usability, correctness or sufficiency of claims, cold-reader comprehension, or rendered accessibility quality.",
     "humanReviewRequired": [
       "Cold-reader comprehension and orientation",
       "Practical usefulness of the Software beachhead",
