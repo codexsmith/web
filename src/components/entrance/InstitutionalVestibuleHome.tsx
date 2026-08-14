@@ -17,12 +17,16 @@ import {
 
 const disclosureLayers = [
   {
-    label: "Institution",
-    question: "What is this, and who is responsible?",
+    label: "Laboratory",
+    question: "What is this, who is responsible, and how is the work governed?",
+    entrance: "Laboratory",
+    href: "/about",
   },
   {
     label: "Practice",
-    question: "What do I do with a real problem?",
+    question: "What does this look like in a real system?",
+    entrance: "Software",
+    href: "/software",
   },
   {
     label: "Method",
@@ -31,14 +35,18 @@ const disclosureLayers = [
   {
     label: "Evidence",
     question: "What supports the claim?",
+    entrance: "Work",
+    href: "/work",
   },
   {
     label: "Research",
     question: "Why does the pattern generalize?",
+    entrance: "Research",
+    href: "/research",
   },
   {
     label: "Formal core",
-    question: "What is the underlying theory?",
+    question: "What is the underlying structure?",
   },
 ] as const;
 
@@ -105,7 +113,7 @@ export function InstitutionalVestibuleHome() {
                 className="inline-flex min-h-12 items-center border border-border bg-card px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em]"
                 href="/about"
               >
-                Explore the institute
+                Explore the laboratory
               </Link>
             </div>
           </div>
@@ -116,13 +124,13 @@ export function InstitutionalVestibuleHome() {
               <div className="flex items-start justify-between gap-5">
                 <div className="max-w-md">
                   <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-foreground-muted">
-                    How to read this site
+                    How the work deepens
                   </p>
                   <h2 className="mt-2 font-serif text-2xl font-semibold sm:text-3xl">
                     One body of work. Different depths.
                   </h2>
                   <p className="mt-3 text-sm leading-6 text-primary-foreground-secondary">
-                    Begin concrete and move inward only as far as your question requires.
+                    The menu chooses an entrance. This map shows how far inward the same work can be followed.
                   </p>
                 </div>
                 <CosmicShoreMark className="h-16 w-16 shrink-0" surface="dark" variant="compact" />
@@ -140,16 +148,34 @@ export function InstitutionalVestibuleHome() {
                     <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.11em]">
                       {layer.label}
                     </span>
-                    <span className="text-xs leading-5 text-primary-foreground-secondary">
-                      {layer.question}
-                    </span>
+                    <div className="min-w-0">
+                      <span className="block text-xs leading-5 text-primary-foreground-secondary">
+                        {layer.question}
+                      </span>
+                      {layer.href && layer.entrance ? (
+                        <Link
+                          className="mt-1 inline-flex items-center font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-foreground hover:underline"
+                          href={layer.href}
+                        >
+                          Enter through {layer.entrance}
+                          <ArrowRight aria-hidden="true" className="ml-1.5 h-3 w-3" />
+                        </Link>
+                      ) : null}
+                    </div>
                   </div>
                 ))}
               </div>
 
-              <p className="mt-4 text-xs leading-5 text-primary-foreground-muted">
-                The layers are routes into the same governed corpus—not separate versions of the work.
-              </p>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs leading-5 text-primary-foreground-muted">
+                <span>Choose an entrance. Follow the work inward as far as your question requires.</span>
+                <Link
+                  className="inline-flex items-center font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-foreground hover:underline"
+                  href="/collaborate"
+                >
+                  Collaborate at any depth
+                  <ArrowRight aria-hidden="true" className="ml-1.5 h-3 w-3" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -158,7 +184,7 @@ export function InstitutionalVestibuleHome() {
       <section className="border-b border-border px-5 py-10 sm:px-8 sm:py-12">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-sm leading-7 text-foreground-muted">Start at the layer that matches your question.</p>
+            <p className="text-sm leading-7 text-foreground-muted">Choose the entrance that matches why you are here.</p>
             <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">Choose a path.</h2>
           </div>
           <div className="mt-6 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
@@ -224,7 +250,7 @@ export function InstitutionalVestibuleHome() {
           <div>
             <ShieldCheck aria-hidden="true" className="h-7 w-7" />
             <p className="mt-4 text-sm leading-7 text-primary-foreground-secondary">Governance, provenance, standards, limits, and correction paths should be inspectable too.</p>
-            <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">Make the institution inspectable.</h2>
+            <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">Make the laboratory inspectable.</h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-primary-foreground-secondary">Boundary First Labs is being built around a retained portfolio and provenance corpus. Governance, evidence status, institutional limits, and public claims remain visible rather than being hidden behind branding.</p>
           </div>
           <div className="grid gap-px overflow-hidden border border-primary-foreground/20 bg-primary-foreground/20 sm:grid-cols-2">
