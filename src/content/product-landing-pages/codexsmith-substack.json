@@ -1,0 +1,23 @@
+{
+  "slug": "codexsmith",
+  "title": "Codex Smith",
+  "status": "draft",
+  "visibility": "private",
+  "pageType": "recovered-author-publication-landing",
+  "hero": {
+    "eyebrow": "CODEX SMITH",
+    "headline": "Follow the work where the map fails.",
+    "support": "A recovered author and publication surface for essays, research notes, public explanations, technical arguments, and field reports emerging from Boundary First Labs."
+  },
+  "sections": [
+    {"heading":"Public notebook, not authority shortcut","body":"The publication lane exposes reasoning, artifacts, open questions, revisions, and failures without asking the author identity to substitute for evidence."},
+    {"heading":"Multiple audiences, one source system","body":"Technical, civic, scientific, philosophical, and accessible public writing can project from the same governed corpus at different depths."},
+    {"heading":"Show the work","body":"Claims should link outward to the object that supports them: papers, software, case studies, data, primary sources, or explicit provenance."},
+    {"heading":"From essay to lab","body":"Public writing is an on-ramp into deeper methods, demonstrations, evidence, and collaboration rather than an isolated content stream."}
+  ],
+  "cta":{"label":"Read the work"},
+  "notes":[
+    "Recovered from the earlier eight-page landing-page set, originally framed around a Codexsmith/Substack publication surface.",
+    "Keep private until the current publication/channel strategy is confirmed; do not assume Substack remains the canonical route."
+  ]
+}
