@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0",
+  "id": "closure-driven-software-development",
+  "slug": "closure-driven-software-development",
+  "title": "Closure-Driven Software Development",
+  "pageType": "public-engineering-method",
+  "status": "advanced-practitioner-draft",
+  "visibility": "public",
+  "hero": {
+    "eyebrow": "CLOSURE-DRIVEN SOFTWARE DEVELOPMENT",
+    "headline": "Software delivery is the disciplined stabilization of useful form under uncertainty.",
+    "support": "A Boundary-First engineering method for discovering the domain, tightening uncertainty, exposing invariants and responsibility, and letting working artifacts correct the plan before ambiguity hardens into architecture."
+  },
+  "sections": [
+    {"heading":"Discovery is progressive closure","body":"Backlogs, refinement, prototypes, and working increments should reduce uncertainty rather than merely create more descriptions of work."},
+    {"heading":"Certainty must meet execution","body":"A task becomes implementation-ready when the business/domain cone of certainty intersects the executable cone at the right granularity."},
+    {"heading":"Build a delivery skeleton","body":"Establish the path from domain uncertainty to delivered artifact early enough that integration, deployment, ownership, and environmental blockers become visible."},
+    {"heading":"Working software is a witness","body":"The artifact is allowed to falsify assumptions, expose missing distinctions, and reshape the plan."},
+    {"heading":"Closure is stronger than completion","body":"Done means the relevant domain condition is represented, executable, observable, deliverable, and repairable—not merely that a ticket changed state."
+    }
+  ],
+  "evidenceTargets": ["unresolved requirement count", "rework", "escaped defects", "decision latency", "stakeholder agreement"],
+  "cta":{"label":"Apply the method before implementation"}
+}
