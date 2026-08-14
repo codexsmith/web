@@ -100,7 +100,7 @@ const criteria = [
       requireText(html, "Independent research & engineering lab", "/");
       requireText(
         html,
-        "Boundary First Labs studies how complex systems hold together, fail, and can be changed without losing what matters.",
+        "Boundary First Labs studies how complex systems are structured, how their parts depend on one another, and how they can be changed without losing what matters.",
         "/",
       );
       requireHref(html, "/about", "/");
