@@ -1,52 +1,46 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "kind": "product-landing-page-registry",
   "root": "src/content/product-landing-pages",
-  "description": "Content-only registry for Boundary First Labs product, program, standard, and collaboration landing pages. Rendering and route resolution are intentionally separate concerns.",
+  "description": "Content-only registry for Boundary First Labs product, program, standard, practitioner, research, and collaboration landing pages. Rendering and route resolution are intentionally separate concerns.",
   "pages": [
-    {
-      "id": "boundary-first-ux",
-      "slug": "boundary-first-ux",
-      "pageType": "public-standard",
-      "visibility": "public",
-      "status": "launch-candidate",
-      "file": "boundary-first-ux.json"
-    },
-    {
-      "id": "software-before-code",
-      "slug": "software-before-code",
-      "pageType": "public-engineering-method",
-      "visibility": "public",
-      "status": "working-public-method",
-      "file": "software-before-code.json"
-    },
-    {
-      "id": "boundary-first-weather",
-      "slug": "weather",
-      "pageType": "public-research-program",
-      "visibility": "public",
-      "status": "pilot-ready-research-program",
-      "file": "boundary-first-weather.json"
-    },
-    {
-      "id": "ground-news",
-      "slug": "bridge/ground-news",
-      "pageType": "collaboration-bridge",
-      "visibility": "unlisted",
-      "status": "draft",
-      "file": "ground-news.json"
-    },
-    {
-      "id": "constitutional-law-and-jurisprudence",
-      "slug": "law",
-      "pageType": "public-legal-research-program",
-      "visibility": "public",
-      "status": "working-public-research-program",
-      "file": "constitutional-law-and-jurisprudence.json"
-    }
+    {"id":"boundary-first-ux","slug":"boundary-first-ux","pageType":"public-standard","visibility":"public","status":"launch-candidate","collection":"active","routingEligibility":"public-candidate","file":"boundary-first-ux.json"},
+    {"id":"software-before-code","slug":"software-before-code","pageType":"public-engineering-method","visibility":"public","status":"working-public-method","collection":"active","routingEligibility":"public-candidate","file":"software-before-code.json"},
+    {"id":"closure-driven-software-development","slug":"closure-driven-software-development","pageType":"public-engineering-method","visibility":"public","status":"advanced-practitioner-draft","collection":"active","routingEligibility":"public-candidate","file":"closure-driven-software-development.json"},
+    {"id":"boundary-first-weather","slug":"weather","pageType":"public-research-program","visibility":"public","status":"pilot-ready-research-program","collection":"active","routingEligibility":"public-candidate","file":"boundary-first-weather.json"},
+    {"id":"constitutional-law-and-jurisprudence","slug":"law","pageType":"public-legal-research-program","visibility":"public","status":"working-public-research-program","collection":"active","routingEligibility":"public-candidate","file":"constitutional-law-and-jurisprudence.json"},
+    {"id":"boundary-first-chess","slug":"chess","pageType":"public-practitioner-doctrine","visibility":"public","status":"working-public-doctrine","collection":"active","routingEligibility":"public-candidate","file":"boundary-first-chess.json"},
+    {"id":"boundary-first-soccer","slug":"soccer","pageType":"public-practitioner-doctrine","visibility":"public","status":"working-public-doctrine","collection":"active","routingEligibility":"public-candidate","file":"boundary-first-soccer.json"},
+    {"id":"corpus-forge","slug":"corpus-forge","pageType":"public-research-operations-program","visibility":"public","status":"active-development","collection":"active","routingEligibility":"public-candidate","file":"corpus-forge.json"},
+    {"id":"agency-representation-audit","slug":"agency-audit","pageType":"public-professional-service","visibility":"public","status":"pilot-intake","collection":"active","routingEligibility":"public-candidate","file":"agency-representation-audit.json"},
+
+    {"id":"ground-news","slug":"bridge/ground-news","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"ground-news.json"},
+    {"id":"gothamchess","slug":"bridge/gothamchess","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"gothamchess.json"},
+    {"id":"rupaul-world-of-wonder","slug":"bridge/rupaul-world-of-wonder","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"rupaul-world-of-wonder.json"},
+    {"id":"augusta-citywatch","slug":"bridge/augusta-citywatch","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"augusta-citywatch.json"},
+    {"id":"boundary-first-robocup","slug":"bridge/robocup","pageType":"research-collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"boundary-first-robocup.json"},
+
+    {"id":"boundary-first-labs","slug":"boundary-first-labs","pageType":"recovered-institutional-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"boundary-first-labs.json"},
+    {"id":"corpus-forge-workbench","slug":"corpus-forge-workbench","pageType":"recovered-product-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"corpus-forge-workbench.json"},
+    {"id":"boundary-first-engineering","slug":"boundary-first-engineering","pageType":"recovered-method-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"boundary-first-engineering.json"},
+    {"id":"representational-relativity","slug":"representational-relativity","pageType":"recovered-theory-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"representational-relativity.json"},
+    {"id":"emergence-theory","slug":"emergence-theory","pageType":"recovered-theory-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"emergence-theory.json"},
+    {"id":"volumology-labs","slug":"volumology-labs","pageType":"recovered-legacy-landing","visibility":"private","status":"archived","collection":"legacy-recovered","routingEligibility":"hold","file":"volumology-labs.json"},
+    {"id":"codexsmith-substack","slug":"codexsmith","pageType":"recovered-author-publication-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"codexsmith-substack.json"},
+    {"id":"ai-as-forge","slug":"ai-as-forge","pageType":"recovered-method-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"ai-as-forge.json"},
+    {"id":"learning-navigator","slug":"learning-navigator","pageType":"product-concept-landing","visibility":"private","status":"draft","collection":"reconciliation","routingEligibility":"hold","file":"learning-navigator.json"}
   ],
+  "collections": {
+    "active": "Current public-facing product, method, practitioner, service, and research landing objects eligible for a future public routing decision.",
+    "bridge": "Recipient- or community-specific collaboration pages. These may be routable by direct URL later but must not enter navigation or sitemap discovery solely because they exist.",
+    "legacy-recovered": "Previously developed landing-page work preserved for migration. Terminology or hierarchy may be superseded; no public route should be generated until reconciled with current canon.",
+    "reconciliation": "Current concept with unresolved overlap or naming against another portfolio object. Preserve content but hold routing until adjudicated."
+  },
   "routingPolicy": {
     "implemented": false,
-    "notes": "Do not infer public navigation or indexing solely from file presence. UI, route resolution, sitemap behavior, robots behavior, and unlisted-page handling will be implemented in a separate pass."
+    "publicRule": "visibility=public and routingEligibility=public-candidate may be considered by the future router; neither field alone creates a route.",
+    "unlistedRule": "visibility=unlisted must remain absent from primary navigation and sitemap/indexing surfaces unless an explicit later policy overrides that behavior.",
+    "privateRule": "visibility=private or routingEligibility=hold must never be exposed by automatic content discovery.",
+    "notes": "UI, route resolution, navigation, sitemap behavior, robots behavior, canonical URLs, and private/unlisted enforcement remain separate implementation work."
   }
 }
