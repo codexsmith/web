@@ -1,27 +1,27 @@
-import boundaryFirstUx from "@/content/product-landing-pages/boundary-first-ux.json";
-import softwareBeforeCode from "@/content/product-landing-pages/software-before-code.json";
-import closureDrivenSoftwareDevelopment from "@/content/product-landing-pages/closure-driven-software-development.json";
-import boundaryFirstWeather from "@/content/product-landing-pages/boundary-first-weather.json";
-import constitutionalLaw from "@/content/product-landing-pages/constitutional-law-and-jurisprudence.json";
-import boundaryFirstChess from "@/content/product-landing-pages/boundary-first-chess.json";
-import boundaryFirstSoccer from "@/content/product-landing-pages/boundary-first-soccer.json";
-import corpusForge from "@/content/product-landing-pages/corpus-forge.json";
-import agencyRepresentationAudit from "@/content/product-landing-pages/agency-representation-audit.json";
-import schemathematics from "@/content/product-landing-pages/schemathematics.json";
-import groundNews from "@/content/product-landing-pages/ground-news.json";
-import gothamchess from "@/content/product-landing-pages/gothamchess.json";
-import rupaulWorldOfWonder from "@/content/product-landing-pages/rupaul-world-of-wonder.json";
-import augustaCitywatch from "@/content/product-landing-pages/augusta-citywatch.json";
-import boundaryFirstRobocup from "@/content/product-landing-pages/boundary-first-robocup.json";
-import georgiaTechGtri from "@/content/product-landing-pages/georgia-tech-gtri-research-bridge.json";
-import toposInstitute from "@/content/product-landing-pages/topos-institute-research-bridge.json";
-import santaFeInstitute from "@/content/product-landing-pages/santa-fe-institute-research-bridge.json";
-import southCarolinaLegalModernization from "@/content/product-landing-pages/south-carolina-legal-modernization-bridge.json";
-import weatherResearchOperations from "@/content/product-landing-pages/weather-research-operations-bridge.json";
+import boundaryFirstUx from "../content/product-landing-pages/boundary-first-ux.json";
+import softwareBeforeCode from "../content/product-landing-pages/software-before-code.json";
+import closureDrivenSoftwareDevelopment from "../content/product-landing-pages/closure-driven-software-development.json";
+import boundaryFirstWeather from "../content/product-landing-pages/boundary-first-weather.json";
+import constitutionalLaw from "../content/product-landing-pages/constitutional-law-and-jurisprudence.json";
+import boundaryFirstChess from "../content/product-landing-pages/boundary-first-chess.json";
+import boundaryFirstSoccer from "../content/product-landing-pages/boundary-first-soccer.json";
+import corpusForge from "../content/product-landing-pages/corpus-forge.json";
+import agencyRepresentationAudit from "../content/product-landing-pages/agency-representation-audit.json";
+import schemathematics from "../content/product-landing-pages/schemathematics.json";
+import groundNews from "../content/product-landing-pages/ground-news.json";
+import gothamchess from "../content/product-landing-pages/gothamchess.json";
+import rupaulWorldOfWonder from "../content/product-landing-pages/rupaul-world-of-wonder.json";
+import augustaCitywatch from "../content/product-landing-pages/augusta-citywatch.json";
+import boundaryFirstRobocup from "../content/product-landing-pages/boundary-first-robocup.json";
+import georgiaTechGtri from "../content/product-landing-pages/georgia-tech-gtri-research-bridge.json";
+import toposInstitute from "../content/product-landing-pages/topos-institute-research-bridge.json";
+import santaFeInstitute from "../content/product-landing-pages/santa-fe-institute-research-bridge.json";
+import southCarolinaLegalModernization from "../content/product-landing-pages/south-carolina-legal-modernization-bridge.json";
+import weatherResearchOperations from "../content/product-landing-pages/weather-research-operations-bridge.json";
 import {
   getRouteEligibleProductLandingEntries,
   type ProductLandingEntry,
-} from "@/lib/product-landing-routing";
+} from "./product-landing-routing";
 
 export type ProductLandingContent = Record<string, unknown>;
 
