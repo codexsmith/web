@@ -33,10 +33,10 @@ export const institutionalRoutes = [
     href: "/research",
   },
   {
-    title: "Institute",
+    title: "Laboratory",
     label: "Who governs this",
     description:
-      "Mission, provenance, governance, participation, standards, and the current institutional state.",
+      "Mission, provenance, governance, participation, standards, and the current institutional state of the laboratory.",
     href: "/about",
   },
 ] as const;
