@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Braces, Bug, GitBranch, Layers3, RefreshCcw, Search, ShieldCheck } from "lucide-react";
 import { LayerContext } from "@/components/public-interface/LayerContext";
+import { ProductLandingDirectory } from "@/components/product-landing/ProductLandingDirectory";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { featuredPublicWork, publicVocabulary, softwarePaths } from "@/lib/p1-public-shell";
@@ -92,6 +93,8 @@ export default function SoftwarePage() {
           </div>
         </div>
       </section>
+
+      <ProductLandingDirectory group="software" />
 
       <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-7xl">
