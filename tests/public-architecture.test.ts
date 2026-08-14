@@ -5,6 +5,8 @@ import {
   destinationPath,
   isNavigationItemActive,
 } from "../src/lib/site-navigation";
+import fs from "node:fs";
+import path from "node:path";
 
 describe("public architecture navigation contracts", () => {
   it("keeps Software as the preferred start route and preserves the five-item shell", () => {
@@ -45,10 +47,24 @@ describe("public architecture navigation contracts", () => {
   it("preserves the supporting section groupings used by progressive disclosure", () => {
     expect(isNavigationItemActive("/methods", "/software")).toBe(true);
     expect(isNavigationItemActive("/learn", "/software")).toBe(true);
+    expect(isNavigationItemActive("/learn/boundary-first", "/software")).toBe(true);
+    expect(isNavigationItemActive("/learn/distinction-space", "/software")).toBe(true);
     expect(isNavigationItemActive("/work/index", "/work")).toBe(true);
     expect(isNavigationItemActive("/publications", "/work")).toBe(true);
     expect(isNavigationItemActive("/trust/architecture", "/about")).toBe(true);
     expect(isNavigationItemActive("/accessibility", "/about")).toBe(true);
+  });
+
+  it("keeps the homepage depth map connected to guided learning scenes", () => {
+    const home = fs.readFileSync(
+      path.join(process.cwd(), "src/components/entrance/InstitutionalVestibuleHome.tsx"),
+      "utf8",
+    );
+    expect(home).toContain('href: "/learn/boundary-first"');
+    expect(home).toContain('entrance: "guided method"');
+    expect(home).toContain('href: "/learn/distinction-space"');
+    expect(home).toContain('entrance: "Distinction Space"');
+    expect(home).toContain("Learn carries you between depths.");
   });
 
   it("normalizes query and hash destinations before active-route comparison", () => {
