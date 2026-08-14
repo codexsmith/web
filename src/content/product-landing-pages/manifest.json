@@ -1,8 +1,8 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "kind": "product-landing-page-registry",
   "root": "src/content/product-landing-pages",
-  "description": "Manifest-backed registry for Boundary First Labs product, program, standard, practitioner, research, and collaboration landing pages. Routing and visibility policy are executable; renderer route activation remains separate.",
+  "description": "Manifest-backed registry for Boundary First Labs product, program, standard, practitioner, research, and collaboration landing pages. Routing, visibility policy, shared rendering, and physical route activation are implemented.",
   "pages": [
     {"id":"boundary-first-ux","slug":"boundary-first-ux","pageType":"public-standard","visibility":"public","status":"launch-candidate","collection":"active","routingEligibility":"public-candidate","file":"boundary-first-ux.json"},
     {"id":"software-before-code","slug":"software-before-code","pageType":"public-engineering-method","visibility":"public","status":"working-public-method","collection":"active","routingEligibility":"public-candidate","file":"software-before-code.json"},
@@ -37,21 +37,21 @@
     {"id":"learning-navigator","slug":"learning-navigator","pageType":"product-concept-landing","visibility":"private","status":"draft","collection":"reconciliation","routingEligibility":"hold","file":"learning-navigator.json"}
   ],
   "collections": {
-    "active": "Current public-facing product, method, practitioner, service, and research landing objects eligible for a future public route.",
-    "bridge": "Recipient-, institution-, community-, or target-class-specific collaboration pages. Direct-link routing is allowed only when the renderer route is activated; bridges never enter primary navigation or sitemap discovery automatically.",
-    "legacy-recovered": "Previously developed landing-page work preserved for migration. Terminology or hierarchy may be superseded; these records are blocked from public routing until reconciled.",
+    "active": "Current public-facing product, method, practitioner, service, and research landing objects served by the shared landing renderer.",
+    "bridge": "Recipient-, institution-, community-, or target-class-specific collaboration pages. Direct-link routing is active, but bridges never enter primary navigation or sitemap discovery automatically.",
+    "legacy-recovered": "Previously developed landing-page work preserved for migration. Terminology or hierarchy may be superseded; these records remain blocked from public routing until reconciled.",
     "reconciliation": "Current concept with unresolved overlap or naming against another portfolio object. Preserve content but block public routing until adjudicated."
   },
   "routingPolicy": {
     "implemented": true,
     "rulesImplemented": true,
-    "routesImplemented": false,
-    "rendererImplemented": false,
-    "publicRule": "visibility=public and routingEligibility=public-candidate is the only combination eligible for public routing, indexing, navigation, and sitemap inclusion after route activation.",
-    "unlistedRule": "visibility=unlisted and routingEligibility=unlisted-only permits direct-link routing after route activation but requires noindex/nofollow metadata and exclusion from primary navigation and sitemap discovery.",
-    "privateRule": "visibility=private or routingEligibility=hold is blocked from automatic routing and discovery and must resolve as unavailable if presented to the public router.",
+    "routesImplemented": true,
+    "rendererImplemented": true,
+    "publicRule": "visibility=public and routingEligibility=public-candidate is the only combination eligible for public routing, indexing, navigation eligibility, and sitemap inclusion.",
+    "unlistedRule": "visibility=unlisted and routingEligibility=unlisted-only permits direct-link routing but requires noindex/nofollow metadata and exclusion from primary navigation and sitemap discovery.",
+    "privateRule": "visibility=private or routingEligibility=hold is blocked from automatic routing and discovery and resolves as unavailable if presented to the public router.",
     "relationshipRule": "Every bridge must declare relationshipStatus. exploratory-no-affiliation and target-class-no-affiliation must never render language implying endorsement, partnership, sponsorship, review, or adoption; historical-project-no-current-affiliation may describe documented historical work but must not imply a current relationship.",
-    "activationRule": "No landing page may enter the sitemap merely because policy marks it eligible. routesImplemented and a renderer route must be active before public landing URLs are emitted.",
-    "notes": "The manifest and src/lib/product-landing-routing.ts now define executable route/visibility decisions. UI rendering, canonical metadata extraction from heterogeneous content objects, and physical catch-all route activation remain the next implementation layer."
+    "activationRule": "The shared catch-all renderer is active. Public sitemap URLs are emitted only for manifest entries whose visibility policy is indexable; unlisted and held entries remain excluded.",
+    "notes": "src/app/[...slug]/page.tsx is the physical route boundary. src/lib/product-landing-routing.ts owns visibility decisions, src/lib/product-landing-content.ts imports only route-eligible content, and ProductLandingRenderer renders public and bridge projections without exposing held records or internal metadata fields."
   }
 }
