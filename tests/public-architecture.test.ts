@@ -5,6 +5,15 @@ import {
   destinationPath,
   isNavigationItemActive,
 } from "../src/lib/site-navigation";
+import {
+  getHeldProductLandingEntries,
+  getProductLandingSitemapPaths,
+  getPublicProductLandingEntries,
+  getUnlistedProductLandingEntries,
+  productLandingManifest,
+  resolveProductLandingRoute,
+  validateProductLandingManifest,
+} from "../src/lib/product-landing-routing";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -70,5 +79,57 @@ describe("public architecture navigation contracts", () => {
   it("normalizes query and hash destinations before active-route comparison", () => {
     expect(destinationPath("/map?mode=atlas&view=domains#node")).toBe("/map");
     expect(destinationPath("/software#practice")).toBe("/software");
+  });
+});
+
+describe("product landing routing and visibility contracts", () => {
+  it("keeps the landing manifest internally coherent", () => {
+    expect(validateProductLandingManifest()).toEqual([]);
+    expect(productLandingManifest.routingPolicy.rulesImplemented).toBe(true);
+  });
+
+  it("admits public candidates as indexable routes", () => {
+    const decision = resolveProductLandingRoute("weather");
+    expect(decision?.routeKind).toBe("public");
+    expect(decision?.policy).toMatchObject({
+      routeEligible: true,
+      directLinkOnly: false,
+      indexable: true,
+      sitemapEligible: true,
+      navigationEligible: true,
+      robots: { index: true, follow: true },
+    });
+  });
+
+  it("keeps collaboration bridges direct-link-only and non-indexable", () => {
+    const decision = resolveProductLandingRoute("/bridge/ground-news?from=test#pilot");
+    expect(decision?.routeKind).toBe("unlisted");
+    expect(decision?.policy).toMatchObject({
+      routeEligible: true,
+      directLinkOnly: true,
+      indexable: false,
+      sitemapEligible: false,
+      navigationEligible: false,
+      robots: { index: false, follow: false },
+    });
+    expect(decision?.relationshipNotice).toContain("No affiliation");
+  });
+
+  it("blocks private and hold records from the public router", () => {
+    const decision = resolveProductLandingRoute("learning-navigator");
+    expect(decision?.routeKind).toBe("blocked");
+    expect(decision?.policy.routeEligible).toBe(false);
+    expect(decision?.policy.indexable).toBe(false);
+  });
+
+  it("preserves the three visibility populations", () => {
+    expect(getPublicProductLandingEntries().every((entry) => entry.visibility === "public")).toBe(true);
+    expect(getUnlistedProductLandingEntries().every((entry) => entry.visibility === "unlisted")).toBe(true);
+    expect(getHeldProductLandingEntries().every((entry) => entry.visibility === "private")).toBe(true);
+  });
+
+  it("does not emit landing sitemap URLs before renderer route activation", () => {
+    expect(productLandingManifest.routingPolicy.routesImplemented).toBe(false);
+    expect(getProductLandingSitemapPaths()).toEqual([]);
   });
 });
