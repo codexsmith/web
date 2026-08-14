@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, FlaskConical, ShieldCheck } from "lucide-react";
+import { ArrowLeft, ArrowRight, BriefcaseBusiness, Code2, FlaskConical, Microscope, ShieldCheck } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -8,6 +8,7 @@ import {
   getProductLandingTitle,
   type ProductLandingContent,
 } from "@/lib/product-landing-content";
+import { getProductLandingNavigationGroup } from "@/lib/product-landing-navigation";
 import type {
   ProductLandingEntry,
   ProductLandingRouteDecision,
@@ -93,6 +94,41 @@ function resolveLabel(value: unknown): string | null {
   return typeof value.label === "string" ? value.label : null;
 }
 
+function publicFrame(entry: ProductLandingEntry) {
+  const group = getProductLandingNavigationGroup(`/${entry.slug}`);
+  if (group === "software") {
+    return {
+      group,
+      label: "Software / public method",
+      href: "/software",
+      heroClass: "bg-primary text-primary-foreground",
+      eyebrowClass: "text-primary-foreground-muted",
+      bodyClass: "text-primary-foreground-secondary",
+      icon: Code2,
+    } as const;
+  }
+  if (group === "research") {
+    return {
+      group,
+      label: "Research / active program",
+      href: "/research",
+      heroClass: "bg-card/55 text-foreground",
+      eyebrowClass: "text-foreground-muted",
+      bodyClass: "text-foreground-muted",
+      icon: Microscope,
+    } as const;
+  }
+  return {
+    group: "work",
+    label: "Work / applied program",
+    href: "/work/index",
+    heroClass: "bg-background text-foreground",
+    eyebrowClass: "text-foreground-muted",
+    bodyClass: "text-foreground-muted",
+    icon: BriefcaseBusiness,
+  } as const;
+}
+
 export function ProductLandingRenderer({
   decision,
   content,
@@ -111,35 +147,64 @@ export function ProductLandingRenderer({
   const primaryCta = hero?.primaryCta ?? presentation.cta;
   const secondaryCta = hero?.secondaryCta;
   const bridge = entry.collection === "bridge";
-
+  const frame = publicFrame(entry);
+  const FrameIcon = frame.icon;
   const sections = orderedSections(presentation);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       {bridge ? <BridgeMasthead /> : <SiteHeader />}
 
-      <section className="border-b border-border px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
-              {eyebrow}
+      {!bridge ? (
+        <div className="border-b border-border bg-card/45 px-5 py-3 sm:px-8">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
+            <Link className="inline-flex min-h-9 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted hover:text-foreground" href={frame.href}>
+              <ArrowLeft aria-hidden="true" className="mr-2 h-3.5 w-3.5" />
+              {frame.label}
+            </Link>
+            <span className="inline-flex items-center gap-2 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              <FrameIcon aria-hidden="true" className="h-3.5 w-3.5" />
+              Governed public landing
             </span>
-            {policy.directLinkOnly ? (
-              <span className="border border-border px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
-                Direct-link brief
+          </div>
+        </div>
+      ) : null}
+
+      <section className={`border-b border-border px-5 py-16 sm:px-8 sm:py-24 ${bridge ? "bg-background text-foreground" : frame.heroClass}`}>
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.58fr)] lg:items-end">
+          <div>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className={`font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${bridge ? "text-foreground-muted" : frame.eyebrowClass}`}>
+                {eyebrow}
               </span>
-            ) : null}
+              {policy.directLinkOnly ? (
+                <span className="border border-border px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+                  Direct-link brief
+                </span>
+              ) : null}
+            </div>
+            <h1 className="mt-5 max-w-5xl font-serif text-5xl font-semibold leading-[0.96] tracking-tight sm:text-7xl">
+              {heroTitle}
+            </h1>
+            <p className={`mt-7 max-w-4xl text-lg leading-8 sm:text-xl ${bridge ? "text-foreground-muted" : frame.bodyClass}`}>
+              {heroDeck}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Cta inverted={!bridge && frame.group === "software"} value={primaryCta} />
+              <Cta inverted={!bridge && frame.group === "software"} secondary value={secondaryCta} />
+            </div>
           </div>
-          <h1 className="mt-5 max-w-5xl font-serif text-5xl font-semibold leading-[0.98] tracking-tight sm:text-7xl">
-            {heroTitle}
-          </h1>
-          <p className="mt-7 max-w-4xl text-lg leading-8 text-foreground-muted sm:text-xl">
-            {heroDeck}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Cta value={primaryCta} />
-            <Cta secondary value={secondaryCta} />
-          </div>
+          {!bridge ? (
+            <aside className={`border p-6 ${frame.group === "software" ? "border-primary-foreground/20 bg-primary-foreground/5" : "border-border bg-background/65"}`}>
+              <p className={`font-mono text-[9px] font-semibold uppercase tracking-[0.14em] ${frame.eyebrowClass}`}>
+                Representation class
+              </p>
+              <p className="mt-4 font-serif text-2xl font-semibold leading-8">{humanize(entry.pageType)}</p>
+              <p className={`mt-4 text-sm leading-7 ${frame.bodyClass}`}>
+                This page is a public projection of a governed program record. Its claims, status, and scope remain bounded by the underlying content object.
+              </p>
+            </aside>
+          ) : null}
         </div>
       </section>
 
@@ -202,10 +267,14 @@ function LandingSection({
     (typeof record?.title === "string" && record.title) || humanize(sectionKey);
   const anchor =
     (typeof record?.id === "string" && record.id) || sectionKey.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+  const consequential = sectionKey === "legalNotice" || sectionKey === "claimBoundary" || sectionKey === "claimRegimes";
 
   return (
-    <article className="scroll-mt-28 border border-border bg-card p-6 sm:p-8" id={anchor}>
-      <h2 className="font-serif text-2xl font-semibold sm:text-3xl">{heading}</h2>
+    <article className={`scroll-mt-28 border p-6 sm:p-8 ${consequential ? "border-foreground bg-card/70" : "border-border bg-card"}`} id={anchor}>
+      {consequential ? (
+        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">Claim boundary</p>
+      ) : null}
+      <h2 className={`${consequential ? "mt-2" : ""} font-serif text-2xl font-semibold sm:text-3xl`}>{heading}</h2>
       <div className="mt-5">
         <Value value={record ? stripPresentationKeys(record) : value} depth={0} />
       </div>
@@ -273,17 +342,20 @@ function Value({ value, depth }: { value: unknown; depth: number }) {
   return null;
 }
 
-function Cta({ value, secondary = false }: { value: unknown; secondary?: boolean }) {
+function Cta({ value, secondary = false, inverted = false }: { value: unknown; secondary?: boolean; inverted?: boolean }) {
   const label = resolveLabel(value);
   const href = resolveHref(value);
   if (!label || !href) return null;
+  const className = secondary
+    ? inverted
+      ? "border border-primary-foreground/25 bg-transparent text-primary-foreground"
+      : "border border-border bg-background text-foreground"
+    : inverted
+      ? "bg-primary-foreground text-primary"
+      : "bg-primary text-primary-foreground";
   return (
     <Link
-      className={`inline-flex min-h-11 items-center px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] ${
-        secondary
-          ? "border border-border bg-background text-foreground"
-          : "bg-primary text-primary-foreground"
-      }`}
+      className={`inline-flex min-h-11 items-center px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] ${className}`}
       href={href}
     >
       {label}
