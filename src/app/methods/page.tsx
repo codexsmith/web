@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CircleDot } from "lucide-react";
 import { PageMasthead } from "@/components/page-masthead";
+import { LayerContext } from "@/components/public-interface/LayerContext";
 import { ProjectionProvenance } from "@/components/public-interface/ProjectionProvenance";
 import { PublicPageFrame } from "@/components/public-interface/PublicPageFrame";
 import { SectionJumpNavigation } from "@/components/public-interface/SectionJumpNavigation";
@@ -25,6 +26,12 @@ const glossary = asRecordArray(payload.glossary);
 export default function MethodsPage() {
   return (
     <PublicPageFrame group="work">
+      <LayerContext
+        layer={{ index: 2, label: "Method" }}
+        outward={{ label: "Back to software", href: "/software" }}
+        inward={{ label: "Inspect proof & provenance", href: "/evidence" }}
+      />
+
       <PageMasthead
         deck={firstText(methodsPage.headline)}
         description={firstText(methodsPage.dek)}
@@ -161,17 +168,17 @@ export default function MethodsPage() {
           <div>
             <CircleDot aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
             <h2 className="mt-4 max-w-4xl font-serif text-3xl font-semibold sm:text-4xl">
-              {firstText(asRecord(methodsPage.closing).headline)}
+              What supports or limits the method?
             </h2>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-foreground-muted">
-              {firstText(asRecord(methodsPage.closing).body)}
+              Follow the method into its evidence standing, claim ceilings, provenance, and open promotion gates before moving deeper into the research architecture.
             </p>
           </div>
           <Link
             className="inline-flex min-h-12 items-center bg-primary px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-primary-foreground"
-            href="/map/refined"
+            href="/evidence"
           >
-            Browse the Atlas list view
+            Inspect proof & provenance
             <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />
           </Link>
         </div>
