@@ -2,6 +2,7 @@ import { getWorkRecord } from "@/lib/work-records";
 
 export type SandboxKind =
   | "representation-lab"
+  | "interaction-research"
   | "guided-sequence"
   | "bounded-testbed"
   | "research-operations"
@@ -36,6 +37,19 @@ export const sandboxEntries: SandboxEntry[] = [
     boundary:
       "A visualization can improve legibility or expose a defect in a representation. It does not by itself establish truth, evidence maturity, or universal transport.",
     href: "/sandbox/representation-lab",
+  },
+  {
+    id: "interaction-research",
+    title: "Interaction Research",
+    kind: "interaction-research",
+    status: "Design research / CONTEXT",
+    purpose:
+      "Test the Closure Engine, candidate interaction lexicon, representational motion laws, Boundary Timeline, and anti-charisma governance as bounded design-research objects.",
+    tests:
+      "Whether novel interface language can carry explicit operational semantics, preserve context, remain accessible, and refuse to manufacture stronger claims merely by becoming more compelling.",
+    boundary:
+      "These packets are experiential R&D. They are not production interaction standards, validated governance instruments, or evidence that the broader apparatus should be built.",
+    href: "/sandbox/interaction-research",
   },
   {
     id: "guided-introduction",

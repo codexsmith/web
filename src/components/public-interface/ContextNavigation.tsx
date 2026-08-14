@@ -42,6 +42,7 @@ const navigation = {
     links: [
       { label: "Research", href: "/research" },
       { label: "Representation lab", href: "/sandbox/representation-lab" },
+      { label: "Interaction research", href: "/sandbox/interaction-research" },
       { label: "Domain architecture", href: "/domains" },
       { label: "Map view", href: "/map" },
       { label: "List view", href: "/map/refined" },

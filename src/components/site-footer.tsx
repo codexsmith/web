@@ -46,6 +46,7 @@ export function SiteFooter() {
               ["Evidence", "/evidence"],
               ["Sandbox registry", "/sandbox"],
               ["Representation lab", "/sandbox/representation-lab"],
+              ["Interaction research", "/sandbox/interaction-research"],
               ["Domains", DOMAINS_HREF],
               ["Atlas map", ATLAS_HREF],
               ["Atlas list", ATLAS_LIST_HREF],
