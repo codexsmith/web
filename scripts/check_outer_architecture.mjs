@@ -61,6 +61,12 @@ function main() {
   ]);
 
   for (const criterion of acceptance.criteria ?? []) {
+    if (criterion.state !== "implemented-review-pending") {
+      fail(
+        errors,
+        `architecture criterion ${criterion.id ?? "unknown"}: expected implemented-review-pending`,
+      );
+    }
     for (const item of criterion.evidence ?? []) {
       if (typeof item.href !== "string" || !item.href.startsWith("/")) continue;
       const route = item.href.split(/[?#]/, 1)[0];
@@ -76,6 +82,8 @@ function main() {
   for (const label of ["Software", "Work", "Research", "Institute", "Collaborate"]) {
     requireText(errors, "src/lib/site-navigation.ts", `label: "${label}"`);
   }
+  requireText(errors, "src/lib/site-navigation.ts", '"/research": ["/research", "/evidence", "/theory", "/sandbox"');
+  requireText(errors, "src/lib/site-navigation.ts", '"/collaborate": ["/collaborate", "/inquire", "/outreach"]');
 
   requireText(errors, "src/app/methods/page.tsx", 'href: "/software"');
   requireText(errors, "src/app/methods/page.tsx", 'href: "/evidence"');
@@ -91,6 +99,8 @@ function main() {
   requireText(errors, "src/lib/inquiry.ts", "source");
   requireText(errors, "src/lib/inquiry.ts", "record");
   requireText(errors, "src/app/trust/page.tsx", 'href="/trust/architecture"');
+  requireText(errors, "src/app/trust/architecture/page.tsx", "implemented-review-pending");
+  requireText(errors, "src/app/trust/architecture/page.tsx", "CircleDashed");
 
   const vercelPath = path.join(ROOT, "vercel.json");
   if (fs.existsSync(vercelPath)) {
