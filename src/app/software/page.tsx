@@ -4,7 +4,7 @@ import { ArrowRight, Braces, Bug, GitBranch, Layers3, RefreshCcw, Search, Shield
 import { LayerContext } from "@/components/public-interface/LayerContext";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { softwarePaths, softwareVocabulary, featuredPublicWork } from "@/lib/p1-public-shell";
+import { featuredPublicWork, publicVocabulary, softwarePaths } from "@/lib/p1-public-shell";
 
 export const metadata: Metadata = {
   title: "Software",
@@ -80,10 +80,10 @@ export default function SoftwarePage() {
             {softwarePaths.map((path, index) => {
               const Icon = pathIcons[index] ?? GitBranch;
               return (
-                <Link className="group bg-background p-5" href={path.href} key={path.title}>
+                <Link className="group bg-background p-5" href={path.href} key={path.id}>
                   <Icon aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
-                  <p className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-foreground-muted">{path.label}</p>
-                  <h2 className="mt-2 font-serif text-2xl font-semibold">{path.title}</h2>
+                  <p className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-foreground-muted">{path.verb}</p>
+                  <h2 className="mt-2 font-serif text-2xl font-semibold">{path.prompt}</h2>
                   <p className="mt-3 text-sm leading-7 text-foreground-muted">{path.description}</p>
                   <span className="mt-6 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Follow path <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
                 </Link>
@@ -102,10 +102,10 @@ export default function SoftwarePage() {
               <p className="mt-5 max-w-xl text-sm leading-7 text-foreground-muted">The formal core sits deeper in the site. At the software layer, these words are practical handles for finding hidden assumptions before code turns them into defects.</p>
             </div>
             <div className="grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-              {softwareVocabulary.map((item) => (
-                <article className="bg-card p-5" key={item.term}>
-                  <h3 className="font-serif text-xl font-semibold">{item.term}</h3>
-                  <p className="mt-3 text-sm leading-6 text-foreground-muted">{item.definition}</p>
+              {publicVocabulary.map(([term, definition]) => (
+                <article className="bg-card p-5" key={term}>
+                  <h3 className="font-serif text-xl font-semibold">{term}</h3>
+                  <p className="mt-3 text-sm leading-6 text-foreground-muted">{definition}</p>
                 </article>
               ))}
             </div>
