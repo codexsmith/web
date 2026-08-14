@@ -1,0 +1,21 @@
+{
+  "slug": "boundary-first-engineering",
+  "title": "Boundary-First Engineering",
+  "status": "draft",
+  "visibility": "private",
+  "pageType": "recovered-method-landing",
+  "hero": {
+    "eyebrow": "BOUNDARY-FIRST ENGINEERING",
+    "headline": "Extract the boundary before optimizing the inside.",
+    "support": "A systems-engineering practice for discovering actors, distinctions, invariants, interfaces, failure states, responsibility, and closure conditions before implementation hardens them accidentally."
+  },
+  "sections": [
+    {"heading":"Own the problem complexity","body":"Do not create code complexity to compensate for an insufficient model of the domain."},
+    {"heading":"Build the delivery skeleton","body":"Clear the executable path from uncertainty to delivered artifact and expose blockers early."},
+    {"heading":"Make invariants explicit","body":"Architecture should preserve declared domain conditions across execution, composition, deployment, failure, and repair."},
+    {"heading":"Let certainty meet execution","body":"Work is ready when domain certainty and executable implementation meet at the correct granularity."},
+    {"heading":"Treat defects structurally","body":"A bug is one observable instance of a deeper failure relative to an expected invariant, boundary, or closure condition."}
+  ],
+  "cta":{"label":"Explore the engineering method"},
+  "notes":["Recovered from the earlier eight-page landing-page set.","Keep private until reconciled with /software and Software Before Code; this is the broader applied practice rather than the book/discipline landing."]
+}
