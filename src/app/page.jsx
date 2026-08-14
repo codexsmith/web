@@ -1,7 +1,7 @@
 import { GraphProvider } from "@/app/context/GraphContext";
 import { GuidedSequence } from "@/components/guided-sequence";
 import { GuidedSequenceV2 } from "@/components/guided-sequence-v2";
-import { SplashEntranceHome } from "@/components/entrance/SplashEntranceHome";
+import { InstitutionalVestibuleHome } from "@/components/entrance/InstitutionalVestibuleHome";
 import { phase12Launch } from "@/lib/phase12-launch";
 
 export const metadata = {
@@ -21,7 +21,7 @@ function parseInitialScene(value) {
 export default async function Home({ searchParams }) {
   const params = await searchParams;
 
-  // Preserve old scene links while the guided sequence moves to /learn.
+  // Preserve old scene links while the guided sequence remains available on /learn.
   if (params?.scene !== undefined || params?.version) {
     const initialScene = parseInitialScene(params?.scene);
     return params?.version === "v1" ? (
@@ -31,5 +31,5 @@ export default async function Home({ searchParams }) {
     );
   }
 
-  return <SplashEntranceHome />;
+  return <InstitutionalVestibuleHome />;
 }
