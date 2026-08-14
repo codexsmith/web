@@ -1,3 +1,5 @@
+import { getProductLandingNavigationGroup } from "@/lib/product-landing-navigation";
+
 export type SiteNavigationItem = {
   label: string;
   href: string;
@@ -34,6 +36,15 @@ export function isNavigationItemActive(
 ): boolean {
   const destination = destinationPath(href);
   if (pathname === destination) return true;
+
+  const landingGroup = getProductLandingNavigationGroup(pathname);
+  if (landingGroup) {
+    return (
+      (landingGroup === "software" && destination === "/software") ||
+      (landingGroup === "work" && destination === "/work") ||
+      (landingGroup === "research" && destination === "/research")
+    );
+  }
 
   const routeGroups: Record<string, string[]> = {
     "/software": ["/software", "/learn", "/audience", "/problem", "/practice", "/methods"],
