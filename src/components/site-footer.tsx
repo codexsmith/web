@@ -60,6 +60,7 @@ export function SiteFooter() {
               ["Mission", "/mission"],
               ["Governance", "/governance"],
               ["Institutional trust", "/trust"],
+              ["Architecture acceptance", "/trust/architecture"],
               ["Accessibility", "/accessibility"],
               ["People", "/people"],
               ["Outreach projections", "/outreach"],

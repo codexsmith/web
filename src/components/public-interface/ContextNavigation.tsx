@@ -33,6 +33,7 @@ const navigation = {
       { label: "Governance", href: "/governance" },
       { label: "People", href: "/people" },
       { label: "Trust", href: "/trust" },
+      { label: "Architecture", href: "/trust/architecture" },
       { label: "Accessibility", href: "/accessibility" },
       { label: "Public record", href: ATLAS_EVIDENCE_HREF },
     ],

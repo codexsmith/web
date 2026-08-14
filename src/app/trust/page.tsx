@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CheckCircle2, CircleDashed, ShieldCheck } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, CircleDashed, Network, ShieldCheck } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import governanceProjection from "@/content/public-projections/governance.json";
@@ -57,11 +57,12 @@ export default function TrustPage() {
       </section>
 
       <section className="border-b border-border bg-card/55 px-5 py-14 sm:px-8 sm:py-20">
-        <div className="mx-auto grid max-w-7xl gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-5">
           <TrustLink title="Governance" body="Authority, evidence, criticism, stewardship, correction, and formation boundaries." href="/governance" />
           <TrustLink title="Evidence grammar" body="Standing, claim ceilings, boundary conditions, provenance, and open evidence gates." href="/evidence" />
           <TrustLink title="Accessibility" body="The semantic accessibility commitments governing public interaction and visual representations." href="/accessibility" />
           <TrustLink title="Work index" body="The governed and provisional portfolio records currently exposed through the public Work schema." href="/work/index" />
+          <TrustLink title="Architecture acceptance" body="The outer architecture's invariants, definition-of-done criteria, structural checks, and remaining human review gates." href="/trust/architecture" />
         </div>
       </section>
 
