@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "id": "boundary-first-soccer",
+  "slug": "soccer",
+  "title": "Boundary-First Soccer",
+  "pageType": "public-practitioner-doctrine",
+  "status": "working-public-doctrine",
+  "visibility": "public",
+  "hero": {
+    "eyebrow": "BOUNDARY-FIRST SOCCER",
+    "headline": "Before asking where the ball should go, ask what boundary must change.",
+    "support": "A doctrine of space, pressure, possession, promotion, and repair for seeing soccer as the construction and transport of temporary closures through an adversarial field."
+  },
+  "sections": [
+    {"heading":"Space is actionable, not empty","body":"Relevant space depends on reachability, orientation, pressure, support, timing, and what becomes possible after the next action."},
+    {"heading":"Possession is a maintained structure","body":"Keeping the ball matters when the team preserves enough support and continuation to transport an advantage rather than merely record completed passes."},
+    {"heading":"Pressure authors futures","body":"Effective pressure changes the opponent's reachable action set and can make a later event predictable before it occurs."},
+    {"heading":"Promotion separates motion from progress","body":"An advantage is promoted when it survives transport into a more consequential team state."},
+    {"heading":"Repair is tactical intelligence","body":"When structure breaks, the next useful question is which repair path restores support, access, responsibility, or control."
+    }
+  ],
+  "proof": {
+    "built": ["Boundary-First Soccer practitioner doctrine", "Analyst vocabulary and tactical tagging concepts"],
+    "claimBoundary": "This is a practitioner doctrine and research on-ramp, not a claim to replace established coaching, performance analysis, or sports science."
+  },
+  "cta":{"label":"See the field structurally"}
+}
