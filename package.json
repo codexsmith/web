@@ -17,6 +17,7 @@
     "graph:dry-run": "python scripts/build_graph_context.py --dry-run",
     "graph:test": "python -m unittest scripts/test_build_graph_context.py",
     "test:ui": "vitest",
+    "test:contracts": "vitest run tests/public-architecture.test.ts",
     "ui:normalize": "python scripts/opacity_purge.py && python scripts/replace_email.py",
     "ui:check": "python scripts/check_ui_stabilization.py"
   },
@@ -34,7 +35,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
-    "rehype-highlight": "^7.0.2",
+    "rehype-highlight": "^7.0.1",
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
