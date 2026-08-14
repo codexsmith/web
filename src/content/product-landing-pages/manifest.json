@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "kind": "product-landing-page-registry",
   "root": "src/content/product-landing-pages",
   "description": "Content-only registry for Boundary First Labs product, program, standard, practitioner, research, and collaboration landing pages. Rendering and route resolution are intentionally separate concerns.",
@@ -13,12 +13,18 @@
     {"id":"boundary-first-soccer","slug":"soccer","pageType":"public-practitioner-doctrine","visibility":"public","status":"working-public-doctrine","collection":"active","routingEligibility":"public-candidate","file":"boundary-first-soccer.json"},
     {"id":"corpus-forge","slug":"corpus-forge","pageType":"public-research-operations-program","visibility":"public","status":"active-development","collection":"active","routingEligibility":"public-candidate","file":"corpus-forge.json"},
     {"id":"agency-representation-audit","slug":"agency-audit","pageType":"public-professional-service","visibility":"public","status":"pilot-intake","collection":"active","routingEligibility":"public-candidate","file":"agency-representation-audit.json"},
+    {"id":"schemathematics","slug":"schemathematics","pageType":"public-formal-research-program","visibility":"public","status":"research-program-draft","collection":"active","routingEligibility":"public-candidate","file":"schemathematics.json"},
 
     {"id":"ground-news","slug":"bridge/ground-news","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"ground-news.json"},
     {"id":"gothamchess","slug":"bridge/gothamchess","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"gothamchess.json"},
     {"id":"rupaul-world-of-wonder","slug":"bridge/rupaul-world-of-wonder","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"rupaul-world-of-wonder.json"},
     {"id":"augusta-citywatch","slug":"bridge/augusta-citywatch","pageType":"collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"augusta-citywatch.json"},
     {"id":"boundary-first-robocup","slug":"bridge/robocup","pageType":"research-collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"boundary-first-robocup.json"},
+    {"id":"georgia-tech-gtri-research-bridge","slug":"bridge/georgia-tech-gtri","pageType":"research-collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"georgia-tech-gtri-research-bridge.json"},
+    {"id":"topos-institute-research-bridge","slug":"bridge/topos-institute","pageType":"research-collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"topos-institute-research-bridge.json"},
+    {"id":"santa-fe-institute-research-bridge","slug":"bridge/santa-fe-institute","pageType":"research-collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"santa-fe-institute-research-bridge.json"},
+    {"id":"south-carolina-legal-modernization-bridge","slug":"bridge/south-carolina-legal-modernization","pageType":"institutional-collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"south-carolina-legal-modernization-bridge.json"},
+    {"id":"weather-research-operations-bridge","slug":"bridge/weather-research-operations","pageType":"research-collaboration-bridge","visibility":"unlisted","status":"draft","collection":"bridge","routingEligibility":"unlisted-only","file":"weather-research-operations-bridge.json"},
 
     {"id":"boundary-first-labs","slug":"boundary-first-labs","pageType":"recovered-institutional-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"boundary-first-labs.json"},
     {"id":"corpus-forge-workbench","slug":"corpus-forge-workbench","pageType":"recovered-product-landing","visibility":"private","status":"draft","collection":"legacy-recovered","routingEligibility":"hold","file":"corpus-forge-workbench.json"},
@@ -32,7 +38,7 @@
   ],
   "collections": {
     "active": "Current public-facing product, method, practitioner, service, and research landing objects eligible for a future public routing decision.",
-    "bridge": "Recipient- or community-specific collaboration pages. These may be routable by direct URL later but must not enter navigation or sitemap discovery solely because they exist.",
+    "bridge": "Recipient-, institution-, community-, or target-class-specific collaboration pages. These may be routable by direct URL later but must not enter navigation or sitemap discovery solely because they exist.",
     "legacy-recovered": "Previously developed landing-page work preserved for migration. Terminology or hierarchy may be superseded; no public route should be generated until reconciled with current canon.",
     "reconciliation": "Current concept with unresolved overlap or naming against another portfolio object. Preserve content but hold routing until adjudicated."
   },
@@ -41,6 +47,7 @@
     "publicRule": "visibility=public and routingEligibility=public-candidate may be considered by the future router; neither field alone creates a route.",
     "unlistedRule": "visibility=unlisted must remain absent from primary navigation and sitemap/indexing surfaces unless an explicit later policy overrides that behavior.",
     "privateRule": "visibility=private or routingEligibility=hold must never be exposed by automatic content discovery.",
-    "notes": "UI, route resolution, navigation, sitemap behavior, robots behavior, canonical URLs, and private/unlisted enforcement remain separate implementation work."
+    "relationshipRule": "A named bridge with relationshipStatus=exploratory-no-affiliation or target-class-no-affiliation must never be rendered in language that implies endorsement, partnership, sponsorship, review, or institutional adoption.",
+    "notes": "UI, route resolution, navigation, sitemap behavior, robots behavior, canonical URLs, relationship-status enforcement, and private/unlisted enforcement remain separate implementation work."
   }
 }
