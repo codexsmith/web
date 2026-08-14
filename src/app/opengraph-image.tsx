@@ -127,7 +127,6 @@ export default async function OpenGraphImage() {
             }}
           />
           {/* next/image is not supported inside ImageResponse. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt=""
             height={410}

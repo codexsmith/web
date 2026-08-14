@@ -9,17 +9,17 @@ export const ATLAS_EVIDENCE_HREF =
   "/map/refined?filter=evidence&stage=evidence";
 export const DOMAINS_HREF = "/domains";
 export const LANGUAGE_HREF = "/language";
-export const START_HREF = "/audience";
+export const START_HREF = "/software";
 export const RELATION_INDEX_HREF = "/relations";
 export const RELATIONS_HREF =
   "/map?mode=halo&node=boundary-theory&view=domains";
 
 export const PRIMARY_NAV_ITEMS: SiteNavigationItem[] = [
-  { label: "Start", href: START_HREF },
-  { label: "Learn", href: "/learn" },
+  { label: "Software", href: "/software" },
   { label: "Work", href: "/work" },
-  { label: "Explore", href: DOMAINS_HREF },
-  { label: "About", href: "/about" },
+  { label: "Research", href: "/research" },
+  { label: "Laboratory", href: "/about" },
+  { label: "Collaborate", href: "/collaborate" },
 ];
 
 export const IMMERSIVE_NAV_ITEMS = PRIMARY_NAV_ITEMS;
@@ -36,25 +36,11 @@ export function isNavigationItemActive(
   if (pathname === destination) return true;
 
   const routeGroups: Record<string, string[]> = {
-    [START_HREF]: ["/audience", "/problem"],
-    "/learn": ["/learn", "/publications", LANGUAGE_HREF],
-    "/domains": ["/domains", "/domain", "/map", "/relations", "/search"],
-    "/work": [
-      "/work",
-      "/help",
-      "/practice",
-      "/methods",
-      "/artifact",
-      "/collaborate",
-      "/business",
-    ],
-    "/about": [
-      "/about",
-      "/mission",
-      "/governance",
-      "/people",
-      ATLAS_EVIDENCE_HREF,
-    ],
+    "/software": ["/software", "/learn", "/audience", "/problem", "/practice", "/methods"],
+    "/work": ["/work", "/help", "/business", "/artifact", "/publications"],
+    "/research": ["/research", "/evidence", "/theory", "/sandbox", "/domains", "/domain", "/map", "/relations", LANGUAGE_HREF],
+    "/about": ["/about", "/mission", "/governance", "/people", "/trust", "/accessibility"],
+    "/collaborate": ["/collaborate", "/inquire", "/outreach"],
   };
   const group = routeGroups[destination];
   return Boolean(
