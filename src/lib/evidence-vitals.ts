@@ -170,6 +170,8 @@ export const evidenceSnapshot = {
   researchVersion: crossDomainResearchProgram.version,
 };
 
+export const EVIDENCE_SNAPSHOT_STAMP = `Corpus snapshot ${evidenceSnapshot.generated} / research v${evidenceSnapshot.researchVersion}`;
+
 export const corpusEvidenceVitals: EvidenceVital[] = [
   {
     id: "core-records",
@@ -261,6 +263,20 @@ export const claimEvidenceVitals: EvidenceVital[] = [
   researchEvidenceVitals.find((item) => item.id === "bounded-cases")!,
   researchEvidenceVitals.find((item) => item.id === "breakpoints")!,
 ];
+
+export const corpusEvidenceStatus = validateEvidenceStatus({
+  standing: "recorded",
+  appliesTo:
+    "The institutional corpus and register counts.",
+  claimCeiling:
+    "Inventory and status tracking only. Source presence does not establish validity or operation.",
+  boundaryConditions: [
+    "Records reflect inventoried source material across Boundary First collections.",
+    "No claim of operational proof is made by register presence alone.",
+  ],
+  provenanceRecords: [{ id: "institutional-register-summary" }],
+  lastReviewed: institutionalRegisterSummary.generated,
+});
 
 export const claimEvidenceStatus = validateEvidenceStatus({
   standing: "recorded",

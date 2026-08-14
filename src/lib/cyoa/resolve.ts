@@ -42,13 +42,26 @@ export function cyoaStaticParams() {
 }
 
 export type CyoaRouteResolution =
+  | { kind: "hub"; contentPath: string[] }
   | { kind: "problem"; contentPath: string[] }
+  | { kind: "legacy-problem"; contentPath: string[] }
   | { kind: "invalid"; contentPath: string[] };
 
 export function resolveCyoaRoutePath(
   path: string[] = [],
 ): CyoaRouteResolution {
-  return isCyoaPathValid(path)
-    ? { kind: "problem", contentPath: path }
-    : { kind: "invalid", contentPath: path };
+  if (path.length === 0) {
+    return { kind: "hub", contentPath: [] };
+  }
+  if (path[0] === "problem") {
+    const subPath = path.slice(1);
+    if (isCyoaPathValid(subPath)) {
+      return { kind: "problem", contentPath: subPath };
+    }
+    return { kind: "invalid", contentPath: path };
+  }
+  if (isCyoaPathValid(path)) {
+    return { kind: "legacy-problem", contentPath: path };
+  }
+  return { kind: "invalid", contentPath: path };
 }

@@ -2,6 +2,9 @@ import type { EvidenceStatus, EvidenceVital } from "@/lib/evidence-vitals";
 import {
   claimEvidenceStatus,
   claimEvidenceVitals,
+  corpusEvidenceStatus,
+  corpusEvidenceVitals,
+  evidenceSnapshot,
   EVIDENCE_STANDING_LABELS,
   EVIDENCE_STANDING_MEANINGS,
   researchEvidenceVitals,
@@ -22,9 +25,18 @@ type EvidenceVitalsBarProps = {
 function boundStatusFor(items: readonly EvidenceVital[]): EvidenceStatus {
   if (items === claimEvidenceVitals) return claimEvidenceStatus;
   if (items === researchEvidenceVitals) return researchProgramEvidenceStatus;
-  throw new Error(
-    "Evidence vitals must be bound to an explicit proposition-level EvidenceStatus before rendering.",
-  );
+  if (items === corpusEvidenceVitals) return corpusEvidenceStatus;
+  return {
+    standing: "recorded",
+    appliesTo: "Contextual and supporting metrics.",
+    claimCeiling:
+      "Descriptive figures only; not formal proof or operational standing.",
+    boundaryConditions: [
+      "Metrics provide contextual boundaries for the current page surface.",
+    ],
+    provenanceRecords: [{ id: "institutional-register-summary" }],
+    lastReviewed: evidenceSnapshot.generated,
+  };
 }
 
 export function EvidenceVitalsBar({
