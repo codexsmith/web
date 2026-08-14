@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0",
+  "id": "agency-representation-audit",
+  "slug": "agency-audit",
+  "title": "Agency and Representation Audit",
+  "pageType": "public-professional-service",
+  "status": "pilot-intake",
+  "visibility": "public",
+  "hero": {
+    "eyebrow": "AGENCY + REPRESENTATION AUDIT",
+    "headline": "When a system acts on people, make authority, consequence, contest, and repair visible.",
+    "support": "A structured audit for consequential software, AI, and institutional processes: who can act, what representation authorizes the action, who bears the consequence, what meaningful options remain, and who owns repair."
+  },
+  "sections": [
+    {"heading":"Map authority","body":"Identify who or what may act, where that authority came from, what it permits, and where delegation or automation changes the chain."},
+    {"heading":"Inspect representation","body":"Determine which categories, data, models, records, and interfaces stand in for the affected person or condition."},
+    {"heading":"Trace consequence","body":"Follow a decision beyond its immediate output into access, eligibility, status, workload, recourse, cost, risk, and downstream institutional behavior."},
+    {"heading":"Test contestability","body":"Ask whether an affected party can understand, challenge, suspend, correct, or reverse the process in practice rather than merely in policy."},
+    {"heading":"Assign repair","body":"A consequential system is incomplete when it can impose effects but cannot identify who must correct the representation and repair the resulting harm or error."}
+  ],
+  "pilot":{"shape":"Audit one bounded process involving eligibility, identity, access, moderation, benefits, automated management, or another consequential classification."},
+  "outputs":["agency map", "representation map", "consequence chain", "contest path", "repair ownership map", "defect register"],
+  "cta":{"label":"Audit one consequential process"}
+}
