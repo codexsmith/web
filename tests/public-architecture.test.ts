@@ -13,7 +13,7 @@ describe("public architecture navigation contracts", () => {
       "Software",
       "Work",
       "Research",
-      "Institute",
+      "Laboratory",
       "Collaborate",
     ]);
   });
