@@ -12,6 +12,7 @@
     "content:build": "node scripts/build_public_content.mjs",
     "content:check": "node scripts/build_public_content.mjs --check",
     "architecture:check": "node scripts/check_outer_architecture.mjs",
+    "acceptance:runtime": "node scripts/check_launch_readiness.mjs",
     "graph:build": "python scripts/build_graph_context.py",
     "graph:check": "python scripts/build_graph_context.py --check",
     "graph:dry-run": "python scripts/build_graph_context.py --dry-run",
