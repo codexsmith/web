@@ -39,8 +39,8 @@ export function isNavigationItemActive(
     "/software": ["/software", "/learn", "/audience", "/problem", "/practice", "/methods"],
     "/work": ["/work", "/help", "/business", "/artifact", "/publications"],
     "/research": ["/research", "/evidence", "/theory", "/domains", "/domain", "/map", "/relations", LANGUAGE_HREF],
-    "/about": ["/about", "/mission", "/governance", "/people"],
-    "/collaborate": ["/collaborate"],
+    "/about": ["/about", "/mission", "/governance", "/people", "/trust", "/accessibility"],
+    "/collaborate": ["/collaborate", "/inquire"],
   };
   const group = routeGroups[destination];
   return Boolean(

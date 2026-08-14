@@ -36,6 +36,7 @@ export function SiteFooter() {
               ["Methods", "/methods"],
               ["Guided introduction", "/learn"],
               ["Work & portfolio", "/work"],
+              ["Work index", "/work/index"],
             ]}
           />
           <FooterColumn
@@ -55,13 +56,19 @@ export function SiteFooter() {
               ["About the lab", "/about"],
               ["Mission", "/mission"],
               ["Governance", "/governance"],
+              ["Institutional trust", "/trust"],
+              ["Accessibility", "/accessibility"],
               ["People", "/people"],
-              ["Collaborate", "/collaborate"],
             ]}
           />
           <div>
             <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground-muted">Contact</h2>
             <ul className="mt-4 space-y-3 text-sm">
+              <li>
+                <Link href="/inquire" className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground">
+                  Contextual inquiry
+                </Link>
+              </li>
               <li>
                 <a href="mailto:contact@boundaryfirstlabs.com" className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground">
                   contact@boundaryfirstlabs.com
