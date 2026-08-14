@@ -1,0 +1,47 @@
+{
+  "slug": "bridge/weather-research-operations",
+  "title": "Weather Research & Operations Bridge",
+  "status": "draft",
+  "visibility": "unlisted",
+  "pageType": "research-collaboration-bridge",
+  "relationshipStatus": "target-class-no-affiliation",
+  "audience": {
+    "type": "institutional-class",
+    "name": "Operational meteorology, public weather infrastructure, emergency management, climate and weather research organizations"
+  },
+  "hero": {
+    "eyebrow": "WEATHER RESEARCH + OPERATIONS",
+    "headline": "Follow the boundary. Measure the defect.",
+    "support": "Boundary First Weather does not propose to replace operational numerical weather prediction. It proposes a bounded research layer for identifying where structural error concentrates, where ensemble disagreement matters, and where computational or observational attention may be most valuable."
+  },
+  "bridge": [
+    "Operational forecasting already depends on mature numerical models, data assimilation, observations, ensembles, verification, and expert interpretation.",
+    "Boundary First contributes candidate representations for fronts, transitions, regime boundaries, defect concentration, uncertainty transport, and consequence-aware refinement.",
+    "The central hypothesis is comparative: changing boundaries may provide a useful signal for where the modeled volume deserves additional computation, observation, or review.",
+    "The result must be tested against standard diagnostics and operational baselines rather than presented as an independent forecast replacement."
+  ],
+  "candidatePilot": {
+    "title": "Watch a forecast lose the boundary",
+    "scope": "Choose one archived event with meaningful forecast error or ensemble disagreement and reconstruct the evolution of a selected boundary across forecast cycles and observations.",
+    "outputs": [
+      "time-indexed observed and forecast boundary objects",
+      "structural error / defect maps",
+      "comparison with conventional verification metrics",
+      "ensemble disagreement and regime-transition analysis",
+      "ablation showing whether the boundary representation adds information beyond standard fields",
+      "operational usefulness review by a domain expert"
+    ]
+  },
+  "firstAsk": "Give us one archived weather problem where structural error, computational cost, forecast uncertainty, or local consequence is expensive enough to measure.",
+  "claimBoundary": [
+    "This page does not imply NOAA, NWS, ECMWF, WRF, MPAS, GraphCast, any emergency-management organization, or any weather institution endorses or collaborates with Boundary First Labs.",
+    "Boundary First Weather is an experimental representation and diagnostic program, not an operational forecast authority.",
+    "No claim of forecast superiority should be made without benchmark evidence on held-out cases.",
+    "A null result or reduction to existing diagnostics is a valid outcome and should narrow the program."
+  ],
+  "cta": {"label": "Bring one archived event"},
+  "notes": [
+    "Use as an unlisted target-class bridge until a specific weather organization is selected.",
+    "Complements the public Boundary First Weather landing page without duplicating its product narrative."
+  ]
+}
