@@ -9,11 +9,13 @@ import {
   getHeldProductLandingEntries,
   getProductLandingSitemapPaths,
   getPublicProductLandingEntries,
+  getRouteEligibleProductLandingEntries,
   getUnlistedProductLandingEntries,
   productLandingManifest,
   resolveProductLandingRoute,
   validateProductLandingManifest,
 } from "../src/lib/product-landing-routing";
+import { validateProductLandingContentRegistry } from "../src/lib/product-landing-content";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -82,10 +84,23 @@ describe("public architecture navigation contracts", () => {
   });
 });
 
-describe("product landing routing and visibility contracts", () => {
-  it("keeps the landing manifest internally coherent", () => {
+describe("product landing routing, rendering, and visibility contracts", () => {
+  it("keeps the landing manifest and route content registry coherent", () => {
     expect(validateProductLandingManifest()).toEqual([]);
+    expect(validateProductLandingContentRegistry()).toEqual([]);
     expect(productLandingManifest.routingPolicy.rulesImplemented).toBe(true);
+    expect(productLandingManifest.routingPolicy.routesImplemented).toBe(true);
+    expect(productLandingManifest.routingPolicy.rendererImplemented).toBe(true);
+  });
+
+  it("has one physical catch-all route for manifest-backed landing pages", () => {
+    const route = path.join(process.cwd(), "src/app/[...landing]/page.tsx");
+    const renderer = path.join(
+      process.cwd(),
+      "src/components/product-landing/ProductLandingRenderer.tsx",
+    );
+    expect(fs.existsSync(route)).toBe(true);
+    expect(fs.existsSync(renderer)).toBe(true);
   });
 
   it("admits public candidates as indexable routes", () => {
@@ -122,14 +137,20 @@ describe("product landing routing and visibility contracts", () => {
     expect(decision?.policy.indexable).toBe(false);
   });
 
-  it("preserves the three visibility populations", () => {
+  it("preserves the visibility populations and route inventory", () => {
     expect(getPublicProductLandingEntries().every((entry) => entry.visibility === "public")).toBe(true);
     expect(getUnlistedProductLandingEntries().every((entry) => entry.visibility === "unlisted")).toBe(true);
     expect(getHeldProductLandingEntries().every((entry) => entry.visibility === "private")).toBe(true);
+    expect(getRouteEligibleProductLandingEntries()).toHaveLength(20);
+    expect(getHeldProductLandingEntries()).toHaveLength(9);
   });
 
-  it("does not emit landing sitemap URLs before renderer route activation", () => {
-    expect(productLandingManifest.routingPolicy.routesImplemented).toBe(false);
-    expect(getProductLandingSitemapPaths()).toEqual([]);
+  it("emits only public landing pages into the sitemap after activation", () => {
+    const sitemapPaths = getProductLandingSitemapPaths();
+    expect(sitemapPaths).toHaveLength(10);
+    expect(sitemapPaths).toContain("/weather");
+    expect(sitemapPaths).toContain("/schemathematics");
+    expect(sitemapPaths.some((pathname) => pathname.startsWith("/bridge/"))).toBe(false);
+    expect(sitemapPaths).not.toContain("/learning-navigator");
   });
 });
