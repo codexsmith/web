@@ -1,13 +1,12 @@
-export type PublicShellWorkKind = "project" | "method" | "artifact" | "practice";
+import { phase12Launch } from "@/lib/phase12-launch";
 
 export type PublicShellWork = {
   id: string;
   title: string;
-  kind: PublicShellWorkKind;
+  kind: string;
   summary: string;
   href: string;
-  status: "Recorded" | "Operational" | "Externally verified";
-  period?: string;
+  status: string;
   role: string;
 };
 
@@ -68,7 +67,7 @@ export const softwarePaths = [
     description:
       "Name what must remain true, define admissible states and interfaces, and make failure and repair observable before implementation outruns understanding.",
     vocabulary: ["Invariant", "Contract", "State"],
-    href: "/artifact/consequence-bearing-development-and-ai-repair-loops",
+    href: phase12Launch.systemsAudit.relatedTrack.href,
   },
   {
     id: "change",
@@ -77,7 +76,7 @@ export const softwarePaths = [
     description:
       "Intervene without destroying the properties that need to survive the transition. Keep consequence, ownership, and repair paths visible.",
     vocabulary: ["Invariant", "Repair", "Closure"],
-    href: "/work#systems-audit",
+    href: phase12Launch.systemsAudit.secondaryAction.href,
   },
   {
     id: "learn",
@@ -90,38 +89,43 @@ export const softwarePaths = [
   },
 ] as const;
 
+const civilizationalMechanics = phase12Launch.featuredWork.find(
+  (item) => item.id === "civilizational-mechanics",
+);
+
+if (!civilizationalMechanics) {
+  throw new Error("Phase 12 launch binding must expose Civilizational Mechanics.");
+}
+
 export const featuredPublicWork: PublicShellWork[] = [
   {
-    id: "systems-audit",
-    title: "Systems Audit",
-    kind: "practice",
-    summary:
-      "A bounded practice for making system structure, obligations, defects, and repair paths inspectable before intervention.",
-    href: "/work#systems-audit",
-    status: "Operational",
+    id: phase12Launch.systemsAudit.id,
+    title: phase12Launch.systemsAudit.title,
+    kind: phase12Launch.systemsAudit.category,
+    summary: phase12Launch.systemsAudit.summary,
+    href: phase12Launch.systemsAudit.secondaryAction.href,
+    status: phase12Launch.systemsAudit.status,
     role: "Transformation / repeatable practice",
   },
   {
-    id: "consequence-bearing-development",
-    title: "Consequence-Bearing Development and AI Repair Loops",
-    kind: "artifact",
-    summary:
-      "A software-facing artifact connecting development practice, evidence, repair, and responsibility to the wider Boundary First program.",
-    href: "/artifact/consequence-bearing-development-and-ai-repair-loops",
-    status: "Recorded",
+    id: "ai-consequence-loop-audit",
+    title: phase12Launch.systemsAudit.relatedTrack.title,
+    kind: "Artifact · software practice",
+    summary: phase12Launch.systemsAudit.relatedTrack.description,
+    href: phase12Launch.systemsAudit.relatedTrack.href,
+    status: phase12Launch.systemsAudit.relatedTrack.status,
     role: "Communication / method bridge",
   },
   {
-    id: "civilizational-mechanics",
-    title: "Civilizational Mechanics",
-    kind: "artifact",
-    summary:
-      "A public learning pathway from displaced consequence and institutional agency into Boundary First mechanics and routes to repair.",
-    href: "/publications/civilizational-mechanics",
-    status: "Recorded",
+    id: civilizationalMechanics.id,
+    title: civilizationalMechanics.title,
+    kind: civilizationalMechanics.category,
+    summary: civilizationalMechanics.summary,
+    href: civilizationalMechanics.action.href,
+    status: civilizationalMechanics.status,
     role: "Communication / research bridge",
   },
-] as const;
+];
 
 export const publicVocabulary = [
   ["Boundary", "Where responsibility, state, representation, or consequence changes context."],
