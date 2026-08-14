@@ -41,6 +41,16 @@ function main() {
     fail(errors, "architecture acceptance status must remain implementation-review-pending until human review closes it");
   }
 
+  if (acceptance.validation?.automatedGate !== "npm run architecture:check") {
+    fail(errors, "architecture acceptance must identify the structural architecture gate");
+  }
+  if (acceptance.validation?.runtimeGate !== "npm run acceptance:runtime") {
+    fail(errors, "architecture acceptance must identify the production runtime gate");
+  }
+  if (acceptance.validation?.runtimeStatus !== "verified") {
+    fail(errors, "architecture acceptance runtime status must remain verified after Release 9 runtime acceptance");
+  }
+
   const requiredRoutes = new Set([
     "/",
     "/software",
@@ -104,6 +114,8 @@ function main() {
   requireText(errors, "src/app/trust/page.tsx", 'href="/trust/architecture"');
   requireText(errors, "src/app/trust/architecture/page.tsx", "criterion.state");
   requireText(errors, "src/app/trust/architecture/page.tsx", "CircleDashed");
+  requireText(errors, "src/app/trust/architecture/page.tsx", "runtimeStatus");
+  requireText(errors, ".github/workflows/review-gate.yml", "npm run acceptance:runtime");
 
   const vercelPath = path.join(ROOT, "vercel.json");
   if (fs.existsSync(vercelPath)) {
@@ -123,6 +135,7 @@ function main() {
   console.log("Outer architecture structural acceptance contracts pass");
   console.log(`Acceptance criteria encoded: ${acceptance.criteria.length}`);
   console.log(`Structural routes checked: ${requiredRoutes.size}`);
+  console.log(`Runtime acceptance record: ${acceptance.validation.runtimeStatus}`);
   console.log("Human usability/evidence/accessibility review remains intentionally open");
 }
 
