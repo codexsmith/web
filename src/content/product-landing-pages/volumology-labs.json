@@ -1,0 +1,24 @@
+{
+  "slug": "volumology-labs",
+  "title": "Volumology Labs",
+  "status": "archived",
+  "visibility": "private",
+  "pageType": "recovered-legacy-landing",
+  "hero": {
+    "eyebrow": "VOLUMOLOGY LABS",
+    "headline": "Map the volume through the boundaries that organize it.",
+    "support": "A recovered historical landing page for the geometry and physics research lane that explored regions, surfaces, flows, projection, closure, and defect as a route into larger boundary-first formalism."
+  },
+  "sections": [
+    {"heading":"Region before coordinate","body":"Start by identifying the region, its boundary, what crosses it, and what remains invariant before choosing a preferred coordinate description."},
+    {"heading":"Surface and volume together","body":"Volume behavior and boundary behavior are treated as coupled representations rather than unrelated scales."},
+    {"heading":"Projection as instrument","body":"Surface, shell, and volume projections can expose structure hidden by an undifferentiated interior description."},
+    {"heading":"From historical lane to current method","body":"The durable operational idea has been retained as Volumetric Mapping inside the broader Boundary First research program."}
+  ],
+  "cta":{"label":"Explore current research"},
+  "notes":[
+    "Recovered from the earlier eight-page landing-page set.",
+    "Legacy brand/name. Current preferred operational term is Volumetric Mapping; do not create a public Volumology Labs route without explicit reactivation.",
+    "Archived and private by default."
+  ]
+}
