@@ -31,6 +31,8 @@ const disclosureLayers = [
   {
     label: "Method",
     question: "How is the practice structured?",
+    entrance: "guided method",
+    href: "/learn/boundary-first",
   },
   {
     label: "Evidence",
@@ -47,6 +49,8 @@ const disclosureLayers = [
   {
     label: "Formal core",
     question: "What is the underlying structure?",
+    entrance: "Distinction Space",
+    href: "/learn/distinction-space",
   },
 ] as const;
 
@@ -152,22 +156,20 @@ export function InstitutionalVestibuleHome() {
                       <span className="block text-xs leading-5 text-primary-foreground-secondary">
                         {layer.question}
                       </span>
-                      {layer.href && layer.entrance ? (
-                        <Link
-                          className="mt-1 inline-flex items-center font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-foreground hover:underline"
-                          href={layer.href}
-                        >
-                          Enter through {layer.entrance}
-                          <ArrowRight aria-hidden="true" className="ml-1.5 h-3 w-3" />
-                        </Link>
-                      ) : null}
+                      <Link
+                        className="mt-1 inline-flex items-center font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-foreground hover:underline"
+                        href={layer.href}
+                      >
+                        Enter through {layer.entrance}
+                        <ArrowRight aria-hidden="true" className="ml-1.5 h-3 w-3" />
+                      </Link>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs leading-5 text-primary-foreground-muted">
-                <span>Choose an entrance. Follow the work inward as far as your question requires.</span>
+                <span>Choose an entrance. Learn carries you between depths. Follow the work inward as far as your question requires.</span>
                 <Link
                   className="inline-flex items-center font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-foreground hover:underline"
                   href="/collaborate"
