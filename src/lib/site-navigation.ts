@@ -18,7 +18,7 @@ export const PRIMARY_NAV_ITEMS: SiteNavigationItem[] = [
   { label: "Software", href: "/software" },
   { label: "Work", href: "/work" },
   { label: "Research", href: "/research" },
-  { label: "Institute", href: "/about" },
+  { label: "Laboratory", href: "/about" },
   { label: "Collaborate", href: "/collaborate" },
 ];
 
