@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BookOpen, CheckCircle2, CircleDashed, Network, ShieldCheck } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, CircleDashed, ShieldCheck } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import governanceProjection from "@/content/public-projections/governance.json";
