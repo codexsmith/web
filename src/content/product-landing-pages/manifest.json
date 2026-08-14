@@ -52,6 +52,6 @@
     "privateRule": "visibility=private or routingEligibility=hold is blocked from automatic routing and discovery and resolves as unavailable if presented to the public router.",
     "relationshipRule": "Every bridge must declare relationshipStatus. exploratory-no-affiliation and target-class-no-affiliation must never render language implying endorsement, partnership, sponsorship, review, or adoption; historical-project-no-current-affiliation may describe documented historical work but must not imply a current relationship.",
     "activationRule": "The shared catch-all renderer is active. Public sitemap URLs are emitted only for manifest entries whose visibility policy is indexable; unlisted and held entries remain excluded.",
-    "notes": "src/app/[...slug]/page.tsx is the physical route boundary. src/lib/product-landing-routing.ts owns visibility decisions, src/lib/product-landing-content.ts imports only route-eligible content, and ProductLandingRenderer renders public and bridge projections without exposing held records or internal metadata fields."
+    "notes": "src/app/[...landing]/page.tsx is the physical route boundary. src/lib/product-landing-routing.ts owns visibility decisions, src/lib/product-landing-content.ts imports only route-eligible content, and ProductLandingRenderer renders public and bridge projections without exposing held records or internal metadata fields."
   }
 }
