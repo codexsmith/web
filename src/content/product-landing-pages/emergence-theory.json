@@ -1,0 +1,25 @@
+{
+  "slug": "emergence-theory",
+  "title": "Emergence Theory",
+  "status": "draft",
+  "visibility": "private",
+  "pageType": "recovered-theory-landing",
+  "hero": {
+    "eyebrow": "EMERGENCE THEORY",
+    "headline": "Persistence becomes generative when a grammar can preserve and promote it.",
+    "support": "A recovered landing projection for the research program studying how stable distinctions, boundaries, invariants, defects, and admissible compositions become higher-level structure."
+  },
+  "sections": [
+    {"heading":"From persistence to structure","body":"Emergence is treated as more than aggregation: persistent lower-level structure can become a lawful primitive at a higher level when its relevant invariants survive promotion."},
+    {"heading":"Contexture matters","body":"What can emerge depends on the declared environment, available distinctions, admissible operations, boundaries, and closure conditions."},
+    {"heading":"Defect is informative","body":"Failure to close exposes the residue or obstruction that a higher-level description must account for."},
+    {"heading":"Micro to macro","body":"The research program studies projection, lift, boundary transport, invariant preservation, and promotion as a concrete bridge between levels of description."},
+    {"heading":"Current theoretical position","body":"Emergence Theory is now a major facet of Boundary Theory rather than the umbrella name for the entire research corpus."}
+  ],
+  "cta":{"label":"Explore Boundary Theory"},
+  "notes":[
+    "Recovered from the earlier eight-page landing-page set.",
+    "Historical hierarchy warning: Emergence Theory is no longer the top-level umbrella. Current top level is Boundary Theory.",
+    "Keep private until migrated into the current theory information architecture."
+  ]
+}
