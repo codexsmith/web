@@ -1,8 +1,12 @@
-"use client";
-
-import { useId, useMemo, useState } from "react";
-import { ChevronDown } from "lucide-react";
-import type { EvidenceVital, EvidenceVitalTone } from "@/lib/evidence-vitals";
+import type { EvidenceStatus, EvidenceVital } from "@/lib/evidence-vitals";
+import {
+  claimEvidenceStatus,
+  claimEvidenceVitals,
+  EVIDENCE_STANDING_LABELS,
+  EVIDENCE_STANDING_MEANINGS,
+  researchEvidenceVitals,
+  researchProgramEvidenceStatus,
+} from "@/lib/evidence-vitals";
 
 type EvidenceVitalsBarProps = {
   className?: string;
@@ -11,108 +15,159 @@ type EvidenceVitalsBarProps = {
   items: readonly EvidenceVital[];
   layout?: "inline" | "stacked";
   stamp?: string;
+  status?: EvidenceStatus;
   title: string;
 };
 
-const toneClasses: Record<EvidenceVitalTone, string> = {
-  standard: "bg-background",
-  bounded: "bg-card/70",
-  caution: "bg-accent/10",
-};
+function boundStatusFor(items: readonly EvidenceVital[]): EvidenceStatus {
+  if (items === claimEvidenceVitals) return claimEvidenceStatus;
+  if (items === researchEvidenceVitals) return researchProgramEvidenceStatus;
+  throw new Error(
+    "Evidence vitals must be bound to an explicit proposition-level EvidenceStatus before rendering.",
+  );
+}
 
 export function EvidenceVitalsBar({
   className = "",
   description,
-  eyebrow = "Evidence context",
+  eyebrow = "Evidence status",
   items,
-  layout = "inline",
   stamp,
+  status: statusOverride,
   title,
 }: EvidenceVitalsBarProps) {
-  const [expanded, setExpanded] = useState(false);
-  const panelId = useId();
-  const mobileSummary = useMemo(() => {
-    const prioritized = items.filter((item) => item.mobilePriority);
-    return (prioritized.length > 0 ? prioritized : items)
-      .slice(0, 2)
-      .map((item) => `${item.value} ${item.label.toLocaleLowerCase()}`)
-      .join(" / ");
-  }, [items]);
-  const layoutClasses =
-    layout === "inline"
-      ? "md:grid-cols-[minmax(13rem,0.72fr)_minmax(0,2.28fr)]"
-      : "grid-cols-1";
+  const status = statusOverride ?? boundStatusFor(items);
+  const standingLabel = EVIDENCE_STANDING_LABELS[status.standing];
+  const standingMeaning = EVIDENCE_STANDING_MEANINGS[status.standing];
 
   return (
-    <section
-      aria-label={title}
-      className={`overflow-hidden border border-border bg-border ${className}`}
-    >
-      <div className={`grid gap-px ${layoutClasses}`}>
-        <header className="bg-card/70 p-4 sm:p-5">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
-                {eyebrow}
-              </p>
-              <h2 className="mt-2 font-serif text-xl font-semibold leading-tight">
-                {title}
-              </h2>
-            </div>
-            <button
-              aria-controls={panelId}
-              aria-expanded={expanded}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center border border-border bg-background md:hidden"
-              onClick={() => setExpanded((current) => !current)}
-              type="button"
-            >
-              <span className="sr-only">
-                {expanded ? "Collapse" : "Expand"} {title}
-              </span>
-              <ChevronDown
-                aria-hidden="true"
-                className={`h-4 w-4 transition-transform ${
-                  expanded ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-          </div>
-          <p className="mt-2 font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.11em] text-foreground-muted md:hidden">
-            {mobileSummary}
+    <details className={`group border border-border bg-card ${className}`}>
+      <summary className="flex min-h-14 cursor-pointer list-none flex-wrap items-center justify-between gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden sm:px-5">
+        <span className="flex flex-wrap items-center gap-2">
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">
+            {eyebrow}
+          </span>
+          <span className="border border-border bg-background px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">
+            {standingLabel}
+          </span>
+          {status.pending ? (
+            <span className="border border-border bg-accent/10 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">
+              Evidence pending
+            </span>
+          ) : null}
+          <span className="text-xs font-medium text-foreground-muted">
+            {title}
+          </span>
+        </span>
+        <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+          <span className="group-open:hidden">Inspect boundaries +</span>
+          <span className="hidden group-open:inline">Close boundaries -</span>
+        </span>
+      </summary>
+      <div className="border-t border-border px-4 py-5 sm:px-5">
+        {description ? (
+          <p className="max-w-4xl text-xs leading-6 text-foreground-muted">
+            {description}
           </p>
-          {description ? (
-            <p className="mt-3 hidden text-xs leading-6 text-foreground-muted md:block">
-              {description}
-            </p>
+        ) : null}
+        <dl className="mt-4 grid gap-4 text-xs leading-6 sm:grid-cols-2">
+          <div>
+            <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Standing
+            </dt>
+            <dd className="mt-1 text-foreground-muted">
+              {standingLabel}. {standingMeaning}
+            </dd>
+          </div>
+          <div>
+            <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Applies to
+            </dt>
+            <dd className="mt-1 text-foreground-muted">
+              {status.appliesTo}
+            </dd>
+          </div>
+          <div className="sm:col-span-2">
+            <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Claim ceiling
+            </dt>
+            <dd className="mt-1 text-foreground-muted">
+              {status.claimCeiling}
+            </dd>
+          </div>
+          {status.boundaryConditions?.length ? (
+            <div className="sm:col-span-2">
+              <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+                Boundary conditions
+              </dt>
+              <dd className="mt-1">
+                <ul className="list-disc space-y-1 pl-4 text-foreground-muted">
+                  {status.boundaryConditions.map((condition) => (
+                    <li key={condition}>{condition}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
           ) : null}
-          {stamp ? (
-            <p className="mt-3 hidden font-mono text-[10px] uppercase leading-5 tracking-[0.11em] text-foreground-muted md:block">
-              {stamp}
-            </p>
+          {status.pending ? (
+            <div className="sm:col-span-2">
+              <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+                Pending gate · {EVIDENCE_STANDING_LABELS[status.pending.target]}
+              </dt>
+              <dd className="mt-1 text-foreground-muted">
+                {status.pending.gate}
+              </dd>
+            </div>
           ) : null}
-        </header>
-
-        <dl
-          className={`${
-            expanded ? "grid" : "hidden"
-          } grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-px bg-border md:grid`}
-          id={panelId}
-        >
+        </dl>
+        <dl className="mt-5 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item) => (
-            <div className={`p-4 sm:p-5 ${toneClasses[item.tone]}`} key={item.id}>
-              <dt className="font-mono text-[10px] font-semibold uppercase leading-5 tracking-[0.13em] text-foreground-muted">
+            <div className="bg-background p-4" key={item.id}>
+              <dt className="font-mono text-[9px] font-semibold uppercase leading-5 tracking-[0.12em] text-foreground-muted">
                 {item.label}
               </dt>
-              <dd className="mt-2 font-serif text-3xl font-semibold leading-none">
+              <dd className="mt-1 font-serif text-2xl font-semibold">
                 {item.value}
               </dd>
-              <p className="mt-3 text-xs leading-5 text-foreground-muted">
+              <p className="mt-2 text-xs leading-5 text-foreground-muted">
                 {item.detail}
               </p>
             </div>
           ))}
         </dl>
+        {status.publicReferences?.length ? (
+          <div className="mt-5 border-t border-border pt-4">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+              Named / external references
+            </p>
+            <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-2 text-xs">
+              {status.publicReferences.map((reference) => (
+                <li key={`${reference.kind}:${reference.label}`}>
+                  {reference.href ? (
+                    <a
+                      className="underline decoration-border underline-offset-4 hover:decoration-foreground"
+                      href={reference.href}
+                      rel={reference.kind === "external" ? "noreferrer" : undefined}
+                      target={reference.kind === "external" ? "_blank" : undefined}
+                    >
+                      {reference.label}
+                    </a>
+                  ) : (
+                    reference.label
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+        {status.lastReviewed || stamp ? (
+          <p className="mt-4 font-mono text-[9px] uppercase leading-5 tracking-[0.11em] text-foreground-muted">
+            {[status.lastReviewed ? `Reviewed ${status.lastReviewed}` : null, stamp]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+        ) : null}
       </div>
-    </section>
+    </details>
   );
 }

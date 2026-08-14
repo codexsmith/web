@@ -12,6 +12,62 @@ export type EvidenceVital = {
   mobilePriority?: boolean;
 };
 
+export type EvidenceStanding =
+  | "recorded"
+  | "operational"
+  | "externally-verified"
+  | "withdrawn";
+
+export type EvidencePending = {
+  target: "operational" | "externally-verified";
+  gate: string;
+};
+
+export type PublicEvidenceReference = {
+  kind: "named-internal" | "external";
+  label: string;
+  href?: string;
+};
+
+export type ProvenanceReference = {
+  id: string;
+  note?: string;
+};
+
+export type EvidenceStatus = {
+  standing: EvidenceStanding;
+  pending?: EvidencePending;
+  appliesTo: string;
+  claimCeiling: string;
+  boundaryConditions?: string[];
+  publicReferences?: PublicEvidenceReference[];
+  provenanceRecords: ProvenanceReference[];
+  lastReviewed?: string;
+  withdrawal?: {
+    date: string;
+    reason: string;
+    supersededBy?: string;
+  };
+};
+
+export const EVIDENCE_STANDING_LABELS: Record<EvidenceStanding, string> = {
+  recorded: "Recorded",
+  operational: "Operational",
+  "externally-verified": "Externally verified",
+  withdrawn: "Withdrawn",
+};
+
+export const EVIDENCE_STANDING_MEANINGS: Record<EvidenceStanding, string> = {
+  recorded:
+    "A traceable claim, artifact, event, or outcome exists in the provenance system.",
+  operational:
+    "The declared first-party evidence gate has been satisfied within the stated boundary conditions.",
+  "externally-verified":
+    "Qualifying independent evidence supports the stated claim within its declared scope.",
+  withdrawn:
+    "The claim is no longer asserted for current use; its historical provenance remains retained.",
+};
+
 type InstitutionalRegisterSummary = {
   schemaVersion: "boundary-first.institutional-register-summary.v1";
   status: string;
@@ -49,6 +105,49 @@ function validateSnapshot(summary: InstitutionalRegisterSummary) {
   if (!summary.generated.trim() || !summary.boundary.trim()) {
     throw new Error("Institutional evidence snapshot lacks boundary metadata.");
   }
+}
+
+export function validateEvidenceStatus(status: EvidenceStatus): EvidenceStatus {
+  if (!status.appliesTo.trim() || !status.claimCeiling.trim()) {
+    throw new Error("Evidence status requires an explicit referent and claim ceiling.");
+  }
+  if (status.provenanceRecords.length === 0) {
+    throw new Error("Evidence status must retain underlying provenance.");
+  }
+  if (status.standing === "withdrawn" && status.pending) {
+    throw new Error("Withdrawn revisions cannot retain an open promotion gate.");
+  }
+  if (status.standing === "withdrawn" && !status.withdrawal) {
+    throw new Error("Withdrawn revisions require withdrawal metadata.");
+  }
+  if (
+    status.pending?.target === "operational" &&
+    status.standing !== "recorded"
+  ) {
+    throw new Error("Only recorded claims may be pending operational promotion.");
+  }
+  if (
+    status.pending?.target === "externally-verified" &&
+    (status.standing === "externally-verified" ||
+      status.standing === "withdrawn")
+  ) {
+    throw new Error(
+      "Externally verified or withdrawn claims cannot be pending external verification.",
+    );
+  }
+  status.publicReferences?.forEach((reference) => {
+    if (!reference.label.trim()) {
+      throw new Error("Public evidence references require a label.");
+    }
+    if (
+      reference.kind === "external" &&
+      reference.href &&
+      !reference.href.startsWith("https://")
+    ) {
+      throw new Error("External evidence references require an HTTPS URL.");
+    }
+  });
+  return status;
 }
 
 validateSnapshot(institutionalRegisterSummary);
@@ -163,4 +262,46 @@ export const claimEvidenceVitals: EvidenceVital[] = [
   researchEvidenceVitals.find((item) => item.id === "breakpoints")!,
 ];
 
-export const EVIDENCE_SNAPSHOT_STAMP = `Corpus snapshot ${evidenceSnapshot.generated} / research v${evidenceSnapshot.researchVersion}`;
+export const claimEvidenceStatus = validateEvidenceStatus({
+  standing: "recorded",
+  appliesTo:
+    "The aggregate claim-evidence context shown across the Work and Publications indexes.",
+  claimCeiling:
+    "Collection-level evidence context only. Individual claims, projects, publications, and artifacts retain their own standing and claim ceiling.",
+  boundaryConditions: [
+    "The summary combines corpus source presence with bounded research indicators.",
+    "No child claim inherits the strongest standing represented anywhere in the collection.",
+  ],
+  provenanceRecords: [
+    { id: "institutional-register-summary" },
+    { id: "cross-domain-research-program" },
+  ],
+  lastReviewed: institutionalRegisterSummary.generated,
+});
+
+export const researchProgramEvidenceStatus = validateEvidenceStatus({
+  standing: "operational",
+  pending: {
+    target: "externally-verified",
+    gate: [
+      crossDomainResearchProgram.openGates[0],
+      crossDomainResearchProgram.openGates[2],
+      crossDomainResearchProgram.openGates[4],
+    ].join("; "),
+  },
+  appliesTo:
+    `${crossDomainResearchProgram.title} as an active bounded comparative research program.`,
+  claimCeiling: crossDomainResearchProgram.claimCeiling,
+  boundaryConditions: [
+    "Operational applies to the completed first-party comparative readings, explicit mapping decisions, and recorded breakpoints in this program.",
+    "It does not assert formal equivalence, universality, field superiority, or independent validation.",
+  ],
+  publicReferences: crossDomainResearchProgram.sources
+    .filter((source) => source.kind === "external-primary")
+    .map((source) => ({
+      kind: "external" as const,
+      label: source.label,
+      href: source.url,
+    })),
+  provenanceRecords: [{ id: "cross-domain-research-program" }],
+});

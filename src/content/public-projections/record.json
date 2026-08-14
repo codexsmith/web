@@ -165,45 +165,19 @@
       ]
     },
     "citationPolicy": {
-      "headlineRefs": [
-        "phr_1c02443c116d"
-      ],
       "headline": [
-        "Cite the inheritance. Bound the contribution."
-      ],
-      "purposeRefs": [
-        "phr_18495061678e"
+        "Cite the object, not the machinery."
       ],
       "purpose": [
-        "Boundary First Labs should make it easy for a reader to see what is inherited from established work, what is a comparison or synthesis, what is a BFL-specific construction, and what remains open or conjectural."
-      ],
-      "rulesRefs": [
-        "phr_c5e239904738",
-        "phr_a0c14c1d29bf",
-        "phr_8329266eb10c",
-        "phr_6fd0bb9b8b05",
-        "phr_3f619a5b5fed",
-        "phr_5514bc3bf6e2",
-        "phr_da1f24955948",
-        "phr_bc4db80b6e13",
-        "phr_caf5f9c2d868",
-        "phr_da7d9ccb5a18",
-        "phr_7afb5c25abee",
-        "phr_6ccfdd578bbb"
+        "Public citations should help a reader inspect evidence, intellectual inheritance, comparison, or a named source. Internal provenance remains recorded for reconstructibility without being repeated as reader-facing citation furniture."
       ],
       "rules": [
-        "Cite before claiming novelty.",
-        "Compare before differentiating.",
-        "Prefer primary sources, canonical literature, and the institutions' own descriptions of their work.",
-        "State whether a source is evidence, lineage, analogy, comparison, counterpoint, or current institutional context.",
-        "Do not use missing citations to manufacture novelty.",
-        "Do not treat structural resemblance as identity or derivation.",
-        "Do not claim that a broad framework replaces a mature field.",
-        "Use the established name when it is adequate; introduce a new term only when a new distinction is doing real work.",
-        "A first-principles derivation must still reconnect to prior art, formal literature, empirical evidence, or an explicit open question.",
-        "Every public comparison should state both the shared problem and the non-equivalence.",
-        "Current institutional comparisons are contextual, not endorsements, affiliations, or claims of peer status.",
-        "When a BFL claim is broader than its support, lower the claim rather than stretching the citation."
+        "Cite external factual, formal, legal, scientific, or historical claims when the source materially helps a reader evaluate the claim.",
+        "Name foundational or neighboring work when intellectual inheritance, comparison, or non-equivalence matters.",
+        "Link a named Boundary First document or artifact when the reader can inspect the object itself.",
+        "Do not expose projection ids, schema versions, hashes, migration notes, raw source paths, or other internal provenance machinery as public citations.",
+        "A citation supplies traceability; it does not raise a claim's maturity, authority, or evidence status.",
+        "When support is weaker than the claim, lower the claim rather than adding citation clutter."
       ],
       "citationClasses": [
         {
