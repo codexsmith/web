@@ -8,6 +8,7 @@ import { CorpusForgeLanding } from "@/components/product-landing/CorpusForgeLand
 import { ProductLandingRenderer } from "@/components/product-landing/ProductLandingRenderer";
 import { SchemathematicsLanding } from "@/components/product-landing/SchemathematicsLanding";
 import { SoccerLanding } from "@/components/product-landing/SoccerLanding";
+import { SoftwareBeforeCodeLanding } from "@/components/product-landing/SoftwareBeforeCodeLanding";
 import {
   getProductLandingContent,
   getProductLandingDescription,
@@ -136,6 +137,10 @@ export default async function ProductLandingPage({ params }: ProductLandingPageP
 
   if (decision.entry.id === "schemathematics" && decision.entry.collection !== "bridge") {
     return <SchemathematicsLanding />;
+  }
+
+  if (decision.entry.id === "software-before-code" && decision.entry.collection !== "bridge") {
+    return <SoftwareBeforeCodeLanding />;
   }
 
   return <ProductLandingRenderer content={content} decision={decision} />;
