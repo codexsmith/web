@@ -65,22 +65,22 @@
 }
 
 :root {
-  --background: #F8F3E8; /* brand-ivory */
-  --foreground: #0B1F3A; /* brand-navy */
-  --card: #F8FAFC; /* brand-white */
+  --background: #F8F3E8;
+  --foreground: #0B1F3A;
+  --card: #F8FAFC;
   --card-foreground: #0B1F3A;
   --popover: #F8FAFC;
   --popover-foreground: #0B1F3A;
   --primary: #0B1F3A;
   --primary-foreground: #F8F3E8;
-  --secondary: #1E293B; /* brand-slate */
+  --secondary: #1E293B;
   --secondary-foreground: #F8F3E8;
   --muted: #E2E8F0;
   --muted-foreground: #475569;
-  --accent: #C8A24A; /* brand-gold */
+  --accent: #C8A24A;
   --accent-foreground: #111111;
-  --destructive: #9F2D20; /* brand-red */
-  --border: #1E293B; /* brand-slate */
+  --destructive: #9F2D20;
+  --border: #1E293B;
   --input: #1E293B;
   --ring: #0B1F3A;
   --chart-1: #2563EB;
@@ -176,4 +176,22 @@
 .text-\[10px\] {
   font-size: 0.6875rem;
   line-height: 1rem;
+}
+
+/* BFUX sequence rails are semantic paths, not scrollable text strips. */
+[aria-label="Boundary First timeline stages"] {
+  flex-wrap: wrap !important;
+  overflow-x: visible !important;
+  padding-bottom: 0 !important;
+  scrollbar-width: none;
+}
+
+[aria-label="Boundary First timeline stages"]::-webkit-scrollbar,
+section[aria-label="Boundary First UX sandbox session"] .overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+
+section[aria-label="Boundary First UX sandbox session"] .overflow-x-auto {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
