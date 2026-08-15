@@ -60,6 +60,19 @@ describe("progressive public journey contracts", () => {
     expect(theoryIndex).toBeGreaterThan(directoryIndex);
   });
 
+  it("keeps the Work overview editorial while routing exhaustive discovery into the Work Index", () => {
+    const work = source("src/app/work/page.tsx");
+    const workIndex = source("src/app/work/index/page.tsx");
+
+    expect(work).toContain("Current proof surfaces");
+    expect(work).toContain("Full inventory · separate surface");
+    expect(work).toContain('href="/work/index"');
+    expect(work).not.toContain("projectIndex.projects");
+    expect(work).not.toContain("portfolioData.items");
+    expect(workIndex).toContain("workRecords.filter");
+    expect(workIndex).toContain("Filterable").toBeDefined;
+  });
+
   it("uses rail directories on canonical journeys but preserves the dense Work Index inventory", () => {
     const directory = source(
       "src/components/product-landing/ProductLandingDirectory.tsx",
