@@ -87,16 +87,13 @@ const customProjections = {
   "boundary-first-ux": "BoundaryFirstUxLanding.tsx",
   "boundary-first-chess": "ChessLanding.tsx",
   "boundary-first-soccer": "SoccerLanding.tsx",
+  "boundary-first-weather": "WeatherLanding.tsx",
   "closure-driven-software-development": "ClosureDrivenLanding.tsx",
+  "constitutional-law-and-jurisprudence": "LawLanding.tsx",
   "corpus-forge": "CorpusForgeLanding.tsx",
   schemathematics: "SchemathematicsLanding.tsx",
   "software-before-code": "SoftwareBeforeCodeLanding.tsx",
 } as const;
-
-const genericPublicIds = [
-  "boundary-first-weather",
-  "constitutional-law-and-jurisprudence",
-] as const;
 
 describe("product landing governed-content contracts", () => {
   it("keeps public content identity, route, visibility, and maturity aligned with the manifest", () => {
@@ -143,7 +140,7 @@ describe("product landing governed-content contracts", () => {
 });
 
 describe("product landing projection contracts", () => {
-  it("routes authored projections explicitly and leaves the two reference surfaces on the shared renderer", () => {
+  it("routes every current public landing through an explicit authored projection", () => {
     const routeSource = fs.readFileSync(
       path.join(process.cwd(), "src/app/[...landing]/page.tsx"),
       "utf8",
@@ -151,10 +148,6 @@ describe("product landing projection contracts", () => {
 
     for (const id of Object.keys(customProjections)) {
       expect(routeSource, id).toContain(`decision.entry.id === "${id}"`);
-    }
-
-    for (const id of genericPublicIds) {
-      expect(routeSource, id).not.toContain(`decision.entry.id === "${id}"`);
     }
   });
 
@@ -185,7 +178,25 @@ describe("product landing projection contracts", () => {
     }
   });
 
-  it("renders priority legal notice before the public rail and keeps strategy metadata out of generic body sections", () => {
+  it("keeps the authored Law legal notice directly below the hero and before the public field guide", () => {
+    const law = fs.readFileSync(
+      path.join(
+        process.cwd(),
+        "src/components/product-landing/LawLanding.tsx",
+      ),
+      "utf8",
+    );
+
+    const noticeIndex = law.indexOf('id="legal-notice"');
+    const railIndex = law.indexOf(
+      '<PublicLandingRail currentId="constitutional-law-and-jurisprudence" />',
+    );
+
+    expect(noticeIndex).toBeGreaterThan(-1);
+    expect(railIndex).toBeGreaterThan(noticeIndex);
+  });
+
+  it("keeps the fallback renderer legally ordered and strategy metadata out of body sections", () => {
     const renderer = fs.readFileSync(
       path.join(
         process.cwd(),
