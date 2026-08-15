@@ -51,26 +51,7 @@ export default function SoftwarePage() {
 
       <SoftwareProblemRouter />
 
-      <section className="border-b border-border bg-card/45 px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[minmax(15rem,0.55fr)_minmax(0,1.45fr)] lg:items-start">
-            <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-                Public methods & instruments
-              </p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
-                Go deeper after the job is clear.
-              </h2>
-              <p className="mt-5 text-sm leading-7 text-foreground-muted">
-                The public software projections make particular parts of the practice inspectable. They are not prerequisites for beginning with a concrete problem.
-              </p>
-            </div>
-            <div id="software-public-directory">
-              <ProductLandingDirectory group="software" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <ProductLandingDirectory group="software" variant="rail" />
 
       <section className="border-b border-border px-5 py-12 sm:px-8 sm:py-16">
         <div className="mx-auto max-w-7xl">
