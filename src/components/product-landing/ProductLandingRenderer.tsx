@@ -1,7 +1,16 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, BriefcaseBusiness, Code2, FlaskConical, Microscope, ShieldCheck } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BriefcaseBusiness,
+  Code2,
+  FlaskConical,
+  Microscope,
+  ShieldCheck,
+} from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { PublicLandingRail } from "@/components/product-landing/PublicLandingRail";
 import {
   getProductLandingDescription,
   getProductLandingPresentationContent,
@@ -18,6 +27,7 @@ const hiddenKeys = new Set([
   "id",
   "slug",
   "status",
+  "statusLabel",
   "visibility",
   "pageType",
   "version",
@@ -27,12 +37,14 @@ const hiddenKeys = new Set([
   "metadata",
   "sourceKeys",
   "relationshipStatus",
+  "cta",
 ]);
 
 const preferredSectionOrder = [
   "legalNotice",
   "opening",
   "openingClaim",
+  "sections",
   "executiveBrief",
   "definition",
   "problem",
@@ -56,7 +68,6 @@ const preferredSectionOrder = [
   "claimRegimes",
   "collaboration",
   "firstAsk",
-  "cta",
   "closing",
 ];
 
@@ -69,6 +80,20 @@ function humanize(key: string): string {
     .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
     .replace(/[-_]/g, " ")
     .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function firstString(...values: unknown[]): string | undefined {
+  return values.find(
+    (value): value is string =>
+      typeof value === "string" && value.trim().length > 0,
+  );
 }
 
 function heroValue(
@@ -84,14 +109,30 @@ function heroValue(
 
 function resolveHref(value: unknown): string | null {
   if (!isRecord(value)) return null;
-  if (typeof value.href === "string" && value.href.startsWith("/")) return value.href;
-  if (typeof value.target === "string" && value.target.trim()) return `#${value.target}`;
+  if (typeof value.href === "string" && value.href.startsWith("/")) {
+    return value.href;
+  }
+  if (typeof value.target === "string" && value.target.trim()) {
+    return `#${value.target}`;
+  }
   return null;
 }
 
 function resolveLabel(value: unknown): string | null {
   if (!isRecord(value)) return null;
   return typeof value.label === "string" ? value.label : null;
+}
+
+function resolveStatusLabel(
+  presentation: Record<string, unknown>,
+  entry: ProductLandingEntry,
+): string {
+  const product = isRecord(presentation.product) ? presentation.product : null;
+  const program = isRecord(presentation.program) ? presentation.program : null;
+
+  return (
+    firstString(product?.statusLabel, program?.statusLabel) ?? humanize(entry.status)
+  );
 }
 
 function publicFrame(entry: ProductLandingEntry) {
@@ -150,6 +191,7 @@ export function ProductLandingRenderer({
   const frame = publicFrame(entry);
   const FrameIcon = frame.icon;
   const sections = orderedSections(presentation);
+  const statusLabel = resolveStatusLabel(presentation, entry);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -158,7 +200,10 @@ export function ProductLandingRenderer({
       {!bridge ? (
         <div className="border-b border-border bg-card/45 px-5 py-3 sm:px-8">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
-            <Link className="inline-flex min-h-9 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted hover:text-foreground" href={frame.href}>
+            <Link
+              className="inline-flex min-h-9 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted hover:text-foreground"
+              href={frame.href}
+            >
               <ArrowLeft aria-hidden="true" className="mr-2 h-3.5 w-3.5" />
               {frame.label}
             </Link>
@@ -170,13 +215,26 @@ export function ProductLandingRenderer({
         </div>
       ) : null}
 
-      <section className={`border-b border-border px-5 py-16 sm:px-8 sm:py-24 ${bridge ? "bg-background text-foreground" : frame.heroClass}`}>
+      <section
+        className={`border-b border-border px-5 py-16 sm:px-8 sm:py-24 ${
+          bridge ? "bg-background text-foreground" : frame.heroClass
+        }`}
+      >
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.58fr)] lg:items-end">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className={`font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${bridge ? "text-foreground-muted" : frame.eyebrowClass}`}>
+              <span
+                className={`font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${
+                  bridge ? "text-foreground-muted" : frame.eyebrowClass
+                }`}
+              >
                 {eyebrow}
               </span>
+              {!bridge ? (
+                <span className="border border-current/20 px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] opacity-75">
+                  {statusLabel}
+                </span>
+              ) : null}
               {policy.directLinkOnly ? (
                 <span className="border border-border px-2.5 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
                   Direct-link brief
@@ -186,37 +244,80 @@ export function ProductLandingRenderer({
             <h1 className="mt-5 max-w-5xl font-serif text-5xl font-semibold leading-[0.96] tracking-tight sm:text-7xl">
               {heroTitle}
             </h1>
-            <p className={`mt-7 max-w-4xl text-lg leading-8 sm:text-xl ${bridge ? "text-foreground-muted" : frame.bodyClass}`}>
+            <p
+              className={`mt-7 max-w-4xl text-lg leading-8 sm:text-xl ${
+                bridge ? "text-foreground-muted" : frame.bodyClass
+              }`}
+            >
               {heroDeck}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Cta inverted={!bridge && frame.group === "software"} value={primaryCta} />
-              <Cta inverted={!bridge && frame.group === "software"} secondary value={secondaryCta} />
+              <Cta
+                fallbackHref={bridge ? "/collaborate" : frame.href}
+                inverted={!bridge && frame.group === "software"}
+                value={primaryCta}
+              />
+              <Cta
+                inverted={!bridge && frame.group === "software"}
+                secondary
+                value={secondaryCta}
+              />
             </div>
           </div>
           {!bridge ? (
-            <aside className={`border p-6 ${frame.group === "software" ? "border-primary-foreground/20 bg-primary-foreground/5" : "border-border bg-background/65"}`}>
-              <p className={`font-mono text-[9px] font-semibold uppercase tracking-[0.14em] ${frame.eyebrowClass}`}>
+            <aside
+              className={`border p-6 ${
+                frame.group === "software"
+                  ? "border-primary-foreground/20 bg-primary-foreground/5"
+                  : "border-border bg-background/65"
+              }`}
+            >
+              <p
+                className={`font-mono text-[9px] font-semibold uppercase tracking-[0.14em] ${frame.eyebrowClass}`}
+              >
                 Representation class
               </p>
-              <p className="mt-4 font-serif text-2xl font-semibold leading-8">{humanize(entry.pageType)}</p>
-              <p className={`mt-4 text-sm leading-7 ${frame.bodyClass}`}>
-                This page is a public projection of a governed program record. Its claims, status, and scope remain bounded by the underlying content object.
+              <p className="mt-4 font-serif text-2xl font-semibold leading-8">
+                {humanize(entry.pageType)}
               </p>
+              <dl className={`mt-5 grid gap-4 text-sm ${frame.bodyClass}`}>
+                <div>
+                  <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] opacity-70">
+                    Public maturity
+                  </dt>
+                  <dd className="mt-1 leading-6">{statusLabel}</dd>
+                </div>
+                <div>
+                  <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] opacity-70">
+                    Projection rule
+                  </dt>
+                  <dd className="mt-1 leading-6">
+                    Claims and scope remain bounded by the governed content object;
+                    public visibility does not erase draft, pilot, or research status.
+                  </dd>
+                </div>
+              </dl>
             </aside>
           ) : null}
         </div>
       </section>
 
+      {!bridge ? <PublicLandingRail currentId={entry.id} /> : null}
+
       {relationshipNotice ? (
         <section className="border-b border-border bg-card/55 px-5 py-6 sm:px-8">
           <div className="mx-auto flex max-w-7xl gap-4">
-            <ShieldCheck aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-foreground-muted" />
+            <ShieldCheck
+              aria-hidden="true"
+              className="mt-1 h-5 w-5 shrink-0 text-foreground-muted"
+            />
             <div>
               <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
                 Relationship boundary
               </p>
-              <p className="mt-2 max-w-4xl text-sm leading-7">{relationshipNotice}</p>
+              <p className="mt-2 max-w-4xl text-sm leading-7">
+                {relationshipNotice}
+              </p>
             </div>
           </div>
         </section>
@@ -255,6 +356,12 @@ function orderedSections(
   });
 }
 
+function isNarrativeSection(
+  value: unknown,
+): value is { heading: string; body?: unknown } {
+  return isRecord(value) && typeof value.heading === "string";
+}
+
 function LandingSection({
   sectionKey,
   value,
@@ -262,19 +369,64 @@ function LandingSection({
   sectionKey: string;
   value: unknown;
 }) {
+  if (
+    sectionKey === "sections" &&
+    Array.isArray(value) &&
+    value.length > 0 &&
+    value.every(isNarrativeSection)
+  ) {
+    return (
+      <>
+        {value.map((section, index) => (
+          <article
+            className="scroll-mt-28 border border-border bg-card p-6 sm:p-8"
+            id={slugify(section.heading) || `section-${index + 1}`}
+            key={`${section.heading}-${index}`}
+          >
+            <h2 className="font-serif text-2xl font-semibold sm:text-3xl">
+              {section.heading}
+            </h2>
+            {section.body !== undefined ? (
+              <div className="mt-5">
+                <Value depth={0} value={section.body} />
+              </div>
+            ) : null}
+          </article>
+        ))}
+      </>
+    );
+  }
+
   const record = isRecord(value) ? value : null;
   const heading =
     (typeof record?.title === "string" && record.title) || humanize(sectionKey);
   const anchor =
-    (typeof record?.id === "string" && record.id) || sectionKey.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
-  const consequential = sectionKey === "legalNotice" || sectionKey === "claimBoundary" || sectionKey === "claimRegimes";
+    (typeof record?.id === "string" && record.id) ||
+    sectionKey.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+  const consequential =
+    sectionKey === "legalNotice" ||
+    sectionKey === "claimBoundary" ||
+    sectionKey === "claimRegimes";
 
   return (
-    <article className={`scroll-mt-28 border p-6 sm:p-8 ${consequential ? "border-foreground bg-card/70" : "border-border bg-card"}`} id={anchor}>
+    <article
+      className={`scroll-mt-28 border p-6 sm:p-8 ${
+        consequential ? "border-foreground bg-card/70" : "border-border bg-card"
+      }`}
+      id={anchor}
+    >
       {consequential ? (
-        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">Claim boundary</p>
+        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+          Claim boundary
+        </p>
       ) : null}
-      <h2 className={`${consequential ? "mt-2" : ""} font-serif text-2xl font-semibold sm:text-3xl`}>{heading}</h2>
+      <h2
+        className={`${
+          consequential ? "mt-2" : ""
+        } font-serif text-2xl font-semibold sm:text-3xl`}
+      >
+        {heading}
+      </h2>
       <div className="mt-5">
         <Value value={record ? stripPresentationKeys(record) : value} depth={0} />
       </div>
@@ -282,7 +434,9 @@ function LandingSection({
   );
 }
 
-function stripPresentationKeys(record: Record<string, unknown>): Record<string, unknown> {
+function stripPresentationKeys(
+  record: Record<string, unknown>,
+): Record<string, unknown> {
   return Object.fromEntries(
     Object.entries(record).filter(
       ([key]) => key !== "title" && key !== "id" && !hiddenKeys.has(key),
@@ -292,7 +446,11 @@ function stripPresentationKeys(record: Record<string, unknown>): Record<string, 
 
 function Value({ value, depth }: { value: unknown; depth: number }) {
   if (typeof value === "string") {
-    return <p className="max-w-4xl text-base leading-8 text-foreground-muted">{value}</p>;
+    return (
+      <p className="max-w-4xl text-base leading-8 text-foreground-muted">
+        {value}
+      </p>
+    );
   }
   if (typeof value === "number" || typeof value === "boolean") {
     return <p className="font-mono text-sm">{String(value)}</p>;
@@ -302,7 +460,10 @@ function Value({ value, depth }: { value: unknown; depth: number }) {
       return (
         <ul className="grid gap-3 md:grid-cols-2">
           {value.map((item, index) => (
-            <li className="border-l-2 border-border pl-4 text-sm leading-7 text-foreground-muted" key={`${item}-${index}`}>
+            <li
+              className="border-l-2 border-border pl-4 text-sm leading-7 text-foreground-muted"
+              key={`${item}-${index}`}
+            >
               {item}
             </li>
           ))}
@@ -321,13 +482,20 @@ function Value({ value, depth }: { value: unknown; depth: number }) {
   }
   if (isRecord(value)) {
     const entries = Object.entries(value).filter(
-      ([key, item]) => !hiddenKeys.has(key) && item !== null && item !== undefined && item !== "",
+      ([key, item]) =>
+        !hiddenKeys.has(key) &&
+        item !== null &&
+        item !== undefined &&
+        item !== "",
     );
     if (entries.length === 0) return null;
     return (
       <div className={depth === 0 ? "grid gap-5 md:grid-cols-2" : "space-y-4"}>
         {entries.map(([key, item]) => (
-          <div className={depth === 0 ? "border border-border bg-background p-5" : ""} key={key}>
+          <div
+            className={depth === 0 ? "border border-border bg-background p-5" : ""}
+            key={key}
+          >
             <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
               {humanize(key)}
             </h3>
@@ -342,9 +510,19 @@ function Value({ value, depth }: { value: unknown; depth: number }) {
   return null;
 }
 
-function Cta({ value, secondary = false, inverted = false }: { value: unknown; secondary?: boolean; inverted?: boolean }) {
+function Cta({
+  value,
+  secondary = false,
+  inverted = false,
+  fallbackHref = null,
+}: {
+  value: unknown;
+  secondary?: boolean;
+  inverted?: boolean;
+  fallbackHref?: string | null;
+}) {
   const label = resolveLabel(value);
-  const href = resolveHref(value);
+  const href = resolveHref(value) ?? fallbackHref;
   if (!label || !href) return null;
   const className = secondary
     ? inverted
@@ -389,8 +567,12 @@ function BridgeFooter({ entry }: { entry: ProductLandingEntry }) {
             This direct-link page is scoped to {entry.id.replace(/-/g, " ")}.
           </p>
         </div>
-        <Link className="inline-flex min-h-10 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]" href="/collaborate">
-          Collaboration context <FlaskConical aria-hidden="true" className="ml-2 h-3.5 w-3.5" />
+        <Link
+          className="inline-flex min-h-10 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]"
+          href="/collaborate"
+        >
+          Collaboration context
+          <FlaskConical aria-hidden="true" className="ml-2 h-3.5 w-3.5" />
         </Link>
       </div>
     </footer>
