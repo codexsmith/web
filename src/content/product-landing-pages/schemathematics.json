@@ -53,7 +53,8 @@
     ]
   },
   "cta": {
-    "label": "Try to reduce the machinery"
+    "label": "Explore the research context",
+    "href": "/research"
   },
   "notes": [
     "Current canon: Schemathematics powers Representational Mechanics and sits within the formal apparatus of Boundary Theory.",
