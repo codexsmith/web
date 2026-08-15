@@ -57,14 +57,14 @@ export function BoundaryFirstUxTimeline({ compact = false }: { compact?: boolean
       </div>
 
       <div className="border-b border-white/10 p-3 sm:p-4">
-        <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Boundary First timeline stages">
+        <div className="flex flex-wrap gap-2" aria-label="Boundary First timeline stages">
           {stages.map((item, index) => (
             <button
               key={item.verb}
               type="button"
               onClick={() => setStage(index)}
               aria-current={index === stage ? "step" : undefined}
-              className={`min-w-max border px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.1em] transition-colors ${index === stage ? "border-brand-gold bg-brand-gold text-brand-black" : index < stage ? "border-white/20 bg-white/10 text-white" : "border-white/10 text-white/55 hover:border-white/30 hover:text-white"}`}
+              className={`border px-3 py-2 font-mono text-[9px] font-semibold uppercase tracking-[0.1em] transition-colors ${index === stage ? "border-brand-gold bg-brand-gold text-brand-black" : index < stage ? "border-white/20 bg-white/10 text-white" : "border-white/10 text-white/55 hover:border-white/30 hover:text-white"}`}
             >
               {String(index + 1).padStart(2, "0")} · {item.verb}
             </button>
@@ -213,23 +213,23 @@ function stageCopy(stage: number) {
     "Maintenance begins immediately after acceptance. Reveal exposes a real interval that was already outside the represented project boundary.",
     "The dates do not change. The representation changes which relationships matter: obligations and downstream service become salient.",
     "Stress the exact handoff. The date lines up; the executable path for ownership and funding does not.",
-    "Trace preserves causality across the nominal edge instead of allowing chronology to stop at closeout.",
-    "Promote changes the containing context. The two-year project remains visible as a nested interval inside a twelve-year lifecycle.",
-    "Repair lands owner, funding, inspection cadence, observable state, and consequence path across the duration they must actually cover.",
-    "Closure is earned under declared scope. The interface still shows what remains outside that closure rather than pretending the world ended.",
+    "Trace preserves causality across the handoff instead of letting project closeout terminate the story.",
+    "Promote changes the containing temporal context. The project remains nested inside the lifecycle rather than being replaced by it.",
+    "Repair lands ownership, funding, inspection, and cadence across the same interval as the obligation.",
+    "Closure is now a scoped interval whose obligations reconcile. It is not merely the last milestone on a chart.",
   ][stage];
 }
 
 function operationCopy(stage: number) {
   return [
     "Orient within declared project time",
-    "Inspect the semantic meaning of the edge",
-    "Reveal an excluded persistent interval",
+    "Inspect the semantic meaning of the right edge",
+    "Reveal an excluded interval",
     "Reframe milestone time as consequence time",
-    "Stress a temporal handoff",
+    "Stress the temporal handoff",
     "Trace causal continuity across closeout",
-    "Promote into a containing lifecycle context",
-    "Repair with coextensive obligation paths",
+    "Promote to the containing lifecycle interval",
+    "Repair with a coextensive obligation path",
     "Declare scoped temporal closure",
   ][stage];
 }
