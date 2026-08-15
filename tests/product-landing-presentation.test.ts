@@ -90,10 +90,10 @@ const customProjections = {
   "closure-driven-software-development": "ClosureDrivenLanding.tsx",
   "corpus-forge": "CorpusForgeLanding.tsx",
   schemathematics: "SchemathematicsLanding.tsx",
+  "software-before-code": "SoftwareBeforeCodeLanding.tsx",
 } as const;
 
 const genericPublicIds = [
-  "software-before-code",
   "boundary-first-weather",
   "constitutional-law-and-jurisprudence",
 ] as const;
@@ -143,7 +143,7 @@ describe("product landing governed-content contracts", () => {
 });
 
 describe("product landing projection contracts", () => {
-  it("routes authored projections explicitly and leaves the three reference surfaces on the shared renderer", () => {
+  it("routes authored projections explicitly and leaves the two reference surfaces on the shared renderer", () => {
     const routeSource = fs.readFileSync(
       path.join(process.cwd(), "src/app/[...landing]/page.tsx"),
       "utf8",
