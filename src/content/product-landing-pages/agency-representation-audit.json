@@ -20,5 +20,5 @@
   ],
   "pilot":{"shape":"Audit one bounded process involving eligibility, identity, access, moderation, benefits, automated management, or another consequential classification."},
   "outputs":["agency map", "representation map", "consequence chain", "contest path", "repair ownership map", "defect register"],
-  "cta":{"label":"Audit one consequential process"}
+  "cta":{"label":"Start an audit inquiry","href":"/collaborate"}
 }
