@@ -26,6 +26,19 @@ const claimLedger = getWorkRecord("claim-evidence-ledger");
 
 export const sandboxEntries: SandboxEntry[] = [
   {
+    id: "boundary-first-ux-lab",
+    title: "Boundary First UX Laboratory",
+    kind: "interaction-research",
+    status: "Canonical pattern sandbox",
+    purpose:
+      "Operate Boundary First UX semantics directly through temporal boundaries, resolution navigation, and context-admission gates.",
+    tests:
+      "Whether a familiar timeline can expose persistent obligations, whether finer resolution preserves the containing world and external relations, and whether blocked transitions explain their missing semantic prerequisites.",
+    boundary:
+      "These are reference pattern proofs over fictional demonstration data. A successful interaction supports the UX method; it does not independently validate domain claims or automatically promote an experimental renderer into the standard.",
+    href: "/sandbox/boundary-first-ux",
+  },
+  {
     id: "representation-lab",
     title: "Representation Laboratory",
     kind: "representation-lab",
