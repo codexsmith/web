@@ -23,8 +23,8 @@ const disclosureLayers = [
   {
     label: "Method",
     question: "How is the practice structured?",
-    entrance: "Methods",
-    href: "/methods",
+    entrance: "guided method",
+    href: "/learn/boundary-first",
   },
   {
     label: "Evidence",
@@ -41,8 +41,8 @@ const disclosureLayers = [
   {
     label: "Formal core",
     question: "What is the underlying structure?",
-    entrance: "Theory",
-    href: "/theory",
+    entrance: "Distinction Space",
+    href: "/learn/distinction-space",
   },
 ] as const;
 
@@ -148,6 +148,9 @@ export function InstitutionalVestibuleHome() {
                   </div>
                 ))}
               </div>
+              <p className="mt-4 text-xs leading-5 text-primary-foreground-muted">
+                Learn carries you between depths. Direct entrances remain available when your question already has the context it needs.
+              </p>
             </div>
           </div>
         </div>
