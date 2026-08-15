@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
+import { ClosureDrivenLanding } from "@/components/product-landing/ClosureDrivenLanding";
 import { ProductLandingRenderer } from "@/components/product-landing/ProductLandingRenderer";
+import { SchemathematicsLanding } from "@/components/product-landing/SchemathematicsLanding";
 import {
   getProductLandingContent,
   getProductLandingDescription,
@@ -111,6 +113,14 @@ export default async function ProductLandingPage({ params }: ProductLandingPageP
 
   if (decision.entry.id === "boundary-first-ux" && decision.entry.collection !== "bridge") {
     return <BoundaryFirstUxLanding />;
+  }
+
+  if (decision.entry.id === "closure-driven-software-development" && decision.entry.collection !== "bridge") {
+    return <ClosureDrivenLanding />;
+  }
+
+  if (decision.entry.id === "schemathematics" && decision.entry.collection !== "bridge") {
+    return <SchemathematicsLanding />;
   }
 
   return <ProductLandingRenderer content={content} decision={decision} />;
