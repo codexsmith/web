@@ -10,10 +10,9 @@ import {
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { CosmicShoreMark } from "@/components/cosmic-shore-mark";
-import {
-  featuredPublicWork,
-  institutionalRoutes,
-} from "@/lib/p1-public-shell";
+import { PublicLandingCarousel } from "@/components/product-landing/PublicLandingCarousel";
+import { getPublicLandingCarouselItems } from "@/lib/product-landing-carousel";
+import { institutionalRoutes } from "@/lib/p1-public-shell";
 
 const disclosureLayers = [
   {
@@ -86,6 +85,8 @@ const capabilityCards = [
 ] as const;
 
 export function InstitutionalVestibuleHome() {
+  const publicLandingCarouselItems = getPublicLandingCarouselItems();
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -202,6 +203,13 @@ export function InstitutionalVestibuleHome() {
         </div>
       </section>
 
+      <PublicLandingCarousel
+        description="Traverse the current public landing pages while keeping their Software, Research, and Work context visible."
+        eyebrow="Boundary First UX · Public landing pages"
+        items={publicLandingCarouselItems}
+        title="Explore the public work without losing the larger context."
+      />
+
       <section className="border-b border-border bg-card/55 px-5 py-10 sm:px-8 sm:py-14">
         <div className="mx-auto max-w-7xl">
           <div className="max-w-3xl">
@@ -215,32 +223,6 @@ export function InstitutionalVestibuleHome() {
                 <h3 className="mt-4 font-serif text-2xl font-semibold">{title}</h3>
                 <p className="mt-2 max-w-2xl text-sm leading-6 text-foreground-muted">{description}</p>
                 <span className="mt-5 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Explore <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-border px-5 py-10 sm:px-8 sm:py-14" id="featured-work">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-wrap items-end justify-between gap-5">
-            <div className="max-w-3xl">
-              <p className="text-sm leading-7 text-foreground-muted">Inspect the work, not just the claim.</p>
-              <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">Selected work.</h2>
-            </div>
-            <Link className="inline-flex min-h-11 items-center font-mono text-[10px] font-semibold uppercase tracking-[0.13em] hover:underline" href="/work">Browse the portfolio <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" /></Link>
-          </div>
-          <div className="mt-6 grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-3">
-            {featuredPublicWork.map((item) => (
-              <Link className="group bg-card p-5 sm:p-6" href={item.href} key={item.id}>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">{item.kind}</span>
-                  <span className="border border-border bg-background px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.1em]">{item.status}</span>
-                </div>
-                <h3 className="mt-4 font-serif text-2xl font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-foreground-muted">{item.summary}</p>
-                <p className="mt-5 border-t border-border pt-3 font-mono text-[9px] uppercase tracking-[0.11em] text-foreground-muted">{item.role}</p>
-                <span className="mt-4 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Inspect record <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
               </Link>
             ))}
           </div>
