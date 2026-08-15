@@ -94,12 +94,26 @@ describe("public architecture navigation contracts", () => {
     expect(items.map((item) => item.ordinal)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
-  it("keeps the carousel reusable and unplaced until a parent surface is chosen", () => {
+  it("places the public landing carousel on the homepage before What we work on and hides Selected work", () => {
     const component = path.join(
       process.cwd(),
       "src/components/product-landing/PublicLandingCarousel.tsx",
     );
     expect(fs.existsSync(component)).toBe(true);
+
+    const home = fs.readFileSync(
+      path.join(process.cwd(), "src/components/entrance/InstitutionalVestibuleHome.tsx"),
+      "utf8",
+    );
+    const choosePathIndex = home.indexOf("Choose a path.");
+    const carouselIndex = home.indexOf("<PublicLandingCarousel");
+    const whatWeWorkOnIndex = home.indexOf("What we work on.");
+
+    expect(choosePathIndex).toBeGreaterThan(-1);
+    expect(carouselIndex).toBeGreaterThan(choosePathIndex);
+    expect(whatWeWorkOnIndex).toBeGreaterThan(carouselIndex);
+    expect(home).not.toContain("Selected work.");
+    expect(home).not.toContain("featuredPublicWork");
 
     for (const file of [
       "src/app/software/page.tsx",
