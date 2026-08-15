@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
 import { ProductLandingRenderer } from "@/components/product-landing/ProductLandingRenderer";
 import {
   getProductLandingContent,
@@ -102,6 +103,10 @@ export default async function ProductLandingPage({ params }: ProductLandingPageP
 
   const content = getProductLandingContent(decision.entry);
   if (!content) notFound();
+
+  if (decision.entry.id === "boundary-first-ux" && decision.entry.collection !== "bridge") {
+    return <BoundaryFirstUxLanding />;
+  }
 
   return <ProductLandingRenderer content={content} decision={decision} />;
 }
