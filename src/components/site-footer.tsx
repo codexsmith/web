@@ -13,6 +13,8 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-16">
       <div className="mx-auto max-w-7xl">
+        <div id="public-field-guide-slot" className="empty:hidden" />
+
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
           <div className="sm:col-span-2 lg:col-span-2">
             <Link href="/" className="flex min-h-10 items-center gap-3 transition-opacity hover:opacity-75">
