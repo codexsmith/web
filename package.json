@@ -18,7 +18,7 @@
     "graph:dry-run": "python scripts/build_graph_context.py --dry-run",
     "graph:test": "python -m unittest scripts/test_build_graph_context.py",
     "test:ui": "vitest",
-    "test:contracts": "vitest run tests/public-architecture.test.ts",
+    "test:contracts": "vitest run tests/public-architecture.test.ts tests/product-landing-presentation.test.ts",
     "ui:normalize": "python scripts/opacity_purge.py && python scripts/replace_email.py",
     "ui:check": "python scripts/check_ui_stabilization.py"
   },
@@ -48,7 +48,7 @@
     "@types/d3": "^7.4.3",
     "@types/node": "^20",
     "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react-dom": "^19.2.4",
     "eslint": "^9",
     "eslint-config-next": "16.2.12",
     "shadcn": "^4.13.0",
