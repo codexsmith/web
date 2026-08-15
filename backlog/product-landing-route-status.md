@@ -91,5 +91,18 @@ Still pending manual route inspection before checking any route complete:
 
 - desktop/mobile visual QA;
 - anchor and internal-link verification on the dense Weather, Law, and Software Before Code records;
-- page-specific authored templates or demonstrations for Closure-Driven Software Development, Schemathematics, Chess, Soccer, Corpus Forge, and Agency & Representation Audit;
+- page-specific authored templates or demonstrations for Closure-Driven Software Development, Schemathematics, Chess, Soccer, and Corpus Forge;
 - homepage carousel eyebrow copy review so Boundary First UX is presented as the interaction method used by the carousel rather than as the parent identity of all public work.
+
+### Agency & Representation Audit — 2026-08-15
+
+Promotion pass implemented without changing the governed maturity state from `pilot-intake`:
+
+- Expanded the governed content object to a service-ready narrative with an executive brief, diagnostic questions, failure modes, five-pass audit method, pilot-fit criteria, bounded intake shape, declared outputs, evidence rule, claim boundary, and closing proposition.
+- Added a purpose-built `AgencyAuditLanding` projection that reads from the governed JSON content rather than duplicating the audit claims in an unrelated page object.
+- The hero now presents an explicit consequence trace from authority through representation, consequence, contest, and repair, plus direct intake and method CTAs.
+- Pilot fit and non-fit conditions are visible before intake so broad certification, predetermined-conclusion, penetration-test, and disguised legal-opinion requests are rejected by the public page itself.
+- The claim firewall explicitly states that the audit does not provide legal advice, compliance certification, algorithmic fairness/safety/bias certification, cybersecurity certification, universal discovery guarantees, or automatic endorsement.
+- `/agency-audit` now routes to the purpose-built projection while continuing to use the manifest/content registry for route eligibility, metadata, and public maturity.
+
+The inspection checkbox remains open until the route receives desktop/mobile visual QA and live anchor/link verification.
