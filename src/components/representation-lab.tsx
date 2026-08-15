@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowLeftRight,
   CircleDot,
@@ -325,7 +326,7 @@ function ProfileReadout({
 }: {
   label: string;
   profile: PresetProfile;
-  icon: typeof Eye;
+  icon: LucideIcon;
 }) {
   return (
     <article className="bg-background p-5 sm:p-6">
