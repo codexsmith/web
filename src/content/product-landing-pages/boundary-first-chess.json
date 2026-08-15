@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "id": "boundary-first-chess",
   "slug": "chess",
   "title": "Boundary-First Chess",
@@ -7,20 +7,137 @@
   "status": "working-public-doctrine",
   "visibility": "public",
   "hero": {
-    "eyebrow": "BOUNDARY-FIRST CHESS",
+    "eyebrow": "BOUNDARY-FIRST CHESS · WORKING PUBLIC DOCTRINE",
     "headline": "See the position before you calculate the move.",
-    "support": "A practical language for reading chess through constrained possibility, reachable states, pressure, boundaries, closure, defects, and repair."
+    "support": "A practical language for reading chess through constrained possibility, reachable states, pressure, boundaries, closure, defects, and repair. The aim is not to replace calculation, but to make clear what the calculation is for.",
+    "primaryCta": {
+      "label": "Inspect the reading method",
+      "target": "method"
+    },
+    "secondaryCta": {
+      "label": "Explore applied work",
+      "href": "/work/index"
+    }
   },
-  "sections": [
-    {"heading":"The board is a possibility space","body":"A position is not only a list of pieces. It is a structured set of reachable states shaped by legal movement, pressure, protection, access, time, and consequence."},
-    {"heading":"Pressure changes what is reachable","body":"Threats and constraints matter because they contract or redirect the opponent's admissible future states."},
-    {"heading":"Good moves preserve continuation","body":"A locally attractive action is only useful if the resulting position retains the invariants and options required for the next phase."},
-    {"heading":"Closure is earned","body":"Winning material, gaining space, or creating an attack becomes meaningful when the advantage can be stabilized, promoted, or converted."},
-    {"heading":"A public on-ramp","body":"Chess makes Boundary First reasoning visible in a bounded world where rules, state, consequence, and counterfactuals can be inspected directly."}
-  ],
+  "definition": {
+    "title": "A move is a state transition under adversarial constraint.",
+    "body": "A chess position is more than material and legal moves. It is a structured set of reachable continuations shaped by king safety, mobility, pressure, protection, time, geometry, tactical forcing, and the opponent's ability to answer.",
+    "rule": "Evaluate the move together with the future state it admits, closes, exposes, or makes irreversible."
+  },
+  "positionLens": {
+    "title": "Read the boundary before choosing the line.",
+    "dimensions": [
+      {
+        "name": "Legality",
+        "question": "Which transitions are actually available now?"
+      },
+      {
+        "name": "King safety",
+        "question": "Which checks, mating nets, flight squares, pins, and exposed lines constrain the state space?"
+      },
+      {
+        "name": "Reachability",
+        "question": "Which squares, files, diagonals, ranks, and pieces can each side realistically activate in time?"
+      },
+      {
+        "name": "Pressure",
+        "question": "Which threats or overloaded duties remove otherwise legal continuations?"
+      },
+      {
+        "name": "Continuation",
+        "question": "After the candidate move and best reply, which useful options survive?"
+      },
+      {
+        "name": "Conversion / repair",
+        "question": "Can an advantage be stabilized, promoted, exchanged, or repaired before the opponent restores counterplay?"
+      }
+    ]
+  },
+  "method": {
+    "id": "method",
+    "title": "Five passes before commitment.",
+    "passes": [
+      {
+        "name": "1. Bound the position",
+        "question": "What is forcing right now: checks, captures, threats, tactical liabilities, and immediate defensive obligations?",
+        "output": "Immediate constraint map"
+      },
+      {
+        "name": "2. Map reachable pressure",
+        "question": "Which pieces and squares can become relevant within the next few moves, and which apparently available resources are too slow?",
+        "output": "Reachability and pressure map"
+      },
+      {
+        "name": "3. Generate candidate transitions",
+        "question": "Which moves materially change the boundary: open a line, close a square, trade a defender, create a passer, change king exposure, or force a reply?",
+        "output": "Candidate move set"
+      },
+      {
+        "name": "4. Preserve continuation",
+        "question": "After the opponent's strongest answer, does the resulting state retain the coordination, safety, and options needed for the plan to continue?",
+        "output": "Reply-aware continuation test"
+      },
+      {
+        "name": "5. Convert or repair",
+        "question": "If the move creates an advantage, can it be stabilized or promoted; if it creates a defect, what repair cost follows?",
+        "output": "Conversion or repair path"
+      }
+    ]
+  },
+  "workedExample": {
+    "id": "worked-example",
+    "title": "Worked pattern: the material win that deletes the defense.",
+    "setup": "Imagine a candidate move that wins a rook or queen-side material but requires the only defender currently preventing a back-rank mating sequence to leave its post. The material count improves immediately; the reachable state space may become losing.",
+    "naiveRead": "The candidate wins material, so it is attractive.",
+    "boundaryRead": [
+      "the defender is carrying two responsibilities, not one",
+      "moving it changes the set of legal defensive replies to a forcing check",
+      "the opponent's best answer may become forced rather than optional",
+      "the apparent material gain cannot be evaluated independently of king-safety closure",
+      "if the mating or decisive sequence is real, the move fails before conversion is relevant"
+    ],
+    "lesson": "Boundary-First analysis does not replace calculation. It tells the calculation where the consequential boundary moved and which continuation must be falsified before the material gain can be trusted.",
+    "scopeNote": "This is a constructed teaching pattern rather than an engine-validated benchmark position."
+  },
+  "validation": {
+    "title": "A teaching doctrine should earn its usefulness.",
+    "targets": [
+      "candidate-move quality before deep calculation",
+      "recognition of overloaded defenders and hidden obligations",
+      "ability to explain why a move changes the reachable state space",
+      "transfer from tactical examples to positional continuation and conversion",
+      "agreement with established chess analysis on the actual position"
+    ],
+    "claimRule": "Comparative teaching or performance claims require controlled evidence; explanatory fit to familiar chess motifs is not enough."
+  },
   "proof": {
-    "built": ["Complete Boundary-First Chess manuscript draft", "Worked explanatory grammar and teaching examples"],
+    "built": [
+      "Complete Boundary-First Chess manuscript draft",
+      "Worked explanatory grammar and teaching examples"
+    ],
     "claimBoundary": "The framework is offered for teaching, analysis, and falsification; it does not claim superiority to established chess instruction without comparative evidence."
   },
-  "cta":{"label":"Explore the applied work","href":"/work/index"}
+  "claimBoundary": {
+    "title": "Practitioner doctrine, not a replacement for chess theory or engine analysis.",
+    "safe": [
+      "Boundary-First Chess is a working public teaching and analysis doctrine.",
+      "Its vocabulary can be compared against established tactical, positional, endgame, and engine analysis.",
+      "The doctrine is useful only where it preserves the concrete rules and facts of the position."
+    ],
+    "notEstablished": [
+      "that the doctrine improves rating or tournament performance",
+      "that it is superior to established coaching systems",
+      "that Boundary First terminology is necessary to explain positions already handled well by existing chess concepts",
+      "that illustrative patterns constitute engine or empirical validation"
+    ]
+  },
+  "closing": {
+    "eyebrow": "BOUNDARY-FIRST CHESS",
+    "title": "Calculate the line. First understand which future you are trying to preserve.",
+    "finalLine": "Bound the position. Map the pressure. Test the reply. Preserve continuation. Convert only what survives."
+  },
+  "cta": {
+    "label": "Explore applied work",
+    "href": "/work/index"
+  }
 }
