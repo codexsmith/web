@@ -2,9 +2,11 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
+  Boxes,
   BriefcaseBusiness,
   Code2,
   FlaskConical,
+  GitBranch,
   Microscope,
   ShieldCheck,
 } from "lucide-react";
@@ -40,6 +42,55 @@ const hiddenKeys = new Set([
   "audience",
   "pageIntent",
   "cta",
+]);
+
+const proseKeys = new Set([
+  "body",
+  "intro",
+  "support",
+  "supporting",
+  "description",
+  "definition",
+  "proposition",
+  "statement",
+  "diagnosis",
+  "rule",
+  "qualityRule",
+  "publicPromise",
+  "northStar",
+  "claimBoundary",
+  "claimRule",
+  "implication",
+  "important",
+  "warning",
+  "premise",
+  "ask",
+  "primaryQuestion",
+  "researchQuestion",
+  "boundaryFirstQuestion",
+  "boundaryFirstExtension",
+  "criticalBoundary",
+  "candidateDoctrine",
+  "statusOfCandidate",
+  "promotionRule",
+  "compact",
+  "compactObject",
+  "notation",
+  "publicationLine",
+  "finalLine",
+  "line",
+  "desiredReaction",
+]);
+
+const sequenceKeys = new Set([
+  "chain",
+  "sequence",
+  "loop",
+  "stages",
+  "steps",
+  "levels",
+  "scenes",
+  "architecture",
 ]);
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -116,6 +167,8 @@ function publicFrame(entry: ProductLandingEntry) {
       heroClass: "bg-primary text-primary-foreground",
       eyebrowClass: "text-primary-foreground-muted",
       bodyClass: "text-primary-foreground-secondary",
+      gridClass:
+        "[background-image:linear-gradient(rgba(255,255,255,.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.045)_1px,transparent_1px)]",
       icon: Code2,
     } as const;
   }
@@ -127,6 +180,8 @@ function publicFrame(entry: ProductLandingEntry) {
       heroClass: "bg-card/55 text-foreground",
       eyebrowClass: "text-foreground-muted",
       bodyClass: "text-foreground-muted",
+      gridClass:
+        "[background-image:linear-gradient(rgba(11,31,58,.045)_1px,transparent_1px),linear-gradient(90deg,rgba(11,31,58,.045)_1px,transparent_1px)]",
       icon: Microscope,
     } as const;
   }
@@ -137,8 +192,20 @@ function publicFrame(entry: ProductLandingEntry) {
     heroClass: "bg-background text-foreground",
     eyebrowClass: "text-foreground-muted",
     bodyClass: "text-foreground-muted",
+    gridClass:
+      "[background-image:linear-gradient(rgba(11,31,58,.045)_1px,transparent_1px),linear-gradient(90deg,rgba(11,31,58,.045)_1px,transparent_1px)]",
     icon: BriefcaseBusiness,
   } as const;
+}
+
+function frameTrace(group: "software" | "research" | "work"): string[] {
+  if (group === "software") {
+    return ["Domain", "Representation", "Execution", "Witness"];
+  }
+  if (group === "research") {
+    return ["Observation", "Structure", "Hypothesis", "Test"];
+  }
+  return ["Context", "Action", "Evidence", "Repair"];
 }
 
 export function ProductLandingRenderer({
@@ -156,6 +223,7 @@ export function ProductLandingRenderer({
   const eyebrow = heroValue(hero, "eyebrow") ?? humanize(entry.pageType);
   const heroTitle = heroValue(hero, "title", "headline") ?? title;
   const heroDeck = heroValue(hero, "deck", "support") ?? description;
+  const heroSupport = heroValue(hero, "support", "supporting", "pullQuote");
   const primaryCta = hero?.primaryCta ?? presentation.cta;
   const secondaryCta = hero?.secondaryCta;
   const bridge = entry.collection === "bridge";
@@ -166,6 +234,8 @@ export function ProductLandingRenderer({
     ([key]) => key !== "legalNotice",
   );
   const statusLabel = resolveStatusLabel(presentation, entry);
+  const trace = frameTrace(frame.group);
+  const softwareHero = !bridge && frame.group === "software";
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -190,15 +260,21 @@ export function ProductLandingRenderer({
       ) : null}
 
       <section
-        className={`border-b border-border px-5 py-16 sm:px-8 sm:py-24 ${
+        className={`relative isolate overflow-hidden border-b border-border px-5 py-16 sm:px-8 sm:py-24 ${
           bridge ? "bg-background text-foreground" : frame.heroClass
         }`}
       >
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(18rem,0.58fr)] lg:items-end">
+        {!bridge ? (
+          <div
+            className={`pointer-events-none absolute inset-0 -z-20 opacity-80 [background-size:46px_46px] ${frame.gridClass}`}
+          />
+        ) : null}
+        <div className="pointer-events-none absolute -right-28 -top-28 -z-10 h-96 w-96 rounded-full border border-current opacity-[0.08]" />
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(21rem,0.62fr)] lg:items-end">
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span
-                className={`font-mono text-[10px] font-semibold uppercase tracking-[0.16em] ${
+                className={`font-mono text-[10px] font-semibold uppercase tracking-[0.18em] ${
                   bridge ? "text-foreground-muted" : frame.eyebrowClass
                 }`}
               >
@@ -215,7 +291,7 @@ export function ProductLandingRenderer({
                 </span>
               ) : null}
             </div>
-            <h1 className="mt-5 max-w-5xl font-serif text-5xl font-semibold leading-[0.96] tracking-tight sm:text-7xl">
+            <h1 className="mt-6 max-w-5xl font-serif text-5xl font-semibold leading-[0.92] tracking-[-0.035em] sm:text-7xl">
               {heroTitle}
             </h1>
             <p
@@ -225,52 +301,76 @@ export function ProductLandingRenderer({
             >
               {heroDeck}
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            {heroSupport && heroSupport !== heroDeck ? (
+              <p
+                className={`mt-5 max-w-3xl border-l-2 border-current/35 pl-5 text-sm leading-7 ${
+                  bridge ? "text-foreground-muted" : frame.bodyClass
+                }`}
+              >
+                {heroSupport}
+              </p>
+            ) : null}
+            <div className="mt-9 flex flex-wrap gap-3">
               <Cta
                 fallbackHref={bridge ? "/collaborate" : frame.href}
-                inverted={!bridge && frame.group === "software"}
+                inverted={softwareHero}
                 value={primaryCta}
               />
-              <Cta
-                inverted={!bridge && frame.group === "software"}
-                secondary
-                value={secondaryCta}
-              />
+              <Cta inverted={softwareHero} secondary value={secondaryCta} />
             </div>
           </div>
           {!bridge ? (
             <aside
-              className={`border p-6 ${
-                frame.group === "software"
-                  ? "border-primary-foreground/20 bg-primary-foreground/5"
-                  : "border-border bg-background/65"
+              className={`border p-6 sm:p-7 ${
+                softwareHero
+                  ? "border-primary-foreground/20 bg-primary-foreground/[0.045]"
+                  : "border-border bg-background/75"
               }`}
             >
-              <p
-                className={`font-mono text-[9px] font-semibold uppercase tracking-[0.14em] ${frame.eyebrowClass}`}
-              >
-                Representation class
-              </p>
-              <p className="mt-4 font-serif text-2xl font-semibold leading-8">
-                {humanize(entry.pageType)}
-              </p>
-              <dl className={`mt-5 grid gap-4 text-sm ${frame.bodyClass}`}>
-                <div>
-                  <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] opacity-70">
-                    Public maturity
-                  </dt>
-                  <dd className="mt-1 leading-6">{statusLabel}</dd>
-                </div>
-                <div>
-                  <dt className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] opacity-70">
-                    Projection rule
-                  </dt>
-                  <dd className="mt-1 leading-6">
-                    Claims and scope remain bounded by the governed content object;
-                    public visibility does not erase draft, pilot, or research status.
-                  </dd>
-                </div>
-              </dl>
+              <div className="flex items-center justify-between gap-4">
+                <p
+                  className={`font-mono text-[9px] font-semibold uppercase tracking-[0.14em] ${frame.eyebrowClass}`}
+                >
+                  Reading frame
+                </p>
+                <GitBranch aria-hidden="true" className="h-4 w-4 opacity-60" />
+              </div>
+              <div className="mt-6 grid gap-0">
+                {trace.map((item, index) => (
+                  <div
+                    className="grid grid-cols-[2.4rem_1fr] items-stretch"
+                    key={item}
+                  >
+                    <div className="relative flex justify-center">
+                      <span className="relative z-10 flex h-7 w-7 items-center justify-center rounded-full border border-current/30 bg-inherit font-mono text-[8px] font-semibold">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {index < trace.length - 1 ? (
+                        <span className="absolute bottom-0 top-7 w-px bg-current opacity-20" />
+                      ) : null}
+                    </div>
+                    <div className="min-h-16 pb-5">
+                      <p className="font-serif text-lg font-semibold">{item}</p>
+                      <p className={`mt-1 text-xs leading-5 ${frame.bodyClass}`}>
+                        {index === trace.length - 1
+                          ? "Close the claim against an observable consequence."
+                          : "Preserve the distinctions needed by the next transition."}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-2 border-t border-current/15 pt-5">
+                <p
+                  className={`font-mono text-[9px] font-semibold uppercase tracking-[0.12em] ${frame.eyebrowClass}`}
+                >
+                  Public maturity
+                </p>
+                <p className="mt-2 font-serif text-xl font-semibold">{statusLabel}</p>
+                <p className={`mt-2 text-xs leading-6 ${frame.bodyClass}`}>
+                  Public visibility does not promote a draft, pilot, or research claim beyond its governed status.
+                </p>
+              </div>
             </aside>
           ) : null}
         </div>
@@ -299,13 +399,16 @@ export function ProductLandingRenderer({
         </section>
       ) : null}
 
-      <section className="px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mx-auto max-w-7xl space-y-8">
-          {sections.map(([key, value]) => (
-            <LandingSection key={key} sectionKey={key} value={value} />
-          ))}
-        </div>
-      </section>
+      <div>
+        {sections.map(([key, value], index) => (
+          <LandingSection
+            index={index}
+            key={key}
+            sectionKey={key}
+            value={value}
+          />
+        ))}
+      </div>
 
       {bridge ? <BridgeFooter entry={entry} /> : <SiteFooter />}
     </main>
@@ -380,10 +483,22 @@ function isNarrativeSection(
 function LandingSection({
   sectionKey,
   value,
+  index,
 }: {
   sectionKey: string;
   value: unknown;
+  index: number;
 }) {
+  if ((sectionKey === "product" || sectionKey === "program") && isRecord(value)) {
+    return (
+      <IdentitySection index={index} record={value} sectionKey={sectionKey} />
+    );
+  }
+
+  if (sectionKey === "closing" && isRecord(value)) {
+    return <ClosingSection index={index} record={value} />;
+  }
+
   if (
     sectionKey === "sections" &&
     Array.isArray(value) &&
@@ -392,21 +507,18 @@ function LandingSection({
   ) {
     return (
       <>
-        {value.map((section, index) => (
-          <article
-            className="scroll-mt-28 border border-border bg-card p-6 sm:p-8"
-            id={slugify(section.heading) || `section-${index + 1}`}
-            key={`${section.heading}-${index}`}
+        {value.map((section, sectionIndex) => (
+          <SectionShell
+            anchor={slugify(section.heading) || `section-${sectionIndex + 1}`}
+            heading={section.heading}
+            index={index + sectionIndex}
+            key={`${section.heading}-${sectionIndex}`}
+            sectionKey="section"
           >
-            <h2 className="font-serif text-2xl font-semibold sm:text-3xl">
-              {section.heading}
-            </h2>
             {section.body !== undefined ? (
-              <div className="mt-5">
-                <Value depth={0} value={section.body} />
-              </div>
+              <Value depth={0} value={section.body} valueKey="body" />
             ) : null}
-          </article>
+          </SectionShell>
         ))}
       </>
     );
@@ -421,31 +533,224 @@ function LandingSection({
   const consequential =
     sectionKey === "legalNotice" ||
     sectionKey === "claimBoundary" ||
-    sectionKey === "claimRegimes";
+    sectionKey === "claimRegimes" ||
+    sectionKey === "claimFirewall";
 
   return (
-    <article
-      className={`scroll-mt-28 border p-6 sm:p-8 ${
-        consequential ? "border-foreground bg-card/70" : "border-border bg-card"
+    <SectionShell
+      anchor={anchor}
+      consequential={consequential}
+      heading={heading}
+      index={index}
+      sectionKey={sectionKey}
+    >
+      <Value
+        depth={0}
+        value={record ? stripPresentationKeys(record) : value}
+        valueKey={sectionKey}
+      />
+    </SectionShell>
+  );
+}
+
+function SectionShell({
+  anchor,
+  children,
+  consequential = false,
+  heading,
+  index,
+  sectionKey,
+}: {
+  anchor: string;
+  children: React.ReactNode;
+  consequential?: boolean;
+  heading: string;
+  index: number;
+  sectionKey: string;
+}) {
+  const shaded = index % 2 === 1;
+
+  return (
+    <section
+      className={`scroll-mt-28 border-b border-border px-5 py-14 sm:px-8 sm:py-20 ${
+        consequential
+          ? "bg-card/70"
+          : shaded
+            ? "bg-card/35"
+            : "bg-background"
       }`}
       id={anchor}
     >
-      {consequential ? (
-        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
-          Claim boundary
-        </p>
-      ) : null}
-      <h2
-        className={`${
-          consequential ? "mt-2" : ""
-        } font-serif text-2xl font-semibold sm:text-3xl`}
-      >
-        {heading}
-      </h2>
-      <div className="mt-5">
-        <Value value={record ? stripPresentationKeys(record) : value} depth={0} />
+      <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[minmax(13rem,0.4fr)_minmax(0,1.6fr)] lg:gap-14">
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[9px] font-semibold tabular-nums text-foreground-muted">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="h-px w-8 bg-border" />
+            <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+              {consequential ? "Claim boundary" : humanize(sectionKey)}
+            </span>
+          </div>
+          <h2 className="mt-4 font-serif text-3xl font-semibold leading-[1.05] sm:text-4xl">
+            {heading}
+          </h2>
+        </div>
+        <div className="min-w-0">{children}</div>
       </div>
-    </article>
+    </section>
+  );
+}
+
+function IdentitySection({
+  index,
+  record,
+  sectionKey,
+}: {
+  index: number;
+  record: Record<string, unknown>;
+  sectionKey: string;
+}) {
+  const name = firstString(record.name) ?? humanize(sectionKey);
+  const shortName = firstString(record.shortName);
+  const primaryLine = firstString(record.primaryLine);
+  const secondaryLine = firstString(record.secondaryLine);
+  const proposition = firstString(
+    record.coreProposition,
+    record.publicPromise,
+    record.coreQuestion,
+  );
+  const highlight = firstString(
+    record.engineeringMaxim,
+    record.northStar,
+    record.claimBoundary,
+  );
+  const highlightLabel = record.engineeringMaxim
+    ? "Engineering maxim"
+    : record.northStar
+      ? "North star"
+      : "Claim boundary";
+  const classification = Array.isArray(record.classification)
+    ? record.classification.filter(
+        (item): item is string => typeof item === "string",
+      )
+    : [];
+
+  return (
+    <section className="border-b border-border bg-card/35 px-5 py-14 sm:px-8 sm:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="font-mono text-[9px] font-semibold tabular-nums text-foreground-muted">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="h-px w-8 bg-border" />
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+            {sectionKey === "product" ? "Method profile" : "Research profile"}
+          </span>
+        </div>
+
+        <div className="mt-7 grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-14">
+          <div>
+            <div className="flex flex-wrap items-end gap-4">
+              <h2 className="font-serif text-4xl font-semibold leading-[0.98] sm:text-5xl">
+                {name}
+              </h2>
+              {shortName ? (
+                <span className="mb-1 border border-border bg-background px-3 py-1.5 font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+                  {shortName}
+                </span>
+              ) : null}
+            </div>
+            {secondaryLine ? (
+              <p className="mt-5 max-w-xl text-base leading-8 text-foreground-muted">
+                {secondaryLine}
+              </p>
+            ) : null}
+            {classification.length > 0 ? (
+              <div className="mt-7 flex flex-wrap gap-2">
+                {classification.map((item) => (
+                  <span
+                    className="border border-border bg-background px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-foreground-muted"
+                    key={item}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            ) : null}
+          </div>
+
+          <div className="grid gap-4">
+            {primaryLine ? (
+              <article className="border border-border bg-background p-6 sm:p-8">
+                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+                  Primary line
+                </p>
+                <p className="mt-4 max-w-3xl font-serif text-3xl font-semibold leading-[1.08] sm:text-4xl">
+                  {primaryLine}
+                </p>
+              </article>
+            ) : null}
+            {proposition ? (
+              <article className="border border-border bg-background p-6 sm:p-8">
+                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+                  {record.coreQuestion ? "Core question" : "Core proposition"}
+                </p>
+                <p className="mt-4 max-w-4xl text-base leading-8 text-foreground-muted">
+                  {proposition}
+                </p>
+              </article>
+            ) : null}
+            {highlight ? (
+              <article className="border-l-2 border-accent bg-background px-6 py-5 sm:px-8">
+                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+                  {highlightLabel}
+                </p>
+                <p className="mt-3 font-serif text-xl font-semibold leading-8">
+                  {highlight}
+                </p>
+              </article>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ClosingSection({
+  index,
+  record,
+}: {
+  index: number;
+  record: Record<string, unknown>;
+}) {
+  const title = firstString(record.title) ?? "Close the loop.";
+  const eyebrow = firstString(record.eyebrow) ?? "Boundary First";
+  const finalLine = firstString(record.finalLine, record.line);
+
+  return (
+    <section className="border-b border-border bg-primary px-5 py-16 text-primary-foreground sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex items-center gap-3 text-primary-foreground-muted">
+          <span className="font-mono text-[9px] font-semibold tabular-nums">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="h-px w-8 bg-primary-foreground opacity-25" />
+          <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em]">
+            {eyebrow}
+          </span>
+        </div>
+        <h2 className="mt-6 max-w-5xl font-serif text-4xl font-semibold leading-[0.98] tracking-[-0.025em] sm:text-6xl">
+          {title}
+        </h2>
+        {finalLine ? (
+          <p className="mt-7 max-w-4xl border-l-2 border-accent pl-5 text-lg leading-8 text-primary-foreground-secondary sm:text-xl">
+            {finalLine}
+          </p>
+        ) : null}
+      </div>
+    </section>
   );
 }
 
@@ -459,70 +764,257 @@ function stripPresentationKeys(
   );
 }
 
-function Value({ value, depth }: { value: unknown; depth: number }) {
+function Value({
+  value,
+  depth,
+  valueKey,
+}: {
+  value: unknown;
+  depth: number;
+  valueKey?: string;
+}) {
   if (typeof value === "string") {
-    return (
-      <p className="max-w-4xl text-base leading-8 text-foreground-muted">
+    const formal = valueKey === "notation" || valueKey === "compactObject";
+    return formal ? (
+      <div className="border border-border bg-card p-6 sm:p-8">
+        <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+          Formal carrier
+        </p>
+        <p className="mt-4 break-words font-serif text-3xl font-semibold leading-tight sm:text-4xl">
+          {value}
+        </p>
+      </div>
+    ) : (
+      <p
+        className={`max-w-4xl leading-8 text-foreground-muted ${
+          depth === 0 ? "text-base sm:text-lg" : "text-sm"
+        }`}
+      >
         {value}
       </p>
     );
   }
+
   if (typeof value === "number" || typeof value === "boolean") {
     return <p className="font-mono text-sm">{String(value)}</p>;
   }
+
   if (Array.isArray(value)) {
     if (value.every((item) => typeof item === "string")) {
       return (
-        <ul className="grid gap-3 md:grid-cols-2">
-          {value.map((item, index) => (
-            <li
-              className="border-l-2 border-border pl-4 text-sm leading-7 text-foreground-muted"
-              key={`${item}-${index}`}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
+        <StringArrayValue
+          items={value as string[]}
+          valueKey={valueKey ?? "items"}
+        />
       );
     }
+    return <ObjectArrayValue items={value} valueKey={valueKey} />;
+  }
+
+  if (isRecord(value)) {
+    return <RecordValue depth={depth} record={value} />;
+  }
+
+  return null;
+}
+
+function StringArrayValue({
+  items,
+  valueKey,
+}: {
+  items: string[];
+  valueKey: string;
+}) {
+  if (valueKey === "classification") {
     return (
-      <div className="grid gap-4 md:grid-cols-2">
-        {value.map((item, index) => (
-          <div className="border border-border bg-background p-4" key={index}>
-            <Value depth={depth + 1} value={item} />
+      <div className="flex flex-wrap gap-2">
+        {items.map((item) => (
+          <span
+            className="border border-border bg-card px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] text-foreground-muted"
+            key={item}
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  if (valueKey === "body") {
+    return (
+      <div className="space-y-4">
+        {items.map((item) => (
+          <p className="max-w-4xl text-base leading-8 text-foreground-muted" key={item}>
+            {item}
+          </p>
+        ))}
+      </div>
+    );
+  }
+
+  if (sequenceKeys.has(valueKey)) {
+    return (
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+        {items.map((item, index) => (
+          <div className="contents" key={`${item}-${index}`}>
+            <div className="min-w-0 border border-border bg-card px-4 py-3 sm:max-w-52 sm:flex-1">
+              <span className="font-mono text-[8px] font-semibold text-foreground-muted">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p className="mt-1 text-sm font-semibold leading-6">{item}</p>
+            </div>
+            {index < items.length - 1 ? (
+              <ArrowRight
+                aria-hidden="true"
+                className="hidden h-4 w-4 shrink-0 text-foreground-muted sm:block"
+              />
+            ) : null}
           </div>
         ))}
       </div>
     );
   }
-  if (isRecord(value)) {
-    const entries = Object.entries(value).filter(
-      ([key, item]) =>
-        !hiddenKeys.has(key) &&
-        item !== null &&
-        item !== undefined &&
-        item !== "",
-    );
-    if (entries.length === 0) return null;
-    return (
-      <div className={depth === 0 ? "grid gap-5 md:grid-cols-2" : "space-y-4"}>
-        {entries.map(([key, item]) => (
+
+  return (
+    <ul className="grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 xl:grid-cols-3">
+      {items.map((item, index) => (
+        <li className="min-h-28 bg-card p-5" key={`${item}-${index}`}>
+          <span className="font-mono text-[9px] font-semibold tabular-nums text-foreground-muted">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <p className="mt-4 text-sm leading-7 text-foreground-muted">{item}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ObjectArrayValue({
+  items,
+  valueKey,
+}: {
+  items: unknown[];
+  valueKey?: string;
+}) {
+  return (
+    <div className="grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 xl:grid-cols-3">
+      {items.map((item, index) => {
+        if (!isRecord(item)) {
+          return (
+            <div className="bg-card p-5" key={index}>
+              <Value depth={1} value={item} />
+            </div>
+          );
+        }
+
+        const headingKey = ["title", "name", "label", "smell", "symbol", "id"].find(
+          (key) => typeof item[key] === "string" && String(item[key]).trim(),
+        );
+        const heading = headingKey ? String(item[headingKey]) : null;
+        const body = Object.fromEntries(
+          Object.entries(item).filter(
+            ([key, entry]) =>
+              key !== headingKey &&
+              !hiddenKeys.has(key) &&
+              entry !== null &&
+              entry !== undefined &&
+              entry !== "",
+          ),
+        );
+
+        return (
+          <article className="min-h-56 bg-card p-5 sm:p-6" key={index}>
+            <div className="flex items-center justify-between gap-3">
+              <span className="font-mono text-[9px] font-semibold tabular-nums text-foreground-muted">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              {valueKey ? (
+                <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-foreground-muted">
+                  {humanize(valueKey)}
+                </span>
+              ) : null}
+            </div>
+            {heading ? (
+              <h3 className="mt-6 font-serif text-2xl font-semibold leading-tight">
+                {heading}
+              </h3>
+            ) : null}
+            {Object.keys(body).length > 0 ? (
+              <div className="mt-5">
+                <RecordValue depth={1} record={body} />
+              </div>
+            ) : null}
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function RecordValue({
+  record,
+  depth,
+}: {
+  record: Record<string, unknown>;
+  depth: number;
+}) {
+  const entries = Object.entries(record).filter(
+    ([key, item]) =>
+      !hiddenKeys.has(key) &&
+      item !== null &&
+      item !== undefined &&
+      item !== "",
+  );
+  if (entries.length === 0) return null;
+
+  return (
+    <div className={depth === 0 ? "grid gap-4 md:grid-cols-2" : "space-y-5"}>
+      {entries.map(([key, item]) => {
+        const prose = typeof item === "string" && proseKeys.has(key);
+        const formal = key === "notation" || key === "compactObject";
+
+        if (prose || formal) {
+          return (
+            <div
+              className={`${
+                depth === 0 ? "md:col-span-2" : ""
+              } ${
+                formal
+                  ? "border border-border bg-card p-6 sm:p-8"
+                  : "border-l-2 border-accent pl-5"
+              }`}
+              key={key}
+            >
+              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+                {formal ? "Formal carrier" : humanize(key)}
+              </p>
+              <div className="mt-3">
+                <Value depth={depth + 1} value={item} valueKey={key} />
+              </div>
+            </div>
+          );
+        }
+
+        return (
           <div
-            className={depth === 0 ? "border border-border bg-background p-5" : ""}
+            className={
+              depth === 0
+                ? "border border-border bg-card p-5 sm:p-6"
+                : "border-t border-border pt-4 first:border-t-0 first:pt-0"
+            }
             key={key}
           >
-            <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+            <h3 className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
               {humanize(key)}
             </h3>
             <div className="mt-3">
-              <Value depth={depth + 1} value={item} />
+              <Value depth={depth + 1} value={item} valueKey={key} />
             </div>
           </div>
-        ))}
-      </div>
-    );
-  }
-  return null;
+        );
+      })}
+    </div>
+  );
 }
 
 function Cta({
