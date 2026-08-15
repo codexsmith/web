@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "id": "corpus-forge",
   "slug": "corpus-forge",
   "title": "Corpus Forge",
@@ -7,20 +7,179 @@
   "status": "active-development",
   "visibility": "public",
   "hero": {
-    "eyebrow": "CORPUS FORGE",
+    "eyebrow": "CORPUS FORGE · ACTIVE DEVELOPMENT",
     "headline": "Turn a body of work into a system that can remember, disagree, mature, and repair itself.",
-    "support": "A research-operations method for transforming notes, documents, conversations, models, experiments, and revisions into a traceable corpus with provenance, claim status, contradiction handling, review gates, and replacement history."
+    "support": "A research-operations method for transforming notes, documents, conversations, models, experiments, and revisions into a traceable corpus with provenance, explicit claim status, contradiction handling, review gates, and replacement history.",
+    "primaryCta": {
+      "label": "Trace a claim through the forge",
+      "target": "worked-example"
+    },
+    "secondaryCta": {
+      "label": "Explore applied work",
+      "href": "/work/index"
+    }
   },
-  "sections": [
-    {"heading":"Preserve the source","body":"Ingestion begins by retaining provenance and source boundaries so later synthesis remains reconstructible."},
-    {"heading":"Extract candidate structure","body":"Claims, concepts, artifacts, dependencies, contradictions, evidence, and open questions become explicit objects rather than remaining buried in prose."},
-    {"heading":"Keep maturity visible","body":"A note, hypothesis, working result, reviewed artifact, and public claim are different states and should not silently collapse into one another."},
-    {"heading":"Record replacement","body":"Knowledge systems need supersession and correction paths so improvement does not erase why a prior representation existed."},
-    {"heading":"Human promotion gates","body":"AI and automation may accelerate transformation, but consequential promotion into the durable corpus remains reviewable and attributable."}
-  ],
+  "definition": {
+    "title": "A corpus is not a pile of documents. It is a governed memory system.",
+    "body": "Corpus Forge treats sources, extracted claims, relationships, contradictions, reviews, promotions, and supersessions as distinct objects so later synthesis can remain reconstructable instead of silently flattening everything into current prose.",
+    "rule": "Compression is allowed only when the path back to consequential source, status, disagreement, and replacement history remains available."
+  },
+  "lifecycle": {
+    "id": "method",
+    "title": "Six stages from source to durable corpus.",
+    "stages": [
+      {
+        "name": "1. Ingest",
+        "question": "What is the source, where did it come from, and what boundary must remain attached to it?",
+        "artifact": "Source record + provenance"
+      },
+      {
+        "name": "2. Extract",
+        "question": "Which claims, concepts, artifacts, questions, evidence references, and candidate relationships are present?",
+        "artifact": "Candidate structured objects"
+      },
+      {
+        "name": "3. Relate",
+        "question": "What supports, contradicts, depends on, refines, duplicates, or supersedes what?",
+        "artifact": "Typed relationship graph"
+      },
+      {
+        "name": "4. Review",
+        "question": "Which extraction or synthesis decisions require a human witness before they can become durable?",
+        "artifact": "Attributed review decision"
+      },
+      {
+        "name": "5. Promote",
+        "question": "Which bounded objects have enough evidence and review to enter a stronger maturity state?",
+        "artifact": "Promoted claim or artifact with status"
+      },
+      {
+        "name": "6. Supersede / repair",
+        "question": "When new evidence changes the representation, what is replaced, what remains historical, and which downstream objects must be revisited?",
+        "artifact": "Replacement edge + repair queue"
+      }
+    ]
+  },
+  "objects": {
+    "title": "Keep unlike things unlike.",
+    "types": [
+      {
+        "name": "Source",
+        "purpose": "Preserve the original artifact and its provenance boundary."
+      },
+      {
+        "name": "Claim",
+        "purpose": "Represent an assertion with explicit maturity, scope, and evidence links."
+      },
+      {
+        "name": "Evidence",
+        "purpose": "Record observations, references, tests, or artifacts offered in support or tension."
+      },
+      {
+        "name": "Contradiction",
+        "purpose": "Preserve disagreement as an object to resolve or retain, not noise to average away."
+      },
+      {
+        "name": "Decision",
+        "purpose": "Attribute consequential review, promotion, rejection, or repair choices."
+      },
+      {
+        "name": "Supersession",
+        "purpose": "Record that a newer representation replaces another for a declared purpose without deleting history."
+      }
+    ]
+  },
+  "workedExample": {
+    "id": "worked-example",
+    "title": "Illustrative trace: when a design claim and an incident disagree.",
+    "setup": "Suppose a design note says a retryable command is idempotent, while a later incident review records duplicate execution after a timeout and retry. A conventional summary may simply update the prose. Corpus Forge keeps the disagreement inspectable.",
+    "trace": [
+      {
+        "stage": "Source",
+        "state": "The design note and incident review remain separate source records with dates, authorship/provenance, and their original language preserved."
+      },
+      {
+        "stage": "Extraction",
+        "state": "Candidate claim A: the command is idempotent. Candidate claim B: a timeout/retry path produced duplicate execution."
+      },
+      {
+        "stage": "Relation",
+        "state": "The corpus records tension between the claims rather than forcing early reconciliation. Logs, tests, code versions, or reproduction artifacts can attach as evidence."
+      },
+      {
+        "stage": "Review",
+        "state": "A reviewer determines whether the claims concern the same version, execution path, environment, or definition of idempotence and records the decision basis."
+      },
+      {
+        "stage": "Promotion",
+        "state": "Only the bounded finding supported by the reviewed evidence is promoted. Unresolved scope remains explicit."
+      },
+      {
+        "stage": "Supersession / repair",
+        "state": "If the earlier design claim is no longer admissible for the current system, it is superseded rather than erased, and dependent summaries or claims enter a repair queue."
+      }
+    ],
+    "lesson": "The goal is not to preserve every sentence forever. It is to preserve enough structure that a consequential claim can be reconstructed, challenged, replaced, and repaired without inventing history.",
+    "scopeNote": "This is a constructed research-operations example, not a report about a specific production system."
+  },
+  "promotionGrammar": {
+    "title": "Maturity is a state transition, not a formatting choice.",
+    "states": [
+      "raw source",
+      "candidate extraction",
+      "working claim",
+      "reviewed claim",
+      "public claim",
+      "superseded / historical"
+    ],
+    "gates": [
+      "provenance is attached",
+      "scope is declared",
+      "supporting and contradicting evidence is represented",
+      "material inference is labeled",
+      "review responsibility is attributable",
+      "replacement and repair obligations are visible"
+    ]
+  },
+  "validation": {
+    "title": "A governed corpus should be testable as an information system.",
+    "targets": [
+      "reconstruct a public claim back to material sources and review decisions",
+      "detect when contradictory evidence exists but has not been resolved",
+      "prevent lower-maturity notes from silently appearing as established claims",
+      "recover why a superseded representation existed and what replaced it",
+      "identify downstream objects affected by a repaired or withdrawn claim",
+      "measure human review burden introduced by stronger provenance and promotion gates"
+    ],
+    "claimRule": "Corpus Forge is in active development. These are operational goals and validation targets, not published reliability or productivity results."
+  },
   "relationship": {
-    "workbench": "Corpus Forge Workbench is the maintained software/product expression of this method and program.",
-    "ledger": "Claim and Evidence Ledger is a focused product surface extracted from the wider governance model."
+    "title": "Method, software, and focused surfaces remain distinct.",
+    "workbench": "Corpus Forge Workbench is a maintained software/product expression of this method and program. Its retained landing record is not currently promoted as a public route.",
+    "ledger": "Claim and Evidence Ledger is a focused product surface extracted from the wider governance model.",
+    "boundary": "The public Corpus Forge page describes the research-operations program. It should not imply that every planned software capability is deployed, validated, or publicly available."
   },
-  "cta":{"label":"Explore the applied work","href":"/work/index"}
+  "claimBoundary": {
+    "title": "Active development, not a claim of solved knowledge management.",
+    "safe": [
+      "Corpus Forge is a current Boundary First Labs research-operations method and software-development program.",
+      "Its core design objective is reconstructable provenance, maturity, disagreement, review, supersession, and repair.",
+      "Individual mechanisms can be compared with established provenance systems, knowledge graphs, version control, scholarly workflows, data lineage, argument mapping, and research information systems."
+    ],
+    "notEstablished": [
+      "that Corpus Forge is a complete or production-ready knowledge-management platform",
+      "that the method eliminates hallucination, disagreement, stale knowledge, or review error",
+      "that stronger provenance necessarily reduces total research cost",
+      "that AI extraction can safely promote consequential claims without attributable human review where such review is required"
+    ]
+  },
+  "closing": {
+    "eyebrow": "CORPUS FORGE",
+    "title": "Let knowledge change without pretending it never changed.",
+    "finalLine": "Preserve the source. Extract the object. Keep disagreement visible. Promote deliberately. Record replacement. Repair what depended on the old claim."
+  },
+  "cta": {
+    "label": "Explore applied work",
+    "href": "/work/index"
+  }
 }
