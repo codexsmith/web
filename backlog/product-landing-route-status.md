@@ -85,13 +85,13 @@ Implemented on `agent/product-landing-shared-contract`:
 - Compact `sections[]` records render as authored landing sections rather than as generic `Heading` / `Body` object cards.
 - Top-level `cta` is treated as presentation control rather than generic page content, preventing CTA labels from leaking into the body as pseudo-data.
 - Closure-Driven Software Development, Schemathematics, Boundary-First Chess, Boundary-First Soccer, Corpus Forge, and Agency & Representation Audit now declare explicit CTA destinations.
-- Agency & Representation Audit points directly to collaboration intake; doctrine/program pages currently point to their governing Software, Research, or Work context until deeper purpose-built routes are promoted.
+- Agency & Representation Audit points directly to collaboration intake; doctrine/program pages point to their governing Software, Research, or Work context unless a more specific public destination is declared.
 
 Still pending manual route inspection before checking any route complete:
 
 - desktop/mobile visual QA;
 - anchor and internal-link verification on the dense Weather, Law, and Software Before Code records;
-- page-specific authored templates or demonstrations for Chess, Soccer, and Corpus Forge;
+- desktop/mobile and anchor/link verification for the authored promotion pages;
 - homepage carousel eyebrow copy review so Boundary First UX is presented as the interaction method used by the carousel rather than as the parent identity of all public work.
 
 ### Agency & Representation Audit — 2026-08-15
@@ -131,5 +131,46 @@ Promotion pass implemented without changing the governed maturity state from `re
 - Validation is framed as a comparative research program across discrimination, prerequisite reconstruction, operation selection, translation, pedagogy, retrieval, and machine reasoning.
 - The claim firewall explicitly distinguishes a Boundary First research framing from priority claims, benchmark claims, or claims that a new primitive is necessary when established mathematics is sufficient.
 - `/schemathematics` now routes to a purpose-built `SchemathematicsLanding` projection sourced from the governed content object.
+
+The inspection checkbox remains open until desktop/mobile visual QA and live anchor/link verification are complete.
+
+### Boundary-First Chess — 2026-08-15
+
+Promotion pass implemented without changing the governed maturity state from `working-public-doctrine`:
+
+- Reframed the public doctrine around state transitions under adversarial constraint rather than material or move choice in isolation.
+- Added a six-dimension position lens covering legality, king safety, reachability, pressure, continuation, and conversion/repair.
+- Added a five-pass reading method from immediate constraints through candidate transitions, reply-aware continuation, and conversion or repair.
+- Added a constructed teaching pattern in which an apparent material win removes a critical defender, making the consequential boundary shift explicit before deep calculation.
+- The example is labeled as a teaching pattern rather than an engine-validated benchmark position.
+- Validation targets include candidate-move quality, recognition of hidden obligations, explanatory transfer, and agreement with established chess analysis.
+- `/chess` now routes to a purpose-built `ChessLanding` projection sourced from the governed content object.
+
+The inspection checkbox remains open until desktop/mobile visual QA and live anchor/link verification are complete.
+
+### Boundary-First Soccer — 2026-08-15
+
+Promotion pass implemented without changing the governed maturity state from `working-public-doctrine`:
+
+- Reframed space as changing reachability governed by access, support, pressure, orientation, promotion, and repair.
+- Added a five-pass team-state method for bounding the phase, mapping support, reading authored pressure, promoting advantage, and repairing structure.
+- Added a constructed possession trace showing when a backward reset can restore the reachable action set rather than merely lose territory.
+- Added a candidate analyst tagging grammar while explicitly requiring compatibility with established event, tracking, tactical, and coaching vocabularies.
+- Validation targets include inter-analyst agreement, event/tracking-data correspondence, pressure-state predictive value, and coaching usefulness.
+- `/soccer` now routes to a purpose-built `SoccerLanding` projection sourced from the governed content object.
+
+The inspection checkbox remains open until desktop/mobile visual QA and live anchor/link verification are complete.
+
+### Corpus Forge — 2026-08-15
+
+Promotion pass implemented without changing the governed maturity state from `active-development`:
+
+- Reframed the corpus as a governed memory system rather than a document collection.
+- Added a six-stage lifecycle from source ingestion through structured extraction, typed relationships, attributable review, promotion, and supersession/repair.
+- Added explicit object classes for source, claim, evidence, contradiction, decision, and supersession so unlike things do not silently collapse into one representation.
+- Added an illustrative design-note-versus-incident trace showing how contradictory claims remain inspectable until scope and evidence support a bounded promotion decision.
+- Added a promotion grammar that distinguishes raw source, candidate extraction, working claim, reviewed claim, public claim, and superseded/historical states.
+- The public relationship boundary now distinguishes the Corpus Forge program from the retained, not-currently-public Workbench landing and from focused product surfaces such as the Claim and Evidence Ledger.
+- `/corpus-forge` now routes to a purpose-built `CorpusForgeLanding` projection sourced from the governed content object.
 
 The inspection checkbox remains open until desktop/mobile visual QA and live anchor/link verification are complete.
