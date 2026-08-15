@@ -19,6 +19,10 @@ export function PublicLandingCarousel({
   const [activeIndex, setActiveIndex] = useState(0);
   const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
   const activeItem = items[activeIndex];
+  const displayEyebrow =
+    eyebrow === "Boundary First UX · Public landing pages"
+      ? "Boundary First Labs · Public work"
+      : eyebrow;
 
   const moveTo = useCallback(
     (nextIndex: number) => {
@@ -50,7 +54,7 @@ export function PublicLandingCarousel({
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-              {eyebrow}
+              {displayEyebrow}
             </p>
             <h2
               className="mt-3 max-w-4xl font-serif text-3xl font-semibold tracking-tight sm:text-4xl"
