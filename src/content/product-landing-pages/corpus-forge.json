@@ -22,5 +22,5 @@
     "workbench": "Corpus Forge Workbench is the maintained software/product expression of this method and program.",
     "ledger": "Claim and Evidence Ledger is a focused product surface extracted from the wider governance model."
   },
-  "cta":{"label":"Forge a bounded corpus"}
+  "cta":{"label":"Explore the applied work","href":"/work/index"}
 }
