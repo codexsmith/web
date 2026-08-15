@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CornerDownRight } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { PublicLandingCarouselItem } from "@/lib/product-landing-carousel";
 
 export function PublicLandingCarousel({
@@ -16,8 +16,10 @@ export function PublicLandingCarousel({
   title?: string;
   description?: string;
 }) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [requestedIndex, setActiveIndex] = useState(0);
   const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
+  const activeIndex =
+    items.length === 0 ? 0 : Math.min(requestedIndex, items.length - 1);
   const activeItem = items[activeIndex];
   const displayEyebrow =
     eyebrow === "Boundary First UX · Public landing pages"
@@ -36,12 +38,6 @@ export function PublicLandingCarousel({
     },
     [items.length],
   );
-
-  useEffect(() => {
-    if (activeIndex >= items.length && items.length > 0) {
-      setActiveIndex(items.length - 1);
-    }
-  }, [activeIndex, items.length]);
 
   if (items.length === 0 || !activeItem) return null;
 
