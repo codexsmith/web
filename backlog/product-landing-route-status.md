@@ -76,4 +76,20 @@ For each active route, inspect at minimum:
 
 Use this section for route-specific defects, decisions, or promotion work discovered during inspection.
 
-- _No manual inspection notes recorded yet._
+### Shared public-landing contract — 2026-08-15
+
+Implemented on `agent/product-landing-shared-contract`:
+
+- Generic public landings now expose manifest/content maturity visibly in the hero and representation panel instead of hiding draft, pilot, or active-development status.
+- Generic public landings now include the same public field-guide rail used by Boundary First UX, preserving the larger Software / Research / Work context after a visitor enters an individual landing page.
+- Compact `sections[]` records render as authored landing sections rather than as generic `Heading` / `Body` object cards.
+- Top-level `cta` is treated as presentation control rather than generic page content, preventing CTA labels from leaking into the body as pseudo-data.
+- Closure-Driven Software Development, Schemathematics, Boundary-First Chess, Boundary-First Soccer, Corpus Forge, and Agency & Representation Audit now declare explicit CTA destinations.
+- Agency & Representation Audit points directly to collaboration intake; doctrine/program pages currently point to their governing Software, Research, or Work context until deeper purpose-built routes are promoted.
+
+Still pending manual route inspection before checking any route complete:
+
+- desktop/mobile visual QA;
+- anchor and internal-link verification on the dense Weather, Law, and Software Before Code records;
+- page-specific authored templates or demonstrations for Closure-Driven Software Development, Schemathematics, Chess, Soccer, Corpus Forge, and Agency & Representation Audit;
+- homepage carousel eyebrow copy review so Boundary First UX is presented as the interaction method used by the carousel rather than as the parent identity of all public work.
