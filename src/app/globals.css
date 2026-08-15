@@ -195,3 +195,411 @@ section[aria-label="Boundary First UX sandbox session"] .overflow-x-auto {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+/*
+ * Boundary First public landing engineering chrome.
+ * The governed content remains page-specific; this layer makes the shared
+ * instrument language visible across authored projections.
+ */
+.bfl-engineering-shell {
+  --bfl-signal: var(--color-brand-gold);
+  --bfl-signal-secondary: var(--color-brand-blue);
+  position: relative;
+  isolation: isolate;
+}
+
+.bfl-engineering-shell[data-bfl-domain="audit"] {
+  --bfl-signal: var(--color-brand-red);
+  --bfl-signal-secondary: var(--color-brand-gold);
+}
+
+.bfl-engineering-shell[data-bfl-domain="ux"] {
+  --bfl-signal: var(--color-brand-gold);
+  --bfl-signal-secondary: var(--color-brand-blue);
+}
+
+.bfl-engineering-shell[data-bfl-domain="chess"] {
+  --bfl-signal: var(--color-brand-gold);
+  --bfl-signal-secondary: var(--color-brand-red);
+}
+
+.bfl-engineering-shell[data-bfl-domain="soccer"] {
+  --bfl-signal: var(--color-brand-green);
+  --bfl-signal-secondary: var(--color-brand-gold);
+}
+
+.bfl-engineering-shell[data-bfl-domain="weather"] {
+  --bfl-signal: var(--color-brand-blue);
+  --bfl-signal-secondary: var(--color-brand-green);
+}
+
+.bfl-engineering-shell[data-bfl-domain="software"] {
+  --bfl-signal: var(--color-brand-gold);
+  --bfl-signal-secondary: var(--color-brand-green);
+}
+
+.bfl-engineering-shell[data-bfl-domain="law"] {
+  --bfl-signal: var(--color-brand-red);
+  --bfl-signal-secondary: var(--color-brand-gold);
+}
+
+.bfl-engineering-shell[data-bfl-domain="corpus"] {
+  --bfl-signal: var(--color-brand-gold);
+  --bfl-signal-secondary: var(--color-brand-blue);
+}
+
+.bfl-engineering-shell[data-bfl-domain="research"] {
+  --bfl-signal: var(--color-brand-blue);
+  --bfl-signal-secondary: var(--color-brand-gold);
+}
+
+.bfl-engineering-shell main {
+  counter-reset: bfl-section;
+}
+
+.bfl-engineering-shell main > section {
+  position: relative;
+  counter-increment: bfl-section;
+}
+
+.bfl-engineering-shell main > section:not(:first-of-type) {
+  background-image:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--bfl-signal) 4%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+.bfl-engineering-shell main > section::after {
+  position: absolute;
+  top: 0.85rem;
+  right: 1.1rem;
+  z-index: 2;
+  content: "S" counter(bfl-section, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, currentColor 34%, transparent);
+  pointer-events: none;
+}
+
+.bfl-engineering-shell main > section h2 {
+  text-wrap: balance;
+}
+
+.bfl-engineering-shell main > section h2::after {
+  display: block;
+  width: 3.25rem;
+  height: 2px;
+  margin-top: 0.85rem;
+  content: "";
+  background: linear-gradient(
+    90deg,
+    var(--bfl-signal),
+    var(--bfl-signal-secondary)
+  );
+  opacity: 0.72;
+}
+
+.bfl-engineering-shell main article {
+  position: relative;
+  box-shadow: 5px 5px 0
+    color-mix(in srgb, var(--bfl-signal) 11%, transparent);
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease;
+}
+
+.bfl-engineering-shell main article::before,
+.bfl-engineering-shell main article::after,
+.bfl-engineering-shell main > section:first-of-type aside::before,
+.bfl-engineering-shell main > section:first-of-type aside::after {
+  position: absolute;
+  z-index: 3;
+  width: 1rem;
+  height: 1rem;
+  content: "";
+  pointer-events: none;
+}
+
+.bfl-engineering-shell main article::before,
+.bfl-engineering-shell main > section:first-of-type aside::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--bfl-signal);
+  border-left: 2px solid var(--bfl-signal);
+}
+
+.bfl-engineering-shell main article::after,
+.bfl-engineering-shell main > section:first-of-type aside::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid var(--bfl-signal-secondary);
+  border-bottom: 2px solid var(--bfl-signal-secondary);
+}
+
+.bfl-engineering-shell main article > svg:first-child {
+  color: var(--bfl-signal);
+  filter: drop-shadow(
+    2px 2px 0 color-mix(in srgb, var(--bfl-signal) 16%, transparent)
+  );
+}
+
+.bfl-engineering-shell main > section:first-of-type aside {
+  position: relative;
+  box-shadow: 10px 10px 0
+    color-mix(in srgb, var(--bfl-signal) 13%, transparent);
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--bfl-signal) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bfl-signal) 7%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 18px 18px;
+}
+
+.bfl-engineering-shell main > section:first-of-type h1 {
+  text-wrap: balance;
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--bfl-signal) 22%, transparent);
+}
+
+.bfl-engineering-shell main > section :where(a, button)[class*="min-h-"] {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    0 100%
+  );
+}
+
+.bfl-engineering-shell[data-bfl-page="constitutional-law-and-jurisprudence"]
+  #legal-notice {
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  box-shadow: inset 4px 0 0 var(--bfl-signal);
+}
+
+.bfl-engineering-shell[data-bfl-page="boundary-first-weather"]
+  main
+  > section:first-of-type
+  aside {
+  box-shadow:
+    10px 10px 0 color-mix(in srgb, var(--bfl-signal) 14%, transparent),
+    18px 18px 0 color-mix(in srgb, var(--bfl-signal-secondary) 7%, transparent);
+}
+
+.bfl-engineering-shell[data-bfl-page="software-before-code"]
+  main
+  > section:first-of-type
+  aside {
+  box-shadow:
+    10px 10px 0 color-mix(in srgb, var(--bfl-signal) 15%, transparent),
+    18px 18px 0 color-mix(in srgb, var(--bfl-signal-secondary) 6%, transparent);
+}
+
+@media (hover: hover) {
+  .bfl-engineering-shell main article:hover {
+    transform: translate(-2px, -2px);
+    border-color: color-mix(in srgb, var(--bfl-signal) 62%, var(--border));
+    box-shadow: 9px 9px 0
+      color-mix(in srgb, var(--bfl-signal) 15%, transparent);
+  }
+}
+
+.bfl-engineering-rail,
+.bfl-engineering-registration {
+  display: none;
+}
+
+@media (min-width: 1536px) {
+  .bfl-engineering-rail {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 40;
+    display: flex;
+    width: 4.5rem;
+    max-height: min(42rem, 82vh);
+    transform: translateY(-50%);
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--background) 92%, transparent);
+    box-shadow: 8px 8px 0
+      color-mix(in srgb, var(--bfl-signal) 10%, transparent);
+    backdrop-filter: blur(16px);
+  }
+
+  .bfl-engineering-rail-cap {
+    display: grid;
+    gap: 0.45rem;
+    justify-items: center;
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 0.45rem;
+  }
+
+  .bfl-engineering-sigil {
+    position: relative;
+    display: grid;
+    width: 2.25rem;
+    height: 2.25rem;
+    place-items: center;
+    border: 1px solid var(--bfl-signal);
+    color: var(--bfl-signal);
+    box-shadow: inset 0 0 0 3px
+      color-mix(in srgb, var(--bfl-signal) 8%, transparent);
+  }
+
+  .bfl-engineering-sigil-node {
+    position: absolute;
+    top: -0.24rem;
+    right: -0.24rem;
+    width: 0.48rem;
+    height: 0.48rem;
+    border: 1px solid var(--background);
+    border-radius: 999px;
+    background: var(--bfl-signal-secondary);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--bfl-signal-secondary) 12%, transparent);
+  }
+
+  .bfl-engineering-code {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .bfl-engineering-rail-title {
+    margin: 0.9rem auto;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .bfl-engineering-rail-trace {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bfl-engineering-rail-signal {
+    display: grid;
+    min-height: 4.5rem;
+    grid-template-columns: 0.7rem 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: start;
+    gap: 0.2rem 0.35rem;
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--border) 55%, transparent);
+    padding: 0.55rem 0.45rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+  }
+
+  .bfl-engineering-rail-signal:last-child {
+    border-bottom: 0;
+  }
+
+  .bfl-engineering-rail-node {
+    width: 0.48rem;
+    height: 0.48rem;
+    margin-top: 0.15rem;
+    border-radius: 999px;
+    background: var(--bfl-signal);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--bfl-signal) 10%, transparent);
+  }
+
+  .bfl-engineering-rail-signal strong {
+    grid-column: 1 / -1;
+    color: var(--foreground-muted);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    writing-mode: vertical-rl;
+  }
+
+  .bfl-engineering-rail-status {
+    display: grid;
+    gap: 0.45rem;
+    justify-items: center;
+    padding: 0.7rem 0.45rem;
+    color: var(--foreground-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .bfl-engineering-rail-status > span:last-child {
+    max-height: 7rem;
+    overflow: hidden;
+    writing-mode: vertical-rl;
+  }
+
+  .bfl-engineering-status-lamp {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: var(--bfl-signal-secondary);
+    box-shadow: 0 0 0 4px
+      color-mix(in srgb, var(--bfl-signal-secondary) 10%, transparent);
+  }
+}
+
+@media (min-width: 1280px) {
+  .bfl-engineering-registration {
+    position: fixed;
+    top: 7.25rem;
+    right: 1rem;
+    z-index: 30;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    color: color-mix(in srgb, var(--foreground) 38%, transparent);
+    pointer-events: none;
+  }
+
+  .bfl-engineering-registration > span:first-child,
+  .bfl-engineering-registration > span:nth-child(2) {
+    position: absolute;
+    background: var(--bfl-signal);
+    opacity: 0.5;
+  }
+
+  .bfl-engineering-registration > span:first-child {
+    width: 100%;
+    height: 1px;
+  }
+
+  .bfl-engineering-registration > span:nth-child(2) {
+    width: 1px;
+    height: 100%;
+  }
+
+  .bfl-engineering-registration strong {
+    position: absolute;
+    top: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+}

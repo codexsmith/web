@@ -5,6 +5,7 @@ import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFir
 import { ChessLanding } from "@/components/product-landing/ChessLanding";
 import { ClosureDrivenLanding } from "@/components/product-landing/ClosureDrivenLanding";
 import { CorpusForgeLanding } from "@/components/product-landing/CorpusForgeLanding";
+import { LandingEngineeringChrome } from "@/components/product-landing/LandingEngineeringChrome";
 import { LawLanding } from "@/components/product-landing/LawLanding";
 import { ProductLandingRenderer } from "@/components/product-landing/ProductLandingRenderer";
 import { SchemathematicsLanding } from "@/components/product-landing/SchemathematicsLanding";
@@ -114,43 +115,83 @@ export default async function ProductLandingPage({ params }: ProductLandingPageP
   if (!content) notFound();
 
   if (decision.entry.id === "agency-representation-audit" && decision.entry.collection !== "bridge") {
-    return <AgencyAuditLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <AgencyAuditLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "boundary-first-ux" && decision.entry.collection !== "bridge") {
-    return <BoundaryFirstUxLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <BoundaryFirstUxLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "boundary-first-chess" && decision.entry.collection !== "bridge") {
-    return <ChessLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <ChessLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "boundary-first-soccer" && decision.entry.collection !== "bridge") {
-    return <SoccerLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <SoccerLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "closure-driven-software-development" && decision.entry.collection !== "bridge") {
-    return <ClosureDrivenLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <ClosureDrivenLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "corpus-forge" && decision.entry.collection !== "bridge") {
-    return <CorpusForgeLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <CorpusForgeLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "schemathematics" && decision.entry.collection !== "bridge") {
-    return <SchemathematicsLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <SchemathematicsLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "software-before-code" && decision.entry.collection !== "bridge") {
-    return <SoftwareBeforeCodeLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <SoftwareBeforeCodeLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "boundary-first-weather" && decision.entry.collection !== "bridge") {
-    return <WeatherLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <WeatherLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   if (decision.entry.id === "constitutional-law-and-jurisprudence" && decision.entry.collection !== "bridge") {
-    return <LawLanding />;
+    return (
+      <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
+        <LawLanding />
+      </LandingEngineeringChrome>
+    );
   }
 
   return <ProductLandingRenderer content={content} decision={decision} />;

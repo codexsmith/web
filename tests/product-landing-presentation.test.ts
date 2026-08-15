@@ -151,6 +151,39 @@ describe("product landing projection contracts", () => {
     }
   });
 
+  it("wraps every authored projection in the shared engineering chrome and registers its domain sigil", () => {
+    const routeSource = fs.readFileSync(
+      path.join(process.cwd(), "src/app/[...landing]/page.tsx"),
+      "utf8",
+    );
+    const chromeSource = fs.readFileSync(
+      path.join(
+        process.cwd(),
+        "src/components/product-landing/LandingEngineeringChrome.tsx",
+      ),
+      "utf8",
+    );
+    const globalCss = fs.readFileSync(
+      path.join(process.cwd(), "src/app/globals.css"),
+      "utf8",
+    );
+
+    expect(routeSource).toContain("LandingEngineeringChrome");
+    expect((routeSource.match(/<LandingEngineeringChrome/g) ?? []).length).toBe(
+      Object.keys(customProjections).length,
+    );
+
+    for (const id of Object.keys(customProjections)) {
+      expect(chromeSource, id).toContain(`"${id}"`);
+    }
+
+    expect(chromeSource).toContain("bfl-engineering-rail");
+    expect(chromeSource).toContain("bfl-engineering-sigil");
+    expect(globalCss).toContain(".bfl-engineering-shell");
+    expect(globalCss).toContain(".bfl-engineering-rail");
+    expect(globalCss).toContain("--bfl-signal");
+  });
+
   it("keeps every authored public projection connected to the shared public field guide", () => {
     for (const [id, file] of Object.entries(customProjections)) {
       const source = fs.readFileSync(
