@@ -18,7 +18,7 @@
     "graph:dry-run": "python scripts/build_graph_context.py --dry-run",
     "graph:test": "python -m unittest scripts/test_build_graph_context.py",
     "test:ui": "vitest",
-    "test:contracts": "vitest run tests/public-architecture.test.ts tests/product-landing-presentation.test.ts",
+    "test:contracts": "vitest run tests/public-architecture.test.ts tests/product-landing-presentation.test.ts tests/site-journey-refinement.test.ts",
     "ui:normalize": "python scripts/opacity_purge.py && python scripts/replace_email.py",
     "ui:check": "python scripts/check_ui_stabilization.py"
   },
