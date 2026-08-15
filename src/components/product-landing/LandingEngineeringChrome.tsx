@@ -12,6 +12,7 @@ import {
   Network,
   ScanSearch,
 } from "lucide-react";
+import styles from "./LandingEngineeringChrome.module.css";
 
 type LandingChromeSpec = {
   code: string;
@@ -122,7 +123,7 @@ export function LandingEngineeringChrome({
 
   return (
     <div
-      className="bfl-engineering-shell"
+      className={`bfl-engineering-shell ${styles.shell}`}
       data-bfl-domain={spec.domain}
       data-bfl-page={pageId}
     >
