@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "id": "boundary-first-soccer",
   "slug": "soccer",
   "title": "Boundary-First Soccer",
@@ -7,20 +7,154 @@
   "status": "working-public-doctrine",
   "visibility": "public",
   "hero": {
-    "eyebrow": "BOUNDARY-FIRST SOCCER",
+    "eyebrow": "BOUNDARY-FIRST SOCCER · WORKING PUBLIC DOCTRINE",
     "headline": "Before asking where the ball should go, ask what boundary must change.",
-    "support": "A doctrine of space, pressure, possession, promotion, and repair for seeing soccer as the construction and transport of temporary closures through an adversarial field."
+    "support": "A doctrine of actionable space, pressure, possession, promotion, and repair for reading soccer as the construction and transport of temporary advantages through an adversarial field.",
+    "primaryCta": {
+      "label": "Trace a possession phase",
+      "target": "worked-example"
+    },
+    "secondaryCta": {
+      "label": "Explore applied work",
+      "href": "/work/index"
+    }
   },
-  "sections": [
-    {"heading":"Space is actionable, not empty","body":"Relevant space depends on reachability, orientation, pressure, support, timing, and what becomes possible after the next action."},
-    {"heading":"Possession is a maintained structure","body":"Keeping the ball matters when the team preserves enough support and continuation to transport an advantage rather than merely record completed passes."},
-    {"heading":"Pressure authors futures","body":"Effective pressure changes the opponent's reachable action set and can make a later event predictable before it occurs."},
-    {"heading":"Promotion separates motion from progress","body":"An advantage is promoted when it survives transport into a more consequential team state."},
-    {"heading":"Repair is tactical intelligence","body":"When structure breaks, the next useful question is which repair path restores support, access, responsibility, or control."}
-  ],
+  "definition": {
+    "title": "Space matters when it changes what can happen next.",
+    "body": "Relevant soccer space is not empty geometry. It is shaped by player reachability, orientation, support, pressure, timing, cover, passing lanes, defensive responsibility, and the next state a team can construct from the current one.",
+    "rule": "Judge an action by the team state it creates or preserves, not by ball movement alone."
+  },
+  "fieldLens": {
+    "title": "Read the field as changing reachability.",
+    "dimensions": [
+      {
+        "name": "Access",
+        "question": "Which players, lanes, and zones are realistically reachable before pressure closes them?"
+      },
+      {
+        "name": "Support",
+        "question": "If the receiver is pressed, which continuations remain available?"
+      },
+      {
+        "name": "Pressure",
+        "question": "Which options is the opponent removing, delaying, or making expensive?"
+      },
+      {
+        "name": "Orientation",
+        "question": "Can the next player receive facing useful space or only recycle under constraint?"
+      },
+      {
+        "name": "Promotion",
+        "question": "Does the action transport an advantage into a more consequential state?"
+      },
+      {
+        "name": "Repair",
+        "question": "When structure breaks, which action restores support, access, responsibility, or control?"
+      }
+    ]
+  },
+  "method": {
+    "id": "method",
+    "title": "Five passes through a team state.",
+    "passes": [
+      {
+        "name": "1. Bound the phase",
+        "question": "Where is the ball, which team has functional control, what immediate pressure exists, and what transition risk is live?",
+        "output": "Current-state boundary"
+      },
+      {
+        "name": "2. Map access and support",
+        "question": "Which receivers and zones can be reached in time, and what support remains after the pass?",
+        "output": "Reachability and support map"
+      },
+      {
+        "name": "3. Read authored pressure",
+        "question": "Which options is the opponent trying to remove, and which future action are they attempting to force?",
+        "output": "Pressure and trap hypothesis"
+      },
+      {
+        "name": "4. Promote the advantage",
+        "question": "Which action carries space, numerical advantage, orientation, or tempo into a more consequential state without destroying continuation?",
+        "output": "Promotion path"
+      },
+      {
+        "name": "5. Repair before collapse",
+        "question": "If the lane closes or structure fragments, what reset preserves enough control to build again?",
+        "output": "Repair or circulation path"
+      }
+    ]
+  },
+  "workedExample": {
+    "id": "worked-example",
+    "title": "Worked phase: the backward pass that restores the attack.",
+    "setup": "A fullback receives near the touchline while an opponent closes from inside-out. The nearby winger is marked, the forward lane is narrow, and a central midfielder is available behind the ball. A forward pass would look progressive on a pass map but may enter the opponent's trap.",
+    "naiveRead": "Playing backward loses territory and appears less attacking.",
+    "boundaryTrace": [
+      "the touchline removes one side of the receiver's escape space",
+      "the presser's angle is attempting to make the forward lane predictable",
+      "the marked winger offers nominal proximity but weak continuation",
+      "the central reset can reopen the far side and change the opponent's pressure orientation",
+      "the backward pass is useful if it restores a larger reachable action set and allows the next line to be broken under better conditions"
+    ],
+    "promotionTest": "The reset is not automatically good. It earns value only if the team uses the restored structure to regain access, move the opponent, or create a more consequential next state.",
+    "lesson": "Progress is not identical to forward ball motion. A temporary loss of territory can be a repair operation when it reconstructs the support and access needed to promote the possession later.",
+    "scopeNote": "This is a constructed tactical teaching phase, not a claim about a specific match, team, or event dataset."
+  },
+  "taggingGrammar": {
+    "title": "A candidate analyst vocabulary.",
+    "tags": [
+      "boundary opened",
+      "boundary closed",
+      "support restored",
+      "pressure authored",
+      "forced future",
+      "advantage promoted",
+      "advantage dissipated",
+      "repair action",
+      "continuation preserved",
+      "transition defect"
+    ],
+    "rule": "Tags should describe observable team-state changes and remain compatible with established event, tracking, and tactical-analysis vocabularies rather than replacing them by fiat."
+  },
+  "validation": {
+    "title": "The doctrine becomes useful only if it survives match evidence.",
+    "targets": [
+      "inter-analyst agreement on boundary and repair tags",
+      "ability to distinguish possession maintenance from advantage promotion",
+      "agreement between qualitative traces and event/tracking data where available",
+      "predictive value of pressure-state descriptions for likely next actions",
+      "coaching usefulness compared with established tactical language"
+    ],
+    "claimRule": "Illustrative fit to familiar soccer situations is not validation. Comparative analyst, coaching, event-data, or tracking-data evidence is required for performance claims."
+  },
   "proof": {
-    "built": ["Boundary-First Soccer practitioner doctrine", "Analyst vocabulary and tactical tagging concepts"],
+    "built": [
+      "Boundary-First Soccer practitioner doctrine",
+      "Analyst vocabulary and tactical tagging concepts"
+    ],
     "claimBoundary": "This is a practitioner doctrine and research on-ramp, not a claim to replace established coaching, performance analysis, or sports science."
   },
-  "cta":{"label":"Explore the applied work","href":"/work/index"}
+  "claimBoundary": {
+    "title": "Practitioner doctrine, not a substitute for established soccer analysis.",
+    "safe": [
+      "Boundary-First Soccer is a working public tactical and analytical framing.",
+      "Its concepts can be tested against video, event data, tracking data, coaching interpretation, and established tactical frameworks.",
+      "The doctrine should import existing football-analysis language whenever that language already captures the relevant structure."
+    ],
+    "notEstablished": [
+      "that the doctrine improves team performance or player development",
+      "that the proposed tags are more reliable than established analysis systems",
+      "that pressure or promotion can be inferred robustly without suitable observation",
+      "that Boundary First terminology is necessary when conventional soccer concepts are sufficient"
+    ]
+  },
+  "closing": {
+    "eyebrow": "BOUNDARY-FIRST SOCCER",
+    "title": "Move the ball when moving the ball changes the field you can act in.",
+    "finalLine": "Map access. Read pressure. Preserve support. Promote the advantage. Repair before the structure collapses."
+  },
+  "cta": {
+    "label": "Explore applied work",
+    "href": "/work/index"
+  }
 }
