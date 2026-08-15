@@ -91,7 +91,7 @@ Still pending manual route inspection before checking any route complete:
 
 - desktop/mobile visual QA;
 - anchor and internal-link verification on the dense Weather, Law, and Software Before Code records;
-- page-specific authored templates or demonstrations for Closure-Driven Software Development, Schemathematics, Chess, Soccer, and Corpus Forge;
+- page-specific authored templates or demonstrations for Chess, Soccer, and Corpus Forge;
 - homepage carousel eyebrow copy review so Boundary First UX is presented as the interaction method used by the carousel rather than as the parent identity of all public work.
 
 ### Agency & Representation Audit — 2026-08-15
@@ -106,3 +106,30 @@ Promotion pass implemented without changing the governed maturity state from `pi
 - `/agency-audit` now routes to the purpose-built projection while continuing to use the manifest/content registry for route eligibility, metadata, and public maturity.
 
 The inspection checkbox remains open until the route receives desktop/mobile visual QA and live anchor/link verification.
+
+### Closure-Driven Software Development — 2026-08-15
+
+Promotion pass implemented without changing the governed maturity state from `advanced-practitioner-draft`:
+
+- Reframed the method around a six-stage closure loop: discover, bound, skeleton, execute, witness, and repair/promote.
+- Added an explicit readiness model where domain certainty and executable certainty must overlap at the granularity of the next commitment; complete knowledge is not required.
+- Added a delivery-skeleton contract that requires a real input, protected distinctions, a meaningful operation, a domain witness, a failure path, observation, and repair ownership.
+- Added a worked CSV-export example showing how a seemingly small UI request hides permissions, filtering, historical-state, ordering, delivery, retention, and audit distinctions.
+- Evidence targets are now framed as measurements for comparative validation rather than as established performance claims.
+- Added a public claim boundary stating that the method remains an active draft and has not established general superiority over existing delivery approaches.
+- `/closure-driven-software-development` now routes to a purpose-built `ClosureDrivenLanding` projection sourced from the governed content object.
+
+The inspection checkbox remains open until desktop/mobile visual QA and live anchor/link verification are complete.
+
+### Schemathematics — 2026-08-15
+
+Promotion pass implemented without changing the governed maturity state from `research-program-draft`:
+
+- Added an eight-field operative profile covering entity, admissibility, transformations, invariants, closure, boundary, provenance, and defect/repair.
+- Added a worked monoid-to-group comparison using established algebra so the page demonstrates the representation method without treating the underlying mathematics as novel.
+- The comparison makes the added universal-invertibility condition visible together with the operations it guarantees and the operations a general monoid does not guarantee.
+- Validation is framed as a comparative research program across discrimination, prerequisite reconstruction, operation selection, translation, pedagogy, retrieval, and machine reasoning.
+- The claim firewall explicitly distinguishes a Boundary First research framing from priority claims, benchmark claims, or claims that a new primitive is necessary when established mathematics is sufficient.
+- `/schemathematics` now routes to a purpose-built `SchemathematicsLanding` projection sourced from the governed content object.
+
+The inspection checkbox remains open until desktop/mobile visual QA and live anchor/link verification are complete.
