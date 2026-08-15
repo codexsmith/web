@@ -116,11 +116,11 @@ export function BoundaryFirstUxSandboxSession() {
                     aria-current={active ? "page" : undefined}
                   >
                     <div className="flex items-center justify-between gap-3">
-                      <span className={`font-mono text-[9px] font-semibold uppercase tracking-[0.12em] ${active ? "text-primary-foreground/60" : "text-foreground-muted"}`}>{item.index} · instrument</span>
+                      <span className={`font-mono text-[9px] font-semibold uppercase tracking-[0.12em] ${active ? "text-primary-foreground-muted" : "text-foreground-muted"}`}>{item.index} · instrument</span>
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </div>
                     <strong className="mt-3 block font-serif text-lg leading-6">{item.label}</strong>
-                    <span className={`mt-1 block text-xs leading-5 ${active ? "text-primary-foreground/65" : "text-foreground-muted"}`}>{item.action}</span>
+                    <span className={`mt-1 block text-xs leading-5 ${active ? "text-primary-foreground-secondary" : "text-foreground-muted"}`}>{item.action}</span>
                   </button>
                 );
               })}
@@ -191,7 +191,7 @@ function ResolutionInstrument({ state, resolutionState, onChange }: { state: Sna
           <div className="mt-6 grid gap-2">
             {(["system", "project", "pump"] as const).map((level, index) => (
               <button key={level} type="button" onClick={() => onChange(level)} className={`flex min-h-14 items-center justify-between border px-4 text-left ${state.resolution === level ? "border-foreground bg-primary text-primary-foreground" : "border-border bg-background"}`}>
-                <span><span className="block font-mono text-[9px] font-semibold uppercase tracking-[0.1em]">0{index + 1} · {resolutionData[level].label}</span><span className={`mt-1 block text-xs ${state.resolution === level ? "text-primary-foreground/65" : "text-foreground-muted"}`}>{index === 0 ? "Whole project as one stable object" : index === 1 ? "Differentiate project packages" : "Resolve the pump carrier itself"}</span></span>
+                <span><span className="block font-mono text-[9px] font-semibold uppercase tracking-[0.1em]">0{index + 1} · {resolutionData[level].label}</span><span className={`mt-1 block text-xs ${state.resolution === level ? "text-primary-foreground-secondary" : "text-foreground-muted"}`}>{index === 0 ? "Whole project as one stable object" : index === 1 ? "Differentiate project packages" : "Resolve the pump carrier itself"}</span></span>
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </button>
             ))}
