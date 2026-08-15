@@ -70,7 +70,7 @@ describe("progressive public journey contracts", () => {
     expect(work).not.toContain("projectIndex.projects");
     expect(work).not.toContain("portfolioData.items");
     expect(workIndex).toContain("workRecords.filter");
-    expect(workIndex).toContain("Filterable").toBeDefined;
+    expect(workIndex).toContain("Portfolio inventory");
   });
 
   it("uses rail directories on canonical journeys but preserves the dense Work Index inventory", () => {
