@@ -5,10 +5,12 @@ import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFir
 import { ChessLanding } from "@/components/product-landing/ChessLanding";
 import { ClosureDrivenLanding } from "@/components/product-landing/ClosureDrivenLanding";
 import { CorpusForgeLanding } from "@/components/product-landing/CorpusForgeLanding";
+import { LawLanding } from "@/components/product-landing/LawLanding";
 import { ProductLandingRenderer } from "@/components/product-landing/ProductLandingRenderer";
 import { SchemathematicsLanding } from "@/components/product-landing/SchemathematicsLanding";
 import { SoccerLanding } from "@/components/product-landing/SoccerLanding";
 import { SoftwareBeforeCodeLanding } from "@/components/product-landing/SoftwareBeforeCodeLanding";
+import { WeatherLanding } from "@/components/product-landing/WeatherLanding";
 import {
   getProductLandingContent,
   getProductLandingDescription,
@@ -141,6 +143,14 @@ export default async function ProductLandingPage({ params }: ProductLandingPageP
 
   if (decision.entry.id === "software-before-code" && decision.entry.collection !== "bridge") {
     return <SoftwareBeforeCodeLanding />;
+  }
+
+  if (decision.entry.id === "boundary-first-weather" && decision.entry.collection !== "bridge") {
+    return <WeatherLanding />;
+  }
+
+  if (decision.entry.id === "constitutional-law-and-jurisprudence" && decision.entry.collection !== "bridge") {
+    return <LawLanding />;
   }
 
   return <ProductLandingRenderer content={content} decision={decision} />;
