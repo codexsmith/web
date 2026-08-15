@@ -78,7 +78,7 @@ const landingChrome: Record<string, LandingChromeSpec> = {
     icon: Database,
     signals: ["source", "claim", "supersede"],
   },
-  schemathematics: {
+  "schemathematics": {
     code: "SCH-01",
     domain: "research",
     label: "Schemathematics",
