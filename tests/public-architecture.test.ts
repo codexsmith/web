@@ -94,7 +94,7 @@ describe("public architecture navigation contracts", () => {
     expect(items.map((item) => item.ordinal)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   });
 
-  it("places the public landing carousel on the homepage before What we work on and hides Selected work", () => {
+  it("progresses the homepage from visitor intent through inspectability before sideways public-work browsing", () => {
     const component = path.join(
       process.cwd(),
       "src/components/product-landing/PublicLandingCarousel.tsx",
@@ -105,14 +105,18 @@ describe("public architecture navigation contracts", () => {
       path.join(process.cwd(), "src/components/entrance/InstitutionalVestibuleHome.tsx"),
       "utf8",
     );
-    const choosePathIndex = home.indexOf("Choose a path.");
+    const intentIndex = home.indexOf("<EntranceIntentConsole />");
+    const inspectabilityIndex = home.indexOf("Inspect the laboratory");
     const carouselIndex = home.indexOf("<PublicLandingCarousel");
-    const whatWeWorkOnIndex = home.indexOf("What we work on.");
 
-    expect(choosePathIndex).toBeGreaterThan(-1);
-    expect(carouselIndex).toBeGreaterThan(choosePathIndex);
-    expect(whatWeWorkOnIndex).toBeGreaterThan(carouselIndex);
+    expect(intentIndex).toBeGreaterThan(-1);
+    expect(inspectabilityIndex).toBeGreaterThan(intentIndex);
+    expect(carouselIndex).toBeGreaterThan(inspectabilityIndex);
+    expect(home).not.toContain("Choose a path.");
+    expect(home).not.toContain("What we work on.");
     expect(home).not.toContain("Selected work.");
+    expect(home).not.toContain("institutionalRoutes.map");
+    expect(home).not.toContain("capabilityCards.map");
     expect(home).not.toContain("featuredPublicWork");
 
     for (const file of [
