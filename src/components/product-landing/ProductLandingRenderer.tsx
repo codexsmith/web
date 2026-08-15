@@ -37,39 +37,10 @@ const hiddenKeys = new Set([
   "metadata",
   "sourceKeys",
   "relationshipStatus",
+  "audience",
+  "pageIntent",
   "cta",
 ]);
-
-const preferredSectionOrder = [
-  "legalNotice",
-  "opening",
-  "openingClaim",
-  "sections",
-  "executiveBrief",
-  "definition",
-  "problem",
-  "sharedProblem",
-  "whyThisBridge",
-  "whyGroundNews",
-  "whyYou",
-  "coreObject",
-  "coreQuestions",
-  "program",
-  "method",
-  "flagship",
-  "flagshipDemo",
-  "bridge",
-  "candidateWork",
-  "whatBFLBrings",
-  "whatTheInstitutionCouldBring",
-  "validation",
-  "researchHypotheses",
-  "claimBoundary",
-  "claimRegimes",
-  "collaboration",
-  "firstAsk",
-  "closing",
-];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
@@ -190,7 +161,10 @@ export function ProductLandingRenderer({
   const bridge = entry.collection === "bridge";
   const frame = publicFrame(entry);
   const FrameIcon = frame.icon;
-  const sections = orderedSections(presentation);
+  const legalNotice = presentation.legalNotice;
+  const sections = orderedSections(presentation).filter(
+    ([key]) => key !== "legalNotice",
+  );
   const statusLabel = resolveStatusLabel(presentation, entry);
 
   return (
@@ -302,6 +276,8 @@ export function ProductLandingRenderer({
         </div>
       </section>
 
+      <PriorityLegalNotice value={legalNotice} />
+
       {!bridge ? <PublicLandingRail currentId={entry.id} /> : null}
 
       {relationshipNotice ? (
@@ -339,7 +315,7 @@ export function ProductLandingRenderer({
 function orderedSections(
   presentation: Record<string, unknown>,
 ): [string, unknown][] {
-  const available = Object.entries(presentation).filter(
+  return Object.entries(presentation).filter(
     ([key, value]) =>
       key !== "hero" &&
       !hiddenKeys.has(key) &&
@@ -347,13 +323,52 @@ function orderedSections(
       value !== undefined &&
       value !== "",
   );
-  const rank = new Map(preferredSectionOrder.map((key, index) => [key, index]));
-  return available.sort(([left], [right]) => {
-    const leftRank = rank.get(left) ?? Number.MAX_SAFE_INTEGER;
-    const rightRank = rank.get(right) ?? Number.MAX_SAFE_INTEGER;
-    if (leftRank !== rightRank) return leftRank - rightRank;
-    return left.localeCompare(right);
-  });
+}
+
+function PriorityLegalNotice({ value }: { value: unknown }) {
+  if (!isRecord(value)) return null;
+  const title = firstString(value.title) ?? "Legal notice";
+  const body = firstString(value.body);
+  const rules = Array.isArray(value.rules)
+    ? value.rules.filter((item): item is string => typeof item === "string")
+    : [];
+
+  return (
+    <section
+      className="border-b border-foreground bg-card/70 px-5 py-7 sm:px-8"
+      id="legal-notice"
+    >
+      <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[minmax(15rem,0.55fr)_minmax(0,1.45fr)]">
+        <div>
+          <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+            Legal notice · research boundary
+          </p>
+          <h2 className="mt-2 font-serif text-2xl font-semibold sm:text-3xl">
+            {title}
+          </h2>
+        </div>
+        <div>
+          {body ? (
+            <p className="max-w-4xl text-sm leading-7 text-foreground-muted">
+              {body}
+            </p>
+          ) : null}
+          {rules.length > 0 ? (
+            <ul className="mt-5 grid gap-2 md:grid-cols-2">
+              {rules.map((rule) => (
+                <li
+                  className="border-l-2 border-foreground/40 pl-4 text-xs leading-6 text-foreground-muted"
+                  key={rule}
+                >
+                  {rule}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function isNarrativeSection(
