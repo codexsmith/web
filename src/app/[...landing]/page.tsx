@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
+import { ChessLanding } from "@/components/product-landing/ChessLanding";
 import { ClosureDrivenLanding } from "@/components/product-landing/ClosureDrivenLanding";
+import { CorpusForgeLanding } from "@/components/product-landing/CorpusForgeLanding";
 import { ProductLandingRenderer } from "@/components/product-landing/ProductLandingRenderer";
 import { SchemathematicsLanding } from "@/components/product-landing/SchemathematicsLanding";
+import { SoccerLanding } from "@/components/product-landing/SoccerLanding";
 import {
   getProductLandingContent,
   getProductLandingDescription,
@@ -115,8 +118,20 @@ export default async function ProductLandingPage({ params }: ProductLandingPageP
     return <BoundaryFirstUxLanding />;
   }
 
+  if (decision.entry.id === "boundary-first-chess" && decision.entry.collection !== "bridge") {
+    return <ChessLanding />;
+  }
+
+  if (decision.entry.id === "boundary-first-soccer" && decision.entry.collection !== "bridge") {
+    return <SoccerLanding />;
+  }
+
   if (decision.entry.id === "closure-driven-software-development" && decision.entry.collection !== "bridge") {
     return <ClosureDrivenLanding />;
+  }
+
+  if (decision.entry.id === "corpus-forge" && decision.entry.collection !== "bridge") {
+    return <CorpusForgeLanding />;
   }
 
   if (decision.entry.id === "schemathematics" && decision.entry.collection !== "bridge") {
