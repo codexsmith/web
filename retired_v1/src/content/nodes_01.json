@@ -1,0 +1,426 @@
+[
+  {
+    "body": "The foundational lane develops Distinction Theory and related formal work: a diagnostic grammar for asking what a system distinguishes, how it represents, where it closes, what boundary it creates, what defect remains, and what survives transport. Mathematical claims are separated by maturity and advanced through definitions, comparisons, proofs, and computational tests.",
+    "facets": [
+      "Distinction Theory",
+      "Closure & Defect",
+      "System Invariants",
+      "Formal Programs"
+    ],
+    "takeaways": [
+      "Define before generalizing.",
+      "Separate metaphor, method, and proof.",
+      "Promote claims only with evidence."
+    ],
+    "claims": [],
+    "documents": [
+      {
+        "id": "one_manifesto",
+        "title": "One Manifesto",
+        "type": "manifesto",
+        "maturity": "published"
+      },
+      {
+        "id": "distinction_theory_unified_spine_v0_7_0",
+        "title": "Distinction Theory Unified Spine v0.7.0",
+        "type": "formal",
+        "maturity": "published"
+      },
+      {
+        "id": "identify_the_pressure",
+        "title": "Identify the Pressure",
+        "type": "doctrine",
+        "maturity": "formal"
+      },
+      {
+        "id": "forge_the_grammar",
+        "title": "Forge the Grammar",
+        "type": "doctrine",
+        "maturity": "formal"
+      },
+      {
+        "id": "find_the_cycle",
+        "title": "Find the Cycle",
+        "type": "doctrine",
+        "maturity": "formal"
+      }
+    ],
+    "id": "theory",
+    "label": "Theory & Foundations",
+    "short": "Distinction, representation, closure, defect, and invariant.",
+    "title": "A research program for how systems become legible.",
+    "iconName": "Orbit",
+    "mapIcon": "\u235f",
+    "homeX": -92,
+    "homeY": -295,
+    "homeR": 82,
+    "mapX": -180,
+    "mapY": -200,
+    "mapR": 80,
+    "coreThesis": "Develops Distinction Theory and related formal work: a diagnostic grammar for asking what a system distinguishes."
+  },
+  {
+    "body": "Boundary First Labs uses generative AI as an instrument of disciplined transformation: sorting source material, exposing defects, generating candidate representations, testing alternatives, and accelerating craft. Provenance is the tang; claim discipline is the temper; accountable human judgment remains responsible for what leaves the forge.",
+    "facets": [
+      "Corpus Forging",
+      "Provenance",
+      "Human Review",
+      "Bounded Agents"
+    ],
+    "takeaways": [
+      "The human remains the smith.",
+      "Amplification requires review.",
+      "Agency cannot be outsourced."
+    ],
+    "claims": [],
+    "documents": [
+      {
+        "id": "ai_as_forge_extended_draft_v0_2",
+        "title": "AI Is a Forge, Not an Oracle",
+        "type": "artifact",
+        "maturity": "published"
+      },
+      {
+        "id": "distinction_theory_ai_alignment_and_boundary_preservation",
+        "title": "AI Alignment and Boundary Preservation",
+        "type": "artifact",
+        "maturity": "formal"
+      }
+    ],
+    "id": "ai-forge",
+    "label": "AI as Forge",
+    "short": "Human-led AI for disciplined research and production.",
+    "title": "AI is a forge, not an oracle.",
+    "iconName": "Sparkles",
+    "mapIcon": "\u2726",
+    "homeX": 136,
+    "homeY": 270,
+    "homeR": 80,
+    "mapX": 270,
+    "mapY": -95,
+    "mapR": 88,
+    "coreThesis": "Generative AI is an instrument of disciplined transformation."
+  },
+  {
+    "body": "The public lane translates the lab's research into essays, doctrines, policy architectures, and civic arguments without asking readers to enter through the formal machinery. It addresses AI governance, software responsibility, sustainability, institutional repair, civilizational risk, and the conditions under which progress remains accountable to those who bear its consequences.",
+    "facets": [
+      "Essays & Doctrine",
+      "AI Governance",
+      "Public Engineering",
+      "Civilizational Systems"
+    ],
+    "takeaways": [
+      "Our roots must balance our branches.",
+      "Public consequence belongs inside the design.",
+      "Progress requires representation and repair."
+    ],
+    "claims": [],
+    "documents": [
+      {
+        "id": "the_throughput_trap",
+        "title": "The Throughput Trap",
+        "type": "artifact",
+        "maturity": "published"
+      },
+      {
+        "id": "from_grease_to_gate",
+        "title": "From Scarcity to Underutilization",
+        "type": "artifact",
+        "maturity": "formal"
+      }
+    ],
+    "id": "public-domain",
+    "label": "Public Work",
+    "short": "Essays, policy, doctrine, and civic systems.",
+    "title": "Research must become publicly legible.",
+    "iconName": "Globe2",
+    "mapIcon": "\u2302",
+    "homeX": -12,
+    "homeY": 235,
+    "homeR": 94,
+    "mapX": 260,
+    "mapY": 165,
+    "mapR": 88,
+    "coreThesis": "Translates lab research into publicly accessible civic arguments."
+  },
+  {
+    "body": "This lane studies who can act, who can decide, who bears consequences, and who can repair a failure. It applies boundary-first analysis to AI alignment, organizations, governance, law, economics, professional responsibility, and public infrastructure\u2014especially where power is amplified faster than accountability.",
+    "facets": [
+      "Human & Artificial Agency",
+      "Organizations",
+      "Governance & Law",
+      "Economics & Infrastructure"
+    ],
+    "takeaways": [
+      "No consequence without representation.",
+      "Responsibility must remain traceable.",
+      "Contestability and repair are system requirements."
+    ],
+    "claims": [],
+    "documents": [
+      {
+        "id": "claim_regimes",
+        "title": "Claim Regimes",
+        "type": "essay",
+        "maturity": "published"
+      },
+      {
+        "id": "claim regimes",
+        "title": "Claim Regimes",
+        "type": "artifact",
+        "maturity": "formal"
+      },
+      {
+        "id": "antitrust_as_anti_sovereignty_law_draft_v0_1",
+        "title": "Antitrust as Anti-Sovereignty",
+        "type": "artifact",
+        "maturity": "formal"
+      }
+    ],
+    "id": "agency",
+    "label": "Agency & Institutions",
+    "short": "Responsibility, decision, accountability, and repair.",
+    "title": "Agency must land somewhere.",
+    "iconName": "Compass",
+    "mapIcon": "\u25ec",
+    "homeX": -205,
+    "homeY": -122,
+    "homeR": 92,
+    "mapX": 180,
+    "mapY": -220,
+    "mapR": 84,
+    "coreThesis": "Studies who can act, decide, bear consequences, and repair failure."
+  },
+  {
+    "body": "Boundary-First Engineering discovers the domain before it chooses the architecture. It extracts actors, artifacts, boundaries, invariants, interfaces, contracts, failure modes, and responsibility; builds the smallest end-to-end skeleton; and lets real use expose defects before complexity hardens into code.",
+    "facets": [
+      "Domain Archaeology",
+      "Executable Skeletons",
+      "Interfaces & Contracts",
+      "Failure & Recovery"
+    ],
+    "takeaways": [
+      "Own the problem complexity.",
+      "Use the simplest representation that preserves the invariant.",
+      "Make failure observable and repairable."
+    ],
+    "claims": [],
+    "documents": [
+      {
+        "id": "executable_representation",
+        "title": "Executable Representation",
+        "type": "essay",
+        "maturity": "published"
+      },
+      {
+        "id": "boundary_first_engineering_revised_v_0_2_marked",
+        "title": "Boundary First Engineering",
+        "type": "artifact",
+        "maturity": "published"
+      }
+    ],
+    "id": "bfe",
+    "label": "Boundary-First Engineering",
+    "short": "Turn domain boundaries and invariants into executable systems.",
+    "title": "Engineering begins before implementation.",
+    "iconName": "Hammer",
+    "mapIcon": "\u25a1",
+    "homeX": 320,
+    "homeY": 105,
+    "homeR": 104,
+    "mapX": -270,
+    "mapY": -95,
+    "mapR": 90,
+    "coreThesis": "Boundary-First Engineering discovers the domain before it chooses the architecture."
+  },
+  {
+    "body": "This lane studies the computational forms through which systems become executable: software architecture, data and knowledge models, algorithms, graph structures, complexity, observability, and research tooling. The design question is not only whether code runs, but whether the representation preserves the boundary conditions and meaning of the domain.",
+    "facets": [
+      "Software Architecture",
+      "Data & Knowledge Graphs",
+      "Complexity & Observability",
+      "Research Tooling"
+    ],
+    "takeaways": [
+      "Choose representations by invariant.",
+      "Expose hidden state, drift, and failure.",
+      "Keep implementation subordinate to the domain."
+    ],
+    "claims": [],
+    "documents": [
+      {
+        "id": "problem_complexity_classes",
+        "title": "Problem Complexity Classes",
+        "type": "artifact",
+        "maturity": "formal"
+      },
+      {
+        "id": "distinction_theory_isotropic_computing_and_compression",
+        "title": "Isotropic Computing",
+        "type": "artifact",
+        "maturity": "draft"
+      }
+    ],
+    "id": "computer-science",
+    "label": "Representational Mechanics",
+    "short": "Software, computation, data, complexity, and systems design.",
+    "title": "Representations are part of the mechanism.",
+    "iconName": "BrainCircuit",
+    "mapIcon": "\u2316",
+    "homeX": 265,
+    "homeY": -120,
+    "homeR": 112,
+    "mapX": 0,
+    "mapY": -235,
+    "mapR": 88,
+    "coreThesis": "Studies computational forms where systems become executable."
+  },
+  {
+    "body": "The lab develops products and testbeds that force the research into contact with reality. Boundary-First Chess makes boundary reasoning visible in a familiar game. Weather@Home and weather-simulation work test dynamic modeling and public-infrastructure ideas. Software tools, benchmarks, and institutional prototypes turn concepts into measurable use.",
+    "facets": [
+      "Boundary-First Chess",
+      "Weather@Home",
+      "Software Tools",
+      "System Demonstrations"
+    ],
+    "takeaways": [
+      "Build the smallest credible test.",
+      "Measure where the model fails.",
+      "Let products refine the research."
+    ],
+    "claims": [],
+    "documents": [],
+    "id": "applied-systems",
+    "label": "Products & Testbeds",
+    "short": "Research made testable through products, software, and demonstrations.",
+    "title": "Applied systems are where research pays rent.",
+    "iconName": "Layers3",
+    "mapIcon": "\u25c9",
+    "homeX": -245,
+    "homeY": 100,
+    "homeR": 102,
+    "mapX": -240,
+    "mapY": 165,
+    "mapR": 90,
+    "coreThesis": "Develops products and testbeds that force research into contact with reality."
+  },
+  {
+    "body": "The on-ramp lane turns abstract mechanics into ordinary examples, visual explanations, workshops, and domain-specific teaching tools. Checklists, bug reports, contracts, game boards, dashboards, and chess positions help readers encounter boundaries, closure, defect, and invariant before formal terminology becomes necessary.",
+    "facets": [
+      "Examples Library",
+      "Visual Essays",
+      "Glossary & Diagrams",
+      "Workshops & Curriculum"
+    ],
+    "takeaways": [
+      "Start from a familiar failure.",
+      "Teach the mechanism before the name.",
+      "Keep metaphor and formal claim distinct."
+    ],
+    "claims": [],
+    "documents": [],
+    "id": "essays",
+    "label": "On-Ramps & Education",
+    "short": "Examples, diagrams, glossaries, and teaching systems.",
+    "title": "Multiple doors into the same research.",
+    "iconName": "FileText",
+    "mapIcon": "\u2261",
+    "homeX": -358,
+    "homeY": 14,
+    "homeR": 74,
+    "mapX": -300,
+    "mapY": 20,
+    "mapR": 76,
+    "coreThesis": "Turns abstract mechanics into ordinary examples and teaching tools."
+  },
+  {
+    "body": "Boundary First Labs is a research-to-product lab for systems, software, AI-era agency, and public consequence. We study how distinctions, representations, boundaries, constraints, invariants, and failures shape what systems can become\u2014then turn that research into methods, tools, products, and public work that people can test, use, and govern.",
+    "facets": [
+      "Foundational Research",
+      "Boundary-First Engineering",
+      "AI as Forge",
+      "Products & Testbeds",
+      "Public Work"
+    ],
+    "takeaways": [
+      "Begin with the boundary, not the implementation.",
+      "Preserve the invariants that make a system trustworthy.",
+      "Give agency, failure, and consequence an accountable home.",
+      "Move claims through research, demonstration, and use."
+    ],
+    "claims": [
+      "A system that cannot account for its own consequences will eventually destroy the conditions that sustain it."
+    ],
+    "documents": [
+      {
+        "id": "bfl_ethos",
+        "title": "BFL Ethos",
+        "type": "manifesto",
+        "maturity": "published"
+      },
+      {
+        "id": "master_operating_plan",
+        "title": "Master Operating Plan",
+        "type": "plan",
+        "maturity": "published",
+        "audience": "Patron"
+      },
+      {
+        "id": "bfl_impact_comparison",
+        "title": "BFL Impact Comparison",
+        "type": "artifact",
+        "maturity": "published"
+      }
+    ],
+    "id": "identity",
+    "label": "Boundary First Labs",
+    "short": "Research to product for systems, software, agency, and public consequence.",
+    "title": "Boundary First Labs.",
+    "iconName": "CircleDot",
+    "mapIcon": "\u25ce",
+    "homeX": 0,
+    "homeY": 0,
+    "homeR": 156,
+    "mapX": 0,
+    "mapY": 0,
+    "mapR": 110,
+    "tone": "primary",
+    "coreThesis": "Boundary First Labs is a research-to-product lab for systems, software, AI-era agency, and public consequence."
+  },
+  {
+    "body": "The corpus is not an archive alone. It is an operating system for turning notes, drafts, diagrams, datasets, experiments, and conversations into traceable research artifacts. Provenance, claim ceilings, maturity labels, review gates, and replacement documents keep the work coherent as the program grows.",
+    "facets": [
+      "Corpus Forge",
+      "Provenance",
+      "Claim Ledgers",
+      "Benchmarks"
+    ],
+    "takeaways": [
+      "Preserve source lineage.",
+      "Label claim maturity.",
+      "Replace and refine; do not merely accumulate."
+    ],
+    "claims": [],
+    "documents": [
+      {
+        "id": "scripts_index",
+        "title": "Scripts Index",
+        "type": "catalog",
+        "maturity": "published"
+      }
+    ],
+    "id": "corpus",
+    "label": "Corpus & Research Ops",
+    "short": "Provenance, claim ledgers, experiments, and publication.",
+    "title": "Research becomes reliable through controlled transformation.",
+    "iconName": "BookOpen",
+    "mapIcon": "\u25b1",
+    "homeX": 158,
+    "homeY": -300,
+    "homeR": 76,
+    "mapX": 0,
+    "mapY": 245,
+    "mapR": 84,
+    "coreThesis": "The corpus is an operating system for turning unstructured artifacts into traceable research."
+  }
+]

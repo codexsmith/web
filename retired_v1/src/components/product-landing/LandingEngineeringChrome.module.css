@@ -1,0 +1,309 @@
+.shell :global(main > section:nth-last-of-type(-n + 5)) {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.shell :global(main > section:nth-last-of-type(-n + 5) > *) {
+  position: relative;
+  z-index: 1;
+}
+
+.shell :global(main > section:nth-last-of-type(-n + 5) h2::after) {
+  width: 5.5rem;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--bfl-signal) 0 52%,
+    transparent 52% 58%,
+    var(--bfl-signal-secondary) 58% 100%
+  );
+  opacity: 0.88;
+}
+
+.shell :global(main > section:nth-last-of-type(-n + 5) article) {
+  box-shadow: none;
+}
+
+.shell :global(main > section:nth-last-of-type(5)) {
+  box-shadow: inset 0 3px 0 color-mix(in srgb, var(--bfl-signal) 68%, transparent);
+  background-image:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bfl-signal) 7%, transparent),
+      transparent 18%,
+      transparent 82%,
+      color-mix(in srgb, var(--bfl-signal-secondary) 5%, transparent)
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--bfl-signal) 4%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: auto, 24px 24px;
+}
+
+.shell :global(main > section:nth-last-of-type(5)::before) {
+  position: absolute;
+  top: 0.85rem;
+  left: 1.25rem;
+  z-index: 3;
+  content: "SECOND ACT / EVIDENCE + CONSEQUENCE";
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, currentColor 48%, transparent);
+  pointer-events: none;
+}
+
+.shell :global(main > section:nth-last-of-type(5) article),
+.shell :global(main > section:nth-last-of-type(5) li[class*="border"]) {
+  border-top-width: 2px;
+  border-top-color: color-mix(in srgb, var(--bfl-signal) 52%, var(--border));
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bfl-signal) 5%, transparent),
+    transparent 42%
+  );
+  clip-path: polygon(
+    0 0,
+    calc(100% - 14px) 0,
+    100% 14px,
+    100% 100%,
+    0 100%
+  );
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--bfl-signal) 9%, transparent);
+}
+
+.shell :global(main > section:nth-last-of-type(4)) {
+  background-image:
+    radial-gradient(
+      circle at 13% 22%,
+      color-mix(in srgb, var(--bfl-signal) 8%, transparent) 0 1px,
+      transparent 1.5px
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0 2.2rem,
+      color-mix(in srgb, var(--bfl-signal) 16%, transparent) 2.2rem 2.25rem,
+      transparent 2.25rem
+    );
+  background-size: 18px 18px, auto;
+}
+
+.shell :global(main > section:nth-last-of-type(4)::before) {
+  position: absolute;
+  top: 0.85rem;
+  left: 1.25rem;
+  z-index: 3;
+  content: "TRACE / DIAGNOSE";
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, currentColor 48%, transparent);
+  pointer-events: none;
+}
+
+.shell :global(main > section:nth-last-of-type(4) article) {
+  border-left-width: 3px;
+  border-left-color: color-mix(in srgb, var(--bfl-signal) 68%, var(--border));
+  background-image:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bfl-signal) 6%, transparent),
+      transparent 32%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 27px,
+      color-mix(in srgb, currentColor 5%, transparent) 27px 28px
+    );
+}
+
+.shell :global(main > section:nth-last-of-type(4) article::before) {
+  width: 0.65rem;
+  height: 0.65rem;
+  top: 0.65rem;
+  left: -0.4rem;
+  border: 1px solid var(--background);
+  border-radius: 999px;
+  background: var(--bfl-signal);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--bfl-signal) 12%, transparent);
+}
+
+.shell :global(main > section:nth-last-of-type(3)) {
+  background-image:
+    linear-gradient(
+      112deg,
+      transparent 0 61%,
+      color-mix(in srgb, var(--bfl-signal-secondary) 5%, transparent) 61% 72%,
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bfl-signal) 3%, transparent),
+      transparent 45%
+    );
+}
+
+.shell :global(main > section:nth-last-of-type(3)::before) {
+  position: absolute;
+  top: 0.85rem;
+  left: 1.25rem;
+  z-index: 3;
+  content: "TEST / REPAIR";
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, currentColor 48%, transparent);
+  pointer-events: none;
+}
+
+.shell :global(main > section:nth-last-of-type(3) article) {
+  position: relative;
+  border-color: color-mix(in srgb, var(--bfl-signal-secondary) 42%, var(--border));
+  background-image: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--bfl-signal-secondary) 6%, transparent),
+    transparent 38%
+  );
+  box-shadow:
+    10px 10px 0 color-mix(in srgb, var(--bfl-signal-secondary) 7%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--bfl-signal) 8%, transparent);
+}
+
+.shell :global(main > section:nth-last-of-type(3) article:nth-of-type(even)) {
+  margin-top: 0.9rem;
+  margin-bottom: -0.9rem;
+}
+
+.shell :global(main > section:nth-last-of-type(2)) {
+  border-top-width: 2px;
+  border-top-color: color-mix(in srgb, var(--bfl-signal) 64%, var(--border));
+  border-bottom-width: 2px;
+  border-bottom-color: color-mix(in srgb, var(--bfl-signal-secondary) 52%, var(--border));
+  background-image:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bfl-signal) 7%, transparent) 0 3px,
+      transparent 3px calc(100% - 3px),
+      color-mix(in srgb, var(--bfl-signal-secondary) 7%, transparent) calc(100% - 3px)
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--bfl-signal) 4%, transparent),
+      transparent 30%,
+      transparent 70%,
+      color-mix(in srgb, var(--bfl-signal-secondary) 4%, transparent)
+    );
+}
+
+.shell :global(main > section:nth-last-of-type(2)::before) {
+  position: absolute;
+  top: 0.85rem;
+  left: 1.25rem;
+  z-index: 3;
+  content: "CLAIM GATE / DECISION BOUNDARY";
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, currentColor 52%, transparent);
+  pointer-events: none;
+}
+
+.shell :global(main > section:nth-last-of-type(2) article) {
+  border-width: 2px;
+  border-color: color-mix(in srgb, var(--bfl-signal) 34%, var(--border));
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--bfl-signal) 6%, transparent),
+    transparent 28%
+  );
+  box-shadow: inset 4px 0 0 color-mix(in srgb, var(--bfl-signal) 55%, transparent);
+}
+
+.shell :global(main > section:last-of-type) {
+  min-height: 24rem;
+  display: grid;
+  align-items: center;
+  border-top-width: 4px;
+  border-top-color: color-mix(in srgb, var(--bfl-signal) 72%, var(--border));
+  background-image:
+    radial-gradient(
+      circle at 82% 38%,
+      color-mix(in srgb, var(--bfl-signal) 13%, transparent) 0 1px,
+      transparent 1px 5rem,
+      color-mix(in srgb, var(--bfl-signal-secondary) 10%, transparent) 5rem 5.1rem,
+      transparent 5.1rem 9rem,
+      color-mix(in srgb, var(--bfl-signal) 8%, transparent) 9rem 9.1rem,
+      transparent 9.1rem
+    ),
+    linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--bfl-signal) 7%, transparent),
+      transparent 38%,
+      color-mix(in srgb, var(--bfl-signal-secondary) 5%, transparent)
+    );
+}
+
+.shell :global(main > section:last-of-type::before) {
+  position: absolute;
+  top: 0.85rem;
+  left: 1.25rem;
+  z-index: 3;
+  content: "TERMINAL / NEXT ACTION";
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, currentColor 52%, transparent);
+  pointer-events: none;
+}
+
+.shell :global(main > section:last-of-type h2) {
+  max-width: 64rem;
+  letter-spacing: -0.035em;
+}
+
+.shell :global(main > section:last-of-type h2::after) {
+  width: 8rem;
+}
+
+.shell :global(main > section:last-of-type article) {
+  border-color: color-mix(in srgb, var(--bfl-signal) 46%, var(--border));
+  background-image:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--bfl-signal) 8%, transparent),
+      transparent 42%
+    );
+  box-shadow: 12px 12px 0 color-mix(in srgb, var(--bfl-signal) 10%, transparent);
+}
+
+@media (max-width: 767px) {
+  .shell :global(main > section:nth-last-of-type(-n + 5)::before) {
+    left: 1rem;
+    max-width: calc(100% - 5rem);
+    font-size: 0.625rem;
+    letter-spacing: 0.09em;
+  }
+
+  .shell :global(main > section:nth-last-of-type(3) article:nth-of-type(even)) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .shell :global(main > section:last-of-type) {
+    min-height: 20rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell :global(main > section:nth-last-of-type(-n + 5) article) {
+    transition: none;
+  }
+}

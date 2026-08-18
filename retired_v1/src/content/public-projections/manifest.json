@@ -1,0 +1,60 @@
+{
+  "projectionVersion": "1.0.0",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "policy": {
+    "changeType": "expansion-and-refinement",
+    "reorganization": false,
+    "sourceRule": "The content master remains intact. Route-sized files are deterministic generated projections and must not be edited by hand.",
+    "missingArtifactWaiver": {
+      "status": "accepted",
+      "files": [
+        "metadata/public_interface_relation_map.md",
+        "source_snapshot/02_Boundary_First_UX.md",
+        "source_snapshot/12_Webpage.md",
+        "source_snapshot/website_packet.md"
+      ]
+    },
+    "stewardship": "institutional quality and mission",
+    "atlas": "preserve current; refine a parallel version"
+  },
+  "files": [
+    {
+      "name": "navigation.json",
+      "sha256": "9d5eccfc693393a19cba3363046a0dcac3c3d2451f3dea971bbf789497131e81"
+    },
+    {
+      "name": "home.json",
+      "sha256": "01ff81d3eedc5cb8d056544ceb8585e546a1de3e8ef749a33181d435f4da7237"
+    },
+    {
+      "name": "mission.json",
+      "sha256": "99f975b87e0ba33f2414dbd2e4b7dfd41b2a3c5f19dcfd351d322a8f62556ef1"
+    },
+    {
+      "name": "practice.json",
+      "sha256": "afd6b28552da9a1c84370f1ca73b28c28c9cdb021c706bf8a16ba54664889b90"
+    },
+    {
+      "name": "governance.json",
+      "sha256": "6b25cc7352c2362fc1f797323e2cabc439efd38ddc139a07e8e856449124bf02"
+    },
+    {
+      "name": "work.json",
+      "sha256": "7f6f3dd019e6a3cde18d972dba7a188fdba85475894b0ebe21525eb1d0b96c5e"
+    },
+    {
+      "name": "atlas.json",
+      "sha256": "0c281bf86aa5117470fb325a0a02811dd48d874a46ffb71ffedf54df10bac611"
+    },
+    {
+      "name": "record.json",
+      "sha256": "cccdc1e336edf9e470aef4cbf23562f2bf6bc7a5cc38667e414105ba40034605"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "boundary-first.governance-bindings.v1",
+  "status": "explicit-presentation-bindings; adoption and operation records remain separate",
+  "records": [
+    {
+      "id": "binding-work-portfolio",
+      "appliesToType": "work-migration-record",
+      "appliesToSource": "src/content/work_portfolio.json#items",
+      "sourcePaths": ["identity.portfolioGovernance", "identity.evidenceArchitecture", "identity.publicationAdmissibility"],
+      "authorityBoundary": "Classification and display do not establish product availability, institutional adoption, evidence, or stewardship.",
+      "requiredClosure": "Every promoted record must retain correction, replacement, transfer, retirement, or open-release conditions.",
+      "status": "binding-source-recorded; per-entity operation unverified"
+    },
+    {
+      "id": "binding-seed-project-index",
+      "appliesToType": "seed-project",
+      "appliesToSource": "src/content/project_index.json#projects",
+      "sourcePaths": ["identity.portfolioGovernance", "identity.evidenceArchitecture"],
+      "authorityBoundary": "Seed-project visibility does not imply a named steward, approved next gate, funding, completion, or canonical promotion.",
+      "requiredClosure": "Attach steward, next gate, output disposition, evidence status, and replacement history before canonical promotion.",
+      "status": "presentation binding active; missing records visible"
+    },
+    {
+      "id": "binding-publication-evidence",
+      "appliesToType": "publication",
+      "appliesToSource": "civilizational-mechanics",
+      "sourcePaths": ["identity.evidenceArchitecture", "identity.publicationAdmissibility"],
+      "authorityBoundary": "Publication communicates bounded claims at its declared ceiling; publication alone does not create formal or empirical authority.",
+      "requiredClosure": "Corrections, replacement, withdrawal, and claim-ceiling changes remain attached to the publication record.",
+      "status": "canonical governance source recorded"
+    },
+    {
+      "id": "binding-collaboration-framework",
+      "appliesToType": "collaboration-framework",
+      "appliesToSource": "identity.collaboration",
+      "sourcePaths": ["identity.collaboration", "identity.governance", "identity.participation"],
+      "authorityBoundary": "Participation, advice, review, funding, contribution, authorship, ownership, endorsement, and institutional authority remain non-equivalent.",
+      "requiredClosure": "A live instance requires declared parties or protection markers, roles, authority, evidence, funding, rights, publication status, and closure state.",
+      "status": "framework recorded; no public operational instances recorded"
+    }
+  ]
+}

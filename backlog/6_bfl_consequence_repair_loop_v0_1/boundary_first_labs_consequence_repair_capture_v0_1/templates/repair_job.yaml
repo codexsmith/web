@@ -1,0 +1,38 @@
+job_id: REPAIR-YYYYMMDD-NNN
+claim_id: ""
+purpose: ""
+operating_boundary:
+  included: []
+  excluded: []
+  environment: ""
+source_provenance: []
+assumptions: []
+protected_invariants: []
+affected_parties: []
+expected_consequence:
+  description: ""
+  measurement: ""
+observation_channel:
+  type: test | telemetry | reconciliation | user_evidence | formal_check | experiment | audit
+  reference: ""
+  independent_of_generator: true
+discrepancy_rule:
+  threshold: ""
+  severity_levels: []
+permissions:
+  level: L0 | L1 | L2 | L3
+  allowed_actions: []
+  forbidden_actions: []
+escalation_conditions: []
+verification_procedure: ""
+closure_authority:
+  role: ""
+  independent_witness_required: true
+outputs:
+  - evidence_bundle
+  - discrepancy_report
+  - repair_proposal
+  - action_log
+  - verification_result
+  - closure_record
+state: draft

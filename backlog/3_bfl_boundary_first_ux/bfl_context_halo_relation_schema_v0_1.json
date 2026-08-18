@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://boundaryfirstlabs.org/schemas/context-halo-relation-v0.1.json",
+  "title": "Boundary First Labs Context Halo Relation",
+  "description": "Facet-addressed relation data for local relation-field projections. Relation dimensions remain independent and must not be collapsed into a single score.",
+  "type": "object",
+  "required": [
+    "id",
+    "source",
+    "targets",
+    "relationType",
+    "domainFamily",
+    "semanticAffinity",
+    "structuralDistance",
+    "relationshipStrength",
+    "evidenceMaturity",
+    "description"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "entityType",
+        "sourceKind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "sourceKind": {
+          "enum": [
+            "canonical-node",
+            "nested-program",
+            "nested-shelf",
+            "work-entity",
+            "artifact",
+            "virtual-context"
+          ]
+        },
+        "sourceRef": {
+          "type": "string"
+        },
+        "subdiscipline": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "facetId",
+          "strength"
+        ],
+        "properties": {
+          "facetId": {
+            "type": "string"
+          },
+          "strength": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "relationTypeOverride": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "relationType": {
+      "enum": [
+        "grounds",
+        "formalizes",
+        "tests",
+        "applies",
+        "implements",
+        "governs",
+        "translates",
+        "compares",
+        "witnesses",
+        "produces",
+        "historically-informs",
+        "shared-machinery",
+        "depends-on"
+      ]
+    },
+    "domainFamily": {
+      "enum": [
+        "theory",
+        "mathematics",
+        "physics",
+        "computation",
+        "engineering",
+        "public-consequence",
+        "public-interface",
+        "corpus-evidence"
+      ]
+    },
+    "semanticAffinity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "structuralDistance": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "relationshipStrength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sharedness": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "evidenceMaturity": {
+      "enum": [
+        "canonical",
+        "established-neighbor",
+        "supported-local-relation",
+        "editorial-inference",
+        "exploratory"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "display": {
+      "type": "object",
+      "properties": {
+        "visibilityLevel": {
+          "enum": [
+            "far",
+            "medium",
+            "near"
+          ]
+        },
+        "preferredRadiusBand": {
+          "enum": [
+            "close",
+            "middle",
+            "horizon"
+          ]
+        },
+        "pinnedAngleDegrees": {
+          "type": "number"
+        },
+        "pinnedRadius": {
+          "type": "number"
+        },
+        "edgeBundleKey": {
+          "type": "string"
+        },
+        "editorialPriority": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "sourceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authoringNote": {
+          "type": "string"
+        },
+        "reviewStatus": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

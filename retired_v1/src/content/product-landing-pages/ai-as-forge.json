@@ -1,0 +1,24 @@
+{
+  "slug": "ai-as-forge",
+  "title": "AI as Forge",
+  "status": "draft",
+  "visibility": "private",
+  "pageType": "recovered-method-landing",
+  "hero": {
+    "eyebrow": "AI AS FORGE",
+    "headline": "Use AI to transform material, not to manufacture authority.",
+    "support": "A recovered landing projection for disciplined human-AI collaboration: search, compare, generate, critique, restructure, and test faster while keeping provenance, claim ceilings, review gates, and consequential judgment outside the model."
+  },
+  "sections": [
+    {"heading":"Forge, not oracle","body":"AI can accelerate transformation and expose candidate structure. It does not make unsupported output true by producing it fluently."},
+    {"heading":"Keep the source attached","body":"Useful AI work remains coupled to evidence, artifacts, decisions, citations, provenance, and reconstructible transformations."},
+    {"heading":"Separate generation from promotion","body":"Candidate claims, interpretations, code, and designs are generated cheaply; promotion into durable or public artifacts requires explicit review."},
+    {"heading":"Critique is part of generation","body":"Operator, critic, and human-gate roles reduce the risk that a single conversational trajectory silently becomes canon."},
+    {"heading":"Authority remains consequential","body":"The party able to understand, accept, deploy, publish, or repair the result retains responsibility for those actions."}
+  ],
+  "cta":{"label":"Explore governed AI work"},
+  "notes":[
+    "Recovered from the earlier eight-page landing-page set.",
+    "Keep private until reconciled with the current AI governance, Corpus Forge, and founder-provenance surfaces."
+  ]
+}

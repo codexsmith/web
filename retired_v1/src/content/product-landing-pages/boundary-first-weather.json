@@ -1,0 +1,159 @@
+{
+  "id": "boundary-first-weather",
+  "slug": "weather",
+  "pageType": "public-research-program",
+  "visibility": "public",
+  "status": "pilot-ready-research-program",
+  "program": {
+    "name": "Boundary First Weather",
+    "shortName": "BF Weather",
+    "classification": [
+      "weather simulation research program",
+      "numerical-weather-prediction augmentation layer",
+      "boundary-aware computational method",
+      "forecast diagnostic research",
+      "public-interest computational infrastructure"
+    ],
+    "statusLabel": "Research Program · Pilot Candidate",
+    "primaryLine": "Compute where the weather is changing.",
+    "secondaryLine": "Follow the boundaries, fluxes, and defects that carry forecast-relevant change across scale.",
+    "publicPromise": "Explore whether boundary-aware diagnostics and selective computation can preserve forecast-relevant structure while improving the efficiency, interpretability, and failure visibility of weather simulation.",
+    "northStar": "Spend computation where the atmosphere is doing something consequential.",
+    "claimBoundary": "Boundary First Weather is an experimental layer for simulation, diagnostics, compression, ensemble analysis, and adaptive refinement. It does not claim to replace operational numerical weather prediction."
+  },
+  "hero": {
+    "eyebrow": "BOUNDARY FIRST WEATHER · COMPUTATIONAL RESEARCH",
+    "title": "Compute where the weather is changing.",
+    "deck": "The atmosphere is a moving field of energy, moisture, momentum, boundaries, transport, instability, and scale interaction. Boundary First Weather asks whether forecast computation can become more selective by explicitly tracking where those structures form, move, couple, and fail to close.",
+    "supporting": "The goal is not to replace modern weather prediction. It is to test a boundary-aware layer that can sit alongside established numerical and learned forecast systems.",
+    "primaryCta": { "label": "Enter the Weather Lab", "target": "flagship-demo" },
+    "secondaryCta": { "label": "See the research program", "target": "research-program" }
+  },
+  "openingClaim": {
+    "title": "Weather does not change uniformly.",
+    "body": [
+      "A weather model represents an enormous volume of atmosphere, but forecast-relevant change is not distributed uniformly through that volume.",
+      "Fronts sharpen. Moisture organizes. Convection initiates. Vortices interact. Shear layers form. Boundaries move. Transport pathways reorganize. Small mismatches can couple across scale and become consequential.",
+      "Traditional simulation already uses sophisticated adaptive meshes, parameterizations, assimilation, ensembles, and numerical methods to manage this complexity.",
+      "Boundary First Weather asks whether explicit boundary, transport, and closure-defect information can tell us where additional computation or attention is most valuable."
+    ],
+    "callout": "The hypothesis is not that the volume does not matter. The hypothesis is that changing boundaries may tell us where the volume matters most."
+  },
+  "scientificPosture": {
+    "title": "Build on weather science. Do not pretend to replace it.",
+    "baseLayer": ["numerical weather prediction", "finite-volume and related PDE methods", "data assimilation", "ensemble forecasting", "observational networks", "existing atmospheric physics", "learned weather models"],
+    "boundaryFirstLayer": ["boundary detection", "cross-scale consistency", "transport diagnostics", "defect localization", "structural ensemble comparison", "adaptive refinement signals", "structure-preserving compression", "boundary-aware surrogate features"],
+    "rule": "Domain institutions and mature weather systems are infrastructure to interoperate with, test against, and potentially support — not competitors to recreate."
+  },
+  "paradigm": {
+    "title": "Weather as boundary-mediated closure dynamics",
+    "mapping": [
+      { "boundaryFirst": "Region", "weather": "Air mass, storm cell, moisture region, circulation regime, model cell or dynamically identified structure" },
+      { "boundaryFirst": "Boundary", "weather": "Front, inversion, coastline, terrain interface, shear layer, convective edge, moisture gradient" },
+      { "boundaryFirst": "Flux", "weather": "Heat, moisture, momentum, mass and radiative transport" },
+      { "boundaryFirst": "Scale / shell", "weather": "Local, convective, mesoscale, synoptic and planetary organization" },
+      { "boundaryFirst": "Closure", "weather": "Declared conservation, admissibility and resolved-scale consistency under a numerical model" },
+      { "boundaryFirst": "Defect", "weather": "Unresolved transport, model mismatch, numerical diffusion, unrepresented convection, cross-scale inconsistency or forecast error" },
+      { "boundaryFirst": "Witness", "weather": "Station, radar, satellite, sounding, reanalysis, forecast verification or another observational projection" }
+    ]
+  },
+  "forecastPipeline": {
+    "title": "A forecast is a chain of representations.",
+    "compact": "Observed atmosphere → discrete state → admissible time update → forecast atmosphere → observational witness",
+    "boundaryFirstQuestion": "Where in that chain did a consequential distinction stop commuting?"
+  },
+  "weatherClosureObject": {
+    "title": "A bounded object for weather simulation",
+    "notation": "W = (M, U, Φ, T, I, A, R)",
+    "plainLanguage": [
+      { "symbol": "M", "name": "Mesh / represented region" },
+      { "symbol": "U", "name": "State" },
+      { "symbol": "Φ", "name": "Flux" },
+      { "symbol": "T", "name": "Time update" },
+      { "symbol": "I", "name": "Protected invariants" },
+      { "symbol": "A", "name": "Admissibility" },
+      { "symbol": "R", "name": "Repair / projection" }
+    ]
+  },
+  "coreHypothesis": {
+    "title": "The boundary-selective computation hypothesis",
+    "statement": "Forecast-relevant novelty, error and cross-scale information may concentrate disproportionately around evolving lower-dimensional structures such as fronts, interfaces, coherent boundaries and defect regions.",
+    "implication": "If measurable boundary or defect indicators predict where model disagreement and forecast-relevant change will concentrate, they may support adaptive computation, diagnostic prioritization or structural compression.",
+    "doesNotClaim": ["atmospheric interiors can be ignored", "all forecast error occurs on boundaries", "one universal defect metric exists", "boundary refinement is automatically cheaper", "the method already outperforms established adaptive techniques"],
+    "test": "Measure whether boundary-aware allocation produces comparable or better forecast-relevant accuracy for less computational work than an appropriately matched baseline."
+  },
+  "researchProgram": {
+    "id": "research-program",
+    "title": "A ladder of claims that can be tested separately",
+    "levels": [
+      { "id": "W0", "name": "Boundary and shell detection", "claimCeiling": "Structural description" },
+      { "id": "W1", "name": "Regime classification", "claimCeiling": "Diagnostic classification" },
+      { "id": "W2", "name": "Transition warning", "claimCeiling": "Predictive precursor hypothesis" },
+      { "id": "W3", "name": "Ensemble structural ranking", "claimCeiling": "Comparative forecast diagnostic" },
+      { "id": "W4", "name": "Structure-preserving compression", "claimCeiling": "Compression experiment" },
+      { "id": "W5", "name": "Hybrid correction / refinement", "claimCeiling": "Simulation acceleration / correction hypothesis" }
+    ]
+  },
+  "flagshipDemo": {
+    "id": "flagship-demo",
+    "kind": "planned-computational-demonstrator",
+    "status": "specification-and-experiment-stage",
+    "title": "Watch a forecast lose the boundary.",
+    "subtitle": "A controlled 2D weather-like simulation where the field, boundaries, transport, prediction and defect can be inspected together.",
+    "model": "2D shallow-water / moist-flow toy system",
+    "scenes": ["Flow", "Boundary", "Flux", "Scale", "Forecast", "Witness", "Defect", "Refine", "Compare"],
+    "desiredReaction": "Oh — the forecast error has a shape."
+  },
+  "adaptiveRefinement": {
+    "title": "Refine by consequence, not merely geometry.",
+    "workingName": "Boundary-Selective Refinement",
+    "loop": ["simulate", "measure boundary state", "measure transport", "estimate defect", "identify high-consequence region", "refine or allocate compute", "advance", "compare against baseline", "audit conservation and error"],
+    "evaluation": ["wall-clock time", "cell / update count", "memory", "forecast-relevant error", "boundary-position error", "transport error", "conservation error", "transition-detection lead time", "compute spent outside active regions"],
+    "claimRule": "Efficiency is an experimental result, not part of the definition of Boundary First Weather."
+  },
+  "ensembleAnalysis": {
+    "title": "Not every plausible forecast is structurally equally plausible.",
+    "possibleOutputs": ["structural-consistency score", "boundary-displacement score", "transport-consistency score", "regime-transition disagreement", "defect-growth trajectory", "clustered ensemble regimes"],
+    "claimBoundary": "These are candidate diagnostics to compare against existing ensemble methods, not replacements for calibrated probabilistic forecasting."
+  },
+  "validationLadder": {
+    "title": "From toy flow to operational comparison",
+    "stages": ["Synthetic geometry", "Scalar transport", "Shallow water", "Moist / Boussinesq-like systems", "Compressible / moist atmospheric models", "Offline established-model comparison", "Independent meteorological evaluation"],
+    "promotionRule": "No lower rung licenses claims belonging to a higher rung."
+  },
+  "pilot": {
+    "title": "A bounded technical pilot",
+    "primaryQuestion": "Can boundary-selective refinement reduce computational work while preserving declared forecast-relevant structure and numerical invariants in a controlled weather-like simulation?",
+    "deliverables": ["reproducible source code", "2D reference demonstrator", "matched uniform-refinement baseline", "boundary / defect diagnostics", "benchmark report", "walltime and update-count comparison", "accuracy and invariant report", "counterexample analysis", "GPU acceleration plan", "3D / established-model validation roadmap"],
+    "important": "A well-bounded negative result is still a successful research pilot."
+  },
+  "partners": {
+    "title": "Where collaboration becomes useful",
+    "principle": "Boundary First Weather needs domain contact more than endorsement.",
+    "categories": ["Operational weather institutions", "Universities and atmospheric-science groups", "Weather and climate NGOs", "Weather technology companies", "Civic resilience organizations", "Agriculture and logistics", "Research computing / HPC"],
+    "ask": "Give us a bounded weather problem where structural error, computational cost, or forecast uncertainty is expensive enough to measure."
+  },
+  "claimFirewall": {
+    "title": "What we can say now",
+    "allowed": ["Boundary First Weather is a research and simulation program.", "It proposes measurable boundary, transport and defect diagnostics.", "It proposes testing selective refinement against matched baselines.", "It can be implemented first in controlled weather-like PDE systems.", "It is designed to interoperate with established weather science."],
+    "notAllowedYet": ["Boundary First Weather makes forecasts more accurate.", "Boundary First Weather is faster than operational NWP.", "Boundary First Weather predicts severe storms earlier.", "Boundary First Weather replaces existing weather models.", "Boundary First Weather has been validated by NOAA or another external institution."]
+  },
+  "sandbox": {
+    "status": "new public weather sandbox should be created",
+    "recommendedRoute": "/sandbox/weather",
+    "recommendedName": "Boundary First Weather Lab",
+    "modes": ["Flow", "Boundary", "Flux", "Scale", "Defect", "Refinement", "Ensemble", "Compression"]
+  },
+  "closing": {
+    "title": "The atmosphere is a volume. The forecast may turn on its boundaries.",
+    "finalLine": "Follow the boundary. Measure the defect. Spend computation where the distinction matters."
+  },
+  "metadata": {
+    "owner": "Boundary First Labs",
+    "program": "Boundary First Weather",
+    "public": true,
+    "maturity": "research-pilot",
+    "lineage": ["Boundary First Weather", "Weather@Home", "TITANUS weather research", "RGT / Distinction Weather Lab"],
+    "tags": ["weather", "meteorology", "numerical-weather-prediction", "adaptive-refinement", "boundary-first", "simulation", "scientific-computing"]
+  }
+}

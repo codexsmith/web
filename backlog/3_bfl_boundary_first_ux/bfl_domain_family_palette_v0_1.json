@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "implementation-guidance",
+  "principle": "Hue identifies domain family; shade identifies subdiscipline; shape identifies entity type; opacity is reserved for interaction prominence.",
+  "accessibility": {
+    "colorOnlyEncodingProhibited": true,
+    "minimumTextContrast": "WCAG AA",
+    "fallbacks": [
+      "visible family label",
+      "entity-type kicker",
+      "shape grammar",
+      "optional texture or perimeter mark"
+    ],
+    "colorVisionCheck": [
+      "protanopia",
+      "deuteranopia",
+      "tritanopia",
+      "grayscale"
+    ]
+  },
+  "families": {
+    "theory": {
+      "label": "Boundary Theory and Foundations",
+      "base": "#5B6472",
+      "light": "#D9DEE6",
+      "dark": "#333A46",
+      "fallbackMark": "double-ring"
+    },
+    "mathematics": {
+      "label": "Mathematics and Formal Structures",
+      "base": "#B33A3A",
+      "light": "#F1D5D2",
+      "dark": "#6E1F26",
+      "fallbackMark": "M"
+    },
+    "physics": {
+      "label": "Physics and Physical Regimes",
+      "base": "#2F5DA8",
+      "light": "#D4E0F3",
+      "dark": "#193968",
+      "fallbackMark": "P"
+    },
+    "computation": {
+      "label": "Computation and Machine Intelligence",
+      "base": "#6B4FA1",
+      "light": "#E1D9F0",
+      "dark": "#3E2C65",
+      "fallbackMark": "C"
+    },
+    "engineering": {
+      "label": "Engineering and Software",
+      "base": "#B7791F",
+      "light": "#F4E3C4",
+      "dark": "#70450D",
+      "fallbackMark": "E"
+    },
+    "public-consequence": {
+      "label": "Governance, Law, Finance, and Infrastructure",
+      "base": "#267A70",
+      "light": "#D2EAE6",
+      "dark": "#144B45",
+      "fallbackMark": "G"
+    },
+    "public-interface": {
+      "label": "Public Philosophy, Criticism, and Education",
+      "base": "#A44A72",
+      "light": "#EED8E2",
+      "dark": "#622A44",
+      "fallbackMark": "U"
+    },
+    "corpus-evidence": {
+      "label": "Corpus, Evidence, and Research Operations",
+      "base": "#64748B",
+      "light": "#E2E8F0",
+      "dark": "#334155",
+      "fallbackMark": "R"
+    }
+  },
+  "subdisciplineExamples": {
+    "mathematics": {
+      "geometry": "#C95443",
+      "topology": "#A62F46",
+      "analysis": "#7D2638",
+      "logic": "#D46337",
+      "number-theory": "#8F345E"
+    },
+    "physics": {
+      "classical-fields": "#3478C5",
+      "relativity": "#1E477F",
+      "quantum": "#4D5FC1",
+      "thermodynamics": "#2A84A2",
+      "cosmology": "#24345E"
+    },
+    "computation": {
+      "foundations": "#59408A",
+      "graphs-knowledge": "#7652B4",
+      "machine-learning": "#8A62B0",
+      "memory-agents": "#5A4AB6",
+      "computational-epistemology": "#72437F"
+    },
+    "engineering": {
+      "software-architecture": "#C47A14",
+      "delivery-maintenance": "#9B6518",
+      "boundary-first-engineering": "#D2922E",
+      "ai-as-forge": "#A86B22"
+    },
+    "public-consequence": {
+      "governance": "#2B8578",
+      "law": "#1E6A68",
+      "finance": "#398A66",
+      "infrastructure": "#366F78"
+    }
+  }
+}

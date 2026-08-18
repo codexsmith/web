@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://boundaryfirstlabs.example/schemas/institutional-content-register-v0.1.json",
+  "title": "Boundary First Labs Institutional Content Register",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "status",
+    "records"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "generated": {
+      "type": "string"
+    },
+    "governingRule": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "recordCount": {
+      "type": "integer"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source",
+          "text",
+          "contentType",
+          "operatingLayer",
+          "scope",
+          "statusAssessment",
+          "canonicalDisposition"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "source": {
+            "type": "object",
+            "required": [
+              "file",
+              "nodeId",
+              "path"
+            ],
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "nodeId": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "contentVersion": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "operatingLayer": {
+            "enum": [
+              "purpose",
+              "invariants",
+              "authority",
+              "operating-gates",
+              "standing-and-participation",
+              "repair-and-correction",
+              "continuity-and-stewardship",
+              "goals-and-work-queue",
+              "cross-cutting"
+            ]
+          },
+          "scope": {
+            "type": "string"
+          },
+          "statusAssessment": {
+            "type": "object",
+            "required": [
+              "sourceStatus",
+              "bindingStatus",
+              "operationalizationStatus",
+              "reviewNeeds"
+            ],
+            "properties": {
+              "sourceStatus": {
+                "type": "string"
+              },
+              "bindingStatus": {
+                "type": "string"
+              },
+              "operationalizationStatus": {
+                "type": "string"
+              },
+              "reviewNeeds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "canonicalDisposition": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "duplicateGroup": {
+            "type": "string"
+          },
+          "registerTier": {
+            "enum": [
+              "core-institutional",
+              "domain-governance-appendix",
+              "extended-source-context"
+            ]
+          }
+        }
+      }
+    },
+    "candidateCanonicalClusters": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "terminologyScan": {
+      "type": "object"
+    },
+    "coreRecordCount": {
+      "type": "integer"
+    },
+    "recordTiers": {
+      "type": "object"
+    }
+  }
+}

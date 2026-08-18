@@ -1,0 +1,147 @@
+{
+  "version": "0.2.0",
+  "id": "agency-representation-audit",
+  "slug": "agency-audit",
+  "title": "Agency and Representation Audit",
+  "pageType": "public-professional-service",
+  "status": "pilot-intake",
+  "visibility": "public",
+  "hero": {
+    "eyebrow": "AGENCY + REPRESENTATION AUDIT · PILOT INTAKE",
+    "headline": "Make the chain from representation to consequence inspectable.",
+    "support": "A bounded diagnostic for consequential software, AI, and institutional processes. Map who can act, what representation informs or authorizes the action, how consequences propagate, whether the process can be contested, and who owns repair.",
+    "primaryCta": {
+      "label": "Start an audit inquiry",
+      "href": "/collaborate"
+    },
+    "secondaryCta": {
+      "label": "See the audit method",
+      "target": "method"
+    }
+  },
+  "executiveBrief": {
+    "title": "Audit the operating relationship, not only the model or policy.",
+    "summary": "Consequential systems rarely fail at one isolated component. Authority may be delegated across people, policies, software, vendors, models, records, and interfaces while the resulting consequence lands somewhere else. The audit reconstructs that relationship as an inspectable system.",
+    "questions": [
+      "Who or what is permitted to act?",
+      "What representation stands in for the affected person, condition, or case?",
+      "Which transition does the system make or enable?",
+      "Who receives the resulting gain, loss, restriction, workload, risk, or obligation?",
+      "Can an affected party understand and contest the process in practice?",
+      "Who owns correction of the representation and repair of the consequence?"
+    ],
+    "decisionUse": "Use the audit when a bounded process can materially alter access, eligibility, identity, status, moderation, benefits, work, risk, recourse, or another consequential condition."
+  },
+  "problem": {
+    "title": "Consequential systems often distribute authority while concentrating consequence.",
+    "body": "A policy can authorize a workflow, a model can classify a record, an interface can collapse context, an operator can execute the result, and a downstream institution can treat the output as fact. Each local step may appear reasonable while the whole chain becomes difficult to reconstruct, challenge, or repair.",
+    "failureModes": [
+      "the authority chain disappears behind workflow or automation",
+      "a representation is treated as equivalent to the person or condition it describes",
+      "classification changes downstream options without making that consequence visible",
+      "policy provides appeal in principle but the executable process does not",
+      "correction of the source record does not propagate to downstream decisions",
+      "repair responsibility is fragmented across teams, vendors, or institutions",
+      "success is measured at the decision point while downstream burden is externalized"
+    ]
+  },
+  "method": {
+    "id": "method",
+    "title": "Five passes from authority to repair.",
+    "passes": [
+      {
+        "name": "1. Map authority",
+        "question": "Who or what may act, where did that authority come from, what does it permit, and where does delegation or automation alter the chain?",
+        "output": "Agency map"
+      },
+      {
+        "name": "2. Inspect representation",
+        "question": "Which categories, data, models, records, documents, and interfaces stand in for the affected person or condition, and what do they omit?",
+        "output": "Representation map"
+      },
+      {
+        "name": "3. Trace consequence",
+        "question": "What changes after the decision, who receives the effect, and how does it propagate through access, eligibility, status, workload, recourse, cost, risk, or downstream behavior?",
+        "output": "Consequence chain"
+      },
+      {
+        "name": "4. Test contestability",
+        "question": "Can an affected party discover the basis of the action and meaningfully challenge, suspend, correct, or reverse it through the actual operating process?",
+        "output": "Contest path"
+      },
+      {
+        "name": "5. Assign repair",
+        "question": "When the representation or action is wrong, who must correct it, how does correction propagate, and who owns repair of consequences already produced?",
+        "output": "Repair ownership map + defect register"
+      }
+    ],
+    "closureTest": "The audit is not complete when the decision is explained. It closes only when the scoped authority, representation, consequence, contest, and repair paths can be reconstructed well enough to expose unresolved defects and ownership gaps."
+  },
+  "candidateWork": {
+    "title": "Good pilot candidates are bounded, consequential, and inspectable.",
+    "goodFit": [
+      "one identifiable process or decision path",
+      "a real representation such as a record, score, model output, category, case file, or eligibility state",
+      "a consequential transition with identifiable affected parties",
+      "enough access to reconstruct policy, software, human, and vendor handoffs",
+      "an owner who is willing to examine defects rather than defend a predetermined conclusion"
+    ],
+    "examples": [
+      "eligibility or benefits determination",
+      "identity verification or account recovery",
+      "moderation, trust, or safety classification",
+      "automated or AI-assisted case triage",
+      "employee monitoring or automated management",
+      "access, entitlement, or risk classification",
+      "another bounded process where a representation materially changes a person's available options"
+    ],
+    "notYetFit": [
+      "an institution-wide certification request without a bounded process",
+      "a request to validate a predetermined policy conclusion",
+      "a purely technical penetration test or security review",
+      "a legal opinion disguised as a systems audit"
+    ]
+  },
+  "firstAsk": {
+    "title": "Pilot one bounded process.",
+    "shape": "Start with one process whose inputs, decision path, affected parties, and downstream consequences can be named. The pilot is intended to produce a reconstructable map and a prioritized defect register, not a universal verdict on the institution.",
+    "whatYouBring": [
+      "the process or decision path to examine",
+      "known actors, systems, policies, vendors, and handoffs",
+      "representative artifacts such as forms, records, screenshots, model outputs, notices, or procedure documents",
+      "known failure cases, complaints, workarounds, appeals, or repair attempts",
+      "a person who can clarify operational reality when documentation and execution differ"
+    ],
+    "whatYouReceive": [
+      "agency map",
+      "representation map",
+      "consequence chain",
+      "contest path",
+      "repair ownership map",
+      "defect register with unresolved boundaries, missing witnesses, and ownership gaps"
+    ],
+    "evidenceRule": "Each material finding should be traceable to an observed artifact, declared rule, executable behavior, stakeholder account, or clearly labeled inference."
+  },
+  "claimBoundary": {
+    "title": "This is a systems audit, not delegated institutional authority.",
+    "body": "The audit evaluates the scoped operating structure and its representations. It does not inherit the authority of a regulator, court, standards body, security assessor, medical professional, or internal decision owner.",
+    "doesNotProvide": [
+      "legal advice or a legal determination",
+      "regulatory or compliance certification",
+      "algorithmic fairness, safety, or bias certification",
+      "cybersecurity or penetration-test certification",
+      "a guarantee that every affected case or downstream consequence has been discovered",
+      "automatic endorsement of the audited system or institution"
+    ],
+    "claimRule": "Findings describe observed or reconstructable agency, representation, consequence, contest, and repair conditions inside the declared scope. They should not be promoted into claims about the institution as a whole without additional evidence."
+  },
+  "closing": {
+    "eyebrow": "AGENCY + REPRESENTATION AUDIT",
+    "title": "If the system can act, the path from authority to repair should be reconstructable.",
+    "finalLine": "Make the representation visible. Follow the consequence. Preserve the contest path. Assign the repair."
+  },
+  "cta": {
+    "label": "Start an audit inquiry",
+    "href": "/collaborate"
+  }
+}

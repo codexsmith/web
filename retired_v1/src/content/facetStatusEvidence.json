@@ -1,0 +1,755 @@
+{
+  "auditDate": "2026-07-27",
+  "viewable": {
+    "research": {
+      "documented": true,
+      "active": true
+    },
+    "product": {
+      "research-led": true
+    }
+  },
+  "activeResearch": [
+    "admissibility-theory--admissible-forgetting-and-projection",
+    "admissibility-theory--admissible-representation",
+    "admissibility-theory--admissible-transformation",
+    "admissibility-theory--authority-evidence-defect-and-repair",
+    "admissibility-theory--composition-and-interface-contracts",
+    "admissibility-theory--replacement-judgments-tolerance",
+    "admissibility-theory--typed-closure-assessment",
+    "ai-forge--accountable-delegation",
+    "ai-forge--ai-assisted-transformation",
+    "ai-forge--bounded-agents",
+    "ai-forge--human-review",
+    "bfe--executable-and-delivery-skeletons",
+    "bfe--failure-recovery-repair",
+    "bfe--maintenance-retirement",
+    "bfe--method-cards-consulting-instruments",
+    "boundary-theory--admissibility",
+    "boundary-theory--boundary-closure-and-defect",
+    "boundary-theory--contexture",
+    "boundary-theory--distinction",
+    "boundary-theory--distinction-space",
+    "boundary-theory--emergence",
+    "boundary-theory--invariant-preservation-repair-and-promotion",
+    "boundary-theory--system",
+    "computational-systems--complexity-quantum-computation",
+    "computational-systems--foundations-of-computation",
+    "computational-systems--graphs-knowledge-systems",
+    "computational-systems--machine-learning",
+    "constructive-humanist-agentics--embodied-and-cognitive-agency",
+    "constructive-humanist-agentics--responsibility-consequence-repair",
+    "contexture--assessment-decoration",
+    "contexture--composition-defects-and-repair",
+    "contexture--inherited-and-specialized-structure",
+    "contexture--lineage-and-disambiguation",
+    "contexture--local-carrier-and-inclusion",
+    "contexture--structural-composition",
+    "contexture--typed-interfaces",
+    "corpus--claim-contradiction-decision-and-adjudication-ledgers",
+    "corpus--claim-proof-maturity-ledgers",
+    "corpus--corpus-forge",
+    "corpus--publication-admissibility",
+    "corpus--restricted-research-dual-use-review",
+    "corpus-forge--atomic-extraction",
+    "corpus-forge--burden-failure-and-baseline-comparison",
+    "corpus-forge--claim-and-contradiction-ledgers",
+    "corpus-forge--human-promotion-gate",
+    "corpus-forge--operator-critic-separation",
+    "corpus-forge--source-stabilization-and-hashing",
+    "corpus-forge--stable-file-mutation",
+    "corpus-forge--supersession-and-preservation",
+    "distinction-space--admissibility-viability-and-reachability",
+    "distinction-space--carrier-capacity-and-local-variation",
+    "distinction-space--consequential-boundaries-and-interfaces",
+    "distinction-space--declaration-and-regime",
+    "distinction-space--defect-and-repair",
+    "distinction-space--distinctions-and-relations",
+    "distinction-space--obligations-witnesses-and-typed-closure",
+    "distinction-space--projection-transport-composition-and-promotion",
+    "distinction-theory--boundary-exposure",
+    "distinction-theory--contexture-and-representation",
+    "distinction-theory--distinction-and-interface",
+    "distinction-theory--protected-difference-and-collapse",
+    "distinction-theory--transport-loss-and-refinement",
+    "emergence-theory--fresh-successor-obligations",
+    "emergence-theory--loss-failure-and-rollback",
+    "emergence-theory--promotion-and-demotion",
+    "emergence-theory--scale-and-context-transition",
+    "emergence-theory--stable-residue-and-candidate-macro",
+    "emergence-theory--successor-distinction-spaces",
+    "emergence-theory--target-use-congruence",
+    "finance-capital--boundary-trust-bounded-capital",
+    "finance-capital--public-credit-future-agency",
+    "finance-capital--repair-note-finance",
+    "formal-grammars--defect-and-countermodel-representation",
+    "formal-grammars--external-provenance-authority-criticism-and-stewardship",
+    "formal-grammars--formation-and-composition",
+    "formal-grammars--indexed-adequacy-closure-repair-and-promotion",
+    "formal-grammars--institution-realizable-satisfaction-core",
+    "formal-grammars--operational-semantics",
+    "formal-grammars--primitive-vocabularies-and-types",
+    "formal-grammars--sentence-translation-and-model-reduct",
+    "governance-institutions--agency-audits-institutional-repair",
+    "governance-institutions--consequence-bearing-software-accountability",
+    "governance-institutions--constitutional-systems",
+    "governance-institutions--governance-law-political-economy",
+    "governance-institutions--maintenance-governance",
+    "governance-institutions--operational-reliability-incident-repair",
+    "governance-institutions--organizations-professional-responsibility",
+    "governance-institutions--research-governance-publication-stewardship",
+    "identity--computational-machine-intelligence-research",
+    "identity--ecology-labor-material-substrate",
+    "identity--engineering-governance-institutional-continuity",
+    "identity--founder-originated-research-program",
+    "identity--infrastructure-civilizational-repair",
+    "identity--law-constitutional-systems-public-trust",
+    "identity--mathematics-formal-structures",
+    "identity--physics-physical-regimes",
+    "identity--portfolio-governance-product-stewardship",
+    "identity--software-engineering-applied-computer-science",
+    "identity--software-products-public-infrastructure",
+    "identity--systems-criticism-public-diagnosis",
+    "infrastructure-repair--ecological-material-closure",
+    "infrastructure-repair--software-as-infrastructure",
+    "law-public-trust--corporate-and-artificial-agency",
+    "law-public-trust--due-process-standing-contestability",
+    "law-public-trust--public-trust-delegated-authority",
+    "law-public-trust--repair-rights-institutional-recourse",
+    "mathematics--analysis-continuation",
+    "on-ramps--finance-law-infrastructure-on-ramps",
+    "physics--flow-weather-thermodynamics",
+    "positions--finance-future-agency",
+    "positions--law-public-trust",
+    "products-testbeds--public-economic-infrastructure",
+    "products-testbeds--research-engineering-governance-workbenches",
+    "representational-mechanics--agency-consequence-repair",
+    "representational-mechanics--boundary-closure-and-defect",
+    "representational-mechanics--competent-baseline-comparison",
+    "representational-mechanics--declaration-regime-and-carrier",
+    "representational-mechanics--distinction-space-and-contexture-analysis",
+    "representational-mechanics--emergence-promotion-mechanics",
+    "representational-mechanics--formal-grammar-design",
+    "representational-mechanics--institutional-and-economic-representation",
+    "representational-mechanics--operational-grammar-design",
+    "representational-mechanics--perturbation-and-evidence",
+    "representational-mechanics--pressure-cycle-grammar",
+    "representational-mechanics--reassessment-promotion-and-stop-rules",
+    "representational-mechanics--repair-accounting-and-hidden-labor",
+    "representational-mechanics--representation-and-instrument",
+    "software-engineering-practice--agile-lean-as-observational-systems",
+    "software-engineering-practice--closure-driven-software-development",
+    "software-engineering-practice--delivery-skeletons-closure-sized-increments",
+    "software-engineering-practice--onion-clean-ports-and-adapters-architecture",
+    "software-engineering-practice--reliability-security-operational-repair",
+    "software-engineering-practice--software-accountability-instruments",
+    "software-engineering-practice--software-consulting-training-advisory",
+    "software-engineering-practice--technical-debt-refactoring-maintenance",
+    "software-engineering-practice--technical-leadership-project-rescue",
+    "system--attractors-basins-and-persistent-identity",
+    "system--coalgebraic-presentation",
+    "system--contexture-complex",
+    "system--defect-repair-and-reorganization",
+    "system--dynamics-and-process-semantics",
+    "system--interfaces-and-external-coupling",
+    "systems-criticism--boundary-failure-casebook",
+    "systems-criticism--technology-ai-software-critique"
+  ],
+  "documentedResearch": {
+    "admissibility-theory--admissible-forgetting": [
+      "Distinction Theory Admissible Opacity Insight",
+      "Contexture Foundations for Emergence Theory",
+      "Emergence Theory Job Manifest V0 5"
+    ],
+    "admissibility-theory--admissible-forgetting-and-projection": [
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "admissibility-theory--admissible-representation": [
+      "Distinction Theory Formalizing Contextual Representations",
+      "The Wigner Closure Response V 0 2",
+      "The Wigner Closure Response",
+      "Admissibility Facet",
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "admissibility-theory--admissible-transformation": [
+      "From Universal Symbolic Computation to Lawful Transformation of Executable Representations",
+      "The Wigner Closure Response V 0 2",
+      "Distinction Theory Mathematical Critiques Framework",
+      "Admissibility Facet",
+      "Distinction Spaces and Their Morphisms"
+    ],
+    "admissibility-theory--authority-evidence-defect-and-repair": [
+      "Operational Facets Packet",
+      "Representational Mechanics Discipline and Evaluation Packet"
+    ],
+    "admissibility-theory--composition-and-interface-contracts": [
+      "Contextures: Lineage, Locality, and Composition"
+    ],
+    "admissibility-theory--typed-closure-assessment": [
+      "Typed Closure Registry",
+      "Typed Closure Theorem Packet"
+    ],
+    "ai-forge--accountable-delegation": [
+      "Constructive Humanist Agentics",
+      "External Execution Readiness and Resource Gate"
+    ],
+    "ai-forge--ai-assisted-transformation": [
+      "AI as Forge",
+      "Ontological Representation Durability Protocol"
+    ],
+    "ai-forge--bounded-agents": [
+      "Separated Fluency and Ontology-Governed Transformation",
+      "Benchmark Release, Adapter, and Preregistration Packet"
+    ],
+    "ai-forge--human-review": [
+      "General Publication Declaration",
+      "Corpus Forge External Critic Packet"
+    ],
+    "ai-forge--provenance-claim-discipline": [
+      "Boundary-First / Emergence Program",
+      "Business Strategy",
+      "Distinction Theory Academic Publication Audit V0 1"
+    ],
+    "bfe--lifecycle-ownership": [
+      "The Maintenance Agent The Build Is Not The",
+      "Release Is An Accountability Event A",
+      "Status Is Not A Field A Status Is A Lifecycle Boundary Wearing A Dropdown Every Software Project Eventually Creates A St"
+    ],
+    "boundary-theory--admissibility": [
+      "Typed Closure Registry",
+      "Typed Closure Theorem Packet",
+      "Distinction, Admissibility, and Emergence as Operational Facets"
+    ],
+    "boundary-theory--boundary-closure-and-defect": [
+      "Boundary, Closure, and Defect",
+      "Typed Closure Registry",
+      "Typed Closure Theorem Packet"
+    ],
+    "boundary-theory--contexture": [
+      "Contexture Lineage Memo",
+      "Contextures: Lineage, Locality, and Composition"
+    ],
+    "boundary-theory--distinction": [
+      "Distinction, Admissibility, and Emergence as Operational Facets"
+    ],
+    "boundary-theory--distinction-space": [
+      "Boundary Theory: A Research Program for Distinction Spaces",
+      "Foundational Architecture Baseline"
+    ],
+    "boundary-theory--emergence": [
+      "Promotion, Coarse-Graining, and Successor Use",
+      "Distinction, Admissibility, and Emergence as Operational Facets"
+    ],
+    "boundary-theory--invariant-preservation-repair-and-promotion": [
+      "Transport and Closure Equivariance",
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "boundary-theory--system": [
+      "System Formalization",
+      "Root Closure Diagram"
+    ],
+    "computational-systems--computational-epistemology": [
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1",
+      "Distinction Theory Mapreduce Enhancements Exploration"
+    ],
+    "computational-systems--machine-learning": [
+      "Distinction Theory Boundaryspectral Learning Systems",
+      "Boundary-First Across Domains",
+      "Seed Outline",
+      "Ontological Representation Durability Protocol",
+      "Separated Fluency and Ontology-Governed Transformation",
+      "Multi-Domain Learned-Model Benchmark Corpus and Harness",
+      "Benchmark Release, Adapter, and Preregistration Packet",
+      "External Execution Readiness and Resource Gate"
+    ],
+    "constructive-humanist-agentics--delegated-agency": [
+      "The Agency Audit",
+      "The Agency Audit Practical Method V0 1",
+      "1. Why the claim holds"
+    ],
+    "constructive-humanist-agentics--human-capacity": [
+      "1. Why the claim holds",
+      "From Scarcity to Underutilization"
+    ],
+    "constructive-humanist-agentics--maintenance-responsibility": [
+      "Draft Status Document",
+      "Substack Paper Drafts Status",
+      "Distinction Theory Infrastructure Closure Analysis"
+    ],
+    "constructive-humanist-agentics--public-trust": [
+      "Public Systems Governance Politics Economics Constitution Lane",
+      "Public Systems Lane: Governance, Politics, Economics, Finance, and the U.S. Constitution",
+      "Data Portability Is Public Memory A"
+    ],
+    "contexture--assessment-decoration": [
+      "Contextures: Lineage, Locality, and Composition",
+      "Typed Closure Theorem Packet"
+    ],
+    "contexture--composition-defects-and-repair": [
+      "Contextures: Lineage, Locality, and Composition"
+    ],
+    "contexture--inherited-and-specialized-structure": [
+      "Contexture"
+    ],
+    "contexture--lineage-and-disambiguation": [
+      "Contexture Lineage Memo"
+    ],
+    "contexture--local-carrier-and-inclusion": [
+      "Contexture"
+    ],
+    "contexture--structural-composition": [
+      "Contextures: Lineage, Locality, and Composition"
+    ],
+    "contexture--typed-interfaces": [
+      "Contextures: Lineage, Locality, and Composition"
+    ],
+    "corpus--claim-contradiction-decision-and-adjudication-ledgers": [
+      "Corpus Forge Protocol",
+      "Delta Register",
+      "Contradiction Register",
+      "Decision Record",
+      "Adjudication Register"
+    ],
+    "corpus--corpus-forge": [
+      "Corpus Forge Protocol",
+      "Corpus Forge Vertical Slice and Methods Packet",
+      "Corpus Forge Manuscript"
+    ],
+    "corpus--publication-admissibility": [
+      "General Publication Declaration",
+      "Publication Sequence"
+    ],
+    "corpus-forge--atomic-extraction": [
+      "Corpus Forge Protocol",
+      "Corpus Forge Vertical Slice and Methods Packet"
+    ],
+    "corpus-forge--burden-failure-and-baseline-comparison": [
+      "Corpus Forge Matched Comparison",
+      "Corpus Forge Internal Red Team"
+    ],
+    "corpus-forge--claim-and-contradiction-ledgers": [
+      "Corpus Forge Protocol",
+      "Corpus Forge Vertical Slice and Methods Packet"
+    ],
+    "corpus-forge--human-promotion-gate": [
+      "Corpus Forge Vertical Slice and Methods Packet",
+      "General Publication Declaration"
+    ],
+    "corpus-forge--operator-critic-separation": [
+      "Corpus Forge Vertical Slice and Methods Packet",
+      "Corpus Forge External Critic Packet"
+    ],
+    "corpus-forge--source-stabilization-and-hashing": [
+      "Corpus Forge Protocol",
+      "Corpus Forge Vertical Slice and Methods Packet"
+    ],
+    "corpus-forge--stable-file-mutation": [
+      "Corpus Forge Vertical Slice and Methods Packet"
+    ],
+    "corpus-forge--supersession-and-preservation": [
+      "Corpus Forge Protocol",
+      "General Publication Declaration"
+    ],
+    "distinction-space--admissibility-viability-and-reachability": [
+      "Distinction Space",
+      "Distinction Spaces and Their Morphisms"
+    ],
+    "distinction-space--carrier-capacity-and-local-variation": [
+      "Capacity and Possibility",
+      "Distinction Space"
+    ],
+    "distinction-space--consequential-boundaries-and-interfaces": [
+      "Boundary, Closure, and Defect",
+      "Contextures: Lineage, Locality, and Composition"
+    ],
+    "distinction-space--declaration-and-regime": [
+      "Distinction Space"
+    ],
+    "distinction-space--defect-and-repair": [
+      "Boundary, Closure, and Defect",
+      "Typed Closure Theorem Packet"
+    ],
+    "distinction-space--distinctions-and-relations": [
+      "Distinction Space",
+      "Distinction Spaces and Their Morphisms"
+    ],
+    "distinction-space--obligations-witnesses-and-typed-closure": [
+      "Typed Closure Registry",
+      "Typed Closure Theorem Packet"
+    ],
+    "distinction-space--projection-transport-composition-and-promotion": [
+      "Distinction Spaces and Their Morphisms",
+      "Contextures: Lineage, Locality, and Composition",
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "distinction-theory--boundary-closure": [
+      "Weather as Boundary-Mediated Closure Dynamics",
+      "Weather As Boundary Mediated Closure Dynamics V0 1",
+      "The Wigner Closure Response"
+    ],
+    "distinction-theory--boundary-exposure": [
+      "Boundary, Closure, and Defect"
+    ],
+    "distinction-theory--contexture-and-representation": [
+      "Distinction Facet",
+      "Contexture"
+    ],
+    "distinction-theory--contexture-representation": [
+      "FORM-002 — Boundary and Defect as Distinct Operators: A Calculus of Residual Non-Closure v1.0.1",
+      "Form 002 Boundary Defect Calculus V1 0 1",
+      "Distinction Theory Unified Spine V0 7 0"
+    ],
+    "distinction-theory--defect-invariant": [
+      "FORM-002 — Boundary and Defect as Distinct Operators: A Calculus of Residual Non-Closure v1.0.1",
+      "Form 002 Boundary Defect Calculus V1 0 1",
+      "Distinction Theory Rough Unreviewed Audit V0 1"
+    ],
+    "distinction-theory--distinction-and-interface": [
+      "Distinction Facet",
+      "Distinction Spaces and Their Morphisms"
+    ],
+    "distinction-theory--distinction-interface": [
+      "Distinction Theory Survey Of Impacted Fields",
+      "Distinction Theory Unified Spine V0 7 0",
+      "A Survey of Fields Impacted by Distinction Theory"
+    ],
+    "distinction-theory--protected-difference-and-collapse": [
+      "Operational Facets Packet",
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "distinction-theory--transport-loss-and-refinement": [
+      "Distinction Spaces and Their Morphisms",
+      "Transport and Closure Equivariance"
+    ],
+    "distinction-theory--transport-refinement": [
+      "Distinction Theory Isotropic Computing And Compression",
+      "Distinction Theory Unified Spine V0 7 0",
+      "Index Manifest"
+    ],
+    "emergence-theory--fresh-successor-obligations": [
+      "Operational Facets Packet"
+    ],
+    "emergence-theory--loss-failure-and-rollback": [
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "emergence-theory--promotion-and-demotion": [
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "emergence-theory--scale-and-context-transition": [
+      "Emergence Facet"
+    ],
+    "emergence-theory--stable-residue-and-candidate-macro": [
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "emergence-theory--successor-distinction-spaces": [
+      "Operational Facets Packet",
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "emergence-theory--target-use-congruence": [
+      "Promotion, Coarse-Graining, and Successor Use"
+    ],
+    "finance-capital--boundary-weighted-finance": [
+      "Boundary-First Publication, Funding, and Draft-Conversion Plan",
+      "Boundary-First / Emergence Program",
+      "Computational, Simulation, and Applied Engine Catalog v0.1"
+    ],
+    "formal-grammars--defect-and-countermodel-representation": [
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "formal-grammars--external-provenance-authority-criticism-and-stewardship": [
+      "Formal Grammars as Boundary-Aware Institutions",
+      "General Publication Declaration"
+    ],
+    "formal-grammars--formation-and-composition": [
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "formal-grammars--indexed-adequacy-closure-repair-and-promotion": [
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "formal-grammars--institution-realizable-satisfaction-core": [
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "formal-grammars--operational-semantics": [
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "formal-grammars--primitive-vocabularies-and-types": [
+      "Formal Grammars"
+    ],
+    "formal-grammars--sentence-translation-and-model-reduct": [
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "governance-institutions--public-infrastructure": [
+      "Distinction Theory Infrastructure Closure Analysis",
+      "The Maintenance Agent The Build Is Not The",
+      "Consequence Bearing Software"
+    ],
+    "governance-institutions--public-trust": [
+      "Public Systems Governance Politics Economics Constitution Lane",
+      "Public Systems Lane: Governance, Politics, Economics, Finance, and the U.S. Constitution",
+      "Data Portability Is Public Memory A"
+    ],
+    "identity--representational-mechanics": [
+      "Representational Mechanics Practice System",
+      "Representational Consequences",
+      "1. What Ground News already owns"
+    ],
+    "infrastructure-repair--civilizational-tech-debt": [
+      "Distinction Theory Civilizational Tech Debt",
+      "Compiled Revision F",
+      "Novel Mathematical Machinery Catalog V0 1"
+    ],
+    "infrastructure-repair--lifecycle-closure-cost": [
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1",
+      "Distinction Theory Infrastructure Closure Analysis"
+    ],
+    "infrastructure-repair--maintenance-agent-of-record": [
+      "Distinction Theory Infrastructure Closure Analysis",
+      "The Maintenance Agent The Build Is Not The",
+      "The Responsible Engineer Of Record Not Everyone Who Writes Software Needs A License Some Software Systems Need A Named"
+    ],
+    "law-public-trust--antitrust-as-anti-sovereignty": [
+      "Antitrust As Anti Sovereignty Law Draft V0 1",
+      "Antitrust as Anti-Sovereignty Law v0.1",
+      "Survey: 0402_public_law_and_antitrust"
+    ],
+    "law-public-trust--constitutional-boundary-doctrine": [
+      "Emergence Theory Job Manifest V0 5",
+      "Emergence Theory — Job Manifest v0.5 State of Work",
+      "FORM-JOB-013 — Defect-Boundary-Percolation-Emergence Claim Ledger v0.1"
+    ],
+    "mathematics--boundary-reconstruction": [
+      "Boundary-First Across Domains",
+      "Distinction Theory - Thought Experiment Collection",
+      "Thought Experiment Collection"
+    ],
+    "mathematics--geometry-dimension": [
+      "Hypersphere Volume Formula Conv 00787 Turn 00013 01 Bffb88Cb",
+      "Distinction Theory Geometry Kernel Limit Theory",
+      "Distinction Theory Unified Spine V0 7 0"
+    ],
+    "mathematics--logic-foundations": [
+      "Novel Mathematical Machinery Catalog V0 1",
+      "Distinction Theory Academic Publication Audit V0 1",
+      "Distinction Theory Public Face Root Audit V0 1"
+    ],
+    "mathematics--mathematical-physics": [
+      "Distinction Theory Mathematical Critiques Framework",
+      "Boundary Operators and Mellin Spectral Physics",
+      "Distinction Theory Planck Scale Physics Insights"
+    ],
+    "mathematics--number-theory": [
+      "Distinction Theory Survey Of Impacted Fields",
+      "Wigner S Unreasonable Effectiveness Conv 00620 Turn 00004 01 3B5Dcfe4",
+      "Job Scheduling Frequency Conv 00633 Turn 00087 01 A230C719"
+    ],
+    "on-ramps--method-cards": [
+      "Distinction Theory Rough Unreviewed Audit V0 1",
+      "Distinction Theory Rough Unreviewed Draft Audit v0.1",
+      "Distinction Theory — Job Manifest v0.4 State of Work"
+    ],
+    "physics--cosmology": [
+      "Distinction Theory Planck Scale Physics Insights",
+      "Artifact Opportunity Summary",
+      "Task Update And Expansion Conv 00640 Turn 00001 50 B5Fa90B5"
+    ],
+    "physics--mathematical-physics": [
+      "Distinction Theory Mathematical Critiques Framework",
+      "Boundary Operators and Mellin Spectral Physics",
+      "Distinction Theory Planck Scale Physics Insights"
+    ],
+    "physics--quantum-foundations": [
+      "Task Update And Expansion Conv 00640 Turn 00004 365 2B54998E",
+      "Scope",
+      "Spine Job 001 Unified Spine V0 7 0 Emergence Patch Review V0 2"
+    ],
+    "physics--relativity-gravitation": [
+      "Task Update And Expansion Conv 00640 Turn 00004 412 2Ddd53B3",
+      "Task Update And Expansion Conv 00640 Turn 00001 41 Edd28Bee",
+      "Task Update And Expansion Conv 00640 Turn 00004 161 008Ab106"
+    ],
+    "positions--infrastructure-maintenance": [
+      "The Throughput Trap",
+      "Distinction Theory Infrastructure Closure Analysis",
+      "The Maintenance Agent The Build Is Not The"
+    ],
+    "positions--institutional-accountability": [
+      "What Distinction Theory Is And Is Not V 0 2 Thickened",
+      "The Responsible Engineer Of Record Not Everyone Who Writes Software Needs A License Some Software Systems Need A Named",
+      "Consequence Bearing Software"
+    ],
+    "positions--political-representation": [
+      "Problem Formulation",
+      "1. What Ground News already owns",
+      "Analysis 0.1"
+    ],
+    "public-philosophy-satire--carlin-lane": [
+      "Comic Carlin Public Outreach Lane"
+    ],
+    "public-philosophy-satire--cultural-critique": [
+      "Boundary First Bank Investor Pitch Materials V0 2",
+      "Boundary First Labs — Bank & Investor Pitch Materials v0.2",
+      "Founder’s Letter"
+    ],
+    "representational-mechanics--boundary-closure-and-defect": [
+      "Typed Closure Registry",
+      "Representational Mechanics Discipline and Evaluation Packet"
+    ],
+    "representational-mechanics--boundary-constraint-closure": [
+      "Distinction Theory - Outline Development Strategy",
+      "Outline Development Strategy",
+      "Closure Boundary First Axiom Conv 00839 Turn 00002 01 78Ae40F9"
+    ],
+    "representational-mechanics--competent-baseline-comparison": [
+      "Representational Mechanics Discipline and Evaluation Packet"
+    ],
+    "representational-mechanics--declaration-regime-and-carrier": [
+      "Representational Mechanics Discipline and Evaluation Packet"
+    ],
+    "representational-mechanics--distinction-representation": [
+      "A Survey of Fields Impacted by Distinction Theory",
+      "Distinction Theory Field Impact Survey V0 1",
+      "Distinction Theory Content Tree V0"
+    ],
+    "representational-mechanics--distinction-space-and-contexture-analysis": [
+      "Distinction Spaces and Their Morphisms",
+      "Contextures: Lineage, Locality, and Composition"
+    ],
+    "representational-mechanics--formal-grammar-design": [
+      "Formal Grammars as Boundary-Aware Institutions"
+    ],
+    "representational-mechanics--invariant-defect-transport": [
+      "FORM-JOB-013 — Defect-Boundary-Percolation-Emergence Claim Ledger v0.1",
+      "Form Job 013 Claim Ledger Control Note V0 1",
+      "Defect Boundary Calculus Packet V0 1"
+    ],
+    "representational-mechanics--perturbation-and-evidence": [
+      "Representational Mechanics Discipline and Evaluation Packet",
+      "Ontological Representation Durability Protocol"
+    ],
+    "representational-mechanics--reassessment-promotion-and-stop-rules": [
+      "Promotion, Coarse-Graining, and Successor Use",
+      "Representational Mechanics Discipline and Evaluation Packet"
+    ],
+    "representational-mechanics--repair-accounting-and-hidden-labor": [
+      "Closure-Driven Software Internal Red Team",
+      "Representational Mechanics Discipline and Evaluation Packet"
+    ],
+    "representational-mechanics--representation-and-instrument": [
+      "Representational Mechanics Discipline and Evaluation Packet"
+    ],
+    "software-engineering-practice--architecture-as-nested-closure": [
+      "Boundary-First Engineering",
+      "Boundary First Engineering Essay Draft V0 1",
+      "Boundary First Engineering Revised V 0 2 Marked"
+    ],
+    "software-engineering-practice--closure-driven-software-development": [
+      "Closure-Driven Software Development",
+      "Closure-Driven Software Development: Agile, Boundary-First Engineering, and the Discipline of Letting Reality Close",
+      "Software Agile Boundary First Engineering V1 0",
+      "False Completion in Software Systems",
+      "Closure-Driven Software Reference Carrier",
+      "Closure-Driven Software Internal Red Team"
+    ],
+    "software-engineering-practice--consequence-bearing-software-practice": [
+      "Professional Software Boundary First Engineering Draft V0 1",
+      "Software Engineering Is Missing Its Theory of Defect",
+      "The Responsible Engineer Of Record Not Everyone Who Writes Software Needs A License Some Software Systems Need A Named"
+    ],
+    "software-engineering-practice--software-patterns-as-boundary-moves": [
+      "Software Patterns As Boundary Moves Why Familiar",
+      "02A Boundary First Software Engineering",
+      "Deep Moves Map"
+    ],
+    "system--attractors-basins-and-persistent-identity": [
+      "System Formalization"
+    ],
+    "system--coalgebraic-presentation": [
+      "System Formalization"
+    ],
+    "system--contexture-complex": [
+      "System Formalization"
+    ],
+    "system--defect-repair-and-reorganization": [
+      "System Formalization",
+      "Root Closure Diagram"
+    ],
+    "system--dynamics-and-process-semantics": [
+      "System Formalization"
+    ],
+    "system--interfaces-and-external-coupling": [
+      "System Formalization"
+    ]
+  },
+  "prototypeProducts": {
+    "admissibility-theory--admissible-forgetting": [
+      "General Software Toolkits and AI/ML R&D Lane",
+      "General Software Toolkits And AI ML RD Lane V2 With Frontier Addendum",
+      "Bf Chess Engine V1"
+    ],
+    "computational-systems--computational-epistemology": [
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1"
+    ],
+    "computational-systems--machine-learning": [
+      "Ontological Learned Benchmark Harness",
+      "Ontological Benchmark Release Candidate 0.1.0-rc1",
+      "Separated Fluency/Transformation Synthetic Carrier"
+    ],
+    "constructive-humanist-agentics--public-trust": [
+      "General Software Toolkits and AI/ML R&D Lane",
+      "General Software Toolkits And AI ML RD Lane V2 With Frontier Addendum"
+    ],
+    "corpus--corpus-forge": [
+      "Corpus Forge Vertical Slice and Validation Carrier"
+    ],
+    "distinction-theory--boundary-closure": [
+      "Bf Chess Engine V1",
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1"
+    ],
+    "distinction-theory--contexture-representation": [
+      "General Software Toolkits and AI/ML R&D Lane",
+      "General Software Toolkits And AI ML RD Lane V2 With Frontier Addendum"
+    ],
+    "distinction-theory--defect-invariant": [
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1"
+    ],
+    "finance-capital--boundary-weighted-finance": [
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1"
+    ],
+    "governance-institutions--public-trust": [
+      "General Software Toolkits and AI/ML R&D Lane",
+      "General Software Toolkits And AI ML RD Lane V2 With Frontier Addendum"
+    ],
+    "infrastructure-repair--lifecycle-closure-cost": [
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1"
+    ],
+    "infrastructure-repair--software-as-infrastructure": [
+      "General Software Toolkits and AI/ML R&D Lane",
+      "General Software Toolkits And AI ML RD Lane V2 With Frontier Addendum"
+    ],
+    "mathematics--number-theory": [
+      "Computational, Simulation, and Applied Engine Catalog v0.1",
+      "Computational Simulation Application Catalog V0 1",
+      "Distinction Theory Emergent Chess Theory Engine"
+    ],
+    "physics--cosmology": [
+      "Distinction Theory Emergent Chess Theory Engine"
+    ],
+    "software-engineering-practice--closure-driven-software-development": [
+      "General Software Toolkits and AI/ML R&D Lane",
+      "General Software Toolkits And AI ML RD Lane V2 With Frontier Addendum",
+      "Closure-Driven Software Reference Carrier"
+    ],
+    "systems-criticism--technology-ai-software-critique": [
+      "General Software Toolkits and AI/ML R&D Lane",
+      "General Software Toolkits And AI ML RD Lane V2 With Frontier Addendum"
+    ]
+  },
+  "operationalProducts": {}
+}

@@ -1,0 +1,161 @@
+{
+  "version": "0.2.0",
+  "id": "schemathematics",
+  "slug": "schemathematics",
+  "title": "Schemathematics",
+  "status": "research-program-draft",
+  "visibility": "public",
+  "pageType": "public-formal-research-program",
+  "hero": {
+    "eyebrow": "FORMAL RESEARCH · RESEARCH PROGRAM DRAFT",
+    "headline": "What does the object do?",
+    "support": "Schemathematics studies how formal structures are represented, differentiated, composed, transformed, and made intelligible across schemas. It treats the schema itself as a consequential mathematical carrier rather than as passive notation.",
+    "primaryCta": {
+      "label": "Inspect a worked comparison",
+      "target": "worked-example"
+    },
+    "secondaryCta": {
+      "label": "Explore the research context",
+      "href": "/research"
+    }
+  },
+  "definition": {
+    "title": "A schema should tell you what structure is available and what operations it licenses.",
+    "body": "Schemathematics is the formal study of schemas as lawful generators and carriers of objects, transformations, admissibility conditions, invariants, defects, provenance, and repair.",
+    "discipline": "Prefer established mathematics wherever it already carries the required structure. The research question is whether an explicit operative atlas across those structures improves comparison, navigation, translation, pedagogy, or machine reasoning."
+  },
+  "operativeProfile": {
+    "title": "Profile the object by operation, not by name alone.",
+    "fields": [
+      {
+        "name": "Entity",
+        "question": "What kind of object is being represented?"
+      },
+      {
+        "name": "Admissibility",
+        "question": "What conditions must hold before the object or operation is well-formed?"
+      },
+      {
+        "name": "Transformations",
+        "question": "Which maps, actions, or rewrites are lawful?"
+      },
+      {
+        "name": "Invariants",
+        "question": "What must survive those lawful transformations?"
+      },
+      {
+        "name": "Closure",
+        "question": "Which operations remain inside the represented structure?"
+      },
+      {
+        "name": "Boundary",
+        "question": "Which added or removed condition changes the object's available behavior?"
+      },
+      {
+        "name": "Provenance",
+        "question": "Which prior distinctions or constructions are required to reconstruct the object?"
+      },
+      {
+        "name": "Defect / repair",
+        "question": "What fails when a required condition is omitted, and what restores the intended structure?"
+      }
+    ]
+  },
+  "coreQuestions": [
+    "What structure must exist for this object to do what it does?",
+    "Which distinction does the object introduce?",
+    "Which transformations are admissible?",
+    "What remains invariant across equivalent or alternative representations?",
+    "Which dependency edges are required to reconstruct the object without hidden jumps?",
+    "What does one representation expose that another suppresses or makes expensive?"
+  ],
+  "program": {
+    "representation": "Express formal objects through typed operative profiles rather than names alone.",
+    "comparison": "Compare neighboring structures by the constraints, transformations, and invariants that differentiate them.",
+    "composition": "Study when local schemas compose lawfully and where hidden loss appears at interfaces.",
+    "transport": "Track what survives admissible movement between representations.",
+    "computation": "Test whether structured schema representations improve mathematical navigation, derivation, discrimination, and machine reasoning.",
+    "pedagogy": "Treat unexplained conceptual jumps as candidate missing dependency edges rather than as unavoidable abstraction."
+  },
+  "workedExample": {
+    "id": "worked-example",
+    "title": "Worked comparison: monoid → group.",
+    "purpose": "This is intentionally established mathematics. The test is whether operative profiling makes the structural difference easier to see without inventing a new object.",
+    "monoid": {
+      "entity": "A set M equipped with a binary operation.",
+      "admissibility": [
+        "the operation maps M × M back into M",
+        "the operation is associative",
+        "there is an identity element e"
+      ],
+      "guaranteedOperations": [
+        "compose any finite sequence of elements",
+        "insert or remove the identity without changing the result"
+      ],
+      "notGuaranteed": [
+        "an inverse for every element",
+        "general cancellation",
+        "solving a · x = b or x · a = b inside M for arbitrary a and b"
+      ]
+    },
+    "group": {
+      "entity": "A monoid in which every element has an inverse.",
+      "addedCondition": "For every a in G there exists a⁻¹ in G with a·a⁻¹ = a⁻¹·a = e.",
+      "newlyGuaranteed": [
+        "left and right cancellation",
+        "reversible multiplication by any group element",
+        "unique solutions to a · x = b and x · a = b inside the group"
+      ]
+    },
+    "boundaryDistinction": "The promotion from monoid to group is the addition of universal invertibility. That one condition changes which transformations are guaranteed reversible and which equations are guaranteed solvable inside the structure.",
+    "schemaLesson": "The names are useful labels; the operative profile exposes why the distinction matters. A useful schema should let a reader recover the added condition, the new guarantees it licenses, and the operations that remain unavailable without it."
+  },
+  "validation": {
+    "title": "The program succeeds only if the representation earns its cost.",
+    "tests": [
+      "Formal fidelity: preserve accepted definitions and required conditions.",
+      "Differentiating power: make neighboring structures easier to distinguish.",
+      "Dependency clarity: expose which prior distinctions are required.",
+      "Transformational utility: show which operations and invariants become available.",
+      "Pedagogical transfer: allow reconstruction without hidden conceptual jumps.",
+      "Equivalence burden: reduce to established formal machinery when that machinery already carries the required structure."
+    ],
+    "comparisonShape": "Compare conventional name/definition lookup with operative-profile representations on bounded tasks such as structure discrimination, prerequisite reconstruction, operation selection, and cross-representation translation.",
+    "claimRule": "Any claimed improvement in theorem proving, retrieval, pedagogy, or mathematical AI requires benchmark evidence beyond illustrative examples."
+  },
+  "researchHypotheses": [
+    "Formal objects can be indexed by operative profiles containing entity type, admissibility conditions, lawful transformations, invariants, closure properties, provenance, and boundary structure.",
+    "Operationally equivalent representations may remain asymmetric in visibility, cognitive cost, and computational usefulness.",
+    "Cross-domain discovery may improve when objects are matched by operative profile rather than terminology alone.",
+    "Structured Schemathematics representations may improve mathematical navigation and reasoning relative to vector-only retrieval, but this remains an empirical hypothesis."
+  ],
+  "claimBoundary": {
+    "title": "Formal research framing, not a novelty claim by default.",
+    "safe": [
+      "Schemathematics is a current Boundary First Labs research framing and formalization program.",
+      "Its objects and hypotheses can be tested independently of Boundary Theory as a whole.",
+      "Existing category theory, type theory, topology, algebra, logic, formal methods, knowledge representation, and related mathematics must be imported where they already solve the problem.",
+      "The monoid/group example demonstrates the representation method using standard mathematics; it is not evidence that the underlying algebra is new."
+    ],
+    "notYetEstablished": [
+      "that Schemathematics is a new mathematical field in the priority sense",
+      "that it improves theorem proving or mathematical AI without benchmark evidence",
+      "that operative profiles outperform established mathematical notation across tasks",
+      "that any proposed Boundary First primitive is necessary when an established formalism is sufficient"
+    ]
+  },
+  "closing": {
+    "eyebrow": "SCHEMATHEMATICS",
+    "title": "Make the difference between objects reconstructable, not merely nameable.",
+    "finalLine": "Represent the conditions. Expose the operations. Compare the boundary. Preserve what established mathematics already knows."
+  },
+  "cta": {
+    "label": "Explore the research context",
+    "href": "/research"
+  },
+  "notes": [
+    "Current canon: Schemathematics powers Representational Mechanics and sits within the formal apparatus of Boundary Theory.",
+    "Public page should foreground comparison, formal fidelity, and falsifiability rather than novelty claims.",
+    "Source basis includes the Schemathematics Atlas first pass and Research Deployment Packet."
+  ]
+}

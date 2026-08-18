@@ -1,0 +1,15 @@
+{
+  "packet": "bfl_public_interface_stack_refined_packet_v0_1",
+  "created": "2026-08-07",
+  "file_count": 21,
+  "source_snapshots": [
+    "02_Boundary_First_UX.md",
+    "12_Webpage.md",
+    "website_packet.md"
+  ],
+  "notes": [
+    "source snapshots are exact copies",
+    "website/core identity duplication audited",
+    "refined layer does not claim upstream exhaustiveness"
+  ]
+}

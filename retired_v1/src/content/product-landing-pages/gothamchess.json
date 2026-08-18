@@ -1,0 +1,30 @@
+{
+  "version": "2.0",
+  "pageType": "collaboration-bridge",
+  "renderPolicy": {"navigation": false, "indexing": false, "requiresManifestEntry": true},
+  "bridges": [
+    {
+      "id": "gothamchess",
+      "slug": "bridge/gothamchess",
+      "status": "draft",
+      "visibility": "unlisted",
+      "audience": {"type":"person","name":"Levy Rozman / GothamChess"},
+      "pageIntent": "Invite expert falsification and a bounded teaching experiment around Boundary-First Chess, not endorsement of the wider theory.",
+      "hero": {
+        "eyebrow": "BOUNDARY-FIRST CHESS × GOTHAMCHESS",
+        "title": "You already make chess legible at speed. I built a structural language I want you to try to break.",
+        "support": "Boundary-First Chess reframes positions through constrained possibility, reachable states, pressure, closure, defect, repair, and decision geometry."
+      },
+      "executiveBrief": "The smallest useful collaboration is one game, position family, or teaching theme analyzed in both ordinary chess language and the Boundary-First vocabulary to see whether the added structure helps, confuses, or says nothing new.",
+      "whyYou": "The page is aimed at a high-volume chess educator and communicator capable of testing whether a new explanatory representation survives contact with real positions and real learners.",
+      "bridge": {
+        "theirWorld": "Fast, accessible chess explanation has to preserve strategic structure without drowning the learner in engine output or specialist vocabulary.",
+        "bflMachinery": "A complete Boundary-First Chess manuscript and a mechanics vocabulary for possibility, pressure, boundary, closure, defect, repair, and promotion.",
+        "intersection": "Use the framework as an additional teaching instrument on a bounded set of positions and compare what it makes easier or harder to see."
+      },
+      "proof": {"built":["Complete Boundary-First Chess manuscript draft", "Worked teaching and analysis vocabulary"], "claimBoundary":"No endorsement or instructional superiority is assumed. Negative critique is useful evidence."},
+      "collaboration": {"level":"experiment","ask":"Choose one position, game, or concept and try to break the representation."},
+      "closing": {"primary":"Let's put it on a board."}
+    }
+  ]
+}

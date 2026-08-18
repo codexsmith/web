@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "seed-project-index; review before canonical promotion",
+  "projects": [
+    {
+      "id": "project-boundary-theory-node-reorganization",
+      "entityType": "project",
+      "title": "Boundary Theory Node Reorganization",
+      "summary": "Reorganize the canonical node ontology around Boundary Theory, Distinction Space, its primary theory facets, Representational Mechanics, Formal Grammars, Boundary First, and Boundary-First Engineering.",
+      "objective": "Produce a non-destructive canonical node reorganization and migration record.",
+      "projectType": "ontology-reorganization",
+      "portfolioStanding": "confirmed",
+      "operatingState": "complete",
+      "projectPhase": "closure",
+      "canonicalNodeRefs": [
+        "identity",
+        "boundary-theory",
+        "distinction-space",
+        "representational-mechanics"
+      ],
+      "sourceRefs": [
+        "nodes(3).json",
+        "nodes_boundary_theory_reorganized_v0_1.json",
+        "nodes_boundary_theory_reorganization_audit_v0_1.md",
+        "nodes_boundary_theory_migration_map_v0_1.json"
+      ],
+      "producesEntityRefs": [
+        "artifact-nodes-boundary-theory-reorganized",
+        "artifact-node-reorganization-audit",
+        "artifact-node-migration-map"
+      ],
+      "advancesEntityRefs": [
+        "program-boundary-first-labs-public-architecture"
+      ],
+      "steward": null,
+      "visibility": "public"
+    },
+    {
+      "id": "project-bfl-introductory-experience",
+      "entityType": "project",
+      "title": "Boundary First Labs Introductory Experience",
+      "summary": "Build a guided, resumable first passage that teaches the atlas legend before revealing the full map.",
+      "objective": "Implement sequence, radial, tree, node, pathway, work, and atlas projections over the canonical graph.",
+      "projectType": "public-experience-design",
+      "portfolioStanding": "confirmed",
+      "operatingState": "active",
+      "projectPhase": "definition",
+      "canonicalNodeRefs": [
+        "identity",
+        "on-ramps",
+        "boundary-theory",
+        "representational-mechanics",
+        "products-testbeds"
+      ],
+      "sourceRefs": [
+        "bfl_introductory_experience_mermaid_wireframes_v0_1.md",
+        "bfl_introductory_experience_config_v0_1.json"
+      ],
+      "producesEntityRefs": [
+        "artifact-bfl-intro-wireframes-v0-2",
+        "artifact-bfl-intro-config-v0-2"
+      ],
+      "advancesEntityRefs": [
+        "program-boundary-first-labs-public-architecture"
+      ],
+      "steward": null,
+      "visibility": "public"
+    },
+    {
+      "id": "project-corpus-forge-agent-pipeline",
+      "entityType": "project",
+      "title": "Corpus Forge Agent Pipeline",
+      "summary": "Configure and test the supervised Operator-Critic-Human promotion workflow for corpus refinement.",
+      "objective": "Produce a bounded, traceable agent workflow that prepares review packets without self-promoting canonical changes.",
+      "projectType": "build-and-validation",
+      "portfolioStanding": "confirmed",
+      "operatingState": "active",
+      "projectPhase": "validation",
+      "canonicalNodeRefs": [
+        "corpus",
+        "ai-forge",
+        "products-testbeds"
+      ],
+      "sourceRefs": [
+        "Corpus Forge Pipeline Setup.txt"
+      ],
+      "producesEntityRefs": [
+        "artifact-corpus-forge-pipeline-setup"
+      ],
+      "advancesEntityRefs": [
+        "program-corpus-forge",
+        "product-corpus-forge-workbench",
+        "product-claim-evidence-ledger"
+      ],
+      "steward": null,
+      "visibility": "cautious"
+    },
+    {
+      "id": "project-boundary-first-soccer-theory",
+      "entityType": "project",
+      "title": "Boundary-First Soccer Theory Development",
+      "summary": "Develop soccer as a continuous, noisy, multi-agent public on-ramp for Boundary First and Representational Mechanics.",
+      "objective": "Create a rigorous pedagogical framework and test whether boundary reasoning transports beyond chess.",
+      "projectType": "research-and-public-on-ramp",
+      "portfolioStanding": "candidate",
+      "operatingState": "active",
+      "projectPhase": "definition",
+      "canonicalNodeRefs": [
+        "on-ramps",
+        "representational-mechanics",
+        "boundary-first"
+      ],
+      "sourceRefs": [
+        "Boundary-First Soccer Theory.txt"
+      ],
+      "producesEntityRefs": [
+        "artifact-boundary-first-soccer-theory"
+      ],
+      "advancesEntityRefs": [
+        "program-public-on-ramps"
+      ],
+      "steward": null,
+      "visibility": "public"
+    },
+    {
+      "id": "project-software-before-code-publication",
+      "entityType": "project",
+      "title": "Software Before Code Publication Development",
+      "summary": "Develop the practitioner-facing publication that explains software as representation, executable process, closure, and consequence.",
+      "objective": "Turn the software corpus into a readable book and reusable Boundary First Labs publication assets.",
+      "projectType": "publication-development",
+      "portfolioStanding": "confirmed",
+      "operatingState": "active",
+      "projectPhase": "definition",
+      "canonicalNodeRefs": [
+        "software-engineering-practice",
+        "bfe",
+        "representational-mechanics"
+      ],
+      "sourceRefs": [
+        "Software Before Code.txt",
+        "closure_driven_software_development_readable_v_1.md"
+      ],
+      "producesEntityRefs": [
+        "artifact-software-before-code-seed"
+      ],
+      "advancesEntityRefs": [
+        "program-software-engineering-publication"
+      ],
+      "steward": null,
+      "visibility": "public"
+    },
+    {
+      "id": "project-ai-as-forge-followup-series",
+      "entityType": "project",
+      "title": "AI as Forge Follow-up Series",
+      "summary": "Develop a public follow-up series explaining AI-assisted transformation, provenance, critique, and closure gates.",
+      "objective": "Publish a structured essay series grounded in the AI as Forge method and the corpus-governance doctrine.",
+      "projectType": "publication-series",
+      "portfolioStanding": "confirmed",
+      "operatingState": "planned",
+      "projectPhase": "publication",
+      "canonicalNodeRefs": [
+        "ai-forge",
+        "corpus",
+        "public-philosophy-satire"
+      ],
+      "sourceRefs": [
+        "ai_as_forge_followup_series_plan_v0_1.md"
+      ],
+      "producesEntityRefs": [
+        "artifact-ai-as-forge-series-plan"
+      ],
+      "advancesEntityRefs": [
+        "program-ai-as-forge-publication"
+      ],
+      "steward": null,
+      "visibility": "public"
+    }
+  ]
+}

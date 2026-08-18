@@ -1,0 +1,846 @@
+Yes. The right move is **not to simplify the body of work**. It is to control the order in which the reader acquires its distinctions.
+
+The current map is an atlas presented before the reader has learned its legend. The introductory sequence should teach that legend and then pull back to reveal that the sequence has been moving through the atlas all along.
+
+## The core UX idea
+
+The introduction should not be a slideshow that eventually dumps the reader into an unrelated graph.
+
+It should be:
+
+> **A guided camera path through the same underlying knowledge graph.**
+
+At each stage:
+
+- a small, meaningful cluster comes into focus;
+- the surrounding graph remains faintly visible;
+- one conceptual burden is introduced;
+- the reader can open any visible node;
+- closing the node returns them to exactly where they were;
+- continuing moves the camera to the next cluster;
+- the final step pulls back into the complete map.
+
+This creates three simultaneous modes:
+
+### Grok
+
+Each scene communicates one central proposition and introduces no more than a few new terms.
+
+### Navigate
+
+A persistent miniature map shows where the reader is, what has already been introduced, and what lies ahead.
+
+### Dive
+
+Any visible node can open its full existing record—body, facets, claims, documents, programs, history—without forcing the reader to abandon the sequence.
+
+The deep node records should remain canonical. The sequence references and frames them rather than duplicating their contents. The existing data already contains the domain bodies, facets, documents, research programs, histories, validation standards, and related-node relationships needed for this. fileciteturn0file0
+
+---
+
+# A First Passage Through Boundary First Labs
+
+The public label could simply be **Start Here**.
+
+The page or experience title might be:
+
+> **A First Passage Through Boundary First Labs**
+
+The landing choices would be:
+
+```text id="0akdj0"
+Begin the introduction
+Choose a familiar on-ramp
+Open the full atlas
+```
+
+No visitor is trapped in the tutorial. Experts can go directly to the map. Curious readers can begin with something familiar. Most first-time readers take the guided path.
+
+## Scene 0 — The problem
+
+### Headline
+
+> **Every consequential system draws a boundary.**
+
+### Supporting thought
+
+A system must distinguish something from something else before it can measure, decide, act, preserve, or repair. What it places outside its representation does not disappear. It returns as uncertainty, defect, externality, brittleness, or harm.
+
+### Visual
+
+Begin with a largely empty field.
+
+A boundary is drawn. Some elements fall inside, some outside. A decision is made using only what is represented. One excluded relation produces a visible consequence.
+
+This gives the reader the motivating problem before introducing any institutional history or theoretical terminology.
+
+### Exit question
+
+> How should we begin examining such a system?
+
+That question creates the next scene.
+
+---
+
+## Scene 1 — Boundary First
+
+### Headline
+
+> **Begin with what must remain true.**
+
+Introduce **Boundary First** as the operational method before asking the reader to understand the entire theory.
+
+The first working grammar can be reduced to four questions:
+
+```text id="3fo26m"
+What is the consequential boundary?
+
+What must the system preserve?
+
+Where can closure fail?
+
+Who can detect and repair the failure?
+```
+
+### Visual
+
+A simple system appears at the center, with four orbiting questions:
+
+- boundary;
+- invariant;
+- defect;
+- repair.
+
+The user can select one of several tiny examples:
+
+- a software interface;
+- a chess king;
+- a soccer defensive shape;
+- a public decision;
+- a physical boundary condition.
+
+The example changes, but the four questions remain.
+
+### Why this comes early
+
+The reader now possesses a usable method before learning the full architecture. The theory will later explain why the method works.
+
+---
+
+## Scene 2 — The roots
+
+This is where the leftmost cluster from the black diagram becomes valuable.
+
+### Headline
+
+> **The work did not come from one field.**
+
+### Primary root cluster
+
+```text id="1pfdtb"
+Information
+Computation
+Practical Mechanics
+Physics
+Mathematics
+Scientific Method
+```
+
+These should not necessarily become full public-domain nodes in the main map. They can be typed as **lineage nodes** or **source traditions** in the sequence layer.
+
+Each one gets a short role rather than a full theory lecture:
+
+- **Information:** what difference can be transmitted or lost?
+- **Computation:** what transformations can be performed?
+- **Practical mechanics:** what bears load, fails, and can be repaired?
+- **Physics:** what remains invariant under lawful transformation?
+- **Mathematics:** what can be made exact?
+- **Scientific method:** how do representations answer to evidence?
+
+### Visual
+
+The six circles gather but do not yet merge. Their overlap creates a highlighted center.
+
+### Optional dive
+
+A reader interested in provenance can open the history and founder-development material. A reader interested only in the theory can continue immediately.
+
+This keeps biography and lineage available without making biography carry the argument.
+
+---
+
+## Scene 3 — The synthesis
+
+This corresponds to the second cluster in the black diagram.
+
+### Headline
+
+> **The recurring problem was not merely information. It was disciplined transformation.**
+
+### Synthesis cluster
+
+```text id="5ed7bb"
+Agentic Computation
+Research Methods
+Formal Grammar
+Agile and Lean Practice
+Systems Engineering
+```
+
+These represent the operational traditions through which the roots began to converge.
+
+The important synthesis is:
+
+> Systems do not merely contain states. They use representations and rules to select consequential transitions.
+
+### Visual
+
+The six roots feed into the synthesis cluster. Relations appear one at a time:
+
+- information becomes actionable through computation;
+- computation becomes consequential through agency;
+- formal grammar makes transitions explicit;
+- research methods test the resulting claims;
+- systems engineering binds them to real operating conditions;
+- Agile and Lean practice expose closure under uncertainty and use.
+
+This stage should feel like a convergence rather than an encyclopedia.
+
+---
+
+## Scene 4 — The lived convergence
+
+This preserves the third cluster in the black image.
+
+### Headline
+
+> **The same mechanics appeared in research and in practice.**
+
+Two circles appear:
+
+```text id="f863p4"
+Professional Software Practice
+Independent Research
+```
+
+They overlap.
+
+The overlap does not claim that software proves physics or that one domain replaces another. It explains why a shared diagnostic vocabulary became necessary.
+
+Repeated structures appeared across both:
+
+- hidden assumptions;
+- incompatible representations;
+- boundaries without owners;
+- transformations without invariant declarations;
+- closure that appeared complete but was not;
+- defects displaced into later stages;
+- responsibility separated from repair capacity.
+
+### Visual
+
+Instead of adding five new theoretical terms, show two concrete failures—one software, one research—and reveal the shared structural pattern.
+
+### Claim boundary
+
+Founder history explains the origin and persistence of the program. It does not validate the theory. That distinction should remain visible whenever this scene is expanded.
+
+---
+
+## Scene 5 — The on-ramps
+
+This is the bridge the current map lacks.
+
+### Headline
+
+> **Before the abstraction, see the mechanics working.**
+
+Offer several familiar entrances:
+
+```text id="y1n0ma"
+Chess
+Soccer
+Software
+Maps and Models
+Institutions
+Classical Geometry
+Physical Boundaries
+```
+
+The reader chooses one. The chosen example occupies the central canvas, while the others remain available as alternate doors.
+
+Each on-ramp teaches the same compact cycle:
+
+```text id="as2x2o"
+A difference becomes consequential.
+A representation makes it actionable.
+A boundary organizes possible transitions.
+An invariant must be preserved.
+A defect appears when closure fails.
+Repair restores or transforms the system.
+```
+
+Examples:
+
+- Chess foregrounds the safety boundaries around the two kings.
+- Soccer shows dynamically constructed boundaries in continuous, noisy, multi-agent space.
+- Software exposes boundaries through interfaces, data ownership, lifecycle states, and responsibility.
+- Institutions expose them through authority, standing, consequence, and recourse.
+- Physics exposes boundary conditions, observables, invariants, and regime changes.
+- Geometry exposes form, enclosure, continuity, and reconstruction.
+
+### Critical UX function
+
+The reader reaches the theory having already recognized the pattern.
+
+They are no longer being asked to accept a large abstraction cold.
+
+---
+
+# The conceptual ascent
+
+The black diagram then reached Representational Mechanics, Boundary Theory, and Distinction Space together. The refined architecture gives us a much cleaner order.
+
+The object should appear before the full theory, because the object makes the facets intelligible.
+
+## Scene 6 — Distinction Space
+
+### Headline
+
+> **Possibility becomes usable when variation is specified.**
+
+Begin with an ordinary possibility space: a cloud or field of possible states.
+
+Then successively add:
+
+1. distinctions;
+2. relations;
+3. permitted transformations;
+4. protected invariants;
+5. closure conditions;
+6. defect and repair paths.
+
+The field transforms into a **Distinction Space**.
+
+### Compact definition
+
+> **A Distinction Space specifies what can be distinguished and how it may lawfully vary.**
+
+It generalizes possibility space by including the specifications under which variations remain coherent, comparable, admissible, and reusable.
+
+### Interactive visual
+
+The reader changes one specification:
+
+- remove a distinction;
+- prohibit a transition;
+- alter a tolerance;
+- protect a different invariant.
+
+The reachable space changes visibly.
+
+That single interaction may do more explanatory work than several pages of prose.
+
+### Exit question
+
+> What aspects of such a space must a theory explain?
+
+---
+
+## Scene 7 — Boundary Theory
+
+### Headline
+
+> **Boundary Theory studies the structure and transformation of Distinction Spaces.**
+
+Distinction Space remains in the center.
+
+Three facets appear around it—not as unrelated domains, but as three ways of interrogating the same object.
+
+### Distinction Theory
+
+> **What can become distinguishable?**
+
+It studies distinctions, representations, interfaces, contextual legibility, and the structure by which differences can count.
+
+### Admissibility Theory
+
+> **Which variations remain lawful?**
+
+It studies transformation, composition, compression, projection, forgetting, disclosure, delegation, invariant preservation, tolerance, and closure conditions.
+
+### Emergence Theory
+
+> **How does stable structure become new operative possibility?**
+
+It studies how a stable residue, relation, grammar, closure, or pattern can be promoted into a reusable primitive—and how that promotion changes the next Distinction Space.
+
+### Visual relation
+
+The three facets should not be shown as three isolated circles.
+
+They should behave as lenses over the same central object:
+
+```text id="a1erey"
+                         Distinction Theory
+                                ↓
+Admissibility Theory → [ Distinction Space ] ← Emergence Theory
+```
+
+A better dynamic rendering would show:
+
+```text id="novd1f"
+Distinction Space n
+      ↓ distinction
+      ↓ admissible variation
+      ↓ closure or stable residue
+      ↓ emergence and promotion
+Distinction Space n+1
+```
+
+This is the conceptual heart of the entire introduction.
+
+The reader should be able to linger here, open any facet, or continue with only the three guiding questions.
+
+---
+
+## Scene 8 — Representational Mechanics
+
+### Headline
+
+> **The theory becomes a discipline when we learn to work with it.**
+
+Boundary Theory explains the architecture.
+
+Representational Mechanics is the discipline that formalizes, investigates, tests, and applies that architecture.
+
+### Core cycle
+
+```text id="i7frai"
+pressure or need
+       ↓
+distinction
+       ↓
+representation
+       ↓
+admissible transformation
+       ↓
+boundary and closure
+       ↓
+preserved invariant or defect
+       ↓
+repair, recurrence, or promotion
+```
+
+### Formal Grammars
+
+Formal Grammars appear here as the explicit apparatus through which the mechanics are specified.
+
+They define:
+
+- primitive vocabularies;
+- types;
+- valid compositions;
+- transformation rules;
+- admissibility judgments;
+- operational semantics;
+- closure rules;
+- invariant conditions;
+- defect states;
+- repair operations;
+- promotion rules.
+
+This cleanly retires the former working title without losing the research it carried. The reorganized source now places Formal Grammars as the explicit apparatus of Representational Mechanics rather than as another theoretical facet. [Review the reorganized architecture](sandbox:/mnt/data/nodes_boundary_theory_reorganization_audit_v0_1.md)
+
+### Visual
+
+The reader sees the theoretical cluster behind the discipline:
+
+```text id="vnwx30"
+Boundary Theory
+      ↓ grounds
+Representational Mechanics
+      ↓ made explicit through
+Formal Grammars
+```
+
+The distinction between theory, object, facet, discipline, and apparatus is now part of the map legend.
+
+---
+
+# The branching point
+
+The reader now understands enough to choose a direction.
+
+The introduction should stop behaving linearly here and become a controlled branching interface.
+
+## Scene 9 — Where the work goes
+
+### Headline
+
+> **One discipline. Several ways to test and use it.**
+
+Present four large paths rather than thirteen equal nodes.
+
+## Formal and scientific research
+
+```text id="jmqmb3"
+Mathematics & Formal Structures
+Physics & Physical Regimes
+Computational & Machine Intelligence
+```
+
+This path asks whether the mechanics can be:
+
+- made exact;
+- connected to nature;
+- implemented in learning, computation, memory, and agency.
+
+## Engineering and construction
+
+```text id="pzk798"
+Boundary-First Engineering
+Software Engineering & Applied Computer Science
+AI as Forge
+Products & Testbeds
+```
+
+This path turns the mechanics into methods, software, systems, instruments, and evidence.
+
+## Agency and public consequence
+
+```text id="y5khnp"
+Constructive Humanist Agentics
+Governance & Institutions
+Law & Public Trust
+Finance & Capital
+Infrastructure & Civilizational Repair
+```
+
+This path asks how power, authority, capital, maintenance, consequence, standing, and repair remain connected.
+
+## Interpretation and public contact
+
+```text id="hlmwa9"
+Systems Criticism & Public Diagnosis
+Positions & Commitments
+On-Ramps & Education
+Public Philosophy & Satire
+Corpus & Research Operations
+```
+
+This path handles public meaning, criticism, education, corpus stewardship, and the institution’s own accountability.
+
+### Interaction
+
+Hovering over a path reveals its constituent nodes.
+
+Selecting a path begins a short domain-specific continuation. Selecting an individual node opens it immediately.
+
+This prevents the first encounter with the applied portfolio from becoming another “everything at once” moment.
+
+---
+
+## Scene 10 — How the work becomes real
+
+### Headline
+
+> **Claims earn promotion through contact.**
+
+This scene explains why the public outputs matter.
+
+```text id="k63lhl"
+Theory
+  ↓
+Formalization
+  ↓
+Prototype or derivation
+  ↓
+Internal test
+  ↓
+External pilot or comparison
+  ↓
+Independent criticism
+  ↓
+Public result
+  ↓
+Replication, use, correction, or replacement
+```
+
+Then show the output classes from the right side of the black diagram:
+
+```text id="e9fjpi"
+Publication
+Software
+Hardware
+Methods and Instruments
+Case Studies
+Education
+Institutional Designs
+```
+
+The important message is that these are not unrelated side projects.
+
+They are **witnessing artifacts**:
+
+- mathematics witnesses exactness;
+- physics witnesses contact with nature;
+- software witnesses executability;
+- products witness use and maintenance;
+- case studies witness practical consequence;
+- publications expose claims to criticism;
+- education tests whether the work can become independently legible.
+
+This is also where Corpus & Research Operations becomes understandable. It is the infrastructure that preserves source, lineage, maturity, replacement, and repair across the whole program.
+
+---
+
+## Scene 11 — The atlas reveal
+
+### Headline
+
+> **You now have the legend.**
+
+The camera gradually pulls back.
+
+Every node encountered during the sequence remains where it was introduced. Additional application and public-interface nodes appear around them. Typed connections become visible.
+
+The result is the complete map.
+
+But now the reader sees:
+
+- an institution;
+- a theory;
+- a central object;
+- three theoretical facets;
+- a discipline;
+- a formal apparatus;
+- an operational method;
+- an applied practice;
+- research programs;
+- consequence-bearing domains;
+- evidence surfaces;
+- public interfaces;
+- support infrastructure.
+
+The map is no longer twenty-six bubbles.
+
+It is a legible system.
+
+The final actions are:
+
+```text id="6oq0o4"
+Continue exploring the atlas
+
+Follow your selected path
+
+Return to an on-ramp
+
+Search the corpus
+```
+
+The visitor’s selected on-ramp or branch can determine which area of the map is emphasized when the atlas opens.
+
+---
+
+# The persistent interface
+
+The current right-hand domain card can remain, but during the introductory sequence it should serve a slightly different role.
+
+## Main canvas
+
+The graph, cluster, example, or Distinction Space visualization.
+
+## Narrative panel
+
+One headline, one core proposition, one short explanation, and one primary continuation action.
+
+Not a miniature article.
+
+## Progress rail
+
+Something like:
+
+```text id="swjlip"
+Problem
+Method
+Roots
+Synthesis
+On-Ramps
+Object
+Theory
+Discipline
+Paths
+Evidence
+Atlas
+```
+
+The user can revisit completed stages and jump ahead.
+
+## Persistent mini-map
+
+A tiny view of the total conceptual geography:
+
+- introduced regions are clearly drawn;
+- current region is emphasized;
+- future regions are faint;
+- the complete atlas is always accessible.
+
+## Dive behavior
+
+Opening a node should create an overlay or expand the right panel.
+
+The sequence state remains intact behind it.
+
+The node view provides:
+
+```text id="76khuu"
+Overview
+Facets
+Claims
+Documents
+Programs
+History
+Related nodes
+```
+
+Closing it returns the reader to the sequence.
+
+The browser back button should also return to the previous sequence state rather than unexpectedly ejecting the reader to the beginning.
+
+---
+
+# The data architecture
+
+The introduction should be a **presentation overlay**, not a rewrite of the node data.
+
+The reorganized node file remains the canonical content graph:
+
+[Reorganized Boundary Theory node data](sandbox:/mnt/data/nodes_boundary_theory_reorganized_v0_1.json)
+
+A separate sequence structure can reference node IDs:
+
+```text id="4a7yra"
+sequence
+  id
+  title
+  audience
+  estimatedDuration
+  steps[]
+
+step
+  id
+  headline
+  thesis
+  focusNodes[]
+  contextNodes[]
+  newlyIntroducedTerms[]
+  visualMode
+  cameraTarget
+  narrative
+  transitionQuestion
+  optionalOnRamps[]
+  availableBranches[]
+```
+
+For example:
+
+```json id="0ua6of"
+{
+  "id": "boundary-theory",
+  "headline": "Boundary Theory studies the structure and transformation of Distinction Spaces.",
+  "focusNodes": [
+    "boundary-theory",
+    "distinction-space",
+    "distinction-theory",
+    "admissibility-theory",
+    "emergence-theory"
+  ],
+  "newlyIntroducedTerms": [
+    "Boundary Theory",
+    "Distinction Theory",
+    "Admissibility Theory",
+    "Emergence Theory"
+  ],
+  "visualMode": "faceted-object",
+  "transitionQuestion": "How do we formalize and work with these structures?"
+}
+```
+
+The prose in the sequence should be purpose-written orientation copy. It should not replace the detailed `body` fields.
+
+## Additional node types for the lineage view
+
+The black-image roots do not all need to become primary atlas domains.
+
+They can live in a union graph with types such as:
+
+```text id="pext81"
+canonical-domain
+theoretical-facet
+formal-object
+discipline
+method
+practice
+research-program
+application-domain
+public-interface
+evidence-surface
+support-function
+lineage-source
+biographical-stage
+output-class
+```
+
+That lets the introductory sequence include Information, Computation, Scientific Method, Professional Software Practice, and Independent Research without crowding the canonical domain map.
+
+---
+
+# One canonical path, then several derivative paths
+
+The first release should contain one carefully composed canonical sequence.
+
+The same infrastructure can later support:
+
+- **The Theory Path** — Distinction Space through the three facets;
+- **The Engineer’s Path** — Boundary First through software and BFE;
+- **The Scientific Path** — mathematics, physics, and computation;
+- **The Public Consequence Path** — agency, governance, law, finance, and infrastructure;
+- **The Founder and Research Lineage** — the black-diagram developmental sequence;
+- **The Evidence Path** — from source through claim, prototype, criticism, and public result.
+
+These are not six separate websites. They are six camera paths through one graph.
+
+## The strongest v1 formulation
+
+The initial experience should therefore be:
+
+```text id="rdkqos"
+A concrete consequence
+        ↓
+Boundary First
+        ↓
+interdisciplinary roots
+        ↓
+methodological and lived convergence
+        ↓
+familiar on-ramps
+        ↓
+Distinction Space
+        ↓
+Boundary Theory and its facets
+        ↓
+Representational Mechanics and Formal Grammars
+        ↓
+research, practice, and public-consequence paths
+        ↓
+evidence and outputs
+        ↓
+the complete atlas
+```
+
+That preserves the insight of the original black-and-white sequence while updating its center to the new canonical architecture.
+
+Most importantly, it means the reader does not arrive at the main map empty-handed.
+
+They arrive already knowing what kind of thing each node is, why it exists, how it relates to the others, and which direction they personally want to travel.

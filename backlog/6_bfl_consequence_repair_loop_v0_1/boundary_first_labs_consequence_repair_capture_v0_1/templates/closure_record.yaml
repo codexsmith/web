@@ -1,0 +1,33 @@
+closure_id: CLOSE-YYYYMMDD-NNN
+job_id: ""
+claim_id: ""
+claim_summary: ""
+operating_boundary: ""
+expected_consequence: ""
+observed_consequence: ""
+evidence:
+  references: []
+  independent_of_generator: true
+discrepancy:
+  material: false
+  description: ""
+diagnosis: ""
+repair:
+  performed: false
+  description: ""
+  authority_reference: ""
+verification:
+  procedure: ""
+  result: pass | fail | partial | invalid
+  evidence_references: []
+residual_risk:
+  accepted: false
+  description: ""
+  owner: ""
+  review_condition: ""
+closure_witness:
+  name_or_role: ""
+  independent: true
+closed_at: ""
+status: closed | repair_required | human_adjudication_required | accepted_open
+reopen_conditions: []

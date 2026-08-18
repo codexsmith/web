@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "boundary-first.public-language.world-class.v1",
+  "version": "0.1",
+  "promotionStatus": "recommended-default-pending-founder-review",
+  "sourceSuite": "999_Library/02_Core_Theory/0103_engine_core/world_class_executable_distinctions_suite_v0_1",
+  "headline": "Redefining world class.",
+  "publicTriad": [
+    "World class is not a status we claim. It is a capacity we give.",
+    "The highest standard should not remain rare. It should become infrastructure.",
+    "World class by what we give the world."
+  ],
+  "websiteSection": {
+    "eyebrow": "Institutional standard · Working public language",
+    "title": "World class is a responsibility to give capacity back to the world.",
+    "description": "For Boundary First Labs, excellence becomes meaningful when it leaves behind better distinctions, usable methods, visible consequence, and reachable repair."
+  },
+  "claimCeiling": "An institutional commitment and conceptual framing, not a certification of quality, a hierarchy of human worth, or proof that a formal class of worlds has been established.",
+  "firewalls": [
+    "Class without caste. Distinction without domination.",
+    "A person is not exhausted by any software or institutional representation.",
+    "A useful analogy is not an established formal equivalence."
+  ],
+  "routes": {
+    "manifesto": "/artifact/world-class-is-a-capacity-we-give",
+    "doctrine": "/domain/boundary-first",
+    "research": "/domain/representational-mechanics"
+  }
+}

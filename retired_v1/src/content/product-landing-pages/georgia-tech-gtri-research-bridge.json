@@ -1,0 +1,52 @@
+{
+  "slug": "bridge/georgia-tech-gtri",
+  "title": "Georgia Tech / GTRI Research Bridge",
+  "status": "draft",
+  "visibility": "unlisted",
+  "pageType": "research-collaboration-bridge",
+  "relationshipStatus": "exploratory-no-affiliation",
+  "audience": {
+    "type": "institution",
+    "name": "Georgia Tech / Georgia Tech Research Institute"
+  },
+  "hero": {
+    "eyebrow": "RESEARCH ENGINEERING",
+    "headline": "A distinction should earn its representational cost.",
+    "support": "This bridge connects Boundary First Labs' current research program to the empirical research-engineering discipline that helped shape it: make the representation explicit, test it against a baseline, preserve the null result, and let the evidence decide whether the distinction survives."
+  },
+  "whyThisBridge": [
+    "The founder's Georgia Tech research history includes contributing within a computer-architecture / HPC / NUMA research direction rather than leading the lab agenda.",
+    "The current Research Deployment Packet routes Georgia Tech/GTRI toward empirical research engineering and the discipline of null results.",
+    "The relevant contribution is not a request to validate Boundary Theory; it is a bounded program of formalization, benchmark construction, computational experiments, provenance recovery, and adversarial reduction."
+  ],
+  "candidateWork": [
+    "Recover and narrow the historical NUMA experiment into an inspectable technical note whose claim remains tied to the actual workload and hardware regime.",
+    "Build a bounded Schemathematics typed-graph prototype and benchmark structured mathematical navigation against ordinary semantic retrieval.",
+    "Test representation choice through null, baseline, equivalence, transport, composition, provenance, limit, and counterexample tests.",
+    "Develop one research-engineering case where an apparently meaningful structural distinction fails to improve a measurable computational objective."
+  ],
+  "whatBFLBrings": [
+    "Research-engineering and software architecture experience across ambiguous domains.",
+    "Schemathematics, Representational Mechanics, Admissibility, and distinction-space research programs.",
+    "A claim discipline that preserves negative results and retires unnecessary abstractions.",
+    "Prototype and workbench capability for turning formal hypotheses into inspectable computational artifacts."
+  ],
+  "whatTheInstitutionCouldBring": [
+    "Independent technical critique.",
+    "Research-method and experimental-design review.",
+    "Relevant expertise in computing, systems, modeling, formal methods, or applied research engineering.",
+    "A benchmark environment or bounded problem where representation choice is consequential."
+  ],
+  "firstAsk": "Review one bounded research object and tell us what the existing field already explains, what the proposed representation adds, and what experiment would falsify the added layer.",
+  "claimBoundary": [
+    "This page does not imply Georgia Tech or GTRI endorsement, affiliation, sponsorship, or active collaboration.",
+    "Historical founder research participation must remain scoped as contributing work inside an existing research direction.",
+    "The precise historical NUMA performance claim remains unpublished until supporting experiment artifacts are recovered and independently checked.",
+    "A successful collaboration would validate only the bounded result studied, not Boundary Theory as a whole."
+  ],
+  "cta": {"label": "Review the research object"},
+  "notes": [
+    "Use as an unlisted direct-outreach page only.",
+    "Primary routing from the Research Deployment Packet: empirical research engineering / discipline of null results."
+  ]
+}

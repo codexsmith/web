@@ -1,0 +1,1469 @@
+{
+  "schemaVersion": "0.5.0",
+  "status": "implementation-guidance-draft-with-work-context-halo-lineage-and-provisional-institutional-governance-layers",
+  "defaultExperience": "first-passage",
+  "viewModes": {
+    "sequence": {
+      "description": "A resumable guided camera path through curated graph scenes.",
+      "supports": [
+        "next",
+        "previous",
+        "skip",
+        "nodeDive",
+        "resume"
+      ],
+      "preserveState": true
+    },
+    "radial": {
+      "description": "A focused node or object surrounded by a curated conceptual neighborhood.",
+      "maxPrimaryNeighbors": 7,
+      "stablePositions": true
+    },
+    "tree": {
+      "description": "A hierarchy or lineage projection using selected primary edge types.",
+      "defaultEdgeTypes": [
+        "contains",
+        "definedWithin",
+        "grounds",
+        "appliedThrough",
+        "stewards"
+      ]
+    },
+    "node": {
+      "description": "The canonical deep record for one node.",
+      "sections": [
+        "overview",
+        "facets",
+        "takeaways",
+        "claims",
+        "documents",
+        "programs",
+        "projects",
+        "products",
+        "artifacts",
+        "evidence",
+        "stewardship",
+        "lineage",
+        "history",
+        "relations",
+        "pathways",
+        "contextHalo"
+      ]
+    },
+    "pathway": {
+      "description": "A reader-intent route through selected nodes and sequence scenes.",
+      "preserveBranchChoice": true
+    },
+    "atlas": {
+      "description": "The complete graph with search, filters, focus, and pathway emphasis.",
+      "filters": [
+        "entityType",
+        "role",
+        "layer",
+        "portfolioStanding",
+        "lifecycleStage",
+        "operatingState",
+        "maturity",
+        "pathway",
+        "relationType",
+        "domainFamily",
+        "facetRelation",
+        "evidenceMaturity",
+        "lineageType",
+        "citationStatus",
+        "lineageEvidenceStatus",
+        "publicCopyStatus",
+        "governanceStatus",
+        "bindingStatus",
+        "operatingLayer",
+        "operationalizationStatus"
+      ]
+    },
+    "work": {
+      "description": "A typed portfolio projection separating programs, projects, products, artifacts, services, and testbeds.",
+      "supports": [
+        "filter",
+        "sort",
+        "compare",
+        "follow",
+        "nodeDive",
+        "portfolioToggle"
+      ],
+      "defaultFilters": [
+        "entityType",
+        "portfolioStanding",
+        "lifecycleStage",
+        "operatingState",
+        "domain",
+        "availability"
+      ],
+      "preserveState": true
+    },
+    "context-halo": {
+      "label": "Context Halo",
+      "description": "A mesoscopic local-relation projection showing a selected entity, its addressable facets, and its wider contextual relations.",
+      "routePattern": "/domain/:id/halo",
+      "layers": [
+        "center-object",
+        "facet-ring",
+        "close-relation-band",
+        "domain-horizon"
+      ],
+      "supports": [
+        "hoverFacet",
+        "hoverContextNode",
+        "pinSelection",
+        "compare",
+        "nodeDive",
+        "viewInAtlas",
+        "startPathwayHere",
+        "semanticZoom"
+      ],
+      "preserveState": true,
+      "stableFacetOrder": true,
+      "defaultProminence": {
+        "centerObject": 1.0,
+        "facetRing": 1.0,
+        "closeRelations": 0.38,
+        "domainHorizon": 0.22,
+        "inactiveEdges": 0.12
+      },
+      "filters": [
+        "governance"
+      ],
+      "governanceRelations": [
+        "authorizedBy",
+        "boundBy",
+        "reviewedBy",
+        "publishedUnder",
+        "stewardedBy",
+        "maintainedBy",
+        "fundedBy",
+        "contestableBy",
+        "affectedBy",
+        "correctedBy",
+        "retiredBy",
+        "succeedsTo"
+      ]
+    },
+    "lineage-lens": {
+      "label": "Foundations & Lineage",
+      "description": "A historical-context projection showing foundational works, inherited formalisms, methodological lineages, critical counterpoints, and neighboring research traditions for a selected node or pathway.",
+      "routePattern": "/domain/:id/lineage",
+      "supports": [
+        "worksFirst",
+        "filterByLineageType",
+        "pinSelection",
+        "compare",
+        "nodeDive",
+        "viewSourceStatus",
+        "returnToSequence"
+      ],
+      "preserveState": true,
+      "defaultOrder": "contribution-before-person",
+      "mandatoryNonClaim": true
+    },
+    "institutional-closure-map": {
+      "label": "How the Lab Operates",
+      "description": "A provisional institutional projection organizing source-backed content by purpose, invariants, authority, operating gates, standing, repair, and continuity.",
+      "routePattern": "/about/how-the-lab-operates",
+      "sourceRegister": "bfl_institutional_content_register_v0_1.json",
+      "referenceMap": "bfl_institutional_closure_map_reference_v0_1.json",
+      "supports": [
+        "expandExactSource",
+        "filterByBindingStatus",
+        "traceAuthorityAndRepair",
+        "openConventionalPage",
+        "returnToSequence"
+      ],
+      "preserveState": true,
+      "publicationGate": "content-adjudication-and-adoption-status-review-required"
+    }
+  },
+  "experiences": [
+    {
+      "id": "first-passage",
+      "title": "A First Passage Through Boundary First Labs",
+      "estimatedMinutes": 15,
+      "entryActions": [
+        "begin",
+        "choose-on-ramp",
+        "open-atlas",
+        "resume"
+      ],
+      "steps": [
+        {
+          "id": "problem",
+          "order": 0,
+          "title": "The Problem",
+          "headline": "Every consequential system draws a boundary.",
+          "visualMode": "sequence",
+          "layoutPreset": "single-consequence",
+          "focusNodes": [],
+          "newTerms": [],
+          "transitionQuestion": "How should we begin examining such a system?",
+          "institutionalTouchpoint": {
+            "type": "promise",
+            "sourcePaths": [
+              "identity.mission.primary",
+              "identity.vision.compact"
+            ],
+            "status": "copy-adjudication-required"
+          }
+        },
+        {
+          "id": "boundary-first",
+          "order": 1,
+          "title": "Boundary First",
+          "headline": "Begin with what must remain true.",
+          "visualMode": "radial",
+          "layoutPreset": "four-question-wheel",
+          "focusNodes": [
+            "boundary-first"
+          ],
+          "newTerms": [
+            "boundary",
+            "invariant",
+            "defect",
+            "repair"
+          ],
+          "transitionQuestion": "Where did this method come from?",
+          "institutionalTouchpoint": {
+            "type": "mission-to-method",
+            "sourcePaths": [
+              "identity.mission.primary",
+              "identity.mission.method"
+            ],
+            "status": "copy-adjudication-required"
+          }
+        },
+        {
+          "id": "roots",
+          "order": 2,
+          "title": "The Roots",
+          "headline": "The work did not come from one field.",
+          "visualMode": "tree",
+          "layoutPreset": "lineage-roots",
+          "focusNodes": [],
+          "virtualNodes": [
+            "information",
+            "computation",
+            "practical-mechanics",
+            "physics-lineage",
+            "mathematics-lineage",
+            "scientific-method"
+          ],
+          "newTerms": [],
+          "transitionQuestion": "What recurring structure connected these traditions?",
+          "historicalContext": {
+            "enabled": true,
+            "tabs": [
+              "idea",
+              "foundations",
+              "present-development"
+            ],
+            "moduleIds": [
+              "lineage-module-computation",
+              "lineage-module-mathematics",
+              "lineage-module-physics",
+              "lineage-module-engineering"
+            ],
+            "inlineCardLimit": 4,
+            "overflowAction": "open-lineage-lens"
+          }
+        },
+        {
+          "id": "synthesis",
+          "order": 3,
+          "title": "The Synthesis",
+          "headline": "The recurring problem was disciplined transformation.",
+          "visualMode": "sequence",
+          "layoutPreset": "many-to-one-convergence",
+          "focusNodes": [
+            "formal-grammars"
+          ],
+          "virtualNodes": [
+            "agentic-computation",
+            "research-methods",
+            "agile-lean",
+            "systems-engineering"
+          ],
+          "newTerms": [
+            "formal grammar"
+          ],
+          "transitionQuestion": "Where did the common mechanics become visible in practice?",
+          "historicalContext": {
+            "enabled": true,
+            "tabs": [
+              "idea",
+              "foundations",
+              "present-development"
+            ],
+            "moduleIds": [
+              "lineage-module-computation",
+              "lineage-module-engineering",
+              "lineage-module-corpus"
+            ],
+            "inlineCardLimit": 4,
+            "overflowAction": "open-lineage-lens"
+          }
+        },
+        {
+          "id": "lived-convergence",
+          "order": 4,
+          "title": "Lived Convergence",
+          "headline": "The same mechanics appeared in research and in practice.",
+          "visualMode": "sequence",
+          "layoutPreset": "dual-node-overlap",
+          "focusNodes": [
+            "software-engineering-practice"
+          ],
+          "virtualNodes": [
+            "independent-research"
+          ],
+          "newTerms": [],
+          "transitionQuestion": "Can we see the mechanics before learning the abstraction?"
+        },
+        {
+          "id": "on-ramps",
+          "order": 5,
+          "title": "On-Ramps",
+          "headline": "Before the abstraction, see the mechanics working.",
+          "visualMode": "pathway",
+          "layoutPreset": "on-ramp-chooser",
+          "focusNodes": [
+            "on-ramps"
+          ],
+          "options": [
+            "chess",
+            "soccer",
+            "software",
+            "institutions",
+            "classical-geometry",
+            "physical-boundaries"
+          ],
+          "newTerms": [],
+          "transitionQuestion": "What common object do these examples reveal?"
+        },
+        {
+          "id": "distinction-space",
+          "order": 6,
+          "title": "Distinction Space",
+          "headline": "Possibility becomes usable when variation is specified.",
+          "visualMode": "radial",
+          "layoutPreset": "formal-object-explorer",
+          "focusNodes": [
+            "distinction-space"
+          ],
+          "contextNodes": [
+            "distinction-theory",
+            "admissibility-theory",
+            "emergence-theory"
+          ],
+          "newTerms": [
+            "Distinction Space"
+          ],
+          "transitionQuestion": "What aspects of this object must a theory explain?",
+          "historicalContext": {
+            "enabled": true,
+            "tabs": [
+              "idea",
+              "foundations",
+              "present-development"
+            ],
+            "moduleIds": [
+              "lineage-module-mathematics",
+              "lineage-module-boundary-theory"
+            ],
+            "inlineCardLimit": 4,
+            "overflowAction": "open-lineage-lens"
+          }
+        },
+        {
+          "id": "boundary-theory",
+          "order": 7,
+          "title": "Boundary Theory",
+          "headline": "Boundary Theory studies the structure and transformation of Distinction Spaces.",
+          "visualMode": "radial",
+          "layoutPreset": "faceted-object",
+          "focusNodes": [
+            "boundary-theory",
+            "distinction-space"
+          ],
+          "contextNodes": [
+            "distinction-theory",
+            "admissibility-theory",
+            "emergence-theory"
+          ],
+          "newTerms": [
+            "Boundary Theory",
+            "Distinction Theory",
+            "Admissibility Theory",
+            "Emergence Theory"
+          ],
+          "transitionQuestion": "How do we formalize and work with these structures?",
+          "historicalContext": {
+            "enabled": true,
+            "tabs": [
+              "idea",
+              "foundations",
+              "present-development"
+            ],
+            "moduleIds": [
+              "lineage-module-boundary-theory",
+              "lineage-module-admissibility"
+            ],
+            "inlineCardLimit": 4,
+            "overflowAction": "open-lineage-lens"
+          }
+        },
+        {
+          "id": "representational-mechanics",
+          "order": 8,
+          "title": "Representational Mechanics",
+          "headline": "The theory becomes a discipline when we learn to work with it.",
+          "visualMode": "sequence",
+          "layoutPreset": "mechanics-cycle",
+          "focusNodes": [
+            "representational-mechanics",
+            "formal-grammars",
+            "boundary-first",
+            "bfe"
+          ],
+          "newTerms": [
+            "Representational Mechanics",
+            "Formal Grammars"
+          ],
+          "transitionQuestion": "Where do you want to follow the work next?",
+          "historicalContext": {
+            "enabled": true,
+            "tabs": [
+              "idea",
+              "foundations",
+              "present-development"
+            ],
+            "moduleIds": [
+              "lineage-module-boundary-theory",
+              "lineage-module-engineering",
+              "lineage-module-computation"
+            ],
+            "inlineCardLimit": 4,
+            "overflowAction": "open-lineage-lens"
+          }
+        },
+        {
+          "id": "choose-path",
+          "order": 9,
+          "title": "Choose a Path",
+          "headline": "One discipline. Several ways to test and use it.",
+          "visualMode": "pathway",
+          "layoutPreset": "seven-path-chooser",
+          "focusNodes": [],
+          "pathwayOptions": [
+            "theory",
+            "engineering",
+            "science",
+            "build-use",
+            "public-consequence",
+            "public-translation",
+            "evidence",
+            "lineage",
+            "how-lab-operates"
+          ],
+          "newTerms": [],
+          "transitionQuestion": "How does work in any path earn public authority?",
+          "historicalContext": {
+            "enabled": true,
+            "tabs": [
+              "idea",
+              "foundations",
+              "present-development"
+            ],
+            "moduleIds": [
+              "lineage-module-mathematics",
+              "lineage-module-physics",
+              "lineage-module-computation",
+              "lineage-module-engineering",
+              "lineage-module-public-consequence"
+            ],
+            "inlineCardLimit": 4,
+            "overflowAction": "open-lineage-lens"
+          }
+        },
+        {
+          "id": "work-takes-form",
+          "order": 10,
+          "title": "The Work Takes Form",
+          "headline": "Projects advance the work. Products keep selected results available in the world.",
+          "visualMode": "work",
+          "layoutPreset": "program-project-product-evidence-loop",
+          "focusNodes": [
+            "products-testbeds",
+            "corpus",
+            "bfe"
+          ],
+          "newTerms": [
+            "program",
+            "project",
+            "product",
+            "artifact",
+            "service",
+            "testbed"
+          ],
+          "branchActions": [
+            {
+              "id": "see-projects",
+              "label": "See what we are building",
+              "target": "projects-index"
+            },
+            {
+              "id": "see-products",
+              "label": "See what you can use",
+              "target": "products-index"
+            }
+          ],
+          "transitionQuestion": "How do projects, products, and artifacts earn public authority?"
+        },
+        {
+          "id": "evidence",
+          "order": 11,
+          "title": "How Work Becomes Real",
+          "headline": "Projects, products, and claims earn promotion through contact.",
+          "visualMode": "sequence",
+          "layoutPreset": "evidence-pipeline",
+          "focusNodes": [
+            "corpus",
+            "products-testbeds",
+            "systems-criticism"
+          ],
+          "newTerms": [
+            "claim ceiling",
+            "promotion",
+            "replication"
+          ],
+          "transitionQuestion": "How does the complete body now fit together?",
+          "historicalContext": {
+            "enabled": true,
+            "tabs": [
+              "idea",
+              "foundations",
+              "present-development"
+            ],
+            "moduleIds": [
+              "lineage-module-corpus"
+            ],
+            "inlineCardLimit": 4,
+            "overflowAction": "open-lineage-lens"
+          },
+          "institutionalTouchpoint": {
+            "type": "self-binding-preview",
+            "sourcePaths": [
+              "identity.evidenceArchitecture",
+              "identity.publicationAdmissibility",
+              "identity.governance"
+            ],
+            "status": "content-adjudication-required"
+          }
+        },
+        {
+          "id": "institution-binds-itself",
+          "order": 12,
+          "title": "The Institution Binds Itself",
+          "headline": "The lab must live inside the systems it proposes.",
+          "visualMode": "institutional-closure-map",
+          "layoutPreset": "purpose-power-repair-cycle",
+          "focusNodes": [
+            "identity"
+          ],
+          "newTerms": [
+            "institutional invariant",
+            "bounded authority",
+            "standing",
+            "institutional repair"
+          ],
+          "sourceRegister": "bfl_institutional_content_register_v0_1.json",
+          "status": "provisional-presentation-scaffold; canonical copy and adoption status unresolved",
+          "transitionQuestion": "How does the complete body now fit together?"
+        },
+        {
+          "id": "atlas-reveal",
+          "order": 13,
+          "title": "The Atlas Reveal",
+          "headline": "You now have the legend.",
+          "visualMode": "atlas",
+          "layoutPreset": "canonical-atlas",
+          "focusNodes": [
+            "identity"
+          ],
+          "newTerms": [],
+          "completionActions": [
+            "continue-exploring",
+            "follow-selected-path",
+            "browse-projects",
+            "browse-products",
+            "return-to-on-ramp",
+            "search-corpus"
+          ]
+        }
+      ]
+    }
+  ],
+  "pathways": [
+    {
+      "id": "theory",
+      "title": "Theory Path",
+      "nodeSequence": [
+        "distinction-space",
+        "boundary-theory",
+        "distinction-theory",
+        "admissibility-theory",
+        "emergence-theory",
+        "representational-mechanics",
+        "formal-grammars"
+      ],
+      "atlasEmphasis": "theory",
+      "lineageModuleIds": [
+        "lineage-module-boundary-theory",
+        "lineage-module-admissibility",
+        "lineage-module-mathematics"
+      ],
+      "supportsLineageLens": true
+    },
+    {
+      "id": "engineering",
+      "title": "Engineering Path",
+      "nodeSequence": [
+        "boundary-first",
+        "bfe",
+        "software-engineering-practice",
+        "ai-forge",
+        "products-testbeds",
+        "corpus"
+      ],
+      "atlasEmphasis": "practice",
+      "lineageModuleIds": [
+        "lineage-module-engineering",
+        "lineage-module-computation"
+      ],
+      "supportsLineageLens": true
+    },
+    {
+      "id": "science",
+      "title": "Scientific Path",
+      "nodeSequence": [
+        "boundary-theory",
+        "mathematics",
+        "physics",
+        "computational-systems",
+        "products-testbeds"
+      ],
+      "atlasEmphasis": "research",
+      "lineageModuleIds": [
+        "lineage-module-mathematics",
+        "lineage-module-physics",
+        "lineage-module-computation"
+      ],
+      "supportsLineageLens": true
+    },
+    {
+      "id": "public-consequence",
+      "title": "Public Consequence Path",
+      "nodeSequence": [
+        "constructive-humanist-agentics",
+        "governance-institutions",
+        "law-public-trust",
+        "finance-capital",
+        "infrastructure-repair",
+        "systems-criticism"
+      ],
+      "atlasEmphasis": "public-consequence",
+      "lineageModuleIds": [
+        "lineage-module-public-consequence"
+      ],
+      "supportsLineageLens": true
+    },
+    {
+      "id": "public-translation",
+      "title": "Public Translation Path",
+      "nodeSequence": [
+        "on-ramps",
+        "positions",
+        "public-philosophy-satire",
+        "systems-criticism",
+        "identity"
+      ],
+      "atlasEmphasis": "public-interface",
+      "lineageModuleIds": [
+        "lineage-module-boundary-theory",
+        "lineage-module-public-consequence"
+      ],
+      "supportsLineageLens": true
+    },
+    {
+      "id": "evidence",
+      "title": "Evidence Path",
+      "nodeSequence": [
+        "corpus",
+        "products-testbeds",
+        "systems-criticism",
+        "identity"
+      ],
+      "stageSequence": [
+        "source",
+        "formalization",
+        "prototype",
+        "internal-test",
+        "external-pilot",
+        "comparative-evidence",
+        "independent-review",
+        "public-result",
+        "replication"
+      ],
+      "atlasEmphasis": "evidence",
+      "lineageModuleIds": [
+        "lineage-module-corpus"
+      ],
+      "supportsLineageLens": true
+    },
+    {
+      "id": "lineage",
+      "title": "Foundations & Research Lineage",
+      "nodeSequence": [
+        "software-engineering-practice",
+        "formal-grammars",
+        "representational-mechanics",
+        "boundary-theory",
+        "identity"
+      ],
+      "virtualNodeSequence": [
+        "information",
+        "computation",
+        "practical-mechanics",
+        "physics-lineage",
+        "mathematics-lineage",
+        "scientific-method",
+        "agentic-computation",
+        "research-methods",
+        "agile-lean",
+        "systems-engineering",
+        "independent-research"
+      ],
+      "atlasEmphasis": "lineage",
+      "lineageModuleIds": [
+        "lineage-module-boundary-theory",
+        "lineage-module-mathematics",
+        "lineage-module-physics",
+        "lineage-module-computation",
+        "lineage-module-engineering",
+        "lineage-module-public-consequence",
+        "lineage-module-corpus"
+      ],
+      "supportsLineageLens": true,
+      "description": "A works-first path through the established formalisms, methods, critical traditions, and historical contexts on which the program depends.",
+      "defaultViewMode": "lineage-lens"
+    },
+    {
+      "id": "build-use",
+      "title": "Build and Use Path",
+      "description": "Follow selected work from theory and method through programs, projects, products, use, evidence, and repair.",
+      "nodeSequence": [
+        "representational-mechanics",
+        "boundary-first",
+        "bfe",
+        "products-testbeds",
+        "corpus"
+      ],
+      "entitySequence": [
+        "program",
+        "project",
+        "product",
+        "artifact",
+        "evidence"
+      ],
+      "atlasEmphasis": "work",
+      "completionTarget": "portfolio-atlas",
+      "lineageModuleIds": [
+        "lineage-module-engineering",
+        "lineage-module-computation",
+        "lineage-module-corpus"
+      ],
+      "supportsLineageLens": true
+    },
+    {
+      "id": "how-lab-operates",
+      "title": "Purpose, Power, and Repair",
+      "description": "Follow why the lab exists, what it promises to preserve, how authority is bounded, how work earns promotion, how people participate, and how institutional failure is corrected.",
+      "nodeSequence": [
+        "identity",
+        "positions",
+        "constructive-humanist-agentics",
+        "governance-institutions",
+        "systems-criticism",
+        "corpus"
+      ],
+      "institutionalLayerSequence": [
+        "purpose",
+        "invariants",
+        "authority",
+        "operating-gates",
+        "standing-and-participation",
+        "repair-and-correction",
+        "continuity-and-stewardship"
+      ],
+      "defaultViewMode": "institutional-closure-map",
+      "atlasEmphasis": "governance",
+      "sourceRegister": "bfl_institutional_content_register_v0_1.json",
+      "status": "provisional-until-content-adjudication"
+    }
+  ],
+  "sourceCompatibility": {
+    "canonicalNodes": "nodes_boundary_theory_reorganized_v0_1.json",
+    "priorExperienceConfig": "bfl_introductory_experience_config_v0_1.json",
+    "nonDestructiveOverlay": true,
+    "contextHaloVersion": "0.1.0",
+    "institutionalContentRegister": "bfl_institutional_content_register_v0_1.json",
+    "institutionalLayerVersion": "0.1.0"
+  },
+  "entityTypes": {
+    "institution": {
+      "label": "Institution",
+      "shape": "double-circle",
+      "layer": "concept"
+    },
+    "theory": {
+      "label": "Theory",
+      "shape": "circle",
+      "layer": "concept"
+    },
+    "formal-object": {
+      "label": "Formal Object",
+      "shape": "circle-with-inner-ring",
+      "layer": "concept"
+    },
+    "discipline": {
+      "label": "Discipline",
+      "shape": "circle",
+      "layer": "concept"
+    },
+    "method": {
+      "label": "Method",
+      "shape": "circle",
+      "layer": "concept"
+    },
+    "program": {
+      "label": "Program",
+      "shape": "rounded-rectangle",
+      "layer": "work"
+    },
+    "project": {
+      "label": "Project",
+      "shape": "rectangle-with-progress-edge",
+      "layer": "work"
+    },
+    "product": {
+      "label": "Product",
+      "shape": "hexagon",
+      "layer": "work"
+    },
+    "product-family": {
+      "label": "Product Family",
+      "shape": "stacked-hexagon",
+      "layer": "work"
+    },
+    "artifact": {
+      "label": "Artifact",
+      "shape": "diamond",
+      "layer": "evidence"
+    },
+    "service": {
+      "label": "Service",
+      "shape": "parallelogram",
+      "layer": "work"
+    },
+    "testbed": {
+      "label": "Testbed",
+      "shape": "hexagon-dashed",
+      "layer": "evidence"
+    },
+    "lineage-source": {
+      "label": "Lineage Source",
+      "shape": "small-circle-dashed",
+      "layer": "lineage"
+    }
+  },
+  "statusSystems": {
+    "portfolioStanding": [
+      "candidate",
+      "emerging",
+      "confirmed"
+    ],
+    "productLifecycle": [
+      "seed",
+      "governed-concept",
+      "bounded-prototype",
+      "testbed",
+      "pilot",
+      "product-instrument",
+      "maintained-service",
+      "retired-transferred-open"
+    ],
+    "projectOperatingState": [
+      "planned",
+      "active",
+      "paused",
+      "blocked",
+      "in-review",
+      "complete",
+      "archived"
+    ],
+    "productOperatingState": [
+      "concept-development",
+      "active-development",
+      "pilot-intake",
+      "available",
+      "maintenance",
+      "paused",
+      "retired",
+      "needs-inventory"
+    ],
+    "projectPhase": [
+      "discovery",
+      "definition",
+      "build",
+      "validation",
+      "pilot",
+      "publication",
+      "launch",
+      "closure"
+    ]
+  },
+  "visualGrammar": {
+    "typeKickerRequired": true,
+    "textStatusRequired": true,
+    "colorOnlyEncodingProhibited": true,
+    "shapeByEntityType": true,
+    "defaultShapeMapping": {
+      "institution": "double-circle",
+      "theory": "circle",
+      "formal-object": "circle-with-inner-ring",
+      "discipline": "circle",
+      "method": "circle",
+      "program": "rounded-rectangle",
+      "project": "rectangle-with-progress-edge",
+      "product": "hexagon",
+      "product-family": "stacked-hexagon",
+      "artifact": "diamond",
+      "service": "parallelogram",
+      "testbed": "hexagon-dashed",
+      "lineage-source": "small-circle-dashed",
+      "lineage-work": "small-dashed-circle-with-work-mark",
+      "lineage-field": "dashed-arc-or-group-label"
+    },
+    "badges": {
+      "project": [
+        "PROJECT",
+        "operatingState",
+        "projectPhase"
+      ],
+      "product": [
+        "PRODUCT",
+        "portfolioStanding",
+        "lifecycleStage",
+        "operatingState"
+      ],
+      "artifact": [
+        "ARTIFACT",
+        "artifactType",
+        "maturity"
+      ],
+      "service": [
+        "SERVICE",
+        "availability",
+        "scope"
+      ],
+      "lineage": [
+        "FOUNDATION_OR_LINEAGE",
+        "lineageType",
+        "citationStatus"
+      ]
+    },
+    "minimumCardQuestions": [
+      "What kind of thing is this?",
+      "Is it being worked on, or can I use it?",
+      "How mature is it?",
+      "Who is responsible for it?",
+      "What does it produce or depend upon?",
+      "Where does it sit in the larger body of work?"
+    ],
+    "domainFamilyColorRef": "bfl_domain_family_palette_v0_1.json",
+    "relationshipEncoding": {
+      "strength": "edge-weight",
+      "type": "edge-style-and-label-on-focus",
+      "distance": "radial-position",
+      "sharedness": "edge-count-and-summary",
+      "maturity": "detail-card-text"
+    },
+    "contextHaloNodeProminence": {
+      "defaultExternalOpacity": 0.24,
+      "hoveredOrPinnedOpacity": 1.0,
+      "unrelatedDuringFocusOpacity": 0.08,
+      "familyArcOpacity": 0.16
+    }
+  },
+  "relationTypes": {
+    "organizes": {
+      "from": [
+        "program"
+      ],
+      "to": [
+        "project"
+      ]
+    },
+    "advances": {
+      "from": [
+        "project"
+      ],
+      "to": [
+        "product",
+        "product-family",
+        "program"
+      ]
+    },
+    "produces": {
+      "from": [
+        "project"
+      ],
+      "to": [
+        "artifact",
+        "product",
+        "testbed"
+      ]
+    },
+    "maintains": {
+      "from": [
+        "institution",
+        "program",
+        "project"
+      ],
+      "to": [
+        "product",
+        "service",
+        "testbed"
+      ]
+    },
+    "implements": {
+      "from": [
+        "product",
+        "service",
+        "project"
+      ],
+      "to": [
+        "method",
+        "discipline",
+        "theory"
+      ]
+    },
+    "generatesEvidenceFor": {
+      "from": [
+        "product",
+        "service",
+        "artifact",
+        "testbed"
+      ],
+      "to": [
+        "program",
+        "theory",
+        "discipline",
+        "method"
+      ]
+    },
+    "dependsOn": {
+      "from": [
+        "project",
+        "product",
+        "service",
+        "artifact"
+      ],
+      "to": [
+        "project",
+        "product",
+        "program",
+        "method",
+        "artifact"
+      ]
+    },
+    "releases": {
+      "from": [
+        "project",
+        "program"
+      ],
+      "to": [
+        "product",
+        "artifact"
+      ]
+    },
+    "supersedes": {
+      "from": [
+        "artifact",
+        "product"
+      ],
+      "to": [
+        "artifact",
+        "product"
+      ]
+    },
+    "stewardedBy": {
+      "from": [
+        "product",
+        "service",
+        "artifact",
+        "testbed"
+      ],
+      "to": [
+        "institution",
+        "program"
+      ]
+    }
+  },
+  "portfolioViews": {
+    "projectsIndex": {
+      "route": "/projects",
+      "title": "Projects",
+      "description": "Bounded efforts advancing research, products, publications, and public work.",
+      "defaultSort": "updated-desc",
+      "filters": [
+        "operatingState",
+        "projectPhase",
+        "program",
+        "domain",
+        "participation",
+        "fundingNeed"
+      ],
+      "cardTemplate": "project-card"
+    },
+    "productsIndex": {
+      "route": "/products",
+      "title": "Products",
+      "description": "Maintained or developing tools, publications, instruments, platforms, and public utilities.",
+      "defaultSort": "availability-then-maturity",
+      "filters": [
+        "productClass",
+        "portfolioStanding",
+        "lifecycleStage",
+        "operatingState",
+        "availability",
+        "domain"
+      ],
+      "cardTemplate": "product-card"
+    },
+    "workAtlas": {
+      "route": "/work",
+      "title": "Work and Portfolio Atlas",
+      "defaultLayers": [
+        "program",
+        "project",
+        "product"
+      ],
+      "optionalLayers": [
+        "artifact",
+        "service",
+        "testbed",
+        "concept"
+      ],
+      "toggles": [
+        "concepts",
+        "work",
+        "evidence",
+        "all"
+      ]
+    }
+  },
+  "detailTemplates": {
+    "project": {
+      "tabs": [
+        "overview",
+        "scope",
+        "workstreams",
+        "milestones",
+        "outputs",
+        "evidence",
+        "dependencies",
+        "history"
+      ],
+      "requiredHeaderFields": [
+        "title",
+        "typeKicker",
+        "operatingState",
+        "projectPhase",
+        "objective",
+        "steward"
+      ],
+      "primaryActions": [
+        "follow-project",
+        "view-outputs",
+        "participate"
+      ]
+    },
+    "product": {
+      "tabs": [
+        "overview",
+        "users",
+        "capabilities",
+        "availability",
+        "evidence",
+        "projects",
+        "stewardship",
+        "releases",
+        "roadmap"
+      ],
+      "requiredHeaderFields": [
+        "title",
+        "typeKicker",
+        "portfolioStanding",
+        "lifecycleStage",
+        "operatingState",
+        "valueProposition",
+        "availability"
+      ],
+      "primaryActions": [
+        "use-or-request-access",
+        "follow-progress",
+        "view-related-projects"
+      ]
+    }
+  },
+  "localNavigationScales": [
+    {
+      "id": "sequence",
+      "question": "What should I understand next?",
+      "viewMode": "sequence"
+    },
+    {
+      "id": "atlas",
+      "question": "Where does this sit in the whole body of work?",
+      "viewMode": "atlas"
+    },
+    {
+      "id": "context-halo",
+      "question": "What is this locally related to, and through which facets?",
+      "viewMode": "context-halo"
+    },
+    {
+      "id": "lineage-lens",
+      "question": "What established work, formalism, and criticism does this inherit?",
+      "viewMode": "lineage-lens"
+    },
+    {
+      "id": "node",
+      "question": "What specifically does this object contain?",
+      "viewMode": "node"
+    }
+  ],
+  "contextHalo": {
+    "enabled": true,
+    "publicLabel": "Context Halo",
+    "formalLabel": "Local Relation Field",
+    "purpose": "Keep the local object foregrounded while making dependencies, applications, analogues, projects, products, and consequences quietly navigable at the horizon.",
+    "referenceFiles": {
+      "relationSchema": "bfl_context_halo_relation_schema_v0_1.json",
+      "domainPalette": "bfl_domain_family_palette_v0_1.json",
+      "representationalMechanicsPreset": "bfl_context_halo_reference_representational_mechanics_v0_1.json",
+      "orderingAndPlacement": "bfl_context_halo_ordering_placement_spec_v0_1.md"
+    },
+    "encodings": {
+      "angle": "facet-affinity",
+      "radius": "structural-distance",
+      "nodeHue": "domain-family",
+      "nodeShade": "subdiscipline",
+      "nodeShape": "entity-type",
+      "edgeWeight": "relationship-strength",
+      "edgeStyle": "relationship-type",
+      "opacity": "interaction-prominence"
+    },
+    "independentRelationDimensions": [
+      "semanticAffinity",
+      "structuralDistance",
+      "relationshipStrength",
+      "sharedness",
+      "evidenceMaturity"
+    ],
+    "interaction": {
+      "hoverFacet": "highlight-related-context-and-summarize",
+      "hoverContextNode": "highlight-connected-facets-and-explain",
+      "click": "pin-selection",
+      "explicitOpenAction": "navigate-to-entity",
+      "compare": {
+        "enabled": true,
+        "maxPinned": 2
+      },
+      "clear": "restore-quiet-default"
+    },
+    "semanticZoom": {
+      "far": "domain-family-arcs-and-relation-counts",
+      "medium": "subdisciplines-and-strong-relations",
+      "near": "individual-entities-edge-labels-and-relation-cards"
+    },
+    "filters": [
+      "domainFamily",
+      "entityType",
+      "relationshipType",
+      "structuralDistance",
+      "evidenceMaturity",
+      "projects",
+      "products",
+      "evidence",
+      "lineage"
+    ],
+    "orderingPolicy": "computed-suggestion-then-editorially-approved-stable-order",
+    "accessibility": {
+      "colorOnlyEncodingProhibited": true,
+      "hoverOnlyInformationProhibited": true,
+      "keyboardPinningRequired": true,
+      "screenReaderRelationSummaryRequired": true,
+      "reducedMotionMode": "cuts-and-opacity-only"
+    },
+    "lineageMode": {
+      "enabled": true,
+      "horizonPlacement": "outer-horizon",
+      "edgeFamily": "lineage-edge-styles",
+      "historicalNodesNeverImplyAuthorityByVerticalPlacement": true,
+      "cardFields": [
+        "contribution",
+        "why-it-matters",
+        "local-use",
+        "non-claim",
+        "citation-status"
+      ]
+    }
+  },
+  "lineageRelationTypes": {
+    "documentedDirectInfluence": {
+      "display": "documented direct influence",
+      "edgeStyle": "dotted-arrow"
+    },
+    "foundationalFormalism": {
+      "display": "foundational formalism",
+      "edgeStyle": "fine-dashed"
+    },
+    "foundationalResearchTradition": {
+      "display": "foundational research tradition",
+      "edgeStyle": "fine-dashed"
+    },
+    "methodologicalLineage": {
+      "display": "methodological lineage",
+      "edgeStyle": "dotted"
+    },
+    "historicalPrecedent": {
+      "display": "historical precedent",
+      "edgeStyle": "dotted"
+    },
+    "criticalCounterpoint": {
+      "display": "critical counterpoint",
+      "edgeStyle": "dash-dot"
+    },
+    "neighboringResearchLineage": {
+      "display": "neighboring research lineage",
+      "edgeStyle": "fine-dashed"
+    },
+    "sharedProblem": {
+      "display": "shared problem",
+      "edgeStyle": "dotted-double"
+    },
+    "independentConvergence": {
+      "display": "independent convergence",
+      "edgeStyle": "dotted-no-arrow"
+    },
+    "comparativeReference": {
+      "display": "comparative reference",
+      "edgeStyle": "hairline-dotted"
+    }
+  },
+  "historicalLineage": {
+    "enabled": true,
+    "publicLabel": "Foundations & Lineage",
+    "formalLabel": "Historical Lineage Lens",
+    "purpose": "Situate the work within established traditions while preventing endorsement, equivalence, direct-succession, and greatness-by-association claims.",
+    "referenceFiles": {
+      "relationSchema": "bfl_historical_lineage_relation_schema_v0_1.json",
+      "referenceSeed": "bfl_historical_lineage_reference_seed_v0_1.json",
+      "pathExpansion": "bfl_introductory_path_lineage_expansion_v0_1.json",
+      "editorialStandard": "bfl_historical_lineage_editorial_standard_v0_1.md",
+      "uiContracts": "bfl_historical_lineage_ui_component_contracts_v0_1.md",
+      "sourceAudit": "bfl_historical_lineage_source_audit_v0_1.md"
+    },
+    "sceneTabs": [
+      "idea",
+      "foundations",
+      "present-development"
+    ],
+    "globalNonClaim": "These references identify foundational works, inherited formalisms, neighboring research traditions, and critical comparisons. They do not imply endorsement, equivalence, direct succession, or validation of Boundary First Labs.",
+    "worksFirst": true,
+    "peopleSecond": true,
+    "separateFromInternalHistory": true,
+    "requiredCardFields": [
+      "whatItEstablished",
+      "whyItMattersHere",
+      "localUse",
+      "whatIsNotClaimed",
+      "citationStatus"
+    ],
+    "preferredVerbs": [
+      "builds within",
+      "draws upon",
+      "is guided by",
+      "uses the formalism of",
+      "inherits a problem from",
+      "develops alongside",
+      "compares with",
+      "reinterprets through",
+      "extends a question raised by"
+    ],
+    "prohibitedWithoutIndependentEvidence": [
+      "completes",
+      "solves",
+      "supersedes",
+      "unifies",
+      "fulfills",
+      "continues the legacy of",
+      "stands alongside",
+      "is the next"
+    ],
+    "publicationGate": [
+      "exact-work-verified",
+      "date-verified",
+      "edition-verified",
+      "local-claim-reviewed",
+      "relation-type-adjudicated",
+      "non-claim-visible",
+      "domain-review-complete"
+    ]
+  },
+  "institutionalGovernance": {
+    "operatingLayers": [
+      "purpose",
+      "invariants",
+      "authority",
+      "operating-gates",
+      "standing-and-participation",
+      "repair-and-correction",
+      "continuity-and-stewardship"
+    ],
+    "statusVocabulary": [
+      "descriptive",
+      "aspirational",
+      "declared-principle",
+      "declared-commitment",
+      "proposed-policy",
+      "provisionally-adopted",
+      "adopted",
+      "operationalized",
+      "audited",
+      "under-revision",
+      "superseded",
+      "withdrawn",
+      "unverified"
+    ],
+    "currentPacketRestriction": "Do not display provisionally-adopted, adopted, operationalized, or audited without a separate explicit source record.",
+    "conventionalCrosswalk": "bfl_institutional_conventional_ia_crosswalk_v0_1.json"
+  }
+}

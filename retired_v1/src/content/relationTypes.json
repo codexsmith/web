@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0",
+  "relations": {
+    "contains": {
+      "label": "Contains",
+      "inverseLabel": "Facet of",
+      "directionality": "inverse-paired",
+      "inverseKey": "facetOf",
+      "summary": "{source} contains {target} as a declared theory, object, or subdomain.",
+      "inverseSummary": "{source} is a declared facet, object, or subdomain of {target}.",
+      "claimBoundary": "Containment declares conceptual scope; each record retains its own claim and evidence boundaries."
+    },
+    "definedWithin": {
+      "label": "Defined within",
+      "inverseLabel": "Defines the scope of",
+      "directionality": "directed",
+      "summary": "{source} is defined within the declared scope of {target}.",
+      "inverseSummary": "{source} defines the declared scope within which {target} is interpreted.",
+      "claimBoundary": "Definition supplies scope, not independent validation or operational authority."
+    },
+    "studiedBy": {
+      "label": "Studied by",
+      "inverseLabel": "Studies",
+      "directionality": "directed",
+      "summary": "{source} is studied through the research or analytic program recorded by {target}.",
+      "inverseSummary": "{source} studies the object or domain recorded by {target}.",
+      "claimBoundary": "Study does not transfer authority or imply that either record validates every claim made by the other."
+    },
+    "formalizedThrough": {
+      "label": "Formalized through",
+      "inverseLabel": "Formalizes",
+      "directionality": "directed",
+      "summary": "{source} is formalized through the apparatus maintained by {target}.",
+      "inverseSummary": "{source} supplies formalization used by {target}.",
+      "claimBoundary": "Formal authority applies only to explicitly encoded definitions, assumptions, and results."
+    },
+    "operationalizedBy": {
+      "label": "Operationalized by",
+      "inverseLabel": "Operationalizes",
+      "directionality": "directed",
+      "summary": "{source} is operationalized through the method recorded by {target}.",
+      "inverseSummary": "{source} operationalizes parts of {target} within its declared method boundary.",
+      "claimBoundary": "Operational use does not promote the source theory beyond its evidence or claim ceiling."
+    },
+    "appliedThrough": {
+      "label": "Applied through",
+      "inverseLabel": "Application route for",
+      "directionality": "directed",
+      "summary": "{source} is applied through the practice recorded by {target}.",
+      "inverseSummary": "{source} is a declared application route for {target}.",
+      "claimBoundary": "Application supplies use context, not automatic theoretical validation."
+    },
+    "appliedBy": {
+      "label": "Applied by",
+      "inverseLabel": "Applies",
+      "directionality": "directed",
+      "summary": "{source} is applied by {target} within a declared practice boundary.",
+      "inverseSummary": "{source} applies parts of {target} within its declared practice boundary.",
+      "claimBoundary": "The applied practice remains responsible for its own decisions, consequences, and evidence."
+    },
+    "appliedWithin": {
+      "label": "Applied within",
+      "inverseLabel": "Hosts application of",
+      "directionality": "directed",
+      "summary": "{source} is applied within the practice domain recorded by {target}.",
+      "inverseSummary": "{source} hosts a declared application of {target}.",
+      "claimBoundary": "Placement within a practice domain does not confer unrestricted professional authority."
+    },
+    "dependsOn": {
+      "label": "Depends on",
+      "inverseLabel": "Grounds",
+      "directionality": "directed",
+      "summary": "{source} declares {target} as conceptual, formal, or operational grounding.",
+      "inverseSummary": "{source} supplies declared grounding for {target}.",
+      "claimBoundary": "Dependency identifies grounding; the grounding record does not thereby endorse dependent claims."
+    },
+    "relatedTo": {
+      "label": "Related domain",
+      "inverseLabel": "Related domain",
+      "directionality": "symmetric",
+      "summary": "{source} and {target} share a declared contextual relation.",
+      "inverseSummary": "{source} and {target} share a declared contextual relation.",
+      "claimBoundary": "Adjacency supplies context only; it does not imply endorsement, equivalence, or promotion."
+    },
+    "theoreticalGrounding": {
+      "label": "Theoretical grounding",
+      "inverseLabel": "Grounds theory for",
+      "directionality": "directed",
+      "summary": "{source} names {target} as part of its theoretical grounding.",
+      "inverseSummary": "{source} supplies declared theoretical grounding for {target}.",
+      "claimBoundary": "Grounding must be traced to specific definitions and claims before it can carry formal weight."
+    },
+    "practiceGrounding": {
+      "label": "Practice grounding",
+      "inverseLabel": "Grounds practice for",
+      "directionality": "directed",
+      "summary": "{source} names {target} as part of its practice grounding.",
+      "inverseSummary": "{source} supplies declared practice grounding for {target}.",
+      "claimBoundary": "Practice proximity does not transfer professional authority or evidence."
+    },
+    "facetOf": {
+      "label": "Facet of",
+      "inverseLabel": "Contains",
+      "directionality": "inverse-paired",
+      "inverseKey": "contains",
+      "summary": "{source} is a declared facet, object, or subdomain of {target}.",
+      "inverseSummary": "{source} contains {target} as a declared theory, object, or subdomain.",
+      "claimBoundary": "Facet status inherits scope from the parent while preserving a separate claim and evidence record."
+    },
+    "centralObject": {
+      "label": "Central object",
+      "inverseLabel": "Central object of",
+      "directionality": "directed",
+      "summary": "{source} studies or operates on the central object recorded by {target}.",
+      "inverseSummary": "{source} is recorded as a central object of {target}.",
+      "claimBoundary": "Object selection constrains scope; it does not establish a result by itself."
+    },
+    "formalApparatusFor": {
+      "label": "Formal apparatus for",
+      "inverseLabel": "Uses formal apparatus",
+      "directionality": "inverse-paired",
+      "inverseKey": "formalApparatus",
+      "summary": "{source} supplies formal apparatus for {target}.",
+      "inverseSummary": "{source} uses formal apparatus supplied by {target}.",
+      "claimBoundary": "The apparatus governs only results stated under its declared assumptions and proof conditions."
+    },
+    "encodes": {
+      "label": "Encodes",
+      "inverseLabel": "Encoded by",
+      "directionality": "directed",
+      "summary": "{source} encodes parts of the theory or discipline recorded by {target}.",
+      "inverseSummary": "{source} is partially encoded by {target}.",
+      "claimBoundary": "Encoding preserves only declared structure and does not imply complete equivalence."
+    },
+    "composedOf": {
+      "label": "Composed of",
+      "inverseLabel": "Component of",
+      "directionality": "directed",
+      "summary": "{source} is composed in part of {target}.",
+      "inverseSummary": "{source} is a declared component of {target}.",
+      "claimBoundary": "Composition declares structure without collapsing the distinct claim, evidence, or lifecycle boundaries of either record."
+    },
+    "discipline": {
+      "label": "Discipline",
+      "inverseLabel": "Discipline for",
+      "directionality": "directed",
+      "summary": "{source} is situated within the discipline recorded by {target}.",
+      "inverseSummary": "{source} supplies the declared discipline for {target}.",
+      "claimBoundary": "Disciplinary placement supplies method and context, not automatic validation."
+    },
+    "distinctFrom": {
+      "label": "Distinct from",
+      "inverseLabel": "Distinct from",
+      "directionality": "symmetric",
+      "summary": "{source} is explicitly distinguished from {target}.",
+      "inverseSummary": "{source} is explicitly distinguished from {target}.",
+      "claimBoundary": "Declared distinction prevents conflation; it does not imply opposition, exclusion, or comparative authority."
+    },
+    "formalApparatus": {
+      "label": "Uses formal apparatus",
+      "inverseLabel": "Formal apparatus for",
+      "directionality": "inverse-paired",
+      "inverseKey": "formalApparatusFor",
+      "summary": "{source} uses formal apparatus supplied by {target}.",
+      "inverseSummary": "{source} supplies formal apparatus for {target}.",
+      "claimBoundary": "Use of an apparatus is bounded by its declared assumptions, translations, and proof conditions."
+    },
+    "governedBy": {
+      "label": "Governed by",
+      "inverseLabel": "Governs",
+      "directionality": "directed",
+      "summary": "{source} is governed by the authority and stewardship recorded by {target}.",
+      "inverseSummary": "{source} governs the declared stewardship boundary of {target}.",
+      "claimBoundary": "Governance applies only within the authority, standing, and correction duties explicitly declared by the governing record."
+    },
+    "operatedThrough": {
+      "label": "Operated through",
+      "inverseLabel": "Operates on",
+      "directionality": "inverse-paired",
+      "inverseKey": "operatesOn",
+      "summary": "{source} is operated through the process or system recorded by {target}.",
+      "inverseSummary": "{source} operates on {target} within a declared process boundary.",
+      "claimBoundary": "Operational linkage does not transfer ownership, evidence, or unrestricted mutation authority."
+    },
+    "operatesOn": {
+      "label": "Operates on",
+      "inverseLabel": "Operated through",
+      "directionality": "inverse-paired",
+      "inverseKey": "operatedThrough",
+      "summary": "{source} operates on {target} within a declared process boundary.",
+      "inverseSummary": "{source} is operated through the process or system recorded by {target}.",
+      "claimBoundary": "Operational linkage does not transfer ownership, evidence, or unrestricted mutation authority."
+    },
+    "pairedResearchLane": {
+      "label": "Paired research lane",
+      "inverseLabel": "Paired research lane",
+      "directionality": "symmetric",
+      "summary": "{source} and {target} are maintained as paired, distinct research lanes.",
+      "inverseSummary": "{source} and {target} are maintained as paired, distinct research lanes.",
+      "claimBoundary": "Pairing coordinates inquiry without merging methods, claims, or evidence."
+    },
+    "siblingFacets": {
+      "label": "Sibling facet",
+      "inverseLabel": "Sibling facet",
+      "directionality": "symmetric",
+      "summary": "{source} and {target} are sibling facets within a shared theoretical family.",
+      "inverseSummary": "{source} and {target} are sibling facets within a shared theoretical family.",
+      "claimBoundary": "Sibling status expresses shared placement while preserving distinct definitions and obligations."
+    }
+  }
+}

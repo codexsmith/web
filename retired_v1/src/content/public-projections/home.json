@@ -1,0 +1,836 @@
+{
+  "projectionVersion": "1.0.0",
+  "kind": "home",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "payload": {
+    "heroPolicy": {
+      "status": "adopted",
+      "rule": "Preserve the current operational homepage hero. Use the content-master headline as a mission and doctrine proposition rather than a replacement hero."
+    },
+    "identity": {
+      "nameRefs": [
+        "phr_1ba4b8b645f9"
+      ],
+      "name": [
+        "Boundary First Labs"
+      ],
+      "institutionalFormRefs": [
+        "phr_0efbc6f1dac1"
+      ],
+      "institutionalForm": [
+        "Independent public-interest research and engineering laboratory."
+      ],
+      "compactDescriptorRefs": [
+        "phr_eea8674c5c0a",
+        "phr_ead854920466"
+      ],
+      "compactDescriptor": [
+        "An independent public-interest research and engineering laboratory for institutional design, research stewardship, and consequential systems.",
+        "Institutional design, research stewardship, and public work for consequential systems."
+      ],
+      "primaryHeadlineRefs": [
+        "phr_a32d84b0707d"
+      ],
+      "primaryHeadline": [
+        "No consequence without representation."
+      ],
+      "primaryMaximRefs": [
+        "phr_8d75d4fc2dc1"
+      ],
+      "primaryMaxim": [
+        "Keeping power coupled to consequence."
+      ],
+      "missionRefs": [
+        "phr_3b69e35388c0"
+      ],
+      "mission": [
+        "Help people and institutions make consequential systems more legible, accountable, maintainable, contestable, and repairable."
+      ],
+      "publicPromiseRefs": [
+        "phr_74ae28b38c36"
+      ],
+      "publicPromise": [
+        "We want systems to work better for the people who live inside them."
+      ],
+      "institutionalStance": [
+        "pro-progress",
+        "pro-human",
+        "pro-accountability",
+        "pro-repair",
+        "pro-institution when institutions remain answerable to reality and people",
+        "anti-impunity",
+        "anti-responsibility laundering",
+        "anti-procedure-as-substitute-for-outcome",
+        "anti-hidden human burden",
+        "anti-growth-for-growth's-sake"
+      ],
+      "institutionalCritique": {
+        "headlineRefs": [
+          "phr_4d03902eb208"
+        ],
+        "headline": [
+          "We do not reject institutions. We ask institutions to become worthy of the responsibilities they claim."
+        ],
+        "bodyRefs": [
+          "phr_1db7b550256b"
+        ],
+        "body": [
+          "Boundary First Labs uses the language of institutions deliberately: governance, accountability, policy, stewardship, public trust, maintenance, standing, authority, obligation, audit, closure, and repair. The critique is not that these words are empty. It is that they are often implemented as symbols after the relationships they were meant to preserve have been severed."
+        ],
+        "mode": "reconstructive rather than merely oppositional"
+      },
+      "worldClassPosition": {
+        "headlineRefs": [
+          "phr_0615d95efb57"
+        ],
+        "headline": [
+          "World class is what you give the world."
+        ],
+        "stanceRefs": [
+          "phr_db0bd954366d"
+        ],
+        "stance": [
+          "Boundary First Labs does not use 'world class' as a self-certified prestige ranking. It treats world class as a standard of institutional conduct: whether the institution leaves people, knowledge, systems, and the surrounding field more capable because it existed."
+        ],
+        "campaignLineRefs": [
+          "phr_362375c5fd90"
+        ],
+        "campaignLine": [
+          "Giving class to the world."
+        ],
+        "interpretationRefs": [
+          "phr_62e9e407eee1"
+        ],
+        "interpretation": [
+          "Class is more than praise. Institutions classify constantly: eligible and ineligible, inside and outside, authorized and unauthorized, safe and unsafe, complete and incomplete. Those classifications allocate access, duties, rights, resources, visibility, and consequence. A world-class institution should therefore improve the quality of the distinctions it gives the world and remain willing to revise them when reality disagrees."
+        ]
+      },
+      "socialMissionRefs": [
+        "phr_7b906cc0fad1"
+      ],
+      "socialMission": [
+        "The systems that govern people's possibilities should remain answerable to the people, conditions, relationships, and futures that bear their consequences."
+      ],
+      "humanPurposeRefs": [
+        "phr_91e86a9168cb"
+      ],
+      "humanPurpose": [
+        "Build better representations so people do not have to live inside the consequences of what consequential systems forgot."
+      ]
+    },
+    "doctrineHero": {
+      "eyebrowRefs": [
+        "phr_1ba4b8b645f9"
+      ],
+      "eyebrow": [
+        "Boundary First Labs"
+      ],
+      "headlineRefs": [
+        "phr_a32d84b0707d"
+      ],
+      "headline": [
+        "No consequence without representation."
+      ],
+      "subheadlineRefs": [
+        "phr_cf5b7d871d05"
+      ],
+      "subheadline": [
+        "We help people and institutions make consequential systems more legible, accountable, maintainable, contestable, and repairable."
+      ],
+      "supportingRefs": [
+        "phr_1df304c6631c"
+      ],
+      "supporting": [
+        "Power travels through software, policies, markets, organizations, infrastructure, and institutions. Responsibility and repair should be able to travel just as far."
+      ],
+      "primaryCta": {
+        "labelRefs": [
+          "phr_8c00aa14b0c8"
+        ],
+        "label": [
+          "How We Help"
+        ],
+        "href": "/help"
+      },
+      "secondaryCta": {
+        "labelRefs": [
+          "phr_45c266d3e8ec"
+        ],
+        "label": [
+          "How we bind our own work"
+        ],
+        "href": "/governance"
+      },
+      "tertiaryCta": {
+        "labelRefs": [
+          "phr_5932598f8e5f"
+        ],
+        "label": [
+          "Challenge our work"
+        ],
+        "href": "/record/challenge"
+      }
+    },
+    "sequence": [
+      "welcome",
+      "representation",
+      "institutional-repair",
+      "admissible-forgetting",
+      "how-we-help",
+      "social-mission",
+      "human-consequence",
+      "world-class",
+      "institutional-covenant",
+      "how-we-work",
+      "boundary-first-method",
+      "intellectual-neighborhood",
+      "formation-stage",
+      "collaboration",
+      "public-record",
+      "contact"
+    ],
+    "sections": {
+      "representation": {
+        "headlineRefs": [
+          "phr_a32d84b0707d"
+        ],
+        "headline": [
+          "No consequence without representation."
+        ],
+        "bodyRefs": [
+          "phr_fe8f8a8c192e",
+          "phr_3f3e6b2bb3cd",
+          "phr_6273e303d51f"
+        ],
+        "body": [
+          "Every institution must simplify reality in order to act. It creates categories, roles, metrics, jurisdictions, procedures, models, and records.",
+          "The danger is not that a system has a boundary. The danger is that something consequential falls outside that boundary and the institution begins behaving as though it no longer exists.",
+          "People, burdens, exceptions, uncertainty, maintenance, and downstream effects do not disappear because they were omitted from the form."
+        ],
+        "humanReadingRefs": [
+          "phr_27cd3789f850"
+        ],
+        "humanReading": [
+          "If someone bears the consequence, the system needs a way to see them, hear them, explain itself to them, and reach repair."
+        ],
+        "provenanceType": "source_derived_public_translation"
+      },
+      "institutional-repair": {
+        "headlineRefs": [
+          "phr_9b08ce8505dc"
+        ],
+        "headline": [
+          "The institution should be where responsibility becomes real, not where it disappears."
+        ],
+        "bodyRefs": [
+          "phr_edbcc7b3c201",
+          "phr_d2fc7ea491e6",
+          "phr_d8a8aebb3732"
+        ],
+        "body": [
+          "Boundary First Labs is interested in institutional design because institutions are how human beings preserve action, memory, authority, obligation, and care across time.",
+          "The problem is not institution itself. The problem is institutional closure that protects the procedure while exporting the consequence.",
+          "We want institutions that can explain what they are doing, detect when their model fails, hear from the people carrying the residual burden, revise their rules, and repair what they break."
+        ],
+        "provenanceType": "website_synthesis"
+      },
+      "how-we-help": {
+        "headlineRefs": [
+          "phr_28d778ceaaa7"
+        ],
+        "headline": [
+          "Bring us the system that almost works."
+        ],
+        "bodyRefs": [
+          "phr_bf441d5ee780"
+        ],
+        "body": [
+          "We help make hidden boundaries, missing distinctions, displaced burdens, authority gaps, maintenance debt, and broken repair paths visible enough to act on."
+        ],
+        "entryPointsRefs": [
+          "phr_92261fb2aff3",
+          "phr_995218bc17a0",
+          "phr_f34c79485fdf",
+          "phr_6328823ed271",
+          "phr_81ffb446bb03",
+          "phr_79e3a80db31f",
+          "phr_ac50275c47ba",
+          "phr_03a8f04ad016",
+          "phr_679013bfd363",
+          "phr_0717589e4cdf"
+        ],
+        "entryPoints": [
+          "The process everyone works around.",
+          "The policy that produces behavior nobody intended.",
+          "The software that succeeds only because people quietly compensate for it.",
+          "The responsibility that keeps moving between departments.",
+          "The metric that looks healthy while the lived system gets worse.",
+          "The public decision people cannot meaningfully question or appeal.",
+          "The maintenance burden nobody owns.",
+          "The institution whose stated purpose and actual machinery no longer agree.",
+          "The collaboration where roles, authority, contribution, or risk have become unclear.",
+          "The new capability that needs governance before it gains consequence."
+        ],
+        "closingRefs": [
+          "phr_a1dce9be6b3a"
+        ],
+        "closing": [
+          "Our first job is not to sell you a vocabulary. It is to help make the actual problem easier to see."
+        ],
+        "provenanceType": "website_synthesis",
+        "helpScales": [
+          {
+            "labelRefs": [
+              "phr_ab3ccc8dba2a"
+            ],
+            "label": [
+              "People"
+            ],
+            "lineRefs": [
+              "phr_6bda88c88314"
+            ],
+            "line": [
+              "Understand, navigate, contest, and repair systems that affect your life."
+            ]
+          },
+          {
+            "labelRefs": [
+              "phr_5b56e06ae8f8"
+            ],
+            "label": [
+              "Practitioners & communities"
+            ],
+            "lineRefs": [
+              "phr_35b5d4772f47"
+            ],
+            "line": [
+              "Gain better tools for seeing hidden structure, preserving local knowledge, and acting together."
+            ]
+          },
+          {
+            "labelRefs": [
+              "phr_b58a412866f9"
+            ],
+            "label": [
+              "Institutions"
+            ],
+            "lineRefs": [
+              "phr_24fcb1daaa56"
+            ],
+            "line": [
+              "Represent real obligations and build the authority, maintenance, and repair capacity needed to stop exporting defects."
+            ]
+          }
+        ],
+        "socialMissionBridge": "We help institutions become more capable so the people depending on them do not have to compensate for institutional incapacity."
+      },
+      "social-mission": {
+        "headlineRefs": [
+          "phr_7e6fb107610d"
+        ],
+        "headline": [
+          "What we are trying to make possible."
+        ],
+        "dekRefs": [
+          "phr_1906571a25a0"
+        ],
+        "dek": [
+          "No consequence without representation is not only a systems principle. It is a social promise: people should remain visible, capable, heard, and repairable inside the systems that shape their lives."
+        ],
+        "promises": [
+          {
+            "headlineRefs": [
+              "phr_99886cf9cc7a"
+            ],
+            "headline": [
+              "People who are affected can be heard."
+            ],
+            "bodyRefs": [
+              "phr_82b9f1a654c9"
+            ],
+            "body": [
+              "Consequence should create a route to representation, intelligible reasons, contest, and repair."
+            ]
+          },
+          {
+            "headlineRefs": [
+              "phr_77b579e3bc15"
+            ],
+            "headline": [
+              "People remain more than their category."
+            ],
+            "bodyRefs": [
+              "phr_b27ee0c290c1"
+            ],
+            "body": [
+              "Administrative usefulness does not exhaust human identity, circumstance, capacity, or need."
+            ]
+          },
+          {
+            "headlineRefs": [
+              "phr_1f0db9f8b00d"
+            ],
+            "headline": [
+              "Capability should expand agency."
+            ],
+            "bodyRefs": [
+              "phr_4a8bebc88970"
+            ],
+            "body": [
+              "Technology, education, care, and institutions should leave people more capable where possible, not merely more dependent."
+            ]
+          },
+          {
+            "headlineRefs": [
+              "phr_0844e531be1c"
+            ],
+            "headline": [
+              "Systems should work beyond the happy path."
+            ],
+            "bodyRefs": [
+              "phr_e3149c1e6b5f"
+            ],
+            "body": [
+              "Accessibility, disability, variation, unusual circumstances, failure, and recovery belong to reality and therefore belong in serious design."
+            ]
+          },
+          {
+            "headlineRefs": [
+              "phr_4d110cbe39a4"
+            ],
+            "headline": [
+              "Costs must land in the ledger that produced them."
+            ],
+            "bodyRefs": [
+              "phr_2760b805e67d"
+            ],
+            "body": [
+              "Labor, maintenance, ecological damage, risk, downstream burden, and future obligations do not vanish because accounting stopped looking."
+            ]
+          },
+          {
+            "headlineRefs": [
+              "phr_edbc3571af32"
+            ],
+            "headline": [
+              "Repair must be possible."
+            ],
+            "bodyRefs": [
+              "phr_a5c07fb00aaf"
+            ],
+            "body": [
+              "A consequential error should have a path to someone with the authority, evidence, resources, and duty to change the outcome."
+            ]
+          }
+        ],
+        "closingRefs": [
+          "phr_780ee98ead4b"
+        ],
+        "closing": [
+          "This is what “No consequence without representation” means in human terms."
+        ],
+        "cta": {
+          "labelRefs": [
+            "phr_b870e60d3b16"
+          ],
+          "label": [
+            "Explore our social mission"
+          ],
+          "href": "/mission#social-mission"
+        },
+        "provenanceType": "mixed_corpus_and_public_synthesis"
+      },
+      "human-consequence": {
+        "headlineRefs": [
+          "phr_8ee19f7cc5c5"
+        ],
+        "headline": [
+          "The system can say complete while the consequence is still open."
+        ],
+        "vignettes": [
+          {
+            "institutionalArtifactRefs": [
+              "phr_a51928e9f9d1"
+            ],
+            "institutionalArtifact": [
+              "The form says complete."
+            ],
+            "humanConsequenceRefs": [
+              "phr_7457eafc567a"
+            ],
+            "humanConsequence": [
+              "The person is still waiting."
+            ],
+            "diagnosisRefs": [
+              "phr_73a0f5b691d2"
+            ],
+            "diagnosis": [
+              "The process is not closed."
+            ]
+          },
+          {
+            "institutionalArtifactRefs": [
+              "phr_34a3c03582e8"
+            ],
+            "institutionalArtifact": [
+              "The dashboard says healthy."
+            ],
+            "humanConsequenceRefs": [
+              "phr_54bbbeb91170"
+            ],
+            "humanConsequence": [
+              "The people maintaining it are exhausted."
+            ],
+            "diagnosisRefs": [
+              "phr_c19c1a7dd999"
+            ],
+            "diagnosis": [
+              "The metric forgot something."
+            ]
+          },
+          {
+            "institutionalArtifactRefs": [
+              "phr_ee228dbb0826"
+            ],
+            "institutionalArtifact": [
+              "The decision was automated."
+            ],
+            "humanConsequenceRefs": [
+              "phr_494dd6d3ac4a"
+            ],
+            "humanConsequence": [
+              "The harm was not."
+            ],
+            "diagnosisRefs": [
+              "phr_6210b21182cf"
+            ],
+            "diagnosis": [
+              "Responsibility must land."
+            ]
+          },
+          {
+            "institutionalArtifactRefs": [
+              "phr_b6fa94860360"
+            ],
+            "institutionalArtifact": [
+              "The category worked."
+            ],
+            "humanConsequenceRefs": [
+              "phr_9f752c10a07b"
+            ],
+            "humanConsequence": [
+              "The person disappeared."
+            ],
+            "diagnosisRefs": [
+              "phr_a32d84b0707d"
+            ],
+            "diagnosis": [
+              "No consequence without representation."
+            ]
+          }
+        ],
+        "designNote": "Render as sparse drafting-style consequence diagrams rather than sentimental stock photography: institutional object on one side, omitted consequence beyond its declared boundary on the other.",
+        "provenanceType": "website_synthesis"
+      },
+      "institutional-covenant": {
+        "headlineRefs": [
+          "phr_7f98e46b2289"
+        ],
+        "headline": [
+          "What we ask of systems, we must ask of ourselves."
+        ],
+        "principleIds": [
+          "no-consequence-without-representation",
+          "responsibility-must-land",
+          "repair-is-infrastructure",
+          "no-hidden-human-shock-absorbers",
+          "no-undeclared-we",
+          "every-construction-creates-future-obligation",
+          "no-closure-without-affected-side-verification",
+          "metrics-remain-revisable",
+          "no-product-without-stewardship",
+          "criticism-is-institutional-maintenance"
+        ],
+        "closingRefs": [
+          "phr_d62da6defe92"
+        ],
+        "closing": [
+          "The doctrine governs the laboratory before it governs anyone else."
+        ]
+      },
+      "how-we-work": {
+        "headlineRefs": [
+          "phr_1206578b487e"
+        ],
+        "headline": [
+          "Show your work."
+        ],
+        "steps": [
+          {
+            "verbRefs": [
+              "phr_a0910bc7d1ab"
+            ],
+            "verb": [
+              "Declare"
+            ],
+            "bodyRefs": [
+              "phr_e29a379bdc64"
+            ],
+            "body": [
+              "State the boundary, purpose, authority, assumptions, exclusions, affected parties, and claim status."
+            ]
+          },
+          {
+            "verbRefs": [
+              "phr_4f4224f44ad2"
+            ],
+            "verb": [
+              "Observe"
+            ],
+            "bodyRefs": [
+              "phr_eccb8c4b6955"
+            ],
+            "body": [
+              "Measure behavior and consequence rather than assuming the rule, model, or procedure produced the intended reality."
+            ]
+          },
+          {
+            "verbRefs": [
+              "phr_d0fa55488566"
+            ],
+            "verb": [
+              "Trace"
+            ],
+            "bodyRefs": [
+              "phr_efbffb6ba0c0"
+            ],
+            "body": [
+              "Follow responsibility, obligation, labor, risk, maintenance, and residual burden across boundaries."
+            ]
+          },
+          {
+            "verbRefs": [
+              "phr_a94a8fe5ccb1"
+            ],
+            "verb": [
+              "Test"
+            ],
+            "bodyRefs": [
+              "phr_6cf7143a6265"
+            ],
+            "body": [
+              "Expose claims and designs to counterexample, criticism, alternatives, failure modes, and real use."
+            ]
+          },
+          {
+            "verbRefs": [
+              "phr_e8a7d6f2bc41"
+            ],
+            "verb": [
+              "Repair"
+            ],
+            "bodyRefs": [
+              "phr_6051cf54f6a6"
+            ],
+            "body": [
+              "Give defects an owner, authority, evidence, resources, and a target state."
+            ]
+          },
+          {
+            "verbRefs": [
+              "phr_86a4261d849a"
+            ],
+            "verb": [
+              "Verify"
+            ],
+            "bodyRefs": [
+              "phr_3f563b6e561a"
+            ],
+            "body": [
+              "Do not declare closure until the affected condition has actually changed and residual burden is known."
+            ]
+          },
+          {
+            "verbRefs": [
+              "phr_a5062f56eb9c"
+            ],
+            "verb": [
+              "Revise"
+            ],
+            "bodyRefs": [
+              "phr_64204b193350"
+            ],
+            "body": [
+              "Preserve why the system changed and keep the representation answerable to new evidence."
+            ]
+          }
+        ]
+      },
+      "formation-stage": {
+        "headlineRefs": [
+          "phr_8b2ba00f66f9"
+        ],
+        "headline": [
+          "Building the institution in public."
+        ],
+        "bodyRefs": [
+          "phr_86615dca97e4",
+          "phr_8e6db72ef9f3",
+          "phr_197970631254"
+        ],
+        "body": [
+          "Boundary First Labs is presently a founder-led, AI-enabled micro-lab in institutional formation.",
+          "The work is substantial. The durable multi-person institution around it is still being built.",
+          "Independent governance, broader external review, sustainable stewardship, and succession are goals under construction, not credentials we pretend already exist."
+        ],
+        "closingRefs": [
+          "phr_57a12a76b5e7"
+        ],
+        "closing": [
+          "Formation-stage transparency is not a disclaimer around the institution. It is part of the institution."
+        ]
+      },
+      "public-record": {
+        "headlineRefs": [
+          "phr_c41d5e757e38"
+        ],
+        "headline": [
+          "An institution should leave a trail."
+        ],
+        "bodyRefs": [
+          "phr_5074960fd282"
+        ],
+        "body": [
+          "The Public Record is where Boundary First Labs makes its institutional commitments, revisions, corrections, limitations, and formation status inspectable."
+        ],
+        "records": [
+          "Declaration",
+          "Ethos & Origin",
+          "The Laboratory",
+          "Institutional Covenant",
+          "Governance Posture",
+          "Collaboration Doctrine",
+          "AI Use & Disclosure",
+          "Publication & Claim Discipline",
+          "Corrections, Supersessions & Retractions",
+          "Institutional Change Log",
+          "Formation Status",
+          "Challenges & Responses"
+        ]
+      }
+    },
+    "socialMission": {
+      "headlineRefs": [
+        "phr_e57144a398da"
+      ],
+      "headline": [
+        "Better systems should leave people with more agency, not more invisible burden."
+      ],
+      "corePropositionRefs": [
+        "phr_7b906cc0fad1"
+      ],
+      "coreProposition": [
+        "The systems that govern people's possibilities should remain answerable to the people, conditions, relationships, and futures that bear their consequences."
+      ],
+      "humanTranslationOfPrimaryHeadlineRefs": [
+        "phr_27cd3789f850"
+      ],
+      "humanTranslationOfPrimaryHeadline": [
+        "If someone bears the consequence, the system needs a way to see them, hear them, explain itself to them, and reach repair."
+      ],
+      "scalesOfHelp": [
+        {
+          "id": "people",
+          "labelRefs": [
+            "phr_ab3ccc8dba2a"
+          ],
+          "label": [
+            "People"
+          ],
+          "promiseRefs": [
+            "phr_7e0725cfdda0"
+          ],
+          "promise": [
+            "Help people understand, navigate, contest, and repair consequential systems that affect their lives."
+          ],
+          "publicLineRefs": [
+            "phr_e255fd9029b8"
+          ],
+          "publicLine": [
+            "You should not need extraordinary power, money, fluency, health, persistence, or luck merely to get a consequential error acknowledged and corrected."
+          ]
+        },
+        {
+          "id": "practitioners-communities",
+          "labelRefs": [
+            "phr_5b56e06ae8f8"
+          ],
+          "label": [
+            "Practitioners & communities"
+          ],
+          "promiseRefs": [
+            "phr_60e399b964cc"
+          ],
+          "promise": [
+            "Give practitioners and communities usable methods for seeing hidden burdens, mapping responsibility, preserving local knowledge, and improving the systems they already inhabit."
+          ],
+          "publicLineRefs": [
+            "phr_8d184a87ef11"
+          ],
+          "publicLine": [
+            "The people closest to a system often carry knowledge the formal representation has forgotten."
+          ]
+        },
+        {
+          "id": "institutions",
+          "labelRefs": [
+            "phr_b58a412866f9"
+          ],
+          "label": [
+            "Institutions"
+          ],
+          "promiseRefs": [
+            "phr_b64de9190402"
+          ],
+          "promise": [
+            "Help institutions represent their real obligations, affected parties, maintenance needs, authority boundaries, and repair paths before defects are displaced onto people."
+          ],
+          "publicLineRefs": [
+            "phr_91aa12d0f43d"
+          ],
+          "publicLine": [
+            "Institutional capacity should reduce the amount of institutional incapacity that people are forced to absorb."
+          ]
+        }
+      ],
+      "impactRuleRefs": [
+        "phr_3b3c0ea2181b"
+      ],
+      "impactRule": [
+        "Every social mission must connect human promise -> structural defect -> Boundary First operation -> public artifact or intervention -> evidence/review gate."
+      ]
+    },
+    "stewardship": {
+      "classification": "institutional quality and mission",
+      "headline": "Stewardship is how the institution remains answerable over time.",
+      "principleRefs": [
+        "phr_0e163ae1b05a",
+        "phr_1a718d5e4151",
+        "phr_c2b1fee83307",
+        "phr_ff4968e68891"
+      ],
+      "principle": [
+        "Stewardship precedes capability.",
+        "Stewardship, correction, migration, retirement, institutional memory, and succession belong to the original design.",
+        "Turn accumulated work into publicly useful, bounded, inspectable forms while building the criticism, maintenance, stewardship, and governance structures required to support them.",
+        "Build stewardship and retirement before uncontrolled scale."
+      ]
+    }
+  }
+}

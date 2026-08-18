@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://boundaryfirst.org/schemas/cyoa-binding.schema.json",
+  "title": "Boundary First CYOA Binding",
+  "description": "A governed adaptive on-ramp binding for projecting familiar scenes into canonical concepts and nodes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "bindingProtocol",
+    "source",
+    "semantics",
+    "workflow",
+    "projection",
+    "interactions",
+    "validation",
+    "export"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "boundary-first.binding.cyoa.v1" },
+    "bindingProtocol": {
+      "type": "object",
+      "required": ["id", "version", "title", "status", "claimCeiling", "provenance", "compatibility"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "status": { "enum": ["draft", "review", "approved", "superseded"] },
+        "claimCeiling": { "const": "pedagogical-on-ramp" },
+        "provenance": {
+          "type": "object",
+          "required": ["createdFrom", "implementedAt"],
+          "properties": {
+            "createdFrom": { "$ref": "#/$defs/nonEmptyStringArray" },
+            "implementedAt": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        },
+        "compatibility": {
+          "type": "object",
+          "required": ["renderer", "canonicalNodeSource"],
+          "properties": {
+            "renderer": { "$ref": "#/$defs/nonEmptyString" },
+            "canonicalNodeSource": { "$ref": "#/$defs/nonEmptyString" }
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": ["schemaFamily", "schemaReference", "adapters"],
+      "properties": {
+        "schemaFamily": { "const": "custom" },
+        "schemaReference": { "$ref": "#/$defs/nonEmptyString" },
+        "adapters": { "type": "array", "items": { "$ref": "#/$defs/nonEmptyString" }, "uniqueItems": true }
+      }
+    },
+    "semantics": {
+      "type": "object",
+      "required": ["conceptRegistry", "onramps"],
+      "properties": {
+        "conceptRegistry": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/concept" }
+        },
+        "onramps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/onramp" }
+        }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "required": ["profile", "states", "transitions", "restartable", "stateMutation"],
+      "properties": {
+        "profile": { "const": "adaptive-onramp" },
+        "states": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["id", "label"],
+            "properties": {
+              "id": { "enum": ["choose-world", "name-trouble", "cross-bridge"] },
+              "label": { "$ref": "#/$defs/nonEmptyString" }
+            }
+          }
+        },
+        "transitions": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "action"],
+            "properties": {
+              "from": { "$ref": "#/$defs/nonEmptyString" },
+              "to": { "$ref": "#/$defs/nonEmptyString" },
+              "action": { "$ref": "#/$defs/nonEmptyString" }
+            }
+          }
+        },
+        "restartable": { "const": true },
+        "stateMutation": { "const": "navigation-only" }
+      }
+    },
+    "projection": { "type": "object" },
+    "interactions": { "type": "object" },
+    "validation": { "type": "object" },
+    "export": { "type": "object" }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    },
+    "concept": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "definition", "canonicalNodeIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "label": { "$ref": "#/$defs/nonEmptyString" },
+        "definition": { "$ref": "#/$defs/nonEmptyString" },
+        "canonicalNodeIds": { "$ref": "#/$defs/nonEmptyStringArray" }
+      }
+    },
+    "choice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "title",
+        "scene",
+        "conceptLabel",
+        "conceptIds",
+        "canonicalNodeIds",
+        "lesson",
+        "structuralMove",
+        "metaphorFirewall",
+        "formalBridge",
+        "destinationNodeId",
+        "actionLabel"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "slug": { "$ref": "#/$defs/nonEmptyString" },
+        "title": { "$ref": "#/$defs/nonEmptyString" },
+        "scene": { "$ref": "#/$defs/nonEmptyString" },
+        "conceptLabel": { "$ref": "#/$defs/nonEmptyString" },
+        "conceptIds": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "canonicalNodeIds": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "lesson": { "$ref": "#/$defs/nonEmptyString" },
+        "structuralMove": { "$ref": "#/$defs/nonEmptyString" },
+        "metaphorFirewall": { "$ref": "#/$defs/nonEmptyString" },
+        "formalBridge": { "$ref": "#/$defs/nonEmptyString" },
+        "destinationNodeId": { "$ref": "#/$defs/nonEmptyString" },
+        "actionLabel": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "onramp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "slug", "number", "label", "prompt", "description", "canonicalNodeIds", "choices"],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmptyString" },
+        "slug": { "$ref": "#/$defs/nonEmptyString" },
+        "number": { "$ref": "#/$defs/nonEmptyString" },
+        "label": { "$ref": "#/$defs/nonEmptyString" },
+        "prompt": { "$ref": "#/$defs/nonEmptyString" },
+        "description": { "$ref": "#/$defs/nonEmptyString" },
+        "canonicalNodeIds": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "choices": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/choice" }
+        }
+      }
+    }
+  }
+}

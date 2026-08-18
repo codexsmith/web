@@ -1,0 +1,1207 @@
+{
+  "projectionVersion": "1.0.0",
+  "kind": "practice",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "payload": {
+    "howWeHelp": {
+      "headlineRefs": [
+        "phr_28d778ceaaa7"
+      ],
+      "headline": [
+        "Bring us the system that almost works."
+      ],
+      "bodyRefs": [
+        "phr_bf441d5ee780"
+      ],
+      "body": [
+        "We help make hidden boundaries, missing distinctions, displaced burdens, authority gaps, maintenance debt, and broken repair paths visible enough to act on."
+      ],
+      "entryPointsRefs": [
+        "phr_92261fb2aff3",
+        "phr_995218bc17a0",
+        "phr_f34c79485fdf",
+        "phr_6328823ed271",
+        "phr_81ffb446bb03",
+        "phr_79e3a80db31f",
+        "phr_ac50275c47ba",
+        "phr_03a8f04ad016",
+        "phr_679013bfd363",
+        "phr_0717589e4cdf"
+      ],
+      "entryPoints": [
+        "The process everyone works around.",
+        "The policy that produces behavior nobody intended.",
+        "The software that succeeds only because people quietly compensate for it.",
+        "The responsibility that keeps moving between departments.",
+        "The metric that looks healthy while the lived system gets worse.",
+        "The public decision people cannot meaningfully question or appeal.",
+        "The maintenance burden nobody owns.",
+        "The institution whose stated purpose and actual machinery no longer agree.",
+        "The collaboration where roles, authority, contribution, or risk have become unclear.",
+        "The new capability that needs governance before it gains consequence."
+      ],
+      "closingRefs": [
+        "phr_a1dce9be6b3a"
+      ],
+      "closing": [
+        "Our first job is not to sell you a vocabulary. It is to help make the actual problem easier to see."
+      ],
+      "provenanceType": "website_synthesis",
+      "helpScales": [
+        {
+          "labelRefs": [
+            "phr_ab3ccc8dba2a"
+          ],
+          "label": [
+            "People"
+          ],
+          "lineRefs": [
+            "phr_6bda88c88314"
+          ],
+          "line": [
+            "Understand, navigate, contest, and repair systems that affect your life."
+          ]
+        },
+        {
+          "labelRefs": [
+            "phr_5b56e06ae8f8"
+          ],
+          "label": [
+            "Practitioners & communities"
+          ],
+          "lineRefs": [
+            "phr_35b5d4772f47"
+          ],
+          "line": [
+            "Gain better tools for seeing hidden structure, preserving local knowledge, and acting together."
+          ]
+        },
+        {
+          "labelRefs": [
+            "phr_b58a412866f9"
+          ],
+          "label": [
+            "Institutions"
+          ],
+          "lineRefs": [
+            "phr_24fcb1daaa56"
+          ],
+          "line": [
+            "Represent real obligations and build the authority, maintenance, and repair capacity needed to stop exporting defects."
+          ]
+        }
+      ],
+      "socialMissionBridge": "We help institutions become more capable so the people depending on them do not have to compensate for institutional incapacity."
+    },
+    "howWeWork": {
+      "headlineRefs": [
+        "phr_1206578b487e"
+      ],
+      "headline": [
+        "Show your work."
+      ],
+      "steps": [
+        {
+          "verbRefs": [
+            "phr_a0910bc7d1ab"
+          ],
+          "verb": [
+            "Declare"
+          ],
+          "bodyRefs": [
+            "phr_e29a379bdc64"
+          ],
+          "body": [
+            "State the boundary, purpose, authority, assumptions, exclusions, affected parties, and claim status."
+          ]
+        },
+        {
+          "verbRefs": [
+            "phr_4f4224f44ad2"
+          ],
+          "verb": [
+            "Observe"
+          ],
+          "bodyRefs": [
+            "phr_eccb8c4b6955"
+          ],
+          "body": [
+            "Measure behavior and consequence rather than assuming the rule, model, or procedure produced the intended reality."
+          ]
+        },
+        {
+          "verbRefs": [
+            "phr_d0fa55488566"
+          ],
+          "verb": [
+            "Trace"
+          ],
+          "bodyRefs": [
+            "phr_efbffb6ba0c0"
+          ],
+          "body": [
+            "Follow responsibility, obligation, labor, risk, maintenance, and residual burden across boundaries."
+          ]
+        },
+        {
+          "verbRefs": [
+            "phr_a94a8fe5ccb1"
+          ],
+          "verb": [
+            "Test"
+          ],
+          "bodyRefs": [
+            "phr_6cf7143a6265"
+          ],
+          "body": [
+            "Expose claims and designs to counterexample, criticism, alternatives, failure modes, and real use."
+          ]
+        },
+        {
+          "verbRefs": [
+            "phr_e8a7d6f2bc41"
+          ],
+          "verb": [
+            "Repair"
+          ],
+          "bodyRefs": [
+            "phr_6051cf54f6a6"
+          ],
+          "body": [
+            "Give defects an owner, authority, evidence, resources, and a target state."
+          ]
+        },
+        {
+          "verbRefs": [
+            "phr_86a4261d849a"
+          ],
+          "verb": [
+            "Verify"
+          ],
+          "bodyRefs": [
+            "phr_3f563b6e561a"
+          ],
+          "body": [
+            "Do not declare closure until the affected condition has actually changed and residual burden is known."
+          ]
+        },
+        {
+          "verbRefs": [
+            "phr_a5062f56eb9c"
+          ],
+          "verb": [
+            "Revise"
+          ],
+          "bodyRefs": [
+            "phr_64204b193350"
+          ],
+          "body": [
+            "Preserve why the system changed and keep the representation answerable to new evidence."
+          ]
+        }
+      ]
+    },
+    "boundaryFirstMethod": {
+      "headlineRefs": [
+        "phr_76156ec3096c"
+      ],
+      "headline": [
+        "A doctrine for learning, mapping, building, and repair."
+      ],
+      "bodyRefs": [
+        "phr_e4e523e0acf0",
+        "phr_6fcd557e461f",
+        "phr_93f0282bfbb6",
+        "phr_aae66c3fa734"
+      ],
+      "body": [
+        "Boundary First begins with the consequential boundary: what is inside the decision, what remains outside it, what must survive, and where failure can land.",
+        "Agentic Scientific Method turns inquiry into a recursive test between world, observation, representation, and claim.",
+        "Atlassification turns accumulated distinctions and evidence into a navigable atlas that preserves relationships, provenance, uncertainty, and paths of return.",
+        "Institutional design asks what happens after people begin using that atlas to exercise real power."
+      ],
+      "methodCards": [
+        {
+          "labelRefs": [
+            "phr_320542a7330c"
+          ],
+          "label": [
+            "Boundary First"
+          ],
+          "verbRefs": [
+            "phr_a4880e8741d2"
+          ],
+          "verb": [
+            "Govern"
+          ],
+          "lineRefs": [
+            "phr_3bb4ab7d6e31"
+          ],
+          "line": [
+            "Declare the boundary. Preserve the invariant. Expose the defect. Restore the path to repair."
+          ]
+        },
+        {
+          "labelRefs": [
+            "phr_be985d2fdf96"
+          ],
+          "label": [
+            "Agentic Scientific Method"
+          ],
+          "verbRefs": [
+            "phr_7dca5d4cddf5"
+          ],
+          "verb": [
+            "Learn"
+          ],
+          "lineRefs": [
+            "phr_b1113ace27c0"
+          ],
+          "line": [
+            "Bound. Load. Trace. Test. Repair. Close—provisionally."
+          ]
+        },
+        {
+          "labelRefs": [
+            "phr_e0a9ccc9ac2b"
+          ],
+          "label": [
+            "Atlassification"
+          ],
+          "verbRefs": [
+            "phr_37745ed7a0f0"
+          ],
+          "verb": [
+            "Map"
+          ],
+          "lineRefs": [
+            "phr_6bcd09f5bc4f"
+          ],
+          "line": [
+            "Make the known, unknown, related, disputed, and consequential navigable."
+          ]
+        },
+        {
+          "labelRefs": [
+            "phr_34c41e7cce87"
+          ],
+          "label": [
+            "institutional design"
+          ],
+          "verbRefs": [
+            "phr_80754af91bfb"
+          ],
+          "verb": [
+            "Build"
+          ],
+          "lineRefs": [
+            "phr_02d3cd35d2b5"
+          ],
+          "line": [
+            "Keep authority, consequence, contestability, maintenance, and repair connected."
+          ]
+        }
+      ],
+      "cta": {
+        "labelRefs": [
+          "phr_014da902f857"
+        ],
+        "label": [
+          "Explore the methods"
+        ],
+        "href": "/methods"
+      },
+      "provenanceType": "mixed_corpus_and_working_public_synthesis"
+    },
+    "publicMethodStack": {
+      "titleRefs": [
+        "phr_f6283f7a0cfe"
+      ],
+      "title": [
+        "The Boundary First Method Stack"
+      ],
+      "headlineRefs": [
+        "phr_3d599ffc128a"
+      ],
+      "headline": [
+        "Learn carefully. Map what matters. Act where responsibility can still reach."
+      ],
+      "purposeRefs": [
+        "phr_ac9bf8d62a22"
+      ],
+      "purpose": [
+        "Boundary First Labs uses several related layers because one word should not be asked to carry the institution, the theory, the research method, the representational tools, and the applied practice at once. The layers are meant to be traversable by ordinary readers without requiring formal theory first."
+      ],
+      "publicCompression": [
+        {
+          "id": "boundary-first",
+          "labelRefs": [
+            "phr_320542a7330c"
+          ],
+          "label": [
+            "Boundary First"
+          ],
+          "roleRefs": [
+            "phr_9c6b4288ee16"
+          ],
+          "role": [
+            "Doctrine / operational method"
+          ],
+          "questionRefs": [
+            "phr_51a10c498bb9"
+          ],
+          "question": [
+            "What must remain visible and protected before we act?"
+          ],
+          "oneLineRefs": [
+            "phr_3bb4ab7d6e31"
+          ],
+          "oneLine": [
+            "Declare the boundary. Preserve the invariant. Expose the defect. Restore the path to repair."
+          ],
+          "publicVerbRefs": [
+            "phr_a4880e8741d2"
+          ],
+          "publicVerb": [
+            "Govern"
+          ],
+          "status": "published public method derived from the Boundary Theory architecture"
+        },
+        {
+          "id": "agentic-scientific-method",
+          "labelRefs": [
+            "phr_be985d2fdf96"
+          ],
+          "label": [
+            "Agentic Scientific Method"
+          ],
+          "roleRefs": [
+            "phr_82667714fa5f"
+          ],
+          "role": [
+            "Inquiry / epistemic method"
+          ],
+          "questionRefs": [
+            "phr_77e666c1a337"
+          ],
+          "question": [
+            "How do we learn without confusing our representation for reality?"
+          ],
+          "oneLineRefs": [
+            "phr_b1113ace27c0"
+          ],
+          "oneLine": [
+            "Bound. Load. Trace. Test. Repair. Close—provisionally."
+          ],
+          "publicVerbRefs": [
+            "phr_7dca5d4cddf5"
+          ],
+          "publicVerb": [
+            "Learn"
+          ],
+          "status": "working research and public-method program"
+        },
+        {
+          "id": "atlassification",
+          "labelRefs": [
+            "phr_e0a9ccc9ac2b"
+          ],
+          "label": [
+            "Atlassification"
+          ],
+          "roleRefs": [
+            "phr_6b567062a899"
+          ],
+          "role": [
+            "Representational operation"
+          ],
+          "questionRefs": [
+            "phr_20e3800a4ff9"
+          ],
+          "question": [
+            "How do many tested distinctions become something a person can actually navigate?"
+          ],
+          "oneLineRefs": [
+            "phr_d458cc9092b9"
+          ],
+          "oneLine": [
+            "Turn scattered observations, relations, boundaries, and open questions into a coherent atlas without pretending the atlas is the territory."
+          ],
+          "publicVerbRefs": [
+            "phr_37745ed7a0f0"
+          ],
+          "publicVerb": [
+            "Map"
+          ],
+          "status": "working BFL term; conversation-derived and still under formalization"
+        },
+        {
+          "id": "institutional-design",
+          "labelRefs": [
+            "phr_8c5082f5bc8a"
+          ],
+          "label": [
+            "Boundary-First Institutional Design"
+          ],
+          "roleRefs": [
+            "phr_2b5f3a5d98db"
+          ],
+          "role": [
+            "Consequence-bearing application"
+          ],
+          "questionRefs": [
+            "phr_900993f5cc53"
+          ],
+          "question": [
+            "How does a representation remain answerable once an institution acts through it?"
+          ],
+          "oneLineRefs": [
+            "phr_14f144fc49d8"
+          ],
+          "oneLine": [
+            "Keep authority, evidence, affected parties, contestability, maintenance, responsibility, and repair in the same living system."
+          ],
+          "publicVerbRefs": [
+            "phr_80754af91bfb"
+          ],
+          "publicVerb": [
+            "Build"
+          ],
+          "status": "institutional doctrine / applied design program"
+        }
+      ],
+      "cycle": [
+        "BOUND — decide what is being studied or governed, and what crosses the boundary.",
+        "DISTINGUISH — identify differences that change consequence.",
+        "REPRESENT — construct a usable schema rather than pretending to copy the whole world.",
+        "ATLAS — organize states, relations, pathways, scales, provenance, and unknowns into a navigable representation.",
+        "LOAD — expose the representation to pressure, variation, alternatives, use, criticism, or intervention.",
+        "TRACE — preserve what actually happened.",
+        "TEST — compare expectation, representation, observation, consequence, and competing explanations.",
+        "EXPOSE DEFECT — locate where reality does not fit the current representation.",
+        "REPAIR — revise the model, boundary, process, institution, or responsibility path.",
+        "CLOSE PROVISIONALLY — stabilize only what has survived the declared testing regime.",
+        "PROMOTE — allow stable structure to become a reusable primitive, rule, tool, or institutional capability.",
+        "RECURSE — use the repaired result as the starting boundary for the next inquiry."
+      ],
+      "relationship": {
+        "plainLanguageRefs": [
+          "phr_523839464d49"
+        ],
+        "plainLanguage": [
+          "Boundary First protects the inquiry from losing consequential distinctions. Agentic Scientific Method gives the inquiry a disciplined way to encounter reality. Atlassification gives the resulting knowledge navigable form. Institutional design governs what happens when people begin acting through that form."
+        ],
+        "compact": "Boundary First governs the boundary. Agentic Scientific Method learns inside it. Atlassification makes the learned structure navigable. Institutional design keeps action answerable after the map becomes operational."
+      }
+    },
+    "boundaryFirstDoctrine": {
+      "titleRefs": [
+        "phr_14818b87f407"
+      ],
+      "title": [
+        "Boundary First Doctrine"
+      ],
+      "headlineRefs": [
+        "phr_bb0660546509"
+      ],
+      "headline": [
+        "Start with the boundary because every consequential action already has one."
+      ],
+      "publicDefinitionRefs": [
+        "phr_7f2e45102139"
+      ],
+      "publicDefinition": [
+        "Boundary First is a method for making the limits, obligations, preserved conditions, failure modes, and repair paths of a consequential system explicit before treating its internal operation as trustworthy."
+      ],
+      "canonicalMethod": [
+        "Declare the boundary.",
+        "Preserve the invariant.",
+        "Expose the defect.",
+        "Restore the path to repair."
+      ],
+      "expandedPublicMethod": [
+        {
+          "stepRefs": [
+            "phr_a0910bc7d1ab"
+          ],
+          "step": [
+            "Declare"
+          ],
+          "questionRefs": [
+            "phr_e18e7ff67aa8"
+          ],
+          "question": [
+            "What system, decision, relationship, or inquiry are we actually talking about?"
+          ],
+          "includeRefs": [
+            "phr_231e65684158",
+            "phr_2b7a4307f3e3",
+            "phr_9694127461bb",
+            "phr_66f5c871938e",
+            "phr_e28589ce60ab",
+            "phr_495117c3604f",
+            "phr_ca0d7c20665e",
+            "phr_511e8c22ee29",
+            "phr_8ff20063a4b2"
+          ],
+          "include": [
+            "purpose",
+            "inside / outside",
+            "affected people",
+            "authority",
+            "inputs and outputs",
+            "dependencies",
+            "time horizon",
+            "what may cross the boundary",
+            "what is currently excluded"
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_e900984dc91d"
+          ],
+          "step": [
+            "Preserve"
+          ],
+          "questionRefs": [
+            "phr_df0eea40ace5"
+          ],
+          "question": [
+            "What must remain true while the system changes?"
+          ],
+          "includeRefs": [
+            "phr_a06d45580f00",
+            "phr_1407cb2332c3",
+            "phr_1db089a9f84e",
+            "phr_2a9079f50339",
+            "phr_cece62585698",
+            "phr_1d074decbcdb",
+            "phr_928c6786e637",
+            "phr_c3813963f07f",
+            "phr_dc5309e3f46d"
+          ],
+          "include": [
+            "safety conditions",
+            "rights",
+            "identity",
+            "meaning",
+            "critical relationships",
+            "continuity",
+            "traceability",
+            "repair capacity",
+            "domain-specific invariants"
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_0d23a9d9da66"
+          ],
+          "step": [
+            "Expose"
+          ],
+          "questionRefs": [
+            "phr_713b66ade513"
+          ],
+          "question": [
+            "Where does the representation fail to carry what reality still requires?"
+          ],
+          "includeRefs": [
+            "phr_be51ea0d2df9",
+            "phr_fb82bd7722f8",
+            "phr_2d29db796dbc",
+            "phr_5070937ec753",
+            "phr_954cbe3268b8",
+            "phr_f110c0197bf9",
+            "phr_4e748737e8d6",
+            "phr_b7a8a93794fc",
+            "phr_2a3997559116",
+            "phr_f1ca890e9746",
+            "phr_f1dee73a67cc"
+          ],
+          "include": [
+            "exceptions",
+            "workarounds",
+            "unrepresented people",
+            "externalized burden",
+            "contradictions",
+            "broken handoffs",
+            "missing states",
+            "invisible maintenance",
+            "uncertainty",
+            "appeals and complaints",
+            "failed predictions"
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_e8a7d6f2bc41"
+          ],
+          "step": [
+            "Repair"
+          ],
+          "questionRefs": [
+            "phr_513ff584ff49"
+          ],
+          "question": [
+            "Can the defect reach someone with the capacity and obligation to change the outcome?"
+          ],
+          "includeRefs": [
+            "phr_579233b2c479",
+            "phr_66f5c871938e",
+            "phr_100ec4462dec",
+            "phr_0189424a5a60",
+            "phr_a442b7fe6d91",
+            "phr_ff3a6f3b41f1",
+            "phr_c91200878131",
+            "phr_5dd0295ae846",
+            "phr_b1cb43723cec",
+            "phr_144134b590e3",
+            "phr_4b199a695e10"
+          ],
+          "include": [
+            "owner",
+            "authority",
+            "evidence",
+            "resources",
+            "target state",
+            "rollback",
+            "appeal",
+            "restitution or restoration where relevant",
+            "model revision",
+            "institutional memory",
+            "verification by the affected side"
+          ]
+        }
+      ],
+      "publicQuestions": [
+        "What do we have?",
+        "Where is it?",
+        "Who knows about it?",
+        "When is it there?",
+        "Why does it matter?",
+        "Only then: how should we implement or intervene?"
+      ],
+      "doctrineHierarchy": [
+        {
+          "order": 1,
+          "nameRefs": [
+            "phr_1ba4b8b645f9"
+          ],
+          "name": [
+            "Boundary First Labs"
+          ],
+          "kind": "institution",
+          "roleRefs": [
+            "phr_2e184c723f2f"
+          ],
+          "role": [
+            "Stewards the research, methods, public record, criticism, collaborations, and consequence-bearing applications."
+          ]
+        },
+        {
+          "order": 2,
+          "nameRefs": [
+            "phr_5e68ddd7a89b"
+          ],
+          "name": [
+            "Boundary Theory"
+          ],
+          "kind": "theoretical architecture",
+          "roleRefs": [
+            "phr_98add2d2c197"
+          ],
+          "role": [
+            "Studies consequential distinctions, boundaries, transformations, invariants, closure, defects, emergence, agency, consequence, and repair."
+          ]
+        },
+        {
+          "order": 3,
+          "nameRefs": [
+            "phr_3be0ef8e79d7"
+          ],
+          "name": [
+            "Distinction Space"
+          ],
+          "kind": "central formal object",
+          "roleRefs": [
+            "phr_4ae805bc69b2"
+          ],
+          "role": [
+            "Represents candidate states or possibilities together with what can be distinguished, which variations are available and admissible, what must remain invariant, and what closes the space."
+          ]
+        },
+        {
+          "order": 4,
+          "nameRefs": [
+            "phr_d4fd228948d7"
+          ],
+          "name": [
+            "Distinction"
+          ],
+          "kind": "facet",
+          "roleRefs": [
+            "phr_b523f4873efc"
+          ],
+          "role": [
+            "Asks what can become distinguishable, representable, stable, and legible."
+          ]
+        },
+        {
+          "order": 5,
+          "nameRefs": [
+            "phr_1e716bed5020"
+          ],
+          "name": [
+            "Admissibility"
+          ],
+          "kind": "facet",
+          "roleRefs": [
+            "phr_a767963b096c"
+          ],
+          "role": [
+            "Asks which transformations, compositions, compressions, disclosures, delegations, and acts of forgetting remain valid."
+          ]
+        },
+        {
+          "order": 6,
+          "nameRefs": [
+            "phr_125cbc5ceeae"
+          ],
+          "name": [
+            "Emergence"
+          ],
+          "kind": "facet",
+          "roleRefs": [
+            "phr_52652e24bd41"
+          ],
+          "role": [
+            "Asks when stabilized structure may become a reusable primitive that changes subsequent possibility."
+          ]
+        },
+        {
+          "order": 7,
+          "nameRefs": [
+            "phr_4fcbac73ea13"
+          ],
+          "name": [
+            "Representational Mechanics"
+          ],
+          "kind": "discipline",
+          "roleRefs": [
+            "phr_86023fd5ee35"
+          ],
+          "role": [
+            "Formalizes and tests how distinctions, representations, pressures, boundaries, transformations, invariants, closures, defects, agency relations, consequences, and repair processes behave."
+          ]
+        },
+        {
+          "order": 8,
+          "nameRefs": [
+            "phr_81178c550ec7"
+          ],
+          "name": [
+            "Formal Grammars"
+          ],
+          "kind": "explicit apparatus",
+          "roleRefs": [
+            "phr_23e11ff515f8"
+          ],
+          "role": [
+            "Specify primitives, types, valid composition, transformation rules, admissibility judgments, operational semantics, closure, invariants, defect states, repair, and promotion."
+          ]
+        },
+        {
+          "order": 9,
+          "nameRefs": [
+            "phr_320542a7330c"
+          ],
+          "name": [
+            "Boundary First"
+          ],
+          "kind": "operational method",
+          "roleRefs": [
+            "phr_8dca90abdf64"
+          ],
+          "role": [
+            "Turns the architecture into a portable sequence for inquiry, diagnosis, governance, and design."
+          ]
+        },
+        {
+          "order": 10,
+          "nameRefs": [
+            "phr_b576f9b329a4"
+          ],
+          "name": [
+            "Boundary-First Engineering"
+          ],
+          "kind": "applied practice",
+          "roleRefs": [
+            "phr_cbcd0716cf05"
+          ],
+          "role": [
+            "Uses the method to construct software, processes, tools, institutions, and other consequence-bearing systems."
+          ]
+        },
+        {
+          "order": 11,
+          "nameRefs": [
+            "phr_be985d2fdf96"
+          ],
+          "name": [
+            "Agentic Scientific Method"
+          ],
+          "kind": "research / inquiry practice",
+          "roleRefs": [
+            "phr_784067204f02"
+          ],
+          "role": [
+            "Uses boundary, pressure, trace, comparison, defect, repair, and provisional closure to regulate scientific warrant."
+          ]
+        },
+        {
+          "order": 12,
+          "nameRefs": [
+            "phr_e0a9ccc9ac2b"
+          ],
+          "name": [
+            "Atlassification"
+          ],
+          "kind": "working representational operation",
+          "roleRefs": [
+            "phr_7185c620b5aa"
+          ],
+          "role": [
+            "Organizes a sufficiently specified domain into a navigable atlas of objects, relations, states, boundaries, transformations, provenance, and open defects."
+          ]
+        }
+      ],
+      "firewallsRefs": [
+        "phr_312515fbad14",
+        "phr_dada264de978",
+        "phr_c34d07c63ccf",
+        "phr_705b25cfdd4a",
+        "phr_137fa8641ff4",
+        "phr_b8be92b1449b",
+        "phr_bacf71a681b5",
+        "phr_099395216915"
+      ],
+      "firewalls": [
+        "The institution is not the theory.",
+        "The theory is not a proof that all domains are identical.",
+        "A shared grammar is not a license to erase domain-specific validation.",
+        "A correspondence is not an equivalence.",
+        "A useful representation is not the territory.",
+        "A map becoming navigable does not make it complete.",
+        "A stable public method does not automatically establish a formal theorem.",
+        "A result in one domain does not automatically validate another."
+      ],
+      "publicPromiseRefs": [
+        "phr_757b4fb3f7cc"
+      ],
+      "publicPromise": [
+        "The point of the doctrine is not to make ordinary problems sound more abstract. It is to help people find the consequential distinction sooner, preserve what matters, see where the system is failing, and restore a path to effective action."
+      ]
+    },
+    "methodsPage": {
+      "slug": "/methods",
+      "headlineRefs": [
+        "phr_77a2b1e80b2f"
+      ],
+      "headline": [
+        "Boundary First is how we keep inquiry and action answerable to what they affect."
+      ],
+      "dekRefs": [
+        "phr_f784b667e7fe"
+      ],
+      "dek": [
+        "The public method is simple enough to use without the formal theory. The deeper research program exists to make the distinctions more exact, test where they fail, and build better instruments from them."
+      ],
+      "sections": [
+        {
+          "id": "doctrine",
+          "labelRefs": [
+            "phr_320542a7330c"
+          ],
+          "label": [
+            "Boundary First"
+          ],
+          "headlineRefs": [
+            "phr_60cc8a7c8845"
+          ],
+          "headline": [
+            "Find the boundary before optimizing the inside."
+          ],
+          "bodyRef": "boundaryFirstDoctrine"
+        },
+        {
+          "id": "scientific-method",
+          "labelRefs": [
+            "phr_be985d2fdf96"
+          ],
+          "label": [
+            "Agentic Scientific Method"
+          ],
+          "headlineRefs": [
+            "phr_3d91e7bd4521"
+          ],
+          "headline": [
+            "Make the representation answer to reality."
+          ],
+          "bodyRef": "agenticScientificMethod"
+        },
+        {
+          "id": "atlassification",
+          "labelRefs": [
+            "phr_e0a9ccc9ac2b"
+          ],
+          "label": [
+            "Atlassification"
+          ],
+          "headlineRefs": [
+            "phr_9e8893a2478a"
+          ],
+          "headline": [
+            "Make what you learned navigable without pretending it is complete."
+          ],
+          "bodyRef": "atlassification"
+        },
+        {
+          "id": "admissible-forgetting",
+          "labelRefs": [
+            "phr_e8ae5d8488b1"
+          ],
+          "label": [
+            "Admissible Forgetting"
+          ],
+          "headlineRefs": [
+            "phr_8dbc03895d02"
+          ],
+          "headline": [
+            "Every useful representation leaves things out. Govern what may be forgotten."
+          ],
+          "bodyRef": "publicConcepts#admissible-forgetting"
+        },
+        {
+          "id": "institutional-design",
+          "labelRefs": [
+            "phr_34c41e7cce87"
+          ],
+          "label": [
+            "institutional design"
+          ],
+          "headlineRefs": [
+            "phr_6aa74c2de891"
+          ],
+          "headline": [
+            "Keep the map, the power, the affected people, and the repair path connected."
+          ],
+          "bodyRef": "publicConcepts#institutional-design"
+        }
+      ],
+      "publicUseCasesRefs": [
+        "phr_ac09c07e6325",
+        "phr_3b677687c08b",
+        "phr_97fb12baa588",
+        "phr_6bce4e9d47b2",
+        "phr_f0c7748f7ecd",
+        "phr_06287c7c996a",
+        "phr_1db9da47e9b9",
+        "phr_c0cf6ec6cc96",
+        "phr_90c0e74e09ab",
+        "phr_2482760a016e",
+        "phr_e08195c2946b"
+      ],
+      "publicUseCases": [
+        "understanding a confusing process",
+        "researching an open question",
+        "designing software",
+        "reviewing a policy",
+        "auditing an AI-enabled decision",
+        "making a public metric more honest",
+        "mapping responsibility",
+        "diagnosing hidden work",
+        "building a repair process",
+        "organizing a complex body of knowledge",
+        "deciding what a model may safely omit"
+      ],
+      "closing": {
+        "headlineRefs": [
+          "phr_7e58a9c4c281"
+        ],
+        "headline": [
+          "The point is not to force every problem into BFL language."
+        ],
+        "bodyRefs": [
+          "phr_f4466b2ae719"
+        ],
+        "body": [
+          "Use the language only where it clarifies the real system. Where an established domain already has the better term, use the established term. Where the method exposes a missing distinction, preserve it long enough to test whether it matters."
+        ]
+      }
+    },
+    "glossary": [
+      {
+        "termRefs": [
+          "phr_2db8c22f7547"
+        ],
+        "term": [
+          "Boundary"
+        ],
+        "definitionRefs": [
+          "phr_3d9c99b16dba"
+        ],
+        "definition": [
+          "A consequential separation: where membership, authority, admissibility, obligation, visibility, or consequence changes."
+        ],
+        "status": "core public term"
+      },
+      {
+        "termRefs": [
+          "phr_1738bf069670"
+        ],
+        "term": [
+          "Invariant"
+        ],
+        "definitionRefs": [
+          "phr_4decb99815bf"
+        ],
+        "definition": [
+          "Something the system intends or is required to preserve while other things change."
+        ],
+        "status": "core public term"
+      },
+      {
+        "termRefs": [
+          "phr_1ca0739975cf"
+        ],
+        "term": [
+          "Defect"
+        ],
+        "definitionRefs": [
+          "phr_f08ad439c8ad"
+        ],
+        "definition": [
+          "Residual non-closure: evidence that the current representation or process is missing something required for the intended result."
+        ],
+        "status": "core public term"
+      },
+      {
+        "termRefs": [
+          "phr_e8a7d6f2bc41"
+        ],
+        "term": [
+          "Repair"
+        ],
+        "definitionRefs": [
+          "phr_ee4fed3e787b"
+        ],
+        "definition": [
+          "A bounded action that restores a viable relationship, condition, responsibility path, or representation after defect."
+        ],
+        "status": "core public term"
+      },
+      {
+        "termRefs": [
+          "phr_d091cefc7695"
+        ],
+        "term": [
+          "Closure"
+        ],
+        "definitionRefs": [
+          "phr_502343926f34"
+        ],
+        "definition": [
+          "A condition stable enough to support the next intended action within declared boundaries and conditions."
+        ],
+        "status": "core public term"
+      },
+      {
+        "termRefs": [
+          "phr_1e716bed5020"
+        ],
+        "term": [
+          "Admissibility"
+        ],
+        "definitionRefs": [
+          "phr_2ea5c78a5520"
+        ],
+        "definition": [
+          "The question of whether a change, action, compression, disclosure, delegation, or representation remains valid under the conditions that matter."
+        ],
+        "status": "core theory term with plain-language public definition"
+      },
+      {
+        "termRefs": [
+          "phr_e8ae5d8488b1"
+        ],
+        "term": [
+          "Admissible Forgetting"
+        ],
+        "definitionRefs": [
+          "phr_abbe7473be5c"
+        ],
+        "definition": [
+          "Leaving out detail without discarding a distinction that a later consequence-bearing action still depends on."
+        ],
+        "status": "public-ready doctrine"
+      },
+      {
+        "termRefs": [
+          "phr_be985d2fdf96"
+        ],
+        "term": [
+          "Agentic Scientific Method"
+        ],
+        "definitionRefs": [
+          "phr_3945eb92d892"
+        ],
+        "definition": [
+          "A recursive inquiry method that makes the choices of boundary, representation, test, comparison, revision, and closure explicit and answerable to evidence."
+        ],
+        "status": "working public/research method"
+      },
+      {
+        "termRefs": [
+          "phr_e0a9ccc9ac2b"
+        ],
+        "term": [
+          "Atlassification"
+        ],
+        "definitionRefs": [
+          "phr_9b46aae82b2c"
+        ],
+        "definition": [
+          "The working BFL term for turning structured knowledge into a coherent, navigable atlas while preserving provenance, uncertainty, boundary, scale, and revision paths."
+        ],
+        "status": "working BFL term; not yet formalized as settled doctrine"
+      },
+      {
+        "termRefs": [
+          "phr_faafe4ecefb4"
+        ],
+        "term": [
+          "Consequence Literacy"
+        ],
+        "definitionRefs": [
+          "phr_96dbbb5c6861"
+        ],
+        "definition": [
+          "The capacity to represent how actions become outcomes for people, systems, and future conditions—including responsibility, maintenance, recourse, and repair."
+        ],
+        "status": "public institutional term"
+      }
+    ],
+    "impactRuleRefs": [
+      "phr_3b3c0ea2181b"
+    ],
+    "impactRule": [
+      "Every social mission must connect human promise -> structural defect -> Boundary First operation -> public artifact or intervention -> evidence/review gate."
+    ]
+  }
+}

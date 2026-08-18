@@ -1,0 +1,22 @@
+claim_id: CLAIM-YYYYMMDD-NNN
+title: ""
+claim_type: observation | inference | hypothesis | requirement | design | implementation | prediction | interpretation
+source:
+  kind: primary | secondary | model_generated | conversation | measurement | code | policy
+  reference: ""
+  anchor: ""
+claim_text: ""
+operating_domain: ""
+assumptions: []
+protected_distinctions: []
+protected_invariants: []
+affected_parties: []
+expected_consequence: ""
+disconfirming_consequence: ""
+observation_channel: ""
+independence_level: weak | partial | strong
+claim_ceiling: ""
+permitted_public_wording: ""
+known_counterevidence: []
+next_test: ""
+status: draft | bounded | under_test | supported | contradicted | superseded | accepted_open

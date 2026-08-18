@@ -1,0 +1,25 @@
+{
+  "slug": "representational-relativity",
+  "title": "Representational Relativity",
+  "status": "draft",
+  "visibility": "private",
+  "pageType": "recovered-theory-landing",
+  "hero": {
+    "eyebrow": "REPRESENTATIONAL RELATIVITY",
+    "headline": "The representation changes. The invariant is what survives lawful transport.",
+    "support": "A recovered public-facing frame for the principle that no representation is the thing itself: each carrier exposes, compresses, distorts, or preserves structure according to its boundary and context."
+  },
+  "sections": [
+    {"heading":"Representations are interfaces","body":"A representation is not a passive copy. It mediates what can be seen, compared, transported, acted upon, and forgotten."},
+    {"heading":"Carriers can change","body":"Text, diagrams, software objects, measurements, legal categories, models, performances, and human descriptions may carry the same object differently."},
+    {"heading":"Validity is transport","body":"The important question is which distinctions and invariants survive admissible movement between representations."},
+    {"heading":"Defects appear at the crossing","body":"A representational defect occurs when a distinction that consequence still depends on is lost, invented, collapsed, or moved without warrant."},
+    {"heading":"Current formal home","body":"The underlying principle now belongs inside Representational Mechanics, with closure gauges and admissible distinction providing more precise machinery."}
+  ],
+  "cta":{"label":"Explore Representational Mechanics"},
+  "notes":[
+    "Recovered from the earlier eight-page landing-page set.",
+    "Legacy public umbrella. Current canonical discipline is Representational Mechanics; Representational Relativity remains a useful public principle, not the top-level discipline.",
+    "Keep private until terminology and route ownership are adjudicated."
+  ]
+}

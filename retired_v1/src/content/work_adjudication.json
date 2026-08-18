@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "boundary-first.work-adjudication.v1",
+  "status": "provisional-editorial-adjudication; canonical promotion remains gated",
+  "source": "backlog/3_bfl_boundary_first_ux/bfl_work_portfolio_migration_seed_v0_1.json",
+  "records": [
+    { "sourceId": "projectr", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a bounded platform offering; stewardship and availability remain unrecorded." },
+    { "sourceId": "youtube-knowledge-explorer", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a bounded public utility; stewardship and availability remain unrecorded." },
+    { "sourceId": "cross-platform-bookshelf", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a bounded public utility; stewardship and availability remain unrecorded." },
+    { "sourceId": "constructive-media-protocol", "decision": "split-review-required", "entityType": "protocol", "rationale": "Protocol, infrastructure, and hosted-product possibilities must be separated before product promotion." },
+    { "sourceId": "barter-capacity-exchange", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a platform concept; operating evidence and stewardship remain unrecorded." },
+    { "sourceId": "barter-ledger", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes platform infrastructure; operating evidence and stewardship remain unrecorded." },
+    { "sourceId": "need-capacity-map", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a bounded public utility; candidate maturity remains visible." },
+    { "sourceId": "child-safe-video-calling", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a bounded public utility; safety evidence and stewardship remain gated." },
+    { "sourceId": "family-presence-mode", "decision": "provisional-type-accepted", "entityType": "product-family", "rationale": "The source groups related interaction modes; concrete maintained products are not yet recorded." },
+    { "sourceId": "single-purpose-phone-modes", "decision": "family-boundary-review", "entityType": "product-family", "rationale": "The framework may contain multiple concrete products and must retain that distinction." },
+    { "sourceId": "corpus-forge", "decision": "split-review-required", "entityType": "program", "rationale": "Method, operating program, workflow, and product language coexist and require separate records." },
+    { "sourceId": "corpus-forge-workbench", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The workbench is distinguishable from the Corpus Forge method and program." },
+    { "sourceId": "bfe-workbench", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a professional tool; maintained availability remains unrecorded." },
+    { "sourceId": "agency-audit-platform", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a professional tool at pilot-intake state; pilot evidence remains gated." },
+    { "sourceId": "claim-evidence-ledger", "decision": "provisional-type-accepted", "entityType": "product", "rationale": "The source describes a professional tool under active development; stewardship remains unrecorded." },
+    { "sourceId": "secure-multistream-video-storage", "decision": "inventory-required", "entityType": "product", "rationale": "The technical asset must be inventoried before its current product standing can be verified." },
+    { "sourceId": "cryptonium", "decision": "inventory-required", "entityType": "product", "rationale": "The technical asset must be inventoried before its current product standing can be verified." },
+    { "sourceId": "macro-deck-dashboard", "decision": "inventory-required", "entityType": "product", "rationale": "The technical asset must be inventoried before its current product standing can be verified." },
+    { "sourceId": "terminal-workspace-manager", "decision": "inventory-required", "entityType": "product", "rationale": "The technical asset must be inventoried before its current product standing can be verified." },
+    { "sourceId": "boundary-first-chess-software", "decision": "family-boundary-review", "entityType": "product-family", "rationale": "Multiple possible software offerings remain grouped; concrete products require separate records." },
+    { "sourceId": "weather-at-home", "decision": "split-review-required", "entityType": "program", "rationale": "Research-lane and product language coexist and require separate program, testbed, and product records." },
+    { "sourceId": "home-boundary-maintenance-os", "decision": "candidate-scope-review", "entityType": "product", "rationale": "The source supports a product concept, but candidate standing, stewardship, and availability remain unresolved." },
+    { "sourceId": "infrastructure-maintenance-ledger", "decision": "candidate-scope-review", "entityType": "product", "rationale": "The source supports an institutional-tool concept, but candidate standing and operating evidence remain unresolved." },
+    { "sourceId": "boundary-first-soccer", "decision": "provisional-type-accepted", "entityType": "project", "rationale": "The current source supports a research and public-on-ramp project, not a maintained product." }
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "filename": "00_concept_gallery.png",
+    "bytes": 10541799,
+    "sha256": "912b1121472d067c06da09f77e69f255859a7d99e679e2b33598190aff913430",
+    "description": "Contact sheet of all generated design artifacts."
+  },
+  {
+    "filename": "01_public_front_door_concept.png",
+    "bytes": 2030508,
+    "sha256": "3cc0429d34aaac071feb5bc19dda0395e725db6e9f242d0804d36d53bc195f8c",
+    "description": "Three-panel public entrance, institutional lab, and top-level Atlas architecture concept."
+  },
+  {
+    "filename": "02_corpus_forge_living_workbench.png",
+    "bytes": 2029658,
+    "sha256": "fd546c1022b47030af82e32afe21464e8d41595b3af1f4b4abc0715688f1ec4a",
+    "description": "Corpus Forge research-production dashboard with pipeline, artifacts, provenance, ledgers, critic, and human gate."
+  },
+  {
+    "filename": "03_atlas_redesign.png",
+    "bytes": 2078779,
+    "sha256": "d06f7d38e615abccd6f8f9165225377c5e2a3c35e82f3331880feefa7af9aa57",
+    "description": "Cluster-first guided Atlas with persistent inspector and deeper typed-edge view."
+  },
+  {
+    "filename": "04_binding_protocol_studio.png",
+    "bytes": 2141470,
+    "sha256": "084c5f173535be373cb657c483cbdd0e1c28c6b853411aaccadd2c43ab5a3d50",
+    "description": "Constructive UI studio for schema-aware reusable binding workflows and generated interfaces."
+  },
+  {
+    "filename": "05_spatial_environment_isometric.png",
+    "bytes": 2626958,
+    "sha256": "8ad59ca4bdd67789fc85dae537b8d48fb5f79ee9652a49c6ea9b9d64f2145367",
+    "description": "Isometric cutaway of the inhabitable Corpus Forge research environment."
+  },
+  {
+    "filename": "06_spatial_environment_floorplan.png",
+    "bytes": 2667687,
+    "sha256": "173202c896e89dd43c28db8adb811a44c3146a89f0e6d11e53b1b2182733334c",
+    "description": "Top-down architectural systems plan showing rooms, flows, zones, and promotion gates."
+  },
+  {
+    "filename": "07_spatial_pointer_model.png",
+    "bytes": 2314734,
+    "sha256": "27954289f4c933be019ece7bd4af2f42fc144341867abe26477e38a4860532bc",
+    "description": "Spatial pointer interaction sheet showing volumetric selection and Orient/Probe/Bind/Act states."
+  }
+]

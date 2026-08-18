@@ -1,0 +1,429 @@
+{
+  "id": "bfl-d3-visualization-registry-v0-1",
+  "principle": "Use the same knowledge graph and change projection based on relation type.",
+  "restriction": "Do not allow automatic layout to determine conceptual hierarchy. Use curated semantic coordinates for canonical atlas views.",
+  "views": [
+    {
+      "stepId": "nested-world",
+      "title": "There Is No More Outside",
+      "mode": "nested-interiors",
+      "primary": {
+        "library": "d3-hierarchy",
+        "layout": "partition",
+        "package": "d3@7",
+        "implementation": "hierarchy + partition with rounded nested rectangles"
+      },
+      "secondary": {
+        "library": "d3-shape",
+        "layout": "curved transfer path",
+        "implementation": "linkHorizontal or custom Bezier overlay"
+      },
+      "dataShape": "rooted containment hierarchy plus typed cross-boundary transfer edges",
+      "why": "Nested rectangles make the no-floor claim literal: each apparent outside is visibly inside a larger enclosure. A transfer path shows that consequence crosses rather than vanishes.",
+      "avoid": [
+        "force-directed graph as the first view",
+        "geographic map unless the example is explicitly spatial",
+        "unlabeled decorative bubbles"
+      ],
+      "mobileFallback": "Vertical nested cards with a stepwise burden trace.",
+      "reducedMotionFallback": "Static before/after states with the receiving box highlighted.",
+      "accessibility": {
+        "textTemplate": "The burden leaves {source} and enters {receiver}; both are contained within {largerSystem}.",
+        "keyboardOrder": [
+          "source",
+          "transfer",
+          "receiver",
+          "larger system"
+        ]
+      }
+    },
+    {
+      "stepId": "externality-transfer",
+      "title": "Externality Is a Boundary Choice",
+      "mode": "benefit-burden-flow",
+      "primary": {
+        "library": "d3-sankey",
+        "layout": "sankey",
+        "package": "d3-sankey@0.12.3",
+        "implementation": "parallel represented and unrepresented flows"
+      },
+      "secondary": {
+        "library": "d3-scale",
+        "layout": "boundary toggle",
+        "implementation": "filter nodes by accounting inclusion state"
+      },
+      "dataShape": "directed weighted flows from activity to benefits and burdens, each tagged represented/unrepresented",
+      "why": "A Sankey diagram shows that reducing a represented cost does not erase flow; it redirects burden into another node.",
+      "avoid": [
+        "single-number score",
+        "pie chart",
+        "monetizing every consequence by default"
+      ],
+      "mobileFallback": "Ordered source \u2192 decision boundary \u2192 receiver flow list with quantities or qualitative severity.",
+      "reducedMotionFallback": "Side-by-side inclusive and exclusive accounting states.",
+      "accessibility": {
+        "textTemplate": "{activity} produces {benefit} for {beneficiary} and transfers {burden} to {receiver}; the current accounting {includesOrExcludes} that burden.",
+        "keyboardOrder": [
+          "activity",
+          "benefit flow",
+          "burden flow",
+          "receiver"
+        ]
+      }
+    },
+    {
+      "stepId": "business-agent",
+      "title": "Business Is Already Artificial Agency",
+      "mode": "agent-system-loop",
+      "primary": {
+        "library": "d3-force",
+        "layout": "constrained force simulation",
+        "package": "d3@7",
+        "implementation": "fixed functional sectors around a central institutional identity"
+      },
+      "secondary": {
+        "library": "d3-shape",
+        "layout": "directed loop",
+        "implementation": "typed arrows for sense, decide, act, receive feedback"
+      },
+      "dataShape": "typed heterogeneous graph with functional roles and directed agency edges",
+      "why": "A constrained network reveals that the business is neither one person nor an inert container; it is a persistent loop composed of human, legal, financial, and computational parts.",
+      "avoid": [
+        "anthropomorphic face or brain metaphor as the primary view",
+        "unconstrained force layout that scrambles functional roles",
+        "equating business and AI in every property"
+      ],
+      "mobileFallback": "Six-stage agent loop with expandable component lists.",
+      "reducedMotionFallback": "Fixed radial system diagram.",
+      "accessibility": {
+        "textTemplate": "The organization senses through {sensors}, remembers through {memory}, decides through {policy}, acts through {actuators}, and persists through {persistenceMechanisms}.",
+        "keyboardOrder": [
+          "identity",
+          "sensing",
+          "memory",
+          "decision",
+          "action",
+          "feedback",
+          "persistence"
+        ]
+      }
+    },
+    {
+      "stepId": "ai-acceleration",
+      "title": "AI Accelerates Institutional Agency",
+      "mode": "same-graph-different-rate",
+      "primary": {
+        "library": "d3-force",
+        "layout": "reuse business-agent coordinates",
+        "package": "d3@7",
+        "implementation": "stable node positions with edge throughput and latency controls"
+      },
+      "secondary": {
+        "library": "d3-timer",
+        "layout": "particle flow",
+        "implementation": "optional animated tokens along decision edges"
+      },
+      "dataShape": "agent graph plus latency, throughput, review gate, and interruptibility attributes",
+      "why": "Keeping the same graph while changing rate makes the thesis legible: the category of agent remains, but the cadence and bypass risk change.",
+      "avoid": [
+        "new unrelated robot graphic",
+        "animation without controls",
+        "speed presented as intelligence or legitimacy"
+      ],
+      "mobileFallback": "Before/after agency loop with latency and removed-gate badges.",
+      "reducedMotionFallback": "Static paper-speed and bit-speed comparison.",
+      "accessibility": {
+        "textTemplate": "At {rate}, the system completes {actions}; the following review gates are preserved: {preserved}; the following are bypassed: {bypassed}.",
+        "keyboardOrder": [
+          "speed control",
+          "preserved gates",
+          "bypassed gates",
+          "interrupt control"
+        ]
+      }
+    },
+    {
+      "stepId": "abstraction-without-return",
+      "title": "Abstraction Without Return",
+      "mode": "radial-root-atlas",
+      "primary": {
+        "library": "d3-hierarchy",
+        "layout": "radial cluster",
+        "package": "d3@7",
+        "implementation": "central root with ten severance branches and consequence leaves"
+      },
+      "secondary": {
+        "library": "d3-shape",
+        "layout": "linkRadial",
+        "implementation": "typed severance and repair edges"
+      },
+      "dataShape": "rooted doctrine tree with cross-links from each root to repair routes",
+      "why": "A radial root structure makes the shared origin visible while preserving distinct branches. It supports card expansion without pretending the roots are identical.",
+      "avoid": [
+        "flat undifferentiated list",
+        "ten equal cards with no shared structure",
+        "continuous rotation that prevents reading"
+      ],
+      "mobileFallback": "Accordion root cards grouped by severance type.",
+      "reducedMotionFallback": "Static radial or indented tree.",
+      "accessibility": {
+        "textTemplate": "{root} separates {leftTerm} from {rightTerm}, producing {consequences}; its repair is {repair}.",
+        "keyboardOrder": [
+          "central root",
+          "ontological severances",
+          "institutional severances",
+          "repair links"
+        ]
+      }
+    },
+    {
+      "stepId": "accounting-software",
+      "title": "Accounting Meets Software Engineering",
+      "mode": "happy-path-to-operational-graph",
+      "primary": {
+        "library": "d3-dag",
+        "layout": "sugiyama",
+        "package": "d3-dag@1.1.0",
+        "implementation": "layered directed graph with normal, exceptional, recovery, and escalation branches"
+      },
+      "secondary": {
+        "library": "d3-shape",
+        "layout": "edge bundling by path type",
+        "implementation": "solid normal flow, dashed failure flow, return repair flow"
+      },
+      "dataShape": "directed state-transition graph with path kind, owner, witness, and closure status",
+      "why": "A layered DAG shows the exact professional move: a thin normative path becomes a richer executable state space with explicit failure and repair.",
+      "avoid": [
+        "generic code screenshot",
+        "simple before/after prose only",
+        "treating all social values as software types"
+      ],
+      "mobileFallback": "Stepwise state machine with expandable exception and repair branches.",
+      "reducedMotionFallback": "Static happy-path and operational-path comparison.",
+      "accessibility": {
+        "textTemplate": "The normal path moves from {start} to {success}. Failure {failure} is detected by {witness}, owned by {owner}, and repaired through {repairPath}.",
+        "keyboardOrder": [
+          "normal path",
+          "failure branches",
+          "owners",
+          "repair returns"
+        ]
+      }
+    },
+    {
+      "stepId": "boundary-first-cycle",
+      "title": "Boundary First",
+      "mode": "mechanics-cycle",
+      "primary": {
+        "library": "d3-shape",
+        "layout": "radial state cycle",
+        "package": "d3@7",
+        "implementation": "arc segments plus directed radial links"
+      },
+      "secondary": {
+        "library": "d3-transition",
+        "layout": "step reveal",
+        "implementation": "one stage activated at a time; user controlled"
+      },
+      "dataShape": "ordered cyclic states with success, defect, repair, and promotion branches",
+      "why": "The radial cycle communicates recurrence and repair while direct stage selection supports operational learning.",
+      "avoid": [
+        "automatic endless animation",
+        "linear pipeline that hides recurrence",
+        "introducing the full formal vocabulary at once"
+      ],
+      "mobileFallback": "Vertical cycle with return arrows and a sticky current-stage card.",
+      "reducedMotionFallback": "Static cycle with selection highlighting only.",
+      "accessibility": {
+        "textTemplate": "At {stage}, the system {action}. If {condition}, it proceeds to {successNext}; otherwise it exposes {defect} and returns through {repairNext}.",
+        "keyboardOrder": [
+          "pressure",
+          "distinction",
+          "representation",
+          "transformation",
+          "closure",
+          "outcome",
+          "repair",
+          "promotion"
+        ]
+      }
+    },
+    {
+      "stepId": "baseline-evolution",
+      "title": "Every Baseline Opens a Field of Variation",
+      "mode": "nested-baseline-timeline",
+      "primary": {
+        "library": "d3-hierarchy",
+        "layout": "icicle/partition",
+        "package": "d3@7",
+        "implementation": "levels of stable organization along an ordered axis"
+      },
+      "secondary": {
+        "library": "d3-shape",
+        "layout": "branch outcomes",
+        "implementation": "collapse, restore, and promote branches at each level"
+      },
+      "dataShape": "ordered multilevel hierarchy with baseline dependencies and outcome branches",
+      "why": "The combined hierarchy and ordered progression shows that a new level becomes a substrate without ceasing to depend on the levels beneath it.",
+      "avoid": [
+        "literal universal history claim with unsupported precision",
+        "single upward arrow implying guaranteed progress",
+        "collapsing particles, matter, cells, and institutions into identical mechanisms"
+      ],
+      "mobileFallback": "Stacked baseline ladder with expandable dependency and failure panels.",
+      "reducedMotionFallback": "Static ladder and three outcome branches.",
+      "accessibility": {
+        "textTemplate": "{level} depends on {substrate}; variation can {restore}, {collapse}, or {promote} into {successor}.",
+        "keyboardOrder": [
+          "earlier baseline",
+          "variation",
+          "three outcomes",
+          "successor baseline"
+        ]
+      }
+    },
+    {
+      "stepId": "representational-evolution",
+      "title": "Representational Evolution",
+      "mode": "revision-spiral",
+      "primary": {
+        "library": "d3-shape",
+        "layout": "radial line / spiral",
+        "package": "d3@7",
+        "implementation": "successive representation cycles positioned on expanding radius"
+      },
+      "secondary": {
+        "library": "d3-hierarchy",
+        "layout": "version comparison tree",
+        "implementation": "branch rejected, repaired, and promoted revisions"
+      },
+      "dataShape": "ordered representation versions with defect evidence, tests, and promotion status",
+      "why": "A spiral preserves recurrence while showing that successful repair changes the baseline rather than returning to the identical starting point.",
+      "avoid": [
+        "simple loop that implies no learning",
+        "unbounded progress spiral",
+        "hiding rejected or superseded revisions"
+      ],
+      "mobileFallback": "Version timeline with defect \u2192 revision \u2192 test \u2192 promotion cards.",
+      "reducedMotionFallback": "Static stepped spiral or numbered timeline.",
+      "accessibility": {
+        "textTemplate": "Version {version} encountered {defect}; revision {revision} preserved {invariant}, passed {tests}, and received status {status}.",
+        "keyboardOrder": [
+          "current representation",
+          "defect",
+          "new distinction",
+          "revision",
+          "test",
+          "promotion"
+        ]
+      }
+    },
+    {
+      "stepId": "civilization-executable",
+      "title": "Civilizational Mechanics",
+      "mode": "nested-executable-civilization",
+      "primary": {
+        "library": "d3-hierarchy",
+        "layout": "partition",
+        "package": "d3@7",
+        "implementation": "nested civilization layers: embodied life, households, organizations, institutions, infrastructures, biosphere"
+      },
+      "secondary": {
+        "library": "d3-force",
+        "layout": "typed cross-layer execution edges",
+        "implementation": "fixed anchor positions with force used only for collision and local adjustment"
+      },
+      "dataShape": "containment hierarchy plus typed execution, consequence, evidence, and repair edges",
+      "why": "Nested layers show substrate dependence; cross-layer edges show that laws, accounts, software, and organizations execute across boundaries rather than staying inside one level.",
+      "avoid": [
+        "single universal force layout",
+        "centralized control-room metaphor",
+        "implying civilization can be engineered as one monolithic machine"
+      ],
+      "mobileFallback": "Layered vertical stack with selectable execution chains.",
+      "reducedMotionFallback": "Static nested layers with one highlighted chain at a time.",
+      "accessibility": {
+        "textTemplate": "{representation} is executed by {agent} through {mechanism}, affecting {system}; consequence is witnessed by {witness} and repaired through {repair}.",
+        "keyboardOrder": [
+          "embodied baseline",
+          "institutions",
+          "representations",
+          "executing agents",
+          "consequences",
+          "repair paths"
+        ]
+      }
+    },
+    {
+      "stepId": "repair-router",
+      "title": "Route the Defect to Consequence Closure",
+      "mode": "root-consequence-repair-router",
+      "primary": {
+        "library": "d3-sankey",
+        "layout": "sankey",
+        "package": "d3-sankey@0.12.3",
+        "implementation": "roots on left, consequence classes in center, repair routes on right"
+      },
+      "secondary": {
+        "library": "d3-scale",
+        "layout": "confidence and maturity encoding",
+        "implementation": "stroke and pattern rather than color alone"
+      },
+      "dataShape": "typed weighted tripartite graph: root \u2192 consequence \u2192 repair route",
+      "why": "The Sankey view makes many-to-many routing visible: one root can produce several consequences, and one repair route can address several roots without collapsing their distinctions.",
+      "avoid": [
+        "one-size-fits-all checklist",
+        "ranking harms on a single scalar",
+        "repair routes without accountable owners"
+      ],
+      "mobileFallback": "Wizard: diagnose root \u2192 select consequence \u2192 construct repair packet.",
+      "reducedMotionFallback": "Static highlighted path through the router.",
+      "accessibility": {
+        "textTemplate": "The diagnosed root {root} produces {consequence}. Recommended route {route} requires owner {owner}, witness {witness}, and closure test {test}.",
+        "keyboardOrder": [
+          "root",
+          "consequence",
+          "repair route",
+          "owner",
+          "test"
+        ]
+      }
+    },
+    {
+      "stepId": "mission-atlas",
+      "title": "Keep the Future Open",
+      "mode": "curated-atlas-reveal",
+      "primary": {
+        "library": "d3-force",
+        "layout": "curated semantic coordinates with collision simulation",
+        "package": "d3@7",
+        "implementation": "manual cluster anchors; force only preserves spacing and drag behavior"
+      },
+      "secondary": {
+        "library": "d3-zoom",
+        "layout": "camera transition",
+        "implementation": "zoom from completed pathway neighborhood to full atlas"
+      },
+      "dataShape": "typed content graph plus pathway emphasis and journey-state overlays",
+      "why": "The same nodes remain in place while context expands, preserving spatial memory and proving that the sequence and atlas are projections of one graph.",
+      "avoid": [
+        "new disconnected homepage",
+        "universal auto-layout as v1",
+        "equal node size implying equal authority",
+        "removing the learner\u2019s selected path on reveal"
+      ],
+      "mobileFallback": "Searchable clustered list with a focused neighborhood view and pathway emphasis.",
+      "reducedMotionFallback": "Crossfade from pathway neighborhood to full atlas with stable node positions.",
+      "accessibility": {
+        "textTemplate": "The atlas contains {nodeCount} typed concepts. Your completed path emphasizes {path}; the recommended next regions are {regions}.",
+        "keyboardOrder": [
+          "current path",
+          "recommended next regions",
+          "search",
+          "filters",
+          "atlas nodes"
+        ]
+      }
+    }
+  ]
+}

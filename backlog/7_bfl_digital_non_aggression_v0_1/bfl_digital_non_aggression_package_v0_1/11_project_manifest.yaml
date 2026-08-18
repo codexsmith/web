@@ -1,0 +1,73 @@
+project:
+  id: BFL-DNA-ND-NI-001
+  title: Digital Non-Aggression, Non-Destruction, and Non-Interference
+  short_title: Digital Peace Accord Research Program
+  version: 0.1
+  date: 2026-08-01
+  status: internal_research_seed
+  organization: Boundary First Labs
+  domain:
+    primary: AI governance
+    secondary:
+      - cybersecurity
+      - digital rights
+      - international cyber norms
+      - agentic systems
+      - technical certification
+
+source_boundary:
+  conversation_derived: true
+  corpus_aligned: true
+  external_primary_sources:
+    - arXiv:2403.02817
+    - arXiv:2606.03811
+  excluded:
+    - finished legal doctrine
+    - treaty authority claims
+    - exploit implementation instructions
+
+central_question: >-
+  What minimum prohibitions, duties, technical controls, accountability rules,
+  and repair guarantees are required to prevent digital systems from becoming
+  unauthorized substrates for automated aggression, destruction, or interference?
+
+protected_invariants:
+  - authorized_purpose_integrity
+  - data_and_state_integrity
+  - confidentiality
+  - continuity
+  - non_propagation_without_authorization
+  - human_and_institutional_agency
+  - responsibility_continuity
+  - repairability
+
+claim_ceiling:
+  technical: demonstrated_in_controlled_research
+  legal: research_question_only
+  institutional: options_analysis_only
+  public: bounded_normative_proposal
+
+workstreams:
+  - technical_threat_validation
+  - legal_and_norms_mapping
+  - boundary_first_formalization
+  - technical_control_profile
+  - rights_and_abuse_review
+  - publication_and_expert_review
+
+promotion_gates:
+  - primary_source_annotations_complete
+  - cybersecurity_review_complete
+  - legal_review_complete
+  - civil_liberties_review_complete
+  - six_case_studies_complete
+  - exception_framework_complete
+  - responsibility_matrix_complete
+  - technical_control_pilot_complete
+
+next_outputs:
+  - From Morris-II to Adaptive Worms
+  - Artificial Intelligence, Not Automated Aggression
+  - Digital Agency and Propagation Audit
+  - Non-Propagation and Authorized-Purpose Integrity Control Profile
+  - Institutional Form Options Report

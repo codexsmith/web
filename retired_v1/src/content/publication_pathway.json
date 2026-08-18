@@ -1,0 +1,1721 @@
+{
+  "$schema": "./bfl_learning_pathway_schema_v0_1.json",
+  "id": "bfl-civilizational-mechanics-first-passage",
+  "version": "0.1",
+  "title": "From Externality to Civilizational Repair",
+  "subtitle": "A Boundary-First learning pathway from familiar consequences to operational mechanics and repair",
+  "status": "implementation-guidance draft; public copy and canonical promotion pending",
+  "claimCeiling": "Public doctrine and operational orientation. The pathway explains and applies the current framework; it does not by itself establish formal or empirical claims.",
+  "thesis": "Civilization acts through executable representations. Boundary First Labs develops the mechanics needed to keep those representations answerable to embodied consequence and capable of lawful revision.",
+  "sourceArtifacts": [
+    "public_architecture.md",
+    "bfl_introductory_experience_mermaid_wireframes_v0_1.md",
+    "project_sources_single_replacement_v0_3.md",
+    "Boundary First Labs Structure.txt",
+    "current project conversation: Abstraction Without Return through Public Mission"
+  ],
+  "experienceContract": {
+    "principle": "One knowledge graph, several lawful projections.",
+    "modes": [
+      {
+        "id": "grok",
+        "purpose": "One memorable proposition and no more than three new canonical terms."
+      },
+      {
+        "id": "navigate",
+        "purpose": "Persistent position, visible neighbors, resumable pathway state."
+      },
+      {
+        "id": "dive",
+        "purpose": "Open the deeper doctrine, evidence, examples, and source records without losing pathway state."
+      },
+      {
+        "id": "apply",
+        "purpose": "Manipulate a boundary, diagnose a defect, or choose a repair before continuing."
+      }
+    ],
+    "progressiveDisclosure": [
+      "card quote",
+      "expanded explanation",
+      "mechanism diagram",
+      "worked example",
+      "audit questions",
+      "source and evidence dive"
+    ],
+    "stateToPersist": [
+      "pathwayId",
+      "stepId",
+      "completedStepIds",
+      "selectedRootCardIds",
+      "selectedRepairRouteId",
+      "selectedExampleDomain",
+      "camera",
+      "filters",
+      "returnTarget",
+      "reducedMotion"
+    ],
+    "globalExits": [
+      "continue",
+      "back",
+      "open current node",
+      "choose another on-ramp",
+      "skip to repair paths",
+      "open full atlas"
+    ]
+  },
+  "phases": [
+    {
+      "id": "familiar",
+      "label": "Start with what people already experience",
+      "purpose": "Make displaced consequence visible before introducing theory.",
+      "stepIds": [
+        "nested-world",
+        "externality-transfer",
+        "business-agent",
+        "ai-acceleration"
+      ]
+    },
+    {
+      "id": "root-pattern",
+      "label": "Name the structural pattern",
+      "purpose": "Show that the familiar failures are instances of abstraction without return.",
+      "stepIds": [
+        "abstraction-without-return"
+      ]
+    },
+    {
+      "id": "operational-mechanics",
+      "label": "Make the pattern operable",
+      "purpose": "Connect accounting and software engineering to Boundary First mechanics.",
+      "stepIds": [
+        "accounting-software",
+        "boundary-first-cycle"
+      ]
+    },
+    {
+      "id": "evolution",
+      "label": "Show how systems revise or fail",
+      "purpose": "Introduce baseline formation, defect, promotion, and representational evolution.",
+      "stepIds": [
+        "baseline-evolution",
+        "representational-evolution"
+      ]
+    },
+    {
+      "id": "civilization",
+      "label": "Scale the mechanics to civilization",
+      "purpose": "Unify accounting, software, agency, institutions, and evolution.",
+      "stepIds": [
+        "civilization-executable"
+      ]
+    },
+    {
+      "id": "repair",
+      "label": "Move from critique to repair",
+      "purpose": "Route diagnosed severances into concrete institutional and engineering responses.",
+      "stepIds": [
+        "repair-router",
+        "mission-atlas"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "nested-world",
+      "order": 0,
+      "phaseId": "familiar",
+      "canonicalStatus": "public doctrine candidate",
+      "card": {
+        "kicker": "Familiar fact",
+        "title": "There Is No More Outside",
+        "quote": "Every externality is someone else’s internality."
+      },
+      "expanded": {
+        "summary": "Modern people and institutions inhabit nested physical, social, legal, economic, computational, and ecological systems. A burden moved beyond one boundary does not disappear; it enters another interior.",
+        "mechanism": "Externalization is a boundary crossing whose receiving system has been omitted from the acting system’s representation.",
+        "consequence": "Waste enters a watershed, unpaid work enters a household, risk enters a public budget, and delay enters another team’s queue.",
+        "repair": "Name the receiving system, preserve the transfer path, and distinguish burden resolution from burden relocation."
+      },
+      "learning": {
+        "objectives": [
+          "Distinguish disappearance from transfer",
+          "Recognize nested system boundaries",
+          "Identify the receiving interior"
+        ],
+        "newTerms": [
+          "externality",
+          "internality",
+          "nested system"
+        ],
+        "prompt": "Choose a familiar burden and trace where it goes when an organization calls it external.",
+        "microAssessment": {
+          "type": "select-receiver",
+          "success": "The learner identifies a concrete receiving body, place, institution, or future period."
+        }
+      },
+      "contentRefs": [
+        "doctrine:no-more-outside",
+        "root:representation-reality",
+        "root:local-global-closure"
+      ],
+      "visualization": {
+        "mode": "nested-interiors",
+        "primary": {
+          "library": "d3-hierarchy",
+          "layout": "partition",
+          "package": "d3@7",
+          "implementation": "hierarchy + partition with rounded nested rectangles"
+        },
+        "secondary": {
+          "library": "d3-shape",
+          "layout": "curved transfer path",
+          "implementation": "linkHorizontal or custom Bezier overlay"
+        },
+        "why": "Nested rectangles make the no-floor claim literal: each apparent outside is visibly inside a larger enclosure. A transfer path shows that consequence crosses rather than vanishes.",
+        "dataShape": "rooted containment hierarchy plus typed cross-boundary transfer edges",
+        "avoid": [
+          "force-directed graph as the first view",
+          "geographic map unless the example is explicitly spatial",
+          "unlabeled decorative bubbles"
+        ],
+        "mobileFallback": "Vertical nested cards with a stepwise burden trace.",
+        "reducedMotionFallback": "Static before/after states with the receiving box highlighted.",
+        "accessibility": {
+          "textTemplate": "The burden leaves {source} and enters {receiver}; both are contained within {largerSystem}.",
+          "keyboardOrder": [
+            "source",
+            "transfer",
+            "receiver",
+            "larger system"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Drag a burden token across a boundary",
+        "onSuccess": "Reveal the receiving interior and its repair capacity",
+        "optionalExamples": [
+          "household labor",
+          "pollution",
+          "software support",
+          "public infrastructure"
+        ]
+      },
+      "transition": {
+        "question": "If the consequence remains inside the larger world, why was it called external?",
+        "nextStepId": "externality-transfer"
+      }
+    },
+    {
+      "id": "externality-transfer",
+      "order": 1,
+      "phaseId": "familiar",
+      "canonicalStatus": "public doctrine candidate",
+      "card": {
+        "kicker": "Accounting fact",
+        "title": "Externality Is a Boundary Choice",
+        "quote": "An externality is not outside the system. It is outside the system’s accounting."
+      },
+      "expanded": {
+        "summary": "Accounting systems necessarily choose what to represent. The category of externality records a real consequence excluded by the chosen accounting boundary.",
+        "mechanism": "Apparent gain is produced when benefits remain represented while burdens are transferred into unrepresented actors, lifecycle stages, or environments.",
+        "consequence": "Local cost falls while household, public, ecological, maintenance, or future cost rises elsewhere.",
+        "repair": "Expand the decision representation enough to include receiving actors, lifecycle burdens, uncertainty, and nonmonetary constraints without pretending every value is commensurable."
+      },
+      "learning": {
+        "objectives": [
+          "Treat externality as a declared boundary",
+          "Separate measurement difficulty from nonexistence",
+          "Trace benefit and burden together"
+        ],
+        "newTerms": [
+          "accounting boundary",
+          "consequence inclusion",
+          "defect export"
+        ],
+        "prompt": "Toggle which costs are represented and watch the reported result change while the actual burden remains.",
+        "microAssessment": {
+          "type": "boundary-toggle",
+          "success": "The learner can explain whose apparent efficiency depends on whose uncounted burden."
+        }
+      },
+      "contentRefs": [
+        "doctrine:externality-boundary-failure",
+        "repair:consequence-accounting"
+      ],
+      "visualization": {
+        "mode": "benefit-burden-flow",
+        "primary": {
+          "library": "d3-sankey",
+          "layout": "sankey",
+          "package": "d3-sankey@0.12.3",
+          "implementation": "parallel represented and unrepresented flows"
+        },
+        "secondary": {
+          "library": "d3-scale",
+          "layout": "boundary toggle",
+          "implementation": "filter nodes by accounting inclusion state"
+        },
+        "why": "A Sankey diagram shows that reducing a represented cost does not erase flow; it redirects burden into another node.",
+        "dataShape": "directed weighted flows from activity to benefits and burdens, each tagged represented/unrepresented",
+        "avoid": [
+          "single-number score",
+          "pie chart",
+          "monetizing every consequence by default"
+        ],
+        "mobileFallback": "Ordered source → decision boundary → receiver flow list with quantities or qualitative severity.",
+        "reducedMotionFallback": "Side-by-side inclusive and exclusive accounting states.",
+        "accessibility": {
+          "textTemplate": "{activity} produces {benefit} for {beneficiary} and transfers {burden} to {receiver}; the current accounting {includesOrExcludes} that burden.",
+          "keyboardOrder": [
+            "activity",
+            "benefit flow",
+            "burden flow",
+            "receiver"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Toggle actors and lifecycle stages inside the accounting boundary",
+        "onSuccess": "Recalculate represented result and list still-unresolved nonmonetary constraints",
+        "optionalExamples": [
+          "fast delivery",
+          "cheap software feature",
+          "factory production",
+          "property development"
+        ]
+      },
+      "transition": {
+        "question": "What kind of thing is making these boundary choices and acting through them?",
+        "nextStepId": "business-agent"
+      }
+    },
+    {
+      "id": "business-agent",
+      "order": 2,
+      "phaseId": "familiar",
+      "canonicalStatus": "public doctrine candidate",
+      "card": {
+        "kicker": "Agency fact",
+        "title": "Business Is Already Artificial Agency",
+        "quote": "The corporation is the paper-speed ancestor of the artificial agent."
+      },
+      "expanded": {
+        "summary": "A business preserves identity, senses conditions, records memory, selects actions, delegates work, transforms environments, and responds to feedback across time.",
+        "mechanism": "Contracts, accounts, policies, governance, employees, software, capital, and infrastructure jointly form a persistent agency architecture.",
+        "consequence": "The organization can act more coherently and persistently than any participant while responsibility disappears into distributed roles.",
+        "repair": "Evaluate the full agency chain and bind delegated action to represented affected parties, interruptibility, accountability, and repair."
+      },
+      "learning": {
+        "objectives": [
+          "Recognize institutional agency without requiring consciousness",
+          "Map organizational components to agent functions",
+          "Locate responsibility gaps"
+        ],
+        "newTerms": [
+          "constructed agent",
+          "agency architecture",
+          "distributed responsibility"
+        ],
+        "prompt": "Map one ordinary business into sensing, memory, policy, action, feedback, and persistence.",
+        "microAssessment": {
+          "type": "agent-loop-map",
+          "success": "The learner identifies both the acting organization and the humans or systems through which its agency is realized."
+        }
+      },
+      "contentRefs": [
+        "doctrine:business-artificial-agency",
+        "root:agency-consequence",
+        "repair:agency-governance"
+      ],
+      "visualization": {
+        "mode": "agent-system-loop",
+        "primary": {
+          "library": "d3-force",
+          "layout": "constrained force simulation",
+          "package": "d3@7",
+          "implementation": "fixed functional sectors around a central institutional identity"
+        },
+        "secondary": {
+          "library": "d3-shape",
+          "layout": "directed loop",
+          "implementation": "typed arrows for sense, decide, act, receive feedback"
+        },
+        "why": "A constrained network reveals that the business is neither one person nor an inert container; it is a persistent loop composed of human, legal, financial, and computational parts.",
+        "dataShape": "typed heterogeneous graph with functional roles and directed agency edges",
+        "avoid": [
+          "anthropomorphic face or brain metaphor as the primary view",
+          "unconstrained force layout that scrambles functional roles",
+          "equating business and AI in every property"
+        ],
+        "mobileFallback": "Six-stage agent loop with expandable component lists.",
+        "reducedMotionFallback": "Fixed radial system diagram.",
+        "accessibility": {
+          "textTemplate": "The organization senses through {sensors}, remembers through {memory}, decides through {policy}, acts through {actuators}, and persists through {persistenceMechanisms}.",
+          "keyboardOrder": [
+            "identity",
+            "sensing",
+            "memory",
+            "decision",
+            "action",
+            "feedback",
+            "persistence"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Assign organizational parts to agent functions",
+        "onSuccess": "Highlight any function with authority but no consequence return",
+        "optionalExamples": [
+          "retailer",
+          "bank",
+          "platform",
+          "municipal agency"
+        ]
+      },
+      "transition": {
+        "question": "What changes when this paper-speed agent receives a bit-speed nervous system?",
+        "nextStepId": "ai-acceleration"
+      }
+    },
+    {
+      "id": "ai-acceleration",
+      "order": 3,
+      "phaseId": "familiar",
+      "canonicalStatus": "public doctrine candidate",
+      "card": {
+        "kicker": "AI fact",
+        "title": "AI Accelerates Institutional Agency",
+        "quote": "A business is already an artificial agent. AI gives it a faster nervous system."
+      },
+      "expanded": {
+        "summary": "AI does not introduce constructed agency into an otherwise human-only world. It increases the speed, reach, memory, replication, and integration of existing institutional agents.",
+        "mechanism": "Administrative sensing, classification, decision, communication, and execution move from meeting-and-paper cadence toward continuous computation.",
+        "consequence": "Automation can remove not only wasteful delay but also review, appeal, contextual judgment, informal repair, and identifiable responsibility.",
+        "repair": "Audit which larger agent the AI serves, which protective frictions it removes, who can interrupt it, and where responsibility and repair remain embodied."
+      },
+      "learning": {
+        "objectives": [
+          "Place AI inside a larger institutional agent",
+          "Distinguish wasteful from protective friction",
+          "Evaluate acceleration separately from objective quality"
+        ],
+        "newTerms": [
+          "institutional alignment",
+          "protective friction",
+          "agency acceleration"
+        ],
+        "prompt": "Increase system speed and observe which review, appeal, or repair functions are bypassed.",
+        "microAssessment": {
+          "type": "friction-classification",
+          "success": "The learner preserves at least one protective friction rather than treating all delay as waste."
+        }
+      },
+      "contentRefs": [
+        "doctrine:ai-faster-nervous-system",
+        "repair:agency-governance",
+        "root:responsibility-capacity"
+      ],
+      "visualization": {
+        "mode": "same-graph-different-rate",
+        "primary": {
+          "library": "d3-force",
+          "layout": "reuse business-agent coordinates",
+          "package": "d3@7",
+          "implementation": "stable node positions with edge throughput and latency controls"
+        },
+        "secondary": {
+          "library": "d3-timer",
+          "layout": "particle flow",
+          "implementation": "optional animated tokens along decision edges"
+        },
+        "why": "Keeping the same graph while changing rate makes the thesis legible: the category of agent remains, but the cadence and bypass risk change.",
+        "dataShape": "agent graph plus latency, throughput, review gate, and interruptibility attributes",
+        "avoid": [
+          "new unrelated robot graphic",
+          "animation without controls",
+          "speed presented as intelligence or legitimacy"
+        ],
+        "mobileFallback": "Before/after agency loop with latency and removed-gate badges.",
+        "reducedMotionFallback": "Static paper-speed and bit-speed comparison.",
+        "accessibility": {
+          "textTemplate": "At {rate}, the system completes {actions}; the following review gates are preserved: {preserved}; the following are bypassed: {bypassed}.",
+          "keyboardOrder": [
+            "speed control",
+            "preserved gates",
+            "bypassed gates",
+            "interrupt control"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Adjust agency speed and toggle review gates",
+        "onSuccess": "Show changed consequence radius and repair latency",
+        "optionalExamples": [
+          "insurance claims",
+          "content moderation",
+          "hiring",
+          "credit decisions"
+        ]
+      },
+      "transition": {
+        "question": "What common structural failure connects uncounted burdens, distributed agency, and accelerated decisions?",
+        "nextStepId": "abstraction-without-return"
+      }
+    },
+    {
+      "id": "abstraction-without-return",
+      "order": 4,
+      "phaseId": "root-pattern",
+      "canonicalStatus": "public mission doctrine candidate",
+      "card": {
+        "kicker": "Root diagnosis",
+        "title": "Abstraction Without Return",
+        "quote": "The defining failure of the modern age is not abstraction itself. It is abstraction without return."
+      },
+      "expanded": {
+        "summary": "Abstraction enables civilization, but it becomes dangerous when an agent, metric, category, decision, or claim no longer has a lawful path back to the reality it transforms.",
+        "mechanism": "A capacity to act becomes separated from its required consequence, witness, maintenance, contestability, or repair path.",
+        "consequence": "The excluded residue returns as exported defect borne by bodies, communities, infrastructure, ecosystems, maintainers, or future generations.",
+        "repair": "Restore typed return paths between agency and consequence, representation and reality, authority and standing, construction and stewardship, and knowledge and provenance."
+      },
+      "learning": {
+        "objectives": [
+          "Recognize the common pattern across domains",
+          "Differentiate a root severance from a downstream symptom",
+          "Choose the correct root card for a case"
+        ],
+        "newTerms": [
+          "abstraction without return",
+          "root severance",
+          "return path"
+        ],
+        "prompt": "Select a consequence and identify which required relation was severed.",
+        "microAssessment": {
+          "type": "root-classifier",
+          "success": "The learner can distinguish at least two plausible roots and justify the primary one."
+        }
+      },
+      "contentRefs": [
+        "doctrine:abstraction-without-return",
+        "collection:root-cards"
+      ],
+      "visualization": {
+        "mode": "radial-root-atlas",
+        "primary": {
+          "library": "d3-hierarchy",
+          "layout": "radial cluster",
+          "package": "d3@7",
+          "implementation": "central root with ten severance branches and consequence leaves"
+        },
+        "secondary": {
+          "library": "d3-shape",
+          "layout": "linkRadial",
+          "implementation": "typed severance and repair edges"
+        },
+        "why": "A radial root structure makes the shared origin visible while preserving distinct branches. It supports card expansion without pretending the roots are identical.",
+        "dataShape": "rooted doctrine tree with cross-links from each root to repair routes",
+        "avoid": [
+          "flat undifferentiated list",
+          "ten equal cards with no shared structure",
+          "continuous rotation that prevents reading"
+        ],
+        "mobileFallback": "Accordion root cards grouped by severance type.",
+        "reducedMotionFallback": "Static radial or indented tree.",
+        "accessibility": {
+          "textTemplate": "{root} separates {leftTerm} from {rightTerm}, producing {consequences}; its repair is {repair}.",
+          "keyboardOrder": [
+            "central root",
+            "ontological severances",
+            "institutional severances",
+            "repair links"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Open one root card",
+        "onSuccess": "Trace root → consequences → repair doctrine",
+        "branchTargets": [
+          "rootCards:*"
+        ],
+        "optionalExamples": [
+          "employment",
+          "AI governance",
+          "public infrastructure",
+          "scientific knowledge"
+        ]
+      },
+      "transition": {
+        "question": "How can we integrate excluded consequences rather than merely criticize their exclusion?",
+        "nextStepId": "accounting-software"
+      }
+    },
+    {
+      "id": "accounting-software",
+      "order": 5,
+      "phaseId": "operational-mechanics",
+      "canonicalStatus": "public doctrine and engineering bridge candidate",
+      "card": {
+        "kicker": "Operational bridge",
+        "title": "Accounting Meets Software Engineering",
+        "quote": "Accounting declares what the system recognizes. Software engineering integrates what operation cannot afford to forget."
+      },
+      "expanded": {
+        "summary": "Professional software engineering expands a normative happy-path representation into an operational system that includes actors, states, dependencies, exceptions, boundary conditions, observability, ownership, failure, recovery, and repair.",
+        "mechanism": "Defects and edge cases reveal distinctions the original representation omitted but execution still requires.",
+        "consequence": "When institutions retain narrow accounting while gaining software-speed execution, omitted consequences become faster and more systematic.",
+        "repair": "Apply the same professional standard to civilizational accounting: represent ordinary and exceptional states, affected parties, lifecycle burdens, detection, ownership, rollback, and repair."
+      },
+      "learning": {
+        "objectives": [
+          "Connect externality accounting to edge-case integration",
+          "Distinguish happy-path completion from closure",
+          "Translate software practices into institutional design questions"
+        ],
+        "newTerms": [
+          "normative representation",
+          "edge case",
+          "closure-driven engineering"
+        ],
+        "prompt": "Start with a happy path and add the states reality forces the system to acknowledge.",
+        "microAssessment": {
+          "type": "exception-integration",
+          "success": "The learner adds both a detection path and a responsible repair owner."
+        }
+      },
+      "contentRefs": [
+        "doctrine:externality-boundary-failure",
+        "artifact:software-before-code",
+        "repair:consequence-accounting",
+        "repair:lifecycle-stewardship"
+      ],
+      "visualization": {
+        "mode": "happy-path-to-operational-graph",
+        "primary": {
+          "library": "d3-dag",
+          "layout": "sugiyama",
+          "package": "d3-dag@1.1.0",
+          "implementation": "layered directed graph with normal, exceptional, recovery, and escalation branches"
+        },
+        "secondary": {
+          "library": "d3-shape",
+          "layout": "edge bundling by path type",
+          "implementation": "solid normal flow, dashed failure flow, return repair flow"
+        },
+        "why": "A layered DAG shows the exact professional move: a thin normative path becomes a richer executable state space with explicit failure and repair.",
+        "dataShape": "directed state-transition graph with path kind, owner, witness, and closure status",
+        "avoid": [
+          "generic code screenshot",
+          "simple before/after prose only",
+          "treating all social values as software types"
+        ],
+        "mobileFallback": "Stepwise state machine with expandable exception and repair branches.",
+        "reducedMotionFallback": "Static happy-path and operational-path comparison.",
+        "accessibility": {
+          "textTemplate": "The normal path moves from {start} to {success}. Failure {failure} is detected by {witness}, owned by {owner}, and repaired through {repairPath}.",
+          "keyboardOrder": [
+            "normal path",
+            "failure branches",
+            "owners",
+            "repair returns"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Add an omitted actor, failure state, or lifecycle phase",
+        "onSuccess": "Require witness, owner, and repair before the path can close",
+        "optionalExamples": [
+          "invoice approval",
+          "benefit eligibility",
+          "product launch",
+          "infrastructure procurement"
+        ]
+      },
+      "transition": {
+        "question": "What is the general mechanics behind boundary, omission, failure, and repair?",
+        "nextStepId": "boundary-first-cycle"
+      }
+    },
+    {
+      "id": "boundary-first-cycle",
+      "order": 6,
+      "phaseId": "operational-mechanics",
+      "canonicalStatus": "canonical operational doorway",
+      "card": {
+        "kicker": "Method",
+        "title": "Boundary First",
+        "quote": "Begin with the consequential boundary, what must remain true, where closure can fail, and who can repair it."
+      },
+      "expanded": {
+        "summary": "Boundary First turns critique into a repeatable diagnostic and construction order.",
+        "mechanism": "Pressure or need produces a distinction; the distinction is represented; transformations are admitted or refused; closure preserves an invariant or exposes a defect; repair revises the representation; stable structure may be promoted and reused.",
+        "consequence": "Without explicit boundaries and closure criteria, systems confuse local completion with global success and hide repair in unrepresented people.",
+        "repair": "Declare boundary, invariant, affected actors, admissible transformations, witnesses, failure modes, repair owners, and promotion conditions."
+      },
+      "learning": {
+        "objectives": [
+          "Use the four opening Boundary First questions",
+          "Trace a defect back to a representation",
+          "Separate repair from promotion"
+        ],
+        "newTerms": [
+          "invariant",
+          "closure",
+          "defect"
+        ],
+        "prompt": "Run one familiar case through boundary → invariant → defect → repair.",
+        "microAssessment": {
+          "type": "mechanics-cycle",
+          "success": "The learner states a protected invariant and a repair path rather than only describing harm."
+        }
+      },
+      "contentRefs": [
+        "node:boundary-first",
+        "node:representational-mechanics",
+        "node:formal-grammars"
+      ],
+      "visualization": {
+        "mode": "mechanics-cycle",
+        "primary": {
+          "library": "d3-shape",
+          "layout": "radial state cycle",
+          "package": "d3@7",
+          "implementation": "arc segments plus directed radial links"
+        },
+        "secondary": {
+          "library": "d3-transition",
+          "layout": "step reveal",
+          "implementation": "one stage activated at a time; user controlled"
+        },
+        "why": "The radial cycle communicates recurrence and repair while direct stage selection supports operational learning.",
+        "dataShape": "ordered cyclic states with success, defect, repair, and promotion branches",
+        "avoid": [
+          "automatic endless animation",
+          "linear pipeline that hides recurrence",
+          "introducing the full formal vocabulary at once"
+        ],
+        "mobileFallback": "Vertical cycle with return arrows and a sticky current-stage card.",
+        "reducedMotionFallback": "Static cycle with selection highlighting only.",
+        "accessibility": {
+          "textTemplate": "At {stage}, the system {action}. If {condition}, it proceeds to {successNext}; otherwise it exposes {defect} and returns through {repairNext}.",
+          "keyboardOrder": [
+            "pressure",
+            "distinction",
+            "representation",
+            "transformation",
+            "closure",
+            "outcome",
+            "repair",
+            "promotion"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Complete the four-question audit",
+        "onSuccess": "Unlock the full mechanics cycle and grammar overlay",
+        "toggles": [
+          "ordinary language",
+          "formal grammar",
+          "worked example"
+        ]
+      },
+      "transition": {
+        "question": "How do these cycles create new baselines rather than merely restore old ones?",
+        "nextStepId": "baseline-evolution"
+      }
+    },
+    {
+      "id": "baseline-evolution",
+      "order": 7,
+      "phaseId": "evolution",
+      "canonicalStatus": "public interpretive doctrine candidate",
+      "card": {
+        "kicker": "Evolutionary pattern",
+        "title": "Every Baseline Opens a Field of Variation",
+        "quote": "Variation must cohere into a new baseline, restore the old one, or destroy the conditions that made it possible."
+      },
+      "expanded": {
+        "summary": "Stable relations create a substrate upon which further variation can occur. New structures may remain transient, destabilize the substrate, or cohere strongly enough to become a new operative unit.",
+        "mechanism": "Baseline → variation → interaction → restoration, collapse, or promotion into a successor baseline.",
+        "consequence": "A higher-order system can consume the lower-order capacities upon which its own agency depends.",
+        "repair": "Evaluate whether new agency preserves, repairs, and enlarges its enabling baselines rather than merely extracting from them."
+      },
+      "learning": {
+        "objectives": [
+          "Recognize substrate dependence across levels",
+          "Differentiate transient variation from promoted structure",
+          "Identify baseline consumption"
+        ],
+        "newTerms": [
+          "baseline",
+          "promotion",
+          "substrate preservation"
+        ],
+        "prompt": "Choose a system and identify the lower-order capacities its higher-order agency requires.",
+        "microAssessment": {
+          "type": "baseline-dependency",
+          "success": "The learner identifies an invariant of the substrate that the higher-order system must preserve."
+        }
+      },
+      "contentRefs": [
+        "doctrine:baseline-evolution",
+        "node:emergence",
+        "root:local-global-closure"
+      ],
+      "visualization": {
+        "mode": "nested-baseline-timeline",
+        "primary": {
+          "library": "d3-hierarchy",
+          "layout": "icicle/partition",
+          "package": "d3@7",
+          "implementation": "levels of stable organization along an ordered axis"
+        },
+        "secondary": {
+          "library": "d3-shape",
+          "layout": "branch outcomes",
+          "implementation": "collapse, restore, and promote branches at each level"
+        },
+        "why": "The combined hierarchy and ordered progression shows that a new level becomes a substrate without ceasing to depend on the levels beneath it.",
+        "dataShape": "ordered multilevel hierarchy with baseline dependencies and outcome branches",
+        "avoid": [
+          "literal universal history claim with unsupported precision",
+          "single upward arrow implying guaranteed progress",
+          "collapsing particles, matter, cells, and institutions into identical mechanisms"
+        ],
+        "mobileFallback": "Stacked baseline ladder with expandable dependency and failure panels.",
+        "reducedMotionFallback": "Static ladder and three outcome branches.",
+        "accessibility": {
+          "textTemplate": "{level} depends on {substrate}; variation can {restore}, {collapse}, or {promote} into {successor}.",
+          "keyboardOrder": [
+            "earlier baseline",
+            "variation",
+            "three outcomes",
+            "successor baseline"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Select a level and inspect its enabling substrate",
+        "onSuccess": "Compare capacity creation with substrate consumption",
+        "optionalDomains": [
+          "physical organization",
+          "biological organization",
+          "institutions",
+          "technology"
+        ]
+      },
+      "transition": {
+        "question": "Can a system revise its governing representation before destructive selection does the work?",
+        "nextStepId": "representational-evolution"
+      }
+    },
+    {
+      "id": "representational-evolution",
+      "order": 8,
+      "phaseId": "evolution",
+      "canonicalStatus": "central process candidate within Representational Mechanics",
+      "card": {
+        "kicker": "Core process",
+        "title": "Representational Evolution",
+        "quote": "A system survives by evolving its representations before reality breaks through them."
+      },
+      "expanded": {
+        "summary": "Representations are necessarily incomplete and condition-bound. Systems fail when operating conditions change but their governing distinctions remain fixed.",
+        "mechanism": "Representation → operation → contact with reality → defect → new distinction → revised representation → tested closure → promotion.",
+        "consequence": "Exceptions multiply, manual repair accumulates, categories stop fitting, and institutions defend obsolete models against reality.",
+        "repair": "Every consequential representation needs witnesses, challenge rights, revision triggers, protected invariants, test conditions, and a promotion path for repaired models."
+      },
+      "learning": {
+        "objectives": [
+          "Treat defects as evidence about representation",
+          "Distinguish behavioral adaptation from representation revision",
+          "Specify a lawful revision path"
+        ],
+        "newTerms": [
+          "representational evolution",
+          "revision trigger",
+          "representational extinction"
+        ],
+        "prompt": "Turn an accumulating exception into a candidate new distinction and test whether the revised model closes.",
+        "microAssessment": {
+          "type": "revision-proposal",
+          "success": "The learner names the omitted distinction, protected invariant, and evidence that would justify promotion."
+        }
+      },
+      "contentRefs": [
+        "doctrine:representational-evolution",
+        "node:representational-mechanics",
+        "node:emergence"
+      ],
+      "visualization": {
+        "mode": "revision-spiral",
+        "primary": {
+          "library": "d3-shape",
+          "layout": "radial line / spiral",
+          "package": "d3@7",
+          "implementation": "successive representation cycles positioned on expanding radius"
+        },
+        "secondary": {
+          "library": "d3-hierarchy",
+          "layout": "version comparison tree",
+          "implementation": "branch rejected, repaired, and promoted revisions"
+        },
+        "why": "A spiral preserves recurrence while showing that successful repair changes the baseline rather than returning to the identical starting point.",
+        "dataShape": "ordered representation versions with defect evidence, tests, and promotion status",
+        "avoid": [
+          "simple loop that implies no learning",
+          "unbounded progress spiral",
+          "hiding rejected or superseded revisions"
+        ],
+        "mobileFallback": "Version timeline with defect → revision → test → promotion cards.",
+        "reducedMotionFallback": "Static stepped spiral or numbered timeline.",
+        "accessibility": {
+          "textTemplate": "Version {version} encountered {defect}; revision {revision} preserved {invariant}, passed {tests}, and received status {status}.",
+          "keyboardOrder": [
+            "current representation",
+            "defect",
+            "new distinction",
+            "revision",
+            "test",
+            "promotion"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Revise one distinction or boundary",
+        "onSuccess": "Compare old and new reachable states, defects, and preserved invariants",
+        "controls": [
+          "show provenance",
+          "show rejected revisions",
+          "compare versions"
+        ]
+      },
+      "transition": {
+        "question": "What do we call this process when the represented and acting system is civilization itself?",
+        "nextStepId": "civilization-executable"
+      }
+    },
+    {
+      "id": "civilization-executable",
+      "order": 9,
+      "phaseId": "civilization",
+      "canonicalStatus": "public program definition candidate",
+      "card": {
+        "kicker": "Civilization scale",
+        "title": "Civilizational Mechanics",
+        "quote": "Civilization is an executable representation that must learn to revise itself before it fails beneath its own model."
+      },
+      "expanded": {
+        "summary": "Civilization acts through laws, accounting, institutions, organizations, infrastructure, software, and artificial agents. Together they represent people, resources, obligations, value, risk, and possible action.",
+        "mechanism": "Accounting defines what enters collective consideration; institutions and software execute those representations; reality exposes omissions; representational evolution repairs them; civilizational closure preserves future possibility.",
+        "consequence": "Locally aligned agents can accelerate globally defective representations until civilization consumes the baselines on which it depends.",
+        "repair": "Develop Civilizational Mechanics as the scale-specific application of Representational Mechanics to collective accounting, agency, institutional evolution, and closure."
+      },
+      "learning": {
+        "objectives": [
+          "Unify accounting, software, agency, evolution, and civilization",
+          "Treat institutions as executable representations",
+          "Locate local/global closure failures"
+        ],
+        "newTerms": [
+          "Civilizational Mechanics",
+          "executable representation",
+          "civilizational closure"
+        ],
+        "prompt": "Select a civilizational representation—law, metric, market rule, software system—and trace how it becomes action.",
+        "microAssessment": {
+          "type": "execution-chain",
+          "success": "The learner traces representation → agent → action → affected system → consequence → repair."
+        }
+      },
+      "contentRefs": [
+        "program:civilizational-mechanics",
+        "node:representational-mechanics",
+        "node:constructive-humanist-agentics",
+        "mission:boundary-first-labs"
+      ],
+      "visualization": {
+        "mode": "nested-executable-civilization",
+        "primary": {
+          "library": "d3-hierarchy",
+          "layout": "partition",
+          "package": "d3@7",
+          "implementation": "nested civilization layers: embodied life, households, organizations, institutions, infrastructures, biosphere"
+        },
+        "secondary": {
+          "library": "d3-force",
+          "layout": "typed cross-layer execution edges",
+          "implementation": "fixed anchor positions with force used only for collision and local adjustment"
+        },
+        "why": "Nested layers show substrate dependence; cross-layer edges show that laws, accounts, software, and organizations execute across boundaries rather than staying inside one level.",
+        "dataShape": "containment hierarchy plus typed execution, consequence, evidence, and repair edges",
+        "avoid": [
+          "single universal force layout",
+          "centralized control-room metaphor",
+          "implying civilization can be engineered as one monolithic machine"
+        ],
+        "mobileFallback": "Layered vertical stack with selectable execution chains.",
+        "reducedMotionFallback": "Static nested layers with one highlighted chain at a time.",
+        "accessibility": {
+          "textTemplate": "{representation} is executed by {agent} through {mechanism}, affecting {system}; consequence is witnessed by {witness} and repaired through {repair}.",
+          "keyboardOrder": [
+            "embodied baseline",
+            "institutions",
+            "representations",
+            "executing agents",
+            "consequences",
+            "repair paths"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Trace one executable representation end to end",
+        "onSuccess": "Reveal missing standing, accounting, or repair links",
+        "optionalExamples": [
+          "zoning",
+          "credit scoring",
+          "employment classification",
+          "infrastructure funding",
+          "AI policy execution"
+        ]
+      },
+      "transition": {
+        "question": "Which concrete repair path matches the failure you have diagnosed?",
+        "nextStepId": "repair-router"
+      }
+    },
+    {
+      "id": "repair-router",
+      "order": 10,
+      "phaseId": "repair",
+      "canonicalStatus": "operational doctrine candidate",
+      "card": {
+        "kicker": "Repair",
+        "title": "Route the Defect to Consequence Closure",
+        "quote": "Critique becomes useful when the severed return path is made explicit and repairable."
+      },
+      "expanded": {
+        "summary": "Different failures require different repairs. A missing cost is not repaired in the same way as missing standing, provenance, lifecycle ownership, or interruptibility.",
+        "mechanism": "Diagnose the root severance, identify the receiving system and protected invariant, then select a repair route with an accountable owner, witness, test, and closure criterion.",
+        "consequence": "Generic calls for responsibility often leave the agency architecture unchanged and return the burden to the same hidden human shock absorbers.",
+        "repair": "Use a typed repair router rather than a universal moral slogan."
+      },
+      "learning": {
+        "objectives": [
+          "Match failures to repair mechanisms",
+          "Assign responsible capacity rather than blame alone",
+          "Define evidence of repair"
+        ],
+        "newTerms": [
+          "repair route",
+          "closure criterion",
+          "repair witness"
+        ],
+        "prompt": "Choose the primary severance, then build a repair packet with owner, authority, resources, witness, and test.",
+        "microAssessment": {
+          "type": "repair-route-builder",
+          "success": "The learner selects a route and supplies all required closure fields."
+        }
+      },
+      "contentRefs": [
+        "collection:repair-routes",
+        "node:boundary-first-engineering",
+        "node:constructive-humanist-agentics"
+      ],
+      "visualization": {
+        "mode": "root-consequence-repair-router",
+        "primary": {
+          "library": "d3-sankey",
+          "layout": "sankey",
+          "package": "d3-sankey@0.12.3",
+          "implementation": "roots on left, consequence classes in center, repair routes on right"
+        },
+        "secondary": {
+          "library": "d3-scale",
+          "layout": "confidence and maturity encoding",
+          "implementation": "stroke and pattern rather than color alone"
+        },
+        "why": "The Sankey view makes many-to-many routing visible: one root can produce several consequences, and one repair route can address several roots without collapsing their distinctions.",
+        "dataShape": "typed weighted tripartite graph: root → consequence → repair route",
+        "avoid": [
+          "one-size-fits-all checklist",
+          "ranking harms on a single scalar",
+          "repair routes without accountable owners"
+        ],
+        "mobileFallback": "Wizard: diagnose root → select consequence → construct repair packet.",
+        "reducedMotionFallback": "Static highlighted path through the router.",
+        "accessibility": {
+          "textTemplate": "The diagnosed root {root} produces {consequence}. Recommended route {route} requires owner {owner}, witness {witness}, and closure test {test}.",
+          "keyboardOrder": [
+            "root",
+            "consequence",
+            "repair route",
+            "owner",
+            "test"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Build a repair packet",
+        "onSuccess": "Generate a shareable audit summary",
+        "branchTargets": [
+          "repairRoutes:*"
+        ],
+        "outputFields": [
+          "system boundary",
+          "affected parties",
+          "protected invariant",
+          "root severance",
+          "repair owner",
+          "authority",
+          "resources",
+          "witness",
+          "test",
+          "revision trigger"
+        ]
+      },
+      "transition": {
+        "question": "How does this pathway connect to the wider work of Boundary First Labs?",
+        "nextStepId": "mission-atlas"
+      }
+    },
+    {
+      "id": "mission-atlas",
+      "order": 11,
+      "phaseId": "repair",
+      "canonicalStatus": "public mission candidate",
+      "card": {
+        "kicker": "Public mission",
+        "title": "Keep the Future Open",
+        "quote": "Boundary First Labs develops the representational mechanics civilization needs to recognize its consequences, repair its institutions, and evolve before it fails beneath its own models."
+      },
+      "expanded": {
+        "summary": "The pathway now opens into the full Boundary First Labs atlas: theory, formal objects, engineering, agency, public consequence, evidence, and research programs.",
+        "mechanism": "The learning sequence is a camera path through the same graph. Every concept introduced remains available as a node, doctrine card, repair route, or applied pathway.",
+        "consequence": "Without the legend, the atlas appears as everything at once. With the pathway, the reader understands what kind of object each region contains and how critique connects to repair.",
+        "repair": "Preserve the guided path, selected root, worked example, and repair route as emphasis layers when the complete atlas is revealed."
+      },
+      "learning": {
+        "objectives": [
+          "Locate the pathway within the wider atlas",
+          "Choose a next route by intent",
+          "Preserve the completed repair packet"
+        ],
+        "newTerms": [],
+        "prompt": "Choose where to continue: theory, engineering, science, public consequence, evidence, or a domain-specific repair path.",
+        "microAssessment": {
+          "type": "self-directed-branch",
+          "success": "The learner can explain why the chosen next route follows from the diagnosed problem."
+        }
+      },
+      "contentRefs": [
+        "mission:boundary-first-labs",
+        "atlas:public-content-graph",
+        "pathway:theory",
+        "pathway:engineering",
+        "pathway:science",
+        "pathway:public-consequence",
+        "pathway:evidence"
+      ],
+      "visualization": {
+        "mode": "curated-atlas-reveal",
+        "primary": {
+          "library": "d3-force",
+          "layout": "curated semantic coordinates with collision simulation",
+          "package": "d3@7",
+          "implementation": "manual cluster anchors; force only preserves spacing and drag behavior"
+        },
+        "secondary": {
+          "library": "d3-zoom",
+          "layout": "camera transition",
+          "implementation": "zoom from completed pathway neighborhood to full atlas"
+        },
+        "why": "The same nodes remain in place while context expands, preserving spatial memory and proving that the sequence and atlas are projections of one graph.",
+        "dataShape": "typed content graph plus pathway emphasis and journey-state overlays",
+        "avoid": [
+          "new disconnected homepage",
+          "universal auto-layout as v1",
+          "equal node size implying equal authority",
+          "removing the learner’s selected path on reveal"
+        ],
+        "mobileFallback": "Searchable clustered list with a focused neighborhood view and pathway emphasis.",
+        "reducedMotionFallback": "Crossfade from pathway neighborhood to full atlas with stable node positions.",
+        "accessibility": {
+          "textTemplate": "The atlas contains {nodeCount} typed concepts. Your completed path emphasizes {path}; the recommended next regions are {regions}.",
+          "keyboardOrder": [
+            "current path",
+            "recommended next regions",
+            "search",
+            "filters",
+            "atlas nodes"
+          ]
+        }
+      },
+      "interaction": {
+        "primaryAction": "Open the atlas with pathway emphasis",
+        "onSuccess": "Offer next routes without hidden profiling",
+        "nextRoutes": [
+          "theory",
+          "engineering",
+          "science",
+          "public consequence",
+          "public translation",
+          "evidence"
+        ]
+      },
+      "transition": {
+        "question": "Which part of the work should become operative next?",
+        "nextStepId": null
+      }
+    }
+  ],
+  "rootCards": [
+    {
+      "id": "agency-consequence",
+      "title": "Agency and Consequence",
+      "quote": "Power becomes dangerous when it can act upon bodies and places without remaining attached to either.",
+      "severance": [
+        "agency",
+        "consequence-bearing"
+      ],
+      "mechanism": "Decision authority persists while exposure, dependence, maintenance, and repair are displaced.",
+      "consequences": [
+        "extraction without attachment",
+        "ownership without stewardship",
+        "authority without exposure",
+        "profit without repair"
+      ],
+      "repairDoctrine": "Bind agency to affected-party representation, consequence-bearing, stewardship, interruption, and enforceable repair.",
+      "primaryRepairRouteIds": [
+        "agency-governance",
+        "standing-contestability",
+        "lifecycle-stewardship"
+      ]
+    },
+    {
+      "id": "representation-reality",
+      "title": "Representation and Reality",
+      "quote": "A representation becomes a defect when it forgets what reality still requires.",
+      "severance": [
+        "representation",
+        "represented reality"
+      ],
+      "mechanism": "A metric, model, category, or interface becomes authoritative after its operating conditions and exclusions are forgotten.",
+      "consequences": [
+        "metric capture",
+        "exception growth",
+        "manual shadow systems",
+        "institutional brittleness"
+      ],
+      "repairDoctrine": "Declare what is preserved and forgotten; instrument omitted consequence; revise when closure fails.",
+      "primaryRepairRouteIds": [
+        "representation-revision",
+        "consequence-accounting",
+        "provenance-witness"
+      ]
+    },
+    {
+      "id": "authority-standing",
+      "title": "Authority and Standing",
+      "quote": "No one should be bound by a decision they have no meaningful way to contest.",
+      "severance": [
+        "decision authority",
+        "standing of affected parties"
+      ],
+      "mechanism": "People appear as classified objects but not as agents able to question, appeal, introduce evidence, or reopen a defective decision.",
+      "consequences": [
+        "unappealable classification",
+        "procedural exclusion",
+        "automated denial",
+        "authority without recourse"
+      ],
+      "repairDoctrine": "No consequence without representation: preserve standing, explanation, contestability, and correction.",
+      "primaryRepairRouteIds": [
+        "standing-contestability",
+        "agency-governance"
+      ]
+    },
+    {
+      "id": "responsibility-capacity",
+      "title": "Responsibility and Capacity",
+      "quote": "Responsibility becomes cruelty when it lands without authority, knowledge, resources, or repair capacity.",
+      "severance": [
+        "responsibility",
+        "capacity to discharge it"
+      ],
+      "mechanism": "Those who decide are insulated while frontline workers, households, operators, or local institutions absorb repair obligations.",
+      "consequences": [
+        "impunity above",
+        "human shock absorbers below",
+        "burnout",
+        "unrepairable accountability"
+      ],
+      "repairDoctrine": "Align authority, knowledge, resources, responsibility, consequence, and repair capacity.",
+      "primaryRepairRouteIds": [
+        "responsibility-capacity-alignment",
+        "agency-governance"
+      ]
+    },
+    {
+      "id": "construction-stewardship",
+      "title": "Construction and Stewardship",
+      "quote": "Nothing is truly built until maintenance, repair, replacement, and retirement are accounted for.",
+      "severance": [
+        "creation",
+        "lifecycle stewardship"
+      ],
+      "mechanism": "Initial production is rewarded while ongoing operation and eventual repair are assigned elsewhere or nowhere.",
+      "consequences": [
+        "maintenance debt",
+        "abandoned products",
+        "fragile infrastructure",
+        "invisible operational labor"
+      ],
+      "repairDoctrine": "No product without stewardship and closure; represent the full lifecycle before construction is approved.",
+      "primaryRepairRouteIds": [
+        "lifecycle-stewardship",
+        "consequence-accounting"
+      ]
+    },
+    {
+      "id": "value-capacity",
+      "title": "Value and Durable Capacity",
+      "quote": "Value is false when gain is counted here and damage is carried elsewhere.",
+      "severance": [
+        "represented value",
+        "durable system capacity"
+      ],
+      "mechanism": "Benefits are captured inside the valuation boundary while depleted labor, infrastructure, ecology, trust, and future options remain outside it.",
+      "consequences": [
+        "false efficiency",
+        "fragility",
+        "capacity depletion",
+        "future repair burden"
+      ],
+      "repairDoctrine": "Count displaced burden, resilience, lifecycle cost, repair, and future option space wherever value is claimed.",
+      "primaryRepairRouteIds": [
+        "consequence-accounting",
+        "global-closure"
+      ]
+    },
+    {
+      "id": "local-global-closure",
+      "title": "Local Success and Systemic Closure",
+      "quote": "A system has not succeeded when its parts win by making the whole less viable.",
+      "severance": [
+        "local objective",
+        "larger system closure"
+      ],
+      "mechanism": "Subsystems optimize within narrow boundaries and transfer defect into the systems that sustain them.",
+      "consequences": [
+        "metric gaming",
+        "institutional cannibalization",
+        "civilizational fragility",
+        "Great-Filter-class failure"
+      ],
+      "repairDoctrine": "Admit local action only when the necessary invariants of larger containing systems remain preserved.",
+      "primaryRepairRouteIds": [
+        "global-closure",
+        "consequence-accounting"
+      ]
+    },
+    {
+      "id": "legibility-reciprocity",
+      "title": "Legibility and Reciprocity",
+      "quote": "Power should not see downward more clearly than it can be seen upward.",
+      "severance": [
+        "visibility imposed on subjects",
+        "visibility of governing power"
+      ],
+      "mechanism": "People become governable data objects while decision procedures, incentives, and responsible actors remain opaque.",
+      "consequences": [
+        "surveillance without accountability",
+        "scoring without explanation",
+        "opacity of power",
+        "agency capture"
+      ],
+      "repairDoctrine": "Expose what accountability and repair require; protect what dignity and independent agency require.",
+      "primaryRepairRouteIds": [
+        "standing-contestability",
+        "agency-governance",
+        "provenance-witness"
+      ]
+    },
+    {
+      "id": "language-operation",
+      "title": "Language and Operational Meaning",
+      "quote": "A word becomes an instrument of capture when its public meaning and operative meaning diverge.",
+      "severance": [
+        "public meaning",
+        "operative definition"
+      ],
+      "mechanism": "Institutions inherit legitimacy from ordinary language while executing narrower or incompatible definitions.",
+      "consequences": [
+        "semantic arbitrage",
+        "undeclared collective agency",
+        "policy by euphemism",
+        "uncontestable ambiguity"
+      ],
+      "repairDoctrine": "Define consequential terms by boundary, test, exclusion, actor, and translation rule. No undeclared we.",
+      "primaryRepairRouteIds": [
+        "representation-revision",
+        "standing-contestability"
+      ]
+    },
+    {
+      "id": "knowledge-provenance",
+      "title": "Knowledge and Provenance",
+      "quote": "Knowledge without a return path to witness becomes rhetoric with inherited authority.",
+      "severance": [
+        "claim",
+        "source, method, witness, and correction"
+      ],
+      "mechanism": "Summaries, generated statements, and institutional conclusions circulate after their evidence and conditions disappear.",
+      "consequences": [
+        "source laundering",
+        "recursive amplification",
+        "false consensus",
+        "uncorrectable doctrine"
+      ],
+      "repairDoctrine": "Preserve the path from claim to source, method, witness, criticism, correction, and supersession.",
+      "primaryRepairRouteIds": [
+        "provenance-witness",
+        "representation-revision"
+      ]
+    }
+  ],
+  "repairRoutes": [
+    {
+      "id": "consequence-accounting",
+      "title": "Consequence Accounting",
+      "useWhen": [
+        "burdens are excluded from the decision boundary",
+        "value depends on displaced cost",
+        "future or nonmonetary effects are invisible"
+      ],
+      "requiredInputs": [
+        "declared accounting boundary",
+        "beneficiaries",
+        "receiving systems",
+        "lifecycle stages",
+        "uncertainty",
+        "nonmonetary constraints"
+      ],
+      "operations": [
+        "trace all material boundary crossings",
+        "preserve qualitative constraints where monetization is invalid",
+        "assign monitoring and repair obligations",
+        "recalculate the decision under inclusive scenarios"
+      ],
+      "outputs": [
+        "consequence ledger",
+        "boundary-crossing register",
+        "scenario comparison",
+        "unresolved constraint list"
+      ],
+      "closureTest": "No material predictable burden remains unnamed, ownerless, or misdescribed as resolved when it has only been transferred."
+    },
+    {
+      "id": "agency-governance",
+      "title": "Agency Governance",
+      "useWhen": [
+        "constructed agents act through distributed people and software",
+        "AI accelerates institutional decisions",
+        "responsibility disappears into architecture"
+      ],
+      "requiredInputs": [
+        "larger serving agent",
+        "objective structure",
+        "delegated authorities",
+        "interrupt paths",
+        "affected parties",
+        "repair capacity"
+      ],
+      "operations": [
+        "map the complete agency chain",
+        "preserve humanly answerable authority",
+        "classify protective friction",
+        "define interruption, reversal, and escalation"
+      ],
+      "outputs": [
+        "agency map",
+        "delegation contract",
+        "interruptibility plan",
+        "responsibility matrix"
+      ],
+      "closureTest": "Every consequential action has an accountable authority, visible affected parties, an interruption path, and a funded repair owner."
+    },
+    {
+      "id": "standing-contestability",
+      "title": "Standing and Contestability",
+      "useWhen": [
+        "people are classified or governed without recourse",
+        "decision logic is opaque",
+        "the affected party cannot introduce evidence"
+      ],
+      "requiredInputs": [
+        "decision type",
+        "affected classes",
+        "evidence used",
+        "decision owner",
+        "appeal authority",
+        "repair remedies"
+      ],
+      "operations": [
+        "grant notice and explanation",
+        "create challenge and evidence paths",
+        "prevent retaliation",
+        "make correction and remedy executable"
+      ],
+      "outputs": [
+        "standing map",
+        "appeal workflow",
+        "evidence access policy",
+        "remedy catalog"
+      ],
+      "closureTest": "An affected person can understand, challenge, correct, and obtain remedy for a defective consequential decision."
+    },
+    {
+      "id": "responsibility-capacity-alignment",
+      "title": "Responsibility–Capacity Alignment",
+      "useWhen": [
+        "frontline workers absorb policy failure",
+        "an owner lacks authority or resources",
+        "repair depends on invisible labor"
+      ],
+      "requiredInputs": [
+        "responsibilities",
+        "decision rights",
+        "knowledge access",
+        "resources",
+        "consequence exposure",
+        "escalation path"
+      ],
+      "operations": [
+        "move authority toward responsibility or responsibility toward authority",
+        "fund repair capacity",
+        "remove impossible obligations",
+        "make escalation non-punitive"
+      ],
+      "outputs": [
+        "RACI-plus-consequence matrix",
+        "resource commitments",
+        "escalation contract",
+        "shock-absorber audit"
+      ],
+      "closureTest": "No party remains accountable for an outcome they lack the authority, knowledge, resources, or lawful path to repair."
+    },
+    {
+      "id": "lifecycle-stewardship",
+      "title": "Lifecycle Stewardship",
+      "useWhen": [
+        "construction is funded but maintenance is not",
+        "products lack retirement paths",
+        "operational burden is hidden"
+      ],
+      "requiredInputs": [
+        "full lifecycle",
+        "operators",
+        "maintenance schedule",
+        "failure modes",
+        "replacement reserve",
+        "retirement conditions"
+      ],
+      "operations": [
+        "calculate lifecycle burden",
+        "assign stewardship",
+        "fund maintenance and replacement",
+        "define decommissioning and data or material disposition"
+      ],
+      "outputs": [
+        "stewardship plan",
+        "lifecycle cost model",
+        "maintenance ownership",
+        "retirement plan"
+      ],
+      "closureTest": "The created system has viable operation, maintenance, repair, replacement, and retirement paths before launch."
+    },
+    {
+      "id": "provenance-witness",
+      "title": "Provenance and Witness",
+      "useWhen": [
+        "claims cannot be traced",
+        "summaries replace sources",
+        "AI-generated content recursively amplifies itself"
+      ],
+      "requiredInputs": [
+        "claim",
+        "source",
+        "method",
+        "originator",
+        "uncertainty",
+        "criticism and correction history"
+      ],
+      "operations": [
+        "anchor claims",
+        "separate source from inference",
+        "preserve negative results",
+        "record supersession and correction",
+        "prevent circular sourcing"
+      ],
+      "outputs": [
+        "claim ledger",
+        "source inventory",
+        "method record",
+        "correction and supersession chain"
+      ],
+      "closureTest": "Every consequential claim retains a reconstructible path to evidence, method, criticism, and correction."
+    },
+    {
+      "id": "global-closure",
+      "title": "Local–Global Closure",
+      "useWhen": [
+        "local optimization degrades containing systems",
+        "institutional metrics conflict",
+        "one subsystem exports defect to another"
+      ],
+      "requiredInputs": [
+        "local objective",
+        "containing systems",
+        "shared invariants",
+        "coupling paths",
+        "failure thresholds",
+        "long-horizon effects"
+      ],
+      "operations": [
+        "map containment and dependence",
+        "declare global invariants",
+        "test local policies under transport",
+        "limit actions that consume shared baselines",
+        "create cross-boundary governance"
+      ],
+      "outputs": [
+        "nested invariant map",
+        "cross-system impact model",
+        "admissibility gates",
+        "shared repair compact"
+      ],
+      "closureTest": "Local success remains admissible after its consequences are transported through every materially affected containing system."
+    },
+    {
+      "id": "representation-revision",
+      "title": "Representational Revision",
+      "useWhen": [
+        "exceptions accumulate",
+        "categories no longer fit",
+        "manual repairs conceal model failure",
+        "language and operation diverge"
+      ],
+      "requiredInputs": [
+        "current representation",
+        "operating conditions",
+        "defect evidence",
+        "omitted distinctions",
+        "protected invariants",
+        "candidate revision"
+      ],
+      "operations": [
+        "make the defect explicit",
+        "introduce or refine distinctions",
+        "compare reachable states",
+        "test under known failures",
+        "promote, reject, or supersede visibly"
+      ],
+      "outputs": [
+        "representation diff",
+        "defect register",
+        "test results",
+        "promotion decision",
+        "revision trigger"
+      ],
+      "closureTest": "The revised representation handles the exposed defect, preserves required invariants, and contains a lawful path for future revision."
+    }
+  ],
+  "viewRegistry": {
+    "principle": "A view is a projection of the content graph plus pathway overlays; it is not a separate ontology.",
+    "views": [
+      {
+        "id": "sequence",
+        "primaryQuestion": "What should I understand next?",
+        "d3Use": "camera, transitions, and small stage-specific diagrams",
+        "bestFor": [
+          "first passage",
+          "mechanics cycles",
+          "evidence or repair pipelines"
+        ]
+      },
+      {
+        "id": "radial",
+        "primaryQuestion": "What surrounds and conditions this object?",
+        "d3Use": "cluster, linkRadial, arc, fixed semantic rings",
+        "bestFor": [
+          "root cards",
+          "theory facets",
+          "agent functions",
+          "mechanics cycles"
+        ]
+      },
+      {
+        "id": "tree",
+        "primaryQuestion": "What contains, grounds, or descends from what?",
+        "d3Use": "tree, cluster, partition, treemap",
+        "bestFor": [
+          "nested interiors",
+          "baseline dependence",
+          "lineage",
+          "canonical hierarchy"
+        ]
+      },
+      {
+        "id": "flow",
+        "primaryQuestion": "Where does benefit, burden, authority, or repair travel?",
+        "d3Use": "d3-sankey or layered DAG",
+        "bestFor": [
+          "externalities",
+          "agency chains",
+          "repair routing",
+          "lifecycle flow"
+        ]
+      },
+      {
+        "id": "state",
+        "primaryQuestion": "What states and transitions are admissible?",
+        "d3Use": "d3-shape links and arcs, d3-dag for acyclic portions",
+        "bestFor": [
+          "software operationalization",
+          "appeal workflows",
+          "representation revision"
+        ]
+      },
+      {
+        "id": "atlas",
+        "primaryQuestion": "How does the complete body connect?",
+        "d3Use": "curated coordinates, force collision, zoom, filters",
+        "bestFor": [
+          "post-orientation exploration",
+          "cross-domain discovery",
+          "path emphasis"
+        ]
+      },
+      {
+        "id": "node",
+        "primaryQuestion": "What exactly is this?",
+        "d3Use": "only small local diagrams; prose and evidence remain primary",
+        "bestFor": [
+          "doctrine expansion",
+          "claims",
+          "sources",
+          "repair packets"
+        ]
+      }
+    ],
+    "selectionRules": [
+      "Use hierarchy only when containment or descent is the claim.",
+      "Use Sankey only when flow or transfer is the claim; do not imply numerical precision when only qualitative weight is known.",
+      "Use force layouts for networks, not hierarchy; preserve curated anchors for canonical architecture.",
+      "Use radial layouts for one focus with three to seven primary neighbors or a genuinely cyclic mechanism.",
+      "Use state diagrams when admissibility and transition matter more than conceptual proximity.",
+      "Use cards and prose when the relationship is primarily doctrinal rather than geometric.",
+      "Every visualization has a text alternative, stable keyboard order, mobile fallback, and reduced-motion form."
+    ]
+  }
+}
