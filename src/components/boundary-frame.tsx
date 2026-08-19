@@ -13,6 +13,7 @@ type BoundaryFrameProps = {
   onHome: () => void;
   onBack: () => void;
   onNavigate: (id: string) => void;
+  onFocusPath: (id: string) => void;
   onZoomOut: () => void;
   onZoomIn: () => void;
   onSearch: () => void;
@@ -59,10 +60,14 @@ export function BoundaryFrame({
   onHome,
   onBack,
   onNavigate,
+  onFocusPath,
   onZoomOut,
   onZoomIn,
   onSearch,
 }: BoundaryFrameProps) {
+  const focusPath = breadcrumbs.filter((node) => node.id !== "root");
+  const showCurrentFocus = focusNode.id !== "root";
+
   return (
     <div className={`boundary-frame ${visible ? "boundary-frame--visible" : ""}`}>
       <header className="boundary-frame__top">
@@ -106,52 +111,57 @@ export function BoundaryFrame({
             <FrameIcon name="search" />
             <span className="frame-tool__label">Search</span>
           </button>
-          <div className="frame-zoom" aria-label="Gestalt scale controls">
+          <div className="frame-zoom" aria-label="Gestalt whole controls">
             <span className="frame-zoom__label" aria-hidden="true">
-              <span>Scale</span>
+              <span>Whole</span>
               <strong>Gestalt</strong>
             </span>
             <button
               className="frame-tool"
               onClick={onZoomOut}
               disabled={!canZoomOut}
-              aria-label="Zoom out gestalt"
-              title="Zoom out: show what this is part of"
+              aria-label="Expand the gestalt whole"
+              title="Expand the whole while preserving the current focus"
             >
               <FrameIcon name="minus" />
-              <span className="frame-tool__label">Zoom out</span>
+              <span className="frame-tool__label">Expand whole</span>
             </button>
             <button
               className="frame-tool"
               onClick={onZoomIn}
               disabled={!canZoomIn}
-              aria-label="Zoom in gestalt"
-              title="Zoom in: restore the contained whole"
+              aria-label="Narrow the gestalt whole"
+              title="Narrow the whole toward the current focus"
             >
               <FrameIcon name="plus" />
-              <span className="frame-tool__label">Zoom in</span>
+              <span className="frame-tool__label">Narrow whole</span>
             </button>
           </div>
         </div>
       </header>
 
-      <aside className="boundary-frame__left" aria-label="Current containment path">
-        <div className="path-label">Path</div>
+      <aside className="boundary-frame__left" aria-label="Current focus ancestry path">
+        <div className="path-label">Focus path</div>
         <ol>
-          {breadcrumbs.map((node) => (
+          {focusPath.map((node) => (
             <li key={node.id}>
               <span className="path-node__dot" aria-hidden="true" />
-              <button onClick={() => onNavigate(node.id)} title={`Go to ${node.label}`}>
+              <button
+                onClick={() => onFocusPath(node.id)}
+                title={`Move focus to ${node.label}; preserve the current whole when possible`}
+              >
                 <span className="path-node__label">{node.shortLabel ?? node.label}</span>
               </button>
             </li>
           ))}
-          <li aria-current="page">
-            <span className="path-node__dot" aria-hidden="true" />
-            <span className="path-node__current">
-              <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
-            </span>
-          </li>
+          {showCurrentFocus ? (
+            <li aria-current="page">
+              <span className="path-node__dot" aria-hidden="true" />
+              <span className="path-node__current">
+                <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
+              </span>
+            </li>
+          ) : null}
         </ol>
       </aside>
 
@@ -163,17 +173,6 @@ export function BoundaryFrame({
         <span className="frame-status frame-status--gestalt">
           <strong>Whole</strong>
           <span className="frame-status__value">{gestaltNode.shortLabel ?? gestaltNode.label}</span>
-        </span>
-        <span className="boundary-frame__hint" aria-label="Interaction grammar">
-          <span className="frame-hint__operator">
-            <span className="frame-hint__key">Click</span>
-            <span className="frame-hint__text">traverse</span>
-          </span>
-          <span className="frame-hint__separator" aria-hidden="true" />
-          <span className="frame-hint__operator">
-            <span className="frame-hint__key">Scale</span>
-            <span className="frame-hint__text">change the whole</span>
-          </span>
         </span>
       </footer>
     </div>
