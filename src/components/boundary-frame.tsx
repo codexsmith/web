@@ -18,6 +18,36 @@ type BoundaryFrameProps = {
   onSearch: () => void;
 };
 
+type FrameIconName = "back" | "search" | "minus" | "plus";
+
+function FrameIcon({ name }: { name: FrameIconName }) {
+  if (name === "back") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M10 5 4 11l6 6" />
+        <path d="M5 11h8.5a6.5 6.5 0 0 1 6.5 6.5" />
+      </svg>
+    );
+  }
+
+  if (name === "search") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="10.5" cy="10.5" r="5.75" />
+        <path d="m15 15 4.5 4.5" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="7.5" />
+      <path d="M8.75 12h6.5" />
+      {name === "plus" ? <path d="M12 8.75v6.5" /> : null}
+    </svg>
+  );
+}
+
 export function BoundaryFrame({
   visible,
   focusNode,
@@ -40,61 +70,111 @@ export function BoundaryFrame({
           <span className="brand-anchor__mark" aria-hidden="true">
             BF
           </span>
-          <span className="brand-anchor__name">Boundary First Labs</span>
+          <span className="brand-anchor__copy">
+            <span className="brand-anchor__name">Boundary First Labs</span>
+            <span className="brand-anchor__mode">Root · knowledge environment</span>
+          </span>
         </button>
 
-        <nav className="primary-nav" aria-label="Primary navigation">
-          {rootBranches.map((branch) => {
+        <nav className="primary-nav" aria-label="Primary regions">
+          {rootBranches.map((branch, index) => {
             const active = breadcrumbs.some((node) => node.id === branch.id) || focusNode.id === branch.id;
             return (
               <button
                 key={branch.id}
                 className={active ? "is-active" : ""}
                 onClick={() => onNavigate(branch.id)}
+                aria-current={active ? "page" : undefined}
+                title={`Enter ${branch.label}`}
               >
-                {branch.label}
+                <span className="primary-nav__index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="primary-nav__label">{branch.label}</span>
+                <span className="primary-nav__signal" aria-hidden="true" />
               </button>
             );
           })}
         </nav>
 
         <div className="frame-tools" aria-label="Global controls">
-          <button onClick={onBack} aria-label="Back" title="Back">
-            Back
+          <button className="frame-tool frame-tool--back" onClick={onBack} aria-label="Back" title="Back through traversal history">
+            <FrameIcon name="back" />
+            <span className="frame-tool__label">Back</span>
           </button>
-          <button onClick={onSearch} aria-label="Search" title="Search">
-            Search
+          <button className="frame-tool" onClick={onSearch} aria-label="Search" title="Search the lab">
+            <FrameIcon name="search" />
+            <span className="frame-tool__label">Search</span>
           </button>
-          <span className="tool-divider" aria-hidden="true" />
-          <button onClick={onZoomOut} disabled={!canZoomOut} aria-label="Zoom out gestalt" title="Zoom out gestalt">
-            -
-          </button>
-          <button onClick={onZoomIn} disabled={!canZoomIn} aria-label="Zoom in gestalt" title="Zoom in gestalt">
-            +
-          </button>
+          <div className="frame-zoom" aria-label="Gestalt scale controls">
+            <span className="frame-zoom__label" aria-hidden="true">
+              <span>Scale</span>
+              <strong>Gestalt</strong>
+            </span>
+            <button
+              className="frame-tool"
+              onClick={onZoomOut}
+              disabled={!canZoomOut}
+              aria-label="Zoom out gestalt"
+              title="Zoom out: show what this is part of"
+            >
+              <FrameIcon name="minus" />
+              <span className="frame-tool__label">Zoom out</span>
+            </button>
+            <button
+              className="frame-tool"
+              onClick={onZoomIn}
+              disabled={!canZoomIn}
+              aria-label="Zoom in gestalt"
+              title="Zoom in: restore the contained whole"
+            >
+              <FrameIcon name="plus" />
+              <span className="frame-tool__label">Zoom in</span>
+            </button>
+          </div>
         </div>
       </header>
 
-      <aside className="boundary-frame__left" aria-label="Current path">
+      <aside className="boundary-frame__left" aria-label="Current containment path">
         <div className="path-label">Path</div>
         <ol>
           {breadcrumbs.map((node) => (
             <li key={node.id}>
-              <button onClick={() => onNavigate(node.id)}>{node.shortLabel ?? node.label}</button>
+              <span className="path-node__dot" aria-hidden="true" />
+              <button onClick={() => onNavigate(node.id)} title={`Go to ${node.label}`}>
+                <span className="path-node__label">{node.shortLabel ?? node.label}</span>
+              </button>
             </li>
           ))}
-          <li aria-current="page">{focusNode.shortLabel ?? focusNode.label}</li>
+          <li aria-current="page">
+            <span className="path-node__dot" aria-hidden="true" />
+            <span className="path-node__current">
+              <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
+            </span>
+          </li>
         </ol>
       </aside>
 
       <footer className="boundary-frame__bottom">
-        <span>
-          <strong>Focus</strong> {focusNode.shortLabel ?? focusNode.label}
+        <span className="frame-status frame-status--focus">
+          <strong>Focus</strong>
+          <span className="frame-status__value">{focusNode.shortLabel ?? focusNode.label}</span>
         </span>
-        <span>
-          <strong>Gestalt</strong> {gestaltNode.shortLabel ?? gestaltNode.label}
+        <span className="frame-status frame-status--gestalt">
+          <strong>Whole</strong>
+          <span className="frame-status__value">{gestaltNode.shortLabel ?? gestaltNode.label}</span>
         </span>
-        <span className="boundary-frame__hint">Click traverses. Zoom changes the whole.</span>
+        <span className="boundary-frame__hint" aria-label="Interaction grammar">
+          <span className="frame-hint__operator">
+            <span className="frame-hint__key">Click</span>
+            <span className="frame-hint__text">traverse</span>
+          </span>
+          <span className="frame-hint__separator" aria-hidden="true" />
+          <span className="frame-hint__operator">
+            <span className="frame-hint__key">Scale</span>
+            <span className="frame-hint__text">change the whole</span>
+          </span>
+        </span>
       </footer>
     </div>
   );
