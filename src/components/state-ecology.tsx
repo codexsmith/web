@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ContentNode, DeliveryStage, getChildren } from "@/lib/content";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { getSemanticEvents, type SemanticEvent } from "@/lib/semantic-events";
 
 type StateEcologyProps = {
   focusNode: ContentNode;
@@ -142,10 +143,18 @@ function evidencePosture(node: ContentNode) {
   };
 }
 
+function eventEffectiveLabel(event: SemanticEvent) {
+  if (!event.effectiveAt) return "Effective date not established";
+  if (event.datePrecision === "year") return event.effectiveAt.slice(0, 4);
+  if (event.datePrecision === "month") return event.effectiveAt.slice(0, 7);
+  return event.effectiveAt;
+}
+
 export function StateEcology({ focusNode, gestaltNode }: StateEcologyProps) {
   const [open, setOpen] = useState(false);
   const profile = deriveStateProfile(focusNode);
   const evidence = evidencePosture(focusNode);
+  const ledgerEvents = useMemo(() => getSemanticEvents(focusNode.id), [focusNode.id]);
 
   const worldDistribution = useMemo(() => {
     const children = getChildren(gestaltNode.id).map(hydrateContentNode);
@@ -176,6 +185,9 @@ export function StateEcology({ focusNode, gestaltNode }: StateEcologyProps) {
   }, [focusNode.id]);
 
   const hasWorldField = worldDistribution.children.length > 0;
+  const ledgerLabel = ledgerEvents.length
+    ? `${ledgerEvents.length} ledger ${ledgerEvents.length === 1 ? "event" : "events"}`
+    : "no explicit ledger";
 
   return (
     <aside
@@ -192,7 +204,7 @@ export function StateEcology({ focusNode, gestaltNode }: StateEcologyProps) {
         <span className="state-ecology__identity">
           <small>State field</small>
           <strong>{profile.label}</strong>
-          <em>{evidence.label}</em>
+          <em>{evidence.label} · {ledgerLabel}</em>
         </span>
         <span className="state-ecology__chevron" aria-hidden="true">{open ? "−" : "+"}</span>
       </button>
@@ -216,6 +228,70 @@ export function StateEcology({ focusNode, gestaltNode }: StateEcologyProps) {
             <p>{profile.transitionGate}</p>
           </section>
 
+          <section className="state-ecology__section state-ecology__section--ledger">
+            <span className="state-ecology__label">Semantic event ledger</span>
+            {ledgerEvents.length ? (
+              <div className="semantic-event-ledger">
+                {ledgerEvents.map((event) => (
+                  <article
+                    className="semantic-event"
+                    data-event-type={event.type}
+                    data-standing-effect={event.standingEffect}
+                    key={event.id}
+                  >
+                    <span className="semantic-event__rail" aria-hidden="true" />
+                    <header className="semantic-event__header">
+                      <span>
+                        <small>{event.type.replaceAll("-", " ")}</small>
+                        <strong>{event.label}</strong>
+                      </span>
+                      <time dateTime={event.effectiveAt ?? event.recordedAt}>
+                        {eventEffectiveLabel(event)}
+                      </time>
+                    </header>
+                    <p>{event.summary}</p>
+                    <dl className="semantic-event__facts">
+                      <div>
+                        <dt>Actor</dt>
+                        <dd>{event.actor.label}</dd>
+                      </div>
+                      <div>
+                        <dt>Standing effect</dt>
+                        <dd>{event.standingEffect}</dd>
+                      </div>
+                      {event.resultingStage ? (
+                        <div>
+                          <dt>Resulting stage</dt>
+                          <dd>{event.resultingStage}</dd>
+                        </div>
+                      ) : null}
+                      <div>
+                        <dt>Recorded</dt>
+                        <dd>{event.recordedAt}</dd>
+                      </div>
+                    </dl>
+                    <div className="semantic-event__ceiling">
+                      <small>Claim ceiling</small>
+                      <p>{event.claimCeiling}</p>
+                    </div>
+                    <div className="semantic-event__evidence">
+                      <small>Evidence / provenance</small>
+                      <ul>
+                        {event.evidenceRefs.map((evidenceRef) => (
+                          <li key={evidenceRef}>{evidenceRef}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <p className="semantic-event-ledger__empty">
+                No semantic events have been admitted for this object yet. Current standing remains a state claim, not a reconstructed chronology.
+              </p>
+            )}
+          </section>
+
           {hasWorldField ? (
             <section className="state-ecology__section">
               <span className="state-ecology__label">Current whole · declared state distribution</span>
@@ -231,7 +307,7 @@ export function StateEcology({ focusNode, gestaltNode }: StateEcologyProps) {
           ) : null}
 
           <p className="state-ecology__clock-note">
-            No semantic timestamps are inferred here. “Recent,” “blocked,” “superseded,” and similar temporal claims require explicit source data.
+            Event effective dates are shown only when the retained source establishes them. Ledger recording dates are not substituted for unknown domain-event dates.
           </p>
         </div>
       ) : null}
