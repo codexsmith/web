@@ -1,0 +1,91 @@
+/* Interactive affordances layered after the structural Boundary Frame treatment. */
+
+.frame-tools .frame-tool {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+}
+
+/* Spatial traversal beacons belong to the same operating language as the frame. */
+.direction-control {
+  min-height: 44px;
+  gap: 0.55rem;
+  padding: 0.46rem 0.7rem 0.46rem 0.48rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent),
+    color-mix(in srgb, var(--paper-strong) 92%, transparent);
+  box-shadow:
+    0 8px 24px rgba(23, 32, 28, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(16px) saturate(108%);
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.direction-control:hover {
+  border-color: var(--ink);
+  background: var(--paper-strong);
+  box-shadow:
+    0 11px 30px rgba(23, 32, 28, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.direction-control span {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--field);
+  color: var(--accent);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.direction-control small {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.64rem;
+  line-height: 1.15;
+}
+
+.direction-control--up:hover {
+  transform: translate(-50%, -2px);
+}
+
+.direction-control--left:hover {
+  transform: translate(-2px, -50%);
+}
+
+.direction-control--right {
+  padding: 0.46rem 0.48rem 0.46rem 0.7rem;
+}
+
+.direction-control--right:hover {
+  transform: translate(2px, -50%);
+}
+
+@media (max-width: 720px) {
+  .direction-control {
+    min-height: 40px;
+    border-radius: 10px;
+  }
+
+  .direction-control--left:hover,
+  .direction-control--right:hover {
+    transform: none;
+  }
+
+  .direction-control--up:hover {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .direction-control {
+    transition: none;
+  }
+}
