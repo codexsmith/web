@@ -87,14 +87,18 @@ try {
   await expectPage("/", [
     "Software for difficult systems.",
     "Enter the lab",
-    "Entry threshold",
+    "Boundary First Labs",
   ], [
     "Enter region",
     "Root World · operating environment",
+    "The hero is the threshold",
+    "Cross the threshold to activate",
+    "One proposition · one action · one world beyond it",
   ]);
 
   await expectPage("/?world=1", [
     "Root World · operating environment",
+    "Follow the work, the evidence behind it, and the obligations it creates.",
     "Products",
     "Public Interest",
     "Research",
@@ -103,6 +107,7 @@ try {
     "Enter region",
   ], [
     "Enter the lab",
+    "The entered Root World is an operating map rather than a second hero",
   ]);
 
   await expectPage("/publications", [

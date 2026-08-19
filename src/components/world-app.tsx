@@ -21,6 +21,10 @@ type WorldAppProps = {
   initialHeroVisible?: boolean;
 };
 
+type TraversalWindow = Window & {
+  __bflFocusTraversal?: string[];
+};
+
 function inferDirection(fromId: string, toId: string): TransitionDirection {
   if (fromId === toId) return "none";
   const from = getNode(fromId);
@@ -56,10 +60,31 @@ function appendTraversal(path: string[], targetId: string) {
   return [...path, targetId];
 }
 
-function rewindTraversal(path: string[], targetId: string) {
+function rewindTraversal(path: string[], targetId: string, targetIndex?: number) {
+  if (typeof targetIndex === "number" && path[targetIndex] === targetId) {
+    return path.slice(0, targetIndex + 1);
+  }
+
   const index = path.lastIndexOf(targetId);
   if (index < 0) return appendTraversal(path, targetId);
   return path.slice(0, index + 1);
+}
+
+function readTraversalMemory() {
+  if (typeof window === "undefined") return [];
+  const remembered = (window as TraversalWindow).__bflFocusTraversal;
+  return Array.isArray(remembered) ? [...remembered] : [];
+}
+
+function writeTraversalMemory(path: string[]) {
+  if (typeof window === "undefined") return;
+  (window as TraversalWindow).__bflFocusTraversal = [...path];
+}
+
+function traversalBase(localPath: string[], focusId: string) {
+  const remembered = readTraversalMemory();
+  if (remembered.length && remembered[remembered.length - 1] === focusId) return remembered;
+  return localPath;
 }
 
 function readBrowserState() {
@@ -113,13 +138,24 @@ export function WorldApp({
   }, [focusNode, inspectionId]);
 
   useEffect(() => {
+    const remembered = readTraversalMemory();
+    const restored = remembered.length ? appendTraversal(remembered, initialNodeId) : [initialNodeId];
+    writeTraversalMemory(restored);
+    setTraversalIds(restored);
+  }, [initialNodeId]);
+
+  useEffect(() => {
     const onPopState = () => {
       const next = readBrowserState();
+      const remembered = readTraversalMemory();
+      const nextTraversal = remembered.length ? appendTraversal(remembered, next.node.id) : [next.node.id];
+
+      writeTraversalMemory(nextTraversal);
       setFocusId(next.node.id);
       setProjection(next.projection);
       setProcessScope(next.processScope);
       setHeroVisible(next.heroVisible);
-      setTraversalIds((current) => rewindTraversal(current, next.node.id));
+      setTraversalIds(nextTraversal);
       setTransitionDirection("none");
       setTransitionKey((value) => value + 1);
       setInspectionId(null);
@@ -153,11 +189,13 @@ export function WorldApp({
   }, [heroVisible]);
 
   const enterLab = useCallback(() => {
+    const rootTraversal = ["root"];
+    writeTraversalMemory(rootTraversal);
     setHeroVisible(false);
     setFocusId("root");
     setProjection("world");
     setProcessScope("full");
-    setTraversalIds(["root"]);
+    setTraversalIds(rootTraversal);
     setTransitionDirection("none");
     setTransitionKey((value) => value + 1);
     router.replace(stateUrl("root", "world", "full"), { scroll: false });
@@ -165,6 +203,8 @@ export function WorldApp({
 
   const navigate = useCallback(
     (targetId: string, direction?: TransitionDirection) => {
+      const nextTraversal = appendTraversal(traversalBase(traversalIds, focusId), targetId);
+      writeTraversalMemory(nextTraversal);
       setTransitionDirection(direction ?? inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
@@ -172,32 +212,36 @@ export function WorldApp({
       setInspectionId(null);
       router.push(stateUrl(targetId, projection, processScope), { scroll: false });
     },
-    [focusId, processScope, projection, router],
+    [focusId, processScope, projection, router, traversalIds],
   );
 
   const navigateHome = useCallback(() => {
+    const nextTraversal = appendTraversal(traversalBase(traversalIds, focusId), "root");
+    writeTraversalMemory(nextTraversal);
     setHeroVisible(false);
     setTransitionDirection("up");
     setTransitionKey((value) => value + 1);
     setFocusId("root");
-    setTraversalIds((current) => appendTraversal(current, "root"));
+    setTraversalIds(nextTraversal);
     setProjection("world");
     setProcessScope("full");
     setInspectionId(null);
     router.push(stateUrl("root", "world", "full"), { scroll: false });
-  }, [router]);
+  }, [focusId, router, traversalIds]);
 
   const navigateTraversalPath = useCallback(
     (targetId: string, index: number) => {
       if (targetId === focusId && index === traversalIds.length - 1) return;
+      const rewoundTraversal = rewindTraversal(traversalBase(traversalIds, focusId), targetId, index);
+      writeTraversalMemory(rewoundTraversal);
       setTransitionDirection(inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
-      setTraversalIds((current) => current.slice(0, index + 1));
+      setTraversalIds(rewoundTraversal);
       setInspectionId(null);
       router.push(stateUrl(targetId, projection, processScope), { scroll: false });
     },
-    [focusId, processScope, projection, router, traversalIds.length],
+    [focusId, processScope, projection, router, traversalIds],
   );
 
   const changeProcessScope = useCallback(

@@ -14,10 +14,10 @@ export function HeroScreen({ onEnter }: HeroScreenProps) {
       </div>
 
       <section className="hero-screen__copy">
-        <p className="hero-screen__eyebrow">Boundary First Labs · Software research and engineering lab</p>
+        <p className="hero-screen__eyebrow">Boundary First Labs</p>
         <h1 id="hero-screen-title">Software for difficult systems.</h1>
         <p className="hero-screen__lede">
-          Products, public-interest work, and research for domains where representation, boundaries, state, and responsibility matter.
+          We build software, methods, and public-interest work for domains where hidden assumptions become operational consequences.
         </p>
 
         <div className="hero-screen__entry">
@@ -25,7 +25,6 @@ export function HeroScreen({ onEnter }: HeroScreenProps) {
             <span>Enter the lab</span>
             <span aria-hidden="true">→</span>
           </button>
-          <p>Cross the threshold to activate the Boundary navigation environment.</p>
         </div>
       </section>
 
@@ -43,15 +42,7 @@ export function HeroScreen({ onEnter }: HeroScreenProps) {
           <div className="hero-apparatus__port hero-apparatus__port--left">Observe</div>
           <div className="hero-apparatus__port hero-apparatus__port--right">Act</div>
         </div>
-        <p>
-          The hero is the threshold. The Root World begins after entry; structure and traversal live inside the frame.
-        </p>
       </section>
-
-      <footer className="hero-screen__footer">
-        <span>Entry threshold</span>
-        <span>One proposition · one action · one world beyond it</span>
-      </footer>
     </main>
   );
 }

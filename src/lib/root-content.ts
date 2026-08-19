@@ -5,8 +5,11 @@ type RootOverride = Partial<
 >;
 
 const rootOverride: RootOverride = {
+  summary:
+    "Follow the work, the evidence behind it, and the obligations it creates.",
   body: [
-    "The entered Root World is an operating map rather than a second hero. Products shows what the Lab is building and has delivered; Public Interest states what technical capacity is for; Research exposes evidence, mechanism, and formalization; Publications shows which written artifacts exist and how close each is to a stable release boundary; About makes method, provenance, stewardship, and institutional standing inspectable.",
+    "Boundary First work starts with consequential boundaries: what the system represents, what it permits, what it must preserve, and how failure returns to repair.",
+    "Publications shows which written artifacts exist and how close each is to a stable release boundary; Products, Public Interest, Research, and About preserve the other major public responsibilities without collapsing them into one authority claim.",
     "A recurring entry point is the system that almost works: the process everyone works around, the software that succeeds only because people quietly compensate for it, the responsibility that keeps moving between departments, the metric that looks healthy while the lived system gets worse, or the new capability that needs governance before it gains consequence.",
   ],
   inspection: [
