@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./portfolio.css";
+import "./boundary-frame.css";
 
 export const metadata: Metadata = {
   title: {
