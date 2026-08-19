@@ -133,6 +133,7 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   return (
     <WorldApp
+      key={`${node.id}:${initialProjection}:${initialProcessScope}`}
       initialNodeId={node.id}
       initialProjection={initialProjection}
       initialProcessScope={initialProcessScope}
