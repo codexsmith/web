@@ -8,6 +8,8 @@ import "./world-morphology.css";
 import "./world-ecology.css";
 import "./focus-telemetry.css";
 import "./focus-telemetry-interaction.css";
+import "./state-ecology.css";
+import "./state-surface-projection.css";
 import "./industrial-interaction.css";
 
 export const metadata: Metadata = {
