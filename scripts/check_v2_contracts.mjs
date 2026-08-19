@@ -143,6 +143,10 @@ for (const path of [
   "src/content/public-projections/work.json",
   "src/content/work_portfolio.json",
   "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json",
+  "backlog/10_social_mission_preagent_ux/03_The_Institute.md",
+  "backlog/10_social_mission_preagent_ux/05_founders_note.md",
+  "backlog/10_social_mission_preagent_ux/06_BFL_ethos.md",
+  "backlog/10_social_mission_preagent_ux/07_public_mission.md",
 ]) {
   requireExists(path, "Rich retained public-content source must remain available");
 }
@@ -185,6 +189,47 @@ forbidMatch(
   "src/lib/root-content.ts",
   /Software for difficult systems\./,
   "Root content fill must not duplicate the hero proposition",
+);
+
+// Public institutional depth is append-only and must preserve its governance/engagement claim boundaries.
+requireExists(
+  "src/lib/public-depth-content.ts",
+  "Public institutional depth projection must exist",
+);
+requireMatch(
+  "src/lib/content-projections.ts",
+  /hydratePublicDepthNode[\s\S]*hydratePublicInterestNode/,
+  "Canonical content hydration must apply Public Depth after the primary Public Interest projection",
+);
+requireMatch(
+  "src/lib/public-depth-content.ts",
+  /What we ask of systems, we must ask of ourselves[\s\S]*No undeclared “we”[\s\S]*No product without stewardship/,
+  "Public depth must preserve the institutional covenant rather than reducing governance to generic values",
+);
+requireMatch(
+  "src/lib/public-depth-content.ts",
+  /What is the smallest relationship that allows the work to encounter the strongest relevant reality/,
+  "Public depth must preserve the bounded collaboration test",
+);
+requireMatch(
+  "src/lib/public-depth-content.ts",
+  /World class is what you give the world[\s\S]*Contribution standard, not prestige certification/,
+  "Public depth must preserve contribution-over-prestige framing with its claim ceiling",
+);
+requireMatch(
+  "src/lib/public-depth-content.ts",
+  /founder -> work -> lab[\s\S]*Biography explains origin; it does not validate theory/,
+  "Public depth must keep founder provenance separate from work substance and institutional stewardship",
+);
+forbidMatch(
+  "src/lib/public-depth-content.ts",
+  /\bstatus\s*:/,
+  "Append-only public depth must not override canonical lifecycle status",
+);
+forbidMatch(
+  "src/lib/public-depth-content.ts",
+  /href:\s*"\/(help|governance|record\/challenge|start|learn)"/,
+  "Public depth must not revive stale historical UX routes",
 );
 
 // Text preservation wins over decorative geometry under zoom / viewport compression.
