@@ -20,6 +20,7 @@ import {
 
 type WorldAppProps = {
   initialNodeId: string;
+  initialGestaltId?: string;
   skipLanding: boolean;
 };
 
@@ -41,10 +42,11 @@ function inferDirection(fromId: string, toId: string): TransitionDirection {
   return "cross";
 }
 
-export function WorldApp({ initialNodeId, skipLanding }: WorldAppProps) {
+export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: WorldAppProps) {
   const router = useRouter();
+  const resolvedInitialGestaltId = initialGestaltId ?? initialNodeId;
   const [focusId, setFocusId] = useState(initialNodeId);
-  const [gestaltId, setGestaltId] = useState(initialNodeId);
+  const [gestaltId, setGestaltId] = useState(resolvedInitialGestaltId);
   const [introEnabled, setIntroEnabled] = useState(initialNodeId === "root" && !skipLanding);
   const [landingProgress, setLandingProgress] = useState(skipLanding ? 1 : 0);
   const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>("none");
@@ -66,11 +68,11 @@ export function WorldApp({ initialNodeId, skipLanding }: WorldAppProps) {
 
   useEffect(() => {
     setFocusId(initialNodeId);
-    setGestaltId(initialNodeId);
+    setGestaltId(initialGestaltId ?? initialNodeId);
     setIntroEnabled(initialNodeId === "root" && !skipLanding);
     setLandingProgress(initialNodeId === "root" && !skipLanding ? 0 : 1);
     setInspectionId(null);
-  }, [initialNodeId, skipLanding]);
+  }, [initialNodeId, initialGestaltId, skipLanding]);
 
   useEffect(() => {
     const locked = !introEnabled;
@@ -103,6 +105,25 @@ export function WorldApp({ initialNodeId, skipLanding }: WorldAppProps) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  const replaceGestaltUrl = useCallback(
+    (nextGestaltId: string) => {
+      const focusPath = getPathForNode(focusId);
+      const params = new URLSearchParams();
+
+      if (focusId === "root") {
+        params.set("world", "1");
+      }
+
+      if (nextGestaltId !== focusId) {
+        params.set("gestalt", nextGestaltId);
+      }
+
+      const query = params.toString();
+      router.replace(query ? `${focusPath}?${query}` : focusPath, { scroll: false });
+    },
+    [focusId, router],
+  );
+
   const navigate = useCallback(
     (targetId: string, direction?: TransitionDirection) => {
       const nextDirection = direction ?? inferDirection(focusId, targetId);
@@ -129,7 +150,8 @@ export function WorldApp({ initialNodeId, skipLanding }: WorldAppProps) {
     setTransitionDirection("zoom-out");
     setTransitionKey((value) => value + 1);
     setGestaltId(parent.id);
-  }, [gestaltId]);
+    replaceGestaltUrl(parent.id);
+  }, [gestaltId, replaceGestaltUrl]);
 
   const zoomIn = useCallback(() => {
     if (gestaltId === focusId) return;
@@ -138,7 +160,8 @@ export function WorldApp({ initialNodeId, skipLanding }: WorldAppProps) {
     setTransitionDirection("zoom-in");
     setTransitionKey((value) => value + 1);
     setGestaltId(child.id);
-  }, [focusId, gestaltId]);
+    replaceGestaltUrl(child.id);
+  }, [focusId, gestaltId, replaceGestaltUrl]);
 
   const openInspection = useCallback((nextInspectionId: string) => {
     setInspectionId(nextInspectionId);
