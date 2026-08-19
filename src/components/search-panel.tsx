@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { nodes } from "@/lib/content";
+import { hydrateAboutNode } from "@/lib/about-content";
 
 type SearchPanelProps = {
   onClose: () => void;
@@ -10,11 +11,12 @@ type SearchPanelProps = {
 
 export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
   const [query, setQuery] = useState("");
+  const indexedNodes = useMemo(() => nodes.map(hydrateAboutNode), []);
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    if (!needle) return nodes.filter((node) => node.id !== "root").slice(0, 8);
+    if (!needle) return indexedNodes.filter((node) => node.id !== "root").slice(0, 8);
 
-    return nodes
+    return indexedNodes
       .filter((node) => {
         const searchable = [
           node.label,
@@ -23,6 +25,12 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
           node.status?.label,
           node.status?.sourceStatus,
           ...(node.body ?? []),
+          ...(node.inspection ?? []).flatMap((inspection) => [
+            inspection.label,
+            inspection.eyebrow,
+            inspection.summary,
+            ...inspection.bullets,
+          ]),
         ]
           .filter(Boolean)
           .join(" ")
@@ -30,7 +38,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
         return searchable.includes(needle);
       })
       .slice(0, 10);
-  }, [query]);
+  }, [indexedNodes, query]);
 
   return (
     <div className="search-layer" role="dialog" aria-modal="true" aria-labelledby="search-title">
@@ -49,7 +57,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
             autoFocus
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Shipped, pilot, Corpus Forge, Augusta..."
+            placeholder="Founder, stewardship, shipped, Corpus Forge..."
           />
         </label>
         <div className="search-results">
