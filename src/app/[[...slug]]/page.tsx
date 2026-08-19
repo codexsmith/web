@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WorldApp } from "@/components/world-app";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, isDescendantOf, nodes } from "@/lib/content";
+import { parseProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection } from "@/lib/view-projection";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
@@ -33,6 +34,7 @@ type PageProps = {
     world?: string | string[];
     gestalt?: string | string[];
     view?: string | string[];
+    scope?: string | string[];
   }>;
 };
 
@@ -190,20 +192,26 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   const node = getNodeByPath(slug);
   const skipLanding = query.world === "1";
-  const requestedGestaltId = typeof query.gestalt === "string" ? query.gestalt : undefined;
-  const requestedGestalt = requestedGestaltId
-    ? nodes.find((candidate) => candidate.id === requestedGestaltId)
+
+  // Legacy containment-Gestalt links remain readable, but the UI no longer emits
+  // this parameter. Gestalt now names the process projection and its scope filter.
+  const requestedLegacyGestaltId = typeof query.gestalt === "string" ? query.gestalt : undefined;
+  const requestedLegacyGestalt = requestedLegacyGestaltId
+    ? nodes.find((candidate) => candidate.id === requestedLegacyGestaltId)
     : undefined;
-  const initialGestaltId = requestedGestalt && isDescendantOf(node.id, requestedGestalt.id)
-    ? requestedGestalt.id
+  const initialGestaltId = requestedLegacyGestalt && isDescendantOf(node.id, requestedLegacyGestalt.id)
+    ? requestedLegacyGestalt.id
     : node.id;
+
   const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
+  const initialProcessScope = parseProcessScope(query.scope) ?? "full";
 
   return (
     <WorldApp
       initialNodeId={node.id}
       initialGestaltId={initialGestaltId}
       initialProjection={initialProjection}
+      initialProcessScope={initialProcessScope}
       skipLanding={skipLanding}
     />
   );
