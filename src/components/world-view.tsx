@@ -6,7 +6,6 @@ import {
   getChildren,
   getCrossEdges,
   getImmediateChildTowardFocus,
-  getParent,
   getSiblings,
 } from "@/lib/content";
 import { hydrateContentNode } from "@/lib/content-projections";
@@ -41,7 +40,6 @@ export function WorldView({
   const renderedGestaltNode = hydrateContentNode(gestaltNode);
   const renderedFocusNode = hydrateContentNode(focusNode);
   const children = getChildren(gestaltNode.id).map(hydrateContentNode);
-  const parent = getParent(gestaltNode.id);
   const focusRegion = getImmediateChildTowardFocus(gestaltNode.id, focusNode.id);
   const isLeaf = children.length === 0;
 
@@ -50,17 +48,6 @@ export function WorldView({
       key={`${gestaltNode.id}-${transitionKey}`}
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
-      {parent ? (
-        <button
-          className="direction-control direction-control--up"
-          onClick={() => onNavigate(parent.id, "up")}
-          title={`Up to ${parent.label}`}
-        >
-          <span aria-hidden="true">^</span>
-          <small>{parent.shortLabel ?? parent.label}</small>
-        </button>
-      ) : null}
-
       {isLeaf ? (
         <NodeDetail node={renderedGestaltNode} onNavigate={onNavigate} onInspect={onInspect} />
       ) : (
