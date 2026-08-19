@@ -11,10 +11,12 @@ type SubjectPaneProps = {
 
 export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
   const body = node.body ?? [];
-  const visibleBody = body.slice(0, 2);
-  const remainingBody = body.slice(2);
+  const status = node.status;
+  const publication = node.publication;
   const records = node.links ?? [];
   const inspections = node.inspection ?? [];
+  const visibleBody = body.slice(0, 2);
+  const remainingBody = body.slice(2);
   const isBranch = getChildren(node.id).length > 0;
   const relations = isBranch
     ? getCrossEdges(node.id).map((edge) => ({
@@ -27,8 +29,8 @@ export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
 
   const hasContent =
     body.length > 0 ||
-    Boolean(node.status) ||
-    Boolean(node.publication) ||
+    Boolean(status) ||
+    Boolean(publication) ||
     records.length > 0 ||
     inspections.length > 0 ||
     relations.length > 0;
@@ -39,24 +41,24 @@ export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
     <section className="subject-pane" aria-label={`Overview for ${node.label}`}>
       <header className="subject-pane__header">
         <span className="subject-pane__label">Overview</span>
-        {node.publication ? (
-          <span className="work-status-chip publication-status-chip" data-stage={node.publication.stage}>
-            {node.publication.label}
+        {publication ? (
+          <span className="work-status-chip publication-status-chip" data-stage={publication.stage}>
+            {publication.label}
           </span>
-        ) : node.status ? (
-          <span className="work-status-chip" data-stage={node.status.stage}>{node.status.label}</span>
+        ) : status ? (
+          <span className="work-status-chip" data-stage={status.stage}>{status.label}</span>
         ) : null}
       </header>
 
-      {node.publication ? (
+      {publication ? (
         <div className="subject-pane__standing">
-          <strong>{node.publication.documentClass}</strong>
-          <p>{node.publication.nextGate}</p>
+          <strong>{publication.documentClass}</strong>
+          <p>{publication.nextGate}</p>
         </div>
-      ) : node.status ? (
+      ) : status ? (
         <div className="subject-pane__standing">
-          <strong>{node.status.label}</strong>
-          <p>{node.status.detail}</p>
+          <strong>{status.label}</strong>
+          <p>{status.detail}</p>
         </div>
       ) : null}
 
