@@ -2,12 +2,9 @@
 
 import {
   ContentNode,
-  getAncestors,
   getChildren,
   getCrossEdges,
-  getImmediateChildTowardFocus,
   getParent,
-  getSiblings,
 } from "@/lib/content";
 import { hydrateContentNode } from "@/lib/content-projections";
 
@@ -22,8 +19,7 @@ export type TransitionDirection =
   | "zoom-out";
 
 type WorldViewProps = {
-  gestaltNode: ContentNode;
-  focusNode: ContentNode;
+  node: ContentNode;
   transitionDirection: TransitionDirection;
   transitionKey: number;
   onNavigate: (id: string, direction?: TransitionDirection) => void;
@@ -31,35 +27,25 @@ type WorldViewProps = {
 };
 
 export function WorldView({
-  gestaltNode,
-  focusNode,
+  node,
   transitionDirection,
   transitionKey,
   onNavigate,
   onInspect,
 }: WorldViewProps) {
-  const renderedGestaltNode = hydrateContentNode(gestaltNode);
-  const renderedFocusNode = hydrateContentNode(focusNode);
-  const children = getChildren(gestaltNode.id).map(hydrateContentNode);
-  const focusRegion = getImmediateChildTowardFocus(gestaltNode.id, focusNode.id);
+  const renderedNode = hydrateContentNode(node);
+  const children = getChildren(node.id).map(hydrateContentNode);
   const isLeaf = children.length === 0;
 
   return (
     <main
-      key={`world-${gestaltNode.id}-${transitionKey}`}
+      key={`world-${node.id}-${transitionKey}`}
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
       {isLeaf ? (
-        <LeafWorld node={renderedGestaltNode} onNavigate={onNavigate} />
+        <LeafWorld node={renderedNode} onNavigate={onNavigate} />
       ) : (
-        <BranchWorld
-          gestaltNode={renderedGestaltNode}
-          focusNode={renderedFocusNode}
-          focusRegion={focusRegion}
-          children={children}
-          onNavigate={onNavigate}
-          onInspect={onInspect}
-        />
+        <BranchWorld node={renderedNode} children={children} onNavigate={onNavigate} onInspect={onInspect} />
       )}
     </main>
   );
@@ -111,10 +97,7 @@ function LeafWorld({ node, onNavigate }: LeafWorldProps) {
       <header className="world-heading">
         <p className="eyebrow">World projection · local boundary</p>
         <h1>{node.label}</h1>
-        <p>
-          The focal object remains the whole at this scale. Containment and typed relations appear as boundary
-          ports rather than being silently converted into article content.
-        </p>
+        <p>{node.summary}</p>
       </header>
 
       <div className="leaf-world__field">
@@ -163,130 +146,60 @@ function LeafWorld({ node, onNavigate }: LeafWorldProps) {
 }
 
 type BranchWorldProps = {
-  gestaltNode: ContentNode;
-  focusNode: ContentNode;
-  focusRegion?: ContentNode;
+  node: ContentNode;
   children: ContentNode[];
   onNavigate: (id: string, direction?: TransitionDirection) => void;
   onInspect: (inspectionId: string) => void;
 };
 
-function BranchWorld({
-  gestaltNode,
-  focusNode,
-  focusRegion,
-  children,
-  onNavigate,
-  onInspect,
-}: BranchWorldProps) {
-  const focusedBelow = focusNode.id !== gestaltNode.id;
-  const showGestaltContext = !focusedBelow;
-  const inspections = gestaltNode.inspection ?? [];
-  const exploratoryInspections = inspections.filter((inspection) =>
-    inspection.id.startsWith("exploratory-"),
-  );
-  const supportingInspections = inspections.filter(
-    (inspection) => !inspection.id.startsWith("exploratory-"),
-  );
-
-  const fullFocusLineage = [
-    ...getAncestors(focusNode.id).map(hydrateContentNode),
-    focusNode,
-  ];
-  const gestaltLineageIndex = fullFocusLineage.findIndex((node) => node.id === gestaltNode.id);
-  const focusLineage = gestaltLineageIndex >= 0
-    ? fullFocusLineage.slice(gestaltLineageIndex)
-    : [gestaltNode, focusNode];
-  const focusDepth = Math.max(0, focusLineage.length - 1);
-  const focusVia = focusLineage
-    .slice(1, -1)
-    .map((node) => node.shortLabel ?? node.label)
-    .join(" › ");
+function BranchWorld({ node, children, onNavigate, onInspect }: BranchWorldProps) {
+  const inspections = node.inspection ?? [];
+  const exploratoryInspections = inspections.filter((inspection) => inspection.id.startsWith("exploratory-"));
+  const supportingInspections = inspections.filter((inspection) => !inspection.id.startsWith("exploratory-"));
+  const isRoot = node.id === "root";
 
   return (
     <section
-      className={`branch-world branch-world--${gestaltNode.kind}`}
-      data-kind={gestaltNode.kind}
-      data-gestalt-id={gestaltNode.id}
-      data-focus-depth={focusDepth}
+      className={`branch-world branch-world--${node.kind} ${isRoot ? "branch-world--root-home" : ""}`}
+      data-kind={node.kind}
+      data-world-id={node.id}
+      data-gestalt-id={node.id}
     >
       <header className="world-heading">
-        <p className="eyebrow">{gestaltNode.eyebrow}</p>
-        <h1>{gestaltNode.label}</h1>
-        <p>{gestaltNode.summary}</p>
-        {gestaltNode.body?.length ? <p className="world-heading__context">{gestaltNode.body[0]}</p> : null}
-        {focusedBelow ? (
-          <div className="focus-trace" aria-label={`${focusNode.label} remains the focal object ${focusDepth} levels inside ${gestaltNode.label}`}>
-            <span className="focus-trace__label">Focal object retained</span>
-            <strong>{focusNode.label}</strong>
-            {focusVia ? <small className="focus-trace__via">via {focusVia}</small> : null}
-            <em className="focus-trace__depth">
-              {focusDepth} {focusDepth === 1 ? "layer" : "layers"} inward
-            </em>
-          </div>
-        ) : null}
+        <p className="eyebrow">{isRoot ? "Boundary First Labs · Software research and engineering lab" : node.eyebrow}</p>
+        <h1>{isRoot ? "Software for difficult systems." : node.label}</h1>
+        <p>{node.summary}</p>
+        {node.body?.[0] ? <p className="world-heading__context">{node.body[0]}</p> : null}
       </header>
 
-      <div className={`district-grid district-grid--${Math.min(children.length, 6)}`} aria-label={`${gestaltNode.label} regions`}>
-        {children.map((child, index) => {
-          const isFocusRegion = focusRegion?.id === child.id || focusNode.id === child.id;
-          const childLineageIndex = focusLineage.findIndex((node) => node.id === child.id);
-          const childFocusLineage = childLineageIndex >= 0 ? focusLineage.slice(childLineageIndex) : [];
-          const carriesNestedFocus = isFocusRegion && focusNode.id !== child.id && childFocusLineage.length > 1;
-          const nestedDepth = Math.max(0, childFocusLineage.length - 1);
-          const nestedVia = childFocusLineage
-            .slice(1, -1)
-            .map((node) => node.shortLabel ?? node.label)
-            .join(" › ");
-
-          return (
-            <button
-              key={child.id}
-              className={`district-card ${isFocusRegion ? "district-card--focused" : ""}`}
-              data-kind={child.kind}
-              data-node-id={child.id}
-              data-carries-focus={isFocusRegion ? "true" : "false"}
-              data-focus-mode={isFocusRegion ? (carriesNestedFocus ? "nested" : "direct") : "none"}
-              onClick={() => onNavigate(child.id, "down")}
-              aria-current={isFocusRegion ? "location" : undefined}
-              title={`Enter ${child.label}`}
-            >
-              <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
-              <span className="district-card__kind">{child.eyebrow}</span>
-              {child.status ? (
-                <span className="work-status-chip" data-stage={child.status.stage}>
-                  {child.status.label}
-                </span>
-              ) : null}
-              <strong>{child.label}</strong>
-              <p>{child.summary}</p>
-
-              {carriesNestedFocus ? (
-                <span className="compact-focus">
-                  <span className="compact-focus__signal" aria-hidden="true" />
-                  <span className="compact-focus__copy">
-                    <span>Focal object retained</span>
-                    <strong>{focusNode.label}</strong>
-                    {nestedVia ? <small>via {nestedVia}</small> : null}
-                  </span>
-                  <span className="compact-focus__depth">
-                    {nestedDepth} {nestedDepth === 1 ? "layer" : "layers"}
-                  </span>
-                </span>
-              ) : null}
-
-              <span className="district-card__action">Enter region</span>
-            </button>
-          );
-        })}
+      <div className={`district-grid district-grid--${Math.min(children.length, 6)}`} aria-label={`${node.label} regions`}>
+        {children.map((child, index) => (
+          <button
+            key={child.id}
+            className="district-card"
+            data-kind={child.kind}
+            data-node-id={child.id}
+            onClick={() => onNavigate(child.id, "down")}
+            title={`Enter ${child.label}`}
+          >
+            <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
+            <span className="district-card__kind">{child.eyebrow}</span>
+            {child.status ? (
+              <span className="work-status-chip" data-stage={child.status.stage}>{child.status.label}</span>
+            ) : null}
+            <strong>{child.label}</strong>
+            <p>{child.summary}</p>
+            <span className="district-card__action">Enter region</span>
+          </button>
+        ))}
       </div>
 
-      {showGestaltContext && gestaltNode.links?.length ? (
+      {node.links?.length ? (
         <section className="node-section branch-world__context-section node-section--records">
           <div className="node-section__label">Connected operative surfaces</div>
           <div className="record-links">
-            {gestaltNode.links.map((link) => (
-              <a href={link.href} key={`${gestaltNode.id}-${link.href}`}>
+            {node.links.map((link) => (
+              <a href={link.href} key={`${node.id}-${link.href}`}>
                 <span>{link.eyebrow ?? "Related surface"}</span>
                 <strong>{link.label}</strong>
                 {link.summary ? <small>{link.summary}</small> : null}
@@ -296,41 +209,35 @@ function BranchWorld({
         </section>
       ) : null}
 
-      {showGestaltContext && supportingInspections.length ? (
+      {supportingInspections.length ? (
         <section className="node-section branch-world__context-section node-section--inspection">
           <div className="node-section__label">Supporting research</div>
           <div className="inspection-links">
             {supportingInspections.map((inspection) => (
-              <button
-                key={inspection.id}
-                onClick={() => onInspect(inspection.id)}
-                title={`Inspect ${inspection.label} without leaving ${gestaltNode.label}`}
-              >
+              <button key={inspection.id} onClick={() => onInspect(inspection.id)} title={`Inspect ${inspection.label}`}>
                 <span>Through</span>
                 <strong>{inspection.label}</strong>
+                <small>{inspection.summary}</small>
               </button>
             ))}
           </div>
         </section>
       ) : null}
 
-      {showGestaltContext && exploratoryInspections.length ? (
+      {exploratoryInspections.length ? (
         <section className="node-section branch-world__context-section branch-world__exploratory-section node-section--inspection">
           <div className="node-section__label">Exploratory Research</div>
           <p className="branch-world__section-intro">
-            Reformulation is a research instrument, not a solution claim. Solved targets calibrate the
-            representation; open problems remain reformulations, proof obligations, derivation audits, or
-            experiments until their native validation gates are met.
+            Reformulation is a research instrument, not a solution claim. Solved targets calibrate the representation;
+            open problems remain reformulations, proof obligations, derivation audits, or experiments until their native
+            validation gates are met.
           </p>
           <div className="inspection-links">
             {exploratoryInspections.map((inspection) => (
-              <button
-                key={inspection.id}
-                onClick={() => onInspect(inspection.id)}
-                title={`Explore ${inspection.label} without changing location`}
-              >
+              <button key={inspection.id} onClick={() => onInspect(inspection.id)} title={`Explore ${inspection.label}`}>
                 <span>Explore</span>
                 <strong>{inspection.label}</strong>
+                <small>{inspection.summary}</small>
               </button>
             ))}
           </div>
@@ -347,36 +254,11 @@ type NodeDetailProps = {
 };
 
 function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
-  const siblings = getSiblings(node.id).map(hydrateContentNode);
-  const siblingIndex = siblings.findIndex((sibling) => sibling.id === node.id);
-  const previous = siblingIndex > 0 ? siblings[siblingIndex - 1] : undefined;
-  const next = siblingIndex >= 0 && siblingIndex < siblings.length - 1 ? siblings[siblingIndex + 1] : undefined;
+  const children = getChildren(node.id).map(hydrateContentNode);
   const crossEdges = getCrossEdges(node.id).map((edge) => ({ ...edge, node: hydrateContentNode(edge.node) }));
 
   return (
     <section className="node-detail">
-      {previous ? (
-        <button
-          className="direction-control direction-control--left"
-          onClick={() => onNavigate(previous.id, "left")}
-          title={`Previous sibling: ${previous.label}`}
-        >
-          <span aria-hidden="true">&lt;</span>
-          <small>{previous.shortLabel ?? previous.label}</small>
-        </button>
-      ) : null}
-
-      {next ? (
-        <button
-          className="direction-control direction-control--right"
-          onClick={() => onNavigate(next.id, "right")}
-          title={`Next sibling: ${next.label}`}
-        >
-          <small>{next.shortLabel ?? next.label}</small>
-          <span aria-hidden="true">&gt;</span>
-        </button>
-      ) : null}
-
       <article className="node-surface" data-kind={node.kind}>
         <header>
           <p className="eyebrow">{node.eyebrow}</p>
@@ -402,18 +284,31 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
 
         {node.body?.length ? (
           <div className="node-surface__body">
-            {node.body.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            {node.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         ) : (
           <div className="node-surface__body node-surface__body--placeholder">
             <p>
-              This node is intentionally concise. Follow its typed connections or retained records for deeper
-              evidence, implementation detail, and provenance.
+              This public record is intentionally concise. Its contained regions, evidence, retained records, and typed
+              relationships remain available below rather than being hidden in another view.
             </p>
           </div>
         )}
+
+        {children.length ? (
+          <section className="node-section node-section--children">
+            <div className="node-section__label">Contained regions</div>
+            <div className="contained-region-links">
+              {children.map((child) => (
+                <button key={child.id} onClick={() => onNavigate(child.id, "down")} title={`Open ${child.label}`}>
+                  <span>{child.eyebrow}</span>
+                  <strong>{child.label}</strong>
+                  <small>{child.summary}</small>
+                </button>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         {node.links?.length ? (
           <section className="node-section node-section--records">
@@ -435,13 +330,10 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
             <div className="node-section__label">Inspect through this node</div>
             <div className="inspection-links">
               {node.inspection.map((inspection) => (
-                <button
-                  key={inspection.id}
-                  onClick={() => onInspect(inspection.id)}
-                  title={`Inspect ${inspection.label} without leaving ${node.label}`}
-                >
+                <button key={inspection.id} onClick={() => onInspect(inspection.id)} title={`Inspect ${inspection.label}`}>
                   <span>Through</span>
                   <strong>{inspection.label}</strong>
+                  <small>{inspection.summary}</small>
                 </button>
               ))}
             </div>
