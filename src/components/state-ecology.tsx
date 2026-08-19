@@ -256,6 +256,10 @@ export function StateEcology({ focusNode, gestaltNode }: StateEcologyProps) {
                         <dd>{event.actor.label}</dd>
                       </div>
                       <div>
+                        <dt>Recorded by</dt>
+                        <dd>{event.recordedBy.label}</dd>
+                      </div>
+                      <div>
                         <dt>Standing effect</dt>
                         <dd>{event.standingEffect}</dd>
                       </div>
