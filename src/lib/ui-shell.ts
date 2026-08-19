@@ -3,10 +3,14 @@ export const uiShellModes = ["cards", "apparatus"] as const;
 export type UiShellMode = (typeof uiShellModes)[number];
 
 /**
- * Card is the active production renderer. Apparatus is intentionally reserved here as a
+ * Card is the active production renderer. Apparatus is intentionally reserved as a
  * second representation target over the same semantic graph, traversal state, content,
- * evidence, and process model. Do not render an apparatus placeholder: its visual and
- * interaction grammar is still under design.
+ * evidence, publication, and process model.
+ *
+ * Its interaction grammar is now documented in
+ * backlog/3_bfl_boundary_first_ux/bfl_apparatus_interaction_grammar_v0_1.md.
+ * Do not render an apparatus placeholder or production renderer yet: the next gate is
+ * three static apparatus studies (root, branch, leaf) reviewed against that grammar.
  */
 export const activeUiShell: UiShellMode = "cards";
 
