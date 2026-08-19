@@ -25,6 +25,25 @@ export function InspectionPanel({ inspection, onClose }: InspectionPanelProps) {
               <li key={bullet}>{bullet}</li>
             ))}
           </ul>
+
+          {inspection.sourceRef ? (
+            <div className="inspection-source">
+              <span>Retained source</span>
+              <code>{inspection.sourceRef}</code>
+            </div>
+          ) : null}
+
+          {inspection.links?.length ? (
+            <div className="inspection-record-links">
+              {inspection.links.map((link) => (
+                <a href={link.href} key={`${inspection.id}-${link.href}`}>
+                  <span>{link.eyebrow ?? "Related record"}</span>
+                  <strong>{link.label}</strong>
+                  {link.summary ? <small>{link.summary}</small> : null}
+                </a>
+              ))}
+            </div>
+          ) : null}
         </div>
       </section>
     </div>
