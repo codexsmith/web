@@ -1,0 +1,6 @@
+/* Peer navigation is complete and persistent in the Boundary Frame.
+   Retire the old previous/next-only record controls so sibling behavior has one owner. */
+.direction-control--left,
+.direction-control--right {
+  display: none !important;
+}
