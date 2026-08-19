@@ -23,18 +23,20 @@ function forbidMatch(path, pattern, message) {
 }
 
 const apparatusGrammar = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_interaction_grammar_v0_1.md";
+const apparatusStudies = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_static_studies_v0_1.md";
 
 for (const path of [
   "src/lib/ui-shell.ts",
   "src/app/bf-industrial-tokens.css",
   "src/app/industrial-card-ui.css",
   apparatusGrammar,
+  apparatusStudies,
 ]) {
-  requireExists(path, "Industrial UI foundation and design contract must remain present");
+  requireExists(path, "Industrial UI foundation and Apparatus design records must remain present");
 }
 
 // Two render targets are named, but only Card may render until the documented Apparatus
-// grammar has passed its three static-study prototype gate.
+// grammar and static studies have passed visual morphology review.
 requireMatch(
   "src/lib/ui-shell.ts",
   /uiShellModes\s*=\s*\["cards",\s*"apparatus"\]/,
@@ -52,16 +54,16 @@ requireMatch(
 );
 requireMatch(
   "src/lib/ui-shell.ts",
-  /bfl_apparatus_interaction_grammar_v0_1\.md[\s\S]*three static apparatus studies/,
-  "UI shell must point to the documented Apparatus prototype gate",
+  /bfl_apparatus_interaction_grammar_v0_1\.md[\s\S]*bfl_apparatus_static_studies_v0_1\.md[\s\S]*visual morphology review/,
+  "UI shell must point to the documented Apparatus morphology gate",
 );
 forbidExists(
   "src/app/industrial-apparatus-ui.css",
-  "Apparatus styling must not be implemented before the static-study prototype gate",
+  "Apparatus styling must not be implemented before visual morphology review",
 );
 forbidExists(
   "src/components/apparatus-world.tsx",
-  "Apparatus renderer must not be implemented before the static-study prototype gate",
+  "Apparatus renderer must not be implemented before visual morphology review",
 );
 
 // Apparatus grammar: one semantic engine, small primitive set, no cockpit theater.
@@ -82,11 +84,6 @@ requireMatch(
 );
 requireMatch(
   apparatusGrammar,
-  /Root apparatus study[\s\S]*Branch apparatus study[\s\S]*Leaf apparatus study/,
-  "Apparatus must pass root, branch, and leaf static studies before implementation",
-);
-requireMatch(
-  apparatusGrammar,
   /reflow topologically, not miniaturize geometrically/,
   "Apparatus responsive behavior must preserve semantics rather than shrink schematics",
 );
@@ -94,6 +91,44 @@ requireMatch(
   apparatusGrammar,
   /not a cockpit skin[\s\S]*not a cyberpunk dashboard/,
   "Apparatus must reject cockpit/dashboard theater",
+);
+
+// Static studies must use real BFL content and preserve the same semantic owners at
+// root, branch, and leaf scales before production morphology is chosen.
+requireMatch(
+  apparatusStudies,
+  /Study A — Root apparatus[\s\S]*Products[\s\S]*Public Interest[\s\S]*Research[\s\S]*Publications[\s\S]*About/,
+  "Root Apparatus study must preserve the five first-class Lab regions",
+);
+requireMatch(
+  apparatusStudies,
+  /Study B — Branch apparatus[\s\S]*Software[\s\S]*Boundary First Engineering[\s\S]*Executable Representation[\s\S]*Boundary First UX[\s\S]*Verification & Governance/,
+  "Branch Apparatus study must exercise real Software modules and local relation topology",
+);
+requireMatch(
+  apparatusStudies,
+  /Study C — Leaf \/ publication apparatus[\s\S]*Software Before Code[\s\S]*Working Public Method[\s\S]*External practitioner review[\s\S]*worked cases/,
+  "Leaf Apparatus study must expose real publication standing and its next gate",
+);
+requireMatch(
+  apparatusStudies,
+  /Root is a backplane\. Branch is an assembly\. Leaf is an instrument\./,
+  "Static studies must preserve the scale-dependent Apparatus topology finding",
+);
+requireMatch(
+  apparatusStudies,
+  /Ports carry meaning before wires do/,
+  "Static studies must preserve port-first connector discipline",
+);
+requireMatch(
+  apparatusStudies,
+  /Did any study require an eighth primitive\?[\s\S]*No\./,
+  "Static studies must explicitly pressure-test the primitive count",
+);
+requireMatch(
+  apparatusStudies,
+  /Port morphology[\s\S]*Connector routing[\s\S]*Gate expansion[\s\S]*Trace placement[\s\S]*Relationship density threshold/,
+  "Unsettled morphology questions must remain explicit before renderer implementation",
 );
 
 // Shared palette semantics: material, operator agency, and observed state have different jobs.
