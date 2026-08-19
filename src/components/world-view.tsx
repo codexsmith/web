@@ -34,8 +34,8 @@ export function WorldView({
   onInspect,
 }: WorldViewProps) {
   const renderedNode = hydrateContentNode(node);
-  const children = getChildren(node.id).map(hydrateContentNode);
-  const isLeaf = children.length === 0;
+  const regions = getChildren(node.id).map(hydrateContentNode);
+  const isLeaf = regions.length === 0;
 
   return (
     <main
@@ -45,7 +45,7 @@ export function WorldView({
       {isLeaf ? (
         <LeafWorld node={renderedNode} onNavigate={onNavigate} />
       ) : (
-        <BranchWorld node={renderedNode} children={children} onNavigate={onNavigate} onInspect={onInspect} />
+        <BranchWorld node={renderedNode} regions={regions} onNavigate={onNavigate} onInspect={onInspect} />
       )}
     </main>
   );
@@ -147,12 +147,12 @@ function LeafWorld({ node, onNavigate }: LeafWorldProps) {
 
 type BranchWorldProps = {
   node: ContentNode;
-  children: ContentNode[];
+  regions: ContentNode[];
   onNavigate: (id: string, direction?: TransitionDirection) => void;
   onInspect: (inspectionId: string) => void;
 };
 
-function BranchWorld({ node, children, onNavigate, onInspect }: BranchWorldProps) {
+function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps) {
   const inspections = node.inspection ?? [];
   const exploratoryInspections = inspections.filter((inspection) => inspection.id.startsWith("exploratory-"));
   const supportingInspections = inspections.filter((inspection) => !inspection.id.startsWith("exploratory-"));
@@ -172,8 +172,8 @@ function BranchWorld({ node, children, onNavigate, onInspect }: BranchWorldProps
         {node.body?.[0] ? <p className="world-heading__context">{node.body[0]}</p> : null}
       </header>
 
-      <div className={`district-grid district-grid--${Math.min(children.length, 6)}`} aria-label={`${node.label} regions`}>
-        {children.map((child, index) => (
+      <div className={`district-grid district-grid--${Math.min(regions.length, 6)}`} aria-label={`${node.label} regions`}>
+        {regions.map((child, index) => (
           <button
             key={child.id}
             className="district-card"
