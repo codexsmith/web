@@ -64,13 +64,18 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
           {results.map((node) => (
             <button
               key={node.id}
+              data-kind={node.kind}
               onClick={() => {
                 onNavigate(node.id);
                 onClose();
               }}
+              title={`Traverse to ${node.label}`}
             >
               <span>{node.label}</span>
-              <small>{node.status?.label ?? node.eyebrow}</small>
+              <span className="search-result__meta">
+                <small>{node.status?.label ?? node.eyebrow}</small>
+                <code className="search-result__path">/{node.path}</code>
+              </span>
             </button>
           ))}
         </div>
