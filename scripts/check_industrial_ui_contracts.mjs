@@ -24,6 +24,7 @@ function forbidMatch(path, pattern, message) {
 
 const apparatusGrammar = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_interaction_grammar_v0_1.md";
 const apparatusStudies = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_static_studies_v0_1.md";
+const apparatusMorphology = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_visual_morphology_v0_1.md";
 
 for (const path of [
   "src/lib/ui-shell.ts",
@@ -31,12 +32,14 @@ for (const path of [
   "src/app/industrial-card-ui.css",
   apparatusGrammar,
   apparatusStudies,
+  apparatusMorphology,
 ]) {
   requireExists(path, "Industrial UI foundation and Apparatus design records must remain present");
 }
 
-// Two render targets are named, but only Card may render until the documented Apparatus
-// grammar and static studies have passed visual morphology review.
+// Two render targets are named, but only Card is production-active. The Apparatus design
+// sequence may now proceed to a small implementation prototype, but this contract still
+// forbids prototype code until that next pass explicitly changes the gate.
 requireMatch(
   "src/lib/ui-shell.ts",
   /uiShellModes\s*=\s*\["cards",\s*"apparatus"\]/,
@@ -54,16 +57,16 @@ requireMatch(
 );
 requireMatch(
   "src/lib/ui-shell.ts",
-  /bfl_apparatus_interaction_grammar_v0_1\.md[\s\S]*bfl_apparatus_static_studies_v0_1\.md[\s\S]*visual morphology review/,
-  "UI shell must point to the documented Apparatus morphology gate",
+  /bfl_apparatus_interaction_grammar_v0_1\.md[\s\S]*bfl_apparatus_static_studies_v0_1\.md[\s\S]*bfl_apparatus_visual_morphology_v0_1\.md[\s\S]*small implementation prototype/,
+  "UI shell must point to the completed Apparatus design sequence and prototype gate",
 );
 forbidExists(
   "src/app/industrial-apparatus-ui.css",
-  "Apparatus styling must not be implemented before visual morphology review",
+  "Apparatus styling must not appear before the implementation-prototype pass explicitly opens",
 );
 forbidExists(
   "src/components/apparatus-world.tsx",
-  "Apparatus renderer must not be implemented before visual morphology review",
+  "Apparatus renderer must not appear before the implementation-prototype pass explicitly opens",
 );
 
 // Apparatus grammar: one semantic engine, small primitive set, no cockpit theater.
@@ -125,10 +128,72 @@ requireMatch(
   /Did any study require an eighth primitive\?[\s\S]*No\./,
   "Static studies must explicitly pressure-test the primitive count",
 );
+
+// Visual morphology resolves the physical grammar without creating a type-shape zoo.
 requireMatch(
-  apparatusStudies,
-  /Port morphology[\s\S]*Connector routing[\s\S]*Gate expansion[\s\S]*Trace placement[\s\S]*Relationship density threshold/,
-  "Unsettled morphology questions must remain explicit before renderer implementation",
+  apparatusMorphology,
+  /Root\s+= backplane[\s\S]*Branch\s+= assembly[\s\S]*Leaf\s+= instrument/,
+  "Morphology must preserve the converged root/branch/leaf physical scale",
+);
+requireMatch(
+  apparatusMorphology,
+  /Do \*\*not\*\* create a shape zoo[\s\S]*explicit type label[\s\S]*Color never encodes object type/,
+  "Morphology must keep type explicit without proliferating decorative shapes",
+);
+requireMatch(
+  apparatusMorphology,
+  /canonical port is a small \*\*rectilinear terminal integrated into a module boundary\*\*/,
+  "Ports must remain labeled edge-mounted terminals",
+);
+requireMatch(
+  apparatusMorphology,
+  /orthogonal routed traces[\s\S]*Prefer zero crossings[\s\S]*at most \*\*three persistent labeled structural connectors\*\*[\s\S]*four simultaneous visible routed relations/,
+  "Connector morphology must preserve orthogonal routing and the density budget",
+);
+requireMatch(
+  apparatusMorphology,
+  /left chassis rail[\s\S]*Duplicate visits remain visible[\s\S]*Do not turn it into breadcrumbs/,
+  "Trace morphology must preserve actual traversal history rather than ancestry",
+);
+requireMatch(
+  apparatusMorphology,
+  /Gate is a crossbar on a transition[\s\S]*expands \*\*inline from the transition it constrains\*\*/,
+  "Gate morphology must stay attached to the constrained transition",
+);
+requireMatch(
+  apparatusMorphology,
+  /signal strip[\s\S]*publication maturity, research standing, and product delivery/,
+  "State morphology must preserve independent status axes",
+);
+requireMatch(
+  apparatusMorphology,
+  /Commands are \*\*operator plates\*\*[\s\S]*violet edge\/underline\/terminal/,
+  "Commands must use operator-agency semantics rather than state colors",
+);
+requireMatch(
+  apparatusMorphology,
+  /Through is a \*\*recessed inspection aperture\*\*[\s\S]*without adding a Focus traversal step/,
+  "Through morphology must preserve inspection without traversal",
+);
+requireMatch(
+  apparatusMorphology,
+  /Peers remain a \*\*right chassis bank\*\*[\s\S]*Peers do not draw wires into the subject/,
+  "Peers must remain sibling navigation rather than decorative graph wiring",
+);
+requireMatch(
+  apparatusMorphology,
+  /four-position depth selector[\s\S]*does not add a trace step/,
+  "Depth morphology must preserve projection changes without traversal",
+);
+requireMatch(
+  apparatusMorphology,
+  /wide spatial → medium banked → narrow linear/,
+  "Responsive morphology must reflow topology rather than miniaturize it",
+);
+requireMatch(
+  apparatusMorphology,
+  /The next artifact may be an Apparatus prototype\. It may not yet replace Card as the production shell\./,
+  "Morphology pass must open only a bounded prototype gate, not production activation",
 );
 
 // Shared palette semantics: material, operator agency, and observed state have different jobs.
