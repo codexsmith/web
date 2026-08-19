@@ -1,6 +1,7 @@
 "use client";
 
 import { ContentNode } from "@/lib/content";
+import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
   projectionDescriptions,
   projectionLabels,
@@ -11,18 +12,19 @@ import {
 type BoundaryFrameProps = {
   visible: boolean;
   focusNode: ContentNode;
-  gestaltNode: ContentNode;
   breadcrumbs: ContentNode[];
   rootBranches: ContentNode[];
-  canZoomOut: boolean;
-  canZoomIn: boolean;
+  siblings: ContentNode[];
   projection?: ProjectionMode;
+  processScope: ProcessScope;
+  canProcessZoomOut: boolean;
+  canProcessZoomIn: boolean;
   onHome: () => void;
   onBack: () => void;
   onNavigate: (id: string) => void;
   onFocusPath: (id: string) => void;
-  onZoomOut: () => void;
-  onZoomIn: () => void;
+  onProcessZoomOut: () => void;
+  onProcessZoomIn: () => void;
   onProjectionChange?: (projection: ProjectionMode) => void;
   onSearch: () => void;
 };
@@ -60,26 +62,31 @@ function FrameIcon({ name }: { name: FrameIconName }) {
 export function BoundaryFrame({
   visible,
   focusNode,
-  gestaltNode,
   breadcrumbs,
   rootBranches,
-  canZoomOut,
-  canZoomIn,
+  siblings,
   projection = "world",
+  processScope,
+  canProcessZoomOut,
+  canProcessZoomIn,
   onHome,
   onBack,
   onNavigate,
   onFocusPath,
-  onZoomOut,
-  onZoomIn,
+  onProcessZoomOut,
+  onProcessZoomIn,
   onProjectionChange,
   onSearch,
 }: BoundaryFrameProps) {
   const focusPath = breadcrumbs.filter((node) => node.id !== "root");
   const showCurrentFocus = focusNode.id !== "root";
+  const isRootFocus = focusNode.id === "root";
+  const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
 
   return (
-    <div className={`boundary-frame ${visible ? "boundary-frame--visible" : ""}`}>
+    <div
+      className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
+    >
       <header className="boundary-frame__top">
         <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs home">
           <span className="brand-anchor__mark" aria-hidden="true">
@@ -91,26 +98,19 @@ export function BoundaryFrame({
           </span>
         </button>
 
-        <nav className="primary-nav" aria-label="Primary regions">
-          {rootBranches.map((branch, index) => {
-            const active = breadcrumbs.some((node) => node.id === branch.id) || focusNode.id === branch.id;
-            return (
-              <button
-                key={branch.id}
-                className={active ? "is-active" : ""}
-                onClick={() => onNavigate(branch.id)}
-                aria-current={active ? "page" : undefined}
-                title={`Enter ${branch.label}`}
-              >
+        {isRootFocus ? (
+          <nav className="primary-nav" aria-label="Primary regions">
+            {rootBranches.map((branch, index) => (
+              <button key={branch.id} onClick={() => onNavigate(branch.id)} title={`Enter ${branch.label}`}>
                 <span className="primary-nav__index" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="primary-nav__label">{branch.label}</span>
                 <span className="primary-nav__signal" aria-hidden="true" />
               </button>
-            );
-          })}
-        </nav>
+            ))}
+          </nav>
+        ) : null}
 
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool frame-tool--back" onClick={onBack} aria-label="Back" title="Back through traversal history">
@@ -121,32 +121,34 @@ export function BoundaryFrame({
             <FrameIcon name="search" />
             <span className="frame-tool__label">Search</span>
           </button>
-          <div className="frame-zoom" aria-label="Gestalt whole controls">
-            <span className="frame-zoom__label" aria-hidden="true">
-              <span>Whole</span>
-              <strong>Gestalt</strong>
-            </span>
-            <button
-              className="frame-tool"
-              onClick={onZoomOut}
-              disabled={!canZoomOut}
-              aria-label="Expand the gestalt whole"
-              title="Expand the whole while preserving the current focus"
-            >
-              <FrameIcon name="minus" />
-              <span className="frame-tool__label">Expand whole</span>
-            </button>
-            <button
-              className="frame-tool"
-              onClick={onZoomIn}
-              disabled={!canZoomIn}
-              aria-label="Narrow the gestalt whole"
-              title="Narrow the whole toward the current focus"
-            >
-              <FrameIcon name="plus" />
-              <span className="frame-tool__label">Narrow whole</span>
-            </button>
-          </div>
+          {projection === "gestalt" ? (
+            <div className="frame-process-zoom" aria-label="Gestalt process-context controls">
+              <span className="frame-process-zoom__label" aria-hidden="true">
+                <span>Gestalt</span>
+                <strong>{processScopeLabels[processScope]}</strong>
+              </span>
+              <button
+                className="frame-tool"
+                onClick={onProcessZoomOut}
+                disabled={!canProcessZoomOut}
+                aria-label="Widen Gestalt process context"
+                title="Widen the process context around the current focus"
+              >
+                <FrameIcon name="minus" />
+                <span className="frame-tool__label">Widen process context</span>
+              </button>
+              <button
+                className="frame-tool"
+                onClick={onProcessZoomIn}
+                disabled={!canProcessZoomIn}
+                aria-label="Narrow Gestalt process context"
+                title="Narrow the process context around the current focus"
+              >
+                <FrameIcon name="plus" />
+                <span className="frame-tool__label">Narrow process context</span>
+              </button>
+            </div>
+          ) : null}
         </div>
       </header>
 
@@ -156,10 +158,7 @@ export function BoundaryFrame({
           {focusPath.map((node) => (
             <li key={node.id}>
               <span className="path-node__dot" aria-hidden="true" />
-              <button
-                onClick={() => onFocusPath(node.id)}
-                title={`Move focus to ${node.label}; preserve the current whole when possible`}
-              >
+              <button onClick={() => onFocusPath(node.id)} title={`Move focus to ${node.label}`}>
                 <span className="path-node__label">{node.shortLabel ?? node.label}</span>
               </button>
             </li>
@@ -175,14 +174,26 @@ export function BoundaryFrame({
         </ol>
       </aside>
 
+      {peerNodes.length ? (
+        <aside className="boundary-frame__right" aria-label={`Sibling navigation for ${focusNode.label}`}>
+          <div className="peer-label">Peers</div>
+          <ol>
+            {peerNodes.map((peer, index) => (
+              <li key={peer.id}>
+                <button onClick={() => onNavigate(peer.id)} title={`Traverse to sibling ${peer.label}`}>
+                  <span className="peer-node__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </aside>
+      ) : null}
+
       <footer className="boundary-frame__bottom">
         <span className="frame-status frame-status--focus">
           <strong>Focus</strong>
           <span className="frame-status__value">{focusNode.shortLabel ?? focusNode.label}</span>
-        </span>
-        <span className="frame-status frame-status--gestalt">
-          <strong>Whole</strong>
-          <span className="frame-status__value">{gestaltNode.shortLabel ?? gestaltNode.label}</span>
         </span>
         {onProjectionChange ? (
           <div className="projection-switcher" aria-label="View projection">
