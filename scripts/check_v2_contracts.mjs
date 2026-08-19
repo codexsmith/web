@@ -130,7 +130,8 @@ requireMatch(
   "Sibling traversal must remain owned by the peer rail rather than the Focus Path",
 );
 
-// Ordinary World traversal must expose useful content/actions before specialized views are needed.
+// Ordinary World traversal must expose useful content/actions before specialized views are needed,
+// while progressive disclosure keeps the initial pane legible instead of dumping every retained item.
 requireExists(
   "src/components/subject-pane.tsx",
   "Content-first World must have a reusable subject overview pane",
@@ -151,13 +152,23 @@ forbidMatch(
 );
 requireMatch(
   "src/components/subject-pane.tsx",
-  /node\.body[\s\S]*node\.status[\s\S]*node\.publication[\s\S]*node\.links[\s\S]*node\.inspection[\s\S]*getCrossEdges/,
-  "Subject overview must expose body, standing, retained records, inspections, and typed relations",
+  /const immediateBody\s*=\s*body\[0\][\s\S]*const remainingBody\s*=\s*body\.slice\(1\)/,
+  "World must expose one key context paragraph immediately and keep longer context inline-disclosable",
 );
 requireMatch(
   "src/components/subject-pane.tsx",
-  /Read more context[\s\S]*Records[\s\S]*Inspect[\s\S]*Connections/,
-  "Overflow content must remain available through ordinary inline disclosure and click interactions",
+  /const primaryActions\s*=\s*orderedActions\.slice\(0,\s*4\)[\s\S]*const remainingActions\s*=\s*orderedActions\.slice\(4\)/,
+  "World must expose a bounded set of immediate next actions instead of dumping every action",
+);
+requireMatch(
+  "src/components/subject-pane.tsx",
+  /relationActions\[0\][\s\S]*recordActions\[0\][\s\S]*inspectionActions\[0\]/,
+  "Immediate World actions must remain diverse across traversal, retained records, and inspection when available",
+);
+requireMatch(
+  "src/components/subject-pane.tsx",
+  /At a glance[\s\S]*Continue from here[\s\S]*More context ·[\s\S]*More paths ·/,
+  "Primary content/actions must be visible while secondary material remains one counted inline disclosure away",
 );
 requireMatch(
   "src/components/world-view.tsx",
