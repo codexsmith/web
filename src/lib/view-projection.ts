@@ -1,5 +1,3 @@
-import { getChildren } from "@/lib/content";
-
 export const projectionModes = ["world", "record", "evidence", "gestalt"] as const;
 
 export type ProjectionMode = (typeof projectionModes)[number];
@@ -13,7 +11,7 @@ export const projectionLabels: Record<ProjectionMode, string> = {
 
 export const projectionDescriptions: Record<ProjectionMode, string> = {
   world: "Spatial context, containment, and relations",
-  record: "Read the focal object's public record",
+  record: "Read the focal object's complete public record",
   evidence: "Standing, provenance, evidence, lineage, and typed relations",
   gestalt: "Place the focal object inside the Boundary First operating loop",
 };
@@ -27,6 +25,11 @@ export function parseProjection(value: string | string[] | undefined): Projectio
   return isProjectionMode(candidate) ? candidate : undefined;
 }
 
+/**
+ * The root is the spatial home of the lab. Every other canonical content URL opens
+ * its complete public record by default; World remains an explicit alternative
+ * representation rather than a content-hiding default.
+ */
 export function defaultProjectionForNode(nodeId: string): ProjectionMode {
-  return getChildren(nodeId).length > 0 ? "world" : "record";
+  return nodeId === "root" ? "world" : "record";
 }
