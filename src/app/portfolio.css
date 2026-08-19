@@ -1,0 +1,180 @@
+/* Status and retained-record additions for the v2 Boundary First spine. */
+
+.world-heading__context {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--line-strong);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.work-status-chip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 0.55rem;
+  padding: 0.28rem 0.48rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(251, 250, 246, 0.7);
+  color: var(--ink-soft);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.work-status-chip[data-stage="shipped"],
+.work-status-panel[data-stage="shipped"] {
+  border-color: var(--ink);
+}
+
+.work-status-chip[data-stage="pilot"],
+.work-status-panel[data-stage="pilot"] {
+  border-color: var(--accent);
+}
+
+.work-status-chip[data-stage="active-development"],
+.work-status-panel[data-stage="active-development"] {
+  border-style: dashed;
+}
+
+.work-status-chip[data-stage="planned"],
+.work-status-panel[data-stage="planned"] {
+  border-color: var(--line);
+}
+
+.work-status-panel {
+  max-width: 800px;
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(223, 226, 215, 0.36);
+}
+
+.work-status-panel__heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.work-status-panel__heading span,
+.work-status-panel__provenance span,
+.inspection-source > span,
+.record-links a > span,
+.inspection-record-links a > span {
+  color: var(--accent);
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.work-status-panel__heading strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+.work-status-panel > p {
+  margin: 0.7rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.work-status-panel__provenance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--line);
+}
+
+.work-status-panel__provenance span {
+  color: var(--ink-soft);
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.record-links,
+.inspection-record-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.record-links a,
+.inspection-record-links a {
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.record-links a:hover,
+.inspection-record-links a:hover {
+  border-color: var(--line-strong);
+  background: rgba(223, 226, 215, 0.52);
+  transform: translateY(-2px);
+}
+
+.record-links a > strong,
+.inspection-record-links a > strong {
+  margin-top: 0.35rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.record-links a > small,
+.inspection-record-links a > small {
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.62rem;
+  line-height: 1.45;
+}
+
+.inspection-source {
+  display: grid;
+  gap: 0.35rem;
+  margin: 1.2rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+.inspection-source code {
+  overflow-wrap: anywhere;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.inspection-record-links {
+  margin-top: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 760px) {
+  .record-links,
+  .inspection-record-links {
+    grid-template-columns: 1fr;
+  }
+
+  .work-status-panel__heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
