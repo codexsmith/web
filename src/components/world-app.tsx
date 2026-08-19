@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BoundaryFrame } from "@/components/boundary-frame";
+import { FocusTelemetry } from "@/components/focus-telemetry";
 import { InspectionPanel } from "@/components/inspection-panel";
 import { LandingSequence } from "@/components/landing-sequence";
 import { SearchPanel } from "@/components/search-panel";
@@ -199,6 +200,12 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
             transitionKey={transitionKey}
             onNavigate={navigate}
             onInspect={openInspection}
+          />
+          <FocusTelemetry
+            focusNode={focusNode}
+            gestaltNode={gestaltNode}
+            onInspect={openInspection}
+            onNavigate={(targetId) => navigate(targetId, "cross")}
           />
           <WorldEcology
             focusNode={focusNode}
