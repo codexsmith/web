@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
+import { hydrateAboutNode } from "@/lib/about-content";
 import { getNodeByPath, nodes } from "@/lib/content";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
@@ -41,10 +42,9 @@ export async function generateStaticParams() {
           slug: entry.slug.split("/"),
         }))
       : [];
-      
-  // Add static params for the world app nodes
-  const nodeParams = nodes.map(n => ({
-    slug: n.path ? n.path.split("/") : []
+
+  const nodeParams = nodes.map((node) => ({
+    slug: node.path ? node.path.split("/") : [],
   }));
 
   return [...landingParams, ...nodeParams];
@@ -90,8 +90,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
-  // Fallback to basic metadata for the spine
-  const node = getNodeByPath(slug);
+  const node = hydrateAboutNode(getNodeByPath(slug));
   return {
     title: node.label,
     description: node.summary,
@@ -100,8 +99,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params, searchParams }: PageProps) {
   const [{ slug = [] }, query] = await Promise.all([params, searchParams]);
-  
-  // First, check if this route matches a product landing page
+
   if (
     productLandingManifest.routingPolicy.routesImplemented &&
     productLandingManifest.routingPolicy.rendererImplemented
@@ -186,7 +184,6 @@ export default async function Page({ params, searchParams }: PageProps) {
     }
   }
 
-  // Fallback to the v2 spine WorldApp
   const node = getNodeByPath(slug);
   const skipLanding = query.world === "1";
 
