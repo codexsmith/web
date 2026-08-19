@@ -1,0 +1,262 @@
+/* Boundary First UX · Semantic Event Ledger
+   The ledger records admissible state-change claims without substituting record time
+   for unknown effective time. Timeline form is supplemental; text remains authoritative. */
+
+.state-ecology__section--ledger {
+  gap: 0.52rem;
+}
+
+.semantic-event-ledger {
+  position: relative;
+  display: grid;
+  gap: 0.62rem;
+  padding-left: 0.18rem;
+}
+
+.semantic-event-ledger::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 9px;
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.semantic-event {
+  position: relative;
+  display: grid;
+  gap: 0.5rem;
+  margin-left: 1.35rem;
+  padding: 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), transparent 62px),
+    rgba(251, 250, 246, 0.5);
+  box-shadow:
+    0 5px 14px rgba(23, 32, 28, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.semantic-event__rail {
+  position: absolute;
+  top: 15px;
+  left: -1.75rem;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper-strong);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--paper-strong) 86%, transparent);
+}
+
+.semantic-event[data-standing-effect="promotes"] .semantic-event__rail,
+.semantic-event[data-event-type="validated"] .semantic-event__rail,
+.semantic-event[data-event-type="shipped"] .semantic-event__rail {
+  background: var(--ink);
+}
+
+.semantic-event[data-event-type="developed"] {
+  border-bottom: 3px double var(--ink-soft);
+}
+
+.semantic-event[data-event-type="piloted"] {
+  border-bottom: 3px dashed var(--accent);
+}
+
+.semantic-event[data-event-type="validated"] {
+  border-left: 3px solid var(--ink);
+}
+
+.semantic-event[data-event-type="shipped"] {
+  border-bottom: 4px solid var(--ink);
+}
+
+.semantic-event[data-event-type="revised"],
+.semantic-event[data-event-type="evidence-attached"] {
+  border-left: 3px solid var(--accent);
+}
+
+.semantic-event[data-event-type="superseded"],
+.semantic-event[data-standing-effect="supersedes"] {
+  border-style: double;
+}
+
+.semantic-event[data-event-type="retired"],
+.semantic-event[data-standing-effect="retires"] {
+  background:
+    repeating-linear-gradient(45deg, rgba(23, 32, 28, 0.025) 0 2px, transparent 2px 6px),
+    rgba(251, 250, 246, 0.5);
+}
+
+.semantic-event[data-event-type="reopened"],
+.semantic-event[data-standing-effect="reopens"] {
+  border-left: 3px dashed var(--accent);
+}
+
+.semantic-event__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.55rem;
+  align-items: start;
+}
+
+.semantic-event__header > span {
+  min-width: 0;
+  display: grid;
+  gap: 0.14rem;
+}
+
+.semantic-event__header small,
+.semantic-event__ceiling > small,
+.semantic-event__evidence > small {
+  color: var(--accent);
+  font-size: 0.38rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.semantic-event__header strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.semantic-event__header time {
+  max-width: 112px;
+  padding: 0.26rem 0.34rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--instrument-recess);
+  color: var(--ink-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.4rem;
+  line-height: 1.25;
+  text-align: right;
+}
+
+.semantic-event > p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.55rem;
+  line-height: 1.48;
+}
+
+.semantic-event__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.32rem;
+  margin: 0;
+}
+
+.semantic-event__facts > div {
+  min-width: 0;
+  padding: 0.38rem 0.42rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--instrument-recess);
+}
+
+.semantic-event__facts dt {
+  color: var(--ink-soft);
+  font-size: 0.34rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.semantic-event__facts dd {
+  margin: 0.12rem 0 0;
+  font-size: 0.46rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.semantic-event__ceiling,
+.semantic-event__evidence {
+  display: grid;
+  gap: 0.28rem;
+  padding-top: 0.44rem;
+  border-top: 1px dotted var(--line-strong);
+}
+
+.semantic-event__ceiling p {
+  margin: 0;
+  font-size: 0.52rem;
+  line-height: 1.45;
+}
+
+.semantic-event__evidence ul {
+  display: grid;
+  gap: 0.24rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.semantic-event__evidence li {
+  padding: 0.3rem 0.36rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--instrument-recess);
+  color: var(--ink-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.4rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.semantic-event-ledger__empty {
+  margin: 0;
+  padding: 0.58rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: 6px;
+  background: var(--instrument-recess);
+  color: var(--ink-soft);
+  font-size: 0.54rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 560px) {
+  .semantic-event__header {
+    grid-template-columns: 1fr;
+  }
+
+  .semantic-event__header time {
+    max-width: none;
+    text-align: left;
+  }
+
+  .semantic-event__facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  .semantic-event,
+  .semantic-event__header time,
+  .semantic-event__facts > div,
+  .semantic-event__evidence li,
+  .semantic-event-ledger__empty {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .semantic-event-ledger::before,
+  .semantic-event__rail {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .semantic-event[data-standing-effect="promotes"] .semantic-event__rail,
+  .semantic-event[data-event-type="validated"] .semantic-event__rail,
+  .semantic-event[data-event-type="shipped"] .semantic-event__rail {
+    background: Highlight;
+  }
+}
