@@ -1,0 +1,48 @@
+/* Project the canonical status controls already present in each surface into physical lifecycle cues. */
+
+.district-card:has(.work-status-chip[data-stage="active-development"]) {
+  border-bottom: 3px solid var(--accent);
+}
+
+.district-card:has(.work-status-chip[data-stage="pilot"]) {
+  border-bottom: 3px dashed var(--accent);
+}
+
+.district-card:has(.work-status-chip[data-stage="developed"]) {
+  border-bottom: 3px double var(--ink-soft);
+}
+
+.district-card:has(.work-status-chip[data-stage="shipped"]) {
+  border-bottom: 4px solid var(--ink);
+}
+
+.district-card:has(.work-status-chip[data-stage="planned"]) {
+  border-bottom: 2px dashed var(--line-strong);
+}
+
+.node-surface:has(.work-status-panel[data-stage="active-development"]) {
+  border-bottom: 4px solid var(--accent);
+}
+
+.node-surface:has(.work-status-panel[data-stage="pilot"]) {
+  border-bottom: 4px dashed var(--accent);
+}
+
+.node-surface:has(.work-status-panel[data-stage="developed"]) {
+  border-bottom: 4px double var(--ink-soft);
+}
+
+.node-surface:has(.work-status-panel[data-stage="shipped"]) {
+  border-bottom: 5px solid var(--ink);
+}
+
+.node-surface:has(.work-status-panel[data-stage="planned"]) {
+  border-bottom: 3px dashed var(--line-strong);
+}
+
+@media (forced-colors: active) {
+  .district-card:has(.work-status-chip),
+  .node-surface:has(.work-status-panel) {
+    border-bottom-color: CanvasText;
+  }
+}
