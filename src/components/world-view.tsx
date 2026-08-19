@@ -6,6 +6,7 @@ import {
   getChildren,
   getCrossEdges,
   getImmediateChildTowardFocus,
+  getParent,
   getSiblings,
 } from "@/lib/content";
 import { hydrateContentNode } from "@/lib/content-projections";
@@ -45,11 +46,11 @@ export function WorldView({
 
   return (
     <main
-      key={`${gestaltNode.id}-${transitionKey}`}
+      key={`world-${gestaltNode.id}-${transitionKey}`}
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
       {isLeaf ? (
-        <NodeDetail node={renderedGestaltNode} onNavigate={onNavigate} onInspect={onInspect} />
+        <LeafWorld node={renderedGestaltNode} onNavigate={onNavigate} />
       ) : (
         <BranchWorld
           gestaltNode={renderedGestaltNode}
@@ -61,6 +62,103 @@ export function WorldView({
         />
       )}
     </main>
+  );
+}
+
+type RecordViewProps = {
+  focusNode: ContentNode;
+  transitionDirection: TransitionDirection;
+  transitionKey: number;
+  onNavigate: (id: string, direction?: TransitionDirection) => void;
+  onInspect: (inspectionId: string) => void;
+};
+
+export function RecordView({
+  focusNode,
+  transitionDirection,
+  transitionKey,
+  onNavigate,
+  onInspect,
+}: RecordViewProps) {
+  const renderedFocusNode = hydrateContentNode(focusNode);
+
+  return (
+    <main
+      key={`record-${focusNode.id}-${transitionKey}`}
+      className={`world-viewport world-transition world-transition--${transitionDirection}`}
+    >
+      <NodeDetail node={renderedFocusNode} onNavigate={onNavigate} onInspect={onInspect} />
+    </main>
+  );
+}
+
+type LeafWorldProps = {
+  node: ContentNode;
+  onNavigate: (id: string, direction?: TransitionDirection) => void;
+};
+
+function LeafWorld({ node, onNavigate }: LeafWorldProps) {
+  const parent = getParent(node.id);
+  const renderedParent = parent ? hydrateContentNode(parent) : undefined;
+  const relations = getCrossEdges(node.id).map((edge) => ({
+    ...edge,
+    node: hydrateContentNode(edge.node),
+    direction: edge.from === node.id ? "outgoing" as const : "incoming" as const,
+  }));
+
+  return (
+    <section className="leaf-world" data-node-id={node.id} data-kind={node.kind}>
+      <header className="world-heading">
+        <p className="eyebrow">World projection · local boundary</p>
+        <h1>{node.label}</h1>
+        <p>
+          The focal object remains the whole at this scale. Containment and typed relations appear as boundary
+          ports rather than being silently converted into article content.
+        </p>
+      </header>
+
+      <div className="leaf-world__field">
+        <article className="leaf-world__focus" data-node-id={node.id}>
+          <small>{node.eyebrow}</small>
+          <strong>{node.label}</strong>
+          <p>{node.summary}</p>
+        </article>
+
+        <div className="leaf-world__ports" aria-label={`Boundary ports for ${node.label}`}>
+          {renderedParent ? (
+            <button
+              className="leaf-world__port"
+              onClick={() => onNavigate(renderedParent.id, "up")}
+              title={`Traverse containment to ${renderedParent.label}`}
+            >
+              <span>Contained by</span>
+              <strong>{renderedParent.label}</strong>
+              <small>parent boundary</small>
+            </button>
+          ) : null}
+
+          {relations.map((relation) => (
+            <button
+              className="leaf-world__port"
+              key={`${relation.from}-${relation.to}-${relation.type}`}
+              onClick={() => onNavigate(relation.node.id, "cross")}
+              data-edge-type={relation.type}
+              title={`${relation.label}: ${relation.node.label}`}
+            >
+              <span>{relation.direction === "outgoing" ? relation.label : `incoming · ${relation.label}`}</span>
+              <strong>{relation.node.label}</strong>
+              <small>{relation.type}</small>
+            </button>
+          ))}
+
+          {!renderedParent && !relations.length ? (
+            <p className="leaf-world__empty">
+              No containment or typed cross-tree relation is declared for this object at the current public boundary.
+            </p>
+          ) : null}
+        </div>
+      </div>
+    </section>
   );
 }
 
