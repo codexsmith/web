@@ -7,15 +7,9 @@ import { EvidenceView } from "@/components/evidence-view";
 import { GestaltView } from "@/components/gestalt-view";
 import { InspectionPanel } from "@/components/inspection-panel";
 import { SearchPanel } from "@/components/search-panel";
-import { WorldEcology } from "@/components/world-ecology";
 import { RecordView, TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
-import {
-  getAncestors,
-  getNode,
-  getPathForNode,
-  getSiblings,
-} from "@/lib/content";
+import { getAncestors, getNode, getPathForNode, getSiblings } from "@/lib/content";
 import { processScopes, type ProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, type ProjectionMode } from "@/lib/view-projection";
 
@@ -47,23 +41,14 @@ function stateUrl(focusId: string, projection: ProjectionMode, processScope: Pro
   const focusPath = getPathForNode(focusId);
   const params = new URLSearchParams();
 
-  if (projection !== defaultProjectionForNode(focusId)) {
-    params.set("view", projection);
-  }
-
-  if (projection === "gestalt" && processScope !== "full") {
-    params.set("scope", processScope);
-  }
+  if (projection !== defaultProjectionForNode(focusId)) params.set("view", projection);
+  if (projection === "gestalt" && processScope !== "full") params.set("scope", processScope);
 
   const query = params.toString();
   return query ? `${focusPath}?${query}` : focusPath;
 }
 
-export function WorldApp({
-  initialNodeId,
-  initialProjection,
-  initialProcessScope = "full",
-}: WorldAppProps) {
+export function WorldApp({ initialNodeId, initialProjection, initialProcessScope = "full" }: WorldAppProps) {
   const router = useRouter();
   const resolvedInitialProjection = initialProjection ?? defaultProjectionForNode(initialNodeId);
   const [focusId, setFocusId] = useState(initialNodeId);
@@ -117,8 +102,7 @@ export function WorldApp({
 
   const navigate = useCallback(
     (targetId: string, direction?: TransitionDirection) => {
-      const nextDirection = direction ?? inferDirection(focusId, targetId);
-      setTransitionDirection(nextDirection);
+      setTransitionDirection(direction ?? inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
       setInspectionId(null);
@@ -161,13 +145,11 @@ export function WorldApp({
   );
 
   const processZoomOut = useCallback(() => {
-    if (!canProcessZoomOut) return;
-    changeProcessScope(processScopes[processScopeIndex - 1]);
+    if (canProcessZoomOut) changeProcessScope(processScopes[processScopeIndex - 1]);
   }, [canProcessZoomOut, changeProcessScope, processScopeIndex]);
 
   const processZoomIn = useCallback(() => {
-    if (!canProcessZoomIn) return;
-    changeProcessScope(processScopes[processScopeIndex + 1]);
+    if (canProcessZoomIn) changeProcessScope(processScopes[processScopeIndex + 1]);
   }, [canProcessZoomIn, changeProcessScope, processScopeIndex]);
 
   const changeProjection = useCallback(
@@ -182,9 +164,7 @@ export function WorldApp({
     [focusId, processScope, projection, router],
   );
 
-  const openInspection = useCallback((nextInspectionId: string) => {
-    setInspectionId(nextInspectionId);
-  }, []);
+  const openInspection = useCallback((nextInspectionId: string) => setInspectionId(nextInspectionId), []);
 
   return (
     <div
@@ -214,20 +194,13 @@ export function WorldApp({
       />
 
       {projection === "world" ? (
-        <>
-          <WorldView
-            node={focusNode}
-            transitionDirection={transitionDirection}
-            transitionKey={transitionKey}
-            onNavigate={navigate}
-            onInspect={openInspection}
-          />
-          <WorldEcology
-            focusNode={focusNode}
-            gestaltNode={focusNode}
-            onNavigate={(targetId) => navigate(targetId, "cross")}
-          />
-        </>
+        <WorldView
+          node={focusNode}
+          transitionDirection={transitionDirection}
+          transitionKey={transitionKey}
+          onNavigate={navigate}
+          onInspect={openInspection}
+        />
       ) : projection === "record" ? (
         <RecordView
           focusNode={focusNode}
@@ -250,10 +223,7 @@ export function WorldApp({
         />
       )}
 
-      {activeInspection ? (
-        <InspectionPanel inspection={activeInspection} onClose={() => setInspectionId(null)} />
-      ) : null}
-
+      {activeInspection ? <InspectionPanel inspection={activeInspection} onClose={() => setInspectionId(null)} /> : null}
       {searchOpen ? <SearchPanel onClose={() => setSearchOpen(false)} onNavigate={navigate} /> : null}
     </div>
   );
