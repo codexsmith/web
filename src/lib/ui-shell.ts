@@ -7,13 +7,16 @@ export type UiShellMode = (typeof uiShellModes)[number];
  * second representation target over the same semantic graph, traversal state, content,
  * evidence, publication, and process model.
  *
- * The interaction grammar and root/branch/leaf static studies are documented in:
+ * The Apparatus design sequence is documented in:
  * - backlog/3_bfl_boundary_first_ux/bfl_apparatus_interaction_grammar_v0_1.md
  * - backlog/3_bfl_boundary_first_ux/bfl_apparatus_static_studies_v0_1.md
+ * - backlog/3_bfl_boundary_first_ux/bfl_apparatus_visual_morphology_v0_1.md
  *
- * Do not render an apparatus placeholder or production renderer yet. The next gate is
- * visual morphology review: module/port form, connector routing, trace/peer physical
- * treatment, state/gate/command differentiation, and responsive transformation.
+ * The semantic grammar, real-content studies, and first visual morphology are now
+ * sufficiently specified for a small implementation prototype. Apparatus remains
+ * reserved until that prototype proves semantic parity, accessibility, zoom/reflow,
+ * connector-density collapse, and reduced-motion behavior. It must not replace Card as
+ * the production shell merely because prototype code exists.
  */
 export const activeUiShell: UiShellMode = "cards";
 
