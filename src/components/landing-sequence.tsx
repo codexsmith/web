@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import type { ContentNode } from "@/lib/content";
 
 type LandingSequenceProps = {
@@ -12,6 +12,13 @@ type LandingSequenceProps = {
 type LandingStyle = CSSProperties & {
   "--landing-progress": number;
   "--world-progress": number;
+  "--hero-exit-progress": number;
+  "--logo-progress": number;
+};
+
+type LandingGeometry = {
+  start: number;
+  distance: number;
 };
 
 function clamp(value: number) {
@@ -19,39 +26,126 @@ function clamp(value: number) {
 }
 
 export function LandingSequence({ branches, onNavigate, onProgress }: LandingSequenceProps) {
+  const sequenceRef = useRef<HTMLElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef(0);
+  const geometryRef = useRef<LandingGeometry | null>(null);
+  const scrollFrameRef = useRef<number | null>(null);
+  const resizeFrameRef = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
 
+  const measureGeometry = useCallback((): LandingGeometry => {
+    const sequence = sequenceRef.current;
+    const sticky = stickyRef.current;
+
+    if (!sequence || !sticky) {
+      return { start: 0, distance: 1 };
+    }
+
+    const start = sequence.getBoundingClientRect().top + window.scrollY;
+    const distance = Math.max(sequence.scrollHeight - sticky.offsetHeight, 1);
+    return { start, distance };
+  }, []);
+
+  const updateProgress = useCallback(() => {
+    const geometry = measureGeometry();
+    geometryRef.current = geometry;
+    const next = clamp((window.scrollY - geometry.start) / geometry.distance);
+    progressRef.current = next;
+    setProgress((current) => (Math.abs(current - next) > 0.0005 ? next : current));
+    onProgress(next);
+  }, [measureGeometry, onProgress]);
+
   useEffect(() => {
-    const update = () => {
-      const distance = Math.max(window.innerHeight * 1.15, 1);
-      const next = clamp(window.scrollY / distance);
-      setProgress(next);
-      onProgress(next);
+    const scheduleScrollUpdate = () => {
+      if (scrollFrameRef.current !== null) return;
+      scrollFrameRef.current = window.requestAnimationFrame(() => {
+        scrollFrameRef.current = null;
+        updateProgress();
+      });
     };
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    const preserveProgressAcrossResize = () => {
+      if (resizeFrameRef.current !== null) {
+        window.cancelAnimationFrame(resizeFrameRef.current);
+      }
+
+      const preservedProgress = progressRef.current;
+      const previousGeometry = geometryRef.current;
+
+      resizeFrameRef.current = window.requestAnimationFrame(() => {
+        resizeFrameRef.current = null;
+        const nextGeometry = measureGeometry();
+        const geometryChanged =
+          !previousGeometry ||
+          Math.abs(nextGeometry.distance - previousGeometry.distance) > 1 ||
+          Math.abs(nextGeometry.start - previousGeometry.start) > 1;
+
+        if (geometryChanged && previousGeometry) {
+          window.scrollTo({
+            top: nextGeometry.start + preservedProgress * nextGeometry.distance,
+            behavior: "auto",
+          });
+        }
+
+        geometryRef.current = nextGeometry;
+        updateProgress();
+      });
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
+    window.addEventListener("resize", preserveProgressAcrossResize);
+
+    const observer = new ResizeObserver(preserveProgressAcrossResize);
+    if (sequenceRef.current) observer.observe(sequenceRef.current);
+    if (stickyRef.current) observer.observe(stickyRef.current);
+
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", scheduleScrollUpdate);
+      window.removeEventListener("resize", preserveProgressAcrossResize);
+      observer.disconnect();
+      if (scrollFrameRef.current !== null) window.cancelAnimationFrame(scrollFrameRef.current);
+      if (resizeFrameRef.current !== null) window.cancelAnimationFrame(resizeFrameRef.current);
     };
-  }, [onProgress]);
+  }, [measureGeometry, updateProgress]);
 
-  const worldProgress = clamp((progress - 0.34) / 0.66);
+  const heroExitProgress = clamp((progress - 0.08) / 0.42);
+  const worldProgress = clamp((progress - 0.14) / 0.66);
+  const logoProgress = clamp((progress - 0.18) / 0.82);
+  const heroInteractive = progress < 0.48;
+  const worldInteractive = worldProgress >= 0.42;
+
   const style: LandingStyle = {
     "--landing-progress": progress,
     "--world-progress": worldProgress,
+    "--hero-exit-progress": heroExitProgress,
+    "--logo-progress": logoProgress,
   };
 
   const enterWorld = () => {
-    window.scrollTo({ top: window.innerHeight * 1.15, behavior: "smooth" });
+    const geometry = measureGeometry();
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({
+      top: geometry.start + geometry.distance,
+      behavior: reducedMotion ? "auto" : "smooth",
+    });
   };
 
   return (
-    <main className="landing-sequence" style={style}>
-      <div className="landing-sticky">
-        <section className="hero-state" aria-label="Boundary First Labs introduction">
+    <main
+      ref={sequenceRef}
+      className="landing-sequence"
+      data-phase={progress < 0.18 ? "hero" : worldProgress < 0.42 ? "transition" : "world"}
+      style={style}
+    >
+      <div ref={stickyRef} className="landing-sticky">
+        <section
+          className="hero-state"
+          data-interactive={heroInteractive ? "true" : "false"}
+          aria-label="Boundary First Labs introduction"
+          aria-hidden={!heroInteractive}
+        >
           <div className="hero-state__copy">
             <p className="eyebrow">Software research and engineering lab</p>
             <h1>Software for difficult systems.</h1>
@@ -60,16 +154,21 @@ export function LandingSequence({ branches, onNavigate, onProgress }: LandingSeq
               state, and responsibility matter.
             </p>
             <div className="hero-state__actions">
-              <button className="button button--primary" onClick={enterWorld}>
+              <button className="button button--primary" onClick={enterWorld} tabIndex={heroInteractive ? 0 : -1}>
                 Explore the lab
               </button>
-              <button className="button" onClick={() => onNavigate("products")}>
+              <button className="button" onClick={() => onNavigate("products")} tabIndex={heroInteractive ? 0 : -1}>
                 View products
               </button>
             </div>
           </div>
 
-          <button className="hero-logo" onClick={enterWorld} aria-label="Enter Boundary First Labs">
+          <button
+            className="hero-logo"
+            onClick={enterWorld}
+            aria-label="Enter Boundary First Labs"
+            tabIndex={heroInteractive ? 0 : -1}
+          >
             <span>BF</span>
           </button>
 
@@ -81,9 +180,9 @@ export function LandingSequence({ branches, onNavigate, onProgress }: LandingSeq
 
         <section
           className="landing-world"
+          data-interactive={worldInteractive ? "true" : "false"}
           aria-label="Boundary First Labs world"
-          aria-hidden={worldProgress < 0.55}
-          style={{ pointerEvents: worldProgress > 0.58 ? "auto" : "none" }}
+          aria-hidden={worldProgress < 0.26}
         >
           <div className="landing-world__field" />
           <div className="landing-world__title">
@@ -96,13 +195,17 @@ export function LandingSequence({ branches, onNavigate, onProgress }: LandingSeq
                 key={branch.id}
                 className={`world-district world-district--${index + 1}`}
                 onClick={() => onNavigate(branch.id)}
-                tabIndex={worldProgress > 0.72 ? 0 : -1}
+                tabIndex={worldInteractive ? 0 : -1}
               >
                 <span className="world-district__index">0{index + 1}</span>
                 <strong>{branch.label}</strong>
                 <small>{branch.eyebrow}</small>
               </button>
             ))}
+          </div>
+          <div className="landing-world__handoff" aria-hidden="true">
+            <strong>Root world available</strong>
+            <span>Choose a region or keep scrolling to resolve the whole.</span>
           </div>
         </section>
       </div>
