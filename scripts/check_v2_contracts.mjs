@@ -86,8 +86,18 @@ forbidMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /traversalIds[\s\S]*appendTraversal[\s\S]*rewindTraversal/,
-  "WorldApp must retain and rewind the actual traversal sequence",
+  /const \[traversalIds,\s*setTraversalIds\]\s*=\s*useState<string\[\]>/,
+  "WorldApp must hold an explicit traversal sequence",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /function appendTraversal\(/,
+  "WorldApp must define traversal append semantics",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /function rewindTraversal\(/,
+  "WorldApp must define traversal rewind semantics",
 );
 requireMatch(
   "src/components/world-app.tsx",
