@@ -112,7 +112,8 @@ try {
 
   await expectPage("/publications", [
     "Publications",
-    "Overview",
+    "At a glance",
+    "Continue from here",
     "Publication status is tracked separately",
     "Essays &amp; Arguments",
     "Methods &amp; Standards",
@@ -123,8 +124,9 @@ try {
 
   await expectPage("/publications/methods/software-before-code", [
     "Software Before Code",
-    "Overview",
+    "At a glance",
     "Working Public Method",
+    "Next publication gate",
     "External practitioner review",
   ]);
 
@@ -137,7 +139,8 @@ try {
 
   await expectPage("/public-interest", [
     "Public Interest",
-    "Overview",
+    "At a glance",
+    "Continue from here",
     "Mission",
     "Principles",
     "Enter region",
@@ -156,7 +159,7 @@ try {
 
   await expectPage("/public-interest/goals-aspirations", [
     "Goals &amp; Aspirations",
-    "Overview",
+    "At a glance",
   ]);
 
   console.log("v2 production runtime smoke: pass");
