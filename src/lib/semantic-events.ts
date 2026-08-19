@@ -1,5 +1,7 @@
 import type { DeliveryStage } from "@/lib/content";
 
+export const semanticEventLedgerSchemaVersion = "0.1.0";
+
 export type SemanticEventType =
   | "introduced"
   | "developed"
@@ -215,6 +217,57 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
     },
   ],
 };
+
+function assertIsoDate(value: string, field: string, eventId: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new Error(`Semantic event ${eventId} has invalid ${field}: ${value}`);
+  }
+}
+
+function assertSemanticEventLedgerIntegrity() {
+  const allEvents = Object.values(semanticEventLedger).flat();
+  const ids = new Set<string>();
+
+  Object.entries(semanticEventLedger).forEach(([nodeId, events]) => {
+    events.forEach((event) => {
+      if (event.nodeId !== nodeId) {
+        throw new Error(`Semantic event ${event.id} is filed under ${nodeId} but declares nodeId ${event.nodeId}`);
+      }
+
+      if (ids.has(event.id)) {
+        throw new Error(`Duplicate semantic event id: ${event.id}`);
+      }
+      ids.add(event.id);
+
+      assertIsoDate(event.recordedAt, "recordedAt", event.id);
+
+      if (event.effectiveAt) {
+        assertIsoDate(event.effectiveAt, "effectiveAt", event.id);
+        if (event.datePrecision === "unknown") {
+          throw new Error(`Semantic event ${event.id} has effectiveAt but unknown date precision`);
+        }
+      } else if (event.datePrecision !== "unknown") {
+        throw new Error(`Semantic event ${event.id} declares date precision without an effectiveAt date`);
+      }
+
+      if (!event.evidenceRefs.length) {
+        throw new Error(`Semantic event ${event.id} must retain at least one evidence reference`);
+      }
+
+      if (event.standingEffect === "supersedes" && !event.replacesEventId) {
+        throw new Error(`Superseding semantic event ${event.id} must name replacesEventId`);
+      }
+    });
+  });
+
+  allEvents.forEach((event) => {
+    if (event.replacesEventId && !ids.has(event.replacesEventId)) {
+      throw new Error(`Semantic event ${event.id} replaces unknown event ${event.replacesEventId}`);
+    }
+  });
+}
+
+assertSemanticEventLedgerIntegrity();
 
 export function getSemanticEvents(nodeId: string): SemanticEvent[] {
   return [...(semanticEventLedger[nodeId] ?? [])].sort((left, right) => {
