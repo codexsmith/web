@@ -141,7 +141,11 @@ export function WorldApp({
     const remembered = readTraversalMemory();
     const restored = remembered.length ? appendTraversal(remembered, initialNodeId) : [initialNodeId];
     writeTraversalMemory(restored);
-    setTraversalIds(restored);
+
+    if (restored.length === 1 && restored[0] === initialNodeId) return;
+
+    const frame = window.requestAnimationFrame(() => setTraversalIds(restored));
+    return () => window.cancelAnimationFrame(frame);
   }, [initialNodeId]);
 
   useEffect(() => {
