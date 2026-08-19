@@ -1,27 +1,22 @@
 "use client";
 
-import { ContentNode, getCrossEdges } from "@/lib/content-registry";
+import { ContentNode, getChildren, getCrossEdges } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 
 type SubjectPaneProps = {
   node: ContentNode;
   onInspect: (inspectionId: string) => void;
   onNavigate: (id: string) => void;
-  includeRelations?: boolean;
 };
 
-export function SubjectPane({
-  node,
-  onInspect,
-  onNavigate,
-  includeRelations = true,
-}: SubjectPaneProps) {
+export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
   const body = node.body ?? [];
   const visibleBody = body.slice(0, 2);
   const remainingBody = body.slice(2);
   const records = node.links ?? [];
   const inspections = node.inspection ?? [];
-  const relations = includeRelations
+  const isBranch = getChildren(node.id).length > 0;
+  const relations = isBranch
     ? getCrossEdges(node.id).map((edge) => ({
         ...edge,
         node: hydrateContentNode(edge.node),
