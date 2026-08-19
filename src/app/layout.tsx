@@ -10,6 +10,7 @@ import "./focus-telemetry.css";
 import "./focus-telemetry-interaction.css";
 import "./state-ecology.css";
 import "./state-surface-projection.css";
+import "./semantic-event-ledger.css";
 import "./industrial-interaction.css";
 
 export const metadata: Metadata = {
