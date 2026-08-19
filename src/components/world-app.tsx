@@ -19,6 +19,7 @@ import {
   getParent,
   getPathForNode,
   getSiblings,
+  isDescendantOf,
 } from "@/lib/content";
 
 type WorldAppProps = {
@@ -45,6 +46,22 @@ function inferDirection(fromId: string, toId: string): TransitionDirection {
   return "cross";
 }
 
+function stateUrl(focusId: string, gestaltId: string) {
+  const focusPath = getPathForNode(focusId);
+  const params = new URLSearchParams();
+
+  if (focusId === "root") {
+    params.set("world", "1");
+  }
+
+  if (gestaltId !== focusId) {
+    params.set("gestalt", gestaltId);
+  }
+
+  const query = params.toString();
+  return query ? `${focusPath}?${query}` : focusPath;
+}
+
 export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: WorldAppProps) {
   const router = useRouter();
   const resolvedInitialGestaltId = initialGestaltId ?? initialNodeId;
@@ -63,6 +80,7 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
   const rootBranches = getChildren("root").map(hydrateContentNode);
   const canZoomOut = Boolean(getParent(gestaltId));
   const canZoomIn = gestaltId !== focusId && Boolean(getImmediateChildTowardFocus(gestaltId, focusId));
+  const worldMode = introEnabled ? "landing" : getChildren(gestaltId).length === 0 ? "detail" : "world";
 
   const activeInspection = useMemo(() => {
     if (!inspectionId) return undefined;
@@ -110,19 +128,7 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
 
   const replaceGestaltUrl = useCallback(
     (nextGestaltId: string) => {
-      const focusPath = getPathForNode(focusId);
-      const params = new URLSearchParams();
-
-      if (focusId === "root") {
-        params.set("world", "1");
-      }
-
-      if (nextGestaltId !== focusId) {
-        params.set("gestalt", nextGestaltId);
-      }
-
-      const query = params.toString();
-      router.replace(query ? `${focusPath}?${query}` : focusPath, { scroll: false });
+      router.replace(stateUrl(focusId, nextGestaltId), { scroll: false });
     },
     [focusId, router],
   );
@@ -137,14 +143,29 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
       setInspectionId(null);
       setIntroEnabled(false);
       setLandingProgress(1);
-
-      if (targetId === "root") {
-        router.push("/?world=1");
-      } else {
-        router.push(getPathForNode(targetId));
-      }
+      router.push(stateUrl(targetId, targetId));
     },
     [focusId, router],
+  );
+
+  const navigateFocusPath = useCallback(
+    (targetId: string) => {
+      if (targetId === focusId) return;
+
+      const currentWholeContainsTarget =
+        targetId === gestaltId || isDescendantOf(targetId, gestaltId);
+      const nextGestaltId = currentWholeContainsTarget ? gestaltId : targetId;
+
+      setTransitionDirection(inferDirection(focusId, targetId));
+      setTransitionKey((value) => value + 1);
+      setFocusId(targetId);
+      setGestaltId(nextGestaltId);
+      setInspectionId(null);
+      setIntroEnabled(false);
+      setLandingProgress(1);
+      router.push(stateUrl(targetId, nextGestaltId));
+    },
+    [focusId, gestaltId, router],
   );
 
   const zoomOut = useCallback(() => {
@@ -173,7 +194,7 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
   const frameVisible = !introEnabled || landingProgress > 0.48;
 
   return (
-    <div className="site-shell">
+    <div className="site-shell" data-world-mode={worldMode}>
       <BoundaryFrame
         visible={frameVisible}
         focusNode={focusNode}
@@ -182,9 +203,10 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
         rootBranches={rootBranches}
         canZoomOut={canZoomOut}
         canZoomIn={canZoomIn}
-        onHome={() => navigate("root", "zoom-out")}
+        onHome={() => navigate("root", "up")}
         onBack={() => router.back()}
         onNavigate={navigate}
+        onFocusPath={navigateFocusPath}
         onZoomOut={zoomOut}
         onZoomIn={zoomIn}
         onSearch={() => setSearchOpen(true)}
