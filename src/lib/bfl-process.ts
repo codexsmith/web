@@ -208,9 +208,17 @@ const eventStageMap: Record<SemanticEventType, ProcessStageId[]> = {
 };
 
 function freshScores(): Record<ProcessStageId, StageScore> {
-  return Object.fromEntries(
-    processStageIds.map((stage) => [stage, { score: 0, reasons: [] }]),
-  ) as Record<ProcessStageId, StageScore>;
+  return {
+    intake: { score: 0, reasons: [] },
+    boundary: { score: 0, reasons: [] },
+    representation: { score: 0, reasons: [] },
+    hypothesis: { score: 0, reasons: [] },
+    construction: { score: 0, reasons: [] },
+    execution: { score: 0, reasons: [] },
+    validation: { score: 0, reasons: [] },
+    repair: { score: 0, reasons: [] },
+    promotion: { score: 0, reasons: [] },
+  };
 }
 
 function add(
@@ -236,8 +244,6 @@ export function deriveProcessPlacement(node: ContentNode): ProcessPlacement {
     );
   });
 
-  // Every public node is itself a representation, but the low weight keeps this from
-  // erasing stronger lifecycle/research signals.
   add(scores, "representation", 1, "The public node is itself a governed representation of the underlying work.");
 
   const status = node.status;
@@ -300,12 +306,21 @@ export function deriveProcessPlacement(node: ContentNode): ProcessPlacement {
     .map((entry) => entry.stage)
     .sort((a, b) => processStageIds.indexOf(a) - processStageIds.indexOf(b));
 
+  const stageScores = freshScores();
+  const scoreRecord = {} as Record<ProcessStageId, number>;
+  const reasonRecord = {} as Record<ProcessStageId, string[]>;
+  processStageIds.forEach((stage) => {
+    scoreRecord[stage] = scores[stage].score;
+    reasonRecord[stage] = [...scores[stage].reasons];
+  });
+  void stageScores;
+
   return {
     nodeId: node.id,
     primaryStage,
     activeStages: activeStages.length ? activeStages : [primaryStage],
-    stageScores: Object.fromEntries(processStageIds.map((stage) => [stage, scores[stage].score])) as Record<ProcessStageId, number>,
-    reasons: Object.fromEntries(processStageIds.map((stage) => [stage, scores[stage].reasons])) as Record<ProcessStageId, string[]>,
+    stageScores: scoreRecord,
+    reasons: reasonRecord,
     basis: status || events.length ? "declared-and-derived" : "derived",
   };
 }
