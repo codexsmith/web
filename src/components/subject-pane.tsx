@@ -7,19 +7,27 @@ type SubjectPaneProps = {
   node: ContentNode;
   onInspect: (inspectionId: string) => void;
   onNavigate: (id: string) => void;
+  includeRelations?: boolean;
 };
 
-export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
+export function SubjectPane({
+  node,
+  onInspect,
+  onNavigate,
+  includeRelations = true,
+}: SubjectPaneProps) {
   const body = node.body ?? [];
   const visibleBody = body.slice(0, 2);
   const remainingBody = body.slice(2);
   const records = node.links ?? [];
   const inspections = node.inspection ?? [];
-  const relations = getCrossEdges(node.id).map((edge) => ({
-    ...edge,
-    node: hydrateContentNode(edge.node),
-    direction: edge.from === node.id ? "outgoing" as const : "incoming" as const,
-  }));
+  const relations = includeRelations
+    ? getCrossEdges(node.id).map((edge) => ({
+        ...edge,
+        node: hydrateContentNode(edge.node),
+        direction: edge.from === node.id ? "outgoing" as const : "incoming" as const,
+      }))
+    : [];
   const hasExploratoryInspection = inspections.some((inspection) => inspection.id.startsWith("exploratory-"));
 
   const hasContent =
