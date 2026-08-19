@@ -288,7 +288,6 @@ export function WorldApp({
       ) : projection === "evidence" ? (
         <EvidenceView
           focusNode={focusNode}
-          gestaltNode={focusNode}
           onInspect={openInspection}
           onNavigate={(targetId) => navigate(targetId, "cross")}
         />
