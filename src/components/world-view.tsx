@@ -91,6 +91,13 @@ function BranchWorld({
 }: BranchWorldProps) {
   const focusedBelow = focusNode.id !== gestaltNode.id;
   const showGestaltContext = !focusedBelow;
+  const inspections = gestaltNode.inspection ?? [];
+  const exploratoryInspections = inspections.filter((inspection) =>
+    inspection.id.startsWith("exploratory-"),
+  );
+  const supportingInspections = inspections.filter(
+    (inspection) => !inspection.id.startsWith("exploratory-"),
+  );
 
   return (
     <section className={`branch-world branch-world--${gestaltNode.kind}`}>
@@ -147,13 +154,32 @@ function BranchWorld({
         </section>
       ) : null}
 
-      {showGestaltContext && gestaltNode.inspection?.length ? (
+      {showGestaltContext && supportingInspections.length ? (
         <section className="node-section branch-world__context-section">
           <div className="node-section__label">Supporting research</div>
           <div className="inspection-links">
-            {gestaltNode.inspection.map((inspection) => (
+            {supportingInspections.map((inspection) => (
               <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
                 <span>Through</span>
+                <strong>{inspection.label}</strong>
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {showGestaltContext && exploratoryInspections.length ? (
+        <section className="node-section branch-world__context-section branch-world__exploratory-section">
+          <div className="node-section__label">Exploratory Research</div>
+          <p className="branch-world__section-intro">
+            Reformulation is a research instrument, not a solution claim. Solved targets calibrate the
+            representation; open problems remain reformulations, proof obligations, derivation audits, or
+            experiments until their native validation gates are met.
+          </p>
+          <div className="inspection-links">
+            {exploratoryInspections.map((inspection) => (
+              <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
+                <span>Explore</span>
                 <strong>{inspection.label}</strong>
               </button>
             ))}
