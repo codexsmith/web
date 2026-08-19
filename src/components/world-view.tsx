@@ -50,7 +50,11 @@ export function WorldView({
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
       {parent ? (
-        <button className="direction-control direction-control--up" onClick={() => onNavigate(parent.id, "up")}>
+        <button
+          className="direction-control direction-control--up"
+          onClick={() => onNavigate(parent.id, "up")}
+          title={`Up to ${parent.label}`}
+        >
           <span aria-hidden="true">^</span>
           <small>{parent.shortLabel ?? parent.label}</small>
         </button>
@@ -100,7 +104,7 @@ function BranchWorld({
   );
 
   return (
-    <section className={`branch-world branch-world--${gestaltNode.kind}`}>
+    <section className={`branch-world branch-world--${gestaltNode.kind}`} data-kind={gestaltNode.kind}>
       <header className="world-heading">
         <p className="eyebrow">{gestaltNode.eyebrow}</p>
         <h1>{gestaltNode.label}</h1>
@@ -114,7 +118,7 @@ function BranchWorld({
         ) : null}
       </header>
 
-      <div className={`district-grid district-grid--${Math.min(children.length, 6)}`}>
+      <div className={`district-grid district-grid--${Math.min(children.length, 6)}`} aria-label={`${gestaltNode.label} regions`}>
         {children.map((child, index) => {
           const isFocusRegion = focusRegion?.id === child.id || focusNode.id === child.id;
           return (
@@ -123,6 +127,8 @@ function BranchWorld({
               className={`district-card ${isFocusRegion ? "district-card--focused" : ""}`}
               data-kind={child.kind}
               onClick={() => onNavigate(child.id, "down")}
+              aria-current={isFocusRegion ? "location" : undefined}
+              title={`Enter ${child.label}`}
             >
               <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
               <span className="district-card__kind">{child.eyebrow}</span>
@@ -133,14 +139,14 @@ function BranchWorld({
               ) : null}
               <strong>{child.label}</strong>
               <p>{child.summary}</p>
-              <span className="district-card__action">Enter</span>
+              <span className="district-card__action">Enter region</span>
             </button>
           );
         })}
       </div>
 
       {showGestaltContext && gestaltNode.links?.length ? (
-        <section className="node-section branch-world__context-section">
+        <section className="node-section branch-world__context-section node-section--records">
           <div className="node-section__label">Connected operative surfaces</div>
           <div className="record-links">
             {gestaltNode.links.map((link) => (
@@ -155,11 +161,15 @@ function BranchWorld({
       ) : null}
 
       {showGestaltContext && supportingInspections.length ? (
-        <section className="node-section branch-world__context-section">
+        <section className="node-section branch-world__context-section node-section--inspection">
           <div className="node-section__label">Supporting research</div>
           <div className="inspection-links">
             {supportingInspections.map((inspection) => (
-              <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
+              <button
+                key={inspection.id}
+                onClick={() => onInspect(inspection.id)}
+                title={`Inspect ${inspection.label} without leaving ${gestaltNode.label}`}
+              >
                 <span>Through</span>
                 <strong>{inspection.label}</strong>
               </button>
@@ -169,7 +179,7 @@ function BranchWorld({
       ) : null}
 
       {showGestaltContext && exploratoryInspections.length ? (
-        <section className="node-section branch-world__context-section branch-world__exploratory-section">
+        <section className="node-section branch-world__context-section branch-world__exploratory-section node-section--inspection">
           <div className="node-section__label">Exploratory Research</div>
           <p className="branch-world__section-intro">
             Reformulation is a research instrument, not a solution claim. Solved targets calibrate the
@@ -178,7 +188,11 @@ function BranchWorld({
           </p>
           <div className="inspection-links">
             {exploratoryInspections.map((inspection) => (
-              <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
+              <button
+                key={inspection.id}
+                onClick={() => onInspect(inspection.id)}
+                title={`Explore ${inspection.label} without changing location`}
+              >
                 <span>Explore</span>
                 <strong>{inspection.label}</strong>
               </button>
@@ -209,6 +223,7 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
         <button
           className="direction-control direction-control--left"
           onClick={() => onNavigate(previous.id, "left")}
+          title={`Previous sibling: ${previous.label}`}
         >
           <span aria-hidden="true">&lt;</span>
           <small>{previous.shortLabel ?? previous.label}</small>
@@ -219,13 +234,14 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
         <button
           className="direction-control direction-control--right"
           onClick={() => onNavigate(next.id, "right")}
+          title={`Next sibling: ${next.label}`}
         >
           <small>{next.shortLabel ?? next.label}</small>
           <span aria-hidden="true">&gt;</span>
         </button>
       ) : null}
 
-      <article className="node-surface">
+      <article className="node-surface" data-kind={node.kind}>
         <header>
           <p className="eyebrow">{node.eyebrow}</p>
           <h1>{node.label}</h1>
@@ -264,7 +280,7 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
         )}
 
         {node.links?.length ? (
-          <section className="node-section">
+          <section className="node-section node-section--records">
             <div className="node-section__label">Open retained record</div>
             <div className="record-links">
               {node.links.map((link) => (
@@ -279,11 +295,15 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
         ) : null}
 
         {node.inspection?.length ? (
-          <section className="node-section">
+          <section className="node-section node-section--inspection">
             <div className="node-section__label">Inspect through this node</div>
             <div className="inspection-links">
               {node.inspection.map((inspection) => (
-                <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
+                <button
+                  key={inspection.id}
+                  onClick={() => onInspect(inspection.id)}
+                  title={`Inspect ${inspection.label} without leaving ${node.label}`}
+                >
                   <span>Through</span>
                   <strong>{inspection.label}</strong>
                 </button>
@@ -293,11 +313,16 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
         ) : null}
 
         {crossEdges.length ? (
-          <section className="node-section">
+          <section className="node-section node-section--edges">
             <div className="node-section__label">Typed connections</div>
             <div className="edge-links">
               {crossEdges.map((edge) => (
-                <button key={`${edge.from}-${edge.to}-${edge.type}`} onClick={() => onNavigate(edge.node.id, "cross")}>
+                <button
+                  key={`${edge.from}-${edge.to}-${edge.type}`}
+                  data-edge-type={edge.type}
+                  onClick={() => onNavigate(edge.node.id, "cross")}
+                  title={`${edge.label}: ${edge.node.label}`}
+                >
                   <span>{edge.label}</span>
                   <strong>{edge.node.label}</strong>
                   <small>{edge.type}</small>
