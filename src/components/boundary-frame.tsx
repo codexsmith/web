@@ -1,6 +1,12 @@
 "use client";
 
 import { ContentNode } from "@/lib/content";
+import {
+  projectionDescriptions,
+  projectionLabels,
+  projectionModes,
+  type ProjectionMode,
+} from "@/lib/view-projection";
 
 type BoundaryFrameProps = {
   visible: boolean;
@@ -10,12 +16,14 @@ type BoundaryFrameProps = {
   rootBranches: ContentNode[];
   canZoomOut: boolean;
   canZoomIn: boolean;
+  projection?: ProjectionMode;
   onHome: () => void;
   onBack: () => void;
   onNavigate: (id: string) => void;
   onFocusPath: (id: string) => void;
   onZoomOut: () => void;
   onZoomIn: () => void;
+  onProjectionChange?: (projection: ProjectionMode) => void;
   onSearch: () => void;
 };
 
@@ -57,12 +65,14 @@ export function BoundaryFrame({
   rootBranches,
   canZoomOut,
   canZoomIn,
+  projection = "world",
   onHome,
   onBack,
   onNavigate,
   onFocusPath,
   onZoomOut,
   onZoomIn,
+  onProjectionChange,
   onSearch,
 }: BoundaryFrameProps) {
   const focusPath = breadcrumbs.filter((node) => node.id !== "root");
@@ -174,6 +184,21 @@ export function BoundaryFrame({
           <strong>Whole</strong>
           <span className="frame-status__value">{gestaltNode.shortLabel ?? gestaltNode.label}</span>
         </span>
+        {onProjectionChange ? (
+          <div className="projection-switcher" aria-label="View projection">
+            <span className="projection-switcher__label">View</span>
+            {projectionModes.map((mode) => (
+              <button
+                key={mode}
+                onClick={() => onProjectionChange(mode)}
+                aria-pressed={projection === mode}
+                title={projectionDescriptions[mode]}
+              >
+                {projectionLabels[mode]}
+              </button>
+            ))}
+          </div>
+        ) : null}
       </footer>
     </div>
   );
