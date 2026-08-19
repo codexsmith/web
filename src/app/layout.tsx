@@ -13,6 +13,8 @@ import "./navigation-topology.css";
 import "./gestalt-process.css";
 import "./navigation-interaction.css";
 import "./root-world-and-content-stability.css";
+import "./hero-screen.css";
+import "./traversal-history.css";
 
 export const metadata: Metadata = {
   title: {

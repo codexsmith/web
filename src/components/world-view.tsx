@@ -160,14 +160,14 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
 
   return (
     <section
-      className={`branch-world branch-world--${node.kind} ${isRoot ? "branch-world--root-home" : ""}`}
+      className={`branch-world branch-world--${node.kind} ${isRoot ? "branch-world--root-world" : ""}`}
       data-kind={node.kind}
       data-world-id={node.id}
       data-gestalt-id={node.id}
     >
       <header className="world-heading">
-        <p className="eyebrow">{isRoot ? "Boundary First Labs · Software research and engineering lab" : node.eyebrow}</p>
-        <h1>{isRoot ? "Software for difficult systems." : node.label}</h1>
+        <p className="eyebrow">{isRoot ? "Root World · operating environment" : node.eyebrow}</p>
+        <h1>{node.label}</h1>
         <p>{node.summary}</p>
         {node.body?.[0] ? <p className="world-heading__context">{node.body[0]}</p> : null}
       </header>
@@ -254,7 +254,7 @@ type NodeDetailProps = {
 };
 
 function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
-  const children = getChildren(node.id).map(hydrateContentNode);
+  const regions = getChildren(node.id).map(hydrateContentNode);
   const crossEdges = getCrossEdges(node.id).map((edge) => ({ ...edge, node: hydrateContentNode(edge.node) }));
 
   return (
@@ -295,11 +295,11 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
           </div>
         )}
 
-        {children.length ? (
+        {regions.length ? (
           <section className="node-section node-section--children">
             <div className="node-section__label">Contained regions</div>
             <div className="contained-region-links">
-              {children.map((child) => (
+              {regions.map((child) => (
                 <button key={child.id} onClick={() => onNavigate(child.id, "down")} title={`Open ${child.label}`}>
                   <span>{child.eyebrow}</span>
                   <strong>{child.label}</strong>

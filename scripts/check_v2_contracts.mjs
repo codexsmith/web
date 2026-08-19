@@ -4,6 +4,12 @@ function read(path) {
   return fs.readFileSync(path, "utf8");
 }
 
+function requireExists(path, message) {
+  if (!fs.existsSync(path)) {
+    throw new Error(`${message} (${path})`);
+  }
+}
+
 function requireMatch(path, pattern, message) {
   const source = read(path);
   if (!pattern.test(source)) {
@@ -18,7 +24,7 @@ function forbidMatch(path, pattern, message) {
   }
 }
 
-// One canonical home: root is World, every non-root canonical node defaults to Record.
+// Projection vocabulary stays stable: Root defaults to World; non-root canonical nodes default to Record.
 requireMatch(
   "src/lib/view-projection.ts",
   /projectionModes\s*=\s*\["world",\s*"record",\s*"evidence",\s*"gestalt"\]/,
@@ -30,41 +36,86 @@ requireMatch(
   "Root must default to World and non-root content to Record",
 );
 
-// Root-world consolidation: the app may not revive the separate landing state machine.
+// Hero = threshold; Root World = structural operating world. The threshold must not become a second root map.
+requireMatch(
+  "src/components/hero-screen.tsx",
+  /Software for difficult systems\.[\s\S]*Enter the lab/,
+  "Hero must make the public proposition and expose an explicit entry action",
+);
 forbidMatch(
-  "src/components/world-app.tsx",
-  /LandingSequence|landingProgress|introEnabled|skipLanding/,
-  "Canonical WorldApp must not carry a second landing/home state machine",
+  "src/components/hero-screen.tsx",
+  /district-grid|rootBranches|Enter region|onNavigate/,
+  "Hero must not duplicate Root World structure or traversal controls",
+);
+requireMatch(
+  "src/app/[[...slug]]/page.tsx",
+  /initialHeroVisible\s*=\s*node\.id\s*===\s*"root"\s*&&\s*worldState\s*!==\s*"1"/,
+  "Bare root URL must resolve to the entry threshold while ?world=1 resolves to the entered world",
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /router\.push\("\/",\s*\{\s*scroll:\s*false\s*\}\)/,
-  "BF home must resolve to the canonical root URL",
+  /focusId\s*===\s*"root"\)\s*params\.set\("world",\s*"1"\)/,
+  "Entered Root World state must be reconstructible in the URL",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /router\.replace\(stateUrl\("root",\s*"world",\s*"full"\)/,
+  "Crossing the hero threshold must replace rather than pollute browser history",
 );
 forbidMatch(
   "src/components/world-app.tsx",
-  /WorldEcology|gestaltId|initialGestaltId/,
-  "Standard World traversal must not depend on the retired containment-Gestalt ecology",
+  /LandingSequence|landingProgress|introEnabled|skipLanding/,
+  "Hero restoration must not revive the retired scroll-driven duplicate landing state machine",
+);
+forbidMatch(
+  "src/components/world-view.tsx",
+  /Software for difficult systems\./,
+  "Root World must not repeat the hero proposition",
+);
+requireMatch(
+  "src/components/world-view.tsx",
+  /Root World · operating environment/,
+  "Entered root must identify itself as the operating world",
 );
 
-// Navigation ownership: root structure lives in the Root World, not a duplicate top nav.
+// Focus Path = actual traversal history. Content structure belongs to World/Record/Peers, not the left rail.
 forbidMatch(
+  "src/components/world-app.tsx",
+  /getAncestors|breadcrumbs/,
+  "Focus Path must not be derived from content ancestry",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /traversalIds[\s\S]*appendTraversal[\s\S]*rewindTraversal/,
+  "WorldApp must retain and rewind the actual traversal sequence",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /setTraversalIds\(\(current\)\s*=>\s*appendTraversal\(current,\s*targetId\)\)/,
+  "Graph traversal must append the actual target to the Focus Path",
+);
+requireMatch(
   "src/components/boundary-frame.tsx",
-  /primary-nav|rootBranches/,
-  "Boundary Frame must not duplicate root district navigation",
+  /aria-label="Focus traversal history"/,
+  "Left rail must identify itself semantically as traversal history",
+);
+requireMatch(
+  "src/components/boundary-frame.tsx",
+  /onTraversalPath\(node\.id,\s*index\)/,
+  "Earlier Focus Path steps must be actionable traversal-history rewind points",
 );
 requireMatch(
   "src/components/boundary-frame.tsx",
   /path-node__role[\s\S]*Focus/,
-  "Focus must be represented by the terminal Focus Path endpoint",
+  "Current Focus must remain the terminal traversal endpoint",
 );
 requireMatch(
   "src/components/boundary-frame.tsx",
   /peerNodes\s*=\s*siblings\.filter/,
-  "Sibling traversal must be owned by the complete peer set",
+  "Sibling traversal must remain owned by the peer rail rather than the Focus Path",
 );
 
-// Record must expose the public body and structural children rather than hiding them in World.
+// Record must expose public body and structural children rather than hiding them in World.
 requireMatch(
   "src/components/world-view.tsx",
   /Contained regions/,
@@ -74,11 +125,6 @@ requireMatch(
   "src/components/world-view.tsx",
   /inspection\.summary/,
   "Record/World inspection affordances must expose substantive inspection summaries",
-);
-requireMatch(
-  "src/components/world-view.tsx",
-  /Software for difficult systems\./,
-  "Root World must carry the public home introduction",
 );
 
 // Text preservation wins over decorative geometry under zoom / viewport compression.
@@ -110,7 +156,7 @@ requireMatch(
   "Gestalt must expose the BFL operating synthesis",
 );
 
-// Dead architectural layers should not remain active through global CSS imports.
+// Active style cascade must include the threshold and traversal semantics, but not retired ecology layers.
 forbidMatch(
   "src/app/layout.tsx",
   /world-ecology\.css|focus-telemetry|state-ecology|state-surface-projection|landing-stability/,
@@ -118,8 +164,25 @@ forbidMatch(
 );
 requireMatch(
   "src/app/layout.tsx",
-  /root-world-and-content-stability\.css/,
-  "Canonical root/readability stability layer must be active",
+  /root-world-and-content-stability\.css[\s\S]*hero-screen\.css[\s\S]*traversal-history\.css/,
+  "Root readability, hero threshold, and traversal-history layers must all be active",
+);
+
+// The retired archive must represent final v1, including the late journey-refinement branch merged into main.
+for (const path of [
+  "retired_v1/src/components/journey/EntranceIntentConsole.tsx",
+  "retired_v1/src/components/journey/EvidenceClaimReader.tsx",
+  "retired_v1/src/components/journey/MethodStackNavigator.tsx",
+  "retired_v1/src/components/journey/ResearchJourneyRail.tsx",
+  "retired_v1/src/components/journey/SoftwareProblemRouter.tsx",
+  "retired_v1/tests/site-journey-refinement.test.ts",
+]) {
+  requireExists(path, "Final v1 journey refinement must remain preserved in retired_v1");
+}
+requireMatch(
+  "retired_v1/src/components/entrance/InstitutionalVestibuleHome.tsx",
+  /EntranceIntentConsole/,
+  "Retired v1 homepage must include its final intent-console refinement",
 );
 
 console.log("v2 architecture contracts: pass");

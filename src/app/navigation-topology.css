@@ -1,13 +1,12 @@
 /* Boundary First UX · Navigation topology
-   Root choices are entrance controls. Once inside the graph, the Focus Path owns ancestry
-   and the Peer rail owns complete sibling traversal. */
+   Root structure belongs to the Root World. Once inside the graph, the Focus Path records
+   the route actually traversed and the Peer rail owns complete sibling traversal. */
 
 :root {
   --frame-left: 168px;
   --frame-right: 158px;
 }
 
-/* The top district selector is a root-only entrance instrument. */
 .brand-anchor {
   grid-column: 1;
 }
@@ -20,7 +19,7 @@
   grid-column: 3;
 }
 
-/* Focus Path must preserve the actual node label rather than clipping it into a nav token. */
+/* Focus Path preserves actual traversed labels rather than compressing them into tokens. */
 .boundary-frame__left {
   overflow: hidden;
 }
@@ -58,7 +57,7 @@
   line-height: 1.28;
 }
 
-/* Complete sibling traversal lives on the opposite boundary from ancestry. */
+/* Complete sibling traversal lives on the opposite boundary from the session trace. */
 .boundary-frame__right {
   position: absolute;
   top: var(--frame-top);
@@ -164,9 +163,8 @@
   right: var(--frame-right);
 }
 
-/* Root keeps the four entrance regions in the top housing. Once the visitor enters
-   one, that top selector disappears because those peers are now represented by the
-   Focus Path + sibling rail. */
+/* The frame does not repeat root branch structure. Inside a non-root focus, peers and
+   the actual traversal trace supply boundary-local navigation around the current world. */
 .boundary-frame:not(.boundary-frame--root) .primary-nav {
   display: none;
 }
@@ -249,8 +247,6 @@
 }
 
 @media (max-width: 720px) {
-  /* Root needs the second row because it still owns the entrance district selector.
-     Non-root frames collapse to one control row. */
   .site-shell[data-root-focus="false"] {
     --frame-top: 62px;
   }

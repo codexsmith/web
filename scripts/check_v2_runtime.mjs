@@ -46,7 +46,7 @@ async function waitForServer() {
   throw new Error(`Timed out waiting for production server${lastError ? `: ${lastError}` : ""}\n${output}`);
 }
 
-async function expectPage(path, expectedStrings) {
+async function expectPage(path, expectedStrings, forbiddenStrings = []) {
   const response = await fetchWithTimeout(`${base}${path}`);
   if (response.status !== 200) {
     throw new Error(`${path} returned HTTP ${response.status}`);
@@ -56,6 +56,12 @@ async function expectPage(path, expectedStrings) {
   for (const expected of expectedStrings) {
     if (!html.includes(expected)) {
       throw new Error(`${path} did not contain expected public marker: ${expected}`);
+    }
+  }
+
+  for (const forbidden of forbiddenStrings) {
+    if (html.includes(forbidden)) {
+      throw new Error(`${path} contained forbidden public marker: ${forbidden}`);
     }
   }
 }
@@ -80,10 +86,22 @@ try {
 
   await expectPage("/", [
     "Software for difficult systems.",
+    "Enter the lab",
+    "Entry threshold",
+  ], [
+    "Enter region",
+    "Root World · operating environment",
+  ]);
+
+  await expectPage("/?world=1", [
+    "Root World · operating environment",
     "Products",
     "Public Interest",
     "Research",
     "About",
+    "Enter region",
+  ], [
+    "Enter the lab",
   ]);
 
   await expectPage("/public-interest", [

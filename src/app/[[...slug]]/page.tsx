@@ -33,6 +33,7 @@ type PageProps = {
   searchParams: Promise<{
     view?: string | string[];
     scope?: string | string[];
+    world?: string | string[];
   }>;
 };
 
@@ -130,13 +131,15 @@ export default async function Page({ params, searchParams }: PageProps) {
   const node = getNodeByPath(slug);
   const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
   const initialProcessScope = parseProcessScope(query.scope) ?? "full";
+  const worldState = Array.isArray(query.world) ? query.world[0] : query.world;
+  const initialHeroVisible = node.id === "root" && worldState !== "1";
 
   return (
     <WorldApp
-      key={`${node.id}:${initialProjection}:${initialProcessScope}`}
       initialNodeId={node.id}
       initialProjection={initialProjection}
       initialProcessScope={initialProcessScope}
+      initialHeroVisible={initialHeroVisible}
     />
   );
 }

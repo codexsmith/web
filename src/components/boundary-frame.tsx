@@ -12,7 +12,7 @@ import {
 type BoundaryFrameProps = {
   visible: boolean;
   focusNode: ContentNode;
-  breadcrumbs: ContentNode[];
+  traversalPath: ContentNode[];
   siblings: ContentNode[];
   projection?: ProjectionMode;
   processScope: ProcessScope;
@@ -21,7 +21,7 @@ type BoundaryFrameProps = {
   onHome: () => void;
   onBack: () => void;
   onNavigate: (id: string) => void;
-  onFocusPath: (id: string) => void;
+  onTraversalPath: (id: string, index: number) => void;
   onProcessZoomOut: () => void;
   onProcessZoomIn: () => void;
   onProjectionChange?: (projection: ProjectionMode) => void;
@@ -61,7 +61,7 @@ function FrameIcon({ name }: { name: FrameIconName }) {
 export function BoundaryFrame({
   visible,
   focusNode,
-  breadcrumbs,
+  traversalPath,
   siblings,
   projection = "world",
   processScope,
@@ -70,14 +70,15 @@ export function BoundaryFrame({
   onHome,
   onBack,
   onNavigate,
-  onFocusPath,
+  onTraversalPath,
   onProcessZoomOut,
   onProcessZoomIn,
   onProjectionChange,
   onSearch,
 }: BoundaryFrameProps) {
-  const focusPath = breadcrumbs.filter((node) => node.id !== "root");
+  const priorTraversal = traversalPath.slice(0, -1);
   const isRootFocus = focusNode.id === "root";
+  const showTraversalPath = !isRootFocus || traversalPath.length > 1;
   const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
 
   return (
@@ -94,7 +95,7 @@ export function BoundaryFrame({
         </button>
 
         <div className="frame-tools" aria-label="Global controls">
-          <button className="frame-tool frame-tool--back" onClick={onBack} aria-label="Back" title="Back through traversal history">
+          <button className="frame-tool frame-tool--back" onClick={onBack} aria-label="Back" title="Back through browser navigation history">
             <FrameIcon name="back" />
             <span className="frame-tool__label">Back</span>
           </button>
@@ -133,22 +134,26 @@ export function BoundaryFrame({
         </div>
       </header>
 
-      {!isRootFocus ? (
-        <aside className="boundary-frame__left" aria-label="Current focus ancestry path">
+      {showTraversalPath ? (
+        <aside className="boundary-frame__left" aria-label="Focus traversal history">
           <div className="path-label">Focus path</div>
           <ol>
-            {focusPath.map((node) => (
-              <li key={node.id}>
+            {priorTraversal.map((node, index) => (
+              <li key={`${node.id}-${index}`} data-history-step={index + 1}>
                 <span className="path-node__dot" aria-hidden="true" />
-                <button onClick={() => onFocusPath(node.id)} title={`Move focus to ${node.label}`}>
+                <button
+                  onClick={() => onTraversalPath(node.id, index)}
+                  title={`Return to traversal step ${index + 1}: ${node.label}`}
+                >
+                  <span className="path-node__step" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                   <span className="path-node__label">{node.shortLabel ?? node.label}</span>
                 </button>
               </li>
             ))}
-            <li aria-current="page">
+            <li aria-current="page" data-history-step={traversalPath.length}>
               <span className="path-node__dot" aria-hidden="true" />
               <span className="path-node__current">
-                <small className="path-node__role">Focus</small>
+                <small className="path-node__role">Step {String(traversalPath.length).padStart(2, "0")} · Focus</small>
                 <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
               </span>
             </li>

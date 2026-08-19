@@ -1,7 +1,7 @@
-/* Boundary First UX · canonical root + readable content
-   There is one home: the Root World. The frame carries commands and representation;
-   the world carries root structure. Text is allowed to grow before layout is allowed
-   to preserve decorative geometry. */
+/* Boundary First UX · canonical Root World + readable content
+   The hero is the entry threshold. Once entered, the Root World is the canonical
+   structural world: the frame carries commands and representation; the world carries
+   root structure. Text is allowed to grow before decorative geometry is preserved. */
 
 /* No duplicate root navigation in the top frame. */
 .boundary-frame__top {
@@ -22,8 +22,8 @@
   display: none !important;
 }
 
-/* Root has no ancestry rail. The logo is the root boundary and the Root World itself
-   contains Products / Public Interest / Research / About. */
+/* A fresh Root World has no traversal trace yet. If the visitor later returns Home,
+   traversal-history.css lawfully restores the left rail for the route they actually took. */
 .site-shell[data-root-focus="true"] .world-viewport {
   left: 0;
   right: 0;
@@ -53,7 +53,7 @@
   text-transform: uppercase;
 }
 
-/* Bottom frame is now a representation rail rather than a duplicate subject readout. */
+/* Bottom frame is a representation rail rather than a duplicate subject readout. */
 .boundary-frame__bottom {
   justify-content: flex-end;
 }
@@ -62,23 +62,23 @@
   margin-left: 0;
 }
 
-/* Root World is also the home/intro experience. */
-.branch-world--root-home {
-  align-content: center;
+/* Root World is an operating map, not a second hero. */
+.branch-world--root-world {
+  align-content: start;
 }
 
-.branch-world--root-home > .world-heading .eyebrow {
+.branch-world--root-world > .world-heading .eyebrow {
   max-width: 42rem;
 }
 
-.branch-world--root-home > .world-heading h1 {
-  max-width: 9.5ch;
-  font-size: clamp(3.25rem, 6.6vw, 7rem);
+.branch-world--root-world > .world-heading h1 {
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 4.8vw, 5.4rem);
 }
 
-.branch-world--root-home > .world-heading > p:not(.eyebrow) {
-  max-width: 36rem;
-  font-size: clamp(0.95rem, 1.25vw, 1.12rem);
+.branch-world--root-world > .world-heading > p:not(.eyebrow) {
+  max-width: 40rem;
+  font-size: clamp(0.92rem, 1.15vw, 1.08rem);
 }
 
 /* Text growth is a lawful state, not an overflow defect. */
@@ -309,8 +309,8 @@
     grid-template-columns: 1fr !important;
   }
 
-  .branch-world--root-home > .world-heading h1 {
-    font-size: clamp(2.8rem, 15vw, 4.6rem);
+  .branch-world--root-world > .world-heading h1 {
+    font-size: clamp(2.35rem, 11vw, 3.9rem);
   }
 
   .district-card {

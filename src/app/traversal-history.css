@@ -1,0 +1,60 @@
+/* Boundary First UX · traversal history
+   The left rail records the route the visitor actually traversed. It is deliberately
+   distinct from content ancestry, sibling structure, and the browser's Back stack. */
+
+.path-label::after {
+  content: "TRACE";
+}
+
+.boundary-frame__left li[data-history-step] button {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 7px;
+  align-items: start;
+}
+
+.path-node__step {
+  color: var(--accent);
+  font-size: 0.4rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+}
+
+.path-node__current .path-node__role {
+  line-height: 1.3;
+}
+
+/* A visitor can return Home after a longer traversal. Root normally has no left rail,
+   but an actual trace remains visible when there is history worth preserving. */
+.site-shell[data-root-focus="true"][data-show-traversal="true"] .world-viewport {
+  left: var(--frame-left);
+}
+
+.site-shell[data-root-focus="true"][data-show-traversal="true"] .boundary-frame--root::after {
+  left: var(--frame-left);
+}
+
+.site-shell[data-root-focus="true"][data-show-traversal="true"] .boundary-frame__bottom {
+  padding-left: calc(var(--frame-left) + 14px);
+}
+
+@media (max-width: 980px) {
+  .site-shell[data-root-focus="true"][data-show-traversal="true"] .world-viewport {
+    left: 0;
+  }
+
+  .site-shell[data-root-focus="true"][data-show-traversal="true"] .boundary-frame--root::after {
+    left: 0;
+  }
+
+  .site-shell[data-root-focus="true"][data-show-traversal="true"] .boundary-frame__bottom {
+    padding-left: 14px;
+  }
+}
+
+@media (forced-colors: active) {
+  .path-node__step {
+    color: CanvasText;
+  }
+}
