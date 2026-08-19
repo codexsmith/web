@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { nodes } from "@/lib/content";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { semanticEventSearchText } from "@/lib/semantic-events";
 
 type SearchPanelProps = {
   onClose: () => void;
@@ -31,6 +32,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
             inspection.summary,
             ...inspection.bullets,
           ]),
+          ...semanticEventSearchText(node.id),
         ]
           .filter(Boolean)
           .join(" ")
@@ -46,7 +48,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
       <section className="search-panel">
         <div className="search-panel__header">
           <div>
-            <p className="eyebrow">Traverse by name, standing, or concern</p>
+            <p className="eyebrow">Traverse by name, standing, event, or concern</p>
             <h2 id="search-title">Search the lab</h2>
           </div>
           <button onClick={onClose}>Close</button>
@@ -57,7 +59,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
             autoFocus
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Accessibility, civic, founder, shipped, Corpus Forge..."
+            placeholder="Accessibility, civic, shipped, superseded, launch candidate..."
           />
         </label>
         <div className="search-results">
