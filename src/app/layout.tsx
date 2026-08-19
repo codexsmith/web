@@ -16,6 +16,7 @@ import "./root-world-and-content-stability.css";
 import "./hero-screen.css";
 import "./traversal-history.css";
 import "./publication-portfolio.css";
+import "./content-first-world.css";
 
 export const metadata: Metadata = {
   title: {
