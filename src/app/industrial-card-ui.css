@@ -1,0 +1,645 @@
+/* Boundary First Industrial UX · Card renderer
+   This is the production card-shell refinement. It consumes the shared --bf-* semantic
+   palette and leaves the Apparatus renderer intentionally unimplemented.
+
+   Material = structure. Violet = operator agency. State colors = observed condition.
+   Gradients describe shallow material depth only; wear implies use, not neglect. */
+
+body[data-ui-shell="cards"] {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(119, 185, 232, 0.025), transparent 28rem),
+    radial-gradient(circle at 82% 76%, rgba(169, 140, 255, 0.022), transparent 34rem),
+    linear-gradient(145deg, #151c22, var(--bf-bg-frame) 56%);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .site-shell {
+  background: var(--bf-bg-frame);
+}
+
+/* Entry threshold --------------------------------------------------------- */
+
+body[data-ui-shell="cards"] .hero-screen {
+  color: var(--bf-text-primary);
+  background:
+    radial-gradient(circle at 74% 42%, rgba(169, 140, 255, 0.055), transparent 28rem),
+    linear-gradient(122deg, rgba(255, 255, 255, 0.025), transparent 44%),
+    var(--bf-bg-base);
+}
+
+body[data-ui-shell="cards"] .hero-screen::before {
+  border-color: var(--bf-border-default);
+  box-shadow:
+    inset 0 1px 0 var(--bf-edge-highlight),
+    0 28px 80px var(--bf-edge-shadow);
+}
+
+body[data-ui-shell="cards"] .hero-screen::after {
+  background: linear-gradient(transparent, var(--bf-border-default) 18%, var(--bf-border-default) 82%, transparent);
+  opacity: 0.65;
+}
+
+body[data-ui-shell="cards"] .hero-screen__threshold,
+body[data-ui-shell="cards"] .hero-apparatus__label,
+body[data-ui-shell="cards"] .hero-apparatus__port {
+  border-color: var(--bf-border-default);
+  background: var(--bf-bg-surface);
+  color: var(--bf-text-secondary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .hero-screen__threshold span:nth-child(2),
+body[data-ui-shell="cards"] .hero-screen__eyebrow {
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .hero-screen__lede {
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .hero-screen__entry button {
+  border-color: var(--bf-action-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 48%),
+    var(--bf-action-pressed);
+  color: var(--bf-white-050);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+body[data-ui-shell="cards"] .hero-screen__entry button:hover {
+  border-color: var(--bf-action-hover);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 48%),
+    var(--bf-action);
+  box-shadow:
+    0 13px 30px rgba(0, 0, 0, 0.42),
+    0 0 0 1px var(--bf-action-line);
+}
+
+body[data-ui-shell="cards"] .hero-apparatus__outer {
+  border-color: var(--bf-border-default);
+  background:
+    radial-gradient(circle at 34% 27%, rgba(255, 255, 255, 0.08), transparent 38%),
+    var(--bf-bg-surface);
+  box-shadow:
+    0 26px 70px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 12px rgba(0, 0, 0, 0.09),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .hero-apparatus__middle {
+  border-color: var(--bf-border-default);
+  background: var(--bf-bg-raised);
+  box-shadow:
+    inset 0 0 0 7px rgba(0, 0, 0, 0.09),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .hero-apparatus__core {
+  border-color: var(--bf-action-line);
+  background: var(--bf-bg-surface);
+  color: var(--bf-white-050);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 5px rgba(0, 0, 0, 0.12),
+    0 0 24px rgba(169, 140, 255, 0.045);
+}
+
+body[data-ui-shell="cards"] .hero-screen__footer {
+  border-color: var(--bf-border-subtle);
+  color: var(--bf-text-muted);
+}
+
+/* Boundary housing ------------------------------------------------------- */
+
+body[data-ui-shell="cards"] .boundary-frame {
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.025));
+}
+
+body[data-ui-shell="cards"] .boundary-frame__top,
+body[data-ui-shell="cards"] .boundary-frame__left,
+body[data-ui-shell="cards"] .boundary-frame__right,
+body[data-ui-shell="cards"] .boundary-frame__bottom {
+  border-color: var(--bf-border-default);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 46%),
+    color-mix(in srgb, var(--bf-bg-surface) 94%, transparent);
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 var(--bf-edge-highlight);
+  backdrop-filter: blur(20px) saturate(106%);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__left,
+body[data-ui-shell="cards"] .boundary-frame__right {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018), transparent 72%),
+    var(--bf-bg-surface);
+}
+
+body[data-ui-shell="cards"] .brand-anchor:hover {
+  border-color: var(--bf-border-default);
+  background: var(--bf-bg-raised);
+}
+
+body[data-ui-shell="cards"] .brand-anchor__mark {
+  border-color: var(--bf-border-strong);
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.08), transparent 46%),
+    var(--bf-bg-raised);
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 5px 14px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .brand-anchor__mark::after {
+  border-color: var(--bf-border-subtle);
+}
+
+body[data-ui-shell="cards"] .brand-anchor__mode,
+body[data-ui-shell="cards"] .path-label,
+body[data-ui-shell="cards"] .peer-label,
+body[data-ui-shell="cards"] .projection-switcher__label {
+  color: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .path-node__role,
+body[data-ui-shell="cards"] .peer-label::after {
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .frame-tool,
+body[data-ui-shell="cards"] .frame-zoom,
+body[data-ui-shell="cards"] .projection-switcher,
+body[data-ui-shell="cards"] .frame-process-zoom {
+  border-color: var(--bf-border-default);
+  background: var(--bf-bg-control);
+  color: var(--bf-text-secondary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .frame-tools .frame-tool:hover:not(:disabled),
+body[data-ui-shell="cards"] .projection-switcher button:hover {
+  border-color: var(--bf-action-line);
+  background: var(--bf-bg-raised);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .projection-switcher button[aria-pressed="true"] {
+  border-color: var(--bf-action-line);
+  background: var(--bf-action-surface);
+  color: var(--bf-action-hover);
+  box-shadow:
+    inset 0 1px 0 var(--bf-edge-highlight),
+    0 0 0 1px rgba(169, 140, 255, 0.08);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__right button,
+body[data-ui-shell="cards"] .boundary-frame__left button,
+body[data-ui-shell="cards"] .path-node__current {
+  border-color: var(--bf-border-subtle);
+  background: rgba(48, 59, 66, 0.42);
+  color: var(--bf-text-secondary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__right button:hover,
+body[data-ui-shell="cards"] .boundary-frame__left button:hover {
+  border-color: var(--bf-action-line);
+  background: var(--bf-bg-raised);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .path-node__current {
+  border-color: var(--bf-action-line);
+  background: var(--bf-action-surface);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .path-node__dot {
+  border-color: var(--bf-border-strong);
+  background: var(--bf-bg-surface);
+}
+
+body[data-ui-shell="cards"] li[aria-current="page"] .path-node__dot {
+  border-color: var(--bf-action);
+  background: var(--bf-action);
+  box-shadow: 0 0 0 3px var(--bf-action-surface);
+}
+
+/* Work surface ----------------------------------------------------------- */
+
+body[data-ui-shell="cards"] .world-viewport {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(119, 185, 232, 0.027), transparent 27rem),
+    radial-gradient(circle at 76% 78%, rgba(169, 140, 255, 0.018), transparent 34rem),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.012), transparent 42%),
+    var(--bf-bg-base);
+  box-shadow:
+    inset 12px 0 32px rgba(0, 0, 0, 0.12),
+    inset 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+body[data-ui-shell="cards"] .world-heading {
+  border-color: var(--bf-border-default);
+  border-left-color: var(--bf-border-strong);
+  background:
+    linear-gradient(110deg, rgba(255, 255, 255, 0.045), transparent 52%),
+    var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+/* The old CURRENT WHOLE label belongs to the retired containment-Gestalt model. */
+body[data-ui-shell="cards"] .world-heading::before {
+  display: none;
+  content: none;
+}
+
+body[data-ui-shell="cards"] .world-heading > p:not(.eyebrow),
+body[data-ui-shell="cards"] .world-heading__context,
+body[data-ui-shell="cards"] .node-surface__summary {
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .eyebrow {
+  color: var(--bf-action);
+}
+
+/* Card morphology -------------------------------------------------------- */
+
+body[data-ui-shell="cards"] .district-grid {
+  border-color: var(--bf-border-subtle);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 38%),
+    rgba(8, 12, 15, 0.22);
+  box-shadow:
+    inset 0 1px 0 var(--bf-edge-highlight),
+    inset 0 0 0 5px rgba(0, 0, 0, 0.06);
+}
+
+body[data-ui-shell="cards"] .district-card {
+  border-color: var(--bf-border-default);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 34%),
+    var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 var(--bf-edge-highlight),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.26);
+}
+
+body[data-ui-shell="cards"] .district-card::before {
+  background: var(--bf-border-default);
+}
+
+body[data-ui-shell="cards"] .district-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--bf-action-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 34%),
+    var(--bf-bg-raised);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 var(--bf-edge-highlight-strong),
+    0 0 0 1px rgba(169, 140, 255, 0.05);
+}
+
+body[data-ui-shell="cards"] .district-card:hover::before,
+body[data-ui-shell="cards"] .district-card--focused::before {
+  background: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .district-card--focused {
+  border-color: var(--bf-action-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 34%),
+    color-mix(in srgb, var(--bf-bg-raised) 88%, var(--bf-action) 12%);
+}
+
+body[data-ui-shell="cards"] .district-card__number,
+body[data-ui-shell="cards"] .district-card__action::after {
+  border-color: var(--bf-border-default);
+  background: var(--bf-bg-control);
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .district-card__kind,
+body[data-ui-shell="cards"] .district-card p,
+body[data-ui-shell="cards"] .district-card__action {
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .district-card[data-kind="foundation"],
+body[data-ui-shell="cards"] .district-card[data-kind="theory"] {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%),
+    color-mix(in srgb, var(--bf-bg-surface) 86%, var(--bf-bg-base));
+}
+
+body[data-ui-shell="cards"] .district-card[data-kind="document"],
+body[data-ui-shell="cards"] .district-card[data-kind="about"] {
+  box-shadow:
+    5px 7px 0 rgba(0, 0, 0, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+/* Subject overview: content first, progressive disclosure. */
+
+body[data-ui-shell="cards"] .subject-pane,
+body[data-ui-shell="cards"] .node-surface {
+  border-color: var(--bf-border-default);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 58%),
+    var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .subject-pane__header,
+body[data-ui-shell="cards"] .subject-pane__actions,
+body[data-ui-shell="cards"] .subject-pane__more,
+body[data-ui-shell="cards"] .node-section {
+  border-color: var(--bf-border-subtle);
+}
+
+body[data-ui-shell="cards"] .subject-pane__label,
+body[data-ui-shell="cards"] .subject-pane__group-label {
+  color: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .subject-pane__standing,
+body[data-ui-shell="cards"] .work-status-panel,
+body[data-ui-shell="cards"] .publication-status-panel {
+  border-color: var(--bf-border-default);
+  border-left-color: var(--bf-action-line);
+  background:
+    linear-gradient(90deg, var(--bf-action-surface), transparent 78%),
+    var(--bf-bg-raised);
+  color: var(--bf-text-primary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .subject-pane__standing p,
+body[data-ui-shell="cards"] .subject-pane__body p,
+body[data-ui-shell="cards"] .subject-pane__notice,
+body[data-ui-shell="cards"] .work-status-panel p,
+body[data-ui-shell="cards"] .publication-status-panel p {
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .subject-pane__notice {
+  border-color: var(--bf-border-default);
+  background: rgba(8, 12, 15, 0.2);
+}
+
+body[data-ui-shell="cards"] .subject-pane__more summary {
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-grid > a,
+body[data-ui-shell="cards"] .subject-pane__action-grid > button,
+body[data-ui-shell="cards"] .contained-region-links button,
+body[data-ui-shell="cards"] .inspection-links button,
+body[data-ui-shell="cards"] .edge-links button,
+body[data-ui-shell="cards"] .record-links a,
+body[data-ui-shell="cards"] .leaf-world__port {
+  border-color: var(--bf-border-subtle);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 55%),
+    var(--bf-bg-control);
+  color: var(--bf-text-primary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-grid > a:hover,
+body[data-ui-shell="cards"] .subject-pane__action-grid > button:hover,
+body[data-ui-shell="cards"] .contained-region-links button:hover,
+body[data-ui-shell="cards"] .inspection-links button:hover,
+body[data-ui-shell="cards"] .edge-links button:hover,
+body[data-ui-shell="cards"] .record-links a:hover,
+body[data-ui-shell="cards"] .leaf-world__port:hover {
+  border-color: var(--bf-action-line);
+  background: var(--bf-bg-raised);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-grid span,
+body[data-ui-shell="cards"] .contained-region-links span,
+body[data-ui-shell="cards"] .leaf-world__port > span {
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-grid small,
+body[data-ui-shell="cards"] .leaf-world__port small,
+body[data-ui-shell="cards"] .contained-region-links small {
+  color: var(--bf-text-muted);
+}
+
+/* State is system feedback, never a substitute for operator color. */
+
+body[data-ui-shell="cards"] .work-status-chip,
+body[data-ui-shell="cards"] .publication-status-chip {
+  border: 1px solid var(--bf-border-default);
+  background: rgba(116, 129, 136, 0.1);
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .work-status-chip[data-stage="shipped"],
+body[data-ui-shell="cards"] .publication-status-chip[data-stage="published"] {
+  border-color: color-mix(in srgb, var(--bf-valid) 58%, transparent);
+  background: color-mix(in srgb, var(--bf-valid) 10%, transparent);
+  color: var(--bf-valid);
+}
+
+body[data-ui-shell="cards"] .work-status-chip[data-stage="developed"],
+body[data-ui-shell="cards"] .publication-status-chip[data-stage="working-public"] {
+  border-color: color-mix(in srgb, var(--bf-info) 58%, transparent);
+  background: color-mix(in srgb, var(--bf-info) 10%, transparent);
+  color: var(--bf-info);
+}
+
+body[data-ui-shell="cards"] .work-status-chip[data-stage="active-development"],
+body[data-ui-shell="cards"] .work-status-chip[data-stage="pilot"],
+body[data-ui-shell="cards"] .publication-status-chip[data-stage="review"],
+body[data-ui-shell="cards"] .publication-status-chip[data-stage="launch-candidate"] {
+  border-color: color-mix(in srgb, var(--bf-attention) 58%, transparent);
+  background: color-mix(in srgb, var(--bf-attention) 9%, transparent);
+  color: var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .work-status-chip[data-stage="planned"],
+body[data-ui-shell="cards"] .publication-status-chip[data-stage="seed"],
+body[data-ui-shell="cards"] .publication-status-chip[data-stage="draft"],
+body[data-ui-shell="cards"] .publication-status-chip[data-stage="superseded"] {
+  border-color: color-mix(in srgb, var(--bf-unknown) 55%, transparent);
+  background: color-mix(in srgb, var(--bf-unknown) 9%, transparent);
+  color: var(--bf-silver-300);
+}
+
+/* Deep representations --------------------------------------------------- */
+
+body[data-ui-shell="cards"] .evidence-view,
+body[data-ui-shell="cards"] .gestalt-view {
+  border-color: var(--bf-border-default);
+  background:
+    linear-gradient(rgba(170, 180, 184, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(170, 180, 184, 0.025) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.028), transparent 58%),
+    var(--bf-bg-base);
+  background-size: 36px 36px, 36px 36px, auto, auto;
+  color: var(--bf-text-primary);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
+}
+
+body[data-ui-shell="cards"] .evidence-view__scope,
+body[data-ui-shell="cards"] .evidence-compartment,
+body[data-ui-shell="cards"] .gestalt-view__scope,
+body[data-ui-shell="cards"] .gestalt-synthesis,
+body[data-ui-shell="cards"] .gestalt-pipeline__stages > li,
+body[data-ui-shell="cards"] .gestalt-discipline-map article,
+body[data-ui-shell="cards"] .gestalt-placement-notes,
+body[data-ui-shell="cards"] .gestalt-process-peers {
+  border-color: var(--bf-border-subtle);
+  background: var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .evidence-view p,
+body[data-ui-shell="cards"] .evidence-view dd,
+body[data-ui-shell="cards"] .gestalt-view p,
+body[data-ui-shell="cards"] .gestalt-view dd,
+body[data-ui-shell="cards"] .gestalt-stage__copy p,
+body[data-ui-shell="cards"] .gestalt-stage__copy li {
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .evidence-cards button,
+body[data-ui-shell="cards"] .evidence-relations button,
+body[data-ui-shell="cards"] .evidence-records a,
+body[data-ui-shell="cards"] .gestalt-process-peers button {
+  border-color: var(--bf-border-subtle);
+  background: var(--bf-bg-control);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .evidence-cards button:hover,
+body[data-ui-shell="cards"] .evidence-relations button:hover,
+body[data-ui-shell="cards"] .evidence-records a:hover,
+body[data-ui-shell="cards"] .gestalt-process-peers button:hover {
+  border-color: var(--bf-action-line);
+  background: var(--bf-bg-raised);
+}
+
+body[data-ui-shell="cards"] .gestalt-pipeline__stages > li.is-active {
+  border-color: var(--bf-action-line);
+  background: color-mix(in srgb, var(--bf-bg-raised) 90%, var(--bf-action) 10%);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+body[data-ui-shell="cards"] .gestalt-pipeline__stages > li[data-primary="true"] {
+  border-left-color: var(--bf-action);
+}
+
+/* Dialogs / overlays ----------------------------------------------------- */
+
+body[data-ui-shell="cards"] .inspection-layer__backdrop,
+body[data-ui-shell="cards"] .search-layer__backdrop {
+  background: rgba(4, 7, 9, 0.72);
+}
+
+body[data-ui-shell="cards"] .inspection-panel,
+body[data-ui-shell="cards"] .search-panel {
+  border-color: var(--bf-border-default);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.035), transparent 54%),
+    var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.56);
+}
+
+body[data-ui-shell="cards"] .inspection-panel__rail,
+body[data-ui-shell="cards"] .search-panel__header {
+  border-color: var(--bf-border-subtle);
+  background: var(--bf-bg-raised);
+}
+
+body[data-ui-shell="cards"] .inspection-panel button,
+body[data-ui-shell="cards"] .search-panel button,
+body[data-ui-shell="cards"] .inspection-record-links a {
+  border-color: var(--bf-border-subtle);
+  background: var(--bf-bg-control);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .search-field input {
+  border-color: var(--bf-border-default);
+  background: var(--bf-recess);
+  color: var(--bf-text-primary);
+  caret-color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .search-field input::placeholder {
+  color: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .inspection-source,
+body[data-ui-shell="cards"] .evidence-source-list li {
+  border-color: var(--bf-border-subtle);
+  background: var(--bf-recess);
+  color: var(--bf-text-secondary);
+}
+
+/* Physical interaction: agency belongs to the operator. */
+
+body[data-ui-shell="cards"] button,
+body[data-ui-shell="cards"] a,
+body[data-ui-shell="cards"] summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body[data-ui-shell="cards"] button:focus-visible,
+body[data-ui-shell="cards"] a:focus-visible,
+body[data-ui-shell="cards"] input:focus-visible,
+body[data-ui-shell="cards"] summary:focus-visible {
+  outline: 2px solid var(--bf-focus-ring);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ui-shell="cards"] .district-card,
+  body[data-ui-shell="cards"] .frame-tool,
+  body[data-ui-shell="cards"] .hero-screen__entry button {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] {
+    color-scheme: light dark;
+  }
+
+  body[data-ui-shell="cards"] .district-card,
+  body[data-ui-shell="cards"] .subject-pane,
+  body[data-ui-shell="cards"] .node-surface,
+  body[data-ui-shell="cards"] .inspection-panel,
+  body[data-ui-shell="cards"] .search-panel,
+  body[data-ui-shell="cards"] .evidence-view,
+  body[data-ui-shell="cards"] .gestalt-view {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+}
