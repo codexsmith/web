@@ -13,6 +13,7 @@ import "./state-surface-projection.css";
 import "./semantic-event-ledger.css";
 import "./landing-stability.css";
 import "./industrial-interaction.css";
+import "./frame-detail-stability.css";
 
 export const metadata: Metadata = {
   title: {
