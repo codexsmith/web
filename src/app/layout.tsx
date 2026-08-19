@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { activeUiShell } from "@/lib/ui-shell";
 import "./globals.css";
+import "./bf-industrial-tokens.css";
 import "./portfolio.css";
 import "./boundary-frame.css";
 import "./boundary-frame-controls.css";
@@ -17,6 +19,7 @@ import "./hero-screen.css";
 import "./traversal-history.css";
 import "./publication-portfolio.css";
 import "./content-first-world.css";
+import "./industrial-card-ui.css";
 
 export const metadata: Metadata = {
   title: {
@@ -35,7 +38,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body data-ui-shell={activeUiShell}>{children}</body>
     </html>
   );
 }
