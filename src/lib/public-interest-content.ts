@@ -32,10 +32,10 @@ const publicInterestOverrides: Record<string, PublicInterestOverride> = {
         summary: "A bounded audit for authority, representation, consequence, contestability, and repair.",
       },
       {
-        label: "Inspect Executable Governance",
-        href: "/research/software/executable-governance",
+        label: "Inspect Verification & Governance",
+        href: "/research/software/verification-governance",
         eyebrow: "Software research",
-        summary: "How authority, evidence, responsibility, and permitted state transitions can become inspectable system structure.",
+        summary: "Testing, observability, provenance, permissions, auditability, and lifecycle responsibility inside one executable system boundary.",
       },
     ],
     inspection: [
@@ -180,10 +180,10 @@ const publicInterestOverrides: Record<string, PublicInterestOverride> = {
         summary: "A planned representation for matching underused capacity, unmet need, constraints, and trusted organizations.",
       },
       {
-        label: "Inspect Executable Governance",
-        href: "/research/software/executable-governance",
+        label: "Inspect Verification & Governance",
+        href: "/research/software/verification-governance",
         eyebrow: "Related software doctrine",
-        summary: "Representation of authority, evidence, state transition, responsibility, audit, and repair in operational systems.",
+        summary: "Testing, observability, provenance, permissions, auditability, authority, and lifecycle responsibility in operational systems.",
       },
     ],
     inspection: [
