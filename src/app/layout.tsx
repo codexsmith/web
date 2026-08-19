@@ -5,6 +5,7 @@ import "./boundary-frame.css";
 import "./boundary-frame-controls.css";
 import "./industrial-design.css";
 import "./world-morphology.css";
+import "./world-ecology.css";
 import "./industrial-interaction.css";
 
 export const metadata: Metadata = {
