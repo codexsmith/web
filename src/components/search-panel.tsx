@@ -15,7 +15,20 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
     if (!needle) return nodes.filter((node) => node.id !== "root").slice(0, 8);
 
     return nodes
-      .filter((node) => `${node.label} ${node.eyebrow} ${node.summary}`.toLowerCase().includes(needle))
+      .filter((node) => {
+        const searchable = [
+          node.label,
+          node.eyebrow,
+          node.summary,
+          node.status?.label,
+          node.status?.sourceStatus,
+          ...(node.body ?? []),
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        return searchable.includes(needle);
+      })
       .slice(0, 10);
   }, [query]);
 
@@ -25,7 +38,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
       <section className="search-panel">
         <div className="search-panel__header">
           <div>
-            <p className="eyebrow">Traverse by name</p>
+            <p className="eyebrow">Traverse by name or standing</p>
             <h2 id="search-title">Search the lab</h2>
           </div>
           <button onClick={onClose}>Close</button>
@@ -36,7 +49,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
             autoFocus
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Engineering, Augusta, distinction..."
+            placeholder="Shipped, pilot, Corpus Forge, Augusta..."
           />
         </label>
         <div className="search-results">
@@ -49,7 +62,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
               }}
             >
               <span>{node.label}</span>
-              <small>{node.eyebrow}</small>
+              <small>{node.status?.label ?? node.eyebrow}</small>
             </button>
           ))}
         </div>
