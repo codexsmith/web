@@ -3,6 +3,7 @@ import "./globals.css";
 import "./portfolio.css";
 import "./boundary-frame.css";
 import "./boundary-frame-controls.css";
+import "./industrial-design.css";
 
 export const metadata: Metadata = {
   title: {
