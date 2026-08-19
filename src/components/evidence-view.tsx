@@ -1,12 +1,11 @@
 "use client";
 
-import { ContentNode, getCrossEdges } from "@/lib/content";
+import { ContentNode, getCrossEdges, getParent } from "@/lib/content";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getSemanticEvents } from "@/lib/semantic-events";
 
 type EvidenceViewProps = {
   focusNode: ContentNode;
-  gestaltNode: ContentNode;
   onInspect: (inspectionId: string) => void;
   onNavigate: (id: string) => void;
 };
@@ -15,9 +14,10 @@ function eventDate(effectiveAt: string | undefined, recordedAt: string) {
   return effectiveAt ?? recordedAt;
 }
 
-export function EvidenceView({ focusNode, gestaltNode, onInspect, onNavigate }: EvidenceViewProps) {
+export function EvidenceView({ focusNode, onInspect, onNavigate }: EvidenceViewProps) {
   const inspections = focusNode.inspection ?? [];
   const records = focusNode.links ?? [];
+  const parent = getParent(focusNode.id);
   const relations = getCrossEdges(focusNode.id).map((edge) => ({
     ...edge,
     node: hydrateContentNode(edge.node),
@@ -51,8 +51,8 @@ export function EvidenceView({ focusNode, gestaltNode, onInspect, onNavigate }: 
               <dd>{focusNode.shortLabel ?? focusNode.label}</dd>
             </div>
             <div>
-              <dt>Whole</dt>
-              <dd>{gestaltNode.shortLabel ?? gestaltNode.label}</dd>
+              <dt>Parent boundary</dt>
+              <dd>{parent ? parent.shortLabel ?? parent.label : "BFL root"}</dd>
             </div>
             <div>
               <dt>Through views</dt>
