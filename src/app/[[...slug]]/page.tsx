@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
-import { getNodeByPath } from "@/lib/content";
+import { getNodeByPath, nodes } from "@/lib/content";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
 import { ChessLanding } from "@/components/product-landing/ChessLanding";
@@ -31,7 +31,7 @@ type PageProps = {
   searchParams: Promise<{ world?: string | string[] }>;
 };
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const landingParams =
@@ -42,8 +42,12 @@ export async function generateStaticParams() {
         }))
       : [];
       
-  // Add static params for the world app nodes (v2 spine logic could go here)
-  return landingParams;
+  // Add static params for the world app nodes
+  const nodeParams = nodes.map(n => ({
+    slug: n.path ? n.path.split("/") : []
+  }));
+
+  return [...landingParams, ...nodeParams];
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

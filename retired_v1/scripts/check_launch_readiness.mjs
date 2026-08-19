@@ -112,7 +112,7 @@ const criteria = [
     check: async () => {
       const root = await fetchPage("/");
       const software = await fetchPage("/software");
-      requireText(root.html, "Start with software", "/");
+      requireText(root.html, "Start with a real problem", "/");
       requireHref(root.html, "/software", "/");
       requireText(software.html, "Preferred practical entrance", "/software");
       requireText(software.html, "Real software problems. A method for making them legible.", "/software");

@@ -1,25 +1,14 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
-  Box,
   CircleDot,
-  Diamond,
-  FlaskConical,
-  Hexagon,
   Layers3,
+  Search,
   ShieldCheck,
   Wrench,
 } from "lucide-react";
-import { useIdentity } from "../context/IdentityContext";
-import {
-  asRecord,
-  asRecordArray,
-  asString,
-  asStringArray,
-} from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageMasthead } from "@/components/page-masthead";
@@ -27,109 +16,108 @@ import { EngagementHeroes } from "@/components/engagement-heroes";
 import { EvidenceVitalsBar } from "@/components/evidence-vitals-bar";
 import { ContextNavigation } from "@/components/public-interface/ContextNavigation";
 import { SectionJumpNavigation } from "@/components/public-interface/SectionJumpNavigation";
-import { WorkProjectionGroups } from "@/components/public-interface/WorkProjectionGroups";
-import {
-  ProjectCard,
-  WorkCard,
-  type SeedProject,
-  type WorkAdjudication,
-  type WorkPortfolioItem,
-} from "@/components/work-layer-cards";
-import portfolioData from "@/content/work_portfolio.json";
-import adjudicationData from "@/content/work_adjudication.json";
-import projectIndex from "@/content/project_index.json";
-import { ATLAS_HREF, ATLAS_LIST_HREF } from "@/lib/site-navigation";
 import {
   claimEvidenceVitals,
   EVIDENCE_SNAPSHOT_STAMP,
 } from "@/lib/evidence-vitals";
 import { phase12Launch } from "@/lib/phase12-launch";
+import { ATLAS_HREF } from "@/lib/site-navigation";
 
-const objectGrammar = [
+export const metadata: Metadata = {
+  title: "Work & Evidence",
+  description:
+    "A public overview of Boundary First Labs work, evidence standing, current promoted surfaces, stewardship, and the route into the full Work Index.",
+  alternates: { canonical: "/work" },
+};
+
+const civilizationalMechanics = phase12Launch.featuredWork.find(
+  (item) => item.id === "civilizational-mechanics",
+);
+
+if (!civilizationalMechanics) {
+  throw new Error("Phase 12 launch binding must expose Civilizational Mechanics.");
+}
+
+const proofSurfaces = [
   {
-    label: "Program",
-    description: "A governed line of inquiry or development.",
-    icon: Layers3,
-    href: "#work-programs-methods",
-    action: "Browse programs",
+    id: "civilizational-mechanics",
+    eyebrow: "Publication",
+    title: civilizationalMechanics.title,
+    status: civilizationalMechanics.status,
+    summary: civilizationalMechanics.summary,
+    href: civilizationalMechanics.action.href,
+    action: civilizationalMechanics.action.label,
+    icon: BookOpen,
   },
   {
-    label: "Project",
-    description: "Bounded work with a current objective and lifecycle.",
-    icon: Box,
-    href: "#projects",
-    action: "Open project index",
-  },
-  {
-    label: "Product",
-    description: "A maintained instrument that has passed stewardship gates.",
-    icon: Hexagon,
-    href: "#work-public-products",
-    action: "Browse products",
-  },
-  {
-    label: "Artifact",
-    description: "A durable record, release, paper, model, or implementation.",
-    icon: Diamond,
-    href: "/publications",
-    action: "Browse publications",
-  },
-  {
-    label: "Service",
-    description: "A bounded professional or institutional practice.",
+    id: "systems-audit",
+    eyebrow: phase12Launch.systemsAudit.category,
+    title: phase12Launch.systemsAudit.title,
+    status: phase12Launch.systemsAudit.status,
+    summary: phase12Launch.systemsAudit.summary,
+    href: phase12Launch.systemsAudit.secondaryAction.href,
+    action: phase12Launch.systemsAudit.secondaryAction.label,
     icon: Wrench,
-    href: "#systems-audit",
-    action: "View current service",
   },
   {
-    label: "Testbed",
-    description: "A controlled environment for contact, failure, and evidence.",
-    icon: FlaskConical,
-    href: "/methods#practice-cycle",
-    action: "Open practice cycle",
+    id: "boundary-first-chess",
+    eyebrow: phase12Launch.boundaryFirstChess.category,
+    title: phase12Launch.boundaryFirstChess.title,
+    status: phase12Launch.boundaryFirstChess.status,
+    summary: phase12Launch.boundaryFirstChess.summary,
+    href: phase12Launch.boundaryFirstChess.primaryAction.href,
+    action: phase12Launch.boundaryFirstChess.primaryAction.label,
+    icon: Layers3,
   },
-];
+] as const;
+
+const promotionSequence = [
+  {
+    label: "Record the object",
+    body: "Keep the artifact, claim, project, service, or program distinguishable enough that its source, scope, owner, and current state can be reconstructed.",
+  },
+  {
+    label: "Attach the evidence",
+    body: "Operational contact, bounded cases, external verification, counterexamples, and open gates remain attached to the particular claim they support.",
+  },
+  {
+    label: "Earn stewardship",
+    body: "A maintained public surface needs an owner, correction path, support boundary, maintenance logic, and a retirement or transfer condition—not just a successful launch.",
+  },
+  {
+    label: "Promote only what survived",
+    body: "Stronger standing applies only inside the tested boundary. Neighboring records do not inherit authority simply because they sit in the same portfolio.",
+  },
+] as const;
 
 export default function WorkPage() {
-  const identity = useIdentity();
-  const evidence = asRecord(identity?.evidenceArchitecture);
-  const portfolio = asRecord(identity?.portfolioGovernance);
-  const stages = asRecordArray(evidence.stages);
-  const lifecycle = asRecordArray(portfolio.lifecycle);
-  const requiredRecords = asStringArray(portfolio.requiredRecords);
-  const workItems = portfolioData.items as WorkPortfolioItem[];
-  const adjudications = new Map(
-    (adjudicationData.records as WorkAdjudication[]).map((record) => [
-      record.sourceId,
-      record,
-    ]),
-  );
-  const projects = projectIndex.projects as SeedProject[];
-  const systemsAudit = phase12Launch.systemsAudit;
-  const boundaryFirstChess = phase12Launch.boundaryFirstChess;
-
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SiteHeader />
       <ContextNavigation group="work" />
       <PageMasthead
+        actions={
+          <Link
+            className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-primary"
+            href="/work/index"
+          >
+            Open Work Index
+            <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />
+          </Link>
+        }
         deck="Work earns promotion through contact with reality."
-        description={asString(evidence.principle)}
+        description="This page is the evidence overview. The full portfolio inventory lives in the Work Index so the main reading path can stay focused on standing, promoted surfaces, and stewardship."
         eyebrow="Evidence, stewardship, and release"
         title="Work & evidence"
       />
 
       <SectionJumpNavigation
-        label="Work contents"
+        label="Work overview"
         items={[
           { label: "Snapshot", href: "#snapshot" },
-          { label: "Systems Audit", href: "#systems-audit" },
-          { label: "Chess", href: "#boundary-first-chess" },
-          { label: "Work types", href: "#work-types" },
+          { label: "Promoted surfaces", href: "#promoted-surfaces" },
           { label: "Promotion", href: "#promotion" },
-          { label: "Portfolio", href: "#portfolio" },
-          { label: "Projects", href: "#projects" },
-          { label: "Active work", href: "#active-work" },
+          { label: "Full index", href: "#full-index" },
           { label: "Engage", href: "#engage" },
         ]}
       />
@@ -145,426 +133,115 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-card/55 px-5 py-12 sm:px-8 sm:py-16">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
-          <div>
-            <BookOpen className="h-7 w-7 text-foreground-muted" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-              Publication · v0.1
-            </p>
-            <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
-              Civilizational Mechanics
-            </h2>
-          </div>
-          <div>
-            <p className="max-w-3xl text-base leading-8 text-foreground-muted">
-              A public learning pathway from displaced consequence and
-              institutional agency through Boundary First mechanics,
-              representational evolution, and eight typed routes to repair.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link
-                className="inline-flex min-h-12 items-center bg-primary px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary-foreground"
-                href="/publications/civilizational-mechanics"
-              >
-                Read the publication
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-              <Link
-                className="inline-flex min-h-12 items-center border border-border bg-background px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                href="/publications"
-              >
-                Publication index
-              </Link>
-              <Link
-                className="inline-flex min-h-12 items-center border border-border bg-background px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                href={ATLAS_LIST_HREF}
-              >
-                Browse Atlas list
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="scroll-mt-32 border-b border-border px-5 py-14 sm:px-8 sm:py-20" id="systems-audit">
-        <span aria-hidden="true" className="block scroll-mt-32" id="current-offer" />
+      <section className="scroll-mt-32 border-b border-border px-5 py-14 sm:px-8 sm:py-20" id="promoted-surfaces">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
-            <div className="bg-primary p-6 text-primary-foreground sm:p-9 lg:p-12">
-              <Wrench className="h-7 w-7" />
-              <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
-                {systemsAudit.status}
+          <div className="grid gap-8 lg:grid-cols-[minmax(14rem,0.48fr)_minmax(0,1.52fr)]">
+            <div>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
+                Current proof surfaces
               </p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
-                {systemsAudit.title}
+              <h2 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
+                Start with the work that has a clear public role now.
               </h2>
-              <p className="mt-6 text-base leading-8 text-primary-foreground-secondary">
-                {systemsAudit.summary}
-              </p>
-              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-7 text-primary-foreground-muted">
-                {systemsAudit.availabilityNote}
+              <p className="mt-5 text-sm leading-7 text-foreground-muted">
+                These are not the entire portfolio. They are current public surfaces with explicit status and a concrete route for inspection or use.
               </p>
             </div>
 
-            <div className="bg-background p-6 sm:p-9 lg:p-12">
-              <p className="max-w-3xl text-lg leading-8 text-foreground-muted">
-                {systemsAudit.idealFor}
-              </p>
-              <div className="mt-8 grid gap-8 lg:grid-cols-2">
-                <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
-                    Working inputs
-                  </h3>
-                  <ul className="mt-4 space-y-3">
-                    {systemsAudit.inputs.map((input) => (
-                      <li className="flex gap-3 text-sm leading-6" key={input}>
-                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-foreground-muted" aria-hidden="true" />
-                        {input}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
-                    Engagement boundaries
-                  </h3>
-                  <ul className="mt-4 space-y-3">
-                    {systemsAudit.boundaries.map((boundary) => (
-                      <li className="flex gap-3 text-sm leading-6" key={boundary}>
-                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-foreground-muted" aria-hidden="true" />
-                        {boundary}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <h3 className="mt-9 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
-                Concrete outputs
-              </h3>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {systemsAudit.deliverables.map((deliverable) => (
-                  <div
-                    className="flex gap-3 border border-border bg-card p-4 text-sm leading-6"
-                    key={deliverable}
+            <div className="border-y border-border">
+              {proofSurfaces.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    className="group grid gap-4 border-b border-border py-6 last:border-b-0 lg:grid-cols-[2.5rem_3rem_14rem_minmax(0,1fr)_auto] lg:items-center"
+                    href={item.href}
+                    id={item.id}
+                    key={item.id}
                   >
-                    <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0 text-foreground-muted" />
-                    {deliverable}
-                  </div>
-                ))}
-              </div>
-              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground-muted">
-                <span className="font-semibold text-foreground">Success condition: </span>
-                {systemsAudit.successCondition}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  className="inline-flex min-h-12 items-center bg-primary px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary-foreground"
-                  href={systemsAudit.primaryAction.href}
-                >
-                  {systemsAudit.primaryAction.label}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-                <Link
-                  className="inline-flex min-h-12 items-center border border-border bg-card px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                  href="/business"
-                >
-                  See enterprise practice
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <aside className="grid border-x border-b border-border bg-card p-6 sm:p-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-10" aria-labelledby="ai-audit-track-title">
-            <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-foreground-muted">
-                {systemsAudit.relatedTrack.status}
-              </p>
-              <h3 className="mt-2 font-serif text-2xl font-semibold" id="ai-audit-track-title">
-                {systemsAudit.relatedTrack.title}
-              </h3>
-            </div>
-            <div>
-              <p className="text-sm leading-7 text-foreground-muted">
-                {systemsAudit.relatedTrack.description}
-              </p>
-              <Link className="mt-5 inline-flex min-h-10 items-center font-mono text-[10px] font-semibold uppercase tracking-[0.13em] hover:underline" href={systemsAudit.relatedTrack.href}>
-                Read the focused framework
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section className="scroll-mt-32 border-b border-border bg-card/50 px-5 py-14 sm:px-8 sm:py-20" id="boundary-first-chess">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-px overflow-hidden border border-border bg-border lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
-            <div className="bg-background p-6 sm:p-9 lg:p-12">
-              <Layers3 className="h-7 w-7 text-foreground-muted" aria-hidden="true" />
-              <p className="mt-6 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-                {boundaryFirstChess.status}
-              </p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
-                {boundaryFirstChess.title}
-              </h2>
-              <p className="mt-6 text-base leading-8 text-foreground-muted">
-                {boundaryFirstChess.summary}
-              </p>
-              <p className="mt-5 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground-muted">
-                {boundaryFirstChess.availabilityNote}
-              </p>
-            </div>
-
-            <div className="bg-primary p-6 text-primary-foreground sm:p-9 lg:p-12">
-              <div className="grid gap-8 sm:grid-cols-2">
-                <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
-                    Current forms
-                  </h3>
-                  <ul className="mt-4 space-y-3">
-                    {boundaryFirstChess.currentForms.map((form) => (
-                      <li className="flex gap-3 text-sm leading-6 text-primary-foreground-secondary" key={form}>
-                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                        {form}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground-muted">
-                    Launching forms
-                  </h3>
-                  <ul className="mt-4 space-y-3">
-                    {boundaryFirstChess.launchingForms.map((form) => (
-                      <li className="flex gap-3 text-sm leading-6 text-primary-foreground-secondary" key={form}>
-                        <CircleDot className="mt-1 h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                        {form}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <p className="mt-8 border-t border-primary-foreground/20 pt-6 text-sm leading-7 text-primary-foreground-secondary">
-                {boundaryFirstChess.futureBoundary}
-              </p>
-              <p className="mt-4 text-xs leading-6 text-primary-foreground-muted">
-                {boundaryFirstChess.claimBoundary}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  className="inline-flex min-h-12 items-center bg-primary-foreground px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em] text-primary"
-                  href={boundaryFirstChess.primaryAction.href}
-                >
-                  {boundaryFirstChess.primaryAction.label}
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                </a>
-                <Link
-                  className="inline-flex min-h-12 items-center border border-primary-foreground/35 px-5 font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-                  href="#work-research-programs"
-                >
-                  Inspect related work
-                </Link>
-              </div>
+                    <span className="font-mono text-[9px] text-foreground-muted">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="grid h-10 w-10 place-items-center border border-border bg-card">
+                      <Icon aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
+                    </span>
+                    <div>
+                      <span className="font-mono text-[8px] font-semibold uppercase tracking-[0.11em] text-foreground-muted">{item.eyebrow}</span>
+                      <h3 className="mt-1 font-serif text-xl font-semibold">{item.title}</h3>
+                      <span className="mt-2 inline-block border border-border px-2 py-1 font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-foreground-muted">{item.status}</span>
+                    </div>
+                    <p className="text-sm leading-7 text-foreground-muted">{item.summary}</p>
+                    <span className="inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.11em]">
+                      {item.action}
+                      <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="scroll-mt-32 border-b border-border bg-card/50 px-5 py-12 sm:px-8 sm:py-16" id="work-types">
-        <div className="mx-auto max-w-7xl">
-          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-            Typed work objects
-          </p>
-          <nav
-            aria-label="Browse typed work objects"
-            className="mt-7 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {objectGrammar.map(({ label, description, icon: Icon, href, action }) => (
-              <Link
-                aria-label={`${action}: ${label}`}
-                className="group flex min-h-56 flex-col bg-background p-5 transition-colors hover:bg-muted/55 focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-foreground sm:p-6"
-                href={href}
-                key={label}
-              >
-                <span className="flex items-start justify-between gap-4">
-                  <Icon className="h-6 w-6 text-foreground-muted" />
-                  <ArrowRight className="h-4 w-4 text-foreground-muted transition-transform group-hover:translate-x-1" />
-                </span>
-                <h2 className="mt-4 font-serif text-2xl font-semibold">
-                  {label}
-                </h2>
-                <p className="mt-3 text-sm leading-6 text-foreground-muted">
-                  {description}
-                </p>
-                <span className="mt-auto pt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground-muted group-hover:text-foreground">
-                  {action}
-                </span>
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </section>
-
-      <section className="scroll-mt-32 px-5 py-14 sm:px-8 sm:py-20" id="promotion">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-4xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-              Promotion sequence
+      <section className="scroll-mt-32 border-b border-border bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20" id="promotion">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(14rem,0.5fr)_minmax(0,1.5fr)]">
+          <div>
+            <ShieldCheck aria-hidden="true" className="h-7 w-7" />
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
+              Promotion discipline
             </p>
             <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
-              One ladder, domain-specific gates.
+              The portfolio is not a pile. It is a sequence of earned public commitments.
             </h2>
-            <p className="mt-5 text-base leading-8 text-foreground-muted">
-              {asString(evidence.promotionRule)}
+            <p className="mt-5 text-sm leading-7 text-primary-foreground-secondary">
+              Presence in the corpus, usefulness in practice, external verification, public release, and maintained stewardship are different states. The interface should keep them different.
             </p>
           </div>
-          <ol className="mt-10 grid border-l border-t border-border md:grid-cols-3">
-            {stages.map((stage, index) => (
-              <li
-                className="border-b border-r border-border bg-card p-5 sm:p-6"
-                key={asString(stage.id)}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
-                    Gate {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <CircleDot className="h-4 w-4 text-foreground-muted" />
-                </div>
-                <h3 className="mt-4 font-serif text-2xl font-semibold">
-                  {asString(stage.label)}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-foreground-muted">
-                  {asString(stage.description)}
-                </p>
+
+          <ol className="border-l border-primary-foreground/25">
+            {promotionSequence.map((step, index) => (
+              <li className="relative border-b border-primary-foreground/20 py-5 pl-7 last:border-b-0" key={step.label}>
+                <span aria-hidden="true" className="absolute -left-1 top-7 h-2 w-2 bg-primary-foreground" />
+                <p className="font-mono text-[9px] text-primary-foreground-muted">{String(index + 1).padStart(2, "0")}</p>
+                <h3 className="mt-2 font-serif text-xl font-semibold">{step.label}</h3>
+                <p className="mt-2 max-w-3xl text-sm leading-7 text-primary-foreground-secondary">{step.body}</p>
               </li>
             ))}
           </ol>
         </div>
       </section>
 
-      <section className="scroll-mt-32 border-y border-border bg-primary px-5 py-14 text-primary-foreground sm:px-8 sm:py-20" id="stewardship">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
+      <section className="scroll-mt-32 border-b border-border px-5 py-14 sm:px-8 sm:py-20" id="full-index">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.56fr)] lg:items-center">
           <div>
-            <ShieldCheck className="h-8 w-8" />
-            <p className="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
-              Product stewardship gate
+            <Search aria-hidden="true" className="h-6 w-6 text-foreground-muted" />
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
+              Full inventory · separate surface
             </p>
-            <h2 className="mt-3 font-serif text-4xl font-semibold">
-              No product without stewardship and closure.
+            <h2 className="mt-3 max-w-4xl font-serif text-4xl font-semibold sm:text-5xl">
+              Need the projects, products, services, artifacts, provisional records, and active programs?
             </h2>
-          </div>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {(requiredRecords.length
-              ? requiredRecords
-              : [
-                  "Named steward",
-                  "Public-value thesis",
-                  "Maintenance path",
-                  "Support boundary",
-                  "Funding path",
-                  "Correction process",
-                  "Retirement, transfer, or open-release condition",
-                ]
-            ).map((record) => (
-              <div
-                className="flex gap-3 border border-primary-foreground/35 bg-primary-foreground/[0.08] p-4 text-sm leading-6"
-                key={record}
-              >
-                <span className="font-mono text-primary-foreground-muted">+</span>
-                {record}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {lifecycle.length > 0 && (
-        <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
-          <div className="mx-auto max-w-7xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-              Portfolio lifecycle
-            </p>
-            <div className="mt-7 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-              {lifecycle.map((stage, index) => (
-                <article
-                  className="border border-border bg-card p-5"
-                  key={asString(stage.id)}
-                >
-                  <span className="font-mono text-[11px] text-foreground-muted">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-2 font-serif text-xl font-semibold">
-                    {asString(stage.label)}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-foreground-muted">
-                    {asString(stage.description)}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <WorkProjectionGroups />
-
-      <section className="scroll-mt-32 border-b border-border bg-card/50 px-5 py-14 sm:px-8 sm:py-20" id="projects">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-4xl">
-            <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-              Provisional project index
-            </p>
-            <h2 className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
-              Six bounded projects, with missing records left visible.
-            </h2>
-            <p className="mt-5 text-base leading-8 text-foreground-muted">
-              These records come from the reviewed migration seed. They are
-              useful for navigation, but they are not promoted as complete
-              operational records: stewardship and next-gate decisions remain
-              explicitly unrecorded.
+            <p className="mt-5 max-w-3xl text-base leading-8 text-foreground-muted">
+              Use the Work Index when the task is discovery. It keeps filters, work kinds, record authority, maturity, and the complete retained inventory without turning this evidence overview into a catalog.
             </p>
           </div>
-          <div className="mt-9 grid gap-4 lg:grid-cols-2">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="scroll-mt-32 px-5 py-14 sm:px-8 sm:py-20" id="active-work">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
-                Active work context
-              </p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold">
-                Navigate work through theory, evidence, and governance.
-              </h2>
-            </div>
-            <Link
-              className="inline-flex min-h-11 items-center border border-border bg-card px-4 font-mono text-[11px] font-semibold uppercase tracking-[0.15em]"
-              href={ATLAS_HREF}
-            >
-              Open atlas filters <ArrowRight className="ml-2 h-4 w-4" />
+          <div className="border border-border bg-card p-6">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+              Choose the inspection tool
+            </p>
+            <Link className="mt-5 flex min-h-12 items-center justify-between border-b border-border py-3 font-semibold" href="/work/index">
+              Filterable Work Index
+              <ArrowRight aria-hidden="true" className="h-4 w-4" />
+            </Link>
+            <Link className="flex min-h-12 items-center justify-between py-3 font-semibold" href={ATLAS_HREF}>
+              Atlas relationship view
+              <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-9 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {workItems.map((item) => (
-              <WorkCard
-                adjudication={adjudications.get(item.sourceId)}
-                key={item.sourceId}
-                item={item}
-              />
-            ))}
-          </div>
         </div>
       </section>
 
-      <EngagementHeroes context="work" />
+      <div id="engage">
+        <EngagementHeroes context="work" />
+      </div>
       <SiteFooter />
     </main>
   );

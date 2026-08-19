@@ -1,18 +1,11 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  BookOpen,
-  Building2,
-  Code2,
-  FlaskConical,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { CosmicShoreMark } from "@/components/cosmic-shore-mark";
+import { EntranceIntentConsole } from "@/components/journey/EntranceIntentConsole";
 import { PublicLandingCarousel } from "@/components/product-landing/PublicLandingCarousel";
 import { getPublicLandingCarouselItems } from "@/lib/product-landing-carousel";
-import { institutionalRoutes } from "@/lib/p1-public-shell";
 
 const disclosureLayers = [
   {
@@ -35,13 +28,13 @@ const disclosureLayers = [
   },
   {
     label: "Evidence",
-    question: "What supports the claim?",
-    entrance: "Work",
-    href: "/work",
+    question: "What supports or limits the claim?",
+    entrance: "Evidence",
+    href: "/evidence",
   },
   {
     label: "Research",
-    question: "Why does the pattern generalize?",
+    question: "Why might the pattern generalize?",
     entrance: "Research",
     href: "/research",
   },
@@ -53,34 +46,21 @@ const disclosureLayers = [
   },
 ] as const;
 
-const capabilityCards = [
+const inspectability = [
   {
-    title: "Software & systems",
-    description:
-      "Diagnose, understand, build, and change complex software and socio-technical systems without losing the properties that matter.",
-    href: "/software",
-    icon: Code2,
+    label: "Work & evidence",
+    body: "See what has actually been built, recorded, operated, or bounded—and the claim ceilings attached to it.",
+    href: "/work",
   },
   {
-    title: "Research & method",
-    description:
-      "Develop and test reusable methods for boundaries, evidence, representation, repair, and systemic change.",
-    href: "/research",
-    icon: FlaskConical,
-  },
-  {
-    title: "Institutions & governance",
-    description:
-      "Study accountability, lifecycle, authority, public consequence, and repair where responsibility crosses organizational boundaries.",
+    label: "Governance & standards",
+    body: "Inspect how stewardship, criticism, public claims, correction, and institutional limits are handled.",
     href: "/governance",
-    icon: Building2,
   },
   {
-    title: "Modeling & theory",
-    description:
-      "Investigate the deeper formal structure beneath the applied work without requiring that formalism at the front door.",
-    href: "/theory",
-    icon: BookOpen,
+    label: "Collaborate",
+    body: "Choose a declared operating relationship with explicit authority, evidence, and closure boundaries.",
+    href: "/collaborate",
   },
 ] as const;
 
@@ -111,14 +91,14 @@ export function InstitutionalVestibuleHome() {
                 className="inline-flex min-h-12 items-center bg-primary px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-primary-foreground transition-transform hover:-translate-y-0.5"
                 href="/software"
               >
-                Start with software
+                Start with a real problem
                 <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />
               </Link>
               <Link
                 className="inline-flex min-h-12 items-center border border-border bg-card px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em]"
-                href="/about"
+                href="/work"
               >
-                Explore the laboratory
+                Inspect the record
               </Link>
             </div>
           </div>
@@ -135,7 +115,7 @@ export function InstitutionalVestibuleHome() {
                     One body of work. Different depths.
                   </h2>
                   <p className="mt-3 text-sm leading-6 text-primary-foreground-secondary">
-                    The menu chooses an entrance. This map shows how far inward the same work can be followed.
+                    Enter at the depth your question requires. The deeper layers remain available without becoming prerequisites.
                   </p>
                 </div>
                 <CosmicShoreMark className="h-16 w-16 shrink-0" surface="dark" variant="compact" />
@@ -168,35 +148,42 @@ export function InstitutionalVestibuleHome() {
                   </div>
                 ))}
               </div>
-
-              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs leading-5 text-primary-foreground-muted">
-                <span>Choose an entrance. Learn carries you between depths. Follow the work inward as far as your question requires.</span>
-                <Link
-                  className="inline-flex items-center font-mono text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-foreground hover:underline"
-                  href="/collaborate"
-                >
-                  Collaborate at any depth
-                  <ArrowRight aria-hidden="true" className="ml-1.5 h-3 w-3" />
-                </Link>
-              </div>
+              <p className="mt-4 text-xs leading-5 text-primary-foreground-muted">
+                Learn carries you between depths. Direct entrances remain available when your question already has the context it needs.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-border px-5 py-10 sm:px-8 sm:py-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="text-sm leading-7 text-foreground-muted">Choose the entrance that matches why you are here.</p>
-            <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">Choose a path.</h2>
+      <EntranceIntentConsole />
+
+      <section className="border-b border-border bg-primary px-5 py-12 text-primary-foreground sm:px-8 sm:py-16">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(15rem,0.55fr)_minmax(0,1.45fr)]">
+          <div>
+            <ShieldCheck aria-hidden="true" className="h-7 w-7" />
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-foreground-muted">
+              Inspect the laboratory
+            </p>
+            <h2 className="mt-3 font-serif text-3xl font-semibold sm:text-4xl">
+              The machinery around the work is part of the public surface.
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-primary-foreground-secondary">
+              Provenance, standards, limits, correction paths, and collaboration boundaries should be inspectable without forcing every visitor through them first.
+            </p>
           </div>
-          <div className="mt-6 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
-            {institutionalRoutes.map((route, index) => (
-              <Link className="group bg-background p-5 transition-colors hover:bg-card sm:p-6" href={route.href} key={route.title}>
-                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.15em] text-foreground-muted">{String(index + 1).padStart(2, "0")} · {route.label}</p>
-                <h3 className="mt-3 font-serif text-2xl font-semibold">{route.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-foreground-muted">{route.description}</p>
-                <span className="mt-5 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Enter <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
+
+          <div className="border-y border-primary-foreground/20">
+            {inspectability.map((item, index) => (
+              <Link
+                className="group grid gap-3 border-b border-primary-foreground/15 py-5 last:border-b-0 sm:grid-cols-[2.5rem_12rem_minmax(0,1fr)_auto] sm:items-center"
+                href={item.href}
+                key={item.label}
+              >
+                <span className="font-mono text-[9px] text-primary-foreground-muted">{String(index + 1).padStart(2, "0")}</span>
+                <h3 className="font-serif text-xl font-semibold">{item.label}</h3>
+                <p className="text-sm leading-6 text-primary-foreground-secondary">{item.body}</p>
+                <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             ))}
           </div>
@@ -204,66 +191,11 @@ export function InstitutionalVestibuleHome() {
       </section>
 
       <PublicLandingCarousel
-        description="Traverse the current public landing pages while keeping their Software, Research, and Work context visible."
-        eyebrow="Boundary First UX · Public landing pages"
+        description="Browse the current governed public projections after choosing a general entrance. Each lens keeps its maturity and claim boundary attached."
+        eyebrow="Boundary First Labs · Public work"
         items={publicLandingCarouselItems}
-        title="Explore the public work without losing the larger context."
+        title="Go sideways through the work when you are ready."
       />
-
-      <section className="border-b border-border bg-card/55 px-5 py-10 sm:px-8 sm:py-14">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-3xl">
-            <p className="text-sm leading-7 text-foreground-muted">Different domains. The same demand for legibility, evidence, and repair.</p>
-            <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">What we work on.</h2>
-          </div>
-          <div className="mt-6 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2">
-            {capabilityCards.map(({ title, description, href, icon: Icon }) => (
-              <Link className="group bg-background p-5 sm:p-6" href={href} key={title}>
-                <Icon aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
-                <h3 className="mt-4 font-serif text-2xl font-semibold">{title}</h3>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-foreground-muted">{description}</p>
-                <span className="mt-5 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Explore <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-border bg-primary px-5 py-10 text-primary-foreground sm:px-8 sm:py-14">
-        <div className="mx-auto grid max-w-7xl gap-7 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
-          <div>
-            <ShieldCheck aria-hidden="true" className="h-7 w-7" />
-            <p className="mt-4 text-sm leading-7 text-primary-foreground-secondary">Governance, provenance, standards, limits, and correction paths should be inspectable too.</p>
-            <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">Make the laboratory inspectable.</h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-primary-foreground-secondary">Boundary First Labs is being built around a retained portfolio and provenance corpus. Governance, evidence status, institutional limits, and public claims remain visible rather than being hidden behind branding.</p>
-          </div>
-          <div className="grid gap-px overflow-hidden border border-primary-foreground/20 bg-primary-foreground/20 sm:grid-cols-2">
-            {[
-              ["History & provenance", "Where the work came from and how present methods relate to prior practice.", "/about"],
-              ["Governance & standards", "How claims, stewardship, criticism, and institutional responsibility are bounded.", "/governance"],
-              ["Work & evidence", "What has actually been built, operated, investigated, or recorded.", "/work"],
-              ["Collaborate", "Ways to inquire, contribute, test, challenge, or work with the lab.", "/collaborate"],
-            ].map(([title, description, href]) => (
-              <Link className="group bg-primary p-5" href={href} key={title}>
-                <h3 className="font-serif text-xl font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-primary-foreground-secondary">{description}</p>
-                <span className="mt-4 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Inspect <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-5 py-10 sm:px-8 sm:py-12">
-        <div className="mx-auto grid max-w-7xl gap-6 border border-border bg-card p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-          <div>
-            <p className="text-sm leading-7 text-foreground-muted">Software is a demonstration domain, not the project boundary.</p>
-            <h2 className="mt-1 font-serif text-3xl font-semibold sm:text-4xl">There is a deeper framework.</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-foreground-muted">The same mechanics are investigated across institutions, governance, scientific models, infrastructure, mathematics, and other systems whose behavior depends on what their representations preserve, omit, permit, and repair.</p>
-          </div>
-          <Link className="inline-flex min-h-12 items-center bg-primary px-5 font-mono text-[10px] font-semibold uppercase tracking-[0.15em] text-primary-foreground" href="/research">Explore the research <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" /></Link>
-        </div>
-      </section>
 
       <SiteFooter />
     </main>

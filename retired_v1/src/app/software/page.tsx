@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Braces, Bug, GitBranch, Layers3, RefreshCcw, Search, ShieldCheck } from "lucide-react";
+import { ArrowRight, GitBranch, Layers3, ShieldCheck } from "lucide-react";
+import { SoftwareProblemRouter } from "@/components/journey/SoftwareProblemRouter";
 import { LayerContext } from "@/components/public-interface/LayerContext";
 import { ProductLandingDirectory } from "@/components/product-landing/ProductLandingDirectory";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { featuredPublicWork, publicVocabulary, softwarePaths } from "@/lib/p1-public-shell";
+import { featuredPublicWork, publicVocabulary } from "@/lib/p1-public-shell";
 
 export const metadata: Metadata = {
   title: "Software",
@@ -13,8 +14,6 @@ export const metadata: Metadata = {
     "Boundary First applied to real software problems: diagnose, understand, build, change, and learn without losing the system properties that matter.",
   alternates: { canonical: "/software" },
 };
-
-const pathIcons = [Bug, Search, Braces, RefreshCcw, Layers3] as const;
 
 export default function SoftwarePage() {
   return (
@@ -50,69 +49,37 @@ export default function SoftwarePage() {
         </div>
       </section>
 
-      <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.65fr)_minmax(0,1.35fr)]">
-            <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">Recognize the problem</p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold tracking-tight">You have probably heard some version of these sentences.</h2>
-            </div>
-            <div className="border border-border bg-card p-6 sm:p-8">
-              <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-foreground-muted">Common failure language</p>
-              <ul className="mt-5 space-y-4 text-sm leading-7">
-                <li>The bug is somewhere in here.</li>
-                <li>Nobody understands the whole system.</li>
-                <li>Every change breaks something else.</li>
-                <li>The documentation describes a system that no longer exists.</li>
-                <li>Everyone owns part of the problem. Nobody owns the outcome.</li>
-              </ul>
-              <p className="mt-6 border-l-2 border-accent pl-4 text-sm leading-7 text-foreground-muted">
-                These often look unrelated until the system&apos;s boundaries, states, contracts, and evidence are made explicit.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <SoftwareProblemRouter />
 
-      <section className="border-b border-border bg-card/55 px-5 py-14 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">Choose the job to be done</p>
-          <div className="mt-7 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-2 xl:grid-cols-5">
-            {softwarePaths.map((path, index) => {
-              const Icon = pathIcons[index] ?? GitBranch;
-              return (
-                <Link className="group bg-background p-5" href={path.href} key={path.id}>
-                  <Icon aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
-                  <p className="mt-5 font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-foreground-muted">{path.verb}</p>
-                  <h2 className="mt-2 font-serif text-2xl font-semibold">{path.prompt}</h2>
-                  <p className="mt-3 text-sm leading-7 text-foreground-muted">{path.description}</p>
-                  <span className="mt-6 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Follow path <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <ProductLandingDirectory group="software" variant="rail" />
 
-      <ProductLandingDirectory group="software" />
-
-      <section className="border-b border-border px-5 py-14 sm:px-8 sm:py-20">
+      <section className="border-b border-border px-5 py-12 sm:px-8 sm:py-16">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
-            <div>
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">Working vocabulary</p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold tracking-tight">Use the terms only as far as they help you operate.</h2>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-foreground-muted">The formal core sits deeper in the site. At the software layer, these words are practical handles for finding hidden assumptions before code turns them into defects.</p>
-            </div>
-            <div className="grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          <details className="border border-border bg-card">
+            <summary className="cursor-pointer list-none p-6 sm:p-8">
+              <div className="flex flex-wrap items-end justify-between gap-5">
+                <div>
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
+                    Optional working vocabulary
+                  </p>
+                  <h2 className="mt-3 font-serif text-3xl font-semibold sm:text-4xl">
+                    Open the terms when they help you operate.
+                  </h2>
+                </div>
+                <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+                  Expand vocabulary
+                </span>
+              </div>
+            </summary>
+            <div className="grid gap-px border-t border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
               {publicVocabulary.map(([term, definition]) => (
-                <article className="bg-card p-5" key={term}>
+                <article className="bg-background p-5" key={term}>
                   <h3 className="font-serif text-xl font-semibold">{term}</h3>
                   <p className="mt-3 text-sm leading-6 text-foreground-muted">{definition}</p>
                 </article>
               ))}
             </div>
-          </div>
+          </details>
         </div>
       </section>
 
@@ -120,21 +87,32 @@ export default function SoftwarePage() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-3xl">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">Practice → proof</p>
-              <h2 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">See the method against work that already exists.</h2>
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground-muted">
+                Practice → proof
+              </p>
+              <h2 className="mt-3 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
+                See the method against work that already exists.
+              </h2>
             </div>
-            <Link className="inline-flex min-h-11 items-center border border-primary-foreground/25 px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]" href="/work">Browse all work <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" /></Link>
+            <Link className="inline-flex min-h-11 items-center border border-primary-foreground/25 px-4 font-mono text-[9px] font-semibold uppercase tracking-[0.12em]" href="/work">
+              Browse work overview
+              <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" />
+            </Link>
           </div>
-          <div className="mt-8 grid gap-px overflow-hidden border border-primary-foreground/20 bg-primary-foreground/20 lg:grid-cols-3">
-            {featuredPublicWork.map((item) => (
-              <Link className="group bg-primary p-6" href={item.href} key={item.id}>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.13em] text-primary-foreground-muted">{item.kind}</span>
-                  <span className="border border-primary-foreground/20 px-2 py-1 font-mono text-[9px] font-semibold uppercase tracking-[0.1em]">{item.status}</span>
+          <div className="mt-8 border-y border-primary-foreground/20">
+            {featuredPublicWork.map((item, index) => (
+              <Link
+                className="group grid gap-4 border-b border-primary-foreground/15 py-6 last:border-b-0 lg:grid-cols-[3rem_14rem_minmax(0,1fr)_auto] lg:items-center"
+                href={item.href}
+                key={item.id}
+              >
+                <span className="font-mono text-[9px] text-primary-foreground-muted">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-primary-foreground-muted">{item.kind}</span>
+                  <h3 className="mt-2 font-serif text-xl font-semibold">{item.title}</h3>
                 </div>
-                <h3 className="mt-5 font-serif text-2xl font-semibold">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-primary-foreground-secondary">{item.summary}</p>
-                <span className="mt-6 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Inspect evidence <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
+                <p className="text-sm leading-7 text-primary-foreground-secondary">{item.summary}</p>
+                <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             ))}
           </div>
@@ -142,25 +120,30 @@ export default function SoftwarePage() {
       </section>
 
       <section className="px-5 py-14 sm:px-8 sm:py-20">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
-          <Link className="group border border-border bg-card p-6" href="/methods">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
+          <div>
             <GitBranch aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
-            <h2 className="mt-4 font-serif text-2xl font-semibold">How the method works</h2>
-            <p className="mt-3 text-sm leading-7 text-foreground-muted">Move one layer inward from recognizable practice to the repeatable method underneath it.</p>
-            <span className="mt-6 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Methods <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
-          </Link>
-          <Link className="group border border-border bg-card p-6" href="/evidence">
-            <ShieldCheck aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
-            <h2 className="mt-4 font-serif text-2xl font-semibold">What supports the claims</h2>
-            <p className="mt-3 text-sm leading-7 text-foreground-muted">Inspect standing, claim ceilings, provenance, replication status, and open evidence gates.</p>
-            <span className="mt-6 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Evidence <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
-          </Link>
-          <Link className="group border border-border bg-card p-6" href="/research">
-            <Layers3 aria-hidden="true" className="h-5 w-5 text-foreground-muted" />
-            <h2 className="mt-4 font-serif text-2xl font-semibold">Where the broader research goes</h2>
-            <p className="mt-3 text-sm leading-7 text-foreground-muted">Software is one demonstration domain inside a wider program of representational, institutional, mathematical, and scientific work.</p>
-            <span className="mt-6 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]">Research <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" /></span>
-          </Link>
+            <p className="mt-5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground-muted">
+              Next decision
+            </p>
+            <h2 className="mt-3 font-serif text-3xl font-semibold sm:text-4xl">
+              Do you need the method—or the evidence behind it?
+            </h2>
+          </div>
+          <div className="border-y border-border">
+            <Link className="group grid gap-3 border-b border-border py-5 sm:grid-cols-[2rem_12rem_1fr_auto] sm:items-center" href="/methods">
+              <Layers3 aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
+              <span className="font-serif text-xl font-semibold">Methods</span>
+              <span className="text-sm leading-6 text-foreground-muted">Inspect the repeatable stack and practice cycle underneath the software work.</span>
+              <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link className="group grid gap-3 py-5 sm:grid-cols-[2rem_12rem_1fr_auto] sm:items-center" href="/evidence">
+              <ShieldCheck aria-hidden="true" className="h-4 w-4 text-foreground-muted" />
+              <span className="font-serif text-xl font-semibold">Evidence</span>
+              <span className="text-sm leading-6 text-foreground-muted">Inspect standing, claim ceilings, provenance, and open promotion gates.</span>
+              <ArrowRight aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
         </div>
       </section>
 
