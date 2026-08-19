@@ -1,0 +1,91 @@
+/* Boundary First Industrial UX · shared semantic palette
+   Metal = structure. Violet = operator agency. Signal colors = observed machine state.
+   Wear implies use, not neglect. Apparatus and Card renderers must share these meanings. */
+
+:root {
+  color-scheme: dark;
+
+  /* Material */
+  --bf-iron-950: #11161b;
+  --bf-gunmetal-900: #182129;
+  --bf-steel-800: #242e35;
+  --bf-steel-700: #303b42;
+  --bf-steel-600: #38444b;
+  --bf-alloy-500: #52616a;
+  --bf-alloy-400: #748188;
+  --bf-silver-300: #aab4b8;
+  --bf-workshop-100: #e4e7e3;
+  --bf-white-050: #f3f5f2;
+
+  /* Operator / boundary interaction */
+  --bf-action: #a98cff;
+  --bf-action-hover: #b9a5ff;
+  --bf-action-pressed: #9174e8;
+  --bf-action-surface: rgba(169, 140, 255, 0.14);
+  --bf-action-line: rgba(169, 140, 255, 0.45);
+  --bf-action-glow: rgba(169, 140, 255, 0.2);
+  --bf-focus-ring: rgba(169, 140, 255, 0.72);
+
+  /* Observed machine state */
+  --bf-valid: #8edb9a;
+  --bf-attention: #f2c66d;
+  --bf-info: #77b9e8;
+  --bf-defect: #e77c73;
+  --bf-unknown: #748188;
+
+  /* Material behavior */
+  --bf-edge-highlight: rgba(255, 255, 255, 0.075);
+  --bf-edge-highlight-strong: rgba(255, 255, 255, 0.12);
+  --bf-edge-shadow: rgba(0, 0, 0, 0.34);
+  --bf-edge-shadow-deep: rgba(0, 0, 0, 0.54);
+  --bf-hairline: rgba(170, 180, 184, 0.16);
+  --bf-line: rgba(170, 180, 184, 0.26);
+  --bf-line-strong: rgba(170, 180, 184, 0.42);
+  --bf-recess: rgba(8, 12, 15, 0.28);
+
+  /* Semantic aliases used by both UI renderers. */
+  --bf-bg-frame: var(--bf-iron-950);
+  --bf-bg-base: var(--bf-gunmetal-900);
+  --bf-bg-surface: var(--bf-steel-800);
+  --bf-bg-raised: var(--bf-steel-700);
+  --bf-bg-control: var(--bf-steel-600);
+  --bf-border-subtle: var(--bf-hairline);
+  --bf-border-default: var(--bf-line);
+  --bf-border-strong: var(--bf-line-strong);
+  --bf-text-primary: var(--bf-workshop-100);
+  --bf-text-secondary: var(--bf-silver-300);
+  --bf-text-muted: var(--bf-alloy-400);
+  --bf-text-disabled: var(--bf-alloy-500);
+
+  /* Compatibility bridge for the existing semantic UI. The future Apparatus renderer
+     should consume the --bf-* tokens directly rather than invent another palette. */
+  --ink: var(--bf-text-primary);
+  --ink-soft: var(--bf-text-secondary);
+  --paper: var(--bf-bg-frame);
+  --paper-strong: var(--bf-bg-surface);
+  --field: var(--bf-bg-base);
+  --field-strong: var(--bf-bg-raised);
+  --line: var(--bf-border-subtle);
+  --line-strong: var(--bf-border-default);
+  --accent: var(--bf-action);
+  --accent-soft: var(--bf-action-surface);
+  --shadow: 0 24px 80px var(--bf-edge-shadow-deep);
+}
+
+html,
+body {
+  background: var(--bf-bg-frame);
+  color: var(--bf-text-primary);
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline-color: var(--bf-focus-ring);
+}
+
+::selection {
+  background: var(--bf-action-surface);
+  color: var(--bf-white-050);
+}
