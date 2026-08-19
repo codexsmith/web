@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { WorldApp } from "@/components/world-app";
 import { hydrateContentNode } from "@/lib/content-projections";
-import { getNodeByPath, isDescendantOf, nodes } from "@/lib/content";
+import { getNodeByPath, nodes } from "@/lib/content";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection } from "@/lib/view-projection";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
@@ -31,8 +31,6 @@ import {
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
   searchParams: Promise<{
-    world?: string | string[];
-    gestalt?: string | string[];
     view?: string | string[];
     scope?: string | string[];
   }>;
@@ -44,15 +42,10 @@ export async function generateStaticParams() {
   const landingParams =
     productLandingManifest.routingPolicy.routesImplemented &&
     productLandingManifest.routingPolicy.rendererImplemented
-      ? getRouteEligibleProductLandingEntries().map((entry) => ({
-          slug: entry.slug.split("/"),
-        }))
+      ? getRouteEligibleProductLandingEntries().map((entry) => ({ slug: entry.slug.split("/") }))
       : [];
 
-  const nodeParams = nodes.map((node) => ({
-    slug: node.path ? node.path.split("/") : [],
-  }));
-
+  const nodeParams = nodes.map((node) => ({ slug: node.path ? node.path.split("/") : [] }));
   return [...landingParams, ...nodeParams];
 }
 
@@ -77,30 +70,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         description,
         alternates: decision.policy.indexable ? { canonical: pathname } : undefined,
         robots: decision.policy.robots,
-        openGraph: decision.policy.indexable
-          ? {
-              title,
-              description,
-              type: "website",
-              url: pathname,
-            }
-          : undefined,
-        twitter: decision.policy.indexable
-          ? {
-              card: "summary_large_image",
-              title,
-              description,
-            }
-          : undefined,
+        openGraph: decision.policy.indexable ? { title, description, type: "website", url: pathname } : undefined,
+        twitter: decision.policy.indexable ? { card: "summary_large_image", title, description } : undefined,
       };
     }
   }
 
   const node = hydrateContentNode(getNodeByPath(slug));
-  return {
-    title: node.label,
-    description: node.summary,
-  };
+  return { title: node.label, description: node.summary };
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
@@ -115,74 +92,34 @@ export default async function Page({ params, searchParams }: PageProps) {
       const content = getProductLandingContent(decision.entry);
       if (content) {
         if (decision.entry.id === "agency-representation-audit" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <AgencyAuditLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><AgencyAuditLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "boundary-first-ux" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <BoundaryFirstUxLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><BoundaryFirstUxLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "boundary-first-chess" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <ChessLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><ChessLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "boundary-first-soccer" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <SoccerLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><SoccerLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "closure-driven-software-development" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <ClosureDrivenLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><ClosureDrivenLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "corpus-forge" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <CorpusForgeLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><CorpusForgeLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "schemathematics" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <SchemathematicsLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><SchemathematicsLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "software-before-code" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <SoftwareBeforeCodeLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><SoftwareBeforeCodeLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "boundary-first-weather" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <WeatherLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><WeatherLanding /></LandingEngineeringChrome>;
         }
         if (decision.entry.id === "constitutional-law-and-jurisprudence" && decision.entry.collection !== "bridge") {
-          return (
-            <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}>
-              <LawLanding />
-            </LandingEngineeringChrome>
-          );
+          return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><LawLanding /></LandingEngineeringChrome>;
         }
 
         return <ProductLandingRenderer content={content} decision={decision} />;
@@ -191,28 +128,14 @@ export default async function Page({ params, searchParams }: PageProps) {
   }
 
   const node = getNodeByPath(slug);
-  const skipLanding = query.world === "1";
-
-  // Legacy containment-Gestalt links remain readable, but the UI no longer emits
-  // this parameter. Gestalt now names the process projection and its scope filter.
-  const requestedLegacyGestaltId = typeof query.gestalt === "string" ? query.gestalt : undefined;
-  const requestedLegacyGestalt = requestedLegacyGestaltId
-    ? nodes.find((candidate) => candidate.id === requestedLegacyGestaltId)
-    : undefined;
-  const initialGestaltId = requestedLegacyGestalt && isDescendantOf(node.id, requestedLegacyGestalt.id)
-    ? requestedLegacyGestalt.id
-    : node.id;
-
   const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
   const initialProcessScope = parseProcessScope(query.scope) ?? "full";
 
   return (
     <WorldApp
       initialNodeId={node.id}
-      initialGestaltId={initialGestaltId}
       initialProjection={initialProjection}
       initialProcessScope={initialProcessScope}
-      skipLanding={skipLanding}
     />
   );
 }
