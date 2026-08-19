@@ -1,0 +1,587 @@
+/* Boundary First UX · First-class view projections
+   Focus answers what. Whole answers which containing boundary. Projection answers
+   which lawful representation of that state the visitor is asking for. */
+
+/* Projection selector lives in the persistent state rail rather than floating over content. */
+.projection-switcher {
+  min-width: 0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.projection-switcher__label {
+  padding: 0 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.projection-switcher button {
+  min-height: 28px;
+  padding: 0 0.58rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.61rem;
+}
+
+.projection-switcher button:hover {
+  border-color: var(--line);
+  background: rgba(251, 250, 246, 0.72);
+  color: var(--ink);
+}
+
+.projection-switcher button[aria-pressed="true"] {
+  border-color: var(--line-strong);
+  background: var(--paper-strong);
+  color: var(--ink);
+  box-shadow: 0 2px 8px rgba(23, 32, 28, 0.07);
+}
+
+/* Record projection owns the reading plane. Evidence/state instruments no longer
+   reserve a universal right rail because they have their own projection. */
+@media (min-width: 1181px) {
+  .site-shell[data-world-mode="detail"] .world-viewport {
+    right: 0;
+  }
+
+  .site-shell[data-world-mode="detail"] .node-surface {
+    width: min(100%, 1120px);
+  }
+}
+
+/* A leaf in World projection is not silently converted into a document. It becomes
+   a local boundary object with explicit ports to containment and typed relations. */
+.leaf-world {
+  width: min(1220px, 100%);
+  height: min(760px, 100%);
+  display: grid;
+  grid-template-columns: minmax(270px, 0.72fr) minmax(420px, 1.28fr);
+  gap: clamp(28px, 5vw, 70px);
+  align-items: center;
+}
+
+.leaf-world > .world-heading {
+  position: static;
+}
+
+.leaf-world__field {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 14px;
+}
+
+.leaf-world__focus {
+  position: relative;
+  min-width: 0;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid var(--ink);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 16% 12%, rgba(255, 255, 255, 0.9), transparent 15rem),
+    var(--paper-strong);
+  box-shadow: var(--shadow);
+}
+
+.leaf-world__focus::before {
+  content: "FOCUS";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: var(--accent);
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.leaf-world__focus small,
+.leaf-world__port span {
+  color: var(--accent);
+  font-size: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.leaf-world__focus strong {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 4.4rem);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.leaf-world__focus p {
+  max-width: 620px;
+  margin: 1rem 0 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.leaf-world__ports {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  overflow: auto;
+  padding: 2px;
+  scrollbar-width: thin;
+}
+
+.leaf-world__port {
+  min-width: 0;
+  min-height: 116px;
+  display: grid;
+  align-content: center;
+  gap: 0.32rem;
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: rgba(251, 250, 246, 0.76);
+  cursor: pointer;
+  text-align: left;
+}
+
+.leaf-world__port:hover {
+  border-color: var(--ink);
+  background: var(--paper-strong);
+}
+
+.leaf-world__port strong {
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.leaf-world__port small {
+  color: var(--ink-soft);
+  font-size: 0.53rem;
+  overflow-wrap: anywhere;
+}
+
+.leaf-world__empty {
+  padding: 1.2rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: 12px;
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+/* Evidence is a reader-like projection, but its grammar is a dossier rather than an article. */
+.evidence-viewport {
+  overflow: hidden;
+  place-items: stretch;
+  padding: clamp(18px, 2.8vw, 40px);
+}
+
+.evidence-view {
+  width: min(1320px, 100%);
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin-inline: auto;
+  overflow-y: auto;
+  padding: clamp(24px, 3vw, 42px);
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  background: rgba(251, 250, 246, 0.93);
+  box-shadow: var(--shadow);
+  scrollbar-width: thin;
+}
+
+.evidence-view__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: clamp(26px, 5vw, 70px);
+  align-items: end;
+  padding-bottom: 1.7rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.evidence-view__heading h1 {
+  max-width: 850px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+}
+
+.evidence-view__heading > div > p:not(.eyebrow) {
+  max-width: 720px;
+  margin: 1.2rem 0 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.evidence-view__scope,
+.evidence-compartment dl,
+.evidence-ledger dl {
+  margin: 0;
+}
+
+.evidence-view__scope {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--instrument-recess, rgba(223, 226, 215, 0.34));
+}
+
+.evidence-view__scope > div {
+  min-width: 0;
+  padding: 0.65rem 0.72rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.evidence-view__scope > div:nth-child(2n) {
+  border-right: 0;
+}
+
+.evidence-view__scope > div:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.evidence-view__scope dt,
+.evidence-compartment dt,
+.evidence-ledger dt {
+  color: var(--ink-soft);
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.evidence-view__scope dd,
+.evidence-compartment dd,
+.evidence-ledger dd {
+  margin: 0.2rem 0 0;
+  overflow-wrap: anywhere;
+  font-size: 0.62rem;
+}
+
+.evidence-view__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.evidence-compartment {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.evidence-compartment--ledger,
+.evidence-compartment--relations {
+  grid-column: 1 / -1;
+}
+
+.evidence-compartment__label {
+  margin-bottom: 0.8rem;
+  color: var(--accent);
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.evidence-compartment--standing > strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+.evidence-compartment--standing > p,
+.evidence-empty {
+  margin: 0.55rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.evidence-compartment--standing dl,
+.evidence-ledger dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 0.8rem;
+}
+
+.evidence-compartment--standing dl > div,
+.evidence-ledger dl > div {
+  min-width: 0;
+  padding: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(223, 226, 215, 0.22);
+}
+
+.evidence-cards,
+.evidence-records,
+.evidence-relations,
+.evidence-ledger {
+  display: grid;
+  gap: 9px;
+}
+
+.evidence-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.evidence-cards button,
+.evidence-records a,
+.evidence-relations button {
+  min-width: 0;
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: rgba(251, 250, 246, 0.6);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+
+.evidence-cards button:hover,
+.evidence-records a:hover,
+.evidence-relations button:hover {
+  border-color: var(--ink);
+  background: var(--paper-strong);
+}
+
+.evidence-cards span,
+.evidence-records span,
+.evidence-relations span {
+  color: var(--accent);
+  font-size: 0.45rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.evidence-cards strong,
+.evidence-records strong,
+.evidence-relations strong {
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.83rem;
+  font-weight: 400;
+}
+
+.evidence-cards p,
+.evidence-records p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.58rem;
+  line-height: 1.4;
+}
+
+.evidence-cards small,
+.evidence-relations small {
+  color: var(--ink-soft);
+  font-size: 0.48rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.evidence-source-list,
+.evidence-ledger ul {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evidence-source-list li,
+.evidence-ledger li {
+  padding: 0.52rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(223, 226, 215, 0.2);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.54rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.evidence-ledger article {
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--line-strong);
+  border-radius: 9px;
+  background: rgba(251, 250, 246, 0.58);
+}
+
+.evidence-ledger article > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.evidence-ledger article > header span {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.evidence-ledger article > header small,
+.evidence-ledger__ceiling small {
+  color: var(--accent);
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.evidence-ledger article > header strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.evidence-ledger time {
+  color: var(--ink-soft);
+  font-size: 0.54rem;
+}
+
+.evidence-ledger article > p,
+.evidence-ledger__ceiling p {
+  margin: 0.65rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.64rem;
+  line-height: 1.5;
+}
+
+.evidence-ledger__ceiling {
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px dotted var(--line-strong);
+}
+
+.evidence-ledger ul {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 980px) {
+  .leaf-world {
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    align-content: start;
+    overflow-y: auto;
+    padding: 12px;
+  }
+
+  .leaf-world > .world-heading {
+    max-width: 720px;
+  }
+
+  .evidence-view__heading {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .projection-switcher {
+    height: 34px;
+  }
+
+  .projection-switcher__label {
+    display: none;
+  }
+
+  .projection-switcher button {
+    min-height: 26px;
+    padding-inline: 0.45rem;
+    font-size: 0.56rem;
+  }
+
+  .frame-status--focus {
+    max-width: 39vw;
+  }
+
+  .frame-status__value {
+    max-width: 28vw;
+  }
+
+  .leaf-world__ports,
+  .evidence-view__grid,
+  .evidence-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-compartment--ledger,
+  .evidence-compartment--relations {
+    grid-column: auto;
+  }
+
+  .evidence-viewport {
+    padding: 8px;
+  }
+
+  .evidence-view {
+    padding: 22px 16px 42px;
+    border-radius: 12px;
+  }
+
+  .evidence-view__heading h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+  }
+
+  .evidence-compartment--standing dl,
+  .evidence-ledger dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 460px) {
+  .frame-status--focus {
+    display: none;
+  }
+
+  .projection-switcher {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .projection-switcher button {
+    flex: 1 1 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projection-switcher button,
+  .leaf-world__port,
+  .evidence-cards button,
+  .evidence-records a,
+  .evidence-relations button {
+    transition: none;
+  }
+}
