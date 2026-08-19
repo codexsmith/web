@@ -6,6 +6,7 @@ import { BoundaryFrame } from "@/components/boundary-frame";
 import { InspectionPanel } from "@/components/inspection-panel";
 import { LandingSequence } from "@/components/landing-sequence";
 import { SearchPanel } from "@/components/search-panel";
+import { WorldEcology } from "@/components/world-ecology";
 import { TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
 import {
@@ -190,14 +191,21 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
       {introEnabled ? (
         <LandingSequence branches={rootBranches} onNavigate={navigate} onProgress={setLandingProgress} />
       ) : (
-        <WorldView
-          gestaltNode={gestaltNode}
-          focusNode={focusNode}
-          transitionDirection={transitionDirection}
-          transitionKey={transitionKey}
-          onNavigate={navigate}
-          onInspect={openInspection}
-        />
+        <>
+          <WorldView
+            gestaltNode={gestaltNode}
+            focusNode={focusNode}
+            transitionDirection={transitionDirection}
+            transitionKey={transitionKey}
+            onNavigate={navigate}
+            onInspect={openInspection}
+          />
+          <WorldEcology
+            focusNode={focusNode}
+            gestaltNode={gestaltNode}
+            onNavigate={(targetId) => navigate(targetId, "cross")}
+          />
+        </>
       )}
 
       {activeInspection ? (
