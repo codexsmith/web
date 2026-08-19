@@ -30,12 +30,18 @@
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "retired_v1",
+    "backlog",
+    "tests",
+    "vitest.config.ts",
+    "src/components/entrance",
+    "src/components/journey"
   ]
 }
