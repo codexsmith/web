@@ -7,6 +7,7 @@ import { FocusTelemetry } from "@/components/focus-telemetry";
 import { InspectionPanel } from "@/components/inspection-panel";
 import { LandingSequence } from "@/components/landing-sequence";
 import { SearchPanel } from "@/components/search-panel";
+import { StateEcology } from "@/components/state-ecology";
 import { WorldEcology } from "@/components/world-ecology";
 import { TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
@@ -207,6 +208,7 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
             onInspect={openInspection}
             onNavigate={(targetId) => navigate(targetId, "cross")}
           />
+          <StateEcology focusNode={focusNode} gestaltNode={gestaltNode} />
           <WorldEcology
             focusNode={focusNode}
             gestaltNode={gestaltNode}
