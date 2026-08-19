@@ -7,7 +7,7 @@ import { InspectionPanel } from "@/components/inspection-panel";
 import { LandingSequence } from "@/components/landing-sequence";
 import { SearchPanel } from "@/components/search-panel";
 import { TransitionDirection, WorldView } from "@/components/world-view";
-import { hydrateAboutNode } from "@/lib/about-content";
+import { hydrateContentNode } from "@/lib/content-projections";
 import {
   getAncestors,
   getChildren,
@@ -52,10 +52,10 @@ export function WorldApp({ initialNodeId, skipLanding }: WorldAppProps) {
   const [inspectionId, setInspectionId] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
 
-  const focusNode = hydrateAboutNode(getNode(focusId));
-  const gestaltNode = hydrateAboutNode(getNode(gestaltId));
-  const breadcrumbs = getAncestors(focusId).map(hydrateAboutNode);
-  const rootBranches = getChildren("root").map(hydrateAboutNode);
+  const focusNode = hydrateContentNode(getNode(focusId));
+  const gestaltNode = hydrateContentNode(getNode(gestaltId));
+  const breadcrumbs = getAncestors(focusId).map(hydrateContentNode);
+  const rootBranches = getChildren("root").map(hydrateContentNode);
   const canZoomOut = Boolean(getParent(gestaltId));
   const canZoomIn = gestaltId !== focusId && Boolean(getImmediateChildTowardFocus(gestaltId, focusId));
 
