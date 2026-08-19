@@ -1,0 +1,58 @@
+/* Interaction corrections and alternate projection for the Industrial Design layer. */
+
+.direction-control--up:active {
+  transform: translate(-50%, 1px);
+}
+
+.direction-control--left:active {
+  transform: translate(1px, -50%);
+}
+
+.direction-control--right:active {
+  transform: translate(1px, -50%);
+}
+
+@media (max-width: 720px) {
+  .direction-control--up:active {
+    transform: translate(-50%, 1px);
+  }
+
+  .direction-control--left:active,
+  .direction-control--right:active {
+    transform: translateY(1px);
+  }
+}
+
+@media (forced-colors: active) {
+  .world-heading,
+  .district-grid,
+  .district-card,
+  .node-surface,
+  .work-status-panel,
+  .record-links a,
+  .inspection-record-links a,
+  .inspection-links button,
+  .edge-links button,
+  .inspection-panel,
+  .search-panel,
+  .search-field input,
+  .search-results button,
+  .direction-control {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .district-card--focused,
+  .boundary-frame__left li[aria-current="page"] .path-node__dot {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .district-card--focused::before,
+  .work-status-panel::before,
+  .primary-nav button.is-active .primary-nav__signal {
+    background: Highlight;
+  }
+}
