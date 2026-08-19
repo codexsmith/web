@@ -16,6 +16,21 @@
   align-self: start;
 }
 
+.branch-world__exploratory-section {
+  padding: 1rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(251, 250, 246, 0.34);
+}
+
+.branch-world__section-intro {
+  max-width: 760px;
+  margin: -0.2rem 0 0.9rem;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
 .work-status-chip {
   display: inline-flex;
   align-items: center;
