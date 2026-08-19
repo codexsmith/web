@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
-import { hydrateAboutNode } from "@/lib/about-content";
+import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
@@ -90,7 +90,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
-  const node = hydrateAboutNode(getNodeByPath(slug));
+  const node = hydrateContentNode(getNodeByPath(slug));
   return {
     title: node.label,
     description: node.summary,
