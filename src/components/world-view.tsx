@@ -8,6 +8,7 @@ import {
   getParent,
   getSiblings,
 } from "@/lib/content";
+import { hydrateAboutNode } from "@/lib/about-content";
 
 export type TransitionDirection =
   | "none"
@@ -36,7 +37,9 @@ export function WorldView({
   onNavigate,
   onInspect,
 }: WorldViewProps) {
-  const children = getChildren(gestaltNode.id);
+  const renderedGestaltNode = hydrateAboutNode(gestaltNode);
+  const renderedFocusNode = hydrateAboutNode(focusNode);
+  const children = getChildren(gestaltNode.id).map(hydrateAboutNode);
   const parent = getParent(gestaltNode.id);
   const focusRegion = getImmediateChildTowardFocus(gestaltNode.id, focusNode.id);
   const isLeaf = children.length === 0;
@@ -54,11 +57,11 @@ export function WorldView({
       ) : null}
 
       {isLeaf ? (
-        <NodeDetail node={gestaltNode} onNavigate={onNavigate} onInspect={onInspect} />
+        <NodeDetail node={renderedGestaltNode} onNavigate={onNavigate} onInspect={onInspect} />
       ) : (
         <BranchWorld
-          gestaltNode={gestaltNode}
-          focusNode={focusNode}
+          gestaltNode={renderedGestaltNode}
+          focusNode={renderedFocusNode}
           focusRegion={focusRegion}
           children={children}
           onNavigate={onNavigate}
@@ -135,11 +138,11 @@ type NodeDetailProps = {
 };
 
 function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
-  const siblings = getSiblings(node.id);
+  const siblings = getSiblings(node.id).map(hydrateAboutNode);
   const siblingIndex = siblings.findIndex((sibling) => sibling.id === node.id);
   const previous = siblingIndex > 0 ? siblings[siblingIndex - 1] : undefined;
   const next = siblingIndex >= 0 && siblingIndex < siblings.length - 1 ? siblings[siblingIndex + 1] : undefined;
-  const crossEdges = getCrossEdges(node.id);
+  const crossEdges = getCrossEdges(node.id).map((edge) => ({ ...edge, node: hydrateAboutNode(edge.node) }));
 
   return (
     <section className="node-detail">
