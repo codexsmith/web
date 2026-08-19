@@ -16,10 +16,8 @@ The Apparatus renderer is a second representation of the same Boundary First sem
 
 The apparatus exists to make relations, state, paths, gates, agency, consequence, and repair physically legible without turning the interface into decorative machinery.
 
-It is not:
+**It is not a cockpit skin and not a cyberpunk dashboard.** It is also not:
 
-- a cockpit skin;
-- a cyberpunk dashboard;
 - a denser card grid;
 - a miniature engineering schematic for its own sake;
 - a replacement for Record, Evidence, or Gestalt;
