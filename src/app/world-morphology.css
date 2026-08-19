@@ -1,0 +1,558 @@
+/* Boundary First UX · Gestalt World Morphology
+   The containment tree supplies orientation; these spatial arrangements supply gestalt.
+   Zooming out changes the operative whole while preserving a compact representation of focus. */
+
+.branch-world {
+  --world-gap: clamp(24px, 3.6vw, 56px);
+  position: relative;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(520px, 1.55fr);
+  gap: var(--world-gap);
+  align-content: center;
+}
+
+.branch-world > .world-heading {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.branch-world > .district-grid {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.branch-world > .branch-world__context-section {
+  grid-column: 1 / -1;
+}
+
+/* The focused descendant remains visibly present when its world is compactified. */
+
+.focus-trace {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.16rem 0.65rem;
+  align-items: center;
+  padding: 0.72rem 0.78rem 0.72rem 2.25rem;
+}
+
+.focus-trace::before {
+  content: "";
+  position: absolute;
+  left: 0.78rem;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(141, 78, 47, 0.1);
+  transform: translateY(-50%);
+}
+
+.focus-trace__label {
+  grid-column: 1 / -1;
+  color: var(--ink-soft);
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.focus-trace strong {
+  min-width: 0;
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.focus-trace__via {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 0.52rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.focus-trace__depth {
+  grid-row: 2 / 4;
+  grid-column: 3;
+  align-self: center;
+  padding: 0.28rem 0.38rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--ink-soft);
+  font-size: 0.44rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.district-card[data-carries-focus="true"] {
+  z-index: 2;
+}
+
+.compact-focus {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr) auto;
+  gap: 0.16rem 0.5rem;
+  align-items: center;
+  margin-top: 0.72rem;
+  padding: 0.58rem 0.62rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background:
+    linear-gradient(90deg, rgba(141, 78, 47, 0.055), transparent 48%),
+    var(--instrument-recess);
+  box-shadow:
+    inset 0 1px 3px rgba(23, 32, 28, 0.065),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.22);
+  text-align: left;
+}
+
+.compact-focus__signal {
+  grid-row: 1 / 4;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(141, 78, 47, 0.09);
+}
+
+.compact-focus__copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.compact-focus__copy > span {
+  color: var(--ink-soft);
+  font-size: 0.42rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.compact-focus__copy > strong {
+  margin: 0;
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.76rem;
+  font-weight: 400;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compact-focus__copy > small {
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 0.49rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compact-focus__depth {
+  grid-column: 3;
+  grid-row: 1 / 4;
+  align-self: center;
+  color: var(--accent);
+  font-size: 0.45rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* Root campus: the four institutional regions form one asymmetric campus. */
+
+.branch-world[data-gestalt-id="root"] .district-grid {
+  grid-template-columns: 1.08fr 0.92fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="products"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="public-interest"] {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="about"] {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  min-height: 42%;
+}
+
+/* Products: active work and pipeline carry more area than archive/support. */
+
+.branch-world[data-gestalt-id="products"] .district-grid {
+  grid-template-columns: 1.25fr 1fr 0.8fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.branch-world[data-gestalt-id="products"] .district-card[data-node-id="current-work"] {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="products"] .district-card[data-node-id="shipped-work"] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="products"] .district-card[data-node-id="planned-products"] {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="products"] .district-card[data-node-id="tools-experiments"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* Public Interest: principles/mission constrain the civic field; aspiration sits at horizon. */
+
+.branch-world[data-gestalt-id="public-interest"] .district-grid {
+  grid-template-columns: 0.86fr 1.45fr 0.92fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.branch-world[data-gestalt-id="public-interest"] .district-card[data-node-id="public-mission"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="public-interest"] .district-card[data-node-id="public-principles"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="public-interest"] .district-card[data-node-id="augusta-civic"] {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.branch-world[data-gestalt-id="public-interest"] .district-card[data-node-id="public-aspirations"] {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+
+/* Research atlas: Software is the large executable district; testbeds bridge to formal depth. */
+
+.branch-world[data-gestalt-id="research"] .district-grid {
+  grid-template-columns: 1.18fr 0.95fr 0.95fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.branch-world[data-gestalt-id="research"] .district-card[data-node-id="software"] {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.branch-world[data-gestalt-id="research"] .district-card[data-node-id="applied-testbeds"] {
+  grid-column: 2 / 4;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="research"] .district-card[data-node-id="foundations"] {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="research"] .district-card[data-node-id="formal-theory"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* Software: arrange doctrine as an executable system rather than six peer tiles. */
+
+.branch-world[data-gestalt-id="software"] .district-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 1fr 1fr;
+}
+
+.branch-world[data-gestalt-id="software"] .district-card[data-node-id="boundary-first-engineering"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="software"] .district-card[data-node-id="ontological-software"] {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="software"] .district-card[data-node-id="executable-representation"] {
+  grid-column: 3 / 5;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="software"] .district-card[data-node-id="boundary-first-architecture"] {
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="software"] .district-card[data-node-id="boundary-first-ux"] {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="software"] .district-card[data-node-id="verification-governance"] {
+  grid-column: 4;
+  grid-row: 2;
+}
+
+/* Testbeds: a broad field above two contrasting agents and one institutional boundary. */
+
+.branch-world[data-gestalt-id="applied-testbeds"] .district-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: 0.9fr 1fr 0.9fr;
+}
+
+.branch-world[data-gestalt-id="applied-testbeds"] .district-card[data-node-id="boundary-first-weather"] {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="applied-testbeds"] .district-card[data-node-id="boundary-first-chess"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="applied-testbeds"] .district-card[data-node-id="boundary-first-soccer"] {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="applied-testbeds"] .district-card[data-node-id="constitutional-law"] {
+  grid-column: 1 / 3;
+  grid-row: 3;
+}
+
+/* Foundations are rendered as a calibration sequence. */
+
+.branch-world[data-gestalt-id="foundations"] .district-grid {
+  position: relative;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.branch-world[data-gestalt-id="foundations"] .district-grid::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  z-index: 0;
+  background: var(--line-strong);
+}
+
+.branch-world[data-gestalt-id="foundations"] .district-card {
+  z-index: 1;
+  min-height: 230px;
+}
+
+.branch-world[data-gestalt-id="foundations"] .district-card__number {
+  border-radius: 50%;
+}
+
+/* Formal theory is intentionally sparse: fewer objects, stronger boundary. */
+
+.branch-world[data-gestalt-id="formal-theory"] .district-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+  gap: 22px;
+}
+
+.branch-world[data-gestalt-id="formal-theory"] .district-card {
+  min-height: 280px;
+}
+
+/* About reads as an institutional dossier instead of a spatial research map. */
+
+.branch-world[data-gestalt-id="about"] {
+  grid-template-columns: minmax(260px, 0.68fr) minmax(620px, 1.7fr);
+}
+
+.branch-world[data-gestalt-id="about"] .district-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+  gap: 10px;
+}
+
+.branch-world[data-gestalt-id="about"] .district-card {
+  min-height: 300px;
+}
+
+/* A deeper retained focus increases salience without turning the rest of the world off. */
+
+.branch-world[data-focus-depth="2"] .district-card[data-carries-focus="true"],
+.branch-world[data-focus-depth="3"] .district-card[data-carries-focus="true"],
+.branch-world[data-focus-depth="4"] .district-card[data-carries-focus="true"] {
+  box-shadow:
+    0 18px 38px rgba(23, 32, 28, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    inset 0 0 0 1px rgba(141, 78, 47, 0.14);
+}
+
+/* Zoom transitions preserve object constancy: world and part representations morph in scale. */
+
+.world-transition--zoom-out .district-card[data-carries-focus="true"] {
+  animation: compactFocusOut 280ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+.world-transition--zoom-in .district-card[data-carries-focus="true"] {
+  animation: compactFocusIn 260ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+@keyframes compactFocusOut {
+  from {
+    opacity: 0.5;
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes compactFocusIn {
+  from {
+    opacity: 0.62;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1180px) {
+  .branch-world[data-gestalt-id="software"] .district-grid,
+  .branch-world[data-gestalt-id="about"] .district-grid,
+  .branch-world[data-gestalt-id="foundations"] .district-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .branch-world[data-gestalt-id="software"] .district-card,
+  .branch-world[data-gestalt-id="about"] .district-card,
+  .branch-world[data-gestalt-id="foundations"] .district-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 170px;
+  }
+
+  .branch-world[data-gestalt-id="foundations"] .district-grid::before {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .branch-world {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-content: start;
+  }
+
+  .branch-world > .world-heading,
+  .branch-world > .district-grid,
+  .branch-world > .branch-world__context-section {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .branch-world[data-gestalt-id="root"] .district-grid,
+  .branch-world[data-gestalt-id="products"] .district-grid,
+  .branch-world[data-gestalt-id="public-interest"] .district-grid,
+  .branch-world[data-gestalt-id="research"] .district-grid,
+  .branch-world[data-gestalt-id="software"] .district-grid,
+  .branch-world[data-gestalt-id="applied-testbeds"] .district-grid,
+  .branch-world[data-gestalt-id="foundations"] .district-grid,
+  .branch-world[data-gestalt-id="formal-theory"] .district-grid,
+  .branch-world[data-gestalt-id="about"] .district-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .branch-world .district-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 155px !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .branch-world[data-gestalt-id] .district-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compact-focus {
+    grid-template-columns: 10px minmax(0, 1fr);
+  }
+
+  .compact-focus__depth {
+    grid-column: 2;
+    grid-row: 4;
+    justify-self: start;
+    margin-top: 0.16rem;
+  }
+
+  .focus-trace {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 2.25rem;
+  }
+
+  .focus-trace__label,
+  .focus-trace strong,
+  .focus-trace__via,
+  .focus-trace__depth {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .focus-trace__depth {
+    justify-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world-transition--zoom-out .district-card[data-carries-focus="true"],
+  .world-transition--zoom-in .district-card[data-carries-focus="true"] {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .compact-focus,
+  .focus-trace {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .compact-focus__signal,
+  .focus-trace::before {
+    background: Highlight;
+  }
+}
