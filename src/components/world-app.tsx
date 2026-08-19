@@ -6,30 +6,23 @@ import { BoundaryFrame } from "@/components/boundary-frame";
 import { EvidenceView } from "@/components/evidence-view";
 import { GestaltView } from "@/components/gestalt-view";
 import { InspectionPanel } from "@/components/inspection-panel";
-import { LandingSequence } from "@/components/landing-sequence";
 import { SearchPanel } from "@/components/search-panel";
 import { WorldEcology } from "@/components/world-ecology";
 import { RecordView, TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
 import {
   getAncestors,
-  getChildren,
   getNode,
   getPathForNode,
   getSiblings,
 } from "@/lib/content";
-import {
-  processScopes,
-  type ProcessScope,
-} from "@/lib/bfl-process";
+import { processScopes, type ProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, type ProjectionMode } from "@/lib/view-projection";
 
 type WorldAppProps = {
   initialNodeId: string;
-  initialGestaltId?: string;
   initialProjection?: ProjectionMode;
   initialProcessScope?: ProcessScope;
-  skipLanding: boolean;
 };
 
 function inferDirection(fromId: string, toId: string): TransitionDirection {
@@ -54,10 +47,6 @@ function stateUrl(focusId: string, projection: ProjectionMode, processScope: Pro
   const focusPath = getPathForNode(focusId);
   const params = new URLSearchParams();
 
-  if (focusId === "root") {
-    params.set("world", "1");
-  }
-
   if (projection !== defaultProjectionForNode(focusId)) {
     params.set("view", projection);
   }
@@ -72,32 +61,24 @@ function stateUrl(focusId: string, projection: ProjectionMode, processScope: Pro
 
 export function WorldApp({
   initialNodeId,
-  initialGestaltId,
   initialProjection,
   initialProcessScope = "full",
-  skipLanding,
 }: WorldAppProps) {
   const router = useRouter();
-  const resolvedInitialGestaltId = initialGestaltId ?? initialNodeId;
   const resolvedInitialProjection = initialProjection ?? defaultProjectionForNode(initialNodeId);
   const [focusId, setFocusId] = useState(initialNodeId);
-  const [gestaltId, setGestaltId] = useState(resolvedInitialGestaltId);
   const [projection, setProjection] = useState<ProjectionMode>(resolvedInitialProjection);
   const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
-  const [introEnabled, setIntroEnabled] = useState(initialNodeId === "root" && !skipLanding);
-  const [landingProgress, setLandingProgress] = useState(skipLanding ? 1 : 0);
   const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>("none");
   const [transitionKey, setTransitionKey] = useState(0);
   const [inspectionId, setInspectionId] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
 
   const focusNode = hydrateContentNode(getNode(focusId));
-  const gestaltNode = hydrateContentNode(getNode(gestaltId));
   const breadcrumbs = getAncestors(focusId).map(hydrateContentNode);
-  const rootBranches = getChildren("root").map(hydrateContentNode);
   const siblings = getSiblings(focusId).map(hydrateContentNode);
   const hasSiblings = siblings.some((node) => node.id !== focusId);
-  const worldMode = introEnabled ? "landing" : projection === "record" ? "detail" : projection;
+  const worldMode = projection === "record" ? "detail" : projection;
   const processScopeIndex = processScopes.indexOf(processScope);
   const canProcessZoomOut = projection === "gestalt" && processScopeIndex > 0;
   const canProcessZoomIn = projection === "gestalt" && processScopeIndex < processScopes.length - 1;
@@ -109,24 +90,10 @@ export function WorldApp({
 
   useEffect(() => {
     setFocusId(initialNodeId);
-    setGestaltId(initialGestaltId ?? initialNodeId);
     setProjection(initialProjection ?? defaultProjectionForNode(initialNodeId));
     setProcessScope(initialProcessScope);
-    setIntroEnabled(initialNodeId === "root" && !skipLanding);
-    setLandingProgress(initialNodeId === "root" && !skipLanding ? 0 : 1);
     setInspectionId(null);
-  }, [initialNodeId, initialGestaltId, initialProjection, initialProcessScope, skipLanding]);
-
-  useEffect(() => {
-    const locked = !introEnabled;
-    document.documentElement.classList.toggle("world-locked", locked);
-    document.body.classList.toggle("world-locked", locked);
-
-    return () => {
-      document.documentElement.classList.remove("world-locked");
-      document.body.classList.remove("world-locked");
-    };
-  }, [introEnabled]);
+  }, [initialNodeId, initialProjection, initialProcessScope]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -154,10 +121,7 @@ export function WorldApp({
       setTransitionDirection(nextDirection);
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
-      setGestaltId(targetId);
       setInspectionId(null);
-      setIntroEnabled(false);
-      setLandingProgress(1);
       router.push(stateUrl(targetId, projection, processScope), { scroll: false });
     },
     [focusId, processScope, projection, router],
@@ -167,26 +131,19 @@ export function WorldApp({
     setTransitionDirection("up");
     setTransitionKey((value) => value + 1);
     setFocusId("root");
-    setGestaltId("root");
     setProjection("world");
     setProcessScope("full");
     setInspectionId(null);
-    setIntroEnabled(false);
-    setLandingProgress(1);
-    router.push(stateUrl("root", "world", "full"), { scroll: false });
+    router.push("/", { scroll: false });
   }, [router]);
 
   const navigateFocusPath = useCallback(
     (targetId: string) => {
       if (targetId === focusId) return;
-
       setTransitionDirection(inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
-      setGestaltId(targetId);
       setInspectionId(null);
-      setIntroEnabled(false);
-      setLandingProgress(1);
       router.push(stateUrl(targetId, projection, processScope), { scroll: false });
     },
     [focusId, processScope, projection, router],
@@ -229,8 +186,6 @@ export function WorldApp({
     setInspectionId(nextInspectionId);
   }, []);
 
-  const frameVisible = !introEnabled || landingProgress > 0.48;
-
   return (
     <div
       className="site-shell"
@@ -240,10 +195,9 @@ export function WorldApp({
       data-has-siblings={hasSiblings ? "true" : "false"}
     >
       <BoundaryFrame
-        visible={frameVisible}
+        visible
         focusNode={focusNode}
         breadcrumbs={breadcrumbs}
-        rootBranches={rootBranches}
         siblings={siblings}
         projection={projection}
         processScope={processScope}
@@ -259,13 +213,10 @@ export function WorldApp({
         onSearch={() => setSearchOpen(true)}
       />
 
-      {introEnabled ? (
-        <LandingSequence branches={rootBranches} onNavigate={navigate} onProgress={setLandingProgress} />
-      ) : projection === "world" ? (
+      {projection === "world" ? (
         <>
           <WorldView
-            gestaltNode={gestaltNode}
-            focusNode={focusNode}
+            node={focusNode}
             transitionDirection={transitionDirection}
             transitionKey={transitionKey}
             onNavigate={navigate}
@@ -273,7 +224,7 @@ export function WorldApp({
           />
           <WorldEcology
             focusNode={focusNode}
-            gestaltNode={gestaltNode}
+            gestaltNode={focusNode}
             onNavigate={(targetId) => navigate(targetId, "cross")}
           />
         </>
