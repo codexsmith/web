@@ -1,0 +1,412 @@
+/* Boundary First UX · World Ecology
+   Typed relations change representation with the operative whole:
+   visible connector -> compacted internal relation -> boundary port. */
+
+.world-ecology {
+  position: fixed;
+  top: var(--frame-top);
+  right: 0;
+  bottom: var(--frame-bottom);
+  left: var(--frame-left);
+  z-index: 18;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.relation-overlay,
+.relation-label-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.relation-path {
+  fill: none;
+  stroke: rgba(23, 32, 28, 0.52);
+  stroke-width: 1.35;
+  vector-effect: non-scaling-stroke;
+}
+
+.relation-port {
+  fill: var(--paper-strong);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.relation-overlay g[data-edge-family="structural"] .relation-path {
+  stroke-width: 1.6;
+}
+
+.relation-overlay g[data-edge-family="applied"] .relation-path {
+  stroke: var(--accent);
+  stroke-dasharray: 8 5;
+}
+
+.relation-overlay g[data-edge-family="governance"] .relation-path {
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+}
+
+.relation-arrow {
+  fill: var(--ink-soft);
+}
+
+.relation-arrow--applied {
+  fill: var(--accent);
+}
+
+.relation-geometry-label {
+  position: absolute;
+  max-width: 140px;
+  padding: 0.22rem 0.38rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--paper-strong) 94%, transparent);
+  box-shadow: 0 3px 10px rgba(23, 32, 28, 0.07);
+  color: var(--ink-soft);
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+}
+
+.relation-geometry-label[data-edge-family="applied"] {
+  border-style: dashed;
+  color: var(--accent);
+}
+
+.relation-geometry-label[data-edge-family="governance"] {
+  border-style: dotted;
+}
+
+.relation-dock {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  width: min(340px, calc(100% - 36px));
+  max-height: min(470px, calc(100% - 36px));
+  overflow: hidden;
+  border: 1px solid var(--instrument-edge);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent 70px),
+    color-mix(in srgb, var(--paper-strong) 95%, transparent);
+  box-shadow:
+    0 18px 44px rgba(23, 32, 28, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    inset 0 0 0 4px rgba(23, 32, 28, 0.016);
+  pointer-events: auto;
+  backdrop-filter: blur(14px);
+}
+
+.relation-dock__toggle {
+  width: 100%;
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.65rem 0.72rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.relation-dock--open .relation-dock__toggle {
+  border-bottom-color: var(--line);
+  background: rgba(223, 226, 215, 0.24);
+}
+
+.relation-dock__toggle > span:first-child {
+  min-width: 0;
+  display: grid;
+  gap: 0.16rem;
+}
+
+.relation-dock__toggle small {
+  color: var(--accent);
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.relation-dock__toggle strong {
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relation-dock__counts {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.relation-dock__counts i {
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--instrument-recess);
+  color: var(--ink-soft);
+  font-size: 0.54rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.relation-dock__counts i:first-child {
+  border-style: solid;
+}
+
+.relation-dock__counts i:nth-child(2) {
+  border-style: dashed;
+}
+
+.relation-dock__counts i:nth-child(3) {
+  border-style: dotted;
+}
+
+.relation-dock__chevron {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--paper-strong);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.relation-dock__body {
+  max-height: 390px;
+  overflow: auto;
+  padding: 0.65rem;
+  scrollbar-width: thin;
+}
+
+.relation-dock__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.65rem;
+  margin-bottom: 0.55rem;
+  color: var(--ink-soft);
+  font-size: 0.43rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.relation-dock__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.relation-dock__legend i {
+  width: 16px;
+  height: 0;
+  border-top: 1px solid var(--ink-soft);
+}
+
+.relation-dock__legend i[data-scope="internal"] {
+  border-top-style: dashed;
+}
+
+.relation-dock__legend i[data-scope="boundary"] {
+  border-top-style: dotted;
+}
+
+.relation-dock__relations {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.relation-dock__relations > button {
+  position: relative;
+  width: 100%;
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: 13px minmax(0, 1fr) auto;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.65rem 0.62rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(251, 250, 246, 0.52);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.relation-dock__relations > button:hover {
+  transform: translateY(-1px);
+  border-color: var(--ink);
+  background: var(--paper-strong);
+}
+
+.relation-dock__relations > button[data-scope="internal"] {
+  border-style: dashed;
+}
+
+.relation-dock__relations > button[data-scope="boundary"] {
+  border-style: dotted;
+}
+
+.relation-dock__relations > button[data-edge-family="applied"] {
+  border-left-color: var(--accent);
+  border-left-width: 3px;
+}
+
+.relation-dock__relations > button[data-edge-family="structural"] {
+  border-left-color: var(--ink);
+  border-left-width: 3px;
+}
+
+.relation-dock__port {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper-strong);
+  box-shadow: 0 0 0 3px rgba(23, 32, 28, 0.04);
+}
+
+.relation-dock__relations > button[data-scope="local"] .relation-dock__port {
+  background: var(--ink);
+}
+
+.relation-dock__relations > button[data-scope="internal"] .relation-dock__port {
+  border-style: dashed;
+  background: var(--field);
+}
+
+.relation-dock__relations > button[data-scope="boundary"] .relation-dock__port {
+  border-style: dotted;
+  background: transparent;
+}
+
+.relation-dock__copy {
+  min-width: 0;
+  display: grid;
+  gap: 0.18rem;
+}
+
+.relation-dock__copy small {
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.relation-dock__copy strong {
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relation-dock__copy em {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 0.55rem;
+  font-style: normal;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.relation-dock__arrow {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+/* Relation geometry is an additional representation, never the only one. */
+
+@media (max-width: 980px) {
+  .relation-geometry-label {
+    display: none;
+  }
+
+  .relation-dock {
+    right: 10px;
+    bottom: 10px;
+    width: min(300px, calc(100% - 20px));
+  }
+}
+
+@media (max-width: 720px) {
+  .world-ecology {
+    left: 0;
+  }
+
+  .relation-overlay {
+    opacity: 0.5;
+  }
+
+  .relation-dock {
+    width: min(288px, calc(100% - 16px));
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .relation-dock__body {
+    max-height: 250px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .relation-dock__relations > button {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .relation-path,
+  .relation-port,
+  .relation-arrow {
+    stroke: CanvasText;
+    fill: Canvas;
+  }
+
+  .relation-arrow {
+    fill: CanvasText;
+  }
+
+  .relation-geometry-label,
+  .relation-dock,
+  .relation-dock__relations > button,
+  .relation-dock__chevron,
+  .relation-dock__counts i {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+}
