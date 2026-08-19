@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { WorldApp } from "@/components/world-app";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, isDescendantOf, nodes } from "@/lib/content";
+import { defaultProjectionForNode, parseProjection } from "@/lib/view-projection";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
 import { ChessLanding } from "@/components/product-landing/ChessLanding";
@@ -31,6 +32,7 @@ type PageProps = {
   searchParams: Promise<{
     world?: string | string[];
     gestalt?: string | string[];
+    view?: string | string[];
   }>;
 };
 
@@ -195,11 +197,13 @@ export default async function Page({ params, searchParams }: PageProps) {
   const initialGestaltId = requestedGestalt && isDescendantOf(node.id, requestedGestalt.id)
     ? requestedGestalt.id
     : node.id;
+  const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
 
   return (
     <WorldApp
       initialNodeId={node.id}
       initialGestaltId={initialGestaltId}
+      initialProjection={initialProjection}
       skipLanding={skipLanding}
     />
   );
