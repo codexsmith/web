@@ -3,13 +3,12 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BoundaryFrame } from "@/components/boundary-frame";
-import { FocusTelemetry } from "@/components/focus-telemetry";
+import { EvidenceView } from "@/components/evidence-view";
 import { InspectionPanel } from "@/components/inspection-panel";
 import { LandingSequence } from "@/components/landing-sequence";
 import { SearchPanel } from "@/components/search-panel";
-import { StateEcology } from "@/components/state-ecology";
 import { WorldEcology } from "@/components/world-ecology";
-import { TransitionDirection, WorldView } from "@/components/world-view";
+import { RecordView, TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
 import {
   getAncestors,
@@ -21,10 +20,12 @@ import {
   getSiblings,
   isDescendantOf,
 } from "@/lib/content";
+import { defaultProjectionForNode, type ProjectionMode } from "@/lib/view-projection";
 
 type WorldAppProps = {
   initialNodeId: string;
   initialGestaltId?: string;
+  initialProjection?: ProjectionMode;
   skipLanding: boolean;
 };
 
@@ -46,7 +47,7 @@ function inferDirection(fromId: string, toId: string): TransitionDirection {
   return "cross";
 }
 
-function stateUrl(focusId: string, gestaltId: string) {
+function stateUrl(focusId: string, gestaltId: string, projection: ProjectionMode) {
   const focusPath = getPathForNode(focusId);
   const params = new URLSearchParams();
 
@@ -58,15 +59,26 @@ function stateUrl(focusId: string, gestaltId: string) {
     params.set("gestalt", gestaltId);
   }
 
+  if (projection !== defaultProjectionForNode(focusId)) {
+    params.set("view", projection);
+  }
+
   const query = params.toString();
   return query ? `${focusPath}?${query}` : focusPath;
 }
 
-export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: WorldAppProps) {
+export function WorldApp({
+  initialNodeId,
+  initialGestaltId,
+  initialProjection,
+  skipLanding,
+}: WorldAppProps) {
   const router = useRouter();
   const resolvedInitialGestaltId = initialGestaltId ?? initialNodeId;
+  const resolvedInitialProjection = initialProjection ?? defaultProjectionForNode(initialNodeId);
   const [focusId, setFocusId] = useState(initialNodeId);
   const [gestaltId, setGestaltId] = useState(resolvedInitialGestaltId);
+  const [projection, setProjection] = useState<ProjectionMode>(resolvedInitialProjection);
   const [introEnabled, setIntroEnabled] = useState(initialNodeId === "root" && !skipLanding);
   const [landingProgress, setLandingProgress] = useState(skipLanding ? 1 : 0);
   const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>("none");
@@ -80,7 +92,7 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
   const rootBranches = getChildren("root").map(hydrateContentNode);
   const canZoomOut = Boolean(getParent(gestaltId));
   const canZoomIn = gestaltId !== focusId && Boolean(getImmediateChildTowardFocus(gestaltId, focusId));
-  const worldMode = introEnabled ? "landing" : getChildren(gestaltId).length === 0 ? "detail" : "world";
+  const worldMode = introEnabled ? "landing" : projection === "record" ? "detail" : projection;
 
   const activeInspection = useMemo(() => {
     if (!inspectionId) return undefined;
@@ -90,10 +102,11 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
   useEffect(() => {
     setFocusId(initialNodeId);
     setGestaltId(initialGestaltId ?? initialNodeId);
+    setProjection(initialProjection ?? defaultProjectionForNode(initialNodeId));
     setIntroEnabled(initialNodeId === "root" && !skipLanding);
     setLandingProgress(initialNodeId === "root" && !skipLanding ? 0 : 1);
     setInspectionId(null);
-  }, [initialNodeId, initialGestaltId, skipLanding]);
+  }, [initialNodeId, initialGestaltId, initialProjection, skipLanding]);
 
   useEffect(() => {
     const locked = !introEnabled;
@@ -128,9 +141,9 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
 
   const replaceGestaltUrl = useCallback(
     (nextGestaltId: string) => {
-      router.replace(stateUrl(focusId, nextGestaltId), { scroll: false });
+      router.replace(stateUrl(focusId, nextGestaltId, projection), { scroll: false });
     },
-    [focusId, router],
+    [focusId, projection, router],
   );
 
   const navigate = useCallback(
@@ -143,10 +156,22 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
       setInspectionId(null);
       setIntroEnabled(false);
       setLandingProgress(1);
-      router.push(stateUrl(targetId, targetId));
+      router.push(stateUrl(targetId, targetId, projection), { scroll: false });
     },
-    [focusId, router],
+    [focusId, projection, router],
   );
+
+  const navigateHome = useCallback(() => {
+    setTransitionDirection("up");
+    setTransitionKey((value) => value + 1);
+    setFocusId("root");
+    setGestaltId("root");
+    setProjection("world");
+    setInspectionId(null);
+    setIntroEnabled(false);
+    setLandingProgress(1);
+    router.push(stateUrl("root", "root", "world"), { scroll: false });
+  }, [router]);
 
   const navigateFocusPath = useCallback(
     (targetId: string) => {
@@ -163,9 +188,9 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
       setInspectionId(null);
       setIntroEnabled(false);
       setLandingProgress(1);
-      router.push(stateUrl(targetId, nextGestaltId));
+      router.push(stateUrl(targetId, nextGestaltId, projection), { scroll: false });
     },
-    [focusId, gestaltId, router],
+    [focusId, gestaltId, projection, router],
   );
 
   const zoomOut = useCallback(() => {
@@ -187,6 +212,18 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
     replaceGestaltUrl(child.id);
   }, [focusId, gestaltId, replaceGestaltUrl]);
 
+  const changeProjection = useCallback(
+    (nextProjection: ProjectionMode) => {
+      if (nextProjection === projection) return;
+      setProjection(nextProjection);
+      setTransitionDirection("none");
+      setTransitionKey((value) => value + 1);
+      setInspectionId(null);
+      router.push(stateUrl(focusId, gestaltId, nextProjection), { scroll: false });
+    },
+    [focusId, gestaltId, projection, router],
+  );
+
   const openInspection = useCallback((nextInspectionId: string) => {
     setInspectionId(nextInspectionId);
   }, []);
@@ -194,7 +231,7 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
   const frameVisible = !introEnabled || landingProgress > 0.48;
 
   return (
-    <div className="site-shell" data-world-mode={worldMode}>
+    <div className="site-shell" data-world-mode={worldMode} data-projection={projection}>
       <BoundaryFrame
         visible={frameVisible}
         focusNode={focusNode}
@@ -203,18 +240,20 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
         rootBranches={rootBranches}
         canZoomOut={canZoomOut}
         canZoomIn={canZoomIn}
-        onHome={() => navigate("root", "up")}
+        projection={projection}
+        onHome={navigateHome}
         onBack={() => router.back()}
         onNavigate={navigate}
         onFocusPath={navigateFocusPath}
         onZoomOut={zoomOut}
         onZoomIn={zoomIn}
+        onProjectionChange={changeProjection}
         onSearch={() => setSearchOpen(true)}
       />
 
       {introEnabled ? (
         <LandingSequence branches={rootBranches} onNavigate={navigate} onProgress={setLandingProgress} />
-      ) : (
+      ) : projection === "world" ? (
         <>
           <WorldView
             gestaltNode={gestaltNode}
@@ -224,19 +263,27 @@ export function WorldApp({ initialNodeId, initialGestaltId, skipLanding }: World
             onNavigate={navigate}
             onInspect={openInspection}
           />
-          <FocusTelemetry
-            focusNode={focusNode}
-            gestaltNode={gestaltNode}
-            onInspect={openInspection}
-            onNavigate={(targetId) => navigate(targetId, "cross")}
-          />
-          <StateEcology focusNode={focusNode} gestaltNode={gestaltNode} />
           <WorldEcology
             focusNode={focusNode}
             gestaltNode={gestaltNode}
             onNavigate={(targetId) => navigate(targetId, "cross")}
           />
         </>
+      ) : projection === "record" ? (
+        <RecordView
+          focusNode={focusNode}
+          transitionDirection={transitionDirection}
+          transitionKey={transitionKey}
+          onNavigate={navigate}
+          onInspect={openInspection}
+        />
+      ) : (
+        <EvidenceView
+          focusNode={focusNode}
+          gestaltNode={gestaltNode}
+          onInspect={openInspection}
+          onNavigate={(targetId) => navigate(targetId, "cross")}
+        />
       )}
 
       {activeInspection ? (
