@@ -14,6 +14,7 @@ type LandingStyle = CSSProperties & {
   "--world-progress": number;
   "--hero-exit-progress": number;
   "--logo-progress": number;
+  "--logo-opacity": number;
 };
 
 type LandingGeometry = {
@@ -112,7 +113,10 @@ export function LandingSequence({ branches, onNavigate, onProgress }: LandingSeq
 
   const heroExitProgress = clamp((progress - 0.08) / 0.42);
   const worldProgress = clamp((progress - 0.14) / 0.66);
-  const logoProgress = clamp((progress - 0.18) / 0.82);
+  const logoProgress = clamp((progress - 0.16) / 0.42);
+  const logoReveal = clamp((progress - 0.14) / 0.14);
+  const logoHandoff = 1 - clamp((progress - 0.44) / 0.16);
+  const logoOpacity = logoReveal * logoHandoff;
   const heroInteractive = progress < 0.48;
   const worldInteractive = worldProgress >= 0.42;
 
@@ -121,6 +125,7 @@ export function LandingSequence({ branches, onNavigate, onProgress }: LandingSeq
     "--world-progress": worldProgress,
     "--hero-exit-progress": heroExitProgress,
     "--logo-progress": logoProgress,
+    "--logo-opacity": logoOpacity,
   };
 
   const enterWorld = () => {
@@ -182,7 +187,7 @@ export function LandingSequence({ branches, onNavigate, onProgress }: LandingSeq
           className="landing-world"
           data-interactive={worldInteractive ? "true" : "false"}
           aria-label="Boundary First Labs world"
-          aria-hidden={worldProgress < 0.26}
+          aria-hidden={!worldInteractive}
         >
           <div className="landing-world__field" />
           <div className="landing-world__title">
