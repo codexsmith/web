@@ -8,18 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "content:build": "node scripts/build_public_content.mjs",
-    "content:check": "node scripts/build_public_content.mjs --check",
-    "architecture:check": "node scripts/check_outer_architecture.mjs",
-    "acceptance:runtime": "node scripts/check_launch_readiness.mjs",
-    "graph:build": "python scripts/build_graph_context.py",
-    "graph:check": "python scripts/build_graph_context.py --check",
-    "graph:dry-run": "python scripts/build_graph_context.py --dry-run",
-    "graph:test": "python -m unittest scripts/test_build_graph_context.py",
-    "test:ui": "vitest",
-    "test:contracts": "vitest run tests/public-architecture.test.ts tests/product-landing-presentation.test.ts tests/site-journey-refinement.test.ts",
-    "ui:normalize": "python scripts/opacity_purge.py && python scripts/replace_email.py",
-    "ui:check": "python scripts/check_ui_stabilization.py"
+    "contracts:check": "node scripts/check_v2_contracts.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
