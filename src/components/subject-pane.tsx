@@ -9,14 +9,79 @@ type SubjectPaneProps = {
   onNavigate: (id: string) => void;
 };
 
+type SubjectAction =
+  | {
+      kind: "record";
+      key: string;
+      label: string;
+      eyebrow: string;
+      summary?: string;
+      href: string;
+    }
+  | {
+      kind: "inspection";
+      key: string;
+      label: string;
+      eyebrow: string;
+      summary: string;
+      inspectionId: string;
+    }
+  | {
+      kind: "relation";
+      key: string;
+      label: string;
+      eyebrow: string;
+      summary: string;
+      nodeId: string;
+      edgeType: string;
+    };
+
+function ActionCard({
+  action,
+  onInspect,
+  onNavigate,
+}: {
+  action: SubjectAction;
+  onInspect: (inspectionId: string) => void;
+  onNavigate: (id: string) => void;
+}) {
+  if (action.kind === "record") {
+    return (
+      <a href={action.href}>
+        <span>{action.eyebrow}</span>
+        <strong>{action.label}</strong>
+        {action.summary ? <small>{action.summary}</small> : null}
+      </a>
+    );
+  }
+
+  if (action.kind === "inspection") {
+    return (
+      <button onClick={() => onInspect(action.inspectionId)}>
+        <span>{action.eyebrow}</span>
+        <strong>{action.label}</strong>
+        <small>{action.summary}</small>
+      </button>
+    );
+  }
+
+  return (
+    <button onClick={() => onNavigate(action.nodeId)} data-edge-type={action.edgeType}>
+      <span>{action.eyebrow}</span>
+      <strong>{action.label}</strong>
+      <small>{action.summary}</small>
+    </button>
+  );
+}
+
 export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
   const body = node.body ?? [];
   const status = node.status;
   const publication = node.publication;
   const records = node.links ?? [];
   const inspections = node.inspection ?? [];
-  const visibleBody = body.slice(0, 2);
-  const remainingBody = body.slice(2);
+  const immediateBody = body[0];
+  const remainingBody = body.slice(1);
   const isBranch = getChildren(node.id).length > 0;
   const relations = isBranch
     ? getCrossEdges(node.id).map((edge) => ({
@@ -25,22 +90,67 @@ export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
         direction: edge.from === node.id ? "outgoing" as const : "incoming" as const,
       }))
     : [];
-  const hasExploratoryInspection = inspections.some((inspection) => inspection.id.startsWith("exploratory-"));
+
+  const recordActions: SubjectAction[] = records.map((record) => ({
+    kind: "record",
+    key: `record:${record.href}`,
+    label: record.label,
+    eyebrow: record.eyebrow ?? "Open record",
+    summary: record.summary,
+    href: record.href,
+  }));
+
+  const inspectionActions: SubjectAction[] = inspections.map((inspection) => ({
+    kind: "inspection",
+    key: `inspection:${inspection.id}`,
+    label: inspection.label,
+    eyebrow: inspection.id.startsWith("exploratory-")
+      ? "Explore · calibration only"
+      : inspection.eyebrow ?? "Inspect",
+    summary: inspection.summary,
+    inspectionId: inspection.id,
+  }));
+
+  const relationActions: SubjectAction[] = relations.map((relation) => ({
+    kind: "relation",
+    key: `relation:${relation.from}:${relation.to}:${relation.type}`,
+    label: relation.node.label,
+    eyebrow: relation.direction === "outgoing" ? relation.label : `Incoming · ${relation.label}`,
+    summary: relation.type,
+    nodeId: relation.node.id,
+    edgeType: relation.type,
+  }));
+
+  // Ordinary World interaction should expose a small, diverse set of useful paths first
+  // rather than dumping every available record/evidence/relation into the initial pane.
+  const orderedActions = [
+    relationActions[0],
+    recordActions[0],
+    inspectionActions[0],
+    recordActions[1],
+    relationActions[1],
+    inspectionActions[1],
+    ...recordActions.slice(2),
+    ...relationActions.slice(2),
+    ...inspectionActions.slice(2),
+  ].filter((action): action is SubjectAction => Boolean(action));
+
+  const primaryActions = orderedActions.slice(0, 4);
+  const remainingActions = orderedActions.slice(4);
 
   const hasContent =
     body.length > 0 ||
     Boolean(status) ||
     Boolean(publication) ||
-    records.length > 0 ||
-    inspections.length > 0 ||
-    relations.length > 0;
+    primaryActions.length > 0 ||
+    remainingActions.length > 0;
 
   if (!hasContent) return null;
 
   return (
-    <section className="subject-pane" aria-label={`Overview for ${node.label}`}>
+    <section className="subject-pane" aria-label={`At a glance for ${node.label}`}>
       <header className="subject-pane__header">
-        <span className="subject-pane__label">Overview</span>
+        <span className="subject-pane__label">At a glance</span>
         {publication ? (
           <span className="work-status-chip publication-status-chip" data-stage={publication.stage}>
             {publication.label}
@@ -50,86 +160,65 @@ export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
         ) : null}
       </header>
 
+      {immediateBody ? (
+        <div className="subject-pane__body">
+          <p>{immediateBody}</p>
+        </div>
+      ) : null}
+
       {publication ? (
         <div className="subject-pane__standing">
-          <strong>{publication.documentClass}</strong>
+          <span>Next publication gate</span>
           <p>{publication.nextGate}</p>
         </div>
       ) : status ? (
         <div className="subject-pane__standing">
-          <strong>{status.label}</strong>
+          <span>Current standing</span>
           <p>{status.detail}</p>
         </div>
       ) : null}
 
-      {visibleBody.length ? (
-        <div className="subject-pane__body">
-          {visibleBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      {primaryActions.length ? (
+        <section className="subject-pane__primary" aria-label="Immediate next paths">
+          <div className="subject-pane__group-label">Continue from here</div>
+          <div className="subject-pane__action-grid">
+            {primaryActions.map((action) => (
+              <ActionCard
+                key={action.key}
+                action={action}
+                onInspect={onInspect}
+                onNavigate={onNavigate}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {remainingBody.length || remainingActions.length ? (
+        <div className="subject-pane__secondary">
           {remainingBody.length ? (
-            <details className="subject-pane__more">
-              <summary>Read more context · {remainingBody.length}</summary>
-              <div>
+            <details className="subject-pane__disclosure">
+              <summary>More context · {remainingBody.length}</summary>
+              <div className="subject-pane__disclosure-body">
                 {remainingBody.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
               </div>
             </details>
           ) : null}
-        </div>
-      ) : null}
 
-      {records.length || inspections.length || relations.length ? (
-        <div className="subject-pane__actions">
-          {records.length ? (
-            <section className="subject-pane__group" aria-label="Retained records">
-              <div className="subject-pane__group-label">Records</div>
-              <div className="subject-pane__action-grid">
-                {records.map((record) => (
-                  <a href={record.href} key={`${node.id}-${record.href}`}>
-                    <span>{record.eyebrow ?? "Record"}</span>
-                    <strong>{record.label}</strong>
-                    {record.summary ? <small>{record.summary}</small> : null}
-                  </a>
+          {remainingActions.length ? (
+            <details className="subject-pane__disclosure">
+              <summary>More paths · {remainingActions.length}</summary>
+              <div className="subject-pane__action-grid subject-pane__action-grid--secondary">
+                {remainingActions.map((action) => (
+                  <ActionCard
+                    key={action.key}
+                    action={action}
+                    onInspect={onInspect}
+                    onNavigate={onNavigate}
+                  />
                 ))}
               </div>
-            </section>
-          ) : null}
-
-          {inspections.length ? (
-            <section className="subject-pane__group" aria-label="Inspectable context">
-              <div className="subject-pane__group-label">Inspect</div>
-              {hasExploratoryInspection ? (
-                <p className="subject-pane__notice">
-                  Exploratory reformulations remain calibration, derivation, proof, or experiment obligations until their native validation gates are met.
-                </p>
-              ) : null}
-              <div className="subject-pane__action-grid">
-                {inspections.map((inspection) => (
-                  <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
-                    <span>{inspection.eyebrow ?? "Through"}</span>
-                    <strong>{inspection.label}</strong>
-                    <small>{inspection.summary}</small>
-                  </button>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {relations.length ? (
-            <section className="subject-pane__group" aria-label="Typed connections">
-              <div className="subject-pane__group-label">Connections</div>
-              <div className="subject-pane__action-grid">
-                {relations.map((relation) => (
-                  <button
-                    key={`${relation.from}-${relation.to}-${relation.type}`}
-                    onClick={() => onNavigate(relation.node.id)}
-                    data-edge-type={relation.type}
-                  >
-                    <span>{relation.direction === "outgoing" ? relation.label : `incoming · ${relation.label}`}</span>
-                    <strong>{relation.node.label}</strong>
-                    <small>{relation.type}</small>
-                  </button>
-                ))}
-              </div>
-            </section>
+            </details>
           ) : null}
         </div>
       ) : null}
