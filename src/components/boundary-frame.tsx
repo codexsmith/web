@@ -179,8 +179,8 @@ export function BoundaryFrame({
 
       <footer className="boundary-frame__bottom">
         {onProjectionChange ? (
-          <div className="projection-switcher" aria-label={`Representation of ${focusNode.label}`}>
-            <span className="projection-switcher__label">View</span>
+          <div className="projection-switcher" aria-label={`Deeper representations of ${focusNode.label}`}>
+            <span className="projection-switcher__label">Depth</span>
             {projectionModes.map((mode) => (
               <button
                 key={mode}
