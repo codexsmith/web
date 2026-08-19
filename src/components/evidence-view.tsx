@@ -25,11 +25,12 @@ export function EvidenceView({ focusNode, gestaltNode, onInspect, onNavigate }: 
   }));
   const ledgerEvents = getSemanticEvents(focusNode.id);
   const sourceRefs = Array.from(
-    new Set(
-      inspections
+    new Set([
+      ...inspections
         .map((inspection) => inspection.sourceRef)
         .filter((sourceRef): sourceRef is string => Boolean(sourceRef)),
-    ),
+      ...ledgerEvents.flatMap((event) => event.evidenceRefs),
+    ]),
   );
 
   return (
@@ -130,7 +131,7 @@ export function EvidenceView({ focusNode, gestaltNode, onInspect, onNavigate }: 
                 ))}
               </ul>
             ) : (
-              <p className="evidence-empty">No explicit source references are declared on the current inspections.</p>
+              <p className="evidence-empty">No explicit source references are declared on current inspections or lineage events.</p>
             )}
           </section>
 
