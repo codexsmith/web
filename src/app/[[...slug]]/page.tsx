@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
 import { hydrateContentNode } from "@/lib/content-projections";
-import { getNodeByPath, nodes } from "@/lib/content";
+import { getNodeByPath, isDescendantOf, nodes } from "@/lib/content";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
 import { ChessLanding } from "@/components/product-landing/ChessLanding";
@@ -29,7 +28,10 @@ import {
 
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
-  searchParams: Promise<{ world?: string | string[] }>;
+  searchParams: Promise<{
+    world?: string | string[];
+    gestalt?: string | string[];
+  }>;
 };
 
 export const dynamicParams = true;
@@ -186,6 +188,19 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   const node = getNodeByPath(slug);
   const skipLanding = query.world === "1";
+  const requestedGestaltId = typeof query.gestalt === "string" ? query.gestalt : undefined;
+  const requestedGestalt = requestedGestaltId
+    ? nodes.find((candidate) => candidate.id === requestedGestaltId)
+    : undefined;
+  const initialGestaltId = requestedGestalt && isDescendantOf(node.id, requestedGestalt.id)
+    ? requestedGestalt.id
+    : node.id;
 
-  return <WorldApp initialNodeId={node.id} skipLanding={skipLanding} />;
+  return (
+    <WorldApp
+      initialNodeId={node.id}
+      initialGestaltId={initialGestaltId}
+      skipLanding={skipLanding}
+    />
+  );
 }
