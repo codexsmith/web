@@ -24,7 +24,7 @@ function forbidMatch(path, pattern, message) {
   }
 }
 
-// Projection vocabulary stays stable: Root defaults to World; non-root canonical nodes default to Record.
+// Projection vocabulary stays stable, but World is now the ordinary public surface.
 requireMatch(
   "src/lib/view-projection.ts",
   /projectionModes\s*=\s*\["world",\s*"record",\s*"evidence",\s*"gestalt"\]/,
@@ -32,8 +32,13 @@ requireMatch(
 );
 requireMatch(
   "src/lib/view-projection.ts",
-  /nodeId\s*===\s*"root"\s*\?\s*"world"\s*:\s*"record"/,
-  "Root must default to World and non-root content to Record",
+  /defaultProjectionForNode[\s\S]*return\s+"world"/,
+  "Every canonical content URL must default to the content-bearing World surface",
+);
+requireMatch(
+  "src/lib/view-projection.ts",
+  /Record, Evidence, and Gestalt deepen that state/,
+  "Specialized projections must deepen the ordinary World rather than own basic content discovery",
 );
 
 // Hero = threshold; Root World = structural operating world. The threshold must not become a second root map.
@@ -125,16 +130,44 @@ requireMatch(
   "Sibling traversal must remain owned by the peer rail rather than the Focus Path",
 );
 
-// Record must expose public body and structural children rather than hiding them in World.
+// Ordinary World traversal must expose useful content/actions before specialized views are needed.
+requireExists(
+  "src/components/subject-pane.tsx",
+  "Content-first World must have a reusable subject overview pane",
+);
+requireExists(
+  "src/app/content-first-world.css",
+  "Content-first World layout/style layer must exist",
+);
+requireMatch(
+  "src/components/world-view.tsx",
+  /SubjectPane[\s\S]*!isRoot[\s\S]*SubjectPane/,
+  "Branch and leaf World surfaces must expose the selected subject overview directly",
+);
+forbidMatch(
+  "src/components/world-view.tsx",
+  /world-heading__context/,
+  "Body copy must live in the normal content pane rather than being squeezed into the World heading",
+);
+requireMatch(
+  "src/components/subject-pane.tsx",
+  /node\.body[\s\S]*node\.status[\s\S]*node\.publication[\s\S]*node\.links[\s\S]*node\.inspection[\s\S]*getCrossEdges/,
+  "Subject overview must expose body, standing, retained records, inspections, and typed relations",
+);
+requireMatch(
+  "src/components/subject-pane.tsx",
+  /Read more context[\s\S]*Records[\s\S]*Inspect[\s\S]*Connections/,
+  "Overflow content must remain available through ordinary inline disclosure and click interactions",
+);
 requireMatch(
   "src/components/world-view.tsx",
   /Contained regions/,
-  "Record projection must expose contained regions",
+  "Record projection must remain an exhaustive structural/document surface",
 );
 requireMatch(
   "src/components/world-view.tsx",
   /inspection\.summary/,
-  "Record/World inspection affordances must expose substantive inspection summaries",
+  "Record inspection affordances must expose substantive inspection summaries",
 );
 
 // Rich retained content is projected through bounded editorial layers instead of being wired raw into runtime.
@@ -248,6 +281,11 @@ requireMatch(
   /overflow-wrap:\s*anywhere/,
   "Long public text must have an explicit containment escape rule",
 );
+requireMatch(
+  "src/app/content-first-world.css",
+  /subject-pane[\s\S]*overflow-wrap:\s*anywhere[\s\S]*@media \(max-width: 980px\)/,
+  "Inline subject content must preserve text and collapse lawfully under constrained widths",
+);
 
 // Gestalt is process placement/filter, not ancestry or spatial containment zoom.
 requireMatch(
@@ -261,7 +299,7 @@ requireMatch(
   "Gestalt must expose the BFL operating synthesis",
 );
 
-// Active style cascade must include the threshold and traversal semantics, but not retired ecology layers.
+// Active style cascade must include content-first World, threshold, and traversal semantics, but not retired ecology layers.
 forbidMatch(
   "src/app/layout.tsx",
   /world-ecology\.css|focus-telemetry|state-ecology|state-surface-projection|landing-stability/,
@@ -269,8 +307,8 @@ forbidMatch(
 );
 requireMatch(
   "src/app/layout.tsx",
-  /root-world-and-content-stability\.css[\s\S]*hero-screen\.css[\s\S]*traversal-history\.css/,
-  "Root readability, hero threshold, and traversal-history layers must all be active",
+  /root-world-and-content-stability\.css[\s\S]*hero-screen\.css[\s\S]*traversal-history\.css[\s\S]*content-first-world\.css/,
+  "Root readability, hero threshold, traversal history, and content-first World layers must all be active",
 );
 
 // The retired archive must represent final v1, including the late journey-refinement branch merged into main.
