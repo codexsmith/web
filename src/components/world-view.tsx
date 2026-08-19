@@ -7,6 +7,7 @@ import {
   getParent,
 } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { SubjectPane } from "@/components/subject-pane";
 
 export type TransitionDirection =
   | "none"
@@ -43,7 +44,7 @@ export function WorldView({
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
       {isLeaf ? (
-        <LeafWorld node={renderedNode} onNavigate={onNavigate} />
+        <LeafWorld node={renderedNode} onNavigate={onNavigate} onInspect={onInspect} />
       ) : (
         <BranchWorld node={renderedNode} regions={regions} onNavigate={onNavigate} onInspect={onInspect} />
       )}
@@ -81,9 +82,10 @@ export function RecordView({
 type LeafWorldProps = {
   node: ContentNode;
   onNavigate: (id: string, direction?: TransitionDirection) => void;
+  onInspect: (inspectionId: string) => void;
 };
 
-function LeafWorld({ node, onNavigate }: LeafWorldProps) {
+function LeafWorld({ node, onNavigate, onInspect }: LeafWorldProps) {
   const parent = getParent(node.id);
   const renderedParent = parent ? hydrateContentNode(parent) : undefined;
   const relations = getCrossEdges(node.id).map((edge) => ({
@@ -95,22 +97,17 @@ function LeafWorld({ node, onNavigate }: LeafWorldProps) {
   return (
     <section className="leaf-world" data-node-id={node.id} data-kind={node.kind}>
       <header className="world-heading">
-        <p className="eyebrow">World projection · local boundary</p>
+        <p className="eyebrow">{node.eyebrow}</p>
         <h1>{node.label}</h1>
         <p>{node.summary}</p>
       </header>
 
       <div className="leaf-world__field">
-        <article className="leaf-world__focus" data-node-id={node.id}>
-          <small>{node.eyebrow}</small>
-          {node.publication ? (
-            <span className="work-status-chip publication-status-chip" data-stage={node.publication.stage}>
-              {node.publication.label}
-            </span>
-          ) : null}
-          <strong>{node.label}</strong>
-          <p>{node.summary}</p>
-        </article>
+        <SubjectPane
+          node={node}
+          onInspect={onInspect}
+          onNavigate={(targetId) => onNavigate(targetId, "cross")}
+        />
 
         <div className="leaf-world__ports" aria-label={`Boundary ports for ${node.label}`}>
           {renderedParent ? (
@@ -158,9 +155,6 @@ type BranchWorldProps = {
 };
 
 function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps) {
-  const inspections = node.inspection ?? [];
-  const exploratoryInspections = inspections.filter((inspection) => inspection.id.startsWith("exploratory-"));
-  const supportingInspections = inspections.filter((inspection) => !inspection.id.startsWith("exploratory-"));
   const isRoot = node.id === "root";
 
   return (
@@ -174,8 +168,15 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
         <p className="eyebrow">{isRoot ? "Root World · operating environment" : node.eyebrow}</p>
         <h1>{node.label}</h1>
         <p>{node.summary}</p>
-        {node.body?.[0] ? <p className="world-heading__context">{node.body[0]}</p> : null}
       </header>
+
+      {!isRoot ? (
+        <SubjectPane
+          node={node}
+          onInspect={onInspect}
+          onNavigate={(targetId) => onNavigate(targetId, "cross")}
+        />
+      ) : null}
 
       <div className={`district-grid district-grid--${Math.min(regions.length, 6)}`} aria-label={`${node.label} regions`}>
         {regions.map((child, index) => (
@@ -202,56 +203,6 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
           </button>
         ))}
       </div>
-
-      {node.links?.length ? (
-        <section className="node-section branch-world__context-section node-section--records">
-          <div className="node-section__label">Connected operative surfaces</div>
-          <div className="record-links">
-            {node.links.map((link) => (
-              <a href={link.href} key={`${node.id}-${link.href}`}>
-                <span>{link.eyebrow ?? "Related surface"}</span>
-                <strong>{link.label}</strong>
-                {link.summary ? <small>{link.summary}</small> : null}
-              </a>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {supportingInspections.length ? (
-        <section className="node-section branch-world__context-section node-section--inspection">
-          <div className="node-section__label">Supporting research</div>
-          <div className="inspection-links">
-            {supportingInspections.map((inspection) => (
-              <button key={inspection.id} onClick={() => onInspect(inspection.id)} title={`Inspect ${inspection.label}`}>
-                <span>Through</span>
-                <strong>{inspection.label}</strong>
-                <small>{inspection.summary}</small>
-              </button>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      {exploratoryInspections.length ? (
-        <section className="node-section branch-world__context-section branch-world__exploratory-section node-section--inspection">
-          <div className="node-section__label">Exploratory Research</div>
-          <p className="branch-world__section-intro">
-            Reformulation is a research instrument, not a solution claim. Solved targets calibrate the representation;
-            open problems remain reformulations, proof obligations, derivation audits, or experiments until their native
-            validation gates are met.
-          </p>
-          <div className="inspection-links">
-            {exploratoryInspections.map((inspection) => (
-              <button key={inspection.id} onClick={() => onInspect(inspection.id)} title={`Explore ${inspection.label}`}>
-                <span>Explore</span>
-                <strong>{inspection.label}</strong>
-                <small>{inspection.summary}</small>
-              </button>
-            ))}
-          </div>
-        </section>
-      ) : null}
     </section>
   );
 }
@@ -338,7 +289,7 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
           <div className="node-surface__body node-surface__body--placeholder">
             <p>
               This public record is intentionally concise. Its contained regions, evidence, retained records, and typed
-              relationships remain available below rather than being hidden in another view.
+              relationships remain available below.
             </p>
           </div>
         )}
