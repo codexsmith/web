@@ -74,13 +74,6 @@ export function WorldApp({ initialNodeId, initialProjection, initialProcessScope
   }, [focusNode, inspectionId]);
 
   useEffect(() => {
-    setFocusId(initialNodeId);
-    setProjection(initialProjection ?? defaultProjectionForNode(initialNodeId));
-    setProcessScope(initialProcessScope);
-    setInspectionId(null);
-  }, [initialNodeId, initialProjection, initialProcessScope]);
-
-  useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       const isTyping = target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.isContentEditable;
