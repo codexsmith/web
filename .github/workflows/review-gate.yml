@@ -36,6 +36,9 @@ jobs:
       - name: Check publication portfolio contracts
         run: node scripts/check_publication_contracts.mjs
 
+      - name: Check industrial UI contracts
+        run: node scripts/check_industrial_ui_contracts.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
