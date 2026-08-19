@@ -41,7 +41,10 @@ export type SemanticEvent = {
   /** Date this event was admitted into the public semantic ledger. */
   recordedAt: string;
   datePrecision: "day" | "month" | "year" | "unknown";
+  /** Party that performed, declared, or owned the represented domain event. */
   actor: SemanticEventActor;
+  /** Party responsible for admitting this representation into the public ledger. */
+  recordedBy: SemanticEventActor;
   evidenceRefs: string[];
   resultingStage?: DeliveryStage;
   sourceStatus?: string;
@@ -75,6 +78,7 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
       recordedAt: publicLedgerRecordedAt,
       datePrecision: "unknown",
       actor: boundaryFirstLabs,
+      recordedBy: boundaryFirstLabs,
       evidenceRefs: [
         "src/content/product-landing-pages/corpus-forge.json",
         "src/content/project_index.json#project-corpus-forge-agent-pipeline",
@@ -95,6 +99,7 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
       recordedAt: publicLedgerRecordedAt,
       datePrecision: "unknown",
       actor: boundaryFirstLabs,
+      recordedBy: boundaryFirstLabs,
       evidenceRefs: ["src/content/project_index.json#project-corpus-forge-agent-pipeline"],
       sourceStatus: "active / validation",
       standingEffect: "preserves",
@@ -113,6 +118,7 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
       recordedAt: publicLedgerRecordedAt,
       datePrecision: "unknown",
       actor: boundaryFirstLabs,
+      recordedBy: boundaryFirstLabs,
       evidenceRefs: ["src/content/product-landing-pages/agency-representation-audit.json"],
       resultingStage: "pilot",
       sourceStatus: "pilot-intake",
@@ -131,7 +137,11 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
         "The retained CityWatch record supports that civic-transparency software was built and delivered inside Augusta-Richmond County IT and is now represented as historical professional standing.",
       recordedAt: publicLedgerRecordedAt,
       datePrecision: "unknown",
-      actor: boundaryFirstLabs,
+      actor: {
+        label: "Augusta-Richmond County IT",
+        kind: "institution",
+      },
+      recordedBy: boundaryFirstLabs,
       evidenceRefs: ["src/content/product-landing-pages/augusta-citywatch.json"],
       resultingStage: "shipped",
       sourceStatus: "historical-project-no-current-affiliation",
@@ -151,6 +161,7 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
       recordedAt: publicLedgerRecordedAt,
       datePrecision: "unknown",
       actor: boundaryFirstLabs,
+      recordedBy: boundaryFirstLabs,
       evidenceRefs: ["src/content/product-landing-pages/boundary-first-ux.json"],
       resultingStage: "developed",
       sourceStatus: "launch-candidate",
@@ -170,6 +181,7 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
       recordedAt: publicLedgerRecordedAt,
       datePrecision: "unknown",
       actor: boundaryFirstLabs,
+      recordedBy: boundaryFirstLabs,
       evidenceRefs: [
         "Software Before Code retained public record",
         "Closure-Driven Software Development retained public record",
@@ -191,6 +203,7 @@ export const semanticEventLedger: Record<string, SemanticEvent[]> = {
       recordedAt: publicLedgerRecordedAt,
       datePrecision: "unknown",
       actor: boundaryFirstLabs,
+      recordedBy: boundaryFirstLabs,
       evidenceRefs: [
         "src/content/product-landing-pages/augusta-citywatch.json",
         "src/lib/public-interest-content.ts#augusta-civic",
@@ -217,6 +230,7 @@ export function semanticEventSearchText(nodeId: string): string[] {
     event.label,
     event.summary,
     event.actor.label,
+    event.recordedBy.label,
     event.sourceStatus,
     event.claimCeiling,
     ...event.evidenceRefs,
