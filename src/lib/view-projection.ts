@@ -10,8 +10,8 @@ export const projectionLabels: Record<ProjectionMode, string> = {
 };
 
 export const projectionDescriptions: Record<ProjectionMode, string> = {
-  world: "Spatial context, containment, and relations",
-  record: "Read the focal object's complete public record",
+  world: "Primary content, spatial context, containment, and ordinary traversal",
+  record: "Read the focal object's exhaustive public record",
   evidence: "Standing, provenance, evidence, lineage, and typed relations",
   gestalt: "Place the focal object inside the Boundary First operating loop",
 };
@@ -26,10 +26,10 @@ export function parseProjection(value: string | string[] | undefined): Projectio
 }
 
 /**
- * The root is the spatial home of the lab. Every other canonical content URL opens
- * its complete public record by default; World remains an explicit alternative
- * representation rather than a content-hiding default.
+ * World is the ordinary public surface for every content object. It carries enough
+ * inline content and interaction to understand and traverse the subject without first
+ * selecting a specialized projection. Record, Evidence, and Gestalt deepen that state.
  */
-export function defaultProjectionForNode(nodeId: string): ProjectionMode {
-  return nodeId === "root" ? "world" : "record";
+export function defaultProjectionForNode(_nodeId: string): ProjectionMode {
+  return "world";
 }
