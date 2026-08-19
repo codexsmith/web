@@ -65,6 +65,7 @@ export function WorldView({
           focusRegion={focusRegion}
           children={children}
           onNavigate={onNavigate}
+          onInspect={onInspect}
         />
       )}
     </main>
@@ -77,6 +78,7 @@ type BranchWorldProps = {
   focusRegion?: ContentNode;
   children: ContentNode[];
   onNavigate: (id: string, direction?: TransitionDirection) => void;
+  onInspect: (inspectionId: string) => void;
 };
 
 function BranchWorld({
@@ -85,8 +87,10 @@ function BranchWorld({
   focusRegion,
   children,
   onNavigate,
+  onInspect,
 }: BranchWorldProps) {
   const focusedBelow = focusNode.id !== gestaltNode.id;
+  const showGestaltContext = !focusedBelow;
 
   return (
     <section className={`branch-world branch-world--${gestaltNode.kind}`}>
@@ -127,6 +131,35 @@ function BranchWorld({
           );
         })}
       </div>
+
+      {showGestaltContext && gestaltNode.links?.length ? (
+        <section className="node-section branch-world__context-section">
+          <div className="node-section__label">Connected operative surfaces</div>
+          <div className="record-links">
+            {gestaltNode.links.map((link) => (
+              <a href={link.href} key={`${gestaltNode.id}-${link.href}`}>
+                <span>{link.eyebrow ?? "Related surface"}</span>
+                <strong>{link.label}</strong>
+                {link.summary ? <small>{link.summary}</small> : null}
+              </a>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {showGestaltContext && gestaltNode.inspection?.length ? (
+        <section className="node-section branch-world__context-section">
+          <div className="node-section__label">Supporting research</div>
+          <div className="inspection-links">
+            {gestaltNode.inspection.map((inspection) => (
+              <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
+                <span>Through</span>
+                <strong>{inspection.label}</strong>
+              </button>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </section>
   );
 }
