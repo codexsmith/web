@@ -6,6 +6,16 @@
   font-family: Georgia, "Times New Roman", serif;
 }
 
+.branch-world > .world-heading {
+  grid-row: 1 / span 8;
+}
+
+.branch-world__context-section {
+  grid-column: 2;
+  margin-top: 0;
+  align-self: start;
+}
+
 .work-status-chip {
   display: inline-flex;
   align-items: center;
@@ -168,6 +178,16 @@
 }
 
 @media (max-width: 760px) {
+  .branch-world > .world-heading,
+  .branch-world__context-section {
+    grid-row: auto;
+    grid-column: auto;
+  }
+
+  .branch-world__context-section {
+    margin-top: 1.5rem;
+  }
+
   .record-links,
   .inspection-record-links {
     grid-template-columns: 1fr;
