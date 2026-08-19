@@ -14,6 +14,7 @@ import "./semantic-event-ledger.css";
 import "./landing-stability.css";
 import "./industrial-interaction.css";
 import "./frame-detail-stability.css";
+import "./projection-views.css";
 
 export const metadata: Metadata = {
   title: {
