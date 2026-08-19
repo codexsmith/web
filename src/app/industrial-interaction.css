@@ -12,6 +12,61 @@
   transform: translate(1px, -50%);
 }
 
+/* Direct focus and contained focus are related but not identical states. */
+
+.district-card[data-focus-mode="direct"]::after {
+  content: "FOCUS";
+}
+
+.district-card[data-focus-mode="nested"]::after {
+  content: "CONTAINS FOCUS";
+}
+
+.district-card[data-focus-mode="nested"] > p {
+  -webkit-line-clamp: 1;
+}
+
+/* Root campus correction: no two institutional regions occupy the same spatial cell. */
+
+.branch-world[data-gestalt-id="root"] .district-grid {
+  grid-template-columns: 1.05fr 1.12fr 0.82fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="products"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="public-interest"] {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="about"] {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  min-height: 0;
+  align-self: stretch;
+}
+
+@media (max-width: 980px) {
+  .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .branch-world[data-gestalt-id="root"] .district-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}
+
 @media (max-width: 720px) {
   .direction-control--up:active {
     transform: translate(-50%, 1px);
@@ -20,6 +75,10 @@
   .direction-control--left:active,
   .direction-control--right:active {
     transform: translateY(1px);
+  }
+
+  .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -37,7 +96,9 @@
   .search-panel,
   .search-field input,
   .search-results button,
-  .direction-control {
+  .direction-control,
+  .compact-focus,
+  .focus-trace {
     background: Canvas;
     color: CanvasText;
     border-color: CanvasText;
@@ -52,7 +113,9 @@
 
   .district-card--focused::before,
   .work-status-panel::before,
-  .primary-nav button.is-active .primary-nav__signal {
+  .primary-nav button.is-active .primary-nav__signal,
+  .compact-focus__signal,
+  .focus-trace::before {
     background: Highlight;
   }
 }
