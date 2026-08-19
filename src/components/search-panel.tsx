@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { nodes } from "@/lib/content";
-import { hydrateAboutNode } from "@/lib/about-content";
+import { hydrateContentNode } from "@/lib/content-projections";
 
 type SearchPanelProps = {
   onClose: () => void;
@@ -11,7 +11,7 @@ type SearchPanelProps = {
 
 export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
   const [query, setQuery] = useState("");
-  const indexedNodes = useMemo(() => nodes.map(hydrateAboutNode), []);
+  const indexedNodes = useMemo(() => nodes.map(hydrateContentNode), []);
   const results = useMemo(() => {
     const needle = query.trim().toLowerCase();
     if (!needle) return indexedNodes.filter((node) => node.id !== "root").slice(0, 8);
@@ -46,7 +46,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
       <section className="search-panel">
         <div className="search-panel__header">
           <div>
-            <p className="eyebrow">Traverse by name or standing</p>
+            <p className="eyebrow">Traverse by name, standing, or concern</p>
             <h2 id="search-title">Search the lab</h2>
           </div>
           <button onClick={onClose}>Close</button>
@@ -57,7 +57,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
             autoFocus
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Founder, stewardship, shipped, Corpus Forge..."
+            placeholder="Accessibility, civic, founder, shipped, Corpus Forge..."
           />
         </label>
         <div className="search-results">
