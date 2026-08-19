@@ -2,6 +2,7 @@
 
 import {
   ContentNode,
+  getAncestors,
   getChildren,
   getCrossEdges,
   getImmediateChildTowardFocus,
@@ -103,17 +104,40 @@ function BranchWorld({
     (inspection) => !inspection.id.startsWith("exploratory-"),
   );
 
+  const fullFocusLineage = [
+    ...getAncestors(focusNode.id).map(hydrateContentNode),
+    focusNode,
+  ];
+  const gestaltLineageIndex = fullFocusLineage.findIndex((node) => node.id === gestaltNode.id);
+  const focusLineage = gestaltLineageIndex >= 0
+    ? fullFocusLineage.slice(gestaltLineageIndex)
+    : [gestaltNode, focusNode];
+  const focusDepth = Math.max(0, focusLineage.length - 1);
+  const focusVia = focusLineage
+    .slice(1, -1)
+    .map((node) => node.shortLabel ?? node.label)
+    .join(" › ");
+
   return (
-    <section className={`branch-world branch-world--${gestaltNode.kind}`} data-kind={gestaltNode.kind}>
+    <section
+      className={`branch-world branch-world--${gestaltNode.kind}`}
+      data-kind={gestaltNode.kind}
+      data-gestalt-id={gestaltNode.id}
+      data-focus-depth={focusDepth}
+    >
       <header className="world-heading">
         <p className="eyebrow">{gestaltNode.eyebrow}</p>
         <h1>{gestaltNode.label}</h1>
         <p>{gestaltNode.summary}</p>
         {gestaltNode.body?.length ? <p className="world-heading__context">{gestaltNode.body[0]}</p> : null}
         {focusedBelow ? (
-          <div className="focus-trace">
-            <span>Focal object</span>
+          <div className="focus-trace" aria-label={`${focusNode.label} remains the focal object ${focusDepth} levels inside ${gestaltNode.label}`}>
+            <span className="focus-trace__label">Focal object retained</span>
             <strong>{focusNode.label}</strong>
+            {focusVia ? <small className="focus-trace__via">via {focusVia}</small> : null}
+            <em className="focus-trace__depth">
+              {focusDepth} {focusDepth === 1 ? "layer" : "layers"} inward
+            </em>
           </div>
         ) : null}
       </header>
@@ -121,11 +145,23 @@ function BranchWorld({
       <div className={`district-grid district-grid--${Math.min(children.length, 6)}`} aria-label={`${gestaltNode.label} regions`}>
         {children.map((child, index) => {
           const isFocusRegion = focusRegion?.id === child.id || focusNode.id === child.id;
+          const childLineageIndex = focusLineage.findIndex((node) => node.id === child.id);
+          const childFocusLineage = childLineageIndex >= 0 ? focusLineage.slice(childLineageIndex) : [];
+          const carriesNestedFocus = isFocusRegion && focusNode.id !== child.id && childFocusLineage.length > 1;
+          const nestedDepth = Math.max(0, childFocusLineage.length - 1);
+          const nestedVia = childFocusLineage
+            .slice(1, -1)
+            .map((node) => node.shortLabel ?? node.label)
+            .join(" › ");
+
           return (
             <button
               key={child.id}
               className={`district-card ${isFocusRegion ? "district-card--focused" : ""}`}
               data-kind={child.kind}
+              data-node-id={child.id}
+              data-carries-focus={isFocusRegion ? "true" : "false"}
+              data-focus-mode={isFocusRegion ? (carriesNestedFocus ? "nested" : "direct") : "none"}
               onClick={() => onNavigate(child.id, "down")}
               aria-current={isFocusRegion ? "location" : undefined}
               title={`Enter ${child.label}`}
@@ -139,6 +175,21 @@ function BranchWorld({
               ) : null}
               <strong>{child.label}</strong>
               <p>{child.summary}</p>
+
+              {carriesNestedFocus ? (
+                <span className="compact-focus">
+                  <span className="compact-focus__signal" aria-hidden="true" />
+                  <span className="compact-focus__copy">
+                    <span>Focal object retained</span>
+                    <strong>{focusNode.label}</strong>
+                    {nestedVia ? <small>via {nestedVia}</small> : null}
+                  </span>
+                  <span className="compact-focus__depth">
+                    {nestedDepth} {nestedDepth === 1 ? "layer" : "layers"}
+                  </span>
+                </span>
+              ) : null}
+
               <span className="district-card__action">Enter region</span>
             </button>
           );
