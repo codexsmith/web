@@ -13,7 +13,6 @@ type BoundaryFrameProps = {
   visible: boolean;
   focusNode: ContentNode;
   breadcrumbs: ContentNode[];
-  rootBranches: ContentNode[];
   siblings: ContentNode[];
   projection?: ProjectionMode;
   processScope: ProcessScope;
@@ -63,7 +62,6 @@ export function BoundaryFrame({
   visible,
   focusNode,
   breadcrumbs,
-  rootBranches,
   siblings,
   projection = "world",
   processScope,
@@ -79,7 +77,6 @@ export function BoundaryFrame({
   onSearch,
 }: BoundaryFrameProps) {
   const focusPath = breadcrumbs.filter((node) => node.id !== "root");
-  const showCurrentFocus = focusNode.id !== "root";
   const isRootFocus = focusNode.id === "root";
   const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
 
@@ -88,29 +85,13 @@ export function BoundaryFrame({
       className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
     >
       <header className="boundary-frame__top">
-        <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs home">
-          <span className="brand-anchor__mark" aria-hidden="true">
-            BF
-          </span>
+        <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs root world">
+          <span className="brand-anchor__mark" aria-hidden="true">BF</span>
           <span className="brand-anchor__copy">
             <span className="brand-anchor__name">Boundary First Labs</span>
-            <span className="brand-anchor__mode">Root · knowledge environment</span>
+            <span className="brand-anchor__mode">Root world</span>
           </span>
         </button>
-
-        {isRootFocus ? (
-          <nav className="primary-nav" aria-label="Primary regions">
-            {rootBranches.map((branch, index) => (
-              <button key={branch.id} onClick={() => onNavigate(branch.id)} title={`Enter ${branch.label}`}>
-                <span className="primary-nav__index" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="primary-nav__label">{branch.label}</span>
-                <span className="primary-nav__signal" aria-hidden="true" />
-              </button>
-            ))}
-          </nav>
-        ) : null}
 
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool frame-tool--back" onClick={onBack} aria-label="Back" title="Back through traversal history">
@@ -132,7 +113,7 @@ export function BoundaryFrame({
                 onClick={onProcessZoomOut}
                 disabled={!canProcessZoomOut}
                 aria-label="Widen Gestalt process context"
-                title="Widen the process context around the current focus"
+                title="Widen the process context around the current subject"
               >
                 <FrameIcon name="minus" />
                 <span className="frame-tool__label">Widen process context</span>
@@ -142,7 +123,7 @@ export function BoundaryFrame({
                 onClick={onProcessZoomIn}
                 disabled={!canProcessZoomIn}
                 aria-label="Narrow Gestalt process context"
-                title="Narrow the process context around the current focus"
+                title="Narrow the process context around the current subject"
               >
                 <FrameIcon name="plus" />
                 <span className="frame-tool__label">Narrow process context</span>
@@ -152,27 +133,28 @@ export function BoundaryFrame({
         </div>
       </header>
 
-      <aside className="boundary-frame__left" aria-label="Current focus ancestry path">
-        <div className="path-label">Focus path</div>
-        <ol>
-          {focusPath.map((node) => (
-            <li key={node.id}>
-              <span className="path-node__dot" aria-hidden="true" />
-              <button onClick={() => onFocusPath(node.id)} title={`Move focus to ${node.label}`}>
-                <span className="path-node__label">{node.shortLabel ?? node.label}</span>
-              </button>
-            </li>
-          ))}
-          {showCurrentFocus ? (
+      {!isRootFocus ? (
+        <aside className="boundary-frame__left" aria-label="Current focus ancestry path">
+          <div className="path-label">Focus path</div>
+          <ol>
+            {focusPath.map((node) => (
+              <li key={node.id}>
+                <span className="path-node__dot" aria-hidden="true" />
+                <button onClick={() => onFocusPath(node.id)} title={`Move focus to ${node.label}`}>
+                  <span className="path-node__label">{node.shortLabel ?? node.label}</span>
+                </button>
+              </li>
+            ))}
             <li aria-current="page">
               <span className="path-node__dot" aria-hidden="true" />
               <span className="path-node__current">
+                <small className="path-node__role">Focus</small>
                 <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
               </span>
             </li>
-          ) : null}
-        </ol>
-      </aside>
+          </ol>
+        </aside>
+      ) : null}
 
       {peerNodes.length ? (
         <aside className="boundary-frame__right" aria-label={`Sibling navigation for ${focusNode.label}`}>
@@ -191,12 +173,8 @@ export function BoundaryFrame({
       ) : null}
 
       <footer className="boundary-frame__bottom">
-        <span className="frame-status frame-status--focus">
-          <strong>Focus</strong>
-          <span className="frame-status__value">{focusNode.shortLabel ?? focusNode.label}</span>
-        </span>
         {onProjectionChange ? (
-          <div className="projection-switcher" aria-label="View projection">
+          <div className="projection-switcher" aria-label={`Representation of ${focusNode.label}`}>
             <span className="projection-switcher__label">View</span>
             {projectionModes.map((mode) => (
               <button
