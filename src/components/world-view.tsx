@@ -8,7 +8,7 @@ import {
   getParent,
   getSiblings,
 } from "@/lib/content";
-import { hydrateAboutNode } from "@/lib/about-content";
+import { hydrateContentNode } from "@/lib/content-projections";
 
 export type TransitionDirection =
   | "none"
@@ -37,9 +37,9 @@ export function WorldView({
   onNavigate,
   onInspect,
 }: WorldViewProps) {
-  const renderedGestaltNode = hydrateAboutNode(gestaltNode);
-  const renderedFocusNode = hydrateAboutNode(focusNode);
-  const children = getChildren(gestaltNode.id).map(hydrateAboutNode);
+  const renderedGestaltNode = hydrateContentNode(gestaltNode);
+  const renderedFocusNode = hydrateContentNode(focusNode);
+  const children = getChildren(gestaltNode.id).map(hydrateContentNode);
   const parent = getParent(gestaltNode.id);
   const focusRegion = getImmediateChildTowardFocus(gestaltNode.id, focusNode.id);
   const isLeaf = children.length === 0;
@@ -138,11 +138,11 @@ type NodeDetailProps = {
 };
 
 function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
-  const siblings = getSiblings(node.id).map(hydrateAboutNode);
+  const siblings = getSiblings(node.id).map(hydrateContentNode);
   const siblingIndex = siblings.findIndex((sibling) => sibling.id === node.id);
   const previous = siblingIndex > 0 ? siblings[siblingIndex - 1] : undefined;
   const next = siblingIndex >= 0 && siblingIndex < siblings.length - 1 ? siblings[siblingIndex + 1] : undefined;
-  const crossEdges = getCrossEdges(node.id).map((edge) => ({ ...edge, node: hydrateAboutNode(edge.node) }));
+  const crossEdges = getCrossEdges(node.id).map((edge) => ({ ...edge, node: hydrateContentNode(edge.node) }));
 
   return (
     <section className="node-detail">
