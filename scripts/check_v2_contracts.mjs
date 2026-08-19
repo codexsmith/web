@@ -137,6 +137,56 @@ requireMatch(
   "Record/World inspection affordances must expose substantive inspection summaries",
 );
 
+// Rich retained content is projected through bounded editorial layers instead of being wired raw into runtime.
+for (const path of [
+  "src/content/public-projections/home.json",
+  "src/content/public-projections/work.json",
+  "src/content/work_portfolio.json",
+  "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json",
+]) {
+  requireExists(path, "Rich retained public-content source must remain available");
+}
+requireMatch(
+  "src/lib/content-projections.ts",
+  /hydrateProductNode[\s\S]*hydrateRootNode/,
+  "Canonical content hydration must include bounded Product and Root content projections",
+);
+requireMatch(
+  "src/lib/product-content.ts",
+  /src\/content\/public-projections\/work\.json/,
+  "Product fill must retain a visible source path to the curated work projection",
+);
+requireMatch(
+  "src/lib/product-content.ts",
+  /pipeline-retained-families[\s\S]*projectr-constructive-media-family[\s\S]*need-capacity-map-first-wedge/,
+  "Product fill must preserve hidden product-family context without promoting every source entity into navigation",
+);
+forbidMatch(
+  "src/lib/product-content.ts",
+  /\bincomePotential\s*:/,
+  "Opportunity hypotheses from the retained work corpus must not be silently promoted into the public product projection",
+);
+forbidMatch(
+  "src/lib/product-content.ts",
+  /\bstatus\s*:/,
+  "Editorial product fill must not override canonical lifecycle status",
+);
+requireMatch(
+  "src/lib/root-content.ts",
+  /No consequence without representation[\s\S]*Bring us the system that almost works[\s\S]*How to read the Lab/,
+  "Root content must expose mission, practical entry, and public-surface orientation from the curated home projection",
+);
+requireMatch(
+  "src/lib/root-content.ts",
+  /src\/content\/public-projections\/home\.json/,
+  "Root fill must retain a visible source path to the curated home projection",
+);
+forbidMatch(
+  "src/lib/root-content.ts",
+  /Software for difficult systems\./,
+  "Root content fill must not duplicate the hero proposition",
+);
+
 // Text preservation wins over decorative geometry under zoom / viewport compression.
 requireMatch(
   "src/app/root-world-and-content-stability.css",

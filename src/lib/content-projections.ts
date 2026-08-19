@@ -2,13 +2,19 @@ import type { ContentNode } from "@/lib/content";
 import { hydrateAboutNode } from "@/lib/about-content";
 import { hydrateExploratoryResearchNode } from "@/lib/exploratory-research";
 import { hydrateProcessNode } from "@/lib/process-content";
+import { hydrateProductNode } from "@/lib/product-content";
 import { hydratePublicInterestNode } from "@/lib/public-interest-content";
 import { hydrateResearchNode } from "@/lib/research-content";
+import { hydrateRootNode } from "@/lib/root-content";
 
 export function hydrateContentNode(node: ContentNode): ContentNode {
   return hydrateProcessNode(
     hydrateExploratoryResearchNode(
-      hydrateResearchNode(hydratePublicInterestNode(hydrateAboutNode(node))),
+      hydrateResearchNode(
+        hydratePublicInterestNode(
+          hydrateAboutNode(hydrateProductNode(hydrateRootNode(node))),
+        ),
+      ),
     ),
   );
 }
