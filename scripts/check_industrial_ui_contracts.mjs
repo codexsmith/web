@@ -22,16 +22,19 @@ function forbidMatch(path, pattern, message) {
   if (pattern.test(source)) throw new Error(`${message} (${path})`);
 }
 
+const apparatusGrammar = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_interaction_grammar_v0_1.md";
+
 for (const path of [
   "src/lib/ui-shell.ts",
   "src/app/bf-industrial-tokens.css",
   "src/app/industrial-card-ui.css",
+  apparatusGrammar,
 ]) {
-  requireExists(path, "Industrial UI foundation must remain present");
+  requireExists(path, "Industrial UI foundation and design contract must remain present");
 }
 
-// Two render targets are named now, but only Card is allowed to render until the
-// Apparatus interaction grammar is intentionally designed.
+// Two render targets are named, but only Card may render until the documented Apparatus
+// grammar has passed its three static-study prototype gate.
 requireMatch(
   "src/lib/ui-shell.ts",
   /uiShellModes\s*=\s*\["cards",\s*"apparatus"\]/,
@@ -47,13 +50,50 @@ requireMatch(
   /cards:\s*"active"[\s\S]*apparatus:\s*"reserved"/,
   "Apparatus must remain explicitly reserved rather than implicitly unfinished",
 );
+requireMatch(
+  "src/lib/ui-shell.ts",
+  /bfl_apparatus_interaction_grammar_v0_1\.md[\s\S]*three static apparatus studies/,
+  "UI shell must point to the documented Apparatus prototype gate",
+);
 forbidExists(
   "src/app/industrial-apparatus-ui.css",
-  "Apparatus styling must not be implemented before its design pass",
+  "Apparatus styling must not be implemented before the static-study prototype gate",
 );
 forbidExists(
   "src/components/apparatus-world.tsx",
-  "Apparatus renderer must not be implemented before its design pass",
+  "Apparatus renderer must not be implemented before the static-study prototype gate",
+);
+
+// Apparatus grammar: one semantic engine, small primitive set, no cockpit theater.
+requireMatch(
+  apparatusGrammar,
+  /Card explains the system as bounded readable modules[\s\S]*Apparatus explains the same system as a bounded operational assembly/,
+  "Apparatus must remain a second representation of the same semantic system",
+);
+requireMatch(
+  apparatusGrammar,
+  /Boundary[\s\S]*State[\s\S]*Path[\s\S]*Constraint[\s\S]*Agency[\s\S]*Consequence[\s\S]*Recovery/,
+  "Apparatus expressive test must preserve the seven Boundary First UX questions",
+);
+requireMatch(
+  apparatusGrammar,
+  /Module \/ boundary[\s\S]*Port[\s\S]*Trace[\s\S]*Gate[\s\S]*State readout[\s\S]*Command[\s\S]*Repair path/,
+  "Apparatus primitive vocabulary must remain compact and explicit",
+);
+requireMatch(
+  apparatusGrammar,
+  /Root apparatus study[\s\S]*Branch apparatus study[\s\S]*Leaf apparatus study/,
+  "Apparatus must pass root, branch, and leaf static studies before implementation",
+);
+requireMatch(
+  apparatusGrammar,
+  /reflow topologically, not miniaturize geometrically/,
+  "Apparatus responsive behavior must preserve semantics rather than shrink schematics",
+);
+requireMatch(
+  apparatusGrammar,
+  /not a cockpit skin[\s\S]*not a cyberpunk dashboard/,
+  "Apparatus must reject cockpit/dashboard theater",
 );
 
 // Shared palette semantics: material, operator agency, and observed state have different jobs.
