@@ -98,10 +98,34 @@ try {
     "Products",
     "Public Interest",
     "Research",
+    "Publications",
     "About",
     "Enter region",
   ], [
     "Enter the lab",
+  ]);
+
+  await expectPage("/publications", [
+    "Publications",
+    "Contained regions",
+    "Essays &amp; Arguments",
+    "Methods &amp; Standards",
+    "Research Programs",
+    "Learning &amp; Visuals",
+  ]);
+
+  await expectPage("/publications/methods/software-before-code", [
+    "Software Before Code",
+    "Publication development",
+    "Working Public Method",
+    "External practitioner review",
+  ]);
+
+  await expectPage("/publications/essays/executable-distinctions?view=evidence", [
+    "Evidence / lineage projection",
+    "Executable Distinctions",
+    "Working publication · review pending",
+    "Publication development state is independent",
   ]);
 
   await expectPage("/public-interest", [

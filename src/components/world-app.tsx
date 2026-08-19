@@ -10,7 +10,7 @@ import { InspectionPanel } from "@/components/inspection-panel";
 import { SearchPanel } from "@/components/search-panel";
 import { RecordView, TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
-import { getNode, getNodeByPath, getPathForNode, getSiblings } from "@/lib/content";
+import { getNode, getNodeByPath, getPathForNode, getSiblings } from "@/lib/content-registry";
 import { parseProcessScope, processScopes, type ProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection, type ProjectionMode } from "@/lib/view-projection";
 

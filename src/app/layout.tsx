@@ -15,6 +15,7 @@ import "./navigation-interaction.css";
 import "./root-world-and-content-stability.css";
 import "./hero-screen.css";
 import "./traversal-history.css";
+import "./publication-portfolio.css";
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Boundary First Labs",
   },
   description:
-    "Software for difficult systems, public-interest projects, and research into executable representation.",
+    "Software for difficult systems, public-interest projects, publications, and research into executable representation.",
 };
 
 export const viewport: Viewport = {

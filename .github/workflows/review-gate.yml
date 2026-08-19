@@ -33,6 +33,9 @@ jobs:
       - name: Check v2 architecture contracts
         run: npm run contracts:check
 
+      - name: Check publication portfolio contracts
+        run: node scripts/check_publication_contracts.mjs
+
       - name: Typecheck
         run: npm run typecheck
 

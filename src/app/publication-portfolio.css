@@ -1,0 +1,170 @@
+/* Boundary First UX · Publications as a first-class institutional surface
+   Publication development is independent from delivery and research validation.
+   The root campus expands to five regions without changing the inner morphology of
+   Products, Public Interest, Research, or About. */
+
+.branch-world[data-gestalt-id="root"] .district-grid {
+  grid-template-columns: 0.95fr 1.16fr 0.95fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="products"] {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="public-interest"] {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="publications"] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.branch-world[data-gestalt-id="root"] .district-card[data-node-id="about"] {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: stretch;
+  min-height: 0;
+}
+
+.publication-status-chip {
+  border-style: dashed;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.publication-status-panel {
+  min-width: 0;
+  display: grid;
+  gap: 0.78rem;
+  padding: 1rem;
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--instrument-recess);
+}
+
+.publication-status-panel__heading {
+  min-width: 0;
+  display: grid;
+  gap: 0.22rem;
+}
+
+.publication-status-panel__heading span,
+.publication-status-panel dt {
+  color: var(--ink-soft);
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.publication-status-panel__heading strong {
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.publication-status-panel > p {
+  max-width: 72ch;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.publication-status-panel dl {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--line);
+}
+
+.publication-status-panel dl > div {
+  min-width: 0;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.64rem 0.7rem;
+  background: var(--paper-strong);
+}
+
+.publication-status-panel dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  font-size: 0.66rem;
+  line-height: 1.42;
+}
+
+.publication-status-panel__gate,
+.publication-status-panel__source {
+  grid-column: 1 / -1;
+}
+
+.contained-region-links em {
+  color: var(--accent);
+  font-size: 0.48rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1360px) {
+  .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .branch-world[data-gestalt-id="root"] .district-card[data-node-id] {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .publication-status-panel dl {
+    grid-template-columns: 1fr;
+  }
+
+  .publication-status-panel__gate,
+  .publication-status-panel__source {
+    grid-column: 1;
+  }
+}
+
+@media (forced-colors: active) {
+  .publication-status-panel {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+  }
+
+  .publication-status-panel dl,
+  .publication-status-panel dl > div {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+  }
+}

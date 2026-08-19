@@ -5,7 +5,7 @@ import {
   getChildren,
   getCrossEdges,
   getParent,
-} from "@/lib/content";
+} from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 
 export type TransitionDirection =
@@ -103,6 +103,11 @@ function LeafWorld({ node, onNavigate }: LeafWorldProps) {
       <div className="leaf-world__field">
         <article className="leaf-world__focus" data-node-id={node.id}>
           <small>{node.eyebrow}</small>
+          {node.publication ? (
+            <span className="work-status-chip publication-status-chip" data-stage={node.publication.stage}>
+              {node.publication.label}
+            </span>
+          ) : null}
           <strong>{node.label}</strong>
           <p>{node.summary}</p>
         </article>
@@ -184,7 +189,11 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
           >
             <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
             <span className="district-card__kind">{child.eyebrow}</span>
-            {child.status ? (
+            {child.publication ? (
+              <span className="work-status-chip publication-status-chip" data-stage={child.publication.stage}>
+                {child.publication.label}
+              </span>
+            ) : child.status ? (
               <span className="work-status-chip" data-stage={child.status.stage}>{child.status.label}</span>
             ) : null}
             <strong>{child.label}</strong>
@@ -266,7 +275,46 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
           <p className="node-surface__summary">{node.summary}</p>
         </header>
 
-        {node.status ? (
+        {node.publication ? (
+          <aside className="publication-status-panel" data-stage={node.publication.stage}>
+            <div className="publication-status-panel__heading">
+              <span>Publication development</span>
+              <strong>{node.publication.label}</strong>
+            </div>
+            <p>
+              Manuscript maturity is tracked independently from the validation standing of the underlying research,
+              method, product, or institutional claim.
+            </p>
+            <dl>
+              <div>
+                <dt>Document class</dt>
+                <dd>{node.publication.documentClass}</dd>
+              </div>
+              <div>
+                <dt>Claim maturity</dt>
+                <dd>{node.publication.claimMaturity}</dd>
+              </div>
+              <div>
+                <dt>Audience</dt>
+                <dd>{node.publication.audience}</dd>
+              </div>
+              {node.publication.version ? (
+                <div>
+                  <dt>Version</dt>
+                  <dd>{node.publication.version}</dd>
+                </div>
+              ) : null}
+              <div className="publication-status-panel__gate">
+                <dt>Next gate</dt>
+                <dd>{node.publication.nextGate}</dd>
+              </div>
+              <div className="publication-status-panel__source">
+                <dt>Source</dt>
+                <dd>{node.publication.sourceRef}</dd>
+              </div>
+            </dl>
+          </aside>
+        ) : node.status ? (
           <aside className="work-status-panel" data-stage={node.status.stage}>
             <div className="work-status-panel__heading">
               <span>Current standing</span>
@@ -303,6 +351,7 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
                 <button key={child.id} onClick={() => onNavigate(child.id, "down")} title={`Open ${child.label}`}>
                   <span>{child.eyebrow}</span>
                   <strong>{child.label}</strong>
+                  {child.publication ? <em>{child.publication.label}</em> : null}
                   <small>{child.summary}</small>
                 </button>
               ))}

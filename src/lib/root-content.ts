@@ -6,7 +6,7 @@ type RootOverride = Partial<
 
 const rootOverride: RootOverride = {
   body: [
-    "The entered Root World is an operating map rather than a second hero. Products shows what the Lab is building and has delivered; Public Interest states what technical capacity is for; Research exposes evidence, mechanism, and formalization; About makes method, provenance, stewardship, and institutional standing inspectable.",
+    "The entered Root World is an operating map rather than a second hero. Products shows what the Lab is building and has delivered; Public Interest states what technical capacity is for; Research exposes evidence, mechanism, and formalization; Publications shows which written artifacts exist and how close each is to a stable release boundary; About makes method, provenance, stewardship, and institutional standing inspectable.",
     "A recurring entry point is the system that almost works: the process everyone works around, the software that succeeds only because people quietly compensate for it, the responsibility that keeps moving between departments, the metric that looks healthy while the lived system gets worse, or the new capability that needs governance before it gains consequence.",
   ],
   inspection: [
@@ -45,17 +45,19 @@ const rootOverride: RootOverride = {
     {
       id: "root-public-surface-map",
       label: "How to read the Lab",
-      eyebrow: "Four public surfaces",
+      eyebrow: "Five public surfaces",
       summary:
-        "The top-level branches answer different questions so evidence, purpose, products, and institutional identity do not collapse into one authority claim.",
+        "The top-level branches answer different questions so products, purpose, research, written publication, and institutional identity do not collapse into one authority claim.",
       bullets: [
         "Products: what has been built, what is operating now, what was historically delivered, and what remains a governed concept.",
         "Public Interest: what consequences and public capacities the Lab believes technical work should remain answerable to.",
         "Research: what mechanisms, experiments, derivations, source records, and claim boundaries support or limit the operative work.",
+        "Publications: what written artifacts exist, who they are for, their manuscript development state, and which review or release gate remains.",
         "About: who is accountable for the work, how it is produced, what the institution currently is, and how provenance and correction are handled.",
         "Deeper theory remains traversable without becoming a prerequisite for understanding the practical surface.",
       ],
-      sourceRef: "src/content/public-projections/home.json + v2 public spine architecture",
+      sourceRef:
+        "src/content/public-projections/home.json + src/content/publication_pathway.json + v2 public spine architecture",
     },
     {
       id: "root-human-purpose",

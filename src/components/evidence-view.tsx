@@ -1,6 +1,6 @@
 "use client";
 
-import { ContentNode, getCrossEdges, getParent } from "@/lib/content";
+import { ContentNode, getCrossEdges, getParent } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getSemanticEvents } from "@/lib/semantic-events";
 
@@ -26,6 +26,7 @@ export function EvidenceView({ focusNode, onInspect, onNavigate }: EvidenceViewP
   const ledgerEvents = getSemanticEvents(focusNode.id);
   const sourceRefs = Array.from(
     new Set([
+      ...(focusNode.publication?.sourceRef ? [focusNode.publication.sourceRef] : []),
       ...inspections
         .map((inspection) => inspection.sourceRef)
         .filter((sourceRef): sourceRef is string => Boolean(sourceRef)),
@@ -72,7 +73,43 @@ export function EvidenceView({ focusNode, onInspect, onNavigate }: EvidenceViewP
         <div className="evidence-view__grid">
           <section className="evidence-compartment evidence-compartment--standing">
             <div className="evidence-compartment__label">Declared standing</div>
-            {focusNode.status ? (
+            {focusNode.publication ? (
+              <>
+                <strong>{focusNode.publication.label}</strong>
+                <p>
+                  Publication development state is independent from the proof, validation, delivery, or adoption standing
+                  of the underlying subject.
+                </p>
+                <dl>
+                  <div>
+                    <dt>Stage</dt>
+                    <dd>{focusNode.publication.stage}</dd>
+                  </div>
+                  <div>
+                    <dt>Document class</dt>
+                    <dd>{focusNode.publication.documentClass}</dd>
+                  </div>
+                  <div>
+                    <dt>Claim maturity</dt>
+                    <dd>{focusNode.publication.claimMaturity}</dd>
+                  </div>
+                  <div>
+                    <dt>Audience</dt>
+                    <dd>{focusNode.publication.audience}</dd>
+                  </div>
+                  {focusNode.publication.version ? (
+                    <div>
+                      <dt>Version</dt>
+                      <dd>{focusNode.publication.version}</dd>
+                    </div>
+                  ) : null}
+                  <div>
+                    <dt>Next gate</dt>
+                    <dd>{focusNode.publication.nextGate}</dd>
+                  </div>
+                </dl>
+              </>
+            ) : focusNode.status ? (
               <>
                 <strong>{focusNode.status.label}</strong>
                 <p>{focusNode.status.detail}</p>
@@ -100,7 +137,7 @@ export function EvidenceView({ focusNode, onInspect, onNavigate }: EvidenceViewP
                 </dl>
               </>
             ) : (
-              <p className="evidence-empty">No lifecycle or delivery standing is declared for this object.</p>
+              <p className="evidence-empty">No lifecycle, delivery, or publication standing is declared for this object.</p>
             )}
           </section>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { nodes } from "@/lib/content";
+import { nodes } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { semanticEventSearchText } from "@/lib/semantic-events";
 
@@ -25,6 +25,12 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
           node.summary,
           node.status?.label,
           node.status?.sourceStatus,
+          node.publication?.label,
+          node.publication?.documentClass,
+          node.publication?.claimMaturity,
+          node.publication?.audience,
+          node.publication?.nextGate,
+          node.publication?.sourceRef,
           ...(node.body ?? []),
           ...(node.inspection ?? []).flatMap((inspection) => [
             inspection.label,
@@ -48,7 +54,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
       <section className="search-panel">
         <div className="search-panel__header">
           <div>
-            <p className="eyebrow">Traverse by name, standing, event, or concern</p>
+            <p className="eyebrow">Traverse by name, standing, event, publication state, or concern</p>
             <h2 id="search-title">Search the lab</h2>
           </div>
           <button onClick={onClose}>Close</button>
@@ -59,7 +65,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
             autoFocus
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Accessibility, civic, shipped, superseded, launch candidate..."
+            placeholder="Accessibility, draft, review, shipped, superseded, launch candidate..."
           />
         </label>
         <div className="search-results">
@@ -75,7 +81,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
             >
               <span>{node.label}</span>
               <span className="search-result__meta">
-                <small>{node.status?.label ?? node.eyebrow}</small>
+                <small>{node.publication?.label ?? node.status?.label ?? node.eyebrow}</small>
                 <code className="search-result__path">/{node.path}</code>
               </span>
             </button>

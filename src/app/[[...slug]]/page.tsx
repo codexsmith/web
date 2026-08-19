@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { WorldApp } from "@/components/world-app";
 import { hydrateContentNode } from "@/lib/content-projections";
-import { getNodeByPath, nodes } from "@/lib/content";
+import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection } from "@/lib/view-projection";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";

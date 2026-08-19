@@ -1,4 +1,4 @@
-import type { ContentNode } from "@/lib/content";
+import type { ContentNode } from "@/lib/content-registry";
 import { hydrateAboutNode } from "@/lib/about-content";
 import { hydrateExploratoryResearchNode } from "@/lib/exploratory-research";
 import { hydrateProcessNode } from "@/lib/process-content";
@@ -22,5 +22,5 @@ export function hydrateContentNode(node: ContentNode): ContentNode {
         ),
       ),
     ),
-  );
+  ) as ContentNode;
 }
