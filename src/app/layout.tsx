@@ -4,6 +4,7 @@ import "./portfolio.css";
 import "./boundary-frame.css";
 import "./boundary-frame-controls.css";
 import "./industrial-design.css";
+import "./industrial-interaction.css";
 
 export const metadata: Metadata = {
   title: {
