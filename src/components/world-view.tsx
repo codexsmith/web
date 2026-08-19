@@ -91,6 +91,7 @@ function BranchWorld({
         <p className="eyebrow">{gestaltNode.eyebrow}</p>
         <h1>{gestaltNode.label}</h1>
         <p>{gestaltNode.summary}</p>
+        {gestaltNode.body?.length ? <p className="world-heading__context">{gestaltNode.body[0]}</p> : null}
         {focusedBelow ? (
           <div className="focus-trace">
             <span>Focal object</span>
@@ -111,6 +112,11 @@ function BranchWorld({
             >
               <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
               <span className="district-card__kind">{child.eyebrow}</span>
+              {child.status ? (
+                <span className="work-status-chip" data-stage={child.status.stage}>
+                  {child.status.label}
+                </span>
+              ) : null}
               <strong>{child.label}</strong>
               <p>{child.summary}</p>
               <span className="district-card__action">Enter</span>
@@ -164,6 +170,22 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
           <p className="node-surface__summary">{node.summary}</p>
         </header>
 
+        {node.status ? (
+          <aside className="work-status-panel" data-stage={node.status.stage}>
+            <div className="work-status-panel__heading">
+              <span>Current standing</span>
+              <strong>{node.status.label}</strong>
+            </div>
+            <p>{node.status.detail}</p>
+            {node.status.sourceStatus || node.status.provenance ? (
+              <div className="work-status-panel__provenance">
+                {node.status.sourceStatus ? <span>Source status: {node.status.sourceStatus}</span> : null}
+                {node.status.provenance ? <span>Provenance: {node.status.provenance}</span> : null}
+              </div>
+            ) : null}
+          </aside>
+        ) : null}
+
         {node.body?.length ? (
           <div className="node-surface__body">
             {node.body.map((paragraph) => (
@@ -173,11 +195,26 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
         ) : (
           <div className="node-surface__body node-surface__body--placeholder">
             <p>
-              This starter node is structurally complete and ready for production copy, evidence, diagrams,
-              sources, and executable examples.
+              This node is intentionally concise. Follow its typed connections or retained records for deeper
+              evidence, implementation detail, and provenance.
             </p>
           </div>
         )}
+
+        {node.links?.length ? (
+          <section className="node-section">
+            <div className="node-section__label">Open retained record</div>
+            <div className="record-links">
+              {node.links.map((link) => (
+                <a href={link.href} key={`${node.id}-${link.href}`}>
+                  <span>{link.eyebrow ?? "Related record"}</span>
+                  <strong>{link.label}</strong>
+                  {link.summary ? <small>{link.summary}</small> : null}
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         {node.inspection?.length ? (
           <section className="node-section">
