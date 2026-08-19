@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./portfolio.css";
 import "./boundary-frame.css";
+import "./boundary-frame-controls.css";
 
 export const metadata: Metadata = {
   title: {
