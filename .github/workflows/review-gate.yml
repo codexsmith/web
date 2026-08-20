@@ -39,6 +39,9 @@ jobs:
       - name: Check industrial UI contracts
         run: node scripts/check_industrial_ui_contracts.mjs
 
+      - name: Check Apparatus hardening contracts
+        run: node scripts/check_apparatus_hardening.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
