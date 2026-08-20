@@ -4,6 +4,7 @@ import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection } from "@/lib/view-projection";
+import { parseUiShell } from "@/lib/ui-shell";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
 import { ChessLanding } from "@/components/product-landing/ChessLanding";
@@ -34,6 +35,7 @@ type PageProps = {
     view?: string | string[];
     scope?: string | string[];
     world?: string | string[];
+    ui?: string | string[];
   }>;
 };
 
@@ -50,8 +52,8 @@ export async function generateStaticParams() {
   return [...landingParams, ...nodeParams];
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug = [] } = await params;
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
+  const [{ slug = [] }, query] = await Promise.all([params, searchParams]);
   const decision = resolveProductLandingRoute(slug);
 
   if (
@@ -78,7 +80,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const node = hydrateContentNode(getNodeByPath(slug));
-  return { title: node.label, description: node.summary };
+  const uiShell = parseUiShell(query.ui);
+
+  return {
+    title: uiShell === "apparatus" ? `${node.label} · Apparatus prototype` : node.label,
+    description: node.summary,
+    robots: uiShell === "apparatus" ? { index: false, follow: false } : undefined,
+  };
 }
 
 export default async function Page({ params, searchParams }: PageProps) {
@@ -131,6 +139,7 @@ export default async function Page({ params, searchParams }: PageProps) {
   const node = getNodeByPath(slug);
   const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
   const initialProcessScope = parseProcessScope(query.scope) ?? "full";
+  const initialUiShell = parseUiShell(query.ui);
   const worldState = Array.isArray(query.world) ? query.world[0] : query.world;
   const initialHeroVisible = node.id === "root" && worldState !== "1";
 
@@ -140,6 +149,7 @@ export default async function Page({ params, searchParams }: PageProps) {
       initialProjection={initialProjection}
       initialProcessScope={initialProcessScope}
       initialHeroVisible={initialHeroVisible}
+      initialUiShell={initialUiShell}
     />
   );
 }
