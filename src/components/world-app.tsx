@@ -50,7 +50,7 @@ function stateUrl(
   focusId: string,
   projection: ProjectionMode,
   processScope: ProcessScope,
-  uiShell: UiShellMode,
+  uiShell: UiShellMode = "cards",
 ) {
   const focusPath = getPathForNode(focusId);
   const params = new URLSearchParams();
@@ -215,7 +215,12 @@ export function WorldApp({
     setTraversalIds(rootTraversal);
     setTransitionDirection("none");
     setTransitionKey((value) => value + 1);
-    router.replace(stateUrl("root", "world", "full", uiShell), { scroll: false });
+
+    if (uiShell === "apparatus") {
+      router.replace(stateUrl("root", "world", "full", uiShell), { scroll: false });
+    } else {
+      router.replace(stateUrl("root", "world", "full"), { scroll: false });
+    }
   }, [router, uiShell]);
 
   const navigate = useCallback(
