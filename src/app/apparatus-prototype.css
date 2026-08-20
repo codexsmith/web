@@ -1,0 +1,962 @@
+/*
+ * Boundary First Apparatus prototype.
+ * This file is intentionally scoped to .apparatus-prototype-shell and does not activate
+ * Apparatus as the production UI shell. Card remains the default renderer.
+ */
+
+.apparatus-prototype-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(9.5rem, 0.17fr) minmax(0, 1fr) minmax(11rem, 0.2fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "top top top"
+    "trace work peers"
+    "depth depth depth";
+  gap: 1px;
+  background: var(--bf-iron-950);
+  color: var(--bf-workshop-100);
+}
+
+.apparatus-prototype-shell button,
+.apparatus-prototype-shell a,
+.apparatus-prototype-shell summary {
+  font: inherit;
+}
+
+.apparatus-prototype-shell button:focus-visible,
+.apparatus-prototype-shell a:focus-visible,
+.apparatus-prototype-shell summary:focus-visible {
+  outline: 2px solid var(--bf-action);
+  outline-offset: 3px;
+}
+
+.apparatus-prototype__topbar {
+  grid-area: top;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 70%),
+    var(--bf-steel-800);
+  border-bottom: 1px solid var(--bf-alloy-500);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.04), inset 0 -1px rgba(0, 0, 0, 0.32);
+}
+
+.apparatus-prototype__prototype-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-inline: auto;
+  color: var(--bf-silver-300);
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.apparatus-prototype__prototype-label strong {
+  color: var(--bf-attention);
+  font-weight: 650;
+}
+
+.apparatus-prototype__global-commands,
+.apparatus-process-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.apparatus-process-controls {
+  padding-left: 0.35rem;
+  border-left: 1px solid var(--bf-alloy-500);
+  color: var(--bf-silver-300);
+}
+
+.apparatus-command {
+  min-height: 2.4rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-bottom-color: var(--bf-action);
+  border-radius: 3px;
+  background: var(--bf-steel-700);
+  color: var(--bf-workshop-100);
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.apparatus-command:hover:not(:disabled) {
+  border-color: var(--bf-action);
+  background: var(--bf-steel-600);
+}
+
+.apparatus-command:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.apparatus-command:disabled {
+  cursor: not-allowed;
+  color: var(--bf-alloy-400);
+  border-bottom-color: var(--bf-alloy-500);
+}
+
+.apparatus-command--brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-bottom-color: var(--bf-alloy-500);
+  text-align: left;
+}
+
+.apparatus-command__register {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--bf-alloy-400);
+  color: var(--bf-workshop-100);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+}
+
+.apparatus-command--exit {
+  color: var(--bf-silver-300);
+}
+
+.apparatus-register-label,
+.apparatus-module__type,
+.apparatus-bay__register,
+.apparatus-port__label,
+.apparatus-state-strip__axis {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.69rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--bf-silver-300);
+}
+
+.apparatus-trace {
+  background: var(--bf-steel-800);
+  color: var(--bf-workshop-100);
+}
+
+.apparatus-trace--rail {
+  grid-area: trace;
+  min-width: 0;
+  padding: 0.8rem 0.65rem 1rem;
+  border-right: 1px solid var(--bf-alloy-500);
+}
+
+.apparatus-trace--compact {
+  display: none;
+}
+
+.apparatus-trace__steps {
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.apparatus-trace__steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 3rem;
+}
+
+.apparatus-trace__steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 1.08rem;
+  top: 2rem;
+  bottom: -0.6rem;
+  width: 1px;
+  background: var(--bf-alloy-500);
+}
+
+.apparatus-trace__index {
+  align-self: start;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  min-height: 2rem;
+  color: var(--bf-alloy-400);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+}
+
+.apparatus-trace__steps button,
+.apparatus-trace__current {
+  min-width: 0;
+  align-self: start;
+  border: 0;
+  border-left: 2px solid var(--bf-alloy-500);
+  background: transparent;
+  color: var(--bf-silver-300);
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.apparatus-trace__steps button {
+  cursor: pointer;
+}
+
+.apparatus-trace__steps button:hover {
+  color: var(--bf-workshop-100);
+  border-left-color: var(--bf-action);
+}
+
+.apparatus-trace__steps li[data-current="true"] .apparatus-trace__index {
+  color: var(--bf-action);
+}
+
+.apparatus-trace__current {
+  color: var(--bf-workshop-100);
+  border-left-color: var(--bf-action);
+}
+
+.apparatus-prototype__workfield {
+  grid-area: work;
+  min-width: 0;
+  padding: clamp(0.65rem, 1.6vw, 1.35rem);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.008), rgba(255, 255, 255, 0.008)),
+    var(--bf-gunmetal-900);
+  overflow: auto;
+}
+
+.apparatus-peer-bank {
+  grid-area: peers;
+  min-width: 0;
+  padding: 0.8rem 0.65rem 1rem;
+  background: var(--bf-steel-800);
+  border-left: 1px solid var(--bf-alloy-500);
+}
+
+.apparatus-peer-bank ol {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+}
+
+.apparatus-peer-bank--empty p {
+  color: var(--bf-alloy-400);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.apparatus-depth {
+  grid-area: depth;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 0.55rem 0.8rem;
+  background: var(--bf-steel-800);
+  border-top: 1px solid var(--bf-alloy-500);
+}
+
+.apparatus-depth__positions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.apparatus-depth__position {
+  min-height: 2.35rem;
+  border: 1px solid transparent;
+  border-bottom: 2px solid var(--bf-alloy-500);
+  background: transparent;
+  color: var(--bf-silver-300);
+  padding: 0.35rem 0.65rem;
+  cursor: pointer;
+}
+
+.apparatus-depth__position:hover {
+  color: var(--bf-workshop-100);
+  border-bottom-color: var(--bf-action);
+}
+
+.apparatus-depth__position[aria-pressed="true"] {
+  color: var(--bf-workshop-100);
+  border-bottom-color: var(--bf-action);
+  background: rgba(169, 140, 255, 0.055);
+}
+
+.apparatus-world {
+  width: min(100%, 92rem);
+  margin-inline: auto;
+}
+
+.apparatus-backplane__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.apparatus-backplane__heading p {
+  max-width: 62rem;
+  margin: 0;
+  color: var(--bf-silver-300);
+  line-height: 1.55;
+}
+
+.apparatus-backplane,
+.apparatus-module-bay,
+.apparatus-routing-bay {
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 3px;
+  padding: clamp(0.65rem, 1.2vw, 1rem);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.01)),
+    var(--bf-gunmetal-900);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.02), inset 0 -1px rgba(0, 0, 0, 0.28);
+}
+
+.apparatus-backplane {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.apparatus-bay {
+  grid-column: span 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 13rem;
+  padding: 0.85rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 3px;
+  background: var(--bf-steel-800);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.035), inset 0 -1px rgba(0, 0, 0, 0.35);
+}
+
+.apparatus-bay:nth-child(4),
+.apparatus-bay:nth-child(5) {
+  grid-column: span 3;
+}
+
+.apparatus-bay h2,
+.apparatus-module h3,
+.apparatus-subject-faceplate h1,
+.apparatus-instrument h1 {
+  margin: 0;
+  color: var(--bf-workshop-100);
+}
+
+.apparatus-bay h2 {
+  font-size: clamp(1.05rem, 1.7vw, 1.45rem);
+}
+
+.apparatus-bay p,
+.apparatus-module p,
+.apparatus-subject-faceplate p,
+.apparatus-instrument p {
+  color: var(--bf-silver-300);
+  line-height: 1.55;
+}
+
+.apparatus-bay p {
+  margin: 0;
+  flex: 1;
+}
+
+.apparatus-port {
+  position: relative;
+  min-width: 0;
+  min-height: 2.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 0.05rem 0.65rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 2px;
+  background: var(--bf-steel-700);
+  color: var(--bf-workshop-100);
+  padding: 0.45rem 0.75rem 0.45rem 0.65rem;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.apparatus-port:hover {
+  border-color: var(--bf-action);
+}
+
+.apparatus-port__label {
+  grid-column: 1;
+}
+
+.apparatus-port strong {
+  grid-column: 1;
+  overflow-wrap: anywhere;
+}
+
+.apparatus-port__terminal {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 0.45rem;
+  height: 1.45rem;
+  border: 1px solid var(--bf-alloy-400);
+  border-right: 0;
+  background: var(--bf-gunmetal-900);
+}
+
+.apparatus-port:hover .apparatus-port__terminal,
+.apparatus-port:focus-visible .apparatus-port__terminal {
+  border-color: var(--bf-action);
+  background: rgba(169, 140, 255, 0.16);
+}
+
+.apparatus-port--enter {
+  margin-top: auto;
+  border-right-color: var(--bf-action-line, var(--bf-action));
+}
+
+.apparatus-world--branch {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.apparatus-subject-faceplate,
+.apparatus-instrument {
+  position: relative;
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.026), transparent 42%),
+    var(--bf-steel-800);
+  box-shadow:
+    0 0 0 1px rgba(169, 140, 255, 0.22),
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    inset 0 -1px rgba(0, 0, 0, 0.32);
+}
+
+.apparatus-subject-faceplate::before,
+.apparatus-instrument::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-left: 2px solid var(--bf-action);
+  border-top: 1px solid rgba(169, 140, 255, 0.48);
+  pointer-events: none;
+}
+
+.apparatus-subject-faceplate {
+  padding: clamp(0.85rem, 1.5vw, 1.25rem);
+}
+
+.apparatus-subject-faceplate h1 {
+  margin-top: 0.25rem;
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
+}
+
+.apparatus-module-bay > .apparatus-register-label,
+.apparatus-routing-bay > .apparatus-register-label {
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.apparatus-module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.apparatus-module {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 3px;
+  background: var(--bf-steel-800);
+}
+
+.apparatus-module h3 {
+  font-size: 1rem;
+}
+
+.apparatus-module p {
+  margin: 0;
+  font-size: 0.88rem;
+  flex: 1;
+}
+
+.apparatus-state-strip {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  padding: 0.32rem 0.45rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.13);
+}
+
+.apparatus-state-strip__signal {
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.apparatus-state-strip[data-signal="valid"] .apparatus-state-strip__signal {
+  color: var(--bf-valid);
+}
+
+.apparatus-state-strip[data-signal="attention"] .apparatus-state-strip__signal {
+  color: var(--bf-attention);
+}
+
+.apparatus-state-strip[data-signal="info"] .apparatus-state-strip__signal {
+  color: var(--bf-info);
+}
+
+.apparatus-state-strip[data-signal="defect"] .apparatus-state-strip__signal {
+  color: var(--bf-defect);
+}
+
+.apparatus-state-strip[data-signal="unknown"] .apparatus-state-strip__signal {
+  color: var(--bf-alloy-400);
+}
+
+.apparatus-state-strip strong {
+  min-width: 0;
+  color: var(--bf-workshop-100);
+  font-size: 0.78rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.apparatus-routing-bay__traces {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.apparatus-relation-trace {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.25fr) minmax(1.5rem, 1fr) auto minmax(1.5rem, 1fr) minmax(7rem, 0.25fr);
+  align-items: center;
+  min-width: 0;
+}
+
+.apparatus-relation-trace button {
+  min-width: 0;
+  min-height: 2.3rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 2px;
+  background: var(--bf-steel-700);
+  color: var(--bf-workshop-100);
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.apparatus-relation-trace button:hover {
+  border-color: var(--bf-action);
+}
+
+.apparatus-relation-trace__line {
+  min-width: 0;
+  height: 1px;
+  background: var(--bf-alloy-400);
+}
+
+.apparatus-relation-trace__label {
+  margin-inline: 0.45rem;
+  color: var(--bf-silver-300);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.apparatus-port-bank,
+.apparatus-through,
+.apparatus-gate {
+  margin-top: 0.7rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.apparatus-port-bank > summary,
+.apparatus-through > summary,
+.apparatus-gate > summary {
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0.65rem;
+  color: var(--bf-silver-300);
+  cursor: pointer;
+  list-style: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.apparatus-port-bank > summary::-webkit-details-marker,
+.apparatus-through > summary::-webkit-details-marker,
+.apparatus-gate > summary::-webkit-details-marker {
+  display: none;
+}
+
+.apparatus-port-bank > summary::after,
+.apparatus-through > summary::after,
+.apparatus-gate > summary::after {
+  content: "+";
+  color: var(--bf-action);
+  font-size: 1rem;
+}
+
+.apparatus-port-bank[open] > summary::after,
+.apparatus-through[open] > summary::after,
+.apparatus-gate[open] > summary::after {
+  content: "−";
+}
+
+.apparatus-port-bank > div,
+.apparatus-port-bank__grid,
+.apparatus-through__well {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.apparatus-port-bank > div,
+.apparatus-through__well {
+  padding: 0.65rem;
+  border-top: 1px solid var(--bf-alloy-500);
+}
+
+.apparatus-through {
+  background: var(--bf-gunmetal-900);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.apparatus-through__well button {
+  display: grid;
+  gap: 0.15rem;
+  min-height: 3rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-left-color: var(--bf-action);
+  border-radius: 2px;
+  background: var(--bf-steel-800);
+  color: var(--bf-workshop-100);
+  padding: 0.5rem 0.65rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.apparatus-through__well button span,
+.apparatus-through__well button small {
+  color: var(--bf-silver-300);
+}
+
+.apparatus-instrument {
+  max-width: 70rem;
+  margin-inline: auto;
+  padding: clamp(0.9rem, 2vw, 1.5rem);
+  display: grid;
+  gap: 0.9rem;
+}
+
+.apparatus-instrument__heading {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.apparatus-instrument__heading h1 {
+  font-size: clamp(1.55rem, 3vw, 2.5rem);
+}
+
+.apparatus-instrument__heading p,
+.apparatus-instrument__context p {
+  margin: 0;
+}
+
+.apparatus-instrument__state {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.apparatus-instrument__context {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.7rem 0;
+  border-block: 1px solid var(--bf-alloy-500);
+}
+
+.apparatus-gate {
+  border-left: 2px solid var(--bf-attention);
+}
+
+.apparatus-gate > summary strong {
+  color: var(--bf-attention);
+}
+
+.apparatus-gate__detail {
+  padding: 0.7rem;
+  border-top: 1px solid var(--bf-alloy-500);
+}
+
+.apparatus-gate__detail p {
+  margin-top: 0;
+}
+
+.apparatus-gate__detail dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.apparatus-gate__detail dl > div {
+  border: 1px solid var(--bf-alloy-500);
+  padding: 0.55rem;
+}
+
+.apparatus-gate__detail dt {
+  color: var(--bf-silver-300);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.apparatus-gate__detail dd {
+  margin: 0.2rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.apparatus-instrument__ports,
+.apparatus-record-well {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.apparatus-port-bank__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.apparatus-record-well {
+  padding: 0.7rem;
+  border: 1px solid var(--bf-alloy-500);
+  background: var(--bf-gunmetal-900);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.apparatus-record-well > div:last-child {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.apparatus-record-well a {
+  display: grid;
+  gap: 0.12rem;
+  border: 1px solid var(--bf-alloy-500);
+  border-right-color: var(--bf-action);
+  color: var(--bf-workshop-100);
+  text-decoration: none;
+  padding: 0.5rem 0.65rem;
+}
+
+.apparatus-record-well a span {
+  color: var(--bf-silver-300);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.apparatus-prototype__projection-surface {
+  min-width: 0;
+}
+
+.apparatus-prototype-shell .apparatus-prototype__projection-surface > .world-viewport,
+.apparatus-prototype-shell .apparatus-prototype__projection-surface > .evidence-view,
+.apparatus-prototype-shell .apparatus-prototype__projection-surface > .gestalt-view {
+  min-height: auto;
+}
+
+@media (max-width: 1100px) {
+  .apparatus-prototype-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+      "top"
+      "trace"
+      "work"
+      "peers"
+      "depth";
+  }
+
+  .apparatus-trace--rail {
+    display: none;
+  }
+
+  .apparatus-trace--compact {
+    display: block;
+    grid-area: trace;
+    border-bottom: 1px solid var(--bf-alloy-500);
+  }
+
+  .apparatus-trace--compact > summary {
+    min-height: 2.7rem;
+    display: flex;
+    align-items: center;
+    padding: 0.45rem 0.75rem;
+    cursor: pointer;
+    color: var(--bf-silver-300);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .apparatus-trace--compact .apparatus-trace__steps {
+    padding: 0 0.75rem 0.7rem;
+  }
+
+  .apparatus-peer-bank {
+    border-left: 0;
+    border-top: 1px solid var(--bf-alloy-500);
+  }
+
+  .apparatus-peer-bank ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .apparatus-prototype__topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .apparatus-prototype__prototype-label {
+    margin-inline: 0;
+  }
+
+  .apparatus-prototype__global-commands,
+  .apparatus-process-controls {
+    align-items: stretch;
+  }
+
+  .apparatus-prototype__global-commands > *,
+  .apparatus-process-controls > button {
+    flex: 1 1 auto;
+  }
+
+  .apparatus-backplane,
+  .apparatus-module-grid,
+  .apparatus-port-bank__grid,
+  .apparatus-instrument__state,
+  .apparatus-gate__detail dl,
+  .apparatus-peer-bank ol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .apparatus-bay,
+  .apparatus-bay:nth-child(4),
+  .apparatus-bay:nth-child(5) {
+    grid-column: auto;
+    min-height: auto;
+  }
+
+  .apparatus-backplane__heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .apparatus-relation-trace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--bf-alloy-500);
+  }
+
+  .apparatus-relation-trace__line {
+    width: 1px;
+    height: 0.8rem;
+    margin-inline: 0.8rem;
+  }
+
+  .apparatus-relation-trace__label {
+    margin-inline: 0;
+    text-align: left;
+  }
+
+  .apparatus-depth {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .apparatus-depth__positions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apparatus-prototype-shell *,
+  .apparatus-prototype-shell *::before,
+  .apparatus-prototype-shell *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .apparatus-prototype-shell,
+  .apparatus-prototype-shell * {
+    forced-color-adjust: auto;
+  }
+
+  .apparatus-subject-faceplate,
+  .apparatus-instrument,
+  .apparatus-bay,
+  .apparatus-module,
+  .apparatus-port,
+  .apparatus-command,
+  .apparatus-state-strip,
+  .apparatus-gate,
+  .apparatus-through,
+  .apparatus-record-well {
+    border-color: CanvasText;
+  }
+
+  .apparatus-subject-faceplate::before,
+  .apparatus-instrument::before,
+  .apparatus-depth__position[aria-pressed="true"],
+  .apparatus-trace__current {
+    border-color: Highlight;
+  }
+
+  .apparatus-state-strip__signal,
+  .apparatus-port__terminal {
+    color: CanvasText;
+    background: CanvasText;
+  }
+}
