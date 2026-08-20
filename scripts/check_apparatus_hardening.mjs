@@ -70,8 +70,13 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /uiShell\s*===\s*"apparatus"[\s\S]*ApparatusPrototypeFrame[\s\S]*router\.replace\(stateUrl\(focusId,\s*projection,\s*processScope,\s*"cards"\)/,
-  "Apparatus must share World state and return to Card without adding navigation history",
+  /uiShell\s*===\s*"apparatus"[\s\S]*ApparatusPrototypeFrame/,
+  "Apparatus must render inside the shared World state machine rather than a second app",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /const exitPrototype[\s\S]*router\.replace\(stateUrl\(focusId,\s*projection,\s*processScope,\s*"cards"\)/,
+  "Returning to Card must replace renderer state without adding navigation history",
 );
 
 console.log("apparatus hardening contracts: pass");
