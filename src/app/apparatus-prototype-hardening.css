@@ -22,8 +22,8 @@
 
 .apparatus-prototype-shell summary {
   min-height: var(--apparatus-hit-target);
-  display: flex;
-  align-items: center;
+  display: list-item;
+  padding-block: 0.65rem;
   cursor: pointer;
   overflow-wrap: anywhere;
 }
