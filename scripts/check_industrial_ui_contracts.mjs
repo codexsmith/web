@@ -25,6 +25,8 @@ function forbidMatch(path, pattern, message) {
 const apparatusGrammar = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_interaction_grammar_v0_1.md";
 const apparatusStudies = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_static_studies_v0_1.md";
 const apparatusMorphology = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_visual_morphology_v0_1.md";
+const apparatusPrototype = "src/components/apparatus-prototype.tsx";
+const apparatusPrototypeCss = "src/app/apparatus-prototype.css";
 
 for (const path of [
   "src/lib/ui-shell.ts",
@@ -33,40 +35,41 @@ for (const path of [
   apparatusGrammar,
   apparatusStudies,
   apparatusMorphology,
+  apparatusPrototype,
+  apparatusPrototypeCss,
 ]) {
-  requireExists(path, "Industrial UI foundation and Apparatus design records must remain present");
+  requireExists(path, "Industrial UI foundation, Apparatus design records, and bounded prototype must remain present");
 }
 
-// Two render targets are named, but only Card is production-active. The Apparatus design
-// sequence may now proceed to a small implementation prototype, but this contract still
-// forbids prototype code until that next pass explicitly changes the gate.
+// Card remains the production renderer. Apparatus may exist only as an explicitly
+// addressed prototype over the same semantic engine.
 requireMatch(
   "src/lib/ui-shell.ts",
   /uiShellModes\s*=\s*\["cards",\s*"apparatus"\]/,
-  "UI shell vocabulary must reserve Card and Apparatus",
+  "UI shell vocabulary must preserve Card and Apparatus",
 );
 requireMatch(
   "src/lib/ui-shell.ts",
   /activeUiShell:\s*UiShellMode\s*=\s*"cards"/,
-  "Card must remain the only active production shell for this phase",
+  "Card must remain the production-active shell during prototype review",
 );
 requireMatch(
   "src/lib/ui-shell.ts",
-  /cards:\s*"active"[\s\S]*apparatus:\s*"reserved"/,
-  "Apparatus must remain explicitly reserved rather than implicitly unfinished",
+  /cards:\s*"active"[\s\S]*apparatus:\s*"prototype"/,
+  "Apparatus readiness must be prototype rather than production-active",
 );
 requireMatch(
   "src/lib/ui-shell.ts",
-  /bfl_apparatus_interaction_grammar_v0_1\.md[\s\S]*bfl_apparatus_static_studies_v0_1\.md[\s\S]*bfl_apparatus_visual_morphology_v0_1\.md[\s\S]*small implementation prototype/,
-  "UI shell must point to the completed Apparatus design sequence and prototype gate",
+  /parseUiShell[\s\S]*candidate === "apparatus" \? "apparatus" : "cards"/,
+  "Unknown or absent UI-shell requests must fall back to Card",
 );
 forbidExists(
   "src/app/industrial-apparatus-ui.css",
-  "Apparatus styling must not appear before the implementation-prototype pass explicitly opens",
+  "Production Apparatus styling must remain absent during bounded prototype review",
 );
 forbidExists(
   "src/components/apparatus-world.tsx",
-  "Apparatus renderer must not appear before the implementation-prototype pass explicitly opens",
+  "Production Apparatus World renderer must remain absent during bounded prototype review",
 );
 
 // Apparatus grammar: one semantic engine, small primitive set, no cockpit theater.
@@ -96,8 +99,7 @@ requireMatch(
   "Apparatus must reject cockpit/dashboard theater",
 );
 
-// Static studies must use real BFL content and preserve the same semantic owners at
-// root, branch, and leaf scales before production morphology is chosen.
+// Static studies preserve real BFL content at root, branch, and leaf scales.
 requireMatch(
   apparatusStudies,
   /Study A — Root apparatus[\s\S]*Products[\s\S]*Public Interest[\s\S]*Research[\s\S]*Publications[\s\S]*About/,
@@ -190,10 +192,95 @@ requireMatch(
   /wide spatial → medium banked → narrow linear/,
   "Responsive morphology must reflow topology rather than miniaturize it",
 );
+
+// Bounded implementation prototype: real registry data, shared World state, explicit query.
 requireMatch(
-  apparatusMorphology,
-  /The next artifact may be an Apparatus prototype\. It may not yet replace Card as the production shell\./,
-  "Morphology pass must open only a bounded prototype gate, not production activation",
+  apparatusPrototype,
+  /getChildren[\s\S]*getCrossEdges[\s\S]*getParent/,
+  "Apparatus prototype must derive topology from the shared content registry",
+);
+requireMatch(
+  apparatusPrototype,
+  /RootApparatus[\s\S]*BranchApparatus[\s\S]*LeafApparatus/,
+  "Prototype must exercise root, branch, and leaf apparatus scales",
+);
+requireMatch(
+  apparatusPrototype,
+  /relations\.slice\(0, 3\)[\s\S]*relations\.slice\(3\)/,
+  "Prototype must enforce the three-persistent-connector budget and overflow bank",
+);
+requireMatch(
+  apparatusPrototype,
+  /TraceSteps[\s\S]*onTraversalPath[\s\S]*Duplicate|TraceSteps[\s\S]*onTraversalPath/,
+  "Prototype trace must use the shared rewind callback rather than ancestry",
+);
+requireMatch(
+  apparatusPrototype,
+  /projectionModes[\s\S]*onProjectionChange/,
+  "Prototype Depth selector must drive the shared projection callback",
+);
+requireMatch(
+  apparatusPrototype,
+  /node\.publication\.nextGate[\s\S]*State preserved[\s\S]*node\.publication\.sourceRef/,
+  "Publication instrument must expose the real next gate, preserved state, and source",
+);
+requireMatch(
+  apparatusPrototype,
+  /apparatus-through[\s\S]*onInspect/,
+  "Prototype Through aperture must inspect the current object without inventing graph traversal",
+);
+
+requireMatch(
+  "src/components/world-app.tsx",
+  /initialUiShell[\s\S]*useState<UiShellMode>[\s\S]*data-ui-renderer=\{uiShell\}/,
+  "WorldApp must own renderer state alongside existing focus/projection state",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /if \(uiShell === "apparatus"\) params\.set\("ui", "apparatus"\)/,
+  "WorldApp state URLs must preserve explicit Apparatus prototype addressing",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /ApparatusPrototypeFrame[\s\S]*traversalPath=\{traversalPath\}[\s\S]*onTraversalPath=\{navigateTraversalPath\}[\s\S]*onProjectionChange=\{changeProjection\}/,
+  "Apparatus frame must reuse the same traversal and Depth callbacks as Card",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /exitPrototype[\s\S]*setUiShell\("cards"\)[\s\S]*router\.replace/,
+  "Prototype must provide a no-traversal return to the Card renderer",
+);
+
+requireMatch(
+  "src/app/[[...slug]]/page.tsx",
+  /ui\?: string \| string\[\][\s\S]*parseUiShell\(query\.ui\)[\s\S]*robots: uiShell === "apparatus" \? \{ index: false, follow: false \}/,
+  "Apparatus prototype pages must be explicitly addressed and no-index",
+);
+requireMatch(
+  "src/app/[[...slug]]/page.tsx",
+  /initialUiShell=\{initialUiShell\}/,
+  "Page routing must pass the requested prototype renderer into WorldApp",
+);
+
+requireMatch(
+  apparatusPrototypeCss,
+  /^\/\*[\s\S]*\.apparatus-prototype-shell/,
+  "Prototype styling must remain scoped to the Apparatus prototype shell",
+);
+requireMatch(
+  apparatusPrototypeCss,
+  /grid-template-areas:[\s\S]*"trace work peers"[\s\S]*@media \(max-width: 1100px\)[\s\S]*@media \(max-width: 760px\)/,
+  "Prototype CSS must implement wide, banked, and narrow topology modes",
+);
+requireMatch(
+  apparatusPrototypeCss,
+  /prefers-reduced-motion: reduce[\s\S]*forced-colors: active/,
+  "Prototype must include reduced-motion and forced-colors treatments",
+);
+requireMatch(
+  apparatusPrototypeCss,
+  /apparatus-relation-trace[\s\S]*grid-template-columns[\s\S]*apparatus-port-bank/,
+  "Prototype must provide routed relation traces with banked overflow",
 );
 
 // Shared palette semantics: material, operator agency, and observed state have different jobs.
@@ -232,11 +319,11 @@ requireMatch(
   "Industrial token layer must preserve restrained wear doctrine",
 );
 
-// Card renderer consumes the shared palette instead of inventing a second color system.
+// Card renderer consumes the same shared palette and remains the default.
 requireMatch(
   "src/app/industrial-card-ui.css",
   /body\[data-ui-shell="cards"\]/,
-  "Card styling must be isolated behind the Card shell boundary",
+  "Card styling must remain isolated behind the production Card shell boundary",
 );
 requireMatch(
   "src/app/industrial-card-ui.css",
@@ -245,7 +332,7 @@ requireMatch(
 );
 requireMatch(
   "src/app/industrial-card-ui.css",
-  /world-heading::before[\s\S]*display:\s*none/,
+  /\.world-heading::before[\s\S]*display:\s*none/,
   "Card UI must retire the stale CURRENT WHOLE heading label",
 );
 requireMatch(
@@ -261,8 +348,8 @@ forbidMatch(
 
 requireMatch(
   "src/app/layout.tsx",
-  /activeUiShell[\s\S]*bf-industrial-tokens\.css[\s\S]*content-first-world\.css[\s\S]*industrial-card-ui\.css[\s\S]*data-ui-shell=\{activeUiShell\}/,
-  "Layout must load shared tokens before the final Card skin and expose the active shell in DOM",
+  /activeUiShell[\s\S]*bf-industrial-tokens\.css[\s\S]*industrial-card-ui\.css[\s\S]*apparatus-prototype\.css[\s\S]*data-ui-shell=\{activeUiShell\}/,
+  "Layout must keep shared tokens, Card default styling, and scoped prototype styling in one root shell",
 );
 
 console.log("industrial UI contracts: pass");
