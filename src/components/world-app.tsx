@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ApparatusPrototypeFrame, ApparatusPrototypeWorld } from "@/components/apparatus-prototype";
 import { BoundaryFrame } from "@/components/boundary-frame";
 import { EvidenceView } from "@/components/evidence-view";
 import { GestaltView } from "@/components/gestalt-view";
@@ -13,12 +14,14 @@ import { hydrateContentNode } from "@/lib/content-projections";
 import { getNode, getNodeByPath, getPathForNode, getSiblings } from "@/lib/content-registry";
 import { parseProcessScope, processScopes, type ProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection, type ProjectionMode } from "@/lib/view-projection";
+import { parseUiShell, type UiShellMode } from "@/lib/ui-shell";
 
 type WorldAppProps = {
   initialNodeId: string;
   initialProjection?: ProjectionMode;
   initialProcessScope?: ProcessScope;
   initialHeroVisible?: boolean;
+  initialUiShell?: UiShellMode;
 };
 
 type TraversalWindow = Window & {
@@ -43,13 +46,19 @@ function inferDirection(fromId: string, toId: string): TransitionDirection {
   return "cross";
 }
 
-function stateUrl(focusId: string, projection: ProjectionMode, processScope: ProcessScope) {
+function stateUrl(
+  focusId: string,
+  projection: ProjectionMode,
+  processScope: ProcessScope,
+  uiShell: UiShellMode,
+) {
   const focusPath = getPathForNode(focusId);
   const params = new URLSearchParams();
 
   if (focusId === "root") params.set("world", "1");
   if (projection !== defaultProjectionForNode(focusId)) params.set("view", projection);
   if (projection === "gestalt" && processScope !== "full") params.set("scope", processScope);
+  if (uiShell === "apparatus") params.set("ui", "apparatus");
 
   const query = params.toString();
   return query ? `${focusPath}?${query}` : focusPath;
@@ -96,9 +105,10 @@ function readBrowserState() {
   const params = new URLSearchParams(window.location.search);
   const projection = parseProjection(params.get("view") ?? undefined) ?? defaultProjectionForNode(node.id);
   const processScope = parseProcessScope(params.get("scope") ?? undefined) ?? "full";
+  const uiShell = parseUiShell(params.get("ui") ?? undefined);
   const heroVisible = node.id === "root" && params.get("world") !== "1";
 
-  return { node, projection, processScope, heroVisible };
+  return { node, projection, processScope, uiShell, heroVisible };
 }
 
 export function WorldApp({
@@ -106,12 +116,14 @@ export function WorldApp({
   initialProjection,
   initialProcessScope = "full",
   initialHeroVisible = false,
+  initialUiShell = "cards",
 }: WorldAppProps) {
   const router = useRouter();
   const resolvedInitialProjection = initialProjection ?? defaultProjectionForNode(initialNodeId);
   const [focusId, setFocusId] = useState(initialNodeId);
   const [projection, setProjection] = useState<ProjectionMode>(resolvedInitialProjection);
   const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
+  const [uiShell, setUiShell] = useState<UiShellMode>(initialUiShell);
   const [heroVisible, setHeroVisible] = useState(initialHeroVisible);
   const [traversalIds, setTraversalIds] = useState<string[]>([initialNodeId]);
   const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>("none");
@@ -158,6 +170,7 @@ export function WorldApp({
       setFocusId(next.node.id);
       setProjection(next.projection);
       setProcessScope(next.processScope);
+      setUiShell(next.uiShell);
       setHeroVisible(next.heroVisible);
       setTraversalIds(nextTraversal);
       setTransitionDirection("none");
@@ -202,8 +215,8 @@ export function WorldApp({
     setTraversalIds(rootTraversal);
     setTransitionDirection("none");
     setTransitionKey((value) => value + 1);
-    router.replace(stateUrl("root", "world", "full"), { scroll: false });
-  }, [router]);
+    router.replace(stateUrl("root", "world", "full", uiShell), { scroll: false });
+  }, [router, uiShell]);
 
   const navigate = useCallback(
     (targetId: string, direction?: TransitionDirection) => {
@@ -214,9 +227,9 @@ export function WorldApp({
       setFocusId(targetId);
       setTraversalIds((current) => appendTraversal(current, targetId));
       setInspectionId(null);
-      router.push(stateUrl(targetId, projection, processScope), { scroll: false });
+      router.push(stateUrl(targetId, projection, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router, traversalIds],
+    [focusId, processScope, projection, router, traversalIds, uiShell],
   );
 
   const navigateHome = useCallback(() => {
@@ -230,8 +243,8 @@ export function WorldApp({
     setProjection("world");
     setProcessScope("full");
     setInspectionId(null);
-    router.push(stateUrl("root", "world", "full"), { scroll: false });
-  }, [focusId, router, traversalIds]);
+    router.push(stateUrl("root", "world", "full", uiShell), { scroll: false });
+  }, [focusId, router, traversalIds, uiShell]);
 
   const navigateTraversalPath = useCallback(
     (targetId: string, index: number) => {
@@ -243,9 +256,9 @@ export function WorldApp({
       setFocusId(targetId);
       setTraversalIds(rewoundTraversal);
       setInspectionId(null);
-      router.push(stateUrl(targetId, projection, processScope), { scroll: false });
+      router.push(stateUrl(targetId, projection, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router, traversalIds],
+    [focusId, processScope, projection, router, traversalIds, uiShell],
   );
 
   const changeProcessScope = useCallback(
@@ -254,9 +267,9 @@ export function WorldApp({
       setProcessScope(nextScope);
       setTransitionDirection("none");
       setTransitionKey((value) => value + 1);
-      router.replace(stateUrl(focusId, projection, nextScope), { scroll: false });
+      router.replace(stateUrl(focusId, projection, nextScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router],
+    [focusId, processScope, projection, router, uiShell],
   );
 
   const processZoomOut = useCallback(() => {
@@ -274,10 +287,17 @@ export function WorldApp({
       setTransitionDirection("none");
       setTransitionKey((value) => value + 1);
       setInspectionId(null);
-      router.push(stateUrl(focusId, nextProjection, processScope), { scroll: false });
+      router.push(stateUrl(focusId, nextProjection, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router],
+    [focusId, processScope, projection, router, uiShell],
   );
+
+  const exitPrototype = useCallback(() => {
+    setUiShell("cards");
+    setTransitionDirection("none");
+    setTransitionKey((value) => value + 1);
+    router.replace(stateUrl(focusId, projection, processScope, "cards"), { scroll: false });
+  }, [focusId, processScope, projection, router]);
 
   const openInspection = useCallback((nextInspectionId: string) => setInspectionId(nextInspectionId), []);
 
@@ -285,62 +305,97 @@ export function WorldApp({
     return <HeroScreen onEnter={enterLab} />;
   }
 
+  const projectionSurface = projection === "world" ? (
+    uiShell === "apparatus" ? (
+      <ApparatusPrototypeWorld
+        node={focusNode}
+        onNavigate={(targetId) => navigate(targetId)}
+        onInspect={openInspection}
+      />
+    ) : (
+      <WorldView
+        node={focusNode}
+        transitionDirection={transitionDirection}
+        transitionKey={transitionKey}
+        onNavigate={navigate}
+        onInspect={openInspection}
+      />
+    )
+  ) : projection === "record" ? (
+    <RecordView
+      focusNode={focusNode}
+      transitionDirection={transitionDirection}
+      transitionKey={transitionKey}
+      onNavigate={navigate}
+      onInspect={openInspection}
+    />
+  ) : projection === "evidence" ? (
+    <EvidenceView
+      focusNode={focusNode}
+      onInspect={openInspection}
+      onNavigate={(targetId) => navigate(targetId, "cross")}
+    />
+  ) : (
+    <GestaltView
+      focusNode={focusNode}
+      scope={processScope}
+      onNavigate={(targetId) => navigate(targetId, "cross")}
+    />
+  );
+
   return (
     <div
-      className="site-shell"
+      className={`site-shell ${uiShell === "apparatus" ? "site-shell--apparatus-prototype" : ""}`}
       data-world-mode={worldMode}
       data-projection={projection}
+      data-ui-renderer={uiShell}
       data-root-focus={focusId === "root" ? "true" : "false"}
       data-has-siblings={hasSiblings ? "true" : "false"}
       data-show-traversal={showTraversalPath ? "true" : "false"}
     >
-      <BoundaryFrame
-        visible
-        focusNode={focusNode}
-        traversalPath={traversalPath}
-        siblings={siblings}
-        projection={projection}
-        processScope={processScope}
-        canProcessZoomOut={canProcessZoomOut}
-        canProcessZoomIn={canProcessZoomIn}
-        onHome={navigateHome}
-        onBack={() => router.back()}
-        onNavigate={navigate}
-        onTraversalPath={navigateTraversalPath}
-        onProcessZoomOut={processZoomOut}
-        onProcessZoomIn={processZoomIn}
-        onProjectionChange={changeProjection}
-        onSearch={() => setSearchOpen(true)}
-      />
-
-      {projection === "world" ? (
-        <WorldView
-          node={focusNode}
-          transitionDirection={transitionDirection}
-          transitionKey={transitionKey}
-          onNavigate={navigate}
-          onInspect={openInspection}
-        />
-      ) : projection === "record" ? (
-        <RecordView
+      {uiShell === "apparatus" ? (
+        <ApparatusPrototypeFrame
           focusNode={focusNode}
-          transitionDirection={transitionDirection}
-          transitionKey={transitionKey}
-          onNavigate={navigate}
-          onInspect={openInspection}
-        />
-      ) : projection === "evidence" ? (
-        <EvidenceView
-          focusNode={focusNode}
-          onInspect={openInspection}
-          onNavigate={(targetId) => navigate(targetId, "cross")}
-        />
+          traversalPath={traversalPath}
+          siblings={siblings}
+          projection={projection}
+          processScope={processScope}
+          canProcessZoomOut={canProcessZoomOut}
+          canProcessZoomIn={canProcessZoomIn}
+          onHome={navigateHome}
+          onBack={() => router.back()}
+          onNavigate={(targetId) => navigate(targetId)}
+          onTraversalPath={navigateTraversalPath}
+          onProcessZoomOut={processZoomOut}
+          onProcessZoomIn={processZoomIn}
+          onProjectionChange={changeProjection}
+          onSearch={() => setSearchOpen(true)}
+          onExitPrototype={exitPrototype}
+        >
+          <div className="apparatus-prototype__projection-surface">{projectionSurface}</div>
+        </ApparatusPrototypeFrame>
       ) : (
-        <GestaltView
-          focusNode={focusNode}
-          scope={processScope}
-          onNavigate={(targetId) => navigate(targetId, "cross")}
-        />
+        <>
+          <BoundaryFrame
+            visible
+            focusNode={focusNode}
+            traversalPath={traversalPath}
+            siblings={siblings}
+            projection={projection}
+            processScope={processScope}
+            canProcessZoomOut={canProcessZoomOut}
+            canProcessZoomIn={canProcessZoomIn}
+            onHome={navigateHome}
+            onBack={() => router.back()}
+            onNavigate={navigate}
+            onTraversalPath={navigateTraversalPath}
+            onProcessZoomOut={processZoomOut}
+            onProcessZoomIn={processZoomIn}
+            onProjectionChange={changeProjection}
+            onSearch={() => setSearchOpen(true)}
+          />
+          {projectionSurface}
+        </>
       )}
 
       {activeInspection ? <InspectionPanel inspection={activeInspection} onClose={() => setInspectionId(null)} /> : null}
