@@ -1,10 +1,10 @@
 # Boundary First Apparatus Visual Morphology
 ## Version 0.1 — physical grammar before renderer implementation
 
-**Status:** morphology design contract; no production renderer yet  
+**Status:** morphology design contract; bounded prototype implemented, production activation still prohibited  
 **Depends on:** `bfl_apparatus_interaction_grammar_v0_1.md` and `bfl_apparatus_static_studies_v0_1.md`  
 **Active renderer:** Card  
-**Reserved renderer:** Apparatus  
+**Prototype renderer:** Apparatus via explicit `ui=apparatus` query  
 **Purpose:** resolve the physical appearance and behavior of the seven Apparatus primitives without creating a second semantic system
 
 ---
@@ -729,7 +729,7 @@ Reject a visual comp that introduces any of the following:
 
 ## 21. Converged first-renderer decisions
 
-The following morphology choices are now sufficiently resolved for an implementation prototype:
+The following morphology choices are implemented in the bounded prototype:
 
 ```text
 Module family       rectilinear bay / faceplate / instrument
@@ -743,7 +743,7 @@ Gate                transition crossbar with inline expandable conditions
 State               text + small signal marker strip
 Command             steel operator plate with violet action edge
 Through             recessed inspection aperture
-Peers               right chassis terminal bank; disclosure on narrow screens
+Peers               right chassis terminal bank; disclosure/bank on narrow screens
 Depth               four-position chassis selector with violet index
 Repair              path from exact fault/gate to corrective command and recheck
 Motion              restrained semantic Traverse / Through / Depth / Gate transitions
@@ -752,9 +752,54 @@ Responsive          wide spatial → medium banked → narrow linear
 
 ---
 
-## 22. Remaining prototype questions
+## 22. Prototype implementation
 
-These should be answered by an implementation prototype and browser review rather than another abstract design layer:
+The bounded prototype is implemented through:
+
+```text
+src/components/apparatus-prototype.tsx
+src/app/apparatus-prototype.css
+src/components/world-app.tsx
+src/app/[[...slug]]/page.tsx
+```
+
+It is addressed only by the explicit query:
+
+```text
+?ui=apparatus
+```
+
+Examples:
+
+```text
+/?world=1&ui=apparatus
+/research/software?ui=apparatus
+/publications/methods/software-before-code?ui=apparatus
+/publications/methods/software-before-code?view=evidence&ui=apparatus
+```
+
+Properties of the bounded prototype:
+
+- Card remains the default when `ui` is absent or unknown;
+- Apparatus prototype pages are `noindex, nofollow`;
+- the prototype consumes the real content registry rather than a duplicate study model;
+- WorldApp remains the owner of Focus, traversal history, Back, search, process scope, Depth, and inspection;
+- `ui=apparatus` is preserved across graph traversal and Depth changes;
+- returning to Card changes representation without adding a Focus traversal step;
+- Root uses the real five-region registry;
+- branches derive contained modules and local typed relations from `getChildren` / `getCrossEdges`;
+- leaf/publication instruments expose real manuscript standing and next gate;
+- the prototype limits persistent local routed relations to three and banks overflow;
+- reduced-motion and forced-colors CSS are present;
+- wide, medium, and narrow topology rules are present.
+
+Automated Review Gate coverage validates contracts, TypeScript, lint, optimized build, and production-route rendering. It does **not** constitute browser/pixel, keyboard-device, screen-reader, forced-colors-device, or 200%/400% zoom validation.
+
+---
+
+## 23. Remaining prototype review questions
+
+These should now be answered by actual browser review rather than another abstract design layer:
 
 1. exact port terminal width and label placement;
 2. exact module padding and vertical density;
@@ -765,26 +810,27 @@ These should be answered by an implementation prototype and browser review rathe
 7. how much material texture survives real displays without harming contrast;
 8. forced-colors representation of terminal, trace, gate, and state distinctions;
 9. 200% / 400% browser zoom behavior on real content;
-10. touch ergonomics of dense port banks.
-
-These are implementation-validation questions, not reasons to reopen the semantic grammar.
+10. touch ergonomics of dense port banks;
+11. whether existing Record / Evidence / Gestalt surfaces need Apparatus-specific morphology or are acceptable as shared depth surfaces;
+12. whether branch relation traces are genuinely faster to parse than labeled port banks on real content.
 
 ---
 
-## 23. Gate to creating the Apparatus
+## 24. Gate to production activation
 
-The semantic grammar, three real-content static studies, and visual morphology are now sufficiently specified to make a **small implementation prototype** meaningful.
+The prototype may be reviewed and iterated, but **Card remains the production shell**.
 
-However, production activation remains prohibited until that prototype demonstrates:
+Apparatus may not become production-active until hands-on review demonstrates:
 
-- Root / Software / Software Before Code equivalence with Card semantics;
-- correct Focus traversal preservation;
-- no projection-induced trace steps;
+- Root / Software / Software Before Code semantic parity with Card;
+- correct Focus traversal preservation and rewind behavior;
+- no Depth/Through-induced trace steps;
 - readable 200% and 400% zoom behavior;
 - keyboard-complete ports, gates, Through, peers, and Depth;
 - forced-colors legibility;
 - reduced-motion parity;
 - connector-density collapse into port banks;
-- no content or status loss relative to the shared semantic model.
+- no content or status loss relative to the shared semantic model;
+- no regression of the content-first rule: click → understand → act → deepen only when useful.
 
-> **The next artifact may be an Apparatus prototype. It may not yet replace Card as the production shell.**
+> **The Apparatus exists now as a prototype representation. It has not yet earned production activation.**
