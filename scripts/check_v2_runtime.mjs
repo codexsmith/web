@@ -162,6 +162,49 @@ try {
     "At a glance",
   ]);
 
+  // Explicitly addressed, no-index Apparatus prototype. Card remains the default route.
+  await expectPage("/?world=1&ui=apparatus", [
+    "APPARATUS",
+    "bounded prototype",
+    "ROOT WORLD · BACKPLANE",
+    "Products",
+    "Public Interest",
+    "Research",
+    "Publications",
+    "About",
+    "Return to Card",
+    "noindex",
+  ], [
+    "Enter region",
+  ]);
+
+  await expectPage("/research/software?ui=apparatus", [
+    "APPARATUS",
+    "Software",
+    "CONTAINED MODULES",
+    "Boundary First Engineering",
+    "Executable Representation",
+    "Boundary First UX",
+    "Verification &amp; Governance",
+    "LOCAL ROUTING",
+  ]);
+
+  await expectPage("/publications/methods/software-before-code?ui=apparatus", [
+    "APPARATUS",
+    "Software Before Code",
+    "Working Public Method",
+    "GATE · NEXT PUBLICATION GATE",
+    "External practitioner review",
+    "Return to Card",
+  ]);
+
+  await expectPage("/publications/methods/software-before-code?view=evidence&ui=apparatus", [
+    "APPARATUS",
+    "Evidence / lineage projection",
+    "Software Before Code",
+    "Working Public Method",
+  ]);
+
   console.log("v2 production runtime smoke: pass");
 } finally {
   await stopServer();
