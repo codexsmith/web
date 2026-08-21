@@ -30,6 +30,20 @@ type BoundaryFrameProps = {
 
 type FrameIconName = "back" | "search" | "minus" | "plus";
 
+const rootProjectionLabels: Record<ProjectionMode, string> = {
+  world: "World",
+  record: "Founder",
+  evidence: "Evidence",
+  gestalt: "Timeline",
+};
+
+const rootProjectionDescriptions: Record<ProjectionMode, string> = {
+  world: "The Lab's five public operating regions.",
+  record: "Founder provenance, contribution, and present institutional responsibility.",
+  evidence: "Evidence supporting founder provenance and operating history, with explicit claim boundaries.",
+  gestalt: "Founder and institutional development timeline from practice to Boundary First Labs.",
+};
+
 function FrameIcon({ name }: { name: FrameIconName }) {
   if (name === "back") {
     return (
@@ -98,7 +112,7 @@ export function BoundaryFrame({
             <FrameIcon name="search" />
             <span className="frame-tool__label">Search</span>
           </button>
-          {projection === "gestalt" ? (
+          {projection === "gestalt" && !isRootFocus ? (
             <div className="frame-process-zoom" aria-label="Gestalt process-context controls">
               <span className="frame-process-zoom__label" aria-hidden="true">
                 <span>Gestalt</span>
@@ -184,16 +198,19 @@ export function BoundaryFrame({
         </button>
 
         {onProjectionChange ? (
-          <div className="projection-switcher" aria-label={`Deeper representations of ${focusNode.label}`}>
+          <div
+            className="projection-switcher"
+            aria-label={isRootFocus ? "Boundary First Labs views" : `Deeper representations of ${focusNode.label}`}
+          >
             <span className="projection-switcher__label">Depth</span>
             {projectionModes.map((mode) => (
               <button
                 key={mode}
                 onClick={() => onProjectionChange(mode)}
                 aria-pressed={projection === mode}
-                title={projectionDescriptions[mode]}
+                title={isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode]}
               >
-                {projectionLabels[mode]}
+                {isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode]}
               </button>
             ))}
           </div>
