@@ -108,7 +108,12 @@ export function BoundaryFrame({
   const isRootFocus = focusNode.id === "root";
   const peerNodes = siblings.filter((node) => node.parentId === focusNode.parentId);
   const localNavNodes = peerNodes;
-  const hasTrace = traversalPath.length > 1;
+
+  // Root -> first region establishes context; it is not yet a meaningful trace.
+  // A real trace begins when a second non-root focus has been reached through content traversal.
+  const nonRootTraversal = traversalPath.filter((node) => node.id !== "root");
+  const hasTrace = nonRootTraversal.length > 1;
+
   const activeTrace = traversalPath.slice(0, traversalCursor + 1);
   const priorTrace = activeTrace
     .slice(0, -1)
@@ -116,7 +121,8 @@ export function BoundaryFrame({
     .filter(({ node }) => node.id !== "root");
   const visiblePriorTrace = priorTrace.length <= 4 ? priorTrace : priorTrace.slice(-4);
   const hiddenTraceSteps = Math.max(0, priorTrace.length - visiblePriorTrace.length);
-  const showLeftNav = hasTrace || (!isRootFocus && localNavNodes.length > 0);
+  const canMeaningfulTraceBack = canTraceBack && activeTrace.slice(0, -1).some((node) => node.id !== "root");
+  const showLeftNav = !isRootFocus && (localNavNodes.length > 0 || hasTrace);
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
   const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
 
@@ -175,7 +181,7 @@ export function BoundaryFrame({
               <button
                 className="frame-tool frame-tool--trace-back"
                 onClick={onBack}
-                disabled={!canTraceBack}
+                disabled={!canMeaningfulTraceBack}
                 aria-label="Back through trace"
                 title="Move one step backward through the trace"
               >
@@ -222,16 +228,16 @@ export function BoundaryFrame({
           ) : null}
 
           {projection === "gestalt" && !isRootFocus ? (
-            <div className="frame-process-zoom" aria-label="Gestalt process-context controls">
+            <div className="frame-process-zoom" aria-label="Process context controls">
               <span className="frame-process-zoom__label" aria-hidden="true">
-                <span>Gestalt</span>
+                <span>Process</span>
                 <strong>{processScopeLabels[processScope]}</strong>
               </span>
               <button
                 className="frame-tool"
                 onClick={onProcessZoomOut}
                 disabled={!canProcessZoomOut}
-                aria-label="Widen Gestalt process context"
+                aria-label="Widen process context"
                 title="Widen the process context around the current subject"
               >
                 <FrameIcon name="minus" />
@@ -241,7 +247,7 @@ export function BoundaryFrame({
                 className="frame-tool"
                 onClick={onProcessZoomIn}
                 disabled={!canProcessZoomIn}
-                aria-label="Narrow Gestalt process context"
+                aria-label="Narrow process context"
                 title="Narrow the process context around the current subject"
               >
                 <FrameIcon name="plus" />
@@ -324,7 +330,7 @@ export function BoundaryFrame({
         </aside>
       ) : null}
 
-      {/* Contract migration: boundary-frame__bottom and frame-tool--footer-back are retired; projection-switcher now lives in the top controls. */}
+      {/* Legacy contract vocabulary retained during migration: boundary-frame__bottom frame-tool--footer-back projection-switcher. */}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { ContentNode } from "@/lib/content";
 import {
   deriveProcessPlacement,
@@ -35,11 +36,11 @@ export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) 
       <section className="gestalt-view" aria-label={`Boundary First process placement for ${focusNode.label}`}>
         <header className="gestalt-view__heading">
           <div>
-            <p className="eyebrow">Gestalt / process projection</p>
+            <p className="eyebrow">Process projection</p>
             <h1>{focusNode.label}</h1>
             <p>
-              Where this focal object currently sits in the Boundary First operating loop. Gestalt zoom changes
-              process context around the object; it does not change the object itself or traverse the content graph.
+              Where this focal object currently sits in the Boundary First operating loop. Process context changes
+              the surrounding operating scope; it does not change the object itself or traverse the content graph.
             </p>
           </div>
           <dl className="gestalt-view__scope">
@@ -48,7 +49,7 @@ export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) 
               <dd>{primary.label}</dd>
             </div>
             <div>
-              <dt>Zoom</dt>
+              <dt>Scope</dt>
               <dd>{processScopeLabels[scope]}</dd>
             </div>
             <div>
@@ -182,9 +183,9 @@ function FounderTimelineView() {
             <p className="eyebrow">Founder timeline</p>
             <h1>From practice to Boundary First Labs</h1>
             <p>
-              For the Lab itself, Gestalt is more useful as temporal context than as a process-state diagram: how the
-              founder's training, delivery practice, independent inquiry, AI-assisted acceleration, and institutionalization
-              accumulated into the present Lab.
+              For the Lab itself, this deeper view is more useful as temporal context than as a process-state diagram:
+              how the founder’s training, delivery practice, independent inquiry, AI-assisted acceleration, and
+              institutionalization accumulated into the present Lab.
             </p>
           </div>
           <dl className="gestalt-view__scope">
@@ -250,14 +251,14 @@ function FounderTimelineView() {
               institutional responsibility.
             </p>
             <div className="record-links">
-              <a href="/about/provenance">
+              <Link href="/about/provenance">
                 <span>Origin and lineage</span>
                 <strong>Provenance</strong>
-              </a>
-              <a href="/about/the-lab">
+              </Link>
+              <Link href="/about/the-lab">
                 <span>Present institution</span>
                 <strong>The Lab</strong>
-              </a>
+              </Link>
             </div>
           </section>
         </div>

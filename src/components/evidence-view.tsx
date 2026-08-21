@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ContentNode, getCrossEdges, getParent } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { founderClaimBoundaries, founderEvidenceItems, founderProfile } from "@/lib/founder-content";
@@ -286,7 +287,7 @@ function FounderEvidenceView() {
             <p className="eyebrow">Founder evidence</p>
             <h1>{founderProfile.name}</h1>
             <p>
-              Evidence here answers a narrower question than the Lab's research evidence: what supports the founder's
+              Evidence here answers a narrower question than the Lab’s research evidence: what supports the founder’s
               provenance, operating experience, continuity of work, and present institutional responsibility?
             </p>
           </div>
@@ -320,16 +321,16 @@ function FounderEvidenceView() {
           <section className="evidence-compartment">
             <div className="evidence-compartment__label">Public provenance record</div>
             <div className="evidence-records">
-              <a href="/about/provenance">
+              <Link href="/about/provenance">
                 <span>Origin and lineage</span>
                 <strong>Provenance</strong>
                 <p>Founder history, work substance, and institutional stewardship are kept as distinct claims.</p>
-              </a>
-              <a href="/about/the-lab">
+              </Link>
+              <Link href="/about/the-lab">
                 <span>Institutional responsibility</span>
                 <strong>The Lab</strong>
                 <p>Formation-stage stewardship, founder concentration risk, governance, correction, and continuity.</p>
-              </a>
+              </Link>
             </div>
           </section>
 

@@ -104,12 +104,19 @@ try {
     "Publications",
     "About",
     "Enter region",
-    "Back",
     "Depth",
   ], [
     "Enter the lab",
     "Root World",
     "operating environment",
+    "Back through trace",
+    "Forward through trace",
+  ]);
+
+  await expectPage("/?world=1&view=timeline", [
+    "Founder timeline",
+    "From practice to Boundary First Labs",
+    "Development arc",
   ]);
 
   await expectPage("/publications", [
@@ -142,10 +149,11 @@ try {
   await expectPage("/public-interest", [
     "Public Interest",
     "At a glance",
-    "Continue from here",
     "Mission",
     "Principles",
-    "Enter region",
+    "Goals &amp; Aspirations",
+    "Augusta Civic Infrastructure",
+    "Open project record",
   ]);
 
   await expectPage("/public-interest?view=record", [
@@ -154,8 +162,8 @@ try {
     "Inspect through this node",
   ]);
 
-  await expectPage("/public-interest?view=gestalt", [
-    "Gestalt / process projection",
+  await expectPage("/public-interest?view=process", [
+    "Process projection",
     "Agentic · Lean Startup · Agile · Scientific · Computational · Constructive",
   ]);
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   ContentNode,
   getChildren,
@@ -114,16 +115,16 @@ function FounderRecord() {
         <section className="node-section node-section--records">
           <div className="node-section__label">Institutional context</div>
           <div className="record-links">
-            <a href="/about/provenance">
+            <Link href="/about/provenance">
               <span>Origin and lineage</span>
               <strong>Provenance</strong>
               <small>How founder history, work substance, and institutional stewardship are kept distinct.</small>
-            </a>
-            <a href="/about/the-lab">
+            </Link>
+            <Link href="/about/the-lab">
               <span>Present institution</span>
               <strong>The Lab</strong>
               <small>Current institutional responsibilities, founder concentration risk, and the path toward durable stewardship.</small>
-            </a>
+            </Link>
           </div>
         </section>
       </article>

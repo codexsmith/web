@@ -60,9 +60,12 @@ function stateUrl(
 ) {
   const focusPath = getPathForNode(focusId);
   const params = new URLSearchParams();
+  const publicProjection = projection === "gestalt"
+    ? (focusId === "root" ? "timeline" : "process")
+    : projection;
 
   if (focusId === "root") params.set("world", "1");
-  if (projection !== defaultProjectionForNode(focusId)) params.set("view", projection);
+  if (projection !== defaultProjectionForNode(focusId)) params.set("view", publicProjection);
   if (projection === "gestalt" && processScope !== "full") params.set("scope", processScope);
   if (uiShell === "apparatus") params.set("ui", "apparatus");
 
@@ -154,7 +157,7 @@ export function WorldApp({
   );
   const siblings = getSiblings(focusId).map(hydrateContentNode);
   const hasSiblings = siblings.some((node) => node.id !== focusId);
-  const showTraversalPath = traversalIds.length > 1;
+  const showTraversalPath = traversalIds.filter((id) => id !== "root").length > 1;
   const canTraceBack = traversalCursor > 0;
   const canTraceForward = traversalCursor >= 0 && traversalCursor < traversalIds.length - 1;
   const worldMode = projection === "record" ? "detail" : projection;
