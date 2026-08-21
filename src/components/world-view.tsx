@@ -165,7 +165,7 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
       data-gestalt-id={node.id}
     >
       <header className="world-heading">
-        <p className="eyebrow">{isRoot ? "Root World · operating environment" : node.eyebrow}</p>
+        {!isRoot ? <p className="eyebrow">{node.eyebrow}</p> : null}
         <h1>{node.label}</h1>
         <p>{node.summary}</p>
       </header>
