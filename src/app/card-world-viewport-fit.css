@@ -71,7 +71,7 @@ body[data-ui-shell="cards"] .projection-switcher {
 
 body[data-ui-shell="cards"] .world-viewport {
   place-items: stretch;
-  padding: clamp(6px, 0.55vw, 10px);
+  padding: clamp(8px, 0.55vw, 10px);
 }
 
 body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
