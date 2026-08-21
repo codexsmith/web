@@ -3,7 +3,6 @@ import { spawn } from "node:child_process";
 const port = 3210;
 const base = `http://127.0.0.1:${port}`;
 const nextCli = "node_modules/next/dist/bin/next";
-
 const server = spawn(process.execPath, [nextCli, "start", "-p", String(port)], {
   env: { ...process.env, PORT: String(port) },
   stdio: ["ignore", "pipe", "pipe"],
@@ -97,7 +96,7 @@ try {
   ]);
 
   await expectPage("/?world=1", [
-    "Root World · operating environment",
+    "Boundary First Labs",
     "Follow the work, the evidence behind it, and the obligations it creates.",
     "Products",
     "Public Interest",
@@ -105,9 +104,12 @@ try {
     "Publications",
     "About",
     "Enter region",
+    "Back",
+    "Depth",
   ], [
     "Enter the lab",
-    "The entered Root World is an operating map rather than a second hero",
+    "Root World",
+    "operating environment",
   ]);
 
   await expectPage("/publications", [
