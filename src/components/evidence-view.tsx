@@ -2,6 +2,7 @@
 
 import { ContentNode, getCrossEdges, getParent } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { founderClaimBoundaries, founderEvidenceItems, founderProfile } from "@/lib/founder-content";
 import { getSemanticEvents } from "@/lib/semantic-events";
 
 type EvidenceViewProps = {
@@ -15,6 +16,10 @@ function eventDate(effectiveAt: string | undefined, recordedAt: string) {
 }
 
 export function EvidenceView({ focusNode, onInspect, onNavigate }: EvidenceViewProps) {
+  if (focusNode.id === "root") {
+    return <FounderEvidenceView />;
+  }
+
   const inspections = focusNode.inspection ?? [];
   const records = focusNode.links ?? [];
   const parent = getParent(focusNode.id);
@@ -265,6 +270,90 @@ export function EvidenceView({ focusNode, onInspect, onNavigate }: EvidenceViewP
             ) : (
               <p className="evidence-empty">No typed cross-tree relations are declared for this object yet.</p>
             )}
+          </section>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function FounderEvidenceView() {
+  return (
+    <main className="world-viewport evidence-viewport">
+      <section className="evidence-view founder-evidence-view" aria-label={`Founder evidence for ${founderProfile.name}`}>
+        <header className="evidence-view__heading">
+          <div>
+            <p className="eyebrow">Founder evidence</p>
+            <h1>{founderProfile.name}</h1>
+            <p>
+              Evidence here answers a narrower question than the Lab's research evidence: what supports the founder's
+              provenance, operating experience, continuity of work, and present institutional responsibility?
+            </p>
+          </div>
+          <dl className="evidence-view__scope">
+            <div>
+              <dt>Subject</dt>
+              <dd>{founderProfile.name}</dd>
+            </div>
+            <div>
+              <dt>Role</dt>
+              <dd>{founderProfile.role}</dd>
+            </div>
+            <div>
+              <dt>Evidence mode</dt>
+              <dd>provenance + delivery record</dd>
+            </div>
+            <div>
+              <dt>Claim boundary</dt>
+              <dd>biography is not validation</dd>
+            </div>
+          </dl>
+        </header>
+
+        <div className="evidence-view__grid">
+          <section className="evidence-compartment evidence-compartment--standing">
+            <div className="evidence-compartment__label">Present standing</div>
+            <strong>Founder and current steward</strong>
+            <p>{founderProfile.currentPhase}</p>
+          </section>
+
+          <section className="evidence-compartment">
+            <div className="evidence-compartment__label">Public provenance record</div>
+            <div className="evidence-records">
+              <a href="/about/provenance">
+                <span>Origin and lineage</span>
+                <strong>Provenance</strong>
+                <p>Founder history, work substance, and institutional stewardship are kept as distinct claims.</p>
+              </a>
+              <a href="/about/the-lab">
+                <span>Institutional responsibility</span>
+                <strong>The Lab</strong>
+                <p>Formation-stage stewardship, founder concentration risk, governance, correction, and continuity.</p>
+              </a>
+            </div>
+          </section>
+
+          <section className="evidence-compartment evidence-compartment--ledger">
+            <div className="evidence-compartment__label">Evidence basis</div>
+            <div className="evidence-cards">
+              {founderEvidenceItems.map((item) => (
+                <article key={item.label}>
+                  <span>{item.eyebrow}</span>
+                  <strong>{item.label}</strong>
+                  <p>{item.summary}</p>
+                  <small>{item.source}</small>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="evidence-compartment evidence-compartment--relations">
+            <div className="evidence-compartment__label">Claim boundaries</div>
+            <ul className="evidence-source-list">
+              {founderClaimBoundaries.map((boundary) => (
+                <li key={boundary}>{boundary}</li>
+              ))}
+            </ul>
           </section>
         </div>
       </section>
