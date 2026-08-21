@@ -4,14 +4,15 @@
 
 .hero-screen {
   position: relative;
-  min-height: 100svh;
+  height: 100svh;
+  min-height: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
-  grid-template-rows: 1fr auto;
+  grid-template-rows: minmax(0, 1fr);
   align-items: center;
-  gap: clamp(2rem, 6vw, 7rem);
-  padding: clamp(28px, 5vw, 72px);
-  overflow: auto;
+  gap: clamp(1.5rem, 4vw, 5rem);
+  padding: clamp(22px, 3.5svh, 48px) clamp(28px, 5vw, 72px);
+  overflow: hidden;
   color: var(--ink);
   background:
     radial-gradient(circle at 72% 44%, rgba(255, 255, 255, 0.72), transparent 31%),
@@ -78,31 +79,32 @@
 
 .hero-screen__copy {
   max-width: 760px;
+  min-height: 0;
   display: grid;
   align-content: center;
-  gap: clamp(1rem, 2vw, 1.7rem);
-  padding: clamp(18px, 3vw, 34px);
+  gap: clamp(0.8rem, 1.7svh, 1.35rem);
+  padding: clamp(12px, 2svh, 26px);
 }
 
 .hero-screen__eyebrow {
   max-width: 44rem;
   margin: 0;
   color: var(--accent);
-  font-size: clamp(0.56rem, 0.8vw, 0.72rem);
+  font-size: clamp(0.88rem, 1.15vw, 1.08rem);
   font-weight: 800;
-  letter-spacing: 0.15em;
-  line-height: 1.5;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
 .hero-screen h1 {
-  max-width: 9.5ch;
+  max-width: 15ch;
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.7rem, 8.6vw, 8.8rem);
+  font-size: clamp(3rem, min(6.4vw, 8.5svh), 6.25rem);
   font-weight: 400;
-  letter-spacing: -0.062em;
-  line-height: 0.86;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
   text-wrap: balance;
 }
 
@@ -110,8 +112,8 @@
   max-width: 39rem;
   margin: 0;
   color: var(--ink-soft);
-  font-size: clamp(1rem, 1.35vw, 1.2rem);
-  line-height: 1.6;
+  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+  line-height: 1.55;
 }
 
 .hero-screen__entry {
@@ -120,11 +122,11 @@
   grid-template-columns: max-content minmax(0, 1fr);
   gap: 1rem;
   align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .hero-screen__entry button {
-  min-height: 54px;
+  min-height: 52px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -168,7 +170,8 @@
 }
 
 .hero-screen__instrument {
-  width: min(100%, 560px);
+  width: min(100%, 500px);
+  min-height: 0;
   justify-self: center;
   display: grid;
   gap: 1.25rem;
@@ -186,7 +189,7 @@
 
 .hero-apparatus {
   position: relative;
-  width: min(32vw, 440px);
+  width: min(29vw, 48svh, 400px);
   aspect-ratio: 1;
   margin: auto;
 }
@@ -251,7 +254,7 @@
 
 .hero-apparatus__core span {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-size: clamp(1.5rem, min(3vw, 4svh), 3rem);
   letter-spacing: -0.06em;
 }
 
@@ -270,19 +273,11 @@
   text-transform: uppercase;
 }
 
-.hero-apparatus__label--outer {
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .hero-apparatus__port {
   position: absolute;
-  top: 50%;
   z-index: 3;
   min-width: 58px;
   padding: 5px 7px;
-  transform: translateY(-50%);
   border: 1px solid var(--line-strong);
   border-radius: 6px;
   background: var(--paper-strong);
@@ -294,12 +289,33 @@
   text-transform: uppercase;
 }
 
+.hero-apparatus__port--left,
+.hero-apparatus__port--right {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .hero-apparatus__port--left {
   left: -16%;
 }
 
 .hero-apparatus__port--right {
   right: -16%;
+}
+
+.hero-apparatus__port--top,
+.hero-apparatus__port--bottom {
+  left: 50%;
+}
+
+.hero-apparatus__port--top {
+  top: -10%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-apparatus__port--bottom {
+  bottom: -10%;
+  transform: translate(-50%, 50%);
 }
 
 .hero-screen__footer {
@@ -323,11 +339,14 @@
 
 @media (max-width: 880px) {
   .hero-screen {
+    height: auto;
+    min-height: 100svh;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto;
     gap: 2rem;
     align-content: start;
     padding-top: 78px;
+    overflow: visible;
   }
 
   .hero-screen::after {
@@ -339,12 +358,12 @@
   }
 
   .hero-screen h1 {
-    max-width: 10ch;
-    font-size: clamp(3.5rem, 15vw, 6.4rem);
+    max-width: 14ch;
+    font-size: clamp(3rem, 13vw, 5.5rem);
   }
 
   .hero-apparatus {
-    width: min(68vw, 360px);
+    width: min(64vw, 340px);
   }
 
   .hero-screen__footer {
