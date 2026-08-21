@@ -29,8 +29,23 @@ requireMatch(
 );
 requireMatch(
   hardening,
-  /@media \(max-width:\s*1100px\)[\s\S]*\.apparatus-prototype__workfield[\s\S]*overflow:\s*visible/,
-  "Collapsed Apparatus topology must avoid nested workfield scrolling",
+  /\.apparatus-prototype-shell\s*\{[\s\S]*height:\s*100svh;[\s\S]*min-height:\s*0;[\s\S]*overflow:\s*hidden;/,
+  "Wide Apparatus must remain a single-viewport chassis instead of expanding the document in Y",
+);
+requireMatch(
+  hardening,
+  /\.apparatus-trace--rail,\s*\n\.apparatus-peer-bank\s*\{[\s\S]*overflow:\s*auto;[\s\S]*overscroll-behavior:\s*contain/,
+  "Wide Apparatus side bays must own their overflow inside the fixed chassis",
+);
+requireMatch(
+  hardening,
+  /@media \(max-width:\s*1100px\)[\s\S]*\.apparatus-prototype-shell\s*\{[\s\S]*height:\s*auto;[\s\S]*min-height:\s*100svh;[\s\S]*overflow:\s*visible/,
+  "Collapsed Apparatus topology must return overflow ownership to the document",
+);
+requireMatch(
+  hardening,
+  /@media \(max-width:\s*1100px\)[\s\S]*\.apparatus-prototype__workfield,[\s\S]*\.apparatus-peer-bank\s*\{[\s\S]*overflow:\s*visible/,
+  "Collapsed Apparatus topology must avoid nested workfield and peer-bank scrolling",
 );
 requireMatch(
   hardening,
