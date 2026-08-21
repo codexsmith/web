@@ -154,7 +154,7 @@ export function WorldApp({
   );
   const siblings = getSiblings(focusId).map(hydrateContentNode);
   const hasSiblings = siblings.some((node) => node.id !== focusId);
-  const showTraversalPath = focusId !== "root" || traversalCursor > 0;
+  const showTraversalPath = traversalIds.length > 1;
   const canTraceBack = traversalCursor > 0;
   const canTraceForward = traversalCursor >= 0 && traversalCursor < traversalIds.length - 1;
   const worldMode = projection === "record" ? "detail" : projection;
@@ -293,19 +293,10 @@ export function WorldApp({
     (targetId: string, direction?: TransitionDirection) => {
       if (targetId === focusId) return;
 
-      const from = getNode(focusId);
-      const target = getNode(targetId);
       const activePath = traversalIds.slice(0, traversalCursor + 1);
-      const existingIndex = activePath.lastIndexOf(targetId);
-      const isSiblingChoice = Boolean(from.parentId && from.parentId === target.parentId);
       let nextTraversal: TraversalState;
 
-      if (isSiblingChoice) {
-        nextTraversal = replaceTraversalTerminal(traversalIds, traversalCursor, targetId);
-        setTraversalIds(nextTraversal.ids);
-      } else if (existingIndex >= 0) {
-        nextTraversal = { ids: traversalIds, cursor: existingIndex };
-      } else if (traversalCursor === traversalIds.length - 1) {
+      if (traversalCursor === traversalIds.length - 1) {
         nextTraversal = {
           ids: appendTraversal(traversalIds, targetId),
           cursor: traversalIds.length,
@@ -328,6 +319,24 @@ export function WorldApp({
       router.push(stateUrl(targetId, projection, processScope, uiShell), { scroll: false });
     },
     [focusId, processScope, projection, router, traversalCursor, traversalIds, uiShell],
+  );
+
+  const navigateLocal = useCallback(
+    (targetId: string) => {
+      if (targetId === focusId) return;
+
+      const localTraversal = [targetId];
+      writeTraversalMemory(localTraversal, 0);
+      setTraversalIds(localTraversal);
+      setTraversalCursor(0);
+      setTransitionDirection(inferDirection(focusId, targetId));
+      setTransitionKey((value) => value + 1);
+      setFocusId(targetId);
+      setInspectionId(null);
+      setSearchOpen(false);
+      router.push(stateUrl(targetId, projection, processScope, uiShell), { scroll: false });
+    },
+    [focusId, processScope, projection, router, uiShell],
   );
 
   const navigateHome = useCallback(() => {
@@ -507,7 +516,7 @@ export function WorldApp({
             onHome={navigateHome}
             onBack={navigateTraceBack}
             onForward={navigateTraceForward}
-            onNavigate={navigate}
+            onLocalNavigate={navigateLocal}
             onTraversalPath={navigateTraversalPath}
             onProcessZoomOut={processZoomOut}
             onProcessZoomIn={processZoomIn}
@@ -519,7 +528,7 @@ export function WorldApp({
       )}
 
       {activeInspection ? <InspectionPanel inspection={activeInspection} onClose={() => setInspectionId(null)} /> : null}
-      {searchOpen ? <SearchPanel onClose={() => setSearchOpen(false)} onNavigate={navigate} /> : null}
+      {searchOpen ? <SearchPanel onClose={() => setSearchOpen(false)} onNavigate={navigateLocal} /> : null}
     </div>
   );
 }

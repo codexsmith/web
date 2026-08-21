@@ -25,7 +25,7 @@ type BoundaryFrameProps = {
   onHome: () => void;
   onBack: () => void;
   onForward: () => void;
-  onNavigate: (id: string) => void;
+  onLocalNavigate: (id: string) => void;
   onTraversalPath: (id: string, index: number) => void;
   onProcessZoomOut: () => void;
   onProcessZoomIn: () => void;
@@ -98,7 +98,7 @@ export function BoundaryFrame({
   onHome,
   onBack,
   onForward,
-  onNavigate,
+  onLocalNavigate,
   onTraversalPath,
   onProcessZoomOut,
   onProcessZoomIn,
@@ -107,10 +107,8 @@ export function BoundaryFrame({
 }: BoundaryFrameProps) {
   const isRootFocus = focusNode.id === "root";
   const peerNodes = siblings.filter((node) => node.parentId === focusNode.parentId);
-  const currentPeerIndex = peerNodes.findIndex((node) => node.id === focusNode.id);
-  const navQueue = currentPeerIndex >= 0
-    ? [...peerNodes.slice(currentPeerIndex), ...peerNodes.slice(0, currentPeerIndex)]
-    : [focusNode, ...peerNodes.filter((node) => node.id !== focusNode.id)];
+  const localNavNodes = peerNodes;
+  const hasTrace = traversalPath.length > 1;
   const activeTrace = traversalPath.slice(0, traversalCursor + 1);
   const priorTrace = activeTrace
     .slice(0, -1)
@@ -118,7 +116,7 @@ export function BoundaryFrame({
     .filter(({ node }) => node.id !== "root");
   const visiblePriorTrace = priorTrace.length <= 4 ? priorTrace : priorTrace.slice(-4);
   const hiddenTraceSteps = Math.max(0, priorTrace.length - visiblePriorTrace.length);
-  const showTraceNav = !isRootFocus || priorTrace.length > 0 || navQueue.length > 1;
+  const showLeftNav = hasTrace || (!isRootFocus && localNavNodes.length > 0);
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
   const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
 
@@ -162,14 +160,41 @@ export function BoundaryFrame({
       className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
     >
       <header className="boundary-frame__top">
-        <button
-          className="brand-anchor"
-          onClick={onHome}
-          aria-label="Boundary First Labs home"
-          title="Reset trace to Boundary First Labs"
-        >
-          <span className="brand-anchor__mark" aria-hidden="true">BF</span>
-        </button>
+        <div className={`frame-home-tray ${hasTrace ? "frame-home-tray--trace" : ""}`} aria-label="Home and trace controls">
+          <button
+            className="brand-anchor"
+            onClick={onHome}
+            aria-label="Boundary First Labs home"
+            title="Boundary First Labs home"
+          >
+            <span className="brand-anchor__mark" aria-hidden="true">BF</span>
+          </button>
+
+          {hasTrace ? (
+            <>
+              <button
+                className="frame-tool frame-tool--trace-back"
+                onClick={onBack}
+                disabled={!canTraceBack}
+                aria-label="Back through trace"
+                title="Move one step backward through the trace"
+              >
+                <FrameIcon name="back" />
+                <span className="frame-tool__label">Back</span>
+              </button>
+              <button
+                className="frame-tool frame-tool--trace-forward"
+                onClick={onForward}
+                disabled={!canTraceForward}
+                aria-label="Forward through trace"
+                title="Move one step forward through the trace"
+              >
+                <FrameIcon name="forward" />
+                <span className="frame-tool__label">Forward</span>
+              </button>
+            </>
+          ) : null}
+        </div>
 
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool" onClick={onSearch} aria-label="Search" title="Search the lab">
@@ -227,76 +252,57 @@ export function BoundaryFrame({
         </div>
       </header>
 
-      {showTraceNav ? (
-        <aside className="boundary-frame__left boundary-frame__trace-nav">
-          <nav className="trace-nav" aria-label={`Trace and local navigation for ${focusNode.label}`}>
-            <div className="trace-nav__transport" aria-label="Trace history controls">
-              <button
-                className="frame-tool frame-tool--back frame-tool--footer-back frame-tool--trace-back"
-                onClick={onBack}
-                disabled={!canTraceBack}
-                aria-label="Back through trace"
-                title="Move one step backward through the trace"
-              >
-                <FrameIcon name="back" />
-                <span className="frame-tool__label">Back</span>
-              </button>
-              <button
-                className="frame-tool frame-tool--trace-forward"
-                onClick={onForward}
-                disabled={!canTraceForward}
-                aria-label="Forward through trace"
-                title="Move one step forward through the trace"
-              >
-                <FrameIcon name="forward" />
-                <span className="frame-tool__label">Forward</span>
-              </button>
-            </div>
+      {showLeftNav ? (
+        <aside className="boundary-frame__left boundary-frame__trace-nav" data-has-trace={hasTrace ? "true" : "false"}>
+          <nav className="trace-nav" aria-label={`Local navigation and trace for ${focusNode.label}`}>
+            {hasTrace && visiblePriorTrace.length ? (
+              <div className="trace-nav__history-wrap">
+                {hiddenTraceSteps ? (
+                  <span
+                    className="trace-nav__history-gap"
+                    aria-label={`${hiddenTraceSteps} earlier trace ${hiddenTraceSteps === 1 ? "step" : "steps"} hidden`}
+                  >
+                    +{hiddenTraceSteps}
+                  </span>
+                ) : null}
+                <ol className="trace-nav__history" aria-label="Focus traversal history">
+                  {visiblePriorTrace.map(({ node, index }) => (
+                    <li key={`${node.id}-${index}`}>
+                      <span className="trace-nav__history-dot" aria-hidden="true" />
+                      <button
+                        onClick={() => onTraversalPath(node.id, index)}
+                        title={`Return to ${node.label}`}
+                      >
+                        <span className="path-node__label">{node.shortLabel ?? node.label}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ) : null}
 
-            <div className="trace-nav__history-wrap">
-              {hiddenTraceSteps ? (
-                <span
-                  className="trace-nav__history-gap"
-                  aria-label={`${hiddenTraceSteps} earlier trace ${hiddenTraceSteps === 1 ? "step" : "steps"} hidden`}
-                >
-                  +{hiddenTraceSteps}
-                </span>
-              ) : null}
-              <ol className="trace-nav__history" aria-label="Focus traversal history">
-                {visiblePriorTrace.map(({ node, index }) => (
-                  <li key={`${node.id}-${index}`}>
-                    <span className="trace-nav__history-dot" aria-hidden="true" />
-                    <button
-                      onClick={() => onTraversalPath(node.id, index)}
-                      title={`Return to ${node.label}`}
-                    >
-                      <span className="path-node__label">{node.shortLabel ?? node.label}</span>
-                    </button>
-                  </li>
-                ))}
+            {localNavNodes.length ? (
+              <ol className="local-nav__links" aria-label={`Related pages at the same level as ${focusNode.label}`}>
+                {localNavNodes.map((peer) => {
+                  const isCurrent = peer.id === focusNode.id;
+                  return (
+                    <li key={peer.id}>
+                      <button
+                        className={isCurrent ? "is-active" : undefined}
+                        aria-current={isCurrent ? "page" : undefined}
+                        onClick={() => {
+                          if (!isCurrent) onLocalNavigate(peer.id);
+                        }}
+                        title={isCurrent ? `${peer.label} (current)` : `Open ${peer.label}`}
+                      >
+                        {isCurrent ? <span className="path-node__role sr-only">Focus</span> : null}
+                        <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
+                      </button>
+                    </li>
+                  );
+                })}
               </ol>
-            </div>
-
-            <ol className="trace-nav__queue">
-              {navQueue.map((peer) => {
-                const isCurrent = peer.id === focusNode.id;
-                return (
-                  <li key={peer.id}>
-                    <button
-                      className={isCurrent ? "is-active" : undefined}
-                      aria-current={isCurrent ? "page" : undefined}
-                      onClick={() => {
-                        if (!isCurrent) onNavigate(peer.id);
-                      }}
-                      title={isCurrent ? `${peer.label} (current)` : `Switch to ${peer.label}`}
-                    >
-                      {isCurrent ? <span className="path-node__role">Focus</span> : null}
-                      <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
+            ) : null}
           </nav>
         </aside>
       ) : null}
