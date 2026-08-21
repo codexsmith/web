@@ -172,6 +172,18 @@ try {
     "At a glance",
   ]);
 
+  await expectPage("/agency-audit", [
+    "Make the chain from representation to consequence inspectable.",
+    "At a glance",
+    "Five passes from authority to repair.",
+    "Good pilot candidates are bounded, consequential, and inspectable.",
+    "Pilot one bounded process.",
+    "This is a systems audit, not delegated institutional authority.",
+  ], [
+    "Reading frame",
+    "Governed public landing",
+  ]);
+
   // Explicitly addressed, no-index Apparatus prototype. Card remains the default route.
   await expectPage("/?world=1&ui=apparatus", [
     "APPARATUS",
