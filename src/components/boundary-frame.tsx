@@ -86,19 +86,14 @@ export function BoundaryFrame({
       className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
     >
       <header className="boundary-frame__top">
-        <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs root world">
+        <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs home">
           <span className="brand-anchor__mark" aria-hidden="true">BF</span>
           <span className="brand-anchor__copy">
             <span className="brand-anchor__name">Boundary First Labs</span>
-            <span className="brand-anchor__mode">Root world</span>
           </span>
         </button>
 
         <div className="frame-tools" aria-label="Global controls">
-          <button className="frame-tool frame-tool--back" onClick={onBack} aria-label="Back" title="Back through browser navigation history">
-            <FrameIcon name="back" />
-            <span className="frame-tool__label">Back</span>
-          </button>
           <button className="frame-tool" onClick={onSearch} aria-label="Search" title="Search the lab">
             <FrameIcon name="search" />
             <span className="frame-tool__label">Search</span>
@@ -178,6 +173,16 @@ export function BoundaryFrame({
       ) : null}
 
       <footer className="boundary-frame__bottom">
+        <button
+          className="frame-tool frame-tool--back frame-tool--footer-back"
+          onClick={onBack}
+          aria-label="Back"
+          title="Back through browser navigation history"
+        >
+          <FrameIcon name="back" />
+          <span className="frame-tool__label">Back</span>
+        </button>
+
         {onProjectionChange ? (
           <div className="projection-switcher" aria-label={`Deeper representations of ${focusNode.label}`}>
             <span className="projection-switcher__label">Depth</span>
