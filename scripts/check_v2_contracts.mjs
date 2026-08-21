@@ -41,7 +41,7 @@ requireMatch(
   "Specialized projections must deepen the ordinary World rather than own basic content discovery",
 );
 
-// Hero = threshold; Root World = structural operating world. The threshold must not become a second root map.
+// Hero = threshold; entered root = structural world. The threshold must not become a second root map.
 requireMatch(
   "src/components/hero-screen.tsx",
   /Software for difficult systems\.[\s\S]*Enter the lab/,
@@ -50,7 +50,7 @@ requireMatch(
 forbidMatch(
   "src/components/hero-screen.tsx",
   /district-grid|rootBranches|Enter region|onNavigate/,
-  "Hero must not duplicate Root World structure or traversal controls",
+  "Hero must not duplicate entered-world structure or traversal controls",
 );
 requireMatch(
   "src/app/[[...slug]]/page.tsx",
@@ -60,7 +60,7 @@ requireMatch(
 requireMatch(
   "src/components/world-app.tsx",
   /focusId\s*===\s*"root"\)\s*params\.set\("world",\s*"1"\)/,
-  "Entered Root World state must be reconstructible in the URL",
+  "Entered root state must be reconstructible in the URL",
 );
 requireMatch(
   "src/components/world-app.tsx",
@@ -75,12 +75,27 @@ forbidMatch(
 forbidMatch(
   "src/components/world-view.tsx",
   /Software for difficult systems\./,
-  "Root World must not repeat the hero proposition",
+  "Entered root must not repeat the hero proposition",
+);
+forbidMatch(
+  "src/components/world-view.tsx",
+  /Root World · operating environment/,
+  "Entered root must not carry redundant Root World / operating-environment labeling",
 );
 requireMatch(
   "src/components/world-view.tsx",
-  /Root World · operating environment/,
-  "Entered root must identify itself as the operating world",
+  /!isRoot\s*\?\s*<p className="eyebrow">\{node\.eyebrow\}<\/p>\s*:\s*null/,
+  "Entered root must use the institution name directly rather than a redundant root eyebrow",
+);
+requireMatch(
+  "src/components/boundary-frame.tsx",
+  /aria-label="Boundary First Labs home"/,
+  "Frame identity must name the Lab without redundant Root World copy",
+);
+forbidMatch(
+  "src/components/boundary-frame.tsx",
+  /Root world/i,
+  "Frame chrome must not repeat Root World labeling",
 );
 
 // Focus Path = actual traversal history. Content structure belongs to World/Record/Peers, not the left rail.
@@ -280,7 +295,7 @@ forbidMatch(
 requireMatch(
   "src/app/root-world-and-content-stability.css",
   /\.district-card\s*\{[\s\S]*overflow:\s*visible/,
-  "District cards must be allowed to grow rather than clip content",
+  "District cards must be allowed to grow rather than clip content in general World layouts",
 );
 requireMatch(
   "src/app/root-world-and-content-stability.css",
@@ -297,6 +312,25 @@ requireMatch(
   /subject-pane[\s\S]*overflow-wrap:\s*anywhere[\s\S]*@media \(max-width: 980px\)/,
   "Inline subject content must preserve text and collapse lawfully under constrained widths",
 );
+requireExists(
+  "src/app/card-world-viewport-fit.css",
+  "Card World viewport-budget refinement must remain active",
+);
+requireMatch(
+  "src/app/card-world-viewport-fit.css",
+  /--frame-top:\s*52px[\s\S]*--frame-bottom:\s*52px[\s\S]*world-viewport[\s\S]*padding:\s*clamp\(8px/,
+  "Card World must keep equal compact horizontal rails and a low-padding working viewport",
+);
+requireMatch(
+  "src/app/card-world-viewport-fit.css",
+  /data-gestalt-id="root"[\s\S]*district-grid[\s\S]*height:\s*100%[\s\S]*district-card[\s\S]*height:\s*100%/,
+  "Entered root must spend the available viewport before introducing scroll",
+);
+requireMatch(
+  "src/components/boundary-frame.tsx",
+  /boundary-frame__bottom[\s\S]*frame-tool--footer-back[\s\S]*projection-switcher/,
+  "Back and Depth must share the bottom rail, with Back physically preceding Depth",
+);
 
 // Gestalt is process placement/filter, not ancestry or spatial containment zoom.
 requireMatch(
@@ -310,7 +344,7 @@ requireMatch(
   "Gestalt must expose the BFL operating synthesis",
 );
 
-// Active style cascade must include content-first World, threshold, and traversal semantics, but not retired ecology layers.
+// Active style cascade must include content-first World, threshold, traversal semantics, and viewport-fit layer, but not retired ecology layers.
 forbidMatch(
   "src/app/layout.tsx",
   /world-ecology\.css|focus-telemetry|state-ecology|state-surface-projection|landing-stability/,
@@ -318,8 +352,8 @@ forbidMatch(
 );
 requireMatch(
   "src/app/layout.tsx",
-  /root-world-and-content-stability\.css[\s\S]*hero-screen\.css[\s\S]*traversal-history\.css[\s\S]*content-first-world\.css/,
-  "Root readability, hero threshold, traversal history, and content-first World layers must all be active",
+  /root-world-and-content-stability\.css[\s\S]*hero-screen\.css[\s\S]*traversal-history\.css[\s\S]*content-first-world\.css[\s\S]*industrial-card-ui\.css[\s\S]*card-world-viewport-fit\.css/,
+  "Root readability, hero threshold, traversal history, content-first World, and Card viewport-fit layers must all be active",
 );
 
 // The retired archive must represent final v1, including the late journey-refinement branch merged into main.
