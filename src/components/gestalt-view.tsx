@@ -11,6 +11,7 @@ import {
   visibleProcessStages,
 } from "@/lib/bfl-process";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { founderProfile, founderTimeline } from "@/lib/founder-content";
 
 type GestaltViewProps = {
   focusNode: ContentNode;
@@ -19,6 +20,10 @@ type GestaltViewProps = {
 };
 
 export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) {
+  if (focusNode.id === "root") {
+    return <FounderTimelineView />;
+  }
+
   const placement = deriveProcessPlacement(focusNode);
   const visibleStages = visibleProcessStages(placement, scope);
   const visibleIds = new Set(visibleStages.map((stage) => stage.id));
@@ -161,6 +166,99 @@ export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) 
             ) : (
               <p className="gestalt-empty">No other public nodes currently resolve to this primary process stage.</p>
             )}
+          </section>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function FounderTimelineView() {
+  return (
+    <main className="world-viewport gestalt-viewport">
+      <section className="gestalt-view founder-timeline-view" aria-label={`Founder timeline for ${founderProfile.name}`}>
+        <header className="gestalt-view__heading">
+          <div>
+            <p className="eyebrow">Founder timeline</p>
+            <h1>From practice to Boundary First Labs</h1>
+            <p>
+              For the Lab itself, Gestalt is more useful as temporal context than as a process-state diagram: how the
+              founder's training, delivery practice, independent inquiry, AI-assisted acceleration, and institutionalization
+              accumulated into the present Lab.
+            </p>
+          </div>
+          <dl className="gestalt-view__scope">
+            <div>
+              <dt>Focus</dt>
+              <dd>{founderProfile.name}</dd>
+            </div>
+            <div>
+              <dt>Arc</dt>
+              <dd>practice → research → lab</dd>
+            </div>
+            <div>
+              <dt>Current phase</dt>
+              <dd>conversion + institutionalization</dd>
+            </div>
+          </dl>
+        </header>
+
+        <section className="gestalt-synthesis" aria-label="Timeline reading rule">
+          <div className="gestalt-section-label">Reading rule</div>
+          <p>
+            <strong>Provenance explains how the work accumulated. It does not certify the claims.</strong>
+            <span>
+              The timeline is a founder and institutional history. Research, product, and publication evidence remain
+              answerable to their own domains and validation paths.
+            </span>
+          </p>
+        </section>
+
+        <section className="gestalt-pipeline founder-timeline" aria-label="Boundary First Labs founder timeline">
+          <div className="gestalt-section-label">Development arc</div>
+          <ol className="gestalt-pipeline__stages">
+            {founderTimeline.map((item, index) => (
+              <li key={item.label} className="is-active" data-primary={index === founderTimeline.length - 1 ? "true" : "false"}>
+                <span className="gestalt-stage__index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="gestalt-stage__signal" aria-hidden="true" />
+                <div className="gestalt-stage__copy">
+                  <small>{item.period}</small>
+                  <strong>{item.label}</strong>
+                  <p>{item.summary}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <div className="gestalt-lower-grid">
+          <section className="gestalt-placement-notes">
+            <div className="gestalt-section-label">Present institutional task</div>
+            <h2>Convert founder-held coherence into shared structure</h2>
+            <p>{founderProfile.currentPhase}</p>
+            <p className="gestalt-placement-notes__boundary">
+              The success condition is not founder indispensability. It is work that other capable people can understand,
+              criticize, test, improve, teach, operate, maintain, and steward without erasing where it came from.
+            </p>
+          </section>
+
+          <section className="gestalt-placement-notes">
+            <div className="gestalt-section-label">Continue the institutional record</div>
+            <h2>Provenance and the Lab</h2>
+            <p>
+              The About branch carries the fuller split between origin, work substance, operating method, and present
+              institutional responsibility.
+            </p>
+            <div className="record-links">
+              <a href="/about/provenance">
+                <span>Origin and lineage</span>
+                <strong>Provenance</strong>
+              </a>
+              <a href="/about/the-lab">
+                <span>Present institution</span>
+                <strong>The Lab</strong>
+              </a>
+            </div>
           </section>
         </div>
       </section>
