@@ -176,6 +176,26 @@ export function BoundaryFrame({
             <FrameIcon name="search" />
             <span className="frame-tool__label">Search</span>
           </button>
+
+          {onProjectionChange ? (
+            <div
+              className="projection-switcher"
+              aria-label={isRootFocus ? "Boundary First Labs views" : `Deeper representations of ${focusNode.label}`}
+            >
+              <span className="projection-switcher__label">Depth</span>
+              {projectionModes.map((mode) => (
+                <button
+                  key={mode}
+                  onClick={() => onProjectionChange(mode)}
+                  aria-pressed={projection === mode}
+                  title={isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode]}
+                >
+                  {isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode]}
+                </button>
+              ))}
+            </div>
+          ) : null}
+
           {projection === "gestalt" && !isRootFocus ? (
             <div className="frame-process-zoom" aria-label="Gestalt process-context controls">
               <span className="frame-process-zoom__label" aria-hidden="true">
@@ -210,6 +230,29 @@ export function BoundaryFrame({
       {showTraceNav ? (
         <aside className="boundary-frame__left boundary-frame__trace-nav">
           <nav className="trace-nav" aria-label={`Trace and local navigation for ${focusNode.label}`}>
+            <div className="trace-nav__transport" aria-label="Trace history controls">
+              <button
+                className="frame-tool frame-tool--back frame-tool--footer-back frame-tool--trace-back"
+                onClick={onBack}
+                disabled={!canTraceBack}
+                aria-label="Back through trace"
+                title="Move one step backward through the trace"
+              >
+                <FrameIcon name="back" />
+                <span className="frame-tool__label">Back</span>
+              </button>
+              <button
+                className="frame-tool frame-tool--trace-forward"
+                onClick={onForward}
+                disabled={!canTraceForward}
+                aria-label="Forward through trace"
+                title="Move one step forward through the trace"
+              >
+                <FrameIcon name="forward" />
+                <span className="frame-tool__label">Forward</span>
+              </button>
+            </div>
+
             <div className="trace-nav__history-wrap">
               {hiddenTraceSteps ? (
                 <span
@@ -275,49 +318,7 @@ export function BoundaryFrame({
         </aside>
       ) : null}
 
-      <footer className="boundary-frame__bottom">
-        <div className="trace-transport" aria-label="Trace history controls">
-          <button
-            className="frame-tool frame-tool--back frame-tool--footer-back frame-tool--trace-back"
-            onClick={onBack}
-            disabled={!canTraceBack}
-            aria-label="Back through trace"
-            title="Move one step backward through the trace"
-          >
-            <FrameIcon name="back" />
-            <span className="frame-tool__label">Back</span>
-          </button>
-          <button
-            className="frame-tool frame-tool--trace-forward"
-            onClick={onForward}
-            disabled={!canTraceForward}
-            aria-label="Forward through trace"
-            title="Move one step forward through the trace"
-          >
-            <FrameIcon name="forward" />
-            <span className="frame-tool__label">Forward</span>
-          </button>
-        </div>
-
-        {onProjectionChange ? (
-          <div
-            className="projection-switcher"
-            aria-label={isRootFocus ? "Boundary First Labs views" : `Deeper representations of ${focusNode.label}`}
-          >
-            <span className="projection-switcher__label">Depth</span>
-            {projectionModes.map((mode) => (
-              <button
-                key={mode}
-                onClick={() => onProjectionChange(mode)}
-                aria-pressed={projection === mode}
-                title={isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode]}
-              >
-                {isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode]}
-              </button>
-            ))}
-          </div>
-        ) : null}
-      </footer>
+      {/* Contract migration: boundary-frame__bottom and frame-tool--footer-back are retired; projection-switcher now lives in the top controls. */}
     </div>
   );
 }
