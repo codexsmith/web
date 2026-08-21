@@ -154,8 +154,19 @@ type BranchWorldProps = {
   onInspect: (inspectionId: string) => void;
 };
 
+const rootRegionOrder = ["public-interest", "products", "publications", "about", "research"];
+
 function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps) {
   const isRoot = node.id === "root";
+  const displayedRegions = isRoot
+    ? [...regions].sort((a, b) => {
+        const aIndex = rootRegionOrder.indexOf(a.id);
+        const bIndex = rootRegionOrder.indexOf(b.id);
+        const aOrder = aIndex === -1 ? rootRegionOrder.length : aIndex;
+        const bOrder = bIndex === -1 ? rootRegionOrder.length : bIndex;
+        return aOrder - bOrder;
+      })
+    : regions;
 
   return (
     <section
@@ -178,8 +189,8 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
         />
       ) : null}
 
-      <div className={`district-grid district-grid--${Math.min(regions.length, 6)}`} aria-label={`${node.label} regions`}>
-        {regions.map((child, index) => (
+      <div className={`district-grid district-grid--${Math.min(displayedRegions.length, 6)}`} aria-label={`${node.label} regions`}>
+        {displayedRegions.map((child, index) => (
           <button
             key={child.id}
             className="district-card"
