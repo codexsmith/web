@@ -88,38 +88,41 @@ body[data-ui-shell="cards"] .branch-world {
 }
 
 body[data-ui-shell="cards"] .branch-world--root-world {
-  grid-template-columns: minmax(180px, 0.34fr) minmax(0, 1.66fr);
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(260px, 0.48fr) minmax(0, 1.52fr);
+  grid-template-rows: minmax(0, 0.94fr) minmax(0, 1.06fr);
   align-items: stretch;
 }
 
+/* Root identity already lives in the frame. The root intro is plain copy in the notch,
+   not a sixth card competing with the five actual regions. */
 body[data-ui-shell="cards"] .branch-world--root-world > .world-heading {
   grid-column: 1;
   grid-row: 1;
+  z-index: 1;
   align-self: stretch;
   display: grid;
   align-content: center;
-  padding: clamp(12px, 1vw, 18px);
-}
-
-body[data-ui-shell="cards"] .branch-world--root-world > .world-heading h1 {
-  max-width: 8ch;
-  font-size: clamp(2.15rem, min(3.1vw, 6.2svh), 3.8rem);
-  line-height: 0.92;
+  padding: clamp(18px, 1.35vw, 28px);
+  border: 0;
+  border-left: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 body[data-ui-shell="cards"] .branch-world--root-world > .world-heading > p:not(.eyebrow) {
-  margin-top: 0.55rem;
-  font-size: clamp(0.72rem, 0.78vw, 0.9rem);
-  line-height: 1.38;
+  max-width: 24ch;
+  margin: 0;
+  font-size: clamp(0.8rem, 0.88vw, 1rem);
+  line-height: 1.48;
 }
 
 body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-grid {
   grid-column: 1 / -1;
   grid-row: 1 / -1;
   display: grid;
-  grid-template-columns: minmax(180px, 0.34fr) repeat(3, minmax(0, 1fr));
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(260px, 0.48fr) repeat(3, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 0.94fr) minmax(0, 1.06fr);
   height: 100%;
   min-height: 0;
   align-content: stretch;
@@ -156,13 +159,14 @@ body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card
 body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="about"] {
   grid-column: 1;
   grid-row: 2;
+  padding: clamp(16px, 1.15vw, 22px);
 }
 
 body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] {
   grid-column: 2 / 5;
   grid-row: 2;
-  border-radius: clamp(28px, 5vw, 999px);
-  padding-inline: clamp(24px, 2.6vw, 46px);
+  border-radius: clamp(24px, 2.1vw, 34px);
+  padding-inline: clamp(22px, 2vw, 36px);
 }
 
 body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card__kind {
@@ -183,6 +187,11 @@ body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card
   margin-top: 0.5rem;
   font-size: clamp(0.68rem, 0.74vw, 0.82rem);
   line-height: 1.34;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="about"] > p {
+  font-size: clamp(0.7rem, 0.76vw, 0.84rem);
+  line-height: 1.38;
 }
 
 body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card__action {
@@ -231,6 +240,7 @@ body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card
   body[data-ui-shell="cards"] .branch-world--root-world > .world-heading {
     grid-column: 1;
     grid-row: auto;
+    padding: 14px;
   }
 
   body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-grid {
