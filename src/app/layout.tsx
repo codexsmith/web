@@ -13,6 +13,7 @@ import "./frame-detail-stability.css";
 import "./projection-views.css";
 import "./navigation-topology.css";
 import "./gestalt-process.css";
+import "./root-founder-projections.css";
 import "./navigation-interaction.css";
 import "./root-world-and-content-stability.css";
 import "./hero-screen.css";
