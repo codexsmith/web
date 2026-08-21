@@ -177,7 +177,7 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
     >
       <header className="world-heading">
         {!isRoot ? <p className="eyebrow">{node.eyebrow}</p> : null}
-        <h1>{node.label}</h1>
+        {isRoot ? <h1 className="sr-only">{node.label}</h1> : <h1>{node.label}</h1>}
         <p>{node.summary}</p>
       </header>
 
