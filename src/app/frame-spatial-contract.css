@@ -1,8 +1,12 @@
 /* Boundary First Card World · canonical frame spatial contract.
-   Loaded after feature/presentation layers so frame geometry has one final owner.
-   The top rail owns stable sibling navigation; the bottom rail owns traversal history. */
+   The left boundary is one combined local-navigation + trace instrument.
+   Sibling choices rotate through one stable queue; history transport lives in the footer. */
 
 @media (min-width: 981px) {
+  body[data-ui-shell="cards"] {
+    --frame-left: 186px;
+  }
+
   body[data-ui-shell="cards"] .boundary-frame__top {
     display: grid !important;
     grid-template-columns: auto minmax(0, 1fr) auto !important;
@@ -16,15 +20,12 @@
     grid-row: 1 !important;
     align-self: center;
     justify-self: start;
+    width: 40px;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__peers,
-  body[data-ui-shell="cards"] .boundary-frame__peer-spacer {
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-    align-self: center;
-    justify-self: start !important;
-    margin: 0 !important;
+  body[data-ui-shell="cards"] .brand-anchor__copy,
+  body[data-ui-shell="cards"] .brand-anchor__name {
+    display: none !important;
   }
 
   body[data-ui-shell="cards"] .frame-tools {
@@ -38,33 +39,199 @@
     transform: none !important;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__bottom {
-    display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr) auto !important;
-    align-items: center;
-    gap: clamp(8px, 1vw, 14px);
+  /* One left instrument owns both the local sibling queue and the trace tail. */
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav {
+    top: var(--frame-top);
+    bottom: var(--frame-bottom);
+    left: 0;
+    width: var(--frame-left);
+    align-items: stretch;
+    padding: 12px 10px 14px;
+    border-right: 0 !important;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018), transparent 72%),
+      var(--bf-bg-surface);
+    box-shadow: none !important;
   }
 
-  body[data-ui-shell="cards"] .frame-tool--footer-back {
-    grid-column: 1 !important;
-    justify-self: start;
+  body[data-ui-shell="cards"] .trace-nav {
+    min-width: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__trace,
-  body[data-ui-shell="cards"] .boundary-frame__trace-spacer {
-    grid-column: 2 !important;
-    align-self: center;
-    justify-self: start !important;
+  body[data-ui-shell="cards"] .trace-nav__queue,
+  body[data-ui-shell="cards"] .trace-nav__history {
+    min-width: 0;
+    flex: 0 0 auto !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
     margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue {
+    display: flex;
+    flex-direction: column;
+    gap: 7px !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue li,
+  body[data-ui-shell="cards"] .trace-nav__history li {
+    max-width: none;
+    min-width: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue li + li::before,
+  body[data-ui-shell="cards"] .trace-nav__history li + li::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue button {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: 2px;
+    padding: 7px 9px;
+    border: 1px solid var(--bf-border-subtle);
+    border-radius: 9px;
+    background: rgba(48, 59, 66, 0.34);
+    color: var(--bf-text-secondary);
+    box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue button:hover:not(.is-active) {
+    border-color: var(--bf-action-line);
+    background: var(--bf-bg-raised);
+    color: var(--bf-text-primary);
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue button.is-active {
+    border-color: var(--bf-action-line);
+    background:
+      linear-gradient(90deg, var(--bf-action-surface), transparent 86%),
+      var(--bf-bg-raised);
+    color: var(--bf-text-primary);
+    cursor: default;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue .path-node__role {
+    color: var(--bf-action-hover);
+    font-size: 0.38rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue .peer-node__label {
+    overflow-wrap: anywhere;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
+
+  /* History is deliberately quieter than the local choice queue. The current node is
+     not repeated: it is already the first queue item above. */
+  body[data-ui-shell="cards"] .trace-nav__history-wrap {
+    min-width: 0;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--bf-border-subtle);
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history {
+    display: flex;
+    flex-direction: column;
+    gap: 2px !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history li {
+    display: grid;
+    grid-template-columns: 8px minmax(0, 1fr);
+    align-items: center;
+    gap: 6px;
+    min-height: 22px;
+    color: var(--bf-text-muted);
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history-dot {
+    width: 4px;
+    height: 4px;
+    justify-self: center;
+    border-radius: 50%;
+    background: var(--bf-border-strong);
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history button {
+    width: 100%;
+    min-width: 0;
+    padding: 3px 2px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history button:hover {
+    color: var(--bf-text-primary);
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history .path-node__label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.55rem;
+    line-height: 1.15;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history-overflow {
+    display: block;
+    margin-top: 4px;
+    padding-left: 14px;
+    color: var(--bf-text-muted);
+    font-size: 0.42rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* Back/forward are transport through the retained trace; Depth remains independent. */
+  body[data-ui-shell="cards"] .boundary-frame__bottom {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between !important;
+    gap: 10px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-transport {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  body[data-ui-shell="cards"] .trace-transport .frame-tool:disabled {
+    opacity: 0.22;
+    cursor: default;
   }
 
   body[data-ui-shell="cards"] .projection-switcher {
-    grid-column: 3 !important;
-    justify-self: end;
-    margin-left: 0 !important;
+    margin-left: auto !important;
   }
 
-  /* The old vertical Focus Path and left peer rail are retired. */
+  /* Retire every remnant of the old vertical breadcrumb/Focus Path. */
   body[data-ui-shell="cards"] .brand-anchor__mark::before,
   body[data-ui-shell="cards"] .boundary-frame__left::before,
   body[data-ui-shell="cards"] .boundary-frame__left ol::before {
@@ -72,21 +239,32 @@
     display: none !important;
   }
 
-  body[data-ui-shell="cards"] .world-viewport,
-  body[data-ui-shell="cards"] .site-shell[data-has-siblings="true"] .world-viewport,
-  body[data-ui-shell="cards"] .site-shell[data-has-siblings="false"] .world-viewport {
-    left: 0 !important;
+  /* Non-root content spends the rectangle to the right of the combined left instrument. */
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .world-viewport {
+    left: var(--frame-left) !important;
     right: 0 !important;
     min-width: 0;
     min-height: 0;
     overflow: hidden;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame::after,
-  body[data-ui-shell="cards"] .site-shell[data-has-siblings="true"] .boundary-frame::after,
-  body[data-ui-shell="cards"] .site-shell[data-has-siblings="false"] .boundary-frame::after {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
     left: 0 !important;
+    right: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame::after,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .boundary-frame::after,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .boundary-frame::after {
     border-left: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .boundary-frame::after {
+    left: var(--frame-left) !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .boundary-frame::after {
+    left: 0 !important;
   }
 
   body[data-ui-shell="cards"] .world-viewport > * {
@@ -95,7 +273,7 @@
     max-height: 100%;
   }
 
-  /* Leaf nodes share one reusable spatial law. */
+  /* Leaf nodes share one reusable spatial law rather than requiring route fixes. */
   body[data-ui-shell="cards"] .leaf-world {
     width: min(100%, 1360px);
     max-width: 100%;
@@ -127,6 +305,10 @@
 }
 
 @media (max-width: 980px) {
+  body[data-ui-shell="cards"] {
+    --trace-nav-shelf: 60px;
+  }
+
   body[data-ui-shell="cards"] .boundary-frame__top,
   body[data-ui-shell="cards"] .boundary-frame--root .boundary-frame__top,
   body[data-ui-shell="cards"] .boundary-frame:not(.boundary-frame--root) .boundary-frame__top {
@@ -142,11 +324,9 @@
     grid-row: 1 !important;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__peers,
-  body[data-ui-shell="cards"] .boundary-frame__peer-spacer {
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-    justify-self: start !important;
+  body[data-ui-shell="cards"] .brand-anchor__copy,
+  body[data-ui-shell="cards"] .brand-anchor__name {
+    display: none !important;
   }
 
   body[data-ui-shell="cards"] .frame-tools {
@@ -159,27 +339,91 @@
     transform: none !important;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__bottom {
-    display: grid !important;
-    grid-template-columns: auto minmax(0, 1fr) auto !important;
-    align-items: center;
-    gap: 6px;
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav {
+    top: var(--frame-top);
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: var(--trace-nav-shelf);
+    display: block;
+    padding: 6px 8px;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--bf-border-default);
   }
 
-  body[data-ui-shell="cards"] .frame-tool--footer-back {
-    grid-column: 1 !important;
-  }
-
-  body[data-ui-shell="cards"] .boundary-frame__trace,
-  body[data-ui-shell="cards"] .boundary-frame__trace-spacer {
-    grid-column: 2 !important;
+  body[data-ui-shell="cards"] .trace-nav {
     min-width: 0;
-    justify-self: stretch !important;
+    height: 100%;
   }
 
-  body[data-ui-shell="cards"] .projection-switcher {
-    grid-column: 3 !important;
-    margin-left: 0 !important;
+  body[data-ui-shell="cards"] .trace-nav__queue {
+    height: 100%;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue li {
+    max-width: none;
+    flex: 0 0 auto;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue li + li::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue button {
+    min-width: 112px;
+    min-height: 42px;
+    padding: 6px 8px;
+    border: 1px solid var(--bf-border-subtle);
+    border-radius: 8px;
+    background: var(--bf-bg-control);
+    color: var(--bf-text-secondary);
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__queue button.is-active {
+    border-color: var(--bf-action-line);
+    background: var(--bf-action-surface);
+    color: var(--bf-text-primary);
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history-wrap {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .world-viewport {
+    top: calc(var(--frame-top) + var(--trace-nav-shelf)) !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
+    top: var(--frame-top) !important;
+    left: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__bottom {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 6px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-transport {
+    display: flex;
+    gap: 3px;
   }
 
   body[data-ui-shell="cards"] .brand-anchor__mark::before,
@@ -187,13 +431,6 @@
   body[data-ui-shell="cards"] .boundary-frame__left ol::before {
     content: none !important;
     display: none !important;
-  }
-
-  body[data-ui-shell="cards"] .world-viewport,
-  body[data-ui-shell="cards"] .site-shell[data-has-siblings="true"] .world-viewport,
-  body[data-ui-shell="cards"] .site-shell[data-has-siblings="false"] .world-viewport {
-    left: 0 !important;
-    right: 0 !important;
   }
 
   body[data-ui-shell="cards"] .leaf-world {

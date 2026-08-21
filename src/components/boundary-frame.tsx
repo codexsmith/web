@@ -14,13 +14,17 @@ type BoundaryFrameProps = {
   visible: boolean;
   focusNode: ContentNode;
   traversalPath: ContentNode[];
+  traversalCursor: number;
   siblings: ContentNode[];
   projection?: ProjectionMode;
   processScope: ProcessScope;
+  canTraceBack: boolean;
+  canTraceForward: boolean;
   canProcessZoomOut: boolean;
   canProcessZoomIn: boolean;
   onHome: () => void;
   onBack: () => void;
+  onForward: () => void;
   onNavigate: (id: string) => void;
   onTraversalPath: (id: string, index: number) => void;
   onProcessZoomOut: () => void;
@@ -29,7 +33,7 @@ type BoundaryFrameProps = {
   onSearch: () => void;
 };
 
-type FrameIconName = "back" | "search" | "minus" | "plus";
+type FrameIconName = "back" | "forward" | "search" | "minus" | "plus";
 
 const rootProjectionLabels: Record<ProjectionMode, string> = {
   world: "World",
@@ -51,11 +55,12 @@ const publicInterestPageSections = [
 ] as const;
 
 function FrameIcon({ name }: { name: FrameIconName }) {
-  if (name === "back") {
+  if (name === "back" || name === "forward") {
+    const isForward = name === "forward";
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M10 5 4 11l6 6" />
-        <path d="M5 11h8.5a6.5 6.5 0 0 1 6.5 6.5" />
+        <path d={isForward ? "m14 5 6 6-6 6" : "M10 5 4 11l6 6"} />
+        <path d={isForward ? "M19 11h-8.5A6.5 6.5 0 0 0 4 17.5" : "M5 11h8.5a6.5 6.5 0 0 1 6.5 6.5"} />
       </svg>
     );
   }
@@ -82,13 +87,17 @@ export function BoundaryFrame({
   visible,
   focusNode,
   traversalPath,
+  traversalCursor,
   siblings,
   projection = "world",
   processScope,
+  canTraceBack,
+  canTraceForward,
   canProcessZoomOut,
   canProcessZoomIn,
   onHome,
   onBack,
+  onForward,
   onNavigate,
   onTraversalPath,
   onProcessZoomOut,
@@ -96,16 +105,17 @@ export function BoundaryFrame({
   onProjectionChange,
   onSearch,
 }: BoundaryFrameProps) {
-  const traceStartIndex = Math.max(0, traversalPath.length - 5);
-  const priorTraversal = traversalPath.slice(traceStartIndex, -1).map((node, offset) => ({
-    node,
-    index: traceStartIndex + offset,
-  }));
-  const hiddenTraceSteps = traceStartIndex;
   const isRootFocus = focusNode.id === "root";
-  const showTraversalPath = !isRootFocus || traversalPath.length > 1;
   const peerNodes = siblings.filter((node) => node.parentId === focusNode.parentId);
-  const showPeerNavigation = peerNodes.length > 1;
+  const currentPeerIndex = peerNodes.findIndex((node) => node.id === focusNode.id);
+  const navQueue = currentPeerIndex >= 0
+    ? [...peerNodes.slice(currentPeerIndex), ...peerNodes.slice(0, currentPeerIndex)]
+    : [focusNode, ...peerNodes.filter((node) => node.id !== focusNode.id)];
+  const activeTrace = traversalPath.slice(0, traversalCursor + 1);
+  const priorTrace = activeTrace.slice(0, -1).map((node, index) => ({ node, index })).reverse();
+  const visiblePriorTrace = priorTrace.slice(0, 4);
+  const hiddenTraceSteps = Math.max(0, priorTrace.length - visiblePriorTrace.length);
+  const showTraceNav = !isRootFocus || priorTrace.length > 0 || navQueue.length > 1;
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
   const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
 
@@ -144,80 +154,14 @@ export function BoundaryFrame({
     section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }
 
-  const traceTimeline = showTraversalPath ? (
-    <nav className="boundary-frame__trace" aria-label="Focus traversal history">
-      <span className="boundary-frame__trace-label">Trace</span>
-      {hiddenTraceSteps ? (
-        <span
-          className="boundary-frame__trace-tail"
-          aria-label={`${hiddenTraceSteps} earlier trace ${hiddenTraceSteps === 1 ? "step" : "steps"} hidden`}
-        >
-          …
-        </span>
-      ) : null}
-      <ol>
-        {priorTraversal.map(({ node, index }) => (
-          <li key={`${node.id}-${index}`} data-history-step={index + 1}>
-            <span className="path-node__dot" aria-hidden="true" />
-            <button
-              onClick={() => onTraversalPath(node.id, index)}
-              title={`Return to ${node.label}`}
-            >
-              <span className="path-node__step" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <span className="path-node__label">{node.shortLabel ?? node.label}</span>
-            </button>
-          </li>
-        ))}
-        <li aria-current="page" data-history-step={traversalPath.length}>
-          <span className="path-node__dot" aria-hidden="true" />
-          <span className="path-node__current">
-            <small className="path-node__role">Focus</small>
-            <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
-          </span>
-        </li>
-      </ol>
-    </nav>
-  ) : (
-    <span className="boundary-frame__trace-spacer" aria-hidden="true" />
-  );
-
   return (
     <div
       className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
     >
       <header className="boundary-frame__top">
-        <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs home">
+        <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs home" title="Reset to the Lab root">
           <span className="brand-anchor__mark" aria-hidden="true">BF</span>
-          <span className="brand-anchor__copy">
-            <span className="brand-anchor__name">Boundary First Labs</span>
-          </span>
         </button>
-
-        {showPeerNavigation ? (
-          <nav className="boundary-frame__peers" aria-label={`Sibling navigation for ${focusNode.label}`}>
-            <ol>
-              {peerNodes.map((peer) => {
-                const isCurrent = peer.id === focusNode.id;
-                return (
-                  <li key={peer.id}>
-                    <button
-                      className={isCurrent ? "is-active" : undefined}
-                      aria-current={isCurrent ? "page" : undefined}
-                      onClick={() => {
-                        if (!isCurrent) onNavigate(peer.id);
-                      }}
-                      title={isCurrent ? `${peer.label} (current)` : `Traverse to sibling ${peer.label}`}
-                    >
-                      <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ol>
-          </nav>
-        ) : (
-          <span className="boundary-frame__peer-spacer" aria-hidden="true" />
-        )}
 
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool" onClick={onSearch} aria-label="Search" title="Search the lab">
@@ -255,6 +199,56 @@ export function BoundaryFrame({
         </div>
       </header>
 
+      {showTraceNav ? (
+        <aside className="boundary-frame__left boundary-frame__trace-nav">
+          <nav className="trace-nav" aria-label={`Trace and local navigation for ${focusNode.label}`}>
+            <ol className="trace-nav__queue">
+              {navQueue.map((peer) => {
+                const isCurrent = peer.id === focusNode.id;
+                return (
+                  <li key={peer.id}>
+                    <button
+                      className={isCurrent ? "is-active" : undefined}
+                      aria-current={isCurrent ? "page" : undefined}
+                      onClick={() => {
+                        if (!isCurrent) onNavigate(peer.id);
+                      }}
+                      title={isCurrent ? `${peer.label} (current)` : `Switch to ${peer.label}`}
+                    >
+                      {isCurrent ? <span className="path-node__role">Focus</span> : null}
+                      <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
+
+            {visiblePriorTrace.length ? (
+              <div className="trace-nav__history-wrap">
+                <ol className="trace-nav__history" aria-label="Focus traversal history">
+                  {visiblePriorTrace.map(({ node, index }) => (
+                    <li key={`${node.id}-${index}`}>
+                      <span className="trace-nav__history-dot" aria-hidden="true" />
+                      <button
+                        onClick={() => onTraversalPath(node.id, index)}
+                        title={`Return to ${node.label}`}
+                      >
+                        <span className="path-node__label">{node.shortLabel ?? node.label}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+                {hiddenTraceSteps ? (
+                  <span className="trace-nav__history-overflow" aria-label={`${hiddenTraceSteps} earlier trace steps hidden`}>
+                    +{hiddenTraceSteps}
+                  </span>
+                ) : null}
+              </div>
+            ) : null}
+          </nav>
+        </aside>
+      ) : null}
+
       {isPublicInterestWorld ? (
         <aside className="boundary-frame__right boundary-frame__pages" aria-label="Page position">
           <div className="page-position-nav">
@@ -273,17 +267,28 @@ export function BoundaryFrame({
       ) : null}
 
       <footer className="boundary-frame__bottom">
-        <button
-          className="frame-tool frame-tool--back frame-tool--footer-back"
-          onClick={onBack}
-          aria-label="Back"
-          title="Back through browser navigation history"
-        >
-          <FrameIcon name="back" />
-          <span className="frame-tool__label">Back</span>
-        </button>
-
-        {traceTimeline}
+        <div className="trace-transport" aria-label="Trace history controls">
+          <button
+            className="frame-tool frame-tool--back frame-tool--footer-back frame-tool--trace-back"
+            onClick={onBack}
+            disabled={!canTraceBack}
+            aria-label="Back through trace"
+            title="Move one step backward through the trace"
+          >
+            <FrameIcon name="back" />
+            <span className="frame-tool__label">Back</span>
+          </button>
+          <button
+            className="frame-tool frame-tool--trace-forward"
+            onClick={onForward}
+            disabled={!canTraceForward}
+            aria-label="Forward through trace"
+            title="Move one step forward through the trace"
+          >
+            <FrameIcon name="forward" />
+            <span className="frame-tool__label">Forward</span>
+          </button>
+        </div>
 
         {onProjectionChange ? (
           <div
