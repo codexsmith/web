@@ -1,7 +1,6 @@
 /* Boundary First Card World · canonical frame spatial contract.
    Loaded after feature/presentation layers so frame geometry has one final owner.
-   Earlier styles may describe materials and individual surfaces; this layer owns where
-   the persistent frame and ordinary World content are allowed to live. */
+   The top rail owns stable sibling navigation; the bottom rail owns traversal history. */
 
 @media (min-width: 981px) {
   body[data-ui-shell="cards"] .boundary-frame__top {
@@ -19,8 +18,8 @@
     justify-self: start;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__trace,
-  body[data-ui-shell="cards"] .boundary-frame__trace-spacer {
+  body[data-ui-shell="cards"] .boundary-frame__peers,
+  body[data-ui-shell="cards"] .boundary-frame__peer-spacer {
     grid-column: 2 !important;
     grid-row: 1 !important;
     align-self: center;
@@ -39,27 +38,55 @@
     transform: none !important;
   }
 
-  /* The Focus Path moved to the top timeline. Retire every remnant of its old
-     vertical continuation through the BF mark and left rail. */
+  body[data-ui-shell="cards"] .boundary-frame__bottom {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: center;
+    gap: clamp(8px, 1vw, 14px);
+  }
+
+  body[data-ui-shell="cards"] .frame-tool--footer-back {
+    grid-column: 1 !important;
+    justify-self: start;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace,
+  body[data-ui-shell="cards"] .boundary-frame__trace-spacer {
+    grid-column: 2 !important;
+    align-self: center;
+    justify-self: start !important;
+    margin: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher {
+    grid-column: 3 !important;
+    justify-self: end;
+    margin-left: 0 !important;
+  }
+
+  /* The old vertical Focus Path and left peer rail are retired. */
   body[data-ui-shell="cards"] .brand-anchor__mark::before,
   body[data-ui-shell="cards"] .boundary-frame__left::before,
-  body[data-ui-shell="cards"] .boundary-frame__left ol::before,
-  body[data-ui-shell="cards"] .boundary-frame__peers ol::before {
+  body[data-ui-shell="cards"] .boundary-frame__left ol::before {
     content: none !important;
     display: none !important;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__peers {
-    border-right: 0 !important;
-    box-shadow: none !important;
-  }
-
-  /* Every ordinary World is clipped to the rectangle left by the persistent frame.
-     Individual content surfaces scroll inside that rectangle instead of expanding it. */
-  body[data-ui-shell="cards"] .world-viewport {
+  body[data-ui-shell="cards"] .world-viewport,
+  body[data-ui-shell="cards"] .site-shell[data-has-siblings="true"] .world-viewport,
+  body[data-ui-shell="cards"] .site-shell[data-has-siblings="false"] .world-viewport {
+    left: 0 !important;
+    right: 0 !important;
     min-width: 0;
     min-height: 0;
     overflow: hidden;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame::after,
+  body[data-ui-shell="cards"] .site-shell[data-has-siblings="true"] .boundary-frame::after,
+  body[data-ui-shell="cards"] .site-shell[data-has-siblings="false"] .boundary-frame::after {
+    left: 0 !important;
+    border-left: 0 !important;
   }
 
   body[data-ui-shell="cards"] .world-viewport > * {
@@ -68,8 +95,7 @@
     max-height: 100%;
   }
 
-  /* Leaf nodes (Mission, Principles, product records in World, etc.) share one
-     reusable spatial law. They do not need route-specific viewport fixes. */
+  /* Leaf nodes share one reusable spatial law. */
   body[data-ui-shell="cards"] .leaf-world {
     width: min(100%, 1360px);
     max-width: 100%;
@@ -116,8 +142,8 @@
     grid-row: 1 !important;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__trace,
-  body[data-ui-shell="cards"] .boundary-frame__trace-spacer {
+  body[data-ui-shell="cards"] .boundary-frame__peers,
+  body[data-ui-shell="cards"] .boundary-frame__peer-spacer {
     grid-column: 2 !important;
     grid-row: 1 !important;
     justify-self: start !important;
@@ -133,16 +159,41 @@
     transform: none !important;
   }
 
+  body[data-ui-shell="cards"] .boundary-frame__bottom {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: center;
+    gap: 6px;
+  }
+
+  body[data-ui-shell="cards"] .frame-tool--footer-back {
+    grid-column: 1 !important;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace,
+  body[data-ui-shell="cards"] .boundary-frame__trace-spacer {
+    grid-column: 2 !important;
+    min-width: 0;
+    justify-self: stretch !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher {
+    grid-column: 3 !important;
+    margin-left: 0 !important;
+  }
+
   body[data-ui-shell="cards"] .brand-anchor__mark::before,
   body[data-ui-shell="cards"] .boundary-frame__left::before,
-  body[data-ui-shell="cards"] .boundary-frame__left ol::before,
-  body[data-ui-shell="cards"] .boundary-frame__peers ol::before {
+  body[data-ui-shell="cards"] .boundary-frame__left ol::before {
     content: none !important;
     display: none !important;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__peers {
-    border-right: 0 !important;
+  body[data-ui-shell="cards"] .world-viewport,
+  body[data-ui-shell="cards"] .site-shell[data-has-siblings="true"] .world-viewport,
+  body[data-ui-shell="cards"] .site-shell[data-has-siblings="false"] .world-viewport {
+    left: 0 !important;
+    right: 0 !important;
   }
 
   body[data-ui-shell="cards"] .leaf-world {

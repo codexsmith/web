@@ -104,7 +104,8 @@ export function BoundaryFrame({
   const hiddenTraceSteps = traceStartIndex;
   const isRootFocus = focusNode.id === "root";
   const showTraversalPath = !isRootFocus || traversalPath.length > 1;
-  const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
+  const peerNodes = siblings.filter((node) => node.parentId === focusNode.parentId);
+  const showPeerNavigation = peerNodes.length > 1;
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
   const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
 
@@ -143,6 +144,43 @@ export function BoundaryFrame({
     section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }
 
+  const traceTimeline = showTraversalPath ? (
+    <nav className="boundary-frame__trace" aria-label="Focus traversal history">
+      <span className="boundary-frame__trace-label">Trace</span>
+      {hiddenTraceSteps ? (
+        <span
+          className="boundary-frame__trace-tail"
+          aria-label={`${hiddenTraceSteps} earlier trace ${hiddenTraceSteps === 1 ? "step" : "steps"} hidden`}
+        >
+          …
+        </span>
+      ) : null}
+      <ol>
+        {priorTraversal.map(({ node, index }) => (
+          <li key={`${node.id}-${index}`} data-history-step={index + 1}>
+            <span className="path-node__dot" aria-hidden="true" />
+            <button
+              onClick={() => onTraversalPath(node.id, index)}
+              title={`Return to ${node.label}`}
+            >
+              <span className="path-node__step" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+              <span className="path-node__label">{node.shortLabel ?? node.label}</span>
+            </button>
+          </li>
+        ))}
+        <li aria-current="page" data-history-step={traversalPath.length}>
+          <span className="path-node__dot" aria-hidden="true" />
+          <span className="path-node__current">
+            <small className="path-node__role">Focus</small>
+            <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
+          </span>
+        </li>
+      </ol>
+    </nav>
+  ) : (
+    <span className="boundary-frame__trace-spacer" aria-hidden="true" />
+  );
+
   return (
     <div
       className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
@@ -155,40 +193,31 @@ export function BoundaryFrame({
           </span>
         </button>
 
-        {showTraversalPath ? (
-          <nav className="boundary-frame__trace" aria-label="Focus traversal history">
-            <span className="boundary-frame__trace-label">Trace</span>
-            {hiddenTraceSteps ? (
-              <span
-                className="boundary-frame__trace-tail"
-                aria-label={`${hiddenTraceSteps} earlier trace ${hiddenTraceSteps === 1 ? "step" : "steps"} hidden`}
-              >
-                …
-              </span>
-            ) : null}
+        {showPeerNavigation ? (
+          <nav className="boundary-frame__peers" aria-label={`Sibling navigation for ${focusNode.label}`}>
             <ol>
-              {priorTraversal.map(({ node, index }) => (
-                <li key={`${node.id}-${index}`} data-history-step={index + 1}>
-                  <span className="path-node__dot" aria-hidden="true" />
-                  <button
-                    onClick={() => onTraversalPath(node.id, index)}
-                    title={`Return to ${node.label}`}
-                  >
-                    <span className="path-node__step" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="path-node__label">{node.shortLabel ?? node.label}</span>
-                  </button>
-                </li>
-              ))}
-              <li aria-current="page" data-history-step={traversalPath.length}>
-                <span className="path-node__dot" aria-hidden="true" />
-                <span className="path-node__current">
-                  <small className="path-node__role">Focus</small>
-                  <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
-                </span>
-              </li>
+              {peerNodes.map((peer) => {
+                const isCurrent = peer.id === focusNode.id;
+                return (
+                  <li key={peer.id}>
+                    <button
+                      className={isCurrent ? "is-active" : undefined}
+                      aria-current={isCurrent ? "page" : undefined}
+                      onClick={() => {
+                        if (!isCurrent) onNavigate(peer.id);
+                      }}
+                      title={isCurrent ? `${peer.label} (current)` : `Traverse to sibling ${peer.label}`}
+                    >
+                      <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
+                    </button>
+                  </li>
+                );
+              })}
             </ol>
           </nav>
-        ) : <span className="boundary-frame__trace-spacer" aria-hidden="true" />}
+        ) : (
+          <span className="boundary-frame__peer-spacer" aria-hidden="true" />
+        )}
 
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool" onClick={onSearch} aria-label="Search" title="Search the lab">
@@ -226,20 +255,6 @@ export function BoundaryFrame({
         </div>
       </header>
 
-      {peerNodes.length ? (
-        <aside className="boundary-frame__left boundary-frame__peers" aria-label={`Sibling navigation for ${focusNode.label}`}>
-          <ol>
-            {peerNodes.map((peer) => (
-              <li key={peer.id}>
-                <button onClick={() => onNavigate(peer.id)} title={`Traverse to sibling ${peer.label}`}>
-                  <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
-                </button>
-              </li>
-            ))}
-          </ol>
-        </aside>
-      ) : null}
-
       {isPublicInterestWorld ? (
         <aside className="boundary-frame__right boundary-frame__pages" aria-label="Page position">
           <div className="page-position-nav">
@@ -267,6 +282,8 @@ export function BoundaryFrame({
           <FrameIcon name="back" />
           <span className="frame-tool__label">Back</span>
         </button>
+
+        {traceTimeline}
 
         {onProjectionChange ? (
           <div

@@ -1,9 +1,10 @@
 /* Boundary First UX · Navigation topology
-   Trace lives across the top. Peers live quietly on the left boundary. A right-side
-   page-position control appears only when the current World defines internal reading pages. */
+   Sibling navigation is a stable selector across the top. Trace is session history in
+   the bottom rail. A right-side page-position control appears only when a World defines
+   internal reading pages. */
 
 :root {
-  --frame-left: 168px;
+  --frame-left: 0px;
   --frame-right: 0px;
 }
 
@@ -15,8 +16,8 @@
   grid-column: 1;
 }
 
-.boundary-frame__trace,
-.boundary-frame__trace-spacer {
+.boundary-frame__peers,
+.boundary-frame__peer-spacer {
   grid-column: 2;
 }
 
@@ -29,41 +30,51 @@
   display: none;
 }
 
-/* Remove the old vertical seam between chrome and working surface. */
+/* The old left navigation rail is retired. The work surface always receives the
+   full width between the persistent top and bottom rails. */
+.site-shell[data-has-siblings="true"] .world-viewport,
+.site-shell[data-has-siblings="false"] .world-viewport {
+  left: 0;
+  right: 0;
+}
+
+.site-shell[data-has-siblings="true"] .boundary-frame::after,
+.site-shell[data-has-siblings="false"] .boundary-frame::after,
 .boundary-frame::after {
+  left: 0;
   border-left: 0;
 }
 
-/* Peers / siblings ------------------------------------------------------- */
+/* Stable sibling selector ------------------------------------------------ */
 
 .boundary-frame__peers {
+  min-width: 0;
+  width: min(100%, 980px);
+  justify-self: start;
   overflow: hidden;
-  align-items: stretch;
-  padding-top: 14px;
-  border-right: 0;
-  box-shadow: none;
 }
 
 .boundary-frame__peers ol {
-  min-height: 0;
+  min-width: 0;
   display: flex;
-  flex: 0 1 auto;
-  flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   justify-content: flex-start;
-  gap: 7px;
+  gap: 6px;
   margin: 0;
-  padding: 0 2px 14px 0;
-  overflow-y: auto;
-  border-bottom: 1px solid var(--line);
+  padding: 0 2px;
+  overflow-x: auto;
+  overflow-y: hidden;
   list-style: none;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+}
+
+.boundary-frame__peers ol::-webkit-scrollbar {
+  display: none;
 }
 
 .boundary-frame__peers li {
   min-width: 0;
-  max-width: none;
-  padding: 0;
+  flex: 0 0 auto;
 }
 
 .boundary-frame__peers li + li::before {
@@ -71,20 +82,19 @@
 }
 
 .boundary-frame__peers button {
-  width: 100%;
-  min-width: 0;
-  min-height: 42px;
+  min-width: clamp(108px, 10vw, 150px);
+  max-width: 190px;
+  min-height: 36px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  align-items: center;
-  padding: 7px 8px;
+  place-items: center;
+  padding: 5px 12px;
   border: 1px solid var(--line);
   border-radius: 9px;
-  background: rgba(251, 250, 246, 0.34);
+  background: rgba(251, 250, 246, 0.28);
   color: var(--ink-soft);
   cursor: pointer;
-  text-align: left;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-align: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
 }
 
 .boundary-frame__peers button:hover {
@@ -93,30 +103,47 @@
   color: var(--ink);
 }
 
+.boundary-frame__peers button.is-active,
+.boundary-frame__peers button[aria-current="page"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
 .peer-node__label {
   min-width: 0;
-  overflow-wrap: anywhere;
+  max-width: 100%;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.67rem;
-  line-height: 1.2;
+  font-size: 0.66rem;
+  line-height: 1.15;
 }
 
-.site-shell[data-has-siblings="true"] .world-viewport {
-  left: var(--frame-left);
-  right: 0;
+body[data-ui-shell="cards"] .boundary-frame__peers button {
+  border-color: var(--bf-border-subtle);
+  background: var(--bf-bg-control);
+  color: var(--bf-text-secondary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
 }
 
-.site-shell[data-has-siblings="false"] .world-viewport {
-  left: 0;
-  right: 0;
+body[data-ui-shell="cards"] .boundary-frame__peers button:hover {
+  border-color: var(--bf-action-line);
+  background: var(--bf-bg-raised);
+  color: var(--bf-text-primary);
 }
 
-.site-shell[data-has-siblings="true"] .boundary-frame::after {
-  left: var(--frame-left);
-}
-
-.site-shell[data-has-siblings="false"] .boundary-frame::after {
-  left: 0;
+body[data-ui-shell="cards"] .boundary-frame__peers button.is-active,
+body[data-ui-shell="cards"] .boundary-frame__peers button[aria-current="page"] {
+  border-color: var(--bf-action-line);
+  background: var(--bf-action-surface);
+  color: var(--bf-text-primary);
+  box-shadow:
+    inset 0 -2px 0 var(--bf-action),
+    inset 0 1px 0 var(--bf-edge-highlight);
 }
 
 /* Page-position indicator ------------------------------------------------ */
@@ -182,62 +209,15 @@
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
-@media (max-width: 1180px) and (min-width: 981px) {
-  :root {
-    --frame-left: 154px;
-  }
-}
-
 @media (max-width: 980px) {
   :root {
     --frame-left: 0px;
     --frame-right: 0px;
-    --peer-shelf: 64px;
-  }
-
-  .boundary-frame__peers {
-    top: auto;
-    right: 0;
-    bottom: var(--frame-bottom);
-    left: 0;
-    width: auto;
-    height: var(--peer-shelf);
-    display: block;
-    padding: 7px 8px;
-    border-top: 1px solid var(--line-strong);
-    border-right: 0;
-    background: var(--frame-surface-deep);
-    box-shadow: 0 -8px 24px rgba(23, 32, 28, 0.055);
-  }
-
-  .boundary-frame__peers ol {
-    min-width: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 6px;
-    margin: 0;
-    padding: 0 0 4px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .boundary-frame__peers li {
-    flex: 0 0 auto;
   }
 
   .boundary-frame__peers button {
-    width: auto;
-    min-width: 118px;
-    max-width: 180px;
-    min-height: 46px;
-  }
-
-  .site-shell[data-has-siblings="true"] .world-viewport {
-    left: 0;
-    bottom: calc(var(--frame-bottom) + var(--peer-shelf));
+    min-width: 112px;
+    max-width: 168px;
   }
 
   .page-position-nav {
@@ -257,8 +237,9 @@
   }
 
   .boundary-frame__peers button {
-    min-width: 106px;
-    max-width: 150px;
+    min-width: 96px;
+    max-width: 138px;
+    padding-inline: 8px;
   }
 
   .boundary-frame__pages {
@@ -267,13 +248,16 @@
 }
 
 @media (forced-colors: active) {
-  .boundary-frame__peers,
   .boundary-frame__peers button,
   .page-position-nav {
     background: Canvas;
     color: CanvasText;
     border-color: CanvasText;
     box-shadow: none;
+  }
+
+  .boundary-frame__peers button[aria-current="page"] {
+    outline: 2px solid CanvasText;
   }
 
   .page-position-nav button span,
