@@ -96,8 +96,12 @@ export function BoundaryFrame({
   onProjectionChange,
   onSearch,
 }: BoundaryFrameProps) {
-  const priorTraversal = traversalPath.slice(0, -1).slice(-4);
-  const hiddenTraceSteps = Math.max(0, traversalPath.length - priorTraversal.length - 1);
+  const traceStartIndex = Math.max(0, traversalPath.length - 5);
+  const priorTraversal = traversalPath.slice(traceStartIndex, -1).map((node, offset) => ({
+    node,
+    index: traceStartIndex + offset,
+  }));
+  const hiddenTraceSteps = traceStartIndex;
   const isRootFocus = focusNode.id === "root";
   const showTraversalPath = !isRootFocus || traversalPath.length > 1;
   const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
@@ -163,7 +167,7 @@ export function BoundaryFrame({
               </span>
             ) : null}
             <ol>
-              {priorTraversal.map((node, index) => (
+              {priorTraversal.map(({ node, index }) => (
                 <li key={`${node.id}-${index}`} data-history-step={index + 1}>
                   <span className="path-node__dot" aria-hidden="true" />
                   <button
