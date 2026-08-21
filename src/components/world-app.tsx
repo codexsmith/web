@@ -238,18 +238,18 @@ export function WorldApp({
   );
 
   const navigateHome = useCallback(() => {
-    const nextTraversal = appendTraversal(traversalBase(traversalIds, focusId), "root");
-    writeTraversalMemory(nextTraversal);
+    const rootTraversal = ["root"];
+    writeTraversalMemory(rootTraversal);
     setHeroVisible(false);
     setTransitionDirection("up");
     setTransitionKey((value) => value + 1);
     setFocusId("root");
-    setTraversalIds(nextTraversal);
+    setTraversalIds(rootTraversal);
     setProjection("world");
     setProcessScope("full");
     setInspectionId(null);
     router.push(stateUrl("root", "world", "full", uiShell), { scroll: false });
-  }, [focusId, router, traversalIds, uiShell]);
+  }, [router, uiShell]);
 
   const navigateTraversalPath = useCallback(
     (targetId: string, index: number) => {

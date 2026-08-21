@@ -1,10 +1,14 @@
 /* Boundary First UX · Navigation topology
-   Trace lives across the top. Peers live on the left boundary. A right-side page-position
-   control appears only when the current World defines internal reading pages. */
+   Trace lives across the top. Peers live quietly on the left boundary. A right-side
+   page-position control appears only when the current World defines internal reading pages. */
 
 :root {
   --frame-left: 168px;
   --frame-right: 0px;
+}
+
+.boundary-frame__top {
+  grid-template-columns: auto minmax(0, 1fr) auto;
 }
 
 .brand-anchor {
@@ -18,10 +22,16 @@
 
 .frame-tools {
   grid-column: 3;
+  justify-self: end;
 }
 
 .boundary-frame:not(.boundary-frame--root) .primary-nav {
   display: none;
+}
+
+/* Remove the old vertical seam between chrome and working surface. */
+.boundary-frame::after {
+  border-left: 0;
 }
 
 /* Peers / siblings ------------------------------------------------------- */
@@ -29,39 +39,23 @@
 .boundary-frame__peers {
   overflow: hidden;
   align-items: stretch;
-}
-
-.peer-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2px 12px;
-  border-bottom: 1px solid var(--line);
-  color: var(--ink-soft);
-  font-size: 0.47rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.peer-label::after {
-  content: "SIBLINGS";
-  color: var(--accent);
-  font-size: 0.4rem;
-  letter-spacing: 0.07em;
+  padding-top: 14px;
+  border-right: 0;
+  box-shadow: none;
 }
 
 .boundary-frame__peers ol {
   min-height: 0;
   display: flex;
-  flex: 1;
+  flex: 0 1 auto;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
   gap: 7px;
-  margin: 12px 0 0;
-  padding: 0 2px 0 0;
+  margin: 0;
+  padding: 0 2px 14px 0;
   overflow-y: auto;
+  border-bottom: 1px solid var(--line);
   list-style: none;
   scrollbar-width: thin;
 }
@@ -79,19 +73,18 @@
 .boundary-frame__peers button {
   width: 100%;
   min-width: 0;
+  min-height: 42px;
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 8px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  min-height: 48px;
   padding: 7px 8px;
   border: 1px solid var(--line);
   border-radius: 9px;
-  background: rgba(251, 250, 246, 0.46);
+  background: rgba(251, 250, 246, 0.34);
   color: var(--ink-soft);
   cursor: pointer;
   text-align: left;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .boundary-frame__peers button:hover {
@@ -100,23 +93,12 @@
   color: var(--ink);
 }
 
-.peer-node__index {
-  width: 22px;
-  height: 22px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  font-size: 0.45rem;
-  font-weight: 800;
-}
-
 .peer-node__label {
   min-width: 0;
   overflow-wrap: anywhere;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.66rem;
-  line-height: 1.18;
+  font-size: 0.67rem;
+  line-height: 1.2;
 }
 
 .site-shell[data-has-siblings="true"] .world-viewport {
@@ -220,10 +202,7 @@
     left: 0;
     width: auto;
     height: var(--peer-shelf);
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-    gap: 8px;
+    display: block;
     padding: 7px 8px;
     border-top: 1px solid var(--line-strong);
     border-right: 0;
@@ -231,28 +210,18 @@
     box-shadow: 0 -8px 24px rgba(23, 32, 28, 0.055);
   }
 
-  .peer-label {
-    height: 100%;
-    padding: 0 8px 0 2px;
-    border-right: 1px solid var(--line);
-    border-bottom: 0;
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-  }
-
-  .peer-label::after {
-    display: none;
-  }
-
   .boundary-frame__peers ol {
     min-width: 0;
+    height: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 6px;
     margin: 0;
-    padding: 0 0 2px;
+    padding: 0 0 4px;
     overflow-x: auto;
     overflow-y: hidden;
+    border-bottom: 1px solid var(--line);
   }
 
   .boundary-frame__peers li {
@@ -278,17 +247,18 @@
 }
 
 @media (max-width: 720px) {
-  .boundary-frame__peers button {
-    min-width: 106px;
-    max-width: 150px;
+  .boundary-frame__top {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 0.45rem;
   }
 
-  .peer-node__index {
+  .brand-anchor__copy {
     display: none;
   }
 
   .boundary-frame__peers button {
-    grid-template-columns: minmax(0, 1fr);
+    min-width: 106px;
+    max-width: 150px;
   }
 
   .boundary-frame__pages {

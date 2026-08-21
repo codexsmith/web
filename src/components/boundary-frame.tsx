@@ -96,7 +96,8 @@ export function BoundaryFrame({
   onProjectionChange,
   onSearch,
 }: BoundaryFrameProps) {
-  const priorTraversal = traversalPath.slice(0, -1);
+  const priorTraversal = traversalPath.slice(0, -1).slice(-4);
+  const hiddenTraceSteps = Math.max(0, traversalPath.length - priorTraversal.length - 1);
   const isRootFocus = focusNode.id === "root";
   const showTraversalPath = !isRootFocus || traversalPath.length > 1;
   const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
@@ -153,13 +154,21 @@ export function BoundaryFrame({
         {showTraversalPath ? (
           <nav className="boundary-frame__trace" aria-label="Focus traversal history">
             <span className="boundary-frame__trace-label">Trace</span>
+            {hiddenTraceSteps ? (
+              <span
+                className="boundary-frame__trace-tail"
+                aria-label={`${hiddenTraceSteps} earlier trace ${hiddenTraceSteps === 1 ? "step" : "steps"} hidden`}
+              >
+                …
+              </span>
+            ) : null}
             <ol>
               {priorTraversal.map((node, index) => (
                 <li key={`${node.id}-${index}`} data-history-step={index + 1}>
                   <span className="path-node__dot" aria-hidden="true" />
                   <button
                     onClick={() => onTraversalPath(node.id, index)}
-                    title={`Return to traversal step ${index + 1}: ${node.label}`}
+                    title={`Return to ${node.label}`}
                   >
                     <span className="path-node__step" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                     <span className="path-node__label">{node.shortLabel ?? node.label}</span>
@@ -169,7 +178,7 @@ export function BoundaryFrame({
               <li aria-current="page" data-history-step={traversalPath.length}>
                 <span className="path-node__dot" aria-hidden="true" />
                 <span className="path-node__current">
-                  <small className="path-node__role">Step {String(traversalPath.length).padStart(2, "0")} · Focus</small>
+                  <small className="path-node__role">Focus</small>
                   <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
                 </span>
               </li>
@@ -215,12 +224,10 @@ export function BoundaryFrame({
 
       {peerNodes.length ? (
         <aside className="boundary-frame__left boundary-frame__peers" aria-label={`Sibling navigation for ${focusNode.label}`}>
-          <div className="peer-label">Peers</div>
           <ol>
-            {peerNodes.map((peer, index) => (
+            {peerNodes.map((peer) => (
               <li key={peer.id}>
                 <button onClick={() => onNavigate(peer.id)} title={`Traverse to sibling ${peer.label}`}>
-                  <span className="peer-node__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                   <span className="peer-node__label">{peer.shortLabel ?? peer.label}</span>
                 </button>
               </li>
