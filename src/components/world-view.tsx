@@ -44,7 +44,9 @@ export function WorldView({
       key={`world-${node.id}-${transitionKey}`}
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
-      {isLeaf ? (
+      {renderedNode.id === "public-interest" ? (
+        <PublicInterestWorld node={renderedNode} regions={regions} onNavigate={onNavigate} />
+      ) : isLeaf ? (
         <LeafWorld node={renderedNode} onNavigate={onNavigate} onInspect={onInspect} />
       ) : (
         <BranchWorld node={renderedNode} regions={regions} onNavigate={onNavigate} onInspect={onInspect} />
@@ -125,6 +127,95 @@ function FounderRecord() {
           </div>
         </section>
       </article>
+    </section>
+  );
+}
+
+type PublicInterestWorldProps = {
+  node: ContentNode;
+  regions: ContentNode[];
+  onNavigate: (id: string, direction?: TransitionDirection) => void;
+};
+
+function PublicInterestWorld({ node, regions, onNavigate }: PublicInterestWorldProps) {
+  const mission = regions.find((region) => region.id === "public-mission");
+  const principles = regions.find((region) => region.id === "public-principles");
+  const aspirations = regions.find((region) => region.id === "public-aspirations");
+  const augusta = regions.find((region) => region.id === "augusta-civic");
+  const heroRegions = [mission, principles, aspirations].filter((region): region is ContentNode => Boolean(region));
+
+  return (
+    <section className="public-interest-world" data-world-id={node.id}>
+      <section
+        id="public-interest-overview"
+        className="public-interest-page public-interest-page--overview"
+        data-page-section="overview"
+        aria-label="Public Interest overview"
+      >
+        <header className="public-interest-hero__intro">
+          <p className="eyebrow">{node.eyebrow}</p>
+          <div className="public-interest-hero__title-row">
+            <h1>{node.label}</h1>
+            <p>{node.summary}</p>
+          </div>
+        </header>
+
+        <div className="public-interest-hero__panels" aria-label="Public Interest orientation">
+          <article className="public-interest-panel public-interest-panel--glance">
+            <span className="public-interest-panel__kind">At a glance</span>
+            <strong>Public purpose is part of the engineering boundary.</strong>
+            <p>{node.body?.[0] ?? node.summary}</p>
+          </article>
+
+          {heroRegions.map((region) => (
+            <button
+              key={region.id}
+              className="public-interest-panel public-interest-panel--link"
+              onClick={() => onNavigate(region.id, "down")}
+              title={`Open ${region.label}`}
+            >
+              <span className="public-interest-panel__kind">{region.eyebrow}</span>
+              <strong>{region.label}</strong>
+              <p>{region.summary}</p>
+              <span className="public-interest-panel__action">Open</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {augusta ? (
+        <section
+          id="public-interest-augusta"
+          className="public-interest-page public-interest-page--augusta"
+          data-page-section="augusta"
+          aria-label="Augusta Civic Infrastructure"
+        >
+          <article className="public-interest-feature">
+            <header className="public-interest-feature__header">
+              <div>
+                <p className="eyebrow">{augusta.eyebrow}</p>
+                <h2>{augusta.label}</h2>
+              </div>
+              {augusta.status ? (
+                <span className="work-status-chip" data-stage={augusta.status.stage}>{augusta.status.label}</span>
+              ) : null}
+            </header>
+
+            <p className="public-interest-feature__deck">{augusta.summary}</p>
+
+            {augusta.body?.length ? (
+              <div className="public-interest-feature__body">
+                {augusta.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              </div>
+            ) : null}
+
+            <footer className="public-interest-feature__footer">
+              <span>Local civic infrastructure · source-grounded · correctable</span>
+              <button onClick={() => onNavigate(augusta.id, "down")}>Open project record</button>
+            </footer>
+          </article>
+        </section>
+      ) : null}
     </section>
   );
 }
@@ -298,32 +389,12 @@ function NodeDetail({ node, onNavigate, onInspect }: NodeDetailProps) {
               method, product, or institutional claim.
             </p>
             <dl>
-              <div>
-                <dt>Document class</dt>
-                <dd>{node.publication.documentClass}</dd>
-              </div>
-              <div>
-                <dt>Claim maturity</dt>
-                <dd>{node.publication.claimMaturity}</dd>
-              </div>
-              <div>
-                <dt>Audience</dt>
-                <dd>{node.publication.audience}</dd>
-              </div>
-              {node.publication.version ? (
-                <div>
-                  <dt>Version</dt>
-                  <dd>{node.publication.version}</dd>
-                </div>
-              ) : null}
-              <div className="publication-status-panel__gate">
-                <dt>Next gate</dt>
-                <dd>{node.publication.nextGate}</dd>
-              </div>
-              <div className="publication-status-panel__source">
-                <dt>Source</dt>
-                <dd>{node.publication.sourceRef}</dd>
-              </div>
+              <div><dt>Document class</dt><dd>{node.publication.documentClass}</dd></div>
+              <div><dt>Claim maturity</dt><dd>{node.publication.claimMaturity}</dd></div>
+              <div><dt>Audience</dt><dd>{node.publication.audience}</dd></div>
+              {node.publication.version ? <div><dt>Version</dt><dd>{node.publication.version}</dd></div> : null}
+              <div className="publication-status-panel__gate"><dt>Next gate</dt><dd>{node.publication.nextGate}</dd></div>
+              <div className="publication-status-panel__source"><dt>Source</dt><dd>{node.publication.sourceRef}</dd></div>
             </dl>
           </aside>
         ) : node.status ? (

@@ -1,17 +1,18 @@
 /* Boundary First UX · Navigation topology
-   Root structure belongs to the Root World. Once inside the graph, the Focus Path records
-   the route actually traversed and the Peer rail owns complete sibling traversal. */
+   Trace lives across the top. Peers live on the left boundary. A right-side page-position
+   control appears only when the current World defines internal reading pages. */
 
 :root {
   --frame-left: 168px;
-  --frame-right: 158px;
+  --frame-right: 0px;
 }
 
 .brand-anchor {
   grid-column: 1;
 }
 
-.primary-nav {
+.boundary-frame__trace,
+.boundary-frame__trace-spacer {
   grid-column: 2;
 }
 
@@ -19,64 +20,15 @@
   grid-column: 3;
 }
 
-/* Focus Path preserves actual traversed labels rather than compressing them into tokens. */
-.boundary-frame__left {
+.boundary-frame:not(.boundary-frame--root) .primary-nav {
+  display: none;
+}
+
+/* Peers / siblings ------------------------------------------------------- */
+
+.boundary-frame__peers {
   overflow: hidden;
-}
-
-.boundary-frame__left ol {
-  min-height: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding-right: 2px;
-  scrollbar-width: thin;
-}
-
-.boundary-frame__left li {
-  min-height: 0;
-  padding-top: 7px;
-  padding-bottom: 7px;
-}
-
-.boundary-frame__left button,
-.path-node__current {
-  min-width: 0;
-  height: auto;
-  min-height: 34px;
-  align-items: flex-start;
-}
-
-.path-node__label {
-  width: 100%;
-  overflow: visible;
-  display: block;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  -webkit-box-orient: initial;
-  -webkit-line-clamp: unset;
-  line-height: 1.28;
-}
-
-/* Complete sibling traversal lives on the opposite boundary from the session trace. */
-.boundary-frame__right {
-  position: absolute;
-  top: var(--frame-top);
-  right: 0;
-  bottom: var(--frame-bottom);
-  width: var(--frame-right);
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  padding: 18px 12px 16px;
-  border-left: 1px solid var(--line-strong);
-  background:
-    linear-gradient(270deg, rgba(255, 255, 255, 0.34), transparent 72%),
-    var(--frame-surface-deep);
-  box-shadow:
-    -8px 0 28px rgba(23, 32, 28, 0.055),
-    inset 1px 0 0 rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(20px) saturate(108%);
-  pointer-events: auto;
+  align-items: stretch;
 }
 
 .peer-label {
@@ -99,11 +51,13 @@
   letter-spacing: 0.07em;
 }
 
-.boundary-frame__right ol {
+.boundary-frame__peers ol {
   min-height: 0;
   display: flex;
   flex: 1;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   gap: 7px;
   margin: 12px 0 0;
   padding: 0 2px 0 0;
@@ -112,11 +66,17 @@
   scrollbar-width: thin;
 }
 
-.boundary-frame__right li {
+.boundary-frame__peers li {
   min-width: 0;
+  max-width: none;
+  padding: 0;
 }
 
-.boundary-frame__right button {
+.boundary-frame__peers li + li::before {
+  display: none;
+}
+
+.boundary-frame__peers button {
   width: 100%;
   min-width: 0;
   display: grid;
@@ -134,7 +94,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-.boundary-frame__right button:hover {
+.boundary-frame__peers button:hover {
   border-color: var(--ink);
   background: var(--paper-strong);
   color: var(--ink);
@@ -160,19 +120,89 @@
 }
 
 .site-shell[data-has-siblings="true"] .world-viewport {
-  right: var(--frame-right);
+  left: var(--frame-left);
+  right: 0;
 }
 
-/* The frame does not repeat root branch structure. Inside a non-root focus, peers and
-   the actual traversal trace supply boundary-local navigation around the current world. */
-.boundary-frame:not(.boundary-frame--root) .primary-nav {
-  display: none;
+.site-shell[data-has-siblings="false"] .world-viewport {
+  left: 0;
+  right: 0;
+}
+
+.site-shell[data-has-siblings="true"] .boundary-frame::after {
+  left: var(--frame-left);
+}
+
+.site-shell[data-has-siblings="false"] .boundary-frame::after {
+  left: 0;
+}
+
+/* Page-position indicator ------------------------------------------------ */
+
+.boundary-frame__pages {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  bottom: auto;
+  left: auto;
+  width: auto;
+  height: auto;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+
+.page-position-nav {
+  display: grid;
+  gap: 5px;
+  padding: 5px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--frame-surface) 92%, transparent);
+  box-shadow: 0 7px 20px rgba(23, 32, 28, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+}
+
+.page-position-nav button {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.page-position-nav button span {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  background: transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.page-position-nav button:hover span {
+  border-color: var(--accent);
+}
+
+.page-position-nav button[aria-current="page"] span {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 16%, transparent);
 }
 
 @media (max-width: 1180px) and (min-width: 981px) {
   :root {
     --frame-left: 154px;
-    --frame-right: 144px;
   }
 }
 
@@ -183,11 +213,7 @@
     --peer-shelf: 64px;
   }
 
-  .frame-tools {
-    grid-column: 3;
-  }
-
-  .boundary-frame__right {
+  .boundary-frame__peers {
     top: auto;
     right: 0;
     bottom: var(--frame-bottom);
@@ -200,7 +226,7 @@
     gap: 8px;
     padding: 7px 8px;
     border-top: 1px solid var(--line-strong);
-    border-left: 0;
+    border-right: 0;
     background: var(--frame-surface-deep);
     box-shadow: 0 -8px 24px rgba(23, 32, 28, 0.055);
   }
@@ -218,7 +244,7 @@
     display: none;
   }
 
-  .boundary-frame__right ol {
+  .boundary-frame__peers ol {
     min-width: 0;
     display: flex;
     flex-direction: row;
@@ -229,11 +255,11 @@
     overflow-y: hidden;
   }
 
-  .boundary-frame__right li {
+  .boundary-frame__peers li {
     flex: 0 0 auto;
   }
 
-  .boundary-frame__right button {
+  .boundary-frame__peers button {
     width: auto;
     min-width: 118px;
     max-width: 180px;
@@ -241,33 +267,18 @@
   }
 
   .site-shell[data-has-siblings="true"] .world-viewport {
-    right: 0;
+    left: 0;
     bottom: calc(var(--frame-bottom) + var(--peer-shelf));
+  }
+
+  .page-position-nav {
+    padding: 4px;
+    gap: 4px;
   }
 }
 
 @media (max-width: 720px) {
-  .site-shell[data-root-focus="false"] {
-    --frame-top: 62px;
-  }
-
-  .boundary-frame:not(.boundary-frame--root) .boundary-frame__top {
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 56px;
-    height: var(--frame-top);
-  }
-
-  .boundary-frame:not(.boundary-frame--root) .brand-anchor {
-    grid-row: 1;
-    grid-column: 1;
-  }
-
-  .boundary-frame:not(.boundary-frame--root) .frame-tools {
-    grid-row: 1;
-    grid-column: 2;
-  }
-
-  .boundary-frame__right button {
+  .boundary-frame__peers button {
     min-width: 106px;
     max-width: 150px;
   }
@@ -276,17 +287,31 @@
     display: none;
   }
 
-  .boundary-frame__right button {
+  .boundary-frame__peers button {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .boundary-frame__pages {
+    right: 4px;
   }
 }
 
 @media (forced-colors: active) {
-  .boundary-frame__right,
-  .boundary-frame__right button {
+  .boundary-frame__peers,
+  .boundary-frame__peers button,
+  .page-position-nav {
     background: Canvas;
     color: CanvasText;
     border-color: CanvasText;
     box-shadow: none;
+  }
+
+  .page-position-nav button span,
+  .page-position-nav button[aria-current="page"] span {
+    border-color: CanvasText;
+  }
+
+  .page-position-nav button[aria-current="page"] span {
+    background: CanvasText;
   }
 }

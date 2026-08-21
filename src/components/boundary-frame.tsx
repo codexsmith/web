@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ContentNode } from "@/lib/content";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
@@ -43,6 +44,11 @@ const rootProjectionDescriptions: Record<ProjectionMode, string> = {
   evidence: "Evidence supporting founder provenance and operating history, with explicit claim boundaries.",
   gestalt: "Founder and institutional development timeline from practice to Boundary First Labs.",
 };
+
+const publicInterestPageSections = [
+  { id: "public-interest-overview", ariaLabel: "Go to Public Interest overview" },
+  { id: "public-interest-augusta", ariaLabel: "Go to Augusta Civic Infrastructure" },
+] as const;
 
 function FrameIcon({ name }: { name: FrameIconName }) {
   if (name === "back") {
@@ -94,6 +100,43 @@ export function BoundaryFrame({
   const isRootFocus = focusNode.id === "root";
   const showTraversalPath = !isRootFocus || traversalPath.length > 1;
   const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
+  const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
+  const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
+
+  useEffect(() => {
+    if (!isPublicInterestWorld) return;
+
+    const container = document.querySelector<HTMLElement>(".public-interest-world");
+    if (!container) return;
+
+    const sections = publicInterestPageSections
+      .map((section) => document.getElementById(section.id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    const updateActivePage = () => {
+      const marker = container.scrollTop + container.clientHeight * 0.42;
+      let active = sections[0]?.id ?? publicInterestPageSections[0].id;
+
+      sections.forEach((section) => {
+        if (section.offsetTop <= marker) active = section.id;
+      });
+
+      setActivePageSection(active);
+    };
+
+    updateActivePage();
+    container.addEventListener("scroll", updateActivePage, { passive: true });
+    return () => container.removeEventListener("scroll", updateActivePage);
+  }, [isPublicInterestWorld]);
+
+  function jumpToPage(sectionId: string) {
+    const section = document.getElementById(sectionId);
+    if (!section) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setActivePageSection(sectionId);
+    section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }
 
   return (
     <div
@@ -106,6 +149,33 @@ export function BoundaryFrame({
             <span className="brand-anchor__name">Boundary First Labs</span>
           </span>
         </button>
+
+        {showTraversalPath ? (
+          <nav className="boundary-frame__trace" aria-label="Focus traversal history">
+            <span className="boundary-frame__trace-label">Trace</span>
+            <ol>
+              {priorTraversal.map((node, index) => (
+                <li key={`${node.id}-${index}`} data-history-step={index + 1}>
+                  <span className="path-node__dot" aria-hidden="true" />
+                  <button
+                    onClick={() => onTraversalPath(node.id, index)}
+                    title={`Return to traversal step ${index + 1}: ${node.label}`}
+                  >
+                    <span className="path-node__step" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="path-node__label">{node.shortLabel ?? node.label}</span>
+                  </button>
+                </li>
+              ))}
+              <li aria-current="page" data-history-step={traversalPath.length}>
+                <span className="path-node__dot" aria-hidden="true" />
+                <span className="path-node__current">
+                  <small className="path-node__role">Step {String(traversalPath.length).padStart(2, "0")} · Focus</small>
+                  <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
+                </span>
+              </li>
+            </ol>
+          </nav>
+        ) : <span className="boundary-frame__trace-spacer" aria-hidden="true" />}
 
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool" onClick={onSearch} aria-label="Search" title="Search the lab">
@@ -143,35 +213,8 @@ export function BoundaryFrame({
         </div>
       </header>
 
-      {showTraversalPath ? (
-        <aside className="boundary-frame__left" aria-label="Focus traversal history">
-          <div className="path-label">Focus path</div>
-          <ol>
-            {priorTraversal.map((node, index) => (
-              <li key={`${node.id}-${index}`} data-history-step={index + 1}>
-                <span className="path-node__dot" aria-hidden="true" />
-                <button
-                  onClick={() => onTraversalPath(node.id, index)}
-                  title={`Return to traversal step ${index + 1}: ${node.label}`}
-                >
-                  <span className="path-node__step" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="path-node__label">{node.shortLabel ?? node.label}</span>
-                </button>
-              </li>
-            ))}
-            <li aria-current="page" data-history-step={traversalPath.length}>
-              <span className="path-node__dot" aria-hidden="true" />
-              <span className="path-node__current">
-                <small className="path-node__role">Step {String(traversalPath.length).padStart(2, "0")} · Focus</small>
-                <span className="path-node__label">{focusNode.shortLabel ?? focusNode.label}</span>
-              </span>
-            </li>
-          </ol>
-        </aside>
-      ) : null}
-
       {peerNodes.length ? (
-        <aside className="boundary-frame__right" aria-label={`Sibling navigation for ${focusNode.label}`}>
+        <aside className="boundary-frame__left boundary-frame__peers" aria-label={`Sibling navigation for ${focusNode.label}`}>
           <div className="peer-label">Peers</div>
           <ol>
             {peerNodes.map((peer, index) => (
@@ -183,6 +226,23 @@ export function BoundaryFrame({
               </li>
             ))}
           </ol>
+        </aside>
+      ) : null}
+
+      {isPublicInterestWorld ? (
+        <aside className="boundary-frame__right boundary-frame__pages" aria-label="Page position">
+          <div className="page-position-nav">
+            {publicInterestPageSections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => jumpToPage(section.id)}
+                aria-label={section.ariaLabel}
+                aria-current={activePageSection === section.id ? "page" : undefined}
+              >
+                <span aria-hidden="true" />
+              </button>
+            ))}
+          </div>
         </aside>
       ) : null}
 

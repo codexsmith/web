@@ -22,6 +22,7 @@ import "./publication-portfolio.css";
 import "./content-first-world.css";
 import "./industrial-card-ui.css";
 import "./card-world-viewport-fit.css";
+import "./public-interest-world.css";
 import "./apparatus-prototype.css";
 import "./apparatus-prototype-hardening.css";
 
