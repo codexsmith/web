@@ -112,8 +112,11 @@ export function BoundaryFrame({
     ? [...peerNodes.slice(currentPeerIndex), ...peerNodes.slice(0, currentPeerIndex)]
     : [focusNode, ...peerNodes.filter((node) => node.id !== focusNode.id)];
   const activeTrace = traversalPath.slice(0, traversalCursor + 1);
-  const priorTrace = activeTrace.slice(0, -1).map((node, index) => ({ node, index })).reverse();
-  const visiblePriorTrace = priorTrace.slice(0, 4);
+  const priorTrace = activeTrace
+    .slice(0, -1)
+    .map((node, index) => ({ node, index }))
+    .filter(({ node }) => node.id !== "root");
+  const visiblePriorTrace = priorTrace.length <= 4 ? priorTrace : priorTrace.slice(-4);
   const hiddenTraceSteps = Math.max(0, priorTrace.length - visiblePriorTrace.length);
   const showTraceNav = !isRootFocus || priorTrace.length > 0 || navQueue.length > 1;
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
@@ -159,7 +162,12 @@ export function BoundaryFrame({
       className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
     >
       <header className="boundary-frame__top">
-        <button className="brand-anchor" onClick={onHome} aria-label="Boundary First Labs home" title="Reset to the Lab root">
+        <button
+          className="brand-anchor"
+          onClick={onHome}
+          aria-label="Boundary First Labs home"
+          title="Reset trace to Boundary First Labs"
+        >
           <span className="brand-anchor__mark" aria-hidden="true">BF</span>
         </button>
 
@@ -202,6 +210,30 @@ export function BoundaryFrame({
       {showTraceNav ? (
         <aside className="boundary-frame__left boundary-frame__trace-nav">
           <nav className="trace-nav" aria-label={`Trace and local navigation for ${focusNode.label}`}>
+            <div className="trace-nav__history-wrap">
+              {hiddenTraceSteps ? (
+                <span
+                  className="trace-nav__history-gap"
+                  aria-label={`${hiddenTraceSteps} earlier trace ${hiddenTraceSteps === 1 ? "step" : "steps"} hidden`}
+                >
+                  +{hiddenTraceSteps}
+                </span>
+              ) : null}
+              <ol className="trace-nav__history" aria-label="Focus traversal history">
+                {visiblePriorTrace.map(({ node, index }) => (
+                  <li key={`${node.id}-${index}`}>
+                    <span className="trace-nav__history-dot" aria-hidden="true" />
+                    <button
+                      onClick={() => onTraversalPath(node.id, index)}
+                      title={`Return to ${node.label}`}
+                    >
+                      <span className="path-node__label">{node.shortLabel ?? node.label}</span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
             <ol className="trace-nav__queue">
               {navQueue.map((peer) => {
                 const isCurrent = peer.id === focusNode.id;
@@ -222,29 +254,6 @@ export function BoundaryFrame({
                 );
               })}
             </ol>
-
-            {visiblePriorTrace.length ? (
-              <div className="trace-nav__history-wrap">
-                <ol className="trace-nav__history" aria-label="Focus traversal history">
-                  {visiblePriorTrace.map(({ node, index }) => (
-                    <li key={`${node.id}-${index}`}>
-                      <span className="trace-nav__history-dot" aria-hidden="true" />
-                      <button
-                        onClick={() => onTraversalPath(node.id, index)}
-                        title={`Return to ${node.label}`}
-                      >
-                        <span className="path-node__label">{node.shortLabel ?? node.label}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ol>
-                {hiddenTraceSteps ? (
-                  <span className="trace-nav__history-overflow" aria-label={`${hiddenTraceSteps} earlier trace steps hidden`}>
-                    +{hiddenTraceSteps}
-                  </span>
-                ) : null}
-              </div>
-            ) : null}
           </nav>
         </aside>
       ) : null}
