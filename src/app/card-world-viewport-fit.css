@@ -161,7 +161,8 @@ body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card
 
 /* When topology collapses, text preservation wins and the document may scroll. */
 @media (max-width: 980px) {
-  body[data-ui-shell="cards"] {
+  body[data-ui-shell="cards"],
+  body[data-ui-shell="cards"] .site-shell {
     --frame-top: 52px;
     --frame-bottom: 52px;
   }
@@ -189,6 +190,13 @@ body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card
 }
 
 @media (max-width: 720px) {
+  body[data-ui-shell="cards"],
+  body[data-ui-shell="cards"] .site-shell,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] {
+    --frame-top: 52px;
+    --frame-bottom: 52px;
+  }
+
   body[data-ui-shell="cards"] .boundary-frame__top,
   body[data-ui-shell="cards"] .boundary-frame__bottom {
     height: 52px;
