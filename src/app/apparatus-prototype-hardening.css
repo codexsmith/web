@@ -2,13 +2,28 @@
  * Bounded Apparatus prototype hardening.
  *
  * This layer does not promote Apparatus to the production renderer. It sharpens
- * accessibility, reflow, touch, and high-contrast behavior that can be established
- * before subjective browser/pixel review.
+ * accessibility, reflow, touch, viewport fit, and high-contrast behavior that can be
+ * established before subjective browser/pixel review.
  */
 
 .apparatus-prototype-shell {
   --apparatus-hit-target: 2.75rem;
   --apparatus-readable-measure: 68ch;
+  height: 100svh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.apparatus-prototype__workfield,
+.apparatus-trace--rail,
+.apparatus-peer-bank {
+  min-height: 0;
+}
+
+.apparatus-trace--rail,
+.apparatus-peer-bank {
+  overflow: auto;
+  overscroll-behavior: contain;
 }
 
 .apparatus-prototype-shell :where(button, a, summary) {
@@ -69,11 +84,18 @@
 
 /*
  * 200% browser zoom on a common desktop viewport naturally falls through this
- * topology. Avoid nested workfield scrolling once the chassis has collapsed to one
- * column; the document should become the scroll container.
+ * topology. Once the chassis collapses to one column, return scroll ownership to the
+ * document instead of trapping content inside the wide-screen instrument frame.
  */
 @media (max-width: 1100px) {
-  .apparatus-prototype__workfield {
+  .apparatus-prototype-shell {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .apparatus-prototype__workfield,
+  .apparatus-peer-bank {
     overflow: visible;
   }
 
