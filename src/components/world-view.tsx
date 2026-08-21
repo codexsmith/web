@@ -7,6 +7,7 @@ import {
   getParent,
 } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { founderProfile, founderRecordSections } from "@/lib/founder-content";
 import { SubjectPane } from "@/components/subject-pane";
 
 export type TransitionDirection =
@@ -74,8 +75,57 @@ export function RecordView({
       key={`record-${focusNode.id}-${transitionKey}`}
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
-      <NodeDetail node={renderedFocusNode} onNavigate={onNavigate} onInspect={onInspect} />
+      {focusNode.id === "root" ? (
+        <FounderRecord />
+      ) : (
+        <NodeDetail node={renderedFocusNode} onNavigate={onNavigate} onInspect={onInspect} />
+      )}
     </main>
+  );
+}
+
+function FounderRecord() {
+  return (
+    <section className="node-detail founder-record">
+      <article className="node-surface founder-record__surface" data-kind="about">
+        <header>
+          <p className="eyebrow">Founder record</p>
+          <h1>{founderProfile.name}</h1>
+          <p className="node-surface__summary">{founderProfile.summary}</p>
+        </header>
+
+        <div className="node-surface__body">
+          <p>
+            <strong>{founderProfile.role}.</strong> {founderProfile.currentPhase}
+          </p>
+        </div>
+
+        {founderRecordSections.map((section) => (
+          <section className="node-section" key={section.label}>
+            <div className="node-section__label">{section.label}</div>
+            <div className="node-surface__body">
+              <p>{section.body}</p>
+            </div>
+          </section>
+        ))}
+
+        <section className="node-section node-section--records">
+          <div className="node-section__label">Institutional context</div>
+          <div className="record-links">
+            <a href="/about/provenance">
+              <span>Origin and lineage</span>
+              <strong>Provenance</strong>
+              <small>How founder history, work substance, and institutional stewardship are kept distinct.</small>
+            </a>
+            <a href="/about/the-lab">
+              <span>Present institution</span>
+              <strong>The Lab</strong>
+              <small>Current institutional responsibilities, founder concentration risk, and the path toward durable stewardship.</small>
+            </a>
+          </div>
+        </section>
+      </article>
+    </section>
   );
 }
 
