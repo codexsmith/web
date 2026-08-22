@@ -28,6 +28,7 @@ import "./trace-nav-refinement.css";
 import "./card-root-control-board.css";
 import "./card-secondary-control-board.css";
 import "./local-nav-instrument.css";
+import "./navigation-apparatus-sections.css";
 import "./apparatus-prototype.css";
 import "./apparatus-prototype-hardening.css";
 import "./apparatus-sleek-refinement.css";
