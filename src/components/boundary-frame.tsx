@@ -310,22 +310,32 @@ export function BoundaryFrame({
                   <ol>
                     {history.map((node, index) => {
                       const canReplay = canTraceBack && index === history.length - 1;
+                      const copy = (
+                        <>
+                          <span>{node.shortLabel ?? node.label}</span>
+                          <small>{String(index + 1).padStart(2, "0")}</small>
+                        </>
+                      );
+
                       return (
                         <li key={`${node.id}-${index}`}>
                           <span className="traversal-nav__history-terminal" aria-hidden="true" />
-                          <button
-                            className="traversal-nav__history-node"
-                            disabled={!canReplay}
-                            onClick={() => {
-                              if (!canReplay) return;
-                              if (onTraversalPath) onTraversalPath(node.id, index);
-                              else onBack();
-                            }}
-                            title={canReplay ? `Back to ${node.label}` : `${node.label} (earlier traversal history)`}
-                          >
-                            <span>{node.shortLabel ?? node.label}</span>
-                            <small>{String(index + 1).padStart(2, "0")}</small>
-                          </button>
+                          {canReplay ? (
+                            <button
+                              className="traversal-nav__history-node"
+                              onClick={() => {
+                                if (onTraversalPath) onTraversalPath(node.id, index);
+                                else onBack();
+                              }}
+                              title={`Back to ${node.label}`}
+                            >
+                              {copy}
+                            </button>
+                          ) : (
+                            <div className="traversal-nav__history-node" title={`${node.label} (earlier traversal history)`}>
+                              {copy}
+                            </div>
+                          )}
                         </li>
                       );
                     })}
