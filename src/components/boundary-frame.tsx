@@ -1,12 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  getChildren,
-  getParent,
-  type ContentNode,
-} from "@/lib/content-registry";
-import { hydrateContentNode } from "@/lib/content-projections";
+import { useEffect, useRef, useState } from "react";
+import { type ContentNode } from "@/lib/content-registry";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
   projectionDescriptions,
@@ -88,36 +83,25 @@ function FrameIcon({ name }: { name: FrameIconName }) {
   );
 }
 
-function MoveGroup({
-  direction,
-  label,
+function SiblingChoices({
   nodes,
   onNavigate,
 }: {
-  direction: "up" | "across" | "down";
-  label: string;
   nodes: ContentNode[];
   onNavigate: (id: string) => void;
 }) {
   if (!nodes.length) return null;
 
   return (
-    <section className="traversal-nav__move-group" data-direction={direction} aria-label={`${label} navigation`}>
-      <div className="traversal-nav__direction" aria-hidden="true">
-        <span>{direction === "up" ? "↑" : direction === "across" ? "↔" : "↓"}</span>
-        <strong>{label}</strong>
-      </div>
-      <ol>
-        {nodes.map((node) => (
-          <li key={node.id}>
-            <button onClick={() => onNavigate(node.id)} title={`${label}: ${node.label}`}>
-              <span>{node.shortLabel ?? node.label}</span>
-              <small>{direction === "up" ? "Containing boundary" : direction === "across" ? "Same boundary" : "Contained region"}</small>
-            </button>
-          </li>
-        ))}
-      </ol>
-    </section>
+    <ol className="traversal-nav__peer-list" aria-label="Nearby choices">
+      {nodes.map((node) => (
+        <li key={node.id}>
+          <button onClick={() => onNavigate(node.id)} title={`Open ${node.label}`}>
+            <span>{node.shortLabel ?? node.label}</span>
+          </button>
+        </li>
+      ))}
+    </ol>
   );
 }
 
@@ -146,18 +130,25 @@ export function BoundaryFrame({
   const isRootFocus = focusNode.id === "root";
   const activeTraversal = traversalPath.slice(0, traversalCursor + 1);
   const history = activeTraversal.slice(0, -1);
-  const parent = getParent(focusNode.id);
-  const parentNode = parent ? hydrateContentNode(parent) : undefined;
   const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
   const siblingNodes = peerNodes;
-  const childNodes = getChildren(focusNode.id).map(hydrateContentNode);
   const hasTrace = activeTraversal.length > 1;
-  const showLeftNav = !isRootFocus && (
-    history.length > 0 || Boolean(parentNode) || siblingNodes.length > 0 || childNodes.length > 0
-  );
+  const showLeftNav = !isRootFocus && (history.length > 0 || siblingNodes.length > 0);
+  const historyViewportRef = useRef<HTMLDivElement>(null);
 
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
   const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
+
+  useEffect(() => {
+    const viewport = historyViewportRef.current;
+    if (!viewport || !history.length) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      viewport.scrollTop = viewport.scrollHeight;
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [focusNode.id, history.length, traversalCursor]);
 
   useEffect(() => {
     if (!isPublicInterestWorld) return;
@@ -300,46 +291,48 @@ export function BoundaryFrame({
           <nav className="trace-nav apparatus-nav traversal-nav" aria-label={`Traversal continuity for ${focusNode.label}`}>
             <header className="apparatus-nav__header traversal-nav__header">
               <strong>Traversal</strong>
-              <span>Where you have been · where you can go next</span>
+              <span>Where you have been · nearby choices</span>
             </header>
 
             <div className="traversal-nav__flow">
               {history.length ? (
                 <section className="traversal-nav__history" aria-label="Focus traversal history">
                   <div className="traversal-nav__section-label">Where you have been</div>
-                  <ol>
-                    {history.map((node, index) => {
-                      const canReplay = canTraceBack && index === history.length - 1;
-                      const copy = (
-                        <>
-                          <span>{node.shortLabel ?? node.label}</span>
-                          <small>{String(index + 1).padStart(2, "0")}</small>
-                        </>
-                      );
+                  <div className="traversal-nav__history-viewport" ref={historyViewportRef}>
+                    <ol>
+                      {history.map((node, index) => {
+                        const canReplay = canTraceBack && index === history.length - 1;
+                        const copy = (
+                          <>
+                            <span>{node.shortLabel ?? node.label}</span>
+                            <small>{String(index + 1).padStart(2, "0")}</small>
+                          </>
+                        );
 
-                      return (
-                        <li key={`${node.id}-${index}`}>
-                          <span className="traversal-nav__history-terminal" aria-hidden="true" />
-                          {canReplay ? (
-                            <button
-                              className="traversal-nav__history-node"
-                              onClick={() => {
-                                if (onTraversalPath) onTraversalPath(node.id, index);
-                                else onBack();
-                              }}
-                              title={`Back to ${node.label}`}
-                            >
-                              {copy}
-                            </button>
-                          ) : (
-                            <div className="traversal-nav__history-node" title={`${node.label} (earlier traversal history)`}>
-                              {copy}
-                            </div>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ol>
+                        return (
+                          <li key={`${node.id}-${index}`}>
+                            <span className="traversal-nav__history-terminal" aria-hidden="true" />
+                            {canReplay ? (
+                              <button
+                                className="traversal-nav__history-node"
+                                onClick={() => {
+                                  if (onTraversalPath) onTraversalPath(node.id, index);
+                                  else onBack();
+                                }}
+                                title={`Back to ${node.label}`}
+                              >
+                                {copy}
+                              </button>
+                            ) : (
+                              <div className="traversal-nav__history-node" title={`${node.label} (earlier traversal history)`}>
+                                {copy}
+                              </div>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </div>
                 </section>
               ) : null}
 
@@ -351,27 +344,12 @@ export function BoundaryFrame({
                 </div>
               </section>
 
-              <section className="traversal-nav__next" aria-label="Where you can go next">
-                <div className="traversal-nav__section-label">Where you can go next</div>
-                <MoveGroup
-                  direction="up"
-                  label="Up"
-                  nodes={parentNode ? [parentNode] : []}
-                  onNavigate={onLocalNavigate}
-                />
-                <MoveGroup
-                  direction="across"
-                  label="Across"
-                  nodes={siblingNodes}
-                  onNavigate={onLocalNavigate}
-                />
-                <MoveGroup
-                  direction="down"
-                  label="Down"
-                  nodes={childNodes}
-                  onNavigate={onLocalNavigate}
-                />
-              </section>
+              {siblingNodes.length ? (
+                <section className="traversal-nav__next" aria-label="Where you can go next">
+                  <div className="traversal-nav__section-label">Where you can go next</div>
+                  <SiblingChoices nodes={siblingNodes} onNavigate={onLocalNavigate} />
+                </section>
+              ) : null}
             </div>
           </nav>
         </aside>
