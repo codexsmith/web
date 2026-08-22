@@ -1,0 +1,484 @@
+/*
+ * Apparatus sleek refinement.
+ *
+ * Visual-only refinement of the bounded Apparatus prototype. The interaction model,
+ * traversal semantics, projection vocabulary, and production Card renderer remain
+ * unchanged.
+ *
+ * Material rule: dark gunmetal carries the primary content plane; smaller inset
+ * controls and modules step one value brighter. Surfaces are clean and matte rather
+ * than grainy, glossy, or decorative.
+ */
+
+.apparatus-prototype-shell {
+  --apparatus-chassis: #0b1116;
+  --apparatus-content: #0f171d;
+  --apparatus-main: #131d24;
+  --apparatus-rail: #111a20;
+  --apparatus-inset: #26323a;
+  --apparatus-inset-hover: #2d3a43;
+  --apparatus-inset-pressed: #202b33;
+  --apparatus-line: rgba(170, 180, 184, 0.18);
+  --apparatus-line-strong: rgba(170, 180, 184, 0.3);
+  --apparatus-edge: rgba(255, 255, 255, 0.05);
+  --apparatus-shadow: rgba(0, 0, 0, 0.28);
+
+  grid-template-columns: minmax(18rem, 21rem) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1.15fr) minmax(0, 0.85fr) auto;
+  grid-template-areas:
+    "top top"
+    "trace work"
+    "peers work"
+    "depth depth";
+  background: var(--apparatus-chassis);
+}
+
+/* Matte chassis chrome: a controlled value shift, not a texture effect. */
+.apparatus-prototype__topbar,
+.apparatus-trace,
+.apparatus-peer-bank,
+.apparatus-depth {
+  background: var(--apparatus-rail);
+  background-image: none;
+}
+
+.apparatus-prototype__topbar {
+  min-height: 4.2rem;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--apparatus-line-strong);
+  box-shadow: inset 0 -1px var(--apparatus-shadow);
+}
+
+.apparatus-command {
+  border-color: var(--apparatus-line-strong);
+  border-bottom-color: var(--apparatus-line-strong);
+  border-radius: 7px;
+  background: var(--apparatus-inset);
+  box-shadow: inset 0 1px var(--apparatus-edge), 0 1px 2px var(--apparatus-shadow);
+}
+
+.apparatus-command:hover:not(:disabled) {
+  border-color: var(--bf-action-line);
+  background: var(--apparatus-inset-hover);
+}
+
+.apparatus-command:active:not(:disabled) {
+  background: var(--apparatus-inset-pressed);
+}
+
+.apparatus-command--brand {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding-left: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.apparatus-command--brand:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: var(--apparatus-line);
+}
+
+.apparatus-command__register {
+  width: 2.35rem;
+  border-radius: 8px;
+  border-color: var(--apparatus-line-strong);
+  background: var(--apparatus-inset);
+  box-shadow: inset 0 1px var(--apparatus-edge);
+  font-size: 0.82rem;
+}
+
+.apparatus-prototype__prototype-label {
+  margin-inline: 0 auto;
+  color: var(--bf-alloy-400);
+  font-size: 0.67rem;
+}
+
+.apparatus-prototype__prototype-label strong {
+  color: var(--bf-silver-300);
+  font-weight: 500;
+}
+
+.apparatus-prototype__global-commands {
+  margin-left: auto;
+}
+
+/* Left apparatus = retained traversal plus sibling options. */
+.apparatus-trace--rail {
+  grid-area: trace;
+  padding: 0.9rem 0.8rem 0.75rem;
+  border-right: 1px solid var(--apparatus-line-strong);
+  border-bottom: 1px solid var(--apparatus-line);
+}
+
+.apparatus-peer-bank {
+  grid-area: peers;
+  padding: 0.75rem 0.8rem 0.9rem;
+  border-left: 0;
+  border-right: 1px solid var(--apparatus-line-strong);
+  border-top: 0;
+}
+
+.apparatus-trace--rail > .apparatus-register-label,
+.apparatus-peer-bank > .apparatus-register-label {
+  font-size: 0;
+}
+
+.apparatus-trace--rail > .apparatus-register-label::before {
+  content: "APPARATUS / TRAVERSAL SPINE";
+  font-size: 0.69rem;
+  color: var(--bf-workshop-100);
+}
+
+.apparatus-trace__steps::before {
+  content: "TRACE / TRAVERSAL HISTORY";
+  display: block;
+  margin: 0 0 0.6rem;
+  color: var(--bf-alloy-400);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.63rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.apparatus-peer-bank > .apparatus-register-label::before {
+  content: "SIBLING CONTENT / ADJACENT OPTIONS";
+  font-size: 0.63rem;
+  color: var(--bf-alloy-400);
+}
+
+.apparatus-trace__steps {
+  margin-top: 0.7rem;
+}
+
+.apparatus-trace__steps li {
+  grid-template-columns: 1.35rem minmax(0, 1fr);
+  min-height: 2.75rem;
+}
+
+.apparatus-trace__steps li:not(:last-child)::after {
+  left: 0.39rem;
+  top: 1.6rem;
+  bottom: -0.7rem;
+  background: var(--apparatus-line-strong);
+}
+
+.apparatus-trace__index {
+  width: 0.78rem;
+  height: 0.78rem;
+  min-height: 0;
+  margin-top: 0.8rem;
+  border: 1px solid var(--bf-alloy-400);
+  border-radius: 50%;
+  background: var(--apparatus-content);
+  color: transparent;
+  font-size: 0;
+}
+
+.apparatus-trace__steps li[data-current="true"] .apparatus-trace__index {
+  border-color: var(--bf-action);
+  background: var(--bf-action-pressed);
+  box-shadow: 0 0 0 3px rgba(169, 140, 255, 0.1);
+}
+
+.apparatus-trace__steps button,
+.apparatus-trace__current {
+  min-height: 2.45rem;
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: 6px;
+  padding: 0.48rem 0.62rem;
+}
+
+.apparatus-trace__steps button:hover {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: var(--apparatus-line);
+  border-left-color: var(--bf-action-line);
+}
+
+.apparatus-trace__current {
+  color: var(--bf-workshop-100);
+  border-color: var(--bf-action-line);
+  border-left: 3px solid var(--bf-action);
+  background: rgba(169, 140, 255, 0.105);
+}
+
+.apparatus-peer-bank ol {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.38rem;
+  margin-top: 0.7rem;
+}
+
+.apparatus-peer-bank .apparatus-port {
+  min-height: 3.15rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: 1fr;
+  padding: 0.55rem 0.65rem;
+}
+
+.apparatus-peer-bank .apparatus-port__label {
+  display: none;
+}
+
+.apparatus-peer-bank .apparatus-port strong {
+  grid-row: 1;
+  font-weight: 500;
+}
+
+/* Primary content plane: noticeably darker gunmetal than the controls it contains. */
+.apparatus-prototype__workfield {
+  padding: clamp(0.75rem, 1.4vw, 1.25rem);
+  background: var(--apparatus-content);
+  background-image: none;
+}
+
+.apparatus-world {
+  width: min(100%, 96rem);
+}
+
+/* Main panels stay quiet and matte. */
+.apparatus-backplane,
+.apparatus-module-bay,
+.apparatus-routing-bay,
+.apparatus-subject-faceplate,
+.apparatus-instrument {
+  border-color: var(--apparatus-line);
+  border-radius: 9px;
+  background: var(--apparatus-main);
+  background-image: none;
+  box-shadow: 0 1px 2px var(--apparatus-shadow);
+}
+
+.apparatus-subject-faceplate,
+.apparatus-instrument {
+  box-shadow: 0 1px 2px var(--apparatus-shadow);
+}
+
+.apparatus-subject-faceplate::before,
+.apparatus-instrument::before {
+  inset: -1px;
+  border-left: 2px solid var(--bf-action);
+  border-top: 1px solid var(--bf-action-line);
+  border-radius: 9px 0 0 9px;
+}
+
+/* Smaller inset modules step brighter, with only enough edge lift to read as controls. */
+.apparatus-bay,
+.apparatus-module,
+.apparatus-port,
+.apparatus-state-strip,
+.apparatus-relation-trace button,
+.apparatus-through__well button,
+.apparatus-record-well a,
+.apparatus-gate__detail dl > div {
+  border-color: var(--apparatus-line-strong);
+  border-radius: 7px;
+  background: var(--apparatus-inset);
+  background-image: none;
+  box-shadow: inset 0 1px var(--apparatus-edge), 0 1px 2px var(--apparatus-shadow);
+}
+
+.apparatus-bay:hover,
+.apparatus-module:hover {
+  border-color: rgba(170, 180, 184, 0.38);
+}
+
+.apparatus-port:hover,
+.apparatus-relation-trace button:hover,
+.apparatus-through__well button:hover,
+.apparatus-record-well a:hover {
+  border-color: var(--bf-action-line);
+  background: var(--apparatus-inset-hover);
+}
+
+.apparatus-port__terminal {
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 0;
+  background: transparent;
+  color: var(--bf-silver-300);
+}
+
+.apparatus-port__terminal::before {
+  content: "›";
+  display: block;
+  font-size: 1.2rem;
+  line-height: 0.8rem;
+}
+
+.apparatus-port:hover .apparatus-port__terminal,
+.apparatus-port:focus-visible .apparatus-port__terminal {
+  border: 0;
+  background: transparent;
+  color: var(--bf-action-hover);
+}
+
+.apparatus-state-strip {
+  background: #202c34;
+}
+
+.apparatus-port-bank,
+.apparatus-through,
+.apparatus-gate,
+.apparatus-record-well {
+  border-color: var(--apparatus-line);
+  border-radius: 8px;
+  background: #101920;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+
+.apparatus-through__well,
+.apparatus-port-bank > div,
+.apparatus-gate__detail {
+  border-top-color: var(--apparatus-line);
+}
+
+.apparatus-record-well {
+  padding: 0.8rem;
+}
+
+.apparatus-relation-trace__line {
+  background: var(--apparatus-line-strong);
+}
+
+/* Projection switch reads as an instrument selector rather than a footer nav bar. */
+.apparatus-depth {
+  border-top: 1px solid var(--apparatus-line-strong);
+  padding: 0.45rem 0.7rem;
+}
+
+.apparatus-depth__position {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--bf-silver-300);
+}
+
+.apparatus-depth__position:hover {
+  border-color: var(--apparatus-line-strong);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.apparatus-depth__position[aria-pressed="true"] {
+  border-color: var(--bf-action-line);
+  background: rgba(169, 140, 255, 0.12);
+  color: var(--bf-action-hover);
+}
+
+/* On large displays Depth belongs in the top chassis beside global controls. */
+@media (min-width: 1440px) {
+  .apparatus-prototype-shell {
+    position: relative;
+    grid-template-rows: auto minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas:
+      "top top"
+      "trace work"
+      "peers work";
+  }
+
+  .apparatus-prototype__topbar {
+    padding-right: 31rem;
+  }
+
+  .apparatus-depth {
+    position: absolute;
+    z-index: 5;
+    top: 0.62rem;
+    right: 0.8rem;
+    min-height: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.18rem 0.24rem 0.18rem 0.55rem;
+    border: 1px solid var(--apparatus-line-strong);
+    border-radius: 7px;
+    background: #121b22;
+    box-shadow: inset 0 1px var(--apparatus-edge), 0 1px 2px var(--apparatus-shadow);
+  }
+
+  .apparatus-depth__positions {
+    gap: 0.12rem;
+  }
+}
+
+/* Preserve the hardening contract once the chassis collapses. */
+@media (max-width: 1100px) {
+  .apparatus-prototype-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+      "top"
+      "trace"
+      "work"
+      "peers"
+      "depth";
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .apparatus-trace--rail {
+    display: none;
+  }
+
+  .apparatus-trace--compact {
+    display: block;
+    grid-area: trace;
+    border-bottom: 1px solid var(--apparatus-line-strong);
+  }
+
+  .apparatus-prototype__workfield,
+  .apparatus-peer-bank {
+    overflow: visible;
+  }
+
+  .apparatus-peer-bank {
+    border-right: 0;
+    border-top: 1px solid var(--apparatus-line-strong);
+  }
+
+  .apparatus-peer-bank ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .apparatus-depth {
+    position: static;
+  }
+}
+
+@media (max-width: 760px) {
+  .apparatus-prototype__topbar {
+    min-height: 0;
+  }
+
+  .apparatus-prototype__prototype-label {
+    margin-inline: 0;
+  }
+
+  .apparatus-peer-bank ol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .apparatus-depth__position {
+    width: 100%;
+  }
+}
+
+@media (forced-colors: active) {
+  .apparatus-prototype-shell :where(
+    .apparatus-command,
+    .apparatus-bay,
+    .apparatus-module,
+    .apparatus-port,
+    .apparatus-state-strip,
+    .apparatus-subject-faceplate,
+    .apparatus-instrument,
+    .apparatus-routing-bay,
+    .apparatus-peer-bank,
+    .apparatus-depth
+  ) {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+}
