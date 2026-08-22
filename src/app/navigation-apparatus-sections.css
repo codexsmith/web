@@ -1,9 +1,12 @@
 /*
- * Boundary First Card renderer · unified traversal tree.
+ * Boundary First Card renderer · admissible traversal navigation.
  *
- * Containment, sibling choice, and the active trace are not three navigation systems.
- * They are three readings of one tree. Neutral branches expose nearby choices; the
- * violet conductor marks the route to the current terminal.
+ * The rail has two jobs only:
+ *   1. preserve the realized traversal history;
+ *   2. expose the immediately admissible next moves from the current node.
+ *
+ * History is evidence, not a shortcut menu. The current node is the boundary between
+ * history and possibility. Ordinary outgoing moves are Up, Across, or Down.
  */
 
 body[data-ui-shell="cards"] {
@@ -18,7 +21,7 @@ body[data-ui-shell="cards"] {
 
 @media (min-width: 981px) {
   body[data-ui-shell="cards"] {
-    --frame-left: clamp(258px, 21vw, 338px);
+    --frame-left: clamp(272px, 21vw, 342px);
   }
 
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
@@ -43,24 +46,24 @@ body[data-ui-shell="cards"] {
     scrollbar-width: thin;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav {
+  body[data-ui-shell="cards"] .traversal-nav {
     min-height: 100%;
     display: flex;
     flex-direction: column;
     color: var(--bf-silver-300);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__header {
-    min-height: 48px;
+  body[data-ui-shell="cards"] .traversal-nav__header {
+    min-height: 52px;
     display: grid;
     align-content: center;
-    gap: 0.18rem;
-    padding: 8px 15px;
+    gap: 0.2rem;
+    padding: 9px 15px;
     border-bottom: 1px solid var(--nav-line);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__header strong {
+  body[data-ui-shell="cards"] .traversal-nav__header strong {
     color: var(--bf-workshop-100);
     font-size: 0.7rem;
     font-weight: 600;
@@ -69,76 +72,73 @@ body[data-ui-shell="cards"] {
     text-transform: uppercase;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__header > span {
+  body[data-ui-shell="cards"] .traversal-nav__header > span {
     color: var(--bf-alloy-400);
     font-size: 0.5rem;
-    letter-spacing: 0.03em;
-    line-height: 1.2;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-shell {
+  body[data-ui-shell="cards"] .traversal-nav__flow {
+    position: relative;
     flex: 1 0 auto;
     min-width: 0;
-    padding: 14px 13px 18px;
+    display: grid;
+    align-content: start;
+    padding: 14px 13px 20px;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li {
+  body[data-ui-shell="cards"] .traversal-nav__section-label {
+    margin-bottom: 0.55rem;
+    color: var(--bf-alloy-400);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.46rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  /* History ----------------------------------------------------------- */
+
+  body[data-ui-shell="cards"] .traversal-nav__history {
     position: relative;
-    min-width: 0;
+    padding-bottom: 10px;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root {
-    padding-left: 24px;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level {
+  body[data-ui-shell="cards"] .traversal-nav__history ol {
     position: relative;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin: 6px 0 0 12px;
-    padding: 0 0 0 20px;
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0 0 0 23px;
     list-style: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level::before {
+  body[data-ui-shell="cards"] .traversal-nav__history ol::before {
     content: "";
     position: absolute;
-    top: -7px;
-    bottom: 19px;
-    left: 5px;
+    top: 13px;
+    bottom: -14px;
+    left: 6px;
     width: 1px;
-    background: var(--nav-line);
+    background: linear-gradient(var(--nav-edge), var(--bf-action-line));
   }
 
-  body[data-ui-shell="cards"] li[data-path="true"] > .apparatus-nav__tree-level::before {
-    background: linear-gradient(var(--bf-action-line), var(--nav-line));
+  body[data-ui-shell="cards"] .traversal-nav__history li {
+    position: relative;
+    min-width: 0;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li::before {
-    content: "";
+  body[data-ui-shell="cards"] .traversal-nav__history-terminal {
     position: absolute;
-    top: 20px;
-    right: calc(100% - 1px);
-    width: 15px;
-    height: 1px;
-    background: var(--nav-line);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li[data-path="true"]::before,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li[data-current="true"]::before {
-    background: var(--bf-action-line);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__terminal {
-    position: absolute;
-    z-index: 3;
-    top: 20px;
-    left: -19px;
-    width: 8px;
-    height: 8px;
+    top: 50%;
+    left: -20px;
+    width: 7px;
+    height: 7px;
     border: 1px solid var(--nav-edge);
     border-radius: 50%;
     background: var(--nav-chassis);
@@ -146,44 +146,180 @@ body[data-ui-shell="cards"] {
     transform: translateY(-50%);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__terminal--root {
-    top: 19px;
-    left: 3px;
+  body[data-ui-shell="cards"] .traversal-nav__history-node {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 5px 7px;
+    color: var(--bf-alloy-400);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.72rem;
+    line-height: 1.2;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > small {
+    color: rgba(170, 180, 184, 0.42);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.43rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* Current boundary -------------------------------------------------- */
+
+  body[data-ui-shell="cards"] .traversal-nav__current {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 12px 23px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -17px;
+    width: 1px;
+    height: 13px;
+    background: var(--bf-action-line);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current-terminal {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: -21px;
     width: 10px;
     height: 10px;
-    border-color: var(--bf-silver-300);
-  }
-
-  body[data-ui-shell="cards"] li[data-path="true"] > .apparatus-nav__terminal,
-  body[data-ui-shell="cards"] li[data-current="true"] > .apparatus-nav__terminal,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root[data-traced="true"] > .apparatus-nav__terminal {
-    border-color: var(--bf-action);
-  }
-
-  body[data-ui-shell="cards"] li[data-current="true"] > .apparatus-nav__terminal,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root[data-current="true"] > .apparatus-nav__terminal {
+    border: 1px solid var(--bf-action);
+    border-radius: 50%;
     background: var(--bf-action-pressed);
     box-shadow:
       0 0 0 2px var(--nav-chassis),
-      0 0 0 4px rgba(169, 140, 255, 0.11);
+      0 0 0 4px rgba(169, 140, 255, 0.12);
+    transform: translateY(-50%);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
+  body[data-ui-shell="cards"] .traversal-nav__current > div {
+    min-height: 50px;
+    display: grid;
+    align-content: center;
+    gap: 0.22rem;
+    padding: 8px 10px;
+    border: 1px solid var(--bf-action-line);
+    border-radius: 6px;
+    background:
+      linear-gradient(90deg, rgba(169, 140, 255, 0.14), transparent 80%),
+      var(--nav-control-active);
+    box-shadow:
+      inset 3px 0 var(--bf-action),
+      inset 0 1px var(--nav-highlight);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current small {
+    color: var(--bf-action-hover);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.43rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current strong {
+    color: var(--bf-workshop-100);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(0.82rem, 0.9vw, 0.96rem);
+    font-weight: 400;
+    line-height: 1.18;
+  }
+
+  /* Admissible possibility ------------------------------------------- */
+
+  body[data-ui-shell="cards"] .traversal-nav__next {
     position: relative;
-    z-index: 1;
+    padding: 2px 0 0 23px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__next::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 12px;
+    left: 6px;
+    width: 1px;
+    background: var(--nav-line);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group {
+    position: relative;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 7px;
+    align-items: start;
+    padding: 5px 0 7px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: -17px;
+    width: 17px;
+    height: 1px;
+    background: var(--nav-line);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__direction {
+    min-height: 32px;
+    display: grid;
+    grid-template-columns: 12px minmax(0, 1fr);
+    gap: 3px;
+    align-items: center;
+    color: var(--bf-alloy-400);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__direction > span {
+    color: var(--bf-action-hover);
+    font-size: 0.67rem;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__direction strong {
+    font-size: 0.45rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group ol {
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group button {
     width: 100%;
     min-width: 0;
-    min-height: 40px;
+    min-height: 42px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 7px 10px;
+    gap: 0.14rem;
+    align-content: center;
+    padding: 7px 9px;
     border: 1px solid var(--nav-line);
     border-radius: 6px;
     background: var(--nav-control);
-    background-image: none;
     color: var(--bf-silver-300);
     box-shadow: inset 0 1px var(--nav-highlight);
     cursor: pointer;
@@ -191,191 +327,243 @@ body[data-ui-shell="cards"] {
     transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button {
-    min-height: 38px;
-    border-color: transparent;
-    background: rgba(255, 255, 255, 0.014);
-    color: var(--bf-workshop-100);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button:hover:not(.is-current),
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button:hover:not(.is-current) {
-    border-color: var(--nav-edge);
+  body[data-ui-shell="cards"] .traversal-nav__move-group button:hover {
+    border-color: var(--bf-action-line);
     background: var(--nav-control-hover);
     color: var(--bf-workshop-100);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button.is-path,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button.is-path {
-    border-color: rgba(169, 140, 255, 0.27);
-    background:
-      linear-gradient(90deg, rgba(169, 140, 255, 0.08), transparent 74%),
-      var(--nav-control);
-    color: var(--bf-workshop-100);
-    box-shadow:
-      inset 2px 0 rgba(169, 140, 255, 0.55),
-      inset 0 1px var(--nav-highlight);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button.is-current,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button.is-current {
-    border-color: var(--bf-action-line);
-    background:
-      linear-gradient(90deg, rgba(169, 140, 255, 0.14), transparent 78%),
-      var(--nav-control-active);
-    color: var(--bf-workshop-100);
-    box-shadow:
-      inset 3px 0 var(--bf-action),
-      inset 0 1px var(--nav-highlight);
-    cursor: default;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__node-label {
+  body[data-ui-shell="cards"] .traversal-nav__move-group button > span {
     min-width: 0;
     overflow-wrap: anywhere;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(0.75rem, 0.78vw, 0.86rem);
-    line-height: 1.18;
+    font-size: 0.76rem;
+    line-height: 1.15;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root .apparatus-nav__node-label {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.02em;
+  body[data-ui-shell="cards"] .traversal-nav__move-group button > small {
+    color: var(--bf-alloy-400);
+    font-size: 0.46rem;
+    line-height: 1.15;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__current-marker {
-    color: var(--bf-action-hover);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.42rem;
-    font-weight: 700;
-    letter-spacing: 0.055em;
-    line-height: 1;
-    text-transform: uppercase;
-    white-space: nowrap;
+  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="up"] button {
+    border-left-color: rgba(242, 198, 109, 0.42);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="across"] button {
+    border-left-color: rgba(169, 140, 255, 0.42);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="down"] button {
+    border-left-color: rgba(142, 219, 154, 0.4);
   }
 }
 
-/* Compact screens keep the same tree model, but expose only the current level. The
- * full hierarchy remains available on desktop while the reading surface gets priority. */
+/* Compact projection: preserve both semantics without recreating the desktop rail.
+ * The current node anchors the shelf. History is summarized as a non-interactive trail;
+ * only admissible next moves remain interactive. */
 @media (max-width: 980px) {
+  body[data-ui-shell="cards"] {
+    --trace-nav-shelf: 68px;
+  }
+
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
     padding: 5px 7px !important;
     background: var(--nav-chassis);
     border-color: var(--nav-edge);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav {
+  body[data-ui-shell="cards"] .traversal-nav {
     height: 100%;
     min-width: 0;
     display: block;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__header,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > .apparatus-nav__terminal,
-  body[data-ui-shell="cards"] .apparatus-nav__terminal,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level::before,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li::before {
+  body[data-ui-shell="cards"] .traversal-nav__header,
+  body[data-ui-shell="cards"] .traversal-nav__section-label,
+  body[data-ui-shell="cards"] .traversal-nav__history-terminal,
+  body[data-ui-shell="cards"] .traversal-nav__current-terminal,
+  body[data-ui-shell="cards"] .traversal-nav__current::after,
+  body[data-ui-shell="cards"] .traversal-nav__next::before,
+  body[data-ui-shell="cards"] .traversal-nav__move-group::before,
+  body[data-ui-shell="cards"] .traversal-nav__direction {
     display: none;
     content: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-shell,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root {
+  body[data-ui-shell="cards"] .traversal-nav__flow {
     height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button {
-    display: none;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level {
-    display: none;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level:has(> li[data-current="true"]),
-  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-focus-at-boundary-root="true"] .apparatus-nav__tree-root > .apparatus-nav__tree-level {
+    min-width: 0;
     display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 5px;
+    padding: 0;
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level::-webkit-scrollbar {
+  body[data-ui-shell="cards"] .traversal-nav__flow::-webkit-scrollbar {
     display: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li {
+  body[data-ui-shell="cards"] .traversal-nav__history,
+  body[data-ui-shell="cards"] .traversal-nav__current,
+  body[data-ui-shell="cards"] .traversal-nav__next,
+  body[data-ui-shell="cards"] .traversal-nav__move-group {
     flex: 0 0 auto;
+    margin: 0;
     padding: 0;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > .apparatus-nav__tree-level {
-    display: none !important;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
-    min-width: 122px;
-    min-height: 40px;
-    height: 40px;
+  body[data-ui-shell="cards"] .traversal-nav__history ol,
+  body[data-ui-shell="cards"] .traversal-nav__next,
+  body[data-ui-shell="cards"] .traversal-nav__move-group,
+  body[data-ui-shell="cards"] .traversal-nav__move-group ol {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 5px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history ol {
+    padding: 0;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history ol::before {
+    display: none;
+    content: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history li:not(:last-child) {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node {
+    width: auto;
+    max-width: 118px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 6px 9px;
+    border: 1px solid var(--nav-line);
+    border-radius: 6px;
+    color: var(--bf-alloy-400);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node::before {
+    content: "←";
+    margin-right: 0.35rem;
+    color: var(--bf-alloy-400);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.7rem;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > small {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current > div {
+    min-width: 122px;
+    min-height: 44px;
+    display: grid;
+    align-content: center;
+    gap: 0.12rem;
+    padding: 6px 9px;
+    border: 1px solid var(--bf-action-line);
+    border-radius: 6px;
+    background: var(--nav-control-active);
+    box-shadow: inset 0 -2px var(--bf-action);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current small {
+    font-size: 0.38rem;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current strong {
+    max-width: 138px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.72rem;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group button {
+    min-width: 116px;
+    min-height: 40px;
+    height: 40px;
     padding: 6px 9px;
     border: 1px solid var(--nav-line);
     border-radius: 6px;
     background: var(--nav-control);
     color: var(--bf-silver-300);
     box-shadow: inset 0 1px var(--nav-highlight);
-    text-align: left;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button.is-current {
-    border-color: var(--bf-action-line);
-    background: var(--nav-control-active);
-    color: var(--bf-workshop-100);
-    box-shadow: inset 0 -2px var(--bf-action);
+  body[data-ui-shell="cards"] .traversal-nav__move-group button::before {
+    margin-right: 0.3rem;
+    color: var(--bf-action-hover);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.6rem;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__node-label {
+  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="up"] button::before {
+    content: "↑";
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="across"] button::before {
+    content: "↔";
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="down"] button::before {
+    content: "↓";
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__move-group button > span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__current-marker {
+  body[data-ui-shell="cards"] .traversal-nav__move-group button > small {
     display: none;
   }
 }
 
 @media (max-width: 460px) {
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
-    min-width: 108px;
+  body[data-ui-shell="cards"] {
+    --trace-nav-shelf: 62px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node {
+    max-width: 96px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current > div,
+  body[data-ui-shell="cards"] .traversal-nav__move-group button {
+    min-width: 104px;
   }
 }
 
 @media (forced-colors: active) {
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
+  body[data-ui-shell="cards"] .traversal-nav__current > div,
+  body[data-ui-shell="cards"] .traversal-nav__history-node,
+  body[data-ui-shell="cards"] .traversal-nav__move-group button {
     background: Canvas;
     color: CanvasText;
     border-color: CanvasText;
     box-shadow: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__terminal {
+  body[data-ui-shell="cards"] .traversal-nav__history-terminal,
+  body[data-ui-shell="cards"] .traversal-nav__current-terminal {
     border-color: CanvasText;
     background: Canvas;
     box-shadow: none;
