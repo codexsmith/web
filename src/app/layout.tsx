@@ -27,6 +27,7 @@ import "./frame-spatial-contract.css";
 import "./trace-nav-refinement.css";
 import "./apparatus-prototype.css";
 import "./apparatus-prototype-hardening.css";
+import "./apparatus-sleek-refinement.css";
 
 export const metadata: Metadata = {
   title: {
