@@ -1,0 +1,19 @@
+/* Peer navigation is complete and persistent in the Boundary Frame.
+   Retire the old previous/next-only record controls so sibling behavior has one owner. */
+.direction-control--left,
+.direction-control--right {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  /* Root still owns the entrance selector's second row. */
+  .boundary-frame--root .frame-tools {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .boundary-frame--root .primary-nav {
+    grid-row: 2;
+    grid-column: 1 / -1;
+  }
+}

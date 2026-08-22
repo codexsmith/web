@@ -1,0 +1,2267 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "reference-configuration-requires-editorial-review",
+  "projection": "context-halo",
+  "centerNode": {
+    "id": "representational-mechanics",
+    "label": "Representational Mechanics",
+    "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#representational-mechanics"
+  },
+  "facetOrderPolicy": "approved-stable-circular-order",
+  "facets": [
+    {
+      "id": "rm-formal-grammars",
+      "label": "Formal Grammars",
+      "order": 0,
+      "role": "formal-apparatus",
+      "angleIndex": 0
+    },
+    {
+      "id": "rm-pressure-cycle-capacity",
+      "label": "Pressure, Cycle & Capacity",
+      "order": 1,
+      "role": "mechanical-facet",
+      "angleIndex": 1
+    },
+    {
+      "id": "rm-distinction-representation",
+      "label": "Distinction & Representation",
+      "order": 2,
+      "role": "mechanical-facet",
+      "angleIndex": 2
+    },
+    {
+      "id": "rm-distinction-space-analysis",
+      "label": "Distinction-Space Analysis",
+      "order": 3,
+      "role": "analytic-facet",
+      "angleIndex": 3
+    },
+    {
+      "id": "rm-boundary-constraint-closure",
+      "label": "Boundary, Constraint & Closure",
+      "order": 4,
+      "role": "mechanical-facet",
+      "angleIndex": 4
+    },
+    {
+      "id": "rm-invariant-defect-transport",
+      "label": "Invariant, Defect & Transport",
+      "order": 5,
+      "role": "mechanical-facet",
+      "angleIndex": 5
+    },
+    {
+      "id": "rm-agency-consequence-repair",
+      "label": "Agency, Consequence & Repair",
+      "order": 6,
+      "role": "consequence-facet",
+      "angleIndex": 6
+    },
+    {
+      "id": "rm-institutional-economic-representation",
+      "label": "Institutional & Economic Representation",
+      "order": 7,
+      "role": "application-facet",
+      "angleIndex": 7
+    },
+    {
+      "id": "rm-operational-grammar-design",
+      "label": "Operational Grammar Design",
+      "order": 8,
+      "role": "constructive-facet",
+      "angleIndex": 8
+    }
+  ],
+  "contextNodes": [
+    {
+      "id": "boundary-theory",
+      "label": "Boundary Theory",
+      "entityType": "theory",
+      "domainFamily": "theory",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#boundary-theory"
+    },
+    {
+      "id": "distinction-space",
+      "label": "Distinction Space",
+      "entityType": "formal-object",
+      "domainFamily": "theory",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#distinction-space"
+    },
+    {
+      "id": "distinction-theory",
+      "label": "Distinction Theory",
+      "entityType": "theory-facet",
+      "domainFamily": "theory",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#distinction-theory"
+    },
+    {
+      "id": "admissibility-theory",
+      "label": "Admissibility Theory",
+      "entityType": "theory-facet",
+      "domainFamily": "theory",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#admissibility-theory"
+    },
+    {
+      "id": "emergence-theory",
+      "label": "Emergence Theory",
+      "entityType": "theory-facet",
+      "domainFamily": "theory",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#emergence-theory"
+    },
+    {
+      "id": "mathematics",
+      "label": "Mathematics & Formal Structures",
+      "entityType": "research-program",
+      "domainFamily": "mathematics",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics"
+    },
+    {
+      "id": "math-geometry-envelopes",
+      "label": "Geometry, Envelopes & Dimension",
+      "entityType": "research-shelf",
+      "domainFamily": "mathematics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[geometry-envelopes]",
+      "subdiscipline": "geometry"
+    },
+    {
+      "id": "math-boundary-reconstruction",
+      "label": "Boundary, Shell & Reconstruction",
+      "entityType": "research-shelf",
+      "domainFamily": "mathematics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[boundary-reconstruction]",
+      "subdiscipline": "geometry"
+    },
+    {
+      "id": "math-topology-obstruction",
+      "label": "Topology, Homology & Obstruction",
+      "entityType": "research-shelf",
+      "domainFamily": "mathematics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[topology-obstruction]",
+      "subdiscipline": "topology"
+    },
+    {
+      "id": "math-analysis-continuation",
+      "label": "Analysis & Continuation",
+      "entityType": "research-shelf",
+      "domainFamily": "mathematics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[analysis-continuation]",
+      "subdiscipline": "analysis"
+    },
+    {
+      "id": "math-logic-foundations",
+      "label": "Logic, Foundations & Proof Envelopes",
+      "entityType": "research-shelf",
+      "domainFamily": "mathematics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[logic-foundations]",
+      "subdiscipline": "logic"
+    },
+    {
+      "id": "physics",
+      "label": "Physics & Physical Regimes",
+      "entityType": "research-program",
+      "domainFamily": "physics",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics"
+    },
+    {
+      "id": "physics-variational-noether",
+      "label": "Variational Mechanics, Action & Noether Theory",
+      "entityType": "research-shelf",
+      "domainFamily": "physics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[variational-noether]",
+      "subdiscipline": "classical-fields"
+    },
+    {
+      "id": "physics-classical-fields",
+      "label": "Classical Fields & Boundary Dynamics",
+      "entityType": "research-shelf",
+      "domainFamily": "physics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[classical-fields]",
+      "subdiscipline": "classical-fields"
+    },
+    {
+      "id": "physics-relativity-gravity",
+      "label": "Relativity, Gravitation & Spacetime Volume",
+      "entityType": "research-shelf",
+      "domainFamily": "physics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[relativity-gravity]",
+      "subdiscipline": "relativity"
+    },
+    {
+      "id": "physics-quantum-foundations",
+      "label": "Quantum Foundations & State-Space Closure",
+      "entityType": "research-shelf",
+      "domainFamily": "physics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[quantum-foundations]",
+      "subdiscipline": "quantum"
+    },
+    {
+      "id": "physics-thermodynamics",
+      "label": "Thermodynamics, Heat & Spectral Emergence",
+      "entityType": "research-shelf",
+      "domainFamily": "physics",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[thermodynamics]",
+      "subdiscipline": "thermodynamics"
+    },
+    {
+      "id": "computational-systems",
+      "label": "Computational & Machine Intelligence",
+      "entityType": "research-program",
+      "domainFamily": "computation",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems"
+    },
+    {
+      "id": "comp-foundations-computation",
+      "label": "Foundations of Computation",
+      "entityType": "research-shelf",
+      "domainFamily": "computation",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[foundations-computation]",
+      "subdiscipline": "foundations"
+    },
+    {
+      "id": "comp-graphs-knowledge",
+      "label": "Graphs & Knowledge Systems",
+      "entityType": "research-shelf",
+      "domainFamily": "computation",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[graphs-knowledge-systems]",
+      "subdiscipline": "graphs-knowledge"
+    },
+    {
+      "id": "comp-machine-learning",
+      "label": "Machine Learning",
+      "entityType": "research-shelf",
+      "domainFamily": "computation",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[machine-learning]",
+      "subdiscipline": "machine-learning"
+    },
+    {
+      "id": "comp-memory-agents",
+      "label": "Memory & Agent Architectures",
+      "entityType": "research-shelf",
+      "domainFamily": "computation",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[memory-agent-architectures]",
+      "subdiscipline": "memory-agents"
+    },
+    {
+      "id": "comp-computational-epistemology",
+      "label": "Computational Epistemology",
+      "entityType": "research-shelf",
+      "domainFamily": "computation",
+      "sourceKind": "nested-shelf",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[computational-epistemology]",
+      "subdiscipline": "computational-epistemology"
+    },
+    {
+      "id": "boundary-first",
+      "label": "Boundary First",
+      "entityType": "method",
+      "domainFamily": "engineering",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#boundary-first",
+      "subdiscipline": "boundary-first-engineering"
+    },
+    {
+      "id": "bfe",
+      "label": "Boundary-First Engineering",
+      "entityType": "applied-practice",
+      "domainFamily": "engineering",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#bfe",
+      "subdiscipline": "boundary-first-engineering"
+    },
+    {
+      "id": "software-engineering-practice",
+      "label": "Software Engineering & Applied Computer Science",
+      "entityType": "practice-domain",
+      "domainFamily": "engineering",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#software-engineering-practice",
+      "subdiscipline": "software-architecture"
+    },
+    {
+      "id": "ai-forge",
+      "label": "AI as Forge",
+      "entityType": "method",
+      "domainFamily": "engineering",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#ai-forge",
+      "subdiscipline": "ai-as-forge"
+    },
+    {
+      "id": "constructive-humanist-agentics",
+      "label": "Constructive Humanist Agentics",
+      "entityType": "philosophy",
+      "domainFamily": "public-consequence",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#constructive-humanist-agentics",
+      "subdiscipline": "governance"
+    },
+    {
+      "id": "governance-institutions",
+      "label": "Governance & Institutions",
+      "entityType": "application-domain",
+      "domainFamily": "public-consequence",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#governance-institutions",
+      "subdiscipline": "governance"
+    },
+    {
+      "id": "law-public-trust",
+      "label": "Law, Constitutional Systems & Public Trust",
+      "entityType": "application-domain",
+      "domainFamily": "public-consequence",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#law-public-trust",
+      "subdiscipline": "law"
+    },
+    {
+      "id": "finance-capital",
+      "label": "Finance, Capital & Economic Systems",
+      "entityType": "application-domain",
+      "domainFamily": "public-consequence",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#finance-capital",
+      "subdiscipline": "finance"
+    },
+    {
+      "id": "infrastructure-repair",
+      "label": "Infrastructure & Civilizational Repair",
+      "entityType": "application-domain",
+      "domainFamily": "public-consequence",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#infrastructure-repair",
+      "subdiscipline": "infrastructure"
+    },
+    {
+      "id": "systems-criticism",
+      "label": "Systems Criticism & Public Diagnosis",
+      "entityType": "public-interface",
+      "domainFamily": "public-interface",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#systems-criticism"
+    },
+    {
+      "id": "corpus",
+      "label": "Corpus & Research Operations",
+      "entityType": "operations",
+      "domainFamily": "corpus-evidence",
+      "sourceKind": "canonical-node",
+      "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#corpus"
+    },
+    {
+      "id": "project-corpus-forge-agent-pipeline",
+      "label": "Corpus Forge Agent Pipeline",
+      "entityType": "project",
+      "domainFamily": "corpus-evidence",
+      "sourceKind": "work-entity",
+      "sourceRef": "bfl_project_index_seed_v0_1.json#project-corpus-forge-agent-pipeline"
+    },
+    {
+      "id": "product-corpus-forge-workbench",
+      "label": "Integrated Corpus Forge Workbench",
+      "entityType": "product",
+      "domainFamily": "corpus-evidence",
+      "sourceKind": "work-entity",
+      "sourceRef": "bfl_work_portfolio_migration_seed_v0_1.json#corpus-forge-workbench"
+    },
+    {
+      "id": "product-agency-audit-platform",
+      "label": "Agency Audit Platform",
+      "entityType": "product",
+      "domainFamily": "public-consequence",
+      "sourceKind": "work-entity",
+      "sourceRef": "bfl_work_portfolio_migration_seed_v0_1.json#agency-audit-platform",
+      "subdiscipline": "governance"
+    },
+    {
+      "id": "project-software-before-code-publication",
+      "label": "Software Before Code Publication Development",
+      "entityType": "project",
+      "domainFamily": "engineering",
+      "sourceKind": "work-entity",
+      "sourceRef": "bfl_project_index_seed_v0_1.json#project-software-before-code-publication",
+      "subdiscipline": "software-architecture"
+    },
+    {
+      "id": "project-boundary-first-soccer-theory",
+      "label": "Boundary-First Soccer Theory Development",
+      "entityType": "project",
+      "domainFamily": "public-interface",
+      "sourceKind": "work-entity",
+      "sourceRef": "bfl_project_index_seed_v0_1.json#project-boundary-first-soccer-theory"
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel-boundary-theory",
+      "source": {
+        "id": "boundary-theory",
+        "label": "Boundary Theory",
+        "entityType": "theory",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#boundary-theory"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.88
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.72
+        }
+      ],
+      "relationType": "grounds",
+      "domainFamily": "theory",
+      "semanticAffinity": 0.95,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.96,
+      "sharedness": 0.6,
+      "evidenceMaturity": "canonical",
+      "description": "Boundary Theory supplies the theoretical architecture within which Representational Mechanics studies and applies boundary, distinction-space, closure, and defect structures.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 10
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#boundary-theory"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-distinction-space",
+      "source": {
+        "id": "distinction-space",
+        "label": "Distinction Space",
+        "entityType": "formal-object",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#distinction-space"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 1.0
+        },
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.72
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.68
+        }
+      ],
+      "relationType": "grounds",
+      "domainFamily": "theory",
+      "semanticAffinity": 0.98,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.98,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Distinction Space is the central formal object analyzed by the discipline.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 10
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#distinction-space"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-distinction-theory",
+      "source": {
+        "id": "distinction-theory",
+        "label": "Distinction Theory",
+        "entityType": "theory-facet",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#distinction-theory"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.98
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.75
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.48
+        }
+      ],
+      "relationType": "grounds",
+      "domainFamily": "theory",
+      "semanticAffinity": 0.96,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.94,
+      "sharedness": 0.6,
+      "evidenceMaturity": "canonical",
+      "description": "Distinction Theory supplies the theory of distinguishability, representation, and contextual legibility.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 10
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#distinction-theory"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-admissibility-theory",
+      "source": {
+        "id": "admissibility-theory",
+        "label": "Admissibility Theory",
+        "entityType": "theory-facet",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#admissibility-theory"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.92
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.62
+        }
+      ],
+      "relationType": "grounds",
+      "domainFamily": "theory",
+      "semanticAffinity": 0.96,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.95,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Admissibility Theory supplies the theory of lawful transformation relative to invariants and closure conditions.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 10
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#admissibility-theory"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-emergence-theory",
+      "source": {
+        "id": "emergence-theory",
+        "label": "Emergence Theory",
+        "entityType": "theory-facet",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#emergence-theory"
+      },
+      "targets": [
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.7
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.72
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.42
+        }
+      ],
+      "relationType": "grounds",
+      "domainFamily": "theory",
+      "semanticAffinity": 0.88,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.86,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Emergence Theory explains how stable structure changes the next operative distinction space.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 9
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#emergence-theory"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-mathematics",
+      "source": {
+        "id": "mathematics",
+        "label": "Mathematics & Formal Structures",
+        "entityType": "research-program",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.92
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.76
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.84
+        }
+      ],
+      "relationType": "formalizes",
+      "domainFamily": "mathematics",
+      "semanticAffinity": 0.92,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.91,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Mathematics tests whether the mechanics can be made exact through definitions, constructions, computations, and proofs.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 9
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#mathematics"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-math-geometry-envelopes",
+      "source": {
+        "id": "math-geometry-envelopes",
+        "label": "Geometry, Envelopes & Dimension",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[geometry-envelopes]",
+        "subdiscipline": "geometry"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.44
+        }
+      ],
+      "relationType": "formalizes",
+      "domainFamily": "mathematics",
+      "semanticAffinity": 0.81,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.76,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Geometry and envelope families formalize spaces, dimensions, gauges, and boundary-defining structures.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 5
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[geometry-envelopes]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-math-boundary-reconstruction",
+      "source": {
+        "id": "math-boundary-reconstruction",
+        "label": "Boundary, Shell & Reconstruction",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[boundary-reconstruction]",
+        "subdiscipline": "geometry"
+      },
+      "targets": [
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.96
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.62
+        }
+      ],
+      "relationType": "formalizes",
+      "domainFamily": "mathematics",
+      "semanticAffinity": 0.94,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.91,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Boundary-response and reconstruction mathematics directly formalize closure, transport, and recoverability.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 8
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[boundary-reconstruction]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-math-topology-obstruction",
+      "source": {
+        "id": "math-topology-obstruction",
+        "label": "Topology, Homology & Obstruction",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[topology-obstruction]",
+        "subdiscipline": "topology"
+      },
+      "targets": [
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.87
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.96
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.66
+        }
+      ],
+      "relationType": "formalizes",
+      "domainFamily": "mathematics",
+      "semanticAffinity": 0.94,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.92,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Topology and homology provide machinery for boundary, persistence, obstruction, and defect classes.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 8
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[topology-obstruction]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-math-analysis-continuation",
+      "source": {
+        "id": "math-analysis-continuation",
+        "label": "Analysis & Continuation",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[analysis-continuation]",
+        "subdiscipline": "analysis"
+      },
+      "targets": [
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.74
+        },
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.5
+        }
+      ],
+      "relationType": "formalizes",
+      "domainFamily": "mathematics",
+      "semanticAffinity": 0.86,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.8,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Analysis and continuation formalize transport, singularity, branch structure, and failure of continuation.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 6
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[analysis-continuation]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-math-logic-foundations",
+      "source": {
+        "id": "math-logic-foundations",
+        "label": "Logic, Foundations & Proof Envelopes",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[logic-foundations]",
+        "subdiscipline": "logic"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.96
+        },
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.72
+        }
+      ],
+      "relationType": "formalizes",
+      "domainFamily": "mathematics",
+      "semanticAffinity": 0.91,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.88,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Logic and proof theory formalize vocabularies, admissible inference, proof envelopes, and grammar conditions.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 8
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#mathematics.researchShelves[logic-foundations]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-physics",
+      "source": {
+        "id": "physics",
+        "label": "Physics & Physical Regimes",
+        "entityType": "research-program",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics"
+      },
+      "targets": [
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.8
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.58
+        }
+      ],
+      "relationType": "tests",
+      "domainFamily": "physics",
+      "semanticAffinity": 0.91,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.92,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Physics tests whether the mechanics describe nature through dimensional validity, known-physics recovery, prediction, and observation.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 9
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#physics"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-physics-variational-noether",
+      "source": {
+        "id": "physics-variational-noether",
+        "label": "Variational Mechanics, Action & Noether Theory",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[variational-noether]",
+        "subdiscipline": "classical-fields"
+      },
+      "targets": [
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.97
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.82
+        }
+      ],
+      "relationType": "tests",
+      "domainFamily": "physics",
+      "semanticAffinity": 0.93,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.91,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Variational and Noether structures connect pressure, boundary terms, invariants, and defect-modified balance laws.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 8
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[variational-noether]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-physics-classical-fields",
+      "source": {
+        "id": "physics-classical-fields",
+        "label": "Classical Fields & Boundary Dynamics",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[classical-fields]",
+        "subdiscipline": "classical-fields"
+      },
+      "targets": [
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.94
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.62
+        }
+      ],
+      "relationType": "tests",
+      "domainFamily": "physics",
+      "semanticAffinity": 0.9,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.86,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Classical fields provide explicit boundary, flux, transport, and reconstruction test domains.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[classical-fields]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-physics-relativity-gravity",
+      "source": {
+        "id": "physics-relativity-gravity",
+        "label": "Relativity, Gravitation & Spacetime Volume",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[relativity-gravity]",
+        "subdiscipline": "relativity"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.52
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.64
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.78
+        }
+      ],
+      "relationType": "tests",
+      "domainFamily": "physics",
+      "semanticAffinity": 0.82,
+      "structuralDistance": 4,
+      "relationshipStrength": 0.67,
+      "sharedness": 0.8,
+      "evidenceMaturity": "exploratory",
+      "description": "Relativity and gravity connect reference frames, causal regions, horizons, invariants, and spacetime closure.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 4
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[relativity-gravity]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-physics-quantum-foundations",
+      "source": {
+        "id": "physics-quantum-foundations",
+        "label": "Quantum Foundations & State-Space Closure",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[quantum-foundations]",
+        "subdiscipline": "quantum"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.72
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.84
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.76
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.68
+        }
+      ],
+      "relationType": "tests",
+      "domainFamily": "physics",
+      "semanticAffinity": 0.84,
+      "structuralDistance": 4,
+      "relationshipStrength": 0.7,
+      "sharedness": 0.8,
+      "evidenceMaturity": "exploratory",
+      "description": "Quantum foundations provide a state-space and measurement domain for projection, admissibility, closure, and observability.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 4
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[quantum-foundations]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-physics-thermodynamics",
+      "source": {
+        "id": "physics-thermodynamics",
+        "label": "Thermodynamics, Heat & Spectral Emergence",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[thermodynamics]",
+        "subdiscipline": "thermodynamics"
+      },
+      "targets": [
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.92
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-distinction-space-analysis",
+          "strength": 0.54
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.34
+        }
+      ],
+      "relationType": "tests",
+      "domainFamily": "physics",
+      "semanticAffinity": 0.85,
+      "structuralDistance": 4,
+      "relationshipStrength": 0.72,
+      "sharedness": 0.8,
+      "evidenceMaturity": "exploratory",
+      "description": "Thermodynamics connects pressure, capacity, coarse-graining, irreversible loss, and emergent closure.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 4
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#physics.researchShelves[thermodynamics]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-computational-systems",
+      "source": {
+        "id": "computational-systems",
+        "label": "Computational & Machine Intelligence",
+        "entityType": "research-program",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.88
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.74
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "computation",
+      "semanticAffinity": 0.93,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.92,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Computational research applies the mechanics to learning, graphs, knowledge, memory, complexity, and agency.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 9
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#computational-systems"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-comp-foundations-computation",
+      "source": {
+        "id": "comp-foundations-computation",
+        "label": "Foundations of Computation",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[foundations-computation]",
+        "subdiscipline": "foundations"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.96
+        },
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.74
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.86
+        }
+      ],
+      "relationType": "formalizes",
+      "domainFamily": "computation",
+      "semanticAffinity": 0.92,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.89,
+      "sharedness": 0.8,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Foundations of computation connect distinction, effective grammar, inspection, and closure machines.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 8
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[foundations-computation]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-comp-graphs-knowledge",
+      "source": {
+        "id": "comp-graphs-knowledge",
+        "label": "Graphs & Knowledge Systems",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[graphs-knowledge-systems]",
+        "subdiscipline": "graphs-knowledge"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.84
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.72
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "computation",
+      "semanticAffinity": 0.87,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.83,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Graph and knowledge systems make edge admissibility, path support, transport, and provenance explicit.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[graphs-knowledge-systems]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-comp-machine-learning",
+      "source": {
+        "id": "comp-machine-learning",
+        "label": "Machine Learning",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[machine-learning]",
+        "subdiscipline": "machine-learning"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.76
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.72
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.68
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.5
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "computation",
+      "semanticAffinity": 0.79,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.73,
+      "sharedness": 0.8,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Machine learning provides test domains for representation, defect observables, calibration, and deployment admissibility.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 5
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[machine-learning]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-comp-memory-agents",
+      "source": {
+        "id": "comp-memory-agents",
+        "label": "Memory & Agent Architectures",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[memory-agent-architectures]",
+        "subdiscipline": "memory-agents"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.64
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.94
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.88
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.58
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "computation",
+      "semanticAffinity": 0.88,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.84,
+      "sharedness": 0.8,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Memory and agent architectures connect persistence, delegated action, bounded operation, and repair.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[memory-agent-architectures]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-comp-computational-epistemology",
+      "source": {
+        "id": "comp-computational-epistemology",
+        "label": "Computational Epistemology",
+        "entityType": "research-shelf",
+        "sourceKind": "nested-shelf",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[computational-epistemology]",
+        "subdiscipline": "computational-epistemology"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.7
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.76
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "computation",
+      "semanticAffinity": 0.88,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.82,
+      "sharedness": 0.8,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Computational epistemology studies the production, testing, transport, provenance, and repair of knowledge.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#computational-systems.researchShelves[computational-epistemology]"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-boundary-first",
+      "source": {
+        "id": "boundary-first",
+        "label": "Boundary First",
+        "entityType": "method",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#boundary-first",
+        "subdiscipline": "boundary-first-engineering"
+      },
+      "targets": [
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.94
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.88
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.72
+        }
+      ],
+      "relationType": "implements",
+      "domainFamily": "engineering",
+      "semanticAffinity": 0.96,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.96,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Boundary First operationalizes the discipline by beginning with the consequential boundary, invariant, defect, and repair path.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 10
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#boundary-first"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-bfe",
+      "source": {
+        "id": "bfe",
+        "label": "Boundary-First Engineering",
+        "entityType": "applied-practice",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#bfe",
+        "subdiscipline": "boundary-first-engineering"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.7
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.94
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.88
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.96
+        }
+      ],
+      "relationType": "implements",
+      "domainFamily": "engineering",
+      "semanticAffinity": 0.96,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.95,
+      "sharedness": 1.0,
+      "evidenceMaturity": "canonical",
+      "description": "Boundary-First Engineering turns the mechanics into repeatable professional practice.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 10
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#bfe"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-software-engineering-practice",
+      "source": {
+        "id": "software-engineering-practice",
+        "label": "Software Engineering & Applied Computer Science",
+        "entityType": "practice-domain",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#software-engineering-practice",
+        "subdiscipline": "software-architecture"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.76
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.88
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.76
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.94
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "engineering",
+      "semanticAffinity": 0.94,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.92,
+      "sharedness": 1.0,
+      "evidenceMaturity": "canonical",
+      "description": "Software engineering provides a primary applied laboratory for representation, interfaces, lifecycle closure, defect, and repair.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 9
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#software-engineering-practice"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-ai-forge",
+      "source": {
+        "id": "ai-forge",
+        "label": "AI as Forge",
+        "entityType": "method",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#ai-forge",
+        "subdiscipline": "ai-as-forge"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.74
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.68
+        }
+      ],
+      "relationType": "implements",
+      "domainFamily": "engineering",
+      "semanticAffinity": 0.84,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.8,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "AI as Forge applies explicit transformation and review grammars to research and artifact production.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#ai-forge"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-constructive-humanist-agentics",
+      "source": {
+        "id": "constructive-humanist-agentics",
+        "label": "Constructive Humanist Agentics",
+        "entityType": "philosophy",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#constructive-humanist-agentics",
+        "subdiscipline": "governance"
+      },
+      "targets": [
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 1.0
+        },
+        {
+          "facetId": "rm-institutional-economic-representation",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.58
+        }
+      ],
+      "relationType": "governs",
+      "domainFamily": "public-consequence",
+      "semanticAffinity": 0.95,
+      "structuralDistance": 1,
+      "relationshipStrength": 0.94,
+      "sharedness": 0.6,
+      "evidenceMaturity": "canonical",
+      "description": "Constructive Humanist Agentics supplies the normative doctrine for delegated agency, standing, responsibility, and repair.",
+      "display": {
+        "visibilityLevel": "near",
+        "preferredRadiusBand": "close",
+        "editorialPriority": 10
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#constructive-humanist-agentics"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-governance-institutions",
+      "source": {
+        "id": "governance-institutions",
+        "label": "Governance & Institutions",
+        "entityType": "application-domain",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#governance-institutions",
+        "subdiscipline": "governance"
+      },
+      "targets": [
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.94
+        },
+        {
+          "facetId": "rm-institutional-economic-representation",
+          "strength": 0.98
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.7
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "public-consequence",
+      "semanticAffinity": 0.94,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.92,
+      "sharedness": 0.6,
+      "evidenceMaturity": "canonical",
+      "description": "Governance and institutions apply the mechanics to authority, consequence, standing, contestability, and repair.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 9
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#governance-institutions"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-law-public-trust",
+      "source": {
+        "id": "law-public-trust",
+        "label": "Law, Constitutional Systems & Public Trust",
+        "entityType": "application-domain",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#law-public-trust",
+        "subdiscipline": "law"
+      },
+      "targets": [
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.9
+        },
+        {
+          "facetId": "rm-institutional-economic-representation",
+          "strength": 0.96
+        },
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.52
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "public-consequence",
+      "semanticAffinity": 0.9,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.85,
+      "sharedness": 0.6,
+      "evidenceMaturity": "canonical",
+      "description": "Law and public trust formalize delegated authority, standing, liability, appeal, and institutional repair.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#law-public-trust"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-finance-capital",
+      "source": {
+        "id": "finance-capital",
+        "label": "Finance, Capital & Economic Systems",
+        "entityType": "application-domain",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#finance-capital",
+        "subdiscipline": "finance"
+      },
+      "targets": [
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.62
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.76
+        },
+        {
+          "facetId": "rm-institutional-economic-representation",
+          "strength": 0.98
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "public-consequence",
+      "semanticAffinity": 0.88,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.84,
+      "sharedness": 0.6,
+      "evidenceMaturity": "canonical",
+      "description": "Finance and capital apply the mechanics to future agency, bounded obligation, externality, maintenance, and repair.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#finance-capital"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-infrastructure-repair",
+      "source": {
+        "id": "infrastructure-repair",
+        "label": "Infrastructure & Civilizational Repair",
+        "entityType": "application-domain",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#infrastructure-repair",
+        "subdiscipline": "infrastructure"
+      },
+      "targets": [
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.92
+        },
+        {
+          "facetId": "rm-institutional-economic-representation",
+          "strength": 0.76
+        }
+      ],
+      "relationType": "applies",
+      "domainFamily": "public-consequence",
+      "semanticAffinity": 0.89,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.84,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Infrastructure work connects lifecycle boundaries, maintenance ownership, defect visibility, and repair authority.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 7
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#infrastructure-repair"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-systems-criticism",
+      "source": {
+        "id": "systems-criticism",
+        "label": "Systems Criticism & Public Diagnosis",
+        "entityType": "public-interface",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#systems-criticism"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.7
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.88
+        },
+        {
+          "facetId": "rm-institutional-economic-representation",
+          "strength": 0.76
+        }
+      ],
+      "relationType": "witnesses",
+      "domainFamily": "public-interface",
+      "semanticAffinity": 0.84,
+      "structuralDistance": 3,
+      "relationshipStrength": 0.79,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Systems criticism detects normalized representational defects and makes them publicly contestable.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 6
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#systems-criticism"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-corpus",
+      "source": {
+        "id": "corpus",
+        "label": "Corpus & Research Operations",
+        "entityType": "operations",
+        "sourceKind": "canonical-node",
+        "sourceRef": "nodes_boundary_theory_reorganized_v0_1.json#corpus"
+      },
+      "targets": [
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.72
+        },
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.92
+        }
+      ],
+      "relationType": "implements",
+      "domainFamily": "corpus-evidence",
+      "semanticAffinity": 0.9,
+      "structuralDistance": 2,
+      "relationshipStrength": 0.88,
+      "sharedness": 0.8,
+      "evidenceMaturity": "canonical",
+      "description": "Corpus and research operations preserve provenance, transformation rules, contradiction, promotion, and replacement history.",
+      "display": {
+        "visibilityLevel": "medium",
+        "preferredRadiusBand": "middle",
+        "editorialPriority": 8
+      },
+      "provenance": {
+        "sourceRefs": [
+          "nodes_boundary_theory_reorganized_v0_1.json#corpus"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-project-corpus-forge-agent-pipeline",
+      "source": {
+        "id": "project-corpus-forge-agent-pipeline",
+        "label": "Corpus Forge Agent Pipeline",
+        "entityType": "project",
+        "sourceKind": "work-entity",
+        "sourceRef": "bfl_project_index_seed_v0_1.json#project-corpus-forge-agent-pipeline"
+      },
+      "targets": [
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.92
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-formal-grammars",
+          "strength": 0.7
+        }
+      ],
+      "relationType": "implements",
+      "domainFamily": "corpus-evidence",
+      "semanticAffinity": 0.8,
+      "structuralDistance": 4,
+      "relationshipStrength": 0.72,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "The Agent Pipeline project turns research transformation and criticism into a supervised operational grammar.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 5
+      },
+      "provenance": {
+        "sourceRefs": [
+          "bfl_project_index_seed_v0_1.json#project-corpus-forge-agent-pipeline"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-product-corpus-forge-workbench",
+      "source": {
+        "id": "product-corpus-forge-workbench",
+        "label": "Integrated Corpus Forge Workbench",
+        "entityType": "product",
+        "sourceKind": "work-entity",
+        "sourceRef": "bfl_work_portfolio_migration_seed_v0_1.json#corpus-forge-workbench"
+      },
+      "targets": [
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.94
+        },
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.74
+        },
+        {
+          "facetId": "rm-invariant-defect-transport",
+          "strength": 0.76
+        }
+      ],
+      "relationType": "implements",
+      "domainFamily": "corpus-evidence",
+      "semanticAffinity": 0.82,
+      "structuralDistance": 4,
+      "relationshipStrength": 0.74,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "The Corpus Forge Workbench is a product concept implementing provenance-aware transformation, comparison, and repair.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 5
+      },
+      "provenance": {
+        "sourceRefs": [
+          "bfl_work_portfolio_migration_seed_v0_1.json#corpus-forge-workbench"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-product-agency-audit-platform",
+      "source": {
+        "id": "product-agency-audit-platform",
+        "label": "Agency Audit Platform",
+        "entityType": "product",
+        "sourceKind": "work-entity",
+        "sourceRef": "bfl_work_portfolio_migration_seed_v0_1.json#agency-audit-platform",
+        "subdiscipline": "governance"
+      },
+      "targets": [
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.98
+        },
+        {
+          "facetId": "rm-institutional-economic-representation",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.72
+        }
+      ],
+      "relationType": "implements",
+      "domainFamily": "public-consequence",
+      "semanticAffinity": 0.88,
+      "structuralDistance": 4,
+      "relationshipStrength": 0.8,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "The Agency Audit Platform operationalizes authorization, boundedness, legibility, contestability, attribution, and repair.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 6
+      },
+      "provenance": {
+        "sourceRefs": [
+          "bfl_work_portfolio_migration_seed_v0_1.json#agency-audit-platform"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-project-software-before-code-publication",
+      "source": {
+        "id": "project-software-before-code-publication",
+        "label": "Software Before Code Publication Development",
+        "entityType": "project",
+        "sourceKind": "work-entity",
+        "sourceRef": "bfl_project_index_seed_v0_1.json#project-software-before-code-publication",
+        "subdiscipline": "software-architecture"
+      },
+      "targets": [
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.82
+        },
+        {
+          "facetId": "rm-operational-grammar-design",
+          "strength": 0.78
+        }
+      ],
+      "relationType": "translates",
+      "domainFamily": "engineering",
+      "semanticAffinity": 0.83,
+      "structuralDistance": 4,
+      "relationshipStrength": 0.75,
+      "sharedness": 0.6,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Software Before Code translates the discipline into a practitioner-facing account of representation, admissibility, boundaries, and closure.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 5
+      },
+      "provenance": {
+        "sourceRefs": [
+          "bfl_project_index_seed_v0_1.json#project-software-before-code-publication"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    },
+    {
+      "id": "rel-project-boundary-first-soccer-theory",
+      "source": {
+        "id": "project-boundary-first-soccer-theory",
+        "label": "Boundary-First Soccer Theory Development",
+        "entityType": "project",
+        "sourceKind": "work-entity",
+        "sourceRef": "bfl_project_index_seed_v0_1.json#project-boundary-first-soccer-theory"
+      },
+      "targets": [
+        {
+          "facetId": "rm-pressure-cycle-capacity",
+          "strength": 0.8
+        },
+        {
+          "facetId": "rm-boundary-constraint-closure",
+          "strength": 0.86
+        },
+        {
+          "facetId": "rm-agency-consequence-repair",
+          "strength": 0.78
+        },
+        {
+          "facetId": "rm-distinction-representation",
+          "strength": 0.62
+        }
+      ],
+      "relationType": "translates",
+      "domainFamily": "public-interface",
+      "semanticAffinity": 0.79,
+      "structuralDistance": 5,
+      "relationshipStrength": 0.65,
+      "sharedness": 0.8,
+      "evidenceMaturity": "supported-local-relation",
+      "description": "Boundary-First Soccer provides a continuous, noisy, embodied on-ramp to pressure, boundary construction, admissible transitions, and repair.",
+      "display": {
+        "visibilityLevel": "far",
+        "preferredRadiusBand": "horizon",
+        "editorialPriority": 4
+      },
+      "provenance": {
+        "sourceRefs": [
+          "bfl_project_index_seed_v0_1.json#project-boundary-first-soccer-theory"
+        ],
+        "reviewStatus": "reference-seed-requires-editorial-review"
+      }
+    }
+  ],
+  "layout": {
+    "startAngleDegrees": -90,
+    "direction": "clockwise",
+    "facetRingRadius": 1.0,
+    "relationBands": {
+      "close": [
+        1.25,
+        1.55
+      ],
+      "middle": [
+        1.55,
+        2.15
+      ],
+      "horizon": [
+        2.15,
+        3.1
+      ]
+    },
+    "familyArcLabels": true,
+    "edgeBundling": "family-then-facet",
+    "collisionPolicy": "preserve-family-order-then-increase-radius",
+    "editorialOverridesAllowed": true
+  },
+  "defaultFilters": {
+    "maxVisibleContextNodes": 28,
+    "minimumRelationshipStrength": 0.66,
+    "includeEntityTypes": [
+      "theory",
+      "formal-object",
+      "theory-facet",
+      "research-program",
+      "research-shelf",
+      "method",
+      "applied-practice",
+      "practice-domain",
+      "application-domain",
+      "philosophy",
+      "operations",
+      "project",
+      "product"
+    ]
+  },
+  "interaction": {
+    "hoverFacet": "reveal-relations",
+    "hoverContextNode": "reveal-facets",
+    "click": "pin",
+    "compareMax": 2,
+    "openRequiresExplicitAction": true
+  },
+  "notes": [
+    "This is a presentation seed, not a claim that every relation has equal formal or evidentiary status.",
+    "Canonical top-level relationships are distinguished from supported local relations and exploratory mappings.",
+    "Facet order should remain stable after editorial approval to preserve spatial memory."
+  ]
+}

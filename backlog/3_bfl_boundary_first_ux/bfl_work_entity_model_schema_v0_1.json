@@ -1,0 +1,483 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://boundaryfirstlabs.org/schemas/work-entity-model-v0.1.json",
+  "title": "Boundary First Labs Work Entity Model",
+  "description": "Typed entities and relations for presenting programs, projects, products, artifacts, services, and testbeds without replacing the canonical conceptual graph.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "entities",
+    "relations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/program"
+          },
+          {
+            "$ref": "#/$defs/project"
+          },
+          {
+            "$ref": "#/$defs/product"
+          },
+          {
+            "$ref": "#/$defs/artifact"
+          },
+          {
+            "$ref": "#/$defs/service"
+          },
+          {
+            "$ref": "#/$defs/testbed"
+          }
+        ]
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relation"
+      }
+    }
+  },
+  "$defs": {
+    "base": {
+      "type": "object",
+      "required": [
+        "id",
+        "entityType",
+        "title",
+        "summary",
+        "sourceRefs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "entityType": {
+          "enum": [
+            "program",
+            "project",
+            "product",
+            "product-family",
+            "artifact",
+            "service",
+            "testbed"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "sourceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "canonicalNodeRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "steward": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "cautious",
+            "private",
+            "restricted"
+          ]
+        },
+        "presentation": {
+          "type": "object"
+        }
+      }
+    },
+    "program": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "entityType": {
+              "const": "program"
+            },
+            "programType": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "projectRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "project": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "objective",
+            "operatingState",
+            "projectPhase"
+          ],
+          "properties": {
+            "entityType": {
+              "const": "project"
+            },
+            "projectType": {
+              "type": "string"
+            },
+            "objective": {
+              "type": "string"
+            },
+            "portfolioStanding": {
+              "enum": [
+                "candidate",
+                "emerging",
+                "confirmed"
+              ]
+            },
+            "operatingState": {
+              "enum": [
+                "planned",
+                "active",
+                "paused",
+                "blocked",
+                "in-review",
+                "complete",
+                "archived"
+              ]
+            },
+            "projectPhase": {
+              "enum": [
+                "discovery",
+                "definition",
+                "build",
+                "validation",
+                "pilot",
+                "publication",
+                "launch",
+                "closure"
+              ]
+            },
+            "scope": {
+              "type": "object"
+            },
+            "workstreams": {
+              "type": "array"
+            },
+            "milestones": {
+              "type": "array"
+            },
+            "acceptanceCriteria": {
+              "type": "array"
+            },
+            "advancesEntityRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "producesEntityRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "dependencyRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "product": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "productClass",
+            "portfolioStanding",
+            "lifecycleStage",
+            "operatingState",
+            "valueProposition"
+          ],
+          "properties": {
+            "entityType": {
+              "enum": [
+                "product",
+                "product-family"
+              ]
+            },
+            "productClass": {
+              "type": "string"
+            },
+            "portfolioStanding": {
+              "enum": [
+                "candidate",
+                "emerging",
+                "confirmed"
+              ]
+            },
+            "lifecycleStage": {
+              "enum": [
+                "seed",
+                "governed-concept",
+                "bounded-prototype",
+                "testbed",
+                "pilot",
+                "product-instrument",
+                "maintained-service",
+                "retired-transferred-open"
+              ]
+            },
+            "operatingState": {
+              "enum": [
+                "concept-development",
+                "active-development",
+                "pilot-intake",
+                "available",
+                "maintenance",
+                "paused",
+                "retired",
+                "needs-inventory"
+              ]
+            },
+            "valueProposition": {
+              "type": "string"
+            },
+            "users": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "capabilities": {
+              "type": "array"
+            },
+            "availability": {
+              "type": "object"
+            },
+            "relatedProjectRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evidenceRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "stewardship": {
+              "type": "object",
+              "properties": {
+                "owner": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "maintenancePath": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "fundingPath": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "incidentPath": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "retirementCondition": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "artifact": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "entityType": {
+              "const": "artifact"
+            },
+            "artifactType": {
+              "type": "string"
+            },
+            "maturity": {
+              "type": "string"
+            },
+            "producedByProjectRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "witnessesEntityRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "service": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "entityType": {
+              "const": "service"
+            },
+            "serviceClass": {
+              "type": "string"
+            },
+            "availability": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "object"
+            },
+            "methodRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "testbed": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/base"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "entityType": {
+              "const": "testbed"
+            },
+            "operatingState": {
+              "type": "string"
+            },
+            "testPurpose": {
+              "type": "string"
+            },
+            "evidenceForRefs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "relation": {
+      "type": "object",
+      "required": [
+        "type",
+        "from",
+        "to"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "organizes",
+            "advances",
+            "produces",
+            "maintains",
+            "implements",
+            "generatesEvidenceFor",
+            "dependsOn",
+            "releases",
+            "supersedes",
+            "stewardedBy",
+            "partOf",
+            "relatedTo"
+          ]
+        },
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,321 @@
+/* Boundary First UX · Temporal / State Ecology
+   State is derived from declared lifecycle and evidence posture. No synthetic chronology. */
+
+.state-ecology {
+  position: fixed;
+  left: calc(var(--frame-left) + 18px);
+  bottom: calc(var(--frame-bottom) + 18px);
+  z-index: 19;
+  width: min(360px, calc(100vw - var(--frame-left) - 410px));
+  overflow: hidden;
+  border: 1px solid var(--instrument-edge);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), transparent 68px),
+    color-mix(in srgb, var(--paper-strong) 95%, transparent);
+  box-shadow:
+    0 18px 44px rgba(23, 32, 28, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    inset 0 0 0 4px rgba(23, 32, 28, 0.016);
+  backdrop-filter: blur(14px);
+}
+
+.state-ecology__toggle {
+  width: 100%;
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.65rem;
+  align-items: center;
+  padding: 0.62rem 0.7rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.state-ecology--open .state-ecology__toggle {
+  border-bottom-color: var(--line);
+  background: rgba(223, 226, 215, 0.2);
+}
+
+.state-ecology__signal {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 4px rgba(23, 32, 28, 0.04);
+}
+
+.state-ecology[data-state-mode="active"] .state-ecology__signal,
+.state-ecology[data-state-mode="testing"] .state-ecology__signal {
+  background: var(--accent);
+}
+
+.state-ecology[data-state-mode="developed"] .state-ecology__signal {
+  background: linear-gradient(90deg, var(--accent) 0 50%, transparent 50%);
+}
+
+.state-ecology[data-state-mode="delivered"] .state-ecology__signal {
+  background: var(--ink);
+}
+
+.state-ecology[data-state-mode="future"] .state-ecology__signal {
+  border-style: dashed;
+}
+
+.state-ecology[data-state-mode="historical"] .state-ecology__signal {
+  background: repeating-linear-gradient(45deg, var(--ink-soft) 0 1px, transparent 1px 3px);
+}
+
+.state-ecology__identity {
+  min-width: 0;
+  display: grid;
+  gap: 0.12rem;
+}
+
+.state-ecology__identity small,
+.state-ecology__label {
+  color: var(--accent);
+  font-size: 0.41rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.state-ecology__identity strong {
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.state-ecology__identity em {
+  color: var(--ink-soft);
+  font-size: 0.47rem;
+  font-style: normal;
+}
+
+.state-ecology__chevron {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--paper-strong);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.state-ecology__body {
+  max-height: min(470px, calc(100vh - var(--frame-top) - var(--frame-bottom) - 120px));
+  overflow: auto;
+  padding: 0.68rem;
+  scrollbar-width: thin;
+}
+
+.state-ecology__section {
+  display: grid;
+  gap: 0.28rem;
+  padding: 0.62rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.state-ecology__section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.state-ecology__section > strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.state-ecology__section > p,
+.state-ecology__clock-note {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.56rem;
+  line-height: 1.45;
+}
+
+.state-ecology__section--gate {
+  padding: 0.62rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 7px;
+  background: var(--instrument-recess);
+}
+
+.state-ecology__distribution {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.18rem;
+}
+
+.state-ecology__distribution > span {
+  min-width: 58px;
+  display: grid;
+  gap: 0.08rem;
+  padding: 0.38rem 0.42rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: rgba(251, 250, 246, 0.5);
+}
+
+.state-ecology__distribution strong {
+  font-size: 0.72rem;
+}
+
+.state-ecology__distribution small {
+  color: var(--ink-soft);
+  font-size: 0.4rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.state-ecology__distribution > span[data-stage="active-development"],
+.state-ecology__distribution > span[data-stage="pilot"] {
+  border-left: 3px solid var(--accent);
+}
+
+.state-ecology__distribution > span[data-stage="planned"] {
+  border-style: dashed;
+}
+
+.state-ecology__distribution > span[data-stage="historical"] {
+  background:
+    repeating-linear-gradient(45deg, rgba(23, 32, 28, 0.025) 0 2px, transparent 2px 5px),
+    rgba(251, 250, 246, 0.5);
+}
+
+.state-ecology__clock-note {
+  margin-top: 0.62rem;
+  padding-top: 0.55rem;
+  border-top: 1px dotted var(--line-strong);
+  font-style: italic;
+}
+
+/* Region surfaces expose lifecycle through boundary treatment, not only labels. */
+
+.district-card[data-stage="active-development"] {
+  border-bottom: 3px solid var(--accent);
+}
+
+.district-card[data-stage="pilot"] {
+  border-bottom: 3px dashed var(--accent);
+}
+
+.district-card[data-stage="developed"] {
+  border-bottom: 3px double var(--ink-soft);
+}
+
+.district-card[data-stage="shipped"] {
+  border-bottom: 4px solid var(--ink);
+}
+
+.district-card[data-stage="planned"] {
+  border-bottom: 2px dashed var(--line-strong);
+}
+
+.district-card[data-historical="true"] {
+  background:
+    repeating-linear-gradient(45deg, rgba(23, 32, 28, 0.022) 0 2px, transparent 2px 6px),
+    var(--instrument-face);
+}
+
+.node-surface[data-stage="active-development"] {
+  border-bottom: 4px solid var(--accent);
+}
+
+.node-surface[data-stage="pilot"] {
+  border-bottom: 4px dashed var(--accent);
+}
+
+.node-surface[data-stage="developed"] {
+  border-bottom: 4px double var(--ink-soft);
+}
+
+.node-surface[data-stage="shipped"] {
+  border-bottom: 5px solid var(--ink);
+}
+
+.node-surface[data-stage="planned"] {
+  border-bottom: 3px dashed var(--line-strong);
+}
+
+.node-surface[data-historical="true"] {
+  background:
+    repeating-linear-gradient(45deg, rgba(23, 32, 28, 0.018) 0 2px, transparent 2px 7px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.68), transparent 110px),
+    var(--paper-strong);
+}
+
+@media (max-width: 1180px) {
+  .state-ecology {
+    width: min(320px, calc(100vw - var(--frame-left) - 340px));
+  }
+}
+
+@media (max-width: 980px) {
+  .state-ecology {
+    left: 14px;
+    bottom: calc(var(--frame-bottom) + 14px);
+    width: min(320px, calc(100vw - 340px));
+  }
+}
+
+@media (max-width: 720px) {
+  .state-ecology {
+    left: 8px;
+    right: auto;
+    bottom: calc(var(--frame-bottom) + 8px);
+    width: min(250px, calc(100vw - 308px));
+  }
+
+  .state-ecology__body {
+    max-height: 45vh;
+  }
+}
+
+@media (max-width: 560px) {
+  .state-ecology {
+    width: min(220px, calc(100vw - 16px));
+  }
+
+  .state-ecology--open {
+    width: calc(100vw - 16px);
+  }
+}
+
+@media (forced-colors: active) {
+  .state-ecology,
+  .state-ecology__chevron,
+  .state-ecology__section--gate,
+  .state-ecology__distribution > span {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .state-ecology__signal {
+    border-color: CanvasText;
+  }
+
+  .state-ecology[data-state-mode="active"] .state-ecology__signal,
+  .state-ecology[data-state-mode="testing"] .state-ecology__signal,
+  .state-ecology[data-state-mode="delivered"] .state-ecology__signal {
+    background: Highlight;
+  }
+}

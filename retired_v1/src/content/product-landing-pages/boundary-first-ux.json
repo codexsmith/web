@@ -1,0 +1,186 @@
+{
+  "id": "boundary-first-ux",
+  "slug": "boundary-first-ux",
+  "pageType": "public-standard",
+  "visibility": "public",
+  "status": "launch-candidate",
+  "product": {
+    "name": "Boundary First UX",
+    "shortName": "BFUX",
+    "classification": [
+      "semantic interaction paradigm",
+      "representation standard",
+      "complex-systems UX method"
+    ],
+    "statusLabel": "Working Public Standard · Launch Candidate",
+    "primaryLine": "Design the boundary, not the screen.",
+    "productPromise": "Make complex systems tangible, navigable, testable, and repairable without losing the larger context.",
+    "northStar": "Oh. I can see the system now.",
+    "commitment": "Local simplicity without global amnesia."
+  },
+  "hero": {
+    "eyebrow": "BOUNDARY FIRST UX · WORKING PUBLIC STANDARD",
+    "title": "Design the boundary, not the screen.",
+    "deck": "Every interface is a bounded representation of a larger system. Boundary First UX makes those boundaries explicit so users can change resolution, perspective, and context without losing identity, provenance, consequence, or closure.",
+    "primaryCta": { "label": "See the flagship", "target": "flagship" },
+    "secondaryCta": { "label": "Enter the sandbox", "target": "sandbox" }
+  },
+  "opening": {
+    "title": "Every interface is a boundary.",
+    "body": "The design problem is not only what appears on the screen. It is what the representation admits, excludes, compresses, reveals, makes actionable, and preserves as context changes."
+  },
+  "principles": [
+    "Bound every view",
+    "Preserve identity through transformation",
+    "Make hidden structure tangible",
+    "Preserve consequence and path",
+    "Closure is earned"
+  ],
+  "flagship": {
+    "id": "flagship",
+    "title": "The Green Project Was Inside a Larger System",
+    "sequence": ["Orient", "Inspect", "Reveal", "Reframe", "Stress", "Trace", "Promote", "Repair", "Closure"],
+    "acts": {
+      "Trust": ["Orient", "Inspect"],
+      "Discovery": ["Reveal", "Reframe", "Stress", "Trace"],
+      "Reconstruction": ["Promote", "Repair", "Closure"]
+    },
+    "premise": "A locally valid project view hides a ten-year maintenance obligation outside the project boundary. The user discovers the obligation, reframes toward consequence, traces it through handoff and funding, promotes the representation into lifecycle context, repairs ownership, and reaches scoped closure.",
+    "desiredReaction": "Oh. I can see the system now."
+  },
+  "timelineProof": {
+    "sequence": ["Authorization", "Design", "Install", "Acceptance", "Closeout"],
+    "question": "What ends here?",
+    "reveal": "Project closeout occurs while a ten-year maintenance obligation begins and household service consequence persists.",
+    "promotion": "Expand the two-year project view into a twelve-year lifecycle while preserving the original project interval.",
+    "line": "The project ends. The system does not."
+  },
+  "rendererIndependence": {
+    "thesis": "Boundary First semantics belong to the represented world, not to any one renderer.",
+    "projections": ["World / spatial renderer", "Non-spatial instrument", "Timeline renderer"]
+  },
+  "semanticStack": [
+    "semantic world",
+    "bounded context / contexture",
+    "interaction grammar",
+    "task instrument",
+    "audience projection",
+    "renderer / visual language"
+  ],
+  "semanticRule": "Views do not own semantic truth. Renderers receive semantic state and emit declared intentions.",
+  "grammar": {
+    "worldActions": ["Orient", "Traverse", "Inspect", "Reveal", "Reframe", "Trace", "Gate", "Stress", "Repair", "Promote"],
+    "workbench": ["Distill", "Condense", "Overlay", "Calibrate"],
+    "worldEvents": ["Leak", "Crack", "Overflow", "Stall", "Orphan", "Drift", "Collision", "Closure"],
+    "closureRule": "Closure is a state, not a verb or button."
+  },
+  "signatureMechanics": [
+    "Resolution navigation",
+    "Reframe",
+    "Reveal",
+    "Promote",
+    "Trace",
+    "Stress & Repair"
+  ],
+  "interactionPatterns": [
+    "Guided Atlas Passage",
+    "Focus Contexture",
+    "Semantic Resolve",
+    "Context Rotation",
+    "Typed Edge Resolution",
+    "Visible Partiality",
+    "Provenance-Preserving Collapse",
+    "Resolution Breadcrumb",
+    "Closure Gate",
+    "Repairable Reset",
+    "Multi-Resolution Comparison",
+    "User-Drawn Boundary",
+    "Hidden-Structure Reveal",
+    "Stress-to-Defect",
+    "Consequence Trace",
+    "Context Promotion",
+    "Representational World Shift",
+    "Semantic Depth Reveal",
+    "Instrumented Repair"
+  ],
+  "conceptualTangibility": {
+    "artDirection": "scientific instrument + civic infrastructure + museum cutaway + drafting table + playful game logic",
+    "rule": "Every physical metaphor must have operational semantics.",
+    "screenDepth": {
+      "behind": "outside current representation",
+      "on": "current representation",
+      "inFront": "surfaced consequence, evidence, or action"
+    },
+    "motionSemantics": {
+      "lateral": "Traverse",
+      "throughScreen": "Reveal",
+      "worldRotation": "Reframe",
+      "zoomBeyondFrame": "Promote"
+    }
+  },
+  "motionLaws": ["Continuity", "Conservation", "Causality", "Persistence", "Reversibility", "Containment"],
+  "projectionFamily": ["World / Experiential", "Guided / Public", "Research / Workbench"],
+  "accessibility": {
+    "principle": "Accessibility is paradigm correctness.",
+    "requirements": [
+      "keyboard complete",
+      "reduced-motion parity",
+      "screen-reader semantics",
+      "non-spatial alternatives",
+      "visible context and provenance",
+      "no color- or position-only essential information",
+      "no motor-precision gate"
+    ],
+    "rule": "An accessible representation is a lawful projection, not a fallback copy."
+  },
+  "conformance": {
+    "questions": [
+      "Is the represented containment boundary explicit?",
+      "Is partiality visible rather than hidden?",
+      "Are identity and provenance preserved through transformations?",
+      "Do transitions have declared semantics?",
+      "Can consequences be traced?",
+      "Can state be recovered after a transformation?",
+      "Can hidden structure be revealed without destroying context?",
+      "Are defects diagnosable and repairable?",
+      "Is the experience semantically complete through accessible routes?",
+      "Is closure scoped and earned?"
+    ],
+    "candidateLevels": ["BFUX-informed", "BFUX-compatible", "BFUX-conformant"],
+    "candidateLevelsStatus": "proposed, not yet canonical"
+  },
+  "notThis": [
+    "component library",
+    "mandatory skin",
+    "graph-only interface",
+    "generic gamification",
+    "3D for its own sake",
+    "requirement for visually complex UI",
+    "claim that existing design systems are obsolete"
+  ],
+  "sandbox": {
+    "title": "NOW BREAK IT",
+    "architecture": "Standard → Demonstration → Experimental Lab",
+    "standard": "Normative semantic contract",
+    "demo": "Reference performance",
+    "lab": "Experimentation without automatic promotion",
+    "publicRoutes": [
+      { "name": "Representation Laboratory", "href": "/sandbox/representation-lab" },
+      { "name": "Interaction Research", "href": "/sandbox/interaction-research" },
+      { "name": "Guided Introduction", "href": "/learn" }
+    ],
+    "promotionRule": "Sandbox contact may produce evidence, defects, or reusable methods. It never promotes an object directly to capability, program, or canon without the corresponding review gate."
+  },
+  "closing": {
+    "eyebrow": "BOUNDARY FIRST UX",
+    "title": "Design the boundary, not the screen.",
+    "body": "Make complex systems tangible without erasing the larger system that gives the local view meaning.",
+    "finalLine": "Local simplicity without global amnesia."
+  },
+  "metadata": {
+    "owner": "Boundary First Labs",
+    "public": true,
+    "maturity": "launch-candidate",
+    "tags": ["boundary-first-ux", "representation", "semantic-interaction", "complex-systems", "ux-standard"]
+  }
+}

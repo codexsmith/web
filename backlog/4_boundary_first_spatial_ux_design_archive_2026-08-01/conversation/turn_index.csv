@@ -1,0 +1,23 @@
+turn,role,topic,artifact
+1,user,Reapproach website around Boundary First Labs institution and Corpus Forge,
+2,assistant,Institutional framing and revised top-level architecture,
+3,user,Responsible frame for work in progress and negative results,
+4,assistant,Publication ladder and claim-boundary system,
+5,user,Recognizable-domain UX concept request,
+6,assistant,Generated public front-door / lab / atlas concept,01_public_front_door_concept.png
+7,user,Living workbench and Atlas redesign request,
+8,assistant,Generated Corpus Forge workbench and Atlas redesign,02_corpus_forge_living_workbench.png;03_atlas_redesign.png
+9,user,Constructive UI for binding-file protocol,
+10,assistant,Generated Binding Protocol Studio,04_binding_protocol_studio.png
+11,user,Embed and supersede simplified scientific method within lawful Corpus Forge cycle,
+12,assistant,Scientific Method Lens feature request and requirements,
+13,user,Make the environment feel like an actual sci-fi/high-fantasy hyperreal space,
+14,assistant,Spatial research operating environment architecture,
+15,user,Address 2D mouse projection failure in 3D worlds,
+16,assistant,Boundary-aware spatial pointer theory and prototype,
+17,user,Request concept drawings, floor plan, and wireframes,
+18,assistant,Generated isometric environment, floor plan, and pointer sheet,05_spatial_environment_isometric.png;06_spatial_environment_floorplan.png;07_spatial_pointer_model.png
+19,user,Observation that the result feels RTS-like,
+20,assistant,RTS research-operations interaction grammar,
+21,user,Request operational plan with modular features,
+22,user,Request complete ZIP archive with conversation, artifacts, and plan,

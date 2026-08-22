@@ -1,0 +1,224 @@
+/* Boundary First UX · Focus path and detail reading stability
+   Home, focus traversal, and gestalt scale are separate operators.
+   Long-form detail pages reserve space for instrumentation instead of letting fixed
+   controls cover the reading surface. */
+
+/* The BF root instrument terminates the root end of the focus path. */
+@media (min-width: 981px) {
+  .brand-anchor__mark::before {
+    content: "";
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 50%;
+    width: 1px;
+    height: 18px;
+    background: linear-gradient(var(--line-strong), transparent);
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  .boundary-frame__left::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 43px;
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(transparent, var(--line-strong));
+    pointer-events: none;
+  }
+
+  .boundary-frame__left ol::before {
+    left: 32px;
+  }
+
+  .boundary-frame__left li {
+    padding-left: 48px;
+  }
+
+  .path-node__dot {
+    left: 28px;
+  }
+
+  .boundary-frame__left li[aria-current="page"] .path-node__dot {
+    left: 27px;
+  }
+}
+
+.path-label::after {
+  content: "FOCUS";
+}
+
+/* Detail pages are reader surfaces. World ecology remains present, but the object
+   itself must own a stable readable rectangle at every viewport. */
+.site-shell[data-world-mode="detail"] .world-viewport,
+.site-shell[data-world-mode="detail"] .node-detail,
+.site-shell[data-world-mode="detail"] .node-surface {
+  min-width: 0;
+  min-height: 0;
+}
+
+.site-shell[data-world-mode="detail"] .world-viewport {
+  overflow: hidden;
+  place-items: stretch;
+  padding: clamp(18px, 2.6vw, 38px);
+}
+
+.site-shell[data-world-mode="detail"] .node-detail {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.site-shell[data-world-mode="detail"] .node-surface {
+  width: min(100%, 1040px);
+  max-width: 100%;
+  height: 100%;
+  margin-inline: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.site-shell[data-world-mode="detail"] .node-surface > *,
+.site-shell[data-world-mode="detail"] .node-surface header,
+.site-shell[data-world-mode="detail"] .node-surface__body,
+.site-shell[data-world-mode="detail"] .node-section,
+.site-shell[data-world-mode="detail"] .record-links,
+.site-shell[data-world-mode="detail"] .inspection-links,
+.site-shell[data-world-mode="detail"] .edge-links {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.site-shell[data-world-mode="detail"] .node-surface h1,
+.site-shell[data-world-mode="detail"] .node-surface__summary,
+.site-shell[data-world-mode="detail"] .node-surface__body p,
+.site-shell[data-world-mode="detail"] .record-links a,
+.site-shell[data-world-mode="detail"] .inspection-links button,
+.site-shell[data-world-mode="detail"] .edge-links button {
+  overflow-wrap: anywhere;
+}
+
+/* Wide screens receive a dedicated instrument service rail. The reader surface
+   therefore never sits underneath telemetry/state controls. */
+@media (min-width: 1181px) {
+  .site-shell[data-world-mode="detail"] .world-viewport {
+    right: 350px;
+  }
+
+  .site-shell[data-world-mode="detail"] .focus-telemetry,
+  .site-shell[data-world-mode="detail"] .state-ecology {
+    right: 18px;
+    left: auto;
+    width: 314px;
+  }
+
+  .site-shell[data-world-mode="detail"] .focus-telemetry {
+    top: calc(var(--frame-top) + 18px);
+    bottom: auto;
+  }
+
+  .site-shell[data-world-mode="detail"] .state-ecology {
+    top: auto;
+    bottom: calc(var(--frame-bottom) + 18px);
+  }
+}
+
+/* Medium screens use compact instrument shelves at opposite corners. */
+@media (max-width: 1180px) {
+  .site-shell[data-world-mode="detail"] .node-detail {
+    padding: 82px 12px 76px;
+  }
+
+  .site-shell[data-world-mode="detail"] .node-surface {
+    height: calc(100% - 2px);
+  }
+
+  .site-shell[data-world-mode="detail"] .focus-telemetry {
+    top: calc(var(--frame-top) + 10px);
+    right: 10px;
+    bottom: auto;
+    width: min(280px, calc(100vw - 20px));
+  }
+
+  .site-shell[data-world-mode="detail"] .state-ecology {
+    left: 10px;
+    right: auto;
+    bottom: calc(var(--frame-bottom) + 10px);
+    width: min(250px, calc(100vw - 20px));
+  }
+}
+
+@media (max-width: 720px) {
+  .site-shell[data-world-mode="detail"] .world-viewport {
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .site-shell[data-world-mode="detail"] .node-detail {
+    height: 100%;
+    min-height: 0;
+    padding: 76px 8px 70px;
+  }
+
+  .site-shell[data-world-mode="detail"] .node-surface {
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 28px 18px 52px;
+    border-radius: 12px;
+  }
+
+  .site-shell[data-world-mode="detail"] .node-surface h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+  }
+
+  .site-shell[data-world-mode="detail"] .focus-telemetry {
+    top: calc(var(--frame-top) + 8px);
+    right: 8px;
+    bottom: auto;
+    width: min(232px, calc(100vw - 16px));
+  }
+
+  .site-shell[data-world-mode="detail"] .focus-telemetry--open {
+    width: calc(100vw - 16px);
+  }
+
+  .site-shell[data-world-mode="detail"] .state-ecology {
+    left: 8px;
+    right: auto;
+    bottom: calc(var(--frame-bottom) + 8px);
+    width: min(216px, calc(100vw - 16px));
+  }
+
+  .site-shell[data-world-mode="detail"] .state-ecology--open {
+    right: 8px;
+    width: auto;
+  }
+
+  .site-shell[data-world-mode="detail"] .record-links,
+  .site-shell[data-world-mode="detail"] .inspection-links,
+  .site-shell[data-world-mode="detail"] .edge-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* When a dock is expanded on a compact viewport, it becomes a deliberate overlay
+   rather than an accidental collision of several half-width instruments. */
+@media (max-width: 560px) {
+  .site-shell[data-world-mode="detail"] .focus-telemetry--open,
+  .site-shell[data-world-mode="detail"] .state-ecology--open {
+    left: 8px;
+    right: 8px;
+    width: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .brand-anchor__mark::before,
+  .boundary-frame__left::before {
+    background: CanvasText;
+  }
+}

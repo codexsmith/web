@@ -1,0 +1,9 @@
+filename,bytes,sha256,description
+00_concept_gallery.png,10541799,912b1121472d067c06da09f77e69f255859a7d99e679e2b33598190aff913430,Contact sheet of all generated design artifacts.
+01_public_front_door_concept.png,2030508,3cc0429d34aaac071feb5bc19dda0395e725db6e9f242d0804d36d53bc195f8c,"Three-panel public entrance, institutional lab, and top-level Atlas architecture concept."
+02_corpus_forge_living_workbench.png,2029658,fd546c1022b47030af82e32afe21464e8d41595b3af1f4b4abc0715688f1ec4a,"Corpus Forge research-production dashboard with pipeline, artifacts, provenance, ledgers, critic, and human gate."
+03_atlas_redesign.png,2078779,d06f7d38e615abccd6f8f9165225377c5e2a3c35e82f3331880feefa7af9aa57,Cluster-first guided Atlas with persistent inspector and deeper typed-edge view.
+04_binding_protocol_studio.png,2141470,084c5f173535be373cb657c483cbdd0e1c28c6b853411aaccadd2c43ab5a3d50,Constructive UI studio for schema-aware reusable binding workflows and generated interfaces.
+05_spatial_environment_isometric.png,2626958,8ad59ca4bdd67789fc85dae537b8d48fb5f79ee9652a49c6ea9b9d64f2145367,Isometric cutaway of the inhabitable Corpus Forge research environment.
+06_spatial_environment_floorplan.png,2667687,173202c896e89dd43c28db8adb811a44c3146a89f0e6d11e53b1b2182733334c,"Top-down architectural systems plan showing rooms, flows, zones, and promotion gates."
+07_spatial_pointer_model.png,2314734,27954289f4c933be019ece7bd4af2f42fc144341867abe26477e38a4860532bc,Spatial pointer interaction sheet showing volumetric selection and Orient/Probe/Bind/Act states.

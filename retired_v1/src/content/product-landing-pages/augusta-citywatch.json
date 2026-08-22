@@ -1,0 +1,32 @@
+{
+  "version": "2.0",
+  "pageType": "collaboration-bridge",
+  "renderPolicy": {"navigation": false, "indexing": false, "requiresManifestEntry": true},
+  "bridges": [
+    {
+      "id": "augusta-citywatch",
+      "slug": "bridge/augusta-citywatch",
+      "status": "draft",
+      "visibility": "unlisted",
+      "audience": {"type":"institution","name":"Augusta-Richmond County civic and technology stakeholders"},
+      "pageIntent": "Reconnect proven civic-transparency work to a bounded modern Boundary First civic-engineering collaboration.",
+      "hero": {
+        "eyebrow": "CIVIC ENGINEERING × REPRESENTATION",
+        "title": "We already proved that better representation can change how a city sees itself.",
+        "support": "CityWatch made projects, spending, infrastructure status, timelines, geography, and public-facing evidence more legible. Boundary First asks what the next generation of that civic representation should preserve, expose, and make repairable."
+      },
+      "executiveBrief": "The bridge is not a proposal to recreate an old portal. It is to use the CityWatch experience as proof of standing for a modern bounded civic instrument: choose one consequential public process, map the representations and responsibility chain around it, and build the smallest interface that makes status, consequence, evidence, and repair visible.",
+      "bridge": {
+        "priorWork": "CityWatch joined operational project information, public transparency, financial/accounting data, status, media, timeline, and map context into a citizen-facing representation.",
+        "currentMachinery": "Boundary First adds explicit boundary, provenance, consequence, authority, contestability, and repair analysis around the represented system.",
+        "smallestUsefulNextStep": "Select one bounded municipal process or infrastructure domain and produce a representation/consequence map plus a small public-facing prototype."
+      },
+      "proof": {
+        "built": ["CityWatch civic transparency implementation", "Requirements and delivery experience inside Augusta-Richmond County IT"],
+        "claimBoundary": "Historical outcomes and awards should be linked to retained records or independent evidence before being used as public claims on the rendered page."
+      },
+      "collaboration": {"level":"experiment","ask":"Choose one civic process where better representation would materially improve public understanding, operational coordination, or repair."},
+      "closing": {"primary":"Start with one boundary the city already has to manage. Make it visible enough to act on."}
+    }
+  ]
+}

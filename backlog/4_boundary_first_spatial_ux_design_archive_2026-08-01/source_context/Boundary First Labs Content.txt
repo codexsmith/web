@@ -1,0 +1,26 @@
+Merged the physics outlook and conjecture framework into **v0.14**.
+
+The physics node now includes:
+
+- a dedicated **Boundary-First Physics: Outlooks, Conjectures & Research Notes** publication series;
+- eight distinct artifact classes, from physical interpretation and toy model through hypothesis and supported result;
+- a mandatory claim-status box;
+- a standard ten-section publication structure;
+- release and promotion rules;
+- language guidance for presenting uncertain work accurately;
+- nine candidate publication programs, including:
+  - Physics as a Hierarchy of Closure Regimes
+  - Volumology and Boundary-First Physical Ontology
+  - Defect-Modified Noether Mechanics
+  - Quantum Measurement as Admissible Projection
+  - Planck-Regime Coupled Closure
+  - Boundary-Spectral Physical Regime Atlas
+  - the Fine-Structure Constant Research Ledger
+  - Thermodynamics and Admissible Forgetting
+  - Weather as a Multiscale Boundary-Transport Testbed
+
+The identity and corpus nodes were also updated with publication channels, required metadata, physics-specific ledgers, negative-result policy, and promotion boundaries.
+
+The file retains **21 valid top-level nodes** and passed JSON validation.
+
+[Download `nodes_revised_public_spine_v0_14.json`](sandbox:/mnt/data/nodes_revised_public_spine_v0_14.json)

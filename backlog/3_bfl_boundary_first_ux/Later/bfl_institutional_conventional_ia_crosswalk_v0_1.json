@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "provisional-crosswalk; canonical copy pending content adjudication",
+  "principle": "Conventional institutional pages and Boundary First UX are two projections over the same versioned source records.",
+  "conventionalRoutes": [
+    {
+      "route": "/about",
+      "label": "About",
+      "operatingLayers": [
+        "purpose"
+      ],
+      "contentTypes": [
+        "institutional-identity",
+        "founding-rationale"
+      ]
+    },
+    {
+      "route": "/about/mission",
+      "label": "Mission",
+      "operatingLayers": [
+        "purpose"
+      ],
+      "contentTypes": [
+        "mission"
+      ]
+    },
+    {
+      "route": "/about/vision",
+      "label": "Vision",
+      "operatingLayers": [
+        "purpose"
+      ],
+      "contentTypes": [
+        "vision"
+      ]
+    },
+    {
+      "route": "/about/principles",
+      "label": "Principles & Commitments",
+      "operatingLayers": [
+        "invariants"
+      ],
+      "contentTypes": [
+        "institutional-principle",
+        "public-position",
+        "public-covenant"
+      ]
+    },
+    {
+      "route": "/governance",
+      "label": "Governance",
+      "operatingLayers": [
+        "authority"
+      ],
+      "contentTypes": [
+        "governance-doctrine",
+        "governance-commitment",
+        "policy-principle",
+        "decision-rule"
+      ]
+    },
+    {
+      "route": "/governance/policies",
+      "label": "Policies",
+      "operatingLayers": [
+        "authority",
+        "operating-gates"
+      ],
+      "contentTypes": [
+        "policy-principle",
+        "adoption-step",
+        "required-public-record"
+      ]
+    },
+    {
+      "route": "/research-integrity",
+      "label": "Research Integrity",
+      "operatingLayers": [
+        "operating-gates"
+      ],
+      "contentTypes": [
+        "evidence-framework",
+        "publication-doctrine",
+        "validation-gate",
+        "claim-firewall"
+      ]
+    },
+    {
+      "route": "/participate",
+      "label": "Participation",
+      "operatingLayers": [
+        "standing-and-participation"
+      ],
+      "contentTypes": [
+        "participation-principle",
+        "participation-pathway",
+        "participation-requirement"
+      ]
+    },
+    {
+      "route": "/corrections",
+      "label": "Corrections & Criticism",
+      "operatingLayers": [
+        "repair-and-correction"
+      ],
+      "contentTypes": [
+        "criticism-or-correction-rule"
+      ]
+    },
+    {
+      "route": "/stewardship",
+      "label": "Stewardship & Continuity",
+      "operatingLayers": [
+        "continuity-and-stewardship"
+      ],
+      "contentTypes": [
+        "continuity-principle",
+        "portfolio-governance-rule",
+        "stewardship-record-or-principle"
+      ]
+    },
+    {
+      "route": "/goals",
+      "label": "Goals & Work Plan",
+      "operatingLayers": [
+        "goals-and-work-queue"
+      ],
+      "contentTypes": [
+        "goal"
+      ]
+    }
+  ],
+  "boundaryFirstProjection": {
+    "route": "/about/how-the-lab-operates",
+    "viewMode": "institutional-closure-map",
+    "sequence": [
+      "purpose",
+      "invariants",
+      "authority",
+      "operating-gates",
+      "standing-and-participation",
+      "repair-and-correction",
+      "continuity-and-stewardship"
+    ]
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "boundary-first.visual-grammar.v1",
+  "version": "0.1",
+  "promotionStatus": "working-original-visuals-pending-founder-and-research-review",
+  "sourceSuite": "world_class_executable_distinctions_suite_v0_1",
+  "title": "Original Visual Grammar",
+  "summary": "Two project-native diagrams make the route from representation to consequence inspectable, including the gates and repair paths that prevent class language or word power from becoming mystical, automatic, or reductionist.",
+  "sourceImagePolicy": {
+    "bibliographicStatus": "unresolved",
+    "publicationStatus": "internal-only",
+    "copiedAssets": false,
+    "designOrigin": "project-native-abstract-structure",
+    "note": "The unidentified software-design reference pages remain internal-only. These diagrams use only the suite's abstract requirements and the website's own visual system; no source pixels, illustrations, or page layouts are reproduced."
+  },
+  "diagrams": [
+    {
+      "id": "class-to-consequence",
+      "number": "01",
+      "eyebrow": "World-class mechanics",
+      "title": "From specification to consequence",
+      "proposition": "A class matters through what its instances can represent, do, preserve, and repair.",
+      "description": "The sequence begins with a declared class, follows a concrete instance through state and admissible operation, then tests the resulting consequence against the class's invariants.",
+      "accessibleSummary": "Class specifies distinctions and invariants. An instance embodies that specification in a current state. An admissible operation changes the state and produces a consequence. An invariant check either permits closure or routes the defect through witness, responsibility, repair, and revision before returning to state.",
+      "path": [
+        {
+          "id": "declared-class",
+          "role": "class",
+          "label": "Class",
+          "description": "Declares entities, distinctions, invariants, methods, and interfaces."
+        },
+        {
+          "id": "concrete-instance",
+          "role": "instance",
+          "label": "Instance",
+          "description": "Embodies the specification as a concrete institution, system, or object."
+        },
+        {
+          "id": "current-state",
+          "role": "state",
+          "label": "State",
+          "description": "Locates the instance in its present conditions, relations, and obligations."
+        },
+        {
+          "id": "admissible-operation",
+          "role": "operation",
+          "label": "Operation",
+          "description": "Acts through a permitted method or interface under declared constraints."
+        },
+        {
+          "id": "observed-consequence",
+          "role": "consequence",
+          "label": "Consequence",
+          "description": "Produces a new state whose effects can be observed, attributed, and tested."
+        }
+      ],
+      "feedback": {
+        "gateLabel": "Invariant check",
+        "question": "Did the operation preserve what the class said must remain true?",
+        "preserved": {
+          "label": "Preserved",
+          "steps": [
+            "Closure or promotion"
+          ]
+        },
+        "contested": {
+          "label": "Broken or uncertain",
+          "steps": [
+            "Witness",
+            "Responsibility",
+            "Repair and revision"
+          ]
+        },
+        "returnLabel": "Return to state",
+        "returnToRole": "state",
+        "returnDescription": "Repair changes the represented state or revises the class before the next operation is admitted."
+      }
+    },
+    {
+      "id": "symbol-to-consequence",
+      "number": "02",
+      "eyebrow": "Executable distinctions",
+      "title": "From symbol to material consequence",
+      "proposition": "A word becomes consequential only through an interpreter, recognized authority, and an executable path.",
+      "description": "The symbol does not act by itself. A procedure interprets it, a system recognizes a distinction, and an authority gate determines whether any operation may follow.",
+      "accessibleSummary": "A symbol enters an interpreter or procedure. The system recognizes a distinction and classification. An authority and standing gate decides whether an operation is admissible. Execution changes state and produces consequence. A contestability check either explains or affirms the result, or routes it through appeal, witness, responsibility, and repair before correction returns to the state transition.",
+      "path": [
+        {
+          "id": "presented-symbol",
+          "role": "symbol",
+          "label": "Symbol",
+          "description": "A word, mark, credential, record, declaration, or label is presented."
+        },
+        {
+          "id": "operative-interpreter",
+          "role": "interpreter",
+          "label": "Interpreter",
+          "description": "A grammar, compiler, rule, clerk, court, or procedure assigns meaning."
+        },
+        {
+          "id": "recognized-classification",
+          "role": "classification",
+          "label": "Classification",
+          "description": "The system recognizes an entity, distinction, status, or obligation."
+        },
+        {
+          "id": "authority-standing-gate",
+          "role": "authority",
+          "label": "Authority",
+          "description": "Standing, evidence, jurisdiction, and permission determine whether action is valid."
+        },
+        {
+          "id": "authorized-operation",
+          "role": "operation",
+          "label": "Operation",
+          "description": "An action becomes admissible, prohibited, required, or available."
+        },
+        {
+          "id": "resulting-transition",
+          "role": "state-transition",
+          "label": "State transition",
+          "description": "The operative system changes a represented or material condition."
+        },
+        {
+          "id": "distributed-consequence",
+          "role": "consequence",
+          "label": "Consequence",
+          "description": "Access, obligation, resource, standing, risk, or force is redistributed."
+        }
+      ],
+      "feedback": {
+        "gateLabel": "Contestability check",
+        "question": "Can the classification, authority, and resulting action be explained and challenged?",
+        "preserved": {
+          "label": "Standing upheld",
+          "steps": [
+            "Explanation or affirmation"
+          ]
+        },
+        "contested": {
+          "label": "Classification or execution contested",
+          "steps": [
+            "Appeal",
+            "Witness",
+            "Responsibility",
+            "Repair"
+          ]
+        },
+        "returnLabel": "Correct and re-enter",
+        "returnToRole": "state-transition",
+        "returnDescription": "A valid correction changes the record, rule, authority decision, or transition rather than pretending the earlier consequence never occurred."
+      }
+    }
+  ],
+  "safeguards": [
+    "A person is not exhausted by any software or institutional representation.",
+    "A useful analogy is not an established formal equivalence.",
+    "A symbol has no automatic or mystical force; consequence requires interpretation, authority, and execution.",
+    "Repair may change future state and responsibility without erasing elapsed consequence."
+  ],
+  "routes": {
+    "gallery": "/language/visuals",
+    "registry": "/language",
+    "visualArtifact": "/artifact/original-visual-grammar",
+    "manifesto": "/artifact/world-class-is-a-capacity-we-give",
+    "executableArgument": "/artifact/executable-distinctions",
+    "researchProgram": "/artifact/testing-cross-domain-operational-homology"
+  },
+  "claimCeiling": "These diagrams are explanatory models for the current public argument. They do not establish a formal class of worlds, prove cross-domain equivalence, reduce persons or institutions to software objects, or imply that words act without interpreters, authority, records, enforcement, and repair."
+}

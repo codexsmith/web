@@ -1,0 +1,229 @@
+/* Boundary First UX · traversal history
+   Trace is a bounded recent-history timeline in the bottom rail. The most recent steps
+   remain visible, connected by one continuous line, with current focus as the terminal event. */
+
+.boundary-frame__trace {
+  min-width: 0;
+  width: min(100%, 720px);
+  height: 38px;
+  justify-self: start;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+  padding: 2px 8px 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent),
+    color-mix(in srgb, var(--frame-surface-deep) 64%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(23, 32, 28, 0.035);
+}
+
+.boundary-frame__trace-label {
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 0.39rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.boundary-frame__trace-tail {
+  width: 14px;
+  height: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+.boundary-frame__trace ol {
+  position: relative;
+  min-width: 0;
+  height: 30px;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: clamp(10px, 1.2vw, 18px);
+  margin: 0;
+  padding: 0 3px;
+  overflow: hidden;
+  list-style: none;
+}
+
+.boundary-frame__trace ol::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 7px;
+  right: 7px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line), var(--line-strong));
+}
+
+.boundary-frame__trace li {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  flex: 0 1 auto;
+  display: grid;
+  grid-template-rows: 13px minmax(0, 1fr);
+  justify-items: start;
+  align-items: start;
+  color: var(--ink-soft);
+}
+
+.boundary-frame__trace .path-node__dot {
+  position: static;
+  width: 7px;
+  height: 7px;
+  align-self: center;
+  margin-left: 7px;
+  border: 2px solid var(--frame-surface-deep);
+  border-radius: 50%;
+  background: var(--line-strong);
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+
+.boundary-frame__trace li[aria-current="page"] .path-node__dot {
+  width: 9px;
+  height: 9px;
+  margin-left: 6px;
+  border-color: var(--frame-surface-deep);
+  background: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.boundary-frame__trace button,
+.boundary-frame__trace .path-node__current {
+  min-width: 0;
+  min-height: 16px;
+  display: block;
+  padding: 1px 6px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+
+.boundary-frame__trace button {
+  cursor: pointer;
+}
+
+.boundary-frame__trace button:hover {
+  background: rgba(251, 250, 246, 0.24);
+  color: var(--ink);
+}
+
+.path-node__step,
+.boundary-frame__trace .path-node__role {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.boundary-frame__trace .path-node__label {
+  max-width: 126px;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.56rem;
+  line-height: 1.12;
+}
+
+.boundary-frame__trace li[aria-current="page"] .path-node__label {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.boundary-frame__trace .path-node__current {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__trace {
+  border-color: var(--bf-border-subtle);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
+    color-mix(in srgb, var(--bf-bg-control) 88%, transparent);
+  color: var(--bf-text-secondary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__trace-label {
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__trace ol::before {
+  background: linear-gradient(90deg, var(--bf-border-subtle), var(--bf-border-strong));
+}
+
+body[data-ui-shell="cards"] .boundary-frame__trace .path-node__dot {
+  border-color: var(--bf-bg-control);
+  background: var(--bf-border-strong);
+  box-shadow: 0 0 0 1px var(--bf-border-strong);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__trace li[aria-current="page"] .path-node__dot {
+  border-color: var(--bf-bg-control);
+  background: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .boundary-frame__trace li[aria-current="page"] .path-node__label {
+  color: var(--bf-text-primary);
+}
+
+@media (max-width: 980px) {
+  .boundary-frame__trace {
+    width: 100%;
+  }
+
+  .boundary-frame__trace-label {
+    display: none;
+  }
+
+  .boundary-frame__trace .path-node__label {
+    max-width: 96px;
+  }
+}
+
+@media (max-width: 720px) {
+  .boundary-frame__trace {
+    grid-template-columns: auto minmax(0, 1fr);
+    padding-inline: 5px;
+  }
+
+  .boundary-frame__trace-tail {
+    display: none;
+  }
+
+  .boundary-frame__trace ol {
+    gap: 7px;
+  }
+
+  .boundary-frame__trace .path-node__label {
+    max-width: 68px;
+    font-size: 0.5rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .boundary-frame__trace,
+  .boundary-frame__trace .path-node__dot,
+  .boundary-frame__trace li[aria-current="page"] .path-node__dot {
+    border-color: CanvasText;
+  }
+
+  .boundary-frame__trace li[aria-current="page"] .path-node__dot {
+    background: CanvasText;
+  }
+}

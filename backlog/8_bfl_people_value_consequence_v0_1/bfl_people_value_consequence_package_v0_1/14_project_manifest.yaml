@@ -1,0 +1,68 @@
+project:
+  id: BFL-PVC-001
+  title: People Make the Value / People Are Not Overhead
+  version: 0.1
+  date: 2026-08-01
+  status: internal-doctrine-and-research-seed
+  institution: Boundary First Labs
+  source_type: project-conversation
+  source_scope:
+    - hostage-and-accountant-parable
+    - distance-mediated-permission-to-harm
+    - human-resource-asset-liability-overhead-category-error
+    - people-as-source-and-destination-of-value
+    - b2b-as-delegated-agency
+    - recursive-value-extraction
+  primary_lanes:
+    - civilizational-mechanics
+    - governance-and-institutions
+    - finance-and-capital
+    - systems-criticism-and-public-diagnosis
+    - constructive-humanist-agentics
+  maxims:
+    - People make the value. People are not overhead.
+    - People are the source. People are the destination. Institutions are the means.
+    - The agency chain must return to people.
+    - The rule must survive proximity.
+  key_terms:
+    - overhead-inversion
+    - agency-depth
+    - terminal-accountability
+    - delegated-service
+    - recursive-value-extraction
+    - human-capacity-ledger
+    - proximity-stress-test
+  claim_ceiling: >-
+    Normative doctrine, analytical framing, parable, and operational research seed.
+    Not a complete accounting, economic, legal, or empirical theory.
+  required_reviews:
+    - accounting
+    - labor-and-worker
+    - organizational-design
+    - economics
+    - disability-and-care
+    - governance-and-public-interest
+  candidate_outputs:
+    - public-essay
+    - doctrine-card
+    - parable
+    - poster-series
+    - animated-explainer
+    - workshop
+    - audit-instrument
+    - case-library
+    - learning-pathway-scenes
+  immediate_goals:
+    - approve-canonical-slogan
+    - approve-canonical-doctrine
+    - select-canonical-parable
+    - validate-accounting-language
+    - draft-audit-v0-1
+    - develop-three-case-studies
+  promotion_gates:
+    - accounting-language-reviewed
+    - b2b-constructive-and-pathological-cases-separated
+    - claim-firewall-present
+    - affected-party-review-completed
+    - repair-instrument-defined
+    - correction-and-supersession-path-present

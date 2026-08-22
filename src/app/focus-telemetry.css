@@ -1,0 +1,361 @@
+/* Boundary First UX · Focus Telemetry
+   Telemetry reports the object's observable standing and evidence environment.
+   It does not score quality or infer maturity beyond declared source data. */
+
+.focus-telemetry {
+  position: fixed;
+  top: calc(var(--frame-top) + 18px);
+  right: 18px;
+  z-index: 19;
+  width: min(360px, calc(100vw - var(--frame-left) - 36px));
+  overflow: hidden;
+  border: 1px solid var(--instrument-edge);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), transparent 76px),
+    color-mix(in srgb, var(--paper-strong) 95%, transparent);
+  box-shadow:
+    0 18px 46px rgba(23, 32, 28, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    inset 0 0 0 4px rgba(23, 32, 28, 0.016);
+  backdrop-filter: blur(14px);
+}
+
+.focus-telemetry__toggle {
+  width: 100%;
+  min-height: 66px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.68rem 0.72rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.focus-telemetry--open .focus-telemetry__toggle {
+  border-bottom-color: var(--line);
+  background: rgba(223, 226, 215, 0.22);
+}
+
+.focus-telemetry__identity {
+  min-width: 0;
+  display: grid;
+  gap: 0.12rem;
+}
+
+.focus-telemetry__identity small {
+  color: var(--accent);
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.focus-telemetry__identity strong {
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.focus-telemetry__identity em {
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 0.48rem;
+  font-style: normal;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.focus-telemetry__signal {
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 0 4px rgba(23, 32, 28, 0.04);
+}
+
+.focus-telemetry[data-stage="shipped"] .focus-telemetry__signal {
+  background: var(--ink);
+}
+
+.focus-telemetry[data-stage="developed"] .focus-telemetry__signal,
+.focus-telemetry[data-stage="pilot"] .focus-telemetry__signal,
+.focus-telemetry[data-stage="active-development"] .focus-telemetry__signal {
+  background: var(--accent);
+}
+
+.focus-telemetry[data-stage="planned"] .focus-telemetry__signal {
+  border-style: dashed;
+}
+
+.focus-telemetry__chevron {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--paper-strong);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.focus-telemetry__readouts {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-bottom: 1px solid var(--line);
+  background: var(--instrument-recess);
+  box-shadow: inset 0 1px 4px rgba(23, 32, 28, 0.06);
+}
+
+.focus-telemetry__readouts > span {
+  min-width: 0;
+  min-height: 68px;
+  display: grid;
+  align-content: center;
+  gap: 0.16rem;
+  padding: 0.55rem 0.45rem;
+  border-right: 1px solid var(--line);
+}
+
+.focus-telemetry__readouts > span:last-child {
+  border-right: 0;
+}
+
+.focus-telemetry__readouts small {
+  color: var(--ink-soft);
+  font-size: 0.39rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.focus-telemetry__readouts strong {
+  overflow: hidden;
+  font-size: 0.56rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+}
+
+.focus-telemetry__readouts em {
+  color: var(--ink-soft);
+  font-size: 0.42rem;
+  font-style: normal;
+}
+
+.focus-telemetry__body {
+  max-height: min(510px, calc(100vh - var(--frame-top) - var(--frame-bottom) - 175px));
+  overflow: auto;
+  padding: 0.65rem;
+  scrollbar-width: thin;
+}
+
+.telemetry-compartment {
+  padding: 0.65rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.telemetry-compartment:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.telemetry-compartment__label {
+  width: fit-content;
+  margin-bottom: 0.48rem;
+  padding: 0.22rem 0.35rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(223, 226, 215, 0.34);
+  color: var(--ink-soft);
+  font-size: 0.4rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.telemetry-compartment--standing > strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.telemetry-compartment--standing > p {
+  margin: 0.45rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.62rem;
+  line-height: 1.5;
+}
+
+.telemetry-compartment__meta {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.52rem;
+  padding: 0.48rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--instrument-recess);
+  color: var(--ink-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.45rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.telemetry-actions,
+.telemetry-records {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.42rem;
+}
+
+.telemetry-actions button,
+.telemetry-records a {
+  min-width: 0;
+  min-height: 82px;
+  display: grid;
+  align-content: center;
+  gap: 0.18rem;
+  padding: 0.58rem;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: rgba(251, 250, 246, 0.5);
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+}
+
+.telemetry-actions button {
+  cursor: pointer;
+}
+
+.telemetry-actions button:hover,
+.telemetry-records a:hover {
+  border-color: var(--ink);
+  background: var(--paper-strong);
+}
+
+.telemetry-actions span,
+.telemetry-records span {
+  color: var(--accent);
+  font-size: 0.4rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.telemetry-actions strong,
+.telemetry-records strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.telemetry-actions small,
+.telemetry-records small {
+  color: var(--ink-soft);
+  font-size: 0.43rem;
+  line-height: 1.25;
+}
+
+.telemetry-actions--applied button {
+  border-left: 3px solid var(--line-strong);
+}
+
+.telemetry-compartment--sources ul {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.telemetry-compartment--sources li {
+  padding: 0.42rem 0.48rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--instrument-recess);
+  color: var(--ink-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.45rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 980px) {
+  .focus-telemetry {
+    top: auto;
+    right: 14px;
+    bottom: calc(var(--frame-bottom) + 14px);
+    width: min(340px, calc(100vw - 28px));
+  }
+
+  .focus-telemetry__body {
+    max-height: min(420px, 55vh);
+  }
+}
+
+@media (max-width: 720px) {
+  .focus-telemetry {
+    right: 10px;
+    bottom: calc(var(--frame-bottom) + 10px);
+    width: calc(100vw - 20px);
+  }
+
+  .focus-telemetry__readouts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .focus-telemetry__readouts > span:nth-child(3) {
+    border-right: 0;
+  }
+
+  .focus-telemetry__readouts > span:nth-child(n + 4) {
+    border-top: 1px solid var(--line);
+  }
+
+  .telemetry-actions,
+  .telemetry-records {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  .focus-telemetry,
+  .focus-telemetry__readouts,
+  .focus-telemetry__chevron,
+  .telemetry-compartment__label,
+  .telemetry-compartment__meta,
+  .telemetry-actions button,
+  .telemetry-records a,
+  .telemetry-compartment--sources li {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .focus-telemetry__signal {
+    border-color: CanvasText;
+  }
+
+  .focus-telemetry[data-stage="shipped"] .focus-telemetry__signal,
+  .focus-telemetry[data-stage="developed"] .focus-telemetry__signal,
+  .focus-telemetry[data-stage="pilot"] .focus-telemetry__signal,
+  .focus-telemetry[data-stage="active-development"] .focus-telemetry__signal {
+    background: Highlight;
+  }
+}

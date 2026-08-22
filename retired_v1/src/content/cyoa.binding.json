@@ -1,0 +1,561 @@
+{
+  "schemaVersion": "boundary-first.binding.cyoa.v1",
+  "bindingProtocol": {
+    "id": "bfl-cyoa-adaptive-onramps",
+    "version": "0.2.0",
+    "title": "Choose Your Own On-Ramp",
+    "status": "draft",
+    "claimCeiling": "pedagogical-on-ramp",
+    "provenance": {
+      "createdFrom": [
+        "backlog/4_boundary_first_spatial_ux_design_archive_2026-08-01/plans/requirements_specification.md#FR-006",
+        "backlog/4_boundary_first_spatial_ux_design_archive_2026-08-01/plans/binding_protocol_and_schema_plan.md",
+        "backlog/4_boundary_first_spatial_ux_design_archive_2026-08-01/source_context/on_ramps_to_distinction_theory_v_0_2_revised.md"
+      ],
+      "implementedAt": "/problem"
+    },
+    "compatibility": {
+      "renderer": "next-app-router/cyoa-guided-path-v1",
+      "canonicalNodeSource": "src/content/nodes.json"
+    }
+  },
+  "source": {
+    "schemaFamily": "custom",
+    "schemaReference": "src/content/schemas/cyoa-binding.schema.json",
+    "adapters": ["canonical-domain-href"]
+  },
+  "semantics": {
+    "conceptRegistry": [
+      {
+        "id": "boundary",
+        "label": "Boundary",
+        "definition": "A declared distinction that conditions what may cross, transform, or remain separate.",
+        "canonicalNodeIds": ["boundary-theory"]
+      },
+      {
+        "id": "interface",
+        "label": "Interface",
+        "definition": "A typed crossing whose permitted inputs, meanings, actions, and failures are declared.",
+        "canonicalNodeIds": ["formal-grammars", "representational-mechanics"]
+      },
+      {
+        "id": "admissibility",
+        "label": "Admissibility",
+        "definition": "The conditions under which an operation, transition, or comparison is permitted.",
+        "canonicalNodeIds": ["formal-grammars"]
+      },
+      {
+        "id": "defect",
+        "label": "Defect",
+        "definition": "A typed failure of preservation, correspondence, closure, or lawful transition.",
+        "canonicalNodeIds": ["representational-mechanics", "boundary-theory"]
+      },
+      {
+        "id": "closure",
+        "label": "Closure",
+        "definition": "Completion sufficient for a declared purpose under declared conditions and reopening rules.",
+        "canonicalNodeIds": ["boundary-theory", "bfe"]
+      },
+      {
+        "id": "invariant",
+        "label": "Invariant",
+        "definition": "A structure or relation required to remain preserved under admitted transformation.",
+        "canonicalNodeIds": ["boundary-theory", "representational-mechanics"]
+      },
+      {
+        "id": "scope",
+        "label": "Scope",
+        "definition": "The declared operating domain within which a claim, test, or closure condition applies.",
+        "canonicalNodeIds": ["bfe"]
+      },
+      {
+        "id": "reopening",
+        "label": "Reopening",
+        "definition": "A declared condition that lawfully returns closed work to active inquiry or repair.",
+        "canonicalNodeIds": ["boundary-theory", "corpus"]
+      },
+      {
+        "id": "representation",
+        "label": "Representation",
+        "definition": "A purpose-typed presentation of selected structure from a richer source or carrier.",
+        "canonicalNodeIds": ["representational-mechanics"]
+      },
+      {
+        "id": "projection",
+        "label": "Projection",
+        "definition": "A mapping that preserves selected structure while intentionally or consequentially discarding other structure.",
+        "canonicalNodeIds": ["representational-mechanics"]
+      },
+      {
+        "id": "transport",
+        "label": "Transport",
+        "definition": "Movement of structure, meaning, or state between declared carriers or contextures.",
+        "canonicalNodeIds": ["representational-mechanics", "formal-grammars"]
+      },
+      {
+        "id": "ownership",
+        "label": "Ownership",
+        "definition": "Accountability for maintaining, testing, authorizing, or repairing a bounded object or transition.",
+        "canonicalNodeIds": ["governance-institutions", "bfe"]
+      },
+      {
+        "id": "repair",
+        "label": "Repair",
+        "definition": "A governed change that restores a failed invariant, correspondence, or reachable path.",
+        "canonicalNodeIds": ["bfe", "corpus"]
+      },
+      {
+        "id": "gauge",
+        "label": "Gauge",
+        "definition": "A declared observational or representational frame that conditions what can be measured or compared.",
+        "canonicalNodeIds": ["physics", "representational-mechanics"]
+      },
+      {
+        "id": "measurement",
+        "label": "Measurement",
+        "definition": "Disciplined representation through a declared instrument, gauge, unit, and precision.",
+        "canonicalNodeIds": ["representational-mechanics", "physics"]
+      },
+      {
+        "id": "trace",
+        "label": "Trace",
+        "definition": "A preserved record of an operation, observation, transition, or failure.",
+        "canonicalNodeIds": ["corpus"]
+      },
+      {
+        "id": "correspondence",
+        "label": "Correspondence",
+        "definition": "A declared relation used to compare expected, represented, and observed states.",
+        "canonicalNodeIds": ["representational-mechanics"]
+      },
+      {
+        "id": "agency",
+        "label": "Agency",
+        "definition": "The consequential actions an actor can actually reach within declared constraints.",
+        "canonicalNodeIds": ["constructive-humanist-agentics"]
+      },
+      {
+        "id": "standing",
+        "label": "Standing",
+        "definition": "Recognized authority to enter a process, raise a claim, or seek review and remedy.",
+        "canonicalNodeIds": ["governance-institutions"]
+      },
+      {
+        "id": "contestability",
+        "label": "Contestability",
+        "definition": "A reachable and consequential path for challenging a decision, claim, or status.",
+        "canonicalNodeIds": ["governance-institutions"]
+      },
+      {
+        "id": "authority",
+        "label": "Authority",
+        "definition": "Permission to take bounded actions for a declared purpose under reviewable conditions.",
+        "canonicalNodeIds": ["governance-institutions", "constructive-humanist-agentics"]
+      },
+      {
+        "id": "provenance",
+        "label": "Provenance",
+        "definition": "Durable evidence of origin, transformation, stewardship, and promotion history.",
+        "canonicalNodeIds": ["corpus"]
+      },
+      {
+        "id": "transformation",
+        "label": "Transformation",
+        "definition": "A typed operation that changes a carrier or representation under declared rules.",
+        "canonicalNodeIds": ["boundary-theory", "formal-grammars"]
+      },
+      {
+        "id": "identity",
+        "label": "Identity",
+        "definition": "The structure sufficient to recognize continuity across admitted change.",
+        "canonicalNodeIds": ["boundary-theory", "identity"]
+      },
+      {
+        "id": "scale",
+        "label": "Scale",
+        "definition": "A regime of extent or relation that conditions which structure remains accessible.",
+        "canonicalNodeIds": ["physics"]
+      },
+      {
+        "id": "resolution",
+        "label": "Resolution",
+        "definition": "The discriminating capacity of a representation or observational regime.",
+        "canonicalNodeIds": ["physics", "representational-mechanics"]
+      },
+      {
+        "id": "observability",
+        "label": "Observability",
+        "definition": "Whether a feature can be exposed under declared conditions, instruments, and resolution.",
+        "canonicalNodeIds": ["physics", "representational-mechanics"]
+      },
+      {
+        "id": "purpose",
+        "label": "Purpose",
+        "definition": "The declared end that bounds relevance, sufficiency, and closure.",
+        "canonicalNodeIds": ["identity", "bfe"]
+      },
+      {
+        "id": "on-ramp",
+        "label": "On-ramp",
+        "definition": "A familiar example that orients a learner toward formal structure without claiming to establish it.",
+        "canonicalNodeIds": ["on-ramps"]
+      },
+      {
+        "id": "typing",
+        "label": "Typing",
+        "definition": "Explicit declaration of the kind, domain, and permitted operations of an object or relation.",
+        "canonicalNodeIds": ["formal-grammars"]
+      },
+      {
+        "id": "claim-ceiling",
+        "label": "Claim ceiling",
+        "definition": "The strongest class of conclusion an artifact is permitted to support.",
+        "canonicalNodeIds": ["corpus"]
+      },
+      {
+        "id": "formalization",
+        "label": "Formalization",
+        "definition": "Translation from an intuitive handle into declared objects, relations, operations, and constraints.",
+        "canonicalNodeIds": ["formal-grammars", "mathematics"]
+      }
+    ],
+    "onramps": [
+      {
+        "id": "onramp:software",
+        "slug": "software",
+        "number": "01",
+        "label": "Systems & software",
+        "prompt": "Two correct parts failed together.",
+        "description": "Start where an interface turns local success into system failure.",
+        "canonicalNodeIds": ["software-engineering-practice", "bfe", "formal-grammars"],
+        "choices": [
+          {
+            "id": "choice:software-interface",
+            "slug": "interface",
+            "title": "The interface kept its syntax and broke its promise.",
+            "scene": "Two services exchanged valid messages. The workflow still failed because each side meant something different by ‘complete.’",
+            "conceptLabel": "The API as boundary contract",
+            "conceptIds": ["boundary", "interface", "admissibility", "defect"],
+            "canonicalNodeIds": ["software-engineering-practice", "formal-grammars", "representational-mechanics"],
+            "lesson": "An interface is more than a connection point. It declares what may cross, what must remain true, and what each side may rely on.",
+            "structuralMove": "Inspect the contract at the crossing: inputs, meanings, authority, failure behavior, and the invariant the exchange was meant to preserve.",
+            "metaphorFirewall": "An API illustrates a typed boundary; it does not prove that every social or physical boundary behaves like software.",
+            "formalBridge": "Describe the two carriers, the admissible transformation between them, and the first condition that fails after transport.",
+            "destinationNodeId": "software-engineering-practice",
+            "actionLabel": "Enter software engineering"
+          },
+          {
+            "id": "choice:software-closure",
+            "slug": "closure",
+            "title": "Everything was checked off. The work was not actually closed.",
+            "scene": "The release passed its list, shipped on time, and created a consequence no item on the list was capable of seeing.",
+            "conceptLabel": "The checklist as closure test",
+            "conceptIds": ["closure", "invariant", "scope", "reopening"],
+            "canonicalNodeIds": ["bfe", "boundary-theory", "corpus"],
+            "lesson": "A checklist does not certify universal completeness. It certifies a declared purpose under a declared set of conditions.",
+            "structuralMove": "Ask what the closure test covered, which consequence sat outside its boundary, and what evidence should lawfully reopen the work.",
+            "metaphorFirewall": "A checklist is a handle for purpose-bounded closure, not a guarantee that a finite list can capture every possible consequence.",
+            "formalBridge": "Write the closure predicate, its operating domain, and an explicit reopening condition before adding another task.",
+            "destinationNodeId": "bfe",
+            "actionLabel": "Enter Boundary-First Engineering"
+          }
+        ]
+      },
+      {
+        "id": "onramp:engineering",
+        "slug": "engineering",
+        "number": "02",
+        "label": "Building & engineering",
+        "prompt": "The plan failed in practice.",
+        "description": "Start where drawings, tolerances, and handoffs meet the real thing.",
+        "canonicalNodeIds": ["bfe", "representational-mechanics"],
+        "choices": [
+          {
+            "id": "choice:engineering-blueprint",
+            "slug": "blueprint",
+            "title": "The drawing was precise. The build still drifted.",
+            "scene": "Every dimension was present, but the drawing did not carry the installation order, site condition, or tolerance that made those dimensions usable.",
+            "conceptLabel": "The blueprint as disciplined projection",
+            "conceptIds": ["representation", "projection", "transport", "invariant"],
+            "canonicalNodeIds": ["representational-mechanics", "bfe"],
+            "lesson": "A representation succeeds by preserving the structure needed for an operation—not by containing the whole thing it represents.",
+            "structuralMove": "Name what the drawing preserves, what it intentionally discards, and which lost feature became consequential during construction.",
+            "metaphorFirewall": "A blueprint is not the built object, and projection is not automatically error. Disciplined loss is often what makes action possible.",
+            "formalBridge": "Declare the source, the representation, the intended operation, and the invariant that must survive the projection.",
+            "destinationNodeId": "representational-mechanics",
+            "actionLabel": "Enter Representational Mechanics"
+          },
+          {
+            "id": "choice:engineering-handoff",
+            "slug": "handoff",
+            "title": "Each trade finished its part. The junction failed.",
+            "scene": "The components met their own specifications. Their shared edge had no single owner, test, or repair path.",
+            "conceptLabel": "The handoff as a governed boundary",
+            "conceptIds": ["boundary", "ownership", "closure", "repair"],
+            "canonicalNodeIds": ["bfe", "governance-institutions"],
+            "lesson": "Local completion does not compose automatically into system completion. The seam needs its own conditions and accountable steward.",
+            "structuralMove": "Treat the junction as an object: give it an owner, an invariant, an acceptance test, and a route back to repair.",
+            "metaphorFirewall": "The seam metaphor helps locate responsibility; it does not imply that every failure belongs to exactly one boundary or person.",
+            "formalBridge": "Model the adjoining parts and their shared interface separately, then test whether their local closure conditions compose.",
+            "destinationNodeId": "bfe",
+            "actionLabel": "Enter Boundary-First Engineering"
+          }
+        ]
+      },
+      {
+        "id": "onramp:research",
+        "slug": "research",
+        "number": "03",
+        "label": "Research & science",
+        "prompt": "The evidence was clear. Its meaning was not.",
+        "description": "Start where observation becomes interpretation and claim.",
+        "canonicalNodeIds": ["representational-mechanics", "boundary-theory", "corpus"],
+        "choices": [
+          {
+            "id": "choice:research-ruler",
+            "slug": "ruler",
+            "title": "A different instrument produced a different answer.",
+            "scene": "The object remained in place. The unit, resolution, and available comparison changed—and so did the representation.",
+            "conceptLabel": "Smith’s ruler",
+            "conceptIds": ["gauge", "measurement", "representation", "invariant"],
+            "canonicalNodeIds": ["representational-mechanics", "physics"],
+            "lesson": "Measurement is disciplined access through a declared gauge. An instrument makes some properties comparable while leaving others outside its view.",
+            "structuralMove": "Separate the object, instrument, measurement conditions, and the property claimed to remain stable across repeated observations.",
+            "metaphorFirewall": "A ruler is a teaching handle for gauge and disciplined loss; it is not equivalent to every formal use of gauge in mathematics or physics.",
+            "formalBridge": "Write the representation as a function of the observational gauge, then state which comparison you expect to remain invariant.",
+            "destinationNodeId": "representational-mechanics",
+            "actionLabel": "Enter Representational Mechanics"
+          },
+          {
+            "id": "choice:research-contradiction",
+            "slug": "contradiction",
+            "title": "The result contradicted the model you trusted.",
+            "scene": "The temptation was to smooth away the outlier. Instead, you preserved the trace and asked where the correspondence first broke.",
+            "conceptLabel": "Contradiction as a repair signal",
+            "conceptIds": ["defect", "trace", "correspondence", "repair"],
+            "canonicalNodeIds": ["boundary-theory", "representational-mechanics", "corpus"],
+            "lesson": "A contradiction is not merely an obstacle to publication. Preserved with its conditions, it can localize a defect in model, method, or boundary.",
+            "structuralMove": "Keep observation and expectation distinct, retain the full trace, and find the earliest comparison that fails.",
+            "metaphorFirewall": "Not every disagreement falsifies a theory; instrumentation, sampling, transport, and interpretation can also be defective.",
+            "formalBridge": "Represent expected and observed states separately, then type each possible defect location before choosing a repair.",
+            "destinationNodeId": "boundary-theory",
+            "actionLabel": "Enter Boundary Theory"
+          }
+        ]
+      },
+      {
+        "id": "onramp:institutions",
+        "slug": "institutions",
+        "number": "04",
+        "label": "Policy & institutions",
+        "prompt": "The rule worked. Repair did not.",
+        "description": "Start where authority blocks challenge, correction, or repair.",
+        "canonicalNodeIds": ["governance-institutions", "constructive-humanist-agentics"],
+        "choices": [
+          {
+            "id": "choice:institutions-appeal",
+            "slug": "appeal",
+            "title": "There was a decision, but no reachable appeal.",
+            "scene": "The procedure looked complete from inside the institution. From the affected person’s position, the route to challenge an error did not exist.",
+            "conceptLabel": "Appeal as contestability mechanism",
+            "conceptIds": ["agency", "standing", "contestability", "repair"],
+            "canonicalNodeIds": ["governance-institutions", "constructive-humanist-agentics"],
+            "lesson": "A right that cannot be reached, invoked, or completed may be present in text while absent from the person’s actual action-space.",
+            "structuralMove": "Trace the path from consequence to notice, standing, evidence, review authority, decision, and effective remedy.",
+            "metaphorFirewall": "The path model reveals reachability; it does not by itself decide what a just outcome must be.",
+            "formalBridge": "Model agency as the set of actions actually reachable under the institution’s rules, resources, and time constraints.",
+            "destinationNodeId": "governance-institutions",
+            "actionLabel": "Enter governance & institutions"
+          },
+          {
+            "id": "choice:institutions-authority",
+            "slug": "authority",
+            "title": "Authority crossed the boundary that justified it.",
+            "scene": "A role created for one bounded purpose accumulated permissions, acted elsewhere, and left no durable account of the transition.",
+            "conceptLabel": "Authority as a bounded interface",
+            "conceptIds": ["authority", "boundary", "provenance", "closure"],
+            "canonicalNodeIds": ["constructive-humanist-agentics", "governance-institutions", "corpus"],
+            "lesson": "Legitimate authority is typed by purpose, domain, permitted actions, evidence, and conditions for review or withdrawal.",
+            "structuralMove": "Separate possession of capability from authorization to use it, then inspect the transition that enlarged the role.",
+            "metaphorFirewall": "Boundary language can clarify authority without pretending that institutional legitimacy is a purely technical type-checking problem.",
+            "formalBridge": "Declare the actor, operating domain, admissible action set, required evidence, and independent closure gate.",
+            "destinationNodeId": "constructive-humanist-agentics",
+            "actionLabel": "Enter constructive agentics"
+          }
+        ]
+      },
+      {
+        "id": "onramp:formal",
+        "slug": "formal",
+        "number": "05",
+        "label": "Physics & mathematics",
+        "prompt": "Something changed. Something had to remain.",
+        "description": "Start with change, invariance, scale, and lawful comparison.",
+        "canonicalNodeIds": ["mathematics", "physics", "boundary-theory"],
+        "choices": [
+          {
+            "id": "choice:formal-invariant",
+            "slug": "invariant",
+            "title": "The form changed, but a relation survived.",
+            "scene": "Coordinates, notation, or viewpoint shifted. A structure remained stable enough to identify the same object or law across the transformation.",
+            "conceptLabel": "The invariant under transformation",
+            "conceptIds": ["transformation", "invariant", "identity", "admissibility"],
+            "canonicalNodeIds": ["mathematics", "boundary-theory", "formal-grammars"],
+            "lesson": "An invariant states what a permitted transformation must preserve. It gives comparison a lawful spine.",
+            "structuralMove": "Name the carrier, transformation family, preserved structure, and the conditions that make the transformation admissible.",
+            "metaphorFirewall": "Finding a pattern that stays visually similar is not enough; formal invariance requires an explicit transformation and preservation law.",
+            "formalBridge": "Define a transformation on a typed space and test the candidate invariant under every admitted operation.",
+            "destinationNodeId": "mathematics",
+            "actionLabel": "Enter mathematics & formal structures"
+          },
+          {
+            "id": "choice:formal-resolution",
+            "slug": "resolution",
+            "title": "A feature vanished when the scale changed.",
+            "scene": "The object did not disappear. Under the new resolution, its edge, interior, or local variation no longer survived the projection.",
+            "conceptLabel": "The straw across the room",
+            "conceptIds": ["scale", "resolution", "projection", "observability"],
+            "canonicalNodeIds": ["physics", "representational-mechanics"],
+            "lesson": "What exists and what a representation can expose are different questions. Relevant structure can be lost without becoming unreal.",
+            "structuralMove": "Compare the representations at both scales and identify which feature ceased to be observable—and why that loss matters for the operation.",
+            "metaphorFirewall": "The example concerns observational regimes; it does not settle ontology or make every defect merely subjective.",
+            "formalBridge": "Index the representation by resolution, then state the threshold at which the feature required by the task is no longer preserved.",
+            "destinationNodeId": "physics",
+            "actionLabel": "Enter physics & physical regimes"
+          }
+        ]
+      },
+      {
+        "id": "onramp:learning",
+        "slug": "learning",
+        "number": "06",
+        "label": "Learning & exploration",
+        "prompt": "You need an example before the theory.",
+        "description": "Start with a map or metaphor, then follow it into the formal idea.",
+        "canonicalNodeIds": ["on-ramps", "formal-grammars", "representational-mechanics"],
+        "choices": [
+          {
+            "id": "choice:learning-map",
+            "slug": "map",
+            "title": "Two maps disagreed and both were useful.",
+            "scene": "One preserved roads, another weather, another transit connectivity. Each discarded structure the others needed.",
+            "conceptLabel": "The map is not the territory—but it is not nothing",
+            "conceptIds": ["representation", "projection", "purpose", "invariant"],
+            "canonicalNodeIds": ["on-ramps", "representational-mechanics"],
+            "lesson": "A representation is judged by the invariant it preserves for a declared purpose. Incomplete does not mean arbitrary; useful does not mean total.",
+            "structuralMove": "Ask what operation the map serves, which structure it preserves, and what would break if it were used for a different task.",
+            "metaphorFirewall": "The map analogy does not imply that truth is relative. A map can be purpose-fit, incomplete, or simply wrong.",
+            "formalBridge": "Treat the map as a projection from a richer carrier and declare both the preserved invariant and the intentionally lost information.",
+            "destinationNodeId": "on-ramps",
+            "actionLabel": "Enter on-ramps & education"
+          },
+          {
+            "id": "choice:learning-metaphor",
+            "slug": "metaphor",
+            "title": "The example became more convincing than the claim.",
+            "scene": "A familiar story made the structure easy to grasp, then quietly began doing work that only definitions, evidence, or proof could support.",
+            "conceptLabel": "The metaphor firewall",
+            "conceptIds": ["on-ramp", "typing", "claim-ceiling", "formalization"],
+            "canonicalNodeIds": ["formal-grammars", "on-ramps", "corpus"],
+            "lesson": "A metaphor can reveal the shape of an operation. It cannot certify that the formal system has the same properties.",
+            "structuralMove": "Keep the intuitive handle, label its claim ceiling, and mark the exact point where formal definitions must take over.",
+            "metaphorFirewall": "A metaphor is a door, not the room.",
+            "formalBridge": "Translate the example into a declared carrier, boundary, operation, invariant, defect condition, and transport rule.",
+            "destinationNodeId": "formal-grammars",
+            "actionLabel": "Enter the formal grammars"
+          }
+        ]
+      }
+    ]
+  },
+  "workflow": {
+    "profile": "adaptive-onramp",
+    "states": [
+      { "id": "choose-world", "label": "Choose a setting" },
+      { "id": "name-trouble", "label": "Name the break" },
+      { "id": "cross-bridge", "label": "Find the pattern" }
+    ],
+    "transitions": [
+      { "from": "choose-world", "to": "name-trouble", "action": "select-onramp" },
+      { "from": "name-trouble", "to": "cross-bridge", "action": "select-scene" },
+      { "from": "cross-bridge", "to": "name-trouble", "action": "choose-other-turn" },
+      { "from": "name-trouble", "to": "choose-world", "action": "choose-other-world" }
+    ],
+    "restartable": true,
+    "stateMutation": "navigation-only"
+  },
+  "projection": {
+    "id": "cyoa-guided-path-v1",
+    "pattern": "guided-path",
+    "regions": ["prototype-status", "masthead", "progress", "stage", "exit"],
+    "components": {
+      "onramp": "choice-card",
+      "scene": "narrative-card",
+      "concept": "semantic-token",
+      "lesson": "teaching-panel",
+      "firewall": "claim-boundary-panel",
+      "bridge": "formal-bridge-panel",
+      "destination": "canonical-node-link"
+    },
+    "copy": {
+      "prototypePrimary": "Teaching bridge · concept-stage route",
+      "prototypeSecondary": "One familiar scene -> one formal doorway",
+      "entranceEyebrow": "Problem-first entrance",
+      "entranceTitle": "Where did it break?",
+      "entranceIntro": "Many paths. Same destination.",
+      "nonClassification": "Choose a familiar setting. We will trace the trouble to one useful idea.",
+      "choiceTitle": "What happened next?",
+      "choiceIntro": "Choose the closer scene. Either one opens the same body of work.",
+      "conceptStripLabel": "Structure now visible",
+      "footerPrimary": "Boundary First Labs · public teaching route",
+      "footerSecondary": "Your choices change the route, not what you may reach."
+    }
+  },
+  "interactions": {
+    "actions": [
+      { "id": "select-onramp", "method": "link", "preservesHistory": true, "keyboardEquivalent": "native-link" },
+      { "id": "select-scene", "method": "link", "preservesHistory": true, "keyboardEquivalent": "native-link" },
+      { "id": "restart", "method": "link", "preservesHistory": true, "keyboardEquivalent": "native-link" },
+      { "id": "open-canonical-node", "method": "link", "preservesHistory": true, "keyboardEquivalent": "native-link" }
+    ],
+    "fallbacks": ["linear-document-order", "native-browser-history", "direct-canonical-node-link"]
+  },
+  "validation": {
+    "requiredOnrampIds": [
+      "onramp:software",
+      "onramp:engineering",
+      "onramp:research",
+      "onramp:institutions",
+      "onramp:formal",
+      "onramp:learning"
+    ],
+    "requiredChoiceFields": [
+      "scene",
+      "conceptIds",
+      "canonicalNodeIds",
+      "lesson",
+      "structuralMove",
+      "metaphorFirewall",
+      "formalBridge",
+      "destinationNodeId"
+    ],
+    "accessibilityConstraints": [
+      "native-link-keyboard-operation",
+      "non-color-progress-state",
+      "linear-reading-order",
+      "reduced-motion-compatible"
+    ],
+    "governanceConstraints": [
+      "pedagogical-claim-ceiling-visible-in-binding",
+      "metaphor-firewall-required",
+      "destination-must-be-canonical-node",
+      "projection-may-not-mutate-semantic-state",
+      "choice-may-not-classify-user"
+    ]
+  },
+  "export": {
+    "targets": ["next-web", "accessible-document", "atlas-guided-path"],
+    "documentation": true,
+    "fixtures": true
+  }
+}

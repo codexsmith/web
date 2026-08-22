@@ -1,0 +1,218 @@
+.page {
+  --cyoa-ink: var(--primary);
+  --cyoa-paper: var(--primary-foreground);
+  --cyoa-card: var(--card);
+  --cyoa-signal: var(--accent);
+  --cyoa-line: var(--border);
+  min-height: 100vh;
+  color: var(--foreground);
+  background: radial-gradient(
+      circle at 12% 22%,
+      color-mix(in srgb, var(--accent) 11%, transparent) 0,
+      transparent 24rem
+    ),
+    linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(50% - 0.5px),
+      color-mix(in srgb, var(--border) 8%, transparent) 50%,
+      transparent calc(50% + 0.5px)
+    ),
+    var(--background);
+  font-family: var(--font-sans);
+}
+
+.progress,
+.hero,
+.stage,
+.arrival,
+.onrampGrid {
+  width: min(100% - 2rem, 78rem);
+  margin-inline: auto;
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1.25rem;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--cyoa-line);
+  border-radius: var(--radius);
+  list-style: none;
+}
+.progress li {
+  display: flex;
+  min-height: 4.25rem;
+  align-items: center;
+  gap: 0.85rem;
+  border-right: 1px solid var(--cyoa-line);
+  padding: 0.85rem 1rem;
+  color: color-mix(in srgb, var(--foreground) 46%, transparent);
+}
+.progress li:last-child { border-right: 0; }
+.progress li span { display: grid; width: 1.85rem; height: 1.85rem; flex: none; place-items: center; border: 1px solid var(--cyoa-line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.61rem; }
+.progress li strong { font-size: 0.76rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+.progress li[data-complete="true"] { color: color-mix(in srgb, var(--foreground) 68%, transparent); background: color-mix(in srgb, var(--card) 82%, transparent); }
+.progress .activeProgress { color: var(--cyoa-paper); background: var(--cyoa-ink); }
+.progress .activeProgress span { border-color: var(--accent); color: var(--accent); }
+.progress li[data-complete="true"] span { background: var(--accent); color: var(--accent-foreground); }
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: end;
+  padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(2rem, 4vw, 3rem);
+}
+.eyebrow,
+.panelLabel {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.eyebrow { color: var(--foreground); }
+.hero h1,
+.stageHeading h1,
+.arrivalHero h1 {
+  margin: 1rem 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 5.8vw, 5.4rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+}
+.heroCopy { align-self: end; }
+.heroCopy h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3vw, 2.9rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+.heroCopy p { margin: 1rem 0 0; color: var(--muted-foreground); font-size: 0.94rem; line-height: 1.6; }
+.heroCopy .routeNote {
+  margin-top: 0.85rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.onrampGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--cyoa-line);
+}
+.onrampCard {
+  display: grid;
+  min-height: 21rem;
+  grid-template-rows: auto auto 1fr auto auto;
+  padding: clamp(1.4rem, 3vw, 2.25rem);
+  border-right: 1px solid var(--cyoa-line);
+  background: color-mix(in srgb, var(--background) 92%, white);
+  transition: background 160ms ease, color 160ms ease;
+}
+.onrampCard:nth-child(3n) { border-right: 0; }
+.onrampCard:nth-child(-n + 3) { border-bottom: 1px solid var(--cyoa-line); }
+.onrampCard:hover,
+.onrampCard:focus-visible { color: var(--cyoa-paper); background: var(--cyoa-ink); outline-offset: -4px; }
+.cardNumber { color: var(--accent); font-family: var(--font-mono); font-size: 0.67rem; font-weight: 700; }
+.onrampCard > p,
+.choiceCard > p { margin: 1.5rem 0 0.65rem; font-family: var(--font-mono); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.65; }
+.onrampCard h2,
+.choiceCard h2 { margin: 0; font-family: var(--font-serif); font-size: clamp(1.7rem, 3vw, 2.45rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; }
+.cardDescription { align-self: end; margin-top: 1.25rem; font-size: 0.9rem; line-height: 1.55; opacity: 0.68; }
+.cardAction { display: flex; align-items: center; gap: 0.65rem; margin-top: 1.25rem; font-family: var(--font-mono); font-size: 0.64rem; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+.cardAction svg { width: 1rem; height: 1rem; transition: transform 160ms ease; }
+a:hover .cardAction svg { transform: translateX(0.25rem); }
+
+.stage,
+.arrival { padding-block: 2rem 6rem; }
+.backLink { display: inline-flex; align-items: center; gap: 0.55rem; min-height: 2.75rem; border: 1px solid var(--border); border-radius: 999px; padding: 0.55rem 0.9rem; background: color-mix(in srgb, var(--card) 68%, var(--background)); font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; }
+.backLink svg { width: 1rem; height: 1rem; }
+.stageHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.5fr);
+  gap: 3rem;
+  align-items: end;
+  margin-block: 2.5rem 3rem;
+}
+.stageHeading h1 { font-size: clamp(3rem, 5.8vw, 5.4rem); }
+.stageHeading > p { margin: 0; color: var(--muted-foreground); font-size: 1rem; line-height: 1.7; }
+.choiceGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--cyoa-line); }
+.choiceCard { display: grid; min-height: 24rem; grid-template-rows: auto auto 1fr auto auto; padding: clamp(1.5rem, 4vw, 3rem); background: color-mix(in srgb, var(--background) 92%, white); }
+.choiceCard + .choiceCard { border-left: 1px solid var(--cyoa-line); }
+.choiceCard:hover,
+.choiceCard:focus-visible { color: var(--cyoa-paper); background: var(--cyoa-ink); outline-offset: -4px; }
+.choiceCard blockquote { align-self: end; margin: 2.5rem 0 0; padding-left: 1rem; border-left: 2px solid var(--cyoa-signal); font-family: var(--font-serif); font-size: 1.05rem; font-style: italic; line-height: 1.6; opacity: 0.72; }
+
+.arrivalHero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.6fr); gap: 4rem; align-items: end; margin-block: 2.5rem 3.5rem; }
+.arrivalHero h1 { max-width: 13ch; font-size: clamp(3.2rem, 6.2vw, 6.4rem); }
+.arrivalHero blockquote { margin: 0; padding: 0 0 0 2rem; border-left: 2px solid var(--cyoa-signal); font-family: var(--font-serif); font-size: clamp(1.15rem, 2vw, 1.55rem); font-style: italic; line-height: 1.55; }
+.conceptStrip { display: flex; align-items: center; justify-content: space-between; gap: 2rem; border-block: 1px solid var(--cyoa-line); padding: 1rem 0; }
+.conceptStripHeading { font-family: var(--font-mono); font-size: 0.63rem; font-weight: 750; letter-spacing: 0.13em; text-transform: uppercase; }
+.conceptStripHeading small { display: block; margin-top: 0.38rem; color: var(--muted-foreground); font-size: 0.54rem; font-weight: 650; letter-spacing: 0.08em; }
+.conceptStrip ul { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+.conceptStrip li { border: 1px solid var(--cyoa-line); border-radius: 999px; font-family: var(--font-mono); font-size: 0.61rem; font-weight: 700; text-transform: uppercase; }
+.conceptStrip li a { display: block; padding: 0.42rem 0.72rem; }
+.conceptStrip li:has(a:hover) { color: var(--cyoa-paper); background: var(--cyoa-ink); }
+.arrivalGrid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.65fr); overflow: hidden; border: 1px solid var(--cyoa-line); border-top: 0; border-radius: 0 0 var(--radius) var(--radius); }
+.lesson { padding: clamp(1.75rem, 4vw, 3.5rem); background: var(--cyoa-card); }
+.lesson h2 { max-width: 21ch; margin: 1.5rem 0 2.5rem; font-family: var(--font-serif); font-size: clamp(2.2rem, 4vw, 4rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.03; }
+.lesson > div { max-width: 46rem; border-top: 1px solid var(--cyoa-line); padding-top: 1.5rem; }
+.lesson > div > p:last-child,
+.bridge > div > p:last-child { margin: 0.75rem 0 0; color: var(--muted-foreground); font-size: 0.98rem; line-height: 1.68; }
+.bridge { border-left: 1px solid var(--cyoa-line); }
+.bridge > div { padding: 1.75rem; }
+.bridge > div + div { border-top: 1px solid var(--cyoa-line); }
+.bridge .actions { display: grid; gap: 0.65rem; padding: 1.75rem; background: var(--cyoa-ink); }
+.primaryAction,
+.secondaryAction { display: flex; min-height: 3.25rem; align-items: center; justify-content: center; gap: 0.65rem; border: 1px solid var(--cyoa-paper); border-radius: 999px; padding: 0.7rem 1rem; color: var(--cyoa-paper); text-align: center; font-family: var(--font-mono); font-size: 0.63rem; font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; }
+.primaryAction { border-color: var(--cyoa-signal); color: var(--cyoa-ink); background: var(--cyoa-signal); }
+.primaryAction svg { width: 1rem; height: 1rem; }
+
+@media (max-width: 900px) {
+  .hero,
+  .stageHeading,
+  .arrivalHero,
+  .arrivalGrid { grid-template-columns: 1fr; }
+  .hero { gap: 2rem; align-items: start; }
+  .heroCopy,
+  .stageHeading > p { max-width: 40rem; }
+  .onrampGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .onrampCard:nth-child(3n) { border-right: 1px solid var(--cyoa-line); }
+  .onrampCard:nth-child(2n) { border-right: 0; }
+  .onrampCard:nth-child(-n + 4) { border-bottom: 1px solid var(--cyoa-line); }
+  .arrivalHero { gap: 2rem; }
+  .arrivalHero blockquote { max-width: 38rem; }
+  .bridge { border-top: 1px solid var(--cyoa-line); border-left: 0; }
+}
+
+@media (max-width: 650px) {
+  .progress,
+  .hero,
+  .stage,
+  .arrival,
+  .onrampGrid { width: min(100% - 1.25rem, 78rem); }
+  .progress li { min-height: 3.7rem; padding: 0.65rem; }
+  .progress li strong { font-size: 0.6rem; }
+  .progress li span { display: none; }
+  .hero { padding-top: 2.5rem; }
+  .hero h1 { font-size: clamp(2.8rem, 14vw, 4.25rem); }
+  .onrampGrid,
+  .choiceGrid { grid-template-columns: 1fr; }
+  .onrampCard { min-height: 18rem; border-right: 0 !important; border-bottom: 1px solid var(--cyoa-line); }
+  .onrampCard:last-child { border-bottom: 0; }
+  .choiceCard { min-height: 22rem; }
+  .choiceCard + .choiceCard { border-top: 1px solid var(--cyoa-line); border-left: 0; }
+  .conceptStrip { align-items: flex-start; flex-direction: column; }
+  .conceptStrip ul { justify-content: flex-start; }
+}

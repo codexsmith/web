@@ -1,0 +1,53 @@
+/*
+ * Boundary First wave mark theme contract
+ *
+ * Use these variables on the SVG itself or on any ancestor when the component
+ * does not override them with props.
+ */
+
+.bf-wave-logo {
+  --bf-boundary: #1a254b;
+  --bf-field: #4e7376;
+  --bf-depth: #304b5e;
+  --bf-field-mid: color-mix(in srgb, var(--bf-field) 62%, var(--bf-depth));
+  --bf-witness: var(--bf-boundary);
+  --bf-spark: var(--bf-boundary);
+
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Optional ready-made palettes. */
+.bf-wave-logo[data-theme="statesman"] {
+  --bf-boundary: #0b1f3a;
+  --bf-field: #527c80;
+  --bf-depth: #334155;
+  --bf-witness: #c8a24a;
+  --bf-spark: #c8a24a;
+}
+
+.bf-wave-logo[data-theme="systems"] {
+  --bf-boundary: #0f172a;
+  --bf-field: #2563eb;
+  --bf-depth: #1e293b;
+  --bf-witness: #22c55e;
+  --bf-spark: #f59e0b;
+}
+
+.bf-wave-logo[data-theme="feral"] {
+  --bf-boundary: #05070a;
+  --bf-field: #00e5ff;
+  --bf-depth: #8b5cf6;
+  --bf-witness: #ff6a00;
+  --bf-spark: #ff6a00;
+}
+
+.bf-wave-logo[data-theme="monochrome"] {
+  --bf-boundary: currentColor;
+  --bf-field: currentColor;
+  --bf-field-mid: currentColor;
+  --bf-depth: currentColor;
+  --bf-witness: currentColor;
+  --bf-spark: currentColor;
+}

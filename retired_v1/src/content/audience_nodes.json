@@ -1,0 +1,289 @@
+{
+  "schemaVersion": "boundary-first.audience.v1",
+  "title": "Boundary First Audience and Use-Case Registry",
+  "description": "A visitor-centered routing overlay that references, but does not replace, the canonical content graph.",
+  "intents": [
+    {
+      "id": "intent-understand",
+      "slug": "understand",
+      "type": "intent",
+      "title": "Understand the central idea",
+      "prompt": "I want to understand the central idea.",
+      "summary": "Begin with a familiar consequence, acquire the minimum vocabulary, then reveal the larger atlas.",
+      "useCase": "understand",
+      "audienceIds": ["audience-curious", "audience-learner", "audience-educator", "audience-researcher"],
+      "recommendedDepth": "understand",
+      "related": ["boundary-first", "distinction-space", "boundary-theory"]
+    },
+    {
+      "id": "intent-diagnose",
+      "slug": "diagnose",
+      "type": "intent",
+      "title": "Diagnose a system or recurring failure",
+      "prompt": "I have a system or problem I need to diagnose.",
+      "summary": "Identify the consequential boundary, protected invariant, closure failure, consequence path, and repair responsibility.",
+      "useCase": "diagnose",
+      "audienceIds": ["audience-practitioner", "audience-leader", "audience-affected"],
+      "recommendedDepth": "use",
+      "related": ["boundary-first-engineering", "closure", "defect", "repair"]
+    },
+    {
+      "id": "intent-apply",
+      "slug": "apply",
+      "type": "intent",
+      "title": "Use practical tools and methods",
+      "prompt": "I want practical tools and methods.",
+      "summary": "Move from domain example to field guide, worksheet, implementation pattern, and review practice.",
+      "useCase": "apply",
+      "audienceIds": ["audience-practitioner", "audience-builder", "audience-leader", "audience-educator"],
+      "recommendedDepth": "use",
+      "related": ["boundary-first-engineering", "formal-grammars", "products-testbeds"]
+    },
+    {
+      "id": "intent-evaluate",
+      "slug": "evaluate",
+      "type": "intent",
+      "title": "Evaluate or challenge the research",
+      "prompt": "I want to evaluate, criticize, or replicate the work.",
+      "summary": "Route directly to exact claims, provenance, operating domains, evidence, negative results, and reproduction materials.",
+      "useCase": "evaluate",
+      "audienceIds": ["audience-researcher", "audience-critic"],
+      "recommendedDepth": "evaluate",
+      "related": ["formal-spine", "claim-ledger", "contradiction-register"]
+    },
+    {
+      "id": "intent-collaborate",
+      "slug": "collaborate",
+      "type": "intent",
+      "title": "Build, collaborate, or support",
+      "prompt": "I want to build, collaborate, or support the lab.",
+      "summary": "Expose bounded programs, maturity, needs, responsibilities, and the witness artifact a collaboration should produce.",
+      "useCase": "collaborate",
+      "audienceIds": ["audience-builder", "audience-researcher", "audience-partner"],
+      "recommendedDepth": "build",
+      "related": ["research-programs", "products-testbeds", "corpus-operations"]
+    },
+    {
+      "id": "intent-agency",
+      "slug": "agency",
+      "type": "intent",
+      "title": "Recover representation, agency, or repair",
+      "prompt": "I am looking for representation, agency, or repair.",
+      "summary": "Begin with lived consequence, then make the system's representation, authority, omissions, standing, and repair paths legible.",
+      "useCase": "recover-agency",
+      "audienceIds": ["audience-affected", "audience-learner", "audience-educator"],
+      "recommendedDepth": "use",
+      "related": ["constructive-humanist-agentics", "agency-audit", "modern-posture"]
+    }
+  ],
+  "doorways": [
+    { "id": "doorway-software", "slug": "software", "type": "doorway", "title": "Software", "summary": "Interfaces, state, architecture, execution, and closure make the method concrete.", "domainNodeIds": ["software-engineering", "software-before-code", "closure-driven-development"], "audienceIds": ["audience-practitioner", "audience-builder", "audience-leader", "audience-researcher"], "related": ["formal-grammars", "boundary-first-engineering"] },
+    { "id": "doorway-soccer", "slug": "soccer", "type": "doorway", "title": "Soccer", "summary": "A continuous, noisy, embodied multi-agent system of constructed and repaired boundaries.", "domainNodeIds": ["boundary-first-soccer"], "audienceIds": ["audience-curious", "audience-learner", "audience-educator"], "related": ["boundary", "closure", "admissibility"] },
+    { "id": "doorway-chess", "slug": "chess", "type": "doorway", "title": "Chess", "summary": "A finite, inspectable state space for learning consequential boundaries and admissible transitions.", "domainNodeIds": ["boundary-first-chess"], "audienceIds": ["audience-curious", "audience-learner", "audience-educator"], "related": ["distinction-space", "admissibility-theory"] },
+    { "id": "doorway-body", "slug": "body", "type": "doorway", "title": "The body", "summary": "Modern environments, embodied constraints, self-observation, and informed maintenance.", "domainNodeIds": ["modern-posture", "human-factors"], "audienceIds": ["audience-affected", "audience-learner", "audience-educator"], "related": ["agency", "repair"] },
+    { "id": "doorway-institutions", "slug": "institutions", "type": "doorway", "title": "Institutions", "summary": "Authority, standing, consequence, representation, appeal, and repair.", "domainNodeIds": ["governance-institutions", "law-public-trust", "agency-audit"], "audienceIds": ["audience-leader", "audience-affected", "audience-critic", "audience-partner"], "related": ["no-consequence-without-representation"] },
+    { "id": "doorway-formal", "slug": "formal", "type": "doorway", "title": "Mathematics and formal systems", "summary": "Exact objects, lawful transformations, invariants, closure conditions, and proof obligations.", "domainNodeIds": ["mathematics-formal-structures", "distinction-space", "formal-grammars"], "audienceIds": ["audience-researcher", "audience-critic", "audience-builder"], "related": ["boundary-theory", "admissibility-theory"] }
+  ],
+  "audiences": [
+    {
+      "id": "audience-curious", "slug": "curious-recognizer", "type": "audience", "title": "The curious recognizer", "shortTitle": "Curious",
+      "arrivalStatement": "I sense that this connects many things, but I do not yet have the language.",
+      "trigger": "A familiar example or public idea reveals a recurring pattern.",
+      "barrier": "The complete portfolio appears too large to enter.",
+      "desiredTransformation": "Recognize the pattern, understand the basic method, and choose a next path.",
+      "depthRange": { "entry": "recognize", "maximum": "understand" },
+      "useCases": ["understand"], "doorwayIds": ["doorway-soccer", "doorway-chess", "doorway-software"],
+      "coreConcepts": ["boundary", "invariant", "closure", "defect", "repair"],
+      "recommendedNodeIds": ["boundary-first", "distinction-space", "boundary-theory"],
+      "preferredFormats": ["visual explainer", "short essay", "interactive example"],
+      "nextAction": { "label": "Begin the first passage", "href": "/start" },
+      "successSignal": "The visitor can state the pattern in their own words and choose a deeper route.",
+      "route": [
+        { "id": "recognize", "title": "See a consequential boundary", "summary": "Begin with one familiar system and show what changes when a relevant distinction is omitted.", "nodeRefs": [{"id":"boundary-first","role":"core"}] },
+        { "id": "method", "title": "Acquire the four questions", "summary": "What is the boundary? What must remain true? Where can closure fail? Who can repair it?", "nodeRefs": [{"id":"boundary-first","role":"core"},{"id":"closure","role":"support"}] },
+        { "id": "reveal", "title": "Reveal the larger atlas", "summary": "Connect the familiar example to Distinction Space and Boundary Theory without requiring the whole corpus.", "nodeRefs": [{"id":"distinction-space","role":"destination"},{"id":"boundary-theory","role":"destination"}] }
+      ],
+      "related": ["audience-learner", "intent-understand"]
+    },
+    {
+      "id": "audience-learner", "slug": "self-directed-learner", "type": "audience", "title": "The self-directed learner", "shortTitle": "Learner",
+      "arrivalStatement": "I want to become capable of understanding and using this material.",
+      "trigger": "Curiosity, exclusion from a gated field, or a need to acquire practical intellectual tools.",
+      "barrier": "Prerequisites and disciplinary language are implicit.",
+      "desiredTransformation": "Acquire the distinctions, practice the method, and participate meaningfully.",
+      "depthRange": { "entry": "recognize", "maximum": "build" },
+      "useCases": ["understand", "learn", "recover-agency"], "doorwayIds": ["doorway-soccer", "doorway-chess", "doorway-body", "doorway-software"],
+      "coreConcepts": ["distinction", "representation", "admissibility", "boundary", "closure"],
+      "recommendedNodeIds": ["on-ramps", "boundary-first", "distinction-space"],
+      "preferredFormats": ["guided course", "glossary", "workbook", "interactive diagram"],
+      "nextAction": { "label": "Open the learning path", "href": "/learn" },
+      "successSignal": "The learner can apply the method to a new example without copying the original wording.",
+      "route": [
+        { "id": "locate", "title": "Locate current knowledge", "summary": "Choose a doorway and declare what is already familiar.", "nodeRefs": [{"id":"on-ramps","role":"doorway"}] },
+        { "id": "sequence", "title": "Acquire vocabulary progressively", "summary": "Introduce distinctions only when the learner needs them to solve the next problem.", "nodeRefs": [{"id":"distinction-space","role":"core"}] },
+        { "id": "practice", "title": "Apply and receive feedback", "summary": "Use exercises that expose omitted distinctions, false closure, and repair requirements.", "nodeRefs": [{"id":"boundary-first-engineering","role":"destination"}] }
+      ],
+      "related": ["audience-curious", "audience-educator"]
+    },
+    {
+      "id": "audience-practitioner", "slug": "working-practitioner", "type": "audience", "title": "The working practitioner", "shortTitle": "Practitioner",
+      "arrivalStatement": "I am responsible for a real system, and something about it does not close.",
+      "trigger": "Recurring defects, architectural disagreement, invisible manual repair, or displaced complexity.",
+      "barrier": "Structural necessities are treated as taste, style, or personality.",
+      "desiredTransformation": "Identify the omitted distinction, endangered invariant, broken boundary, and required repair.",
+      "depthRange": { "entry": "understand", "maximum": "build" },
+      "useCases": ["diagnose", "apply", "build"], "doorwayIds": ["doorway-software", "doorway-institutions", "doorway-formal"],
+      "coreConcepts": ["domain representation", "invariant", "interface", "closure", "repair"],
+      "recommendedNodeIds": ["boundary-first-engineering", "software-before-code", "closure-driven-development"],
+      "preferredFormats": ["field guide", "worksheet", "case study", "review packet"],
+      "nextAction": { "label": "Run a boundary review", "href": "/tools/boundary-review" },
+      "successSignal": "The practitioner can make the structural disagreement legible and testable.",
+      "route": [
+        { "id": "system", "title": "Name the consequential system", "summary": "Bound the domain, affected actors, and claimed completion condition.", "nodeRefs": [{"id":"boundary-first-engineering","role":"core"}] },
+        { "id": "failure", "title": "Find the closure failure", "summary": "Trace omitted states, crossed responsibilities, hidden work, and downstream consequence.", "nodeRefs": [{"id":"closure-driven-development","role":"core"}] },
+        { "id": "repair", "title": "Specify repair and witness", "summary": "Declare the repaired invariant, responsible owner, test, and evidence of closure.", "nodeRefs": [{"id":"formal-grammars","role":"support"}] }
+      ],
+      "related": ["audience-leader", "audience-builder"]
+    },
+    {
+      "id": "audience-builder", "slug": "builder-product-user", "type": "audience", "title": "The builder and product user", "shortTitle": "Builder",
+      "arrivalStatement": "I want a tool, workflow, or product that helps me perform this work.",
+      "trigger": "A concrete task needs a repeatable instrument rather than another explanation.",
+      "barrier": "The theory is useful but not yet operational in the current workflow.",
+      "desiredTransformation": "Use or build an instrument that produces a reliable, inspectable difference.",
+      "depthRange": { "entry": "use", "maximum": "extend" },
+      "useCases": ["apply", "build", "collaborate"], "doorwayIds": ["doorway-software", "doorway-formal"],
+      "coreConcepts": ["specification", "admissibility", "witness", "testbed", "promotion"],
+      "recommendedNodeIds": ["products-testbeds", "ai-as-forge", "corpus-operations"],
+      "preferredFormats": ["demo", "technical documentation", "SDK", "worked example"],
+      "nextAction": { "label": "Explore active testbeds", "href": "/projects" },
+      "successSignal": "The tool makes a previously unreliable operation repeatable and inspectable.",
+      "route": [
+        { "id": "job", "title": "Bound the job to be done", "summary": "Declare the input, output, protected invariant, failure modes, and witness.", "nodeRefs": [{"id":"products-testbeds","role":"core"}] },
+        { "id": "instrument", "title": "Choose or specify the instrument", "summary": "Select the smallest tool that closes the real workflow.", "nodeRefs": [{"id":"ai-as-forge","role":"support"}] },
+        { "id": "evidence", "title": "Produce evidence through use", "summary": "Treat deployment and maintenance as tests of the representation.", "nodeRefs": [{"id":"corpus-operations","role":"destination"}] }
+      ],
+      "related": ["audience-practitioner", "audience-partner"]
+    },
+    {
+      "id": "audience-leader", "slug": "organizational-leader", "type": "audience", "title": "The organizational leader", "shortTitle": "Leader",
+      "arrivalStatement": "My organization repeatedly produces failures that no individual intervention seems to fix.",
+      "trigger": "Capable people repeatedly encounter the same systemic defect.",
+      "barrier": "Authority, representation, consequence, and repair are distributed across incompatible structures.",
+      "desiredTransformation": "Locate the misalignment and identify the smallest consequential repair.",
+      "depthRange": { "entry": "understand", "maximum": "build" },
+      "useCases": ["diagnose", "apply", "collaborate"], "doorwayIds": ["doorway-institutions", "doorway-software"],
+      "coreConcepts": ["responsibility boundary", "authority", "standing", "false closure", "repair capacity"],
+      "recommendedNodeIds": ["agency-audit", "governance-institutions", "boundary-first-engineering"],
+      "preferredFormats": ["audit", "workshop", "system map", "implementation playbook"],
+      "nextAction": { "label": "Map responsibility and repair", "href": "/services/agency-audit" },
+      "successSignal": "The recurring failure can be traced to a repairable structural mismatch rather than blamed on individuals.",
+      "route": [
+        { "id": "consequence", "title": "Start from consequence", "summary": "Identify who bears the result and who can observe the failure.", "nodeRefs": [{"id":"agency-audit","role":"core"}] },
+        { "id": "authority", "title": "Map authority and responsibility", "summary": "Find where decision power and repair obligation separate.", "nodeRefs": [{"id":"governance-institutions","role":"core"}] },
+        { "id": "intervention", "title": "Choose a bounded intervention", "summary": "Repair the smallest boundary that restores visibility, standing, or closure.", "nodeRefs": [{"id":"boundary-first-engineering","role":"destination"}] }
+      ],
+      "related": ["audience-practitioner", "audience-affected"]
+    },
+    {
+      "id": "audience-affected", "slug": "affected-participant", "type": "audience", "title": "The affected participant and self-advocate", "shortTitle": "Participant",
+      "arrivalStatement": "A system acts upon me, but I cannot adequately see, influence, contest, or repair its representation of me.",
+      "trigger": "A consequential institutional, bodily, educational, or automated system becomes dependency-producing or illegible.",
+      "barrier": "The system has a representation of the person, but the person lacks a usable representation of the system.",
+      "desiredTransformation": "Identify boundaries, claims, responsibilities, omissions, standing, and available repair paths.",
+      "depthRange": { "entry": "recognize", "maximum": "use" },
+      "useCases": ["recover-agency", "diagnose", "learn"], "doorwayIds": ["doorway-body", "doorway-institutions"],
+      "coreConcepts": ["representation", "standing", "authority", "recourse", "repair"],
+      "recommendedNodeIds": ["constructive-humanist-agentics", "agency-audit", "modern-posture"],
+      "preferredFormats": ["accessible guide", "self-assessment", "question set", "participatory workshop"],
+      "nextAction": { "label": "Make the system legible", "href": "/agency" },
+      "successSignal": "The participant can ask better questions, document consequence, and locate a viable recourse path.",
+      "route": [
+        { "id": "experience", "title": "Begin with lived consequence", "summary": "Record what happens without requiring institutional vocabulary first.", "nodeRefs": [{"id":"constructive-humanist-agentics","role":"core"}] },
+        { "id": "system", "title": "Map the system's representation", "summary": "Identify what the system can see, what it ignores, and who can alter the record.", "nodeRefs": [{"id":"agency-audit","role":"core"}] },
+        { "id": "recourse", "title": "Find standing and repair", "summary": "Locate evidence, decision authority, appeal, maintenance, or self-care pathways.", "nodeRefs": [{"id":"modern-posture","role":"doorway"}] }
+      ],
+      "related": ["audience-leader", "audience-learner"]
+    },
+    {
+      "id": "audience-educator", "slug": "educator-translator", "type": "audience", "title": "The educator and translator", "shortTitle": "Educator",
+      "arrivalStatement": "I see educational value here and need a reliable way to teach it.",
+      "trigger": "A learner group needs a bounded, claim-safe progression.",
+      "barrier": "The material is too broad to teach as a single undifferentiated theory.",
+      "desiredTransformation": "Deliver an audience-appropriate sequence with clear objectives, examples, and limits.",
+      "depthRange": { "entry": "understand", "maximum": "extend" },
+      "useCases": ["teach", "learn", "understand"], "doorwayIds": ["doorway-soccer", "doorway-chess", "doorway-body"],
+      "coreConcepts": ["on-ramp", "sequence", "claim boundary", "transfer", "assessment"],
+      "recommendedNodeIds": ["on-ramps", "education", "public-interface"],
+      "preferredFormats": ["curriculum", "lesson plan", "activity", "facilitator guide"],
+      "nextAction": { "label": "Build a teaching sequence", "href": "/teach" },
+      "successSignal": "Learners transfer the method to new domains without mistaking the example for the theory.",
+      "route": [
+        { "id": "learners", "title": "Define the learner boundary", "summary": "State prior knowledge, context, time, and desired capability.", "nodeRefs": [{"id":"education","role":"core"}] },
+        { "id": "onramp", "title": "Select a familiar on-ramp", "summary": "Choose an example that reveals the operation while preserving claim limits.", "nodeRefs": [{"id":"on-ramps","role":"core"}] },
+        { "id": "transfer", "title": "Test transfer", "summary": "Ask learners to reconstruct the pattern in a different domain.", "nodeRefs": [{"id":"public-interface","role":"destination"}] }
+      ],
+      "related": ["audience-learner", "audience-curious"]
+    },
+    {
+      "id": "audience-researcher", "slug": "formal-researcher", "type": "audience", "title": "The formal researcher", "shortTitle": "Researcher",
+      "arrivalStatement": "I want to determine what is defined, novel, provable, falsifiable, or useful.",
+      "trigger": "A formal object, conjecture, derivation, or interdisciplinary claim requires evaluation.",
+      "barrier": "Public synthesis can obscure exact claim type, provenance, and proof obligation.",
+      "desiredTransformation": "Identify the exact object, contribution, prior-art relation, and next valid test.",
+      "depthRange": { "entry": "understand", "maximum": "extend" },
+      "useCases": ["evaluate", "extend", "collaborate"], "doorwayIds": ["doorway-formal", "doorway-software"],
+      "coreConcepts": ["formal object", "operator", "claim status", "operating domain", "falsifiability"],
+      "recommendedNodeIds": ["formal-spine", "mathematics-formal-structures", "physics-physical-regimes"],
+      "preferredFormats": ["paper", "technical note", "proof ledger", "experiment repository"],
+      "nextAction": { "label": "Open the research spine", "href": "/research" },
+      "successSignal": "The researcher can isolate and test the actual claim.",
+      "route": [
+        { "id": "claim", "title": "Isolate the claim", "summary": "Separate interpretation, definition, conjecture, theorem, and supported result.", "nodeRefs": [{"id":"formal-spine","role":"core"}] },
+        { "id": "context", "title": "Locate prior art and operating domain", "summary": "State where the object applies and which neighboring frameworks matter.", "nodeRefs": [{"id":"mathematics-formal-structures","role":"support"}] },
+        { "id": "test", "title": "Specify the next valid test", "summary": "Expose proof obligations, counterexamples, experiments, and promotion conditions.", "nodeRefs": [{"id":"physics-physical-regimes","role":"destination"}] }
+      ],
+      "related": ["audience-critic", "audience-partner"]
+    },
+    {
+      "id": "audience-critic", "slug": "critic-reviewer", "type": "audience", "title": "The critic, reviewer, and replicator", "shortTitle": "Critic",
+      "arrivalStatement": "I want to test whether the work withstands serious scrutiny.",
+      "trigger": "A consequential claim needs independent criticism or reproduction.",
+      "barrier": "The actual claim is difficult to separate from surrounding rhetoric or synthesis.",
+      "desiredTransformation": "Criticize or reproduce the exact claim with access to provenance, limits, and correction history.",
+      "depthRange": { "entry": "evaluate", "maximum": "extend" },
+      "useCases": ["evaluate", "replicate"], "doorwayIds": ["doorway-formal", "doorway-institutions"],
+      "coreConcepts": ["claim ceiling", "provenance", "contradiction", "negative result", "supersession"],
+      "recommendedNodeIds": ["claim-ledger", "contradiction-register", "corpus-operations"],
+      "preferredFormats": ["critic packet", "source manifest", "reproduction guide", "audit report"],
+      "nextAction": { "label": "Inspect claims and evidence", "href": "/review" },
+      "successSignal": "Agreement is unnecessary; informed criticism becomes easier and more precise.",
+      "route": [
+        { "id": "trace", "title": "Trace the claim", "summary": "Locate source, inference, status, operating domain, and current wording.", "nodeRefs": [{"id":"claim-ledger","role":"core"}] },
+        { "id": "stress", "title": "Stress the boundaries", "summary": "Search for compression loss, contradiction, unsupported promotion, and failure cases.", "nodeRefs": [{"id":"contradiction-register","role":"core"}] },
+        { "id": "record", "title": "Record criticism and repair", "summary": "Preserve objections, responses, negative results, and supersession without silent reconciliation.", "nodeRefs": [{"id":"corpus-operations","role":"destination"}] }
+      ],
+      "related": ["audience-researcher"]
+    },
+    {
+      "id": "audience-partner", "slug": "collaborator-partner", "type": "audience", "title": "The collaborator, partner, or supporter", "shortTitle": "Partner",
+      "arrivalStatement": "I see potential alignment and need to understand where I can contribute.",
+      "trigger": "A program, product, funding opportunity, or institutional need appears aligned.",
+      "barrier": "The lab's breadth makes the bounded opportunity difficult to see.",
+      "desiredTransformation": "Understand the program architecture and a specific, responsible contribution path.",
+      "depthRange": { "entry": "understand", "maximum": "extend" },
+      "useCases": ["collaborate", "support", "build"], "doorwayIds": ["doorway-institutions", "doorway-formal", "doorway-software"],
+      "coreConcepts": ["program boundary", "maturity", "need", "responsibility", "witness artifact"],
+      "recommendedNodeIds": ["research-programs", "products-testbeds", "lab-overview"],
+      "preferredFormats": ["program brief", "pilot proposal", "roadmap", "partnership memo"],
+      "nextAction": { "label": "Review collaboration opportunities", "href": "/collaborate" },
+      "successSignal": "The partner can name the bounded opportunity, contribution, risk, and expected output.",
+      "route": [
+        { "id": "alignment", "title": "Locate genuine alignment", "summary": "Match the partner's capability and need to an active program rather than the whole lab.", "nodeRefs": [{"id":"lab-overview","role":"core"}] },
+        { "id": "scope", "title": "Bound the collaboration", "summary": "Declare deliverable, decision rights, risk, source boundary, and review gate.", "nodeRefs": [{"id":"research-programs","role":"core"}] },
+        { "id": "witness", "title": "Define the witness artifact", "summary": "Specify what publication, prototype, dataset, pilot, or institutional change will demonstrate completion.", "nodeRefs": [{"id":"products-testbeds","role":"destination"}] }
+      ],
+      "related": ["audience-builder", "audience-researcher"]
+    }
+  ]
+}

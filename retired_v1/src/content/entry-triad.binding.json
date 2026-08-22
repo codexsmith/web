@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "boundary-first.binding.entry-triad.v1",
+  "bindingProtocol": {
+    "id": "bfl-entry-triad",
+    "version": "0.1.0",
+    "title": "People · Problem · Repair",
+    "status": "draft",
+    "invariant": "Every entrance begins with a different boundary while preserving access to the same body of work."
+  },
+  "projection": {
+    "pattern": "three-part-instrument",
+    "eyebrow": "A Boundary First entrance",
+    "title": "Begin where the boundary is clearest.",
+    "introduction": "With the people living the consequence, the problem asking to be named, or the repair that restores a path.",
+    "instruction": "Choose one part of the instrument. You can return and enter another way at any time."
+  },
+  "routes": [
+    {
+      "id": "people",
+      "label": "People",
+      "question": "Who is here?",
+      "description": "Begin with the person, role, responsibility, or consequence already in view.",
+      "href": "/audience",
+      "bridge": "who",
+      "canonicalNodeIds": [
+        "identity",
+        "on-ramps",
+        "constructive-humanist-agentics"
+      ]
+    },
+    {
+      "id": "problem",
+      "label": "Problem",
+      "question": "What happened?",
+      "description": "Begin with the pressure, failure, contradiction, or boundary asking to be named.",
+      "href": "/problem",
+      "bridge": "what",
+      "canonicalNodeIds": [
+        "boundary-theory",
+        "representational-mechanics",
+        "systems-criticism"
+      ]
+    },
+    {
+      "id": "repair",
+      "label": "Repair",
+      "question": "What restores the path?",
+      "description": "Begin with the method, instrument, and governed work of making consequence repairable.",
+      "href": "/learn",
+      "bridge": "how",
+      "canonicalNodeIds": ["bfe", "corpus", "identity"]
+    }
+  ],
+  "validation": {
+    "requiredRouteIds": ["people", "problem", "repair"],
+    "accessibilityConstraints": [
+      "each-slice-is-a-native-link",
+      "visible-label-and-question",
+      "non-color-route-identity",
+      "reduced-motion-compatible"
+    ]
+  }
+}

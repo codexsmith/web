@@ -1,0 +1,36 @@
+artifact_set: boundary_first_labs_social_lawful_arc
+version: 0.1
+captured_date: 2026-08-01
+institution: Boundary First Labs
+source_scope:
+  - current_conversation
+  - distinction_theory_unified_spine_v0_7_0.md
+  - on_ramps_to_distinction_theory_v_0_2_revised.md
+  - distinction_theory_public_face_root_audit_v0_1.md
+  - distinction_theory_academic_publication_audit_v0_1.md
+  - refined_corpus_next_work_queue_v0_2.md
+  - Boundary First Labs Structure.txt
+  - Corpus Forge Pipeline Setup.txt
+claim_ceiling: conceptual_framework_and_operational_program
+human_promotion_required: true
+primary_outputs:
+  - executive_synthesis
+  - canonical_theses
+  - social_lawful_doctrine
+  - economic_mechanics
+  - consequence_accounting
+  - business_agentics
+  - digital_governance
+  - anonymity_dilemma
+  - scientific_method_refinement
+  - public_on_ramp
+  - provenance_narrative
+  - critique_and_claim_firewalls
+  - publication_plan
+  - tasks_and_goals
+operational_templates:
+  - consequence_accounting_ledger
+  - agency_laundering_trace
+  - boundary_first_inquiry
+  - social_lawfulness_audit
+promotion_status: candidate_packet_for_corpus_forge

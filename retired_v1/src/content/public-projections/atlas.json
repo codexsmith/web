@@ -1,0 +1,569 @@
+{
+  "projectionVersion": "1.0.0",
+  "kind": "atlas",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "payload": {
+    "versionPolicy": {
+      "current": "/map",
+      "refined": "/map/refined",
+      "rule": "The current Atlas remains available while the refined experience is reviewed for semantic and accessibility parity."
+    },
+    "experienceArchitecture": {
+      "status": "working implementation guidance; historical user preferences integrated with current BFL UX-family architecture",
+      "publicSurface": false,
+      "intentRefs": [
+        "phr_2b2005d41d22"
+      ],
+      "intent": [
+        "My work has now branched from pure academic into nearly every other discipline and public facing artifacts. I need a website that is MINE and me. Not just some site"
+      ],
+      "coreRules": {
+        "semanticContinuity": "One semantic world may be projected differently by audience/task; visual layers must not silently become independent content authorities.",
+        "progressiveTopologyRefs": [
+          "phr_93d0c5b10460",
+          "phr_0c8066704a47",
+          "phr_5cb6947351da"
+        ],
+        "progressiveTopology": [
+          "Bubbles first, topology later.",
+          "The landing page should feel like walking up to a clean map table, not opening a systems-engineering dashboard.",
+          "Soft constellation first, formal topology later."
+        ],
+        "legibilityBeforeDensity": true,
+        "graphAsUXNotGraphAsDecoration": true
+      },
+      "depthLevels": [
+        {
+          "level": 0,
+          "id": "landing-intro",
+          "preferredGrammar": "bubble-constellation",
+          "edgePolicy": "none or extremely faint proximity cues",
+          "purpose": "orientation, invitation, breadth without topology overload",
+          "sourceDirectiveRefs": [
+            "phr_a2cbae6a3f72",
+            "phr_c3f32f250063",
+            "phr_93d0c5b10460",
+            "phr_0c8066704a47",
+            "phr_5cb6947351da"
+          ],
+          "sourceDirective": [
+            "Smith-chart / knowledge-graph feel with a legible presentation of the material.",
+            "Pure bubble chart for the landing and intro page; save edge charts for deeper layers.",
+            "Bubbles first, topology later.",
+            "The landing page should feel like walking up to a clean map table, not opening a systems-engineering dashboard.",
+            "Soft constellation first, formal topology later."
+          ]
+        },
+        {
+          "level": 1,
+          "id": "domain-intro",
+          "preferredGrammar": "radial / segmented / blooming chapter view",
+          "edgePolicy": "bounded local relationships only",
+          "purpose": "structure one selected domain while preserving spatial orientation",
+          "status": "archive-derived synthesis; human design review required"
+        },
+        {
+          "level": 2,
+          "id": "deep-atlas",
+          "preferredGrammar": "knowledge graph / Smith-chart-inspired relational view",
+          "edgePolicy": "explicit typed topology permitted",
+          "purpose": "claims, artifacts, papers, definitions, experiments, citations, provenance, and deep relationships",
+          "sourceDirectiveRefs": [
+            "phr_21d3a472b2c0",
+            "phr_a2cbae6a3f72",
+            "phr_c3f32f250063"
+          ],
+          "sourceDirective": [
+            "Graph as UX is probably the closest to what I have tried to do before.",
+            "Smith-chart / knowledge-graph feel with a legible presentation of the material.",
+            "Pure bubble chart for the landing and intro page; save edge charts for deeper layers."
+          ]
+        }
+      ],
+      "visualRegisters": {
+        "draftingAtlas": {
+          "keywords": [
+            "architectural",
+            "drafting-table",
+            "geometric",
+            "blueprint-like",
+            "decomposed",
+            "frayed",
+            "visually-segmented",
+            "soft",
+            "circular",
+            "spatial"
+          ],
+          "sourceDirectiveRefs": [
+            "phr_88f78008dd96",
+            "phr_bab943022c15"
+          ],
+          "sourceDirective": [
+            "Architectural draftsman / drawing-table feel.",
+            "More geometric, more blueprint-like, more decomposed, more \"frayed,\" visually segmented, softer, more circular and spatial."
+          ]
+        },
+        "feralCyber": {
+          "keywords": [
+            "cyber",
+            "space",
+            "feral",
+            "cyberfreak",
+            "void-born"
+          ],
+          "sourceDirectiveRefs": [
+            "phr_2975f8f0ef51",
+            "phr_89ec81658122"
+          ],
+          "sourceDirective": [
+            "Feral, cyberfreak, void-born side.",
+            "Cyber / space feel."
+          ]
+        },
+        "spatialPresentation": {
+          "keywords": [
+            "Prezi-inspired",
+            "bubble-constellation",
+            "radial-bloom",
+            "knowledge-graph",
+            "Smith-chart-inspired"
+          ],
+          "sourceDirectiveRefs": [
+            "phr_7266e62ad84a",
+            "phr_a2cbae6a3f72",
+            "phr_c3f32f250063"
+          ],
+          "sourceDirective": [
+            "Depart from conventional web design toward a Prezi-style spatial presentation interface.",
+            "Smith-chart / knowledge-graph feel with a legible presentation of the material.",
+            "Pure bubble chart for the landing and intro page; save edge charts for deeper layers."
+          ]
+        }
+      },
+      "technologyMotifs": {
+        "status": "inspiration / implementation options, not hard dependencies",
+        "items": [
+          "WebGL",
+          "D3",
+          "graph UX",
+          "spatial zoom/pan",
+          "radial layouts"
+        ]
+      },
+      "guardrails": [
+        "Do not expose full edge topology before the visitor has orientation.",
+        "Do not let motion or spatial novelty reduce accessibility or textual legibility.",
+        "Do not make the public interface require theory fluency.",
+        "Preserve semantic identity and provenance across every projection.",
+        "Use the feral/cyber register as a valid projection, not as the only institutional voice."
+      ]
+    },
+    "atlassification": {
+      "titleRefs": [
+        "phr_e0a9ccc9ac2b"
+      ],
+      "title": [
+        "Atlassification"
+      ],
+      "headlineRefs": [
+        "phr_c8b90f41257b"
+      ],
+      "headline": [
+        "A map answers one question. An atlas lets you keep asking."
+      ],
+      "status": "working BFL term; public concept suitable for careful introduction, formal definition still under development",
+      "provenance": "Derived from recent BFL research conversations and atlas/workbench UX development; not yet promoted as a settled external scientific term.",
+      "workingDefinitionRefs": [
+        "phr_83ada98e4a37"
+      ],
+      "workingDefinition": [
+        "Atlassification is the deliberate construction of a coherent, navigable representation of a domain from distributed distinctions, relations, states, boundaries, transformations, provenance, scales, and unresolved defects."
+      ],
+      "shortDefinitionRefs": [
+        "phr_38c702a79474"
+      ],
+      "shortDefinition": [
+        "Turn structured knowledge into a navigable world-model without pretending the world-model is the world."
+      ],
+      "whyAtlasNotMap": [
+        "A map is usually one projection selected for one purpose.",
+        "An atlas preserves multiple related projections and the relationships among them.",
+        "An atlas can expose local detail while retaining global orientation.",
+        "An atlas can show where knowledge changes by scale, context, time, representation, or observer.",
+        "An atlas can preserve blank regions, disputed borders, uncertain relations, and unresolved defects instead of filling them with false certainty."
+      ],
+      "whatGetsAtlassified": [
+        "objects",
+        "relations",
+        "boundaries",
+        "state spaces",
+        "admissible and inadmissible transitions",
+        "invariants",
+        "agents and authority",
+        "observations and evidence",
+        "claims and claim status",
+        "provenance",
+        "contradictions",
+        "defects",
+        "repair paths",
+        "scale changes",
+        "alternative projections",
+        "known unknowns"
+      ],
+      "mechanic": [
+        {
+          "stepRefs": [
+            "phr_b3d0a8449e07"
+          ],
+          "step": [
+            "Collect"
+          ],
+          "meaningRefs": [
+            "phr_dd82680061e5"
+          ],
+          "meaning": [
+            "Gather observations, sources, objects, and existing representations without immediately flattening them."
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_a66bc3d8c18a"
+          ],
+          "step": [
+            "Distinguish"
+          ],
+          "meaningRefs": [
+            "phr_b4e9d5379fe3"
+          ],
+          "meaning": [
+            "Separate objects, relation types, statuses, domains, scales, and uncertainty that should not be collapsed."
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_6bdd4db977b0"
+          ],
+          "step": [
+            "Bind"
+          ],
+          "meaningRefs": [
+            "phr_8a24e6661862"
+          ],
+          "meaning": [
+            "Declare which representations refer to the same underlying object or relation and preserve provenance."
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_84774ba193af"
+          ],
+          "step": [
+            "Relate"
+          ],
+          "meaningRefs": [
+            "phr_9aa9cefe3072"
+          ],
+          "meaning": [
+            "Type the connections: causal, compositional, spatial, temporal, institutional, evidentiary, analogical, contradictory, or otherwise."
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_98f54143ab4e"
+          ],
+          "step": [
+            "Project"
+          ],
+          "meaningRefs": [
+            "phr_46eb5d351fec"
+          ],
+          "meaning": [
+            "Produce purpose-specific views without letting a view silently become the canonical whole."
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_fb6aa5c2f5f1"
+          ],
+          "step": [
+            "Navigate"
+          ],
+          "meaningRefs": [
+            "phr_af68240df146"
+          ],
+          "meaning": [
+            "Allow movement among scale, context, sequence, hierarchy, neighborhood, and alternative representations while preserving orientation."
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_a94a8fe5ccb1"
+          ],
+          "step": [
+            "Test"
+          ],
+          "meaningRefs": [
+            "phr_b4cbf56d7780"
+          ],
+          "meaning": [
+            "Ask whether the atlas improves prediction, explanation, discovery, coordination, diagnosis, comparison, or repair."
+          ]
+        },
+        {
+          "stepRefs": [
+            "phr_a5062f56eb9c"
+          ],
+          "step": [
+            "Revise"
+          ],
+          "meaningRefs": [
+            "phr_e4c5fc363350"
+          ],
+          "meaning": [
+            "When reality or criticism exposes a missing state, bad boundary, false relation, or unusable projection, repair the atlas."
+          ]
+        }
+      ],
+      "publicAnalogyRefs": [
+        "phr_66b70fdb564a"
+      ],
+      "publicAnalogy": [
+        "A city atlas does not contain the city. It lets different people navigate streets, neighborhoods, transit, parcels, elevation, history, and jurisdiction through related projections. BFL uses the same general idea for complex knowledge: preserve enough structure that different questions can be asked without rebuilding the world from scratch."
+      ],
+      "relationshipToBoundaryFirstUXRefs": [
+        "phr_b2e5fed7196f"
+      ],
+      "relationshipToBoundaryFirstUX": [
+        "Atlassification gives Boundary First UX a clear institutional purpose: interfaces should support lawful movement among representations and levels of resolution while preserving location, provenance, active filters, scale, and paths of return."
+      ],
+      "relationshipToASMRefs": [
+        "phr_683d89899a51"
+      ],
+      "relationshipToASM": [
+        "Agentic Scientific Method produces and repairs bounded representations under pressure from reality. Atlassification organizes those representations, traces, competing models, and unresolved regions so inquiry can continue without losing where each conclusion came from."
+      ],
+      "relationshipToInstitutionRefs": [
+        "phr_926b4cc49d48"
+      ],
+      "relationshipToInstitution": [
+        "An institution is always acting through some atlas of the world, even when that atlas is only a database schema, policy manual, org chart, budget, case file, dashboard, or collection of tacit assumptions. Atlassification makes that operative world-model visible enough to inspect and revise."
+      ],
+      "publicQuestions": [
+        "What does this institution believe exists?",
+        "How are those things related?",
+        "Which distinctions are visible?",
+        "Which boundaries change authority or consequence?",
+        "What is represented at this scale but hidden at another?",
+        "Where did this claim or classification come from?",
+        "Which parts are uncertain or disputed?",
+        "Where does the atlas stop?",
+        "What would force us to redraw it?"
+      ],
+      "firewallsRefs": [
+        "phr_f8666cd7db72",
+        "phr_d47336b8b366",
+        "phr_520d020d8373",
+        "phr_86926e4b528a",
+        "phr_3aa2078defd1",
+        "phr_84b3c4debea3",
+        "phr_93ec56f69c65"
+      ],
+      "firewalls": [
+        "Atlassification is not cartographic omniscience.",
+        "The atlas is not the territory.",
+        "A coherent atlas can still be wrong.",
+        "More nodes do not automatically mean more knowledge.",
+        "Navigation is not validation.",
+        "Visual elegance is not evidence.",
+        "A useful atlas must preserve uncertainty, provenance, boundary conditions, and revision paths."
+      ]
+    },
+    "publicMethodStack": {
+      "titleRefs": [
+        "phr_f6283f7a0cfe"
+      ],
+      "title": [
+        "The Boundary First Method Stack"
+      ],
+      "headlineRefs": [
+        "phr_3d599ffc128a"
+      ],
+      "headline": [
+        "Learn carefully. Map what matters. Act where responsibility can still reach."
+      ],
+      "purposeRefs": [
+        "phr_ac9bf8d62a22"
+      ],
+      "purpose": [
+        "Boundary First Labs uses several related layers because one word should not be asked to carry the institution, the theory, the research method, the representational tools, and the applied practice at once. The layers are meant to be traversable by ordinary readers without requiring formal theory first."
+      ],
+      "publicCompression": [
+        {
+          "id": "boundary-first",
+          "labelRefs": [
+            "phr_320542a7330c"
+          ],
+          "label": [
+            "Boundary First"
+          ],
+          "roleRefs": [
+            "phr_9c6b4288ee16"
+          ],
+          "role": [
+            "Doctrine / operational method"
+          ],
+          "questionRefs": [
+            "phr_51a10c498bb9"
+          ],
+          "question": [
+            "What must remain visible and protected before we act?"
+          ],
+          "oneLineRefs": [
+            "phr_3bb4ab7d6e31"
+          ],
+          "oneLine": [
+            "Declare the boundary. Preserve the invariant. Expose the defect. Restore the path to repair."
+          ],
+          "publicVerbRefs": [
+            "phr_a4880e8741d2"
+          ],
+          "publicVerb": [
+            "Govern"
+          ],
+          "status": "published public method derived from the Boundary Theory architecture"
+        },
+        {
+          "id": "agentic-scientific-method",
+          "labelRefs": [
+            "phr_be985d2fdf96"
+          ],
+          "label": [
+            "Agentic Scientific Method"
+          ],
+          "roleRefs": [
+            "phr_82667714fa5f"
+          ],
+          "role": [
+            "Inquiry / epistemic method"
+          ],
+          "questionRefs": [
+            "phr_77e666c1a337"
+          ],
+          "question": [
+            "How do we learn without confusing our representation for reality?"
+          ],
+          "oneLineRefs": [
+            "phr_b1113ace27c0"
+          ],
+          "oneLine": [
+            "Bound. Load. Trace. Test. Repair. Close—provisionally."
+          ],
+          "publicVerbRefs": [
+            "phr_7dca5d4cddf5"
+          ],
+          "publicVerb": [
+            "Learn"
+          ],
+          "status": "working research and public-method program"
+        },
+        {
+          "id": "atlassification",
+          "labelRefs": [
+            "phr_e0a9ccc9ac2b"
+          ],
+          "label": [
+            "Atlassification"
+          ],
+          "roleRefs": [
+            "phr_6b567062a899"
+          ],
+          "role": [
+            "Representational operation"
+          ],
+          "questionRefs": [
+            "phr_20e3800a4ff9"
+          ],
+          "question": [
+            "How do many tested distinctions become something a person can actually navigate?"
+          ],
+          "oneLineRefs": [
+            "phr_d458cc9092b9"
+          ],
+          "oneLine": [
+            "Turn scattered observations, relations, boundaries, and open questions into a coherent atlas without pretending the atlas is the territory."
+          ],
+          "publicVerbRefs": [
+            "phr_37745ed7a0f0"
+          ],
+          "publicVerb": [
+            "Map"
+          ],
+          "status": "working BFL term; conversation-derived and still under formalization"
+        },
+        {
+          "id": "institutional-design",
+          "labelRefs": [
+            "phr_8c5082f5bc8a"
+          ],
+          "label": [
+            "Boundary-First Institutional Design"
+          ],
+          "roleRefs": [
+            "phr_2b5f3a5d98db"
+          ],
+          "role": [
+            "Consequence-bearing application"
+          ],
+          "questionRefs": [
+            "phr_900993f5cc53"
+          ],
+          "question": [
+            "How does a representation remain answerable once an institution acts through it?"
+          ],
+          "oneLineRefs": [
+            "phr_14f144fc49d8"
+          ],
+          "oneLine": [
+            "Keep authority, evidence, affected parties, contestability, maintenance, responsibility, and repair in the same living system."
+          ],
+          "publicVerbRefs": [
+            "phr_80754af91bfb"
+          ],
+          "publicVerb": [
+            "Build"
+          ],
+          "status": "institutional doctrine / applied design program"
+        }
+      ],
+      "cycle": [
+        "BOUND — decide what is being studied or governed, and what crosses the boundary.",
+        "DISTINGUISH — identify differences that change consequence.",
+        "REPRESENT — construct a usable schema rather than pretending to copy the whole world.",
+        "ATLAS — organize states, relations, pathways, scales, provenance, and unknowns into a navigable representation.",
+        "LOAD — expose the representation to pressure, variation, alternatives, use, criticism, or intervention.",
+        "TRACE — preserve what actually happened.",
+        "TEST — compare expectation, representation, observation, consequence, and competing explanations.",
+        "EXPOSE DEFECT — locate where reality does not fit the current representation.",
+        "REPAIR — revise the model, boundary, process, institution, or responsibility path.",
+        "CLOSE PROVISIONALLY — stabilize only what has survived the declared testing regime.",
+        "PROMOTE — allow stable structure to become a reusable primitive, rule, tool, or institutional capability.",
+        "RECURSE — use the repaired result as the starting boundary for the next inquiry."
+      ],
+      "relationship": {
+        "plainLanguageRefs": [
+          "phr_523839464d49"
+        ],
+        "plainLanguage": [
+          "Boundary First protects the inquiry from losing consequential distinctions. Agentic Scientific Method gives the inquiry a disciplined way to encounter reality. Atlassification gives the resulting knowledge navigable form. Institutional design governs what happens when people begin acting through that form."
+        ],
+        "compact": "Boundary First governs the boundary. Agentic Scientific Method learns inside it. Atlassification makes the learned structure navigable. Institutional design keeps action answerable after the map becomes operational."
+      }
+    }
+  }
+}

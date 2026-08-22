@@ -1,0 +1,158 @@
+{
+  "packet": "bfl_historical_lineage_presentation_packet_v0_4",
+  "version": "0.4.0",
+  "generated": "2026-07-26",
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 5393,
+      "sha256": "821148c134e25146ec4f9910b7c4c72d60389be151a50ea3a1bf121bc56d8d9e"
+    },
+    {
+      "name": "bfl_context_halo_ordering_placement_spec_v0_1.md",
+      "bytes": 4756,
+      "sha256": "e1219a136a35ff6788e5abb2c7ed32777b29c9ef5926dc65c0cca514d4de7731"
+    },
+    {
+      "name": "bfl_context_halo_reference_representational_mechanics_v0_1.json",
+      "bytes": 75002,
+      "sha256": "a4548a157c6b18c6e2b9ffe08bbe521c1008dd9de5e362719afbf3170a48d4e8"
+    },
+    {
+      "name": "bfl_context_halo_relation_schema_v0_1.json",
+      "bytes": 4349,
+      "sha256": "67b1e7223db007609995dc67f013d899fb2faab87dc9583c3c1066f9af422d39"
+    },
+    {
+      "name": "bfl_domain_family_palette_v0_1.json",
+      "bytes": 3050,
+      "sha256": "1fd7bb62e5e1c65effcbec34e202e5fadd1e8b45edcd52ae726e80260bb3daf6"
+    },
+    {
+      "name": "bfl_historical_lineage_editorial_standard_v0_1.md",
+      "bytes": 4056,
+      "sha256": "bd27a7a19b15776e33bfc30c0b78fae5f7ee75b0e8a2d3e915e1223615c1c44e"
+    },
+    {
+      "name": "bfl_historical_lineage_reference_seed_v0_1.json",
+      "bytes": 235959,
+      "sha256": "6318b414b4ffa13a5b1bc903b26e3918123361dd499b9e675c75e7ebac1d77b2"
+    },
+    {
+      "name": "bfl_historical_lineage_relation_schema_v0_1.json",
+      "bytes": 3122,
+      "sha256": "65bc1422d3fa7dc31a318be42b6cd61c9d687a0942c8669d7fb1f4030dbb6817"
+    },
+    {
+      "name": "bfl_historical_lineage_source_audit_v0_1.md",
+      "bytes": 1679,
+      "sha256": "1c0e957f5fbe7f6abbf126fe4dab002aeaa5364e0ad57a2128034f57880afd59"
+    },
+    {
+      "name": "bfl_historical_lineage_ui_component_contracts_v0_1.md",
+      "bytes": 3814,
+      "sha256": "be097bcfbb60ea0ac4bb0baa075db181507ccdb9f25271f578afa418ef5e8f40"
+    },
+    {
+      "name": "bfl_introductory_experience_config_v0_4.json",
+      "bytes": 36203,
+      "sha256": "041964cdbe4ca8bb38dad79b67cd7c6eb0bffd1b873d9bf638d949a11eb46859"
+    },
+    {
+      "name": "bfl_introductory_experience_mermaid_wireframes_v0_4.md",
+      "bytes": 32865,
+      "sha256": "eea27db80e7e9412dbca9fab5760d13cc8d9061532f064b9b14a47e661d0036e"
+    },
+    {
+      "name": "bfl_introductory_path_lineage_expansion_v0_1.json",
+      "bytes": 12701,
+      "sha256": "1c20e06d8b930a3fe04bd58bb4919c6fce669ff7d5409076eacc049d12e7eb40"
+    },
+    {
+      "name": "bfl_project_index_seed_v0_1.json",
+      "bytes": 6672,
+      "sha256": "28ea791842199cdfdf54509b37959ae94bfd671a9850ccc0b2a60724c6c5e0be"
+    },
+    {
+      "name": "bfl_projects_products_migration_plan_v0_1.md",
+      "bytes": 3913,
+      "sha256": "dbbf77a68a0e9cbb40a1804e2755493f1dad6157edddcb9b708c97f5df5f4c90"
+    },
+    {
+      "name": "bfl_work_entity_model_schema_v0_1.json",
+      "bytes": 10908,
+      "sha256": "a0c78c699734e2a08d06e31143e9af030bf673b9477dbcd90cb35013b79db0d9"
+    },
+    {
+      "name": "bfl_work_layer_ui_component_contracts_v0_3.md",
+      "bytes": 11227,
+      "sha256": "4a0d43e38314e6771d5d138cbf1466110b5a0a9f8612e13d2340b5b62e824fbe"
+    },
+    {
+      "name": "bfl_work_portfolio_migration_seed_v0_1.json",
+      "bytes": 42282,
+      "sha256": "46088d8a5becf92c147494c9e03b3e33989208faf0516f6b7c27d15c9a419288"
+    }
+  ],
+  "validation": [
+    {
+      "file": "bfl_context_halo_reference_representational_mechanics_v0_1.json",
+      "sha256": "a4548a157c6b18c6e2b9ffe08bbe521c1008dd9de5e362719afbf3170a48d4e8",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_context_halo_relation_schema_v0_1.json",
+      "sha256": "67b1e7223db007609995dc67f013d899fb2faab87dc9583c3c1066f9af422d39",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_domain_family_palette_v0_1.json",
+      "sha256": "1fd7bb62e5e1c65effcbec34e202e5fadd1e8b45edcd52ae726e80260bb3daf6",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_historical_lineage_reference_seed_v0_1.json",
+      "sha256": "6318b414b4ffa13a5b1bc903b26e3918123361dd499b9e675c75e7ebac1d77b2",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_historical_lineage_relation_schema_v0_1.json",
+      "sha256": "65bc1422d3fa7dc31a318be42b6cd61c9d687a0942c8669d7fb1f4030dbb6817",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_introductory_experience_config_v0_4.json",
+      "sha256": "041964cdbe4ca8bb38dad79b67cd7c6eb0bffd1b873d9bf638d949a11eb46859",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_introductory_path_lineage_expansion_v0_1.json",
+      "sha256": "1c20e06d8b930a3fe04bd58bb4919c6fce669ff7d5409076eacc049d12e7eb40",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_project_index_seed_v0_1.json",
+      "sha256": "28ea791842199cdfdf54509b37959ae94bfd671a9850ccc0b2a60724c6c5e0be",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_work_entity_model_schema_v0_1.json",
+      "sha256": "a0c78c699734e2a08d06e31143e9af030bf673b9477dbcd90cb35013b79db0d9",
+      "jsonValid": true
+    },
+    {
+      "file": "bfl_work_portfolio_migration_seed_v0_1.json",
+      "sha256": "46088d8a5becf92c147494c9e03b3e33989208faf0516f6b7c27d15c9a419288",
+      "jsonValid": true
+    }
+  ],
+  "crossFileValidation": {
+    "lineageEntries": 122,
+    "canonicalNodeHistoryEntries": 115,
+    "additionalEditorialCandidates": 7,
+    "pathModules": 8,
+    "schemaErrors": 0,
+    "missingReferences": 0,
+    "status": "passed"
+  }
+}

@@ -1,0 +1,206 @@
+Listed directory Import
+Ran command: `python -c "
+import zipfile, os
+
+import_dir = r'h:\Boundary First Institute\Import'
+zips = [f for f in os.listdir(import_dir) if f.endswith('.zip')]
+
+for z in zips:
+    zpath = os.path.join(import_dir, z)
+    print('==================================================')
+    print('ZIP:', z)
+    print('==================================================')
+    with zipfile.ZipFile(zpath, 'r') as zf:
+        namelist = zf.namelist()
+        print(f'Total files: {len(namelist)}')
+        for name in namelist[:30]:
+            print('  ', name)
+        if len(namelist) > 30:
+            print(f'  ... and {len(namelist)-30} more files')
+"`
+Ran command: `python -c "
+import zipfile, os
+
+import_dir = r'h:\Boundary First Institute\Import'
+zips = [f for f in os.listdir(import_dir) if f.endswith('.zip')]
+
+for z in zips:
+    zpath = os.path.join(import_dir, z)
+    print('==================================================')
+    print('ZIP:', z)
+    print('==================================================')
+    with zipfile.ZipFile(zpath, 'r') as zf:
+        namelist = zf.namelist()
+        for name in namelist:
+            if any(k in name.lower() for k in ['web', 'ux', 'plan', 'spatial', 'ui', 'roadmap', 'spec', 'design', 'architecture', 'front', 'page', 'site', 'layout', 'app']):
+                print('  ', name)
+"`
+Ran command: `python -c "
+import zipfile, os
+
+zpath = r'h:\Boundary First Institute\Import\boundary_first_spatial_ux_design_archive_2026-08-01.zip'
+
+with zipfile.ZipFile(zpath, 'r') as zf:
+    for name in zf.namelist():
+        print(name)
+"`
+Ran command: `python -c "
+import zipfile
+
+zpath = r'h:\Boundary First Institute\Import\boundary_first_spatial_ux_design_archive_2026-08-01.zip'
+
+with zipfile.ZipFile(zpath, 'r') as zf:
+    readme = zf.read('boundary_first_spatial_ux_design_archive_2026-08-01/README.md').decode('utf-8')
+    print('=== README.md ===')
+    print(readme[:2000])
+"`
+Ran command: `python -c "
+import zipfile, os
+
+import_dir = r'h:\Boundary First Institute\Import'
+zips = [f for f in os.listdir(import_dir) if f.endswith('.zip')]
+
+for z in zips:
+    zpath = os.path.join(import_dir, z)
+    with zipfile.ZipFile(zpath, 'r') as zf:
+        print(f'=== {z} ({len(zf.namelist())} files) ===')
+        readmes = [n for n in zf.namelist() if 'readme' in n.lower()]
+        for r in readmes:
+            print('--- ' + r + ' ---')
+            print(zf.read(r).decode('utf-8', errors='ignore')[:1000])
+"`
+Ran command: `python -c "
+import zipfile
+
+zpath = r'h:\Boundary First Institute\Import\boundary_first_spatial_ux_design_archive_2026-08-01.zip'
+
+with zipfile.ZipFile(zpath, 'r') as zf:
+    for path in ['plans/operational_plan.md', 'plans/implementation_roadmap.md', 'plans/feature_catalog.md', 'plans/requirements_specification.md']:
+        full_path = 'boundary_first_spatial_ux_design_archive_2026-08-01/' + path
+        print('==================================================')
+        print(path)
+        print('==================================================')
+        content = zf.read(full_path).decode('utf-8', errors='ignore')
+        print(content[:3000])
+"`
+Ran command: `python -c "
+import zipfile
+
+zpath = r'h:\Boundary First Institute\Import\boundary_first_spatial_ux_design_archive_2026-08-01.zip'
+
+with zipfile.ZipFile(zpath, 'r') as zf:
+    full_path = 'boundary_first_spatial_ux_design_archive_2026-08-01/plans/operational_plan.md'
+    content = zf.read(full_path).decode('utf-8', errors='ignore')
+    print(content)
+"`
+Ran command: `python -c "
+import zipfile, sys
+sys.stdout.reconfigure(encoding='utf-8')
+
+zpath = r'h:\Boundary First Institute\Import\boundary_first_spatial_ux_design_archive_2026-08-01.zip'
+
+with zipfile.ZipFile(zpath, 'r') as zf:
+    full_path = 'boundary_first_spatial_ux_design_archive_2026-08-01/plans/operational_plan.md'
+    content = zf.read(full_path).decode('utf-8', errors='ignore')
+    print(content)
+"`
+
+Yes! The large web dev plan is located inside **`boundary_first_spatial_ux_design_archive_2026-08-01.zip`** (26.4 MB), right inside your `Import` folder.
+
+Below is a detailed review of this archive, along with a summary of the contents found across all 6 zip packages in `h:\Boundary First Institute\Import`.
+
+---
+
+## 🎯 Primary Web Dev Plan: `boundary_first_spatial_ux_design_archive_2026-08-01.zip`
+
+This archive is a **complete pre-implementation master package** for the **Boundary First Labs / Institute web application and spatial UX ecosystem**. It reframes the public web presence from a flat academic layout into an interactive institutional entrance, guided Atlas, governed research workbench, and spatial research environment.
+
+### 🏛️ Web Application Architecture & Product Modules
+
+1. **Adaptive Public Front Door**
+   - Meets visitors through 6 recognizable role-based entry paths (*Systems/Software, Building/Engineering, Research/Science, Policy/Institutions, Physics/Math, Learning*).
+   - Establishes institutional identity and purpose before introducing deep theoretical frameworks.
+
+2. **Atlas Knowledge Environment (Guided Exploration)**
+   - Calm, cluster-first graph overview of the corpus with zoom, pan, minimap, search, and guided camera paths.
+   - Deep typed-edge navigation to explore explicit relationships between concepts and papers without overwhelming the user.
+
+3. **Corpus Forge Workbench (Governed Research-Production Engine)**
+   - A 2D research UI with job intake, pipeline boards (Collect $\rightarrow$ Synthesize $\rightarrow$ Critic $\rightarrow$ Gate), claim ledgers, contradiction logs, repair branches, and human promotion gates.
+   - Publishes both positive work and negative/unfinished results responsibly.
+
+4. **Binding Protocol Studio (Decoupled UI System)**
+   - Separates source schemas, workflow logic, view regions, and presentation components.
+   - Enables the web application to regenerate views dynamically from `.binding.yaml` profiles without custom layout code.
+
+5. **Scientific Method Lens**
+   - 3 synchronized views: *Familiar Method Ring*, *Expanded Forge Lifecycle*, and *Research-State Graph*. Allows researchers to navigate using familiar scientific phases while exposing deeper provenance.
+
+6. **Spatial Research Environment & Pointer (RTS Operations)**
+   - 3D spatial workbench and RTS-like operational overview with a boundary-aware volumetric pointer for inspecting complex multi-layer research graphs.
+
+---
+
+### 📂 Key Specification & Plan Files Inside the Archive
+
+All specs are organized under `boundary_first_spatial_ux_design_archive_2026-08-01/plans/`:
+
+| Document | Scope & Contents |
+|---|---|
+| [`operational_plan.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Integrated master program plan, module inventory (M01–M11), 12 shared design laws, and user journeys. |
+| [`implementation_roadmap.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | 6-phase staged delivery plan (Foundation Kernel $\rightarrow$ 2D Forge Workbench $\rightarrow$ Binding Studio $\rightarrow$ Method Lens $\rightarrow$ Spatial Prototype $\rightarrow$ Spatial Pointer). |
+| [`feature_catalog.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Complete priority matrix (P0–P3) detailing all modules, user values, MVP scopes, and dependencies. |
+| [`requirements_specification.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Functional requirements (FR-001 through FR-015), data models, claim ceilings, and governance rules. |
+| [`binding_protocol_and_schema_plan.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Specification for the `.binding.yaml` schema family and visual component binding rules. |
+| [`rts_interaction_model.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Interaction mechanics for multi-scale navigation, selection groups, minimap, and research status queues. |
+| [`spatial_environment_spec.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Spatial floorplan, visual tokens, room zones (Threshold, Central Workbench, Correspondence Hall, Archive). |
+| [`spatial_pointer_spec.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Ray casting, depth disambiguation, candidate field interaction, and action menus. |
+| [`scientific_method_lens_spec.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | State synchronization across familiar and expanded scientific inquiry lifecycles. |
+| [`research_validation_plan.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Usability testing protocols, validation criteria, and metric targets for web UI and spatial interaction. |
+| [`open_questions_decision_log.md`](file:///h:/Boundary%20First%20Institute/Import/boundary_first_spatial_ux_design_archive_2026-08-01.zip) | Decision record resolving trade-offs between 2D web productivity and 3D spatial immersion. |
+
+---
+
+### 🎨 Visual Artifacts & Concept UI Mockups
+
+The archive also includes 8 high-resolution PNG concept mockups under `artifacts/`:
+
+1. `00_concept_gallery.png` — Overview matrix of the entire web & spatial suite
+2. `01_public_front_door_concept.png` — Adaptive institutional website entrance layout
+3. `02_corpus_forge_living_workbench.png` — 2D web application research workbench UI
+4. `03_atlas_redesign.png` — Atlas cluster graph navigation view
+5. `04_binding_protocol_studio.png` — Protocol mapping UI studio
+6. `05_spatial_environment_isometric.png` — 3D spatial research environment isometric render
+7. `06_spatial_environment_floorplan.png` — 3D spatial environment room floorplan layout
+8. `07_spatial_pointer_model.png` — Volumetric boundary-aware selection pointer model
+
+---
+
+## 📦 Summary of Other Zip Files in `Import`
+
+The remaining 5 zip packages contain supporting theoretical packages, governance frameworks, and operational provenance data that feed into the web platform's content pipeline:
+
+1. **`Boundary_Theory_Conversation_Capture_2026-08-01 (1).zip` (9.9 MB)**
+   - Historical provenance capture containing photos & video storyboard of the pre-AI operational research room, technical talk outlines, philosophy of science abstracts, and research timeline.
+
+2. **`bfl_digital_non_aggression_package_v0_1.zip` (58 KB)**
+   - Governance & research package for AI agent safety, worm defense, and a Digital Non-Aggression / Non-Interference Accord.
+
+3. **`bfl_people_value_consequence_package_v0_1.zip` (54 KB)**
+   - Institutional doctrine package (*"People Make the Value / People Are Not Overhead"*), including essay outlines and public talk architecture.
+
+4. **`boundary_first_labs_consequence_repair_capture_v0_1 (1).zip` (39 KB)**
+   - Productization roadmap & operating spec for AI Repair Loops and consequence-bearing feedback circuits (Lean/Agile/Scrum/Kanban).
+
+5. **`boundary_first_labs_social_lawful_arc_v0_1.zip` (74 KB)**
+   - Comprehensive work package covering social lawfulness, economic concentration, publication plans, and claim ledgers.
+
+---
+
+## 🚀 Suggested Next Steps
+
+If you would like to begin executing or integrating this web plan into your codebase:
+1. **Unpack the Archive:** We can extract `boundary_first_spatial_ux_design_archive_2026-08-01.zip` into a clean working folder (e.g. `h:\Boundary First Institute\Import\spatial_ux_design_archive`).
+2. **Review Initial Slice:** We can review Phase 1 of `implementation_roadmap.md` to begin building the core binding profiles and component schemas for the `Webpage` project.
+
+Let me know how you'd like to proceed!

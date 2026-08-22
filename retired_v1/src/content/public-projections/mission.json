@@ -1,0 +1,708 @@
+{
+  "projectionVersion": "1.0.0",
+  "kind": "mission",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "payload": {
+    "missionPage": {
+      "slug": "/mission",
+      "headlineRefs": [
+        "phr_a8e08b1745ef"
+      ],
+      "headline": [
+        "Keep power coupled to consequence. Expand agency. Build the path to repair."
+      ],
+      "introRefs": [
+        "phr_bbda1e7fad9f"
+      ],
+      "intro": [
+        "Boundary First Labs is an independent public-interest research and engineering laboratory. Its social mission is to help people and institutions build consequential systems that remain answerable to the people and conditions they affect."
+      ],
+      "sections": [
+        "social-mission",
+        "human-agency",
+        "standing-and-recourse",
+        "accessibility",
+        "capability-transfer",
+        "economic-and-household-continuity",
+        "public-trust",
+        "answerable-technology",
+        "public-knowledge",
+        "ecological-and-intergenerational-continuity",
+        "maintenance-and-repair",
+        "how-we-measure-ourselves"
+      ],
+      "closingRefs": [
+        "phr_f90885c644f5"
+      ],
+      "closing": [
+        "World class is what you give the world: more capability, better distinctions, stronger repair paths, and institutions more worthy of the trust placed in them."
+      ]
+    },
+    "socialMission": {
+      "titleRefs": [
+        "phr_c5da34fe2360"
+      ],
+      "title": [
+        "Social Mission"
+      ],
+      "headlineRefs": [
+        "phr_e57144a398da"
+      ],
+      "headline": [
+        "Better systems should leave people with more agency, not more invisible burden."
+      ],
+      "corePropositionRefs": [
+        "phr_7b906cc0fad1"
+      ],
+      "coreProposition": [
+        "The systems that govern people's possibilities should remain answerable to the people, conditions, relationships, and futures that bear their consequences."
+      ],
+      "humanTranslationOfPrimaryHeadlineRefs": [
+        "phr_27cd3789f850"
+      ],
+      "humanTranslationOfPrimaryHeadline": [
+        "If someone bears the consequence, the system needs a way to see them, hear them, explain itself to them, and reach repair."
+      ],
+      "orientation": {
+        "proHumanRefs": [
+          "phr_9fdd3d58cafb"
+        ],
+        "proHuman": [
+          "People are agents, not merely users, workers, patients, consumers, data points, claimants, demographic categories, or administrative roles."
+        ],
+        "proInstitutionRefs": [
+          "phr_2b4a2faccf89"
+        ],
+        "proInstitution": [
+          "Institutions are human tools for carrying purpose, memory, authority, obligation, maintenance, and care across time; BFL seeks to improve them rather than merely oppose them."
+        ],
+        "proProgressRefs": [
+          "phr_e55a6ee1b584"
+        ],
+        "proProgress": [
+          "Scientific and technical capability should expand, while the systems for consequence, responsibility, contestability, maintenance, and repair expand with it."
+        ],
+        "antiSaviorRefs": [
+          "phr_180c1ea8c432"
+        ],
+        "antiSavior": [
+          "BFL should increase people's capacity to understand, decide, contest, act, and repair; it should not create dependency on BFL as a permanent interpreter."
+        ]
+      },
+      "scalesOfHelp": [
+        {
+          "id": "people",
+          "labelRefs": [
+            "phr_ab3ccc8dba2a"
+          ],
+          "label": [
+            "People"
+          ],
+          "promiseRefs": [
+            "phr_7e0725cfdda0"
+          ],
+          "promise": [
+            "Help people understand, navigate, contest, and repair consequential systems that affect their lives."
+          ],
+          "publicLineRefs": [
+            "phr_e255fd9029b8"
+          ],
+          "publicLine": [
+            "You should not need extraordinary power, money, fluency, health, persistence, or luck merely to get a consequential error acknowledged and corrected."
+          ]
+        },
+        {
+          "id": "practitioners-communities",
+          "labelRefs": [
+            "phr_5b56e06ae8f8"
+          ],
+          "label": [
+            "Practitioners & communities"
+          ],
+          "promiseRefs": [
+            "phr_60e399b964cc"
+          ],
+          "promise": [
+            "Give practitioners and communities usable methods for seeing hidden burdens, mapping responsibility, preserving local knowledge, and improving the systems they already inhabit."
+          ],
+          "publicLineRefs": [
+            "phr_8d184a87ef11"
+          ],
+          "publicLine": [
+            "The people closest to a system often carry knowledge the formal representation has forgotten."
+          ]
+        },
+        {
+          "id": "institutions",
+          "labelRefs": [
+            "phr_b58a412866f9"
+          ],
+          "label": [
+            "Institutions"
+          ],
+          "promiseRefs": [
+            "phr_b64de9190402"
+          ],
+          "promise": [
+            "Help institutions represent their real obligations, affected parties, maintenance needs, authority boundaries, and repair paths before defects are displaced onto people."
+          ],
+          "publicLineRefs": [
+            "phr_91aa12d0f43d"
+          ],
+          "publicLine": [
+            "Institutional capacity should reduce the amount of institutional incapacity that people are forced to absorb."
+          ]
+        }
+      ],
+      "missions": [
+        {
+          "id": "agency-dignity",
+          "labelRefs": [
+            "phr_78da417d497f"
+          ],
+          "label": [
+            "Human agency & dignity"
+          ],
+          "humanPromiseRefs": [
+            "phr_1dcd06bc5fde"
+          ],
+          "humanPromise": [
+            "A person remains more than the category through which a system encounters them."
+          ],
+          "failurePatternRefs": [
+            "phr_edc128382ad1"
+          ],
+          "failurePattern": [
+            "A local model becomes the operative identity of the person and constrains options the system cannot adequately represent."
+          ],
+          "boundaryFirstOperation": [
+            "identify the consequential classification",
+            "expose omitted distinctions",
+            "preserve person-versus-profile separation",
+            "create contest and correction paths"
+          ],
+          "publicOutputs": [
+            "agency audits",
+            "category-defect audits",
+            "plain-language institutional explanations",
+            "public doctrine and educational tools"
+          ],
+          "claimPostureRefs": [
+            "phr_e888e5068b8c"
+          ],
+          "claimPosture": [
+            "normative institutional doctrine"
+          ]
+        },
+        {
+          "id": "standing-recourse",
+          "labelRefs": [
+            "phr_991e512ec75b"
+          ],
+          "label": [
+            "Standing, reasons, contestability & recourse"
+          ],
+          "humanPromiseRefs": [
+            "phr_3a69a42fb981"
+          ],
+          "humanPromise": [
+            "If a system materially acts upon you, there should be a meaningful route to understand it, answer it, challenge it, and reach someone capable of changing the outcome."
+          ],
+          "failurePatternRefs": [
+            "phr_a98d89b07c2b"
+          ],
+          "failurePattern": [
+            "classification -> consequence -> no standing -> no appeal -> defect persists"
+          ],
+          "boundaryFirstOperation": [
+            "map representation",
+            "map authority",
+            "trace consequence",
+            "identify affected parties",
+            "define evidence and reasons",
+            "build appeal and repair path",
+            "verify affected-side closure"
+          ],
+          "publicOutputs": [
+            "affected-party matrices",
+            "appeal and repair assessments",
+            "policy boundary reviews",
+            "contestability reviews"
+          ],
+          "claimPostureRefs": [
+            "phr_1d78974630fc"
+          ],
+          "claimPosture": [
+            "normative and analytical; legal enforceability is jurisdiction-specific"
+          ]
+        },
+        {
+          "id": "accessibility",
+          "labelRefs": [
+            "phr_99fad115a0a1"
+          ],
+          "label": [
+            "Accessibility & non-normative participation"
+          ],
+          "humanPromiseRefs": [
+            "phr_52f4c6df689a"
+          ],
+          "humanPromise": [
+            "People should not have to approximate a normative user in order to exercise meaningful agency."
+          ],
+          "failurePatternRefs": [
+            "phr_edf1858fbb08"
+          ],
+          "failurePattern": [
+            "The system assumes one body, cognition, schedule, language, interface, resource level, or failure mode and treats variation as exceptional burden."
+          ],
+          "boundaryFirstOperation": [
+            "enumerate served states",
+            "identify excluded states",
+            "test alternate access paths",
+            "preserve function across variation",
+            "verify with affected users"
+          ],
+          "publicOutputs": [
+            "accessibility checklists",
+            "multi-modal content",
+            "reduced-motion and keyboard-safe experiences",
+            "non-normative state audits"
+          ],
+          "claimPostureRefs": [
+            "phr_3ff4d459946e"
+          ],
+          "claimPosture": [
+            "institutional and UX doctrine; specialized accessibility compliance requires applicable standards and review"
+          ]
+        },
+        {
+          "id": "capability-transfer",
+          "labelRefs": [
+            "phr_4b2b66df3045"
+          ],
+          "label": [
+            "Care, education & capability transfer"
+          ],
+          "humanPromiseRefs": [
+            "phr_3d8764c00bf7"
+          ],
+          "humanPromise": [
+            "Good service should leave people more capable where doing so is safe and appropriate."
+          ],
+          "failurePatternRefs": [
+            "phr_6e2b2e880705"
+          ],
+          "failurePattern": [
+            "Knowledge remains institutionally gated until crisis, or support creates dependency without adequate continuity, recourse, or transfer of capability."
+          ],
+          "boundaryFirstOperation": [
+            "translate specialist knowledge",
+            "declare scope and stop conditions",
+            "give observable markers and safe actions",
+            "preserve escalation paths",
+            "test comprehension"
+          ],
+          "publicOutputs": [
+            "public literacy tools",
+            "field guides",
+            "appointment preparation tools",
+            "educational on-ramps",
+            "open methods"
+          ],
+          "claimPostureRefs": [
+            "phr_364a973aea75"
+          ],
+          "claimPosture": [
+            "domain-specific evidence and reviewer gates apply, especially in health contexts"
+          ]
+        },
+        {
+          "id": "economic-burden",
+          "labelRefs": [
+            "phr_240904030c53"
+          ],
+          "label": [
+            "Economic dignity, labor & household continuity"
+          ],
+          "humanPromiseRefs": [
+            "phr_c9e27ed5a7b7"
+          ],
+          "humanPromise": [
+            "People and households should not become the invisible buffer that makes a supposedly efficient system appear closed."
+          ],
+          "failurePatternRefs": [
+            "phr_47997aeefa80"
+          ],
+          "failurePattern": [
+            "Benefits are counted locally while labor, maintenance, risk, precarity, or downstream cost is exported outside the accounting boundary."
+          ],
+          "boundaryFirstOperation": [
+            "expand accounting boundary",
+            "trace transferred burden",
+            "represent hidden labor and maintenance",
+            "identify responsibility",
+            "test full lifecycle viability"
+          ],
+          "publicOutputs": [
+            "consequence maps",
+            "maintenance ledgers",
+            "institutional lifecycle audits",
+            "economic/public-policy analyses"
+          ],
+          "claimPostureRefs": [
+            "phr_64e80a32a897"
+          ],
+          "claimPosture": [
+            "analytical and normative; economic and legal claims require source- and jurisdiction-specific support"
+          ]
+        },
+        {
+          "id": "public-trust",
+          "labelRefs": [
+            "phr_741ea99f47de"
+          ],
+          "label": [
+            "Public trust & bounded authority"
+          ],
+          "humanPromiseRefs": [
+            "phr_5cbb7f50f723"
+          ],
+          "humanPromise": [
+            "Power that shapes unavoidable or essential conditions should remain explainable, contestable, bounded, and repairable."
+          ],
+          "failurePatternRefs": [
+            "phr_c7b1153cebaa"
+          ],
+          "failurePattern": [
+            "Authority expands while meaningful exit, evidence access, appeal, named responsibility, or repair capacity disappears."
+          ],
+          "boundaryFirstOperation": [
+            "declare source of authority",
+            "bound scope and duration",
+            "preserve reasons and evidence",
+            "provide meaningful standing",
+            "create independent review",
+            "assign repair and recurrence prevention"
+          ],
+          "publicOutputs": [
+            "governance reviews",
+            "public-agency maps",
+            "institutional covenants",
+            "accountability chains"
+          ],
+          "claimPostureRefs": [
+            "phr_f01773a8ac66"
+          ],
+          "claimPosture": [
+            "institutional and comparative-law design; not a statement of settled law"
+          ]
+        },
+        {
+          "id": "technology-accountability",
+          "labelRefs": [
+            "phr_57cd96913b19"
+          ],
+          "label": [
+            "Humanly answerable software & AI"
+          ],
+          "humanPromiseRefs": [
+            "phr_295a38c4924b"
+          ],
+          "humanPromise": [
+            "Automation should increase usable capability without becoming the place where responsibility disappears."
+          ],
+          "failurePatternRefs": [
+            "phr_0c6dd85fe8ba"
+          ],
+          "failurePattern": [
+            "automated action -> real consequence -> opaque delegation -> nobody with practical repair capacity"
+          ],
+          "boundaryFirstOperation": [
+            "map authorization",
+            "declare action envelope",
+            "identify protected invariants",
+            "make observability explicit",
+            "preserve human contest and override",
+            "assign rollback and repair"
+          ],
+          "publicOutputs": [
+            "agency audits",
+            "deployment invariant declarations",
+            "contestability and repair reviews",
+            "AI governance memos"
+          ],
+          "claimPostureRefs": [
+            "phr_688d87b0f441"
+          ],
+          "claimPosture": [
+            "governance and engineering doctrine; not universal safety certification"
+          ]
+        },
+        {
+          "id": "knowledge-access",
+          "labelRefs": [
+            "phr_c38428fa7152"
+          ],
+          "label": [
+            "Public knowledge & educational access"
+          ],
+          "humanPromiseRefs": [
+            "phr_c7d627f8fd4e"
+          ],
+          "humanPromise": [
+            "People should be able to acquire the distinctions and tools needed to participate intelligently in systems that affect them."
+          ],
+          "failurePatternRefs": [
+            "phr_d41ffc73eeb1"
+          ],
+          "failurePattern": [
+            "Knowledge is abundant but structurally inaccessible, provenance is lost, and people remain dependent on institutional interpreters."
+          ],
+          "boundaryFirstOperation": [
+            "preserve provenance",
+            "organize lawful learning paths",
+            "translate without erasing caveats",
+            "make claim status visible",
+            "support independent reuse and criticism"
+          ],
+          "publicOutputs": [
+            "public records",
+            "atlases",
+            "open educational resources",
+            "structured learning pathways",
+            "field guides"
+          ],
+          "claimPostureRefs": [
+            "phr_d3998d272810"
+          ],
+          "claimPosture": [
+            "public-interest education and research stewardship"
+          ]
+        },
+        {
+          "id": "ecological-future",
+          "labelRefs": [
+            "phr_85392bfeb143"
+          ],
+          "label": [
+            "Ecological & intergenerational continuity"
+          ],
+          "humanPromiseRefs": [
+            "phr_3e7bc5df1ac9"
+          ],
+          "humanPromise": [
+            "Today's systems should not preserve local success by silently consuming the ecological, infrastructural, or agency baselines required by future people."
+          ],
+          "failurePatternRefs": [
+            "phr_d9c02e286fd8"
+          ],
+          "failurePattern": [
+            "Present benefit closes inside a narrow ledger while maintenance, ecological damage, resource depletion, and future obligations are exported across time and scale."
+          ],
+          "boundaryFirstOperation": [
+            "expand temporal and substrate boundary",
+            "represent lifecycle obligations",
+            "trace ecological/material transfers",
+            "identify future dependency",
+            "test whether growth preserves its roots"
+          ],
+          "publicOutputs": [
+            "civilizational mechanics analyses",
+            "lifecycle audits",
+            "infrastructure and maintenance studies",
+            "public education"
+          ],
+          "claimPostureRefs": [
+            "phr_a2004e1b2565"
+          ],
+          "claimPosture": [
+            "systems and public-interest doctrine; empirical environmental claims require domain evidence"
+          ]
+        },
+        {
+          "id": "repair-maintenance",
+          "labelRefs": [
+            "phr_23a88621a767"
+          ],
+          "label": [
+            "Maintenance, repair & durable public capacity"
+          ],
+          "humanPromiseRefs": [
+            "phr_d76249988a9d"
+          ],
+          "humanPromise": [
+            "People should not have to repeatedly absorb the same institutional defect because maintenance and repair were never funded or owned."
+          ],
+          "failurePatternRefs": [
+            "phr_e5776167845b"
+          ],
+          "failurePattern": [
+            "construction is rewarded; maintenance, adaptation, incident response, and retirement are treated as residual overhead."
+          ],
+          "boundaryFirstOperation": [
+            "declare lifecycle owner",
+            "budget maintenance",
+            "make incident and correction paths visible",
+            "preserve institutional memory",
+            "plan retirement or transfer"
+          ],
+          "publicOutputs": [
+            "maintenance governance",
+            "incident/correction workflows",
+            "stewardship registers",
+            "repair protocols"
+          ],
+          "claimPostureRefs": [
+            "phr_6c52c6b243cc"
+          ],
+          "claimPosture": [
+            "institutional design doctrine"
+          ]
+        }
+      ],
+      "impactRuleRefs": [
+        "phr_3b3c0ea2181b"
+      ],
+      "impactRule": [
+        "Every social mission must connect human promise -> structural defect -> Boundary First operation -> public artifact or intervention -> evidence/review gate."
+      ],
+      "antiTheaterTestsRefs": [
+        "phr_a13a21d7c989",
+        "phr_8eb3ac0775b5",
+        "phr_951927c7bd36",
+        "phr_e8cc1c5bae0d",
+        "phr_85cb0a8c01d5",
+        "phr_7fc5c32b3be7"
+      ],
+      "antiTheaterTests": [
+        "Does the mission change budgets, authority, interfaces, review burden, maintenance, or repair paths?",
+        "Can an affected person identify what practical difference the commitment creates?",
+        "Is there an owner and an evidence path?",
+        "Are legal, health, and scientific claim ceilings visible?",
+        "Can criticism change the institution rather than merely be collected?",
+        "Does the institution transfer capability instead of manufacturing dependency?"
+      ],
+      "claimFirewalls": {
+        "legal": "Rights, standing, due process, public trust, and remedy language may express BFL normative or comparative institutional doctrine. Do not present proposed principles as settled law. Jurisdiction-specific legal claims require primary sources and qualified review.",
+        "health": "Agency, bodily literacy, accessibility, and capability-transfer language must not become diagnosis or individualized treatment. Safety, escalation, evidence, and clinical-review gates apply.",
+        "economic": "Claims about markets, households, labor, damages, financialization, or public policy require explicit scope, evidence, and distinction between analysis, critique, and proposal.",
+        "environmental": "Ecological and intergenerational principles may motivate systems design; empirical environmental claims require appropriate scientific evidence and domain review.",
+        "general": "Social mission is not evidence that a BFL method works. Practical claims must earn support through implementation, affected-party feedback, comparison, criticism, and measured outcomes."
+      }
+    },
+    "governance": {
+      "titleRefs": [
+        "phr_45c266d3e8ec"
+      ],
+      "title": [
+        "How we bind our own work"
+      ],
+      "leadRefs": [
+        "phr_d62da6defe92"
+      ],
+      "lead": [
+        "The doctrine governs the laboratory before it governs anyone else."
+      ],
+      "commitmentsRefs": [
+        "phr_2d10f2b2fe2b",
+        "phr_e3cfd7776d11",
+        "phr_0c5fd0c40993",
+        "phr_eb90a28816db",
+        "phr_911be6c1cf47",
+        "phr_cfcbf038f499",
+        "phr_6ed577be4a4e",
+        "phr_ed67571f2f75",
+        "phr_da8f3ad0ed72",
+        "phr_ff4968e68891"
+      ],
+      "commitments": [
+        "Declare authority before exercising it.",
+        "Keep provenance attached to claims.",
+        "Scale review with consequence.",
+        "Preserve uncertainty.",
+        "Represent affected parties and residual burdens.",
+        "Give consequential decisions meaningful contest and appeal.",
+        "Give repair an owner with capacity.",
+        "Version material changes and preserve rationale.",
+        "Treat criticism as maintenance.",
+        "Build stewardship and retirement before uncontrolled scale."
+      ],
+      "humaneTest": "Would you put your family inside this system?",
+      "publicChallenge": {
+        "headlineRefs": [
+          "phr_74ef9b42e0a9"
+        ],
+        "headline": [
+          "Challenge something we published."
+        ],
+        "bodyRefs": [
+          "phr_fbb449d2b6cf"
+        ],
+        "body": [
+          "If you think a Boundary First Labs claim, policy, record, or representation is wrong, incomplete, unfair, misleading, or missing a consequential distinction, we want a durable route for that criticism to land."
+        ],
+        "cta": "Submit a challenge"
+      }
+    },
+    "formation": {
+      "status": "formation-stage",
+      "currentRealityRefs": [
+        "phr_ff615741e679"
+      ],
+      "currentReality": [
+        "Founder-led, AI-enabled micro-lab."
+      ],
+      "publicPositionRefs": [
+        "phr_8e6db72ef9f3"
+      ],
+      "publicPosition": [
+        "The work is substantial. The durable multi-person institution around it is still being built."
+      ],
+      "notYetClaimed": [
+        "independent multi-person governance at mature scale",
+        "self-sufficient stewardship",
+        "broad external validation",
+        "durable succession"
+      ],
+      "nearTermInstitutionalGoalRefs": [
+        "phr_c2b1fee83307"
+      ],
+      "nearTermInstitutionalGoal": [
+        "Turn accumulated work into publicly useful, bounded, inspectable forms while building the criticism, maintenance, stewardship, and governance structures required to support them."
+      ],
+      "longTermInstitutionalGoalRefs": [
+        "phr_cc28122f5303"
+      ],
+      "longTermInstitutionalGoal": [
+        "Become a durable public-interest steward capable of surviving correction, disagreement, transfer, and succession."
+      ]
+    },
+    "stewardship": {
+      "classification": "institutional quality and mission",
+      "headline": "Stewardship is an institutional obligation, not an ornamental claim.",
+      "principleRefs": [
+        "phr_0e163ae1b05a",
+        "phr_1a718d5e4151",
+        "phr_2e184c723f2f",
+        "phr_c2b1fee83307",
+        "phr_cc28122f5303",
+        "phr_ff4968e68891"
+      ],
+      "principle": [
+        "Stewardship precedes capability.",
+        "Stewardship, correction, migration, retirement, institutional memory, and succession belong to the original design.",
+        "Stewards the research, methods, public record, criticism, collaborations, and consequence-bearing applications.",
+        "Turn accumulated work into publicly useful, bounded, inspectable forms while building the criticism, maintenance, stewardship, and governance structures required to support them.",
+        "Become a durable public-interest steward capable of surviving correction, disagreement, transfer, and succession.",
+        "Build stewardship and retirement before uncontrolled scale."
+      ]
+    }
+  }
+}

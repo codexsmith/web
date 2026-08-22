@@ -24,39 +24,29 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: pip
-          cache-dependency-path: requirements-ci.txt
-
-      - name: Install JavaScript dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Install Python validation dependencies
-        run: python -m pip install -r requirements-ci.txt
+      - name: Check v2 architecture contracts
+        run: npm run contracts:check
 
-      - name: Check generated public content
-        run: npm run content:check
+      - name: Check publication portfolio contracts
+        run: node scripts/check_publication_contracts.mjs
 
-      - name: Check graph context
-        run: npm run graph:check
+      - name: Check industrial UI contracts
+        run: node scripts/check_industrial_ui_contracts.mjs
 
-      - name: Test graph builder
-        run: npm run graph:test
+      - name: Check Apparatus hardening contracts
+        run: node scripts/check_apparatus_hardening.mjs
 
-      - name: Check UI stabilization invariants
-        run: npm run ui:check
+      - name: Check landing review contracts
+        run: node scripts/check_landing_review_contracts.mjs
 
-      - name: Check outer architecture contracts
-        run: npm run architecture:check
-
-      - name: Test public architecture navigation contracts
-        run: npm run test:contracts
+      - name: Typecheck
+        run: npm run typecheck
 
       - name: Lint
         run: npm run lint
@@ -64,5 +54,5 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Exercise production launch-readiness paths
-        run: npm run acceptance:runtime
+      - name: Exercise v2 production routes
+        run: npm run runtime:check

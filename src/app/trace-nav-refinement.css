@@ -1,0 +1,507 @@
+/* Boundary First Card World · stable local navigation + explicit trace.
+   Local links are canonical and stationary. Content traversal creates trace history;
+   the BF/Home tray gains Back/Forward only after a meaningful non-root trace exists. */
+
+body[data-ui-shell="cards"] {
+  --frame-bottom: 0px !important;
+}
+
+body[data-ui-shell="cards"] .boundary-frame__bottom {
+  display: none !important;
+}
+
+body[data-ui-shell="cards"] .world-viewport {
+  bottom: 0 !important;
+}
+
+/* The parent is already represented by navigation context; do not repeat it as a leaf card. */
+body[data-ui-shell="cards"] .leaf-world__port:not([data-edge-type]) {
+  display: none !important;
+}
+
+body[data-ui-shell="cards"] .leaf-world__ports:has(> .leaf-world__port:not([data-edge-type])):not(:has(> .leaf-world__port[data-edge-type])) {
+  display: none;
+}
+
+/* Home and trace transport form one compact instrument. */
+body[data-ui-shell="cards"] .boundary-frame__top {
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray {
+  grid-column: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 3px;
+  min-height: 40px;
+  padding: 3px;
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    color-mix(in srgb, var(--bf-bg-control) 90%, transparent);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .frame-home-tray .brand-anchor {
+  width: 34px !important;
+  height: 34px;
+  min-width: 34px;
+  gap: 0;
+  padding: 2px !important;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray .brand-anchor:hover {
+  background: var(--bf-bg-raised);
+}
+
+body[data-ui-shell="cards"] .frame-home-tray .brand-anchor__mark {
+  width: 28px;
+  height: 28px;
+  flex-basis: 28px;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray--trace .brand-anchor {
+  margin-right: 3px;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray--trace .brand-anchor::after {
+  content: "";
+  width: 1px;
+  height: 22px;
+  margin-left: 5px;
+  background: var(--bf-border-subtle);
+}
+
+body[data-ui-shell="cards"] .frame-home-tray .frame-tool {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  padding: 0;
+  border: 0;
+  border-radius: 8px !important;
+  background: transparent;
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .frame-home-tray .frame-tool:hover:not(:disabled) {
+  background: var(--bf-bg-raised);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .frame-home-tray .frame-tool:disabled {
+  opacity: 0.24;
+  cursor: default;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray .frame-tool__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Search and Depth remain the right-side global controls. */
+body[data-ui-shell="cards"] .frame-tools {
+  grid-column: 3 !important;
+  gap: 6px;
+}
+
+body[data-ui-shell="cards"] .frame-tools > .frame-tool {
+  order: 1;
+}
+
+body[data-ui-shell="cards"] .frame-tools > .projection-switcher {
+  order: 2;
+  flex: 0 1 auto;
+  margin-left: 0 !important;
+}
+
+body[data-ui-shell="cards"] .frame-tools > .frame-process-zoom {
+  order: 3;
+}
+
+/* Retire the older breadcrumb/rail connector experiments. */
+body[data-ui-shell="cards"] .brand-anchor__mark::before,
+body[data-ui-shell="cards"] .brand-anchor__mark::after,
+body[data-ui-shell="cards"] .boundary-frame__left::before,
+body[data-ui-shell="cards"] .boundary-frame__left ol::before {
+  content: none !important;
+  display: none !important;
+}
+
+@media (min-width: 981px) {
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav {
+    top: calc(var(--frame-top) + 8px) !important;
+    right: auto;
+    bottom: auto !important;
+    left: 0;
+    width: calc(var(--frame-left) - 8px);
+    min-width: 154px;
+    height: auto !important;
+    max-height: calc(100svh - var(--frame-top) - 24px);
+    display: block !important;
+    align-items: stretch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 10px 11px 12px 9px;
+    border: 1px solid var(--bf-border-default) !important;
+    border-left: 0 !important;
+    border-radius: 0 13px 13px 0;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 30%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018), transparent 70%),
+      color-mix(in srgb, var(--bf-bg-surface) 95%, transparent);
+    box-shadow:
+      8px 10px 22px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 var(--bf-edge-highlight);
+    backdrop-filter: blur(12px);
+    scrollbar-width: thin;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav {
+    min-width: 0;
+    min-height: 0 !important;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  /* Trace history is independent of local sibling count, which keeps it present on
+     leaf pages such as CityWatch when a content traversal led there. */
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-has-trace="true"] .trace-nav__history-wrap {
+    display: block !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history-wrap {
+    position: relative;
+    min-width: 0;
+    margin: 0 !important;
+    padding: 2px 0 9px !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--bf-border-subtle) !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history {
+    position: relative;
+    display: flex !important;
+    flex: 0 0 auto !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 7px;
+    width: 1px;
+    background: linear-gradient(var(--bf-border-subtle), var(--bf-border-strong));
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history li {
+    position: relative;
+    min-width: 0;
+    min-height: 25px;
+    display: block !important;
+    padding: 0 2px 0 22px !important;
+    color: var(--bf-text-muted);
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history li + li::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history-dot {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 4px;
+    width: 7px;
+    height: 7px;
+    border: 2px solid var(--bf-bg-surface);
+    border-radius: 50%;
+    background: var(--bf-border-strong);
+    transform: translateY(-50%);
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history button {
+    width: 100%;
+    min-width: 0;
+    min-height: 25px;
+    padding: 4px 2px !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history button:hover {
+    color: var(--bf-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history .path-node__label {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.55rem;
+    line-height: 1.2;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history-gap {
+    display: block;
+    margin-bottom: 3px;
+    padding-left: 22px;
+    color: var(--bf-text-muted);
+    font-size: 0.42rem;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+  }
+
+  /* Local navigation is a stationary instrument bank: normal buttons, fixed order,
+     ordinary active/hover states, and no trace/timeline semantics. */
+  body[data-ui-shell="cards"] .local-nav__links {
+    min-width: 0;
+    display: flex !important;
+    flex: 0 0 auto !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links li {
+    min-width: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links li + li::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links button {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    display: grid;
+    align-items: center;
+    padding: 8px 10px;
+    border: 1px solid var(--bf-border-subtle);
+    border-radius: 9px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent),
+      rgba(48, 59, 66, 0.36);
+    color: var(--bf-text-secondary);
+    box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 120ms ease, background 120ms ease, color 120ms ease, transform 120ms ease;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links button:hover:not(.is-active) {
+    border-color: var(--bf-action-line);
+    background: var(--bf-bg-raised);
+    color: var(--bf-text-primary);
+    transform: translateX(1px);
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links button.is-active {
+    border-color: var(--bf-action-line);
+    background:
+      linear-gradient(90deg, var(--bf-action-surface), transparent 88%),
+      var(--bf-bg-raised);
+    color: var(--bf-text-primary);
+    box-shadow:
+      inset 3px 0 0 var(--bf-action),
+      inset 0 1px 0 var(--bf-edge-highlight);
+    cursor: default;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links .peer-node__label {
+    overflow-wrap: anywhere;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.69rem;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 1180px) and (min-width: 981px) {
+  body[data-ui-shell="cards"] .projection-switcher__label {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher button {
+    padding-inline: 0.45rem;
+  }
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] {
+    --frame-bottom: 0px !important;
+    --trace-nav-shelf: 64px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav {
+    bottom: auto !important;
+    height: var(--trace-nav-shelf) !important;
+    max-height: none;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav {
+    min-width: 0;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 6px;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history-wrap {
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links {
+    min-width: 0;
+    height: 100%;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links li {
+    flex: 0 0 auto;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links button {
+    min-width: 112px;
+    min-height: 42px;
+    padding: 7px 9px;
+    border: 1px solid var(--bf-border-subtle);
+    border-radius: 9px;
+    background: var(--bf-bg-control);
+    color: var(--bf-text-secondary);
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links button.is-active {
+    border-color: var(--bf-action-line);
+    background: var(--bf-bg-raised);
+    color: var(--bf-text-primary);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .world-viewport {
+    top: calc(var(--frame-top) + var(--trace-nav-shelf)) !important;
+    bottom: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
+    top: var(--frame-top) !important;
+    bottom: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher__label {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher button {
+    min-height: 28px;
+    padding-inline: 0.4rem;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .boundary-frame__top {
+    padding-inline: 6px;
+  }
+
+  body[data-ui-shell="cards"] .frame-home-tray {
+    gap: 1px;
+  }
+
+  body[data-ui-shell="cards"] .frame-home-tray .frame-tool {
+    width: 30px;
+    height: 30px;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+
+  body[data-ui-shell="cards"] .frame-tools {
+    gap: 3px;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher {
+    gap: 1px;
+    padding: 2px;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher button {
+    min-height: 26px;
+    padding-inline: 0.28rem;
+    font-size: 0.52rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ui-shell="cards"] .local-nav__links button {
+    transition: none;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links button:hover:not(.is-active) {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .frame-home-tray,
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav,
+  body[data-ui-shell="cards"] .local-nav__links button {
+    border-color: CanvasText !important;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+  }
+
+  body[data-ui-shell="cards"] .local-nav__links button.is-active {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
+  body[data-ui-shell="cards"] .trace-nav__history::before,
+  body[data-ui-shell="cards"] .trace-nav__history-dot {
+    background: CanvasText;
+  }
+}

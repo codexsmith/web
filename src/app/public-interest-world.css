@@ -1,0 +1,308 @@
+/* Boundary First Card World · Public Interest reading surface.
+   Page one is orientation. Page two is the Augusta civic-infrastructure feature below the fold. */
+
+body[data-ui-shell="cards"] .public-interest-world {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-snap-type: y proximity;
+  scrollbar-width: thin;
+}
+
+body[data-ui-shell="cards"] .public-interest-page {
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
+  padding: clamp(12px, 1.35vw, 22px);
+}
+
+body[data-ui-shell="cards"] .public-interest-page--overview {
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(10px, 1vw, 16px);
+}
+
+body[data-ui-shell="cards"] .public-interest-hero__intro {
+  min-width: 0;
+  padding: clamp(12px, 1.2vw, 20px) clamp(14px, 1.45vw, 24px);
+  border: 1px solid var(--bf-border-default);
+  border-radius: 14px;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.035), transparent 48%),
+    var(--bf-bg-surface);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .public-interest-hero__intro .eyebrow {
+  margin-bottom: 0.55rem;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .public-interest-hero__title-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.55fr) minmax(0, 1.45fr);
+  gap: clamp(18px, 3vw, 46px);
+  align-items: end;
+}
+
+body[data-ui-shell="cards"] .public-interest-hero__title-row h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.6rem, min(4.7vw, 7svh), 5.25rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+}
+
+body[data-ui-shell="cards"] .public-interest-hero__title-row p {
+  max-width: 920px;
+  margin: 0;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.82rem, 0.95vw, 1rem);
+  line-height: 1.48;
+}
+
+body[data-ui-shell="cards"] .public-interest-hero__panels {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 0.75vw, 12px);
+}
+
+body[data-ui-shell="cards"] .public-interest-panel {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(14px, 1.15vw, 20px);
+  border: 1px solid var(--bf-border-default);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 38%),
+    var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 var(--bf-edge-highlight);
+  text-align: left;
+}
+
+body[data-ui-shell="cards"] button.public-interest-panel {
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+body[data-ui-shell="cards"] button.public-interest-panel:hover {
+  transform: translateY(-2px);
+  border-color: var(--bf-action-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 38%),
+    var(--bf-bg-raised);
+}
+
+body[data-ui-shell="cards"] .public-interest-panel__kind {
+  color: var(--bf-action);
+  font-size: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .public-interest-panel > strong {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 1.55vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.04;
+}
+
+body[data-ui-shell="cards"] .public-interest-panel > p {
+  margin: 0.7rem 0 0;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.68rem, 0.72vw, 0.8rem);
+  line-height: 1.45;
+}
+
+body[data-ui-shell="cards"] .public-interest-panel__action {
+  margin-top: auto;
+  padding-top: 1rem;
+  color: var(--bf-text-muted);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .public-interest-panel--glance {
+  border-left-color: var(--bf-action-line);
+}
+
+/* Augusta / below the fold ---------------------------------------------- */
+
+body[data-ui-shell="cards"] .public-interest-page--augusta {
+  padding-top: clamp(16px, 1.5vw, 26px);
+  padding-bottom: clamp(16px, 1.5vw, 26px);
+}
+
+body[data-ui-shell="cards"] .public-interest-feature {
+  min-width: 0;
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  gap: clamp(14px, 1.4vw, 24px);
+  padding: clamp(22px, 2.2vw, 38px);
+  border: 1px solid var(--bf-border-default);
+  border-top: 3px solid var(--bf-border-strong);
+  border-radius: 14px;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.045), transparent 48%),
+    var(--bf-bg-surface);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__header {
+  min-width: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--bf-border-default);
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__header .eyebrow {
+  margin-bottom: 0.65rem;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .public-interest-feature h2 {
+  max-width: 1000px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.8rem, min(5vw, 7.5svh), 5.8rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__deck {
+  max-width: 1120px;
+  margin: 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.5rem);
+  line-height: 1.35;
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__body {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 34px);
+  align-content: start;
+  padding-top: clamp(6px, 0.8vw, 12px);
+  border-top: 1px solid var(--bf-border-subtle);
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__body p {
+  margin: 0;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.78rem, 0.86vw, 0.94rem);
+  line-height: 1.62;
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bf-border-default);
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__footer > span {
+  color: var(--bf-text-muted);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__footer button {
+  min-height: 38px;
+  padding: 0 0.9rem;
+  border: 1px solid var(--bf-action-line);
+  border-radius: 9px;
+  background: var(--bf-action-surface);
+  color: var(--bf-action-hover);
+  cursor: pointer;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__footer button:hover {
+  border-color: var(--bf-action);
+  background: var(--bf-bg-raised);
+}
+
+@media (max-width: 1180px) {
+  body[data-ui-shell="cards"] .public-interest-hero__panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-ui-shell="cards"] .public-interest-page--overview {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-ui-shell="cards"] .public-interest-hero__title-row,
+  body[data-ui-shell="cards"] .public-interest-feature__body {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .public-interest-hero__panels {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .public-interest-feature__header,
+  body[data-ui-shell="cards"] .public-interest-feature__footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body[data-ui-shell="cards"] .public-interest-page {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ui-shell="cards"] .public-interest-world {
+    scroll-behavior: auto;
+  }
+
+  body[data-ui-shell="cards"] button.public-interest-panel {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .public-interest-hero__intro,
+  body[data-ui-shell="cards"] .public-interest-panel,
+  body[data-ui-shell="cards"] .public-interest-feature {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+}

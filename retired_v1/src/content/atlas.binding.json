@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "boundary-first.binding.atlas.v1",
+  "bindingProtocol": {
+    "id": "boundary-first-research-atlas",
+    "version": "1.0.0",
+    "title": "Theory-centered research Atlas",
+    "status": "draft",
+    "invariant": "Boundary Theory is the organizing root; the laboratory is its public steward, not its conceptual parent."
+  },
+  "projection": {
+    "pattern": "theory-centered-cluster-tree",
+    "rootNodeId": "boundary-theory",
+    "contextNodeId": "identity",
+    "eyebrow": "Research architecture",
+    "title": "Boundary Theory and the work it organizes",
+    "introduction": "Begin with the theory, then follow one named branch into its foundations, lineages, methods, programs, applications, or evidence.",
+    "branches": [
+      {
+        "id": "formal-foundations",
+        "label": "Formal foundations",
+        "description": "The central formal object, its composable structures, and operational facets.",
+        "layer": "theory",
+        "angleDegrees": -90,
+        "nodeIds": [
+          "distinction-space",
+          "contexture",
+          "system",
+          "distinction-theory",
+          "admissibility-theory",
+          "emergence-theory"
+        ]
+      },
+      {
+        "id": "research-lineages",
+        "label": "Research lineages",
+        "description": "Established formal, scientific, computational, and professional traditions that supply context and constraint.",
+        "layer": "research",
+        "angleDegrees": -30,
+        "nodeIds": [
+          "formal-grammars",
+          "mathematics",
+          "physics",
+          "computational-systems",
+          "software-engineering-practice"
+        ]
+      },
+      {
+        "id": "methods-formalization",
+        "label": "Methods & formalization",
+        "description": "The disciplines, methods, and research operations that make the theory explicit and usable.",
+        "layer": "public-spine",
+        "angleDegrees": 30,
+        "nodeIds": [
+          "representational-mechanics",
+          "boundary-first",
+          "ai-forge",
+          "corpus-forge"
+        ]
+      },
+      {
+        "id": "programs-practice",
+        "label": "Programs & practice",
+        "description": "Bounded research and professional practices that develop and test the method.",
+        "layer": "practice",
+        "angleDegrees": 90,
+        "nodeIds": ["constructive-humanist-agentics", "bfe"]
+      },
+      {
+        "id": "applications-public-use",
+        "label": "Applications & public use",
+        "description": "Where the work meets institutions, infrastructure, culture, and public consequence.",
+        "layer": "public-policy",
+        "angleDegrees": 150,
+        "nodeIds": [
+          "positions",
+          "governance-institutions",
+          "law-public-trust",
+          "finance-capital",
+          "infrastructure-repair",
+          "systems-criticism",
+          "on-ramps",
+          "public-philosophy-satire"
+        ]
+      },
+      {
+        "id": "evidence-stewardship",
+        "label": "Evidence & stewardship",
+        "description": "How work earns standing, remains traceable, and is stewarded for public use and repair.",
+        "layer": "support",
+        "angleDegrees": 210,
+        "nodeIds": ["products-testbeds", "corpus", "identity"]
+      }
+    ]
+  },
+  "validation": {
+    "requireCompleteCanonicalCoverage": true,
+    "requireUniqueBranchMembership": true,
+    "accessibilityConstraints": [
+      "Every canonical node remains keyboard selectable.",
+      "Branch labels do not replace canonical node labels.",
+      "The hierarchy remains available through the domain index when the spatial projection is unavailable."
+    ]
+  }
+}

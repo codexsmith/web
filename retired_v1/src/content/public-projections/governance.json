@@ -1,0 +1,383 @@
+{
+  "projectionVersion": "1.0.0",
+  "kind": "governance",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "payload": {
+    "governance": {
+      "titleRefs": [
+        "phr_45c266d3e8ec"
+      ],
+      "title": [
+        "How we bind our own work"
+      ],
+      "leadRefs": [
+        "phr_d62da6defe92"
+      ],
+      "lead": [
+        "The doctrine governs the laboratory before it governs anyone else."
+      ],
+      "commitmentsRefs": [
+        "phr_2d10f2b2fe2b",
+        "phr_e3cfd7776d11",
+        "phr_0c5fd0c40993",
+        "phr_eb90a28816db",
+        "phr_911be6c1cf47",
+        "phr_cfcbf038f499",
+        "phr_6ed577be4a4e",
+        "phr_ed67571f2f75",
+        "phr_da8f3ad0ed72",
+        "phr_ff4968e68891"
+      ],
+      "commitments": [
+        "Declare authority before exercising it.",
+        "Keep provenance attached to claims.",
+        "Scale review with consequence.",
+        "Preserve uncertainty.",
+        "Represent affected parties and residual burdens.",
+        "Give consequential decisions meaningful contest and appeal.",
+        "Give repair an owner with capacity.",
+        "Version material changes and preserve rationale.",
+        "Treat criticism as maintenance.",
+        "Build stewardship and retirement before uncontrolled scale."
+      ],
+      "humaneTest": "Would you put your family inside this system?",
+      "publicChallenge": {
+        "headlineRefs": [
+          "phr_74ef9b42e0a9"
+        ],
+        "headline": [
+          "Challenge something we published."
+        ],
+        "bodyRefs": [
+          "phr_fbb449d2b6cf"
+        ],
+        "body": [
+          "If you think a Boundary First Labs claim, policy, record, or representation is wrong, incomplete, unfair, misleading, or missing a consequential distinction, we want a durable route for that criticism to land."
+        ],
+        "cta": "Submit a challenge"
+      }
+    },
+    "publicRecord": {
+      "titleRefs": [
+        "phr_8f1ee21cd8c6"
+      ],
+      "title": [
+        "public record"
+      ],
+      "purposeRefs": [
+        "phr_e842276f1763"
+      ],
+      "purpose": [
+        "Make the institution inspectable without forcing the public to reconstruct it from scattered documents."
+      ],
+      "items": [
+        {
+          "id": "declaration",
+          "labelRefs": [
+            "phr_a635d9a05949"
+          ],
+          "label": [
+            "Declaration"
+          ],
+          "status": "published"
+        },
+        {
+          "id": "ethos-origin",
+          "labelRefs": [
+            "phr_34bbb9d482c9"
+          ],
+          "label": [
+            "Ethos & Origin"
+          ],
+          "status": "published"
+        },
+        {
+          "id": "institute",
+          "labelRefs": [
+            "phr_b55beafc956d"
+          ],
+          "label": [
+            "The Laboratory"
+          ],
+          "status": "published"
+        },
+        {
+          "id": "institutional-covenant",
+          "labelRefs": [
+            "phr_4aa519dfabb6"
+          ],
+          "label": [
+            "Institutional Covenant"
+          ],
+          "status": "working / adoption-controlled"
+        },
+        {
+          "id": "governance-posture",
+          "labelRefs": [
+            "phr_3b1fcaced05b"
+          ],
+          "label": [
+            "Governance Posture"
+          ],
+          "status": "published"
+        },
+        {
+          "id": "collaboration-doctrine",
+          "labelRefs": [
+            "phr_393acef01807"
+          ],
+          "label": [
+            "Collaboration Doctrine"
+          ],
+          "status": "published"
+        },
+        {
+          "id": "ai-use",
+          "labelRefs": [
+            "phr_f2c7d15ba11b"
+          ],
+          "label": [
+            "AI Use & Disclosure"
+          ],
+          "status": "to publish"
+        },
+        {
+          "id": "claims",
+          "labelRefs": [
+            "phr_77afcfacc69c"
+          ],
+          "label": [
+            "Publication & Claim Discipline"
+          ],
+          "status": "to publish"
+        },
+        {
+          "id": "corrections",
+          "labelRefs": [
+            "phr_30059ef58455"
+          ],
+          "label": [
+            "Corrections, Supersessions & Retractions"
+          ],
+          "status": "to build"
+        },
+        {
+          "id": "change-log",
+          "labelRefs": [
+            "phr_6cc874e24e78"
+          ],
+          "label": [
+            "Institutional Change Log"
+          ],
+          "status": "to build"
+        },
+        {
+          "id": "formation-status",
+          "labelRefs": [
+            "phr_3fb7580002ea"
+          ],
+          "label": [
+            "Formation Status"
+          ],
+          "status": "to publish"
+        },
+        {
+          "id": "challenges",
+          "labelRefs": [
+            "phr_53a37376c4d5"
+          ],
+          "label": [
+            "Challenges & Responses"
+          ],
+          "status": "to build"
+        },
+        {
+          "id": "methods-doctrine",
+          "labelRefs": [
+            "phr_acca7d493443"
+          ],
+          "label": [
+            "Boundary First Methods & Doctrine"
+          ],
+          "status": "working public doctrine; publish with explicit layer/status distinctions"
+        }
+      ],
+      "metadataFields": [
+        "status",
+        "owner",
+        "effective date",
+        "last reviewed",
+        "revision history",
+        "supersedes",
+        "challenge / correction route"
+      ]
+    },
+    "citationPolicy": {
+      "headlineRefs": [
+        "phr_1c02443c116d"
+      ],
+      "headline": [
+        "Cite the inheritance. Bound the contribution."
+      ],
+      "purposeRefs": [
+        "phr_18495061678e"
+      ],
+      "purpose": [
+        "Boundary First Labs should make it easy for a reader to see what is inherited from established work, what is a comparison or synthesis, what is a BFL-specific construction, and what remains open or conjectural."
+      ],
+      "rulesRefs": [
+        "phr_c5e239904738",
+        "phr_a0c14c1d29bf",
+        "phr_8329266eb10c",
+        "phr_6fd0bb9b8b05",
+        "phr_3f619a5b5fed",
+        "phr_5514bc3bf6e2",
+        "phr_da1f24955948",
+        "phr_bc4db80b6e13",
+        "phr_caf5f9c2d868",
+        "phr_da7d9ccb5a18",
+        "phr_7afb5c25abee",
+        "phr_6ccfdd578bbb"
+      ],
+      "rules": [
+        "Cite before claiming novelty.",
+        "Compare before differentiating.",
+        "Prefer primary sources, canonical literature, and the institutions' own descriptions of their work.",
+        "State whether a source is evidence, lineage, analogy, comparison, counterpoint, or current institutional context.",
+        "Do not use missing citations to manufacture novelty.",
+        "Do not treat structural resemblance as identity or derivation.",
+        "Do not claim that a broad framework replaces a mature field.",
+        "Use the established name when it is adequate; introduce a new term only when a new distinction is doing real work.",
+        "A first-principles derivation must still reconnect to prior art, formal literature, empirical evidence, or an explicit open question.",
+        "Every public comparison should state both the shared problem and the non-equivalence.",
+        "Current institutional comparisons are contextual, not endorsements, affiliations, or claims of peer status.",
+        "When a BFL claim is broader than its support, lower the claim rather than stretching the citation."
+      ],
+      "citationClasses": [
+        {
+          "id": "foundational_lineage",
+          "meaningRefs": [
+            "phr_f02d160d31d9"
+          ],
+          "meaning": [
+            "Established theory or method that supplies part of the intellectual inheritance."
+          ]
+        },
+        {
+          "id": "direct_comparison",
+          "meaningRefs": [
+            "phr_b0d72d961040"
+          ],
+          "meaning": [
+            "A source used to compare mechanisms, primitives, questions, or operating assumptions."
+          ]
+        },
+        {
+          "id": "current_institutional_neighbor",
+          "meaningRefs": [
+            "phr_67301fdca8c7"
+          ],
+          "meaning": [
+            "A current organization or community working in a meaningfully adjacent problem space."
+          ]
+        },
+        {
+          "id": "evidence",
+          "meaningRefs": [
+            "phr_77813e6107a2"
+          ],
+          "meaning": [
+            "A source bearing directly on a factual, empirical, legal, mathematical, or historical claim."
+          ]
+        },
+        {
+          "id": "counterpoint",
+          "meaningRefs": [
+            "phr_2dc2ce763eec"
+          ],
+          "meaning": [
+            "A competing framing or result retained because disagreement helps bound the BFL claim."
+          ]
+        },
+        {
+          "id": "open_problem",
+          "meaningRefs": [
+            "phr_d912eab9da1e"
+          ],
+          "meaning": [
+            "A recognized unresolved question used to locate a research problem without implying that BFL has solved it."
+          ]
+        }
+      ],
+      "publicNotation": {
+        "inherited": "Established",
+        "adapted": "Adapted / synthesized",
+        "bflConstruction": "BFL construction",
+        "working": "Working hypothesis / doctrine",
+        "open": "Open question",
+        "contested": "Contested / multiple live accounts"
+      }
+    },
+    "formation": {
+      "status": "formation-stage",
+      "currentRealityRefs": [
+        "phr_ff615741e679"
+      ],
+      "currentReality": [
+        "Founder-led, AI-enabled micro-lab."
+      ],
+      "publicPositionRefs": [
+        "phr_8e6db72ef9f3"
+      ],
+      "publicPosition": [
+        "The work is substantial. The durable multi-person institution around it is still being built."
+      ],
+      "notYetClaimed": [
+        "independent multi-person governance at mature scale",
+        "self-sufficient stewardship",
+        "broad external validation",
+        "durable succession"
+      ],
+      "nearTermInstitutionalGoalRefs": [
+        "phr_c2b1fee83307"
+      ],
+      "nearTermInstitutionalGoal": [
+        "Turn accumulated work into publicly useful, bounded, inspectable forms while building the criticism, maintenance, stewardship, and governance structures required to support them."
+      ],
+      "longTermInstitutionalGoalRefs": [
+        "phr_cc28122f5303"
+      ],
+      "longTermInstitutionalGoal": [
+        "Become a durable public-interest steward capable of surviving correction, disagreement, transfer, and succession."
+      ]
+    },
+    "claimFirewalls": {
+      "legal": "Rights, standing, due process, public trust, and remedy language may express BFL normative or comparative institutional doctrine. Do not present proposed principles as settled law. Jurisdiction-specific legal claims require primary sources and qualified review.",
+      "health": "Agency, bodily literacy, accessibility, and capability-transfer language must not become diagnosis or individualized treatment. Safety, escalation, evidence, and clinical-review gates apply.",
+      "economic": "Claims about markets, households, labor, damages, financialization, or public policy require explicit scope, evidence, and distinction between analysis, critique, and proposal.",
+      "environmental": "Ecological and intergenerational principles may motivate systems design; empirical environmental claims require appropriate scientific evidence and domain review.",
+      "general": "Social mission is not evidence that a BFL method works. Practical claims must earn support through implementation, affected-party feedback, comparison, criticism, and measured outcomes."
+    },
+    "stewardship": {
+      "classification": "institutional quality and mission",
+      "principleRefs": [
+        "phr_1a718d5e4151",
+        "phr_c2b1fee83307",
+        "phr_cc28122f5303",
+        "phr_ff4968e68891"
+      ],
+      "principle": [
+        "Stewardship, correction, migration, retirement, institutional memory, and succession belong to the original design.",
+        "Turn accumulated work into publicly useful, bounded, inspectable forms while building the criticism, maintenance, stewardship, and governance structures required to support them.",
+        "Become a durable public-interest steward capable of surviving correction, disagreement, transfer, and succession.",
+        "Build stewardship and retirement before uncontrolled scale."
+      ]
+    }
+  }
+}

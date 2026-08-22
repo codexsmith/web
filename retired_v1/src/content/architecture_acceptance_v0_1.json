@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "implementation-review-pending",
+  "statement": "New outer layers improve legibility while retained inner layers preserve depth over one canonical body of work.",
+  "visitorDisclosureSequence": [
+    "Laboratory",
+    "Practice",
+    "Method",
+    "Evidence",
+    "Research",
+    "Formal core"
+  ],
+  "institutionalPromotionSequence": [
+    "Artifact",
+    "Project",
+    "Portfolio",
+    "Capability",
+    "Program",
+    "Institution"
+  ],
+  "invariants": [
+    "Do not flatten or discard the retained inner corpus.",
+    "Do not require theory before the laboratory, recognizable practice, or method.",
+    "Prefer examples before ontology.",
+    "Project the same governed objects into multiple public contexts rather than duplicating claims.",
+    "Keep evidence standing and claim ceilings explicit without turning every interface into a disclaimer wall.",
+    "Keep large concepts contextual until they have operational semantics and an appropriate promotion gate.",
+    "Provide equivalent legible states for interactive and visual representations."
+  ],
+  "criteria": [
+    {
+      "id": "institution-legible",
+      "outcome": "A new visitor can understand what Boundary First Labs is without learning the theory taxonomy.",
+      "state": "implemented-review-pending",
+      "note": "The root presents the laboratory before deeper taxonomy and formalism.",
+      "evidence": [
+        { "label": "Laboratory entrance", "href": "/" },
+        { "label": "About the laboratory", "href": "/about" }
+      ]
+    },
+    {
+      "id": "software-preferred",
+      "outcome": "A new visitor can recognize Software as the preferred concrete entry path.",
+      "state": "implemented-review-pending",
+      "note": "Software is the primary start route without becoming the project boundary.",
+      "evidence": [
+        { "label": "Software entrance", "href": "/software" },
+        { "label": "Guided introduction", "href": "/learn" }
+      ]
+    },
+    {
+      "id": "practice-before-abstraction",
+      "outcome": "A practitioner can encounter a familiar problem and see Boundary First practice applied before formal abstraction.",
+      "state": "implemented-review-pending",
+      "note": "The software route begins with recognizable failure states, task paths, practice vocabulary, and examples.",
+      "evidence": [
+        { "label": "Software problem paths", "href": "/software" },
+        { "label": "Methods", "href": "/methods" }
+      ]
+    },
+    {
+      "id": "progressive-depth",
+      "outcome": "A visitor can descend from practice into method, evidence, research, and formal theory without losing orientation.",
+      "state": "implemented-review-pending",
+      "note": "Shared layer context links preserve an explicit outward/inward path across the six disclosure layers.",
+      "evidence": [
+        { "label": "Method", "href": "/methods" },
+        { "label": "Evidence", "href": "/evidence" },
+        { "label": "Research", "href": "/research" },
+        { "label": "Theory", "href": "/theory" }
+      ]
+    },
+    {
+      "id": "status-inspectable",
+      "outcome": "A visitor can distinguish tested, operational, historical, provisional, speculative, and externally verified material where the corpus supports those distinctions.",
+      "state": "implemented-review-pending",
+      "note": "Evidence standing, Work authority, sandbox promotion boundaries, and trust records remain separate concepts.",
+      "evidence": [
+        { "label": "Evidence grammar", "href": "/evidence" },
+        { "label": "Work index", "href": "/work/index" },
+        { "label": "Sandbox registry", "href": "/sandbox" },
+        { "label": "Laboratory trust", "href": "/trust" }
+      ]
+    },
+    {
+      "id": "contextual-contact",
+      "outcome": "A visitor can contact Boundary First Labs without losing the context that brought them to the inquiry.",
+      "state": "implemented-review-pending",
+      "note": "Inquiry source, topic, intent, and optional Work record context are preserved into a bounded email handoff.",
+      "evidence": [
+        { "label": "Contextual inquiry", "href": "/inquire" },
+        { "label": "Collaborate", "href": "/collaborate" }
+      ]
+    },
+    {
+      "id": "purpose-bypass",
+      "outcome": "A visitor can bypass the Software path for research, laboratory verification, collaboration, or direct corpus exploration.",
+      "state": "implemented-review-pending",
+      "note": "The primary shell retains direct Work, Research, Laboratory, and Collaborate entrances alongside Software.",
+      "evidence": [
+        { "label": "Research", "href": "/research" },
+        { "label": "Trust", "href": "/trust" },
+        { "label": "Collaborate", "href": "/collaborate" },
+        { "label": "Atlas", "href": "/map?mode=atlas&view=domains" }
+      ]
+    },
+    {
+      "id": "inner-corpus-retained",
+      "outcome": "A visitor can reach the retained deeper corpus instead of encountering a parallel replacement corpus.",
+      "state": "implemented-review-pending",
+      "note": "Domains, Atlas, relations, artifacts, publications, and canonical Work records remain the deeper inspectable substrate.",
+      "evidence": [
+        { "label": "Domains", "href": "/domains" },
+        { "label": "Atlas", "href": "/map?mode=atlas&view=domains" },
+        { "label": "Relations", "href": "/relations" },
+        { "label": "Publications", "href": "/publications" },
+        { "label": "Work index", "href": "/work/index" }
+      ]
+    }
+  ],
+  "validation": {
+    "automatedGate": "npm run architecture:check",
+    "runtimeGate": "npm run acceptance:runtime",
+    "runtimeStatus": "verified",
+    "runtimeEvidence": "All eight Definition-of-Done route/content contracts have been exercised against a built production Next server in CI.",
+    "scope": "The structural gate verifies route presence, traversal wiring, canonical acceptance data, and selected navigation contracts. The runtime gate verifies successful production rendering, key content and links, disclosure traversal, contextual inquiry state, purpose bypasses, and retained-corpus reachability. Neither gate proves usability, correctness or sufficiency of claims, cold-reader comprehension, or rendered accessibility quality.",
+    "humanReviewRequired": [
+      "Cold-reader comprehension and orientation",
+      "Practical usefulness of the Software beachhead",
+      "Accuracy and sufficiency of evidence/provenance claims",
+      "Keyboard, focus, reduced-motion, and semantic-equivalence behavior in a rendered browser",
+      "Whether the retained corpus feels progressively disclosed rather than merely hidden"
+    ]
+  }
+}

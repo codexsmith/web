@@ -1,0 +1,248 @@
+/*
+ * Bounded Apparatus prototype hardening.
+ *
+ * This layer does not promote Apparatus to the production renderer. It sharpens
+ * accessibility, reflow, touch, viewport fit, and high-contrast behavior that can be
+ * established before subjective browser/pixel review.
+ */
+
+.apparatus-prototype-shell {
+  --apparatus-hit-target: 2.75rem;
+  --apparatus-readable-measure: 68ch;
+  height: 100svh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.apparatus-prototype__workfield,
+.apparatus-trace--rail,
+.apparatus-peer-bank {
+  min-height: 0;
+}
+
+.apparatus-trace--rail,
+.apparatus-peer-bank {
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.apparatus-prototype-shell :where(button, a, summary) {
+  scroll-margin-block: 5rem;
+  touch-action: manipulation;
+}
+
+.apparatus-prototype-shell :where(.apparatus-command, .apparatus-depth__position) {
+  min-height: var(--apparatus-hit-target);
+}
+
+.apparatus-prototype-shell summary {
+  min-height: var(--apparatus-hit-target);
+  display: list-item;
+  padding-block: 0.65rem;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.apparatus-prototype-shell :where(
+  .apparatus-bay,
+  .apparatus-module,
+  .apparatus-subject-faceplate,
+  .apparatus-instrument,
+  .apparatus-port,
+  .apparatus-peer-bank,
+  .apparatus-routing-bay,
+  .apparatus-through,
+  .apparatus-gate
+) {
+  min-width: 0;
+}
+
+.apparatus-prototype-shell :where(
+  h1,
+  h2,
+  h3,
+  p,
+  strong,
+  small,
+  button,
+  a,
+  summary,
+  dt,
+  dd
+) {
+  overflow-wrap: anywhere;
+}
+
+.apparatus-prototype-shell :where(
+  .apparatus-subject-faceplate > p,
+  .apparatus-instrument__heading > p,
+  .apparatus-instrument__context > p,
+  .apparatus-backplane__heading > p
+) {
+  max-width: var(--apparatus-readable-measure);
+}
+
+/*
+ * 200% browser zoom on a common desktop viewport naturally falls through this
+ * topology. Once the chassis collapses to one column, return scroll ownership to the
+ * document instead of trapping content inside the wide-screen instrument frame.
+ */
+@media (max-width: 1100px) {
+  .apparatus-prototype-shell {
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .apparatus-prototype__workfield,
+  .apparatus-peer-bank {
+    overflow: visible;
+  }
+
+  .apparatus-prototype__topbar,
+  .apparatus-prototype__global-commands,
+  .apparatus-depth,
+  .apparatus-depth__positions {
+    min-width: 0;
+  }
+
+  .apparatus-prototype__global-commands {
+    justify-content: flex-start;
+  }
+
+  .apparatus-trace--compact {
+    border-bottom: 1px solid var(--bf-alloy-500);
+  }
+
+  .apparatus-trace--compact > summary {
+    padding: 0.6rem 0.75rem;
+  }
+}
+
+/*
+ * 400% zoom and phone-scale widths use a genuinely linear control path. Preserve
+ * labels and actions; do not rescue the schematic by shrinking typography.
+ */
+@media (max-width: 760px) {
+  .apparatus-prototype__prototype-label {
+    margin-inline: 0;
+    justify-content: flex-start;
+  }
+
+  .apparatus-prototype__global-commands,
+  .apparatus-process-controls,
+  .apparatus-depth,
+  .apparatus-depth__positions {
+    width: 100%;
+  }
+
+  .apparatus-prototype__global-commands,
+  .apparatus-depth__positions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .apparatus-process-controls {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) repeat(2, auto);
+    border-left: 0;
+    border-top: 1px solid var(--bf-alloy-500);
+    padding: 0.45rem 0 0;
+  }
+
+  .apparatus-depth {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .apparatus-command,
+  .apparatus-depth__position,
+  .apparatus-port {
+    width: 100%;
+  }
+
+  .apparatus-relation-trace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.25rem;
+    border-left: 2px solid var(--bf-alloy-500);
+    padding-left: 0.65rem;
+  }
+
+  .apparatus-relation-trace__line {
+    display: none;
+  }
+
+  .apparatus-relation-trace__label {
+    order: -1;
+    justify-self: start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 430px) {
+  .apparatus-prototype__global-commands,
+  .apparatus-depth__positions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .apparatus-process-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (pointer: coarse) {
+  .apparatus-prototype-shell :where(
+    .apparatus-command,
+    .apparatus-depth__position,
+    .apparatus-port,
+    .apparatus-trace__steps button,
+    .apparatus-through button,
+    .apparatus-gate button
+  ) {
+    min-height: 3rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .apparatus-prototype-shell :where(
+    .apparatus-command,
+    .apparatus-depth__position,
+    .apparatus-port,
+    .apparatus-bay,
+    .apparatus-module,
+    .apparatus-subject-faceplate,
+    .apparatus-instrument,
+    .apparatus-routing-bay,
+    .apparatus-peer-bank,
+    .apparatus-through,
+    .apparatus-gate
+  ) {
+    border-color: CanvasText;
+  }
+
+  .apparatus-prototype-shell :where(
+    button:focus-visible,
+    a:focus-visible,
+    summary:focus-visible,
+    .apparatus-depth__position[aria-pressed="true"]
+  ) {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .apparatus-prototype-shell :where(
+    .apparatus-port__terminal,
+    .apparatus-state-strip__signal
+  ) {
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+
+  .apparatus-prototype-shell .apparatus-depth__position[aria-pressed="true"],
+  .apparatus-prototype-shell .apparatus-trace__current {
+    border-color: Highlight;
+    color: Highlight;
+  }
+}

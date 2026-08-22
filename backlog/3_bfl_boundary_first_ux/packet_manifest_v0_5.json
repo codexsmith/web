@@ -1,0 +1,173 @@
+{
+  "packetVersion": "0.5.0",
+  "generated": "2026-07-26",
+  "status": "institutional-harvest-distinction-audit-and-provisional-ux-integration",
+  "canonicalNodeSource": "nodes_boundary_theory_reorganized_v0_1.json",
+  "fileCount": 32,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3526,
+      "sha256": "1aa6cab2248744acc6776ad2af2b9f9bf635b19968ab97a92f498ae7b0d306d4"
+    },
+    {
+      "path": "bfl_context_halo_ordering_placement_spec_v0_1.md",
+      "bytes": 4756,
+      "sha256": "e1219a136a35ff6788e5abb2c7ed32777b29c9ef5926dc65c0cca514d4de7731"
+    },
+    {
+      "path": "bfl_context_halo_reference_representational_mechanics_v0_1.json",
+      "bytes": 75002,
+      "sha256": "a4548a157c6b18c6e2b9ffe08bbe521c1008dd9de5e362719afbf3170a48d4e8"
+    },
+    {
+      "path": "bfl_context_halo_relation_schema_v0_1.json",
+      "bytes": 4349,
+      "sha256": "67b1e7223db007609995dc67f013d899fb2faab87dc9583c3c1066f9af422d39"
+    },
+    {
+      "path": "bfl_domain_family_palette_v0_1.json",
+      "bytes": 3050,
+      "sha256": "1fd7bb62e5e1c65effcbec34e202e5fadd1e8b45edcd52ae726e80260bb3daf6"
+    },
+    {
+      "path": "bfl_historical_lineage_editorial_standard_v0_1.md",
+      "bytes": 4056,
+      "sha256": "bd27a7a19b15776e33bfc30c0b78fae5f7ee75b0e8a2d3e915e1223615c1c44e"
+    },
+    {
+      "path": "bfl_historical_lineage_reference_seed_v0_1.json",
+      "bytes": 235959,
+      "sha256": "6318b414b4ffa13a5b1bc903b26e3918123361dd499b9e675c75e7ebac1d77b2"
+    },
+    {
+      "path": "bfl_historical_lineage_relation_schema_v0_1.json",
+      "bytes": 3122,
+      "sha256": "65bc1422d3fa7dc31a318be42b6cd61c9d687a0942c8669d7fb1f4030dbb6817"
+    },
+    {
+      "path": "bfl_historical_lineage_source_audit_v0_1.md",
+      "bytes": 1679,
+      "sha256": "1c0e957f5fbe7f6abbf126fe4dab002aeaa5364e0ad57a2128034f57880afd59"
+    },
+    {
+      "path": "bfl_historical_lineage_ui_component_contracts_v0_1.md",
+      "bytes": 3814,
+      "sha256": "be097bcfbb60ea0ac4bb0baa075db181507ccdb9f25271f578afa418ef5e8f40"
+    },
+    {
+      "path": "bfl_institutional_closure_map_reference_v0_1.json",
+      "bytes": 8374,
+      "sha256": "5b6faceeffcd90e03e36364a23adbdab28d4caa16380a2e703fe565b2aab9918"
+    },
+    {
+      "path": "bfl_institutional_content_distinction_audit_v0_1.md",
+      "bytes": 9444,
+      "sha256": "239cd25835df0de8afbaee8e85fae5756d35595f9c2cd7ec5adbac9fccb9e137"
+    },
+    {
+      "path": "bfl_institutional_content_register_schema_v0_1.json",
+      "bytes": 3779,
+      "sha256": "bba9df752703002647d6624501d6c7548020904cb7035a45231f5c9f9d1e9306"
+    },
+    {
+      "path": "bfl_institutional_content_register_v0_1.json",
+      "bytes": 1368244,
+      "sha256": "d61133586c4b663894e3c1d5061e38d83afdc23e3e9734d8059659505c95775b"
+    },
+    {
+      "path": "bfl_institutional_conventional_ia_crosswalk_v0_1.json",
+      "bytes": 3289,
+      "sha256": "252e4a14f94e2d28cc88987297753bcc98325e4a8834c19e4de02c0da2f5b6b1"
+    },
+    {
+      "path": "bfl_institutional_core_content_register_v0_1.json",
+      "bytes": 611989,
+      "sha256": "ee4e36499f642c6415fac165930404e6c4682b23c8887d50a4f40ff01356d659"
+    },
+    {
+      "path": "bfl_institutional_source_and_promotion_audit_v0_1.md",
+      "bytes": 1270,
+      "sha256": "e51f33854465f14c29936a67a761d9e984768be32ad8bcafe9665f4671f65039"
+    },
+    {
+      "path": "bfl_institutional_ux_component_contracts_v0_1.md",
+      "bytes": 3842,
+      "sha256": "0f9b8158642a42c15463d7a27a10a5a23bc457ebc49f67ff9f7720b59be0543d"
+    },
+    {
+      "path": "bfl_introductory_experience_config_v0_4.json",
+      "bytes": 36203,
+      "sha256": "041964cdbe4ca8bb38dad79b67cd7c6eb0bffd1b873d9bf638d949a11eb46859"
+    },
+    {
+      "path": "bfl_introductory_experience_config_v0_5.json",
+      "bytes": 41063,
+      "sha256": "7ecb481e4600ffce576edb6ed2b55a3d641f51a7591e340f6565723a96c049e4"
+    },
+    {
+      "path": "bfl_introductory_experience_mermaid_wireframes_v0_3.md",
+      "bytes": 23174,
+      "sha256": "656ff3574dbedb74176a1bbac5f07311cb72bfca4f687f06f83a0985072a11ea"
+    },
+    {
+      "path": "bfl_introductory_experience_mermaid_wireframes_v0_4.md",
+      "bytes": 32865,
+      "sha256": "eea27db80e7e9412dbca9fab5760d13cc8d9061532f064b9b14a47e661d0036e"
+    },
+    {
+      "path": "bfl_introductory_experience_mermaid_wireframes_v0_5.md",
+      "bytes": 38494,
+      "sha256": "8f9bd881e68ef2d43f597778767c82a9f78063fbbc5ccd843664173104c342eb"
+    },
+    {
+      "path": "bfl_introductory_path_lineage_expansion_v0_1.json",
+      "bytes": 12701,
+      "sha256": "1c20e06d8b930a3fe04bd58bb4919c6fce669ff7d5409076eacc049d12e7eb40"
+    },
+    {
+      "path": "bfl_project_index_seed_v0_1.json",
+      "bytes": 6672,
+      "sha256": "28ea791842199cdfdf54509b37959ae94bfd671a9850ccc0b2a60724c6c5e0be"
+    },
+    {
+      "path": "bfl_projects_products_migration_plan_v0_1.md",
+      "bytes": 3913,
+      "sha256": "dbbf77a68a0e9cbb40a1804e2755493f1dad6157edddcb9b708c97f5df5f4c90"
+    },
+    {
+      "path": "bfl_work_entity_model_schema_v0_1.json",
+      "bytes": 10908,
+      "sha256": "a0c78c699734e2a08d06e31143e9af030bf673b9477dbcd90cb35013b79db0d9"
+    },
+    {
+      "path": "bfl_work_layer_ui_component_contracts_v0_2.md",
+      "bytes": 10326,
+      "sha256": "434c010f532d4e1a5567a6f7f3a3c29ad500a78ad556f5cf46ab7898602cf7a1"
+    },
+    {
+      "path": "bfl_work_layer_ui_component_contracts_v0_3.md",
+      "bytes": 11227,
+      "sha256": "4a0d43e38314e6771d5d138cbf1466110b5a0a9f8612e13d2340b5b62e824fbe"
+    },
+    {
+      "path": "bfl_work_portfolio_migration_seed_v0_1.json",
+      "bytes": 42282,
+      "sha256": "46088d8a5becf92c147494c9e03b3e33989208faf0516f6b7c27d15c9a419288"
+    },
+    {
+      "path": "packet_manifest_v0_4.json",
+      "bytes": 5446,
+      "sha256": "4100803e3b0f847fe53a44cf1adb87ce63e0846f8e43770c55553e20a253c17b"
+    }
+  ],
+  "counts": {
+    "extendedRegisterRecords": 1485,
+    "coreRegisterRecords": 651
+  },
+  "validation": {
+    "jsonSyntax": "passed",
+    "registerSchema": "passed",
+    "crossReferences": "passed"
+  }
+}

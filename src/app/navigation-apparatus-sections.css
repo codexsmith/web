@@ -1,0 +1,544 @@
+/*
+ * Boundary First Card renderer · constrained traversal navigation.
+ *
+ * The rail has two jobs only:
+ *   1. preserve the realized traversal history;
+ *   2. expose nearby same-level choices from the current node.
+ *
+ * Parent movement is already represented by the trace/back control. Child movement
+ * belongs to the page content itself. The rail therefore avoids duplicating either.
+ */
+
+body[data-ui-shell="cards"] {
+  --nav-chassis: #111a20;
+  --nav-control: #202b33;
+  --nav-control-hover: #26333c;
+  --nav-control-active: #252f3a;
+  --nav-line: rgba(170, 180, 184, 0.16);
+  --nav-edge: rgba(170, 180, 184, 0.29);
+  --nav-highlight: rgba(255, 255, 255, 0.045);
+}
+
+@media (min-width: 981px) {
+  body[data-ui-shell="cards"] {
+    --frame-left: clamp(272px, 21vw, 342px);
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
+    top: calc(var(--frame-top) + 7px) !important;
+    bottom: 8px !important;
+    left: 0;
+    width: calc(var(--frame-left) - 9px);
+    min-width: 0;
+    height: auto !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid var(--nav-edge) !important;
+    border-left: 0 !important;
+    border-radius: 0 7px 7px 0;
+    background: var(--nav-chassis);
+    background-image: none;
+    box-shadow:
+      5px 7px 14px rgba(0, 0, 0, 0.16),
+      inset 0 1px var(--nav-highlight);
+    backdrop-filter: none;
+    scrollbar-width: thin;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: var(--bf-silver-300);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__header {
+    min-height: 52px;
+    display: grid;
+    align-content: center;
+    gap: 0.2rem;
+    padding: 9px 15px;
+    border-bottom: 1px solid var(--nav-line);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__header strong {
+    color: var(--bf-workshop-100);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.095em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__header > span {
+    color: var(--bf-alloy-400);
+    font-size: 0.5rem;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__flow {
+    position: relative;
+    flex: 1 0 auto;
+    min-width: 0;
+    display: grid;
+    align-content: start;
+    padding: 14px 13px 20px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__section-label {
+    margin-bottom: 0.55rem;
+    color: var(--bf-alloy-400);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.46rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  /* History ----------------------------------------------------------- */
+
+  body[data-ui-shell="cards"] .traversal-nav__history {
+    position: relative;
+    min-width: 0;
+    padding-bottom: 10px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-viewport {
+    max-height: clamp(132px, 28vh, 246px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history ol {
+    position: relative;
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0 2px 0 23px;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history ol::before {
+    content: "";
+    position: absolute;
+    top: 13px;
+    bottom: 13px;
+    left: 6px;
+    width: 1px;
+    background: linear-gradient(var(--nav-edge), var(--bf-action-line));
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history li {
+    position: relative;
+    min-width: 0;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-terminal {
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--nav-edge);
+    border-radius: 50%;
+    background: var(--nav-chassis);
+    box-shadow: 0 0 0 2px var(--nav-chassis);
+    transform: translateY(-50%);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 5px 7px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--bf-alloy-400);
+    font: inherit;
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] button.traversal-nav__history-node {
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+  }
+
+  body[data-ui-shell="cards"] button.traversal-nav__history-node:hover {
+    background: rgba(169, 140, 255, 0.07);
+    color: var(--bf-workshop-100);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.72rem;
+    line-height: 1.2;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > small {
+    color: rgba(170, 180, 184, 0.42);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.43rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* Current boundary -------------------------------------------------- */
+
+  body[data-ui-shell="cards"] .traversal-nav__current {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 12px 23px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: -17px;
+    width: 1px;
+    height: 10px;
+    background: var(--bf-action-line);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -17px;
+    width: 1px;
+    height: 13px;
+    background: var(--bf-action-line);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current-terminal {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: -21px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--bf-action);
+    border-radius: 50%;
+    background: var(--bf-action-pressed);
+    box-shadow:
+      0 0 0 2px var(--nav-chassis),
+      0 0 0 4px rgba(169, 140, 255, 0.12);
+    transform: translateY(-50%);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current > div {
+    min-height: 50px;
+    display: grid;
+    align-content: center;
+    gap: 0.22rem;
+    padding: 8px 10px;
+    border: 1px solid var(--bf-action-line);
+    border-radius: 6px;
+    background:
+      linear-gradient(90deg, rgba(169, 140, 255, 0.14), transparent 80%),
+      var(--nav-control-active);
+    box-shadow:
+      inset 3px 0 var(--bf-action),
+      inset 0 1px var(--nav-highlight);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current small {
+    color: var(--bf-action-hover);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.43rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current strong {
+    color: var(--bf-workshop-100);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(0.82rem, 0.9vw, 0.96rem);
+    font-weight: 400;
+    line-height: 1.18;
+  }
+
+  /* Same-level choices ------------------------------------------------ */
+
+  body[data-ui-shell="cards"] .traversal-nav__next {
+    position: relative;
+    padding: 2px 0 0 23px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__next::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 12px;
+    left: 6px;
+    width: 1px;
+    background: var(--nav-line);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
+    position: relative;
+    min-width: 0;
+    display: grid;
+    gap: 5px;
+    margin: 0;
+    padding: 5px 0 7px;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -17px;
+    width: 17px;
+    height: 1px;
+    background: var(--nav-line);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
+    width: 100%;
+    min-width: 0;
+    min-height: 40px;
+    display: grid;
+    align-content: center;
+    padding: 7px 9px;
+    border: 1px solid var(--nav-line);
+    border-left-color: rgba(169, 140, 255, 0.42);
+    border-radius: 6px;
+    background: var(--nav-control);
+    color: var(--bf-silver-300);
+    box-shadow: inset 0 1px var(--nav-highlight);
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button:hover {
+    border-color: var(--bf-action-line);
+    background: var(--nav-control-hover);
+    color: var(--bf-workshop-100);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button > span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.76rem;
+    line-height: 1.15;
+  }
+}
+
+/* Compact projection: retain the immediately previous history step, current focus,
+ * and same-level choices in one horizontal shelf. Child navigation remains in-page. */
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] {
+    --trace-nav-shelf: 68px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
+    padding: 5px 7px !important;
+    background: var(--nav-chassis);
+    border-color: var(--nav-edge);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav {
+    height: 100%;
+    min-width: 0;
+    display: block;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__header,
+  body[data-ui-shell="cards"] .traversal-nav__section-label,
+  body[data-ui-shell="cards"] .traversal-nav__history-terminal,
+  body[data-ui-shell="cards"] .traversal-nav__current-terminal,
+  body[data-ui-shell="cards"] .traversal-nav__current::before,
+  body[data-ui-shell="cards"] .traversal-nav__current::after,
+  body[data-ui-shell="cards"] .traversal-nav__next::before,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list::before {
+    display: none;
+    content: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__flow {
+    height: 100%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__flow::-webkit-scrollbar {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history,
+  body[data-ui-shell="cards"] .traversal-nav__current,
+  body[data-ui-shell="cards"] .traversal-nav__next {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-viewport {
+    max-height: none;
+    overflow: visible;
+    scrollbar-gutter: auto;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history ol,
+  body[data-ui-shell="cards"] .traversal-nav__next,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history ol,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
+    margin: 0;
+    padding: 0;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history ol::before {
+    display: none;
+    content: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history li:not(:last-child) {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node {
+    width: auto;
+    max-width: 118px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 6px 9px;
+    border: 1px solid var(--nav-line);
+    border-radius: 6px;
+    color: var(--bf-alloy-400);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node::before {
+    content: "←";
+    margin-right: 0.35rem;
+    color: var(--bf-alloy-400);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.7rem;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > small {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current > div {
+    min-width: 122px;
+    min-height: 44px;
+    display: grid;
+    align-content: center;
+    gap: 0.12rem;
+    padding: 6px 9px;
+    border: 1px solid var(--bf-action-line);
+    border-radius: 6px;
+    background: var(--nav-control-active);
+    box-shadow: inset 0 -2px var(--bf-action);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current small {
+    font-size: 0.38rem;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current strong {
+    max-width: 138px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.72rem;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
+    flex: 0 0 auto;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
+    min-width: 116px;
+    min-height: 40px;
+    height: 40px;
+    padding: 6px 9px;
+    border: 1px solid var(--nav-line);
+    border-left-color: rgba(169, 140, 255, 0.42);
+    border-radius: 6px;
+    background: var(--nav-control);
+    color: var(--bf-silver-300);
+    box-shadow: inset 0 1px var(--nav-highlight);
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 460px) {
+  body[data-ui-shell="cards"] {
+    --trace-nav-shelf: 62px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node {
+    max-width: 96px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current > div,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
+    min-width: 104px;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .traversal-nav__current > div,
+  body[data-ui-shell="cards"] .traversal-nav__history-node,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-terminal,
+  body[data-ui-shell="cards"] .traversal-nav__current-terminal {
+    border-color: CanvasText;
+    background: Canvas;
+    box-shadow: none;
+  }
+}

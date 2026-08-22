@@ -1,0 +1,252 @@
+{
+  "id": "software-before-code",
+  "slug": "software-before-code",
+  "pageType": "public-engineering-method",
+  "visibility": "public",
+  "status": "working-public-method",
+  "product": {
+    "name": "Software Before Code",
+    "shortName": "SBC",
+    "classification": [
+      "software engineering method",
+      "architecture doctrine",
+      "requirements and modeling discipline",
+      "boundary-first engineering practice"
+    ],
+    "statusLabel": "Working Public Method",
+    "primaryLine": "Determine the object before selecting the mechanism.",
+    "secondaryLine": "Find what must survive before choosing how to build it.",
+    "coreProposition": "Software is a computational representation of a domain joined to an executable process. Code is the operational material of that representation, not the whole engineered object.",
+    "engineeringMaxim": "Own the problem complexity; do not create code complexity."
+  },
+  "hero": {
+    "eyebrow": "SOFTWARE BEFORE CODE · BOUNDARY-FIRST ENGINEERING",
+    "title": "Determine the object before selecting the mechanism.",
+    "deck": "Teams often choose frameworks, schemas, services, APIs, queues, classes, tickets, and deployment structures before agreeing on what the system must preserve. Software Before Code reverses that order.",
+    "support": "Discover the domain, consequential distinctions, admissible transformations, protected invariants, boundaries, witnesses, and closure conditions; then choose implementation structure.",
+    "primaryCta": { "label": "See the method", "target": "method" },
+    "secondaryCta": { "label": "Start with a software problem", "href": "/software" }
+  },
+  "opening": {
+    "title": "Code is not the first software artifact.",
+    "body": "Software engineering begins with a representation of a domain and a theory of lawful change inside it. Implementation is where that representation becomes executable."
+  },
+  "coreObject": {
+    "proposition": "Software is a computational representation of a domain and an executable process acting inside that domain. Code is the material in which that representation is made operational; it is not the whole object being engineered.",
+    "chain": ["DOMAIN", "REPRESENTATION", "EXECUTABLE TRANSFORMATION", "DELIVERED ARTIFACT", "WITNESS / CONSEQUENCE"],
+    "qualityRule": "Good software is a representation whose declared invariants survive admissible execution, composition, deployment, use, failure, and repair."
+  },
+  "problem": {
+    "title": "Most software arguments begin downstream.",
+    "examples": [
+      "Which framework?",
+      "Which database?",
+      "Which service boundary?",
+      "Which queue?",
+      "Which API shape?",
+      "Which deployment topology?"
+    ],
+    "diagnosis": "Those decisions become brittle when the team has not yet found the distinctions, invariants, and closure conditions the mechanisms are supposed to protect."
+  },
+  "notBigDesignUpFront": {
+    "title": "Before code does not mean before learning.",
+    "body": "The method does not demand perfect requirements before implementation. It asks what must be known before a particular commitment becomes safe, and it learns through probes, prototypes, artifacts, execution, observation, and witness."
+  },
+  "nineQuestions": [
+    { "name": "Representation", "question": "What world does the system claim to represent, and what does it omit?" },
+    { "name": "Distinction", "question": "Which differences must remain visible, and which may be collapsed?" },
+    { "name": "Boundary", "question": "Where does interaction occur and under what crossing conditions?" },
+    { "name": "Admissibility", "question": "Which states, operations, transitions, and compositions are lawful?" },
+    { "name": "Invariant", "question": "What must remain true?" },
+    { "name": "Closure", "question": "What makes the process complete enough for the domain to recognize, verify, and use?" },
+    { "name": "Defect", "question": "Which forgotten distinction returns as failure, residue, exception, or harm?" },
+    { "name": "Witness", "question": "Who or what verifies the system's claim?" },
+    { "name": "Consequence", "question": "Who receives the gain, cost, risk, or repair burden?" }
+  ],
+  "method": {
+    "id": "method",
+    "title": "Distinction-to-Closure Software Analysis",
+    "steps": [
+      "Bound the domain",
+      "Inventory distinctions",
+      "Build the categorical map",
+      "Extract the grammar",
+      "Select representations",
+      "Draw translation and commutation diagrams",
+      "Build the delivery skeleton",
+      "Test closure",
+      "Trace defects upward",
+      "Promote or repair"
+    ]
+  },
+  "deliverySkeleton": {
+    "title": "Build the smallest path that can tell the truth.",
+    "requirements": [
+      "accept one real input",
+      "preserve protected distinctions",
+      "perform one meaningful operation",
+      "produce a domain-recognized witness",
+      "expose at least one failure path",
+      "include observation and repair"
+    ]
+  },
+  "doctrine": [
+    "Bits do not supply meaning.",
+    "Types protect categorical distinctions.",
+    "Grammars protect admissible transformation.",
+    "Booleans are claims of binary adequacy.",
+    "Interfaces are admissibility boundaries.",
+    "Architecture protects distinctions under composition.",
+    "Completion is not closure.",
+    "Defects often reveal forgotten distinctions.",
+    "Good translation is selective, not total.",
+    "Consequence requires representation."
+  ],
+  "controlledForgetting": {
+    "title": "Representation is controlled forgetting.",
+    "body": "Every useful software representation makes the world smaller. A database row forgets most of a person. An API response forgets most of a database. A UI forgets implementation. A cache forgets freshness within tolerance. A queue forgets synchronous timing while preserving other semantics.",
+    "rule": "Forgetting becomes a defect when the system collapses a distinction that execution still needs.",
+    "line": "A boundary is a licensed forgetting operator; a defect is the residue of a distinction forgotten without license."
+  },
+  "flagship": {
+    "title": "Invoice Approval",
+    "challenge": "Build an invoice status tracker.",
+    "naiveRepresentations": ["invoice.isApproved: boolean", "invoice.status: string"],
+    "hiddenDistinctions": [
+      "received",
+      "syntactically valid",
+      "vendor recognized",
+      "goods or services confirmed",
+      "budget owner approval",
+      "compliance approval",
+      "accounting recognition",
+      "payment authorization",
+      "scheduled",
+      "released",
+      "settled",
+      "disputed",
+      "rejected",
+      "revoked",
+      "reversed",
+      "expired",
+      "duplicate or suspected duplicate"
+    ],
+    "protectedInvariants": [
+      "requester cannot satisfy independent approval",
+      "payment cannot release without authority and evidence",
+      "reversal preserves original history",
+      "duplicates cannot independently close without review",
+      "approved identifies authority, time, policy, and evidence",
+      "reported success is reconstructable from audit"
+    ],
+    "publicationLine": "Binary storage is easy; semantic adequacy is difficult; grammatical validity is consequential; closure is stronger than completion."
+  },
+  "booleanChallenge": {
+    "title": "Every boolean makes a promise.",
+    "body": "A boolean claims the domain distinction is adequately binary for every operation that depends on it. When the real domain contains independent dimensions, authority, evidence, time, revocation, or partial completion, the boolean may hide the state machine rather than simplify it."
+  },
+  "diagnostics": [
+    { "smell": "boolean proliferation", "likelyDefect": "hidden state machine", "repair": "extract states and transitions" },
+    { "smell": "status ambiguity", "likelyDefect": "different actors mean different things", "repair": "split categorical states and authorities" },
+    { "smell": "repeated conditionals", "likelyDefect": "grammar is dispersed", "repair": "centralize transition rules" },
+    { "smell": "manual spreadsheet reconciliation", "likelyDefect": "missing closure witness or provenance", "repair": "model the artifact and repair loop" },
+    { "smell": "retry duplicates", "likelyDefect": "command/event conflation", "repair": "declare execution semantics" },
+    { "smell": "API success but user failure", "likelyDefect": "technical and domain closure conflated", "repair": "define the domain witness" },
+    { "smell": "shared primitive IDs", "likelyDefect": "categories collapsed", "repair": "use distinct types" },
+    { "smell": "permission checks everywhere", "likelyDefect": "authority boundary not represented", "repair": "model capability or role grammar" }
+  ],
+  "architecture": {
+    "title": "Architecture is invariant protection.",
+    "body": "Architecture is justified when it protects consequential distinctions, responsibilities, admissible composition, observability, and repair across execution boundaries."
+  },
+  "agile": {
+    "title": "Iteration is an observational system.",
+    "body": "Agile is useful when it shortens the distance between representation, execution, witness, and correction. It fails when it becomes productivity theater detached from learning and closure."
+  },
+  "closure": {
+    "title": "Done is a claim. Closure needs a witness.",
+    "tests": [
+      "technical completion",
+      "semantic validity",
+      "institutional recognition",
+      "downstream usability",
+      "failure visibility",
+      "repair ownership",
+      "replay and retry behavior",
+      "audit reconstruction"
+    ]
+  },
+  "ai": {
+    "title": "AI makes Software Before Code more important, not less.",
+    "body": "As implementation becomes cheaper, the cost of choosing the wrong representation becomes proportionally more important. Cheap code increases the value of knowing what the code is supposed to preserve."
+  },
+  "validation": {
+    "ladder": [
+      "Concept examples",
+      "Formal toy models",
+      "Executable reference implementation",
+      "Comparative design study",
+      "Legacy archaeology",
+      "External replication"
+    ],
+    "immediateExperiment": "Compare baseline and Boundary First invoice-approval designs against a 25-fault mutation set and measure detection before deployment.",
+    "claimRule": "Formalism is a tool for consequence, not a ritual of sophistication."
+  },
+  "practiceLevels": {
+    "levels": ["lightweight", "structured", "rigorous"],
+    "status": "proposed, not yet canonical"
+  },
+  "workbench": {
+    "artifacts": [
+      "job_manifest.yaml",
+      "domain_boundary.md",
+      "distinction_ledger.md",
+      "domain_objects.md",
+      "relation_map.md",
+      "composition_table.md",
+      "system_grammar.md",
+      "representation_map.md",
+      "commutation_matrix.md",
+      "delivery_skeleton.md",
+      "closure_test_report.md",
+      "defect_trace.md",
+      "promotion_or_repair_decision.md"
+    ],
+    "futureTools": [
+      "Distinction Mapper",
+      "Grammar and Trace Analyzer",
+      "Representation Loss Auditor",
+      "Closure Review Assistant",
+      "Architecture Commutation Workbench"
+    ]
+  },
+  "siteRelationship": {
+    "architecture": [
+      "/software — I have a problem.",
+      "/software-before-code — Here is the engineering discipline.",
+      "Invoice demo — Show me why.",
+      "/methods — Teach me how.",
+      "/work — Show me where you've used it.",
+      "/evidence — Show me what you actually know."
+    ],
+    "bookRole": "The book is the durable canonical long-form source for the method, not the product identity itself."
+  },
+  "notThis": [
+    "big design up front",
+    "anti-code methodology",
+    "framework rejection",
+    "formalism for its own sake",
+    "claim of proof of correctness without a bounded proof system"
+  ],
+  "closing": {
+    "eyebrow": "SOFTWARE BEFORE CODE",
+    "title": "Find what must survive. Then build.",
+    "finalLine": "Code is the mechanism. The system comes first."
+  },
+  "metadata": {
+    "owner": "Boundary First Labs",
+    "public": true,
+    "maturity": "working-public-method",
+    "tags": ["software-before-code", "boundary-first-engineering", "architecture", "requirements", "software-method"]
+  }
+}

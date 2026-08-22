@@ -1,105 +1,60 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { activeUiShell } from "@/lib/ui-shell";
 import "./globals.css";
-import { IdentityProvider } from "./context/IdentityContext";
-import { getIdentityNode } from "@/lib/graph-data";
-import { getSiteOrigin } from "@/lib/site";
-import { phase12Launch } from "@/lib/phase12-launch";
-
-const siteOrigin = getSiteOrigin();
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-});
+import "./bf-industrial-tokens.css";
+import "./portfolio.css";
+import "./boundary-frame.css";
+import "./boundary-frame-controls.css";
+import "./industrial-design.css";
+import "./world-morphology.css";
+import "./semantic-event-ledger.css";
+import "./industrial-interaction.css";
+import "./frame-detail-stability.css";
+import "./projection-views.css";
+import "./navigation-topology.css";
+import "./gestalt-process.css";
+import "./root-founder-projections.css";
+import "./navigation-interaction.css";
+import "./root-world-and-content-stability.css";
+import "./hero-screen.css";
+import "./traversal-history.css";
+import "./publication-portfolio.css";
+import "./content-first-world.css";
+import "./industrial-card-ui.css";
+import "./landing-bfux-refinement.css";
+import "./card-world-viewport-fit.css";
+import "./public-interest-world.css";
+import "./frame-spatial-contract.css";
+import "./trace-nav-refinement.css";
+import "./card-root-control-board.css";
+import "./card-secondary-control-board.css";
+import "./local-nav-instrument.css";
+import "./navigation-apparatus-sections.css";
+import "./desktop-spatial-flow-refinement.css";
+import "./mobile-editorial-flow.css";
+import "./apparatus-prototype.css";
+import "./apparatus-prototype-hardening.css";
+import "./apparatus-sleek-refinement.css";
+import "./apparatus-world-root-refinement.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteOrigin),
   title: {
     default: "Boundary First Labs",
-    template: "%s · Boundary First Labs",
+    template: "%s | Boundary First Labs",
   },
-  description: phase12Launch.identity.compactStatement,
-  robots: {
-    index: true,
-    follow: true,
-  },
-  manifest: "/manifest.webmanifest",
-  openGraph: {
-    title: "Boundary First Labs",
-    description: `${phase12Launch.identity.headline} ${phase12Launch.identity.compactStatement}`,
-    type: "website",
-    siteName: "Boundary First Labs",
-    locale: "en_US",
-    url: "/",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Boundary First Labs",
-    description: phase12Launch.identity.compactStatement,
-  },
+  description:
+    "Software for difficult systems, public-interest projects, publications, and research into executable representation.",
 };
 
 export const viewport: Viewport = {
-  colorScheme: "light",
-  themeColor: "#F8F3E8",
+  width: "device-width",
+  initialScale: 1,
 };
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": `${siteOrigin}/#organization`,
-      name: "Boundary First Labs",
-      url: siteOrigin,
-      email: "contact@boundaryfirstlabs.com",
-      description: phase12Launch.identity.fullStatement,
-    },
-    {
-      "@type": "WebSite",
-      "@id": `${siteOrigin}/#website`,
-      name: "Boundary First Labs",
-      url: siteOrigin,
-      publisher: {
-        "@id": `${siteOrigin}/#organization`,
-      },
-    },
-  ],
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const identity = getIdentityNode();
-
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={`${inter.variable} ${playfair.variable} ${jetbrains.variable} h-full`}
-    >
-      <body className="flex min-h-full flex-col">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
-          }}
-          type="application/ld+json"
-        />
-        <IdentityProvider identity={identity}>{children}</IdentityProvider>
-      </body>
+    <html lang="en">
+      <body data-ui-shell={activeUiShell}>{children}</body>
     </html>
   );
 }

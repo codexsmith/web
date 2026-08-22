@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://boundaryfirstlabs.org/schemas/learning-pathway-v0.1.schema.json",
+  "title": "Boundary First Learning Pathway",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "title",
+    "thesis",
+    "phases",
+    "steps",
+    "rootCards",
+    "repairRoutes",
+    "viewRegistry"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "thesis": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "claimCeiling": {
+      "type": "string"
+    },
+    "sourceArtifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "experienceContract": {
+      "type": "object"
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "purpose",
+          "stepIds"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "stepIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "order",
+          "phaseId",
+          "card",
+          "expanded",
+          "learning",
+          "visualization",
+          "interaction",
+          "transition"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "phaseId": {
+            "type": "string"
+          },
+          "canonicalStatus": {
+            "type": "string"
+          },
+          "card": {
+            "type": "object",
+            "required": [
+              "title",
+              "quote"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "quote": {
+                "type": "string"
+              },
+              "kicker": {
+                "type": "string"
+              }
+            }
+          },
+          "expanded": {
+            "type": "object",
+            "required": [
+              "summary",
+              "mechanism",
+              "consequence",
+              "repair"
+            ],
+            "properties": {
+              "summary": {
+                "type": "string"
+              },
+              "mechanism": {
+                "type": "string"
+              },
+              "consequence": {
+                "type": "string"
+              },
+              "repair": {
+                "type": "string"
+              }
+            }
+          },
+          "learning": {
+            "type": "object"
+          },
+          "contentRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "visualization": {
+            "$ref": "#/$defs/visualization"
+          },
+          "interaction": {
+            "type": "object"
+          },
+          "transition": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "rootCards": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "repairRoutes": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "viewRegistry": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "visualization": {
+      "type": "object",
+      "required": [
+        "mode",
+        "primary",
+        "why",
+        "dataShape",
+        "accessibility"
+      ],
+      "properties": {
+        "mode": {
+          "type": "string"
+        },
+        "primary": {
+          "type": "object"
+        },
+        "secondary": {
+          "type": "object"
+        },
+        "why": {
+          "type": "string"
+        },
+        "dataShape": {
+          "type": "string"
+        },
+        "avoid": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mobileFallback": {
+          "type": "string"
+        },
+        "reducedMotionFallback": {
+          "type": "string"
+        },
+        "accessibility": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

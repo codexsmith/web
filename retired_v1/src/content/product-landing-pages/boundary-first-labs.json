@@ -1,0 +1,41 @@
+{
+  "slug": "boundary-first-labs",
+  "title": "Boundary First Labs",
+  "status": "draft",
+  "visibility": "private",
+  "hero": {
+    "eyebrow": "BOUNDARY FIRST LABS",
+    "headline": "One method. One living system. Many domains.",
+    "support": "Boundary First Labs is an applied research and product laboratory for making complex systems more legible, testable, accountable, and repairable. The work moves from theory into methods, instruments, software, pilots, and public artifacts."
+  },
+  "sections": [
+    {
+      "heading": "Start at the boundary",
+      "body": "Boundary First asks what a system includes, excludes, preserves, transforms, delegates, forgets, and makes repairable before optimizing what happens inside it."
+    },
+    {
+      "heading": "One method, multiple projections",
+      "body": "Software, AI, law, weather, civic systems, games, research operations, and public communication are treated as different consequence-bearing environments in which the same structural questions can be tested."
+    },
+    {
+      "heading": "Build instruments, not just arguments",
+      "body": "The lab develops workbenches, audits, standards, demonstrations, research programs, publications, and bounded partner pilots that let claims encounter real material."
+    },
+    {
+      "heading": "Claims earn territory",
+      "body": "Theory, hypothesis, measured result, institutional position, and product promise remain distinct. A useful result in one domain does not silently validate the entire framework."
+    },
+    {
+      "heading": "Repair is the public mission",
+      "body": "The practical objective is to find where representation, authority, responsibility, consequence, or maintenance stops closing and to construct a lawful path to repair."
+    }
+  ],
+  "cta": {
+    "label": "Explore the work"
+  },
+  "notes": [
+    "Recovered from the earlier eight-page landing-page set.",
+    "Keep private until the institutional homepage and this landing projection are reconciled; the current site already has a public institutional entrance.",
+    "Current public brand is Boundary First Labs; Boundary First is the operational method."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "version": "0.1.0",
+  "id": "boundary-first-robocup",
+  "slug": "bridge/robocup",
+  "title": "Boundary-First RoboCup Collaboration Program",
+  "pageType": "research-collaboration-bridge",
+  "status": "draft",
+  "visibility": "unlisted",
+  "audience": {"type":"community","name":"RoboCup researchers, teams, and technical committees"},
+  "hero": {
+    "eyebrow": "INTERPRETABLE MULTI-AGENT SOCCER",
+    "headline": "Translate tactical understanding into something machines and researchers can test.",
+    "support": "Boundary First Labs proposes a bounded research program that formalizes selected concepts from human soccer into explicit representations for autonomous multi-agent soccer."
+  },
+  "bridge": {
+    "source": "Boundary-First Soccer provides a human-readable vocabulary for boundary, invariant, closure, defect, promotion, responsibility, and repair.",
+    "target": "RoboCup environments provide reproducible multi-agent states, policies, logs, replays, and increasingly embodied systems.",
+    "firstQuestion": "Can a narrow tactical ontology be operationalized reliably and add explanatory or engineering value beyond ordinary state and event descriptions?"
+  },
+  "pilot": {
+    "sequence": ["formalize one tactical problem", "annotate a small replay/log set", "test reviewer agreement", "compare explanatory utility", "preserve negative results", "decide whether a co-design study is warranted"],
+    "initialAsk": "Review a five-sequence concept package and tell us where the representation fails."
+  },
+  "claimBoundary": "Independent Boundary First Labs proposal. No RoboCup affiliation, endorsement, partnership, paper acceptance, league membership, or performance improvement is claimed.",
+  "cta":{"label":"Critique the representation"}
+}

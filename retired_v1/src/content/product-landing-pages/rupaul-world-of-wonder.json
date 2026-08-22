@@ -1,0 +1,31 @@
+{
+  "version": "2.0",
+  "pageType": "collaboration-bridge",
+  "renderPolicy": {"navigation": false, "indexing": false, "requiresManifestEntry": true},
+  "bridges": [
+    {
+      "id": "rupaul-world-of-wonder",
+      "slug": "bridge/rupaul-world-of-wonder",
+      "status": "draft",
+      "visibility": "unlisted",
+      "audience": {"type":"organization","name":"RuPaul / World of Wonder"},
+      "pageIntent": "Explore whether cultural legibility and Boundary First institutional-consequence analysis can form a bounded public-interest collaboration without asking for endorsement.",
+      "hero": {
+        "eyebrow": "REPRESENTATION × LEGIBILITY × CONSEQUENCE",
+        "title": "Representation does not merely describe reality. It changes what reality can do.",
+        "support": "World of Wonder has helped make marginalized identity culturally legible at extraordinary scale. Boundary First Labs is developing instruments for making the institutional consequences attached to representation legible and answerable."
+      },
+      "executiveBrief": "The proposed bridge is from cultural visibility to institutional answerability: preserve lived variation, expose the categories and boundaries through which institutions act, trace who bears the consequence, and test whether standing and repair remain available when representation fails.",
+      "whyYou": "The collaboration is directed toward a cultural institution with deep practical experience in identity, performance, transformation, legibility, audience translation, and public consequence.",
+      "domainPrimer": ["Representation", "Invariant", "Context", "Legibility", "Transformation", "Boundary", "Consequence", "Standing", "Repair"],
+      "bridge": {
+        "culturalTransformation": "stigmatized difference → self-recognition → shared language → craft → public legibility → cultural power",
+        "institutionalTransformation": "lived variation → adequate representation → consequence tracing → affected-party standing → accountability → repair and institutional redesign",
+        "centralDistinction": "The work does not seek to make queer and transgender people legible by compressing them into normative categories. It seeks to make real variation, defective institutional representations, and their consequences legible."
+      },
+      "proof": {"claimBoundary":"The page does not claim to speak for LGBTQ+ people as a whole, imply endorsement, or substitute formal theory for community knowledge and cultural work."},
+      "collaboration": {"level":"conversation","ask":"Compare the representation mechanics against lived and cultural practice, and identify where the formalism clarifies or distorts."},
+      "closing": {"primary":"You helped make us visible to culture. I believe this work may help make institutions answerable to what that visibility reveals."}
+    }
+  ]
+}

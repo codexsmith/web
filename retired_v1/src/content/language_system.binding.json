@@ -1,0 +1,624 @@
+{
+  "schemaVersion": "boundary-first.language-system.v1",
+  "version": "0.1",
+  "systemStatus": "working-governance-system-pending-founder-approval",
+  "sourceSuite": "world_class_executable_distinctions_suite_v0_1",
+  "title": "The Governed Language Garden",
+  "canonicalMeaning": "World class is not a status we claim. It is a capacity we give.",
+  "stewardshipPrinciple": "Every promoted phrase carries a declared meaning, intended context, source path, claim ceiling, known ambiguity, and replacement path. The garden remains alive because it can be pruned without erasing its history.",
+  "lifecycle": [
+    {
+      "id": "project-language-candidate",
+      "label": "Candidate",
+      "publishRule": "May appear only in declared working contexts with its claim ceiling and explainer."
+    },
+    {
+      "id": "recommended-default-pending-founder-review",
+      "label": "Recommended default",
+      "publishRule": "May bind the working website while remaining visibly pending founder approval."
+    },
+    {
+      "id": "research-hypothesis",
+      "label": "Research hypothesis",
+      "publishRule": "Requires definitions, evidence level, breakpoints, and the next test."
+    },
+    {
+      "id": "campaign-variant-pending-founder-decision",
+      "label": "Restricted campaign variant",
+      "publishRule": "Limited to approved informal channels and never used as evidence."
+    },
+    {
+      "id": "semantic-firewall",
+      "label": "Semantic firewall",
+      "publishRule": "Travels with the risk it constrains and may change only through explicit succession."
+    },
+    {
+      "id": "approved-canonical",
+      "label": "Approved canonical",
+      "publishRule": "Available in assigned channels until superseded, narrowed, or retired."
+    },
+    {
+      "id": "retired",
+      "label": "Retired",
+      "publishRule": "Not for new use; remains discoverable with rationale and successor when one exists."
+    }
+  ],
+  "registers": [
+    {
+      "id": "institutional",
+      "label": "Institutional",
+      "useClass": "public",
+      "description": "Mission, website, founder-letter, and institutional language centered on public capacity, responsibility, and answerability.",
+      "requirements": [
+        "Connect world class to public benefit, responsibility, or answerability.",
+        "Avoid prestige-only or human-ranking interpretations."
+      ],
+      "prohibitedContexts": []
+    },
+    {
+      "id": "software-native",
+      "label": "Software-native",
+      "useClass": "public",
+      "description": "Technical on-ramps for software publications, developer education, architecture workshops, and product explanation.",
+      "requirements": [
+        "Provide a structural explanation rather than relying on wordplay.",
+        "Preserve the person-is-not-an-object firewall when institutional examples appear."
+      ],
+      "prohibitedContexts": [
+        "Unsupported claims that institutions are equivalent to software systems."
+      ]
+    },
+    {
+      "id": "formal-research",
+      "label": "Formal research",
+      "useClass": "research",
+      "description": "Research terms and conjectures that require definitions, evidence levels, counterexamples, breakpoints, and next tests.",
+      "requirements": [
+        "Declare source-domain definitions and mapping level.",
+        "State preserved structure, known breakpoints, claim status, and next test."
+      ],
+      "prohibitedContexts": [
+        "Unqualified use in taglines, product claims, or public proof statements."
+      ]
+    },
+    {
+      "id": "public-philosophy",
+      "label": "Public philosophy",
+      "useClass": "public",
+      "description": "Public-facing formulations about classification, power, consequence, institutional legibility, and repair.",
+      "requirements": [
+        "Link the phrase to a mechanism or structural explainer.",
+        "Do not imply mystical language force."
+      ],
+      "prohibitedContexts": []
+    },
+    {
+      "id": "playful",
+      "label": "Playful and campaign",
+      "useClass": "restricted",
+      "description": "Social, event, merchandise, and workshop language that may open a route into more rigorous material.",
+      "requirements": [
+        "Use sparingly and retain a reachable explainer.",
+        "Do not substitute the phrase for technical explanation or evidence."
+      ],
+      "prohibitedContexts": [
+        "Claim boxes",
+        "Academic abstracts",
+        "Safety statements"
+      ]
+    },
+    {
+      "id": "semantic-firewall",
+      "label": "Semantic firewall",
+      "useClass": "safeguard",
+      "description": "Guardrails that must accompany uses at risk of human hierarchy, reductionism, or analogy inflation.",
+      "requirements": [
+        "Keep the safeguard available wherever its corresponding risk is present.",
+        "Revise only through an explicit successor record."
+      ],
+      "prohibitedContexts": []
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-WC-CONVERSATION",
+      "kind": "founder-originated-conversation",
+      "label": "World-class phrase-garden conversation",
+      "preservationStatus": "retained-source-object"
+    },
+    {
+      "id": "SRC-WC-PHRASE-GARDEN",
+      "kind": "editorial-synthesis",
+      "label": "The World Class / Executable Distinctions Phrase Garden v0.1",
+      "preservationStatus": "candidate-source-bank"
+    },
+    {
+      "id": "SRC-WC-MANIFESTO",
+      "kind": "working-publication",
+      "label": "World Class Is a Capacity We Give",
+      "publicRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "preservationStatus": "working-public-artifact"
+    },
+    {
+      "id": "SRC-WC-EXECUTABLE",
+      "kind": "working-publication",
+      "label": "Executable Distinctions",
+      "publicRoute": "/artifact/executable-distinctions",
+      "preservationStatus": "working-public-artifact"
+    },
+    {
+      "id": "SRC-WC-RESEARCH",
+      "kind": "working-research",
+      "label": "Testing Cross-Domain Operational Homology",
+      "publicRoute": "/artifact/testing-cross-domain-operational-homology",
+      "preservationStatus": "active-bounded-research"
+    },
+    {
+      "id": "SRC-WC-OPERATIONS",
+      "kind": "operations-policy",
+      "label": "Governing the World Class Language System v0.1",
+      "publicRoute": "/artifact/governing-the-language-garden",
+      "preservationStatus": "proposed-operating-policy"
+    }
+  ],
+  "reviewGates": [
+    {
+      "id": "GATE-A",
+      "label": "Copy review",
+      "checks": [
+        "Audience and register are declared.",
+        "The phrase remains connected to its intended meaning.",
+        "No human-worth hierarchy or unsupported universal claim is implied.",
+        "Claim status and required explainer are visible."
+      ]
+    },
+    {
+      "id": "GATE-B",
+      "label": "Research review",
+      "checks": [
+        "Source-domain definitions are present.",
+        "Mapping level and preserved structure are declared.",
+        "Counterexamples and domain-specific caveats are recorded.",
+        "Evidence, breakpoints, and next test are visible."
+      ]
+    },
+    {
+      "id": "GATE-C",
+      "label": "Public promotion",
+      "checks": [
+        "Canonical wording or channel-specific variant is approved.",
+        "A linked explainer is available.",
+        "Visual and source rights are cleared.",
+        "Correction, retirement, and replacement routes are declared."
+      ]
+    }
+  ],
+  "editorialChecklist": [
+    {
+      "id": "ED-01",
+      "label": "Register and audience",
+      "requirement": "Name the active register, intended audience, and publication channel."
+    },
+    {
+      "id": "ED-02",
+      "label": "Status and priority",
+      "requirement": "Record the phrase status, claim class, and P0/P1 priority when assigned."
+    },
+    {
+      "id": "ED-03",
+      "label": "Meaning",
+      "requirement": "State the operational or institutional meaning the phrase is intended to carry."
+    },
+    {
+      "id": "ED-04",
+      "label": "Provenance",
+      "requirement": "Retain the source record and distinguish founder language, editorial synthesis, research inference, and external evidence."
+    },
+    {
+      "id": "ED-05",
+      "label": "Claim ceiling",
+      "requirement": "Declare what the phrase may communicate and what it does not establish."
+    },
+    {
+      "id": "ED-06",
+      "label": "Ambiguity and firewalls",
+      "requirement": "Record foreseeable misreadings and attach the relevant semantic safeguard."
+    },
+    {
+      "id": "ED-07",
+      "label": "Context rules",
+      "requirement": "List permitted channels, prohibited contexts, and any required explainer."
+    },
+    {
+      "id": "ED-08",
+      "label": "Replacement path",
+      "requirement": "Name the trigger for review and preserve an append-only successor or retirement record."
+    }
+  ],
+  "replacementPolicy": {
+    "appendOnly": true,
+    "preserveSourceWording": true,
+    "requireSuccessorOrRetirementRationale": true,
+    "rules": [
+      "Never silently rewrite a promoted phrase record.",
+      "A successor receives a new identifier and links back to the record it replaces.",
+      "A retired phrase remains discoverable with its rationale, prior uses, and replacement route.",
+      "A correction may narrow meaning or channel permissions without retroactively changing source language."
+    ]
+  },
+  "phrases": [
+    {
+      "id": "PHR-001",
+      "phrase": "World class is not a status we claim. It is a capacity we give.",
+      "registerId": "institutional",
+      "useClass": "public",
+      "status": "recommended-default-pending-founder-review",
+      "priority": "P0",
+      "meaning": "World class names a responsibility to return usable public capacity rather than a prestige rank.",
+      "claimCeiling": "Institutional commitment and public-purpose framing; not a certification of quality or a hierarchy of human worth.",
+      "knownAmbiguities": [
+        "May be heard as an unsupported excellence claim.",
+        "Class may be misread as social or human ranking."
+      ],
+      "allowedChannels": ["website", "publications", "talks", "education"],
+      "restrictedContexts": ["Prestige-only product claims"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-CONVERSATION", "SRC-WC-MANIFESTO"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "Founder wording decision, semantic drift, or a stronger approved institutional sentence.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-002",
+      "phrase": "Redefining world class.",
+      "registerId": "institutional",
+      "useClass": "public",
+      "status": "recommended-default-pending-founder-review",
+      "priority": "P0",
+      "meaning": "A headline announcing that world class will be defined by public contribution and responsibility.",
+      "claimCeiling": "Headline-level framing only; it requires the canonical meaning nearby.",
+      "knownAmbiguities": ["May sound like an ungrounded quality claim without supporting copy."],
+      "allowedChannels": ["website", "publications", "talks"],
+      "restrictedContexts": ["Standalone certification or product-quality claims"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-CONVERSATION", "SRC-WC-PHRASE-GARDEN"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "decisionId": "D-001",
+      "replacement": {
+        "state": "pending-channel-decision",
+        "trigger": "Founder selects the primary headline or assigns this line to a specific channel.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-003",
+      "phrase": "World class by what we give the world.",
+      "registerId": "institutional",
+      "useClass": "public",
+      "status": "recommended-default-pending-founder-review",
+      "priority": "P0",
+      "meaning": "The institution is evaluated by the capacity, distinctions, instruments, and repair paths it makes available.",
+      "claimCeiling": "Explanatory institutional line; not an empirical measure until a concrete evaluation instrument exists.",
+      "knownAmbiguities": ["May imply that every contribution is automatically beneficial."],
+      "allowedChannels": ["website", "publications", "talks", "education"],
+      "restrictedContexts": ["Unqualified impact reporting"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-CONVERSATION", "SRC-WC-MANIFESTO"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "decisionId": "D-001",
+      "replacement": {
+        "state": "pending-channel-decision",
+        "trigger": "Founder chooses the explanatory line or approves a channel-specific successor.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-004",
+      "phrase": "The highest standard should not remain rare. It should become infrastructure.",
+      "registerId": "institutional",
+      "useClass": "public",
+      "status": "project-language-candidate",
+      "priority": "P0",
+      "meaning": "Excellence becomes public value when it is converted into durable, accessible capacity.",
+      "claimCeiling": "Normative institutional aspiration; not a claim that all high standards can or should be standardized.",
+      "knownAmbiguities": ["Infrastructure may be mistaken for compulsory uniformity."],
+      "allowedChannels": ["website", "publications", "talks", "education"],
+      "restrictedContexts": ["Claims that eliminate necessary expertise or plural standards"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN", "SRC-WC-MANIFESTO"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "Evidence of a coercive, flattening, or inaccessible interpretation.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-005",
+      "phrase": "There is no ‘just words’ once the words are wired to consequence.",
+      "registerId": "public-philosophy",
+      "useClass": "public",
+      "status": "project-language-candidate",
+      "priority": "P0",
+      "meaning": "Symbols become consequential through interpreters, procedures, authority, state transitions, and enforcement.",
+      "claimCeiling": "Conceptual claim about represented action; not a claim that words possess force in isolation.",
+      "knownAmbiguities": ["May be misread as mystical language power or universal performativity."],
+      "allowedChannels": ["publications", "talks", "education", "website"],
+      "restrictedContexts": ["Standalone proof claims"],
+      "explainerRoute": "/artifact/executable-distinctions",
+      "sourceIds": ["SRC-WC-CONVERSATION", "SRC-WC-EXECUTABLE"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "A use omits interpreter, authority, consequence, or repair.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-006",
+      "phrase": "They heard words. I saw executable distinctions.",
+      "registerId": "public-philosophy",
+      "useClass": "public",
+      "status": "project-language-candidate",
+      "priority": "P0",
+      "meaning": "The relevant object is the system that interprets a distinction and makes actions reachable or unavailable.",
+      "claimCeiling": "Public on-ramp into the executable-distinctions argument; not evidence for cross-domain equivalence.",
+      "knownAmbiguities": ["May sound self-authorizing if separated from the research method."],
+      "allowedChannels": ["publications", "talks", "education", "events"],
+      "restrictedContexts": ["Academic abstracts without definitions"],
+      "explainerRoute": "/artifact/executable-distinctions",
+      "sourceIds": ["SRC-WC-CONVERSATION", "SRC-WC-EXECUTABLE"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "Audience testing shows the line obscures rather than opens the mechanism.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-007",
+      "phrase": "What a system cannot name, it cannot reliably govern.",
+      "registerId": "public-philosophy",
+      "useClass": "public",
+      "status": "project-language-candidate",
+      "priority": "P0",
+      "meaning": "Reliable governance requires representations capable of distinguishing the objects, states, consequences, and responsibilities at issue.",
+      "claimCeiling": "Strong operational principle with boundary conditions; not a claim that naming is sufficient for governance.",
+      "knownAmbiguities": ["May be misread as claiming that only linguistic representation counts."],
+      "allowedChannels": ["publications", "talks", "education", "website"],
+      "restrictedContexts": ["Universal theorem statements"],
+      "explainerRoute": "/artifact/executable-distinctions",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN", "SRC-WC-EXECUTABLE"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "Case evidence identifies a domain where unnamed structure is governed reliably through another declared carrier.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-008",
+      "phrase": "Software is a lexical fossil record of representational mechanics.",
+      "registerId": "formal-research",
+      "useClass": "research",
+      "status": "research-hypothesis",
+      "priority": "P1",
+      "meaning": "Software vocabulary may record repeated encounters with operational constraints that other domains can leave tacit.",
+      "claimCeiling": "Programmatic research metaphor; historical origin, universality, and formal correspondence are not established.",
+      "knownAmbiguities": ["Fossil record may imply a proven historical lineage or software priority."],
+      "allowedChannels": ["research-notes", "academic-drafts", "talks", "education"],
+      "restrictedContexts": ["Institutional taglines", "Product claims", "Claim boxes without hypothesis label"],
+      "explainerRoute": "/artifact/testing-cross-domain-operational-homology",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN", "SRC-WC-RESEARCH"],
+      "reviewGates": ["GATE-A", "GATE-B", "GATE-C"],
+      "decisionId": "D-005",
+      "replacement": {
+        "state": "retained-as-research-hypothesis",
+        "trigger": "Historical research, counterexamples, or domain review supports, narrows, or rejects the metaphor.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-009",
+      "phrase": "Every system instantiates a class of world.",
+      "registerId": "formal-research",
+      "useClass": "research",
+      "status": "research-hypothesis",
+      "priority": "P1",
+      "meaning": "A system makes some entities, states, relations, operations, and consequences reachable while excluding others.",
+      "claimCeiling": "Theoretical formulation pending explicit definitions of system, class, world, and instantiation.",
+      "knownAmbiguities": ["May be mistaken for an established mathematical theorem."],
+      "allowedChannels": ["research-notes", "academic-drafts", "talks", "diagrams"],
+      "restrictedContexts": ["Unqualified website taglines", "Product claims"],
+      "explainerRoute": "/artifact/testing-cross-domain-operational-homology",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN", "SRC-WC-RESEARCH"],
+      "reviewGates": ["GATE-A", "GATE-B", "GATE-C"],
+      "replacement": {
+        "state": "retained-as-research-hypothesis",
+        "trigger": "Formal definition, counterexample, or research review changes the scope of the claim.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-010",
+      "phrase": "Architecture is the composition of responsibility.",
+      "registerId": "software-native",
+      "useClass": "public",
+      "status": "project-language-candidate",
+      "priority": "P1",
+      "meaning": "Architecture distributes operations, dependencies, authority, failure handling, and repair ownership across a system.",
+      "claimCeiling": "Technical and educational framing; not a complete definition of software or institutional architecture.",
+      "knownAmbiguities": ["May understate physical, economic, temporal, and performance structure."],
+      "allowedChannels": ["publications", "talks", "education", "product-copy"],
+      "restrictedContexts": ["Formal definition without qualification"],
+      "explainerRoute": "/domain/software-engineering-practice",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "Technical review shows the formulation hides a consequential architectural dimension.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-011",
+      "phrase": "Giving class to the world.",
+      "registerId": "playful",
+      "useClass": "restricted",
+      "status": "campaign-variant-pending-founder-decision",
+      "priority": null,
+      "meaning": "A campaign variant connecting quality, generosity, education, and formal class language.",
+      "claimCeiling": "Playful campaign copy only until its channel and relation to the canonical institutional sentence are approved.",
+      "knownAmbiguities": ["May imply conferring status, taste, or rank upon other people."],
+      "allowedChannels": ["social", "events", "merchandise", "internal-workshops"],
+      "restrictedContexts": ["Mission statements", "Academic abstracts", "Safety statements", "Claim boxes"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-CONVERSATION", "SRC-WC-PHRASE-GARDEN"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "decisionId": "D-001",
+      "replacement": {
+        "state": "pending-channel-decision",
+        "trigger": "Founder designates it as primary copy, a campaign variant, or retired language.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-012",
+      "phrase": "A world class specifies a class of possible worlds.",
+      "registerId": "formal-research",
+      "useClass": "research",
+      "status": "research-hypothesis",
+      "priority": null,
+      "meaning": "A proposed formal prompt for describing possible entities, states, relations, operations, invariants, and repair conditions.",
+      "claimCeiling": "Research metaphor until a formal definition is supplied in the same artifact.",
+      "knownAmbiguities": ["May be misread as already mathematically canonical."],
+      "allowedChannels": ["research-notes", "academic-drafts", "talks", "diagrams"],
+      "restrictedContexts": ["General taglines", "Unqualified product or institutional claims"],
+      "explainerRoute": "/artifact/testing-cross-domain-operational-homology",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN", "SRC-WC-RESEARCH"],
+      "reviewGates": ["GATE-A", "GATE-B", "GATE-C"],
+      "decisionId": "D-002",
+      "replacement": {
+        "state": "retained-as-research-hypothesis",
+        "trigger": "A formal definition is accepted, the metaphor is narrowed, or the mapping is rejected.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-013",
+      "phrase": "It’s giving world class.",
+      "registerId": "playful",
+      "useClass": "restricted",
+      "status": "campaign-variant-pending-founder-decision",
+      "priority": null,
+      "meaning": "An informal invitation into the institutional idea that quality should give capacity back.",
+      "claimCeiling": "Social and event copy; never a substitute for the institutional definition or evidence.",
+      "knownAmbiguities": ["May date quickly or read as detached trend language."],
+      "allowedChannels": ["social", "events", "merchandise", "internal-workshops"],
+      "restrictedContexts": ["Mission statements", "Academic abstracts", "Safety statements", "Claim boxes"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-CONVERSATION", "SRC-WC-PHRASE-GARDEN"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "pending-channel-decision",
+        "trigger": "Campaign review assigns, updates, or retires the variant.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-014",
+      "phrase": "It’s giving a damn—systematically.",
+      "registerId": "playful",
+      "useClass": "restricted",
+      "status": "campaign-variant-pending-founder-decision",
+      "priority": null,
+      "meaning": "A playful statement that care should be translated into organized, inspectable responsibility and repair.",
+      "claimCeiling": "Informal campaign copy only; not suitable for evidence, safety, or formal governance statements.",
+      "knownAmbiguities": ["Tone may be inappropriate or trivializing in consequential contexts."],
+      "allowedChannels": ["social", "events", "merchandise", "internal-workshops"],
+      "restrictedContexts": ["Mission statements", "Academic abstracts", "Safety statements", "Claim boxes"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "pending-channel-decision",
+        "trigger": "Tone, audience, or campaign review assigns, revises, or retires the line.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-015",
+      "phrase": "Class without caste. Distinction without domination.",
+      "registerId": "semantic-firewall",
+      "useClass": "safeguard",
+      "status": "semantic-firewall",
+      "priority": "P0",
+      "meaning": "Formal and institutional classification must never be used to establish hierarchy of human worth.",
+      "claimCeiling": "Normative safeguard; it does not by itself prove that a system avoids domination.",
+      "knownAmbiguities": ["A slogan cannot substitute for an audit of actual classifications and consequences."],
+      "allowedChannels": ["website", "publications", "talks", "education", "research-notes"],
+      "restrictedContexts": ["Uses that treat the line as evidence of compliance"],
+      "explainerRoute": "/artifact/world-class-is-a-capacity-we-give",
+      "sourceIds": ["SRC-WC-PHRASE-GARDEN", "SRC-WC-OPERATIONS"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "A stronger safeguard is approved through an explicit successor record.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-016",
+      "phrase": "A person is not exhausted by any software or institutional representation.",
+      "registerId": "semantic-firewall",
+      "useClass": "safeguard",
+      "status": "semantic-firewall",
+      "priority": "P0",
+      "meaning": "A person remains a governing subject whose standing, subjectivity, and agency exceed any operational schema.",
+      "claimCeiling": "Anti-reduction safeguard; it does not resolve every design question about representing persons.",
+      "knownAmbiguities": ["May be treated as sufficient without affected-party participation or appeal design."],
+      "allowedChannels": ["website", "publications", "talks", "education", "research-notes"],
+      "restrictedContexts": ["Uses that treat the line as evidence of humane system behavior"],
+      "explainerRoute": "/artifact/executable-distinctions",
+      "sourceIds": ["SRC-WC-OPERATIONS", "SRC-WC-EXECUTABLE"],
+      "reviewGates": ["GATE-A", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "A stronger anti-reduction safeguard is approved through an explicit successor record.",
+        "successorId": null
+      }
+    },
+    {
+      "id": "PHR-017",
+      "phrase": "A useful analogy is not an established formal equivalence.",
+      "registerId": "semantic-firewall",
+      "useClass": "safeguard",
+      "status": "semantic-firewall",
+      "priority": "P0",
+      "meaning": "Resemblance must remain below the claim ceiling supported by definitions, mapped structure, counterexamples, and review.",
+      "claimCeiling": "Research safeguard; it does not decide which mappings will survive testing.",
+      "knownAmbiguities": ["May be invoked vaguely instead of declaring an actual mapping level."],
+      "allowedChannels": ["website", "publications", "talks", "education", "research-notes", "academic-drafts"],
+      "restrictedContexts": ["Uses that omit the actual mapping grade"],
+      "explainerRoute": "/artifact/testing-cross-domain-operational-homology",
+      "sourceIds": ["SRC-WC-OPERATIONS", "SRC-WC-RESEARCH"],
+      "reviewGates": ["GATE-A", "GATE-B", "GATE-C"],
+      "replacement": {
+        "state": "active-no-successor",
+        "trigger": "The mapping-grade system changes or a clearer claim firewall is approved.",
+        "successorId": null
+      }
+    }
+  ],
+  "routes": {
+    "registry": "/language",
+    "governanceNote": "/artifact/governing-the-language-garden",
+    "manifesto": "/artifact/world-class-is-a-capacity-we-give",
+    "executableArgument": "/artifact/executable-distinctions",
+    "researchProgram": "/artifact/testing-cross-domain-operational-homology"
+  },
+  "claimCeiling": "This registry governs current website and publication language as a working operational system. It tracks candidates, research hypotheses, campaign variants, safeguards, sources, review gates, and replacement paths. It does not record final founder approval, prove the phrases' broader theories, or authorize every listed phrase for every channel."
+}

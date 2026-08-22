@@ -1,0 +1,109 @@
+{
+  "projectionVersion": "1.0.0",
+  "kind": "navigation",
+  "source": {
+    "id": "bfl-public-content-flat-dedup-v0-3",
+    "schemaVersion": "0.3.0",
+    "status": "working normalized content master; historical UX/content sources integrated with promotion gates",
+    "sha256": "eea010ca1f40f8059bc7dd3746f9fd5287075ca321a9bc09ab9800b248719eb2",
+    "path": "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json"
+  },
+  "payload": {
+    "globalNavigationPolicy": {
+      "status": "adopted",
+      "rule": "Preserve Start, Learn, Explore, Work, and Laboratory as the global navigation. Render the proposed public-interface routes as contextual navigation beneath those pillars."
+    },
+    "proposedRoutes": [
+      {
+        "id": "about",
+        "labelRefs": [
+          "phr_5780daf6db0b"
+        ],
+        "label": [
+          "About"
+        ],
+        "href": "/about"
+      },
+      {
+        "id": "mission",
+        "labelRefs": [
+          "phr_e59abed35218"
+        ],
+        "label": [
+          "Mission"
+        ],
+        "href": "/mission"
+      },
+      {
+        "id": "how-we-help",
+        "labelRefs": [
+          "phr_8c00aa14b0c8"
+        ],
+        "label": [
+          "How We Help"
+        ],
+        "href": "/help"
+      },
+      {
+        "id": "how-we-work",
+        "labelRefs": [
+          "phr_790d77c88e07"
+        ],
+        "label": [
+          "How We Work"
+        ],
+        "href": "/practice"
+      },
+      {
+        "id": "methods",
+        "labelRefs": [
+          "phr_b85dac7f6464"
+        ],
+        "label": [
+          "Methods"
+        ],
+        "href": "/methods"
+      },
+      {
+        "id": "governance",
+        "labelRefs": [
+          "phr_56b8e6bb9574"
+        ],
+        "label": [
+          "Governance"
+        ],
+        "href": "/governance"
+      },
+      {
+        "id": "collaborate",
+        "labelRefs": [
+          "phr_d2875e20b171"
+        ],
+        "label": [
+          "Collaborate"
+        ],
+        "href": "/collaborate"
+      },
+      {
+        "id": "people",
+        "labelRefs": [
+          "phr_ab3ccc8dba2a"
+        ],
+        "label": [
+          "People"
+        ],
+        "href": "/people"
+      },
+      {
+        "id": "public-record",
+        "labelRefs": [
+          "phr_8f1ee21cd8c6"
+        ],
+        "label": [
+          "public record"
+        ],
+        "href": "/record"
+      }
+    ]
+  }
+}

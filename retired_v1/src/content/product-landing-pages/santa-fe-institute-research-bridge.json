@@ -1,0 +1,41 @@
+{
+  "slug": "bridge/santa-fe-institute",
+  "title": "Santa Fe Institute Research Bridge",
+  "status": "draft",
+  "visibility": "unlisted",
+  "pageType": "research-collaboration-bridge",
+  "relationshipStatus": "exploratory-no-affiliation",
+  "audience": {
+    "type": "institution",
+    "name": "Santa Fe Institute"
+  },
+  "hero": {
+    "eyebrow": "COMPLEX SYSTEMS",
+    "headline": "When does local structure survive promotion to the next scale?",
+    "support": "Boundary First Labs is studying emergence as invariant-preserving promotion across changing representations and scales. The useful question for complex-systems research is not whether the vocabulary sounds compatible, but whether it yields measurable structure that survives comparison with established multiscale methods."
+  },
+  "researchBridge": [
+    "Distinction spaces ask how meaningful states become available and how those distinctions are sourced.",
+    "Emergence work asks when local or mesoscopic closure residues can be promoted into higher-level primitives without losing the invariant that made them meaningful.",
+    "Representational Mechanics asks what structure survives when the same system is modeled at different scales, resolutions, or carriers.",
+    "Admissibility provides a candidate discipline for distinguishing lawful coarse-graining or abstraction from information loss that invalidates downstream inference."
+  ],
+  "candidateStudies": [
+    "Compare a Boundary First promotion model with an established multiscale or coarse-graining analysis on one bounded complex system.",
+    "Test whether defect concentration or boundary structure identifies transitions that are already captured by standard observables, and preserve a null result if it does not.",
+    "Study when two representations of the same system are formally adequate but operationally asymmetric in the transitions they expose.",
+    "Build a small cross-scale casebook in which local closure, mesoscopic residue, promotion, and macro-interface formation can be independently annotated and criticized."
+  ],
+  "firstAsk": "Choose one multiscale system where the relevant coarse-graining is already well understood and test whether the Boundary First promotion language adds anything measurable, compressive, or explanatory.",
+  "claimBoundary": [
+    "This page does not imply Santa Fe Institute endorsement, partnership, affiliation, or review.",
+    "Compatibility with complex-systems language is not evidence of a new result.",
+    "Boundary First must benchmark against established multiscale, network, dynamical-systems, information-theoretic, and statistical approaches appropriate to the selected system.",
+    "A clean reduction or null result is a valid outcome and should narrow the theory."
+  ],
+  "cta": {"label": "Test the promotion rule"},
+  "notes": [
+    "Use as an unlisted direct-outreach page only.",
+    "Research Deployment Packet routing: complex systems; distinction/escape/constructive spaces and representation variants."
+  ]
+}

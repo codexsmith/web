@@ -1,0 +1,548 @@
+/* Boundary First UX · Gestalt process projection
+   Gestalt is now process context around Focus. Its zoom changes how much of the
+   Boundary First operating loop is visible; it does not traverse content ancestry. */
+
+.gestalt-viewport {
+  overflow: hidden;
+  place-items: stretch;
+  padding: clamp(16px, 2.4vw, 34px);
+}
+
+.gestalt-view {
+  width: min(1440px, 100%);
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin-inline: auto;
+  overflow-y: auto;
+  padding: clamp(22px, 3vw, 42px);
+  border: 1px solid var(--line-strong);
+  border-radius: 22px;
+  background:
+    linear-gradient(rgba(23, 32, 28, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 32, 28, 0.022) 1px, transparent 1px),
+    rgba(251, 250, 246, 0.93);
+  background-size: 36px 36px, 36px 36px, auto;
+  box-shadow: var(--shadow);
+  scrollbar-width: thin;
+}
+
+.gestalt-view__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: clamp(26px, 5vw, 72px);
+  align-items: end;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.gestalt-view__heading h1 {
+  max-width: 900px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.8rem, 6vw, 6.2rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.gestalt-view__heading > div > p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 1.15rem 0 0;
+  color: var(--ink-soft);
+  line-height: 1.58;
+}
+
+.gestalt-view__scope {
+  display: grid;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--instrument-recess, rgba(223, 226, 215, 0.34));
+}
+
+.gestalt-view__scope > div {
+  min-width: 0;
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.68rem 0.76rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.gestalt-view__scope > div:last-child {
+  border-bottom: 0;
+}
+
+.gestalt-view__scope dt,
+.gestalt-view__scope dd {
+  margin: 0;
+}
+
+.gestalt-view__scope dt,
+.gestalt-section-label {
+  color: var(--ink-soft);
+  font-size: 0.45rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.gestalt-view__scope dd {
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+}
+
+.gestalt-synthesis {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 18px;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.gestalt-synthesis p {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.gestalt-synthesis strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 400;
+}
+
+.gestalt-synthesis span {
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.gestalt-pipeline,
+.gestalt-discipline-map,
+.gestalt-placement-notes,
+.gestalt-process-peers {
+  margin-top: 18px;
+}
+
+.gestalt-pipeline__stages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 9px;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gestalt-pipeline__stages > li {
+  position: relative;
+  min-width: 0;
+  min-height: 188px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 8px 10px;
+  padding: 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(251, 250, 246, 0.5);
+}
+
+.gestalt-pipeline__stages > li + li::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: -10px;
+  width: 10px;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.gestalt-pipeline__stages > li.is-active {
+  border-color: var(--ink);
+  background: var(--paper-strong);
+  box-shadow: 0 8px 22px rgba(23, 32, 28, 0.08);
+}
+
+.gestalt-pipeline__stages > li[data-primary="true"] {
+  border-left: 4px solid var(--accent);
+}
+
+.gestalt-stage__index {
+  grid-column: 1;
+  width: 28px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--ink-soft);
+  font-size: 0.48rem;
+  font-weight: 800;
+}
+
+.gestalt-stage__signal {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.gestalt-pipeline__stages > li.is-active .gestalt-stage__signal {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(141, 78, 47, 0.08);
+}
+
+.gestalt-stage__copy {
+  grid-column: 2;
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+}
+
+.gestalt-stage__copy small {
+  padding-right: 12px;
+  color: var(--accent);
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gestalt-stage__copy strong {
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.gestalt-stage__copy p,
+.gestalt-stage__copy li {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.58rem;
+  line-height: 1.42;
+}
+
+.gestalt-stage__copy ul {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0;
+  padding: 0.55rem 0 0 1rem;
+  border-top: 1px dotted var(--line);
+}
+
+.gestalt-discipline-map__grid {
+  display: grid;
+  gap: 8px;
+  margin-top: 0.7rem;
+}
+
+.gestalt-discipline-map article {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.6fr) minmax(0, 1.4fr);
+  gap: 14px;
+  align-items: center;
+  padding: 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.gestalt-discipline-map article header {
+  min-width: 0;
+}
+
+.gestalt-discipline-map article header strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.gestalt-discipline-map article header p {
+  margin: 0.3rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.56rem;
+  line-height: 1.4;
+}
+
+.gestalt-discipline__stages {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.gestalt-discipline__stages span {
+  min-width: 0;
+  min-height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0.25rem;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: rgba(66, 80, 72, 0.45);
+  font-size: 0.4rem;
+  text-align: center;
+}
+
+.gestalt-discipline__stages span[data-visible="false"] {
+  opacity: 0.24;
+}
+
+.gestalt-discipline__stages span[data-participates="true"] {
+  border-color: var(--line-strong);
+  background: rgba(223, 226, 215, 0.42);
+  color: var(--ink-soft);
+}
+
+.gestalt-discipline__stages span[data-participates="true"][data-focus="true"] {
+  border-color: var(--accent);
+  background: rgba(216, 183, 158, 0.32);
+  color: var(--ink);
+}
+
+.gestalt-lower-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.gestalt-placement-notes,
+.gestalt-process-peers {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.gestalt-placement-notes h2,
+.gestalt-process-peers h2 {
+  margin: 0.55rem 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+}
+
+.gestalt-placement-notes > p,
+.gestalt-empty {
+  color: var(--ink-soft);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.gestalt-placement-notes ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.8rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.gestalt-placement-notes li {
+  color: var(--ink-soft);
+  font-size: 0.63rem;
+  line-height: 1.45;
+}
+
+.gestalt-placement-notes__boundary {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px dotted var(--line-strong);
+}
+
+.gestalt-process-peers__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 0.8rem;
+}
+
+.gestalt-process-peers button {
+  min-width: 0;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(251, 250, 246, 0.58);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.gestalt-process-peers button:hover {
+  border-color: var(--ink);
+  background: var(--paper-strong);
+}
+
+.gestalt-process-peers button span {
+  color: var(--accent);
+  font-size: 0.42rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.gestalt-process-peers button strong {
+  overflow-wrap: anywhere;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+.gestalt-process-peers button small {
+  color: var(--ink-soft);
+  font-size: 0.48rem;
+}
+
+/* Gestalt zoom controls are process-scope controls, only present in this projection. */
+.frame-process-zoom {
+  height: 46px;
+  display: grid;
+  grid-template-columns: auto 38px 38px;
+  align-items: center;
+  gap: 2px;
+  padding: 3px 3px 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.frame-process-zoom__label {
+  display: grid;
+  gap: 0.08rem;
+  margin-right: 4px;
+}
+
+.frame-process-zoom__label span {
+  color: var(--ink-soft);
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.frame-process-zoom__label strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.64rem;
+  font-weight: 400;
+}
+
+.frame-process-zoom .frame-tool {
+  width: 38px;
+  height: 38px;
+  min-width: 38px !important;
+  min-height: 38px !important;
+}
+
+@media (max-width: 1180px) {
+  .frame-process-zoom__label {
+    display: none;
+  }
+
+  .frame-process-zoom {
+    grid-template-columns: 38px 38px;
+    padding-left: 3px;
+  }
+}
+
+@media (max-width: 980px) {
+  .gestalt-view__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .gestalt-discipline-map article {
+    grid-template-columns: 1fr;
+  }
+
+  .gestalt-discipline__stages {
+    overflow-x: auto;
+    grid-template-columns: repeat(9, minmax(74px, 1fr));
+    padding-bottom: 2px;
+  }
+}
+
+@media (max-width: 720px) {
+  .gestalt-viewport {
+    padding: 8px;
+  }
+
+  .gestalt-view {
+    padding: 22px 15px 42px;
+    border-radius: 12px;
+  }
+
+  .gestalt-view__heading h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+  }
+
+  .gestalt-synthesis {
+    grid-template-columns: 1fr;
+  }
+
+  .gestalt-pipeline__stages {
+    grid-template-columns: 1fr;
+  }
+
+  .gestalt-pipeline__stages > li + li::before {
+    top: -10px;
+    left: 21px;
+    width: 1px;
+    height: 10px;
+  }
+
+  .gestalt-lower-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gestalt-process-peers__list {
+    grid-template-columns: 1fr;
+  }
+
+  .frame-process-zoom {
+    height: 42px;
+    grid-template-columns: 34px 34px;
+  }
+
+  .frame-process-zoom .frame-tool {
+    width: 34px;
+    height: 34px;
+    min-width: 34px !important;
+    min-height: 34px !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .gestalt-view,
+  .gestalt-pipeline__stages > li,
+  .gestalt-discipline-map article,
+  .gestalt-placement-notes,
+  .gestalt-process-peers,
+  .gestalt-process-peers button,
+  .frame-process-zoom {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  .gestalt-pipeline__stages > li[data-primary="true"] {
+    border-left-color: Highlight;
+  }
+}

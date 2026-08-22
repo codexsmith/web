@@ -1,0 +1,268 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "implementation-guidance-candidate",
+  "purpose": "Attach optional historical foundations and lineage modules to introductory scenes and reader pathways without converting the introduction into a pantheon or a claim of intellectual succession.",
+  "sceneContract": {
+    "tabs": [
+      "idea",
+      "foundations",
+      "present-development"
+    ],
+    "defaultTab": "idea",
+    "foundationCardFields": [
+      "work-or-formalism",
+      "attribution",
+      "what-it-established",
+      "why-it-matters-here",
+      "local-use",
+      "what-is-not-claimed",
+      "citation-status"
+    ],
+    "maxInlineCards": 4,
+    "overflowAction": "explore-lineage-lens"
+  },
+  "pathModules": [
+    {
+      "id": "lineage-module-computation",
+      "title": "Computation: formal procedure, architecture, information, and agency",
+      "pathway": "science",
+      "targetNodes": [
+        "computational-systems"
+      ],
+      "entryIds": [
+        "lineage-alan-m-turing-on-computable-numbers-with-an-application-to-the-entscheidungsproblem-computational-systems",
+        "lineage-claude-e-shannon-a-mathematical-theory-of-communication-computational-systems",
+        "lineage-john-von-neumann-first-draft-of-a-report-on-the-edvac-computational-systems",
+        "lineage-stephen-a-cook-the-complexity-of-theorem-proving-procedures-computational-systems",
+        "lineage-von-neumann-stored-program-agentic-computation"
+      ],
+      "orientation": "Situate current computational and agentic work inside computability, information theory, architecture, complexity, machine learning, and graph-based computation.",
+      "nonClaim": "This pathway does not claim to complete, supersede, or stand in direct succession to these foundational programs."
+    },
+    {
+      "id": "lineage-module-mathematics",
+      "title": "Mathematics: geometry, invariance, operators, spectra, and structure",
+      "pathway": "science",
+      "targetNodes": [
+        "mathematics",
+        "distinction-space"
+      ],
+      "entryIds": [
+        "lineage-bernhard-riemann-on-the-hypotheses-which-lie-at-the-foundations-of-geometry-mathematics",
+        "lineage-emmy-noether-invariant-variation-problems-mathematics",
+        "lineage-samuel-eilenberg-and-saunders-mac-lane-general-theory-of-natural-equivalences-mathematics",
+        "lineage-mark-kac-can-one-hear-the-shape-of-a-drum-mathematics",
+        "lineage-riemann-intrinsic-geometry-distinction-space",
+        "lineage-dirac-operators-distinction-space",
+        "lineage-connes-noncommutative-geometry-distinction-space"
+      ],
+      "orientation": "Present the mathematics program inside established geometry, invariance, category theory, operator theory, spectral geometry, and noncommutative geometry.",
+      "nonClaim": "Names and works identify formal foundations and comparison obligations, not equivalence of contribution or authority by association."
+    },
+    {
+      "id": "lineage-module-physics",
+      "title": "Physics: dynamics, fields, relativity, quantum theory, horizons, and thermodynamics",
+      "pathway": "science",
+      "targetNodes": [
+        "physics"
+      ],
+      "entryIds": [
+        "lineage-isaac-newton-philosophi-naturalis-principia-mathematica-physics",
+        "lineage-james-clerk-maxwell-a-dynamical-theory-of-the-electromagnetic-field-physics",
+        "lineage-albert-einstein-the-foundation-of-the-general-theory-of-relativity-physics",
+        "lineage-emmy-noether-invariant-variation-problems-physics",
+        "lineage-john-von-neumann-mathematical-foundations-of-quantum-mechanics-physics",
+        "lineage-richard-p-feynman-and-albert-r-hibbs-quantum-mechanics-and-path-integrals-physics",
+        "lineage-dirac-relativistic-quantum-physics",
+        "lineage-hawking-horizons-thermodynamics-physics"
+      ],
+      "orientation": "Place Boundary-First Physics inside established classical, relativistic, quantum, field-theoretic, variational, horizon, and thermodynamic research.",
+      "nonClaim": "No new physics gains authority through proximity to major figures; every model must independently pass dimensional, recovery, prediction, empirical, and review gates."
+    },
+    {
+      "id": "lineage-module-boundary-theory",
+      "title": "Boundary Theory: distinction, signs, information, feedback, and designed systems",
+      "pathway": "theory",
+      "targetNodes": [
+        "boundary-theory",
+        "distinction-theory",
+        "representational-mechanics"
+      ],
+      "entryIds": [
+        "lineage-aristotle-categories-distinction-theory",
+        "lineage-ferdinand-de-saussure-course-in-general-linguistics-distinction-theory",
+        "lineage-george-spencer-brown-laws-of-form-distinction-theory",
+        "lineage-gregory-bateson-steps-to-an-ecology-of-mind-distinction-theory",
+        "lineage-charles-s-peirce-collected-writings-on-signs-and-semiosis-representational-mechanics",
+        "lineage-claude-e-shannon-a-mathematical-theory-of-communication-representational-mechanics",
+        "lineage-norbert-wiener-cybernetics-representational-mechanics",
+        "lineage-herbert-a-simon-the-sciences-of-the-artificial-representational-mechanics",
+        "lineage-susan-leigh-star-and-james-r-griesemer-institutional-ecology-translations-and-boundary-objects-representational-mechanics"
+      ],
+      "orientation": "Show that Boundary Theory and Representational Mechanics develop within long traditions of category, sign, distinction, information, feedback, representation, and boundary-object research.",
+      "nonClaim": "The current framework is not presented as a synthesis endorsed by these predecessors or as a replacement for their fields."
+    },
+    {
+      "id": "lineage-module-admissibility",
+      "title": "Admissibility: validity, types, correctness, approximation, and safety",
+      "pathway": "theory",
+      "targetNodes": [
+        "admissibility-theory",
+        "formal-grammars"
+      ],
+      "entryIds": [
+        "lineage-alfred-tarski-the-concept-of-truth-in-formalized-languages-admissibility-theory",
+        "lineage-c-a-r-hoare-an-axiomatic-basis-for-computer-programming-admissibility-theory",
+        "lineage-edsger-w-dijkstra-a-discipline-of-programming-admissibility-theory",
+        "lineage-patrick-cousot-and-radhia-cousot-abstract-interpretation-a-unified-lattice-model-admissibility-theory",
+        "lineage-nancy-leveson-engineering-a-safer-world-admissibility-theory"
+      ],
+      "orientation": "Differentiate logical validity, program correctness, sound approximation, authorized operation, and system safety.",
+      "nonClaim": "Admissibility Theory does not collapse these distinct traditions into one theorem or claim that one formal regime governs every domain."
+    },
+    {
+      "id": "lineage-module-engineering",
+      "title": "Engineering: modularity, systems safety, domains, Lean practice, and architecture",
+      "pathway": "engineering",
+      "targetNodes": [
+        "bfe",
+        "software-engineering-practice"
+      ],
+      "entryIds": [
+        "lineage-ludwig-von-bertalanffy-general-system-theory-bfe",
+        "lineage-david-l-parnas-on-the-criteria-to-be-used-in-decomposing-systems-into-modules-bfe",
+        "lineage-barry-w-boehm-a-spiral-model-of-software-development-and-enhancement-bfe",
+        "lineage-eric-evans-domain-driven-design-bfe",
+        "lineage-nancy-leveson-engineering-a-safer-world-bfe",
+        "lineage-taiichi-ohno-toyota-production-system-software-engineering-practice",
+        "lineage-christopher-alexander-et-al-a-pattern-language-software-engineering-practice",
+        "lineage-kent-beck-et-al-manifesto-for-agile-software-development-software-engineering-practice"
+      ],
+      "orientation": "Position Boundary-First Engineering as a reinterpretive and integrative practitioner program built within established systems, software, Lean, architecture, domain, and safety traditions.",
+      "nonClaim": "Boundary-First Engineering does not claim to have invented or replaced the established methods it studies and recontextualizes."
+    },
+    {
+      "id": "lineage-module-public-consequence",
+      "title": "Public consequence: representation, institutions, capability, law, and repair",
+      "pathway": "public-consequence",
+      "targetNodes": [
+        "constructive-humanist-agentics",
+        "governance-institutions",
+        "law-public-trust",
+        "finance-capital",
+        "infrastructure-repair"
+      ],
+      "entryIds": [
+        "lineage-j-c-r-licklider-man-computer-symbiosis-constructive-humanist-agentics",
+        "lineage-douglas-engelbart-augmenting-human-intellect-constructive-humanist-agentics",
+        "lineage-joseph-weizenbaum-computer-power-and-human-reason-constructive-humanist-agentics",
+        "lineage-amartya-sen-commodities-and-capabilities-constructive-humanist-agentics",
+        "lineage-john-dewey-the-public-and-its-problems-governance-institutions",
+        "lineage-elinor-ostrom-governing-the-commons-governance-institutions",
+        "lineage-charles-perrow-normal-accidents-infrastructure-repair",
+        "lineage-donella-h-meadows-et-al-the-limits-to-growth-infrastructure-repair"
+      ],
+      "orientation": "Place the public-consequence work inside human augmentation, capability, democratic inquiry, institutional governance, resilience, and system-accident traditions.",
+      "nonClaim": "The public doctrine is a contemporary position accountable to these traditions, not a claim that they converge on or endorse one Boundary First program."
+    },
+    {
+      "id": "lineage-module-corpus",
+      "title": "Corpus and evidence: inquiry, criticism, scientific memory, and provenance",
+      "pathway": "evidence",
+      "targetNodes": [
+        "corpus"
+      ],
+      "entryIds": [
+        "lineage-francis-bacon-novum-organum-corpus",
+        "lineage-royal-society-philosophical-transactions-corpus",
+        "lineage-karl-popper-the-logic-of-scientific-discovery-corpus",
+        "lineage-thomas-s-kuhn-the-structure-of-scientific-revolutions-corpus",
+        "lineage-donald-e-knuth-literate-programming-corpus",
+        "lineage-w3c-prov-dm-the-prov-data-model-corpus"
+      ],
+      "orientation": "Show Corpus Forge and research operations as contemporary work inside longstanding practices of disciplined inquiry, public record, criticism, executable explanation, and provenance.",
+      "nonClaim": "The pipeline is an operational implementation proposal, not a new philosophy of science established by citing these lineages."
+    }
+  ],
+  "sceneBindings": [
+    {
+      "sceneId": "roots",
+      "moduleIds": [
+        "lineage-module-computation",
+        "lineage-module-mathematics",
+        "lineage-module-physics",
+        "lineage-module-engineering"
+      ]
+    },
+    {
+      "sceneId": "synthesis",
+      "moduleIds": [
+        "lineage-module-computation",
+        "lineage-module-engineering",
+        "lineage-module-corpus"
+      ]
+    },
+    {
+      "sceneId": "distinction-space",
+      "moduleIds": [
+        "lineage-module-mathematics",
+        "lineage-module-boundary-theory"
+      ]
+    },
+    {
+      "sceneId": "boundary-theory",
+      "moduleIds": [
+        "lineage-module-boundary-theory",
+        "lineage-module-admissibility"
+      ]
+    },
+    {
+      "sceneId": "representational-mechanics",
+      "moduleIds": [
+        "lineage-module-boundary-theory",
+        "lineage-module-engineering",
+        "lineage-module-computation"
+      ]
+    },
+    {
+      "sceneId": "choose-path",
+      "moduleIds": [
+        "lineage-module-mathematics",
+        "lineage-module-physics",
+        "lineage-module-computation",
+        "lineage-module-engineering",
+        "lineage-module-public-consequence"
+      ]
+    },
+    {
+      "sceneId": "evidence",
+      "moduleIds": [
+        "lineage-module-corpus"
+      ]
+    }
+  ],
+  "editorialFirewall": {
+    "requiredDisclaimer": "These references identify foundational works, inherited formalisms, neighboring research traditions, and critical comparisons. They do not imply endorsement, equivalence, direct succession, or validation of Boundary First Labs.",
+    "preferredVerbs": [
+      "builds within",
+      "draws upon",
+      "is guided by",
+      "uses the formalism of",
+      "inherits a problem from",
+      "develops alongside",
+      "compares with",
+      "reinterprets through",
+      "extends a question raised by"
+    ],
+    "prohibitedWithoutIndependentEvidence": [
+      "completes",
+      "solves",
+      "supersedes",
+      "unifies",
+      "fulfills",
+      "continues the legacy of",
+      "stands alongside",
+      "is the next"
+    ]
+  }
+}

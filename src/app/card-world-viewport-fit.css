@@ -1,0 +1,290 @@
+/*
+ * Boundary First Card World · viewport-budget refinement.
+ *
+ * The horizontal frame rails are compact and equal. Wide World surfaces should use
+ * the available viewport before asking the visitor to scroll. Content may scroll only
+ * when it genuinely cannot be represented inside the available height.
+ */
+
+body[data-ui-shell="cards"] {
+  --frame-top: 52px;
+  --frame-bottom: 52px;
+}
+
+body[data-ui-shell="cards"] .boundary-frame__top,
+body[data-ui-shell="cards"] .boundary-frame__bottom {
+  height: 52px;
+  padding-inline: 10px;
+}
+
+body[data-ui-shell="cards"] .brand-anchor {
+  height: 40px;
+  gap: 0.58rem;
+  padding: 4px 8px 4px 6px;
+  border-radius: 11px;
+}
+
+body[data-ui-shell="cards"] .brand-anchor__mark {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+  font-size: 0.58rem;
+}
+
+body[data-ui-shell="cards"] .brand-anchor__name {
+  font-size: 0.86rem;
+}
+
+body[data-ui-shell="cards"] .brand-anchor__copy {
+  gap: 0;
+}
+
+body[data-ui-shell="cards"] .frame-tool {
+  width: 38px;
+  height: 38px;
+  min-width: 38px !important;
+  min-height: 38px !important;
+  border-radius: 10px !important;
+}
+
+body[data-ui-shell="cards"] .frame-tool svg {
+  width: 16px;
+  height: 16px;
+}
+
+body[data-ui-shell="cards"] .boundary-frame__bottom,
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .boundary-frame__bottom {
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+body[data-ui-shell="cards"] .frame-tool--footer-back {
+  flex: 0 0 auto;
+}
+
+body[data-ui-shell="cards"] .projection-switcher {
+  min-width: 0;
+  margin-left: auto;
+}
+
+body[data-ui-shell="cards"] .world-viewport {
+  place-items: stretch;
+  padding: clamp(8px, 0.55vw, 10px);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
+  overflow: hidden;
+  padding: clamp(5px, 0.45vw, 8px);
+}
+
+body[data-ui-shell="cards"] .branch-world {
+  --world-gap: clamp(8px, 0.9vw, 14px);
+  height: 100%;
+  min-height: 0;
+  gap: var(--world-gap);
+  align-content: stretch;
+}
+
+body[data-ui-shell="cards"] .branch-world--root-world {
+  grid-template-columns: minmax(260px, 0.48fr) minmax(0, 1.52fr);
+  grid-template-rows: minmax(0, 0.94fr) minmax(0, 1.06fr);
+  align-items: stretch;
+}
+
+/* Root identity already lives in the frame. The root intro is plain copy in the notch,
+   not a sixth card competing with the five actual regions. */
+body[data-ui-shell="cards"] .branch-world--root-world > .world-heading {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 1;
+  align-self: stretch;
+  display: grid;
+  align-content: center;
+  padding: clamp(18px, 1.35vw, 28px);
+  border: 0;
+  border-left: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"] .branch-world--root-world > .world-heading > p:not(.eyebrow) {
+  max-width: 24ch;
+  margin: 0;
+  font-size: clamp(0.8rem, 0.88vw, 1rem);
+  line-height: 1.48;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-grid {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.48fr) repeat(3, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 0.94fr) minmax(0, 1.06fr);
+  height: 100%;
+  min-height: 0;
+  align-content: stretch;
+  align-items: stretch;
+  gap: 8px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card {
+  min-height: 0 !important;
+  height: 100%;
+  overflow: hidden;
+  padding: clamp(12px, 0.9vw, 16px);
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="public-interest"] {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="products"] {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="publications"] {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="about"] {
+  grid-column: 1;
+  grid-row: 2;
+  padding: clamp(16px, 1.15vw, 22px);
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] {
+  grid-column: 2 / 5;
+  grid-row: 2;
+  border-radius: clamp(24px, 2.1vw, 34px);
+  padding-inline: clamp(22px, 2vw, 36px);
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card__kind {
+  font-size: 0.5rem;
+  line-height: 1.25;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card > strong {
+  font-size: clamp(1.2rem, min(1.55vw, 2.8svh), 1.9rem);
+  line-height: 1;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] > strong {
+  font-size: clamp(1.45rem, min(2.1vw, 3.6svh), 2.35rem);
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card > p {
+  margin-top: 0.5rem;
+  font-size: clamp(0.68rem, 0.74vw, 0.82rem);
+  line-height: 1.34;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="about"] > p {
+  font-size: clamp(0.7rem, 0.76vw, 0.84rem);
+  line-height: 1.38;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card__action {
+  margin-top: auto;
+  padding-top: 0.55rem;
+}
+
+/* A normal branch should also spend the viewport before it becomes a scroll surface. */
+@media (min-width: 981px) {
+  body[data-ui-shell="cards"] .world-viewport {
+    overflow: hidden;
+  }
+
+  body[data-ui-shell="cards"] .branch-world[data-world-id]:not([data-world-id="root"]) {
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+}
+
+/* When topology collapses, text preservation wins and the document may scroll. */
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"],
+  body[data-ui-shell="cards"] .site-shell {
+    --frame-top: 52px;
+    --frame-bottom: 52px;
+  }
+
+  body[data-ui-shell="cards"] .world-viewport,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
+    overflow: auto;
+    padding: 6px;
+  }
+
+  body[data-ui-shell="cards"] .branch-world,
+  body[data-ui-shell="cards"] .branch-world--root-world {
+    height: auto;
+    min-height: 100%;
+  }
+
+  body[data-ui-shell="cards"] .branch-world--root-world {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  body[data-ui-shell="cards"] .branch-world--root-world > .world-heading {
+    grid-column: 1;
+    grid-row: auto;
+    padding: 14px;
+  }
+
+  body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-column: 1;
+    grid-row: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card,
+  body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id] {
+    grid-column: auto;
+    grid-row: auto;
+    height: auto;
+    overflow: visible;
+    border-radius: 18px;
+    padding-inline: 14px;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"],
+  body[data-ui-shell="cards"] .site-shell,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] {
+    --frame-top: 52px;
+    --frame-bottom: 52px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__top,
+  body[data-ui-shell="cards"] .boundary-frame__bottom {
+    height: 52px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__top {
+    padding-inline: 6px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__bottom,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .boundary-frame__bottom {
+    padding-inline: 6px;
+  }
+
+  body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,120 @@
+version: 0.1
+date: 2026-08-01
+program: consequence-bearing-development
+primary_goal: >-
+  Convert the conversation synthesis into one publishable doctrine,
+  one testable operating protocol, and one purchasable service.
+
+goals:
+  - id: G1
+    title: Establish canonical framework
+    priority: P0
+    tasks:
+      - id: T1.1
+        action: Review new doctrine against Closure-Driven Software Development
+        output: compatibility notes and proposed merge points
+      - id: T1.2
+        action: Approve naming hierarchy
+        output: canonical terminology decision
+      - id: T1.3
+        action: Approve bounded circuit stage sequence
+        output: protocol v0.2
+      - id: T1.4
+        action: Register glossary and failure patterns
+        output: corpus ledger entries
+    closure:
+      - one approved naming stack
+      - no unresolved contradiction with existing canonical software documents
+      - claim ceilings recorded
+
+  - id: G2
+    title: Produce AI Repair Loop Playbook
+    priority: P0
+    tasks:
+      - id: T2.1
+        action: Draft 6000-9000 word playbook
+        output: manuscript v0.1
+      - id: T2.2
+        action: Build worked pull-request example
+        output: end-to-end case study
+      - id: T2.3
+        action: Convert templates into worksheets
+        output: reader kit v0.1
+      - id: T2.4
+        action: Red-team independence and authority rules
+        output: critic report and repairs
+    closure:
+      - readable without prior theory knowledge
+      - one workflow can be instrumented from the guide
+      - no self-authorization or self-closure loophole
+
+  - id: G3
+    title: Validate AI Consequence-Loop Audit
+    priority: P0
+    tasks:
+      - id: T3.1
+        action: Identify ten target buyers
+        output: outreach list
+      - id: T3.2
+        action: Conduct five problem interviews
+        output: interview evidence ledger
+      - id: T3.3
+        action: Offer one bounded pilot
+        output: proposal or engagement
+    closure_any:
+      - paid pilot
+      - written intent plus bounded workflow access
+      - three independent buyers report the same expensive failure
+
+  - id: G4
+    title: Build reference implementation
+    priority: P1
+    tasks:
+      - id: T4.1
+        action: Select repository and consequence channel
+        output: reference environment
+      - id: T4.2
+        action: Implement typed repair job and CI loop
+        output: reproducible workflow
+      - id: T4.3
+        action: Produce evidence and closure records
+        output: case study bundle
+    closure:
+      - mismatch detected
+      - repair verified
+      - full audit trail preserved
+
+  - id: G5
+    title: Develop conceptual paper
+    priority: P1
+    tasks:
+      - id: T5.1
+        action: Build literature map
+        output: annotated bibliography
+      - id: T5.2
+        action: Define mediation functions and indicators
+        output: research specification
+      - id: T5.3
+        action: Collect case studies and counterexamples
+        output: evidence table
+    closure:
+      - empirical claims cited
+      - evolutionary framing qualified
+      - testable diagnostics included
+
+  - id: G6
+    title: Integrate into Corpus Forge
+    priority: P1
+    tasks:
+      - id: T6.1
+        action: Add claim contracts and consequence channels to jobs
+        output: updated job schema
+      - id: T6.2
+        action: Add false-closure checks to Critic
+        output: updated critic protocol
+      - id: T6.3
+        action: Add reopened-closure state
+        output: ledger and workflow update
+    closure:
+      - every promoted AI claim has independent verification status
+      - reopened claims remain traceable

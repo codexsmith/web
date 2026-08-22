@@ -1,15 +1,8 @@
 import { ENTRANCE_ROUTES, getEntranceRoute } from "./registry";
-import type {
-  EntranceId,
-  EntranceMilestone,
-  EntranceResolution,
-} from "./types";
+import type { EntranceId, EntranceMilestone, EntranceResolution } from "./types";
 
 function pathParts(pathname: string, basePath: string) {
-  return pathname
-    .slice(basePath.length)
-    .split("/")
-    .filter(Boolean);
+  return pathname.slice(basePath.length).split("/").filter(Boolean);
 }
 
 export function entranceMilestone(
@@ -36,13 +29,10 @@ export function entranceMilestone(
   return parts.at(-1) === "atlas-reveal" ? "arrival" : "route";
 }
 
-export function resolveEntrancePath(
-  pathname: string,
-): EntranceResolution | null {
+export function resolveEntrancePath(pathname: string): EntranceResolution | null {
   const route = ENTRANCE_ROUTES.find(
     (candidate) =>
-      pathname === candidate.rootHref ||
-      pathname.startsWith(`${candidate.rootHref}/`),
+      pathname === candidate.rootHref || pathname.startsWith(`${candidate.rootHref}/`),
   );
   if (!route) return null;
 
@@ -54,10 +44,7 @@ export function resolveEntrancePath(
   };
 }
 
-export const ENTRANCE_MILESTONE_LABELS: Record<
-  EntranceMilestone,
-  string
-> = {
+export const ENTRANCE_MILESTONE_LABELS: Record<EntranceMilestone, string> = {
   identity: "Identity",
   orientation: "Orientation",
   selection: "Selection",

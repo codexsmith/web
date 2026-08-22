@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "implementation-guidance-draft",
+  "defaultExperience": "first-passage",
+  "viewModes": {
+    "sequence": {
+      "description": "A resumable guided camera path through curated graph scenes.",
+      "supports": ["next", "previous", "skip", "nodeDive", "resume"],
+      "preserveState": true
+    },
+    "radial": {
+      "description": "A focused node or object surrounded by a curated conceptual neighborhood.",
+      "maxPrimaryNeighbors": 7,
+      "stablePositions": true
+    },
+    "tree": {
+      "description": "A hierarchy or lineage projection using selected primary edge types.",
+      "defaultEdgeTypes": ["contains", "definedWithin", "grounds", "appliedThrough", "stewards"]
+    },
+    "node": {
+      "description": "The canonical deep record for one node.",
+      "sections": ["overview", "facets", "takeaways", "claims", "documents", "programs", "history", "relations", "pathways"]
+    },
+    "pathway": {
+      "description": "A reader-intent route through selected nodes and sequence scenes.",
+      "preserveBranchChoice": true
+    },
+    "atlas": {
+      "description": "The complete graph with search, filters, focus, and pathway emphasis.",
+      "filters": ["role", "layer", "maturity", "pathway", "relationType"]
+    }
+  },
+  "experiences": [
+    {
+      "id": "first-passage",
+      "title": "A First Passage Through Boundary First Labs",
+      "estimatedMinutes": 10,
+      "entryActions": ["begin", "choose-on-ramp", "open-atlas", "resume"],
+      "steps": [
+        {
+          "id": "problem",
+          "order": 0,
+          "title": "The Problem",
+          "headline": "Every consequential system draws a boundary.",
+          "visualMode": "sequence",
+          "layoutPreset": "single-consequence",
+          "focusNodes": [],
+          "newTerms": [],
+          "transitionQuestion": "How should we begin examining such a system?"
+        },
+        {
+          "id": "boundary-first",
+          "order": 1,
+          "title": "Boundary First",
+          "headline": "Begin with what must remain true.",
+          "visualMode": "radial",
+          "layoutPreset": "four-question-wheel",
+          "focusNodes": ["boundary-first"],
+          "newTerms": ["boundary", "invariant", "defect", "repair"],
+          "transitionQuestion": "Where did this method come from?"
+        },
+        {
+          "id": "roots",
+          "order": 2,
+          "title": "The Roots",
+          "headline": "The work did not come from one field.",
+          "visualMode": "tree",
+          "layoutPreset": "lineage-roots",
+          "focusNodes": [],
+          "virtualNodes": ["information", "computation", "practical-mechanics", "physics-lineage", "mathematics-lineage", "scientific-method"],
+          "newTerms": [],
+          "transitionQuestion": "What recurring structure connected these traditions?"
+        },
+        {
+          "id": "synthesis",
+          "order": 3,
+          "title": "The Synthesis",
+          "headline": "The recurring problem was disciplined transformation.",
+          "visualMode": "sequence",
+          "layoutPreset": "many-to-one-convergence",
+          "focusNodes": ["formal-grammars"],
+          "virtualNodes": ["agentic-computation", "research-methods", "agile-lean", "systems-engineering"],
+          "newTerms": ["formal grammar"],
+          "transitionQuestion": "Where did the common mechanics become visible in practice?"
+        },
+        {
+          "id": "lived-convergence",
+          "order": 4,
+          "title": "Lived Convergence",
+          "headline": "The same mechanics appeared in research and in practice.",
+          "visualMode": "sequence",
+          "layoutPreset": "dual-node-overlap",
+          "focusNodes": ["software-engineering-practice"],
+          "virtualNodes": ["independent-research"],
+          "newTerms": [],
+          "transitionQuestion": "Can we see the mechanics before learning the abstraction?"
+        },
+        {
+          "id": "on-ramps",
+          "order": 5,
+          "title": "On-Ramps",
+          "headline": "Before the abstraction, see the mechanics working.",
+          "visualMode": "pathway",
+          "layoutPreset": "on-ramp-chooser",
+          "focusNodes": ["on-ramps"],
+          "options": ["chess", "soccer", "software", "institutions", "classical-geometry", "physical-boundaries"],
+          "newTerms": [],
+          "transitionQuestion": "What common object do these examples reveal?"
+        },
+        {
+          "id": "distinction-space",
+          "order": 6,
+          "title": "Distinction Space",
+          "headline": "Possibility becomes usable when variation is specified.",
+          "visualMode": "radial",
+          "layoutPreset": "formal-object-explorer",
+          "focusNodes": ["distinction-space"],
+          "contextNodes": ["distinction-theory", "admissibility-theory", "emergence-theory"],
+          "newTerms": ["Distinction Space"],
+          "transitionQuestion": "What aspects of this object must a theory explain?"
+        },
+        {
+          "id": "boundary-theory",
+          "order": 7,
+          "title": "Boundary Theory",
+          "headline": "Boundary Theory studies the structure and transformation of Distinction Spaces.",
+          "visualMode": "radial",
+          "layoutPreset": "faceted-object",
+          "focusNodes": ["boundary-theory", "distinction-space"],
+          "contextNodes": ["distinction-theory", "admissibility-theory", "emergence-theory"],
+          "newTerms": ["Boundary Theory", "Distinction Theory", "Admissibility Theory", "Emergence Theory"],
+          "transitionQuestion": "How do we formalize and work with these structures?"
+        },
+        {
+          "id": "representational-mechanics",
+          "order": 8,
+          "title": "Representational Mechanics",
+          "headline": "The theory becomes a discipline when we learn to work with it.",
+          "visualMode": "sequence",
+          "layoutPreset": "mechanics-cycle",
+          "focusNodes": ["representational-mechanics", "formal-grammars", "boundary-first", "bfe"],
+          "newTerms": ["Representational Mechanics", "Formal Grammars"],
+          "transitionQuestion": "Where do you want to follow the work next?"
+        },
+        {
+          "id": "choose-path",
+          "order": 9,
+          "title": "Choose a Path",
+          "headline": "One discipline. Several ways to test and use it.",
+          "visualMode": "pathway",
+          "layoutPreset": "six-path-chooser",
+          "focusNodes": [],
+          "pathwayOptions": ["theory", "engineering", "science", "public-consequence", "public-translation", "evidence", "lineage"],
+          "newTerms": [],
+          "transitionQuestion": "How does work in any path earn public authority?"
+        },
+        {
+          "id": "evidence",
+          "order": 10,
+          "title": "How Work Becomes Real",
+          "headline": "Claims earn promotion through contact.",
+          "visualMode": "sequence",
+          "layoutPreset": "evidence-pipeline",
+          "focusNodes": ["corpus", "products-testbeds"],
+          "newTerms": ["claim ceiling", "promotion", "replication"],
+          "transitionQuestion": "How does the complete body now fit together?"
+        },
+        {
+          "id": "atlas-reveal",
+          "order": 11,
+          "title": "The Atlas Reveal",
+          "headline": "You now have the legend.",
+          "visualMode": "atlas",
+          "layoutPreset": "canonical-atlas",
+          "focusNodes": ["identity"],
+          "newTerms": [],
+          "completionActions": ["continue-exploring", "follow-selected-path", "return-to-on-ramp", "search-corpus"]
+        }
+      ]
+    }
+  ],
+  "pathways": [
+    {
+      "id": "theory",
+      "title": "Theory Path",
+      "nodeSequence": ["distinction-space", "boundary-theory", "distinction-theory", "admissibility-theory", "emergence-theory", "representational-mechanics", "formal-grammars"],
+      "atlasEmphasis": "theory"
+    },
+    {
+      "id": "engineering",
+      "title": "Engineering Path",
+      "nodeSequence": ["boundary-first", "bfe", "software-engineering-practice", "ai-forge", "products-testbeds", "corpus"],
+      "atlasEmphasis": "practice"
+    },
+    {
+      "id": "science",
+      "title": "Scientific Path",
+      "nodeSequence": ["boundary-theory", "mathematics", "physics", "computational-systems", "products-testbeds"],
+      "atlasEmphasis": "research"
+    },
+    {
+      "id": "public-consequence",
+      "title": "Public Consequence Path",
+      "nodeSequence": ["constructive-humanist-agentics", "governance-institutions", "law-public-trust", "finance-capital", "infrastructure-repair", "systems-criticism"],
+      "atlasEmphasis": "public-consequence"
+    },
+    {
+      "id": "public-translation",
+      "title": "Public Translation Path",
+      "nodeSequence": ["on-ramps", "positions", "public-philosophy-satire", "systems-criticism", "identity"],
+      "atlasEmphasis": "public-interface"
+    },
+    {
+      "id": "evidence",
+      "title": "Evidence Path",
+      "nodeSequence": ["corpus", "products-testbeds", "systems-criticism", "identity"],
+      "stageSequence": ["source", "formalization", "prototype", "internal-test", "external-pilot", "comparative-evidence", "independent-review", "public-result", "replication"],
+      "atlasEmphasis": "evidence"
+    },
+    {
+      "id": "lineage",
+      "title": "Founder and Research Lineage",
+      "nodeSequence": ["software-engineering-practice", "formal-grammars", "representational-mechanics", "boundary-theory", "identity"],
+      "virtualNodeSequence": ["information", "computation", "practical-mechanics", "physics-lineage", "mathematics-lineage", "scientific-method", "agentic-computation", "research-methods", "agile-lean", "systems-engineering", "independent-research"],
+      "atlasEmphasis": "lineage"
+    }
+  ]
+}

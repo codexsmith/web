@@ -1,0 +1,372 @@
+/*
+ * Boundary First Apparatus · World root refinement.
+ *
+ * Scope: the entered root World surface only. The existing left traversal/sibling
+ * apparatus is intentionally untouched. This layer reshapes the root working field
+ * into the five-region control-board composition used in the approved BF-UX study.
+ */
+
+.apparatus-prototype-shell:has(.apparatus-world--root) {
+  --root-panel: #172128;
+  --root-panel-raised: #1b262e;
+  --root-panel-hover: #202c35;
+  --root-hairline: rgba(170, 180, 184, 0.19);
+  --root-edge: rgba(170, 180, 184, 0.34);
+  --root-highlight: rgba(255, 255, 255, 0.055);
+  --root-shadow: rgba(0, 0, 0, 0.34);
+}
+
+.apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__workfield {
+  padding: clamp(0.85rem, 1.3vw, 1.2rem);
+  background: #0d151b;
+}
+
+.apparatus-world--root {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+/* Root orientation is carried by the apparatus and cards; do not repeat a page heading. */
+.apparatus-world--root .apparatus-backplane__heading {
+  display: none;
+}
+
+.apparatus-world--root .apparatus-backplane {
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(14rem, 1fr));
+  gap: clamp(0.7rem, 1vw, 1rem);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  counter-reset: bf-root-region;
+}
+
+.apparatus-world--root .apparatus-bay {
+  --root-region-accent: var(--bf-action);
+
+  position: relative;
+  grid-column: span 2;
+  min-height: 0;
+  counter-increment: bf-root-region;
+  padding: clamp(0.95rem, 1.25vw, 1.25rem);
+  padding-top: clamp(1.15rem, 1.5vw, 1.45rem);
+  gap: 0.55rem;
+  overflow: hidden;
+  border: 1px solid var(--root-edge);
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, var(--root-highlight), transparent 24%),
+    var(--root-panel);
+  box-shadow:
+    inset 0 1px var(--root-highlight),
+    inset 0 -1px rgba(0, 0, 0, 0.34),
+    0 2px 6px var(--root-shadow);
+}
+
+/* Three equal regions above; About narrow and Research dominant below. */
+.apparatus-world--root .apparatus-bay:nth-child(1),
+.apparatus-world--root .apparatus-bay:nth-child(2),
+.apparatus-world--root .apparatus-bay:nth-child(3) {
+  grid-column: span 2;
+}
+
+.apparatus-world--root .apparatus-bay:nth-child(4) {
+  grid-column: span 2;
+}
+
+.apparatus-world--root .apparatus-bay:nth-child(5) {
+  grid-column: span 4;
+}
+
+.apparatus-world--root .apparatus-bay:nth-child(1) { --root-region-accent: var(--bf-action); }
+.apparatus-world--root .apparatus-bay:nth-child(2) { --root-region-accent: var(--bf-valid); }
+.apparatus-world--root .apparatus-bay:nth-child(3) { --root-region-accent: var(--bf-info); }
+.apparatus-world--root .apparatus-bay:nth-child(4) { --root-region-accent: var(--bf-attention); }
+.apparatus-world--root .apparatus-bay:nth-child(5) { --root-region-accent: var(--bf-action); }
+
+/* Edge illumination indicates region semantics without turning the panel into neon. */
+.apparatus-world--root .apparatus-bay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-left: 2px solid var(--root-region-accent);
+  border-top: 1px solid color-mix(in srgb, var(--root-region-accent) 52%, transparent);
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.92;
+}
+
+.apparatus-world--root .apparatus-bay::after {
+  content: "0" counter(bf-root-region);
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  display: grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 1.65rem;
+  padding-inline: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--root-region-accent) 54%, transparent);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.018);
+  color: var(--root-region-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.apparatus-world--root .apparatus-bay__register {
+  display: grid;
+  align-content: start;
+  min-height: 3.15rem;
+  padding-right: 3rem;
+  color: var(--root-region-accent);
+  line-height: 1.35;
+}
+
+/* A small geometric register mark gives the cards an instrument identity without
+ * introducing a second icon library or decorative illustration layer. */
+.apparatus-world--root .apparatus-bay__register::before {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--root-region-accent);
+  font-size: 1.75rem;
+  line-height: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.apparatus-world--root .apparatus-bay:nth-child(1) .apparatus-bay__register::before { content: "◎"; }
+.apparatus-world--root .apparatus-bay:nth-child(2) .apparatus-bay__register::before { content: "◇"; }
+.apparatus-world--root .apparatus-bay:nth-child(3) .apparatus-bay__register::before { content: "▤"; }
+.apparatus-world--root .apparatus-bay:nth-child(4) .apparatus-bay__register::before { content: "△"; }
+.apparatus-world--root .apparatus-bay:nth-child(5) .apparatus-bay__register::before { content: "⌁"; }
+
+.apparatus-world--root .apparatus-bay h2 {
+  margin-top: 0.05rem;
+  max-width: 18ch;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1.05;
+}
+
+.apparatus-world--root .apparatus-bay:nth-child(5) h2 {
+  max-width: none;
+  font-size: clamp(1.55rem, 2.15vw, 2.15rem);
+}
+
+.apparatus-world--root .apparatus-bay p {
+  max-width: 48ch;
+  color: var(--bf-silver-300);
+  font-size: clamp(0.84rem, 0.9vw, 0.96rem);
+  line-height: 1.55;
+}
+
+.apparatus-world--root .apparatus-bay:nth-child(5) p {
+  max-width: 78ch;
+}
+
+/* Root entry ports become the lower control strip of each region panel. */
+.apparatus-world--root .apparatus-bay > .apparatus-port--enter {
+  width: calc(100% + 2 * clamp(0.95rem, 1.25vw, 1.25rem));
+  min-height: 3rem;
+  margin:
+    auto
+    calc(-1 * clamp(0.95rem, 1.25vw, 1.25rem))
+    calc(-1 * clamp(0.95rem, 1.25vw, 1.25rem));
+  padding-inline: clamp(0.95rem, 1.25vw, 1.25rem);
+  border: 0;
+  border-top: 1px solid var(--root-hairline);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: none;
+  color: var(--root-region-accent);
+}
+
+.apparatus-world--root .apparatus-bay > .apparatus-port--enter:hover {
+  border-top-color: color-mix(in srgb, var(--root-region-accent) 46%, var(--root-hairline));
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.apparatus-world--root .apparatus-bay > .apparatus-port--enter .apparatus-port__label {
+  color: var(--root-region-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.apparatus-world--root .apparatus-bay > .apparatus-port--enter .apparatus-port__label::after {
+  content: " REGION";
+}
+
+.apparatus-world--root .apparatus-bay > .apparatus-port--enter strong {
+  display: none;
+}
+
+.apparatus-world--root .apparatus-bay > .apparatus-port--enter .apparatus-port__terminal {
+  color: var(--root-region-accent);
+}
+
+/* The approved root study uses a compact machine header. Preserve the existing
+ * functional controls; only reposition them. The left apparatus is not touched. */
+@media (min-width: 1360px) {
+  .apparatus-prototype-shell:has(.apparatus-world--root) {
+    grid-template-rows: auto minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-areas:
+      "top top"
+      "trace work"
+      "peers work";
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__topbar {
+    position: relative;
+    min-height: 4.75rem;
+    padding-right: 31rem;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-command--brand {
+    min-width: 23rem;
+    align-self: stretch;
+    padding-bottom: 1.15rem;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-command__register {
+    width: 2.8rem;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__prototype-label {
+    position: absolute;
+    left: 4.6rem;
+    bottom: 0.55rem;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__global-commands {
+    margin-left: auto;
+  }
+
+  /* Back is meaningful once a traversal exists, but the root itself has nowhere to rewind. */
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__global-commands > .apparatus-command:first-child {
+    display: none;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-command--exit {
+    display: none;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__global-commands > .apparatus-command:nth-child(2) {
+    width: 3rem;
+    min-width: 3rem;
+    padding-inline: 0;
+    font-size: 0;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__global-commands > .apparatus-command:nth-child(2)::before {
+    content: "⌕";
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  /* This is a readout, not a control. It intentionally carries no pointer affordance. */
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__topbar::after {
+    content: "SYSTEM STATE   ●   ADMISSIBLE";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 18rem;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid var(--root-edge);
+    border-radius: 7px;
+    background: #10181e;
+    box-shadow: inset 0 1px var(--root-highlight);
+    color: var(--bf-valid);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-depth {
+    position: absolute;
+    z-index: 5;
+    top: 0.72rem;
+    right: 0.8rem;
+    min-height: 3.15rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.45rem;
+    padding: 0.2rem 0.28rem 0.2rem 0.6rem;
+    border: 1px solid var(--root-edge);
+    border-radius: 7px;
+    background: #111a20;
+    box-shadow: inset 0 1px var(--root-highlight), 0 1px 2px var(--root-shadow);
+  }
+}
+
+/* Mid-width Apparatus retains the current left rail while the root card field compacts. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .apparatus-world--root .apparatus-backplane {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .apparatus-world--root .apparatus-bay,
+  .apparatus-world--root .apparatus-bay:nth-child(1),
+  .apparatus-world--root .apparatus-bay:nth-child(2),
+  .apparatus-world--root .apparatus-bay:nth-child(3),
+  .apparatus-world--root .apparatus-bay:nth-child(4) {
+    grid-column: span 1;
+    min-height: 15rem;
+  }
+
+  .apparatus-world--root .apparatus-bay:nth-child(5) {
+    grid-column: 1 / -1;
+    min-height: 15rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .apparatus-prototype-shell:has(.apparatus-world--root) .apparatus-prototype__workfield {
+    padding: 0.7rem;
+  }
+
+  .apparatus-world--root .apparatus-backplane {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    height: auto;
+    gap: 0.65rem;
+  }
+
+  .apparatus-world--root .apparatus-bay,
+  .apparatus-world--root .apparatus-bay:nth-child(1),
+  .apparatus-world--root .apparatus-bay:nth-child(2),
+  .apparatus-world--root .apparatus-bay:nth-child(3),
+  .apparatus-world--root .apparatus-bay:nth-child(4),
+  .apparatus-world--root .apparatus-bay:nth-child(5) {
+    grid-column: auto;
+    min-height: 14rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .apparatus-world--root .apparatus-bay,
+  .apparatus-world--root .apparatus-bay::before,
+  .apparatus-world--root .apparatus-bay::after,
+  .apparatus-world--root .apparatus-bay > .apparatus-port--enter {
+    border-color: CanvasText;
+  }
+
+  .apparatus-world--root .apparatus-bay::after,
+  .apparatus-world--root .apparatus-bay__register,
+  .apparatus-world--root .apparatus-bay > .apparatus-port--enter,
+  .apparatus-world--root .apparatus-bay > .apparatus-port--enter .apparatus-port__label {
+    color: CanvasText;
+  }
+}

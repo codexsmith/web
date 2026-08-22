@@ -1,0 +1,373 @@
+{
+  "schemaVersion": "boundary-first.research-program.operational-homology.v1",
+  "version": "0.1",
+  "programStatus": "bounded-comparative-program-active-pending-external-review",
+  "sourceSuite": "world_class_executable_distinctions_suite_v0_1",
+  "title": "Testing Cross-Domain Operational Homology",
+  "objective": "Determine which recurring software, institutional, and research-operation correspondences preserve operational structure, where they break, and whether any improve diagnosis beyond ordinary domain practice.",
+  "hypothesis": "Mature domains that govern consequential transformation tend to represent entity roles, state, admissible transition, invariant, witness, responsibility, defect, and repair. Some mappings may preserve enough of that linked structure to warrant formal testing.",
+  "negativeResultRule": "A bounded or rejected mapping is a successful research result when it identifies the precise breakpoint and prevents a stronger false claim.",
+  "operationalTuple": [
+    "entity roles",
+    "relations",
+    "state representation",
+    "admissible transitions",
+    "protected invariants",
+    "boundary conditions",
+    "witness mechanisms",
+    "failure modes",
+    "responsibility routing",
+    "repair operations"
+  ],
+  "mappingGrades": [
+    {
+      "level": "L0",
+      "label": "Token resemblance",
+      "criterion": "The same or similar word appears in both domains.",
+      "operationalHomologyNameAllowed": false
+    },
+    {
+      "level": "L1",
+      "label": "Semantic resemblance",
+      "criterion": "The terms carry related meanings, but no operational role has been shown to survive.",
+      "operationalHomologyNameAllowed": false
+    },
+    {
+      "level": "L2",
+      "label": "Functional role resemblance",
+      "criterion": "The compared objects perform a similar local function.",
+      "operationalHomologyNameAllowed": false
+    },
+    {
+      "level": "L3",
+      "label": "Transition and invariant preservation",
+      "criterion": "The mapping preserves relevant state changes and what must remain true across them.",
+      "operationalHomologyNameAllowed": false
+    },
+    {
+      "level": "L4",
+      "label": "Failure and repair preservation",
+      "criterion": "The mapping also preserves characteristic defects, witnesses, responsibility routes, and repair operations.",
+      "operationalHomologyNameAllowed": true
+    },
+    {
+      "level": "L5",
+      "label": "Composition-preserving formal map",
+      "criterion": "A declared formal carrier preserves the mapped structure under composition.",
+      "operationalHomologyNameAllowed": true
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-OMG-BPMN-2",
+      "kind": "external-primary",
+      "label": "Object Management Group, Business Process Model and Notation 2.0",
+      "url": "https://www.omg.org/spec/BPMN/2.0/"
+    },
+    {
+      "id": "SRC-NIST-RBAC",
+      "kind": "external-primary",
+      "label": "NIST Role-Based Access Control reference material",
+      "url": "https://csrc.nist.gov/Projects/Role-Based-Access-Control"
+    },
+    {
+      "id": "SRC-POSTGRES-TRANSACTION",
+      "kind": "external-primary",
+      "label": "PostgreSQL 16 documentation, Transactions",
+      "url": "https://www.postgresql.org/docs/16/tutorial-transactions.html"
+    },
+    {
+      "id": "SRC-W3C-PROV-O",
+      "kind": "external-primary",
+      "label": "W3C Recommendation, PROV-O: The PROV Ontology",
+      "url": "https://www.w3.org/TR/prov-o/"
+    },
+    {
+      "id": "SRC-TREASURY-IPP",
+      "kind": "external-primary",
+      "label": "U.S. Treasury Bureau of the Fiscal Service, IPP payment-status definitions",
+      "url": "https://fiscal.treasury.gov/financial-management-solutions/invoice-processing-platform-ipp/finding-payment-status-invoices"
+    },
+    {
+      "id": "SRC-BFI-EN-003",
+      "kind": "project-primary",
+      "label": "EN-003 - Software Worked-Case Pack: Invoice Approval, Payment, Settlement, and Repair"
+    },
+    {
+      "id": "SRC-BFI-CORPUS-FORGE",
+      "kind": "project-primary",
+      "label": "Corpus Forge Vertical Slice - JOB-PUB-002"
+    },
+    {
+      "id": "SRC-BFI-OH-PROGRAM",
+      "kind": "project-primary",
+      "label": "Research Program: Testing Cross-Domain Operational Homology v0.1"
+    }
+  ],
+  "lexicon": [
+    {
+      "id": "LEX-PROCESS",
+      "domain": "business-process modeling",
+      "term": "process",
+      "definition": "An end-to-end ordering of activities and messages among participants; the representation makes sequence and exchange visible.",
+      "sourceId": "SRC-OMG-BPMN-2"
+    },
+    {
+      "id": "LEX-ROLE",
+      "domain": "software security",
+      "term": "role",
+      "definition": "An organizationally meaningful collection of permissions through which a user receives authority to perform operations.",
+      "sourceId": "SRC-NIST-RBAC"
+    },
+    {
+      "id": "LEX-TRANSACTION",
+      "domain": "database systems",
+      "term": "transaction",
+      "definition": "A group of steps treated as one all-or-nothing database operation, with commit or rollback governing durable effect.",
+      "sourceId": "SRC-POSTGRES-TRANSACTION"
+    },
+    {
+      "id": "LEX-PROVENANCE-ENTITY",
+      "domain": "provenance systems",
+      "term": "entity",
+      "definition": "A physical, digital, conceptual, or other thing whose generation, use, revision, or invalidation can be represented.",
+      "sourceId": "SRC-W3C-PROV-O"
+    },
+    {
+      "id": "LEX-PROVENANCE-ACTIVITY",
+      "domain": "provenance systems",
+      "term": "activity",
+      "definition": "A process occurring over time that uses, transforms, or generates entities.",
+      "sourceId": "SRC-W3C-PROV-O"
+    },
+    {
+      "id": "LEX-PROVENANCE-AGENT",
+      "domain": "provenance systems",
+      "term": "agent",
+      "definition": "A represented bearer of responsibility for an activity, entity, or another agent's activity.",
+      "sourceId": "SRC-W3C-PROV-O"
+    },
+    {
+      "id": "LEX-PENDING-APPROVAL",
+      "domain": "public invoice administration",
+      "term": "pending approval",
+      "definition": "An invoice has reached the buyer and is still moving through the approval route; payment readiness has not yet been established.",
+      "sourceId": "SRC-TREASURY-IPP"
+    },
+    {
+      "id": "LEX-APPROVED-TO-PAY",
+      "domain": "public invoice administration",
+      "term": "approved to pay",
+      "definition": "The invoice has passed the required approval and receipt conditions, while a payment date may still be unset.",
+      "sourceId": "SRC-TREASURY-IPP"
+    },
+    {
+      "id": "LEX-PAID",
+      "domain": "public invoice administration",
+      "term": "paid",
+      "definition": "The payment has been issued and funds received; this is stronger than approval or scheduling.",
+      "sourceId": "SRC-TREASURY-IPP"
+    },
+    {
+      "id": "LEX-PROMOTION",
+      "domain": "research operations",
+      "term": "promotion",
+      "definition": "A human-authorized, scope-bounded decision that moves selected claims or artifacts into a more authoritative working state while preserving conditions and exclusions.",
+      "sourceId": "SRC-BFI-CORPUS-FORGE"
+    },
+    {
+      "id": "LEX-CRITIC",
+      "domain": "research operations",
+      "term": "critic report",
+      "definition": "A separate adversarial review record that identifies findings, required repairs, retests, independence limits, and unresolved human decisions.",
+      "sourceId": "SRC-BFI-CORPUS-FORGE"
+    },
+    {
+      "id": "LEX-SUPERSESSION",
+      "domain": "research operations",
+      "term": "supersession",
+      "definition": "An append-only replacement relation that preserves predecessor material and the authority trail rather than silently overwriting history.",
+      "sourceId": "SRC-BFI-CORPUS-FORGE"
+    }
+  ],
+  "caseStudies": [
+    {
+      "id": "CASE-INVOICE-APPROVAL",
+      "title": "Invoice approval, payment, settlement, and repair",
+      "status": "bounded-comparative-reading-complete",
+      "scope": "One fictional invoice from receipt through approval, authorization, execution, settlement, reconciliation, contest, and repair.",
+      "sourceIds": [
+        "SRC-TREASURY-IPP",
+        "SRC-BFI-EN-003",
+        "SRC-OMG-BPMN-2",
+        "SRC-NIST-RBAC",
+        "SRC-POSTGRES-TRANSACTION"
+      ],
+      "representations": [
+        {
+          "id": "ordinary-process",
+          "label": "Ordinary process view",
+          "reveals": "The visible route from receipt to approval and payment, including participant handoffs.",
+          "omits": "A coarse received-approved-paid sequence can hide distinct authorities, settlement evidence, reconciliation, and repair."
+        },
+        {
+          "id": "software-model",
+          "label": "Software state and interaction view",
+          "reveals": "Orthogonal state dimensions, guarded transitions, permissions, idempotent attempts, and append-only events.",
+          "omits": "Standing, affected-party legitimacy, and institutional repair remain invisible unless explicitly represented."
+        },
+        {
+          "id": "boundary-first-model",
+          "label": "Boundary First view",
+          "reveals": "The false quotient between accounting approval and payment authority, the required witnesses, and the route from defect to owned repair.",
+          "omits": "It does not yet establish lower burden or superior field performance over competent workflow, contract, or safety methods."
+        }
+      ],
+      "falseCollapse": "Approved collapses accounting recognition and payment authority; Paid collapses submission, acknowledgment, settlement, and reconciliation.",
+      "result": "The single-status design is materially non-closing. The typed design is a closure candidate pending executable and comparative evidence.",
+      "mappingDecision": {
+        "candidate": "software state-machine structure to invoice lifecycle",
+        "grade": "L3",
+        "decision": "promoted-bounded-analogy",
+        "rationale": "The mapping preserves consequential state transitions and invariants and changes the design decision, but comparative failure-and-repair equivalence is not yet established.",
+        "breakpoint": "Database atomicity and rollback do not undo elapsed institutional consequences, supplier reliance, or payment-network events."
+      }
+    },
+    {
+      "id": "CASE-CLAIM-PROMOTION",
+      "title": "Research-claim promotion and supersession",
+      "status": "bounded-comparative-reading-complete",
+      "scope": "One documented transition from inherited architecture to a bounded working architecture through sources, typed claims, criticism, human authority, promotion conditions, and recoverable supersession.",
+      "sourceIds": [
+        "SRC-W3C-PROV-O",
+        "SRC-BFI-CORPUS-FORGE",
+        "SRC-NIST-RBAC"
+      ],
+      "representations": [
+        {
+          "id": "ordinary-process",
+          "label": "Ordinary publication view",
+          "reveals": "A familiar route from draft through review to a released or retained result.",
+          "omits": "A generic draft-review-publish lane does not show which source supports which claim, who may promote it, or how an older architecture remains recoverable."
+        },
+        {
+          "id": "software-model",
+          "label": "Software lifecycle and provenance view",
+          "reveals": "Typed states, source hashes, dependency edges, role permissions, validation, versioning, and reversible replacement records.",
+          "omits": "Schema validity and reproducibility cannot confer truth, legitimacy, external independence, or release authority."
+        },
+        {
+          "id": "boundary-first-model",
+          "label": "Boundary First view",
+          "reveals": "Evidence, claim ceiling, critic witness, human promotion authority, unresolved obligations, repair, and append-only supersession remain coupled in one consequence chain.",
+          "omits": "The retrospective case does not demonstrate general superiority, scalability, or lower research burden."
+        }
+      ],
+      "falseCollapse": "Reviewed collapses internal criticism, independent review, human promotion authority, and public-release authorization into one reassuring label.",
+      "result": "The case preserves a bounded source-to-consequence transition and its repair trail; external review and general comparative validation remain open.",
+      "mappingDecision": {
+        "candidate": "software memento and version record to research provenance and supersession record",
+        "grade": "L4",
+        "decision": "promoted-operational-homology-candidate",
+        "rationale": "The bounded mapping preserves state, lineage, failure witness, human responsibility, repair, and recoverable replacement across the documented transition.",
+        "breakpoint": "A recoverable record can preserve decision history but cannot mechanize scholarly judgment or make an internal critic independent."
+      }
+    }
+  ],
+  "counterexamples": [
+    {
+      "id": "BRK-001",
+      "mapping": "software inheritance to biological inheritance",
+      "observedResemblance": "Both describe transmission from a predecessor structure.",
+      "breakpoint": "Biological inheritance is not a programmer-declared subtype relation and includes reproduction, variation, population history, and selection.",
+      "decision": "rejected",
+      "maxGrade": "L1"
+    },
+    {
+      "id": "BRK-002",
+      "mapping": "software object identity to personal identity",
+      "observedResemblance": "Both distinguish a continuing particular from its changing attributes.",
+      "breakpoint": "Persons possess subjectivity, standing, self-interpretation, and rights that are not exhausted by an addressable state-bearing object model.",
+      "decision": "rejected",
+      "maxGrade": "L1"
+    },
+    {
+      "id": "BRK-003",
+      "mapping": "compilation to judicial interpretation",
+      "observedResemblance": "Both give operational consequence to a recognized grammar.",
+      "breakpoint": "Courts operate amid precedent, discretion, contested facts, institutional legitimacy, and appeal rather than a fixed compiler semantics.",
+      "decision": "bounded-only",
+      "maxGrade": "L2"
+    },
+    {
+      "id": "BRK-004",
+      "mapping": "database rollback to historical or moral repair",
+      "observedResemblance": "Both respond to a defective prior transition.",
+      "breakpoint": "Institutional harm, elapsed time, reliance, and memory cannot be canceled by restoring an earlier record state.",
+      "decision": "rejected",
+      "maxGrade": "L2"
+    },
+    {
+      "id": "BRK-005",
+      "mapping": "singleton object to legitimate sovereignty",
+      "observedResemblance": "Both may designate a single coordinating authority.",
+      "breakpoint": "Uniqueness does not establish consent, legitimacy, checks, succession, jurisdiction, or a right to govern.",
+      "decision": "rejected",
+      "maxGrade": "L1"
+    },
+    {
+      "id": "BRK-006",
+      "mapping": "facade interface to public-service portal",
+      "observedResemblance": "Both simplify access to a complex underlying system.",
+      "breakpoint": "A portal can become consequence-obscuring compression when exceptions, reasons, affected parties, or appeal routes disappear.",
+      "decision": "bounded-only",
+      "maxGrade": "L2"
+    },
+    {
+      "id": "BRK-007",
+      "mapping": "observer subscription to legal notice",
+      "observedResemblance": "Both propagate information after a state change.",
+      "breakpoint": "Legal notice depends on standing, timing, accessibility, proof of delivery, and opportunity to respond, not mere event receipt.",
+      "decision": "bounded-only",
+      "maxGrade": "L2"
+    },
+    {
+      "id": "BRK-008",
+      "mapping": "object deletion to institutional termination",
+      "observedResemblance": "Both remove an entity from an active lifecycle.",
+      "breakpoint": "Termination can leave records, duties, affected people, appeals, liabilities, and successor obligations that must remain represented.",
+      "decision": "rejected",
+      "maxGrade": "L2"
+    },
+    {
+      "id": "BRK-009",
+      "mapping": "class membership to public-benefit eligibility",
+      "observedResemblance": "Both classify a particular under declared criteria.",
+      "breakpoint": "Eligibility may be contested, evidence-dependent, time-sensitive, jurisdictional, and subject to due process and equitable exception.",
+      "decision": "bounded-only",
+      "maxGrade": "L2"
+    },
+    {
+      "id": "BRK-010",
+      "mapping": "software composition to institutional merger",
+      "observedResemblance": "Both combine parts into a larger operating whole.",
+      "breakpoint": "Institutional parts can retain agency, conflicting obligations, exit rights, culture, and external standing that strong software composition suppresses.",
+      "decision": "bounded-only",
+      "maxGrade": "L2"
+    }
+  ],
+  "openGates": [
+    "External domain review of the starter lexicon and case judgments",
+    "Executable comparison of the invoice case against competent baseline methods",
+    "Independent review of the claim-promotion case",
+    "Formal carrier and composition test for the strongest L4 candidate",
+    "Prospective replication beyond the two retrospective or synthetic cases"
+  ],
+  "claimCeiling": "This is an active bounded comparative research program. It establishes a test structure, a source-backed starter lexicon, two completed comparative readings, and explicit positive and negative mapping decisions. It does not establish a universal grammar, formal isomorphism across domains, field superiority, or license to reduce persons and institutions to software objects.",
+  "routes": {
+    "program": "/artifact/testing-cross-domain-operational-homology",
+    "argument": "/artifact/executable-distinctions",
+    "work": "/work",
+    "collaborate": "/collaborate"
+  }
+}

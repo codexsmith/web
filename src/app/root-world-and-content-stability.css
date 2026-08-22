@@ -1,0 +1,352 @@
+/* Boundary First UX · canonical Root World + readable content
+   The hero is the entry threshold. Once entered, the Root World is the canonical
+   structural world: the frame carries commands and representation; the world carries
+   root structure. Text is allowed to grow before decorative geometry is preserved. */
+
+/* No duplicate root navigation in the top frame. */
+.boundary-frame__top {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+}
+
+.brand-anchor {
+  grid-column: 1;
+}
+
+.frame-tools {
+  grid-column: 2;
+  justify-self: end;
+}
+
+.primary-nav {
+  display: none !important;
+}
+
+/* A fresh Root World has no traversal trace yet. If the visitor later returns Home,
+   traversal-history.css lawfully restores the left rail for the route they actually took. */
+.site-shell[data-root-focus="true"] .world-viewport {
+  left: 0;
+  right: 0;
+}
+
+.boundary-frame--root::after {
+  left: 0;
+}
+
+.site-shell[data-root-focus="true"] .boundary-frame__bottom {
+  padding-left: 14px;
+}
+
+/* Focus has one visual owner: the endpoint of the Focus Path. */
+.path-node__current {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.14rem;
+}
+
+.path-node__role {
+  color: var(--accent);
+  font-size: 0.39rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Bottom frame is a representation rail rather than a duplicate subject readout. */
+.boundary-frame__bottom {
+  justify-content: flex-end;
+}
+
+.projection-switcher {
+  margin-left: 0;
+}
+
+/* Root World is an operating map, not a second hero. */
+.branch-world--root-world {
+  align-content: start;
+}
+
+.branch-world--root-world > .world-heading .eyebrow {
+  max-width: 42rem;
+}
+
+.branch-world--root-world > .world-heading h1 {
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 4.8vw, 5.4rem);
+}
+
+.branch-world--root-world > .world-heading > p:not(.eyebrow) {
+  max-width: 40rem;
+  font-size: clamp(0.92rem, 1.15vw, 1.08rem);
+}
+
+/* Text growth is a lawful state, not an overflow defect. */
+.world-viewport,
+.branch-world,
+.world-heading,
+.district-grid,
+.district-card,
+.leaf-world,
+.leaf-world__field,
+.leaf-world__focus,
+.leaf-world__ports,
+.leaf-world__port,
+.node-detail,
+.node-surface,
+.node-surface > *,
+.node-section,
+.record-links,
+.inspection-links,
+.edge-links,
+.contained-region-links,
+.work-status-panel,
+.evidence-view,
+.gestalt-view,
+.boundary-frame__top,
+.boundary-frame__bottom,
+.boundary-frame__left,
+.boundary-frame__right {
+  min-width: 0;
+}
+
+.world-heading h1,
+.world-heading p,
+.district-card strong,
+.district-card p,
+.district-card span,
+.node-surface h1,
+.node-surface p,
+.node-surface strong,
+.node-surface small,
+.work-status-panel,
+.work-status-panel *,
+.record-links *,
+.inspection-links *,
+.edge-links *,
+.contained-region-links *,
+.leaf-world *,
+.evidence-view *,
+.gestalt-view *,
+.path-node__label,
+.peer-node__label {
+  overflow-wrap: anywhere;
+}
+
+/* Sticky prose headings and clipped card copy were the largest zoom failure modes. */
+.world-heading {
+  position: relative;
+  top: auto;
+}
+
+.branch-world {
+  align-content: start;
+}
+
+.district-grid {
+  align-items: stretch;
+  grid-auto-rows: minmax(min-content, auto);
+}
+
+.district-card {
+  height: auto;
+  overflow: visible;
+}
+
+.district-card p {
+  display: block;
+  overflow: visible;
+  -webkit-box-orient: initial;
+  -webkit-line-clamp: unset;
+}
+
+.district-card strong,
+.district-card p,
+.work-status-chip,
+.frame-status__value,
+.focus-trace strong,
+.focus-trace__via,
+.compact-focus__copy > strong,
+.compact-focus__copy > small {
+  white-space: normal;
+  text-overflow: clip;
+}
+
+/* Record is the complete default content surface. Containment is visible here too,
+   so structure does not disappear merely because the reader chose prose over World. */
+.contained-region-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.contained-region-links button {
+  min-width: 0;
+  display: grid;
+  gap: 0.34rem;
+  align-content: start;
+  padding: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(251, 250, 246, 0.46);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.contained-region-links button:hover {
+  border-color: var(--ink);
+  background: var(--paper-strong);
+}
+
+.contained-region-links span,
+.inspection-links small {
+  color: var(--ink-soft);
+  font-size: 0.55rem;
+  line-height: 1.42;
+}
+
+.contained-region-links span {
+  color: var(--accent);
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.contained-region-links strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.inspection-links button {
+  justify-content: flex-start;
+}
+
+.inspection-links small {
+  margin-top: 0.4rem;
+}
+
+/* When zoom or viewport compression leaves insufficient room for bespoke spatial
+   morphology, preserve content first and fall back to a normal responsive assembly. */
+@media (max-width: 1360px) {
+  .branch-world[data-world-id] {
+    grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+  }
+
+  .branch-world[data-world-id] .district-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: auto !important;
+  }
+
+  .branch-world[data-world-id] .district-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+@media (max-width: 980px) {
+  :root {
+    --frame-left: 0px;
+    --frame-right: 0px;
+  }
+
+  .branch-world[data-world-id] {
+    grid-template-columns: 1fr;
+  }
+
+  .branch-world[data-world-id] > .world-heading,
+  .branch-world[data-world-id] > .district-grid,
+  .branch-world[data-world-id] > .branch-world__context-section {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .world-viewport {
+    left: 0;
+  }
+
+  .contained-region-links {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --frame-top: 62px;
+  }
+
+  .boundary-frame__top,
+  .boundary-frame--root .boundary-frame__top,
+  .boundary-frame:not(.boundary-frame--root) .boundary-frame__top {
+    height: var(--frame-top);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 1fr;
+    padding-inline: 8px;
+  }
+
+  .boundary-frame .brand-anchor {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .boundary-frame .frame-tools {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .brand-anchor__copy {
+    display: none;
+  }
+
+  .branch-world {
+    padding: 14px 10px 24px;
+  }
+
+  .branch-world[data-world-id] .district-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .branch-world--root-world > .world-heading h1 {
+    font-size: clamp(2.35rem, 11vw, 3.9rem);
+  }
+
+  .district-card {
+    padding: 16px;
+  }
+
+  .node-surface {
+    padding: 26px 16px 52px;
+  }
+
+  .node-surface h1 {
+    font-size: clamp(2.3rem, 12vw, 4rem);
+  }
+
+  .projection-switcher {
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .projection-switcher button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 460px) {
+  .projection-switcher {
+    width: auto;
+    max-width: calc(100vw - 16px);
+  }
+}
+
+@media (forced-colors: active) {
+  .contained-region-links button {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+  }
+}

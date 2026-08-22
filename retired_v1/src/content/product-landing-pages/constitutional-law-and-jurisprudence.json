@@ -1,0 +1,193 @@
+{
+  "id": "constitutional-law-and-jurisprudence",
+  "slug": "law",
+  "pageType": "public-legal-research-program",
+  "visibility": "public",
+  "status": "working-public-research-program",
+  "program": {
+    "name": "Constitutional Law & Jurisprudence",
+    "shortName": "Boundary First Law",
+    "classification": ["independent legal research", "jurisprudence", "constitutional systems analysis", "institutional design", "civic and legal education"],
+    "statusLabel": "Independent Research Program",
+    "primaryLine": "Authority should close in responsibility.",
+    "secondaryLine": "Follow law all the way from authorization to consequence and repair.",
+    "coreQuestion": "When an institution exercises lawful authority over a person, what must remain represented, contestable, accountable, and repairable for the resulting process to remain lawful over time?"
+  },
+  "legalNotice": {
+    "placement": "directly-below-hero",
+    "prominence": "high",
+    "title": "Research and educational material — not legal advice",
+    "body": "Boundary First Labs is not a law firm. Nicholas Smith is not a licensed attorney. This program presents independent research, systems analysis, jurisprudential proposals, and civic/legal education. It does not provide legal advice, legal representation, or an attorney-client relationship. Any legal claim that matters to an actual dispute, right, deadline, jurisdiction, or course of action should be independently verified with current primary authority and qualified counsel.",
+    "rules": ["Current law and proposed doctrine must be visibly distinguished.", "Jurisdiction-specific claims require jurisdiction-specific research.", "Legal citations should be checked for current validity before reliance.", "BFL analytical concepts do not themselves create legal rights, causes of action, defenses, or remedies.", "Attorney review is required before BFL research is used as legal advocacy or advice."]
+  },
+  "hero": {
+    "eyebrow": "CONSTITUTIONAL LAW & JURISPRUDENCE · BOUNDARY FIRST LABS",
+    "title": "Authority should close in responsibility.",
+    "deck": "Law does more than declare rules. It authorizes actors, constructs categories, admits evidence, transforms legal status, imposes consequences, creates avenues of contest, and determines whether error can actually be repaired. Boundary First Law studies that entire path.",
+    "pullQuote": "A legal process can be procedurally finished while the system it created remains open.",
+    "primaryCta": { "label": "Follow a legal process", "target": "flagship-demo" },
+    "secondaryCta": { "label": "See what is law — and what is proposed", "target": "claim-regimes" }
+  },
+  "openingClaim": {
+    "title": "Law does not end when the order is signed.",
+    "body": ["A statute can be validly enacted.", "An agency can possess authority.", "A record can be complete under its rules.", "A decision can be final.", "An appeal can technically exist.", "And yet the person affected may remain governed by an incorrect representation, an untraceable decision path, or a consequence no actor is capable of repairing."],
+    "closing": "Boundary First jurisprudence studies the whole consequence-bearing system rather than treating formal procedural completion as the only relevant boundary."
+  },
+  "constitutionalBaseline": {
+    "title": "Begin with the law that actually exists.",
+    "intro": "Boundary First jurisprudence starts from existing constitutional structure before proposing extensions. The purpose is not to redescribe a proposal as settled doctrine.",
+    "anchors": [
+      { "id": "tenth-amendment", "status": "constitutional-text-and-current-doctrine", "title": "Delegated federal power and federalism", "summary": "The Tenth Amendment reserves powers not delegated to the United States, and not prohibited to the states, to the states or the people. Modern doctrine substantially concerns limits on federal power, state sovereignty, and federalism.", "sourceKeys": ["US-CONST-X", "CA-TENTH-DOCTRINE"] },
+      { "id": "ninth-amendment", "status": "constitutional-text-and-contested-doctrine", "title": "Enumerated rights are not an exhaustive textual list", "summary": "The Ninth Amendment rejects construing the enumeration of certain constitutional rights to deny or disparage others retained by the people. Its independent doctrinal role in identifying particular enforceable rights remains limited and contested.", "sourceKeys": ["US-CONST-IX", "CA-NINTH-DOCTRINE"] },
+      { "id": "due-process", "status": "current-doctrine", "title": "Government deprivation and procedural due process", "summary": "When government seeks to deprive a person of a constitutionally protected life, liberty, or property interest, due process may require procedural safeguards appropriate to the context. Modern civil procedural analysis is highly contextual rather than governed by one universal procedure.", "sourceKeys": ["US-CONST-XIV", "CA-MATHEWS"] },
+      { "id": "state-action", "status": "current-doctrine", "title": "Constitutional limits ordinarily require governmental action", "summary": "The Fourteenth Amendment ordinarily constrains governmental conduct rather than purely private conduct. Private behavior can become attributable to the state in particular circumstances, but private power alone does not automatically create constitutional state action.", "sourceKeys": ["CA-STATE-ACTION"] },
+      { "id": "standing", "status": "current-doctrine", "title": "Federal courts require an actual case or controversy", "summary": "Article III standing generally requires a concrete and particularized injury, traceability to the challenged conduct, and likely redressability by a favorable judicial decision.", "sourceKeys": ["CA-STANDING"] },
+      { "id": "equal-protection", "status": "current-doctrine", "title": "Law classifies — but constitutional scrutiny varies", "summary": "Equal Protection doctrine does not subject every governmental classification to the same test. Most classifications receive rational-basis review, while particular classifications and rights can trigger heightened scrutiny.", "sourceKeys": ["CA-EQUAL-PROTECTION", "CA-STRICT-SCRUTINY"] }
+    ],
+    "rule": "Existing doctrine is the baseline to understand and test against, not an obstacle to be rhetorically replaced."
+  },
+  "claimRegimes": {
+    "id": "claim-regimes",
+    "title": "Every legal claim gets a type.",
+    "types": [
+      { "id": "constitutional-text", "label": "Constitutional text" },
+      { "id": "current-doctrine", "label": "Current doctrine" },
+      { "id": "doctrinal-analogy", "label": "Doctrinal analogy" },
+      { "id": "proposed-jurisprudence", "label": "Proposed jurisprudence" },
+      { "id": "law-reform", "label": "Law-reform proposal" },
+      { "id": "empirical-hypothesis", "label": "Empirical hypothesis" },
+      { "id": "moral-proposition", "label": "Moral / jurisprudential proposition" },
+      { "id": "open-question", "label": "Open research question" }
+    ],
+    "displayRule": "Public artifacts should show claim status beside consequential propositions rather than hiding epistemic status in footnotes."
+  },
+  "boundaryFirstJurisprudence": {
+    "title": "Boundary-First Jurisprudence",
+    "status": "proposed-jurisprudence",
+    "definition": "Boundary-First jurisprudence studies whether legal authority, representation, judgment, consequence, contest, responsibility, and repair form a coherent and accountable closure.",
+    "questions": ["What is the consequential boundary?", "What lawful condition is the institution trying to preserve?", "Whose interests, rights, agency, or obligations cross the boundary?", "Which representation is being used to make the decision?", "What distinctions does that representation preserve or collapse?", "Who possesses authority to transform legal status?", "What practical consequences follow?", "Can the governing facts and classifications be contested?", "Who owns correction when the system is wrong?", "Does repair actually reach the consequence?"],
+    "maxims": ["Liberty is retained; coercive power is delegated.", "No consequence without representation.", "Power creates duties.", "Govern the consequence, not merely the person.", "Procedure is not the same thing as complete lawfulness.", "Repair is part of justice, not an afterthought.", "Authority must close in responsibility."]
+  },
+  "legalProcessModel": {
+    "title": "The complete legal complement",
+    "status": "systems-framework-not-current-doctrine",
+    "chain": ["Authorization", "Representation", "Admissibility", "Judgment", "Consequence", "Witness", "Contest", "Repair", "Learning"],
+    "compactObject": "L = (A, R, D, J, C, W, Q, P, U)",
+    "closureRule": "A legal process is not fully closed merely because judgment is final."
+  },
+  "distinctionSystem": {
+    "title": "Law is a distinction system.",
+    "examples": ["permitted / prohibited", "public / private", "person / institution", "right / privilege", "harm / risk", "evidence / allegation", "eligible / ineligible", "jurisdiction / no jurisdiction", "final / appealable", "responsible / immune", "represented / excluded"],
+    "researchQuestion": "What happens when the law collapses two states that remain materially different to the consequence being imposed?"
+  },
+  "controlledCompression": {
+    "title": "Law is controlled compression.",
+    "status": "proposed-analytical-framework",
+    "body": "Every legal rule ignores some differences and preserves others. That compression is unavoidable. Boundary First asks whether a discarded distinction later reappears as a consequential defect.",
+    "candidateDoctrine": "A legal classification is defective when it suppresses a distinction that the consequence still depends upon.",
+    "statusOfCandidate": "Proposed jurisprudential doctrine — not the current constitutional Equal Protection test."
+  },
+  "dueProcessBridge": {
+    "title": "Due process provides an important existing analogue.",
+    "status": "doctrinal-analogy-plus-current-doctrine",
+    "mathewsFactors": ["the private interest affected", "the risk of erroneous deprivation and probable value of additional safeguards", "the government's interests, including administrative burdens"],
+    "boundaryFirstExtension": "Boundary First asks what happens after procedural sufficiency: whether the representation, consequence, responsibility path, repair, and institutional learning actually close.",
+    "sourceKeys": ["CA-DUE-PROCESS", "CA-MATHEWS"]
+  },
+  "standingBridge": {
+    "title": "Injury, traceability, redressability — and a useful but limited analogy",
+    "currentDoctrine": "Article III standing governs access to federal judicial power and generally requires injury, traceability, and redressability.",
+    "sourceKeys": ["CA-STANDING"],
+    "analogy": { "Injury": "Consequence", "Traceability": "Causal and responsibility path", "Redressability": "Repair" },
+    "criticalBoundary": "This is a conceptual comparison, not a statement that Boundary First consequence analysis is Article III standing doctrine."
+  },
+  "privatePower": {
+    "title": "The constitutional boundary stops earlier than the governance problem.",
+    "currentLaw": "Constitutional state-action rules generally do not transform purely private conduct into governmental action merely because a private organization is large, important, or provides a public-facing service.",
+    "proposedConcept": { "name": "Consequential Actor", "status": "law-reform-and-jurisprudential-proposal", "definition": "A public or private actor whose practical capacity allows it to impose significant, difficult-to-escape consequences on another person's ability to participate in social life." },
+    "warning": "This program does not claim that consequential actors are automatically constitutional state actors.",
+    "sourceKeys": ["CA-STATE-ACTION"]
+  },
+  "proposedJustificationTest": {
+    "title": "A Boundary First justification test",
+    "status": "proposed-jurisprudence-not-universal-current-doctrine",
+    "questions": ["Source of authority", "Protected condition", "Material necessity", "Causal fit", "Proportionality", "Least impairment", "Representation", "Contestability", "Repair", "Revalidation"]
+  },
+  "flagshipDemo": {
+    "id": "flagship-demo",
+    "kind": "synthetic-legal-systems-demonstration",
+    "status": "proposed",
+    "eyebrow": "FOLLOW THE CONSEQUENCE",
+    "title": "The appeal existed. The repair path didn't.",
+    "subtitle": "A fictional administrative eligibility case designed to make legal-process closure visible.",
+    "legalBoundary": "The scenario is educational and synthetic. It does not state the law governing any actual benefits program, licensing regime, jurisdiction, or individual's rights.",
+    "sequence": ["Authorization", "Representation", "Reveal distinction", "Admissibility", "Judgment", "Consequence", "Witness", "Contest", "Repair", "Learning"],
+    "desiredReaction": "The procedure closed before the consequence did."
+  },
+  "repair": {
+    "title": "A remedy should repair the object that was actually harmed.",
+    "status": "systems-taxonomy-not-universal-legal-entitlement",
+    "classes": ["Reversal", "Restoration", "Compensation", "Rehabilitation", "Correction", "Containment", "Structural repair", "Recurrence prevention"],
+    "important": "These are analytical repair classes. Whether any particular remedy is legally available depends on actual law and jurisdiction."
+  },
+  "researchLanes": {
+    "title": "Where the program goes to work",
+    "lanes": ["Constitutional authority", "Due process and administrative systems", "Classification and equal protection", "Standing, injury, and redressability", "Private consequential power", "Automated and AI-mediated judgment", "Evidence and record integrity", "Remedies and institutional repair", "Digital non-aggression", "Antitrust and concentrated private sovereignty"]
+  },
+  "legalDiagnostic": {
+    "title": "A repeatable systems review",
+    "questions": ["What authority is being exercised?", "What person, property, liberty, right, status, capability, or relationship is at stake?", "What representation governs the decision?", "Who created and controls that representation?", "Which evidence is admitted?", "Which evidence or party is excluded?", "What classification or rule transforms the state?", "Who experiences the consequence?", "Who can explain the result?", "Who can contest it?", "Who can suspend it?", "Who can repair it?", "Can the repair reach the original record and downstream effects?", "What prevents recurrence?"],
+    "output": ["authority map", "representation map", "evidence path", "consequence chain", "responsibility map", "contest path", "repair map", "claim-status crosswalk"]
+  },
+  "lawyerCollaboration": {
+    "title": "The program needs lawyers precisely where systems analysis stops.",
+    "premise": "Boundary First Labs can map structure, consequence, representation, evidence paths, institutional interfaces, and candidate doctrine. Qualified lawyers determine how that analysis interacts with controlling authority, procedural posture, jurisdiction, professional obligations, litigation strategy, and legal advice.",
+    "primaryAsk": { "label": "Tell us where the legal map is wrong.", "description": "The first purpose of legal collaboration is adversarial doctrinal review, not endorsement." }
+  },
+  "claimFirewall": {
+    "title": "What Boundary First Law does not claim",
+    "items": ["Boundary First Labs has not discovered a new nationwide constitutional right already enforceable in court.", "The Ninth Amendment does not by itself establish the entire Boundary First liberty framework.", "The Tenth Amendment does not mean every state law requires personal delegation from each person governed.", "Every governmental restriction is not currently governed by one universal Boundary First proportionality or least-impairment test.", "No Consequence Without Representation is a proposed jurisprudential principle, not a generally binding rule of United States law.", "Powerful private organizations are not automatically constitutional state actors.", "Boundary First consequence standing is not Article III standing.", "Boundary First classification analysis is not the current Equal Protection test.", "The existence of a recurring structural pattern does not itself establish legal liability.", "Nothing on this page provides individualized legal advice."]
+  },
+  "citations": {
+    "strategy": "Use primary text and official legal sources wherever practical. Separate citations supporting current law from sources used as analogies or intellectual background.",
+    "sourceKeys": {
+      "US-CONST-IX": "U.S. Constitution, Amendment IX",
+      "US-CONST-X": "U.S. Constitution, Amendment X",
+      "US-CONST-XIV": "U.S. Constitution, Amendment XIV",
+      "CA-NINTH-DOCTRINE": "Congress.gov Constitution Annotated — Ninth Amendment doctrine",
+      "CA-TENTH-DOCTRINE": "Congress.gov Constitution Annotated — modern Tenth Amendment doctrine",
+      "CA-STATE-ACTION": "Congress.gov Constitution Annotated — State Action Doctrine",
+      "CA-DUE-PROCESS": "Congress.gov Constitution Annotated — Procedural Due Process",
+      "CA-MATHEWS": "Congress.gov Constitution Annotated — Mathews v. Eldridge procedural framework",
+      "CA-STANDING": "Congress.gov Constitution Annotated — Article III Standing",
+      "CA-EQUAL-PROTECTION": "Congress.gov Constitution Annotated — Equal Protection and Rational Basis Review",
+      "CA-STRICT-SCRUTINY": "Congress.gov Constitution Annotated — heightened scrutiny for suspect classifications"
+    }
+  },
+  "websiteArchitecture": {
+    "recommendedRoute": "/law",
+    "existingRelatedRoutes": ["/governance", "/research", "/evidence", "/work"],
+    "futureRoute": "/sandbox/law",
+    "futureSandboxName": "Legal Process & Repair Lab"
+  },
+  "notThis": {
+    "title": "What this page is not",
+    "items": ["not a law firm", "not legal advice", "not litigation strategy", "not an attorney-client relationship", "not a constitutional-rights generator", "not a substitute for primary legal research", "not a political-party legal platform", "not a claim that every institutional failure is illegal", "not a claim that jurisprudential legitimacy and enforceable doctrine are identical"]
+  },
+  "closing": {
+    "eyebrow": "THE PROGRAM IN ONE SENTENCE",
+    "title": "Law should remain traceable from authority to consequence — and from error to repair.",
+    "body": "Boundary First Law treats legal order as a consequence-bearing system. Authority must have a source. Decisions require representations. Representations preserve and discard distinctions. Judgments transform status. Consequences land on real people and institutions. Contest must be meaningful. Responsibility must remain identifiable. And when the system is wrong, repair must have somewhere lawful to go.",
+    "finalLine": "Authority should close in responsibility."
+  },
+  "metadata": {
+    "owner": "Boundary First Labs",
+    "program": "Constitutional Law & Jurisprudence",
+    "public": true,
+    "legalAdvice": false,
+    "lawFirm": false,
+    "attorneyAuthored": false,
+    "requiresCounselForApplication": true,
+    "tags": ["constitutional-law", "jurisprudence", "due-process", "state-action", "standing", "equal-protection", "repair", "representational-mechanics", "public-law"]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "boundary-first.public-argument.executable-distinctions.v1",
+  "version": "0.1",
+  "promotionStatus": "working-public-essay-pending-founder-review",
+  "sourceSuite": "999_Library/02_Core_Theory/0103_engine_core/world_class_executable_distinctions_suite_v0_1",
+  "title": "Executable Distinctions",
+  "thesis": "Words become operators when they are recognized by a system authorized to act on their distinctions.",
+  "summary": "A rigorous public argument about how symbols become consequential through interpreters, authority, rules, records, state transitions, and repair.",
+  "layers": [
+    {
+      "id": "token",
+      "label": "Token",
+      "question": "What mark or word was presented?",
+      "description": "A symbol is available to be recognized. At this layer it has not yet acquired one fixed meaning or material force."
+    },
+    {
+      "id": "semantic",
+      "label": "Semantic",
+      "question": "What distinction did the system recognize?",
+      "description": "A grammar, interpreter, or institution assigns meaning, classifies the represented object, and makes some states legible."
+    },
+    {
+      "id": "operational",
+      "label": "Operational",
+      "question": "What may happen because that distinction was accepted?",
+      "description": "Authority, rules, records, and execution paths permit or prohibit actions that change reachable state and distribute consequence."
+    }
+  ],
+  "consequencePath": [
+    "symbol",
+    "interpreter or procedure",
+    "recognized distinction",
+    "classification",
+    "authorized operation",
+    "state transition",
+    "consequence",
+    "contestability and repair"
+  ],
+  "safeguards": [
+    "Words do not possess power in isolation; consequential force comes from systems authorized and equipped to act.",
+    "A person is not exhausted by the software or institutional representation applied to them.",
+    "Vocabulary overlap and useful analogy do not establish formal equivalence or operational homology."
+  ],
+  "claimCeiling": "A conceptual public argument supported by software and institutional examples. It does not establish that every word is executable, that human institutions are reducible to computers, or that cross-domain correspondences are formally equivalent.",
+  "routes": {
+    "essay": "/artifact/executable-distinctions",
+    "manifesto": "/artifact/world-class-is-a-capacity-we-give",
+    "research": "/domain/representational-mechanics",
+    "software": "/domain/software-engineering-practice",
+    "institutions": "/domain/governance-institutions"
+  }
+}

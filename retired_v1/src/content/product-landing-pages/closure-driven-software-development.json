@@ -1,0 +1,153 @@
+{
+  "version": "0.2.0",
+  "id": "closure-driven-software-development",
+  "slug": "closure-driven-software-development",
+  "title": "Closure-Driven Software Development",
+  "pageType": "public-engineering-method",
+  "status": "advanced-practitioner-draft",
+  "visibility": "public",
+  "hero": {
+    "eyebrow": "CLOSURE-DRIVEN SOFTWARE DEVELOPMENT · ADVANCED PRACTITIONER DRAFT",
+    "headline": "Turn uncertainty into executable evidence before it hardens into architecture.",
+    "support": "A Boundary-First engineering method for progressively tightening domain uncertainty, exposing invariants and responsibility, building the delivery path early, and letting working artifacts correct the plan.",
+    "primaryCta": {
+      "label": "See the worked delivery loop",
+      "target": "worked-example"
+    },
+    "secondaryCta": {
+      "label": "Explore the software practice",
+      "href": "/software"
+    }
+  },
+  "definition": {
+    "title": "Delivery is progressive closure under uncertainty.",
+    "body": "Backlogs, refinement, prototypes, tests, deployments, and working increments are useful when they reduce consequential uncertainty. The method treats each artifact as a bounded claim about the domain and asks execution to confirm, refine, or falsify that claim.",
+    "maxim": "Own the problem complexity; do not create code complexity."
+  },
+  "loop": {
+    "id": "method",
+    "title": "A six-stage closure loop.",
+    "steps": [
+      {
+        "name": "Discover",
+        "question": "What is the domain actually trying to change, preserve, or recognize?",
+        "witness": "named actors, artifacts, distinctions, and failure cases"
+      },
+      {
+        "name": "Bound",
+        "question": "What must be true for this increment to be safe enough to commit to implementation?",
+        "witness": "declared scope, invariants, dependencies, and unresolved questions"
+      },
+      {
+        "name": "Skeleton",
+        "question": "What is the smallest end-to-end path that can expose integration, ownership, environment, and delivery failure?",
+        "witness": "one executable path from real input to recognizable output"
+      },
+      {
+        "name": "Execute",
+        "question": "What does the working artifact reveal that the plan could not?",
+        "witness": "running behavior, logs, tests, and stakeholder interaction"
+      },
+      {
+        "name": "Witness",
+        "question": "Who or what can verify that the domain condition was actually satisfied?",
+        "witness": "domain-recognized evidence rather than ticket state alone"
+      },
+      {
+        "name": "Repair or promote",
+        "question": "Which defects require another loop, and which findings are stable enough to become a stronger commitment?",
+        "witness": "repaired boundary, promoted rule, or explicitly retained uncertainty"
+      }
+    ]
+  },
+  "certainty": {
+    "title": "Implementation readiness is an intersection, not a feeling.",
+    "body": "A task is ready when the domain cone of certainty and the executable cone of certainty overlap at the granularity of the commitment being made. The method does not require complete knowledge; it requires enough knowledge for the next irreversible or expensive decision.",
+    "domainCone": [
+      "the intended outcome is recognizable",
+      "consequential distinctions are named",
+      "authority and ownership are visible",
+      "known failure modes are represented"
+    ],
+    "executableCone": [
+      "the smallest delivery path is known",
+      "interfaces and dependencies are reachable",
+      "the environment can run the increment",
+      "observation and repair are possible"
+    ]
+  },
+  "deliverySkeleton": {
+    "title": "Build the path that can tell the truth.",
+    "body": "Establish delivery structure early enough that integration, deployment, ownership, environment, and operational blockers can falsify the plan before large amounts of code accumulate.",
+    "requirements": [
+      "accept one real or representative input",
+      "preserve the distinctions the increment depends on",
+      "perform one meaningful operation",
+      "produce a domain-recognized output or witness",
+      "expose at least one failure path",
+      "include enough observation to diagnose the failure",
+      "identify who can repair the path"
+    ]
+  },
+  "workedExample": {
+    "id": "worked-example",
+    "title": "Worked example: “Export the current case list.”",
+    "request": "A user asks for a CSV export button on a case-management dashboard. The UI request is simple; the domain commitment is not.",
+    "hiddenDistinctions": [
+      "all cases or only the currently filtered result set",
+      "visible fields versus fields the user is not authorized to export",
+      "current values versus historically reconstructed values",
+      "display labels versus stable machine identifiers",
+      "screen ordering versus deterministic export ordering",
+      "small synchronous exports versus large asynchronous jobs",
+      "successful generation versus successful delivery to the requester",
+      "temporary artifact retention and deletion obligations",
+      "whether the export itself requires an audit record"
+    ],
+    "smallestSkeleton": [
+      "one authenticated user",
+      "one representative filtered case set",
+      "one explicit field-authorization rule",
+      "one generated file",
+      "one visible failure state",
+      "one audit witness linking requester, scope, time, and artifact"
+    ],
+    "closureCheck": "The ticket is not closed merely because a file downloads. Closure requires agreement that the exported set is the intended set, protected fields remain protected, the output is reconstructable, failures are visible, and the artifact's lifecycle has an owner.",
+    "lesson": "The working slice is not a miniature final system. It is an instrument for discovering which distinctions the final system must preserve."
+  },
+  "validation": {
+    "title": "Treat the method as a testable engineering claim.",
+    "evidenceTargets": [
+      "unresolved requirement count at implementation start",
+      "rework caused by missed domain distinctions",
+      "escaped defects attributable to representation or boundary errors",
+      "decision latency for unresolved ownership or authority",
+      "stakeholder agreement on closure conditions before and after execution"
+    ],
+    "comparisonShape": "Compare a baseline delivery process and a closure-driven process on similarly bounded increments, then inspect whether early executable witnesses reduce late boundary discovery without imposing disproportionate analysis cost.",
+    "claimRule": "These are measurement targets and hypotheses for validation, not published performance results."
+  },
+  "claimBoundary": {
+    "title": "Draft method, not a universal delivery law.",
+    "safe": [
+      "Closure-Driven Software Development is a current Boundary First Labs engineering method under active refinement.",
+      "The method can be evaluated through bounded delivery experiments and comparative project evidence.",
+      "Its practices intentionally overlap with established Agile, Lean, systems engineering, DevOps, formal methods, domain modeling, testing, and reliability disciplines where those disciplines already solve the problem."
+    ],
+    "notEstablished": [
+      "that the method outperforms established software delivery approaches in general",
+      "that every project should use the same amount of boundary analysis",
+      "that closure can eliminate uncertainty rather than bound and expose it",
+      "that a successful worked example constitutes empirical validation"
+    ]
+  },
+  "closing": {
+    "eyebrow": "CLOSURE-DRIVEN SOFTWARE DEVELOPMENT",
+    "title": "Do not ask the plan to predict what execution can reveal sooner.",
+    "finalLine": "Tighten the boundary, build the witness, let the artifact answer, then repair or promote."
+  },
+  "cta": {
+    "label": "Explore the software practice",
+    "href": "/software"
+  }
+}

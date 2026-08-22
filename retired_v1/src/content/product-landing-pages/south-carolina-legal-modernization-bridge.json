@@ -1,0 +1,55 @@
+{
+  "slug": "bridge/south-carolina-legal-modernization",
+  "title": "South Carolina Legal Systems Modernization Bridge",
+  "status": "draft",
+  "visibility": "unlisted",
+  "pageType": "institutional-collaboration-bridge",
+  "relationshipStatus": "target-class-no-affiliation",
+  "audience": {
+    "type": "institutional-class",
+    "name": "South Carolina courts, public legal systems, legal-service organizations, modernization teams, and legal researchers"
+  },
+  "hero": {
+    "eyebrow": "LEGAL SYSTEMS + DIGITAL MODERNIZATION",
+    "headline": "Modernize the system without modernizing the defect.",
+    "support": "Digital modernization changes interfaces, workflows, records, automation, and decision paths. Boundary First asks whether the distinctions that legal consequence depends on remain represented, contestable, traceable, and repairable after the transformation."
+  },
+  "legalNotice": "Boundary First Labs is not a law firm. Nicholas Smith is not a licensed attorney. This page presents independent systems research, modernization analysis, and proposed collaboration methods; it does not provide legal advice or create an attorney-client relationship.",
+  "problemFrame": [
+    "A legacy legal process can contain defects in representation, record integrity, notice, status transitions, authority, appeal, or repair before software modernization begins.",
+    "Digitization can expose those defects, preserve them, or automate them at greater scale.",
+    "A successful modernization therefore needs both technical correctness and consequence closure: the transformed system must preserve the legally and operationally relevant distinctions on which downstream action depends."
+  ],
+  "boundaryFirstOffer": [
+    "Map actors, authority, records, statuses, deadlines, evidence, interfaces, consequences, appeal paths, and repair ownership before implementation hardens.",
+    "Identify classifications or data collapses whose downstream consequence still depends on a distinction the representation no longer carries.",
+    "Trace source-of-truth boundaries across court, agency, vendor, attorney, public, and archival systems.",
+    "Model error correction as an end-to-end system property: detection, standing, contest, correction, propagation, recurrence prevention, and verified repair.",
+    "Produce a claim-status crosswalk separating current legal authority, implementation requirement, systems hypothesis, proposed jurisprudence, and open research question."
+  ],
+  "candidatePilot": {
+    "title": "One consequence-bearing workflow",
+    "scope": "Select one bounded process such as filing, notice, eligibility, case status, record correction, appointment/representation, deadline, or appeal. Reconstruct its full lifecycle across human and software boundaries.",
+    "outputs": [
+      "authority and responsibility map",
+      "record and source-of-truth map",
+      "state-transition model",
+      "representation-loss / defect register",
+      "contest and repair path",
+      "modernization invariant declaration",
+      "implementation questions requiring licensed counsel or controlling authority"
+    ]
+  },
+  "firstAsk": "Give us one bounded legal or court-administration workflow where modernization is underway, planned, or painful enough that representation loss can be measured before and after the change.",
+  "claimBoundary": [
+    "This page does not imply an existing relationship with the State of South Carolina, its judiciary, any legal-services organization, or any modernization program.",
+    "Boundary First systems analysis does not determine controlling law, jurisdiction-specific legal duties, litigation strategy, or legal advice.",
+    "Any real legal implementation requires current primary authority and qualified legal review.",
+    "The objective is not to impose novel jurisprudence on a modernization project; it is to distinguish established requirements from proposed systems diagnostics and identify where each belongs."
+  ],
+  "cta": {"label": "Bring one workflow"},
+  "notes": [
+    "Use as an unlisted target-class bridge rather than a named partnership page until a specific institution or modernization program is selected.",
+    "Designed to connect the existing Constitutional Law & Jurisprudence program with software modernization and public-system engineering."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": "0.1.0",
+  "id": "learning-navigator",
+  "slug": "learning-navigator",
+  "title": "Learning Navigator",
+  "pageType": "product-concept-landing",
+  "status": "draft",
+  "visibility": "private",
+  "hero": {
+    "eyebrow": "LEARNING NAVIGATOR",
+    "headline": "Turn a pile of educational media into a path a learner can actually traverse.",
+    "support": "A structured navigation layer for courses, videos, articles, and learning collections that makes prerequisites, dependencies, depth changes, alternate paths, disagreement, and the next admissible learning step visible."
+  },
+  "sections": [
+    {"heading":"Abundance is not navigation","body":"A large corpus can contain the right material and still fail a learner when ordering, prerequisites, conceptual gaps, and reasons for progression remain implicit."},
+    {"heading":"Map dependencies","body":"Represent what a learner needs before an object becomes useful, what it unlocks afterward, and where alternate explanations or routes exist."},
+    {"heading":"Preserve the underlying creators","body":"The navigator organizes and contextualizes an existing educational corpus rather than replacing the source material."},
+    {"heading":"Make the next step explainable","body":"Recommendations should state why an item is next: prerequisite repair, depth transition, alternate representation, application, review, or branch choice."},
+    {"heading":"Measure transfer","body":"A useful pilot tests path completion, comprehension, confidence, and whether learners can use the concept outside the original sequence."}
+  ],
+  "pilot":{"shape":"Map one bounded video series or course into prerequisites, alternate paths, missing bridges, and depth transitions."},
+  "cta":{"label":"Map a learning path"},
+  "notes":["Recovered from prior partnership/product landing work.","Kept private until its relationship to YouTube Knowledge Explorer and the broader Projectr knowledge-platform portfolio is adjudicated."]
+}
