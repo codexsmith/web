@@ -41,11 +41,6 @@ type BoundaryFrameProps = {
 
 type FrameIconName = "back" | "forward" | "search" | "minus" | "plus";
 
-type TraceItem = {
-  node: ContentNode;
-  traversalIndex: number;
-};
-
 const rootProjectionLabels: Record<ProjectionMode, string> = {
   world: "World",
   record: "Founder",
@@ -94,16 +89,11 @@ function FrameIcon({ name }: { name: FrameIconName }) {
   );
 }
 
-function RailSectionLabel({ children }: { children: React.ReactNode }) {
-  return <div className="apparatus-nav__section-label">{children}</div>;
-}
-
 export function BoundaryFrame({
   visible,
   focusNode,
   traversalPath,
   traversalCursor,
-  siblings,
   projection = "world",
   processScope,
   canTraceBack,
@@ -122,57 +112,26 @@ export function BoundaryFrame({
 }: BoundaryFrameProps) {
   const isRootFocus = focusNode.id === "root";
 
-  // The rail has three distinct representations:
-  // 1. Boundary Tree: canonical containment around the first region boundary.
-  // 2. Trace: the retained path beginning at the selected child of that boundary.
-  // 3. Adjacent Options: siblings of the trace terminal, available without extending it.
+  // Containment, sibling choice, and traversal are one structure. The tree supplies
+  // canonical levels; the active traversal simply illuminates the route through it.
   const containmentPath = isRootFocus
     ? []
     : [...getAncestors(focusNode.id), getNode(focusNode.id)]
         .filter((node) => node.id !== "root")
         .map(hydrateContentNode);
-
   const boundaryRoot = containmentPath[0];
-  const boundarySelection = containmentPath[1];
-  const boundaryTreeNodes = boundaryRoot
-    ? getChildren(boundaryRoot.id).map(hydrateContentNode)
-    : [];
-
   const activeTraversal = traversalPath.slice(0, traversalCursor + 1);
   const activeTraversalIds = activeTraversal.map((node) => node.id);
-  const boundarySelectionTraversalIndex = boundarySelection
-    ? activeTraversalIds.lastIndexOf(boundarySelection.id)
-    : -1;
-
-  const traversalTrace: TraceItem[] = boundarySelectionTraversalIndex >= 0
-    ? activeTraversal.slice(boundarySelectionTraversalIndex).map((node, offset) => ({
-        node,
-        traversalIndex: boundarySelectionTraversalIndex + offset,
-      }))
-    : [];
-
-  const containmentTrace: TraceItem[] = boundarySelection
-    ? containmentPath.slice(1).map((node) => ({
-        node,
-        traversalIndex: activeTraversalIds.lastIndexOf(node.id),
-      }))
-    : [];
-
-  const semanticTrace = traversalTrace.length > 1
-    ? traversalTrace
-    : containmentTrace.length > 1
-      ? containmentTrace
-      : [];
-  const hasTrace = semanticTrace.length > 1;
-  const adjacentNodes = hasTrace
-    ? siblings.filter((node) => node.id !== focusNode.id)
-    : [];
-  const canMeaningfulTraceBack = canTraceBack && semanticTrace.some(
-    (item) => item.traversalIndex >= 0 && item.traversalIndex < traversalCursor,
-  );
+  const nonRootTraversal = activeTraversal.filter((node) => node.id !== "root");
+  const hasTrace = nonRootTraversal.length > 1;
+  const canMeaningfulTraceBack = canTraceBack && activeTraversal
+    .slice(0, -1)
+    .some((node) => node.id !== "root");
+  const rootChildren = boundaryRoot ? getChildren(boundaryRoot.id) : [];
   const showLeftNav = !isRootFocus && Boolean(boundaryRoot) && (
-    boundaryTreeNodes.length > 0 || hasTrace || adjacentNodes.length > 0
+    rootChildren.length > 0 || containmentPath.length > 1
   );
+  const focusAtBoundaryRoot = Boolean(boundaryRoot && focusNode.id === boundaryRoot.id);
 
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
   const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
@@ -212,13 +171,55 @@ export function BoundaryFrame({
     section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }
 
-  function navigateTraceItem(item: TraceItem) {
-    if (item.node.id === focusNode.id) return;
-    if (item.traversalIndex >= 0) {
-      onTraversalPath(item.node.id, item.traversalIndex);
+  function navigateTreeNode(node: ContentNode) {
+    if (node.id === focusNode.id) return;
+
+    const traversalIndex = activeTraversalIds.lastIndexOf(node.id);
+    if (traversalIndex >= 0) {
+      onTraversalPath(node.id, traversalIndex);
       return;
     }
-    onLocalNavigate(item.node.id);
+
+    onLocalNavigate(node.id);
+  }
+
+  function renderTreeLevel(parentNode: ContentNode, parentDepth: number) {
+    const children = getChildren(parentNode.id).map(hydrateContentNode);
+    if (!children.length) return null;
+
+    const pathChild = containmentPath[parentDepth + 1];
+
+    return (
+      <ol className="apparatus-nav__tree-level" data-depth={parentDepth + 1}>
+        {children.map((node) => {
+          const isPath = pathChild?.id === node.id;
+          const isCurrent = focusNode.id === node.id;
+          const isTraced = activeTraversalIds.includes(node.id);
+
+          return (
+            <li
+              key={node.id}
+              data-path={isPath ? "true" : "false"}
+              data-current={isCurrent ? "true" : "false"}
+              data-traced={isTraced ? "true" : "false"}
+            >
+              <span className="apparatus-nav__terminal" aria-hidden="true" />
+              <button
+                className={isCurrent ? "is-current" : isPath ? "is-path" : undefined}
+                aria-current={isCurrent ? "page" : undefined}
+                onClick={() => navigateTreeNode(node)}
+                title={isCurrent ? `${node.label} (current)` : `Open ${node.label}`}
+              >
+                <span className="apparatus-nav__node-label">{node.shortLabel ?? node.label}</span>
+                {isCurrent ? <small className="apparatus-nav__current-marker">You are here</small> : null}
+              </button>
+
+              {isPath && !isCurrent ? renderTreeLevel(node, parentDepth + 1) : null}
+            </li>
+          );
+        })}
+      </ol>
+    );
   }
 
   return (
@@ -323,98 +324,34 @@ export function BoundaryFrame({
           className="boundary-frame__left boundary-frame__trace-nav"
           data-has-trace={hasTrace ? "true" : "false"}
           data-apparatus-sections="true"
+          data-focus-at-boundary-root={focusAtBoundaryRoot ? "true" : "false"}
         >
-          <nav className="trace-nav apparatus-nav" aria-label={`Navigation apparatus for ${focusNode.label}`}>
+          <nav className="trace-nav apparatus-nav" aria-label={`Current path and nearby navigation for ${focusNode.label}`}>
             <header className="apparatus-nav__header">
-              <span>Apparatus</span>
-              <span className="apparatus-nav__slash" aria-hidden="true">/</span>
-              <strong>Traversal Spine</strong>
-              <span className="apparatus-nav__info" aria-hidden="true">i</span>
+              <strong>Traversal</strong>
+              <span>Current path · nearby choices</span>
             </header>
 
-            <section className="apparatus-nav__section apparatus-nav__boundary" aria-label="Boundary tree">
-              <RailSectionLabel>Boundary Tree</RailSectionLabel>
-              <div className="apparatus-nav__tree">
-                <div className="apparatus-nav__tree-root">
-                  <span className="apparatus-nav__terminal apparatus-nav__terminal--root" aria-hidden="true" />
-                  <button
-                    className={focusNode.id === boundaryRoot.id ? "is-current" : undefined}
-                    aria-current={focusNode.id === boundaryRoot.id ? "page" : undefined}
-                    onClick={() => {
-                      if (focusNode.id !== boundaryRoot.id) onLocalNavigate(boundaryRoot.id);
-                    }}
-                    title={focusNode.id === boundaryRoot.id ? `${boundaryRoot.label} (current)` : `Open ${boundaryRoot.label}`}
-                  >
-                    <span>{boundaryRoot.shortLabel ?? boundaryRoot.label}</span>
-                  </button>
-                </div>
+            <div className="apparatus-nav__tree-shell">
+              <div
+                className="apparatus-nav__tree-root"
+                data-current={focusAtBoundaryRoot ? "true" : "false"}
+                data-traced={activeTraversalIds.includes(boundaryRoot.id) ? "true" : "false"}
+              >
+                <span className="apparatus-nav__terminal apparatus-nav__terminal--root" aria-hidden="true" />
+                <button
+                  className={focusAtBoundaryRoot ? "is-current" : "is-path"}
+                  aria-current={focusAtBoundaryRoot ? "page" : undefined}
+                  onClick={() => navigateTreeNode(boundaryRoot)}
+                  title={focusAtBoundaryRoot ? `${boundaryRoot.label} (current)` : `Open ${boundaryRoot.label}`}
+                >
+                  <span className="apparatus-nav__node-label">{boundaryRoot.shortLabel ?? boundaryRoot.label}</span>
+                  {focusAtBoundaryRoot ? <small className="apparatus-nav__current-marker">You are here</small> : null}
+                </button>
 
-                {boundaryTreeNodes.length ? (
-                  <ol className="apparatus-nav__tree-children">
-                    {boundaryTreeNodes.map((node) => {
-                      const isSelected = boundarySelection?.id === node.id;
-                      const isCurrent = focusNode.id === node.id;
-                      return (
-                        <li key={node.id} data-selected={isSelected ? "true" : "false"}>
-                          <span className="apparatus-nav__terminal" aria-hidden="true" />
-                          <button
-                            className={isSelected ? "is-selected" : undefined}
-                            aria-current={isCurrent ? "page" : isSelected ? "location" : undefined}
-                            onClick={() => {
-                              if (!isCurrent) onLocalNavigate(node.id);
-                            }}
-                            title={isCurrent ? `${node.label} (current)` : `Open ${node.label}`}
-                          >
-                            <span>{node.shortLabel ?? node.label}</span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                ) : null}
+                {renderTreeLevel(boundaryRoot, 0)}
               </div>
-            </section>
-
-            {hasTrace ? (
-              <section className="apparatus-nav__section apparatus-nav__trace" aria-label="Traversal history">
-                <RailSectionLabel>Trace <span aria-hidden="true">/</span> Traversal History</RailSectionLabel>
-                <ol className="apparatus-nav__trace-list">
-                  {semanticTrace.map((item, index) => {
-                    const isCurrent = item.node.id === focusNode.id && index === semanticTrace.length - 1;
-                    return (
-                      <li key={`${item.node.id}-${index}`} data-current={isCurrent ? "true" : "false"}>
-                        <span className="apparatus-nav__trace-symbol" aria-hidden="true" />
-                        <button
-                          aria-current={isCurrent ? "page" : undefined}
-                          onClick={() => navigateTraceItem(item)}
-                          title={isCurrent ? `${item.node.label} (current)` : `Return to ${item.node.label}`}
-                        >
-                          <span>{item.node.shortLabel ?? item.node.label}</span>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </section>
-            ) : null}
-
-            {adjacentNodes.length ? (
-              <section className="apparatus-nav__section apparatus-nav__adjacent" aria-label="Sibling content and adjacent options">
-                <RailSectionLabel>Sibling Content <span aria-hidden="true">/</span> Adjacent Options</RailSectionLabel>
-                <ol className="apparatus-nav__adjacent-list">
-                  {adjacentNodes.map((node) => (
-                    <li key={node.id}>
-                      <span className="apparatus-nav__adjacent-symbol" aria-hidden="true" />
-                      <button onClick={() => onLocalNavigate(node.id)} title={`Open ${node.label}`}>
-                        <strong>{node.shortLabel ?? node.label}</strong>
-                        <small>Available from this parent</small>
-                        <span className="apparatus-nav__chevron" aria-hidden="true">›</span>
-                      </button>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            ) : null}
+            </div>
           </nav>
         </aside>
       ) : null}
