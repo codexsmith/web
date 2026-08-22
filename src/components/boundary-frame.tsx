@@ -31,6 +31,7 @@ type BoundaryFrameProps = {
   onBack: () => void;
   onForward: () => void;
   onLocalNavigate: (id: string) => void;
+  onTraversalPath?: (id: string, index: number) => void;
   onProcessZoomOut: () => void;
   onProcessZoomIn: () => void;
   onProjectionChange?: (projection: ProjectionMode) => void;
@@ -136,6 +137,7 @@ export function BoundaryFrame({
   onBack,
   onForward,
   onLocalNavigate,
+  onTraversalPath,
   onProcessZoomOut,
   onProcessZoomIn,
   onProjectionChange,
@@ -146,7 +148,8 @@ export function BoundaryFrame({
   const history = activeTraversal.slice(0, -1);
   const parent = getParent(focusNode.id);
   const parentNode = parent ? hydrateContentNode(parent) : undefined;
-  const siblingNodes = siblings.filter((node) => node.id !== focusNode.id);
+  const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
+  const siblingNodes = peerNodes;
   const childNodes = getChildren(focusNode.id).map(hydrateContentNode);
   const hasTrace = activeTraversal.length > 1;
   const showLeftNav = !isRootFocus && (
@@ -302,18 +305,30 @@ export function BoundaryFrame({
 
             <div className="traversal-nav__flow">
               {history.length ? (
-                <section className="traversal-nav__history" aria-label="Where you have been">
+                <section className="traversal-nav__history" aria-label="Focus traversal history">
                   <div className="traversal-nav__section-label">Where you have been</div>
                   <ol>
-                    {history.map((node, index) => (
-                      <li key={`${node.id}-${index}`}>
-                        <span className="traversal-nav__history-terminal" aria-hidden="true" />
-                        <div className="traversal-nav__history-node">
-                          <span>{node.shortLabel ?? node.label}</span>
-                          <small>{String(index + 1).padStart(2, "0")}</small>
-                        </div>
-                      </li>
-                    ))}
+                    {history.map((node, index) => {
+                      const canReplay = canTraceBack && index === history.length - 1;
+                      return (
+                        <li key={`${node.id}-${index}`}>
+                          <span className="traversal-nav__history-terminal" aria-hidden="true" />
+                          <button
+                            className="traversal-nav__history-node"
+                            disabled={!canReplay}
+                            onClick={() => {
+                              if (!canReplay) return;
+                              if (onTraversalPath) onTraversalPath(node.id, index);
+                              else onBack();
+                            }}
+                            title={canReplay ? `Back to ${node.label}` : `${node.label} (earlier traversal history)`}
+                          >
+                            <span>{node.shortLabel ?? node.label}</span>
+                            <small>{String(index + 1).padStart(2, "0")}</small>
+                          </button>
+                        </li>
+                      );
+                    })}
                   </ol>
                 </section>
               ) : null}
@@ -321,7 +336,7 @@ export function BoundaryFrame({
               <section className="traversal-nav__current" aria-label="Current location">
                 <span className="traversal-nav__current-terminal" aria-hidden="true" />
                 <div>
-                  <small>You are here</small>
+                  <small className="traversal-nav__current-marker path-node__role">Focus · You are here</small>
                   <strong>{focusNode.shortLabel ?? focusNode.label}</strong>
                 </div>
               </section>
