@@ -1,0 +1,343 @@
+/*
+ * Boundary First Card renderer · entered World root control board.
+ *
+ * Scope: /?world=1 while the production Card renderer is active.
+ * The existing frame/navigation mechanics are intentionally unchanged. This layer
+ * only refines the root working surface and its five region controls to match the
+ * approved BF-UX direction: clean matte gunmetal, shallow physical hierarchy,
+ * semantic signal accents, and a viewport-filling 3 + 2 composition.
+ */
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] {
+  --root-board-bg: #0d151b;
+  --root-board-panel: #172128;
+  --root-board-panel-raised: #1b262e;
+  --root-board-panel-hover: #202c35;
+  --root-board-line: rgba(170, 180, 184, 0.2);
+  --root-board-edge: rgba(170, 180, 184, 0.34);
+  --root-board-highlight: rgba(255, 255, 255, 0.055);
+  --root-board-shadow: rgba(0, 0, 0, 0.34);
+}
+
+/* The frame already establishes location. The entered root does not need a sixth,
+ * prose-only panel competing with the five actual regions. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world--root-world {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  height: 100%;
+  min-height: 0;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world--root-world > .world-heading {
+  display: none;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
+  padding: clamp(10px, 0.8vw, 14px);
+  background: var(--root-board-bg);
+  background-image: none;
+  box-shadow: inset 0 10px 28px rgba(0, 0, 0, 0.16);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-grid {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 0.85vw, 14px);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Three equal top regions. About occupies one third of the lower row; Research is
+ * intentionally dominant and occupies the remaining two thirds. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="public-interest"] {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  --root-region-accent: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="products"] {
+  grid-column: 3 / span 2;
+  grid-row: 1;
+  --root-region-accent: var(--bf-valid);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="publications"] {
+  grid-column: 5 / span 2;
+  grid-row: 1;
+  --root-region-accent: var(--bf-info);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="about"] {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+  --root-region-accent: var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="research"] {
+  grid-column: 3 / span 4;
+  grid-row: 2;
+  --root-region-accent: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card {
+  position: relative;
+  min-width: 0;
+  min-height: 0 !important;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  padding: clamp(16px, 1.2vw, 22px);
+  border: 1px solid var(--root-board-edge);
+  border-left: 2px solid var(--root-region-accent, var(--bf-action));
+  border-radius: 9px;
+  background:
+    linear-gradient(180deg, var(--root-board-highlight), transparent 25%),
+    var(--root-board-panel);
+  color: var(--bf-workshop-100);
+  box-shadow:
+    inset 0 1px var(--root-board-highlight),
+    inset 0 -1px rgba(0, 0, 0, 0.34),
+    0 2px 7px var(--root-board-shadow);
+  transform: none;
+  transition:
+    background 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 48%, transparent);
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card:hover {
+  transform: none;
+  border-color: color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 54%, var(--root-board-edge));
+  border-left-color: var(--root-region-accent, var(--bf-action));
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.065), transparent 26%),
+    var(--root-board-panel-raised);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.075),
+    inset 0 -1px rgba(0, 0, 0, 0.34),
+    0 4px 11px rgba(0, 0, 0, 0.4);
+}
+
+/* Number registers are machine labels, not decorative badges. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card__number {
+  position: absolute;
+  top: clamp(14px, 1vw, 18px);
+  right: clamp(14px, 1vw, 18px);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: auto;
+  min-width: 2rem;
+  height: 1.65rem;
+  padding-inline: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 56%, transparent);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.018);
+  color: var(--root-region-accent, var(--bf-action));
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+/* The existing eyebrow becomes the instrument register. A restrained geometric mark
+ * supplies quick visual discrimination without adding another icon dependency. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card__kind {
+  display: block;
+  min-height: 3.6rem;
+  padding-right: 3rem;
+  color: var(--bf-silver-300);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(0.58rem, 0.56vw, 0.68rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card__kind::before {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--root-region-accent, var(--bf-action));
+  font-size: clamp(1.55rem, 1.6vw, 2rem);
+  line-height: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="public-interest"] .district-card__kind::before { content: "◎"; }
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="products"] .district-card__kind::before { content: "◇"; }
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="publications"] .district-card__kind::before { content: "▤"; }
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="about"] .district-card__kind::before { content: "△"; }
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="research"] .district-card__kind::before { content: "⌁"; }
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card > strong {
+  max-width: 22ch;
+  margin-top: 0.08rem;
+  color: var(--bf-workshop-100);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, min(1.9vw, 3.3svh), 2.15rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] > strong {
+  max-width: none;
+  font-size: clamp(1.65rem, min(2.2vw, 3.8svh), 2.45rem);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card > p {
+  max-width: 50ch;
+  margin: 0.7rem 0 0;
+  color: var(--bf-silver-300);
+  font-size: clamp(0.75rem, 0.76vw, 0.9rem);
+  line-height: 1.52;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] > p {
+  max-width: 82ch;
+}
+
+/* Entry is a lower control strip integrated into the panel housing. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card__action {
+  width: calc(100% + 2 * clamp(16px, 1.2vw, 22px));
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin:
+    auto
+    calc(-1 * clamp(16px, 1.2vw, 22px))
+    calc(-1 * clamp(16px, 1.2vw, 22px));
+  padding: 0 clamp(16px, 1.2vw, 22px);
+  border-top: 1px solid var(--root-board-line);
+  color: var(--root-region-accent, var(--bf-action));
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card__action::after {
+  content: "›";
+  display: block;
+  border: 0;
+  background: transparent;
+  color: var(--root-region-accent, var(--bf-action));
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+/* Give the root chrome the same clean matte hierarchy without changing its controls
+ * or navigation semantics. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .boundary-frame__top {
+  background: #111a20;
+  background-image: none;
+  border-bottom-color: var(--root-board-edge);
+  box-shadow: inset 0 -1px rgba(0, 0, 0, 0.34);
+  backdrop-filter: none;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .brand-anchor,
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .frame-tool,
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .projection-switcher {
+  background: #202b33;
+  background-image: none;
+  border-color: var(--root-board-edge);
+  box-shadow: inset 0 1px var(--root-board-highlight);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .brand-anchor {
+  width: auto;
+  min-width: 12.5rem;
+  justify-content: flex-start;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .brand-anchor::after {
+  content: "BOUNDARY FIRST LABS";
+  color: var(--bf-workshop-100);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+/* Preserve responsive content before preserving the desktop control-board geometry. */
+@media (max-width: 1360px) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: auto !important;
+    height: auto;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id] {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 16rem !important;
+    height: auto;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id="research"] {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .world-viewport {
+    overflow: auto;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world--root-world {
+    height: auto;
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card[data-node-id] {
+    min-height: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .brand-anchor {
+    min-width: 0;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .brand-anchor::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card {
+    transition: none;
+  }
+}
