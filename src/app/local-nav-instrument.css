@@ -1,0 +1,328 @@
+/*
+ * Boundary First Card renderer · local navigation instrument refinement.
+ *
+ * Scope: non-root Card surfaces. Navigation semantics and ordering are unchanged.
+ * The left rail is treated as an apparatus: history/context feeds a persistent local
+ * spine; sibling choices branch from it; the active sibling is the operator-focus
+ * terminal. Surfaces are clean matte gunmetal with restrained edge lift.
+ */
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] {
+  --nav-chassis: #111a20;
+  --nav-control: #1b252c;
+  --nav-control-hover: #202c34;
+  --nav-control-active: #242e37;
+  --nav-line: rgba(170, 180, 184, 0.22);
+  --nav-edge: rgba(170, 180, 184, 0.34);
+  --nav-highlight: rgba(255, 255, 255, 0.05);
+  --nav-shadow: rgba(0, 0, 0, 0.28);
+}
+
+/* Home / trace transport ------------------------------------------------ */
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray {
+  min-height: 42px;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--nav-edge);
+  border-radius: 7px;
+  background: var(--nav-chassis);
+  background-image: none;
+  box-shadow:
+    inset 0 1px var(--nav-highlight),
+    0 1px 3px var(--nav-shadow);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray .brand-anchor {
+  width: 34px !important;
+  height: 34px;
+  min-width: 34px;
+  padding: 2px !important;
+  border-radius: 5px;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray .brand-anchor__mark {
+  width: 27px;
+  height: 27px;
+  flex-basis: 27px;
+  border-color: var(--nav-edge);
+  background: #202b33;
+  background-image: none;
+  box-shadow: inset 0 1px var(--nav-highlight);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray--trace .brand-anchor {
+  margin-right: 2px;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray--trace .brand-anchor::after {
+  height: 20px;
+  margin-left: 4px;
+  background: var(--nav-line);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray .frame-tool {
+  width: 30px;
+  height: 30px;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  border-radius: 5px !important;
+  color: var(--bf-silver-300);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray .frame-tool:hover:not(:disabled) {
+  background: var(--nav-control-hover);
+  color: var(--bf-workshop-100);
+}
+
+/* Desktop left apparatus ------------------------------------------------ */
+
+@media (min-width: 981px) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .boundary-frame__trace-nav {
+    top: calc(var(--frame-top) + 7px) !important;
+    width: calc(var(--frame-left) - 9px);
+    min-width: 158px;
+    max-height: calc(100svh - var(--frame-top) - 22px);
+    padding: 11px 10px 13px 11px;
+    border: 1px solid var(--nav-edge) !important;
+    border-left: 0 !important;
+    border-radius: 0 7px 7px 0;
+    background: var(--nav-chassis);
+    background-image: none;
+    box-shadow:
+      5px 7px 14px rgba(0, 0, 0, 0.16),
+      inset 0 1px var(--nav-highlight);
+    backdrop-filter: none;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav {
+    gap: 0;
+  }
+
+  /* Prior traversal is context, not another menu card. */
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history-wrap {
+    margin: 0 !important;
+    padding: 2px 0 10px !important;
+    border: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history {
+    position: relative;
+    padding: 0 0 0 22px !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history::before {
+    top: 50%;
+    bottom: auto;
+    left: 7px;
+    width: 11px;
+    height: 1px;
+    background: var(--nav-line);
+    transform: translateY(-50%);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history li {
+    min-height: 27px;
+    padding: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history-dot {
+    top: 50%;
+    left: -18px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--nav-edge);
+    background: var(--nav-chassis);
+    box-shadow: 0 0 0 2px var(--nav-chassis);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history button {
+    min-height: 27px;
+    padding: 3px 3px !important;
+    color: var(--bf-alloy-400);
+    text-decoration: none;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history button:hover {
+    color: var(--bf-workshop-100);
+    text-decoration: none;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history .path-node__label {
+    font-size: 0.67rem;
+    line-height: 1.2;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history-gap {
+    margin: 0 0 4px;
+    padding-left: 22px;
+    color: var(--bf-alloy-400);
+  }
+
+  /* Sibling content is expressed as branches from a structural spine. */
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links {
+    position: relative;
+    gap: 5px !important;
+    padding: 4px 0 0 24px !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    bottom: 22px;
+    left: 8px;
+    width: 1px;
+    background: linear-gradient(var(--nav-edge), var(--nav-line));
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li {
+    position: relative;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li::before {
+    content: "" !important;
+    display: block !important;
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: -16px;
+    width: 16px;
+    height: 1px;
+    background: var(--nav-line);
+    transform: translateY(-50%);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: -20px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--nav-edge);
+    border-radius: 50%;
+    background: var(--nav-chassis);
+    box-shadow: 0 0 0 2px var(--nav-chassis);
+    transform: translateY(-50%);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li:has(button.is-active)::after {
+    border-color: var(--bf-action);
+    background: var(--bf-action-pressed);
+    box-shadow:
+      0 0 0 2px var(--nav-chassis),
+      0 0 0 4px rgba(169, 140, 255, 0.11);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button {
+    position: relative;
+    z-index: 1;
+    min-height: 44px;
+    padding: 8px 11px;
+    border: 1px solid var(--nav-line);
+    border-radius: 6px;
+    background: var(--nav-control);
+    background-image: none;
+    color: var(--bf-silver-300);
+    box-shadow: inset 0 1px var(--nav-highlight);
+    transition:
+      border-color 120ms ease,
+      background 120ms ease,
+      color 120ms ease;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button:hover:not(.is-active) {
+    transform: none;
+    border-color: var(--nav-edge);
+    background: var(--nav-control-hover);
+    color: var(--bf-workshop-100);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button.is-active {
+    border-color: var(--bf-action-line);
+    background:
+      linear-gradient(90deg, rgba(169, 140, 255, 0.13), transparent 76%),
+      var(--nav-control-active);
+    color: var(--bf-workshop-100);
+    box-shadow:
+      inset 2px 0 var(--bf-action),
+      inset 0 1px var(--nav-highlight);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links .peer-node__label {
+    font-size: clamp(0.69rem, 0.73vw, 0.79rem);
+    line-height: 1.18;
+  }
+
+  /* The context tap and sibling spine should read as one continuous route. */
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .trace-nav__history-wrap + .local-nav__links::before {
+    top: -10px;
+  }
+}
+
+/* Responsive shelf keeps existing interaction topology; the schematic line collapses. */
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray {
+    border-radius: 6px;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .boundary-frame__trace-nav {
+    background: var(--nav-chassis);
+    background-image: none;
+    border-color: var(--nav-edge);
+    backdrop-filter: none;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links {
+    gap: 5px !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links::before,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li::before,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button {
+    min-height: 40px;
+    border-radius: 6px;
+    background: var(--nav-control);
+    color: var(--bf-silver-300);
+    box-shadow: inset 0 1px var(--nav-highlight);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button.is-active {
+    border-color: var(--bf-action-line);
+    background: var(--nav-control-active);
+    color: var(--bf-workshop-100);
+    box-shadow: inset 0 -2px var(--bf-action);
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tray,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .boundary-frame__trace-nav,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links::before,
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li::before {
+    background: CanvasText;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li::after {
+    border-color: CanvasText;
+    background: Canvas;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links li:has(button.is-active)::after {
+    background: Highlight;
+  }
+}
