@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from "react";
 import {
-  getAncestors,
   getChildren,
-  getNode,
+  getParent,
   type ContentNode,
 } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
@@ -32,7 +31,6 @@ type BoundaryFrameProps = {
   onBack: () => void;
   onForward: () => void;
   onLocalNavigate: (id: string) => void;
-  onTraversalPath: (id: string, index: number) => void;
   onProcessZoomOut: () => void;
   onProcessZoomIn: () => void;
   onProjectionChange?: (projection: ProjectionMode) => void;
@@ -89,11 +87,45 @@ function FrameIcon({ name }: { name: FrameIconName }) {
   );
 }
 
+function MoveGroup({
+  direction,
+  label,
+  nodes,
+  onNavigate,
+}: {
+  direction: "up" | "across" | "down";
+  label: string;
+  nodes: ContentNode[];
+  onNavigate: (id: string) => void;
+}) {
+  if (!nodes.length) return null;
+
+  return (
+    <section className="traversal-nav__move-group" data-direction={direction} aria-label={`${label} navigation`}>
+      <div className="traversal-nav__direction" aria-hidden="true">
+        <span>{direction === "up" ? "↑" : direction === "across" ? "↔" : "↓"}</span>
+        <strong>{label}</strong>
+      </div>
+      <ol>
+        {nodes.map((node) => (
+          <li key={node.id}>
+            <button onClick={() => onNavigate(node.id)} title={`${label}: ${node.label}`}>
+              <span>{node.shortLabel ?? node.label}</span>
+              <small>{direction === "up" ? "Containing boundary" : direction === "across" ? "Same boundary" : "Contained region"}</small>
+            </button>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
 export function BoundaryFrame({
   visible,
   focusNode,
   traversalPath,
   traversalCursor,
+  siblings,
   projection = "world",
   processScope,
   canTraceBack,
@@ -104,34 +136,22 @@ export function BoundaryFrame({
   onBack,
   onForward,
   onLocalNavigate,
-  onTraversalPath,
   onProcessZoomOut,
   onProcessZoomIn,
   onProjectionChange,
   onSearch,
 }: BoundaryFrameProps) {
   const isRootFocus = focusNode.id === "root";
-
-  // Containment, sibling choice, and traversal are one structure. The tree supplies
-  // canonical levels; the active traversal simply illuminates the route through it.
-  const containmentPath = isRootFocus
-    ? []
-    : [...getAncestors(focusNode.id), getNode(focusNode.id)]
-        .filter((node) => node.id !== "root")
-        .map(hydrateContentNode);
-  const boundaryRoot = containmentPath[0];
   const activeTraversal = traversalPath.slice(0, traversalCursor + 1);
-  const activeTraversalIds = activeTraversal.map((node) => node.id);
-  const nonRootTraversal = activeTraversal.filter((node) => node.id !== "root");
-  const hasTrace = nonRootTraversal.length > 1;
-  const canMeaningfulTraceBack = canTraceBack && activeTraversal
-    .slice(0, -1)
-    .some((node) => node.id !== "root");
-  const rootChildren = boundaryRoot ? getChildren(boundaryRoot.id) : [];
-  const showLeftNav = !isRootFocus && Boolean(boundaryRoot) && (
-    rootChildren.length > 0 || containmentPath.length > 1
+  const history = activeTraversal.slice(0, -1);
+  const parent = getParent(focusNode.id);
+  const parentNode = parent ? hydrateContentNode(parent) : undefined;
+  const siblingNodes = siblings.filter((node) => node.id !== focusNode.id);
+  const childNodes = getChildren(focusNode.id).map(hydrateContentNode);
+  const hasTrace = activeTraversal.length > 1;
+  const showLeftNav = !isRootFocus && (
+    history.length > 0 || Boolean(parentNode) || siblingNodes.length > 0 || childNodes.length > 0
   );
-  const focusAtBoundaryRoot = Boolean(boundaryRoot && focusNode.id === boundaryRoot.id);
 
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
   const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
@@ -171,63 +191,12 @@ export function BoundaryFrame({
     section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }
 
-  function navigateTreeNode(node: ContentNode) {
-    if (node.id === focusNode.id) return;
-
-    const traversalIndex = activeTraversalIds.lastIndexOf(node.id);
-    if (traversalIndex >= 0) {
-      onTraversalPath(node.id, traversalIndex);
-      return;
-    }
-
-    onLocalNavigate(node.id);
-  }
-
-  function renderTreeLevel(parentNode: ContentNode, parentDepth: number) {
-    const children = getChildren(parentNode.id).map(hydrateContentNode);
-    if (!children.length) return null;
-
-    const pathChild = containmentPath[parentDepth + 1];
-
-    return (
-      <ol className="apparatus-nav__tree-level" data-depth={parentDepth + 1}>
-        {children.map((node) => {
-          const isPath = pathChild?.id === node.id;
-          const isCurrent = focusNode.id === node.id;
-          const isTraced = activeTraversalIds.includes(node.id);
-
-          return (
-            <li
-              key={node.id}
-              data-path={isPath ? "true" : "false"}
-              data-current={isCurrent ? "true" : "false"}
-              data-traced={isTraced ? "true" : "false"}
-            >
-              <span className="apparatus-nav__terminal" aria-hidden="true" />
-              <button
-                className={isCurrent ? "is-current" : isPath ? "is-path" : undefined}
-                aria-current={isCurrent ? "page" : undefined}
-                onClick={() => navigateTreeNode(node)}
-                title={isCurrent ? `${node.label} (current)` : `Open ${node.label}`}
-              >
-                <span className="apparatus-nav__node-label">{node.shortLabel ?? node.label}</span>
-                {isCurrent ? <small className="apparatus-nav__current-marker">You are here</small> : null}
-              </button>
-
-              {isPath && !isCurrent ? renderTreeLevel(node, parentDepth + 1) : null}
-            </li>
-          );
-        })}
-      </ol>
-    );
-  }
-
   return (
     <div
       className={`boundary-frame ${isRootFocus ? "boundary-frame--root" : ""} ${visible ? "boundary-frame--visible" : ""}`}
     >
       <header className="boundary-frame__top">
-        <div className={`frame-home-tray ${hasTrace ? "frame-home-tray--trace" : ""}`} aria-label="Home and trace controls">
+        <div className={`frame-home-tray ${hasTrace ? "frame-home-tray--trace" : ""}`} aria-label="Home and traversal history controls">
           <button
             className="brand-anchor"
             onClick={onHome}
@@ -242,9 +211,9 @@ export function BoundaryFrame({
               <button
                 className="frame-tool frame-tool--trace-back"
                 onClick={onBack}
-                disabled={!canMeaningfulTraceBack}
-                aria-label="Back through trace"
-                title="Move one step backward through the trace"
+                disabled={!canTraceBack}
+                aria-label="Back through traversal history"
+                title="Replay the previous traversal state"
               >
                 <FrameIcon name="back" />
                 <span className="frame-tool__label">Back</span>
@@ -253,8 +222,8 @@ export function BoundaryFrame({
                 className="frame-tool frame-tool--trace-forward"
                 onClick={onForward}
                 disabled={!canTraceForward}
-                aria-label="Forward through trace"
-                title="Move one step forward through the trace"
+                aria-label="Forward through traversal history"
+                title="Replay the next traversal state"
               >
                 <FrameIcon name="forward" />
                 <span className="frame-tool__label">Forward</span>
@@ -319,38 +288,65 @@ export function BoundaryFrame({
         </div>
       </header>
 
-      {showLeftNav && boundaryRoot ? (
+      {showLeftNav ? (
         <aside
           className="boundary-frame__left boundary-frame__trace-nav"
-          data-has-trace={hasTrace ? "true" : "false"}
+          data-has-history={history.length ? "true" : "false"}
           data-apparatus-sections="true"
-          data-focus-at-boundary-root={focusAtBoundaryRoot ? "true" : "false"}
         >
-          <nav className="trace-nav apparatus-nav" aria-label={`Current path and nearby navigation for ${focusNode.label}`}>
-            <header className="apparatus-nav__header">
+          <nav className="trace-nav apparatus-nav traversal-nav" aria-label={`Traversal continuity for ${focusNode.label}`}>
+            <header className="apparatus-nav__header traversal-nav__header">
               <strong>Traversal</strong>
-              <span>Current path · nearby choices</span>
+              <span>Where you have been · where you can go next</span>
             </header>
 
-            <div className="apparatus-nav__tree-shell">
-              <div
-                className="apparatus-nav__tree-root"
-                data-current={focusAtBoundaryRoot ? "true" : "false"}
-                data-traced={activeTraversalIds.includes(boundaryRoot.id) ? "true" : "false"}
-              >
-                <span className="apparatus-nav__terminal apparatus-nav__terminal--root" aria-hidden="true" />
-                <button
-                  className={focusAtBoundaryRoot ? "is-current" : "is-path"}
-                  aria-current={focusAtBoundaryRoot ? "page" : undefined}
-                  onClick={() => navigateTreeNode(boundaryRoot)}
-                  title={focusAtBoundaryRoot ? `${boundaryRoot.label} (current)` : `Open ${boundaryRoot.label}`}
-                >
-                  <span className="apparatus-nav__node-label">{boundaryRoot.shortLabel ?? boundaryRoot.label}</span>
-                  {focusAtBoundaryRoot ? <small className="apparatus-nav__current-marker">You are here</small> : null}
-                </button>
+            <div className="traversal-nav__flow">
+              {history.length ? (
+                <section className="traversal-nav__history" aria-label="Where you have been">
+                  <div className="traversal-nav__section-label">Where you have been</div>
+                  <ol>
+                    {history.map((node, index) => (
+                      <li key={`${node.id}-${index}`}>
+                        <span className="traversal-nav__history-terminal" aria-hidden="true" />
+                        <div className="traversal-nav__history-node">
+                          <span>{node.shortLabel ?? node.label}</span>
+                          <small>{String(index + 1).padStart(2, "0")}</small>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              ) : null}
 
-                {renderTreeLevel(boundaryRoot, 0)}
-              </div>
+              <section className="traversal-nav__current" aria-label="Current location">
+                <span className="traversal-nav__current-terminal" aria-hidden="true" />
+                <div>
+                  <small>You are here</small>
+                  <strong>{focusNode.shortLabel ?? focusNode.label}</strong>
+                </div>
+              </section>
+
+              <section className="traversal-nav__next" aria-label="Where you can go next">
+                <div className="traversal-nav__section-label">Where you can go next</div>
+                <MoveGroup
+                  direction="up"
+                  label="Up"
+                  nodes={parentNode ? [parentNode] : []}
+                  onNavigate={onLocalNavigate}
+                />
+                <MoveGroup
+                  direction="across"
+                  label="Across"
+                  nodes={siblingNodes}
+                  onNavigate={onLocalNavigate}
+                />
+                <MoveGroup
+                  direction="down"
+                  label="Down"
+                  nodes={childNodes}
+                  onNavigate={onLocalNavigate}
+                />
+              </section>
             </div>
           </nav>
         </aside>
