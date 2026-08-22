@@ -1,0 +1,65 @@
+/*
+ * Boundary First UX · desktop spatial-flow correction.
+ *
+ * The traversal rail is an instrument, not a full-height wall. It should occupy only
+ * the space its history/current/peer controls require, up to a bounded viewport cap.
+ *
+ * Secondary World pages are top-first rather than vertically partitioned: the focused
+ * subject/title establishes the full-width header, while overview and contained regions
+ * share the working row beneath it.
+ */
+
+@media (min-width: 981px) {
+  /* Traversal rail ----------------------------------------------------- */
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
+    bottom: auto !important;
+    height: fit-content !important;
+    max-height: calc(100svh - var(--frame-top) - 16px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav {
+    min-height: 0;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__flow {
+    flex: 0 1 auto;
+  }
+
+  /* Secondary World --------------------------------------------------- */
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .branch-world:not(.branch-world--root-world) {
+    grid-template-columns: minmax(270px, 0.72fr) minmax(0, 1.58fr);
+    grid-template-rows: auto auto;
+    align-content: start;
+    align-items: start;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .branch-world:not(.branch-world--root-world) > .world-heading {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .branch-world:not(.branch-world--root-world) > .subject-pane {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .branch-world:not(.branch-world--root-world) > .district-grid {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+  }
+}
