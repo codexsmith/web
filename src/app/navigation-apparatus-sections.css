@@ -1,14 +1,24 @@
 /*
- * Boundary First Card renderer · canonical navigation apparatus sections.
+ * Boundary First Card renderer · unified traversal tree.
  *
- * The rail is not a sidebar menu. It is three projections of navigation state:
- * canonical containment (Boundary Tree), retained traversal (Trace), and sibling
- * alternatives at the current terminal (Adjacent Options).
+ * Containment, sibling choice, and the active trace are not three navigation systems.
+ * They are three readings of one tree. Neutral branches expose nearby choices; the
+ * violet conductor marks the route to the current terminal.
  */
+
+body[data-ui-shell="cards"] {
+  --nav-chassis: #111a20;
+  --nav-control: #202b33;
+  --nav-control-hover: #26333c;
+  --nav-control-active: #252f3a;
+  --nav-line: rgba(170, 180, 184, 0.16);
+  --nav-edge: rgba(170, 180, 184, 0.29);
+  --nav-highlight: rgba(255, 255, 255, 0.045);
+}
 
 @media (min-width: 981px) {
   body[data-ui-shell="cards"] {
-    --frame-left: clamp(272px, 23vw, 360px);
+    --frame-left: clamp(258px, 21vw, 338px);
   }
 
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
@@ -18,7 +28,6 @@
     width: calc(var(--frame-left) - 9px);
     min-width: 0;
     height: auto !important;
-    max-height: none;
     padding: 0 !important;
     overflow-x: hidden;
     overflow-y: auto;
@@ -38,128 +47,96 @@
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0 !important;
     color: var(--bf-silver-300);
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__header {
-    min-height: 42px;
+    min-height: 48px;
     display: grid;
-    grid-template-columns: auto auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 0.48rem;
-    padding: 0 14px;
+    align-content: center;
+    gap: 0.18rem;
+    padding: 8px 15px;
     border-bottom: 1px solid var(--nav-line);
-    color: var(--bf-workshop-100);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.065em;
-    text-transform: uppercase;
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__header strong {
-    font: inherit;
-    font-weight: 500;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__slash {
-    color: var(--bf-alloy-500);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__info {
-    width: 17px;
-    height: 17px;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--nav-edge);
-    border-radius: 50%;
-    color: var(--bf-alloy-400);
-    font-size: 0.58rem;
+    color: var(--bf-workshop-100);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.095em;
     line-height: 1;
-    text-transform: none;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__section {
-    position: relative;
-    min-width: 0;
-    padding: 12px 13px 14px;
-    border-bottom: 1px solid var(--nav-line);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__section:last-child {
-    border-bottom: 0;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__section-label {
-    margin-bottom: 9px;
-    color: var(--bf-alloy-400);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.62rem;
-    font-weight: 500;
-    letter-spacing: 0.075em;
-    line-height: 1.2;
     text-transform: uppercase;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__section-label span {
-    color: var(--bf-alloy-500);
+  body[data-ui-shell="cards"] .apparatus-nav__header > span {
+    color: var(--bf-alloy-400);
+    font-size: 0.5rem;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
   }
 
-  /* Boundary Tree ------------------------------------------------------- */
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree {
-    position: relative;
+  body[data-ui-shell="cards"] .apparatus-nav__tree-shell {
+    flex: 1 0 auto;
     min-width: 0;
-    padding-left: 28px;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree::before {
-    content: "";
-    position: absolute;
-    top: 19px;
-    bottom: 20px;
-    left: 13px;
-    width: 1px;
-    background: linear-gradient(var(--nav-edge), var(--nav-line));
+    padding: 14px 13px 18px;
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__tree-root,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children li {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li {
     position: relative;
     min-width: 0;
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__tree-root {
-    margin-bottom: 5px;
+    padding-left: 24px;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root::before,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children li::before {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 6px 0 0 12px;
+    padding: 0 0 0 20px;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level::before {
     content: "";
     position: absolute;
-    z-index: 0;
-    top: 50%;
-    right: 100%;
+    top: -7px;
+    bottom: 19px;
+    left: 5px;
+    width: 1px;
+    background: var(--nav-line);
+  }
+
+  body[data-ui-shell="cards"] li[data-path="true"] > .apparatus-nav__tree-level::before {
+    background: linear-gradient(var(--bf-action-line), var(--nav-line));
+  }
+
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: calc(100% - 1px);
     width: 15px;
     height: 1px;
     background: var(--nav-line);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin: 0;
-    padding: 0 0 0 16px;
-    list-style: none;
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li[data-path="true"]::before,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li[data-current="true"]::before {
+    background: var(--bf-action-line);
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__terminal {
     position: absolute;
-    z-index: 2;
-    top: 50%;
-    left: -20px;
+    z-index: 3;
+    top: 20px;
+    left: -19px;
     width: 8px;
     height: 8px;
     border: 1px solid var(--nav-edge);
@@ -170,32 +147,43 @@
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__terminal--root {
-    left: -19px;
+    top: 19px;
+    left: 3px;
     width: 10px;
     height: 10px;
     border-color: var(--bf-silver-300);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children li[data-selected="true"] .apparatus-nav__terminal {
+  body[data-ui-shell="cards"] li[data-path="true"] > .apparatus-nav__terminal,
+  body[data-ui-shell="cards"] li[data-current="true"] > .apparatus-nav__terminal,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root[data-traced="true"] > .apparatus-nav__terminal {
     border-color: var(--bf-action);
+  }
+
+  body[data-ui-shell="cards"] li[data-current="true"] > .apparatus-nav__terminal,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root[data-current="true"] > .apparatus-nav__terminal {
     background: var(--bf-action-pressed);
     box-shadow:
       0 0 0 2px var(--nav-chassis),
-      0 0 0 4px rgba(169, 140, 255, 0.1);
+      0 0 0 4px rgba(169, 140, 255, 0.11);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree button {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
     position: relative;
     z-index: 1;
     width: 100%;
     min-width: 0;
-    min-height: 38px;
-    display: flex;
+    min-height: 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
+    gap: 0.45rem;
     padding: 7px 10px;
     border: 1px solid var(--nav-line);
     border-radius: 6px;
     background: var(--nav-control);
+    background-image: none;
     color: var(--bf-silver-300);
     box-shadow: inset 0 1px var(--nav-highlight);
     cursor: pointer;
@@ -204,222 +192,76 @@
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__tree-root > button {
-    min-height: 36px;
+    min-height: 38px;
     border-color: transparent;
-    background: rgba(255, 255, 255, 0.015);
-    box-shadow: none;
+    background: rgba(255, 255, 255, 0.014);
     color: var(--bf-workshop-100);
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.02em;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree button:hover:not(.is-selected):not(.is-current) {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button:hover:not(.is-current),
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button:hover:not(.is-current) {
     border-color: var(--nav-edge);
     background: var(--nav-control-hover);
     color: var(--bf-workshop-100);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree button.is-selected,
-  body[data-ui-shell="cards"] .apparatus-nav__tree button.is-current {
-    border-color: var(--bf-action-line);
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button.is-path,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button.is-path {
+    border-color: rgba(169, 140, 255, 0.27);
     background:
-      linear-gradient(90deg, rgba(169, 140, 255, 0.13), transparent 76%),
-      var(--nav-control-active);
+      linear-gradient(90deg, rgba(169, 140, 255, 0.08), transparent 74%),
+      var(--nav-control);
     color: var(--bf-workshop-100);
     box-shadow:
-      inset 2px 0 var(--bf-action),
+      inset 2px 0 rgba(169, 140, 255, 0.55),
       inset 0 1px var(--nav-highlight);
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children button span {
-    overflow-wrap: anywhere;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(0.76rem, 0.79vw, 0.88rem);
-    line-height: 1.15;
-  }
-
-  /* Traversal trace ----------------------------------------------------- */
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list {
-    position: relative;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 0;
-    padding: 0 0 0 27px;
-    list-style: none;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list::before {
-    content: "";
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 10px;
-    width: 1px;
-    border-left: 1px dashed var(--nav-edge);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list li {
-    position: relative;
-    min-width: 0;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-symbol {
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    left: -21px;
-    width: 7px;
-    height: 7px;
-    border: 1px solid var(--bf-action-line);
-    border-radius: 50%;
-    background: var(--nav-chassis);
-    transform: translateY(-50%);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list li[data-current="true"] .apparatus-nav__trace-symbol {
-    width: 9px;
-    height: 9px;
-    left: -22px;
-    border-color: var(--bf-action);
-    background: var(--bf-action-pressed);
-    box-shadow:
-      0 0 0 2px var(--nav-chassis),
-      0 0 0 4px rgba(169, 140, 255, 0.1);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list button {
-    width: 100%;
-    min-width: 0;
-    min-height: 31px;
-    padding: 5px 7px;
-    border: 0;
-    background: transparent;
-    color: var(--bf-alloy-400);
-    cursor: pointer;
-    text-align: left;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list button:hover {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button.is-current,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button.is-current {
+    border-color: var(--bf-action-line);
+    background:
+      linear-gradient(90deg, rgba(169, 140, 255, 0.14), transparent 78%),
+      var(--nav-control-active);
     color: var(--bf-workshop-100);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list li[data-current="true"] button {
-    color: var(--bf-action-hover);
+    box-shadow:
+      inset 3px 0 var(--bf-action),
+      inset 0 1px var(--nav-highlight);
     cursor: default;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list button span {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  body[data-ui-shell="cards"] .apparatus-nav__node-label {
+    min-width: 0;
+    overflow-wrap: anywhere;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.76rem;
-    line-height: 1.2;
+    font-size: clamp(0.75rem, 0.78vw, 0.86rem);
+    line-height: 1.18;
   }
 
-  /* Adjacent sibling options ------------------------------------------- */
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent {
-    flex: 1 0 auto;
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root .apparatus-nav__node-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list li {
-    position: relative;
-    min-width: 0;
-    padding-left: 17px;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-symbol {
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    border: 1px solid var(--nav-edge);
-    transform: translateY(-50%) rotate(45deg);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list button {
-    position: relative;
-    width: 100%;
-    min-width: 0;
-    min-height: 48px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 2px 8px;
-    align-items: center;
-    padding: 7px 30px 7px 10px;
-    border: 1px solid var(--nav-line);
-    border-radius: 6px;
-    background: var(--nav-control);
-    color: var(--bf-silver-300);
-    box-shadow: inset 0 1px var(--nav-highlight);
-    cursor: pointer;
-    text-align: left;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list button:hover {
-    border-color: var(--bf-action-line);
-    background: var(--nav-control-hover);
-    color: var(--bf-workshop-100);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list strong {
-    grid-column: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.76rem;
-    font-weight: 400;
-    line-height: 1.16;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list small {
-    grid-column: 1;
-    color: var(--bf-alloy-400);
-    font-size: 0.5rem;
-    line-height: 1.2;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__chevron {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    color: var(--bf-alloy-400);
-    font-size: 1.1rem;
-    line-height: 1;
-    transform: translateY(-50%);
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list button:hover .apparatus-nav__chevron {
+  body[data-ui-shell="cards"] .apparatus-nav__current-marker {
     color: var(--bf-action-hover);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 }
 
-/* The compact topology keeps the same state model, but only exposes the immediately
- * useful choice bank. Deep trace pages show Adjacent Options; shallow pages show the
- * Boundary Tree children. */
+/* Compact screens keep the same tree model, but expose only the current level. The
+ * full hierarchy remains available on desktop while the reading surface gets priority. */
 @media (max-width: 980px) {
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
-    padding: 6px 7px !important;
+    padding: 5px 7px !important;
     background: var(--nav-chassis);
     border-color: var(--nav-edge);
   }
@@ -431,95 +273,109 @@
   }
 
   body[data-ui-shell="cards"] .apparatus-nav__header,
-  body[data-ui-shell="cards"] .apparatus-nav__section-label,
-  body[data-ui-shell="cards"] .apparatus-nav__trace {
-    display: none;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__section {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree-root {
-    display: none;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree {
-    height: 100%;
-    padding: 0;
-  }
-
-  body[data-ui-shell="cards"] .apparatus-nav__tree::before,
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children li::before,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root > .apparatus-nav__terminal,
   body[data-ui-shell="cards"] .apparatus-nav__terminal,
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-symbol {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level::before,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li::before {
     display: none;
     content: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children,
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-shell,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root {
     height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level {
+    display: none;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level:has(> li[data-current="true"]),
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-focus-at-boundary-root="true"] .apparatus-nav__tree-root > .apparatus-nav__tree-level {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 5px;
-    margin: 0;
-    padding: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    list-style: none;
+    scrollbar-width: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree-children li,
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list li {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level::-webkit-scrollbar {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li {
     flex: 0 0 auto;
     padding: 0;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__tree button,
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list button {
-    min-width: 118px;
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > .apparatus-nav__tree-level {
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
+    min-width: 122px;
     min-height: 40px;
     height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
     padding: 6px 9px;
     border: 1px solid var(--nav-line);
     border-radius: 6px;
     background: var(--nav-control);
     color: var(--bf-silver-300);
     box-shadow: inset 0 1px var(--nav-highlight);
+    text-align: left;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list small,
-  body[data-ui-shell="cards"] .apparatus-nav__chevron {
-    display: none;
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button.is-current {
+    border-color: var(--bf-action-line);
+    background: var(--nav-control-active);
+    color: var(--bf-workshop-100);
+    box-shadow: inset 0 -2px var(--bf-action);
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-has-trace="true"] .apparatus-nav__boundary {
-    display: none;
+  body[data-ui-shell="cards"] .apparatus-nav__node-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.72rem;
   }
 
-  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-has-trace="false"] .apparatus-nav__adjacent {
+  body[data-ui-shell="cards"] .apparatus-nav__current-marker {
     display: none;
   }
 }
 
+@media (max-width: 460px) {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
+    min-width: 108px;
+  }
+}
+
 @media (forced-colors: active) {
-  body[data-ui-shell="cards"] .apparatus-nav__tree button,
-  body[data-ui-shell="cards"] .apparatus-nav__trace-list button,
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-list button {
+  body[data-ui-shell="cards"] .apparatus-nav__tree-root > button,
+  body[data-ui-shell="cards"] .apparatus-nav__tree-level > li > button {
     background: Canvas;
     color: CanvasText;
     border-color: CanvasText;
     box-shadow: none;
   }
 
-  body[data-ui-shell="cards"] .apparatus-nav__terminal,
-  body[data-ui-shell="cards"] .apparatus-nav__trace-symbol,
-  body[data-ui-shell="cards"] .apparatus-nav__adjacent-symbol {
+  body[data-ui-shell="cards"] .apparatus-nav__terminal {
     border-color: CanvasText;
     background: Canvas;
     box-shadow: none;
