@@ -328,10 +328,16 @@ export function WorldApp({
     (targetId: string) => {
       if (targetId === focusId) return;
 
-      const localTraversal = [targetId];
-      writeTraversalMemory(localTraversal, 0);
-      setTraversalIds(localTraversal);
-      setTraversalCursor(0);
+      const current = getNode(focusId);
+      const target = getNode(targetId);
+      const isSiblingSwap = Boolean(current.parentId && current.parentId === target.parentId);
+      const nextTraversal = isSiblingSwap
+        ? replaceTraversalTerminal(traversalIds, traversalCursor, targetId)
+        : { ids: [targetId], cursor: 0 };
+
+      writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
+      setTraversalIds(nextTraversal.ids);
+      setTraversalCursor(nextTraversal.cursor);
       setTransitionDirection(inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
@@ -339,7 +345,7 @@ export function WorldApp({
       setSearchOpen(false);
       router.push(stateUrl(targetId, projection, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router, uiShell],
+    [focusId, processScope, projection, router, traversalCursor, traversalIds, uiShell],
   );
 
   const navigateHome = useCallback(() => {
