@@ -1,12 +1,12 @@
 /*
- * Boundary First Card renderer · admissible traversal navigation.
+ * Boundary First Card renderer · constrained traversal navigation.
  *
  * The rail has two jobs only:
  *   1. preserve the realized traversal history;
- *   2. expose the immediately admissible next moves from the current node.
+ *   2. expose nearby same-level choices from the current node.
  *
- * History is evidence, not a shortcut menu. The current node is the boundary between
- * history and possibility. Ordinary outgoing moves are Up, Across, or Down.
+ * Parent movement is already represented by the trace/back control. Child movement
+ * belongs to the page content itself. The rail therefore avoids duplicating either.
  */
 
 body[data-ui-shell="cards"] {
@@ -103,7 +103,17 @@ body[data-ui-shell="cards"] {
 
   body[data-ui-shell="cards"] .traversal-nav__history {
     position: relative;
+    min-width: 0;
     padding-bottom: 10px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-viewport {
+    max-height: clamp(132px, 28vh, 246px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__history ol {
@@ -111,7 +121,7 @@ body[data-ui-shell="cards"] {
     display: grid;
     gap: 0;
     margin: 0;
-    padding: 0 0 0 23px;
+    padding: 0 2px 0 23px;
     list-style: none;
   }
 
@@ -119,7 +129,7 @@ body[data-ui-shell="cards"] {
     content: "";
     position: absolute;
     top: 13px;
-    bottom: -14px;
+    bottom: 13px;
     left: 6px;
     width: 1px;
     background: linear-gradient(var(--nav-edge), var(--bf-action-line));
@@ -154,7 +164,22 @@ body[data-ui-shell="cards"] {
     gap: 0.5rem;
     align-items: center;
     padding: 5px 7px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
     color: var(--bf-alloy-400);
+    font: inherit;
+    text-align: left;
+  }
+
+  body[data-ui-shell="cards"] button.traversal-nav__history-node {
+    cursor: pointer;
+    transition: background 120ms ease, color 120ms ease;
+  }
+
+  body[data-ui-shell="cards"] button.traversal-nav__history-node:hover {
+    background: rgba(169, 140, 255, 0.07);
+    color: var(--bf-workshop-100);
   }
 
   body[data-ui-shell="cards"] .traversal-nav__history-node > span {
@@ -179,6 +204,16 @@ body[data-ui-shell="cards"] {
     position: relative;
     z-index: 2;
     margin: 0 0 12px 23px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: -17px;
+    width: 1px;
+    height: 10px;
+    background: var(--bf-action-line);
   }
 
   body[data-ui-shell="cards"] .traversal-nav__current::after {
@@ -241,7 +276,7 @@ body[data-ui-shell="cards"] {
     line-height: 1.18;
   }
 
-  /* Admissible possibility ------------------------------------------- */
+  /* Same-level choices ------------------------------------------------ */
 
   body[data-ui-shell="cards"] .traversal-nav__next {
     position: relative;
@@ -258,66 +293,35 @@ body[data-ui-shell="cards"] {
     background: var(--nav-line);
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__move-group {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
     position: relative;
     min-width: 0;
     display: grid;
-    grid-template-columns: 46px minmax(0, 1fr);
-    gap: 7px;
-    align-items: start;
+    gap: 5px;
+    margin: 0;
     padding: 5px 0 7px;
+    list-style: none;
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__move-group::before {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list::before {
     content: "";
     position: absolute;
-    top: 18px;
+    top: 20px;
     left: -17px;
     width: 17px;
     height: 1px;
     background: var(--nav-line);
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__direction {
-    min-height: 32px;
-    display: grid;
-    grid-template-columns: 12px minmax(0, 1fr);
-    gap: 3px;
-    align-items: center;
-    color: var(--bf-alloy-400);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__direction > span {
-    color: var(--bf-action-hover);
-    font-size: 0.67rem;
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__direction strong {
-    font-size: 0.45rem;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group ol {
-    min-width: 0;
-    display: grid;
-    gap: 5px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group button {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
     width: 100%;
     min-width: 0;
-    min-height: 42px;
+    min-height: 40px;
     display: grid;
-    gap: 0.14rem;
     align-content: center;
     padding: 7px 9px;
     border: 1px solid var(--nav-line);
+    border-left-color: rgba(169, 140, 255, 0.42);
     border-radius: 6px;
     background: var(--nav-control);
     color: var(--bf-silver-300);
@@ -327,42 +331,23 @@ body[data-ui-shell="cards"] {
     transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__move-group button:hover {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button:hover {
     border-color: var(--bf-action-line);
     background: var(--nav-control-hover);
     color: var(--bf-workshop-100);
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__move-group button > span {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button > span {
     min-width: 0;
     overflow-wrap: anywhere;
     font-family: Georgia, "Times New Roman", serif;
     font-size: 0.76rem;
     line-height: 1.15;
   }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group button > small {
-    color: var(--bf-alloy-400);
-    font-size: 0.46rem;
-    line-height: 1.15;
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="up"] button {
-    border-left-color: rgba(242, 198, 109, 0.42);
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="across"] button {
-    border-left-color: rgba(169, 140, 255, 0.42);
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="down"] button {
-    border-left-color: rgba(142, 219, 154, 0.4);
-  }
 }
 
-/* Compact projection: preserve both semantics without recreating the desktop rail.
- * The current node anchors the shelf. History is summarized as a non-interactive trail;
- * only admissible next moves remain interactive. */
+/* Compact projection: retain the immediately previous history step, current focus,
+ * and same-level choices in one horizontal shelf. Child navigation remains in-page. */
 @media (max-width: 980px) {
   body[data-ui-shell="cards"] {
     --trace-nav-shelf: 68px;
@@ -384,10 +369,10 @@ body[data-ui-shell="cards"] {
   body[data-ui-shell="cards"] .traversal-nav__section-label,
   body[data-ui-shell="cards"] .traversal-nav__history-terminal,
   body[data-ui-shell="cards"] .traversal-nav__current-terminal,
+  body[data-ui-shell="cards"] .traversal-nav__current::before,
   body[data-ui-shell="cards"] .traversal-nav__current::after,
   body[data-ui-shell="cards"] .traversal-nav__next::before,
-  body[data-ui-shell="cards"] .traversal-nav__move-group::before,
-  body[data-ui-shell="cards"] .traversal-nav__direction {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list::before {
     display: none;
     content: none;
   }
@@ -410,23 +395,29 @@ body[data-ui-shell="cards"] {
 
   body[data-ui-shell="cards"] .traversal-nav__history,
   body[data-ui-shell="cards"] .traversal-nav__current,
-  body[data-ui-shell="cards"] .traversal-nav__next,
-  body[data-ui-shell="cards"] .traversal-nav__move-group {
+  body[data-ui-shell="cards"] .traversal-nav__next {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
   }
 
+  body[data-ui-shell="cards"] .traversal-nav__history-viewport {
+    max-height: none;
+    overflow: visible;
+    scrollbar-gutter: auto;
+  }
+
   body[data-ui-shell="cards"] .traversal-nav__history ol,
   body[data-ui-shell="cards"] .traversal-nav__next,
-  body[data-ui-shell="cards"] .traversal-nav__move-group,
-  body[data-ui-shell="cards"] .traversal-nav__move-group ol {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
     display: flex;
     align-items: center;
     gap: 5px;
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__history ol {
+  body[data-ui-shell="cards"] .traversal-nav__history ol,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
+    margin: 0;
     padding: 0;
   }
 
@@ -494,46 +485,28 @@ body[data-ui-shell="cards"] {
     font-size: 0.72rem;
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__move-group button {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list {
+    flex: 0 0 auto;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
     min-width: 116px;
     min-height: 40px;
     height: 40px;
     padding: 6px 9px;
     border: 1px solid var(--nav-line);
+    border-left-color: rgba(169, 140, 255, 0.42);
     border-radius: 6px;
     background: var(--nav-control);
     color: var(--bf-silver-300);
     box-shadow: inset 0 1px var(--nav-highlight);
   }
 
-  body[data-ui-shell="cards"] .traversal-nav__move-group button::before {
-    margin-right: 0.3rem;
-    color: var(--bf-action-hover);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.6rem;
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="up"] button::before {
-    content: "↑";
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="across"] button::before {
-    content: "↔";
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group[data-direction="down"] button::before {
-    content: "↓";
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group button > span {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button > span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 0.7rem;
-  }
-
-  body[data-ui-shell="cards"] .traversal-nav__move-group button > small {
-    display: none;
   }
 }
 
@@ -547,7 +520,7 @@ body[data-ui-shell="cards"] {
   }
 
   body[data-ui-shell="cards"] .traversal-nav__current > div,
-  body[data-ui-shell="cards"] .traversal-nav__move-group button {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
     min-width: 104px;
   }
 }
@@ -555,7 +528,7 @@ body[data-ui-shell="cards"] {
 @media (forced-colors: active) {
   body[data-ui-shell="cards"] .traversal-nav__current > div,
   body[data-ui-shell="cards"] .traversal-nav__history-node,
-  body[data-ui-shell="cards"] .traversal-nav__move-group button {
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
     background: Canvas;
     color: CanvasText;
     border-color: CanvasText;
