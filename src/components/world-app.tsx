@@ -52,6 +52,16 @@ function inferDirection(fromId: string, toId: string): TransitionDirection {
   return "cross";
 }
 
+function isAdmissibleHierarchyMove(fromId: string, toId: string) {
+  if (fromId === toId) return false;
+  const from = getNode(fromId);
+  const to = getNode(toId);
+
+  if (from.parentId === to.id) return true;
+  if (to.parentId === from.id) return true;
+  return Boolean(from.parentId && from.parentId === to.parentId);
+}
+
 function stateUrl(
   focusId: string,
   projection: ProjectionMode,
@@ -326,14 +336,11 @@ export function WorldApp({
 
   const navigateLocal = useCallback(
     (targetId: string) => {
-      if (targetId === focusId) return;
+      if (!isAdmissibleHierarchyMove(focusId, targetId)) return;
 
-      const current = getNode(focusId);
-      const target = getNode(targetId);
-      const isSiblingSwap = Boolean(current.parentId && current.parentId === target.parentId);
-      const nextTraversal = isSiblingSwap
-        ? replaceTraversalTerminal(traversalIds, traversalCursor, targetId)
-        : { ids: [targetId], cursor: 0 };
+      const activePath = traversalIds.slice(0, traversalCursor + 1);
+      const nextIds = appendTraversal(activePath, targetId);
+      const nextTraversal = { ids: nextIds, cursor: nextIds.length - 1 };
 
       writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
       setTraversalIds(nextTraversal.ids);
@@ -346,6 +353,27 @@ export function WorldApp({
       router.push(stateUrl(targetId, projection, processScope, uiShell), { scroll: false });
     },
     [focusId, processScope, projection, router, traversalCursor, traversalIds, uiShell],
+  );
+
+  const navigateFromSearch = useCallback(
+    (targetId: string) => {
+      if (targetId === focusId) {
+        setSearchOpen(false);
+        return;
+      }
+
+      const nextTraversal = { ids: [targetId], cursor: 0 };
+      writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
+      setTraversalIds(nextTraversal.ids);
+      setTraversalCursor(nextTraversal.cursor);
+      setTransitionDirection("cross");
+      setTransitionKey((value) => value + 1);
+      setFocusId(targetId);
+      setInspectionId(null);
+      setSearchOpen(false);
+      router.push(stateUrl(targetId, projection, processScope, uiShell), { scroll: false });
+    },
+    [focusId, processScope, projection, router, uiShell],
   );
 
   const navigateHome = useCallback(() => {
@@ -526,7 +554,6 @@ export function WorldApp({
             onBack={navigateTraceBack}
             onForward={navigateTraceForward}
             onLocalNavigate={navigateLocal}
-            onTraversalPath={navigateTraversalPath}
             onProcessZoomOut={processZoomOut}
             onProcessZoomIn={processZoomIn}
             onProjectionChange={changeProjection}
@@ -537,7 +564,7 @@ export function WorldApp({
       )}
 
       {activeInspection ? <InspectionPanel inspection={activeInspection} onClose={() => setInspectionId(null)} /> : null}
-      {searchOpen ? <SearchPanel onClose={() => setSearchOpen(false)} onNavigate={navigateLocal} /> : null}
+      {searchOpen ? <SearchPanel onClose={() => setSearchOpen(false)} onNavigate={navigateFromSearch} /> : null}
     </div>
   );
 }
