@@ -1,6 +1,6 @@
 /* P1 Boundary First topology and projection transport feedback. */
 
-body[data-ui-shell="cards"] .projection-transport-notice {
+.projection-transport-notice {
   position: fixed;
   z-index: 80;
   top: calc(var(--frame-top) + 12px);
@@ -22,13 +22,13 @@ body[data-ui-shell="cards"] .projection-transport-notice {
     inset 0 1px 0 var(--bf-edge-highlight);
 }
 
-body[data-ui-shell="cards"] .projection-transport-notice > span,
-body[data-ui-shell="cards"] .projection-transport-notice > small {
+.projection-transport-notice > span,
+.projection-transport-notice > small {
   grid-column: 1;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-body[data-ui-shell="cards"] .projection-transport-notice > span {
+.projection-transport-notice > span {
   color: var(--bf-action-hover);
   font-size: 0.48rem;
   font-weight: 700;
@@ -36,7 +36,7 @@ body[data-ui-shell="cards"] .projection-transport-notice > span {
   text-transform: uppercase;
 }
 
-body[data-ui-shell="cards"] .projection-transport-notice > strong {
+.projection-transport-notice > strong {
   grid-column: 1;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 0.86rem;
@@ -44,13 +44,13 @@ body[data-ui-shell="cards"] .projection-transport-notice > strong {
   line-height: 1.25;
 }
 
-body[data-ui-shell="cards"] .projection-transport-notice > small {
+.projection-transport-notice > small {
   color: var(--bf-text-secondary);
   font-size: 0.5rem;
   line-height: 1.35;
 }
 
-body[data-ui-shell="cards"] .projection-transport-notice > button {
+.projection-transport-notice > button {
   grid-column: 2;
   grid-row: 1 / span 3;
   align-self: center;
@@ -63,7 +63,7 @@ body[data-ui-shell="cards"] .projection-transport-notice > button {
   cursor: pointer;
 }
 
-body[data-ui-shell="cards"] .projection-transport-notice > button:hover {
+.projection-transport-notice > button:hover {
   border-color: var(--bf-action-line);
   color: var(--bf-text-primary);
 }
@@ -75,13 +75,13 @@ body[data-ui-shell="cards"] .projection-transport-notice > button:hover {
 }
 
 @media (max-width: 620px) {
-  body[data-ui-shell="cards"] .projection-transport-notice {
+  .projection-transport-notice {
     right: 8px;
     width: calc(100vw - 16px);
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body[data-ui-shell="cards"] .projection-transport-notice > button {
+  .projection-transport-notice > button {
     grid-column: 1;
     grid-row: auto;
     justify-self: start;
@@ -89,7 +89,7 @@ body[data-ui-shell="cards"] .projection-transport-notice > button:hover {
 }
 
 @media (forced-colors: active) {
-  body[data-ui-shell="cards"] .projection-transport-notice {
+  .projection-transport-notice {
     border: 1px solid CanvasText;
     background: Canvas;
     color: CanvasText;
