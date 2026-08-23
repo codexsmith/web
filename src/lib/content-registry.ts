@@ -28,6 +28,22 @@ export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const nodeByPath = new Map(nodes.map((node) => [node.path, node]));
 
+const canonicalChildOrder: Record<string, string[]> = {
+  root: ["public-interest", "products", "publications", "about", "research"],
+};
+
+function orderChildren(parentId: string, children: ContentNode[]) {
+  const order = canonicalChildOrder[parentId];
+  if (!order) return children;
+
+  const position = new Map(order.map((id, index) => [id, index]));
+  return [...children].sort((a, b) => {
+    const aIndex = position.get(a.id) ?? Number.MAX_SAFE_INTEGER;
+    const bIndex = position.get(b.id) ?? Number.MAX_SAFE_INTEGER;
+    return aIndex - bIndex;
+  });
+}
+
 export function getNode(id: string): ContentNode {
   return nodeById.get(id) ?? nodeById.get("root")!;
 }
@@ -38,7 +54,7 @@ export function getNodeByPath(pathSegments: string[]): ContentNode {
 }
 
 export function getChildren(id: string): ContentNode[] {
-  return nodes.filter((node) => node.parentId === id);
+  return orderChildren(id, nodes.filter((node) => node.parentId === id));
 }
 
 export function getParent(id: string): ContentNode | undefined {
