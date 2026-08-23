@@ -309,8 +309,6 @@ type BranchWorldProps = {
   onInspect: (inspectionId: string) => void;
 };
 
-const rootRegionOrder = ["public-interest", "products", "publications", "about", "research"];
-
 type SupportingContextProps = {
   node: ContentNode;
   regions: ContentNode[];
@@ -421,15 +419,7 @@ function SupportingContext({ node, regions, onNavigate, onInspect }: SupportingC
 
 function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps) {
   const isRoot = node.id === "root";
-  const displayedRegions = isRoot
-    ? [...regions].sort((a, b) => {
-      const aIndex = rootRegionOrder.indexOf(a.id);
-      const bIndex = rootRegionOrder.indexOf(b.id);
-      const aOrder = aIndex === -1 ? rootRegionOrder.length : aIndex;
-      const bOrder = bIndex === -1 ? rootRegionOrder.length : bIndex;
-      return aOrder - bOrder;
-    })
-    : regions;
+  const displayedRegions = regions;
 
   return (
     <section
