@@ -76,19 +76,19 @@ function isAdmissibleHierarchyMove(fromId: string, toId: string) {
 
 function stateUrl(
   focusId: string,
-  projection: ProjectionMode,
+  projectionIntent: ProjectionMode,
   processScope: ProcessScope,
   uiShell: UiShellMode = "cards",
 ) {
   const focusPath = getPathForNode(focusId);
   const params = new URLSearchParams();
-  const publicProjection = projection === "gestalt"
+  const publicProjection = projectionIntent === "gestalt"
     ? (focusId === "root" ? "timeline" : "process")
-    : projection;
+    : projectionIntent;
 
   if (focusId === "root") params.set("world", "1");
-  if (projection !== defaultProjectionForNode(focusId)) params.set("view", publicProjection);
-  if (projection === "gestalt" && processScope !== "full") params.set("scope", processScope);
+  if (projectionIntent !== defaultProjectionForNode(focusId)) params.set("view", publicProjection);
+  if (projectionIntent === "gestalt" && processScope !== "full") params.set("scope", processScope);
   if (uiShell === "apparatus") params.set("ui", "apparatus");
 
   const query = params.toString();
@@ -195,12 +195,10 @@ export function WorldApp({
   initialUiShell = "cards",
 }: WorldAppProps) {
   const router = useRouter();
-  const resolvedInitialProjection = normalizeProjectionForNode(
-    initialNodeId,
-    initialProjection ?? defaultProjectionForNode(initialNodeId),
-  );
+  const initialProjectionIntent = initialProjection ?? defaultProjectionForNode(initialNodeId);
+  const resolvedInitialProjection = normalizeProjectionForNode(initialNodeId, initialProjectionIntent);
   const [focusId, setFocusId] = useState(initialNodeId);
-  const [projection, setProjection] = useState<ProjectionMode>(resolvedInitialProjection);
+  const [projectionIntent, setProjectionIntent] = useState<ProjectionMode>(initialProjectionIntent);
   const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
   const [uiShell, setUiShell] = useState<UiShellMode>(initialUiShell);
   const [heroVisible, setHeroVisible] = useState(initialHeroVisible);
@@ -210,9 +208,18 @@ export function WorldApp({
   const [transitionKey, setTransitionKey] = useState(0);
   const [inspectionId, setInspectionId] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [projectionTransportNotice, setProjectionTransportNotice] = useState<ProjectionTransportNotice | null>(null);
+  const [projectionTransportNotice, setProjectionTransportNotice] = useState<ProjectionTransportNotice | null>(
+    resolvedInitialProjection === initialProjectionIntent
+      ? null
+      : {
+          requested: initialProjectionIntent,
+          resolved: resolvedInitialProjection,
+          targetLabel: getNode(initialNodeId).label,
+        },
+  );
 
   const focusNode = hydrateContentNode(getNode(focusId));
+  const renderedProjection = normalizeProjectionForNode(focusId, projectionIntent);
   const parent = getParent(focusId);
   const parentNode = parent ? hydrateContentNode(parent) : undefined;
   const sectionPathSegment = focusNode.path.split("/")[0];
@@ -229,10 +236,10 @@ export function WorldApp({
   const showTraversalPath = traversalIds.filter((id) => id !== "root").length > 1;
   const canTraceBack = traversalCursor > 0;
   const canTraceForward = traversalCursor >= 0 && traversalCursor < traversalIds.length - 1;
-  const worldMode = projection;
+  const worldMode = renderedProjection;
   const processScopeIndex = processScopes.indexOf(processScope);
-  const canProcessZoomOut = projection === "gestalt" && processScopeIndex > 0;
-  const canProcessZoomIn = projection === "gestalt" && processScopeIndex < processScopes.length - 1;
+  const canProcessZoomOut = renderedProjection === "gestalt" && processScopeIndex > 0;
+  const canProcessZoomIn = renderedProjection === "gestalt" && processScopeIndex < processScopes.length - 1;
 
   const resolveProjectionTransport = useCallback((targetId: string, requestedProjection: ProjectionMode) => {
     const resolvedProjection = normalizeProjectionForNode(targetId, requestedProjection);
@@ -300,7 +307,7 @@ export function WorldApp({
 
       writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
       setFocusId(next.node.id);
-      setProjection(next.projection);
+      setProjectionIntent(next.requestedProjection);
       setProjectionTransportNotice(
         next.projection === next.requestedProjection
           ? null
@@ -352,7 +359,7 @@ export function WorldApp({
     writeTraversalMemory(rootTraversal, 0);
     setHeroVisible(false);
     setFocusId("root");
-    setProjection("world");
+    setProjectionIntent("world");
     setProjectionTransportNotice(null);
     setProcessScope("full");
     setTraversalIds(rootTraversal);
@@ -372,7 +379,7 @@ export function WorldApp({
       if (targetId === focusId) return;
 
       const nextTraversal = branchTraversal(traversalIds, traversalCursor, targetId);
-      const nextProjection = resolveProjectionTransport(targetId, projection);
+      resolveProjectionTransport(targetId, projectionIntent);
 
       writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
       setTraversalIds(nextTraversal.ids);
@@ -380,11 +387,10 @@ export function WorldApp({
       setTransitionDirection(direction ?? inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
-      setProjection(nextProjection);
       setInspectionId(null);
-      router.push(stateUrl(targetId, nextProjection, processScope, uiShell), { scroll: false });
+      router.push(stateUrl(targetId, projectionIntent, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, resolveProjectionTransport, router, traversalCursor, traversalIds, uiShell],
+    [focusId, processScope, projectionIntent, resolveProjectionTransport, router, traversalCursor, traversalIds, uiShell],
   );
 
   const navigateLocal = useCallback(
@@ -418,7 +424,7 @@ export function WorldApp({
     setFocusId("root");
     setTraversalIds(rootTraversal);
     setTraversalCursor(0);
-    setProjection("world");
+    setProjectionIntent("world");
     setProjectionTransportNotice(null);
     setProcessScope("full");
     setInspectionId(null);
@@ -429,17 +435,16 @@ export function WorldApp({
     (nextCursor: number) => {
       if (nextCursor < 0 || nextCursor >= traversalIds.length || nextCursor === traversalCursor) return;
       const targetId = traversalIds[nextCursor];
-      const nextProjection = resolveProjectionTransport(targetId, projection);
+      resolveProjectionTransport(targetId, projectionIntent);
       writeTraversalMemory(traversalIds, nextCursor);
       setTransitionDirection(inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
       setFocusId(targetId);
-      setProjection(nextProjection);
       setTraversalCursor(nextCursor);
       setInspectionId(null);
-      router.replace(stateUrl(targetId, nextProjection, processScope, uiShell), { scroll: false });
+      router.replace(stateUrl(targetId, projectionIntent, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, resolveProjectionTransport, router, traversalCursor, traversalIds, uiShell],
+    [focusId, processScope, projectionIntent, resolveProjectionTransport, router, traversalCursor, traversalIds, uiShell],
   );
 
   const navigateTraceBack = useCallback(() => {
@@ -471,9 +476,9 @@ export function WorldApp({
       setProcessScope(nextScope);
       setTransitionDirection("none");
       setTransitionKey((value) => value + 1);
-      router.replace(stateUrl(focusId, projection, nextScope, uiShell), { scroll: false });
+      router.replace(stateUrl(focusId, projectionIntent, nextScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router, uiShell],
+    [focusId, processScope, projectionIntent, router, uiShell],
   );
 
   const processZoomOut = useCallback(() => {
@@ -486,23 +491,23 @@ export function WorldApp({
 
   const changeProjection = useCallback(
     (nextProjection: ProjectionMode) => {
-      if (nextProjection === projection) return;
-      setProjection(nextProjection);
-      setProjectionTransportNotice(null);
+      if (nextProjection === projectionIntent) return;
+      setProjectionIntent(nextProjection);
+      resolveProjectionTransport(focusId, nextProjection);
       setTransitionDirection("none");
       setTransitionKey((value) => value + 1);
       setInspectionId(null);
       router.push(stateUrl(focusId, nextProjection, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router, uiShell],
+    [focusId, processScope, projectionIntent, resolveProjectionTransport, router, uiShell],
   );
 
   const exitPrototype = useCallback(() => {
     setUiShell("cards");
     setTransitionDirection("none");
     setTransitionKey((value) => value + 1);
-    router.replace(stateUrl(focusId, projection, processScope, "cards"), { scroll: false });
-  }, [focusId, processScope, projection, router]);
+    router.replace(stateUrl(focusId, projectionIntent, processScope, "cards"), { scroll: false });
+  }, [focusId, processScope, projectionIntent, router]);
 
   const openInspection = useCallback((nextInspectionId: string) => setInspectionId(nextInspectionId), []);
 
@@ -510,7 +515,7 @@ export function WorldApp({
     return <HeroScreen onEnter={enterLab} />;
   }
 
-  const projectionSurface = projection === "world" ? (
+  const projectionSurface = renderedProjection === "world" ? (
     uiShell === "apparatus" ? (
       <ApparatusPrototypeWorld
         node={focusNode}
@@ -526,7 +531,7 @@ export function WorldApp({
         onInspect={openInspection}
       />
     )
-  ) : projection === "evidence" ? (
+  ) : renderedProjection === "evidence" ? (
     <EvidenceView
       focusNode={focusNode}
       onNavigate={(targetId) => navigate(targetId, "cross")}
@@ -543,7 +548,9 @@ export function WorldApp({
     <div
       className={`site-shell ${uiShell === "apparatus" ? "site-shell--apparatus-prototype" : ""}`}
       data-world-mode={worldMode}
-      data-projection={projection}
+      data-projection={renderedProjection}
+      data-projection-intent={projectionIntent}
+      data-projection-fallback={renderedProjection === projectionIntent ? "false" : "true"}
       data-ui-renderer={uiShell}
       data-root-focus={focusId === "root" ? "true" : "false"}
       data-section-theme={sectionThemeId}
@@ -555,7 +562,7 @@ export function WorldApp({
           focusNode={focusNode}
           traversalPath={traversalPath}
           siblings={siblings}
-          projection={projection}
+          projection={renderedProjection}
           processScope={processScope}
           canProcessZoomOut={canProcessZoomOut}
           canProcessZoomIn={canProcessZoomIn}
@@ -580,7 +587,7 @@ export function WorldApp({
             traversalPath={traversalPath}
             traversalCursor={traversalCursor}
             siblings={siblings}
-            projection={projection}
+            projection={renderedProjection}
             processScope={processScope}
             canTraceBack={canTraceBack}
             canTraceForward={canTraceForward}
@@ -607,7 +614,9 @@ export function WorldApp({
           <strong>
             {projectionLabels[projectionTransportNotice.requested]} unavailable for {projectionTransportNotice.targetLabel}
           </strong>
-          <small>Showing {projectionLabels[projectionTransportNotice.resolved]} instead.</small>
+          <small>
+            Showing {projectionLabels[projectionTransportNotice.resolved]} here. {projectionLabels[projectionTransportNotice.requested]} remains preferred and will resume when supported.
+          </small>
           <button type="button" onClick={() => setProjectionTransportNotice(null)} aria-label="Dismiss projection boundary notice">
             Dismiss
           </button>
