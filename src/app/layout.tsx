@@ -41,6 +41,7 @@ import "./evidence-projection-refinement.css";
 import "./p0-boundary-navigation.css";
 import "./p1-boundary-topology.css";
 import "./p1-world-orientation.css";
+import "./p1-search-traversal.css";
 
 export const metadata: Metadata = {
   title: {
