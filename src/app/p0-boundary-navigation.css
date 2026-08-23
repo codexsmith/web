@@ -1,0 +1,117 @@
+/* P0 Boundary First navigation closure.
+   Temporal traversal and containment traversal are separate operators. */
+
+body[data-ui-shell="cards"] .traversal-nav__history-node {
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__history-node:hover {
+  background: color-mix(in srgb, var(--bf-action) 7%, transparent);
+  color: var(--bf-workshop-100);
+}
+
+body[data-ui-shell="cards"] .traversal-nav__containment {
+  min-width: 0;
+  margin: 8px 0 2px 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--nav-line);
+}
+
+body[data-ui-shell="cards"] .traversal-nav__containment .traversal-nav__section-label {
+  margin: 0 0 6px;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1px 8px;
+  align-items: center;
+  padding: 7px 9px;
+  border: 1px solid var(--nav-line);
+  border-left-color: var(--bf-action-line);
+  border-radius: 6px;
+  background: var(--nav-control);
+  color: var(--bf-silver-300);
+  box-shadow: inset 0 1px var(--nav-highlight);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 120ms ease, background 120ms ease, color 120ms ease;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up:hover {
+  border-color: var(--bf-action-line);
+  background: var(--nav-control-hover);
+  color: var(--bf-workshop-100);
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up svg {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up > span {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.76rem;
+  line-height: 1.15;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up > small {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--bf-alloy-400);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.42rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .traversal-nav__containment {
+    flex: 0 0 auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__containment .traversal-nav__section-label,
+  body[data-ui-shell="cards"] .traversal-nav__up > small {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__up {
+    width: auto;
+    min-width: 116px;
+    min-height: 40px;
+    height: 40px;
+    grid-template-columns: 16px minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    padding: 6px 9px;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__up svg,
+  body[data-ui-shell="cards"] .traversal-nav__up > span {
+    grid-row: 1;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__up > span {
+    font-size: 0.7rem;
+  }
+}
