@@ -3,7 +3,8 @@
  *
  * The traversal rail is an instrument, not a full-height wall. It should occupy only
  * the space its history/current/peer controls require, up to a bounded viewport cap.
- * It is also deliberately narrow enough to remain supporting furniture beside content.
+ * It is deliberately narrow enough to remain supporting furniture beside content, and
+ * its trace/current/peer controls share one compact alignment column.
  *
  * Secondary World pages are top-first rather than vertically partitioned: the focused
  * subject/title establishes the full-width header, while overview and contained regions
@@ -14,7 +15,7 @@
   /* Traversal rail ----------------------------------------------------- */
 
   body[data-ui-shell="cards"] {
-    --frame-left: clamp(220px, 17vw, 268px);
+    --frame-left: clamp(196px, 15vw, 232px);
   }
 
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
@@ -30,13 +31,69 @@
   }
 
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__header {
-    min-height: 40px;
-    padding: 8px 12px;
+    min-height: 38px;
+    padding: 7px 8px;
   }
 
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__flow {
     flex: 0 1 auto;
-    padding: 10px 10px 14px;
+    padding: 8px 6px 12px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__history-viewport {
+    scrollbar-gutter: auto;
+  }
+
+  /* One compact alignment column: the spine sits close to the chassis edge and
+     history/current/peer content all begin at the same inset. */
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__history ol {
+    padding: 0 0 0 13px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__history ol::before {
+    left: 3px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__history-terminal {
+    left: -12px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__history-node {
+    padding-inline: 5px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__current {
+    margin-left: 13px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__current::before,
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__current::after {
+    left: -10px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__current-terminal {
+    left: -14px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__current > div {
+    padding-inline: 8px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__next {
+    padding-left: 13px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__next::before {
+    left: 3px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__peer-list::before {
+    left: -10px;
+    width: 10px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__peer-list button {
+    padding-inline: 8px;
   }
 
   /* Secondary World --------------------------------------------------- */
