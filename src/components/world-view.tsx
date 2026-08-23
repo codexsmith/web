@@ -258,7 +258,6 @@ function LeafWorld({ node, onNavigate, onInspect }: LeafWorldProps) {
   const relations = getCrossEdges(node.id).map((edge) => ({
     ...edge,
     node: hydrateContentNode(edge.node),
-    direction: edge.from === node.id ? "outgoing" as const : "incoming" as const,
   }));
 
   return (
@@ -295,9 +294,10 @@ function LeafWorld({ node, onNavigate, onInspect }: LeafWorldProps) {
               key={`${relation.from}-${relation.to}-${relation.type}`}
               onClick={() => onNavigate(relation.node.id, "cross")}
               data-edge-type={relation.type}
+              data-edge-direction={relation.direction}
               title={`${relation.label}: ${relation.node.label}`}
             >
-              <span>{relation.direction === "outgoing" ? relation.label : `incoming · ${relation.label}`}</span>
+              <span>{relation.label}</span>
               <strong>{relation.node.label}</strong>
               <small>{relation.type}</small>
             </button>
