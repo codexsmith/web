@@ -38,6 +38,7 @@ import "./apparatus-sleek-refinement.css";
 import "./apparatus-world-root-refinement.css";
 import "./section-hero-organization.css";
 import "./evidence-projection-refinement.css";
+import "./p0-boundary-navigation.css";
 
 export const metadata: Metadata = {
   title: {
