@@ -89,7 +89,6 @@ export function getSubjectActions(node: ContentNode): SubjectAction[] {
     ? getCrossEdges(node.id).map((edge) => ({
         ...edge,
         node: hydrateContentNode(edge.node),
-        direction: edge.from === node.id ? "outgoing" as const : "incoming" as const,
       }))
     : [];
 
@@ -117,7 +116,7 @@ export function getSubjectActions(node: ContentNode): SubjectAction[] {
     kind: "relation",
     key: `relation:${relation.from}:${relation.to}:${relation.type}`,
     label: relation.node.label,
-    eyebrow: relation.direction === "outgoing" ? relation.label : `Incoming · ${relation.label}`,
+    eyebrow: relation.label,
     summary: relation.type,
     nodeId: relation.node.id,
     edgeType: relation.type,
