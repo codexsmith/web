@@ -1,0 +1,40 @@
+/* P1 World orientation copy.
+   Boundary statements explain function without replacing the richer object summary. */
+
+.section-region-card__boundary {
+  display: block;
+  max-width: 48ch;
+  margin-top: 0.45rem;
+  color: var(--bf-silver-300);
+  font-size: clamp(0.68rem, 0.72vw, 0.82rem);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+body[data-ui-shell="cards"] .branch-world--root-world .section-region-card__boundary {
+  max-width: 42ch;
+  color: var(--bf-silver-300);
+}
+
+body[data-ui-shell="cards"] .section-region-grid--concise .section-region-card__boundary {
+  margin-top: 0.35rem;
+  font-size: clamp(0.66rem, 0.68vw, 0.76rem);
+  line-height: 1.4;
+}
+
+body[data-ui-shell="cards"] .public-interest-panel .section-region-card__boundary {
+  color: var(--bf-silver-300);
+}
+
+@media (max-width: 720px) {
+  .section-region-card__boundary {
+    max-width: none;
+    font-size: 0.76rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .section-region-card__boundary {
+    color: CanvasText;
+  }
+}
