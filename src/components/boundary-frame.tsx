@@ -7,6 +7,7 @@ import {
   projectionDescriptions,
   projectionLabels,
   projectionModesForNode,
+  projectionPurposes,
   type ProjectionMode,
 } from "@/lib/view-projection";
 
@@ -41,6 +42,12 @@ const rootProjectionLabels: Record<ProjectionMode, string> = {
   world: "World",
   evidence: "Evidence",
   gestalt: "Timeline",
+};
+
+const rootProjectionPurposes: Record<ProjectionMode, string> = {
+  world: "Public regions",
+  evidence: "Founder provenance",
+  gestalt: "Development history",
 };
 
 const rootProjectionDescriptions: Record<ProjectionMode, string> = {
@@ -280,20 +287,30 @@ export function BoundaryFrame({
 
           {onProjectionChange ? (
             <div
-              className="projection-switcher"
-              aria-label={isRootFocus ? "Boundary First Labs views" : `Deeper representations of ${focusNode.label}`}
+              className="projection-switcher projection-switcher--legible"
+              role="group"
+              data-projection={projection}
+              aria-label={isRootFocus ? "Boundary First Labs views" : `Representations of ${focusNode.label}`}
             >
-              <span className="projection-switcher__label">Depth</span>
-              {availableProjectionModes.map((mode) => (
-                <button
-                  key={mode}
-                  onClick={() => onProjectionChange(mode)}
-                  aria-pressed={projection === mode}
-                  title={isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode]}
-                >
-                  {isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode]}
-                </button>
-              ))}
+              <span className="projection-switcher__label">View</span>
+              {availableProjectionModes.map((mode) => {
+                const label = isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode];
+                const purpose = isRootFocus ? rootProjectionPurposes[mode] : projectionPurposes[mode];
+                const description = isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode];
+
+                return (
+                  <button
+                    key={mode}
+                    onClick={() => onProjectionChange(mode)}
+                    aria-pressed={projection === mode}
+                    aria-label={`${label}: ${description}`}
+                    title={description}
+                  >
+                    <span className="projection-switcher__mode-name">{label}</span>
+                    <small className="projection-switcher__mode-purpose">{purpose}</small>
+                  </button>
+                );
+              })}
             </div>
           ) : null}
 
