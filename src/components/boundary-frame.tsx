@@ -143,13 +143,9 @@ export function BoundaryFrame({
   const availableProjectionModes = projectionModesForNode(focusNode.id);
   const history = traversalPath
     .map((node, index) => ({ node, index }))
-    .filter(({ index }) => index !== traversalCursor);
+    .filter(({ index }) => index < traversalCursor);
   const displayHistory = history.filter(({ node }) => node.id !== "root");
-  const mostRecentHistoryId = displayHistory.at(-1)?.node.id;
-  const peerNodes = siblings.filter(
-    (node) => node.id !== focusNode.id && node.id !== mostRecentHistoryId,
-  );
-  const siblingNodes = peerNodes;
+  const siblingNodes = siblings.filter((node) => node.id !== focusNode.id);
   const hasTrace = traversalPath.length > 1;
   const showLeftNav = !isRootFocus && (displayHistory.length > 0 || siblingNodes.length > 0 || Boolean(parentNode));
   const historyViewportRef = useRef<HTMLDivElement>(null);
