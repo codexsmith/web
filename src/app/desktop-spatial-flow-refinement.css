@@ -3,6 +3,7 @@
  *
  * The traversal rail is an instrument, not a full-height wall. It should occupy only
  * the space its history/current/peer controls require, up to a bounded viewport cap.
+ * It is also deliberately narrow enough to remain supporting furniture beside content.
  *
  * Secondary World pages are top-first rather than vertically partitioned: the focused
  * subject/title establishes the full-width header, while overview and contained regions
@@ -11,6 +12,10 @@
 
 @media (min-width: 981px) {
   /* Traversal rail ----------------------------------------------------- */
+
+  body[data-ui-shell="cards"] {
+    --frame-left: clamp(220px, 17vw, 268px);
+  }
 
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
     bottom: auto !important;
@@ -24,8 +29,14 @@
     min-height: 0;
   }
 
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__header {
+    min-height: 40px;
+    padding: 8px 12px;
+  }
+
   body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] .traversal-nav__flow {
     flex: 0 1 auto;
+    padding: 10px 10px 14px;
   }
 
   /* Secondary World --------------------------------------------------- */
