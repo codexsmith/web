@@ -4,6 +4,7 @@ import {
   type ContentNode as BaseContentNode,
   type GraphEdge,
 } from "@/lib/content";
+import { getLocalSections, type LocalSectionDefinition } from "@/lib/local-section-registry";
 import { publicationEdges, publicationNodes } from "@/lib/publication-portfolio";
 import type { PublicationMetadata } from "@/lib/publication-types";
 import {
@@ -15,6 +16,7 @@ import {
 
 export type ContentNode = BaseContentNode & {
   publication?: PublicationMetadata;
+  localSections?: LocalSectionDefinition[];
 };
 
 export type DirectedGraphEdge = Omit<GraphEdge, "label"> & {
@@ -37,10 +39,16 @@ export type {
   NodeKind,
   WorkStatus,
 } from "@/lib/content";
+export type { LocalSectionDefinition } from "@/lib/local-section-registry";
 export type { PublicationMetadata, PublicationStage } from "@/lib/publication-types";
 export type { RelationDirection } from "@/lib/relation-semantics";
 
-export const nodes: ContentNode[] = [...baseNodes, ...publicationNodes];
+const rawNodes: ContentNode[] = [...baseNodes, ...publicationNodes];
+
+export const nodes: ContentNode[] = rawNodes.map((node) => {
+  const localSections = getLocalSections(node.id);
+  return localSections.length ? { ...node, localSections } : node;
+});
 export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
