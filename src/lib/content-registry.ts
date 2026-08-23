@@ -6,9 +6,26 @@ import {
 } from "@/lib/content";
 import { publicationEdges, publicationNodes } from "@/lib/publication-portfolio";
 import type { PublicationMetadata } from "@/lib/publication-types";
+import {
+  getDirectedRelationLabel,
+  getRelationDirection,
+  getRelationLabels,
+  type RelationDirection,
+} from "@/lib/relation-semantics";
 
 export type ContentNode = BaseContentNode & {
   publication?: PublicationMetadata;
+};
+
+export type DirectedGraphEdge = Omit<GraphEdge, "label"> & {
+  label: string;
+  declaredLabel: string;
+  forwardLabel: string;
+  inverseLabel: string;
+  direction: RelationDirection;
+  node: ContentNode;
+  sourceNode: ContentNode;
+  targetNode: ContentNode;
 };
 
 export type {
@@ -21,6 +38,7 @@ export type {
   WorkStatus,
 } from "@/lib/content";
 export type { PublicationMetadata, PublicationStage } from "@/lib/publication-types";
+export type { RelationDirection } from "@/lib/relation-semantics";
 
 export const nodes: ContentNode[] = [...baseNodes, ...publicationNodes];
 export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
@@ -105,10 +123,25 @@ export function getImmediateChildTowardFocus(
   return getChildren(gestaltId).find((child) => isDescendantOf(focusId, child.id));
 }
 
-export function getCrossEdges(id: string): Array<GraphEdge & { node: ContentNode }> {
+export function getCrossEdges(id: string): DirectedGraphEdge[] {
   return edges.flatMap((edge) => {
-    if (edge.from === id) return [{ ...edge, node: getNode(edge.to) }];
-    if (edge.to === id) return [{ ...edge, node: getNode(edge.from) }];
-    return [];
+    const direction = getRelationDirection(edge, id);
+    if (!direction) return [];
+
+    const labels = getRelationLabels(edge);
+    const sourceNode = getNode(edge.from);
+    const targetNode = getNode(edge.to);
+
+    return [{
+      ...edge,
+      label: getDirectedRelationLabel(edge, direction),
+      declaredLabel: edge.label,
+      forwardLabel: labels.forward,
+      inverseLabel: labels.inverse,
+      direction,
+      node: direction === "outgoing" ? targetNode : sourceNode,
+      sourceNode,
+      targetNode,
+    }];
   });
 }
