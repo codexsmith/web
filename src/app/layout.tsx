@@ -39,6 +39,7 @@ import "./apparatus-world-root-refinement.css";
 import "./section-hero-organization.css";
 import "./evidence-projection-refinement.css";
 import "./p0-boundary-navigation.css";
+import "./p1-boundary-topology.css";
 
 export const metadata: Metadata = {
   title: {
