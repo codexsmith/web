@@ -107,27 +107,9 @@
     align-items: start;
   }
 
-  body[data-ui-shell="cards"]
-    .site-shell[data-root-focus="false"][data-projection="world"]
     .branch-world:not(.branch-world--root-world) > .world-heading {
     grid-column: 1 / -1;
     grid-row: 1;
     width: 100%;
-  }
-
-  body[data-ui-shell="cards"]
-    .site-shell[data-root-focus="false"][data-projection="world"]
-    .branch-world:not(.branch-world--root-world) > .subject-pane {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: start;
-  }
-
-  body[data-ui-shell="cards"]
-    .site-shell[data-root-focus="false"][data-projection="world"]
-    .branch-world:not(.branch-world--root-world) > .district-grid {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: start;
   }
 }

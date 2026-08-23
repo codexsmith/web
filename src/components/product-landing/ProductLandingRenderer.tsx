@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
-  Boxes,
   BriefcaseBusiness,
   Code2,
   FlaskConical,

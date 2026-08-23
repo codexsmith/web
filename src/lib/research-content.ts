@@ -12,23 +12,23 @@ const researchOverrides: Record<string, ResearchOverride> = {
       "The support layer beneath the Lab's operative surfaces: research that explains mechanisms, tests transport, records breakpoints, and keeps products, public-interest work, and formal claims inside their evidence boundary.",
     body: [
       "Research is not a validation halo around the rest of Boundary First Labs. Its job is to make the operative surfaces more answerable: explain why a mechanism should work, identify what would falsify it, preserve negative results, distinguish analogy from structure, and show where a product, method, civic claim, or formal theory still depends on unresolved evidence.",
-      "The public research surface therefore begins near practice and moves downward only as needed: software doctrine and operational mechanisms, bounded testbeds, primitive foundations, and formal theory. Cross-cutting institutional research appears as Through material when it supports more than one branch.",
+      "Start near practice, then move deeper only when the question requires it. Cross-cutting institutional research remains related material rather than being forced into a single branch.",
     ],
     links: [
       {
-        label: "Inspect current work",
+        label: "Current Work",
         href: "/products/current",
         eyebrow: "Operative surface",
         summary: "Where research is being turned into software and bounded services.",
       },
       {
-        label: "Inspect Public Interest",
+        label: "Public Interest",
         href: "/public-interest",
         eyebrow: "Consequence surface",
         summary: "Where authority, accessibility, public legibility, maintenance, and repair become institutional commitments.",
       },
       {
-        label: "Inspect How We Work",
+        label: "How We Work",
         href: "/about/how-we-work",
         eyebrow: "Method and release discipline",
         summary: "How the lab separates source, hypothesis, implementation, observation, repair, and promotion.",

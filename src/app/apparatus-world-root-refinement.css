@@ -48,7 +48,7 @@
 }
 
 .apparatus-world--root .apparatus-bay {
-  --root-region-accent: var(--bf-action);
+  --root-region-accent: var(--bf-unknown);
 
   position: relative;
   grid-column: span 2;
@@ -84,11 +84,11 @@
   grid-column: span 4;
 }
 
-.apparatus-world--root .apparatus-bay:nth-child(1) { --root-region-accent: var(--bf-action); }
-.apparatus-world--root .apparatus-bay:nth-child(2) { --root-region-accent: var(--bf-valid); }
-.apparatus-world--root .apparatus-bay:nth-child(3) { --root-region-accent: var(--bf-info); }
-.apparatus-world--root .apparatus-bay:nth-child(4) { --root-region-accent: var(--bf-attention); }
-.apparatus-world--root .apparatus-bay:nth-child(5) { --root-region-accent: var(--bf-action); }
+.apparatus-world--root .apparatus-bay:nth-child(1) { --root-region-accent: var(--bf-region-public-interest); }
+.apparatus-world--root .apparatus-bay:nth-child(2) { --root-region-accent: var(--bf-region-products); }
+.apparatus-world--root .apparatus-bay:nth-child(3) { --root-region-accent: var(--bf-region-publications); }
+.apparatus-world--root .apparatus-bay:nth-child(4) { --root-region-accent: var(--bf-region-about); }
+.apparatus-world--root .apparatus-bay:nth-child(5) { --root-region-accent: var(--bf-region-research); }
 
 /* Edge illumination indicates region semantics without turning the panel into neon. */
 .apparatus-world--root .apparatus-bay::before {

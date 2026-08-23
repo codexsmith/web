@@ -167,17 +167,14 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-/* On a branch, spatial children stay visible while the selected subject's ordinary
-   content sits beside them. The pane should support orientation, not become a second page. */
-.branch-world:not(.branch-world--root-world) > .subject-pane {
-  grid-column: 1;
-  grid-row: 2;
-  align-self: start;
-}
-
-.branch-world:not(.branch-world--root-world) > .district-grid {
-  grid-column: 2;
-  grid-row: 1 / span 2;
+/* When SubjectPane is embedded in the top hero, strip its outer background/borders */
+.world-hero__glance .subject-pane {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  height: 100%;
 }
 
 /* A leaf uses the same at-a-glance pane as its focal content surface. Ports keep
@@ -199,25 +196,10 @@
 }
 
 @media (max-width: 1360px) {
-  .branch-world:not(.branch-world--root-world) > .subject-pane {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .branch-world:not(.branch-world--root-world) > .district-grid {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-  }
+  /* ... */
 }
 
 @media (max-width: 980px) {
-  .branch-world:not(.branch-world--root-world) > .world-heading,
-  .branch-world:not(.branch-world--root-world) > .subject-pane,
-  .branch-world:not(.branch-world--root-world) > .district-grid {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
   .leaf-world {
     grid-template-columns: 1fr;
     height: auto;

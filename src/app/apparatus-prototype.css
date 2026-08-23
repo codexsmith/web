@@ -290,7 +290,7 @@
 .apparatus-depth__position[aria-pressed="true"] {
   color: var(--bf-workshop-100);
   border-bottom-color: var(--bf-action);
-  background: rgba(169, 140, 255, 0.055);
+  background: color-mix(in srgb, var(--bf-action) 5.5%, transparent);
 }
 
 .apparatus-world {
@@ -420,7 +420,7 @@
 .apparatus-port:hover .apparatus-port__terminal,
 .apparatus-port:focus-visible .apparatus-port__terminal {
   border-color: var(--bf-action);
-  background: rgba(169, 140, 255, 0.16);
+  background: color-mix(in srgb, var(--bf-action) 16%, transparent);
 }
 
 .apparatus-port--enter {
@@ -442,7 +442,7 @@
     linear-gradient(180deg, rgba(255, 255, 255, 0.026), transparent 42%),
     var(--bf-steel-800);
   box-shadow:
-    0 0 0 1px rgba(169, 140, 255, 0.22),
+    0 0 0 1px color-mix(in srgb, var(--bf-action) 22%, transparent),
     inset 0 1px rgba(255, 255, 255, 0.035),
     inset 0 -1px rgba(0, 0, 0, 0.32);
 }
@@ -453,7 +453,7 @@
   position: absolute;
   inset: -2px;
   border-left: 2px solid var(--bf-action);
-  border-top: 1px solid rgba(169, 140, 255, 0.48);
+  border-top: 1px solid color-mix(in srgb, var(--bf-action) 48%, transparent);
   pointer-events: none;
 }
 

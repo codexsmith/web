@@ -281,3 +281,7 @@ Once the interaction model stabilizes, good candidates to evaluate are:
 - a graph database only when query requirements justify the operational cost
 
 Start with the smallest coherent executable representation, then promote structure when the system earns it.
+
+## Phase history
+
+- [Public interface consolidation and Evidence refinement · v0.1](public_interface_consolidation_and_evidence_refinement_phase_log_v0_1.md) — completed 2026-08-23. Records the shared top-level page system, navigation-history refinement, palette decisions, Record retirement, Evidence redesign, documentation, and closeout validation completed after this original v2 seed.

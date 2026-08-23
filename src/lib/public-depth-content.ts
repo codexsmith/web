@@ -6,50 +6,7 @@ type PublicDepthOverride = Partial<
 
 const publicDepthOverrides: Record<string, PublicDepthOverride> = {
   about: {
-    body: [
-      "About is deliberately split into four questions rather than one founder narrative. The Lab explains the institution that exists now. How We Work explains the operating discipline. Provenance explains where the work came from. Contact explains how an outside person or organization can encounter the work without pretending a relationship already exists.",
-      "That separation is part of the claim discipline. Institutional identity, method, biography, collaboration, and evidence can inform one another, but none should silently stand in for the others.",
-    ],
     inspection: [
-      {
-        id: "about-four-questions",
-        label: "How to read About",
-        eyebrow: "Institution, method, origin, engagement",
-        summary:
-          "The four About records answer different questions so institutional authority, founder provenance, operating method, and outside relationship do not collapse into one story.",
-        bullets: [
-          "The Lab: what institution presently exists and what responsibilities it accepts.",
-          "How We Work: how work moves from observation and boundary-setting through construction, validation, repair, and promotion.",
-          "Provenance: where the questions, methods, professional practice, and research lineage came from.",
-          "Contact: what a bounded engagement or collaboration needs in order to be coherent.",
-          "Founder standing supplies provenance and present responsibility; it is not a substitute for evidence.",
-          "Institutional language supplies stewardship commitments; it is not a substitute for demonstrated capacity.",
-        ],
-        sourceRef:
-          "backlog/10_social_mission_preagent_ux/03_The_Institute.md + 05_founders_note.md",
-        links: [
-          {
-            label: "The Lab",
-            href: "/about/the-lab",
-            eyebrow: "Institution",
-          },
-          {
-            label: "How We Work",
-            href: "/about/how-we-work",
-            eyebrow: "Method",
-          },
-          {
-            label: "Provenance",
-            href: "/about/provenance",
-            eyebrow: "Origin and lineage",
-          },
-          {
-            label: "Contact",
-            href: "/about/contact",
-            eyebrow: "Engagement",
-          },
-        ],
-      },
       {
         id: "about-public-legibility",
         label: "The public is owed legibility, not a data dump",

@@ -24,11 +24,11 @@ function forbidMatch(path, pattern, message) {
   }
 }
 
-// Projection vocabulary stays stable, but World is now the ordinary public surface.
+// World owns narrative content; Evidence and Process remain genuinely different depths.
 requireMatch(
   "src/lib/view-projection.ts",
-  /projectionModes\s*=\s*\["world",\s*"record",\s*"evidence",\s*"gestalt"\]/,
-  "Projection vocabulary must remain World / Record / Evidence / Gestalt",
+  /projectionModes\s*=\s*\["world",\s*"evidence",\s*"gestalt"\]/,
+  "Projection vocabulary must remain World / Evidence / Process",
 );
 requireMatch(
   "src/lib/view-projection.ts",
@@ -37,8 +37,13 @@ requireMatch(
 );
 requireMatch(
   "src/lib/view-projection.ts",
-  /Record, Evidence, and Gestalt deepen that state/,
-  "Specialized projections must deepen the ordinary World rather than own basic content discovery",
+  /Evidence and Process deepen that state without[\s\S]*repeating its narrative content/,
+  "Specialized projections must add a distinct representation rather than repeat World content",
+);
+requireMatch(
+  "src/app/[[...slug]]/page.tsx",
+  /legacyRecordDestination[\s\S]*permanentRedirect\(recordDestination\)/,
+  "Legacy Record URLs must resolve to their canonical World or Provenance destination",
 );
 
 // Hero = threshold; entered root = structural world. The threshold must not become a second root map.
@@ -98,7 +103,7 @@ forbidMatch(
   "Frame chrome must not repeat Root World labeling",
 );
 
-// Focus Path = actual traversal history. Content structure belongs to World/Record/Peers, not the left rail.
+// Focus Path = actual traversal history. Content structure belongs to World/Peers, not the left rail.
 forbidMatch(
   "src/components/world-app.tsx",
   /getAncestors|breadcrumbs/,
@@ -187,13 +192,75 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-view.tsx",
-  /Contained regions/,
-  "Record projection must remain an exhaustive structural/document surface",
+  /function SupportingContext[\s\S]*Related paths[\s\S]*Explore further/,
+  "World must retain useful related paths and deeper inspection content inline",
 );
 requireMatch(
   "src/components/world-view.tsx",
-  /inspection\.summary/,
-  "Record inspection affordances must expose substantive inspection summaries",
+  /id="public-interest-context"[\s\S]*<SupportingContext/,
+  "Public Interest must retain supporting content after Record retirement",
+);
+forbidMatch(
+  "src/components/world-view.tsx",
+  /RecordView|FounderRecord|NodeDetail/,
+  "Retired Record rendering must not remain as a duplicate content surface",
+);
+
+// Top-level sections share one presentation grammar. Public Interest may compose a
+// specialized feature section, but it must not fork the hero, region-card, or context system.
+requireExists(
+  "src/app/section-hero-organization.css",
+  "Top-level section organization styles must remain explicit",
+);
+requireMatch(
+  "src/components/world-view.tsx",
+  /function WorldHero[\s\S]*function RegionGrid[\s\S]*function PublicInterestWorld[\s\S]*<WorldHero[\s\S]*<RegionGrid[\s\S]*function SupportingContext[\s\S]*function BranchWorld/,
+  "Top-level sections must compose the shared WorldHero, RegionGrid, and SupportingContext primitives",
+);
+requireMatch(
+  "src/components/world-view.tsx",
+  /const isTopLevelSection\s*=\s*node\.parentId\s*===\s*"root"[\s\S]*!isTopLevelSection\s*\?\s*<p>\{child\.summary\}<\/p>\s*:\s*null/,
+  "Top-level region cards must stay concise while deeper region cards retain useful descriptions",
+);
+requireMatch(
+  "src/components/world-view.tsx",
+  /district-card__action[\s\S]*View/,
+  "Region cards must use direct View wording",
+);
+forbidMatch(
+  "src/components/world-view.tsx",
+  /Enter region/,
+  "The retired Enter region wording must not return",
+);
+requireMatch(
+  "src/app/section-hero-organization.css",
+  /public-interest-page--overview[\s\S]*grid-template-columns[\s\S]*data-world-id="research"[\s\S]*grid-template-columns/,
+  "Dense Public Interest and Research heroes must retain their wider content columns",
+);
+requireMatch(
+  "src/app/layout.tsx",
+  /section-hero-organization\.css[\s\S]*evidence-projection-refinement\.css/,
+  "Section and Evidence refinements must remain active after the shared layout layers",
+);
+
+// Evidence is a claim-and-source representation at object depth and a standing summary at branch depth.
+requireExists(
+  "src/lib/evidence-content.ts",
+  "Evidence packages and generated evidence profiles must remain explicit",
+);
+requireExists(
+  "src/app/evidence-projection-refinement.css",
+  "Evidence projection layout must remain explicit",
+);
+requireMatch(
+  "src/components/evidence-view.tsx",
+  /function ObjectEvidenceView[\s\S]*ClaimSection[\s\S]*SourceSection[\s\S]*LimitsSection[\s\S]*HistorySection/,
+  "Object Evidence must bind claims to sources, limits, and admitted changes",
+);
+requireMatch(
+  "src/components/evidence-view.tsx",
+  /function BranchEvidenceView[\s\S]*Current portfolio distribution[\s\S]*Evidence-bearing work[\s\S]*Promotion gates[\s\S]*Admitted changes/,
+  "Branch Evidence must summarize standing, evidence-bearing work, gates, and changes",
 );
 
 // Rich retained content is projected through bounded editorial layers instead of being wired raw into runtime.

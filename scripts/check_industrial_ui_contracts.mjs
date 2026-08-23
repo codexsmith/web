@@ -294,7 +294,8 @@ const requiredTokens = [
   ["--bf-alloy-400", "#748188"],
   ["--bf-silver-300", "#aab4b8"],
   ["--bf-workshop-100", "#e4e7e3"],
-  ["--bf-action", "#a98cff"],
+  ["--bf-site-action", "var(--bf-silver-300)"],
+  ["--bf-action", "var(--bf-site-action)"],
   ["--bf-valid", "#8edb9a"],
   ["--bf-attention", "#f2c66d"],
   ["--bf-info", "#77b9e8"],
@@ -310,7 +311,7 @@ for (const [token, value] of requiredTokens) {
 }
 requireMatch(
   "src/app/bf-industrial-tokens.css",
-  /Metal = structure[\s\S]*Violet = operator agency[\s\S]*Signal colors = observed machine state/,
+  /Metal = structure and operator agency[\s\S]*Signal colors = observed machine state/,
   "Industrial token layer must preserve material / agency / state semantic separation",
 );
 requireMatch(

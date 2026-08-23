@@ -179,7 +179,7 @@
 .apparatus-trace__steps li[data-current="true"] .apparatus-trace__index {
   border-color: var(--bf-action);
   background: var(--bf-action-pressed);
-  box-shadow: 0 0 0 3px rgba(169, 140, 255, 0.1);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--bf-action) 10%, transparent);
 }
 
 .apparatus-trace__steps button,
@@ -201,7 +201,7 @@
   color: var(--bf-workshop-100);
   border-color: var(--bf-action-line);
   border-left: 3px solid var(--bf-action);
-  background: rgba(169, 140, 255, 0.105);
+  background: color-mix(in srgb, var(--bf-action) 10.5%, transparent);
 }
 
 .apparatus-peer-bank ol {
@@ -361,7 +361,7 @@
 
 .apparatus-depth__position[aria-pressed="true"] {
   border-color: var(--bf-action-line);
-  background: rgba(169, 140, 255, 0.12);
+  background: color-mix(in srgb, var(--bf-action) 12%, transparent);
   color: var(--bf-action-hover);
 }
 

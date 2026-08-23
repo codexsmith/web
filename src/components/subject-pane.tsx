@@ -3,13 +3,20 @@
 import { ContentNode, getChildren, getCrossEdges } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 
-type SubjectPaneProps = {
-  node: ContentNode;
-  onInspect: (inspectionId: string) => void;
-  onNavigate: (id: string) => void;
-};
+type SubjectPaneProps =
+  | {
+      node: ContentNode;
+      variant: "glance";
+      glanceHeading?: string;
+    }
+  | {
+      node: ContentNode;
+      variant?: "full";
+      onInspect: (inspectionId: string) => void;
+      onNavigate: (id: string) => void;
+    };
 
-type SubjectAction =
+export type SubjectAction =
   | {
       kind: "record";
       key: string;
@@ -23,7 +30,7 @@ type SubjectAction =
       key: string;
       label: string;
       eyebrow: string;
-      summary: string;
+      summary?: string;
       inspectionId: string;
     }
   | {
@@ -31,12 +38,12 @@ type SubjectAction =
       key: string;
       label: string;
       eyebrow: string;
-      summary: string;
+      summary?: string;
       nodeId: string;
       edgeType: string;
     };
 
-function ActionCard({
+export function ActionCard({
   action,
   onInspect,
   onNavigate,
@@ -60,7 +67,7 @@ function ActionCard({
       <button onClick={() => onInspect(action.inspectionId)}>
         <span>{action.eyebrow}</span>
         <strong>{action.label}</strong>
-        <small>{action.summary}</small>
+        {action.summary ? <small>{action.summary}</small> : null}
       </button>
     );
   }
@@ -69,19 +76,14 @@ function ActionCard({
     <button onClick={() => onNavigate(action.nodeId)} data-edge-type={action.edgeType}>
       <span>{action.eyebrow}</span>
       <strong>{action.label}</strong>
-      <small>{action.summary}</small>
+      {action.summary ? <small>{action.summary}</small> : null}
     </button>
   );
 }
 
-export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
-  const body = node.body ?? [];
-  const status = node.status;
-  const publication = node.publication;
+export function getSubjectActions(node: ContentNode): SubjectAction[] {
   const records = node.links ?? [];
   const inspections = node.inspection ?? [];
-  const immediateBody = body[0];
-  const remainingBody = body.slice(1);
   const isBranch = getChildren(node.id).length > 0;
   const relations = isBranch
     ? getCrossEdges(node.id).map((edge) => ({
@@ -123,7 +125,7 @@ export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
 
   // Ordinary World interaction should expose a small, diverse set of useful paths first
   // rather than dumping every available record/evidence/relation into the initial pane.
-  const orderedActions = [
+  return [
     relationActions[0],
     recordActions[0],
     inspectionActions[0],
@@ -134,6 +136,28 @@ export function SubjectPane({ node, onInspect, onNavigate }: SubjectPaneProps) {
     ...relationActions.slice(2),
     ...inspectionActions.slice(2),
   ].filter((action): action is SubjectAction => Boolean(action));
+}
+
+export function SubjectPane(props: SubjectPaneProps) {
+  const { node } = props;
+  const body = node.body ?? [];
+  const status = node.status;
+  const publication = node.publication;
+  const immediateBody = body[0];
+  const remainingBody = body.slice(1);
+
+  if (props.variant === "glance") {
+    return (
+      <article className="subject-pane subject-pane--glance public-interest-panel public-interest-panel--glance">
+        <span className="public-interest-panel__kind">At a glance</span>
+        {props.glanceHeading ? <strong>{props.glanceHeading}</strong> : null}
+        <p>{immediateBody ?? node.summary}</p>
+      </article>
+    );
+  }
+
+  const { onInspect, onNavigate } = props;
+  const orderedActions = getSubjectActions(node);
 
   const primaryActions = orderedActions.slice(0, 4);
   const remainingActions = orderedActions.slice(4);

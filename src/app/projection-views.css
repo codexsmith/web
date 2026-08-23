@@ -50,18 +50,6 @@
   box-shadow: 0 2px 8px rgba(23, 32, 28, 0.07);
 }
 
-/* Record projection owns the reading plane. Evidence/state instruments no longer
-   reserve a universal right rail because they have their own projection. */
-@media (min-width: 1181px) {
-  .site-shell[data-world-mode="detail"] .world-viewport {
-    right: 0;
-  }
-
-  .site-shell[data-world-mode="detail"] .node-surface {
-    width: min(100%, 1120px);
-  }
-}
-
 /* A leaf in World projection is not silently converted into a document. It becomes
    a local boundary object with explicit ports to containment and typed relations. */
 .leaf-world {

@@ -30,7 +30,7 @@ body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world--r
   min-height: 0;
 }
 
-body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world--root-world > .world-heading {
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world--root-world > .world-hero {
   display: none;
 }
 
@@ -63,31 +63,31 @@ body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[da
 body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="public-interest"] {
   grid-column: 1 / span 2;
   grid-row: 1;
-  --root-region-accent: var(--bf-action);
+  --root-region-accent: var(--bf-region-public-interest);
 }
 
 body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="products"] {
   grid-column: 3 / span 2;
   grid-row: 1;
-  --root-region-accent: var(--bf-valid);
+  --root-region-accent: var(--bf-region-products);
 }
 
 body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="publications"] {
   grid-column: 5 / span 2;
   grid-row: 1;
-  --root-region-accent: var(--bf-info);
+  --root-region-accent: var(--bf-region-publications);
 }
 
 body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="about"] {
   grid-column: 1 / span 2;
   grid-row: 2;
-  --root-region-accent: var(--bf-attention);
+  --root-region-accent: var(--bf-region-about);
 }
 
 body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .district-card[data-node-id="research"] {
   grid-column: 3 / span 4;
   grid-row: 2;
-  --root-region-accent: var(--bf-action);
+  --root-region-accent: var(--bf-region-research);
 }
 
 body[data-ui-shell="cards"] .site-shell[data-root-focus="true"] .branch-world[data-gestalt-id="root"] .district-card {

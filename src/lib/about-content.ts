@@ -13,6 +13,20 @@ const aboutOverrides: Record<string, AboutOverride> = {
     body: [
       "Boundary First Labs exists because the work now requires stewardship as well as invention: provenance must be preserved, claims separated by maturity and evidence, released artifacts maintained, criticism made possible, and founder-held structure progressively converted into inspectable institutional structure.",
     ],
+    links: [
+      {
+        label: "Current Work",
+        href: "/products/current",
+        eyebrow: "See the work",
+        summary: "Active development and bounded pilot work with explicit maturity boundaries.",
+      },
+      {
+        label: "Public Interest",
+        href: "/public-interest",
+        eyebrow: "Institutional commitments",
+        summary: "The public-purpose principles and work the lab expects to be judged against.",
+      },
+    ],
   },
   "the-lab": {
     eyebrow: "Formation-stage institution",
@@ -109,6 +123,7 @@ const aboutOverrides: Record<string, AboutOverride> = {
       "Two habits became especially important. Formal grammar asks what the primitives are, which compositions are valid, and which semantic distinctions must survive. Testing traverses state space, seeks edge cases, exposes failure, reconstructs the missing boundary or contract, and tests again.",
       "The broader research corpus grew by carrying those habits into mathematics, physics, AI, institutions, public systems, cognition, and other bounded domains while repeatedly tightening claim ceilings. The continuity is methodological, not a claim that the domains are identical.",
       "Capable language models greatly accelerated indexing, comparison, criticism, recomposition, and prototyping. They accelerated the assembly of the current corpus; they did not originate the underlying professional practice or become evidence for its claims.",
+      "Boundary First Labs is the current institutional phase of that work: converting founder-held methods, decisions, and research into durable products, public goods, independently testable claims, and structures other capable people can inspect, challenge, improve, operate, and eventually steward. Founder provenance explains origin and present responsibility; it does not validate the work by biography.",
     ],
     links: [
       {

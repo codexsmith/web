@@ -85,7 +85,7 @@ body[data-ui-shell="cards"] {
     min-width: 0;
     display: grid;
     align-content: start;
-    padding: 14px 13px 20px;
+    padding: 14px 10px 20px;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__section-label {
@@ -104,7 +104,7 @@ body[data-ui-shell="cards"] {
   body[data-ui-shell="cards"] .traversal-nav__history {
     position: relative;
     min-width: 0;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__history-viewport {
@@ -121,32 +121,36 @@ body[data-ui-shell="cards"] {
     display: grid;
     gap: 0;
     margin: 0;
-    padding: 0 2px 0 23px;
+    padding: 0 2px 0 6px;
     list-style: none;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__history ol::before {
     content: "";
     position: absolute;
-    top: 13px;
-    bottom: 13px;
-    left: 6px;
+    top: 17px;
+    bottom: 17px;
+    left: 3px;
     width: 1px;
-    background: linear-gradient(var(--nav-edge), var(--bf-action-line));
+    background: var(--nav-edge);
   }
 
   body[data-ui-shell="cards"] .traversal-nav__history li {
     position: relative;
     min-width: 0;
+    max-width: none;
     min-height: 34px;
     display: flex;
     align-items: center;
+    padding: 0;
+    margin: 0;
+    text-align: left;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__history-terminal {
     position: absolute;
     top: 50%;
-    left: -20px;
+    left: -6px;
     width: 7px;
     height: 7px;
     border: 1px solid var(--nav-edge);
@@ -172,13 +176,13 @@ body[data-ui-shell="cards"] {
     text-align: left;
   }
 
-  body[data-ui-shell="cards"] button.traversal-nav__history-node {
+  body[data-ui-shell="cards"] .traversal-nav__history-node[role="button"] {
     cursor: pointer;
     transition: background 120ms ease, color 120ms ease;
   }
 
-  body[data-ui-shell="cards"] button.traversal-nav__history-node:hover {
-    background: rgba(169, 140, 255, 0.07);
+  body[data-ui-shell="cards"] .traversal-nav__history-node[role="button"]:hover {
+    background: color-mix(in srgb, var(--bf-action) 7%, transparent);
     color: var(--bf-workshop-100);
   }
 
@@ -203,14 +207,14 @@ body[data-ui-shell="cards"] {
   body[data-ui-shell="cards"] .traversal-nav__current {
     position: relative;
     z-index: 2;
-    margin: 0 0 12px 23px;
+    margin: 0 0 0px 6px;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__current::before {
     content: "";
     position: absolute;
     bottom: 100%;
-    left: -17px;
+    left: -3px;
     width: 1px;
     height: 10px;
     background: var(--bf-action-line);
@@ -220,7 +224,7 @@ body[data-ui-shell="cards"] {
     content: "";
     position: absolute;
     top: 100%;
-    left: -17px;
+    left: -3px;
     width: 1px;
     height: 13px;
     background: var(--bf-action-line);
@@ -230,7 +234,7 @@ body[data-ui-shell="cards"] {
     position: absolute;
     z-index: 3;
     top: 50%;
-    left: -21px;
+    left: -8px;
     width: 10px;
     height: 10px;
     border: 1px solid var(--bf-action);
@@ -238,7 +242,7 @@ body[data-ui-shell="cards"] {
     background: var(--bf-action-pressed);
     box-shadow:
       0 0 0 2px var(--nav-chassis),
-      0 0 0 4px rgba(169, 140, 255, 0.12);
+      0 0 0 4px color-mix(in srgb, var(--bf-action) 12%, transparent);
     transform: translateY(-50%);
   }
 
@@ -251,7 +255,7 @@ body[data-ui-shell="cards"] {
     border: 1px solid var(--bf-action-line);
     border-radius: 6px;
     background:
-      linear-gradient(90deg, rgba(169, 140, 255, 0.14), transparent 80%),
+      linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 14%, transparent), transparent 80%),
       var(--nav-control-active);
     box-shadow:
       inset 3px 0 var(--bf-action),
@@ -280,17 +284,11 @@ body[data-ui-shell="cards"] {
 
   body[data-ui-shell="cards"] .traversal-nav__next {
     position: relative;
-    padding: 2px 0 0 23px;
+    padding: 2px 0 0 6px;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__next::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 12px;
-    left: 6px;
-    width: 1px;
-    background: var(--nav-line);
+    display: none;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__peer-list {
@@ -303,14 +301,15 @@ body[data-ui-shell="cards"] {
     list-style: none;
   }
 
+  body[data-ui-shell="cards"] .traversal-nav__peer-list li {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+
   body[data-ui-shell="cards"] .traversal-nav__peer-list::before {
-    content: "";
-    position: absolute;
-    top: 20px;
-    left: -17px;
-    width: 17px;
-    height: 1px;
-    background: var(--nav-line);
+    display: none;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__peer-list button {
@@ -321,7 +320,7 @@ body[data-ui-shell="cards"] {
     align-content: center;
     padding: 7px 9px;
     border: 1px solid var(--nav-line);
-    border-left-color: rgba(169, 140, 255, 0.42);
+    border-left-color: color-mix(in srgb, var(--bf-action) 42%, transparent);
     border-radius: 6px;
     background: var(--nav-control);
     color: var(--bf-silver-300);
@@ -411,12 +410,22 @@ body[data-ui-shell="cards"] {
   body[data-ui-shell="cards"] .traversal-nav__next,
   body[data-ui-shell="cards"] .traversal-nav__peer-list {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 5px;
   }
 
   body[data-ui-shell="cards"] .traversal-nav__history ol,
   body[data-ui-shell="cards"] .traversal-nav__peer-list {
+    margin: 0;
+    padding: 0;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history li,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list li {
+    min-height: 0;
+    flex: 0 0 auto;
     margin: 0;
     padding: 0;
   }
@@ -495,7 +504,7 @@ body[data-ui-shell="cards"] {
     height: 40px;
     padding: 6px 9px;
     border: 1px solid var(--nav-line);
-    border-left-color: rgba(169, 140, 255, 0.42);
+    border-left-color: color-mix(in srgb, var(--bf-action) 42%, transparent);
     border-radius: 6px;
     background: var(--nav-control);
     color: var(--bf-silver-300);

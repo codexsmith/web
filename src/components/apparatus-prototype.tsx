@@ -12,7 +12,7 @@ import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
   projectionDescriptions,
   projectionLabels,
-  projectionModes,
+  projectionModesForNode,
   type ProjectionMode,
 } from "@/lib/view-projection";
 
@@ -94,6 +94,7 @@ export function ApparatusPrototypeFrame({
   children,
 }: ApparatusPrototypeFrameProps) {
   const peers = siblings.filter((node) => node.id !== focusNode.id);
+  const availableProjectionModes = projectionModesForNode(focusNode.id);
 
   return (
     <div className="apparatus-prototype-shell" data-prototype="apparatus" data-projection={projection}>
@@ -167,7 +168,7 @@ export function ApparatusPrototypeFrame({
       <footer className="apparatus-depth" aria-label={`Depth controls for ${focusNode.label}`}>
         <span className="apparatus-register-label">DEPTH</span>
         <div className="apparatus-depth__positions">
-          {projectionModes.map((mode) => (
+          {availableProjectionModes.map((mode) => (
             <button
               key={mode}
               type="button"

@@ -6,7 +6,7 @@ import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
   projectionDescriptions,
   projectionLabels,
-  projectionModes,
+  projectionModesForNode,
   type ProjectionMode,
 } from "@/lib/view-projection";
 
@@ -37,14 +37,12 @@ type FrameIconName = "back" | "forward" | "search" | "minus" | "plus";
 
 const rootProjectionLabels: Record<ProjectionMode, string> = {
   world: "World",
-  record: "Founder",
   evidence: "Evidence",
   gestalt: "Timeline",
 };
 
 const rootProjectionDescriptions: Record<ProjectionMode, string> = {
   world: "The Lab's five public operating regions.",
-  record: "Founder provenance, contribution, and present institutional responsibility.",
   evidence: "Evidence supporting founder provenance and operating history, with explicit claim boundaries.",
   gestalt: "Founder and institutional development timeline from practice to Boundary First Labs.",
 };
@@ -52,6 +50,7 @@ const rootProjectionDescriptions: Record<ProjectionMode, string> = {
 const publicInterestPageSections = [
   { id: "public-interest-overview", ariaLabel: "Go to Public Interest overview" },
   { id: "public-interest-augusta", ariaLabel: "Go to Augusta Civic Infrastructure" },
+  { id: "public-interest-context", ariaLabel: "Go to Public Interest supporting context" },
 ] as const;
 
 function FrameIcon({ name }: { name: FrameIconName }) {
@@ -128,12 +127,18 @@ export function BoundaryFrame({
   onSearch,
 }: BoundaryFrameProps) {
   const isRootFocus = focusNode.id === "root";
-  const activeTraversal = traversalPath.slice(0, traversalCursor + 1);
-  const history = activeTraversal.slice(0, -1);
-  const peerNodes = siblings.filter((node) => node.id !== focusNode.id);
+  const availableProjectionModes = projectionModesForNode(focusNode.id);
+  const history = traversalPath
+    .map((node, index) => ({ node, index }))
+    .filter(({ index }) => index !== traversalCursor);
+  const displayHistory = history.filter(({ node }) => node.id !== "root");
+  const mostRecentHistoryId = displayHistory.at(-1)?.node.id;
+  const peerNodes = siblings.filter(
+    (node) => node.id !== focusNode.id && node.id !== mostRecentHistoryId,
+  );
   const siblingNodes = peerNodes;
-  const hasTrace = activeTraversal.length > 1;
-  const showLeftNav = !isRootFocus && (history.length > 0 || siblingNodes.length > 0);
+  const hasTrace = traversalPath.length > 1;
+  const showLeftNav = !isRootFocus && (displayHistory.length > 0 || siblingNodes.length > 0);
   const historyViewportRef = useRef<HTMLDivElement>(null);
 
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
@@ -197,7 +202,7 @@ export function BoundaryFrame({
             aria-label="Boundary First Labs home"
             title="Boundary First Labs home"
           >
-            <span className="brand-anchor__mark" aria-hidden="true">BF</span>
+            <span className="brand-anchor__mark" aria-hidden="true" />
           </button>
 
           {hasTrace ? (
@@ -212,16 +217,17 @@ export function BoundaryFrame({
                 <FrameIcon name="back" />
                 <span className="frame-tool__label">Back</span>
               </button>
-              <button
-                className="frame-tool frame-tool--trace-forward"
-                onClick={onForward}
-                disabled={!canTraceForward}
-                aria-label="Forward through traversal history"
-                title="Replay the next traversal state"
-              >
-                <FrameIcon name="forward" />
-                <span className="frame-tool__label">Forward</span>
-              </button>
+              {canTraceForward ? (
+                <button
+                  className="frame-tool frame-tool--trace-forward"
+                  onClick={onForward}
+                  aria-label="Forward through traversal history"
+                  title="Replay the next traversal state"
+                >
+                  <FrameIcon name="forward" />
+                  <span className="frame-tool__label">Forward</span>
+                </button>
+              ) : null}
             </>
           ) : null}
         </div>
@@ -238,7 +244,7 @@ export function BoundaryFrame({
               aria-label={isRootFocus ? "Boundary First Labs views" : `Deeper representations of ${focusNode.label}`}
             >
               <span className="projection-switcher__label">Depth</span>
-              {projectionModes.map((mode) => (
+              {availableProjectionModes.map((mode) => (
                 <button
                   key={mode}
                   onClick={() => onProjectionChange(mode)}
@@ -294,38 +300,39 @@ export function BoundaryFrame({
             </header>
 
             <div className="traversal-nav__flow">
-              {history.length ? (
+              {displayHistory.length ? (
                 <section className="traversal-nav__history" aria-label="Focus traversal history">
                   <div className="traversal-nav__history-viewport" ref={historyViewportRef}>
                     <ol>
-                      {history.map((node, index) => {
-                        const canReplay = canTraceBack && index === history.length - 1;
+                      {displayHistory.map(({ node, index }, displayIndex) => {
                         const copy = (
                           <>
                             <span>{node.shortLabel ?? node.label}</span>
-                            <small>{String(index + 1).padStart(2, "0")}</small>
+                            <small>{String(displayIndex + 1).padStart(2, "0")}</small>
                           </>
                         );
 
                         return (
                           <li key={`${node.id}-${index}`}>
                             <span className="traversal-nav__history-terminal" aria-hidden="true" />
-                            {canReplay ? (
-                              <button
-                                className="traversal-nav__history-node"
-                                onClick={() => {
+                            <div
+                              role="button"
+                              tabIndex={0}
+                              className="traversal-nav__history-node"
+                              onClick={() => {
+                                if (onTraversalPath) onTraversalPath(node.id, index);
+                                else onBack();
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
                                   if (onTraversalPath) onTraversalPath(node.id, index);
                                   else onBack();
-                                }}
-                                title={`Back to ${node.label}`}
-                              >
-                                {copy}
-                              </button>
-                            ) : (
-                              <div className="traversal-nav__history-node" title={`${node.label} (earlier traversal history)`}>
-                                {copy}
-                              </div>
-                            )}
+                                }
+                              }}
+                              title={`Jump to ${node.label}`}
+                            >
+                              {copy}
+                            </div>
                           </li>
                         );
                       })}

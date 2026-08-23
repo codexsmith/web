@@ -65,18 +65,42 @@ async function expectPage(path, expectedStrings, forbiddenStrings = []) {
   }
 }
 
+async function expectRedirect(path, expectedLocation) {
+  const response = await fetchWithTimeout(`${base}${path}`);
+  if (response.status !== 308) {
+    throw new Error(`${path} returned HTTP ${response.status}; expected permanent redirect`);
+  }
+
+  if (response.headers.get("location") !== expectedLocation) {
+    throw new Error(`${path} redirected to ${response.headers.get("location")}; expected ${expectedLocation}`);
+  }
+}
+
+async function expectTemporaryRedirect(path, expectedLocation) {
+  const response = await fetchWithTimeout(`${base}${path}`);
+  if (response.status !== 307) {
+    throw new Error(`${path} returned HTTP ${response.status}; expected temporary redirect`);
+  }
+
+  if (response.headers.get("location") !== expectedLocation) {
+    throw new Error(`${path} redirected to ${response.headers.get("location")}; expected ${expectedLocation}`);
+  }
+}
+
 async function stopServer() {
   if (server.exitCode !== null) return;
 
+  const gracefulExit = new Promise((resolve) => server.once("exit", resolve));
   server.kill("SIGTERM");
   await Promise.race([
-    new Promise((resolve) => server.once("exit", resolve)),
+    gracefulExit,
     sleep(2_000),
   ]);
 
   if (server.exitCode === null) {
+    const forcedExit = new Promise((resolve) => server.once("exit", resolve));
     server.kill("SIGKILL");
-    await new Promise((resolve) => server.once("exit", resolve));
+    await Promise.race([forcedExit, sleep(2_000)]);
   }
 }
 
@@ -103,7 +127,7 @@ try {
     "Research",
     "Publications",
     "About",
-    "Enter region",
+    "View",
     "Depth",
   ], [
     "Enter the lab",
@@ -122,12 +146,62 @@ try {
   await expectPage("/publications", [
     "Publications",
     "At a glance",
-    "Continue from here",
+    "Related paths",
     "Publication status is tracked separately",
     "Essays &amp; Arguments",
     "Methods &amp; Standards",
     "Research Programs",
     "Learning &amp; Visuals",
+    "View",
+  ], [
+    "A public essay presents a bounded argument",
+    "Enter region",
+  ]);
+
+  await expectPage("/products", [
+    "Products",
+    "At a glance",
+    "Current Work",
+    "Shipped Work",
+    "Product Pipeline",
+    "Tools &amp; Experiments",
+    "Related paths",
+    "How We Work",
+    "View",
+  ], [
+    "Work with a current public operating surface",
+    "Systems that were actually delivered or operated",
+    "Product concepts with enough architecture",
+    "Small artifacts that test an interaction",
+    "Enter region",
+  ]);
+
+  await expectPage("/research", [
+    "Research",
+    "At a glance",
+    "Software",
+    "Applied Testbeds",
+    "Foundations",
+    "Formal Theory",
+    "Related paths",
+    "Explore further",
+    "View",
+  ], [
+    "A coherent software lane",
+    "Enter region",
+  ]);
+
+  await expectPage("/about", [
+    "About",
+    "At a glance",
+    "The Lab",
+    "How We Work",
+    "Provenance",
+    "Contact",
+    "Related paths",
+    "View",
+  ], [
+    "Boundary First Labs as a software research and engineering lab whose primary medium",
     "Enter region",
   ]);
 
@@ -140,11 +214,36 @@ try {
   ]);
 
   await expectPage("/publications/essays/executable-distinctions?view=evidence", [
-    "Evidence / lineage projection",
+    "Publication evidence",
     "Executable Distinctions",
-    "Working publication · review pending",
-    "Publication development state is independent",
+    "Working v0.1 publication · review pending",
+    "Claim ceiling",
+    "Records behind the claims",
+    "What remains outside the claim",
   ]);
+
+  await expectPage("/products?view=evidence", [
+    "Portfolio evidence",
+    "Products",
+    "Current portfolio distribution",
+    "Evidence-bearing work",
+    "Corpus Forge",
+    "View evidence",
+  ]);
+
+  await expectPage("/products/current/corpus-forge?view=evidence", [
+    "Product evidence",
+    "What establishes Corpus Forge as an active program",
+    "Claim ceiling",
+    "Records behind the claims",
+    "Effective date not established",
+  ], [
+    "src/content/",
+    "Typed relations",
+    "Retained / public records",
+  ]);
+
+  await expectTemporaryRedirect("/about/contact?view=evidence", "/about/contact");
 
   await expectPage("/public-interest", [
     "Public Interest",
@@ -156,11 +255,7 @@ try {
     "Open project record",
   ]);
 
-  await expectPage("/public-interest?view=record", [
-    "Public Interest",
-    "Contained regions",
-    "Inspect through this node",
-  ]);
+  await expectRedirect("/public-interest?view=record", "/public-interest");
 
   await expectPage("/public-interest?view=process", [
     "Process projection",
@@ -222,9 +317,10 @@ try {
 
   await expectPage("/publications/methods/software-before-code?view=evidence&ui=apparatus", [
     "APPARATUS",
-    "Evidence / lineage projection",
+    "Publication evidence",
     "Software Before Code",
     "Working Public Method",
+    "Records behind the claims",
   ]);
 
   console.log("v2 production runtime smoke: pass");

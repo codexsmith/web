@@ -1,20 +1,6 @@
 /* Boundary First Labs root projections
-   The Lab root uses Founder / Evidence / Timeline rather than treating the institution
-   itself like an ordinary research object. These rules stay deliberately small and reuse
-   the existing Record, Evidence, and Gestalt grammars. */
-
-.founder-record .node-surface {
-  width: min(100%, 1040px);
-}
-
-.founder-record .node-surface__body strong {
-  font-weight: 700;
-}
-
-.founder-record .node-section .node-surface__body {
-  max-width: 820px;
-  margin-top: 0.55rem;
-}
+   The Lab root uses World / Evidence / Timeline. Founder narrative lives in About;
+   these rules only refine the two genuinely specialized root projections. */
 
 .founder-evidence-view .evidence-cards article {
   min-width: 0;

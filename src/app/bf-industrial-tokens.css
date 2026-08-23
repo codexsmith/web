@@ -1,5 +1,5 @@
 /* Boundary First Industrial UX · shared semantic palette
-   Metal = structure. Violet = operator agency. Signal colors = observed machine state.
+   Metal = structure and operator agency. Signal colors = observed machine state.
    Wear implies use, not neglect. Apparatus and Card renderers must share these meanings. */
 
 :root {
@@ -17,14 +17,22 @@
   --bf-workshop-100: #e4e7e3;
   --bf-white-050: #f3f5f2;
 
-  /* Operator / boundary interaction */
-  --bf-action: #a98cff;
-  --bf-action-hover: #b9a5ff;
-  --bf-action-pressed: #9174e8;
-  --bf-action-surface: rgba(169, 140, 255, 0.14);
-  --bf-action-line: rgba(169, 140, 255, 0.45);
-  --bf-action-glow: rgba(169, 140, 255, 0.2);
-  --bf-focus-ring: rgba(169, 140, 255, 0.72);
+  /* Operator / boundary interaction. Silver is quieter than the categorical
+     accents while remaining clearly distinct from the warmer off-white type. */
+  --bf-site-action: var(--bf-silver-300);
+  --bf-site-action-hover: #c3cbcd;
+  --bf-site-action-pressed: var(--bf-alloy-400);
+  --bf-site-action-surface: rgba(170, 180, 184, 0.12);
+  --bf-site-action-line: rgba(170, 180, 184, 0.42);
+  --bf-site-action-glow: rgba(170, 180, 184, 0.18);
+  --bf-site-focus-ring: rgba(170, 180, 184, 0.72);
+  --bf-action: var(--bf-site-action);
+  --bf-action-hover: var(--bf-site-action-hover);
+  --bf-action-pressed: var(--bf-site-action-pressed);
+  --bf-action-surface: var(--bf-site-action-surface);
+  --bf-action-line: var(--bf-site-action-line);
+  --bf-action-glow: var(--bf-site-action-glow);
+  --bf-focus-ring: var(--bf-site-focus-ring);
 
   /* Observed machine state */
   --bf-valid: #8edb9a;
@@ -32,6 +40,13 @@
   --bf-info: #77b9e8;
   --bf-defect: #e77c73;
   --bf-unknown: #748188;
+
+  /* Stable categorical accents for the five home regions. */
+  --bf-region-public-interest: var(--bf-info);
+  --bf-region-products: var(--bf-defect);
+  --bf-region-publications: var(--bf-valid);
+  --bf-region-about: var(--bf-attention);
+  --bf-region-research: #a98cff;
 
   /* Material behavior */
   --bf-edge-highlight: rgba(255, 255, 255, 0.075);
@@ -70,6 +85,26 @@
   --accent: var(--bf-action);
   --accent-soft: var(--bf-action-surface);
   --shadow: 0 24px 80px var(--bf-edge-shadow-deep);
+}
+
+/* Major sections inherit the categorical color of their home card. State colors such
+   as valid, attention, and defect remain unchanged; only operator/action accents move. */
+.site-shell[data-section-theme="public-interest"] { --bf-section-accent: var(--bf-region-public-interest); }
+.site-shell[data-section-theme="products"] { --bf-section-accent: var(--bf-region-products); }
+.site-shell[data-section-theme="publications"] { --bf-section-accent: var(--bf-region-publications); }
+.site-shell[data-section-theme="about"] { --bf-section-accent: var(--bf-region-about); }
+.site-shell[data-section-theme="research"] { --bf-section-accent: var(--bf-region-research); }
+
+.site-shell[data-section-theme] .world-viewport {
+  --bf-action: var(--bf-section-accent);
+  --bf-action-hover: color-mix(in srgb, var(--bf-section-accent) 78%, var(--bf-white-050));
+  --bf-action-pressed: color-mix(in srgb, var(--bf-section-accent) 76%, var(--bf-iron-950));
+  --bf-action-surface: color-mix(in srgb, var(--bf-section-accent) 14%, transparent);
+  --bf-action-line: color-mix(in srgb, var(--bf-section-accent) 45%, transparent);
+  --bf-action-glow: color-mix(in srgb, var(--bf-section-accent) 20%, transparent);
+  --bf-focus-ring: color-mix(in srgb, var(--bf-section-accent) 72%, transparent);
+  --accent: var(--bf-section-accent);
+  --accent-soft: var(--bf-action-surface);
 }
 
 html,

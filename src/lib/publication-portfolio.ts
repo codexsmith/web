@@ -561,6 +561,20 @@ const categoryNodes: PublicationContentNode[] = [
       "Publication status is tracked separately from the maturity of the underlying research, product, or method. A polished manuscript does not validate its subject, and an important research program may still have only a draft public artifact.",
       "The portfolio is therefore a development surface rather than a bibliography. Each publication record names what kind of document exists, what claim maturity it currently carries, who it is for, where its source lives, and which gate remains before stronger public release.",
     ],
+    links: [
+      {
+        label: "Research",
+        href: "/research",
+        eyebrow: "Underlying programs",
+        summary: "Follow the research programs and evidence boundaries behind the manuscript pipeline.",
+      },
+      {
+        label: "How We Work",
+        href: "/about/how-we-work",
+        eyebrow: "Release discipline",
+        summary: "How source, claim maturity, review, correction, and release are kept distinct.",
+      },
+    ],
     inspection: [
       {
         id: "publications-stage-vocabulary",

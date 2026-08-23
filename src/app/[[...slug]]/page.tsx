@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { permanentRedirect, redirect } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection } from "@/lib/view-projection";
 import { parseUiShell } from "@/lib/ui-shell";
+import { hasEvidenceProjection } from "@/lib/evidence-content";
 import { AgencyAuditLanding } from "@/components/product-landing/AgencyAuditLanding";
 import { BoundaryFirstUxLanding } from "@/components/product-landing/BoundaryFirstUxLanding";
 import { ChessLanding } from "@/components/product-landing/ChessLanding";
@@ -40,6 +42,46 @@ type PageProps = {
 };
 
 export const dynamicParams = true;
+
+function firstQueryValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function legacyRecordDestination(slug: string[], query: Awaited<PageProps["searchParams"]>) {
+  if (firstQueryValue(query.view) !== "record") return undefined;
+
+  const pathname = slug.length
+    ? `/${slug.map((segment) => encodeURIComponent(segment)).join("/")}`
+    : "/about/provenance";
+  const params = new URLSearchParams();
+
+  for (const key of ["scope", "world", "ui"] as const) {
+    const value = firstQueryValue(query[key]);
+    if (value) params.set(key, value);
+  }
+
+  return params.size ? `${pathname}?${params}` : pathname;
+}
+
+function unsupportedEvidenceDestination(
+  slug: string[],
+  query: Awaited<PageProps["searchParams"]>,
+  nodeId: string,
+) {
+  if (firstQueryValue(query.view) !== "evidence" || hasEvidenceProjection(nodeId)) return undefined;
+
+  const pathname = slug.length
+    ? `/${slug.map((segment) => encodeURIComponent(segment)).join("/")}`
+    : "/";
+  const params = new URLSearchParams();
+
+  for (const key of ["scope", "world", "ui"] as const) {
+    const value = firstQueryValue(query[key]);
+    if (value) params.set(key, value);
+  }
+
+  return params.size ? `${pathname}?${params}` : pathname;
+}
 
 export async function generateStaticParams() {
   const landingParams =
@@ -91,6 +133,8 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
 export default async function Page({ params, searchParams }: PageProps) {
   const [{ slug = [] }, query] = await Promise.all([params, searchParams]);
+  const recordDestination = legacyRecordDestination(slug, query);
+  if (recordDestination) permanentRedirect(recordDestination);
 
   if (
     productLandingManifest.routingPolicy.routesImplemented &&
@@ -137,6 +181,8 @@ export default async function Page({ params, searchParams }: PageProps) {
   }
 
   const node = getNodeByPath(slug);
+  const evidenceDestination = unsupportedEvidenceDestination(slug, query, node.id);
+  if (evidenceDestination) redirect(evidenceDestination);
   const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
   const initialProcessScope = parseProcessScope(query.scope) ?? "full";
   const initialUiShell = parseUiShell(query.ui);

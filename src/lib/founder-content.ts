@@ -7,29 +7,6 @@ export const founderProfile = {
     "Convert a long-running body of software, research, methods, and public-interest work into durable products, public goods, independently testable research, and institutional structure.",
 };
 
-export const founderRecordSections = [
-  {
-    label: "Founder contribution",
-    body:
-      "The founder contribution is a combination of software-systems practice, independent inquiry, and a recurring engineering pattern: find the hidden boundary, name what must survive, expose the defect, build the smallest useful artifact, test whether reality closes, and refine.",
-  },
-  {
-    label: "Professional grounding",
-    body:
-      "The public founder record describes Georgia Tech computer-science training in artificial intelligence and systems architecture, followed by roughly thirteen years building, repairing, integrating, and delivering software across web applications, APIs, databases, cloud infrastructure, mobile systems, consulting environments, regulated contexts, and startup-style teams.",
-  },
-  {
-    label: "Research continuity",
-    body:
-      "Boundary First Labs did not begin as a recent response to generative AI. Its source record describes a long-running software, research, and systems-analysis practice spanning software, artificial intelligence, mathematics, physics, cognition, research methods, institutions, governance, weather, games, and public systems.",
-  },
-  {
-    label: "Institutional boundary",
-    body:
-      "Founder provenance explains origin and present accountability; it does not validate theory. The institutional goal is to move memory, method, decisions, criticism, correction, and stewardship out of private founder dependence and into structures other capable people can inspect, challenge, improve, operate, and eventually steward.",
-  },
-] as const;
-
 export const founderEvidenceItems = [
   {
     label: "Training and delivery practice",

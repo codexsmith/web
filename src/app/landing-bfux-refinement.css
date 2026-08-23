@@ -2,7 +2,7 @@
  * Boundary First UX · public threshold refinement.
  *
  * The landing page is a threshold into the same operating world, not a second home map.
- * Structure is metal, violet marks operator agency, and the one primary action is entry.
+ * Structure is metal, green marks operator agency, and the one primary action is entry.
  */
 
 body[data-ui-shell="cards"] .hero-screen {
@@ -13,7 +13,7 @@ body[data-ui-shell="cards"] .hero-screen {
   background:
     linear-gradient(rgba(170, 180, 184, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(170, 180, 184, 0.025) 1px, transparent 1px),
-    radial-gradient(circle at 72% 46%, rgba(169, 140, 255, 0.055), transparent 27rem),
+    radial-gradient(circle at 72% 46%, color-mix(in srgb, var(--bf-action) 5.5%, transparent), transparent 27rem),
     linear-gradient(128deg, rgba(255, 255, 255, 0.018), transparent 42%),
     var(--bf-bg-frame);
   background-size: 48px 48px, 48px 48px, auto, auto, auto;
@@ -132,7 +132,7 @@ body[data-ui-shell="cards"] .hero-screen__threshold {
     0 4px 12px rgba(0, 0, 0, 0.18);
   color: var(--bf-text-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.42rem;
+  font-size: clamp(0.35rem, 0.7vw, 0.42rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -259,27 +259,27 @@ body[data-ui-shell="cards"] .hero-screen__entry {
 
 body[data-ui-shell="cards"] .hero-screen__entry-register {
   color: var(--bf-text-muted);
-  font-size: 0.44rem;
+  font-size: clamp(0.38rem, 0.8vw, 0.44rem);
   font-weight: 700;
   letter-spacing: 0.09em;
 }
 
 body[data-ui-shell="cards"] .hero-screen__entry button {
   position: relative;
-  min-height: 50px;
+  min-height: clamp(40px, 5vw, 50px);
   width: 100%;
-  padding: 0 8px 0 14px;
+  padding: 0 clamp(6px, 1.2vw, 8px) 0 clamp(10px, 1.8vw, 14px);
   border: 1px solid var(--bf-action-line);
-  border-radius: 6px;
+  border-radius: clamp(4px, 1vw, 6px);
   background:
-    linear-gradient(90deg, rgba(169, 140, 255, 0.13), transparent 72%),
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 13%, transparent), transparent 72%),
     var(--bf-bg-surface);
   color: var(--bf-workshop-100);
   box-shadow:
     inset 3px 0 var(--bf-action),
     inset 0 1px var(--bf-edge-highlight),
     0 8px 20px rgba(0, 0, 0, 0.22);
-  font-size: 0.72rem;
+  font-size: clamp(0.6rem, 1.2vw, 0.72rem);
   letter-spacing: 0.055em;
   text-transform: uppercase;
   transition: border-color 120ms ease, background 120ms ease, box-shadow 120ms ease;
@@ -289,25 +289,25 @@ body[data-ui-shell="cards"] .hero-screen__entry button:hover {
   transform: none;
   border-color: var(--bf-action-hover);
   background:
-    linear-gradient(90deg, rgba(169, 140, 255, 0.2), transparent 74%),
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 20%, transparent), transparent 74%),
     var(--bf-bg-raised);
   box-shadow:
     inset 3px 0 var(--bf-action-hover),
     inset 0 1px var(--bf-edge-highlight),
     0 10px 24px rgba(0, 0, 0, 0.28),
-    0 0 0 1px rgba(169, 140, 255, 0.08);
+    0 0 0 1px color-mix(in srgb, var(--bf-action) 8%, transparent);
 }
 
 body[data-ui-shell="cards"] .hero-screen__entry-terminal {
-  width: 32px;
-  height: 32px;
+  width: clamp(24px, 4vw, 32px);
+  height: clamp(24px, 4vw, 32px);
   display: grid;
   place-items: center;
   border: 1px solid var(--bf-action-line);
   border-radius: 4px;
   background: var(--bf-action-pressed);
   color: var(--bf-white-050);
-  font-size: 0.92rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.92rem);
 }
 
 body[data-ui-shell="cards"] .hero-screen__instrument {
@@ -413,14 +413,14 @@ body[data-ui-shell="cards"] .hero-apparatus__core {
   border: 1px solid var(--bf-action-line);
   border-radius: 7px;
   background:
-    linear-gradient(145deg, rgba(169, 140, 255, 0.08), transparent 60%),
+    linear-gradient(145deg, color-mix(in srgb, var(--bf-action) 8%, transparent), transparent 60%),
     var(--bf-bg-surface);
   color: var(--bf-workshop-100);
   box-shadow:
     0 10px 26px rgba(0, 0, 0, 0.34),
     inset 3px 0 var(--bf-action),
     inset 0 1px var(--bf-edge-highlight),
-    0 0 24px rgba(169, 140, 255, 0.06);
+    0 0 24px color-mix(in srgb, var(--bf-action) 6%, transparent);
 }
 
 body[data-ui-shell="cards"] .hero-apparatus__core span {
@@ -477,7 +477,7 @@ body[data-ui-shell="cards"] .hero-screen__footer {
   border-top: 1px solid var(--bf-border-subtle);
   color: var(--bf-text-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.42rem;
+  font-size: clamp(0.35rem, 0.7vw, 0.42rem);
   font-weight: 700;
   letter-spacing: 0.09em;
   line-height: 1;

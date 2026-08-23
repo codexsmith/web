@@ -1,363 +1,389 @@
 "use client";
 
 import Link from "next/link";
-import { ContentNode, getCrossEdges, getParent } from "@/lib/content-registry";
-import { hydrateContentNode } from "@/lib/content-projections";
-import { founderClaimBoundaries, founderEvidenceItems, founderProfile } from "@/lib/founder-content";
-import { getSemanticEvents } from "@/lib/semantic-events";
+import type { ContentNode } from "@/lib/content-registry";
+import {
+  getBranchEvidenceSummary,
+  getEvidenceProfile,
+  type BranchEvidenceEvent,
+  type EvidenceAvailability,
+  type EvidenceProfile,
+  type EvidenceSource,
+} from "@/lib/evidence-content";
+import type { SemanticEvent } from "@/lib/semantic-events";
 
 type EvidenceViewProps = {
   focusNode: ContentNode;
-  onInspect: (inspectionId: string) => void;
   onNavigate: (id: string) => void;
 };
 
-function eventDate(effectiveAt: string | undefined, recordedAt: string) {
-  return effectiveAt ?? recordedAt;
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function formatDate(value: string) {
+  const [year, month, day] = value.split("-");
+  const monthName = monthNames[Number(month) - 1];
+  if (!year || !monthName || !day) return value;
+  return `${monthName} ${Number(day)}, ${year}`;
 }
 
-export function EvidenceView({ focusNode, onInspect, onNavigate }: EvidenceViewProps) {
-  if (focusNode.id === "root") {
-    return <FounderEvidenceView />;
+function humanize(value: string) {
+  return value.replaceAll("-", " ");
+}
+
+function availabilityLabel(availability: EvidenceAvailability) {
+  if (availability === "public") return "Public";
+  if (availability === "internal") return "Internal register";
+  return "Retained";
+}
+
+function EvidenceHeading({ profile }: { profile: EvidenceProfile }) {
+  return (
+    <>
+      <header className="evidence-view__heading">
+        <div>
+          <p className="eyebrow">{profile.eyebrow}</p>
+          <h1>{profile.title}</h1>
+          <p>{profile.question}</p>
+        </div>
+        <dl className="evidence-view__scope">
+          <div>
+            <dt>Current standing</dt>
+            <dd>{profile.currentStanding}</dd>
+          </div>
+          <div>
+            <dt>Evidence level</dt>
+            <dd>{profile.evidenceLevel}</dd>
+          </div>
+          <div>
+            <dt>Last evidence update</dt>
+            <dd>{profile.lastUpdated ? formatDate(profile.lastUpdated) : "Not declared"}</dd>
+          </div>
+          <div>
+            <dt>Next gate</dt>
+            <dd>{profile.nextGate}</dd>
+          </div>
+        </dl>
+      </header>
+
+      <section className="evidence-ceiling" aria-label="Claim ceiling">
+        <span>Claim ceiling</span>
+        <p>{profile.claimCeiling}</p>
+      </section>
+    </>
+  );
+}
+
+function ClaimSection({ profile }: { profile: EvidenceProfile }) {
+  const sourceById = new Map(profile.sources.map((source) => [source.id, source]));
+
+  return (
+    <section className="evidence-section evidence-section--claims">
+      <header className="evidence-section__heading">
+        <span>Claims</span>
+        <h2>What the current record supports</h2>
+      </header>
+      <div className="evidence-claims">
+        {profile.claims.map((claim) => {
+          const supports = claim.supportIds
+            .map((sourceId) => sourceById.get(sourceId))
+            .filter((source): source is EvidenceSource => Boolean(source));
+
+          return (
+            <article key={claim.id} data-standing={claim.standing}>
+              <div className="evidence-claim__standing">{claim.standing}</div>
+              <h3>{claim.statement}</h3>
+              {supports.length ? (
+                <div className="evidence-claim__support">
+                  <span>Supported by</span>
+                  <ul>
+                    {supports.map((source) => (
+                      <li key={source.id}>
+                        <a href={`#evidence-source-${source.id}`}>{source.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {claim.boundary ? (
+                <div className="evidence-claim__boundary">
+                  <span>Boundary</span>
+                  <p>{claim.boundary}</p>
+                </div>
+              ) : null}
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function SourceLink({ source }: { source: EvidenceSource }) {
+  if (!source.href) return null;
+  if (source.href.startsWith("/")) return <Link href={source.href}>View public record</Link>;
+  return <a href={source.href}>View public record</a>;
+}
+
+function SourceSection({ sources }: { sources: EvidenceSource[] }) {
+  if (!sources.length) return null;
+
+  return (
+    <section className="evidence-section evidence-section--sources">
+      <header className="evidence-section__heading">
+        <span>Sources</span>
+        <h2>Records behind the claims</h2>
+      </header>
+      <div className="evidence-sources">
+        {sources.map((source) => (
+          <article id={`evidence-source-${source.id}`} key={source.id}>
+            <header>
+              <span>{source.type}</span>
+              <small data-availability={source.availability}>{availabilityLabel(source.availability)}</small>
+            </header>
+            <h3>{source.label}</h3>
+            {source.owner || source.date ? (
+              <dl>
+                {source.owner ? (
+                  <div>
+                    <dt>Owner</dt>
+                    <dd>{source.owner}</dd>
+                  </div>
+                ) : null}
+                {source.date ? (
+                  <div>
+                    <dt>Date</dt>
+                    <dd>{formatDate(source.date)}</dd>
+                  </div>
+                ) : null}
+              </dl>
+            ) : null}
+            {source.note ? <p>{source.note}</p> : null}
+            <SourceLink source={source} />
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function LimitsSection({ profile }: { profile: EvidenceProfile }) {
+  const limits = profile.limits ?? [];
+  const unknowns = profile.unknowns ?? [];
+  if (!limits.length && !unknowns.length) return null;
+
+  return (
+    <section className="evidence-section evidence-section--limits">
+      <header className="evidence-section__heading">
+        <span>Limits</span>
+        <h2>What remains outside the claim</h2>
+      </header>
+      <div className="evidence-limits">
+        {limits.length ? (
+          <div>
+            <h3>Boundaries</h3>
+            <ul>
+              {limits.map((limit) => <li key={limit}>{limit}</li>)}
+            </ul>
+          </div>
+        ) : null}
+        {unknowns.length ? (
+          <div>
+            <h3>Open questions</h3>
+            <ul>
+              {unknowns.map((unknown) => <li key={unknown}>{unknown}</li>)}
+            </ul>
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
+function EventDate({ event }: { event: SemanticEvent }) {
+  if (event.effectiveAt) {
+    return <time dateTime={event.effectiveAt}>Effective {formatDate(event.effectiveAt)}</time>;
   }
 
-  const inspections = focusNode.inspection ?? [];
-  const records = focusNode.links ?? [];
-  const parent = getParent(focusNode.id);
-  const relations = getCrossEdges(focusNode.id).map((edge) => ({
-    ...edge,
-    node: hydrateContentNode(edge.node),
-    direction: edge.from === focusNode.id ? "outgoing" as const : "incoming" as const,
-  }));
-  const ledgerEvents = getSemanticEvents(focusNode.id);
-  const sourceRefs = Array.from(
-    new Set([
-      ...(focusNode.publication?.sourceRef ? [focusNode.publication.sourceRef] : []),
-      ...inspections
-        .map((inspection) => inspection.sourceRef)
-        .filter((sourceRef): sourceRef is string => Boolean(sourceRef)),
-      ...ledgerEvents.flatMap((event) => event.evidenceRefs),
-    ]),
+  return (
+    <span className="evidence-event__date">
+      <time dateTime={event.recordedAt}>Recorded {formatDate(event.recordedAt)}</time>
+      <small>Effective date not established</small>
+    </span>
   );
+}
+
+function EventCards({ events, showNode = false }: { events: Array<SemanticEvent | BranchEvidenceEvent>; showNode?: boolean }) {
+  return (
+    <div className="evidence-events">
+      {events.map((event) => {
+        const branchEvent = event as BranchEvidenceEvent;
+        return (
+          <article key={event.id} data-event-type={event.type}>
+            <header>
+              <div>
+                <span>{showNode && branchEvent.node ? branchEvent.node.label : humanize(event.type)}</span>
+                <h3>{event.label}</h3>
+              </div>
+              <EventDate event={event} />
+            </header>
+            <p>{event.summary}</p>
+            <dl>
+              <div>
+                <dt>Actor</dt>
+                <dd>{event.actor.label}</dd>
+              </div>
+              <div>
+                <dt>Standing effect</dt>
+                <dd>{event.standingEffect}</dd>
+              </div>
+            </dl>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function HistorySection({ events }: { events: SemanticEvent[] }) {
+  if (!events.length) return null;
+
+  return (
+    <section className="evidence-section evidence-section--history">
+      <header className="evidence-section__heading">
+        <span>Change history</span>
+        <h2>Admitted changes to standing</h2>
+      </header>
+      <EventCards events={events} />
+    </section>
+  );
+}
+
+function ObjectEvidenceView({ focusNode }: { focusNode: ContentNode }) {
+  const profile = getEvidenceProfile(focusNode);
+  if (!profile) return null;
 
   return (
     <main className="world-viewport evidence-viewport">
-      <section className="evidence-view" aria-label={`Evidence and lineage for ${focusNode.label}`}>
-        <header className="evidence-view__heading">
-          <div>
-            <p className="eyebrow">Evidence / lineage projection</p>
-            <h1>{focusNode.label}</h1>
-            <p>
-              What supports, constrains, qualifies, connects, or changes this focal object without changing
-              its conceptual location.
-            </p>
-          </div>
-          <dl className="evidence-view__scope">
-            <div>
-              <dt>Focus</dt>
-              <dd>{focusNode.shortLabel ?? focusNode.label}</dd>
-            </div>
-            <div>
-              <dt>Parent boundary</dt>
-              <dd>{parent ? parent.shortLabel ?? parent.label : "BFL root"}</dd>
-            </div>
-            <div>
-              <dt>Through views</dt>
-              <dd>{inspections.length}</dd>
-            </div>
-            <div>
-              <dt>Source refs</dt>
-              <dd>{sourceRefs.length}</dd>
-            </div>
-            <div>
-              <dt>Ledger events</dt>
-              <dd>{ledgerEvents.length}</dd>
-            </div>
-          </dl>
-        </header>
-
+      <article className="evidence-view evidence-view--object" aria-label={`Evidence for ${profile.title}`}>
+        <EvidenceHeading profile={profile} />
         <div className="evidence-view__grid">
-          <section className="evidence-compartment evidence-compartment--standing">
-            <div className="evidence-compartment__label">Declared standing</div>
-            {focusNode.publication ? (
-              <>
-                <strong>{focusNode.publication.label}</strong>
-                <p>
-                  Publication development state is independent from the proof, validation, delivery, or adoption standing
-                  of the underlying subject.
-                </p>
-                <dl>
-                  <div>
-                    <dt>Stage</dt>
-                    <dd>{focusNode.publication.stage}</dd>
-                  </div>
-                  <div>
-                    <dt>Document class</dt>
-                    <dd>{focusNode.publication.documentClass}</dd>
-                  </div>
-                  <div>
-                    <dt>Claim maturity</dt>
-                    <dd>{focusNode.publication.claimMaturity}</dd>
-                  </div>
-                  <div>
-                    <dt>Audience</dt>
-                    <dd>{focusNode.publication.audience}</dd>
-                  </div>
-                  {focusNode.publication.version ? (
-                    <div>
-                      <dt>Version</dt>
-                      <dd>{focusNode.publication.version}</dd>
-                    </div>
-                  ) : null}
-                  <div>
-                    <dt>Next gate</dt>
-                    <dd>{focusNode.publication.nextGate}</dd>
-                  </div>
-                </dl>
-              </>
-            ) : focusNode.status ? (
-              <>
-                <strong>{focusNode.status.label}</strong>
-                <p>{focusNode.status.detail}</p>
-                <dl>
-                  <div>
-                    <dt>Stage</dt>
-                    <dd>{focusNode.status.stage}</dd>
-                  </div>
-                  <div>
-                    <dt>Historical</dt>
-                    <dd>{focusNode.status.historical ? "yes" : "no"}</dd>
-                  </div>
-                  {focusNode.status.sourceStatus ? (
-                    <div>
-                      <dt>Source status</dt>
-                      <dd>{focusNode.status.sourceStatus}</dd>
-                    </div>
-                  ) : null}
-                  {focusNode.status.provenance ? (
-                    <div>
-                      <dt>Provenance</dt>
-                      <dd>{focusNode.status.provenance}</dd>
-                    </div>
-                  ) : null}
-                </dl>
-              </>
-            ) : (
-              <p className="evidence-empty">No lifecycle, delivery, or publication standing is declared for this object.</p>
-            )}
-          </section>
-
-          <section className="evidence-compartment">
-            <div className="evidence-compartment__label">Inspectable evidence</div>
-            {inspections.length ? (
-              <div className="evidence-cards">
-                {inspections.map((inspection) => (
-                  <button key={inspection.id} onClick={() => onInspect(inspection.id)}>
-                    <span>{inspection.eyebrow}</span>
-                    <strong>{inspection.label}</strong>
-                    <p>{inspection.summary}</p>
-                    <small>{inspection.sourceRef ? `Source · ${inspection.sourceRef}` : "Source reference not declared"}</small>
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <p className="evidence-empty">No Through evidence views are attached to this object yet.</p>
-            )}
-          </section>
-
-          <section className="evidence-compartment">
-            <div className="evidence-compartment__label">Source register</div>
-            {sourceRefs.length ? (
-              <ul className="evidence-source-list">
-                {sourceRefs.map((sourceRef) => (
-                  <li key={sourceRef}>{sourceRef}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="evidence-empty">No explicit source references are declared on current inspections or lineage events.</p>
-            )}
-          </section>
-
-          <section className="evidence-compartment evidence-compartment--ledger">
-            <div className="evidence-compartment__label">Semantic lineage</div>
-            {ledgerEvents.length ? (
-              <div className="evidence-ledger">
-                {ledgerEvents.map((event) => (
-                  <article key={event.id} data-event-type={event.type}>
-                    <header>
-                      <span>
-                        <small>{event.type.replaceAll("-", " ")}</small>
-                        <strong>{event.label}</strong>
-                      </span>
-                      <time dateTime={event.effectiveAt ?? event.recordedAt}>
-                        {eventDate(event.effectiveAt, event.recordedAt)}
-                      </time>
-                    </header>
-                    <p>{event.summary}</p>
-                    <dl>
-                      <div>
-                        <dt>Actor</dt>
-                        <dd>{event.actor.label}</dd>
-                      </div>
-                      <div>
-                        <dt>Recorded by</dt>
-                        <dd>{event.recordedBy.label}</dd>
-                      </div>
-                      <div>
-                        <dt>Standing effect</dt>
-                        <dd>{event.standingEffect}</dd>
-                      </div>
-                      {event.resultingStage ? (
-                        <div>
-                          <dt>Resulting stage</dt>
-                          <dd>{event.resultingStage}</dd>
-                        </div>
-                      ) : null}
-                    </dl>
-                    <div className="evidence-ledger__ceiling">
-                      <small>Claim ceiling</small>
-                      <p>{event.claimCeiling}</p>
-                    </div>
-                    {event.evidenceRefs.length ? (
-                      <ul>
-                        {event.evidenceRefs.map((ref) => (
-                          <li key={ref}>{ref}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <p className="evidence-empty">
-                No semantic events have been admitted for this object. Current standing should not be read as a reconstructed chronology.
-              </p>
-            )}
-          </section>
-
-          <section className="evidence-compartment">
-            <div className="evidence-compartment__label">Retained / public records</div>
-            {records.length ? (
-              <div className="evidence-records">
-                {records.map((record) => (
-                  <a href={record.href} key={`${focusNode.id}-${record.href}`}>
-                    <span>{record.eyebrow ?? "Record"}</span>
-                    <strong>{record.label}</strong>
-                    {record.summary ? <p>{record.summary}</p> : null}
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <p className="evidence-empty">No retained or public records are linked from this object yet.</p>
-            )}
-          </section>
-
-          <section className="evidence-compartment evidence-compartment--relations">
-            <div className="evidence-compartment__label">Typed relations</div>
-            {relations.length ? (
-              <div className="evidence-relations">
-                {relations.map((relation) => (
-                  <button
-                    key={`${relation.from}-${relation.to}-${relation.type}`}
-                    onClick={() => onNavigate(relation.node.id)}
-                    data-edge-type={relation.type}
-                  >
-                    <span>{relation.direction === "outgoing" ? relation.label : `incoming · ${relation.label}`}</span>
-                    <strong>{relation.node.label}</strong>
-                    <small>{relation.type}</small>
-                  </button>
-                ))}
-              </div>
-            ) : (
-              <p className="evidence-empty">No typed cross-tree relations are declared for this object yet.</p>
-            )}
-          </section>
+          <ClaimSection profile={profile} />
+          <SourceSection sources={profile.sources} />
+          <LimitsSection profile={profile} />
+          <HistorySection events={profile.events} />
         </div>
-      </section>
+      </article>
     </main>
   );
 }
 
-function FounderEvidenceView() {
+function BranchEvidenceView({ focusNode, onNavigate }: EvidenceViewProps) {
+  const summary = getBranchEvidenceSummary(focusNode);
+  const shownGates = summary.gates.slice(0, 8);
+  const remainingGates = summary.gates.length - shownGates.length;
+
   return (
     <main className="world-viewport evidence-viewport">
-      <section className="evidence-view founder-evidence-view" aria-label={`Founder evidence for ${founderProfile.name}`}>
+      <article className="evidence-view evidence-view--branch" aria-label={`Portfolio evidence for ${focusNode.label}`}>
         <header className="evidence-view__heading">
           <div>
-            <p className="eyebrow">Founder evidence</p>
-            <h1>{founderProfile.name}</h1>
-            <p>
-              Evidence here answers a narrower question than the Lab’s research evidence: what supports the founder’s
-              provenance, operating experience, continuity of work, and present institutional responsibility?
-            </p>
+            <p className="eyebrow">Portfolio evidence</p>
+            <h1>{focusNode.label}</h1>
+            <p>{summary.question}</p>
           </div>
           <dl className="evidence-view__scope">
             <div>
-              <dt>Subject</dt>
-              <dd>{founderProfile.name}</dd>
+              <dt>Evidence-bearing objects</dt>
+              <dd>{summary.items.length}</dd>
             </div>
             <div>
-              <dt>Role</dt>
-              <dd>{founderProfile.role}</dd>
+              <dt>Standing categories</dt>
+              <dd>{summary.stageCounts.length}</dd>
             </div>
             <div>
-              <dt>Evidence mode</dt>
-              <dd>provenance + delivery record</dd>
+              <dt>Declared next gates</dt>
+              <dd>{summary.gates.length}</dd>
             </div>
             <div>
-              <dt>Claim boundary</dt>
-              <dd>biography is not validation</dd>
+              <dt>Admitted changes</dt>
+              <dd>{summary.events.length}</dd>
             </div>
           </dl>
         </header>
 
         <div className="evidence-view__grid">
-          <section className="evidence-compartment evidence-compartment--standing">
-            <div className="evidence-compartment__label">Present standing</div>
-            <strong>Founder and current steward</strong>
-            <p>{founderProfile.currentPhase}</p>
-          </section>
+          {summary.stageCounts.length ? (
+            <section className="evidence-section evidence-section--distribution">
+              <header className="evidence-section__heading">
+                <span>Standing</span>
+                <h2>Current portfolio distribution</h2>
+              </header>
+              <dl className="evidence-distribution">
+                {summary.stageCounts.map(({ stage, count }) => (
+                  <div key={stage} data-stage={stage}>
+                    <dt>{humanize(stage)}</dt>
+                    <dd>{count}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          ) : null}
 
-          <section className="evidence-compartment">
-            <div className="evidence-compartment__label">Public provenance record</div>
-            <div className="evidence-records">
-              <Link href="/about/provenance">
-                <span>Origin and lineage</span>
-                <strong>Provenance</strong>
-                <p>Founder history, work substance, and institutional stewardship are kept as distinct claims.</p>
-              </Link>
-              <Link href="/about/the-lab">
-                <span>Institutional responsibility</span>
-                <strong>The Lab</strong>
-                <p>Formation-stage stewardship, founder concentration risk, governance, correction, and continuity.</p>
-              </Link>
-            </div>
-          </section>
-
-          <section className="evidence-compartment evidence-compartment--ledger">
-            <div className="evidence-compartment__label">Evidence basis</div>
-            <div className="evidence-cards">
-              {founderEvidenceItems.map((item) => (
-                <article key={item.label}>
-                  <span>{item.eyebrow}</span>
-                  <strong>{item.label}</strong>
-                  <p>{item.summary}</p>
-                  <small>{item.source}</small>
-                </article>
+          <section className="evidence-section evidence-section--portfolio">
+            <header className="evidence-section__heading">
+              <span>Evidence-bearing work</span>
+              <h2>Objects with declared standing or support</h2>
+            </header>
+            <div className="evidence-portfolio">
+              {summary.items.map((item) => (
+                <button type="button" key={item.node.id} onClick={() => onNavigate(item.node.id)} data-stage={item.stage}>
+                  <span>{humanize(item.stage)}</span>
+                  <strong>{item.node.label}</strong>
+                  <small>{item.standing}</small>
+                  <i aria-hidden="true">View evidence →</i>
+                </button>
               ))}
             </div>
           </section>
 
-          <section className="evidence-compartment evidence-compartment--relations">
-            <div className="evidence-compartment__label">Claim boundaries</div>
-            <ul className="evidence-source-list">
-              {founderClaimBoundaries.map((boundary) => (
-                <li key={boundary}>{boundary}</li>
-              ))}
-            </ul>
-          </section>
+          {shownGates.length ? (
+            <section className="evidence-section evidence-section--gates">
+              <header className="evidence-section__heading">
+                <span>Promotion gates</span>
+                <h2>What must happen next</h2>
+              </header>
+              <div className="evidence-gates">
+                {shownGates.map(({ node, gate }) => (
+                  <article key={node.id}>
+                    <button type="button" onClick={() => onNavigate(node.id)}>{node.label}</button>
+                    <p>{gate}</p>
+                  </article>
+                ))}
+                {remainingGates > 0 ? (
+                  <p className="evidence-gates__remainder">
+                    {remainingGates} additional {remainingGates === 1 ? "gate is" : "gates are"} available on individual evidence views.
+                  </p>
+                ) : null}
+              </div>
+            </section>
+          ) : null}
+
+          {summary.events.length ? (
+            <section className="evidence-section evidence-section--history">
+              <header className="evidence-section__heading">
+                <span>Recent changes</span>
+                <h2>Admitted changes across this portfolio</h2>
+              </header>
+              <EventCards events={summary.events} showNode />
+            </section>
+          ) : null}
         </div>
-      </section>
+      </article>
     </main>
   );
+}
+
+export function EvidenceView(props: EvidenceViewProps) {
+  if (props.focusNode.kind === "branch") return <BranchEvidenceView {...props} />;
+  return <ObjectEvidenceView focusNode={props.focusNode} />;
 }

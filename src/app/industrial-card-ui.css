@@ -2,13 +2,13 @@
    This is the production card-shell refinement. It consumes the shared --bf-* semantic
    palette and leaves the Apparatus renderer intentionally unimplemented.
 
-   Material = structure. Violet = operator agency. State colors = observed condition.
+   Material = structure. Green = operator agency. State colors = observed condition.
    Gradients describe shallow material depth only; wear implies use, not neglect. */
 
 body[data-ui-shell="cards"] {
   background:
     radial-gradient(circle at 18% 12%, rgba(119, 185, 232, 0.025), transparent 28rem),
-    radial-gradient(circle at 82% 76%, rgba(169, 140, 255, 0.022), transparent 34rem),
+    radial-gradient(circle at 82% 76%, color-mix(in srgb, var(--bf-action) 2.2%, transparent), transparent 34rem),
     linear-gradient(145deg, #151c22, var(--bf-bg-frame) 56%);
   color: var(--bf-text-primary);
 }
@@ -22,7 +22,7 @@ body[data-ui-shell="cards"] .site-shell {
 body[data-ui-shell="cards"] .hero-screen {
   color: var(--bf-text-primary);
   background:
-    radial-gradient(circle at 74% 42%, rgba(169, 140, 255, 0.055), transparent 28rem),
+    radial-gradient(circle at 74% 42%, color-mix(in srgb, var(--bf-action) 5.5%, transparent), transparent 28rem),
     linear-gradient(122deg, rgba(255, 255, 255, 0.025), transparent 44%),
     var(--bf-bg-base);
 }
@@ -104,7 +104,7 @@ body[data-ui-shell="cards"] .hero-apparatus__core {
   box-shadow:
     0 12px 32px rgba(0, 0, 0, 0.34),
     inset 0 0 0 5px rgba(0, 0, 0, 0.12),
-    0 0 24px rgba(169, 140, 255, 0.045);
+    0 0 24px color-mix(in srgb, var(--bf-action) 4.5%, transparent);
 }
 
 body[data-ui-shell="cards"] .hero-screen__footer {
@@ -196,7 +196,7 @@ body[data-ui-shell="cards"] .projection-switcher button[aria-pressed="true"] {
   color: var(--bf-action-hover);
   box-shadow:
     inset 0 1px 0 var(--bf-edge-highlight),
-    0 0 0 1px rgba(169, 140, 255, 0.08);
+    0 0 0 1px color-mix(in srgb, var(--bf-action) 8%, transparent);
 }
 
 body[data-ui-shell="cards"] .boundary-frame__right button,
@@ -237,7 +237,7 @@ body[data-ui-shell="cards"] li[aria-current="page"] .path-node__dot {
 body[data-ui-shell="cards"] .world-viewport {
   background:
     radial-gradient(circle at 18% 16%, rgba(119, 185, 232, 0.027), transparent 27rem),
-    radial-gradient(circle at 76% 78%, rgba(169, 140, 255, 0.018), transparent 34rem),
+    radial-gradient(circle at 76% 78%, color-mix(in srgb, var(--bf-action) 1.8%, transparent), transparent 34rem),
     linear-gradient(115deg, rgba(255, 255, 255, 0.012), transparent 42%),
     var(--bf-bg-base);
   box-shadow:
@@ -310,7 +310,7 @@ body[data-ui-shell="cards"] .district-card:hover {
   box-shadow:
     0 12px 28px rgba(0, 0, 0, 0.36),
     inset 0 1px 0 var(--bf-edge-highlight-strong),
-    0 0 0 1px rgba(169, 140, 255, 0.05);
+    0 0 0 1px color-mix(in srgb, var(--bf-action) 5%, transparent);
 }
 
 body[data-ui-shell="cards"] .district-card:hover::before,

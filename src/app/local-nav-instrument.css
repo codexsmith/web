@@ -213,7 +213,7 @@ body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tra
     background: var(--bf-action-pressed);
     box-shadow:
       0 0 0 2px var(--nav-chassis),
-      0 0 0 4px rgba(169, 140, 255, 0.11);
+      0 0 0 4px color-mix(in srgb, var(--bf-action) 11%, transparent);
   }
 
   body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button {
@@ -243,7 +243,7 @@ body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .frame-home-tra
   body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .local-nav__links button.is-active {
     border-color: var(--bf-action-line);
     background:
-      linear-gradient(90deg, rgba(169, 140, 255, 0.13), transparent 76%),
+      linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 13%, transparent), transparent 76%),
       var(--nav-control-active);
     color: var(--bf-workshop-100);
     box-shadow:

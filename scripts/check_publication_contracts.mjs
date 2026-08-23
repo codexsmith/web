@@ -105,15 +105,20 @@ for (const path of [
 }
 
 requireMatch(
-  "src/components/world-view.tsx",
-  /publication-status-chip[\s\S]*Publication development[\s\S]*Next gate/,
-  "World and Record projections must expose publication development state and next gate",
+  "src/components/subject-pane.tsx",
+  /publication-status-chip[\s\S]*Next publication gate[\s\S]*publication\.nextGate/,
+  "World must expose publication development state and next gate",
 );
 
 requireMatch(
+  "src/lib/evidence-content.ts",
+  /publication-manuscript[\s\S]*Manuscript maturity and epistemic validity remain separate axes/,
+  "Evidence projection must describe a human-facing publication source and keep manuscript state separate from validation",
+);
+requireMatch(
   "src/components/evidence-view.tsx",
-  /publication\.sourceRef[\s\S]*Publication development state is independent/,
-  "Evidence projection must expose publication source and keep publication state separate from validation",
+  /Records behind the claims[\s\S]*What remains outside the claim/,
+  "Evidence projection must bind publication claims to sources and explicit limits",
 );
 
 requireMatch(

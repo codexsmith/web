@@ -6,10 +6,6 @@ type ProductOverride = Partial<
 
 const productOverrides: Record<string, ProductOverride> = {
   products: {
-    body: [
-      "The visible product spine is a curated projection over a larger work graph. Grouping something under Current Work, Shipped Work, Product Pipeline, or Tools & Experiments does not change the underlying artifact's identity, provenance, maturity, or evidence boundary.",
-      "The retained work corpus contains programs, products, product families, professional instruments, protocols, utilities, and research-heavy opportunities at different stages. The public spine promotes only the distinctions useful for navigation while keeping richer adjacent work available as inspectable context.",
-    ],
     links: [
       {
         label: "Current Work",
@@ -28,6 +24,18 @@ const productOverrides: Record<string, ProductOverride> = {
         href: "/products/pipeline",
         eyebrow: "Governed concepts",
         summary: "Developed, recurring, and emerging concepts that have not earned a shipped-product claim.",
+      },
+      {
+        label: "How We Work",
+        href: "/about/how-we-work",
+        eyebrow: "Release discipline",
+        summary: "How maturity, evidence, testing, repair, and promotion are kept distinct.",
+      },
+      {
+        label: "Research",
+        href: "/research",
+        eyebrow: "Support layer",
+        summary: "The mechanisms and evidence beneath products, methods, and bounded pilots.",
       },
     ],
     inspection: [

@@ -1,0 +1,574 @@
+/* Evidence projection ----------------------------------------------------
+   Evidence is a claim ledger, not a second navigation surface. Branches
+   summarize evidence-bearing descendants; leaves bind claims to sources,
+   boundaries, gates, and admitted changes. */
+
+.evidence-viewport {
+  overflow: hidden;
+  padding: clamp(14px, 2.4vw, 34px);
+}
+
+.evidence-view {
+  width: min(1380px, 100%);
+  height: 100%;
+  margin-inline: auto;
+  overflow-y: auto;
+  padding: clamp(22px, 3vw, 42px);
+  border: 1px solid var(--bf-border-default);
+  border-radius: 18px;
+  background:
+    linear-gradient(rgba(170, 180, 184, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(170, 180, 184, 0.022) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.025), transparent 58%),
+    var(--bf-bg-base);
+  background-size: 36px 36px, 36px 36px, auto, auto;
+  color: var(--bf-text-primary);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.28);
+  scrollbar-width: thin;
+}
+
+.evidence-view__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: clamp(24px, 4vw, 58px);
+  align-items: end;
+  padding-bottom: clamp(22px, 3vw, 34px);
+  border-bottom: 1px solid var(--bf-border-subtle);
+}
+
+.evidence-view__heading h1 {
+  max-width: 880px;
+  margin: 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 5.6vw, 5.6rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+}
+
+.evidence-view__heading > div > p:not(.eyebrow) {
+  max-width: 700px;
+  margin: 1.1rem 0 0;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.9rem, 1.2vw, 1.04rem);
+  line-height: 1.58;
+}
+
+.evidence-view__scope {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bf-bg-surface) 82%, transparent);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+.evidence-view__scope > div {
+  min-width: 0;
+  padding: 0.78rem 0.82rem;
+  border-right: 1px solid var(--bf-border-subtle);
+  border-bottom: 1px solid var(--bf-border-subtle);
+}
+
+.evidence-view__scope > div:nth-child(2n) {
+  border-right: 0;
+}
+
+.evidence-view__scope > div:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.evidence-view__scope dt,
+.evidence-sources dt,
+.evidence-events dt {
+  color: var(--bf-text-muted);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.evidence-view__scope dd,
+.evidence-sources dd,
+.evidence-events dd {
+  margin: 0.3rem 0 0;
+  color: var(--bf-text-primary);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.evidence-ceiling {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  margin-top: 14px;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--bf-action-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bf-action-surface) 58%, var(--bf-bg-surface));
+}
+
+.evidence-ceiling > span,
+.evidence-section__heading > span,
+.evidence-claim__standing,
+.evidence-claim__support > span,
+.evidence-claim__boundary > span {
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.evidence-ceiling p {
+  margin: 0;
+  color: var(--bf-text-primary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.evidence-view__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.evidence-section {
+  min-width: 0;
+  padding: clamp(16px, 2vw, 24px);
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: 12px;
+  background: var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+.evidence-section--claims,
+.evidence-section--portfolio,
+.evidence-section--history {
+  grid-column: 1 / -1;
+}
+
+.evidence-section__heading {
+  display: grid;
+  gap: 0.32rem;
+  margin-bottom: 1rem;
+}
+
+.evidence-section__heading h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.evidence-claims,
+.evidence-sources,
+.evidence-events,
+.evidence-gates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.evidence-claims > article,
+.evidence-sources > article,
+.evidence-events > article,
+.evidence-gates > article {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: 10px;
+  background: var(--bf-bg-base);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+.evidence-claims > article {
+  display: grid;
+  gap: 0.78rem;
+  border-left: 3px solid var(--accent);
+}
+
+.evidence-claims h3,
+.evidence-sources h3,
+.evidence-events h3 {
+  margin: 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+  line-height: 1.32;
+}
+
+.evidence-claim__support {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.evidence-claim__support ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evidence-claim__support a,
+.evidence-sources article > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0.34rem 0.52rem;
+  border: 1px solid var(--bf-action-line);
+  border-radius: 6px;
+  background: var(--bf-action-surface);
+  color: var(--bf-text-primary);
+  font-size: 0.72rem;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.evidence-claim__support a:hover,
+.evidence-sources article > a:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--bf-action-surface) 68%, var(--bf-bg-raised));
+}
+
+.evidence-claim__boundary {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 0.72rem;
+  border-top: 1px dotted var(--bf-border-default);
+}
+
+.evidence-claim__boundary p,
+.evidence-sources p,
+.evidence-events p,
+.evidence-gates p,
+.evidence-gates__remainder {
+  margin: 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.evidence-sources > article {
+  display: grid;
+  gap: 0.65rem;
+  scroll-margin-top: 1rem;
+}
+
+.evidence-sources > article:target {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--bf-action-surface), inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+.evidence-sources article > header,
+.evidence-events article > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: flex-start;
+}
+
+.evidence-sources article > header > span,
+.evidence-events article > header > div > span {
+  color: var(--accent);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.evidence-sources article > header > small {
+  flex: 0 0 auto;
+  padding: 0.22rem 0.38rem;
+  border: 1px solid var(--bf-border-default);
+  border-radius: 999px;
+  color: var(--bf-text-secondary);
+  font-size: 0.6rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.evidence-sources article > header > small[data-availability="public"] {
+  border-color: color-mix(in srgb, var(--bf-valid) 55%, transparent);
+  color: var(--bf-valid);
+}
+
+.evidence-sources article > header > small[data-availability="internal"] {
+  color: var(--bf-attention);
+}
+
+.evidence-sources dl,
+.evidence-events dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin: 0;
+}
+
+.evidence-sources dl > div,
+.evidence-events dl > div {
+  min-width: 0;
+  padding: 0.52rem;
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: 7px;
+  background: var(--bf-recess);
+}
+
+.evidence-limits {
+  display: grid;
+  gap: 1rem;
+}
+
+.evidence-limits h3 {
+  margin: 0 0 0.55rem;
+  color: var(--bf-text-primary);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.evidence-limits ul {
+  display: grid;
+  gap: 0.58rem;
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.evidence-limits li {
+  color: var(--bf-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.evidence-events > article {
+  display: grid;
+  gap: 0.72rem;
+  border-left: 3px solid var(--bf-border-default);
+}
+
+.evidence-events article > header > div {
+  display: grid;
+  gap: 0.28rem;
+}
+
+.evidence-event__date {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 0.18rem;
+  text-align: right;
+}
+
+.evidence-event__date time,
+.evidence-events article > header > time {
+  color: var(--bf-text-secondary);
+  font-size: 0.68rem;
+}
+
+.evidence-event__date small {
+  color: var(--bf-text-muted);
+  font-size: 0.58rem;
+}
+
+.evidence-distribution {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.evidence-distribution > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.7rem;
+  border: 1px solid var(--bf-border-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bf-bg-base);
+}
+
+.evidence-distribution dt {
+  color: var(--bf-text-secondary);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.evidence-distribution dd {
+  margin: 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+}
+
+.evidence-portfolio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.evidence-portfolio > button {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.48rem;
+  min-height: 150px;
+  padding: 0.9rem;
+  border: 1px solid var(--bf-border-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: 9px;
+  background: var(--bf-bg-control);
+  color: var(--bf-text-primary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.evidence-portfolio > button:hover {
+  border-color: var(--bf-action-line);
+  border-left-color: var(--accent);
+  background: var(--bf-bg-raised);
+}
+
+.evidence-portfolio > button > span,
+.evidence-portfolio > button > i {
+  color: var(--accent);
+  font-size: 0.62rem;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.evidence-portfolio > button > strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.evidence-portfolio > button > small {
+  color: var(--bf-text-secondary);
+  font-size: 0.72rem;
+  line-height: 1.38;
+}
+
+.evidence-gates > article {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.evidence-gates button {
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  text-align: left;
+}
+
+.evidence-gates button:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.evidence-gates__remainder {
+  grid-column: 1 / -1;
+  padding: 0.7rem 0.85rem;
+  border: 1px dashed var(--bf-border-default);
+  border-radius: 8px;
+}
+
+@media (max-width: 1050px) {
+  .evidence-view__heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .evidence-portfolio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .evidence-viewport {
+    padding: 8px;
+  }
+
+  .evidence-view {
+    padding: 20px 14px 42px;
+    border-radius: 12px;
+  }
+
+  .evidence-view__heading h1 {
+    font-size: clamp(2.55rem, 12vw, 4.25rem);
+  }
+
+  .evidence-view__scope,
+  .evidence-view__grid,
+  .evidence-claims,
+  .evidence-sources,
+  .evidence-events,
+  .evidence-gates,
+  .evidence-portfolio {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-view__scope > div,
+  .evidence-view__scope > div:nth-child(2n),
+  .evidence-view__scope > div:nth-last-child(-n + 2) {
+    border-right: 0;
+    border-bottom: 1px solid var(--bf-border-subtle);
+  }
+
+  .evidence-view__scope > div:last-child {
+    border-bottom: 0;
+  }
+
+  .evidence-ceiling {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .evidence-section--claims,
+  .evidence-section--portfolio,
+  .evidence-section--history,
+  .evidence-gates__remainder {
+    grid-column: auto;
+  }
+
+  .evidence-portfolio > button {
+    min-height: 0;
+  }
+
+  .evidence-sources dl,
+  .evidence-events dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evidence-portfolio > button,
+  .evidence-claim__support a,
+  .evidence-sources article > a {
+    transition: none;
+  }
+}
+

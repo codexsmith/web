@@ -3,7 +3,7 @@
  *
  * Scope: non-root World pages only. The navigation/frame apparatus is deliberately
  * untouched. Main content plates stay dark and quiet; smaller actionable/inset
- * surfaces step brighter. Violet remains operator agency, while status colors retain
+ * surfaces step brighter. Green remains operator agency, while status colors retain
  * their existing machine-state semantics.
  */
 
@@ -251,7 +251,7 @@ body[data-ui-shell="cards"] .site-shell[data-root-focus="false"][data-projection
 body[data-ui-shell="cards"] .site-shell[data-root-focus="false"][data-projection="world"] .branch-world:not(.branch-world--root-world) .district-card__number {
   border-color: var(--bf-action-line);
   border-radius: 5px;
-  background: rgba(169, 140, 255, 0.08);
+  background: color-mix(in srgb, var(--bf-action) 8%, transparent);
   color: var(--bf-action-hover);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }

@@ -6,16 +6,6 @@
   font-family: Georgia, "Times New Roman", serif;
 }
 
-.branch-world > .world-heading {
-  grid-row: 1 / span 8;
-}
-
-.branch-world__context-section {
-  grid-column: 2;
-  margin-top: 0;
-  align-self: start;
-}
-
 .branch-world__exploratory-section {
   padding: 1rem;
   border: 1px dashed var(--line-strong);
