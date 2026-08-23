@@ -1,0 +1,100 @@
+{
+  "packet": "bfux_traversal_apparatus_refinement",
+  "version": "2026-08-23",
+  "status": "implemented_design_pass_archive",
+  "repository": "codexsmith/web",
+  "branch": "feature/v2-spine-integration",
+  "implementation_parent": "ce04350bad2dd28546a3500754ac3d73a95af2c5",
+  "purpose": "Preserve the design reasoning, navigation invariant, implementation evolution, and visual references from the August 2026 Boundary First UX traversal/apparatus refinement pass.",
+  "core_invariant": "Navigation is graph traversal, not address selection.",
+  "website_projection": {
+    "rail": [
+      "realized traversal history",
+      "current focus",
+      "same-level alternatives"
+    ],
+    "page": [
+      "current subject meaning",
+      "contained children",
+      "deeper actions and disclosures"
+    ],
+    "temporal_controls": ["back", "forward"],
+    "nonlocal_context_change": ["search"]
+  },
+  "documents": [
+    "README.md",
+    "DESIGN_INVARIANTS.md",
+    "IMPLEMENTATION_LOG.md",
+    "VISUAL_REFERENCES.md",
+    "MANIFEST.json"
+  ],
+  "images": [
+    {
+      "path": "images/concept_root_apparatus.webp",
+      "kind": "generated_concept",
+      "role": "canonical overall apparatus morphology reference",
+      "preview_dimensions": "480x270"
+    },
+    {
+      "path": "images/concept_aspirations_branch.webp",
+      "kind": "generated_concept",
+      "role": "branch-level traversal and apparatus reference",
+      "preview_dimensions": "480x270"
+    },
+    {
+      "path": "images/concept_need_capacity_leaf.webp",
+      "kind": "generated_concept",
+      "role": "deep leaf / working instrument reference",
+      "preview_dimensions": "480x270"
+    },
+    {
+      "path": "images/concept_root_interface_map.webp",
+      "kind": "generated_concept",
+      "role": "annotated interface anatomy / morphology map",
+      "preview_dimensions": "480x360"
+    },
+    {
+      "path": "images/implementation_root_world.webp",
+      "kind": "implementation_snapshot",
+      "role": "production Card renderer state reference",
+      "preview_dimensions": "480x218"
+    },
+    {
+      "path": "images/implementation_secondary_products_issue.webp",
+      "kind": "implementation_observation",
+      "role": "evidence for top-first branch layout and content-sized nav height",
+      "preview_dimensions": "420x423"
+    },
+    {
+      "path": "images/implementation_traversal_spacing_issue.webp",
+      "kind": "implementation_observation",
+      "role": "evidence for narrower rail and single compact alignment column",
+      "preview_dimensions": "337x623"
+    }
+  ],
+  "visual_reference_policy": {
+    "format": "optimized WebP archival previews",
+    "generated_originals": "higher resolution",
+    "concepts_define": [
+      "hierarchy",
+      "composition",
+      "control morphology",
+      "material relationships",
+      "typographic rhythm"
+    ],
+    "concepts_do_not_authorize": [
+      "fake telemetry",
+      "unsupported counts",
+      "system health claims",
+      "controls without handlers",
+      "content-model relationships that do not exist"
+    ]
+  },
+  "latest_geometry": {
+    "desktop_traversal_width": "clamp(196px, 15vw, 232px)",
+    "history": "bounded internal scrolling with auto-follow to latest traversal entries",
+    "alignment": "one compact column for history, current focus, and peer choices",
+    "secondary_world": "full-width title row; subject overview and contained regions beneath",
+    "small_screen": "editorial/newspaper flow"
+  }
+}
