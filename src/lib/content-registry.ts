@@ -26,16 +26,11 @@ export type {
 } from "@/lib/content";
 export type { PublicationMetadata, PublicationStage } from "@/lib/publication-types";
 
-export const nodes: ContentNode[] = [
-  ...baseNodes,
-  ...publicationNodes,
-  ...persistencePublicationNodes,
-];
-export const edges: GraphEdge[] = [
-  ...baseEdges,
-  ...publicationEdges,
-  ...persistencePublicationEdges,
-];
+export const nodes: ContentNode[] = [...baseNodes, ...publicationNodes];
+nodes.push(...persistencePublicationNodes);
+
+export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
+edges.push(...persistencePublicationEdges);
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const nodeByPath = new Map(nodes.map((node) => [node.path, node]));
