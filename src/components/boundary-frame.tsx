@@ -13,6 +13,7 @@ import {
 type BoundaryFrameProps = {
   visible: boolean;
   focusNode: ContentNode;
+  parentNode?: ContentNode;
   traversalPath: ContentNode[];
   traversalCursor: number;
   siblings: ContentNode[];
@@ -23,6 +24,7 @@ type BoundaryFrameProps = {
   canProcessZoomOut: boolean;
   canProcessZoomIn: boolean;
   onHome: () => void;
+  onUp: () => void;
   onBack: () => void;
   onForward: () => void;
   onLocalNavigate: (id: string) => void;
@@ -33,7 +35,7 @@ type BoundaryFrameProps = {
   onSearch: () => void;
 };
 
-type FrameIconName = "back" | "forward" | "search" | "minus" | "plus";
+type FrameIconName = "back" | "forward" | "up" | "search" | "minus" | "plus";
 
 const rootProjectionLabels: Record<ProjectionMode, string> = {
   world: "World",
@@ -60,6 +62,15 @@ function FrameIcon({ name }: { name: FrameIconName }) {
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d={isForward ? "m14 5 6 6-6 6" : "M10 5 4 11l6 6"} />
         <path d={isForward ? "M19 11h-8.5A6.5 6.5 0 0 0 4 17.5" : "M5 11h8.5a6.5 6.5 0 0 1 6.5 6.5"} />
+      </svg>
+    );
+  }
+
+  if (name === "up") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m6 14 6-6 6 6" />
+        <path d="M12 8v10" />
       </svg>
     );
   }
@@ -107,6 +118,7 @@ function SiblingChoices({
 export function BoundaryFrame({
   visible,
   focusNode,
+  parentNode,
   traversalPath,
   traversalCursor,
   siblings,
@@ -117,6 +129,7 @@ export function BoundaryFrame({
   canProcessZoomOut,
   canProcessZoomIn,
   onHome,
+  onUp,
   onBack,
   onForward,
   onLocalNavigate,
@@ -138,7 +151,7 @@ export function BoundaryFrame({
   );
   const siblingNodes = peerNodes;
   const hasTrace = traversalPath.length > 1;
-  const showLeftNav = !isRootFocus && (displayHistory.length > 0 || siblingNodes.length > 0);
+  const showLeftNav = !isRootFocus && (displayHistory.length > 0 || siblingNodes.length > 0 || Boolean(parentNode));
   const historyViewportRef = useRef<HTMLDivElement>(null);
 
   const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
@@ -304,38 +317,22 @@ export function BoundaryFrame({
                 <section className="traversal-nav__history" aria-label="Focus traversal history">
                   <div className="traversal-nav__history-viewport" ref={historyViewportRef}>
                     <ol>
-                      {displayHistory.map(({ node, index }, displayIndex) => {
-                        const copy = (
-                          <>
+                      {displayHistory.map(({ node, index }, displayIndex) => (
+                        <li key={`${node.id}-${index}`}>
+                          <span className="traversal-nav__history-terminal" aria-hidden="true" />
+                          <button
+                            className="traversal-nav__history-node"
+                            onClick={() => {
+                              if (onTraversalPath) onTraversalPath(node.id, index);
+                              else onBack();
+                            }}
+                            title={`Jump to ${node.label}`}
+                          >
                             <span>{node.shortLabel ?? node.label}</span>
                             <small>{String(displayIndex + 1).padStart(2, "0")}</small>
-                          </>
-                        );
-
-                        return (
-                          <li key={`${node.id}-${index}`}>
-                            <span className="traversal-nav__history-terminal" aria-hidden="true" />
-                            <div
-                              role="button"
-                              tabIndex={0}
-                              className="traversal-nav__history-node"
-                              onClick={() => {
-                                if (onTraversalPath) onTraversalPath(node.id, index);
-                                else onBack();
-                              }}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  if (onTraversalPath) onTraversalPath(node.id, index);
-                                  else onBack();
-                                }
-                              }}
-                              title={`Jump to ${node.label}`}
-                            >
-                              {copy}
-                            </div>
-                          </li>
-                        );
-                      })}
+                          </button>
+                        </li>
+                      ))}
                     </ol>
                   </div>
                 </section>
@@ -348,6 +345,21 @@ export function BoundaryFrame({
                   <strong>{focusNode.shortLabel ?? focusNode.label}</strong>
                 </div>
               </section>
+
+              {parentNode ? (
+                <section className="traversal-nav__containment" aria-label={`Containing boundary: ${parentNode.label}`}>
+                  <div className="traversal-nav__section-label">Contained by</div>
+                  <button
+                    className="traversal-nav__up"
+                    onClick={onUp}
+                    title={`Traverse up to ${parentNode.label}`}
+                  >
+                    <FrameIcon name="up" />
+                    <span>{parentNode.shortLabel ?? parentNode.label}</span>
+                    <small>parent boundary</small>
+                  </button>
+                </section>
+              ) : null}
 
               {siblingNodes.length ? (
                 <section className="traversal-nav__next" aria-label="Where you can go next">
