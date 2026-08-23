@@ -11,7 +11,7 @@ import { InspectionPanel } from "@/components/inspection-panel";
 import { SearchPanel } from "@/components/search-panel";
 import { TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
-import { getNode, getNodeByPath, getPathForNode, getSiblings } from "@/lib/content-registry";
+import { getNode, getNodeByPath, getParent, getPathForNode, getSiblings } from "@/lib/content-registry";
 import { parseProcessScope, processScopes, type ProcessScope } from "@/lib/bfl-process";
 import {
   defaultProjectionForNode,
@@ -88,20 +88,31 @@ function stateUrl(
   return query ? `${focusPath}?${query}` : focusPath;
 }
 
-function appendTraversal(path: string[], targetId: string) {
-  if (path[path.length - 1] === targetId) return path;
-  return [...path, targetId];
-}
-
-function rewindTraversal(path: string[], targetId: string, targetIndex?: number) {
-  if (typeof targetIndex === "number" && path[targetIndex] === targetId) return targetIndex;
-  return path.lastIndexOf(targetId);
-}
-
 function normalizeTraversalCursor(path: string[], cursor: number | undefined) {
   if (!path.length) return -1;
   if (typeof cursor !== "number" || Number.isNaN(cursor)) return path.length - 1;
   return Math.min(Math.max(0, cursor), path.length - 1);
+}
+
+function branchTraversal(path: string[], cursor: number, targetId: string): TraversalState {
+  const normalizedCursor = normalizeTraversalCursor(path, cursor);
+  const activePath = normalizedCursor >= 0 ? path.slice(0, normalizedCursor + 1) : [];
+
+  if (activePath[activePath.length - 1] === targetId) {
+    return { ids: activePath, cursor: activePath.length - 1 };
+  }
+
+  const ids = [...activePath, targetId];
+  return { ids, cursor: ids.length - 1 };
+}
+
+function resolveExistingTraversalCursor(path: string[], cursor: number, targetId: string) {
+  const normalizedCursor = normalizeTraversalCursor(path, cursor);
+  if (normalizedCursor < 0) return -1;
+  if (path[normalizedCursor] === targetId) return normalizedCursor;
+  if (normalizedCursor > 0 && path[normalizedCursor - 1] === targetId) return normalizedCursor - 1;
+  if (normalizedCursor < path.length - 1 && path[normalizedCursor + 1] === targetId) return normalizedCursor + 1;
+  return path.lastIndexOf(targetId);
 }
 
 function readTraversalMemory(): TraversalState {
@@ -194,6 +205,8 @@ export function WorldApp({
   const [searchOpen, setSearchOpen] = useState(false);
 
   const focusNode = hydrateContentNode(getNode(focusId));
+  const parent = getParent(focusId);
+  const parentNode = parent ? hydrateContentNode(parent) : undefined;
   const sectionPathSegment = focusNode.path.split("/")[0];
   const sectionThemeId = ["public-interest", "products", "publications", "about", "research"]
     .includes(sectionPathSegment)
@@ -225,11 +238,10 @@ export function WorldApp({
     if (!remembered.ids.length) {
       restored = { ids: [initialNodeId], cursor: 0 };
     } else {
-      const rememberedFocus = remembered.ids[remembered.cursor] ?? remembered.ids[remembered.ids.length - 1];
-      const restoredIds = rememberedFocus === initialNodeId && remembered.cursor === remembered.ids.length - 1
-        ? remembered.ids
-        : appendTraversal(remembered.ids, initialNodeId);
-      restored = { ids: restoredIds, cursor: restoredIds.length - 1 };
+      const existingCursor = resolveExistingTraversalCursor(remembered.ids, remembered.cursor, initialNodeId);
+      restored = existingCursor >= 0
+        ? { ids: remembered.ids, cursor: existingCursor }
+        : branchTraversal(remembered.ids, remembered.cursor, initialNodeId);
     }
 
     writeTraversalMemory(restored.ids, restored.cursor);
@@ -256,8 +268,10 @@ export function WorldApp({
       let nextTraversal: TraversalState;
 
       if (remembered.ids.length) {
-        const nextIds = appendTraversal(remembered.ids, next.node.id);
-        nextTraversal = { ids: nextIds, cursor: nextIds.length - 1 };
+        const existingCursor = resolveExistingTraversalCursor(remembered.ids, remembered.cursor, next.node.id);
+        nextTraversal = existingCursor >= 0
+          ? { ids: remembered.ids, cursor: existingCursor }
+          : branchTraversal(remembered.ids, remembered.cursor, next.node.id);
       } else {
         nextTraversal = { ids: [next.node.id], cursor: 0 };
       }
@@ -325,12 +339,11 @@ export function WorldApp({
     (targetId: string, direction?: TransitionDirection) => {
       if (targetId === focusId) return;
 
-      const nextIds = appendTraversal(traversalIds, targetId);
-      const nextTraversal = { ids: nextIds, cursor: nextIds.length - 1 };
+      const nextTraversal = branchTraversal(traversalIds, traversalCursor, targetId);
       const nextProjection = normalizeProjectionForNode(targetId, projection);
 
       writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
-      setTraversalIds((current) => appendTraversal(current, targetId));
+      setTraversalIds(nextTraversal.ids);
       setTraversalCursor(nextTraversal.cursor);
       setTransitionDirection(direction ?? inferDirection(focusId, targetId));
       setTransitionKey((value) => value + 1);
@@ -339,7 +352,7 @@ export function WorldApp({
       setInspectionId(null);
       router.push(stateUrl(targetId, nextProjection, processScope, uiShell), { scroll: false });
     },
-    [focusId, processScope, projection, router, traversalIds, uiShell],
+    [focusId, processScope, projection, router, traversalCursor, traversalIds, uiShell],
   );
 
   const navigateLocal = useCallback(
@@ -397,9 +410,8 @@ export function WorldApp({
   );
 
   const navigateTraceBack = useCallback(() => {
-    const previousId = traversalIds[traversalCursor - 1];
-    if (previousId) navigate(previousId);
-  }, [navigate, traversalCursor, traversalIds]);
+    moveTraversalCursor(traversalCursor - 1);
+  }, [moveTraversalCursor, traversalCursor]);
 
   const navigateTraceForward = useCallback(() => {
     moveTraversalCursor(traversalCursor + 1);
@@ -407,12 +419,18 @@ export function WorldApp({
 
   const navigateTraversalPath = useCallback(
     (targetId: string, index: number) => {
-      const targetIndex = rewindTraversal(traversalIds, targetId, index);
-      if (targetIndex < 0) return;
-      navigate(targetId);
+      if (traversalIds[index] !== targetId) return;
+      moveTraversalCursor(index);
     },
-    [navigate, traversalIds],
+    [moveTraversalCursor, traversalIds],
   );
+
+  const navigateUp = useCallback(() => {
+    const nextParent = getParent(focusId);
+    if (!nextParent) return;
+    setSearchOpen(false);
+    navigate(nextParent.id, "up");
+  }, [focusId, navigate]);
 
   const changeProcessScope = useCallback(
     (nextScope: ProcessScope) => {
@@ -524,6 +542,7 @@ export function WorldApp({
           <BoundaryFrame
             visible
             focusNode={focusNode}
+            parentNode={parentNode}
             traversalPath={traversalPath}
             traversalCursor={traversalCursor}
             siblings={siblings}
@@ -534,6 +553,7 @@ export function WorldApp({
             canProcessZoomOut={canProcessZoomOut}
             canProcessZoomIn={canProcessZoomIn}
             onHome={navigateHome}
+            onUp={navigateUp}
             onBack={navigateTraceBack}
             onForward={navigateTraceForward}
             onLocalNavigate={navigateLocal}
