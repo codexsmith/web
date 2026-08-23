@@ -1,0 +1,98 @@
+/* P1 Boundary First topology and projection transport feedback. */
+
+body[data-ui-shell="cards"] .projection-transport-notice {
+  position: fixed;
+  z-index: 80;
+  top: calc(var(--frame-top) + 12px);
+  right: 16px;
+  width: min(360px, calc(100vw - 32px));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  padding: 11px 12px;
+  border: 1px solid var(--bf-action-line);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 10%, transparent), transparent 74%),
+    var(--bf-bg-raised);
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.2),
+    inset 3px 0 0 var(--bf-action),
+    inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .projection-transport-notice > span,
+body[data-ui-shell="cards"] .projection-transport-notice > small {
+  grid-column: 1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+body[data-ui-shell="cards"] .projection-transport-notice > span {
+  color: var(--bf-action-hover);
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .projection-transport-notice > strong {
+  grid-column: 1;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+body[data-ui-shell="cards"] .projection-transport-notice > small {
+  color: var(--bf-text-secondary);
+  font-size: 0.5rem;
+  line-height: 1.35;
+}
+
+body[data-ui-shell="cards"] .projection-transport-notice > button {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  padding: 6px 8px;
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: 5px;
+  background: var(--bf-bg-control);
+  color: var(--bf-text-secondary);
+  font-size: 0.52rem;
+  cursor: pointer;
+}
+
+body[data-ui-shell="cards"] .projection-transport-notice > button:hover {
+  border-color: var(--bf-action-line);
+  color: var(--bf-text-primary);
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="false"] .projection-transport-notice {
+    top: calc(var(--frame-top) + var(--trace-nav-shelf) + 8px);
+  }
+}
+
+@media (max-width: 620px) {
+  body[data-ui-shell="cards"] .projection-transport-notice {
+    right: 8px;
+    width: calc(100vw - 16px);
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-ui-shell="cards"] .projection-transport-notice > button {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .projection-transport-notice {
+    border: 1px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+  }
+}
