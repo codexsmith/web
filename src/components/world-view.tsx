@@ -8,6 +8,7 @@ import {
   getParent,
 } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { getWorldOrientation } from "@/lib/world-orientation";
 import { ActionCard, getSubjectActions, SubjectPane } from "@/components/subject-pane";
 
 export type TransitionDirection =
@@ -99,7 +100,9 @@ type RegionGridProps = {
 
 function RegionGrid({ node, regions, onNavigate, variant = "district" }: RegionGridProps) {
   const isOrientation = variant === "orientation";
+  const isRoot = node.id === "root";
   const isTopLevelSection = node.parentId === "root";
+  const usesBoundaryOrientation = isRoot || isTopLevelSection;
 
   return (
     <div
@@ -111,37 +114,46 @@ function RegionGrid({ node, regions, onNavigate, variant = "district" }: RegionG
       ].filter(Boolean).join(" ")}
       aria-label={isOrientation ? `${node.label} orientation` : `${node.label} regions`}
     >
-      {regions.map((child, index) => (
-        <button
-          key={child.id}
-          className={isOrientation
-            ? "section-region-card public-interest-panel public-interest-panel--link"
-            : "section-region-card district-card"}
-          data-kind={child.kind}
-          data-node-id={child.id}
-          onClick={() => onNavigate(child.id, "down")}
-          title={`View ${child.label}`}
-        >
-          {!isOrientation ? (
-            <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
-          ) : null}
-          <span className={isOrientation ? "public-interest-panel__kind" : "district-card__kind"}>
-            {child.eyebrow}
-          </span>
-          {!isOrientation && child.publication ? (
-            <span className="work-status-chip publication-status-chip" data-stage={child.publication.stage}>
-              {child.publication.label}
+      {regions.map((child, index) => {
+        const orientation = usesBoundaryOrientation ? getWorldOrientation(child.id) : undefined;
+
+        return (
+          <button
+            key={child.id}
+            className={isOrientation
+              ? "section-region-card public-interest-panel public-interest-panel--link"
+              : "section-region-card district-card"}
+            data-kind={child.kind}
+            data-node-id={child.id}
+            data-orientation={orientation ? "boundary" : undefined}
+            onClick={() => onNavigate(child.id, "down")}
+            title={`View ${child.label}`}
+          >
+            {!isOrientation ? (
+              <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
+            ) : null}
+            <span className={isOrientation ? "public-interest-panel__kind" : "district-card__kind"}>
+              {child.eyebrow}
             </span>
-          ) : !isOrientation && child.status ? (
-            <span className="work-status-chip" data-stage={child.status.stage}>{child.status.label}</span>
-          ) : null}
-          <strong>{child.label}</strong>
-          {!isTopLevelSection ? <p>{child.summary}</p> : null}
-          <span className={isOrientation ? "public-interest-panel__action" : "district-card__action"}>
-            View
-          </span>
-        </button>
-      ))}
+            {!isOrientation && child.publication ? (
+              <span className="work-status-chip publication-status-chip" data-stage={child.publication.stage}>
+                {child.publication.label}
+              </span>
+            ) : !isOrientation && child.status ? (
+              <span className="work-status-chip" data-stage={child.status.stage}>{child.status.label}</span>
+            ) : null}
+            <strong>{child.label}</strong>
+            {orientation ? (
+              <span className="section-region-card__boundary">{orientation.boundary}</span>
+            ) : !isTopLevelSection ? (
+              <p>{child.summary}</p>
+            ) : null}
+            <span className={isOrientation ? "public-interest-panel__action" : "district-card__action"}>
+              View
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 }
