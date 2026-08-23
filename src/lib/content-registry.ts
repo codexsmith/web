@@ -4,6 +4,10 @@ import {
   type ContentNode as BaseContentNode,
   type GraphEdge,
 } from "@/lib/content";
+import {
+  persistencePublicationEdges,
+  persistencePublicationNodes,
+} from "@/lib/persistence-effectiveness-publication";
 import { publicationEdges, publicationNodes } from "@/lib/publication-portfolio";
 import type { PublicationMetadata } from "@/lib/publication-types";
 
@@ -22,8 +26,16 @@ export type {
 } from "@/lib/content";
 export type { PublicationMetadata, PublicationStage } from "@/lib/publication-types";
 
-export const nodes: ContentNode[] = [...baseNodes, ...publicationNodes];
-export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
+export const nodes: ContentNode[] = [
+  ...baseNodes,
+  ...publicationNodes,
+  ...persistencePublicationNodes,
+];
+export const edges: GraphEdge[] = [
+  ...baseEdges,
+  ...publicationEdges,
+  ...persistencePublicationEdges,
+];
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const nodeByPath = new Map(nodes.map((node) => [node.path, node]));
