@@ -30,10 +30,15 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
   const [query, setQuery] = useState("");
   const [filters, setFilters] = useState<SearchFilters>(initialFilters);
   const panelRef = useRef<HTMLElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const restoreFocusRef = useRef<HTMLElement | null>(null);
   const index = useMemo(() => buildSearchIndex(), []);
   const facets = useMemo(() => searchFacetOptions(index), [index]);
-  const results = useMemo(() => searchLab(index, query, filters), [filters, index, query]);
+  const matchedResults = useMemo(
+    () => searchLab(index, query, filters, Number.MAX_SAFE_INTEGER),
+    [filters, index, query],
+  );
+  const results = matchedResults.slice(0, 14);
   const hasActiveFilters = filters.objectType !== "all"
     || filters.stage !== "all"
     || filters.relation !== "all"
@@ -43,6 +48,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
     restoreFocusRef.current = document.activeElement instanceof HTMLElement
       ? document.activeElement
       : null;
+    inputRef.current?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -83,6 +89,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
   const clearSearch = () => {
     setQuery("");
     setFilters(initialFilters);
+    inputRef.current?.focus();
   };
 
   return (
@@ -100,7 +107,7 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
         <label className="search-field">
           <span className="sr-only">Search</span>
           <input
-            autoFocus
+            ref={inputRef}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Accessibility, launch candidate, grounds, CityWatch, claim ceiling..."
@@ -161,7 +168,11 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
         </fieldset>
 
         <div className="search-result-summary" aria-live="polite">
-          <span>{results.length} admissible result{results.length === 1 ? "" : "s"}</span>
+          <span>
+            {matchedResults.length === results.length
+              ? `${results.length} admissible result${results.length === 1 ? "" : "s"}`
+              : `Showing ${results.length} of ${matchedResults.length} admissible results`}
+          </span>
           {(query || hasActiveFilters) ? (
             <button type="button" onClick={clearSearch}>Clear query and facets</button>
           ) : null}
