@@ -291,13 +291,11 @@ export function BoundaryFrame({
           <nav className="trace-nav apparatus-nav traversal-nav" aria-label={`Traversal continuity for ${focusNode.label}`}>
             <header className="apparatus-nav__header traversal-nav__header">
               <strong>Traversal</strong>
-              <span>Where you have been · nearby choices</span>
             </header>
 
             <div className="traversal-nav__flow">
               {history.length ? (
                 <section className="traversal-nav__history" aria-label="Focus traversal history">
-                  <div className="traversal-nav__section-label">Where you have been</div>
                   <div className="traversal-nav__history-viewport" ref={historyViewportRef}>
                     <ol>
                       {history.map((node, index) => {
@@ -346,7 +344,6 @@ export function BoundaryFrame({
 
               {siblingNodes.length ? (
                 <section className="traversal-nav__next" aria-label="Where you can go next">
-                  <div className="traversal-nav__section-label">Where you can go next</div>
                   <SiblingChoices nodes={siblingNodes} onNavigate={onLocalNavigate} />
                 </section>
               ) : null}
