@@ -10,6 +10,12 @@ export const projectionLabels: Record<ProjectionMode, string> = {
   gestalt: "Process",
 };
 
+export const projectionPurposes: Record<ProjectionMode, string> = {
+  world: "Content · context",
+  evidence: "Standing · sources",
+  gestalt: "Operating sequence",
+};
+
 export const projectionDescriptions: Record<ProjectionMode, string> = {
   world: "Primary content, spatial context, containment, and ordinary traversal",
   evidence: "Standing, provenance, evidence, lineage, and typed relations",
