@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { type ContentNode } from "@/lib/content-registry";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
@@ -48,12 +48,6 @@ const rootProjectionDescriptions: Record<ProjectionMode, string> = {
   evidence: "Evidence supporting founder provenance and operating history, with explicit claim boundaries.",
   gestalt: "Founder and institutional development timeline from practice to Boundary First Labs.",
 };
-
-const publicInterestPageSections = [
-  { id: "public-interest-overview", ariaLabel: "Go to Public Interest overview" },
-  { id: "public-interest-augusta", ariaLabel: "Go to Augusta Civic Infrastructure" },
-  { id: "public-interest-context", ariaLabel: "Go to Public Interest supporting context" },
-] as const;
 
 function FrameIcon({ name }: { name: FrameIconName }) {
   if (name === "back" || name === "forward") {
@@ -115,6 +109,22 @@ function SiblingChoices({
   );
 }
 
+function findSharedScrollContainer(sections: HTMLElement[]) {
+  let candidate = sections[0]?.parentElement;
+
+  while (candidate) {
+    const style = window.getComputedStyle(candidate);
+    const scrollable = /(auto|scroll|overlay)/.test(style.overflowY)
+      && candidate.scrollHeight > candidate.clientHeight;
+    const containsAllSections = sections.every((section) => candidate?.contains(section));
+
+    if (scrollable && containsAllSections) return candidate;
+    candidate = candidate.parentElement;
+  }
+
+  return undefined;
+}
+
 export function BoundaryFrame({
   visible,
   focusNode,
@@ -149,9 +159,12 @@ export function BoundaryFrame({
   const hasTrace = traversalPath.length > 1;
   const showLeftNav = !isRootFocus && (displayHistory.length > 0 || siblingNodes.length > 0 || Boolean(parentNode));
   const historyViewportRef = useRef<HTMLDivElement>(null);
-
-  const isPublicInterestWorld = focusNode.id === "public-interest" && projection === "world";
-  const [activePageSection, setActivePageSection] = useState<string>(publicInterestPageSections[0].id);
+  const localSections = useMemo(
+    () => projection === "world" ? focusNode.localSections ?? [] : [],
+    [focusNode, projection],
+  );
+  const showLocalSectionNav = localSections.length > 1;
+  const [activeLocalSection, setActiveLocalSection] = useState<string>("");
 
   useEffect(() => {
     const viewport = historyViewportRef.current;
@@ -165,37 +178,55 @@ export function BoundaryFrame({
   }, [focusNode.id, history.length, traversalCursor]);
 
   useEffect(() => {
-    if (!isPublicInterestWorld) return;
+    if (!showLocalSectionNav) {
+      setActiveLocalSection("");
+      return;
+    }
 
-    const container = document.querySelector<HTMLElement>(".public-interest-world");
-    if (!container) return;
-
-    const sections = publicInterestPageSections
+    const sections = localSections
       .map((section) => document.getElementById(section.id))
       .filter((section): section is HTMLElement => Boolean(section));
+    if (!sections.length) return;
 
-    const updateActivePage = () => {
-      const marker = container.scrollTop + container.clientHeight * 0.42;
-      let active = sections[0]?.id ?? publicInterestPageSections[0].id;
+    const container = findSharedScrollContainer(sections);
+
+    const updateActiveSection = () => {
+      const marker = container
+        ? container.getBoundingClientRect().top + container.clientHeight * 0.42
+        : window.innerHeight * 0.42;
+      let active = sections[0]?.id ?? localSections[0].id;
 
       sections.forEach((section) => {
-        if (section.offsetTop <= marker) active = section.id;
+        if (section.getBoundingClientRect().top <= marker) active = section.id;
       });
 
-      setActivePageSection(active);
+      setActiveLocalSection(active);
     };
 
-    updateActivePage();
-    container.addEventListener("scroll", updateActivePage, { passive: true });
-    return () => container.removeEventListener("scroll", updateActivePage);
-  }, [isPublicInterestWorld]);
+    updateActiveSection();
+    window.addEventListener("resize", updateActiveSection);
 
-  function jumpToPage(sectionId: string) {
+    if (container) {
+      container.addEventListener("scroll", updateActiveSection, { passive: true });
+      return () => {
+        container.removeEventListener("scroll", updateActiveSection);
+        window.removeEventListener("resize", updateActiveSection);
+      };
+    }
+
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [localSections, showLocalSectionNav]);
+
+  function jumpToLocalSection(sectionId: string) {
     const section = document.getElementById(sectionId);
     if (!section) return;
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setActivePageSection(sectionId);
+    setActiveLocalSection(sectionId);
     section.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }
 
@@ -367,15 +398,19 @@ export function BoundaryFrame({
         </aside>
       ) : null}
 
-      {isPublicInterestWorld ? (
-        <aside className="boundary-frame__right boundary-frame__pages" aria-label="Page position">
+      {showLocalSectionNav ? (
+        <aside
+          className="boundary-frame__right boundary-frame__pages"
+          aria-label={`Position within ${focusNode.label}`}
+        >
           <div className="page-position-nav">
-            {publicInterestPageSections.map((section) => (
+            {localSections.map((section) => (
               <button
                 key={section.id}
-                onClick={() => jumpToPage(section.id)}
-                aria-label={section.ariaLabel}
-                aria-current={activePageSection === section.id ? "page" : undefined}
+                onClick={() => jumpToLocalSection(section.id)}
+                aria-label={section.ariaLabel ?? `Go to ${section.label} within ${focusNode.label}`}
+                aria-current={activeLocalSection === section.id ? "page" : undefined}
+                title={section.label}
               >
                 <span aria-hidden="true" />
               </button>
