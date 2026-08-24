@@ -2,7 +2,7 @@
 
 This inventory reviews the active public manifest-backed records against their canonical BFUX graph objects.
 
-The structural migration is uniform: the legacy alias becomes a compatibility entrance and the retained record renders inside the canonical object's main content area. The visual/content migration is intentionally not uniform: each important record should eventually receive a composition suited to what it represents.
+The structural migration is uniform: the legacy alias becomes a compatibility entrance and the retained record renders inside the canonical object's main content area. The visual/content migration is intentionally not uniform: each important record receives a composition suited to what it represents.
 
 | Legacy alias | Canonical graph object | Detail status | Next design burden |
 | --- | --- | --- | --- |
@@ -15,7 +15,7 @@ The structural migration is uniform: the legacy alias becomes a compatibility en
 | `/schemathematics` | `/publications/research/schemathematics` | **Specialized P4 · formal research program / dependency atlas** | Validate formal-density legibility, the monoid→group dependency trace, and whether future definitions/propositions can enter without obscuring proof and claim standing. |
 | `/law` | `/research/applied-testbeds/law` | **Specialized P4 · provenance-first legal research instrument** | Validate authority-register density, claim-status legibility, synthetic-case boundaries, and adversarial doctrinal-review workflow. |
 | `/chess` | `/research/applied-testbeds/chess` | **Specialized P4 · practitioner decision board** | Validate position-lens density, five-pass commitment flow, consequence-trace legibility, and whether future worked positions can enter without implying engine validation. |
-| `/soccer` | `/research/applied-testbeds/soccer` | Transitional structured record | Build a practitioner/testbed field: spatial boundaries, role/transition grammar, examples, observable tactical consequences, validation burden. |
+| `/soccer` | `/research/applied-testbeds/soccer` | **Specialized P4 · spatial practitioner field** | Validate field-state density, pressure/repair/promotion trace legibility, analyst-tag agreement, and later evidence integration with video/event/tracking sources. |
 
 ## Canonical ownership notes
 
@@ -31,9 +31,9 @@ Unlisted collaboration bridges are not silently promoted into this system. They 
 
 Held legacy/reconciliation records remain blocked from public routing.
 
-## Specialized grammars established so far
+## Specialized grammars established
 
-P4 now has nine deliberately different third-layer grammars rather than one universal template:
+P4 now has ten deliberately different third-layer grammars rather than one universal template:
 
 1. **Agency & Representation Audit** — diagnostic/service workflow: operating questions, failure field, audit passes, pilot boundary, evidence rule, claim firewall.
 2. **Software Before Code** — practitioner method: object trace, boundary questions, method sequence, stress test, diagnostics, closure, validation ladder.
@@ -44,11 +44,12 @@ P4 now has nine deliberately different third-layer grammars rather than one univ
 7. **Schemathematics** — formal research program / dependency atlas: definition boundary, eight-coordinate operative profile, inspection grammar, research-program lanes, established monoid→group structural witness, hypothesis standing, formal/empirical validation burden, novelty firewall.
 8. **Constitutional Law & Jurisprudence** — provenance-first legal research instrument: prominent non-advice boundary, current-law authority register, source keys, typed claim regimes, doctrine/analogy/proposal separation, legal-process closure model, synthetic consequence-to-repair case, analytical remedy taxonomy, professional-counsel boundary, claim firewall.
 9. **Boundary-First Chess** — practitioner decision board: current-state lens bank, six position dimensions, five pre-commitment passes, candidate-move consequence trace, constructed teaching pattern, established-chess external witness, comparative-evidence ceiling, performance claim boundary.
+10. **Boundary-First Soccer** — spatial practitioner field: relational field state, six access/support/pressure/orientation/promotion/repair lenses, five phase-reading passes, backward-pass repair-to-promotion trace, candidate analyst tags, match-evidence boundary, comparative performance ceiling.
 
-The generic structured record remains a migration safety net, not a target design.
+The generic structured record remains a migration safety net for future retained records, not a target design.
 
-## Migration priority
+## Active migration status
 
-The final active transitional third-layer design is:
+**Complete for the current active public manifest set.**
 
-1. **Soccer** — establish a spatial practitioner/testbed field grammar.
+Future third-layer work should now shift from emergency normalization of raw/standalone records to cross-surface visual QA, content-density refinement, evidence integration, and carefully chosen interactive demonstrations that preserve each grammar's standing and boundaries.
