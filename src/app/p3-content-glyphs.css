@@ -1,0 +1,69 @@
+/* P3 content-level glyphs.
+   Region icons identify the declared kind/role of a bounded module. They remain small
+   secondary instrumentation so the content label, orientation, and standing stay primary. */
+
+body[data-ui-shell="cards"] .district-card__kind,
+body[data-ui-shell="cards"] .public-interest-panel__kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+body[data-ui-shell="cards"] .district-card__kind > span,
+body[data-ui-shell="cards"] .public-interest-panel__kind > span {
+  min-width: 0;
+}
+
+body[data-ui-shell="cards"] .section-region-card__glyph {
+  width: 18px;
+  height: 18px;
+  color: var(--bf-action);
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.42));
+  transition: color 120ms ease, transform 120ms ease;
+}
+
+body[data-ui-shell="cards"] .section-region-card:hover .section-region-card__glyph,
+body[data-ui-shell="cards"] .section-region-card:focus-visible .section-region-card__glyph {
+  color: var(--bf-action-hover);
+  transform: translateY(-1px);
+}
+
+body[data-ui-shell="cards"] .section-region-card[data-node-id="products"] .section-region-card__glyph {
+  color: var(--bf-region-products);
+}
+
+body[data-ui-shell="cards"] .section-region-card[data-node-id="public-interest"] .section-region-card__glyph {
+  color: var(--bf-region-public-interest);
+}
+
+body[data-ui-shell="cards"] .section-region-card[data-node-id="publications"] .section-region-card__glyph {
+  color: var(--bf-region-publications);
+}
+
+body[data-ui-shell="cards"] .section-region-card[data-node-id="about"] .section-region-card__glyph {
+  color: var(--bf-region-about);
+}
+
+body[data-ui-shell="cards"] .section-region-card[data-node-id="research"] .section-region-card__glyph {
+  color: var(--bf-region-research);
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .district-card__kind,
+  body[data-ui-shell="cards"] .public-interest-panel__kind {
+    gap: 5px;
+  }
+
+  body[data-ui-shell="cards"] .section-region-card__glyph {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .section-region-card__glyph,
+  body[data-ui-shell="cards"] .section-region-card[data-node-id] .section-region-card__glyph {
+    color: CanvasText !important;
+    filter: none;
+  }
+}
