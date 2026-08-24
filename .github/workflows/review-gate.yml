@@ -51,6 +51,9 @@ jobs:
       - name: Check Corpus Forge workbench contracts
         run: node scripts/check_p4_corpus_forge.mjs
 
+      - name: Check Boundary First UX conformance contracts
+        run: node scripts/check_p4_boundary_first_ux.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
@@ -62,6 +65,9 @@ jobs:
 
       - name: Exercise Corpus Forge production workbench
         run: node scripts/check_p4_corpus_forge_runtime.mjs
+
+      - name: Exercise Boundary First UX production instrument
+        run: node scripts/check_p4_boundary_first_ux_runtime.mjs
 
       - name: Exercise v2 production routes
         run: npm run runtime:check
