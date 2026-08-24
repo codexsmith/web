@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import type { ContentNode } from "@/lib/content";
+import { ProcessCircuit } from "@/components/process-circuit";
 import {
   deriveProcessPlacement,
   getProcessPeers,
-  processDisciplines,
   processScopeLabels,
   processStages,
   type ProcessScope,
-  visibleProcessStages,
 } from "@/lib/bfl-process";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { founderProfile, founderTimeline } from "@/lib/founder-content";
@@ -26,21 +25,20 @@ export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) 
   }
 
   const placement = deriveProcessPlacement(focusNode);
-  const visibleStages = visibleProcessStages(placement, scope);
-  const visibleIds = new Set(visibleStages.map((stage) => stage.id));
   const peers = getProcessPeers(focusNode.id, placement.primaryStage).map(hydrateContentNode);
   const primary = processStages.find((stage) => stage.id === placement.primaryStage)!;
 
   return (
     <main className="world-viewport gestalt-viewport">
-      <section className="gestalt-view" aria-label={`Boundary First process placement for ${focusNode.label}`}>
+      <section className="gestalt-view" data-process-scope={scope} aria-label={`Boundary First process placement for ${focusNode.label}`}>
         <header className="gestalt-view__heading">
           <div>
             <p className="eyebrow">Process projection</p>
             <h1>{focusNode.label}</h1>
             <p>
-              Where this focal object currently sits in the Boundary First operating loop. Process context changes
-              the surrounding operating scope; it does not change the object itself or traverse the content graph.
+              Where this focal object currently sits in the Boundary First operating circuit. Process scope changes
+              how much of the surrounding control structure is visible; it does not change the object itself or
+              traverse the content graph.
             </p>
           </div>
           <dl className="gestalt-view__scope">
@@ -59,80 +57,7 @@ export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) 
           </dl>
         </header>
 
-        <section className="gestalt-synthesis" aria-label="Boundary First operating synthesis">
-          <div className="gestalt-section-label">Operating synthesis</div>
-          <p>
-            <strong>Agentic · Lean Startup · Agile · Scientific · Computational · Constructive</strong>
-            <span>
-              These are overlapping disciplines applied across one repairable loop, not six sequential phases.
-            </span>
-          </p>
-        </section>
-
-        <section className="gestalt-pipeline" aria-label="Boundary First operating loop">
-          <div className="gestalt-section-label">Process loop · {processScopeLabels[scope]}</div>
-          <ol className="gestalt-pipeline__stages">
-            {visibleStages.map((stage) => {
-              const active = placement.activeStages.includes(stage.id);
-              const primaryStage = placement.primaryStage === stage.id;
-              const reasons = placement.reasons[stage.id];
-              return (
-                <li
-                  key={stage.id}
-                  className={active ? "is-active" : ""}
-                  data-primary={primaryStage ? "true" : "false"}
-                  data-stage={stage.id}
-                >
-                  <span className="gestalt-stage__index">
-                    {String(processStages.findIndex((candidate) => candidate.id === stage.id) + 1).padStart(2, "0")}
-                  </span>
-                  <span className="gestalt-stage__signal" aria-hidden="true" />
-                  <div className="gestalt-stage__copy">
-                    <small>{primaryStage ? "Primary placement" : active ? "Participating" : "Process stage"}</small>
-                    <strong>{stage.label}</strong>
-                    <p>{stage.question}</p>
-                    {scope === "local" && reasons.length ? (
-                      <ul>
-                        {reasons.map((reason) => (
-                          <li key={reason}>{reason}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-        </section>
-
-        {scope !== "local" ? (
-          <section className="gestalt-discipline-map" aria-label="Operating disciplines across the process loop">
-            <div className="gestalt-section-label">Method bands</div>
-            <div className="gestalt-discipline-map__grid">
-              {processDisciplines.map((discipline) => (
-                <article key={discipline.id} data-discipline={discipline.id}>
-                  <header>
-                    <strong>{discipline.label}</strong>
-                    <p>{discipline.role}</p>
-                  </header>
-                  <div className="gestalt-discipline__stages" aria-label={`${discipline.label} process coverage`}>
-                    {processStages.map((stage) => (
-                      <span
-                        key={stage.id}
-                        data-visible={visibleIds.has(stage.id) ? "true" : "false"}
-                        data-participates={discipline.stages.includes(stage.id) ? "true" : "false"}
-                        data-focus={placement.activeStages.includes(stage.id) ? "true" : "false"}
-                        title={`${stage.shortLabel}${discipline.stages.includes(stage.id) ? ` · ${discipline.label} participates` : ""}`}
-                      >
-                        {stage.shortLabel}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        ) : null}
+        <ProcessCircuit placement={placement} scope={scope} />
 
         <div className="gestalt-lower-grid">
           <section className="gestalt-placement-notes">
