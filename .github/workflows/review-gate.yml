@@ -66,6 +66,9 @@ jobs:
       - name: Check Law provenance-research contracts
         run: node scripts/check_p4_law_research.mjs
 
+      - name: Check Chess practitioner decision-board contracts
+        run: node scripts/check_p4_chess_practitioner.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
@@ -92,6 +95,9 @@ jobs:
 
       - name: Exercise Law production provenance research instrument
         run: node scripts/check_p4_law_research_runtime.mjs
+
+      - name: Exercise Chess production practitioner decision board
+        run: node scripts/check_p4_chess_practitioner_runtime.mjs
 
       - name: Exercise v2 production routes
         run: npm run runtime:check
