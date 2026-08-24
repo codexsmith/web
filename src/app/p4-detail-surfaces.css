@@ -1,0 +1,1024 @@
+/* P4 third-layer detail surfaces.
+   Object detail remains inside the bounded content viewport. Search is still a global
+   traversal instrument; records and inspections are not modal windows or second sites. */
+
+body[data-ui-shell="cards"] .detail-surface {
+  place-items: stretch;
+  padding: clamp(10px, 1.15vw, 18px);
+  overflow: hidden;
+  background:
+    var(--bf-brushed-metal),
+    radial-gradient(circle at 84% 12%, rgba(255, 255, 255, 0.035), transparent 24rem),
+    color-mix(in srgb, var(--bf-bg-base) 96%, black);
+}
+
+body[data-ui-shell="cards"] .detail-workbench {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--bf-etched-line-strong);
+  border-radius: var(--bf-radius-housing);
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 18%),
+    color-mix(in srgb, var(--bf-bg-surface) 97%, black);
+  box-shadow:
+    var(--bf-shadow-panel),
+    inset 0 1px 0 var(--bf-edge-highlight-strong),
+    inset 0 -1px 0 var(--bf-seam-dark);
+}
+
+body[data-ui-shell="cards"] .record-detail {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+body[data-ui-shell="cards"] .record-detail__masthead {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px clamp(16px, 2vw, 30px);
+  padding: clamp(15px, 1.55vw, 24px) clamp(16px, 1.75vw, 28px);
+  border-bottom: 1px solid var(--bf-etched-line-strong);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 5%, transparent), transparent 38%),
+    var(--bf-well-surface);
+  box-shadow: inset 0 -1px 0 var(--bf-seam-dark);
+}
+
+body[data-ui-shell="cards"] .record-detail__identity {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(11px, 1vw, 17px);
+}
+
+body[data-ui-shell="cards"] .record-detail__identity-glyph {
+  width: clamp(34px, 3vw, 48px);
+  height: clamp(34px, 3vw, 48px);
+  flex: 0 0 auto;
+  color: var(--bf-action);
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28));
+}
+
+body[data-ui-shell="cards"] .record-detail__kicker,
+body[data-ui-shell="cards"] .record-detail__micro-label,
+body[data-ui-shell="cards"] .record-detail__section-heading > span,
+body[data-ui-shell="cards"] .record-detail__status,
+body[data-ui-shell="cards"] .record-detail__fit-grid article > span,
+body[data-ui-shell="cards"] .record-detail__handoff-grid article > span,
+body[data-ui-shell="cards"] .record-detail__comparison-grid article > span,
+body[data-ui-shell="cards"] .record-detail__two-column-notes article > span,
+body[data-ui-shell="cards"] .record-detail__boundary-grid > div > span {
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.115em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__identity h1 {
+  margin: 3px 0 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2.1vw, 2.45rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.018em;
+}
+
+body[data-ui-shell="cards"] .record-detail__masthead-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+body[data-ui-shell="cards"] .record-detail__status,
+body[data-ui-shell="cards"] .record-detail__return {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background: var(--bf-bezel-surface);
+  box-shadow: var(--bf-shadow-control), var(--bf-shadow-inset);
+}
+
+body[data-ui-shell="cards"] .record-detail__return {
+  color: var(--bf-text-secondary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.49rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__return:hover {
+  border-color: var(--bf-action-line);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .record-detail__return .bfux-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .record-detail__lede {
+  grid-column: 1 / -1;
+  max-width: 92ch;
+  margin: 4px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.79rem, 0.86vw, 0.95rem);
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .record-detail__boundary-line {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(24px, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  margin-top: 2px;
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.42rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__boundary-line i {
+  height: 1px;
+  background: linear-gradient(90deg, var(--bf-action-line), var(--bf-etched-line), transparent);
+}
+
+body[data-ui-shell="cards"] .record-detail__scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: clamp(12px, 1.3vw, 20px);
+}
+
+body[data-ui-shell="cards"] .record-detail__opening,
+body[data-ui-shell="cards"] .record-detail__section,
+body[data-ui-shell="cards"] .record-detail__closing {
+  max-width: 1480px;
+  margin-inline: auto;
+}
+
+body[data-ui-shell="cards"] .record-detail__opening {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.72fr);
+  gap: clamp(14px, 1.5vw, 24px);
+  padding: clamp(18px, 2vw, 32px);
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background:
+    linear-gradient(125deg, color-mix(in srgb, var(--bf-action) 8%, transparent), transparent 46%),
+    var(--bf-bg-base);
+  box-shadow: var(--bf-shadow-inset), inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .record-detail__opening-copy h2,
+body[data-ui-shell="cards"] .record-detail__section-heading h2,
+body[data-ui-shell="cards"] .record-detail__closing h2 {
+  margin: 7px 0 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.018em;
+}
+
+body[data-ui-shell="cards"] .record-detail__opening-copy h2 {
+  max-width: 25ch;
+  font-size: clamp(2rem, 3.1vw, 4rem);
+  line-height: 0.98;
+}
+
+body[data-ui-shell="cards"] .record-detail__opening-copy > p,
+body[data-ui-shell="cards"] .record-detail__prose,
+body[data-ui-shell="cards"] .record-detail__section-body > p {
+  max-width: 78ch;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.86rem, 0.92vw, 1rem);
+  line-height: 1.65;
+}
+
+body[data-ui-shell="cards"] .record-detail blockquote {
+  margin: 16px 0 0;
+  padding: 12px 15px;
+  border-left: 2px solid var(--bf-action);
+  background: color-mix(in srgb, var(--bf-action) 5%, transparent);
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.95rem, 1.1vw, 1.22rem);
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .record-detail__trace {
+  display: grid;
+  align-content: start;
+  gap: 0;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background: var(--bf-well-surface);
+  box-shadow: var(--bf-shadow-well);
+  list-style: none;
+}
+
+body[data-ui-shell="cards"] .record-detail__trace li {
+  position: relative;
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 2px 9px;
+  align-items: center;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--bf-etched-line);
+}
+
+body[data-ui-shell="cards"] .record-detail__trace li:last-child {
+  border-bottom: 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__trace .bfux-icon {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  width: 22px;
+  height: 22px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .record-detail__trace li > span,
+body[data-ui-shell="cards"] .record-detail__method-index span,
+body[data-ui-shell="cards"] .record-detail__sequence span,
+body[data-ui-shell="cards"] .record-detail__validation-ladder span {
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__trace strong {
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.98rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .record-detail__trace small {
+  color: var(--bf-text-muted);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
+body[data-ui-shell="cards"] .record-detail__section {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.28fr) minmax(0, 1fr);
+  gap: clamp(16px, 2vw, 32px);
+  margin-top: clamp(12px, 1.2vw, 18px);
+  padding: clamp(18px, 1.8vw, 28px);
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.022), transparent 28%),
+    color-mix(in srgb, var(--bf-bg-base) 96%, black);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .record-detail__section[data-variant="quiet"] {
+  background: var(--bf-well-surface);
+  box-shadow: var(--bf-shadow-well);
+}
+
+body[data-ui-shell="cards"] .record-detail__section[data-variant="attention"] {
+  border-left: 3px solid var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .record-detail__section-heading {
+  align-self: start;
+  position: sticky;
+  top: 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__section-heading h2 {
+  max-width: 16ch;
+  font-size: clamp(1.45rem, 2vw, 2.65rem);
+  line-height: 1.02;
+}
+
+body[data-ui-shell="cards"] .record-detail__section-body {
+  min-width: 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid--nine {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid article,
+body[data-ui-shell="cards"] .record-detail__method-stack article,
+body[data-ui-shell="cards"] .record-detail__fit-grid article,
+body[data-ui-shell="cards"] .record-detail__handoff-grid article,
+body[data-ui-shell="cards"] .record-detail__comparison-grid article,
+body[data-ui-shell="cards"] .record-detail__two-column-notes article,
+body[data-ui-shell="cards"] .record-detail__generic-cards > article {
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-bezel-surface);
+  box-shadow: var(--bf-shadow-inset);
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid article {
+  min-height: 118px;
+  padding: 13px;
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid article > span {
+  color: var(--bf-action);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.45rem;
+  font-weight: 800;
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid article > .bfux-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  color: var(--bf-action);
+  vertical-align: middle;
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid h3 {
+  margin: 12px 0 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .record-detail__question-grid p {
+  margin: 8px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.52;
+}
+
+body[data-ui-shell="cards"] .record-detail__defect-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 14px;
+}
+
+body[data-ui-shell="cards"] .record-detail__defect-list > div {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 9px;
+  padding: 10px;
+  border-bottom: 1px solid var(--bf-etched-line);
+}
+
+body[data-ui-shell="cards"] .record-detail__defect-list .bfux-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .record-detail__defect-list p {
+  margin: 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+body[data-ui-shell="cards"] .record-detail__method-stack {
+  display: grid;
+  gap: 7px;
+}
+
+body[data-ui-shell="cards"] .record-detail__method-stack article {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 13px;
+  padding: 13px;
+}
+
+body[data-ui-shell="cards"] .record-detail__method-index {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 5px;
+  border-right: 1px solid var(--bf-etched-line);
+}
+
+body[data-ui-shell="cards"] .record-detail__method-index .bfux-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .record-detail__method-stack h3,
+body[data-ui-shell="cards"] .record-detail__two-column-notes h3 {
+  margin: 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .record-detail__method-stack p,
+body[data-ui-shell="cards"] .record-detail__two-column-notes p {
+  margin: 6px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .record-detail__method-stack small {
+  display: block;
+  margin-top: 7px;
+  color: var(--bf-action);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.44rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__closure,
+body[data-ui-shell="cards"] .record-detail__note,
+body[data-ui-shell="cards"] .record-detail__evidence-rule {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 11px;
+  margin-top: 10px;
+  padding: 13px;
+  border: 1px solid var(--bf-action-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-action-surface);
+}
+
+body[data-ui-shell="cards"] .record-detail__closure .bfux-icon,
+body[data-ui-shell="cards"] .record-detail__note .bfux-icon,
+body[data-ui-shell="cards"] .record-detail__evidence-rule .bfux-icon {
+  width: 21px;
+  height: 21px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .record-detail__closure span,
+body[data-ui-shell="cards"] .record-detail__note strong {
+  color: var(--bf-action);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.47rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__closure p,
+body[data-ui-shell="cards"] .record-detail__note p,
+body[data-ui-shell="cards"] .record-detail__evidence-rule {
+  color: var(--bf-text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .record-detail__closure p,
+body[data-ui-shell="cards"] .record-detail__note p {
+  margin: 4px 0 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__closure ul {
+  margin: 8px 0 0;
+  padding-left: 1rem;
+  color: var(--bf-text-secondary);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .record-detail__fit-grid,
+body[data-ui-shell="cards"] .record-detail__handoff-grid,
+body[data-ui-shell="cards"] .record-detail__comparison-grid,
+body[data-ui-shell="cards"] .record-detail__two-column-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+body[data-ui-shell="cards"] .record-detail__fit-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body[data-ui-shell="cards"] .record-detail__fit-grid article,
+body[data-ui-shell="cards"] .record-detail__handoff-grid article,
+body[data-ui-shell="cards"] .record-detail__comparison-grid article,
+body[data-ui-shell="cards"] .record-detail__two-column-notes article {
+  padding: 14px;
+}
+
+body[data-ui-shell="cards"] .record-detail__fit-grid article[data-fit="no"] {
+  border-color: color-mix(in srgb, var(--bf-attention) 55%, var(--bf-etched-line));
+}
+
+body[data-ui-shell="cards"] .record-detail ul {
+  margin: 10px 0 0;
+  padding-left: 1.05rem;
+  color: var(--bf-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .record-detail li + li {
+  margin-top: 4px;
+}
+
+body[data-ui-shell="cards"] .record-detail__tags,
+body[data-ui-shell="cards"] .record-detail__downstream-grid,
+body[data-ui-shell="cards"] .record-detail__closure-tests,
+body[data-ui-shell="cards"] .record-detail__not-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+body[data-ui-shell="cards"] .record-detail__tags span,
+body[data-ui-shell="cards"] .record-detail__downstream-grid span,
+body[data-ui-shell="cards"] .record-detail__closure-tests > span,
+body[data-ui-shell="cards"] .record-detail__not-grid > span {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-bezel-surface);
+  color: var(--bf-text-secondary);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+body[data-ui-shell="cards"] .record-detail__closure-tests .bfux-icon,
+body[data-ui-shell="cards"] .record-detail__not-grid .bfux-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .record-detail__not-grid .bfux-icon {
+  color: var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .record-detail__sequence,
+body[data-ui-shell="cards"] .record-detail__validation-ladder {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body[data-ui-shell="cards"] .record-detail__sequence li,
+body[data-ui-shell="cards"] .record-detail__validation-ladder li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  margin: 0;
+  padding: 9px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-bezel-surface);
+  color: var(--bf-text-secondary);
+  font-size: 0.74rem;
+}
+
+body[data-ui-shell="cards"] .record-detail__sequence p {
+  margin: 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__principle-line {
+  margin: 12px 0 0;
+  color: var(--bf-action);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .record-detail__comparison-grid {
+  grid-template-columns: 0.75fr 1.35fr 1fr;
+}
+
+body[data-ui-shell="cards"] .record-detail__diagnostic-table {
+  display: grid;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  overflow: hidden;
+}
+
+body[data-ui-shell="cards"] .record-detail__diagnostic-table > div {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr 1fr;
+}
+
+body[data-ui-shell="cards"] .record-detail__diagnostic-table > div > span {
+  padding: 9px 11px;
+  border-right: 1px solid var(--bf-etched-line);
+  border-bottom: 1px solid var(--bf-etched-line);
+  color: var(--bf-text-secondary);
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+body[data-ui-shell="cards"] .record-detail__diagnostic-table > div > span:last-child {
+  border-right: 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__diagnostic-table > div:last-child > span {
+  border-bottom: 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__diagnostic-head {
+  background: var(--bf-well-surface);
+}
+
+body[data-ui-shell="cards"] .record-detail__diagnostic-head > span {
+  color: var(--bf-text-muted) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.45rem !important;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__boundary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.7fr);
+  gap: 10px;
+}
+
+body[data-ui-shell="cards"] .record-detail__boundary-grid blockquote {
+  margin: 0;
+}
+
+body[data-ui-shell="cards"] .record-detail__closing {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 14px;
+  margin-top: clamp(12px, 1.2vw, 18px);
+  padding: clamp(18px, 2vw, 30px);
+  border: 1px solid var(--bf-action-line);
+  border-radius: var(--bf-radius-control);
+  background:
+    linear-gradient(90deg, var(--bf-action-surface), transparent 58%),
+    var(--bf-bg-base);
+}
+
+body[data-ui-shell="cards"] .record-detail__closing > .bfux-icon {
+  width: 38px;
+  height: 38px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .record-detail__closing > div > span {
+  color: var(--bf-action);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__closing h2 {
+  font-size: clamp(1.4rem, 1.8vw, 2.25rem);
+}
+
+body[data-ui-shell="cards"] .record-detail__closing p {
+  margin: 7px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.8rem;
+}
+
+/* Generic records are normalized into nested semantic compartments instead of a raw
+   JSON-shaped page. Specialized records can replace this projection incrementally. */
+body[data-ui-shell="cards"] .record-detail__generic-fields {
+  display: grid;
+  gap: 9px;
+}
+
+body[data-ui-shell="cards"] .record-detail__generic-fields > section {
+  padding: 13px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-bezel-surface);
+}
+
+body[data-ui-shell="cards"] .record-detail__generic-fields h3 {
+  margin: 0 0 8px;
+  color: var(--bf-action);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .record-detail__generic-fields p {
+  margin: 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .record-detail__generic-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+body[data-ui-shell="cards"] .record-detail__generic-cards > article {
+  padding: 11px;
+}
+
+/* Inspection is now a main content surface. There is deliberately no backdrop,
+   no modal positioning, and no aria-modal interaction model. */
+body[data-ui-shell="cards"] .inspection-surface {
+  place-items: stretch;
+}
+
+body[data-ui-shell="cards"] .inspection-workbench {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  padding: clamp(16px, 1.6vw, 24px);
+  border-bottom: 1px solid var(--bf-etched-line-strong);
+  background: var(--bf-well-surface);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__identity > .bfux-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__identity span,
+body[data-ui-shell="cards"] .inspection-surface__source span {
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.46rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__identity h2 {
+  margin: 3px 0 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 2.2vw, 2.7rem);
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__close {
+  align-self: center;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background: var(--bf-bezel-surface);
+  color: var(--bf-text-secondary);
+  box-shadow: var(--bf-shadow-control), var(--bf-shadow-inset);
+  cursor: pointer;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__close:hover {
+  border-color: var(--bf-action-line);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__close .bfux-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__summary {
+  grid-column: 1 / -1;
+  max-width: 88ch;
+  margin: 2px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__content {
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(14px, 1.5vw, 24px);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__grid {
+  max-width: 1280px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.38fr);
+  gap: 10px;
+  margin-inline: auto;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__findings,
+body[data-ui-shell="cards"] .inspection-surface__source,
+body[data-ui-shell="cards"] .inspection-surface__links {
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background: var(--bf-bezel-surface);
+  box-shadow: var(--bf-shadow-inset);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__findings {
+  grid-row: span 2;
+  margin: 0;
+  padding: clamp(16px, 1.5vw, 24px) clamp(18px, 1.8vw, 28px);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__findings li {
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.8rem, 0.9vw, 0.96rem);
+  line-height: 1.6;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__findings li + li {
+  margin-top: 9px;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__source,
+body[data-ui-shell="cards"] .inspection-surface__links {
+  padding: 14px;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__source code {
+  display: block;
+  margin-top: 8px;
+  color: var(--bf-text-secondary);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__links {
+  display: grid;
+  gap: 6px;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__links a {
+  min-height: 42px;
+  display: grid;
+  gap: 2px;
+  padding: 9px 10px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-well-surface);
+  color: var(--bf-text-secondary);
+  text-decoration: none;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__links a:hover {
+  border-color: var(--bf-action-line);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__links strong {
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .inspection-surface__links small {
+  color: var(--bf-text-muted);
+  font-size: 0.58rem;
+}
+
+@media (max-width: 1100px) {
+  body[data-ui-shell="cards"] .record-detail__opening,
+  body[data-ui-shell="cards"] .record-detail__section,
+  body[data-ui-shell="cards"] .inspection-surface__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-ui-shell="cards"] .record-detail__section-heading {
+    position: static;
+  }
+
+  body[data-ui-shell="cards"] .record-detail__section-heading h2 {
+    max-width: 28ch;
+  }
+
+  body[data-ui-shell="cards"] .record-detail__question-grid--nine,
+  body[data-ui-shell="cards"] .record-detail__fit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-ui-shell="cards"] .record-detail__comparison-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .detail-surface {
+    padding: 7px;
+  }
+
+  body[data-ui-shell="cards"] .record-detail__masthead,
+  body[data-ui-shell="cards"] .inspection-surface__header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-ui-shell="cards"] .record-detail__masthead-tools {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  body[data-ui-shell="cards"] .record-detail__question-grid,
+  body[data-ui-shell="cards"] .record-detail__question-grid--nine,
+  body[data-ui-shell="cards"] .record-detail__defect-list,
+  body[data-ui-shell="cards"] .record-detail__fit-grid,
+  body[data-ui-shell="cards"] .record-detail__handoff-grid,
+  body[data-ui-shell="cards"] .record-detail__two-column-notes,
+  body[data-ui-shell="cards"] .record-detail__sequence,
+  body[data-ui-shell="cards"] .record-detail__validation-ladder,
+  body[data-ui-shell="cards"] .record-detail__boundary-grid,
+  body[data-ui-shell="cards"] .record-detail__generic-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-ui-shell="cards"] .record-detail__diagnostic-table {
+    overflow-x: auto;
+  }
+
+  body[data-ui-shell="cards"] .record-detail__diagnostic-table > div {
+    min-width: 650px;
+  }
+
+  body[data-ui-shell="cards"] .inspection-surface__close {
+    justify-self: start;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .detail-workbench,
+  body[data-ui-shell="cards"] .record-detail__opening,
+  body[data-ui-shell="cards"] .record-detail__section,
+  body[data-ui-shell="cards"] .record-detail__trace,
+  body[data-ui-shell="cards"] .inspection-surface__findings,
+  body[data-ui-shell="cards"] .inspection-surface__source,
+  body[data-ui-shell="cards"] .inspection-surface__links {
+    background: Canvas !important;
+    color: CanvasText !important;
+    border-color: CanvasText !important;
+    box-shadow: none !important;
+  }
+}
