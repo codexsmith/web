@@ -50,7 +50,7 @@ export type PaperMineSnapshot = {
   frontier: PaperMineFrontierItem[];
 };
 
-export const paperMineSnapshot = snapshot as PaperMineSnapshot;
+export const paperMineSnapshot = snapshot as unknown as PaperMineSnapshot;
 
 export const paperMineCandidateById = new Map(
   paperMineSnapshot.candidates.map((candidate) => [candidate.id, candidate]),
