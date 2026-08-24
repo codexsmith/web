@@ -7,6 +7,7 @@ import type {
   PaperMineFrontierItem,
   PaperMineSnapshot,
 } from "@/lib/paper-mine";
+import { PaperMineGraph } from "./paper-mine-graph";
 import styles from "./paper-mine.module.css";
 
 type ViewState = {
@@ -371,6 +372,13 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
             <article><strong>{data.frontier.filter((item) => item.paperization_state === "materialized").length}</strong><span>materialized packets</span></article>
             <article><strong>{visible.length}</strong><span>visible now</span></article>
           </section>
+
+          <PaperMineGraph
+            candidates={visible}
+            frontier={data.frontier}
+            selectedId={view.paper}
+            onSelect={selectCandidate}
+          />
 
           <section className={styles.panel}>
             <header>
