@@ -45,7 +45,16 @@ for (const nodeId of [
 
 for (const kind of ["sequence", "loop", "set", "ladder", "fanout", "convergence"]) {
   expect(files.registry.includes(`| "${kind}"`) || files.registry.includes(`kind: "${kind}"`), `Artifact grammar must retain ${kind}`);
-  expect(files.css.includes(`bfux-artifact--${kind}`) || ["fanout", "convergence"].includes(kind), `Artifact CSS should expose ${kind} semantics`);
+}
+
+for (const [semantic, selector] of [
+  ["sequence", ".bfux-artifact__sequence"],
+  ["loop return", ".bfux-artifact__return"],
+  ["bounded set", ".bfux-artifact__set"],
+  ["ladder", ".bfux-artifact__ladder"],
+  ["fan-out/convergence", ".bfux-artifact__fan"],
+]) {
+  expect(files.css.includes(selector), `Artifact CSS must expose ${semantic} semantics`);
 }
 
 expect(files.registry.includes("const ARROW"), "Inspection compiler must recognize explicit arrow sequences");
@@ -53,6 +62,7 @@ expect(files.registry.includes("parseArrowBullet"), "Inspection compiler must pr
 expect(files.registry.includes("isHorizonLabel"), "Inspection compiler must recognize staged maturity/capability horizons");
 expect(files.component.includes('<ol className="bfux-artifact__sequence"'), "Sequences must preserve ordered-list accessibility semantics");
 expect(files.component.includes('<ul className="bfux-artifact__set"'), "Peer sets must preserve unordered-list accessibility semantics");
+expect(files.component.includes('<ol className="bfux-artifact__ladder"'), "Ladders must preserve ordered-list accessibility semantics");
 expect(files.component.includes('data-artifact-kind={artifact.kind}'), "Rendered artifacts must expose their semantic kind for QA and inspection");
 expect(files.css.includes("@media (forced-colors: active)"), "Semantic artifacts must preserve forced-colors support");
 expect(files.css.includes("@media (max-width: 980px)"), "Semantic artifacts must explicitly recompose for compact projection");
