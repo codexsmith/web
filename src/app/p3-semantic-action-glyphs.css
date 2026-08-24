@@ -18,10 +18,23 @@ body[data-ui-shell="cards"] .subject-pane__action-glyph {
   transition: color 120ms ease, transform 120ms ease;
 }
 
-body[data-ui-shell="cards"] .subject-pane__action-copy {
+body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy {
   min-width: 0;
   display: grid;
   gap: 3px;
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy > span {
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy > strong {
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy > small {
+  color: var(--bf-text-muted);
 }
 
 body[data-ui-shell="cards"] .subject-pane__action[data-action-kind="inspection"] .subject-pane__action-glyph {
@@ -56,7 +69,11 @@ body[data-ui-shell="cards"] .subject-pane__action:focus-visible .subject-pane__a
 
 @media (forced-colors: active) {
   body[data-ui-shell="cards"] .subject-pane__action-glyph,
-  body[data-ui-shell="cards"] .subject-pane__action[data-action-kind] .subject-pane__action-glyph {
+  body[data-ui-shell="cards"] .subject-pane__action[data-action-kind] .subject-pane__action-glyph,
+  body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy,
+  body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy > span,
+  body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy > strong,
+  body[data-ui-shell="cards"] .subject-pane__action-grid .subject-pane__action-copy > small {
     color: CanvasText !important;
   }
 }
