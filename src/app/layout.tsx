@@ -50,6 +50,7 @@ import "./p3-industrial-responsive.css";
 import "./p4-detail-surfaces.css";
 import "./p4-corpus-forge-workbench.css";
 import "./p4-boundary-first-ux-conformance.css";
+import "./p4-closure-driven-control-surface.css";
 
 export const metadata: Metadata = {
   title: {
