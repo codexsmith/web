@@ -3,6 +3,7 @@ import { permanentRedirect } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
 import { RecordDetailSurface } from "@/components/record-detail-surface";
 import { CorpusForgeRecordDetail } from "@/components/corpus-forge-record-detail";
+import { BoundaryFirstUxRecordDetail } from "@/components/boundary-first-ux-record-detail";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
@@ -211,6 +212,11 @@ export default async function Page({ params, searchParams }: PageProps) {
       {recordDetail && recordContent ? (
         recordDetail.entry.id === "corpus-forge" ? (
           <CorpusForgeRecordDetail
+            owner={recordDetail.owner}
+            entry={recordDetail.entry}
+          />
+        ) : recordDetail.entry.id === "boundary-first-ux" ? (
+          <BoundaryFirstUxRecordDetail
             owner={recordDetail.owner}
             entry={recordDetail.entry}
           />
