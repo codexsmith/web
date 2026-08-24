@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0-web",
+  "generated_on": "2026-08-24",
+  "source_revision": "33d8de2add04eeeb9a70c28937dd76af86801181",
+  "source_content_sha256": "16ae7406cedd5b9e942208791ea4c75695f20b71d77c0aed2bed8f7d0afdd11c",
+  "authority": {
+    "scope": "bounded public projection of controlled publication objects plus mined paper candidates",
+    "publication_promotion": false,
+    "scientific_authority": false,
+    "queue_insertion": false,
+    "human_gate_required": true,
+    "negative_results_are_valid": true,
+    "private_lab_remains_authoritative": true
+  },
+  "summary": {
+    "raw_source_record_count": 158,
+    "canonical_paper_count": 152,
+    "controlled_publication_count": 112,
+    "mined_candidate_count": 40,
+    "frontier_count": 6,
+    "alias_mapping_count": 1,
+    "excluded_record_count": 5,
+    "relation_count": 89,
+    "counts_by_origin": {
+      "obsidian_phase12": 7,
+      "publication_graph": 112,
+      "soft_science_pass1": 18,
+      "soft_science_pass2": 16
+    },
+    "counts_by_discipline": {
+      "boundary_native": 30,
+      "computer_science": 35,
+      "cross_domain": 18,
+      "mathematics": 21,
+      "other": 4,
+      "philosophy_of_science": 10,
+      "physics": 20,
+      "social_science": 14
+    },
+    "counts_by_stage": {
+      "A": 67,
+      "B": 18,
+      "C": 30,
+      "discovery": 37
+    },
+    "counts_by_record_class": {
+      "controlled_publication": 112,
+      "mined_candidate": 40
+    }
+  },
+  "frontier": [
+    {
+      "rank": 1,
+      "candidate_id": "hci_resolution_navigation",
+      "source_candidate_id": "hci_resolution_navigation",
+      "paperization_state": "outline_now",
+      "question": "Does context-preserving semantic zoom improve orientation, relation comprehension, and return-path recovery in typed knowledge interfaces relative to conventional zoomable graphs and hierarchy-plus-breadcrumb baselines?",
+      "baselines": [
+        "conventional zoomable node-link graph",
+        "hierarchy plus breadcrumbs",
+        "overview-detail interface"
+      ],
+      "measures": [
+        "location recovery accuracy",
+        "return time",
+        "relation-type inference accuracy",
+        "path reconstruction accuracy",
+        "task completion accuracy",
+        "subjective orientation/workload"
+      ],
+      "failure_outcomes": [
+        "ordinary hierarchy plus breadcrumbs performs equivalently",
+        "semantic resolution increases cognitive burden",
+        "typed transitions fail to improve comprehension",
+        "benefits appear only for a narrow graph/task class"
+      ],
+      "claim_ceiling": "bounded HCI result plus formal interaction model; no general superiority claim",
+      "local_artifacts": [
+        "formal interaction contract",
+        "prototype with at least two semantic resolutions",
+        "baseline prototype(s)",
+        "pre-registered or fixed task protocol",
+        "analysis notebook",
+        "negative-result statement"
+      ]
+    },
+    {
+      "rank": 2,
+      "candidate_id": "pos_ai_forge_bfs_dfs",
+      "source_candidate_id": "pos_ai_forge_bfs_dfs",
+      "paperization_state": "benchmark_design_now",
+      "question": "Does alternating breadth-first comparison with depth-first reduction improve the auditability, reconstruction quality, and defect discovery of machine-assisted research relative to breadth-only, depth-only, and unconstrained agent workflows?",
+      "baselines": [
+        "breadth-only workflow",
+        "depth-only workflow",
+        "unconstrained research-agent workflow",
+        "human-authored reference reduction where available"
+      ],
+      "measures": [
+        "reconstruction fidelity",
+        "defect/counterexample discovery",
+        "provenance completeness",
+        "unsupported-claim rate",
+        "compression ratio with retained recoverability",
+        "human audit time"
+      ],
+      "failure_outcomes": [
+        "alternation provides no measurable benefit",
+        "benefit is explained by additional compute/tokens",
+        "DFS alone captures the useful effect",
+        "BFS pattern recurrence increases false equivalence"
+      ],
+      "claim_ceiling": "testable workflow contribution; no superiority claim before controlled benchmark",
+      "local_artifacts": [
+        "fixed corpus benchmark",
+        "workflow specifications",
+        "machine-readable provenance ledger",
+        "scoring rubric",
+        "ablation conditions",
+        "failure corpus"
+      ]
+    },
+    {
+      "rank": 3,
+      "candidate_id": "hci_visible_partiality",
+      "source_candidate_id": "hci_visible_partiality",
+      "paperization_state": "experiment_design_now",
+      "question": "Can an interface disclose active filters, omissions, and projection boundaries in a way that improves user calibration without imposing unacceptable workload or reducing task performance?",
+      "baselines": [
+        "undisclosed filtering",
+        "passive filter-label disclosure",
+        "interactive omission/projection disclosure"
+      ],
+      "measures": [
+        "hidden-filter recognition",
+        "calibration/confidence accuracy",
+        "decision quality",
+        "task accuracy",
+        "completion time",
+        "subjective workload"
+      ],
+      "failure_outcomes": [
+        "disclosure harms task performance more than it improves calibration",
+        "simple filter chips fully subsume the proposed mechanism",
+        "users ignore partiality indicators",
+        "benefits depend on domain expertise"
+      ],
+      "claim_ceiling": "bounded transparency/usability tradeoff result",
+      "local_artifacts": []
+    },
+    {
+      "rank": 4,
+      "candidate_id": "hci_typed_resolution_relations",
+      "source_candidate_id": "hci_typed_resolution_relations",
+      "paperization_state": "experiment_design_now",
+      "question": "Do relation types revealed or differentiated under focus reduce false inference compared with generic edges in complex knowledge-graph tasks?",
+      "baselines": [
+        "generic unlabeled or uniformly encoded edges",
+        "always-visible typed edges",
+        "typed-on-focus resolution"
+      ],
+      "measures": [
+        "false-inference rate",
+        "relation classification accuracy",
+        "response time",
+        "confidence calibration",
+        "visual clutter/workload"
+      ],
+      "failure_outcomes": [
+        "always-visible typed edges perform as well or better",
+        "focus-triggered typing causes mode errors",
+        "relation labels alone explain the effect",
+        "benefits disappear at realistic graph scale"
+      ],
+      "claim_ceiling": "empirical relation-comprehension result for specified graph/task conditions",
+      "local_artifacts": []
+    },
+    {
+      "rank": 5,
+      "candidate_id": "hci_reversible_depth_context_recovery",
+      "source_candidate_id": "hci_reversible_depth_context_recovery",
+      "paperization_state": "experiment_design_now",
+      "question": "Does preserving ancestry, active context, and reversible depth transitions improve recovery after deep exploration compared with conventional navigation history and breadcrumbs?",
+      "baselines": [
+        "browser-like back stack",
+        "hierarchical breadcrumbs",
+        "overview-detail plus history"
+      ],
+      "measures": [
+        "location recovery accuracy",
+        "return time",
+        "path reconstruction",
+        "navigation errors",
+        "subjective disorientation"
+      ],
+      "failure_outcomes": [
+        "breadcrumbs fully subsume the effect",
+        "persistent context increases clutter",
+        "benefit appears only for unfamiliar domains",
+        "reversibility is not used in practice"
+      ],
+      "claim_ceiling": "bounded navigation/orientation result",
+      "local_artifacts": []
+    },
+    {
+      "rank": 6,
+      "candidate_id": "pos_represented_observed_state_spaces",
+      "source_candidate_id": "pos_represented_observed_state_spaces",
+      "paperization_state": "worked_examples_and_prior_art_now",
+      "question": "What distinct scientific errors arise when the state space admitted by a model does not correspond to the states and transitions observable in the target system?",
+      "baselines": [
+        "ordinary model discrepancy/error analysis",
+        "measurement-model distinction",
+        "structural/model misspecification accounts"
+      ],
+      "measures": [
+        "real state missing from model",
+        "model distinguishes observationally irrelevant states",
+        "model collapses consequence-distinct states",
+        "model permits empirically absent transition",
+        "model forbids observed transition",
+        "boundary omission causes apparent noise"
+      ],
+      "failure_outcomes": [
+        "taxonomy is fully subsumed by existing model-discrepancy literature",
+        "categories are not reliably distinguishable in cases",
+        "state-space framing adds no diagnostic value"
+      ],
+      "claim_ceiling": "philosophical synthesis and defect taxonomy unless a stronger novelty case survives prior-art review",
+      "local_artifacts": []
+    }
+  ],
+  "aliases": [
+    {
+      "source_id": "ssp_formal_structure_metrology",
+      "canonical_id": "schem_metrology",
+      "relation": "alias_of",
+      "confidence": "high",
+      "reason": "The soft-science mining record names the same Metrology for Formal Structure paper already represented by the controlled Schemathematics publication node. Preserve the mining provenance without creating a second paper identity."
+    }
+  ],
+  "excluded_records": [
+    {
+      "source_id": "obs_p1_cantor_defect",
+      "title": "Cantor Diagonalization as Boundary Defect",
+      "origin": "obsidian_phase12",
+      "reason": "duplicate_or_subsumed",
+      "related_controlled_ids": [
+        "math_cantor",
+        "bdc_computation",
+        "ctm_research_graph"
+      ]
+    },
+    {
+      "source_id": "obs_p1_volumology_compared",
+      "title": "Volumology Compared",
+      "origin": "obsidian_phase12",
+      "reason": "development_provenance",
+      "related_controlled_ids": []
+    },
+    {
+      "source_id": "obs_p1_what_is_volumology",
+      "title": "What Is Volumology?",
+      "origin": "obsidian_phase12",
+      "reason": "development_provenance",
+      "related_controlled_ids": []
+    },
+    {
+      "source_id": "obs_p2_complex_shell",
+      "title": "Complex Domain Shell Lift",
+      "origin": "obsidian_phase12",
+      "reason": "requires_revalidation",
+      "related_controlled_ids": [
+        "syn_local_global_closure",
+        "syn_representation_vs_reality"
+      ]
+    },
+    {
+      "source_id": "obs_p2_spectral_closure",
+      "title": "The Spectral Closure Calculus",
+      "origin": "obsidian_phase12",
+      "reason": "requires_revalidation",
+      "related_controlled_ids": []
+    }
+  ]
+}

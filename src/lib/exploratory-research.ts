@@ -4,24 +4,25 @@ export const exploratoryResearchInspections: Inspection[] = [
   {
     id: "exploratory-paper-mine",
     label: "Paper Mine",
-    eyebrow: "Publication discovery · public data projection",
+    eyebrow: "Publication discovery · corpus-wide public data projection",
     summary:
-      "Browse 34 paper-shaped research questions mined from the private Lab corpus, with visible readiness, provenance paths, claim ceilings, evidence obligations, and a six-object paperization frontier.",
+      "Browse 152 canonical paper objects spanning controlled publication work and mined candidates, with stage, readiness, provenance, claim ceilings, evidence obligations, and the paperization frontier visible.",
     bullets: [
-      "The public page is a projection snapshot, not a second scientific database; the private Lab publication-control artifacts remain authoritative.",
-      "Discovery candidates are not silently promoted into the publication queue, and readiness hints are not publication decisions.",
-      "Every filtered view keeps visible/total/omitted counts so a partial projection cannot masquerade as the whole public snapshot.",
-      "Frontier objects preserve their baseline, evidence, failure, and subsumption conditions before stronger claims can be made.",
-      "URL state makes a bounded projection directly addressable and reproducible without changing the underlying research state.",
+      "112 controlled publication objects and 40 mined candidates share one canonical public projection; explicit aliases are deduplicated rather than silently counted twice.",
+      "The public data is generated from private Lab publication and mining registries; the website remains a bounded projection rather than a second scientific database.",
+      "Controlled Stage A, B, and C objects remain visibly distinct from discovery-stage candidates, and no render state can promote a candidate into the publication queue.",
+      "Every filtered view keeps visible/total/omitted counts so a partial projection cannot masquerade as the whole 152-paper public snapshot.",
+      "Each paper preserves its claim ceiling, prior-art boundary, evidence contract, provenance, queue/disposition state, and canonical alias information.",
+      "URL state makes each bounded corpus view directly addressable and reproducible for review.",
     ],
     sourceRef:
-      "src/content/paper-mine/paper-mine.snapshot.json · projected from codexsmith/boundary-first-labs merge 1088283631c63011413f27967512e153d5e21f50",
+      "Corpus-wide public Paper Mine projection · 152 canonical papers · Lab source 33d8de2add04eeeb9a70c28937dd76af86801181 · projection 16ae7406cedd5b9e942208791ea4c75695f20b71d77c0aed2bed8f7d0afdd11c",
     links: [
       {
         label: "Open Paper Mine",
         href: "/research/paper-mine",
         eyebrow: "Publication discovery workbench",
-        summary: "Explore the candidate field, paperization frontier, and research boundaries.",
+        summary: "Explore controlled publications, mined candidates, canonical identity, the paperization frontier, and research boundaries.",
       },
     ],
   },
