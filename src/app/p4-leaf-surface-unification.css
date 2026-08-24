@@ -110,18 +110,16 @@ body[data-ui-shell="cards"]
 }
 
 @media (max-width: 980px) {
-  /* The compact/editorial projection owns scrolling at the world viewport. The unified
-     leaf must expand with its content; clipping it to one screen would turn a single
-     semantic panel into a hidden internal scroll/crop boundary on longer records. */
+  /* Compact leafs become ordinary block flow inside the same outer shell. This makes
+     the object boundary grow with every internal bank instead of asking an implicit
+     grid track to represent a long editorial page inside a viewport-sized rectangle. */
   body[data-ui-shell="cards"]
     .site-shell[data-root-focus="false"][data-projection="world"]
     .leaf-world {
+    display: block !important;
     height: auto !important;
     min-height: 100%;
     max-height: none !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: auto !important;
-    align-content: start !important;
     overflow: visible !important;
   }
 
