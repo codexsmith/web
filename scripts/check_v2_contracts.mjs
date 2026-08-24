@@ -103,7 +103,8 @@ forbidMatch(
   "Frame chrome must not repeat Root World labeling",
 );
 
-// Focus Path = actual traversal history. Content structure belongs to World/Peers, not the left rail.
+// Focus Path = actual traversal history. Temporal replay uses a cursor; new traversal
+// branches from the active cursor and must discard abandoned forward history.
 forbidMatch(
   "src/components/world-app.tsx",
   /getAncestors|breadcrumbs/,
@@ -116,18 +117,38 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /function appendTraversal\(/,
-  "WorldApp must define traversal append semantics",
+  /function branchTraversal\(path:\s*string\[\],\s*cursor:\s*number,\s*targetId:\s*string\)/,
+  "WorldApp must define cursor-aware traversal branching",
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /function rewindTraversal\(/,
-  "WorldApp must define traversal rewind semantics",
+  /activePath\s*=\s*normalizedCursor\s*>=\s*0\s*\?\s*path\.slice\(0,\s*normalizedCursor\s*\+\s*1\)\s*:\s*\[\]/,
+  "New traversal from rewound history must truncate the abandoned forward path",
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /setTraversalIds\(\(current\)\s*=>\s*appendTraversal\(current,\s*targetId\)\)/,
-  "Graph traversal must append the actual target to the Focus Path",
+  /const ids\s*=\s*\[\.\.\.activePath,\s*targetId\][\s\S]*cursor:\s*ids\.length\s*-\s*1/,
+  "A new graph traversal must append the actual target to the active traversal branch",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /const nextTraversal\s*=\s*branchTraversal\(traversalIds,\s*traversalCursor,\s*targetId\)[\s\S]*setTraversalIds\(nextTraversal\.ids\)[\s\S]*setTraversalCursor\(nextTraversal\.cursor\)/,
+  "Graph traversal must commit both the branched sequence and its active cursor",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /function resolveExistingTraversalCursor[\s\S]*path\.lastIndexOf\(targetId\)/,
+  "Browser and remembered traversal must resolve an existing temporal cursor before branching",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /const moveTraversalCursor\s*=\s*useCallback[\s\S]*setTraversalCursor\(nextCursor\)/,
+  "Back, Forward, and history replay must move the cursor without appending traversal state",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /moveTraversalCursor\(traversalCursor\s*-\s*1\)[\s\S]*moveTraversalCursor\(traversalCursor\s*\+\s*1\)/,
+  "Back and Forward must be temporal cursor operations",
 );
 requireMatch(
   "src/components/boundary-frame.tsx",
@@ -137,7 +158,7 @@ requireMatch(
 requireMatch(
   "src/components/boundary-frame.tsx",
   /onTraversalPath\(node\.id,\s*index\)/,
-  "Earlier Focus Path steps must be actionable traversal-history rewind points",
+  "Earlier Focus Path steps must be actionable traversal-history replay points",
 );
 requireMatch(
   "src/components/boundary-frame.tsx",
@@ -146,8 +167,8 @@ requireMatch(
 );
 requireMatch(
   "src/components/boundary-frame.tsx",
-  /peerNodes\s*=\s*siblings\.filter/,
-  "Sibling traversal must remain owned by the peer rail rather than the Focus Path",
+  /siblingNodes\s*=\s*siblings\.filter/,
+  "Sibling traversal must remain owned by adjacency rather than the Focus Path",
 );
 
 // Ordinary World traversal must expose useful content/actions before specialized views are needed,
@@ -386,7 +407,7 @@ requireExists(
 requireMatch(
   "src/app/card-world-viewport-fit.css",
   /--frame-top:\s*52px[\s\S]*--frame-bottom:\s*52px[\s\S]*world-viewport[\s\S]*padding:\s*clamp\(8px/,
-  "Card World must keep equal compact horizontal rails and a low-padding working viewport",
+  "Card World must keep its compact frame budget and a low-padding working viewport",
 );
 requireMatch(
   "src/app/card-world-viewport-fit.css",
@@ -395,8 +416,13 @@ requireMatch(
 );
 requireMatch(
   "src/components/boundary-frame.tsx",
-  /boundary-frame__bottom[\s\S]*frame-tool--footer-back[\s\S]*projection-switcher/,
-  "Back and Depth must share the bottom rail, with Back physically preceding Depth",
+  /boundary-frame__top[\s\S]*frame-home-tray[\s\S]*onBack[\s\S]*onForward[\s\S]*frame-tools[\s\S]*projection-switcher/,
+  "Temporal replay and projection controls must remain explicit but relationally distinct in the top frame housing",
+);
+forbidMatch(
+  "src/components/boundary-frame.tsx",
+  /<footer[^>]*boundary-frame__bottom/,
+  "The retired bottom control rail must not return as a second global coordinate system",
 );
 
 // Gestalt is process placement/filter, not ancestry or spatial containment zoom.
