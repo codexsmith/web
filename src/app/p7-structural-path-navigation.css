@@ -1,0 +1,80 @@
+/* P7 structural path navigation.
+   Top frame = structural location + temporal Back/Forward transport.
+   Left frame = local relational neighborhood. Parent/current duplication is retired. */
+
+body[data-ui-shell="cards"] .frame-location-path {
+  grid-column: 2;
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+body[data-ui-shell="cards"] .frame-location-path > ol {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 0 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+body[data-ui-shell="cards"] .frame-location-path > ol::-webkit-scrollbar { display: none; }
+body[data-ui-shell="cards"] .frame-location-path li { min-width: 0; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 2px; }
+body[data-ui-shell="cards"] .frame-location-path__separator { flex: 0 0 auto; padding: 0 2px; color: var(--bf-text-muted); font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.58rem; line-height: 1; }
+body[data-ui-shell="cards"] .frame-location-path__node { min-width: 0; max-width: 220px; min-height: 32px; display: inline-flex; align-items: center; justify-content: center; padding: 5px 9px; border: 1px solid transparent; border-radius: 8px; color: var(--bf-text-secondary); font-family: Georgia, "Times New Roman", serif; font-size: 0.67rem; font-weight: 400; line-height: 1.05; text-align: left; white-space: nowrap; }
+body[data-ui-shell="cards"] .frame-location-path__node--ancestor { overflow: hidden; color: var(--bf-text-muted); text-overflow: ellipsis; }
+body[data-ui-shell="cards"] .frame-location-path__node--parent { cursor: pointer; background: transparent; transition: border-color 120ms ease, background 120ms ease, color 120ms ease; }
+body[data-ui-shell="cards"] .frame-location-path__node--parent:hover { border-color: var(--bf-border-subtle); background: var(--bf-bg-raised); color: var(--bf-text-primary); }
+body[data-ui-shell="cards"] .frame-location-path__node--current { min-width: 0; display: grid; justify-items: start; gap: 2px; padding: 4px 10px 5px; border-color: var(--bf-action-line); background: linear-gradient(90deg, var(--bf-action-surface), transparent 92%), var(--bf-bg-raised); color: var(--bf-text-primary); box-shadow: inset 3px 0 0 var(--bf-action), inset 0 1px 0 var(--bf-edge-highlight); }
+body[data-ui-shell="cards"] .frame-location-path__node--current small { color: var(--bf-action); font-family: var(--font-mono, ui-monospace, monospace); font-size: 0.39rem; font-weight: 800; letter-spacing: 0.13em; line-height: 1; text-transform: uppercase; }
+body[data-ui-shell="cards"] .frame-location-path__node--current strong { max-width: 200px; overflow: hidden; font: inherit; text-overflow: ellipsis; white-space: nowrap; }
+body[data-ui-shell="cards"] .frame-location-path--root { pointer-events: none; }
+
+body[data-ui-shell="cards"] .boundary-frame__neighborhood-nav .boundary-neighborhood-nav { gap: 7px; }
+body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__header { margin: 0 !important; }
+body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__flow,
+body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__next { min-width: 0; margin: 0 !important; padding: 0 !important; }
+body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__next::before,
+body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__peer-list::before { content: none !important; display: none !important; }
+body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__peer-list { margin-top: 0 !important; }
+
+@media (min-width: 981px) {
+  body[data-ui-shell="cards"] .boundary-frame__neighborhood-nav { max-height: calc(100svh - var(--frame-top) - 24px); }
+  body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__peer-list { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 6px !important; margin: 0 !important; padding: 0 !important; }
+  body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__peer-list li { min-width: 0; margin: 0 !important; padding: 0 !important; }
+}
+
+@media (max-width: 1180px) {
+  body[data-ui-shell="cards"] .frame-location-path__node { max-width: 164px; padding-inline: 7px; font-size: 0.62rem; }
+  body[data-ui-shell="cards"] .frame-location-path__node--current strong { max-width: 150px; }
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .frame-location-path > ol { padding-inline: 5px; }
+  body[data-ui-shell="cards"] .frame-location-path__node { min-height: 30px; max-width: 150px; padding-inline: 6px; font-size: 0.6rem; }
+  body[data-ui-shell="cards"] .frame-location-path__node--current { padding-block: 4px; }
+  body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__flow { display: block !important; }
+  body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__next,
+  body[data-ui-shell="cards"] .boundary-neighborhood-nav .traversal-nav__peer-list { height: 100% !important; }
+}
+
+@media (max-width: 680px) {
+  body[data-ui-shell="cards"] .frame-location-path__node--ancestor { display: none; }
+  body[data-ui-shell="cards"] .frame-location-path li:has(.frame-location-path__node--ancestor),
+  body[data-ui-shell="cards"] .frame-location-path li:has(.frame-location-path__node--ancestor) + li > .frame-location-path__separator { display: none; }
+  body[data-ui-shell="cards"] .frame-location-path__node--parent,
+  body[data-ui-shell="cards"] .frame-location-path__node--current { max-width: 128px; }
+  body[data-ui-shell="cards"] .frame-location-path__node--current small { display: none; }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .frame-location-path__node--current,
+  body[data-ui-shell="cards"] .frame-location-path__node--parent:hover { border-color: CanvasText; }
+}

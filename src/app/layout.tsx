@@ -63,6 +63,7 @@ import "./p5-semantic-content-artifacts.css";
 import "./p6-process-circuit.css";
 import "./p6-lens-board-refinement.css";
 import "./p6-traversal-shelf-refinement.css";
+import "./p7-structural-path-navigation.css";
 
 export const metadata: Metadata = {
   title: {

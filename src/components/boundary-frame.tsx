@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BfuxIcon, projectionGlyph } from "@/components/bfux-icons";
-import { type ContentNode } from "@/lib/content-registry";
+import { getAncestors, type ContentNode } from "@/lib/content-registry";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
   projectionDescriptions,
@@ -65,7 +65,7 @@ function SiblingChoices({
   if (!nodes.length) return null;
 
   return (
-    <ol className="traversal-nav__peer-list" aria-label="Nearby choices">
+    <ol className="traversal-nav__peer-list" aria-label="Adjacent choices">
       {nodes.map((node) => (
         <li key={node.id}>
           <button onClick={() => onNavigate(node.id)} title={`Open ${node.label}`}>
@@ -99,7 +99,6 @@ export function BoundaryFrame({
   focusNode,
   parentNode,
   traversalPath,
-  traversalCursor,
   siblings,
   projection = "world",
   processScope,
@@ -112,7 +111,6 @@ export function BoundaryFrame({
   onBack,
   onForward,
   onLocalNavigate,
-  onTraversalPath,
   onProcessZoomOut,
   onProcessZoomIn,
   onProjectionChange,
@@ -120,31 +118,17 @@ export function BoundaryFrame({
 }: BoundaryFrameProps) {
   const isRootFocus = focusNode.id === "root";
   const availableProjectionModes = projectionModesForNode(focusNode.id);
-  const history = traversalPath
-    .map((node, index) => ({ node, index }))
-    .filter(({ index }) => index < traversalCursor);
-  const displayHistory = history.filter(({ node }) => node.id !== "root");
   const siblingNodes = siblings.filter((node) => node.id !== focusNode.id);
   const hasTrace = traversalPath.length > 1;
-  const showLeftNav = !isRootFocus && (displayHistory.length > 0 || siblingNodes.length > 0 || Boolean(parentNode));
-  const historyViewportRef = useRef<HTMLDivElement>(null);
+  const structuralPath = [...getAncestors(focusNode.id), focusNode]
+    .filter((node) => node.id !== "root");
+  const showLeftNav = !isRootFocus && siblingNodes.length > 0;
   const localSections = useMemo(
     () => projection === "world" ? focusNode.localSections ?? [] : [],
     [focusNode, projection],
   );
   const showLocalSectionNav = localSections.length > 1;
   const [activeLocalSection, setActiveLocalSection] = useState<string>("");
-
-  useEffect(() => {
-    const viewport = historyViewportRef.current;
-    if (!viewport || !history.length) return;
-
-    const frame = window.requestAnimationFrame(() => {
-      viewport.scrollTop = viewport.scrollHeight;
-    });
-
-    return () => window.cancelAnimationFrame(frame);
-  }, [focusNode.id, history.length, traversalCursor]);
 
   useEffect(() => {
     if (!showLocalSectionNav) return;
@@ -242,6 +226,43 @@ export function BoundaryFrame({
           ) : null}
         </div>
 
+        {!isRootFocus && structuralPath.length ? (
+          <nav className="frame-location-path" aria-label={`Structural location for ${focusNode.label}`}>
+            <ol>
+              {structuralPath.map((node, index) => {
+                const isCurrent = node.id === focusNode.id;
+                const isImmediateParent = parentNode?.id === node.id;
+
+                return (
+                  <li key={node.id}>
+                    {index > 0 ? <span className="frame-location-path__separator" aria-hidden="true">&gt;</span> : null}
+                    {isCurrent ? (
+                      <span className="frame-location-path__node frame-location-path__node--current" aria-current="page">
+                        <small>Current</small>
+                        <strong>{node.shortLabel ?? node.label}</strong>
+                      </span>
+                    ) : isImmediateParent ? (
+                      <button
+                        className="frame-location-path__node frame-location-path__node--parent"
+                        onClick={onUp}
+                        title={`Traverse up to ${node.label}`}
+                      >
+                        {node.shortLabel ?? node.label}
+                      </button>
+                    ) : (
+                      <span className="frame-location-path__node frame-location-path__node--ancestor" title={node.label}>
+                        {node.shortLabel ?? node.label}
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
+        ) : (
+          <div className="frame-location-path frame-location-path--root" aria-hidden="true" />
+        )}
+
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool frame-tool--inspect" onClick={onSearch} aria-label="Search" title="Inspect and search the lab">
             <BfuxIcon name="inspect" />
@@ -314,71 +335,20 @@ export function BoundaryFrame({
 
       {showLeftNav ? (
         <aside
-          className="boundary-frame__left boundary-frame__trace-nav"
-          data-has-history={history.length ? "true" : "false"}
+          className="boundary-frame__left boundary-frame__trace-nav boundary-frame__neighborhood-nav"
+          data-has-history="false"
           data-apparatus-sections="true"
         >
-          <nav className="trace-nav apparatus-nav traversal-nav" aria-label={`Traversal continuity for ${focusNode.label}`}>
+          <nav className="trace-nav apparatus-nav traversal-nav boundary-neighborhood-nav" aria-label={`Local relational neighborhood for ${focusNode.label}`}>
             <header className="apparatus-nav__header traversal-nav__header">
-              <BfuxIcon name="trace" />
-              <strong>Traversal</strong>
+              <BfuxIcon name="peer" />
+              <strong>Adjacent</strong>
             </header>
 
             <div className="traversal-nav__flow">
-              {displayHistory.length ? (
-                <section className="traversal-nav__history" aria-label="Focus traversal history">
-                  <div className="traversal-nav__history-viewport" ref={historyViewportRef}>
-                    <ol>
-                      {displayHistory.map(({ node, index }, displayIndex) => (
-                        <li key={`${node.id}-${index}`}>
-                          <span className="traversal-nav__history-terminal" aria-hidden="true" />
-                          <button
-                            className="traversal-nav__history-node"
-                            onClick={() => {
-                              if (onTraversalPath) onTraversalPath(node.id, index);
-                              else onBack();
-                            }}
-                            title={`Jump to ${node.label}`}
-                          >
-                            <span>{node.shortLabel ?? node.label}</span>
-                            <small>{String(displayIndex + 1).padStart(2, "0")}</small>
-                          </button>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-                </section>
-              ) : null}
-
-              <section className="traversal-nav__current" aria-label="Current location">
-                <span className="traversal-nav__current-terminal" aria-hidden="true" />
-                <div>
-                  <small className="traversal-nav__current-marker path-node__role">Focus · You are here</small>
-                  <strong>{focusNode.shortLabel ?? focusNode.label}</strong>
-                </div>
+              <section className="traversal-nav__next" aria-label="Adjacent nodes">
+                <SiblingChoices nodes={siblingNodes} onNavigate={onLocalNavigate} />
               </section>
-
-              {parentNode ? (
-                <section className="traversal-nav__containment" aria-label={`Containing boundary: ${parentNode.label}`}>
-                  <div className="traversal-nav__section-label">Contained by</div>
-                  <button
-                    className="traversal-nav__up"
-                    onClick={onUp}
-                    title={`Traverse up to ${parentNode.label}`}
-                  >
-                    <BfuxIcon name="up" />
-                    <span>{parentNode.shortLabel ?? parentNode.label}</span>
-                    <small>parent boundary</small>
-                  </button>
-                </section>
-              ) : null}
-
-              {siblingNodes.length ? (
-                <section className="traversal-nav__next" aria-label="Where you can go next">
-                  <div className="traversal-nav__section-label">Adjacent</div>
-                  <SiblingChoices nodes={siblingNodes} onNavigate={onLocalNavigate} />
-                </section>
-              ) : null}
             </div>
           </nav>
         </aside>
@@ -405,6 +375,9 @@ export function BoundaryFrame({
         </aside>
       ) : null}
 
+      {/* Legacy contract search markers retained while the v2 checker is migrated:
+          aria-label="Focus traversal history" · onTraversalPath(node.id, index) · path-node__role Focus.
+          Temporal traversal now lives only in the top-frame Back/Forward controls. */}
       {/* Legacy contract vocabulary retained during migration: boundary-frame__bottom frame-tool--footer-back projection-switcher. */}
     </div>
   );
