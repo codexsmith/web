@@ -179,6 +179,10 @@ function FounderTimelineView() {
               institutional responsibility.
             </p>
             <div className="record-links">
+              <Link href="/about/provenance/timeline">
+                <span>Full development history</span>
+                <strong>Founder &amp; Intellectual Provenance Timeline</strong>
+              </Link>
               <Link href="/about/provenance">
                 <span>Origin and lineage</span>
                 <strong>Provenance</strong>
