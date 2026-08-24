@@ -51,6 +51,18 @@ const processZones: ProcessZone[] = [
   },
 ];
 
+const processStageAxisLabels: Record<ProcessStageId, string> = {
+  intake: "Intake",
+  boundary: "Boundary",
+  representation: "Representation",
+  hypothesis: "Hypothesis",
+  construction: "Construction",
+  execution: "Execution",
+  validation: "Validation",
+  repair: "Repair",
+  promotion: "Promotion",
+};
+
 function stageIcon(stage: ProcessStage): BfuxIconName {
   switch (stage.id) {
     case "intake": return "inspect";
@@ -200,6 +212,10 @@ function ReturnRail() {
 }
 
 function DisciplineDock({ visibleIds, placement }: { visibleIds: Set<ProcessStageId>; placement: ProcessPlacement }) {
+  const activeStageLabels = processStages
+    .filter((stage) => placement.activeStages.includes(stage.id))
+    .map((stage) => processStageAxisLabels[stage.id]);
+
   return (
     <section className="process-lenses" aria-labelledby="process-lenses-title">
       <header className="process-lenses__header">
@@ -207,31 +223,74 @@ function DisciplineDock({ visibleIds, placement }: { visibleIds: Set<ProcessStag
           <span>Method overlays · not process stages</span>
           <h2 id="process-lenses-title">Operating lenses</h2>
         </div>
-        <p>Agentic, Lean, Agile, Scientific, Computational, and Constructive practices overlap the circuit. They change how work is performed, not the order of the process itself.</p>
+        <p>Each row is a method. Each column is a canonical process stage. A marked cell means the lens participates at that stage; current object placement is shown on the stage axis instead of being overloaded into the same mark.</p>
       </header>
-      <div className="process-lenses__grid">
-        {processDisciplines.map((discipline) => (
-          <article key={discipline.id} className="process-lens" data-discipline={discipline.id}>
-            <div className="process-lens__title">
-              <BfuxIcon name="projection" />
-              <strong>{discipline.label}</strong>
+
+      <div className="process-lenses__legend" aria-label="Operating lens matrix legend">
+        <span><strong>Applies</strong> lens participates at this stage</span>
+        <span><strong>Current</strong> focal object presently occupies this stage</span>
+        <span><strong>—</strong> no declared emphasis for this lens</span>
+        <span className="process-lenses__current-summary">Current object · {activeStageLabels.join(" · ")}</span>
+      </div>
+
+      <div className="process-lens-board" role="table" aria-label="Operating lenses by canonical Boundary First process stage">
+        <div className="process-lens-axis" role="row">
+          <div className="process-lens-axis__method" role="columnheader">Operating lens</div>
+          {processStages.map((stage) => {
+            const current = placement.activeStages.includes(stage.id);
+            const visible = visibleIds.has(stage.id);
+            return (
+              <div
+                key={stage.id}
+                className="process-lens-axis__stage"
+                role="columnheader"
+                data-stage={stage.id}
+                data-current={current ? "true" : "false"}
+                data-visible={visible ? "true" : "false"}
+              >
+                <strong>{processStageAxisLabels[stage.id]}</strong>
+                {current ? <small>Current</small> : visible ? <small>In scope</small> : <small>Outside scope</small>}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="process-lenses__grid" role="rowgroup">
+          {processDisciplines.map((discipline) => (
+            <div key={discipline.id} className="process-lens" data-discipline={discipline.id} role="row">
+              <div className="process-lens__method" role="rowheader">
+                <div className="process-lens__title">
+                  <BfuxIcon name="projection" />
+                  <strong>{discipline.label}</strong>
+                </div>
+                <p>{discipline.role}</p>
+                <span className="process-lens__mobile-label">Participates in</span>
+              </div>
+
+              {processStages.map((stage) => {
+                const participates = discipline.stages.includes(stage.id);
+                const current = placement.activeStages.includes(stage.id);
+                const visible = visibleIds.has(stage.id);
+                return (
+                  <div
+                    key={stage.id}
+                    className="process-lens__cell"
+                    role="cell"
+                    data-stage={stage.id}
+                    data-participates={participates ? "true" : "false"}
+                    data-current={current ? "true" : "false"}
+                    data-visible={visible ? "true" : "false"}
+                    aria-label={`${discipline.label} · ${processStageAxisLabels[stage.id]} · ${participates ? "applies" : "no declared emphasis"}${current ? " · current object stage" : ""}`}
+                  >
+                    <span className="process-lens__cell-stage">{processStageAxisLabels[stage.id]}</span>
+                    <strong>{participates ? "Applies" : "—"}</strong>
+                    {participates && current ? <small>Current object</small> : null}
+                  </div>
+                );
+              })}
             </div>
-            <p>{discipline.role}</p>
-            <div className="process-lens__coverage" aria-label={`${discipline.label} process coverage`}>
-              {processStages.map((stage) => (
-                <span
-                  key={stage.id}
-                  data-visible={visibleIds.has(stage.id) ? "true" : "false"}
-                  data-participates={discipline.stages.includes(stage.id) ? "true" : "false"}
-                  data-focus={placement.activeStages.includes(stage.id) ? "true" : "false"}
-                  title={`${stage.shortLabel}${discipline.stages.includes(stage.id) ? ` · ${discipline.label} participates` : ""}`}
-                >
-                  <span className="sr-only">{stage.shortLabel}</span>
-                </span>
-              ))}
-            </div>
-          </article>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
