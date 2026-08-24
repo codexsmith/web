@@ -10,7 +10,7 @@ The structural migration is uniform: the legacy alias becomes a compatibility en
 | `/software-before-code` | `/publications/methods/software-before-code` | **Specialized P4** | Validate method trace, diagnostics, and long-form reading rhythm. |
 | `/corpus-forge` | `/products/current/corpus-forge` | **Specialized P4 · research-operations workbench** | Validate workbench density and decide whether later interactive drill-down adds value without turning the record into an application shell. |
 | `/boundary-first-ux` | `/publications/methods/boundary-first-ux` | **Specialized P4 · standard/conformance instrument** | Validate the self-demonstrating flagship, conformance density, and whether later interactive boundary manipulation adds evidence rather than spectacle. |
-| `/closure-driven-software-development` | `/publications/methods/closure-driven-software-development` | Transitional structured record | Build a progressive-closure delivery instrument with gates, uncertainty reduction, witness, repair, and worked-case slots. |
+| `/closure-driven-software-development` | `/publications/methods/closure-driven-software-development` | **Specialized P4 · progressive-closure delivery instrument** | Validate closure-loop density, certainty-intersection legibility, and the worked-case transition from simple request to domain-recognized closure. |
 | `/weather` | `/research/applied-testbeds/weather` | Transitional structured record | Build a computational-research testbed surface: hypothesis, baseline, diagnostics, simulation/ensemble comparison, validation ladder, claim firewall. |
 | `/law` | `/research/applied-testbeds/law` | Transitional structured record | Build a legal-research surface emphasizing authority, source hierarchy, claim standing, precedent/interpretation relations, and explicit non-advice boundary. |
 | `/chess` | `/research/applied-testbeds/chess` | Transitional structured record | Build a practitioner/testbed board: doctrine, position/decision examples, observable consequences, validation against established chess practice. |
@@ -33,12 +33,13 @@ Held legacy/reconciliation records remain blocked from public routing.
 
 ## Specialized grammars established so far
 
-P4 now has four deliberately different third-layer grammars rather than one universal template:
+P4 now has five deliberately different third-layer grammars rather than one universal template:
 
 1. **Agency & Representation Audit** — diagnostic/service workflow: operating questions, failure field, audit passes, pilot boundary, evidence rule, claim firewall.
 2. **Software Before Code** — practitioner method: object trace, boundary questions, method sequence, stress test, diagnostics, closure, validation ladder.
 3. **Corpus Forge** — research-operations workbench: lifecycle backplane, typed object bank, contradiction trace, promotion gates, validation surface, repair/claim boundary.
 4. **Boundary First UX** — standard/conformance instrument: explicit current boundary, flagship reveal/reframe sequence, lifecycle promotion, renderer independence, semantic grammar, accessibility parity, provisional conformance criteria, standard/demo/lab separation.
+5. **Closure-Driven Software Development** — progressive-closure delivery instrument: six-stage closure loop, domain/executable certainty intersection, executable truth path, worked delivery case, closure gate, empirical validation burden, repair-or-promote outcome.
 
 The generic structured record remains a migration safety net, not a target design.
 
@@ -46,8 +47,7 @@ The generic structured record remains a migration safety net, not a target desig
 
 The next specialized third-layer designs should prioritize by public importance and representational payoff rather than by manifest order:
 
-1. **Closure-Driven Software Development** — naturally maps to a gate/trace/process instrument.
-2. **Weather** — establishes the research-testbed visual grammar reusable for other experimental domains.
-3. **Schemathematics** — establishes the formal-research visual grammar.
-4. **Law** — establishes a high-provenance domain-research grammar.
-5. **Chess / Soccer** — establish practitioner/testbed variants once the reusable research grammar is stable.
+1. **Weather** — establishes the research-testbed visual grammar reusable for other experimental domains.
+2. **Schemathematics** — establishes the formal-research visual grammar.
+3. **Law** — establishes a high-provenance domain-research grammar.
+4. **Chess / Soccer** — establish practitioner/testbed variants once the reusable research grammar is stable.
