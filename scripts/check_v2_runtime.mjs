@@ -234,9 +234,11 @@ try {
   await expectPage("/about/contact?view=evidence", [
     "Contact",
     "Projection boundary",
-    "Evidence unavailable for Contact",
-    "Showing World here.",
-    "Evidence remains preferred and will resume when supported.",
+    "data-projection=\"world\"",
+    "data-projection-intent=\"evidence\"",
+    "data-projection-fallback=\"true\"",
+    "unavailable for ",
+    "remains preferred and will resume when supported.",
   ]);
 
   await expectPage("/public-interest", [
