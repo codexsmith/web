@@ -1,0 +1,62 @@
+/* P3 semantic action glyph layout.
+   Action cards expose their operation through the same BFUX visual grammar used by the frame. */
+
+body[data-ui-shell="cards"] .subject-pane__action {
+  min-width: 0;
+  display: grid !important;
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+  text-align: left;
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-glyph {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  color: var(--bf-text-muted);
+  transition: color 120ms ease, transform 120ms ease;
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+body[data-ui-shell="cards"] .subject-pane__action[data-action-kind="inspection"] .subject-pane__action-glyph {
+  color: var(--bf-info);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action[data-action-kind="record"] .subject-pane__action-glyph {
+  color: var(--bf-valid);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action[data-action-kind="relation"] .subject-pane__action-glyph {
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .subject-pane__action:hover .subject-pane__action-glyph,
+body[data-ui-shell="cards"] .subject-pane__action:focus-visible .subject-pane__action-glyph {
+  color: var(--bf-action-hover);
+  transform: translateX(1px);
+}
+
+@media (max-width: 620px) {
+  body[data-ui-shell="cards"] .subject-pane__action {
+    grid-template-columns: 20px minmax(0, 1fr);
+    gap: 7px;
+  }
+
+  body[data-ui-shell="cards"] .subject-pane__action-glyph {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .subject-pane__action-glyph,
+  body[data-ui-shell="cards"] .subject-pane__action[data-action-kind] .subject-pane__action-glyph {
+    color: CanvasText !important;
+  }
+}
