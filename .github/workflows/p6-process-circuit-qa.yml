@@ -66,6 +66,7 @@ jobs:
           fi
 
           P6_QA_BASE=http://127.0.0.1:3226 node scripts/qa_p6_process_circuit.mjs
+          P6_QA_BASE=http://127.0.0.1:3226 node scripts/qa_p6_traversal_shelf.mjs
 
       - name: Upload process circuit QA
         if: always()
