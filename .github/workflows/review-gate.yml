@@ -48,6 +48,9 @@ jobs:
       - name: Check third-layer detail contracts
         run: node scripts/check_p4_detail_surfaces.mjs
 
+      - name: Check Corpus Forge workbench contracts
+        run: node scripts/check_p4_corpus_forge.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
