@@ -1,0 +1,780 @@
+/* P3 Boundary First industrial control-panel language.
+   This layer intentionally loads after the mature P0-P2 geometry. It changes material,
+   edge, depth, iconography, and instrument state without changing navigation semantics. */
+
+.bfux-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+body[data-ui-shell="cards"] .boundary-frame__top {
+  position: relative;
+  border-top: 1px solid var(--bf-seam-light) !important;
+  border-bottom: 1px solid var(--bf-etched-line-strong) !important;
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 34%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2), transparent 46%),
+    color-mix(in srgb, var(--bf-bg-surface) 94%, black) !important;
+  box-shadow:
+    0 1px 0 var(--bf-seam-dark),
+    0 11px 28px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 var(--bf-edge-highlight-strong),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.58) !important;
+}
+
+body[data-ui-shell="cards"] .boundary-frame__top::before {
+  content: "";
+  position: absolute;
+  right: 12px;
+  bottom: 5px;
+  left: 12px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bf-etched-line), transparent);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray,
+body[data-ui-shell="cards"] .projection-switcher--legible,
+body[data-ui-shell="cards"] .frame-process-zoom {
+  border: 1px solid var(--bf-etched-line) !important;
+  border-radius: var(--bf-radius-housing) !important;
+  background:
+    var(--bf-brushed-metal),
+    var(--bf-well-surface) !important;
+  box-shadow:
+    var(--bf-shadow-well),
+    0 1px 0 var(--bf-seam-light) !important;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray {
+  min-height: 42px;
+  padding: 4px !important;
+}
+
+body[data-ui-shell="cards"] .frame-home-tray--trace .brand-anchor::after {
+  background: linear-gradient(var(--bf-seam-dark), var(--bf-etched-line), var(--bf-seam-dark)) !important;
+}
+
+body[data-ui-shell="cards"] .brand-anchor__mark {
+  width: 30px !important;
+  height: 30px !important;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--bf-etched-line-strong) !important;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.08), transparent 38%),
+    radial-gradient(circle at 50% 60%, rgba(0, 0, 0, 0.25), transparent 68%),
+    var(--bf-bg-frame) !important;
+  box-shadow:
+    0 1px 0 var(--bf-seam-light),
+    0 4px 10px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.32) !important;
+}
+
+body[data-ui-shell="cards"] .brand-anchor__mark .bfux-icon {
+  width: 23px;
+  height: 23px;
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .frame-tool,
+.search-panel__close,
+.inspection-panel__close {
+  border: 1px solid var(--bf-etched-line) !important;
+  border-radius: var(--bf-radius-control) !important;
+  background: var(--bf-bezel-surface) !important;
+  color: var(--bf-text-secondary);
+  box-shadow: var(--bf-shadow-control), var(--bf-shadow-inset) !important;
+}
+
+body[data-ui-shell="cards"] .frame-tool:hover:not(:disabled),
+.search-panel__close:hover,
+.inspection-panel__close:hover {
+  border-color: var(--bf-action-line) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 38%),
+    color-mix(in srgb, var(--bf-bg-raised) 88%, var(--bf-action-surface)) !important;
+  color: var(--bf-text-primary);
+  box-shadow:
+    0 1px 0 var(--bf-seam-dark),
+    0 6px 16px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 var(--bf-edge-highlight-strong) !important;
+}
+
+body[data-ui-shell="cards"] .frame-tool:active:not(:disabled),
+.search-panel__close:active,
+.inspection-panel__close:active {
+  transform: translateY(1px) !important;
+  box-shadow: var(--bf-shadow-well) !important;
+}
+
+body[data-ui-shell="cards"] .frame-tool .bfux-icon {
+  width: 18px;
+  height: 18px;
+}
+
+body[data-ui-shell="cards"] .frame-tool--inspect .bfux-icon {
+  width: 19px;
+  height: 19px;
+}
+
+body[data-ui-shell="cards"] .projection-switcher--legible {
+  min-height: 46px;
+  gap: 4px !important;
+  padding: 4px !important;
+}
+
+body[data-ui-shell="cards"] .projection-switcher--legible .projection-switcher__label {
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  min-width: 38px;
+  margin-right: 1px;
+  padding-inline: 0.4rem;
+  border-right: 1px solid var(--bf-etched-line);
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .projection-switcher--legible button {
+  min-height: 38px;
+  display: grid !important;
+  grid-template-columns: 22px minmax(0, 1fr) !important;
+  grid-template-rows: auto !important;
+  align-items: center;
+  align-content: center;
+  justify-items: stretch !important;
+  gap: 6px !important;
+  padding: 4px 8px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--bf-radius-control) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--bf-text-muted);
+  text-align: left;
+  transition: border-color 120ms ease, background 120ms ease, color 120ms ease, box-shadow 120ms ease, transform 120ms ease;
+}
+
+body[data-ui-shell="cards"] .projection-switcher--legible button:hover {
+  border-color: var(--bf-border-subtle) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  color: var(--bf-text-secondary);
+}
+
+body[data-ui-shell="cards"] .projection-switcher--legible button[aria-pressed="true"] {
+  border-color: var(--bf-action-line) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bf-action) 9%, transparent), transparent 62%),
+    var(--bf-bezel-surface) !important;
+  color: var(--bf-text-primary);
+  box-shadow:
+    inset 0 -2px 0 color-mix(in srgb, var(--bf-action) 78%, transparent),
+    0 1px 0 var(--bf-seam-dark),
+    0 4px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 var(--bf-edge-highlight) !important;
+}
+
+body[data-ui-shell="cards"] .projection-switcher__glyph {
+  grid-column: 1;
+  width: 19px;
+  height: 19px;
+  color: currentColor;
+}
+
+body[data-ui-shell="cards"] .projection-switcher__copy {
+  grid-column: 2;
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+body[data-ui-shell="cards"] .projection-switcher__mode-name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 0.58rem !important;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .projection-switcher__mode-purpose {
+  color: var(--bf-text-muted) !important;
+  font-size: 0.39rem !important;
+  letter-spacing: 0.03em;
+}
+
+body[data-ui-shell="cards"] .projection-switcher--legible button[aria-pressed="true"] .projection-switcher__mode-purpose {
+  color: var(--bf-text-secondary) !important;
+}
+
+body[data-ui-shell="cards"] .frame-process-zoom {
+  min-height: 46px;
+  padding: 4px;
+}
+
+body[data-ui-shell="cards"] .frame-process-zoom__label {
+  padding-inline: 7px 5px;
+}
+
+/* Etched traversal instrument */
+body[data-ui-shell="cards"] .boundary-frame__trace-nav {
+  position: fixed;
+  border-color: var(--bf-etched-line) !important;
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 24%),
+    color-mix(in srgb, var(--bf-bg-surface) 94%, black) !important;
+  box-shadow:
+    var(--bf-shadow-panel),
+    inset -1px 0 0 rgba(0, 0, 0, 0.45) !important;
+}
+
+body[data-ui-shell="cards"] .boundary-frame__trace-nav::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--bf-etched-line-strong), var(--bf-etched-line-strong)) left top / 15px 1px no-repeat,
+    linear-gradient(var(--bf-etched-line-strong), var(--bf-etched-line-strong)) left top / 1px 15px no-repeat,
+    linear-gradient(var(--bf-etched-line-strong), var(--bf-etched-line-strong)) right bottom / 15px 1px no-repeat,
+    linear-gradient(var(--bf-etched-line-strong), var(--bf-etched-line-strong)) right bottom / 1px 15px no-repeat;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+body[data-ui-shell="cards"] .apparatus-nav__header,
+body[data-ui-shell="cards"] .traversal-nav__header {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 7px;
+  padding: 5px 7px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-well-surface);
+  color: var(--bf-text-secondary);
+  box-shadow: var(--bf-shadow-well);
+}
+
+body[data-ui-shell="cards"] .apparatus-nav__header .bfux-icon,
+body[data-ui-shell="cards"] .traversal-nav__header .bfux-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .apparatus-nav__header strong,
+body[data-ui-shell="cards"] .traversal-nav__header strong,
+body[data-ui-shell="cards"] .traversal-nav__section-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__section-label {
+  margin: 9px 0 5px;
+  color: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .traversal-nav__current {
+  border: 1px solid var(--bf-action-line) !important;
+  border-radius: var(--bf-radius-control) !important;
+  background:
+    linear-gradient(90deg, var(--bf-action-surface), transparent 72%),
+    var(--bf-bezel-surface) !important;
+  box-shadow:
+    inset 3px 0 0 var(--bf-action),
+    var(--bf-shadow-control),
+    var(--bf-shadow-inset) !important;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up,
+body[data-ui-shell="cards"] .traversal-nav__peer-list button {
+  border: 1px solid var(--bf-etched-line) !important;
+  border-radius: var(--bf-radius-control) !important;
+  background: var(--bf-bezel-surface) !important;
+  box-shadow: var(--bf-shadow-control), var(--bf-shadow-inset) !important;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up:hover,
+body[data-ui-shell="cards"] .traversal-nav__peer-list button:hover {
+  border-color: var(--bf-action-line) !important;
+  background:
+    linear-gradient(90deg, var(--bf-action-surface), transparent 92%),
+    var(--bf-bg-raised) !important;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__up .bfux-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .traversal-nav__peer-list button {
+  display: grid !important;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 7px;
+}
+
+body[data-ui-shell="cards"] .traversal-nav__peer-glyph {
+  width: 15px;
+  height: 15px;
+  color: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .traversal-nav__peer-list button:hover .traversal-nav__peer-glyph {
+  color: var(--bf-action);
+}
+
+/* Local section coordinates are an instrument rail, not page dots. */
+body[data-ui-shell="cards"] .boundary-frame__pages {
+  border: 1px solid var(--bf-etched-line) !important;
+  background:
+    var(--bf-brushed-metal),
+    color-mix(in srgb, var(--bf-bg-surface) 94%, black) !important;
+  box-shadow: var(--bf-shadow-panel), var(--bf-shadow-inset) !important;
+}
+
+body[data-ui-shell="cards"] .page-position-nav {
+  position: relative;
+  gap: 7px !important;
+  padding: 8px 6px !important;
+}
+
+body[data-ui-shell="cards"] .page-position-nav::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 50%;
+  width: 1px;
+  background: var(--bf-etched-line);
+  transform: translateX(-50%);
+}
+
+body[data-ui-shell="cards"] .page-position-nav button {
+  position: relative;
+  z-index: 1;
+  width: 24px !important;
+  height: 24px !important;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--bf-etched-line) !important;
+  border-radius: 4px !important;
+  background: var(--bf-bg-frame) !important;
+  box-shadow: var(--bf-shadow-control) !important;
+}
+
+body[data-ui-shell="cards"] .page-position-nav button > span {
+  width: 8px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .page-position-nav button[aria-current="page"] {
+  border-color: var(--bf-action-line) !important;
+  background: color-mix(in srgb, var(--bf-bg-raised) 88%, var(--bf-action-surface)) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--bf-action) 18%, transparent),
+    0 0 12px var(--bf-action-glow),
+    var(--bf-shadow-control) !important;
+}
+
+body[data-ui-shell="cards"] .page-position-nav button[aria-current="page"] > span {
+  width: 12px;
+  background: var(--bf-action);
+}
+
+/* Search: diagnostic console rather than generic modal. */
+.search-layer__backdrop,
+.inspection-layer__backdrop {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(56, 68, 75, 0.18), transparent 48%),
+    rgba(5, 8, 10, 0.78) !important;
+  backdrop-filter: blur(5px);
+}
+
+.search-panel--instrument,
+.inspection-panel--instrument {
+  position: relative;
+  border: 1px solid var(--bf-etched-line-strong) !important;
+  border-radius: var(--bf-radius-housing) !important;
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 20%),
+    color-mix(in srgb, var(--bf-bg-surface) 96%, black) !important;
+  box-shadow:
+    0 0 0 1px var(--bf-seam-dark),
+    var(--bf-shadow-float),
+    inset 0 1px 0 var(--bf-edge-highlight-strong),
+    inset 0 -1px 0 var(--bf-seam-dark) !important;
+}
+
+.search-panel--instrument::before,
+.inspection-panel--instrument::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: calc(var(--bf-radius-housing) - 3px);
+  pointer-events: none;
+}
+
+.search-panel__header {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--bf-etched-line);
+}
+
+.search-panel__title-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.search-panel__title-glyph {
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  color: var(--bf-action);
+}
+
+.search-panel__close,
+.inspection-panel__close {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.search-panel__close .bfux-icon,
+.inspection-panel__close .bfux-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.search-field--instrument {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.search-field--instrument .search-field__glyph {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  z-index: 2;
+  width: 19px;
+  height: 19px;
+  color: var(--bf-text-muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.search-panel--instrument .search-field--instrument input {
+  padding-left: 44px !important;
+  border-color: var(--bf-etched-line) !important;
+  background: var(--bf-well-surface) !important;
+  box-shadow: var(--bf-shadow-well) !important;
+}
+
+.search-panel--instrument .search-field--instrument input:focus {
+  border-color: var(--bf-action-line) !important;
+  box-shadow:
+    var(--bf-shadow-well),
+    0 0 0 1px var(--bf-action-line),
+    0 0 16px var(--bf-action-glow) !important;
+}
+
+.search-facets {
+  position: relative;
+  z-index: 1;
+  border-color: var(--bf-etched-line) !important;
+  background: var(--bf-well-surface) !important;
+  box-shadow: var(--bf-shadow-well) !important;
+}
+
+.search-facets select,
+.search-facets > .search-facets__check {
+  border-color: var(--bf-etched-line) !important;
+  background: var(--bf-bezel-surface) !important;
+  box-shadow: var(--bf-shadow-control), var(--bf-shadow-inset) !important;
+}
+
+.search-results--instrument > .search-result {
+  position: relative;
+  border-color: var(--bf-etched-line) !important;
+  border-radius: var(--bf-radius-control) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 28%),
+    color-mix(in srgb, var(--bf-bg-base) 94%, black) !important;
+  box-shadow:
+    0 1px 0 var(--bf-seam-dark),
+    inset 0 1px 0 var(--bf-edge-highlight) !important;
+}
+
+.search-results--instrument > .search-result::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 9px;
+  height: 9px;
+  border-top: 1px solid var(--bf-etched-line);
+  border-right: 1px solid var(--bf-etched-line);
+  opacity: 0.7;
+}
+
+.search-results--instrument > .search-result:hover {
+  border-color: var(--bf-action-line) !important;
+  background:
+    linear-gradient(90deg, var(--bf-action-surface), transparent 84%),
+    var(--bf-bg-raised) !important;
+  box-shadow:
+    0 1px 0 var(--bf-seam-dark),
+    0 7px 18px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 var(--bf-edge-highlight-strong) !important;
+}
+
+.search-result__facets > small {
+  border-radius: 3px !important;
+  background: var(--bf-well-surface) !important;
+}
+
+/* Inspection: narrow diagnostic bay. */
+.inspection-panel--instrument .inspection-panel__rail {
+  border-right: 1px solid var(--bf-etched-line) !important;
+  background:
+    var(--bf-brushed-metal),
+    var(--bf-well-surface) !important;
+  box-shadow: inset -1px 0 0 var(--bf-seam-dark) !important;
+}
+
+.inspection-panel__rail-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--bf-text-secondary);
+}
+
+.inspection-panel__rail-label .bfux-icon {
+  width: 17px;
+  height: 17px;
+  color: var(--bf-action);
+}
+
+.inspection-panel--instrument .inspection-panel__content {
+  position: relative;
+  z-index: 1;
+}
+
+.inspection-panel--instrument .inspection-panel__content > ul,
+.inspection-panel--instrument .inspection-source,
+.inspection-panel--instrument .inspection-record-links > a {
+  border-color: var(--bf-etched-line) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 35%),
+    color-mix(in srgb, var(--bf-bg-base) 93%, black) !important;
+  box-shadow: var(--bf-shadow-inset) !important;
+}
+
+.inspection-source > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inspection-source > span .bfux-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--bf-action);
+}
+
+/* Primary content surfaces read as machined modules rather than flat SaaS cards. */
+body[data-ui-shell="cards"] .section-region-card,
+body[data-ui-shell="cards"] .leaf-world__port,
+body[data-ui-shell="cards"] .subject-pane__action,
+body[data-ui-shell="cards"] .public-interest-panel {
+  border-color: var(--bf-etched-line) !important;
+  border-radius: var(--bf-radius-control) !important;
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 26%),
+    color-mix(in srgb, var(--bf-bg-base) 95%, black) !important;
+  box-shadow:
+    0 1px 0 var(--bf-seam-dark),
+    0 5px 14px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 var(--bf-edge-highlight) !important;
+}
+
+body[data-ui-shell="cards"] .section-region-card:hover,
+body[data-ui-shell="cards"] .leaf-world__port:hover,
+body[data-ui-shell="cards"] .subject-pane__action:hover,
+body[data-ui-shell="cards"] .public-interest-panel--link:hover {
+  border-color: var(--bf-action-line) !important;
+  background:
+    linear-gradient(90deg, var(--bf-action-surface), transparent 90%),
+    var(--bf-bg-raised) !important;
+  box-shadow:
+    0 1px 0 var(--bf-seam-dark),
+    0 8px 20px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 var(--bf-edge-highlight-strong) !important;
+}
+
+body[data-ui-shell="cards"] .section-region-card::after,
+body[data-ui-shell="cards"] .leaf-world__port::after {
+  border-color: var(--bf-etched-line) !important;
+}
+
+/* Evidence and Process remain distinct projections but share apparatus material law. */
+body[data-ui-shell="cards"] .evidence-view__scope,
+body[data-ui-shell="cards"] .evidence-ceiling,
+body[data-ui-shell="cards"] .evidence-claims > article,
+body[data-ui-shell="cards"] .evidence-sources > article,
+body[data-ui-shell="cards"] .evidence-limits > div,
+body[data-ui-shell="cards"] .evidence-events > article,
+body[data-ui-shell="cards"] .gestalt-synthesis,
+body[data-ui-shell="cards"] .gestalt-pipeline,
+body[data-ui-shell="cards"] .gestalt-discipline-map,
+body[data-ui-shell="cards"] .gestalt-placement-notes,
+body[data-ui-shell="cards"] .gestalt-process-peers {
+  border-color: var(--bf-etched-line) !important;
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.028), transparent 26%),
+    color-mix(in srgb, var(--bf-bg-base) 94%, black) !important;
+  box-shadow:
+    0 1px 0 var(--bf-seam-dark),
+    inset 0 1px 0 var(--bf-edge-highlight) !important;
+}
+
+body[data-ui-shell="cards"] .evidence-ceiling {
+  box-shadow:
+    inset 3px 0 0 var(--bf-attention),
+    var(--bf-shadow-inset) !important;
+}
+
+body[data-ui-shell="cards"] .gestalt-pipeline__stages > li {
+  border-color: var(--bf-etched-line) !important;
+}
+
+body[data-ui-shell="cards"] .gestalt-pipeline__stages > li[data-primary="true"] {
+  box-shadow:
+    inset 3px 0 0 var(--bf-action),
+    0 0 18px var(--bf-action-glow) !important;
+}
+
+/* Projection transport is a boundary-condition instrument, not a generic toast. */
+.projection-transport-notice {
+  border: 1px solid color-mix(in srgb, var(--bf-attention) 48%, var(--bf-etched-line)) !important;
+  border-left: 3px solid var(--bf-attention) !important;
+  border-radius: var(--bf-radius-control) !important;
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-attention) 10%, transparent), transparent 70%),
+    color-mix(in srgb, var(--bf-bg-surface) 96%, black) !important;
+  box-shadow: var(--bf-shadow-panel), var(--bf-shadow-inset) !important;
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .projection-switcher--legible button {
+    grid-template-columns: 19px minmax(0, 1fr) !important;
+    gap: 5px !important;
+    padding-inline: 6px !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher__glyph {
+    width: 16px;
+    height: 16px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav::after {
+    inset: 5px;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .projection-switcher--legible button {
+    grid-template-columns: 16px minmax(0, 1fr) !important;
+    gap: 4px !important;
+    padding-inline: 5px !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher__glyph {
+    width: 14px;
+    height: 14px;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher__mode-name {
+    font-size: 0.5rem !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher__mode-purpose {
+    font-size: 0.33rem !important;
+  }
+
+  .search-panel__close > span,
+  .inspection-panel__close > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .search-panel__close,
+  .inspection-panel__close {
+    width: 34px;
+    min-width: 34px;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .bfux-icon {
+    color: CanvasText !important;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__top,
+  body[data-ui-shell="cards"] .frame-home-tray,
+  body[data-ui-shell="cards"] .projection-switcher--legible,
+  body[data-ui-shell="cards"] .frame-process-zoom,
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav,
+  body[data-ui-shell="cards"] .boundary-frame__pages,
+  .search-panel--instrument,
+  .inspection-panel--instrument,
+  .search-facets,
+  .search-results--instrument > .search-result,
+  body[data-ui-shell="cards"] .section-region-card,
+  body[data-ui-shell="cards"] .leaf-world__port,
+  body[data-ui-shell="cards"] .subject-pane__action,
+  body[data-ui-shell="cards"] .evidence-view__scope,
+  body[data-ui-shell="cards"] .gestalt-pipeline,
+  .projection-transport-notice {
+    border-color: CanvasText !important;
+    background: Canvas !important;
+    box-shadow: none !important;
+  }
+}
