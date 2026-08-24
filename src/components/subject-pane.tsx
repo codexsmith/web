@@ -1,6 +1,8 @@
 "use client";
 
+import { BfuxContentArtifact } from "@/components/bfux-content-artifact";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
+import { getNodeContentArtifacts } from "@/lib/bfux-content-artifacts";
 import { ContentNode, getChildren, getCrossEdges } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getRecordDetailHrefForLink } from "@/lib/record-detail-routing";
@@ -181,12 +183,14 @@ export function SubjectPane(props: SubjectPaneProps) {
 
   const { onInspect, onNavigate } = props;
   const orderedActions = getSubjectActions(node);
+  const contentArtifacts = getNodeContentArtifacts(node.id);
 
   const primaryActions = orderedActions.slice(0, 4);
   const remainingActions = orderedActions.slice(4);
 
   const hasContent =
     body.length > 0 ||
+    contentArtifacts.length > 0 ||
     Boolean(status) ||
     Boolean(publication) ||
     primaryActions.length > 0 ||
@@ -210,6 +214,14 @@ export function SubjectPane(props: SubjectPaneProps) {
       {immediateBody ? (
         <div className="subject-pane__body">
           <p>{immediateBody}</p>
+        </div>
+      ) : null}
+
+      {contentArtifacts.length ? (
+        <div className="subject-pane__artifacts" aria-label={`Visual structure for ${node.label}`}>
+          {contentArtifacts.map((artifact) => (
+            <BfuxContentArtifact key={artifact.id} artifact={artifact} />
+          ))}
         </div>
       ) : null}
 
