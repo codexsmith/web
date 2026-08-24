@@ -1,5 +1,6 @@
 "use client";
 
+import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import { ContentNode, getChildren, getCrossEdges } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
 
@@ -43,6 +44,25 @@ export type SubjectAction =
       edgeType: string;
     };
 
+function actionGlyph(action: SubjectAction): BfuxIconName {
+  if (action.kind === "inspection") return "inspect";
+  if (action.kind === "relation") return "peer";
+  return "trace";
+}
+
+function ActionCardContents({ action }: { action: SubjectAction }) {
+  return (
+    <>
+      <BfuxIcon name={actionGlyph(action)} className="subject-pane__action-glyph" />
+      <span className="subject-pane__action-copy">
+        <span>{action.eyebrow}</span>
+        <strong>{action.label}</strong>
+        {action.summary ? <small>{action.summary}</small> : null}
+      </span>
+    </>
+  );
+}
+
 export function ActionCard({
   action,
   onInspect,
@@ -54,29 +74,32 @@ export function ActionCard({
 }) {
   if (action.kind === "record") {
     return (
-      <a href={action.href}>
-        <span>{action.eyebrow}</span>
-        <strong>{action.label}</strong>
-        {action.summary ? <small>{action.summary}</small> : null}
+      <a className="subject-pane__action" data-action-kind={action.kind} href={action.href}>
+        <ActionCardContents action={action} />
       </a>
     );
   }
 
   if (action.kind === "inspection") {
     return (
-      <button onClick={() => onInspect(action.inspectionId)}>
-        <span>{action.eyebrow}</span>
-        <strong>{action.label}</strong>
-        {action.summary ? <small>{action.summary}</small> : null}
+      <button
+        className="subject-pane__action"
+        data-action-kind={action.kind}
+        onClick={() => onInspect(action.inspectionId)}
+      >
+        <ActionCardContents action={action} />
       </button>
     );
   }
 
   return (
-    <button onClick={() => onNavigate(action.nodeId)} data-edge-type={action.edgeType}>
-      <span>{action.eyebrow}</span>
-      <strong>{action.label}</strong>
-      {action.summary ? <small>{action.summary}</small> : null}
+    <button
+      className="subject-pane__action"
+      data-action-kind={action.kind}
+      onClick={() => onNavigate(action.nodeId)}
+      data-edge-type={action.edgeType}
+    >
+      <ActionCardContents action={action} />
     </button>
   );
 }
