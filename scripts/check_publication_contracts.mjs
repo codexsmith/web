@@ -35,6 +35,7 @@ for (const path of [
   "src/lib/publication-types.ts",
   "src/lib/publication-portfolio.ts",
   "src/lib/content-registry.ts",
+  "src/lib/search-index.ts",
 ]) {
   requireExists(path, "First-class publication source/registry must remain available");
 }
@@ -95,14 +96,24 @@ for (const path of [
   "src/components/world-app.tsx",
   "src/components/world-view.tsx",
   "src/components/evidence-view.tsx",
-  "src/components/search-panel.tsx",
 ]) {
   requireMatch(
     path,
     /@\/lib\/content-registry/,
-    "Routing, traversal, world, evidence, and search must use the combined first-class content registry",
+    "Routing, traversal, World, and Evidence must use the combined first-class content registry",
   );
 }
+
+requireMatch(
+  "src/components/search-panel.tsx",
+  /@\/lib\/search-index/,
+  "Search UI must consume the typed search-index boundary rather than duplicate registry indexing logic",
+);
+requireMatch(
+  "src/lib/search-index.ts",
+  /@\/lib\/content-registry/,
+  "Search index must derive its corpus from the combined first-class content registry",
+);
 
 requireMatch(
   "src/components/subject-pane.tsx",
@@ -122,9 +133,9 @@ requireMatch(
 );
 
 requireMatch(
-  "src/components/search-panel.tsx",
-  /publication\?\.label[\s\S]*publication\?\.claimMaturity[\s\S]*publication\?\.nextGate/,
-  "Search must index publication development metadata",
+  "src/lib/search-index.ts",
+  /node\.publication\?\.label[\s\S]*node\.publication\?\.claimMaturity[\s\S]*node\.publication\?\.nextGate/,
+  "Search index must include publication development metadata in the typed standing channel",
 );
 
 requireMatch(
