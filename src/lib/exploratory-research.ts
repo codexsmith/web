@@ -2,6 +2,30 @@ import type { ContentNode, Inspection } from "@/lib/content";
 
 export const exploratoryResearchInspections: Inspection[] = [
   {
+    id: "exploratory-paper-mine",
+    label: "Paper Mine",
+    eyebrow: "Publication discovery · public data projection",
+    summary:
+      "Browse 34 paper-shaped research questions mined from the private Lab corpus, with visible readiness, provenance paths, claim ceilings, evidence obligations, and a six-object paperization frontier.",
+    bullets: [
+      "The public page is a projection snapshot, not a second scientific database; the private Lab publication-control artifacts remain authoritative.",
+      "Discovery candidates are not silently promoted into the publication queue, and readiness hints are not publication decisions.",
+      "Every filtered view keeps visible/total/omitted counts so a partial projection cannot masquerade as the whole public snapshot.",
+      "Frontier objects preserve their baseline, evidence, failure, and subsumption conditions before stronger claims can be made.",
+      "URL state makes a bounded projection directly addressable and reproducible without changing the underlying research state.",
+    ],
+    sourceRef:
+      "src/content/paper-mine/paper-mine.snapshot.json · projected from codexsmith/boundary-first-labs merge 1088283631c63011413f27967512e153d5e21f50",
+    links: [
+      {
+        label: "Open Paper Mine",
+        href: "/research/paper-mine",
+        eyebrow: "Publication discovery workbench",
+        summary: "Explore the candidate field, paperization frontier, and research boundaries.",
+      },
+    ],
+  },
+  {
     id: "exploratory-poincare",
     label: "Poincaré Reformulation",
     eyebrow: "Worked calibration example · solved target",
