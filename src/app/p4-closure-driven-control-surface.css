@@ -1,0 +1,928 @@
+/* P4 Closure-Driven Software Development specialized third-layer grammar.
+   Delivery is represented as progressive closure under uncertainty: bound the commitment,
+   establish an executable witness, let execution expose defects, then repair or promote. */
+
+body[data-ui-shell="cards"] .closure-driven-surface {
+  place-items: stretch;
+  padding: clamp(10px, 1.1vw, 18px);
+  overflow: hidden;
+  background:
+    var(--bf-brushed-metal),
+    radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--bf-action) 7%, transparent), transparent 27rem),
+    color-mix(in srgb, var(--bf-bg-base) 96%, black);
+}
+
+body[data-ui-shell="cards"] .closure-driven {
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--bf-etched-line-strong);
+  border-radius: var(--bf-radius-housing);
+  background:
+    var(--bf-brushed-metal),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.028), transparent 18%),
+    color-mix(in srgb, var(--bf-bg-surface) 97%, black);
+  box-shadow:
+    var(--bf-shadow-panel),
+    inset 0 1px 0 var(--bf-edge-highlight-strong),
+    inset 0 -1px 0 var(--bf-seam-dark);
+}
+
+body[data-ui-shell="cards"] .closure-driven__masthead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px clamp(16px, 2vw, 30px);
+  padding: clamp(15px, 1.5vw, 24px) clamp(16px, 1.7vw, 28px);
+  border-bottom: 1px solid var(--bf-etched-line-strong);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 6%, transparent), transparent 42%),
+    var(--bf-well-surface);
+  box-shadow: inset 0 -1px 0 var(--bf-seam-dark);
+}
+
+body[data-ui-shell="cards"] .closure-driven__identity {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(11px, 1vw, 17px);
+}
+
+body[data-ui-shell="cards"] .closure-driven__mark {
+  width: clamp(38px, 3.4vw, 54px);
+  height: clamp(38px, 3.4vw, 54px);
+  flex: 0 0 auto;
+  color: var(--bf-action);
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.28));
+}
+
+body[data-ui-shell="cards"] .closure-driven__identity span,
+body[data-ui-shell="cards"] .closure-driven__tools,
+body[data-ui-shell="cards"] .closure-driven__micro-label,
+body[data-ui-shell="cards"] .closure-driven__panel-heading span,
+body[data-ui-shell="cards"] .closure-driven__cone-heading span,
+body[data-ui-shell="cards"] .closure-driven__ticket span,
+body[data-ui-shell="cards"] .closure-driven__truth-path span,
+body[data-ui-shell="cards"] .closure-driven__closure-gate span,
+body[data-ui-shell="cards"] .closure-driven__validation-grid aside > span,
+body[data-ui-shell="cards"] .closure-driven__closing span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.105em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .closure-driven__identity span,
+body[data-ui-shell="cards"] .closure-driven__micro-label,
+body[data-ui-shell="cards"] .closure-driven__panel-heading span,
+body[data-ui-shell="cards"] .closure-driven__cone-heading span,
+body[data-ui-shell="cards"] .closure-driven__ticket span,
+body[data-ui-shell="cards"] .closure-driven__truth-path span,
+body[data-ui-shell="cards"] .closure-driven__closure-gate span,
+body[data-ui-shell="cards"] .closure-driven__validation-grid aside > span,
+body[data-ui-shell="cards"] .closure-driven__closing span {
+  color: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .closure-driven__identity h1 {
+  max-width: 34ch;
+  margin: 3px 0 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2vw, 2.35rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.018em;
+}
+
+body[data-ui-shell="cards"] .closure-driven__tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  color: var(--bf-text-muted);
+}
+
+body[data-ui-shell="cards"] .closure-driven__tools > span,
+body[data-ui-shell="cards"] .closure-driven__tools a {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background: var(--bf-bezel-surface);
+  box-shadow: var(--bf-shadow-control), var(--bf-shadow-inset);
+}
+
+body[data-ui-shell="cards"] .closure-driven__tools a {
+  color: var(--bf-text-secondary);
+  text-decoration: none;
+}
+
+body[data-ui-shell="cards"] .closure-driven__tools a:hover {
+  border-color: var(--bf-action-line);
+  color: var(--bf-text-primary);
+}
+
+body[data-ui-shell="cards"] .closure-driven__tools .bfux-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__masthead > p {
+  grid-column: 1 / -1;
+  max-width: 95ch;
+  margin: 3px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.78rem, 0.86vw, 0.95rem);
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .closure-driven__boundary-line {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(24px, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.42rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .closure-driven__boundary-line i {
+  height: 1px;
+  background: linear-gradient(90deg, var(--bf-action-line), var(--bf-etched-line), transparent);
+}
+
+body[data-ui-shell="cards"] .closure-driven__scroll {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: clamp(12px, 1.25vw, 20px);
+}
+
+body[data-ui-shell="cards"] .closure-driven__opening,
+body[data-ui-shell="cards"] .closure-driven__section,
+body[data-ui-shell="cards"] .closure-driven__closing {
+  max-width: 1480px;
+  margin-inline: auto;
+}
+
+body[data-ui-shell="cards"] .closure-driven__opening {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.62fr);
+  gap: clamp(14px, 1.5vw, 24px);
+  padding: clamp(18px, 2vw, 32px);
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background:
+    linear-gradient(125deg, color-mix(in srgb, var(--bf-action) 7%, transparent), transparent 48%),
+    var(--bf-bg-base);
+  box-shadow: var(--bf-shadow-inset), inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .closure-driven__definition h2,
+body[data-ui-shell="cards"] .closure-driven__section > header h2,
+body[data-ui-shell="cards"] .closure-driven__closing h2 {
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: -0.018em;
+}
+
+body[data-ui-shell="cards"] .closure-driven__definition h2 {
+  max-width: 25ch;
+  margin: 7px 0 0;
+  font-size: clamp(2rem, 3vw, 3.8rem);
+  line-height: 0.99;
+}
+
+body[data-ui-shell="cards"] .closure-driven__definition > p,
+body[data-ui-shell="cards"] .closure-driven__section > header > p {
+  max-width: 82ch;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.84rem, 0.9vw, 0.98rem);
+  line-height: 1.62;
+}
+
+body[data-ui-shell="cards"] .closure-driven blockquote {
+  margin: 16px 0 0;
+  padding: 12px 15px;
+  border-left: 2px solid var(--bf-action);
+  background: color-mix(in srgb, var(--bf-action) 5%, transparent);
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.95rem, 1.08vw, 1.2rem);
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .closure-driven__pressure {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.42fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-well-surface);
+  box-shadow: var(--bf-shadow-well);
+}
+
+body[data-ui-shell="cards"] .closure-driven__pressure-dial {
+  aspect-ratio: 1;
+  min-height: 132px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 4px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--bf-action) 8%, transparent), transparent 62%),
+    var(--bf-bg-base);
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.32), inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .closure-driven__pressure-dial .bfux-icon {
+  width: 42px;
+  height: 42px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__pressure-dial span,
+body[data-ui-shell="cards"] .closure-driven__pressure-dial strong {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .closure-driven__pressure-dial span {
+  color: var(--bf-text-muted);
+  font-size: 0.42rem;
+  letter-spacing: 0.1em;
+}
+
+body[data-ui-shell="cards"] .closure-driven__pressure-dial strong {
+  color: var(--bf-action);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+body[data-ui-shell="cards"] .closure-driven__pressure p {
+  margin: 6px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .closure-driven__section {
+  margin-top: clamp(12px, 1.2vw, 18px);
+  padding: clamp(18px, 1.8vw, 28px);
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-control);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 28%),
+    color-mix(in srgb, var(--bf-bg-base) 96%, black);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .closure-driven__section > header {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.28fr) minmax(0, 1fr);
+  gap: 5px clamp(18px, 2vw, 32px);
+  margin-bottom: 18px;
+}
+
+body[data-ui-shell="cards"] .closure-driven__section > header .closure-driven__micro-label {
+  grid-row: 1 / 4;
+  align-self: start;
+}
+
+body[data-ui-shell="cards"] .closure-driven__section > header h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.1vw, 2.8rem);
+  line-height: 1.02;
+}
+
+body[data-ui-shell="cards"] .closure-driven__section > header p {
+  margin: 5px 0 0;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-well-surface);
+  box-shadow: var(--bf-shadow-well);
+  list-style: none;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop li {
+  position: relative;
+  min-width: 0;
+  min-height: 220px;
+  padding: 14px 13px 16px;
+  border-right: 1px solid var(--bf-etched-line);
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop li:last-child {
+  border-right: 0;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop-index {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop-index .bfux-icon {
+  width: 23px;
+  height: 23px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop-index span,
+body[data-ui-shell="cards"] .closure-driven__skeleton > li > span,
+body[data-ui-shell="cards"] .closure-driven__distinctions span,
+body[data-ui-shell="cards"] .closure-driven__example-skeleton span {
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop h3 {
+  margin: 22px 0 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.16rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop p {
+  margin: 9px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.7rem;
+  line-height: 1.47;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop small {
+  display: block;
+  margin-top: 12px;
+  color: var(--bf-text-muted);
+  font-size: 0.58rem;
+  line-height: 1.38;
+}
+
+body[data-ui-shell="cards"] .closure-driven__loop-arrow {
+  position: absolute;
+  z-index: 2;
+  top: 17px;
+  right: -9px;
+  width: 17px;
+  height: 17px;
+  padding: 2px;
+  color: var(--bf-action);
+  background: var(--bf-bg-base);
+  border-radius: 50%;
+}
+
+body[data-ui-shell="cards"] .closure-driven__certainty {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.38fr) minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+}
+
+body[data-ui-shell="cards"] .closure-driven__certainty > article,
+body[data-ui-shell="cards"] .closure-driven__example-grid > article,
+body[data-ui-shell="cards"] .closure-driven__validation-grid > article,
+body[data-ui-shell="cards"] .closure-driven__claim-grid > article {
+  padding: 15px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-bezel-surface);
+  box-shadow: var(--bf-shadow-inset);
+}
+
+body[data-ui-shell="cards"] .closure-driven__certainty > article[data-cone="domain"] {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 6%, transparent), transparent),
+    var(--bf-bezel-surface);
+}
+
+body[data-ui-shell="cards"] .closure-driven__certainty > article[data-cone="executable"] {
+  background:
+    linear-gradient(270deg, color-mix(in srgb, var(--bf-action) 6%, transparent), transparent),
+    var(--bf-bezel-surface);
+}
+
+body[data-ui-shell="cards"] .closure-driven__cone-heading,
+body[data-ui-shell="cards"] .closure-driven__panel-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+body[data-ui-shell="cards"] .closure-driven__cone-heading .bfux-icon,
+body[data-ui-shell="cards"] .closure-driven__panel-heading .bfux-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__cone-heading strong,
+body[data-ui-shell="cards"] .closure-driven__panel-heading strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .closure-driven__certainty ul,
+body[data-ui-shell="cards"] .closure-driven__validation-grid ul,
+body[data-ui-shell="cards"] .closure-driven__claim-grid ul {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  color: var(--bf-text-secondary);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .closure-driven__intersection {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 5px;
+  padding: 14px;
+  text-align: center;
+  border: 1px solid var(--bf-action-line);
+  border-radius: var(--bf-radius-instrument);
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--bf-action) 13%, transparent), transparent 67%),
+    var(--bf-well-surface);
+  box-shadow: var(--bf-shadow-well), inset 0 0 24px color-mix(in srgb, var(--bf-action) 4%, transparent);
+}
+
+body[data-ui-shell="cards"] .closure-driven__intersection .bfux-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__intersection span,
+body[data-ui-shell="cards"] .closure-driven__intersection small {
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .closure-driven__intersection strong {
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+body[data-ui-shell="cards"] .closure-driven__skeleton {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body[data-ui-shell="cards"] .closure-driven__skeleton li {
+  min-height: 138px;
+  display: grid;
+  grid-template-columns: auto 24px;
+  align-content: start;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--bf-etched-line);
+  border-right: 0;
+  background: var(--bf-bezel-surface);
+}
+
+body[data-ui-shell="cards"] .closure-driven__skeleton li:first-child {
+  border-radius: var(--bf-radius-instrument) 0 0 var(--bf-radius-instrument);
+}
+
+body[data-ui-shell="cards"] .closure-driven__skeleton li:last-child {
+  border-right: 1px solid var(--bf-etched-line);
+  border-radius: 0 var(--bf-radius-instrument) var(--bf-radius-instrument) 0;
+}
+
+body[data-ui-shell="cards"] .closure-driven__skeleton .bfux-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__skeleton p {
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+body[data-ui-shell="cards"] .closure-driven__truth-path {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 9px;
+  padding: 11px 13px;
+  border: 1px solid var(--bf-action-line);
+  background: color-mix(in srgb, var(--bf-action) 5%, transparent);
+}
+
+body[data-ui-shell="cards"] .closure-driven__truth-path .bfux-icon {
+  width: 25px;
+  height: 25px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__truth-path strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .closure-driven__ticket {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) 38px minmax(0, 1.28fr);
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid var(--bf-etched-line);
+  background: var(--bf-well-surface);
+}
+
+body[data-ui-shell="cards"] .closure-driven__ticket > .bfux-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__ticket-request,
+body[data-ui-shell="cards"] .closure-driven__ticket-domain {
+  padding: 12px;
+  border: 1px solid var(--bf-etched-line);
+  background: var(--bf-bezel-surface);
+}
+
+body[data-ui-shell="cards"] .closure-driven__ticket strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .closure-driven__ticket small {
+  display: block;
+  margin-top: 4px;
+  color: var(--bf-text-muted);
+  font-size: 0.62rem;
+}
+
+body[data-ui-shell="cards"] .closure-driven__example-grid,
+body[data-ui-shell="cards"] .closure-driven__claim-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+body[data-ui-shell="cards"] .closure-driven__distinctions,
+body[data-ui-shell="cards"] .closure-driven__example-skeleton {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+body[data-ui-shell="cards"] .closure-driven__distinctions li,
+body[data-ui-shell="cards"] .closure-driven__example-skeleton li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 8px;
+  padding: 8px 0;
+  border-top: 1px solid var(--bf-etched-line);
+  color: var(--bf-text-secondary);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+body[data-ui-shell="cards"] .closure-driven__closure-gate {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 11px;
+  margin-top: 9px;
+  padding: 13px;
+  border: 1px solid color-mix(in srgb, var(--bf-attention) 55%, var(--bf-etched-line));
+  border-left: 3px solid var(--bf-attention);
+  background: color-mix(in srgb, var(--bf-attention) 5%, transparent);
+}
+
+body[data-ui-shell="cards"] .closure-driven__closure-gate .bfux-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .closure-driven__closure-gate strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+}
+
+body[data-ui-shell="cards"] .closure-driven__closure-gate p {
+  margin: 7px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.73rem;
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .closure-driven__lesson {
+  margin-top: 9px;
+}
+
+body[data-ui-shell="cards"] .closure-driven__validation-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.4fr);
+  gap: 8px;
+}
+
+body[data-ui-shell="cards"] .closure-driven__validation-grid aside {
+  padding: 15px;
+  border: 1px solid color-mix(in srgb, var(--bf-attention) 45%, var(--bf-etched-line));
+  border-left: 3px solid var(--bf-attention);
+  background: color-mix(in srgb, var(--bf-attention) 4%, transparent);
+}
+
+body[data-ui-shell="cards"] .closure-driven__validation-grid aside .bfux-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .closure-driven__validation-grid aside p {
+  margin: 9px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+body[data-ui-shell="cards"] .closure-driven__claim-grid article[data-standing="safe"] {
+  border-left: 3px solid var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__claim-grid article[data-standing="open"] {
+  border-left: 3px solid var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .closure-driven__claim-grid article[data-standing="open"] .bfux-icon {
+  color: var(--bf-attention);
+}
+
+body[data-ui-shell="cards"] .closure-driven__closing {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  margin-top: clamp(12px, 1.2vw, 18px);
+  padding: clamp(18px, 1.8vw, 28px);
+  border: 1px solid var(--bf-action-line);
+  border-radius: var(--bf-radius-control);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 8%, transparent), transparent 55%),
+    var(--bf-bg-base);
+}
+
+body[data-ui-shell="cards"] .closure-driven__closing > .bfux-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .closure-driven__closing h2 {
+  margin: 4px 0 0;
+  font-size: clamp(1.55rem, 2.2vw, 2.8rem);
+  line-height: 1.02;
+}
+
+body[data-ui-shell="cards"] .closure-driven__closing p {
+  margin: 8px 0 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 1180px) {
+  body[data-ui-shell="cards"] .closure-driven__loop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__loop li:nth-child(3n) {
+    border-right: 0;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__loop li:nth-child(-n + 3) {
+    border-bottom: 1px solid var(--bf-etched-line);
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__loop li:nth-child(3) .closure-driven__loop-arrow {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__skeleton {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__skeleton li,
+  body[data-ui-shell="cards"] .closure-driven__skeleton li:first-child,
+  body[data-ui-shell="cards"] .closure-driven__skeleton li:last-child {
+    border: 1px solid var(--bf-etched-line);
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  body[data-ui-shell="cards"] .closure-driven__masthead {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__tools {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__opening,
+  body[data-ui-shell="cards"] .closure-driven__certainty,
+  body[data-ui-shell="cards"] .closure-driven__validation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__intersection {
+    min-height: 150px;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__section > header {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__section > header .closure-driven__micro-label {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 700px) {
+  body[data-ui-shell="cards"] .closure-driven-surface {
+    padding: 7px;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__masthead,
+  body[data-ui-shell="cards"] .closure-driven__opening,
+  body[data-ui-shell="cards"] .closure-driven__section,
+  body[data-ui-shell="cards"] .closure-driven__closing {
+    padding: 15px;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__identity {
+    align-items: flex-start;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__boundary-line {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__boundary-line i {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__loop {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__loop li {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--bf-etched-line);
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__loop li:last-child {
+    border-bottom: 0;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__loop-arrow {
+    display: none;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__skeleton {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__skeleton li {
+    min-height: 0;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__ticket {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__ticket > .bfux-icon {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__example-grid,
+  body[data-ui-shell="cards"] .closure-driven__claim-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  body[data-ui-shell="cards"] .closure-driven__scroll {
+    padding: 8px;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__pressure {
+    grid-template-columns: 1fr;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__pressure-dial {
+    width: min(150px, 72vw);
+    justify-self: center;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__tools > span {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .closure-driven-surface,
+  body[data-ui-shell="cards"] .closure-driven,
+  body[data-ui-shell="cards"] .closure-driven__masthead,
+  body[data-ui-shell="cards"] .closure-driven__opening,
+  body[data-ui-shell="cards"] .closure-driven__section,
+  body[data-ui-shell="cards"] .closure-driven__certainty > article,
+  body[data-ui-shell="cards"] .closure-driven__intersection,
+  body[data-ui-shell="cards"] .closure-driven__ticket,
+  body[data-ui-shell="cards"] .closure-driven__ticket-request,
+  body[data-ui-shell="cards"] .closure-driven__ticket-domain,
+  body[data-ui-shell="cards"] .closure-driven__example-grid > article,
+  body[data-ui-shell="cards"] .closure-driven__validation-grid > article,
+  body[data-ui-shell="cards"] .closure-driven__claim-grid > article,
+  body[data-ui-shell="cards"] .closure-driven__closing {
+    background: Canvas;
+    box-shadow: none;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__mark,
+  body[data-ui-shell="cards"] .closure-driven .bfux-icon {
+    color: ButtonText;
+  }
+
+  body[data-ui-shell="cards"] .closure-driven__intersection,
+  body[data-ui-shell="cards"] .closure-driven__truth-path,
+  body[data-ui-shell="cards"] .closure-driven__closure-gate,
+  body[data-ui-shell="cards"] .closure-driven__closing {
+    border-color: Highlight;
+  }
+}
