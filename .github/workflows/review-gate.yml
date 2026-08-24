@@ -60,6 +60,9 @@ jobs:
       - name: Check Weather research-testbed contracts
         run: node scripts/check_p4_weather_testbed.mjs
 
+      - name: Check Schemathematics formal-program contracts
+        run: node scripts/check_p4_schemathematics.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
@@ -80,6 +83,9 @@ jobs:
 
       - name: Exercise Weather production research testbed
         run: node scripts/check_p4_weather_testbed_runtime.mjs
+
+      - name: Exercise Schemathematics production formal program
+        run: node scripts/check_p4_schemathematics_runtime.mjs
 
       - name: Exercise v2 production routes
         run: npm run runtime:check
