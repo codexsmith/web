@@ -7,6 +7,7 @@ import { BoundaryFirstUxRecordDetail } from "@/components/boundary-first-ux-reco
 import { ClosureDrivenRecordDetail } from "@/components/closure-driven-record-detail";
 import { WeatherResearchRecordDetail } from "@/components/weather-research-record-detail";
 import { SchemathematicsFormalRecordDetail } from "@/components/schemathematics-formal-record-detail";
+import { LawResearchRecordDetail } from "@/components/law-research-record-detail";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
@@ -235,6 +236,11 @@ export default async function Page({ params, searchParams }: PageProps) {
           />
         ) : recordDetail.entry.id === "schemathematics" ? (
           <SchemathematicsFormalRecordDetail
+            owner={recordDetail.owner}
+            entry={recordDetail.entry}
+          />
+        ) : recordDetail.entry.id === "constitutional-law-and-jurisprudence" ? (
+          <LawResearchRecordDetail
             owner={recordDetail.owner}
             entry={recordDetail.entry}
           />
