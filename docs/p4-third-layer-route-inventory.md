@@ -8,7 +8,7 @@ The structural migration is uniform: the legacy alias becomes a compatibility en
 | --- | --- | --- | --- |
 | `/agency-audit` | `/products/current/agency-representation-audit` | **Specialized P4** | Validate service/audit workflow density and pilot-call-to-action behavior. |
 | `/software-before-code` | `/publications/methods/software-before-code` | **Specialized P4** | Validate method trace, diagnostics, and long-form reading rhythm. |
-| `/corpus-forge` | `/products/current/corpus-forge` | Transitional structured record | Build a research-operations workbench: ingest → extract → relate → review → promote → repair, with provenance/claim ledgers as instruments. |
+| `/corpus-forge` | `/products/current/corpus-forge` | **Specialized P4 · research-operations workbench** | Validate workbench density and decide whether later interactive drill-down adds value without turning the record into an application shell. |
 | `/boundary-first-ux` | `/publications/methods/boundary-first-ux` | Transitional structured record | Build a standard/conformance surface: primitives, interaction grammar, accessibility obligations, renderer independence, conformance ladder, examples. |
 | `/closure-driven-software-development` | `/publications/methods/closure-driven-software-development` | Transitional structured record | Build a progressive-closure delivery instrument with gates, uncertainty reduction, witness, repair, and worked-case slots. |
 | `/weather` | `/research/applied-testbeds/weather` | Transitional structured record | Build a computational-research testbed surface: hypothesis, baseline, diagnostics, simulation/ensemble comparison, validation ladder, claim firewall. |
@@ -31,16 +31,23 @@ Unlisted collaboration bridges are not silently promoted into this system. They 
 
 Held legacy/reconciliation records remain blocked from public routing.
 
+## Specialized grammars established so far
+
+P4 now has three deliberately different third-layer grammars rather than one universal template:
+
+1. **Agency & Representation Audit** — diagnostic/service workflow: operating questions, failure field, audit passes, pilot boundary, evidence rule, claim firewall.
+2. **Software Before Code** — practitioner method: object trace, boundary questions, method sequence, stress test, diagnostics, closure, validation ladder.
+3. **Corpus Forge** — research-operations workbench: lifecycle backplane, typed object bank, contradiction trace, promotion gates, validation surface, repair/claim boundary.
+
+The generic structured record remains a migration safety net, not a target design.
+
 ## Migration priority
 
 The next specialized third-layer designs should prioritize by public importance and representational payoff rather than by manifest order:
 
-1. **Corpus Forge** — strongest opportunity for an actual operational workbench rather than prose.
-2. **Boundary First UX** — the doctrine should demonstrate its own conformance/interaction grammar.
-3. **Closure-Driven Software Development** — naturally maps to a gate/trace/process instrument.
-4. **Weather** — establishes the research-testbed visual grammar reusable for other experimental domains.
-5. **Schemathematics** — establishes the formal-research visual grammar.
-6. **Law** — establishes a high-provenance domain-research grammar.
-7. **Chess / Soccer** — establish practitioner/testbed variants once the reusable research grammar is stable.
-
-The generic structured record is therefore a migration safety net, not a target design.
+1. **Boundary First UX** — the doctrine should demonstrate its own conformance/interaction grammar.
+2. **Closure-Driven Software Development** — naturally maps to a gate/trace/process instrument.
+3. **Weather** — establishes the research-testbed visual grammar reusable for other experimental domains.
+4. **Schemathematics** — establishes the formal-research visual grammar.
+5. **Law** — establishes a high-provenance domain-research grammar.
+6. **Chess / Soccer** — establish practitioner/testbed variants once the reusable research grammar is stable.
