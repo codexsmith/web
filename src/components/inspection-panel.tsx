@@ -7,7 +7,7 @@ import { getRecordDetailHrefForLink } from "@/lib/record-detail-routing";
 
 type InspectionPanelProps = {
   inspection: Inspection;
-  owner: ContentNode;
+  owner?: ContentNode;
   onClose: () => void;
 };
 
@@ -52,7 +52,9 @@ export function InspectionPanel({ inspection, owner, onClose }: InspectionPanelP
             {inspection.links?.length ? (
               <div className="inspection-surface__links" aria-label="Related retained records">
                 {inspection.links.map((link) => {
-                  const href = getRecordDetailHrefForLink(owner, link.href) ?? link.href;
+                  const href = owner
+                    ? getRecordDetailHrefForLink(owner, link.href) ?? link.href
+                    : link.href;
                   return (
                     <a href={href} key={`${inspection.id}-${link.href}`}>
                       <small>{link.eyebrow ?? "Related record"}</small>
