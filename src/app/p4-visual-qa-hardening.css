@@ -15,6 +15,126 @@
 }
 
 @media (max-width: 720px) {
+  /* Compact frame geometry -------------------------------------------------
+     The compact traversal shelf is one row. A later industrial header rule had
+     accidentally reintroduced a second TRAVERSAL row while the spatial contract still
+     budgeted for one shelf, making the reading field fight the frame. Retire that header
+     explicitly and spend only the height needed for current/previous/peer controls. */
+  body[data-ui-shell="cards"] {
+    --frame-top: 52px;
+    --trace-nav-shelf: 50px;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__top {
+    height: var(--frame-top) !important;
+    min-height: var(--frame-top) !important;
+    padding-inline: 6px !important;
+    gap: 5px !important;
+  }
+
+  body[data-ui-shell="cards"] .frame-home-tray,
+  body[data-ui-shell="cards"] .projection-switcher--legible {
+    min-height: 36px !important;
+  }
+
+  body[data-ui-shell="cards"] .frame-home-tray {
+    padding: 2px !important;
+  }
+
+  body[data-ui-shell="cards"] .brand-anchor__mark {
+    width: 26px !important;
+    height: 26px !important;
+    flex-basis: 26px !important;
+  }
+
+  body[data-ui-shell="cards"] .brand-anchor__mark .bfux-icon {
+    width: 19px !important;
+    height: 19px !important;
+  }
+
+  body[data-ui-shell="cards"] .frame-tool,
+  body[data-ui-shell="cards"] .frame-tool--inspect {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher--legible button {
+    min-height: 30px !important;
+    padding-block: 2px !important;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav[data-apparatus-sections="true"] {
+    height: var(--trace-nav-shelf) !important;
+    padding: 4px 6px !important;
+  }
+
+  body[data-ui-shell="cards"] .boundary-frame__trace-nav .traversal-nav__header {
+    display: none !important;
+    content: none !important;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__flow {
+    height: 100% !important;
+    gap: 4px !important;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button {
+    min-width: 92px !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    padding: 4px 7px !important;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node {
+    max-width: 100px !important;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current > div {
+    min-width: 98px !important;
+    min-height: 38px !important;
+    padding: 4px 7px !important;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__current small {
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .traversal-nav__history-node > span,
+  body[data-ui-shell="cards"] .traversal-nav__current strong,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button > span {
+    font-size: 0.66rem !important;
+  }
+
+  /* Local section position remains available without occupying the reading edge. On a
+     phone it becomes a tiny horizontal instrument in the lower-right corner rather than
+     a vertical rail superimposed over paragraphs and cards. */
+  body[data-ui-shell="cards"] .boundary-frame__pages {
+    top: auto !important;
+    right: 7px !important;
+    bottom: 7px !important;
+    transform: none !important;
+  }
+
+  body[data-ui-shell="cards"] .page-position-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 3px !important;
+    padding: 3px !important;
+  }
+
+  body[data-ui-shell="cards"] .page-position-nav::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .page-position-nav button {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
   /* The compact top frame keeps the semantic mode name and glyph. Purpose copy remains
      available through the control's aria-label/title; forcing it into the narrow bezel
      only creates clipped pseudo-information. */
@@ -24,6 +144,77 @@
 
   body[data-ui-shell="cards"] .projection-switcher__copy {
     gap: 0 !important;
+  }
+
+  /* Public Interest orientation ------------------------------------------
+     Mission / Principles / Goals & Aspirations are orientation operators, not three
+     mobile articles. Preserve their identities and affordance while collapsing desktop
+     explanatory redundancy into one compact three-control strip. */
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-hero__panels {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    padding: 8px var(--mobile-editorial-gutter) 10px !important;
+    border-bottom: 1px solid var(--mobile-editorial-rule-strong);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel,
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    button.public-interest-panel {
+    min-width: 0 !important;
+    min-height: 78px !important;
+    height: auto !important;
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    align-items: start !important;
+    gap: 4px !important;
+    padding: 9px 8px !important;
+    border: 1px solid var(--bf-etched-line) !important;
+    border-radius: var(--bf-radius-control) !important;
+    background: var(--bf-bezel-surface) !important;
+    box-shadow: var(--bf-shadow-inset) !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel__kind {
+    min-height: 0 !important;
+    gap: 0 !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel__kind > span {
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel .section-region-card__glyph {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel > strong {
+    align-self: end !important;
+    margin: 2px 0 0 !important;
+    padding: 0 !important;
+    font-size: clamp(0.8rem, 3.45vw, 0.98rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.018em !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel > .section-region-card__boundary {
+    display: none !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel__action {
+    margin: 0 !important;
+    padding: 2px 0 0 !important;
+    font-size: 0.43rem !important;
+    line-height: 1 !important;
   }
 
   /* The five root regions become a lawful editorial sequence. Flex deliberately retires
@@ -108,6 +299,28 @@
     .branch-world:not(.branch-world--root-world) .district-card > .district-card__action {
     grid-column: 1 / -1 !important;
     grid-row: auto !important;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Very narrow phones still keep the three public-purpose controls in one row, but the
+     labels tighten slightly so orientation remains visible without becoming a second
+     vertical navigation stack. */
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-hero__panels {
+    gap: 4px !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel,
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    button.public-interest-panel {
+    padding-inline: 6px !important;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-section-theme="public-interest"]
+    .public-interest-panel > strong {
+    font-size: 0.76rem !important;
   }
 }
 
