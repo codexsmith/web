@@ -46,7 +46,29 @@ jobs:
         run: node scripts/qa_p4_visual.mjs
 
       - name: Run second-layer leaf surface QA
-        run: node scripts/qa_leaf_surfaces.mjs
+        run: |
+          mkdir -p qa-artifacts/p4/leaf-surfaces
+          setsid npm run start -- -p 3223 > qa-artifacts/p4/leaf-surfaces/server.log 2>&1 &
+          server_pid=$!
+          cleanup() {
+            kill -TERM -- "-$server_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+
+          ready=0
+          for attempt in {1..60}; do
+            if curl -fsS http://127.0.0.1:3223/public-interest/mission >/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 0.5
+          done
+          if [ "$ready" -ne 1 ]; then
+            cat qa-artifacts/p4/leaf-surfaces/server.log
+            exit 1
+          fi
+
+          LEAF_QA_BASE=http://127.0.0.1:3223 node scripts/qa_leaf_surfaces_client.mjs
 
       - name: Upload P4 QA report and screenshots
         if: always()
