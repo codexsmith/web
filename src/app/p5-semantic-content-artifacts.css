@@ -78,9 +78,8 @@ body[data-ui-shell="cards"] .bfux-artifact__fan-items {
 
 body[data-ui-shell="cards"] .bfux-artifact__sequence {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(112px, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(var(--artifact-count), minmax(68px, 1fr));
+  gap: 9px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 2px 1px 8px;
@@ -96,7 +95,7 @@ body[data-ui-shell="cards"] .bfux-artifact__sequence > li {
   grid-template-rows: auto auto 1fr;
   gap: 5px;
   align-content: start;
-  padding: 10px;
+  padding: 10px 8px;
   scroll-snap-align: start;
   border: 1px solid var(--secondary-line);
   border-radius: 7px;
@@ -107,11 +106,11 @@ body[data-ui-shell="cards"] .bfux-artifact__sequence > li:not(:last-child)::afte
   content: "";
   position: absolute;
   top: 29px;
-  right: -15px;
-  width: 14px;
+  right: -10px;
+  width: 9px;
   height: 1px;
   background: var(--bf-action-line);
-  box-shadow: 10px -3px 0 -2px var(--bf-action-line), 10px 3px 0 -2px var(--bf-action-line);
+  box-shadow: 6px -3px 0 -2px var(--bf-action-line), 6px 3px 0 -2px var(--bf-action-line);
 }
 
 body[data-ui-shell="cards"] .bfux-artifact__item-head {
@@ -390,8 +389,6 @@ body[data-ui-shell="cards"] .bfux-artifact__hub--result {
   }
 
   body[data-ui-shell="cards"] .bfux-artifact__sequence {
-    grid-auto-flow: row;
-    grid-auto-columns: auto;
     grid-template-columns: minmax(0, 1fr);
     gap: 10px;
     overflow: visible;
