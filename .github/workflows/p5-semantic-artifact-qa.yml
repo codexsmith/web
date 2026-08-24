@@ -1,0 +1,77 @@
+name: P5 semantic artifact QA
+
+on:
+  push:
+    branches:
+      - agent/p5-semantic-content-artifacts
+  pull_request:
+    branches:
+      - agent/p4-visual-qa-hardening
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: p5-semantic-artifact-qa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install application dependencies
+        run: npm ci
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Install QA browser harness
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run semantic artifact browser QA
+        run: |
+          mkdir -p qa-artifacts/p5-semantic-artifacts
+          setsid npm run start -- -p 3225 > qa-artifacts/p5-semantic-artifacts/server.log 2>&1 &
+          server_pid=$!
+          cleanup() {
+            kill -TERM -- "-$server_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+
+          ready=0
+          for attempt in {1..60}; do
+            if curl -fsS http://127.0.0.1:3225/public-interest/mission >/dev/null; then
+              ready=1
+              break
+            fi
+            sleep 0.5
+          done
+          if [ "$ready" -ne 1 ]; then
+            cat qa-artifacts/p5-semantic-artifacts/server.log
+            exit 1
+          fi
+
+          P5_QA_BASE=http://127.0.0.1:3225 node scripts/qa_p5_semantic_artifacts.mjs
+
+      - name: Upload semantic artifact QA
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p5-semantic-artifact-qa
+          path: qa-artifacts/p5-semantic-artifacts
+          if-no-files-found: warn
+          retention-days: 14
