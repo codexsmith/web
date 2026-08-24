@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import {
   ContentNode,
   getChildren,
@@ -98,6 +99,29 @@ type RegionGridProps = {
   variant?: "district" | "orientation";
 };
 
+function regionGlyph(node: ContentNode): BfuxIconName {
+  if (node.id === "products") return "object";
+  if (node.id === "public-interest") return "responsibility";
+  if (node.id === "publications") return "trace";
+  if (node.id === "about") return "actor";
+  if (node.id === "research") return "invariant";
+
+  switch (node.kind) {
+    case "root": return "root";
+    case "branch": return "contexture";
+    case "product": return "object";
+    case "service": return "gate";
+    case "project": return "transition";
+    case "research": return "witness";
+    case "method": return "gate";
+    case "standard": return "admissibility";
+    case "foundation": return "boundary";
+    case "theory": return "invariant";
+    case "about": return "responsibility";
+    case "document": return "trace";
+  }
+}
+
 function RegionGrid({ node, regions, onNavigate, variant = "district" }: RegionGridProps) {
   const isOrientation = variant === "orientation";
   const isRoot = node.id === "root";
@@ -133,7 +157,8 @@ function RegionGrid({ node, regions, onNavigate, variant = "district" }: RegionG
               <span className="district-card__number">{String(index + 1).padStart(2, "0")}</span>
             ) : null}
             <span className={isOrientation ? "public-interest-panel__kind" : "district-card__kind"}>
-              {child.eyebrow}
+              <BfuxIcon name={regionGlyph(child)} className="section-region-card__glyph" />
+              <span>{child.eyebrow}</span>
             </span>
             {!isOrientation && child.publication ? (
               <span className="work-status-chip publication-status-chip" data-stage={child.publication.stage}>
