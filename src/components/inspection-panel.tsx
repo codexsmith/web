@@ -1,5 +1,6 @@
 "use client";
 
+import { BfuxIcon } from "@/components/bfux-icons";
 import type { Inspection } from "@/lib/content";
 
 type InspectionPanelProps = {
@@ -11,10 +12,16 @@ export function InspectionPanel({ inspection, onClose }: InspectionPanelProps) {
   return (
     <div className="inspection-layer" role="dialog" aria-modal="true" aria-labelledby="inspection-title">
       <button className="inspection-layer__backdrop" onClick={onClose} aria-label="Close inspection" />
-      <section className="inspection-panel">
+      <section className="inspection-panel inspection-panel--instrument">
         <div className="inspection-panel__rail">
-          <span>Through</span>
-          <button onClick={onClose}>Close</button>
+          <span className="inspection-panel__rail-label">
+            <BfuxIcon name="inspect" />
+            <span>Through</span>
+          </span>
+          <button className="inspection-panel__close" onClick={onClose}>
+            <BfuxIcon name="close" />
+            <span>Close</span>
+          </button>
         </div>
         <div className="inspection-panel__content">
           <p className="eyebrow">{inspection.eyebrow}</p>
@@ -28,7 +35,10 @@ export function InspectionPanel({ inspection, onClose }: InspectionPanelProps) {
 
           {inspection.sourceRef ? (
             <div className="inspection-source">
-              <span>Retained source</span>
+              <span>
+                <BfuxIcon name="trace" />
+                Retained source
+              </span>
               <code>{inspection.sourceRef}</code>
             </div>
           ) : null}
