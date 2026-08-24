@@ -58,6 +58,34 @@
   --bf-line-strong: rgba(170, 180, 184, 0.42);
   --bf-recess: rgba(8, 12, 15, 0.28);
 
+  /* P3 apparatus physics. These encode hierarchy rather than decoration:
+     seams separate housings, bezels lift controls, wells recess subordinate state. */
+  --bf-seam-dark: rgba(0, 0, 0, 0.62);
+  --bf-seam-light: rgba(255, 255, 255, 0.09);
+  --bf-etched-line: rgba(196, 207, 211, 0.22);
+  --bf-etched-line-strong: rgba(196, 207, 211, 0.38);
+  --bf-shadow-control: 0 1px 0 var(--bf-seam-dark), 0 5px 13px rgba(0, 0, 0, 0.28);
+  --bf-shadow-panel: 0 1px 0 var(--bf-seam-light), 0 10px 28px rgba(0, 0, 0, 0.28);
+  --bf-shadow-float: 0 18px 56px rgba(0, 0, 0, 0.48);
+  --bf-shadow-inset: inset 0 1px 0 var(--bf-edge-highlight), inset 0 -1px 0 rgba(0, 0, 0, 0.46);
+  --bf-shadow-well: inset 0 2px 8px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(0, 0, 0, 0.5);
+  --bf-radius-housing: 10px;
+  --bf-radius-control: 7px;
+  --bf-radius-instrument: 5px;
+  --bf-bezel-surface:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 34%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.11), transparent 42%),
+    var(--bf-bg-control);
+  --bf-well-surface:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.24), rgba(255, 255, 255, 0.018)),
+    color-mix(in srgb, var(--bf-bg-base) 92%, black);
+  --bf-brushed-metal:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.018) 0 1px, transparent 1px 5px);
+  --bf-fine-grid:
+    linear-gradient(rgba(170, 180, 184, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(170, 180, 184, 0.03) 1px, transparent 1px);
+
   /* Semantic aliases used by both UI renderers. */
   --bf-bg-frame: var(--bf-iron-950);
   --bf-bg-base: var(--bf-gunmetal-900);
