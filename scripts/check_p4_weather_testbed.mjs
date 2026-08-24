@@ -64,8 +64,13 @@ requireMatch(
 );
 requireMatch(
   component,
-  /record\.ensembleAnalysis\.possibleOutputs[\s\S]*record\.ensembleAnalysis\.claimBoundary/,
-  "Weather ensemble outputs must remain candidate diagnostics under an explicit claim boundary",
+  /record\.ensembleAnalysis\.possibleOutputs/,
+  "Weather must expose its candidate ensemble diagnostics",
+);
+requireMatch(
+  component,
+  /record\.ensembleAnalysis\.claimBoundary/,
+  "Weather ensemble diagnostics must retain an explicit claim boundary",
 );
 requireMatch(
   component,
