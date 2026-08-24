@@ -170,9 +170,7 @@ function RegionGrid({ node, regions, onNavigate, variant = "district" }: RegionG
             <strong>{child.label}</strong>
             {orientation ? (
               <span className="section-region-card__boundary">{orientation.boundary}</span>
-            ) : !isTopLevelSection ? (
-              <p>{child.summary}</p>
-            ) : null}
+            ) : !isTopLevelSection ? <p>{child.summary}</p> : null}
             <span className={isOrientation ? "public-interest-panel__action" : "district-card__action"}>
               View
             </span>
