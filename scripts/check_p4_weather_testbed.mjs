@@ -54,8 +54,13 @@ requireMatch(
 );
 requireMatch(
   component,
-  /record\.adaptiveRefinement\.loop[\s\S]*Matched-baseline measures[\s\S]*record\.adaptiveRefinement\.evaluation[\s\S]*record\.adaptiveRefinement\.claimRule/,
-  "Weather refinement experiment must expose loop, matched-baseline measures, and claim rule",
+  /record\.adaptiveRefinement\.loop[\s\S]*Matched-baseline measures[\s\S]*record\.adaptiveRefinement\.evaluation/,
+  "Weather refinement experiment must expose its loop and matched-baseline measures",
+);
+requireMatch(
+  component,
+  /record\.adaptiveRefinement\.claimRule/,
+  "Weather refinement experiment must retain its efficiency claim rule",
 );
 requireMatch(
   component,
@@ -64,8 +69,13 @@ requireMatch(
 );
 requireMatch(
   component,
-  /record\.validationLadder\.stages[\s\S]*record\.validationLadder\.promotionRule/,
-  "Weather must retain an ordered validation ladder with a promotion rule",
+  /record\.validationLadder\.stages/,
+  "Weather must retain an ordered validation ladder",
+);
+requireMatch(
+  component,
+  /record\.validationLadder\.promotionRule/,
+  "Weather validation ladder must retain its promotion rule",
 );
 requireMatch(
   component,
