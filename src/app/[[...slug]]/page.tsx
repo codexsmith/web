@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { permanentRedirect } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
 import { RecordDetailSurface } from "@/components/record-detail-surface";
+import { CorpusForgeRecordDetail } from "@/components/corpus-forge-record-detail";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
@@ -208,11 +209,18 @@ export default async function Page({ params, searchParams }: PageProps) {
         initialUiShell={initialUiShell}
       />
       {recordDetail && recordContent ? (
-        <RecordDetailSurface
-          owner={recordDetail.owner}
-          entry={recordDetail.entry}
-          content={recordContent}
-        />
+        recordDetail.entry.id === "corpus-forge" ? (
+          <CorpusForgeRecordDetail
+            owner={recordDetail.owner}
+            entry={recordDetail.entry}
+          />
+        ) : (
+          <RecordDetailSurface
+            owner={recordDetail.owner}
+            entry={recordDetail.entry}
+            content={recordContent}
+          />
+        )
       ) : null}
     </>
   );
