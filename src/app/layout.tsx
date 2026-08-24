@@ -55,6 +55,7 @@ import "./p4-weather-research-testbed.css";
 import "./p4-schemathematics-formal-program.css";
 import "./p4-law-provenance-research.css";
 import "./p4-chess-practitioner-decision-board.css";
+import "./p4-soccer-spatial-practitioner-field.css";
 
 export const metadata: Metadata = {
   title: {
