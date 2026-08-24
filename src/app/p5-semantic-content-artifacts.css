@@ -1,0 +1,484 @@
+/* P5 semantic content artifacts.
+   Text remains the source of meaning, but ordered work, bounded sets, maturity ladders,
+   fan-out derivations, and converging constraints should preserve those relations visually. */
+
+body[data-ui-shell="cards"] .subject-pane__artifacts,
+body[data-ui-shell="cards"] .bfux-artifact-stack {
+  min-width: 0;
+  display: grid;
+  gap: clamp(9px, 0.8vw, 13px);
+}
+
+body[data-ui-shell="cards"] .inspection-surface__grid > .bfux-artifact-stack {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact {
+  min-width: 0;
+  display: grid;
+  gap: clamp(10px, 0.85vw, 14px);
+  margin: 0;
+  padding: clamp(12px, 1vw, 16px);
+  overflow: hidden;
+  border: 1px solid var(--secondary-line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bf-action) 4%, transparent), transparent 34%),
+    color-mix(in srgb, var(--secondary-panel) 72%, transparent);
+  box-shadow:
+    inset 0 1px var(--secondary-highlight),
+    inset 0 -1px rgba(0, 0, 0, 0.22);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__caption {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--secondary-line);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__caption > span {
+  color: var(--bf-action-hover);
+  font-size: 0.46rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__caption > strong {
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.9rem, 1vw, 1.08rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__caption > p {
+  max-width: 72ch;
+  margin: 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.62rem;
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__sequence,
+body[data-ui-shell="cards"] .bfux-artifact__set,
+body[data-ui-shell="cards"] .bfux-artifact__ladder,
+body[data-ui-shell="cards"] .bfux-artifact__fan-items {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Directed sequences -------------------------------------------------- */
+
+body[data-ui-shell="cards"] .bfux-artifact__sequence {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(112px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 1px 8px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__sequence > li {
+  position: relative;
+  min-width: 0;
+  min-height: 92px;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 5px;
+  align-content: start;
+  padding: 10px;
+  scroll-snap-align: start;
+  border: 1px solid var(--secondary-line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--secondary-main) 84%, transparent);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__sequence > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 29px;
+  right: -15px;
+  width: 14px;
+  height: 1px;
+  background: var(--bf-action-line);
+  box-shadow: 10px -3px 0 -2px var(--bf-action-line), 10px 3px 0 -2px var(--bf-action-line);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__item-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__index {
+  color: var(--bf-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.43rem;
+  letter-spacing: 0.08em;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__glyph,
+body[data-ui-shell="cards"] .bfux-artifact__item-head .bfux-icon {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__sequence strong,
+body[data-ui-shell="cards"] .bfux-artifact__set strong,
+body[data-ui-shell="cards"] .bfux-artifact__fan-items strong,
+body[data-ui-shell="cards"] .bfux-artifact__hub strong,
+body[data-ui-shell="cards"] .bfux-artifact__ladder strong {
+  min-width: 0;
+  color: var(--bf-text-primary);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.18;
+  overflow-wrap: anywhere;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__sequence small,
+body[data-ui-shell="cards"] .bfux-artifact__set small,
+body[data-ui-shell="cards"] .bfux-artifact__fan-items small,
+body[data-ui-shell="cards"] .bfux-artifact__hub small,
+body[data-ui-shell="cards"] .bfux-artifact__ladder small {
+  color: var(--bf-text-secondary);
+  font-size: 0.52rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__return {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  max-width: 100%;
+  margin-left: auto;
+  padding: 5px 8px;
+  border: 1px dashed var(--secondary-line);
+  border-radius: 999px;
+  color: var(--bf-text-muted);
+  font-size: 0.48rem;
+  line-height: 1.25;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__return .bfux-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--bf-action-hover);
+}
+
+/* Peer sets ----------------------------------------------------------- */
+
+body[data-ui-shell="cards"] .bfux-artifact__set {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__set > li,
+body[data-ui-shell="cards"] .bfux-artifact__fan-items > li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 8px;
+  align-items: start;
+  padding: 9px 10px;
+  border-left: 2px solid var(--bf-action-line);
+  background: color-mix(in srgb, var(--secondary-main) 72%, transparent);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__set .bfux-artifact__item-head,
+body[data-ui-shell="cards"] .bfux-artifact__fan-items .bfux-artifact__item-head {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: start;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__set > li > strong,
+body[data-ui-shell="cards"] .bfux-artifact__set > li > small,
+body[data-ui-shell="cards"] .bfux-artifact__fan-items > li > strong,
+body[data-ui-shell="cards"] .bfux-artifact__fan-items > li > small {
+  grid-column: 2;
+}
+
+/* Ordered maturity / capability ladders ----------------------------- */
+
+body[data-ui-shell="cards"] .bfux-artifact__ladder {
+  position: relative;
+  display: grid;
+  gap: 6px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__ladder::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 15px;
+  width: 1px;
+  background: var(--secondary-line);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__ladder > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 9px;
+  align-items: stretch;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__ladder-marker {
+  z-index: 1;
+  width: 30px;
+  min-height: 30px;
+  display: grid;
+  place-items: center;
+  align-self: start;
+  border: 1px solid var(--bf-action-line);
+  border-radius: 50%;
+  background: var(--secondary-main);
+  color: var(--bf-action-hover);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__ladder-copy {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 7px;
+  padding: 7px 9px 9px;
+  border-bottom: 1px solid var(--secondary-line);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__ladder-copy .bfux-icon {
+  grid-row: 1 / 3;
+  width: 16px;
+  height: 16px;
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__ladder-copy strong,
+body[data-ui-shell="cards"] .bfux-artifact__ladder-copy small {
+  grid-column: 2;
+}
+
+/* Fan-out and convergence -------------------------------------------- */
+
+body[data-ui-shell="cards"] .bfux-artifact__fan {
+  min-width: 0;
+  display: grid;
+  gap: 10px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__hub {
+  position: relative;
+  width: min(360px, 100%);
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  justify-self: center;
+  padding: 9px 11px;
+  border: 1px solid var(--bf-action-line);
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--bf-action-surface) 58%, var(--secondary-main));
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__hub .bfux-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--bf-action-hover);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__hub > span {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan-items {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+  padding-top: 12px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan-items::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: var(--secondary-line);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan-items > li {
+  position: relative;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan-items > li::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 1px;
+  height: 10px;
+  background: var(--secondary-line);
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan--convergence .bfux-artifact__fan-items {
+  order: 1;
+  padding-top: 0;
+  padding-bottom: 12px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan--convergence .bfux-artifact__fan-items::before {
+  top: auto;
+  bottom: 3px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan--convergence .bfux-artifact__fan-items > li::before {
+  top: auto;
+  bottom: -10px;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan--convergence .bfux-artifact__hub--source {
+  order: 2;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__fan--convergence .bfux-artifact__hub--result {
+  order: 3;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__hub--result {
+  border-style: double;
+}
+
+/* Compact projection ------------------------------------------------- */
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .bfux-artifact {
+    border-radius: 0;
+    border-right: 0;
+    border-left: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body[data-ui-shell="cards"] .subject-pane__artifacts .bfux-artifact {
+    margin-right: calc(var(--mobile-editorial-gutter, 15px) * -1);
+    margin-left: calc(var(--mobile-editorial-gutter, 15px) * -1);
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__sequence {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    overflow: visible;
+    padding-bottom: 2px;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__sequence > li {
+    min-height: 0;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 3px 8px;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__sequence .bfux-artifact__item-head {
+    grid-row: 1 / 3;
+    align-self: start;
+    display: grid;
+    gap: 4px;
+    justify-items: center;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__sequence > li > strong,
+  body[data-ui-shell="cards"] .bfux-artifact__sequence > li > small {
+    grid-column: 2;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__sequence > li:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: -11px;
+    left: 19px;
+    width: 1px;
+    height: 10px;
+    box-shadow: none;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__return {
+    margin-left: 0;
+    border-radius: 6px;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__set,
+  body[data-ui-shell="cards"] .bfux-artifact__fan-items {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__fan-items::before,
+  body[data-ui-shell="cards"] .bfux-artifact__fan-items > li::before {
+    content: none;
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .bfux-artifact {
+    padding: 12px 15px;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__caption > strong {
+    font-size: 0.92rem;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__set > li,
+  body[data-ui-shell="cards"] .bfux-artifact__fan-items > li {
+    padding: 8px 0 9px 9px;
+    background: transparent;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .bfux-artifact,
+  body[data-ui-shell="cards"] .bfux-artifact__sequence > li,
+  body[data-ui-shell="cards"] .bfux-artifact__set > li,
+  body[data-ui-shell="cards"] .bfux-artifact__fan-items > li,
+  body[data-ui-shell="cards"] .bfux-artifact__hub,
+  body[data-ui-shell="cards"] .bfux-artifact__ladder-marker {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+  }
+
+  body[data-ui-shell="cards"] .bfux-artifact__sequence > li:not(:last-child)::after,
+  body[data-ui-shell="cards"] .bfux-artifact__fan-items::before,
+  body[data-ui-shell="cards"] .bfux-artifact__fan-items > li::before,
+  body[data-ui-shell="cards"] .bfux-artifact__ladder::before {
+    background: CanvasText;
+    box-shadow: none;
+  }
+}
