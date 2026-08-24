@@ -45,6 +45,7 @@ import "./p1-search-traversal.css";
 import "./p2-projection-legibility.css";
 import "./p3-industrial-control-panel.css";
 import "./p3-semantic-action-glyphs.css";
+import "./p3-content-glyphs.css";
 import "./p3-industrial-responsive.css";
 
 export const metadata: Metadata = {
