@@ -59,6 +59,7 @@ import "./p4-soccer-spatial-practitioner-field.css";
 import "./p4-visual-qa-hardening.css";
 import "./p4-leaf-surface-unification.css";
 import "./p5-semantic-content-artifacts.css";
+import "./p6-process-circuit.css";
 
 export const metadata: Metadata = {
   title: {
