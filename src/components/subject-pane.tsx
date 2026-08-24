@@ -3,6 +3,7 @@
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import { ContentNode, getChildren, getCrossEdges } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
+import { getRecordDetailHrefForLink } from "@/lib/record-detail-routing";
 
 type SubjectPaneProps =
   | {
@@ -121,7 +122,7 @@ export function getSubjectActions(node: ContentNode): SubjectAction[] {
     label: record.label,
     eyebrow: record.eyebrow ?? "Open record",
     summary: record.summary,
-    href: record.href,
+    href: getRecordDetailHrefForLink(node, record.href) ?? record.href,
   }));
 
   const inspectionActions: SubjectAction[] = inspections.map((inspection) => ({
