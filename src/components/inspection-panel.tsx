@@ -2,60 +2,70 @@
 
 import { BfuxIcon } from "@/components/bfux-icons";
 import type { Inspection } from "@/lib/content";
+import type { ContentNode } from "@/lib/content-registry";
+import { getRecordDetailHrefForLink } from "@/lib/record-detail-routing";
 
 type InspectionPanelProps = {
   inspection: Inspection;
+  owner: ContentNode;
   onClose: () => void;
 };
 
-export function InspectionPanel({ inspection, onClose }: InspectionPanelProps) {
+export function InspectionPanel({ inspection, owner, onClose }: InspectionPanelProps) {
   return (
-    <div className="inspection-layer" role="dialog" aria-modal="true" aria-labelledby="inspection-title">
-      <button className="inspection-layer__backdrop" onClick={onClose} aria-label="Close inspection" />
-      <section className="inspection-panel inspection-panel--instrument">
-        <div className="inspection-panel__rail">
-          <span className="inspection-panel__rail-label">
+    <main
+      className="world-viewport detail-surface inspection-surface"
+      data-detail-kind="inspection"
+      aria-labelledby="inspection-title"
+    >
+      <section className="detail-workbench inspection-workbench">
+        <header className="inspection-surface__header">
+          <div className="inspection-surface__identity">
             <BfuxIcon name="inspect" />
-            <span>Through</span>
-          </span>
-          <button className="inspection-panel__close" onClick={onClose}>
-            <BfuxIcon name="close" />
-            <span>Close</span>
+            <div>
+              <span>{inspection.eyebrow} · inspection</span>
+              <h2 id="inspection-title">{inspection.label}</h2>
+            </div>
+          </div>
+          <button className="inspection-surface__close" type="button" onClick={onClose}>
+            <BfuxIcon name="back" />
+            <span>Return to object</span>
           </button>
-        </div>
-        <div className="inspection-panel__content">
-          <p className="eyebrow">{inspection.eyebrow}</p>
-          <h2 id="inspection-title">{inspection.label}</h2>
-          <p className="lede">{inspection.summary}</p>
-          <ul>
-            {inspection.bullets.map((bullet) => (
-              <li key={bullet}>{bullet}</li>
-            ))}
-          </ul>
+          <p className="inspection-surface__summary">{inspection.summary}</p>
+        </header>
 
-          {inspection.sourceRef ? (
-            <div className="inspection-source">
-              <span>
-                <BfuxIcon name="trace" />
-                Retained source
-              </span>
-              <code>{inspection.sourceRef}</code>
-            </div>
-          ) : null}
-
-          {inspection.links?.length ? (
-            <div className="inspection-record-links">
-              {inspection.links.map((link) => (
-                <a href={link.href} key={`${inspection.id}-${link.href}`}>
-                  <span>{link.eyebrow ?? "Related record"}</span>
-                  <strong>{link.label}</strong>
-                  {link.summary ? <small>{link.summary}</small> : null}
-                </a>
+        <div className="inspection-surface__content">
+          <div className="inspection-surface__grid">
+            <ul className="inspection-surface__findings">
+              {inspection.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
               ))}
-            </div>
-          ) : null}
+            </ul>
+
+            {inspection.sourceRef ? (
+              <div className="inspection-surface__source">
+                <span>Retained source</span>
+                <code>{inspection.sourceRef}</code>
+              </div>
+            ) : null}
+
+            {inspection.links?.length ? (
+              <div className="inspection-surface__links" aria-label="Related retained records">
+                {inspection.links.map((link) => {
+                  const href = getRecordDetailHrefForLink(owner, link.href) ?? link.href;
+                  return (
+                    <a href={href} key={`${inspection.id}-${link.href}`}>
+                      <small>{link.eyebrow ?? "Related record"}</small>
+                      <strong>{link.label}</strong>
+                      {link.summary ? <small>{link.summary}</small> : null}
+                    </a>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
