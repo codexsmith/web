@@ -5,7 +5,7 @@ import { paperMineSnapshot } from "@/lib/paper-mine";
 export const metadata: Metadata = {
   title: "Paper Mine",
   description:
-    "A bounded public projection of paper-shaped research discovered across the Boundary First Labs corpus, with visible provenance, readiness, claim ceilings, evidence obligations, and paperization gates.",
+    "A corpus-wide bounded public projection of controlled publication objects and mined paper candidates across Boundary First Labs, with visible provenance, readiness, claim ceilings, evidence obligations, and paperization gates.",
   alternates: { canonical: "/research/paper-mine" },
 };
 

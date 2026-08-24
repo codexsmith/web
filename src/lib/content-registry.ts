@@ -49,14 +49,14 @@ const paperMineNavigation: Partial<Record<"research" | "publications", NonNullab
     href: "/research/paper-mine",
     eyebrow: "Featured research workbench",
     summary:
-      "Inspect paper-shaped research across the corpus by field, discovery pass, readiness, claim ceiling, evidence obligation, provenance, and paperization frontier.",
+      "Inspect the corpus-wide paper field across controlled Stage A/B/C publication objects and mined candidates by discipline, field, stage, readiness, claim ceiling, evidence obligation, provenance, and paperization frontier.",
   },
   publications: {
     label: "Paper Mine",
     href: "/research/paper-mine",
     eyebrow: "Featured publication discovery",
     summary:
-      "See the discovery and paperization layer upstream of the controlled publication portfolio, including readiness, claim ceilings, provenance, and human promotion gates.",
+      "See the canonical discovery-to-publication field spanning mined candidates, controlled publication objects, readiness, claim ceilings, provenance, queue state, and human promotion gates.",
   },
 };
 

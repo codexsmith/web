@@ -1,14 +1,14 @@
 import type {
-  PaperMineCandidate,
   PaperMineFrontierItem,
+  PaperMinePaper,
 } from "@/lib/paper-mine";
 import graphStyles from "./paper-mine-graph.module.css";
 
 type PaperMineGraphProps = {
-  candidates: PaperMineCandidate[];
+  papers: PaperMinePaper[];
   frontier: PaperMineFrontierItem[];
   selectedId: string | null;
-  onSelect: (candidate: PaperMineCandidate) => void;
+  onSelect: (paper: PaperMinePaper) => void;
 };
 
 type PositionedSource = {
@@ -20,13 +20,13 @@ type PositionedSource = {
 const GRAPH_WIDTH = 1430;
 const FIELD_X = 32;
 const FIELD_WIDTH = 230;
-const CANDIDATE_X = 382;
-const CANDIDATE_WIDTH = 400;
+const PAPER_X = 382;
+const PAPER_WIDTH = 400;
 const SOURCE_X = 1012;
 const SOURCE_WIDTH = 382;
 const TOP = 62;
-const CANDIDATE_HEIGHT = 58;
-const CANDIDATE_STEP = 78;
+const PAPER_HEIGHT = 58;
+const PAPER_STEP = 78;
 const SOURCE_HEIGHT = 46;
 const SOURCE_STEP = 56;
 
@@ -79,13 +79,19 @@ function spreadSources(
   return placed.map(({ path, y, count }) => ({ path, y, count }));
 }
 
-export function PaperMineGraph({ candidates, frontier, selectedId, onSelect }: PaperMineGraphProps) {
-  if (!candidates.length) {
+function paperMeta(paper: PaperMinePaper, frontier?: PaperMineFrontierItem) {
+  const corpus = paper.record_class === "controlled_publication" ? "Controlled" : "Mined";
+  const stage = paper.stage === "discovery" ? "Discovery" : `Stage ${paper.stage}`;
+  return `${corpus} · ${stage} · R${paper.readiness_hint}${frontier ? ` · frontier #${frontier.rank}` : ""}`;
+}
+
+export function PaperMineGraph({ papers, frontier, selectedId, onSelect }: PaperMineGraphProps) {
+  if (!papers.length) {
     return (
       <section className={graphStyles.graphPanel}>
         <header className={graphStyles.graphHeader}>
           <div><span>Data-first graph</span><h2>Typed relationship graph</h2></div>
-          <p>No candidate nodes exist inside the current boundary.</p>
+          <p>No paper nodes exist inside the current boundary.</p>
         </header>
         <div className={graphStyles.graphEmpty}>Broaden the filters to restore graph structure.</div>
       </section>
@@ -93,31 +99,32 @@ export function PaperMineGraph({ candidates, frontier, selectedId, onSelect }: P
   }
 
   const frontierById = new Map(frontier.map((item) => [item.candidate_id, item]));
-  const orderedCandidates = [...candidates].sort((left, right) => {
+  const orderedPapers = [...papers].sort((left, right) => {
     const fieldCompare = humanize(left.field_group).localeCompare(humanize(right.field_group));
     if (fieldCompare !== 0) return fieldCompare;
     const leftRank = frontierById.get(left.id)?.rank ?? 999;
     const rightRank = frontierById.get(right.id)?.rank ?? 999;
     if (leftRank !== rightRank) return leftRank - rightRank;
+    if (left.stage !== right.stage) return left.stage.localeCompare(right.stage);
     if (left.readiness_hint !== right.readiness_hint) return right.readiness_hint - left.readiness_hint;
     return left.title.localeCompare(right.title);
   });
 
-  const candidateLayout = orderedCandidates.map((candidate, index) => ({
-    candidate,
-    y: TOP + index * CANDIDATE_STEP,
+  const paperLayout = orderedPapers.map((paper, index) => ({
+    paper,
+    y: TOP + index * PAPER_STEP,
   }));
 
   const fieldMembers = new Map<string, number[]>();
   const sourceMembers = new Map<string, number[]>();
-  candidateLayout.forEach(({ candidate, y }) => {
-    const fieldYs = fieldMembers.get(candidate.field_group) ?? [];
-    fieldYs.push(y + CANDIDATE_HEIGHT / 2);
-    fieldMembers.set(candidate.field_group, fieldYs);
+  paperLayout.forEach(({ paper, y }) => {
+    const fieldYs = fieldMembers.get(paper.field_group) ?? [];
+    fieldYs.push(y + PAPER_HEIGHT / 2);
+    fieldMembers.set(paper.field_group, fieldYs);
 
-    [...new Set(candidate.source_paths)].forEach((path) => {
+    [...new Set(paper.source_paths)].forEach((path) => {
       const sourceYs = sourceMembers.get(path) ?? [];
-      sourceYs.push(y + CANDIDATE_HEIGHT / 2);
+      sourceYs.push(y + PAPER_HEIGHT / 2);
       sourceMembers.set(path, sourceYs);
     });
   });
@@ -133,44 +140,46 @@ export function PaperMineGraph({ candidates, frontier, selectedId, onSelect }: P
   }));
   const graphHeight = Math.max(
     600,
-    TOP + orderedCandidates.length * CANDIDATE_STEP + 38,
+    TOP + orderedPapers.length * PAPER_STEP + 38,
     TOP + sourceSeeds.length * SOURCE_STEP + 38,
   );
   const sourceNodes = spreadSources(sourceSeeds, graphHeight);
   const sourceY = new Map(sourceNodes.map((source) => [source.path, source.y]));
 
-  const provenanceEdgeCount = orderedCandidates.reduce(
-    (sum, candidate) => sum + new Set(candidate.source_paths).size,
+  const provenanceEdgeCount = orderedPapers.reduce(
+    (sum, paper) => sum + new Set(paper.source_paths).size,
     0,
   );
-  const frontierCount = orderedCandidates.filter((candidate) => frontierById.has(candidate.id)).length;
+  const frontierCount = orderedPapers.filter((paper) => frontierById.has(paper.id)).length;
+  const controlledCount = orderedPapers.filter((paper) => paper.record_class === "controlled_publication").length;
 
   return (
     <section className={graphStyles.graphPanel} aria-label="Paper Mine data-first graph view">
       <header className={graphStyles.graphHeader}>
         <div>
           <span>Data-first graph</span>
-          <h2>Typed relationship graph</h2>
+          <h2>Corpus-wide typed graph</h2>
         </div>
         <p>
-          Deterministic projection of the current visible dataset. Field and provenance edges are derived directly from candidate records; no additional scientific relation is inferred.
+          Deterministic projection of the current visible dataset. Field and provenance edges are derived directly from canonical paper records; controlled dependency relations remain authoritative in the Lab and are not silently inferred from layout.
         </p>
       </header>
 
       <div className={graphStyles.graphStats} aria-label="Graph counts">
         <span><b>{fieldNodes.length}</b> fields</span>
-        <span><b>{orderedCandidates.length}</b> candidate nodes</span>
-        <span><b>{sourceNodes.length}</b> source reservoirs</span>
-        <span><b>{orderedCandidates.length + provenanceEdgeCount}</b> typed edges</span>
+        <span><b>{orderedPapers.length}</b> paper nodes</span>
+        <span><b>{controlledCount}</b> controlled</span>
+        <span><b>{sourceNodes.length}</b> provenance reservoirs</span>
+        <span><b>{orderedPapers.length + provenanceEdgeCount}</b> displayed edges</span>
         <span><b>{frontierCount}</b> frontier nodes visible</span>
       </div>
 
       <div className={graphStyles.graphLegend} aria-label="Graph legend">
         <span data-kind="field">Field group</span>
-        <span data-kind="candidate">Paper candidate</span>
-        <span data-kind="frontier">Frontier candidate</span>
-        <span data-kind="source">Private Lab provenance</span>
-        <code>field → candidate → source</code>
+        <span data-kind="candidate">Paper object</span>
+        <span data-kind="frontier">Paperization frontier</span>
+        <span data-kind="source">Lab provenance</span>
+        <code>field → paper → source</code>
       </div>
 
       <div className={graphStyles.graphViewport}>
@@ -179,42 +188,42 @@ export function PaperMineGraph({ candidates, frontier, selectedId, onSelect }: P
           width={GRAPH_WIDTH}
           height={graphHeight}
           viewBox={`0 0 ${GRAPH_WIDTH} ${graphHeight}`}
-          aria-label={`${orderedCandidates.length} paper candidates connected to ${fieldNodes.length} field groups and ${sourceNodes.length} provenance reservoirs`}
+          aria-label={`${orderedPapers.length} paper objects connected to ${fieldNodes.length} field groups and ${sourceNodes.length} provenance reservoirs`}
         >
           <text className={graphStyles.graphColumnLabel} x={FIELD_X} y={30}>FIELD GROUP</text>
-          <text className={graphStyles.graphColumnLabel} x={CANDIDATE_X} y={30}>PAPER CANDIDATE · PASS · READINESS</text>
+          <text className={graphStyles.graphColumnLabel} x={PAPER_X} y={30}>PAPER OBJECT · CORPUS · STAGE · READINESS</text>
           <text className={graphStyles.graphColumnLabel} x={SOURCE_X} y={30}>PROVENANCE SOURCE</text>
 
-          {candidateLayout.map(({ candidate, y }) => {
-            const field = fieldNodes.find((node) => node.field === candidate.field_group);
+          {paperLayout.map(({ paper, y }) => {
+            const field = fieldNodes.find((node) => node.field === paper.field_group);
             if (!field) return null;
-            const selected = selectedId === candidate.id;
+            const selected = selectedId === paper.id;
             return (
               <path
-                key={`field:${candidate.id}`}
+                key={`field:${paper.id}`}
                 className={`${graphStyles.graphEdge} ${graphStyles.graphEdgeField} ${selected ? graphStyles.graphEdgeSelected : ""}`}
                 d={curve(
                   FIELD_X + FIELD_WIDTH,
                   field.y + 25,
-                  CANDIDATE_X,
-                  y + CANDIDATE_HEIGHT / 2,
+                  PAPER_X,
+                  y + PAPER_HEIGHT / 2,
                 )}
               />
             );
           })}
 
-          {candidateLayout.flatMap(({ candidate, y }) =>
-            [...new Set(candidate.source_paths)].map((path) => {
+          {paperLayout.flatMap(({ paper, y }) =>
+            [...new Set(paper.source_paths)].map((path) => {
               const targetY = sourceY.get(path);
               if (targetY === undefined) return null;
-              const selected = selectedId === candidate.id;
+              const selected = selectedId === paper.id;
               return (
                 <path
-                  key={`source:${candidate.id}:${path}`}
+                  key={`source:${paper.id}:${path}`}
                   className={`${graphStyles.graphEdge} ${graphStyles.graphEdgeSource} ${selected ? graphStyles.graphEdgeSelected : ""}`}
                   d={curve(
-                    CANDIDATE_X + CANDIDATE_WIDTH,
-                    y + CANDIDATE_HEIGHT / 2,
+                    PAPER_X + PAPER_WIDTH,
+                    y + PAPER_HEIGHT / 2,
                     SOURCE_X,
                     targetY + SOURCE_HEIGHT / 2,
                   )}
@@ -228,34 +237,31 @@ export function PaperMineGraph({ candidates, frontier, selectedId, onSelect }: P
               <div className={graphStyles.graphFieldNode} title={humanize(node.field)}>
                 <span>Field group</span>
                 <strong>{humanize(node.field)}</strong>
-                <small>{node.count} candidate{node.count === 1 ? "" : "s"}</small>
+                <small>{node.count} paper{node.count === 1 ? "" : "s"}</small>
               </div>
             </foreignObject>
           ))}
 
-          {candidateLayout.map(({ candidate, y }) => {
-            const frontierItem = frontierById.get(candidate.id);
+          {paperLayout.map(({ paper, y }) => {
+            const frontierItem = frontierById.get(paper.id);
             return (
               <foreignObject
-                key={candidate.id}
-                x={CANDIDATE_X}
+                key={paper.id}
+                x={PAPER_X}
                 y={y}
-                width={CANDIDATE_WIDTH}
-                height={CANDIDATE_HEIGHT}
+                width={PAPER_WIDTH}
+                height={PAPER_HEIGHT}
               >
                 <button
                   type="button"
                   className={graphStyles.graphCandidate}
                   data-frontier={frontierItem ? "true" : "false"}
-                  data-selected={selectedId === candidate.id ? "true" : "false"}
-                  onClick={() => onSelect(candidate)}
-                  title={candidate.title}
+                  data-selected={selectedId === paper.id ? "true" : "false"}
+                  onClick={() => onSelect(paper)}
+                  title={paper.title}
                 >
-                  <span>
-                    {candidate.pass === "pass1" ? "Pass 1" : "Pass 2"} · R{candidate.readiness_hint}
-                    {frontierItem ? ` · frontier #${frontierItem.rank}` : ""}
-                  </span>
-                  <strong>{candidate.title}</strong>
+                  <span>{paperMeta(paper, frontierItem)}</span>
+                  <strong>{paper.title}</strong>
                 </button>
               </foreignObject>
             );
@@ -270,7 +276,7 @@ export function PaperMineGraph({ candidates, frontier, selectedId, onSelect }: P
               height={SOURCE_HEIGHT}
             >
               <div className={graphStyles.graphSourceNode} title={source.path}>
-                <span>Private source reservoir</span>
+                <span>Lab provenance reservoir</span>
                 <strong>{compactSource(source.path)}</strong>
                 <small>{source.count} reference{source.count === 1 ? "" : "s"}</small>
               </div>
@@ -280,8 +286,8 @@ export function PaperMineGraph({ candidates, frontier, selectedId, onSelect }: P
       </div>
 
       <footer className={graphStyles.graphFootnote}>
-        <span>Graph boundary = current visible candidate set</span>
-        <span>Selection opens the same object inspector used by the card view</span>
+        <span>Graph boundary = current visible paper set</span>
+        <span>Selection opens the same canonical paper inspector used by the data cards</span>
       </footer>
     </section>
   );
