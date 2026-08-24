@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { BfuxIcon, projectionGlyph } from "@/components/bfux-icons";
 import { type ContentNode } from "@/lib/content-registry";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
@@ -36,8 +37,6 @@ type BoundaryFrameProps = {
   onSearch: () => void;
 };
 
-type FrameIconName = "back" | "forward" | "up" | "search" | "minus" | "plus";
-
 const rootProjectionLabels: Record<ProjectionMode, string> = {
   world: "World",
   evidence: "Evidence",
@@ -56,44 +55,6 @@ const rootProjectionDescriptions: Record<ProjectionMode, string> = {
   gestalt: "Founder and institutional development timeline from practice to Boundary First Labs.",
 };
 
-function FrameIcon({ name }: { name: FrameIconName }) {
-  if (name === "back" || name === "forward") {
-    const isForward = name === "forward";
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d={isForward ? "m14 5 6 6-6 6" : "M10 5 4 11l6 6"} />
-        <path d={isForward ? "M19 11h-8.5A6.5 6.5 0 0 0 4 17.5" : "M5 11h8.5a6.5 6.5 0 0 1 6.5 6.5"} />
-      </svg>
-    );
-  }
-
-  if (name === "up") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="m6 14 6-6 6 6" />
-        <path d="M12 8v10" />
-      </svg>
-    );
-  }
-
-  if (name === "search") {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="10.5" cy="10.5" r="5.75" />
-        <path d="m15 15 4.5 4.5" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="7.5" />
-      <path d="M8.75 12h6.5" />
-      {name === "plus" ? <path d="M12 8.75v6.5" /> : null}
-    </svg>
-  );
-}
-
 function SiblingChoices({
   nodes,
   onNavigate,
@@ -108,6 +69,7 @@ function SiblingChoices({
       {nodes.map((node) => (
         <li key={node.id}>
           <button onClick={() => onNavigate(node.id)} title={`Open ${node.label}`}>
+            <BfuxIcon name="peer" className="traversal-nav__peer-glyph" />
             <span>{node.shortLabel ?? node.label}</span>
           </button>
         </li>
@@ -249,7 +211,9 @@ export function BoundaryFrame({
             aria-label="Boundary First Labs home"
             title="Boundary First Labs home"
           >
-            <span className="brand-anchor__mark" aria-hidden="true" />
+            <span className="brand-anchor__mark" aria-hidden="true">
+              <BfuxIcon name="root" />
+            </span>
           </button>
 
           {hasTrace ? (
@@ -261,7 +225,7 @@ export function BoundaryFrame({
                 aria-label="Back through traversal history"
                 title="Replay the previous traversal state"
               >
-                <FrameIcon name="back" />
+                <BfuxIcon name="back" />
                 <span className="frame-tool__label">Back</span>
               </button>
               {canTraceForward ? (
@@ -271,7 +235,7 @@ export function BoundaryFrame({
                   aria-label="Forward through traversal history"
                   title="Replay the next traversal state"
                 >
-                  <FrameIcon name="forward" />
+                  <BfuxIcon name="forward" />
                   <span className="frame-tool__label">Forward</span>
                 </button>
               ) : null}
@@ -280,8 +244,8 @@ export function BoundaryFrame({
         </div>
 
         <div className="frame-tools" aria-label="Global controls">
-          <button className="frame-tool" onClick={onSearch} aria-label="Search" title="Search the lab">
-            <FrameIcon name="search" />
+          <button className="frame-tool frame-tool--inspect" onClick={onSearch} aria-label="Search" title="Inspect and search the lab">
+            <BfuxIcon name="inspect" />
             <span className="frame-tool__label">Search</span>
           </button>
 
@@ -305,9 +269,13 @@ export function BoundaryFrame({
                     aria-pressed={projection === mode}
                     aria-label={`${label}: ${description}`}
                     title={description}
+                    data-projection-mode={mode}
                   >
-                    <span className="projection-switcher__mode-name">{label}</span>
-                    <small className="projection-switcher__mode-purpose">{purpose}</small>
+                    <BfuxIcon name={projectionGlyph(mode)} className="projection-switcher__glyph" />
+                    <span className="projection-switcher__copy">
+                      <span className="projection-switcher__mode-name">{label}</span>
+                      <small className="projection-switcher__mode-purpose">{purpose}</small>
+                    </span>
                   </button>
                 );
               })}
@@ -327,7 +295,7 @@ export function BoundaryFrame({
                 aria-label="Widen process context"
                 title="Widen the process context around the current subject"
               >
-                <FrameIcon name="minus" />
+                <BfuxIcon name="widen" />
                 <span className="frame-tool__label">Widen process context</span>
               </button>
               <button
@@ -337,7 +305,7 @@ export function BoundaryFrame({
                 aria-label="Narrow process context"
                 title="Narrow the process context around the current subject"
               >
-                <FrameIcon name="plus" />
+                <BfuxIcon name="narrow" />
                 <span className="frame-tool__label">Narrow process context</span>
               </button>
             </div>
@@ -353,6 +321,7 @@ export function BoundaryFrame({
         >
           <nav className="trace-nav apparatus-nav traversal-nav" aria-label={`Traversal continuity for ${focusNode.label}`}>
             <header className="apparatus-nav__header traversal-nav__header">
+              <BfuxIcon name="trace" />
               <strong>Traversal</strong>
             </header>
 
@@ -398,7 +367,7 @@ export function BoundaryFrame({
                     onClick={onUp}
                     title={`Traverse up to ${parentNode.label}`}
                   >
-                    <FrameIcon name="up" />
+                    <BfuxIcon name="up" />
                     <span>{parentNode.shortLabel ?? parentNode.label}</span>
                     <small>parent boundary</small>
                   </button>
@@ -407,6 +376,7 @@ export function BoundaryFrame({
 
               {siblingNodes.length ? (
                 <section className="traversal-nav__next" aria-label="Where you can go next">
+                  <div className="traversal-nav__section-label">Adjacent</div>
                   <SiblingChoices nodes={siblingNodes} onNavigate={onLocalNavigate} />
                 </section>
               ) : null}
