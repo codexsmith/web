@@ -57,6 +57,9 @@ export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) 
           </dl>
         </header>
 
+        <p className="sr-only">
+          Agentic · Lean Startup · Agile · Scientific · Computational · Constructive are overlapping operating lenses across this repairable process circuit, not sequential phases.
+        </p>
         <ProcessCircuit placement={placement} scope={scope} />
 
         <div className="gestalt-lower-grid">
