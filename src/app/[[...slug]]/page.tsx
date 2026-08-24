@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { permanentRedirect } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
+import { RecordDetailSurface } from "@/components/record-detail-surface";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
@@ -29,6 +30,11 @@ import {
   productLandingManifest,
   resolveProductLandingRoute,
 } from "@/lib/product-landing-routing";
+import {
+  buildRecordDetailPath,
+  getCanonicalRecordOwner,
+  resolveRecordDetailForNode,
+} from "@/lib/record-detail-routing";
 
 type PageProps = {
   params: Promise<{ slug?: string[] }>;
@@ -37,6 +43,7 @@ type PageProps = {
     scope?: string | string[];
     world?: string | string[];
     ui?: string | string[];
+    detail?: string | string[];
   }>;
 };
 
@@ -87,7 +94,10 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     if (content) {
       const title = getProductLandingTitle(decision.entry, content);
       const description = getProductLandingDescription(decision.entry, content);
-      const pathname = buildProductLandingPath(decision.entry);
+      const owner = getCanonicalRecordOwner(decision.entry);
+      const pathname = owner
+        ? buildRecordDetailPath(owner, decision.entry)
+        : buildProductLandingPath(decision.entry);
 
       return {
         title,
@@ -101,6 +111,18 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   }
 
   const node = hydrateContentNode(getNodeByPath(slug));
+  const recordDetail = resolveRecordDetailForNode(node, firstQueryValue(query.detail));
+  if (recordDetail) {
+    const content = getProductLandingContent(recordDetail.entry);
+    if (content) {
+      return {
+        title: getProductLandingTitle(recordDetail.entry, content),
+        description: getProductLandingDescription(recordDetail.entry, content),
+        alternates: { canonical: buildRecordDetailPath(recordDetail.owner, recordDetail.entry) },
+      };
+    }
+  }
+
   const uiShell = parseUiShell(query.ui);
 
   return {
@@ -121,8 +143,16 @@ export default async function Page({ params, searchParams }: PageProps) {
   ) {
     const decision = resolveProductLandingRoute(slug);
     if (decision && decision.routeKind !== "blocked" && decision.policy.routeEligible) {
+      const owner = getCanonicalRecordOwner(decision.entry);
+      if (owner) {
+        permanentRedirect(buildRecordDetailPath(owner, decision.entry));
+      }
+
       const content = getProductLandingContent(decision.entry);
       if (content) {
+        // Unlisted bridges and any public landing that has not yet earned a canonical
+        // graph owner keep their governed landing behavior. Active records with owners
+        // are redirected above into the bounded BFUX detail surface.
         if (decision.entry.id === "agency-representation-audit" && decision.entry.collection !== "bridge") {
           return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><AgencyAuditLanding /></LandingEngineeringChrome>;
         }
@@ -165,14 +195,25 @@ export default async function Page({ params, searchParams }: PageProps) {
   const initialUiShell = parseUiShell(query.ui);
   const worldState = Array.isArray(query.world) ? query.world[0] : query.world;
   const initialHeroVisible = node.id === "root" && worldState !== "1";
+  const recordDetail = resolveRecordDetailForNode(node, firstQueryValue(query.detail));
+  const recordContent = recordDetail ? getProductLandingContent(recordDetail.entry) : undefined;
 
   return (
-    <WorldApp
-      initialNodeId={node.id}
-      initialProjection={initialProjection}
-      initialProcessScope={initialProcessScope}
-      initialHeroVisible={initialHeroVisible}
-      initialUiShell={initialUiShell}
-    />
+    <>
+      <WorldApp
+        initialNodeId={node.id}
+        initialProjection={initialProjection}
+        initialProcessScope={initialProcessScope}
+        initialHeroVisible={initialHeroVisible}
+        initialUiShell={initialUiShell}
+      />
+      {recordDetail && recordContent ? (
+        <RecordDetailSurface
+          owner={recordDetail.owner}
+          entry={recordDetail.entry}
+          content={recordContent}
+        />
+      ) : null}
+    </>
   );
 }
