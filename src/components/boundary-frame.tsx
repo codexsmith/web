@@ -147,10 +147,7 @@ export function BoundaryFrame({
   }, [focusNode.id, history.length, traversalCursor]);
 
   useEffect(() => {
-    if (!showLocalSectionNav) {
-      setActiveLocalSection("");
-      return;
-    }
+    if (!showLocalSectionNav) return;
 
     const sections = localSections
       .map((section) => document.getElementById(section.id))
@@ -172,12 +169,13 @@ export function BoundaryFrame({
       setActiveLocalSection(active);
     };
 
-    updateActiveSection();
+    const frame = window.requestAnimationFrame(updateActiveSection);
     window.addEventListener("resize", updateActiveSection);
 
     if (container) {
       container.addEventListener("scroll", updateActiveSection, { passive: true });
       return () => {
+        window.cancelAnimationFrame(frame);
         container.removeEventListener("scroll", updateActiveSection);
         window.removeEventListener("resize", updateActiveSection);
       };
@@ -185,6 +183,7 @@ export function BoundaryFrame({
 
     window.addEventListener("scroll", updateActiveSection, { passive: true });
     return () => {
+      window.cancelAnimationFrame(frame);
       window.removeEventListener("scroll", updateActiveSection);
       window.removeEventListener("resize", updateActiveSection);
     };
