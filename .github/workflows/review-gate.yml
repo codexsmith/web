@@ -54,6 +54,9 @@ jobs:
       - name: Check Boundary First UX conformance contracts
         run: node scripts/check_p4_boundary_first_ux.mjs
 
+      - name: Check Closure-Driven delivery contracts
+        run: node scripts/check_p4_closure_driven.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
@@ -68,6 +71,9 @@ jobs:
 
       - name: Exercise Boundary First UX production instrument
         run: node scripts/check_p4_boundary_first_ux_runtime.mjs
+
+      - name: Exercise Closure-Driven production instrument
+        run: node scripts/check_p4_closure_driven_runtime.mjs
 
       - name: Exercise v2 production routes
         run: npm run runtime:check
