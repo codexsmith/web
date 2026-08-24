@@ -75,6 +75,9 @@ jobs:
       - name: Check semantic content artifact contracts
         run: node scripts/check_p5_semantic_artifacts.mjs
 
+      - name: Check BFUX process circuit contracts
+        run: node scripts/check_p6_process_circuit.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
