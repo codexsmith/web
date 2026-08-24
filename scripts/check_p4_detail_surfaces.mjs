@@ -39,6 +39,21 @@ requireMatch(
   "Owned retained-record actions must prefer canonical in-frame detail routes",
 );
 requireMatch(
+  "src/lib/record-detail-routing.ts",
+  /publicationOwnsLanding[\s\S]*publicationOwners\.length === 1[\s\S]*node\.id === entry\.id[\s\S]*linkedOwners\.length === 1/,
+  "Canonical retained-record ownership must prefer provenance, then identity, then one unique explicit link",
+);
+requireMatch(
+  "src/lib/record-detail-routing.ts",
+  /const canonicalOwner = getCanonicalRecordOwner\(entry\)[\s\S]*buildRecordDetailPath\(canonicalOwner, entry\)/,
+  "Cross-context record links must traverse to the canonical owner rather than re-parenting the record",
+);
+requireMatch(
+  "src/lib/record-detail-routing.ts",
+  /const owner = getCanonicalRecordOwner\(entry\)[\s\S]*owner\.id !== node\.id[\s\S]*return \{ entry, owner \}/,
+  "Record detail URLs must resolve only on their one canonical graph owner",
+);
+requireMatch(
   "src/app\/[[...slug]]\/page.tsx",
   /getCanonicalRecordOwner[\s\S]*permanentRedirect\(buildRecordDetailPath\(owner, decision\.entry\)\)/,
   "Legacy landing aliases must redirect to canonical graph-owned record detail",
