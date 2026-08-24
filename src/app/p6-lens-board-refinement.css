@@ -1,0 +1,401 @@
+/* P6 operating-lens refinement.
+   Repeated marks require an explicit semantic axis. Wide screens use a lens-by-stage
+   matrix with full stage words; compact screens recompose each lens into a full-word
+   participation list rather than compressing or abbreviating the axis. */
+
+.process-lenses {
+  gap: 10px;
+}
+
+.process-lenses__header {
+  grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1.45fr);
+  align-items: start;
+}
+
+.process-lenses__legend {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  align-items: center;
+  padding: 7px 9px;
+  border: 1px solid var(--secondary-line, var(--line));
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--secondary-main, var(--paper)) 62%, transparent);
+  color: var(--bf-text-muted, var(--ink-soft));
+  font-size: 0.46rem;
+  line-height: 1.35;
+}
+
+.process-lenses__legend > span {
+  display: inline-flex;
+  gap: 4px;
+  align-items: baseline;
+}
+
+.process-lenses__legend strong {
+  color: var(--bf-text-primary, var(--ink));
+  font-weight: 800;
+}
+
+.process-lenses__current-summary {
+  margin-left: auto;
+  color: var(--bf-action-hover, var(--accent));
+  font-weight: 800;
+}
+
+.process-lens-board {
+  min-width: 0;
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid var(--secondary-line, var(--line));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--secondary-main, var(--paper)) 74%, transparent);
+}
+
+.process-lens-axis,
+.process-lens {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(248px, 1.7fr) repeat(9, minmax(72px, 1fr));
+  gap: 0;
+}
+
+.process-lens-axis {
+  border-bottom: 1px solid var(--secondary-line, var(--line));
+  background: color-mix(in srgb, var(--secondary-panel, var(--paper-strong)) 90%, transparent);
+}
+
+.process-lens-axis__method,
+.process-lens-axis__stage {
+  min-width: 0;
+  min-height: 52px;
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  padding: 7px 8px;
+  border-right: 1px solid var(--secondary-line, var(--line));
+}
+
+.process-lens-axis__stage:last-child {
+  border-right: 0;
+}
+
+.process-lens-axis__method {
+  color: var(--bf-text-muted, var(--ink-soft));
+  font-size: 0.46rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.process-lens-axis__stage {
+  text-align: center;
+}
+
+.process-lens-axis__stage strong {
+  min-width: 0;
+  color: var(--bf-text-primary, var(--ink));
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.58rem;
+  font-weight: 400;
+  line-height: 1.08;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.process-lens-axis__stage small {
+  color: var(--bf-text-muted, var(--ink-soft));
+  font-size: 0.4rem;
+  line-height: 1.1;
+}
+
+.process-lens-axis__stage[data-current="true"] {
+  background: color-mix(in srgb, var(--bf-action, var(--accent)) 10%, transparent);
+  box-shadow: inset 0 3px var(--bf-action, var(--accent));
+}
+
+.process-lens-axis__stage[data-current="true"] small {
+  color: var(--bf-action-hover, var(--accent));
+  font-weight: 800;
+}
+
+.process-lens-axis__stage[data-visible="false"] {
+  opacity: 0.46;
+}
+
+.process-lenses__grid {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0;
+}
+
+.process-lens {
+  grid-template-rows: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.process-lens + .process-lens {
+  border-top: 1px solid var(--secondary-line, var(--line));
+}
+
+.process-lens__method {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 8px;
+  align-content: center;
+  padding: 9px 10px;
+  border-right: 1px solid var(--secondary-line, var(--line));
+  background: color-mix(in srgb, var(--secondary-panel, var(--paper-strong)) 52%, transparent);
+}
+
+.process-lens__title {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.process-lens__title .bfux-icon {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  color: var(--bf-action-hover, var(--accent));
+}
+
+.process-lens__title strong {
+  min-width: 0;
+  color: var(--bf-text-primary, var(--ink));
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.12;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.process-lens__method p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--bf-text-secondary, var(--ink-soft));
+  font-size: 0.45rem;
+  line-height: 1.38;
+}
+
+.process-lens__mobile-label {
+  display: none;
+}
+
+.process-lens__cell {
+  min-width: 0;
+  min-height: 62px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 3px;
+  padding: 6px 4px;
+  border-right: 1px solid var(--secondary-line, var(--line));
+  color: var(--bf-text-muted, var(--ink-soft));
+  text-align: center;
+  background: transparent;
+}
+
+.process-lens__cell:last-child {
+  border-right: 0;
+}
+
+.process-lens__cell-stage {
+  display: none;
+}
+
+.process-lens__cell > strong {
+  color: var(--bf-text-muted, var(--ink-soft));
+  font-size: 0.44rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.process-lens__cell > small {
+  color: var(--bf-action-hover, var(--accent));
+  font-size: 0.38rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.process-lens__cell[data-participates="true"] {
+  background: color-mix(in srgb, var(--bf-action, var(--accent)) 12%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bf-action-line, var(--line-strong)) 72%, transparent);
+}
+
+.process-lens__cell[data-participates="true"] > strong {
+  color: var(--bf-text-primary, var(--ink));
+}
+
+.process-lens__cell[data-current="true"] {
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--bf-action, var(--accent)) 8%, transparent), transparent);
+}
+
+.process-lens__cell[data-visible="false"] {
+  opacity: 0.42;
+}
+
+/* The matrix has a real axis only while the full stage words remain comfortably readable.
+   Below that threshold, each method becomes a full-word participation card. */
+@media (max-width: 1180px) {
+  .process-lenses__header {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .process-lenses__current-summary {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 4px;
+    border-top: 1px dotted var(--secondary-line, var(--line));
+  }
+
+  .process-lens-board {
+    overflow: visible;
+    border: 0;
+    background: transparent;
+  }
+
+  .process-lens-axis {
+    display: none;
+  }
+
+  .process-lenses__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .process-lens {
+    min-width: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    padding: 9px;
+    border: 1px solid var(--secondary-line, var(--line));
+    border-radius: 7px;
+    background: color-mix(in srgb, var(--secondary-main, var(--paper)) 78%, transparent);
+  }
+
+  .process-lens + .process-lens {
+    border-top: 1px solid var(--secondary-line, var(--line));
+  }
+
+  .process-lens__method {
+    grid-column: 1 / -1;
+    display: grid;
+    padding: 0 0 7px;
+    border-right: 0;
+    border-bottom: 1px solid var(--secondary-line, var(--line));
+    background: transparent;
+  }
+
+  .process-lens__method p {
+    display: block;
+    font-size: 0.48rem;
+  }
+
+  .process-lens__mobile-label {
+    display: block;
+    margin-top: 3px;
+    color: var(--bf-text-muted, var(--ink-soft));
+    font-size: 0.4rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .process-lens__cell {
+    min-height: 46px;
+    display: none;
+    place-items: start;
+    align-content: center;
+    gap: 1px;
+    padding: 6px 7px;
+    border: 1px solid var(--secondary-line, var(--line));
+    border-radius: 5px;
+    text-align: left;
+  }
+
+  .process-lens__cell[data-participates="true"] {
+    display: grid;
+  }
+
+  .process-lens__cell-stage {
+    display: block;
+    color: var(--bf-text-primary, var(--ink));
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.62rem;
+    line-height: 1.12;
+  }
+
+  .process-lens__cell > strong {
+    color: var(--bf-action-hover, var(--accent));
+    font-size: 0.4rem;
+    text-transform: uppercase;
+  }
+
+  .process-lens__cell[data-visible="false"] {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 640px) {
+  .process-lenses__legend {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .process-lenses__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-lens {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-lens__title strong {
+    font-size: 0.74rem;
+  }
+
+  .process-lens__cell-stage {
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .process-lens {
+    grid-template-columns: 1fr;
+  }
+
+  .process-lens__method {
+    grid-column: 1;
+  }
+}
+
+@media (forced-colors: active) {
+  .process-lens-axis__stage[data-current="true"],
+  .process-lens__cell[data-participates="true"] {
+    border-color: Highlight;
+    box-shadow: inset 0 0 0 1px Highlight;
+  }
+
+  .process-lens-axis__stage[data-current="true"] {
+    box-shadow: inset 0 3px Highlight;
+  }
+}
