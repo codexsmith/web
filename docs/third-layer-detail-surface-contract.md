@@ -51,9 +51,16 @@ This preserves the distinction between **projection** (how the same object is vi
 
 ## Canonical ownership
 
-A public manifest record earns in-frame migration when a canonical node explicitly links to that landing route. The link is the current ownership declaration.
+A retained record has one canonical graph owner. Multiple objects may point to the same public record, but a relation to a record is not permission to re-parent it according to whichever link happens to be traversed.
 
-Do not invent graph ownership merely to eliminate a standalone page. If no public canonical owner exists, the record remains an exception until its topology is declared.
+Ownership is resolved from existing declarations in descending strength:
+
+1. **Publication provenance** — a publication whose `sourceRef` explicitly names the manifest file owns that public method/standard record.
+2. **Semantic identity** — a graph node whose ID equals the retained-record ID owns the matching product/research record.
+3. **Unique explicit record link** — when exactly one node points to the landing alias, that link may establish ownership.
+4. **Unresolved ambiguity** — if several candidates remain after these rules, no owner is invented merely to eliminate a standalone page.
+
+Cross-context links traverse to the canonical owner. They do not make the retained record appear as detail belonging to the linking context. This matters for records such as Software Before Code: Boundary First Engineering can point to the method, while the publication object remains the identity-bearing public record because it declares the retained JSON as its source.
 
 ## Raw-content migration
 
@@ -92,7 +99,8 @@ A third-layer migration is correct when:
 1. opening an inspection does not create a backdrop or modal dialog;
 2. opening a retained record keeps the Boundary Frame visible;
 3. a legacy landing alias redirects to the canonical graph owner when one exists;
-4. returning from detail restores the same object rather than navigating to a guessed parent;
-5. World/Evidence/Process semantics remain unchanged;
-6. record detail does not add traversal history as though it were a separate object;
-7. raw record data is projected into semantic sections rather than exposed as an undifferentiated data dump.
+4. another object linking the same record traverses to that canonical owner rather than re-parenting the record;
+5. returning from detail restores the same canonical object rather than navigating to a guessed parent;
+6. World/Evidence/Process semantics remain unchanged;
+7. record detail does not add traversal history as though it were a separate object;
+8. raw record data is projected into semantic sections rather than exposed as an undifferentiated data dump.
