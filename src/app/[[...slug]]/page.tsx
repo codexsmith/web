@@ -8,6 +8,7 @@ import { ClosureDrivenRecordDetail } from "@/components/closure-driven-record-de
 import { WeatherResearchRecordDetail } from "@/components/weather-research-record-detail";
 import { SchemathematicsFormalRecordDetail } from "@/components/schemathematics-formal-record-detail";
 import { LawResearchRecordDetail } from "@/components/law-research-record-detail";
+import { ChessPractitionerRecordDetail } from "@/components/chess-practitioner-record-detail";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
@@ -241,6 +242,11 @@ export default async function Page({ params, searchParams }: PageProps) {
           />
         ) : recordDetail.entry.id === "constitutional-law-and-jurisprudence" ? (
           <LawResearchRecordDetail
+            owner={recordDetail.owner}
+            entry={recordDetail.entry}
+          />
+        ) : recordDetail.entry.id === "boundary-first-chess" ? (
+          <ChessPractitionerRecordDetail
             owner={recordDetail.owner}
             entry={recordDetail.entry}
           />
