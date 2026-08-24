@@ -44,6 +44,7 @@ import "./p1-world-orientation.css";
 import "./p1-search-traversal.css";
 import "./p2-projection-legibility.css";
 import "./p3-industrial-control-panel.css";
+import "./p3-semantic-action-glyphs.css";
 
 export const metadata: Metadata = {
   title: {
