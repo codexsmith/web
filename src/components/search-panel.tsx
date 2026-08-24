@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { BfuxIcon } from "@/components/bfux-icons";
 import {
   buildSearchIndex,
   searchFacetOptions,
@@ -97,15 +98,22 @@ export function SearchPanel({ onClose, onNavigate }: SearchPanelProps) {
       <button className="search-layer__backdrop" onClick={onClose} aria-label="Close search" />
       <section className="search-panel search-panel--instrument" ref={panelRef}>
         <div className="search-panel__header">
-          <div>
-            <p className="eyebrow">Traverse by identity, boundary, standing, evidence, relation, or event</p>
-            <h2 id="search-title">Search the lab</h2>
+          <div className="search-panel__title-block">
+            <BfuxIcon name="inspect" className="search-panel__title-glyph" />
+            <div>
+              <p className="eyebrow">Traverse by identity, boundary, standing, evidence, relation, or event</p>
+              <h2 id="search-title">Search the lab</h2>
+            </div>
           </div>
-          <button onClick={onClose}>Close</button>
+          <button className="search-panel__close" onClick={onClose}>
+            <BfuxIcon name="close" />
+            <span>Close</span>
+          </button>
         </div>
 
-        <label className="search-field">
+        <label className="search-field search-field--instrument">
           <span className="sr-only">Search</span>
+          <BfuxIcon name="inspect" className="search-field__glyph" />
           <input
             ref={inputRef}
             value={query}
