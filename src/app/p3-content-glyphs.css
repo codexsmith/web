@@ -1,6 +1,10 @@
 /* P3 content-level glyphs.
    Region icons identify the declared kind/role of a bounded module. They remain small
-   secondary instrumentation so the content label, orientation, and standing stay primary. */
+   secondary instrumentation so the content label, orientation, and standing stay primary.
+
+   The five entered-World root regions are the exception: they are not ordinary cards.
+   They are the primary doors into the Lab, so each reads as a cover object with one
+   large BFUX emblem and a restrained domain-specific field rather than a numbered tile. */
 
 body[data-ui-shell="cards"] .district-card__kind,
 body[data-ui-shell="cards"] .public-interest-panel__kind {
@@ -48,6 +52,170 @@ body[data-ui-shell="cards"] .section-region-card[data-node-id="research"] .secti
   color: var(--bf-region-research);
 }
 
+/* Root World doors ---------------------------------------------------------
+   The older root board supplied a typographic pseudo-glyph plus a numbered machine
+   register. P3 now has the canonical BFUX vectors, so those redundant marks disappear.
+   The surviving glyph becomes the cover emblem and the surface itself carries identity. */
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card__number {
+  display: none !important;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card__kind {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  align-items: start;
+  justify-items: start;
+  gap: 0;
+  min-height: 0;
+  padding-right: 0;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card__kind::before {
+  content: none !important;
+  display: none !important;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card__kind > span {
+  max-width: 32ch;
+  color: var(--bf-silver-300);
+  line-height: 1.35;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card .section-region-card__glyph {
+  width: clamp(46px, 4.2vw, 68px);
+  height: clamp(46px, 4.2vw, 68px);
+  margin: 0 0 clamp(12px, 1vw, 17px);
+  color: var(--root-region-accent, var(--bf-action));
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.08))
+    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.24));
+  opacity: 0.96;
+  transform: none;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card:hover .section-region-card__glyph,
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card:focus-visible .section-region-card__glyph {
+  color: var(--root-region-accent, var(--bf-action));
+  transform: translateY(-2px) scale(1.025);
+}
+
+/* Each cover keeps the same physical law while carrying a different semantic field.
+   These are intentionally quiet enough to read as material/printing, not illustration. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card {
+  --root-cover-motif: linear-gradient(transparent, transparent);
+  background:
+    var(--bf-brushed-metal),
+    var(--root-cover-motif),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 28%),
+    color-mix(in srgb, var(--root-board-panel) 96%, black) !important;
+}
+
+/* Public Interest: a responsibility field radiating outward from a bounded center. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="public-interest"] {
+  --root-cover-motif:
+    radial-gradient(circle at 82% 23%, transparent 0 34px,
+      color-mix(in srgb, var(--bf-region-public-interest) 13%, transparent) 35px 36px,
+      transparent 37px 58px,
+      color-mix(in srgb, var(--bf-region-public-interest) 7%, transparent) 59px 60px,
+      transparent 61px),
+    radial-gradient(circle at 82% 23%,
+      color-mix(in srgb, var(--bf-region-public-interest) 5%, transparent),
+      transparent 46%);
+}
+
+/* Products: constructed objects, orthogonal assembly, repeatable modules. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="products"] {
+  --root-cover-motif:
+    linear-gradient(90deg,
+      transparent 0 69%,
+      color-mix(in srgb, var(--bf-region-products) 9%, transparent) 69% 69.5%,
+      transparent 69.5% 84%,
+      color-mix(in srgb, var(--bf-region-products) 6%, transparent) 84% 84.5%,
+      transparent 84.5%),
+    linear-gradient(180deg,
+      transparent 0 31%,
+      color-mix(in srgb, var(--bf-region-products) 8%, transparent) 31% 31.5%,
+      transparent 31.5% 58%,
+      color-mix(in srgb, var(--bf-region-products) 5%, transparent) 58% 58.5%,
+      transparent 58.5%);
+}
+
+/* Publications: a bound spine with quiet manuscript/ledger ruling. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="publications"] {
+  --root-cover-motif:
+    linear-gradient(90deg,
+      transparent 0 78%,
+      color-mix(in srgb, var(--bf-region-publications) 11%, transparent) 78% 78.6%,
+      transparent 78.6%),
+    repeating-linear-gradient(180deg,
+      transparent 0 27px,
+      color-mix(in srgb, var(--bf-region-publications) 5%, transparent) 27px 28px);
+}
+
+/* About: an identity field rather than a diagram; one bounded focal presence. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="about"] {
+  --root-cover-motif:
+    radial-gradient(ellipse at 79% 30%,
+      color-mix(in srgb, var(--bf-region-about) 8%, transparent) 0 14%,
+      transparent 15% 26%,
+      color-mix(in srgb, var(--bf-region-about) 4%, transparent) 27% 27.5%,
+      transparent 28%),
+    linear-gradient(90deg,
+      transparent 0 73%,
+      color-mix(in srgb, var(--bf-region-about) 6%, transparent) 73% 73.4%,
+      transparent 73.4%);
+}
+
+/* Research: coordinate field + invariant focus, with extra room because the door is wider. */
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="research"] {
+  --root-cover-motif:
+    radial-gradient(circle at 84% 28%,
+      color-mix(in srgb, var(--bf-region-research) 10%, transparent) 0 3px,
+      transparent 4px 48px,
+      color-mix(in srgb, var(--bf-region-research) 7%, transparent) 49px 50px,
+      transparent 51px),
+    linear-gradient(90deg,
+      transparent 0 84%,
+      color-mix(in srgb, var(--bf-region-research) 6%, transparent) 84% 84.4%,
+      transparent 84.4%),
+    linear-gradient(180deg,
+      transparent 0 28%,
+      color-mix(in srgb, var(--bf-region-research) 6%, transparent) 28% 28.4%,
+      transparent 28.4%);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="research"] .section-region-card__glyph {
+  width: clamp(54px, 4.8vw, 78px);
+  height: clamp(54px, 4.8vw, 78px);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card:hover,
+body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"] .district-card:focus-visible {
+  background:
+    var(--bf-brushed-metal),
+    var(--root-cover-motif),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 30%),
+    color-mix(in srgb, var(--root-board-panel-raised) 94%, var(--root-region-accent, var(--bf-action)) 6%) !important;
+}
+
 @media (max-width: 720px) {
   body[data-ui-shell="cards"] .district-card__kind,
   body[data-ui-shell="cards"] .public-interest-panel__kind {
@@ -58,6 +226,33 @@ body[data-ui-shell="cards"] .section-region-card[data-node-id="research"] .secti
     width: 15px;
     height: 15px;
   }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"] .district-card .section-region-card__glyph {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 10px;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+    .district-card[data-node-id="research"] .section-region-card__glyph {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 430px) {
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"] .district-card .section-region-card__glyph {
+    width: 38px;
+    height: 38px;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+    .district-card[data-node-id="research"] .section-region-card__glyph {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 @media (forced-colors: active) {
@@ -65,5 +260,11 @@ body[data-ui-shell="cards"] .section-region-card[data-node-id="research"] .secti
   body[data-ui-shell="cards"] .section-region-card[data-node-id] .section-region-card__glyph {
     color: CanvasText !important;
     filter: none;
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"] .district-card {
+    --root-cover-motif: linear-gradient(transparent, transparent);
+    background: Canvas !important;
   }
 }
