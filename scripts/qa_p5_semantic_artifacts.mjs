@@ -53,6 +53,8 @@ async function layoutProbe(page, selector) {
       .slice(0, 10)
       .map((element) => (element.textContent ?? "").trim().replace(/\s+/g, " ").slice(0, 100));
 
+    const sequence = artifact.querySelector("ol.bfux-artifact__sequence");
+
     return {
       missing: false,
       documentHorizontalOverflow: document.documentElement.scrollWidth > innerWidth + 2,
@@ -61,6 +63,7 @@ async function layoutProbe(page, selector) {
       artifactWidth: Math.round(artifact.getBoundingClientRect().width),
       orderedSequenceCount: artifact.querySelectorAll("ol.bfux-artifact__sequence").length,
       peerSetCount: artifact.querySelectorAll("ul.bfux-artifact__set").length,
+      sequenceHorizontalOverflow: sequence ? sequence.scrollWidth > sequence.clientWidth + 2 : false,
       clipped,
     };
   }, selector);
@@ -90,6 +93,7 @@ async function visitRoute(browser, route, viewportName) {
     if (metrics.documentHorizontalOverflow) issues.push("semantic artifact caused document horizontal overflow");
     if (metrics.artifactWidth < 100) issues.push(`artifact collapsed to ${metrics.artifactWidth}px`);
     if ((route.kind === "sequence" || route.kind === "loop") && metrics.orderedSequenceCount !== 1) issues.push("ordered artifact lost OL sequence semantics");
+    if (viewportName === "desktop" && (route.kind === "sequence" || route.kind === "loop") && metrics.sequenceHorizontalOverflow) issues.push("desktop operator chain hides stages behind internal horizontal scrolling");
     if (metrics.clipped.length) issues.push(`clipped artifact text: ${metrics.clipped.join(" | ")}`);
   }
   if (consoleErrors.length) issues.push(`console errors: ${consoleErrors.join(" | ")}`);
@@ -122,14 +126,18 @@ async function inspectCompiledProse(browser) {
   await surface.waitFor({ state: "visible", timeout: 10_000 });
   await page.waitForTimeout(100);
 
-  const metrics = await page.evaluate(() => ({
-    artifactCount: document.querySelectorAll('.inspection-surface .bfux-artifact[data-artifact-kind]').length,
-    loopCount: document.querySelectorAll('.inspection-surface .bfux-artifact[data-artifact-kind="loop"]').length,
-    setCount: document.querySelectorAll('.inspection-surface .bfux-artifact[data-artifact-kind="set"]').length,
-    rawFindingsCount: document.querySelectorAll(".inspection-surface__findings").length,
-    ariaModalCount: document.querySelectorAll('.inspection-surface[aria-modal="true"], .inspection-surface [aria-modal="true"]').length,
-    horizontalOverflow: document.documentElement.scrollWidth > innerWidth + 2,
-  }));
+  const metrics = await page.evaluate(() => {
+    const sequence = document.querySelector('.inspection-surface ol.bfux-artifact__sequence');
+    return {
+      artifactCount: document.querySelectorAll('.inspection-surface .bfux-artifact[data-artifact-kind]').length,
+      loopCount: document.querySelectorAll('.inspection-surface .bfux-artifact[data-artifact-kind="loop"]').length,
+      setCount: document.querySelectorAll('.inspection-surface .bfux-artifact[data-artifact-kind="set"]').length,
+      rawFindingsCount: document.querySelectorAll(".inspection-surface__findings").length,
+      ariaModalCount: document.querySelectorAll('.inspection-surface[aria-modal="true"], .inspection-surface [aria-modal="true"]').length,
+      horizontalOverflow: document.documentElement.scrollWidth > innerWidth + 2,
+      sequenceHorizontalOverflow: sequence ? sequence.scrollWidth > sequence.clientWidth + 2 : false,
+    };
+  });
 
   if (metrics.artifactCount < 2) issues.push(`expected compiled sequence plus boundary notes, found ${metrics.artifactCount} artifacts`);
   if (metrics.loopCount < 1) issues.push("arrow-authored consequence circuit did not compile into a loop artifact");
@@ -137,6 +145,7 @@ async function inspectCompiledProse(browser) {
   if (metrics.rawFindingsCount !== 0) issues.push("raw inspection findings list returned");
   if (metrics.ariaModalCount !== 0) issues.push("inspection regained modal semantics");
   if (metrics.horizontalOverflow) issues.push("compiled inspection artifacts caused document horizontal overflow");
+  if (metrics.sequenceHorizontalOverflow) issues.push("compiled desktop consequence circuit hides stages behind internal horizontal scrolling");
   if (consoleErrors.length) issues.push(`console errors: ${consoleErrors.join(" | ")}`);
   if (pageErrors.length) issues.push(`page errors: ${pageErrors.join(" | ")}`);
 
@@ -155,7 +164,7 @@ function writeReport() {
     "",
     "| Surface | Viewport | Kind | Overflow | Clipping | Issues |",
     "|---|---:|---|---|---:|---|",
-    ...results.map((item) => `| ${item.name} | ${item.viewport.width}×${item.viewport.height} | ${item.metrics.artifactKind ?? (item.metrics.loopCount ? "compiled inspection" : "—")} | ${item.metrics.documentHorizontalOverflow || item.metrics.horizontalOverflow ? "FAIL" : "ok"} | ${item.metrics.clipped?.length ?? 0} | ${item.issues.length ? item.issues.join("; ") : "—"} |`),
+    ...results.map((item) => `| ${item.name} | ${item.viewport.width}×${item.viewport.height} | ${item.metrics.artifactKind ?? (item.metrics.loopCount ? "compiled inspection" : "—")} | ${item.metrics.documentHorizontalOverflow || item.metrics.horizontalOverflow || item.metrics.sequenceHorizontalOverflow ? "FAIL" : "ok"} | ${item.metrics.clipped?.length ?? 0} | ${item.issues.length ? item.issues.join("; ") : "—"} |`),
   ];
   fs.writeFileSync(path.join(artifactDir, "report.json"), JSON.stringify({ failures, results }, null, 2));
   fs.writeFileSync(path.join(artifactDir, "report.md"), `${lines.join("\n")}\n`);
