@@ -9,6 +9,7 @@ import { WeatherResearchRecordDetail } from "@/components/weather-research-recor
 import { SchemathematicsFormalRecordDetail } from "@/components/schemathematics-formal-record-detail";
 import { LawResearchRecordDetail } from "@/components/law-research-record-detail";
 import { ChessPractitionerRecordDetail } from "@/components/chess-practitioner-record-detail";
+import { SoccerPractitionerRecordDetail } from "@/components/soccer-practitioner-record-detail";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
@@ -216,40 +217,21 @@ export default async function Page({ params, searchParams }: PageProps) {
       />
       {recordDetail && recordContent ? (
         recordDetail.entry.id === "corpus-forge" ? (
-          <CorpusForgeRecordDetail
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-          />
+          <CorpusForgeRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : recordDetail.entry.id === "boundary-first-ux" ? (
-          <BoundaryFirstUxRecordDetail
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-          />
+          <BoundaryFirstUxRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : recordDetail.entry.id === "closure-driven-software-development" ? (
-          <ClosureDrivenRecordDetail
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-          />
+          <ClosureDrivenRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : recordDetail.entry.id === "boundary-first-weather" ? (
-          <WeatherResearchRecordDetail
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-          />
+          <WeatherResearchRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : recordDetail.entry.id === "schemathematics" ? (
-          <SchemathematicsFormalRecordDetail
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-          />
+          <SchemathematicsFormalRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : recordDetail.entry.id === "constitutional-law-and-jurisprudence" ? (
-          <LawResearchRecordDetail
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-          />
+          <LawResearchRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : recordDetail.entry.id === "boundary-first-chess" ? (
-          <ChessPractitionerRecordDetail
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-          />
+          <ChessPractitionerRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
+        ) : recordDetail.entry.id === "boundary-first-soccer" ? (
+          <SoccerPractitionerRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : (
           <RecordDetailSurface
             owner={recordDetail.owner}
