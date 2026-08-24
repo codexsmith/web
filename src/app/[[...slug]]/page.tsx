@@ -5,6 +5,7 @@ import { RecordDetailSurface } from "@/components/record-detail-surface";
 import { CorpusForgeRecordDetail } from "@/components/corpus-forge-record-detail";
 import { BoundaryFirstUxRecordDetail } from "@/components/boundary-first-ux-record-detail";
 import { ClosureDrivenRecordDetail } from "@/components/closure-driven-record-detail";
+import { WeatherResearchRecordDetail } from "@/components/weather-research-record-detail";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNodeByPath, nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
@@ -223,6 +224,11 @@ export default async function Page({ params, searchParams }: PageProps) {
           />
         ) : recordDetail.entry.id === "closure-driven-software-development" ? (
           <ClosureDrivenRecordDetail
+            owner={recordDetail.owner}
+            entry={recordDetail.entry}
+          />
+        ) : recordDetail.entry.id === "boundary-first-weather" ? (
+          <WeatherResearchRecordDetail
             owner={recordDetail.owner}
             entry={recordDetail.entry}
           />
