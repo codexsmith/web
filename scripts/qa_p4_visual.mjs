@@ -84,19 +84,28 @@ async function inspectLayout(page) {
       return style.display !== "none" && style.visibility !== "hidden" && Number(style.opacity || 1) > 0 && rect.width > 1 && rect.height > 1;
     };
 
+    const serializeRect = (rect) => ({
+      left: Math.round(rect.left * 10) / 10,
+      right: Math.round(rect.right * 10) / 10,
+      top: Math.round(rect.top * 10) / 10,
+      bottom: Math.round(rect.bottom * 10) / 10,
+      width: Math.round(rect.width * 10) / 10,
+      height: Math.round(rect.height * 10) / 10,
+    });
+
     const rectOf = (selector) => {
       const element = document.querySelector(selector);
       if (!element || !isVisible(element)) return null;
-      const rect = element.getBoundingClientRect();
-      return {
-        left: Math.round(rect.left * 10) / 10,
-        right: Math.round(rect.right * 10) / 10,
-        top: Math.round(rect.top * 10) / 10,
-        bottom: Math.round(rect.bottom * 10) / 10,
-        width: Math.round(rect.width * 10) / 10,
-        height: Math.round(rect.height * 10) / 10,
-      };
+      return serializeRect(element.getBoundingClientRect());
     };
+
+    const intersects = (a, b) => Boolean(
+      a && b
+      && a.left < b.right - 2
+      && a.right > b.left + 2
+      && a.top < b.bottom - 2
+      && a.bottom > b.top + 2
+    );
 
     const clippedText = Array.from(document.querySelectorAll("h1,h2,h3,h4,p,li,strong,small,a,button,span"))
       .filter(isVisible)
@@ -104,6 +113,7 @@ async function inspectLayout(page) {
         const style = getComputedStyle(element);
         if (style.position === "absolute" && (element.clientWidth <= 2 || element.clientHeight <= 2)) return false;
         if (element.getAttribute("aria-hidden") === "true") return false;
+        if (style.textOverflow === "ellipsis") return false;
         const horizontalClip = element.scrollWidth > element.clientWidth + 3 && /hidden|clip/.test(style.overflowX);
         const verticalClip = element.scrollHeight > element.clientHeight + 3 && /hidden|clip/.test(style.overflowY);
         return horizontalClip || verticalClip;
@@ -121,11 +131,28 @@ async function inspectLayout(page) {
     const detailHeadingRect = detailHeading && isVisible(detailHeading) ? detailHeading.getBoundingClientRect() : null;
     const topFrame = document.querySelector(".boundary-frame__top");
     const topFrameRect = topFrame && isVisible(topFrame) ? topFrame.getBoundingClientRect() : null;
-    const leftFrame = document.querySelector(".boundary-frame__left");
-    const leftFrameRect = leftFrame && isVisible(leftFrame) ? leftFrame.getBoundingClientRect() : null;
+    const traceFrame = document.querySelector(".boundary-frame__left");
+    const traceFrameRect = traceFrame && isVisible(traceFrame) ? traceFrame.getBoundingClientRect() : null;
+    const worldViewport = document.querySelector(".site-shell .world-viewport");
+    const rootCards = Array.from(document.querySelectorAll('.branch-world[data-gestalt-id="root"] .district-card[data-node-id]'))
+      .filter(isVisible)
+      .map((card) => ({
+        id: card.getAttribute("data-node-id"),
+        ...serializeRect(card.getBoundingClientRect()),
+      }));
 
-    const headingUnderTopFrame = Boolean(detailHeadingRect && topFrameRect && detailHeadingRect.top < topFrameRect.bottom - 2);
-    const headingUnderLeftFrame = Boolean(detailHeadingRect && leftFrameRect && detailHeadingRect.left < leftFrameRect.right - 2);
+    const regionKindPathologies = Array.from(document.querySelectorAll(".branch-world:not(.branch-world--root-world) .district-card__kind"))
+      .filter(isVisible)
+      .map((element) => {
+        const rect = element.getBoundingClientRect();
+        return {
+          text: (element.textContent ?? "").trim().replace(/\s+/g, " "),
+          width: Math.round(rect.width * 10) / 10,
+          height: Math.round(rect.height * 10) / 10,
+        };
+      })
+      .filter((item) => item.text.length >= 10 && item.width < 72 && item.height > item.width * 1.8)
+      .slice(0, 10);
 
     return {
       url: location.pathname + location.search,
@@ -142,14 +169,17 @@ async function inspectLayout(page) {
       leftFrame: rectOf(".boundary-frame__left"),
       rightFrame: rectOf(".boundary-frame__right"),
       detailSurface: rectOf("main.detail-surface"),
-      detailHeading: detailHeadingRect ? {
-        left: detailHeadingRect.left,
-        right: detailHeadingRect.right,
-        top: detailHeadingRect.top,
-        bottom: detailHeadingRect.bottom,
+      detailHeading: detailHeadingRect ? serializeRect(detailHeadingRect) : null,
+      headingUnderTopFrame: intersects(detailHeadingRect, topFrameRect),
+      headingUnderLeftFrame: intersects(detailHeadingRect, traceFrameRect),
+      rootCards,
+      worldViewport: worldViewport && isVisible(worldViewport) ? {
+        ...serializeRect(worldViewport.getBoundingClientRect()),
+        scrollTop: Math.round(worldViewport.scrollTop * 10) / 10,
+        scrollHeight: worldViewport.scrollHeight,
+        clientHeight: worldViewport.clientHeight,
       } : null,
-      headingUnderTopFrame,
-      headingUnderLeftFrame,
+      regionKindPathologies,
       clippedText,
       genericFallback: document.body.innerText.includes("Structured retained record"),
       standaloneLanding: document.body.innerText.includes("Governed public landing"),
@@ -169,7 +199,10 @@ function assessCommon(name, metrics, consoleErrors, pageErrors, isDetail = false
   if (pageErrors.length) issues.push(`page errors: ${pageErrors.join(" | ")}`);
   if (!metrics.searchButtonCount) issues.push("Search control is not visible in the Boundary Frame");
   if (metrics.headingUnderTopFrame) issues.push("detail heading is occluded by the top Boundary Frame");
-  if (metrics.headingUnderLeftFrame) issues.push("detail heading is occluded by the left traversal frame");
+  if (metrics.headingUnderLeftFrame) issues.push("detail heading is occluded by the traversal shelf/frame");
+  if (metrics.regionKindPathologies.length) {
+    issues.push(`region type/eyebrow collapsed into a narrow vertical strip: ${metrics.regionKindPathologies.map((item) => item.text).join(" | ")}`);
+  }
   if (metrics.clippedText.length) warnings.push(`${metrics.clippedText.length} potentially clipped text element(s)`);
 
   if (isDetail) {
@@ -217,6 +250,14 @@ async function visit(browser, config) {
       assessment.issues.push(issue);
       criticalFailures.push({ name: config.name, issues: [issue] });
     }
+    if (config.viewport.width <= 720) {
+      const collapsed = metrics.rootCards.filter((card) => card.height < 150);
+      if (collapsed.length) {
+        const issue = `compact root door collapsed below 150px: ${collapsed.map((card) => `${card.id}:${card.height}px`).join(", ")}`;
+        assessment.issues.push(issue);
+        criticalFailures.push({ name: config.name, issues: [issue] });
+      }
+    }
   }
 
   const screenshotPath = path.join(screenshotDir, `${slug(config.name)}.png`);
@@ -258,7 +299,7 @@ async function runInteractionChecks(browser) {
     if (rootCards !== 5) failures.push(`Back traversal did not restore the five-door World (${rootCards})`);
   }
 
-  const search = page.getByRole("button", { name: "Search" });
+  const search = page.getByRole("button", { name: "Search", exact: true });
   await search.click();
   await page.waitForTimeout(100);
   const searchVisible = await page.locator(".search-panel").isVisible().catch(() => false);
