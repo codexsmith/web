@@ -60,6 +60,23 @@ const paperMineNavigation: Partial<Record<"research" | "publications", NonNullab
   },
 };
 
+const founderTimelineNavigation: Partial<Record<"about" | "provenance", NonNullable<ContentNode["links"]>[number]>> = {
+  about: {
+    label: "Founder & Intellectual Provenance Timeline",
+    href: "/about/provenance/timeline",
+    eyebrow: "Interactive provenance chronology",
+    summary:
+      "Trace founder formation, research genealogy, theory development, evidence classes, unresolved transitions, and recovery work in one source-aware chronology.",
+  },
+  provenance: {
+    label: "Open the founder provenance timeline",
+    href: "/about/provenance/timeline",
+    eyebrow: "Interactive chronology",
+    summary:
+      "Inspect the typed chronology, evidence classes, lineage, source surfaces, and unresolved provenance work behind the Lab's current architecture.",
+  },
+};
+
 function withPaperMineNavigation(node: ContentNode): ContentNode {
   const paperMineLink = node.id === "research" || node.id === "publications"
     ? paperMineNavigation[node.id]
@@ -75,11 +92,26 @@ function withPaperMineNavigation(node: ContentNode): ContentNode {
   };
 }
 
+function withFounderTimelineNavigation(node: ContentNode): ContentNode {
+  const timelineLink = node.id === "about" || node.id === "provenance"
+    ? founderTimelineNavigation[node.id]
+    : undefined;
+  if (!timelineLink) return node;
+
+  return {
+    ...node,
+    links: [
+      timelineLink,
+      ...(node.links ?? []).filter((link) => link.href !== timelineLink.href),
+    ],
+  };
+}
+
 const rawNodes: ContentNode[] = [...baseNodes, ...publicationNodes];
 
 export const nodes: ContentNode[] = rawNodes.map((node) => {
   const localSections = getLocalSections(node.id);
-  const enrichedNode = withPaperMineNavigation(node);
+  const enrichedNode = withFounderTimelineNavigation(withPaperMineNavigation(node));
   return localSections.length ? { ...enrichedNode, localSections } : enrichedNode;
 });
 export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
