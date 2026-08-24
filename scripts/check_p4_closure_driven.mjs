@@ -39,7 +39,7 @@ requireMatch(
 );
 requireMatch(
   component,
-  /record\.loop\.steps[\s\S]*Six-stage closure loop/,
+  /Six-stage closure loop[\s\S]*record\.loop\.steps/,
   "Closure-Driven must expose the complete six-stage loop with witnesses",
 );
 requireMatch(
