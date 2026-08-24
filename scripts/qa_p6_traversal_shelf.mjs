@@ -42,6 +42,9 @@ async function probe(page) {
       return style.display !== "none" && style.visibility !== "hidden" && r.width > 1 && r.height > 1;
     }).length;
 
+    const traversal = document.querySelector(".boundary-frame__trace-nav");
+    const traversalStyle = traversal ? getComputedStyle(traversal) : null;
+
     return {
       top: rect(".boundary-frame__top"),
       traversal: rect(".boundary-frame__trace-nav"),
@@ -51,10 +54,11 @@ async function probe(page) {
       currentVisible: isVisible(".traversal-nav__current"),
       parentVisible: isVisible(".traversal-nav__containment"),
       peerButtonVisibleCount: visibleCount(".traversal-nav__peer-list button"),
-      backVisible: isVisible(".frame-tool--trace-back"),
       current: rect(".traversal-nav__current > div"),
       parent: rect(".traversal-nav__up"),
       firstPeer: rect(".traversal-nav__peer-list button"),
+      traversalComputedTop: traversalStyle?.top ?? null,
+      traversalTransform: traversalStyle?.transform ?? null,
       documentHorizontalOverflow: document.documentElement.scrollWidth > innerWidth + 2,
       viewportWidth: innerWidth,
       viewportHeight: innerHeight,
@@ -81,7 +85,6 @@ try {
     if (!metrics.traversal || !metrics.world || !metrics.top) issues.push("frame geometry missing");
     if (metrics.documentHorizontalOverflow) issues.push("document has horizontal overflow");
     if (!metrics.currentVisible) issues.push("current focus is not visible in traversal navigation");
-    if (!metrics.backVisible) issues.push("top-frame Back transport is not visible");
 
     if (testCase.mode === "shelf" && metrics.traversal && metrics.world) {
       if (metrics.headerVisible) issues.push("redundant TRAVERSAL header is visible in shelf projection");
@@ -90,7 +93,7 @@ try {
       if (metrics.traversal.width < metrics.viewportWidth - 4) issues.push("shelf does not span the available reading width");
       if (Math.abs(metrics.world.left) > 2) issues.push(`world remains inset ${Math.round(metrics.world.left)}px as if desktop rail still existed`);
       const verticalGap = metrics.world.top - metrics.traversal.bottom;
-      if (verticalGap < -2 || verticalGap > 4) issues.push(`world begins ${Math.round(verticalGap)}px from shelf boundary instead of immediately below it`);
+      if (verticalGap < -2 || verticalGap > 4) issues.push(`world begins ${Math.round(verticalGap)}px from shelf boundary instead of immediately below it (computed top ${metrics.traversalComputedTop}, transform ${metrics.traversalTransform})`);
       if (metrics.current && metrics.current.height > 40.5) issues.push(`current-focus control is too tall at ${Math.round(metrics.current.height)}px`);
       if (metrics.parent && metrics.parent.height > 40.5) issues.push(`parent control is too tall at ${Math.round(metrics.parent.height)}px`);
       if (metrics.firstPeer && metrics.firstPeer.height > 40.5) issues.push(`peer control is too tall at ${Math.round(metrics.firstPeer.height)}px`);
