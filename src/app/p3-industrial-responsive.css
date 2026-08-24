@@ -1,0 +1,59 @@
+/* P3 responsive tail.
+   Loaded after the industrial chrome so compact projections can intentionally simplify
+   the apparatus without being defeated by higher-specificity desktop material rules. */
+
+body[data-ui-shell="cards"] .brand-anchor__mark {
+  flex: 0 0 30px !important;
+}
+
+@media (max-width: 1180px) {
+  body[data-ui-shell="cards"] .projection-switcher--legible .projection-switcher__label {
+    display: none !important;
+  }
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .projection-switcher--legible {
+    min-height: 42px;
+    padding: 3px !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher--legible button {
+    min-height: 34px;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .projection-switcher--legible {
+    min-height: 40px;
+  }
+
+  body[data-ui-shell="cards"] .frame-home-tray {
+    min-height: 38px;
+    padding: 3px !important;
+  }
+
+  body[data-ui-shell="cards"] .brand-anchor__mark {
+    width: 28px !important;
+    height: 28px !important;
+    flex-basis: 28px !important;
+  }
+
+  body[data-ui-shell="cards"] .brand-anchor__mark .bfux-icon {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media (max-width: 430px) {
+  body[data-ui-shell="cards"] .projection-switcher--legible button {
+    grid-template-columns: 14px minmax(0, 1fr) !important;
+    gap: 3px !important;
+    padding-inline: 4px !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher__glyph {
+    width: 13px;
+    height: 13px;
+  }
+}
