@@ -1,0 +1,140 @@
+/* Paper Mine prominence on the two section routes that govern its public meaning.
+   The workbench is a cross-boundary destination: research discovery upstream,
+   publication paperization downstream. Keep that transition visible before the
+   ordinary region grid without turning Paper Mine into a child node of either tree. */
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-header > span,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-header > span {
+  font-size: 0;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-header > span::after,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-header > span::after {
+  color: var(--bf-action);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-header > span::after {
+  content: "Featured research workbench";
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-header > span::after {
+  content: "Featured publication discovery";
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-actions > a[href="/research/paper-mine"],
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-actions > a[href="/research/paper-mine"] {
+  grid-column: 1 / -1;
+  min-height: clamp(104px, 12svh, 150px);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(12px, 1.5vw, 22px);
+  align-items: center;
+  padding: clamp(16px, 1.6vw, 26px);
+  border: 1px solid var(--bf-action-line);
+  border-top-width: 3px;
+  border-radius: 14px;
+  background:
+    linear-gradient(110deg, var(--bf-action-surface), transparent 52%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 44%),
+    var(--bf-bg-surface);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 var(--bf-edge-highlight);
+  color: var(--bf-text-primary);
+  text-decoration: none;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-actions > a[href="/research/paper-mine"]:hover,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-actions > a[href="/research/paper-mine"]:hover {
+  transform: translateY(-2px);
+  border-color: var(--bf-action-hover);
+  background:
+    linear-gradient(110deg, var(--bf-action-surface), transparent 45%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 44%),
+    var(--bf-bg-raised);
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-actions > a[href="/research/paper-mine"]:focus-visible,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-actions > a[href="/research/paper-mine"]:focus-visible {
+  outline: 2px solid var(--bf-action-hover);
+  outline-offset: 3px;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] a[href="/research/paper-mine"] .subject-pane__action-glyph,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] a[href="/research/paper-mine"] .subject-pane__action-glyph {
+  width: clamp(30px, 2.7vw, 44px);
+  height: clamp(30px, 2.7vw, 44px);
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] a[href="/research/paper-mine"] .subject-pane__action-copy,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] a[href="/research/paper-mine"] .subject-pane__action-copy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] a[href="/research/paper-mine"] .subject-pane__action-copy > span,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] a[href="/research/paper-mine"] .subject-pane__action-copy > span {
+  color: var(--bf-action);
+  font-size: 0.52rem;
+  letter-spacing: 0.11em;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] a[href="/research/paper-mine"] .subject-pane__action-copy > strong,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] a[href="/research/paper-mine"] .subject-pane__action-copy > strong {
+  font-size: clamp(1.45rem, 2.2vw, 2.35rem);
+  line-height: 1;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] a[href="/research/paper-mine"] .subject-pane__action-copy > small,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] a[href="/research/paper-mine"] .subject-pane__action-copy > small {
+  max-width: 76ch;
+  color: var(--bf-text-secondary);
+  font-size: clamp(0.68rem, 0.78vw, 0.84rem);
+  line-height: 1.5;
+}
+
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-actions > a[href="/research/paper-mine"]::after,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-actions > a[href="/research/paper-mine"]::after {
+  content: "Open Paper Mine  →";
+  align-self: center;
+  padding: 0.65rem 0.78rem;
+  border: 1px solid var(--bf-action-line);
+  border-radius: 8px;
+  background: var(--bf-action-surface);
+  color: var(--bf-action-hover);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-actions > a[href="/research/paper-mine"],
+  body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-actions > a[href="/research/paper-mine"] {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-actions > a[href="/research/paper-mine"]::after,
+  body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-actions > a[href="/research/paper-mine"]::after {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-actions > a[href="/research/paper-mine"],
+  body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-actions > a[href="/research/paper-mine"] {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+}

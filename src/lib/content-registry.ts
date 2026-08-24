@@ -43,11 +43,44 @@ export type { LocalSectionDefinition } from "@/lib/local-section-registry";
 export type { PublicationMetadata, PublicationStage } from "@/lib/publication-types";
 export type { RelationDirection } from "@/lib/relation-semantics";
 
+const paperMineNavigation: Partial<Record<"research" | "publications", NonNullable<ContentNode["links"]>[number]>> = {
+  research: {
+    label: "Paper Mine",
+    href: "/research/paper-mine",
+    eyebrow: "Featured research workbench",
+    summary:
+      "Inspect paper-shaped research across the corpus by field, discovery pass, readiness, claim ceiling, evidence obligation, provenance, and paperization frontier.",
+  },
+  publications: {
+    label: "Paper Mine",
+    href: "/research/paper-mine",
+    eyebrow: "Featured publication discovery",
+    summary:
+      "See the discovery and paperization layer upstream of the controlled publication portfolio, including readiness, claim ceilings, provenance, and human promotion gates.",
+  },
+};
+
+function withPaperMineNavigation(node: ContentNode): ContentNode {
+  const paperMineLink = node.id === "research" || node.id === "publications"
+    ? paperMineNavigation[node.id]
+    : undefined;
+  if (!paperMineLink) return node;
+
+  return {
+    ...node,
+    links: [
+      paperMineLink,
+      ...(node.links ?? []).filter((link) => link.href !== paperMineLink.href),
+    ],
+  };
+}
+
 const rawNodes: ContentNode[] = [...baseNodes, ...publicationNodes];
 
 export const nodes: ContentNode[] = rawNodes.map((node) => {
   const localSections = getLocalSections(node.id);
-  return localSections.length ? { ...node, localSections } : node;
+  const enrichedNode = withPaperMineNavigation(node);
+  return localSections.length ? { ...enrichedNode, localSections } : enrichedNode;
 });
 export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
 
