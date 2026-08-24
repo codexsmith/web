@@ -263,17 +263,45 @@ try {
     "At a glance",
   ]);
 
-  await expectPage("/agency-audit", [
-    "Make the chain from representation to consequence inspectable.",
-    "At a glance",
-    "Five passes from authority to repair.",
-    "Good pilot candidates are bounded, consequential, and inspectable.",
-    "Pilot one bounded process.",
-    "This is a systems audit, not delegated institutional authority.",
-  ], [
-    "Reading frame",
-    "Governed public landing",
-  ]);
+  await expectRedirect(
+    "/agency-audit",
+    "/products/current/agency-representation-audit?detail=record:agency-representation-audit",
+  );
+
+  await expectPage(
+    "/products/current/agency-representation-audit?detail=record:agency-representation-audit",
+    [
+      "data-detail-kind=\"record\"",
+      "Retained record",
+      "Make the chain from representation to consequence inspectable.",
+      "Six questions locate the operating relationship.",
+      "Five passes from authority to repair.",
+      "Good pilot candidates are bounded, consequential, and inspectable.",
+      "This is a systems audit, not delegated institutional authority.",
+      "Return to object",
+    ],
+    ["Governed public landing", "Reading frame"],
+  );
+
+  await expectRedirect(
+    "/software-before-code",
+    "/publications/methods/software-before-code?detail=record:software-before-code",
+  );
+
+  await expectPage(
+    "/publications/methods/software-before-code?detail=record:software-before-code",
+    [
+      "data-detail-kind=\"record\"",
+      "Retained record",
+      "Determine the object before selecting the mechanism.",
+      "Nine questions before architecture hardens.",
+      "Representation is controlled forgetting.",
+      "Symptoms become useful when they point back to a lost distinction.",
+      "What this method is not.",
+      "Return to object",
+    ],
+    ["Governed public landing"],
+  );
 
   // Explicitly addressed, no-index Apparatus prototype. Card remains the default route.
   await expectPage("/?world=1&ui=apparatus", [
