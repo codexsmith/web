@@ -1,5 +1,6 @@
 "use client";
 
+import { BfuxInspectionArtifacts } from "@/components/bfux-content-artifact";
 import { BfuxIcon } from "@/components/bfux-icons";
 import type { Inspection } from "@/lib/content";
 import type { ContentNode } from "@/lib/content-registry";
@@ -36,11 +37,7 @@ export function InspectionPanel({ inspection, owner, onClose }: InspectionPanelP
 
         <div className="inspection-surface__content">
           <div className="inspection-surface__grid">
-            <ul className="inspection-surface__findings">
-              {inspection.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
+            <BfuxInspectionArtifacts inspection={inspection} />
 
             {inspection.sourceRef ? (
               <div className="inspection-surface__source">
