@@ -72,6 +72,9 @@ jobs:
       - name: Check Soccer spatial practitioner-field contracts
         run: node scripts/check_p4_soccer_practitioner.mjs
 
+      - name: Check semantic content artifact contracts
+        run: node scripts/check_p5_semantic_artifacts.mjs
+
       - name: Typecheck
         run: npm run typecheck
 
