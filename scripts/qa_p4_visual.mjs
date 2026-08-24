@@ -49,9 +49,7 @@ function sleep(ms) {
 async function waitForServer(server) {
   const deadline = Date.now() + 45_000;
   while (Date.now() < deadline) {
-    if (server.exitCode !== null) {
-      throw new Error(`Next server exited before readiness with code ${server.exitCode}\n${serverOutput}`);
-    }
+    if (server.exitCode !== null) throw new Error(`Next server exited before readiness with code ${server.exitCode}\n${serverOutput}`);
     try {
       const response = await fetch(`${base}/?world=1`, { signal: AbortSignal.timeout(3000) });
       if (response.status >= 200 && response.status < 500) return;
@@ -136,10 +134,7 @@ async function inspectLayout(page) {
     const worldViewport = document.querySelector(".site-shell .world-viewport");
     const rootCards = Array.from(document.querySelectorAll('.branch-world[data-gestalt-id="root"] .district-card[data-node-id]'))
       .filter(isVisible)
-      .map((card) => ({
-        id: card.getAttribute("data-node-id"),
-        ...serializeRect(card.getBoundingClientRect()),
-      }));
+      .map((card) => ({ id: card.getAttribute("data-node-id"), ...serializeRect(card.getBoundingClientRect()) }));
 
     const regionKindPathologies = Array.from(document.querySelectorAll(".branch-world:not(.branch-world--root-world) .district-card__kind"))
       .filter(isVisible)
@@ -228,9 +223,7 @@ async function visit(browser, config) {
   page.on("pageerror", (error) => pageErrors.push(String(error).slice(0, 500)));
 
   const response = await page.goto(`${base}${config.path}`, { waitUntil: "networkidle", timeout: 30_000 });
-  if (!response || !response.ok()) {
-    criticalFailures.push({ name: config.name, issues: [`HTTP ${response?.status() ?? "no response"}`] });
-  }
+  if (!response || !response.ok()) criticalFailures.push({ name: config.name, issues: [`HTTP ${response?.status() ?? "no response"}`] });
   await page.waitForTimeout(150);
 
   if (config.expectedRecordId) {
@@ -314,9 +307,14 @@ async function runInteractionChecks(browser) {
   if (!(await returnLink.isVisible())) {
     failures.push("Corpus Forge detail did not expose Return to object");
   } else {
-    await returnLink.click();
-    await page.waitForLoadState("networkidle");
-    if (new URL(page.url()).searchParams.has("detail")) failures.push("Return to object retained detail state");
+    try {
+      await Promise.all([
+        page.waitForURL((url) => url.pathname === "/products/current/corpus-forge" && !url.searchParams.has("detail"), { timeout: 5000 }),
+        returnLink.click(),
+      ]);
+    } catch {
+      failures.push(`Return to object did not clear detail state (${page.url()})`);
+    }
   }
 
   if (failures.length) criticalFailures.push({ name: "interaction-checks", issues: failures });
@@ -398,11 +396,7 @@ try {
 
   for (const route of worldRoutes) {
     for (const viewportName of ["desktop", "mobile"]) {
-      await visit(browser, {
-        name: `${route.id}-${viewportName}`,
-        path: route.path,
-        viewport: viewports[viewportName],
-      });
+      await visit(browser, { name: `${route.id}-${viewportName}`, path: route.path, viewport: viewports[viewportName] });
     }
   }
 
