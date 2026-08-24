@@ -4,13 +4,16 @@ on:
   push:
     branches:
       - agent/p4-visual-qa-hardening
+  pull_request:
+    branches:
+      - agent/p4-soccer-spatial-practitioner-field
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: p4-visual-qa-${{ github.ref }}
+  group: p4-visual-qa-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
