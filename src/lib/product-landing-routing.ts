@@ -189,11 +189,20 @@ if (manifestErrors.length > 0) {
 const entriesBySlug = new Map(
   productLandingPages.map((entry) => [entry.slug, entry] as const),
 );
+const entriesById = new Map(
+  productLandingPages.map((entry) => [entry.id, entry] as const),
+);
 
 export function getProductLandingEntry(
   value: string | readonly string[],
 ): ProductLandingEntry | undefined {
   return entriesBySlug.get(normalizeProductLandingSlug(value));
+}
+
+export function getProductLandingEntryById(
+  id: string,
+): ProductLandingEntry | undefined {
+  return entriesById.get(id);
 }
 
 export function getProductLandingVisibilityPolicy(
