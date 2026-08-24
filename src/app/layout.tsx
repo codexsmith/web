@@ -47,6 +47,7 @@ import "./p3-industrial-control-panel.css";
 import "./p3-semantic-action-glyphs.css";
 import "./p3-content-glyphs.css";
 import "./p3-industrial-responsive.css";
+import "./p4-detail-surfaces.css";
 
 export const metadata: Metadata = {
   title: {
