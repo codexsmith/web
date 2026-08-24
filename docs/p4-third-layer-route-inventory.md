@@ -12,16 +12,16 @@ The structural migration is uniform: the legacy alias becomes a compatibility en
 | `/boundary-first-ux` | `/publications/methods/boundary-first-ux` | **Specialized P4 · standard/conformance instrument** | Validate the self-demonstrating flagship, conformance density, and whether later interactive boundary manipulation adds evidence rather than spectacle. |
 | `/closure-driven-software-development` | `/publications/methods/closure-driven-software-development` | **Specialized P4 · progressive-closure delivery instrument** | Validate closure-loop density, certainty-intersection legibility, and the worked-case transition from simple request to domain-recognized closure. |
 | `/weather` | `/research/applied-testbeds/weather` | **Specialized P4 · computational research testbed** | Validate research density, claim-ladder legibility, and whether an eventual executable demonstrator can inhabit the same evidence grammar without promoting itself beyond experiment status. |
-| `/schemathematics` | `/research/formal-theory/schemathematics` | **Specialized P4 · formal research program / dependency atlas** | Validate formal-density legibility, the monoid→group dependency trace, and whether future definitions/propositions can enter without obscuring proof and claim standing. |
+| `/schemathematics` | `/publications/research/schemathematics` | **Specialized P4 · formal research program / dependency atlas** | Validate formal-density legibility, the monoid→group dependency trace, and whether future definitions/propositions can enter without obscuring proof and claim standing. |
 | `/law` | `/research/applied-testbeds/law` | Transitional structured record | Build a legal-research surface emphasizing authority, source hierarchy, claim standing, precedent/interpretation relations, and explicit non-advice boundary. |
 | `/chess` | `/research/applied-testbeds/chess` | Transitional structured record | Build a practitioner/testbed board: doctrine, position/decision examples, observable consequences, validation against established chess practice. |
 | `/soccer` | `/research/applied-testbeds/soccer` | Transitional structured record | Build a practitioner/testbed field: spatial boundaries, role/transition grammar, examples, observable tactical consequences, validation burden. |
 
 ## Canonical ownership notes
 
-Publication-backed public methods and standards are owned by the publication node when its publication metadata names the manifest JSON as `sourceRef`. This prevents a research or engineering-context link from re-parenting the public record.
+Publication-backed public methods, standards, and research records are owned by the publication node when its publication metadata names the manifest JSON as `sourceRef`. This prevents a research, formal-theory, or engineering-context link from re-parenting the public record. Schemathematics is provenance-owned by `/publications/research/schemathematics` under this rule even though a same-ID formal-theory node also exists.
 
-Exact identity owns the record next: for example, `corpus-forge`, `boundary-first-weather`, `boundary-first-chess`, `boundary-first-soccer`, and `schemathematics` have graph identities aligned with their retained-record IDs.
+Exact identity owns the record next: for example, `corpus-forge`, `boundary-first-weather`, `boundary-first-chess`, and `boundary-first-soccer` have graph identities aligned with their retained-record IDs when no stronger publication provenance declaration exists.
 
 Unique explicit link ownership handles records whose graph ID intentionally differs from the manifest ID, including Agency & Representation Audit and Constitutional Law & Jurisprudence.
 
