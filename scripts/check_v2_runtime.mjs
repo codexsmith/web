@@ -76,17 +76,6 @@ async function expectRedirect(path, expectedLocation) {
   }
 }
 
-async function expectTemporaryRedirect(path, expectedLocation) {
-  const response = await fetchWithTimeout(`${base}${path}`);
-  if (response.status !== 307) {
-    throw new Error(`${path} returned HTTP ${response.status}; expected temporary redirect`);
-  }
-
-  if (response.headers.get("location") !== expectedLocation) {
-    throw new Error(`${path} redirected to ${response.headers.get("location")}; expected ${expectedLocation}`);
-  }
-}
-
 async function stopServer() {
   if (server.exitCode !== null) return;
 
@@ -128,7 +117,6 @@ try {
     "Publications",
     "About",
     "View",
-    "Depth",
   ], [
     "Enter the lab",
     "Root World",
@@ -243,7 +231,13 @@ try {
     "Retained / public records",
   ]);
 
-  await expectTemporaryRedirect("/about/contact?view=evidence", "/about/contact");
+  await expectPage("/about/contact?view=evidence", [
+    "Contact",
+    "Projection boundary",
+    "Evidence unavailable for Contact",
+    "Showing World here.",
+    "Evidence remains preferred and will resume when supported.",
+  ]);
 
   await expectPage("/public-interest", [
     "Public Interest",
