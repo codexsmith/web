@@ -60,5 +60,8 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Exercise Corpus Forge production workbench
+        run: node scripts/check_p4_corpus_forge_runtime.mjs
+
       - name: Exercise v2 production routes
         run: npm run runtime:check
