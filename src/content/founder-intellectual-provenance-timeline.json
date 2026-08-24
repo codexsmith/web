@@ -1,0 +1,213 @@
+{
+  "schema_version": "1.0-web-projection",
+  "projection_of": "codexsmith/boundary-first-labs:organized_library_curated/02_Core_Identity/founder_intellectual_provenance_timeline.json",
+  "artifact": {
+    "title": "Master Founder & Intellectual Provenance Timeline",
+    "authority_status": "derived",
+    "artifact_lifecycle": "active",
+    "operational_status": "active",
+    "publication_status": "internal",
+    "source_class": "founder_intellectual_provenance_synthesis",
+    "version": "0.1",
+    "date": "2026-08-24",
+    "claim_posture": "typed chronology synthesis; not independent historical verification"
+  },
+  "purpose": "Reconstruct a single working chronology for the formation of Boundary First Labs and the intellectual development that led into the current Boundary Theory architecture while preserving provenance classes, discontinuities, unresolved transitions, and verification tasks.",
+  "governing_rules": [
+    "Do not create a smooth retrospective story where the record is actually discontinuous.",
+    "Do not infer a rename from conceptual similarity.",
+    "Separate first use, mature use, and canonical use.",
+    "Treat conversation checkpoints as testimony until tied to primary artifacts.",
+    "Do not promote autobiographical provenance into scientific validation.",
+    "Git dates establish repository presence, not necessarily intellectual first conception."
+  ],
+  "evidence_classes": {
+    "P": {"name": "Primary / contemporaneous artifact", "meaning": "Dated correspondence, source media, notebooks, Git commits, contemporaneous files, or other direct artifacts.", "allowed_use": "Strongest chronology evidence available internally; substantive claims retain their own claim ceilings."},
+    "R": {"name": "Repository-backed synthesis", "meaning": "Current or dated repository document that explicitly reconstructs an earlier period or records current architectural status.", "allowed_use": "Good internal provenance; retrospective claims are not automatically independent verification."},
+    "C": {"name": "Conversation / founder checkpoint", "meaning": "Retained dated conversation statement or founder testimony not yet tied to a recovered primary artifact.", "allowed_use": "Preserve chronology and language as testimony; do not upgrade to repository-direct history."},
+    "I": {"name": "Interpretive bridge", "meaning": "A synthesis connecting two or more supported milestones.", "allowed_use": "Orientation only; must not manufacture synonymy, causality, or exact transition dates."},
+    "OPEN": {"name": "Unresolved", "meaning": "Transition, date, or source remains unresolved.", "allowed_use": "Preserve as a research task rather than filling by inference."}
+  },
+  "entities": [
+    {"id":"ENT-BFL","name":"Boundary First Labs","type":"institution"},
+    {"id":"ENT-BT","name":"Boundary Theory","type":"theory"},
+    {"id":"ENT-DS","name":"Distinction Space","type":"formal_object"},
+    {"id":"ENT-CTX","name":"Contexture","type":"formal_object"},
+    {"id":"ENT-DIST","name":"Distinction","type":"operational_facet"},
+    {"id":"ENT-ADM","name":"Admissibility","type":"operational_facet"},
+    {"id":"ENT-EMG","name":"Emergence","type":"operational_facet"},
+    {"id":"ENT-RM","name":"Representational Mechanics","type":"discipline"},
+    {"id":"ENT-FG","name":"Formal Grammars","type":"apparatus"},
+    {"id":"ENT-BF","name":"Boundary First","type":"operational_method"},
+    {"id":"ENT-CF","name":"Corpus Forge","type":"provenance_governance"},
+    {"id":"ENT-SCH","name":"Schemathematics","type":"research_program"},
+    {"id":"ENT-RR","name":"Representational Relativity","type":"historical_public_framing"},
+    {"id":"ENT-RGT","name":"Representation Gauge Theory","short_name":"RGT","type":"historical_umbrella"},
+    {"id":"ENT-VOL","name":"Volumology","type":"historical_research_program"},
+    {"id":"ENT-BFE","name":"Boundary-First Engineering","short_name":"BFE","type":"historical_method_lineage"},
+    {"id":"ENT-ABW","name":"Admissibility Web","type":"historical_intermediate_formal_object"},
+    {"id":"ENT-NBALL","name":"n-ball family","type":"proto_schema_bridge_object"},
+    {"id":"ENT-SECOND-ORDER","name":"Second-order scientific method","type":"methodological_layer"}
+  ],
+  "phases": [
+    {"id":"PHASE-01","name":"Formation before the named theory","order":1},
+    {"id":"PHASE-02","name":"Software and systems practice as an independent test environment","order":2},
+    {"id":"PHASE-03","name":"Long-run mathematical and physics program","order":3},
+    {"id":"PHASE-04","name":"From Volumology into a general representation program","order":4},
+    {"id":"PHASE-05","name":"Decomposition of the broad RGT umbrella","order":5},
+    {"id":"PHASE-06","name":"Schemas, construction, and the applying discipline","order":6},
+    {"id":"PHASE-07","name":"Boundary Theory consolidation","order":7},
+    {"id":"PHASE-08","name":"Institutional and founder reconstruction","order":8}
+  ],
+  "timeline": [
+    {
+      "id":"EVT-001","phase_id":"PHASE-01","title":"Childhood and adolescence — formative constructive cognition",
+      "date":{"precision":"unknown","start":null,"end":null,"label":"exact dates to recover"},"evidence":["R","C"],"status":"open_chronology",
+      "summary":"Early constructive cognition, repeated encounters with inadequate categories, and a habit of reconstructing the problem rather than assuming offered alternatives were exhaustive. Augusta founder-history adds an educational formation centered on learning, seriousness, capability, character, and excellence.",
+      "causal_spine":["formation","validation","rupture","reconstruction","return"],
+      "claims":["The mature research program did not begin with a formal theory name.","The founder entered technical education with an existing expectation that difficult learning was legitimate, capability was developable, and authority did not automatically equal understanding."],
+      "sources":["organized_library_curated/02_Core_Identity/02_Ethos_and_Origin.md","organized_library_curated/02_Core_Identity/Augusta_Lineage/07_founder_story_augusta_lineage_internal_v0_1.md","organized_library_curated/999_Library/02_Core_Theory/0103_engine_core/03_work_packets/boundary_first_labs_second_order_scientific_method_2026-08-01/02_LONGFORM_ORIGIN_ESSAY.md","organized_library_curated/999_Library/02_Core_Theory/0103_engine_core/03_work_packets/boundary_first_labs_second_order_scientific_method_2026-08-01/12_PROVENANCE_TIMELINE.md"],
+      "verification_tasks":["Recover primary educational artifacts, dated personal notes, and early technical notebooks relevant to the intellectual chronology."]
+    },
+    {
+      "id":"EVT-002","phase_id":"PHASE-01","title":"Technical education and early research formation","date":{"precision":"unknown","start":null,"end":null,"label":"dates to reconcile"},"evidence":["R"],"status":"open_chronology",
+      "summary":"Formal computer-science education spanning AI, systems, and computer architecture; exposure to low-level execution and machine models; and early academic research/publication. Georgia Tech is interpreted as technical intensification rather than absolute origin.",
+      "patterns":["decompose the represented system","distinguish state from interface","trace execution rather than trust labels","test claims against behavior","treat anomalies and null results as information","distinguish authority from understanding"],
+      "verification_tasks":["Recover exact undergraduate research dates, lab affiliations, papers, projects, and earliest surviving technical notes with clear descendants in later Boundary Theory vocabulary."]
+    },
+    {
+      "id":"EVT-003","phase_id":"PHASE-02","title":"Professional software engineering as executable representation laboratory","date":{"precision":"unknown","start":null,"end":null,"label":"exact interval by employer/project to reconstruct"},"evidence":["R","C"],"status":"open_chronology",
+      "summary":"Software engineering supplied an independent test environment in which representational choices became mechanically consequential. Lean and Agile added a hypothesis-probe-revision discipline that later informed Boundary First and the second-order scientific method.",
+      "process_pattern":["domain reality","representation","executable model","interface/workflow","hidden mismatch","defect/exception/manual repair","representation revision"],
+      "verification_tasks":["Build a project-by-project professional chronology and locate earliest artifacts using boundary, closure, invariant, defect, representation, reconciliation, or hidden-work language."]
+    },
+    {
+      "id":"EVT-004","phase_id":"PHASE-03","title":"Long-run GR/QFT comparison problem","date":{"precision":"approximate_duration","start":null,"end":"2026","label":"approximately two decades; exact start unresolved"},"evidence":["R"],"status":"retrospectively_documented",
+      "summary":"Repeated attempts to identify common structure between general relativity and quantum field theory exposed incompatibilities among native objects, scale, locality, statistical procedures, and closure conditions, pushing the inquiry toward more primitive representational questions.",
+      "generating_questions":["What makes a system identifiable?","What determines its boundary?","Which variations are admissible?","How does a local description close?","What survives projection, averaging, coarse-graining, or dimensional reduction?","When do two representations describe the same operative structure?"],
+      "source_ids":["SRC-ORIGIN-001","DG-E013","IGL-008"]
+    },
+    {
+      "id":"EVT-005","phase_id":"PHASE-03","title":"Attempted external scrutiny of relativistic work","date":{"precision":"approximate_year","start":"2018","end":"2018","label":"approximately 2018"},"evidence":["R","OPEN"],"status":"primary_artifact_unrecovered",
+      "summary":"Origin packet records outreach to Michael Schatz at Georgia Tech Physics and Anthony 'RJ' seeking feedback on an attempted relativistic derivation or extension.",
+      "verification_tasks":["Recover original messages, attachments, replies, timestamps, and terminology."],"constraints":["Do not reconstruct exact scientific wording from memory while original correspondence may still be recoverable."]
+    },
+    {
+      "id":"EVT-006","phase_id":"PHASE-03","title":"Physical research-room phase","date":{"precision":"approximate_range","start":"2019","end":"2021","label":"approximately 2019–2021"},"evidence":["R"],"status":"source_media_reportedly_preserved",
+      "summary":"A dedicated research room functioned as an external cognitive apparatus and manually constructed context window, keeping multiple research branches spatially persistent and mutually inspectable.","verification_tasks":["Date photographs and video from metadata and recover corresponding handwritten clusters."]
+    },
+    {
+      "id":"EVT-007","phase_id":"PHASE-03","title":"Red Book binder phase","date":{"precision":"relative","start":null,"end":null,"label":"after research-room expansion; exact dates open"},"evidence":["R","OPEN"],"status":"open_chronology",
+      "summary":"The research room was compressed into a modular binder supporting insertion, removal, regrouping, and replacement. The fine-structure constant became a major organizing target; the work was then described primarily as dimensional analysis.","state_model":{"room":"expanded state","binder":"compiled state"},"verification_tasks":["Inventory binder sections, page chronology, inserted/replaced pages, and earliest occurrence of later key mathematical objects."]
+    },
+    {
+      "id":"EVT-008","phase_id":"PHASE-03","title":"Continuing pre-AI research corpus","date":{"precision":"period","start":null,"end":null,"label":"pre-generative-AI"},"evidence":["R"],"status":"documented_internal_provenance",
+      "summary":"A substantial corpus of handwritten notes, diagrams, calculations, source papers, code, digital files, research-room media, the Red Book binder, and dated external-criticism attempts existed before generative AI adoption.","causal_claim":"The research direction and corpus predate generative AI; AI later supplied representational throughput for compilation, comparison, expansion, and consolidation.","claim_ceiling":"Provenance only; not proof of mathematical or physical claims."
+    },
+    {
+      "id":"EVT-009","phase_id":"PHASE-04","title":"Volumology as historical extent / region / interface program","date":{"precision":"known_checkpoint","start":null,"end":null,"checkpoint":"2026-03-21","label":"historical program; archive findings map dated 2026-03-21"},"evidence":["P","R"],"status":"historical_provenance","entity_ids":["ENT-VOL"],
+      "summary":"The repository preserves substantial Volumology archives while treating them as historical provenance rather than current authority for their strongest claims.","structural_motifs":["region and boundary first","interface and transport","dimensional recursion","persistence under refinement and transformation","spectra and operators","multiple observables from a shared operator spine","formal-to-executable evidence attempts"],
+      "sources":["organized_library_curated/999_Library/03_Domains/0201_pure_math_and_logic/Volumology_Shared/","organized_library_curated/999_Library/03_Domains/0201_pure_math_and_logic/Volumology_Shared/pub_shared/ARCHIVE_FINDINGS_MAP_0A_0B_0C_v1.md","organized_library_curated/04_Products/15_Boundary_First_Volumetrics_Lab/Prior Work/"]
+    },
+    {
+      "id":"EVT-010","phase_id":"PHASE-04","title":"Volumology explicitly reframed as representational gauge work","date":{"precision":"day","start":"2026-04-29","end":"2026-04-29","label":"2026-04-29"},"evidence":["C"],"status":"conversation_checkpoint","entity_ids":["ENT-VOL","ENT-RGT"],
+      "summary":"A retained conversation checkpoint characterizes Volumology as a representational gauge theory of bounded observable structure.","concept_chain":["distinction","gauge","boundedness","Volume","interface","representation","observation","invariant","defect"],"constraints":["No direct repository artifact from this date using the same language has yet been recovered."]
+    },
+    {
+      "id":"EVT-011","phase_id":"PHASE-04","title":"RGT becomes broader head; Volumology becomes specialization","date":{"precision":"day","start":"2026-04-30","end":"2026-04-30","label":"2026-04-30"},"evidence":["C","I"],"status":"conversation_checkpoint_with_repository_lineage_support","entity_ids":["ENT-VOL","ENT-RGT"],
+      "summary":"RGT is described as the broader mature head, while Volumology becomes a region/volume/interface specialization.","conceptual_roles":{"Volumology":"bounded extent, region, volume, and interface structure","RGT":"representation change, gauges, invariants, closure, defects, and cross-domain translation"},"constraints":["Do not infer that RGT was merely a rename of Volumology.","Do not infer that RGT is synonymous with current Boundary Theory."],"repository_support":["IDEA_GENESIS_LEDGER.md","DERIVATION_GRAPH.md"]
+    },
+    {
+      "id":"EVT-012","phase_id":"PHASE-04","title":"RGT crystallizes as closure grammar and cross-domain formal spine","date":{"precision":"range","start":"2026-05-03","end":"2026-05-05","label":"2026-05-03 to 2026-05-05"},"evidence":["C"],"status":"conversation_checkpoint","entity_ids":["ENT-RGT"],
+      "summary":"RGT sharpens into a theory of lawful representation change centered on representation, boundaries/interfaces, closure, defects, invariants, and translation.","subevents":[{"date":"2026-05-03","description":"RGT described as a closure grammar for representational systems and as applying formal-grammar rules to mathematics and systems."},{"date":"2026-05-05","description":"RGT described as a proposed cross-domain formal theory; Representation Context Theory considered as alternate public terminology, with gauge retained as technical machinery."}],"constraints":["Direct primary repository source remains open."]
+    },
+    {
+      "id":"EVT-013","phase_id":"PHASE-04","title":"Gauge and closure machinery deepens","date":{"precision":"month","start":"2026-05","end":"2026-05","label":"May 2026"},"evidence":["C","R"],"status":"mixed_provenance","entity_ids":["ENT-RGT","ENT-NBALL"],
+      "summary":"The representation program expands around closure under representation change, invariants, formal grammars, norm/gauge families, n-ball and Gamma recursion, complex phase, transform methods, spectral/operator views, admissibility, and transport.","n_ball_role":"proto-schema / bridge object","constraints":["The n-ball family is not itself a Distinction Space."]
+    },
+    {
+      "id":"EVT-014","phase_id":"PHASE-05","title":"Admissibility Web and explicit Distinction / Emergence differentiation","date":{"precision":"day","start":"2026-05-30","end":"2026-05-30","label":"2026-05-30"},"evidence":["C"],"status":"conversation_checkpoint","entity_ids":["ENT-ABW","ENT-DIST","ENT-ADM","ENT-EMG"],
+      "summary":"An Admissibility Web appears as an intermediate formal object while Distinction Theory and Emergence Theory differentiate into distinct functional roles. Category/type/representation formalization becomes more tractable through an admissibility layer.","interpretation":"Decomposition and refinement of the broader representation program; not yet the current Boundary Theory facet architecture."
+    },
+    {
+      "id":"EVT-015","phase_id":"PHASE-05","title":"Representational Relativity named as public-facing principle","date":{"precision":"day","start":"2026-06-15","end":"2026-06-15","label":"2026-06-15"},"evidence":["C","R"],"status":"historical_conversation_grounded_public_framing","entity_ids":["ENT-RR"],
+      "summary":"Representational Relativity is named as a more legible umbrella principle: representations may vary while valid structure survives admissible transport.","source_ids":["IGL-004","DG-E019","DR-023"],"constraints":["Not the current canonical theory name.","Not a current formal object.","Not the default public brand.","Direct first-use source remains unresolved."]
+    },
+    {
+      "id":"EVT-016","phase_id":"PHASE-06","title":"Schemathematics crystallizes","date":{"precision":"range","start":"2026-07-07","end":"2026-07-08","label":"2026-07-07 to 2026-07-08"},"evidence":["C","R"],"status":"conversation_origin_with_current_repository_placement","entity_ids":["ENT-SCH"],
+      "summary":"Schemas are differentiated as bounded representational forms carrying typed slots, relations, admissibility conditions, invariants, transformations, validation, defects, and repair. Schemathematics becomes the study of admissible construction, transformation, and closure of representational objects.","constraints":["Current placement does not prove that every later Representational Mechanics concept was already present in the first Schemathematics formulation."]
+    },
+    {
+      "id":"EVT-017","phase_id":"PHASE-07","title":"Second-Order Scientific Method origin-program package","date":{"precision":"day","start":"2026-08-01","end":"2026-08-01","label":"2026-08-01"},"evidence":["R"],"status":"dated_retrospective_synthesis","entity_ids":["ENT-SECOND-ORDER","ENT-DS","ENT-CTX","ENT-NBALL"],
+      "summary":"A comprehensive origin-program package joins the long-run GR/QFT problem, primitive representational questions, agentic pressure on fixed possibility spaces, Distinction Space, Contexture, the n-ball proto-schema, and the second-order scientific method.","sources":["01_EXECUTIVE_SYNTHESIS.md","02_LONGFORM_ORIGIN_ESSAY.md","03_THEORETICAL_GENEALOGY.md","06_RESEARCH_CORPUS_AND_AI_PROVENANCE.md","12_PROVENANCE_TIMELINE.md"],"constraints":["Package date is a synthesis date, not proof that every mature term first appeared on 2026-08-01."]
+    },
+    {
+      "id":"EVT-018","phase_id":"PHASE-06","title":"Earliest retained Schemathematics to Representational Mechanics checkpoint","date":{"precision":"day","start":"2026-08-02","end":"2026-08-02","label":"2026-08-02"},"evidence":["R","C"],"status":"historical_edge_partially_recovered","entity_ids":["ENT-SCH","ENT-RM"],
+      "summary":"The earliest retained checkpoint records the historical relation in which Schemathematics supplies representational machinery to Representational Mechanics.","source_ids":["IGL-005","SRC-SCH-001","SRC-RM-001","SRC-RM-002"],"constraints":["Both endpoints are repository-backed; the exact historical causal edge remains conversation-grounded."]
+    },
+    {
+      "id":"EVT-019","phase_id":"PHASE-08","title":"Founder III / The Oathbound working note","date":{"precision":"day","start":"2026-08-14","end":"2026-08-14","label":"2026-08-14"},"evidence":["P","R"],"status":"wip_not_canonical",
+      "summary":"A working note names a third-founder mode centered on consequence fidelity and converting exceptional founder perception into durable institutional instruments.","process_pattern":["witness","account","translate","architect"],"source":"organized_library_curated/319_Smithy/2026-08-14_founder_iii_oathbound_working_note.md","constraints":["Working doctrine in Smithy; not canonical until reviewed and reconciled with Core Identity."]
+    },
+    {
+      "id":"EVT-020","phase_id":"PHASE-07","title":"Current Boundary Theory architecture becomes explicitly source-controlled","date":{"precision":"range","start":"2026-08-15","end":"2026-08-15","label":"by mid-August 2026"},"evidence":["R","P"],"status":"current_controlled_architecture","entity_ids":["ENT-BT","ENT-DS","ENT-DIST","ENT-ADM","ENT-EMG","ENT-CTX","ENT-RM","ENT-FG","ENT-BF","ENT-CF"],
+      "summary":"Repository source reconciliation records the current architecture as Boundary Theory centered on Distinction Space, typed operational facets, Contexture as composable subspace, and Representational Mechanics as a subordinate discipline with Formal Grammars, Boundary First, and Corpus Forge.",
+      "architecture":{"Boundary Theory":{"Distinction Space":["Distinction facet","Admissibility facet","Emergence facet","Contexture = composable subspace"],"Representational Mechanics":["Formal Grammars","Boundary First","Corpus Forge"]}},
+      "retypings":["Emergence Theory -> Emergence operational facet","Admissibility Theory -> Admissibility operational facet","Contexture primary carrier -> Contexture as composable subspace of Distinction Space","Representational Mechanics -> applying/study discipline subordinate to Boundary Theory","Boundary First -> portable operational method rather than theory"]
+    },
+    {
+      "id":"EVT-021","phase_id":"PHASE-08","title":"Augusta founder lineage made explicit in repository","date":{"precision":"repository_capture","start":"2026-08-22","end":"2026-08-22","label":"repository capture 2026-08-22; internal lineage includes earlier material"},"evidence":["R","P"],"status":"internal_founder_history_model",
+      "summary":"The internal founder-history package records a distinct institutional causal spine from Augusta formation through Georgia Tech, professional discontinuity, independent research and systems practice, Boundary First Labs reconstruction, and return/capability building.","causal_spine":["Augusta formation","Georgia Tech validation / technical intensification","professional rupture / discontinuity","long independent research + systems practice","Boundary First Labs reconstruction","return / capability building"],"source":"organized_library_curated/02_Core_Identity/Augusta_Lineage/07_founder_story_augusta_lineage_internal_v0_1.md"
+    },
+    {
+      "id":"EVT-022","phase_id":"PHASE-08","title":"Volumology historical correction becomes public provenance artifact","date":{"precision":"day","start":"2026-08-23","end":"2026-08-23","label":"2026-08-23"},"evidence":["P","R"],"status":"public_provenance_correction","entity_ids":["ENT-VOL"],
+      "summary":"Historical Volumology material is reframed as provenance to preserve with correction rather than delete or inherit uncritically.","preservation_rule":["preserve ideas","preserve errors","preserve computation","preserve chronology","separate all from current claim authority"]
+    },
+    {
+      "id":"EVT-023","phase_id":"PHASE-08","title":"Master founder and intellectual chronology reconstructed","date":{"precision":"day","start":"2026-08-24","end":"2026-08-24","label":"2026-08-24"},"evidence":["R"],"status":"current_derived_synthesis",
+      "summary":"Founder, research, terminology, theory-architecture, and institutional histories are joined into one typed chronology while leaving unresolved provenance gaps visible."
+    }
+  ],
+  "historical_edges": [
+    {"id":"EDGE-001","from":"ENT-VOL","to":"ENT-RGT","relation":"generalizes","evidence":["C","R","I"],"status":"repository_direct_chronology_unresolved","constraints":["Not established as a simple rename.","Exact first direct RGT artifact remains open."]},
+    {"id":"EDGE-002","from":"ENT-RGT","to":"ENT-BT","relation":"historical_concerns_later_decomposed_retyped_and_reorganized_into","evidence":["C","R","I"],"status":"interpretive_reconstruction","constraints":["Do not describe Boundary Theory as a direct rename of RGT."]},
+    {"id":"EDGE-003","from":"ENT-SCH","to":"ENT-RM","relation":"historical_formalizes_or_supplies_machinery_to","evidence":["C","R"],"status":"current_endpoints_source_backed_historical_edge_open"},
+    {"id":"EDGE-004","from":"ENT-RM","to":"ENT-RR","relation":"projects_to_public_framing","evidence":["C","R"],"status":"historical_conversation_grounded"},
+    {"id":"EDGE-005","from":"ENT-BFE","to":"ENT-BF","relation":"motivates_or_consolidates_into","evidence":["C","R"],"status":"exact_transition_open"},
+    {"id":"EDGE-006","from":"ENT-NBALL","to":"ENT-BT","relation":"motivates_proto_schema_for","evidence":["R"],"status":"repository_backed_genealogy","constraints":["n-ball is not itself Distinction Space."]}
+  ],
+  "current_best_rgt_reconstruction": {
+    "status":"partially_recovered",
+    "sequence":["Volumology — geometric / extent / region / interface emphasis","RGT — gauge-indexed representation / closure umbrella across mathematical and system representations","Distinction / Admissibility / Emergence + Contexture + invariants / transport / closure / defect / repair + Representational Relativity + Schemathematics","Boundary Theory — Distinction Space central object; typed facets; Contexture; Representational Mechanics; Formal Grammars; Boundary First; Corpus Forge"],
+    "safe_historical_statement":"RGT was an important intermediate umbrella in which the geometric intuitions of Volumology were generalized into a theory of representation, gauge, invariance, closure, defect, and cross-domain transport. The later Boundary Theory architecture did not merely rename RGT; it decomposed, retyped, and reorganized many of those concerns around Distinction Space, typed operational facets, Contexture, Representational Mechanics, and explicit formal apparatus. The exact repository-direct transition remains to be recovered.",
+    "forbidden_inferences":["RGT was renamed Boundary Theory on a known date.","RGT is synonymous with Boundary Theory.","Volumology and RGT are identical programs.","Current architectural elegance proves the exact historical path."]
+  },
+  "lineage_map": {
+    "nodes":["formative environments","technical formation","executable representation laboratory","long-run physics problem","agentic computation","representation-construction problem","Volumology / n-ball / Gamma","second-order method","RGT","Distinction / Admissibility / Emergence","Contexture / Representational Relativity / Schemathematics / Formal Grammars","current Boundary Theory architecture","Boundary First Labs"],
+    "paths":[["formative environments","technical formation","executable representation laboratory","representation-construction problem"],["long-run physics problem","representation-construction problem"],["agentic computation","representation-construction problem"],["representation-construction problem","Volumology / n-ball / Gamma","RGT","Distinction / Admissibility / Emergence","Contexture / Representational Relativity / Schemathematics / Formal Grammars","current Boundary Theory architecture","Boundary First Labs"],["representation-construction problem","second-order method","current Boundary Theory architecture"]]
+  },
+  "source_register": {
+    "controls_and_ledgers":["organized_library_curated/00_METADATA_AUTHORITY.md","organized_library_curated/00_LAB_MAP.md","organized_library_curated/automated_GPT_export/SOURCE_REGISTER.md","organized_library_curated/automated_GPT_export/IDEA_GENESIS_LEDGER.md","organized_library_curated/automated_GPT_export/TERMINOLOGY_EVOLUTION.md","organized_library_curated/automated_GPT_export/DERIVATION_GRAPH.md"],
+    "founder_identity_sources":["organized_library_curated/02_Core_Identity/02_Ethos_and_Origin.md","organized_library_curated/02_Core_Identity/09_founders_note.md","organized_library_curated/02_Core_Identity/Augusta_Lineage/07_founder_story_augusta_lineage_internal_v0_1.md","organized_library_curated/319_Smithy/2026-08-14_founder_iii_oathbound_working_note.md"],
+    "origin_research_genealogy_root":"organized_library_curated/999_Library/02_Core_Theory/0103_engine_core/03_work_packets/boundary_first_labs_second_order_scientific_method_2026-08-01/",
+    "origin_research_genealogy_files":["01_EXECUTIVE_SYNTHESIS.md","02_LONGFORM_ORIGIN_ESSAY.md","03_THEORETICAL_GENEALOGY.md","06_RESEARCH_CORPUS_AND_AI_PROVENANCE.md","12_PROVENANCE_TIMELINE.md"],
+    "volumology_sources":["organized_library_curated/999_Library/03_Domains/0201_pure_math_and_logic/Volumology_Shared/pub_shared/ARCHIVE_FINDINGS_MAP_0A_0B_0C_v1.md","organized_library_curated/04_Products/15_Boundary_First_Volumetrics_Lab/Prior Work/","organized_library_curated/04_Products/15_Boundary_First_Volumetrics_Lab/Prior Work/web-content/WHITE_PAPER.md"]
+  },
+  "recovery_queue": {
+    "priority_A_historical_first_use_and_transitions":[
+      {"id":"REC-A01","task":"Recover earliest primary artifact using Volumology as a named program","status":"open"},{"id":"REC-A02","task":"Recover first direct artifact using Representation Gauge Theory / RGT","status":"open"},{"id":"REC-A03","task":"Determine whether Volumology -> RGT was explicit rename, generalization, parallel use, or gradual migration","status":"open"},{"id":"REC-A04","task":"Recover direct first-use artifact for Distinction Theory","status":"open"},{"id":"REC-A05","task":"Recover direct first-use artifact for Admissibility Theory","status":"open"},{"id":"REC-A06","task":"Recover direct first-use artifact for Emergence Theory","status":"open"},{"id":"REC-A07","task":"Recover direct first-use artifact for Boundary Theory","status":"open"},{"id":"REC-A08","task":"Recover direct first-use artifact for Distinction Space","status":"open"},{"id":"REC-A09","task":"Recover direct first-use artifact for Representational Relativity","status":"open"},{"id":"REC-A10","task":"Recover exact Contexture-primary-carrier -> Distinction-Space-central-carrier transition","status":"open"}
+    ],
+    "priority_B_physical_and_documentary_archive":[
+      {"id":"REC-B01","task":"Recover and checksum circa-2018 correspondence and attachments","status":"open"},{"id":"REC-B02","task":"Date research-room photographs and video","status":"open"},{"id":"REC-B03","task":"Inventory Red Book binder without destroying page/order provenance","status":"open"},{"id":"REC-B04","task":"Extract file timestamps and directory history from pre-AI digital corpus","status":"open"},{"id":"REC-B05","task":"Build early-term -> current-object crosswalk using actual artifacts rather than retrospective similarity alone","status":"open"}
+    ],
+    "priority_C_founder_and_professional_chronology":[
+      {"id":"REC-C01","task":"Establish exact educational and undergraduate-research dates","status":"open"},{"id":"REC-C02","task":"Build project-level software-engineering chronology tied to surviving artifacts","status":"open"},{"id":"REC-C03","task":"Recover earliest Boundary-First Engineering source and BFE -> Boundary First transition","status":"open"},{"id":"REC-C04","task":"Reconcile civic/software proof points with intellectual timeline where they materially affected method formation","status":"open"}
+    ],
+    "priority_D_theory_architecture_chronology":[
+      {"id":"REC-D01","task":"Date Distinction / Admissibility / Emergence retyping into operational facets","status":"open"},{"id":"REC-D02","task":"Date formal placement of Representational Mechanics as discipline rather than umbrella theory/facet","status":"open"},{"id":"REC-D03","task":"Recover historical Schemathematics -> Representational Mechanics edge beyond conversation testimony","status":"open"},{"id":"REC-D04","task":"Distinguish exact first use from later canonicalization for every major term","status":"open"}
+    ]
+  },
+  "update_rules": [
+    "Append evidence before improving the story.","Never infer a rename from conceptual similarity.","Preserve superseded claims and terminology.","Separate first use, mature use, and canonical use.","Use Git dates as evidence of repository presence, not automatic evidence of intellectual first conception.","Treat conversation checkpoints as testimony until tied to primary artifacts.","Do not promote autobiographical provenance into scientific validation.","Do not allow current architectural elegance to rewrite the messy path that produced it.","Update the master chronology in place while supporting ledgers remain granular.","When a gap closes, record what evidence closed it and what stronger claim still does not follow."
+  ]
+}
