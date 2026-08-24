@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import type { Inspection } from "@/lib/content";
 import {
@@ -5,6 +6,10 @@ import {
   type BfuxArtifactItem,
   type BfuxContentArtifact as Artifact,
 } from "@/lib/bfux-content-artifacts";
+
+type ArtifactSequenceStyle = CSSProperties & {
+  "--artifact-count": number;
+};
 
 function inferredIcon(item: BfuxArtifactItem): BfuxIconName {
   if (item.icon) return item.icon;
@@ -16,12 +21,12 @@ function inferredIcon(item: BfuxArtifactItem): BfuxIconName {
   if (/invariant|preserve/.test(value)) return "invariant";
   if (/bound|constraint|condition|limit/.test(value)) return "boundary";
   if (/authority|responsib|owner|steward/.test(value)) return "responsibility";
-  if (/evidence|observe|inspect|review|test|verify|measure|source/.test(value)) return "witness";
+  if (/evidence|observe|inspect|instrument|review|test|verify|measure|source/.test(value)) return "witness";
   if (/represent|projection|model|encode/.test(value)) return "projection";
   if (/state|progress|standing/.test(value)) return "state";
   if (/transition|execute|operation|act|deliver/.test(value)) return "transition";
   if (/consequence|result|effect|action/.test(value)) return "consequence";
-  if (/relation|connect|match|dependency|link/.test(value)) return "relation";
+  if (/relation|compare|connect|match|dependency|link/.test(value)) return "relation";
   if (/trace|provenance|lineage|history/.test(value)) return "trace";
   if (/claim|hypothesis|commit/.test(value)) return "claim";
   if (/gate|permission|admissib/.test(value)) return "gate";
@@ -45,9 +50,11 @@ function ArtifactItemContents({ item, index }: { item: BfuxArtifactItem; index?:
 }
 
 function OrderedArtifact({ artifact }: { artifact: Artifact }) {
+  const sequenceStyle = { "--artifact-count": artifact.items.length } as ArtifactSequenceStyle;
+
   return (
     <>
-      <ol className="bfux-artifact__sequence" aria-label={artifact.title}>
+      <ol className="bfux-artifact__sequence" aria-label={artifact.title} style={sequenceStyle}>
         {artifact.items.map((item, index) => (
           <li key={`${artifact.id}-${index}-${item.label}`}>
             <ArtifactItemContents item={item} index={index} />
