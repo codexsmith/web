@@ -44,7 +44,7 @@ requireMatch(
 );
 requireMatch(
   component,
-  /record\.rendererIndependence\.projections[\s\S]*semantic state[\s\S]*record\.semanticRule/,
+  /semantic state[\s\S]*record\.rendererIndependence\.projections[\s\S]*record\.semanticRule/,
   "BFUX must distinguish one semantic core from its renderer projections",
 );
 requireMatch(
