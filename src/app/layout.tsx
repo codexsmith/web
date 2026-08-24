@@ -51,6 +51,7 @@ import "./p4-detail-surfaces.css";
 import "./p4-corpus-forge-workbench.css";
 import "./p4-boundary-first-ux-conformance.css";
 import "./p4-closure-driven-control-surface.css";
+import "./p4-weather-research-testbed.css";
 
 export const metadata: Metadata = {
   title: {
