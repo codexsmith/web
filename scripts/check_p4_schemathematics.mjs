@@ -44,8 +44,13 @@ requireMatch(
 );
 requireMatch(
   component,
-  /record\.operativeProfile\.fields[\s\S]*profileGlyphs/,
-  "Schemathematics must expose the operative profile as typed formal coordinates",
+  /record\.operativeProfile\.fields\.map/,
+  "Schemathematics must expose the operative profile coordinates",
+);
+requireMatch(
+  component,
+  /profileGlyphs\[index\]/,
+  "Schemathematics operative profile must retain typed BFUX glyphs",
 );
 requireMatch(
   component,
