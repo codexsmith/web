@@ -21,13 +21,6 @@ function fail(id, issue) {
   failures.push({ id, issue });
 }
 
-function visible(element) {
-  if (!element) return false;
-  const style = getComputedStyle(element);
-  const rect = element.getBoundingClientRect();
-  return style.display !== "none" && style.visibility !== "hidden" && rect.width > 1 && rect.height > 1;
-}
-
 async function probe(page) {
   return page.evaluate(() => {
     const rect = (selector) => {
