@@ -45,6 +45,9 @@ jobs:
       - name: Run P4 visual and interaction QA
         run: node scripts/qa_p4_visual.mjs
 
+      - name: Run second-layer leaf surface QA
+        run: node scripts/qa_leaf_surfaces.mjs
+
       - name: Upload P4 QA report and screenshots
         if: always()
         uses: actions/upload-artifact@v4
