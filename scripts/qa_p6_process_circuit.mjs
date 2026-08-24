@@ -17,6 +17,7 @@ const cases = [
   { id: "local-mobile", path: "/research/applied-testbeds/weather?view=process&scope=local", viewport: { width: 430, height: 900 }, scope: "local" },
 ];
 
+const fullStageWords = ["Intake", "Boundary", "Representation", "Hypothesis", "Construction", "Execution", "Validation", "Repair", "Promotion"];
 const failures = [];
 const results = [];
 
@@ -25,9 +26,16 @@ function fail(name, issue) {
 }
 
 async function probe(page) {
-  return page.evaluate(() => {
+  return page.evaluate((expectedStageWords) => {
     const circuit = document.querySelector(".process-circuit");
     if (!circuit) return { missing: true };
+
+    const visible = (element) => {
+      if (!(element instanceof HTMLElement || element instanceof SVGElement)) return false;
+      const style = getComputedStyle(element);
+      const box = element.getBoundingClientRect();
+      return style.display !== "none" && style.visibility !== "hidden" && box.width > 1 && box.height > 1;
+    };
 
     const rect = (selector) => {
       const element = document.querySelector(selector);
@@ -39,6 +47,14 @@ async function probe(page) {
     const stageCards = Array.from(document.querySelectorAll(".process-stage-card"));
     const stageWidths = stageCards.map((element) => element.getBoundingClientRect().width);
     const zoneStages = Array.from(document.querySelectorAll(".process-zone__stages .process-stage-card")).map((element) => element.getAttribute("data-stage"));
+    const axis = document.querySelector(".process-lens-axis");
+    const axisHeaders = Array.from(document.querySelectorAll(".process-lens-axis__stage"));
+    const axisWords = axisHeaders.map((element) => element.querySelector("strong")?.textContent?.trim() ?? "");
+    const compactStageLabels = Array.from(document.querySelectorAll(".process-lens__cell-stage"))
+      .filter(visible)
+      .map((element) => element.textContent?.trim() ?? "");
+    const visibleParticipatingCells = Array.from(document.querySelectorAll('.process-lens__cell[data-participates="true"]')).filter(visible);
+    const visibleNonparticipatingCells = Array.from(document.querySelectorAll('.process-lens__cell[data-participates="false"]')).filter(visible);
 
     const clipped = Array.from(circuit.querySelectorAll("strong,p,small,span,h2"))
       .filter((element) => {
@@ -71,11 +87,24 @@ async function probe(page) {
       promotionInsideOrderedZones: zoneStages.includes("promotion"),
       stewardshipCount: document.querySelectorAll(".process-stewardship").length,
       lensCount: document.querySelectorAll(".process-lens").length,
+      lensTableCount: document.querySelectorAll('.process-lens-board[role="table"]').length,
+      lensAxisHeaderCount: axisHeaders.length,
+      lensAxisVisible: axis ? visible(axis) : false,
+      lensAxisWords: axisWords,
+      lensAxisHasFullWords: expectedStageWords.every((word) => axisWords.includes(word)),
+      currentAxisCount: document.querySelectorAll('.process-lens-axis__stage[data-current="true"]').length,
+      lensCellCount: document.querySelectorAll(".process-lens__cell").length,
+      appliesCellCount: document.querySelectorAll('.process-lens__cell[data-participates="true"] strong').length,
+      anonymousCoverageCount: document.querySelectorAll(".process-lens__coverage").length,
+      visibleParticipatingCellCount: visibleParticipatingCells.length,
+      visibleNonparticipatingCellCount: visibleNonparticipatingCells.length,
+      compactStageLabels,
+      compactLabelsAreFullWords: compactStageLabels.every((label) => expectedStageWords.includes(label)),
       oldPipelineCount: document.querySelectorAll(".gestalt-view:not(.founder-timeline-view) .gestalt-pipeline").length,
       oldDisciplineMapCount: document.querySelectorAll(".gestalt-discipline-map").length,
       clipped,
     };
-  });
+  }, fullStageWords);
 }
 
 function checkDesktopShape(name, metrics) {
@@ -90,6 +119,25 @@ function checkDesktopShape(name, metrics) {
   const downstreamBottom = Math.max(metrics.answer.bottom, metrics.stewardship.bottom, metrics.operate.bottom);
   if (!(metrics.returnRail.top >= downstreamBottom - 14)) fail(name, "Return rail does not close beneath the operating circuit");
   if (metrics.minStageWidth < 120) fail(name, `desktop stage card collapsed to ${Math.round(metrics.minStageWidth)}px`);
+}
+
+function checkLensSemantics(name, metrics, viewport) {
+  if (metrics.lensTableCount !== 1) fail(name, `expected one semantic operating-lens matrix, found ${metrics.lensTableCount}`);
+  if (metrics.anonymousCoverageCount !== 0) fail(name, "anonymous pill coverage strips returned");
+  if (metrics.lensCellCount !== 54) fail(name, `expected 54 lens/stage cells, found ${metrics.lensCellCount}`);
+  if (metrics.appliesCellCount < 1) fail(name, "operating-lens matrix has no explicit Applies states");
+  if (metrics.currentAxisCount < 1) fail(name, "current object placement is not represented on the stage axis");
+
+  if (viewport.width > 1180) {
+    if (!metrics.lensAxisVisible) fail(name, "wide process view hides the canonical stage axis");
+    if (metrics.lensAxisHeaderCount !== 9) fail(name, `wide process view should expose nine stage headers, found ${metrics.lensAxisHeaderCount}`);
+    if (!metrics.lensAxisHasFullWords) fail(name, `wide process stage axis is missing full words: ${metrics.lensAxisWords.join(", ")}`);
+  } else {
+    if (metrics.lensAxisVisible) fail(name, "compact process view retained the wide matrix axis instead of recomposing");
+    if (metrics.visibleNonparticipatingCellCount !== 0) fail(name, "compact lens cards show non-participating matrix cells instead of a participation list");
+    if (metrics.visibleParticipatingCellCount < 1) fail(name, "compact lens cards lost their participating stages");
+    if (!metrics.compactLabelsAreFullWords) fail(name, `compact lens cards use compressed stage labels: ${metrics.compactStageLabels.join(", ")}`);
+  }
 }
 
 async function visit(browser, testCase) {
@@ -122,8 +170,10 @@ async function visit(browser, testCase) {
       if (metrics.stewardshipCount !== 1) issues.push(`full circuit should render one stewardship dock, found ${metrics.stewardshipCount}`);
       if (metrics.lensCount !== 6) issues.push(`full circuit should render six operating lenses, found ${metrics.lensCount}`);
       if (!metrics.returnRail) issues.push("full circuit is missing its return rail");
+      checkLensSemantics(testCase.id, metrics, testCase.viewport);
     }
 
+    if (testCase.scope === "phase") checkLensSemantics(testCase.id, metrics, testCase.viewport);
     if (testCase.scope === "local" && metrics.lensCount !== 0) issues.push("local scope should omit the operating-lens dock");
 
     if (testCase.id === "full-desktop") checkDesktopShape(testCase.id, metrics);
@@ -171,9 +221,9 @@ function writeReport() {
     "",
     `Failures: **${failures.length}**`,
     "",
-    "| Surface | Viewport | Scope | Zones | Stages | Lenses | Overflow | Issues |",
-    "|---|---:|---|---:|---:|---:|---|---|",
-    ...results.map((item) => `| ${item.id} | ${item.viewport.width}×${item.viewport.height} | ${item.scope ?? "timeline"} | ${item.metrics.zoneCount ?? "—"} | ${item.metrics.stageCount ?? "—"} | ${item.metrics.lensCount ?? "—"} | ${item.metrics.documentHorizontalOverflow || item.metrics.horizontalOverflow ? "FAIL" : "ok"} | ${item.issues.length ? item.issues.join("; ") : "—"} |`),
+    "| Surface | Viewport | Scope | Zones | Stages | Lenses | Axis | Overflow | Issues |",
+    "|---|---:|---|---:|---:|---:|---|---|---|",
+    ...results.map((item) => `| ${item.id} | ${item.viewport.width}×${item.viewport.height} | ${item.scope ?? "timeline"} | ${item.metrics.zoneCount ?? "—"} | ${item.metrics.stageCount ?? "—"} | ${item.metrics.lensCount ?? "—"} | ${item.metrics.lensAxisVisible ? "matrix" : item.metrics.lensCount ? "full-word cards" : "—"} | ${item.metrics.documentHorizontalOverflow || item.metrics.horizontalOverflow ? "FAIL" : "ok"} | ${item.issues.length ? item.issues.join("; ") : "—"} |`),
   ];
   fs.writeFileSync(path.join(artifactDir, "report.json"), JSON.stringify({ failures, results }, null, 2));
   fs.writeFileSync(path.join(artifactDir, "report.md"), `${lines.join("\n")}\n`);
