@@ -59,7 +59,7 @@ requireMatch(
 );
 requireMatch(
   component,
-  /Corpus Forge Workbench[\s\S]*Claim &amp; Evidence Ledger[\s\S]*record\.relationship\.boundary/,
+  /record\.relationship\.boundary[\s\S]*Corpus Forge Workbench[\s\S]*Claim &amp; Evidence Ledger/,
   "Method, software expression, and focused ledger surface must remain distinct",
 );
 requireMatch(
