@@ -58,6 +58,7 @@ import "./p4-chess-practitioner-decision-board.css";
 import "./p4-soccer-spatial-practitioner-field.css";
 import "./p4-visual-qa-hardening.css";
 import "./p4-leaf-surface-unification.css";
+import "./p5-semantic-content-artifacts.css";
 
 export const metadata: Metadata = {
   title: {
