@@ -52,7 +52,7 @@ try {
   await waitForServer();
 
   const redirect = await fetchWithTimeout("/schemathematics");
-  const expectedLocation = "/research/formal-theory/schemathematics?detail=record:schemathematics";
+  const expectedLocation = "/publications/research/schemathematics?detail=record:schemathematics";
   if (redirect.status !== 308 || redirect.headers.get("location") !== expectedLocation) {
     throw new Error(
       `/schemathematics did not redirect to ${expectedLocation}; got ${redirect.status} ${redirect.headers.get("location")}`,
