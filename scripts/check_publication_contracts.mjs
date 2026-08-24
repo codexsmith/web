@@ -86,8 +86,8 @@ forbidMatch(
 
 requireMatch(
   "src/lib/content-registry.ts",
-  /nodes:\s*ContentNode\[\]\s*=\s*\[\.\.\.baseNodes,\s*\.\.\.publicationNodes\][\s\S]*edges:\s*GraphEdge\[\]\s*=\s*\[\.\.\.baseEdges,\s*\.\.\.publicationEdges\]/,
-  "Active graph registry must combine the base spine with publication nodes and typed relations",
+  /const rawNodes:\s*ContentNode\[\]\s*=\s*\[\.\.\.baseNodes,\s*\.\.\.publicationNodes\][\s\S]*export const nodes:\s*ContentNode\[\]\s*=\s*rawNodes\.map[\s\S]*getLocalSections\(node\.id\)[\s\S]*export const edges:\s*GraphEdge\[\]\s*=\s*\[\.\.\.baseEdges,\s*\.\.\.publicationEdges\]/,
+  "Active graph registry must combine the base spine with publication nodes, hydrate local coordinates, and retain typed publication relations",
 );
 
 for (const path of [
