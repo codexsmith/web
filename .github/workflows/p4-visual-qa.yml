@@ -1,0 +1,52 @@
+name: P4 visual QA
+
+on:
+  push:
+    branches:
+      - agent/p4-visual-qa-hardening
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: p4-visual-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install application dependencies
+        run: npm ci
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Install QA browser harness
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run P4 visual and interaction QA
+        run: node scripts/qa_p4_visual.mjs
+
+      - name: Upload P4 QA report and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p4-visual-qa
+          path: qa-artifacts/p4
+          if-no-files-found: warn
+          retention-days: 14
