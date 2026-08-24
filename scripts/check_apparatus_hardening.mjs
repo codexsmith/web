@@ -90,8 +90,8 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /const exitPrototype[\s\S]*router\.replace\(stateUrl\(focusId,\s*projection,\s*processScope,\s*"cards"\)/,
-  "Returning to Card must replace renderer state without adding navigation history",
+  /const exitPrototype[\s\S]*router\.replace\(stateUrl\(focusId,\s*projectionIntent,\s*processScope,\s*"cards"\)/,
+  "Returning to Card must replace renderer state while preserving projection intent and without adding navigation history",
 );
 
 console.log("apparatus hardening contracts: pass");
