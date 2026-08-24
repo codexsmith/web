@@ -150,7 +150,6 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
     [data.candidates],
   );
   const [view, setView] = useState<ViewState>(defaultViewState);
-  const [urlReady, setUrlReady] = useState(false);
 
   useEffect(() => {
     const restore = () => {
@@ -160,7 +159,6 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
     };
 
     restore();
-    setUrlReady(true);
     window.addEventListener("popstate", restore);
     return () => window.removeEventListener("popstate", restore);
   }, [data, frontierById]);
@@ -251,7 +249,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
   }
 
   return (
-    <main className={styles.shell} data-url-ready={urlReady ? "true" : "false"}>
+    <main className={styles.shell}>
       <header className={styles.topFrame}>
         <div>
           <div className={styles.eyebrow}>Boundary First Labs · Research · Publication discovery</div>
