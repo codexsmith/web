@@ -13,7 +13,7 @@ The structural migration is uniform: the legacy alias becomes a compatibility en
 | `/closure-driven-software-development` | `/publications/methods/closure-driven-software-development` | **Specialized P4 · progressive-closure delivery instrument** | Validate closure-loop density, certainty-intersection legibility, and the worked-case transition from simple request to domain-recognized closure. |
 | `/weather` | `/research/applied-testbeds/weather` | **Specialized P4 · computational research testbed** | Validate research density, claim-ladder legibility, and whether an eventual executable demonstrator can inhabit the same evidence grammar without promoting itself beyond experiment status. |
 | `/schemathematics` | `/publications/research/schemathematics` | **Specialized P4 · formal research program / dependency atlas** | Validate formal-density legibility, the monoid→group dependency trace, and whether future definitions/propositions can enter without obscuring proof and claim standing. |
-| `/law` | `/research/applied-testbeds/law` | Transitional structured record | Build a legal-research surface emphasizing authority, source hierarchy, claim standing, precedent/interpretation relations, and explicit non-advice boundary. |
+| `/law` | `/research/applied-testbeds/law` | **Specialized P4 · provenance-first legal research instrument** | Validate authority-register density, claim-status legibility, synthetic-case boundaries, and adversarial doctrinal-review workflow. |
 | `/chess` | `/research/applied-testbeds/chess` | Transitional structured record | Build a practitioner/testbed board: doctrine, position/decision examples, observable consequences, validation against established chess practice. |
 | `/soccer` | `/research/applied-testbeds/soccer` | Transitional structured record | Build a practitioner/testbed field: spatial boundaries, role/transition grammar, examples, observable tactical consequences, validation burden. |
 
@@ -33,7 +33,7 @@ Held legacy/reconciliation records remain blocked from public routing.
 
 ## Specialized grammars established so far
 
-P4 now has seven deliberately different third-layer grammars rather than one universal template:
+P4 now has eight deliberately different third-layer grammars rather than one universal template:
 
 1. **Agency & Representation Audit** — diagnostic/service workflow: operating questions, failure field, audit passes, pilot boundary, evidence rule, claim firewall.
 2. **Software Before Code** — practitioner method: object trace, boundary questions, method sequence, stress test, diagnostics, closure, validation ladder.
@@ -42,12 +42,13 @@ P4 now has seven deliberately different third-layer grammars rather than one uni
 5. **Closure-Driven Software Development** — progressive-closure delivery instrument: six-stage closure loop, domain/executable certainty intersection, executable truth path, worked delivery case, closure gate, empirical validation burden, repair-or-promote outcome.
 6. **Boundary First Weather** — computational research testbed: established-science substrate vs experimental layer, falsifiable core hypothesis, W0-W5 claim ladder, planned demonstrator, matched-baseline adaptive-refinement loop, ensemble candidate diagnostics, validation ladder, negative-result admissibility, claim firewall.
 7. **Schemathematics** — formal research program / dependency atlas: definition boundary, eight-coordinate operative profile, inspection grammar, research-program lanes, established monoid→group structural witness, hypothesis standing, formal/empirical validation burden, novelty firewall.
+8. **Constitutional Law & Jurisprudence** — provenance-first legal research instrument: prominent non-advice boundary, current-law authority register, source keys, typed claim regimes, doctrine/analogy/proposal separation, legal-process closure model, synthetic consequence-to-repair case, analytical remedy taxonomy, professional-counsel boundary, claim firewall.
 
 The generic structured record remains a migration safety net, not a target design.
 
 ## Migration priority
 
-The next specialized third-layer designs should prioritize by public importance and representational payoff rather than by manifest order:
+The remaining active transitional third-layer designs are practitioner/testbed variants:
 
-1. **Law** — establishes a high-provenance domain-research grammar.
-2. **Chess / Soccer** — establish practitioner/testbed variants once the reusable research grammar is stable.
+1. **Chess** — establish a bounded practitioner decision-board grammar.
+2. **Soccer** — establish a spatial practitioner/testbed field grammar.
