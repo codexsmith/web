@@ -48,6 +48,7 @@ import "./p3-semantic-action-glyphs.css";
 import "./p3-content-glyphs.css";
 import "./p3-industrial-responsive.css";
 import "./p4-detail-surfaces.css";
+import "./p4-corpus-forge-workbench.css";
 
 export const metadata: Metadata = {
   title: {
