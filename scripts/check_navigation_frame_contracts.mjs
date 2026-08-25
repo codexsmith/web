@@ -18,37 +18,60 @@ function forbidMatch(path, pattern, message) {
 
 requireExists(
   "src/app/p7-structural-path-navigation.css",
-  "Structural-path navigation must have an explicit final refinement layer",
+  "Top-frame traversal navigation must retain its final refinement layer",
+);
+
+requireExists(
+  "src/lib/traversal-state.ts",
+  "Traversal continuity must have explicit bootstrap primitives",
 );
 
 requireMatch(
-  "src/app/layout.tsx",
-  /p6-traversal-shelf-refinement\.css[\s\S]*p7-structural-path-navigation\.css/,
-  "Structural-path navigation must load after the traversal-shelf compatibility layer",
+  "src/lib/traversal-state.ts",
+  /bootstrapTraversal[\s\S]*while \(cursor\.parentId\)[\s\S]*ids\.unshift\(cursor\.id\)/,
+  "A deep canonical entry must bootstrap a usable ancestry-backed traversal trace",
+);
+
+requireMatch(
+  "src/components/world-app.tsx",
+  /initialTraversal\s*=\s*bootstrapTraversal\(initialNodeId\)[\s\S]*useState<string\[\]>\(initialTraversal\.ids\)[\s\S]*useState\(initialTraversal\.cursor\)/,
+  "Deep routes must expose a usable Back path on the first rendered frame",
+);
+
+requireMatch(
+  "src/components/world-app.tsx",
+  /else if \(remembered\.ids\[remembered\.cursor\] === initialNodeId\)[\s\S]*branchTraversal\(remembered\.ids, remembered\.cursor, initialNodeId\)/,
+  "A newly loaded route must append to remembered traversal unless it is already the active state",
+);
+
+requireMatch(
+  "src/components/world-app.tsx",
+  /navigateHome[\s\S]*branchTraversal\(traversalIds, traversalCursor, "root"\)[\s\S]*setTraversalIds\(nextTraversal\.ids\)[\s\S]*setTraversalCursor\(nextTraversal\.cursor\)/,
+  "Home/root navigation must append to traversal rather than reset it",
+);
+
+forbidMatch(
+  "src/components/world-app.tsx",
+  /return\s+path\.lastIndexOf\(targetId\)/,
+  "Revisiting a previously seen root or node must not rewind to an unrelated historical occurrence",
 );
 
 requireMatch(
   "src/components/boundary-frame.tsx",
-  /getAncestors[\s\S]*structuralPath\s*=\s*\[\.\.\.getAncestors\(focusNode\.id\),\s*focusNode\]/,
-  "Top-frame location must be derived from canonical content ancestry rather than temporal history",
+  /activeTrace[\s\S]*index <= traversalCursor[\s\S]*aria-label="Focus traversal history"/,
+  "The top frame must show the active traversal trace through the current cursor",
 );
 
 requireMatch(
   "src/components/boundary-frame.tsx",
-  /className="frame-location-path"[\s\S]*aria-current="page"/,
-  "The top frame must expose the canonical structural path and mark the current node",
-);
-
-requireMatch(
-  "src/components/boundary-frame.tsx",
-  /frame-location-path__node--parent[\s\S]*onClick=\{onUp\}/,
-  "The immediate structural parent must remain actionable from the top path",
+  /onTraversalPath\(node\.id, index\)/,
+  "Visible prior trace nodes must remain replayable",
 );
 
 requireMatch(
   "src/components/boundary-frame.tsx",
   /aria-label="Back through traversal history"[\s\S]*aria-label="Forward through traversal history"/,
-  "Temporal history must remain a distinct Back/Forward transport in the top frame",
+  "Back and Forward must remain temporal cursor controls",
 );
 
 requireMatch(
@@ -69,16 +92,10 @@ forbidMatch(
   "The retired duplicate Contained By control must not render",
 );
 
-forbidMatch(
-  "src/components/boundary-frame.tsx",
-  /Focus · You are here/,
-  "The retired large left-rail current-focus card must not render",
-);
-
 requireMatch(
   "src/app/p7-structural-path-navigation.css",
-  /\.frame-location-path[\s\S]*\.boundary-frame__neighborhood-nav/,
-  "The final navigation layer must style both structural location and local neighborhood axes",
+  /\.frame-trace-path[\s\S]*\.boundary-frame__neighborhood-nav/,
+  "The final navigation layer must style both traversal continuity and local neighborhood axes",
 );
 
 console.log("Navigation frame contracts passed.");
