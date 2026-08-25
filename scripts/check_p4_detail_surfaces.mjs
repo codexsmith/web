@@ -18,6 +18,7 @@ for (const path of [
   "src/lib/record-detail-routing.ts",
   "src/components/record-detail-surface.tsx",
   "src/app/p4-detail-surfaces.css",
+  "src/app/p10-inspection-card-layer.css",
   "docs/third-layer-detail-surface-contract.md",
 ]) {
   if (!fs.existsSync(path)) throw new Error(`P4 detail-surface artifact is missing (${path})`);
@@ -25,13 +26,28 @@ for (const path of [
 
 requireMatch(
   "src/components/inspection-panel.tsx",
-  /world-viewport detail-surface inspection-surface/,
-  "Inspection must render in the bounded main content viewport",
+  /world-viewport inspection-card-layer/,
+  "Inspection must stay inside the bounded content viewport as an attached layer",
+);
+requireMatch(
+  "src/components/inspection-panel.tsx",
+  /inspection-workbench inspection-card/,
+  "Inspection must render as a bounded card rather than replacing the whole content surface",
+);
+requireMatch(
+  "src/components/inspection-panel.tsx",
+  /inspection-surface__close--icon[\s\S]*inspection-surface__close--footer/,
+  "Inspection must expose clear close controls at both the top and bottom of the card",
 );
 forbidMatch(
   "src/components/inspection-panel.tsx",
-  /aria-modal|inspection-layer__backdrop|role="dialog"/,
-  "Inspection must not regress to a modal/backdrop interaction model",
+  /aria-modal|inspection-layer__backdrop|role="dialog"|useRouter|router\.(?:push|replace)/,
+  "Inspection must remain non-modal and must not become its own route",
+);
+requireMatch(
+  "src/app/p10-inspection-card-layer.css",
+  /\.inspection-card-layer[\s\S]*pointer-events:\s*none[\s\S]*\.inspection-card[\s\S]*pointer-events:\s*auto/,
+  "Inspection card layer must preserve the surrounding World while keeping the card interactive",
 );
 requireMatch(
   "src/components/subject-pane.tsx",

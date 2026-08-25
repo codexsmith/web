@@ -7,15 +7,15 @@ Boundary First UX does not treat deeper object detail as a reason to leave the b
 The public site previously had two competing third-layer behaviors:
 
 1. retained-record links could escape the Boundary Frame into a standalone product/publication landing renderer;
-2. inspection links could open a modal-style window over the current object.
+2. inspection links could either open a generic modal or replace the entire content pane.
 
 Both behaviors split one object into a primary BFUX identity and a secondary interface world.
 
 ## Invariant
 
-> Object detail is a deeper representation of the current bounded object, not a new site and not a modal window.
+> Object detail is a deeper representation of the current bounded object, not a new site and not a new graph object.
 
-A detail surface may replace the current main-content representation temporarily, but it does not create another graph object merely because more information is visible.
+Different detail kinds may use different interaction geometry. A retained record may occupy the bounded content surface because it is a substantial alternate representation. An inspection is lighter-weight: it should remain visibly attached to the current World as a large, instrument-like card.
 
 ## Detail kinds
 
@@ -27,10 +27,16 @@ Inspection:
 
 - stays inside the main content viewport;
 - keeps the Boundary Frame available;
-- does not use `aria-modal`;
-- does not create a backdrop;
+- leaves the current World visibly present behind it;
+- renders as a large bounded card rather than replacing the whole content pane;
+- does not use `aria-modal` or a dialog interaction model;
+- does not create a blocking backdrop;
+- does not mutate the URL;
 - does not append a traversal-history object;
+- exposes clear close controls at the top and bottom;
 - returns to the same focused object.
+
+The inspection card may receive focus and support Escape as a convenience, but it is not a route and not a modal. The surrounding World remains the identity-bearing context.
 
 Search remains different. Search is a global traversal instrument and may continue to use an overlay because its function is to select another object rather than deepen the current one.
 
@@ -78,17 +84,20 @@ The generic fallback is transitional. High-value records should progressively re
 
 Third-layer detail must project responsively inside the same bounded viewport:
 
-- wide: instrument/workbench composition with multiple simultaneous fields;
-- medium: stacked banks and reduced cross-axis density;
-- narrow: single reading flow with the same headings, state, source, and return semantics.
+- wide inspection: large floating work card with current World visible around it;
+- medium inspection: near-full bounded card with stacked content banks;
+- narrow inspection: edge-inset card using a single reading flow and persistent close control;
+- retained records: instrument/workbench composition that may occupy the full bounded content surface.
 
 Do not miniaturize desktop panels until they become unreadable.
 
 ## Accessibility
 
-- inspection detail is ordinary document/main content, not a modal dialog;
-- the focused object remains legible in the surrounding frame;
-- return controls have explicit text, not icon-only semantics;
+- inspection detail is an attached non-modal region, not a modal dialog;
+- the focused object remains legible in the surrounding frame and visually present behind the inspection;
+- close controls have explicit text and an accessible label;
+- Escape may close the focused inspection card as a convenience;
+- retained-record return controls have explicit text, not icon-only semantics;
 - structured records use headings, lists, and table roles where appropriate;
 - forced-colors mode removes decorative material effects without removing hierarchy.
 
@@ -96,11 +105,13 @@ Do not miniaturize desktop panels until they become unreadable.
 
 A third-layer migration is correct when:
 
-1. opening an inspection does not create a backdrop or modal dialog;
-2. opening a retained record keeps the Boundary Frame visible;
-3. a legacy landing alias redirects to the canonical graph owner when one exists;
-4. another object linking the same record traverses to that canonical owner rather than re-parenting the record;
-5. returning from detail restores the same canonical object rather than navigating to a guessed parent;
-6. World/Evidence/Process semantics remain unchanged;
-7. record detail does not add traversal history as though it were a separate object;
-8. raw record data is projected into semantic sections rather than exposed as an undifferentiated data dump.
+1. opening an inspection does not change the URL or add a traversal-history object;
+2. the inspection appears as a large bounded card while the current World remains visible behind it;
+3. the inspection provides obvious close controls at both the top and bottom;
+4. the inspection does not create a blocking backdrop or modal dialog;
+5. opening a retained record keeps the Boundary Frame visible;
+6. a legacy landing alias redirects to the canonical graph owner when one exists;
+7. another object linking the same record traverses to that canonical owner rather than re-parenting the record;
+8. returning from detail restores the same canonical object rather than navigating to a guessed parent;
+9. World/Evidence/Process semantics remain unchanged;
+10. raw record data is projected into semantic sections rather than exposed as an undifferentiated data dump.

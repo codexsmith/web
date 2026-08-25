@@ -1,5 +1,6 @@
 "use client";
 
+import type { KeyboardEvent } from "react";
 import { BfuxInspectionArtifacts } from "@/components/bfux-content-artifact";
 import { BfuxIcon } from "@/components/bfux-icons";
 import type { Inspection } from "@/lib/content";
@@ -13,26 +14,46 @@ type InspectionPanelProps = {
 };
 
 export function InspectionPanel({ inspection, owner, onClose }: InspectionPanelProps) {
+  function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key !== "Escape") return;
+    event.preventDefault();
+    event.stopPropagation();
+    onClose();
+  }
+
   return (
-    <main
-      className="world-viewport detail-surface inspection-surface"
+    <aside
+      className="world-viewport inspection-card-layer"
       data-detail-kind="inspection"
-      aria-labelledby="inspection-title"
+      data-inspection-id={inspection.id}
+      onKeyDown={handleKeyDown}
     >
-      <section className="detail-workbench inspection-workbench">
+      <section
+        className="inspection-workbench inspection-card"
+        aria-labelledby="inspection-title"
+        aria-describedby="inspection-summary"
+      >
         <header className="inspection-surface__header">
           <div className="inspection-surface__identity">
             <BfuxIcon name="inspect" />
             <div>
-              <span>{inspection.eyebrow} · inspection</span>
+              <span>{inspection.eyebrow} · attached inspection</span>
               <h2 id="inspection-title">{inspection.label}</h2>
             </div>
           </div>
-          <button className="inspection-surface__close" type="button" onClick={onClose}>
-            <BfuxIcon name="back" />
-            <span>Return to object</span>
+          <button
+            autoFocus
+            aria-label="Close inspection"
+            className="inspection-surface__close inspection-surface__close--icon"
+            type="button"
+            onClick={onClose}
+          >
+            <BfuxIcon name="close" />
+            <span>Close</span>
           </button>
-          <p className="inspection-surface__summary">{inspection.summary}</p>
+          <p id="inspection-summary" className="inspection-surface__summary">
+            {inspection.summary}
+          </p>
         </header>
 
         <div className="inspection-surface__content">
@@ -64,7 +85,19 @@ export function InspectionPanel({ inspection, owner, onClose }: InspectionPanelP
             ) : null}
           </div>
         </div>
+
+        <footer className="inspection-surface__footer">
+          <span>Attached inspection · page location unchanged</span>
+          <button
+            className="inspection-surface__close inspection-surface__close--footer"
+            type="button"
+            onClick={onClose}
+          >
+            <BfuxIcon name="back" />
+            <span>Close inspection</span>
+          </button>
+        </footer>
       </section>
-    </main>
+    </aside>
   );
 }
