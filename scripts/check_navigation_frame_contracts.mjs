@@ -27,6 +27,11 @@ requireExists(
 );
 
 requireExists(
+  "src/app/p13-root-busy-board.css",
+  "Root World tactile instrument refinement must exist",
+);
+
+requireExists(
   "src/lib/traversal-state.ts",
   "Traversal continuity must have explicit bootstrap primitives",
 );
@@ -105,8 +110,8 @@ requireMatch(
 
 requireMatch(
   "src/app/layout.tsx",
-  /p11-hero-viewport-resilience\.css";\s*\nimport "\.\/p12-content-density-refinement\.css";/,
-  "The content-density refinement must load after the prior UI refinement layers",
+  /p11-hero-viewport-resilience\.css";\s*\nimport "\.\/p12-content-density-refinement\.css";\s*\nimport "\.\/p13-root-busy-board\.css";/,
+  "The root busy-board refinement must load after the prior UI refinement layers",
 );
 
 requireMatch(
@@ -125,6 +130,36 @@ requireMatch(
   "src/app/p12-content-density-refinement.css",
   /\.branch-world__context-group\[aria-label="Explore further"\][\s\S]*\.subject-pane__action-copy > small\s*\{[\s\S]*display:\s*none;/,
   "Explore further cards must not repeat the description shown after opening the inspection",
+);
+
+requireMatch(
+  "src/app/p13-root-busy-board.css",
+  /\.district-card__number[\s\S]*display:\s*none\s*!important;/,
+  "Root World cards must not restore numbered register chips",
+);
+
+requireMatch(
+  "src/app/p13-root-busy-board.css",
+  /\.district-card__kind::before[\s\S]*radial-gradient[\s\S]*\.district-card__kind::after/,
+  "Root World cards must carry one tactile switch/light assembly without introducing nested controls",
+);
+
+requireMatch(
+  "src/app/p13-root-busy-board.css",
+  /\.district-card:hover[\s\S]*\.district-card__kind::after[\s\S]*translateX\(38px\)[\s\S]*\.district-card:active[\s\S]*scale\(0\.985\)/,
+  "The tactile root control must respond to hover/focus and press states",
+);
+
+requireMatch(
+  "src/app/p13-root-busy-board.css",
+  /\.section-region-card__glyph[\s\S]*border:[\s\S]*radial-gradient[\s\S]*box-shadow/,
+  "Root World semantic icons must retain a shallow colored physical housing",
+);
+
+requireMatch(
+  "src/app/p13-root-busy-board.css",
+  /@media \(prefers-reduced-motion: reduce\)[\s\S]*transition:\s*none;/,
+  "Busy-board interaction must respect reduced-motion preferences",
 );
 
 console.log("Navigation frame contracts passed.");
