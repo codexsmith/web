@@ -32,6 +32,11 @@ requireExists(
 );
 
 requireExists(
+  "src/app/p14-root-instrumentation.css",
+  "Root World functional instrumentation refinement must exist",
+);
+
+requireExists(
   "src/lib/traversal-state.ts",
   "Traversal continuity must have explicit bootstrap primitives",
 );
@@ -110,8 +115,8 @@ requireMatch(
 
 requireMatch(
   "src/app/layout.tsx",
-  /p11-hero-viewport-resilience\.css";\s*\nimport "\.\/p12-content-density-refinement\.css";\s*\nimport "\.\/p13-root-busy-board\.css";/,
-  "The root busy-board refinement must load after the prior UI refinement layers",
+  /p11-hero-viewport-resilience\.css";\s*\nimport "\.\/p12-content-density-refinement\.css";\s*\nimport "\.\/p13-root-busy-board\.css";\s*\nimport "\.\/p14-root-instrumentation\.css";/,
+  "The root instrumentation refinement must load after the prior UI refinement layers",
 );
 
 requireMatch(
@@ -160,6 +165,36 @@ requireMatch(
   "src/app/p13-root-busy-board.css",
   /@media \(prefers-reduced-motion: reduce\)[\s\S]*transition:\s*none;/,
   "Busy-board interaction must respect reduced-motion preferences",
+);
+
+requireMatch(
+  "src/app/p14-root-instrumentation.css",
+  /\.district-card > p\s*\{[\s\S]*display:\s*none;/,
+  "Root World cards must keep descriptive prose in source without rendering it on the door surface",
+);
+
+requireMatch(
+  "src/app/p14-root-instrumentation.css",
+  /\.district-card__kind\s*\{[\s\S]*position:\s*static\s*!important[\s\S]*padding-right:[\s\S]*\.section-region-card__glyph\s*\{[\s\S]*position:\s*absolute[\s\S]*right:/,
+  "Root World eyebrow copy must align to the text edge while the enlarged semantic icon occupies the right side",
+);
+
+requireMatch(
+  "src/app/p14-root-instrumentation.css",
+  /\.district-card__kind::before\s*\{[\s\S]*bottom:\s*var\(--root-busy-bottom\)[\s\S]*\.district-card__action::after\s*\{[\s\S]*content:\s*var\(--root-axis-label\)/,
+  "The tactile switch must replace the old lower-right arrow and leave only a compact axis register in the action rail",
+);
+
+requireMatch(
+  "src/app/p14-root-instrumentation.css",
+  /data-node-id="public-interest"[\s\S]*--root-axis-label:\s*"WHO"[\s\S]*data-node-id="products"[\s\S]*--root-axis-label:\s*"WHAT"[\s\S]*data-node-id="publications"[\s\S]*--root-axis-label:\s*"WHERE"[\s\S]*data-node-id="about"[\s\S]*--root-axis-label:\s*"WHY"[\s\S]*data-node-id="research"[\s\S]*--root-axis-label:\s*"HOW"/,
+  "The five root instruments must preserve the who/what/where/why/how semantic guide",
+);
+
+requireMatch(
+  "src/app/p14-root-instrumentation.css",
+  /\.district-card::after\s*\{[\s\S]*background:\s*var\(--root-instrument-motif\)[\s\S]*pointer-events:\s*none/,
+  "Root World doors must carry quiet non-interactive internal diagram motifs",
 );
 
 console.log("Navigation frame contracts passed.");
