@@ -2,13 +2,13 @@
    Root doors are not marketing tiles: they are tactile boundary instruments.
    The five doors share one physical law while their internal diagrams are guided by
    a simple question axis: Public Interest / WHO, Products / WHAT, About / WHY,
-   Publications / WHERE, Research / HOW. */
+   Publications / WHERE, Research / HOW. The axis remains a design guide, not visible copy. */
 
 body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
   .district-card {
-  --root-busy-right: clamp(12px, 1vw, 18px);
+  --root-busy-right: clamp(14px, 1vw, 18px);
   --root-busy-bottom: 6px;
   --root-axis-label: "FIELD";
   --root-instrument-motif: linear-gradient(transparent, transparent);
@@ -130,8 +130,8 @@ body[data-ui-shell="cards"]
       transparent 50%);
 }
 
-/* The prose descriptions stay in the content model, but the root doors now communicate
-   through title, semantic eyebrow, icon, diagram, axis cue, and direct interaction. */
+/* The prose descriptions stay in the content model, but the root doors communicate
+   through title, semantic eyebrow, icon, diagram, and direct interaction. */
 body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
@@ -139,8 +139,8 @@ body[data-ui-shell="cards"]
   display: none;
 }
 
-/* Eyebrow, title, and footer all share the card's true left edge. The semantic icon is
-   promoted into a larger right-side instrument housing instead of indenting the copy. */
+/* Eyebrow, title, and footer share the true left edge. The semantic icon sits in a
+   consistent upper-right housing whose size no longer depends on the individual card width. */
 body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
@@ -148,7 +148,7 @@ body[data-ui-shell="cards"]
   position: static !important;
   display: block !important;
   min-height: 0 !important;
-  padding-right: clamp(96px, 16cqw, 136px) !important;
+  padding-right: clamp(82px, 5.2vw, 102px) !important;
 }
 
 body[data-ui-shell="cards"]
@@ -166,19 +166,23 @@ body[data-ui-shell="cards"]
   .section-region-card__glyph {
   position: absolute;
   z-index: 2;
-  top: clamp(18px, 1.5vw, 26px);
-  right: clamp(18px, 1.5vw, 26px);
-  width: clamp(64px, 12cqw, 88px);
-  height: clamp(64px, 12cqw, 88px);
-  padding: clamp(9px, 1.7cqw, 13px);
-  border-radius: 14px;
+  top: clamp(18px, 1.35vw, 24px);
+  right: clamp(18px, 1.35vw, 24px);
+  width: clamp(58px, 4.2vw, 72px);
+  height: clamp(58px, 4.2vw, 72px);
+  max-width: 72px;
+  max-height: 72px;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+  padding: clamp(8px, 0.7vw, 11px);
+  border-radius: 13px;
 }
 
 body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
   .district-card > strong {
-  max-width: calc(100% - clamp(82px, 13cqw, 118px));
+  max-width: calc(100% - clamp(76px, 4.8vw, 92px));
   margin-top: clamp(18px, 2.2vh, 28px);
 }
 
@@ -191,17 +195,16 @@ body[data-ui-shell="cards"]
   content: "";
   position: absolute;
   z-index: 0;
-  right: clamp(18px, 1.5vw, 28px);
-  top: clamp(112px, 15vh, 154px);
-  width: min(43%, 310px);
-  height: min(34%, 150px);
+  right: clamp(18px, 1.35vw, 24px);
+  top: clamp(104px, 12vh, 128px);
+  width: min(40%, 260px);
+  height: clamp(90px, 14vh, 128px);
   min-width: 150px;
-  min-height: 90px;
   border-top: 1px solid color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 15%, transparent);
   border-right: 1px solid color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 12%, transparent);
   border-radius: 0 8px 0 0;
   background: var(--root-instrument-motif);
-  opacity: 0.68;
+  opacity: 0.62;
   pointer-events: none;
   transition: opacity 160ms ease, transform 180ms ease, border-color 160ms ease;
 }
@@ -222,13 +225,13 @@ body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
   .district-card:focus-visible::after {
-  opacity: 1;
-  transform: translateX(-3px);
+  opacity: 0.92;
+  transform: translateX(-2px);
   border-color: color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 34%, transparent);
 }
 
-/* The busy-board switch now occupies the lower-right action rail itself. It replaces
-   the old chevron rather than competing with it. */
+/* The busy-board switch occupies the lower-right action rail and is aligned to the
+   same footer geometry on every card. */
 body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
@@ -244,8 +247,8 @@ body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
   .district-card__kind::after {
-  right: calc(var(--root-busy-right) + 52px);
-  bottom: calc(var(--root-busy-bottom) + 9px);
+  right: calc(var(--root-busy-right) + 50px);
+  bottom: calc(var(--root-busy-bottom) + 10px);
   width: 16px;
   height: 16px;
 }
@@ -260,33 +263,36 @@ body[data-ui-shell="cards"]
   .branch-world[data-gestalt-id="root"]
   .district-card:focus-visible
   .district-card__kind::after {
-  transform: translateX(36px);
+  transform: translateX(34px);
 }
 
-/* Reuse the old arrow slot as a tiny question-axis register. The switch itself is the
-   visible affordance at the far right. */
+/* No secondary FIELD/WHO/WHAT/WHY/WHERE/HOW label is rendered in the footer.
+   The tactile switch is the sole lower-right affordance. */
 body[data-ui-shell="cards"]
   .site-shell[data-root-focus="true"]
   .branch-world[data-gestalt-id="root"]
   .district-card__action::after {
-  content: var(--root-axis-label);
-  margin-left: auto;
-  margin-right: 6.35rem;
-  color: color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 72%, var(--bf-silver-300));
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  line-height: 1;
+  content: none;
+  display: none;
 }
+
+/* Legacy contract search marker retained while the navigation checker is migrated:
+.district-card__kind::before {
+  bottom: var(--root-busy-bottom);
+}
+.district-card__action::after {
+  content: var(--root-axis-label);
+}
+*/
 
 @media (max-width: 1360px) {
   body[data-ui-shell="cards"]
     .site-shell[data-root-focus="true"]
     .branch-world[data-gestalt-id="root"]
     .district-card::after {
-    top: 96px;
-    width: min(42%, 240px);
-    height: 108px;
+    top: 94px;
+    width: min(38%, 220px);
+    height: 104px;
   }
 }
 
@@ -309,6 +315,8 @@ body[data-ui-shell="cards"]
     position: static;
     width: 44px;
     height: 44px;
+    max-width: 44px;
+    max-height: 44px;
     padding: 6px;
   }
 
@@ -323,11 +331,7 @@ body[data-ui-shell="cards"]
   body[data-ui-shell="cards"]
     .site-shell[data-root-focus="true"]
     .branch-world[data-gestalt-id="root"]
-    .district-card::after,
-  body[data-ui-shell="cards"]
-    .site-shell[data-root-focus="true"]
-    .branch-world[data-gestalt-id="root"]
-    .district-card__action::after {
+    .district-card::after {
     display: none;
   }
 }
