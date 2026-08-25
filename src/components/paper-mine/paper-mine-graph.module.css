@@ -61,17 +61,37 @@
 }
 
 .graphLegend {
+  gap: 0.45rem 1rem;
   border-bottom: 1px solid var(--bf-border-subtle);
   color: var(--bf-text-secondary);
   font-size: 0.62rem;
 }
 
-.graphLegend span,
+.legendTitle {
+  color: var(--bf-text-muted);
+  font: 700 0.56rem/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.graphLegend span {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  white-space: nowrap;
+}
+
 .graphLegend code {
-  padding: 0.28rem 0.44rem;
-  border: 1px solid var(--bf-border-default);
-  border-radius: 999px;
-  background: var(--bf-well-surface);
+  margin-left: auto;
+  padding: 0 0 0 0.9rem;
+  border: 0;
+  border-left: 1px solid var(--bf-border-subtle);
+  border-radius: 0;
+  background: transparent;
+  color: var(--bf-region-research);
 }
 
 .graphLegend span::before {
@@ -82,6 +102,7 @@
   margin-right: 0.35rem;
   border: 1px solid currentColor;
   border-radius: 2px;
+  background: color-mix(in srgb, currentColor 10%, transparent);
   vertical-align: -0.03rem;
 }
 
@@ -89,7 +110,6 @@
 .graphLegend span[data-kind="candidate"] { color: var(--bf-text-secondary); }
 .graphLegend span[data-kind="frontier"] { color: var(--bf-region-research); }
 .graphLegend span[data-kind="source"] { color: var(--bf-text-muted); }
-.graphLegend code { color: var(--bf-region-research); }
 
 .graphViewport {
   max-height: 72rem;
@@ -203,28 +223,30 @@
 .graphSourceNode strong,
 .graphCandidate strong {
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .graphFieldNode strong {
+  overflow: hidden;
   color: var(--bf-text-primary);
   font-size: 0.69rem;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .graphSourceNode strong {
+  overflow: hidden;
   color: var(--bf-text-secondary);
   font: 0.58rem/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .graphCandidate strong {
-  display: -webkit-box;
+  color: var(--bf-text-primary);
   font-size: 0.72rem;
-  line-height: 1.2;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .graphFieldNode small,
@@ -253,15 +275,19 @@
   .graphHeader { display: block; }
   .graphHeader p { margin-top: 0.45rem; text-align: left; }
   .graphStats, .graphLegend, .graphFootnote { align-items: flex-start; flex-direction: column; }
+  .graphLegend code {
+    margin-left: 0;
+    padding: 0.45rem 0 0;
+    border-top: 1px solid var(--bf-border-subtle);
+    border-left: 0;
+  }
   .graphViewport { max-height: 52rem; }
 }
 
 @media (forced-colors: active) {
   .graphFieldNode,
   .graphSourceNode,
-  .graphCandidate,
-  .graphLegend span,
-  .graphLegend code {
+  .graphCandidate {
     background: Canvas;
     color: CanvasText;
     border-color: CanvasText;
