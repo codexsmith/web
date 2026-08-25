@@ -1,5 +1,21 @@
 import meta from "@/content/paper-mine/meta.json";
 import summaryMeta from "@/content/paper-mine/summary-meta.json";
+import summaryBoundaryNative1 from "@/content/paper-mine/summary-boundary-native-1.json";
+import summaryBoundaryNative2 from "@/content/paper-mine/summary-boundary-native-2.json";
+import summaryBoundaryNative3 from "@/content/paper-mine/summary-boundary-native-3.json";
+import summaryComputerScience1 from "@/content/paper-mine/summary-computer-science-1.json";
+import summaryComputerScience2 from "@/content/paper-mine/summary-computer-science-2.json";
+import summaryComputerScience3 from "@/content/paper-mine/summary-computer-science-3.json";
+import summaryCrossDomain1 from "@/content/paper-mine/summary-cross-domain-1.json";
+import summaryCrossDomain2 from "@/content/paper-mine/summary-cross-domain-2.json";
+import summaryMathematics1 from "@/content/paper-mine/summary-mathematics-1.json";
+import summaryMathematics2 from "@/content/paper-mine/summary-mathematics-2.json";
+import summaryOther1 from "@/content/paper-mine/summary-other-1.json";
+import summaryPhilosophyOfScience1 from "@/content/paper-mine/summary-philosophy-of-science-1.json";
+import summaryPhysics1 from "@/content/paper-mine/summary-physics-1.json";
+import summaryPhysics2 from "@/content/paper-mine/summary-physics-2.json";
+import summarySocialScience1 from "@/content/paper-mine/summary-social-science-1.json";
+import summarySocialScience2 from "@/content/paper-mine/summary-social-science-2.json";
 import controlledComputerScience from "@/content/paper-mine/controlled-computer-science.json";
 import controlledMathematics from "@/content/paper-mine/controlled-mathematics.json";
 import controlledPhysics from "@/content/paper-mine/controlled-physics.json";
@@ -16,6 +32,8 @@ export type PaperMineStage = "A" | "B" | "C" | "discovery";
 export type PaperMineAbstractStatus =
   | "source_reading_priority"
   | "catalog_summary_complete_source_abstract_pending";
+export type PaperMineSummaryKind = "controlled_catalog_summary" | "mined_candidate_summary";
+export type PaperMineSummaryQuality = "structured_source_metadata";
 
 export type PaperMineFrontierItem = {
   rank: number;
@@ -55,8 +73,8 @@ type PaperMinePaperCore = {
 
 export type PaperMinePaper = PaperMinePaperCore & {
   summary: string;
-  summary_kind: "public_projection_catalog_summary";
-  summary_quality: "bounded_public_metadata";
+  summary_kind: PaperMineSummaryKind;
+  summary_quality: PaperMineSummaryQuality;
   summary_basis: string[];
   abstract_status: PaperMineAbstractStatus;
 };
@@ -86,6 +104,14 @@ export type PaperMineSummaryCatalogMeta = {
   method: string;
   public_projection_note: string;
   abstract_equivalence: boolean;
+};
+
+type PaperMineSummaryContentRecord = {
+  paper_id: string;
+  title: string;
+  summary: string;
+  summary_basis: string[];
+  abstract_status: PaperMineAbstractStatus;
 };
 
 export type PaperMineSnapshot = {
@@ -132,20 +158,6 @@ type CompactPaper = Omit<PaperMinePaperCore, "record_class" | "origins" | "sourc
 
 const CONTROLLED_PROVENANCE = "organized_library_curated/01_Daily_Operations/publication_graph/PUBLICATION_GRAPH.json";
 
-function normalizeSentence(text: string) {
-  const normalized = text.trim().replace(/\s+/g, " ");
-  if (!normalized) return normalized;
-  return /[.!?]$/.test(normalized) ? normalized : `${normalized}.`;
-}
-
-function lowerLead(text: string) {
-  const normalized = text.trim();
-  if (normalized.length > 1 && /[A-Z]/.test(normalized[0]) && /[a-z]/.test(normalized[1])) {
-    return normalized[0].toLowerCase() + normalized.slice(1);
-  }
-  return normalized;
-}
-
 function hydrateControlled(paper: CompactPaper): PaperMinePaperCore {
   return {
     ...paper,
@@ -184,87 +196,65 @@ const mined = [
   ...(minedComputational as CompactPaper[]),
 ].map(hydrateMined);
 
-const frontierById = new Map(
-  (meta.frontier as PaperMineFrontierItem[]).map((item) => [item.candidate_id, item]),
-);
+const paperCores = [...controlled, ...mined];
+const labSummaries = [
+  ...(summaryBoundaryNative1 as PaperMineSummaryContentRecord[]),
+  ...(summaryBoundaryNative2 as PaperMineSummaryContentRecord[]),
+  ...(summaryBoundaryNative3 as PaperMineSummaryContentRecord[]),
+  ...(summaryComputerScience1 as PaperMineSummaryContentRecord[]),
+  ...(summaryComputerScience2 as PaperMineSummaryContentRecord[]),
+  ...(summaryComputerScience3 as PaperMineSummaryContentRecord[]),
+  ...(summaryCrossDomain1 as PaperMineSummaryContentRecord[]),
+  ...(summaryCrossDomain2 as PaperMineSummaryContentRecord[]),
+  ...(summaryMathematics1 as PaperMineSummaryContentRecord[]),
+  ...(summaryMathematics2 as PaperMineSummaryContentRecord[]),
+  ...(summaryOther1 as PaperMineSummaryContentRecord[]),
+  ...(summaryPhilosophyOfScience1 as PaperMineSummaryContentRecord[]),
+  ...(summaryPhysics1 as PaperMineSummaryContentRecord[]),
+  ...(summaryPhysics2 as PaperMineSummaryContentRecord[]),
+  ...(summarySocialScience1 as PaperMineSummaryContentRecord[]),
+  ...(summarySocialScience2 as PaperMineSummaryContentRecord[]),
+];
+const summaryById = new Map(labSummaries.map((summary) => [summary.paper_id, summary]));
 
-function abstractStatus(paper: PaperMinePaperCore): PaperMineAbstractStatus {
-  const sourceRich =
-    paper.readiness_hint >= 4 ||
-    /abstract|manuscript/i.test(paper.artifact_state);
-  return sourceRich
-    ? "source_reading_priority"
-    : "catalog_summary_complete_source_abstract_pending";
+if (summaryById.size !== labSummaries.length) {
+  throw new Error(
+    `Paper Mine summary catalog contains duplicate IDs: ${labSummaries.length} records; ${summaryById.size} unique`,
+  );
 }
 
-function buildPublicSummary(paper: PaperMinePaperCore) {
-  const frontier = frontierById.get(paper.id);
-  const parts: string[] = [];
-  const basis = ["title", "domain", "claim_ceiling", "evidence_requirement", "prior_art_requirement"];
+const missingSummaryIds = paperCores.filter((paper) => !summaryById.has(paper.id)).map((paper) => paper.id);
+const paperIds = new Set(paperCores.map((paper) => paper.id));
+const orphanSummaryIds = labSummaries
+  .filter((summary) => !paperIds.has(summary.paper_id))
+  .map((summary) => summary.paper_id);
 
-  if (paper.record_class === "mined_candidate") {
-    if (frontier?.question) {
-      parts.push(`This paper candidate takes as its central research question: “${frontier.question}”`);
-      basis.push("frontier.question");
-    } else {
-      parts.push(
-        normalizeSentence(
-          `This paper candidate develops “${paper.title}” from material already identified in the Lab corpus`,
-        ),
-      );
-    }
-    parts.push(normalizeSentence(`Its current claim ceiling is ${lowerLead(paper.claim_ceiling)}`));
-    parts.push(normalizeSentence(`The next evidence obligation is ${lowerLead(paper.evidence_requirement)}`));
-    parts.push(normalizeSentence(`Prior to promotion, it requires review against ${lowerLead(paper.prior_art_requirement)}`));
-  } else if (paper.stage === "A") {
-    parts.push(
-      normalizeSentence(
-        `This paper develops “${paper.title}” as an interpretive Boundary First reading of ${paper.domain}`,
-      ),
+if (missingSummaryIds.length || orphanSummaryIds.length) {
+  throw new Error(
+    `Paper Mine summary identity mismatch: missing [${missingSummaryIds.join(", ")}]; orphaned [${orphanSummaryIds.join(", ")}]`,
+  );
+}
+
+const papers = paperCores.map((paper): PaperMinePaper => {
+  const labSummary = summaryById.get(paper.id);
+  if (!labSummary) throw new Error(`Missing Paper Mine summary for ${paper.id}`);
+  if (labSummary.title !== paper.title) {
+    throw new Error(
+      `Paper Mine summary title mismatch for ${paper.id}: projection “${paper.title}”; summary “${labSummary.title}”`,
     );
-    parts.push(
-      "The underlying native theorem, algorithm, or construction remains authoritative; the paper asks what distinctions, interfaces, or closure obligations become clearer under the comparative reading.",
-    );
-    parts.push(normalizeSentence(`Its present claim ceiling is ${lowerLead(paper.claim_ceiling)}`));
-    parts.push(normalizeSentence(`The proposed evidence is ${lowerLead(paper.evidence_requirement)}`));
-  } else if (paper.stage === "B") {
-    parts.push(
-      normalizeSentence(
-        `This cross-domain synthesis develops “${paper.title}” across ${paper.domain}`,
-      ),
-    );
-    parts.push(
-      "It tests whether a shared structural vocabulary survives translation without erasing domain-specific proof, model, or interpretation obligations.",
-    );
-    parts.push(normalizeSentence(`Its present claim ceiling is ${lowerLead(paper.claim_ceiling)}`));
-    parts.push(normalizeSentence(`Before promotion, the evidence obligation is ${lowerLead(paper.evidence_requirement)}`));
-  } else {
-    parts.push(
-      normalizeSentence(
-        `This Boundary-native paper develops “${paper.title}” within ${paper.program ?? paper.domain}`,
-      ),
-    );
-    parts.push(
-      "It is presented as a candidate formal contribution rather than as an established theorem or general law.",
-    );
-    parts.push(normalizeSentence(`Its present claim ceiling is ${lowerLead(paper.claim_ceiling)}`));
-    parts.push(normalizeSentence(`The next evidence obligation is ${lowerLead(paper.evidence_requirement)}`));
-    parts.push(normalizeSentence(`Prior to promotion, it requires review against ${lowerLead(paper.prior_art_requirement)}`));
   }
+  if (!labSummary.summary.trim()) throw new Error(`Paper Mine summary is empty for ${paper.id}`);
 
   return {
-    summary: parts.join(" "),
-    summary_kind: "public_projection_catalog_summary" as const,
-    summary_quality: "bounded_public_metadata" as const,
-    summary_basis: basis,
-    abstract_status: abstractStatus(paper),
+    ...paper,
+    summary: labSummary.summary,
+    summary_kind:
+      paper.record_class === "controlled_publication" ? "controlled_catalog_summary" : "mined_candidate_summary",
+    summary_quality: "structured_source_metadata",
+    summary_basis: labSummary.summary_basis,
+    abstract_status: labSummary.abstract_status,
   };
-}
-
-const papers = [...controlled, ...mined].map((paper): PaperMinePaper => ({
-  ...paper,
-  ...buildPublicSummary(paper),
-}));
+});
 
 export const paperMineSnapshot: PaperMineSnapshot = {
   ...(meta as Omit<PaperMineSnapshot, "papers" | "summary_catalog">),
@@ -290,7 +280,7 @@ const sourceReadingPriorityCount = paperMineSnapshot.papers.filter(
 
 if (sourceReadingPriorityCount !== paperMineSnapshot.summary_catalog.source_reading_priority_count) {
   throw new Error(
-    `Paper Mine source-reading priority mismatch: ${sourceReadingPriorityCount} derived; ${paperMineSnapshot.summary_catalog.source_reading_priority_count} declared`,
+    `Paper Mine source-reading priority mismatch: ${sourceReadingPriorityCount} imported; ${paperMineSnapshot.summary_catalog.source_reading_priority_count} declared`,
   );
 }
 

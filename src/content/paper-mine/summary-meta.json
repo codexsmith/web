@@ -6,6 +6,6 @@
   "paper_count": 152,
   "source_reading_priority_count": 37,
   "method": "structured metadata synthesis",
-  "public_projection_note": "The private Lab generates a richer 152-record catalog summary artifact from control-plane metadata. The public site derives bounded summaries only from fields already present in the public Paper Mine projection, preserving the Lab as authority.",
+  "public_projection_note": "The public site consumes a bounded projection of the Lab-generated 152-record summary catalog: canonical ID, title, summary text, summary basis, and abstract status only. Private Lab source records and source paths remain outside the web projection, and catalog summaries are not represented as manuscript abstracts.",
   "abstract_equivalence": false
 }
