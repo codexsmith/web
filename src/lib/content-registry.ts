@@ -47,7 +47,7 @@ export type { LocalSectionDefinition } from "@/lib/local-section-registry";
 export type { PublicationMetadata, PublicationStage } from "@/lib/publication-types";
 export type { RelationDirection } from "@/lib/relation-semantics";
 
-<<<<<<< HEAD
+
 const paperMineNavigation: Partial<Record<"research" | "publications", NonNullable<ContentNode["links"]>[number]>> = {
   research: {
     label: "Paper Mine",
