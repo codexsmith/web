@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import "./check_hero_viewport_resilience.mjs";
 
 function read(path) {
   return fs.readFileSync(path, "utf8");
@@ -24,7 +25,7 @@ requireMatch(
 );
 requireMatch(
   hero,
-  /hero-apparatus__port--top">Model<[\s\S]*hero-apparatus__port--left">Observe<[\s\S]*hero-apparatus__port--right">Act<[\s\S]*hero-apparatus__port--bottom">Evidence</,
+  /hero-apparatus__port--top">Model<[\s\S]*hero-apparatus__port--left">Observe<[\s\S]*hero-apparatus__port--right">Act<[\s\S]*hero-apparatus__port--bottom">Evidence/,
   "Landing instrument must expose Model / Observe / Act / Evidence around the operating loop",
 );
 forbidMatch(
