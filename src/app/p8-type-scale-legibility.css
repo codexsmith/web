@@ -1,0 +1,227 @@
+/* P8 type-scale legibility.
+   Dense industrial hierarchy should read as hierarchy, not as miniature text.
+   The smallest semantic tier is kept readable; when narrow layouts cannot support
+   subordinate copy, that copy is removed rather than reduced below the legibility floor. */
+
+body[data-ui-shell="cards"] {
+  --bf-type-micro: 0.64rem;
+  --bf-type-caption: 0.72rem;
+  --bf-type-control: 0.8rem;
+  --bf-type-body-small: 0.84rem;
+  --bf-type-body: 0.94rem;
+}
+
+/* Global frame --------------------------------------------------------- */
+
+body[data-ui-shell="cards"] .brand-anchor__mode,
+body[data-ui-shell="cards"] .primary-nav__index,
+body[data-ui-shell="cards"] .projection-switcher--legible .projection-switcher__label,
+body[data-ui-shell="cards"] .frame-trace-path__node--current small,
+body[data-ui-shell="cards"] .traversal-nav__header strong,
+body[data-ui-shell="cards"] .apparatus-nav__header strong,
+body[data-ui-shell="cards"] .traversal-nav__section-label {
+  font-size: var(--bf-type-micro) !important;
+}
+
+body[data-ui-shell="cards"] .primary-nav__label,
+body[data-ui-shell="cards"] .traversal-nav__peer-list button > span,
+body[data-ui-shell="cards"] .local-nav__links .peer-node__label {
+  font-size: var(--bf-type-control) !important;
+}
+
+body[data-ui-shell="cards"] .frame-trace-path__separator {
+  font-size: var(--bf-type-micro) !important;
+}
+
+body[data-ui-shell="cards"] .frame-trace-path__node {
+  font-size: 0.76rem !important;
+}
+
+body[data-ui-shell="cards"] .projection-switcher__mode-name {
+  font-size: var(--bf-type-caption) !important;
+}
+
+body[data-ui-shell="cards"] .projection-switcher__mode-purpose {
+  font-size: var(--bf-type-micro) !important;
+  line-height: 1.15;
+}
+
+body[data-ui-shell="cards"] .frame-process-zoom__label > span {
+  font-size: var(--bf-type-micro) !important;
+}
+
+body[data-ui-shell="cards"] .frame-process-zoom__label > strong {
+  font-size: var(--bf-type-caption) !important;
+}
+
+/* World orientation and cards ---------------------------------------- */
+
+body[data-ui-shell="cards"] .eyebrow,
+body[data-ui-shell="cards"] .world-heading .eyebrow {
+  font-size: var(--bf-type-caption) !important;
+  line-height: 1.3;
+}
+
+body[data-ui-shell="cards"] .world-heading > p:not(.eyebrow) {
+  font-size: clamp(var(--bf-type-body-small), 0.86vw, 1rem) !important;
+}
+
+body[data-ui-shell="cards"] :is(
+  .subject-pane__label,
+  .subject-pane__group-label,
+  .subject-pane__standing > span,
+  .public-interest-panel__kind,
+  .work-status-chip,
+  .publication-status-chip
+) {
+  font-size: var(--bf-type-micro) !important;
+}
+
+body[data-ui-shell="cards"] .subject-pane__body > p:first-child {
+  font-size: clamp(0.94rem, 0.98vw, 1.06rem) !important;
+}
+
+body[data-ui-shell="cards"] .subject-pane__body p,
+body[data-ui-shell="cards"] .subject-pane__disclosure-body p {
+  font-size: var(--bf-type-body-small) !important;
+}
+
+body[data-ui-shell="cards"] .subject-pane__standing p {
+  font-size: 0.78rem !important;
+}
+
+body[data-ui-shell="cards"] .subject-pane__disclosure summary {
+  font-size: var(--bf-type-caption) !important;
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-copy > span {
+  font-size: var(--bf-type-caption) !important;
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-copy > strong {
+  font-size: 0.82rem !important;
+}
+
+body[data-ui-shell="cards"] .subject-pane__action-copy > small {
+  font-size: 0.68rem !important;
+}
+
+/* Relation verbs carry primary semantic meaning and should not recede below the target. */
+body[data-ui-shell="cards"] .subject-pane__action[data-action-kind="relation"] .subject-pane__action-copy > span {
+  font-size: 0.84rem !important;
+}
+
+body[data-ui-shell="cards"] .district-card__number {
+  font-size: var(--bf-type-caption) !important;
+}
+
+body[data-ui-shell="cards"] .district-card__kind {
+  font-size: 0.68rem !important;
+}
+
+body[data-ui-shell="cards"] .district-card__action {
+  font-size: var(--bf-type-caption) !important;
+}
+
+body[data-ui-shell="cards"] .branch-world:not(.branch-world--root-world) .district-card > p,
+body[data-ui-shell="cards"] .branch-world[data-gestalt-id="root"] .district-card > p,
+body[data-ui-shell="cards"] .public-interest-panel > p,
+body[data-ui-shell="cards"] .public-interest-feature__body p {
+  font-size: clamp(0.8rem, 0.78vw, 0.92rem) !important;
+}
+
+body[data-ui-shell="cards"] .public-interest-panel__action,
+body[data-ui-shell="cards"] .public-interest-feature__footer > span {
+  font-size: var(--bf-type-micro) !important;
+}
+
+body[data-ui-shell="cards"] .public-interest-feature__footer button {
+  font-size: var(--bf-type-caption) !important;
+}
+
+/* Semantic content artifacts ----------------------------------------- */
+
+body[data-ui-shell="cards"] .bfux-artifact__caption > span,
+body[data-ui-shell="cards"] .bfux-artifact__index,
+body[data-ui-shell="cards"] .bfux-artifact__return,
+body[data-ui-shell="cards"] .bfux-artifact__ladder-marker {
+  font-size: var(--bf-type-micro) !important;
+}
+
+body[data-ui-shell="cards"] .bfux-artifact__caption > p {
+  font-size: 0.76rem !important;
+}
+
+body[data-ui-shell="cards"] :is(
+  .bfux-artifact__sequence,
+  .bfux-artifact__set,
+  .bfux-artifact__fan-items,
+  .bfux-artifact__hub,
+  .bfux-artifact__ladder
+) strong {
+  font-size: var(--bf-type-control) !important;
+}
+
+body[data-ui-shell="cards"] :is(
+  .bfux-artifact__sequence,
+  .bfux-artifact__set,
+  .bfux-artifact__fan-items,
+  .bfux-artifact__hub,
+  .bfux-artifact__ladder
+) small {
+  font-size: 0.68rem !important;
+}
+
+/* Detail / inspection reading surfaces ------------------------------- */
+
+body[data-ui-shell="cards"] :is(
+  .record-detail__kicker,
+  .record-detail__micro-label,
+  .record-detail__section-heading > span,
+  .record-detail__status,
+  .record-detail__fit-grid article > span,
+  .record-detail__handoff-grid article > span,
+  .record-detail__comparison-grid article > span,
+  .record-detail__two-column-notes article > span,
+  .record-detail__boundary-grid > div > span,
+  .record-detail__return,
+  .record-detail__boundary-line,
+  .record-detail__trace li > span,
+  .record-detail__method-index span,
+  .record-detail__sequence span,
+  .record-detail__validation-ladder span
+) {
+  font-size: var(--bf-type-micro) !important;
+}
+
+body[data-ui-shell="cards"] .record-detail__lede {
+  font-size: clamp(var(--bf-type-body-small), 0.88vw, 0.98rem) !important;
+}
+
+body[data-ui-shell="cards"] .record-detail__trace small {
+  font-size: var(--bf-type-caption) !important;
+}
+
+/* Compact layouts ----------------------------------------------------- */
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .frame-trace-path__node,
+  body[data-ui-shell="cards"] .traversal-nav__peer-list button > span {
+    font-size: 0.74rem !important;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .frame-trace-path__node {
+    font-size: 0.7rem !important;
+  }
+
+  body[data-ui-shell="cards"] .projection-switcher__mode-name {
+    font-size: 0.68rem !important;
+  }
+
+  /* Do not solve narrow controls by rendering 5-6 px explanatory copy. */
+  body[data-ui-shell="cards"] .projection-switcher__mode-purpose {
+    display: none !important;
+  }
+}
