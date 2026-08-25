@@ -13,14 +13,7 @@ import { TransitionDirection, WorldView } from "@/components/world-view";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { getNode, getNodeByPath, getParent, getPathForNode, getSiblings } from "@/lib/content-registry";
 import { parseProcessScope, processScopes, type ProcessScope } from "@/lib/bfl-process";
-import {
-  bootstrapTraversal,
-  branchTraversal,
-  normalizeTraversalCursor,
-  resolveAdjacentTraversalCursor,
-  sameTraversalState,
-  type TraversalState,
-} from "@/lib/traversal-state";
+import { bootstrapTraversal, sameTraversalState, type TraversalState } from "@/lib/traversal-state";
 import {
   defaultProjectionForNode,
   normalizeProjectionForNode,
@@ -96,6 +89,34 @@ function stateUrl(
 
   const query = params.toString();
   return query ? `${focusPath}?${query}` : focusPath;
+}
+
+function normalizeTraversalCursor(path: string[], cursor: number | undefined) {
+  if (!path.length) return -1;
+  if (typeof cursor !== "number" || Number.isNaN(cursor)) return path.length - 1;
+  return Math.min(Math.max(0, cursor), path.length - 1);
+}
+
+function branchTraversal(path: string[], cursor: number, targetId: string): TraversalState {
+  const normalizedCursor = normalizeTraversalCursor(path, cursor);
+  const activePath = normalizedCursor >= 0 ? path.slice(0, normalizedCursor + 1) : [];
+
+  if (activePath[activePath.length - 1] === targetId) {
+    return { ids: activePath, cursor: activePath.length - 1 };
+  }
+
+  const ids = [...activePath, targetId];
+  return { ids, cursor: ids.length - 1 };
+}
+
+function resolveExistingTraversalCursor(path: string[], cursor: number, targetId: string) {
+  const normalizedCursor = normalizeTraversalCursor(path, cursor);
+  if (normalizedCursor < 0) return -1;
+  if (path[normalizedCursor] === targetId) return normalizedCursor;
+  if (normalizedCursor > 0 && path[normalizedCursor - 1] === targetId) return normalizedCursor - 1;
+  if (normalizedCursor < path.length - 1 && path[normalizedCursor + 1] === targetId) return normalizedCursor + 1;
+  // Do not fall back to path.lastIndexOf(targetId): revisiting a root or prior node is a new traversal step.
+  return -1;
 }
 
 function readTraversalMemory(): TraversalState {
@@ -267,9 +288,9 @@ export function WorldApp({
       let nextTraversal: TraversalState;
 
       if (remembered.ids.length) {
-        const adjacentCursor = resolveAdjacentTraversalCursor(remembered.ids, remembered.cursor, next.node.id);
-        nextTraversal = adjacentCursor >= 0
-          ? { ids: remembered.ids, cursor: adjacentCursor }
+        const existingCursor = resolveExistingTraversalCursor(remembered.ids, remembered.cursor, next.node.id);
+        nextTraversal = existingCursor >= 0
+          ? { ids: remembered.ids, cursor: existingCursor }
           : branchTraversal(remembered.ids, remembered.cursor, next.node.id);
       } else {
         nextTraversal = bootstrapTraversal(next.node.id);
