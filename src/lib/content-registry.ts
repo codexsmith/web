@@ -5,6 +5,10 @@ import {
   type GraphEdge,
 } from "@/lib/content";
 import { getLocalSections, type LocalSectionDefinition } from "@/lib/local-section-registry";
+import {
+  persistencePublicationEdges,
+  persistencePublicationNodes,
+} from "@/lib/persistence-effectiveness-publication";
 import { publicationEdges, publicationNodes } from "@/lib/publication-portfolio";
 import type { PublicationMetadata } from "@/lib/publication-types";
 import {
@@ -43,6 +47,7 @@ export type { LocalSectionDefinition } from "@/lib/local-section-registry";
 export type { PublicationMetadata, PublicationStage } from "@/lib/publication-types";
 export type { RelationDirection } from "@/lib/relation-semantics";
 
+<<<<<<< HEAD
 const paperMineNavigation: Partial<Record<"research" | "publications", NonNullable<ContentNode["links"]>[number]>> = {
   research: {
     label: "Paper Mine",
@@ -107,14 +112,16 @@ function withFounderTimelineNavigation(node: ContentNode): ContentNode {
   };
 }
 
-const rawNodes: ContentNode[] = [...baseNodes, ...publicationNodes];
+const rawNodes: ContentNode[] = [...baseNodes, ...publicationNodes, ...persistencePublicationNodes];
 
 export const nodes: ContentNode[] = rawNodes.map((node) => {
   const localSections = getLocalSections(node.id);
   const enrichedNode = withFounderTimelineNavigation(withPaperMineNavigation(node));
   return localSections.length ? { ...enrichedNode, localSections } : enrichedNode;
 });
+
 export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
+edges.push(...persistencePublicationEdges);
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const nodeByPath = new Map(nodes.map((node) => [node.path, node]));
