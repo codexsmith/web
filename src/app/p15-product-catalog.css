@@ -1,0 +1,218 @@
+/* P15 - Products as a cross-cutting output catalog.
+   Canonical hierarchy remains elsewhere; this surface groups produced artifacts by kind.
+   Delivery maturity is metadata, not the primary navigation axis. */
+
+.products-world {
+  display: grid;
+  gap: clamp(1.15rem, 2.4vw, 2rem);
+  min-width: 0;
+}
+
+.products-world__intro {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.85fr) minmax(18rem, 1.6fr) auto;
+  gap: 1rem;
+  align-items: end;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid var(--bf-border-default);
+  background: var(--bf-bg-surface);
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+.products-world__intro h2,
+.product-catalog-group__header h2,
+.products-world__lifecycle-header h2 {
+  margin: 0.15rem 0 0;
+}
+
+.products-world__intro > p,
+.product-catalog-group__header p,
+.products-world__lifecycle-header p {
+  margin: 0;
+  color: var(--bf-text-secondary);
+  line-height: 1.55;
+}
+
+.products-world__intro > span,
+.product-catalog-group__header > span,
+.products-world__lifecycle-header > span {
+  align-self: start;
+  white-space: nowrap;
+  color: var(--bf-text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.product-catalog {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.4rem);
+  min-width: 0;
+}
+
+.product-catalog-group {
+  display: grid;
+  gap: 0.95rem;
+  min-width: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bf-border-subtle);
+}
+
+.product-catalog-group__header,
+.products-world__lifecycle-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.product-catalog-group__header > div,
+.products-world__lifecycle-header > div {
+  display: grid;
+  gap: 0.3rem;
+  max-width: 62rem;
+}
+
+.product-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+  gap: 0.75rem;
+}
+
+.product-catalog-card {
+  appearance: none;
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto auto;
+  gap: 0.65rem;
+  min-width: 0;
+  min-height: 15rem;
+  padding: 1rem;
+  border: 1px solid var(--bf-border-default);
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 35%),
+    var(--bf-bg-surface);
+  color: var(--bf-text-primary);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+  cursor: pointer;
+}
+
+.product-catalog-card:hover,
+.product-catalog-card:focus-visible {
+  border-color: var(--bf-action-line);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bf-action) 5%, transparent), transparent 38%),
+    var(--bf-bg-raised);
+  outline: none;
+}
+
+.product-catalog-card:focus-visible {
+  box-shadow:
+    inset 0 1px 0 var(--bf-edge-highlight),
+    0 0 0 2px color-mix(in srgb, var(--bf-action) 30%, transparent);
+}
+
+.product-catalog-card__kind {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-width: 0;
+  color: var(--bf-text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.product-catalog-card__kind span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-catalog-card__glyph {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  color: var(--bf-action);
+}
+
+.product-catalog-card > .work-status-chip {
+  justify-self: start;
+}
+
+.product-catalog-card > strong {
+  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  line-height: 1.2;
+}
+
+.product-catalog-card > p {
+  margin: 0;
+  color: var(--bf-text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.product-catalog-card__home {
+  color: var(--bf-text-muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+}
+
+.product-catalog-card__action {
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--bf-border-subtle);
+  color: var(--bf-action-hover);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.products-world__lifecycle {
+  display: grid;
+  gap: 0.9rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bf-border-default);
+}
+
+.products-world__lifecycle .section-region-grid {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .products-world__intro {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+
+  .products-world__intro > p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .products-world__intro,
+  .product-catalog-group__header,
+  .products-world__lifecycle-header {
+    grid-template-columns: 1fr;
+  }
+
+  .products-world__intro > span,
+  .product-catalog-group__header > span,
+  .products-world__lifecycle-header > span {
+    justify-self: start;
+  }
+
+  .product-catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-catalog-card {
+    min-height: 0;
+  }
+}

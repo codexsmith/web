@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "contracts:check": "node scripts/check_v2_contracts.mjs && node scripts/check_navigation_frame_contracts.mjs && node scripts/check_bounded_special_surfaces.mjs",
+    "contracts:check": "node scripts/check_v2_contracts.mjs && node scripts/check_navigation_frame_contracts.mjs && node scripts/check_bounded_special_surfaces.mjs && node scripts/check_product_catalog_contracts.mjs",
     "runtime:check": "node scripts/check_v2_runtime.mjs",
     "verify": "npm run lint && npm run typecheck && npm run contracts:check && npm run build && npm run runtime:check"
   },

@@ -71,6 +71,7 @@ import "./p11-hero-viewport-resilience.css";
 import "./p12-content-density-refinement.css";
 import "./p13-root-busy-board.css";
 import "./p14-root-instrumentation.css";
+import "./p15-product-catalog.css";
 
 export const metadata: Metadata = {
   title: {

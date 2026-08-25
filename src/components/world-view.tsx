@@ -4,11 +4,18 @@ import type { ReactNode } from "react";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import {
   ContentNode,
+  getAncestors,
   getChildren,
   getCrossEdges,
+  getNode,
   getParent,
 } from "@/lib/content-registry";
 import { hydrateContentNode } from "@/lib/content-projections";
+import {
+  productCatalogGroups,
+  type ProductCatalogEntry,
+  type ProductCatalogGroup,
+} from "@/lib/product-catalog";
 import { getWorldOrientation } from "@/lib/world-orientation";
 import { ActionCard, getSubjectActions, SubjectPane } from "@/components/subject-pane";
 
@@ -46,7 +53,14 @@ export function WorldView({
       key={`world-${node.id}-${transitionKey}`}
       className={`world-viewport world-transition world-transition--${transitionDirection}`}
     >
-      {renderedNode.id === "public-interest" ? (
+      {renderedNode.id === "products" ? (
+        <ProductsWorld
+          node={renderedNode}
+          regions={regions}
+          onNavigate={onNavigate}
+          onInspect={onInspect}
+        />
+      ) : renderedNode.id === "public-interest" ? (
         <PublicInterestWorld
           node={renderedNode}
           regions={regions}
@@ -79,9 +93,11 @@ function WorldHero({
   eyebrow,
   glance,
 }: WorldHeroProps) {
-  const displaySummary = node.id === "publications"
-    ? node.summary.replace("A first-class portfolio", "A portfolio")
-    : node.summary;
+  const displaySummary = node.id === "products"
+    ? "A cross-cutting catalog of software, systems, methods, standards, services, research instruments, and public artifacts produced by Boundary First Labs."
+    : node.id === "publications"
+      ? node.summary.replace("A first-class portfolio", "A portfolio")
+      : node.summary;
 
   return (
     <header className={["world-hero", className].filter(Boolean).join(" ")}>
@@ -182,6 +198,173 @@ function RegionGrid({ node, regions, onNavigate, variant = "district" }: RegionG
         );
       })}
     </div>
+  );
+}
+
+type ProductsWorldProps = {
+  node: ContentNode;
+  regions: ContentNode[];
+  onNavigate: (id: string, direction?: TransitionDirection) => void;
+  onInspect: (inspectionId: string) => void;
+};
+
+function catalogGroupGlyph(groupId: ProductCatalogGroup["id"]): BfuxIconName {
+  switch (groupId) {
+    case "software-systems": return "object";
+    case "methods-standards-services": return "gate";
+    case "research-testbeds": return "witness";
+    case "public-artifacts": return "responsibility";
+  }
+}
+
+function canonicalHomeForNode(node: ContentNode) {
+  const ancestors = getAncestors(node.id).filter((ancestor) => ancestor.id !== "root");
+  return ancestors.length > 0 ? ancestors.map((ancestor) => ancestor.label).join(" / ") : "Boundary First Labs";
+}
+
+type ProductCatalogCardProps = {
+  entry: ProductCatalogEntry;
+  groupId: ProductCatalogGroup["id"];
+  onNavigate: (id: string, direction?: TransitionDirection) => void;
+};
+
+function ProductCatalogCard({ entry, groupId, onNavigate }: ProductCatalogCardProps) {
+  const sourceNode = entry.kind === "node" ? hydrateContentNode(getNode(entry.nodeId)) : undefined;
+  const label = sourceNode?.label ?? (entry.kind === "route" ? entry.label : entry.nodeId);
+  const eyebrow = sourceNode?.eyebrow ?? (entry.kind === "route" ? entry.eyebrow : "Catalog entry");
+  const summary = sourceNode?.summary ?? (entry.kind === "route" ? entry.summary : "");
+  const status = sourceNode?.status ?? (entry.kind === "route" ? entry.status : undefined);
+  const canonicalHome = sourceNode
+    ? canonicalHomeForNode(sourceNode)
+    : entry.kind === "route"
+      ? entry.canonicalHome
+      : "Boundary First Labs";
+
+  const contents = (
+    <>
+      <span className="product-catalog-card__kind">
+        <BfuxIcon name={catalogGroupGlyph(groupId)} className="product-catalog-card__glyph" />
+        <span>{eyebrow}</span>
+      </span>
+      {status ? (
+        <span className="work-status-chip" data-stage={status.stage}>{status.label}</span>
+      ) : null}
+      <strong>{label}</strong>
+      <p>{summary}</p>
+      <small className="product-catalog-card__home">Canonical home: {canonicalHome}</small>
+      <span className="product-catalog-card__action">Open</span>
+    </>
+  );
+
+  if (entry.kind === "route") {
+    return (
+      <a
+        className="product-catalog-card"
+        data-catalog-entry={entry.id}
+        href={entry.href}
+        title={`Open ${entry.label}`}
+      >
+        {contents}
+      </a>
+    );
+  }
+
+  return (
+    <button
+      className="product-catalog-card"
+      data-catalog-entry={entry.nodeId}
+      onClick={() => onNavigate(entry.nodeId, "cross")}
+      title={`View ${label} in its canonical location`}
+    >
+      {contents}
+    </button>
+  );
+}
+
+function ProductsWorld({ node, regions, onNavigate, onInspect }: ProductsWorldProps) {
+  const catalogCount = productCatalogGroups.reduce((count, group) => count + group.entries.length, 0);
+
+  return (
+    <section
+      className="products-world branch-world branch-world--branch"
+      data-kind={node.kind}
+      data-world-id={node.id}
+      data-gestalt-id={node.id}
+    >
+      <WorldHero
+        node={node}
+        eyebrow={<p className="eyebrow">{node.eyebrow}</p>}
+        glance={
+          <SubjectPane
+            node={{
+              ...node,
+              body: [
+                "Canonical home stays where the work belongs; this page cross-lists public outputs so they can be found by what the Lab has produced.",
+              ],
+            }}
+            variant="glance"
+          />
+        }
+      />
+
+      <section className="products-world__intro" aria-label="Products catalog model">
+        <div>
+          <p className="eyebrow">Cross-cutting catalog</p>
+          <h2>What the Lab has produced</h2>
+        </div>
+        <p>
+          Products is a projection across the site, not a second canonical hierarchy. Each card keeps its
+          original home and claim boundary; maturity stays visible as status rather than deciding where the
+          work is allowed to appear.
+        </p>
+        <span>{catalogCount} cataloged outputs</span>
+      </section>
+
+      <div className="product-catalog" aria-label="Boundary First Labs output catalog">
+        {productCatalogGroups.map((group) => (
+          <section className="product-catalog-group" key={group.id} data-catalog-group={group.id}>
+            <header className="product-catalog-group__header">
+              <div>
+                <p className="eyebrow">Output family</p>
+                <h2>{group.label}</h2>
+                <p>{group.summary}</p>
+              </div>
+              <span>{group.entries.length} outputs</span>
+            </header>
+
+            <div className="product-catalog-grid">
+              {group.entries.map((entry) => (
+                <ProductCatalogCard
+                  key={entry.kind === "node" ? entry.nodeId : entry.id}
+                  entry={entry}
+                  groupId={group.id}
+                  onNavigate={onNavigate}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <section className="products-world__lifecycle" aria-label="Product lifecycle views">
+        <header className="products-world__lifecycle-header">
+          <div>
+            <p className="eyebrow">Secondary projection</p>
+            <h2>Lifecycle views</h2>
+            <p>Browse the same portfolio by current work, shipped work, pipeline, or bounded experiments.</p>
+          </div>
+          <span>{regions.length} views</span>
+        </header>
+        <RegionGrid node={node} regions={regions} onNavigate={onNavigate} />
+      </section>
+
+      <SupportingContext
+        node={{ ...node, body: [] }}
+        regions={regions}
+        onNavigate={onNavigate}
+        onInspect={onInspect}
+      />
+    </section>
   );
 }
 
