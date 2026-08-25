@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BfuxIcon, projectionGlyph } from "@/components/bfux-icons";
-import { getAncestors, type ContentNode } from "@/lib/content-registry";
+import { type ContentNode } from "@/lib/content-registry";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
 import {
   projectionDescriptions,
@@ -97,8 +97,8 @@ function findSharedScrollContainer(sections: HTMLElement[]) {
 export function BoundaryFrame({
   visible,
   focusNode,
-  parentNode,
   traversalPath,
+  traversalCursor,
   siblings,
   projection = "world",
   processScope,
@@ -107,10 +107,10 @@ export function BoundaryFrame({
   canProcessZoomOut,
   canProcessZoomIn,
   onHome,
-  onUp,
   onBack,
   onForward,
   onLocalNavigate,
+  onTraversalPath,
   onProcessZoomOut,
   onProcessZoomIn,
   onProjectionChange,
@@ -120,15 +120,31 @@ export function BoundaryFrame({
   const availableProjectionModes = projectionModesForNode(focusNode.id);
   const siblingNodes = siblings.filter((node) => node.id !== focusNode.id);
   const hasTrace = traversalPath.length > 1;
-  const structuralPath = [...getAncestors(focusNode.id), focusNode]
-    .filter((node) => node.id !== "root");
+  const activeTrace = traversalPath
+    .map((node, index) => ({ node, index }))
+    .filter(({ index }) => index <= traversalCursor);
+  const displayTrace = activeTrace.filter(({ node, index }) => (
+    node.id !== "root" || index !== 0 || index === traversalCursor
+  ));
   const showLeftNav = !isRootFocus && siblingNodes.length > 0;
+  const traceViewportRef = useRef<HTMLOListElement>(null);
   const localSections = useMemo(
     () => projection === "world" ? focusNode.localSections ?? [] : [],
     [focusNode, projection],
   );
   const showLocalSectionNav = localSections.length > 1;
   const [activeLocalSection, setActiveLocalSection] = useState<string>("");
+
+  useEffect(() => {
+    const viewport = traceViewportRef.current;
+    if (!viewport) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      viewport.scrollLeft = viewport.scrollWidth;
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [focusNode.id, traversalCursor, traversalPath.length]);
 
   useEffect(() => {
     if (!showLocalSectionNav) return;
@@ -226,42 +242,41 @@ export function BoundaryFrame({
           ) : null}
         </div>
 
-        {!isRootFocus && structuralPath.length ? (
-          <nav className="frame-location-path" aria-label={`Structural location for ${focusNode.label}`}>
-            <ol>
-              {structuralPath.map((node, index) => {
-                const isCurrent = node.id === focusNode.id;
-                const isImmediateParent = parentNode?.id === node.id;
+        <nav className="frame-trace-path" aria-label="Focus traversal history">
+          <ol ref={traceViewportRef}>
+            {displayTrace.map(({ node, index }, displayIndex) => {
+              const isCurrent = index === traversalCursor;
+              const isRootStep = node.id === "root";
 
-                return (
-                  <li key={node.id}>
-                    {index > 0 ? <span className="frame-location-path__separator" aria-hidden="true">&gt;</span> : null}
-                    {isCurrent ? (
-                      <span className="frame-location-path__node frame-location-path__node--current" aria-current="page">
-                        <small>Current</small>
-                        <strong>{node.shortLabel ?? node.label}</strong>
-                      </span>
-                    ) : isImmediateParent ? (
-                      <button
-                        className="frame-location-path__node frame-location-path__node--parent"
-                        onClick={onUp}
-                        title={`Traverse up to ${node.label}`}
-                      >
-                        {node.shortLabel ?? node.label}
-                      </button>
-                    ) : (
-                      <span className="frame-location-path__node frame-location-path__node--ancestor" title={node.label}>
-                        {node.shortLabel ?? node.label}
-                      </span>
-                    )}
-                  </li>
-                );
-              })}
-            </ol>
-          </nav>
-        ) : (
-          <div className="frame-location-path frame-location-path--root" aria-hidden="true" />
-        )}
+              return (
+                <li key={`${node.id}-${index}`}>
+                  {displayIndex > 0 ? <span className="frame-trace-path__separator" aria-hidden="true">&gt;</span> : null}
+                  {isCurrent ? (
+                    <span className="frame-trace-path__node frame-trace-path__node--current" aria-current="page">
+                      <small className="path-node__role">Focus · You are here</small>
+                      <strong>{node.shortLabel ?? node.label}</strong>
+                    </span>
+                  ) : isRootStep ? (
+                    <span className="frame-trace-path__root-step" title="Lab root traversal step" aria-label="Lab root traversal step">
+                      <BfuxIcon name="root" />
+                    </span>
+                  ) : (
+                    <button
+                      className="frame-trace-path__node frame-trace-path__node--history"
+                      onClick={() => {
+                        if (onTraversalPath) onTraversalPath(node.id, index);
+                        else onBack();
+                      }}
+                      title={`Replay ${node.label}`}
+                    >
+                      {node.shortLabel ?? node.label}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
 
         <div className="frame-tools" aria-label="Global controls">
           <button className="frame-tool frame-tool--inspect" onClick={onSearch} aria-label="Search" title="Inspect and search the lab">
@@ -375,9 +390,6 @@ export function BoundaryFrame({
         </aside>
       ) : null}
 
-      {/* Legacy contract search markers retained while the v2 checker is migrated:
-          aria-label="Focus traversal history" · onTraversalPath(node.id, index) · path-node__role Focus.
-          Temporal traversal now lives only in the top-frame Back/Forward controls. */}
       {/* Legacy contract vocabulary retained during migration: boundary-frame__bottom frame-tool--footer-back projection-switcher. */}
     </div>
   );
