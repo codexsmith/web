@@ -79,12 +79,16 @@ function WorldHero({
   eyebrow,
   glance,
 }: WorldHeroProps) {
+  const displaySummary = node.id === "publications"
+    ? node.summary.replace("A first-class portfolio", "A portfolio")
+    : node.summary;
+
   return (
     <header className={["world-hero", className].filter(Boolean).join(" ")}>
       <div className={["world-hero__title-area", titleAreaClassName].filter(Boolean).join(" ")}>
         {eyebrow}
         <h1 className={hideTitle ? "sr-only" : undefined}>{node.label}</h1>
-        <p>{node.summary}</p>
+        <p>{displaySummary}</p>
       </div>
 
       {glance}
@@ -205,15 +209,8 @@ function PublicInterestWorld({ node, regions, onNavigate, onInspect }: PublicInt
       >
         <WorldHero
           node={node}
-          className="public-interest-hero__intro"
-          titleAreaClassName="public-interest-hero__title-area"
-          glance={(
-            <SubjectPane
-              node={node}
-              variant="glance"
-              glanceHeading="Public purpose is part of the engineering boundary."
-            />
-          )}
+          eyebrow={<p className="eyebrow">{node.eyebrow}</p>}
+          glance={<SubjectPane node={node} variant="glance" />}
         />
 
         <RegionGrid node={node} regions={heroRegions} onNavigate={onNavigate} variant="orientation" />
