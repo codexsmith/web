@@ -1,0 +1,353 @@
+/* P14 root-world instrumentation refinement.
+   Root doors are not marketing tiles: they are tactile boundary instruments.
+   The five doors share one physical law while their internal diagrams are guided by
+   a simple question axis: Public Interest / WHO, Products / WHAT, About / WHY,
+   Publications / WHERE, Research / HOW. */
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card {
+  --root-busy-right: clamp(12px, 1vw, 18px);
+  --root-busy-bottom: 6px;
+  --root-axis-label: "FIELD";
+  --root-instrument-motif: linear-gradient(transparent, transparent);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="public-interest"] {
+  --root-axis-label: "WHO";
+  --root-instrument-motif:
+    radial-gradient(circle at 54% 50%,
+      transparent 0 18%,
+      color-mix(in srgb, var(--bf-region-public-interest) 30%, transparent) 18.5% 19.5%,
+      transparent 20% 31%,
+      color-mix(in srgb, var(--bf-region-public-interest) 18%, transparent) 31.5% 32.5%,
+      transparent 33%),
+    linear-gradient(90deg,
+      transparent 0 19%,
+      color-mix(in srgb, var(--bf-region-public-interest) 18%, transparent) 19% 19.7%,
+      transparent 20% 79%,
+      color-mix(in srgb, var(--bf-region-public-interest) 13%, transparent) 79% 79.7%,
+      transparent 80%),
+    linear-gradient(180deg,
+      transparent 0 20%,
+      color-mix(in srgb, var(--bf-region-public-interest) 15%, transparent) 20% 20.7%,
+      transparent 21% 80%,
+      color-mix(in srgb, var(--bf-region-public-interest) 12%, transparent) 80% 80.7%,
+      transparent 81%);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="products"] {
+  --root-axis-label: "WHAT";
+  --root-instrument-motif:
+    radial-gradient(circle at 22% 25%, var(--bf-region-products) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 78% 25%, var(--bf-region-products) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 22% 75%, var(--bf-region-products) 0 2px, transparent 2.5px),
+    radial-gradient(circle at 78% 75%, var(--bf-region-products) 0 2px, transparent 2.5px),
+    linear-gradient(90deg,
+      transparent 0 21%,
+      color-mix(in srgb, var(--bf-region-products) 22%, transparent) 21% 21.8%,
+      transparent 22% 49%,
+      color-mix(in srgb, var(--bf-region-products) 13%, transparent) 49% 49.8%,
+      transparent 50% 78%,
+      color-mix(in srgb, var(--bf-region-products) 22%, transparent) 78% 78.8%,
+      transparent 79%),
+    linear-gradient(180deg,
+      transparent 0 24%,
+      color-mix(in srgb, var(--bf-region-products) 20%, transparent) 24% 24.8%,
+      transparent 25% 74%,
+      color-mix(in srgb, var(--bf-region-products) 20%, transparent) 74% 74.8%,
+      transparent 75%);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="publications"] {
+  --root-axis-label: "WHERE";
+  --root-instrument-motif:
+    radial-gradient(circle at 16% 50%, var(--bf-region-publications) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 42% 50%, var(--bf-region-publications) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 68% 50%, var(--bf-region-publications) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 88% 50%, var(--bf-region-publications) 0 4px, transparent 4.5px),
+    linear-gradient(90deg,
+      transparent 0 15%,
+      color-mix(in srgb, var(--bf-region-publications) 26%, transparent) 15% 89%,
+      transparent 89.5%),
+    repeating-linear-gradient(180deg,
+      transparent 0 17px,
+      color-mix(in srgb, var(--bf-region-publications) 7%, transparent) 17px 18px,
+      transparent 18px 34px);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="about"] {
+  --root-axis-label: "WHY";
+  --root-instrument-motif:
+    radial-gradient(circle at 30% 50%, var(--bf-region-about) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 74% 24%, var(--bf-region-about) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 74% 50%, var(--bf-region-about) 0 3px, transparent 3.5px),
+    radial-gradient(circle at 74% 76%, var(--bf-region-about) 0 3px, transparent 3.5px),
+    linear-gradient(90deg,
+      transparent 0 29%,
+      color-mix(in srgb, var(--bf-region-about) 24%, transparent) 29% 61%,
+      transparent 61.5%),
+    linear-gradient(31deg,
+      transparent 0 49%,
+      color-mix(in srgb, var(--bf-region-about) 17%, transparent) 49.4% 50.2%,
+      transparent 50.6%),
+    linear-gradient(-31deg,
+      transparent 0 49%,
+      color-mix(in srgb, var(--bf-region-about) 17%, transparent) 49.4% 50.2%,
+      transparent 50.6%);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .district-card[data-node-id="research"] {
+  --root-axis-label: "HOW";
+  --root-instrument-motif:
+    radial-gradient(circle at 62% 50%,
+      var(--bf-region-research) 0 3px,
+      transparent 3.5px 18%,
+      color-mix(in srgb, var(--bf-region-research) 28%, transparent) 18.5% 19.5%,
+      transparent 20% 31%,
+      color-mix(in srgb, var(--bf-region-research) 18%, transparent) 31.5% 32.5%,
+      transparent 33% 44%,
+      color-mix(in srgb, var(--bf-region-research) 11%, transparent) 44.5% 45.5%,
+      transparent 46%),
+    linear-gradient(90deg,
+      transparent 0 61%,
+      color-mix(in srgb, var(--bf-region-research) 17%, transparent) 61% 61.6%,
+      transparent 62%),
+    linear-gradient(180deg,
+      transparent 0 49%,
+      color-mix(in srgb, var(--bf-region-research) 17%, transparent) 49% 49.7%,
+      transparent 50%);
+}
+
+/* The prose descriptions stay in the content model, but the root doors now communicate
+   through title, semantic eyebrow, icon, diagram, axis cue, and direct interaction. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card > p {
+  display: none;
+}
+
+/* Eyebrow, title, and footer all share the card's true left edge. The semantic icon is
+   promoted into a larger right-side instrument housing instead of indenting the copy. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card__kind {
+  position: static !important;
+  display: block !important;
+  min-height: 0 !important;
+  padding-right: clamp(96px, 16cqw, 136px) !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card__kind > span {
+  display: block;
+  max-width: 100%;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card
+  .section-region-card__glyph {
+  position: absolute;
+  z-index: 2;
+  top: clamp(18px, 1.5vw, 26px);
+  right: clamp(18px, 1.5vw, 26px);
+  width: clamp(64px, 12cqw, 88px);
+  height: clamp(64px, 12cqw, 88px);
+  padding: clamp(9px, 1.7cqw, 13px);
+  border-radius: 14px;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card > strong {
+  max-width: calc(100% - clamp(82px, 13cqw, 118px));
+  margin-top: clamp(18px, 2.2vh, 28px);
+}
+
+/* Each door gets one quiet internal schematic. It is deliberately non-interactive and
+   low contrast: a diagrammatic field, not illustration or sci-fi wallpaper. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: clamp(18px, 1.5vw, 28px);
+  top: clamp(112px, 15vh, 154px);
+  width: min(43%, 310px);
+  height: min(34%, 150px);
+  min-width: 150px;
+  min-height: 90px;
+  border-top: 1px solid color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 15%, transparent);
+  border-right: 1px solid color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 12%, transparent);
+  border-radius: 0 8px 0 0;
+  background: var(--root-instrument-motif);
+  opacity: 0.68;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 180ms ease, border-color 160ms ease;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card > :not(.district-card__kind) {
+  position: relative;
+  z-index: 1;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card:hover::after,
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-3px);
+  border-color: color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 34%, transparent);
+}
+
+/* The busy-board switch now occupies the lower-right action rail itself. It replaces
+   the old chevron rather than competing with it. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card__kind::before {
+  right: var(--root-busy-right);
+  bottom: var(--root-busy-bottom);
+  width: 78px;
+  height: 36px;
+  border-radius: 9px;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card__kind::after {
+  right: calc(var(--root-busy-right) + 52px);
+  bottom: calc(var(--root-busy-bottom) + 9px);
+  width: 16px;
+  height: 16px;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card:hover
+  .district-card__kind::after,
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card:focus-visible
+  .district-card__kind::after {
+  transform: translateX(36px);
+}
+
+/* Reuse the old arrow slot as a tiny question-axis register. The switch itself is the
+   visible affordance at the far right. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="true"]
+  .branch-world[data-gestalt-id="root"]
+  .district-card__action::after {
+  content: var(--root-axis-label);
+  margin-left: auto;
+  margin-right: 6.35rem;
+  color: color-mix(in srgb, var(--root-region-accent, var(--bf-action)) 72%, var(--bf-silver-300));
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+
+@media (max-width: 1360px) {
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card::after {
+    top: 96px;
+    width: min(42%, 240px);
+    height: 108px;
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card__kind {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding-right: 0 !important;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card
+    .section-region-card__glyph {
+    position: static;
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card > strong {
+    max-width: none;
+    margin-top: 0.8rem;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card::after,
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card__action::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card::after {
+    transition: none;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card:hover::after,
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="true"]
+    .branch-world[data-gestalt-id="root"]
+    .district-card:focus-visible::after {
+    transform: none;
+  }
+}
