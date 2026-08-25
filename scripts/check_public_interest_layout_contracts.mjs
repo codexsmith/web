@@ -23,7 +23,15 @@ expect(
 );
 expect(
   /@media \(min-width: 761px\)[\s\S]*\.public-interest-page--overview[\s\S]*> \.world-hero[\s\S]*display: grid;[\s\S]*grid-template-columns:[\s\S]*padding:/.test(repair),
-  "The nested shared WorldHero must receive its missing desktop grid and padding geometry.",
+  "The nested shared WorldHero must receive its desktop grid and padding geometry.",
+);
+expect(
+  !repair.includes('.site-shell[data-root-focus="false"][data-projection="world"]'),
+  "The Public Interest repair must not depend on site-shell state selectors that can fail to match the nested hero.",
+);
+expect(
+  /\.public-interest-panel--glance[\s\S]*grid-template-rows:\s*auto minmax\(0, 1fr\);[\s\S]*> p[\s\S]*grid-row:\s*2;/.test(repair),
+  "The heading-less At-a-glance pane must keep its body in a real second row instead of overflowing beneath the orientation cards.",
 );
 
 const p15 = layout.indexOf('import "./p15-product-catalog.css";');

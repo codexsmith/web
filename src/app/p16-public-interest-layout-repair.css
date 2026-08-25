@@ -1,12 +1,11 @@
 /* P16 - Public Interest shared-hero layout repair.
-   The Public Interest page now uses the same WorldHero markup and typography as the
-   other top-level sections. Its hero is nested inside the overview page rather than
-   directly under .branch-world, so restore only the missing desktop layout geometry
-   without reviving the retired bespoke Public Interest title treatment. */
+   Public Interest uses the same WorldHero markup and typography as the other top-level
+   sections, but its hero is nested one level deeper inside the overview page. Apply the
+   missing geometry directly to that nested hero instead of depending on site-shell state
+   selectors, and keep the heading-less At-a-glance pane from creating a zero-height row. */
 
 @media (min-width: 761px) {
   body[data-ui-shell="cards"]
-    .site-shell[data-root-focus="false"][data-projection="world"]
     .public-interest-page--overview
     > .world-hero {
     min-width: 0;
@@ -15,5 +14,23 @@
     gap: clamp(12px, 1.4vw, 26px);
     align-items: stretch;
     padding: clamp(12px, 1.2vw, 20px) clamp(14px, 1.45vw, 24px);
+  }
+
+  body[data-ui-shell="cards"]
+    .public-interest-page--overview
+    > .world-hero
+    > .public-interest-panel--glance {
+    height: auto;
+    align-self: stretch;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  body[data-ui-shell="cards"]
+    .public-interest-page--overview
+    > .world-hero
+    > .public-interest-panel--glance
+    > p {
+    grid-row: 2;
+    align-self: center;
   }
 }
