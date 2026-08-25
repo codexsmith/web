@@ -5,7 +5,7 @@
 **Scope:** A second public entry into Boundary First Labs for satire, audio, playful interaction, digital toys, small experiments, and representation-aware crosslinks back into the canonical Lab  
 **Preceding interaction pass:** [15_bfl_interaction_memory_sandbox_ux_v0_1](../15_bfl_interaction_memory_sandbox_ux_v0_1/)  
 **Related sandbox pass:** [15_scientific_visualization_sandboxes](../15_scientific_visualization_sandboxes/)  
-**Companion specs:** [playground_information_architecture_v0_1.md](./playground_information_architecture_v0_1.md), [satire_audio_content_model_v0_1.md](./satire_audio_content_model_v0_1.md), [next_work_register.md](./next_work_register.md)
+**Companion specs:** [playground_information_architecture_v0_1.md](./playground_information_architecture_v0_1.md), [satire_audio_content_model_v0_1.md](./satire_audio_content_model_v0_1.md), [next_work_register.md](./next_work_register.md), [composable_patchbay_and_physical_grammar_v0_1.md](./composable_patchbay_and_physical_grammar_v0_1.md)
 
 ## 1. Decision
 
@@ -147,6 +147,8 @@ Examples:
 - transform-and-route experiments;
 - generative visual or sonic objects;
 - deliberately silly interfaces that nevertheless demonstrate a formal relationship.
+
+The preferred interaction grammar for this family is specified in [Composable Patchbay and Physical Grammar v0.1](./composable_patchbay_and_physical_grammar_v0_1.md): bounded components with typed ports, cables/channels, adapters, meters, access panels, alternate projections, and recursive assembly into reusable modules.
 
 ### 4.4 Web Toys
 
