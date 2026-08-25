@@ -28,6 +28,10 @@ export type ProductCatalogGroup = {
   entries: ProductCatalogEntry[];
 };
 
+/* Catalog threshold: a listed object should be something a visitor can use, run,
+   apply, navigate, inspect, or operationalize. Publication objects are cross-listed
+   when the publication is itself a method, protocol, instrument, learning surface,
+   or research apparatus rather than merely because a manuscript exists. */
 export const productCatalogGroups: ProductCatalogGroup[] = [
   {
     id: "software-systems",
@@ -46,14 +50,9 @@ export const productCatalogGroups: ProductCatalogGroup[] = [
     id: "methods-standards-services",
     label: "Methods, standards & services",
     summary:
-      "Reusable practitioner methods, standards, architecture doctrines, and bounded services produced by the Lab.",
+      "Reusable practitioner methods, standards, protocols, architecture doctrines, instruments, and bounded services produced by the Lab.",
     entries: [
-      { kind: "node", nodeId: "agency-audit" },
       { kind: "node", nodeId: "boundary-first-engineering" },
-      { kind: "node", nodeId: "ontological-software" },
-      { kind: "node", nodeId: "boundary-first-architecture" },
-      { kind: "node", nodeId: "boundary-first-ux" },
-      { kind: "node", nodeId: "verification-governance" },
       {
         kind: "route",
         id: "software-before-code",
@@ -76,6 +75,16 @@ export const productCatalogGroups: ProductCatalogGroup[] = [
         canonicalHome: "Research / Software / Boundary First Engineering",
         status: { stage: "developed", label: "Advanced practitioner draft" },
       },
+      { kind: "node", nodeId: "boundary-first-ux" },
+      { kind: "node", nodeId: "boundary-first-architecture" },
+      { kind: "node", nodeId: "ontological-software" },
+      { kind: "node", nodeId: "executable-representation" },
+      { kind: "node", nodeId: "verification-governance" },
+      { kind: "node", nodeId: "pub-consequence-bearing-development" },
+      { kind: "node", nodeId: "pub-bounded-consequence-circuit" },
+      { kind: "node", nodeId: "agency-audit" },
+      { kind: "node", nodeId: "pub-people-review-worksheet" },
+      { kind: "node", nodeId: "pub-language-garden" },
     ],
   },
   {
@@ -84,11 +93,6 @@ export const productCatalogGroups: ProductCatalogGroup[] = [
     summary:
       "Executable, inspectable, or practitioner-facing research surfaces used to test whether Boundary First methods survive contact with a domain.",
     entries: [
-      { kind: "node", nodeId: "boundary-first-weather" },
-      { kind: "node", nodeId: "boundary-first-chess" },
-      { kind: "node", nodeId: "boundary-first-soccer" },
-      { kind: "node", nodeId: "constitutional-law" },
-      { kind: "node", nodeId: "schemathematics" },
       {
         kind: "route",
         id: "paper-mine",
@@ -100,13 +104,19 @@ export const productCatalogGroups: ProductCatalogGroup[] = [
         canonicalHome: "Research",
         status: { stage: "active-development", label: "Public workbench" },
       },
+      { kind: "node", nodeId: "boundary-first-weather" },
+      { kind: "node", nodeId: "boundary-first-chess" },
+      { kind: "node", nodeId: "boundary-first-soccer" },
+      { kind: "node", nodeId: "constitutional-law" },
+      { kind: "node", nodeId: "schemathematics" },
+      { kind: "node", nodeId: "pub-operational-homology" },
     ],
   },
   {
     id: "public-artifacts",
-    label: "Public artifacts & civic infrastructure",
+    label: "Public instruments & artifacts",
     summary:
-      "Substantial public-facing systems and artifacts that make civic, institutional, or historical structure inspectable.",
+      "Substantial civic, historical, learning, and visual artifacts that make a bounded system or line of reasoning inspectable and usable.",
     entries: [
       { kind: "node", nodeId: "citywatch" },
       { kind: "node", nodeId: "augusta-civic" },
@@ -121,6 +131,8 @@ export const productCatalogGroups: ProductCatalogGroup[] = [
         canonicalHome: "About / Provenance",
         status: { stage: "developed", label: "Interactive artifact" },
       },
+      { kind: "node", nodeId: "pub-original-visual-grammar" },
+      { kind: "node", nodeId: "pub-civilizational-first-passage" },
     ],
   },
 ];
