@@ -137,6 +137,13 @@
   line-height: 1.35;
 }
 
+/* Relation verbs such as Demonstrates and Depends on are the primary semantic cue.
+   Keep them at least as legible as the destination label beneath them. */
+.subject-pane__action[data-action-kind="relation"] .subject-pane__action-copy > span:first-child {
+  font-size: 0.74rem;
+  line-height: 1.05;
+}
+
 .subject-pane__secondary {
   min-width: 0;
   display: grid;

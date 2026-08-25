@@ -143,7 +143,6 @@ export function getSubjectActions(node: ContentNode): SubjectAction[] {
     key: `relation:${relation.from}:${relation.to}:${relation.type}`,
     label: relation.node.label,
     eyebrow: relation.label,
-    summary: relation.type,
     nodeId: relation.node.id,
     edgeType: relation.type,
   }));
