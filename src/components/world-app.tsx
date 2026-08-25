@@ -14,6 +14,14 @@ import { hydrateContentNode } from "@/lib/content-projections";
 import { getNode, getNodeByPath, getParent, getPathForNode, getSiblings } from "@/lib/content-registry";
 import { parseProcessScope, processScopes, type ProcessScope } from "@/lib/bfl-process";
 import {
+  bootstrapTraversal,
+  branchTraversal,
+  normalizeTraversalCursor,
+  resolveAdjacentTraversalCursor,
+  sameTraversalState,
+  type TraversalState,
+} from "@/lib/traversal-state";
+import {
   defaultProjectionForNode,
   normalizeProjectionForNode,
   parseProjection,
@@ -33,11 +41,6 @@ type WorldAppProps = {
 type TraversalWindow = Window & {
   __bflFocusTraversal?: string[];
   __bflFocusTraversalCursor?: number;
-};
-
-type TraversalState = {
-  ids: string[];
-  cursor: number;
 };
 
 type ProjectionTransportNotice = {
@@ -93,33 +96,6 @@ function stateUrl(
 
   const query = params.toString();
   return query ? `${focusPath}?${query}` : focusPath;
-}
-
-function normalizeTraversalCursor(path: string[], cursor: number | undefined) {
-  if (!path.length) return -1;
-  if (typeof cursor !== "number" || Number.isNaN(cursor)) return path.length - 1;
-  return Math.min(Math.max(0, cursor), path.length - 1);
-}
-
-function branchTraversal(path: string[], cursor: number, targetId: string): TraversalState {
-  const normalizedCursor = normalizeTraversalCursor(path, cursor);
-  const activePath = normalizedCursor >= 0 ? path.slice(0, normalizedCursor + 1) : [];
-
-  if (activePath[activePath.length - 1] === targetId) {
-    return { ids: activePath, cursor: activePath.length - 1 };
-  }
-
-  const ids = [...activePath, targetId];
-  return { ids, cursor: ids.length - 1 };
-}
-
-function resolveExistingTraversalCursor(path: string[], cursor: number, targetId: string) {
-  const normalizedCursor = normalizeTraversalCursor(path, cursor);
-  if (normalizedCursor < 0) return -1;
-  if (path[normalizedCursor] === targetId) return normalizedCursor;
-  if (normalizedCursor > 0 && path[normalizedCursor - 1] === targetId) return normalizedCursor - 1;
-  if (normalizedCursor < path.length - 1 && path[normalizedCursor + 1] === targetId) return normalizedCursor + 1;
-  return path.lastIndexOf(targetId);
 }
 
 function readTraversalMemory(): TraversalState {
@@ -197,13 +173,14 @@ export function WorldApp({
   const router = useRouter();
   const initialProjectionIntent = initialProjection ?? defaultProjectionForNode(initialNodeId);
   const resolvedInitialProjection = normalizeProjectionForNode(initialNodeId, initialProjectionIntent);
+  const initialTraversal = bootstrapTraversal(initialNodeId);
   const [focusId, setFocusId] = useState(initialNodeId);
   const [projectionIntent, setProjectionIntent] = useState<ProjectionMode>(initialProjectionIntent);
   const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
   const [uiShell, setUiShell] = useState<UiShellMode>(initialUiShell);
   const [heroVisible, setHeroVisible] = useState(initialHeroVisible);
-  const [traversalIds, setTraversalIds] = useState<string[]>([initialNodeId]);
-  const [traversalCursor, setTraversalCursor] = useState(0);
+  const [traversalIds, setTraversalIds] = useState<string[]>(initialTraversal.ids);
+  const [traversalCursor, setTraversalCursor] = useState(initialTraversal.cursor);
   const [transitionDirection, setTransitionDirection] = useState<TransitionDirection>("none");
   const [transitionKey, setTransitionKey] = useState(0);
   const [inspectionId, setInspectionId] = useState<string | null>(null);
@@ -265,23 +242,16 @@ export function WorldApp({
     let restored: TraversalState;
 
     if (!remembered.ids.length) {
-      restored = { ids: [initialNodeId], cursor: 0 };
+      restored = bootstrapTraversal(initialNodeId);
+    } else if (remembered.ids[remembered.cursor] === initialNodeId) {
+      restored = remembered;
     } else {
-      const existingCursor = resolveExistingTraversalCursor(remembered.ids, remembered.cursor, initialNodeId);
-      restored = existingCursor >= 0
-        ? { ids: remembered.ids, cursor: existingCursor }
-        : branchTraversal(remembered.ids, remembered.cursor, initialNodeId);
+      restored = branchTraversal(remembered.ids, remembered.cursor, initialNodeId);
     }
 
     writeTraversalMemory(restored.ids, restored.cursor);
 
-    if (
-      restored.ids.length === 1 &&
-      restored.ids[0] === initialNodeId &&
-      restored.cursor === 0
-    ) {
-      return;
-    }
+    if (sameTraversalState(restored, initialTraversal)) return;
 
     const frame = window.requestAnimationFrame(() => {
       setTraversalIds(restored.ids);
@@ -297,12 +267,12 @@ export function WorldApp({
       let nextTraversal: TraversalState;
 
       if (remembered.ids.length) {
-        const existingCursor = resolveExistingTraversalCursor(remembered.ids, remembered.cursor, next.node.id);
-        nextTraversal = existingCursor >= 0
-          ? { ids: remembered.ids, cursor: existingCursor }
+        const adjacentCursor = resolveAdjacentTraversalCursor(remembered.ids, remembered.cursor, next.node.id);
+        nextTraversal = adjacentCursor >= 0
+          ? { ids: remembered.ids, cursor: adjacentCursor }
           : branchTraversal(remembered.ids, remembered.cursor, next.node.id);
       } else {
-        nextTraversal = { ids: [next.node.id], cursor: 0 };
+        nextTraversal = bootstrapTraversal(next.node.id);
       }
 
       writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
@@ -416,20 +386,22 @@ export function WorldApp({
   );
 
   const navigateHome = useCallback(() => {
-    const rootTraversal = ["root"];
-    writeTraversalMemory(rootTraversal, 0);
+    if (focusId === "root") return;
+
+    const nextTraversal = branchTraversal(traversalIds, traversalCursor, "root");
+    writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
     setHeroVisible(false);
     setTransitionDirection("up");
     setTransitionKey((value) => value + 1);
     setFocusId("root");
-    setTraversalIds(rootTraversal);
-    setTraversalCursor(0);
+    setTraversalIds(nextTraversal.ids);
+    setTraversalCursor(nextTraversal.cursor);
     setProjectionIntent("world");
     setProjectionTransportNotice(null);
     setProcessScope("full");
     setInspectionId(null);
     router.push(stateUrl("root", "world", "full", uiShell), { scroll: false });
-  }, [router, uiShell]);
+  }, [focusId, router, traversalCursor, traversalIds, uiShell]);
 
   const moveTraversalCursor = useCallback(
     (nextCursor: number) => {
