@@ -1,0 +1,11 @@
+{
+  "generated_on": "2026-08-24",
+  "lab_merge_revision": "4739c5f916d92bcfba4fd3fb544634e36bcba1d1",
+  "source_projection_sha256": "99ae200232326a85c00fcc6bf0e7edf895c0210d9f9ec25ca1a7a60a31d88536",
+  "source_summary_sha256": "45cfe1f926dc81660a749bbd826948fc126b51c1759fa062c09547e852bfa66a",
+  "paper_count": 152,
+  "source_reading_priority_count": 37,
+  "method": "structured metadata synthesis",
+  "public_projection_note": "The private Lab generates a richer 152-record catalog summary artifact from control-plane metadata. The public site derives bounded summaries only from fields already present in the public Paper Mine projection, preserving the Lab as authority.",
+  "abstract_equivalence": false
+}

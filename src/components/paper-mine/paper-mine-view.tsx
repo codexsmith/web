@@ -12,6 +12,7 @@ import styles from "./paper-mine.module.css";
 
 type CorpusFilter = "all" | "controlled" | "mined";
 type StageFilter = "all" | "A" | "B" | "C" | "discovery";
+type HistoryMode = "push" | "replace";
 
 type ViewState = {
   q: string;
@@ -24,8 +25,6 @@ type ViewState = {
   frontierOnly: boolean;
   paper: string | null;
 };
-
-type HistoryMode = "push" | "replace";
 
 const URL_KEYS = [
   "q",
@@ -54,9 +53,7 @@ function defaultViewState(): ViewState {
 }
 
 function humanize(value: string) {
-  return value
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (character) => character.toUpperCase());
+  return value.replace(/_/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
 }
 
 function compactPath(path: string) {
@@ -72,10 +69,29 @@ function stageLabel(paper: PaperMinePaper) {
   return paper.stage === "discovery" ? "Discovery" : `Stage ${paper.stage}`;
 }
 
+function summaryPreview(text: string, limit = 260) {
+  const normalized = text.trim();
+  if (normalized.length <= limit) return normalized;
+  const clipped = normalized.slice(0, limit + 1);
+  const wordBoundary = clipped.lastIndexOf(" ");
+  const end = wordBoundary > limit * 0.65 ? wordBoundary : limit;
+  return `${clipped.slice(0, end).trimEnd()}…`;
+}
+
+function summaryStatus(paper: PaperMinePaper) {
+  return paper.abstract_status === "source_reading_priority"
+    ? "Catalog summary complete · source-read abstract prioritized"
+    : "Catalog summary complete · source-read abstract pending";
+}
+
 function paperSearchText(paper: PaperMinePaper, frontier?: PaperMineFrontierItem) {
   return [
     paper.id,
     paper.title,
+    paper.summary,
+    paper.summary_kind,
+    paper.abstract_status,
+    ...paper.summary_basis,
     paper.record_class,
     paper.discipline,
     paper.field_group,
@@ -139,13 +155,9 @@ function buildViewFromUrl(
         : "all",
     field: fields.has(params.get("field") ?? "") ? (params.get("field") as string) : "all",
     readiness: [0, 1, 2, 3, 4, 5].includes(requestedReadiness) ? requestedReadiness : 0,
-    disposition: dispositions.has(params.get("disposition") ?? "")
-      ? (params.get("disposition") as string)
-      : "all",
+    disposition: dispositions.has(params.get("disposition") ?? "") ? (params.get("disposition") as string) : "all",
     frontierOnly: ["1", "true", "yes"].includes((params.get("frontier") ?? "").toLowerCase()),
-    paper: requestedPaper && data.papers.some((paper) => paper.id === requestedPaper)
-      ? requestedPaper
-      : null,
+    paper: requestedPaper && data.papers.some((paper) => paper.id === requestedPaper) ? requestedPaper : null,
   };
 
   if (view.paper) {
@@ -187,14 +199,8 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
     () => new Map(data.papers.map((paper) => [paper.id, paper])),
     [data.papers],
   );
-  const fields = useMemo(
-    () => [...new Set(data.papers.map((paper) => paper.field_group))].sort(),
-    [data.papers],
-  );
-  const disciplines = useMemo(
-    () => [...new Set(data.papers.map((paper) => paper.discipline))].sort(),
-    [data.papers],
-  );
+  const fields = useMemo(() => [...new Set(data.papers.map((paper) => paper.field_group))].sort(), [data.papers]);
+  const disciplines = useMemo(() => [...new Set(data.papers.map((paper) => paper.discipline))].sort(), [data.papers]);
   const dispositions = useMemo(
     () => [...new Set(data.papers.map((paper) => paper.recommended_disposition))].sort(),
     [data.papers],
@@ -215,9 +221,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
 
   useEffect(() => {
     const paper = view.paper ? paperById.get(view.paper) : undefined;
-    document.title = paper
-      ? `${paper.title} · Paper Mine | Boundary First Labs`
-      : "Paper Mine | Boundary First Labs";
+    document.title = paper ? `${paper.title} · Paper Mine | Boundary First Labs` : "Paper Mine | Boundary First Labs";
   }, [paperById, view.paper]);
 
   const visible = useMemo(
@@ -306,6 +310,8 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
 
   const sourceRevision = data.source_revision?.slice(0, 12) ?? "unknown";
   const contentHash = data.source_content_sha256.slice(0, 12);
+  const summaryRevision = data.summary_catalog.lab_merge_revision.slice(0, 12);
+  const summaryHash = data.summary_catalog.source_summary_sha256.slice(0, 12);
 
   return (
     <main className={styles.shell}>
@@ -314,14 +320,15 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
           <div className={styles.eyebrow}>Boundary First Labs · Research · Corpus-wide publication discovery</div>
           <h1>Paper Mine</h1>
           <p>
-            A bounded public projection of controlled publication objects and paper-shaped candidates already present across the Lab corpus. Controlled status, discovery status, readiness, provenance, and claim boundaries remain distinct.
+            A bounded public projection of controlled publications and paper-shaped candidates across the Lab corpus. Every canonical paper now carries a metadata-grounded catalog summary; manuscript abstracts remain a separate source-reading upgrade rather than being implied by the catalog.
           </p>
         </div>
         <div className={styles.provenanceBlock}>
-          <span>Unified projection</span>
+          <span>Projection + summary layer</span>
           <strong>{data.generated_on}</strong>
-          <code>{sourceRevision}</code>
-          <code>sha256 {contentHash}</code>
+          <code>papers {sourceRevision}</code>
+          <code>summaries {summaryRevision}</code>
+          <code>summary sha256 {summaryHash}</code>
         </div>
       </header>
 
@@ -357,7 +364,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
               type="search"
               value={view.q}
               onChange={(event) => changeFilter({ q: event.target.value.trimStart().toLowerCase() }, "replace")}
-              placeholder="Paper, domain, program, claim…"
+              placeholder="Paper, summary, domain, program, claim…"
             />
           </label>
           <label>
@@ -394,10 +401,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
           </label>
           <label>
             Readiness floor
-            <select
-              value={String(view.readiness)}
-              onChange={(event) => changeFilter({ readiness: Number(event.target.value) })}
-            >
+            <select value={String(view.readiness)} onChange={(event) => changeFilter({ readiness: Number(event.target.value) })}>
               <option value="0">Any readiness</option>
               <option value="1">≥ 1 · latent</option>
               <option value="2">≥ 2 · substantial</option>
@@ -408,49 +412,35 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
           </label>
           <label>
             Queue / disposition
-            <select
-              value={view.disposition}
-              onChange={(event) => changeFilter({ disposition: event.target.value })}
-            >
+            <select value={view.disposition} onChange={(event) => changeFilter({ disposition: event.target.value })}>
               <option value="all">All dispositions</option>
-              {dispositions.map((disposition) => (
-                <option key={disposition} value={disposition}>{humanize(disposition)}</option>
-              ))}
+              {dispositions.map((disposition) => <option key={disposition} value={disposition}>{humanize(disposition)}</option>)}
             </select>
           </label>
           <label className={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              checked={view.frontierOnly}
-              onChange={(event) => changeFilter({ frontierOnly: event.target.checked })}
-            />
+            <input type="checkbox" checked={view.frontierOnly} onChange={(event) => changeFilter({ frontierOnly: event.target.checked })} />
             Paperization frontier only
           </label>
           <button className={styles.resetButton} type="button" onClick={resetView}>Reset boundary</button>
 
           <section className={styles.authorityCard}>
             <div className={styles.frameLabel}>Authority boundary</div>
-            <p>{data.authority.scope}. The private Lab remains authoritative; this public projection cannot promote a paper or scientific claim.</p>
-            <code>discover → canonicalize → control → paperize → human gate → publish</code>
+            <p>{data.authority.scope}. The private Lab remains authoritative; summaries are descriptive catalog aids and cannot promote a paper or scientific claim.</p>
+            <code>discover → summarize → canonicalize → control → paperize → human gate → publish</code>
           </section>
         </aside>
 
         <div className={styles.workbench}>
           <section className={styles.metrics} aria-label="Paper Mine metrics">
             <article><strong>{data.summary.canonical_paper_count}</strong><span>canonical papers</span></article>
+            <article><strong>{data.summary_catalog.paper_count}</strong><span>catalog summaries</span></article>
+            <article><strong>{data.summary_catalog.source_reading_priority_count}</strong><span>source-read priority</span></article>
             <article><strong>{data.summary.controlled_publication_count}</strong><span>controlled publications</span></article>
             <article><strong>{data.summary.mined_candidate_count}</strong><span>mined candidates</span></article>
-            <article><strong>{data.summary.counts_by_stage.A ?? 0}</strong><span>Stage A</span></article>
-            <article><strong>{data.summary.counts_by_stage.B ?? 0}</strong><span>Stage B</span></article>
-            <article><strong>{data.summary.counts_by_stage.C ?? 0}</strong><span>Stage C</span></article>
+            <article><strong>{data.summary.frontier_count}</strong><span>paperization frontier</span></article>
           </section>
 
-          <PaperMineGraph
-            papers={visible}
-            frontier={data.frontier}
-            selectedId={view.paper}
-            onSelect={selectPaper}
-          />
+          <PaperMineGraph papers={visible} frontier={data.frontier} selectedId={view.paper} onSelect={selectPaper} />
 
           <section className={styles.panel}>
             <header>
@@ -482,7 +472,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
           <section className={styles.panel}>
             <header>
               <div><span>Corpus field</span><h2>Canonical paper field</h2></div>
-              <p>{visible.length} of {data.summary.canonical_paper_count} canonical papers are inside the current boundary.</p>
+              <p>{visible.length} of {data.summary.canonical_paper_count} canonical papers are inside the current boundary. Card copy is the public catalog summary, not a manuscript abstract.</p>
             </header>
             <div className={styles.fieldGroups}>
               {grouped.length ? grouped.map(([field, papers]) => (
@@ -507,10 +497,11 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
                             <span>R{paper.readiness_hint}</span>
                           </div>
                           <h4>{paper.title}</h4>
-                          <p>{frontier?.question ?? paper.claim_ceiling}</p>
+                          <p>{summaryPreview(paper.summary)}</p>
                           <div className={styles.chips}>
                             <span>{paper.record_class === "controlled_publication" ? "controlled" : "mined"}</span>
                             {frontier ? <span>frontier #{frontier.rank}</span> : null}
+                            {paper.abstract_status === "source_reading_priority" ? <span>source-read next</span> : null}
                             <span>{humanize(paper.discipline)}</span>
                             <span>{humanize(paper.recommended_disposition)}</span>
                           </div>
@@ -555,11 +546,22 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
                 <div><dt>Stage</dt><dd>{stageLabel(selected)}</dd></div>
                 <div><dt>Readiness</dt><dd>{selected.readiness_hint} / 5</dd></div>
                 <div><dt>Status</dt><dd>{humanize(selected.recommended_disposition)}</dd></div>
+                <div><dt>Summary</dt><dd>Metadata-grounded catalog</dd></div>
+                <div><dt>Abstract</dt><dd>{selected.abstract_status === "source_reading_priority" ? "Source-read priority" : "Source-read pending"}</dd></div>
                 {selected.program ? <div><dt>Program</dt><dd>{selected.program}</dd></div> : null}
                 {selected.control_rank !== null ? <div><dt>Queue rank</dt><dd>{selected.control_rank}</dd></div> : null}
                 <div><dt>Artifact</dt><dd>{selected.artifact_state}</dd></div>
               </dl>
 
+              <section><h3>Catalog summary</h3><p>{selected.summary}</p></section>
+              <section>
+                <h3>Summary status / basis</h3>
+                <ul>
+                  <li>{summaryStatus(selected)}</li>
+                  <li>Public basis: {selected.summary_basis.map(humanize).join(" · ")}</li>
+                  <li>Catalog summary is descriptive metadata synthesis, not a manuscript abstract.</li>
+                </ul>
+              </section>
               <section><h3>Claim ceiling</h3><p>{selectedFrontier?.claim_ceiling ?? selected.claim_ceiling}</p></section>
               <section><h3>Prior-art boundary</h3><p>{selected.prior_art_requirement}</p></section>
               <section><h3>Evidence contract</h3><p>{selected.evidence_requirement}</p></section>
@@ -578,14 +580,14 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
               <section><h3>Private Lab provenance</h3><ul>{selected.source_paths.map((path) => <li key={path}><code>{path}</code></li>)}</ul></section>
             </div>
           ) : (
-            <p className={styles.detailEmpty}>Select a paper node or card to inspect its canonical identity, control state, claim ceiling, evidence contract, and provenance.</p>
+            <p className={styles.detailEmpty}>Select a paper node or card to inspect its catalog summary, canonical identity, control state, claim ceiling, evidence contract, and provenance.</p>
           )}
         </aside>
       </div>
 
       <footer className={styles.bottomFrame}>
-        <span>Public projection only · scientific authority remains in the private Lab · publication promotion requires a human gate</span>
-        <span>Source {sourceRevision} · projection {contentHash}</span>
+        <span>152 catalog summaries · 37 source-read abstract priorities · scientific authority remains in the private Lab</span>
+        <span>papers {sourceRevision}/{contentHash} · summaries {summaryRevision}/{summaryHash}</span>
       </footer>
     </main>
   );
