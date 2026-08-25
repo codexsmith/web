@@ -70,6 +70,7 @@ import "./p10-inspection-card-layer.css";
 import "./p11-hero-viewport-resilience.css";
 import "./p12-content-density-refinement.css";
 import "./p13-root-busy-board.css";
+import "./p14-root-instrumentation.css";
 
 export const metadata: Metadata = {
   title: {
