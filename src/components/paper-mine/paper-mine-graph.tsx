@@ -20,15 +20,16 @@ type PositionedSource = {
 const GRAPH_WIDTH = 1430;
 const FIELD_X = 32;
 const FIELD_WIDTH = 230;
+const FIELD_HEIGHT = 64;
 const PAPER_X = 382;
 const PAPER_WIDTH = 400;
 const SOURCE_X = 1012;
 const SOURCE_WIDTH = 382;
 const TOP = 62;
-const PAPER_HEIGHT = 58;
-const PAPER_STEP = 78;
-const SOURCE_HEIGHT = 46;
-const SOURCE_STEP = 56;
+const PAPER_HEIGHT = 92;
+const PAPER_STEP = 112;
+const SOURCE_HEIGHT = 64;
+const SOURCE_STEP = 76;
 
 function humanize(value: string) {
   return value
@@ -130,7 +131,7 @@ export function PaperMineGraph({ papers, frontier, selectedId, onSelect }: Paper
   });
 
   const fieldNodes = [...fieldMembers.entries()]
-    .map(([field, ys]) => ({ field, y: average(ys) - 25, count: ys.length }))
+    .map(([field, ys]) => ({ field, y: average(ys) - FIELD_HEIGHT / 2, count: ys.length }))
     .sort((left, right) => left.y - right.y);
 
   const sourceSeeds = [...sourceMembers.entries()].map(([path, ys]) => ({
@@ -174,7 +175,8 @@ export function PaperMineGraph({ papers, frontier, selectedId, onSelect }: Paper
         <span><b>{frontierCount}</b> frontier nodes visible</span>
       </div>
 
-      <div className={graphStyles.graphLegend} aria-label="Graph legend">
+      <div className={graphStyles.graphLegend} aria-label="Graph key">
+        <strong className={graphStyles.legendTitle}>Key</strong>
         <span data-kind="field">Field group</span>
         <span data-kind="candidate">Paper object</span>
         <span data-kind="frontier">Paperization frontier</span>
@@ -204,7 +206,7 @@ export function PaperMineGraph({ papers, frontier, selectedId, onSelect }: Paper
                 className={`${graphStyles.graphEdge} ${graphStyles.graphEdgeField} ${selected ? graphStyles.graphEdgeSelected : ""}`}
                 d={curve(
                   FIELD_X + FIELD_WIDTH,
-                  field.y + 25,
+                  field.y + FIELD_HEIGHT / 2,
                   PAPER_X,
                   y + PAPER_HEIGHT / 2,
                 )}
@@ -233,7 +235,7 @@ export function PaperMineGraph({ papers, frontier, selectedId, onSelect }: Paper
           )}
 
           {fieldNodes.map((node) => (
-            <foreignObject key={node.field} x={FIELD_X} y={node.y} width={FIELD_WIDTH} height={50}>
+            <foreignObject key={node.field} x={FIELD_X} y={node.y} width={FIELD_WIDTH} height={FIELD_HEIGHT}>
               <div className={graphStyles.graphFieldNode} title={humanize(node.field)}>
                 <span>Field group</span>
                 <strong>{humanize(node.field)}</strong>
