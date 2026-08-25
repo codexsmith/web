@@ -15,9 +15,12 @@ body[data-ui-shell="cards"] .frame-trace-path__node--current .path-node__role {
   display: none;
 }
 
-/* Research already has its operative orientation in the hero and first body statement.
-   Retire the secondary routing prose from the public branch surface. */
-body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-body {
+/* These top-level branches already establish their orientation in the hero and first
+   body statement. Keep the retained second paragraph in source, but do not repeat it
+   as a separate supporting-context block on the public World surface. */
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-body,
+body[data-ui-shell="cards"] .branch-world[data-world-id="products"] .branch-world__context-body,
+body[data-ui-shell="cards"] .branch-world[data-world-id="publications"] .branch-world__context-body {
   display: none;
 }
 
