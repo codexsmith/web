@@ -65,6 +65,7 @@ import "./p6-lens-board-refinement.css";
 import "./p6-traversal-shelf-refinement.css";
 import "./p7-structural-path-navigation.css";
 import "./p8-type-scale-legibility.css";
+import "./p9-bounded-special-surfaces.css";
 
 export const metadata: Metadata = {
   title: {

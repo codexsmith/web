@@ -1,0 +1,173 @@
+/* P9 bounded special surfaces.
+   Standalone research/provenance tools stay inside the same Boundary First UX frame,
+   while their entry cards are promoted directly beneath the owning World hero. */
+
+body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"] {
+  min-height: 100vh;
+  background: var(--bf-bg-frame);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"] .bounded-standalone-page__surface {
+  position: fixed;
+  top: var(--frame-top);
+  right: 0;
+  bottom: 0;
+  left: var(--frame-left);
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--bf-bg-frame);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"][data-has-siblings="false"] .bounded-standalone-page__surface {
+  left: 0;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"] .bounded-standalone-page__surface > main,
+body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"] .bounded-standalone-page__surface > div {
+  width: 100%;
+  min-height: 100% !important;
+  max-height: none !important;
+}
+
+/* The Boundary frame owns global return/home traversal on these routes. */
+body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"] .bounded-standalone-page__surface nav[aria-label="Research navigation"],
+body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"] .bounded-standalone-page__surface header a[href="/about/provenance"] {
+  display: none !important;
+}
+
+/* Promote the two special surfaces from generic Supporting Context into an explicit
+   first-class destination immediately below the title hero. Supporting prose and
+   inspections remain below the ordinary region map. */
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world:has(
+  > .branch-world__context-section a[href="/research/paper-mine"],
+  > .branch-world__context-section a[href="/about/provenance/timeline"]
+) > .world-hero {
+  order: 0;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world:has(
+  > .branch-world__context-section a[href="/research/paper-mine"],
+  > .branch-world__context-section a[href="/about/provenance/timeline"]
+) > .district-grid {
+  order: 2;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world:has(
+  > .branch-world__context-section a[href="/research/paper-mine"],
+  > .branch-world__context-section a[href="/about/provenance/timeline"]
+) > .branch-world__context-section {
+  display: contents;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world:has(
+  > .branch-world__context-section a[href="/research/paper-mine"],
+  > .branch-world__context-section a[href="/about/provenance/timeline"]
+) > .branch-world__context-section > .branch-world__context-header {
+  display: none;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world:has(
+  > .branch-world__context-section a[href="/research/paper-mine"],
+  > .branch-world__context-section a[href="/about/provenance/timeline"]
+) > .branch-world__context-section > :is(.branch-world__context-body, .branch-world__context-group) {
+  order: 3;
+  width: 100%;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world > .branch-world__context-section > .branch-world__context-group:has(
+  .branch-world__context-actions > a[href="/research/paper-mine"],
+  .branch-world__context-actions > a[href="/about/provenance/timeline"]
+) {
+  order: 1;
+  width: 100%;
+  display: grid;
+  gap: 0.55rem;
+  padding: clamp(12px, 1vw, 16px);
+  border: 1px solid var(--secondary-edge, var(--bf-border-default));
+  border-left: 2px solid var(--bf-action);
+  border-radius: 9px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-action) 7%, transparent), transparent 48%),
+    var(--secondary-main, var(--bf-bg-surface));
+  box-shadow: inset 0 1px 0 var(--bf-edge-highlight);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world > .branch-world__context-section > .branch-world__context-group:has(
+  .branch-world__context-actions > a[href="/research/paper-mine"],
+  .branch-world__context-actions > a[href="/about/provenance/timeline"]
+) > .subject-pane__group-label {
+  color: var(--bf-action-hover);
+  font-size: var(--bf-type-caption, 0.72rem) !important;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world__context-actions > :is(
+  a[href="/research/paper-mine"],
+  a[href="/about/provenance/timeline"]
+) {
+  grid-column: 1 / -1;
+  min-height: clamp(102px, 11vh, 136px);
+  padding: clamp(15px, 1.25vw, 21px) !important;
+  border-color: var(--bf-action-line) !important;
+  border-left: 3px solid var(--bf-action) !important;
+  background:
+    linear-gradient(110deg, color-mix(in srgb, var(--bf-action) 13%, transparent), transparent 64%),
+    var(--secondary-inset, var(--bf-bg-raised)) !important;
+  box-shadow:
+    inset 0 1px 0 var(--bf-edge-highlight-strong),
+    0 5px 16px rgba(0, 0, 0, 0.18) !important;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world__context-actions > :is(
+  a[href="/research/paper-mine"],
+  a[href="/about/provenance/timeline"]
+) .subject-pane__action-glyph {
+  width: 24px;
+  height: 24px;
+  color: var(--bf-action);
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world__context-actions > :is(
+  a[href="/research/paper-mine"],
+  a[href="/about/provenance/timeline"]
+) .subject-pane__action-copy > span {
+  font-size: 0.78rem !important;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world__context-actions > :is(
+  a[href="/research/paper-mine"],
+  a[href="/about/provenance/timeline"]
+) .subject-pane__action-copy > strong {
+  font-size: clamp(1.12rem, 1.35vw, 1.5rem) !important;
+  line-height: 1.08;
+}
+
+body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world__context-actions > :is(
+  a[href="/research/paper-mine"],
+  a[href="/about/provenance/timeline"]
+) .subject-pane__action-copy > small {
+  max-width: 84ch;
+  font-size: 0.78rem !important;
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"] .bounded-standalone-page__surface {
+    left: 0;
+    top: var(--frame-top);
+  }
+
+  body[data-ui-shell="cards"] .site-shell[data-standalone-surface="true"][data-has-siblings="true"] .bounded-standalone-page__surface {
+    top: calc(var(--frame-top) + var(--trace-nav-shelf, 68px));
+  }
+}
+
+@media (max-width: 720px) {
+  body[data-ui-shell="cards"] .site-shell[data-projection="world"] .branch-world__context-actions > :is(
+    a[href="/research/paper-mine"],
+    a[href="/about/provenance/timeline"]
+  ) {
+    min-height: 0;
+  }
+}
