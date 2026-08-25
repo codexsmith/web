@@ -22,6 +22,11 @@ requireExists(
 );
 
 requireExists(
+  "src/app/p12-content-density-refinement.css",
+  "Final navigation and content-density refinement must exist",
+);
+
+requireExists(
   "src/lib/traversal-state.ts",
   "Traversal continuity must have explicit bootstrap primitives",
 );
@@ -96,6 +101,30 @@ requireMatch(
   "src/app/p7-structural-path-navigation.css",
   /\.frame-trace-path[\s\S]*\.boundary-frame__neighborhood-nav/,
   "The final navigation layer must style both traversal continuity and local neighborhood axes",
+);
+
+requireMatch(
+  "src/app/layout.tsx",
+  /p11-hero-viewport-resilience\.css";\s*\nimport "\.\/p12-content-density-refinement\.css";/,
+  "The content-density refinement must load after the prior UI refinement layers",
+);
+
+requireMatch(
+  "src/app/p12-content-density-refinement.css",
+  /\.frame-trace-path__node--current \.path-node__role\s*\{[\s\S]*display:\s*none;/,
+  "The current trace chip must present the node label without a redundant location narration",
+);
+
+requireMatch(
+  "src/app/p12-content-density-refinement.css",
+  /\.branch-world\[data-world-id="research"\] \.branch-world__context-body\s*\{[\s\S]*display:\s*none;/,
+  "The Research branch must omit the redundant secondary routing paragraph from the public surface",
+);
+
+requireMatch(
+  "src/app/p12-content-density-refinement.css",
+  /\.branch-world__context-group\[aria-label="Explore further"\][\s\S]*\.subject-pane__action-copy > small\s*\{[\s\S]*display:\s*none;/,
+  "Explore further cards must not repeat the description shown after opening the inspection",
 );
 
 console.log("Navigation frame contracts passed.");

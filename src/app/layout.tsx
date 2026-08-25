@@ -68,6 +68,7 @@ import "./p8-type-scale-legibility.css";
 import "./p9-bounded-special-surfaces.css";
 import "./p10-inspection-card-layer.css";
 import "./p11-hero-viewport-resilience.css";
+import "./p12-content-density-refinement.css";
 
 export const metadata: Metadata = {
   title: {

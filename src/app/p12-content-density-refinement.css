@@ -1,0 +1,30 @@
+/* P12 content-density refinement.
+   The current trace names the active node without narrating "you are here".
+   Supporting surfaces stay concise when the opened view already carries the detail. */
+
+body[data-ui-shell="cards"] .frame-trace-path__node--current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-height: 32px;
+  padding: 5px 10px;
+}
+
+body[data-ui-shell="cards"] .frame-trace-path__node--current .path-node__role {
+  display: none;
+}
+
+/* Research already has its operative orientation in the hero and first body statement.
+   Retire the secondary routing prose from the public branch surface. */
+body[data-ui-shell="cards"] .branch-world[data-world-id="research"] .branch-world__context-body {
+  display: none;
+}
+
+/* Inspection previews should identify the thing to explore, not repeat the description
+   that appears immediately after opening it. */
+body[data-ui-shell="cards"]
+  .branch-world__context-group[aria-label="Explore further"]
+  .subject-pane__action-copy > small {
+  display: none;
+}
