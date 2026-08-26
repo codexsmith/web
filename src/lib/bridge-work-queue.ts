@@ -2,7 +2,10 @@ import {
   getBridgeLifecycle,
   type BridgeLifecycleStage,
 } from "@/lib/bridge-governance";
-import { governedBridgeRecords } from "@/lib/bridge-system";
+import {
+  productLandingManifest,
+  type ProductLandingEntry,
+} from "@/lib/product-landing-routing";
 
 export type BridgeQueueKind =
   | "drafting"
@@ -34,6 +37,10 @@ const staleAfterDays: Partial<Record<BridgeLifecycleStage, number>> = {
   scoped: 14,
   active: 30,
 };
+
+const bridgeEntries = productLandingManifest.pages.filter(
+  (entry) => entry.collection === "bridge",
+);
 
 function queueForLifecycle(lifecycle: BridgeLifecycleStage): BridgeQueueKind {
   switch (lifecycle) {
@@ -67,15 +74,19 @@ function activityTimestamp(item: {
 }
 
 export function deriveBridgeQueueItem(
-  record: (typeof governedBridgeRecords)[number],
+  entry: ProductLandingEntry,
   now = new Date(),
 ): BridgeQueueItem {
-  const lifecycle = getBridgeLifecycle(record.entry.status);
-  if (!lifecycle) {
-    throw new Error(`Bridge ${record.entry.id} has unsupported lifecycle ${record.entry.status}`);
+  if (entry.collection !== "bridge") {
+    throw new Error(`Landing ${entry.id} is not a bridge record`);
   }
 
-  const operations = record.entry.bridgeOperations;
+  const lifecycle = getBridgeLifecycle(entry.status);
+  if (!lifecycle) {
+    throw new Error(`Bridge ${entry.id} has unsupported lifecycle ${entry.status}`);
+  }
+
+  const operations = entry.bridgeOperations;
   const thresholdDays = staleAfterDays[lifecycle];
   const timestamp = activityTimestamp({
     lifecycle,
@@ -100,8 +111,8 @@ export function deriveBridgeQueueItem(
   }
 
   return {
-    id: record.entry.id,
-    slug: record.entry.slug,
+    id: entry.id,
+    slug: entry.slug,
     lifecycle,
     queue: queueForLifecycle(lifecycle),
     owner: operations?.owner,
@@ -113,7 +124,7 @@ export function deriveBridgeQueueItem(
 }
 
 export function getBridgeWorkQueue(now = new Date()): BridgeQueueItem[] {
-  return governedBridgeRecords.map((record) => deriveBridgeQueueItem(record, now));
+  return bridgeEntries.map((entry) => deriveBridgeQueueItem(entry, now));
 }
 
 export function getBridgeQueue(
