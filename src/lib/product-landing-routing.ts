@@ -43,6 +43,7 @@ export type ProductLandingManifest = {
     unlistedRule: string;
     privateRule: string;
     relationshipRule: string;
+    lifecycleRule?: string;
     activationRule?: string;
     notes: string;
   };
