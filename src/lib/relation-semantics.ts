@@ -1,4 +1,10 @@
-import type { EdgeType, GraphEdge } from "@/lib/content";
+import type {
+  BridgeSystemEdge,
+} from "@/lib/bridge-system";
+import type {
+  EdgeType,
+  GraphEdge as BaseGraphEdge,
+} from "@/lib/content";
 
 export type RelationDirection = "outgoing" | "incoming";
 
@@ -8,7 +14,10 @@ export type RelationLabelPair = {
   symmetric?: boolean;
 };
 
-const relationTypeSemantics: Record<EdgeType, RelationLabelPair> = {
+type RelationEdge = BaseGraphEdge | BridgeSystemEdge;
+type RelationType = EdgeType | BridgeSystemEdge["type"];
+
+const relationTypeSemantics: Record<RelationType, RelationLabelPair> = {
   contains: { forward: "contains", inverse: "contained by" },
   specializes: { forward: "specializes", inverse: "specialized by" },
   implements: { forward: "implements", inverse: "implemented by" },
@@ -17,6 +26,7 @@ const relationTypeSemantics: Record<EdgeType, RelationLabelPair> = {
   "derived-from": { forward: "derived from", inverse: "source for" },
   "depends-on": { forward: "depends on", inverse: "dependency of" },
   "applies-to": { forward: "applies to", inverse: "applied by" },
+  "interfaces-with": { forward: "interfaces with", inverse: "interface for" },
   extends: { forward: "extends", inverse: "extended by" },
   "contrasts-with": { forward: "contrasts with", inverse: "contrasts with", symmetric: true },
   governs: { forward: "governs", inverse: "governed by" },
@@ -25,7 +35,7 @@ const relationTypeSemantics: Record<EdgeType, RelationLabelPair> = {
   instantiates: { forward: "instantiates", inverse: "instantiated by" },
 };
 
-function edgeKey(edge: GraphEdge) {
+function edgeKey(edge: RelationEdge) {
   return `${edge.from}::${edge.to}::${edge.type}`;
 }
 
@@ -67,7 +77,7 @@ const edgeLabelOverrides: Record<string, Partial<RelationLabelPair>> = {
   },
 };
 
-export function getRelationLabels(edge: GraphEdge): RelationLabelPair {
+export function getRelationLabels(edge: RelationEdge): RelationLabelPair {
   const typeSemantics = relationTypeSemantics[edge.type];
   const override = edgeLabelOverrides[edgeKey(edge)];
 
@@ -78,13 +88,13 @@ export function getRelationLabels(edge: GraphEdge): RelationLabelPair {
   };
 }
 
-export function getRelationDirection(edge: GraphEdge, focusId: string): RelationDirection | undefined {
+export function getRelationDirection(edge: RelationEdge, focusId: string): RelationDirection | undefined {
   if (edge.from === focusId) return "outgoing";
   if (edge.to === focusId) return "incoming";
   return undefined;
 }
 
-export function getDirectedRelationLabel(edge: GraphEdge, direction: RelationDirection) {
+export function getDirectedRelationLabel(edge: RelationEdge, direction: RelationDirection) {
   const labels = getRelationLabels(edge);
   return direction === "outgoing" ? labels.forward : labels.inverse;
 }
