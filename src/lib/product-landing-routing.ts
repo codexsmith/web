@@ -1,12 +1,13 @@
 import manifestData from "../content/product-landing-pages/manifest.json";
+import {
+  BRIDGE_RELATIONSHIP_STATUSES,
+  validateBridgeGovernanceEntry,
+  type BridgeRelationshipStatus,
+} from "@/lib/bridge-governance";
 
-export const RELATIONSHIP_STATUSES = [
-  "exploratory-no-affiliation",
-  "target-class-no-affiliation",
-  "historical-project-no-current-affiliation",
-] as const;
+export const RELATIONSHIP_STATUSES = BRIDGE_RELATIONSHIP_STATUSES;
 
-export type RelationshipStatus = (typeof RELATIONSHIP_STATUSES)[number];
+export type RelationshipStatus = BridgeRelationshipStatus;
 export type LandingVisibility = "public" | "unlisted" | "private";
 export type RoutingEligibility = "public-candidate" | "unlisted-only" | "hold";
 export type LandingCollection =
@@ -75,6 +76,12 @@ const relationshipNotices: Record<RelationshipStatus, string> = {
     "Target-class collaboration bridge. It describes a class of potential collaborators and does not imply a named institutional affiliation, endorsement, sponsorship, review, adoption, or partnership.",
   "historical-project-no-current-affiliation":
     "Historical project relationship only. No current affiliation, endorsement, sponsorship, review, adoption, or partnership is implied.",
+  "scoped-collaboration":
+    "A bounded collaboration scope has been established. This status describes only the agreed scope and does not imply endorsement of Boundary First Labs or its wider research program.",
+  "active-collaboration":
+    "An active bounded collaboration exists. Public description is limited to the actual collaboration scope and does not imply broader endorsement, adoption, or institutional sponsorship.",
+  "historical-collaboration":
+    "A documented collaboration occurred historically and is no longer active. Historical description must not imply a current relationship or continuing endorsement.",
 };
 
 export const productLandingManifest = manifestData as ProductLandingManifest;
@@ -148,15 +155,13 @@ export function validateProductLandingManifest(
       errors.push(`${entry.id}: private visibility requires hold routing`);
     }
 
-    if (entry.collection === "bridge" && entry.visibility !== "unlisted") {
-      errors.push(`${entry.id}: bridge collection entries must remain unlisted`);
-    }
-
-    if (entry.collection === "bridge" && !entry.relationshipStatus) {
-      errors.push(`${entry.id}: bridge entries require relationshipStatus`);
-    }
-
-    if (
+    if (entry.collection === "bridge") {
+      errors.push(
+        ...validateBridgeGovernanceEntry(entry).map(
+          (error) => `${entry.id}: ${error}`,
+        ),
+      );
+    } else if (
       entry.relationshipStatus &&
       !relationshipStatusSet.has(entry.relationshipStatus)
     ) {
