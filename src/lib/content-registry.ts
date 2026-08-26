@@ -2,9 +2,13 @@ import {
   edges as baseEdges,
   nodes as baseNodes,
   type ContentNode as BaseContentNode,
-  type GraphEdge,
+  type GraphEdge as BaseGraphEdge,
 } from "@/lib/content";
-import { bridgeSystemNodes } from "@/lib/bridge-system";
+import {
+  bridgeSystemEdges,
+  bridgeSystemNodes,
+  type BridgeSystemEdge,
+} from "@/lib/bridge-system";
 import { getLocalSections, type LocalSectionDefinition } from "@/lib/local-section-registry";
 import {
   persistencePublicationEdges,
@@ -24,6 +28,8 @@ export type ContentNode = BaseContentNode & {
   localSections?: LocalSectionDefinition[];
 };
 
+export type GraphEdge = BaseGraphEdge | BridgeSystemEdge;
+
 export type DirectedGraphEdge = Omit<GraphEdge, "label"> & {
   label: string;
   declaredLabel: string;
@@ -39,7 +45,6 @@ export type {
   ContentLink,
   DeliveryStage,
   EdgeType,
-  GraphEdge,
   Inspection,
   NodeKind,
   WorkStatus,
@@ -126,7 +131,11 @@ export const nodes: ContentNode[] = rawNodes.map((node) => {
   return localSections.length ? { ...enrichedNode, localSections } : enrichedNode;
 });
 
-export const edges: GraphEdge[] = [...baseEdges, ...publicationEdges];
+export const edges: GraphEdge[] = [
+  ...baseEdges,
+  ...bridgeSystemEdges,
+  ...publicationEdges,
+];
 edges.push(...persistencePublicationEdges);
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
