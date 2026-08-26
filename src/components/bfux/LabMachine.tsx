@@ -10,6 +10,7 @@ import {
   type LabMachineNode,
 } from "./lab-machine-model";
 import "./lab-machine.css";
+import "./lab-machine-physical.css";
 
 const nodeIcons: Record<string, BfuxIconName> = {
   products: "object",
@@ -95,7 +96,13 @@ function Node({ node, edges }: { node: LabMachineNode; edges: LabMachineEdge[] }
   );
 }
 
-export function LabMachine({ showSchematic = false }: { showSchematic?: boolean }) {
+export function LabMachine({
+  showSchematic = false,
+  skin = "physical",
+}: {
+  showSchematic?: boolean;
+  skin?: "apparatus" | "physical";
+}) {
   const id = useId().replaceAll(":", "");
   const [svg, setSvg] = useState("");
 
@@ -121,21 +128,22 @@ export function LabMachine({ showSchematic = false }: { showSchematic?: boolean 
   }, [id, showSchematic]);
 
   return (
-    <section className="bf-machine" aria-label="Boundary First Labs machine">
+    <section className="bf-machine" data-skin={skin} aria-label="Boundary First Labs machine">
       <div className="bf-machine__title">
         <strong>THE LAB MACHINE</strong>
         <span>Powered by Research. Built for People.</span>
       </div>
       <div className="bf-machine__board">
         <svg className="bf-machine__traces" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
-          {labMachineEdges.map((edge, i) => (
-            <path
-              key={`${edge.from}-${edge.to}`}
-              data-kind={edge.kind}
-              data-tone={edgeTone(edge)}
-              d={tracePaths[i]}
-            />
-          ))}
+          {labMachineEdges.map((edge, i) => {
+            const tone = edgeTone(edge);
+            return (
+              <g key={`${edge.from}-${edge.to}`} className="bf-machine__cable" data-kind={edge.kind} data-tone={tone}>
+                <path className="bf-machine__cable-sheath" d={tracePaths[i]} />
+                <path className="bf-machine__cable-core" d={tracePaths[i]} />
+              </g>
+            );
+          })}
         </svg>
         {labMachineNodes.map((node) => <Node key={node.id} node={node} edges={labMachineEdges} />)}
       </div>
