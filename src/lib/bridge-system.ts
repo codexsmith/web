@@ -1,4 +1,4 @@
-import type { ContentNode, GraphEdge } from "@/lib/content";
+import type { ContentNode } from "@/lib/content";
 import {
   productLandingManifest,
   type ProductLandingEntry,
@@ -9,6 +9,13 @@ export type BridgeClass =
   | "research-validation"
   | "operational-pilot"
   | "historical-standing";
+
+export type BridgeSystemEdge = {
+  from: string;
+  to: string;
+  type: "interfaces-with";
+  label: string;
+};
 
 export type GovernedBridgeRecord = {
   entry: ProductLandingEntry;
@@ -249,7 +256,7 @@ const bridgeClassRelationLabels: Record<BridgeClass, string> = {
 
 const projectedSourceClassPairs = new Set<string>();
 
-export const bridgeSystemEdges: GraphEdge[] = governedBridgeRecords.flatMap((record) =>
+export const bridgeSystemEdges: BridgeSystemEdge[] = governedBridgeRecords.flatMap((record) =>
   record.sourceNodeIds.flatMap((sourceNodeId) => {
     const key = `${sourceNodeId}::${record.bridgeClass}`;
     if (projectedSourceClassPairs.has(key)) return [];
@@ -258,7 +265,7 @@ export const bridgeSystemEdges: GraphEdge[] = governedBridgeRecords.flatMap((rec
     return [{
       from: sourceNodeId,
       to: `bridges-${record.bridgeClass}`,
-      type: "applies-to",
+      type: "interfaces-with",
       label: bridgeClassRelationLabels[record.bridgeClass],
     }];
   }),
