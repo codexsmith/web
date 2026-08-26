@@ -1,0 +1,299 @@
+/*
+ * Production-card port for the physical Lab Machine skin.
+ *
+ * Source language: main branch card-root-control-board.css,
+ * p17-root-card-visual-grammar.css, and bf-industrial-tokens.css.
+ *
+ * Keep apparatus topology, mounts, ports, and cables. Replace the experimental
+ * card material stack with the proven production Card renderer's matte gunmetal,
+ * shallow physical hierarchy, recessed boundary register, warm type, and restrained
+ * semantic accents.
+ */
+
+.bf-machine[data-skin="physical"] {
+  --machine-card-bg: #0d151b;
+  --machine-card-panel: #172128;
+  --machine-card-panel-raised: #1b262e;
+  --machine-card-line: rgba(170, 180, 184, 0.20);
+  --machine-card-edge: rgba(170, 180, 184, 0.34);
+  --machine-card-highlight: rgba(255, 255, 255, 0.055);
+  --machine-card-shadow: rgba(0, 0, 0, 0.34);
+}
+
+/* Structure stays metal. Category color is a signal, not the body material. */
+.bf-machine[data-skin="physical"] .bf-machine-node {
+  filter: drop-shadow(0 3px 0 rgba(0,0,0,.56)) drop-shadow(0 8px 10px rgba(0,0,0,.42));
+}
+
+/* Keep a modest mounting flange so the card still belongs to an instrument cluster. */
+.bf-machine[data-skin="physical"] .bf-machine-node__mount {
+  display: block;
+  inset: -11px -10px -15px;
+  border: 1px solid rgba(170,180,184,.22);
+  border-radius: 10px;
+  clip-path: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 26%),
+    #11161b;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.05),
+    inset 0 -1px rgba(0,0,0,.48),
+    0 4px 0 rgba(0,0,0,.34),
+    0 8px 14px rgba(0,0,0,.32);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__mount::before,
+.bf-machine[data-skin="physical"] .bf-machine-node__mount::after { display:none; }
+
+/* Neutral outer housing, closely matching the production root cards. */
+.bf-machine[data-skin="physical"] .bf-machine-node__shell {
+  inset: -5px;
+  transform: none;
+  border: 1px solid var(--machine-card-edge);
+  border-radius: 9px;
+  clip-path: none;
+  background:
+    linear-gradient(180deg, var(--machine-card-highlight), transparent 25%),
+    #111a20;
+  box-shadow:
+    inset 0 1px var(--machine-card-highlight),
+    inset 0 -1px rgba(0,0,0,.38),
+    0 2px 7px var(--machine-card-shadow);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__shell::before {
+  inset: 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb,var(--tone) 42%,transparent);
+  border-radius: inherit;
+  clip-path: none;
+  box-shadow: none;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__shell::after { display:none; }
+
+/* This is the production Card surface, ported almost literally. */
+.bf-machine[data-skin="physical"] .bf-machine-node__face {
+  transform: none;
+  border: 1px solid var(--machine-card-edge);
+  border-radius: 7px;
+  clip-path: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 22%),
+    var(--machine-card-panel);
+  color: var(--bf-workshop-100, #e4e7e3);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.05),
+    inset 0 -1px rgba(0,0,0,.38),
+    0 2px 7px var(--machine-card-shadow);
+}
+
+/* Hardware is present but quiet, like case screws on an industrial panel. */
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners { inset:-5px; }
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners i {
+  width: 9px;
+  height: 9px;
+  outline: 0;
+  border: 1px solid rgba(190,199,203,.36);
+  background: radial-gradient(circle at 35% 30%, #9da5a8 0 9%, #495156 14% 42%, #151a1d 46%);
+  box-shadow: 0 1px 2px rgba(0,0,0,.72);
+}
+
+/* Main's canonical BFUX glyph treatment, adapted into the existing icon mount. */
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-plate {
+  left: 14px;
+  top: 14px;
+  width: 52px;
+  height: 52px;
+  padding: 6px;
+  transform: none;
+  border: 1px solid rgba(190,199,203,.26);
+  border-radius: 4px;
+  background: rgba(0,0,0,.12);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.045),
+    inset 0 -1px rgba(0,0,0,.34);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well {
+  border: 1px solid color-mix(in srgb,var(--tone) 46%,rgba(190,199,203,.24));
+  border-radius: 3px;
+  background: rgba(0,0,0,.16);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.04),
+    inset 0 -1px rgba(0,0,0,.34);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well svg {
+  width: 1.9rem;
+  height: 1.9rem;
+  color: var(--tone);
+  stroke-width: 1.55;
+  filter: none;
+}
+
+/* Production card register + title hierarchy. */
+.bf-machine[data-skin="physical"] .bf-machine-node header {
+  min-height: 72px;
+  padding: 14px 14px 8px 80px;
+  border: 0;
+  background: transparent;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header::after {
+  right: 14px;
+  top: 14px;
+  width: 12px;
+  border-top: 1px solid color-mix(in srgb,var(--tone) 56%,transparent);
+  box-shadow: none;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header span {
+  color: var(--bf-silver-300, #aab4b8);
+  font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size: clamp(.56rem,.55vw,.66rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header strong {
+  margin-top: .36rem;
+  color: var(--bf-workshop-100, #e4e7e3);
+  font-family: Georgia,"Times New Roman",serif;
+  font-size: clamp(1.25rem,1.45vw,1.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-shadow: none;
+}
+
+/* P17's recessed BOUNDARY register, ported directly. */
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary {
+  flex: 1 1 auto;
+  margin: 8px 14px 12px;
+  padding: 1.42rem .82rem .72rem;
+  transform: none;
+  border: 1px solid rgba(170,180,184,.18);
+  border-radius: 4px;
+  background: linear-gradient(180deg,rgba(0,0,0,.13),rgba(0,0,0,.06));
+  box-shadow:
+    inset 0 1px rgba(0,0,0,.34),
+    inset 0 -1px rgba(255,255,255,.025);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary::after { display:none; }
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary small {
+  position:absolute;
+  top:.42rem;
+  left:.78rem;
+  color: var(--bf-silver-300, #aab4b8);
+  font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size:.52rem;
+  font-weight:600;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  opacity:.82;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary p {
+  margin: 0;
+  color: var(--bf-silver-300, #aab4b8);
+  font-size: clamp(.7rem,.7vw,.84rem);
+  line-height:1.48;
+}
+
+/* Bottom readouts use the same integrated lower-strip treatment as main's cards. */
+.bf-machine[data-skin="physical"] .bf-machine-node footer {
+  min-height: 2.8rem;
+  margin: auto 0 0;
+  transform: none;
+  border: 0;
+  border-top: 1px solid var(--machine-card-line);
+  border-radius: 0;
+  background: rgba(0,0,0,.10);
+  box-shadow: none;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span {
+  justify-content:center;
+  padding:.48rem .62rem;
+  border-right:1px solid rgba(170,180,184,.12);
+  color: var(--bf-silver-300, #aab4b8);
+  font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size:.54rem;
+  line-height:1.2;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span:last-child { border-right:0; }
+.bf-machine[data-skin="physical"] .bf-machine-node footer small {
+  color: color-mix(in srgb,var(--tone) 65%,var(--bf-silver-300,#aab4b8));
+  font-size:.49rem;
+  letter-spacing:.08em;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer .bf-machine-node__state::before {
+  width:.4rem;
+  height:.4rem;
+  background:var(--tone);
+  border:1px solid color-mix(in srgb,var(--tone) 70%,white 8%);
+  box-shadow:none;
+}
+
+/* Keep graph-derived through-wall ports, but tune them to main's shallow control physics. */
+.bf-machine[data-skin="physical"] .bf-machine-node__ports {
+  gap:3px;
+  padding:4px;
+  border:1px solid rgba(170,180,184,.34);
+  border-radius:4px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.05),transparent 34%),
+    #182129;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.055),
+    inset 0 -1px rgba(0,0,0,.4),
+    0 2px 5px rgba(0,0,0,.38);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__ports i {
+  width:8px;
+  height:8px;
+  border:1px solid color-mix(in srgb,var(--tone) 52%,rgba(170,180,184,.42));
+  background:rgba(0,0,0,.34);
+  box-shadow:none;
+}
+
+/* Category signal appears at the top edge and icon; the metal body stays shared. */
+.bf-machine[data-skin="physical"] .bf-machine-node__face::before {
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:0;
+  right:0;
+  top:0;
+  height:1px;
+  background:color-mix(in srgb,var(--tone) 48%,transparent);
+  pointer-events:none;
+}
+
+/* Research is more important by size, not by a completely different material language. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__mount {
+  inset:-14px -13px -18px;
+  border-width:1px;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.05),
+    0 5px 0 rgba(0,0,0,.36),
+    0 11px 18px rgba(0,0,0,.38);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__shell {
+  inset:-7px;
+  border-width:1px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header strong {
+  font-size:clamp(1.55rem,1.8vw,2.15rem);
+}
+
+/* Compact endpoints inherit the same material rather than looking like another renderer. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__mount,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__mount {
+  inset:-8px -7px -11px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__shell,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__shell {
+  inset:-4px;
+}
+
+@media (max-width:900px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node__mount { display:none; }
+  .bf-machine[data-skin="physical"] .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node footer { transform:none; }
+}
