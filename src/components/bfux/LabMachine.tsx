@@ -11,8 +11,7 @@ import {
 } from "./lab-machine-model";
 import "./lab-machine.css";
 import "./lab-machine-physical.css";
-import "./lab-machine-reference-cards.css";
-import "./lab-machine-mass.css";
+import "./lab-machine-main-card-port.css";
 
 const nodeIcons: Record<string, BfuxIconName> = {
   products: "object",
