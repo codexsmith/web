@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LabMachine } from "@/components/bfux/LabMachine";
+import "./world-machine-preview.css";
 
 export const metadata = {
   title: "World · Lab Machine preview",
