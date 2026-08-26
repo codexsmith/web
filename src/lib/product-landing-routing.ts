@@ -2,6 +2,7 @@ import manifestData from "../content/product-landing-pages/manifest.json";
 import {
   BRIDGE_RELATIONSHIP_STATUSES,
   validateBridgeGovernanceEntry,
+  type BridgeOperationalMetadata,
   type BridgeRelationshipStatus,
 } from "@/lib/bridge-governance";
 
@@ -26,6 +27,7 @@ export type ProductLandingEntry = {
   routingEligibility: RoutingEligibility;
   file: string;
   relationshipStatus?: RelationshipStatus;
+  bridgeOperations?: BridgeOperationalMetadata;
 };
 
 export type ProductLandingManifest = {
