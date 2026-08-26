@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import {
   labMachineEdges,
   labMachineMermaid,
@@ -10,9 +11,32 @@ import {
 } from "./lab-machine-model";
 import "./lab-machine.css";
 
+const nodeIcons: Record<string, BfuxIconName> = {
+  products: "object",
+  publications: "claim",
+  applications: "projection",
+  method: "contexture",
+  pipeline: "trace",
+  research: "invariant",
+  about: "actor",
+  people: "peer",
+  governance: "responsibility",
+  timeline: "process",
+  service: "port",
+  "public-value": "consequence",
+};
+
+function edgeTone(edge: LabMachineEdge) {
+  const source = labMachineNodes.find((node) => node.id === edge.from);
+  const target = labMachineNodes.find((node) => node.id === edge.to);
+  if (edge.kind === "feeds") return target?.tone ?? source?.tone ?? "slate";
+  return source?.tone ?? target?.tone ?? "slate";
+}
+
 function Node({ node, edges }: { node: LabMachineNode; edges: LabMachineEdge[] }) {
   const inbound = edges.filter((edge) => edge.to === node.id);
   const outbound = edges.filter((edge) => edge.from === node.id);
+  const icon = nodeIcons[node.id] ?? "boundary";
 
   return (
     <article
@@ -23,7 +47,17 @@ function Node({ node, edges }: { node: LabMachineNode; edges: LabMachineEdge[] }
       style={{ gridArea: node.area }}
     >
       <div className="bf-machine-node__shell" aria-hidden="true" />
+      <span className="bf-machine-node__fasteners" aria-hidden="true">
+        <i /><i /><i /><i />
+      </span>
+
       <div className="bf-machine-node__face">
+        <div className="bf-machine-node__icon-plate" aria-hidden="true">
+          <span className="bf-machine-node__icon-well">
+            <BfuxIcon name={icon} />
+          </span>
+        </div>
+
         <header>
           <span>{node.question}</span>
           <strong>{node.label}</strong>
@@ -37,7 +71,7 @@ function Node({ node, edges }: { node: LabMachineNode; edges: LabMachineEdge[] }
         {(node.state || node.meta?.length) && (
           <footer>
             {node.state && (
-              <span>
+              <span className="bf-machine-node__state">
                 <small>STATE</small>
                 {node.state}
               </span>
@@ -95,7 +129,12 @@ export function LabMachine({ showSchematic = false }: { showSchematic?: boolean 
       <div className="bf-machine__board">
         <svg className="bf-machine__traces" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
           {labMachineEdges.map((edge, i) => (
-            <path key={`${edge.from}-${edge.to}`} data-kind={edge.kind} d={tracePaths[i]} />
+            <path
+              key={`${edge.from}-${edge.to}`}
+              data-kind={edge.kind}
+              data-tone={edgeTone(edge)}
+              d={tracePaths[i]}
+            />
           ))}
         </svg>
         {labMachineNodes.map((node) => <Node key={node.id} node={node} edges={labMachineEdges} />)}
