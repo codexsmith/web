@@ -1,0 +1,49 @@
+"use client";
+
+import { useEffect, useId, useState } from "react";
+import { labMachineEdges, labMachineMermaid, labMachineNodes, type LabMachineNode } from "./lab-machine-model";
+import "./lab-machine.css";
+
+function Node({ node }: { node: LabMachineNode }) {
+  return (
+    <article className={`bf-machine-node bf-machine-node--${node.kind}`} data-tone={node.tone} style={{ gridArea: node.area }}>
+      <header><span>{node.question}</span><strong>{node.label}</strong></header>
+      <div className="bf-machine-node__boundary"><small>BOUNDARY</small><p>{node.boundary}</p></div>
+      {(node.state || node.meta?.length) && <footer>
+        {node.state && <span><small>STATE</small>{node.state}</span>}
+        {node.meta?.map(item => <span key={item}>{item}</span>)}
+      </footer>}
+    </article>
+  );
+}
+
+export function LabMachine({ showSchematic = false }: { showSchematic?: boolean }) {
+  const id = useId().replaceAll(":", "");
+  const [svg, setSvg] = useState("");
+
+  useEffect(() => {
+    if (!showSchematic) return;
+    let live = true;
+    import("mermaid").then(({ default: mermaid }) => {
+      mermaid.initialize({ startOnLoad:false, theme:"dark", securityLevel:"strict", flowchart:{ curve:"stepAfter", htmlLabels:false } });
+      return mermaid.render(`lab-machine-${id}`, labMachineMermaid());
+    }).then(result => { if (live) setSvg(result.svg); });
+    return () => { live = false; };
+  }, [id, showSchematic]);
+
+  return <section className="bf-machine" aria-label="Boundary First Labs machine">
+    <div className="bf-machine__title"><strong>THE LAB MACHINE</strong><span>Powered by Research. Built for People.</span></div>
+    <div className="bf-machine__board">
+      <svg className="bf-machine__traces" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
+        {labMachineEdges.map((edge, i) => <path key={`${edge.from}-${edge.to}`} data-kind={edge.kind} d={tracePaths[i]} />)}
+      </svg>
+      {labMachineNodes.map(node => <Node key={node.id} node={node} />)}
+    </div>
+    {showSchematic && <details className="bf-machine__schematic"><summary>Structure / Mermaid projection</summary><div dangerouslySetInnerHTML={{ __html: svg }} /></details>}
+  </section>;
+}
+
+const tracePaths = [
+  "M245 350 H410", "M245 500 H410", "M790 385 H900", "M520 290 V185 H365", "M600 290 V185 H600", "M680 290 V185 H835",
+  "M470 560 V650", "M600 560 V650", "M730 560 V650", "M955 185 H1080 V300", "M1110 365 V455", "M1080 520 H925 V700 H500"
+];
