@@ -311,7 +311,7 @@ export function ProductLandingRenderer({
             ) : null}
             <div className="mt-9 flex flex-wrap gap-3">
               <Cta
-                fallbackHref={bridge ? "/collaborate" : frame.href}
+                fallbackHref={bridge ? "/about/bridges" : frame.href}
                 inverted={softwareHero}
                 value={primaryCta}
               />
@@ -1075,9 +1075,9 @@ function BridgeFooter({ entry }: { entry: ProductLandingEntry }) {
         </div>
         <Link
           className="inline-flex min-h-10 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em]"
-          href="/collaborate"
+          href="/about/bridges"
         >
-          Collaboration context
+          Bridge context
           <FlaskConical aria-hidden="true" className="ml-2 h-3.5 w-3.5" />
         </Link>
       </div>
