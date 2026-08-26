@@ -1,4 +1,5 @@
 import type { ContentNode } from "@/lib/content";
+import { getBridgeQueueSummary } from "@/lib/bridge-work-queue";
 import {
   productLandingManifest,
   type ProductLandingEntry,
@@ -112,6 +113,7 @@ const directLinkCount = governedBridgeRecords.filter(
 ).length;
 
 const discoverableCount = governedBridgeRecords.filter(isBridgeDiscoverable).length;
+const queueSummary = getBridgeQueueSummary();
 
 const classDefinitions: Array<{
   id: BridgeClass;
@@ -224,6 +226,21 @@ const bridgeSystemNode: ContentNode = {
         "Promotion must be explicit; routing, navigation, sitemap discovery, and relationship language must change together.",
       ],
       sourceRef: "src/content/product-landing-pages/manifest.json + src/lib/product-landing-routing.ts",
+    },
+    {
+      id: "bridge-operations-projection",
+      label: "Operational projection",
+      eyebrow: "Private queue, public protocol",
+      summary:
+        "The manifest now projects into an action queue without making named outreach operations part of the public World.",
+      bullets: [
+        `${queueSummary.total} governed bridge records currently project into the operational queue.`,
+        `${queueSummary.counts.drafting} are currently in the drafting queue.`,
+        `${queueSummary.stale} currently carry a derived staleness signal.`,
+        "Ready, sent, discussion, scoped, active, declined, and historical states project into distinct operational queues.",
+        "Owners, contact timestamps, next actions, recipient identities, and overdue details remain internal record data rather than public graph content.",
+      ],
+      sourceRef: "src/lib/bridge-work-queue.ts + src/lib/bridge-governance.ts",
     },
   ],
 };
