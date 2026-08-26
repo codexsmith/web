@@ -29,6 +29,14 @@ export type BridgeRoutingEligibility =
   | "unlisted-only"
   | "hold";
 
+export type BridgeOperationalMetadata = {
+  owner?: string;
+  lifecycleChangedAt?: string;
+  lastContactAt?: string;
+  nextAction?: string;
+  nextActionAt?: string;
+};
+
 export type BridgeGovernanceState = {
   lifecycle: BridgeLifecycleStage;
   visibility: BridgeVisibility;
@@ -79,6 +87,61 @@ export function getBridgeLifecycle(
   status: string,
 ): BridgeLifecycleStage | undefined {
   return isBridgeLifecycleStage(status) ? status : undefined;
+}
+
+function isIsoDateTime(value: string) {
+  return value.includes("T") && !Number.isNaN(Date.parse(value));
+}
+
+export function validateBridgeOperationalMetadata(
+  lifecycle: BridgeLifecycleStage,
+  metadata: BridgeOperationalMetadata | undefined,
+): string[] {
+  const errors: string[] = [];
+  if (!metadata) {
+    if (lifecycle === "sent" || lifecycle === "discussion") {
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.lastContactAt`);
+    }
+    if (lifecycle === "scoped" || lifecycle === "active") {
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.owner and lifecycleChangedAt`);
+    }
+    return errors;
+  }
+
+  for (const [field, value] of [
+    ["lifecycleChangedAt", metadata.lifecycleChangedAt],
+    ["lastContactAt", metadata.lastContactAt],
+    ["nextActionAt", metadata.nextActionAt],
+  ] as const) {
+    if (value && !isIsoDateTime(value)) {
+      errors.push(`bridgeOperations.${field} must be an ISO date-time`);
+    }
+  }
+
+  if (metadata.nextAction && !metadata.nextActionAt) {
+    errors.push("bridgeOperations.nextAction requires nextActionAt");
+  }
+  if (metadata.nextActionAt && !metadata.nextAction) {
+    errors.push("bridgeOperations.nextActionAt requires nextAction");
+  }
+
+  if (
+    (lifecycle === "sent" || lifecycle === "discussion") &&
+    !metadata.lastContactAt
+  ) {
+    errors.push(`${lifecycle} lifecycle requires bridgeOperations.lastContactAt`);
+  }
+
+  if (lifecycle === "scoped" || lifecycle === "active") {
+    if (!metadata.owner?.trim()) {
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.owner`);
+    }
+    if (!metadata.lifecycleChangedAt) {
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.lifecycleChangedAt`);
+    }
+  }
+
+  return errors;
 }
 
 export function validateBridgeGovernanceState(
@@ -173,6 +236,7 @@ export function validateBridgeGovernanceEntry(entry: {
   visibility: BridgeVisibility;
   routingEligibility: BridgeRoutingEligibility;
   relationshipStatus?: string;
+  bridgeOperations?: BridgeOperationalMetadata;
 }): string[] {
   const errors: string[] = [];
   const lifecycle = getBridgeLifecycle(entry.status);
@@ -199,5 +263,6 @@ export function validateBridgeGovernanceEntry(entry: {
       routingEligibility: entry.routingEligibility,
       relationshipStatus: entry.relationshipStatus,
     }),
+    ...validateBridgeOperationalMetadata(lifecycle, entry.bridgeOperations),
   ];
 }
