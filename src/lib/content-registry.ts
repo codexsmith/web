@@ -4,6 +4,7 @@ import {
   type ContentNode as BaseContentNode,
   type GraphEdge,
 } from "@/lib/content";
+import { bridgeSystemNodes } from "@/lib/bridge-system";
 import { getLocalSections, type LocalSectionDefinition } from "@/lib/local-section-registry";
 import {
   persistencePublicationEdges,
@@ -112,7 +113,12 @@ function withFounderTimelineNavigation(node: ContentNode): ContentNode {
   };
 }
 
-const rawNodes: ContentNode[] = [...baseNodes, ...publicationNodes, ...persistencePublicationNodes];
+const rawNodes: ContentNode[] = [
+  ...baseNodes,
+  ...bridgeSystemNodes,
+  ...publicationNodes,
+  ...persistencePublicationNodes,
+];
 
 export const nodes: ContentNode[] = rawNodes.map((node) => {
   const localSections = getLocalSections(node.id);
@@ -128,6 +134,7 @@ const nodeByPath = new Map(nodes.map((node) => [node.path, node]));
 
 const canonicalChildOrder: Record<string, string[]> = {
   root: ["public-interest", "products", "publications", "about", "research"],
+  about: ["the-lab", "how-we-work", "bridges", "provenance", "contact"],
 };
 
 function orderChildren(parentId: string, children: ContentNode[]) {
