@@ -12,6 +12,7 @@ import {
 import "./lab-machine.css";
 import "./lab-machine-physical.css";
 import "./lab-machine-reference-cards.css";
+import "./lab-machine-mass.css";
 
 const nodeIcons: Record<string, BfuxIconName> = {
   products: "object",
@@ -62,6 +63,7 @@ function Node({ node, edges }: { node: LabMachineNode; edges: LabMachineEdge[] }
       data-outputs={outbound.length}
       style={{ gridArea: node.area }}
     >
+      <div className="bf-machine-node__mount" aria-hidden="true" />
       <div className="bf-machine-node__shell" aria-hidden="true" />
       <span className="bf-machine-node__fasteners" aria-hidden="true">
         <i /><i /><i /><i />
