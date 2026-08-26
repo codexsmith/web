@@ -209,7 +209,7 @@
 
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] .bf-machine-node__mount,
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="applications"] .bf-machine-node__mount {
-  inset-bottom: -24px;
+  inset: -17px -15px -24px;
 }
 
 /* Compact terminal appliances remain smaller, but should still feel dense. */
