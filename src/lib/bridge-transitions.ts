@@ -304,3 +304,28 @@ export function reopenBridge(
     bridgeOperations: undefined,
   });
 }
+
+export function publishBridge(entry: ProductLandingEntry): BridgeEntry {
+  const bridge = requireBridge(entry);
+  const lifecycle = requireLifecycle(bridge);
+  if (lifecycle !== "active" && lifecycle !== "historical") {
+    throw new Error(
+      `Bridge ${bridge.id} can only become public when active or historical`,
+    );
+  }
+
+  return assertValid({
+    ...bridge,
+    visibility: "public",
+    routingEligibility: "public-candidate",
+  });
+}
+
+export function unpublishBridge(entry: ProductLandingEntry): BridgeEntry {
+  const bridge = requireBridge(entry);
+  return assertValid({
+    ...bridge,
+    visibility: "unlisted",
+    routingEligibility: "unlisted-only",
+  });
+}
