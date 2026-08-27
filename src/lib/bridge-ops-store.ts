@@ -1,5 +1,3 @@
-import "server-only";
-
 import type { ProductLandingManifest } from "@/lib/product-landing-routing";
 
 const MANIFEST_PATH = "src/content/product-landing-pages/manifest.json";
