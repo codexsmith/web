@@ -126,7 +126,7 @@ async function githubJson<T>(
 }
 
 function decodeContents(payload: GitHubContentsResponse, label: string) {
-  if (payload.encoding !== "base64" || !payload.content || !payload.sha) {
+  if (payload.encoding !== "base64" || typeof payload.content !== "string" || !payload.sha) {
     throw new Error(`GitHub returned an unsupported ${label} payload`);
   }
   return Buffer.from(payload.content.replace(/\n/g, ""), "base64").toString("utf8");
