@@ -85,6 +85,8 @@ const relationshipNotices: Record<RelationshipStatus, string> = {
     "An active bounded collaboration exists. Public description is limited to the actual collaboration scope and does not imply broader endorsement, adoption, or institutional sponsorship.",
   "historical-collaboration":
     "A documented collaboration occurred historically and is no longer active. Historical description must not imply a current relationship or continuing endorsement.",
+  "declined-no-current-affiliation":
+    "The proposed bridge is closed without a current collaboration. No affiliation, endorsement, sponsorship, review, adoption, or partnership is implied.",
 };
 
 export const productLandingManifest = manifestData as ProductLandingManifest;
