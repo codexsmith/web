@@ -18,6 +18,7 @@ export const BRIDGE_RELATIONSHIP_STATUSES = [
   "scoped-collaboration",
   "active-collaboration",
   "historical-collaboration",
+  "declined-no-current-affiliation",
 ] as const;
 
 export type BridgeRelationshipStatus =
@@ -35,6 +36,7 @@ export type BridgeOperationalMetadata = {
   lastContactAt?: string;
   nextAction?: string;
   nextActionAt?: string;
+  closureReason?: string;
 };
 
 export type BridgeGovernanceState = {
@@ -98,12 +100,19 @@ export function validateBridgeOperationalMetadata(
   metadata: BridgeOperationalMetadata | undefined,
 ): string[] {
   const errors: string[] = [];
+
   if (!metadata) {
+    if (lifecycle !== "draft") {
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.lifecycleChangedAt`);
+    }
     if (lifecycle === "sent" || lifecycle === "discussion") {
       errors.push(`${lifecycle} lifecycle requires bridgeOperations.lastContactAt`);
     }
     if (lifecycle === "scoped" || lifecycle === "active") {
-      errors.push(`${lifecycle} lifecycle requires bridgeOperations.owner and lifecycleChangedAt`);
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.owner`);
+    }
+    if (lifecycle === "declined" || lifecycle === "historical") {
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.closureReason`);
     }
     return errors;
   }
@@ -116,6 +125,10 @@ export function validateBridgeOperationalMetadata(
     if (value && !isIsoDateTime(value)) {
       errors.push(`bridgeOperations.${field} must be an ISO date-time`);
     }
+  }
+
+  if (lifecycle !== "draft" && !metadata.lifecycleChangedAt) {
+    errors.push(`${lifecycle} lifecycle requires bridgeOperations.lifecycleChangedAt`);
   }
 
   if (metadata.nextAction && !metadata.nextActionAt) {
@@ -136,9 +149,17 @@ export function validateBridgeOperationalMetadata(
     if (!metadata.owner?.trim()) {
       errors.push(`${lifecycle} lifecycle requires bridgeOperations.owner`);
     }
-    if (!metadata.lifecycleChangedAt) {
-      errors.push(`${lifecycle} lifecycle requires bridgeOperations.lifecycleChangedAt`);
+  }
+
+  if (lifecycle === "declined" || lifecycle === "historical") {
+    if (!metadata.closureReason?.trim()) {
+      errors.push(`${lifecycle} lifecycle requires bridgeOperations.closureReason`);
     }
+    if (metadata.nextAction || metadata.nextActionAt) {
+      errors.push(`${lifecycle} lifecycle cannot retain a next action`);
+    }
+  } else if (metadata.closureReason) {
+    errors.push("bridgeOperations.closureReason is only valid for declined or historical lifecycle");
   }
 
   return errors;
@@ -210,6 +231,13 @@ export function validateBridgeGovernanceState(
     state.lifecycle !== "historical"
   ) {
     errors.push("historical-collaboration relationship status is only valid at historical lifecycle");
+  }
+
+  if (
+    state.relationshipStatus === "declined-no-current-affiliation" &&
+    state.lifecycle !== "declined"
+  ) {
+    errors.push("declined-no-current-affiliation relationship status is only valid at declined lifecycle");
   }
 
   if (state.visibility === "public") {
