@@ -1,5 +1,6 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
 import { redirect } from "next/navigation";
 import {
   activateBridge,
@@ -21,10 +22,17 @@ import {
   isBridgeOpsPassword,
 } from "@/lib/bridge-ops-auth";
 import {
-  commitBridgeOpsManifest,
+  commitBridgeOpsTransaction,
   loadBridgeOpsManifest,
 } from "@/lib/bridge-ops-store";
+import {
+  BRIDGE_EVENT_OPERATIONS,
+  createBridgeEventRecord,
+  type BridgeEventOperation,
+} from "@/lib/bridge-event-ledger";
 import { validateProductLandingManifest } from "@/lib/product-landing-routing";
+
+const bridgeEventOperationSet = new Set<string>(BRIDGE_EVENT_OPERATIONS);
 
 function text(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -51,6 +59,17 @@ function destination(message: string, error = false) {
   return `/ops/bridges?${key}=${encodeURIComponent(message)}`;
 }
 
+function operatorIdentity() {
+  return process.env.BFL_BRIDGE_OPS_ACTOR?.trim() || "operator";
+}
+
+function requireBridgeEventOperation(value: string): BridgeEventOperation {
+  if (!bridgeEventOperationSet.has(value)) {
+    throw new Error(`Unsupported bridge operation ${value}`);
+  }
+  return value as BridgeEventOperation;
+}
+
 export async function loginBridgeOpsAction(formData: FormData) {
   const candidate = text(formData, "password");
   if (!isBridgeOpsPassword(candidate)) {
@@ -75,8 +94,8 @@ export async function mutateBridgeAction(formData: FormData) {
   await requireSession();
 
   const id = text(formData, "id");
-  const operation = text(formData, "operation");
-  if (!id || !operation) {
+  const operationText = text(formData, "operation");
+  if (!id || !operationText) {
     redirect(destination("Bridge id and operation are required", true));
   }
 
@@ -84,6 +103,7 @@ export async function mutateBridgeAction(formData: FormData) {
   let errorMessage: string | undefined;
 
   try {
+    const operation = requireBridgeEventOperation(operationText);
     const snapshot = await loadBridgeOpsManifest();
     const index = snapshot.manifest.pages.findIndex(
       (entry) => entry.id === id && entry.collection === "bridge",
@@ -97,35 +117,36 @@ export async function mutateBridgeAction(formData: FormData) {
     const nextActionAt = dateTime(formData, "nextActionAt");
     const owner = optionalText(formData, "owner");
     const reason = optionalText(formData, "reason");
+    const occurredAt = new Date().toISOString();
 
     let next = current;
     switch (operation) {
       case "ready":
-        next = markBridgeReady(current, { nextAction, nextActionAt });
+        next = markBridgeReady(current, { nextAction, nextActionAt }, { at: occurredAt });
         break;
       case "sent":
-        next = markBridgeSent(current, { nextAction, nextActionAt });
+        next = markBridgeSent(current, { nextAction, nextActionAt }, { at: occurredAt });
         break;
       case "response":
-        next = recordBridgeResponse(current, { nextAction, nextActionAt });
+        next = recordBridgeResponse(current, { nextAction, nextActionAt }, { at: occurredAt });
         break;
       case "contact":
-        next = recordBridgeContact(current, { nextAction, nextActionAt });
+        next = recordBridgeContact(current, { nextAction, nextActionAt }, { at: occurredAt });
         break;
       case "scope":
         if (!owner) throw new Error("Scoping requires an owner");
-        next = scopeBridge(current, { owner, nextAction, nextActionAt });
+        next = scopeBridge(current, { owner, nextAction, nextActionAt }, { at: occurredAt });
         break;
       case "activate":
-        next = activateBridge(current, { owner, nextAction, nextActionAt });
+        next = activateBridge(current, { owner, nextAction, nextActionAt }, { at: occurredAt });
         break;
       case "decline":
         if (!reason) throw new Error("Declining requires a closure reason");
-        next = declineBridge(current, { reason });
+        next = declineBridge(current, { reason }, { at: occurredAt });
         break;
       case "archive":
         if (!reason) throw new Error("Archiving requires a closure reason");
-        next = archiveBridge(current, { reason });
+        next = archiveBridge(current, { reason }, { at: occurredAt });
         break;
       case "reopen":
         next = reopenBridge(current);
@@ -136,8 +157,6 @@ export async function mutateBridgeAction(formData: FormData) {
       case "unpublish":
         next = unpublishBridge(current);
         break;
-      default:
-        throw new Error(`Unsupported bridge operation ${operation}`);
     }
 
     const manifest = {
@@ -154,15 +173,24 @@ export async function mutateBridgeAction(formData: FormData) {
       );
     }
 
-    const result = await commitBridgeOpsManifest(
+    const event = createBridgeEventRecord({
+      eventId: randomUUID(),
+      operation,
+      occurredAt,
+      actor: operatorIdentity(),
+      parentCommit: snapshot.parentCommit,
+      before: current,
+      after: next,
+    });
+
+    const result = await commitBridgeOpsTransaction(
       snapshot,
       manifest,
+      event,
       `Bridge ops: ${operation} ${id}`,
     );
 
-    successMessage = `${id}: ${operation} committed${
-      result.commitSha ? ` (${result.commitSha.slice(0, 8)})` : ""
-    }`;
+    successMessage = `${id}: ${operation} committed (${result.commitSha.slice(0, 8)})`;
   } catch (error) {
     errorMessage = error instanceof Error ? error.message : "Bridge mutation failed";
   }
