@@ -38,7 +38,12 @@ function optionalText(formData: FormData, key: string) {
 
 function dateTime(formData: FormData, key: string) {
   const value = optionalText(formData, key);
-  return value ? new Date(value).toISOString() : undefined;
+  if (!value) return undefined;
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    throw new Error(`${key} must be a valid date-time`);
+  }
+  return parsed.toISOString();
 }
 
 function destination(message: string, error = false) {
@@ -74,6 +79,9 @@ export async function mutateBridgeAction(formData: FormData) {
   if (!id || !operation) {
     redirect(destination("Bridge id and operation are required", true));
   }
+
+  let successMessage: string | undefined;
+  let errorMessage: string | undefined;
 
   try {
     const snapshot = await loadBridgeOpsManifest();
@@ -152,13 +160,12 @@ export async function mutateBridgeAction(formData: FormData) {
       `Bridge ops: ${operation} ${id}`,
     );
 
-    redirect(
-      destination(
-        `${id}: ${operation} committed${result.commitSha ? ` (${result.commitSha.slice(0, 8)})` : ""}`,
-      ),
-    );
+    successMessage = `${id}: ${operation} committed${
+      result.commitSha ? ` (${result.commitSha.slice(0, 8)})` : ""
+    }`;
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Bridge mutation failed";
-    redirect(destination(message, true));
+    errorMessage = error instanceof Error ? error.message : "Bridge mutation failed";
   }
+
+  redirect(destination(errorMessage ?? successMessage ?? "Bridge operation completed", Boolean(errorMessage)));
 }
