@@ -203,6 +203,13 @@ export function validateBridgeGovernanceState(
   }
 
   if (
+    state.lifecycle === "declined" &&
+    state.relationshipStatus !== "declined-no-current-affiliation"
+  ) {
+    errors.push("declined lifecycle requires declined-no-current-affiliation relationship status");
+  }
+
+  if (
     state.lifecycle === "historical" &&
     state.relationshipStatus !== "historical-collaboration" &&
     state.relationshipStatus !== "historical-project-no-current-affiliation"
