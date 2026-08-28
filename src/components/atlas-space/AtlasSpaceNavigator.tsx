@@ -13,9 +13,16 @@ type TransitionDirection = "descend" | "ascend";
 type ScaleTransition = {
   direction: TransitionDirection;
   layerId: string;
+  fiberId: string;
 };
 
 const TRANSITION_MS = 560;
+
+function connectorCode(kind: "through" | "keyed" | "test") {
+  if (kind === "through") return "THR";
+  if (kind === "keyed") return "KEY";
+  return "TST";
+}
 
 export function AtlasSpaceNavigator() {
   const model = defaultAtlasSpaceModel;
@@ -26,6 +33,7 @@ export function AtlasSpaceNavigator() {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const activeLayer = model.layers.find((layer) => layer.id === activeLayerId) ?? model.layers[0];
+  const activeFiber = model.fibers.find((fiber) => fiber.id === activeFiberId) ?? model.fibers[0];
   const activeLayerIndex = Math.max(0, model.layers.findIndex((layer) => layer.id === activeLayerId));
   const activeMetaPosition = useMemo(
     () => metaPositionFor(activeLayerIndex, model.layers.length),
@@ -36,7 +44,7 @@ export function AtlasSpaceNavigator() {
     if (timerRef.current) clearTimeout(timerRef.current);
   }, []);
 
-  if (!activeLayer) return null;
+  if (!activeLayer || !activeFiber) return null;
 
   const scheduleTransition = (next: ScaleTransition) => {
     if (transition) return;
@@ -53,13 +61,18 @@ export function AtlasSpaceNavigator() {
   const enterStack = (layerId: string) => {
     if (transition) return;
     setActiveLayerId(layerId);
-    scheduleTransition({ direction: "descend", layerId });
+    scheduleTransition({ direction: "descend", layerId, fiberId: activeFiberId });
   };
 
   const zoomOut = () => {
     if (transition) return;
-    scheduleTransition({ direction: "ascend", layerId: activeLayer.id });
+    scheduleTransition({ direction: "ascend", layerId: activeLayer.id, fiberId: activeFiber.id });
   };
+
+  const transitionFiber = transition
+    ? model.fibers.find((fiber) => fiber.id === transition.fiberId) ?? activeFiber
+    : activeFiber;
+  const transitionAnchor = activeLayer.anchors.find((anchor) => anchor.fiberId === transitionFiber.id);
 
   const transitionStyle = {
     "--meta-x": `${activeMetaPosition.x}%`,
@@ -79,11 +92,11 @@ export function AtlasSpaceNavigator() {
           <strong>
             {transition
               ? transition.direction === "descend"
-                ? `PROJECTING ${activeLayer.hardware.rackCode} → STACK`
-                : `PROJECTING ${activeLayer.hardware.rackCode} → META`
+                ? `PROJECTING ${activeLayer.hardware.rackCode} / ${transitionFiber.label} → STACK`
+                : `PROJECTING ${activeLayer.hardware.rackCode} / ${transitionFiber.label} → META`
               : mode === "meta"
-                ? "META-ATLAS"
-                : `DOMAIN STACK / ${activeLayer.hardware.rackCode}`}
+                ? `META-ATLAS / ${activeFiber.label}`
+                : `DOMAIN STACK / ${activeLayer.hardware.rackCode} / ${activeFiber.label}`}
           </strong>
         </div>
 
@@ -130,9 +143,12 @@ export function AtlasSpaceNavigator() {
           />
         ) : (
           <AtlasSpace
-            key={activeLayerId}
+            key={`${activeLayerId}-${transition?.direction === "descend" ? transition.fiberId : "mounted"}`}
             model={model}
             initialLayerId={activeLayerId}
+            initialFiberId={activeFiberId}
+            onActiveLayerChange={setActiveLayerId}
+            onActiveFiberChange={setActiveFiberId}
           />
         )}
 
@@ -155,12 +171,22 @@ export function AtlasSpaceNavigator() {
                   <small>{activeLayer.hardware.registry}</small>
                 </div>
               </div>
+              <div className={styles.bridgeFiberReadout}>
+                <span className={styles.bridgeFiberLamp} />
+                <div>
+                  <small>CONSERVed correspondence channel</small>
+                  <strong>{transitionFiber.label}</strong>
+                  <span>{connectorCode(transitionFiber.connectorKind)} / {transitionAnchor?.label ?? "UNMAPPED LOCAL PORT"}</span>
+                </div>
+              </div>
               <div className={styles.bridgeProjectionReadout}>
                 <span>{transition.direction === "descend" ? "PROMOTING DOMAIN REGION" : "COLLAPSING DOMAIN BOARD"}</span>
                 <strong>{transition.direction === "descend" ? "META → STACK" : "STACK → META"}</strong>
               </div>
               <div className={styles.bridgeEdgeConnector}>
-                <i /><i /><i /><i /><i /><i />
+                {model.fibers.map((fiber) => (
+                  <i key={fiber.id} className={fiber.id === transitionFiber.id ? styles.bridgeEdgeContactActive : ""} />
+                ))}
               </div>
             </div>
           </div>
@@ -168,9 +194,9 @@ export function AtlasSpaceNavigator() {
       </div>
 
       <footer className={styles.navigatorFooter}>
-        <span>BF-ATLAS / SCALE BUS 0.6</span>
+        <span>BF-ATLAS / SCALE BUS 0.7</span>
         <strong>META ⇄ STACK → EXTRACT → INSPECT → DRILL</strong>
-        <span>PROJECTION CHANGES SCALE, NOT OBJECT IDENTITY</span>
+        <span>OBJECT + CORRESPONDENCE STATE CONSERVED ACROSS PROJECTION</span>
       </footer>
     </section>
   );
