@@ -1,0 +1,238 @@
+{
+  "schemaVersion": "0.1.0",
+  "layer": {
+    "id": "lab-machine",
+    "name": "Lab Machine",
+    "scale": "institutional-operational",
+    "purpose": "Explain how Boundary First Labs operates as a system: what each subsystem does, why it exists, how work moves through it, what constrains it, and what the Lab is attempting to learn or validate through it.",
+    "zoomInMeans": "Inspect the concrete artifacts, records, products, publications, claims, evidence, people, events, or policies contained by the subsystem.",
+    "zoomOutMeans": "Recover the larger institutional purpose, public value, vision, mission, goals, and future-state implications of the Lab."
+  },
+  "cards": {
+    "research": {
+      "label": "Research",
+      "eyebrow": "CORE POWER SOURCE",
+      "framingQuestion": "What is the Lab trying to understand?",
+      "systemRole": "Epistemic engine",
+      "orientation": "Research is where observations, questions, distinctions, models, formal structures, mechanisms, and claims are developed into inspectable knowledge.",
+      "institutionalPurpose": "Generate the explanatory and formal substance from which methods, products, publications, and applications can be built.",
+      "boundary": {
+        "contains": ["research programs", "formal theories", "working hypotheses", "derivations", "experiments", "comparative analyses", "claim and evidence structures"],
+        "excludes": ["claims treated as settled merely because they are interesting", "products treated as validation by themselves", "publication status treated as proof"]
+      },
+      "process": {
+        "entersAs": ["question", "anomaly", "observation", "hypothesis", "cross-domain pattern", "representational defect"],
+        "transformsThrough": ["distinction", "formalization", "comparison", "model construction", "admissibility testing", "falsification", "reconstruction", "defect detection", "repair"],
+        "exitsAs": ["supported claim", "working model", "formal method", "research program", "product proposition", "publication candidate", "application hypothesis"]
+      },
+      "rationale": ["Find structure that survives changes of representation or domain.", "Make uncertainty, defect, and repair explicit rather than hiding them.", "Prefer reconstructable explanations over unsupported synthesis."],
+      "validationSignals": ["reproducible derivation", "cross-domain recurrence", "successful reconstruction", "predictive or explanatory usefulness", "explicit failure accounting", "survival under representation change"],
+      "views": [
+        {"id":"program-map","label":"Research Programs","purpose":"Show active programs and the structural questions they address."},
+        {"id":"method-map","label":"Methods in Use","purpose":"Show which investigative and formal methods are operating where."},
+        {"id":"claim-flow","label":"Claim Development","purpose":"Show how a question becomes a claim, defect, repair, or publication candidate."},
+        {"id":"cross-domain-map","label":"Cross-Domain Invariants","purpose":"Show patterns currently being compared across domains."}
+      ],
+      "takeaway": "Research is not a content category. It is the Lab's mechanism for converting questions into inspectable, testable structure."
+    },
+    "products": {
+      "label": "Products",
+      "eyebrow": "WHAT WE BUILD",
+      "framingQuestion": "Why does the Lab build these things?",
+      "systemRole": "Experimental embodiment",
+      "orientation": "Products are places where research propositions are forced to survive contact with users, tasks, domains, constraints, and consequences.",
+      "institutionalPurpose": "Turn research into executable representations and use real systems as test environments for whether the Lab's methods actually work.",
+      "boundary": {
+        "contains": ["shipped products", "working prototypes", "pilots", "experimental interfaces", "concept-stage systems"],
+        "excludes": ["projects selected only because they are fashionable", "products treated as disconnected business units"]
+      },
+      "process": {
+        "entersAs": ["research proposition", "method hypothesis", "identified user problem", "representational defect"],
+        "transformsThrough": ["prototype", "interaction", "deployment", "measurement", "user feedback", "failure analysis", "repair"],
+        "exitsAs": ["validated mechanism", "rejected assumption", "refined method", "reusable pattern", "public capability", "new research question"]
+      },
+      "rationale": ["Choose domains that expose a meaningful representational problem.", "Prefer environments with observable state and feedback.", "Use product work to test transferability, not merely desirability."],
+      "validationSignals": ["users can act with less hidden structure", "a method transfers beyond the originating domain", "failure modes become more legible", "a tested mechanism becomes reusable"],
+      "views": [
+        {"id":"experimental-portfolio","label":"Experimental Portfolio","purpose":"Show products as test environments rather than merely as a catalog."},
+        {"id":"method-to-product","label":"Method → Product","purpose":"Trace which Lab methods each product exercises."},
+        {"id":"validation-matrix","label":"What We Are Testing","purpose":"Show propositions, validation criteria, evidence, and open defects."},
+        {"id":"transfer-map","label":"Lessons That Transfer","purpose":"Show how results become reusable patterns elsewhere."}
+      ],
+      "takeaway": "The product portfolio is an experimental program: each product exists because it gives the Lab something important to test."
+    },
+    "publications": {
+      "label": "Publications",
+      "eyebrow": "WHAT WE PUBLISH",
+      "framingQuestion": "When is research ready to become a public claim?",
+      "systemRole": "Public knowledge interface",
+      "orientation": "Publication is the point where internal research crosses the institutional boundary and becomes an externally inspectable, versioned claim.",
+      "institutionalPurpose": "Make knowledge public without erasing uncertainty, provenance, maturity, or revision history.",
+      "boundary": {"contains":["papers","white papers","research notes","technical reports","public explanations","versioned doctrine"],"excludes":["untracked claims","drafts presented as settled results","loss of provenance during publication"]},
+      "process": {"entersAs":["research result","method description","synthesis","formal claim"],"transformsThrough":["claim extraction","source registration","provenance review","maturity assignment","editorial projection","versioning"],"exitsAs":["public artifact","citable claim","review target","reusable knowledge object"]},
+      "rationale": ["Preserve claim maturity instead of flattening everything to published/not published.", "Expose sources and revision history.", "Treat criticism and supersession as part of the publication lifecycle."],
+      "validationSignals": ["claim boundary is explicit", "supporting evidence is inspectable", "maturity is accurately labeled", "revision conditions are visible"],
+      "views": [
+        {"id":"publication-map","label":"Publication Program","purpose":"Show publication families and the research programs from which they emerge."},
+        {"id":"maturity-board","label":"Maturity","purpose":"Show what is exploratory, drafted, reviewed, published, or superseded."},
+        {"id":"claim-provenance","label":"Claim Provenance","purpose":"Trace public claims backward to research, evidence, and prior versions."}
+      ],
+      "takeaway": "Publishing is a governed boundary crossing: research becomes public without losing its provenance or uncertainty."
+    },
+    "method": {
+      "label": "Method",
+      "eyebrow": "HOW IT WORKS",
+      "framingQuestion": "How does the Lab reason and investigate?",
+      "systemRole": "Procedural grammar",
+      "orientation": "Method contains the reusable procedures by which the Lab turns ambiguous problems into inspectable systems.",
+      "institutionalPurpose": "Make research practice explicit enough to be examined, taught, reproduced, automated, criticized, and improved.",
+      "boundary": {"contains":["boundary-first method","agentic scientific method","BFS and DFS research traversal","representational mechanics","formal comparison procedures","defect and repair loops"],"excludes":["implicit expert intuition presented as procedure","steps that cannot be inspected","AI generation treated as self-validating"]},
+      "process": {"entersAs":["problem context","candidate distinctions","available evidence"],"transformsThrough":["orient","distinguish","bound","represent","transform","observe","compare","detect defect","repair","close or recurse"],"exitsAs":["procedure","formalized question","tested representation","repair path"]},
+      "rationale": ["Separate procedure from result.", "Instrument AI rather than relying on prompting alone.", "Use traversal strategies deliberately according to the epistemic task."],
+      "validationSignals": ["procedure can be replayed", "failure states remain visible", "representation choices are explicit", "results survive reconstruction"],
+      "views": [
+        {"id":"method-stack","label":"Method Stack","purpose":"Show methods from fundamental primitives through operational procedures."},
+        {"id":"procedure-player","label":"Run the Method","purpose":"Walk through an example problem as the Lab's procedures transform it."},
+        {"id":"method-comparison","label":"Compare Methods","purpose":"Show when different search, representation, or validation procedures are appropriate."}
+      ],
+      "takeaway": "The Lab does not merely produce answers; it develops inspectable procedures for producing, testing, and repairing them."
+    },
+    "pipeline": {
+      "label": "Pipeline",
+      "eyebrow": "HOW WORK MOVES",
+      "framingQuestion": "How does an idea become maintainable work?",
+      "systemRole": "State-transition system",
+      "orientation": "Pipeline is the machinery that prevents ideas from remaining disconnected observations, chat output, drafts, or prototypes.",
+      "institutionalPurpose": "Move work through explicit states while preserving provenance, defects, decisions, ownership, and next actions.",
+      "boundary": {"contains":["intake","triage","research queues","promotion","review","publication preparation","deployment","maintenance"],"excludes":["untracked work","silent promotion of immature claims","artifacts with no steward or state"]},
+      "process": {"entersAs":["observation","idea","draft","candidate artifact"],"transformsThrough":["capture","triage","research","structure","test","review","promote","maintain"],"exitsAs":["maintainable artifact","published work","deployed system","reopened question"]},
+      "rationale": ["Preserve the history of how work became admissible.", "Use gates for evidence, coherence, ownership, and closure.", "Allow work to reopen when defects appear."],
+      "validationSignals": ["every promoted object has provenance", "state transitions are explainable", "ownership is explicit", "defects can send work backward without losing history"],
+      "views": [
+        {"id":"flow-map","label":"Work Flow","purpose":"Show the major states and gates through which work travels."},
+        {"id":"live-queue","label":"Current Work","purpose":"Show current concentrations of work without reducing the page to a task board."},
+        {"id":"promotion-path","label":"How Things Become Real","purpose":"Trace a concrete artifact from observation through vetted output."}
+      ],
+      "takeaway": "The pipeline is the Lab's memory of motion: it records not only what exists, but how it became admissible."
+    },
+    "timeline": {
+      "label": "Timeline",
+      "eyebrow": "WHEN IT HAPPENED",
+      "framingQuestion": "How did the current Lab configuration come to exist?",
+      "systemRole": "Temporal projection",
+      "orientation": "Timeline is a time-indexed view of the entire institution rather than a single founder chronology.",
+      "institutionalPurpose": "Expose lineage, sequence, dependency, convergence, divergence, and state change across the Lab.",
+      "boundary": {"contains":["research milestones","method development","product development","publication events","institutional formation","applications","collaborations","software infrastructure","intellectual lineage","provenance events"],"excludes":["a single undifferentiated chronological list","founder biography presented as the whole institutional history"]},
+      "process": {"entersAs":["dated event","state change","dependency","lineage link"],"transformsThrough":["track assignment","causal linking","filtering","temporal reconstruction","comparison"],"exitsAs":["institutional history","idea lineage","state-at-time projection","convergence map"]},
+      "rationale": ["Treat history as a changing system state.", "Allow multiple institutional tracks to coexist.", "Make conceptual convergence and branching visible."],
+      "validationSignals": ["events retain source and date", "dependencies are explicit", "the institution can be reconstructed at a selected time", "lineages can cross subsystem boundaries"],
+      "views": [
+        {"id":"institutional-timeline","label":"Whole Lab","purpose":"See development as parallel interacting tracks."},
+        {"id":"lineage","label":"Idea Lineage","purpose":"Follow one concept through research, method, product, and publication."},
+        {"id":"state-reconstruction","label":"Lab at Time T","purpose":"Reconstruct what the institution contained and knew at a selected date."},
+        {"id":"convergence-map","label":"Convergences","purpose":"Show moments when previously separate lines became one program."}
+      ],
+      "takeaway": "The Timeline is the Lab viewed as a changing system, not a list of dates."
+    },
+    "governance": {
+      "label": "Governance",
+      "eyebrow": "HOW IT'S GOVERNED",
+      "framingQuestion": "What keeps the machine trustworthy?",
+      "systemRole": "Constraint and repair system",
+      "orientation": "Governance defines who or what may change institutional state, under what conditions, with what evidence, and how mistakes are repaired.",
+      "institutionalPurpose": "Make authority, stewardship, publication, provenance, review, correction, and public-interest obligations explicit.",
+      "boundary": {"contains":["authority","stewardship","policies","review rules","maturity rules","versioning","repair mechanisms","conflict handling","public-interest constraints"],"excludes":["authority inferred only from status","rules that cannot be inspected","irreversible claims without correction paths"]},
+      "process": {"entersAs":["proposed state change","claim promotion","policy decision","reported defect"],"transformsThrough":["authority check","evidence check","review","decision record","versioning","repair"],"exitsAs":["authorized transition","bounded refusal","repair action","governance record"]},
+      "rationale": ["Treat governance as control logic rather than surrounding paperwork.", "Require inspectable authority and evidence for consequential transitions.", "Design correction paths into the institution."],
+      "validationSignals": ["authority is explicit", "decisions leave records", "policies are versioned", "repair is possible and inspectable"],
+      "views": [
+        {"id":"authority-map","label":"Authority","purpose":"Show where decision authority lives and how it is bounded."},
+        {"id":"gate-map","label":"Institutional Gates","purpose":"Show what must be true before work changes state."},
+        {"id":"repair-map","label":"Repair","purpose":"Show how errors, superseded claims, failed products, and policy defects are corrected."},
+        {"id":"ethos-to-rule","label":"Principle → Mechanism","purpose":"Connect institutional principles to concrete governance machinery."}
+      ],
+      "takeaway": "Governance is not paperwork around the machine. It is part of the machine's control logic."
+    },
+    "about": {
+      "label": "About",
+      "eyebrow": "WHO WE ARE",
+      "framingQuestion": "What kind of institution is this?",
+      "systemRole": "Institutional identity boundary",
+      "orientation": "About establishes the identity, provenance, commitments, history, and declared operating character of Boundary First Labs.",
+      "institutionalPurpose": "Give visitors enough context to understand who is speaking, from what institutional position, under what commitments, and with what history.",
+      "boundary": {"contains":["institutional identity","founding history","provenance","ethos","organizational model","contact","declared commitments"],"excludes":["generic branding copy","claims of authority unsupported by provenance","ethos disconnected from operational behavior"]},
+      "process": {"entersAs":["institutional fact","historical record","declared principle"],"transformsThrough":["provenance linking","contextualization","operational mapping"],"exitsAs":["institutional profile","ethos statement","provenance view"]},
+      "rationale": ["Make identity inspectable rather than merely asserted.", "Connect principles to operational consequences.", "Keep institutional provenance close to the claims it contextualizes."],
+      "validationSignals": ["identity claims are traceable", "ethos maps to actual mechanisms", "history distinguishes institution, founder, and collaborators"],
+      "views": [
+        {"id":"institutional-profile","label":"The Institution","purpose":"Explain the Lab's organizational identity and operating model."},
+        {"id":"provenance","label":"Where It Came From","purpose":"Connect the institution to the research history and prior work from which it emerged."},
+        {"id":"ethos","label":"Operating Principles","purpose":"Show values alongside their procedural consequences."}
+      ],
+      "takeaway": "About answers not only who Boundary First Labs says it is, but how that identity is made inspectable."
+    },
+    "people": {
+      "label": "People",
+      "eyebrow": "WHO PARTICIPATES",
+      "framingQuestion": "Who contributes knowledge, labor, review, criticism, and context?",
+      "systemRole": "Human participation network",
+      "orientation": "People represents contributors, collaborators, reviewers, domain experts, users, partners, and communities affected by the work.",
+      "institutionalPurpose": "Make participation legible without collapsing every relationship into employment, authorship, endorsement, or ownership.",
+      "boundary": {"contains":["founders","contributors","reviewers","collaborators","domain experts","partners","communities","users"],"excludes":["implied endorsement","ambiguous attribution","undifferentiated contributor lists"]},
+      "process": {"entersAs":["participation","review","advice","collaboration","use","impact"],"transformsThrough":["role typing","context assignment","provenance linking"],"exitsAs":["participation record","contribution provenance","relationship network"]},
+      "rationale": ["Type relationships instead of flattening them.", "Preserve context for contributions and collaborations.", "Avoid implying endorsement where only participation exists."],
+      "validationSignals": ["role is explicit", "context and period are visible", "contribution can be traced", "non-implications are clear"],
+      "views": [
+        {"id":"participation-network","label":"Participation Network","purpose":"Show relationships as typed connections rather than a flat team page."},
+        {"id":"roles","label":"Roles","purpose":"Explain the different ways people participate in the Lab."},
+        {"id":"provenance-network","label":"Contribution Provenance","purpose":"Connect people to work, decisions, reviews, or artifacts they actually touched."}
+      ],
+      "takeaway": "Participation is contextual: human contribution should be visible without overstating what any relationship means."
+    },
+    "applications": {
+      "label": "Applications",
+      "eyebrow": "WHERE IT'S APPLIED",
+      "framingQuestion": "What happens when the method leaves the Lab?",
+      "systemRole": "Domain transfer layer",
+      "orientation": "Applications show where Lab methods and artifacts are used against real problems outside their original research context.",
+      "institutionalPurpose": "Test whether a method or representation survives transfer into another domain with different constraints.",
+      "boundary": {"contains":["public-interest applications","domain deployments","case studies","partner contexts","field experiments"],"excludes":["domain references with no actual transfer","claims of generality without application evidence"]},
+      "process": {"entersAs":["method","artifact","research result"],"transformsThrough":["domain mapping","constraint discovery","adaptation","field use","transfer analysis"],"exitsAs":["case study","generalized mechanism","new boundary condition","failed transfer"]},
+      "rationale": ["Test generality instead of assuming it.", "Observe what changes and what remains invariant during transfer.", "Use field defects to feed research back inward."],
+      "validationSignals": ["invariants survive transfer", "adaptations are documented", "new constraints are explicit", "failures become research inputs"],
+      "views": [
+        {"id":"domain-map","label":"Domains","purpose":"Show where Lab methods are being tested outside their originating context."},
+        {"id":"transfer-analysis","label":"Transfer Analysis","purpose":"Compare what remained invariant, what changed, and what failed."}
+      ],
+      "takeaway": "Application is where generality is tested rather than assumed."
+    },
+    "service": {
+      "label": "Service Bus",
+      "eyebrow": "DISSEMINATION",
+      "framingQuestion": "How does useful work travel beyond the Lab?",
+      "systemRole": "Distribution interface",
+      "orientation": "The Service Bus represents standards, tools, APIs, guidance, integrations, curricula, and reusable mechanisms that carry Lab capability outward.",
+      "institutionalPurpose": "Prevent valuable work from remaining trapped inside a particular paper, product, or research context.",
+      "boundary": {"contains":["APIs","standards","toolkits","guidance","curricula","integration patterns","public resources"],"excludes":["outputs that cannot be reused or understood outside their original context"]},
+      "process": {"entersAs":["validated applied capability"],"transformsThrough":["packaging","standardization","documentation","integration"],"exitsAs":["reusable service","toolkit","standard","guidance"]},
+      "rationale": ["Design for reuse beyond the originating artifact.", "Preserve semantics as capability is packaged for others."],
+      "validationSignals": ["external reuse is possible", "interfaces are documented", "meaning survives packaging"],
+      "views": [{"id":"distribution-map","label":"Distribution Map","purpose":"Show how internal capability is packaged and carried outward."}],
+      "takeaway": "Dissemination is the interface between internal capability and external reuse."
+    },
+    "public-value": {
+      "label": "Public Value",
+      "eyebrow": "OUTPUT",
+      "framingQuestion": "What useful capability actually leaves the Lab?",
+      "systemRole": "External consequence",
+      "orientation": "Public Value is the measurable or inspectable capability that becomes available beyond the institutional boundary.",
+      "institutionalPurpose": "Keep the Lab oriented toward consequences in the world rather than internal production alone.",
+      "boundary": {"contains":["increased agency","usable knowledge","open tools","educational capability","public-interest infrastructure","improved institutional legibility","reusable methods"],"excludes":["activity metrics treated as impact","internal output treated automatically as public benefit"]},
+      "process": {"entersAs":["distributed capability"],"transformsThrough":["adoption","use","learning","institutional change"],"exitsAs":["agency","understanding","reduced dependency","reusable public capability"]},
+      "rationale": ["Judge output by capability created, not volume produced.", "Ask who can understand or act differently because the work exists."],
+      "validationSignals": ["someone can do something they could not do before", "a system becomes more inspectable", "dependency is reduced", "capability survives without the Lab"],
+      "views": [{"id":"capability-map","label":"Capability Map","purpose":"Show what usable capability reaches people and institutions."}],
+      "takeaway": "The output of the Lab is not artifacts alone. It is capability that survives beyond the Lab boundary."
+    }
+  }
+}
