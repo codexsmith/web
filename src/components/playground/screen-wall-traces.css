@@ -1,0 +1,204 @@
+/* Declared Screen Wall relation routing.
+ * Paths are an explanatory projection of the typed relation registry in
+ * ScreenWallCatalog.tsx. A crossing without a terminal remains a crossing;
+ * only square sources, circular targets, and explicit junction hardware mean
+ * connection.
+ */
+
+.screen-wall-traces {
+  position: absolute;
+  inset: 1.7rem;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.screen-wall-traces svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.screen-wall-trace {
+  --trace: #7c919b;
+  transition: opacity .18s ease;
+}
+
+.screen-wall-trace[data-kind="projection"] { --trace: #68c9dc; }
+.screen-wall-trace[data-kind="signal"] { --trace: #8fbf4b; }
+.screen-wall-trace[data-kind="artifact"] { --trace: #d6a952; }
+
+.screen-wall-trace__underlay,
+.screen-wall-trace__line {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: square;
+}
+
+.screen-wall-trace__underlay {
+  stroke: #050708;
+  stroke-width: 6px;
+  opacity: .96;
+}
+
+.screen-wall-trace__line {
+  stroke: var(--trace);
+  stroke-width: 1.35px;
+  opacity: .68;
+}
+
+.screen-wall-trace[data-kind="projection"] .screen-wall-trace__line {
+  stroke-dasharray: 1 0;
+}
+
+.screen-wall-trace[data-kind="signal"] .screen-wall-trace__line {
+  stroke-dasharray: 7 4;
+}
+
+.screen-wall-trace[data-kind="artifact"] .screen-wall-trace__line {
+  stroke-dasharray: 2 3;
+  stroke-width: 1.7px;
+}
+
+.screen-wall-trace marker path {
+  fill: var(--trace);
+  stroke: #050708;
+  stroke-width: .8px;
+}
+
+.screen-wall-trace__source {
+  fill: #0a0e10;
+  stroke: var(--trace);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.screen-wall-trace__target {
+  fill: #0a0e10;
+  stroke: var(--trace);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.screen-wall-trace__label {
+  fill: color-mix(in srgb, var(--trace) 72%, #8e989d);
+  stroke: #070a0b;
+  stroke-width: 4px;
+  paint-order: stroke fill;
+  font: 500 9px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+}
+
+.screen-wall-trace.is-focused .screen-wall-trace__line {
+  opacity: 1;
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--trace) 42%, transparent));
+}
+
+.screen-wall-trace.is-focused .screen-wall-trace__label {
+  fill: color-mix(in srgb, var(--trace) 90%, white);
+}
+
+.screen-wall-trace.is-muted {
+  opacity: .1;
+}
+
+.screen-wall-grid > .screen-module {
+  z-index: 2;
+}
+
+.screen-wall-relations {
+  margin: 1rem 0;
+  border: 1px solid #30383d;
+  background: #0b1012;
+}
+
+.screen-wall-relations > small {
+  display: block;
+  padding: .48rem .58rem;
+  border-bottom: 1px solid #30383d;
+  color: #737f85;
+  font-size: .45rem;
+  letter-spacing: .12em;
+}
+
+.screen-wall-relations > p {
+  margin: 0;
+  padding: .65rem;
+  color: #768187;
+  font-size: .62rem;
+}
+
+.screen-wall-relations > div {
+  --relation: #8f9ca3;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: .12rem .5rem;
+  align-items: baseline;
+  padding: .55rem .6rem;
+  border-bottom: 1px solid #252d31;
+}
+
+.screen-wall-relations > div:last-child {
+  border-bottom: 0;
+}
+
+.screen-wall-relations > div[data-kind="projection"] { --relation: #68c9dc; }
+.screen-wall-relations > div[data-kind="signal"] { --relation: #8fbf4b; }
+.screen-wall-relations > div[data-kind="artifact"] { --relation: #d6a952; }
+
+.screen-wall-relations span {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  min-height: 2rem;
+  border: 1px solid color-mix(in srgb, var(--relation) 58%, #384247);
+  color: var(--relation);
+  font-size: .45rem;
+  letter-spacing: .08em;
+}
+
+.screen-wall-relations strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #d9dfe2;
+  font-size: .62rem;
+  font-weight: 600;
+}
+
+.screen-wall-relations em {
+  color: color-mix(in srgb, var(--relation) 68%, #778288);
+  font-size: .46rem;
+  font-style: normal;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.legend-trace--projection {
+  border-top-style: solid;
+  border-top-color: #68c9dc;
+}
+
+.legend-trace--signal {
+  border-top-style: dashed;
+  border-top-color: #8fbf4b;
+}
+
+.legend-trace--artifact {
+  border-top-style: dotted;
+  border-top-color: #d6a952;
+}
+
+@media (max-width: 1100px) {
+  .screen-wall-traces {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-wall-trace {
+    transition: none;
+  }
+}

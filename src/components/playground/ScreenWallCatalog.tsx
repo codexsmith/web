@@ -17,10 +17,30 @@ import {
 } from "lucide-react";
 import "./screen-wall.css";
 import "./screen-wall-spatial-refinement.css";
+import "./screen-wall-traces.css";
 
 type WallMode = "curated" | "arcade" | "workbench";
 type Depth = "wall" | "screen" | "world";
 type ScreenKind = "systems" | "game" | "visual" | "audio" | "tool" | "weird";
+type TraceKind = "projection" | "signal" | "artifact";
+type Point = [number, number];
+
+type TraceRoute = {
+  d: string;
+  start: Point;
+  end: Point;
+  label: Point;
+};
+
+type WallTrace = {
+  id: string;
+  from: string;
+  to: string;
+  label: string;
+  kind: TraceKind;
+  modes: WallMode[];
+  routes: Partial<Record<WallMode, TraceRoute>>;
+};
 
 type WallScreen = {
   id: string;
@@ -52,7 +72,7 @@ const screens: WallScreen[] = [
     icon: Orbit,
     preview: "orbit",
     input: "typed graph",
-    output: "projection",
+    output: "graph state",
   },
   {
     id: "chess",
@@ -81,8 +101,8 @@ const screens: WallScreen[] = [
     tone: "violet",
     icon: Sparkles,
     preview: "particles",
-    input: "parameters",
-    output: "field",
+    input: "graph state",
+    output: "field state",
   },
   {
     id: "patchbay",
@@ -96,7 +116,7 @@ const screens: WallScreen[] = [
     tone: "lime",
     icon: GitBranch,
     preview: "network",
-    input: "artifact",
+    input: "field state / artifact",
     output: "artifact",
   },
   {
@@ -111,7 +131,7 @@ const screens: WallScreen[] = [
     tone: "blue",
     icon: Waves,
     preview: "wave",
-    input: "signal",
+    input: "field state",
     output: "trace",
   },
   {
@@ -126,6 +146,7 @@ const screens: WallScreen[] = [
     tone: "red",
     icon: Radio,
     preview: "radio",
+    input: "artifact",
     output: "audio",
   },
   {
@@ -155,6 +176,79 @@ const screens: WallScreen[] = [
     tone: "pink",
     icon: Boxes,
     preview: "bars",
+    input: "audio",
+    output: "remix",
+  },
+];
+
+const wallTraces: WallTrace[] = [
+  {
+    id: "atlas-geometry",
+    from: "atlas",
+    to: "geometry",
+    label: "graph state",
+    kind: "projection",
+    modes: ["curated", "workbench"],
+    routes: {
+      curated: { d: "M 330 188 H 338 V 350 H 346", start: [330, 188], end: [346, 350], label: [340, 260] },
+      workbench: { d: "M 330 188 H 338 V 270 H 346", start: [330, 188], end: [346, 270], label: [340, 228] },
+    },
+  },
+  {
+    id: "geometry-patchbay",
+    from: "geometry",
+    to: "patchbay",
+    label: "field state",
+    kind: "signal",
+    modes: ["curated"],
+    routes: {
+      curated: { d: "M 346 350 H 336 V 520 H 330", start: [346, 350], end: [330, 520], label: [338, 438] },
+    },
+  },
+  {
+    id: "patchbay-radio",
+    from: "patchbay",
+    to: "radio",
+    label: "artifact",
+    kind: "artifact",
+    modes: ["curated"],
+    routes: {
+      curated: { d: "M 330 520 H 336 V 675 H 836 V 520 H 844", start: [330, 520], end: [844, 520], label: [575, 669] },
+    },
+  },
+  {
+    id: "geometry-waves",
+    from: "geometry",
+    to: "waves",
+    label: "field state",
+    kind: "signal",
+    modes: ["arcade", "workbench"],
+    routes: {
+      arcade: { d: "M 670 270 H 678 V 676 H 18 V 520 H 30", start: [670, 270], end: [30, 520], label: [350, 669] },
+      workbench: { d: "M 830 270 H 838 V 520 H 336 V 600 H 346", start: [830, 270], end: [346, 600], label: [585, 514] },
+    },
+  },
+  {
+    id: "radio-oddments",
+    from: "radio",
+    to: "oddments",
+    label: "audio",
+    kind: "signal",
+    modes: ["arcade"],
+    routes: {
+      arcade: { d: "M 970 104 H 984 V 185 H 676 V 430 H 685", start: [970, 104], end: [685, 430], label: [824, 180] },
+    },
+  },
+  {
+    id: "forge-patchbay",
+    from: "forge",
+    to: "patchbay",
+    label: "artifact",
+    kind: "artifact",
+    modes: ["workbench"],
+    routes: {
+      workbench: { d: "M 970 350 H 984 V 680 H 16 V 520 H 30", start: [970, 350], end: [30, 520], label: [500, 673] },
+    },
   },
 ];
 
@@ -170,13 +264,19 @@ const zoneCopy: Record<WallMode, [string, string, string, string]> = {
   workbench: ["Sources + models", "Central stage", "Composition", "Processing"],
 };
 
+function screenTitle(id: string) {
+  return screens.find((screen) => screen.id === id)?.title ?? id;
+}
+
 export function ScreenWallCatalog() {
   const [mode, setMode] = useState<WallMode>("curated");
   const [selectedId, setSelectedId] = useState("geometry");
   const [depth, setDepth] = useState<Depth>("wall");
 
   const visible = useMemo(() => screens.filter((screen) => screen.mode.includes(mode)), [mode]);
+  const activeTraces = useMemo(() => wallTraces.filter((trace) => trace.modes.includes(mode)), [mode]);
   const selected = screens.find((screen) => screen.id === selectedId) ?? visible[0] ?? screens[0];
+  const selectedRelations = activeTraces.filter((trace) => trace.from === selected.id || trace.to === selected.id);
 
   const selectScreen = (id: string) => {
     setSelectedId(id);
@@ -234,6 +334,13 @@ export function ScreenWallCatalog() {
         </div>
 
         <div className="screen-wall-grid">
+          <TraceLayer
+            depth={depth}
+            mode={mode}
+            selectedId={selected.id}
+            traces={activeTraces}
+          />
+
           {visible.map((screen) => (
             <ScreenModule
               key={screen.id}
@@ -276,6 +383,8 @@ export function ScreenWallCatalog() {
                     <div><dt>OUTPUT</dt><dd>{selected.output ?? "—"}</dd></div>
                   </dl>
 
+                  <RelationRegister relations={selectedRelations} selectedId={selected.id} />
+
                   <button type="button" className="screen-wall-enter" onClick={() => setDepth("world")}>
                     Enter world <ArrowUpRight aria-hidden="true" />
                   </button>
@@ -291,11 +400,87 @@ export function ScreenWallCatalog() {
       <footer className="screen-wall-legend">
         <span><i className="legend-boundary" />Boundary <small>environment</small></span>
         <span><i className="legend-port" />Port <small>typed interface</small></span>
-        <span><i className="legend-trace" />Trace <small>shared projection bus</small></span>
+        <span><i className="legend-trace legend-trace--projection" />Trace <small>projection</small></span>
+        <span><i className="legend-trace legend-trace--signal" />Trace <small>signal</small></span>
+        <span><i className="legend-trace legend-trace--artifact" />Trace <small>artifact</small></span>
         <span><i className="legend-state" />State <small>live / retained</small></span>
         <span className="screen-wall-legend__rule">A catalog can project its contents.</span>
       </footer>
     </main>
+  );
+}
+
+function TraceLayer({
+  depth,
+  mode,
+  selectedId,
+  traces,
+}: {
+  depth: Depth;
+  mode: WallMode;
+  selectedId: string;
+  traces: WallTrace[];
+}) {
+  return (
+    <div className="screen-wall-traces" aria-hidden="true">
+      <svg viewBox="0 0 1000 700" preserveAspectRatio="none">
+        <defs>
+          <marker id="screen-wall-trace-arrow" markerHeight="7" markerWidth="7" orient="auto" refX="5" refY="3.5">
+            <path d="M0 0 L6 3.5 L0 7 Z" />
+          </marker>
+        </defs>
+
+        {traces.map((trace) => {
+          const route = trace.routes[mode];
+          if (!route) return null;
+          const focused = depth !== "wall" && (trace.from === selectedId || trace.to === selectedId);
+          const muted = depth !== "wall" && !focused;
+
+          return (
+            <g
+              className={`screen-wall-trace ${focused ? "is-focused" : ""} ${muted ? "is-muted" : ""}`}
+              data-kind={trace.kind}
+              key={trace.id}
+            >
+              <path className="screen-wall-trace__underlay" d={route.d} />
+              <path className="screen-wall-trace__line" d={route.d} markerEnd="url(#screen-wall-trace-arrow)" />
+              <rect className="screen-wall-trace__source" x={route.start[0] - 4} y={route.start[1] - 4} width="8" height="8" />
+              <circle className="screen-wall-trace__target" cx={route.end[0]} cy={route.end[1]} r="4.5" />
+              <text className="screen-wall-trace__label" x={route.label[0]} y={route.label[1]} textAnchor="middle">
+                {trace.kind.toUpperCase()} // {trace.label}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+function RelationRegister({ relations, selectedId }: { relations: WallTrace[]; selectedId: string }) {
+  if (relations.length === 0) {
+    return (
+      <section className="screen-wall-relations" aria-label="Declared connections">
+        <small>DECLARED CONNECTIONS</small>
+        <p>No routed relation is active in this projection.</p>
+      </section>
+    );
+  }
+
+  return (
+    <section className="screen-wall-relations" aria-label="Declared connections">
+      <small>DECLARED CONNECTIONS</small>
+      {relations.map((trace) => {
+        const outbound = trace.from === selectedId;
+        return (
+          <div key={trace.id} data-kind={trace.kind}>
+            <span>{outbound ? "OUT" : "IN"}</span>
+            <strong>{outbound ? screenTitle(trace.to) : screenTitle(trace.from)}</strong>
+            <em>{trace.kind} // {trace.label}</em>
+          </div>
+        );
+      })}
+    </section>
   );
 }
 
