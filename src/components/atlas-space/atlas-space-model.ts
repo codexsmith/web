@@ -63,7 +63,7 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
   id: "boundary-first-atlas-space",
   title: "Atlas Space",
   summary:
-    "A layered view of local domain atlases and the typed correspondences that connect them.",
+    "A layered view of mounted Library domains and the typed correspondences that connect their local representations.",
   thesis: "A bit is the minimal executable form of a bound distinction.",
   fibers: [
     {
@@ -72,7 +72,7 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       relationKind: "structural",
       connectorKind: "through",
       statement:
-        "Each layer binds a distinction locally. The fiber records the shared representational operation without claiming the local objects are identical.",
+        "Each mounted domain binds a distinction locally. The fiber records a shared representational operation without claiming the local objects are identical.",
       position: { x: 18, y: 27 },
     },
     {
@@ -81,7 +81,7 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       relationKind: "structural",
       connectorKind: "through",
       statement:
-        "Each atlas carries a local notion of state: what can be observed, occupied, asserted, or updated at that layer.",
+        "Each mounted domain carries a local notion of state: what can be observed, occupied, asserted, or updated within that representation.",
       position: { x: 70, y: 22 },
     },
     {
@@ -90,7 +90,7 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       relationKind: "structural",
       connectorKind: "keyed",
       statement:
-        "The local vocabulary changes, but each layer constrains which states, transitions, or claims may enter the represented system.",
+        "The local vocabulary changes, but each mounted domain constrains which states, transitions, or claims may enter the represented system.",
       position: { x: 27, y: 73 },
     },
     {
@@ -99,21 +99,21 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       relationKind: "candidate",
       connectorKind: "test",
       statement:
-        "Closure is intentionally marked as a working cross-domain correspondence. The visualization should preserve uncertainty rather than flatten it into identity.",
+        "Closure is intentionally marked as a working cross-domain correspondence. The visualization preserves uncertainty rather than flattening it into identity.",
       position: { x: 75, y: 72 },
     },
   ],
   layers: [
     {
       id: "mathematics",
-      label: "Mathematics",
-      kicker: "Formal atlas",
+      label: "Mathematics & logic",
+      kicker: "Mounted exemplar / Formal systems",
       description:
-        "Local charts for cuts, state spaces, domains, operators, and other mathematical structures.",
+        "A mounted Library domain beneath the Formal systems family, with conceptual charts for cuts, state spaces, domains, operators, and related mathematical structures.",
       hardware: {
         rackCode: "MTH-F01",
         mark: "M",
-        registry: "FORMAL / DOMAIN / OPERATOR",
+        registry: "FORMAL / MATH+LOGIC / OPERATOR",
         pattern: "ruled",
       },
       anchors: [
@@ -126,13 +126,13 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
     {
       id: "physics",
       label: "Physics",
-      kicker: "Natural-system atlas",
+      kicker: "Mounted exemplar / Natural systems",
       description:
-        "Local charts for physical state, interfaces, boundary conditions, conservation, and transport.",
+        "A mounted Library domain beneath the Natural systems family, with conceptual charts for physical state, interfaces, boundary conditions, conservation, and transport.",
       hardware: {
         rackCode: "PHY-N02",
         mark: "P",
-        registry: "NATURAL / FIELD / TRANSPORT",
+        registry: "NATURAL / PHYSICS / TRANSPORT",
         pattern: "wave",
       },
       anchors: [
@@ -144,14 +144,14 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
     },
     {
       id: "computation",
-      label: "Computation",
-      kicker: "Engineered atlas",
+      label: "AI & computation",
+      kicker: "Mounted exemplar / Engineered systems",
       description:
-        "Local charts for bits, predicates, machine states, types, guards, and executable transitions.",
+        "A mounted Library domain beneath the Engineered systems family, with conceptual charts for bits, predicates, machine states, types, guards, and executable transitions.",
       hardware: {
         rackCode: "CMP-E03",
         mark: "C",
-        registry: "ENGINEERED / TYPE / EXECUTION",
+        registry: "ENGINEERED / AI+COMPUTATION / EXECUTION",
         pattern: "logic",
       },
       anchors: [
@@ -163,14 +163,14 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
     },
     {
       id: "law",
-      label: "Law",
-      kicker: "Civic atlas",
+      label: "Law & governance",
+      kicker: "Mounted exemplar / Linguistic systems",
       description:
-        "Local charts for classifications, legal status, jurisdiction, standing, procedure, and finality.",
+        "A mounted Library domain beneath the Linguistic systems family, with conceptual charts for classifications, legal status, jurisdiction, standing, procedure, and finality.",
       hardware: {
-        rackCode: "LAW-C04",
+        rackCode: "LAW-L04",
         mark: "L",
-        registry: "CIVIC / STATUS / PROCEDURE",
+        registry: "LINGUISTIC / LAW+GOVERNANCE / PROCEDURE",
         pattern: "docket",
       },
       anchors: [
