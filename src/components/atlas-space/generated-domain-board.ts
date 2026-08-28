@@ -1,4 +1,5 @@
 import type { AtlasBoardPattern, AtlasLayer } from "./atlas-space-model";
+import { acceptedCalibrationAnchors } from "./domain-calibration";
 import {
   atlasCorpusFamilies,
   corpusMountForLayer,
@@ -45,21 +46,29 @@ function boardMark(label: string) {
 }
 
 export function generateDomainBoardShell(family: AtlasCorpusFamily, domain: AtlasCorpusDomain): AtlasLayer {
-  return {
-    id: generatedLayerIdForDomain(family.id, domain.id),
+  const layerId = generatedLayerIdForDomain(family.id, domain.id);
+  const layer = {
+    id: layerId,
     label: domain.label,
     kicker: "Generated corpus shell",
     description:
       `Provisional board shell fabricated from canonical corpus metadata for ${domain.label}. ` +
-      "No local correspondence ports have been calibrated; missing traces are intentional.",
+      "Semantic correspondence ports remain open until accepted through the calibration bench.",
     hardware: {
       rackCode: `${domain.code}-G`,
       mark: boardMark(domain.label),
-      registry: `${family.code} / GENERATED / UNCALIBRATED`,
+      registry: `${family.code} / GENERATED / CALIBRATION BENCH`,
       pattern: patternByFamily[family.id] ?? "ruled",
     },
-    anchors: [],
-  };
+  } as Omit<AtlasLayer, "anchors"> & { anchors?: AtlasLayer["anchors"] };
+
+  Object.defineProperty(layer, "anchors", {
+    enumerable: true,
+    configurable: false,
+    get: () => acceptedCalibrationAnchors(layerId),
+  });
+
+  return layer as AtlasLayer;
 }
 
 export function corpusDescriptorForLayer(layerId: string): AtlasCorpusLayerDescriptor | undefined {
