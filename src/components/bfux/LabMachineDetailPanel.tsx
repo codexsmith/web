@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineCardContent } from "./lab-machine-content";
 import { getLabMachineNode, type LabMachineNode } from "./lab-machine-model";
+import { LabMachineObjectCarrier } from "./LabMachineObjectCarrier";
 import { LabMachineRelationRail } from "./LabMachineRelationRail";
 import { useLabMachineNavigation } from "./LabMachineNavigationContext";
 import {
@@ -115,6 +116,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
         <p>{content.orientation}</p><p>{content.institutionalPurpose}</p>
       </div>
 
+      <LabMachineObjectCarrier />
       <LabMachineRelationRail nodeId={node.id} />
       {navigation ? <TraversalTrail /> : null}
 
