@@ -10,6 +10,11 @@ import {
   type MethodProjectionMode,
 } from "./LabMachineMethodProjection";
 import {
+  LabMachinePipelineProjection,
+  isPipelineProjectionMode,
+  type PipelineProjectionMode,
+} from "./LabMachinePipelineProjection";
+import {
   LabMachineProductsProjection,
   isProductProjectionMode,
   type ProductProjectionMode,
@@ -31,6 +36,7 @@ type ActiveProjection =
   | { subsystem: "products"; mode: ProductProjectionMode }
   | { subsystem: "research"; mode: ResearchProjectionMode }
   | { subsystem: "method"; mode: MethodProjectionMode }
+  | { subsystem: "pipeline"; mode: PipelineProjectionMode }
   | null;
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
@@ -76,6 +82,16 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
   if (activeProjection?.subsystem === "method") {
     return (
       <LabMachineMethodProjection
+        initialMode={activeProjection.mode}
+        onBack={() => setActiveProjection(null)}
+        onClose={onClose}
+      />
+    );
+  }
+
+  if (activeProjection?.subsystem === "pipeline") {
+    return (
+      <LabMachinePipelineProjection
         initialMode={activeProjection.mode}
         onBack={() => setActiveProjection(null)}
         onClose={onClose}
@@ -144,7 +160,8 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
           const productProjection = node.id === "products" && isProductProjectionMode(view.id);
           const researchProjection = node.id === "research" && isResearchProjectionMode(view.id);
           const methodProjection = node.id === "method" && isMethodProjectionMode(view.id);
-          const available = timelineProjection || productProjection || researchProjection || methodProjection;
+          const pipelineProjection = node.id === "pipeline" && isPipelineProjectionMode(view.id);
+          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection;
           return (
             <article key={view.id} data-view-id={view.id}>
               <span>PROJECTION</span>
@@ -159,6 +176,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
                   if (productProjection) setActiveProjection({ subsystem: "products", mode: view.id });
                   if (researchProjection) setActiveProjection({ subsystem: "research", mode: view.id });
                   if (methodProjection) setActiveProjection({ subsystem: "method", mode: view.id });
+                  if (pipelineProjection) setActiveProjection({ subsystem: "pipeline", mode: view.id });
                 }}
               >
                 {available ? "OPEN" : "PLANNED"}
