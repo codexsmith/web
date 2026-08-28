@@ -20,6 +20,11 @@ import {
   type MethodProjectionMode,
 } from "./LabMachineMethodProjection";
 import {
+  LabMachinePeopleProjection,
+  isPeopleProjectionMode,
+  type PeopleProjectionMode,
+} from "./LabMachinePeopleProjection";
+import {
   LabMachinePipelineProjection,
   isPipelineProjectionMode,
   type PipelineProjectionMode,
@@ -49,6 +54,7 @@ type ActiveProjection =
   | { subsystem: "pipeline"; mode: PipelineProjectionMode }
   | { subsystem: "governance"; mode: GovernanceProjectionMode }
   | { subsystem: "about"; mode: AboutProjectionMode }
+  | { subsystem: "people"; mode: PeopleProjectionMode }
   | null;
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
@@ -68,6 +74,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
   if (activeProjection?.subsystem === "pipeline") return <LabMachinePipelineProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   if (activeProjection?.subsystem === "governance") return <LabMachineGovernanceProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   if (activeProjection?.subsystem === "about") return <LabMachineAboutProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
+  if (activeProjection?.subsystem === "people") return <LabMachinePeopleProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
 
   return (
     <section className="bf-machine-detail" data-tone={node.tone} aria-label={`${node.label} institutional detail`}>
@@ -130,7 +137,8 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
           const pipelineProjection = node.id === "pipeline" && isPipelineProjectionMode(view.id);
           const governanceProjection = node.id === "governance" && isGovernanceProjectionMode(view.id);
           const aboutProjection = node.id === "about" && isAboutProjectionMode(view.id);
-          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection || aboutProjection;
+          const peopleProjection = node.id === "people" && isPeopleProjectionMode(view.id);
+          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection || aboutProjection || peopleProjection;
           return (
             <article key={view.id} data-view-id={view.id}>
               <span>PROJECTION</span>
@@ -148,6 +156,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
                   if (pipelineProjection) setActiveProjection({ subsystem: "pipeline", mode: view.id });
                   if (governanceProjection) setActiveProjection({ subsystem: "governance", mode: view.id });
                   if (aboutProjection) setActiveProjection({ subsystem: "about", mode: view.id });
+                  if (peopleProjection) setActiveProjection({ subsystem: "people", mode: view.id });
                 }}
               >
                 {available ? "OPEN" : "PLANNED"}

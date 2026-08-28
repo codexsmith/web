@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "participation grammar active; public operational collaboration register empty",
+  "purpose": "Represent human participation as typed, attributable, time-bounded relationships to work, decisions, review, use, consequence, and stewardship without turning every connection into employment, authorship, endorsement, ownership, or institutional authority.",
+  "posture": "People is not a team page. The public collaboration register currently records no operational collaboration instances, so this projection exposes the participation grammar, required record contract, and source-backed provenance anchors without inventing collaborators or implied endorsements.",
+  "publicRegister": {
+    "status": "no-public-operational-instances-recorded",
+    "instanceCount": 0,
+    "sourceRef": "src/content/collaboration_instances.json",
+    "protectedFieldPolicy": "A protected value must be represented by an explicit protected-field marker, not silent omission."
+  },
+  "roleTypes": [
+    {
+      "id": "founder-steward",
+      "label": "Founder / Steward",
+      "shortLabel": "STEWARD",
+      "function": "Carries founding provenance, present institutional stewardship, routing responsibility, and continuity obligations for bounded work.",
+      "canContribute": ["originate work", "steward institutional objects", "route review and promotion", "own maintenance and repair"],
+      "doesNotImply": ["independent validation", "exclusive authorship of every artifact", "automatic review independence", "unbounded decision authority"],
+      "evidenceNeeded": "Source-backed role, period, object scope, and authority boundary."
+    },
+    {
+      "id": "contributor",
+      "label": "Contributor",
+      "shortLabel": "CONTRIBUTE",
+      "function": "Adds code, analysis, writing, data, design, experiments, operations, or other bounded material to a specific object.",
+      "canContribute": ["artifact changes", "implementation", "analysis", "documentation", "data or evidence"],
+      "doesNotImply": ["authorship of the whole work", "institutional employment", "ownership", "endorsement of unrelated claims"],
+      "evidenceNeeded": "Traceable contribution, target object, period, and attribution basis."
+    },
+    {
+      "id": "reviewer-critic",
+      "label": "Reviewer / Critic",
+      "shortLabel": "REVIEW",
+      "function": "Challenges evidence, logic, implementation, safety, interpretation, or claim maturity from a role distinct from generation.",
+      "canContribute": ["review findings", "counterexamples", "defect reports", "promotion recommendations", "retest requirements"],
+      "doesNotImply": ["endorsement", "co-authorship", "promotion authority", "independence unless independence is actually established"],
+      "evidenceNeeded": "Attributable review record with scope, findings, evidence basis, and independence limits."
+    },
+    {
+      "id": "collaborator",
+      "label": "Collaborator",
+      "shortLabel": "COLLABORATE",
+      "function": "Works jointly on a declared bounded object or outcome with roles, rights, authority, and closure conditions made explicit.",
+      "canContribute": ["joint design", "joint research", "shared implementation", "co-produced artifact", "shared field work"],
+      "doesNotImply": ["employment", "partnership in the legal sense", "institutional endorsement", "ownership outside the declared scope"],
+      "evidenceNeeded": "Declared parties or protection markers, shared object, roles, rights, evidence, funding posture, publication status, and closure state."
+    },
+    {
+      "id": "domain-expert",
+      "label": "Domain Expert / Advisor",
+      "shortLabel": "ADVISE",
+      "function": "Supplies domain knowledge, constraints, interpretation, criticism, or context that changes how a bounded problem is represented.",
+      "canContribute": ["domain definitions", "constraint discovery", "interpretation", "feasibility criticism", "contextual evidence"],
+      "doesNotImply": ["authorship", "formal review", "endorsement", "institutional authority"],
+      "evidenceNeeded": "Advisory scope, target object, period, and whether advice was accepted, rejected, or remains open."
+    },
+    {
+      "id": "partner-host",
+      "label": "Partner / Host",
+      "shortLabel": "PARTNER",
+      "function": "Provides a bounded institutional, operational, field, or distribution context in which work can be tested, delivered, or observed.",
+      "canContribute": ["test environment", "access", "operational context", "distribution", "joint pilot conditions"],
+      "doesNotImply": ["endorsement of the Lab", "ownership of Lab research", "employment", "scientific validation"],
+      "evidenceNeeded": "Named or protected party, actual scope, period, rights, authority, funding posture, and closure state."
+    },
+    {
+      "id": "funder-supporter",
+      "label": "Funder / Supporter",
+      "shortLabel": "SUPPORT",
+      "function": "Provides money, infrastructure, services, access, or other resources under declared conditions.",
+      "canContribute": ["funding", "in-kind support", "compute", "facilities", "distribution or access"],
+      "doesNotImply": ["authorship", "review independence", "ownership unless granted", "endorsement of specific conclusions"],
+      "evidenceNeeded": "Resource type, amount or protection marker where appropriate, restrictions, rights, disclosure status, and affected decisions."
+    },
+    {
+      "id": "user-operator",
+      "label": "User / Operator",
+      "shortLabel": "USE",
+      "function": "Interacts with a product, method, service, or artifact and produces use evidence, operational feedback, or failure observations.",
+      "canContribute": ["usage evidence", "workflow feedback", "bug reports", "task outcomes", "operational constraints"],
+      "doesNotImply": ["collaboration", "consent to public identification", "endorsement", "institutional membership"],
+      "evidenceNeeded": "Consent-appropriate use context, task, observed consequence, and evidence handling rule."
+    },
+    {
+      "id": "affected-party",
+      "label": "Affected Party / Community",
+      "shortLabel": "AFFECTED",
+      "function": "Experiences consequences from a system, policy, representation, or deployment and therefore may supply standing, contest, evidence, or repair requirements.",
+      "canContribute": ["consequence reports", "contest", "context", "repair requirements", "acceptability constraints"],
+      "doesNotImply": ["voluntary participation", "user status", "agreement", "public identifiability"],
+      "evidenceNeeded": "Standing or consequence basis, protection needs, response path, and resulting action or refusal."
+    }
+  ],
+  "relationTypes": [
+    {"id":"founded","label":"founded / originated","meaning":"Establishes origin or stewardship provenance for a bounded institutional object.","nonImplication":"Does not validate the object's claims."},
+    {"id":"authored","label":"authored","meaning":"Created the attributable expression or substantial intellectual content of a bounded artifact.","nonImplication":"Does not imply sole origin of every underlying idea or institutional authority."},
+    {"id":"contributed","label":"contributed to","meaning":"Added bounded labor or material to an object.","nonImplication":"Does not imply authorship of the whole object."},
+    {"id":"reviewed","label":"reviewed / criticized","meaning":"Evaluated a bounded object and left an attributable finding.","nonImplication":"Does not imply endorsement or promotion authority."},
+    {"id":"advised","label":"advised","meaning":"Supplied domain context or recommendations.","nonImplication":"Does not imply authorship, acceptance of advice, or endorsement."},
+    {"id":"collaborated","label":"collaborated on","meaning":"Worked jointly toward a declared bounded outcome.","nonImplication":"Does not imply employment, ownership, or institution-wide partnership."},
+    {"id":"partnered","label":"provided partner / host context","meaning":"Supplied a field, institutional, or operational environment.","nonImplication":"Does not imply scientific validation or broad endorsement."},
+    {"id":"supported","label":"funded / supported","meaning":"Provided resources under declared conditions.","nonImplication":"Does not imply authorship or control beyond the recorded agreement."},
+    {"id":"used","label":"used / operated","meaning":"Interacted with a product, service, method, or artifact.","nonImplication":"Does not imply collaboration or endorsement."},
+    {"id":"affected","label":"was affected by","meaning":"Experienced consequence relevant to evaluation, contest, or repair.","nonImplication":"Does not imply consent or voluntary participation."},
+    {"id":"stewarded","label":"stewarded","meaning":"Owned routing, maintenance, continuity, or repair obligations for a bounded object.","nonImplication":"Does not imply authorship or unlimited decision authority."}
+  ],
+  "recordContract": [
+    {"field":"party","question":"Who participated, or which explicit protection marker stands in for a protected identity?","requiredForPublicInstance":true},
+    {"field":"role","question":"What typed participation role applied?","requiredForPublicInstance":true},
+    {"field":"relation","question":"What exactly did the party do relative to which object?","requiredForPublicInstance":true},
+    {"field":"period","question":"When did the relationship apply?","requiredForPublicInstance":true},
+    {"field":"authority","question":"What decision authority, if any, accompanied the relationship?","requiredForPublicInstance":true},
+    {"field":"evidence","question":"What record supports the relationship?","requiredForPublicInstance":true},
+    {"field":"funding","question":"Was money or in-kind support involved, and under what disclosure or protection rule?","requiredForPublicInstance":true},
+    {"field":"rights","question":"What authorship, ownership, licensing, confidentiality, or publication rights applied?","requiredForPublicInstance":true},
+    {"field":"publicationStatus","question":"May the relationship or contribution be represented publicly?","requiredForPublicInstance":true},
+    {"field":"closure","question":"Is the relationship active, completed, superseded, withdrawn, disputed, or otherwise closed?","requiredForPublicInstance":true},
+    {"field":"nonImplications","question":"What must a viewer not infer from this relationship?","requiredForPublicInstance":true}
+  ],
+  "provenanceAnchors": [
+    {
+      "id":"founder-provenance",
+      "label":"Founder / institutional origin provenance",
+      "kind":"founder-provenance",
+      "status":"source-backed chronology; not a collaboration instance",
+      "roles":["founder-steward"],
+      "relations":["founded","stewarded","authored"],
+      "targets":["institutional formation","research lineage","current institutional reconstruction"],
+      "evidence":"Typed founder and intellectual provenance distinguishes primary artifacts, repository synthesis, testimony, interpretation, and unresolved gaps.",
+      "nonImplications":["founder provenance is not independent scientific validation","founder role does not imply sole authorship of every artifact or future contribution"],
+      "sourceRef":"src/content/founder-intellectual-provenance-timeline.json"
+    },
+    {
+      "id":"external-scrutiny",
+      "label":"Historical attempts at external scrutiny",
+      "kind":"review-provenance",
+      "status":"historical outreach recorded; primary correspondence remains incompletely recovered",
+      "roles":["reviewer-critic","domain-expert"],
+      "relations":["reviewed","advised"],
+      "targets":["earlier relativistic research work"],
+      "evidence":"The founder provenance timeline records attempted outreach for criticism while explicitly preserving the missing-primary-artifact limitation.",
+      "nonImplications":["outreach does not establish that review occurred","contact does not imply endorsement, collaboration, or institutional relationship"],
+      "sourceRef":"founder provenance EVT-005"
+    },
+    {
+      "id":"repository-contribution",
+      "label":"Repository contribution provenance",
+      "kind":"version-control-provenance",
+      "status":"available mechanically at commit/object level; not promoted here into a public team roster",
+      "roles":["contributor","founder-steward"],
+      "relations":["contributed","authored","stewarded"],
+      "targets":["source-controlled website","Lab Machine projections","content and implementation records"],
+      "evidence":"Version control can support bounded authorship/contribution claims for specific changes and dates.",
+      "nonImplications":["a commit author is not automatically the intellectual author of every represented source","repository contribution does not by itself establish employment or organizational title"],
+      "sourceRef":"Git history / repository commits"
+    },
+    {
+      "id":"public-collaboration-register",
+      "label":"Public operational collaboration register",
+      "kind":"collaboration-register",
+      "status":"empty by current source record",
+      "roles":["collaborator","partner-host","domain-expert","funder-supporter"],
+      "relations":["collaborated","partnered","advised","supported"],
+      "targets":["future publicly representable collaboration instances"],
+      "evidence":"The dedicated public register currently contains zero instances and requires protected-field markers instead of silent omission.",
+      "nonImplications":["absence from the public register is not proof that no private, historical, informal, or unreconciled interaction exists","planned outreach or named targets are not collaborations"],
+      "sourceRef":"src/content/collaboration_instances.json + src/content/governance_bindings.json"
+    }
+  ],
+  "rules": [
+    "Participation, advice, review, funding, contribution, authorship, ownership, endorsement, and institutional authority are non-equivalent.",
+    "A named target, outreach idea, citation, audience, employer history, or desired partner is not a collaboration record.",
+    "Protected identities must use explicit protection markers rather than disappearing from the record in a way that changes interpretation.",
+    "Role, period, target object, authority, evidence, funding, rights, publication status, and closure should remain reconstructable for live collaboration records.",
+    "A person may hold multiple roles, but those roles should not be merged into one vague relationship label.",
+    "The same person may originate and review work, but the record must not describe that review as independent unless independence actually exists.",
+    "Affected parties belong in the participation model even when they never volunteered to become users, collaborators, or public representatives."
+  ]
+}
