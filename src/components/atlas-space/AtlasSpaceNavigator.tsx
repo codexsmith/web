@@ -2,8 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { AtlasSpace, type AtlasNavigationDepth } from "./AtlasSpace";
+import { FamilyDomainAtlas } from "./FamilyDomainAtlas";
 import { MetaAtlasOverview } from "./MetaAtlasOverview";
 import { defaultAtlasSpaceModel } from "./atlas-space-model";
+import {
+  atlasCorpusFamilies,
+  corpusFamilyForLayer,
+  corpusMountForLayer,
+} from "./lab-corpus-atlas";
 import {
   recursiveAtlasPathLabels,
   type RecursiveAtlasPath,
@@ -11,7 +17,7 @@ import {
 import { metaPositionFor } from "./meta-atlas-layout";
 import styles from "./AtlasSpaceNavigator.module.css";
 
-type NavigatorMode = "meta" | "stack";
+type NavigatorMode = "meta" | "family" | "stack";
 type TransitionDirection = "descend" | "ascend";
 
 type ScaleTransition = {
@@ -35,6 +41,8 @@ export function AtlasSpaceNavigator() {
   const [mode, setMode] = useState<NavigatorMode>("meta");
   const [activeLayerId, setActiveLayerId] = useState(model.layers[0]?.id ?? "");
   const [activeFiberId, setActiveFiberId] = useState(model.fibers[0]?.id ?? "");
+  const [activeFamilyId, setActiveFamilyId] = useState(corpusFamilyForLayer(model.layers[0]?.id ?? "")?.id ?? atlasCorpusFamilies[0]?.id ?? "");
+  const [activeDomainIds, setActiveDomainIds] = useState<Record<string, string>>({});
   const [chartPaths, setChartPaths] = useState<Record<string, RecursiveAtlasPath>>({});
   const [navigationDepths, setNavigationDepths] = useState<Record<string, AtlasNavigationDepth>>({});
   const [transition, setTransition] = useState<ScaleTransition | null>(null);
@@ -42,6 +50,8 @@ export function AtlasSpaceNavigator() {
 
   const activeLayer = model.layers.find((layer) => layer.id === activeLayerId) ?? model.layers[0];
   const activeFiber = model.fibers.find((fiber) => fiber.id === activeFiberId) ?? model.fibers[0];
+  const activeFamily = atlasCorpusFamilies.find((family) => family.id === activeFamilyId) ?? atlasCorpusFamilies[0];
+  const activeMount = activeLayer ? corpusMountForLayer(activeLayer.id) : undefined;
   const activeLayerIndex = Math.max(0, model.layers.findIndex((layer) => layer.id === activeLayerId));
   const activeMetaPosition = useMemo(
     () => metaPositionFor(activeLayerIndex, model.layers.length),
@@ -50,12 +60,13 @@ export function AtlasSpaceNavigator() {
   const activeChartPath = chartPaths[activeLayerId] ?? [];
   const activeNavigationDepth = navigationDepths[activeLayerId] ?? "stack";
   const activePathLabels = recursiveAtlasPathLabels(activeLayerId, activeChartPath);
+  const activeDomainId = activeFamily ? activeDomainIds[activeFamily.id] ?? activeMount?.domainId ?? activeFamily.domains[0]?.id : undefined;
 
   useEffect(() => () => {
     if (timerRef.current) clearTimeout(timerRef.current);
   }, []);
 
-  if (!activeLayer || !activeFiber) return null;
+  if (!activeLayer || !activeFiber || !activeFamily) return null;
 
   const scheduleTransition = (next: ScaleTransition) => {
     if (transition) return;
@@ -63,14 +74,29 @@ export function AtlasSpaceNavigator() {
 
     setTransition(next);
     timerRef.current = setTimeout(() => {
-      setMode(next.direction === "descend" ? "stack" : "meta");
+      setMode(next.direction === "descend" ? "stack" : "family");
       setTransition(null);
       timerRef.current = null;
     }, TRANSITION_MS);
   };
 
+  const enterFamily = (layerId: string) => {
+    if (transition) return;
+    const mount = corpusMountForLayer(layerId);
+    if (!mount) return;
+    setActiveLayerId(layerId);
+    setActiveFamilyId(mount.familyId);
+    setActiveDomainIds((existing) => ({ ...existing, [mount.familyId]: existing[mount.familyId] ?? mount.domainId }));
+    setMode("family");
+  };
+
   const enterStack = (layerId: string) => {
     if (transition) return;
+    const mount = corpusMountForLayer(layerId);
+    if (mount) {
+      setActiveFamilyId(mount.familyId);
+      setActiveDomainIds((existing) => ({ ...existing, [mount.familyId]: mount.domainId }));
+    }
     setActiveLayerId(layerId);
     scheduleTransition({
       direction: "descend",
@@ -81,8 +107,13 @@ export function AtlasSpaceNavigator() {
     });
   };
 
-  const zoomOut = () => {
+  const zoomOutToFamily = () => {
     if (transition) return;
+    const mount = corpusMountForLayer(activeLayer.id);
+    if (mount) {
+      setActiveFamilyId(mount.familyId);
+      setActiveDomainIds((existing) => ({ ...existing, [mount.familyId]: mount.domainId }));
+    }
     scheduleTransition({
       direction: "ascend",
       layerId: activeLayer.id,
@@ -90,6 +121,11 @@ export function AtlasSpaceNavigator() {
       chartPath: activeChartPath,
       navigationDepth: activeNavigationDepth,
     });
+  };
+
+  const zoomOutToMeta = () => {
+    if (transition) return;
+    setMode("meta");
   };
 
   const transitionFiber = transition
@@ -102,13 +138,14 @@ export function AtlasSpaceNavigator() {
   const transitionPathLabels = transition
     ? recursiveAtlasPathLabels(transition.layerId, transition.chartPath)
     : activePathLabels;
+  const transitionMount = corpusMountForLayer(transitionLayer.id);
 
   const transitionStyle = {
-    "--meta-x": `${activeMetaPosition.x}%`,
-    "--meta-y": `${activeMetaPosition.y}%`,
+    "--meta-x": mode === "family" || transition?.direction === "ascend" ? "50%" : `${activeMetaPosition.x}%`,
+    "--meta-y": mode === "family" || transition?.direction === "ascend" ? "50%" : `${activeMetaPosition.y}%`,
   } as CSSProperties;
 
-  const railDepth = mode === "meta" ? "meta" : activeNavigationDepth;
+  const railDepth = mode === "meta" ? "meta" : mode === "family" ? "family" : activeNavigationDepth;
 
   return (
     <section
@@ -123,16 +160,20 @@ export function AtlasSpaceNavigator() {
           <strong>
             {transition
               ? transition.direction === "descend"
-                ? `PROJECTING ${transitionLayer.hardware.rackCode} / ${transitionFiber.label} / ${transition.navigationDepth.toUpperCase()} → STACK`
-                : `PROJECTING ${transitionLayer.hardware.rackCode} / ${transitionFiber.label} / ${transition.navigationDepth.toUpperCase()} → META`
+                ? `PROJECTING ${transitionMount?.domainCode ?? transitionLayer.hardware.rackCode} / ${transitionFiber.label} / ${transition.navigationDepth.toUpperCase()} → STACK`
+                : `PROJECTING ${transitionMount?.domainCode ?? transitionLayer.hardware.rackCode} / ${transitionFiber.label} / ${transition.navigationDepth.toUpperCase()} → FAMILY`
               : mode === "meta"
-                ? `META-ATLAS / ${activeFiber.label}${activeChartPath.length ? ` / SUSPENDED DEPTH ${activeChartPath.length + 1}` : ""}`
-                : `${activeNavigationDepth.toUpperCase()} / ${activeLayer.hardware.rackCode} / ${activeFiber.label}`}
+                ? `META-ATLAS / ${activeFiber.label}`
+                : mode === "family"
+                  ? `DOMAIN ATLAS / ${activeFamily.code} / ${activeFamily.label}`
+                  : `${activeNavigationDepth.toUpperCase()} / ${activeLayer.hardware.rackCode} / ${activeFiber.label}`}
           </strong>
         </div>
 
         <div className={styles.scaleTrack} aria-hidden="true">
           <i className={railDepth === "meta" && !transition ? styles.scalePointActive : ""} />
+          <span />
+          <i className={railDepth === "family" && !transition ? styles.scalePointActive : ""} />
           <span />
           <i className={railDepth === "stack" && !transition ? styles.scalePointActive : ""} />
           <span />
@@ -144,6 +185,7 @@ export function AtlasSpaceNavigator() {
 
         <div className={styles.scaleLabels} aria-hidden="true">
           <span>META</span>
+          <span>FAMILY</span>
           <span>STACK</span>
           <span>LOCAL</span>
           <span>SUBCHART</span>
@@ -151,15 +193,17 @@ export function AtlasSpaceNavigator() {
 
         <div className={styles.scaleActions}>
           {mode === "stack" ? (
-            <button type="button" onClick={zoomOut} disabled={Boolean(transition)}>
+            <button type="button" onClick={zoomOutToFamily} disabled={Boolean(transition)}>
+              ← ZOOM OUT TO FAMILY
+            </button>
+          ) : mode === "family" ? (
+            <button type="button" onClick={zoomOutToMeta} disabled={Boolean(transition)}>
               ← ZOOM OUT TO META
             </button>
           ) : transition ? (
             <span>PROJECTION IN MOTION</span>
-          ) : activeNavigationDepth !== "stack" ? (
-            <span>SAVED {activeNavigationDepth.toUpperCase()} POSITION</span>
           ) : (
-            <span>SELECT DOMAIN TO DESCEND</span>
+            <span>SELECT FAMILY TO DESCEND</span>
           )}
         </div>
       </div>
@@ -172,7 +216,15 @@ export function AtlasSpaceNavigator() {
             activeFiberId={activeFiberId}
             onSelectLayer={setActiveLayerId}
             onSelectFiber={setActiveFiberId}
-            onEnterStack={enterStack}
+            onEnterFamily={enterFamily}
+          />
+        ) : mode === "family" ? (
+          <FamilyDomainAtlas
+            family={activeFamily}
+            activeDomainId={activeDomainId}
+            onSelectDomain={(domainId) => setActiveDomainIds((existing) => ({ ...existing, [activeFamily.id]: domainId }))}
+            onEnterMountedDomain={enterStack}
+            onReturnMeta={zoomOutToMeta}
           />
         ) : (
           <AtlasSpace
@@ -182,7 +234,14 @@ export function AtlasSpaceNavigator() {
             initialFiberId={activeFiberId}
             initialChartPaths={chartPaths}
             initialNavigationDepth={activeNavigationDepth}
-            onActiveLayerChange={setActiveLayerId}
+            onActiveLayerChange={(layerId) => {
+              setActiveLayerId(layerId);
+              const mount = corpusMountForLayer(layerId);
+              if (mount) {
+                setActiveFamilyId(mount.familyId);
+                setActiveDomainIds((existing) => ({ ...existing, [mount.familyId]: mount.domainId }));
+              }
+            }}
             onActiveFiberChange={setActiveFiberId}
             onChartPathChange={(layerId, path) => {
               setChartPaths((existing) => ({ ...existing, [layerId]: path }));
@@ -202,14 +261,14 @@ export function AtlasSpaceNavigator() {
           >
             <div className={styles.bridgeCard}>
               <div className={styles.bridgeTopline}>
-                <span>{transitionLayer.hardware.rackCode}</span>
+                <span>{transitionMount?.domainCode ?? transitionLayer.hardware.rackCode}</span>
                 <i />
-                <span>{transitionLayer.kicker}</span>
+                <span>{transitionMount?.familyLabel ?? transitionLayer.kicker}</span>
               </div>
               <div className={styles.bridgeIdentity}>
                 <span>{transitionLayer.hardware.mark}</span>
                 <div>
-                  <strong>{transitionLayer.label}</strong>
+                  <strong>{transitionMount?.domainLabel ?? transitionLayer.label}</strong>
                   <small>{transitionLayer.hardware.registry}</small>
                 </div>
               </div>
@@ -227,8 +286,8 @@ export function AtlasSpaceNavigator() {
                 <span>{transitionPathLabels.length ? transitionPathLabels.join(" / ") : "DOMAIN ROOT / NO DEEP PATH"}</span>
               </div>
               <div className={styles.bridgeProjectionReadout}>
-                <span>{transition.direction === "descend" ? "PROMOTING DOMAIN REGION" : "COLLAPSING DOMAIN BOARD"}</span>
-                <strong>{transition.direction === "descend" ? "META → STACK" : "STACK → META"}</strong>
+                <span>{transition.direction === "descend" ? "PROMOTING DOMAIN BOARD" : "RETURNING DOMAIN BOARD TO FAMILY ATLAS"}</span>
+                <strong>{transition.direction === "descend" ? "FAMILY → STACK" : "STACK → FAMILY"}</strong>
               </div>
               <div className={styles.bridgeEdgeConnector}>
                 {model.fibers.map((fiber) => (
@@ -241,9 +300,9 @@ export function AtlasSpaceNavigator() {
       </div>
 
       <footer className={styles.navigatorFooter}>
-        <span>BF-ATLAS / SCALE BUS 0.8</span>
-        <strong>META ⇄ STACK ⇄ LOCAL ⇄ SUBCHART</strong>
-        <span>OBJECT + FIBER + PATH + DEPTH CONSERVED ACROSS PROJECTION</span>
+        <span>BF-ATLAS / SCALE BUS 0.9</span>
+        <strong>META ⇄ FAMILY ⇄ STACK ⇄ LOCAL ⇄ SUBCHART</strong>
+        <span>CORPUS HIERARCHY + OBJECT + FIBER + PATH + DEPTH CONSERVED</span>
       </footer>
     </section>
   );
