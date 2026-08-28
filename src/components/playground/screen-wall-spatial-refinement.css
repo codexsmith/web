@@ -1,0 +1,443 @@
+/* Screen Wall spatial refinement
+ *
+ * This layer deliberately separates room-scale composition from the base
+ * monitor/component grammar. It gives the wall a landmark, neighborhoods,
+ * shared backplane infrastructure, and ports that read as actual terminals.
+ */
+
+.screen-wall-stage {
+  padding: 1.15rem 1.2rem 1.35rem;
+}
+
+.screen-wall-stage::after {
+  content: "CATALOG BUS // SHARED PROJECTION INFRASTRUCTURE";
+  position: absolute;
+  z-index: 0;
+  left: 2.1rem;
+  bottom: 1.5rem;
+  padding: 0.23rem 0.4rem;
+  border: 1px solid #263036;
+  background: #0a0e10;
+  color: #68747a;
+  font-size: 0.43rem;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.screen-wall-backplane {
+  inset: 1.2rem 1.3rem 1.35rem;
+  border: 1px solid #1b2327;
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(90deg, transparent 0 14%, rgba(116, 134, 143, 0.035) 14% 14.2%, transparent 14.2% 49.8%, rgba(116, 134, 143, 0.035) 49.8% 50%, transparent 50% 84.8%, rgba(116, 134, 143, 0.035) 84.8% 85%, transparent 85%),
+    linear-gradient(180deg, transparent 0 24.8%, rgba(116, 134, 143, 0.035) 24.8% 25%, transparent 25% 74.8%, rgba(116, 134, 143, 0.035) 74.8% 75%, transparent 75%),
+    #080b0d;
+  box-shadow: inset 0 0 0 3px #060809, inset 0 0 55px rgba(0, 0, 0, 0.38);
+}
+
+/* Shared catalog bus: one relation class, one visual language. */
+.screen-wall-bus {
+  border-color: #343f45;
+  background: linear-gradient(180deg, #171d20, #0c1113);
+  box-shadow: 0 0 0 2px #060809, inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.screen-wall-bus::before,
+.screen-wall-bus::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.screen-wall-bus--a {
+  left: 4.5%;
+  right: 4.5%;
+  top: 49.6%;
+  height: 0.58rem;
+}
+
+.screen-wall-bus--a::before {
+  left: 0.35rem;
+  right: 0.35rem;
+  top: 0.16rem;
+  height: 1px;
+  background: #789341;
+  box-shadow: 0 0.18rem 0 #314c39;
+  opacity: 0.72;
+}
+
+.screen-wall-bus--a::after {
+  left: 0.35rem;
+  right: 0.35rem;
+  bottom: 0.12rem;
+  height: 1px;
+  background: #4a5e65;
+}
+
+.screen-wall-bus--b {
+  left: 49.7%;
+  top: 6%;
+  bottom: 6%;
+  width: 0.58rem;
+  height: auto;
+}
+
+.screen-wall-bus--b::before {
+  top: 0.35rem;
+  bottom: 0.35rem;
+  left: 0.16rem;
+  width: 1px;
+  background: #789341;
+  box-shadow: 0.18rem 0 0 #314c39;
+  opacity: 0.72;
+}
+
+.screen-wall-bus--b::after {
+  top: 0.35rem;
+  bottom: 0.35rem;
+  right: 0.12rem;
+  width: 1px;
+  background: #4a5e65;
+}
+
+.screen-wall-bus--c {
+  left: 4.5%;
+  right: 4.5%;
+  top: auto;
+  bottom: 17%;
+  width: auto;
+  height: 0.42rem;
+  border-color: #283238;
+  opacity: 0.78;
+}
+
+.screen-wall-bus--c::before {
+  left: 0.35rem;
+  right: 0.35rem;
+  top: 50%;
+  height: 1px;
+  background: #44565e;
+}
+
+.screen-wall-junction {
+  width: 1.22rem;
+  height: 1.22rem;
+  border-radius: 0.12rem;
+  border-color: #667279;
+  background: linear-gradient(145deg, #20282c, #0d1113 66%);
+  box-shadow: inset 0 0 0 3px #090c0e, 0 0 0 2px #050708;
+}
+
+.screen-wall-junction::after {
+  inset: 0.31rem;
+  background: #93bf3b;
+  box-shadow: 0 0 7px rgba(147, 191, 59, 0.34);
+}
+
+.screen-wall-junction--a {
+  left: calc(50% - 0.61rem);
+  top: calc(50% - 0.61rem);
+}
+
+.screen-wall-junction--b {
+  left: 14%;
+  right: auto;
+  top: calc(50% - 0.61rem);
+}
+
+.screen-wall-junction--c {
+  right: 14%;
+  bottom: calc(17% - 0.4rem);
+}
+
+.screen-wall-zone-labels {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.screen-wall-zone-labels span {
+  position: absolute;
+  padding: 0.2rem 0.35rem;
+  border-left: 2px solid #445058;
+  background: rgba(8, 11, 13, 0.88);
+  color: #69757b;
+  font-size: 0.43rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.screen-wall-zone-labels span:nth-child(1) { left: 1%; top: 1%; }
+.screen-wall-zone-labels span:nth-child(2) { left: 40%; top: 1%; }
+.screen-wall-zone-labels span:nth-child(3) { left: 1%; bottom: 1%; }
+.screen-wall-zone-labels span:nth-child(4) { right: 1%; bottom: 1%; }
+
+.screen-wall-grid {
+  position: relative;
+  min-height: 47rem;
+  padding: 1.7rem 1.7rem 2rem;
+  border: 1px solid #20292e;
+  border-radius: 0.45rem;
+  background:
+    linear-gradient(90deg, transparent 0 16.5%, rgba(110,126,135,.045) 16.5% 16.7%, transparent 16.7% 33.2%, rgba(110,126,135,.045) 33.2% 33.4%, transparent 33.4% 49.9%, rgba(110,126,135,.045) 49.9% 50.1%, transparent 50.1% 66.6%, rgba(110,126,135,.045) 66.6% 66.8%, transparent 66.8% 83.3%, rgba(110,126,135,.045) 83.3% 83.5%, transparent 83.5%),
+    linear-gradient(180deg, transparent 0 24.8%, rgba(110,126,135,.04) 24.8% 25%, transparent 25% 49.8%, rgba(110,126,135,.04) 49.8% 50%, transparent 50% 74.8%, rgba(110,126,135,.04) 74.8% 75%, transparent 75%),
+    rgba(5, 7, 8, 0.26);
+  box-shadow: inset 0 0 0 3px #070a0b, inset 0 0 48px rgba(0,0,0,.28);
+}
+
+.screen-module {
+  border-radius: 0.34rem;
+  border-color: #465158;
+  background: linear-gradient(180deg, #181e21, #0c1012 74%);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.045),
+    inset 0 0 0 3px #090d0f;
+}
+
+.screen-module::before {
+  content: attr(data-screen);
+  position: absolute;
+  z-index: 6;
+  left: 0.72rem;
+  top: -0.43rem;
+  padding: 0.13rem 0.34rem;
+  border: 1px solid #3c474d;
+  background: #0b0f11;
+  color: #667279;
+  font-size: 0.39rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.screen-module::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 8%;
+  right: 8%;
+  bottom: -0.42rem;
+  height: 0.42rem;
+  border: 1px solid #2b3439;
+  border-top: 0;
+  background: #0b0f11;
+  box-shadow: 0 2px 3px rgba(0,0,0,.35);
+}
+
+.screen-module[data-landmark="true"] {
+  border-color: color-mix(in srgb, var(--tone) 50%, #4a565d);
+  box-shadow:
+    0 14px 28px rgba(0,0,0,.48),
+    0 0 0 1px color-mix(in srgb, var(--tone) 12%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 0 0 4px #090d0f;
+}
+
+.screen-module[data-landmark="true"]::before {
+  content: "CENTRAL STAGE // " attr(data-screen);
+  border-color: color-mix(in srgb, var(--tone) 34%, #3c474d);
+  color: color-mix(in srgb, var(--tone) 64%, #8a969c);
+}
+
+.screen-module[data-landmark="true"] .screen-module__copy strong {
+  font-size: 1.15rem;
+}
+
+.screen-module[data-landmark="true"] .screen-module__bezel {
+  padding: 0.48rem;
+}
+
+/* A port exists only when the object declares that interface in JSX. */
+.screen-module__ports {
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 0;
+  padding: 0.27rem 0.2rem;
+  border-color: #59656b;
+  background: linear-gradient(180deg, #1b2226, #0b0f11);
+  box-shadow: 0 0 0 2px #060809, inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.screen-module__ports::before {
+  position: absolute;
+  top: -0.95rem;
+  color: #667279;
+  font-size: 0.37rem;
+  letter-spacing: 0.1em;
+}
+
+.screen-module__ports::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0.9rem;
+  height: 0.24rem;
+  transform: translateY(-50%);
+  border-top: 1px solid #4d5b61;
+  border-bottom: 1px solid #1d272b;
+  background: #111719;
+  box-shadow: 0 0 0 1px #060809;
+}
+
+.screen-module__ports--left {
+  left: -0.43rem;
+}
+
+.screen-module__ports--left::before {
+  content: "IN";
+  left: 0;
+}
+
+.screen-module__ports--left::after {
+  right: 100%;
+}
+
+.screen-module__ports--right {
+  right: -0.43rem;
+}
+
+.screen-module__ports--right::before {
+  content: "OUT";
+  right: 0;
+}
+
+.screen-module__ports--right::after {
+  left: 100%;
+}
+
+.screen-module__ports i {
+  width: 0.48rem;
+  height: 0.48rem;
+  border-color: #718087;
+}
+
+.screen-module__ports i[data-port="input"] {
+  border-radius: 50%;
+  background: radial-gradient(circle, #050708 0 34%, #39464c 36% 48%, #080b0d 50%);
+}
+
+.screen-module__ports i[data-port="output"] {
+  position: relative;
+  border-radius: 0.08rem;
+  background: #080b0d;
+  box-shadow: inset 0 0 0 1px #263137;
+}
+
+.screen-module__ports i[data-port="output"]::after {
+  content: "";
+  position: absolute;
+  inset: 0.12rem;
+  border: 1px solid #7b8a91;
+  background: #151c1f;
+}
+
+.screen-module__io {
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.screen-module__io span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.16rem;
+  color: #667279;
+  font-size: 0.36rem;
+  letter-spacing: 0.08em;
+}
+
+.screen-module__io i {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-color: #657178;
+}
+
+.screen-module__io .is-input {
+  border-radius: 50%;
+}
+
+.screen-module__io .is-output {
+  border-radius: 0.04rem;
+}
+
+@media (min-width: 1101px) {
+  .screen-wall-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-rows: repeat(4, minmax(9.4rem, 1fr));
+    gap: 1rem 1.08rem;
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-module[data-screen="atlas"] { grid-area: 1 / 1 / 3 / 3; }
+  .screen-wall-shell[data-mode="curated"] .screen-module[data-screen="geometry"] { grid-area: 1 / 3 / 5 / 6; }
+  .screen-wall-shell[data-mode="curated"] .screen-module[data-screen="chess"] { grid-area: 1 / 6 / 3 / 7; }
+  .screen-wall-shell[data-mode="curated"] .screen-module[data-screen="patchbay"] { grid-area: 3 / 1 / 5 / 3; }
+  .screen-wall-shell[data-mode="curated"] .screen-module[data-screen="radio"] { grid-area: 3 / 6 / 5 / 7; }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-module[data-screen="chess"] { grid-area: 1 / 1 / 3 / 2; }
+  .screen-wall-shell[data-mode="arcade"] .screen-module[data-screen="geometry"] { grid-area: 1 / 2 / 4 / 5; }
+  .screen-wall-shell[data-mode="arcade"] .screen-module[data-screen="radio"] { grid-area: 1 / 5 / 2 / 7; }
+  .screen-wall-shell[data-mode="arcade"] .screen-module[data-screen="waves"] { grid-area: 3 / 1 / 5 / 2; }
+  .screen-wall-shell[data-mode="arcade"] .screen-module[data-screen="oddments"] { grid-area: 2 / 5 / 5 / 7; }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-module[data-screen="atlas"] { grid-area: 1 / 1 / 3 / 3; }
+  .screen-wall-shell[data-mode="workbench"] .screen-module[data-screen="geometry"] { grid-area: 1 / 3 / 4 / 6; }
+  .screen-wall-shell[data-mode="workbench"] .screen-module[data-screen="patchbay"] { grid-area: 3 / 1 / 5 / 3; }
+  .screen-wall-shell[data-mode="workbench"] .screen-module[data-screen="waves"] { grid-area: 4 / 3 / 5 / 6; }
+  .screen-wall-shell[data-mode="workbench"] .screen-module[data-screen="forge"] { grid-area: 1 / 6 / 5 / 7; }
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .screen-wall-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-template-areas: none;
+    min-height: 0;
+    padding: 1.5rem;
+  }
+
+  .screen-module {
+    grid-area: auto;
+    min-height: 15rem;
+  }
+
+  .screen-module[data-landmark="true"] {
+    grid-column: 1 / -1;
+    min-height: 23rem;
+    order: -1;
+  }
+
+  .screen-wall-zone-labels {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .screen-wall-stage {
+    padding: 0.65rem;
+  }
+
+  .screen-wall-stage::after,
+  .screen-wall-zone-labels {
+    display: none;
+  }
+
+  .screen-wall-grid {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .screen-module[data-landmark="true"] {
+    min-height: 18rem;
+  }
+
+  .screen-module::before {
+    top: 0.22rem;
+    left: 0.8rem;
+  }
+
+  .screen-module__ports::after {
+    display: none;
+  }
+}
