@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "seed institutional projection",
+  "purpose": "Provide a whole-Lab temporal projection that preserves multiple institutional tracks, cross-track convergence, state reconstruction, and provenance gaps instead of flattening history into one founder chronology.",
+  "provenanceNote": "Seed chronology only. Events preserve evidence posture and source references; empty tracks are visible rather than filled by inference.",
+  "tracks": [
+    {"id":"research","label":"Research","description":"Questions, experiments, formal inquiry, and evidence-bearing work.","coverage":"seeded"},
+    {"id":"theory","label":"Theory","description":"Named formal objects, architectures, and conceptual consolidations.","coverage":"seeded"},
+    {"id":"method","label":"Method","description":"Reusable procedures, scientific machinery, and representational practice.","coverage":"seeded"},
+    {"id":"products","label":"Products","description":"Product experiments and test environments selected to exercise Lab methods.","coverage":"pending"},
+    {"id":"publications","label":"Publications","description":"Public artifacts, corrections, and governed boundary crossings.","coverage":"seeded"},
+    {"id":"applications","label":"Applications","description":"Transfers of method into real-world domains and public-interest contexts.","coverage":"pending"},
+    {"id":"people","label":"People","description":"Participation, lineage, review, collaboration, and contributor context.","coverage":"seeded"},
+    {"id":"institution","label":"Institution","description":"Boundary First Labs identity, provenance, governance, and institutional formation.","coverage":"seeded"},
+    {"id":"infrastructure","label":"Infrastructure","description":"Software, repositories, research apparatus, and operational control surfaces.","coverage":"seeded"}
+  ],
+  "snapshots": [
+    {"id":"2018","label":"2018 · External scrutiny","shortLabel":"2018","cutoff":20181231,"note":"Relativistic work is being taken outside the private research loop for criticism."},
+    {"id":"2019","label":"2019–2021 · Research room","shortLabel":"2019","cutoff":20211231,"note":"A physical research environment functions as a persistent external context window."},
+    {"id":"2026-04","label":"April 2026 · Representation program","shortLabel":"APR 26","cutoff":20260430,"note":"Volumology is explicitly reframed toward a broader representational-gauge program."},
+    {"id":"2026-07","label":"July 2026 · Schema construction","shortLabel":"JUL 26","cutoff":20260731,"note":"Schemathematics crystallizes as a bounded construction and transformation program."},
+    {"id":"2026-08-01","label":"August 1 · Second-order method","shortLabel":"AUG 01","cutoff":20260801,"note":"The long-run research genealogy and agentic scientific method are joined into a dated synthesis package."},
+    {"id":"2026-08-15","label":"Mid-August · Controlled architecture","shortLabel":"AUG 15","cutoff":20260815,"note":"Boundary Theory architecture becomes explicit and source-controlled."},
+    {"id":"2026-08-24","label":"August 24 · Provenance synthesis","shortLabel":"AUG 24","cutoff":20260824,"note":"Institutional, founder, terminology, and theory histories are joined into a typed chronology."},
+    {"id":"2026-08-27","label":"August 27 · Lab Machine","shortLabel":"AUG 27","cutoff":20260827,"note":"The website begins exposing institutional operation as an inspectable machine with second-layer subsystem content."}
+  ],
+  "lineages": [
+    {"id":"representation-program","label":"Representation program"},
+    {"id":"scientific-method","label":"Scientific method"},
+    {"id":"institutional-provenance","label":"Institutional provenance"},
+    {"id":"interface-and-apparatus","label":"Interface & apparatus"}
+  ],
+  "events": [
+    {
+      "id":"LMT-001","track":"research","relatedTracks":[],"snapshotId":"2018","sortKey":20180601,"date":"~2018","title":"Attempted external scrutiny of relativistic work","summary":"Origin materials record outreach seeking criticism of an attempted relativistic derivation or extension.","consequence":"The research program is explicitly subjected to an external criticism boundary rather than remaining entirely private.","status":"primary artifact unrecovered","evidence":["R","OPEN"],"sourceRef":"founder provenance EVT-005","lineage":["representation-program","scientific-method"]
+    },
+    {
+      "id":"LMT-002","track":"research","relatedTracks":["infrastructure"],"snapshotId":"2019","sortKey":20190101,"date":"~2019–2021","title":"Physical research-room phase","summary":"A dedicated room functions as an external cognitive apparatus that keeps multiple research branches spatially persistent and mutually inspectable.","consequence":"Research representation becomes environmental: the room itself acts as working memory and comparison machinery.","status":"source media reportedly preserved","evidence":["R"],"sourceRef":"founder provenance EVT-006","lineage":["representation-program","interface-and-apparatus"]
+    },
+    {
+      "id":"LMT-003","track":"theory","relatedTracks":["research"],"snapshotId":"2026-04","sortKey":20260321,"date":"2026-03-21","title":"Volumology archive mapped as historical program","summary":"The surviving archive is treated as historical provenance around region, boundary, interface, recursion, operators, and formal-to-executable evidence attempts.","consequence":"Earlier work is preserved as lineage without inheriting its strongest historical claims as current authority.","status":"historical provenance","evidence":["P","R"],"sourceRef":"founder provenance EVT-009","lineage":["representation-program","institutional-provenance"]
+    },
+    {
+      "id":"LMT-004","track":"theory","relatedTracks":["research"],"snapshotId":"2026-04","sortKey":20260429,"date":"2026-04-29","title":"Volumology reframed as representational gauge work","summary":"A retained checkpoint characterizes the earlier program as bounded observable structure under distinction, gauge, interface, representation, invariant, and defect.","consequence":"The research target moves from a domain-specific volume program toward lawful representation change.","status":"conversation checkpoint","evidence":["C"],"sourceRef":"founder provenance EVT-010","lineage":["representation-program"]
+    },
+    {
+      "id":"LMT-005","track":"theory","relatedTracks":["method"],"snapshotId":"2026-07","sortKey":20260707,"date":"2026-07-07 → 07-08","title":"Schemathematics crystallizes","summary":"Schemas are differentiated as bounded representational forms carrying typed slots, relations, admissibility conditions, invariants, transformations, validation, defects, and repair.","consequence":"Construction and transformation of representations becomes a first-class research program rather than an implicit technique.","status":"conversation origin with repository placement","evidence":["C","R"],"sourceRef":"founder provenance EVT-016","lineage":["representation-program","scientific-method"]
+    },
+    {
+      "id":"LMT-006","track":"method","relatedTracks":["research","theory"],"snapshotId":"2026-08-01","sortKey":20260801,"date":"2026-08-01","title":"Second-Order Scientific Method origin package","summary":"A dated synthesis joins the long-run physics problem, primitive representational questions, agentic pressure on fixed possibility spaces, Distinction Space, Contexture, proto-schema work, and a second-order scientific method.","consequence":"The Lab acquires an explicit methodological layer for instrumenting research processes themselves.","status":"dated retrospective synthesis","evidence":["R"],"sourceRef":"founder provenance EVT-017","lineage":["scientific-method","representation-program"]
+    },
+    {
+      "id":"LMT-007","track":"method","relatedTracks":["theory"],"snapshotId":"2026-08-15","sortKey":20260802,"date":"2026-08-02","title":"Schemathematics → Representational Mechanics edge retained","summary":"The earliest retained checkpoint records Schemathematics as supplying representational machinery to Representational Mechanics.","consequence":"The distinction between the construction program and the applying/study discipline becomes historically inspectable.","status":"historical edge partially recovered","evidence":["R","C"],"sourceRef":"founder provenance EVT-018","lineage":["representation-program","scientific-method"]
+    },
+    {
+      "id":"LMT-008","track":"theory","relatedTracks":["method","institution"],"snapshotId":"2026-08-15","sortKey":20260815,"date":"2026-08-15","title":"Current Boundary Theory architecture becomes source-controlled","summary":"Repository reconciliation records Boundary Theory centered on Distinction Space, typed operational facets, Contexture as composable subspace, and Representational Mechanics with Formal Grammars, Boundary First, and Corpus Forge.","consequence":"The current conceptual architecture receives an explicit controlled representation against which later changes can be compared.","status":"current controlled architecture","evidence":["R","P"],"sourceRef":"founder provenance EVT-020","lineage":["representation-program","scientific-method","institutional-provenance"]
+    },
+    {
+      "id":"LMT-009","track":"people","relatedTracks":["institution"],"snapshotId":"2026-08-24","sortKey":20260822,"date":"2026-08-22","title":"Augusta founder lineage captured in repository","summary":"The internal founder-history package records an institutional causal spine from Augusta formation through technical intensification, professional discontinuity, independent research and systems practice, reconstruction, and capability building.","consequence":"Founder history becomes typed institutional provenance rather than informal biography alone.","status":"internal founder history model","evidence":["R","P"],"sourceRef":"founder provenance EVT-021","lineage":["institutional-provenance"]
+    },
+    {
+      "id":"LMT-010","track":"publications","relatedTracks":["theory","institution"],"snapshotId":"2026-08-24","sortKey":20260823,"date":"2026-08-23","title":"Volumology correction becomes public provenance artifact","summary":"Historical Volumology material is reframed as provenance to preserve with correction rather than delete or inherit uncritically.","consequence":"The publication boundary demonstrates a repair rule: preserve chronology and error while separating both from current claim authority.","status":"public provenance correction","evidence":["P","R"],"sourceRef":"founder provenance EVT-022","lineage":["institutional-provenance","representation-program"]
+    },
+    {
+      "id":"LMT-011","track":"institution","relatedTracks":["research","people"],"snapshotId":"2026-08-24","sortKey":20260824,"date":"2026-08-24","title":"Master founder and intellectual chronology reconstructed","summary":"Founder, research, terminology, theory architecture, and institutional histories are joined into one typed chronology while unresolved provenance gaps remain visible.","consequence":"The Lab gains a temporal control object capable of supporting later whole-institution projections.","status":"current derived synthesis","evidence":["R"],"sourceRef":"founder provenance EVT-023","lineage":["institutional-provenance","scientific-method"]
+    },
+    {
+      "id":"LMT-012","track":"infrastructure","relatedTracks":["institution"],"snapshotId":"2026-08-27","sortKey":20260826,"date":"2026-08-26","title":"Physical Lab Machine adopts production card grammar","summary":"The web prototype renders institutional subsystems as a connected physical apparatus while retaining graph-derived boundaries, ports, state, and relations.","consequence":"Institutional topology becomes directly inspectable as a visual-operational object rather than remaining an abstract sitemap.","status":"repository commit","evidence":["P"],"sourceRef":"web commit 31197e76 · refactor(bfux): use production card skin in physical machine","lineage":["interface-and-apparatus","institutional-provenance"]
+    },
+    {
+      "id":"LMT-013","track":"infrastructure","relatedTracks":["institution","method"],"snapshotId":"2026-08-27","sortKey":20260827,"date":"2026-08-27","title":"Lab Machine second-layer content contract introduced","summary":"Subsystem cards gain structured content for institutional role, boundary, process, rationale, validation, projections, and takeaway.","consequence":"The middle scale of the website begins explaining why each subsystem exists and how it behaves instead of merely linking to contained artifacts.","status":"repository commit","evidence":["P"],"sourceRef":"web commit c4e03214 · feat(bfux): add Lab Machine second-layer content","lineage":["interface-and-apparatus","scientific-method","institutional-provenance"]
+    }
+  ]
+}

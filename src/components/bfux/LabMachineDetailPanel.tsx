@@ -1,13 +1,31 @@
 "use client";
 
+import { useState } from "react";
 import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineCardContent } from "./lab-machine-content";
 import type { LabMachineNode } from "./lab-machine-model";
+import {
+  LabMachineTimelineProjection,
+  isTimelineProjectionMode,
+  type TimelineProjectionMode,
+} from "./LabMachineTimelineProjection";
 import "./lab-machine-detail.css";
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
   const content = getLabMachineCardContent(node.id);
+  const [activeProjection, setActiveProjection] = useState<TimelineProjectionMode | null>(null);
+
   if (!content) return null;
+
+  if (node.id === "timeline" && activeProjection) {
+    return (
+      <LabMachineTimelineProjection
+        initialMode={activeProjection}
+        onBack={() => setActiveProjection(null)}
+        onClose={onClose}
+      />
+    );
+  }
 
   return (
     <section className="bf-machine-detail" data-tone={node.tone} aria-label={`${node.label} institutional detail`}>
@@ -65,14 +83,26 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
 
       <section className="bf-machine-detail__views" aria-label={`${node.label} available views`}>
         <header><small>AVAILABLE PROJECTIONS</small><h3>Inspect this subsystem another way</h3></header>
-        <div>{content.views.map((view) => (
-          <article key={view.id} data-view-id={view.id}>
-            <span>PROJECTION</span>
-            <strong>{view.label}</strong>
-            <p>{view.purpose}</p>
-            <button type="button" disabled title="Projection component pending">PLANNED</button>
-          </article>
-        ))}</div>
+        <div>{content.views.map((view) => {
+          const timelineProjection = node.id === "timeline" && isTimelineProjectionMode(view.id);
+          return (
+            <article key={view.id} data-view-id={view.id}>
+              <span>PROJECTION</span>
+              <strong>{view.label}</strong>
+              <p>{view.purpose}</p>
+              <button
+                type="button"
+                disabled={!timelineProjection}
+                title={timelineProjection ? `Open ${view.label}` : "Projection component pending"}
+                onClick={() => {
+                  if (timelineProjection) setActiveProjection(view.id);
+                }}
+              >
+                {timelineProjection ? "OPEN" : "PLANNED"}
+              </button>
+            </article>
+          );
+        })}</div>
       </section>
 
       <footer className="bf-machine-detail__takeaway">
