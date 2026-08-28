@@ -11,7 +11,7 @@ type MetaAtlasOverviewProps = {
   activeFiberId: string;
   onSelectLayer: (layerId: string) => void;
   onSelectFiber: (fiberId: string) => void;
-  onEnterStack: (layerId: string) => void;
+  onEnterFamily: (layerId: string) => void;
 };
 
 function pathToHub(position: { x: number; y: number }, index: number) {
@@ -36,7 +36,7 @@ export function MetaAtlasOverview({
   activeFiberId,
   onSelectLayer,
   onSelectFiber,
-  onEnterStack,
+  onEnterFamily,
 }: MetaAtlasOverviewProps) {
   const activeFiber = model.fibers.find((fiber) => fiber.id === activeFiberId) ?? model.fibers[0];
   const activeLayer = model.layers.find((layer) => layer.id === activeLayerId) ?? model.layers[0];
@@ -49,7 +49,7 @@ export function MetaAtlasOverview({
         <div>
           <span className={styles.overline}>META-ATLAS / CANONICAL DOMAIN FAMILIES</span>
           <h3>Boundary First Library domain field</h3>
-          <p>Canonical corpus families are shown as the outer atlas; each card mounts one real Library domain as the current exemplar.</p>
+          <p>Canonical corpus families are shown as the outer atlas. Open a family to inspect all of its mapped child domains before descending into a mounted board.</p>
         </div>
         <div className={styles.readout}>
           <span>ACTIVE FIBER</span>
@@ -113,24 +113,24 @@ export function MetaAtlasOverview({
                 <span className={styles.domainMark}>{layer.hardware.mark}</span>
                 <div>
                   <h4>{mount?.familyLabel ?? layer.label}</h4>
-                  <small>{mount ? `${mount.domainCode} / MOUNTED: ${mount.domainLabel}` : layer.hardware.registry}</small>
+                  <small>{mount ? `${mount.domainCode} / CURRENT MOUNT: ${mount.domainLabel}` : layer.hardware.registry}</small>
                 </div>
               </div>
               <div className={styles.localProjection}>
-                <span>{mount ? `${mount.domainLabel.toUpperCase()} / LOCAL FORM OF` : "LOCAL FORM OF"}</span>
+                <span>{mount ? `${mount.domainLabel.toUpperCase()} / CURRENT LOCAL FORM OF` : "LOCAL FORM OF"}</span>
                 <strong>{activeFiber.label}</strong>
                 <p>{anchor?.label ?? "No local termination represented"}</p>
               </div>
               <div className={styles.domainActions}>
-                <span>{mount ? `${mount.inventory.length} CORPUS OBJECTS MOUNTED` : anchor ? `${connectorCode(activeFiber)} PORT TERMINATED` : "UNMAPPED"}</span>
+                <span>{mount ? "OPEN CANONICAL CHILD-DOMAIN ATLAS" : anchor ? `${connectorCode(activeFiber)} PORT TERMINATED` : "UNMAPPED"}</span>
                 <button
                   type="button"
                   onClick={(event) => {
                     event.stopPropagation();
-                    onEnterStack(layer.id);
+                    onEnterFamily(layer.id);
                   }}
                 >
-                  ENTER {mount?.domainLabel.toUpperCase() ?? "STACK"} →
+                  OPEN FAMILY ATLAS →
                 </button>
               </div>
             </article>
@@ -140,7 +140,7 @@ export function MetaAtlasOverview({
         <div className={styles.metaNote}>
           <span>EMPIRICAL MOUNT / {labCorpusAuthority.generatedAt.slice(0, 10)}</span>
           <strong>Formal · Natural · Engineered · Linguistic</strong>
-          <p>Topology follows the generated Boundary First Library Atlas. Mounted inventory records corpus existence, not publication approval or claim validity.</p>
+          <p>Topology follows the generated Boundary First Library Atlas. Family membership, mounted-board availability, publication status, and claim validity remain separate facts.</p>
         </div>
       </div>
     </section>
