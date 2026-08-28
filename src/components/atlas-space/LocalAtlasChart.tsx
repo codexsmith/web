@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import styles from "./LocalAtlasChart.module.css";
+import { recursiveAtlasRoots, type RecursiveAtlasChart } from "./local-atlas-recursion";
 import type { AtlasFiber, AtlasLayer } from "./atlas-space-model";
 
 type LocalAtlasChartProps = {
@@ -10,82 +12,89 @@ type LocalAtlasChartProps = {
   onSelectFiber: (fiberId: string) => void;
 };
 
-type LocalOperation = {
-  label: string;
-  note: string;
-};
-
-const localOperations: Record<string, LocalOperation> = {
-  mathematics: {
-    label: "Map / operator",
-    note: "Transforms one represented mathematical state into another under a declared domain.",
-  },
-  physics: {
-    label: "Transport / evolution",
-    note: "Carries physical state through time, space, or an interface under governing relations.",
-  },
-  computation: {
-    label: "Transition / execution",
-    note: "Applies an executable rule to machine state while preserving type and guard constraints.",
-  },
-  law: {
-    label: "Procedure / disposition",
-    note: "Moves represented legal status through an authorized procedural transition.",
-  },
+type ChartFrame = {
+  chart: RecursiveAtlasChart;
+  viaLabel?: string;
 };
 
 export function LocalAtlasChart({ layer, fibers, activeFiberId, onSelectFiber }: LocalAtlasChartProps) {
-  const anchorByFiber = new Map(layer.anchors.map((anchor) => [anchor.fiberId, anchor]));
-  const operation = localOperations[layer.id] ?? {
-    label: "Local operation",
-    note: "A domain-local transition whose admissibility and consequences are represented on this chart.",
-  };
+  const root = recursiveAtlasRoots[layer.id];
+  const [stack, setStack] = useState<ChartFrame[]>(() => root ? [{ chart: root }] : []);
 
-  const regions = [
-    { fiberId: "bound-distinction", zone: "distinction", code: "D01" },
-    { fiberId: "state", zone: "state", code: "S02" },
-    { fiberId: null, zone: "operation", code: "T03" },
-    { fiberId: "admissibility", zone: "admissibility", code: "A04" },
-    { fiberId: "closure", zone: "closure", code: "C05" },
-  ] as const;
+  useEffect(() => {
+    setStack(root ? [{ chart: root }] : []);
+  }, [layer.id, root]);
+
+  const current = stack.at(-1)?.chart;
+  const fiberById = useMemo(() => new Map(fibers.map((fiber) => [fiber.id, fiber])), [fibers]);
+
+  if (!current) return null;
+
+  const nodeById = new Map(current.nodes.map((node) => [node.id, node]));
 
   return (
-    <section className={styles.chart} aria-label={`${layer.label} local atlas chart`}>
+    <section className={styles.chart} aria-label={`${layer.label} recursive local atlas chart`}>
       <header className={styles.header}>
-        <div>
+        <div className={styles.headerIdentity}>
           <span className={styles.rackCode}>{layer.hardware.rackCode}</span>
-          <h3>{layer.label} local chart</h3>
+          <h3>{current.label}</h3>
+          <p>{current.note}</p>
         </div>
-        <span className={styles.registry}>{layer.hardware.registry}</span>
+        <div className={styles.headerMeta}>
+          <span className={styles.registry}>{current.registry}</span>
+          <span className={styles.depthReadout}>DEPTH {String(stack.length).padStart(2, "0")}</span>
+        </div>
       </header>
+
+      <nav className={styles.breadcrumbs} aria-label="Atlas chart path">
+        <button type="button" onClick={() => setStack([{ chart: root }])}>{layer.label}</button>
+        {stack.map((frame, index) => (
+          <span key={`${frame.chart.id}-${index}`}>
+            <i aria-hidden="true">/</i>
+            <button type="button" onClick={() => setStack((existing) => existing.slice(0, index + 1))}>
+              {frame.viaLabel ?? frame.chart.label}
+            </button>
+          </span>
+        ))}
+      </nav>
 
       <div className={styles.field}>
         <svg className={styles.traces} viewBox="0 0 1000 560" aria-hidden="true">
-          <path d="M180 165 H410 V110 H790" />
-          <path d="M180 165 H410 V285 H510" />
-          <path d="M510 285 H710 V420 H820" />
-          <path d="M510 285 H310 V420 H185" />
-          <path d="M185 420 H500 V495 H820" />
+          {current.edges.map((edge) => {
+            const from = nodeById.get(edge.from);
+            const to = nodeById.get(edge.to);
+            if (!from || !to) return null;
+            return (
+              <line
+                key={`${edge.from}-${edge.to}`}
+                x1={from.x * 10}
+                y1={from.y * 5.6}
+                x2={to.x * 10}
+                y2={to.y * 5.6}
+              />
+            );
+          })}
         </svg>
 
-        {regions.map((region) => {
-          const anchor = region.fiberId ? anchorByFiber.get(region.fiberId) : undefined;
-          const fiber = region.fiberId ? fibers.find((candidate) => candidate.id === region.fiberId) : undefined;
-          const active = Boolean(region.fiberId && region.fiberId === activeFiberId);
-          const label = region.zone === "operation" ? operation.label : anchor?.label ?? region.zone;
-          const note = region.zone === "operation" ? operation.note : anchor?.note ?? "Local chart region.";
+        {current.nodes.map((node) => {
+          const fiber = node.fiberId ? fiberById.get(node.fiberId) : undefined;
+          const active = Boolean(node.fiberId && node.fiberId === activeFiberId);
+          const drillable = Boolean(node.child);
 
           return (
             <button
-              key={region.code}
+              key={node.id}
               type="button"
-              className={`${styles.region} ${styles[`region_${region.zone}`]} ${active ? styles.regionActive : ""}`}
-              onClick={() => region.fiberId && onSelectFiber(region.fiberId)}
-              disabled={!region.fiberId}
+              className={`${styles.region} ${active ? styles.regionActive : ""} ${drillable ? styles.regionDrillable : ""}`}
+              style={{ left: `${node.x}%`, top: `${node.y}%` }}
+              onClick={() => {
+                if (node.fiberId) onSelectFiber(node.fiberId);
+                if (node.child) setStack((existing) => [...existing, { chart: node.child!, viaLabel: node.label }]);
+              }}
             >
-              <span className={styles.regionCode}>{region.code}</span>
-              <strong>{label}</strong>
-              <small>{note}</small>
+              <span className={styles.regionCode}>{node.code}</span>
+              <strong>{node.label}</strong>
+              <small>{node.note}</small>
               <span className={styles.portRow}>
                 {fiber ? (
                   <>
@@ -99,6 +108,7 @@ export function LocalAtlasChart({ layer, fibers, activeFiberId, onSelectFiber }:
                   </>
                 )}
               </span>
+              {drillable ? <span className={styles.drillCue}>OPEN SUBCHART →</span> : null}
             </button>
           );
         })}
@@ -106,8 +116,18 @@ export function LocalAtlasChart({ layer, fibers, activeFiberId, onSelectFiber }:
         <div className={styles.chartLegend}>
           <span><i className={styles.legendPort} /> cross-atlas port</span>
           <span><i className={styles.legendTrace} /> local transition</span>
+          <span><i className={styles.legendDrill} /> recursive subchart</span>
         </div>
       </div>
+
+      <footer className={styles.chartFooter}>
+        <span>PATH: {layer.hardware.rackCode} / {stack.map((frame) => frame.viaLabel ?? frame.chart.label).join(" / ")}</span>
+        {stack.length > 1 ? (
+          <button type="button" onClick={() => setStack((existing) => existing.slice(0, -1))}>← UP ONE LEVEL</button>
+        ) : (
+          <span>ROOT LOCAL CHART</span>
+        )}
+      </footer>
     </section>
   );
 }
