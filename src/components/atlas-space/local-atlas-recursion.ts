@@ -24,6 +24,14 @@ export type RecursiveAtlasChart = {
   edges: RecursiveAtlasEdge[];
 };
 
+export type RecursiveAtlasPath = string[];
+
+export type ResolvedRecursiveAtlasFrame = {
+  chart: RecursiveAtlasChart;
+  viaNodeId?: string;
+  viaLabel?: string;
+};
+
 const physicsFieldChart: RecursiveAtlasChart = {
   id: "physics-field",
   label: "Field chart",
@@ -122,3 +130,26 @@ export const recursiveAtlasRoots: Record<string, RecursiveAtlasChart> = {
     ],
   },
 };
+
+export function resolveRecursiveAtlasPath(layerId: string, requestedPath: RecursiveAtlasPath = []) {
+  const root = recursiveAtlasRoots[layerId];
+  if (!root) return { frames: [] as ResolvedRecursiveAtlasFrame[], path: [] as RecursiveAtlasPath };
+
+  const frames: ResolvedRecursiveAtlasFrame[] = [{ chart: root }];
+  const path: RecursiveAtlasPath = [];
+  let current = root;
+
+  for (const nodeId of requestedPath) {
+    const node = current.nodes.find((candidate) => candidate.id === nodeId);
+    if (!node?.child) break;
+    path.push(node.id);
+    frames.push({ chart: node.child, viaNodeId: node.id, viaLabel: node.label });
+    current = node.child;
+  }
+
+  return { frames, path };
+}
+
+export function recursiveAtlasPathLabels(layerId: string, requestedPath: RecursiveAtlasPath = []) {
+  return resolveRecursiveAtlasPath(layerId, requestedPath).frames.map((frame) => frame.viaLabel ?? frame.chart.label);
+}
