@@ -1,5 +1,6 @@
 export type AtlasRelationKind = "structural" | "candidate" | "invariant";
 export type AtlasConnectorKind = "through" | "keyed" | "test";
+export type AtlasBoardPattern = "ruled" | "wave" | "logic" | "docket";
 
 export type AtlasPosition = {
   x: number;
@@ -21,11 +22,19 @@ export type AtlasAnchor = {
   note: string;
 };
 
+export type AtlasBoardHardware = {
+  rackCode: string;
+  mark: string;
+  registry: string;
+  pattern: AtlasBoardPattern;
+};
+
 export type AtlasLayer = {
   id: string;
   label: string;
   kicker: string;
   description: string;
+  hardware: AtlasBoardHardware;
   anchors: AtlasAnchor[];
 };
 
@@ -101,6 +110,12 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       kicker: "Formal atlas",
       description:
         "Local charts for cuts, state spaces, domains, operators, and other mathematical structures.",
+      hardware: {
+        rackCode: "MTH-F01",
+        mark: "M",
+        registry: "FORMAL / DOMAIN / OPERATOR",
+        pattern: "ruled",
+      },
       anchors: [
         { fiberId: "bound-distinction", label: "Cut / partition", note: "A local mathematical expression of separation into distinguishable regions or classes." },
         { fiberId: "state", label: "Point / element", note: "A locally represented position or member within the chosen mathematical state space." },
@@ -114,6 +129,12 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       kicker: "Natural-system atlas",
       description:
         "Local charts for physical state, interfaces, boundary conditions, conservation, and transport.",
+      hardware: {
+        rackCode: "PHY-N02",
+        mark: "P",
+        registry: "NATURAL / FIELD / TRANSPORT",
+        pattern: "wave",
+      },
       anchors: [
         { fiberId: "bound-distinction", label: "Boundary / interface", note: "A surface or transition at which physical regions, phases, or descriptions are distinguished." },
         { fiberId: "state", label: "Physical state", note: "The represented configuration used to describe a physical system at a chosen scale." },
@@ -127,6 +148,12 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       kicker: "Engineered atlas",
       description:
         "Local charts for bits, predicates, machine states, types, guards, and executable transitions.",
+      hardware: {
+        rackCode: "CMP-E03",
+        mark: "C",
+        registry: "ENGINEERED / TYPE / EXECUTION",
+        pattern: "logic",
+      },
       anchors: [
         { fiberId: "bound-distinction", label: "Bit / predicate", note: "The minimal executable distinction and one of its common operational forms." },
         { fiberId: "state", label: "Machine state", note: "A bounded representation of the information required to continue execution." },
@@ -140,6 +167,12 @@ export const defaultAtlasSpaceModel: AtlasSpaceModel = {
       kicker: "Civic atlas",
       description:
         "Local charts for classifications, legal status, jurisdiction, standing, procedure, and finality.",
+      hardware: {
+        rackCode: "LAW-C04",
+        mark: "L",
+        registry: "CIVIC / STATUS / PROCEDURE",
+        pattern: "docket",
+      },
       anchors: [
         { fiberId: "bound-distinction", label: "Classification", note: "A legal distinction that changes which rules, rights, duties, or procedures attach." },
         { fiberId: "state", label: "Legal status", note: "A represented legal condition that carries consequences within a governing framework." },
