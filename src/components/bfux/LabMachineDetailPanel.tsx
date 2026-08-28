@@ -10,6 +10,11 @@ import {
   type AboutProjectionMode,
 } from "./LabMachineAboutProjection";
 import {
+  LabMachineApplicationsProjection,
+  isApplicationsProjectionMode,
+  type ApplicationsProjectionMode,
+} from "./LabMachineApplicationsProjection";
+import {
   LabMachineGovernanceProjection,
   isGovernanceProjectionMode,
   type GovernanceProjectionMode,
@@ -55,6 +60,7 @@ type ActiveProjection =
   | { subsystem: "governance"; mode: GovernanceProjectionMode }
   | { subsystem: "about"; mode: AboutProjectionMode }
   | { subsystem: "people"; mode: PeopleProjectionMode }
+  | { subsystem: "applications"; mode: ApplicationsProjectionMode }
   | null;
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
@@ -75,25 +81,21 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
   if (activeProjection?.subsystem === "governance") return <LabMachineGovernanceProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   if (activeProjection?.subsystem === "about") return <LabMachineAboutProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   if (activeProjection?.subsystem === "people") return <LabMachinePeopleProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
+  if (activeProjection?.subsystem === "applications") return <LabMachineApplicationsProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
 
   return (
     <section className="bf-machine-detail" data-tone={node.tone} aria-label={`${node.label} institutional detail`}>
       <header className="bf-machine-detail__header">
         <div className="bf-machine-detail__identity">
           <span className="bf-machine-detail__icon"><BfuxIcon name="inspect" /></span>
-          <div>
-            <p>{content.eyebrow}</p>
-            <h2>{content.label}</h2>
-            <strong>{content.framingQuestion}</strong>
-          </div>
+          <div><p>{content.eyebrow}</p><h2>{content.label}</h2><strong>{content.framingQuestion}</strong></div>
         </div>
         <button type="button" onClick={onClose} aria-label={`Close ${node.label} detail`}>CLOSE ×</button>
       </header>
 
       <div className="bf-machine-detail__orientation">
         <div><small>SYSTEM ROLE</small><strong>{content.systemRole}</strong></div>
-        <p>{content.orientation}</p>
-        <p>{content.institutionalPurpose}</p>
+        <p>{content.orientation}</p><p>{content.institutionalPurpose}</p>
       </div>
 
       <div className="bf-machine-detail__grid">
@@ -104,27 +106,16 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
             <div><small>EXCLUDES</small><ul>{content.boundary.excludes.map((item) => <li key={item}>{item}</li>)}</ul></div>
           </div>
         </section>
-
         <section className="bf-machine-detail__module bf-machine-detail__module--process">
           <header><span>02</span><h3>PROCESS</h3></header>
           <div className="bf-machine-detail__process">
-            <ProcessColumn label="ENTERS AS" items={content.process.entersAs} />
-            <span className="bf-machine-detail__arrow" aria-hidden="true">→</span>
-            <ProcessColumn label="TRANSFORMS THROUGH" items={content.process.transformsThrough} />
-            <span className="bf-machine-detail__arrow" aria-hidden="true">→</span>
+            <ProcessColumn label="ENTERS AS" items={content.process.entersAs} /><span className="bf-machine-detail__arrow" aria-hidden="true">→</span>
+            <ProcessColumn label="TRANSFORMS THROUGH" items={content.process.transformsThrough} /><span className="bf-machine-detail__arrow" aria-hidden="true">→</span>
             <ProcessColumn label="EXITS AS" items={content.process.exitsAs} />
           </div>
         </section>
-
-        <section className="bf-machine-detail__module">
-          <header><span>03</span><h3>RATIONALE</h3></header>
-          <ol className="bf-machine-detail__numbered">{content.rationale.map((item) => <li key={item}>{item}</li>)}</ol>
-        </section>
-
-        <section className="bf-machine-detail__module">
-          <header><span>04</span><h3>VALIDATION SIGNALS</h3></header>
-          <ul className="bf-machine-detail__signals">{content.validationSignals.map((item) => <li key={item}>{item}</li>)}</ul>
-        </section>
+        <section className="bf-machine-detail__module"><header><span>03</span><h3>RATIONALE</h3></header><ol className="bf-machine-detail__numbered">{content.rationale.map((item) => <li key={item}>{item}</li>)}</ol></section>
+        <section className="bf-machine-detail__module"><header><span>04</span><h3>VALIDATION SIGNALS</h3></header><ul className="bf-machine-detail__signals">{content.validationSignals.map((item) => <li key={item}>{item}</li>)}</ul></section>
       </div>
 
       <section className="bf-machine-detail__views" aria-label={`${node.label} available views`}>
@@ -138,38 +129,28 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
           const governanceProjection = node.id === "governance" && isGovernanceProjectionMode(view.id);
           const aboutProjection = node.id === "about" && isAboutProjectionMode(view.id);
           const peopleProjection = node.id === "people" && isPeopleProjectionMode(view.id);
-          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection || aboutProjection || peopleProjection;
+          const applicationsProjection = node.id === "applications" && isApplicationsProjectionMode(view.id);
+          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection || aboutProjection || peopleProjection || applicationsProjection;
           return (
             <article key={view.id} data-view-id={view.id}>
-              <span>PROJECTION</span>
-              <strong>{view.label}</strong>
-              <p>{view.purpose}</p>
-              <button
-                type="button"
-                disabled={!available}
-                title={available ? `Open ${view.label}` : "Projection component pending"}
-                onClick={() => {
-                  if (timelineProjection) setActiveProjection({ subsystem: "timeline", mode: view.id });
-                  if (productProjection) setActiveProjection({ subsystem: "products", mode: view.id });
-                  if (researchProjection) setActiveProjection({ subsystem: "research", mode: view.id });
-                  if (methodProjection) setActiveProjection({ subsystem: "method", mode: view.id });
-                  if (pipelineProjection) setActiveProjection({ subsystem: "pipeline", mode: view.id });
-                  if (governanceProjection) setActiveProjection({ subsystem: "governance", mode: view.id });
-                  if (aboutProjection) setActiveProjection({ subsystem: "about", mode: view.id });
-                  if (peopleProjection) setActiveProjection({ subsystem: "people", mode: view.id });
-                }}
-              >
-                {available ? "OPEN" : "PLANNED"}
-              </button>
+              <span>PROJECTION</span><strong>{view.label}</strong><p>{view.purpose}</p>
+              <button type="button" disabled={!available} title={available ? `Open ${view.label}` : "Projection component pending"} onClick={() => {
+                if (timelineProjection) setActiveProjection({ subsystem: "timeline", mode: view.id });
+                if (productProjection) setActiveProjection({ subsystem: "products", mode: view.id });
+                if (researchProjection) setActiveProjection({ subsystem: "research", mode: view.id });
+                if (methodProjection) setActiveProjection({ subsystem: "method", mode: view.id });
+                if (pipelineProjection) setActiveProjection({ subsystem: "pipeline", mode: view.id });
+                if (governanceProjection) setActiveProjection({ subsystem: "governance", mode: view.id });
+                if (aboutProjection) setActiveProjection({ subsystem: "about", mode: view.id });
+                if (peopleProjection) setActiveProjection({ subsystem: "people", mode: view.id });
+                if (applicationsProjection) setActiveProjection({ subsystem: "applications", mode: view.id });
+              }}>{available ? "OPEN" : "PLANNED"}</button>
             </article>
           );
         })}</div>
       </section>
 
-      <footer className="bf-machine-detail__takeaway">
-        <small>INSTITUTIONAL TAKEAWAY</small>
-        <p>{content.takeaway}</p>
-      </footer>
+      <footer className="bf-machine-detail__takeaway"><small>INSTITUTIONAL TAKEAWAY</small><p>{content.takeaway}</p></footer>
     </section>
   );
 }

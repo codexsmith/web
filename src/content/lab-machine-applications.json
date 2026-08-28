@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "bounded domain-transfer projection seed",
+  "purpose": "Show where Boundary First methods, representations, or artifacts encounter domain-native constraints, which structures survive the transfer, what must change, what evidence would count, and which failures should return inward as research rather than being hidden as implementation noise.",
+  "posture": "Application is evidence about transfer, not proof of universality. Historical implementation, public doctrine, pilot readiness, intake, and collaboration proposal are different standings. The projection preserves those differences and does not treat a domain mapping as external validation.",
+  "applications": [
+    {
+      "id": "augusta-citywatch",
+      "label": "Augusta CityWatch",
+      "domain": "Civic infrastructure",
+      "domainKind": "public administration / municipal technology",
+      "standing": "historical-operational-plus-bridge",
+      "standingLabel": "HISTORICAL BUILD · MODERN BRIDGE DRAFT",
+      "sourceMechanism": "Representation of projects, spending, infrastructure status, timelines, geography, and public-facing evidence; current Boundary First bridge adds provenance, consequence, authority, contestability, and repair.",
+      "transferQuestion": "Can one consequential municipal process be represented so public status, evidence, responsibility, consequence, and repair become easier to inspect and act on?",
+      "transferStage": "Prior operational work exists; current Boundary First collaboration bridge is unlisted draft and no current municipal collaboration is claimed.",
+      "mapping": [
+        {"from":"represented object","to":"municipal project / infrastructure process"},
+        {"from":"boundary","to":"scope, jurisdiction, project phase, public/private interface"},
+        {"from":"witness","to":"status record, financial data, map context, timeline, public evidence"},
+        {"from":"repair","to":"visible responsibility and correction path for stale, missing, or conflicting public state"}
+      ],
+      "preservedCandidates": ["one represented object should retain identity across operational and public views", "status should remain connected to evidence and time", "public consequence should remain connected to accountable responsibility"],
+      "adaptations": ["civic authority and jurisdiction must be represented explicitly", "public records and operational systems have different update rhythms", "public legibility must not reveal protected operational information"],
+      "newConstraints": ["records law and public disclosure rules", "procurement and institutional ownership", "accessibility and public usability", "political and administrative responsibility", "long-lived maintenance after project delivery"],
+      "witnesses": ["retained CityWatch implementation records", "operational/public project data", "stakeholder task completion", "current-process prototype evidence if a new pilot occurs"],
+      "failureSignals": ["historical standing is mistaken for current partnership", "public UI state diverges from operational state", "responsibility is visible only as an office name with no repair path", "a simplified civic view hides material uncertainty or jurisdiction"],
+      "returnToResearch": "Civic failures sharpen the distinction between representation correctness, institutional authority, public legibility, and responsibility for consequence.",
+      "claimBoundary": "Historical CityWatch implementation and delivery experience provide provenance and standing only. Historical outcomes or awards require retained or independent evidence before public promotion, and no current Augusta affiliation or collaboration is implied.",
+      "sourceRef": "src/content/product-landing-pages/augusta-citywatch.json"
+    },
+    {
+      "id": "boundary-first-weather",
+      "label": "Boundary First Weather",
+      "domain": "Weather simulation",
+      "domainKind": "meteorology / numerical modeling / HPC",
+      "standing": "pilot-ready-research-program",
+      "standingLabel": "RESEARCH PROGRAM · PILOT CANDIDATE",
+      "sourceMechanism": "Boundary, transport, closure-defect, witness, and selective-computation machinery applied alongside established numerical and learned weather systems.",
+      "transferQuestion": "Do boundary or defect indicators predict where forecast-relevant disagreement and change concentrate well enough to improve diagnostics, adaptive computation, or structural compression against matched baselines?",
+      "transferStage": "Specification and experiment stage; lower-rung controlled tests are proposed before established-model or independent meteorological evaluation.",
+      "mapping": [
+        {"from":"region","to":"air mass, storm cell, circulation regime, mesh region"},
+        {"from":"boundary","to":"front, inversion, terrain/coast interface, shear or convective edge"},
+        {"from":"flux","to":"heat, moisture, momentum, mass, radiative transport"},
+        {"from":"defect","to":"unresolved transport, model mismatch, diffusion, cross-scale inconsistency or forecast error"},
+        {"from":"witness","to":"station, radar, satellite, sounding, reanalysis or forecast verification"}
+      ],
+      "preservedCandidates": ["local state is insufficient without transport across represented interfaces", "a prediction must remain connected to observational witness", "refinement should be justified by measurable consequence rather than geometry alone"],
+      "adaptations": ["domain-native conservation laws and numerical stability dominate admissibility", "boundary detection must coexist with mature adaptive-mesh and data-assimilation methods", "error metrics must be forecast-relevant rather than visually persuasive"],
+      "newConstraints": ["PDE discretization and conservation", "chaotic sensitivity and ensemble uncertainty", "observational sparsity and projection", "wall-clock and accelerator cost", "comparison against mature operational baselines"],
+      "witnesses": ["matched uniform-refinement baseline", "forecast-relevant error", "boundary-position and transport error", "conservation error", "wall-clock/update count", "independent meteorological evaluation at higher validation rungs"],
+      "failureSignals": ["boundary metrics do not predict useful error or novelty", "selective refinement costs more than it saves", "conservation or stability degrades", "apparent structure comes from the detector rather than the atmospheric state", "toy-system success fails established-model comparison"],
+      "returnToResearch": "Negative results constrain what 'boundary', 'defect', and 'closure' can mean in numerical physics and may expose where the general representation vocabulary is too weak or too expensive.",
+      "claimBoundary": "No current claim of improved forecast accuracy, speed over operational NWP, earlier severe-weather prediction, replacement of existing models, or external validation by a weather institution.",
+      "sourceRef": "src/content/product-landing-pages/boundary-first-weather.json"
+    },
+    {
+      "id": "boundary-first-soccer",
+      "label": "Boundary-First Soccer",
+      "domain": "Soccer analysis",
+      "domainKind": "sport / coaching / tactical analysis",
+      "standing": "working-public-doctrine",
+      "standingLabel": "WORKING PUBLIC DOCTRINE",
+      "sourceMechanism": "Boundary, reachability, support, pressure, promotion, state construction, and repair reframed as a practitioner vocabulary for reading possession and tactical change.",
+      "transferQuestion": "Can the vocabulary describe observable team-state change reliably enough to improve analysis or coaching when compared with established tactical language and match evidence?",
+      "transferStage": "Public doctrine and research on-ramp; constructed examples exist, but comparative analyst, coaching, event-data, or tracking-data validation remains open.",
+      "mapping": [
+        {"from":"boundary","to":"actionable space constrained by touchline, reachability, pressure, support and responsibility"},
+        {"from":"admissible transition","to":"pass, carry, reset, press response or circulation path that preserves useful continuation"},
+        {"from":"promotion","to":"transport of space, orientation, numerical advantage or tempo into a more consequential state"},
+        {"from":"repair","to":"reset or circulation that restores support, access, responsibility or control"}
+      ],
+      "preservedCandidates": ["progress should be judged by the next state created, not one local motion", "available action is shaped by boundary and pressure", "repair may require temporary retreat when it restores future possibility"],
+      "adaptations": ["human tactical concepts and conventional soccer vocabulary should be imported where sufficient", "state is partially observed and interpretation can vary between analysts", "team intent cannot be inferred directly from geometry alone"],
+      "newConstraints": ["opponent agency", "continuous movement and timing", "partial observability", "coaching language and cognitive load", "event/tracking-data limits", "inter-analyst reliability"],
+      "witnesses": ["video sequence", "event/tracking data where available", "inter-analyst agreement", "coaching interpretation", "predictive usefulness for likely next actions"],
+      "failureSignals": ["tags cannot be applied reliably", "Boundary First terms merely rename established concepts", "state descriptions depend on unavailable observations", "the vocabulary does not change analysis or decision quality"],
+      "returnToResearch": "Soccer is an adversarial test of whether boundary and admissibility language can represent moving multi-agent possibility without pretending geometry alone determines agency.",
+      "claimBoundary": "No current claim of improved team performance, player development, superior analyst reliability, or necessity of Boundary First terminology where established soccer analysis is sufficient.",
+      "sourceRef": "src/content/product-landing-pages/boundary-first-soccer.json"
+    },
+    {
+      "id": "boundary-first-robocup",
+      "label": "Boundary-First RoboCup",
+      "domain": "Autonomous multi-agent systems",
+      "domainKind": "robotics / AI / reproducible soccer environments",
+      "standing": "draft-collaboration-bridge",
+      "standingLabel": "DRAFT · INDEPENDENT COLLABORATION PROPOSAL",
+      "sourceMechanism": "Transfer a narrow subset of human-readable Boundary-First Soccer concepts into explicit machine-testable representations over states, policies, logs, and replays.",
+      "transferQuestion": "Can one bounded tactical ontology be operationalized reliably and add explanatory or engineering value beyond ordinary state and event descriptions?",
+      "transferStage": "Unlisted proposal: formalize one problem, annotate a small replay/log set, test reviewer agreement, compare explanatory utility, and preserve a negative result if the representation fails.",
+      "mapping": [
+        {"from":"human tactical boundary","to":"explicit state partition or reachability relation"},
+        {"from":"pressure / forced future","to":"policy-conditioned reduction in reachable actions"},
+        {"from":"promotion","to":"state transition that improves a declared tactical objective while preserving continuation"},
+        {"from":"repair","to":"policy action that restores a declared invariant or reachable action set"}
+      ],
+      "preservedCandidates": ["a useful tactical concept should acquire operational semantics", "reviewers should be able to disagree on the representation without disputing hidden definitions", "negative transfer is useful evidence"],
+      "adaptations": ["human interpretive vocabulary must become measurable over explicit state and policy traces", "embodied sensing and control add failure modes absent from tactical diagrams", "machine state may expose variables unavailable to a human analyst"],
+      "newConstraints": ["formal ontology design", "multi-agent policy behavior", "simulation-to-embodiment transfer", "annotation reliability", "benchmark compatibility"],
+      "witnesses": ["annotated replay/log set", "reviewer agreement", "comparison with ordinary state/event descriptions", "engineering usefulness in a bounded task"],
+      "failureSignals": ["ontology cannot be annotated consistently", "added vocabulary does not explain or engineer anything new", "mapping only works with privileged simulator state", "human concepts fracture under autonomous policy behavior"],
+      "returnToResearch": "RoboCup can falsify whether a human-facing tactical schema survives formalization and machine execution, separating useful structure from metaphor.",
+      "claimBoundary": "Independent Boundary First Labs proposal. No RoboCup affiliation, endorsement, partnership, paper acceptance, league membership, or performance improvement is claimed.",
+      "sourceRef": "src/content/product-landing-pages/boundary-first-robocup.json"
+    },
+    {
+      "id": "agency-representation-audit",
+      "label": "Agency + Representation Audit",
+      "domain": "Consequential institutional systems",
+      "domainKind": "software / AI / policy / operations",
+      "standing": "pilot-intake",
+      "standingLabel": "PUBLIC SERVICE · PILOT INTAKE",
+      "sourceMechanism": "Authority, representation, transition, consequence, contestability, and repair reconstructed as one bounded operating relationship rather than auditing an isolated model or policy.",
+      "transferQuestion": "Can one consequential process be reconstructed well enough to expose missing authority, representation loss, externalized consequence, unusable contest paths, and repair ownership gaps?",
+      "transferStage": "Pilot intake: the method and deliverables are specified; each real engagement must be bounded to one reconstructable process with access to relevant artifacts and operational accounts.",
+      "mapping": [
+        {"from":"agency","to":"person, policy, model, vendor, system or operator permitted to act"},
+        {"from":"representation","to":"record, score, category, case file, model output, notice or interface standing in for a person or condition"},
+        {"from":"transition","to":"eligibility, access, status, moderation, work, risk or another changed condition"},
+        {"from":"witness / contest","to":"basis disclosure, appeal, correction, suspension or reversal path"},
+        {"from":"repair","to":"ownership of source correction plus downstream consequence already produced"}
+      ],
+      "preservedCandidates": ["authority should be reconstructable before consequential action", "a representation is not identical to the affected person or condition", "correction is incomplete if downstream consequence remains unrepaired"],
+      "adaptations": ["domain-specific law, policy and authority determine admissibility", "protected data may limit inspectability", "stakeholder testimony and executable behavior can diverge from written procedure"],
+      "newConstraints": ["privacy and access", "legal and regulatory boundaries", "vendor handoffs", "distributed decision authority", "affected-party standing", "operational contestability"],
+      "witnesses": ["observed artifact", "declared rule", "executable behavior", "stakeholder account", "clearly labeled inference", "reconstructable contest and repair path"],
+      "failureSignals": ["institution-wide claims are inferred from one bounded process", "audit language is mistaken for legal or regulatory authority", "the represented process omits protected or inaccessible actors", "repair ownership remains purely advisory"],
+      "returnToResearch": "Institutional audits test whether representation, authority, consequence, contestability, and repair can remain separate but mechanically connected under real organizational constraints.",
+      "claimBoundary": "A scoped systems audit is not legal advice, regulatory/compliance certification, fairness or safety certification, cybersecurity certification, or a guarantee that every affected case has been discovered.",
+      "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json"
+    }
+  ],
+  "transferCandidates": [
+    {"id":"bounded-object","label":"Bounded object","description":"A domain object should become identifiable enough that inclusion, exclusion, interface, and scope are not silently changing during analysis.","posture":"candidate cross-domain structure"},
+    {"id":"state-transition","label":"State + admissible transition","description":"The domain should determine what state means and which changes are lawful, possible, or consequential rather than importing a generic transition vocabulary by fiat.","posture":"candidate cross-domain structure"},
+    {"id":"witness","label":"Witness / evidence","description":"A representation should specify what observation can challenge it; the witness remains domain-native and may itself be partial or contested.","posture":"candidate cross-domain structure"},
+    {"id":"consequence-responsibility","label":"Consequence + responsibility","description":"A state transition becomes institutionally important when its consequences and responsibility chain can be followed beyond the local operation that produced it.","posture":"strongest in civic/institutional applications; differently typed elsewhere"},
+    {"id":"defect-repair","label":"Defect + repair","description":"Failure becomes informative when the domain can identify what protected condition failed, what must change, and what observation would count as restored closure.","posture":"candidate cross-domain structure with domain-specific closure"}
+  ],
+  "transferRule": "Cross-domain recurrence is a research clue. Promotion requires native definitions, a bounded mapping, an explicit witness, counterexample or breakpoint search, and a claim ceiling appropriate to the evidence. A failed transfer is a result, not a reason to hide the application."
+}
