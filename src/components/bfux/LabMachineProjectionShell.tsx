@@ -2,6 +2,9 @@
 
 import type { ReactNode } from "react";
 import { BfuxIcon } from "@/components/bfux-icons";
+import { getLabMachineNode } from "./lab-machine-model";
+import { LabMachineRelationRail } from "./LabMachineRelationRail";
+import { useLabMachineNavigation } from "./LabMachineNavigationContext";
 import "./lab-machine-projection.css";
 
 export function LabMachineProjectionShell({
@@ -26,6 +29,7 @@ export function LabMachineProjectionShell({
   children: ReactNode;
 }) {
   const rings = ["Boundary First Labs", "Lab Machine", subsystem, projection];
+  const navigation = useLabMachineNavigation();
 
   return (
     <section className="bf-projection-shell" aria-label={`${subsystem}: ${projection}`}>
@@ -65,6 +69,15 @@ export function LabMachineProjectionShell({
           </ol>
         </div>
       </aside>
+
+      {navigation?.currentNodeId ? <div className="bf-projection-shell__traversal">
+        <LabMachineRelationRail compact />
+        <div className="bf-projection-shell__path">
+          <small>BOUND PATH · {navigation.trail.length} RELATION{navigation.trail.length === 1 ? "" : "S"}</small>
+          <strong>{navigation.focusLabel} → {getLabMachineNode(navigation.currentNodeId)?.label ?? subsystem}</strong>
+          <span><button type="button" disabled={!navigation.trail.length} onClick={navigation.rewind}>BACK ONE</button><button type="button" disabled={!navigation.trail.length} onClick={navigation.clearTrail}>RESET FOCUS</button></span>
+        </div>
+      </div> : null}
 
       <div className="bf-projection-shell__workfield">{children}</div>
     </section>

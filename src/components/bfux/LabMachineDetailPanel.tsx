@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineCardContent } from "./lab-machine-content";
-import type { LabMachineNode } from "./lab-machine-model";
+import { getLabMachineNode, type LabMachineNode } from "./lab-machine-model";
+import { LabMachineRelationRail } from "./LabMachineRelationRail";
+import { useLabMachineNavigation } from "./LabMachineNavigationContext";
 import {
   LabMachineAboutProjection,
   isAboutProjectionMode,
@@ -77,6 +79,7 @@ type ActiveProjection =
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
   const content = getLabMachineCardContent(node.id);
+  const navigation = useLabMachineNavigation();
   const [activeProjection, setActiveProjection] = useState<ActiveProjection>(null);
 
   useEffect(() => {
@@ -111,6 +114,9 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
         <div><small>SYSTEM ROLE</small><strong>{content.systemRole}</strong></div>
         <p>{content.orientation}</p><p>{content.institutionalPurpose}</p>
       </div>
+
+      <LabMachineRelationRail nodeId={node.id} />
+      {navigation ? <TraversalTrail /> : null}
 
       <div className="bf-machine-detail__grid">
         <section className="bf-machine-detail__module">
@@ -169,6 +175,24 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
       </section>
 
       <footer className="bf-machine-detail__takeaway"><small>INSTITUTIONAL TAKEAWAY</small><p>{content.takeaway}</p></footer>
+    </section>
+  );
+}
+
+function TraversalTrail() {
+  const navigation = useLabMachineNavigation();
+  if (!navigation) return null;
+  const focus = getLabMachineNode(navigation.focusId);
+  return (
+    <section className="bf-machine-trail" aria-label="Current Lab Machine traversal">
+      <header>
+        <div><small>BOUND PATH</small><strong>{focus?.label ?? navigation.focusLabel} → {getLabMachineNode(navigation.currentNodeId)?.label ?? navigation.focusLabel}</strong></div>
+        <div><button type="button" disabled={!navigation.trail.length} onClick={navigation.rewind}>BACK ONE RELATION</button><button type="button" disabled={!navigation.trail.length} onClick={navigation.clearTrail}>RESET TO FOCUS</button></div>
+      </header>
+      <div className="bf-machine-trail__steps">
+        <span className="bf-machine-trail__origin">{focus?.label ?? navigation.focusLabel}</span>
+        {navigation.trail.map((step, index) => <span className="bf-machine-trail__step" key={`${step.edgeKey}-${index}`}><b>{step.direction === "forward" ? "→" : "←"}</b><small>{step.relation}</small><strong>{getLabMachineNode(step.to)?.label ?? step.to}</strong></span>)}
+      </div>
     </section>
   );
 }
