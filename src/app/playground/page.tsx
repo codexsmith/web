@@ -3,6 +3,7 @@ import { ScreenWallCatalog } from "@/components/playground/ScreenWallCatalog";
 import "@/components/playground/screen-wall-chassis.css";
 import "@/components/playground/screen-wall-activity.css";
 import "@/components/playground/screen-wall-focus.css";
+import "@/components/playground/screen-wall-lab-machine.css";
 
 export const metadata: Metadata = {
   title: "Playground · Screen Wall",
