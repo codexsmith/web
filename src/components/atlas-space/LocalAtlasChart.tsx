@@ -7,6 +7,7 @@ import {
   resolveRecursiveAtlasPath,
   type RecursiveAtlasPath,
 } from "./local-atlas-recursion";
+import { corpusMountForLayer, labCorpusAuthority } from "./lab-corpus-atlas";
 import type { AtlasFiber, AtlasLayer } from "./atlas-space-model";
 
 type LocalAtlasChartProps = {
@@ -30,6 +31,7 @@ export function LocalAtlasChart({
   const resolved = resolveRecursiveAtlasPath(layer.id, path);
   const stack = resolved.frames;
   const current = stack.at(-1)?.chart;
+  const mount = corpusMountForLayer(layer.id);
   const fiberById = useMemo(() => new Map(fibers.map((fiber) => [fiber.id, fiber])), [fibers]);
 
   if (!root || !current) return null;
@@ -41,18 +43,18 @@ export function LocalAtlasChart({
     <section className={styles.chart} aria-label={`${layer.label} recursive local atlas chart`}>
       <header className={styles.header}>
         <div className={styles.headerIdentity}>
-          <span className={styles.rackCode}>{layer.hardware.rackCode}</span>
+          <span className={styles.rackCode}>{mount?.domainCode ?? layer.hardware.rackCode}</span>
           <h3>{current.label}</h3>
           <p>{current.note}</p>
         </div>
         <div className={styles.headerMeta}>
-          <span className={styles.registry}>{current.registry}</span>
+          <span className={styles.registry}>{mount ? `${mount.familyLabel} / ${mount.domainLabel}` : current.registry}</span>
           <span className={styles.depthReadout}>DEPTH {String(stack.length).padStart(2, "0")}</span>
         </div>
       </header>
 
       <nav className={styles.breadcrumbs} aria-label="Atlas chart path">
-        <button type="button" onClick={() => updatePath([])}>{layer.label}</button>
+        <button type="button" onClick={() => updatePath([])}>{mount?.domainLabel ?? layer.label}</button>
         {stack.map((frame, index) => (
           <span key={`${frame.chart.id}-${index}`}>
             <i aria-hidden="true">/</i>
@@ -62,6 +64,30 @@ export function LocalAtlasChart({
           </span>
         ))}
       </nav>
+
+      {mount ? (
+        <aside className={styles.corpusMount} aria-label={`${mount.domainLabel} corpus mount`}>
+          <div className={styles.corpusMountHead}>
+            <span>CORPUS MOUNT / CANONICAL LIBRARY TOPOLOGY</span>
+            <strong>{mount.familyLabel} → {mount.domainLabel}</strong>
+            <small>{mount.domainSourcePath}</small>
+          </div>
+          <div className={styles.corpusInventory}>
+            {mount.inventory.map((item) => (
+              <div key={item.sourcePath} className={styles.corpusInventoryItem}>
+                <span>{item.kind.toUpperCase()}</span>
+                <strong>{item.label}</strong>
+                <small>{item.sourcePath}</small>
+              </div>
+            ))}
+          </div>
+          <div className={styles.corpusAuthority}>
+            <span>LIBRARY ATLAS {labCorpusAuthority.generatedAt.slice(0, 10)}</span>
+            <span>FP {labCorpusAuthority.corpusFingerprint.slice(0, 12)}</span>
+            <span>CORPUS EXISTENCE ≠ PUBLICATION OR VALIDATION</span>
+          </div>
+        </aside>
+      ) : null}
 
       <div className={styles.field}>
         <svg className={styles.traces} viewBox="0 0 1000 560" aria-hidden="true">
@@ -120,7 +146,7 @@ export function LocalAtlasChart({
 
         <div className={styles.chartLegend}>
           <span><i className={styles.legendPort} /> cross-atlas port</span>
-          <span><i className={styles.legendTrace} /> local transition</span>
+          <span><i className={styles.legendTrace} /> conceptual transition</span>
           <span><i className={styles.legendDrill} /> recursive subchart</span>
         </div>
       </div>
