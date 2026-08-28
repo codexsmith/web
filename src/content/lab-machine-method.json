@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "operational method projection seed",
+  "purpose": "Expose Boundary First Labs method as an inspectable procedural system: which methods exist, how they compose, which traversal or validation strategy fits a task, and what a problem looks like while it is being transformed rather than only after an answer has been produced.",
+  "posture": "The method stack mixes current public methods, working research procedures, and internal research-operating patterns. A named method is not a claim of general superiority; each procedure must earn usefulness in the task and domain where it is applied.",
+  "kernel": [
+    {"id":"orient","label":"Orient","question":"What system, task, actor, and consequence are actually in view?"},
+    {"id":"distinguish","label":"Distinguish","question":"Which differences must remain visible for the problem to stay truthful?"},
+    {"id":"bound","label":"Bound","question":"What is inside this analysis, what is outside it, and what crosses the interface?"},
+    {"id":"represent","label":"Represent","question":"What explicit objects, states, relations, rules, and evidence carry the problem?"},
+    {"id":"traverse","label":"Traverse","question":"Should we widen across peers, deepen through one path, or alternate the two?"},
+    {"id":"transform","label":"Transform","question":"Which lawful operation, comparison, implementation, or experiment changes the represented state?"},
+    {"id":"witness","label":"Witness","question":"What observation can tell us whether the transformation did what we think it did?"},
+    {"id":"compare","label":"Compare","question":"What baseline, alternative representation, counterexample, or independent source can challenge the result?"},
+    {"id":"defect","label":"Detect Defect","question":"Which contradiction, residue, failed invariant, missing witness, or boundary leak remains?"},
+    {"id":"repair","label":"Repair","question":"What representation, procedure, ownership, or implementation must change because of the defect?"},
+    {"id":"close","label":"Close / Recurse","question":"Has scoped closure been earned, or does the repaired state require another pass?"}
+  ],
+  "layers": [
+    {"id":"orientation","label":"01 · Orientation","question":"Find the consequential object before choosing a mechanism.","methods":["boundary-first","software-before-code"]},
+    {"id":"representation","label":"02 · Representation","question":"Make distinctions, state, invariants, and translation explicit.","methods":["representational-mechanics","formal-grammar"]},
+    {"id":"traversal","label":"03 · Traversal","question":"Control how the field is searched, widened, compressed, and reconstructed.","methods":["breadth-first-corpus","depth-first-reconstruction"]},
+    {"id":"execution","label":"04 · Execution","question":"Turn a candidate representation into something that can answer back.","methods":["agentic-scientific-method","closure-driven-development"]},
+    {"id":"validation","label":"05 · Validation & Repair","question":"Keep evidence, criticism, promotion, and correction separate from generation.","methods":["witness-and-repair"]}
+  ],
+  "methods": [
+    {
+      "id":"boundary-first",
+      "label":"Boundary First Analysis",
+      "shortLabel":"Boundary First",
+      "kind":"orientation",
+      "purpose":"Identify the represented system by its distinctions, containment, interfaces, crossing conditions, consequences, and repair obligations before optimizing the representation.",
+      "useWhen":["the problem boundary is ambiguous","different actors are using the same label for different states","a local solution may externalize consequence","hidden interfaces or obligations are returning as exceptions"],
+      "inputs":["problem context","actors","artifacts","candidate distinctions","known consequences"],
+      "outputs":["declared boundary","distinction set","interfaces","invariants","open defects"],
+      "failureMode":"Boundary language becomes decorative if it does not change what is represented, tested, excluded, or repaired.",
+      "sourceRef":"src/content/product-landing-pages/software-before-code.json"
+    },
+    {
+      "id":"software-before-code",
+      "label":"Software Before Code",
+      "shortLabel":"SBC",
+      "kind":"engineering",
+      "purpose":"Determine the domain object, protected distinctions, admissible transformations, witnesses, and closure conditions before selecting implementation mechanisms.",
+      "useWhen":["framework or schema debate begins before the domain is stable","a boolean or status field may be hiding a state machine","implementation choices are becoming expensive before the team knows what must survive"],
+      "inputs":["domain reality","requirements","failure cases","actors and authority","candidate representations"],
+      "outputs":["domain boundary","distinction ledger","system grammar","representation map","delivery skeleton","closure tests"],
+      "failureMode":"Before code cannot become big design up front; uncertain distinctions must be learned through probes and executable witnesses.",
+      "sourceRef":"src/content/product-landing-pages/software-before-code.json"
+    },
+    {
+      "id":"representational-mechanics",
+      "label":"Representational Mechanics",
+      "shortLabel":"RM",
+      "kind":"representation",
+      "purpose":"Study what is preserved, distorted, hidden, made expensive, or made actionable as a system moves between representations.",
+      "useWhen":["two views claim to describe the same object","translation or compression may lose consequential structure","a UI, schema, formalism, or model changes what the user can observe or do"],
+      "inputs":["source representation","target representation","declared invariants","task and audience"],
+      "outputs":["preserved structure","representation loss","distortion or defect","repair requirement"],
+      "failureMode":"A representation comparison is weak if it names similarities without declaring what must commute or survive the transformation.",
+      "sourceRef":"src/content/artifacts/executable-distinctions.md + current research architecture"
+    },
+    {
+      "id":"formal-grammar",
+      "label":"Formal Grammar / Operative Profile",
+      "shortLabel":"Grammar",
+      "kind":"formalization",
+      "purpose":"Represent entities, admissibility, lawful transformations, invariants, closure, boundary, provenance, and defect as an explicit operative structure.",
+      "useWhen":["a concept is nameable but not reconstructable","neighboring formal objects differ by hidden conditions","cross-domain comparison needs more than vocabulary resemblance"],
+      "inputs":["entities","relations","conditions","operations","invariants"],
+      "outputs":["typed profile","admissibility rules","transformation set","dependency edges","breakpoints"],
+      "failureMode":"Formalism has failed if it merely renames established structure, loses native-domain definitions, or costs more than the distinction it exposes.",
+      "sourceRef":"src/content/product-landing-pages/schemathematics.json"
+    },
+    {
+      "id":"breadth-first-corpus",
+      "label":"Breadth-First Corpus Traversal",
+      "shortLabel":"BFS",
+      "kind":"traversal",
+      "purpose":"Flatten peer material into a common comparison field to discover vocabulary, repeated structures, missing categories, clusters, and candidate invariants before committing deeply to one branch.",
+      "useWhen":["the field is heterogeneous","the taxonomy is not yet trustworthy","you need a gestalt of neighboring artifacts","you are looking for repeated patterns or underrepresented categories"],
+      "inputs":["peer artifacts","shared extraction questions","provenance"],
+      "outputs":["field map","candidate types","shared vocabulary","comparison queue","anomalies"],
+      "failureMode":"Breadth can produce superficial resemblance if candidate patterns are promoted before reconstruction, native definitions, or counterexample search.",
+      "sourceRef":"Lab method corpus-refinement practice; operationalized here as a working method projection"
+    },
+    {
+      "id":"depth-first-reconstruction",
+      "label":"Depth-First Reconstruction",
+      "shortLabel":"DFS",
+      "kind":"traversal",
+      "purpose":"Follow one claim, representation, derivation, or dependency path deeply enough to reconstruct it, compress it faithfully, falsify it, and identify the exact point where coherence fails.",
+      "useWhen":["a candidate claim needs promotion","a derivation has hidden jumps","a source lineage must be reconstructed","a comparison needs a real breakpoint rather than a loose objection"],
+      "inputs":["bounded target","dependencies","sources","expected invariants"],
+      "outputs":["reconstruction","compressed dependency spine","failure point","counterexample","repair queue"],
+      "failureMode":"Depth can overfit one branch or inherit its assumptions; results should return to the wider field before promotion.",
+      "sourceRef":"Lab method corpus-refinement practice; operationalized here as a working method projection"
+    },
+    {
+      "id":"agentic-scientific-method",
+      "label":"Agentic Scientific Method",
+      "shortLabel":"ASM",
+      "kind":"agentic",
+      "purpose":"Instrument generative AI as a transformation engine inside a governed research loop rather than treating fluent generation as evidence or authority.",
+      "useWhen":["a corpus is too large for unaided comparison","many candidate representations or transformations should be explored","generation and critique can be separated","human judgment must remain at consequential promotion gates"],
+      "inputs":["bounded question","source material","declared procedure","role separation","evidence rules"],
+      "outputs":["candidate structures","critic findings","comparison artifacts","testable hypotheses","review decisions"],
+      "failureMode":"The method collapses if generated output silently becomes canon, sources detach, critic and operator roles merge, or human authority is replaced by model fluency.",
+      "sourceRef":"src/content/product-landing-pages/ai-as-forge.json + founder intellectual provenance timeline"
+    },
+    {
+      "id":"closure-driven-development",
+      "label":"Closure-Driven Development",
+      "shortLabel":"Closure Loop",
+      "kind":"execution",
+      "purpose":"Use the smallest executable path that can expose integration, ownership, domain mismatch, failure, and repair before uncertainty hardens into architecture.",
+      "useWhen":["a software or product increment is ready to leave analysis","integration risk is unknown","the plan needs an executable witness","completion and domain closure may differ"],
+      "inputs":["bounded increment","declared invariants","delivery path","failure hypotheses"],
+      "outputs":["executable skeleton","observations","domain witness","defects","repair or promotion decision"],
+      "failureMode":"A prototype is not evidence merely because it runs; execution must be coupled to a domain-recognized witness and explicit closure conditions.",
+      "sourceRef":"src/content/product-landing-pages/closure-driven-software-development.json"
+    },
+    {
+      "id":"witness-and-repair",
+      "label":"Witness, Critique & Repair",
+      "shortLabel":"Repair Loop",
+      "kind":"validation",
+      "purpose":"Keep generation, observation, criticism, authority, promotion, supersession, and repair as distinct operations so failure can improve the represented system without erasing history.",
+      "useWhen":["a result is about to acquire stronger status","a witness disagrees with the representation","new evidence invalidates a dependency","a failed state has already produced downstream consequence"],
+      "inputs":["candidate result","evidence","critic findings","authority boundary","dependency graph"],
+      "outputs":["review record","bounded promotion","rejection","supersession","repair obligations"],
+      "failureMode":"A correction is incomplete when the text changes but affected downstream representations, decisions, or consequences remain untouched.",
+      "sourceRef":"src/content/product-landing-pages/corpus-forge.json + src/content/product-landing-pages/ai-as-forge.json"
+    }
+  ],
+  "procedures": [
+    {
+      "id":"case-export",
+      "label":"Ambiguous software request",
+      "shortLabel":"CASE EXPORT",
+      "startingState":"A user asks: “Export the current case list.” The request sounds like a button and a CSV file, but the represented domain is underspecified.",
+      "desiredConsequence":"Produce the intended authorized case set as a reconstructable artifact with explicit lifecycle and failure behavior.",
+      "sourceRef":"Closure-Driven Software Development worked example + Software Before Code",
+      "steps":[
+        {"kernel":"orient","operator":"Boundary First","question":"What does “current case list” mean to this user and task?","state":"Separate the UI request from the domain consequence.","output":"One authenticated requester, one task context, one intended export consequence.","witness":"The requester can recognize what successful export means.","ifSkipped":"The implementation can be technically correct while exporting the wrong set."},
+        {"kernel":"distinguish","operator":"Software Before Code","question":"Which hidden differences matter?","state":"Inventory filtered/all cases, field authorization, stable identifiers, ordering, historical/current values, retention, and audit obligations.","output":"Distinction ledger and candidate invariants.","witness":"Security, product, and domain actors agree which differences cannot be collapsed.","ifSkipped":"A boolean or generic CSV representation silently erases policy and lifecycle distinctions."},
+        {"kernel":"bound","operator":"Boundary First","question":"What is the smallest safe increment?","state":"Choose one representative filtered set, one authorization rule, one generated file, one failure state, and one audit witness.","output":"Declared delivery boundary.","witness":"Everything outside the increment is explicitly out of scope rather than accidentally forgotten.","ifSkipped":"The team cannot tell whether missing behavior is a defect or simply outside the test."},
+        {"kernel":"represent","operator":"Representational Mechanics","question":"What objects and state must exist?","state":"Represent requester, query scope, field policy, export artifact, delivery state, audit record, and expiry/cleanup responsibility.","output":"Executable domain representation.","witness":"Required distinctions have a place to live in the model.","ifSkipped":"Important policy remains dispersed in UI conditionals or human memory."},
+        {"kernel":"transform","operator":"Closure-Driven Development","question":"What is the smallest end-to-end path that can answer back?","state":"Build one path from authenticated request to filtered authorized data to generated artifact to observable delivery or failure.","output":"Executable skeleton.","witness":"Running behavior, logs, tests, and the actual output artifact.","ifSkipped":"Architecture accumulates before integration and ownership assumptions can be falsified."},
+        {"kernel":"witness","operator":"Closure-Driven Development","question":"Did the domain condition close?","state":"Verify intended set, protected fields, stable identifiers, visible failures, audit reconstruction, and artifact lifecycle ownership.","output":"Closure test report.","witness":"Domain-recognized evidence, not ticket state alone.","ifSkipped":"A downloaded file is mistaken for a correct and complete outcome."},
+        {"kernel":"defect","operator":"Witness & Repair","question":"Which mismatch remains?","state":"Treat any authorization leak, wrong set, missing audit record, ambiguous failure, or orphaned artifact as a representational defect.","output":"Defect trace with affected representation and owner.","witness":"The failure can be reconstructed from evidence.","ifSkipped":"The defect becomes a workaround or exception rather than information about the model."},
+        {"kernel":"repair","operator":"Witness & Repair","question":"What must change upstream?","state":"Repair the representation, rule, ownership, or delivery path and identify dependent artifacts that must be retested.","output":"Repair decision and retest scope.","witness":"The corrected path survives the same witness that exposed the defect.","ifSkipped":"The patch fixes one symptom while the faulty distinction remains elsewhere."},
+        {"kernel":"close","operator":"Boundary First","question":"Has scoped closure been earned?","state":"Promote only the bounded rule or implementation that survived the witness; retain unresolved questions for another loop.","output":"Promote or recurse decision.","witness":"The claim ceiling matches the evidence actually produced.","ifSkipped":"Prototype success is silently generalized beyond the tested boundary."}
+      ]
+    },
+    {
+      "id":"cross-domain-pattern",
+      "label":"Cross-domain structural clue",
+      "shortLabel":"HOMOLOGY",
+      "startingState":"The same words—state, role, witness, defect, repair—appear across software, public administration, research operations, mathematics, and institutions.",
+      "desiredConsequence":"Determine whether any candidate correspondence preserves enough linked operational structure to deserve bounded promotion, while making false friends and breakpoints explicit.",
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md",
+      "steps":[
+        {"kernel":"orient","operator":"BFS","question":"What is recurring across the field?","state":"Flatten peer domains into a common comparison field without declaring equivalence.","output":"Candidate vocabulary and repeated operational slots.","witness":"Multiple native-domain sources show the recurrence.","ifSkipped":"The comparison starts from a favorite analogy rather than the field."},
+        {"kernel":"distinguish","operator":"Formal Grammar","question":"What does each term mean natively?","state":"Keep domain-native definitions separate before mapping.","output":"Source-bounded lexicon.","witness":"Each definition remains traceable to its own domain source.","ifSkipped":"Shared words are mistaken for shared structure."},
+        {"kernel":"represent","operator":"Representational Mechanics","question":"Which linked operations must survive?","state":"Represent entity roles, relations, state, admissible transitions, invariants, boundaries, witnesses, failures, responsibility, and repair.","output":"Operational comparison tuple.","witness":"The proposed map declares both preserved and lost structure.","ifSkipped":"The mapping cannot be falsified beyond semantic disagreement."},
+        {"kernel":"traverse","operator":"DFS","question":"Does one candidate mapping survive reconstruction?","state":"Follow a bounded case deeply enough to test transitions, invariants, witnesses, defects, and repair.","output":"Case reconstruction and breakpoint.","witness":"A concrete case changes design or explanatory consequences.","ifSkipped":"The comparison remains at token or semantic resemblance."},
+        {"kernel":"compare","operator":"Witness & Repair","question":"What counterexample breaks the map?","state":"Search deliberately for false friends, missing composition, domain-specific authority, or irreducible structure.","output":"Promotion grade or bounded rejection.","witness":"Counterexample ledger and explicit claim ceiling.","ifSkipped":"A compelling analogy inflates into a universal grammar."},
+        {"kernel":"close","operator":"Agentic Scientific Method","question":"What is the strongest warranted result?","state":"Promote only the bounded mapping grade earned by evidence; queue stronger claims for formal or external review.","output":"L0–L5 decision, open gates, and next experiment.","witness":"The published claim is no stronger than the mapped evidence.","ifSkipped":"Research rhetoric outruns the comparison program."}
+      ]
+    },
+    {
+      "id":"ai-synthesis",
+      "label":"AI-assisted corpus synthesis",
+      "shortLabel":"AI FORGE",
+      "startingState":"A large heterogeneous corpus contains notes, documents, conversations, claims, contradictions, and partial models that exceed unaided working memory.",
+      "desiredConsequence":"Use generative capacity to accelerate search and transformation while keeping evidence, criticism, promotion authority, and repair reconstructable.",
+      "sourceRef":"src/content/product-landing-pages/ai-as-forge.json + Corpus Forge",
+      "steps":[
+        {"kernel":"bound","operator":"Boundary First","question":"What question and corpus are actually in scope?","state":"Declare the research question, source boundary, evidence class, and prohibited inference.","output":"Bounded job manifest.","witness":"Inputs and exclusions are inspectable before generation begins.","ifSkipped":"The model fills missing scope with plausible adjacent material."},
+        {"kernel":"traverse","operator":"BFS","question":"What field structure is present?","state":"Extract peer concepts, terms, artifacts, contradictions, and candidate clusters across the corpus.","output":"Comparison field and candidate queue.","witness":"Candidates retain source references rather than becoming free-floating synthesis.","ifSkipped":"Early local framing determines what the model notices everywhere else."},
+        {"kernel":"traverse","operator":"DFS","question":"Which candidates survive reconstruction?","state":"Reconstruct high-value claims or structures from sources, dependencies, and counterevidence.","output":"Reconstructed candidate with defects and unresolved dependencies.","witness":"Another pass can recover why the candidate exists and where it could fail.","ifSkipped":"Compression hides the very evidence needed to judge the synthesis."},
+        {"kernel":"compare","operator":"Agentic Scientific Method","question":"What does an independent critic find?","state":"Separate operator and critic passes; search for omitted sources, contradiction, overclaim, and alternate representation.","output":"Critic report and repair queue.","witness":"Criticism is preserved as a separate record rather than blended into a final fluent answer.","ifSkipped":"One conversational trajectory silently becomes self-confirming."},
+        {"kernel":"repair","operator":"Witness & Repair","question":"Which representation changes because of criticism?","state":"Revise or reject candidate objects, propagate changed dependencies, and preserve supersession history.","output":"Repaired candidate plus change record.","witness":"Old and new representations remain reconstructable.","ifSkipped":"The final text changes but the corpus cannot explain why."},
+        {"kernel":"close","operator":"Human Promotion Gate","question":"What may become durable or public?","state":"A responsible human or declared authority accepts, rejects, narrows, or returns the result to research.","output":"Attributed promotion decision and claim ceiling.","witness":"Authority remains separate from generation quality.","ifSkipped":"Fluency becomes institutional authority by default."}
+      ]
+    }
+  ],
+  "comparisons": [
+    {"task":"Map an unfamiliar heterogeneous field","primary":["breadth-first-corpus"],"secondary":["boundary-first","formal-grammar"],"avoid":"Premature DFS on the first compelling branch","reason":"The first job is to learn the peer field and type space before selecting what deserves deep reconstruction."},
+    {"task":"Reconstruct or falsify one consequential claim","primary":["depth-first-reconstruction"],"secondary":["representational-mechanics","witness-and-repair"],"avoid":"Treating broad recurrence as support for the specific claim","reason":"Promotion requires a reconstructable dependency path, breakpoint search, and evidence-specific claim ceiling."},
+    {"task":"Define software before implementation commitment","primary":["software-before-code","boundary-first"],"secondary":["representational-mechanics"],"avoid":"Framework-first architecture","reason":"The mechanism should be selected after the distinctions, invariants, authority, closure, and repair obligations are visible."},
+    {"task":"Learn from a working software increment","primary":["closure-driven-development"],"secondary":["software-before-code","witness-and-repair"],"avoid":"Calling execution alone validation","reason":"The executable skeleton is an instrument; a domain witness decides what it actually established."},
+    {"task":"Compare structures across domains","primary":["formal-grammar","representational-mechanics"],"secondary":["breadth-first-corpus","depth-first-reconstruction"],"avoid":"Token resemblance promoted as universality","reason":"Native definitions, linked operations, counterexamples, and breakpoints are required before stronger mapping language is warranted."},
+    {"task":"Use AI on a large research corpus","primary":["agentic-scientific-method"],"secondary":["breadth-first-corpus","depth-first-reconstruction","witness-and-repair"],"avoid":"Single-pass generation followed by silent promotion","reason":"AI is most useful as a forge inside a source-bound transform/critic/repair loop, not as the authority that declares its own output true."}
+  ]
+}
