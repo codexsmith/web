@@ -6,6 +6,8 @@ import { labCorpusAuthority } from "./lab-corpus-atlas";
 import { corpusDescriptorForLayer } from "./generated-domain-board";
 import {
   calibrationCandidatesForLayer,
+  calibrationDecisionsForLayer,
+  setCalibrationDecision,
   type CalibrationDecision,
   type CalibrationDecisionMap,
 } from "./domain-calibration";
@@ -18,16 +20,6 @@ type GeneratedBoardCalibrationProps = {
   onSelectFiber: (fiberId: string) => void;
 };
 
-type CalibrationDecisionEvent = {
-  layerId: string;
-  fiberId: string;
-  decision: CalibrationDecision;
-};
-
-function emitCalibrationDecision(detail: CalibrationDecisionEvent) {
-  window.dispatchEvent(new CustomEvent<CalibrationDecisionEvent>("atlas-calibration-decision", { detail }));
-}
-
 export function GeneratedBoardCalibration({
   layer,
   fibers,
@@ -36,7 +28,7 @@ export function GeneratedBoardCalibration({
 }: GeneratedBoardCalibrationProps) {
   const descriptor = corpusDescriptorForLayer(layer.id);
   const candidates = calibrationCandidatesForLayer(layer.id);
-  const [decisions, setDecisions] = useState<CalibrationDecisionMap>({});
+  const [decisions, setDecisions] = useState<CalibrationDecisionMap>(() => ({ ...calibrationDecisionsForLayer(layer.id) }));
   const [activeCandidateId, setActiveCandidateId] = useState(candidates[0]?.fiberId ?? activeFiberId);
 
   if (!descriptor?.generated) return null;
@@ -46,8 +38,10 @@ export function GeneratedBoardCalibration({
   const acceptedCount = candidates.filter((candidate) => decisions[candidate.fiberId] === "accepted").length;
 
   const decide = (fiberId: string, decision: CalibrationDecision) => {
+    setCalibrationDecision(layer.id, fiberId, decision);
     setDecisions((existing) => ({ ...existing, [fiberId]: decision }));
-    emitCalibrationDecision({ layerId: layer.id, fiberId, decision });
+    setActiveCandidateId(fiberId);
+    onSelectFiber(fiberId);
   };
 
   return (
