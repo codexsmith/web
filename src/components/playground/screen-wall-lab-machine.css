@@ -1,0 +1,702 @@
+/* Screen Wall · Lab Machine visual alignment
+ *
+ * This layer intentionally owns ONLY the content field. The site's existing
+ * top and bottom navigation frames remain authoritative. The Screen Wall's
+ * former toolbar is demoted into an in-field apparatus plate and its duplicate
+ * footer legend is suppressed.
+ *
+ * Reference grammar: recessed technical backplane, mounted faceplates, visible
+ * fasteners, typed ports/traces, restrained luminous state, serif object names,
+ * and compact mono register labels.
+ */
+
+.screen-wall-shell {
+  --wall-bg: #071015;
+  --wall-panel: #10181d;
+  --wall-panel-2: #151f25;
+  --wall-border: #3a464c;
+  --wall-text: var(--bf-text-primary, #e4e7e3);
+  --wall-muted: var(--bf-text-muted, #748188);
+  --wall-accent: var(--bf-region-publications, #8edb9a);
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100dvh - 8rem);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 52% 34%, rgba(48, 67, 74, .13), transparent 34rem),
+    linear-gradient(180deg, rgba(255, 255, 255, .015), transparent 14%),
+    #050b0f;
+  color: var(--wall-text);
+}
+
+.screen-wall-shell::before {
+  content: "";
+  position: absolute;
+  z-index: -3;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(116, 129, 136, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 129, 136, .03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: linear-gradient(180deg, transparent 0, black 5rem, black calc(100% - 3rem), transparent 100%);
+}
+
+/* The former Screen Wall header becomes a small apparatus plate floating
+ * inside the workfield. It is NOT a second site navigation frame. */
+.screen-wall-toolbar {
+  position: absolute;
+  z-index: 35;
+  top: 1.25rem;
+  right: 1.45rem;
+  left: auto;
+  display: grid;
+  grid-template-columns: minmax(16rem, 1fr) auto;
+  grid-template-areas:
+    "brand modes"
+    "copy modes";
+  gap: .3rem .65rem;
+  width: min(49rem, calc(100% - 3rem));
+  padding: .62rem .72rem;
+  border: 1px solid #3a474e;
+  border-radius: 5px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 38%),
+    linear-gradient(90deg, rgba(7, 12, 15, .95), rgba(12, 19, 23, .98));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 -1px 0 rgba(0,0,0,.72),
+    0 0 0 3px rgba(4, 7, 9, .92),
+    0 12px 28px rgba(0,0,0,.42);
+  backdrop-filter: none;
+}
+
+.screen-wall-toolbar::before,
+.screen-wall-toolbar::after {
+  content: "";
+  position: absolute;
+  width: .42rem;
+  height: .42rem;
+  border: 1px solid #6b777d;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, #b8c0c3 0 11%, #3a4347 30%, #0b0f11 72%);
+  box-shadow: 0 1px 2px #000;
+}
+
+.screen-wall-toolbar::before { left: .35rem; top: .35rem; }
+.screen-wall-toolbar::after { right: .35rem; bottom: .35rem; }
+
+.screen-wall-brand {
+  grid-area: brand;
+  gap: .55rem;
+  padding-left: .35rem;
+}
+
+.screen-wall-brand__mark {
+  display: none;
+}
+
+.screen-wall-brand span:last-child {
+  gap: .05rem;
+}
+
+.screen-wall-brand small {
+  color: #89979d;
+  font-size: .44rem;
+  letter-spacing: .18em;
+}
+
+.screen-wall-brand strong {
+  color: #eef2f1;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.34rem;
+  font-weight: 500;
+  letter-spacing: .025em;
+}
+
+.screen-wall-brand strong::before {
+  content: "THE ";
+  color: #aab4b8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .52rem;
+  letter-spacing: .16em;
+  vertical-align: .3rem;
+}
+
+.screen-wall-mode-copy {
+  grid-area: copy;
+  display: flex;
+  gap: .55rem;
+  align-items: baseline;
+  min-width: 0;
+  padding: 0 .35rem .05rem;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.screen-wall-mode-copy small {
+  display: none;
+}
+
+.screen-wall-mode-copy strong {
+  color: #b9c2c5;
+  font-size: .48rem;
+  letter-spacing: .12em;
+}
+
+.screen-wall-mode-copy span {
+  color: #7e8b91;
+  font-size: .48rem;
+}
+
+.screen-wall-modes {
+  grid-area: modes;
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(4.1rem, 1fr));
+  gap: .28rem;
+  padding: .22rem;
+  border: 1px solid #2e383d;
+  border-radius: 5px;
+  background: #0a1013;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,.56), 0 1px 0 rgba(255,255,255,.035);
+}
+
+.screen-wall-modes button {
+  min-height: 2.6rem;
+  padding: .4rem .45rem;
+  border: 1px solid #354148;
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 42%),
+    #11191d;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 -1px 0 rgba(0,0,0,.55),
+    0 2px 4px rgba(0,0,0,.35);
+  color: #89969c;
+  font-size: .44rem;
+  letter-spacing: .11em;
+}
+
+.screen-wall-modes button::before {
+  content: "";
+  display: block;
+  width: .36rem;
+  height: .36rem;
+  margin: 0 auto .22rem;
+  border: 1px solid #5b686e;
+  border-radius: 50%;
+  background: #080d0f;
+  box-shadow: inset 0 0 0 1px #1c262a;
+}
+
+.screen-wall-modes button.is-active {
+  border-color: color-mix(in srgb, var(--bf-region-publications, #8edb9a) 54%, #435058);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bf-region-publications, #8edb9a) 9%, #151d20), #0c1315);
+  color: color-mix(in srgb, var(--bf-region-publications, #8edb9a) 76%, white);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--bf-region-publications, #8edb9a) 18%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 2px 5px rgba(0,0,0,.42);
+}
+
+.screen-wall-modes button.is-active::before {
+  border-color: var(--bf-region-publications, #8edb9a);
+  background: var(--bf-region-publications, #8edb9a);
+  box-shadow: 0 0 7px color-mix(in srgb, var(--bf-region-publications, #8edb9a) 56%, transparent);
+}
+
+/* Reserve room for the in-field title/mode plate while leaving the actual site
+ * frame untouched above and below this component. */
+.screen-wall-stage {
+  min-height: calc(100dvh - 8rem);
+  padding: 6.5rem 1.2rem 1.3rem;
+  overflow: hidden;
+}
+
+.screen-wall-stage::before {
+  inset: .55rem;
+  border: 1px solid #1f2a2f;
+  border-radius: 4px;
+  background-image:
+    linear-gradient(rgba(114, 132, 140, .028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(114, 132, 140, .028) 1px, transparent 1px);
+  background-size: 24px 24px;
+  box-shadow:
+    inset 0 0 0 1px #070b0d,
+    inset 0 0 90px rgba(0,0,0,.5);
+}
+
+.screen-wall-stage::after {
+  content: "PLAYGROUND // LIVE ENVIRONMENT BACKPLANE";
+  left: 1.65rem;
+  bottom: 1.05rem;
+  padding: .22rem .4rem;
+  border: 0;
+  border-left: 2px solid #536169;
+  background: rgba(5, 10, 13, .88);
+  color: #68777e;
+  font-size: .39rem;
+  letter-spacing: .16em;
+}
+
+.screen-wall-backplane {
+  inset: 6rem 1.35rem 1.35rem;
+  border: 1px solid #162127;
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, transparent 0 14%, rgba(135,151,158,.028) 14% 14.15%, transparent 14.15% 49.8%, rgba(135,151,158,.028) 49.8% 50%, transparent 50% 84.8%, rgba(135,151,158,.028) 84.8% 85%, transparent 85%),
+    linear-gradient(180deg, transparent 0 24.8%, rgba(135,151,158,.028) 24.8% 25%, transparent 25% 74.8%, rgba(135,151,158,.028) 74.8% 75%, transparent 75%),
+    rgba(5, 10, 13, .52);
+  box-shadow: inset 0 0 58px rgba(0,0,0,.38);
+}
+
+.screen-wall-zone-labels span {
+  padding: .16rem .34rem;
+  border: 0;
+  border-left: 2px solid #48565d;
+  background: rgba(5, 10, 13, .88);
+  color: #718087;
+  font-size: .39rem;
+  letter-spacing: .16em;
+}
+
+.screen-wall-grid {
+  min-height: 43rem;
+  padding: 1.45rem 1.55rem 1.8rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+ * Mounted screen modules: the live preview is still the semantic center, but
+ * the housing now reads as a Lab Machine faceplate rather than a web card.
+ * ----------------------------------------------------------------------- */
+.screen-module {
+  border: 1px solid color-mix(in srgb, var(--tone) 26%, #4d5960);
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--tone) 4%, rgba(27,36,41,.96)), rgba(9,14,17,.98) 76%),
+    #0b1114;
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.42),
+    0 0 0 3px #070b0d,
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 0 0 1px color-mix(in srgb, var(--tone) 7%, transparent);
+}
+
+.screen-module::before {
+  left: auto;
+  right: .7rem;
+  top: .54rem;
+  padding: 0 .28rem .12rem;
+  border: 0;
+  border-bottom: 2px solid color-mix(in srgb, var(--tone) 60%, #546168);
+  background: transparent;
+  color: color-mix(in srgb, var(--tone) 82%, #c7d0d2);
+  font-size: .42rem;
+  letter-spacing: .17em;
+  text-shadow: 0 0 7px color-mix(in srgb, var(--tone) 20%, transparent);
+}
+
+.screen-module::after {
+  left: 4%;
+  right: 4%;
+  bottom: -.36rem;
+  height: .36rem;
+  border: 1px solid #28343a;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  background: #090e11;
+  box-shadow: 0 2px 3px rgba(0,0,0,.42);
+}
+
+.screen-module__mounts i {
+  width: .46rem;
+  height: .46rem;
+  border-color: #6f797e;
+  background:
+    linear-gradient(45deg, transparent 46%, #171d20 47% 53%, transparent 54%),
+    radial-gradient(circle at 36% 30%, #b1b8ba 0 9%, #4c5559 28%, #171c1f 62%, #090c0e 78%);
+  box-shadow: 0 1px 2px #000, 0 0 0 1px #070a0c;
+}
+
+.screen-module__button {
+  grid-template-rows: minmax(0, 1fr) auto;
+  padding: .62rem .58rem .5rem;
+}
+
+.screen-module__bezel {
+  padding: .42rem;
+  border: 1px solid color-mix(in srgb, var(--tone) 20%, #465159);
+  border-radius: 3px;
+  background:
+    linear-gradient(145deg, #263137, #0b1013 53%, #1b2428);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 0 0 2px #080c0f,
+    inset 0 0 24px #000,
+    0 1px 0 rgba(255,255,255,.025);
+}
+
+.screen-module__screen {
+  border-color: color-mix(in srgb, var(--tone) 36%, #20282c);
+  border-radius: 2px;
+  background:
+    radial-gradient(circle at 50% 34%, color-mix(in srgb, var(--tone) 11%, #091013), #030709 72%),
+    #030709;
+  box-shadow:
+    inset 0 0 34px rgba(0,0,0,.84),
+    inset 0 1px 10px color-mix(in srgb, var(--tone) 6%, transparent),
+    0 0 10px color-mix(in srgb, var(--tone) 8%, transparent);
+}
+
+.screen-module__screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, rgba(255,255,255,.035), transparent 22%, transparent 77%, rgba(255,255,255,.018));
+  mix-blend-mode: screen;
+}
+
+.screen-module__scanline {
+  opacity: .42;
+  background: repeating-linear-gradient(180deg, rgba(255,255,255,.022) 0 1px, transparent 1px 4px);
+}
+
+.screen-module__status {
+  left: .4rem;
+  bottom: .35rem;
+  gap: .28rem;
+  padding: .2rem .3rem;
+  border: 1px solid #2d373c;
+  border-radius: 2px;
+  background: rgba(3, 7, 9, .86);
+  color: #9da8ad;
+  font-size: .4rem;
+  letter-spacing: .09em;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.screen-module__status i {
+  width: .34rem;
+  height: .34rem;
+  background: var(--tone);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--tone) 72%, transparent);
+}
+
+/* The lower strip now behaves like the screenshot's STATE / TYPE / ... readout
+ * rail: title is the large identity field, I/O terminals occupy their own cell. */
+.screen-module__label {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0;
+  min-height: 3.25rem;
+  padding: 0;
+  margin-top: .38rem;
+  border: 1px solid #303b40;
+  border-radius: 2px;
+  background: rgba(4, 8, 10, .72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  overflow: hidden;
+}
+
+.screen-module__icon {
+  align-self: stretch;
+  width: 3.2rem;
+  height: auto;
+  min-height: 3rem;
+  border: 0;
+  border-right: 1px solid #303b40;
+  background:
+    radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--tone) 12%, #0b1013), #070b0d 72%);
+  box-shadow: inset 0 0 0 3px #090d0f;
+  color: var(--tone);
+}
+
+.screen-module__icon svg {
+  width: 1.42rem;
+  height: 1.42rem;
+  stroke-width: 1.7;
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--tone) 42%, transparent));
+}
+
+.screen-module__copy {
+  justify-content: center;
+  gap: .08rem;
+  padding: .42rem .55rem;
+  border-right: 1px solid #303b40;
+}
+
+.screen-module__copy small {
+  color: color-mix(in srgb, var(--tone) 72%, #88969c);
+  font-size: .4rem;
+  letter-spacing: .11em;
+}
+
+.screen-module__copy strong {
+  color: #eef2f1;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: .015em;
+}
+
+.screen-module__io {
+  align-self: stretch;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(2.55rem, auto);
+  gap: 0;
+  min-width: 2.8rem;
+}
+
+.screen-module__io span {
+  display: flex;
+  min-width: 2.55rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: .2rem;
+  padding: .38rem .35rem;
+  border-right: 1px solid #283238;
+  color: #7d8a90;
+  font-size: .34rem;
+  letter-spacing: .1em;
+}
+
+.screen-module__io span:last-child {
+  border-right: 0;
+}
+
+.screen-module__io i {
+  width: .38rem;
+  height: .38rem;
+  border-color: color-mix(in srgb, var(--tone) 56%, #627077);
+  background: #05090b;
+}
+
+.screen-module__io .is-input {
+  border-radius: 50%;
+}
+
+.screen-module__io .is-output {
+  border-radius: 1px;
+}
+
+.screen-module[data-landmark="true"] {
+  border-color: color-mix(in srgb, var(--tone) 54%, #5a666c);
+  box-shadow:
+    0 16px 30px rgba(0,0,0,.5),
+    0 0 0 3px #070b0d,
+    0 0 18px color-mix(in srgb, var(--tone) 8%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 0 0 1px color-mix(in srgb, var(--tone) 10%, transparent);
+}
+
+.screen-module[data-landmark="true"]::before {
+  content: "CENTRAL // " attr(data-screen);
+}
+
+.screen-module[data-landmark="true"] .screen-module__copy strong {
+  font-size: 1.18rem;
+}
+
+/* Ports become explicit keyed jacks at the housing boundary. */
+.screen-module__ports {
+  border-color: color-mix(in srgb, var(--tone) 30%, #66737a);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #1b2428, #0a0f12);
+  box-shadow:
+    0 0 0 2px #05090b,
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 2px 4px rgba(0,0,0,.5);
+}
+
+.screen-module__ports::before {
+  color: color-mix(in srgb, var(--tone) 62%, #7c888e);
+}
+
+.screen-module__ports i[data-port="input"] {
+  border-color: color-mix(in srgb, var(--tone) 56%, #718087);
+  background: radial-gradient(circle, #020506 0 32%, color-mix(in srgb, var(--tone) 30%, #39464c) 34% 47%, #070b0d 50%);
+}
+
+.screen-module__ports i[data-port="output"] {
+  border-color: color-mix(in srgb, var(--tone) 50%, #718087);
+}
+
+/* Installed wiring follows the same low-glow physical treatment as the
+ * screenshot: dark conduit with restrained colored conductor inside. */
+.screen-wall-trace__underlay {
+  stroke: #080d10;
+  filter: drop-shadow(0 -1px 0 #2b373c) drop-shadow(0 2px 2px rgba(0,0,0,.78));
+}
+
+.screen-wall-trace__line {
+  opacity: .78;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--trace) 16%, transparent));
+}
+
+.screen-wall-bus {
+  border-color: #3a474d;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 13px, rgba(160,174,180,.07) 13px 14px, transparent 14px 27px),
+    linear-gradient(180deg, #1d272b 0, #0d1316 46%, #070b0d 54%, #151d20 100%);
+  box-shadow:
+    0 0 0 2px #05080a,
+    inset 0 1px 0 rgba(255,255,255,.055),
+    inset 0 -1px 0 rgba(0,0,0,.8),
+    0 3px 5px rgba(0,0,0,.46);
+}
+
+.screen-wall-junction {
+  border-radius: 2px;
+  border-color: #6c777d;
+  background: linear-gradient(180deg, #263137, #0c1113 68%);
+}
+
+.screen-wall-junction::after {
+  border-radius: 50%;
+  border-color: #6e7b80;
+  background: #0d1417;
+  box-shadow: inset 0 0 0 2px #05080a, 0 0 0 1px rgba(142,219,154,.18);
+}
+
+/* Inspector becomes a service panel beside the magnified screen rather than a
+ * generic right drawer. */
+.screen-wall-inspector {
+  border-radius: 4px;
+  border-color: #4a585f;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent 20%),
+    linear-gradient(180deg, #121a1e, #080d10);
+  box-shadow:
+    -12px 0 28px rgba(0,0,0,.42),
+    0 0 0 3px #05090b,
+    inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+.screen-wall-inspector__header {
+  border-bottom-color: #39454b;
+  background: #0d1417;
+}
+
+.screen-wall-inspector__preview {
+  border-bottom-color: #39454b;
+  background: #030709;
+}
+
+.screen-wall-inspector__body h1,
+.screen-wall-world__controls h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+.screen-wall-inspector__body dl {
+  border-color: #344047;
+}
+
+.screen-wall-inspector__body dl div {
+  border-color: #344047;
+  background: rgba(4, 8, 10, .36);
+}
+
+.screen-wall-relations {
+  border-color: #344047;
+  background: rgba(3, 7, 9, .54);
+}
+
+.screen-wall-relations > small,
+.screen-wall-relations > div {
+  border-color: #2d383d;
+}
+
+.screen-wall-enter,
+.screen-wall-back,
+.screen-wall-world__controls button {
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 42%),
+    #11191d;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 2px 4px rgba(0,0,0,.32);
+}
+
+/* The outer site's bottom frame already carries the visual grammar legend.
+ * Do not duplicate a second footer inside the workfield. */
+.screen-wall-legend {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .screen-wall-toolbar {
+    top: .85rem;
+    right: .9rem;
+    width: calc(100% - 1.8rem);
+  }
+
+  .screen-wall-stage {
+    padding-top: 6.8rem;
+  }
+
+  .screen-wall-backplane {
+    inset-top: 6rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .screen-wall-shell {
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .screen-wall-toolbar {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    margin: .65rem;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "brand"
+      "copy"
+      "modes";
+  }
+
+  .screen-wall-mode-copy {
+    display: block;
+  }
+
+  .screen-wall-mode-copy span {
+    white-space: normal;
+  }
+
+  .screen-wall-stage {
+    min-height: 0;
+    padding-top: .4rem;
+  }
+
+  .screen-wall-grid {
+    padding: .35rem;
+  }
+
+  .screen-module__label {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .screen-module__io {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-wall-modes button,
+  .screen-module,
+  .screen-wall-trace {
+    transition: none;
+  }
+}
