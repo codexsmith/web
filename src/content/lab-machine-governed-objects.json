@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "governed-object carrier seed",
+  "defaultObjectId": "agency-representation-audit",
+  "purpose": "Carry one governed object through multiple Lab Machine subsystem projections without allowing any projection to become a second source of truth.",
+  "objects": [
+    {
+      "id": "agency-representation-audit",
+      "label": "Agency + Representation Audit",
+      "kind": "governed applied capability",
+      "status": "public service · pilot intake",
+      "framing": "Can one consequential process remain reconstructable from authority through representation, transition, consequence, contest, and repair?",
+      "objectBoundary": "One bounded consequential software, AI, policy, or institutional process together with the actors, representations, transitions, affected parties, evidence, contest paths, and repair obligations required to reconstruct it.",
+      "claimBoundary": "The object is a scoped systems-audit capability at pilot intake. It is not legal advice, regulatory or compliance certification, fairness or safety certification, cybersecurity certification, delegated institutional authority, or evidence that a real institution has already improved.",
+      "invariants": [
+        "the represented person or condition remains distinct from the representation used to act on it",
+        "authority remains traceable to the actor, policy, model, vendor, system, or operator permitted to act",
+        "consequence remains traceable beyond the local decision that produced it",
+        "contestability is evaluated in the executable process, not only in policy language",
+        "source correction is not treated as closure while downstream consequence remains unrepaired",
+        "scope, evidence standing, and claim ceiling survive every projection"
+      ],
+      "route": ["research", "products", "applications", "service", "public-value", "people"],
+      "sourceRefs": [
+        "src/content/product-landing-pages/agency-representation-audit.json",
+        "src/content/lab-machine-research.json#representational-mechanics",
+        "src/content/lab-machine-applications.json#agency-representation-audit",
+        "src/content/lab-machine-service.json#agency-representation-audit",
+        "src/content/lab-machine-public-value.json#agency-audit",
+        "src/content/lab-machine-people.json"
+      ],
+      "projections": {
+        "research": {
+          "role": "Research proposition",
+          "standing": "bounded comparison / application hypothesis",
+          "representation": "Representational Mechanics asks what changes when a representation changes, what must remain invariant, and where hidden defects or consequences appear. The audit turns that question toward a consequential institutional process and tests whether authority, representation, consequence, contest, and repair can remain separate but mechanically connected.",
+          "preserves": ["representation/person distinction", "authority trace", "consequence trace", "defect + repair obligation"],
+          "witness": ["bounded case reconstruction", "counterexample or breakpoint", "domain-native authority and policy sources", "reconstructable evidence chain"],
+          "next": "Accumulate bounded cases and negative results before promoting any cross-domain or effectiveness claim.",
+          "claimBoundary": "Recurring institutional and software vocabulary is evidence for investigation, not proof of universal formal equivalence.",
+          "sourceRef": "src/content/lab-machine-research.json#representational-mechanics + src/content/product-landing-pages/agency-representation-audit.json"
+        },
+        "products": {
+          "role": "Experimental embodiment",
+          "standing": "public professional service · pilot intake",
+          "representation": "The research proposition becomes an executable audit shape: agency map, representation map, consequence chain, contest path, repair ownership map, and defect register for one declared process.",
+          "preserves": ["bounded process", "five-pass authority-to-repair structure", "evidence rule", "explicit non-authority"],
+          "witness": ["specified deliverables", "declared pilot fit", "closure test", "public claim boundary"],
+          "next": "Run a bounded pilot with enough access to reconstruct operational reality and retain the defects that prevent closure.",
+          "claimBoundary": "A specified service and pilot shape are not evidence of successful deployment, institutional improvement, or validated audit performance.",
+          "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json"
+        },
+        "applications": {
+          "role": "Domain transfer",
+          "standing": "consequential institutional systems · pilot intake",
+          "representation": "The method is mapped into software, AI, policy, and operations where authority can be distributed while consequence concentrates elsewhere. Domain law, privacy, vendor handoffs, affected-party standing, and operational contestability become new constraints rather than implementation noise.",
+          "preserves": ["reconstructable authority before consequential action", "representation is not the affected person or condition", "downstream consequence remains part of repair"],
+          "witness": ["observed artifact", "declared rule", "executable behavior", "stakeholder account", "clearly labeled inference", "reconstructable contest and repair path"],
+          "next": "Treat inaccessible actors, false institution-wide generalization, and advisory-only repair as transfer failures that return to Research.",
+          "claimBoundary": "Application is evidence about transfer, not proof of universality or external validation.",
+          "sourceRef": "src/content/lab-machine-applications.json#agency-representation-audit"
+        },
+        "service": {
+          "role": "Distribution package",
+          "standing": "audit / pilot packet · active intake",
+          "representation": "The applied capability is packaged as a bounded professional procedure with maps, defect register, evidence rule, public intake, scoped engagement artifacts, reuse witnesses, and an explicit correction path.",
+          "preserves": ["identity of the governed object", "scope", "provenance", "claim ceiling", "instructions", "reuse witness", "repair path"],
+          "witness": ["another reviewer can reconstruct the scoped chain", "material findings remain traceable", "unresolved ownership gaps remain visible", "scope does not silently expand"],
+          "next": "A completed pilot should test whether the package can be understood and used without hidden Lab interpretation.",
+          "claimBoundary": "Packaging does not confer legal, regulatory, fairness, safety, security, or institutional authority.",
+          "sourceRef": "src/content/lab-machine-service.json#agency-representation-audit"
+        },
+        "public-value": {
+          "role": "Consequence / capability claim",
+          "standing": "E1 · capability is reachable",
+          "representation": "The public intake, method passes, deliverables, evidence rule, and authority limits are reachable. This establishes an available bounded capability, not comprehension, adoption, changed behavior, repaired consequence, or institutional benefit.",
+          "preserves": ["people + institutions as intended beneficiary scales", "agency", "legibility", "contestability", "repairability", "low claim ceiling"],
+          "witness": ["external access path", "instructions or interface", "claim boundary", "repair/contact path"],
+          "next": "Advance only with completed external pilot evidence, affected-party feedback, independent review, and evidence that defects and downstream consequences were actually repaired.",
+          "claimBoundary": "Current evidence supports E1 reachability only; it does not establish usability, action change, independent reuse, or durable public capacity.",
+          "sourceRef": "src/content/lab-machine-public-value.json#agency-audit"
+        },
+        "people": {
+          "role": "Participation + standing interface",
+          "standing": "required roles declared · public operational register empty",
+          "representation": "A real audit would need typed participation from affected parties, users or operators, reviewers or critics, domain experts, and an institutional owner or partner context as appropriate. Those roles are non-equivalent and do not imply endorsement, employment, authorship, consent, or authority beyond their recorded scope.",
+          "preserves": ["affected-party standing", "role non-equivalence", "protection markers", "authority boundary", "attributable review and use evidence"],
+          "witness": ["role + relation + period + target object", "authority and evidence record", "rights and publication status", "closure + non-implications"],
+          "next": "Do not manufacture a collaboration record. A live pilot must create consent-appropriate, source-backed participation records while protecting identities where required.",
+          "claimBoundary": "The current public collaboration register records zero operational collaboration instances. Planned outreach, pilot intake, or desired partners are not collaborations.",
+          "sourceRef": "src/content/lab-machine-people.json"
+        },
+        "method": {
+          "role": "Procedure",
+          "standing": "working public five-pass method",
+          "representation": "The same object is decomposed procedurally as Map Authority → Inspect Representation → Trace Consequence → Test Contestability → Assign Repair, with closure withheld until unresolved defects and ownership gaps are exposed.",
+          "preserves": ["five ordered passes", "bounded scope", "evidence traceability", "closure test"],
+          "witness": ["agency map", "representation map", "consequence chain", "contest path", "repair ownership map + defect register"],
+          "next": "Replay the procedure against an actual bounded process and record where written procedure and executable behavior diverge.",
+          "claimBoundary": "A repeatable procedure does not validate its conclusions or establish superiority over competent domain-specific audits.",
+          "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json#method"
+        },
+        "pipeline": {
+          "role": "Object lifecycle",
+          "standing": "pilot intake · object-specific lifecycle sketch",
+          "representation": "For this object, motion is inquiry → bound one process → gather artifacts and accounts → reconstruct five passes → record defects → review findings → follow repair. This is an object lifecycle projection, not a claim that the canonical Lab live queue already records a completed pilot.",
+          "preserves": ["state is explicit", "promotion does not erase defects", "evidence and owner survive transitions", "reopen on failed repair"],
+          "witness": ["intake scope", "evidence register", "review record", "repair follow-up"],
+          "next": "Promote state only when an actual engagement supplies the required evidence and ownership records.",
+          "claimBoundary": "Pilot intake is not a completed, reviewed, promoted, or maintained deployment state.",
+          "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json + src/content/lab-machine-pipeline.json"
+        },
+        "governance": {
+          "role": "Authority + claim constraint",
+          "standing": "authority limits declared",
+          "representation": "Governance prevents the audit from inheriting authority it does not possess: findings stay scoped, material claims require evidence, affected parties retain consequence standing, and correction must remain possible.",
+          "preserves": ["declared authority", "evidence before promotion", "bounded refusal", "repair ownership", "versionable correction"],
+          "witness": ["claim boundary", "evidence rule", "review record", "repair or supersession record"],
+          "next": "A real pilot should assign who may accept, contest, repair, publish, or supersede each consequential finding.",
+          "claimBoundary": "The Lab does not inherit regulator, court, standards-body, security-assessor, medical-professional, or internal decision-owner authority.",
+          "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json#claimBoundary + src/content/lab-machine-governance.json"
+        },
+        "publications": {
+          "role": "Public knowledge boundary",
+          "standing": "public service description exists · no case-study or impact publication promoted",
+          "representation": "The public page can expose the audit's method, scope, deliverables, evidence rule, and claim boundary as a versioned public artifact. No successful pilot, outcome study, or institutional case result should be inferred from that publication surface.",
+          "preserves": ["maturity", "provenance", "uncertainty", "revision conditions"],
+          "witness": ["versioned public service artifact", "source-controlled method and claim boundary"],
+          "next": "Publish case evidence only after consent, source review, claim scoping, and governance permit the underlying result to cross the public boundary.",
+          "claimBoundary": "Publication status does not manufacture validation, collaboration, institutional endorsement, or impact.",
+          "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json"
+        },
+        "timeline": {
+          "role": "Temporal projection",
+          "standing": "current public state known · no separate completed-pilot chronology claimed",
+          "representation": "The object can be placed in time as a current pilot-intake capability, but a distinct implementation chronology should not be invented before dated engagement, review, repair, and maintenance events exist.",
+          "preserves": ["dated state change", "source", "dependency", "absence of invented events"],
+          "witness": ["source-controlled status", "future dated engagement and review records"],
+          "next": "Create timeline events when the object actually changes institutional state.",
+          "claimBoundary": "A current status label is not a historical sequence and does not imply a completed field deployment.",
+          "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json"
+        },
+        "about": {
+          "role": "Institutional identity projection",
+          "standing": "formation-stage Lab capability",
+          "representation": "The object is one public professional-service expression of an independent public-interest research and engineering laboratory. Its authority is bounded by provenance, method, evidence, and declared institutional formation state rather than branding.",
+          "preserves": ["institution ≠ method", "service ≠ proof", "founder provenance ≠ independent validation", "formation state"],
+          "witness": ["institutional profile", "public service source", "governance and provenance records"],
+          "next": "Let institutional standing rise only with real review, stewardship, collaboration records, and durable operating capacity.",
+          "claimBoundary": "Institutional identity does not increase the audit's evidence level or delegated authority.",
+          "sourceRef": "src/content/public-projections/mission.json + src/content/product-landing-pages/agency-representation-audit.json"
+        }
+      }
+    }
+  ]
+}
