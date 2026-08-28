@@ -24,6 +24,7 @@ type AtlasSpaceProps = {
   initialLayerId?: string;
   initialFiberId?: string;
   initialChartPaths?: Record<string, RecursiveAtlasPath>;
+  initialNavigationDepth?: AtlasNavigationDepth;
   className?: string;
   onActiveLayerChange?: (layerId: string) => void;
   onActiveFiberChange?: (fiberId: string) => void;
@@ -57,6 +58,7 @@ export function AtlasSpace({
   initialLayerId,
   initialFiberId,
   initialChartPaths = {},
+  initialNavigationDepth = "stack",
   className,
   onActiveLayerChange,
   onActiveFiberChange,
@@ -66,7 +68,7 @@ export function AtlasSpace({
   const firstLayerId = model.layers[0]?.id ?? ""; const firstFiberId = model.fibers[0]?.id ?? "";
   const resolvedInitialLayer = model.layers.some((layer) => layer.id === initialLayerId) ? (initialLayerId ?? firstLayerId) : firstLayerId;
   const resolvedInitialFiber = model.fibers.some((fiber) => fiber.id === initialFiberId) ? (initialFiberId ?? firstFiberId) : firstFiberId;
-  const [viewMode, setViewMode] = useState<AtlasViewMode>("woven");
+  const [viewMode, setViewMode] = useState<AtlasViewMode>(initialNavigationDepth === "stack" ? "woven" : "focus");
   const [activeLayerId, setActiveLayerId] = useState(resolvedInitialLayer);
   const [activeFiberId, setActiveFiberId] = useState(resolvedInitialFiber);
   const [chartPaths, setChartPaths] = useState<Record<string, RecursiveAtlasPath>>(() => ({ ...initialChartPaths }));
@@ -108,6 +110,6 @@ export function AtlasSpace({
         {renderLayers.flatMap((layer) => { const level = layerLevel(layer, model.layers); const isLayerActive = layer.id === activeLayer.id; const extracted = viewMode === "focus" && isLayerActive; return model.fibers.map((fiber) => { const anchor = layer.anchors.find((item) => item.fiberId === fiber.id); if (!anchor) return null; const point = project(fiber.position, level, viewMode, extracted); const isActive = fiber.id === activeFiber.id; return <g key={`${layer.id}-${fiber.id}`} className={cx(styles.anchor, isActive && styles.anchorActive, viewMode === "focus" && !isLayerActive && depthStyles.anchorRecessed)} onClick={() => { selectLayer(layer.id); selectFiber(fiber.id); }}><circle cx={point.x} cy={point.y} r={extracted ? 14 : 11} className={cx(styles.jackOuter, wiringStyles[`jack_${fiber.connectorKind}`])} /><circle cx={point.x} cy={point.y} r={extracted ? 8 : 6.5} className={styles.jackInner} /><circle cx={point.x} cy={point.y} r={isActive ? 3.8 : 2.8} className={cx(styles.anchorDot, isLayerActive && styles.anchorDotLayerActive)} filter={isActive ? "url(#atlasGlow)" : undefined} /><text x={point.x + 14} y={point.y - 11} className={cx(styles.anchorLabel, extracted && styles.anchorLabelFocus)}>{anchor.label}</text></g>; }); })}</svg>{viewMode === "focus" ? <LocalAtlasChart layer={activeLayer} fibers={model.fibers} activeFiberId={activeFiberId} path={activeChartPath} onPathChange={(path) => selectChartPath(activeLayer.id, path)} onSelectFiber={selectFiber} /> : null}<div className={styles.screenCornerReadout}>{viewMode === "focus" ? `EXTRACTED ${activeLayer.hardware.rackCode} // ${activeChartPath.length > 0 ? `SUBCHART DEPTH ${activeChartPath.length + 1}` : "LOCAL CHART ONLINE"}` : "LOCAL JACK → EDGE CONTACT → REAR BUS"}</div></div></div><div className={styles.lowerDeck}><div className={styles.deckPlate}><span>ACTIVE BOARD</span><strong>{activeLayer.hardware.rackCode}</strong><small>{activeLayer.hardware.registry}</small></div><div className={styles.deckPlate}><span>ACTIVE CHANNEL</span><strong>{activeFiber.label}</strong><small>{connectorKindLabels[activeFiber.connectorKind]}</small></div><div className={styles.deckPlateWide}><span>DEPTH RULE</span><strong>Chart position is suspended when scale changes.</strong><small>{viewMode === "focus" ? `Current path depth: ${activeChartPath.length + 1}.` : "Extract a board to restore its saved local path."}</small></div></div></div>
 
       <aside className={styles.rightBank} aria-label="Correspondence inspector"><div className={styles.moduleLabel}>BOARD IDENTITY</div><div className={styles.readout}><span className={styles.readoutType}>{activeLayer.hardware.rackCode}</span><h3>{activeLayer.label}</h3><p>{activeLayer.description}</p></div><div className={styles.moduleLabel}>PATCH BAY</div><div className={styles.patchBay}>{model.fibers.map((fiber, index) => <button type="button" key={fiber.id} aria-pressed={fiber.id === activeFiber.id} className={cx(styles.patchRow, wiringStyles[`patch_${fiber.connectorKind}`], fiber.id === activeFiber.id && styles.patchRowActive)} onClick={() => selectFiber(fiber.id)}><span className={styles.patchJack}><i /></span><span className={styles.patchCode}>{fiber.connectorKind === "through" ? "THR" : fiber.connectorKind === "keyed" ? "KEY" : "TST"}{String(index + 1).padStart(2, "0")}</span><span className={styles.patchName}>{fiber.label}</span></button>)}</div><div className={styles.moduleLabel}>CHANNEL READOUT</div><div className={styles.readout}><span className={styles.readoutType}>{relationKindLabels[activeFiber.relationKind]}</span><h3>{activeFiber.label}</h3><p>{activeFiber.statement}</p></div><div className={styles.layerReadout}><span>MECHANICAL ACTION</span><p>{viewMode === "focus" ? `Board is extracted at ${navigationDepth.toUpperCase()} depth. Its saved chart path remains attached to this board.` : "Board is seated in the atlas stack."}</p><button type="button" onClick={() => setViewMode(viewMode === "focus" ? "woven" : "focus")}>{viewMode === "focus" ? "RESEAT BOARD" : "EXTRACT BOARD"}</button></div></aside>
-    </div><footer className={styles.footerStrip}><span>BF-ATLAS / CHART SPEC 0.6</span><span>{model.thesis}</span><span>BOARD + FIBER + CHART PATH STATE PRESERVED</span></footer>
+    </div><footer className={styles.footerStrip}><span>BF-ATLAS / CHART SPEC 0.7</span><span>{model.thesis}</span><span>BOARD + FIBER + CHART PATH + DEPTH PRESERVED</span></footer>
   </section>;
 }
