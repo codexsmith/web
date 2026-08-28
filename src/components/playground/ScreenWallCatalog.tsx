@@ -6,7 +6,6 @@ import {
   ArrowUpRight,
   AudioWaveform,
   Boxes,
-  CircleDot,
   Gamepad2,
   GitBranch,
   Orbit,
@@ -17,6 +16,7 @@ import {
   Wrench,
 } from "lucide-react";
 import "./screen-wall.css";
+import "./screen-wall-spatial-refinement.css";
 
 type WallMode = "curated" | "arcade" | "workbench";
 type Depth = "wall" | "screen" | "world";
@@ -164,6 +164,12 @@ const modeCopy: Record<WallMode, { label: string; note: string }> = {
   workbench: { label: "Workbench Wall", note: "Objects that expose useful inputs and outputs." },
 };
 
+const zoneCopy: Record<WallMode, [string, string, string, string]> = {
+  curated: ["Systems", "Central stage", "Tools + making", "Games + media"],
+  arcade: ["Games", "Central stage", "Experiments", "Oddments + audio"],
+  workbench: ["Sources + models", "Central stage", "Composition", "Processing"],
+};
+
 export function ScreenWallCatalog() {
   const [mode, setMode] = useState<WallMode>("curated");
   const [selectedId, setSelectedId] = useState("geometry");
@@ -178,7 +184,7 @@ export function ScreenWallCatalog() {
   };
 
   return (
-    <main className="screen-wall-shell" data-depth={depth}>
+    <main className="screen-wall-shell" data-depth={depth} data-mode={mode}>
       <header className="screen-wall-toolbar">
         <div className="screen-wall-brand">
           <span className="screen-wall-brand__mark" aria-hidden="true">BF</span>
@@ -223,11 +229,16 @@ export function ScreenWallCatalog() {
           <span className="screen-wall-junction screen-wall-junction--c" />
         </div>
 
+        <div className="screen-wall-zone-labels" aria-hidden="true">
+          {zoneCopy[mode].map((zone) => <span key={zone}>{zone}</span>)}
+        </div>
+
         <div className="screen-wall-grid">
           {visible.map((screen) => (
             <ScreenModule
               key={screen.id}
               screen={screen}
+              landmark={screen.id === "geometry"}
               selected={selected.id === screen.id && depth !== "wall"}
               dimmed={depth !== "wall" && selected.id !== screen.id}
               onSelect={() => selectScreen(screen.id)}
@@ -280,7 +291,7 @@ export function ScreenWallCatalog() {
       <footer className="screen-wall-legend">
         <span><i className="legend-boundary" />Boundary <small>environment</small></span>
         <span><i className="legend-port" />Port <small>typed interface</small></span>
-        <span><i className="legend-trace" />Trace <small>declared relation</small></span>
+        <span><i className="legend-trace" />Trace <small>shared projection bus</small></span>
         <span><i className="legend-state" />State <small>live / retained</small></span>
         <span className="screen-wall-legend__rule">A catalog can project its contents.</span>
       </footer>
@@ -290,11 +301,13 @@ export function ScreenWallCatalog() {
 
 function ScreenModule({
   screen,
+  landmark,
   selected,
   dimmed,
   onSelect,
 }: {
   screen: WallScreen;
+  landmark: boolean;
   selected: boolean;
   dimmed: boolean;
   onSelect: () => void;
@@ -305,11 +318,21 @@ function ScreenModule({
     <article
       className={`screen-module ${selected ? "is-selected" : ""} ${dimmed ? "is-dimmed" : ""}`}
       data-tone={screen.tone}
+      data-screen={screen.id}
+      data-landmark={landmark ? "true" : undefined}
       style={{ gridArea: screen.area }}
     >
       <span className="screen-module__mounts" aria-hidden="true"><i /><i /><i /><i /></span>
-      <div className="screen-module__ports screen-module__ports--left" aria-hidden="true"><i /><i /></div>
-      <div className="screen-module__ports screen-module__ports--right" aria-hidden="true"><i /><i /></div>
+      {screen.input && (
+        <div className="screen-module__ports screen-module__ports--left" aria-hidden="true">
+          <i data-port="input" />
+        </div>
+      )}
+      {screen.output && (
+        <div className="screen-module__ports screen-module__ports--right" aria-hidden="true">
+          <i data-port="output" />
+        </div>
+      )}
 
       <button type="button" className="screen-module__button" onClick={onSelect}>
         <div className="screen-module__bezel">
@@ -327,8 +350,8 @@ function ScreenModule({
             <strong>{screen.title}</strong>
           </span>
           <span className="screen-module__io" aria-hidden="true">
-            {screen.input && <i title={`Input: ${screen.input}`} />}
-            {screen.output && <i title={`Output: ${screen.output}`} />}
+            {screen.input && <span><i className="is-input" />IN</span>}
+            {screen.output && <span><i className="is-output" />OUT</span>}
           </span>
         </footer>
       </button>
