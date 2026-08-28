@@ -17,9 +17,11 @@ type LabMachineNavigationValue = {
   focusLabel: string;
   currentNodeId: string | null;
   trail: LabMachineTraversalStep[];
+  activeObjectId: string | null;
   navigateTo: (nodeId: string) => void;
   rewind: () => void;
   clearTrail: () => void;
+  setActiveObjectId: (objectId: string | null) => void;
 };
 
 const LabMachineNavigationContext = createContext<LabMachineNavigationValue | null>(null);
