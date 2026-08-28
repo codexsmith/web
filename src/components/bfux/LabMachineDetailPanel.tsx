@@ -5,6 +5,11 @@ import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineCardContent } from "./lab-machine-content";
 import type { LabMachineNode } from "./lab-machine-model";
 import {
+  LabMachineGovernanceProjection,
+  isGovernanceProjectionMode,
+  type GovernanceProjectionMode,
+} from "./LabMachineGovernanceProjection";
+import {
   LabMachineMethodProjection,
   isMethodProjectionMode,
   type MethodProjectionMode,
@@ -37,6 +42,7 @@ type ActiveProjection =
   | { subsystem: "research"; mode: ResearchProjectionMode }
   | { subsystem: "method"; mode: MethodProjectionMode }
   | { subsystem: "pipeline"; mode: PipelineProjectionMode }
+  | { subsystem: "governance"; mode: GovernanceProjectionMode }
   | null;
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
@@ -50,53 +56,27 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
   if (!content) return null;
 
   if (activeProjection?.subsystem === "timeline") {
-    return (
-      <LabMachineTimelineProjection
-        initialMode={activeProjection.mode}
-        onBack={() => setActiveProjection(null)}
-        onClose={onClose}
-      />
-    );
+    return <LabMachineTimelineProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   }
 
   if (activeProjection?.subsystem === "products") {
-    return (
-      <LabMachineProductsProjection
-        initialMode={activeProjection.mode}
-        onBack={() => setActiveProjection(null)}
-        onClose={onClose}
-      />
-    );
+    return <LabMachineProductsProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   }
 
   if (activeProjection?.subsystem === "research") {
-    return (
-      <LabMachineResearchProjection
-        initialMode={activeProjection.mode}
-        onBack={() => setActiveProjection(null)}
-        onClose={onClose}
-      />
-    );
+    return <LabMachineResearchProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   }
 
   if (activeProjection?.subsystem === "method") {
-    return (
-      <LabMachineMethodProjection
-        initialMode={activeProjection.mode}
-        onBack={() => setActiveProjection(null)}
-        onClose={onClose}
-      />
-    );
+    return <LabMachineMethodProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   }
 
   if (activeProjection?.subsystem === "pipeline") {
-    return (
-      <LabMachinePipelineProjection
-        initialMode={activeProjection.mode}
-        onBack={() => setActiveProjection(null)}
-        onClose={onClose}
-      />
-    );
+    return <LabMachinePipelineProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
+  }
+
+  if (activeProjection?.subsystem === "governance") {
+    return <LabMachineGovernanceProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   }
 
   return (
@@ -161,7 +141,8 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
           const researchProjection = node.id === "research" && isResearchProjectionMode(view.id);
           const methodProjection = node.id === "method" && isMethodProjectionMode(view.id);
           const pipelineProjection = node.id === "pipeline" && isPipelineProjectionMode(view.id);
-          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection;
+          const governanceProjection = node.id === "governance" && isGovernanceProjectionMode(view.id);
+          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection;
           return (
             <article key={view.id} data-view-id={view.id}>
               <span>PROJECTION</span>
@@ -177,6 +158,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
                   if (researchProjection) setActiveProjection({ subsystem: "research", mode: view.id });
                   if (methodProjection) setActiveProjection({ subsystem: "method", mode: view.id });
                   if (pipelineProjection) setActiveProjection({ subsystem: "pipeline", mode: view.id });
+                  if (governanceProjection) setActiveProjection({ subsystem: "governance", mode: view.id });
                 }}
               >
                 {available ? "OPEN" : "PLANNED"}
@@ -195,10 +177,5 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
 }
 
 function ProcessColumn({ label, items }: { label: string; items: string[] }) {
-  return (
-    <div>
-      <small>{label}</small>
-      <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>
-    </div>
-  );
+  return <div><small>{label}</small><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></div>;
 }
