@@ -18,6 +18,7 @@ type LocalAtlasChartProps = {
   path?: RecursiveAtlasPath;
   onPathChange?: (path: RecursiveAtlasPath) => void;
   onSelectFiber: (fiberId: string) => void;
+  onCalibrationChange?: () => void;
 };
 
 export function LocalAtlasChart({
@@ -27,6 +28,7 @@ export function LocalAtlasChart({
   path = [],
   onPathChange,
   onSelectFiber,
+  onCalibrationChange,
 }: LocalAtlasChartProps) {
   const root = recursiveAtlasRoots[layer.id];
   const resolved = resolveRecursiveAtlasPath(layer.id, path);
@@ -42,6 +44,7 @@ export function LocalAtlasChart({
         fibers={fibers}
         activeFiberId={activeFiberId}
         onSelectFiber={onSelectFiber}
+        onCalibrationChange={onCalibrationChange}
       />
     );
   }
