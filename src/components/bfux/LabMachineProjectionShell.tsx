@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineNode } from "./lab-machine-model";
+import { LabMachineObjectCarrier } from "./LabMachineObjectCarrier";
 import { LabMachineRelationRail } from "./LabMachineRelationRail";
 import { useLabMachineNavigation } from "./LabMachineNavigationContext";
 import "./lab-machine-projection.css";
@@ -71,6 +72,7 @@ export function LabMachineProjectionShell({
       </aside>
 
       {navigation?.currentNodeId ? <div className="bf-projection-shell__traversal">
+        <LabMachineObjectCarrier compact />
         <LabMachineRelationRail compact />
         <div className="bf-projection-shell__path">
           <small>BOUND PATH · {navigation.trail.length} RELATION{navigation.trail.length === 1 ? "" : "S"}</small>
