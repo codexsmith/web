@@ -229,8 +229,49 @@
   letter-spacing: .08em;
 }
 
+.bridgeFiberReadout {
+  display: grid;
+  grid-template-columns: 17px 1fr;
+  gap: 9px;
+  align-items: center;
+  margin-top: 16px;
+  padding: 9px 10px;
+  border: 1px solid #788878;
+  background: linear-gradient(180deg, #1e2a21, #121a15);
+  box-shadow: inset 0 0 14px rgba(0,0,0,.38), 0 1px rgba(255,255,255,.2);
+}
+.bridgeFiberLamp {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid #659069;
+  background: #7bd879;
+  box-shadow: 0 0 10px rgba(123,216,121,.54), inset 0 0 0 2px #31543a;
+}
+.bridgeFiberReadout small,
+.bridgeFiberReadout strong,
+.bridgeFiberReadout div > span { display: block; }
+.bridgeFiberReadout small {
+  color: #728879;
+  font: 700 7px/1 "Courier New", monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.bridgeFiberReadout strong {
+  margin-top: 4px;
+  color: #9bd397;
+  font: 700 11px/1.1 "Courier New", monospace;
+  letter-spacing: .06em;
+}
+.bridgeFiberReadout div > span {
+  margin-top: 4px;
+  color: #9eaaa0;
+  font: 700 7px/1.2 "Courier New", monospace;
+  letter-spacing: .06em;
+}
+
 .bridgeProjectionReadout {
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 9px 10px;
   border: 1px solid #8f978c;
   background: #172019;
@@ -270,6 +311,10 @@
   border-radius: 1px;
   background: linear-gradient(90deg, #7f7250, #b6a46c, #7f7250);
   box-shadow: inset 0 1px rgba(255,255,255,.22);
+}
+.bridgeEdgeConnector .bridgeEdgeContactActive {
+  background: linear-gradient(90deg, #557c54, #9bd397, #557c54);
+  box-shadow: 0 0 8px rgba(123,216,121,.58), inset 0 1px rgba(255,255,255,.5);
 }
 
 .navigatorFooter {
