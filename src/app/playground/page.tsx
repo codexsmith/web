@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ScreenWallCatalog } from "@/components/playground/ScreenWallCatalog";
+import "@/components/playground/screen-wall-chassis.css";
 
 export const metadata: Metadata = {
   title: "Playground · Screen Wall",
