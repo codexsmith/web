@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import governedObjectsSource from "@/content/lab-machine-governed-objects.json";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import { LabMachineDetailPanel } from "./LabMachineDetailPanel";
 import { LabMachineNavigationProvider, type LabMachineTraversalStep } from "./LabMachineNavigationContext";
@@ -19,6 +20,11 @@ import "./lab-machine-physical.css";
 import "./lab-machine-main-card-port.css";
 import "./lab-machine-selection.css";
 import "./lab-machine-traversal.css";
+
+const governedObjects = governedObjectsSource as {
+  defaultObjectId: string;
+  objects: Array<{ id: string; label: string; route: string[] }>;
+};
 
 const nodeIcons: Record<string, BfuxIconName> = {
   products: "object",
@@ -54,7 +60,7 @@ function edgeTone(edge: LabMachineEdge) {
   return source?.tone ?? target?.tone ?? "slate";
 }
 
-function Node({ node, edges, selected, related, visited, onSelect }: { node: LabMachineNode; edges: LabMachineEdge[]; selected: boolean; related: boolean; visited: boolean; onSelect: () => void }) {
+function Node({ node, edges, selected, related, visited, objectRoute, onSelect }: { node: LabMachineNode; edges: LabMachineEdge[]; selected: boolean; related: boolean; visited: boolean; objectRoute: boolean; onSelect: () => void }) {
   const inbound = edges.filter((edge) => edge.to === node.id);
   const outbound = edges.filter((edge) => edge.from === node.id);
   const icon = nodeIcons[node.id] ?? "boundary";
@@ -70,6 +76,7 @@ function Node({ node, edges, selected, related, visited, onSelect }: { node: Lab
       data-selected={selected ? "true" : "false"}
       data-related={related ? "true" : "false"}
       data-visited={visited ? "true" : "false"}
+      data-object-route={objectRoute ? "true" : "false"}
       style={{ gridArea: node.area }}
       role="button"
       tabIndex={0}
@@ -103,8 +110,8 @@ function Node({ node, edges, selected, related, visited, onSelect }: { node: Lab
   );
 }
 
-function PhysicalStatus({ trailLength }: { trailLength: number }) {
-  return <aside className="bf-machine__status" aria-label="Lab Machine graph status"><strong>THE LAB MACHINE</strong><small>Powered by Research. Built for People.</small><dl><div><dt>CORE</dt><dd>RESEARCH</dd></div><div><dt>MODULES</dt><dd>{labMachineNodes.length}</dd></div><div><dt>PATH</dt><dd>{trailLength}</dd></div></dl></aside>;
+function PhysicalStatus({ trailLength, objectLabel }: { trailLength: number; objectLabel?: string }) {
+  return <aside className="bf-machine__status" aria-label="Lab Machine graph status"><strong>THE LAB MACHINE</strong><small>{objectLabel ? `Carrying: ${objectLabel}` : "Powered by Research. Built for People."}</small><dl><div><dt>CORE</dt><dd>RESEARCH</dd></div><div><dt>MODULES</dt><dd>{labMachineNodes.length}</dd></div><div><dt>PATH</dt><dd>{trailLength}</dd></div></dl></aside>;
 }
 
 function PhysicalLegend() {
@@ -118,8 +125,10 @@ export function LabMachine({ showSchematic = false, skin = "physical" }: { showS
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [focusNodeId, setFocusNodeId] = useState<string | null>(null);
   const [trail, setTrail] = useState<LabMachineTraversalStep[]>([]);
+  const [activeObjectId, setActiveObjectId] = useState<string | null>(governedObjects.defaultObjectId);
   const selectedNode = getLabMachineNode(selectedNodeId);
   const focusNode = getLabMachineNode(focusNodeId);
+  const activeObject = governedObjects.objects.find((object) => object.id === activeObjectId);
 
   useEffect(() => {
     if (!showSchematic) return;
@@ -172,15 +181,18 @@ export function LabMachine({ showSchematic = false, skin = "physical" }: { showS
   const activeEdgeKeys = new Set(trail.map((step) => step.edgeKey));
   const relatedNodeIds = new Set(selectedNodeId ? labMachineEdges.flatMap((edge) => edge.from === selectedNodeId ? [edge.to] : edge.to === selectedNodeId ? [edge.from] : []) : []);
   const visitedNodeIds = new Set([focusNodeId, ...trail.flatMap((step) => [step.from, step.to])].filter(Boolean));
+  const objectRouteIds = new Set(activeObject?.route ?? []);
   const paths = skin === "physical" ? physicalTracePaths : apparatusTracePaths;
   const navigationValue = {
     focusId: focusNodeId ?? selectedNodeId ?? "",
     focusLabel: focusNode?.label ?? selectedNode?.label ?? "Lab Machine",
     currentNodeId: selectedNodeId,
     trail,
+    activeObjectId,
     navigateTo,
     rewind,
     clearTrail,
+    setActiveObjectId,
   };
 
   return (
@@ -188,16 +200,17 @@ export function LabMachine({ showSchematic = false, skin = "physical" }: { showS
       <section className="bf-machine" data-skin={skin} aria-label="Boundary First Labs machine">
         <div className="bf-machine__title"><strong>THE LAB MACHINE</strong><span>Powered by Research. Built for People.</span></div>
         <div className="bf-machine__board">
-          {skin === "physical" ? <PhysicalStatus trailLength={trail.length} /> : null}
+          {skin === "physical" ? <PhysicalStatus trailLength={trail.length} objectLabel={activeObject?.label} /> : null}
           <svg className="bf-machine__traces" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
             {labMachineEdges.map((edge, i) => {
               const tone = edgeTone(edge);
               const active = activeEdgeKeys.has(labMachineEdgeKey(edge));
               const adjacent = selectedNodeId === edge.from || selectedNodeId === edge.to;
-              return <g key={`${edge.from}-${edge.to}`} className="bf-machine__cable" data-kind={edge.kind} data-tone={tone} data-active={active ? "true" : "false"} data-adjacent={adjacent ? "true" : "false"}><path className="bf-machine__cable-sheath" d={paths[i]} /><path className="bf-machine__cable-core" d={paths[i]} /><path className="bf-machine__cable-highlight" d={paths[i]} /></g>;
+              const objectRoute = objectRouteIds.has(edge.from) && objectRouteIds.has(edge.to);
+              return <g key={`${edge.from}-${edge.to}`} className="bf-machine__cable" data-kind={edge.kind} data-tone={tone} data-active={active ? "true" : "false"} data-adjacent={adjacent ? "true" : "false"} data-object-route={objectRoute ? "true" : "false"}><path className="bf-machine__cable-sheath" d={paths[i]} /><path className="bf-machine__cable-core" d={paths[i]} /><path className="bf-machine__cable-highlight" d={paths[i]} /></g>;
             })}
           </svg>
-          {labMachineNodes.map((node) => <Node key={node.id} node={node} edges={labMachineEdges} selected={selectedNodeId === node.id} related={relatedNodeIds.has(node.id)} visited={visitedNodeIds.has(node.id)} onSelect={() => navigateTo(node.id)} />)}
+          {labMachineNodes.map((node) => <Node key={node.id} node={node} edges={labMachineEdges} selected={selectedNodeId === node.id} related={relatedNodeIds.has(node.id)} visited={visitedNodeIds.has(node.id)} objectRoute={objectRouteIds.has(node.id)} onSelect={() => navigateTo(node.id)} />)}
         </div>
         {skin === "physical" ? <PhysicalLegend /> : null}
         {selectedNode ? <LabMachineDetailPanel key={selectedNode.id} node={selectedNode} onClose={() => { setSelectedNodeId(null); setFocusNodeId(null); setTrail([]); }} /> : null}
