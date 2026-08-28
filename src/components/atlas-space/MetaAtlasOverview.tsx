@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./MetaAtlasOverview.module.css";
+import { metaPositionFor } from "./meta-atlas-layout";
 import type { AtlasFiber, AtlasLayer, AtlasSpaceModel } from "./atlas-space-model";
 
 type MetaAtlasOverviewProps = {
@@ -12,28 +13,7 @@ type MetaAtlasOverviewProps = {
   onEnterStack: (layerId: string) => void;
 };
 
-type DomainPosition = {
-  x: number;
-  y: number;
-};
-
-const POSITIONS: DomainPosition[] = [
-  { x: 23, y: 24 },
-  { x: 77, y: 24 },
-  { x: 23, y: 74 },
-  { x: 77, y: 74 },
-];
-
-function positionFor(index: number, total: number): DomainPosition {
-  if (total <= POSITIONS.length) return POSITIONS[index] ?? { x: 50, y: 50 };
-  const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
-  return {
-    x: 50 + Math.cos(angle) * 34,
-    y: 50 + Math.sin(angle) * 34,
-  };
-}
-
-function pathToHub(position: DomainPosition, index: number) {
+function pathToHub(position: { x: number; y: number }, index: number) {
   const hubY = 46 + index * 3;
   const elbowX = position.x < 50 ? 42 : 58;
   return `M ${position.x} ${position.y} L ${elbowX} ${position.y} L ${elbowX} ${hubY} L 50 ${hubY}`;
@@ -81,7 +61,7 @@ export function MetaAtlasOverview({
         <svg className={styles.harness} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <rect x="46" y="26" width="8" height="48" rx="1.2" className={styles.hubHousing} />
           {model.layers.map((layer, index) => {
-            const position = positionFor(index, model.layers.length);
+            const position = metaPositionFor(index, model.layers.length);
             return (
               <g key={`${activeFiber.id}-${layer.id}`}>
                 <path d={pathToHub(position, index)} className={styles.harnessSleeve} />
@@ -111,7 +91,7 @@ export function MetaAtlasOverview({
         </div>
 
         {model.layers.map((layer, index) => {
-          const position = positionFor(index, model.layers.length);
+          const position = metaPositionFor(index, model.layers.length);
           const anchor = localAnchor(layer, activeFiber.id);
           const isActive = layer.id === activeLayer.id;
 
