@@ -5,6 +5,11 @@ import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineCardContent } from "./lab-machine-content";
 import type { LabMachineNode } from "./lab-machine-model";
 import {
+  LabMachineMethodProjection,
+  isMethodProjectionMode,
+  type MethodProjectionMode,
+} from "./LabMachineMethodProjection";
+import {
   LabMachineProductsProjection,
   isProductProjectionMode,
   type ProductProjectionMode,
@@ -25,6 +30,7 @@ type ActiveProjection =
   | { subsystem: "timeline"; mode: TimelineProjectionMode }
   | { subsystem: "products"; mode: ProductProjectionMode }
   | { subsystem: "research"; mode: ResearchProjectionMode }
+  | { subsystem: "method"; mode: MethodProjectionMode }
   | null;
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
@@ -60,6 +66,16 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
   if (activeProjection?.subsystem === "research") {
     return (
       <LabMachineResearchProjection
+        initialMode={activeProjection.mode}
+        onBack={() => setActiveProjection(null)}
+        onClose={onClose}
+      />
+    );
+  }
+
+  if (activeProjection?.subsystem === "method") {
+    return (
+      <LabMachineMethodProjection
         initialMode={activeProjection.mode}
         onBack={() => setActiveProjection(null)}
         onClose={onClose}
@@ -127,7 +143,8 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
           const timelineProjection = node.id === "timeline" && isTimelineProjectionMode(view.id);
           const productProjection = node.id === "products" && isProductProjectionMode(view.id);
           const researchProjection = node.id === "research" && isResearchProjectionMode(view.id);
-          const available = timelineProjection || productProjection || researchProjection;
+          const methodProjection = node.id === "method" && isMethodProjectionMode(view.id);
+          const available = timelineProjection || productProjection || researchProjection || methodProjection;
           return (
             <article key={view.id} data-view-id={view.id}>
               <span>PROJECTION</span>
@@ -141,6 +158,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
                   if (timelineProjection) setActiveProjection({ subsystem: "timeline", mode: view.id });
                   if (productProjection) setActiveProjection({ subsystem: "products", mode: view.id });
                   if (researchProjection) setActiveProjection({ subsystem: "research", mode: view.id });
+                  if (methodProjection) setActiveProjection({ subsystem: "method", mode: view.id });
                 }}
               >
                 {available ? "OPEN" : "PLANNED"}
