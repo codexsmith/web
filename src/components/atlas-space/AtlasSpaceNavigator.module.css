@@ -39,6 +39,7 @@
 }
 
 .scaleTrack {
+  position: relative;
   display: grid;
   grid-template-columns: 14px 1fr 14px 1fr 14px 1fr 14px;
   align-items: center;
@@ -63,6 +64,27 @@
   border-color: #4d7c50;
   box-shadow: 0 0 9px rgba(110,180,108,.45), inset 0 0 0 2px #d8e7d8;
 }
+.scaleCarriage {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  width: 20px;
+  height: 10px;
+  margin-top: -5px;
+  border: 1px solid #426547;
+  border-radius: 2px;
+  background: linear-gradient(#86c184, #5d9b62);
+  box-shadow: 0 0 10px rgba(89,151,92,.42), inset 0 1px rgba(255,255,255,.35);
+  pointer-events: none;
+}
+.scaleCarriage::after {
+  content: "";
+  position: absolute;
+  inset: 2px 4px;
+  border-top: 1px solid rgba(239,248,239,.7);
+}
+.scaleCarriageDown { animation: scaleCarriageDown .56s cubic-bezier(.2,.72,.22,1) both; }
+.scaleCarriageUp { animation: scaleCarriageUp .56s cubic-bezier(.2,.72,.22,1) both; }
 
 .scaleLabels {
   grid-column: 2;
@@ -94,10 +116,12 @@
   letter-spacing: .09em;
 }
 .scaleActions button:hover { border-color: #6c876d; }
+.scaleActions button:disabled { opacity: .52; cursor: default; }
 
 .stage {
   position: relative;
   min-height: 760px;
+  overflow: hidden;
   padding: 10px;
   background: linear-gradient(145deg, #d8d1c3, #bfb7a9);
 }
@@ -118,6 +142,136 @@
   pointer-events: none;
 }
 
+.projectionBridge {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(238,242,234,.11), transparent 42%);
+}
+.projectionBridge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(13,18,15,.18);
+  animation: bridgeVeil .56s ease both;
+}
+
+.bridgeCard {
+  position: absolute;
+  left: var(--meta-x);
+  top: var(--meta-y);
+  width: 260px;
+  min-height: 176px;
+  padding: 12px;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  border: 1px solid #7f887e;
+  background:
+    linear-gradient(rgba(97,115,101,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(97,115,101,.07) 1px, transparent 1px),
+    linear-gradient(180deg, #d8d6ca, #bdbbae);
+  background-size: 22px 22px, 22px 22px, auto;
+  color: #263129;
+  box-shadow:
+    0 18px 34px rgba(25,28,24,.34),
+    inset 0 1px rgba(255,255,255,.82),
+    inset 0 0 0 2px rgba(77,93,80,.06);
+}
+.projectionBridgeDescend .bridgeCard {
+  animation: bridgeDescend .56s cubic-bezier(.18,.76,.18,1) both;
+}
+.projectionBridgeAscend .bridgeCard {
+  left: 50%;
+  top: 50%;
+  animation: bridgeAscend .56s cubic-bezier(.18,.76,.18,1) both;
+}
+
+.bridgeTopline {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px;
+  align-items: center;
+  color: #5f675f;
+  font: 700 8px/1 "Courier New", monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.bridgeTopline i { height: 1px; background: #8f958b; }
+
+.bridgeIdentity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.bridgeIdentity > span {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #90978d;
+  background: linear-gradient(#ece9df, #c8c6ba);
+  color: #3f6044;
+  box-shadow: inset 0 1px rgba(255,255,255,.8);
+  font: 700 22px/1 Georgia, serif;
+}
+.bridgeIdentity strong {
+  display: block;
+  color: #273128;
+  font: 600 19px/1.05 Georgia, serif;
+}
+.bridgeIdentity small {
+  display: block;
+  margin-top: 5px;
+  color: #5f695f;
+  font: 700 8px/1.2 "Courier New", monospace;
+  letter-spacing: .08em;
+}
+
+.bridgeProjectionReadout {
+  margin-top: 20px;
+  padding: 9px 10px;
+  border: 1px solid #8f978c;
+  background: #172019;
+  box-shadow: inset 0 0 12px rgba(0,0,0,.34);
+}
+.bridgeProjectionReadout span,
+.bridgeProjectionReadout strong { display: block; }
+.bridgeProjectionReadout span {
+  color: #7f927f;
+  font: 700 7px/1 "Courier New", monospace;
+  letter-spacing: .1em;
+}
+.bridgeProjectionReadout strong {
+  margin-top: 4px;
+  color: #88cb84;
+  font: 700 11px/1 "Courier New", monospace;
+  letter-spacing: .08em;
+}
+
+.bridgeEdgeConnector {
+  position: absolute;
+  right: -11px;
+  top: 34px;
+  bottom: 34px;
+  width: 12px;
+  display: grid;
+  align-content: space-around;
+  justify-items: center;
+  padding: 5px 0;
+  border: 1px solid #727b71;
+  background: #a9aa9f;
+  box-shadow: inset 1px 0 rgba(255,255,255,.4), 2px 0 4px rgba(0,0,0,.18);
+}
+.bridgeEdgeConnector i {
+  width: 6px;
+  height: 13px;
+  border-radius: 1px;
+  background: linear-gradient(90deg, #7f7250, #b6a46c, #7f7250);
+  box-shadow: inset 0 1px rgba(255,255,255,.22);
+}
+
 .navigatorFooter {
   min-height: 36px;
   display: grid;
@@ -134,6 +288,75 @@
   letter-spacing: .08em;
 }
 .navigatorFooter span:last-child { text-align: right; }
+
+@keyframes bridgeDescend {
+  0% {
+    left: var(--meta-x);
+    top: var(--meta-y);
+    width: 260px;
+    min-height: 176px;
+    transform: translate(-50%, -50%) scale(1);
+    filter: saturate(.92) brightness(.94);
+  }
+  55% {
+    left: 50%;
+    top: 50%;
+    width: 430px;
+    min-height: 248px;
+    transform: translate(-50%, -50%) scale(1.04);
+    filter: saturate(1) brightness(1.02);
+  }
+  100% {
+    left: 50%;
+    top: 50%;
+    width: min(72vw, 680px);
+    min-height: 390px;
+    transform: translate(-50%, -50%) scale(1);
+    filter: saturate(.86) brightness(.84);
+  }
+}
+
+@keyframes bridgeAscend {
+  0% {
+    left: 50%;
+    top: 50%;
+    width: min(72vw, 680px);
+    min-height: 390px;
+    transform: translate(-50%, -50%) scale(1);
+    filter: saturate(.86) brightness(.84);
+  }
+  45% {
+    left: 50%;
+    top: 50%;
+    width: 430px;
+    min-height: 248px;
+    transform: translate(-50%, -50%) scale(1.04);
+    filter: saturate(1) brightness(1.02);
+  }
+  100% {
+    left: var(--meta-x);
+    top: var(--meta-y);
+    width: 260px;
+    min-height: 176px;
+    transform: translate(-50%, -50%) scale(1);
+    filter: saturate(.92) brightness(.94);
+  }
+}
+
+@keyframes bridgeVeil {
+  0%, 100% { opacity: .2; }
+  48% { opacity: .62; }
+}
+
+@keyframes scaleCarriageDown {
+  from { left: 6px; }
+  to { left: calc(33.333% - 4px); }
+}
+
+@keyframes scaleCarriageUp {
+  from { left: calc(33.333% - 4px); }
+  to { left: 6px; }
+}
 
 @media (max-width: 850px) {
   .depthRail {
@@ -153,4 +376,15 @@
     padding: 8px 12px;
   }
   .navigatorFooter span:last-child { text-align: left; }
+  .bridgeCard { width: 220px; min-height: 160px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scaleCarriageDown,
+  .scaleCarriageUp,
+  .projectionBridgeDescend .bridgeCard,
+  .projectionBridgeAscend .bridgeCard,
+  .projectionBridge::before {
+    animation-duration: .01ms;
+  }
 }
