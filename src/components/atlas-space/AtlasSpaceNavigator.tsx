@@ -1,9 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
-import { AtlasSpace } from "./AtlasSpace";
+import { AtlasSpace, type AtlasNavigationDepth } from "./AtlasSpace";
 import { MetaAtlasOverview } from "./MetaAtlasOverview";
 import { defaultAtlasSpaceModel } from "./atlas-space-model";
+import {
+  recursiveAtlasPathLabels,
+  type RecursiveAtlasPath,
+} from "./local-atlas-recursion";
 import { metaPositionFor } from "./meta-atlas-layout";
 import styles from "./AtlasSpaceNavigator.module.css";
 
@@ -14,6 +18,8 @@ type ScaleTransition = {
   direction: TransitionDirection;
   layerId: string;
   fiberId: string;
+  chartPath: RecursiveAtlasPath;
+  navigationDepth: AtlasNavigationDepth;
 };
 
 const TRANSITION_MS = 560;
@@ -29,6 +35,8 @@ export function AtlasSpaceNavigator() {
   const [mode, setMode] = useState<NavigatorMode>("meta");
   const [activeLayerId, setActiveLayerId] = useState(model.layers[0]?.id ?? "");
   const [activeFiberId, setActiveFiberId] = useState(model.fibers[0]?.id ?? "");
+  const [chartPaths, setChartPaths] = useState<Record<string, RecursiveAtlasPath>>({});
+  const [navigationDepths, setNavigationDepths] = useState<Record<string, AtlasNavigationDepth>>({});
   const [transition, setTransition] = useState<ScaleTransition | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -39,6 +47,9 @@ export function AtlasSpaceNavigator() {
     () => metaPositionFor(activeLayerIndex, model.layers.length),
     [activeLayerIndex, model.layers.length],
   );
+  const activeChartPath = chartPaths[activeLayerId] ?? [];
+  const activeNavigationDepth = navigationDepths[activeLayerId] ?? "stack";
+  const activePathLabels = recursiveAtlasPathLabels(activeLayerId, activeChartPath);
 
   useEffect(() => () => {
     if (timerRef.current) clearTimeout(timerRef.current);
@@ -61,23 +72,43 @@ export function AtlasSpaceNavigator() {
   const enterStack = (layerId: string) => {
     if (transition) return;
     setActiveLayerId(layerId);
-    scheduleTransition({ direction: "descend", layerId, fiberId: activeFiberId });
+    scheduleTransition({
+      direction: "descend",
+      layerId,
+      fiberId: activeFiberId,
+      chartPath: chartPaths[layerId] ?? [],
+      navigationDepth: navigationDepths[layerId] ?? "stack",
+    });
   };
 
   const zoomOut = () => {
     if (transition) return;
-    scheduleTransition({ direction: "ascend", layerId: activeLayer.id, fiberId: activeFiber.id });
+    scheduleTransition({
+      direction: "ascend",
+      layerId: activeLayer.id,
+      fiberId: activeFiber.id,
+      chartPath: activeChartPath,
+      navigationDepth: activeNavigationDepth,
+    });
   };
 
   const transitionFiber = transition
     ? model.fibers.find((fiber) => fiber.id === transition.fiberId) ?? activeFiber
     : activeFiber;
-  const transitionAnchor = activeLayer.anchors.find((anchor) => anchor.fiberId === transitionFiber.id);
+  const transitionLayer = transition
+    ? model.layers.find((layer) => layer.id === transition.layerId) ?? activeLayer
+    : activeLayer;
+  const transitionAnchor = transitionLayer.anchors.find((anchor) => anchor.fiberId === transitionFiber.id);
+  const transitionPathLabels = transition
+    ? recursiveAtlasPathLabels(transition.layerId, transition.chartPath)
+    : activePathLabels;
 
   const transitionStyle = {
     "--meta-x": `${activeMetaPosition.x}%`,
     "--meta-y": `${activeMetaPosition.y}%`,
   } as CSSProperties;
+
+  const railDepth = mode === "meta" ? "meta" : activeNavigationDepth;
 
   return (
     <section
@@ -92,22 +123,22 @@ export function AtlasSpaceNavigator() {
           <strong>
             {transition
               ? transition.direction === "descend"
-                ? `PROJECTING ${activeLayer.hardware.rackCode} / ${transitionFiber.label} → STACK`
-                : `PROJECTING ${activeLayer.hardware.rackCode} / ${transitionFiber.label} → META`
+                ? `PROJECTING ${transitionLayer.hardware.rackCode} / ${transitionFiber.label} / ${transition.navigationDepth.toUpperCase()} → STACK`
+                : `PROJECTING ${transitionLayer.hardware.rackCode} / ${transitionFiber.label} / ${transition.navigationDepth.toUpperCase()} → META`
               : mode === "meta"
-                ? `META-ATLAS / ${activeFiber.label}`
-                : `DOMAIN STACK / ${activeLayer.hardware.rackCode} / ${activeFiber.label}`}
+                ? `META-ATLAS / ${activeFiber.label}${activeChartPath.length ? ` / SUSPENDED DEPTH ${activeChartPath.length + 1}` : ""}`
+                : `${activeNavigationDepth.toUpperCase()} / ${activeLayer.hardware.rackCode} / ${activeFiber.label}`}
           </strong>
         </div>
 
         <div className={styles.scaleTrack} aria-hidden="true">
-          <i className={mode === "meta" && !transition ? styles.scalePointActive : ""} />
+          <i className={railDepth === "meta" && !transition ? styles.scalePointActive : ""} />
           <span />
-          <i className={mode === "stack" && !transition ? styles.scalePointActive : ""} />
+          <i className={railDepth === "stack" && !transition ? styles.scalePointActive : ""} />
           <span />
-          <i />
+          <i className={railDepth === "local" && !transition ? styles.scalePointActive : ""} />
           <span />
-          <i />
+          <i className={railDepth === "subchart" && !transition ? styles.scalePointActive : ""} />
           {transition ? <b className={`${styles.scaleCarriage} ${transition.direction === "descend" ? styles.scaleCarriageDown : styles.scaleCarriageUp}`} /> : null}
         </div>
 
@@ -125,6 +156,8 @@ export function AtlasSpaceNavigator() {
             </button>
           ) : transition ? (
             <span>PROJECTION IN MOTION</span>
+          ) : activeNavigationDepth !== "stack" ? (
+            <span>SAVED {activeNavigationDepth.toUpperCase()} POSITION</span>
           ) : (
             <span>SELECT DOMAIN TO DESCEND</span>
           )}
@@ -147,8 +180,17 @@ export function AtlasSpaceNavigator() {
             model={model}
             initialLayerId={activeLayerId}
             initialFiberId={activeFiberId}
+            initialChartPaths={chartPaths}
+            initialNavigationDepth={activeNavigationDepth}
             onActiveLayerChange={setActiveLayerId}
             onActiveFiberChange={setActiveFiberId}
+            onChartPathChange={(layerId, path) => {
+              setChartPaths((existing) => ({ ...existing, [layerId]: path }));
+              setNavigationDepths((existing) => ({ ...existing, [layerId]: path.length > 0 ? "subchart" : existing[layerId] === "stack" ? "stack" : "local" }));
+            }}
+            onNavigationDepthChange={(depth) => {
+              setNavigationDepths((existing) => ({ ...existing, [activeLayerId]: depth }));
+            }}
           />
         )}
 
@@ -160,15 +202,15 @@ export function AtlasSpaceNavigator() {
           >
             <div className={styles.bridgeCard}>
               <div className={styles.bridgeTopline}>
-                <span>{activeLayer.hardware.rackCode}</span>
+                <span>{transitionLayer.hardware.rackCode}</span>
                 <i />
-                <span>{activeLayer.kicker}</span>
+                <span>{transitionLayer.kicker}</span>
               </div>
               <div className={styles.bridgeIdentity}>
-                <span>{activeLayer.hardware.mark}</span>
+                <span>{transitionLayer.hardware.mark}</span>
                 <div>
-                  <strong>{activeLayer.label}</strong>
-                  <small>{activeLayer.hardware.registry}</small>
+                  <strong>{transitionLayer.label}</strong>
+                  <small>{transitionLayer.hardware.registry}</small>
                 </div>
               </div>
               <div className={styles.bridgeFiberReadout}>
@@ -178,6 +220,11 @@ export function AtlasSpaceNavigator() {
                   <strong>{transitionFiber.label}</strong>
                   <span>{connectorCode(transitionFiber.connectorKind)} / {transitionAnchor?.label ?? "UNMAPPED LOCAL PORT"}</span>
                 </div>
+              </div>
+              <div className={styles.bridgePathReadout}>
+                <small>CONSERVED NAVIGATION POSITION</small>
+                <strong>{transition.navigationDepth.toUpperCase()}</strong>
+                <span>{transitionPathLabels.length ? transitionPathLabels.join(" / ") : "DOMAIN ROOT / NO DEEP PATH"}</span>
               </div>
               <div className={styles.bridgeProjectionReadout}>
                 <span>{transition.direction === "descend" ? "PROMOTING DOMAIN REGION" : "COLLAPSING DOMAIN BOARD"}</span>
@@ -194,9 +241,9 @@ export function AtlasSpaceNavigator() {
       </div>
 
       <footer className={styles.navigatorFooter}>
-        <span>BF-ATLAS / SCALE BUS 0.7</span>
-        <strong>META ⇄ STACK → EXTRACT → INSPECT → DRILL</strong>
-        <span>OBJECT + CORRESPONDENCE STATE CONSERVED ACROSS PROJECTION</span>
+        <span>BF-ATLAS / SCALE BUS 0.8</span>
+        <strong>META ⇄ STACK ⇄ LOCAL ⇄ SUBCHART</strong>
+        <span>OBJECT + FIBER + PATH + DEPTH CONSERVED ACROSS PROJECTION</span>
       </footer>
     </section>
   );
