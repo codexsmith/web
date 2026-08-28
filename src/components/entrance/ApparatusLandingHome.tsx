@@ -5,7 +5,6 @@ import {
   Boxes,
   CircleDot,
   Globe2,
-  Microscope,
   ScanSearch,
 } from "lucide-react";
 
@@ -46,16 +45,19 @@ function Screw({ className = "" }: { className?: string }) {
 }
 
 function InsetPanel({
+  ariaLabel,
   children,
   className = "",
   labelledBy,
 }: {
+  ariaLabel?: string;
   children?: ReactNode;
   className?: string;
   labelledBy?: string;
 }) {
   return (
     <section
+      aria-label={ariaLabel}
       aria-labelledby={labelledBy}
       className={`relative rounded-[1.15rem] border border-[#bcb7aa] bg-[#f1ece1] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),inset_0_-1px_0_rgba(112,107,95,0.08),0_4px_12px_rgba(59,55,45,0.05)] ${className}`}
     >
@@ -350,7 +352,7 @@ export function ApparatusLandingHome({
           </div>
 
           <InsetPanel
-            aria-label="Reserved apparatus panel"
+            ariaLabel="Reserved apparatus panel"
             className="mt-5 min-h-[9rem] sm:min-h-[10.5rem] xl:mt-6"
           />
         </div>
