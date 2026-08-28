@@ -270,6 +270,34 @@
   letter-spacing: .06em;
 }
 
+.bridgePathReadout {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(107, 126, 111, .55);
+  background: rgba(232, 229, 216, .68);
+  box-shadow: inset 0 1px rgba(255,255,255,.62);
+}
+.bridgePathReadout small,
+.bridgePathReadout strong,
+.bridgePathReadout span { display: block; }
+.bridgePathReadout small {
+  color: #697168;
+  font: 700 7px/1 "Courier New", monospace;
+  letter-spacing: .09em;
+}
+.bridgePathReadout strong {
+  margin-top: 4px;
+  color: #36583b;
+  font: 700 10px/1 "Courier New", monospace;
+  letter-spacing: .08em;
+}
+.bridgePathReadout span {
+  margin-top: 5px;
+  color: #545e55;
+  font: 700 7px/1.3 "Courier New", monospace;
+  letter-spacing: .045em;
+}
+
 .bridgeProjectionReadout {
   margin-top: 10px;
   padding: 9px 10px;
