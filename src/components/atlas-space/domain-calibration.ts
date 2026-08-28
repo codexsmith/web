@@ -1,5 +1,4 @@
-import type { AtlasAnchor, AtlasLayer } from "./atlas-space-model";
-import { corpusDescriptorForLayer } from "./generated-domain-board";
+import type { AtlasAnchor } from "./atlas-space-model";
 
 export type CalibrationDecision = "pending" | "accepted" | "rejected";
 
@@ -14,6 +13,8 @@ export type CalibrationCandidate = {
 };
 
 export type CalibrationDecisionMap = Record<string, CalibrationDecision>;
+
+const calibrationRegistry: Record<string, CalibrationDecisionMap> = {};
 
 const biologySource =
   "organized_library_curated/999_Library/03_Domains/02_natural_systems__domain_family/02_biology__domain/01_volumion_biology__research_note.md";
@@ -66,15 +67,28 @@ const biologyCandidates: CalibrationCandidate[] = [
 ];
 
 export function calibrationCandidatesForLayer(layerId: string): CalibrationCandidate[] {
-  const descriptor = corpusDescriptorForLayer(layerId);
-  if (!descriptor?.generated) return [];
-  if (descriptor.familyId === "natural" && descriptor.domainId === "biology") return biologyCandidates;
+  if (layerId === "generated--natural--biology") return biologyCandidates;
   return [];
+}
+
+export function calibrationDecisionsForLayer(layerId: string): CalibrationDecisionMap {
+  return calibrationRegistry[layerId] ?? {};
+}
+
+export function setCalibrationDecision(
+  layerId: string,
+  fiberId: string,
+  decision: CalibrationDecision,
+) {
+  calibrationRegistry[layerId] = {
+    ...calibrationRegistry[layerId],
+    [fiberId]: decision,
+  };
 }
 
 export function acceptedCalibrationAnchors(
   layerId: string,
-  decisions: CalibrationDecisionMap = {},
+  decisions: CalibrationDecisionMap = calibrationDecisionsForLayer(layerId),
 ): AtlasAnchor[] {
   return calibrationCandidatesForLayer(layerId)
     .filter((candidate) => decisions[candidate.fiberId] === "accepted")
@@ -83,32 +97,4 @@ export function acceptedCalibrationAnchors(
       label: candidate.localLabel,
       note: `${candidate.localNote} Evidence: ${candidate.evidenceLocation}.`,
     }));
-}
-
-export function applyCalibrationToGeneratedLayer(
-  layer: AtlasLayer,
-  decisions: CalibrationDecisionMap = {},
-): AtlasLayer {
-  const descriptor = corpusDescriptorForLayer(layer.id);
-  if (!descriptor?.generated) return layer;
-
-  const candidates = calibrationCandidatesForLayer(layer.id);
-  const anchors = acceptedCalibrationAnchors(layer.id, decisions);
-  const reviewed = candidates.filter((candidate) => decisions[candidate.fiberId] && decisions[candidate.fiberId] !== "pending").length;
-
-  return {
-    ...layer,
-    anchors,
-    hardware: {
-      ...layer.hardware,
-      registry:
-        candidates.length === 0
-          ? `${descriptor.familyCode} / GENERATED / NO CALIBRATION SET`
-          : `${descriptor.familyCode} / GENERATED / PORTS ${anchors.length} LIVE / ${reviewed} REVIEWED`,
-    },
-    description:
-      candidates.length === 0
-        ? layer.description
-        : `Generated corpus shell for ${descriptor.domainLabel}. ${anchors.length} of ${candidates.length} candidate correspondence ports are accepted; unaccepted ports remain physically unterminated.`,
-  };
 }
