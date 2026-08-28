@@ -174,7 +174,7 @@ export function AtlasSpaceNavigator() {
               <div className={styles.bridgeFiberReadout}>
                 <span className={styles.bridgeFiberLamp} />
                 <div>
-                  <small>CONSERVed correspondence channel</small>
+                  <small>CONSERVED CORRESPONDENCE CHANNEL</small>
                   <strong>{transitionFiber.label}</strong>
                   <span>{connectorCode(transitionFiber.connectorKind)} / {transitionAnchor?.label ?? "UNMAPPED LOCAL PORT"}</span>
                 </div>
