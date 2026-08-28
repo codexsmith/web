@@ -1,0 +1,547 @@
+.root {
+  --atlas-green: #355f3f;
+  --atlas-paper: #e8e2d6;
+  --atlas-panel: #f0ebe0;
+  --atlas-ink: #282b27;
+  --atlas-muted: #6f7169;
+  --atlas-line: #b9b4a8;
+  color: var(--atlas-ink);
+  background: #d8d2c6;
+  border: 1px solid #a9a397;
+  border-radius: 24px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 18px 45px rgba(55, 51, 42, 0.14);
+  overflow: hidden;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: start;
+  padding: 28px 32px 24px;
+  border-bottom: 1px solid var(--atlas-line);
+  background: linear-gradient(180deg, #eee9de, #e7e1d5);
+}
+
+.intro {
+  max-width: 820px;
+}
+
+.eyebrow,
+.viewportLabel,
+.inspectorHeader,
+.layerButton small,
+.layerReadout > span,
+.viewportNote {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--atlas-green);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.title {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.summary {
+  max-width: 720px;
+  margin: 12px 0 0;
+  color: #4f534c;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.thesis {
+  width: fit-content;
+  margin: 18px 0 0;
+  padding: 8px 12px;
+  border: 1px solid #c5bfb1;
+  border-radius: 8px;
+  background: #f4f0e7;
+  color: #30362f;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+}
+
+.viewControls {
+  display: grid;
+  gap: 10px;
+  min-width: 260px;
+}
+
+.segmentedControl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  border: 1px solid #b9b3a7;
+  border-radius: 10px;
+  background: #ddd7cb;
+}
+
+.controlButton,
+.fiberToggle,
+.layerButton,
+.fiberButton,
+.mappingButton,
+.layerReadout button {
+  border: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+.controlButton {
+  min-height: 38px;
+  border-radius: 7px;
+  background: transparent;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.controlButtonActive {
+  background: #f1ede4;
+  box-shadow: 0 1px 3px rgba(40, 38, 32, 0.14);
+}
+
+.fiberToggle {
+  min-height: 38px;
+  border: 1px solid #b9b3a7;
+  border-radius: 8px;
+  background: #e7e1d6;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.fiberToggleActive {
+  border-color: color-mix(in srgb, var(--atlas-green) 55%, #b9b3a7);
+  color: var(--atlas-green);
+}
+
+.layerRail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--atlas-line);
+  background: #dfd9cd;
+}
+
+.layerButton {
+  min-height: 70px;
+  padding: 14px 18px;
+  border-right: 1px solid var(--atlas-line);
+  background: transparent;
+  text-align: left;
+}
+
+.layerButton:last-child {
+  border-right: 0;
+}
+
+.layerButton span,
+.layerButton small {
+  display: block;
+}
+
+.layerButton span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+}
+
+.layerButton small {
+  margin-top: 5px;
+  color: var(--atlas-muted);
+  font-size: 8px;
+}
+
+.layerButtonActive {
+  background: #f0ebe1;
+  box-shadow: inset 0 -3px 0 var(--atlas-green);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  min-height: 690px;
+}
+
+.viewport {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border-right: 1px solid var(--atlas-line);
+  background:
+    linear-gradient(rgba(65, 72, 64, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(65, 72, 64, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at 48% 48%, rgba(255, 255, 255, 0.62), transparent 55%),
+    #e4ded2;
+  background-size: 24px 24px, 24px 24px, auto, auto;
+}
+
+.viewport::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+  border: 1px solid rgba(83, 82, 75, 0.12);
+  border-radius: 12px;
+}
+
+.viewportLabel,
+.viewportNote {
+  position: absolute;
+  z-index: 2;
+  left: 28px;
+  right: 28px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #6f7169;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.viewportLabel {
+  top: 24px;
+}
+
+.viewportNote {
+  bottom: 24px;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 690px;
+}
+
+.board {
+  fill: rgba(238, 233, 223, 0.72);
+  stroke: #a7a396;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition: fill 160ms ease, stroke 160ms ease;
+}
+
+.board:hover,
+.boardActive {
+  fill: rgba(247, 243, 234, 0.88);
+  stroke: var(--atlas-green);
+}
+
+.gridLines line {
+  stroke: rgba(74, 77, 69, 0.14);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.layerLabel {
+  fill: #5d625a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  pointer-events: none;
+}
+
+.fiberLine {
+  fill: none;
+  stroke: rgba(53, 95, 63, 0.42);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.fiberLineCandidate {
+  stroke-dasharray: 7 7;
+  stroke: rgba(121, 105, 58, 0.55);
+}
+
+.fiberLineActive {
+  stroke-width: 4;
+  stroke: var(--atlas-green);
+}
+
+.anchor {
+  cursor: pointer;
+}
+
+.anchorHit {
+  fill: transparent;
+}
+
+.anchorDot {
+  fill: #71776e;
+  stroke: #f1ede5;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  transition: r 150ms ease, fill 150ms ease;
+}
+
+.anchorDotLayerActive,
+.anchorActive .anchorDot {
+  fill: var(--atlas-green);
+}
+
+.anchorLabel {
+  fill: #5a5e56;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  paint-order: stroke;
+  stroke: rgba(236, 231, 220, 0.94);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.anchorLabelFocus {
+  font-size: 12px;
+}
+
+.anchorActive .anchorLabel {
+  fill: #273528;
+}
+
+.inspector {
+  display: flex;
+  flex-direction: column;
+  background: #eee8dc;
+}
+
+.inspectorHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--atlas-line);
+  color: #666a62;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.inspectorHeader p {
+  margin: 0;
+}
+
+.inspectorHeader span {
+  color: var(--atlas-green);
+  text-align: right;
+}
+
+.fiberSelector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 16px;
+  border-bottom: 1px solid var(--atlas-line);
+}
+
+.fiberButton {
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 1px solid #c0baae;
+  border-radius: 7px;
+  background: #e4ded2;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fiberButtonActive {
+  border-color: var(--atlas-green);
+  background: #f3efe6;
+  color: var(--atlas-green);
+}
+
+.inspectorCopy {
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid var(--atlas-line);
+}
+
+.inspectorCopy h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.inspectorCopy p,
+.layerReadout p {
+  margin: 10px 0 0;
+  color: #5d615a;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.mappingList {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mappingList li + li {
+  border-top: 1px solid #cbc5b9;
+}
+
+.mappingButton {
+  width: 100%;
+  padding: 15px 20px;
+  background: transparent;
+  text-align: left;
+}
+
+.mappingButton:hover,
+.mappingButtonActive {
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.mappingButton strong,
+.mappingButton small,
+.mappingLayer {
+  display: block;
+}
+
+.mappingLayer {
+  color: var(--atlas-green);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.mappingButton strong {
+  margin-top: 4px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.mappingButton small {
+  margin-top: 4px;
+  color: #6f7169;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.layerReadout {
+  margin-top: auto;
+  padding: 18px 20px 20px;
+  border-top: 1px solid var(--atlas-line);
+  background: #e3ddd1;
+}
+
+.layerReadout > span {
+  color: #74776f;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.layerReadout strong {
+  display: block;
+  margin-top: 4px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.layerReadout button {
+  width: 100%;
+  min-height: 38px;
+  margin-top: 14px;
+  border: 1px solid var(--atlas-green);
+  border-radius: 7px;
+  background: #f0ece3;
+  color: var(--atlas-green);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.emptyState {
+  margin: 0;
+  padding: 40px;
+}
+
+@media (max-width: 1000px) {
+  .header,
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .viewControls {
+    min-width: 0;
+  }
+
+  .viewport {
+    border-right: 0;
+    border-bottom: 1px solid var(--atlas-line);
+  }
+
+  .layerRail {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .layerButton:nth-child(2) {
+    border-right: 0;
+  }
+
+  .layerButton:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--atlas-line);
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 22px 18px 18px;
+  }
+
+  .layerRail {
+    grid-template-columns: 1fr;
+  }
+
+  .layerButton,
+  .layerButton:nth-child(2) {
+    border-right: 0;
+    border-bottom: 1px solid var(--atlas-line);
+  }
+
+  .layerButton:last-child {
+    border-bottom: 0;
+  }
+
+  .canvas {
+    min-height: 540px;
+  }
+
+  .viewportLabel,
+  .viewportNote {
+    left: 18px;
+    right: 18px;
+  }
+
+  .viewportNote {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
