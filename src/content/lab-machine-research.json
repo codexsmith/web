@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "current research architecture seed",
+  "purpose": "Represent the Lab's research as an epistemic engine: typed programs, formal objects, methods, claim-development gates, and negative-capable cross-domain comparisons rather than a list of papers or topics.",
+  "coverageNote": "Seeded from current web research records and the source-controlled August 2026 architecture. Historical names are not silently treated as current canon, and cross-domain recurrence is presented as a clue until stronger structure is earned.",
+  "methods": [
+    {"id":"boundary-analysis","label":"Boundary analysis","description":"Declare what is inside, outside, crossing, constrained, omitted, and consequential before treating a system as understood."},
+    {"id":"operative-profiling","label":"Operative profiling","description":"Describe an object by entity type, admissibility, transformations, invariants, closure, boundary, provenance, defect, and repair rather than by name alone."},
+    {"id":"cross-domain-comparison","label":"Cross-domain comparison","description":"Compare domain-native structures only after preserving their local definitions and then test whether linked operational structure survives the mapping."},
+    {"id":"reconstruction","label":"Reconstruction","description":"Require a representation or claim to be rebuildable from declared dependencies, sources, distinctions, and transformation history."},
+    {"id":"counterexample-search","label":"Counterexample search","description":"Search deliberately for mappings, assumptions, and promoted claims that break; a bounded rejection counts as a successful research result."},
+    {"id":"provenance-governance","label":"Provenance & governance","description":"Preserve source, maturity, review responsibility, criticism, supersession, and repair so stronger status is earned rather than implied."},
+    {"id":"benchmarking","label":"Matched comparison","description":"Where usefulness or performance is claimed, compare the proposed representation against competent established baselines on bounded tasks."}
+  ],
+  "programs": [
+    {
+      "id":"boundary-theory",
+      "label":"Boundary Theory",
+      "shortLabel":"Boundary Theory",
+      "kind":"theory",
+      "status":"current controlled architecture",
+      "role":"Formal umbrella for rigorous cross-domain primitives and structure-preserving relationships around boundaries, distinctions, representation, admissibility, closure, and defect.",
+      "question":"Which structures remain meaningful across changes of domain, scale, representation, or formalism, and what evidence is required before calling them shared?",
+      "description":"The current source-controlled architecture centers Boundary Theory on Distinction Space and treats Representational Mechanics as an applying/study discipline rather than as a competing umbrella.",
+      "claimBoundary":"The current architecture is repository-controlled research structure, not proof that the proposed primitives are novel, necessary, or universal across domains.",
+      "methods":["boundary-analysis","cross-domain-comparison","counterexample-search","provenance-governance"],
+      "inputs":["domain-native formalisms","candidate recurring structures","anomalies and representational defects","historical research lineage"],
+      "outputs":["typed formal questions","candidate primitives","bounded cross-domain propositions","research programs requiring independent validation"],
+      "relations":[{"to":"distinction-space","label":"centered on"},{"to":"representational-mechanics","label":"applied through"},{"to":"schemathematics","label":"formalized through"}],
+      "currentStage":"bounded-representation",
+      "sourceRef":"src/lib/content.ts + src/content/founder-intellectual-provenance-timeline.json#EVT-020"
+    },
+    {
+      "id":"distinction-space",
+      "label":"Distinction Space",
+      "shortLabel":"Distinction Space",
+      "kind":"formal-object",
+      "status":"current formal carrier",
+      "role":"Formal carrier in the current Boundary Theory architecture, with Distinction, Admissibility, and Emergence as operational facets and Contexture as a composable subspace.",
+      "question":"What must be representable before a system can distinguish states, admit transformations, expose emergence, or define a bounded local context?",
+      "description":"Distinction Space is represented in the current architecture as the central formal object rather than as a historical synonym for earlier umbrella theories.",
+      "claimBoundary":"Repository placement establishes current terminology and architecture; it does not by itself establish mathematical novelty, completeness, or equivalence with established formal spaces.",
+      "methods":["boundary-analysis","operative-profiling","reconstruction"],
+      "inputs":["distinctions","admissibility conditions","emergent relations","contextures"],
+      "outputs":["formal representation targets","candidate transformation rules","questions about observability and closure"],
+      "relations":[{"to":"boundary-theory","label":"formal carrier for"},{"to":"representational-mechanics","label":"studied through"}],
+      "currentStage":"bounded-representation",
+      "sourceRef":"src/content/founder-intellectual-provenance-timeline.json#EVT-020"
+    },
+    {
+      "id":"representational-mechanics",
+      "label":"Representational Mechanics",
+      "shortLabel":"Rep. Mechanics",
+      "kind":"discipline",
+      "status":"current applying discipline",
+      "role":"Study how representations preserve, expose, distort, omit, or redirect structure as systems are transformed, projected, interpreted, and made executable.",
+      "question":"What changes when the representation changes, what must remain invariant, and where do hidden defects or consequences appear?",
+      "description":"The current architecture places Representational Mechanics under Boundary Theory and associates it with Formal Grammars, the Boundary First operational method, and Corpus Forge provenance machinery.",
+      "claimBoundary":"Recurring software and institutional vocabulary is evidence for investigation, not proof that human institutions reduce to software or that cross-domain mappings are formal equivalences.",
+      "methods":["operative-profiling","cross-domain-comparison","reconstruction","counterexample-search","provenance-governance"],
+      "inputs":["multiple representations of one operative situation","state-transition systems","institutional and software examples","representation failures"],
+      "outputs":["comparison frames","distortion and defect analyses","candidate invariants","repair obligations"],
+      "relations":[{"to":"boundary-theory","label":"applies"},{"to":"operational-homology","label":"tests through"},{"to":"schemathematics","label":"uses formal apparatus from"}],
+      "currentStage":"bounded-comparison",
+      "sourceRef":"src/content/founder-intellectual-provenance-timeline.json#EVT-020 + src/content/artifacts/executable-distinctions.md"
+    },
+    {
+      "id":"schemathematics",
+      "label":"Schemathematics",
+      "shortLabel":"Schemathematics",
+      "kind":"formal-program",
+      "status":"research-program draft",
+      "role":"Formal study of schemas as lawful carriers of objects, transformations, admissibility conditions, invariants, defects, provenance, and repair.",
+      "question":"Can operative profiles make differences between formal objects more reconstructable and useful without replacing established mathematics that already carries the required structure?",
+      "description":"Schemathematics tests whether explicit operative profiles improve comparison, navigation, translation, pedagogy, or machine reasoning while preserving accepted definitions and reducing to established machinery where appropriate.",
+      "claimBoundary":"Illustrative examples do not establish a new mathematical field or performance improvement; theorem proving, retrieval, pedagogy, and AI claims require benchmark evidence.",
+      "methods":["operative-profiling","reconstruction","benchmarking","counterexample-search"],
+      "inputs":["established mathematical structures","typed conditions and operations","neighboring formal objects","dependency chains"],
+      "outputs":["operative profiles","bounded comparisons","candidate schema transformations","benchmarkable representation hypotheses"],
+      "relations":[{"to":"boundary-theory","label":"formal apparatus for"},{"to":"representational-mechanics","label":"supplies machinery to"}],
+      "currentStage":"candidate-claim",
+      "sourceRef":"src/content/product-landing-pages/schemathematics.json"
+    },
+    {
+      "id":"operational-homology",
+      "label":"Cross-Domain Operational Homology",
+      "shortLabel":"Operational Homology",
+      "kind":"comparative-program",
+      "status":"active bounded comparison",
+      "role":"Negative-capable comparison program for determining whether recurring cross-domain structures preserve linked operational behavior rather than merely sharing terminology.",
+      "question":"When do mappings among software, law, public administration, research operations, mathematics, and institutional systems preserve enough state, transition, invariant, witness, responsibility, failure, and repair structure to deserve promotion?",
+      "description":"The current program uses domain-native definitions, an L0-L5 evidence ladder, explicit breakpoints, bounded comparative cases, and a counterexample ledger. A rejected mapping is an acceptable result.",
+      "claimBoundary":"The current slice does not establish a universal grammar, formal isomorphism across domains, field superiority, or license to reduce persons and institutions to software objects.",
+      "methods":["cross-domain-comparison","counterexample-search","boundary-analysis","provenance-governance"],
+      "inputs":["domain-native terms and sources","candidate mappings","counterexamples","bounded cases"],
+      "outputs":["graded correspondences","rejected mappings","breakpoints","operational-homology candidates requiring stronger review"],
+      "relations":[{"to":"representational-mechanics","label":"tests claims within"},{"to":"boundary-theory","label":"supplies evidence to"}],
+      "currentStage":"counterexample",
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md"
+    },
+    {
+      "id":"second-order-method",
+      "label":"Second-Order Scientific Method",
+      "shortLabel":"Second-Order Method",
+      "kind":"method-program",
+      "status":"dated origin-program synthesis",
+      "role":"Methodological layer for making the research process itself an inspectable object: representation, evidence, agentic generation, criticism, defect, promotion, and repair are explicitly instrumented.",
+      "question":"How can generative research capacity be constrained by explicit evidence, state, defect, reconstruction, criticism, and repair machinery so that outputs can become maintainable knowledge rather than disposable synthesis?",
+      "description":"The August 1 origin package joins long-run formal inquiry, representational questions, agentic pressure on fixed possibility spaces, Distinction Space, Contexture, proto-schema work, and a second-order scientific method.",
+      "claimBoundary":"The package date is a synthesis checkpoint, not proof that every mature concept originated on that date or that the method has established superiority over standard scientific workflows.",
+      "methods":["reconstruction","counterexample-search","provenance-governance","boundary-analysis"],
+      "inputs":["questions","generated hypotheses","sources","critic findings","failed derivations","research state"],
+      "outputs":["inspectable research state","explicit defects","promotion decisions","repair queues","reconstructable knowledge artifacts"],
+      "relations":[{"to":"representational-mechanics","label":"instruments"},{"to":"boundary-theory","label":"tests and develops"}],
+      "currentStage":"review",
+      "sourceRef":"src/content/founder-intellectual-provenance-timeline.json#EVT-017"
+    }
+  ],
+  "claimStages": [
+    {"id":"question","label":"Question / clue","question":"What observation, mismatch, anomaly, or recurring structure is worth investigating?","gate":"Record the clue without promoting resemblance into result."},
+    {"id":"bounded-representation","label":"Bound & represent","question":"What is the unit of analysis, what is outside it, and which objects, conditions, relations, and witnesses must be explicit?","gate":"The representation must expose its scope, dependencies, omissions, and native definitions."},
+    {"id":"candidate-claim","label":"Candidate claim","question":"What bounded proposition follows from the represented structure?","gate":"State exactly what would count as support, failure, or a lower claim ceiling."},
+    {"id":"bounded-comparison","label":"Compare / reconstruct","question":"Does the proposition survive comparison with competent established representations and can it be reconstructed from its evidence?","gate":"Prefer established machinery where it already carries the required structure."},
+    {"id":"counterexample","label":"Falsify / break","question":"Where does the mapping, derivation, analogy, or mechanism stop preserving the claimed structure?","gate":"Actively search for breakpoints; rejected mappings remain successful bounded results."},
+    {"id":"review","label":"Review / witness","question":"Who or what has enough standing, independence, evidence, and context to criticize the result?","gate":"Separate internal criticism, external review, and authority to promote."},
+    {"id":"promotion","label":"Promote / repair","question":"What stronger state has actually been earned, and what must be superseded, repaired, or reopened if the representation changes?","gate":"Promotion records scope, provenance, remaining uncertainty, and downstream repair obligations."}
+  ],
+  "domains": [
+    {"id":"software","label":"Software"},
+    {"id":"public-administration","label":"Public administration"},
+    {"id":"research-operations","label":"Research operations"},
+    {"id":"mathematics","label":"Mathematics"}
+  ],
+  "crossDomainCandidates": [
+    {
+      "id":"state","label":"State representation","posture":"candidate recurring structure","question":"Does the domain distinguish materially different states strongly enough that different actions become admissible?",
+      "domainSignals":{"software":"explicit object / workflow state and guarded transitions","public-administration":"received, pending approval, approved-to-pay, paid, and related status distinctions","research-operations":"candidate, working, reviewed, public, superseded, or historical claim states","mathematics":"object conditions determine which operations and guarantees are available"},
+      "breakpoints":["A shared word such as state does not establish a shared state model.","Institutional states may depend on authority, standing, or elapsed consequence not represented in software state alone."],
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md + src/content/product-landing-pages/schemathematics.json"
+    },
+    {
+      "id":"admissible-transition","label":"Admissible transition","posture":"bounded structural candidate","question":"Which transformations are allowed, who or what authorizes them, and what conditions must hold before the transition is valid?",
+      "domainSignals":{"software":"permissions, guards, interfaces, transaction preconditions","public-administration":"approval and payment states authorize different next actions","research-operations":"human-scoped promotion and supersession gates","mathematics":"well-formed maps, operations, and transformations require declared conditions"},
+      "breakpoints":["Compilation is not judicial interpretation: discretion, contested facts, precedent, legitimacy, and appeal break the mapping.","Class membership is not public-benefit eligibility: jurisdiction, contestability, time, and due process add conditions."],
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md"
+    },
+    {
+      "id":"invariant","label":"Protected invariant","posture":"candidate recurring structure","question":"What must remain true while the system changes, and how is violation detected?",
+      "domainSignals":{"software":"transactional or application invariants constrain successful execution","public-administration":"declared authority, evidence, and procedural conditions may need to remain satisfied across handoffs","research-operations":"source, claim ceiling, review responsibility, and provenance must survive promotion or replacement","mathematics":"invariants identify structure preserved under lawful transformations"},
+      "breakpoints":["The protected condition may be normative in one domain and formal in another.","Similarity of preservation language does not imply one common mathematical invariant."],
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md + src/content/product-landing-pages/schemathematics.json"
+    },
+    {
+      "id":"witness","label":"Witness / evidence","posture":"candidate recurring structure","question":"What observation, record, source, test, or institutional act is accepted as evidence that a state or transition occurred?",
+      "domainSignals":{"software":"logs, events, tests, persisted records, transaction outcomes","public-administration":"status records, approvals, payment evidence, notices","research-operations":"sources, critic reports, review decisions, provenance records","mathematics":"proof, construction, definition, or formal derivation witnesses the claimed structure under its own standards"},
+      "breakpoints":["A log entry is not automatically institutional legitimacy or independent review.","Schema validity cannot confer truth, authority, or release permission by itself."],
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md"
+    },
+    {
+      "id":"defect-repair","label":"Defect & repair","posture":"strong bounded research motif","question":"When the representation or transition fails, what records the defect, who owns correction, and what downstream state must be repaired?",
+      "domainSignals":{"software":"exceptions, rollback, recovery, incident repair, version replacement","public-administration":"contest, reversal, reconciliation, corrected records, successor obligations","research-operations":"critic findings, supersession, repair queues, reopened claims","mathematics":"omitted conditions or invalid transformations expose where the represented structure no longer closes"},
+      "breakpoints":["Database rollback does not undo elapsed institutional consequence, reliance, harm, or memory.","Object deletion does not model institutional termination because records, duties, liabilities, and successor obligations remain."],
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md + src/content/artifacts/executable-distinctions.md"
+    },
+    {
+      "id":"responsibility","label":"Responsibility routing","posture":"candidate recurring structure","question":"Where does a request, failure, judgment, or repair obligation land, and what makes that bearer responsible rather than merely adjacent?",
+      "domainSignals":{"software":"ownership, permissions, handlers, chains of responsibility","public-administration":"named offices, delegated authority, appeal paths, accountable decision roles","research-operations":"reviewers, human promotion decisions, stewards, repair ownership","mathematics":"normally a weaker social analogy; formal roles and dependencies should not be mistaken for institutional responsibility"},
+      "breakpoints":["Software ownership does not establish legitimacy, consent, or moral responsibility.","A singleton object does not model legitimate sovereignty; uniqueness is not authority."],
+      "sourceRef":"src/content/artifacts/testing-cross-domain-operational-homology.md + src/content/artifacts/executable-distinctions.md"
+    }
+  ]
+}
