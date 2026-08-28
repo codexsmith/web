@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import styles from "./LocalAtlasChart.module.css";
+import { GeneratedBoardCalibration } from "./GeneratedBoardCalibration";
 import {
   recursiveAtlasRoots,
   resolveRecursiveAtlasPath,
@@ -34,7 +35,16 @@ export function LocalAtlasChart({
   const mount = corpusMountForLayer(layer.id);
   const fiberById = useMemo(() => new Map(fibers.map((fiber) => [fiber.id, fiber])), [fibers]);
 
-  if (!root || !current) return null;
+  if (!root || !current) {
+    return (
+      <GeneratedBoardCalibration
+        layer={layer}
+        fibers={fibers}
+        activeFiberId={activeFiberId}
+        onSelectFiber={onSelectFiber}
+      />
+    );
+  }
 
   const nodeById = new Map(current.nodes.map((node) => [node.id, node]));
   const updatePath = (nextPath: RecursiveAtlasPath) => onPathChange?.(resolveRecursiveAtlasPath(layer.id, nextPath).path);
@@ -95,15 +105,7 @@ export function LocalAtlasChart({
             const from = nodeById.get(edge.from);
             const to = nodeById.get(edge.to);
             if (!from || !to) return null;
-            return (
-              <line
-                key={`${edge.from}-${edge.to}`}
-                x1={from.x * 10}
-                y1={from.y * 5.6}
-                x2={to.x * 10}
-                y2={to.y * 5.6}
-              />
-            );
+            return <line key={`${edge.from}-${edge.to}`} x1={from.x * 10} y1={from.y * 5.6} x2={to.x * 10} y2={to.y * 5.6} />;
           })}
         </svg>
 
@@ -111,7 +113,6 @@ export function LocalAtlasChart({
           const fiber = node.fiberId ? fiberById.get(node.fiberId) : undefined;
           const active = Boolean(node.fiberId && node.fiberId === activeFiberId);
           const drillable = Boolean(node.child);
-
           return (
             <button
               key={node.id}
@@ -127,17 +128,7 @@ export function LocalAtlasChart({
               <strong>{node.label}</strong>
               <small>{node.note}</small>
               <span className={styles.portRow}>
-                {fiber ? (
-                  <>
-                    <i className={styles.port} />
-                    <span>{fiber.connectorKind.toUpperCase()} / BACKPLANE</span>
-                  </>
-                ) : (
-                  <>
-                    <i className={`${styles.port} ${styles.portLocal}`} />
-                    <span>LOCAL / INTERNAL</span>
-                  </>
-                )}
+                {fiber ? <><i className={styles.port} /><span>{fiber.connectorKind.toUpperCase()} / BACKPLANE</span></> : <><i className={`${styles.port} ${styles.portLocal}`} /><span>LOCAL / INTERNAL</span></>}
               </span>
               {drillable ? <span className={styles.drillCue}>OPEN SUBCHART →</span> : null}
             </button>
@@ -153,11 +144,7 @@ export function LocalAtlasChart({
 
       <footer className={styles.chartFooter}>
         <span>PATH: {layer.hardware.rackCode} / {stack.map((frame) => frame.viaLabel ?? frame.chart.label).join(" / ")}</span>
-        {resolved.path.length > 0 ? (
-          <button type="button" onClick={() => updatePath(resolved.path.slice(0, -1))}>← UP ONE LEVEL</button>
-        ) : (
-          <span>ROOT LOCAL CHART</span>
-        )}
+        {resolved.path.length > 0 ? <button type="button" onClick={() => updatePath(resolved.path.slice(0, -1))}>← UP ONE LEVEL</button> : <span>ROOT LOCAL CHART</span>}
       </footer>
     </section>
   );
