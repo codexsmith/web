@@ -1,0 +1,293 @@
+/* Screen Wall preview activity
+ *
+ * Live projection is a restrained enhancement over a useful static first frame.
+ * These behaviors are intentionally CSS-only: no timers, canvas loops, audio,
+ * or expensive simulation runtime is required for the catalog to feel alive.
+ *
+ * Activity rules:
+ * - motion describes the machine's native behavior;
+ * - amplitudes stay small and periods stay slow;
+ * - dimmed/background modules stop doing work;
+ * - prefers-reduced-motion returns every preview to its static first frame.
+ */
+
+.preview {
+  --activity-period: 8s;
+}
+
+/* --------------------------------------------------------------------------
+ * ATLAS ENGINE — orbital relation drift.
+ * ----------------------------------------------------------------------- */
+.preview-orbit span {
+  transform-origin: 50% 50%;
+  animation: wall-orbit-drift var(--activity-period) linear infinite;
+}
+
+.preview-orbit span:nth-child(2) {
+  animation-duration: 11s;
+  animation-direction: reverse;
+}
+
+.preview-orbit span:nth-child(3) {
+  animation-duration: 15s;
+}
+
+.preview-orbit span::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  transform: translateY(-50%);
+  border: 1px solid var(--tone);
+  border-radius: 50%;
+  background: #070a0b;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--tone) 45%, transparent);
+}
+
+.preview-orbit i {
+  animation: wall-core-breathe 4.8s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+ * BOUNDARY CHESS — one quiet consequence line resolving across the board.
+ * ----------------------------------------------------------------------- */
+.preview-grid i[data-on="true"] {
+  transform-origin: 50% 50%;
+  animation: wall-grid-resolve 6.4s steps(1, end) infinite;
+}
+
+.preview-grid i:nth-child(9) { animation-delay: 0s; }
+.preview-grid i:nth-child(14) { animation-delay: 1.1s; }
+.preview-grid i:nth-child(21) { animation-delay: 2.2s; }
+.preview-grid i:nth-child(28) { animation-delay: 3.3s; }
+
+/* --------------------------------------------------------------------------
+ * DISTINCTION GEOMETRY — slow field breathing and local particle drift.
+ * ----------------------------------------------------------------------- */
+.preview-particles i {
+  animation: wall-particle-drift 7s ease-in-out infinite alternate;
+}
+
+.preview-particles i:nth-child(3n) { animation-duration: 8.7s; animation-delay: -2.4s; }
+.preview-particles i:nth-child(3n + 1) { animation-duration: 10.2s; animation-delay: -5.1s; }
+.preview-particles i:nth-child(4n) { animation-direction: alternate-reverse; }
+
+.preview-particles::before {
+  animation: wall-field-breathe 7.5s ease-in-out infinite;
+}
+
+.preview-particles::after {
+  animation: wall-field-breathe 7.5s ease-in-out -3.75s infinite reverse;
+}
+
+/* --------------------------------------------------------------------------
+ * PATCH BAY — packet/relationship continuity across the declared topology.
+ * ----------------------------------------------------------------------- */
+.preview-network svg path {
+  stroke-dasharray: 10 8;
+  animation: wall-network-flow 9s linear infinite;
+}
+
+.preview-network svg circle {
+  animation: wall-network-node 6s ease-in-out infinite;
+}
+
+.preview-network svg circle:nth-of-type(2) { animation-delay: -1s; }
+.preview-network svg circle:nth-of-type(3) { animation-delay: -2s; }
+.preview-network svg circle:nth-of-type(4) { animation-delay: -3s; }
+.preview-network svg circle:nth-of-type(5) { animation-delay: -4s; }
+.preview-network svg circle:nth-of-type(6) { animation-delay: -5s; }
+
+/* --------------------------------------------------------------------------
+ * WAVE BENCH — restrained instrument sweep, not a decorative oscillation.
+ * ----------------------------------------------------------------------- */
+.preview-wave {
+  overflow: hidden;
+}
+
+.preview-wave svg path {
+  stroke-dasharray: 18 9;
+  animation: wall-wave-sample 10s linear infinite;
+}
+
+.preview-wave svg path:nth-child(2) {
+  animation-duration: 13s;
+  animation-direction: reverse;
+  opacity: .62;
+}
+
+.preview-wave::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  bottom: 8%;
+  left: 8%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--tone) 55%, transparent), transparent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--tone) 20%, transparent);
+  opacity: .5;
+  animation: wall-scope-sweep 7.2s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+ * LAB RADIO — meter cadence. Bars remain meaningful if animation disappears.
+ * ----------------------------------------------------------------------- */
+.preview-radio i {
+  transform-origin: 50% 100%;
+  animation: wall-radio-meter 3.8s steps(4, end) infinite;
+}
+
+.preview-radio i:nth-child(3n) { animation-delay: -.6s; }
+.preview-radio i:nth-child(4n) { animation-delay: -1.25s; }
+.preview-radio i:nth-child(5n) { animation-delay: -2.1s; }
+.preview-radio > svg {
+  animation: wall-radio-carrier 5.5s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+ * CORPUS FORGE — serialized processing stages rather than generic blinking.
+ * ----------------------------------------------------------------------- */
+.preview-machine span,
+.preview-machine b,
+.preview-machine em {
+  animation: wall-forge-stage 8.4s ease-in-out infinite;
+}
+
+.preview-machine span:nth-child(1) { animation-delay: 0s; }
+.preview-machine span:nth-child(2) { animation-delay: -1.4s; }
+.preview-machine span:nth-child(3) { animation-delay: -2.8s; }
+.preview-machine b:nth-of-type(1) { animation-delay: -4.2s; }
+.preview-machine b:nth-of-type(2) { animation-delay: -5.6s; }
+.preview-machine em { animation-delay: -7s; }
+
+/* --------------------------------------------------------------------------
+ * ODDMENTS — irregular but bounded experiment output.
+ * ----------------------------------------------------------------------- */
+.preview-bars i {
+  transform-origin: 50% 100%;
+  animation: wall-oddment-step 6.6s steps(3, end) infinite;
+}
+
+.preview-bars i:nth-child(2n) { animation-delay: -1.2s; }
+.preview-bars i:nth-child(3n) { animation-delay: -2.8s; }
+.preview-bars i:nth-child(5n) { animation-delay: -4.1s; }
+
+/* --------------------------------------------------------------------------
+ * Work budget / focus behavior.
+ * When the wall is in inspection depth, unrelated screens are already dimmed;
+ * pause their activity as well so the visual and computational posture agree.
+ * ----------------------------------------------------------------------- */
+.screen-module.is-dimmed .preview,
+.screen-module.is-dimmed .preview *,
+.screen-module.is-dimmed .preview::before,
+.screen-module.is-dimmed .preview::after {
+  animation-play-state: paused !important;
+}
+
+/* Slightly strengthen the selected screen without increasing speed. */
+.screen-module.is-selected .preview,
+.screen-wall-inspector .preview {
+  --activity-period: 7s;
+}
+
+@keyframes wall-orbit-drift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wall-core-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(.88); opacity: .62; }
+  50% { transform: translate(-50%, -50%) scale(1.08); opacity: .98; }
+}
+
+@keyframes wall-grid-resolve {
+  0%, 72%, 100% { filter: brightness(.9); transform: scale(1); }
+  18%, 34% { filter: brightness(1.55); transform: scale(.94); }
+}
+
+@keyframes wall-particle-drift {
+  0% { transform: translate(-2px, 1px) scale(.92); opacity: .58; }
+  50% { transform: translate(2px, -2px) scale(1.08); opacity: .95; }
+  100% { transform: translate(1px, 2px) scale(.98); opacity: .72; }
+}
+
+@keyframes wall-field-breathe {
+  0%, 100% { transform: scale(.96); opacity: .45; }
+  50% { transform: scale(1.035); opacity: .78; }
+}
+
+@keyframes wall-network-flow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -72; }
+}
+
+@keyframes wall-network-node {
+  0%, 100% { opacity: .5; stroke-width: 1.2; }
+  18% { opacity: 1; stroke-width: 2; }
+  34% { opacity: .62; stroke-width: 1.4; }
+}
+
+@keyframes wall-wave-sample {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -108; }
+}
+
+@keyframes wall-scope-sweep {
+  0%, 8% { transform: translateX(0); opacity: 0; }
+  15% { opacity: .58; }
+  78% { opacity: .42; }
+  88%, 100% { transform: translateX(74vw); opacity: 0; }
+}
+
+@keyframes wall-radio-meter {
+  0%, 100% { transform: scaleY(.62); opacity: .48; }
+  25% { transform: scaleY(.92); opacity: .74; }
+  50% { transform: scaleY(.72); opacity: .58; }
+  75% { transform: scaleY(1); opacity: .82; }
+}
+
+@keyframes wall-radio-carrier {
+  0%, 100% { opacity: .56; transform: scale(.96); }
+  50% { opacity: .92; transform: scale(1.035); }
+}
+
+@keyframes wall-forge-stage {
+  0%, 100% {
+    border-color: color-mix(in srgb, var(--tone) 28%, #334046);
+    box-shadow: inset 0 0 6px color-mix(in srgb, var(--tone) 7%, transparent);
+    opacity: .58;
+  }
+  18%, 34% {
+    border-color: color-mix(in srgb, var(--tone) 82%, #334046);
+    box-shadow: inset 0 0 12px color-mix(in srgb, var(--tone) 28%, transparent), 0 0 5px color-mix(in srgb, var(--tone) 16%, transparent);
+    opacity: .94;
+  }
+}
+
+@keyframes wall-oddment-step {
+  0%, 100% { transform: scaleY(.62); opacity: .48; }
+  33% { transform: scaleY(.9); opacity: .78; }
+  66% { transform: scaleY(.72); opacity: .62; }
+}
+
+@media (max-width: 760px) {
+  /* Mobile is a sequential catalog rather than a simultaneously observed wall;
+   * reduce background cadence to keep the page calm and cheap. */
+  .screen-module:not(.is-selected) .preview-radio i,
+  .screen-module:not(.is-selected) .preview-bars i,
+  .screen-module:not(.is-selected) .preview-particles i {
+    animation-duration: 12s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview,
+  .preview *,
+  .preview::before,
+  .preview::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
