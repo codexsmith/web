@@ -1,36 +1,41 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import styles from "./LocalAtlasChart.module.css";
-import { recursiveAtlasRoots, type RecursiveAtlasChart } from "./local-atlas-recursion";
+import {
+  recursiveAtlasRoots,
+  resolveRecursiveAtlasPath,
+  type RecursiveAtlasPath,
+} from "./local-atlas-recursion";
 import type { AtlasFiber, AtlasLayer } from "./atlas-space-model";
 
 type LocalAtlasChartProps = {
   layer: AtlasLayer;
   fibers: AtlasFiber[];
   activeFiberId: string;
+  path?: RecursiveAtlasPath;
+  onPathChange?: (path: RecursiveAtlasPath) => void;
   onSelectFiber: (fiberId: string) => void;
 };
 
-type ChartFrame = {
-  chart: RecursiveAtlasChart;
-  viaLabel?: string;
-};
-
-export function LocalAtlasChart({ layer, fibers, activeFiberId, onSelectFiber }: LocalAtlasChartProps) {
+export function LocalAtlasChart({
+  layer,
+  fibers,
+  activeFiberId,
+  path = [],
+  onPathChange,
+  onSelectFiber,
+}: LocalAtlasChartProps) {
   const root = recursiveAtlasRoots[layer.id];
-  const [stack, setStack] = useState<ChartFrame[]>(() => root ? [{ chart: root }] : []);
-
-  useEffect(() => {
-    setStack(root ? [{ chart: root }] : []);
-  }, [layer.id, root]);
-
+  const resolved = resolveRecursiveAtlasPath(layer.id, path);
+  const stack = resolved.frames;
   const current = stack.at(-1)?.chart;
   const fiberById = useMemo(() => new Map(fibers.map((fiber) => [fiber.id, fiber])), [fibers]);
 
-  if (!current) return null;
+  if (!root || !current) return null;
 
   const nodeById = new Map(current.nodes.map((node) => [node.id, node]));
+  const updatePath = (nextPath: RecursiveAtlasPath) => onPathChange?.(resolveRecursiveAtlasPath(layer.id, nextPath).path);
 
   return (
     <section className={styles.chart} aria-label={`${layer.label} recursive local atlas chart`}>
@@ -47,11 +52,11 @@ export function LocalAtlasChart({ layer, fibers, activeFiberId, onSelectFiber }:
       </header>
 
       <nav className={styles.breadcrumbs} aria-label="Atlas chart path">
-        <button type="button" onClick={() => setStack([{ chart: root }])}>{layer.label}</button>
+        <button type="button" onClick={() => updatePath([])}>{layer.label}</button>
         {stack.map((frame, index) => (
           <span key={`${frame.chart.id}-${index}`}>
             <i aria-hidden="true">/</i>
-            <button type="button" onClick={() => setStack((existing) => existing.slice(0, index + 1))}>
+            <button type="button" onClick={() => updatePath(resolved.path.slice(0, index))}>
               {frame.viaLabel ?? frame.chart.label}
             </button>
           </span>
@@ -89,7 +94,7 @@ export function LocalAtlasChart({ layer, fibers, activeFiberId, onSelectFiber }:
               style={{ left: `${node.x}%`, top: `${node.y}%` }}
               onClick={() => {
                 if (node.fiberId) onSelectFiber(node.fiberId);
-                if (node.child) setStack((existing) => [...existing, { chart: node.child!, viaLabel: node.label }]);
+                if (node.child) updatePath([...resolved.path, node.id]);
               }}
             >
               <span className={styles.regionCode}>{node.code}</span>
@@ -122,8 +127,8 @@ export function LocalAtlasChart({ layer, fibers, activeFiberId, onSelectFiber }:
 
       <footer className={styles.chartFooter}>
         <span>PATH: {layer.hardware.rackCode} / {stack.map((frame) => frame.viaLabel ?? frame.chart.label).join(" / ")}</span>
-        {stack.length > 1 ? (
-          <button type="button" onClick={() => setStack((existing) => existing.slice(0, -1))}>← UP ONE LEVEL</button>
+        {resolved.path.length > 0 ? (
+          <button type="button" onClick={() => updatePath(resolved.path.slice(0, -1))}>← UP ONE LEVEL</button>
         ) : (
           <span>ROOT LOCAL CHART</span>
         )}
