@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "mixed-readiness distribution projection",
+  "purpose": "Represent how a bounded Lab capability becomes reusable outside its originating paper, product, or application without losing identity, provenance, claim ceiling, repair path, or enough instruction to be used lawfully.",
+  "posture": "The Service Bus is a distribution interface, not a claim that every possible carrier already exists. Active public standards, methods, pilot packages, guided experiences, and sandboxes are shown separately from unoccupied API, curriculum, integration, and SDK ports.",
+  "transportContract": [
+    {"id":"identity","label":"Identity","question":"What governed object is being transported?","failure":"Packaging quietly creates a second source of truth."},
+    {"id":"scope","label":"Scope","question":"For which task, audience, and domain is this package valid?","failure":"A bounded method is presented as universal capability."},
+    {"id":"provenance","label":"Provenance","question":"Can the recipient trace the package back to its source, version, evidence, and decisions?","failure":"The reusable surface outlives the evidence that justified it."},
+    {"id":"claim-ceiling","label":"Claim Ceiling","question":"What may the recipient infer from the package now?","failure":"Public availability or polish is mistaken for stronger validation."},
+    {"id":"instructions","label":"Executable Instructions","question":"Can another person tell how to apply, inspect, or test the package?","failure":"The output is inspirational prose that cannot be operationalized."},
+    {"id":"witness","label":"Reuse Witness","question":"What would show that meaning survived use outside the originating context?","failure":"Adoption is counted without checking semantic or practical fidelity."},
+    {"id":"repair","label":"Repair Path","question":"How are defects, corrections, supersession, and dependency changes propagated?","failure":"A distributed copy becomes detached from correction."},
+    {"id":"accessibility","label":"Legible Equivalent","question":"Does essential meaning survive the interface used to deliver it?","failure":"A visual or interactive carrier becomes the only lawful way to recover state."}
+  ],
+  "carriers": [
+    {"id":"standard","label":"Standard","status":"active","role":"Publish a normative or working semantic contract plus conformance questions and reference behavior."},
+    {"id":"method","label":"Method / Guide","status":"active","role":"Package a repeatable procedure, questions, artifacts, and validation posture for practitioners."},
+    {"id":"audit-protocol","label":"Audit / Pilot Packet","status":"active-intake","role":"Carry a bounded professional procedure into one consequential external process with explicit deliverables and authority limits."},
+    {"id":"guided-experience","label":"Guided Experience","status":"implemented-review-pending","role":"Teach or orient through resumable task paths that preserve access to deeper governed objects."},
+    {"id":"sandbox","label":"Sandbox / Reference","status":"active-experimental","role":"Let a recipient manipulate or stress a representation without granting experimental behavior canonical authority."},
+    {"id":"public-record","label":"Public Record / Evidence","status":"active","role":"Expose work, evidence standing, lineage, and trust information so another party can inspect what supports a claim."}
+  ],
+  "packages": [
+    {
+      "id":"boundary-first-ux",
+      "label":"Boundary First UX",
+      "source":"Product + Method",
+      "standing":"Working Public Standard · Launch Candidate",
+      "carrierIds":["standard","sandbox","guided-experience"],
+      "input":"A semantic interaction paradigm and representation method developed inside Boundary First research and product work.",
+      "packaging":["public standard language","interaction grammar","conformance questions","reference flagship","sandbox routes","accessibility requirements"],
+      "interfaces":["public product page","guided introduction","representation and interaction sandboxes"],
+      "audience":"Designers, engineers, institutions, and researchers representing complex systems.",
+      "semanticPayload":["views do not own semantic truth","identity and provenance survive transformation","renderer independence","closure is earned","accessible representations are lawful projections"],
+      "reuseWitness":["another renderer preserves the same governed meaning","consequences and context remain traceable after navigation","keyboard/reduced-motion/non-spatial routes preserve essential state","candidate conformance questions expose defects rather than merely style differences"],
+      "feedbackPath":"Sandbox evidence, defects, or reusable patterns return through review before any stronger conformance or capability claim.",
+      "claimBoundary":"Candidate BFUX conformance levels remain proposed, not canonical. BFUX is not a mandatory skin, component library, or proof that existing design systems are obsolete.",
+      "sourceRef":"src/content/product-landing-pages/boundary-first-ux.json"
+    },
+    {
+      "id":"software-before-code",
+      "label":"Software Before Code",
+      "source":"Method",
+      "standing":"Working Public Method",
+      "carrierIds":["method","public-record"],
+      "input":"A software-engineering discipline for determining the represented object, protected distinctions, lawful transitions, witnesses, and closure conditions before unsafe implementation commitments.",
+      "packaging":["nine diagnostic questions","Distinction-to-Closure procedure","delivery skeleton","diagnostic smells and repairs","workbench artifact specification","validation ladder"],
+      "interfaces":["public method page","software problem entrance","methods route","work/evidence routes"],
+      "audience":"Software practitioners, technical leads, architects, AI-assisted development teams, and organizations with representation-heavy systems.",
+      "semanticPayload":["determine the object before the mechanism","representation is controlled forgetting","architecture protects consequential distinctions","done is a claim; closure needs a witness","defects can reveal forgotten distinctions"],
+      "reuseWitness":["a new team can bound a domain and produce the declared workbench artifacts","implementation choices follow rather than pre-empt the domain model","failure paths remain observable","a domain-recognized witness can distinguish technical completion from closure"],
+      "feedbackPath":"Comparative design studies, executable reference implementations, legacy archaeology, and external replication can narrow or strengthen the method.",
+      "claimBoundary":"Practice levels and future tools are proposed, not canonical. The method does not claim perfect requirements, proof of correctness, framework rejection, or big-design-up-front authority.",
+      "sourceRef":"src/content/product-landing-pages/software-before-code.json"
+    },
+    {
+      "id":"agency-representation-audit",
+      "label":"Agency + Representation Audit",
+      "source":"Application + Professional Service",
+      "standing":"Pilot Intake",
+      "carrierIds":["audit-protocol","public-record"],
+      "input":"A bounded authority-to-repair systems analysis for one consequential software, AI, policy, or institutional process.",
+      "packaging":["agency map","representation map","consequence chain","contest path","repair ownership map","defect register","evidence rule"],
+      "interfaces":["public service page","bounded inquiry intake","scoped engagement artifacts"],
+      "audience":"Institutions willing to inspect one consequential process rather than request an institution-wide verdict.",
+      "semanticPayload":["authority and consequence may be distributed differently","representation is not the affected person or condition","contestability must exist in the executable process","source correction is incomplete if downstream consequence remains unrepaired"],
+      "reuseWitness":["another reviewer can reconstruct the scoped authority and representation chain","material findings trace to artifacts, rules, behavior, accounts, or labeled inference","unresolved ownership gaps remain visible","the audit does not silently expand beyond the declared process"],
+      "feedbackPath":"Observed process defects and inaccessible boundaries return as method constraints, domain knowledge, and future audit design requirements.",
+      "claimBoundary":"This package does not supply legal advice, regulatory/compliance certification, fairness or safety certification, cybersecurity certification, or delegated institutional authority.",
+      "sourceRef":"src/content/product-landing-pages/agency-representation-audit.json"
+    },
+    {
+      "id":"guided-introduction",
+      "label":"Guided Introduction + Atlas Paths",
+      "source":"Institutional Interface",
+      "standing":"Implemented · Review Pending",
+      "carrierIds":["guided-experience","public-record"],
+      "input":"The same canonical corpus projected into sequence, radial, tree, node, pathway, atlas, work, and context-halo views for different visitor tasks.",
+      "packaging":["resumable first passage","stable conceptual neighborhoods","typed lineage trees","deep node records","reader-intent pathways","searchable atlas","typed work projection"],
+      "interfaces":["/learn","/work/index","/research","/evidence","/map and deeper corpus routes"],
+      "audience":"New visitors, practitioners, researchers, collaborators, and readers entering the corpus at different depths.",
+      "semanticPayload":["one governed corpus, multiple projections","orientation before formal depth","branch choice and context can survive navigation","deep records remain reachable from simplified entrances"],
+      "reuseWitness":["a visitor can move from laboratory to practice, method, evidence, research, and formal core without losing orientation","purpose-specific entrances bypass the software path when appropriate","the retained inner corpus remains reachable rather than replaced"],
+      "feedbackPath":"Cold-reader comprehension, practical usefulness, evidence accuracy, accessibility behavior, and progressive-disclosure quality remain human-review obligations.",
+      "claimBoundary":"Structural and runtime route checks do not prove usability, claim correctness, cold-reader comprehension, or rendered accessibility sufficiency.",
+      "sourceRef":"src/content/introductory_experience_v0_5.json + architecture_acceptance_v0_1.json"
+    }
+  ],
+  "openPorts": [
+    {"id":"api","label":"API / SDK","status":"unoccupied","requiredBeforeActivation":["stable machine-readable contract","versioning and compatibility rule","authentication/data boundary if applicable","examples and failure semantics","maintenance owner"],"note":"The Lab Machine names APIs as a possible distribution form; this projection does not infer that a supported public API currently exists."},
+    {"id":"curriculum","label":"Curriculum","status":"unoccupied-in-this-projection","requiredBeforeActivation":["declared learner and prerequisite boundary","learning objectives","sequence and exercises","assessment/witness","versioned source materials","review owner"],"note":"Education work may exist elsewhere in the corpus, but no canonical Service Bus curriculum package is promoted here without a source-backed distribution contract."},
+    {"id":"integration","label":"Integration Pattern / Adapter","status":"unoccupied","requiredBeforeActivation":["external system contract","mapping of protected semantics","error and fallback behavior","compatibility witness","repair/upgrade path"],"note":"A conceptual mapping or partner target is not treated as a maintained integration."},
+    {"id":"reference-implementation","label":"Standalone Reference Implementation","status":"partial","requiredBeforeActivation":["bounded specification","reproducible build/run path","test witness","known limitations","version and maintenance policy"],"note":"Some demonstrations and sandboxes serve reference roles; this port remains partial until a package is explicitly promoted as a maintained standalone reference implementation."}
+  ],
+  "distributionRule":"A capability is not ready to travel merely because it can be copied. Distribution succeeds when another party can recover what the object is, what it means, what it may claim, how to use it, how to test it, and how to receive correction without depending on hidden Lab context."
+}
