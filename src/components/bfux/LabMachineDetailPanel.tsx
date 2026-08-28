@@ -5,22 +5,42 @@ import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineCardContent } from "./lab-machine-content";
 import type { LabMachineNode } from "./lab-machine-model";
 import {
+  LabMachineProductsProjection,
+  isProductProjectionMode,
+  type ProductProjectionMode,
+} from "./LabMachineProductsProjection";
+import {
   LabMachineTimelineProjection,
   isTimelineProjectionMode,
   type TimelineProjectionMode,
 } from "./LabMachineTimelineProjection";
 import "./lab-machine-detail.css";
 
+type ActiveProjection =
+  | { subsystem: "timeline"; mode: TimelineProjectionMode }
+  | { subsystem: "products"; mode: ProductProjectionMode }
+  | null;
+
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
   const content = getLabMachineCardContent(node.id);
-  const [activeProjection, setActiveProjection] = useState<TimelineProjectionMode | null>(null);
+  const [activeProjection, setActiveProjection] = useState<ActiveProjection>(null);
 
   if (!content) return null;
 
-  if (node.id === "timeline" && activeProjection) {
+  if (activeProjection?.subsystem === "timeline") {
     return (
       <LabMachineTimelineProjection
-        initialMode={activeProjection}
+        initialMode={activeProjection.mode}
+        onBack={() => setActiveProjection(null)}
+        onClose={onClose}
+      />
+    );
+  }
+
+  if (activeProjection?.subsystem === "products") {
+    return (
+      <LabMachineProductsProjection
+        initialMode={activeProjection.mode}
         onBack={() => setActiveProjection(null)}
         onClose={onClose}
       />
@@ -85,6 +105,8 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
         <header><small>AVAILABLE PROJECTIONS</small><h3>Inspect this subsystem another way</h3></header>
         <div>{content.views.map((view) => {
           const timelineProjection = node.id === "timeline" && isTimelineProjectionMode(view.id);
+          const productProjection = node.id === "products" && isProductProjectionMode(view.id);
+          const available = timelineProjection || productProjection;
           return (
             <article key={view.id} data-view-id={view.id}>
               <span>PROJECTION</span>
@@ -92,13 +114,14 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
               <p>{view.purpose}</p>
               <button
                 type="button"
-                disabled={!timelineProjection}
-                title={timelineProjection ? `Open ${view.label}` : "Projection component pending"}
+                disabled={!available}
+                title={available ? `Open ${view.label}` : "Projection component pending"}
                 onClick={() => {
-                  if (timelineProjection) setActiveProjection(view.id);
+                  if (timelineProjection) setActiveProjection({ subsystem: "timeline", mode: view.id });
+                  if (productProjection) setActiveProjection({ subsystem: "products", mode: view.id });
                 }}
               >
-                {timelineProjection ? "OPEN" : "PLANNED"}
+                {available ? "OPEN" : "PLANNED"}
               </button>
             </article>
           );
