@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -50,7 +50,6 @@ type WallScreen = {
   kind: ScreenKind;
   status: string;
   mode: WallMode[];
-  area: string;
   tone: string;
   icon: typeof Orbit;
   preview: "orbit" | "wave" | "grid" | "network" | "bars" | "machine" | "radio" | "particles";
@@ -67,7 +66,6 @@ const screens: WallScreen[] = [
     kind: "systems",
     status: "live model",
     mode: ["curated", "workbench"],
-    area: "atlas",
     tone: "cyan",
     icon: Orbit,
     preview: "orbit",
@@ -82,7 +80,6 @@ const screens: WallScreen[] = [
     kind: "game",
     status: "playable",
     mode: ["curated", "arcade"],
-    area: "chess",
     tone: "amber",
     icon: Gamepad2,
     preview: "grid",
@@ -97,7 +94,6 @@ const screens: WallScreen[] = [
     kind: "visual",
     status: "running",
     mode: ["curated", "arcade", "workbench"],
-    area: "geometry",
     tone: "violet",
     icon: Sparkles,
     preview: "particles",
@@ -112,7 +108,6 @@ const screens: WallScreen[] = [
     kind: "tool",
     status: "prototype",
     mode: ["curated", "workbench"],
-    area: "patchbay",
     tone: "lime",
     icon: GitBranch,
     preview: "network",
@@ -127,7 +122,6 @@ const screens: WallScreen[] = [
     kind: "visual",
     status: "interactive",
     mode: ["arcade", "workbench"],
-    area: "waves",
     tone: "blue",
     icon: Waves,
     preview: "wave",
@@ -142,7 +136,6 @@ const screens: WallScreen[] = [
     kind: "audio",
     status: "quiet",
     mode: ["curated", "arcade"],
-    area: "radio",
     tone: "red",
     icon: Radio,
     preview: "radio",
@@ -157,7 +150,6 @@ const screens: WallScreen[] = [
     kind: "tool",
     status: "bench ready",
     mode: ["workbench"],
-    area: "forge",
     tone: "green",
     icon: Wrench,
     preview: "machine",
@@ -172,7 +164,6 @@ const screens: WallScreen[] = [
     kind: "weird",
     status: "unstable shelf",
     mode: ["arcade"],
-    area: "oddments",
     tone: "pink",
     icon: Boxes,
     preview: "bars",
@@ -505,7 +496,6 @@ function ScreenModule({
       data-tone={screen.tone}
       data-screen={screen.id}
       data-landmark={landmark ? "true" : undefined}
-      style={{ gridArea: screen.area }}
     >
       <span className="screen-module__mounts" aria-hidden="true"><i /><i /><i /><i /></span>
       {screen.input && (
@@ -570,7 +560,7 @@ function Preview({ kind }: { kind: WallScreen["preview"] }) {
   }
 
   if (kind === "particles") {
-    return <div className="preview preview-particles">{Array.from({ length: 16 }, (_, index) => <i key={index} style={{ "--x": `${12 + ((index * 23) % 76)}%`, "--y": `${10 + ((index * 31) % 78)}%`, "--d": `${5 + (index % 4) * 2}px` } as React.CSSProperties} />)}</div>;
+    return <div className="preview preview-particles">{Array.from({ length: 16 }, (_, index) => <i key={index} style={{ "--x": `${12 + ((index * 23) % 76)}%`, "--y": `${10 + ((index * 31) % 78)}%`, "--d": `${5 + (index % 4) * 2}px` } as CSSProperties} />)}</div>;
   }
 
   return <div className="preview preview-orbit"><span /><span /><span /><i /></div>;
