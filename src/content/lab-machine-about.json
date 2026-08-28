@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "working institutional identity projection",
+  "purpose": "Describe what Boundary First Labs is, how its present institutional identity is bounded, where that identity came from, and which declared principles should be observable in the way the Lab actually operates.",
+  "posture": "About is an identity and provenance projection, not an authority claim. Founder history, institutional self-description, product success, publication status, and scientific validation remain different kinds of evidence.",
+  "identity": {
+    "name": "Boundary First Labs",
+    "kind": "applied research and product laboratory",
+    "method": "Boundary First",
+    "statedAim": "Make complex systems more legible, testable, accountable, and repairable.",
+    "materialization": "Research moves into methods, instruments, software, pilots, publications, and public artifacts that can encounter real constraints.",
+    "claimPosture": "Theory, hypothesis, measured result, institutional position, and product promise remain distinct; success in one domain does not silently validate the whole framework.",
+    "sourceStatus": "Working projection reconciled from the Lab Machine content contract, recovered institutional landing material, architecture acceptance rules, and typed founder/intellectual provenance."
+  },
+  "distinctions": [
+    {"id":"institution-method","left":"Boundary First Labs","right":"Boundary First","relation":"institution ≠ operational method","why":"The institution can steward many programs and projections while the portable method remains a distinct object that can be tested, revised, taught, or applied elsewhere."},
+    {"id":"research-validation","left":"Research activity","right":"Scientific validation","relation":"activity ≠ validation","why":"A substantial research program establishes provenance and work performed, not correctness of its strongest scientific claims."},
+    {"id":"product-proof","left":"Product / prototype","right":"Proof of theory","relation":"embodiment ≠ proof","why":"A working product can test bounded mechanisms and expose defects without validating the entire theoretical architecture."},
+    {"id":"publication-authority","left":"Publication","right":"Authority","relation":"visibility ≠ authority","why":"A public artifact can be citable and inspectable while retaining a limited claim ceiling, unresolved review, or later supersession."},
+    {"id":"founder-institution","left":"Founder provenance","right":"Institutional history","relation":"person ≠ institution","why":"Founder chronology is one causal strand. Institutional history also includes methods, systems, artifacts, collaborators, governance, infrastructure, and public consequences."},
+    {"id":"history-current","left":"Historical program","right":"Current canon","relation":"provenance ≠ current authority","why":"Earlier programs can remain important evidence of lineage while their terminology, models, and strongest claims are corrected, retyped, or superseded."}
+  ],
+  "operatingModel": {
+    "materialization": [
+      {"id":"research","label":"Research","role":"develop questions, models, evidence, and formal structure"},
+      {"id":"methods","label":"Methods","role":"turn recurring procedures into inspectable operating grammar"},
+      {"id":"instruments","label":"Instruments","role":"make representations observable, comparable, executable, or measurable"},
+      {"id":"software","label":"Software","role":"force representations to survive implementation and user consequence"},
+      {"id":"pilots","label":"Pilots","role":"test transfer under bounded external constraints"},
+      {"id":"public-artifacts","label":"Public Artifacts","role":"cross the institutional boundary with provenance and claim status attached"}
+    ],
+    "promotion": ["Artifact","Project","Portfolio","Capability","Program","Institution"],
+    "disclosure": ["Laboratory","Practice","Method","Evidence","Research","Formal core"]
+  },
+  "provenance": {
+    "evidenceClasses": [
+      {"id":"P","label":"Primary / contemporaneous artifact","meaning":"Dated correspondence, notebooks, media, commits, source files, or other direct artifacts."},
+      {"id":"R","label":"Repository-backed synthesis","meaning":"Current or dated repository material that reconstructs earlier periods or records current architectural state."},
+      {"id":"C","label":"Conversation / founder checkpoint","meaning":"Retained testimony not yet tied to recovered primary evidence."},
+      {"id":"I","label":"Interpretive bridge","meaning":"Orientation connecting supported milestones without manufacturing exact causality or synonymy."},
+      {"id":"OPEN","label":"Unresolved","meaning":"A date, transition, or source remains a research task rather than being filled by inference."}
+    ],
+    "nodes": [
+      {"id":"technical-formation","label":"Technical formation","period":"early / dates to reconcile","evidence":["R"],"status":"open chronology","summary":"Computer science, AI, systems, architecture, and early research supplied machine-level habits of decomposition, execution tracing, anomaly handling, and distinction between interface and state.","sourceRef":"Founder provenance EVT-002"},
+      {"id":"software-lab","label":"Executable systems practice","period":"professional practice / exact interval open","evidence":["R","C"],"status":"open chronology","summary":"Software engineering became an independent laboratory where representational choices produced mechanically observable defects, workflows, exceptions, and repair costs.","sourceRef":"Founder provenance EVT-003"},
+      {"id":"physics-program","label":"Long-run mathematics / physics program","period":"approximately two decades","evidence":["R"],"status":"retrospectively documented","summary":"Repeated GR/QFT comparison pushed the work toward more primitive questions about boundaries, admissibility, closure, invariants, locality, and representation.","sourceRef":"Founder provenance EVT-004"},
+      {"id":"research-apparatus","label":"Pre-AI research apparatus","period":"2019–2021 and broader pre-generative-AI corpus","evidence":["R"],"status":"internal provenance","summary":"A physical research room, binder systems, handwritten notes, calculations, source papers, code, media, and criticism attempts established a substantial research corpus before generative AI adoption.","sourceRef":"Founder provenance EVT-006 + EVT-008"},
+      {"id":"representation-program","label":"Representation program","period":"2026 spring–summer","evidence":["P","R","C","I"],"status":"mixed provenance","summary":"Volumology, representation-gauge work, admissibility, Schemathematics, Representational Mechanics, and second-order method were differentiated and reorganized rather than treated as a single clean rename chain.","sourceRef":"Founder provenance EVT-009 through EVT-018"},
+      {"id":"controlled-architecture","label":"Controlled Boundary Theory architecture","period":"by mid-August 2026","evidence":["P","R"],"status":"source-controlled architecture","summary":"The repository records the current architecture around Boundary Theory, Distinction Space, typed facets, Contexture, Representational Mechanics, Formal Grammars, Boundary First, and Corpus Forge.","sourceRef":"Founder provenance EVT-020"},
+      {"id":"institutional-reconstruction","label":"Institutional reconstruction","period":"August 2026","evidence":["P","R"],"status":"active derived synthesis","summary":"Founder, research, terminology, theory architecture, institutional history, corrections, and public projections are being joined into a governed institutional system while unresolved provenance gaps remain visible.","sourceRef":"Founder provenance EVT-021 through EVT-023"}
+    ],
+    "edges": [
+      {"from":"technical-formation","to":"software-lab","relation":"supplies executable systems habits"},
+      {"from":"technical-formation","to":"physics-program","relation":"supports formal technical inquiry"},
+      {"from":"software-lab","to":"representation-program","relation":"supplies consequence-bearing test environment"},
+      {"from":"physics-program","to":"research-apparatus","relation":"drives persistent research instrumentation"},
+      {"from":"research-apparatus","to":"representation-program","relation":"preserves material for later comparison and consolidation"},
+      {"from":"representation-program","to":"controlled-architecture","relation":"decomposes, retypes, and consolidates into"},
+      {"from":"controlled-architecture","to":"institutional-reconstruction","relation":"becomes stewarded institutional object"}
+    ],
+    "constraints": [
+      "Do not create a smooth retrospective story where the record is discontinuous.",
+      "Do not infer a rename from conceptual similarity.",
+      "Separate first use, mature use, and canonical use.",
+      "Treat conversation checkpoints as testimony until tied to primary artifacts.",
+      "Do not promote autobiographical provenance into scientific validation.",
+      "Git dates establish repository presence, not necessarily first intellectual conception."
+    ]
+  },
+  "principles": [
+    {"id":"start-boundary","title":"Start at the boundary","declaration":"Ask what a system includes, excludes, preserves, transforms, delegates, forgets, and makes repairable before optimizing inside it.","operationalImplication":"Problems should acquire an explicit boundary, interfaces, protected distinctions, and consequence surface before implementation or optimization is allowed to hide them.","visitorExpectation":"Pages and tools should expose scope, interfaces, exclusions, and deeper containment rather than presenting isolated answers.","sourceRef":"Recovered Boundary First Labs institutional landing","linkedSubsystem":"Method / Research"},
+    {"id":"many-projections","title":"One object, multiple projections","declaration":"Different views may serve different tasks while referring back to the same governed object.","operationalImplication":"Identity, provenance, status, and claim ceiling should survive translation into apparatus, timeline, catalog, detail, visual, and textual interfaces.","visitorExpectation":"Changing views should reveal different structure without quietly creating a second source of truth.","sourceRef":"Architecture acceptance invariant","linkedSubsystem":"Lab Machine / Governance"},
+    {"id":"instruments","title":"Build instruments, not just arguments","declaration":"Research should acquire mechanisms that can answer back through execution, measurement, comparison, review, or use.","operationalImplication":"Methods are pushed into workbenches, audits, standards, demonstrations, software, pilots, and other bounded test environments.","visitorExpectation":"A major claim should eventually point toward a witness, artifact, experiment, executable representation, or clearly stated validation target.","sourceRef":"Recovered Boundary First Labs institutional landing","linkedSubsystem":"Products / Applications"},
+    {"id":"claims-territory","title":"Claims earn territory","declaration":"Theory, hypothesis, measured result, institutional position, and product promise remain distinct.","operationalImplication":"Evidence, review, maturity, promotion, publication, and release are separate operations; success in one domain does not automatically generalize.","visitorExpectation":"The site should make it possible to tell what kind of claim is being encountered and how far its evidence actually reaches.","sourceRef":"Recovered institutional landing + architecture acceptance","linkedSubsystem":"Governance / Publications"},
+    {"id":"retain-depth","title":"Simplify orientation without flattening the corpus","declaration":"Outer layers may improve legibility while retained inner layers preserve the deeper governed body of work.","operationalImplication":"Public projections should link inward to evidence, research, relations, artifacts, and historical material instead of replacing them with parallel marketing summaries.","visitorExpectation":"A reader can start with examples and recognizable practice, then descend toward evidence, research, and formal structure without losing orientation.","sourceRef":"Architecture acceptance invariant","linkedSubsystem":"Research / Timeline"},
+    {"id":"repair-mission","title":"Repair is part of the mission","declaration":"The practical objective is to find where representation, authority, responsibility, consequence, or maintenance stops closing and construct a lawful path to repair.","operationalImplication":"Defects can reopen work; supersession preserves history; affected dependencies remain visible; ownership continues after release.","visitorExpectation":"Corrections should be inspectable as part of the lifecycle rather than hidden as embarrassing exceptions.","sourceRef":"Recovered Boundary First Labs institutional landing + governance projection","linkedSubsystem":"Governance / Pipeline"},
+    {"id":"examples-first","title":"Prefer examples before ontology","declaration":"Institutional legibility should not require prior mastery of the formal theory taxonomy.","operationalImplication":"The public disclosure sequence begins with laboratory, practice, and method before evidence, research, and formal core.","visitorExpectation":"A newcomer can understand what the Lab does before choosing whether to enter the deeper theoretical machinery.","sourceRef":"Architecture acceptance invariant","linkedSubsystem":"About / Products"},
+    {"id":"equivalent-legibility","title":"Preserve equivalent meaning across interfaces","declaration":"Interactive and visual representations require equivalent legible states for the distinctions that matter.","operationalImplication":"Accessibility, semantic equivalence, keyboard/focus behavior, and non-visual state are part of representation quality rather than polish applied afterward.","visitorExpectation":"The physical apparatus may be expressive, but essential institutional meaning should not exist only in color, cable geometry, animation, or visual metaphor.","sourceRef":"Architecture acceptance invariant","linkedSubsystem":"Governance / Products"}
+  ]
+}
