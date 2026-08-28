@@ -2,6 +2,7 @@
 
 import styles from "./MetaAtlasOverview.module.css";
 import { metaPositionFor } from "./meta-atlas-layout";
+import { corpusMountForLayer, labCorpusAuthority } from "./lab-corpus-atlas";
 import type { AtlasFiber, AtlasLayer, AtlasSpaceModel } from "./atlas-space-model";
 
 type MetaAtlasOverviewProps = {
@@ -46,9 +47,9 @@ export function MetaAtlasOverview({
     <section className={styles.root} aria-label="Meta atlas overview">
       <header className={styles.header}>
         <div>
-          <span className={styles.overline}>META-ATLAS / DOMAIN FIELD</span>
-          <h3>Cross-domain representational atlas</h3>
-          <p>Hold one structural question fixed while the domain representation changes around it.</p>
+          <span className={styles.overline}>META-ATLAS / CANONICAL DOMAIN FAMILIES</span>
+          <h3>Boundary First Library domain field</h3>
+          <p>Canonical corpus families are shown as the outer atlas; each card mounts one real Library domain as the current exemplar.</p>
         </div>
         <div className={styles.readout}>
           <span>ACTIVE FIBER</span>
@@ -93,6 +94,7 @@ export function MetaAtlasOverview({
         {model.layers.map((layer, index) => {
           const position = metaPositionFor(index, model.layers.length);
           const anchor = localAnchor(layer, activeFiber.id);
+          const mount = corpusMountForLayer(layer.id);
           const isActive = layer.id === activeLayer.id;
 
           return (
@@ -103,24 +105,24 @@ export function MetaAtlasOverview({
               onClick={() => onSelectLayer(layer.id)}
             >
               <div className={styles.domainTopline}>
-                <span>{layer.hardware.rackCode}</span>
+                <span>{mount?.familyCode ?? layer.hardware.rackCode}</span>
                 <i aria-hidden="true" />
-                <span>{layer.kicker}</span>
+                <span>CORPUS FAMILY</span>
               </div>
               <div className={styles.domainIdentity}>
                 <span className={styles.domainMark}>{layer.hardware.mark}</span>
                 <div>
-                  <h4>{layer.label}</h4>
-                  <small>{layer.hardware.registry}</small>
+                  <h4>{mount?.familyLabel ?? layer.label}</h4>
+                  <small>{mount ? `${mount.domainCode} / MOUNTED: ${mount.domainLabel}` : layer.hardware.registry}</small>
                 </div>
               </div>
               <div className={styles.localProjection}>
-                <span>LOCAL FORM OF</span>
+                <span>{mount ? `${mount.domainLabel.toUpperCase()} / LOCAL FORM OF` : "LOCAL FORM OF"}</span>
                 <strong>{activeFiber.label}</strong>
                 <p>{anchor?.label ?? "No local termination represented"}</p>
               </div>
               <div className={styles.domainActions}>
-                <span>{anchor ? `${connectorCode(activeFiber)} PORT TERMINATED` : "UNMAPPED"}</span>
+                <span>{mount ? `${mount.inventory.length} CORPUS OBJECTS MOUNTED` : anchor ? `${connectorCode(activeFiber)} PORT TERMINATED` : "UNMAPPED"}</span>
                 <button
                   type="button"
                   onClick={(event) => {
@@ -128,7 +130,7 @@ export function MetaAtlasOverview({
                     onEnterStack(layer.id);
                   }}
                 >
-                  ENTER STACK →
+                  ENTER {mount?.domainLabel.toUpperCase() ?? "STACK"} →
                 </button>
               </div>
             </article>
@@ -136,9 +138,9 @@ export function MetaAtlasOverview({
         })}
 
         <div className={styles.metaNote}>
-          <span>VIEW LAW</span>
-          <strong>One fiber, many local charts.</strong>
-          <p>Zooming outward changes the representational scale. It does not collapse the domains into one vocabulary.</p>
+          <span>EMPIRICAL MOUNT / {labCorpusAuthority.generatedAt.slice(0, 10)}</span>
+          <strong>Formal · Natural · Engineered · Linguistic</strong>
+          <p>Topology follows the generated Boundary First Library Atlas. Mounted inventory records corpus existence, not publication approval or claim validity.</p>
         </div>
       </div>
     </section>
