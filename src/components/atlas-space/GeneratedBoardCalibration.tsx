@@ -1,16 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./GeneratedBoardCalibration.module.css";
 import { labCorpusAuthority } from "./lab-corpus-atlas";
 import { corpusDescriptorForLayer } from "./generated-domain-board";
 import {
   calibrationCandidatesForLayer,
-  calibrationDecisionsForLayer,
+  hydrateCalibrationDecisions,
   setCalibrationDecision,
   type CalibrationDecision,
   type CalibrationDecisionMap,
 } from "./domain-calibration";
+import {
+  appendCalibrationRecord,
+  createCalibrationRecord,
+  latestCalibrationDecisions,
+  readCalibrationLedger,
+  recordsForLayer,
+} from "./calibration-records";
 import type { AtlasFiber, AtlasLayer } from "./atlas-space-model";
 
 type GeneratedBoardCalibrationProps = {
@@ -18,6 +25,7 @@ type GeneratedBoardCalibrationProps = {
   fibers: AtlasFiber[];
   activeFiberId: string;
   onSelectFiber: (fiberId: string) => void;
+  onCalibrationChange?: () => void;
 };
 
 export function GeneratedBoardCalibration({
@@ -25,11 +33,22 @@ export function GeneratedBoardCalibration({
   fibers,
   activeFiberId,
   onSelectFiber,
+  onCalibrationChange,
 }: GeneratedBoardCalibrationProps) {
   const descriptor = corpusDescriptorForLayer(layer.id);
   const candidates = calibrationCandidatesForLayer(layer.id);
-  const [decisions, setDecisions] = useState<CalibrationDecisionMap>(() => ({ ...calibrationDecisionsForLayer(layer.id) }));
+  const [decisions, setDecisions] = useState<CalibrationDecisionMap>({});
+  const [recordCount, setRecordCount] = useState(0);
   const [activeCandidateId, setActiveCandidateId] = useState(candidates[0]?.fiberId ?? activeFiberId);
+
+  useEffect(() => {
+    const ledger = readCalibrationLedger();
+    const hydrated = latestCalibrationDecisions(ledger, layer.id);
+    hydrateCalibrationDecisions(layer.id, hydrated);
+    setDecisions(hydrated);
+    setRecordCount(recordsForLayer(ledger, layer.id).length);
+    onCalibrationChange?.();
+  }, [layer.id, onCalibrationChange]);
 
   if (!descriptor?.generated) return null;
 
@@ -38,10 +57,24 @@ export function GeneratedBoardCalibration({
   const acceptedCount = candidates.filter((candidate) => decisions[candidate.fiberId] === "accepted").length;
 
   const decide = (fiberId: string, decision: CalibrationDecision) => {
+    const candidate = candidates.find((item) => item.fiberId === fiberId);
+    if (!candidate) return;
+
     setCalibrationDecision(layer.id, fiberId, decision);
     setDecisions((existing) => ({ ...existing, [fiberId]: decision }));
     setActiveCandidateId(fiberId);
     onSelectFiber(fiberId);
+
+    const nextLedger = appendCalibrationRecord(
+      createCalibrationRecord({
+        layerId: layer.id,
+        descriptor,
+        candidate,
+        decision,
+      }),
+    );
+    setRecordCount(recordsForLayer(nextLedger, layer.id).length);
+    onCalibrationChange?.();
   };
 
   return (
@@ -54,7 +87,7 @@ export function GeneratedBoardCalibration({
         </div>
         <div className={styles.identity}>
           <strong>{descriptor.domainCode}</strong>
-          <small>{acceptedCount} LIVE / {reviewedCount} REVIEWED / {candidates.length} CANDIDATES</small>
+          <small>{acceptedCount} LIVE / {reviewedCount} REVIEWED / {candidates.length} CANDIDATES / {recordCount} RECORDS</small>
         </div>
       </header>
 
@@ -71,6 +104,7 @@ export function GeneratedBoardCalibration({
                 <p>{activeCandidate.evidenceSummary}</p>
                 <b>{activeCandidate.evidenceLocation}</b>
                 <code>{activeCandidate.sourcePath}</code>
+                <code>SHA {activeCandidate.sourceSha}</code>
               </div>
               <div className={styles.decisionBank}>
                 <button type="button" data-active={decisions[activeCandidate.fiberId] === "accepted"} onClick={() => decide(activeCandidate.fiberId, "accepted")}>ACCEPT TERMINATION</button>
@@ -127,12 +161,12 @@ export function GeneratedBoardCalibration({
       <div className={styles.provenance}>
         <span>CORPUS SOURCE</span>
         <strong>{descriptor.domainSourcePath}</strong>
-        <small>{labCorpusAuthority.repository} / {labCorpusAuthority.corpusFingerprint.slice(0, 12)}</small>
+        <small>{labCorpusAuthority.repository} / {labCorpusAuthority.corpusFingerprint.slice(0, 12)} / LOCAL LEDGER V1</small>
       </div>
 
       <footer className={styles.footer}>
         <span>FABRICATED IDENTITY ≠ CALIBRATED SEMANTICS</span>
-        <strong>REVIEW → DISTINGUISH → MAP → TEST → TERMINATE</strong>
+        <strong>REVIEW → RECORD → DISTINGUISH → MAP → TEST → TERMINATE</strong>
       </footer>
     </section>
   );
