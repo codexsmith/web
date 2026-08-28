@@ -40,6 +40,11 @@ import {
   type ProductProjectionMode,
 } from "./LabMachineProductsProjection";
 import {
+  LabMachinePublicValueProjection,
+  isPublicValueProjectionMode,
+  type PublicValueProjectionMode,
+} from "./LabMachinePublicValueProjection";
+import {
   LabMachineResearchProjection,
   isResearchProjectionMode,
   type ResearchProjectionMode,
@@ -67,6 +72,7 @@ type ActiveProjection =
   | { subsystem: "people"; mode: PeopleProjectionMode }
   | { subsystem: "applications"; mode: ApplicationsProjectionMode }
   | { subsystem: "service"; mode: ServiceProjectionMode }
+  | { subsystem: "public-value"; mode: PublicValueProjectionMode }
   | null;
 
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
@@ -89,6 +95,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
   if (activeProjection?.subsystem === "people") return <LabMachinePeopleProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   if (activeProjection?.subsystem === "applications") return <LabMachineApplicationsProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
   if (activeProjection?.subsystem === "service") return <LabMachineServiceProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
+  if (activeProjection?.subsystem === "public-value") return <LabMachinePublicValueProjection initialMode={activeProjection.mode} onBack={() => setActiveProjection(null)} onClose={onClose} />;
 
   return (
     <section className="bf-machine-detail" data-tone={node.tone} aria-label={`${node.label} institutional detail`}>
@@ -138,7 +145,8 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
           const peopleProjection = node.id === "people" && isPeopleProjectionMode(view.id);
           const applicationsProjection = node.id === "applications" && isApplicationsProjectionMode(view.id);
           const serviceProjection = node.id === "service" && isServiceProjectionMode(view.id);
-          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection || aboutProjection || peopleProjection || applicationsProjection || serviceProjection;
+          const publicValueProjection = node.id === "public-value" && isPublicValueProjectionMode(view.id);
+          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection || aboutProjection || peopleProjection || applicationsProjection || serviceProjection || publicValueProjection;
           return (
             <article key={view.id} data-view-id={view.id}>
               <span>PROJECTION</span><strong>{view.label}</strong><p>{view.purpose}</p>
@@ -153,6 +161,7 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
                 if (peopleProjection) setActiveProjection({ subsystem: "people", mode: view.id });
                 if (applicationsProjection) setActiveProjection({ subsystem: "applications", mode: view.id });
                 if (serviceProjection) setActiveProjection({ subsystem: "service", mode: view.id });
+                if (publicValueProjection) setActiveProjection({ subsystem: "public-value", mode: view.id });
               }}>{available ? "OPEN" : "PLANNED"}</button>
             </article>
           );
