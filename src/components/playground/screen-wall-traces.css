@@ -412,6 +412,157 @@
   }
 }
 
+/* Installed-conduit geometry.
+ * The JSX retains simple orthogonal routes as a conservative fallback. On the
+ * full wall, the same semantic paths are promoted to short-radius conduit
+ * bends with local terminal leads. The rounded geometry is presentation only:
+ * endpoints, direction, type, and relation identity remain unchanged.
+ */
+@media (min-width: 1101px) {
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__line {
+    d: path("M 330 188 H 334 Q 340 188 340 194 V 344 Q 340 350 346 350");
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__line {
+    d: path("M 346 350 H 340 Q 334 350 334 356 V 514 Q 334 520 330 520");
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__line {
+    d: path("M 330 520 H 334 Q 340 520 340 526 V 663 Q 340 669 346 669 H 830 Q 836 669 836 663 V 526 Q 836 520 842 520 H 844");
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__line {
+    d: path("M 670 270 H 674 Q 680 270 680 276 V 670 Q 680 676 674 676 H 24 Q 18 676 18 670 V 526 Q 18 520 24 520 H 30");
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__line {
+    d: path("M 970 104 H 978 Q 984 104 984 110 V 179 Q 984 185 978 185 H 682 Q 676 185 676 191 V 424 Q 676 430 682 430 H 685");
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__line {
+    d: path("M 330 188 H 334 Q 340 188 340 194 V 264 Q 340 270 346 270");
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__line {
+    d: path("M 830 270 H 834 Q 840 270 840 276 V 514 Q 840 520 834 520 H 342 Q 336 520 336 526 V 594 Q 336 600 342 600 H 346");
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__line {
+    d: path("M 970 350 H 978 Q 984 350 984 356 V 674 Q 984 680 978 680 H 22 Q 16 680 16 674 V 526 Q 16 520 22 520 H 30");
+  }
+
+  /* Tray clamps: the clamp rhythm is deliberately slower than the tray slat
+   * texture. This makes the hardware look installed rather than patterned. */
+  .screen-wall-bus--a,
+  .screen-wall-bus--c {
+    background:
+      repeating-linear-gradient(90deg, transparent 0 42px, rgba(155,168,174,.42) 42px 44px, rgba(8,11,13,.9) 44px 47px, transparent 47px 86px),
+      repeating-linear-gradient(90deg, transparent 0 12px, rgba(160,174,180,.10) 12px 13px, transparent 13px 26px),
+      linear-gradient(180deg, #222a2e 0, #111719 44%, #090d0f 55%, #171d20 100%);
+  }
+
+  .screen-wall-bus--b {
+    background:
+      repeating-linear-gradient(180deg, transparent 0 42px, rgba(155,168,174,.42) 42px 44px, rgba(8,11,13,.9) 44px 47px, transparent 47px 86px),
+      repeating-linear-gradient(180deg, transparent 0 12px, rgba(160,174,180,.10) 12px 13px, transparent 13px 26px),
+      linear-gradient(90deg, #222a2e 0, #111719 44%, #090d0f 55%, #171d20 100%);
+  }
+
+  /* Reposition the existing service boxes onto actual takeoff lanes for each
+   * projection. These boxes mark managed branch locations in the tray system;
+   * they do not declare connection by themselves. */
+  .screen-wall-shell[data-mode="curated"] .screen-wall-junction--a {
+    left: 33.1%;
+    top: 48.9%;
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-junction--b {
+    left: 33.1%;
+    right: auto;
+    top: auto;
+    bottom: 3.35%;
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-junction--c {
+    right: 15.6%;
+    bottom: 3.35%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-junction--a {
+    left: 67.1%;
+    top: 24.1%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-junction--b {
+    left: 67.1%;
+    right: auto;
+    top: 60.3%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-junction--c {
+    left: .85%;
+    right: auto;
+    bottom: 3.15%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-junction--a {
+    left: 83.1%;
+    top: 73.3%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-junction--b {
+    left: 33.1%;
+    right: auto;
+    top: 73.3%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-junction--c {
+    right: .8%;
+    bottom: 2.8%;
+  }
+
+  /* Branch takeoff collars. A tiny keyed collar at the junction edge indicates
+   * where a conductor exits the shared tray and becomes a local run. */
+  .screen-wall-junction::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -.52rem;
+    width: .42rem;
+    height: .52rem;
+    transform: translateX(-50%);
+    border: 1px solid #59666c;
+    border-top: 0;
+    background:
+      repeating-linear-gradient(180deg, #161d20 0 2px, #303b40 2px 3px),
+      #111719;
+    box-shadow: 0 0 0 2px #050708;
+  }
+
+  /* Local drops get a short keyed lead before entering the device boot. This
+   * keeps the visual boundary crossing distinct from the long shared run. */
+  .screen-module__ports--left::after,
+  .screen-module__ports--right::after {
+    width: 1.34rem;
+  }
+
+  .screen-module__ports--left::after {
+    border-radius: .35rem 0 0 .35rem;
+  }
+
+  .screen-module__ports--right::after {
+    border-radius: 0 .35rem .35rem 0;
+  }
+}
+
 @media (max-width: 1100px) {
   .screen-wall-traces {
     display: none;
