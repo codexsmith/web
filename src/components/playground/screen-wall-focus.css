@@ -1,0 +1,287 @@
+/* Screen Wall in-place inspection
+ *
+ * Wall -> Screen is a magnification, not a route change. The selected device
+ * expands inside the room-scale catalog while neighboring devices remain
+ * visible and selectable at the periphery. Screen -> World remains the second
+ * explicit action.
+ *
+ * When a screen moves, fixed wall traces are withdrawn because their original
+ * endpoints no longer coincide with the moved ports. The same declared
+ * relations are projected textually inside the inspection sidecar instead.
+ */
+
+.screen-module__focus-panel {
+  display: none;
+}
+
+@media (min-width: 761px) {
+  .screen-wall-shell[data-depth="screen"] .screen-wall-grid {
+    isolation: isolate;
+    overflow: visible;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-wall-grid::after {
+    content: "";
+    position: absolute;
+    z-index: 6;
+    inset: 1.3%;
+    border: 1px solid rgba(91, 105, 112, .22);
+    background:
+      radial-gradient(circle at 50% 46%, rgba(19, 25, 28, .28), rgba(4, 6, 7, .68) 72%);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, .34);
+    pointer-events: none;
+  }
+
+  /* A moved device invalidates the old geometric cable endpoints. Withdraw the
+   * fixed route projection rather than displaying a false termination. */
+  .screen-wall-shell[data-depth="screen"] .screen-wall-traces {
+    opacity: 0;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-dimmed {
+    z-index: 2;
+    opacity: .24;
+    filter: saturate(.4) brightness(.64);
+    transform: scale(.94);
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-dimmed:hover,
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-dimmed:focus-within {
+    z-index: 7;
+    opacity: .58;
+    filter: saturate(.72) brightness(.82);
+    transform: scale(.965);
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected {
+    position: absolute;
+    z-index: 12;
+    inset: 6.2% 6.5%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(18rem, .72fr);
+    grid-template-rows: minmax(0, 1fr);
+    min-height: 0;
+    overflow: visible;
+    opacity: 1;
+    filter: none;
+    transform: none;
+    border-color: color-mix(in srgb, var(--tone) 54%, #5d696f);
+    box-shadow:
+      0 26px 60px rgba(0, 0, 0, .66),
+      0 0 0 1px color-mix(in srgb, var(--tone) 22%, transparent),
+      inset 0 1px 0 rgba(255,255,255,.055),
+      inset 0 0 0 3px #090d0f;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected::before {
+    content: "INSPECTION // " attr(data-screen);
+    z-index: 16;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected::after {
+    left: 4%;
+    right: 4%;
+    bottom: -.5rem;
+    height: .5rem;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected .screen-module__button {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    height: 100%;
+    padding: .72rem .78rem .58rem;
+    border-right: 1px solid #333d42;
+    cursor: default;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected .screen-module__bezel {
+    min-height: 0;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected .screen-module__label {
+    min-height: 3.45rem;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected .screen-module__copy strong {
+    font-size: 1.08rem;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected .screen-module__ports {
+    z-index: 15;
+  }
+
+  .screen-module.is-selected .screen-module__focus-panel {
+    position: relative;
+    z-index: 14;
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    border-left: 1px solid #20282c;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--tone) 4%, #151b1e), #0b0f11 72%);
+    box-shadow: inset 3px 0 0 #070a0b;
+  }
+
+  .screen-module__focus-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: .58rem .62rem;
+    border-bottom: 1px solid #313a3f;
+    background: #101518;
+  }
+
+  .screen-module__focus-header > span {
+    color: var(--tone);
+    font-size: .45rem;
+    letter-spacing: .13em;
+  }
+
+  .screen-module__focus-header .screen-wall-back {
+    min-height: 1.9rem;
+    padding: .34rem .48rem;
+  }
+
+  .screen-module__focus-header .screen-wall-back svg {
+    width: .85rem;
+    height: .85rem;
+  }
+
+  .screen-module__focus-body {
+    display: flex;
+    min-height: 0;
+    flex: 1;
+    flex-direction: column;
+    padding: 1rem 1.05rem 1.05rem;
+    overflow: auto;
+  }
+
+  .screen-module__focus-body > small {
+    color: var(--tone);
+    font-size: .48rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .screen-module__focus-body h2 {
+    margin: .28rem 0 .44rem;
+    color: #eef2f3;
+    font-family: Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 500;
+  }
+
+  .screen-module__focus-body > p {
+    margin: 0;
+    color: #aeb7bb;
+    font-family: system-ui, sans-serif;
+    font-size: .74rem;
+    line-height: 1.5;
+  }
+
+  .screen-module__focus-body dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: .9rem 0 0;
+    border-top: 1px solid #30383d;
+    border-left: 1px solid #30383d;
+  }
+
+  .screen-module__focus-body dl div {
+    min-width: 0;
+    padding: .56rem;
+    border-right: 1px solid #30383d;
+    border-bottom: 1px solid #30383d;
+  }
+
+  .screen-module__focus-body dt {
+    color: #737f85;
+    font-size: .42rem;
+    letter-spacing: .1em;
+  }
+
+  .screen-module__focus-body dd {
+    margin: .16rem 0 0;
+    overflow-wrap: anywhere;
+    color: #ccd3d6;
+    font-size: .56rem;
+    text-transform: uppercase;
+  }
+
+  .screen-module__focus-body .screen-wall-relations {
+    margin: .9rem 0;
+  }
+
+  .screen-module__focus-body .screen-wall-enter {
+    margin-top: auto;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected {
+    inset: 4.5% 4%;
+    grid-template-columns: minmax(0, 1.25fr) minmax(15rem, .8fr);
+    min-height: 31rem;
+  }
+
+  .screen-module__focus-body h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Mobile remains a sequential catalog, but Screen depth still preserves the
+   * same object rather than replacing it with a separate inspector card. */
+  .screen-wall-shell[data-depth="screen"] .screen-wall-grid {
+    display: grid;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-dimmed {
+    display: none;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 34rem;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected .screen-module__button {
+    min-height: 18rem;
+    border-right: 0;
+    border-bottom: 1px solid #30383d;
+  }
+
+  .screen-module.is-selected .screen-module__focus-panel {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    border-left: 0;
+  }
+
+  .screen-module__focus-body {
+    padding: .9rem;
+  }
+
+  .screen-module__focus-body dl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-wall-shell[data-depth="screen"] .screen-module,
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-dimmed,
+  .screen-wall-shell[data-depth="screen"] .screen-module.is-selected {
+    transition: none;
+  }
+}
