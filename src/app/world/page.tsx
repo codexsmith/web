@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LabMachine } from "@/components/bfux/LabMachine";
+import { WorldSectionPage } from "./WorldSectionPage";
 import "./world-machine-preview.css";
 
 export const metadata = {
@@ -8,7 +9,11 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: Promise<{ skin?: string | string[]; schematic?: string | string[] }>;
+  searchParams: Promise<{
+    skin?: string | string[];
+    schematic?: string | string[];
+    section?: string | string[];
+  }>;
 };
 
 function one(value: string | string[] | undefined) {
@@ -20,8 +25,13 @@ export default async function WorldPreview({ searchParams }: Props) {
   const requested = one(query.skin);
   const mode = requested === "apparatus" || requested === "both" ? requested : "physical";
   const schematic = one(query.schematic) === "1";
-  const q = (skin: "apparatus" | "physical" | "both", show = schematic) =>
-    `/world?skin=${skin}${show ? "&schematic=1" : ""}`;
+  const section = one(query.section);
+  const q = (skin: "apparatus" | "physical" | "both", show = schematic) => {
+    const params = new URLSearchParams({ skin });
+    if (show) params.set("schematic", "1");
+    if (section) params.set("section", section);
+    return `/world?${params.toString()}`;
+  };
 
   return (
     <main className="world-machine-preview">
@@ -39,15 +49,17 @@ export default async function WorldPreview({ searchParams }: Props) {
         </nav>
       </header>
 
-      {mode === "both" ? (
+      {section && mode !== "both" ? (
+        <WorldSectionPage section={section} skin={mode} showSchematic={schematic} />
+      ) : mode === "both" ? (
         <div className="world-machine-preview__compare">
           <section>
             <h2>Apparatus skin</h2>
-            <LabMachine skin="apparatus" showSchematic={schematic} />
+            <LabMachine skin="apparatus" showSchematic={schematic} initialNodeId={section} />
           </section>
           <section>
             <h2>Physical skin</h2>
-            <LabMachine skin="physical" showSchematic={schematic} />
+            <LabMachine skin="physical" showSchematic={schematic} initialNodeId={section} />
           </section>
         </div>
       ) : (
