@@ -21,61 +21,37 @@ const GRID_STOPS = [25, 50, 75] as const;
 const EDGE_X = 852;
 const BACKPLANE_X = 884;
 
-function cx(...values: Array<string | false | null | undefined>) {
-  return values.filter(Boolean).join(" ");
-}
+function cx(...values: Array<string | false | null | undefined>) { return values.filter(Boolean).join(" "); }
+function layerLevel(layer: AtlasLayer, layers: AtlasLayer[]) { return Math.max(0, layers.length - 1 - layers.findIndex((item) => item.id === layer.id)); }
 
-function project(position: AtlasPosition, level: number, mode: AtlasViewMode): Point {
+function project(position: AtlasPosition, level: number, mode: AtlasViewMode, extracted = false): Point {
   const u = position.x / 100;
   const v = position.y / 100;
-  if (mode === "focus") return { x: 128 + u * 625 + v * 120, y: 258 - u * 74 + v * 224 };
-  return { x: 118 + u * 560 + v * 132, y: 440 - u * 58 + v * 152 - level * 78 };
+  if (mode === "focus" && extracted) return { x: 90 + u * 650 + v * 126, y: 262 - u * 78 + v * 238 };
+  const recession = mode === "focus" ? 0.82 : 1;
+  return { x: 118 + u * 560 * recession + v * 132 * recession, y: 440 - u * 58 * recession + v * 152 * recession - level * 78 };
 }
 
-function layerLevel(layer: AtlasLayer, layers: AtlasLayer[]) {
-  const index = layers.findIndex((candidate) => candidate.id === layer.id);
-  return Math.max(0, layers.length - 1 - index);
-}
-
-function polygonPoints(level: number, mode: AtlasViewMode) {
-  return [
-    project({ x: 0, y: 0 }, level, mode),
-    project({ x: 100, y: 0 }, level, mode),
-    project({ x: 100, y: 100 }, level, mode),
-    project({ x: 0, y: 100 }, level, mode),
-  ].map((point) => `${point.x},${point.y}`).join(" ");
+function polygonPoints(level: number, mode: AtlasViewMode, extracted = false) {
+  return [project({ x: 0, y: 0 }, level, mode, extracted), project({ x: 100, y: 0 }, level, mode, extracted), project({ x: 100, y: 100 }, level, mode, extracted), project({ x: 0, y: 100 }, level, mode, extracted)].map((point) => `${point.x},${point.y}`).join(" ");
 }
 
 function edgePoint(layer: AtlasLayer, layers: AtlasLayer[]) {
-  const level = layerLevel(layer, layers);
-  const boardEdge = project({ x: 100, y: 52 }, level, "woven");
+  const boardEdge = project({ x: 100, y: 52 }, layerLevel(layer, layers), "woven");
   return { x: EDGE_X, y: boardEdge.y };
 }
-
-function backplaneChannelX(fiberIndex: number) {
-  return BACKPLANE_X + fiberIndex * 8;
-}
-
+function backplaneChannelX(index: number) { return BACKPLANE_X + index * 8; }
 function routedPath(anchor: Point, edge: Point, channelX: number) {
   const doglegX = Math.max(anchor.x + 30, edge.x - 42);
   return `M ${anchor.x} ${anchor.y} L ${doglegX} ${anchor.y} L ${doglegX} ${edge.y} L ${edge.x} ${edge.y} L ${channelX} ${edge.y}`;
 }
-
-function connectorClass(kind: AtlasFiber["connectorKind"]) {
-  return wiringStyles[`connector_${kind}`];
-}
-
-function Screw({ className }: { className: string }) {
-  return <span aria-hidden="true" className={cx(styles.screw, className)} />;
-}
+function connectorClass(kind: AtlasFiber["connectorKind"]) { return wiringStyles[`connector_${kind}`]; }
+function Screw({ className }: { className: string }) { return <span aria-hidden="true" className={cx(styles.screw, className)} />; }
 
 export function AtlasSpace({ model = defaultAtlasSpaceModel, initialLayerId, className }: AtlasSpaceProps) {
   const firstLayerId = model.layers[0]?.id ?? "";
   const firstFiberId = model.fibers[0]?.id ?? "";
-  const resolvedInitialLayer = model.layers.some((layer) => layer.id === initialLayerId)
-    ? (initialLayerId ?? firstLayerId)
-    : firstLayerId;
-
+  const resolvedInitialLayer = model.layers.some((layer) => layer.id === initialLayerId) ? (initialLayerId ?? firstLayerId) : firstLayerId;
   const [viewMode, setViewMode] = useState<AtlasViewMode>("woven");
   const [activeLayerId, setActiveLayerId] = useState(resolvedInitialLayer);
   const [activeFiberId, setActiveFiberId] = useState(firstFiberId);
@@ -83,171 +59,84 @@ export function AtlasSpace({ model = defaultAtlasSpaceModel, initialLayerId, cla
 
   const activeLayer = model.layers.find((layer) => layer.id === activeLayerId) ?? model.layers[0];
   const activeFiber = model.fibers.find((fiber) => fiber.id === activeFiberId) ?? model.fibers[0];
-  const visibleLayers = useMemo(
-    () => (viewMode === "focus" && activeLayer ? [activeLayer] : model.layers),
-    [activeLayer, model.layers, viewMode],
-  );
+  const renderLayers = useMemo(() => viewMode === "focus" ? [...model.layers.filter((layer) => layer.id !== activeLayerId), activeLayer] : model.layers, [activeLayer, activeLayerId, model.layers, viewMode]);
+  if (!activeLayer || !activeFiber) return <section className={cx(styles.root, className)}><p className={styles.emptyState}>Atlas Space requires at least one layer and one fiber.</p></section>;
 
-  if (!activeLayer || !activeFiber) {
-    return <section className={cx(styles.root, className)}><p className={styles.emptyState}>Atlas Space requires at least one layer and one fiber.</p></section>;
-  }
+  return <section className={cx(styles.root, className)} aria-labelledby={`${model.id}-title`}>
+    <Screw className={styles.screwTl} /><Screw className={styles.screwTr} /><Screw className={styles.screwBl} /><Screw className={styles.screwBr} />
+    <header className={styles.header}>
+      <div className={styles.brandPlate}><span className={styles.brandMark}>BF</span><div><p>Boundary First Labs</p><small>Atlas instrumentation / prototype 00</small></div></div>
+      <div className={styles.statusStrip}><span><i /> correspondence bus online</span><span>representation is the control</span><span>{model.layers.length} atlas boards mounted</span></div>
+    </header>
 
-  return (
-    <section className={cx(styles.root, className)} aria-labelledby={`${model.id}-title`}>
-      <Screw className={styles.screwTl} /><Screw className={styles.screwTr} />
-      <Screw className={styles.screwBl} /><Screw className={styles.screwBr} />
-
-      <header className={styles.header}>
-        <div className={styles.brandPlate}>
-          <span className={styles.brandMark}>BF</span>
-          <div><p>Boundary First Labs</p><small>Atlas instrumentation / prototype 00</small></div>
+    <div className={styles.instrumentGrid}>
+      <aside className={styles.leftBank} aria-label="Atlas controls">
+        <div className={styles.moduleLabel}>DEPTH CONTROL</div>
+        <div className={styles.toggleStack}>
+          <button type="button" aria-pressed={viewMode === "woven"} className={cx(styles.bankButton, viewMode === "woven" && styles.bankButtonActive)} onClick={() => setViewMode("woven")}><span className={styles.indicator} /> STACK</button>
+          <button type="button" aria-pressed={viewMode === "focus"} className={cx(styles.bankButton, viewMode === "focus" && styles.bankButtonActive)} onClick={() => setViewMode("focus")}><span className={styles.indicator} /> EXTRACT</button>
         </div>
-        <div className={styles.statusStrip}>
-          <span><i /> correspondence bus online</span>
-          <span>representation is the control</span>
-          <span>{model.layers.length} atlas boards mounted</span>
-        </div>
-      </header>
+        <div className={styles.moduleLabel}>BOARD MAGAZINE</div>
+        <nav className={styles.layerStack} aria-label="Atlas layers">
+          {model.layers.map((layer) => <button type="button" key={layer.id} aria-current={layer.id === activeLayer.id ? "true" : undefined} className={cx(styles.layerButton, layer.id === activeLayer.id && styles.layerButtonActive)} onClick={() => setActiveLayerId(layer.id)}>
+            <span className={styles.channelNumber}>{layer.hardware.rackCode}</span><span><strong>{layer.label}</strong><small>{layer.hardware.registry}</small></span><i className={styles.layerLamp} />
+          </button>)}
+        </nav>
+        <div className={styles.moduleLabel}>BUS MASTER</div>
+        <button type="button" aria-pressed={showFibers} className={cx(styles.masterSwitch, showFibers && styles.masterSwitchOn)} onClick={() => setShowFibers((value) => !value)}><span className={styles.switchTrack}><i /></span><span>{showFibers ? "FIBERS ON" : "FIBERS OFF"}</span></button>
+      </aside>
 
-      <div className={styles.instrumentGrid}>
-        <aside className={styles.leftBank} aria-label="Atlas controls">
-          <div className={styles.moduleLabel}>VIEW CONTROL</div>
-          <div className={styles.toggleStack}>
-            <button type="button" aria-pressed={viewMode === "woven"} className={cx(styles.bankButton, viewMode === "woven" && styles.bankButtonActive)} onClick={() => setViewMode("woven")}><span className={styles.indicator} /> WOVEN</button>
-            <button type="button" aria-pressed={viewMode === "focus"} className={cx(styles.bankButton, viewMode === "focus" && styles.bankButtonActive)} onClick={() => setViewMode("focus")}><span className={styles.indicator} /> LOCAL</button>
-          </div>
+      <div className={styles.centerAssembly}>
+        <div className={styles.screenBezel}>
+          <div className={styles.screenHeader}><span>ATLAS SPACE // {viewMode === "woven" ? "STACK" : `EXTRACT ${activeLayer.hardware.rackCode}`}</span><span className={styles.screenState}><i /> LIVE</span></div>
+          <div className={styles.viewport} data-view-mode={viewMode}>
+            <svg className={styles.canvas} viewBox="0 0 960 680" role="img" aria-label="Layered atlas boards connected through a typed rear correspondence backplane">
+              <title>Boundary First Atlas Space layered atlas visualization</title>
+              <defs>
+                <filter id="atlasGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                <pattern id="ruled" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M0 14 H28" className={styles.boardPatternLine} /></pattern>
+                <pattern id="wave" width="42" height="28" patternUnits="userSpaceOnUse"><path d="M0 14 C10 2 20 26 42 14" className={styles.boardPatternLine} /></pattern>
+                <pattern id="logic" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M4 17 H16 V7 H30 M16 17 V29 H30" className={styles.boardPatternLine} /></pattern>
+                <pattern id="docket" width="40" height="32" patternUnits="userSpaceOnUse"><path d="M4 7 H36 M4 16 H28 M4 25 H34" className={styles.boardPatternLine} /></pattern>
+              </defs>
 
-          <div className={styles.moduleLabel}>LAYER SELECT</div>
-          <nav className={styles.layerStack} aria-label="Atlas layers">
-            {model.layers.map((layer, index) => (
-              <button type="button" key={layer.id} aria-current={layer.id === activeLayer.id ? "true" : undefined} className={cx(styles.layerButton, layer.id === activeLayer.id && styles.layerButtonActive)} onClick={() => setActiveLayerId(layer.id)}>
-                <span className={styles.channelNumber}>{String(index + 1).padStart(2, "0")}</span>
-                <span><strong>{layer.label}</strong><small>{layer.kicker}</small></span><i className={styles.layerLamp} />
-              </button>
-            ))}
-          </nav>
+              {renderLayers.map((layer) => {
+                const level = layerLevel(layer, model.layers);
+                const isActive = layer.id === activeLayer.id;
+                const extracted = viewMode === "focus" && isActive;
+                const labelPoint = project({ x: 3, y: 8 }, level, viewMode, extracted);
+                const markPoint = project({ x: 91, y: 11 }, level, viewMode, extracted);
+                return <g key={layer.id} className={cx(styles.boardGroup, viewMode === "focus" && !isActive && styles.boardRecessed, extracted && styles.boardExtracted)}>
+                  <polygon points={polygonPoints(level, viewMode, extracted)} className={cx(styles.boardShadow, isActive && styles.boardShadowActive)} />
+                  <polygon points={polygonPoints(level, viewMode, extracted)} className={cx(styles.board, isActive && styles.boardActive)} onClick={() => setActiveLayerId(layer.id)} />
+                  <polygon points={polygonPoints(level, viewMode, extracted)} fill={`url(#${layer.hardware.pattern})`} className={styles.boardPattern} />
+                  {GRID_STOPS.map((stop) => { const a = project({ x: stop, y: 0 }, level, viewMode, extracted); const b = project({ x: stop, y: 100 }, level, viewMode, extracted); const c = project({ x: 0, y: stop }, level, viewMode, extracted); const d = project({ x: 100, y: stop }, level, viewMode, extracted); return <g key={`${layer.id}-${stop}`} className={styles.gridLines}><line x1={a.x} y1={a.y} x2={b.x} y2={b.y} /><line x1={c.x} y1={c.y} x2={d.x} y2={d.y} /></g>; })}
+                  <text x={labelPoint.x} y={labelPoint.y} className={styles.layerLabel}>{layer.hardware.rackCode} // {layer.label.toUpperCase()}</text>
+                  <text x={markPoint.x} y={markPoint.y} className={styles.boardMark}>{layer.hardware.mark}</text>
+                  <circle cx={labelPoint.x - 10} cy={labelPoint.y - 4} r="4" className={styles.registrationHole} /><circle cx={markPoint.x + 14} cy={markPoint.y - 4} r="4" className={styles.registrationHole} />
+                </g>;
+              })}
 
-          <div className={styles.moduleLabel}>BUS MASTER</div>
-          <button type="button" aria-pressed={showFibers} className={cx(styles.masterSwitch, showFibers && styles.masterSwitchOn)} onClick={() => setShowFibers((value) => !value)}>
-            <span className={styles.switchTrack}><i /></span><span>{showFibers ? "FIBERS ON" : "FIBERS OFF"}</span>
-          </button>
-        </aside>
+              {showFibers && <g opacity={viewMode === "focus" ? 0.45 : 1}>
+                <rect x="844" y="74" width="100" height="514" rx="8" className={wiringStyles.backplaneHousing} /><text x="894" y="96" textAnchor="middle" className={wiringStyles.backplaneLabel}>REAR BUS</text>
+                {model.fibers.map((fiber, fiberIndex) => { const channelX = backplaneChannelX(fiberIndex); const participating = model.layers.filter((layer) => layer.anchors.some((anchor) => anchor.fiberId === fiber.id)); const ends = participating.map((layer) => edgePoint(layer, model.layers)); const minY = Math.min(...ends.map((p) => p.y)); const maxY = Math.max(...ends.map((p) => p.y)); const isActive = fiber.id === activeFiber.id; return <g key={fiber.id}><line x1={channelX} y1={minY} x2={channelX} y2={maxY} className={cx(wiringStyles.backplaneBus, connectorClass(fiber.connectorKind), isActive && wiringStyles.backplaneBusActive)} />{participating.map((layer) => { const anchor = project(fiber.position, layerLevel(layer, model.layers), "woven"); const edge = edgePoint(layer, model.layers); return <g key={`${fiber.id}-${layer.id}`}><path d={routedPath(anchor, edge, channelX)} className={wiringStyles.traceSleeve} /><path d={routedPath(anchor, edge, channelX)} className={cx(wiringStyles.boardTrace, connectorClass(fiber.connectorKind), isActive && wiringStyles.boardTraceActive)} /></g>; })}</g>; })}
+              </g>}
 
-        <div className={styles.centerAssembly}>
-          <div className={styles.screenBezel}>
-            <div className={styles.screenHeader}>
-              <span>ATLAS SPACE // {viewMode === "woven" ? "INTER-ATLAS" : activeLayer.label.toUpperCase()}</span>
-              <span className={styles.screenState}><i /> LIVE</span>
-            </div>
-            <div className={styles.viewport} data-view-mode={viewMode}>
-              <svg className={styles.canvas} viewBox="0 0 960 680" role="img" aria-label="Layered atlas boards connected through a typed rear correspondence backplane">
-                <title>Boundary First Atlas Space layered atlas visualization</title>
-                <defs>
-                  <filter id="atlasGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
-                </defs>
-
-                <g>
-                  {visibleLayers.map((layer) => {
-                    const level = viewMode === "focus" ? 0 : layerLevel(layer, model.layers);
-                    const labelPoint = project({ x: 2, y: 8 }, level, viewMode);
-                    const isActive = layer.id === activeLayer.id;
-                    return <g key={`board-${layer.id}`}>
-                      <polygon points={polygonPoints(level, viewMode)} className={cx(styles.boardShadow, isActive && styles.boardShadowActive)} />
-                      <polygon points={polygonPoints(level, viewMode)} className={cx(styles.board, isActive && styles.boardActive)} onClick={() => setActiveLayerId(layer.id)} />
-                      {GRID_STOPS.map((stop) => {
-                        const xStart = project({ x: stop, y: 0 }, level, viewMode);
-                        const xEnd = project({ x: stop, y: 100 }, level, viewMode);
-                        const yStart = project({ x: 0, y: stop }, level, viewMode);
-                        const yEnd = project({ x: 100, y: stop }, level, viewMode);
-                        return <g key={`${layer.id}-${stop}`} className={styles.gridLines}><line x1={xStart.x} y1={xStart.y} x2={xEnd.x} y2={xEnd.y} /><line x1={yStart.x} y1={yStart.y} x2={yEnd.x} y2={yEnd.y} /></g>;
-                      })}
-                      <text x={labelPoint.x} y={labelPoint.y} className={styles.layerLabel}>{layer.label.toUpperCase()}</text>
-                    </g>;
-                  })}
-                </g>
-
-                {viewMode === "woven" && showFibers ? <g>
-                  <rect x="844" y="74" width="100" height="514" rx="8" className={wiringStyles.backplaneHousing} />
-                  <text x="894" y="96" textAnchor="middle" className={wiringStyles.backplaneLabel}>REAR BUS</text>
-                  {model.fibers.map((fiber, fiberIndex) => {
-                    const channelX = backplaneChannelX(fiberIndex);
-                    const participating = model.layers.filter((layer) => layer.anchors.some((anchor) => anchor.fiberId === fiber.id));
-                    const ends = participating.map((layer) => edgePoint(layer, model.layers));
-                    const minY = Math.min(...ends.map((point) => point.y));
-                    const maxY = Math.max(...ends.map((point) => point.y));
-                    const isActive = fiber.id === activeFiber.id;
-                    return <g key={`bus-${fiber.id}`}>
-                      <line x1={channelX} y1={minY} x2={channelX} y2={maxY} className={cx(wiringStyles.backplaneBus, connectorClass(fiber.connectorKind), isActive && wiringStyles.backplaneBusActive)} />
-                      {participating.map((layer) => {
-                        const level = layerLevel(layer, model.layers);
-                        const anchor = project(fiber.position, level, "woven");
-                        const edge = edgePoint(layer, model.layers);
-                        return <g key={`${fiber.id}-${layer.id}-route`}>
-                          <path d={routedPath(anchor, edge, channelX)} className={wiringStyles.traceSleeve} />
-                          <path d={routedPath(anchor, edge, channelX)} className={cx(wiringStyles.boardTrace, connectorClass(fiber.connectorKind), isActive && wiringStyles.boardTraceActive)} />
-                          <rect x={edge.x - 7} y={edge.y - 6} width="14" height="12" rx={fiber.connectorKind === "through" ? 6 : 2} className={cx(wiringStyles.edgeConnector, wiringStyles[`edge_${fiber.connectorKind}`], isActive && wiringStyles.edgeConnectorActive)} />
-                        </g>;
-                      })}
-                    </g>;
-                  })}
-                </g> : null}
-
-                <g>
-                  {visibleLayers.flatMap((layer) => {
-                    const level = viewMode === "focus" ? 0 : layerLevel(layer, model.layers);
-                    return model.fibers.map((fiber) => {
-                      const anchor = layer.anchors.find((candidate) => candidate.fiberId === fiber.id);
-                      if (!anchor) return null;
-                      const point = project(fiber.position, level, viewMode);
-                      const isActive = fiber.id === activeFiber.id;
-                      const isLayerActive = layer.id === activeLayer.id;
-                      return <g key={`${layer.id}-${fiber.id}`} className={cx(styles.anchor, isActive && styles.anchorActive)} onClick={() => { setActiveLayerId(layer.id); setActiveFiberId(fiber.id); }}>
-                        <circle cx={point.x} cy={point.y} r={viewMode === "focus" ? 14 : 11} className={cx(styles.jackOuter, wiringStyles[`jack_${fiber.connectorKind}`])} />
-                        <circle cx={point.x} cy={point.y} r={viewMode === "focus" ? 8 : 6.5} className={styles.jackInner} />
-                        <circle cx={point.x} cy={point.y} r={isActive ? 3.8 : 2.8} className={cx(styles.anchorDot, isLayerActive && styles.anchorDotLayerActive)} filter={isActive ? "url(#atlasGlow)" : undefined} />
-                        <text x={point.x + 14} y={point.y - 11} className={cx(styles.anchorLabel, viewMode === "focus" && styles.anchorLabelFocus)}>{anchor.label}</text>
-                      </g>;
-                    });
-                  })}
-                </g>
-              </svg>
-              <div className={styles.screenCornerReadout}>LOCAL JACK → EDGE CONTACT → REAR BUS</div>
-            </div>
-          </div>
-
-          <div className={styles.lowerDeck}>
-            <div className={styles.deckPlate}><span>ACTIVE CHANNEL</span><strong>{activeFiber.label}</strong><small>{relationKindLabels[activeFiber.relationKind]}</small></div>
-            <div className={styles.deckPlate}><span>CONNECTOR</span><strong>{connectorKindLabels[activeFiber.connectorKind]}</strong><small>physical routing semantics</small></div>
-            <div className={styles.deckPlateWide}><span>WIRING RULE</span><strong>Local traces terminate on a shared typed backplane.</strong><small>Cross-layer structure is routed; no arbitrary point-to-point graph edges.</small></div>
+              {renderLayers.flatMap((layer) => { const level = layerLevel(layer, model.layers); const isLayerActive = layer.id === activeLayer.id; const extracted = viewMode === "focus" && isLayerActive; return model.fibers.map((fiber) => { const anchor = layer.anchors.find((item) => item.fiberId === fiber.id); if (!anchor) return null; const point = project(fiber.position, level, viewMode, extracted); const isActive = fiber.id === activeFiber.id; return <g key={`${layer.id}-${fiber.id}`} className={cx(styles.anchor, isActive && styles.anchorActive, viewMode === "focus" && !isLayerActive && styles.anchorRecessed)} onClick={() => { setActiveLayerId(layer.id); setActiveFiberId(fiber.id); }}><circle cx={point.x} cy={point.y} r={extracted ? 14 : 11} className={cx(styles.jackOuter, wiringStyles[`jack_${fiber.connectorKind}`])} /><circle cx={point.x} cy={point.y} r={extracted ? 8 : 6.5} className={styles.jackInner} /><circle cx={point.x} cy={point.y} r={isActive ? 3.8 : 2.8} className={cx(styles.anchorDot, isLayerActive && styles.anchorDotLayerActive)} filter={isActive ? "url(#atlasGlow)" : undefined} /><text x={point.x + 14} y={point.y - 11} className={cx(styles.anchorLabel, extracted && styles.anchorLabelFocus)}>{anchor.label}</text></g>; }); })}
+            </svg>
+            <div className={styles.screenCornerReadout}>{viewMode === "focus" ? `EXTRACTED ${activeLayer.hardware.rackCode} // BACKPLANE CONTEXT RETAINED` : "LOCAL JACK → EDGE CONTACT → REAR BUS"}</div>
           </div>
         </div>
-
-        <aside className={styles.rightBank} aria-label="Correspondence inspector">
-          <div className={styles.moduleLabel}>PATCH BAY</div>
-          <div className={styles.patchBay}>
-            {model.fibers.map((fiber, index) => (
-              <button type="button" key={fiber.id} aria-pressed={fiber.id === activeFiber.id} className={cx(styles.patchRow, wiringStyles[`patch_${fiber.connectorKind}`], fiber.id === activeFiber.id && styles.patchRowActive)} onClick={() => setActiveFiberId(fiber.id)}>
-                <span className={styles.patchJack}><i /></span>
-                <span className={styles.patchCode}>{fiber.connectorKind === "through" ? "THR" : fiber.connectorKind === "keyed" ? "KEY" : "TST"}{String(index + 1).padStart(2, "0")}</span>
-                <span className={styles.patchName}>{fiber.label}</span>
-              </button>
-            ))}
-          </div>
-          <div className={styles.moduleLabel}>CHANNEL READOUT</div>
-          <div className={styles.readout}><span className={styles.readoutType}>{connectorKindLabels[activeFiber.connectorKind]}</span><h3>{activeFiber.label}</h3><p>{activeFiber.statement}</p></div>
-          <div className={styles.moduleLabel}>TERMINALS</div>
-          <ol className={styles.mappingList}>
-            {model.layers.map((layer, index) => {
-              const anchor = layer.anchors.find((candidate) => candidate.fiberId === activeFiber.id);
-              if (!anchor) return null;
-              return <li key={`${activeFiber.id}-${layer.id}`}><button type="button" className={cx(styles.mappingButton, layer.id === activeLayer.id && styles.mappingButtonActive)} onClick={() => setActiveLayerId(layer.id)}><span className={styles.terminalNumber}>{String(index + 1).padStart(2, "0")}</span><span><small>{layer.label}</small><strong>{anchor.label}</strong></span><i /></button></li>;
-            })}
-          </ol>
-          <div className={styles.layerReadout}><span>BOARD NOTE</span><p>{activeLayer.description}</p><button type="button" onClick={() => setViewMode("focus")}>ISOLATE BOARD</button></div>
-        </aside>
+        <div className={styles.lowerDeck}><div className={styles.deckPlate}><span>ACTIVE BOARD</span><strong>{activeLayer.hardware.rackCode}</strong><small>{activeLayer.hardware.registry}</small></div><div className={styles.deckPlate}><span>ACTIVE CHANNEL</span><strong>{activeFiber.label}</strong><small>{connectorKindLabels[activeFiber.connectorKind]}</small></div><div className={styles.deckPlateWide}><span>DEPTH RULE</span><strong>Extraction changes view depth, not system membership.</strong><small>The selected card comes forward while its rack and backplane remain visible.</small></div></div>
       </div>
 
-      <footer className={styles.footerStrip}><span>BF-ATLAS / BACKPLANE SPEC 0.2</span><span>{model.thesis}</span><span>ROUTED CORRESPONDENCE ONLY</span></footer>
-    </section>
-  );
+      <aside className={styles.rightBank} aria-label="Correspondence inspector">
+        <div className={styles.moduleLabel}>BOARD IDENTITY</div><div className={styles.readout}><span className={styles.readoutType}>{activeLayer.hardware.rackCode}</span><h3>{activeLayer.label}</h3><p>{activeLayer.description}</p></div>
+        <div className={styles.moduleLabel}>PATCH BAY</div><div className={styles.patchBay}>{model.fibers.map((fiber, index) => <button type="button" key={fiber.id} aria-pressed={fiber.id === activeFiber.id} className={cx(styles.patchRow, wiringStyles[`patch_${fiber.connectorKind}`], fiber.id === activeFiber.id && styles.patchRowActive)} onClick={() => setActiveFiberId(fiber.id)}><span className={styles.patchJack}><i /></span><span className={styles.patchCode}>{fiber.connectorKind === "through" ? "THR" : fiber.connectorKind === "keyed" ? "KEY" : "TST"}{String(index + 1).padStart(2, "0")}</span><span className={styles.patchName}>{fiber.label}</span></button>)}</div>
+        <div className={styles.moduleLabel}>CHANNEL READOUT</div><div className={styles.readout}><span className={styles.readoutType}>{relationKindLabels[activeFiber.relationKind]}</span><h3>{activeFiber.label}</h3><p>{activeFiber.statement}</p></div>
+        <div className={styles.layerReadout}><span>MECHANICAL ACTION</span><p>{viewMode === "focus" ? "Board is extracted for inspection. Other cards remain recessed in rack context." : "Board is seated in the atlas stack."}</p><button type="button" onClick={() => setViewMode(viewMode === "focus" ? "woven" : "focus")}>{viewMode === "focus" ? "RESEAT BOARD" : "EXTRACT BOARD"}</button></div>
+      </aside>
+    </div>
+    <footer className={styles.footerStrip}><span>BF-ATLAS / RACK SPEC 0.3</span><span>{model.thesis}</span><span>STACK → EXTRACT → RESEAT</span></footer>
+  </section>;
 }
