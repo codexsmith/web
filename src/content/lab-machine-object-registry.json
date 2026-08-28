@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "governed-object registry expansion seed",
+  "purpose": "Extend the Lab Machine carrier from one demonstration object into a selectable registry of source-backed governed objects with different institutional routes and explicit missing stages.",
+  "objects": [
+    {
+      "id": "boundary-first-ux",
+      "label": "Boundary First UX",
+      "kind": "public standard / experimental interface",
+      "status": "working public standard · launch candidate",
+      "framing": "Can one semantic object survive changes of renderer, resolution, context, and interaction without losing identity, provenance, consequence, or closure?",
+      "objectBoundary": "The Boundary First UX semantic interaction standard, flagship demonstration, conformance questions, accessibility posture, reference experiences, and experimental sandboxes.",
+      "claimBoundary": "BFUX is a working public standard and launch candidate. Candidate conformance levels are proposed rather than canonical, and the work does not claim that a particular skin, component library, graph interface, or replacement of existing design systems is required.",
+      "invariants": [
+        "views do not own semantic truth",
+        "identity and provenance survive transformation",
+        "consequence and path remain recoverable",
+        "accessible representations preserve essential semantic state",
+        "closure is scoped and earned rather than implied by interface completion"
+      ],
+      "route": ["products", "service", "public-value"],
+      "sourceRefs": [
+        "src/content/product-landing-pages/boundary-first-ux.json",
+        "src/content/lab-machine-service.json#boundary-first-ux",
+        "src/content/lab-machine-public-value.json#bfux"
+      ],
+      "projections": {
+        "products": {
+          "role": "Experimental embodiment",
+          "standing": "working public standard · launch candidate",
+          "representation": "The semantic interaction proposition is forced into a flagship experience, interaction grammar, conformance questions, accessibility requirements, and public sandboxes so representation changes can be inspected rather than merely described.",
+          "preserves": ["renderer independence", "identity + provenance", "consequence + path", "accessible parity", "earned closure"],
+          "witness": ["public standard language", "flagship sequence", "sandbox routes", "conformance questions", "explicit non-goals"],
+          "next": "Collect independent renderer, cold-reader, accessibility, and comparative task evidence before stronger conformance or outcome claims.",
+          "claimBoundary": "A launch-candidate standard and reference experience do not establish improved outcomes, universal applicability, or canonical conformance levels.",
+          "sourceRef": "src/content/product-landing-pages/boundary-first-ux.json"
+        },
+        "service": {
+          "role": "Distribution package",
+          "standing": "standard + sandbox + guided experience",
+          "representation": "BFUX leaves the originating product surface as public standard language, interaction grammar, conformance questions, reference behavior, sandbox routes, and accessibility requirements that another renderer should be able to recover without hidden Lab context.",
+          "preserves": ["identity", "scope", "provenance", "claim ceiling", "executable interaction semantics", "repair path", "legible equivalent"],
+          "witness": ["another renderer preserves governed meaning", "context remains traceable", "non-spatial routes preserve essential state", "conformance questions expose defects"],
+          "next": "Test independent reuse by another team in a different renderer and record semantic drift, accessibility defects, and adaptation requirements.",
+          "claimBoundary": "Distribution does not turn proposed conformance levels into canonical authority or prove that BFUX improves design outcomes.",
+          "sourceRef": "src/content/lab-machine-service.json#boundary-first-ux"
+        },
+        "public-value": {
+          "role": "Consequence / capability claim",
+          "standing": "E1 · capability is reachable",
+          "representation": "The public standard, reference experience, conformance questions, and sandboxes are reachable by declared audiences. That supports availability, not comprehension, adoption, changed decisions, independent reuse, or durable institutional value.",
+          "preserves": ["legibility", "agency", "repairability", "capability transfer", "E1 claim ceiling"],
+          "witness": ["external access path", "interface + instructions", "claim boundary", "repair/contact path"],
+          "next": "Advance only with independent practitioner reuse, cold-reader task evidence, external accessibility review, comparative outcomes, and durability evidence.",
+          "claimBoundary": "Current public-value standing is E1 reachability only.",
+          "sourceRef": "src/content/lab-machine-public-value.json#bfux"
+        },
+        "method": {
+          "role": "Interaction grammar",
+          "standing": "working semantic procedure",
+          "representation": "The object can also be inspected as a method: bound the view, preserve identity, reveal hidden structure, trace consequence, stress the representation, repair defects, and promote context when the current boundary is insufficient.",
+          "preserves": ["semantic state across projections", "declared transition meaning", "reversibility where promised", "closure conditions"],
+          "witness": ["interaction grammar", "motion laws", "signature mechanics", "conformance questions"],
+          "next": "Keep the method separable from the particular industrial visual skin and prove equivalent semantics through alternate renderers.",
+          "claimBoundary": "A method projection does not make one renderer or aesthetic canonical.",
+          "sourceRef": "src/content/product-landing-pages/boundary-first-ux.json"
+        }
+      }
+    },
+    {
+      "id": "software-before-code",
+      "label": "Software Before Code",
+      "kind": "public engineering method",
+      "status": "working public method",
+      "framing": "What must a software representation preserve before implementation choices become safe enough to commit?",
+      "objectBoundary": "A Boundary First software-engineering discipline for discovering the represented domain, consequential distinctions, admissible transformations, protected invariants, witnesses, failure paths, and closure conditions before selecting implementation mechanisms.",
+      "claimBoundary": "Software Before Code is a working public method. It is not proof of correctness, a requirement for big design up front, a rejection of frameworks, or evidence of universal superiority over competent software-engineering practice.",
+      "invariants": [
+        "determine the represented object before selecting mechanisms",
+        "protected distinctions remain visible through implementation",
+        "admissible transitions remain explicit",
+        "completion stays distinct from domain closure",
+        "defects can trace back to forgotten distinctions",
+        "witness and consequence remain part of software quality"
+      ],
+      "route": ["method", "service", "public-value"],
+      "sourceRefs": [
+        "src/content/product-landing-pages/software-before-code.json",
+        "src/content/lab-machine-service.json#software-before-code",
+        "src/content/lab-machine-public-value.json#software-before-code"
+      ],
+      "projections": {
+        "method": {
+          "role": "Procedural grammar",
+          "standing": "working public method",
+          "representation": "The governed object is a repeatable engineering sequence: bound the domain, inventory distinctions, extract lawful transformation grammar, choose representations, build the smallest truthful delivery path, test closure, trace defects, then promote or repair.",
+          "preserves": ["domain boundary", "distinction ledger", "transition grammar", "protected invariants", "witness", "closure + repair"],
+          "witness": ["nine diagnostic questions", "Distinction-to-Closure procedure", "delivery skeleton", "workbench artifact specification", "validation ladder"],
+          "next": "Run matched design studies and executable reference implementations that expose where the method detects consequential defects earlier or fails to add value.",
+          "claimBoundary": "A replayable procedure is not proof of correctness or evidence that every project benefits from the same degree of formalization.",
+          "sourceRef": "src/content/product-landing-pages/software-before-code.json"
+        },
+        "service": {
+          "role": "Method / guide package",
+          "standing": "working public method",
+          "representation": "The method is packaged into diagnostic questions, a delivery skeleton, workbench artifacts, diagnostic smells and repairs, and a validation ladder so another practitioner can apply it without inheriting hidden implementation assumptions.",
+          "preserves": ["identity", "scope", "provenance", "claim ceiling", "instructions", "reuse witness", "repair path"],
+          "witness": ["a new team can produce the declared artifacts", "implementation follows the domain model", "failure paths remain observable", "a domain witness distinguishes completion from closure"],
+          "next": "Collect external replication and comparative design evidence, including cases where established practice already carries the needed structure more simply.",
+          "claimBoundary": "Packaging does not make proposed practice levels canonical or establish perfect requirements, proof of correctness, or framework rejection.",
+          "sourceRef": "src/content/lab-machine-service.json#software-before-code"
+        },
+        "public-value": {
+          "role": "Consequence / capability claim",
+          "standing": "E1 · capability is reachable",
+          "representation": "The public method and workbench are reachable as a reusable engineering capability. Current evidence supports availability, not measured defect-detection advantage, independent practitioner success, or durable organizational improvement.",
+          "preserves": ["legibility", "repairability", "capability transfer", "durable-capacity question", "E1 claim ceiling"],
+          "witness": ["external access path", "method instructions", "claim boundary", "repair/contact path"],
+          "next": "Advance with comparative design study, independent replication, measured defect-detection evidence, and longitudinal maintenance evidence.",
+          "claimBoundary": "Current public-value standing is E1 reachability only.",
+          "sourceRef": "src/content/lab-machine-public-value.json#software-before-code"
+        }
+      }
+    },
+    {
+      "id": "augusta-citywatch",
+      "label": "Augusta CityWatch",
+      "kind": "historical civic implementation / modern bridge",
+      "status": "historical build · modern bridge draft",
+      "framing": "Can one consequential civic process be represented so public status, evidence, responsibility, consequence, and repair become easier to inspect without inventing current institutional standing?",
+      "objectBoundary": "Historical CityWatch civic-transparency implementation and delivery experience, plus an unlisted modern Boundary First collaboration bridge for a bounded municipal process or infrastructure domain.",
+      "claimBoundary": "Historical implementation provides provenance and standing only. No current Augusta affiliation or collaboration is implied, and historical outcomes or awards require retained or independent evidence before public promotion.",
+      "invariants": [
+        "historical standing remains distinct from current partnership",
+        "one civic object retains identity across operational and public views",
+        "status remains connected to evidence and time",
+        "authority and jurisdiction remain explicit",
+        "public consequence remains connected to accountable repair"
+      ],
+      "route": ["applications", "service", "public-value"],
+      "sourceRefs": [
+        "src/content/product-landing-pages/augusta-citywatch.json",
+        "src/content/lab-machine-applications.json#augusta-citywatch",
+        "src/content/lab-machine-public-value.json#citywatch"
+      ],
+      "projections": {
+        "applications": {
+          "role": "Domain transfer",
+          "standing": "historical build · modern bridge draft",
+          "representation": "The object tests civic transfer by joining projects, spending, infrastructure status, timelines, geography, and public evidence while adding explicit provenance, authority, consequence, contestability, and repair questions for a future bounded municipal instrument.",
+          "preserves": ["object identity", "status + evidence + time", "jurisdiction", "public consequence + responsibility"],
+          "witness": ["retained implementation records", "operational/public project data", "stakeholder task evidence", "future prototype evidence if a new pilot occurs"],
+          "next": "Select one verifiable civic process, recover retained evidence, and build the smallest maintained representation that can expose status, consequence, and repair.",
+          "claimBoundary": "Prior operational work does not establish a current municipal collaboration or validate a modern Boundary First civic instrument.",
+          "sourceRef": "src/content/lab-machine-applications.json#augusta-citywatch"
+        },
+        "service": {
+          "role": "Distribution-package gap",
+          "standing": "no dedicated Service Bus package registered",
+          "representation": "CityWatch reaches the distribution boundary without a currently promoted, maintained Service Bus package. The carrier shows that gap instead of inventing an API, civic toolkit, maintained integration, or active municipal delivery channel.",
+          "preserves": ["historical/current distinction", "scope", "provenance", "claim ceiling", "visible missing package"],
+          "witness": ["a future package contract", "maintenance owner", "source/version rule", "public evidence + correction path"],
+          "next": "If a modern civic pilot becomes real, define the exact carrier: public record, bounded prototype, integration, guide, or another maintained package with ownership and repair semantics.",
+          "claimBoundary": "A historical portal and draft bridge are not a maintained present-day distribution service.",
+          "sourceRef": "src/content/lab-machine-service.json + src/content/product-landing-pages/augusta-citywatch.json"
+        },
+        "public-value": {
+          "role": "Consequence / capability claim",
+          "standing": "E1 · historical capability reachable as provenance",
+          "representation": "The historical implementation demonstrates that a citizen-facing representation existed and provides standing for inquiry. Current evidence does not yet establish present user benefit, municipal stewardship, modern repairability, independent reuse, or durable civic capacity.",
+          "preserves": ["people + institutions as beneficiary scales", "legibility", "agency", "durable-capacity question", "E1 claim ceiling"],
+          "witness": ["identifiable historical object", "public/retained source path", "claim boundary", "future correction/maintenance path"],
+          "next": "Recover independent historical evidence and gather current user, institutional, repair, and durability evidence before stronger impact language.",
+          "claimBoundary": "Current public-value record is intentionally conservative and does not promote historical standing into present impact.",
+          "sourceRef": "src/content/lab-machine-public-value.json#citywatch"
+        }
+      }
+    },
+    {
+      "id": "boundary-first-weather",
+      "label": "Boundary First Weather",
+      "kind": "public research program / pilot candidate",
+      "status": "research program · pilot candidate",
+      "framing": "Do measurable boundary or defect indicators predict where forecast-relevant disagreement and change concentrate well enough to improve diagnostics, adaptive computation, or structural compression against matched baselines?",
+      "objectBoundary": "A boundary-aware computational research layer for simulation, diagnostics, ensemble comparison, compression, and adaptive refinement designed to interoperate with established numerical and learned weather systems.",
+      "claimBoundary": "Boundary First Weather is an experimental research program. It does not currently claim improved forecast accuracy, faster operational NWP, earlier severe-weather prediction, replacement of established weather models, or external validation by a weather institution.",
+      "invariants": [
+        "domain-native conservation and numerical stability govern admissibility",
+        "prediction remains connected to observational witness",
+        "refinement is justified by measurable consequence rather than geometry alone",
+        "lower validation rungs do not license higher-rung claims",
+        "negative results remain successful bounded research outcomes"
+      ],
+      "route": ["research", "applications"],
+      "sourceRefs": [
+        "src/content/product-landing-pages/boundary-first-weather.json",
+        "src/content/lab-machine-applications.json#boundary-first-weather"
+      ],
+      "projections": {
+        "research": {
+          "role": "Testable research program",
+          "standing": "research program · pilot candidate",
+          "representation": "The object is a ladder of separable hypotheses about boundary detection, regime classification, transition warning, ensemble structural ranking, structure-preserving compression, and hybrid correction or refinement, each with its own claim ceiling.",
+          "preserves": ["established weather-science base layer", "claim ladder", "matched baseline", "conservation + stability", "negative-result acceptance"],
+          "witness": ["forecast-relevant error", "boundary-position and transport error", "conservation error", "wall-clock/update count", "matched baseline", "higher-rung independent evaluation"],
+          "next": "Implement the controlled weather-like pilot and compare boundary-selective refinement against a matched uniform-refinement baseline before moving toward established-model tests.",
+          "claimBoundary": "The core hypothesis is measurable but unvalidated; efficiency and forecast improvement are experimental results, not definitions.",
+          "sourceRef": "src/content/product-landing-pages/boundary-first-weather.json"
+        },
+        "applications": {
+          "role": "Domain transfer",
+          "standing": "pilot-ready research program",
+          "representation": "Boundary, transport, closure-defect, witness, and selective-computation machinery is transferred into meteorology and numerical modeling where PDE conservation, chaotic sensitivity, ensembles, observation sparsity, and mature adaptive methods can reject or narrow the mapping.",
+          "preserves": ["local state + interface transport", "observational witness", "measurable consequence for refinement"],
+          "witness": ["matched baseline", "forecast-relevant error", "conservation error", "wall-clock/update count", "independent meteorological evaluation at higher rungs"],
+          "next": "Treat failure to predict useful error, excess compute cost, stability loss, detector artifacts, or failure against established methods as research input rather than implementation exceptions.",
+          "claimBoundary": "Application to weather tests transfer; it does not establish universality, operational superiority, or external validation.",
+          "sourceRef": "src/content/lab-machine-applications.json#boundary-first-weather"
+        }
+      }
+    }
+  ]
+}

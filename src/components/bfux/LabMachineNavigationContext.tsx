@@ -22,6 +22,7 @@ type LabMachineNavigationValue = {
   rewind: () => void;
   clearTrail: () => void;
   setActiveObjectId: (objectId: string | null) => void;
+  loadObject: (objectId: string) => void;
 };
 
 const LabMachineNavigationContext = createContext<LabMachineNavigationValue | null>(null);
