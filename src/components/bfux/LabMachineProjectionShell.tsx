@@ -7,6 +7,7 @@ import { LabMachineObjectCarrier } from "./LabMachineObjectCarrier";
 import { LabMachineRelationRail } from "./LabMachineRelationRail";
 import { useLabMachineNavigation } from "./LabMachineNavigationContext";
 import "./lab-machine-projection.css";
+import "./lab-machine-density.css";
 
 export function LabMachineProjectionShell({
   subsystem,
