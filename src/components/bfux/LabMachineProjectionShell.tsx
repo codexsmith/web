@@ -31,6 +31,7 @@ const duplicateReadoutSelectors = [
   ".bf-pipeline__readout",
   ".bf-governance__readout",
   ".bf-timeline__state-readout",
+  ".bf-about__identity-readout",
 ];
 
 function normalizeBadgeWords(value: string) {
