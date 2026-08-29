@@ -1,0 +1,423 @@
+/* Screen Wall chassis families
+ *
+ * Device morphology communicates object role without replacing the shared
+ * Screen Wall grammar. Every object still exposes the same monitor, status,
+ * label, ports, and relation infrastructure. Chassis differences are limited
+ * to enclosure, service access, ventilation, protection, and instrumentation.
+ *
+ * Families in this prototype:
+ *   system engine        -> Atlas Engine
+ *   game cabinet         -> Boundary Chess
+ *   measurement instrument -> Distinction Geometry / Wave Bench
+ *   service chassis      -> Patch Bay / Corpus Forge
+ *   audio receiver       -> Lab Radio
+ *   experimental fixture -> Oddments
+ */
+
+.screen-module {
+  --chassis-metal: #1a2023;
+  --chassis-edge: #4b565c;
+  --chassis-recess: #090d0f;
+  --chassis-detail: #727f85;
+  --chassis-radius: .34rem;
+  --bezel-radius: .22rem;
+}
+
+.screen-module__button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.screen-module__bezel {
+  position: relative;
+  z-index: 2;
+  border-radius: var(--bezel-radius);
+}
+
+.screen-module__label {
+  position: relative;
+  z-index: 3;
+}
+
+/* Shared enclosure rails. These are deliberately quiet; each family changes
+ * their geometry rather than inventing a new visual language. */
+.screen-module__button::before,
+.screen-module__button::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+ * SYSTEM ENGINE — Atlas Engine
+ * Wide computational enclosure, continuous cooling rails, diagnostic spine.
+ * ----------------------------------------------------------------------- */
+.screen-module[data-screen="atlas"] {
+  --chassis-metal: #172126;
+  --chassis-edge: #4c6068;
+  --bezel-radius: .16rem;
+  background:
+    linear-gradient(90deg, #0d1214 0 .5rem, transparent .5rem calc(100% - .5rem), #0d1214 calc(100% - .5rem)),
+    linear-gradient(180deg, #1c2529, #0e1315 72%);
+}
+
+.screen-module[data-screen="atlas"] .screen-module__button {
+  padding: .62rem .66rem .5rem;
+}
+
+.screen-module[data-screen="atlas"] .screen-module__button::before {
+  left: .18rem;
+  right: .18rem;
+  top: .2rem;
+  height: .42rem;
+  border-top: 1px solid #536168;
+  border-bottom: 1px solid #202a2e;
+  background:
+    repeating-linear-gradient(90deg, #172024 0 10px, #303d42 10px 11px, #0b1012 11px 18px);
+  box-shadow: 0 1px 0 #050708;
+}
+
+.screen-module[data-screen="atlas"] .screen-module__button::after {
+  top: .82rem;
+  bottom: 3.55rem;
+  left: .2rem;
+  width: .3rem;
+  border: 1px solid #354147;
+  background:
+    repeating-linear-gradient(180deg, #0c1113 0 9px, #4d5d64 9px 10px, #0c1113 10px 16px);
+  box-shadow: inset 0 0 0 1px #070a0b;
+}
+
+.screen-module[data-screen="atlas"] .screen-module__bezel {
+  margin-left: .2rem;
+  border-color: #46555c;
+  background:
+    linear-gradient(90deg, #263238 0 4px, #0b0f11 4px calc(100% - 4px), #263238 calc(100% - 4px)),
+    #101619;
+}
+
+.screen-module[data-screen="atlas"] .screen-module__label {
+  border-top: 1px solid #263137;
+}
+
+/* --------------------------------------------------------------------------
+ * GAME CABINET — Boundary Chess
+ * Protective shell, stout bezel, visible guards rather than extra controls.
+ * ----------------------------------------------------------------------- */
+.screen-module[data-screen="chess"] {
+  --chassis-metal: #211e18;
+  --chassis-edge: #625742;
+  --bezel-radius: .38rem;
+  border-radius: .54rem;
+  background:
+    linear-gradient(135deg, rgba(232,184,66,.06), transparent 28%),
+    linear-gradient(180deg, #201e19, #0f0e0b 76%);
+}
+
+.screen-module[data-screen="chess"] .screen-module__button {
+  padding: .68rem .56rem .5rem;
+}
+
+.screen-module[data-screen="chess"] .screen-module__button::before {
+  inset: .28rem .2rem auto;
+  height: .3rem;
+  border: 1px solid #4e493b;
+  border-radius: .26rem .26rem 0 0;
+  background: linear-gradient(180deg, #342f25, #15130f);
+  box-shadow: 0 2px 0 #070706;
+}
+
+.screen-module[data-screen="chess"] .screen-module__button::after {
+  left: 1.05rem;
+  right: 1.05rem;
+  bottom: 3.2rem;
+  height: .3rem;
+  border: 1px solid #5b523f;
+  border-radius: 0 0 .3rem .3rem;
+  background: #17140f;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.screen-module[data-screen="chess"] .screen-module__bezel {
+  border-width: 2px;
+  border-color: #544c3d;
+  background:
+    linear-gradient(145deg, #2a271f, #0b0a08 55%, #211d17);
+  box-shadow:
+    inset 0 0 0 2px #080806,
+    inset 0 0 20px #000,
+    0 2px 0 #080806;
+}
+
+.screen-module[data-screen="chess"] .screen-module__icon {
+  border-radius: 50%;
+}
+
+/* --------------------------------------------------------------------------
+ * MEASUREMENT INSTRUMENT — Geometry / Wave Bench
+ * Fine bezel, calibration marks, symmetric instrument rails.
+ * ----------------------------------------------------------------------- */
+.screen-module[data-screen="geometry"],
+.screen-module[data-screen="waves"] {
+  --chassis-metal: #181b22;
+  --chassis-edge: #565b68;
+  --bezel-radius: .08rem;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent .5rem),
+    linear-gradient(180deg, #1b1e25, #0c0e12 76%);
+}
+
+.screen-module[data-screen="geometry"] .screen-module__button,
+.screen-module[data-screen="waves"] .screen-module__button {
+  padding: .56rem .66rem .48rem;
+}
+
+.screen-module[data-screen="geometry"] .screen-module__button::before,
+.screen-module[data-screen="waves"] .screen-module__button::before {
+  left: .28rem;
+  top: .78rem;
+  bottom: 3.55rem;
+  width: .24rem;
+  border-left: 1px solid #4f5961;
+  border-right: 1px solid #20272b;
+  background:
+    repeating-linear-gradient(180deg, #6c777d 0 1px, transparent 1px 8px);
+  opacity: .72;
+}
+
+.screen-module[data-screen="geometry"] .screen-module__button::after,
+.screen-module[data-screen="waves"] .screen-module__button::after {
+  right: .28rem;
+  top: .78rem;
+  bottom: 3.55rem;
+  width: .24rem;
+  border-left: 1px solid #20272b;
+  border-right: 1px solid #4f5961;
+  background:
+    repeating-linear-gradient(180deg, #6c777d 0 1px, transparent 1px 8px);
+  opacity: .72;
+}
+
+.screen-module[data-screen="geometry"] .screen-module__bezel,
+.screen-module[data-screen="waves"] .screen-module__bezel {
+  border-color: color-mix(in srgb, var(--tone) 18%, #4d565d);
+  background: linear-gradient(145deg, #20242b, #080a0d 56%, #171a20);
+}
+
+.screen-module[data-screen="geometry"] .screen-module__label,
+.screen-module[data-screen="waves"] .screen-module__label {
+  border-top: 1px solid #252b31;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 30px, rgba(116,127,133,.08) 30px 31px),
+    linear-gradient(180deg, transparent, rgba(4,6,7,.18));
+}
+
+.screen-module[data-screen="geometry"][data-landmark="true"] .screen-module__button::before,
+.screen-module[data-screen="geometry"][data-landmark="true"] .screen-module__button::after {
+  top: 1rem;
+  bottom: 3.8rem;
+}
+
+/* --------------------------------------------------------------------------
+ * SERVICE CHASSIS — Patch Bay / Corpus Forge
+ * Heavy rack ears, ventilation, removable service panel language.
+ * ----------------------------------------------------------------------- */
+.screen-module[data-screen="patchbay"],
+.screen-module[data-screen="forge"] {
+  --chassis-metal: #171d19;
+  --chassis-edge: #536158;
+  --bezel-radius: .12rem;
+  background:
+    linear-gradient(90deg, #111713 0 .42rem, transparent .42rem calc(100% - .42rem), #111713 calc(100% - .42rem)),
+    linear-gradient(180deg, #1b211d, #0c100d 74%);
+}
+
+.screen-module[data-screen="patchbay"] .screen-module__button,
+.screen-module[data-screen="forge"] .screen-module__button {
+  padding: .62rem .72rem .5rem;
+}
+
+.screen-module[data-screen="patchbay"] .screen-module__button::before,
+.screen-module[data-screen="forge"] .screen-module__button::before {
+  left: .18rem;
+  top: .82rem;
+  bottom: 3.5rem;
+  width: .34rem;
+  border: 1px solid #46534a;
+  background:
+    radial-gradient(circle at 50% 12%, #68756d 0 1px, #080b09 2px 3px, transparent 4px),
+    radial-gradient(circle at 50% 88%, #68756d 0 1px, #080b09 2px 3px, transparent 4px),
+    #121713;
+  box-shadow: inset 0 0 0 1px #070a08;
+}
+
+.screen-module[data-screen="patchbay"] .screen-module__button::after,
+.screen-module[data-screen="forge"] .screen-module__button::after {
+  right: .18rem;
+  top: .82rem;
+  bottom: 3.5rem;
+  width: .34rem;
+  border: 1px solid #46534a;
+  background:
+    radial-gradient(circle at 50% 12%, #68756d 0 1px, #080b09 2px 3px, transparent 4px),
+    radial-gradient(circle at 50% 88%, #68756d 0 1px, #080b09 2px 3px, transparent 4px),
+    #121713;
+  box-shadow: inset 0 0 0 1px #070a08;
+}
+
+.screen-module[data-screen="patchbay"] .screen-module__bezel,
+.screen-module[data-screen="forge"] .screen-module__bezel {
+  border-color: #465249;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.025),
+    inset 0 0 20px #000,
+    0 0 0 1px #080b09;
+}
+
+.screen-module[data-screen="patchbay"] .screen-module__label,
+.screen-module[data-screen="forge"] .screen-module__label {
+  border-top: 1px solid #344039;
+  background:
+    repeating-linear-gradient(90deg, #101511 0 9px, #263129 9px 10px, #101511 10px 18px);
+}
+
+.screen-module[data-screen="forge"] {
+  background:
+    linear-gradient(90deg, #101712 0 .5rem, transparent .5rem calc(100% - .5rem), #101712 calc(100% - .5rem)),
+    linear-gradient(180deg, #1b251e, #0b100c 70%);
+}
+
+.screen-module[data-screen="forge"] .screen-module__bezel {
+  margin-top: .18rem;
+}
+
+/* --------------------------------------------------------------------------
+ * AUDIO RECEIVER — Lab Radio
+ * Horizontal rack receiver with grille language and narrow display framing.
+ * ----------------------------------------------------------------------- */
+.screen-module[data-screen="radio"] {
+  --chassis-metal: #211719;
+  --chassis-edge: #61494c;
+  --bezel-radius: .1rem;
+  background:
+    linear-gradient(180deg, #21191b, #0f0b0c 72%);
+}
+
+.screen-module[data-screen="radio"] .screen-module__button {
+  padding: .54rem .62rem .48rem;
+}
+
+.screen-module[data-screen="radio"] .screen-module__button::before {
+  left: .62rem;
+  right: .62rem;
+  top: .18rem;
+  height: .2rem;
+  background:
+    repeating-linear-gradient(90deg, #4c3d40 0 2px, transparent 2px 6px);
+  opacity: .82;
+}
+
+.screen-module[data-screen="radio"] .screen-module__button::after {
+  left: .64rem;
+  right: .64rem;
+  bottom: 3.08rem;
+  height: .34rem;
+  border-top: 1px solid #46383b;
+  border-bottom: 1px solid #120d0e;
+  background:
+    radial-gradient(circle, #55464a 0 1px, transparent 1.2px) 0 0 / 8px 6px,
+    #151012;
+  opacity: .78;
+}
+
+.screen-module[data-screen="radio"] .screen-module__bezel {
+  border-color: #4b3a3d;
+  background: linear-gradient(180deg, #231b1d, #090708 62%, #191214);
+}
+
+.screen-module[data-screen="radio"] .screen-module__icon {
+  border-radius: .12rem;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--tone) 24%, #111) 0 12%, #090708 13% 54%, #2a2022 55% 58%, #090708 59%);
+}
+
+/* --------------------------------------------------------------------------
+ * EXPERIMENTAL FIXTURE — Oddments
+ * Intentionally less standardized, but still serviceable and bounded. The
+ * asymmetry is localized to the enclosure rather than leaking into semantics.
+ * ----------------------------------------------------------------------- */
+.screen-module[data-screen="oddments"] {
+  --chassis-metal: #211821;
+  --chassis-edge: #5a4759;
+  --bezel-radius: .2rem;
+  border-radius: .24rem .52rem .3rem .42rem;
+  background:
+    linear-gradient(155deg, rgba(255,130,200,.055), transparent 32%),
+    linear-gradient(180deg, #211921, #0f0b0f 73%);
+}
+
+.screen-module[data-screen="oddments"] .screen-module__button {
+  padding: .7rem .58rem .46rem .72rem;
+}
+
+.screen-module[data-screen="oddments"] .screen-module__button::before {
+  left: .24rem;
+  top: 1rem;
+  bottom: 3.45rem;
+  width: .3rem;
+  border: 1px solid #514050;
+  background:
+    repeating-linear-gradient(180deg, #2a2029 0 12px, #0d090d 12px 17px);
+  transform: skewY(-2deg);
+}
+
+.screen-module[data-screen="oddments"] .screen-module__button::after {
+  right: .22rem;
+  top: .42rem;
+  width: 1.2rem;
+  height: .34rem;
+  border: 1px solid #5a4658;
+  background:
+    linear-gradient(90deg, #181018 0 32%, #665164 33% 36%, #181018 37% 68%, #665164 69% 72%, #181018 73%);
+  transform: rotate(1.4deg);
+  box-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+
+.screen-module[data-screen="oddments"] .screen-module__bezel {
+  transform: translateX(.06rem);
+  border-color: #523f51;
+  background: linear-gradient(140deg, #251b24, #090609 58%, #1a1119);
+}
+
+.screen-module[data-screen="oddments"] .screen-module__label {
+  border-top: 1px dashed #473646;
+}
+
+/* Family response at smaller widths: keep morphology, reduce protrusions. */
+@media (max-width: 1100px) {
+  .screen-module[data-screen="atlas"] .screen-module__button::after,
+  .screen-module[data-screen="geometry"] .screen-module__button::before,
+  .screen-module[data-screen="geometry"] .screen-module__button::after,
+  .screen-module[data-screen="waves"] .screen-module__button::before,
+  .screen-module[data-screen="waves"] .screen-module__button::after,
+  .screen-module[data-screen="patchbay"] .screen-module__button::before,
+  .screen-module[data-screen="patchbay"] .screen-module__button::after,
+  .screen-module[data-screen="forge"] .screen-module__button::before,
+  .screen-module[data-screen="forge"] .screen-module__button::after,
+  .screen-module[data-screen="oddments"] .screen-module__button::before {
+    opacity: .5;
+  }
+}
+
+@media (max-width: 760px) {
+  .screen-module__button::before,
+  .screen-module__button::after {
+    opacity: .38;
+  }
+
+  .screen-module[data-screen="oddments"] .screen-module__bezel {
+    transform: none;
+  }
+}

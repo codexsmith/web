@@ -1,0 +1,576 @@
+/* Declared Screen Wall relation routing.
+ * Paths are an explanatory projection of the typed relation registry in
+ * ScreenWallCatalog.tsx. A crossing without a terminal remains a crossing;
+ * only square sources, circular targets, and explicit junction hardware mean
+ * connection.
+ */
+
+.screen-wall-traces {
+  position: absolute;
+  inset: 1.7rem;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.screen-wall-traces svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.screen-wall-trace {
+  --trace: #7c919b;
+  transition: opacity .18s ease;
+}
+
+.screen-wall-trace[data-kind="projection"] { --trace: #68c9dc; }
+.screen-wall-trace[data-kind="signal"] { --trace: #8fbf4b; }
+.screen-wall-trace[data-kind="artifact"] { --trace: #d6a952; }
+
+.screen-wall-trace__underlay,
+.screen-wall-trace__line {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  stroke-linecap: square;
+}
+
+.screen-wall-trace__underlay {
+  stroke: #050708;
+  stroke-width: 6px;
+  opacity: .96;
+}
+
+.screen-wall-trace__line {
+  stroke: var(--trace);
+  stroke-width: 1.35px;
+  opacity: .68;
+}
+
+.screen-wall-trace[data-kind="projection"] .screen-wall-trace__line {
+  stroke-dasharray: 1 0;
+}
+
+.screen-wall-trace[data-kind="signal"] .screen-wall-trace__line {
+  stroke-dasharray: 7 4;
+}
+
+.screen-wall-trace[data-kind="artifact"] .screen-wall-trace__line {
+  stroke-dasharray: 2 3;
+  stroke-width: 1.7px;
+}
+
+.screen-wall-trace marker path {
+  fill: var(--trace);
+  stroke: #050708;
+  stroke-width: .8px;
+}
+
+.screen-wall-trace__source {
+  fill: #0a0e10;
+  stroke: var(--trace);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.screen-wall-trace__target {
+  fill: #0a0e10;
+  stroke: var(--trace);
+  stroke-width: 1.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.screen-wall-trace__label {
+  fill: color-mix(in srgb, var(--trace) 72%, #8e989d);
+  stroke: #070a0b;
+  stroke-width: 4px;
+  paint-order: stroke fill;
+  font: 500 9px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+}
+
+.screen-wall-trace.is-focused .screen-wall-trace__line {
+  opacity: 1;
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--trace) 42%, transparent));
+}
+
+.screen-wall-trace.is-focused .screen-wall-trace__label {
+  fill: color-mix(in srgb, var(--trace) 90%, white);
+}
+
+.screen-wall-trace.is-muted {
+  opacity: .1;
+}
+
+.screen-wall-grid > .screen-module {
+  z-index: 2;
+}
+
+.screen-wall-relations {
+  margin: 1rem 0;
+  border: 1px solid #30383d;
+  background: #0b1012;
+}
+
+.screen-wall-relations > small {
+  display: block;
+  padding: .48rem .58rem;
+  border-bottom: 1px solid #30383d;
+  color: #737f85;
+  font-size: .45rem;
+  letter-spacing: .12em;
+}
+
+.screen-wall-relations > p {
+  margin: 0;
+  padding: .65rem;
+  color: #768187;
+  font-size: .62rem;
+}
+
+.screen-wall-relations > div {
+  --relation: #8f9ca3;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: .12rem .5rem;
+  align-items: baseline;
+  padding: .55rem .6rem;
+  border-bottom: 1px solid #252d31;
+}
+
+.screen-wall-relations > div:last-child {
+  border-bottom: 0;
+}
+
+.screen-wall-relations > div[data-kind="projection"] { --relation: #68c9dc; }
+.screen-wall-relations > div[data-kind="signal"] { --relation: #8fbf4b; }
+.screen-wall-relations > div[data-kind="artifact"] { --relation: #d6a952; }
+
+.screen-wall-relations span {
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+  min-height: 2rem;
+  border: 1px solid color-mix(in srgb, var(--relation) 58%, #384247);
+  color: var(--relation);
+  font-size: .45rem;
+  letter-spacing: .08em;
+}
+
+.screen-wall-relations strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #d9dfe2;
+  font-size: .62rem;
+  font-weight: 600;
+}
+
+.screen-wall-relations em {
+  color: color-mix(in srgb, var(--relation) 68%, #778288);
+  font-size: .46rem;
+  font-style: normal;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.legend-trace--projection {
+  border-top-style: solid;
+  border-top-color: #68c9dc;
+}
+
+.legend-trace--signal {
+  border-top-style: dashed;
+  border-top-color: #8fbf4b;
+}
+
+.legend-trace--artifact {
+  border-top-style: dotted;
+  border-top-color: #d6a952;
+}
+
+/* Mechanical routing refinement.
+ * The route has three readable scales:
+ *   1. cable tray / conduit = shared physical infrastructure;
+ *   2. colored conductor = declared relation class;
+ *   3. terminal + boot = actual ingress / egress at a screen boundary.
+ *
+ * The physical layer never creates a relationship. A junction remains visible
+ * hardware; a crossing bridge explicitly means the two routes do not connect.
+ */
+
+@media (min-width: 1101px) {
+  .screen-wall-traces {
+    isolation: isolate;
+  }
+
+  /* The black stroke becomes the recess of a cable tray rather than a generic
+   * diagram halo. The relation conductor sits visibly inside it. */
+  .screen-wall-trace__underlay {
+    stroke: #0a0f12;
+    stroke-width: 10px;
+    opacity: 1;
+    filter:
+      drop-shadow(0 -1px 0 #283136)
+      drop-shadow(0 2px 2px rgba(0, 0, 0, .72));
+  }
+
+  .screen-wall-trace__line {
+    stroke-width: 2.05px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: .82;
+    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, .75));
+  }
+
+  .screen-wall-trace[data-kind="artifact"] .screen-wall-trace__line {
+    stroke-width: 2.35px;
+  }
+
+  /* Endpoint hardware reads like a keyed plug and a socket. The source is
+   * deliberately rectilinear; the target remains round. */
+  .screen-wall-trace__source {
+    fill: #11171a;
+    stroke-width: 2px;
+    filter:
+      drop-shadow(0 0 0 #050708)
+      drop-shadow(0 1px 2px rgba(0, 0, 0, .9));
+  }
+
+  .screen-wall-trace__target {
+    fill: #06090a;
+    stroke-width: 2px;
+    filter:
+      drop-shadow(0 0 2px color-mix(in srgb, var(--trace) 28%, transparent))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, .9));
+  }
+
+  .screen-wall-trace__label {
+    font-size: 8px;
+    stroke-width: 6px;
+    opacity: .92;
+  }
+
+  .screen-wall-trace.is-focused .screen-wall-trace__underlay {
+    stroke: #10171a;
+    filter:
+      drop-shadow(0 -1px 0 #3a454a)
+      drop-shadow(0 2px 3px rgba(0, 0, 0, .82));
+  }
+
+  .screen-wall-trace.is-focused .screen-wall-trace__line {
+    stroke-width: 2.8px;
+  }
+
+  /* Shared infrastructure is intentionally neutral. Multiple typed conductors
+   * can occupy the same tray without becoming the same relation. */
+  .screen-wall-bus {
+    border-color: #4b575d;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 12px, rgba(160, 174, 180, .10) 12px 13px, transparent 13px 26px),
+      linear-gradient(180deg, #222a2e 0, #111719 44%, #090d0f 55%, #171d20 100%);
+    box-shadow:
+      0 0 0 2px #050708,
+      inset 0 1px 0 rgba(255,255,255,.07),
+      inset 0 -1px 0 rgba(0,0,0,.8),
+      0 3px 4px rgba(0,0,0,.42);
+  }
+
+  .screen-wall-bus--b {
+    background:
+      repeating-linear-gradient(180deg, transparent 0 12px, rgba(160, 174, 180, .10) 12px 13px, transparent 13px 26px),
+      linear-gradient(90deg, #222a2e 0, #111719 44%, #090d0f 55%, #171d20 100%);
+  }
+
+  /* Existing junction blocks now read like serviceable breakout boxes rather
+   * than decorative lamps. Their green center indicates retained continuity,
+   * not a new relation. */
+  .screen-wall-junction {
+    border-color: #778187;
+    background:
+      linear-gradient(90deg, transparent 47%, #657178 48% 52%, transparent 53%),
+      linear-gradient(180deg, #293236, #111719 62%, #0a0e10);
+    box-shadow:
+      inset 0 0 0 3px #080b0d,
+      inset 0 1px 0 rgba(255,255,255,.09),
+      0 0 0 2px #050708,
+      0 3px 4px rgba(0,0,0,.5);
+  }
+
+  .screen-wall-junction::after {
+    inset: .34rem;
+    border: 1px solid #6f7a80;
+    background: #101619;
+    box-shadow:
+      inset 0 0 0 2px #050708,
+      0 0 0 1px rgba(147,191,59,.24);
+  }
+
+  /* Mode-specific tray alignment. These are physical service lanes, not graph
+   * edges; the colored relation traces remain the authority for connectivity. */
+  .screen-wall-shell[data-mode="curated"] .screen-wall-bus--a {
+    top: 49.7%;
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-bus--b {
+    left: 33.7%;
+    top: 15%;
+    bottom: 22%;
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-bus--c {
+    bottom: 4.2%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-bus--a {
+    top: 24.8%;
+    left: 67%;
+    right: 1.5%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-bus--b {
+    left: 67.7%;
+    top: 24.5%;
+    bottom: 3.8%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-bus--c {
+    bottom: 3.7%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-bus--a {
+    top: 74.1%;
+    left: 32.8%;
+    right: 15.7%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-bus--b {
+    left: 83.7%;
+    top: 24%;
+    bottom: 25.5%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-bus--c {
+    bottom: 3.2%;
+  }
+
+  /* Crossing bridge: in Workbench the vertical signal conduit passes over the
+   * horizontal shared service lane. The dark clearance gap and metal arch make
+   * the non-junction explicit. */
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-traces::after {
+    content: "";
+    position: absolute;
+    z-index: 7;
+    left: calc(83.8% - .85rem);
+    top: calc(50% - .46rem);
+    width: 1.7rem;
+    height: .9rem;
+    border: 2px solid #657178;
+    border-bottom: 0;
+    border-radius: 1.2rem 1.2rem 0 0;
+    background: #090d0f;
+    box-shadow:
+      0 -2px 0 #111719,
+      0 0 0 3px #050708,
+      0 3px 4px rgba(0,0,0,.62);
+    pointer-events: none;
+  }
+
+  /* Strain-relief boots at the visible module terminals. They are deliberately
+   * short: the cable becomes free only after crossing the screen boundary. */
+  .screen-module__ports::after {
+    width: 1.12rem;
+    height: .34rem;
+    border: 1px solid #536067;
+    border-left-color: #232c30;
+    border-right-color: #232c30;
+    background:
+      repeating-linear-gradient(90deg, #141a1d 0 3px, #2d383d 3px 4px),
+      #111719;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.04),
+      0 0 0 2px #050708;
+  }
+
+  /* The outlet blocks are slightly larger than the conductor terminal so a
+   * user can visually distinguish plug hardware from the cable itself. */
+  .screen-module__ports {
+    padding: .31rem .24rem;
+    border-color: #68747a;
+    box-shadow:
+      0 0 0 2px #050708,
+      inset 0 1px 0 rgba(255,255,255,.07),
+      0 2px 3px rgba(0,0,0,.48);
+  }
+
+  .screen-module__ports i {
+    box-shadow:
+      inset 0 0 0 1px #222b2f,
+      0 0 0 1px #050708;
+  }
+}
+
+/* Installed-conduit geometry.
+ * The JSX retains simple orthogonal routes as a conservative fallback. On the
+ * full wall, the same semantic paths are promoted to short-radius conduit
+ * bends with local terminal leads. The rounded geometry is presentation only:
+ * endpoints, direction, type, and relation identity remain unchanged.
+ */
+@media (min-width: 1101px) {
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__line {
+    d: path("M 330 188 H 334 Q 340 188 340 194 V 344 Q 340 350 346 350");
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__line {
+    d: path("M 346 350 H 340 Q 334 350 334 356 V 514 Q 334 520 330 520");
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="curated"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__line {
+    d: path("M 330 520 H 334 Q 340 520 340 526 V 663 Q 340 669 346 669 H 830 Q 836 669 836 663 V 526 Q 836 520 842 520 H 844");
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__line {
+    d: path("M 670 270 H 674 Q 680 270 680 276 V 670 Q 680 676 674 676 H 24 Q 18 676 18 670 V 526 Q 18 520 24 520 H 30");
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__line {
+    d: path("M 970 104 H 978 Q 984 104 984 110 V 179 Q 984 185 978 185 H 682 Q 676 185 676 191 V 424 Q 676 430 682 430 H 685");
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(1) .screen-wall-trace__line {
+    d: path("M 330 188 H 334 Q 340 188 340 194 V 264 Q 340 270 346 270");
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(2) .screen-wall-trace__line {
+    d: path("M 830 270 H 834 Q 840 270 840 276 V 514 Q 840 520 834 520 H 342 Q 336 520 336 526 V 594 Q 336 600 342 600 H 346");
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__underlay,
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-trace:nth-of-type(3) .screen-wall-trace__line {
+    d: path("M 970 350 H 978 Q 984 350 984 356 V 674 Q 984 680 978 680 H 22 Q 16 680 16 674 V 526 Q 16 520 22 520 H 30");
+  }
+
+  /* Tray clamps: the clamp rhythm is deliberately slower than the tray slat
+   * texture. This makes the hardware look installed rather than patterned. */
+  .screen-wall-bus--a,
+  .screen-wall-bus--c {
+    background:
+      repeating-linear-gradient(90deg, transparent 0 42px, rgba(155,168,174,.42) 42px 44px, rgba(8,11,13,.9) 44px 47px, transparent 47px 86px),
+      repeating-linear-gradient(90deg, transparent 0 12px, rgba(160,174,180,.10) 12px 13px, transparent 13px 26px),
+      linear-gradient(180deg, #222a2e 0, #111719 44%, #090d0f 55%, #171d20 100%);
+  }
+
+  .screen-wall-bus--b {
+    background:
+      repeating-linear-gradient(180deg, transparent 0 42px, rgba(155,168,174,.42) 42px 44px, rgba(8,11,13,.9) 44px 47px, transparent 47px 86px),
+      repeating-linear-gradient(180deg, transparent 0 12px, rgba(160,174,180,.10) 12px 13px, transparent 13px 26px),
+      linear-gradient(90deg, #222a2e 0, #111719 44%, #090d0f 55%, #171d20 100%);
+  }
+
+  /* Reposition the existing service boxes onto actual takeoff lanes for each
+   * projection. These boxes mark managed branch locations in the tray system;
+   * they do not declare connection by themselves. */
+  .screen-wall-shell[data-mode="curated"] .screen-wall-junction--a {
+    left: 33.1%;
+    top: 48.9%;
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-junction--b {
+    left: 33.1%;
+    right: auto;
+    top: auto;
+    bottom: 3.35%;
+  }
+
+  .screen-wall-shell[data-mode="curated"] .screen-wall-junction--c {
+    right: 15.6%;
+    bottom: 3.35%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-junction--a {
+    left: 67.1%;
+    top: 24.1%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-junction--b {
+    left: 67.1%;
+    right: auto;
+    top: 60.3%;
+  }
+
+  .screen-wall-shell[data-mode="arcade"] .screen-wall-junction--c {
+    left: .85%;
+    right: auto;
+    bottom: 3.15%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-junction--a {
+    left: 83.1%;
+    top: 73.3%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-junction--b {
+    left: 33.1%;
+    right: auto;
+    top: 73.3%;
+  }
+
+  .screen-wall-shell[data-mode="workbench"] .screen-wall-junction--c {
+    right: .8%;
+    bottom: 2.8%;
+  }
+
+  /* Branch takeoff collars. A tiny keyed collar at the junction edge indicates
+   * where a conductor exits the shared tray and becomes a local run. */
+  .screen-wall-junction::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -.52rem;
+    width: .42rem;
+    height: .52rem;
+    transform: translateX(-50%);
+    border: 1px solid #59666c;
+    border-top: 0;
+    background:
+      repeating-linear-gradient(180deg, #161d20 0 2px, #303b40 2px 3px),
+      #111719;
+    box-shadow: 0 0 0 2px #050708;
+  }
+
+  /* Local drops get a short keyed lead before entering the device boot. This
+   * keeps the visual boundary crossing distinct from the long shared run. */
+  .screen-module__ports--left::after,
+  .screen-module__ports--right::after {
+    width: 1.34rem;
+  }
+
+  .screen-module__ports--left::after {
+    border-radius: .35rem 0 0 .35rem;
+  }
+
+  .screen-module__ports--right::after {
+    border-radius: 0 .35rem .35rem 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .screen-wall-traces {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-wall-trace {
+    transition: none;
+  }
+}
