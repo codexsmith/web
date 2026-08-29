@@ -22,14 +22,17 @@ import { LabMachinePublicValueProjection } from "./LabMachinePublicValueProjecti
 import { LabMachineResearchProjection } from "./LabMachineResearchProjection";
 import { LabMachineServiceProjection } from "./LabMachineServiceProjection";
 import { LabMachineTimelineProjection } from "./LabMachineTimelineProjection";
+import { LabMachineNavigationProvider, type LabMachineTraversalStep } from "./LabMachineNavigationContext";
 import { PhysicalMachineExperience } from "./PhysicalMachineExperience";
-import { getLabMachineNode } from "./lab-machine-model";
+import { getLabMachineConnectingEdge, getLabMachineNode, labMachineEdgeKey } from "./lab-machine-model";
 
 type Props = {
   section?: string;
   initialProjection: ProjectionMode;
   initialProcessScope: ProcessScope;
   showSchematic?: boolean;
+  machinePath?: string;
+  intermediateLayer?: boolean;
 };
 
 const coreNodePaths: Partial<Record<string, string>> = {
@@ -40,16 +43,21 @@ const coreNodePaths: Partial<Record<string, string>> = {
   research: "/research",
 };
 
-function machineUrl(projection: ProjectionMode = "world", scope: ProcessScope = "full", section?: string) {
+function machineUrl(basePath: string, projection: ProjectionMode = "world", scope: ProcessScope = "full", section?: string) {
   const params = new URLSearchParams({ skin: "physical" });
   if (section && projection === "world") params.set("section", section);
   if (projection === "evidence") params.set("view", "evidence");
   if (projection === "gestalt") params.set("view", "timeline");
   if (projection === "gestalt" && scope !== "full") params.set("scope", scope);
-  return `/world?${params.toString()}`;
+  return `${basePath}?${params.toString()}`;
 }
 
-function SectionSurface({ section, onClose }: { section: string; onClose: () => void }) {
+function SectionSurface({ section, onClose, intermediateLayer = false }: { section: string; onClose: () => void; intermediateLayer?: boolean }) {
+  if (intermediateLayer) {
+    const node = getLabMachineNode(section);
+    return node ? <LabMachineDetailPanel node={node} onClose={onClose} /> : null;
+  }
+
   switch (section) {
     case "research":
       return <LabMachineResearchProjection initialMode="program-map" onBack={onClose} onClose={onClose} />;
@@ -82,33 +90,49 @@ function SectionSurface({ section, onClose }: { section: string; onClose: () => 
   }
 }
 
-export function LabMachineWorld({ section, initialProjection, initialProcessScope, showSchematic = false }: Props) {
+export function LabMachineWorld({
+  section,
+  initialProjection,
+  initialProcessScope,
+  showSchematic = false,
+  machinePath = "/world",
+  intermediateLayer = false,
+}: Props) {
   const router = useRouter();
   const rootNode = useMemo(() => hydrateContentNode(getNode("root")), []);
   const projection = initialProjection;
   const processScope = initialProcessScope;
   const [searchOpen, setSearchOpen] = useState(false);
+  const [navigationFocusId, setNavigationFocusId] = useState(section ?? "research");
+  const [navigationTrail, setNavigationTrail] = useState<LabMachineTraversalStep[]>([]);
+  const [activeObjectId, setActiveObjectId] = useState<string | null>(null);
 
   const processScopeIndex = processScopes.indexOf(processScope);
   const canProcessZoomOut = processScopeIndex > 0;
   const canProcessZoomIn = processScopeIndex < processScopes.length - 1;
 
-  const closeSection = () => router.push(machineUrl("world", "full"), { scroll: false });
-  const openSection = (nodeId: string) => router.push(machineUrl("world", "full", nodeId), { scroll: false });
+  const closeSection = () => router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
+  const openSection = (nodeId: string) => {
+    if (intermediateLayer && !section) {
+      setNavigationFocusId(nodeId);
+      setNavigationTrail([]);
+    }
+    router.push(machineUrl(machinePath, "world", "full", nodeId), { scroll: false });
+  };
   const openCoreNode = (nodeId: string) => {
     const destination = coreNodePaths[nodeId];
     if (destination) router.push(destination, { scroll: false });
     else openSection(nodeId);
   };
   const returnToMachine = () => {
-    router.push(machineUrl("world", "full"), { scroll: false });
+    router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
   };
   const openMachine = () => router.push("/world");
   const changeProjection = (nextProjection: ProjectionMode) => {
-    router.push(machineUrl(nextProjection, processScope), { scroll: false });
+    router.push(machineUrl(machinePath, nextProjection, processScope), { scroll: false });
   };
   const changeProcessScope = (nextScope: ProcessScope) => {
-    router.replace(machineUrl(projection, nextScope), { scroll: false });
+    router.replace(machineUrl(machinePath, projection, nextScope), { scroll: false });
   };
   const navigateAway = (nodeId: string) => {
     setSearchOpen(false);
@@ -117,19 +141,63 @@ export function LabMachineWorld({ section, initialProjection, initialProcessScop
 
   if (projection === "world") {
     const sectionNode = section ? getLabMachineNode(section) : null;
+    const navigateTo = (nodeId: string) => {
+      const from = section ?? navigationFocusId;
+      const edge = getLabMachineConnectingEdge(from, nodeId);
+      if (edge) {
+        setNavigationTrail((trail) => [...trail, {
+          edgeKey: labMachineEdgeKey(edge),
+          from,
+          to: nodeId,
+          relation: edge.relation,
+          kind: edge.kind,
+          direction: edge.from === from ? "forward" : "reverse",
+        }]);
+      }
+      router.push(machineUrl(machinePath, "world", "full", nodeId), { scroll: false });
+    };
+    const rewind = () => {
+      const prior = navigationTrail.at(-1)?.from ?? navigationFocusId;
+      setNavigationTrail((trail) => trail.slice(0, -1));
+      router.push(machineUrl(machinePath, "world", "full", prior), { scroll: false });
+    };
+    const clearTrail = () => {
+      setNavigationTrail([]);
+      router.push(machineUrl(machinePath, "world", "full", navigationFocusId), { scroll: false });
+    };
 
-    return (
+    const experience = (
       <main className="world-machine-preview">
         <PhysicalMachineExperience
           showSchematic={showSchematic}
           initialResolution={section ? "mid" : "focus"}
           sectionLabel={sectionNode?.label}
-          sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} /> : undefined}
+          sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} intermediateLayer={intermediateLayer} /> : undefined}
           onCloseSection={closeSection}
           onOpenNode={openSection}
           onOpenCoreNode={openCoreNode}
+          machinePath={machinePath}
         />
       </main>
+    );
+
+    if (!intermediateLayer || !sectionNode) return experience;
+
+    return (
+      <LabMachineNavigationProvider value={{
+        focusId: navigationFocusId,
+        focusLabel: getLabMachineNode(navigationFocusId)?.label ?? sectionNode.label,
+        currentNodeId: sectionNode.id,
+        trail: navigationTrail,
+        activeObjectId,
+        navigateTo,
+        rewind,
+        clearTrail,
+        setActiveObjectId,
+        loadObject: setActiveObjectId,
+      }}>
+        {experience}
+      </LabMachineNavigationProvider>
     );
   }
 

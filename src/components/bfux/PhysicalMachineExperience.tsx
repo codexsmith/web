@@ -36,24 +36,33 @@ function writeStoredResolution(resolution: LabMachineResolution) {
 function PhysicalFrameHeader({
   resolution,
   sectionLabel,
+  machinePath,
   onZoomOut,
   onZoomIn,
 }: {
   resolution: LabMachineResolution;
   sectionLabel?: string;
+  machinePath: string;
   onZoomOut: () => void;
   onZoomIn: () => void;
 }) {
-  const backHref = sectionLabel ? "/world" : "/";
+  const backHref = sectionLabel ? machinePath : "/";
   const backLabel = sectionLabel ? "Back to the Lab Machine" : "Back to the main site";
 
   return (
     <header className="world-machine-frame">
       <div className="world-machine-frame__brand">
-        <Link href="/world" aria-label="Boundary First Labs home">
-          <span className="world-machine-frame__mark"><BfuxIcon name="root" /></span>
-          <strong>BOUNDARY FIRST LABS</strong>
-        </Link>
+        {machinePath === "/world" ? (
+          <Link href="/world" aria-label="Boundary First Labs home">
+            <span className="world-machine-frame__mark"><BfuxIcon name="root" /></span>
+            <strong>BOUNDARY FIRST LABS</strong>
+          </Link>
+        ) : (
+          <Link href={machinePath} aria-label="Boundary First Labs home">
+            <span className="world-machine-frame__mark"><BfuxIcon name="root" /></span>
+            <strong>BOUNDARY FIRST LABS</strong>
+          </Link>
+        )}
         <Link className="world-machine-frame__back" href={backHref} aria-label={backLabel}><BfuxIcon name="back" /></Link>
       </div>
 
@@ -61,7 +70,7 @@ function PhysicalFrameHeader({
         <nav className="world-machine-frame__path" aria-label="Current public path">
           {sectionLabel ? (
             <>
-              <Link href="/world">Lab Machine</Link><span>›</span>
+              <Link href={machinePath}>Lab Machine</Link><span>›</span>
               <strong>{sectionLabel}</strong>
             </>
           ) : (
@@ -131,6 +140,7 @@ export function PhysicalMachineExperience({
   onCloseSection,
   onOpenNode,
   onOpenCoreNode,
+  machinePath = "/world",
 }: {
   showSchematic?: boolean;
   initialResolution?: LabMachineResolution;
@@ -139,6 +149,7 @@ export function PhysicalMachineExperience({
   onCloseSection?: () => void;
   onOpenNode?: (nodeId: string) => void;
   onOpenCoreNode?: (nodeId: string) => void;
+  machinePath?: string;
 }) {
   const [resolution, setResolution] = useState<LabMachineResolution>(initialResolution);
   const activeResolution = sectionSurface ? "mid" : resolution;
@@ -167,6 +178,7 @@ export function PhysicalMachineExperience({
       <PhysicalFrameHeader
         resolution={activeResolution}
         sectionLabel={sectionLabel}
+        machinePath={machinePath}
         onZoomOut={() => rememberResolution("mid")}
         onZoomIn={narrowProcessContext}
       />
