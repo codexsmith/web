@@ -1,18 +1,19 @@
-import Link from "next/link";
-import { LabMachine } from "@/components/bfux/LabMachine";
-import { WorldSectionPage } from "./WorldSectionPage";
-import "./world-machine-preview.css";
+import type { Metadata } from "next";
+import { parseProcessScope } from "@/lib/bfl-process";
+import { parseProjection } from "@/lib/view-projection";
+import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 
-export const metadata = {
-  title: "World · Lab Machine preview",
+export const metadata: Metadata = {
+  title: "Boundary First Labs · Lab Machine",
   robots: { index: false, follow: false },
 };
 
 type Props = {
   searchParams: Promise<{
     skin?: string | string[];
-    schematic?: string | string[];
     section?: string | string[];
+    view?: string | string[];
+    scope?: string | string[];
   }>;
 };
 
@@ -20,51 +21,17 @@ function one(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-export default async function WorldPreview({ searchParams }: Props) {
+export default async function WorldPage({ searchParams }: Props) {
   const query = await searchParams;
-  const requested = one(query.skin);
-  const mode = requested === "apparatus" || requested === "both" ? requested : "physical";
-  const schematic = one(query.schematic) === "1";
   const section = one(query.section);
-  const q = (skin: "apparatus" | "physical" | "both", show = schematic) => {
-    const params = new URLSearchParams({ skin });
-    if (show) params.set("schematic", "1");
-    if (section) params.set("section", section);
-    return `/world?${params.toString()}`;
-  };
+  const projection = parseProjection(one(query.view)) ?? "world";
+  const processScope = parseProcessScope(one(query.scope)) ?? "full";
 
   return (
-    <main className="world-machine-preview">
-      <header className="world-machine-preview__toolbar">
-        <div>
-          <small>WORLD · RENDERER PROTOTYPE</small>
-          <strong>Lab Machine comparison surface</strong>
-        </div>
-        <nav>
-          <Link href="/?world=1">Cards</Link>
-          <Link href={q("apparatus")}>Apparatus</Link>
-          <Link href={q("physical")}>Physical</Link>
-          <Link href={q("both")}>Both</Link>
-          <Link href={q(mode, !schematic)}>{schematic ? "Hide schematic" : "Show schematic"}</Link>
-        </nav>
-      </header>
-
-      {section && mode !== "both" ? (
-        <WorldSectionPage section={section} skin={mode} showSchematic={schematic} />
-      ) : mode === "both" ? (
-        <div className="world-machine-preview__compare">
-          <section>
-            <h2>Apparatus skin</h2>
-            <LabMachine skin="apparatus" showSchematic={schematic} initialNodeId={section} />
-          </section>
-          <section>
-            <h2>Physical skin</h2>
-            <LabMachine skin="physical" showSchematic={schematic} initialNodeId={section} />
-          </section>
-        </div>
-      ) : (
-        <LabMachine skin={mode} showSchematic={schematic} />
-      )}
-    </main>
+    <LabMachineWorld
+      section={section}
+      initialProjection={projection}
+      initialProcessScope={processScope}
+    />
   );
 }

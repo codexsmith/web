@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
-import { useRouter } from "next/navigation";
 import legacySource from "@/content/lab-machine-governed-objects.json";
 import registrySource from "@/content/lab-machine-object-registry.json";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
@@ -64,15 +63,24 @@ function PhysicalLegend() {
   return <footer className="bf-machine__legend" aria-label="Boundary First visual grammar legend"><strong>LEGEND · BOUNDARY-FIRST VISUAL GRAMMAR</strong><div>{items.map(([icon,label,detail]) => <span key={label}><BfuxIcon name={icon} /><b>{label}</b><small>{detail}</small></span>)}</div><p>ORIENT → PROBE → BIND → ACT</p></footer>;
 }
 
-export function LabMachine({ showSchematic = false, skin = "physical", initialNodeId }: { showSchematic?: boolean; skin?: "apparatus" | "physical"; initialNodeId?: string }) {
+export function LabMachine({
+  showSchematic = false,
+  skin = "physical",
+  initialNodeId,
+  onOpenNode,
+}: {
+  showSchematic?: boolean;
+  skin?: "apparatus" | "physical";
+  initialNodeId?: string;
+  onOpenNode?: (nodeId: string) => void;
+}) {
   const id = useId().replaceAll(":", "");
-  const router = useRouter();
   const initialNode = getLabMachineNode(initialNodeId);
   const [svg, setSvg] = useState("");
-  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(initialNode?.id ?? null);
-  const [focusNodeId, setFocusNodeId] = useState<string | null>(initialNode?.id ?? null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(onOpenNode ? null : initialNode?.id ?? null);
+  const [focusNodeId, setFocusNodeId] = useState<string | null>(onOpenNode ? null : initialNode?.id ?? null);
   const [trail, setTrail] = useState<LabMachineTraversalStep[]>([]);
-  const [activeObjectId, setActiveObjectId] = useState<string | null>(legacy.defaultObjectId);
+  const [activeObjectId, setActiveObjectId] = useState<string | null>(null);
   const selectedNode = getLabMachineNode(selectedNodeId);
   const focusNode = getLabMachineNode(focusNodeId);
   const activeObject = governedObjects.find((object) => object.id === activeObjectId);
@@ -94,11 +102,11 @@ export function LabMachine({ showSchematic = false, skin = "physical", initialNo
   };
 
   const openCard = (nodeId: string) => {
+    if (onOpenNode) {
+      onOpenNode(nodeId);
+      return;
+    }
     navigateTo(nodeId);
-    const params = new URLSearchParams(window.location.search);
-    params.set("skin", skin);
-    params.set("section", nodeId);
-    router.push(`/world?${params.toString()}`);
   };
 
   const loadObject = (objectId: string) => {
@@ -128,7 +136,7 @@ export function LabMachine({ showSchematic = false, skin = "physical", initialNo
       {labMachineNodes.map((node) => <Node key={node.id} node={node} edges={labMachineEdges} selected={selectedNodeId===node.id} related={relatedNodeIds.has(node.id)} visited={visitedNodeIds.has(node.id)} objectRoute={objectRouteIds.has(node.id)} onSelect={() => openCard(node.id)} />)}
     </div>
     {skin === "physical" ? <PhysicalLegend /> : null}
-    {selectedNode ? <LabMachineDetailPanel key={selectedNode.id} node={selectedNode} onClose={() => { setSelectedNodeId(null); setFocusNodeId(null); setTrail([]); const params = new URLSearchParams(window.location.search); params.delete("section"); router.push(`/world?${params.toString()}`); }} /> : null}
+    {!onOpenNode && selectedNode ? <LabMachineDetailPanel key={selectedNode.id} node={selectedNode} onClose={() => { setSelectedNodeId(null); setFocusNodeId(null); setTrail([]); }} /> : null}
     {showSchematic && <details className="bf-machine__schematic"><summary>Structure / Mermaid projection</summary><div dangerouslySetInnerHTML={{ __html:svg }} /></details>}
   </section></LabMachineNavigationProvider>;
 }
