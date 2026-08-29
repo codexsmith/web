@@ -143,12 +143,7 @@ export function LabMachinePipelineProjection({
             <small>PROJECTION MODE</small>
             <span>
               {pipelineProjectionModes.map((candidate) => (
-                <button
-                  type="button"
-                  key={candidate}
-                  aria-pressed={mode === candidate}
-                  onClick={() => setMode(candidate)}
-                >
+                <button type="button" key={candidate} aria-pressed={mode === candidate} onClick={() => setMode(candidate)}>
                   {modeLabels[candidate].label}
                 </button>
               ))}
@@ -183,13 +178,9 @@ export function LabMachinePipelineProjection({
           <PromotionPath traces={pipeline.traces} states={pipeline.states} selectedTraceId={selectedTrace?.id ?? ""} onSelect={setSelectedTraceId} />
         ) : null}
 
-        <Inspection
-          mode={mode}
-          state={selectedState}
-          gate={selectedGate}
-          queueItem={selectedQueue}
-          trace={selectedTrace}
-        />
+        {mode !== "flow-map" ? (
+          <Inspection mode={mode} queueItem={selectedQueue} trace={selectedTrace} />
+        ) : null}
       </div>
     </LabMachineProjectionShell>
   );
@@ -210,46 +201,94 @@ function FlowMap({
   onSelectState: (id: string) => void;
   onSelectGate: (id: string) => void;
 }) {
+  const pageSize = 4;
+  const selectedGate = gates.find((gate) => gate.id === selectedGateId) ?? null;
+  const selectedState = states.find((state) => state.id === selectedStateId) ?? states[0];
+  const focusStateId = selectedGate?.between[0] ?? selectedState.id;
+  const focusIndex = Math.max(0, states.findIndex((state) => state.id === focusStateId));
+  const pageCount = Math.max(1, Math.ceil(states.length / pageSize));
+  const currentPage = Math.min(pageCount - 1, Math.floor(focusIndex / pageSize));
+  const pageStart = currentPage * pageSize;
+  const visibleStates = states.slice(pageStart, pageStart + pageSize);
+
+  const goToPage = (page: number) => {
+    const bounded = Math.max(0, Math.min(pageCount - 1, page));
+    const target = states[bounded * pageSize];
+    if (target) onSelectState(target.id);
+  };
+
   return (
     <section className="bf-pipeline-flow" aria-label="Institutional pipeline state flow">
-      <div className="bf-pipeline-flow__rail">
-        {states.map((state, index) => {
-          const gate = gates.find((candidate) => candidate.between[0] === state.id && candidate.between[1] === states[index + 1]?.id);
-          return (
-            <div className="bf-pipeline-flow__segment" key={state.id}>
-              <button type="button" className="bf-pipeline-state" data-selected={selectedStateId === state.id ? "true" : "false"} onClick={() => onSelectState(state.id)}>
-                <small>{String(index + 1).padStart(2, "0")} · STATE</small>
-                <strong>{state.label}</strong>
-                <span>{state.role}</span>
-                {state.canReopen ? <em>REOPENABLE</em> : null}
-              </button>
-              {gate ? (
-                <button type="button" className="bf-pipeline-gate" data-selected={selectedGateId === gate.id ? "true" : "false"} onClick={() => onSelectGate(gate.id)}>
-                  <small>GATE</small>
-                  <strong>{gate.label}</strong>
-                  <span>◆</span>
+      <div className="bf-pipeline-flow__viewport">
+        <button className="bf-pipeline-flow__page-button bf-pipeline-flow__page-button--prev" type="button" disabled={currentPage === 0} onClick={() => goToPage(currentPage - 1)} aria-label="Previous pipeline page">‹</button>
+        <div className="bf-pipeline-flow__rail">
+          {visibleStates.map((state, localIndex) => {
+            const absoluteIndex = pageStart + localIndex;
+            const nextState = states[absoluteIndex + 1];
+            const gate = gates.find((candidate) => candidate.between[0] === state.id && candidate.between[1] === nextState?.id);
+            const nextIsVisible = Boolean(nextState && absoluteIndex + 1 < pageStart + visibleStates.length);
+            return (
+              <div className="bf-pipeline-flow__segment" key={state.id}>
+                <button type="button" className="bf-pipeline-state" data-selected={selectedStateId === state.id && !selectedGate ? "true" : "false"} onClick={() => onSelectState(state.id)}>
+                  <small>{String(absoluteIndex + 1).padStart(2, "0")} · STATE</small>
+                  <strong>{state.label}</strong>
+                  <span>{state.role}</span>
+                  {state.canReopen ? <em>REOPENABLE</em> : null}
                 </button>
-              ) : null}
-            </div>
-          );
-        })}
+                {gate && nextIsVisible ? (
+                  <button type="button" className="bf-pipeline-gate" data-selected={selectedGateId === gate.id ? "true" : "false"} onClick={() => onSelectGate(gate.id)}>
+                    <small>GATE</small>
+                    <strong>{gate.label}</strong>
+                    <span>◆</span>
+                  </button>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+        <button className="bf-pipeline-flow__page-button bf-pipeline-flow__page-button--next" type="button" disabled={currentPage === pageCount - 1} onClick={() => goToPage(currentPage + 1)} aria-label="Next pipeline page">›</button>
       </div>
-      <div className="bf-pipeline-flow__return" aria-hidden="true"><span>DEFECT / NEW EVIDENCE</span><b>↶ REOPEN / REPAIR</b></div>
+
+      <div className="bf-pipeline-flow__pager" aria-label={`Pipeline page ${currentPage + 1} of ${pageCount}`}>
+        {Array.from({ length: pageCount }, (_, index) => (
+          <button key={index} type="button" data-active={index === currentPage ? "true" : "false"} onClick={() => goToPage(index)} aria-label={`Go to pipeline page ${index + 1}`} />
+        ))}
+      </div>
+
+      <div className="bf-pipeline-flow__return"><span>DEFECT / NEW EVIDENCE</span><b>↶ REOPEN / REPAIR</b></div>
+      <FlowInspection state={selectedState} gate={selectedGate} />
     </section>
   );
 }
 
-function LiveQueue({
-  states,
-  queueByStage,
-  selectedQueueId,
-  onSelect,
-}: {
-  states: PipelineState[];
-  queueByStage: Map<string, QueueItem[]>;
-  selectedQueueId: string;
-  onSelect: (id: string) => void;
-}) {
+function FlowInspection({ state, gate }: { state: PipelineState; gate: PipelineGate | null }) {
+  if (gate) {
+    return (
+      <div className="bf-pipeline-flow__inspection" aria-live="polite">
+        <header><small>INSPECT · GATE</small><h3>{gate.label}</h3></header>
+        <p>{gate.question}</p>
+        <div className="bf-pipeline-inspection__grid">
+          <section><small>CHECKS</small><ul>{gate.checks.map((item) => <li key={item}>{item}</li>)}</ul></section>
+          <section><small>IF THE GATE FAILS</small><p>{gate.failureRoute}</p></section>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bf-pipeline-flow__inspection" aria-live="polite">
+      <header><small>INSPECT · STATE</small><h3>{state.label}</h3></header>
+      <p>{state.role}</p>
+      <div className="bf-pipeline-inspection__grid">
+        <section><small>ENTRY CONDITIONS</small><ul>{state.entryConditions.map((item) => <li key={item}>{item}</li>)}</ul></section>
+        <section><small>EXIT SIGNALS</small><ul>{state.exitSignals.map((item) => <li key={item}>{item}</li>)}</ul></section>
+        <section><small>REOPENING</small><p>{state.canReopen ? "This state may be re-entered when new evidence, defect, dependency change, or maintenance obligation invalidates later closure." : "This is an intake state rather than a closure state."}</p></section>
+      </div>
+    </div>
+  );
+}
+
+function LiveQueue({ states, queueByStage, selectedQueueId, onSelect }: { states: PipelineState[]; queueByStage: Map<string, QueueItem[]>; selectedQueueId: string; onSelect: (id: string) => void }) {
   return (
     <section className="bf-pipeline-queue" aria-label="Current work projected onto pipeline states">
       {states.map((state) => {
@@ -260,9 +299,7 @@ function LiveQueue({
             <div>
               {items.map((item) => (
                 <button type="button" key={item.id} data-selected={selectedQueueId === item.id ? "true" : "false"} onClick={() => onSelect(item.id)}>
-                  <small>{item.projectType}</small>
-                  <strong>{item.title}</strong>
-                  <span>{item.operatingState} · {item.projectPhase}</span>
+                  <small>{item.projectType}</small><strong>{item.title}</strong><span>{item.operatingState} · {item.projectPhase}</span>
                 </button>
               ))}
               {!items.length ? <p>NO TRACKED OBJECTS</p> : null}
@@ -274,17 +311,7 @@ function LiveQueue({
   );
 }
 
-function PromotionPath({
-  traces,
-  states,
-  selectedTraceId,
-  onSelect,
-}: {
-  traces: PipelineTrace[];
-  states: PipelineState[];
-  selectedTraceId: string;
-  onSelect: (id: string) => void;
-}) {
+function PromotionPath({ traces, states, selectedTraceId, onSelect }: { traces: PipelineTrace[]; states: PipelineState[]; selectedTraceId: string; onSelect: (id: string) => void }) {
   const trace = traces.find((candidate) => candidate.id === selectedTraceId) ?? traces[0];
   const stateById = new Map(states.map((state) => [state.id, state]));
   return (
@@ -311,45 +338,7 @@ function PromotionPath({
   );
 }
 
-function Inspection({
-  mode,
-  state,
-  gate,
-  queueItem,
-  trace,
-}: {
-  mode: PipelineProjectionMode;
-  state: PipelineState;
-  gate: PipelineGate | null;
-  queueItem: QueueItem;
-  trace: PipelineTrace;
-}) {
-  if (mode === "flow-map") {
-    if (gate) {
-      return (
-        <aside className="bf-pipeline-inspection">
-          <header><small>INSPECT · GATE</small><h3>{gate.label}</h3></header>
-          <p>{gate.question}</p>
-          <div className="bf-pipeline-inspection__grid">
-            <section><small>CHECKS</small><ul>{gate.checks.map((item) => <li key={item}>{item}</li>)}</ul></section>
-            <section><small>IF THE GATE FAILS</small><p>{gate.failureRoute}</p></section>
-          </div>
-        </aside>
-      );
-    }
-    return (
-      <aside className="bf-pipeline-inspection">
-        <header><small>INSPECT · STATE</small><h3>{state.label}</h3></header>
-        <p>{state.role}</p>
-        <div className="bf-pipeline-inspection__grid">
-          <section><small>ENTRY CONDITIONS</small><ul>{state.entryConditions.map((item) => <li key={item}>{item}</li>)}</ul></section>
-          <section><small>EXIT SIGNALS</small><ul>{state.exitSignals.map((item) => <li key={item}>{item}</li>)}</ul></section>
-          <section><small>REOPENING</small><p>{state.canReopen ? "This state may be re-entered when new evidence, defect, dependency change, or maintenance obligation invalidates later closure." : "This is an intake state rather than a closure state."}</p></section>
-        </div>
-      </aside>
-    );
-  }
-
+function Inspection({ mode, queueItem, trace }: { mode: Exclude<PipelineProjectionMode, "flow-map">; queueItem: QueueItem; trace: PipelineTrace }) {
   if (mode === "live-queue") {
     return (
       <aside className="bf-pipeline-inspection">
