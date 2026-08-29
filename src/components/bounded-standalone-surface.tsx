@@ -84,7 +84,7 @@ export function BoundedStandaloneSurface({
         canTraceForward={false}
         canProcessZoomOut={false}
         canProcessZoomIn={false}
-        onHome={() => router.push("/?world=1")}
+        onHome={() => router.push("/world")}
         onUp={navigateParent}
         onBack={navigateParent}
         onForward={() => undefined}

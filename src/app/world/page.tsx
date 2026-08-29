@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { parseProjection } from "@/lib/view-projection";
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
+import "./world-machine-preview.css";
 
 export const metadata: Metadata = {
   title: "Boundary First Labs · Lab Machine",
@@ -14,6 +15,7 @@ type Props = {
     section?: string | string[];
     view?: string | string[];
     scope?: string | string[];
+    schematic?: string | string[];
   }>;
 };
 
@@ -32,6 +34,7 @@ export default async function WorldPage({ searchParams }: Props) {
       section={section}
       initialProjection={projection}
       initialProcessScope={processScope}
+      showSchematic={one(query.schematic) === "1"}
     />
   );
 }

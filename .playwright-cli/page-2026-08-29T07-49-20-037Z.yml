@@ -1,0 +1,44 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e188] [cursor=pointer]
+  - alert [ref=e192]: Software for difficult systems.
+  - main [ref=e193]:
+    - generic "Boundary First Labs public entry" [ref=e194]:
+      - generic [ref=e195]:
+        - generic [ref=e196]: BF
+        - generic [ref=e197]:
+          - strong [ref=e198]: Boundary First Labs
+          - generic [ref=e199]: Public entry
+      - generic "Entry boundary" [ref=e200]:
+        - generic [ref=e201]: Outside
+        - generic [ref=e203]: Boundary
+        - generic [ref=e205]: Inside
+      - generic "Current interface mode" [ref=e206]:
+        - generic [ref=e207]: Mode
+        - strong [ref=e208]: Threshold
+    - generic [ref=e209]:
+      - generic [ref=e210]:
+        - generic [ref=e211]: "01"
+        - generic [ref=e212]: Proposition
+      - paragraph [ref=e213]: Boundary First Labs
+      - heading "Software for difficult systems." [level=1] [ref=e214]
+      - paragraph [ref=e215]: We build software, methods, and public-interest work for wicked problems—especially where hidden assumptions become operational consequences.
+      - generic [ref=e216]:
+        - generic [ref=e217]: Entry / World
+        - button "Enter the lab" [ref=e218] [cursor=pointer]:
+          - generic [ref=e220]: →
+    - region "Boundary First entry instrument" [ref=e221]:
+      - generic [ref=e222]:
+        - generic [ref=e223]: Instrument
+        - strong [ref=e224]: Representation loop
+      - generic [ref=e225]:
+        - generic [ref=e227]:
+          - generic [ref=e228]: Representation
+          - generic [ref=e229]: BF
+        - generic [ref=e231]: Model
+        - generic [ref=e232]: Observe
+        - generic [ref=e233]: Act
+        - generic [ref=e234]: Evidence
+    - generic [ref=e235]:
+      - generic [ref=e236]: Public threshold
+      - generic [ref=e237]: Boundary First Labs
+      - generic [ref=e238]: Entered World beyond

@@ -118,13 +118,13 @@
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="publications"] { left: 43.2%; top: 2.5%; width: 18%; height: 27%; }
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="applications"] { left: 62.8%; top: 2.5%; width: 18%; height: 27%; }
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] { left: 86.5%; top: 7.2%; width: 11%; height: 20%; }
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"] { left: 2.7%; top: 33%; width: 18.5%; height: 24%; }
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"] { left: 2.7%; top: 61%; width: 18.5%; height: 24%; }
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] { left: 33.4%; top: 36.2%; width: 31%; height: 30%; }
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] { left: 66.5%; top: 39.3%; width: 17.8%; height: 24%; }
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] { left: 25.6%; top: 71%; width: 18%; height: 23%; }
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] { left: 45.1%; top: 71%; width: 18%; height: 23%; }
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"] { left: 64.6%; top: 71%; width: 18%; height: 23%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"] { left: 4%; top: 82%; width: 11.5%; height: 10%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"] { left: 17%; top: 82%; width: 11.5%; height: 10%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"] { left: 30%; top: 82%; width: 11.5%; height: 10%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] { left: 45%; top: 70%; width: 16%; height: 22%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] { left: 65%; top: 70%; width: 16%; height: 22%; }
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] { left: 86.5%; top: 57.5%; width: 11%; height: 13%; }
 
 /* Three physical layers: back shell, cast face, recessed information wells. */
@@ -410,6 +410,53 @@
   background: #17140f;
 }
 
+/* Conjoined Block (Pipeline, Method, Timeline) */
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header {
+  padding-bottom: 12px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe {
+  position: absolute;
+  left: 50%;
+  width: 226.08%;
+  bottom: -15px;
+  height: 6px;
+  background: linear-gradient(90deg, #1b2226, #2a3438, #1b2226);
+  border: 1px solid #090c0d;
+  border-top: 1px solid #4a565c;
+  border-radius: 3px;
+  box-shadow: 0 8px 12px #000c;
+  z-index: -1;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe-highlight {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 1px;
+  height: 2px;
+  background: #80a85d;
+  box-shadow: 0 0 6px rgba(128, 168, 93, 0.6);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::before,
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  width: 6px;
+  height: 12px;
+  background: linear-gradient(0deg, #1b2226, #2a3438);
+  border: 1px solid #090c0d;
+  border-bottom: 0;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::before {
+  left: -1px;
+  border-radius: 3px 0 0 0;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::after {
+  right: -1px;
+  border-radius: 0 3px 0 0;
+}
+
 /* Research is the central machine, not another card. */
 .bf-machine[data-skin="physical"] .bf-machine-node--core { filter: drop-shadow(0 13px 12px #000d); }
 .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__shell {
@@ -445,6 +492,36 @@
   min-height: 72px;
   padding: 14px 16px 8px 150px;
 }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] header { padding-left: 88px; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] .bf-machine-node__boundary { margin-left: 88px; }
+
+/* Conjoined Block overrides */
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header {
+  min-height: 44px;
+  padding: 8px 6px 4px 50px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header span {
+  font-size: 0.5rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header strong {
+  margin-top: 2px;
+  font-size: 0.95rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-plate {
+  left: 6px;
+  top: 6px;
+  width: 38px;
+  height: 46px;
+  padding: 6px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-well svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__boundary {
+  display: none;
+}
+
 .bf-machine[data-skin="physical"] .bf-machine-node--core header strong { font-size: 1.45rem; }
 .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__boundary {
   min-height: 112px;

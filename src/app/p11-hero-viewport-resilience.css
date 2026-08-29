@@ -69,7 +69,7 @@ body[data-ui-shell="cards"] .hero-screen__instrument-register strong {
   body[data-ui-shell="cards"] .hero-screen {
     --hero-card-inset: 8px;
     --hero-card-radius: 7px;
-    grid-template-columns: minmax(0, 1.02fr) minmax(250px, 0.98fr);
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 1fr);
     grid-template-rows: 46px minmax(0, 1fr) 28px;
     padding: var(--hero-card-inset);
   }
@@ -96,7 +96,7 @@ body[data-ui-shell="cards"] .hero-screen__instrument-register strong {
   }
 
   body[data-ui-shell="cards"] .hero-screen__threshold {
-    grid-template-columns: auto 17px auto 17px auto;
+    grid-template-columns: 4.6em 17px auto 17px 4.6em;
     padding: 4px 7px;
     font-size: 0.58rem;
   }

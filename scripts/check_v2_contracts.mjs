@@ -69,9 +69,62 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /router\.replace\(stateUrl\("root",\s*"world",\s*"full"\)/,
-  "Crossing the hero threshold must replace rather than pollute browser history",
+  /router\.replace\("\/world"/,
+  "Crossing the hero threshold must replace into the canonical Lab route rather than pollute browser history",
 );
+requireMatch(
+  "src/components/world-app.tsx",
+  /const navigateHome = useCallback\(\(\) => \{[\s\S]*?router\.push\("\/world"\);[\s\S]*?\}, \[router\]\)/,
+  "The standard frame logo must return to the Lab Machine rather than the legacy entered root world",
+);
+requireMatch(
+  "src/components/bounded-standalone-surface.tsx",
+  /onHome=\{\(\) => router\.push\("\/world"\)\}/,
+  "Standalone frame logos must return to the Lab Machine",
+);
+requireMatch(
+  "src/components/bfux/LabMachineWorld.tsx",
+  /const openMachine = \(\) => router\.push\("\/world"\)[\s\S]*onHome=\{openMachine\}/,
+  "Lab Machine fallback frame logos must return to the Lab Machine",
+);
+requireMatch(
+  "src/components/bfux/PhysicalMachineExperience.tsx",
+  /resolutionStorageKey[\s\S]*sessionStorage\.getItem[\s\S]*sessionStorage\.setItem[\s\S]*rememberResolution/,
+  "The Lab Machine must remember the visitor's Core set or Full loop resolution",
+);
+requireMatch(
+  "src/components/bfux/PhysicalMachineExperience.tsx",
+  /<Link href="\/world" aria-label="Boundary First Labs home">/,
+  "The physical frame logo must return to the Lab Machine",
+);
+requireMatch(
+  "src/components/bfux/PhysicalMachineExperience.tsx",
+  /activeResolution\s*===\s*"focus"\s*\?\s*onOpenCoreNode\s*\?\?\s*onOpenNode\s*:\s*onOpenNode/,
+  "Core set cards must use a distinct navigation callback from Full loop cards",
+);
+requireMatch(
+  "src/components/bfux/LabMachineWorld.tsx",
+  /if \(projection === "world"\)[\s\S]*sectionSurface=\{section \? <SectionSurface/,
+  "World detail routes must stay inside the physical machine experience",
+);
+requireMatch(
+  "src/components/bfux/PhysicalMachineExperience.tsx",
+  /sectionSurface \? \([\s\S]*world-machine-section[\s\S]*\) : \([\s\S]*<LabMachine/,
+  "The physical frame must persist while its machine and detail workfields swap",
+);
+for (const [nodeId, path] of Object.entries({
+  people: "/public-interest",
+  products: "/products",
+  publications: "/publications",
+  about: "/about",
+  research: "/research",
+})) {
+  requireMatch(
+    "src/components/bfux/LabMachineWorld.tsx",
+    new RegExp(`${nodeId}:\\s*"${path}"`),
+    `Core set ${nodeId} must route to its canonical keyword page`,
+  );
+}
 forbidMatch(
   "src/components/world-app.tsx",
   /LandingSequence|landingProgress|introEnabled|skipLanding/,

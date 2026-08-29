@@ -29,7 +29,7 @@ type GovernedObject = {
   invariants: string[];
   route: string[];
   sourceRefs: string[];
-  projections: Record<string, ObjectProjection>;
+  projections: Partial<Record<string, ObjectProjection>>;
 };
 
 type GovernedObjectsData = {

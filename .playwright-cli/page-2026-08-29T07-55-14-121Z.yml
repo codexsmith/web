@@ -1,0 +1,106 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e246] [cursor=pointer]
+  - alert [ref=e250]: About
+  - generic [ref=e734]:
+    - generic:
+      - banner [ref=e735]:
+        - generic "Home and traversal history controls" [ref=e736]:
+          - button "Boundary First Labs home" [ref=e737] [cursor=pointer]
+          - button "Back through traversal history" [ref=e742]:
+            - generic [ref=e747]: Back
+        - navigation "Focus traversal history" [ref=e748]:
+          - list [ref=e749]:
+            - listitem [ref=e750]:
+              - button "Public Interest" [ref=e751] [cursor=pointer]
+            - listitem [ref=e752]:
+              - generic [ref=e753]: ">"
+              - strong [ref=e755]: About
+        - generic "Global controls" [ref=e756]:
+          - button "Search" [ref=e757] [cursor=pointer]
+          - group "Representations of About" [ref=e763]:
+            - 'button "World: Primary content, spatial context, containment, and ordinary traversal" [pressed] [ref=e764] [cursor=pointer]':
+              - generic [ref=e769]:
+                - generic [ref=e770]: World
+                - generic [ref=e771]: Content · context
+            - 'button "Evidence: Standing, provenance, evidence, lineage, and typed relations" [ref=e772] [cursor=pointer]':
+              - generic [ref=e776]:
+                - generic [ref=e777]: Evidence
+                - generic [ref=e778]: Standing · sources
+            - 'button "Process: Place the focal object inside the Boundary First operating process" [ref=e779] [cursor=pointer]':
+              - generic [ref=e785]:
+                - generic [ref=e786]: Process
+                - generic [ref=e787]: Operating sequence
+      - complementary [ref=e788]:
+        - navigation "Local relational neighborhood for About" [ref=e789]:
+          - strong [ref=e795]: Adjacent
+          - region "Adjacent nodes" [ref=e797]:
+            - list "Adjacent choices" [ref=e798]:
+              - listitem [ref=e799]:
+                - button "Public Interest" [ref=e800] [cursor=pointer]
+              - listitem [ref=e806]:
+                - button "Products" [ref=e807] [cursor=pointer]
+              - listitem [ref=e813]:
+                - button "Publications" [ref=e814] [cursor=pointer]
+              - listitem [ref=e820]:
+                - button "Research" [ref=e821] [cursor=pointer]
+    - main [ref=e827]:
+      - generic [ref=e828]:
+        - generic [ref=e829]:
+          - generic [ref=e830]:
+            - paragraph [ref=e831]: Institution, method, and provenance
+            - heading "About" [level=1] [ref=e832]
+            - paragraph [ref=e833]: A formation-stage software research and engineering lab turning a long-running body of practice and independent research into inspectable methods, products, public-interest work, and bounded research.
+          - article [ref=e834]:
+            - generic [ref=e835]: At a glance
+            - paragraph [ref=e836]: "Boundary First Labs exists because the work now requires stewardship as well as invention: provenance must be preserved, claims separated by maturity and evidence, released artifacts maintained, criticism made possible, and founder-held structure progressively converted into inspectable institutional structure."
+        - generic "About regions" [ref=e837]:
+          - button "01 Formation-stage institution The Lab Institutional identity, scope, and present operating boundary. View ↓" [ref=e838] [cursor=pointer]:
+            - generic [ref=e839]: "01"
+            - generic [ref=e840]: Formation-stage institution
+            - strong [ref=e846]: The Lab
+            - generic [ref=e847]: Institutional identity, scope, and present operating boundary.
+            - generic [ref=e848]: View ↓
+          - button "02 Operating discipline How We Work The construction, evidence, review, and repair discipline used across the Lab. View ↓" [ref=e849] [cursor=pointer]:
+            - generic [ref=e850]: "02"
+            - generic [ref=e851]: Operating discipline
+            - strong [ref=e857]: How We Work
+            - generic [ref=e858]: The construction, evidence, review, and repair discipline used across the Lab.
+            - generic [ref=e859]: View ↓
+          - button "03 Governed external interfaces Bridges View ↓" [ref=e860] [cursor=pointer]:
+            - generic [ref=e861]: "03"
+            - generic [ref=e862]: Governed external interfaces
+            - strong [ref=e867]: Bridges
+            - generic [ref=e868]: View ↓
+          - button "04 Founder and method lineage Provenance Where the work came from and which sources support its lineage. View ↓" [ref=e869] [cursor=pointer]:
+            - generic [ref=e870]: "04"
+            - generic [ref=e871]: Founder and method lineage
+            - strong [ref=e877]: Provenance
+            - generic [ref=e878]: Where the work came from and which sources support its lineage.
+            - generic [ref=e879]: View ↓
+          - button "05 Work with the lab Contact The boundary for collaboration, pilots, engineering, and public-interest engagement. View ↓" [ref=e880] [cursor=pointer]:
+            - generic [ref=e881]: "05"
+            - generic [ref=e882]: Work with the lab
+            - strong [ref=e888]: Contact
+            - generic [ref=e889]: The boundary for collaboration, pilots, engineering, and public-interest engagement.
+            - generic [ref=e890]: View ↓
+        - region "Supporting context for About" [ref=e891]:
+          - generic [ref=e892]: Supporting context
+          - region "Related paths" [ref=e893]:
+            - generic [ref=e895]:
+              - link "See the work Current Work Active development and bounded pilot work with explicit maturity boundaries." [ref=e896] [cursor=pointer]:
+                - /url: /products/current
+                - generic [ref=e900]:
+                  - generic [ref=e901]: See the work
+                  - strong [ref=e902]: Current Work
+                  - generic [ref=e903]: Active development and bounded pilot work with explicit maturity boundaries.
+              - link "Institutional commitments Public Interest The public-purpose principles and work the lab expects to be judged against." [ref=e904] [cursor=pointer]:
+                - /url: /public-interest
+                - generic [ref=e908]:
+                  - generic [ref=e909]: Institutional commitments
+                  - strong [ref=e910]: Public Interest
+                  - generic [ref=e911]: The public-purpose principles and work the lab expects to be judged against.
+          - region "Explore further" [ref=e912]:
+            - button "Publication obligation The public is owed legibility, not a data dump" [ref=e915] [cursor=pointer]:
+              - generic [ref=e920]:
+                - generic [ref=e921]: Publication obligation
+                - strong [ref=e922]: The public is owed legibility, not a data dump

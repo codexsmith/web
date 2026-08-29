@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BfuxIcon } from "@/components/bfux-icons";
 import { getLabMachineCardContent } from "./lab-machine-content";
 import { getLabMachineNode, type LabMachineNode } from "./lab-machine-model";
@@ -78,14 +78,39 @@ type ActiveProjection =
   | { subsystem: "public-value"; mode: PublicValueProjectionMode }
   | null;
 
+function resolveProjection(subsystem: string, mode: string): ActiveProjection {
+  switch (subsystem) {
+    case "timeline":
+      return isTimelineProjectionMode(mode) ? { subsystem, mode } : null;
+    case "products":
+      return isProductProjectionMode(mode) ? { subsystem, mode } : null;
+    case "research":
+      return isResearchProjectionMode(mode) ? { subsystem, mode } : null;
+    case "method":
+      return isMethodProjectionMode(mode) ? { subsystem, mode } : null;
+    case "pipeline":
+      return isPipelineProjectionMode(mode) ? { subsystem, mode } : null;
+    case "governance":
+      return isGovernanceProjectionMode(mode) ? { subsystem, mode } : null;
+    case "about":
+      return isAboutProjectionMode(mode) ? { subsystem, mode } : null;
+    case "people":
+      return isPeopleProjectionMode(mode) ? { subsystem, mode } : null;
+    case "applications":
+      return isApplicationsProjectionMode(mode) ? { subsystem, mode } : null;
+    case "service":
+      return isServiceProjectionMode(mode) ? { subsystem, mode } : null;
+    case "public-value":
+      return isPublicValueProjectionMode(mode) ? { subsystem, mode } : null;
+    default:
+      return null;
+  }
+}
+
 export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode; onClose: () => void }) {
   const content = getLabMachineCardContent(node.id);
   const navigation = useLabMachineNavigation();
   const [activeProjection, setActiveProjection] = useState<ActiveProjection>(null);
-
-  useEffect(() => {
-    setActiveProjection(null);
-  }, [node.id]);
 
   if (!content) return null;
 
@@ -143,33 +168,13 @@ export function LabMachineDetailPanel({ node, onClose }: { node: LabMachineNode;
       <section className="bf-machine-detail__views" aria-label={`${node.label} available views`}>
         <header><small>AVAILABLE PROJECTIONS</small><h3>Inspect this subsystem another way</h3></header>
         <div>{content.views.map((view) => {
-          const timelineProjection = node.id === "timeline" && isTimelineProjectionMode(view.id);
-          const productProjection = node.id === "products" && isProductProjectionMode(view.id);
-          const researchProjection = node.id === "research" && isResearchProjectionMode(view.id);
-          const methodProjection = node.id === "method" && isMethodProjectionMode(view.id);
-          const pipelineProjection = node.id === "pipeline" && isPipelineProjectionMode(view.id);
-          const governanceProjection = node.id === "governance" && isGovernanceProjectionMode(view.id);
-          const aboutProjection = node.id === "about" && isAboutProjectionMode(view.id);
-          const peopleProjection = node.id === "people" && isPeopleProjectionMode(view.id);
-          const applicationsProjection = node.id === "applications" && isApplicationsProjectionMode(view.id);
-          const serviceProjection = node.id === "service" && isServiceProjectionMode(view.id);
-          const publicValueProjection = node.id === "public-value" && isPublicValueProjectionMode(view.id);
-          const available = timelineProjection || productProjection || researchProjection || methodProjection || pipelineProjection || governanceProjection || aboutProjection || peopleProjection || applicationsProjection || serviceProjection || publicValueProjection;
+          const projection = resolveProjection(node.id, view.id);
+          const available = projection !== null;
           return (
             <article key={view.id} data-view-id={view.id}>
               <span>PROJECTION</span><strong>{view.label}</strong><p>{view.purpose}</p>
               <button type="button" disabled={!available} title={available ? `Open ${view.label}` : "Projection component pending"} onClick={() => {
-                if (timelineProjection) setActiveProjection({ subsystem: "timeline", mode: view.id });
-                if (productProjection) setActiveProjection({ subsystem: "products", mode: view.id });
-                if (researchProjection) setActiveProjection({ subsystem: "research", mode: view.id });
-                if (methodProjection) setActiveProjection({ subsystem: "method", mode: view.id });
-                if (pipelineProjection) setActiveProjection({ subsystem: "pipeline", mode: view.id });
-                if (governanceProjection) setActiveProjection({ subsystem: "governance", mode: view.id });
-                if (aboutProjection) setActiveProjection({ subsystem: "about", mode: view.id });
-                if (peopleProjection) setActiveProjection({ subsystem: "people", mode: view.id });
-                if (applicationsProjection) setActiveProjection({ subsystem: "applications", mode: view.id });
-                if (serviceProjection) setActiveProjection({ subsystem: "service", mode: view.id });
-                if (publicValueProjection) setActiveProjection({ subsystem: "public-value", mode: view.id });
+                if (projection) setActiveProjection(projection);
               }}>{available ? "OPEN" : "PLANNED"}</button>
             </article>
           );

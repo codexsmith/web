@@ -1,0 +1,39 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic "Boundary First Labs public entry" [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: BF
+        - generic [ref=e6]:
+          - strong [ref=e7]: Boundary First Labs
+          - generic [ref=e8]: Public entry
+      - generic "Entry boundary" [ref=e9]:
+        - generic [ref=e10]: Outside
+        - generic [ref=e12]: Boundary
+        - generic [ref=e14]: Inside
+      - generic "Current interface mode" [ref=e15]:
+        - generic [ref=e16]: Mode
+        - strong [ref=e17]: Loading
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - generic [ref=e20]: "01"
+        - generic [ref=e21]: Proposition
+      - paragraph [ref=e22]: Boundary First Labs
+      - heading "Software for difficult systems." [level=1] [ref=e23]
+      - paragraph [ref=e24]: We build software, methods, and public-interest work for wicked problems—especially where hidden assumptions become operational consequences.
+      - generic [ref=e25]:
+        - generic [ref=e26]: Entry / World
+        - button "Enter the lab" [ref=e27] [cursor=pointer]:
+          - generic [ref=e29]: →
+    - region "Boundary First entry instrument" [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: Instrument
+        - strong [ref=e33]: Representation loop
+      - generic [ref=e34]:
+        - generic [ref=e36]:
+          - generic [ref=e37]: Representation
+          - generic [ref=e38]: BF
+        - generic [ref=e40]: Model
+        - generic [ref=e41]: Observe
+        - generic [ref=e42]: Act
+        - generic [ref=e43]: Evidence
+  - button "Open Next.js Dev Tools" [ref=e51] [cursor=pointer]

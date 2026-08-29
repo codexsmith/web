@@ -346,24 +346,8 @@ export function WorldApp({
   }, [heroVisible]);
 
   const enterLab = useCallback(() => {
-    const rootTraversal = ["root"];
-    writeTraversalMemory(rootTraversal, 0);
-    setHeroVisible(false);
-    setFocusId("root");
-    setProjectionIntent("world");
-    setProjectionTransportNotice(null);
-    setProcessScope("full");
-    setTraversalIds(rootTraversal);
-    setTraversalCursor(0);
-    setTransitionDirection("none");
-    setTransitionKey((value) => value + 1);
-
-    if (uiShell === "apparatus") {
-      router.replace(stateUrl("root", "world", "full", uiShell), { scroll: false });
-    } else {
-      router.replace(stateUrl("root", "world", "full"), { scroll: false });
-    }
-  }, [router, uiShell]);
+    router.replace("/world", { scroll: false });
+  }, [router]);
 
   const navigate = useCallback(
     (targetId: string, direction?: TransitionDirection) => {
@@ -407,22 +391,10 @@ export function WorldApp({
   );
 
   const navigateHome = useCallback(() => {
-    if (focusId === "root") return;
-
-    const nextTraversal = branchTraversal(traversalIds, traversalCursor, "root");
-    writeTraversalMemory(nextTraversal.ids, nextTraversal.cursor);
-    setHeroVisible(false);
-    setTransitionDirection("up");
-    setTransitionKey((value) => value + 1);
-    setFocusId("root");
-    setTraversalIds(nextTraversal.ids);
-    setTraversalCursor(nextTraversal.cursor);
-    setProjectionIntent("world");
-    setProjectionTransportNotice(null);
-    setProcessScope("full");
+    setSearchOpen(false);
     setInspectionId(null);
-    router.push(stateUrl("root", "world", "full", uiShell), { scroll: false });
-  }, [focusId, router, traversalCursor, traversalIds, uiShell]);
+    router.push("/world");
+  }, [router]);
 
   const moveTraversalCursor = useCallback(
     (nextCursor: number) => {

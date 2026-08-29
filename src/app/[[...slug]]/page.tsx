@@ -50,6 +50,7 @@ type PageProps = {
     view?: string | string[];
     scope?: string | string[];
     world?: string | string[];
+    skin?: string | string[];
     ui?: string | string[];
     detail?: string | string[];
   }>;
@@ -142,6 +143,9 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
 export default async function Page({ params, searchParams }: PageProps) {
   const [{ slug = [] }, query] = await Promise.all([params, searchParams]);
+  if (!slug.length && query.world !== undefined && firstQueryValue(query.skin) === "physical") {
+    permanentRedirect("/world?skin=physical");
+  }
   const recordDestination = legacyRecordDestination(slug, query);
   if (recordDestination) permanentRedirect(recordDestination);
 

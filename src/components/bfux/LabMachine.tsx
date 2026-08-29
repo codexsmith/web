@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { Box, Clock3, ListTree, Network, Share2, ShieldPlus, Users, type LucideIcon } from "lucide-react";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import {
   labMachineEdges,
@@ -11,65 +12,125 @@ import {
 } from "./lab-machine-model";
 import "./lab-machine.css";
 import "./lab-machine-physical.css";
-import "./lab-machine-main-card-port.css";
+import "./lab-machine-reference-cards.css";
+import "./lab-machine-reference-match.css";
 
 const nodeIcons: Record<string, BfuxIconName> = {
   products: "object",
-  publications: "claim",
-  applications: "projection",
-  method: "contexture",
-  pipeline: "trace",
   research: "invariant",
   about: "actor",
-  people: "peer",
-  governance: "responsibility",
-  timeline: "process",
   service: "port",
   "public-value": "consequence",
 };
 
-const nodeNumbers: Record<string, number> = {
+const nodeLucideIcons: Record<string, LucideIcon> = {
+  publications: Share2,
+  applications: Box,
+  method: Network,
+  pipeline: ListTree,
+  people: Users,
+  governance: ShieldPlus,
+  timeline: Clock3,
+};
+
+const aboutResearchConnectorKinds: LabMachineEdge["kind"][] = [
+  "attaches",
+  "attaches",
+  "attaches",
+  "serves",
+  "constrains",
+  "records",
+];
+
+const pipelineMethodConnectorKinds: LabMachineEdge["kind"][] = ["feeds", "feeds"];
+const methodTimelineConnectorKinds: LabMachineEdge["kind"][] = ["records", "records"];
+const lowerDeckContactCount = 5;
+
+const physicalNodeIds = new Set([
+  "products",
+  "publications",
+  "method",
+  "pipeline",
+  "research",
+  "about",
+  "people",
+  "governance",
+  "timeline",
+]);
+
+const physicalFocusNodeOrder: Record<string, number> = {
+  people: 0,
   products: 1,
   publications: 2,
-  pipeline: 3,
-  applications: 4,
-  method: 5,
-  people: 6,
-  governance: 7,
-  timeline: 8,
-  about: 9,
+  about: 3,
+  research: 4,
+  pipeline: 5,
+  method: 6,
+  timeline: 7,
+  governance: 8,
 };
 
 function edgeTone(edge: LabMachineEdge) {
   const source = labMachineNodes.find((node) => node.id === edge.from);
   const target = labMachineNodes.find((node) => node.id === edge.to);
+  if (target?.id === "research" && ["people", "governance", "timeline"].includes(source?.id ?? "")) return "violet";
   if (edge.kind === "feeds") return target?.tone ?? source?.tone ?? "slate";
   return source?.tone ?? target?.tone ?? "slate";
 }
 
-function Node({ node, edges, onOpen }: { node: LabMachineNode; edges: LabMachineEdge[]; onOpen?: (nodeId: string) => void }) {
+function Node({
+  node,
+  edges,
+  skin,
+  onOpen,
+}: {
+  node: LabMachineNode;
+  edges: LabMachineEdge[];
+  skin: "apparatus" | "physical";
+  onOpen?: (nodeId: string) => void;
+}) {
   const inbound = edges.filter((edge) => edge.to === node.id);
   const outbound = edges.filter((edge) => edge.from === node.id);
   const icon = nodeIcons[node.id] ?? "boundary";
-  const number = nodeNumbers[node.id];
-  const interactive = Boolean(onOpen);
+  const LucideNodeIcon = nodeLucideIcons[node.id];
+  const isAboutResearchAdjacency = skin === "physical" && node.id === "about";
+  const isPipelineMethodAdjacency = skin === "physical" && node.id === "pipeline";
+  const isMethodTimelineAdjacency = skin === "physical" && node.id === "method";
+
+  const isConjoinedBlock = skin === "physical" && ["pipeline", "method", "timeline"].includes(node.id);
+  const eyebrow = skin === "physical" && node.id === "people"
+    ? "WHO"
+    : skin === "physical" && node.id === "products"
+    ? "WHAT"
+    : node.id === "service"
+    ? node.label
+    : node.question;
+
+  let outboundCount = outbound.length;
+  if (isAboutResearchAdjacency) outboundCount = aboutResearchConnectorKinds.length;
+  if (isPipelineMethodAdjacency) outboundCount = pipelineMethodConnectorKinds.length;
+  if (isMethodTimelineAdjacency) outboundCount = methodTimelineConnectorKinds.length;
+  if (skin === "physical" && node.id === "timeline") outboundCount = 0;
 
   return (
     <article
-      className={`bf-machine-node bf-machine-node--${node.kind}`}
+      className={`bf-machine-node bf-machine-node--${node.kind} ${isConjoinedBlock ? "bf-machine-node--conjoined" : ""}`}
       data-node-id={node.id}
+      data-machine-node-interactive={onOpen ? "true" : undefined}
       data-tone={node.tone}
       data-inputs={inbound.length}
-      data-outputs={outbound.length}
+      data-outputs={outboundCount}
+      data-adjacency={isAboutResearchAdjacency ? "research" : isPipelineMethodAdjacency ? "method" : isMethodTimelineAdjacency ? "timeline" : undefined}
       style={{ gridArea: node.area }}
-      role={interactive ? "button" : undefined}
-      tabIndex={interactive ? 0 : undefined}
-      aria-label={interactive ? `Open ${node.label}` : undefined}
-      onClick={interactive ? () => onOpen?.(node.id) : undefined}
-      onKeyDown={interactive ? (event) => {
+      role={onOpen ? "button" : undefined}
+      tabIndex={onOpen ? 0 : undefined}
+      aria-label={onOpen ? `Open ${node.label}` : undefined}
+      onClick={onOpen ? () => onOpen(node.id) : undefined}
+      onKeyDown={onOpen ? (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          onOpen?.(node.id);
+          event.stopPropagation();
+          onOpen(node.id);
         }
       } : undefined}
     >
@@ -82,13 +143,13 @@ function Node({ node, edges, onOpen }: { node: LabMachineNode; edges: LabMachine
       <div className="bf-machine-node__face">
         <div className="bf-machine-node__icon-plate" aria-hidden="true">
           <span className="bf-machine-node__icon-well">
-            <BfuxIcon name={icon} />
+            {LucideNodeIcon ? <LucideNodeIcon /> : <BfuxIcon name={icon} />}
           </span>
         </div>
 
         <header>
-          <span>{number ? `${number}. ${node.question}` : node.question}</span>
-          <strong>{node.label}</strong>
+          <span>{eyebrow}</span>
+          {node.id === "service" ? null : <strong>{node.label}</strong>}
         </header>
 
         <div className="bf-machine-node__boundary">
@@ -96,7 +157,7 @@ function Node({ node, edges, onOpen }: { node: LabMachineNode; edges: LabMachine
           <p>{node.boundary}</p>
         </div>
 
-        {(node.state || node.meta?.length) && (
+        {(node.state || node.meta?.length) && !isConjoinedBlock && (
           <footer>
             {node.state && (
               <span className="bf-machine-node__state">
@@ -104,7 +165,10 @@ function Node({ node, edges, onOpen }: { node: LabMachineNode; edges: LabMachine
                 {node.state}
               </span>
             )}
-            {node.meta?.map((item) => <span key={item}>{item}</span>)}
+            {node.meta?.map((item) => {
+              const [label, value] = item.split(" · ");
+              return <span key={item}><small>{label}</small>{value ?? label}</span>;
+            })}
           </footer>
         )}
       </div>
@@ -114,10 +178,42 @@ function Node({ node, edges, onOpen }: { node: LabMachineNode; edges: LabMachine
           {inbound.map((edge) => <i key={`${edge.from}-${edge.to}`} title={`${edge.from} ${edge.relation} ${edge.to}`} data-kind={edge.kind} />)}
         </div>
       )}
-      {outbound.length > 0 && (
-        <div className="bf-machine-node__ports bf-machine-node__ports--out" aria-label={`${outbound.length} outgoing interface${outbound.length === 1 ? "" : "s"}`}>
-          {outbound.map((edge) => <i key={`${edge.from}-${edge.to}`} title={`${edge.from} ${edge.relation} ${edge.to}`} data-kind={edge.kind} />)}
+      {outboundCount > 0 && (
+        <div
+          className="bf-machine-node__ports bf-machine-node__ports--out"
+          aria-label={
+            isAboutResearchAdjacency ? "Six-contact adjacency connector to Research" :
+            isPipelineMethodAdjacency ? "Two-contact adjacency connector to Method" :
+            isMethodTimelineAdjacency ? "Two-contact adjacency connector to Timeline" :
+            `${outbound.length} outgoing interface${outbound.length === 1 ? "" : "s"}`
+          }
+        >
+          {isAboutResearchAdjacency
+            ? aboutResearchConnectorKinds.map((kind, index) => <i key={`about-research-${index}`} title="About snapped to Research" data-kind={kind} />)
+            : isPipelineMethodAdjacency
+            ? pipelineMethodConnectorKinds.map((kind, index) => <i key={`pipeline-method-${index}`} title="Pipeline snapped to Method" data-kind={kind} />)
+            : isMethodTimelineAdjacency
+            ? methodTimelineConnectorKinds.map((kind, index) => <i key={`method-timeline-${index}`} title="Method snapped to Timeline" data-kind={kind} />)
+            : outbound.map((edge) => <i key={`${edge.from}-${edge.to}`} title={`${edge.from} ${edge.relation} ${edge.to}`} data-kind={edge.kind} />)}
         </div>
+      )}
+
+      {isConjoinedBlock && node.id === "pipeline" && (
+        <div className="bf-machine-node__underpipe" aria-hidden="true">
+          <div className="bf-machine-node__underpipe-highlight" />
+        </div>
+      )}
+
+      {skin === "physical" && node.id === "research" && (
+        <div className="bf-machine-node__lower-dock" aria-label="Five-contact connector to the lower module">
+          {Array.from({ length: lowerDeckContactCount }, (_, index) => <i key={`research-lower-dock-${index}`} />)}
+        </div>
+      )}
+      {skin === "physical" && node.id === "research" && (
+        <div className="bf-machine-node__research-governance-dock" aria-label="Research connector to Governance"><i /></div>
+      )}
+      {skin === "physical" && node.id === "governance" && (
+        <div className="bf-machine-node__governance-top-dock" aria-label="Governance connector to Research"><i /></div>
       )}
     </article>
   );
@@ -128,11 +224,6 @@ function PhysicalStatus() {
     <aside className="bf-machine__status" aria-label="Lab Machine graph status">
       <strong>THE LAB MACHINE</strong>
       <small>Powered by Research. Built for People.</small>
-      <dl>
-        <div><dt>CORE</dt><dd>RESEARCH</dd></div>
-        <div><dt>MODULES</dt><dd>{labMachineNodes.length}</dd></div>
-        <div><dt>RELATIONS</dt><dd>{labMachineEdges.length}</dd></div>
-      </dl>
     </aside>
   );
 }
@@ -156,7 +247,10 @@ function PhysicalLegend() {
           <span key={label}><BfuxIcon name={icon} /><b>{label}</b><small>{detail}</small></span>
         ))}
       </div>
-      <p>ORIENT → PROBE → BIND → ACT</p>
+      <div className="bf-machine__legend-actions">
+        <p><span>HOVER: <b>Probe</b></span><span>CLICK: <b>Bind</b></span><span>ENTER: <b>Act</b></span></p>
+        <p>ORIENT → PROBE → BIND → ACT</p>
+      </div>
     </footer>
   );
 }
@@ -164,14 +258,25 @@ function PhysicalLegend() {
 export function LabMachine({
   showSchematic = false,
   skin = "physical",
+  resolution = "mid",
   onOpenNode,
 }: {
   showSchematic?: boolean;
   skin?: "apparatus" | "physical";
+  resolution?: LabMachineResolution;
   onOpenNode?: (nodeId: string) => void;
 }) {
   const id = useId().replaceAll(":", "");
   const [svg, setSvg] = useState("");
+  const [apparatusOffset, setApparatusOffset] = useState({ x: 0, y: 0 });
+  const [isDraggingApparatus, setIsDraggingApparatus] = useState(false);
+  const apparatusDrag = useRef<{
+    pointerId: number;
+    startX: number;
+    startY: number;
+    originX: number;
+    originY: number;
+  } | null>(null);
 
   useEffect(() => {
     if (!showSchematic) return;
@@ -194,29 +299,113 @@ export function LabMachine({
     };
   }, [id, showSchematic]);
 
-  const paths = skin === "physical" ? physicalTracePaths : apparatusTracePaths;
+  const paths = skin === "physical"
+    ? resolution === "focus" ? physicalFocusTracePaths : physicalTracePaths
+    : apparatusTracePaths;
+  const visibleNodes = skin === "physical"
+    ? labMachineNodes.filter((node) => physicalNodeIds.has(node.id))
+    : labMachineNodes;
+  const orderedVisibleNodes = skin === "physical" && resolution === "focus"
+    ? [...visibleNodes].sort((a, b) => physicalFocusNodeOrder[a.id] - physicalFocusNodeOrder[b.id])
+    : visibleNodes;
+  const visibleEdges = skin === "physical"
+    ? labMachineEdges.filter((edge) => physicalNodeIds.has(edge.from) && physicalNodeIds.has(edge.to))
+    : labMachineEdges;
 
   return (
-    <section className="bf-machine" data-skin={skin} aria-label="Boundary First Labs machine">
+    <section className="bf-machine" data-skin={skin} data-resolution={resolution} aria-label="Boundary First Labs machine">
       <div className="bf-machine__title">
         <strong>THE LAB MACHINE</strong>
         <span>Powered by Research. Built for People.</span>
       </div>
       <div className="bf-machine__board">
         {skin === "physical" ? <PhysicalStatus /> : null}
-        <svg className="bf-machine__traces" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
-          {labMachineEdges.map((edge, i) => {
-            const tone = edgeTone(edge);
-            return (
-              <g key={`${edge.from}-${edge.to}`} className="bf-machine__cable" data-kind={edge.kind} data-tone={tone}>
-                <path className="bf-machine__cable-sheath" d={paths[i]} />
-                <path className="bf-machine__cable-core" d={paths[i]} />
-                <path className="bf-machine__cable-highlight" d={paths[i]} />
+        <div
+          className="bf-machine__apparatus"
+          data-dragging={isDraggingApparatus ? "true" : undefined}
+          style={skin === "physical" ? { transform: `translate3d(${apparatusOffset.x}px, ${apparatusOffset.y}px, 0)` } : undefined}
+          tabIndex={skin === "physical" ? 0 : undefined}
+          role={skin === "physical" ? "group" : undefined}
+          aria-label={skin === "physical" ? "Draggable Lab apparatus. Use the pointer to drag, arrow keys to nudge, or Home to reset." : undefined}
+          title={skin === "physical" ? "Drag to reposition the apparatus · Double-click or press Home to reset" : undefined}
+          onPointerDown={skin === "physical" ? (event) => {
+            if (event.button !== 0) return;
+            if ((event.target as HTMLElement).closest('[data-machine-node-interactive="true"], a, button, input, select, textarea')) return;
+            apparatusDrag.current = {
+              pointerId: event.pointerId,
+              startX: event.clientX,
+              startY: event.clientY,
+              originX: apparatusOffset.x,
+              originY: apparatusOffset.y,
+            };
+            event.currentTarget.setPointerCapture(event.pointerId);
+            setIsDraggingApparatus(true);
+          } : undefined}
+          onPointerMove={skin === "physical" ? (event) => {
+            const drag = apparatusDrag.current;
+            if (!drag || drag.pointerId !== event.pointerId) return;
+            const x = Math.max(-700, Math.min(700, drag.originX + event.clientX - drag.startX));
+            const y = Math.max(-260, Math.min(260, drag.originY + event.clientY - drag.startY));
+            setApparatusOffset({ x, y });
+          } : undefined}
+          onPointerUp={skin === "physical" ? (event) => {
+            if (apparatusDrag.current?.pointerId !== event.pointerId) return;
+            apparatusDrag.current = null;
+            setIsDraggingApparatus(false);
+            event.currentTarget.releasePointerCapture(event.pointerId);
+          } : undefined}
+          onPointerCancel={skin === "physical" ? () => {
+            apparatusDrag.current = null;
+            setIsDraggingApparatus(false);
+          } : undefined}
+          onDoubleClick={skin === "physical" ? () => setApparatusOffset({ x: 0, y: 0 }) : undefined}
+          onKeyDown={skin === "physical" ? (event) => {
+            if (event.key === "Home") {
+              event.preventDefault();
+              setApparatusOffset({ x: 0, y: 0 });
+              return;
+            }
+            const delta = event.shiftKey ? 40 : 12;
+            let movement: { x: number; y: number } | null = null;
+            if (event.key === "ArrowLeft") movement = { x: -delta, y: 0 };
+            if (event.key === "ArrowRight") movement = { x: delta, y: 0 };
+            if (event.key === "ArrowUp") movement = { x: 0, y: -delta };
+            if (event.key === "ArrowDown") movement = { x: 0, y: delta };
+            if (movement === null) return;
+            event.preventDefault();
+            setApparatusOffset((current) => ({
+              x: Math.max(-700, Math.min(700, current.x + movement.x)),
+              y: Math.max(-260, Math.min(260, current.y + movement.y)),
+            }));
+          } : undefined}
+        >
+          <svg className="bf-machine__traces" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
+            {visibleEdges.map((edge) => {
+              const i = labMachineEdges.indexOf(edge);
+              const tone = edgeTone(edge);
+              return (
+                <g key={`${edge.from}-${edge.to}`} className="bf-machine__cable" data-kind={edge.kind} data-tone={tone} data-from={edge.from} data-to={edge.to}>
+                  <path className="bf-machine__cable-sheath" d={paths[i]} />
+                  <path className="bf-machine__cable-core" d={paths[i]} />
+                  <path className="bf-machine__cable-highlight" d={paths[i]} />
+                </g>
+              );
+            })}
+            {skin === "physical" && resolution === "mid" ? (
+              <g className="bf-machine__cable bf-machine__cable--product-publication" data-kind="feeds" data-tone="green">
+                <path className="bf-machine__cable-sheath" d="M774 121 H798" />
+                <path className="bf-machine__cable-core" d="M774 121 H798" />
+                <path className="bf-machine__cable-highlight" d="M774 121 H798" />
               </g>
-            );
-          })}
-        </svg>
-        {labMachineNodes.map((node) => <Node key={node.id} node={node} edges={labMachineEdges} onOpen={onOpenNode} />)}
+            ) : null}
+          </svg>
+          {skin === "physical" && resolution === "mid" ? (
+            <div className="bf-machine__lower-deck" aria-hidden="true">
+              <span />
+            </div>
+          ) : null}
+          {orderedVisibleNodes.map((node) => <Node key={node.id} node={node} edges={visibleEdges} skin={skin} onOpen={onOpenNode} />)}
+        </div>
       </div>
       {skin === "physical" ? <PhysicalLegend /> : null}
       {showSchematic && (
@@ -228,6 +417,8 @@ export function LabMachine({
     </section>
   );
 }
+
+export type LabMachineResolution = "mid" | "focus";
 
 const apparatusTracePaths = [
   "M245 350 H410",
@@ -245,16 +436,31 @@ const apparatusTracePaths = [
 ];
 
 const physicalTracePaths = [
-  "M250 335 H330 V395 H405",
-  "M250 555 H330 V470 H405",
-  "M795 390 H760",
-  "M505 300 V260 H395 V225",
-  "M590 300 V230",
-  "M675 300 V260 H770 V225",
-  "M430 600 V565 H500 V530",
-  "M590 600 V530",
-  "M750 600 V565 H680 V530",
-  "M965 155 H1040 V205",
-  "M1090 230 V430",
-  "M1040 485 H930 V650 H520",
+  "",
+  "",
+  "",
+  "M657 239 V205",
+  "M713 285 H915 V205",
+  "",
+  "M399 205 V239",
+  "",
+  "",
+  "",
+  "",
+  "",
+];
+
+const physicalFocusTracePaths = [
+  "",
+  "",
+  "",
+  "M600 395 V355 H546 V319",
+  "M750 395 V355 H852 V319",
+  "",
+  "M186 319 V355 H450 V395",
+  "",
+  "",
+  "",
+  "",
+  "",
 ];

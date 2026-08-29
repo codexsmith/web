@@ -30,6 +30,12 @@ export type LabMachineEdge = {
   kind: "feeds" | "attaches" | "constrains" | "records" | "serves";
 };
 
+export type LabMachineRelation = {
+  edge: LabMachineEdge;
+  direction: "inbound" | "outbound";
+  other: LabMachineNode;
+};
+
 export const labMachineNodes: LabMachineNode[] = [
   { id:"products", label:"Products", question:"WHAT WE BUILD", boundary:"What the Lab builds, ships, pilots, or deliberately keeps at concept status.", kind:"package", tone:"red", state:"BUILDING", meta:["stage · in flight","ownership · stewarded"], area:"products" },
   { id:"publications", label:"Publications", question:"WHAT WE PUBLISH", boundary:"Where research and doctrine become versioned public artifacts with explicit maturity.", kind:"publication", tone:"green", state:"PUBLISHED", meta:["maturity · mixed","review · ongoing"], area:"publications" },
@@ -59,6 +65,34 @@ export const labMachineEdges: LabMachineEdge[] = [
   { from:"service", to:"public-value", relation:"delivers", kind:"serves" },
   { from:"public-value", to:"people", relation:"serves", kind:"serves" },
 ];
+
+export function labMachineEdgeKey(edge: LabMachineEdge) {
+  return `${edge.from}->${edge.to}`;
+}
+
+export function getLabMachineNode(nodeId: string | null | undefined) {
+  return nodeId ? labMachineNodes.find((node) => node.id === nodeId) : undefined;
+}
+
+export function getLabMachineConnectingEdge(from: string, to: string) {
+  return labMachineEdges.find((edge) =>
+    (edge.from === from && edge.to === to) || (edge.from === to && edge.to === from),
+  );
+}
+
+export function getLabMachineRelations(nodeId: string): LabMachineRelation[] {
+  return labMachineEdges.flatMap<LabMachineRelation>((edge) => {
+    if (edge.from === nodeId) {
+      const other = getLabMachineNode(edge.to);
+      return other ? [{ edge, direction: "outbound" as const, other }] : [];
+    }
+    if (edge.to === nodeId) {
+      const other = getLabMachineNode(edge.from);
+      return other ? [{ edge, direction: "inbound" as const, other }] : [];
+    }
+    return [];
+  });
+}
 
 export function labMachineMermaid() {
   const safe = (value:string) => value.replaceAll('"', "'");

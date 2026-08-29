@@ -61,8 +61,14 @@ requireMatch(
 
 requireMatch(
   "src/components/world-app.tsx",
-  /navigateHome[\s\S]*branchTraversal\(traversalIds, traversalCursor, "root"\)[\s\S]*setTraversalIds\(nextTraversal\.ids\)[\s\S]*setTraversalCursor\(nextTraversal\.cursor\)/,
-  "Home/root navigation must append to traversal rather than reset it",
+  /navigateHome[\s\S]*router\.push\("\/world"\)/,
+  "The institutional home control must return to the Lab Machine",
+);
+
+requireMatch(
+  "src/components/world-app.tsx",
+  /navigateUp[\s\S]*getParent\(focusId\)[\s\S]*navigate\(nextParent\.id, "up"\)/,
+  "Hierarchy navigation must remain separate from the institutional home control",
 );
 
 forbidMatch(

@@ -1,0 +1,169 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "Boundary First Labs home" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - strong [ref=e10]: BOUNDARY FIRST LABS
+        - link "Back to the main site" [ref=e11] [cursor=pointer]:
+          - /url: /
+      - generic [ref=e16]:
+        - navigation "Current public path" [ref=e17]:
+          - link "Public Interest" [ref=e18] [cursor=pointer]:
+            - /url: /?focus=public-interest
+          - generic [ref=e19]: ›
+          - link "Publications" [ref=e20] [cursor=pointer]:
+            - /url: /?focus=publications
+          - generic [ref=e21]: ›
+          - link "About" [ref=e22] [cursor=pointer]:
+            - /url: /about
+          - generic [ref=e23]: ›
+          - strong [ref=e24]: Boundary First Labs
+        - generic "Process context controls" [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]: Process
+            - strong [ref=e28]: Core set
+          - button "Widen process context" [ref=e29] [cursor=pointer]
+          - button "Narrow process context" [disabled] [ref=e37]
+      - generic [ref=e46]:
+        - link "Search" [ref=e47] [cursor=pointer]:
+          - /url: /?search=1
+        - generic [ref=e52]: VIEW
+        - navigation "Boundary First Labs views" [ref=e53]:
+          - link "WORLD Public regions" [ref=e54] [cursor=pointer]:
+            - /url: /world?skin=physical
+            - generic [ref=e59]:
+              - strong [ref=e60]: WORLD
+              - generic [ref=e61]: Public regions
+          - link "EVIDENCE Founder provenance" [ref=e62] [cursor=pointer]:
+            - /url: /?projection=evidence
+            - generic [ref=e66]:
+              - strong [ref=e67]: EVIDENCE
+              - generic [ref=e68]: Founder provenance
+          - link "TIMELINE Development history" [ref=e69] [cursor=pointer]:
+            - /url: /?projection=gestalt
+            - generic [ref=e75]:
+              - strong [ref=e76]: TIMELINE
+              - generic [ref=e77]: Development history
+    - region "Boundary First Labs machine" [ref=e78]:
+      - group "Draggable Lab apparatus. Use the pointer to drag, arrow keys to nudge, or Home to reset." [ref=e80]:
+        - button "Open People" [ref=e81] [cursor=pointer]:
+          - generic [ref=e83]:
+            - generic [ref=e91]:
+              - generic [ref=e92]: WHO
+              - strong [ref=e93]: People
+            - generic [ref=e94]:
+              - generic [ref=e95]:
+                - generic [ref=e96]: STATE
+                - text: ACTIVE
+              - generic [ref=e97]:
+                - generic [ref=e98]: type
+                - text: network
+              - generic [ref=e99]:
+                - generic [ref=e100]: visibility
+                - text: transparent
+        - button "Open Products" [ref=e101] [cursor=pointer]:
+          - generic [ref=e103]:
+            - generic [ref=e109]:
+              - generic [ref=e110]: WHAT
+              - strong [ref=e111]: Products
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - generic [ref=e114]: STATE
+                - text: BUILDING
+              - generic [ref=e115]:
+                - generic [ref=e116]: stage
+                - text: in flight
+              - generic [ref=e117]:
+                - generic [ref=e118]: ownership
+                - text: stewarded
+        - button "Open Publications" [ref=e119] [cursor=pointer]:
+          - generic [ref=e121]:
+            - generic [ref=e130]:
+              - generic [ref=e131]: WHAT WE PUBLISH
+              - strong [ref=e132]: Publications
+            - generic [ref=e133]:
+              - generic [ref=e134]:
+                - generic [ref=e135]: STATE
+                - text: PUBLISHED
+              - generic [ref=e136]:
+                - generic [ref=e137]: maturity
+                - text: mixed
+              - generic [ref=e138]:
+                - generic [ref=e139]: review
+                - text: ongoing
+        - button "Open About" [ref=e140] [cursor=pointer]:
+          - generic [ref=e142]:
+            - generic [ref=e151]:
+              - generic [ref=e152]: WHO WE ARE
+              - strong [ref=e153]: About
+            - generic [ref=e154]:
+              - generic [ref=e155]:
+                - generic [ref=e156]: STATE
+                - text: STABLE
+              - generic [ref=e157]:
+                - generic [ref=e158]: identity
+                - text: verified
+              - generic [ref=e159]:
+                - generic [ref=e160]: provenance
+                - text: traceable
+          - generic "Six-contact adjacency connector to Research" [ref=e161]:
+            - generic "About snapped to Research" [ref=e162]
+            - generic "About snapped to Research" [ref=e163]
+            - generic "About snapped to Research" [ref=e164]
+            - generic "About snapped to Research" [ref=e165]
+            - generic "About snapped to Research" [ref=e166]
+            - generic "About snapped to Research" [ref=e167]
+        - button "Open Research" [ref=e168] [cursor=pointer]:
+          - generic [ref=e170]:
+            - generic [ref=e176]:
+              - generic [ref=e177]: CORE POWER SOURCE
+              - strong [ref=e178]: Research
+            - generic [ref=e179]:
+              - generic [ref=e180]:
+                - generic [ref=e181]: STATE
+                - text: ACTIVE
+              - generic [ref=e182]:
+                - generic [ref=e183]: methods
+                - text: formal
+              - generic [ref=e184]:
+                - generic [ref=e185]: evidence
+                - text: required
+          - generic "6 incoming interfaces" [ref=e186]:
+            - generic "method structures research" [ref=e187]
+            - generic "pipeline moves work research" [ref=e188]
+            - generic "about identifies research" [ref=e189]
+            - generic "people participate research" [ref=e190]
+            - generic "governance constrains research" [ref=e191]
+            - generic "timeline records research" [ref=e192]
+      - generic "Boundary First visual grammar legend" [ref=e193]:
+        - strong [ref=e194]: LEGEND · BOUNDARY-FIRST VISUAL GRAMMAR
+        - generic [ref=e195]:
+          - generic [ref=e196]:
+            - generic [ref=e200]: BOUNDARY
+            - generic [ref=e201]: Containment
+          - generic [ref=e202]:
+            - generic [ref=e205]: PORT
+            - generic [ref=e206]: Interface
+          - generic [ref=e207]:
+            - generic [ref=e211]: TRACE
+            - generic [ref=e212]: Relation
+          - generic [ref=e213]:
+            - generic [ref=e215]: GATE
+            - generic [ref=e216]: Condition
+          - generic [ref=e217]:
+            - generic [ref=e220]: STATE
+            - generic [ref=e221]: Observed
+          - generic [ref=e222]:
+            - generic [ref=e226]: COMMAND
+            - generic [ref=e227]: Action
+          - generic [ref=e228]:
+            - generic [ref=e233]: THROUGH
+            - generic [ref=e234]: Inspect deeper
+        - generic [ref=e235]:
+          - paragraph [ref=e236]:
+            - generic [ref=e237]: "HOVER: Probe"
+            - generic [ref=e238]: "CLICK: Bind"
+            - generic [ref=e239]: "ENTER: Act"
+          - paragraph [ref=e240]: ORIENT → PROBE → BIND → ACT
+  - button "Open Next.js Dev Tools" [ref=e246] [cursor=pointer]
