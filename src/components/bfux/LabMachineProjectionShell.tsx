@@ -69,17 +69,7 @@ function uniqueStrings(values: string[]) {
   });
 }
 
-export function LabMachineProjectionShell({
-  subsystem,
-  projection,
-  eyebrow,
-  title,
-  description,
-  status,
-  onBack,
-  onClose,
-  children,
-}: {
+type LabMachineProjectionShellProps = {
   subsystem: string;
   projection: string;
   eyebrow: string;
@@ -89,7 +79,10 @@ export function LabMachineProjectionShell({
   onBack: () => void;
   onClose: () => void;
   children: ReactNode;
-}) {
+};
+
+export function LabMachineProjectionShell(props: LabMachineProjectionShellProps) {
+  const { subsystem, projection, eyebrow, title, description, status, children } = props;
   const shellRef = useRef<HTMLElement>(null);
   const rings = ["Boundary First Labs", "Lab Machine", subsystem, projection];
   const navigation = useLabMachineNavigation();
@@ -162,10 +155,6 @@ export function LabMachineProjectionShell({
                 {allBadges.map((badge) => <span key={badge}>{badge}</span>)}
               </div>
             ) : null}
-          </div>
-          <div className="bf-projection-shell__actions">
-            <button type="button" onClick={onBack}>BACK TO {subsystem.toUpperCase()}</button>
-            <button type="button" onClick={onClose} aria-label="Close projection">CLOSE ×</button>
           </div>
         </div>
       </header>
