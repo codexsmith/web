@@ -19,11 +19,11 @@ import { LabMachineMethodProjection } from "./LabMachineMethodProjection";
 import { LabMachinePeopleProjection } from "./LabMachinePeopleProjection";
 import { LabMachinePipelineProjection } from "./LabMachinePipelineProjection";
 import { LabMachineProductsProjection } from "./LabMachineProductsProjection";
+import { LabMachinePublicationsProjection } from "./LabMachinePublicationsProjection";
 import { LabMachinePublicValueProjection } from "./LabMachinePublicValueProjection";
 import { LabMachineResearchProjection } from "./LabMachineResearchProjection";
 import { LabMachineServiceProjection } from "./LabMachineServiceProjection";
 import { LabMachineTimelineProjection } from "./LabMachineTimelineProjection";
-// import { getLabMachineNode } from "./lab-machine-model";
 import { LabMachineNavigationProvider, type LabMachineTraversalStep } from "./LabMachineNavigationContext";
 import { PhysicalMachineExperience } from "./PhysicalMachineExperience";
 import { getLabMachineConnectingEdge, getLabMachineNode, labMachineEdgeKey } from "./lab-machine-model";
@@ -65,6 +65,8 @@ function SectionSurface({ section, onClose, intermediateLayer = false }: { secti
       return <LabMachineResearchProjection initialMode="program-map" onBack={onClose} onClose={onClose} />;
     case "products":
       return <LabMachineProductsProjection initialMode="experimental-portfolio" onBack={onClose} onClose={onClose} />;
+    case "publications":
+      return <LabMachinePublicationsProjection initialMode="publication-map" onBack={onClose} onClose={onClose} />;
     case "applications":
       return <LabMachineApplicationsProjection initialMode="domain-map" onBack={onClose} onClose={onClose} />;
     case "service":
@@ -83,10 +85,6 @@ function SectionSurface({ section, onClose, intermediateLayer = false }: { secti
       return <LabMachineAboutProjection initialMode="institutional-profile" onBack={onClose} onClose={onClose} />;
     case "timeline":
       return <LabMachineTimelineProjection initialMode="institutional-timeline" onBack={onClose} onClose={onClose} />;
-    case "publications": {
-      const node = getLabMachineNode("publications");
-      return node ? <LabMachineDetailPanel node={node} onClose={onClose} /> : null;
-    }
     default:
       return null;
   }
