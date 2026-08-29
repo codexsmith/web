@@ -32,6 +32,7 @@ export function LabMachineProjectionShell({
 }) {
   const rings = ["Boundary First Labs", "Lab Machine", subsystem, projection];
   const navigation = useLabMachineNavigation();
+  const statusBadges = status?.split("·").map((item) => item.trim()).filter(Boolean) ?? [];
 
   return (
     <section className="bf-projection-shell" aria-label={`${subsystem}: ${projection}`}>
@@ -41,13 +42,22 @@ export function LabMachineProjectionShell({
           <div>
             <p>{eyebrow}</p>
             <h2>{title}</h2>
-            <strong>{description}</strong>
           </div>
         </div>
         <div className="bf-projection-shell__commands">
-          {status ? <span className="bf-projection-shell__status">{status}</span> : null}
-          <button type="button" onClick={onBack}>BACK TO {subsystem.toUpperCase()}</button>
-          <button type="button" onClick={onClose} aria-label="Close projection">CLOSE ×</button>
+          <div className="bf-projection-shell__glance">
+            <small>AT A GLANCE</small>
+            <p>{description}</p>
+            {statusBadges.length ? (
+              <div className="bf-projection-shell__badges" aria-label={`${subsystem} summary figures`}>
+                {statusBadges.map((badge) => <span key={badge}>{badge}</span>)}
+              </div>
+            ) : null}
+          </div>
+          <div className="bf-projection-shell__actions">
+            <button type="button" onClick={onBack}>BACK TO {subsystem.toUpperCase()}</button>
+            <button type="button" onClick={onClose} aria-label="Close projection">CLOSE ×</button>
+          </div>
         </div>
       </header>
 
