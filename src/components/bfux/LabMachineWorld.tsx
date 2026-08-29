@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BoundaryFrame } from "@/components/boundary-frame";
 import { EvidenceView } from "@/components/evidence-view";
@@ -10,6 +10,7 @@ import { hydrateContentNode } from "@/lib/content-projections";
 import { getNode, getPathForNode } from "@/lib/content-registry";
 import { processScopes, type ProcessScope } from "@/lib/bfl-process";
 import type { ProjectionMode } from "@/lib/view-projection";
+import { LabMachine } from "./LabMachine";
 import { LabMachineAboutProjection } from "./LabMachineAboutProjection";
 import { LabMachineApplicationsProjection } from "./LabMachineApplicationsProjection";
 import { LabMachineDetailPanel } from "./LabMachineDetailPanel";
@@ -22,22 +23,12 @@ import { LabMachinePublicValueProjection } from "./LabMachinePublicValueProjecti
 import { LabMachineResearchProjection } from "./LabMachineResearchProjection";
 import { LabMachineServiceProjection } from "./LabMachineServiceProjection";
 import { LabMachineTimelineProjection } from "./LabMachineTimelineProjection";
-import { PhysicalMachineExperience } from "./PhysicalMachineExperience";
 import { getLabMachineNode } from "./lab-machine-model";
 
 type Props = {
   section?: string;
   initialProjection: ProjectionMode;
   initialProcessScope: ProcessScope;
-  showSchematic?: boolean;
-};
-
-const coreNodePaths: Partial<Record<string, string>> = {
-  people: "/public-interest",
-  products: "/products",
-  publications: "/publications",
-  about: "/about",
-  research: "/research",
 };
 
 function machineUrl(projection: ProjectionMode = "world", scope: ProcessScope = "full", section?: string) {
@@ -82,12 +73,15 @@ function SectionSurface({ section, onClose }: { section: string; onClose: () => 
   }
 }
 
-export function LabMachineWorld({ section, initialProjection, initialProcessScope, showSchematic = false }: Props) {
+export function LabMachineWorld({ section, initialProjection, initialProcessScope }: Props) {
   const router = useRouter();
   const rootNode = useMemo(() => hydrateContentNode(getNode("root")), []);
-  const projection = initialProjection;
-  const processScope = initialProcessScope;
+  const [projection, setProjection] = useState<ProjectionMode>(initialProjection);
+  const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
   const [searchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => setProjection(initialProjection), [initialProjection]);
+  useEffect(() => setProcessScope(initialProcessScope), [initialProcessScope]);
 
   const processScopeIndex = processScopes.indexOf(processScope);
   const canProcessZoomOut = processScopeIndex > 0;
@@ -95,19 +89,17 @@ export function LabMachineWorld({ section, initialProjection, initialProcessScop
 
   const closeSection = () => router.push(machineUrl("world", "full"), { scroll: false });
   const openSection = (nodeId: string) => router.push(machineUrl("world", "full", nodeId), { scroll: false });
-  const openCoreNode = (nodeId: string) => {
-    const destination = coreNodePaths[nodeId];
-    if (destination) router.push(destination, { scroll: false });
-    else openSection(nodeId);
-  };
-  const returnToMachine = () => {
+  const home = () => {
+    setProjection("world");
+    setProcessScope("full");
     router.push(machineUrl("world", "full"), { scroll: false });
   };
-  const openMachine = () => router.push("/world");
   const changeProjection = (nextProjection: ProjectionMode) => {
+    setProjection(nextProjection);
     router.push(machineUrl(nextProjection, processScope), { scroll: false });
   };
   const changeProcessScope = (nextScope: ProcessScope) => {
+    setProcessScope(nextScope);
     router.replace(machineUrl(projection, nextScope), { scroll: false });
   };
   const navigateAway = (nodeId: string) => {
@@ -115,25 +107,11 @@ export function LabMachineWorld({ section, initialProjection, initialProcessScop
     router.push(getPathForNode(nodeId), { scroll: false });
   };
 
-  if (projection === "world") {
-    const sectionNode = section ? getLabMachineNode(section) : null;
-
-    return (
-      <main className="world-machine-preview">
-        <PhysicalMachineExperience
-          showSchematic={showSchematic}
-          initialResolution={section ? "mid" : "focus"}
-          sectionLabel={sectionNode?.label}
-          sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} /> : undefined}
-          onCloseSection={closeSection}
-          onOpenNode={openSection}
-          onOpenCoreNode={openCoreNode}
-        />
-      </main>
-    );
-  }
-
-  const projectionSurface = projection === "evidence" ? (
+  const projectionSurface = projection === "world" ? (
+    <main className="world-viewport world-machine-surface" data-world-id="root">
+      {section ? <SectionSurface section={section} onClose={closeSection} /> : <LabMachine skin="physical" onOpenNode={openSection} />}
+    </main>
+  ) : projection === "evidence" ? (
     <EvidenceView focusNode={rootNode} onNavigate={navigateAway} />
   ) : (
     <GestaltView focusNode={rootNode} scope={processScope} onNavigate={navigateAway} />
@@ -163,8 +141,8 @@ export function LabMachineWorld({ section, initialProjection, initialProcessScop
         canTraceForward={false}
         canProcessZoomOut={canProcessZoomOut}
         canProcessZoomIn={canProcessZoomIn}
-        onHome={openMachine}
-        onUp={returnToMachine}
+        onHome={home}
+        onUp={home}
         onBack={() => section ? closeSection() : router.back()}
         onForward={() => undefined}
         onLocalNavigate={navigateAway}
