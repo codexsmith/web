@@ -232,7 +232,8 @@
   top: -12%;
   bottom: -12%;
   left: 50%;
-  width: 1px;
+  width: 3px;
+  transform: translateX(-50%);
 }
 
 .hero-apparatus__middle {

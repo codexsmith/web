@@ -14,11 +14,11 @@ export function normalizeTraversalCursor(path: string[], cursor: number | undefi
 export function bootstrapTraversal(targetId: string): TraversalState {
   const ids: string[] = [];
   let cursor = getNode(targetId);
-  ids.unshift(cursor.id);
 
-  while (cursor.parentId) {
-    cursor = getNode(cursor.parentId);
+  while (cursor.id !== "root") {
     ids.unshift(cursor.id);
+    if (!cursor.parentId) break;
+    cursor = getNode(cursor.parentId);
   }
 
   return { ids, cursor: ids.length - 1 };

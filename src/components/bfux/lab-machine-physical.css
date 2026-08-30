@@ -1,0 +1,610 @@
+/* Physical skin: a mounted, inspectable machine projection of the same semantic graph. */
+.bf-machine[data-skin="physical"] {
+  --physical-board: #0b1114;
+  --physical-steel: #252b2e;
+  --physical-iron: #111619;
+  --physical-edge: #5f696e;
+  --physical-highlight: rgba(255,255,255,.12);
+  background: #070a0c;
+  padding: 0 0 1rem;
+  overflow-x: auto;
+}
+
+/* The physical surface carries its own status instrument; no floating app-title bar. */
+.bf-machine[data-skin="physical"] > .bf-machine__title { display: none; }
+
+.bf-machine[data-skin="physical"] .bf-machine__board {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 1120px;
+  min-height: 720px;
+  aspect-ratio: 16 / 8.9;
+  padding: 0;
+  overflow: hidden;
+  border: 8px solid #121719;
+  outline: 1px solid #394247;
+  background:
+    linear-gradient(rgba(111,139,151,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,139,151,.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 45%, #111a1e 0, #0c1215 44%, #080c0e 100%);
+  background-size: 24px 24px, 24px 24px, auto;
+  box-shadow:
+    inset 0 0 0 2px #050708,
+    inset 0 0 0 5px #22292c,
+    inset 0 0 90px #000,
+    0 8px 26px #000a;
+}
+.bf-machine[data-skin="physical"] .bf-machine__board::before,
+.bf-machine[data-skin="physical"] .bf-machine__board::after { display: none; }
+
+/* Upper-left instrument uses graph facts rather than fictional telemetry. */
+.bf-machine[data-skin="physical"] .bf-machine__status {
+  position: absolute;
+  z-index: 4;
+  left: 1.4%;
+  top: 2.4%;
+  width: 20.2%;
+  min-height: 20.5%;
+  padding: 1rem 1rem .8rem;
+  color: #d9dfe1;
+  border: 2px solid #485257;
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 18%),
+    linear-gradient(135deg, #172024, #0c1114 72%);
+  box-shadow:
+    inset 0 0 0 3px #080b0d,
+    inset 0 1px var(--physical-highlight),
+    0 8px 16px #000b;
+}
+.bf-machine[data-skin="physical"] .bf-machine__status::before,
+.bf-machine[data-skin="physical"] .bf-machine__status::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #8b9193;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c1c5c6 0 10%, #4d5356 13% 42%, #111517 45%);
+  box-shadow: 0 1px 2px #000;
+}
+.bf-machine[data-skin="physical"] .bf-machine__status::before { left: 8px; top: 8px; }
+.bf-machine[data-skin="physical"] .bf-machine__status::after { right: 8px; top: 8px; }
+.bf-machine[data-skin="physical"] .bf-machine__status > strong {
+  display: block;
+  font: 600 .92rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+}
+.bf-machine[data-skin="physical"] .bf-machine__status > small {
+  display: block;
+  margin-top: .35rem;
+  color: #aeb8bc;
+  font-size: .66rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine__status dl {
+  display: grid;
+  grid-template-columns: 1.4fr .8fr .8fr;
+  margin: .9rem 0 0;
+  border-top: 1px solid #313b3f;
+  border-bottom: 1px solid #20282b;
+}
+.bf-machine[data-skin="physical"] .bf-machine__status dl div {
+  padding: .62rem .55rem;
+  border-right: 1px solid #2e383c;
+}
+.bf-machine[data-skin="physical"] .bf-machine__status dl div:last-child { border-right: 0; }
+.bf-machine[data-skin="physical"] .bf-machine__status dt {
+  color: #89969b;
+  font: 600 .5rem/1.2 ui-monospace, monospace;
+  letter-spacing: .09em;
+}
+.bf-machine[data-skin="physical"] .bf-machine__status dd {
+  margin: .28rem 0 0;
+  color: #9bdc62;
+  font: 600 .72rem/1 ui-monospace, monospace;
+}
+
+/* The physical layout is deliberately non-uniform and matches the apparatus composition. */
+.bf-machine[data-skin="physical"] .bf-machine-node {
+  position: absolute !important;
+  z-index: 2;
+  margin: 0 !important;
+  align-self: auto !important;
+  min-width: 0;
+  filter: drop-shadow(0 10px 8px #000c);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] { left: 24.6%; top: 2.5%; width: 17.3%; height: 27%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="publications"] { left: 43.2%; top: 2.5%; width: 18%; height: 27%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="applications"] { left: 62.8%; top: 2.5%; width: 18%; height: 27%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] { left: 86.5%; top: 7.2%; width: 11%; height: 20%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] { left: 33.4%; top: 36.2%; width: 31%; height: 30%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] { left: 66.5%; top: 39.3%; width: 17.8%; height: 24%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"] { left: 4%; top: 82%; width: 11.5%; height: 10%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"] { left: 17%; top: 82%; width: 11.5%; height: 10%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"] { left: 30%; top: 82%; width: 11.5%; height: 10%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] { left: 45%; top: 70%; width: 16%; height: 22%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] { left: 65%; top: 70%; width: 16%; height: 22%; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] { left: 86.5%; top: 57.5%; width: 11%; height: 13%; }
+
+/* Three physical layers: back shell, cast face, recessed information wells. */
+.bf-machine[data-skin="physical"] .bf-machine-node__shell {
+  position: absolute;
+  inset: -9px;
+  z-index: -2;
+  border: 2px solid color-mix(in srgb, var(--tone) 30%, #72797c);
+  border-radius: 5px;
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.13), transparent 16%),
+    linear-gradient(180deg, color-mix(in srgb, var(--tone) 10%, #343a3d), #15191b 34%, #090c0d 100%);
+  box-shadow:
+    inset 0 2px rgba(255,255,255,.08),
+    inset 0 -3px #000,
+    0 0 0 2px #050606,
+    0 9px 14px #000a;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__shell::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node__face {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  border: 2px solid color-mix(in srgb, var(--tone) 25%, #4f595d);
+  border-radius: 3px;
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 15%),
+    linear-gradient(135deg, color-mix(in srgb, var(--tone) 16%, #171c1f), #121719 56%, #0b0f11 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.08),
+    inset 0 -18px 30px #0005;
+}
+
+/* Small raised icon submodule: no more full-height icon sidebar. */
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-plate {
+  position: absolute;
+  z-index: 3;
+  left: 10px;
+  top: 10px;
+  width: 64px;
+  height: 64px;
+  margin: 0;
+  padding: 6px;
+  border: 2px solid #586267;
+  border-right: 2px solid #586267;
+  border-radius: 3px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.08), transparent 30%),
+    linear-gradient(#262d30, #101416);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.1),
+    0 4px 6px #000a;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 2px solid color-mix(in srgb, var(--tone) 58%, #687176);
+  border-radius: 2px;
+  background:
+    radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--tone) 15%, #171c1e), #080b0d 72%);
+  box-shadow:
+    inset 0 0 0 4px #07090a,
+    inset 0 1px rgba(255,255,255,.09),
+    0 0 0 1px #000;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well svg {
+  width: 2.15rem;
+  height: 2.15rem;
+  color: var(--tone);
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--tone) 34%, transparent));
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node header {
+  position: relative;
+  min-height: 78px;
+  padding: 12px 12px 8px 88px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  background: transparent;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header::after {
+  right: 10px;
+  top: 10px;
+  width: 12px;
+  border-top-width: 2px;
+  opacity: .85;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header span {
+  color: var(--tone);
+  font: 650 .58rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .085em;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header strong {
+  display: block;
+  margin-top: .35rem;
+  color: #e4e7e8;
+  font: 500 1.28rem/1.05 Georgia, serif;
+  text-shadow: 0 1px 1px #000;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0 12px 10px 88px;
+  padding: .62rem .68rem;
+  border: 1px solid color-mix(in srgb, var(--tone) 23%, #374247);
+  border-top-color: color-mix(in srgb, var(--tone) 31%, #566065);
+  border-radius: 3px;
+  background: linear-gradient(#0c1214, #090d0f);
+  box-shadow: inset 0 2px 7px #000a;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary::after {
+  width: 14px;
+  height: 4px;
+  opacity: .7;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary small,
+.bf-machine[data-skin="physical"] .bf-machine-node footer small {
+  font: 600 .5rem/1.2 ui-monospace, monospace;
+  letter-spacing: .08em;
+  opacity: .72;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary p {
+  margin: .36rem 0 0;
+  color: #d1d7d9;
+  font-size: .76rem;
+  line-height: 1.42;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node footer {
+  display: flex;
+  flex: 0 0 auto;
+  margin-top: auto;
+  border-top: 1px solid color-mix(in srgb, var(--tone) 20%, #3d474b);
+  background: linear-gradient(#151b1d, #0b0f11);
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: .48rem .5rem;
+  border-right: 1px solid rgba(255,255,255,.07);
+  color: #c9d0d2;
+  font: 500 .54rem/1.2 ui-monospace, monospace;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span:last-child { border-right: 0; }
+.bf-machine[data-skin="physical"] .bf-machine-node footer span:first-child {
+  padding-left: 1.22rem;
+  color: var(--tone);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span:first-child::before {
+  left: .48rem;
+  width: .42rem;
+  height: .42rem;
+  border-color: color-mix(in srgb, var(--tone) 78%, #dce0e1);
+  background: var(--tone);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--tone) 55%, transparent);
+}
+
+/* Corner fasteners are mounting hardware; their repetition is structural. */
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners { inset: -5px; z-index: 7; }
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners i {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #8a9194;
+  background: radial-gradient(circle at 35% 30%, #c8cbcc 0 8%, #555c5f 11% 38%, #15191b 43% 100%);
+  box-shadow: 0 2px 2px #000b;
+}
+
+/* Graph-derived connector blocks become chunky terminal housings. */
+.bf-machine[data-skin="physical"] .bf-machine-node__ports {
+  z-index: 8;
+  gap: 4px;
+  padding: 5px 4px;
+  border: 2px solid #6c7579;
+  border-radius: 3px;
+  background: linear-gradient(#30373a, #0b0f11);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.09),
+    0 4px 7px #000c;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__ports--in { left: -11px; }
+.bf-machine[data-skin="physical"] .bf-machine-node__ports--out { right: -11px; }
+.bf-machine[data-skin="physical"] .bf-machine-node__ports i {
+  width: 9px;
+  height: 9px;
+  border: 1px solid color-mix(in srgb, var(--tone) 70%, #d2d7d8);
+  background: radial-gradient(circle, #050606 0 38%, color-mix(in srgb, var(--tone) 48%, #242a2d) 41% 57%, #07090a 60%);
+  box-shadow: inset 0 0 0 1px #000;
+}
+
+/* Physical cabling: black sheath, colored conductor, metallic highlight. */
+.bf-machine[data-skin="physical"] .bf-machine__traces {
+  z-index: 1;
+  overflow: visible;
+  filter: drop-shadow(0 4px 2px #000);
+}
+.bf-machine[data-skin="physical"] .bf-machine__cable path {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.bf-machine[data-skin="physical"] .bf-machine__cable-sheath {
+  stroke: #030506;
+  stroke-width: 14;
+  opacity: 1;
+}
+.bf-machine[data-skin="physical"] .bf-machine__cable-core {
+  stroke: #697277;
+  stroke-width: 8;
+  opacity: 1;
+}
+.bf-machine[data-skin="physical"] .bf-machine__cable-highlight {
+  stroke: rgba(255,255,255,.26);
+  stroke-width: 1.4;
+  opacity: .85;
+  transform: translateY(-1px);
+}
+.bf-machine[data-skin="physical"] .bf-machine__cable[data-tone="violet"] .bf-machine__cable-core { stroke: color-mix(in srgb, #9b72c6 66%, #70787c); }
+.bf-machine[data-skin="physical"] .bf-machine__cable[data-tone="green"] .bf-machine__cable-core { stroke: color-mix(in srgb, #80a85d 62%, #70787c); }
+.bf-machine[data-skin="physical"] .bf-machine__cable[data-tone="red"] .bf-machine__cable-core { stroke: color-mix(in srgb, #cf625d 62%, #70787c); }
+.bf-machine[data-skin="physical"] .bf-machine__cable[data-tone="cyan"] .bf-machine__cable-core { stroke: color-mix(in srgb, #53a5b5 62%, #70787c); }
+.bf-machine[data-skin="physical"] .bf-machine__cable[data-tone="amber"] .bf-machine__cable-core { stroke: color-mix(in srgb, #c18c39 62%, #70787c); }
+.bf-machine[data-skin="physical"] .bf-machine__cable[data-tone="blue"] .bf-machine__cable-core { stroke: color-mix(in srgb, #5c8fbe 62%, #70787c); }
+
+/* Role-specific chassis morphology. */
+.bf-machine[data-skin="physical"] .bf-machine-node--package .bf-machine-node__shell { inset: -11px -10px; }
+.bf-machine[data-skin="physical"] .bf-machine-node--package::after {
+  left: 35%; right: 35%; bottom: -14px; height: 13px;
+  border: 2px solid #687176; border-top: 0;
+  background: linear-gradient(#202629, #0b0f11);
+  box-shadow: 0 3px 4px #000a;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--publication .bf-machine-node__shell {
+  transform: translate(5px,5px);
+  box-shadow: -5px -5px 0 #20272a, -10px -10px 0 #0e1214, 0 8px 13px #000a;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--attachment .bf-machine-node__shell { inset: -10px -16px -10px -9px; }
+.bf-machine[data-skin="physical"] .bf-machine-node--attachment::after {
+  right: -24px; top: 31%; width: 21px; height: 38%;
+  border: 2px solid #717a7e; border-left: 0;
+  background: repeating-linear-gradient(180deg,#121719 0 9px,color-mix(in srgb,var(--tone) 42%,#22282a) 9px 12px);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--pipeline .bf-machine-node__shell { border-radius: 12px 4px 4px 12px; }
+.bf-machine[data-skin="physical"] .bf-machine-node--pipeline::after {
+  right: -20px; width: 20px; height: 26px;
+  border-block: 3px solid #737c80;
+  background: #111719;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--transparent .bf-machine-node__face {
+  background:
+    linear-gradient(180deg, color-mix(in srgb,var(--tone) 14%,rgba(14,22,28,.9)), rgba(10,16,20,.88));
+  backdrop-filter: blur(2px);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--authority .bf-machine-node__shell,
+.bf-machine[data-skin="physical"] .bf-machine-node--authority .bf-machine-node__face { border-width: 3px; }
+.bf-machine[data-skin="physical"] .bf-machine-node--record .bf-machine-node__face { border-left: 5px double color-mix(in srgb,var(--tone) 45%,#70797d); }
+.bf-machine[data-skin="physical"] .bf-machine-node--identity::after {
+  bottom: -13px;
+  border-width: 2px;
+  background: #17140f;
+}
+
+/* Conjoined Block (Pipeline, Method, Timeline) */
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header {
+  padding-bottom: 12px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe {
+  position: absolute;
+  left: 50%;
+  width: 226.08%;
+  bottom: -15px;
+  height: 6px;
+  background: linear-gradient(90deg, #1b2226, #2a3438, #1b2226);
+  border: 1px solid #090c0d;
+  border-top: 1px solid #4a565c;
+  border-radius: 3px;
+  box-shadow: 0 8px 12px #000c;
+  z-index: -1;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe-highlight {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 1px;
+  height: 2px;
+  background: #80a85d;
+  box-shadow: 0 0 6px rgba(128, 168, 93, 0.6);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::before,
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  width: 6px;
+  height: 12px;
+  background: linear-gradient(0deg, #1b2226, #2a3438);
+  border: 1px solid #090c0d;
+  border-bottom: 0;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::before {
+  left: -1px;
+  border-radius: 3px 0 0 0;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__underpipe::after {
+  right: -1px;
+  border-radius: 0 3px 0 0;
+}
+
+/* Research is the central machine, not another card. */
+.bf-machine[data-skin="physical"] .bf-machine-node--core { filter: drop-shadow(0 13px 12px #000d); }
+.bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__shell {
+  inset: -15px;
+  border-width: 3px;
+  border-color: #6d5d7b;
+  clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__face {
+  border-width: 3px;
+  background:
+    linear-gradient(180deg, rgba(159,113,198,.12), transparent 28%),
+    linear-gradient(135deg, #191824, #0e1117 68%);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__icon-plate {
+  left: 22px;
+  top: 78px;
+  width: 120px;
+  height: 120px;
+  padding: 8px;
+  border-radius: 50%;
+  border-color: #756287;
+  background: linear-gradient(#292832,#0b0d11);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__icon-well {
+  border-radius: 50%;
+  border-color: #9a7cb0;
+  background: radial-gradient(circle, #b687dd 0 5%, #2e2340 7% 24%, #15131d 26% 43%, #080a0c 45% 100%);
+  box-shadow: inset 0 0 0 10px #060708, 0 0 0 3px #30243a, 0 0 18px #8f6bb455;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__icon-well svg { width: 3rem; height: 3rem; }
+.bf-machine[data-skin="physical"] .bf-machine-node--core header {
+  min-height: 72px;
+  padding: 14px 16px 8px 150px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] header { padding-left: 88px; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] .bf-machine-node__boundary { margin-left: 88px; }
+
+/* Conjoined Block overrides */
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header {
+  min-height: 44px;
+  padding: 8px 6px 4px 50px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header span {
+  font-size: 0.5rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined header strong {
+  margin-top: 2px;
+  font-size: 0.95rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-plate {
+  left: 6px;
+  top: 6px;
+  width: 38px;
+  height: 46px;
+  padding: 6px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-well svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__boundary {
+  display: none;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node--core header strong { font-size: 1.45rem; }
+.bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__boundary {
+  min-height: 112px;
+  margin: 0 18px 12px 178px;
+  padding: .8rem .85rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__boundary p { font-size: .8rem; }
+
+/* Compact terminal devices are intentionally unlike content modules. */
+.bf-machine[data-skin="physical"] .bf-machine-node--service .bf-machine-node__icon-plate,
+.bf-machine[data-skin="physical"] .bf-machine-node--output .bf-machine-node__icon-plate { display: none; }
+.bf-machine[data-skin="physical"] .bf-machine-node--service header,
+.bf-machine[data-skin="physical"] .bf-machine-node--output header {
+  min-height: 54px;
+  padding: 12px 12px 6px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--service header strong,
+.bf-machine[data-skin="physical"] .bf-machine-node--output header strong { font-size: 1rem; }
+.bf-machine[data-skin="physical"] .bf-machine-node--service .bf-machine-node__boundary,
+.bf-machine[data-skin="physical"] .bf-machine-node--output .bf-machine-node__boundary {
+  margin: 0 10px 10px;
+  padding: .58rem;
+  border: 1px solid #354147;
+  background: #0b1012;
+  box-shadow: inset 0 2px 6px #0009;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node--service .bf-machine-node__boundary p,
+.bf-machine[data-skin="physical"] .bf-machine-node--output .bf-machine-node__boundary p { font-size: .68rem; }
+.bf-machine[data-skin="physical"] .bf-machine-node--service footer,
+.bf-machine[data-skin="physical"] .bf-machine-node--output footer { display: none; }
+.bf-machine[data-skin="physical"] .bf-machine-node--output .bf-machine-node__shell,
+.bf-machine[data-skin="physical"] .bf-machine-node--output .bf-machine-node__face { border-radius: 5px 20px 20px 5px; }
+
+/* Bottom grammar strip belongs to the physical apparatus, like a machine legend plate. */
+.bf-machine[data-skin="physical"] .bf-machine__legend {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.2rem;
+  min-width: 1120px;
+  padding: .8rem 1rem;
+  border: 1px solid #3f494d;
+  border-top-color: #5c666a;
+  color: #cbd2d4;
+  background: linear-gradient(#151b1e,#0b1012);
+  box-shadow: inset 0 1px rgba(255,255,255,.05), 0 5px 12px #0009;
+}
+.bf-machine[data-skin="physical"] .bf-machine__legend > strong {
+  font: 600 .62rem/1.2 ui-monospace, monospace;
+  letter-spacing: .08em;
+  white-space: nowrap;
+}
+.bf-machine[data-skin="physical"] .bf-machine__legend > div {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine__legend > div > span {
+  display: grid;
+  grid-template-columns: 24px auto;
+  grid-template-rows: auto auto;
+  column-gap: .4rem;
+  align-items: center;
+}
+.bf-machine[data-skin="physical"] .bf-machine__legend svg {
+  grid-row: 1 / span 2;
+  width: 22px;
+  height: 22px;
+  color: #91a0a6;
+}
+.bf-machine[data-skin="physical"] .bf-machine__legend b {
+  font: 600 .54rem/1.1 ui-monospace, monospace;
+  letter-spacing: .06em;
+}
+.bf-machine[data-skin="physical"] .bf-machine__legend small { color: #89969b; font-size: .55rem; }
+.bf-machine[data-skin="physical"] .bf-machine__legend p {
+  margin: 0;
+  color: #b7c0c4;
+  font: 600 .58rem/1.2 ui-monospace, monospace;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .bf-machine[data-skin="physical"] .bf-machine__board,
+  .bf-machine[data-skin="physical"] .bf-machine__legend { min-width: 1040px; }
+}

@@ -17,6 +17,7 @@ function forbidMatch(path, pattern, message) {
 
 const hero = "src/components/hero-screen.tsx";
 const heroCss = "src/app/hero-screen.css";
+const heroRefinement = "src/app/landing-bfux-refinement.css";
 
 requireMatch(
   hero,
@@ -32,6 +33,31 @@ forbidMatch(
   hero,
   /hero-apparatus__label--outer/,
   "The circular landing instrument must not restore Boundary as an outer visible label",
+);
+requireMatch(
+  hero,
+  /hero-screen__mode[\s\S]*<span>Mode<\/span>[\s\S]*<strong>Loading<\/strong>/,
+  "Landing status must read MODE LOADING",
+);
+forbidMatch(
+  hero,
+  /Public threshold|Entered World beyond/,
+  "Landing footer must not retain the old threshold rail labels",
+);
+requireMatch(
+  hero,
+  /hero-screen__footer[\s\S]*hero-screen__loading/,
+  "Landing footer must expose the decorative loading rail",
+);
+requireMatch(
+  heroRefinement,
+  /\.hero-screen::after\s*\{[\s\S]*left:\s*50%;/,
+  "Landing center divider must align with the centered Boundary marker",
+);
+requireMatch(
+  heroRefinement,
+  /\.hero-screen__loading::after\s*\{[\s\S]*animation:\s*hero-screen-loading-sweep/,
+  "Landing loading rail must be a CSS-only indeterminate animation",
 );
 requireMatch(
   heroCss,

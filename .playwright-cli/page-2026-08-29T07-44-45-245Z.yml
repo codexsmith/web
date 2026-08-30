@@ -1,0 +1,146 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "Boundary First Labs home" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - strong [ref=e10]: BOUNDARY FIRST LABS
+        - link "Back to the Lab Machine" [ref=e11] [cursor=pointer]:
+          - /url: /world
+      - generic [ref=e16]:
+        - navigation "Current public path" [ref=e17]:
+          - link "Lab Machine" [ref=e18] [cursor=pointer]:
+            - /url: /world
+          - generic [ref=e19]: ›
+          - strong [ref=e20]: Publications
+        - generic "Process context controls" [ref=e21]:
+          - generic [ref=e22]:
+            - generic [ref=e23]: Process
+            - strong [ref=e24]: Full loop
+          - button "Widen process context" [disabled] [ref=e25]
+          - button "Narrow process context" [ref=e33] [cursor=pointer]
+      - generic [ref=e42]:
+        - link "Search" [ref=e43] [cursor=pointer]:
+          - /url: /?search=1
+        - generic [ref=e48]: VIEW
+        - navigation "Boundary First Labs views" [ref=e49]:
+          - link "WORLD Public regions" [ref=e50] [cursor=pointer]:
+            - /url: /world?skin=physical
+            - generic [ref=e55]:
+              - strong [ref=e56]: WORLD
+              - generic [ref=e57]: Public regions
+          - link "EVIDENCE Founder provenance" [ref=e58] [cursor=pointer]:
+            - /url: /?projection=evidence
+            - generic [ref=e62]:
+              - strong [ref=e63]: EVIDENCE
+              - generic [ref=e64]: Founder provenance
+          - link "TIMELINE Development history" [ref=e65] [cursor=pointer]:
+            - /url: /?projection=gestalt
+            - generic [ref=e71]:
+              - strong [ref=e72]: TIMELINE
+              - generic [ref=e73]: Development history
+    - region "Publications institutional detail" [ref=e75]:
+      - generic [ref=e76]:
+        - generic [ref=e83]:
+          - paragraph [ref=e84]: WHAT WE PUBLISH
+          - heading "Publications" [level=2] [ref=e85]
+          - strong [ref=e86]: When is research ready to become a public claim?
+        - button "Close Publications detail" [ref=e87] [cursor=pointer]: CLOSE ×
+      - generic [ref=e88]:
+        - generic [ref=e89]:
+          - text: SYSTEM ROLE
+          - strong [ref=e90]: Public knowledge interface
+        - paragraph [ref=e91]: Publication is the point where internal research crosses the institutional boundary and becomes an externally inspectable, versioned claim.
+        - paragraph [ref=e92]: Make knowledge public without erasing uncertainty, provenance, maturity, or revision history.
+      - generic [ref=e93]:
+        - generic [ref=e94]:
+          - generic [ref=e95]:
+            - generic [ref=e96]: "01"
+            - heading "BOUNDARY" [level=3] [ref=e97]
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - text: CONTAINS
+              - list [ref=e100]:
+                - listitem [ref=e101]: papers
+                - listitem [ref=e102]: white papers
+                - listitem [ref=e103]: research notes
+                - listitem [ref=e104]: technical reports
+                - listitem [ref=e105]: public explanations
+                - listitem [ref=e106]: versioned doctrine
+            - generic [ref=e107]:
+              - text: EXCLUDES
+              - list [ref=e108]:
+                - listitem [ref=e109]: untracked claims
+                - listitem [ref=e110]: drafts presented as settled results
+                - listitem [ref=e111]: loss of provenance during publication
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - generic [ref=e114]: "02"
+            - heading "PROCESS" [level=3] [ref=e115]
+          - generic [ref=e116]:
+            - generic [ref=e117]:
+              - text: ENTERS AS
+              - list [ref=e118]:
+                - listitem [ref=e119]: research result
+                - listitem [ref=e120]: method description
+                - listitem [ref=e121]: synthesis
+                - listitem [ref=e122]: formal claim
+            - generic [ref=e123]: →
+            - generic [ref=e124]:
+              - text: TRANSFORMS THROUGH
+              - list [ref=e125]:
+                - listitem [ref=e126]: claim extraction
+                - listitem [ref=e127]: source registration
+                - listitem [ref=e128]: provenance review
+                - listitem [ref=e129]: maturity assignment
+                - listitem [ref=e130]: editorial projection
+                - listitem [ref=e131]: versioning
+            - generic [ref=e132]: →
+            - generic [ref=e133]:
+              - text: EXITS AS
+              - list [ref=e134]:
+                - listitem [ref=e135]: public artifact
+                - listitem [ref=e136]: citable claim
+                - listitem [ref=e137]: review target
+                - listitem [ref=e138]: reusable knowledge object
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - generic [ref=e141]: "03"
+            - heading "RATIONALE" [level=3] [ref=e142]
+          - list [ref=e143]:
+            - listitem [ref=e144]: Preserve claim maturity instead of flattening everything to published/not published.
+            - listitem [ref=e145]: Expose sources and revision history.
+            - listitem [ref=e146]: Treat criticism and supersession as part of the publication lifecycle.
+        - generic [ref=e147]:
+          - generic [ref=e148]:
+            - generic [ref=e149]: "04"
+            - heading "VALIDATION SIGNALS" [level=3] [ref=e150]
+          - list [ref=e151]:
+            - listitem [ref=e152]: ●claim boundary is explicit
+            - listitem [ref=e153]: ●supporting evidence is inspectable
+            - listitem [ref=e154]: ●maturity is accurately labeled
+            - listitem [ref=e155]: ●revision conditions are visible
+      - region "Publications available views" [ref=e156]:
+        - generic [ref=e157]:
+          - generic [ref=e158]: AVAILABLE PROJECTIONS
+          - heading "Inspect this subsystem another way" [level=3] [ref=e159]
+        - generic [ref=e160]:
+          - article [ref=e161]:
+            - generic [ref=e162]: PROJECTION
+            - strong [ref=e163]: Publication Program
+            - paragraph [ref=e164]: Show publication families and the research programs from which they emerge.
+            - button "PLANNED" [disabled] [ref=e165]
+          - article [ref=e166]:
+            - generic [ref=e167]: PROJECTION
+            - strong [ref=e168]: Maturity
+            - paragraph [ref=e169]: Show what is exploratory, drafted, reviewed, published, or superseded.
+            - button "PLANNED" [disabled] [ref=e170]
+          - article [ref=e171]:
+            - generic [ref=e172]: PROJECTION
+            - strong [ref=e173]: Claim Provenance
+            - paragraph [ref=e174]: Trace public claims backward to research, evidence, and prior versions.
+            - button "PLANNED" [disabled] [ref=e175]
+      - generic [ref=e176]:
+        - text: INSTITUTIONAL TAKEAWAY
+        - paragraph [ref=e177]: "Publishing is a governed boundary crossing: research becomes public without losing its provenance or uncertainty."
+  - button "Open Next.js Dev Tools" [ref=e183] [cursor=pointer]

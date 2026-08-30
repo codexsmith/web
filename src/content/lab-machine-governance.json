@@ -1,0 +1,246 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "institutional governance projection seed",
+  "purpose": "Make the Lab's control logic inspectable: who or what may authorize consequential state changes, which gates constrain those changes, how defects reopen work, and how declared principles become observable mechanisms rather than slogans.",
+  "posture": "This is a functional authority model, not a staffing chart or claim that every governance function is presently occupied by an independent person. One person may currently perform multiple functions; the model preserves the semantic distinction so authority, review, release, and repair do not collapse into one uninspectable act.",
+  "authorityClasses": [
+    {
+      "id": "originator",
+      "label": "Originator",
+      "shortLabel": "ORIGINATE",
+      "scope": "May propose, capture, or contribute an object and attach the context required to understand its origin.",
+      "may": ["create or submit candidate work", "attach source and provenance", "declare intended scope and question", "respond to review findings"],
+      "mayNot": ["self-promote a consequential claim merely by originating it", "erase contradictory evidence", "convert authorship into release authority by default"],
+      "requiredWitness": "A durable source record and enough provenance to reconstruct what was proposed and by whom or what process.",
+      "sourceRef": "Corpus Forge source/provenance grammar"
+    },
+    {
+      "id": "steward",
+      "label": "Steward",
+      "shortLabel": "STEWARD",
+      "scope": "Owns the current bounded object, its routing, maintenance expectations, dependencies, and unresolved obligations.",
+      "may": ["route work through the pipeline", "declare maintenance state", "request evidence or review", "reopen work when a protected condition fails"],
+      "mayNot": ["treat ownership as evidence", "silently widen scope", "declare a dependency satisfied because it is inconvenient to track"],
+      "requiredWitness": "A stable object identity, declared scope, current state, and visible ownership or maintenance rule.",
+      "sourceRef": "Lab Machine pipeline stewardship gate"
+    },
+    {
+      "id": "reviewer",
+      "label": "Reviewer / Critic",
+      "shortLabel": "REVIEW",
+      "scope": "Evaluates evidence, contradiction, inference, maturity, failure, and claim ceiling from a role distinct from generation.",
+      "may": ["challenge a candidate representation", "record defects and unresolved obligations", "recommend promotion, narrowing, rejection, or repair", "require stronger evidence"],
+      "mayNot": ["silently rewrite the source history", "gain promotion authority merely by criticizing", "treat review as independent when the role is not independent"],
+      "requiredWitness": "An attributable review record that preserves findings, evidence basis, independence limits, and unresolved decisions.",
+      "sourceRef": "AI as Forge + Corpus Forge review grammar"
+    },
+    {
+      "id": "promotion-authority",
+      "label": "Promotion Authority",
+      "shortLabel": "PROMOTE",
+      "scope": "May grant stronger institutional standing to a bounded object for a declared purpose after evidence and review conditions are satisfied.",
+      "may": ["accept a bounded promotion", "narrow the claim ceiling", "refuse promotion", "return the object to an earlier state with recorded reasons"],
+      "mayNot": ["manufacture evidence by decision", "promote beyond the reviewed scope", "replace an attributable decision with model fluency or status"],
+      "requiredWitness": "An attributed decision identifying evidence, scope, maturity, unresolved conditions, and the authority under which promotion occurred.",
+      "sourceRef": "Corpus Forge promotion grammar + Lab Machine pipeline authority gate"
+    },
+    {
+      "id": "release-authority",
+      "label": "Release Authority",
+      "shortLabel": "RELEASE",
+      "scope": "Controls when a promoted object crosses into public, user, partner, or operational consequence.",
+      "may": ["approve a release projection", "restrict audience or visibility", "hold a promoted object internally", "require rollback or repair readiness"],
+      "mayNot": ["publish a stronger claim than was promoted", "erase caveats by changing presentation", "treat public availability as additional validation"],
+      "requiredWitness": "The released representation matches the promoted claim, intended audience, dependency state, consequence boundary, and repair path.",
+      "sourceRef": "Lab Machine pipeline release gate + architecture acceptance invariants"
+    },
+    {
+      "id": "repair-owner",
+      "label": "Repair Owner",
+      "shortLabel": "REPAIR",
+      "scope": "Owns correction, supersession, dependency tracing, retest, and downstream repair when later evidence invalidates part of an accepted state.",
+      "may": ["contain affected scope", "reopen earlier work", "supersede a representation", "queue dependent objects for repair", "verify restored closure"],
+      "mayNot": ["delete history to make the current state appear clean", "patch the visible surface while leaving known downstream defects unowned", "declare repair complete without a witness"],
+      "requiredWitness": "The defect, prior state, repair action, affected dependencies, retest result, and supersession history remain reconstructable.",
+      "sourceRef": "Corpus Forge supersession/repair + Boundary First Labs repair posture"
+    },
+    {
+      "id": "affected-party-witness",
+      "label": "Affected-Party Witness",
+      "shortLabel": "CONTEST",
+      "scope": "Represents observed consequence from the receiving side of a system and supplies evidence that may require review, contest, or repair.",
+      "may": ["report consequence or failure", "contest a represented state", "supply evidence or context", "request a correction path"],
+      "mayNot": ["be treated as represented merely because an internal record exists", "be silently converted into formal institutional authority unless that authority is explicitly granted"],
+      "requiredWitness": "The report, consequence, standing, response, and resulting repair or refusal remain inspectable.",
+      "sourceRef": "Boundary First consequence/contestability doctrine"
+    }
+  ],
+  "gates": [
+    {
+      "id": "admissibility",
+      "label": "Admissibility",
+      "transition": "Captured → Triaged",
+      "authority": ["steward"],
+      "question": "Does this object belong, and can it be bounded without inventing context?",
+      "conditions": ["source/provenance attached", "type and scope plausible", "duplicate or exclusion checked", "routing target exists"],
+      "failureRoute": "Retain as unresolved intake, merge with an existing object, or exclude with an explicit reason."
+    },
+    {
+      "id": "evidence",
+      "label": "Evidence",
+      "transition": "Researching → Structured",
+      "authority": ["steward", "reviewer"],
+      "question": "Is there enough grounded structure to justify making a stronger representation?",
+      "conditions": ["material sources represented", "contradiction not erased", "unknowns labeled", "representation purpose declared"],
+      "failureRoute": "Return to research; structural neatness cannot substitute for evidence."
+    },
+    {
+      "id": "testability",
+      "label": "Testability",
+      "transition": "Structured → Testing",
+      "authority": ["steward", "reviewer"],
+      "question": "Can this representation be made to answer?",
+      "conditions": ["proposition or requirement explicit", "success signal declared", "failure signal declared", "witness or baseline available"],
+      "failureRoute": "Repair the representation until the test can distinguish success from fluent restatement."
+    },
+    {
+      "id": "review",
+      "label": "Review",
+      "transition": "Testing → Reviewing",
+      "authority": ["reviewer"],
+      "question": "Is the evidence package complete enough for a distinct witness to judge?",
+      "conditions": ["observations retained", "defects visible", "material inference labeled", "claim ceiling proposed"],
+      "failureRoute": "Remain in testing or return to research/structure with the missing evidence obligation recorded."
+    },
+    {
+      "id": "promotion",
+      "label": "Promotion",
+      "transition": "Reviewing → Promoted",
+      "authority": ["promotion-authority"],
+      "question": "Who is allowed to give this object stronger institutional standing, and on what evidence?",
+      "conditions": ["review decision attributable", "required repairs resolved or blocking", "scope and maturity declared", "promotion authority explicit"],
+      "failureRoute": "Bounded refusal or return to the earliest failed gate; generation quality does not supply authority."
+    },
+    {
+      "id": "release",
+      "label": "Release",
+      "transition": "Promoted → Published / Deployed",
+      "authority": ["release-authority"],
+      "question": "May this object cross into public or operational consequence?",
+      "conditions": ["audience and visibility appropriate", "dependencies ready", "consequence and rollback/repair path understood", "release representation matches promoted claim"],
+      "failureRoute": "Keep the object promoted internally or revise the release projection without lowering the evidence record."
+    },
+    {
+      "id": "stewardship",
+      "label": "Stewardship",
+      "transition": "Published / Deployed → Maintained",
+      "authority": ["steward", "repair-owner"],
+      "question": "Who owns the object after the launch moment?",
+      "conditions": ["steward or maintenance rule exists", "feedback and defects have an intake route", "supersession/archive behavior exists", "downstream dependencies remain traceable"],
+      "failureRoute": "Do not treat release as closure; assign ownership or explicitly archive the object."
+    }
+  ],
+  "repairLoop": [
+    {"id":"detect","label":"Detect","question":"What protected condition failed?","output":"bounded defect record"},
+    {"id":"preserve","label":"Preserve","question":"What evidence and prior state must remain untouched?","output":"incident/source snapshot"},
+    {"id":"contain","label":"Contain","question":"Where can consequence be stopped from spreading?","output":"affected scope"},
+    {"id":"attribute","label":"Attribute","question":"Who owns the repair decision and action?","output":"repair owner"},
+    {"id":"trace","label":"Trace","question":"What depended on the defective representation or state?","output":"dependency repair queue"},
+    {"id":"repair","label":"Repair","question":"What representation, rule, implementation, or policy must change?","output":"candidate corrected state"},
+    {"id":"retest","label":"Retest","question":"Does the same witness that exposed failure now observe closure?","output":"repair test result"},
+    {"id":"supersede","label":"Supersede","question":"What replaces what, for which purpose, without deleting history?","output":"version/replacement edge"},
+    {"id":"maintain","label":"Maintain","question":"What continuing obligation remains after correction?","output":"stewardship state"}
+  ],
+  "repairCases": [
+    {
+      "id":"claim-correction",
+      "label":"Claim correction",
+      "trigger":"New evidence materially contradicts or narrows a promoted research or publication claim.",
+      "protectedHistory":"Original source, review, promotion decision, public version, and contradiction remain available.",
+      "obligations":["bound the affected claim", "identify dependent summaries or products", "lower or supersede maturity as warranted", "record why the replacement occurred", "notify or update consequence-bearing public surfaces"],
+      "closureWitness":"The current claim can be reconstructed from its sources and the superseded claim remains historically inspectable."
+    },
+    {
+      "id":"product-defect",
+      "label":"Product / deployment defect",
+      "trigger":"Released behavior violates a declared invariant, user obligation, accessibility state, or operational closure condition.",
+      "protectedHistory":"Observed failure, affected version, logs/evidence, user consequence, and prior release state remain available.",
+      "obligations":["contain consequence", "restore or provide a safe fallback", "repair the representation or implementation upstream", "retest the original failure witness", "trace affected dependent surfaces"],
+      "closureWitness":"The repaired path survives the same bounded condition that exposed the defect and ownership remains explicit."
+    },
+    {
+      "id":"governance-defect",
+      "label":"Governance / authority defect",
+      "trigger":"A decision was made under inadequate authority, an uninspectable rule, or a control that failed to represent an affected obligation.",
+      "protectedHistory":"Decision record, rule version, authority basis, affected objects, and reported consequence remain visible.",
+      "obligations":["invalidate or narrow the defective authority path", "version the governing rule", "identify decisions made under the old rule", "re-review affected transitions", "assign responsibility for remaining consequence"],
+      "closureWitness":"A future reviewer can tell what authority applied before and after the repair and which prior decisions were revisited."
+    },
+    {
+      "id":"legibility-defect",
+      "label":"Representation / legibility defect",
+      "trigger":"An interactive, visual, or simplified projection loses a state, relation, qualification, or accessible equivalent required for correct interpretation.",
+      "protectedHistory":"Canonical underlying object and the defective projection remain distinguishable.",
+      "obligations":["identify the lost distinction", "repair the projection rather than duplicating the underlying claim", "verify keyboard/focus/reduced-motion or semantic equivalence where relevant", "keep the canonical object unchanged unless the defect is actually in the source"],
+      "closureWitness":"Equivalent legible states preserve the same governed meaning across the relevant renderers."
+    }
+  ],
+  "principles": [
+    {
+      "id":"claims-earn-territory",
+      "principle":"Claims earn territory.",
+      "mechanism":"Claim maturity, scope, evidence standing, and promotion authority remain explicit; success in one domain does not silently promote the whole framework.",
+      "observableConsequence":"A visitor can distinguish hypothesis, working method, measured result, historical proof, institutional position, and product promise where the corpus supports those distinctions.",
+      "sourceRef":"Boundary First Labs institutional draft + architecture acceptance"
+    },
+    {
+      "id":"same-object-many-projections",
+      "principle":"Project the same governed object; do not duplicate its claim.",
+      "mechanism":"Public interfaces render task-specific projections over canonical objects while identity, provenance, status, and claim ceiling remain attached.",
+      "observableConsequence":"A visual or simplified view can change form without quietly becoming a separate source of truth.",
+      "sourceRef":"architecture_acceptance_v0_1.json"
+    },
+    {
+      "id":"evidence-over-status",
+      "principle":"Status does not manufacture evidence.",
+      "mechanism":"Evidence, review, authority, release, and public visibility are separate state dimensions and gates.",
+      "observableConsequence":"Published, popular, founder-authored, AI-generated, or shipped objects do not automatically inherit stronger truth claims.",
+      "sourceRef":"Corpus Forge + AI as Forge"
+    },
+    {
+      "id":"generation-not-authority",
+      "principle":"Generation and authority remain separate.",
+      "mechanism":"Operator, critic, reviewer, promotion, and release functions are represented separately even when one person currently performs several of them.",
+      "observableConsequence":"AI can transform and compare material, but a consequential promotion decision remains attributable outside model fluency.",
+      "sourceRef":"AI as Forge"
+    },
+    {
+      "id":"repair-preserves-history",
+      "principle":"Repair is part of the system, not an embarrassment outside it.",
+      "mechanism":"Reopening, supersession, dependency tracing, repair queues, retest, and version history are first-class lifecycle operations.",
+      "observableConsequence":"A corrected artifact does not pretend the earlier state never existed, and downstream consequences can be revisited.",
+      "sourceRef":"Corpus Forge"
+    },
+    {
+      "id":"context-before-promotion",
+      "principle":"Large concepts remain contextual until they acquire operational semantics.",
+      "mechanism":"Promotion gates require bounded scope, explicit meaning, evidence posture, and intended consequence before stronger institutional standing.",
+      "observableConsequence":"A compelling phrase or synthesis can remain useful without immediately becoming canonical doctrine.",
+      "sourceRef":"architecture_acceptance_v0_1.json"
+    },
+    {
+      "id":"equivalent-legibility",
+      "principle":"Equivalent meaning must survive changes of interface.",
+      "mechanism":"Interactive and visual representations require equivalent legible semantic states; accessibility review remains a human gate where automation is insufficient.",
+      "observableConsequence":"The physical apparatus can be expressive without making essential system state available only through visual metaphor.",
+      "sourceRef":"architecture_acceptance_v0_1.json"
+    },
+    {
+      "id":"retain-corpus",
+      "principle":"Correction does not require institutional amnesia.",
+      "mechanism":"Retained inner corpus, provenance, supersession, and historical status are preserved while newer outer projections improve legibility.",
+      "observableConsequence":"The public architecture can simplify orientation without flattening or deleting the deeper record that makes claims reconstructable.",
+      "sourceRef":"architecture_acceptance_v0_1.json"
+    }
+  ]
+}

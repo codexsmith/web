@@ -1,0 +1,368 @@
+/*
+ * Reference-card pass for the physical Lab Machine skin.
+ * This layer intentionally leaves graph topology and absolute composition alone.
+ * It changes only the material construction of the bounded modules.
+ */
+
+.bf-machine[data-skin="physical"] .bf-machine-node {
+  --case-dark: color-mix(in srgb, var(--tone) 10%, #0b0e0f);
+  --case-mid: color-mix(in srgb, var(--tone) 18%, #171b1d);
+  --case-hot: color-mix(in srgb, var(--tone) 34%, #252a2c);
+  --case-edge: color-mix(in srgb, var(--tone) 52%, #5c6264);
+  --case-line: color-mix(in srgb, var(--tone) 28%, #3b4245);
+  --case-text: #d8d9d7;
+  filter: drop-shadow(0 13px 8px rgba(0,0,0,.72));
+}
+
+/* Outer cast housing: thick, tinted, clipped, and visibly layered. */
+.bf-machine[data-skin="physical"] .bf-machine-node__shell {
+  inset: -11px;
+  border: 1px solid var(--case-edge);
+  border-radius: 7px;
+  clip-path: polygon(
+    13px 0,
+    calc(100% - 13px) 0,
+    100% 13px,
+    100% calc(100% - 13px),
+    calc(100% - 13px) 100%,
+    13px 100%,
+    0 calc(100% - 13px),
+    0 13px
+  );
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.17) 0 1px, transparent 1px 17px, rgba(255,255,255,.025) 18px 19px, transparent 20px),
+    linear-gradient(315deg, rgba(0,0,0,.54) 0 12px, transparent 13px),
+    linear-gradient(180deg, var(--case-hot) 0%, var(--case-mid) 18%, var(--case-dark) 72%, #080a0b 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.15),
+    inset 0 -3px rgba(0,0,0,.85),
+    inset 3px 0 rgba(255,255,255,.025),
+    0 0 0 3px #050607,
+    0 8px 18px rgba(0,0,0,.7);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node__shell::before {
+  inset: 6px;
+  border: 1px solid color-mix(in srgb, var(--tone) 28%, rgba(255,255,255,.08));
+  border-radius: 3px;
+  clip-path: polygon(7px 0, calc(100% - 7px) 0, 100% 7px, 100% calc(100% - 7px), calc(100% - 7px) 100%, 7px 100%, 0 calc(100% - 7px), 0 7px);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.68);
+}
+
+/* Small physical seam/lip around the face. */
+.bf-machine[data-skin="physical"] .bf-machine-node__shell::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  border-top: 1px solid rgba(255,255,255,.05);
+  border-left: 1px solid rgba(255,255,255,.025);
+  border-right: 1px solid rgba(0,0,0,.45);
+  border-bottom: 1px solid rgba(0,0,0,.7);
+}
+
+/* The card face is now a tinted painted-metal plate, not a black UI panel. */
+.bf-machine[data-skin="physical"] .bf-machine-node__face {
+  border: 1px solid var(--case-line);
+  border-radius: 4px;
+  clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+    linear-gradient(90deg, color-mix(in srgb, var(--tone) 8%, transparent), transparent 43%),
+    linear-gradient(180deg, color-mix(in srgb, var(--tone) 16%, #171b1c), color-mix(in srgb, var(--tone) 8%, #0e1213) 62%, #0a0d0e);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.1),
+    inset 0 -18px 30px rgba(0,0,0,.4),
+    inset 5px 0 14px color-mix(in srgb, var(--tone) 5%, transparent);
+}
+
+/* Corner bolts should read as fasteners, not tiny UI dots. */
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners {
+  inset: -7px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners i {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #737677;
+  background:
+    linear-gradient(45deg, transparent 43%, #151718 44% 55%, transparent 56%),
+    radial-gradient(circle at 34% 28%, #c3c4bf 0 7%, #737674 9% 22%, #393c3d 24% 51%, #111314 53% 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 2px 3px rgba(0,0,0,.9);
+}
+
+/* Icon cartridge: a replaceable submodule mounted onto the main housing. */
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-plate {
+  left: 10px;
+  top: 10px;
+  width: 70px;
+  height: 76px;
+  padding: 7px;
+  border: 1px solid var(--case-edge);
+  border-radius: 4px;
+  background:
+    radial-gradient(circle at 7px 7px, #7a7d7c 0 2px, #161819 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - 7px) 7px, #7a7d7c 0 2px, #161819 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at 7px calc(100% - 7px), #7a7d7c 0 2px, #161819 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - 7px) calc(100% - 7px), #7a7d7c 0 2px, #161819 2.5px 4px, transparent 4.5px),
+    linear-gradient(135deg, rgba(255,255,255,.1), transparent 25%),
+    linear-gradient(180deg, var(--case-hot), #111516 72%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    inset 0 -2px rgba(0,0,0,.8),
+    0 4px 6px rgba(0,0,0,.75);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well {
+  border: 2px solid color-mix(in srgb, var(--tone) 72%, #4f5556);
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 50% 44%, color-mix(in srgb, var(--tone) 18%, #171a1a), #090b0c 68%),
+    #090b0c;
+  box-shadow:
+    inset 0 0 0 4px #080a0b,
+    inset 0 1px rgba(255,255,255,.09),
+    0 0 0 1px #020303,
+    0 0 10px color-mix(in srgb, var(--tone) 16%, transparent);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well svg {
+  width: 2.45rem;
+  height: 2.45rem;
+  stroke-width: 1.65;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--tone) 45%, transparent));
+}
+
+/* Header typography and layout now track the reference modules. */
+.bf-machine[data-skin="physical"] .bf-machine-node header {
+  min-height: 88px;
+  padding: 13px 13px 7px 94px;
+  border-bottom: 0;
+  background: transparent;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header span {
+  color: color-mix(in srgb, var(--tone) 88%, #e3e7e6);
+  font-size: .59rem;
+  font-weight: 700;
+  letter-spacing: .085em;
+  text-shadow: 0 1px #000;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header strong {
+  margin-top: .42rem;
+  color: #e9e7e1;
+  font-size: clamp(1.15rem, 1.35vw, 1.45rem);
+  line-height: 1;
+  text-shadow: 0 1px 2px #000;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node header::after {
+  width: 18px;
+  border-top-color: var(--tone);
+  box-shadow: 0 0 4px color-mix(in srgb, var(--tone) 26%, transparent);
+}
+
+/* Recessed information well: heavy inner shadow, quiet edge, no bright outline. */
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary {
+  margin: 0 12px 10px 94px;
+  padding: .68rem .72rem;
+  border: 1px solid color-mix(in srgb, var(--tone) 18%, #343c3f);
+  border-top-color: color-mix(in srgb, var(--tone) 28%, #495255);
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.018), transparent 26%),
+    color-mix(in srgb, var(--tone) 3%, #080c0e);
+  box-shadow:
+    inset 0 3px 9px rgba(0,0,0,.72),
+    inset 0 0 0 1px rgba(0,0,0,.28),
+    0 1px rgba(255,255,255,.018);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary small {
+  color: #bdc3c2;
+  opacity: .84;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary p {
+  color: #d5d8d5;
+  font-size: .75rem;
+  line-height: 1.48;
+}
+
+/* Bottom tray behaves like three independent status/readout cells. */
+.bf-machine[data-skin="physical"] .bf-machine-node footer {
+  min-height: 44px;
+  margin: 0 5px 5px;
+  border: 1px solid color-mix(in srgb, var(--tone) 16%, #31383a);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--tone) 7%, #15191a), #090c0d);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.045),
+    inset 0 -2px rgba(0,0,0,.7);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .16rem;
+  padding: .45rem .55rem;
+  border-right: 1px solid color-mix(in srgb, var(--tone) 16%, #303638);
+  color: #d2d4d2;
+  font-size: .56rem;
+  line-height: 1.05;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span:last-child {
+  border-right: 0;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer small {
+  color: color-mix(in srgb, var(--tone) 78%, #d7dbd9);
+  opacity: .95;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer .bf-machine-node__state {
+  padding-left: 1.5rem;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer .bf-machine-node__state::before {
+  left: .55rem;
+  width: .46rem;
+  height: .46rem;
+  border-color: color-mix(in srgb, var(--tone) 88%, #f0f1ed);
+  background: var(--tone);
+  box-shadow:
+    inset 0 0 0 2px color-mix(in srgb, var(--tone) 38%, #090b0c),
+    0 0 7px color-mix(in srgb, var(--tone) 52%, transparent);
+}
+
+/* Connector housings should resemble plugs mounted through a wall. */
+.bf-machine[data-skin="physical"] .bf-machine-node__ports {
+  gap: 3px;
+  padding: 5px 4px;
+  border: 1px solid #747879;
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, #44494a 0 2px, #1f2425 3px 45%, #090b0c 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.11),
+    inset 0 -2px #050606,
+    0 3px 5px rgba(0,0,0,.9);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__ports i {
+  border-color: color-mix(in srgb, var(--tone) 58%, #b7b9b5);
+  background: radial-gradient(circle, #040505 0 34%, color-mix(in srgb, var(--tone) 44%, #303537) 37% 56%, #080a0b 60%);
+}
+
+/* Role-specific card material tuning from the reference image. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] { --tone:#e3574e; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="publications"] { --tone:#91bd43; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="applications"] { --tone:#35b9dc; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"],
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"] { --tone:#92c94d; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] { --tone:#a466e7; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] { --tone:#dda329; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] { --tone:#539cec; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] { --tone:#999b98; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"] { --tone:#9a9d9a; }
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"],
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] { --tone:#48bed5; }
+
+/* Research is a large instrument, not merely an enlarged card. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__shell {
+  inset: -14px;
+  border-width: 2px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.15), transparent 14%),
+    linear-gradient(180deg, #332944 0%, #171525 30%, #0b0b10 100%);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__face {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 4px),
+    linear-gradient(135deg, rgba(164,102,231,.15), transparent 50%),
+    linear-gradient(#1e1a2d, #0d0d14);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate {
+  width: 120px;
+  height: 128px;
+  left: 18px;
+  top: 46px;
+  padding: 10px;
+  border-width: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well {
+  border-radius: 50%;
+  border: 1px solid #b18ae0;
+  background:
+    repeating-radial-gradient(circle, transparent 0 11px, rgba(164,102,231,.2) 12px 13px, transparent 14px 22px),
+    radial-gradient(circle, #d7b0ff 0 5%, #8b45d5 6% 11%, #2a173c 12% 36%, #101018 37% 100%);
+  box-shadow:
+    inset 0 0 0 7px #09090d,
+    0 0 0 1px #5f3a83,
+    0 0 18px rgba(164,102,231,.32);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well svg {
+  width: 2rem;
+  height: 2rem;
+  opacity: .52;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header {
+  padding-left: 152px;
+  min-height: 74px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__boundary {
+  margin-left: 152px;
+  margin-right: 18px;
+  margin-bottom: 14px;
+}
+
+/* Publications retain visible stack depth. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="publications"] .bf-machine-node__shell {
+  box-shadow:
+    -4px -4px 0 color-mix(in srgb, var(--tone) 10%, #121516),
+    -8px -8px 0 color-mix(in srgb, var(--tone) 6%, #0a0c0d),
+    inset 0 1px rgba(255,255,255,.13),
+    inset 0 -3px #000,
+    0 0 0 3px #050607,
+    0 8px 18px rgba(0,0,0,.7);
+}
+
+/* Governance is intentionally more armored; People deliberately less opaque. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] .bf-machine-node__shell {
+  border-width: 2px;
+  background: linear-gradient(180deg, #383a39, #171a1a 35%, #0a0c0c);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] .bf-machine-node__face {
+  background:
+    linear-gradient(90deg, rgba(83,156,236,.12), transparent 50%),
+    linear-gradient(180deg, rgba(24,39,51,.9), rgba(10,14,17,.88));
+}
+
+/* Service and output are terminal appliances, not full information cards. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__shell,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__shell {
+  border-color: #586267;
+  background: linear-gradient(180deg, #292f31, #111516 65%, #080a0b);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] header,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] header {
+  min-height: 54px;
+  padding: 12px 12px 6px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__boundary,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__boundary {
+  margin: 0 10px 10px;
+}
+
+@media (max-width: 900px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-plate {
+    width: 62px;
+    height: 68px;
+  }
+  .bf-machine[data-skin="physical"] .bf-machine-node header {
+    padding-left: 86px;
+  }
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary {
+    margin-left: 86px;
+  }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__boundary {
+    padding-left: initial;
+    margin-left: initial;
+  }
+}

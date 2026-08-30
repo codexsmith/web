@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { WorldApp } from "@/components/world-app";
 import { RecordDetailSurface } from "@/components/record-detail-surface";
 import { CorpusForgeRecordDetail } from "@/components/corpus-forge-record-detail";
@@ -11,7 +11,7 @@ import { LawResearchRecordDetail } from "@/components/law-research-record-detail
 import { ChessPractitionerRecordDetail } from "@/components/chess-practitioner-record-detail";
 import { SoccerPractitionerRecordDetail } from "@/components/soccer-practitioner-record-detail";
 import { hydrateContentNode } from "@/lib/content-projections";
-import { getNodeByPath, nodes } from "@/lib/content-registry";
+import { nodes } from "@/lib/content-registry";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { defaultProjectionForNode, parseProjection } from "@/lib/view-projection";
 import { parseUiShell } from "@/lib/ui-shell";
@@ -50,6 +50,7 @@ type PageProps = {
     view?: string | string[];
     scope?: string | string[];
     world?: string | string[];
+    skin?: string | string[];
     ui?: string | string[];
     detail?: string | string[];
   }>;
@@ -59,6 +60,11 @@ export const dynamicParams = true;
 
 function firstQueryValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
+}
+
+function exactContentNode(slug: string[]) {
+  const path = slug.join("/");
+  return nodes.find((node) => node.path === path);
 }
 
 function legacyRecordDestination(slug: string[], query: Awaited<PageProps["searchParams"]>) {
@@ -84,7 +90,9 @@ export async function generateStaticParams() {
       ? getRouteEligibleProductLandingEntries().map((entry) => ({ slug: entry.slug.split("/") }))
       : [];
 
-  const nodeParams = nodes.map((node) => ({ slug: node.path ? node.path.split("/") : [] }));
+  const nodeParams = nodes
+    .filter((node) => Boolean(node.path))
+    .map((node) => ({ slug: node.path.split("/") }));
   return [...landingParams, ...nodeParams];
 }
 
@@ -118,7 +126,9 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     }
   }
 
-  const node = hydrateContentNode(getNodeByPath(slug));
+  const sourceNode = exactContentNode(slug);
+  if (!sourceNode) notFound();
+  const node = hydrateContentNode(sourceNode);
   const recordDetail = resolveRecordDetailForNode(node, firstQueryValue(query.detail));
   if (recordDetail) {
     const content = getProductLandingContent(recordDetail.entry);
@@ -152,15 +162,10 @@ export default async function Page({ params, searchParams }: PageProps) {
     const decision = resolveProductLandingRoute(slug);
     if (decision && decision.routeKind !== "blocked" && decision.policy.routeEligible) {
       const owner = getCanonicalRecordOwner(decision.entry);
-      if (owner) {
-        permanentRedirect(buildRecordDetailPath(owner, decision.entry));
-      }
+      if (owner) permanentRedirect(buildRecordDetailPath(owner, decision.entry));
 
       const content = getProductLandingContent(decision.entry);
       if (content) {
-        // Unlisted bridges and any public landing that has not yet earned a canonical
-        // graph owner keep their governed landing behavior. Active records with owners
-        // are redirected above into the bounded BFUX detail surface.
         if (decision.entry.id === "agency-representation-audit" && decision.entry.collection !== "bridge") {
           return <LandingEngineeringChrome pageId={decision.entry.id} status={decision.entry.status}><AgencyAuditLanding /></LandingEngineeringChrome>;
         }
@@ -197,12 +202,12 @@ export default async function Page({ params, searchParams }: PageProps) {
     }
   }
 
-  const node = getNodeByPath(slug);
+  const node = exactContentNode(slug);
+  if (!node) notFound();
+
   const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
   const initialProcessScope = parseProcessScope(query.scope) ?? "full";
   const initialUiShell = parseUiShell(query.ui);
-  const worldState = Array.isArray(query.world) ? query.world[0] : query.world;
-  const initialHeroVisible = node.id === "root" && worldState !== "1";
   const recordDetail = resolveRecordDetailForNode(node, firstQueryValue(query.detail));
   const recordContent = recordDetail ? getProductLandingContent(recordDetail.entry) : undefined;
 
@@ -212,7 +217,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         initialNodeId={node.id}
         initialProjection={initialProjection}
         initialProcessScope={initialProcessScope}
-        initialHeroVisible={initialHeroVisible}
+        initialHeroVisible={false}
         initialUiShell={initialUiShell}
       />
       {recordDetail && recordContent ? (
@@ -233,11 +238,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         ) : recordDetail.entry.id === "boundary-first-soccer" ? (
           <SoccerPractitionerRecordDetail owner={recordDetail.owner} entry={recordDetail.entry} />
         ) : (
-          <RecordDetailSurface
-            owner={recordDetail.owner}
-            entry={recordDetail.entry}
-            content={recordContent}
-          />
+          <RecordDetailSurface owner={recordDetail.owner} entry={recordDetail.entry} content={recordContent} />
         )
       ) : null}
     </>

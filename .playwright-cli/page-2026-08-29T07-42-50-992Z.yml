@@ -1,0 +1,108 @@
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e246] [cursor=pointer]
+  - alert [ref=e250]: Public Interest
+  - generic [ref=e1062]:
+    - generic:
+      - banner [ref=e1063]:
+        - generic "Home and traversal history controls" [ref=e1064]:
+          - button "Boundary First Labs home" [ref=e1065] [cursor=pointer]
+          - button "Back through traversal history" [ref=e1070]:
+            - generic [ref=e1075]: Back
+        - navigation "Focus traversal history" [ref=e1076]:
+          - list [ref=e1077]:
+            - listitem [ref=e1078]:
+              - strong [ref=e1080]: Public Interest
+        - generic "Global controls" [ref=e1081]:
+          - button "Search" [ref=e1082] [cursor=pointer]
+          - group "Representations of Public Interest" [ref=e1088]:
+            - 'button "World: Primary content, spatial context, containment, and ordinary traversal" [pressed] [ref=e1089] [cursor=pointer]':
+              - generic [ref=e1094]:
+                - generic [ref=e1095]: World
+                - generic [ref=e1096]: Content · context
+            - 'button "Evidence: Standing, provenance, evidence, lineage, and typed relations" [ref=e1097] [cursor=pointer]':
+              - generic [ref=e1101]:
+                - generic [ref=e1102]: Evidence
+                - generic [ref=e1103]: Standing · sources
+            - 'button "Process: Place the focal object inside the Boundary First operating process" [ref=e1104] [cursor=pointer]':
+              - generic [ref=e1110]:
+                - generic [ref=e1111]: Process
+                - generic [ref=e1112]: Operating sequence
+      - complementary [ref=e1113]:
+        - navigation "Local relational neighborhood for Public Interest" [ref=e1114]:
+          - strong [ref=e1120]: Adjacent
+          - region "Adjacent nodes" [ref=e1122]:
+            - list "Adjacent choices" [ref=e1123]:
+              - listitem [ref=e1124]:
+                - button "Products" [ref=e1125] [cursor=pointer]
+              - listitem [ref=e1131]:
+                - button "Publications" [ref=e1132] [cursor=pointer]
+              - listitem [ref=e1138]:
+                - button "About" [ref=e1139] [cursor=pointer]
+              - listitem [ref=e1145]:
+                - button "Research" [ref=e1146] [cursor=pointer]
+      - complementary "Position within Public Interest" [ref=e1152]:
+        - generic [ref=e1153]:
+          - button "Go to Public Interest overview" [ref=e1154] [cursor=pointer]
+          - button "Go to Augusta Civic Infrastructure" [ref=e1156] [cursor=pointer]
+          - button "Go to Public Interest supporting context" [ref=e1158] [cursor=pointer]
+    - main [ref=e1160]:
+      - generic [ref=e1161]:
+        - region "Public Interest overview" [ref=e1162]:
+          - generic [ref=e1163]:
+            - generic [ref=e1164]:
+              - paragraph [ref=e1165]: Public purpose, bounded by evidence
+              - heading "Public Interest" [level=1] [ref=e1166]
+              - paragraph [ref=e1167]: "The part of Boundary First Labs concerned with what technical capacity is for: keeping consequential systems answerable to the people, conditions, communities, and futures that bear their effects."
+            - article [ref=e1168]:
+              - generic [ref=e1169]: At a glance
+              - paragraph [ref=e1170]: Public Interest is not a charitable layer attached to otherwise neutral technical work. It is where the lab states which consequences it believes engineering, research, and institutional design should be able to see, and where current projects are separated from principles and future aspirations so intent never masquerades as delivery.
+          - generic "Public Interest orientation" [ref=e1171]:
+            - button "Why the technical work matters Mission What public purpose the Lab is organized to serve. View" [ref=e1172] [cursor=pointer]:
+              - generic [ref=e1173]: Why the technical work matters
+              - strong [ref=e1178]: Mission
+              - generic [ref=e1179]: What public purpose the Lab is organized to serve.
+              - generic [ref=e1180]: View
+            - button "Operating constraints on public-purpose work Principles Commitments that constrain how public-purpose work is carried out. View" [ref=e1181] [cursor=pointer]:
+              - generic [ref=e1182]: Operating constraints on public-purpose work
+              - strong [ref=e1187]: Principles
+              - generic [ref=e1188]: Commitments that constrain how public-purpose work is carried out.
+              - generic [ref=e1189]: View
+            - button "Future capacity, not current claim Goals & Aspirations Desired future capacity separated from present capability claims. View" [ref=e1190] [cursor=pointer]:
+              - generic [ref=e1191]: Future capacity, not current claim
+              - strong [ref=e1196]: Goals & Aspirations
+              - generic [ref=e1197]: Desired future capacity separated from present capability claims.
+              - generic [ref=e1198]: View
+        - region "Augusta Civic Infrastructure" [ref=e1199]:
+          - article [ref=e1200]:
+            - generic [ref=e1201]:
+              - generic [ref=e1202]:
+                - paragraph [ref=e1203]: Planned civic observability project
+                - heading "Augusta Civic Infrastructure" [level=2] [ref=e1204]
+              - generic [ref=e1205]: Planned public-interest project
+            - paragraph [ref=e1206]: A bounded public-interest direction for making Augusta-area civic and historical infrastructure more inspectable through source-grounded maps, timelines, datasets, relationship models, and public analysis.
+            - generic [ref=e1207]:
+              - paragraph [ref=e1208]: "The project begins from a practical premise: software can be the machinery behind a public artifact without the artifact itself needing to be a commercial software product. Data collection, normalization, provenance, mapping, comparison, and relationship modeling can produce a useful public dataset, map, timeline, report, or interactive analysis."
+              - paragraph [ref=e1209]: The strongest historical standing is CityWatch, delivered inside Augusta-Richmond County IT. That work demonstrated a citizen-facing representation joining project, spending, infrastructure status, timeline, media, and geographic context. It is relevant experience, not evidence of a current municipal partnership.
+              - paragraph [ref=e1210]: The modern project should begin smaller than 'map the city.' The appropriate first unit is one bounded civic or historical infrastructure question with inspectable sources, explicit uncertainty, a representation/consequence map, and one public artifact that can be corrected when better evidence arrives.
+              - paragraph [ref=e1211]: Potential questions include how public spending and projects connect across place and time, how maintenance and replacement obligations become visible, how historic infrastructure decisions propagate into present conditions, and how public records can be made easier to inspect without overstating what the records prove.
+            - generic [ref=e1212]:
+              - generic [ref=e1213]: Local civic infrastructure · source-grounded · correctable
+              - button "Open project record" [ref=e1214] [cursor=pointer]
+        - region "Public Interest supporting context" [ref=e1215]:
+          - region "Supporting context for Public Interest" [ref=e1216]:
+            - generic [ref=e1217]: Supporting context
+            - region "Related paths" [ref=e1218]:
+              - link "Operative surfaces Current Work Where methods and research are currently becoming software and bounded services." [ref=e1221] [cursor=pointer]:
+                - /url: /products/current
+                - generic [ref=e1225]:
+                  - generic [ref=e1226]: Operative surfaces
+                  - strong [ref=e1227]: Current Work
+                  - generic [ref=e1228]: Where methods and research are currently becoming software and bounded services.
+            - generic [ref=e1229]:
+              - paragraph [ref=e1230]: The posture is reconstructive rather than merely oppositional. Boundary First Labs does not reject institutions, expertise, markets, software, public authority, or technological progress as categories. It asks whether the mechanisms carrying those forms remain answerable to the responsibilities and consequences they claim to govern.
+              - paragraph [ref=e1231]: "Public-purpose work can therefore take different forms: software, a dataset, a map, a public analysis, an educational surface, an audit instrument, a research program, an institutional design, or a stewardship relationship. Not every public good needs to become a product, and not every product needs to carry the whole public mission."
+            - region "Explore further" [ref=e1232]:
+              - button "Institutional posture Reconstructive, not merely oppositional" [ref=e1235] [cursor=pointer]:
+                - generic [ref=e1240]:
+                  - generic [ref=e1241]: Institutional posture
+                  - strong [ref=e1242]: Reconstructive, not merely oppositional

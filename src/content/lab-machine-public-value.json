@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "working public-value evidence projection",
+  "purpose": "Separate public output from public value by showing who is meant to gain capability, what practical difference would count, how evidence must rise before stronger impact language is allowed, and whether useful capacity survives without continued dependence on the Lab.",
+  "posture": "Mission is not evidence of impact. A public artifact, launch, page view, pilot specification, or attractive interface is not by itself public value. Practical claims must earn support through implementation, affected-party feedback, comparison, criticism, measured outcomes, independent reuse, and durable repair or stewardship where applicable.",
+  "beneficiaryScales": [
+    {
+      "id": "people",
+      "label": "People",
+      "promise": "Increase the ability to understand, navigate, contest, act, and reach repair in consequential systems without requiring extraordinary power, fluency, persistence, or dependence on the Lab."
+    },
+    {
+      "id": "practitioners-communities",
+      "label": "Practitioners + Communities",
+      "promise": "Provide usable methods for seeing hidden burdens, preserving local knowledge, mapping responsibility, and improving systems already being operated or lived inside."
+    },
+    {
+      "id": "institutions",
+      "label": "Institutions",
+      "promise": "Improve the ability to represent obligations, affected parties, maintenance needs, authority boundaries, consequence, and repair before defects are displaced onto people."
+    }
+  ],
+  "valueDimensions": [
+    {
+      "id": "agency",
+      "label": "Agency",
+      "question": "Can someone understand available options and act with greater control?",
+      "observable": "A person or operator can make a consequential choice they could not reliably make from the prior representation."
+    },
+    {
+      "id": "legibility",
+      "label": "Legibility",
+      "question": "Can the system, state, evidence, and consequence be seen well enough to reason about?",
+      "observable": "A previously hidden dependency, boundary, status, burden, or responsibility becomes inspectable without erasing needed context."
+    },
+    {
+      "id": "contestability",
+      "label": "Contestability",
+      "question": "Can an affected party understand and challenge a consequential representation or action?",
+      "observable": "Reasons, evidence, standing, escalation, correction, or appeal become practically reachable rather than merely promised."
+    },
+    {
+      "id": "repairability",
+      "label": "Repairability",
+      "question": "When something is wrong, can correction reach both the representation and the consequence already produced?",
+      "observable": "A defect has an owner, a correction path, a propagation path, and a witness that distinguishes repair from administrative closure."
+    },
+    {
+      "id": "capability-transfer",
+      "label": "Capability Transfer",
+      "question": "Does service leave another person or institution more capable?",
+      "observable": "Useful distinctions, methods, tools, or operational knowledge can be applied without constant expert mediation by Boundary First Labs."
+    },
+    {
+      "id": "durable-capacity",
+      "label": "Durable Capacity",
+      "question": "Does useful capability survive correction, maintenance, transfer, and time?",
+      "observable": "The capability continues through stewardship, version change, criticism, staff change, or institutional handoff rather than disappearing with the originating intervention."
+    }
+  ],
+  "evidenceLadder": [
+    {
+      "id": "E0",
+      "label": "Output Exists",
+      "claimCeiling": "May say an artifact, method, tool, standard, or intervention exists in the stated condition.",
+      "requires": ["identifiable governed object", "status and scope", "provenance"],
+      "notEnoughFor": "No claim that anyone outside the originating context can use it or benefits from it."
+    },
+    {
+      "id": "E1",
+      "label": "Capability Is Reachable",
+      "claimCeiling": "May say the capability is available to a declared audience through a usable interface or bounded delivery path.",
+      "requires": ["external access path", "instructions or interface", "claim boundary", "repair/contact path"],
+      "notEnoughFor": "Availability is not evidence of comprehension, adoption, changed behavior, or benefit."
+    },
+    {
+      "id": "E2",
+      "label": "Capability Is Usable",
+      "claimCeiling": "May make bounded usability or comprehension claims for the tested audience and task.",
+      "requires": ["affected/user feedback", "task completion or comprehension witness", "accessibility check where relevant", "observed defects"],
+      "notEnoughFor": "Usability does not establish downstream outcome, institutional improvement, or durable value."
+    },
+    {
+      "id": "E3",
+      "label": "Action Changes",
+      "claimCeiling": "May make bounded claims that the capability changed an observable decision, action, repair, or operating condition.",
+      "requires": ["before/after or matched comparison where appropriate", "consequence witness", "scope and confound accounting", "affected-party evidence"],
+      "notEnoughFor": "A local change does not automatically establish broad public benefit or generality."
+    },
+    {
+      "id": "E4",
+      "label": "Independent Reuse",
+      "claimCeiling": "May claim capability transfer when another party can reproduce useful operation without hidden Lab interpretation.",
+      "requires": ["independent use or replication", "semantic fidelity", "known adaptation", "correction channel"],
+      "notEnoughFor": "Independent reuse does not by itself establish long-term durability, equitable distribution, or system-wide improvement."
+    },
+    {
+      "id": "E5",
+      "label": "Durable Public Capacity",
+      "claimCeiling": "May make bounded durability claims when useful capacity persists through maintenance, change, criticism, and transfer.",
+      "requires": ["time or lifecycle evidence", "maintenance owner", "repair history", "continued usefulness without compulsory Lab dependence", "distribution/burden review"],
+      "notEnoughFor": "Even durable success remains scoped; it does not validate unrelated methods, domains, or universal claims."
+    }
+  ],
+  "currentRecords": [
+    {
+      "id": "bfux",
+      "label": "Boundary First UX",
+      "kind": "working public standard",
+      "evidenceLevelId": "E1",
+      "beneficiaryIds": ["practitioners-communities", "institutions"],
+      "dimensionIds": ["legibility", "agency", "repairability", "capability-transfer"],
+      "capability": "A public semantic interaction standard, reference experience, conformance questions, and experimental sandboxes for making complex systems more inspectable without treating one renderer as the source of truth.",
+      "currentEvidence": "Repository-backed public standard and launch-candidate package with explicit accessibility, renderer-independence, sandbox, and conformance posture.",
+      "missingEvidence": ["independent practitioner reuse", "cold-reader task evidence", "comparative design outcomes", "external accessibility review", "durability under adoption and version change"],
+      "independenceTest": "Can another team use the semantic contract in a different renderer and preserve identity, provenance, consequence, and accessible parity without relying on the Lab to interpret each step?",
+      "claimBoundary": "Working public standard and launch candidate. Proposed BFUX conformance levels are not yet canonical, and public availability does not establish improved outcomes.",
+      "sourceRef": "src/content/product-landing-pages/boundary-first-ux.json"
+    },
+    {
+      "id": "software-before-code",
+      "label": "Software Before Code",
+      "kind": "working public method",
+      "evidenceLevelId": "E1",
+      "beneficiaryIds": ["practitioners-communities", "institutions"],
+      "dimensionIds": ["legibility", "repairability", "capability-transfer", "durable-capacity"],
+      "capability": "A reusable engineering discipline for identifying the represented object, distinctions, lawful transitions, invariants, witnesses, and closure conditions before unsafe implementation commitments.",
+      "currentEvidence": "Public method, diagnostic questions, delivery skeleton, workbench artifact specification, and a declared validation ladder exist.",
+      "missingEvidence": ["comparative design study", "external replication", "measured defect-detection advantage", "independent practitioner use", "longitudinal maintenance evidence"],
+      "independenceTest": "Can a team with no hidden Lab context apply the method, produce the declared artifacts, expose a real failure path, and distinguish completion from domain closure?",
+      "claimBoundary": "A working method, not proof of correctness or universal superiority. Proposed practice levels and future tools are not canonical.",
+      "sourceRef": "src/content/product-landing-pages/software-before-code.json"
+    },
+    {
+      "id": "agency-audit",
+      "label": "Agency + Representation Audit",
+      "kind": "pilot intake",
+      "evidenceLevelId": "E1",
+      "beneficiaryIds": ["people", "institutions"],
+      "dimensionIds": ["agency", "legibility", "contestability", "repairability"],
+      "capability": "A bounded procedure for reconstructing authority, representation, consequence, contestability, and repair across one consequential institutional process.",
+      "currentEvidence": "The public intake, method passes, deliverables, evidence rule, and authority limits are specified.",
+      "missingEvidence": ["completed external pilot", "affected-party feedback", "evidence that defects were corrected", "evidence that correction changed downstream consequence", "independent review"],
+      "independenceTest": "Can the scoped institution and affected parties use the resulting maps and defect register to understand, contest, or repair the process after the engagement ends?",
+      "claimBoundary": "A systems audit offer is not legal advice, compliance certification, fairness or safety certification, cybersecurity certification, or evidence that a real institution has already improved.",
+      "sourceRef": "src/content/product-landing-pages/agency-representation-audit.json"
+    },
+    {
+      "id": "citywatch",
+      "label": "Augusta CityWatch",
+      "kind": "historical operational precursor",
+      "evidenceLevelId": "E1",
+      "beneficiaryIds": ["people", "institutions"],
+      "dimensionIds": ["legibility", "agency", "durable-capacity"],
+      "capability": "A historical citizen-facing representation joining project, financial, status, media, timeline, and map context; current Boundary First work treats it as provenance for a possible modern civic instrument.",
+      "currentEvidence": "The retained bridge records prior implementation and delivery experience, but keeps the modern collaboration as an unlisted draft.",
+      "missingEvidence": ["retained or independent evidence for historical outcome claims", "current user evidence", "current municipal relationship", "modern repair/contestability implementation evidence", "durability or transfer evidence"],
+      "independenceTest": "Can a civic representation remain useful, current, and repairable under ordinary municipal stewardship rather than depending on its original builder?",
+      "claimBoundary": "Historical implementation provides provenance and standing only. No current Augusta affiliation or collaboration is implied, and historical outcomes or awards require retained or independent evidence before promotion.",
+      "sourceRef": "src/content/product-landing-pages/augusta-citywatch.json"
+    },
+    {
+      "id": "public-corpus",
+      "label": "Public Corpus + Guided Paths",
+      "kind": "institutional knowledge interface",
+      "evidenceLevelId": "E1",
+      "beneficiaryIds": ["people", "practitioners-communities", "institutions"],
+      "dimensionIds": ["legibility", "agency", "capability-transfer", "durable-capacity"],
+      "capability": "Public records, atlases, deep node views, work projections, and guided pathways intended to make claims, evidence, history, methods, and deeper source material independently navigable.",
+      "currentEvidence": "The public projection architecture and multi-view introductory experience are repository-backed, with retained access to deeper governed records.",
+      "missingEvidence": ["cold-reader comprehension", "independent navigation evidence", "evidence that people can use the corpus to act or criticize more effectively", "long-term stewardship evidence", "external educational reuse"],
+      "independenceTest": "Can a reader recover source, claim status, context, and criticism routes without requiring a private explanation from the Lab?",
+      "claimBoundary": "Structural availability and route coverage do not establish comprehension, educational effectiveness, public impact, or durable stewardship.",
+      "sourceRef": "src/content/public-projections/mission.json + src/content/introductory_experience_v0_5.json"
+    }
+  ],
+  "antiTheaterTests": [
+    "Does the mission change budgets, authority, interfaces, review burden, maintenance, or repair paths?",
+    "Can an affected person identify what practical difference the commitment creates?",
+    "Is there an owner and an evidence path?",
+    "Are legal, health, scientific, economic, and environmental claim ceilings visible where relevant?",
+    "Can criticism change the institution rather than merely be collected?",
+    "Does the institution transfer capability instead of manufacturing dependency?"
+  ],
+  "impactRule": "Every public-value claim should connect human promise -> structural defect -> Boundary First operation -> public artifact or intervention -> evidence/review gate -> observed consequence -> maintenance or transfer condition.",
+  "claimFirewall": "The Lab's social mission is a commitment and design constraint, not evidence that a method works. Stronger claims require domain-appropriate implementation, affected-party feedback, comparison, criticism, and measured outcomes."
+}

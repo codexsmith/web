@@ -1,0 +1,392 @@
+/*
+ * Responsive public-home projection for the physical Lab Machine.
+ * Desktop keeps the authored apparatus composition. Tablet/phone reflow the same
+ * semantic modules into a legible rack instead of shrinking the 1120px canvas.
+ */
+
+@media (max-width: 1024px) {
+  .world-machine-preview,
+  .physical-machine-experience,
+  .bf-machine[data-skin="physical"] {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .bf-machine[data-skin="physical"] {
+    --machine-u: 8px;
+    padding: 0 .55rem .7rem;
+    overflow-x: hidden;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__board {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-height: none;
+    height: auto !important;
+    aspect-ratio: auto;
+    padding: .65rem;
+    overflow: visible;
+    background:
+      linear-gradient(rgba(79,119,133,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,119,133,.035) 1px, transparent 1px),
+      radial-gradient(circle at 50% 18%, #0e181d 0, #091216 48%, #060b0e 100%);
+    background-size: 32px 32px, 32px 32px, auto;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__status,
+  .bf-machine[data-skin="physical"] .bf-machine__traces,
+  .bf-machine[data-skin="physical"] .bf-machine__lower-deck,
+  .bf-machine[data-skin="physical"] .bf-machine-node__ports,
+  .bf-machine[data-skin="physical"] .bf-machine-node__underpipe,
+  .bf-machine[data-skin="physical"] .bf-machine-node__lower-dock,
+  .bf-machine[data-skin="physical"] .bf-machine-node__research-governance-dock,
+  .bf-machine[data-skin="physical"] .bf-machine-node__governance-top-dock {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: .15rem;
+    transform: none !important;
+    touch-action: pan-y;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0;
+    min-height: 10.5rem;
+    margin: 0 !important;
+    align-self: stretch !important;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,.62));
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node:is(
+    [data-node-id="people"],
+    [data-node-id="products"],
+    [data-node-id="publications"],
+    [data-node-id="about"],
+    [data-node-id="research"],
+    [data-node-id="public-value"]
+  ) {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] {
+    grid-column: 1 / -1;
+    order: 0;
+  }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] { order: 1; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="publications"] { order: 2; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] { order: 3; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] { order: 4; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"] { order: 5; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"] { order: 6; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] { order: 7; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"] { order: 8; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="applications"] { order: 9; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] { order: 10; }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] { order: 11; }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node--package .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node--attachment .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node--pipeline .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node--publication .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node--authority .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__shell {
+    inset: -4px !important;
+    transform: none !important;
+    border-width: 1px !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: 4.2rem minmax(0, 1fr) !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 0 !important;
+    min-height: 10.5rem;
+    height: 100%;
+    padding: 0 !important;
+    border-width: 1px !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    width: 3.35rem !important;
+    height: 3.35rem !important;
+    aspect-ratio: 1;
+    margin: .65rem 0 .2rem .65rem;
+    padding: .3rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate {
+    width: 3.7rem !important;
+    height: 3.7rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-well,
+  .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__icon-well {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    box-shadow: inset 0 0 0 4px #060708, 0 0 8px color-mix(in srgb, var(--tone) 28%, transparent);
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-well svg,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-well svg,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well svg {
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+    max-width: none !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate::before {
+    inset: -.32rem !important;
+  }
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate::after {
+    inset: 50% -.45rem auto !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node header,
+  .bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-node--conjoined header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] header {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 0 !important;
+    padding: .7rem .7rem .45rem .45rem !important;
+    border-bottom: 0;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node header span,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined header span,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header span {
+    font-size: .6rem !important;
+    line-height: 1.15;
+    letter-spacing: .075em;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node header strong,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined header strong,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header strong,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] header strong {
+    display: block !important;
+    margin-top: .28rem !important;
+    font-size: 1.12rem !important;
+    line-height: 1.05;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__boundary {
+    display: block !important;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-height: 0 !important;
+    margin: 0 .65rem .65rem !important;
+    padding: .55rem .6rem !important;
+    border: 1px solid color-mix(in srgb, var(--tone) 23%, #374247) !important;
+    background: linear-gradient(#0c1214, #090d0f) !important;
+    box-shadow: inset 0 2px 7px #000a !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary small,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__boundary small {
+    display: block !important;
+    font-size: .52rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary p,
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node__boundary p,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__boundary p {
+    display: block !important;
+    margin: .3rem 0 0 !important;
+    font-size: .73rem !important;
+    line-height: 1.42;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node footer {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    min-height: 0 !important;
+    margin: 0 !important;
+    flex-wrap: wrap;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node footer span,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] footer span,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] footer span,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"] footer span {
+    min-width: 7.5rem;
+    padding: .42rem .5rem !important;
+    font-size: .58rem !important;
+    line-height: 1.25;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node footer span:first-child {
+    padding-left: 1.2rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node footer small {
+    font-size: .49rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node--package::after,
+  .bf-machine[data-skin="physical"] .bf-machine-node--attachment::after,
+  .bf-machine[data-skin="physical"] .bf-machine-node--pipeline::after,
+  .bf-machine[data-skin="physical"] .bf-machine-node--identity::after,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__face::after {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: .45rem;
+    width: auto;
+    height: auto !important;
+    min-height: 0;
+    margin: .55rem 0 0;
+    padding: .6rem .7rem;
+    overflow: visible;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend > strong {
+    display: block;
+    padding: 0;
+    font-size: .58rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend > div:not(.bf-machine__legend-actions) {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .38rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend > div:not(.bf-machine__legend-actions) > span,
+  .bf-machine[data-skin="physical"] .bf-machine__legend > div:not(.bf-machine__legend-actions) > span:first-child,
+  .bf-machine[data-skin="physical"] .bf-machine__legend > div:not(.bf-machine__legend-actions) > span:nth-child(6),
+  .bf-machine[data-skin="physical"] .bf-machine__legend > div:not(.bf-machine__legend-actions) > span:last-child {
+    min-width: 0;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend svg {
+    width: .95rem;
+    height: .95rem;
+  }
+  .bf-machine[data-skin="physical"] .bf-machine__legend b { font-size: .58rem; }
+  .bf-machine[data-skin="physical"] .bf-machine__legend small { font-size: .5rem; }
+  .bf-machine[data-skin="physical"] .bf-machine__legend-actions { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  .bf-machine[data-skin="physical"] {
+    padding-inline: .38rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__board {
+    padding: .48rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .65rem;
+    padding: 0;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] {
+    grid-column: auto;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node {
+    min-height: 9.5rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__face {
+    min-height: 9.5rem;
+    grid-template-columns: 3.85rem minmax(0, 1fr) !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate {
+    width: 3rem !important;
+    height: 3rem !important;
+    margin: .58rem 0 .15rem .58rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node header,
+  .bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-node--conjoined header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] header {
+    padding: .62rem .6rem .4rem .38rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node header strong,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined header strong,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header strong,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] header strong {
+    font-size: 1.06rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__boundary {
+    margin: 0 .58rem .58rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend > strong {
+    display: none;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend > div:not(.bf-machine__legend-actions) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -6,6 +6,11 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
 }
 
+/* The frame home control is icon-only; the Lab Machine carries site identity. */
+.brand-anchor__copy {
+  display: none;
+}
+
 /* Spatial traversal beacons belong to the same operating language as the frame. */
 .direction-control {
   min-height: 44px;

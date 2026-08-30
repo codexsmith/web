@@ -1,0 +1,234 @@
+/*
+ * Mechanical-mass pass for the physical Lab Machine skin.
+ * No new semantics: this layer only strengthens mounting, case depth, recess,
+ * contact shadow, and instrument-cluster weight.
+ */
+
+.bf-machine-node__mount { display: none; }
+
+.bf-machine[data-skin="physical"] .bf-machine-node {
+  filter:
+    drop-shadow(0 5px 0 rgba(0,0,0,.96))
+    drop-shadow(0 16px 12px rgba(0,0,0,.76));
+}
+
+/* A broad mounting flange makes every module feel fixed to the machine wall. */
+.bf-machine[data-skin="physical"] .bf-machine-node__mount {
+  display: block;
+  position: absolute;
+  z-index: -5;
+  inset: -17px -15px -22px;
+  border: 1px solid #42494c;
+  clip-path: polygon(
+    15px 0,
+    calc(100% - 15px) 0,
+    100% 15px,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    0 calc(100% - 12px),
+    0 15px
+  );
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.07), transparent 17%),
+    linear-gradient(180deg, #2b3032 0%, #171b1d 22%, #0a0d0e 78%, #050607 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.08),
+    inset 0 -3px #030404,
+    0 7px 0 #050607,
+    0 11px 0 #090b0c,
+    0 18px 24px rgba(0,0,0,.72);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node__mount::before,
+.bf-machine[data-skin="physical"] .bf-machine-node__mount::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 4px;
+  background: linear-gradient(90deg, #080a0b, #4a5052 18%, #202527 50%, #4a5052 82%, #080a0b);
+  opacity: .72;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__mount::before { top: 7px; }
+.bf-machine[data-skin="physical"] .bf-machine-node__mount::after { bottom: 7px; }
+
+/* The cast case sits forward of the mounting flange and has a visible lower wall. */
+.bf-machine[data-skin="physical"] .bf-machine-node__shell {
+  inset: -11px -10px -15px;
+  border-width: 2px;
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 2px rgba(255,255,255,.12),
+    inset 0 -4px rgba(0,0,0,.9),
+    inset 3px 0 rgba(255,255,255,.025),
+    0 0 0 2px #050607,
+    0 5px 0 #080a0b,
+    0 9px 0 #030405,
+    0 14px 18px rgba(0,0,0,.64);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node__shell::after {
+  inset: auto 10px 8px;
+  height: 7px;
+  border: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), #07090a 48%, #020303 100%);
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+
+/* Painted faceplate floats slightly above the cast housing. */
+.bf-machine[data-skin="physical"] .bf-machine-node__face {
+  transform: translateY(-3px);
+  border-width: 2px;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    inset 0 -22px 32px rgba(0,0,0,.42),
+    inset 5px 0 14px color-mix(in srgb, var(--tone) 5%, transparent),
+    0 4px 0 #07090a,
+    0 7px 8px rgba(0,0,0,.48);
+}
+
+/* Fasteners get washers and a deeper seat. */
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners {
+  inset: -8px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__fasteners i {
+  width: 13px;
+  height: 13px;
+  border: 1px solid #8a8d8b;
+  outline: 2px solid #15191a;
+  outline-offset: 1px;
+  background:
+    linear-gradient(45deg, transparent 43%, #111314 44% 56%, transparent 57%),
+    radial-gradient(circle at 34% 28%, #d1d2cd 0 6%, #858884 8% 20%, #454948 22% 50%, #121516 53% 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 2px 0 #050607,
+    0 4px 4px rgba(0,0,0,.9);
+}
+
+/* Icon cartridge behaves like a bolted instrument subassembly, not an icon tile. */
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-plate {
+  border-width: 2px;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.13),
+    inset 0 -3px rgba(0,0,0,.84),
+    0 4px 0 #07090a,
+    0 7px 8px rgba(0,0,0,.72);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well {
+  border-width: 2px;
+  box-shadow:
+    inset 0 0 0 5px #07090a,
+    inset 0 4px 10px rgba(0,0,0,.9),
+    inset 0 1px rgba(255,255,255,.08),
+    0 0 0 1px #020303;
+}
+
+/* Text lives in a well machined into the faceplate. */
+.bf-machine[data-skin="physical"] .bf-machine-node__boundary {
+  border-width: 2px;
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 5px 12px rgba(0,0,0,.86),
+    inset 0 -1px rgba(255,255,255,.022),
+    inset 0 0 0 1px rgba(0,0,0,.3),
+    0 1px rgba(255,255,255,.025);
+}
+
+/* Readout bank is a separate heavy tray mounted to the bottom of the case. */
+.bf-machine[data-skin="physical"] .bf-machine-node footer {
+  min-height: 47px;
+  margin: 0 6px 7px;
+  border-width: 2px;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.055),
+    inset 0 -3px rgba(0,0,0,.82),
+    0 3px 0 #050708,
+    0 5px 5px rgba(0,0,0,.45);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer span {
+  border-right-width: 2px;
+}
+
+/* Through-wall connectors need enough depth to look mechanically supported. */
+.bf-machine[data-skin="physical"] .bf-machine-node__ports {
+  border-width: 2px;
+  padding: 6px 5px;
+  transform-style: preserve-3d;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.13),
+    inset 0 -3px #050607,
+    0 4px 0 #050607,
+    0 7px 7px rgba(0,0,0,.86);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node__ports--in { margin-left: -2px; }
+.bf-machine[data-skin="physical"] .bf-machine-node__ports--out { margin-right: -2px; }
+
+/* Limit light to instrumentation. The chassis itself stays heavy and matte. */
+.bf-machine[data-skin="physical"] .bf-machine-node__icon-well svg {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--tone) 32%, transparent));
+}
+.bf-machine[data-skin="physical"] .bf-machine-node footer .bf-machine-node__state::before {
+  box-shadow:
+    inset 0 0 0 2px color-mix(in srgb, var(--tone) 34%, #090b0c),
+    0 0 5px color-mix(in srgb, var(--tone) 42%, transparent);
+}
+
+/* Role-dependent mass: important structural objects physically carry more case. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__mount {
+  inset: -23px -20px -27px;
+  border-width: 2px;
+  box-shadow:
+    inset 0 2px rgba(255,255,255,.075),
+    inset 0 -4px #030404,
+    0 9px 0 #050607,
+    0 14px 0 #080a0b,
+    0 22px 30px rgba(0,0,0,.78);
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__shell {
+  inset: -15px -14px -20px;
+  border-width: 3px;
+  box-shadow:
+    inset 0 2px rgba(255,255,255,.11),
+    inset 0 -5px #040506,
+    0 0 0 3px #050607,
+    0 7px 0 #08090a,
+    0 13px 0 #030405,
+    0 19px 24px rgba(0,0,0,.68);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] .bf-machine-node__mount {
+  border: 2px solid #50575a;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] .bf-machine-node__shell {
+  border-width: 3px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] .bf-machine-node__mount,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="applications"] .bf-machine-node__mount {
+  inset: -17px -15px -24px;
+}
+
+/* Compact terminal appliances remain smaller, but should still feel dense. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__mount,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__mount {
+  inset: -13px -12px -18px;
+}
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__shell,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__shell {
+  inset: -8px -8px -12px;
+}
+
+@media (max-width: 900px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node__mount { display: none; }
+  .bf-machine[data-skin="physical"] .bf-machine-node,
+  .bf-machine[data-skin="physical"] .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"] .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node footer {
+    transform: none;
+  }
+}

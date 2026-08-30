@@ -1,0 +1,231 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - link "Boundary First Labs home" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - strong [ref=e10]: BOUNDARY FIRST LABS
+        - link "Back to the Lab Machine" [ref=e11] [cursor=pointer]:
+          - /url: /world
+      - generic [ref=e16]:
+        - navigation "Current public path" [ref=e17]:
+          - link "Lab Machine" [ref=e18] [cursor=pointer]:
+            - /url: /world
+          - generic [ref=e19]: ›
+          - strong [ref=e20]: Research
+        - generic "Process context controls" [ref=e21]:
+          - generic [ref=e22]:
+            - generic [ref=e23]: Process
+            - strong [ref=e24]: Full loop
+          - button "Widen process context" [disabled] [ref=e25]
+          - button "Narrow process context" [ref=e33] [cursor=pointer]
+      - generic [ref=e42]:
+        - link "Search" [ref=e43] [cursor=pointer]:
+          - /url: /?search=1
+        - generic [ref=e48]: VIEW
+        - navigation "Boundary First Labs views" [ref=e49]:
+          - link "WORLD Public regions" [ref=e50] [cursor=pointer]:
+            - /url: /world?skin=physical
+            - generic [ref=e55]:
+              - strong [ref=e56]: WORLD
+              - generic [ref=e57]: Public regions
+          - link "EVIDENCE Founder provenance" [ref=e58] [cursor=pointer]:
+            - /url: /?projection=evidence
+            - generic [ref=e62]:
+              - strong [ref=e63]: EVIDENCE
+              - generic [ref=e64]: Founder provenance
+          - link "TIMELINE Development history" [ref=e65] [cursor=pointer]:
+            - /url: /?projection=gestalt
+            - generic [ref=e71]:
+              - strong [ref=e72]: TIMELINE
+              - generic [ref=e73]: Development history
+    - 'region "Research: Research Programs" [ref=e75]':
+      - generic [ref=e76]:
+        - generic [ref=e81]:
+          - paragraph [ref=e82]: RESEARCH PROJECTION · EPISTEMIC ENGINE
+          - heading "How the Lab Turns Questions Into Structure" [level=2] [ref=e83]
+          - strong [ref=e84]: Inspect the current research architecture as a set of typed programs, formal objects, disciplines, and methodological layers rather than as a flat list of topics.
+        - generic [ref=e85]:
+          - generic [ref=e86]: 6 PROGRAMS · 7 METHODS
+          - button "BACK TO RESEARCH" [ref=e87] [cursor=pointer]
+          - button "Close projection" [ref=e88] [cursor=pointer]: CLOSE ×
+      - complementary "Boundary depth map" [ref=e89]:
+        - generic [ref=e96]:
+          - generic [ref=e97]: BOUNDARY DEPTH
+          - list [ref=e98]:
+            - listitem [ref=e99]:
+              - generic [ref=e100]: "00"
+              - strong [ref=e101]: Boundary First Labs
+            - listitem [ref=e102]:
+              - generic [ref=e103]: "01"
+              - strong [ref=e104]: Lab Machine
+            - listitem [ref=e105]:
+              - generic [ref=e106]: "02"
+              - strong [ref=e107]: Research
+            - listitem [ref=e108]:
+              - generic [ref=e109]: "03"
+              - strong [ref=e110]: Research Programs
+      - generic [ref=e112]:
+        - region "Research projection controls" [ref=e113]:
+          - generic [ref=e114]:
+            - generic [ref=e115]: PROJECTION MODE
+            - generic [ref=e116]:
+              - button "Research Programs" [pressed] [ref=e117] [cursor=pointer]
+              - button "Methods in Use" [ref=e118] [cursor=pointer]
+              - button "Claim Development" [ref=e119] [cursor=pointer]
+              - button "Cross-Domain Invariants" [ref=e120] [cursor=pointer]
+          - paragraph [ref=e121]: Seeded from current web research records and the source-controlled August 2026 architecture. Historical names are not silently treated as current canon, and cross-domain recurrence is presented as a clue until stronger structure is earned.
+        - region "Research filters" [ref=e122]:
+          - generic [ref=e123]:
+            - generic [ref=e124]: PROGRAM TYPE
+            - button "ALL" [pressed] [ref=e125] [cursor=pointer]
+            - button "Theory" [ref=e126] [cursor=pointer]
+            - button "Formal object" [ref=e127] [cursor=pointer]
+            - button "Discipline" [ref=e128] [cursor=pointer]
+            - button "Formal program" [ref=e129] [cursor=pointer]
+            - button "Comparative program" [ref=e130] [cursor=pointer]
+            - button "Method program" [ref=e131] [cursor=pointer]
+          - generic [ref=e132]:
+            - generic [ref=e133]: METHOD
+            - button "ALL" [pressed] [ref=e134] [cursor=pointer]
+            - button "Boundary analysis" [ref=e135] [cursor=pointer]
+            - button "Operative profiling" [ref=e136] [cursor=pointer]
+            - button "Cross-domain comparison" [ref=e137] [cursor=pointer]
+            - button "Reconstruction" [ref=e138] [cursor=pointer]
+            - button "Counterexample search" [ref=e139] [cursor=pointer]
+            - button "Provenance & governance" [ref=e140] [cursor=pointer]
+            - button "Matched comparison" [ref=e141] [cursor=pointer]
+        - region "Research program readout" [ref=e142]:
+          - generic [ref=e143]:
+            - generic [ref=e144]: VISIBLE PROGRAMS
+            - strong [ref=e145]: "6"
+          - generic [ref=e146]:
+            - generic [ref=e147]: METHODS IN USE
+            - strong [ref=e148]: "7"
+          - generic [ref=e149]:
+            - generic [ref=e150]: CLAIM POSTURE
+            - strong [ref=e151]: BOUND · TEST · REPAIR
+          - paragraph [ref=e152]: Recurring structure is treated as a research clue until a bounded mapping, counterexample search, evidence gate, and appropriate review support a stronger claim.
+        - region "Research program map" [ref=e153]:
+          - button "01 Theory Boundary Theory current controlled architecture The current source-controlled architecture centers Boundary Theory on Distinction Space and treats Representational Mechanics as an applying/study discipline rather than as a competing umbrella. SYSTEM ROLE Formal umbrella for rigorous cross-domain primitives and structure-preserving relationships around boundaries, distinctions, representation, admissibility, closure, and defect. centered on → Distinction Space applied through → Rep. Mechanics formalized through → Schemathematics" [ref=e154] [cursor=pointer]:
+            - generic [ref=e155]:
+              - generic [ref=e156]: "01"
+              - generic [ref=e157]: Theory
+            - strong [ref=e158]: Boundary Theory
+            - emphasis [ref=e159]: current controlled architecture
+            - paragraph [ref=e160]: The current source-controlled architecture centers Boundary Theory on Distinction Space and treats Representational Mechanics as an applying/study discipline rather than as a competing umbrella.
+            - generic [ref=e161]:
+              - generic [ref=e162]: SYSTEM ROLE
+              - generic [ref=e163]: Formal umbrella for rigorous cross-domain primitives and structure-preserving relationships around boundaries, distinctions, representation, admissibility, closure, and defect.
+            - generic [ref=e164]:
+              - generic [ref=e165]: centered on → Distinction Space
+              - generic [ref=e166]: applied through → Rep. Mechanics
+              - generic [ref=e167]: formalized through → Schemathematics
+          - button "02 Formal object Distinction Space current formal carrier Distinction Space is represented in the current architecture as the central formal object rather than as a historical synonym for earlier umbrella theories. SYSTEM ROLE Formal carrier in the current Boundary Theory architecture, with Distinction, Admissibility, and Emergence as operational facets and Contexture as a composable subspace. formal carrier for → Boundary Theory studied through → Rep. Mechanics" [ref=e168] [cursor=pointer]:
+            - generic [ref=e169]:
+              - generic [ref=e170]: "02"
+              - generic [ref=e171]: Formal object
+            - strong [ref=e172]: Distinction Space
+            - emphasis [ref=e173]: current formal carrier
+            - paragraph [ref=e174]: Distinction Space is represented in the current architecture as the central formal object rather than as a historical synonym for earlier umbrella theories.
+            - generic [ref=e175]:
+              - generic [ref=e176]: SYSTEM ROLE
+              - generic [ref=e177]: Formal carrier in the current Boundary Theory architecture, with Distinction, Admissibility, and Emergence as operational facets and Contexture as a composable subspace.
+            - generic [ref=e178]:
+              - generic [ref=e179]: formal carrier for → Boundary Theory
+              - generic [ref=e180]: studied through → Rep. Mechanics
+          - button "03 Discipline Representational Mechanics current applying discipline The current architecture places Representational Mechanics under Boundary Theory and associates it with Formal Grammars, the Boundary First operational method, and Corpus Forge provenance machinery. SYSTEM ROLE Study how representations preserve, expose, distort, omit, or redirect structure as systems are transformed, projected, interpreted, and made executable. applies → Boundary Theory tests through → Operational Homology uses formal apparatus from → Schemathematics" [ref=e181] [cursor=pointer]:
+            - generic [ref=e182]:
+              - generic [ref=e183]: "03"
+              - generic [ref=e184]: Discipline
+            - strong [ref=e185]: Representational Mechanics
+            - emphasis [ref=e186]: current applying discipline
+            - paragraph [ref=e187]: The current architecture places Representational Mechanics under Boundary Theory and associates it with Formal Grammars, the Boundary First operational method, and Corpus Forge provenance machinery.
+            - generic [ref=e188]:
+              - generic [ref=e189]: SYSTEM ROLE
+              - generic [ref=e190]: Study how representations preserve, expose, distort, omit, or redirect structure as systems are transformed, projected, interpreted, and made executable.
+            - generic [ref=e191]:
+              - generic [ref=e192]: applies → Boundary Theory
+              - generic [ref=e193]: tests through → Operational Homology
+              - generic [ref=e194]: uses formal apparatus from → Schemathematics
+          - button "04 Formal program Schemathematics research-program draft Schemathematics tests whether explicit operative profiles improve comparison, navigation, translation, pedagogy, or machine reasoning while preserving accepted definitions and reducing to established machinery where appropriate. SYSTEM ROLE Formal study of schemas as lawful carriers of objects, transformations, admissibility conditions, invariants, defects, provenance, and repair. formal apparatus for → Boundary Theory supplies machinery to → Rep. Mechanics" [ref=e195] [cursor=pointer]:
+            - generic [ref=e196]:
+              - generic [ref=e197]: "04"
+              - generic [ref=e198]: Formal program
+            - strong [ref=e199]: Schemathematics
+            - emphasis [ref=e200]: research-program draft
+            - paragraph [ref=e201]: Schemathematics tests whether explicit operative profiles improve comparison, navigation, translation, pedagogy, or machine reasoning while preserving accepted definitions and reducing to established machinery where appropriate.
+            - generic [ref=e202]:
+              - generic [ref=e203]: SYSTEM ROLE
+              - generic [ref=e204]: Formal study of schemas as lawful carriers of objects, transformations, admissibility conditions, invariants, defects, provenance, and repair.
+            - generic [ref=e205]:
+              - generic [ref=e206]: formal apparatus for → Boundary Theory
+              - generic [ref=e207]: supplies machinery to → Rep. Mechanics
+          - button "05 Comparative program Cross-Domain Operational Homology active bounded comparison The current program uses domain-native definitions, an L0-L5 evidence ladder, explicit breakpoints, bounded comparative cases, and a counterexample ledger. A rejected mapping is an acceptable result. SYSTEM ROLE Negative-capable comparison program for determining whether recurring cross-domain structures preserve linked operational behavior rather than merely sharing terminology. tests claims within → Rep. Mechanics supplies evidence to → Boundary Theory" [ref=e208] [cursor=pointer]:
+            - generic [ref=e209]:
+              - generic [ref=e210]: "05"
+              - generic [ref=e211]: Comparative program
+            - strong [ref=e212]: Cross-Domain Operational Homology
+            - emphasis [ref=e213]: active bounded comparison
+            - paragraph [ref=e214]: The current program uses domain-native definitions, an L0-L5 evidence ladder, explicit breakpoints, bounded comparative cases, and a counterexample ledger. A rejected mapping is an acceptable result.
+            - generic [ref=e215]:
+              - generic [ref=e216]: SYSTEM ROLE
+              - generic [ref=e217]: Negative-capable comparison program for determining whether recurring cross-domain structures preserve linked operational behavior rather than merely sharing terminology.
+            - generic [ref=e218]:
+              - generic [ref=e219]: tests claims within → Rep. Mechanics
+              - generic [ref=e220]: supplies evidence to → Boundary Theory
+          - 'button "06 Method program Second-Order Scientific Method dated origin-program synthesis The August 1 origin package joins long-run formal inquiry, representational questions, agentic pressure on fixed possibility spaces, Distinction Space, Contexture, proto-schema work, and a second-order scientific method. SYSTEM ROLE Methodological layer for making the research process itself an inspectable object: representation, evidence, agentic generation, criticism, defect, promotion, and repair are explicitly instrumented. instruments → Rep. Mechanics tests and develops → Boundary Theory" [ref=e221] [cursor=pointer]':
+            - generic [ref=e222]:
+              - generic [ref=e223]: "06"
+              - generic [ref=e224]: Method program
+            - strong [ref=e225]: Second-Order Scientific Method
+            - emphasis [ref=e226]: dated origin-program synthesis
+            - paragraph [ref=e227]: The August 1 origin package joins long-run formal inquiry, representational questions, agentic pressure on fixed possibility spaces, Distinction Space, Contexture, proto-schema work, and a second-order scientific method.
+            - generic [ref=e228]:
+              - generic [ref=e229]: SYSTEM ROLE
+              - generic [ref=e230]: "Methodological layer for making the research process itself an inspectable object: representation, evidence, agentic generation, criticism, defect, promotion, and repair are explicitly instrumented."
+            - generic [ref=e231]:
+              - generic [ref=e232]: instruments → Rep. Mechanics
+              - generic [ref=e233]: tests and develops → Boundary Theory
+        - complementary [ref=e234]:
+          - generic [ref=e235]:
+            - generic [ref=e236]:
+              - generic [ref=e237]: THROUGH · PROGRAM INSPECTION
+              - heading "Boundary Theory" [level=3] [ref=e238]
+            - generic [ref=e239]: current controlled architecture
+          - paragraph [ref=e240]: Which structures remain meaningful across changes of domain, scale, representation, or formalism, and what evidence is required before calling them shared?
+          - generic [ref=e241]:
+            - generic [ref=e242]:
+              - generic [ref=e243]: ROLE
+              - paragraph [ref=e244]: Formal umbrella for rigorous cross-domain primitives and structure-preserving relationships around boundaries, distinctions, representation, admissibility, closure, and defect.
+            - generic [ref=e245]:
+              - generic [ref=e246]: METHODS
+              - list [ref=e247]:
+                - listitem [ref=e248]: Boundary analysis
+                - listitem [ref=e249]: Cross-domain comparison
+                - listitem [ref=e250]: Counterexample search
+                - listitem [ref=e251]: Provenance & governance
+            - generic [ref=e252]:
+              - generic [ref=e253]: INPUTS
+              - list [ref=e254]:
+                - listitem [ref=e255]: domain-native formalisms
+                - listitem [ref=e256]: candidate recurring structures
+                - listitem [ref=e257]: anomalies and representational defects
+                - listitem [ref=e258]: historical research lineage
+            - generic [ref=e259]:
+              - generic [ref=e260]: OUTPUTS
+              - list [ref=e261]:
+                - listitem [ref=e262]: typed formal questions
+                - listitem [ref=e263]: candidate primitives
+                - listitem [ref=e264]: bounded cross-domain propositions
+                - listitem [ref=e265]: research programs requiring independent validation
+            - generic [ref=e266]:
+              - generic [ref=e267]: CURRENT CLAIM STAGE
+              - paragraph [ref=e268]: bounded-representation
+            - generic [ref=e269]:
+              - generic [ref=e270]: CLAIM BOUNDARY
+              - paragraph [ref=e271]: The current architecture is repository-controlled research structure, not proof that the proposed primitives are novel, necessary, or universal across domains.
+          - generic [ref=e272]:
+            - generic [ref=e273]: SOURCE SURFACE
+            - generic [ref=e274]: src/lib/content.ts + src/content/founder-intellectual-provenance-timeline.json#EVT-020
+  - button "Open Next.js Dev Tools" [ref=e280] [cursor=pointer]
