@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
-import { parseProcessScope } from "@/lib/bfl-process";
-import { parseProjection } from "@/lib/view-projection";
-import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
-import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
-import "./world-machine-preview.css";
-
-export const metadata: Metadata = {
-  title: "Boundary First Labs · Lab Machine",
-  robots: { index: false, follow: false },
-};
+import { permanentRedirect } from "next/navigation";
 
 type Props = {
   searchParams: Promise<{
-    skin?: string | string[];
     section?: string | string[];
     view?: string | string[];
     scope?: string | string[];
@@ -20,24 +10,22 @@ type Props = {
   }>;
 };
 
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+};
+
 function one(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-export default async function WorldPage({ searchParams }: Props) {
+export default async function LegacyWorldPage({ searchParams }: Props) {
   const query = await searchParams;
-  const section = one(query.section);
-  const projection = parseProjection(one(query.view)) ?? "world";
-  const processScope = parseProcessScope(one(query.scope)) ?? "full";
+  const params = new URLSearchParams();
 
-  return (
-    <LabMachineHomeBoundary resetTraversal={!section && projection === "world"}>
-      <LabMachineWorld
-        section={section}
-        initialProjection={projection}
-        initialProcessScope={processScope}
-        showSchematic={one(query.schematic) === "1"}
-      />
-    </LabMachineHomeBoundary>
-  );
+  for (const key of ["section", "view", "scope", "schematic"] as const) {
+    const value = one(query[key]);
+    if (value) params.set(key, value);
+  }
+
+  permanentRedirect(params.size ? `/?${params.toString()}` : "/");
 }
