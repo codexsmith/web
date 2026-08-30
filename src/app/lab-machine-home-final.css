@@ -1,0 +1,87 @@
+/* Final homepage-only cleanup after frame + responsive convergence. */
+
+.site-shell[data-root-focus="true"] .world-machine-preview {
+  padding-top: calc(var(--frame-top) + 14px);
+}
+
+.site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+  grid-template-columns: 42px minmax(176px, auto) minmax(0, 1fr);
+  gap: .55rem;
+}
+
+.site-shell[data-root-focus="true"] .frame-context-controls {
+  margin-inline: .08rem .12rem;
+}
+
+.site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
+  gap: 3px;
+  padding: 4px;
+}
+
+.site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
+  padding-inline: .62rem;
+}
+
+/* The apparatus already carries its identity in the title bar; keep only one. */
+.site-shell[data-root-focus="true"] .bf-machine__status {
+  display: none !important;
+}
+
+/* Match the legend to actual interaction semantics. */
+.site-shell[data-root-focus="true"] .bf-machine__legend-actions p {
+  display: none !important;
+}
+
+.site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
+  content: "HOVER: PREVIEW · CLICK / ENTER: OPEN";
+  display: block;
+  font: 700 .54rem/1.35 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .055em;
+  color: #b7c1c5;
+  white-space: nowrap;
+}
+
+@media (max-width: 1280px) {
+  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+    grid-template-columns: 40px minmax(158px, auto) minmax(0, 1fr);
+    gap: .4rem;
+  }
+
+  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
+    padding-inline: .48rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-shell[data-root-focus="true"] .world-machine-preview {
+    padding-top: calc(var(--frame-top) + 10px);
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+    grid-template-columns: 40px auto minmax(0, 1fr);
+    gap: .28rem;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-context-controls {
+    margin: 0;
+  }
+
+  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
+    padding: 3px;
+  }
+
+  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
+    padding-inline: .34rem;
+  }
+
+  .site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
+    font-size: .5rem;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-shell[data-root-focus="true"] .world-machine-preview {
+    padding-top: calc(var(--frame-top) + 8px);
+  }
+}
