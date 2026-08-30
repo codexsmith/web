@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BoundaryFrame } from "@/components/boundary-frame";
+import { BfuxIcon } from "@/components/bfux-icons";
 import { EvidenceView } from "@/components/evidence-view";
 import { GestaltView } from "@/components/gestalt-view";
 import { SearchPanel } from "@/components/search-panel";
@@ -24,6 +25,7 @@ import { LabMachineResearchProjection } from "./LabMachineResearchProjection";
 import { LabMachineServiceProjection } from "./LabMachineServiceProjection";
 import { LabMachineTimelineProjection } from "./LabMachineTimelineProjection";
 import { LabMachineNavigationProvider, type LabMachineTraversalStep } from "./LabMachineNavigationContext";
+import type { LabMachineResolution } from "./LabMachine";
 import { PhysicalMachineExperience } from "./PhysicalMachineExperience";
 import { getLabMachineConnectingEdge, getLabMachineNode, labMachineEdgeKey } from "./lab-machine-model";
 
@@ -43,6 +45,8 @@ const coreNodePaths: Partial<Record<string, string>> = {
   about: "/about",
   research: "/research",
 };
+
+const resolutionStorageKey = "bfl_lab_machine_resolution";
 
 function machineUrl(basePath: string, projection: ProjectionMode = "world", scope: ProcessScope = "full", section?: string) {
   const params = new URLSearchParams({ skin: "physical" });
@@ -101,6 +105,7 @@ export function LabMachineWorld({
   const rootNode = useMemo(() => hydrateContentNode(getNode("root")), []);
   const [projection, setProjection] = useState<ProjectionMode>(initialProjection);
   const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
+  const [machineResolution, setMachineResolution] = useState<LabMachineResolution>(section ? "mid" : "focus");
   const [searchOpen, setSearchOpen] = useState(false);
   const [navigationFocusId, setNavigationFocusId] = useState(section ?? "research");
   const [navigationTrail, setNavigationTrail] = useState<LabMachineTraversalStep[]>([]);
@@ -112,6 +117,15 @@ export function LabMachineWorld({
   const processScopeIndex = processScopes.indexOf(processScope);
   const canProcessZoomOut = processScopeIndex > 0;
   const canProcessZoomIn = processScopeIndex < processScopes.length - 1;
+
+  const setResolution = (nextResolution: LabMachineResolution) => {
+    setMachineResolution(nextResolution);
+    try {
+      window.sessionStorage.setItem(resolutionStorageKey, nextResolution);
+    } catch {
+      // Resolution remains functional when browser storage is unavailable.
+    }
+  };
 
   const closeSection = () => router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
   const openSection = (nodeId: string) => {
@@ -167,6 +181,31 @@ export function LabMachineWorld({
       router.push(machineUrl(machinePath, "world", "full", navigationFocusId), { scroll: false });
     };
 
+    const resolutionControls = !section ? (
+      <div className="lab-machine-frame-zoom" role="group" aria-label="Lab Machine resolution">
+        <button
+          type="button"
+          onClick={() => setResolution("mid")}
+          disabled={machineResolution === "mid"}
+          aria-label="Show full Lab Machine loop"
+          title="Show full Lab Machine loop"
+        >
+          <BfuxIcon name="widen" />
+          <span>Full loop</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => setResolution("focus")}
+          disabled={machineResolution === "focus"}
+          aria-label="Show core Lab set"
+          title="Show core Lab set"
+        >
+          <BfuxIcon name="narrow" />
+          <span>Core set</span>
+        </button>
+      </div>
+    ) : undefined;
+
     const experience = (
       <div
         className="site-shell"
@@ -192,6 +231,7 @@ export function LabMachineWorld({
           canProcessZoomOut={false}
           canProcessZoomIn={false}
           surfaceLabel={sectionNode ? `Lab Machine · ${sectionNode.label}` : "Lab Machine"}
+          contextControls={resolutionControls}
           onHome={returnToMachine}
           onUp={returnToMachine}
           onBack={() => router.back()}
@@ -207,6 +247,9 @@ export function LabMachineWorld({
           <PhysicalMachineExperience
             showSchematic={showSchematic}
             initialResolution={section ? "mid" : "focus"}
+            resolution={machineResolution}
+            onResolutionChange={setMachineResolution}
+            showResolutionControls={Boolean(section)}
             sectionLabel={sectionNode?.label}
             sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} intermediateLayer={intermediateLayer} /> : undefined}
             onCloseSection={closeSection}

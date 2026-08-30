@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BfuxIcon, projectionGlyph } from "@/components/bfux-icons";
 import { type ContentNode } from "@/lib/content-registry";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
@@ -26,6 +26,7 @@ type BoundaryFrameProps = {
   canProcessZoomOut: boolean;
   canProcessZoomIn: boolean;
   surfaceLabel?: string;
+  contextControls?: ReactNode;
   onHome: () => void;
   onUp: () => void;
   onBack: () => void;
@@ -108,6 +109,7 @@ export function BoundaryFrame({
   canProcessZoomOut,
   canProcessZoomIn,
   surfaceLabel,
+  contextControls,
   onHome,
   onBack,
   onForward,
@@ -292,6 +294,8 @@ export function BoundaryFrame({
             <BfuxIcon name="inspect" />
             <span className="frame-tool__label">Search</span>
           </button>
+
+          {contextControls ? <div className="frame-context-controls">{contextControls}</div> : null}
 
           {onProjectionChange ? (
             <div

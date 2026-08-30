@@ -36,6 +36,9 @@ function writeStoredResolution(resolution: LabMachineResolution) {
 export function PhysicalMachineExperience({
   showSchematic = false,
   initialResolution = "focus",
+  resolution: controlledResolution,
+  onResolutionChange,
+  showResolutionControls = true,
   sectionLabel,
   sectionSurface,
   onCloseSection,
@@ -44,18 +47,23 @@ export function PhysicalMachineExperience({
 }: {
   showSchematic?: boolean;
   initialResolution?: LabMachineResolution;
+  resolution?: LabMachineResolution;
+  onResolutionChange?: (resolution: LabMachineResolution) => void;
+  showResolutionControls?: boolean;
   sectionLabel?: string;
   sectionSurface?: ReactNode;
   onCloseSection?: () => void;
   onOpenNode?: (nodeId: string) => void;
   onOpenCoreNode?: (nodeId: string) => void;
 }) {
-  const [resolution, setResolution] = useState<LabMachineResolution>(initialResolution);
+  const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
+  const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
 
   const rememberResolution = (nextResolution: LabMachineResolution) => {
-    setResolution(nextResolution);
+    if (controlledResolution === undefined) setInternalResolution(nextResolution);
+    onResolutionChange?.(nextResolution);
     writeStoredResolution(nextResolution);
   };
 
@@ -67,44 +75,47 @@ export function PhysicalMachineExperience({
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       const nextResolution = sectionLabel ? "mid" : readStoredResolution() ?? initialResolution;
-      setResolution(nextResolution);
+      if (controlledResolution === undefined) setInternalResolution(nextResolution);
+      onResolutionChange?.(nextResolution);
       writeStoredResolution(nextResolution);
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [initialResolution, sectionLabel]);
+  }, [initialResolution, onResolutionChange, sectionLabel]);
 
   return (
     <div className="physical-machine-experience">
-      <div className="world-machine-resolution" aria-label="Lab Machine resolution controls">
-        <span className="world-machine-resolution__label">
-          <small>LAB MACHINE</small>
-          <strong>{sectionLabel ? `${sectionLabel} · ${resolutionLabels[activeResolution]}` : resolutionLabels[activeResolution]}</strong>
-        </span>
-        <span className="world-machine-resolution__hint">Machine-local context</span>
-        <div className="world-machine-resolution__controls">
-          <button
-            type="button"
-            onClick={() => rememberResolution("mid")}
-            disabled={activeResolution === "mid"}
-            aria-label="Show the full Lab Machine loop"
-            title="Show the full Lab Machine loop"
-          >
-            <BfuxIcon name="widen" />
-            <span>Full loop</span>
-          </button>
-          <button
-            type="button"
-            onClick={narrowProcessContext}
-            disabled={activeResolution === "focus" && !sectionSurface}
-            aria-label="Narrow to the core Lab set"
-            title="Narrow to the core Lab set"
-          >
-            <BfuxIcon name="narrow" />
-            <span>Core set</span>
-          </button>
+      {showResolutionControls ? (
+        <div className="world-machine-resolution" aria-label="Lab Machine resolution controls">
+          <span className="world-machine-resolution__label">
+            <small>LAB MACHINE</small>
+            <strong>{sectionLabel ? `${sectionLabel} · ${resolutionLabels[activeResolution]}` : resolutionLabels[activeResolution]}</strong>
+          </span>
+          <span className="world-machine-resolution__hint">Machine-local context</span>
+          <div className="world-machine-resolution__controls">
+            <button
+              type="button"
+              onClick={() => rememberResolution("mid")}
+              disabled={activeResolution === "mid"}
+              aria-label="Show the full Lab Machine loop"
+              title="Show the full Lab Machine loop"
+            >
+              <BfuxIcon name="widen" />
+              <span>Full loop</span>
+            </button>
+            <button
+              type="button"
+              onClick={narrowProcessContext}
+              disabled={activeResolution === "focus" && !sectionSurface}
+              aria-label="Narrow to the core Lab set"
+              title="Narrow to the core Lab set"
+            >
+              <BfuxIcon name="narrow" />
+              <span>Core set</span>
+            </button>
+          </div>
         </div>
-      </div>
+      ) : null}
 
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
