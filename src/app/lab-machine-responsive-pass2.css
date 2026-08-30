@@ -1,0 +1,312 @@
+/*
+ * Responsive pass 2: compact the root navigation and tune the rack projection
+ * after the first fixed-canvas -> responsive reflow.
+ */
+
+@media (max-width: 1024px) {
+  .site-shell[data-root-focus="true"],
+  .site-shell[data-root-focus="true"] .world-machine-preview,
+  .site-shell[data-root-focus="true"] .world-machine-section {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .world-machine-section {
+    padding-inline: .45rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-machine-node-interactive="true"] {
+    transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-machine-node-interactive="true"]:active {
+    transform: translateY(1px);
+  }
+}
+
+@media (max-width: 760px) {
+  /* The root has no useful breadcrumb history. Give that space back to the views. */
+  .site-shell[data-root-focus="true"] {
+    --frame-top: 60px;
+  }
+
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    min-height: 60px;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    grid-template-rows: 60px !important;
+    gap: .4rem !important;
+    padding: 0 .45rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-home-tray {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    min-width: 0;
+    min-height: 42px;
+    padding: 2px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: stretch;
+    display: flex;
+    min-width: 0;
+    gap: .3rem;
+    overflow: hidden;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools > .frame-tool--inspect {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 42px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 3px !important;
+    overflow: hidden;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__label,
+  .site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__mode-purpose {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible button {
+    min-width: 0 !important;
+    min-height: 34px !important;
+    padding: .28rem .35rem !important;
+    grid-template-columns: 14px minmax(0, 1fr) !important;
+    gap: .28rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher__mode-name {
+    overflow: hidden;
+    font-size: .49rem !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Machine-local resolution is a compact touch control, not another header. */
+  .world-machine-resolution {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center !important;
+    gap: .4rem .65rem !important;
+    margin: .38rem .45rem .28rem !important;
+    padding: .45rem .5rem !important;
+  }
+
+  .world-machine-resolution__label {
+    min-width: 0 !important;
+  }
+
+  .world-machine-resolution__label strong {
+    overflow: hidden;
+    font-size: .78rem !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .world-machine-resolution__hint {
+    display: none !important;
+  }
+
+  .world-machine-resolution__controls {
+    display: grid !important;
+    grid-template-columns: repeat(2, auto);
+    gap: .3rem !important;
+  }
+
+  .world-machine-resolution__controls button {
+    min-height: 40px !important;
+    padding: .4rem .55rem !important;
+    touch-action: manipulation;
+  }
+
+  .world-machine-resolution__controls button span {
+    font-size: .48rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__board {
+    padding: .52rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    gap: .62rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node,
+  .bf-machine[data-skin="physical"] .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__face {
+    min-height: 0 !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary {
+    margin-bottom: .5rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node footer span {
+    min-width: 6.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-shell[data-root-focus="true"] .brand-anchor {
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+  }
+
+  .site-shell[data-root-focus="true"] .brand-anchor__mark {
+    width: 30px !important;
+    height: 30px !important;
+    flex-basis: 30px !important;
+  }
+
+  .world-machine-section {
+    padding-inline: .25rem;
+  }
+
+  .world-machine-resolution {
+    grid-template-columns: minmax(0, 1fr) !important;
+    margin-inline: .3rem !important;
+  }
+
+  .world-machine-resolution__controls {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .world-machine-resolution__controls button {
+    justify-content: center;
+  }
+
+  .bf-machine[data-skin="physical"] {
+    padding-inline: .25rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__board {
+    padding: .38rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    gap: .52rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__face,
+  .bf-machine[data-skin="physical"] .bf-machine-node--core .bf-machine-node__face {
+    grid-template-columns: 3.55rem minmax(0, 1fr) !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-plate,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+    margin: .52rem 0 .1rem .52rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__icon-well svg,
+  .bf-machine[data-skin="physical"] .bf-machine-node--conjoined .bf-machine-node__icon-well svg,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well svg {
+    width: 1.55rem !important;
+    height: 1.55rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node header,
+  .bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-node--conjoined header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] header {
+    padding: .55rem .55rem .35rem .3rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="service"] .bf-machine-node__boundary,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="public-value"] .bf-machine-node__boundary {
+    margin: 0 .5rem .5rem !important;
+    padding: .48rem .52rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node__boundary p {
+    font-size: .72rem !important;
+    line-height: 1.38 !important;
+  }
+
+  /* On phones keep the state and one compact register; the section page carries detail. */
+  .bf-machine[data-skin="physical"] .bf-machine-node footer span:nth-child(n+3) {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-node footer span {
+    flex: 1 1 50%;
+    min-width: 0 !important;
+    padding: .38rem .46rem !important;
+    font-size: .56rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend {
+    margin-top: .42rem !important;
+    padding: .48rem .55rem !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-shell[data-root-focus="true"] .projection-switcher--legible button {
+    grid-template-columns: 1fr !important;
+    place-items: center;
+    padding-inline: .2rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher__glyph {
+    display: none;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher__mode-name {
+    font-size: .48rem !important;
+  }
+
+  .world-machine-resolution__label small {
+    font-size: .4rem;
+  }
+
+  .world-machine-resolution__label strong {
+    font-size: .72rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend > div:not(.bf-machine__legend-actions) {
+    gap: .28rem !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend small {
+    display: none;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine__legend b {
+    font-size: .55rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-machine-node-interactive="true"] {
+    transition: none;
+  }
+}
