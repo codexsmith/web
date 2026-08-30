@@ -10,7 +10,6 @@ import { hydrateContentNode } from "@/lib/content-projections";
 import { getNode, getPathForNode } from "@/lib/content-registry";
 import { processScopes, type ProcessScope } from "@/lib/bfl-process";
 import type { ProjectionMode } from "@/lib/view-projection";
-import { LabMachine } from "./LabMachine";
 import { LabMachineAboutProjection } from "./LabMachineAboutProjection";
 import { LabMachineApplicationsProjection } from "./LabMachineApplicationsProjection";
 import { LabMachineDetailPanel } from "./LabMachineDetailPanel";
@@ -169,18 +168,54 @@ export function LabMachineWorld({
     };
 
     const experience = (
-      <main className="world-machine-preview">
-        <PhysicalMachineExperience
-          showSchematic={showSchematic}
-          initialResolution={section ? "mid" : "focus"}
-          sectionLabel={sectionNode?.label}
-          sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} intermediateLayer={intermediateLayer} /> : undefined}
-          onCloseSection={closeSection}
-          onOpenNode={openSection}
-          onOpenCoreNode={openCoreNode}
-          machinePath={machinePath}
+      <div
+        className="site-shell"
+        data-world-mode="world"
+        data-projection="world"
+        data-projection-intent="world"
+        data-projection-fallback="false"
+        data-ui-renderer="cards"
+        data-root-focus="true"
+        data-has-siblings="false"
+        data-show-traversal="false"
+      >
+        <BoundaryFrame
+          visible
+          focusNode={rootNode}
+          traversalPath={[rootNode]}
+          traversalCursor={0}
+          siblings={[]}
+          projection="world"
+          processScope={processScope}
+          canTraceBack={false}
+          canTraceForward={false}
+          canProcessZoomOut={false}
+          canProcessZoomIn={false}
+          surfaceLabel={sectionNode ? `Lab Machine · ${sectionNode.label}` : "Lab Machine"}
+          onHome={returnToMachine}
+          onUp={returnToMachine}
+          onBack={() => router.back()}
+          onForward={() => undefined}
+          onLocalNavigate={navigateAway}
+          onProcessZoomOut={() => undefined}
+          onProcessZoomIn={() => undefined}
+          onProjectionChange={changeProjection}
+          onSearch={() => setSearchOpen(true)}
         />
-      </main>
+
+        <main className="world-machine-preview">
+          <PhysicalMachineExperience
+            showSchematic={showSchematic}
+            initialResolution={section ? "mid" : "focus"}
+            sectionLabel={sectionNode?.label}
+            sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} intermediateLayer={intermediateLayer} /> : undefined}
+            onCloseSection={closeSection}
+            onOpenNode={openSection}
+            onOpenCoreNode={openCoreNode}
+          />
+        </main>
+        {searchOpen ? <SearchPanel onClose={() => setSearchOpen(false)} onNavigate={navigateAway} /> : null}
+      </div>
     );
 
     if (!intermediateLayer || !sectionNode) return experience;
@@ -233,6 +268,7 @@ export function LabMachineWorld({
         canTraceForward={false}
         canProcessZoomOut={canProcessZoomOut}
         canProcessZoomIn={canProcessZoomIn}
+        surfaceLabel="Lab Machine"
         onHome={returnToMachine}
         onUp={returnToMachine}
         onBack={() => section ? closeSection() : router.back()}

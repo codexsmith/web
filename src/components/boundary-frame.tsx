@@ -25,6 +25,7 @@ type BoundaryFrameProps = {
   canTraceForward: boolean;
   canProcessZoomOut: boolean;
   canProcessZoomIn: boolean;
+  surfaceLabel?: string;
   onHome: () => void;
   onUp: () => void;
   onBack: () => void;
@@ -106,6 +107,7 @@ export function BoundaryFrame({
   canTraceForward,
   canProcessZoomOut,
   canProcessZoomIn,
+  surfaceLabel,
   onHome,
   onBack,
   onForward,
@@ -213,6 +215,10 @@ export function BoundaryFrame({
             <span className="brand-anchor__mark" aria-hidden="true">
               <BfuxIcon name="root" />
             </span>
+            <span className="brand-anchor__copy">
+              <span className="brand-anchor__name">Boundary First Labs</span>
+              <span className="brand-anchor__mode">Public systems lab</span>
+            </span>
           </button>
 
           {hasTrace ? (
@@ -247,6 +253,9 @@ export function BoundaryFrame({
             {displayTrace.map(({ node, index }, displayIndex) => {
               const isCurrent = index === traversalCursor;
               const isRootStep = node.id === "root";
+              const currentLabel = isRootFocus && surfaceLabel
+                ? surfaceLabel
+                : node.shortLabel ?? node.label;
 
               return (
                 <li key={`${node.id}-${index}`}>
@@ -254,7 +263,7 @@ export function BoundaryFrame({
                   {isCurrent ? (
                     <span className="frame-trace-path__node frame-trace-path__node--current" aria-current="page">
                       <small className="path-node__role">Focus · You are here</small>
-                      <strong>{node.shortLabel ?? node.label}</strong>
+                      <strong>{currentLabel}</strong>
                     </span>
                   ) : isRootStep ? (
                     <span className="frame-trace-path__root-step" title="Lab root traversal step" aria-label="Lab root traversal step">
