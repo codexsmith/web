@@ -217,10 +217,6 @@ export function BoundaryFrame({
             <span className="brand-anchor__mark" aria-hidden="true">
               <BfuxIcon name="root" />
             </span>
-            <span className="brand-anchor__copy">
-              <span className="brand-anchor__name">Boundary First Labs</span>
-              <span className="brand-anchor__mode">Public systems lab</span>
-            </span>
           </button>
 
           {hasTrace ? (
