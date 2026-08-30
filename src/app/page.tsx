@@ -6,6 +6,7 @@ import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import "./world/world-machine-preview.css";
 import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
+import "./lab-machine-frame-polish.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },

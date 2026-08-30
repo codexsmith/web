@@ -1,0 +1,196 @@
+/* Production Lab Machine frame polish.
+   The homepage frame is an instrument cluster: icon-only home, one location readout,
+   one search control, and a bounded three-mode view switcher. */
+
+.site-shell[data-root-focus="true"] .brand-anchor__copy {
+  display: none !important;
+}
+
+.site-shell[data-root-focus="true"] .boundary-frame__top {
+  grid-template-columns: 48px minmax(180px, 1fr) minmax(430px, 620px) !important;
+  gap: .55rem !important;
+  padding-inline: .55rem !important;
+}
+
+.site-shell[data-root-focus="true"] .frame-home-tray {
+  width: 44px;
+  min-width: 44px;
+  max-width: 44px;
+  min-height: 44px;
+  justify-self: start;
+  padding: 3px !important;
+}
+
+.site-shell[data-root-focus="true"] .brand-anchor {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  padding: 2px !important;
+}
+
+.site-shell[data-root-focus="true"] .brand-anchor__mark {
+  width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path {
+  min-width: 0;
+  max-width: 520px;
+  justify-self: start;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path > ol {
+  justify-content: flex-start;
+  padding-inline: .2rem .4rem !important;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path__node--current {
+  max-width: 260px;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path__node--current small {
+  display: none;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path__node--current strong {
+  max-width: 240px;
+  font-size: .72rem;
+}
+
+.site-shell[data-root-focus="true"] .frame-tools {
+  width: 100%;
+  min-width: 0;
+  justify-self: end;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: .35rem;
+}
+
+.site-shell[data-root-focus="true"] .frame-tools > .frame-tool--inspect {
+  width: 42px;
+  height: 42px;
+  min-width: 42px !important;
+  min-height: 42px !important;
+}
+
+.site-shell[data-root-focus="true"] .projection-switcher--legible {
+  min-width: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto repeat(3, minmax(0, 1fr));
+  gap: 3px !important;
+}
+
+.site-shell[data-root-focus="true"] .projection-switcher--legible button {
+  min-width: 0 !important;
+}
+
+.site-shell[data-root-focus="true"] .projection-switcher__copy,
+.site-shell[data-root-focus="true"] .projection-switcher__mode-name,
+.site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+  min-width: 0;
+}
+
+@media (max-width: 1280px) {
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 48px minmax(150px, 1fr) minmax(380px, 560px) !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__label,
+  .site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 44px minmax(110px, 1fr) minmax(330px, 1.6fr) !important;
+    gap: .4rem !important;
+    padding-inline: .4rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-home-tray {
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+  }
+
+  .site-shell[data-root-focus="true"] .brand-anchor {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+  }
+
+  .site-shell[data-root-focus="true"] .brand-anchor__mark {
+    width: 28px !important;
+    height: 28px !important;
+    flex-basis: 28px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path__node--current {
+    padding-inline: 7px;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path__node--current strong {
+    max-width: 150px;
+    font-size: .64rem;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools > .frame-tool--inspect {
+    width: 40px;
+    height: 40px;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 40px minmax(0, 1fr) !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools {
+    grid-column: 2;
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 36px minmax(0, 1fr) !important;
+    gap: .28rem !important;
+    padding-inline: .3rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-home-tray {
+    width: 36px;
+    min-width: 36px;
+    max-width: 36px;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: .22rem;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools > .frame-tool--inspect {
+    width: 36px;
+    height: 36px;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+}
