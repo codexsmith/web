@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { parseProjection } from "@/lib/view-projection";
+import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import "./world-machine-preview.css";
 
@@ -30,11 +31,13 @@ export default async function WorldPage({ searchParams }: Props) {
   const processScope = parseProcessScope(one(query.scope)) ?? "full";
 
   return (
-    <LabMachineWorld
-      section={section}
-      initialProjection={projection}
-      initialProcessScope={processScope}
-      showSchematic={one(query.schematic) === "1"}
-    />
+    <LabMachineHomeBoundary resetTraversal={!section && projection === "world"}>
+      <LabMachineWorld
+        section={section}
+        initialProjection={projection}
+        initialProcessScope={processScope}
+        showSchematic={one(query.schematic) === "1"}
+      />
+    </LabMachineHomeBoundary>
   );
 }
