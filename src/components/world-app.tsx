@@ -141,7 +141,7 @@ function readTraversalMemory(): TraversalState {
     if (stored) {
       const parsed = JSON.parse(stored);
       if (Array.isArray(parsed.ids)) {
-        ids = parsed.ids.filter((id): id is string => typeof id === "string");
+        ids = parsed.ids.filter((id: unknown): id is string => typeof id === "string");
         cursor = parsed.cursor;
       }
     }
