@@ -25,7 +25,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   /* The root has no useful breadcrumb history. Give that space back to the views. */
   .site-shell[data-root-focus="true"] {
     --frame-top: 60px;
@@ -251,9 +251,9 @@
     line-height: 1.38 !important;
   }
 
-  /* On phones keep the state and one compact register; the section page carries detail. */
+  /* On phones, flex the footer registers to wrap smoothly so data is preserved. */
   .bf-machine[data-skin="physical"] .bf-machine-node footer span:nth-child(n+3) {
-    display: none !important;
+    /* Kept visible for full context */
   }
 
   .bf-machine[data-skin="physical"] .bf-machine-node footer span {
@@ -265,15 +265,15 @@
 
   .bf-machine[data-skin="physical"] .bf-machine__legend {
     margin-top: .42rem !important;
-    padding: .48rem .55rem !important;
+    padding: .48rem .55rem .48rem .75rem !important;
   }
 }
 
 @media (max-width: 430px) {
   .site-shell[data-root-focus="true"] .projection-switcher--legible button {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     place-items: center;
-    padding-inline: .2rem !important;
+    padding-inline: .15rem !important;
   }
 
   .site-shell[data-root-focus="true"] .projection-switcher__glyph {
