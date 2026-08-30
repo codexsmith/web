@@ -4,6 +4,7 @@ import { parseProjection } from "@/lib/view-projection";
 import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import "./world/world-machine-preview.css";
+import "./lab-machine-responsive.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },
