@@ -211,7 +211,7 @@ export function LabMachineWorld({
 
     const computedTraversalPath = [rootNode];
     if (sectionNode) {
-      computedTraversalPath.push(sectionNode);
+      computedTraversalPath.push(sectionNode as any);
       navigationTrail.forEach((step) => {
         const node = getLabMachineNode(step.to);
         if (node) computedTraversalPath.push(node as any);
