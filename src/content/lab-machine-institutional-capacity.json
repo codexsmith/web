@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "working institutional-capacity projection seed",
+  "purpose": "Represent Boundary First Labs' formation-stage institutional capacity, the constraints governing responsible expansion, the roots required to support new branches of work, and the measurable objectives by which a founder-built laboratory can become a durable institution without implying maturity it has not earned.",
+  "posture": "Capacity is not the same as size. This object describes declared institutional doctrine and formation targets; it does not imply a staffed institute, independent multi-person governance, broad external validation, self-sufficient stewardship, or durable succession where those conditions have not yet been established.",
+  "identityRelation": {
+    "institution": "Boundary First Labs",
+    "labMeaning": "Laboratory describes the operating culture: build, test, formalize, pilot, criticize, revise, and repair.",
+    "instituteMeaning": "Institute describes the durable capacity being built: stewardship, criticism, continuity, maintenance, training, public legibility, and institutional memory.",
+    "candidateDescriptor": "A public-interest research institute organized as a laboratory.",
+    "descriptorStatus": "candidate capital/institutional projection; do not silently replace the canonical About identity"
+  },
+  "governingDoctrine": {
+    "primary": "Capacity before expansion.",
+    "growthDefinition": "Growth asks how much larger a system has become.",
+    "capacityDefinition": "Capacity asks what the system can responsibly hold, understand, coordinate, represent, maintain, repair, govern, teach, preserve, transfer, and sustain.",
+    "sufficiencyRule": "Sufficiency is a legitimate success state; the institution must preserve the ability to stop, narrow, retire, transfer, or refuse expansion when additional scale weakens coherent capacity.",
+    "accountabilityRule": "No expansion without accountability; the ability to explain, contest, repair, suspend, or reverse consequential action must scale with power.",
+    "rootRule": "No new branch without roots capable of supporting it."
+  },
+  "formationState": {
+    "standing": "formation-stage founder-led laboratory",
+    "presentAssets": [
+      "substantial research corpus",
+      "formal and operational methods",
+      "software and prototype programs",
+      "provenance and claim-governance machinery",
+      "public-value and evidence models",
+      "experimental and witness-domain portfolio",
+      "publication and distribution pathways",
+      "public institutional interface"
+    ],
+    "notYetEstablishedAtTargetLevel": [
+      "independent multi-person governance",
+      "self-sufficient stewardship across the portfolio",
+      "broad external validation",
+      "durable institutional succession",
+      "independent operation of every bounded capability without founder mediation"
+    ],
+    "institutionalizationThesis": "The work has become too interconnected to be responsibly represented as a collection of founder projects. The institutional layer exists to preserve unity while separating claims, invite criticism, maintain what crosses into consequence, and create continuity beyond the founder."
+  },
+  "capacityDimensions": [
+    {
+      "id": "hold",
+      "label": "Hold",
+      "question": "Can the institution take responsibility for additional work without losing its identity, dependencies, evidence, or maintenance obligations?"
+    },
+    {
+      "id": "understand",
+      "label": "Understand",
+      "question": "Can the institution preserve enough context to reason about the work rather than merely accumulate it?"
+    },
+    {
+      "id": "coordinate",
+      "label": "Coordinate",
+      "question": "Can roles, dependencies, authority, and work states remain legible as more actors or programs participate?"
+    },
+    {
+      "id": "represent",
+      "label": "Represent",
+      "question": "Can consequential distinctions, affected parties, assumptions, evidence, and exclusions remain visible?"
+    },
+    {
+      "id": "maintain",
+      "label": "Maintain",
+      "question": "Can released work remain owned, current, supported, or explicitly retired?"
+    },
+    {
+      "id": "repair",
+      "label": "Repair",
+      "question": "Can defects reopen work, propagate to dependents, and reach a witnessed correction rather than being hidden?"
+    },
+    {
+      "id": "govern",
+      "label": "Govern",
+      "question": "Can authority, review, promotion, release, contestation, and responsibility remain attributable?"
+    },
+    {
+      "id": "teach",
+      "label": "Teach",
+      "question": "Can useful practice be learned without requiring private founder interpretation?"
+    },
+    {
+      "id": "preserve",
+      "label": "Preserve",
+      "question": "Can provenance, contradictions, negative results, replacement history, and institutional memory survive change?"
+    },
+    {
+      "id": "transfer",
+      "label": "Transfer",
+      "question": "Can capability leave the Lab while preserving identity, claim ceiling, uncertainty, authority boundaries, and repair paths?"
+    },
+    {
+      "id": "sustain",
+      "label": "Sustain",
+      "question": "Can the capability continue through time, staff change, funding change, criticism, and maintenance without becoming orphaned?"
+    }
+  ],
+  "branchRootContracts": [
+    {
+      "id": "research-program",
+      "branch": "New research program",
+      "roots": ["provenance", "question and claim register", "domain-appropriate evidence standard", "criticism/reviewer path", "negative-result retention", "publication or closeout path"],
+      "failureIfMissing": "The portfolio grows while claims, contradictions, and unresolved obligations become harder to reconstruct."
+    },
+    {
+      "id": "product",
+      "branch": "New product or maintained software capability",
+      "roots": ["declared user/task boundary", "protected invariants", "maintenance owner", "support or incident route", "versioning", "retirement or transfer path"],
+      "failureIfMissing": "Release creates orphan infrastructure or hidden human maintenance load."
+    },
+    {
+      "id": "partnership",
+      "branch": "New partnership or collaboration",
+      "roots": ["comparative advantage", "relationship scope", "authority boundaries", "attribution/provenance", "expectation management", "repair or exit path"],
+      "failureIfMissing": "Association or borrowed legitimacy substitutes for a lawful working relationship."
+    },
+    {
+      "id": "public-claim",
+      "branch": "New public claim",
+      "roots": ["source and evidence", "claim type", "maturity", "claim ceiling", "correction/supersession route", "named responsibility"],
+      "failureIfMissing": "Visibility or rhetoric silently manufactures authority."
+    },
+    {
+      "id": "agent-automation",
+      "branch": "New agent or automation",
+      "roots": ["authorization boundary", "observability", "suspension/kill path", "result review", "responsibility", "repair path"],
+      "failureIfMissing": "Execution power scales faster than accountability."
+    },
+    {
+      "id": "standard-method",
+      "branch": "New standard, method, or professional practice",
+      "roots": ["versioned canonical source", "scope and intended audience", "evidence posture", "conformance or reuse witness", "stewardship", "correction path"],
+      "failureIfMissing": "A teachable vocabulary spreads faster than the discipline needed to use it responsibly."
+    },
+    {
+      "id": "public-record",
+      "branch": "New public dataset, record, or evidence surface",
+      "roots": ["provenance", "update policy", "maintenance owner", "uncertainty", "affected-party correction path", "archive/supersession behavior"],
+      "failureIfMissing": "A public representation becomes stale while retaining the appearance of authority."
+    }
+  ],
+  "institutionalObjectives": [
+    {
+      "id": "GOAL-001",
+      "label": "Legible public institutional frame",
+      "outcome": "A reader can understand founder, work, institution, and why the institution is necessary without mistaking biography for proof.",
+      "measures": ["institutional essay externally reviewed", "two-page overview", "stable message house", "core architecture described consistently"],
+      "capitalCategoryIds": ["institutional", "distribution"],
+      "websiteWitness": ["five-minute case", "stable identity language", "visible founder/work/institution distinction"]
+    },
+    {
+      "id": "GOAL-002",
+      "label": "Bounded witness-domain tests",
+      "outcome": "At least two witness domains have concrete pilot designs with domain-appropriate evidence standards.",
+      "measures": ["two approved pilot charters", "domain reviewer per active pilot", "explicit success and failure criteria", "closeout artifacts planned before launch"],
+      "capitalCategoryIds": ["research", "validation"],
+      "websiteWitness": ["pilot charter", "success/failure criteria", "reviewer role", "closeout state"]
+    },
+    {
+      "id": "GOAL-003",
+      "label": "Credible partnership pipeline",
+      "outcome": "The Lab can approach collaborators with researched, respectful, bounded proposals without inflated relationship language.",
+      "measures": ["five partner dossiers", "five tailored outreach drafts", "at least three approved contacts", "interactions recorded with typed standing"],
+      "capitalCategoryIds": ["institutional", "distribution", "validation"],
+      "websiteWitness": ["relationship types", "standing", "comparative advantage", "no implied endorsement"]
+    },
+    {
+      "id": "GOAL-004",
+      "label": "Claim and evidence firewall",
+      "outcome": "Public claims remain coupled to sources, evidence, operating domain, maturity, and failure conditions.",
+      "measures": ["claim register active", "public artifacts carry claim ceilings", "external facts verified before release", "contradictions and negative results preserved"],
+      "capitalCategoryIds": ["research", "validation", "institutional"],
+      "websiteWitness": ["evidence state", "claim ceiling", "source route", "negative-result state"]
+    },
+    {
+      "id": "GOAL-005",
+      "label": "Institutional repairability",
+      "outcome": "The Lab can correct, pause, retire, or transfer work without losing provenance.",
+      "measures": ["decision/risk/contradiction/correction processes", "pilot termination paths", "released artifact stewards", "stable operational files updated in place"],
+      "capitalCategoryIds": ["institutional", "engineering", "distribution"],
+      "websiteWitness": ["repair owner", "termination path", "supersession history", "maintenance state"]
+    },
+    {
+      "id": "GOAL-006",
+      "label": "Reduce founder dependence without erasing provenance",
+      "outcome": "External reviewers and collaborators can understand, criticize, and continue bounded work without requiring the founder to personally mediate every distinction.",
+      "measures": ["repeatable templates and gates", "domain reviewers assigned", "at least one process executed by another person", "institutional responsibilities separated from founder biography"],
+      "capitalCategoryIds": ["institutional", "distribution", "validation"],
+      "websiteWitness": ["typed roles", "independent operation witness", "founder provenance remains attributable"]
+    },
+    {
+      "id": "GOAL-007",
+      "label": "Export laboratory capability safely",
+      "outcome": "A bounded expert or research practice becomes reusable outside the Lab without losing invariants, provenance, uncertainty, authority boundaries, or repair conditions.",
+      "measures": ["capability-export pilot", "protected invariants and non-exportable elements declared", "instrument exposes provenance/uncertainty/admissibility/escalation", "independent users operate without hidden founder interpretation", "failures route into repair", "review states what survived compression"],
+      "capitalCategoryIds": ["engineering", "distribution", "validation", "institutional"],
+      "websiteWitness": ["export contract", "reuse witness", "independence test", "repair path"]
+    }
+  ],
+  "adoptionMaturity": [
+    {"level": 1, "id": "public-literacy", "label": "Public literacy", "standing": "teach concepts through essays, glossary, examples, and introductory materials"},
+    {"level": 2, "id": "practitioner-method", "label": "Practitioner method", "standing": "field guides, worksheets, cards, checklists, workshops, and usable method packages"},
+    {"level": 3, "id": "trained-practitioner", "label": "Trained practitioner", "standing": "demonstrated bounded ability to apply the method"},
+    {"level": 4, "id": "certified-practitioner", "label": "Certified practitioner", "standing": "future state requiring explicit competence criteria and evidence"},
+    {"level": 5, "id": "certified-implementation", "label": "Certified implementation", "standing": "future state requiring reviewed system criteria and authority"},
+    {"level": 6, "id": "certified-partner", "label": "Certified partner", "standing": "future state requiring quality controls and explicit authorization"},
+    {"level": 7, "id": "reference-practice", "label": "BFL reference practice", "standing": "frontier or high-consequence work performed or directly supervised by the Lab when the necessary capacity exists"}
+  ],
+  "collaborationDoctrine": {
+    "principle": "Collaborate where there is a genuine division of comparative advantage.",
+    "questions": [
+      "What does Boundary First Labs bring that the collaborator does not already have?",
+      "What does the collaborator bring that Boundary First Labs cannot or should not build alone?",
+      "What is the smallest relationship that allows the work to encounter the strongest relevant reality?"
+    ],
+    "possibleInputs": ["domain authority", "practical experience", "implementation capacity", "distribution", "infrastructure", "institutional access", "capital", "stewardship"],
+    "possibleForms": ["expert review", "advisory participation", "co-development", "licensing", "publication", "investment", "acquisition", "distribution", "institutional sponsorship", "transfer of stewardship"],
+    "claimBoundary": "A proposed relationship is not a partnership, endorsement, investment, or affiliation until it actually exists and its scope is known."
+  },
+  "sourceRefs": [
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/03_The_Institute.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/05_Collaboration_Doctrine.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/06_Institutional_Objectives.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/08_lab_ethos_and_strategy__foundation/02_institutional_scope_and_stewardship__strategy.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/08_lab_ethos_and_strategy__foundation/03_growth_capacity_and_sufficiency__institutional_doctrine.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/08_lab_ethos_and_strategy__foundation/04_claim_boundaries__governance.md",
+    "web: src/content/lab-machine-about.json",
+    "web: src/content/lab-machine-governance.json",
+    "web: src/content/lab-machine-public-value.json",
+    "web: src/content/lab-machine-service.json"
+  ],
+  "claimFirewall": "This object may describe declared institutional doctrine, present assets, formation-stage gaps, and measurable objectives. It may not imply independent governance, staffing, external validation, certified practice, partner standing, or institutional maturity beyond the evidence carried by the corresponding governed objects."
+}
