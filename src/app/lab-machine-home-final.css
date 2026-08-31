@@ -124,10 +124,10 @@
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
   display: flex !important;
   align-items: stretch;
-  gap: 4px !important;
+  gap: 3px !important;
   min-width: 0;
   min-height: 42px;
-  padding: 4px !important;
+  padding: 3px !important;
 }
 
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
@@ -143,6 +143,7 @@
   flex: 0 0 auto;
   width: auto !important;
   min-width: 0;
+  justify-self: end;
   min-height: 42px;
   display: grid !important;
   grid-template-columns: auto auto auto auto !important;

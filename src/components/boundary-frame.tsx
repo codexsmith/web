@@ -291,8 +291,6 @@ export function BoundaryFrame({
             <span className="frame-tool__label">Search</span>
           </button>
 
-          {contextControls ? <div className="frame-context-controls">{contextControls}</div> : null}
-
           {onProjectionChange ? (
             <div
               className="projection-switcher projection-switcher--legible"
@@ -354,6 +352,8 @@ export function BoundaryFrame({
               </button>
             </div>
           ) : null}
+
+          {contextControls ? <div className="frame-context-controls">{contextControls}</div> : null}
         </div>
       </header>
 

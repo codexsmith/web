@@ -130,6 +130,10 @@ body[data-ui-shell="cards"] .frame-tools > .frame-process-zoom {
   order: 3;
 }
 
+body[data-ui-shell="cards"] .frame-tools > .frame-context-controls {
+  order: 4;
+}
+
 /* Retire the older breadcrumb/rail connector experiments. */
 body[data-ui-shell="cards"] .brand-anchor__mark::before,
 body[data-ui-shell="cards"] .brand-anchor__mark::after,
