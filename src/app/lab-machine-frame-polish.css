@@ -74,7 +74,7 @@
   min-height: 42px !important;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher--legible {
+.site-shell .projection-switcher--legible {
   min-width: 0;
   width: 100%;
   display: grid;
@@ -82,13 +82,13 @@
   gap: 3px !important;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher--legible button {
+.site-shell .projection-switcher--legible button {
   min-width: 0 !important;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher__copy,
-.site-shell[data-root-focus="true"] .projection-switcher__mode-name,
-.site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+.site-shell .projection-switcher__copy,
+.site-shell .projection-switcher__mode-name,
+.site-shell .projection-switcher__mode-purpose {
   min-width: 0;
 }
 
@@ -97,13 +97,9 @@
     grid-template-columns: 48px minmax(150px, 1fr) minmax(380px, 560px) !important;
   }
 
-  .site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__label,
-  .site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+  .site-shell .projection-switcher--legible .projection-switcher__label,
+  .site-shell .projection-switcher__mode-purpose {
     display: none !important;
-  }
-
-  .site-shell[data-root-focus="true"] .projection-switcher--legible {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

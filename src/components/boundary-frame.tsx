@@ -364,10 +364,7 @@ export function BoundaryFrame({
           data-apparatus-sections="true"
         >
           <nav className="trace-nav apparatus-nav traversal-nav boundary-neighborhood-nav" aria-label={`Local relational neighborhood for ${focusNode.label}`}>
-            <header className="apparatus-nav__header traversal-nav__header">
-              <BfuxIcon name="peer" />
-              <strong>Adjacent</strong>
-            </header>
+
 
             <div className="traversal-nav__flow">
               <section className="traversal-nav__next" aria-label="Adjacent nodes">

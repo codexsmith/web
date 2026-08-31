@@ -125,6 +125,9 @@ export function LabMachineWorld({
     } catch {
       // Resolution remains functional when browser storage is unavailable.
     }
+    if (nextResolution === "focus" && section) {
+      router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
+    }
   };
 
   const closeSection = () => router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
@@ -181,7 +184,7 @@ export function LabMachineWorld({
       router.push(machineUrl(machinePath, "world", "full", navigationFocusId), { scroll: false });
     };
 
-    const resolutionControls = !section ? (
+    const resolutionControls = (
       <div className="lab-machine-frame-zoom" role="group" aria-label="Lab Machine resolution">
         <button
           type="button"
@@ -204,7 +207,18 @@ export function LabMachineWorld({
           <span>Core set</span>
         </button>
       </div>
-    ) : undefined;
+    );
+
+    const computedTraversalPath = [rootNode];
+    if (sectionNode) {
+      computedTraversalPath.push(sectionNode);
+      navigationTrail.forEach((step) => {
+        const node = getLabMachineNode(step.to);
+        if (node) computedTraversalPath.push(node as any);
+      });
+    }
+    const currentCursor = computedTraversalPath.length - 1;
+    const currentFocus = computedTraversalPath[currentCursor];
 
     const experience = (
       <div
@@ -220,26 +234,26 @@ export function LabMachineWorld({
       >
         <BoundaryFrame
           visible
-          focusNode={rootNode}
-          traversalPath={[rootNode]}
-          traversalCursor={0}
+          focusNode={currentFocus}
+          traversalPath={computedTraversalPath}
+          traversalCursor={currentCursor}
           siblings={[]}
           projection="world"
           processScope={processScope}
-          canTraceBack={false}
+          canTraceBack={currentCursor > 0}
           canTraceForward={false}
           canProcessZoomOut={false}
           canProcessZoomIn={false}
-          surfaceLabel={sectionNode ? `Lab Machine · ${sectionNode.label}` : "Lab Machine"}
+          surfaceLabel="Lab Machine"
           contextControls={resolutionControls}
           onHome={returnToMachine}
           onUp={returnToMachine}
-          onBack={() => router.back()}
+          onBack={currentCursor > 1 ? rewind : returnToMachine}
           onForward={() => undefined}
           onLocalNavigate={navigateAway}
           onProcessZoomOut={() => undefined}
           onProcessZoomIn={() => undefined}
-          onProjectionChange={changeProjection}
+          onProjectionChange={machineResolution === "mid" ? undefined : changeProjection}
           onSearch={() => setSearchOpen(true)}
         />
 

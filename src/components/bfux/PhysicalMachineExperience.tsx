@@ -85,37 +85,7 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience">
-      {showResolutionControls ? (
-        <div className="world-machine-resolution" aria-label="Lab Machine resolution controls">
-          <span className="world-machine-resolution__label">
-            <small>LAB MACHINE</small>
-            <strong>{sectionLabel ? `${sectionLabel} · ${resolutionLabels[activeResolution]}` : resolutionLabels[activeResolution]}</strong>
-          </span>
-          <span className="world-machine-resolution__hint">Machine-local context</span>
-          <div className="world-machine-resolution__controls">
-            <button
-              type="button"
-              onClick={() => rememberResolution("mid")}
-              disabled={activeResolution === "mid"}
-              aria-label="Show the full Lab Machine loop"
-              title="Show the full Lab Machine loop"
-            >
-              <BfuxIcon name="widen" />
-              <span>Full loop</span>
-            </button>
-            <button
-              type="button"
-              onClick={narrowProcessContext}
-              disabled={activeResolution === "focus" && !sectionSurface}
-              aria-label="Narrow to the core Lab set"
-              title="Narrow to the core Lab set"
-            >
-              <BfuxIcon name="narrow" />
-              <span>Core set</span>
-            </button>
-          </div>
-        </div>
-      ) : null}
+
 
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>

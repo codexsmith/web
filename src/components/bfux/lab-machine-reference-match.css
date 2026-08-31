@@ -620,31 +620,30 @@
   visibility: visible;
   pointer-events: auto;
 }
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="people"] {
+  left: 5%; top: 7%; width: 28%; height: 41.5%;
+}
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="products"] {
-  left: 6%; top: 7%; width: 22%; height: 32%;
+  left: 36%; top: 7%; width: 28%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="publications"] {
-  left: 34%; top: 7%; width: 22%; height: 32%;
-}
-.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="research"] {
-  left: 28%; top: 48%; width: 36%; height: 42%;
+  left: 67%; top: 7%; width: 28%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="about"] {
-  left: 72%; top: 7%; width: 22%; height: 32%;
+  left: 5%; top: 51.5%; width: 28%; height: 41.5%;
 }
-.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="public-value"] {
-  left: 72%; top: 52%; width: 22%; height: 30%;
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="research"] {
+  left: 36%; top: 51.5%; width: 59%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__cable {
   opacity: 0;
   transition: opacity 160ms ease;
 }
-.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__cable[data-from="about"][data-to="research"],
-.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__cable[data-from="people"][data-to="research"],
-.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__cable[data-from="research"][data-to="products"],
-.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__cable[data-from="research"][data-to="publications"],
-.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__cable--focus-public {
-  opacity: 1;
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node__ports,
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node__lower-dock,
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node__research-governance-dock,
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node__governance-top-dock {
+  display: none !important;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="public-value"] header {
   min-height: 4.036vw;
@@ -927,19 +926,19 @@
 .bf-machine[data-skin="physical"] .bf-machine__status dd { font-size: calc(var(--machine-u) * .88); }
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="people"] {
-  left: 5%; top: 8%; width: 21%; height: 34%;
+  left: 5%; top: 7%; width: 28%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="products"] {
-  left: 34%; top: 8%; width: 23%; height: 34%;
+  left: 36%; top: 7%; width: 28%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="publications"] {
-  left: 59%; top: 8%; width: 24%; height: 34%;
+  left: 67%; top: 7%; width: 28%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="about"] {
-  left: 5%; top: 56%; width: 21%; height: 35%;
+  left: 5%; top: 51.5%; width: 28%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="research"] {
-  left: calc(26% + var(--adjacency-bay)); top: 52%; width: 48%; height: 43%;
+  left: 36%; top: 51.5%; width: 59%; height: 41.5%;
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node__icon-plate {
   left: calc(var(--machine-u) * 1.25);
@@ -958,13 +957,18 @@
   font-size: calc(var(--machine-u) * 2.2);
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate {
-  left: calc(var(--machine-u) * 4);
-  top: calc(var(--machine-u) * 4.2);
-  width: calc(var(--machine-u) * 12);
-  height: calc(var(--machine-u) * 12);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(var(--machine-u) * 15);
+  height: calc(var(--machine-u) * 15);
+}
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well svg {
+  width: calc(var(--machine-u) * 6);
+  height: calc(var(--machine-u) * 6);
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="research"] header {
-  padding-left: calc(var(--machine-u) * 19.5);
+  padding-left: calc(var(--machine-u) * 2);
 }
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="research"] header span {
   font-size: calc(var(--machine-u) * .95);

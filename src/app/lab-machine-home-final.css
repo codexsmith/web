@@ -139,41 +139,41 @@
   padding: .3rem .52rem !important;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher--legible {
-  flex: 0 1 520px;
-  width: min(520px, 42vw) !important;
-  min-width: 300px;
+.site-shell .projection-switcher--legible {
+  flex: 0 0 auto;
+  width: auto !important;
+  min-width: 0;
   min-height: 42px;
   display: grid !important;
-  grid-template-columns: 42px repeat(3, minmax(0, 1fr)) !important;
+  grid-template-columns: auto auto auto auto !important;
   gap: 3px !important;
   padding: 3px !important;
   overflow: hidden;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__label {
+.site-shell .projection-switcher--legible .projection-switcher__label {
   min-width: 0;
   width: auto;
   padding-inline: .25rem;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher--legible button {
+.site-shell .projection-switcher--legible button {
   min-width: 0 !important;
   min-height: 34px !important;
   padding: .28rem .42rem !important;
   overflow: hidden;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher__copy,
-.site-shell[data-root-focus="true"] .projection-switcher__mode-name,
-.site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+.site-shell .projection-switcher__copy,
+.site-shell .projection-switcher__mode-name,
+.site-shell .projection-switcher__mode-purpose {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.site-shell[data-root-focus="true"] .projection-switcher__mode-name,
-.site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+.site-shell .projection-switcher__mode-name,
+.site-shell .projection-switcher__mode-purpose {
   white-space: nowrap;
 }
 
@@ -202,15 +202,8 @@
 }
 
 @media (max-width: 1500px) {
-  .site-shell[data-root-focus="true"] .projection-switcher--legible {
-    flex-basis: 430px;
-    width: min(430px, 39vw) !important;
-    min-width: 280px;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  }
-
-  .site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__label,
-  .site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+  .site-shell .projection-switcher--legible .projection-switcher__label,
+  .site-shell .projection-switcher__mode-purpose {
     display: none !important;
   }
 }
@@ -253,11 +246,6 @@
     padding-inline: .4rem !important;
   }
 
-  .site-shell[data-root-focus="true"] .projection-switcher--legible {
-    flex-basis: 340px;
-    width: min(340px, 35vw) !important;
-    min-width: 250px;
-  }
 }
 
 @media (max-width: 900px) {
@@ -276,10 +264,9 @@
     gap: 6px !important;
   }
 
-  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+  .site-shell .projection-switcher--legible {
     flex: 1 1 auto;
     width: auto !important;
-    min-width: 210px;
   }
 }
 
@@ -351,13 +338,13 @@
     white-space: nowrap;
   }
 
-  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+  .site-shell .projection-switcher--legible {
     min-width: 0;
     min-height: 38px;
     padding: 2px !important;
   }
 
-  .site-shell[data-root-focus="true"] .projection-switcher--legible button {
+  .site-shell .projection-switcher--legible button {
     min-height: 32px !important;
     grid-template-columns: minmax(0, 1fr) !important;
     place-items: center;
