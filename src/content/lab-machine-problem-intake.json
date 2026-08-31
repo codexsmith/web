@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "working difficult-system intake projection seed",
+  "purpose": "Provide a first-class invitation for people and institutions to bring Boundary First Labs a complicated, overloaded, brittle, opaque, exception-ridden, or consequence-bearing system without requiring them to first know which Lab method, product, service, or research program applies.",
+  "posture": "This is a bounded problem-intake interface, not a claim that Boundary First Labs can solve every problem or possesses domain authority in every field. A successful intake may route to reconstruction, audit, build, validation, governance, partnership, referral, or stop.",
+  "title": "Bring Us Your Difficult System",
+  "apparatusLabel": "PROBLEM INPUT",
+  "hero": {
+    "eyebrow": "Difficult system intake",
+    "headline": "Bring us your difficult system.",
+    "body": "Overloaded, brittle, opaque, exception-ridden, or consequence-bearing is fine. You do not need to translate the problem into Boundary First vocabulary first. Start with what is happening, what keeps breaking, and what you cannot afford to lose.",
+    "cta": "Bring us the system",
+    "secondary": "Before we prescribe a solution, let's make sure we are solving the right system."
+  },
+  "coreInvitation": {
+    "statement": "Bring us your complicated problem. Bring us the overloaded system. Let's make it legible enough to repair.",
+    "promise": "Help reconstruct the system well enough to decide what kind of problem it is, what evidence matters, what Boundary First Labs can responsibly contribute, and what should happen next.",
+    "nonPromise": "Diagnosis does not guarantee repair, acceptance, domain authority, implementation, or a continuing engagement."
+  },
+  "failurePatterns": [
+    {
+      "id": "overloaded-representation",
+      "label": "Overloaded representation",
+      "symptoms": ["one object carries too many meanings", "important distinctions survive only as insider convention", "different teams use the same representation differently", "local efficiency creates global confusion"],
+      "prompt": "Too much reality has been compressed into one representation. What did it forget?"
+    },
+    {
+      "id": "exception-built-system",
+      "label": "Exception-built system",
+      "symptoms": ["happy path is clean but actual operation is dominated by workarounds", "policy and implementation disagree", "edge cases have become normal operation", "hidden labor absorbs defects"],
+      "prompt": "Show us the exceptions. They often reveal the real system."
+    },
+    {
+      "id": "responsibility-gap",
+      "label": "Responsibility gap",
+      "symptoms": ["authority can act but responsibility does not land", "many teams own parts but nobody owns consequence", "affected people cannot reach contest or repair", "escalation ends in another handoff"],
+      "prompt": "Who can act, who is affected, and who can actually repair the result?"
+    },
+    {
+      "id": "brittle-software",
+      "label": "Brittle software / inherited system",
+      "symptoms": ["nobody wants to change it", "local fixes break distant paths", "business rules are spread across code, tickets, memory, and incidents", "interfaces conceal state"],
+      "prompt": "Before rewriting it, let's recover the object the software is trying to represent."
+    },
+    {
+      "id": "maintenance-debt",
+      "label": "Maintenance / lifecycle debt",
+      "symptoms": ["launch succeeded but ownership disappeared", "deferred obligations sit outside success metrics", "temporary human processes became permanent infrastructure", "replacement or retirement has no owner"],
+      "prompt": "What must continually be supplied for this capability to remain real?"
+    },
+    {
+      "id": "knowledge-overload",
+      "label": "Evidence / knowledge overload",
+      "symptoms": ["information multiplies faster than conclusions can be trusted", "provenance disappears in synthesis", "contradictions are hard to recover", "authoritative status is unclear"],
+      "prompt": "The problem may not be information scarcity. It may be governed continuity."
+    },
+    {
+      "id": "cross-boundary-failure",
+      "label": "Cross-boundary failure",
+      "symptoms": ["components work locally but the whole fails at handoffs", "meaning, state, authority, or responsibility changes at interfaces", "the defect is always somebody else's part"],
+      "prompt": "Let's inspect the crossing, not just the components on either side."
+    },
+    {
+      "id": "wicked-problem",
+      "label": "Wicked / unstable problem",
+      "symptoms": ["defining the problem changes it", "interventions create new actors or constraints", "there is no clean single objective", "solutions export consequence elsewhere"],
+      "prompt": "Start with the present boundary, preserve uncertainty, act narrowly, observe consequence, and update the representation."
+    }
+  ],
+  "intakeQuestions": [
+    "What is happening?",
+    "What makes this difficult now?",
+    "Who is involved?",
+    "Who is affected?",
+    "What have you already tried?",
+    "What seems to break when you change it?",
+    "What absolutely must remain true?",
+    "What evidence or artifacts exist?",
+    "Who can authorize a change?",
+    "Who owns repair if the change causes harm or failure?",
+    "What would a meaningfully better state look like?",
+    "What are we not allowed to assume?"
+  ],
+  "routingClasses": [
+    {
+      "id": "reconstruct",
+      "label": "Reconstruct",
+      "when": "The main defect is that nobody has a trustworthy model of the system.",
+      "outputs": ["system map", "actor/artifact map", "state/transition map", "boundary/interface inventory", "invariant list", "unknowns and evidence gaps"],
+      "targetRefs": ["Software Before Code", "Boundary-First Engineering", "Corpus Forge"]
+    },
+    {
+      "id": "audit",
+      "label": "Audit",
+      "when": "Authority, consequence, contestability, responsibility, or repair are central.",
+      "outputs": ["agency map", "representation map", "consequence chain", "contest path", "repair ownership map", "defect register"],
+      "targetRefs": ["Agency + Representation Audit"]
+    },
+    {
+      "id": "build-repair",
+      "label": "Build / Repair",
+      "when": "The bounded representation is understood well enough to construct or repair an instrument or implementation.",
+      "outputs": ["prototype", "reference implementation", "interface/workbench", "workflow redesign", "instrumentation", "integration", "repair plan"],
+      "targetRefs": ["Boundary-First Engineering", "Boundary First UX"]
+    },
+    {
+      "id": "test-validate",
+      "label": "Test / Validate",
+      "when": "A claim, model, intervention, or representation needs a native witness.",
+      "outputs": ["baseline", "benchmark", "experiment", "pilot charter", "review packet", "reproduction attempt", "failure conditions"],
+      "targetRefs": ["Research", "Witness-domain testbeds"]
+    },
+    {
+      "id": "govern-steward",
+      "label": "Govern / Steward",
+      "when": "Ownership, maintenance, authority, versioning, retirement, or transfer are the core problem.",
+      "outputs": ["authority map", "stewardship contract", "maintenance path", "release/promotion rules", "correction/supersession process", "transfer/retirement plan"],
+      "targetRefs": ["Governance", "Service Bus", "Institutional Capacity"]
+    },
+    {
+      "id": "refer-partner",
+      "label": "Refer / Partner",
+      "when": "The next responsible step requires domain authority, infrastructure, access, standing, or stewardship BFL should not reproduce alone.",
+      "outputs": ["bounded problem statement", "missing-capability declaration", "partner/expert requirements", "handoff evidence package", "explicit authority boundary"],
+      "targetRefs": ["Collaboration"]
+    },
+    {
+      "id": "stop",
+      "label": "Stop / Decline",
+      "when": "The intervention exceeds authority, cannot be bounded responsibly, lacks evidence, requires false claims, or has no lawful competence/partnership path.",
+      "outputs": ["decline reason", "bounded unresolved state", "safe referral where appropriate", "preserved evidence"],
+      "targetRefs": ["Governance"]
+    }
+  ],
+  "diagnosticFlow": ["Load", "Bound", "Trace", "Find the Defect", "Route", "Define the Witness", "Repair or Transfer"],
+  "firstEngagement": {
+    "pattern": ["Problem Intake", "Bounded Reconstruction", "Findings / Defect Map", "Recommended Work Type", "Go / Partner / Stop"],
+    "principle": "Do not jump from a messy story directly to a large implementation proposal.",
+    "candidateLabels": ["Difficult System Diagnostic", "Boundary Reconstruction", "System Legibility Sprint", "Boundary & Consequence Map", "Problem Framing / System Reconstruction"]
+  },
+  "capitalRelation": {
+    "statement": "Problem intake is the inverse input manifold to Capital: Capital asks what capacity should enter the Lab; Problem Input asks what difficult reality should enter the inquiry machinery.",
+    "feedbackLoop": ["Real Problems", "Diagnostic Work", "Evidence", "Method Repair", "Better Instruments", "New Capability", "New Problems"],
+    "capitalEffect": "Capital increases the Lab's capacity to receive and close more of these loops without lowering evidence, governance, or stewardship standards."
+  },
+  "copyModules": {
+    "globalCta": "Have a difficult system? Bring it to the Lab.",
+    "globalBody": "Overloaded software, tangled workflows, unclear responsibility, hidden maintenance, evidence sprawl, brittle handoffs—start with the problem as it actually exists.",
+    "voiceLine": "Bring us the mess: the exceptions, the workarounds, the half-true diagram, the five owners, the spreadsheet everyone is afraid to touch.",
+    "professionalLine": "We reconstruct consequence-bearing systems before prescribing solutions: actors, artifacts, authority, state, invariants, interfaces, evidence, failure paths, and repair obligations.",
+    "humanLine": "You do not need to make the problem sound simple before you contact us. Complicated is the point.",
+    "closing": "If the problem crosses boundaries faster than your current tools can follow it, bring us the system. Let's find out what is actually happening."
+  },
+  "claimBoundary": [
+    "No guaranteed resolution.",
+    "No claim of universal cross-domain expertise.",
+    "No legal, clinical, regulatory, financial, safety, or other professional authority unless independently established.",
+    "No implication that every intake becomes an engagement.",
+    "No implication of a large consulting team or unlimited current capacity.",
+    "No claim that a Boundary First diagnosis validates Boundary Theory."
+  ],
+  "sourceRefs": [
+    "src/content/lab-machine-capital.json",
+    "src/content/lab-machine-institutional-capacity.json",
+    "src/content/lab-machine-service.json",
+    "src/content/lab-machine-governance.json",
+    "src/content/lab-machine-products.json",
+    "backlog/16_public_site_positioning_and_pitch_readiness/14_bring_us_your_difficult_system_problem_intake.md"
+  ]
+}
