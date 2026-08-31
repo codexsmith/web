@@ -1,33 +1,193 @@
-/* Final homepage-only cleanup after frame + responsive convergence. */
+/*
+ * Canonical homepage frame.
+ * This file is loaded last and deliberately replaces the accumulated root-frame
+ * overrides with one stable geometry that survives browser zoom and viewport changes.
+ */
 
-.site-shell[data-root-focus="true"] .world-machine-preview {
-  padding-top: calc(var(--frame-top) + 14px);
+.site-shell[data-root-focus="true"] {
+  --frame-top: 64px;
 }
 
+/* Do not allow legacy labels or generated decoration to leak into the home cluster. */
+.site-shell[data-root-focus="true"] .brand-anchor__copy,
+.site-shell[data-root-focus="true"] .frame-home-tray::before,
+.site-shell[data-root-focus="true"] .frame-home-tray::after,
+.site-shell[data-root-focus="true"] .brand-anchor::before,
+.site-shell[data-root-focus="true"] .brand-anchor::after {
+  display: none !important;
+  content: none !important;
+}
+
+.site-shell[data-root-focus="true"] .boundary-frame__top {
+  height: var(--frame-top) !important;
+  min-height: var(--frame-top) !important;
+  grid-template-columns: 44px 156px minmax(0, 1fr) !important;
+  grid-template-rows: var(--frame-top) !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 0 12px !important;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .frame-home-tray {
+  grid-column: 1;
+  grid-row: 1;
+  width: 44px !important;
+  min-width: 44px !important;
+  max-width: 44px !important;
+  min-height: 44px !important;
+  padding: 3px !important;
+  justify-self: start;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .brand-anchor {
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  padding: 2px !important;
+  gap: 0 !important;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .brand-anchor__mark {
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  flex: 0 0 30px !important;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path {
+  grid-column: 2;
+  grid-row: 1;
+  width: 156px;
+  min-width: 0;
+  max-width: 156px;
+  justify-self: start;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path > ol {
+  width: 100%;
+  justify-content: flex-start;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path__node--current {
+  max-width: 150px;
+  padding: 8px 11px !important;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path__node--current small {
+  display: none !important;
+}
+
+.site-shell[data-root-focus="true"] .frame-trace-path__node--current strong {
+  display: block;
+  max-width: 128px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: .72rem !important;
+}
+
+.site-shell[data-root-focus="true"] .frame-tools,
 .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
-  grid-template-columns: 42px minmax(176px, auto) minmax(0, 1fr);
-  gap: .55rem;
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: stretch;
+  width: 100%;
+  min-width: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px !important;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .frame-tools > .frame-tool--inspect {
+  flex: 0 0 42px;
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 !important;
 }
 
 .site-shell[data-root-focus="true"] .frame-context-controls {
-  margin-inline: .08rem .12rem;
+  flex: 0 0 auto;
+  min-width: 0;
+  margin: 0 !important;
 }
 
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
-  gap: 3px;
-  padding: 4px;
+  display: flex !important;
+  align-items: stretch;
+  gap: 4px !important;
+  min-width: 0;
+  min-height: 42px;
+  padding: 4px !important;
 }
 
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-  padding-inline: .62rem;
+  width: 82px;
+  min-width: 82px !important;
+  min-height: 32px !important;
+  grid-template-columns: 15px auto !important;
+  gap: .34rem !important;
+  padding: .3rem .52rem !important;
 }
 
-/* The apparatus already carries its identity in the title bar; keep only one. */
+.site-shell[data-root-focus="true"] .projection-switcher--legible {
+  flex: 0 1 520px;
+  width: min(520px, 42vw) !important;
+  min-width: 300px;
+  min-height: 42px;
+  display: grid !important;
+  grid-template-columns: 42px repeat(3, minmax(0, 1fr)) !important;
+  gap: 3px !important;
+  padding: 3px !important;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__label {
+  min-width: 0;
+  width: auto;
+  padding-inline: .25rem;
+}
+
+.site-shell[data-root-focus="true"] .projection-switcher--legible button {
+  min-width: 0 !important;
+  min-height: 34px !important;
+  padding: .28rem .42rem !important;
+  overflow: hidden;
+}
+
+.site-shell[data-root-focus="true"] .projection-switcher__copy,
+.site-shell[data-root-focus="true"] .projection-switcher__mode-name,
+.site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-shell[data-root-focus="true"] .projection-switcher__mode-name,
+.site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+  white-space: nowrap;
+}
+
+/* Keep the machine clearly below the fixed navigation frame. */
+.site-shell[data-root-focus="true"] .world-machine-preview {
+  padding-top: calc(var(--frame-top) + 18px) !important;
+}
+
+/* The apparatus title is sufficient; the old status plate is duplicate identity. */
 .site-shell[data-root-focus="true"] .bf-machine__status {
   display: none !important;
 }
 
-/* Match the legend to actual interaction semantics. */
+/* Match the legend to the actual interaction contract. */
 .site-shell[data-root-focus="true"] .bf-machine__legend-actions p {
   display: none !important;
 }
@@ -35,53 +195,235 @@
 .site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
   content: "HOVER: PREVIEW · CLICK / ENTER: OPEN";
   display: block;
+  color: #b7c1c5;
   font: 700 .54rem/1.35 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   letter-spacing: .055em;
-  color: #b7c1c5;
   white-space: nowrap;
 }
 
-@media (max-width: 1280px) {
-  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
-    grid-template-columns: 40px minmax(158px, auto) minmax(0, 1fr);
-    gap: .4rem;
+@media (max-width: 1500px) {
+  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+    flex-basis: 430px;
+    width: min(430px, 39vw) !important;
+    min-width: 280px;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
-  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-    padding-inline: .48rem;
+  .site-shell[data-root-focus="true"] .projection-switcher--legible .projection-switcher__label,
+  .site-shell[data-root-focus="true"] .projection-switcher__mode-purpose {
+    display: none !important;
   }
 }
 
-@media (max-width: 768px) {
-  .site-shell[data-root-focus="true"] .world-machine-preview {
-    padding-top: calc(var(--frame-top) + 10px);
+@media (max-width: 1180px) {
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 42px 132px minmax(0, 1fr) !important;
+    gap: 8px !important;
+    padding-inline: 9px !important;
   }
 
+  .site-shell[data-root-focus="true"] .frame-home-tray {
+    width: 42px !important;
+    min-width: 42px !important;
+    max-width: 42px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path {
+    width: 132px;
+    max-width: 132px;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path__node--current {
+    max-width: 126px;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path__node--current strong {
+    max-width: 105px;
+    font-size: .66rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools,
   .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
-    grid-template-columns: 40px auto minmax(0, 1fr);
-    gap: .28rem;
+    gap: 7px !important;
   }
 
-  .site-shell[data-root-focus="true"] .frame-context-controls {
-    margin: 0;
+  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
+    width: 72px;
+    min-width: 72px !important;
+    padding-inline: .4rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+    flex-basis: 340px;
+    width: min(340px, 35vw) !important;
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    gap: 7px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-trace-path {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools,
+  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+    grid-column: 2;
+    gap: 6px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+    flex: 1 1 auto;
+    width: auto !important;
+    min-width: 210px;
+  }
+}
+
+@media (max-width: 680px) {
+  .site-shell[data-root-focus="true"] {
+    --frame-top: 58px;
+  }
+
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 38px minmax(0, 1fr) !important;
+    gap: 5px !important;
+    padding-inline: 6px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-home-tray {
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+    min-height: 38px !important;
+    padding: 1px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .brand-anchor {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .brand-anchor__mark {
+    width: 28px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+    flex-basis: 28px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools,
+  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+    gap: 4px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools > .frame-tool--inspect {
+    flex-basis: 36px;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
   }
 
   .site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
-    padding: 3px;
+    min-height: 38px;
+    gap: 2px !important;
+    padding: 2px !important;
   }
 
   .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-    padding-inline: .34rem;
+    width: 32px;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    grid-template-columns: 15px !important;
+    padding: 0 !important;
   }
 
-  .site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
-    font-size: .5rem;
-    white-space: normal;
+  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible {
+    min-width: 0;
+    min-height: 38px;
+    padding: 2px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher--legible button {
+    min-height: 32px !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    place-items: center;
+    padding: .2rem .18rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher__glyph {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher__mode-name {
+    font-size: .48rem !important;
+  }
+
+  .site-shell[data-root-focus="true"] .world-machine-preview {
+    padding-top: calc(var(--frame-top) + 12px) !important;
   }
 }
 
-@media (max-width: 560px) {
-  .site-shell[data-root-focus="true"] .world-machine-preview {
-    padding-top: calc(var(--frame-top) + 8px);
+@media (max-width: 430px) {
+  .site-shell[data-root-focus="true"] .boundary-frame__top {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+    gap: 3px !important;
+    padding-inline: 4px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-home-tray {
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .brand-anchor {
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .brand-anchor__mark {
+    width: 26px !important;
+    min-width: 26px !important;
+    height: 26px !important;
+    flex-basis: 26px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .frame-tools > .frame-tool--inspect {
+    flex-basis: 32px;
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
+    width: 28px;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+
+  .site-shell[data-root-focus="true"] .projection-switcher__mode-name {
+    font-size: .44rem !important;
+    letter-spacing: .035em;
+  }
+
+  .site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
+    white-space: normal;
+    font-size: .49rem;
   }
 }
