@@ -1,0 +1,229 @@
+/* Capital prototype · End Interface Contact Pass
+
+   Final correction for the two conversion-rail boundary crossings.
+
+   The previous pass interpreted "hollow center" as an air gap between the two
+   multiplex banks. The established full-loop connector language instead reads
+   through hollow colored contact rings inside a continuous paired housing.
+
+   Geometry at both ends is therefore exact and continuous:
+
+     CONDUIT | 18px BANK | 18px BANK | STAGE
+
+   The two banks touch each other, the outer bank touches the conduit, and the
+   inner bank touches the conversion-stage card. No filler pipe and no air gap.
+*/
+
+@media (min-width: 1121px) {
+  .capital-frame {
+    --capital-end-bank-width: 18px;
+    --capital-end-bank-height: 74px;
+    --capital-end-gap: 36px;
+    --capital-end-conduit-tone: #8ba2aa;
+    --capital-end-input-tone: color-mix(in srgb, var(--bf-region-about) 58%, var(--bf-silver-300));
+    --capital-end-return-tone: color-mix(in srgb, var(--bf-valid) 62%, var(--bf-silver-300));
+  }
+
+  /* Shared five hollow-ring contact pattern. The center of each contact stays
+     dark; semantic color is the annulus, matching the full-loop connector read. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before,
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    width: var(--capital-end-bank-width) !important;
+    height: var(--capital-end-bank-height) !important;
+    border-radius: 4px !important;
+    box-shadow:
+      inset 0 0 0 2px #090b0c,
+      inset 0 1px rgba(255,255,255,.08),
+      0 4px 8px rgba(0,0,0,.58) !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* CAPITAL INLET · CONDUIT | BANK | BANK | CARD                            */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before,
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    display: block !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before {
+    left: calc(var(--capital-end-gap) * -1) !important;
+    border-color: color-mix(in srgb, var(--capital-end-conduit-tone) 68%, #596266) !important;
+    border-radius: 4px 0 0 4px !important;
+    background:
+      radial-gradient(circle at 50% 11px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 24px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 37px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 50px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 63px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      linear-gradient(90deg, rgba(255,255,255,.075), transparent 38% 68%, rgba(0,0,0,.3)),
+      linear-gradient(#2a3b41, #0c1215) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    left: calc(var(--capital-end-bank-width) * -1) !important;
+    border-color: color-mix(in srgb, var(--capital-end-input-tone) 72%, #596266) !important;
+    border-radius: 0 4px 4px 0 !important;
+    background:
+      radial-gradient(circle at 50% 11px,
+        #090b0c 0 1.5px,
+        var(--capital-end-input-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 24px,
+        #090b0c 0 1.5px,
+        var(--capital-end-input-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 37px,
+        #090b0c 0 1.5px,
+        var(--capital-end-input-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 50px,
+        #090b0c 0 1.5px,
+        var(--capital-end-input-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 63px,
+        #090b0c 0 1.5px,
+        var(--capital-end-input-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      linear-gradient(90deg, rgba(255,255,255,.08), transparent 38% 68%, rgba(0,0,0,.3)),
+      linear-gradient(#38352b, #0e0d0a) !important;
+  }
+
+  /* The seam is intentional: both banks are separate modules, but there is no
+     spatial gap between them. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before {
+    border-right-color: color-mix(in srgb, var(--capital-end-conduit-tone) 36%, #090b0c) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    border-left-color: color-mix(in srgb, var(--capital-end-input-tone) 36%, #090b0c) !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* RETAINED CAPABILITY · CARD | BANK | BANK | CONDUIT                      */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    right: calc(var(--capital-end-bank-width) * -1) !important;
+    width: var(--capital-end-bank-width) !important;
+    height: var(--capital-end-bank-height) !important;
+    border-color: color-mix(in srgb, var(--capital-end-return-tone) 72%, #596266) !important;
+    border-radius: 4px 0 0 4px !important;
+    background:
+      radial-gradient(circle at 50% 11px,
+        #090b0c 0 1.5px,
+        var(--capital-end-return-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 24px,
+        #090b0c 0 1.5px,
+        var(--capital-end-return-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 37px,
+        #090b0c 0 1.5px,
+        var(--capital-end-return-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 50px,
+        #090b0c 0 1.5px,
+        var(--capital-end-return-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 63px,
+        #090b0c 0 1.5px,
+        var(--capital-end-return-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      linear-gradient(90deg, rgba(255,255,255,.08), transparent 38% 68%, rgba(0,0,0,.3)),
+      linear-gradient(#30382b, #0d110c) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::before {
+    display: none !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    display: block !important;
+    left: var(--capital-end-bank-width) !important;
+    top: 50% !important;
+    width: var(--capital-end-bank-width) !important;
+    height: var(--capital-end-bank-height) !important;
+    transform: translateY(-50%) !important;
+    border-color: color-mix(in srgb, var(--capital-end-conduit-tone) 68%, #596266) !important;
+    border-radius: 0 4px 4px 0 !important;
+    background:
+      radial-gradient(circle at 50% 11px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 24px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 37px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 50px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      radial-gradient(circle at 50% 63px,
+        #090b0c 0 1.5px,
+        var(--capital-end-conduit-tone) 1.9px 3.4px,
+        #090b0c 3.8px 5px,
+        transparent 5.4px),
+      linear-gradient(90deg, rgba(255,255,255,.075), transparent 38% 68%, rgba(0,0,0,.3)),
+      linear-gradient(#2a3b41, #0c1215) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    border-right-color: color-mix(in srgb, var(--capital-end-return-tone) 36%, #090b0c) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    border-left-color: color-mix(in srgb, var(--capital-end-conduit-tone) 36%, #090b0c) !important;
+  }
+
+  /* Both coupled bank pairs are top-layer hardware. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before,
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    z-index: 1200 !important;
+  }
+}
