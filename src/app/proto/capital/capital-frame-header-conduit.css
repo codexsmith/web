@@ -1,0 +1,217 @@
+/* Capital prototype · Header Conduit Pass
+
+   The Primary Conversion Rail header is infrastructure, not a caption card.
+
+   Desktop topology:
+
+     intake vertical conduit
+             │
+             └──── PRIMARY CONVERSION RAIL ────┐
+                                               │
+                                  inspection vertical conduit
+
+   The horizontal header uses the same material vocabulary as the side conduits.
+   Two 90-degree elbow assemblies bridge the body's 16px column gutters and the
+   20px side-conduit inset, landing exactly on the existing 18px vertical rails.
+*/
+
+@media (min-width: 1121px) {
+  .capital-frame {
+    --capital-header-conduit-height: 58px;
+    --capital-header-conduit-width: 18px;
+    --capital-header-elbow-reach: 54px;
+    --capital-header-elbow-depth: 36px;
+  }
+
+  /* Let the elbow assemblies occupy the inter-column gutters without being
+     clipped by the engine's own box. */
+  .capital-frame__engine {
+    overflow: visible;
+  }
+
+  .capital-frame__engine-heading {
+    position: relative;
+    z-index: 40;
+    min-height: var(--capital-header-conduit-height);
+    display: block;
+    padding: 10px 16px 9px;
+    overflow: visible;
+    border: 1px solid var(--capital-conduit-edge);
+    border-radius: 9px;
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,.07) 0 1px,
+        transparent 1px 5px,
+        rgba(0,0,0,.17) 5px calc(100% - 5px),
+        rgba(255,255,255,.018) calc(100% - 5px) calc(100% - 2px),
+        rgba(0,0,0,.48) calc(100% - 2px) 100%),
+      repeating-linear-gradient(90deg,
+        var(--capital-conduit-highlight) 0 1px,
+        rgba(0,0,0,.11) 1px 4px,
+        transparent 4px 14px,
+        rgba(0,0,0,.07) 14px 16px,
+        transparent 16px 24px),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--capital-conduit-face) 84%, #1c262c),
+        var(--capital-conduit-dark));
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.025),
+      inset 0 -3px 0 rgba(0,0,0,.24),
+      0 5px 15px rgba(0,0,0,.24);
+  }
+
+  .capital-frame__engine-heading > div {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .capital-frame__engine-heading span {
+    color: color-mix(in srgb, var(--capital-conduit-edge) 72%, var(--bf-text-muted));
+    font-size: .4rem;
+    letter-spacing: .13em;
+  }
+
+  /* This label duplicated the machine identity already established by the
+     surrounding Lab frame. Removing it gives the rail sentence the full run. */
+  .capital-frame__engine-heading > strong {
+    display: none !important;
+  }
+
+  .capital-frame__engine-heading h2 {
+    max-width: none;
+    margin: 5px 0 0;
+    white-space: nowrap;
+    overflow: visible;
+    color: var(--bf-text-primary);
+    font-size: clamp(.64rem, .76vw, .8rem);
+    line-height: 1;
+    letter-spacing: .035em;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* 90-DEGREE ELBOWS                                                        */
+  /* ---------------------------------------------------------------------- */
+
+  /*
+   * Body geometry at desktop:
+   *   engine edge -> 16px grid gap -> 20px conduit inset -> 18px conduit
+   *
+   * Therefore the conduit occupies x = 36..54px outside either engine edge.
+   * Each elbow is a 54px-wide L: an 18px horizontal run plus an 18px vertical
+   * leg on the far side. The vertical leg overlaps the existing side conduit
+   * beginning at y=58px, making the transition physically continuous.
+   */
+  .capital-frame__engine-heading::before,
+  .capital-frame__engine-heading::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: calc(var(--capital-header-conduit-height) - var(--capital-header-conduit-width));
+    width: var(--capital-header-elbow-reach);
+    height: var(--capital-header-elbow-depth);
+    filter:
+      drop-shadow(0 1px 0 color-mix(in srgb, var(--capital-conduit-edge) 72%, transparent))
+      drop-shadow(0 4px 7px rgba(0,0,0,.26));
+    pointer-events: none;
+  }
+
+  .capital-frame__engine-heading::before {
+    left: calc(var(--capital-header-elbow-reach) * -1);
+    background:
+      /* horizontal run surface */
+      linear-gradient(180deg,
+        rgba(255,255,255,.065) 0 1px,
+        transparent 1px 4px,
+        rgba(0,0,0,.18) 4px 14px,
+        rgba(255,255,255,.02) 14px 17px,
+        rgba(0,0,0,.5) 17px 18px)
+        left top / 100% var(--capital-header-conduit-width) no-repeat,
+      repeating-linear-gradient(90deg,
+        var(--capital-conduit-highlight) 0 1px,
+        rgba(0,0,0,.12) 1px 4px,
+        transparent 4px 12px,
+        rgba(0,0,0,.08) 12px 14px,
+        transparent 14px 21px)
+        left top / 100% var(--capital-header-conduit-width) no-repeat,
+      linear-gradient(180deg, var(--capital-conduit-face), var(--capital-conduit-dark))
+        left top / 100% var(--capital-header-conduit-width) no-repeat,
+      /* vertical leg surface, exactly over the intake conduit */
+      linear-gradient(90deg,
+        rgba(255,255,255,.07) 0 1px,
+        transparent 1px 4px,
+        rgba(0,0,0,.2) 4px 14px,
+        rgba(255,255,255,.025) 14px 17px,
+        rgba(0,0,0,.55) 17px 18px)
+        left top / var(--capital-header-conduit-width) 100% no-repeat,
+      repeating-linear-gradient(180deg,
+        var(--capital-conduit-highlight) 0 1px,
+        rgba(0,0,0,.12) 1px 4px,
+        transparent 4px 11px,
+        rgba(0,0,0,.1) 11px 13px,
+        transparent 13px 19px)
+        left top / var(--capital-header-conduit-width) 100% no-repeat,
+      linear-gradient(90deg, var(--capital-conduit-face), var(--capital-conduit-dark))
+        left top / var(--capital-header-conduit-width) 100% no-repeat;
+  }
+
+  .capital-frame__engine-heading::after {
+    right: calc(var(--capital-header-elbow-reach) * -1);
+    background:
+      /* horizontal run surface */
+      linear-gradient(180deg,
+        rgba(255,255,255,.065) 0 1px,
+        transparent 1px 4px,
+        rgba(0,0,0,.18) 4px 14px,
+        rgba(255,255,255,.02) 14px 17px,
+        rgba(0,0,0,.5) 17px 18px)
+        right top / 100% var(--capital-header-conduit-width) no-repeat,
+      repeating-linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-region-about) 10%, var(--capital-conduit-highlight)) 0 1px,
+        rgba(0,0,0,.12) 1px 4px,
+        transparent 4px 12px,
+        rgba(0,0,0,.08) 12px 14px,
+        transparent 14px 21px)
+        right top / 100% var(--capital-header-conduit-width) no-repeat,
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--bf-region-about) 7%, var(--capital-conduit-face)),
+        var(--capital-conduit-dark))
+        right top / 100% var(--capital-header-conduit-width) no-repeat,
+      /* vertical leg surface, exactly over the inspection conduit */
+      linear-gradient(90deg,
+        rgba(255,255,255,.065) 0 1px,
+        transparent 1px 4px,
+        color-mix(in srgb, var(--bf-region-about) 5%, rgba(0,0,0,.2)) 4px 14px,
+        rgba(255,255,255,.02) 14px 17px,
+        rgba(0,0,0,.55) 17px 18px)
+        right top / var(--capital-header-conduit-width) 100% no-repeat,
+      repeating-linear-gradient(180deg,
+        color-mix(in srgb, var(--bf-region-about) 12%, var(--capital-conduit-highlight)) 0 1px,
+        rgba(0,0,0,.12) 1px 4px,
+        transparent 4px 11px,
+        rgba(0,0,0,.1) 11px 13px,
+        transparent 13px 19px)
+        right top / var(--capital-header-conduit-width) 100% no-repeat,
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-region-about) 7%, var(--capital-conduit-face)),
+        var(--capital-conduit-dark))
+        right top / var(--capital-header-conduit-width) 100% no-repeat;
+  }
+}
+
+/* Once the three-column topology collapses there are no persistent side
+   conduits to join, so the header remains conduit-styled but loses the elbows
+   and permits text wrapping instead of overflowing the linear projection. */
+@media (max-width: 1120px) {
+  .capital-frame__engine-heading::before,
+  .capital-frame__engine-heading::after {
+    display: none !important;
+  }
+
+  .capital-frame__engine-heading > strong {
+    display: none !important;
+  }
+
+  .capital-frame__engine-heading h2 {
+    white-space: normal;
+  }
+}
