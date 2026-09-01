@@ -18,6 +18,7 @@ import "./capital-frame-machine-bed-cleanup.css";
 import "./capital-frame-machine-function-grid.css";
 import "./capital-frame-engine-core.css";
 import "./capital-frame-stewardship-cleanup.css";
+import "./capital-frame-card-typography.css";
 
 export const metadata: Metadata = {
   title: "Boundary First Labs · Capital Economics Prototype",
