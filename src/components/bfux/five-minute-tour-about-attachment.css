@@ -150,9 +150,8 @@
  * Apparatus-level mapping eyebrow.
  *
  * Target x/width are still measured independently from People / Products /
- * Publications. Those measurements now position three inset cells inside one
- * shared arm whose left edge is the live right edge of the Tour card. The arm is
- * therefore visually attached to Tour while preserving the proven target map.
+ * Publications. Those measurements position three inset cells inside one shared
+ * arm whose left edge is the live right edge of the Tour card.
  */
 .bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-tour-map-layer {
   position: absolute;
@@ -194,22 +193,25 @@
   transition: opacity 150ms ease, transform 260ms cubic-bezier(.2,.78,.2,1);
 }
 
-/* A small seam makes the shared housing read as an extension of Tour, not a new panel. */
+/* Simple square coupler: the same connector language used elsewhere in the machine. */
 .bf-machine-tour-map-layer__arm::before {
   content: "";
   position: absolute;
   right: 100%;
   top: 50%;
-  width: .62vw;
-  min-width: 8px;
+  width: .72vw;
+  min-width: 11px;
   height: .72vw;
-  min-height: 10px;
-  transform: translateY(-50%);
-  border: max(1px, .055vw) solid #4a5558;
-  border-right: 0;
-  border-radius: .16vw 0 0 .16vw;
-  background: linear-gradient(180deg, #242c2f, #0b1012);
-  box-shadow: inset 0 1px rgba(255,255,255,.05);
+  min-height: 11px;
+  transform: translate(50%, -50%);
+  border: max(1px, .055vw) solid #5c686b;
+  border-radius: .08vw;
+  background:
+    radial-gradient(circle at center, #050707 0 26%, color-mix(in srgb, #83c66d 42%, #303638) 30% 47%, #080a0b 51%),
+    linear-gradient(180deg, #2b3336, #0b1012);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.06),
+    0 .12vw .2vw rgba(0,0,0,.55);
 }
 
 .bf-machine-tour-map-layer[data-open="true"] .bf-machine-tour-map-layer__arm[data-ready="true"] {
@@ -223,15 +225,15 @@
   top: .25vw;
   bottom: .25vw;
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: .42vw;
+  display: flex;
   align-items: center;
+  justify-content: center;
   min-width: 0;
-  padding: .38vw .5vw;
+  padding: .34vw .5vw;
   border: max(1px, .055vw) solid color-mix(in srgb, var(--map-tone) 56%, #344043);
   border-radius: .16vw;
   color: #dfe4df;
+  text-align: center;
   background:
     linear-gradient(90deg, color-mix(in srgb, var(--map-tone) 9%, #111719), #090e10 46%),
     #090e10;
@@ -250,19 +252,16 @@
   --map-tone: #a4e44f;
 }
 
-.bf-machine-tour-map-layer__item > span {
-  align-self: start;
-  padding-top: .05vw;
-  color: var(--map-tone);
-  font: 800 clamp(.46rem, .47vw, .54rem)/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .07em;
-}
-
 .bf-machine-tour-map-layer__item > strong {
+  display: block;
   min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   color: #e7e9e5;
-  font: 500 clamp(.66rem, .72vw, .82rem)/1.28 Georgia, serif;
-  overflow-wrap: anywhere;
+  font: 500 clamp(.54rem, .62vw, .72rem)/1.1 Georgia, serif;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* Footer is strictly orientation plus sequential navigation. */
@@ -297,7 +296,11 @@
   .bf-machine-tour-map-layer__item {
     top: 4px;
     bottom: 4px;
-    padding: 6px 8px;
+    padding: 6px 7px;
+  }
+
+  .bf-machine-tour-map-layer__item > strong {
+    font-size: .58rem;
   }
 }
 

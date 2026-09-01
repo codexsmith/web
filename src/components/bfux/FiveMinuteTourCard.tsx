@@ -47,20 +47,19 @@ const tourSteps = [
 const mapColumns = [
   {
     target: "people",
-    index: "01",
     text: "Clear representation expands agency.",
   },
   {
     target: "products",
-    index: "02",
     text: "Exposed assumptions improve solutions.",
   },
   {
     target: "publications",
-    index: "03",
     text: "Recurring structure refines knowledge.",
   },
 ] as const;
+
+const mapArmRightInset = 6;
 
 type MapGeometry = Record<string, { left: number; top: number; width: number }>;
 type MapArmGeometry = { left: number; top: number; width: number } | null;
@@ -125,7 +124,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
         setMapArmGeometry({
           left: armLeft,
           top: targetTop,
-          width: targetRight - armLeft,
+          width: Math.max(0, targetRight - armLeft - mapArmRightInset),
         });
       });
     };
@@ -330,9 +329,10 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
                     width: mapArmGeometry.width,
                   }}
                 >
-                  {mapColumns.map((column) => {
+                  {mapColumns.map((column, index) => {
                     const geometry = mapGeometry[column.target];
                     if (!geometry) return null;
+                    const isLast = index === mapColumns.length - 1;
 
                     return (
                       <article
@@ -341,10 +341,9 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
                         data-map-target={column.target}
                         style={{
                           left: geometry.left - mapArmGeometry.left,
-                          width: geometry.width,
+                          width: Math.max(0, geometry.width - (isLast ? mapArmRightInset : 0)),
                         }}
                       >
-                        <span>{column.index}</span>
                         <strong>{column.text}</strong>
                       </article>
                     );
