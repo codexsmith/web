@@ -105,7 +105,7 @@ export function LabMachineWorld({
   const rootNode = useMemo(() => hydrateContentNode(getNode("root")), []);
   const [projection, setProjection] = useState<ProjectionMode>(initialProjection);
   const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
-  const [machineResolution, setMachineResolution] = useState<LabMachineResolution>(section ? "mid" : "focus");
+  const [machineResolution, setMachineResolution] = useState<LabMachineResolution>("mid");
   const [searchOpen, setSearchOpen] = useState(false);
   const [navigationFocusId, setNavigationFocusId] = useState(section ?? "research");
   const [navigationTrail, setNavigationTrail] = useState<LabMachineTraversalStep[]>([]);
@@ -260,7 +260,7 @@ export function LabMachineWorld({
         <main className="world-machine-preview">
           <PhysicalMachineExperience
             showSchematic={showSchematic}
-            initialResolution={section ? "mid" : "focus"}
+            initialResolution="mid"
             resolution={machineResolution}
             onResolutionChange={setMachineResolution}
             showResolutionControls={Boolean(section)}
