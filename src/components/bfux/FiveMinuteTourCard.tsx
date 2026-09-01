@@ -232,29 +232,29 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
                 </div>
               </div>
             </div>
-
-            <aside
-              id="five-minute-tour-map-panel"
-              className="bf-machine-tour-card__map-panel"
-              aria-label="The map in three lines"
-              aria-hidden={!mapOpen}
-            >
-              <div className="bf-machine-tour-card__map-panel-title">
-                <Map aria-hidden="true" />
-                <span>The map in three lines</span>
-              </div>
-              <ol>
-                {durableTakeaways.map((takeaway, index) => (
-                  <li key={takeaway}>
-                    <span>0{index + 1}</span>
-                    <strong>{takeaway}</strong>
-                  </li>
-                ))}
-              </ol>
-            </aside>
           </div>
         </div>
       </div>
+
+      <aside
+        id="five-minute-tour-map-panel"
+        className="bf-machine-tour-card__map-panel"
+        aria-label="The map in three lines"
+        aria-hidden={!mapOpen}
+      >
+        <div className="bf-machine-tour-card__map-panel-title">
+          <Map aria-hidden="true" />
+          <span>The map in three lines</span>
+        </div>
+        <ol>
+          {durableTakeaways.map((takeaway, index) => (
+            <li key={takeaway}>
+              <span>0{index + 1}</span>
+              <strong>{takeaway}</strong>
+            </li>
+          ))}
+        </ol>
+      </aside>
     </article>
   );
 }
