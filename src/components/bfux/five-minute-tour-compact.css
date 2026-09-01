@@ -102,74 +102,103 @@
   font-size: .39vw;
 }
 
-/* Full Loop expansion: preserve left + lower edge; add only the width/height the
- * now-sequential tour needs. This is growth, not a replacement surface. */
+/* Full Loop expansion: same lower-left anchor, just enough additional chassis
+ * for the authored step, takeaway, and controls to fit without collision. */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
   left: 64.85%;
   top: auto;
   bottom: 30%;
-  width: 32.5%;
-  height: 44.5%;
+  width: 34.7%;
+  height: 48.5%;
   z-index: 40;
 }
 
-/* Core expansion is also substantially smaller than the former 95% machine fill. */
+/* Core expansion remains bounded as well. */
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
-  left: 49.8%;
-  top: 18%;
+  left: 47.8%;
+  top: 16%;
   bottom: auto;
-  width: 47%;
-  height: 50%;
+  width: 49%;
+  height: 53%;
   z-index: 40;
 }
 
-/* The reduced tour surface needs a denser but still comfortably readable interior. */
+/* The current step is now the card title. Keep the title readable and make the
+ * content well responsible only for prose + takeaway. */
 .bf-machine-tour-card__topbar {
-  min-height: 54px;
-  padding: 9px 11px 9px 13px;
+  align-items: flex-start;
+  min-height: 62px;
+  padding: 10px 11px 9px 13px;
+}
+
+.bf-machine-tour-card__topbar > div:first-child {
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .bf-machine-tour-card__topbar strong {
-  font-size: clamp(1.05rem, 1.22vw, 1.36rem);
+  display: block;
+  max-width: 100%;
+  font-size: clamp(1.05rem, 1.2vw, 1.34rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.bf-machine-tour-card__topbar span {
+  font-size: .52rem;
+  line-height: 1.2;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__body,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__main,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__stage,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__current {
+  min-height: 0;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__body {
+  overflow: hidden;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__main {
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
 }
 
 .bf-machine[data-skin="physical"] .bf-machine-tour-card__stage {
   padding: 9px 10px 8px;
+  overflow: hidden;
 }
 
 .bf-machine-tour-card__current {
+  align-content: start;
+  overflow: hidden;
   padding: clamp(12px, 1vw, 16px);
 }
 
-.bf-machine-tour-card__current h2 {
-  margin-top: .5rem;
-  font-size: clamp(1.28rem, 1.55vw, 1.72rem);
-  line-height: 1.05;
-}
-
 .bf-machine-tour-card__current > p {
-  margin-top: .58rem;
-  font-size: clamp(.72rem, .75vw, .82rem);
-  line-height: 1.46;
+  margin: 0;
+  font-size: clamp(.73rem, .76vw, .84rem);
+  line-height: 1.5;
 }
 
 .bf-machine-tour-card__takeaway {
   margin-top: .7rem;
-  padding: .5rem .62rem;
+  padding: .52rem .64rem;
 }
 
 .bf-machine-tour-card__takeaway strong {
   font-size: clamp(.76rem, .8vw, .88rem);
-}
-
-.bf-machine-tour-card__main {
-  grid-template-rows: minmax(0, 1fr) auto;
+  line-height: 1.32;
 }
 
 .bf-machine-tour-card__controls {
+  position: relative;
+  z-index: 8;
   min-height: 46px;
   gap: .55rem;
   padding: 7px 10px 8px;
+  background: linear-gradient(180deg, rgba(10,15,17,.96), #080c0e);
 }
 
 .bf-machine-tour-card__progress {
@@ -218,19 +247,18 @@
   opacity: .72;
 }
 
-/* Map disclosure stays within the same total rightward footprint. The main card
- * contracts just enough to expose the content-sized docked panel. */
+/* Map disclosure stays within approximately the same rightward footprint. */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
-  width: 19%;
+  width: 20.5%;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
-  width: 28%;
+  width: 29%;
 }
 
 .bf-machine-tour-card__map-panel {
   left: calc(100% + .9vw);
-  top: 3.6vw;
+  top: 3.8vw;
   width: clamp(220px, 13vw, 260px);
 }
 
@@ -253,8 +281,8 @@
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
-    width: 33%;
-    height: 47%;
+    width: 35.5%;
+    height: 51%;
   }
 
   .bf-machine-tour-card__map-panel {

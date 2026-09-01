@@ -139,8 +139,8 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
         <div className="bf-machine-tour-card__expanded" aria-hidden={!expanded} data-map-open={mapOpen ? "true" : "false"}>
           <div className="bf-machine-tour-card__topbar">
             <div>
-              <span>GUIDED TOUR · RUNTIME ~05:00 · PREREQUISITES NONE</span>
-              <strong>Boundary First Labs — tour &amp; takeaways</strong>
+              <span>{current.eyebrow} · {activeStep + 1} / {tourSteps.length} · GUIDED TOUR · ~05:00</span>
+              <strong>{current.title}</strong>
             </div>
             <div className="bf-machine-tour-card__topbar-actions">
               <button
@@ -164,11 +164,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
             <div className="bf-machine-tour-card__main">
               <div className="bf-machine-tour-card__stage">
                 <section className="bf-machine-tour-card__current" aria-live="polite">
-                  <div className="bf-machine-tour-card__current-register">
-                    <span>{current.eyebrow}</span>
-                    <span>{activeStep + 1} / {tourSteps.length}</span>
-                  </div>
-                  <h2>{current.title}</h2>
                   <p>{current.body}</p>
                   <div className="bf-machine-tour-card__takeaway">
                     <small>TAKEAWAY</small>
