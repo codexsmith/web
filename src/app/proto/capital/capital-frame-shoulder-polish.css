@@ -2,37 +2,32 @@
 
    Refinement after the first explicit-fitting pass.
 
-   The previous shoulder fitting was spatially anchored to the outer edge of
-   the widened header. Because the vertical conduit itself is 18px wide, that
-   made the fitting read as a rounded end-cap hanging inward rather than a
-   junction centered on the riser.
+   The shoulder is a junction centered on the 18px riser, not a rounded cap on
+   the trunk. The plaque is a mounted identification plate and must remain fully
+   legible above the fitting/engine stack.
 
-   This pass makes the shoulder:
-     - wider and shallower;
-     - centered on the 18px vertical conduit;
-     - overlapped upward into the trunk and downward over the riser;
-     - visually smoother than either conduit;
-     - clearly subordinate to connector hardware.
+   Assembly law:
+     conduit < shoulder fitting < identification plaque < connector hardware
 
-   The conduit itself now carries one machine label only: PRIMARY CONVERSION
-   RAIL. The stage sequence belongs to the cards below and is not repeated here.
+   The conduit itself carries one machine label only: PRIMARY CONVERSION RAIL.
 */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
-    --capital-shoulder-polish-width: 44px;
-    --capital-shoulder-polish-height: 32px;
-    /* (44px fitting - 18px conduit) / 2 = 13px overhang per side. */
-    --capital-shoulder-polish-overhang: 13px;
-    --capital-shoulder-polish-drop: 16px;
+    --capital-shoulder-polish-width: 48px;
+    --capital-shoulder-polish-height: 34px;
+    /* (48px fitting - 18px conduit) / 2 = 15px overhang per side. */
+    --capital-shoulder-polish-overhang: 15px;
+    --capital-shoulder-polish-drop: 17px;
+
+    --capital-shoulder-plaque-width: 36px;
+    --capital-shoulder-plaque-height: 68px;
   }
 
   /* ---------------------------------------------------------------------- */
   /* PRIMARY RAIL LABEL                                                     */
   /* ---------------------------------------------------------------------- */
 
-  /* The rail name is stamped directly into the trunk. There is no external
-     annotation and no duplicate rendering of the six stage names. */
   .capital-frame__engine-heading {
     margin-top: 18px !important;
   }
@@ -57,10 +52,6 @@
   /* SHOULDER FITTINGS                                                      */
   /* ---------------------------------------------------------------------- */
 
-  /* Center the fitting over the riser instead of pinning it to the trunk's
-     outer edge. Its top half disappears into the header, and its lower half
-     sleeves the vertical conduit. That overlap makes the assembly read as one
-     cast transition rather than three adjacent rectangles. */
   .capital-frame__engine-heading::before,
   .capital-frame__engine-heading::after {
     z-index: 14 !important;
@@ -68,7 +59,7 @@
     width: var(--capital-shoulder-polish-width) !important;
     height: var(--capital-shoulder-polish-height) !important;
     border: 1px solid color-mix(in srgb, var(--capital-conduit-edge) 86%, #90a0a6) !important;
-    border-radius: 14px 14px 12px 12px !important;
+    border-radius: 15px 15px 13px 13px !important;
     filter: none !important;
     box-shadow:
       inset 1px 1px 0 rgba(255,255,255,.055),
@@ -79,13 +70,12 @@
   .capital-frame__engine-heading::before {
     left: calc(var(--capital-shoulder-polish-overhang) * -1) !important;
     background:
-      /* quiet collar over the centerline where the riser emerges */
       linear-gradient(90deg,
-        transparent 0 12px,
-        rgba(255,255,255,.035) 12px 13px,
-        transparent 13px 30px,
-        rgba(0,0,0,.16) 30px 31px,
-        transparent 31px),
+        transparent 0 14px,
+        rgba(255,255,255,.035) 14px 15px,
+        transparent 15px 32px,
+        rgba(0,0,0,.16) 32px 33px,
+        transparent 33px),
       linear-gradient(180deg,
         color-mix(in srgb, var(--capital-conduit-face) 94%, #45565c),
         color-mix(in srgb, var(--capital-conduit-dark) 84%, #192329)) !important;
@@ -95,32 +85,67 @@
     right: calc(var(--capital-shoulder-polish-overhang) * -1) !important;
     background:
       linear-gradient(90deg,
-        transparent 0 12px,
-        rgba(255,255,255,.03) 12px 13px,
-        transparent 13px 30px,
-        rgba(0,0,0,.16) 30px 31px,
-        transparent 31px),
+        transparent 0 14px,
+        rgba(255,255,255,.03) 14px 15px,
+        transparent 15px 32px,
+        rgba(0,0,0,.16) 32px 33px,
+        transparent 33px),
       linear-gradient(180deg,
         color-mix(in srgb, var(--bf-region-about) 6%, color-mix(in srgb, var(--capital-conduit-face) 94%, #45565c)),
         color-mix(in srgb, var(--capital-conduit-dark) 84%, #192329)) !important;
   }
 
-  /* The risers should appear to disappear into the fitting. Pull their top
-     edge slightly upward behind the shoulder rather than letting a thin seam
-     survive below it. */
+  /* The risers disappear into the fitting rather than terminating below it. */
   .capital-frame__input-console::after,
   .capital-frame__diligence-console::after {
     top: calc(var(--capital-header-top-offset) + var(--capital-header-conduit-height) - 10px) !important;
     z-index: 6 !important;
   }
 
-  /* Keep plaques independent of the fitting silhouette and above it. They stay
-     mounted on the riser centerline, but move down a touch so the shoulder can
-     read as a machine part instead of a backing plate for the label. */
+  /* ---------------------------------------------------------------------- */
+  /* SHOULDER IDENTIFICATION PLAQUES                                        */
+  /* ---------------------------------------------------------------------- */
+
+  /* `capital-frame-manifolds.css` gives the side consoles `isolation:isolate`.
+     That traps even a very large plaque z-index beneath the engine stacking
+     context. The raw conduit stays on z=6, so desktop can safely release that
+     isolation and let the plaque occupy the apparatus annotation layer. */
+  .capital-frame__input-console,
+  .capital-frame__diligence-console {
+    isolation: auto !important;
+    z-index: auto !important;
+  }
+
+  /* The plaque overlaps only the lower lip of the shoulder, then extends down
+     the riser. Its entire label remains visible and the larger plate reads as
+     mounted hardware rather than tiny metadata. */
   .capital-frame__input-console::before,
   .capital-frame__diligence-console::before {
-    top: calc(var(--capital-header-top-offset) + var(--capital-header-conduit-height) - 19px) !important;
-    z-index: 5000 !important;
+    top: calc(var(--capital-header-top-offset) + var(--capital-header-conduit-height) + 4px) !important;
+    z-index: 6000 !important;
+    box-sizing: border-box !important;
+    width: var(--capital-shoulder-plaque-width) !important;
+    height: var(--capital-shoulder-plaque-height) !important;
+    min-height: var(--capital-shoulder-plaque-height) !important;
+    padding: 9px 7px !important;
+    border-radius: 5px !important;
+    font-size: .47rem !important;
+    line-height: 1 !important;
+    font-weight: 900 !important;
+    letter-spacing: .12em !important;
+    text-shadow: 0 1px 0 rgba(0,0,0,.72) !important;
+    overflow: visible !important;
+  }
+
+  /* The conduit centerline is 29px from the side-console edge:
+       20px conduit inset + 9px half-width.
+     A 36px plaque therefore needs an 11px edge inset to share that centerline. */
+  .capital-frame__input-console::before {
+    right: 11px !important;
+  }
+
+  .capital-frame__diligence-console::before {
+    left: 11px !important;
   }
 }
 
