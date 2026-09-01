@@ -1,0 +1,26 @@
+/* Capital prototype · Machine Bed Header Cleanup
+
+   The machine bed does not need a narrative header between the primary
+   conversion rail and the machinery itself. The chassis and modules already
+   identify the Lab and its functions. Removing this strip restores direct
+   apparatus continuity and eliminates the erroneous framing:
+
+     "Where conversion work happens"
+     "The Lab holds the middle of the rail"
+
+   The machine bed now begins directly with the chassis/functions layer.
+*/
+
+.capital-frame__machine-bed > header {
+  display: none !important;
+}
+
+.capital-frame__machine-bed-body {
+  padding-top: 10px !important;
+}
+
+/* With no header strip, the body owns the top interior edge of the housing. */
+.capital-frame__machine-bed-body > :first-child,
+.capital-frame__machine-functions {
+  align-self: start;
+}
