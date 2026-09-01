@@ -1,0 +1,97 @@
+/* Capital prototype · Side Interface Fit
+
+   Fine-point spatial correction:
+
+   CARD | SQUARE CONNECTOR | CONDUIT
+
+   The canonical square connector is the entire local interface. Previous short
+   conduit "arms" were compensating for mismatched x-position assumptions and
+   created redundant geometry between the connector and the vertical conduit.
+
+   This pass makes the left and right side assemblies homologous:
+   - 20px square connector
+   - 18px vertical conduit
+   - connector touches both card and conduit
+   - no intermediary arm
+*/
+
+@media (min-width: 1121px) {
+  /* ---------------------------------------------------------------------- */
+  /* SHARED SIDE-GEOMETRY                                                    */
+  /* ---------------------------------------------------------------------- */
+
+  /*
+   * With the body grid's 16px inter-column gap, placing each conduit 4px from
+   * its column boundary gives exactly 20px from the conduit to the adjacent
+   * center-rail card. A 42px content inset gives the same 20px clearance from
+   * side-rail cards to the conduit's near edge.
+   */
+  .capital-frame__input-console {
+    padding-right: 42px;
+  }
+
+  .capital-frame__diligence-console {
+    padding-left: 42px;
+  }
+
+  .capital-frame__input-console::after {
+    right: 4px;
+  }
+
+  .capital-frame__diligence-console::after {
+    left: 4px;
+  }
+
+  /* Keep the manifold label cap centered over the shifted conduit. */
+  .capital-frame__input-console::before {
+    right: -2px;
+  }
+
+  .capital-frame__diligence-console::before {
+    left: -2px;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* LEFT SIDE · CARD -> CONNECTOR -> CONDUIT                                */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__funding-port > i,
+  .capital-frame__problem-port > i {
+    right: calc(var(--capital-connector-size) * -1);
+  }
+
+  /* The connector itself now occupies the entire card-to-conduit gap. */
+  .capital-frame__funding-port::after,
+  .capital-frame__problem-port::after {
+    display: none;
+  }
+
+  /* Capital is the matching connector on the opposite side of the intake bus. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before {
+    display: none;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    left: 0;
+    transform: translate(-100%, -50%);
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* RIGHT SIDE · CARD -> CONNECTOR -> CONDUIT                               */
+  /* ---------------------------------------------------------------------- */
+
+  /* Retained Capability terminates directly into the diligence conduit. */
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    right: calc(var(--capital-connector-size) * -1);
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    display: none;
+  }
+
+  /* Diligence gates receive directly from the other face of the same conduit. */
+  .capital-frame__diligence-gates li::before,
+  .capital-frame__boundary-note::before {
+    left: calc(var(--capital-connector-size) * -1);
+  }
+}
