@@ -47,24 +47,18 @@ const tourSteps = [
 const mapColumns = [
   {
     target: "people",
-    items: [
-      { index: "01", kind: "takeaway", text: "Representation is the control." },
-      { index: "04", kind: "institution", text: "People — who carries the work." },
-    ],
+    index: "01",
+    text: "People + representation → more agency.",
   },
   {
     target: "products",
-    items: [
-      { index: "02", kind: "takeaway", text: "Hidden assumptions become operational consequences." },
-      { index: "05", kind: "institution", text: "Products — what the work becomes." },
-    ],
+    index: "02",
+    text: "Products + exposed assumptions → better solutions.",
   },
   {
     target: "publications",
-    items: [
-      { index: "03", kind: "takeaway", text: "The domains differ; the mechanics recur." },
-      { index: "06", kind: "institution", text: "Publications — what the work makes public." },
-    ],
+    index: "03",
+    text: "Publications + recurring structure → refined knowledge.",
   },
 ] as const;
 
@@ -312,16 +306,10 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
                       width: geometry.width,
                     } : undefined}
                   >
-                    {column.items.map((item) => (
-                      <article
-                        key={item.index}
-                        className="bf-machine-tour-map-layer__item"
-                        data-map-kind={item.kind}
-                      >
-                        <span>{item.index}</span>
-                        <strong>{item.text}</strong>
-                      </article>
-                    ))}
+                    <article className="bf-machine-tour-map-layer__item">
+                      <span>{column.index}</span>
+                      <strong>{column.text}</strong>
+                    </article>
                   </section>
                 );
               })}

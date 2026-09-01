@@ -141,13 +141,18 @@
   height: 145% !important;
 }
 
+/* The map is supplementary context; opening it must never suppress tour progress. */
+.bf-machine-tour-card[data-map-open="true"] .bf-machine-tour-card__progress {
+  display: flex !important;
+}
+
 /*
  * Apparatus-level mapping layer.
  *
  * The React component measures People / Products / Publications and writes each
- * target's actual x, y, and width into its corresponding column. Each column is
- * then translated upward by its own height, placing the map physically above the
- * machine card in screen-y rather than covering the card in z.
+ * target's actual x, y, and width into its corresponding map card. Each card is
+ * translated upward in screen-y and then mechanically bridged back down into the
+ * measured target so the independently positioned objects read as one assembly.
  */
 .bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-tour-map-layer {
   position: absolute;
@@ -169,9 +174,8 @@
 .bf-machine-tour-map-layer__column {
   --map-tone: #83c66d;
   position: absolute;
-  display: grid;
-  gap: .34vw;
   min-width: 0;
+  overflow: visible;
   opacity: 0;
   transform: translateY(calc(-100% - .52vw));
   transform-origin: center bottom;
@@ -195,6 +199,50 @@
   --map-tone: #a4e44f;
 }
 
+/* Mechanical neck between the independently positioned map card and its target. */
+.bf-machine-tour-map-layer__column::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: calc(100% - 1px);
+  width: .3vw;
+  min-width: 4px;
+  height: .86vw;
+  min-height: 11px;
+  transform: translateX(-50%);
+  border-left: max(1px, .055vw) solid #0a0d0e;
+  border-right: max(1px, .055vw) solid #0a0d0e;
+  background:
+    linear-gradient(90deg, #111719 0 18%, color-mix(in srgb, var(--map-tone) 44%, #374145) 46% 56%, #101517 82% 100%);
+  box-shadow:
+    inset 1px 0 rgba(255,255,255,.06),
+    0 .18vw .3vw rgba(0,0,0,.55);
+}
+
+/* Receiver plate overlaps the target's top edge and carries two visible contacts. */
+.bf-machine-tour-map-layer__column::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(100% + .56vw);
+  width: 1.34vw;
+  min-width: 18px;
+  height: .48vw;
+  min-height: 7px;
+  transform: translateX(-50%);
+  border: max(1px, .055vw) solid #697477;
+  border-radius: .14vw;
+  background:
+    radial-gradient(circle at 34% 50%, #050707 0 20%, var(--map-tone) 23% 35%, #050707 38% 49%, transparent 52%),
+    radial-gradient(circle at 66% 50%, #050707 0 20%, var(--map-tone) 23% 35%, #050707 38% 49%, transparent 52%),
+    linear-gradient(180deg, #343b3e 0 18%, #171d1f 24% 64%, #090c0d 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.09),
+    0 .16vw .28vw rgba(0,0,0,.65),
+    0 0 .22vw color-mix(in srgb, var(--map-tone) 18%, transparent);
+}
+
 .bf-machine-tour-map-layer__item {
   box-sizing: border-box;
   display: grid;
@@ -202,25 +250,18 @@
   gap: .42vw;
   align-items: center;
   min-width: 0;
-  min-height: 2.15vw;
-  padding: .38vw .46vw;
-  border: max(1px, .055vw) solid color-mix(in srgb, var(--map-tone) 45%, #344043);
+  min-height: 2.7vw;
+  padding: .48vw .54vw;
+  border: max(1px, .055vw) solid color-mix(in srgb, var(--map-tone) 58%, #344043);
   border-radius: .18vw;
   color: #dfe4df;
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--map-tone) 8%, #111719), #090e10 38%),
+    linear-gradient(90deg, color-mix(in srgb, var(--map-tone) 12%, #111719), #090e10 44%),
     #090e10;
   box-shadow:
-    inset 0 1px rgba(255,255,255,.035),
-    inset 0 -2px rgba(0,0,0,.46),
-    0 .24vw .48vw rgba(0,0,0,.5);
-}
-
-.bf-machine-tour-map-layer__item[data-map-kind="institution"] {
-  border-color: color-mix(in srgb, var(--map-tone) 64%, #394649);
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--map-tone) 13%, #111719), #090e10 46%),
-    #090e10;
+    inset 0 1px rgba(255,255,255,.045),
+    inset 0 -2px rgba(0,0,0,.5),
+    0 .24vw .48vw rgba(0,0,0,.55);
 }
 
 .bf-machine-tour-map-layer__item > span {
@@ -234,7 +275,7 @@
 .bf-machine-tour-map-layer__item > strong {
   min-width: 0;
   color: #e7e9e5;
-  font: 500 clamp(.62rem, .67vw, .76rem)/1.24 Georgia, serif;
+  font: 500 clamp(.66rem, .72vw, .82rem)/1.28 Georgia, serif;
   overflow-wrap: anywhere;
 }
 
@@ -262,13 +303,20 @@
     height: 154% !important;
   }
 
-  .bf-machine-tour-map-layer__column {
-    gap: 5px;
+  .bf-machine-tour-map-layer__item {
+    min-height: 38px;
+    padding: 7px 8px;
   }
 
-  .bf-machine-tour-map-layer__item {
-    min-height: 34px;
-    padding: 6px 7px;
+  .bf-machine-tour-map-layer__column::before {
+    width: 4px;
+    height: 12px;
+  }
+
+  .bf-machine-tour-map-layer__column::after {
+    top: calc(100% + 8px);
+    width: 20px;
+    height: 8px;
   }
 }
 
