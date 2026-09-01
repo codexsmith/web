@@ -358,10 +358,8 @@ export function CapitalEconomicsFrame() {
         <main className="capital-frame__engine" aria-labelledby="conversion-engine-title">
           <header className="capital-frame__engine-heading">
             <div>
-              <span>Primary conversion rail</span>
-              <h2 id="conversion-engine-title">Capital → coherent capacity → bounded work → validation → transfer → retained capability</h2>
+              <h2 id="conversion-engine-title">Primary conversion rail</h2>
             </div>
-            <strong>BFL / INSTITUTIONAL MACHINE</strong>
           </header>
 
           <section className="capital-frame__conversion-rail" aria-label="Capital conversion sequence">
