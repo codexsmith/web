@@ -9,6 +9,7 @@ import "./five-minute-tour-card.css";
 import "./five-minute-tour-growth.css";
 import "./five-minute-tour-compact.css";
 import "./five-minute-tour-about-attachment.css";
+import "./five-minute-tour-compact-polish.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 

@@ -1,0 +1,99 @@
+/* Final compact-card readability pass. Imported after the attachment geometry. */
+
+/* Full Loop: keep the About connector fixed, but give the closed Tour enough
+ * physical mass to read alongside People rather than as a miniature control. */
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+  > .bf-machine-tour-card[data-expanded="false"] {
+  width: 112% !important;
+  height: 110% !important;
+}
+
+/* Bring compact Tour typography and icon scale back toward the surrounding
+ * first-class machine cards. */
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-plate {
+  left: 9px;
+  top: 9px;
+  width: 58px;
+  height: 58px;
+  padding: 5px;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-well svg {
+  width: 30px;
+  height: 30px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header {
+  min-height: 70px;
+  padding: 11px 10px 7px 76px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header span {
+  font-size: .55rem;
+  line-height: 1.2;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
+  margin-top: .28rem;
+  font-size: clamp(1.08rem, 1.12vw, 1.22rem);
+  line-height: 1.05;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary {
+  margin: 0 10px 8px 76px;
+  padding: 8px 9px;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary small {
+  font-size: .48rem;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary p {
+  margin-top: .28rem;
+  font-size: .69rem;
+  line-height: 1.38;
+}
+
+/* Match the surrounding card register instead of shrinking the status strip.
+ * The first cell explicitly reserves the lamp gutter; the earlier compact rule
+ * reset all padding and caused STATE to occupy the lamp itself. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] footer {
+  min-height: 38px;
+  margin: 0 4px 4px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] footer span {
+  padding: 7px 8px;
+  font-size: .52rem;
+  line-height: 1.2;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] footer small {
+  font-size: .47rem;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] footer span:first-child {
+  padding-left: 1.45rem;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] footer span:first-child::before {
+  left: .5rem;
+  width: .44rem;
+  height: .44rem;
+}
+
+@media (max-width: 1180px) {
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-tour-card[data-expanded="false"] {
+    height: 114% !important;
+  }
+}
