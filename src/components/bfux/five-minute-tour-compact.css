@@ -1,0 +1,297 @@
+/*
+ * Compact tour geometry.
+ *
+ * Full Loop uses existing machine guides rather than an independent overlay:
+ * - left edge = About left edge (64.85%)
+ * - lower edge = People top edge (70%)
+ * The compact card is a raised plate in that column. Opening preserves that
+ * lower-left anchor and grows only upward and rightward, by the minimum amount
+ * needed for the sequential tour content.
+ */
+
+/* The tour now lives inside the real draggable apparatus. Never suppress the
+ * surrounding machine when the tour grows. */
+.bf-machine[data-skin="physical"] .bf-machine__board:has(.bf-machine-tour-card[data-expanded="true"]) .bf-machine__status {
+  opacity: 1 !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus:has(> .bf-machine-tour-card[data-expanded="true"]) > .bf-machine-node:not(.bf-machine-tour-card) {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus:has(> .bf-machine-tour-card[data-expanded="true"]) .bf-machine__traces,
+.bf-machine[data-skin="physical"] .bf-machine__apparatus:has(> .bf-machine-tour-card[data-expanded="true"]) .bf-machine__lower-deck {
+  opacity: 1 !important;
+}
+
+/* Full Loop: compact readable plate anchored to About / People guides. */
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="false"] {
+  left: 64.85%;
+  top: auto;
+  bottom: 30%;
+  width: 16.3%;
+  height: 19.5%;
+  z-index: 12;
+}
+
+/* Core set keeps a compact card rather than a fourth full-height top module. */
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="false"] {
+  left: 75.8%;
+  top: 11%;
+  bottom: auto;
+  width: 21%;
+  height: 25%;
+  z-index: 12;
+}
+
+/* Compact-face tuning: retain the machine-card grammar at the smaller size. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-plate {
+  left: .45vw;
+  top: .5vw;
+  width: 3.45vw;
+  height: 3.9vw;
+  padding: .36vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-well svg {
+  width: 1.7vw;
+  height: 1.7vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header {
+  min-height: 3.25vw;
+  padding: .62vw .52vw .26vw 4.18vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header span {
+  font-size: .47vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
+  margin-top: .22vw;
+  font-size: clamp(.86rem, .94vw, 1.08rem);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary {
+  margin: 0 .5vw .35vw 4.18vw;
+  padding: .34vw .4vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary small {
+  font-size: .43vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary p {
+  margin-top: .22vw;
+  font-size: clamp(.6rem, .61vw, .7rem);
+  line-height: 1.34;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] footer {
+  min-height: 2.35vw;
+  margin: 0 .26vw .26vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] footer span {
+  padding: .3vw .34vw;
+  font-size: .45vw;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] footer small {
+  font-size: .39vw;
+}
+
+/* Full Loop expansion: same lower-left anchor, just enough additional chassis
+ * for the authored step, takeaway, and controls to fit without collision. */
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
+  left: 64.85%;
+  top: auto;
+  bottom: 30%;
+  width: 34.7%;
+  height: 48.5%;
+  z-index: 40;
+}
+
+/* Core expansion remains bounded as well. */
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
+  left: 47.8%;
+  top: 16%;
+  bottom: auto;
+  width: 49%;
+  height: 53%;
+  z-index: 40;
+}
+
+/* The current step is now the card title. Keep the title readable and make the
+ * content well responsible only for prose + takeaway. */
+.bf-machine-tour-card__topbar {
+  align-items: flex-start;
+  min-height: 62px;
+  padding: 10px 11px 9px 13px;
+}
+
+.bf-machine-tour-card__topbar > div:first-child {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.bf-machine-tour-card__topbar strong {
+  display: block;
+  max-width: 100%;
+  font-size: clamp(1.05rem, 1.2vw, 1.34rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.bf-machine-tour-card__topbar span {
+  font-size: .52rem;
+  line-height: 1.2;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__body,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__main,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__stage,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__current {
+  min-height: 0;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__body {
+  overflow: hidden;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__main {
+  grid-template-rows: minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__stage {
+  padding: 9px 10px 8px;
+  overflow: hidden;
+}
+
+.bf-machine-tour-card__current {
+  align-content: start;
+  overflow: hidden;
+  padding: clamp(12px, 1vw, 16px);
+}
+
+.bf-machine-tour-card__current > p {
+  margin: 0;
+  font-size: clamp(.73rem, .76vw, .84rem);
+  line-height: 1.5;
+}
+
+.bf-machine-tour-card__takeaway {
+  margin-top: .7rem;
+  padding: .52rem .64rem;
+}
+
+.bf-machine-tour-card__takeaway strong {
+  font-size: clamp(.76rem, .8vw, .88rem);
+  line-height: 1.32;
+}
+
+.bf-machine-tour-card__controls {
+  position: relative;
+  z-index: 8;
+  min-height: 46px;
+  gap: .55rem;
+  padding: 7px 10px 8px;
+  background: linear-gradient(180deg, rgba(10,15,17,.96), #080c0e);
+}
+
+.bf-machine-tour-card__progress {
+  max-width: 150px;
+}
+
+.bf-machine-tour-card__control-buttons button,
+.bf-machine-tour-card__map-trigger--footer {
+  min-height: 32px;
+}
+
+/* Two-contact dock: same physical grammar as Research's multi-contact lower
+ * connection, reduced to the requested two contacts. */
+.bf-machine-tour-card__lower-dock {
+  position: absolute;
+  z-index: 14;
+  left: 50%;
+  bottom: -.98vw;
+  display: flex;
+  align-items: center;
+  gap: .28vw;
+  padding: .24vw .36vw;
+  transform: translateX(-50%);
+  border: max(1px, .065vw) solid #727b7e;
+  border-top-color: #92999b;
+  border-radius: .2vw;
+  background: linear-gradient(180deg, #343b3e 0 14%, #171d1f 18% 58%, #080b0c 100%);
+  box-shadow:
+    inset 0 max(1px, .065vw) rgba(255,255,255,.1),
+    inset 0 calc(var(--machine-u, 1vw) * -.13) #050606,
+    0 .26vw .45vw rgba(0,0,0,.8);
+  transition: opacity 160ms ease, transform 260ms ease;
+}
+
+.bf-machine-tour-card__lower-dock i {
+  display: block;
+  width: .58vw;
+  height: .58vw;
+  border: max(1px, .065vw) solid color-mix(in srgb, var(--tone) 66%, #d7dad8);
+  border-radius: 50%;
+  background: radial-gradient(circle, #030505 0 35%, color-mix(in srgb, var(--tone) 42%, #303638) 38% 57%, #080a0b 60%);
+  box-shadow: inset 0 0 0 max(1px, .04vw) #000, 0 0 .24vw color-mix(in srgb, var(--tone) 24%, transparent);
+}
+
+.bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__lower-dock {
+  opacity: .72;
+}
+
+/* Map disclosure stays within approximately the same rightward footprint. */
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
+  width: 20.5%;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
+  width: 29%;
+}
+
+.bf-machine-tour-card__map-panel {
+  left: calc(100% + .9vw);
+  top: 3.8vw;
+  width: clamp(220px, 13vw, 260px);
+}
+
+.bf-machine-tour-card[data-map-open="true"] .bf-machine-tour-card__progress {
+  display: none;
+}
+
+.bf-machine-tour-card[data-map-open="true"] .bf-machine-tour-card__map-trigger--footer {
+  width: 34px;
+  padding-inline: 0;
+}
+
+.bf-machine-tour-card[data-map-open="true"] .bf-machine-tour-card__map-trigger--footer span {
+  display: none;
+}
+
+@media (max-width: 1180px) {
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="false"] {
+    height: 21%;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
+    width: 35.5%;
+    height: 51%;
+  }
+
+  .bf-machine-tour-card__map-panel {
+    width: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine-tour-card__lower-dock {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,449 @@
+/* Five-minute tour card: a first-class physical module in both Lab Machine resolutions. */
+
+.bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-tour-card {
+  --tone: #83c66d;
+  left: 1.45%;
+  top: 28.5%;
+  width: 20.3%;
+  height: 25.5%;
+  z-index: 4;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    left 360ms cubic-bezier(.2,.78,.2,1),
+    top 360ms cubic-bezier(.2,.78,.2,1),
+    width 360ms cubic-bezier(.2,.78,.2,1),
+    height 360ms cubic-bezier(.2,.78,.2,1),
+    filter 280ms ease,
+    opacity 180ms ease;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card .bf-machine-node__face {
+  overflow: hidden;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__compact {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 120ms ease, visibility 0s linear 120ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card header strong {
+  font-size: clamp(.92rem, 1.08vw, 1.22rem);
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-tour-card .bf-machine-node__boundary p {
+  display: block;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card .bf-machine-node__boundary p {
+  font-size: clamp(.62rem, .68vw, .75rem);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card .bf-machine-node__icon-well svg {
+  color: var(--tone);
+}
+
+/* Core set: preserve the large Research instrument while making room for a sixth first-class card. */
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+  left: 3.2%;
+  top: 7%;
+  width: 21.2%;
+  height: 41.5%;
+}
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+  left: 27.4%;
+  top: 7%;
+  width: 21.2%;
+  height: 41.5%;
+}
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+  left: 51.6%;
+  top: 7%;
+  width: 21.2%;
+  height: 41.5%;
+}
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+  left: 3.2%;
+  top: 51.5%;
+  width: 21.2%;
+  height: 41.5%;
+}
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+  left: 27.4%;
+  top: 51.5%;
+  width: 69.4%;
+  height: 41.5%;
+}
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card {
+  left: 75.8%;
+  top: 7%;
+  width: 21%;
+  height: 41.5%;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Expansion stays inside the machine instead of navigating to a detached page. */
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
+  left: 2.2%;
+  top: 3.2%;
+  width: 95.6%;
+  height: 91.8%;
+  z-index: 40;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  filter: drop-shadow(0 24px 24px rgba(0,0,0,.88));
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-node__shell {
+  border-color: color-mix(in srgb, var(--tone) 54%, #7d8583);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    inset 0 -3px rgba(0,0,0,.9),
+    0 0 0 3px #050607,
+    0 18px 36px rgba(0,0,0,.8),
+    0 0 34px color-mix(in srgb, var(--tone) 14%, transparent);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__compact {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 90ms ease, visibility 0s linear 90ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  min-height: 0;
+  color: #dce1de;
+  background:
+    linear-gradient(rgba(117,158,129,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117,158,129,.035) 1px, transparent 1px),
+    radial-gradient(circle at 30% 22%, color-mix(in srgb, var(--tone) 8%, #111819), #090d0f 58%, #070a0b 100%);
+  background-size: 20px 20px, 20px 20px, auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(.992);
+  transform-origin: center;
+  transition: opacity 150ms ease, transform 240ms ease, visibility 0s linear 180ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__expanded {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+  transition-delay: 110ms, 70ms, 0s;
+}
+
+.bf-machine-tour-card__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 68px;
+  padding: 12px 16px 12px 18px;
+  border-bottom: 1px solid #2d393a;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(0,0,0,.16));
+}
+
+.bf-machine-tour-card__topbar > div {
+  display: grid;
+  gap: 5px;
+}
+
+.bf-machine-tour-card__topbar span,
+.bf-machine-tour-card__current-register,
+.bf-machine-tour-card__summary-title,
+.bf-machine-tour-card__step > span,
+.bf-machine-tour-card__takeaway small {
+  color: color-mix(in srgb, var(--tone) 82%, #dce3df);
+  font: 700 .56rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.bf-machine-tour-card__topbar strong {
+  color: #f0efe9;
+  font: 500 clamp(1.25rem, 1.7vw, 2rem)/1 Georgia, serif;
+  letter-spacing: -.025em;
+}
+
+.bf-machine-tour-card__topbar button,
+.bf-machine-tour-card__control-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  border: 1px solid #425052;
+  border-radius: 4px;
+  color: #d8ddda;
+  background: linear-gradient(#192023, #0c1113);
+  box-shadow: inset 0 1px rgba(255,255,255,.045), 0 3px 6px rgba(0,0,0,.45);
+  font: 700 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.bf-machine-tour-card__topbar button {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+}
+
+.bf-machine-tour-card__topbar button svg,
+.bf-machine-tour-card__control-buttons svg {
+  width: 15px;
+  height: 15px;
+}
+
+.bf-machine-tour-card__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(245px, .78fr);
+  gap: 12px;
+  min-height: 0;
+  padding: 12px 14px 10px;
+}
+
+.bf-machine-tour-card__current,
+.bf-machine-tour-card__summary {
+  min-height: 0;
+  border: 1px solid #334145;
+  border-radius: 5px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.028), transparent 22%),
+    color-mix(in srgb, var(--tone) 2%, #0b1012);
+  box-shadow: inset 0 2px 9px rgba(0,0,0,.55), 0 1px rgba(255,255,255,.02);
+}
+
+.bf-machine-tour-card__current {
+  display: grid;
+  align-content: center;
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(14px, 1.45vw, 24px);
+}
+
+.bf-machine-tour-card__current-register {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.bf-machine-tour-card__current h2 {
+  max-width: 950px;
+  margin: .65rem 0 0;
+  color: #f1f0ea;
+  font: 500 clamp(1.45rem, 2vw, 2.45rem)/1.03 Georgia, serif;
+  letter-spacing: -.035em;
+}
+
+.bf-machine-tour-card__current > p {
+  max-width: 920px;
+  margin: .75rem 0 0;
+  color: #cdd3d0;
+  font-size: clamp(.75rem, .82vw, .95rem);
+  line-height: 1.55;
+}
+
+.bf-machine-tour-card__takeaway {
+  display: grid;
+  gap: 4px;
+  margin-top: 1rem;
+  padding: .65rem .78rem;
+  border-left: 3px solid var(--tone);
+  background: color-mix(in srgb, var(--tone) 7%, #0a0f10);
+}
+
+.bf-machine-tour-card__takeaway strong {
+  color: #ecede8;
+  font: 500 clamp(.8rem, .9vw, 1.02rem)/1.35 Georgia, serif;
+}
+
+.bf-machine-tour-card__summary {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 14px;
+}
+
+.bf-machine-tour-card__summary-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #283438;
+}
+
+.bf-machine-tour-card__summary-title svg {
+  width: 15px;
+  height: 15px;
+  color: var(--tone);
+}
+
+.bf-machine-tour-card__summary ol {
+  display: grid;
+  align-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 0 0;
+  list-style: none;
+}
+
+.bf-machine-tour-card__summary li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 9px;
+  align-items: start;
+  padding: 8px 9px;
+  border: 1px solid #2a373a;
+  border-radius: 4px;
+  background: #0b1113;
+}
+
+.bf-machine-tour-card__summary li > span {
+  color: var(--tone);
+  font: 700 .55rem/1.35 ui-monospace, monospace;
+}
+
+.bf-machine-tour-card__summary li > strong {
+  color: #dce0dc;
+  font: 500 clamp(.7rem, .75vw, .84rem)/1.38 Georgia, serif;
+}
+
+.bf-machine-tour-card__deck {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0 14px 10px;
+}
+
+.bf-machine-tour-card__step {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 7px;
+  min-height: 104px;
+  padding: 10px 11px;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid #303d40;
+  border-radius: 4px;
+  color: #d5dad7;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--tone) 5%, transparent), transparent 42%),
+    linear-gradient(#12181a, #0a0f11);
+  box-shadow: inset 0 1px rgba(255,255,255,.035), inset 0 -2px rgba(0,0,0,.48);
+  cursor: pointer;
+  transition: border-color 150ms ease, transform 150ms ease, background 150ms ease, opacity 150ms ease;
+}
+
+.bf-machine-tour-card__step:hover,
+.bf-machine-tour-card__step[data-active="true"] {
+  border-color: color-mix(in srgb, var(--tone) 72%, #53605d);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--tone) 11%, transparent), transparent 46%),
+    linear-gradient(#151d1d, #0b1112);
+}
+
+.bf-machine-tour-card__step[data-active="true"] {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px rgba(255,255,255,.05), 0 0 0 1px color-mix(in srgb, var(--tone) 25%, transparent), 0 5px 10px rgba(0,0,0,.38);
+}
+
+.bf-machine-tour-card__step > strong {
+  color: #e8e9e4;
+  font: 500 clamp(.68rem, .72vw, .84rem)/1.22 Georgia, serif;
+}
+
+.bf-machine-tour-card__step > small {
+  align-self: end;
+  color: #9ea9a5;
+  font-size: clamp(.53rem, .56vw, .64rem);
+  line-height: 1.35;
+}
+
+.bf-machine-tour-card__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 52px;
+  padding: 8px 14px 10px;
+  border-top: 1px solid #273337;
+}
+
+.bf-machine-tour-card__progress {
+  display: flex;
+  gap: 5px;
+  flex: 1 1 auto;
+  max-width: 320px;
+}
+
+.bf-machine-tour-card__progress i {
+  display: block;
+  flex: 1 1 0;
+  height: 4px;
+  border-radius: 999px;
+  background: #263133;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.7);
+}
+
+.bf-machine-tour-card__progress i[data-active="true"] {
+  background: var(--tone);
+  box-shadow: 0 0 7px color-mix(in srgb, var(--tone) 38%, transparent);
+}
+
+.bf-machine-tour-card__control-buttons {
+  display: flex;
+  gap: 7px;
+}
+
+.bf-machine-tour-card__control-buttons button {
+  min-height: 34px;
+  padding: 0 12px;
+}
+
+.bf-machine-tour-card__control-buttons button:disabled {
+  opacity: .32;
+  cursor: not-allowed;
+}
+
+/* Expanded tour is the active instrument; the rest of the machine remains visible as context. */
+.bf-machine[data-skin="physical"] .bf-machine__board:has(.bf-machine-tour-card[data-expanded="true"]) .bf-machine__status {
+  opacity: .08;
+  transition: opacity 180ms ease;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus:has(> .bf-machine-tour-card[data-expanded="true"]) > .bf-machine-node:not(.bf-machine-tour-card) {
+  opacity: .08 !important;
+  pointer-events: none !important;
+  transition: opacity 180ms ease;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus:has(> .bf-machine-tour-card[data-expanded="true"]) .bf-machine__traces,
+.bf-machine[data-skin="physical"] .bf-machine__apparatus:has(> .bf-machine-tour-card[data-expanded="true"]) .bf-machine__lower-deck {
+  opacity: .08;
+  transition: opacity 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-tour-card,
+  .bf-machine-tour-card__expanded,
+  .bf-machine-tour-card__compact,
+  .bf-machine-tour-card__step {
+    transition: none !important;
+  }
+}
