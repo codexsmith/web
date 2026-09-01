@@ -1,0 +1,135 @@
+/* Capital prototype · Shoulder + Rail Label Polish
+
+   Refinement after the first explicit-fitting pass.
+
+   The previous shoulder fitting was spatially anchored to the outer edge of
+   the widened header. Because the vertical conduit itself is 18px wide, that
+   made the fitting read as a rounded end-cap hanging inward rather than a
+   junction centered on the riser.
+
+   This pass makes the shoulder:
+     - wider and shallower;
+     - centered on the 18px vertical conduit;
+     - overlapped upward into the trunk and downward over the riser;
+     - visually smoother than either conduit;
+     - clearly subordinate to the rail label and connector hardware.
+
+   It also promotes PRIMARY CONVERSION RAIL from microcopy to an apparatus
+   annotation that can be read without competing with the conversion sentence.
+*/
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-frame {
+    --capital-shoulder-polish-width: 44px;
+    --capital-shoulder-polish-height: 32px;
+    /* (44px fitting - 18px conduit) / 2 = 13px overhang per side. */
+    --capital-shoulder-polish-overhang: 13px;
+    --capital-shoulder-polish-drop: 16px;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* PRIMARY RAIL LABEL                                                     */
+  /* ---------------------------------------------------------------------- */
+
+  /* Give the external annotation enough air to be a first-class apparatus
+     label. The trunk moves down only a few pixels; the machine topology below
+     is unchanged. */
+  .capital-frame__engine-heading {
+    margin-top: 34px !important;
+  }
+
+  .capital-frame__engine-heading > div > span {
+    top: -25px !important;
+    left: calc(var(--capital-header-side-extension) + 18px) !important;
+    padding: 0 2px !important;
+    color: color-mix(in srgb, #d7e6ea 88%, #8ba2aa) !important;
+    text-shadow:
+      0 1px 0 rgba(0,0,0,.72),
+      0 0 10px rgba(184,203,211,.10) !important;
+    font-size: .56rem !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    letter-spacing: .18em !important;
+    opacity: .96 !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* SHOULDER FITTINGS                                                      */
+  /* ---------------------------------------------------------------------- */
+
+  /* Center the fitting over the riser instead of pinning it to the trunk's
+     outer edge. Its top half disappears into the header, and its lower half
+     sleeves the vertical conduit. That overlap makes the assembly read as one
+     cast transition rather than three adjacent rectangles. */
+  .capital-frame__engine-heading::before,
+  .capital-frame__engine-heading::after {
+    z-index: 14 !important;
+    bottom: calc(var(--capital-shoulder-polish-drop) * -1) !important;
+    width: var(--capital-shoulder-polish-width) !important;
+    height: var(--capital-shoulder-polish-height) !important;
+    border: 1px solid color-mix(in srgb, var(--capital-conduit-edge) 86%, #90a0a6) !important;
+    border-radius: 14px 14px 12px 12px !important;
+    filter: none !important;
+    box-shadow:
+      inset 1px 1px 0 rgba(255,255,255,.055),
+      inset -2px -2px 0 rgba(0,0,0,.22),
+      0 4px 9px rgba(0,0,0,.20) !important;
+  }
+
+  .capital-frame__engine-heading::before {
+    left: calc(var(--capital-shoulder-polish-overhang) * -1) !important;
+    background:
+      /* quiet collar over the centerline where the riser emerges */
+      linear-gradient(90deg,
+        transparent 0 12px,
+        rgba(255,255,255,.035) 12px 13px,
+        transparent 13px 30px,
+        rgba(0,0,0,.16) 30px 31px,
+        transparent 31px),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--capital-conduit-face) 94%, #45565c),
+        color-mix(in srgb, var(--capital-conduit-dark) 84%, #192329)) !important;
+  }
+
+  .capital-frame__engine-heading::after {
+    right: calc(var(--capital-shoulder-polish-overhang) * -1) !important;
+    background:
+      linear-gradient(90deg,
+        transparent 0 12px,
+        rgba(255,255,255,.03) 12px 13px,
+        transparent 13px 30px,
+        rgba(0,0,0,.16) 30px 31px,
+        transparent 31px),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--bf-region-about) 6%, color-mix(in srgb, var(--capital-conduit-face) 94%, #45565c)),
+        color-mix(in srgb, var(--capital-conduit-dark) 84%, #192329)) !important;
+  }
+
+  /* The risers should appear to disappear into the fitting. Pull their top
+     edge slightly upward behind the shoulder rather than letting a thin seam
+     survive below it. */
+  .capital-frame__input-console::after,
+  .capital-frame__diligence-console::after {
+    top: calc(var(--capital-header-top-offset) + var(--capital-header-conduit-height) - 10px) !important;
+    z-index: 6 !important;
+  }
+
+  /* Keep plaques independent of the fitting silhouette and above it. They stay
+     mounted on the riser centerline, but move down a touch so the shoulder can
+     read as a machine part instead of a backing plate for the label. */
+  .capital-frame__input-console::before,
+  .capital-frame__diligence-console::before {
+    top: calc(var(--capital-header-top-offset) + var(--capital-header-conduit-height) - 19px) !important;
+    z-index: 5000 !important;
+  }
+}
+
+@media (pointer: coarse), (max-width: 760px) {
+  .capital-frame__engine-heading {
+    margin-top: 0 !important;
+  }
+
+  .capital-frame__engine-heading > div > span {
+    font-size: inherit !important;
+  }
+}
