@@ -91,10 +91,29 @@
   transform-origin: right bottom;
 }
 
-/* Footerless compact card: keep the attachment fixed and remove the dead lower band. */
+/* Footerless compact launcher: only the start control remains visible. */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
   width: 100% !important;
-  height: 76% !important;
+  height: 50% !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary {
+  display: none;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] .bf-machine-tour-card__compact {
+  justify-content: center;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-plate {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] header {
+  min-height: 0;
+  padding-top: .34vw;
+  padding-bottom: .34vw;
 }
 
 /* Expanded Full Loop: preserve the fixed bottom/right datum and pull left/up. */
@@ -117,7 +136,7 @@
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
   width: 100% !important;
-  height: 58% !important;
+  height: 42% !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
@@ -275,7 +294,7 @@
 
 @media (max-width: 1180px) {
   .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
-    height: 80% !important;
+    height: 54% !important;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"],
