@@ -6,6 +6,7 @@ import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import "./physical-machine-experience.css";
 import "./five-minute-tour-card.css";
+import "./five-minute-tour-growth.css";
 
 const resolutionLabels: Record<LabMachineResolution, string> = {
   mid: "Full loop",
