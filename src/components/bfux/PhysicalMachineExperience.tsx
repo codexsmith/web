@@ -89,9 +89,10 @@ export function PhysicalMachineExperience({
     }
 
     const frame = window.requestAnimationFrame(() => {
-      const nextHost = machineHostRef.current?.querySelector<HTMLElement>(
-        '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
-      ) ?? null;
+      const selector = activeResolution === "focus"
+        ? ".bf-machine__apparatus"
+        : '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]';
+      const nextHost = machineHostRef.current?.querySelector<HTMLElement>(selector) ?? null;
       setTourHost(nextHost);
     });
 
@@ -120,10 +121,12 @@ export function PhysicalMachineExperience({
       {!sectionSurface && tourHost
         ? createPortal(
             <>
-              <div className="bf-machine-tour-about-dock" aria-hidden="true">
-                <i />
-                <i />
-              </div>
+              {activeResolution === "mid" ? (
+                <div className="bf-machine-tour-about-dock" aria-hidden="true">
+                  <i />
+                  <i />
+                </div>
+              ) : null}
               <FiveMinuteTourCard resolution={activeResolution} />
             </>,
             tourHost,

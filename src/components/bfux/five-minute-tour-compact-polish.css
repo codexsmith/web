@@ -15,6 +15,33 @@
   height: clamp(72px, 5vw, 82px) !important;
 }
 
+/* Core set: the tour returns to its own fourth top-row slot instead of occupying
+ * the narrow gap between People and About. */
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
+  left: 75.8% !important;
+  top: 7% !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 21% !important;
+  height: clamp(72px, 5vw, 82px) !important;
+  transform-origin: right top;
+}
+
+/* In Core, expansion stays card-sized and grows inward from that top-right slot. */
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"],
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
+  left: auto !important;
+  top: 7% !important;
+  right: 3.2% !important;
+  bottom: auto !important;
+  width: 34.7% !important;
+  height: max(48.5%, 300px) !important;
+  transform-origin: right top;
+}
+
 /* The compact launcher contains only icon + start label + title. */
 .bf-machine[data-skin="physical"]
   .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary,

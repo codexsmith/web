@@ -62,7 +62,12 @@ const mapColumns = [
 const mapArmRightInset = 6;
 
 type MapGeometry = Record<string, { left: number; top: number; width: number }>;
-type MapArmGeometry = { left: number; top: number; width: number } | null;
+type MapArmGeometry = {
+  left: number;
+  top: number;
+  width: number;
+  connectorSide: "left" | "right";
+} | null;
 
 export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResolution }) {
   const [expanded, setExpanded] = useState(false);
@@ -117,13 +122,17 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
         const targetLeft = Math.min(...measuredTargets.map((geometry) => geometry.left));
         const targetTop = Math.min(...measuredTargets.map((geometry) => geometry.top));
         const targetRight = Math.max(...measuredTargets.map((geometry) => geometry.left + geometry.width));
+        const tourLeft = tourRect.left - hostRect.left;
         const tourRight = tourRect.right - hostRect.left;
-        const armLeft = Math.min(tourRight, targetLeft);
+        const tourIsLeft = tourRight <= targetLeft;
+        const armLeft = tourIsLeft ? tourRight : targetLeft;
+        const armRight = tourIsLeft ? targetRight : Math.max(targetRight, tourLeft);
 
         setMapArmGeometry({
           left: armLeft,
           top: targetTop,
-          width: Math.max(0, targetRight - armLeft - mapArmRightInset),
+          width: Math.max(0, armRight - armLeft - (tourIsLeft ? mapArmRightInset : 0)),
+          connectorSide: tourIsLeft ? "left" : "right",
         });
       });
     };
@@ -190,7 +199,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
         data-node-id="tour"
         data-expanded={expanded ? "true" : "false"}
         data-map-open={mapOpen ? "true" : "false"}
-        data-attached-to="about"
+        data-attached-to={resolution === "mid" ? "about" : undefined}
         data-machine-node-interactive="true"
         aria-expanded={expanded}
         aria-label={expanded ? "Five-minute Boundary First Labs tour and takeaways" : "Open five-minute Boundary First Labs tour and takeaways"}
@@ -315,6 +324,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
                 <section
                   className="bf-machine-tour-map-layer__arm"
                   data-ready="true"
+                  data-connector-side={mapArmGeometry.connectorSide}
                   style={{
                     left: mapArmGeometry.left,
                     top: mapArmGeometry.top,

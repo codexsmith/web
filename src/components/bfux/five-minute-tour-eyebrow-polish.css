@@ -8,6 +8,14 @@
   border-right-color: #667174;
 }
 
+/* In Core the Tour occupies the fourth top-row slot, so the eyebrow attaches
+ * from its right edge rather than assuming the Tour is always to the left. */
+.bf-machine-tour-map-layer__arm[data-connector-side="right"]::before {
+  right: auto;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
 /* Match the machine-card end treatment with a narrow right cap and two corner rivets. */
 .bf-machine-tour-map-layer__arm::after {
   content: "";
