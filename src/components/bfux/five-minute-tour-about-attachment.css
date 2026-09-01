@@ -1,10 +1,10 @@
 /*
- * About attachment pass.
+ * About attachment geometry.
  *
- * The tour is mounted as a child of About, so its geometry is defined relative
- * to the module it belongs to rather than by another set of machine-wide
- * coordinates. Compact state sits on About's upper edge; expansion preserves
- * that lower-left attachment point and grows only upward and rightward.
+ * About is the fixed datum. The two-contact connector belongs to About and never
+ * participates in the tour card's size transition. In Full Loop the tour keeps
+ * its lower-right relationship to About, so increasing width pulls the chassis
+ * left and increasing height pulls it up.
  */
 
 .bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
@@ -34,43 +34,100 @@
   opacity: 1 !important;
 }
 
-/* Shared attachment anchor. The two-contact dock projects through the small bay
- * and visually lands on About's upper housing. */
+/*
+ * Fixed connector hardware owned by About.
+ *
+ * The tour's lower edge sits .78vw above About. This housing straddles that gap
+ * and overlaps About slightly, so it reads as a permanent mechanical joint even
+ * while the tour chassis changes size around it.
+ */
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-about-dock {
+  position: absolute;
+  z-index: 18;
+  left: 50%;
+  top: -.76vw;
+  display: flex;
+  align-items: center;
+  gap: .28vw;
+  padding: .24vw .36vw;
+  transform: translateX(-50%);
+  border: max(1px, .065vw) solid #727b7e;
+  border-top-color: #92999b;
+  border-radius: .2vw;
+  background: linear-gradient(180deg, #343b3e 0 14%, #171d1f 18% 58%, #080b0c 100%);
+  box-shadow:
+    inset 0 max(1px, .065vw) rgba(255,255,255,.1),
+    inset 0 calc(var(--machine-u, 1vw) * -.13) #050606,
+    0 .26vw .45vw rgba(0,0,0,.8);
+  pointer-events: none;
+}
+
+.bf-machine-tour-about-dock i {
+  display: block;
+  width: .58vw;
+  height: .58vw;
+  border: max(1px, .065vw) solid color-mix(in srgb, #83c66d 66%, #d7dad8);
+  border-radius: 50%;
+  background: radial-gradient(circle, #030505 0 35%, color-mix(in srgb, #83c66d 42%, #303638) 38% 57%, #080a0b 60%);
+  box-shadow: inset 0 0 0 max(1px, .04vw) #000, 0 0 .24vw color-mix(in srgb, #83c66d 24%, transparent);
+}
+
+/* Shared vertical attachment: the tour always sits immediately above About. */
 .bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card {
-  left: 0 !important;
   top: auto !important;
   bottom: calc(100% + .78vw) !important;
-  width: 100% !important;
   z-index: 14;
+}
+
+/*
+ * Full Loop: right edge is the invariant attachment coordinate.
+ * At width:100% this is the same compact placement as before. Increasing width
+ * therefore moves only the left edge; the bottom edge stays fixed and height
+ * growth moves only the top edge.
+ */
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card {
+  left: auto !important;
+  right: 0 !important;
+  transform-origin: right bottom;
+}
+
+/* The compact display was visibly clipping its boundary/status content. */
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
+  width: 100% !important;
+  height: 98% !important;
+}
+
+/* Expanded Full Loop: preserve the fixed bottom/right datum and pull left/up. */
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
+  width: 213% !important;
+  height: 205% !important;
+  filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
+}
+
+/*
+ * Core set places About against the left side of the board. Expanding left there
+ * would push the tour off-machine, so Core keeps the same fixed connector but
+ * grows inward (right/up) from About's lower-left edge.
+ */
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card {
+  left: 0 !important;
+  right: auto !important;
   transform-origin: left bottom;
 }
 
-/* Full loop: same width as About, compact enough to read as an attached plate. */
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
-  height: 79% !important;
-}
-
-/* Core set: About is taller, so the plate needs a smaller fraction of its host. */
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
-  height: 60% !important;
-}
-
-/* Expansion keeps the same lower-left joint. The reduced heights fit above
- * About while still giving the sequential step enough breathing room. */
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
-  width: 213% !important;
-  height: 145% !important;
-  filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
+  width: 100% !important;
+  height: 72% !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
   width: 220% !important;
-  height: 118% !important;
+  height: 145% !important;
   filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
 }
 
-/* The map sidecar still unfolds from the header icon, but the main chassis
- * contracts so the combined instrument stays near the same rightward extent. */
+/* The map sidecar still unfolds from the header icon. Shrinking the primary
+ * chassis preserves approximately the same total horizontal footprint. */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
   width: 126% !important;
 }
@@ -79,8 +136,7 @@
   width: 132% !important;
 }
 
-/* With the footer map control removed, the footer is strictly orientation plus
- * sequential navigation: passive progress on the left, Back/Next on the right. */
+/* Footer is strictly orientation plus sequential navigation. */
 .bf-machine-tour-card__controls {
   justify-content: space-between;
 }
@@ -89,18 +145,16 @@
   flex: 1 1 auto;
 }
 
-/* Tune the joint itself to bridge the attachment bay rather than float below the
- * now-relative card. */
-.bf-machine-tour-card__lower-dock {
-  bottom: -.94vw;
-}
-
 @media (max-width: 1180px) {
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
+    height: 102% !important;
+  }
+
   .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
-    height: 151% !important;
+    height: 216% !important;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
-    height: 124% !important;
+    height: 154% !important;
   }
 }

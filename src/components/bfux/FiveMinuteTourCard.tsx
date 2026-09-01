@@ -91,7 +91,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
       data-node-id="tour"
       data-expanded={expanded ? "true" : "false"}
       data-map-open={mapOpen ? "true" : "false"}
-      data-connectors="2"
       data-attached-to="about"
       data-machine-node-interactive="true"
       aria-expanded={expanded}
@@ -208,11 +207,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="bf-machine-tour-card__lower-dock" aria-label="Two-contact connector to About">
-        <i />
-        <i />
       </div>
 
       <aside

@@ -116,7 +116,16 @@ export function PhysicalMachineExperience({
       )}
 
       {!sectionSurface && tourHost
-        ? createPortal(<FiveMinuteTourCard resolution={activeResolution} />, tourHost)
+        ? createPortal(
+            <>
+              <div className="bf-machine-tour-about-dock" aria-hidden="true">
+                <i />
+                <i />
+              </div>
+              <FiveMinuteTourCard resolution={activeResolution} />
+            </>,
+            tourHost,
+          )
         : null}
     </div>
   );
