@@ -12,10 +12,10 @@
      - centered on the 18px vertical conduit;
      - overlapped upward into the trunk and downward over the riser;
      - visually smoother than either conduit;
-     - clearly subordinate to the rail label and connector hardware.
+     - clearly subordinate to connector hardware.
 
-   It also promotes PRIMARY CONVERSION RAIL from microcopy to an apparatus
-   annotation that can be read without competing with the conversion sentence.
+   The conduit itself now carries one machine label only: PRIMARY CONVERSION
+   RAIL. The stage sequence belongs to the cards below and is not repeated here.
 */
 
 @media (hover: hover) and (pointer: fine) {
@@ -31,26 +31,26 @@
   /* PRIMARY RAIL LABEL                                                     */
   /* ---------------------------------------------------------------------- */
 
-  /* Give the external annotation enough air to be a first-class apparatus
-     label. The trunk moves down only a few pixels; the machine topology below
-     is unchanged. */
+  /* The rail name is stamped directly into the trunk. There is no external
+     annotation and no duplicate rendering of the six stage names. */
   .capital-frame__engine-heading {
-    margin-top: 34px !important;
+    margin-top: 18px !important;
   }
 
-  .capital-frame__engine-heading > div > span {
-    top: -25px !important;
-    left: calc(var(--capital-header-side-extension) + 18px) !important;
-    padding: 0 2px !important;
+  .capital-frame__engine-heading h2 {
+    margin: 0 !important;
     color: color-mix(in srgb, #d7e6ea 88%, #8ba2aa) !important;
     text-shadow:
       0 1px 0 rgba(0,0,0,.72),
-      0 0 10px rgba(184,203,211,.10) !important;
-    font-size: .56rem !important;
+      0 0 10px rgba(184,203,211,.08) !important;
+    font-size: clamp(.72rem, .84vw, .92rem) !important;
     line-height: 1 !important;
     font-weight: 800 !important;
-    letter-spacing: .18em !important;
-    opacity: .96 !important;
+    letter-spacing: .16em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    opacity: .97 !important;
   }
 
   /* ---------------------------------------------------------------------- */
@@ -129,7 +129,9 @@
     margin-top: 0 !important;
   }
 
-  .capital-frame__engine-heading > div > span {
-    font-size: inherit !important;
+  .capital-frame__engine-heading h2 {
+    font-size: .72rem !important;
+    letter-spacing: .12em !important;
+    white-space: normal !important;
   }
 }
