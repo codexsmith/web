@@ -18,6 +18,12 @@ type InstitutionalStage = {
   copy: string;
 };
 
+type MachineFunction = {
+  id: string;
+  label: string;
+  copy: string;
+};
+
 const fundingPortIds = ["grant", "sponsorship", "strategic-capital", "consulting"];
 
 const fundingPorts = fundingPortIds
@@ -113,15 +119,55 @@ const institutionalStages: InstitutionalStage[] = [
   },
 ];
 
-const machineFunctions = [
-  "Research",
-  "Methods",
-  "Instruments",
-  "Software",
-  "Pilots",
-  "Governance",
-  "Evidence",
-  "Public artifacts",
+const machineFunctions: MachineFunction[] = [
+  {
+    id: "research",
+    label: "Research",
+    copy: "Understand systems at consequential boundaries.",
+  },
+  {
+    id: "methods",
+    label: "Methods",
+    copy: "Turn surviving structure into repeatable practice.",
+  },
+  {
+    id: "instruments",
+    label: "Instruments",
+    copy: "Make difficult systems inspectable and operable.",
+  },
+  {
+    id: "software",
+    label: "Software",
+    copy: "Encode reliable, maintainable capability.",
+  },
+  {
+    id: "pilots",
+    label: "Pilots",
+    copy: "Exercise machinery against bounded reality.",
+  },
+  {
+    id: "evidence",
+    label: "Evidence",
+    copy: "Preserve witnesses, defects, and claim boundaries.",
+  },
+];
+
+const stewardshipFunctions: MachineFunction[] = [
+  {
+    id: "governance",
+    label: "Governance",
+    copy: "Keep authority, claims, correction, responsibility, and repair attributable.",
+  },
+  {
+    id: "public-value",
+    label: "Public value",
+    copy: "Make agency, legibility, contestability, repairability, and durable capacity the consequence test.",
+  },
+  {
+    id: "public-artifacts",
+    label: "Public artifacts",
+    copy: "Make useful knowledge, evidence, methods, and instruments recoverable beyond the Lab.",
+  },
 ];
 
 const retainedReturns = [
@@ -255,11 +301,47 @@ export function CapitalEconomicsFrame() {
                   <small>Research · engineering · governance · stewardship</small>
                 </div>
               </div>
-              <div className="capital-frame__machine-functions">
+
+              <div className="capital-frame__machine-functions" aria-label="Operational Lab machinery">
                 {machineFunctions.map((item, index) => (
-                  <span key={item}><b>{String(index + 1).padStart(2, "0")}</b>{item}</span>
+                  <article className="capital-frame__machine-function" key={item.id} data-machine-id={item.id}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h3>{item.label}</h3>
+                      <p>{item.copy}</p>
+                    </div>
+                  </article>
                 ))}
               </div>
+
+              <section className="capital-frame__stewardship-module" aria-labelledby="civics-stewardship-title">
+                <header>
+                  <div>
+                    <span>Foundational responsibility module</span>
+                    <h3 id="civics-stewardship-title">Civics &amp; Stewardship</h3>
+                  </div>
+                  <strong>PUBLIC CONSEQUENCE</strong>
+                </header>
+
+                <div className="capital-frame__stewardship-grid">
+                  {stewardshipFunctions.map((item, index) => (
+                    <article
+                      className={`capital-frame__stewardship-card${item.id === "public-value" ? " is-public-value" : ""}`}
+                      key={item.id}
+                      data-machine-id={item.id}
+                    >
+                      <header>
+                        <span>S-{String(index + 1).padStart(2, "0")}</span>
+                        {item.id === "public-value" ? <strong>CONSEQUENCE TEST</strong> : null}
+                      </header>
+                      <div>
+                        <h4>{item.label}</h4>
+                        <p>{item.copy}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
             </div>
           </section>
 
