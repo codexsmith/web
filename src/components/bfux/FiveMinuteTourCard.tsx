@@ -48,17 +48,17 @@ const mapColumns = [
   {
     target: "people",
     index: "01",
-    text: "People + representation → more agency.",
+    text: "Representation → greater agency.",
   },
   {
     target: "products",
     index: "02",
-    text: "Products + exposed assumptions → better solutions.",
+    text: "Exposed assumptions → better solutions.",
   },
   {
     target: "publications",
     index: "03",
-    text: "Publications + recurring structure → refined knowledge.",
+    text: "Recurring structure → refined knowledge.",
   },
 ] as const;
 
