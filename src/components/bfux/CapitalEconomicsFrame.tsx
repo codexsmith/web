@@ -1,213 +1,164 @@
 import capital from "@/content/lab-machine-capital.json";
 import problemIntake from "@/content/lab-machine-problem-intake.json";
 
-type FrameNode = {
+type ConversionStage = {
   id: string;
-  register: string;
+  number: string;
   label: string;
   copy: string;
-  state?: string;
+  register: string;
+  machine?: boolean;
+  returnStage?: boolean;
 };
 
-const capitalThesis = (id: string) =>
-  capital.theses.find((item) => item.id === id);
+type InstitutionalStage = {
+  id: string;
+  number: string;
+  label: string;
+  copy: string;
+};
 
-const inputNodes: FrameNode[] = [
+const fundingPortIds = ["grant", "sponsorship", "strategic-capital", "consulting"];
+
+const fundingPorts = fundingPortIds
+  .map((id) => capital.fundingRelationships.find((item) => item.id === id))
+  .filter((item): item is (typeof capital.fundingRelationships)[number] => Boolean(item));
+
+const conversionStages: ConversionStage[] = [
   {
     id: "capital",
-    register: "IN-01",
+    number: "01",
     label: "Capital",
-    copy: "Patient, mission-aligned capacity input.",
-    state: "PORT",
+    copy: "A bounded resource input with an explicit relationship and purpose.",
+    register: "INPUT",
   },
   {
-    id: "research-funding",
-    register: "IN-02",
-    label: "Research funding",
-    copy: "Grants and contracts that advance bounded work.",
-    state: "CHANNEL",
+    id: "coherent-capacity",
+    number: "02",
+    label: "Coherent capacity",
+    copy: "More work the Lab can responsibly hold, understand, govern, maintain, and repair.",
+    register: "HOLD",
+    machine: true,
   },
   {
-    id: "strategic-capital",
-    register: "IN-03",
-    label: "Strategic capital",
-    copy: "Long-horizon capacity under an explicitly defined structure.",
-    state: "TBD",
-  },
-  {
-    id: "sponsorship",
-    register: "IN-04",
-    label: "Sponsorship",
-    copy: "Mission-aligned runway, translation, or public work support.",
-    state: "PORT",
-  },
-];
-
-const coreNodes: FrameNode[] = [
-  {
-    id: "governance",
-    register: "M-01",
-    label: "Governance",
-    copy: "Steward authority, claims, correction, and repair.",
-  },
-  {
-    id: "research",
-    register: "M-02",
-    label: "Research",
-    copy: "Understand systems at consequential boundaries.",
-  },
-  {
-    id: "methods",
-    register: "M-03",
-    label: "Methods",
-    copy: "Turn surviving structure into repeatable practice.",
-  },
-  {
-    id: "public-value",
-    register: "M-04",
-    label: "Public value",
-    copy: "Agency, legibility, contestability, repair, and capacity.",
-  },
-  {
-    id: "instruments",
-    register: "M-05",
-    label: "Instruments",
-    copy: "Build tools that make difficult systems inspectable.",
-  },
-  {
-    id: "public-artifacts",
-    register: "M-06",
-    label: "Public artifacts",
-    copy: "Publish recoverable knowledge, evidence, and methods.",
-  },
-  {
-    id: "pilots",
-    register: "M-07",
-    label: "Pilots",
-    copy: "Exercise the machinery against bounded reality.",
-  },
-  {
-    id: "software",
-    register: "M-08",
-    label: "Software",
-    copy: "Encode reliable, inspectable, maintainable capability.",
-  },
-];
-
-const outputNodes: FrameNode[] = [
-  {
-    id: "consulting-revenue",
-    register: "OUT-01",
-    label: "Consulting revenue",
-    copy: "Applied expert work on bounded difficult systems.",
-    state: "CHANNEL",
-  },
-  {
-    id: "product-revenue",
-    register: "OUT-02",
-    label: "Product revenue",
-    copy: "Earned support from useful software and artifacts.",
-    state: "FORMATION",
-  },
-  {
-    id: "partnerships",
-    register: "OUT-03",
-    label: "Partnerships",
-    copy: "Bring domain authority, access, distribution, or stewardship.",
-    state: "BOUNDED",
+    id: "bounded-work",
+    number: "03",
+    label: "Bounded work",
+    copy: "A defined experiment, artifact, pilot, role, implementation, or transfer with closure conditions.",
+    register: "WORK",
+    machine: true,
   },
   {
     id: "validation",
-    register: "OUT-04",
+    number: "04",
     label: "Validation",
-    copy: "Market response, domain criticism, and reproduction remain distinct.",
-    state: "REQUIRED",
+    copy: "Market response, domain criticism, and technical reproduction answer to different realities.",
+    register: "WITNESS",
+    machine: true,
+  },
+  {
+    id: "transfer",
+    number: "05",
+    label: "Transfer",
+    copy: "Capability leaves the Lab in a form another party can recover, use, inspect, and maintain.",
+    register: "EXPORT",
+    machine: true,
+  },
+  {
+    id: "retained-capability",
+    number: "06",
+    label: "Retained capability",
+    copy: "Evidence, methods, software, revenue, relationships, standards, and institutional memory remain available for the next cycle.",
+    register: "RETURN",
+    returnStage: true,
   },
 ];
 
-const doctrineNodes: FrameNode[] = [
+const institutionalStages: InstitutionalStage[] = [
   {
-    id: "capacity-before-expansion",
-    register: "D-01",
-    label: "Capacity before expansion",
-    copy:
-      capitalThesis("capacity-before-expansion")?.statement ??
-      "Build responsible capacity before scale.",
+    id: "private-corpus",
+    number: "A",
+    label: "Private corpus",
+    copy: "Accumulated research, code, notes, methods, and working capability.",
   },
   {
-    id: "conversion-engine",
-    register: "D-02",
-    label: "Fund the conversion engine",
-    copy:
-      capitalThesis("conversion-engine")?.statement ??
-      "Fund the conversion engine, not an unbounded theory.",
+    id: "public-laboratory",
+    number: "B",
+    label: "Public laboratory",
+    copy: "The work becomes legible, governed, inspectable, and open to criticism.",
   },
   {
-    id: "diligence-object",
-    register: "D-03",
-    label: "Accumulated capacity + bounded validation",
-    copy:
-      capitalThesis("diligence-object")?.statement ??
-      "Inspect what exists and the next bounded validation program separately.",
+    id: "useful-artifacts",
+    number: "C",
+    label: "Useful artifacts",
+    copy: "Research becomes instruments, methods, software, publications, and public objects.",
   },
   {
-    id: "bring-a-system",
-    register: "D-04",
-    label: "Bring us your difficult system",
-    copy: problemIntake.coreInvitation.statement,
-  },
-];
-
-const returnNodes: FrameNode[] = [
-  {
-    id: "problem-intake",
-    register: "RET-01",
-    label: "Problem intake",
-    copy: "Real problems from real systems enter without forced simplification.",
+    id: "products-services",
+    number: "D",
+    label: "Products / services",
+    copy: "Bounded capability encounters users, institutions, constraints, and demand.",
   },
   {
-    id: "institutional-capacity",
-    register: "RET-02",
-    label: "Institutional capacity",
-    copy: "People, systems, stewardship, memory, and infrastructure.",
+    id: "external-review",
+    number: "E",
+    label: "External review",
+    copy: "Claims and implementations encounter domain experts, benchmarks, pilots, and reproduction.",
   },
   {
-    id: "distribution",
-    register: "RET-03",
-    label: "Distribution / transfer",
-    copy: "Capability leaves the Lab in recoverable, maintainable form.",
+    id: "sustainable-program",
+    number: "F",
+    label: "Sustainable research program",
+    copy: "Earned support, public support, reusable capability, and stewardship fund continued inquiry.",
   },
 ];
 
-function ModulePanel({ node, compact = false }: { node: FrameNode; compact?: boolean }) {
+const machineFunctions = [
+  "Research",
+  "Methods",
+  "Instruments",
+  "Software",
+  "Pilots",
+  "Governance",
+  "Evidence",
+  "Public artifacts",
+];
+
+const retainedReturns = [
+  { label: "Evidence", copy: "What survived contact with reality." },
+  { label: "Learning", copy: "What narrowed, failed, or changed the method." },
+  { label: "Revenue / support", copy: "Resources earned or entrusted through useful work." },
+  { label: "Institutional memory", copy: "Reusable methods, software, standards, relationships, and stewardship." },
+];
+
+function ConversionStagePlate({ stage }: { stage: ConversionStage }) {
   return (
     <article
-      className={`capital-frame__module${compact ? " capital-frame__module--compact" : ""}`}
-      data-node-id={node.id}
+      className={`capital-frame__conversion-stage${stage.machine ? " is-machine" : ""}${stage.returnStage ? " is-return" : ""}`}
+      data-stage-id={stage.id}
     >
-      <header className="capital-frame__module-register">
-        <span>{node.register}</span>
-        {node.state ? <strong>{node.state}</strong> : null}
+      <header>
+        <span>{stage.number}</span>
+        <strong>{stage.register}</strong>
       </header>
-      <div className="capital-frame__module-body">
-        <h3>{node.label}</h3>
-        <p>{node.copy}</p>
+      <div>
+        <h3>{stage.label}</h3>
+        <p>{stage.copy}</p>
       </div>
-      <span className="capital-frame__terminal" aria-hidden="true" />
+      <i className="capital-frame__stage-terminal" aria-hidden="true" />
     </article>
   );
 }
 
-function FlowRail({ label, steps }: { label: string; steps: string[] }) {
+function InstitutionalStagePlate({ stage }: { stage: InstitutionalStage }) {
   return (
-    <div className="capital-frame__flow-rail">
-      <span>{label}</span>
-      <ol>
-        {steps.map((step) => (
-          <li key={step}>{step}</li>
-        ))}
-      </ol>
-    </div>
+    <article className="capital-frame__institutional-stage" data-stage-id={stage.id}>
+      <span>{stage.number}</span>
+      <div>
+        <h3>{stage.label}</h3>
+        <p>{stage.copy}</p>
+      </div>
+    </article>
   );
 }
 
@@ -216,149 +167,165 @@ export function CapitalEconomicsFrame() {
     <section className="capital-frame" aria-labelledby="capital-frame-title">
       <header className="capital-frame__topbar">
         <div className="capital-frame__identity">
-          <span className="capital-frame__mark" aria-hidden="true">
-            <b>B</b>
-            <b>F</b>
-            <b>L</b>
-          </span>
+          <span className="capital-frame__mark" aria-hidden="true">BFL</span>
           <div>
             <small>Boundary First Labs</small>
-            <strong id="capital-frame-title">The BFL System</strong>
+            <strong id="capital-frame-title">The conversion engine</strong>
           </div>
         </div>
 
-        <div className="capital-frame__title-plate">
-          <span>The economics web</span>
-          <strong>Resources in · capability out · value returns</strong>
+        <div className="capital-frame__thesis-plate">
+          <span>Capital posture</span>
+          <strong>Fund the conversion engine, not an unbounded theory.</strong>
         </div>
 
         <div className="capital-frame__prototype-state" aria-label="Prototype state">
-          <span>Frame</span>
-          <strong>Prototype 01</strong>
+          <span>Capital projection</span>
+          <strong>Prototype 02</strong>
         </div>
       </header>
 
-      <div className="capital-frame__workplane">
-        <svg
-          className="capital-frame__trace-field"
-          viewBox="0 0 1200 700"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M245 100 H390" />
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M245 235 H390" />
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M245 370 H390" />
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M245 505 H390" />
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M810 100 H955" />
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M810 235 H955" />
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M810 370 H955" />
-          <path className="capital-frame__trace capital-frame__trace--primary" d="M810 505 H955" />
-          <path className="capital-frame__trace capital-frame__trace--secondary" d="M390 78 V585" />
-          <path className="capital-frame__trace capital-frame__trace--secondary" d="M810 78 V585" />
-          <path className="capital-frame__trace capital-frame__trace--return" d="M220 630 H980" />
-        </svg>
+      <section className="capital-frame__orientation" aria-labelledby="capital-orientation-title">
+        <div>
+          <span>What capital actually does</span>
+          <h1 id="capital-orientation-title">Capital becomes capability only by passing through bounded work and evidence.</h1>
+        </div>
+        <p>
+          The central object is not a list of projects or funding channels. It is a conversion system: resources increase coherent capacity; capacity closes bounded work; bounded work produces witnesses; validated capability transfers; what survives returns to the institution.
+        </p>
+      </section>
 
-        <aside className="capital-frame__doctrine" aria-label="Capital doctrine">
-          <div className="capital-frame__bank-label">Interpretation</div>
-          {doctrineNodes.map((node) => (
-            <ModulePanel key={node.id} node={node} compact />
-          ))}
+      <div className="capital-frame__body">
+        <aside className="capital-frame__input-console" aria-labelledby="funding-input-title">
+          <header className="capital-frame__console-heading">
+            <span>Resource manifold</span>
+            <h2 id="funding-input-title">Ways capacity enters</h2>
+          </header>
+
+          <div className="capital-frame__funding-ports">
+            {fundingPorts.map((port, index) => (
+              <article className="capital-frame__funding-port" key={port.id}>
+                <header>
+                  <span>IN-{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{port.capitalType}</strong>
+                </header>
+                <h3>{port.label}</h3>
+                <p>{port.buys}</p>
+                <i aria-hidden="true" />
+              </article>
+            ))}
+          </div>
+
+          <article className="capital-frame__problem-port">
+            <header>
+              <span>REALITY INPUT</span>
+              <strong>PROBLEM</strong>
+            </header>
+            <h3>Bring us your difficult system</h3>
+            <p>{problemIntake.hero.secondary}</p>
+            <i aria-hidden="true" />
+          </article>
         </aside>
 
-        <section className="capital-frame__bank capital-frame__bank--input" aria-labelledby="capital-input-title">
-          <header className="capital-frame__bank-heading">
-            <span>Input manifold</span>
-            <h2 id="capital-input-title">Capacity input</h2>
+        <main className="capital-frame__engine" aria-labelledby="conversion-engine-title">
+          <header className="capital-frame__engine-heading">
+            <div>
+              <span>Primary conversion rail</span>
+              <h2 id="conversion-engine-title">Capital → coherent capacity → bounded work → validation → transfer → retained capability</h2>
+            </div>
+            <strong>BFL / INSTITUTIONAL MACHINE</strong>
           </header>
-          <div className="capital-frame__bank-stack">
-            {inputNodes.map((node) => (
-              <ModulePanel key={node.id} node={node} />
+
+          <section className="capital-frame__conversion-rail" aria-label="Capital conversion sequence">
+            {conversionStages.map((stage) => (
+              <ConversionStagePlate key={stage.id} stage={stage} />
             ))}
-          </div>
-        </section>
+          </section>
 
-        <section className="capital-frame__machine" aria-labelledby="lab-machine-title">
-          <header className="capital-frame__bank-heading capital-frame__bank-heading--machine">
-            <span>Institutional conversion engine</span>
-            <h2 id="lab-machine-title">Lab machine</h2>
-          </header>
-
-          <div className="capital-frame__machine-grid">
-            <ModulePanel node={coreNodes[0]} compact />
-            <ModulePanel node={coreNodes[1]} compact />
-            <ModulePanel node={coreNodes[2]} compact />
-            <ModulePanel node={coreNodes[3]} compact />
-
-            <article className="capital-frame__chassis" aria-label="Boundary First Labs central chassis">
-              <div className="capital-frame__chassis-bezel">
+          <section className="capital-frame__machine-bed" aria-labelledby="machine-bed-title">
+            <header>
+              <span>Where conversion work happens</span>
+              <h2 id="machine-bed-title">The Lab holds the middle of the rail</h2>
+            </header>
+            <div className="capital-frame__machine-bed-body">
+              <div className="capital-frame__chassis">
                 <span className="capital-frame__chassis-mark" aria-hidden="true">BFL</span>
-                <strong>Boundary First Labs</strong>
-                <small>Institutional Lab Machine</small>
-                <div className="capital-frame__chassis-status" aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
-                  <i />
+                <div>
+                  <strong>Boundary First Labs</strong>
+                  <small>Research · engineering · governance · stewardship</small>
                 </div>
               </div>
-            </article>
+              <div className="capital-frame__machine-functions">
+                {machineFunctions.map((item, index) => (
+                  <span key={item}><b>{String(index + 1).padStart(2, "0")}</b>{item}</span>
+                ))}
+              </div>
+            </div>
+          </section>
 
-            <ModulePanel node={coreNodes[4]} compact />
-            <ModulePanel node={coreNodes[5]} compact />
-            <ModulePanel node={coreNodes[6]} compact />
-            <ModulePanel node={coreNodes[7]} compact />
-          </div>
-        </section>
+          <section className="capital-frame__institutional-rail" aria-labelledby="institutional-conversion-title">
+            <header>
+              <span>Institutional conversion</span>
+              <h2 id="institutional-conversion-title">What the same engine does to the Lab itself</h2>
+            </header>
+            <div className="capital-frame__institutional-stages">
+              {institutionalStages.map((stage) => (
+                <InstitutionalStagePlate key={stage.id} stage={stage} />
+              ))}
+            </div>
+          </section>
 
-        <section className="capital-frame__bank capital-frame__bank--output" aria-labelledby="exchange-output-title">
-          <header className="capital-frame__bank-heading">
-            <span>Exchange manifold</span>
-            <h2 id="exchange-output-title">Validation / output</h2>
+          <section className="capital-frame__return-manifold" aria-labelledby="return-manifold-title">
+            <header>
+              <span>Value return / retained capability</span>
+              <h2 id="return-manifold-title">What remains after a cycle closes</h2>
+              <strong>feeds the next coherent-capacity state ↺</strong>
+            </header>
+            <div>
+              {retainedReturns.map((item) => (
+                <article key={item.label}>
+                  <h3>{item.label}</h3>
+                  <p>{item.copy}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </main>
+
+        <aside className="capital-frame__diligence-console" aria-labelledby="diligence-title">
+          <header className="capital-frame__console-heading">
+            <span>Capital ask grammar</span>
+            <h2 id="diligence-title">Five gates every ask must close</h2>
           </header>
-          <div className="capital-frame__bank-stack">
-            {outputNodes.map((node) => (
-              <ModulePanel key={node.id} node={node} />
-            ))}
-          </div>
-        </section>
 
-        <aside className="capital-frame__guides" aria-label="Flow guide">
-          <div className="capital-frame__bank-label">Flow guides</div>
-          <FlowRail
-            label="Capital to transfer"
-            steps={["Capital", "Capacity", "Work", "Validation", "Transfer"]}
-          />
-          <FlowRail
-            label="Problem to better instruments"
-            steps={["Problem", "Diagnose", "Evidence", "Instrument"]}
-          />
-          <div className="capital-frame__legend">
-            <div><i className="is-primary" />Primary flow</div>
-            <div><i className="is-secondary" />Enabling flow</div>
-            <div><i className="is-return" />Value return</div>
-          </div>
+          <ol className="capital-frame__diligence-gates">
+            {capital.diligenceQuestions.map((item, index) => (
+              <li key={item.id}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{item.label}</h3>
+                  <p>{item.question}</p>
+                  <small>{item.requiredState}</small>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <article className="capital-frame__boundary-note">
+            <span>Boundary condition</span>
+            <strong>Capital does not bypass evidence.</strong>
+            <p>Funding, attention, product demand, expert interest, and technical reproduction are different witnesses. None substitutes for the others.</p>
+          </article>
         </aside>
       </div>
 
-      <section className="capital-frame__return-zone" aria-labelledby="return-zone-title">
-        <header>
-          <span>Return / retained capability rail</span>
-          <h2 id="return-zone-title">Problem → capacity → transfer</h2>
-        </header>
-        <div className="capital-frame__return-modules">
-          {returnNodes.map((node, index) => (
-            <div className="capital-frame__return-step" key={node.id}>
-              <ModulePanel node={node} compact />
-              {index < returnNodes.length - 1 ? <span className="capital-frame__return-arrow" aria-hidden="true">→</span> : null}
-            </div>
-          ))}
-        </div>
-      </section>
-
       <footer className="capital-frame__commitment">
-        <strong>Our commitment</strong>
-        <p>We build institutional capacity and instruments that turn difficult problems into public value.</p>
-        <span>Rigorous · Practical · Open · Mission-aligned</span>
+        <div>
+          <span>Due-diligence object</span>
+          <strong>Accumulated productive capacity + a bounded validation program.</strong>
+        </div>
+        <p>What exists now is separated from what capital converts next.</p>
+        <span className="capital-frame__commitment-state">Capacity before expansion</span>
       </footer>
     </section>
   );
