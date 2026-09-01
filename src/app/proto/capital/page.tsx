@@ -10,6 +10,7 @@ import "./capital-frame-side-interface-fit.css";
 import "./capital-frame-end-interface-contact.css";
 import "./capital-frame-zoom-resilience.css";
 import "./capital-frame-conversion-title-pass.css";
+import "./capital-frame-conversion-iconography.css";
 
 export const metadata: Metadata = {
   title: "Boundary First Labs · Capital Economics Prototype",
