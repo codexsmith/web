@@ -30,7 +30,6 @@ type ConversionStage = {
   number: string;
   label: string;
   copy: string;
-  register: string;
   operation: BoundaryOperation;
   affinity: SemanticAffinity;
   machine?: boolean;
@@ -77,17 +76,15 @@ const conversionStages: ConversionStage[] = [
     id: "capital",
     number: "01",
     label: "Capital",
-    copy: "A bounded resource input with an explicit relationship and purpose.",
-    register: "INPUT",
+    copy: "A bounded resource input with an explicit purpose.",
     operation: "inlet",
-    affinity: "neutral",
+    affinity: "institution",
   },
   {
     id: "coherent-capacity",
     number: "02",
     label: "Coherent capacity",
-    copy: "More work the Lab can responsibly hold, understand, govern, maintain, and repair.",
-    register: "HOLD",
+    copy: "Capacity the Lab can responsibly hold, govern, maintain, and repair.",
     operation: "bind",
     affinity: "institution",
     machine: true,
@@ -96,28 +93,25 @@ const conversionStages: ConversionStage[] = [
     id: "bounded-work",
     number: "03",
     label: "Bounded work",
-    copy: "A defined experiment, artifact, pilot, role, implementation, or transfer with closure conditions.",
-    register: "WORK",
+    copy: "A defined experiment, artifact, pilot, role, or transfer with closure conditions.",
     operation: "close",
-    affinity: "neutral",
+    affinity: "research",
     machine: true,
   },
   {
     id: "validation",
     number: "04",
     label: "Validation",
-    copy: "Market response, domain criticism, and technical reproduction answer to different realities.",
-    register: "WITNESS",
+    copy: "Market, domain, and technical witnesses test different claims.",
     operation: "gate",
-    affinity: "neutral",
+    affinity: "public-interest",
     machine: true,
   },
   {
     id: "transfer",
     number: "05",
     label: "Transfer",
-    copy: "Capability leaves the Lab in a form another party can recover, use, inspect, and maintain.",
-    register: "EXPORT",
+    copy: "Capability leaves the Lab recoverable, inspectable, and maintainable.",
     operation: "egress",
     affinity: "publications",
     machine: true,
@@ -126,8 +120,7 @@ const conversionStages: ConversionStage[] = [
     id: "retained-capability",
     number: "06",
     label: "Retained capability",
-    copy: "Evidence, methods, software, revenue, relationships, standards, and institutional memory remain available for the next cycle.",
-    register: "RETURN",
+    copy: "Evidence, methods, software, relationships, and memory remain for the next cycle.",
     operation: "return",
     affinity: "institution",
     returnStage: true,
@@ -265,10 +258,8 @@ function ConversionStagePlate({ stage }: { stage: ConversionStage }) {
     >
       <header>
         <span>{stage.number}</span>
-        <strong>{stage.register}</strong>
       </header>
       <div>
-        <small className="capital-frame__operation-label">{stage.operation}</small>
         <h3>{stage.label}</h3>
         <p>{stage.copy}</p>
       </div>
@@ -308,7 +299,7 @@ export function CapitalEconomicsFrame() {
 
         <div className="capital-frame__prototype-state" aria-label="Prototype state">
           <span>Capital projection</span>
-          <strong>Prototype 03</strong>
+          <strong>Prototype 04</strong>
         </div>
       </header>
 
