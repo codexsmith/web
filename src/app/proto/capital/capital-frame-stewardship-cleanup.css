@@ -36,3 +36,10 @@
   content: none !important;
   display: none !important;
 }
+
+/* The diligence cards on the right rail no longer need literal gate crossbars.
+   Their card boundary and numbered gate treatment already carry the grammar. */
+.capital-frame__diligence-gates li::after {
+  content: none !important;
+  display: none !important;
+}
