@@ -243,7 +243,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
           <div className="bf-machine-tour-card__expanded" aria-hidden={!expanded} data-map-open={mapOpen ? "true" : "false"}>
             <div className="bf-machine-tour-card__topbar">
               <div>
-                <span>{current.eyebrow} · {activeStep + 1} / {tourSteps.length} · GUIDED TOUR · ~05:00</span>
                 <strong>{current.title}</strong>
               </div>
               <div className="bf-machine-tour-card__topbar-actions">

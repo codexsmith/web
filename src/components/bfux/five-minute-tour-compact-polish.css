@@ -90,10 +90,81 @@
   height: .44rem;
 }
 
+/* Expanded reading fit. The title now stands alone in the header, so reclaim
+ * that metadata row and guarantee enough chassis height for the authored prose
+ * plus takeaway. The attachment datum remains the same; any extra height grows
+ * upward from About. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__topbar {
+  align-items: center;
+  min-height: 56px;
+  padding: 9px 11px 9px 13px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__topbar > div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__topbar strong {
+  margin: 0;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+  > .bf-machine-tour-card[data-expanded="true"],
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+  > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
+  height: max(205%, 300px) !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+  > .bf-machine-tour-card[data-expanded="true"],
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+  > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
+  height: max(145%, 300px) !important;
+}
+
+/* Never silently clip authored tour copy. The minimum chassis height above
+ * normally fits the content; on unusually constrained screens this well becomes
+ * the sole vertical scroll surface instead of allowing prose to paint through
+ * the controls. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__stage {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--tone) 42%, #405052) #0a0f11;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__current {
+  overflow: visible;
+  padding: 12px 14px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__current > p {
+  line-height: 1.45;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__takeaway {
+  margin-top: .55rem;
+  padding: .48rem .62rem;
+}
+
 @media (max-width: 1180px) {
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
     > .bf-machine-tour-card[data-expanded="false"] {
     height: 114% !important;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-tour-card[data-expanded="true"],
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
+    height: max(216%, 310px) !important;
   }
 }
