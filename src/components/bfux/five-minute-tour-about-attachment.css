@@ -126,14 +126,26 @@
   filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
 }
 
-/* The map sidecar still unfolds from the header icon. Shrinking the primary
- * chassis preserves approximately the same total horizontal footprint. */
+/*
+ * Map disclosure must not mutate the tour chassis. Only the flyout changes
+ * visibility/extent. These explicit map-open rules intentionally repeat the
+ * expanded geometry so older generic flyout rules cannot contract the card.
+ */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
-  width: 126% !important;
+  width: 213% !important;
+  height: 205% !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
-  width: 132% !important;
+  width: 220% !important;
+  height: 145% !important;
+}
+
+/* The second three-card map set is already semantically tied to the modules it
+ * may later label directly. Keep the current visual grammar while making that
+ * second layer slightly quieter than the primary three-line map. */
+.bf-machine-tour-card__map-panel li[data-map-target] {
+  background: color-mix(in srgb, var(--tone) 3%, #0b1113);
 }
 
 /* Footer is strictly orientation plus sequential navigation. */
@@ -150,11 +162,13 @@
     height: 102% !important;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"],
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
     height: 216% !important;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
+  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"],
+  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
     height: 154% !important;
   }
 }

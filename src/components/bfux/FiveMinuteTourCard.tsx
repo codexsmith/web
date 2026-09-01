@@ -49,6 +49,12 @@ const durableTakeaways = [
   "The domains differ; the mechanics recur.",
 ] as const;
 
+const institutionalMap = [
+  { target: "people", text: "People — who carries the work." },
+  { target: "products", text: "Products — what the work becomes." },
+  { target: "publications", text: "Publications — what the work makes public." },
+] as const;
+
 export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResolution }) {
   const [expanded, setExpanded] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
@@ -224,6 +230,12 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
             <li key={takeaway}>
               <span>0{index + 1}</span>
               <strong>{takeaway}</strong>
+            </li>
+          ))}
+          {institutionalMap.map((entry, index) => (
+            <li key={entry.target} data-map-target={entry.target}>
+              <span>0{index + 4}</span>
+              <strong>{entry.text}</strong>
             </li>
           ))}
         </ol>
