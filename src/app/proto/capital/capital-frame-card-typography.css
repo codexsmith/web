@@ -1,0 +1,249 @@
+/* Capital prototype · Card Typography Pass
+
+   The apparatus has enough structural differentiation that its text no longer
+   needs to be miniature to preserve hierarchy. This layer promotes card copy
+   into normal reading territory while keeping indices / operation labels
+   visibly secondary.
+
+   Cards remain content-driven: when larger type wraps, the object grows rather
+   than clipping or manufacturing viewport-height stretch.
+*/
+
+/* -------------------------------------------------------------------------- */
+/* Input / problem cards                                                       */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__funding-port header,
+.capital-frame__problem-port header {
+  font-size: .48rem !important;
+  line-height: 1.25 !important;
+  letter-spacing: .085em !important;
+}
+
+.capital-frame__funding-port h3,
+.capital-frame__problem-port h3 {
+  font-size: .78rem !important;
+  line-height: 1.18 !important;
+}
+
+.capital-frame__funding-port p,
+.capital-frame__problem-port p {
+  font-size: .69rem !important;
+  line-height: 1.48 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Primary conversion rail                                                     */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__conversion-stage {
+  min-height: 150px !important;
+}
+
+.capital-frame__conversion-stage > div {
+  align-content: start !important;
+  padding-top: 17px !important;
+  padding-bottom: 34px !important;
+}
+
+.capital-frame__conversion-stage h3 {
+  font-size: .82rem !important;
+  line-height: 1.17 !important;
+  letter-spacing: .035em !important;
+}
+
+.capital-frame__conversion-stage p {
+  margin-top: 8px !important;
+  font-size: .71rem !important;
+  line-height: 1.5 !important;
+}
+
+.capital-frame__conversion-stage > header > span {
+  font-size: .49rem !important;
+  line-height: 1 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Operational engine: six peer cards                                          */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__machine-functions {
+  grid-template-rows: repeat(2, minmax(98px, 1fr)) !important;
+}
+
+.capital-frame__machine-functions .capital-frame__machine-function {
+  min-height: 98px !important;
+}
+
+.capital-frame__machine-functions .capital-frame__machine-function > span {
+  font-size: .48rem !important;
+  letter-spacing: .075em !important;
+}
+
+.capital-frame__machine-function > div {
+  gap: 5px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.capital-frame__machine-function .capital-frame__operation-label {
+  margin-bottom: 2px !important;
+  font-size: .47rem !important;
+  line-height: 1 !important;
+}
+
+.capital-frame__machine-function h3 {
+  font-size: .72rem !important;
+  line-height: 1.14 !important;
+}
+
+.capital-frame__machine-function p {
+  font-size: .62rem !important;
+  line-height: 1.42 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Civics & Stewardship governor                                               */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__stewardship-module > header span {
+  font-size: .47rem !important;
+}
+
+.capital-frame__stewardship-module > header h3 {
+  font-size: .86rem !important;
+  line-height: 1.12 !important;
+}
+
+.capital-frame__stewardship-module > header > strong {
+  font-size: .46rem !important;
+}
+
+.capital-frame__stewardship-card {
+  min-height: 126px !important;
+}
+
+.capital-frame__stewardship-card.is-public-value {
+  min-height: 140px !important;
+}
+
+.capital-frame__stewardship-card > header {
+  font-size: .46rem !important;
+}
+
+.capital-frame__stewardship-card > header strong,
+.capital-frame__stewardship-card .capital-frame__operation-label {
+  font-size: .44rem !important;
+}
+
+.capital-frame__stewardship-card h4 {
+  font-size: .82rem !important;
+  line-height: 1.14 !important;
+}
+
+.capital-frame__stewardship-card p {
+  font-size: .68rem !important;
+  line-height: 1.48 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Institutional conversion                                                    */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__institutional-stage > span {
+  font-size: .48rem !important;
+}
+
+.capital-frame__institutional-stage h3 {
+  font-size: .74rem !important;
+  line-height: 1.18 !important;
+}
+
+.capital-frame__institutional-stage p {
+  font-size: .65rem !important;
+  line-height: 1.45 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Retained capability / value return cards                                    */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__return-manifold article h3 {
+  font-size: .75rem !important;
+  line-height: 1.18 !important;
+}
+
+.capital-frame__return-manifold article p {
+  font-size: .66rem !important;
+  line-height: 1.46 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Diligence / right rail cards                                                */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__diligence-gates li {
+  min-height: 126px !important;
+}
+
+.capital-frame__diligence-gates li > span {
+  font-size: .5rem !important;
+}
+
+.capital-frame__diligence-gates h3 {
+  font-size: .78rem !important;
+  line-height: 1.18 !important;
+}
+
+.capital-frame__diligence-gates p {
+  margin-top: 8px !important;
+  font-size: .69rem !important;
+  line-height: 1.48 !important;
+}
+
+.capital-frame__diligence-gates small {
+  font-size: .5rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: .09em !important;
+}
+
+/* Boundary note is card-like and should remain readable beside the gates. */
+.capital-frame__boundary-note > span {
+  font-size: .48rem !important;
+}
+
+.capital-frame__boundary-note > strong {
+  font-size: .75rem !important;
+  line-height: 1.2 !important;
+}
+
+.capital-frame__boundary-note p {
+  font-size: .67rem !important;
+  line-height: 1.48 !important;
+}
+
+/* Preserve compactness on truly narrow / touch projections, but do not return
+   to the old microtype. */
+@media (max-width: 760px), (pointer: coarse) {
+  .capital-frame__conversion-stage h3,
+  .capital-frame__stewardship-card h4,
+  .capital-frame__diligence-gates h3 {
+    font-size: .76rem !important;
+  }
+
+  .capital-frame__funding-port p,
+  .capital-frame__problem-port p,
+  .capital-frame__conversion-stage p,
+  .capital-frame__stewardship-card p,
+  .capital-frame__diligence-gates p {
+    font-size: .66rem !important;
+  }
+
+  .capital-frame__machine-function h3 {
+    font-size: .68rem !important;
+  }
+
+  .capital-frame__machine-function p {
+    font-size: .6rem !important;
+  }
+}
