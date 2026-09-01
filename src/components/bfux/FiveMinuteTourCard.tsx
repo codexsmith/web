@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { ArrowLeft, ArrowRight, Clock3, Map, Play, X } from "lucide-react";
 import type { LabMachineResolution } from "./LabMachine";
 
@@ -43,24 +44,94 @@ const tourSteps = [
   },
 ] as const;
 
-const durableTakeaways = [
-  "Representation is the control.",
-  "Hidden assumptions become operational consequences.",
-  "The domains differ; the mechanics recur.",
+const mapColumns = [
+  {
+    target: "people",
+    items: [
+      { index: "01", kind: "takeaway", text: "Representation is the control." },
+      { index: "04", kind: "institution", text: "People — who carries the work." },
+    ],
+  },
+  {
+    target: "products",
+    items: [
+      { index: "02", kind: "takeaway", text: "Hidden assumptions become operational consequences." },
+      { index: "05", kind: "institution", text: "Products — what the work becomes." },
+    ],
+  },
+  {
+    target: "publications",
+    items: [
+      { index: "03", kind: "takeaway", text: "The domains differ; the mechanics recur." },
+      { index: "06", kind: "institution", text: "Publications — what the work makes public." },
+    ],
+  },
 ] as const;
 
-const institutionalMap = [
-  { target: "people", text: "People — who carries the work." },
-  { target: "products", text: "Products — what the work becomes." },
-  { target: "publications", text: "Publications — what the work makes public." },
-] as const;
+type MapGeometry = Record<string, { left: number; top: number; width: number }>;
 
 export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResolution }) {
   const [expanded, setExpanded] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [mapHost, setMapHost] = useState<HTMLElement | null>(null);
+  const [mapGeometry, setMapGeometry] = useState<MapGeometry>({});
+  const tourRef = useRef<HTMLElement>(null);
   const current = tourSteps[activeStep];
   const contextLabel = resolution === "focus" ? "Core set" : "Full loop";
+
+  useEffect(() => {
+    setMapHost(tourRef.current?.closest<HTMLElement>(".bf-machine__apparatus") ?? null);
+  }, [resolution]);
+
+  useEffect(() => {
+    if (!mapOpen || !mapHost) return;
+
+    let frame = 0;
+    const targets: HTMLElement[] = [];
+
+    const measure = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const next: MapGeometry = {};
+
+        for (const column of mapColumns) {
+          const target = mapHost.querySelector<HTMLElement>(
+            `.bf-machine-node[data-node-id="${column.target}"]`,
+          );
+          if (!target) continue;
+          next[column.target] = {
+            left: target.offsetLeft,
+            top: target.offsetTop,
+            width: target.offsetWidth,
+          };
+        }
+
+        setMapGeometry(next);
+      });
+    };
+
+    const observer = new ResizeObserver(measure);
+    observer.observe(mapHost);
+    for (const column of mapColumns) {
+      const target = mapHost.querySelector<HTMLElement>(
+        `.bf-machine-node[data-node-id="${column.target}"]`,
+      );
+      if (!target) continue;
+      targets.push(target);
+      observer.observe(target);
+    }
+
+    measure();
+    window.addEventListener("resize", measure);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", measure);
+      for (const target of targets) observer.unobserve(target);
+      observer.disconnect();
+    };
+  }, [mapHost, mapOpen, resolution]);
 
   useEffect(() => {
     if (!expanded) return;
@@ -92,154 +163,172 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
   const toggleMap = () => setMapOpen((openState) => !openState);
 
   return (
-    <article
-      className="bf-machine-node bf-machine-tour-card"
-      data-node-id="tour"
-      data-expanded={expanded ? "true" : "false"}
-      data-map-open={mapOpen ? "true" : "false"}
-      data-attached-to="about"
-      data-machine-node-interactive="true"
-      aria-expanded={expanded}
-      aria-label={expanded ? "Five-minute Boundary First Labs tour and takeaways" : "Open five-minute Boundary First Labs tour and takeaways"}
-      role={expanded ? "region" : "button"}
-      tabIndex={expanded ? -1 : 0}
-      onClick={(event) => {
-        event.stopPropagation();
-        if (!expanded) open();
-      }}
-      onKeyDown={(event) => {
-        event.stopPropagation();
-        if (!expanded && (event.key === "Enter" || event.key === " ")) {
-          event.preventDefault();
-          open();
-        }
-      }}
-    >
-      <div className="bf-machine-node__mount" aria-hidden="true" />
-      <div className="bf-machine-node__shell" aria-hidden="true" />
-      <span className="bf-machine-node__fasteners" aria-hidden="true">
-        <i /><i /><i /><i />
-      </span>
-
-      <div className="bf-machine-node__face">
-        <div className="bf-machine-tour-card__compact" aria-hidden={expanded}>
-          <div className="bf-machine-node__icon-plate" aria-hidden="true">
-            <span className="bf-machine-node__icon-well">
-              <Clock3 />
-            </span>
-          </div>
-
-          <header>
-            <span>START HERE · 05:00</span>
-            <strong>Tour &amp; takeaways</strong>
-          </header>
-
-          <div className="bf-machine-node__boundary">
-            <small>BOUNDARY</small>
-            <p>A guided compression of the whole Lab: problem → representation → method → machinery → application → purpose.</p>
-          </div>
-
-          <footer>
-            <span className="bf-machine-node__state"><small>STATE</small>Ready</span>
-            <span><small>FORMAT</small>6 steps</span>
-            <span><small>VIEW</small>{contextLabel}</span>
-          </footer>
-        </div>
-
-        <div className="bf-machine-tour-card__expanded" aria-hidden={!expanded} data-map-open={mapOpen ? "true" : "false"}>
-          <div className="bf-machine-tour-card__topbar">
-            <div>
-              <span>{current.eyebrow} · {activeStep + 1} / {tourSteps.length} · GUIDED TOUR · ~05:00</span>
-              <strong>{current.title}</strong>
-            </div>
-            <div className="bf-machine-tour-card__topbar-actions">
-              <button
-                type="button"
-                className="bf-machine-tour-card__map-trigger bf-machine-tour-card__map-trigger--icon"
-                onClick={toggleMap}
-                aria-label="The map in three lines"
-                aria-controls="five-minute-tour-map-panel"
-                aria-expanded={mapOpen}
-                title="The map in three lines"
-              >
-                <Map aria-hidden="true" />
-              </button>
-              <button type="button" onClick={close} aria-label="Close five-minute tour">
-                <X aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-
-          <div className="bf-machine-tour-card__body">
-            <div className="bf-machine-tour-card__main">
-              <div className="bf-machine-tour-card__stage">
-                <section className="bf-machine-tour-card__current" aria-live="polite">
-                  <p>{current.body}</p>
-                  <div className="bf-machine-tour-card__takeaway">
-                    <small>TAKEAWAY</small>
-                    <strong>{current.takeaway}</strong>
-                  </div>
-                </section>
-              </div>
-
-              <div className="bf-machine-tour-card__controls">
-                <div className="bf-machine-tour-card__progress" aria-label={`Tour progress: step ${activeStep + 1} of ${tourSteps.length}`}>
-                  {tourSteps.map((step, index) => (
-                    <i key={step.eyebrow} data-active={index <= activeStep ? "true" : undefined} />
-                  ))}
-                </div>
-                <div className="bf-machine-tour-card__control-buttons">
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep((step) => Math.max(0, step - 1))}
-                    disabled={activeStep === 0}
-                  >
-                    <ArrowLeft aria-hidden="true" />
-                    Back
-                  </button>
-                  {activeStep < tourSteps.length - 1 ? (
-                    <button type="button" onClick={() => setActiveStep((step) => Math.min(tourSteps.length - 1, step + 1))}>
-                      Next
-                      <ArrowRight aria-hidden="true" />
-                    </button>
-                  ) : (
-                    <button type="button" onClick={close}>
-                      Return to machine
-                      <Play aria-hidden="true" />
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <aside
-        id="five-minute-tour-map-panel"
-        className="bf-machine-tour-card__map-panel"
-        aria-label="The map in three lines"
-        aria-hidden={!mapOpen}
+    <>
+      <article
+        ref={tourRef}
+        className="bf-machine-node bf-machine-tour-card"
+        data-node-id="tour"
+        data-expanded={expanded ? "true" : "false"}
+        data-map-open={mapOpen ? "true" : "false"}
+        data-attached-to="about"
+        data-machine-node-interactive="true"
+        aria-expanded={expanded}
+        aria-label={expanded ? "Five-minute Boundary First Labs tour and takeaways" : "Open five-minute Boundary First Labs tour and takeaways"}
+        role={expanded ? "region" : "button"}
+        tabIndex={expanded ? -1 : 0}
+        onClick={(event) => {
+          event.stopPropagation();
+          if (!expanded) open();
+        }}
+        onKeyDown={(event) => {
+          event.stopPropagation();
+          if (!expanded && (event.key === "Enter" || event.key === " ")) {
+            event.preventDefault();
+            open();
+          }
+        }}
       >
-        <div className="bf-machine-tour-card__map-panel-title">
-          <Map aria-hidden="true" />
-          <span>The map in three lines</span>
+        <div className="bf-machine-node__mount" aria-hidden="true" />
+        <div className="bf-machine-node__shell" aria-hidden="true" />
+        <span className="bf-machine-node__fasteners" aria-hidden="true">
+          <i /><i /><i /><i />
+        </span>
+
+        <div className="bf-machine-node__face">
+          <div className="bf-machine-tour-card__compact" aria-hidden={expanded}>
+            <div className="bf-machine-node__icon-plate" aria-hidden="true">
+              <span className="bf-machine-node__icon-well">
+                <Clock3 />
+              </span>
+            </div>
+
+            <header>
+              <span>START HERE · 05:00</span>
+              <strong>Tour &amp; takeaways</strong>
+            </header>
+
+            <div className="bf-machine-node__boundary">
+              <small>BOUNDARY</small>
+              <p>A guided compression of the whole Lab: problem → representation → method → machinery → application → purpose.</p>
+            </div>
+
+            <footer>
+              <span className="bf-machine-node__state"><small>STATE</small>Ready</span>
+              <span><small>FORMAT</small>6 steps</span>
+              <span><small>VIEW</small>{contextLabel}</span>
+            </footer>
+          </div>
+
+          <div className="bf-machine-tour-card__expanded" aria-hidden={!expanded} data-map-open={mapOpen ? "true" : "false"}>
+            <div className="bf-machine-tour-card__topbar">
+              <div>
+                <span>{current.eyebrow} · {activeStep + 1} / {tourSteps.length} · GUIDED TOUR · ~05:00</span>
+                <strong>{current.title}</strong>
+              </div>
+              <div className="bf-machine-tour-card__topbar-actions">
+                <button
+                  type="button"
+                  className="bf-machine-tour-card__map-trigger bf-machine-tour-card__map-trigger--icon"
+                  onClick={toggleMap}
+                  aria-label="Toggle tour map"
+                  aria-controls="five-minute-tour-map-layer"
+                  aria-expanded={mapOpen}
+                  title="Toggle tour map"
+                >
+                  <Map aria-hidden="true" />
+                </button>
+                <button type="button" onClick={close} aria-label="Close five-minute tour">
+                  <X aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            <div className="bf-machine-tour-card__body">
+              <div className="bf-machine-tour-card__main">
+                <div className="bf-machine-tour-card__stage">
+                  <section className="bf-machine-tour-card__current" aria-live="polite">
+                    <p>{current.body}</p>
+                    <div className="bf-machine-tour-card__takeaway">
+                      <small>TAKEAWAY</small>
+                      <strong>{current.takeaway}</strong>
+                    </div>
+                  </section>
+                </div>
+
+                <div className="bf-machine-tour-card__controls">
+                  <div className="bf-machine-tour-card__progress" aria-label={`Tour progress: step ${activeStep + 1} of ${tourSteps.length}`}>
+                    {tourSteps.map((step, index) => (
+                      <i key={step.eyebrow} data-active={index <= activeStep ? "true" : undefined} />
+                    ))}
+                  </div>
+                  <div className="bf-machine-tour-card__control-buttons">
+                    <button
+                      type="button"
+                      onClick={() => setActiveStep((step) => Math.max(0, step - 1))}
+                      disabled={activeStep === 0}
+                    >
+                      <ArrowLeft aria-hidden="true" />
+                      Back
+                    </button>
+                    {activeStep < tourSteps.length - 1 ? (
+                      <button type="button" onClick={() => setActiveStep((step) => Math.min(tourSteps.length - 1, step + 1))}>
+                        Next
+                        <ArrowRight aria-hidden="true" />
+                      </button>
+                    ) : (
+                      <button type="button" onClick={close}>
+                        Return to machine
+                        <Play aria-hidden="true" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <ol>
-          {durableTakeaways.map((takeaway, index) => (
-            <li key={takeaway}>
-              <span>0{index + 1}</span>
-              <strong>{takeaway}</strong>
-            </li>
-          ))}
-          {institutionalMap.map((entry, index) => (
-            <li key={entry.target} data-map-target={entry.target}>
-              <span>0{index + 4}</span>
-              <strong>{entry.text}</strong>
-            </li>
-          ))}
-        </ol>
-      </aside>
-    </article>
+      </article>
+
+      {mapHost
+        ? createPortal(
+            <aside
+              id="five-minute-tour-map-layer"
+              className="bf-machine-tour-map-layer"
+              data-open={mapOpen ? "true" : "false"}
+              aria-label="Tour map"
+              aria-hidden={!mapOpen}
+            >
+              {mapColumns.map((column) => {
+                const geometry = mapGeometry[column.target];
+                return (
+                  <section
+                    key={column.target}
+                    className="bf-machine-tour-map-layer__column"
+                    data-map-target={column.target}
+                    data-ready={geometry ? "true" : undefined}
+                    style={geometry ? {
+                      left: geometry.left,
+                      top: geometry.top,
+                      width: geometry.width,
+                    } : undefined}
+                  >
+                    {column.items.map((item) => (
+                      <article
+                        key={item.index}
+                        className="bf-machine-tour-map-layer__item"
+                        data-map-kind={item.kind}
+                      >
+                        <span>{item.index}</span>
+                        <strong>{item.text}</strong>
+                      </article>
+                    ))}
+                  </section>
+                );
+              })}
+            </aside>,
+            mapHost,
+          )
+        : null}
+    </>
   );
 }
