@@ -4,6 +4,7 @@ import "./capital-frame.css";
 import "./capital-frame-civics.css";
 import "./capital-frame-boundary-voice.css";
 import "./capital-frame-manifolds.css";
+import "./capital-frame-connector-interfaces.css";
 
 export const metadata: Metadata = {
   title: "Boundary First Labs · Capital Economics Prototype",
