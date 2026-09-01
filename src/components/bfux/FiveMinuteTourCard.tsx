@@ -130,7 +130,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
 
           <footer>
             <span className="bf-machine-node__state"><small>STATE</small>Ready</span>
-            <span><small>FORMAT</small>6 cards</span>
+            <span><small>FORMAT</small>6 steps</span>
             <span><small>VIEW</small>{contextLabel}</span>
           </footer>
         </div>
@@ -174,23 +174,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
                     <strong>{current.takeaway}</strong>
                   </div>
                 </section>
-              </div>
-
-              <div className="bf-machine-tour-card__deck" aria-label="Tour cards">
-                {tourSteps.map((step, index) => (
-                  <button
-                    type="button"
-                    key={step.eyebrow}
-                    className="bf-machine-tour-card__step"
-                    data-active={index === activeStep ? "true" : undefined}
-                    aria-current={index === activeStep ? "step" : undefined}
-                    onClick={() => setActiveStep(index)}
-                  >
-                    <span>{step.eyebrow}</span>
-                    <strong>{step.title}</strong>
-                    <small>{step.takeaway}</small>
-                  </button>
-                ))}
               </div>
 
               <div className="bf-machine-tour-card__controls">
