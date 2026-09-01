@@ -3,7 +3,9 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { BfuxIcon } from "@/components/bfux-icons";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
+import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import "./physical-machine-experience.css";
+import "./five-minute-tour-card.css";
 
 const resolutionLabels: Record<LabMachineResolution, string> = {
   mid: "Full loop",
@@ -85,12 +87,28 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience">
-
-
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
       ) : (
-        <LabMachine skin="physical" showSchematic={showSchematic} resolution={activeResolution} onOpenNode={openNode} />
+        <div className="physical-machine-experience__machine-stack">
+          <LabMachine
+            skin="physical"
+            showSchematic={showSchematic}
+            resolution={activeResolution}
+            onOpenNode={openNode}
+          />
+
+          <div
+            className="bf-machine bf-machine-tour-overlay"
+            data-skin="physical"
+            data-resolution={activeResolution}
+            aria-label="Five-minute tour layer"
+          >
+            <div className="bf-machine__apparatus bf-machine-tour-overlay__apparatus">
+              <FiveMinuteTourCard resolution={activeResolution} />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
