@@ -86,10 +86,207 @@
   filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
 }
 
+/*
+ * Three-line map sidecar.
+ *
+ * The map is no longer permanent content in the tour stage. It is a secondary
+ * instrument that unfolds from the card's right edge and takes real layout
+ * space, so it reads as an attached panel rather than content laid over content.
+ */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.bf-machine-tour-card__topbar-actions {
+  display: flex !important;
+  align-items: center;
+  gap: 7px !important;
+}
+
+.bf-machine-tour-card__map-trigger[data-map-open="true"],
+.bf-machine-tour-card__map-trigger[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--tone) 74%, #586561) !important;
+  color: #eef3ee !important;
+  background: linear-gradient(
+    color-mix(in srgb, var(--tone) 15%, #192023),
+    color-mix(in srgb, var(--tone) 7%, #0c1113)
+  ) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.07),
+    0 0 0 1px color-mix(in srgb, var(--tone) 18%, transparent),
+    0 3px 7px rgba(0,0,0,.45) !important;
+}
+
+.bf-machine-tour-card__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 0fr;
+  min-height: 0;
+  overflow: hidden;
+  transition: grid-template-columns 360ms cubic-bezier(.2,.78,.2,1);
+}
+
+.bf-machine-tour-card__expanded[data-map-open="true"] .bf-machine-tour-card__body {
+  grid-template-columns: minmax(0, 1fr) .38fr;
+}
+
+.bf-machine-tour-card__main {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__stage {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.bf-machine-tour-card__map-panel {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  padding: 14px 12px;
+  border-left: 1px solid #314043;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--tone) 8%, #111819), #0a0f11 22%),
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent 24%);
+  box-shadow: inset 10px 0 18px rgba(0,0,0,.34);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(18px);
+  transition:
+    opacity 150ms ease,
+    transform 300ms cubic-bezier(.2,.78,.2,1),
+    visibility 0s linear 320ms;
+}
+
+.bf-machine-tour-card__expanded[data-map-open="true"] .bf-machine-tour-card__map-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+  transition:
+    opacity 170ms ease 90ms,
+    transform 330ms cubic-bezier(.2,.78,.2,1),
+    visibility 0s linear 0s;
+}
+
+.bf-machine-tour-card__map-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2c393c;
+  color: color-mix(in srgb, var(--tone) 82%, #dce3df);
+  font: 700 .56rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bf-machine-tour-card__map-panel-title svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  color: var(--tone);
+}
+
+.bf-machine-tour-card__map-panel ol {
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bf-machine-tour-card__map-panel li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  min-width: 0;
+  padding: 9px;
+  border: 1px solid #2b383b;
+  border-radius: 4px;
+  background: #0b1113;
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+
+.bf-machine-tour-card__map-panel li > span {
+  color: var(--tone);
+  font: 700 .55rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.bf-machine-tour-card__map-panel li > strong {
+  min-width: 0;
+  color: #dde2de;
+  font: 500 clamp(.7rem, .76vw, .86rem)/1.38 Georgia, serif;
+}
+
+.bf-machine-tour-card__map-trigger--footer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 11px;
+  flex: 0 0 auto;
+  border: 1px solid #425052;
+  border-radius: 4px;
+  color: #d8ddda;
+  background: linear-gradient(#192023, #0c1113);
+  box-shadow: inset 0 1px rgba(255,255,255,.045), 0 3px 6px rgba(0,0,0,.45);
+  font: 700 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.bf-machine-tour-card__map-trigger--footer svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
+.bf-machine-tour-card__map-trigger--footer:hover,
+.bf-machine-tour-card__map-trigger--icon:hover {
+  border-color: color-mix(in srgb, var(--tone) 64%, #57635f);
+}
+
+@media (max-width: 980px) {
+  .bf-machine-tour-card__expanded[data-map-open="true"] .bf-machine-tour-card__body {
+    grid-template-columns: minmax(0, 1fr) .46fr;
+  }
+
+  .bf-machine-tour-card__controls {
+    gap: .55rem;
+  }
+
+  .bf-machine-tour-card__map-trigger--footer span {
+    display: none;
+  }
+
+  .bf-machine-tour-card__map-trigger--footer {
+    width: 34px;
+    padding: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-tour-card,
   .bf-machine[data-skin="physical"] .bf-machine-tour-card__compact,
-  .bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded {
+  .bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded,
+  .bf-machine-tour-card__body,
+  .bf-machine-tour-card__map-panel {
     transition: none !important;
   }
 }
