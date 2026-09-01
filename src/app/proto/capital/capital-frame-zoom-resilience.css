@@ -1,23 +1,21 @@
 /* Capital prototype · Zoom Resilience Pass
 
-   Browser zoom changes the effective CSS viewport and text wrapping. It should
-   not cause the machine to manufacture vertical space merely to satisfy a
-   viewport-height target or to match the tallest neighboring console.
+   Browser zoom changes the effective CSS viewport. On a desktop that should not
+   silently turn a spatial machine into a different topology or stretch one side
+   of the apparatus away from the other.
 
    Law:
-     - the outer page may fill the viewport;
-     - the machine frame is content-sized;
-     - major columns align to their own content, not to one another's height;
-     - the engine's implicit grid tracks are max-content rather than stretched;
-     - conversion cards may grow when text genuinely wraps, but do not get a
-       larger minimum height merely because a width breakpoint was crossed.
+     - the page shell may fill the viewport;
+     - the apparatus is content-sized vertically;
+     - fine-pointer desktop preserves the three-column machine topology;
+     - heavy desktop zoom produces horizontal pan, not asymmetric reflow;
+     - coarse-pointer / mobile may collapse to the linear projection;
+     - conversion cards grow only when their content actually requires it.
 
-   This pass also closes the final ~4px boundary-interface gap:
+   End-interface geometry remains:
      CONDUIT | 20px BANK | 20px BANK | STAGE
 */
 
-/* The background can occupy the viewport. The apparatus itself should not be
-   forced to consume viewport height. `svh` is used only at the page shell. */
 .capital-prototype-page {
   min-height: 100svh;
 }
@@ -28,8 +26,6 @@
   align-content: start;
 }
 
-/* The body row is determined by content. A tall diligence/input console must
-   not stretch the Lab engine beside it. */
 .capital-frame__body {
   align-items: start;
 }
@@ -41,19 +37,14 @@
   height: max-content;
 }
 
-/* Implicit grid rows otherwise use `align-content: stretch`, which is the main
-   source of the odd vertical elongation visible under browser zoom. */
 .capital-frame__engine {
   align-content: start;
   grid-auto-rows: max-content;
 }
 
-/* Machine subassemblies also size from what they contain. */
-.capital-frame__machine-bed-body {
-  align-items: start;
-}
-
+.capital-frame__machine-bed-body,
 .capital-frame__machine-functions {
+  align-items: start;
   align-content: start;
 }
 
@@ -61,28 +52,65 @@
   align-self: start;
 }
 
-/* The base 1400px breakpoint previously increased conversion-card minimum
-   height from 166px to 184px exactly when zoom made the viewport narrower.
-   Keep one desktop minimum and let real wrapping, rather than the breakpoint,
-   determine any additional height. */
-@media (min-width: 761px) {
-  .capital-frame__conversion-stage {
-    min-height: 166px;
+/* -------------------------------------------------------------------------- */
+/* DESKTOP TOPOLOGY · zoom preserves the machine                              */
+/* -------------------------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-prototype-page {
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+
+  /* The complete apparatus needs enough physical width for both manifolds and
+     the conversion engine. Browser zoom may shrink the CSS viewport, but the
+     machine itself does not change identity merely because that happened. */
+  .capital-frame {
+    min-width: 1500px;
+  }
+
+  .capital-frame__body {
+    grid-template-columns: 270px minmax(840px, 1fr) 320px;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .capital-frame__input-console {
+    min-width: 270px;
+  }
+
+  .capital-frame__engine {
+    min-width: 840px;
+  }
+
+  .capital-frame__diligence-console {
+    min-width: 320px;
+  }
+
+  /* Keep both side assemblies independently content-led. The right diligence
+     bank must not stretch the engine or drift because its questions wrap. */
+  .capital-frame__input-console,
+  .capital-frame__diligence-console {
+    align-content: start;
+    grid-auto-rows: max-content;
+  }
+
+  .capital-frame__diligence-gates,
+  .capital-frame__funding-ports {
+    align-content: start;
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/* END INTERFACES · final 20px + 20px bridge                                  */
+/* END INTERFACES · 20px + 20px bridge                                        */
 /* -------------------------------------------------------------------------- */
 
-@media (min-width: 1121px) {
+@media (hover: hover) and (pointer: fine) {
   .capital-frame {
     --capital-end-bank-width: 20px;
     --capital-end-gap: 40px;
   }
 
-  /* Capital: outer bank begins at the conduit and the inner bank terminates
-     exactly on the card edge. */
   .capital-frame__conversion-stage[data-stage-id="capital"]::before {
     left: calc(var(--capital-end-gap) * -1) !important;
     width: var(--capital-end-bank-width) !important;
@@ -93,7 +121,6 @@
     width: var(--capital-end-bank-width) !important;
   }
 
-  /* Retained capability: mirror the same continuous 40px bridge. */
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
     right: calc(var(--capital-end-bank-width) * -1) !important;
     width: var(--capital-end-bank-width) !important;
@@ -105,9 +132,15 @@
   }
 }
 
-/* Mobile remains content-led. When the spatial rail collapses to a linear
-   projection there is no reason to preserve desktop minimum heights. */
-@media (max-width: 760px) {
+/* -------------------------------------------------------------------------- */
+/* MOBILE / COARSE POINTER · content-led linear projection                    */
+/* -------------------------------------------------------------------------- */
+
+@media (pointer: coarse), (max-width: 760px) {
+  .capital-frame {
+    min-width: 0;
+  }
+
   .capital-frame__conversion-stage {
     min-height: 0;
   }
@@ -115,6 +148,7 @@
   .capital-frame__input-console,
   .capital-frame__engine,
   .capital-frame__diligence-console {
+    min-width: 0;
     height: auto;
   }
 }
