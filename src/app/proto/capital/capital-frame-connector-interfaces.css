@@ -1,0 +1,294 @@
+/* Capital prototype · Connector Interface Pass
+   Quiet infrastructure; explicit interfaces.
+
+   The rail should not attract attention through texture or diagram arrows.
+   Continuity is communicated by physical interface repetition:
+
+   BUS / TROUGH = persistent substrate
+   COUPLER      = local bridge
+   SOCKET       = receiving boundary
+   TONGUE       = sending boundary
+   TAP          = branch into shared bus
+   GATE         = constrained crossing
+
+   Visual reference: the existing full-loop homepage language of compact
+   port banks, socket blocks, short docking tongues, and terminal details. */
+
+@media (min-width: 1121px) {
+  /* ---------------------------------------------------------------------- */
+  /* QUIET THE SIDE MANIFOLDS                                               */
+  /* ---------------------------------------------------------------------- */
+
+  /* Remove the optical-frequency texture from both vertical buses. */
+  .capital-frame__input-console::after,
+  .capital-frame__diligence-console::after {
+    width: 14px;
+    border-color: var(--bf-etched-line-strong);
+    background:
+      linear-gradient(90deg,
+        rgba(255,255,255,.055) 0 1px,
+        rgba(255,255,255,.012) 1px 3px,
+        rgba(0,0,0,.32) 3px 10px,
+        rgba(255,255,255,.018) 10px 12px,
+        rgba(0,0,0,.64) 12px 14px),
+      color-mix(in srgb, var(--bf-bg-raised) 80%, black);
+    box-shadow:
+      inset 1px 0 0 rgba(255,255,255,.035),
+      inset -2px 0 0 rgba(0,0,0,.42),
+      0 5px 14px rgba(0,0,0,.22);
+  }
+
+  .capital-frame__diligence-console::after {
+    border-color: color-mix(in srgb, var(--bf-region-about) 38%, var(--bf-etched-line-strong));
+    background:
+      linear-gradient(90deg,
+        rgba(255,255,255,.05) 0 1px,
+        color-mix(in srgb, var(--bf-region-about) 5%, transparent) 1px 3px,
+        rgba(0,0,0,.33) 3px 10px,
+        color-mix(in srgb, var(--bf-region-about) 5%, transparent) 10px 12px,
+        rgba(0,0,0,.64) 12px 14px),
+      color-mix(in srgb, var(--bf-bg-raised) 80%, black);
+  }
+
+  /* Branch couplers become compact interface blocks, not striped tails. */
+  .capital-frame__funding-port > i,
+  .capital-frame__problem-port > i {
+    right: -18px;
+    width: 18px;
+    height: 34px;
+    border: 1px solid color-mix(in srgb, var(--bfux-affinity) 54%, var(--bf-etched-line-strong));
+    border-left: 0;
+    border-radius: 0 3px 3px 0;
+    background:
+      radial-gradient(circle at 9px 8px, color-mix(in srgb, var(--bfux-affinity) 78%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 9px 17px, color-mix(in srgb, var(--bfux-affinity) 78%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 9px 26px, color-mix(in srgb, var(--bfux-affinity) 78%, transparent) 0 2px, transparent 2.5px),
+      linear-gradient(90deg, rgba(255,255,255,.04), transparent 45%),
+      color-mix(in srgb, var(--bf-bg-raised) 88%, black);
+    box-shadow:
+      inset 1px 0 0 rgba(255,255,255,.04),
+      3px 0 8px rgba(0,0,0,.22);
+  }
+
+  .capital-frame__problem-port > i {
+    height: 42px;
+    background:
+      radial-gradient(circle at 9px 8px, color-mix(in srgb, var(--bfux-affinity) 88%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 9px 17px, color-mix(in srgb, var(--bfux-affinity) 88%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 9px 26px, color-mix(in srgb, var(--bfux-affinity) 88%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 9px 35px, color-mix(in srgb, var(--bfux-affinity) 88%, transparent) 0 2px, transparent 2.5px),
+      linear-gradient(90deg, rgba(255,255,255,.04), transparent 45%),
+      color-mix(in srgb, var(--bf-bg-raised) 88%, black);
+  }
+
+  /* The branch from each input to the bus is now a short tongue + receiving block. */
+  .capital-frame__funding-port::after,
+  .capital-frame__problem-port::after {
+    right: -32px;
+    width: 32px;
+    height: 24px;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bfux-affinity) 72%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bfux-affinity) 34%, var(--bf-silver-300))) left center / 18px 3px no-repeat,
+      linear-gradient(90deg,
+        rgba(0,0,0,.62),
+        rgba(0,0,0,.62)) 18px center / 8px 12px no-repeat,
+      radial-gradient(circle at 28px 8px, color-mix(in srgb, var(--bfux-affinity) 76%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 28px 16px, color-mix(in srgb, var(--bfux-affinity) 76%, transparent) 0 2px, transparent 2.5px);
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.22));
+  }
+
+  /* Diligence taps use the same family in reverse: bus -> short coupler -> gate. */
+  .capital-frame__diligence-gates li::before {
+    left: -32px;
+    width: 32px;
+    height: 24px;
+    background:
+      radial-gradient(circle at 4px 8px, color-mix(in srgb, var(--bf-region-about) 72%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 4px 16px, color-mix(in srgb, var(--bf-region-about) 72%, transparent) 0 2px, transparent 2.5px),
+      linear-gradient(90deg,
+        rgba(0,0,0,.62),
+        rgba(0,0,0,.62)) 7px center / 8px 12px no-repeat,
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-region-about) 34%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bf-region-about) 72%, var(--bf-silver-300))) 14px center / 18px 3px no-repeat;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.22));
+  }
+
+  .capital-frame__boundary-note::before {
+    left: -32px;
+    width: 32px;
+    height: 20px;
+    background:
+      radial-gradient(circle at 4px 6px, color-mix(in srgb, var(--bf-attention) 68%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 4px 14px, color-mix(in srgb, var(--bf-attention) 68%, transparent) 0 2px, transparent 2.5px),
+      linear-gradient(90deg, rgba(0,0,0,.62), rgba(0,0,0,.62)) 7px center / 8px 10px no-repeat,
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-attention) 28%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bf-attention) 62%, var(--bf-silver-300))) 14px center / 18px 3px no-repeat;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* QUIET THE PRIMARY CONVERSION SUBSTRATE                                  */
+  /* ---------------------------------------------------------------------- */
+
+  /* Replace the diagrammatic hairline + green segment with one recessed bus. */
+  .capital-frame__conversion-rail::before {
+    left: 3%;
+    right: 3%;
+    top: 50%;
+    height: 14px;
+    transform: translateY(-50%);
+    border-top: 1px solid rgba(255,255,255,.035);
+    border-bottom: 1px solid rgba(0,0,0,.58);
+    border-radius: 3px;
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,.025),
+        rgba(0,0,0,.18) 42%,
+        rgba(0,0,0,.36) 58%,
+        rgba(255,255,255,.012));
+    box-shadow:
+      inset 0 2px 5px rgba(0,0,0,.34),
+      0 1px 0 rgba(255,255,255,.018);
+  }
+
+  .capital-frame__conversion-rail::after {
+    display: none;
+  }
+
+  /* Every stage terminates in the same compact physical coupler family. */
+  .capital-frame__stage-terminal {
+    z-index: 8;
+    right: -13px;
+    width: 18px;
+    height: 28px;
+    border: 1px solid color-mix(in srgb, var(--bfux-affinity) 54%, var(--bf-etched-line-strong));
+    border-radius: 3px;
+    background:
+      radial-gradient(circle at 9px 8px, color-mix(in srgb, var(--bfux-affinity) 82%, transparent) 0 2.2px, transparent 2.7px),
+      radial-gradient(circle at 9px 20px, color-mix(in srgb, var(--bfux-affinity) 82%, transparent) 0 2.2px, transparent 2.7px),
+      linear-gradient(90deg, rgba(255,255,255,.04), transparent 45%),
+      color-mix(in srgb, var(--bf-bg-raised) 88%, black);
+    box-shadow:
+      inset 1px 0 0 rgba(255,255,255,.04),
+      0 2px 6px rgba(0,0,0,.28);
+  }
+
+  /* A short tongue bridges the gap. No arrowhead: the receiving socket supplies directionality. */
+  .capital-frame__conversion-stage:not([data-stage-id="retained-capability"]) .capital-frame__stage-terminal::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    width: 10px;
+    height: 4px;
+    transform: translateY(-50%);
+    border-top: 1px solid rgba(255,255,255,.06);
+    border-bottom: 1px solid rgba(0,0,0,.52);
+    background: color-mix(in srgb, var(--bfux-affinity) 42%, var(--bf-silver-300));
+    box-shadow: 0 1px 2px rgba(0,0,0,.26);
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* CAPITAL SOCKET · replace funnel/chevron drawing with a dock interface.   */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    left: -30px;
+    top: 50%;
+    width: 34px;
+    height: 58px;
+    transform: translateY(-50%);
+    border: 0;
+    background:
+      radial-gradient(circle at 6px 14px, color-mix(in srgb, var(--bf-silver-300) 76%, transparent) 0 2.5px, transparent 3px),
+      radial-gradient(circle at 6px 29px, color-mix(in srgb, var(--bf-silver-300) 76%, transparent) 0 2.5px, transparent 3px),
+      radial-gradient(circle at 6px 44px, color-mix(in srgb, var(--bf-silver-300) 76%, transparent) 0 2.5px, transparent 3px),
+      linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.68)) 11px center / 8px 42px no-repeat,
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-silver-300) 60%, transparent),
+        var(--bf-silver-300)) 18px center / 16px 4px no-repeat;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,.26));
+    opacity: 1;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* TRANSFER · remove the simplistic egress arrow; use an export coupler.    */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__conversion-stage[data-boundary-operation="egress"] {
+    border-right: 1px solid color-mix(in srgb, var(--bfux-affinity) 40%, var(--bf-etched-line));
+    border-radius: 6px;
+    padding-right: 0;
+  }
+
+  .capital-frame__conversion-stage[data-boundary-operation="egress"]::after {
+    right: -18px;
+    top: 50%;
+    width: 24px;
+    height: 44px;
+    transform: translateY(-50%);
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bfux-affinity) 64%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bfux-affinity) 30%, var(--bf-silver-300))) left center / 11px 4px no-repeat,
+      linear-gradient(90deg, rgba(0,0,0,.64), rgba(0,0,0,.64)) 10px center / 8px 26px no-repeat,
+      radial-gradient(circle at 20px 12px, color-mix(in srgb, var(--bfux-affinity) 86%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 20px 22px, color-mix(in srgb, var(--bfux-affinity) 86%, transparent) 0 2px, transparent 2.5px),
+      radial-gradient(circle at 20px 32px, color-mix(in srgb, var(--bfux-affinity) 86%, transparent) 0 2px, transparent 2.5px);
+    opacity: 1;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.28));
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* RETAINED CAPABILITY SOCKET · mirror Capital without arrow geometry.      */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    right: -33px;
+    width: 34px;
+    height: 58px;
+    border: 0;
+    border-radius: 0;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-region-about) 72%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bf-region-about) 34%, var(--bf-silver-300))) left center / 16px 4px no-repeat,
+      linear-gradient(90deg, rgba(0,0,0,.68), rgba(0,0,0,.68)) 15px center / 8px 42px no-repeat,
+      radial-gradient(circle at 28px 14px, color-mix(in srgb, var(--bf-region-about) 78%, transparent) 0 2.5px, transparent 3px),
+      radial-gradient(circle at 28px 29px, color-mix(in srgb, var(--bf-region-about) 78%, transparent) 0 2.5px, transparent 3px),
+      radial-gradient(circle at 28px 44px, color-mix(in srgb, var(--bf-region-about) 78%, transparent) 0 2.5px, transparent 3px);
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,.26));
+  }
+
+  /* Prevent the older return/egress pseudo geometry from competing with the socket. */
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"]::after {
+    left: 14px;
+    right: 14px;
+    bottom: -8px;
+    height: 12px;
+    border-left-width: 2px;
+    border-bottom-width: 2px;
+    opacity: .6;
+  }
+
+  /* The gate's right-edge crossbar remains a boundary operator, but no longer reads as a plus/arrow glyph. */
+  .capital-frame__diligence-gates li::after {
+    right: 8px;
+    width: 10px;
+    height: 46px;
+    background:
+      linear-gradient(color-mix(in srgb, var(--bfux-affinity) 72%, transparent), color-mix(in srgb, var(--bfux-affinity) 72%, transparent)) center / 3px 100% no-repeat,
+      linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 72%, transparent), color-mix(in srgb, var(--bfux-affinity) 72%, transparent)) center / 10px 3px no-repeat;
+    opacity: .64;
+  }
+}
+
+/* Narrow layouts preserve the semantic sequence and avoid miniature interface chrome. */
+@media (max-width: 1120px) {
+  .capital-frame__conversion-rail::after {
+    display: none;
+  }
+}
