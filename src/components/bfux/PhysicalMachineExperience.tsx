@@ -1,17 +1,13 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
-import { BfuxIcon } from "@/components/bfux-icons";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import "./physical-machine-experience.css";
 import "./five-minute-tour-card.css";
 import "./five-minute-tour-growth.css";
-
-const resolutionLabels: Record<LabMachineResolution, string> = {
-  mid: "Full loop",
-  focus: "Core set",
-};
+import "./five-minute-tour-compact.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 
@@ -60,6 +56,8 @@ export function PhysicalMachineExperience({
   onOpenCoreNode?: (nodeId: string) => void;
 }) {
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
+  const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
+  const machineHostRef = useRef<HTMLDivElement>(null);
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
@@ -68,11 +66,6 @@ export function PhysicalMachineExperience({
     if (controlledResolution === undefined) setInternalResolution(nextResolution);
     onResolutionChange?.(nextResolution);
     writeStoredResolution(nextResolution);
-  };
-
-  const narrowProcessContext = () => {
-    rememberResolution("focus");
-    if (sectionSurface) onCloseSection?.();
   };
 
   useEffect(() => {
@@ -86,8 +79,26 @@ export function PhysicalMachineExperience({
     return () => window.cancelAnimationFrame(frame);
   }, [initialResolution, onResolutionChange, sectionLabel]);
 
+  useEffect(() => {
+    if (sectionSurface) {
+      setApparatusHost(null);
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      const nextHost = machineHostRef.current?.querySelector<HTMLElement>(".bf-machine__apparatus") ?? null;
+      setApparatusHost(nextHost);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeResolution, sectionSurface]);
+
+  void showResolutionControls;
+  void onCloseSection;
+  void rememberResolution;
+
   return (
-    <div className="physical-machine-experience">
+    <div className="physical-machine-experience" ref={machineHostRef}>
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
       ) : (
@@ -98,19 +109,12 @@ export function PhysicalMachineExperience({
             resolution={activeResolution}
             onOpenNode={openNode}
           />
-
-          <div
-            className="bf-machine bf-machine-tour-overlay"
-            data-skin="physical"
-            data-resolution={activeResolution}
-            aria-label="Five-minute tour layer"
-          >
-            <div className="bf-machine__apparatus bf-machine-tour-overlay__apparatus">
-              <FiveMinuteTourCard resolution={activeResolution} />
-            </div>
-          </div>
         </div>
       )}
+
+      {!sectionSurface && apparatusHost
+        ? createPortal(<FiveMinuteTourCard resolution={activeResolution} />, apparatusHost)
+        : null}
     </div>
   );
 }

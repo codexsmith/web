@@ -91,6 +91,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
       data-node-id="tour"
       data-expanded={expanded ? "true" : "false"}
       data-map-open={mapOpen ? "true" : "false"}
+      data-connectors="2"
       data-machine-node-interactive="true"
       aria-expanded={expanded}
       aria-label={expanded ? "Five-minute Boundary First Labs tour and takeaways" : "Open five-minute Boundary First Labs tour and takeaways"}
@@ -217,6 +218,11 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="bf-machine-tour-card__lower-dock" aria-label="Two-contact connector below the tour module">
+        <i />
+        <i />
       </div>
 
       <aside
