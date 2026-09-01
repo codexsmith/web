@@ -1,0 +1,368 @@
+/* Capital prototype · Manifold Pass
+   Left and right are two homologous boundary assemblies around one conversion rail.
+
+   RESOURCE MANIFOLD -> CAPITAL SOCKET -> CONVERSION RAIL -> RETURN SOCKET -> DILIGENCE MANIFOLD
+
+   The two side rails intentionally share construction language while carrying opposite semantics:
+   the left normalizes heterogeneous inputs into one governed intake; the right fans one retained
+   institutional state into multiple inspection gates that justify or constrain the next ask. */
+
+@media (min-width: 1121px) {
+  /* ------------------------------------------------------------------------ */
+  /* Shared manifold construction                                             */
+  /* ------------------------------------------------------------------------ */
+
+  .capital-frame__input-console,
+  .capital-frame__diligence-console {
+    position: relative;
+    isolation: isolate;
+  }
+
+  /* Make room for a real bus instead of letting connector marks float in the gutter. */
+  .capital-frame__input-console {
+    padding-right: 38px;
+  }
+
+  .capital-frame__diligence-console {
+    padding-left: 38px;
+  }
+
+  /* The bus housing: two structural rails with an indexed center strip. */
+  .capital-frame__input-console::after,
+  .capital-frame__diligence-console::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 58px;
+    bottom: 16px;
+    width: 16px;
+    border: 1px solid var(--bf-etched-line-strong);
+    border-radius: 3px;
+    background:
+      linear-gradient(90deg,
+        rgba(255,255,255,.07) 0 1px,
+        transparent 1px 5px,
+        rgba(255,255,255,.025) 5px 6px,
+        rgba(0,0,0,.36) 6px 10px,
+        rgba(255,255,255,.025) 10px 11px,
+        transparent 11px 15px,
+        rgba(0,0,0,.72) 15px 16px),
+      repeating-linear-gradient(180deg,
+        rgba(206,216,219,.24) 0 2px,
+        transparent 2px 13px),
+      color-mix(in srgb, var(--bf-bg-raised) 76%, black);
+    box-shadow:
+      inset 2px 0 0 rgba(255,255,255,.035),
+      inset -2px 0 0 rgba(0,0,0,.42),
+      0 6px 18px rgba(0,0,0,.26);
+    pointer-events: none;
+  }
+
+  .capital-frame__input-console::after {
+    right: 8px;
+  }
+
+  .capital-frame__diligence-console::after {
+    left: 8px;
+    border-color: color-mix(in srgb, var(--bf-region-about) 48%, var(--bf-etched-line-strong));
+    background:
+      linear-gradient(90deg,
+        rgba(255,255,255,.06) 0 1px,
+        transparent 1px 5px,
+        color-mix(in srgb, var(--bf-region-about) 16%, transparent) 5px 6px,
+        rgba(0,0,0,.36) 6px 10px,
+        color-mix(in srgb, var(--bf-region-about) 16%, transparent) 10px 11px,
+        transparent 11px 15px,
+        rgba(0,0,0,.72) 15px 16px),
+      repeating-linear-gradient(180deg,
+        color-mix(in srgb, var(--bf-region-about) 38%, transparent) 0 2px,
+        transparent 2px 13px),
+      color-mix(in srgb, var(--bf-bg-raised) 76%, black);
+  }
+
+  /* Manifold caps make these read as bounded assemblies rather than infinite lines. */
+  .capital-frame__input-console::before,
+  .capital-frame__diligence-console::before {
+    position: absolute;
+    z-index: 2;
+    top: 50px;
+    width: 30px;
+    min-height: 22px;
+    display: grid;
+    place-items: center;
+    padding: 4px 3px;
+    border: 1px solid var(--bf-etched-line-strong);
+    border-radius: 3px;
+    background: var(--bf-bg-raised);
+    box-shadow: var(--bf-shadow-control), inset 0 1px 0 rgba(255,255,255,.04);
+    color: var(--bf-text-secondary);
+    font: 800 .34rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: .08em;
+    text-align: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    pointer-events: none;
+  }
+
+  .capital-frame__input-console::before {
+    content: "INTAKE";
+    right: 1px;
+  }
+
+  .capital-frame__diligence-console::before {
+    content: "INSPECT";
+    left: 1px;
+    border-color: color-mix(in srgb, var(--bf-region-about) 52%, var(--bf-etched-line-strong));
+    color: color-mix(in srgb, var(--bf-region-about) 66%, var(--bf-text-primary));
+  }
+
+  /* ------------------------------------------------------------------------ */
+  /* LEFT · Resource intake manifold                                           */
+  /* ------------------------------------------------------------------------ */
+
+  .capital-frame__funding-ports,
+  .capital-frame__problem-port,
+  .capital-frame__console-heading {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Every port visibly docks into one shared collector bus. */
+  .capital-frame__funding-port::after,
+  .capital-frame__problem-port::after {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    right: -31px;
+    width: 31px;
+    height: 20px;
+    transform: translateY(-50%);
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bfux-affinity) 88%, transparent),
+        color-mix(in srgb, var(--bfux-affinity) 48%, var(--bf-silver-300))) left 7px / 24px 3px no-repeat,
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bfux-affinity) 72%, transparent),
+        transparent) left 12px / 20px 1px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--bfux-affinity) 76%, transparent), color-mix(in srgb, var(--bfux-affinity) 76%, transparent)) right center / 3px 16px no-repeat;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.28));
+    pointer-events: none;
+  }
+
+  /* The existing terminal is now the coupler between the plate branch and the collector bus. */
+  .capital-frame__funding-port > i,
+  .capital-frame__problem-port > i {
+    z-index: 5;
+    right: -17px;
+    width: 17px;
+    height: 38px;
+    border-width: 2px 2px 2px 0;
+    background:
+      repeating-linear-gradient(180deg,
+        color-mix(in srgb, var(--bfux-affinity) 34%, transparent) 0 4px,
+        transparent 4px 8px),
+      color-mix(in srgb, var(--bf-bg-raised) 90%, black);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.04),
+      4px 0 10px rgba(0,0,0,.28);
+  }
+
+  .capital-frame__problem-port::after {
+    height: 28px;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bfux-affinity) 96%, transparent),
+        color-mix(in srgb, var(--bfux-affinity) 54%, var(--bf-silver-300))) left 10px / 25px 4px no-repeat,
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bfux-affinity) 72%, transparent),
+        transparent) left 17px / 21px 2px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--bfux-affinity) 84%, transparent), color-mix(in srgb, var(--bfux-affinity) 84%, transparent)) right center / 4px 22px no-repeat;
+  }
+
+  /* The Capital card is the governed socket where manifold input becomes one rail state. */
+  .capital-frame__conversion-stage[data-stage-id="capital"] {
+    border-left-width: 6px;
+    box-shadow:
+      var(--bf-shadow-control),
+      var(--bf-shadow-inset),
+      -9px 0 0 rgba(0,0,0,.18);
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    left: -34px;
+    top: 50%;
+    width: 40px;
+    height: 66px;
+    transform: translateY(-50%);
+    border: 0;
+    background:
+      linear-gradient(90deg,
+        var(--bf-silver-300),
+        color-mix(in srgb, var(--bf-silver-300) 58%, transparent)) left center / 32px 4px no-repeat,
+      linear-gradient(45deg,
+        transparent 44%,
+        color-mix(in srgb, var(--bf-silver-300) 82%, transparent) 45% 55%,
+        transparent 56%) left 8px top 10px / 22px 22px no-repeat,
+      linear-gradient(-45deg,
+        transparent 44%,
+        color-mix(in srgb, var(--bf-silver-300) 82%, transparent) 45% 55%,
+        transparent 56%) left 8px bottom 10px / 22px 22px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--bf-silver-300) 68%, transparent), color-mix(in srgb, var(--bf-silver-300) 68%, transparent)) left center / 4px 44px no-repeat;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  /* ------------------------------------------------------------------------ */
+  /* RIGHT · Retained capability / diligence inspection manifold              */
+  /* ------------------------------------------------------------------------ */
+
+  .capital-frame__diligence-gates,
+  .capital-frame__boundary-note,
+  .capital-frame__diligence-console .capital-frame__console-heading {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Each diligence gate taps the same retained-capability bus on its left edge. */
+  .capital-frame__diligence-gates li::before {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    left: -31px;
+    top: 50%;
+    width: 31px;
+    height: 22px;
+    transform: translateY(-50%);
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-region-about) 52%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bf-region-about) 86%, transparent)) left 8px / 25px 3px no-repeat,
+      linear-gradient(90deg,
+        transparent,
+        color-mix(in srgb, var(--bf-region-about) 64%, transparent)) 6px 13px / 20px 1px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--bf-region-about) 80%, transparent), color-mix(in srgb, var(--bf-region-about) 80%, transparent)) left center / 3px 18px no-repeat;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.26));
+    pointer-events: none;
+  }
+
+  /* Turn the left edge of every diligence card into a receiving socket. */
+  .capital-frame__diligence-gates li {
+    border-left: 3px solid color-mix(in srgb, var(--bf-region-about) 70%, var(--bf-etched-line-strong));
+    box-shadow:
+      var(--bf-shadow-control),
+      var(--bf-shadow-inset),
+      inset 6px 0 0 color-mix(in srgb, var(--bf-region-about) 7%, transparent);
+  }
+
+  .capital-frame__diligence-gates li > span {
+    position: relative;
+  }
+
+  .capital-frame__diligence-gates li > span::before,
+  .capital-frame__diligence-gates li > span::after {
+    content: "";
+    position: absolute;
+    left: -3px;
+    width: 10px;
+    height: 2px;
+    background: color-mix(in srgb, var(--bf-region-about) 76%, transparent);
+  }
+
+  .capital-frame__diligence-gates li > span::before { top: 25%; }
+  .capital-frame__diligence-gates li > span::after { bottom: 25%; }
+
+  /* Stage 06 is the matching return socket: the rail does not simply stop here. */
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
+    border-right: 6px solid color-mix(in srgb, var(--bf-region-about) 64%, var(--bf-etched-line-strong));
+    box-shadow:
+      var(--bf-shadow-control),
+      var(--bf-shadow-inset),
+      9px 0 0 rgba(0,0,0,.18);
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    z-index: 6;
+    right: -38px;
+    width: 38px;
+    height: 54px;
+    border: 0;
+    border-radius: 0;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-region-about) 84%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bf-region-about) 48%, transparent)) left center / 34px 4px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--bf-region-about) 72%, transparent), color-mix(in srgb, var(--bf-region-about) 72%, transparent)) right center / 4px 40px no-repeat,
+      linear-gradient(45deg,
+        transparent 44%,
+        color-mix(in srgb, var(--bf-region-about) 76%, transparent) 45% 55%,
+        transparent 56%) right 8px top 8px / 20px 20px no-repeat,
+      linear-gradient(-45deg,
+        transparent 44%,
+        color-mix(in srgb, var(--bf-region-about) 76%, transparent) 45% 55%,
+        transparent 56%) right 8px bottom 8px / 20px 20px no-repeat;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,.3));
+  }
+
+  /* The right console reads as inspection of one retained state, not a separate wall of cards. */
+  .capital-frame__diligence-console .capital-frame__console-heading {
+    border-left: 4px solid color-mix(in srgb, var(--bf-region-about) 58%, var(--bf-etched-line-strong));
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bf-region-about) 8%, transparent), transparent 44%),
+      var(--bf-well-surface);
+  }
+
+  /* Give both buses a visible lower terminator so they read as maintained modular assemblies. */
+  .capital-frame__input-console .capital-frame__problem-port,
+  .capital-frame__diligence-console .capital-frame__boundary-note {
+    margin-bottom: 14px;
+  }
+
+  /* The boundary note is downstream of the gate bank, so give it a final bus tap rather than a peer-card connector. */
+  .capital-frame__boundary-note::before {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    left: -31px;
+    top: 26px;
+    width: 31px;
+    height: 18px;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-attention) 42%, var(--bf-silver-300)),
+        color-mix(in srgb, var(--bf-attention) 70%, transparent)) left center / 26px 3px no-repeat,
+      linear-gradient(color-mix(in srgb, var(--bf-attention) 58%, transparent), color-mix(in srgb, var(--bf-attention) 58%, transparent)) left center / 3px 16px no-repeat;
+    pointer-events: none;
+  }
+}
+
+/* When the page banks or linearizes, the manifold becomes semantic order rather than tiny wiring. */
+@media (max-width: 1120px) {
+  .capital-frame__input-console,
+  .capital-frame__diligence-console {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .capital-frame__input-console::before,
+  .capital-frame__input-console::after,
+  .capital-frame__diligence-console::before,
+  .capital-frame__diligence-console::after,
+  .capital-frame__funding-port::after,
+  .capital-frame__problem-port::after,
+  .capital-frame__diligence-gates li::before,
+  .capital-frame__boundary-note::before {
+    display: none;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    left: -10px;
+    width: 20px;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    right: -9px;
+    width: 9px;
+    height: 30px;
+  }
+}
