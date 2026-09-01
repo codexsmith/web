@@ -89,9 +89,40 @@
     display: none;
   }
 
+  /* The old RETURN trough is obsolete now that retained capability has a
+     canonical square terminal into the diligence conduit. */
+  .capital-frame__conversion-stage[data-boundary-operation="return"]::after {
+    display: none !important;
+  }
+
   /* Diligence gates receive directly from the other face of the same conduit. */
   .capital-frame__diligence-gates li::before,
   .capital-frame__boundary-note::before {
     left: calc(var(--capital-connector-size) * -1);
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* CONNECTOR LAYERING                                                      */
+  /* ---------------------------------------------------------------------- */
+
+  /* The base stage z-index made each card its own stacking context. That let
+     later sibling cards paint over an earlier card's connector even when the
+     connector itself had a large z-index. Keep the cards in normal paint order
+     and let connector hardware occupy the rail's explicit top layer instead. */
+  .capital-frame__conversion-rail {
+    isolation: isolate;
+  }
+
+  .capital-frame__conversion-stage {
+    z-index: auto !important;
+  }
+
+  .capital-frame__funding-port > i,
+  .capital-frame__problem-port > i,
+  .capital-frame__stage-terminal,
+  .capital-frame__diligence-gates li::before,
+  .capital-frame__boundary-note::before,
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    z-index: 1000 !important;
   }
 }
