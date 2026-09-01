@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CapitalEconomicsFrame } from "@/components/bfux/CapitalEconomicsFrame";
 import "./capital-frame.css";
+import "./capital-frame-civics.css";
 
 export const metadata: Metadata = {
   title: "Boundary First Labs · Capital Economics Prototype",
