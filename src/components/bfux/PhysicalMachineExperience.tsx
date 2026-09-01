@@ -59,7 +59,8 @@ export function PhysicalMachineExperience({
   onOpenCoreNode?: (nodeId: string) => void;
 }) {
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
-  const [tourHost, setTourHost] = useState<HTMLElement | null>(null);
+  const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
+  const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
   const machineHostRef = useRef<HTMLDivElement>(null);
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
@@ -84,16 +85,18 @@ export function PhysicalMachineExperience({
 
   useEffect(() => {
     if (sectionSurface) {
-      setTourHost(null);
+      setApparatusHost(null);
+      setAboutHost(null);
       return;
     }
 
     const frame = window.requestAnimationFrame(() => {
-      const selector = activeResolution === "focus"
-        ? ".bf-machine__apparatus"
-        : '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]';
-      const nextHost = machineHostRef.current?.querySelector<HTMLElement>(selector) ?? null;
-      setTourHost(nextHost);
+      const apparatus = machineHostRef.current?.querySelector<HTMLElement>(".bf-machine__apparatus") ?? null;
+      const about = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
+      ) ?? null;
+      setApparatusHost(apparatus);
+      setAboutHost(about);
     });
 
     return () => window.cancelAnimationFrame(frame);
@@ -118,18 +121,25 @@ export function PhysicalMachineExperience({
         </div>
       )}
 
-      {!sectionSurface && tourHost
+      {!sectionSurface && activeResolution === "focus" && apparatusHost
+        ? createPortal(
+            <FiveMinuteTourCard resolution={activeResolution} />,
+            apparatusHost,
+            "five-minute-tour-core",
+          )
+        : null}
+
+      {!sectionSurface && activeResolution === "mid" && aboutHost
         ? createPortal(
             <>
-              {activeResolution === "mid" ? (
-                <div className="bf-machine-tour-about-dock" aria-hidden="true">
-                  <i />
-                  <i />
-                </div>
-              ) : null}
+              <div className="bf-machine-tour-about-dock" aria-hidden="true">
+                <i />
+                <i />
+              </div>
               <FiveMinuteTourCard resolution={activeResolution} />
             </>,
-            tourHost,
+            aboutHost,
+            "five-minute-tour-full",
           )
         : null}
     </div>
