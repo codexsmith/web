@@ -73,7 +73,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
   const [mapArmGeometry, setMapArmGeometry] = useState<MapArmGeometry>(null);
   const tourRef = useRef<HTMLElement>(null);
   const current = tourSteps[activeStep];
-  const contextLabel = resolution === "focus" ? "Core set" : "Full loop";
 
   useEffect(() => {
     setMapHost(tourRef.current?.closest<HTMLElement>(".bf-machine__apparatus") ?? null);
@@ -232,12 +231,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
               <small>BOUNDARY</small>
               <p>A guided compression of the whole Lab: problem → representation → method → machinery → application → purpose.</p>
             </div>
-
-            <footer>
-              <span className="bf-machine-node__state"><small>STATE</small>Ready</span>
-              <span><small>FORMAT</small>6 steps</span>
-              <span><small>VIEW</small>{contextLabel}</span>
-            </footer>
           </div>
 
           <div className="bf-machine-tour-card__expanded" aria-hidden={!expanded} data-map-open={mapOpen ? "true" : "false"}>

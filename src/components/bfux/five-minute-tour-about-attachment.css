@@ -91,10 +91,10 @@
   transform-origin: right bottom;
 }
 
-/* The compact display was visibly clipping its boundary/status content. */
+/* Footerless compact card: keep the attachment fixed and remove the dead lower band. */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
   width: 100% !important;
-  height: 98% !important;
+  height: 76% !important;
 }
 
 /* Expanded Full Loop: preserve the fixed bottom/right datum and pull left/up. */
@@ -117,7 +117,7 @@
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
   width: 100% !important;
-  height: 72% !important;
+  height: 58% !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
@@ -275,7 +275,7 @@
 
 @media (max-width: 1180px) {
   .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
-    height: 102% !important;
+    height: 80% !important;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"],
