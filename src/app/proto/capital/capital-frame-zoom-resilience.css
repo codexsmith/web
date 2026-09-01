@@ -1,0 +1,120 @@
+/* Capital prototype · Zoom Resilience Pass
+
+   Browser zoom changes the effective CSS viewport and text wrapping. It should
+   not cause the machine to manufacture vertical space merely to satisfy a
+   viewport-height target or to match the tallest neighboring console.
+
+   Law:
+     - the outer page may fill the viewport;
+     - the machine frame is content-sized;
+     - major columns align to their own content, not to one another's height;
+     - the engine's implicit grid tracks are max-content rather than stretched;
+     - conversion cards may grow when text genuinely wraps, but do not get a
+       larger minimum height merely because a width breakpoint was crossed.
+
+   This pass also closes the final ~4px boundary-interface gap:
+     CONDUIT | 20px BANK | 20px BANK | STAGE
+*/
+
+/* The background can occupy the viewport. The apparatus itself should not be
+   forced to consume viewport height. `svh` is used only at the page shell. */
+.capital-prototype-page {
+  min-height: 100svh;
+}
+
+.capital-frame {
+  min-height: 0;
+  grid-template-rows: auto auto auto auto;
+  align-content: start;
+}
+
+/* The body row is determined by content. A tall diligence/input console must
+   not stretch the Lab engine beside it. */
+.capital-frame__body {
+  align-items: start;
+}
+
+.capital-frame__input-console,
+.capital-frame__engine,
+.capital-frame__diligence-console {
+  align-self: start;
+  height: max-content;
+}
+
+/* Implicit grid rows otherwise use `align-content: stretch`, which is the main
+   source of the odd vertical elongation visible under browser zoom. */
+.capital-frame__engine {
+  align-content: start;
+  grid-auto-rows: max-content;
+}
+
+/* Machine subassemblies also size from what they contain. */
+.capital-frame__machine-bed-body {
+  align-items: start;
+}
+
+.capital-frame__machine-functions {
+  align-content: start;
+}
+
+.capital-frame__chassis {
+  align-self: start;
+}
+
+/* The base 1400px breakpoint previously increased conversion-card minimum
+   height from 166px to 184px exactly when zoom made the viewport narrower.
+   Keep one desktop minimum and let real wrapping, rather than the breakpoint,
+   determine any additional height. */
+@media (min-width: 761px) {
+  .capital-frame__conversion-stage {
+    min-height: 166px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* END INTERFACES · final 20px + 20px bridge                                  */
+/* -------------------------------------------------------------------------- */
+
+@media (min-width: 1121px) {
+  .capital-frame {
+    --capital-end-bank-width: 20px;
+    --capital-end-gap: 40px;
+  }
+
+  /* Capital: outer bank begins at the conduit and the inner bank terminates
+     exactly on the card edge. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before {
+    left: calc(var(--capital-end-gap) * -1) !important;
+    width: var(--capital-end-bank-width) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    left: calc(var(--capital-end-bank-width) * -1) !important;
+    width: var(--capital-end-bank-width) !important;
+  }
+
+  /* Retained capability: mirror the same continuous 40px bridge. */
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    right: calc(var(--capital-end-bank-width) * -1) !important;
+    width: var(--capital-end-bank-width) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    left: var(--capital-end-bank-width) !important;
+    width: var(--capital-end-bank-width) !important;
+  }
+}
+
+/* Mobile remains content-led. When the spatial rail collapses to a linear
+   projection there is no reason to preserve desktop minimum heights. */
+@media (max-width: 760px) {
+  .capital-frame__conversion-stage {
+    min-height: 0;
+  }
+
+  .capital-frame__input-console,
+  .capital-frame__engine,
+  .capital-frame__diligence-console {
+    height: auto;
+  }
+}
