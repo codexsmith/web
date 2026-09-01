@@ -8,6 +8,7 @@ import "./physical-machine-experience.css";
 import "./five-minute-tour-card.css";
 import "./five-minute-tour-growth.css";
 import "./five-minute-tour-compact.css";
+import "./five-minute-tour-about-attachment.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 
@@ -56,7 +57,7 @@ export function PhysicalMachineExperience({
   onOpenCoreNode?: (nodeId: string) => void;
 }) {
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
-  const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
+  const [tourHost, setTourHost] = useState<HTMLElement | null>(null);
   const machineHostRef = useRef<HTMLDivElement>(null);
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
@@ -81,13 +82,15 @@ export function PhysicalMachineExperience({
 
   useEffect(() => {
     if (sectionSurface) {
-      setApparatusHost(null);
+      setTourHost(null);
       return;
     }
 
     const frame = window.requestAnimationFrame(() => {
-      const nextHost = machineHostRef.current?.querySelector<HTMLElement>(".bf-machine__apparatus") ?? null;
-      setApparatusHost(nextHost);
+      const nextHost = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
+      ) ?? null;
+      setTourHost(nextHost);
     });
 
     return () => window.cancelAnimationFrame(frame);
@@ -112,8 +115,8 @@ export function PhysicalMachineExperience({
         </div>
       )}
 
-      {!sectionSurface && apparatusHost
-        ? createPortal(<FiveMinuteTourCard resolution={activeResolution} />, apparatusHost)
+      {!sectionSurface && tourHost
+        ? createPortal(<FiveMinuteTourCard resolution={activeResolution} />, tourHost)
         : null}
     </div>
   );

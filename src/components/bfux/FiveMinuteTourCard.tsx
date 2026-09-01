@@ -92,14 +92,19 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
       data-expanded={expanded ? "true" : "false"}
       data-map-open={mapOpen ? "true" : "false"}
       data-connectors="2"
+      data-attached-to="about"
       data-machine-node-interactive="true"
       aria-expanded={expanded}
       aria-label={expanded ? "Five-minute Boundary First Labs tour and takeaways" : "Open five-minute Boundary First Labs tour and takeaways"}
       role={expanded ? "region" : "button"}
       tabIndex={expanded ? -1 : 0}
-      onClick={expanded ? undefined : open}
-      onKeyDown={expanded ? undefined : (event) => {
-        if (event.key === "Enter" || event.key === " ") {
+      onClick={(event) => {
+        event.stopPropagation();
+        if (!expanded) open();
+      }}
+      onKeyDown={(event) => {
+        event.stopPropagation();
+        if (!expanded && (event.key === "Enter" || event.key === " ")) {
           event.preventDefault();
           open();
         }
@@ -178,16 +183,6 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
                     <i key={step.eyebrow} data-active={index <= activeStep ? "true" : undefined} />
                   ))}
                 </div>
-                <button
-                  type="button"
-                  className="bf-machine-tour-card__map-trigger bf-machine-tour-card__map-trigger--footer"
-                  onClick={toggleMap}
-                  aria-controls="five-minute-tour-map-panel"
-                  aria-expanded={mapOpen}
-                >
-                  <Map aria-hidden="true" />
-                  <span>The map in three lines</span>
-                </button>
                 <div className="bf-machine-tour-card__control-buttons">
                   <button
                     type="button"
@@ -215,7 +210,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
         </div>
       </div>
 
-      <div className="bf-machine-tour-card__lower-dock" aria-label="Two-contact connector below the tour module">
+      <div className="bf-machine-tour-card__lower-dock" aria-label="Two-contact connector to About">
         <i />
         <i />
       </div>
