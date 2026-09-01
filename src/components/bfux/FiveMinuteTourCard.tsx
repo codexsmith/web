@@ -63,6 +63,7 @@ const mapColumns = [
 ] as const;
 
 type MapGeometry = Record<string, { left: number; top: number; width: number }>;
+type MapArmGeometry = { left: number; top: number; width: number } | null;
 
 export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResolution }) {
   const [expanded, setExpanded] = useState(false);
@@ -70,6 +71,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
   const [activeStep, setActiveStep] = useState(0);
   const [mapHost, setMapHost] = useState<HTMLElement | null>(null);
   const [mapGeometry, setMapGeometry] = useState<MapGeometry>({});
+  const [mapArmGeometry, setMapArmGeometry] = useState<MapArmGeometry>(null);
   const tourRef = useRef<HTMLElement>(null);
   const current = tourSteps[activeStep];
   const contextLabel = resolution === "focus" ? "Core set" : "Full loop";
@@ -102,11 +104,36 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
         }
 
         setMapGeometry(next);
+
+        const measuredTargets = mapColumns
+          .map((column) => next[column.target])
+          .filter((geometry): geometry is { left: number; top: number; width: number } => Boolean(geometry));
+
+        if (!tourRef.current || measuredTargets.length !== mapColumns.length) {
+          setMapArmGeometry(null);
+          return;
+        }
+
+        const hostRect = mapHost.getBoundingClientRect();
+        const tourRect = tourRef.current.getBoundingClientRect();
+        const targetLeft = Math.min(...measuredTargets.map((geometry) => geometry.left));
+        const targetTop = Math.min(...measuredTargets.map((geometry) => geometry.top));
+        const targetRight = Math.max(...measuredTargets.map((geometry) => geometry.left + geometry.width));
+        const tourRight = tourRect.right - hostRect.left;
+        const armLeft = Math.min(tourRight, targetLeft);
+
+        setMapArmGeometry({
+          left: armLeft,
+          top: targetTop,
+          width: targetRight - armLeft,
+        });
       });
     };
 
     const observer = new ResizeObserver(measure);
     observer.observe(mapHost);
+    if (tourRef.current) observer.observe(tourRef.current);
+
     for (const column of mapColumns) {
       const target = mapHost.querySelector<HTMLElement>(
         `.bf-machine-node[data-node-id="${column.target}"]`,
@@ -122,6 +149,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
     return () => {
       window.cancelAnimationFrame(frame);
       window.removeEventListener("resize", measure);
+      if (tourRef.current) observer.unobserve(tourRef.current);
       for (const target of targets) observer.unobserve(target);
       observer.disconnect();
     };
@@ -292,27 +320,37 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
               aria-label="Tour map"
               aria-hidden={!mapOpen}
             >
-              {mapColumns.map((column) => {
-                const geometry = mapGeometry[column.target];
-                return (
-                  <section
-                    key={column.target}
-                    className="bf-machine-tour-map-layer__column"
-                    data-map-target={column.target}
-                    data-ready={geometry ? "true" : undefined}
-                    style={geometry ? {
-                      left: geometry.left,
-                      top: geometry.top,
-                      width: geometry.width,
-                    } : undefined}
-                  >
-                    <article className="bf-machine-tour-map-layer__item">
-                      <span>{column.index}</span>
-                      <strong>{column.text}</strong>
-                    </article>
-                  </section>
-                );
-              })}
+              {mapArmGeometry ? (
+                <section
+                  className="bf-machine-tour-map-layer__arm"
+                  data-ready="true"
+                  style={{
+                    left: mapArmGeometry.left,
+                    top: mapArmGeometry.top,
+                    width: mapArmGeometry.width,
+                  }}
+                >
+                  {mapColumns.map((column) => {
+                    const geometry = mapGeometry[column.target];
+                    if (!geometry) return null;
+
+                    return (
+                      <article
+                        key={column.target}
+                        className="bf-machine-tour-map-layer__item"
+                        data-map-target={column.target}
+                        style={{
+                          left: geometry.left - mapArmGeometry.left,
+                          width: geometry.width,
+                        }}
+                      >
+                        <span>{column.index}</span>
+                        <strong>{column.text}</strong>
+                      </article>
+                    );
+                  })}
+                </section>
+              ) : null}
             </aside>,
             mapHost,
           )

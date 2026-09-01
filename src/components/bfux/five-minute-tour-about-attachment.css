@@ -147,12 +147,12 @@
 }
 
 /*
- * Apparatus-level mapping layer.
+ * Apparatus-level mapping eyebrow.
  *
- * The React component measures People / Products / Publications and writes each
- * target's actual x, y, and width into its corresponding map card. Each card is
- * translated upward in screen-y and then mechanically bridged back down into the
- * measured target so the independently positioned objects read as one assembly.
+ * Target x/width are still measured independently from People / Products /
+ * Publications. Those measurements now position three inset cells inside one
+ * shared arm whose left edge is the live right edge of the Tour card. The arm is
+ * therefore visually attached to Tour while preserving the proven target map.
  */
 .bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-tour-map-layer {
   position: absolute;
@@ -171,97 +171,83 @@
   transition: opacity 190ms ease 60ms, visibility 0s linear 0s;
 }
 
-.bf-machine-tour-map-layer__column {
-  --map-tone: #83c66d;
+.bf-machine-tour-map-layer__arm {
+  --map-arm-height: clamp(42px, 3.15vw, 50px);
   position: absolute;
+  box-sizing: border-box;
+  height: var(--map-arm-height);
   min-width: 0;
   overflow: visible;
+  padding: .25vw;
+  border: max(1px, .055vw) solid #4a5558;
+  border-radius: .22vw;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 18%),
+    linear-gradient(90deg, color-mix(in srgb, #83c66d 5%, #151b1d), #0c1113 22%, #0a0f11 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.055),
+    inset 0 -2px rgba(0,0,0,.56),
+    0 .24vw .48vw rgba(0,0,0,.5);
   opacity: 0;
   transform: translateY(calc(-100% - .52vw));
-  transform-origin: center bottom;
+  transform-origin: left bottom;
   transition: opacity 150ms ease, transform 260ms cubic-bezier(.2,.78,.2,1);
 }
 
-.bf-machine-tour-map-layer[data-open="true"] .bf-machine-tour-map-layer__column[data-ready="true"] {
+/* A small seam makes the shared housing read as an extension of Tour, not a new panel. */
+.bf-machine-tour-map-layer__arm::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: .62vw;
+  min-width: 8px;
+  height: .72vw;
+  min-height: 10px;
+  transform: translateY(-50%);
+  border: max(1px, .055vw) solid #4a5558;
+  border-right: 0;
+  border-radius: .16vw 0 0 .16vw;
+  background: linear-gradient(180deg, #242c2f, #0b1012);
+  box-shadow: inset 0 1px rgba(255,255,255,.05);
+}
+
+.bf-machine-tour-map-layer[data-open="true"] .bf-machine-tour-map-layer__arm[data-ready="true"] {
   opacity: 1;
   transform: translateY(calc(-100% - .72vw));
 }
 
-.bf-machine-tour-map-layer__column[data-map-target="people"] {
-  --map-tone: #75a4f3;
-}
-
-.bf-machine-tour-map-layer__column[data-map-target="products"] {
-  --map-tone: #e45a6a;
-}
-
-.bf-machine-tour-map-layer__column[data-map-target="publications"] {
-  --map-tone: #a4e44f;
-}
-
-/* Mechanical neck between the independently positioned map card and its target. */
-.bf-machine-tour-map-layer__column::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  left: 50%;
-  top: calc(100% - 1px);
-  width: .3vw;
-  min-width: 4px;
-  height: .86vw;
-  min-height: 11px;
-  transform: translateX(-50%);
-  border-left: max(1px, .055vw) solid #0a0d0e;
-  border-right: max(1px, .055vw) solid #0a0d0e;
-  background:
-    linear-gradient(90deg, #111719 0 18%, color-mix(in srgb, var(--map-tone) 44%, #374145) 46% 56%, #101517 82% 100%);
-  box-shadow:
-    inset 1px 0 rgba(255,255,255,.06),
-    0 .18vw .3vw rgba(0,0,0,.55);
-}
-
-/* Receiver plate overlaps the target's top edge and carries two visible contacts. */
-.bf-machine-tour-map-layer__column::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: calc(100% + .56vw);
-  width: 1.34vw;
-  min-width: 18px;
-  height: .48vw;
-  min-height: 7px;
-  transform: translateX(-50%);
-  border: max(1px, .055vw) solid #697477;
-  border-radius: .14vw;
-  background:
-    radial-gradient(circle at 34% 50%, #050707 0 20%, var(--map-tone) 23% 35%, #050707 38% 49%, transparent 52%),
-    radial-gradient(circle at 66% 50%, #050707 0 20%, var(--map-tone) 23% 35%, #050707 38% 49%, transparent 52%),
-    linear-gradient(180deg, #343b3e 0 18%, #171d1f 24% 64%, #090c0d 100%);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.09),
-    0 .16vw .28vw rgba(0,0,0,.65),
-    0 0 .22vw color-mix(in srgb, var(--map-tone) 18%, transparent);
-}
-
 .bf-machine-tour-map-layer__item {
+  --map-tone: #83c66d;
+  position: absolute;
+  top: .25vw;
+  bottom: .25vw;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: .42vw;
   align-items: center;
   min-width: 0;
-  min-height: 2.7vw;
-  padding: .48vw .54vw;
-  border: max(1px, .055vw) solid color-mix(in srgb, var(--map-tone) 58%, #344043);
-  border-radius: .18vw;
+  padding: .38vw .5vw;
+  border: max(1px, .055vw) solid color-mix(in srgb, var(--map-tone) 56%, #344043);
+  border-radius: .16vw;
   color: #dfe4df;
   background:
-    linear-gradient(90deg, color-mix(in srgb, var(--map-tone) 12%, #111719), #090e10 44%),
+    linear-gradient(90deg, color-mix(in srgb, var(--map-tone) 9%, #111719), #090e10 46%),
     #090e10;
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.045),
-    inset 0 -2px rgba(0,0,0,.5),
-    0 .24vw .48vw rgba(0,0,0,.55);
+  box-shadow: inset 0 1px rgba(255,255,255,.035), inset 0 -1px rgba(0,0,0,.5);
+}
+
+.bf-machine-tour-map-layer__item[data-map-target="people"] {
+  --map-tone: #75a4f3;
+}
+
+.bf-machine-tour-map-layer__item[data-map-target="products"] {
+  --map-tone: #e45a6a;
+}
+
+.bf-machine-tour-map-layer__item[data-map-target="publications"] {
+  --map-tone: #a4e44f;
 }
 
 .bf-machine-tour-map-layer__item > span {
@@ -303,26 +289,21 @@
     height: 154% !important;
   }
 
+  .bf-machine-tour-map-layer__arm {
+    --map-arm-height: 44px;
+    padding: 4px;
+  }
+
   .bf-machine-tour-map-layer__item {
-    min-height: 38px;
-    padding: 7px 8px;
-  }
-
-  .bf-machine-tour-map-layer__column::before {
-    width: 4px;
-    height: 12px;
-  }
-
-  .bf-machine-tour-map-layer__column::after {
-    top: calc(100% + 8px);
-    width: 20px;
-    height: 8px;
+    top: 4px;
+    bottom: 4px;
+    padding: 6px 8px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .bf-machine-tour-map-layer,
-  .bf-machine-tour-map-layer__column {
+  .bf-machine-tour-map-layer__arm {
     transition: none !important;
   }
 }
