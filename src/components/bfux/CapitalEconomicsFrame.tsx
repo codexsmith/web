@@ -1,12 +1,38 @@
 import capital from "@/content/lab-machine-capital.json";
 import problemIntake from "@/content/lab-machine-problem-intake.json";
 
+type SemanticAffinity =
+  | "neutral"
+  | "research"
+  | "products"
+  | "public-interest"
+  | "publications"
+  | "institution";
+
+type BoundaryOperation =
+  | "inlet"
+  | "bind"
+  | "close"
+  | "gate"
+  | "egress"
+  | "return"
+  | "inquire"
+  | "constrain"
+  | "mediate"
+  | "execute"
+  | "expose"
+  | "record"
+  | "answer"
+  | "externalize";
+
 type ConversionStage = {
   id: string;
   number: string;
   label: string;
   copy: string;
   register: string;
+  operation: BoundaryOperation;
+  affinity: SemanticAffinity;
   machine?: boolean;
   returnStage?: boolean;
 };
@@ -16,12 +42,21 @@ type InstitutionalStage = {
   number: string;
   label: string;
   copy: string;
+  affinity: SemanticAffinity;
 };
 
 type MachineFunction = {
   id: string;
   label: string;
   copy: string;
+  operation: BoundaryOperation;
+  affinity: SemanticAffinity;
+};
+
+type RetainedReturn = {
+  label: string;
+  copy: string;
+  affinity: SemanticAffinity;
 };
 
 const fundingPortIds = ["grant", "sponsorship", "strategic-capital", "consulting"];
@@ -30,6 +65,13 @@ const fundingPorts = fundingPortIds
   .map((id) => capital.fundingRelationships.find((item) => item.id === id))
   .filter((item): item is (typeof capital.fundingRelationships)[number] => Boolean(item));
 
+const fundingPortAffinity: Record<string, SemanticAffinity> = {
+  grant: "research",
+  sponsorship: "institution",
+  "strategic-capital": "institution",
+  consulting: "products",
+};
+
 const conversionStages: ConversionStage[] = [
   {
     id: "capital",
@@ -37,6 +79,8 @@ const conversionStages: ConversionStage[] = [
     label: "Capital",
     copy: "A bounded resource input with an explicit relationship and purpose.",
     register: "INPUT",
+    operation: "inlet",
+    affinity: "neutral",
   },
   {
     id: "coherent-capacity",
@@ -44,6 +88,8 @@ const conversionStages: ConversionStage[] = [
     label: "Coherent capacity",
     copy: "More work the Lab can responsibly hold, understand, govern, maintain, and repair.",
     register: "HOLD",
+    operation: "bind",
+    affinity: "institution",
     machine: true,
   },
   {
@@ -52,6 +98,8 @@ const conversionStages: ConversionStage[] = [
     label: "Bounded work",
     copy: "A defined experiment, artifact, pilot, role, implementation, or transfer with closure conditions.",
     register: "WORK",
+    operation: "close",
+    affinity: "neutral",
     machine: true,
   },
   {
@@ -60,6 +108,8 @@ const conversionStages: ConversionStage[] = [
     label: "Validation",
     copy: "Market response, domain criticism, and technical reproduction answer to different realities.",
     register: "WITNESS",
+    operation: "gate",
+    affinity: "neutral",
     machine: true,
   },
   {
@@ -68,6 +118,8 @@ const conversionStages: ConversionStage[] = [
     label: "Transfer",
     copy: "Capability leaves the Lab in a form another party can recover, use, inspect, and maintain.",
     register: "EXPORT",
+    operation: "egress",
+    affinity: "publications",
     machine: true,
   },
   {
@@ -76,6 +128,8 @@ const conversionStages: ConversionStage[] = [
     label: "Retained capability",
     copy: "Evidence, methods, software, revenue, relationships, standards, and institutional memory remain available for the next cycle.",
     register: "RETURN",
+    operation: "return",
+    affinity: "institution",
     returnStage: true,
   },
 ];
@@ -86,36 +140,42 @@ const institutionalStages: InstitutionalStage[] = [
     number: "A",
     label: "Private corpus",
     copy: "Accumulated research, code, notes, methods, and working capability.",
+    affinity: "research",
   },
   {
     id: "public-laboratory",
     number: "B",
     label: "Public laboratory",
     copy: "The work becomes legible, governed, inspectable, and open to criticism.",
+    affinity: "institution",
   },
   {
     id: "useful-artifacts",
     number: "C",
     label: "Useful artifacts",
     copy: "Research becomes instruments, methods, software, publications, and public objects.",
+    affinity: "publications",
   },
   {
     id: "products-services",
     number: "D",
     label: "Products / services",
     copy: "Bounded capability encounters users, institutions, constraints, and demand.",
+    affinity: "products",
   },
   {
     id: "external-review",
     number: "E",
     label: "External review",
     copy: "Claims and implementations encounter domain experts, benchmarks, pilots, and reproduction.",
+    affinity: "public-interest",
   },
   {
     id: "sustainable-program",
     number: "F",
     label: "Sustainable research program",
     copy: "Earned support, public support, reusable capability, and stewardship fund continued inquiry.",
+    affinity: "institution",
   },
 ];
 
@@ -124,31 +184,43 @@ const machineFunctions: MachineFunction[] = [
     id: "research",
     label: "Research",
     copy: "Understand systems at consequential boundaries.",
+    operation: "inquire",
+    affinity: "research",
   },
   {
     id: "methods",
     label: "Methods",
     copy: "Turn surviving structure into repeatable practice.",
+    operation: "constrain",
+    affinity: "research",
   },
   {
     id: "instruments",
     label: "Instruments",
     copy: "Make difficult systems inspectable and operable.",
+    operation: "mediate",
+    affinity: "products",
   },
   {
     id: "software",
     label: "Software",
     copy: "Encode reliable, maintainable capability.",
+    operation: "execute",
+    affinity: "products",
   },
   {
     id: "pilots",
     label: "Pilots",
     copy: "Exercise machinery against bounded reality.",
+    operation: "expose",
+    affinity: "products",
   },
   {
     id: "evidence",
     label: "Evidence",
     copy: "Preserve witnesses, defects, and claim boundaries.",
+    operation: "record",
+    affinity: "publications",
   },
 ];
 
@@ -157,24 +229,30 @@ const stewardshipFunctions: MachineFunction[] = [
     id: "governance",
     label: "Governance",
     copy: "Keep authority, claims, correction, responsibility, and repair attributable.",
+    operation: "bind",
+    affinity: "institution",
   },
   {
     id: "public-value",
     label: "Public value",
     copy: "Make agency, legibility, contestability, repairability, and durable capacity the consequence test.",
+    operation: "answer",
+    affinity: "public-interest",
   },
   {
     id: "public-artifacts",
     label: "Public artifacts",
     copy: "Make useful knowledge, evidence, methods, and instruments recoverable beyond the Lab.",
+    operation: "externalize",
+    affinity: "publications",
   },
 ];
 
-const retainedReturns = [
-  { label: "Evidence", copy: "What survived contact with reality." },
-  { label: "Learning", copy: "What narrowed, failed, or changed the method." },
-  { label: "Revenue / support", copy: "Resources earned or entrusted through useful work." },
-  { label: "Institutional memory", copy: "Reusable methods, software, standards, relationships, and stewardship." },
+const retainedReturns: RetainedReturn[] = [
+  { label: "Evidence", copy: "What survived contact with reality.", affinity: "publications" },
+  { label: "Learning", copy: "What narrowed, failed, or changed the method.", affinity: "research" },
+  { label: "Revenue / support", copy: "Resources earned or entrusted through useful work.", affinity: "products" },
+  { label: "Institutional memory", copy: "Reusable methods, software, standards, relationships, and stewardship.", affinity: "institution" },
 ];
 
 function ConversionStagePlate({ stage }: { stage: ConversionStage }) {
@@ -182,12 +260,15 @@ function ConversionStagePlate({ stage }: { stage: ConversionStage }) {
     <article
       className={`capital-frame__conversion-stage${stage.machine ? " is-machine" : ""}${stage.returnStage ? " is-return" : ""}`}
       data-stage-id={stage.id}
+      data-boundary-operation={stage.operation}
+      data-affinity={stage.affinity}
     >
       <header>
         <span>{stage.number}</span>
         <strong>{stage.register}</strong>
       </header>
       <div>
+        <small className="capital-frame__operation-label">{stage.operation}</small>
         <h3>{stage.label}</h3>
         <p>{stage.copy}</p>
       </div>
@@ -198,7 +279,7 @@ function ConversionStagePlate({ stage }: { stage: ConversionStage }) {
 
 function InstitutionalStagePlate({ stage }: { stage: InstitutionalStage }) {
   return (
-    <article className="capital-frame__institutional-stage" data-stage-id={stage.id}>
+    <article className="capital-frame__institutional-stage" data-stage-id={stage.id} data-affinity={stage.affinity}>
       <span>{stage.number}</span>
       <div>
         <h3>{stage.label}</h3>
@@ -227,7 +308,7 @@ export function CapitalEconomicsFrame() {
 
         <div className="capital-frame__prototype-state" aria-label="Prototype state">
           <span>Capital projection</span>
-          <strong>Prototype 02</strong>
+          <strong>Prototype 03</strong>
         </div>
       </header>
 
@@ -250,7 +331,13 @@ export function CapitalEconomicsFrame() {
 
           <div className="capital-frame__funding-ports">
             {fundingPorts.map((port, index) => (
-              <article className="capital-frame__funding-port" key={port.id}>
+              <article
+                className="capital-frame__funding-port"
+                key={port.id}
+                data-port-id={port.id}
+                data-boundary-operation="inlet"
+                data-affinity={fundingPortAffinity[port.id] ?? "neutral"}
+              >
                 <header>
                   <span>IN-{String(index + 1).padStart(2, "0")}</span>
                   <strong>{port.capitalType}</strong>
@@ -262,7 +349,11 @@ export function CapitalEconomicsFrame() {
             ))}
           </div>
 
-          <article className="capital-frame__problem-port">
+          <article
+            className="capital-frame__problem-port"
+            data-boundary-operation="inlet"
+            data-affinity="public-interest"
+          >
             <header>
               <span>REALITY INPUT</span>
               <strong>PROBLEM</strong>
@@ -304,9 +395,16 @@ export function CapitalEconomicsFrame() {
 
               <div className="capital-frame__machine-functions" aria-label="Operational Lab machinery">
                 {machineFunctions.map((item, index) => (
-                  <article className="capital-frame__machine-function" key={item.id} data-machine-id={item.id}>
+                  <article
+                    className="capital-frame__machine-function"
+                    key={item.id}
+                    data-machine-id={item.id}
+                    data-boundary-operation={item.operation}
+                    data-affinity={item.affinity}
+                  >
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <div>
+                      <small className="capital-frame__operation-label">{item.operation}</small>
                       <h3>{item.label}</h3>
                       <p>{item.copy}</p>
                     </div>
@@ -329,9 +427,12 @@ export function CapitalEconomicsFrame() {
                       className={`capital-frame__stewardship-card${item.id === "public-value" ? " is-public-value" : ""}`}
                       key={item.id}
                       data-machine-id={item.id}
+                      data-boundary-operation={item.operation}
+                      data-affinity={item.affinity}
                     >
                       <header>
                         <span>S-{String(index + 1).padStart(2, "0")}</span>
+                        <span className="capital-frame__operation-label">{item.operation}</span>
                         {item.id === "public-value" ? <strong>CONSEQUENCE TEST</strong> : null}
                       </header>
                       <div>
@@ -357,7 +458,11 @@ export function CapitalEconomicsFrame() {
             </div>
           </section>
 
-          <section className="capital-frame__return-manifold" aria-labelledby="return-manifold-title">
+          <section
+            className="capital-frame__return-manifold"
+            aria-labelledby="return-manifold-title"
+            data-boundary-operation="return"
+          >
             <header>
               <span>Value return / retained capability</span>
               <h2 id="return-manifold-title">What remains after a cycle closes</h2>
@@ -365,7 +470,7 @@ export function CapitalEconomicsFrame() {
             </header>
             <div>
               {retainedReturns.map((item) => (
-                <article key={item.label}>
+                <article key={item.label} data-affinity={item.affinity}>
                   <h3>{item.label}</h3>
                   <p>{item.copy}</p>
                 </article>
@@ -382,7 +487,7 @@ export function CapitalEconomicsFrame() {
 
           <ol className="capital-frame__diligence-gates">
             {capital.diligenceQuestions.map((item, index) => (
-              <li key={item.id}>
+              <li key={item.id} data-boundary-operation="gate" data-affinity="institution">
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <h3>{item.label}</h3>
