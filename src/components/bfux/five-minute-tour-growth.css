@@ -1,0 +1,95 @@
+/*
+ * Tour growth pass.
+ *
+ * The interaction should read as one physical card changing extent, not as a
+ * modal/overlay appearing above the Lab Machine. Keep the compact face present
+ * during most of the geometric expansion, reveal the tour content only after
+ * that expansion is legible, and do not dim the surrounding machine.
+ */
+
+.bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-tour-card {
+  transition:
+    left 540ms cubic-bezier(.18,.76,.18,1),
+    top 540ms cubic-bezier(.18,.76,.18,1),
+    width 540ms cubic-bezier(.18,.76,.18,1),
+    height 540ms cubic-bezier(.18,.76,.18,1),
+    filter 360ms ease,
+    opacity 180ms ease;
+  will-change: left, top, width, height;
+}
+
+/* Preserve the identity of the compact card while the chassis is growing. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__compact {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease 360ms,
+    visibility 0s linear 480ms;
+}
+
+/* The detailed tour is the interior revealed by the larger card, not a new layer. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(.988);
+  transform-origin: center;
+  transition:
+    opacity 150ms ease,
+    transform 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__expanded {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+  transition:
+    opacity 170ms ease 390ms,
+    transform 230ms ease 360ms,
+    visibility 0s linear 360ms;
+}
+
+/* Closing reverses the same object rather than dismissing a modal surface. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-tour-card__compact {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 150ms ease 250ms,
+    visibility 0s linear 250ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-tour-card__expanded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(.988);
+  transition:
+    opacity 110ms ease,
+    transform 160ms ease,
+    visibility 0s linear 130ms;
+}
+
+/* Do not imply a modal context by suppressing the machine behind the card. */
+.physical-machine-experience__machine-stack:has(.bf-machine-tour-card[data-expanded="true"]) > .bf-machine:not(.bf-machine-tour-overlay) {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* The enlarged card can still sit above neighboring modules because it is the
+ * same physical module occupying more of the apparatus surface. Keep the shadow
+ * tighter than the previous modal-like treatment. */
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node.bf-machine-tour-card[data-expanded="true"] {
+  filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-tour-card,
+  .bf-machine[data-skin="physical"] .bf-machine-tour-card__compact,
+  .bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded {
+    transition: none !important;
+  }
+}
