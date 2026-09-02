@@ -222,6 +222,133 @@
   line-height: 1.48 !important;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Contrast / luminance separation                                             */
+/* -------------------------------------------------------------------------- */
+
+/*
+   BFUX readability law for this apparatus:
+     - card face = low-luminance working well;
+     - body copy = high-luminance neutral;
+     - semantic affinity = title / border / instrument signal, not a bright fill.
+
+   Earlier layers deliberately differentiated cards by geometry and affinity,
+   but several bezel surfaces ended up too close in luminance to their copy.
+   This final pass restores a strong figure/ground relationship without
+   flattening the semantic color system.
+*/
+
+.capital-frame__funding-port,
+.capital-frame__problem-port,
+.capital-frame__conversion-stage,
+.capital-frame__machine-function,
+.capital-frame__stewardship-card,
+.capital-frame__institutional-stage,
+.capital-frame__return-manifold article,
+.capital-frame__diligence-gates li,
+.capital-frame__boundary-note {
+  --bfux-readable-face-top: color-mix(in srgb, #263238 94%, var(--bfux-affinity, var(--bf-silver-300)) 6%);
+  --bfux-readable-face-bottom: color-mix(in srgb, #151c20 96%, var(--bfux-affinity, var(--bf-silver-300)) 4%);
+  --bfux-readable-copy: #d5dde0;
+  --bfux-readable-muted: #aeb9bd;
+  --bfux-readable-title: #edf2f3;
+}
+
+/* Darker wells. Semantic tint is deliberately only a few percent. */
+.capital-frame__funding-port,
+.capital-frame__problem-port,
+.capital-frame__conversion-stage,
+.capital-frame__machine-function,
+.capital-frame__stewardship-card,
+.capital-frame__institutional-stage,
+.capital-frame__return-manifold article,
+.capital-frame__diligence-gates li,
+.capital-frame__boundary-note {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 22%),
+    linear-gradient(180deg, var(--bfux-readable-face-top), var(--bfux-readable-face-bottom)) !important;
+}
+
+/* Machine cards were the largest contrast failure in the current screenshot. */
+.capital-frame__machine-functions .capital-frame__machine-function {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity) 6%, transparent), transparent 34%),
+    linear-gradient(180deg, #253137, #171e22) !important;
+}
+
+/* The main conversion cards keep their stronger family identity while using
+   the same dark reading well. */
+.capital-frame__conversion-stage,
+.capital-frame__conversion-stage.is-machine,
+.capital-frame__conversion-stage.is-return {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity) 7%, transparent), transparent 30%),
+    linear-gradient(180deg, #263238, #182025) !important;
+}
+
+/* Body copy: large enough now; make it actually readable. */
+.capital-frame__funding-port p,
+.capital-frame__problem-port p,
+.capital-frame__conversion-stage p,
+.capital-frame__machine-function p,
+.capital-frame__stewardship-card p,
+.capital-frame__institutional-stage p,
+.capital-frame__return-manifold article p,
+.capital-frame__diligence-gates p,
+.capital-frame__boundary-note p {
+  color: var(--bfux-readable-copy) !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.28);
+}
+
+/* Titles stay semantic, but mix toward a brighter neutral so colored titles
+   never become the low-contrast element on a dark card. */
+.capital-frame__funding-port h3,
+.capital-frame__problem-port h3,
+.capital-frame__conversion-stage h3,
+.capital-frame__machine-function h3,
+.capital-frame__stewardship-card h4,
+.capital-frame__institutional-stage h3,
+.capital-frame__return-manifold article h3,
+.capital-frame__diligence-gates h3,
+.capital-frame__boundary-note > strong {
+  color: color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 52%, var(--bfux-readable-title) 48%) !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.42);
+}
+
+/* Small metadata still recedes, but no longer fades into the card. */
+.capital-frame__funding-port header,
+.capital-frame__problem-port header,
+.capital-frame__conversion-stage > header,
+.capital-frame__machine-function > span,
+.capital-frame__stewardship-card > header,
+.capital-frame__institutional-stage > span,
+.capital-frame__diligence-gates li > span,
+.capital-frame__diligence-gates small,
+.capital-frame__boundary-note > span {
+  color: var(--bfux-readable-muted) !important;
+}
+
+.capital-frame__operation-label {
+  color: color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 62%, #eef3f4 38%) !important;
+  background: color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 9%, #0c1114 91%) !important;
+}
+
+/* Keep the stewardship centerpiece visibly special without making it pale. */
+.capital-frame__stewardship-card.is-public-value {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bf-info) 9%, transparent), transparent 34%),
+    linear-gradient(180deg, #233038, #151d22) !important;
+}
+
+/* Side-input cards should remain visually distinct from the central engine,
+   but not by becoming substantially lighter than it. */
+.capital-frame__funding-port,
+.capital-frame__problem-port {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 7%, transparent), transparent 42%),
+    linear-gradient(180deg, #2a353a, #1b2327) !important;
+}
+
 /* Preserve compactness on truly narrow / touch projections, but do not return
    to the old microtype. */
 @media (max-width: 760px), (pointer: coarse) {
