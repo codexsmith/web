@@ -138,6 +138,7 @@ export function BoundaryFrame({
   );
   const showLocalSectionNav = localSections.length > 1;
   const [activeLocalSection, setActiveLocalSection] = useState<string>("");
+  const inlineViewControls = isRootFocus ? contextControls : undefined;
 
   useEffect(() => {
     const viewport = traceViewportRef.current;
@@ -291,15 +292,16 @@ export function BoundaryFrame({
             <span className="frame-tool__label">Search</span>
           </button>
 
-          {onProjectionChange ? (
+          {onProjectionChange || inlineViewControls ? (
             <div
-              className="projection-switcher projection-switcher--legible"
+              className={`projection-switcher projection-switcher--legible ${inlineViewControls ? "projection-switcher--machine" : ""}`}
               role="group"
               data-projection={projection}
               aria-label={isRootFocus ? "Boundary First Labs views" : `Representations of ${focusNode.label}`}
             >
               <span className="projection-switcher__label">View</span>
-              {availableProjectionModes.map((mode) => {
+              {inlineViewControls}
+              {onProjectionChange ? availableProjectionModes.map((mode) => {
                 const label = isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode];
                 const purpose = isRootFocus ? rootProjectionPurposes[mode] : projectionPurposes[mode];
                 const description = isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode];
@@ -320,7 +322,7 @@ export function BoundaryFrame({
                     </span>
                   </button>
                 );
-              })}
+              }) : null}
             </div>
           ) : null}
 
@@ -353,7 +355,7 @@ export function BoundaryFrame({
             </div>
           ) : null}
 
-          {contextControls ? <div className="frame-context-controls">{contextControls}</div> : null}
+          {contextControls && !isRootFocus ? <div className="frame-context-controls">{contextControls}</div> : null}
         </div>
       </header>
 
