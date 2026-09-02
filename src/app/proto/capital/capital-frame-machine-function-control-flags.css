@@ -43,7 +43,7 @@
   left: 0;
   top: 8px;
   bottom: 8px;
-  width: 28px;
+  width: 32px;
   pointer-events: none;
   border-right: 1px solid color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 26%, var(--bf-etched-line));
   background:
@@ -64,7 +64,7 @@
   display: grid !important;
   align-content: center !important;
   gap: 7px !important;
-  padding: 14px 46px 14px 40px !important;
+  padding: 14px 46px 14px 46px !important;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -74,14 +74,14 @@
 .capital-frame__machine-function .capital-frame__operation-label {
   position: absolute !important;
   z-index: 14 !important;
-  left: 14px !important;
+  left: 16px !important;
   top: 50% !important;
-  width: 76px !important;
-  min-width: 76px !important;
-  height: 19px !important;
-  min-height: 19px !important;
+  width: 88px !important;
+  min-width: 88px !important;
+  height: 23px !important;
+  min-height: 23px !important;
   margin: 0 !important;
-  padding: 0 12px !important;
+  padding: 0 13px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -89,21 +89,21 @@
   transform-origin: center !important;
   white-space: nowrap !important;
 
-  border: 1px solid color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 66%, var(--bf-etched-line-strong)) !important;
-  border-radius: 2px !important;
+  border: 1px solid color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 70%, var(--bf-etched-line-strong)) !important;
+  border-radius: 3px !important;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.075), transparent 36%),
+    linear-gradient(180deg, rgba(255,255,255,.085), transparent 36%),
     linear-gradient(90deg,
-      color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 18%, #11171b),
-      color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 8%, #0b1014)) !important;
-  color: color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 82%, var(--bf-white-050)) !important;
+      color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 20%, #11171b),
+      color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 9%, #0b1014)) !important;
+  color: color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 84%, var(--bf-white-050)) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 1px 0 rgba(255,255,255,.07),
     inset 0 -1px 0 rgba(0,0,0,.48),
     0 2px 7px rgba(0,0,0,.32) !important;
 
-  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-  letter-spacing: .105em !important;
+  font: 800 .56rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  letter-spacing: .09em !important;
   text-transform: uppercase !important;
 }
 
@@ -114,8 +114,8 @@
   content: "";
   position: absolute;
   top: 50%;
-  width: 3px;
-  height: 3px;
+  width: 4px;
+  height: 4px;
   transform: translateY(-50%);
   border-radius: 50%;
   background: #080d10;
@@ -125,11 +125,11 @@
 }
 
 .capital-frame__machine-function .capital-frame__operation-label::before {
-  left: 5px;
+  left: 6px;
 }
 
 .capital-frame__machine-function .capital-frame__operation-label::after {
-  right: 5px;
+  right: 6px;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -138,16 +138,16 @@
 
 .capital-frame__machine-function h3 {
   margin: 0 !important;
-  font-size: .84rem !important;
+  font-size: .86rem !important;
   line-height: 1.14 !important;
   letter-spacing: .035em !important;
 }
 
 .capital-frame__machine-function p {
   margin: 0 !important;
-  font-size: .72rem !important;
+  font-size: .74rem !important;
   line-height: 1.48 !important;
-  color: color-mix(in srgb, var(--bf-white-050) 84%, var(--bf-text-secondary)) !important;
+  color: color-mix(in srgb, var(--bf-white-050) 86%, var(--bf-text-secondary)) !important;
 }
 
 /* Keep the right-side operation glyph subordinate to the now-prominent flag. */
@@ -155,38 +155,101 @@
   opacity: .78 !important;
 }
 
+/* -------------------------------------------------------------------------- */
+/* Civics & Stewardship · inspection labels                                    */
+/* -------------------------------------------------------------------------- */
+
+/* These labels carry real governance semantics. They should read as apparatus
+   labels at normal viewing distance, not as decorative microtype. */
+.capital-frame__stewardship-module > header {
+  min-height: 50px !important;
+  padding-block: 10px !important;
+}
+
+.capital-frame__stewardship-module > header span {
+  font-size: .58rem !important;
+  line-height: 1.16 !important;
+  letter-spacing: .105em !important;
+  color: color-mix(in srgb, var(--bf-white-050) 72%, var(--bf-text-muted)) !important;
+}
+
+.capital-frame__stewardship-module > header > strong {
+  padding: 6px 9px !important;
+  font-size: .56rem !important;
+  line-height: 1 !important;
+  letter-spacing: .09em !important;
+}
+
+.capital-frame__stewardship-card > header {
+  min-height: 32px !important;
+  padding: 6px 9px !important;
+  font-size: .54rem !important;
+  letter-spacing: .085em !important;
+}
+
+/* S-01 / S-02 / S-03 indices */
+.capital-frame__stewardship-card > header > span:first-child {
+  font-size: .53rem !important;
+  color: color-mix(in srgb, var(--bf-white-050) 70%, var(--bf-text-muted)) !important;
+}
+
+/* BIND / ANSWER / EXTERNALIZE */
+.capital-frame__stewardship-card .capital-frame__operation-label {
+  min-height: 19px !important;
+  padding: 4px 7px 3px !important;
+  font-size: .53rem !important;
+  line-height: 1 !important;
+  letter-spacing: .095em !important;
+}
+
+/* CONSEQUENCE TEST */
+.capital-frame__stewardship-card > header strong {
+  font-size: .50rem !important;
+  line-height: 1 !important;
+  letter-spacing: .075em !important;
+}
+
 @media (max-width: 760px), (pointer: coarse) {
   .capital-frame__machine-functions {
-    grid-template-rows: repeat(3, minmax(104px, 1fr)) !important;
+    grid-template-rows: repeat(3, minmax(108px, 1fr)) !important;
   }
 
   .capital-frame__machine-functions .capital-frame__machine-function,
   .capital-frame__machine-function > div {
-    min-height: 104px !important;
+    min-height: 108px !important;
   }
 
   .capital-frame__machine-function > div {
-    padding: 12px 40px 12px 36px !important;
+    padding: 12px 40px 12px 42px !important;
   }
 
   .capital-frame__machine-function .capital-frame__operation-label {
-    left: 13px !important;
-    width: 70px !important;
-    min-width: 70px !important;
-    height: 18px !important;
-    min-height: 18px !important;
-    font-size: .43rem !important;
+    left: 15px !important;
+    width: 80px !important;
+    min-width: 80px !important;
+    height: 21px !important;
+    min-height: 21px !important;
+    font-size: .49rem !important;
   }
 
   .capital-frame__machine-functions .capital-frame__machine-function::before {
-    width: 26px;
+    width: 30px;
   }
 
   .capital-frame__machine-function h3 {
-    font-size: .79rem !important;
+    font-size: .81rem !important;
   }
 
   .capital-frame__machine-function p {
-    font-size: .68rem !important;
+    font-size: .70rem !important;
+  }
+
+  .capital-frame__stewardship-module > header span {
+    font-size: .54rem !important;
+  }
+
+  .capital-frame__stewardship-module > header > strong,
+  .capital-frame__stewardship-card .capital-frame__operation-label {
+    font-size: .50rem !important;
   }
 }
