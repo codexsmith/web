@@ -6,12 +6,16 @@
 }
 
 .site-shell[data-root-focus="true"] .frame-context-controls {
-  min-width: 0;
+  min-width: max-content;
+  justify-self: end;
 }
 
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: max-content;
+  min-width: max-content;
   min-height: 42px;
   padding: 3px;
   border: 1px solid var(--bf-etched-line);
@@ -21,14 +25,16 @@
 }
 
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-  min-width: 0;
+  flex: 0 0 auto;
+  min-width: max-content;
   min-height: 38px;
   display: grid;
-  grid-template-columns: 15px auto;
+  grid-template-columns: 15px max-content;
   align-items: center;
   justify-content: center;
   gap: .3rem;
-  padding: 4px 6px;
+  padding: 4px 7px;
+  overflow: hidden;
   border: 1px solid var(--bf-etched-line);
   border-radius: var(--bf-radius-control);
   background: var(--bf-bezel-surface);
@@ -41,6 +47,11 @@
   text-transform: uppercase;
   white-space: nowrap;
   cursor: pointer;
+}
+
+.site-shell[data-root-focus="true"] .lab-machine-frame-zoom button span {
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button:hover:not(:disabled) {
@@ -61,6 +72,7 @@
 .site-shell[data-root-focus="true"] .lab-machine-frame-zoom svg {
   width: 15px;
   height: 15px;
+  flex: 0 0 auto;
 }
 
 @media (max-width: 1280px) {
@@ -69,7 +81,7 @@
   }
 
   .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-    padding-inline: .38rem;
+    padding-inline: .42rem;
   }
 }
 
@@ -85,13 +97,23 @@
 
   .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
     min-height: 32px;
-    padding-inline: .32rem;
+    padding-inline: .36rem;
   }
 }
 
 @media (max-width: 560px) {
+  .site-shell[data-root-focus="true"] .frame-context-controls {
+    min-width: 0;
+  }
+
+  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
+    width: auto;
+    min-width: 0;
+  }
+
   .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
     grid-template-columns: 15px;
+    min-width: 34px;
     width: 34px;
     padding: 0;
   }
@@ -117,6 +139,7 @@
   }
 
   .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
+    min-width: 30px;
     width: 30px;
     min-height: 30px;
   }

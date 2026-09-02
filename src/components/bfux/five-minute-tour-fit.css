@@ -1,0 +1,72 @@
+/* Compact Tour containment.
+ *
+ * The Tour intentionally uses a much shallower chassis than the ordinary machine
+ * cards. Own the cartridge/header fit explicitly so legacy card dimensions and
+ * browser zoom cannot push either element through that chassis.
+ */
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-plate {
+  box-sizing: border-box !important;
+  position: absolute !important;
+  left: 10px !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 42px !important;
+  height: 42px !important;
+  margin: 0 !important;
+  padding: 4px !important;
+  transform: translateY(-50%) !important;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-well {
+  box-sizing: border-box;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-well svg {
+  width: 22px !important;
+  height: 22px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header {
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex: 1 1 auto !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: 0 8px 0 62px !important;
+  overflow: hidden;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header span,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header span {
+  font-size: clamp(.42rem, .46vw, .5rem) !important;
+  line-height: 1.1 !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
+  margin-top: .18rem !important;
+  font-size: clamp(.88rem, .96vw, 1.04rem) !important;
+  line-height: 1.02 !important;
+}
