@@ -1,0 +1,192 @@
+/* Capital prototype · Operational machinery control flags
+
+   The six operating cards already carry a dedicated left-side instrument tab.
+   Use that boundary surface for the operation itself rather than spending both
+   a numeric tab and an interior operation chip on the same card.
+
+   Result:
+     - numeric tabs disappear;
+     - INQUIRE / CONSTRAIN / MEDIATE / EXECUTE / EXPOSE / RECORD become
+       vertically mounted control flags, rotated 90deg clockwise;
+     - the card body begins with the semantic title instead of metadata;
+     - reclaimed vertical space is spent on larger, more readable copy.
+*/
+
+/* -------------------------------------------------------------------------- */
+/* Card chassis and left mounting channel                                      */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__machine-functions {
+  grid-template-rows: repeat(2, minmax(108px, 1fr)) !important;
+}
+
+.capital-frame__machine-functions .capital-frame__machine-function {
+  position: relative !important;
+  display: block !important;
+  grid-template-columns: 1fr !important;
+  min-height: 108px !important;
+  overflow: visible !important;
+}
+
+/* Retire the old numeric tab. The operation flag now owns this boundary. */
+.capital-frame__machine-functions .capital-frame__machine-function > span {
+  display: none !important;
+}
+
+/* A recessed mounting channel keeps the rotated label attached to the card
+   rather than making it read as a floating pill. */
+.capital-frame__machine-functions .capital-frame__machine-function::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 28px;
+  pointer-events: none;
+  border-right: 1px solid color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 26%, var(--bf-etched-line));
+  background:
+    linear-gradient(90deg,
+      rgba(0,0,0,.26),
+      color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 5%, rgba(8,13,17,.92)) 60%,
+      rgba(255,255,255,.025));
+  box-shadow:
+    inset -1px 0 0 rgba(255,255,255,.025),
+    2px 0 7px rgba(0,0,0,.16);
+}
+
+/* The body is now title + copy only. Keep enough right clearance for the
+   established operation glyph while allowing the larger text to breathe. */
+.capital-frame__machine-function > div {
+  position: static !important;
+  min-height: 108px !important;
+  display: grid !important;
+  align-content: center !important;
+  gap: 7px !important;
+  padding: 14px 46px 14px 40px !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mounted control flag                                                        */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__machine-function .capital-frame__operation-label {
+  position: absolute !important;
+  z-index: 14 !important;
+  left: 14px !important;
+  top: 50% !important;
+  width: 76px !important;
+  min-width: 76px !important;
+  height: 19px !important;
+  min-height: 19px !important;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translate(-50%, -50%) rotate(90deg) !important;
+  transform-origin: center !important;
+  white-space: nowrap !important;
+
+  border: 1px solid color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 66%, var(--bf-etched-line-strong)) !important;
+  border-radius: 2px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.075), transparent 36%),
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 18%, #11171b),
+      color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 8%, #0b1014)) !important;
+  color: color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 82%, var(--bf-white-050)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 -1px 0 rgba(0,0,0,.48),
+    0 2px 7px rgba(0,0,0,.32) !important;
+
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  letter-spacing: .105em !important;
+  text-transform: uppercase !important;
+}
+
+/* Two small fasteners make the flag read as a mounted control plate. Because
+   the plate rotates as a unit, these become the upper/lower fasteners. */
+.capital-frame__machine-function .capital-frame__operation-label::before,
+.capital-frame__machine-function .capital-frame__operation-label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #080d10;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 56%, var(--bf-etched-line-strong)),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.capital-frame__machine-function .capital-frame__operation-label::before {
+  left: 5px;
+}
+
+.capital-frame__machine-function .capital-frame__operation-label::after {
+  right: 5px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Spend the reclaimed space on readability                                    */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__machine-function h3 {
+  margin: 0 !important;
+  font-size: .84rem !important;
+  line-height: 1.14 !important;
+  letter-spacing: .035em !important;
+}
+
+.capital-frame__machine-function p {
+  margin: 0 !important;
+  font-size: .72rem !important;
+  line-height: 1.48 !important;
+  color: color-mix(in srgb, var(--bf-white-050) 84%, var(--bf-text-secondary)) !important;
+}
+
+/* Keep the right-side operation glyph subordinate to the now-prominent flag. */
+.capital-frame__machine-function::after {
+  opacity: .78 !important;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .capital-frame__machine-functions {
+    grid-template-rows: repeat(3, minmax(104px, 1fr)) !important;
+  }
+
+  .capital-frame__machine-functions .capital-frame__machine-function,
+  .capital-frame__machine-function > div {
+    min-height: 104px !important;
+  }
+
+  .capital-frame__machine-function > div {
+    padding: 12px 40px 12px 36px !important;
+  }
+
+  .capital-frame__machine-function .capital-frame__operation-label {
+    left: 13px !important;
+    width: 70px !important;
+    min-width: 70px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    font-size: .43rem !important;
+  }
+
+  .capital-frame__machine-functions .capital-frame__machine-function::before {
+    width: 26px;
+  }
+
+  .capital-frame__machine-function h3 {
+    font-size: .79rem !important;
+  }
+
+  .capital-frame__machine-function p {
+    font-size: .68rem !important;
+  }
+}
