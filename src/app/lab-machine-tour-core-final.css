@@ -1,27 +1,97 @@
 /*
- * Canonical Core-set Tour geometry.
+ * Canonical Core-set composition.
  *
- * This file is imported after lab-machine-home-final.css and intentionally owns
- * the final desktop placement for the Tour in Core set. Earlier tour styles are
- * allowed to describe the component; this file supplies the last positional
- * decision so the cascade cannot pull the Tour back into About/People space.
+ * This stylesheet is imported after lab-machine-home-final.css and is the single
+ * final owner of desktop Core geometry. Earlier machine/tour styles may describe
+ * component appearance, but they must not decide the Core composition.
+ *
+ * Core reads as two aligned fields:
+ * - left column: Tour above About
+ * - right field: People / Products / Publications evenly above Research
  */
 
 @media (min-width: 1025px) {
+  /* Bottom row / structural datum. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+    position: absolute !important;
+    left: 3.2% !important;
+    top: 51.5% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 21.2% !important;
+    height: 41.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    position: absolute !important;
+    left: 27.4% !important;
+    top: 51.5% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 69.4% !important;
+    height: 41.5% !important;
+  }
+
+  /*
+   * Top row over Research. Three equal 21.2% cards span the same 69.4% field,
+   * leaving two equal 2.9% internal gaps.
+   */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+    position: absolute !important;
+    left: 27.4% !important;
+    top: 7% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 21.2% !important;
+    height: 41.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+    position: absolute !important;
+    left: 51.5% !important;
+    top: 7% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 21.2% !important;
+    height: 41.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+    position: absolute !important;
+    left: 75.6% !important;
+    top: 7% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 21.2% !important;
+    height: 41.5% !important;
+  }
+
+  /* Tour occupies the corresponding top-left slot above About. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="focus"]
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
     position: absolute !important;
-    left: 75.8% !important;
+    left: 3.2% !important;
     top: 7% !important;
     right: auto !important;
     bottom: auto !important;
-    width: 21% !important;
+    width: 21.2% !important;
     height: clamp(72px, 5vw, 82px) !important;
     z-index: 12 !important;
-    transform-origin: right top !important;
+    transform-origin: left top !important;
   }
 
+  /* Core expansion grows inward from the Tour's top-left slot. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="focus"]
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"],
@@ -29,13 +99,13 @@
     .bf-machine[data-skin="physical"][data-resolution="focus"]
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"][data-map-open="true"] {
     position: absolute !important;
-    left: auto !important;
+    left: 3.2% !important;
     top: 7% !important;
-    right: 3.2% !important;
+    right: auto !important;
     bottom: auto !important;
     width: 34.7% !important;
     height: max(48.5%, 300px) !important;
     z-index: 40 !important;
-    transform-origin: right top !important;
+    transform-origin: left top !important;
   }
 }
