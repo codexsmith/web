@@ -1,0 +1,647 @@
+/*
+ * Five-minute Tour.
+ *
+ * This file owns Tour appearance, state transitions, Full Loop attachment to
+ * About, and the measured map eyebrow. Machine composition (where Core/Full
+ * Loop cards live) belongs to lab-machine-composition.css.
+ */
+
+/* -------------------------------------------------------------------------- */
+/* Chassis and state transition                                                */
+/* -------------------------------------------------------------------------- */
+
+.bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-tour-card {
+  --tone: #83c66d;
+  z-index: 4;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    left 540ms cubic-bezier(.18,.76,.18,1),
+    top 540ms cubic-bezier(.18,.76,.18,1),
+    right 540ms cubic-bezier(.18,.76,.18,1),
+    bottom 540ms cubic-bezier(.18,.76,.18,1),
+    width 540ms cubic-bezier(.18,.76,.18,1),
+    height 540ms cubic-bezier(.18,.76,.18,1),
+    filter 360ms ease,
+    opacity 180ms ease;
+  will-change: left, top, width, height;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card .bf-machine-node__face {
+  overflow: hidden;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__compact {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__compact {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease 360ms,
+    visibility 0s linear 480ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-tour-card__compact {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 150ms ease 250ms,
+    visibility 0s linear 250ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+  color: #dce1de;
+  background:
+    linear-gradient(rgba(117,158,129,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117,158,129,.035) 1px, transparent 1px),
+    radial-gradient(circle at 30% 22%, color-mix(in srgb, var(--tone) 8%, #111819), #090d0f 58%, #070a0b 100%);
+  background-size: 20px 20px, 20px 20px, auto;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(.988);
+  transform-origin: center;
+  transition:
+    opacity 150ms ease,
+    transform 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__expanded {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: scale(1);
+  transition:
+    opacity 170ms ease 390ms,
+    transform 230ms ease 360ms,
+    visibility 0s linear 360ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-tour-card__expanded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(.988);
+  transition:
+    opacity 110ms ease,
+    transform 160ms ease,
+    visibility 0s linear 130ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"] .bf-machine-node__shell {
+  border-color: color-mix(in srgb, var(--tone) 54%, #7d8583);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    inset 0 -3px rgba(0,0,0,.9),
+    0 0 0 3px #050607,
+    0 18px 36px rgba(0,0,0,.8),
+    0 0 34px color-mix(in srgb, var(--tone) 14%, transparent);
+}
+
+/* The Tour grows as part of the machine; surrounding modules remain legible. */
+.physical-machine-experience__machine-stack:has(.bf-machine-tour-card[data-expanded="true"]) > .bf-machine {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Compact launcher                                                            */
+/* -------------------------------------------------------------------------- */
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__boundary,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] footer {
+  display: none !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-plate {
+  left: 10px;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  padding: 4px;
+  transform: translateY(-50%);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] .bf-machine-node__icon-well svg {
+  width: 24px;
+  height: 24px;
+  color: var(--tone);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+  padding: 0 10px 0 66px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header span {
+  font-size: .5rem;
+  line-height: 1.15;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
+  margin-top: .2rem;
+  font-size: clamp(.96rem, 1vw, 1.1rem);
+  line-height: 1.03;
+}
+
+/* Core fallback below the desktop composition breakpoint. Desktop Core geometry
+ * is owned by lab-machine-composition.css. */
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
+  left: 75.8%;
+  top: 7%;
+  right: auto;
+  bottom: auto;
+  width: 21%;
+  height: clamp(72px, 5vw, 82px);
+  z-index: 12;
+  transform-origin: right top;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"] {
+  left: auto;
+  top: 7%;
+  right: 3.2%;
+  bottom: auto;
+  width: 34.7%;
+  height: max(48.5%, 300px);
+  z-index: 40;
+  transform-origin: right top;
+  filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Expanded reading surface                                                    */
+/* -------------------------------------------------------------------------- */
+
+.bf-machine-tour-card__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 56px;
+  padding: 9px 11px 9px 13px;
+  border-bottom: 1px solid #2d393a;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(0,0,0,.16));
+}
+
+.bf-machine-tour-card__topbar > div:first-child {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.bf-machine-tour-card__topbar strong {
+  display: block;
+  max-width: 100%;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #f0efe9;
+  font: 500 clamp(1.05rem, 1.2vw, 1.34rem)/1.08 Georgia, serif;
+  letter-spacing: -.025em;
+}
+
+.bf-machine-tour-card__topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.bf-machine-tour-card__topbar button,
+.bf-machine-tour-card__control-buttons button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  border: 1px solid #425052;
+  border-radius: 4px;
+  color: #d8ddda;
+  background: linear-gradient(#192023, #0c1113);
+  box-shadow: inset 0 1px rgba(255,255,255,.045), 0 3px 6px rgba(0,0,0,.45);
+  font: 700 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.bf-machine-tour-card__topbar button {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+}
+
+.bf-machine-tour-card__topbar button svg,
+.bf-machine-tour-card__control-buttons svg {
+  width: 15px;
+  height: 15px;
+}
+
+.bf-machine-tour-card__map-trigger[aria-expanded="true"] {
+  border-color: color-mix(in srgb, var(--tone) 74%, #586561);
+  color: #eef3ee;
+  background: linear-gradient(
+    color-mix(in srgb, var(--tone) 15%, #192023),
+    color-mix(in srgb, var(--tone) 7%, #0c1113)
+  );
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.07),
+    0 0 0 1px color-mix(in srgb, var(--tone) 18%, transparent),
+    0 3px 7px rgba(0,0,0,.45);
+}
+
+.bf-machine-tour-card__map-trigger--icon:hover {
+  border-color: color-mix(in srgb, var(--tone) 64%, #57635f);
+}
+
+.bf-machine-tour-card__body {
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.bf-machine-tour-card__main {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 0;
+  padding: 9px 10px 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--tone) 42%, #405052) #0a0f11;
+}
+
+.bf-machine-tour-card__current {
+  display: grid;
+  align-content: start;
+  min-height: 0;
+  padding: 12px 14px;
+  overflow: visible;
+  border: 1px solid #334145;
+  border-radius: 5px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.028), transparent 22%),
+    color-mix(in srgb, var(--tone) 2%, #0b1012);
+  box-shadow: inset 0 2px 9px rgba(0,0,0,.55), 0 1px rgba(255,255,255,.02);
+}
+
+.bf-machine-tour-card__current > p {
+  max-width: 920px;
+  margin: 0;
+  color: #cdd3d0;
+  font-size: clamp(.73rem, .76vw, .84rem);
+  line-height: 1.45;
+}
+
+.bf-machine-tour-card__takeaway {
+  display: grid;
+  gap: 4px;
+  margin-top: .55rem;
+  padding: .48rem .62rem;
+  border-left: 3px solid var(--tone);
+  background: color-mix(in srgb, var(--tone) 7%, #0a0f10);
+}
+
+.bf-machine-tour-card__takeaway small {
+  color: color-mix(in srgb, var(--tone) 82%, #dce3df);
+  font: 700 .56rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.bf-machine-tour-card__takeaway strong {
+  color: #ecede8;
+  font: 500 clamp(.76rem, .8vw, .88rem)/1.32 Georgia, serif;
+}
+
+.bf-machine-tour-card__controls {
+  position: relative;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .55rem;
+  min-height: 46px;
+  padding: 7px 10px 8px;
+  border-top: 1px solid #273337;
+  background: linear-gradient(180deg, rgba(10,15,17,.96), #080c0e);
+}
+
+.bf-machine-tour-card__progress {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 5px;
+  max-width: 150px;
+}
+
+.bf-machine-tour-card[data-map-open="true"] .bf-machine-tour-card__progress {
+  display: flex;
+}
+
+.bf-machine-tour-card__progress i {
+  display: block;
+  flex: 1 1 0;
+  height: 4px;
+  border-radius: 999px;
+  background: #263133;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.7);
+}
+
+.bf-machine-tour-card__progress i[data-active="true"] {
+  background: var(--tone);
+  box-shadow: 0 0 7px color-mix(in srgb, var(--tone) 38%, transparent);
+}
+
+.bf-machine-tour-card__control-buttons {
+  display: flex;
+  gap: 7px;
+}
+
+.bf-machine-tour-card__control-buttons button {
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+.bf-machine-tour-card__control-buttons button:disabled {
+  opacity: .32;
+  cursor: not-allowed;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Full Loop: Tour mechanically attached to About                              */
+/* -------------------------------------------------------------------------- */
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+  overflow: visible;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]:has(> .bf-machine-tour-card) {
+  z-index: 12 !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]:has(> .bf-machine-tour-card[data-expanded="true"]) {
+  z-index: 42 !important;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-about-dock {
+  position: absolute;
+  z-index: 18;
+  left: 50%;
+  top: -.76vw;
+  display: flex;
+  align-items: center;
+  gap: .28vw;
+  padding: .24vw .36vw;
+  transform: translateX(-50%);
+  border: max(1px, .065vw) solid #727b7e;
+  border-top-color: #92999b;
+  border-radius: .2vw;
+  background: linear-gradient(180deg, #343b3e 0 14%, #171d1f 18% 58%, #080b0c 100%);
+  box-shadow:
+    inset 0 max(1px, .065vw) rgba(255,255,255,.1),
+    inset 0 calc(var(--machine-u, 1vw) * -.13) #050606,
+    0 .26vw .45vw rgba(0,0,0,.8);
+  pointer-events: none;
+}
+
+.bf-machine-tour-about-dock i {
+  display: block;
+  width: .58vw;
+  height: .58vw;
+  border: max(1px, .065vw) solid color-mix(in srgb, #83c66d 66%, #d7dad8);
+  border-radius: 50%;
+  background: radial-gradient(circle, #030505 0 35%, color-mix(in srgb, #83c66d 42%, #303638) 38% 57%, #080a0b 60%);
+  box-shadow: inset 0 0 0 max(1px, .04vw) #000, 0 0 .24vw color-mix(in srgb, #83c66d 24%, transparent);
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card {
+  top: auto;
+  bottom: calc(100% + .78vw);
+  left: auto;
+  right: 0;
+  z-index: 14;
+  transform-origin: right bottom;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
+  width: 100%;
+  height: clamp(72px, 5vw, 82px);
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
+  width: 213%;
+  height: max(205%, 300px);
+  filter: drop-shadow(0 12px 16px rgba(0,0,0,.68));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Measured Tour map eyebrow                                                   */
+/* -------------------------------------------------------------------------- */
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-tour-map-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 44;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 160ms ease, visibility 0s linear 180ms;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-tour-map-layer[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 190ms ease 60ms, visibility 0s linear 0s;
+}
+
+.bf-machine-tour-map-layer__arm {
+  --map-arm-height: clamp(42px, 3.15vw, 50px);
+  position: absolute;
+  box-sizing: border-box;
+  height: var(--map-arm-height);
+  min-width: 0;
+  overflow: visible;
+  padding: .25vw;
+  border: max(1px, .055vw) solid #4a5558;
+  border-right-width: max(1px, .075vw);
+  border-right-color: #667174;
+  border-radius: .22vw .12vw .12vw .22vw;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 18%),
+    linear-gradient(90deg, color-mix(in srgb, #83c66d 5%, #151b1d), #0c1113 22%, #0a0f11 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.055),
+    inset 0 -2px rgba(0,0,0,.56),
+    0 .24vw .48vw rgba(0,0,0,.5);
+  opacity: 0;
+  transform: translateY(calc(-100% - .52vw));
+  transform-origin: left bottom;
+  transition: opacity 150ms ease, transform 260ms cubic-bezier(.2,.78,.2,1);
+}
+
+.bf-machine-tour-map-layer__arm::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: .72vw;
+  min-width: 11px;
+  height: .72vw;
+  min-height: 11px;
+  transform: translate(50%, -50%);
+  border: max(1px, .055vw) solid #5c686b;
+  border-radius: .08vw;
+  background:
+    radial-gradient(circle at center, #050707 0 26%, color-mix(in srgb, #83c66d 42%, #303638) 30% 47%, #080a0b 51%),
+    linear-gradient(180deg, #2b3336, #0b1012);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.06),
+    0 .12vw .2vw rgba(0,0,0,.55);
+}
+
+.bf-machine-tour-map-layer__arm[data-connector-side="right"]::before {
+  right: auto;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.bf-machine-tour-map-layer__arm::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  width: clamp(10px, .62vw, 12px);
+  pointer-events: none;
+  border-top: max(1px, .055vw) solid #667174;
+  border-right: max(1px, .075vw) solid #667174;
+  border-bottom: max(1px, .055vw) solid #667174;
+  border-radius: 0 .12vw .12vw 0;
+  background:
+    radial-gradient(circle at 50% 7px,
+      #a8afb0 0 1px,
+      #525d5f 1.5px 2.5px,
+      #111718 3px 4px,
+      transparent 4.5px),
+    radial-gradient(circle at 50% calc(100% - 7px),
+      #a8afb0 0 1px,
+      #525d5f 1.5px 2.5px,
+      #111718 3px 4px,
+      transparent 4.5px),
+    linear-gradient(90deg, transparent, rgba(255,255,255,.035));
+  box-shadow: inset 1px 0 rgba(255,255,255,.035);
+}
+
+.bf-machine-tour-map-layer[data-open="true"] .bf-machine-tour-map-layer__arm[data-ready="true"] {
+  opacity: 1;
+  transform: translateY(calc(-100% - .72vw));
+}
+
+.bf-machine-tour-map-layer__item {
+  --map-tone: #83c66d;
+  position: absolute;
+  top: .25vw;
+  bottom: .25vw;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: .34vw .5vw;
+  border: max(1px, .055vw) solid color-mix(in srgb, var(--map-tone) 56%, #344043);
+  border-radius: .16vw;
+  color: #dfe4df;
+  text-align: center;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--map-tone) 9%, #111719), #090e10 46%),
+    #090e10;
+  box-shadow: inset 0 1px rgba(255,255,255,.035), inset 0 -1px rgba(0,0,0,.5);
+}
+
+.bf-machine-tour-map-layer__item[data-map-target="people"] { --map-tone: #75a4f3; }
+.bf-machine-tour-map-layer__item[data-map-target="products"] { --map-tone: #e45a6a; }
+.bf-machine-tour-map-layer__item[data-map-target="publications"] { --map-tone: #a4e44f; }
+
+.bf-machine-tour-map-layer__item > strong {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: #e7e9e5;
+  font: 500 clamp(.54rem, .62vw, .72rem)/1.1 Georgia, serif;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
+    height: 72px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="true"] {
+    height: max(216%, 310px);
+  }
+
+  .bf-machine-tour-map-layer__arm {
+    --map-arm-height: 44px;
+    padding: 4px;
+  }
+
+  .bf-machine-tour-map-layer__item {
+    top: 4px;
+    bottom: 4px;
+    padding: 6px 7px;
+  }
+
+  .bf-machine-tour-map-layer__item > strong {
+    font-size: .58rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine[data-skin="physical"] .bf-machine-node.bf-machine-tour-card,
+  .bf-machine[data-skin="physical"] .bf-machine-tour-card__compact,
+  .bf-machine[data-skin="physical"] .bf-machine-tour-card__expanded,
+  .bf-machine-tour-map-layer,
+  .bf-machine-tour-map-layer__arm {
+    transition: none !important;
+  }
+}

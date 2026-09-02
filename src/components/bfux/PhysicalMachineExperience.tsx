@@ -5,12 +5,7 @@ import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import "./physical-machine-experience.css";
-import "./five-minute-tour-card.css";
-import "./five-minute-tour-growth.css";
-import "./five-minute-tour-compact.css";
-import "./five-minute-tour-about-attachment.css";
-import "./five-minute-tour-compact-polish.css";
-import "./five-minute-tour-eyebrow-polish.css";
+import "./five-minute-tour.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 

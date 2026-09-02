@@ -9,7 +9,7 @@ import "./lab-machine-responsive-pass2.css";
 import "./lab-machine-frame-polish.css";
 import "./lab-machine-frame-resolution.css";
 import "./lab-machine-home-final.css";
-import "./lab-machine-tour-core-final.css";
+import "./lab-machine-composition.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },

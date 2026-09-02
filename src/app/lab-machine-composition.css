@@ -1,0 +1,226 @@
+/*
+ * Canonical desktop composition for the physical Lab Machine.
+ *
+ * Component styles own how a module looks. This file owns where the modules
+ * live. Core is the institutional composition; Full Loop is the extended machine
+ * composition that admits the lower Research machinery.
+ */
+
+@media (min-width: 1025px) {
+  /* ------------------------------------------------------------------------ */
+  /* Core set                                                                 */
+  /* ------------------------------------------------------------------------ */
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"] {
+    --core-left: 3.2%;
+    --core-top: 7%;
+    --core-bottom-top: 51.5%;
+    --core-card-width: 21.2%;
+    --core-card-height: 41.5%;
+    --core-field-gap: 3%;
+    --core-card-gap: 2.9%;
+    --core-research-left: calc(var(--core-left) + var(--core-card-width) + var(--core-field-gap));
+    --core-products-left: calc(var(--core-research-left) + var(--core-card-width) + var(--core-card-gap));
+    --core-publications-left: calc(var(--core-products-left) + var(--core-card-width) + var(--core-card-gap));
+    --core-research-width: 69.4%;
+  }
+
+  /* Tour / About form the left institutional column. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+    position: absolute !important;
+    left: var(--core-left) !important;
+    top: var(--core-bottom-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-card-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
+    position: absolute !important;
+    left: var(--core-left) !important;
+    top: var(--core-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-card-width) !important;
+    height: clamp(72px, 5vw, 82px) !important;
+    z-index: 12 !important;
+    transform-origin: left top !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"] {
+    position: absolute !important;
+    left: var(--core-left) !important;
+    top: var(--core-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 34.7% !important;
+    height: max(48.5%, 300px) !important;
+    z-index: 40 !important;
+    transform-origin: left top !important;
+  }
+
+  /* People / Products / Publications span the Research field in equal cards. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+    position: absolute !important;
+    left: var(--core-research-left) !important;
+    top: var(--core-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-card-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+    position: absolute !important;
+    left: var(--core-products-left) !important;
+    top: var(--core-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-card-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+    position: absolute !important;
+    left: var(--core-publications-left) !important;
+    top: var(--core-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-card-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    position: absolute !important;
+    left: var(--core-research-left) !important;
+    top: var(--core-bottom-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-research-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  /* ------------------------------------------------------------------------ */
+  /* Full Loop                                                                */
+  /* ------------------------------------------------------------------------ */
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"] {
+    /* These are the same machinery dimensions currently used by the lower deck.
+     * Keeping them here makes composition the explicit owner of the shared datum. */
+    --adjacency-port-width: calc(var(--machine-u) * 1.45);
+    --adjacency-bay: calc(var(--machine-u) * 2.9);
+    --research-width: 36%;
+    --research-bottom: 60.5%;
+    --lower-deck-left: calc(20.5% + var(--adjacency-bay));
+    --lower-dock-height: calc(var(--machine-u) * 1.45);
+    --lower-deck-top: calc(var(--research-bottom) + var(--lower-dock-height));
+    --compact-link-bay: calc(var(--machine-u) * 1.32);
+    --compact-side-shoulder: calc(var(--machine-u) * 1.68);
+    --compact-card-inset: calc(var(--machine-u) * .53);
+    --governance-gap: var(--lower-dock-height);
+    --lower-deck-width: var(--research-width);
+    --lower-dock-span: 100%;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+    left: 23.5% !important;
+    top: 5% !important;
+    width: 20% !important;
+    height: 22% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+    left: 45.5% !important;
+    top: 5% !important;
+    width: 18.5% !important;
+    height: 22% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+    left: 66.5% !important;
+    top: 5% !important;
+    width: 19.5% !important;
+    height: 22% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+    left: 2.5% !important;
+    top: 35.5% !important;
+    width: 18% !important;
+    height: 21% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    left: var(--lower-deck-left) !important;
+    top: 31.5% !important;
+    width: var(--research-width) !important;
+    height: 29% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="pipeline"] {
+    left: calc(var(--lower-deck-left) + var(--compact-side-shoulder)) !important;
+    top: calc(var(--lower-deck-top) + var(--compact-card-inset)) !important;
+    z-index: 7 !important;
+    width: 10% !important;
+    height: 12.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="method"] {
+    left: calc(var(--lower-deck-left) + var(--compact-side-shoulder) + 10% + var(--compact-link-bay)) !important;
+    top: calc(var(--lower-deck-top) + var(--compact-card-inset)) !important;
+    z-index: 6 !important;
+    width: 10% !important;
+    height: 12.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="timeline"] {
+    left: calc(var(--lower-deck-left) + var(--compact-side-shoulder) + 20% + var(--compact-link-bay) + var(--compact-link-bay)) !important;
+    top: calc(var(--lower-deck-top) + var(--compact-card-inset)) !important;
+    z-index: 5 !important;
+    width: 10% !important;
+    height: 12.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] {
+    left: calc(var(--lower-deck-left) + var(--research-width) + var(--governance-gap)) !important;
+    top: calc(var(--lower-deck-top) - 8.5% + var(--compact-link-bay)) !important;
+    z-index: 8 !important;
+    width: 18% !important;
+    height: 21% !important;
+  }
+}
