@@ -1,0 +1,172 @@
+/* Capital prototype · Stewardship governor polish
+
+   The three civic responsibility cards form one balanced governor assembly.
+   Public Value remains central through width, border, and depth rather than a
+   different vertical position. Directional pseudo-elements are removed: this
+   is a structural relationship, not a mini flowchart.
+*/
+
+.capital-frame__stewardship-module > header {
+  min-height: 54px !important;
+  padding: 10px 12px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.032), transparent 34%),
+    color-mix(in srgb, var(--bf-bg-frame) 88%, #080d11) !important;
+}
+
+.capital-frame__stewardship-module > header span {
+  font-size: .62rem !important;
+  line-height: 1.15 !important;
+  letter-spacing: .105em !important;
+  color: color-mix(in srgb, var(--bf-white-050) 84%, var(--bf-text-secondary)) !important;
+}
+
+.capital-frame__stewardship-module > header h3 {
+  margin-top: 5px !important;
+  font-size: .9rem !important;
+  line-height: 1.1 !important;
+  color: color-mix(in srgb, var(--bf-white-050) 94%, var(--bf-text-primary)) !important;
+}
+
+.capital-frame__stewardship-module > header > strong {
+  padding: 7px 10px !important;
+  font-size: .6rem !important;
+  line-height: 1 !important;
+  letter-spacing: .085em !important;
+  color: color-mix(in srgb, var(--bf-info) 72%, var(--bf-white-050)) !important;
+  background: color-mix(in srgb, var(--bf-info) 7%, #0a1014) !important;
+}
+
+.capital-frame__stewardship-grid {
+  grid-template-columns: .95fr 1.1fr .95fr !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+}
+
+.capital-frame__stewardship-card,
+.capital-frame__stewardship-card.is-public-value {
+  box-sizing: border-box !important;
+  min-height: 142px !important;
+  height: 100% !important;
+  align-self: stretch !important;
+  margin: 0 !important;
+  top: auto !important;
+  transform: none !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03), transparent 22%),
+    linear-gradient(180deg, #172127, #10171c) !important;
+}
+
+/* Remove all directional/internal connector grammar from the governor cards.
+   Their semantic distinction is carried by title, tag, border, and affinity. */
+.capital-frame__stewardship-card::before,
+.capital-frame__stewardship-card::after,
+.capital-frame__stewardship-card > div::before,
+.capital-frame__stewardship-card > div::after,
+.capital-frame__stewardship-card > header::before,
+.capital-frame__stewardship-card > header::after,
+.capital-frame__stewardship-grid::before,
+.capital-frame__stewardship-grid::after {
+  content: none !important;
+  display: none !important;
+}
+
+.capital-frame__stewardship-card > header {
+  min-height: 36px !important;
+  padding: 7px 9px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  background: color-mix(in srgb, #080d11 68%, transparent) !important;
+}
+
+/* The S-01 / S-02 / S-03 indices no longer carry useful information. */
+.capital-frame__stewardship-card > header > span:first-child {
+  display: none !important;
+}
+
+.capital-frame__stewardship-card .capital-frame__operation-label {
+  min-height: 20px !important;
+  padding: 4px 8px 3px !important;
+  font-size: .56rem !important;
+  line-height: 1 !important;
+  letter-spacing: .09em !important;
+}
+
+.capital-frame__stewardship-card > header strong {
+  margin-left: auto !important;
+  font-size: .53rem !important;
+  line-height: 1 !important;
+  letter-spacing: .07em !important;
+  color: color-mix(in srgb, var(--bf-info) 72%, var(--bf-white-050)) !important;
+}
+
+.capital-frame__stewardship-card > div {
+  min-height: 0 !important;
+  display: grid !important;
+  align-content: center !important;
+  gap: 7px !important;
+  padding: 13px 14px 14px !important;
+}
+
+.capital-frame__stewardship-card h4 {
+  margin: 0 !important;
+  font-size: .88rem !important;
+  line-height: 1.12 !important;
+  letter-spacing: .03em !important;
+  color: color-mix(in srgb, var(--bf-white-050) 92%, var(--bfux-affinity, var(--bf-text-primary))) !important;
+}
+
+.capital-frame__stewardship-card p {
+  margin: 0 !important;
+  max-width: 52ch;
+  font-size: .76rem !important;
+  line-height: 1.48 !important;
+  color: color-mix(in srgb, var(--bf-white-050) 90%, var(--bf-text-secondary)) !important;
+}
+
+/* Public Value is the consequence governor. Keep it perfectly aligned with its
+   peers, but make the center mechanically important through depth and edge. */
+.capital-frame__stewardship-card.is-public-value {
+  border-width: 2px !important;
+  border-color: color-mix(in srgb, var(--bf-info) 64%, var(--bf-etched-line-strong)) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bf-info) 7%, transparent), transparent 38%),
+    linear-gradient(180deg, #17232a, #10181e) !important;
+  box-shadow:
+    var(--bf-shadow-well),
+    0 7px 18px rgba(0,0,0,.22),
+    inset 0 0 0 1px color-mix(in srgb, var(--bf-info) 15%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+.capital-frame__stewardship-card.is-public-value h4 {
+  color: color-mix(in srgb, var(--bf-info) 72%, var(--bf-white-050)) !important;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .capital-frame__stewardship-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .capital-frame__stewardship-card,
+  .capital-frame__stewardship-card.is-public-value {
+    min-height: 132px !important;
+  }
+
+  .capital-frame__stewardship-module > header span {
+    font-size: .57rem !important;
+  }
+
+  .capital-frame__stewardship-card h4 {
+    font-size: .84rem !important;
+  }
+
+  .capital-frame__stewardship-card p {
+    font-size: .71rem !important;
+  }
+}
