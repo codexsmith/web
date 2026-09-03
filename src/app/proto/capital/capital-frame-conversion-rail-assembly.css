@@ -7,31 +7,26 @@
      [ Capital ][ Capacity ][ Work ][ Validation ][ Transfer ][ Retained ]
 
    Important invariants:
-     - preserve the existing stage cards and every connector exactly;
-     - keep the paired five-contact multiplex banks at both rail boundaries;
-     - attach INTAKE / INSPECT to those actual boundary interfaces;
-     - retire the old shoulder fittings and shoulder-mounted labels;
+     - preserve the existing stage cards and every internal square connector;
+     - keep the card-side five-contact bank at both rail boundaries;
+     - make INTAKE / INSPECT the outer boundary-interface modules themselves;
+     - retire the old shoulder fittings and floating interface labels;
      - preserve the coarse-pointer/mobile linear projection.
 
-   Polish law:
-     - the two boundary cards use the exact same faceplate grammar as the four
-       interior cards; end-interface labels must never consume card layout;
-     - the rail nameplate belongs to the conduit housing, not to a floating
-       caption layer;
-     - interface labels touch the outer connector banks directly and remain
-       readable at normal inspection distance;
-     - the conduit must fully contain the mounted card bank, with a compact
-       upper service bay and a visible lower structural lip.
+   Boundary interface law:
+
+     LEFT  : CONDUIT | INTAKE PLATE | 5-PORT BANK | CAPITAL
+     RIGHT : RETAINED | 5-PORT BANK | INSPECT PLATE | CONDUIT
+
+   The labels are therefore hardware, not annotations. This removes the extra
+   z-layer entirely and makes the interface legible as one manufactured unit.
 */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
-    /* Pull the card bank upward 16px and grow the housing downward 20px. This
-       spends less space above the cards while still leaving a real lower lip. */
+    /* Compact upper service bay + enough lower lip to contain the full cards. */
     --capital-rail-shell-height: 292px;
     --capital-rail-card-top: 60px;
-    --capital-end-label-width: 34px;
-    --capital-end-label-height: 82px;
   }
 
   .capital-frame__engine {
@@ -53,8 +48,6 @@
     margin-bottom: 18px !important;
     padding: 0 !important;
     overflow: visible !important;
-    /* Make the upper conduit silhouette unmistakably rounded again. The lower
-       corners stay gentler because this is a machine bay, not a capsule. */
     border-radius: 22px 22px 12px 12px !important;
     border-top-left-radius: 22px !important;
     border-top-right-radius: 22px !important;
@@ -86,9 +79,7 @@
       0 0 10px rgba(184,203,211,.07) !important;
   }
 
-  /* The old elbow/fitting pieces represented the previous topology, where the
-     rail was only a narrow trunk. The enlarged housing now owns its own rounded
-     silhouette; side risers meet the real end interfaces instead. */
+  /* The old elbow/fitting pieces belong to the earlier narrow-trunk topology. */
   .capital-frame__engine-heading::before,
   .capital-frame__engine-heading::after {
     display: none !important;
@@ -111,17 +102,12 @@
     isolation: isolate;
   }
 
-  /* Preserve the card family literally. Only allow the two boundary cards to
-     expose their already-established multiplex hardware and attached plaques. */
   .capital-frame__conversion-stage[data-stage-id="capital"],
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
     overflow: visible !important;
   }
 
-  /* Critical correction: the first integration pass made the two end-card
-     headers static so their external labels had an anchor. That resurrected the
-     obsolete full-width register strips visible in the screenshot. Restore the
-     exact iconography-pass number badge on both boundary cards. */
+  /* Both boundary cards use the same compact number badge as the middle four. */
   .capital-frame__conversion-stage[data-stage-id="capital"] > header,
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header {
     position: absolute !important;
@@ -141,101 +127,122 @@
       0 2px 5px rgba(0,0,0,.26) !important;
   }
 
-  /* Side risers are infrastructure behind the cards but in front of the large
-     conduit face. That makes the bank pairs visibly terminate into a real rail
-     instead of disappearing beneath the enlarged housing. */
+  /* Side risers remain infrastructure behind the card bank. */
   .capital-frame__input-console::after,
   .capital-frame__diligence-console::after {
     top: 18px !important;
     z-index: 55 !important;
   }
 
-  /* ---------------------------------------------------------------------- */
-  /* Retire shoulder labels                                                  */
-  /* ---------------------------------------------------------------------- */
-
+  /* Shoulder-era labels are fully retired. */
   .capital-frame__input-console::before,
   .capital-frame__diligence-console::before {
     display: none !important;
     content: none !important;
   }
 
-  /* ---------------------------------------------------------------------- */
-  /* Boundary labels mounted to the multiplex connector ends                 */
-  /* ---------------------------------------------------------------------- */
-
-  /* The card content layer used to sit at z=4 while the end connector banks
-     sit at z=1200. A child label at z=1600 cannot escape that z=4 stacking
-     context. Lift only the transparent content field on the two boundary cards;
-     the card shell itself stays in normal rail paint order, so neighboring
-     square connectors remain unobstructed. */
+  /* Restore the end-card content field to the normal card paint layer. There
+     is no longer a floating label that needs to escape through connector z. */
   .capital-frame__conversion-stage[data-stage-id="capital"] > div,
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div {
-    z-index: 1400 !important;
+    z-index: 4 !important;
     overflow: visible !important;
   }
 
-  /* Mount the labels on the content field instead of the number badge. The
-     content field already spans the card face, so these coordinates resolve
-     against the actual card boundary without changing any card layout. */
   .capital-frame__conversion-stage[data-stage-id="capital"] > div::before,
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div::after {
-    position: absolute !important;
-    z-index: 6000 !important;
-    top: 50% !important;
-    box-sizing: border-box !important;
-    width: var(--capital-end-label-width) !important;
-    height: var(--capital-end-label-height) !important;
+    display: none !important;
+    content: none !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* INTAKE = left outer interface module                                    */
+  /* ---------------------------------------------------------------------- */
+
+  /* `capital::before` is already the conduit-side member of the paired end
+     interface. Keep its exact 20px x 74px geometry and position, but replace
+     the five hollow contacts with a labeled mounted interface plate. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before {
+    content: "INTAKE" !important;
     display: grid !important;
     place-items: center !important;
-    padding: 8px 6px !important;
-    transform: translateY(-50%) !important;
-    border: 1px solid var(--bf-etched-line-strong) !important;
-    border-radius: 5px !important;
+    z-index: 1600 !important;
+    box-sizing: border-box !important;
+    width: var(--capital-end-bank-width) !important;
+    height: var(--capital-end-bank-height) !important;
+    padding: 6px 3px !important;
+    border: 1px solid color-mix(in srgb, var(--capital-end-input-tone) 62%, #596266) !important;
+    border-right-color: color-mix(in srgb, var(--capital-end-input-tone) 34%, #090b0c) !important;
+    border-radius: 5px 0 0 5px !important;
     background:
-      linear-gradient(180deg, rgba(255,255,255,.065), transparent 30%),
-      linear-gradient(180deg, #333e43, #151c20) !important;
+      linear-gradient(90deg, rgba(255,255,255,.075), transparent 38% 68%, rgba(0,0,0,.30)),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--capital-end-input-tone) 16%, #303a3f),
+        #11171a) !important;
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.055),
-      inset 0 -1px 0 rgba(0,0,0,.5),
-      0 4px 10px rgba(0,0,0,.4) !important;
-    color: var(--bf-text-primary) !important;
-    text-shadow: 0 1px 0 rgba(0,0,0,.75) !important;
-    font: 900 .60rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-    letter-spacing: .13em !important;
+      inset 0 0 0 2px #090b0c,
+      inset 0 1px rgba(255,255,255,.08),
+      0 4px 8px rgba(0,0,0,.58) !important;
+    color: color-mix(in srgb, var(--capital-end-input-tone) 82%, var(--bf-white-050)) !important;
+    text-shadow: 0 1px 0 rgba(0,0,0,.78) !important;
+    font: 900 .50rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    letter-spacing: .10em !important;
     writing-mode: vertical-rl !important;
     text-orientation: mixed !important;
-    pointer-events: none !important;
   }
 
-  /* The pair occupies exactly --capital-end-gap from the card edge. Each label
-     touches the OUTER edge of that pair: no decorative arm and no air gap. */
-  .capital-frame__conversion-stage[data-stage-id="capital"] > div::before {
-    content: "INTAKE" !important;
-    left: calc(0px - var(--capital-end-gap) - var(--capital-end-label-width)) !important;
-    right: auto !important;
-    border-color: color-mix(in srgb, var(--capital-end-input-tone) 64%, var(--bf-etched-line-strong)) !important;
-    color: color-mix(in srgb, var(--capital-end-input-tone) 78%, var(--bf-white-050)) !important;
+  /* Capital-side bank remains the original five hollow-ring connector bank. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    z-index: 1601 !important;
+    border-radius: 0 4px 4px 0 !important;
   }
 
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div::after {
+  /* ---------------------------------------------------------------------- */
+  /* INSPECT = right outer interface module                                  */
+  /* ---------------------------------------------------------------------- */
+
+  /* The stage terminal remains the card-side five-port bank. Its `::after`
+     was the conduit-side bank, so that exact module becomes INSPECT. */
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    z-index: 1601 !important;
+    border-radius: 4px 0 0 4px !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
     content: "INSPECT" !important;
-    left: auto !important;
-    right: calc(0px - var(--capital-end-gap) - var(--capital-end-label-width)) !important;
-    border-color: color-mix(in srgb, var(--capital-end-return-tone) 64%, var(--bf-etched-line-strong)) !important;
-    color: color-mix(in srgb, var(--capital-end-return-tone) 80%, var(--bf-white-050)) !important;
+    display: grid !important;
+    place-items: center !important;
+    z-index: 1600 !important;
+    box-sizing: border-box !important;
+    width: var(--capital-end-bank-width) !important;
+    height: var(--capital-end-bank-height) !important;
+    padding: 6px 3px !important;
+    border: 1px solid color-mix(in srgb, var(--capital-end-return-tone) 62%, #596266) !important;
+    border-left-color: color-mix(in srgb, var(--capital-end-return-tone) 34%, #090b0c) !important;
+    border-radius: 0 5px 5px 0 !important;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.075), transparent 38% 68%, rgba(0,0,0,.30)),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--capital-end-return-tone) 14%, #303a3f),
+        #11171a) !important;
+    box-shadow:
+      inset 0 0 0 2px #090b0c,
+      inset 0 1px rgba(255,255,255,.08),
+      0 4px 8px rgba(0,0,0,.58) !important;
+    color: color-mix(in srgb, var(--capital-end-return-tone) 84%, var(--bf-white-050)) !important;
+    text-shadow: 0 1px 0 rgba(0,0,0,.78) !important;
+    font: 900 .47rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    letter-spacing: .085em !important;
+    writing-mode: vertical-rl !important;
+    text-orientation: mixed !important;
   }
 
-  /* The next major machine begins after the tall rail housing. Because the
-     conversion row is absolutely mounted inside the housing, it contributes no
-     separate grid track of its own. */
   .capital-frame__machine-bed {
     order: 30;
   }
 }
 
-/* Mobile/coarse-pointer retains the content-led linear projection. The rail
-   cards return to normal flow and the top conduit is again just a compact name. */
+/* Mobile/coarse-pointer retains the content-led linear projection. */
 @media (pointer: coarse), (max-width: 760px) {
   .capital-frame__engine-heading {
     min-height: 0 !important;
@@ -246,12 +253,5 @@
     position: relative !important;
     inset: auto !important;
     width: auto !important;
-  }
-
-  /* External boundary labels belong only to the spatial desktop apparatus. */
-  .capital-frame__conversion-stage[data-stage-id="capital"] > div::before,
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div::after {
-    display: none !important;
-    content: none !important;
   }
 }
