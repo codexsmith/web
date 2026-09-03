@@ -140,9 +140,13 @@
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
-    --capital-end-bank-width: 18px;
+    /* 20px hardware with a 2px overlap into the end card. The left assembly
+       therefore spans 38px from Capital to the cycle inner edge: exactly the
+       54px side extension minus the 18px conduit wall. */
+    --capital-end-bank-width: 20px;
     --capital-end-bank-height: 74px;
-    --capital-end-gap: 36px;
+    --capital-end-bank-offset: 18px;
+    --capital-end-interface-offset: 38px;
     --capital-end-input-tone: color-mix(in srgb, var(--bf-region-about) 58%, var(--bf-silver-300));
     --capital-end-return-tone: color-mix(in srgb, var(--bf-valid) 62%, var(--bf-silver-300));
   }
@@ -152,9 +156,7 @@
     overflow: visible !important;
   }
 
-  /* These generated pieces are hardware mounted to the stage boundary. Earlier
-     prototype layers happened to provide absolute positioning; now the canonical
-     connector layer owns that invariant explicitly so they never enter card flow. */
+  /* These generated pieces are hardware mounted to the stage boundary. */
   .capital-frame__conversion-stage[data-stage-id="capital"]::before,
   .capital-frame__conversion-stage[data-stage-id="capital"]::after,
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal,
@@ -165,6 +167,8 @@
     width: var(--capital-end-bank-width) !important;
     height: var(--capital-end-bank-height) !important;
     margin: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
     pointer-events: none !important;
     box-shadow:
       inset 0 0 0 2px #090b0c,
@@ -192,16 +196,16 @@
 
   .capital-frame__conversion-stage[data-stage-id="capital"]::after {
     --bank-tone: var(--capital-end-input-tone);
-    left: calc(var(--capital-end-bank-width) * -1) !important;
-    z-index: 1601 !important;
+    left: calc(0px - var(--capital-end-bank-offset)) !important;
+    z-index: 2201 !important;
     border-radius: 0 4px 4px 0 !important;
     border-left-color: color-mix(in srgb, var(--bank-tone) 36%, #090b0c) !important;
   }
 
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
     --bank-tone: var(--capital-end-return-tone);
-    right: calc(var(--capital-end-bank-width) * -1) !important;
-    z-index: 1601 !important;
+    right: calc(0px - var(--capital-end-bank-offset)) !important;
+    z-index: 2201 !important;
     border-radius: 4px 0 0 4px !important;
     border-right-color: color-mix(in srgb, var(--bank-tone) 36%, #090b0c) !important;
   }
@@ -231,8 +235,8 @@
   .capital-frame__conversion-stage[data-stage-id="capital"]::before {
     --interface-tone: var(--capital-end-input-tone);
     content: "INTAKE" !important;
-    left: calc(var(--capital-end-gap) * -1) !important;
-    z-index: 1600 !important;
+    left: calc(0px - var(--capital-end-interface-offset)) !important;
+    z-index: 2200 !important;
     transform: translateY(-50%) !important;
     border: 1px solid color-mix(in srgb, var(--interface-tone) 62%, #596266) !important;
     border-right-color: color-mix(in srgb, var(--interface-tone) 34%, #090b0c) !important;
@@ -243,7 +247,7 @@
     --interface-tone: var(--capital-end-return-tone);
     content: "INSPECT" !important;
     left: var(--capital-end-bank-width) !important;
-    z-index: 1600 !important;
+    z-index: 2200 !important;
     transform: translateY(-50%) !important;
     border: 1px solid color-mix(in srgb, var(--interface-tone) 62%, #596266) !important;
     border-left-color: color-mix(in srgb, var(--interface-tone) 34%, #090b0c) !important;

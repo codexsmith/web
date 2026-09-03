@@ -7,8 +7,9 @@
               ↓
      civics / stewardship governor
 
-   This file owns engine chassis, layout, and couplings. Operation flags and
-   stewardship-card presentation live in their own focused layers.
+   The unified cycle chassis owns the large enclosure. This file owns only the
+   mounted engine layout and its couplings. Operation flags and stewardship-card
+   presentation live in their own focused layers.
 */
 
 .capital-frame__machine-bed {
@@ -16,21 +17,18 @@
   --engine-shell-face: color-mix(in srgb, var(--bf-bg-raised) 88%, #10171b);
   --engine-drive: color-mix(in srgb, var(--bf-info) 46%, var(--bf-silver-300));
   --engine-return: color-mix(in srgb, var(--bf-valid) 44%, var(--bf-silver-300));
+  --engine-cycle-gutter: calc(var(--capital-cycle-side-extension, 54px) - var(--capital-cycle-side-width, 18px));
 
   position: relative;
   z-index: 4;
   overflow: visible !important;
-  margin-block: 8px 10px;
-  border: 1px solid var(--engine-shell-edge) !important;
-  border-radius: 12px !important;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.034), transparent 18%),
-    linear-gradient(180deg, color-mix(in srgb, var(--engine-shell-face) 96%, #1a2429), var(--engine-shell-face)) !important;
-  box-shadow:
-    0 12px 28px rgba(0,0,0,.28),
-    inset 0 1px 0 rgba(255,255,255,.045),
-    inset 0 -1px 0 rgba(0,0,0,.58),
-    0 0 0 1px rgba(0,0,0,.18) !important;
+  width: calc(100% + var(--engine-cycle-gutter) + var(--engine-cycle-gutter));
+  margin-block: 0;
+  margin-inline: calc(0px - var(--engine-cycle-gutter));
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* The retired narrative strip and redundant BFL identity card no longer
@@ -89,12 +87,11 @@
   grid-template-columns: minmax(0, 1fr) !important;
   align-items: start !important;
   gap: 12px !important;
-  padding: 14px !important;
-  border-radius: 11px;
-  background:
-    linear-gradient(var(--engine-shell-edge), var(--engine-shell-edge)) center / 1px 100% no-repeat,
-    linear-gradient(180deg, rgba(255,255,255,.018), transparent 34%),
-    color-mix(in srgb, var(--bf-bg-base) 92%, #0a1013);
+  padding: 12px 12px 14px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -190,8 +187,9 @@
 
 @media (max-width: 760px), (pointer: coarse) {
   .capital-frame__machine-bed {
-    margin-block: 0;
-    border-radius: 9px !important;
+    width: auto;
+    margin: 0;
+    border-radius: 0 !important;
   }
 
   .capital-frame__machine-bed::before,
@@ -203,7 +201,7 @@
   .capital-frame__machine-bed-body {
     padding: 9px !important;
     gap: 9px !important;
-    background: color-mix(in srgb, var(--bf-bg-base) 92%, #0a1013);
+    background: color-mix(in srgb, var(--bf-bg-base) 92%, #0a1013) !important;
   }
 
   .capital-frame__machine-functions {
