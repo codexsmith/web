@@ -1,13 +1,6 @@
 /* Capital prototype · Unified conversion-cycle shell
 
-   This is the topology refactor for the primary machine cycle.
-
-   BEFORE
-     top conduit + side conduit pseudos + footer housing
-     = several independently painted bars whose overlaps merely implied closure.
-
-   NOW
-     one cycle-loop DOM object owns one cycle-loop-shell.
+   The primary capital cycle is one DOM object and one structural chassis:
 
      ╭════════ PRIMARY CONVERSION RAIL ════════╮
      ║                                          ║
@@ -15,34 +8,38 @@
      ║                                          ║
      ╰════════ DURABLE / RETAINED OUTPUT ══════╯
 
-   The shell is a single textured surface masked into four connected members:
-     - a deep top rail containing the six conversion stages;
-     - two narrow side risers at the established manifold coordinates;
-     - a deep lower rail containing retained output.
+   This layer owns the global cycle boundary. Cards and connectors remain local
+   hardware mounted to it.
 
-   Local cards and connectors remain local hardware. They no longer paint the
-   global cycle boundary. This is intentionally a structural first pass; inner
-   elbow texture/polish can now be refined in one place without changing DOM.
+   Geometry law:
+     - one rounded outer chassis, not four overlapping bars;
+     - one rounded inner void establishes the two side risers and the elbows;
+     - top / bottom member depth follows content and the engine's bounded width;
+     - local connector geometry is not responsible for drawing the global loop.
 */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
     --capital-cycle-side-extension: var(--capital-header-side-extension, 54px);
     --capital-cycle-side-width: 18px;
-    --capital-cycle-top-band: var(--capital-rail-shell-height, 300px);
-    --capital-cycle-bottom-band: 150px;
     --capital-cycle-radius: 22px;
+    --capital-cycle-inner-radius: 16px;
   }
 
+  /* Container-relative vertical geometry keeps the chassis proportions stable
+     across the engine's lawful 840–1040px desktop width envelope. */
   .capital-frame__engine {
     overflow: visible !important;
+    container-type: inline-size;
+    container-name: capital-cycle-engine;
   }
 
-  /* ---------------------------------------------------------------------- */
-  /* ONE CYCLE OBJECT                                                        */
-  /* ---------------------------------------------------------------------- */
-
   .capital-frame__cycle-loop {
+    --capital-cycle-top-band: clamp(258px, 28.85cqi, 300px);
+    --capital-cycle-bottom-band: 150px;
+    --capital-rail-card-top: clamp(38px, 4.23cqi, 44px);
+    --capital-rail-card-min-height: clamp(182px, 20cqi, 208px);
+
     position: relative;
     isolation: isolate;
     display: grid;
@@ -53,6 +50,10 @@
     overflow: visible;
   }
 
+  /* ---------------------------------------------------------------------- */
+  /* ONE CONTINUOUS CYCLE CHASSIS                                             */
+  /* ---------------------------------------------------------------------- */
+
   .capital-frame__cycle-loop-shell {
     position: absolute;
     z-index: 0;
@@ -60,7 +61,9 @@
     bottom: 0;
     left: calc(var(--capital-cycle-side-extension) * -1);
     right: calc(var(--capital-cycle-side-extension) * -1);
+    overflow: hidden;
     pointer-events: none;
+    border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 88%, transparent);
     border-radius: var(--capital-cycle-radius);
     background:
       linear-gradient(180deg,
@@ -78,35 +81,57 @@
       linear-gradient(180deg,
         color-mix(in srgb, var(--capital-conduit-face, var(--bf-bg-raised)) 84%, #1c262c),
         var(--capital-conduit-dark, #10171b));
-    -webkit-mask:
-      linear-gradient(#000 0 0) top / 100% var(--capital-cycle-top-band) no-repeat,
-      linear-gradient(#000 0 0) bottom / 100% var(--capital-cycle-bottom-band) no-repeat,
-      linear-gradient(#000 0 0) left / var(--capital-cycle-side-width) 100% no-repeat,
-      linear-gradient(#000 0 0) right / var(--capital-cycle-side-width) 100% no-repeat;
-    mask:
-      linear-gradient(#000 0 0) top / 100% var(--capital-cycle-top-band) no-repeat,
-      linear-gradient(#000 0 0) bottom / 100% var(--capital-cycle-bottom-band) no-repeat,
-      linear-gradient(#000 0 0) left / var(--capital-cycle-side-width) 100% no-repeat,
-      linear-gradient(#000 0 0) right / var(--capital-cycle-side-width) 100% no-repeat;
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,.24));
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.035),
+      inset 0 -3px 0 rgba(0,0,0,.30),
+      inset 0 0 0 1px rgba(255,255,255,.012),
+      0 8px 18px rgba(0,0,0,.24);
   }
 
-  /* A restrained edge pass on the same single shell. This is deliberately not
-     another conduit segment: it shares the shell bounds/mask exactly. */
+  /* Edge lighting belongs to the same chassis, not to independent conduit
+     pieces. It is deliberately quiet so the silhouette carries the geometry. */
   .capital-frame__cycle-loop-shell::before {
     content: "";
     position: absolute;
-    inset: 0;
-    border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 84%, transparent);
-    border-radius: inherit;
+    z-index: 1;
+    inset: 1px;
+    border: 1px solid rgba(210,224,229,.055);
+    border-radius: calc(var(--capital-cycle-radius) - 1px);
     box-shadow:
-      inset 0 2px 0 rgba(255,255,255,.025),
-      inset 0 -2px 0 rgba(0,0,0,.28);
+      inset 0 1px 0 rgba(255,255,255,.018),
+      inset 0 -1px 0 rgba(0,0,0,.20);
   }
 
-  /* The old left/right manifold buses are now literally the side members of
-     the cycle shell. Card connectors keep their established coordinates and
-     dock into these strips without any geometric rewrite. */
+  /* The inner void is what makes the chassis one continuous pipe/frame rather
+     than four rectangular sticks. Its rounded corners create real inner elbows.
+
+     The body background is reproduced here because this shell sits behind the
+     machine; visible gaps therefore continue the page's field rather than
+     becoming an opaque center slab. */
+  .capital-frame__cycle-loop-shell::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: var(--capital-cycle-top-band);
+    right: var(--capital-cycle-side-width);
+    bottom: var(--capital-cycle-bottom-band);
+    left: var(--capital-cycle-side-width);
+    border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 72%, transparent);
+    border-radius: var(--capital-cycle-inner-radius);
+    background:
+      var(--bf-fine-grid),
+      linear-gradient(180deg, rgba(255,255,255,.010), transparent 22%),
+      color-mix(in srgb, var(--bf-bg-base) 94%, black);
+    background-size: 36px 36px, auto, auto;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.018),
+      inset 0 0 18px rgba(0,0,0,.16);
+  }
+
+  /* The previous side-manifold pseudos are obsolete. The chassis itself now
+     owns both vertical members. Existing card connectors still terminate at
+     the same established x coordinates. */
   .capital-frame__input-console::after,
   .capital-frame__diligence-console::after {
     display: none !important;
@@ -114,7 +139,7 @@
   }
 
   /* ---------------------------------------------------------------------- */
-  /* TOP MEMBER · shell owns the conduit; header owns only label/layout       */
+  /* TOP MEMBER · label + six mounted conversion modules                     */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__engine-heading {
@@ -136,14 +161,18 @@
   .capital-frame__engine-heading > div {
     position: absolute !important;
     z-index: 6 !important;
-    top: 12px !important;
+    top: 10px !important;
     left: 18px !important;
     width: auto !important;
   }
 
   .capital-frame__conversion-rail {
     z-index: 5 !important;
-    top: var(--capital-rail-card-top, 44px) !important;
+    top: var(--capital-rail-card-top) !important;
+  }
+
+  .capital-frame__conversion-stage {
+    min-height: var(--capital-rail-card-min-height) !important;
   }
 
   /* ---------------------------------------------------------------------- */
@@ -152,17 +181,17 @@
 
   .capital-frame__machine-bed {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     margin-block: 0 !important;
   }
 
   /* ---------------------------------------------------------------------- */
-  /* BOTTOM MEMBER · retained output is mounted in the same shell             */
+  /* BOTTOM MEMBER · durable output mounted into the same chassis             */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__return-manifold {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     box-sizing: border-box;
     width: 100% !important;
     min-height: var(--capital-cycle-bottom-band) !important;
@@ -174,14 +203,17 @@
     box-shadow: none !important;
   }
 
+  /* The old footer owned the full-width side extensions and therefore carried
+     72px horizontal header padding. The chassis owns those extensions now, so
+     the footer content returns to a normal local inset. */
   .capital-frame__return-manifold > header {
-    background: transparent !important;
+    margin: 0 12px !important;
+    padding: 9px 18px 8px !important;
+    background: rgba(5,9,12,.14) !important;
   }
 
-  .capital-frame__return-manifold > header,
   .capital-frame__return-manifold > div {
-    margin-left: 12px !important;
-    margin-right: 12px !important;
+    margin: 0 12px 12px !important;
   }
 
   /* The institutional-conversion projection is deliberately outside the
