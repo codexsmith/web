@@ -19,13 +19,17 @@
      - the rail nameplate belongs to the conduit housing, not to a floating
        caption layer;
      - interface labels touch the outer connector banks directly and remain
-       readable at normal inspection distance.
+       readable at normal inspection distance;
+     - the conduit must fully contain the mounted card bank, with a compact
+       upper service bay and a visible lower structural lip.
 */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
-    --capital-rail-shell-height: 272px;
-    --capital-rail-card-top: 76px;
+    /* Pull the card bank upward 16px and grow the housing downward 20px. This
+       spends less space above the cards while still leaving a real lower lip. */
+    --capital-rail-shell-height: 292px;
+    --capital-rail-card-top: 60px;
     --capital-end-label-width: 34px;
     --capital-end-label-height: 82px;
   }
@@ -49,7 +53,12 @@
     margin-bottom: 18px !important;
     padding: 0 !important;
     overflow: visible !important;
-    border-radius: 18px !important;
+    /* Make the upper conduit silhouette unmistakably rounded again. The lower
+       corners stay gentler because this is a machine bay, not a capsule. */
+    border-radius: 22px 22px 12px 12px !important;
+    border-top-left-radius: 22px !important;
+    border-top-right-radius: 22px !important;
+    background-clip: padding-box !important;
     box-shadow:
       inset 0 2px 0 rgba(255,255,255,.035),
       inset 0 -3px 0 rgba(0,0,0,.30),
@@ -60,7 +69,7 @@
   .capital-frame__engine-heading > div {
     position: absolute !important;
     z-index: 90 !important;
-    top: 16px !important;
+    top: 13px !important;
     left: calc(var(--capital-header-side-extension) + 18px) !important;
     width: auto !important;
   }
@@ -155,13 +164,24 @@
   /* Boundary labels mounted to the multiplex connector ends                 */
   /* ---------------------------------------------------------------------- */
 
+  /* The card content layer used to sit at z=4 while the end connector banks
+     sit at z=1200. A child label at z=1600 cannot escape that z=4 stacking
+     context. Lift only the transparent content field on the two boundary cards;
+     the card shell itself stays in normal rail paint order, so neighboring
+     square connectors remain unobstructed. */
+  .capital-frame__conversion-stage[data-stage-id="capital"] > div,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div {
+    z-index: 1400 !important;
+    overflow: visible !important;
+  }
+
   /* Mount the labels on the content field instead of the number badge. The
      content field already spans the card face, so these coordinates resolve
      against the actual card boundary without changing any card layout. */
   .capital-frame__conversion-stage[data-stage-id="capital"] > div::before,
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div::after {
     position: absolute !important;
-    z-index: 1600 !important;
+    z-index: 6000 !important;
     top: 50% !important;
     box-sizing: border-box !important;
     width: var(--capital-end-label-width) !important;
