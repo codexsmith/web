@@ -171,3 +171,14 @@
     transform-origin: left bottom !important;
   }
 }
+
+/* The map eyebrow is apparatus hardware, but it is physically behind the Tour
+ * chassis. When their geometries overlap, the eyebrow should disappear under
+ * the expanded card and emerge from its edge rather than painting across the
+ * Tour title, controls, or reading surface. It remains well above ordinary
+ * machine nodes, whose stacking levels are much lower. */
+.bf-machine[data-skin="physical"]
+  .bf-machine__apparatus[data-machine-layer="apparatus"]
+  > .bf-machine-tour-map-layer {
+  z-index: 39 !important;
+}
