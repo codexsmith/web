@@ -5,12 +5,8 @@ import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import "./physical-machine-experience.css";
-import "./five-minute-tour-card.css";
-import "./five-minute-tour-growth.css";
-import "./five-minute-tour-compact.css";
-import "./five-minute-tour-about-attachment.css";
-import "./five-minute-tour-compact-polish.css";
-import "./five-minute-tour-eyebrow-polish.css";
+import "./five-minute-tour.css";
+import "./five-minute-tour-fit.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 
@@ -120,6 +116,17 @@ export function PhysicalMachineExperience({
           />
         </div>
       )}
+
+      {!sectionSurface && activeResolution === "focus" && aboutHost
+        ? createPortal(
+            <div className="bf-machine-tour-about-dock" aria-hidden="true">
+              <i />
+              <i />
+            </div>,
+            aboutHost,
+            "five-minute-tour-core-dock",
+          )
+        : null}
 
       {!sectionSurface && activeResolution === "focus" && apparatusHost
         ? createPortal(
