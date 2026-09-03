@@ -156,6 +156,14 @@
   white-space: nowrap;
 }
 
+/* Root View is intentionally terse: icons plus the primary mode names carry
+ * enough information. Rich purpose/description copy remains in aria-labels and
+ * titles without consuming a second visual line. */
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible .projection-switcher__mode-purpose {
+  display: none !important;
+}
+
 /*
  * The Lab Machine extends View with Full/Core before the ordinary projections.
  * All controls are siblings and size from their own icon + copy.
