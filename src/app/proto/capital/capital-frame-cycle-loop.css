@@ -11,12 +11,17 @@
    Global cycle geometry lives here. Cards, icons, local connectors, end
    interfaces, and retained-output readouts are mounted hardware owned by their
    respective component layers.
+
+   Surface grammar is static but directional:
+     - corrugation says conduit;
+     - stamped chevrons say flow;
+     - a weak left→right state tint says conversion;
+     - the rail substrate gains a denser lattice toward retained capability.
 */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
     --capital-cycle-side-extension: 54px;
-    /* Compatibility alias while older non-cycle connector layers are reduced. */
     --capital-header-side-extension: var(--capital-cycle-side-extension);
     --capital-cycle-side-width: 18px;
     --capital-cycle-radius: 22px;
@@ -24,6 +29,8 @@
     --capital-cycle-top-band: 282px;
     --capital-cycle-bottom-band: 150px;
     --capital-cycle-stage-height: 212px;
+    --capital-conduit-flow-mark: rgba(205, 220, 225, .032);
+    --capital-conduit-flow-mark-soft: rgba(205, 220, 225, .018);
   }
 
   .capital-frame__engine {
@@ -59,12 +66,28 @@
     border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 88%, transparent);
     border-radius: var(--capital-cycle-radius);
     background:
+      /* surface-state tint: neutral input, slightly greener retained side */
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-silver-300) 2.5%, transparent),
+        transparent 34%,
+        color-mix(in srgb, var(--bf-valid) 4.8%, transparent) 100%),
+      /* paired stamped diagonals read as a static chevron / flow field */
+      linear-gradient(135deg,
+        transparent 43%,
+        var(--capital-conduit-flow-mark) 44% 49%,
+        transparent 50%) 0 0 / 34px 20px,
+      linear-gradient(45deg,
+        transparent 43%,
+        var(--capital-conduit-flow-mark-soft) 44% 49%,
+        transparent 50%) 17px 10px / 34px 20px,
+      /* physical edge lighting */
       linear-gradient(180deg,
         rgba(255,255,255,.065) 0 1px,
         transparent 1px 5px,
         rgba(0,0,0,.15) 5px calc(100% - 5px),
         rgba(255,255,255,.018) calc(100% - 5px) calc(100% - 2px),
         rgba(0,0,0,.46) calc(100% - 2px) 100%),
+      /* corrugation / conduit ribs */
       repeating-linear-gradient(90deg,
         var(--capital-conduit-highlight, rgba(255,255,255,.025)) 0 1px,
         rgba(0,0,0,.09) 1px 4px,
@@ -148,6 +171,46 @@
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
+  }
+
+  /* Capacity accretion substrate. A coarse lattice exists everywhere, while
+     a second finer lattice only occupies the right side. Combined with the
+     mask this reads as structure becoming more densely organized across the
+     conversion rail without adding foreground ornament. */
+  .capital-frame__engine-heading::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 12px;
+    right: 12px;
+    top: 42px;
+    bottom: 15px;
+    pointer-events: none;
+    border-radius: 10px;
+    background:
+      repeating-linear-gradient(90deg,
+        transparent 0 17px,
+        color-mix(in srgb, var(--bf-valid) 5.5%, transparent) 17px 18px) right / 62% 100% no-repeat,
+      repeating-linear-gradient(0deg,
+        transparent 0 13px,
+        color-mix(in srgb, var(--bf-valid) 4.5%, transparent) 13px 14px) right / 62% 100% no-repeat,
+      repeating-linear-gradient(90deg,
+        transparent 0 31px,
+        rgba(203, 217, 222, .020) 31px 32px),
+      repeating-linear-gradient(0deg,
+        transparent 0 23px,
+        rgba(203, 217, 222, .015) 23px 24px);
+    -webkit-mask-image: linear-gradient(90deg,
+      rgba(0,0,0,.22) 0%,
+      rgba(0,0,0,.38) 34%,
+      rgba(0,0,0,.70) 68%,
+      #000 100%);
+    mask-image: linear-gradient(90deg,
+      rgba(0,0,0,.22) 0%,
+      rgba(0,0,0,.38) 34%,
+      rgba(0,0,0,.70) 68%,
+      #000 100%);
+    opacity: .82;
   }
 
   .capital-frame__engine-heading > div {
@@ -279,6 +342,10 @@
   .capital-frame__engine-heading {
     height: auto !important;
     min-height: 0 !important;
+  }
+
+  .capital-frame__engine-heading::before {
+    display: none;
   }
 
   .capital-frame__engine-heading > .capital-frame__conversion-rail {
