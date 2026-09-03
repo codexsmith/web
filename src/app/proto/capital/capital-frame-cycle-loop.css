@@ -1,0 +1,207 @@
+/* Capital prototype · Unified conversion-cycle shell
+
+   This is the topology refactor for the primary machine cycle.
+
+   BEFORE
+     top conduit + side conduit pseudos + footer housing
+     = several independently painted bars whose overlaps merely implied closure.
+
+   NOW
+     one cycle-loop DOM object owns one cycle-loop-shell.
+
+     ╭════════ PRIMARY CONVERSION RAIL ════════╮
+     ║                                          ║
+     ║            LAB CONVERSION ENGINE         ║
+     ║                                          ║
+     ╰════════ DURABLE / RETAINED OUTPUT ══════╯
+
+   The shell is a single textured surface masked into four connected members:
+     - a deep top rail containing the six conversion stages;
+     - two narrow side risers at the established manifold coordinates;
+     - a deep lower rail containing retained output.
+
+   Local cards and connectors remain local hardware. They no longer paint the
+   global cycle boundary. This is intentionally a structural first pass; inner
+   elbow texture/polish can now be refined in one place without changing DOM.
+*/
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-frame {
+    --capital-cycle-side-extension: var(--capital-header-side-extension, 54px);
+    --capital-cycle-side-width: 18px;
+    --capital-cycle-top-band: var(--capital-rail-shell-height, 300px);
+    --capital-cycle-bottom-band: 150px;
+    --capital-cycle-radius: 22px;
+  }
+
+  .capital-frame__engine {
+    overflow: visible !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* ONE CYCLE OBJECT                                                        */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__cycle-loop {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    min-width: 0;
+    margin-top: 18px;
+    overflow: visible;
+  }
+
+  .capital-frame__cycle-loop-shell {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--capital-cycle-side-extension) * -1);
+    right: calc(var(--capital-cycle-side-extension) * -1);
+    pointer-events: none;
+    border-radius: var(--capital-cycle-radius);
+    background:
+      linear-gradient(180deg,
+        rgba(255,255,255,.065) 0 1px,
+        transparent 1px 5px,
+        rgba(0,0,0,.15) 5px calc(100% - 5px),
+        rgba(255,255,255,.018) calc(100% - 5px) calc(100% - 2px),
+        rgba(0,0,0,.46) calc(100% - 2px) 100%),
+      repeating-linear-gradient(90deg,
+        var(--capital-conduit-highlight, rgba(255,255,255,.025)) 0 1px,
+        rgba(0,0,0,.09) 1px 4px,
+        transparent 4px 14px,
+        rgba(0,0,0,.06) 14px 16px,
+        transparent 16px 24px),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--capital-conduit-face, var(--bf-bg-raised)) 84%, #1c262c),
+        var(--capital-conduit-dark, #10171b));
+    -webkit-mask:
+      linear-gradient(#000 0 0) top / 100% var(--capital-cycle-top-band) no-repeat,
+      linear-gradient(#000 0 0) bottom / 100% var(--capital-cycle-bottom-band) no-repeat,
+      linear-gradient(#000 0 0) left / var(--capital-cycle-side-width) 100% no-repeat,
+      linear-gradient(#000 0 0) right / var(--capital-cycle-side-width) 100% no-repeat;
+    mask:
+      linear-gradient(#000 0 0) top / 100% var(--capital-cycle-top-band) no-repeat,
+      linear-gradient(#000 0 0) bottom / 100% var(--capital-cycle-bottom-band) no-repeat,
+      linear-gradient(#000 0 0) left / var(--capital-cycle-side-width) 100% no-repeat,
+      linear-gradient(#000 0 0) right / var(--capital-cycle-side-width) 100% no-repeat;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,.24));
+  }
+
+  /* A restrained edge pass on the same single shell. This is deliberately not
+     another conduit segment: it shares the shell bounds/mask exactly. */
+  .capital-frame__cycle-loop-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 84%, transparent);
+    border-radius: inherit;
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.025),
+      inset 0 -2px 0 rgba(0,0,0,.28);
+  }
+
+  /* The old left/right manifold buses are now literally the side members of
+     the cycle shell. Card connectors keep their established coordinates and
+     dock into these strips without any geometric rewrite. */
+  .capital-frame__input-console::after,
+  .capital-frame__diligence-console::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* TOP MEMBER · shell owns the conduit; header owns only label/layout       */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__engine-heading {
+    position: relative !important;
+    z-index: 2 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-height: var(--capital-cycle-top-band) !important;
+    height: var(--capital-cycle-top-band) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .capital-frame__engine-heading > div {
+    position: absolute !important;
+    z-index: 6 !important;
+    top: 12px !important;
+    left: 18px !important;
+    width: auto !important;
+  }
+
+  .capital-frame__conversion-rail {
+    z-index: 5 !important;
+    top: var(--capital-rail-card-top, 44px) !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* CENTER VOID · actual engine machinery                                   */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__machine-bed {
+    position: relative;
+    z-index: 2;
+    margin-block: 0 !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* BOTTOM MEMBER · retained output is mounted in the same shell             */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__return-manifold {
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    width: 100% !important;
+    min-height: var(--capital-cycle-bottom-band) !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .capital-frame__return-manifold > header {
+    background: transparent !important;
+  }
+
+  .capital-frame__return-manifold > header,
+  .capital-frame__return-manifold > div {
+    margin-left: 12px !important;
+    margin-right: 12px !important;
+  }
+
+  /* The institutional-conversion projection is deliberately outside the
+     closed cycle in source and visual order. */
+  .capital-frame__institutional-rail {
+    margin-top: 0 !important;
+  }
+}
+
+/* Mobile/coarse-pointer keeps the simpler linear projection. The DOM grouping
+   remains semantically useful, but the persistent closed-cycle chassis is a
+   desktop spatial affordance rather than a requirement for reading the page. */
+@media (pointer: coarse), (max-width: 760px) {
+  .capital-frame__cycle-loop {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+  }
+
+  .capital-frame__cycle-loop-shell {
+    display: none;
+  }
+}
