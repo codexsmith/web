@@ -38,7 +38,7 @@ export type LabMachineRelation = {
 
 export const labMachineNodes: LabMachineNode[] = [
   { id:"products", label:"Products", question:"WHAT WE BUILD", boundary:"What the Lab builds, ships, pilots, or deliberately keeps at concept status.", kind:"package", tone:"red", state:"BUILDING", meta:["stage · in flight","ownership · stewarded"], area:"products" },
-  { id:"publications", label:"Publications", question:"WHAT WE PUBLISH", boundary:"Where research and doctrine become versioned public artifacts with explicit maturity.", kind:"publication", tone:"green", state:"PUBLISHED", meta:["maturity · mixed","review · ongoing"], area:"publications" },
+  { id:"publications", label:"Publications", question:"RECORD", boundary:"Where research and doctrine become versioned public artifacts with explicit maturity.", kind:"publication", tone:"green", state:"PUBLISHED", meta:["maturity · mixed","review · ongoing"], area:"publications" },
   { id:"applications", label:"Applications", question:"WHERE IT'S APPLIED", boundary:"Where methods and artifacts are applied to real-world domains and problems.", kind:"package", tone:"cyan", state:"APPLIED", meta:["domain · multiple","impact · real world"], area:"applications" },
   { id:"method", label:"Method", question:"HOW IT WORKS", boundary:"Where the Lab's method, mechanics, and processes are defined and refined.", kind:"attachment", tone:"green", state:"DEFINED", meta:["type · attachment","interface · standard"], area:"method" },
   { id:"pipeline", label:"Pipeline", question:"HOW WORK MOVES", boundary:"The workstream that moves ideas from inquiry to vetted, maintainable artifacts.", kind:"pipeline", tone:"green", state:"FLOWING", meta:["queue · active","quality · gated"], area:"pipeline" },
