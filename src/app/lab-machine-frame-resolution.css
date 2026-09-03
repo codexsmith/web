@@ -1,149 +1,76 @@
 /*
- * Lab Machine resolution is part of the root View instrument.
+ * Lab Machine resolution lives inside the existing root View instrument.
  *
- * BoundaryFrame inserts the Full/Core resolution group immediately after the
- * View label. display:contents removes the old nested housing so those two
- * controls participate in the same physical panel as World/Evidence/Timeline.
+ * Full/Core deliberately inherit the ordinary projection button appearance.
+ * This file owns layout only: keep the five possible choices in one reading
+ * row without changing the established View-panel visual grammar.
  */
 
-.site-shell[data-root-focus="true"] .projection-switcher--machine {
-  width: max-content;
-  max-width: 100%;
-  min-width: 0;
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible:has(> [data-machine-resolution]) {
+  display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-}
-
-.site-shell[data-root-focus="true"]
-  .projection-switcher--machine > .lab-machine-frame-zoom {
-  display: contents;
-}
-
-/* Full/Core are peer choices inside View, not a second instrument housing. */
-.site-shell[data-root-focus="true"]
-  .projection-switcher--machine > .lab-machine-frame-zoom button {
-  flex: 0 0 auto;
-  min-width: max-content;
-  min-height: 36px;
-  display: grid;
-  grid-template-columns: 15px max-content;
-  grid-template-rows: 1fr;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  justify-items: start;
-  gap: .3rem;
-  padding: 3px .58rem;
-  line-height: 1;
-  white-space: nowrap;
-}
-
-.site-shell[data-root-focus="true"]
-  .projection-switcher--machine > .lab-machine-frame-zoom button span {
+  width: 100%;
   min-width: 0;
-  color: currentColor;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: .62rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1;
-  text-transform: none;
-  white-space: nowrap;
 }
 
 .site-shell[data-root-focus="true"]
-  .projection-switcher--machine > .lab-machine-frame-zoom svg {
-  width: 15px;
-  height: 15px;
+  .projection-switcher--legible:has(> [data-machine-resolution]) > .projection-switcher__label {
   flex: 0 0 auto;
+  align-self: center;
 }
 
-/* The selected resolution uses the same active-state grammar as a selected
- * representation. Resolution buttons remain disabled while selected so the
- * existing interaction contract is unchanged. */
+/* Resolution changes are compact siblings. They use the same button styling as
+ * the projections, but should not consume the descriptive width reserved for
+ * World / Evidence / Timeline. */
 .site-shell[data-root-focus="true"]
-  .projection-switcher--machine > .lab-machine-frame-zoom button:disabled {
-  border-color: var(--bf-action-line);
-  background: color-mix(in srgb, var(--bf-action) 5%, var(--bf-well-surface));
-  color: var(--bf-text-primary);
-  box-shadow:
-    var(--bf-shadow-well),
-    inset 0 0 0 1px color-mix(in srgb, var(--bf-action) 30%, transparent),
-    inset 0 -2px 0 var(--bf-action);
-  opacity: 1;
-  cursor: default;
+  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-resolution] {
+  flex: 0 0 auto;
+  min-width: 72px !important;
+}
+
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-projection-mode] {
+  flex: 1 1 0;
+  min-width: 0 !important;
 }
 
 @media (max-width: 1280px) {
   .site-shell[data-root-focus="true"]
-    .projection-switcher--machine > .lab-machine-frame-zoom button {
-    padding-inline: .46rem;
-  }
-
-  .site-shell[data-root-focus="true"]
-    .projection-switcher--machine > .lab-machine-frame-zoom button span {
-    font-size: .58rem;
+    .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-resolution] {
+    min-width: 60px !important;
   }
 }
 
-/* Responsive-pass2 models the ordinary three-choice projection switcher as a
- * three-column grid. The Lab Machine has five possible sibling controls in Core,
- * so override that assumption here with one non-wrapping row. */
+/* The responsive frame has an older three-column projection assumption. Keep
+ * the Lab Machine View instrument as the same single row instead. */
 @media (max-width: 768px) {
-  .site-shell[data-root-focus="true"] .projection-switcher--machine {
+  .site-shell[data-root-focus="true"]
+    .projection-switcher--legible:has(> [data-machine-resolution]) {
     display: flex !important;
     flex: 1 1 auto;
-    width: auto;
+    width: 100%;
     min-width: 0;
     overflow: hidden;
   }
 
-  .site-shell[data-root-focus="true"] .projection-switcher--machine button,
   .site-shell[data-root-focus="true"]
-    .projection-switcher--machine > .lab-machine-frame-zoom button {
-    flex: 1 1 auto;
+    .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-resolution] {
+    flex: 0 0 auto;
+    min-width: 54px !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-projection-mode] {
+    flex: 1 1 0;
     min-width: 0 !important;
-    padding-inline: .34rem;
-  }
-
-  .site-shell[data-root-focus="true"]
-    .projection-switcher--machine > .lab-machine-frame-zoom button span,
-  .site-shell[data-root-focus="true"] .projection-switcher--machine .projection-switcher__mode-name {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 560px) {
-  .site-shell[data-root-focus="true"]
-    .projection-switcher--machine > .lab-machine-frame-zoom button {
-    flex: 0 0 34px;
-    width: 34px;
-    min-width: 34px !important;
-    grid-template-columns: 15px;
-    place-items: center;
-    padding: 0;
-  }
-
-  .site-shell[data-root-focus="true"]
-    .projection-switcher--machine > .lab-machine-frame-zoom button span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
   }
 }
 
 @media (max-width: 430px) {
   .site-shell[data-root-focus="true"]
-    .projection-switcher--machine > .lab-machine-frame-zoom button {
-    flex-basis: 30px;
-    width: 30px;
-    min-width: 30px !important;
-    min-height: 30px;
+    .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-resolution] {
+    min-width: 46px !important;
   }
 }
