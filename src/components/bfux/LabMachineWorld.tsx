@@ -125,6 +125,16 @@ export function LabMachineWorld({
     } catch {
       // Resolution remains functional when browser storage is unavailable.
     }
+
+    /* Evidence and Timeline are Core projections. Full Loop is a World-only
+     * machine state, so widening from either projection returns to World while
+     * collapsing those projection choices from the View instrument. */
+    if (nextResolution === "mid" && projection !== "world") {
+      setProjection("world");
+      router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
+      return;
+    }
+
     if (nextResolution === "focus" && section) {
       router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
     }
@@ -157,6 +167,39 @@ export function LabMachineWorld({
     router.push(getPathForNode(nodeId), { scroll: false });
   };
 
+  const resolutionControls = (
+    <>
+      <button
+        type="button"
+        onClick={() => setResolution("mid")}
+        aria-pressed={machineResolution === "mid"}
+        aria-label="Full loop: show the complete Lab Machine"
+        title="Show the complete Lab Machine"
+        data-machine-resolution="mid"
+      >
+        <BfuxIcon name="widen" className="projection-switcher__glyph" />
+        <span className="projection-switcher__copy">
+          <span className="projection-switcher__mode-name">Full</span>
+          <small className="projection-switcher__mode-purpose">Loop</small>
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={() => setResolution("focus")}
+        aria-pressed={machineResolution === "focus"}
+        aria-label="Core set: show the core Lab Machine"
+        title="Show the core Lab Machine"
+        data-machine-resolution="focus"
+      >
+        <BfuxIcon name="narrow" className="projection-switcher__glyph" />
+        <span className="projection-switcher__copy">
+          <span className="projection-switcher__mode-name">Core</span>
+          <small className="projection-switcher__mode-purpose">Set</small>
+        </span>
+      </button>
+    </>
+  );
+
   if (projection === "world") {
     const sectionNode = section ? getLabMachineNode(section) : null;
     const navigateTo = (nodeId: string) => {
@@ -183,31 +226,6 @@ export function LabMachineWorld({
       setNavigationTrail([]);
       router.push(machineUrl(machinePath, "world", "full", navigationFocusId), { scroll: false });
     };
-
-    const resolutionControls = (
-      <div className="lab-machine-frame-zoom" role="group" aria-label="Lab Machine resolution">
-        <button
-          type="button"
-          onClick={() => setResolution("mid")}
-          disabled={machineResolution === "mid"}
-          aria-label="Show full Lab Machine loop"
-          title="Show full Lab Machine loop"
-        >
-          <BfuxIcon name="widen" />
-          <span>Full loop</span>
-        </button>
-        <button
-          type="button"
-          onClick={() => setResolution("focus")}
-          disabled={machineResolution === "focus"}
-          aria-label="Show core Lab set"
-          title="Show core Lab set"
-        >
-          <BfuxIcon name="narrow" />
-          <span>Core set</span>
-        </button>
-      </div>
-    );
 
     const computedTraversalPath = [rootNode];
     if (sectionNode) {
@@ -245,7 +263,7 @@ export function LabMachineWorld({
           canProcessZoomOut={false}
           canProcessZoomIn={false}
           surfaceLabel="Lab Machine"
-          contextControls={resolutionControls}
+          viewControls={resolutionControls}
           onHome={returnToMachine}
           onUp={returnToMachine}
           onBack={currentCursor > 1 ? rewind : returnToMachine}
@@ -326,6 +344,7 @@ export function LabMachineWorld({
         canProcessZoomOut={canProcessZoomOut}
         canProcessZoomIn={canProcessZoomIn}
         surfaceLabel="Lab Machine"
+        viewControls={resolutionControls}
         onHome={returnToMachine}
         onUp={returnToMachine}
         onBack={() => section ? closeSection() : router.back()}
@@ -333,7 +352,7 @@ export function LabMachineWorld({
         onLocalNavigate={navigateAway}
         onProcessZoomOut={() => canProcessZoomOut && changeProcessScope(processScopes[processScopeIndex - 1])}
         onProcessZoomIn={() => canProcessZoomIn && changeProcessScope(processScopes[processScopeIndex + 1])}
-        onProjectionChange={changeProjection}
+        onProjectionChange={machineResolution === "mid" ? undefined : changeProjection}
         onSearch={() => setSearchOpen(true)}
       />
 

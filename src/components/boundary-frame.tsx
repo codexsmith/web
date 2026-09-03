@@ -26,6 +26,7 @@ type BoundaryFrameProps = {
   canProcessZoomOut: boolean;
   canProcessZoomIn: boolean;
   surfaceLabel?: string;
+  viewControls?: ReactNode;
   contextControls?: ReactNode;
   onHome: () => void;
   onUp: () => void;
@@ -109,6 +110,7 @@ export function BoundaryFrame({
   canProcessZoomOut,
   canProcessZoomIn,
   surfaceLabel,
+  viewControls,
   contextControls,
   onHome,
   onBack,
@@ -291,7 +293,7 @@ export function BoundaryFrame({
             <span className="frame-tool__label">Search</span>
           </button>
 
-          {onProjectionChange ? (
+          {onProjectionChange || viewControls ? (
             <div
               className="projection-switcher projection-switcher--legible"
               role="group"
@@ -299,7 +301,8 @@ export function BoundaryFrame({
               aria-label={isRootFocus ? "Boundary First Labs views" : `Representations of ${focusNode.label}`}
             >
               <span className="projection-switcher__label">View</span>
-              {availableProjectionModes.map((mode) => {
+              {viewControls}
+              {onProjectionChange ? availableProjectionModes.map((mode) => {
                 const label = isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode];
                 const purpose = isRootFocus ? rootProjectionPurposes[mode] : projectionPurposes[mode];
                 const description = isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode];
@@ -320,7 +323,7 @@ export function BoundaryFrame({
                     </span>
                   </button>
                 );
-              })}
+              }) : null}
             </div>
           ) : null}
 
@@ -345,7 +348,7 @@ export function BoundaryFrame({
                 onClick={onProcessZoomIn}
                 disabled={!canProcessZoomIn}
                 aria-label="Narrow process context"
-                title="Narrow the process context around the current subject"
+                title="Narrow process context around the current subject"
               >
                 <BfuxIcon name="narrow" />
                 <span className="frame-tool__label">Narrow process context</span>
@@ -364,8 +367,6 @@ export function BoundaryFrame({
           data-apparatus-sections="true"
         >
           <nav className="trace-nav apparatus-nav traversal-nav boundary-neighborhood-nav" aria-label={`Local relational neighborhood for ${focusNode.label}`}>
-
-
             <div className="traversal-nav__flow">
               <section className="traversal-nav__next" aria-label="Adjacent nodes">
                 <SiblingChoices nodes={siblingNodes} onNavigate={onLocalNavigate} />
