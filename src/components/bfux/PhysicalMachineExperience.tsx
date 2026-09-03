@@ -10,7 +10,7 @@ import "./five-minute-tour-fit.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 const desktopFitQuery = "(min-width: 1025px)";
-const targetMachineWidthRatio = 0.82;
+const targetMachineWidthRatio = 0.88;
 
 type MachineFit = {
   enabled: boolean;
@@ -120,11 +120,12 @@ export function PhysicalMachineExperience({
         const sourceHeight = Math.max(stack.offsetHeight, stack.scrollHeight);
         if (!hostWidth || !sourceWidth || !sourceHeight) return;
 
+        /* Horizontal occupancy is the governing datum. A short viewport may
+         * require a little document scrolling; it must not miniaturize the
+         * machine just to keep its entire height above the fold. */
         const targetWidth = hostWidth * targetMachineWidthRatio;
         const horizontalScale = targetWidth / sourceWidth;
-        const availableHeight = Math.max(360, window.innerHeight - host.getBoundingClientRect().top - 20);
-        const verticalScale = availableHeight / sourceHeight;
-        const scale = Math.max(0.6, Math.min(0.9, horizontalScale, verticalScale));
+        const scale = Math.max(0.72, Math.min(0.92, horizontalScale));
         const height = Math.ceil(sourceHeight * scale);
 
         setMachineFit((current) => {
