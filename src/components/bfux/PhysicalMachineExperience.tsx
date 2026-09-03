@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
@@ -15,13 +15,13 @@ const targetMachineWidthRatio = 0.88;
 type MachineFit = {
   enabled: boolean;
   scale: number;
-  height: number;
+  collapse: number;
 };
 
 const defaultMachineFit: MachineFit = {
   enabled: false,
   scale: 1,
-  height: 0,
+  collapse: 0,
 };
 
 function readStoredResolution() {
@@ -103,7 +103,8 @@ export function PhysicalMachineExperience({
 
     const host = machineHostRef.current;
     const stack = machineStackRef.current;
-    if (!host || !stack) return;
+    const board = stack?.querySelector<HTMLElement>(".bf-machine__board") ?? null;
+    if (!host || !stack || !board) return;
 
     let frame = 0;
 
@@ -116,31 +117,27 @@ export function PhysicalMachineExperience({
         }
 
         const hostWidth = host.clientWidth;
-        /* Fit the authored layout box, not scroll overflow. Legacy physical-machine
-         * decorations intentionally extend beyond their boxes; including those in
-         * scrollWidth made the source appear much wider than the visible machine. */
-        const sourceWidth = stack.offsetWidth;
-        const sourceHeight = stack.offsetHeight;
+        const sourceWidth = board.offsetWidth;
+        const sourceHeight = board.offsetHeight;
         if (!hostWidth || !sourceWidth || !sourceHeight) return;
 
-        /* Horizontal occupancy is the governing datum. A short viewport may
-         * require a little document scrolling; it must not miniaturize the
-         * machine just to keep its entire height above the fold. */
+        /* The board is the machine object. The legend below it is page context,
+         * so it deliberately stays outside the fitted transform. */
         const targetWidth = hostWidth * targetMachineWidthRatio;
         const horizontalScale = targetWidth / sourceWidth;
-        const scale = Math.max(0.72, Math.min(0.92, horizontalScale));
-        const height = Math.ceil(sourceHeight * scale);
+        const scale = Math.max(0.72, Math.min(0.96, horizontalScale));
+        const collapse = Math.max(0, sourceHeight * (1 - scale));
 
         setMachineFit((current) => {
           if (
             current.enabled
             && Math.abs(current.scale - scale) < 0.002
-            && Math.abs(current.height - height) < 2
+            && Math.abs(current.collapse - collapse) < 2
           ) {
             return current;
           }
 
-          return { enabled: true, scale, height };
+          return { enabled: true, scale, collapse };
         });
       });
     };
@@ -150,7 +147,7 @@ export function PhysicalMachineExperience({
 
     const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(updateFit);
     observer?.observe(host);
-    observer?.observe(stack);
+    observer?.observe(board);
 
     return () => {
       window.cancelAnimationFrame(frame);
@@ -182,6 +179,11 @@ export function PhysicalMachineExperience({
   void onCloseSection;
   void rememberResolution;
 
+  const fitStyle = machineFit.enabled ? ({
+    "--machine-fit-scale": machineFit.scale,
+    "--machine-fit-margin-bottom": `${-machineFit.collapse}px`,
+  } as CSSProperties) : undefined;
+
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
       {sectionSurface ? (
@@ -190,12 +192,11 @@ export function PhysicalMachineExperience({
         <div
           className="physical-machine-experience__fit-stage"
           data-auto-fit={machineFit.enabled ? "true" : undefined}
-          style={machineFit.enabled ? { height: machineFit.height } : undefined}
+          style={fitStyle}
         >
           <div
             className="physical-machine-experience__machine-stack"
             ref={machineStackRef}
-            style={machineFit.enabled ? { transform: `scale(${machineFit.scale})` } : undefined}
           >
             <LabMachine
               skin="physical"
