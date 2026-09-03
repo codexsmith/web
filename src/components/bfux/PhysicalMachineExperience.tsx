@@ -116,8 +116,11 @@ export function PhysicalMachineExperience({
         }
 
         const hostWidth = host.clientWidth;
-        const sourceWidth = Math.max(stack.offsetWidth, stack.scrollWidth);
-        const sourceHeight = Math.max(stack.offsetHeight, stack.scrollHeight);
+        /* Fit the authored layout box, not scroll overflow. Legacy physical-machine
+         * decorations intentionally extend beyond their boxes; including those in
+         * scrollWidth made the source appear much wider than the visible machine. */
+        const sourceWidth = stack.offsetWidth;
+        const sourceHeight = stack.offsetHeight;
         if (!hostWidth || !sourceWidth || !sourceHeight) return;
 
         /* Horizontal occupancy is the governing datum. A short viewport may
