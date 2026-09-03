@@ -23,8 +23,9 @@
   z-index: 4;
   overflow: visible !important;
   width: calc(100% + var(--engine-cycle-gutter) + var(--engine-cycle-gutter));
-  margin-block: 0;
-  margin-inline: calc(0px - var(--engine-cycle-gutter));
+  max-width: none !important;
+  justify-self: center !important;
+  margin: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
@@ -188,6 +189,8 @@
 @media (max-width: 760px), (pointer: coarse) {
   .capital-frame__machine-bed {
     width: auto;
+    max-width: none !important;
+    justify-self: stretch !important;
     margin: 0;
     border-radius: 0 !important;
   }

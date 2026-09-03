@@ -196,6 +196,7 @@
 
   .capital-frame__conversion-stage[data-stage-id="capital"]::after {
     --bank-tone: var(--capital-end-input-tone);
+    content: "" !important;
     left: calc(0px - var(--capital-end-bank-offset)) !important;
     z-index: 2201 !important;
     border-radius: 0 4px 4px 0 !important;
