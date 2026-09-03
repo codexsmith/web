@@ -1,0 +1,604 @@
+/* Capital prototype · Canonical surface grammar
+
+   This layer owns the readable/semantic face of mounted modules:
+     - BFUX affinity assignment;
+     - card luminance and typography;
+     - compressed left/right rail face grammar;
+     - conversion-stage structural accents;
+     - operational edge glyphs;
+     - stewardship baseplate/card surfaces;
+     - institutional-stage indexing;
+     - durable-output readouts.
+
+   It does NOT own:
+     - global cycle geometry (cycle-loop);
+     - connector hardware (canonical-connectors);
+     - zoom/layout envelope (zoom-resilience);
+     - conversion iconography (conversion-iconography);
+     - engine chassis/couplings (engine-core);
+     - mounted control flags (machine-function-control-flags);
+     - stewardship specialization (stewardship-polish).
+*/
+
+/* -------------------------------------------------------------------------- */
+/* SEMANTIC AFFINITY                                                           */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__funding-port,
+.capital-frame__problem-port,
+.capital-frame__conversion-stage,
+.capital-frame__machine-function,
+.capital-frame__stewardship-card,
+.capital-frame__institutional-stage,
+.capital-frame__return-manifold article,
+.capital-frame__diligence-gates li {
+  --bfux-affinity: var(--bf-silver-300);
+}
+
+.capital-frame [data-affinity="neutral"] {
+  --bfux-affinity: var(--bf-silver-300);
+}
+
+.capital-frame [data-affinity="research"] {
+  --bfux-affinity: color-mix(in srgb, var(--bf-region-research) 60%, var(--bf-silver-300));
+}
+
+.capital-frame [data-affinity="products"] {
+  --bfux-affinity: color-mix(in srgb, var(--bf-region-products) 54%, var(--bf-silver-300));
+}
+
+.capital-frame [data-affinity="public-interest"] {
+  --bfux-affinity: color-mix(in srgb, var(--bf-region-public-interest) 56%, var(--bf-silver-300));
+}
+
+.capital-frame [data-affinity="publications"] {
+  --bfux-affinity: color-mix(in srgb, var(--bf-region-publications) 48%, var(--bf-silver-300));
+}
+
+.capital-frame [data-affinity="institution"] {
+  --bfux-affinity: color-mix(in srgb, var(--bf-region-about) 52%, var(--bf-silver-300));
+}
+
+/* -------------------------------------------------------------------------- */
+/* READABLE WORKING SURFACES                                                   */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__funding-port,
+.capital-frame__problem-port,
+.capital-frame__conversion-stage,
+.capital-frame__machine-function,
+.capital-frame__stewardship-card,
+.capital-frame__institutional-stage,
+.capital-frame__return-manifold article,
+.capital-frame__diligence-gates li {
+  --bfux-readable-face-top: color-mix(in srgb, #263238 94%, var(--bfux-affinity) 6%);
+  --bfux-readable-face-bottom: color-mix(in srgb, #151c20 96%, var(--bfux-affinity) 4%);
+  --bfux-readable-copy: #d5dde0;
+  --bfux-readable-muted: #aeb9bd;
+  --bfux-readable-title: #edf2f3;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 22%),
+    linear-gradient(180deg, var(--bfux-readable-face-top), var(--bfux-readable-face-bottom)) !important;
+}
+
+.capital-frame__conversion-stage,
+.capital-frame__conversion-stage.is-machine,
+.capital-frame__conversion-stage.is-return {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity) 7%, transparent), transparent 30%),
+    linear-gradient(180deg, #263238, #182025) !important;
+}
+
+.capital-frame__machine-functions .capital-frame__machine-function {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity) 6%, transparent), transparent 34%),
+    linear-gradient(180deg, #253137, #171e22) !important;
+}
+
+.capital-frame__funding-port,
+.capital-frame__problem-port {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 7%, transparent), transparent 42%),
+    linear-gradient(180deg, #2a353a, #1b2327) !important;
+}
+
+.capital-frame__funding-port p,
+.capital-frame__problem-port p,
+.capital-frame__conversion-stage p,
+.capital-frame__machine-function p,
+.capital-frame__stewardship-card p,
+.capital-frame__institutional-stage p,
+.capital-frame__return-manifold article p,
+.capital-frame__diligence-gates p {
+  color: var(--bfux-readable-copy) !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.28);
+}
+
+.capital-frame__funding-port h3,
+.capital-frame__problem-port h3,
+.capital-frame__conversion-stage h3,
+.capital-frame__machine-function h3,
+.capital-frame__stewardship-card h4,
+.capital-frame__institutional-stage h3,
+.capital-frame__return-manifold article h3,
+.capital-frame__diligence-gates h3 {
+  color: color-mix(in srgb, var(--bfux-affinity) 52%, var(--bfux-readable-title) 48%) !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.42);
+}
+
+.capital-frame__conversion-stage > header,
+.capital-frame__stewardship-card > header,
+.capital-frame__institutional-stage > span,
+.capital-frame__diligence-gates li > span {
+  color: var(--bfux-readable-muted) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* LEFT INPUT RAIL · compressed front panels                                  */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__input-console {
+  gap: 8px !important;
+}
+
+.capital-frame__input-console > .capital-frame__console-heading {
+  padding: 9px 10px !important;
+}
+
+.capital-frame__input-console > .capital-frame__console-heading > span {
+  display: none !important;
+}
+
+.capital-frame__input-console > .capital-frame__console-heading h2 {
+  margin: 0 !important;
+  font-size: .78rem !important;
+  line-height: 1.15 !important;
+}
+
+.capital-frame__funding-ports {
+  gap: 7px !important;
+}
+
+.capital-frame__funding-port,
+.capital-frame__problem-port {
+  position: relative;
+  overflow: visible;
+  min-height: 0 !important;
+  padding: 9px 10px !important;
+  border-left: 3px solid color-mix(in srgb, var(--bfux-affinity) 72%, var(--bf-etched-line-strong));
+  border-radius: 2px 8px 8px 2px;
+  box-shadow: var(--bf-shadow-inset), 0 2px 8px rgba(0,0,0,.14);
+}
+
+.capital-frame__problem-port {
+  margin-top: 0 !important;
+  border-left-width: 5px;
+}
+
+.capital-frame__funding-port > header,
+.capital-frame__problem-port > header {
+  display: none !important;
+}
+
+.capital-frame__funding-port h3,
+.capital-frame__problem-port h3 {
+  margin: 0 !important;
+  font-size: .78rem !important;
+  line-height: 1.16 !important;
+}
+
+.capital-frame__funding-port p,
+.capital-frame__problem-port p {
+  margin: 5px 0 0 !important;
+  font-size: .69rem !important;
+  line-height: 1.42 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* RIGHT DILIGENCE RAIL · five inspection gates                               */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__diligence-console .capital-frame__console-heading {
+  border-left: 4px solid color-mix(in srgb, var(--bf-region-about) 58%, var(--bf-etched-line-strong));
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bf-region-about) 8%, transparent), transparent 44%),
+    var(--bf-well-surface);
+}
+
+.capital-frame__diligence-gates {
+  gap: 10px !important;
+}
+
+.capital-frame__diligence-gates li {
+  position: relative;
+  overflow: visible;
+  min-height: 96px !important;
+  padding-right: 16px;
+  border-left: 3px solid color-mix(in srgb, var(--bf-region-about) 70%, var(--bf-etched-line-strong));
+  border-top: 3px solid color-mix(in srgb, var(--bfux-affinity) 68%, var(--bf-etched-line-strong));
+  border-radius: 5px;
+  box-shadow:
+    var(--bf-shadow-control),
+    var(--bf-shadow-inset),
+    inset 6px 0 0 color-mix(in srgb, var(--bf-region-about) 7%, transparent);
+}
+
+.capital-frame__diligence-gates li::after {
+  content: none !important;
+  display: none !important;
+}
+
+.capital-frame__diligence-gates li > span {
+  font-size: .5rem !important;
+}
+
+.capital-frame__diligence-gates h3 {
+  font-size: .78rem !important;
+  line-height: 1.18 !important;
+}
+
+.capital-frame__diligence-gates p {
+  margin-top: 5px !important;
+  font-size: .69rem !important;
+  line-height: 1.42 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* PRIMARY CONVERSION RAIL · structural semantic accents                      */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__conversion-stage {
+  overflow: visible;
+  border-top: 3px solid color-mix(in srgb, var(--bfux-affinity) 74%, var(--bf-etched-line-strong));
+}
+
+.capital-frame__conversion-stage[data-boundary-operation="inlet"] {
+  border-left: 6px solid color-mix(in srgb, var(--bfux-affinity) 76%, var(--bf-etched-line-strong));
+}
+
+.capital-frame__conversion-stage[data-boundary-operation="bind"] {
+  border-top-width: 4px;
+}
+
+.capital-frame__conversion-stage[data-stage-id="retained-capability"] {
+  border-right: 6px solid color-mix(in srgb, var(--bf-region-about) 64%, var(--bf-etched-line-strong));
+  border-bottom: 4px solid color-mix(in srgb, var(--bfux-affinity) 76%, var(--bf-etched-line-strong));
+}
+
+/* Mobile/tablet rail text remains readable until the fixed desktop metrics in
+   cycle-loop take over. */
+.capital-frame__conversion-stage h3 {
+  font-size: .82rem !important;
+  line-height: 1.17 !important;
+  letter-spacing: .035em !important;
+}
+
+.capital-frame__conversion-stage p {
+  margin-top: 8px !important;
+  font-size: .71rem !important;
+  line-height: 1.5 !important;
+}
+
+.capital-frame__conversion-stage > header > span {
+  font-size: .49rem !important;
+  line-height: 1 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* OPERATIONAL ENGINE · card chassis + edge operation glyphs                   */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__machine-functions .capital-frame__machine-function {
+  position: relative;
+  display: block;
+  overflow: visible !important;
+  border: 1px solid color-mix(in srgb, var(--bfux-affinity) 34%, var(--bf-etched-line));
+  border-top: 3px solid color-mix(in srgb, var(--bfux-affinity) 74%, var(--bf-etched-line-strong));
+  border-radius: 5px;
+  box-shadow:
+    var(--bf-shadow-control),
+    var(--bf-shadow-inset),
+    0 2px 5px rgba(0,0,0,.12);
+}
+
+.capital-frame__machine-function::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  right: -1px;
+  top: 50%;
+  width: 34px;
+  height: 42px;
+  transform: translateY(-50%);
+  border-left: 2px solid color-mix(in srgb, var(--bfux-affinity) 54%, var(--bf-etched-line-strong));
+  opacity: .78;
+  pointer-events: none;
+}
+
+.capital-frame__machine-function[data-boundary-operation="inquire"]::after {
+  background:
+    radial-gradient(circle at 25px 50%, color-mix(in srgb, var(--bfux-affinity) 95%, transparent) 0 4px, transparent 4.5px),
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 88%, transparent), color-mix(in srgb, var(--bfux-affinity) 88%, transparent)) 5px center / 21px 3px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--bfux-affinity) 48%, transparent), color-mix(in srgb, var(--bfux-affinity) 48%, transparent)) 5px center / 2px 30px no-repeat;
+}
+
+.capital-frame__machine-function[data-boundary-operation="constrain"]::after {
+  width: 30px;
+  background:
+    linear-gradient(color-mix(in srgb, var(--bfux-affinity) 92%, transparent), color-mix(in srgb, var(--bfux-affinity) 92%, transparent)) 8px center / 3px 34px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--bfux-affinity) 92%, transparent), color-mix(in srgb, var(--bfux-affinity) 92%, transparent)) 21px center / 3px 34px no-repeat,
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 38%, transparent), color-mix(in srgb, var(--bfux-affinity) 38%, transparent)) center / 13px 2px no-repeat;
+}
+
+.capital-frame__machine-function[data-boundary-operation="mediate"]::after {
+  background:
+    radial-gradient(circle at 6px 50%, color-mix(in srgb, var(--bfux-affinity) 94%, transparent) 0 4px, transparent 4.5px),
+    radial-gradient(circle at 28px 50%, color-mix(in srgb, var(--bfux-affinity) 94%, transparent) 0 4px, transparent 4.5px),
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 84%, transparent), color-mix(in srgb, var(--bfux-affinity) 84%, transparent)) center / 20px 3px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--bfux-affinity) 68%, transparent), color-mix(in srgb, var(--bfux-affinity) 68%, transparent)) center / 4px 30px no-repeat;
+}
+
+.capital-frame__machine-function[data-boundary-operation="execute"]::after {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 92%, transparent), color-mix(in srgb, var(--bfux-affinity) 92%, transparent)) 4px 11px / 26px 3px no-repeat,
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 92%, transparent), color-mix(in srgb, var(--bfux-affinity) 92%, transparent)) 4px 28px / 26px 3px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--bfux-affinity) 68%, transparent), color-mix(in srgb, var(--bfux-affinity) 68%, transparent)) 28px center / 3px 34px no-repeat;
+}
+
+.capital-frame__machine-function[data-boundary-operation="expose"]::after {
+  width: 26px;
+  border-left: 0;
+  background:
+    repeating-linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity) 94%, transparent) 0 7px, transparent 7px 13px) 12px center / 4px 38px no-repeat,
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 62%, transparent), transparent) left center / 24px 2px no-repeat;
+}
+
+.capital-frame__machine-function[data-boundary-operation="record"]::after {
+  background:
+    linear-gradient(color-mix(in srgb, var(--bfux-affinity) 86%, transparent), color-mix(in srgb, var(--bfux-affinity) 86%, transparent)) 5px center / 3px 36px no-repeat,
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 94%, transparent), color-mix(in srgb, var(--bfux-affinity) 94%, transparent)) 11px 9px / 19px 3px no-repeat,
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 94%, transparent), color-mix(in srgb, var(--bfux-affinity) 94%, transparent)) 11px 19px / 19px 3px no-repeat,
+    linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 94%, transparent), color-mix(in srgb, var(--bfux-affinity) 94%, transparent)) 11px 29px / 13px 3px no-repeat;
+}
+
+/* -------------------------------------------------------------------------- */
+/* STEWARDSHIP · structural base surface (specialized later)                  */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__stewardship-module {
+  overflow: hidden;
+}
+
+.capital-frame__stewardship-module > header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--bf-etched-line-strong);
+}
+
+.capital-frame__stewardship-module > header span {
+  display: block;
+  text-transform: uppercase;
+}
+
+.capital-frame__stewardship-module > header h3 {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.capital-frame__stewardship-module > header > strong {
+  flex: 0 0 auto;
+  border: 1px solid color-mix(in srgb, var(--bf-info) 36%, var(--bf-etched-line));
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.capital-frame__stewardship-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  padding: 10px;
+}
+
+.capital-frame__stewardship-card {
+  border: 1px solid color-mix(in srgb, var(--bfux-affinity) 30%, var(--bf-etched-line-strong));
+  border-radius: 7px;
+  box-shadow: var(--bf-shadow-well), inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.capital-frame__stewardship-card > header {
+  border-bottom: 1px solid var(--bf-etched-line);
+}
+
+.capital-frame__stewardship-card .capital-frame__operation-label {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--bfux-affinity) 54%, var(--bf-etched-line));
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--bfux-affinity) 9%, #0c1114 91%) !important;
+  color: color-mix(in srgb, var(--bfux-affinity) 62%, #eef3f4 38%) !important;
+  text-transform: uppercase;
+}
+
+.capital-frame__stewardship-card h4 {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------------------- */
+/* INSTITUTIONAL CONVERSION                                                    */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__institutional-stage {
+  position: relative;
+  border-top: 4px solid color-mix(in srgb, var(--bfux-affinity) 72%, var(--bf-etched-line-strong));
+}
+
+.capital-frame__institutional-stage > span {
+  color: color-mix(in srgb, var(--bfux-affinity) 90%, var(--bf-text-primary)) !important;
+  background: color-mix(in srgb, var(--bfux-affinity) 7%, rgba(0,0,0,.12));
+  font-size: .48rem !important;
+}
+
+.capital-frame__institutional-stage h3 {
+  font-size: .74rem !important;
+  line-height: 1.18 !important;
+}
+
+.capital-frame__institutional-stage p {
+  font-size: .65rem !important;
+  line-height: 1.45 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* DURABLE / RETAINED OUTPUT READOUTS                                         */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__return-manifold > header {
+  min-height: 48px;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  grid-template-rows: auto auto !important;
+  align-content: center;
+  column-gap: 18px !important;
+  margin: 0 12px !important;
+  padding: 9px 18px 8px !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 72%, transparent) !important;
+  background: rgba(5,9,12,.14) !important;
+}
+
+.capital-frame__return-manifold > header span {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  color: color-mix(in srgb, var(--bf-valid) 58%, var(--bf-white-050)) !important;
+  font-size: .52rem !important;
+  letter-spacing: .12em !important;
+}
+
+.capital-frame__return-manifold > header h2 {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  margin: 3px 0 0 !important;
+  color: var(--bf-text-primary) !important;
+  font-size: .78rem !important;
+  line-height: 1.08 !important;
+  letter-spacing: .055em !important;
+}
+
+.capital-frame__return-manifold > header > strong {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  align-self: center !important;
+  color: color-mix(in srgb, var(--bf-valid) 78%, var(--bf-white-050)) !important;
+  font-size: .53rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: .075em !important;
+}
+
+.capital-frame__return-manifold > div {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  margin: 0 12px 12px !important;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--bf-valid) 24%, var(--bf-etched-line-strong));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--bf-bg-base) 92%, #070c10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    inset 0 -1px 0 rgba(0,0,0,.52),
+    0 3px 10px rgba(0,0,0,.16);
+}
+
+.capital-frame__return-manifold article {
+  min-height: 82px !important;
+  position: relative;
+  display: grid;
+  align-content: center;
+  padding: 12px 14px !important;
+  border-right: 1px solid var(--bf-etched-line) !important;
+  border-top: 3px solid color-mix(in srgb, var(--bfux-affinity) 72%, var(--bf-etched-line-strong));
+}
+
+.capital-frame__return-manifold article:last-child {
+  border-right: 0 !important;
+}
+
+.capital-frame__return-manifold article h3 {
+  margin: 0 !important;
+  font-size: .76rem !important;
+  line-height: 1.15 !important;
+}
+
+.capital-frame__return-manifold article p {
+  margin-top: 6px !important;
+  font-size: .67rem !important;
+  line-height: 1.42 !important;
+}
+
+.capital-frame__institutional-rail {
+  margin-top: 12px !important;
+  opacity: .88;
+  border-color: color-mix(in srgb, var(--bf-etched-line) 82%, transparent) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* RESPONSIVE SURFACE RULES                                                    */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 760px), (pointer: coarse) {
+  .capital-frame__conversion-stage h3,
+  .capital-frame__stewardship-card h4,
+  .capital-frame__diligence-gates h3 {
+    font-size: .76rem !important;
+  }
+
+  .capital-frame__funding-port p,
+  .capital-frame__problem-port p,
+  .capital-frame__conversion-stage p,
+  .capital-frame__stewardship-card p,
+  .capital-frame__diligence-gates p {
+    font-size: .66rem !important;
+  }
+
+  .capital-frame__return-manifold > header {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 4px;
+    margin: 0 !important;
+    padding: 10px 12px !important;
+  }
+
+  .capital-frame__return-manifold > header span,
+  .capital-frame__return-manifold > header h2,
+  .capital-frame__return-manifold > header > strong {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+  .capital-frame__return-manifold > div {
+    grid-template-columns: 1fr !important;
+    margin: 0 8px 8px !important;
+  }
+
+  .capital-frame__return-manifold article {
+    min-height: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--bf-etched-line) !important;
+  }
+
+  .capital-frame__return-manifold article:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .capital-frame__institutional-rail {
+    margin-top: 4px !important;
+    opacity: 1;
+  }
+}

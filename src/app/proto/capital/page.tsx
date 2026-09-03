@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
 import { CapitalEconomicsFrame } from "@/components/bfux/CapitalEconomicsFrame";
 import "./capital-frame.css";
-import "./capital-frame-civics.css";
-import "./capital-frame-boundary-voice.css";
-import "./capital-frame-manifolds.css";
 import "./capital-frame-canonical-connectors.css";
 import "./capital-frame-zoom-resilience.css";
 import "./capital-frame-conversion-iconography.css";
 import "./capital-frame-engine-core.css";
-import "./capital-frame-card-typography.css";
+import "./capital-frame-surface-system.css";
 import "./capital-frame-machine-function-control-flags.css";
 import "./capital-frame-stewardship-polish.css";
-import "./capital-frame-cycle-footer.css";
-import "./capital-frame-input-rail-compression.css";
 import "./capital-frame-cycle-loop.css";
 
 export const metadata: Metadata = {
