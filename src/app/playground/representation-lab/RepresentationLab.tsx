@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import styles from "./representation-lab.module.css";
+import x from "./representation-lab-expansion.module.css";
 import {
+  buildComparison,
   buildTrace,
   isWall,
   MAZE_ROWS,
@@ -16,8 +18,10 @@ import {
 
 const MODE_LABELS: Record<Mode, { title: string; technical: string; port: string }> = {
   bfs: { title: "Pathfinder", technical: "BFS", port: "GRAPH / QUEUE" },
+  astar: { title: "Directed Search", technical: "A*", port: "GRAPH / HEURISTIC" },
   minimax: { title: "Adversary", technical: "Minimax", port: "GAME TREE / MIN" },
   expectimax: { title: "Stochastic", technical: "Expectimax", port: "GAME TREE / E" },
+  mdp: { title: "Planner", technical: "Value iteration", port: "MDP / POLICY" },
   bayes: { title: "Blind Bayesian", technical: "Bayes filter", port: "BELIEF / SENSOR" },
 };
 
@@ -29,9 +33,11 @@ const ACTION_LABELS: Record<Action, string> = {
   STOP: "stop",
 };
 
+const POLICY_GLYPHS: Record<Action, string> = { N: "↑", S: "↓", E: "→", W: "←", STOP: "·" };
 const TRACE_STAGES = ["WORLD", "OBSERVE", "REPRESENT", "INFER", "ACT", "CONSEQUENCE"] as const;
 const CELL = 38;
 const keyOf = ([x, y]: Point) => `${x},${y}`;
+const isSearchMode = (mode: Mode) => mode === "bfs" || mode === "astar";
 
 function scoreText(score: number) {
   return Number.isInteger(score) ? score.toFixed(0) : score.toFixed(1);
@@ -47,22 +53,35 @@ function activeTraceStage(step: number, total: number) {
   return Math.min(TRACE_STAGES.length - 1, Math.floor((step / (total - 1)) * TRACE_STAGES.length));
 }
 
+function playbackInterval(mode: Mode) {
+  if (mode === "bfs" || mode === "astar") return 90;
+  if (mode === "mdp") return 420;
+  return 900;
+}
+
 export function RepresentationLab() {
   const [mode, setMode] = useState<Mode>("bfs");
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [revealTruth, setRevealTruth] = useState(false);
-  const trace = useMemo(() => buildTrace(mode), [mode]);
+  const [breakModel, setBreakModel] = useState(false);
+  const searchMode = isSearchMode(mode);
+  const trace = useMemo(
+    () => buildTrace(mode, { retainParents: searchMode ? !breakModel : true }),
+    [mode, breakModel, searchMode],
+  );
+  const comparison = useMemo(() => buildComparison(), []);
   const frame = trace.frames[Math.min(step, trace.frames.length - 1)];
   const beliefPeak = currentBeliefPeak(frame);
   const closureReached = step >= trace.frames.length - 1;
+  const closureState = closureReached ? trace.closure : "open";
   const traceStage = activeTraceStage(step, trace.frames.length);
 
   useEffect(() => {
     setStep(0);
     setPlaying(false);
     setRevealTruth(false);
-  }, [mode]);
+  }, [mode, breakModel]);
 
   useEffect(() => {
     if (!playing) return;
@@ -74,7 +93,7 @@ export function RepresentationLab() {
         }
         return current + 1;
       });
-    }, mode === "bfs" ? 105 : 900);
+    }, playbackInterval(mode));
     return () => window.clearInterval(interval);
   }, [mode, playing, trace.frames.length]);
 
@@ -82,6 +101,17 @@ export function RepresentationLab() {
   const frontier = useMemo(() => new Set(frame.frontier.map(keyOf)), [frame.frontier]);
   const path = useMemo(() => new Set(frame.path.map(keyOf)), [frame.path]);
   const beliefs = useMemo(() => new Map(frame.beliefs.map((cell) => [keyOf(cell.point), cell.probability])), [frame.beliefs]);
+  const values = useMemo(() => new Map((frame.values ?? []).map((cell) => [keyOf(cell.point), cell.value])), [frame.values]);
+  const policies = useMemo(() => new Map((frame.policy ?? []).map((cell) => [keyOf(cell.point), cell.action])), [frame.policy]);
+  const maxAbsValue = useMemo(
+    () => Math.max(1, ...(frame.values ?? []).map((cell) => Math.abs(cell.value))),
+    [frame.values],
+  );
+
+  const minimaxSummary = comparison.find((row) => row.mode === "minimax");
+  const expectimaxSummary = comparison.find((row) => row.mode === "expectimax");
+  const bfsSummary = comparison.find((row) => row.mode === "bfs");
+  const astarSummary = comparison.find((row) => row.mode === "astar");
 
   const reset = () => {
     setPlaying(false);
@@ -95,6 +125,10 @@ export function RepresentationLab() {
     }
     if (closureReached) setStep(0);
     setPlaying(true);
+  };
+
+  const loadMode = (nextMode: Mode) => {
+    setMode(nextMode);
   };
 
   return (
@@ -123,7 +157,7 @@ export function RepresentationLab() {
             <span>REASONER BUS</span>
             <strong>Replace one formal cartridge</strong>
           </div>
-          <div className={styles.modeStrip} role="group" aria-label="Reasoning cartridge">
+          <div className={`${styles.modeStrip} ${x.modeStripExpanded}`} role="group" aria-label="Reasoning cartridge">
             {MODE_ORDER.map((item) => {
               const selected = mode === item;
               return (
@@ -132,7 +166,7 @@ export function RepresentationLab() {
                   type="button"
                   aria-pressed={selected}
                   className={selected ? styles.cartridgeActive : styles.cartridge}
-                  onClick={() => setMode(item)}
+                  onClick={() => loadMode(item)}
                 >
                   <span>{MODE_LABELS[item].title}</span>
                   <small>{MODE_LABELS[item].technical}</small>
@@ -152,6 +186,22 @@ export function RepresentationLab() {
           <PortBank label="WITHHELD / FORGOTTEN" items={trace.worldModel.hidden} state="closed" />
         </div>
 
+        <div className={x.stressRig} data-active={searchMode ? "true" : "false"} data-defect={breakModel && searchMode ? "true" : "false"}>
+          <div>
+            <span>STRESS RIG · RETENTION PORT</span>
+            <strong>Predecessor relation</strong>
+            <small>{searchMode ? "Required after goal recognition to reconstruct the route." : "Load BFS or A* to stress a required search distinction."}</small>
+          </div>
+          <button
+            type="button"
+            disabled={!searchMode}
+            aria-pressed={breakModel && searchMode}
+            onClick={() => setBreakModel((value) => !value)}
+          >
+            {breakModel && searchMode ? "DROPPED · MODEL BROKEN" : "RETAINED · DROP DISTINCTION"}
+          </button>
+        </div>
+
         <div className={styles.instrument}>
           <section className={styles.worldHousing} aria-label="Persistent carrier world">
             <div className={styles.worldHeader}>
@@ -162,7 +212,11 @@ export function RepresentationLab() {
               <div className={styles.statusCluster}>
                 <StatusLamp label="WORLD" value="FIXED" state="valid" />
                 <StatusLamp label="MODEL" value={trace.worldModel.shortLabel} state="attention" />
-                <StatusLamp label="CLOSURE" value={closureReached ? "REACHED" : "OPEN"} state={closureReached ? "valid" : "unknown"} />
+                <StatusLamp
+                  label="CLOSURE"
+                  value={closureState === "defect" ? "DEFECT" : closureState === "reached" ? "REACHED" : "OPEN"}
+                  state={closureState === "defect" ? "defect" : closureState === "reached" ? "valid" : "unknown"}
+                />
               </div>
             </div>
 
@@ -181,18 +235,37 @@ export function RepresentationLab() {
             <div className={styles.mazeFrame}>
               <svg className={styles.maze} viewBox={`0 0 ${WORLD.width * CELL} ${WORLD.height * CELL}`} role="img" aria-labelledby="representation-lab-maze-title representation-lab-maze-desc">
                 <title id="representation-lab-maze-title">WORLD-01 rendered through the active reasoner</title>
-                <desc id="representation-lab-maze-desc">The maze and object identity remain fixed while overlays expose the active representation and inference state.</desc>
-                {MAZE_ROWS.map((row, y) => [...row].map((_, x) => {
-                  const point: Point = [x, y];
+                <desc id="representation-lab-maze-desc">The maze and object identity remain fixed while overlays expose search frontiers, value fields, policies, game-tree decisions, or belief state.</desc>
+                {MAZE_ROWS.map((row, y) => [...row].map((_, xPos) => {
+                  const point: Point = [xPos, y];
                   const key = keyOf(point);
                   const belief = beliefs.get(key) ?? 0;
+                  const value = values.get(key);
+                  const policy = policies.get(key);
+                  const valueOpacity = typeof value === "number" ? Math.min(0.68, 0.08 + Math.abs(value) / maxAbsValue * 0.6) : 0;
                   return (
                     <g key={key}>
-                      <rect x={x * CELL} y={y * CELL} width={CELL} height={CELL} className={isWall(point) ? styles.wall : styles.floor} />
-                      {belief > 0 ? <rect x={x * CELL + 3} y={y * CELL + 3} width={CELL - 6} height={CELL - 6} rx={4} className={styles.belief} opacity={Math.min(0.88, 0.08 + belief * 18)} /> : null}
-                      {explored.has(key) ? <rect x={x * CELL + 6} y={y * CELL + 6} width={CELL - 12} height={CELL - 12} rx={3} className={styles.explored} /> : null}
-                      {frontier.has(key) ? <circle cx={x * CELL + CELL / 2} cy={y * CELL + CELL / 2} r={7} className={styles.frontier} /> : null}
-                      {path.has(key) ? <circle cx={x * CELL + CELL / 2} cy={y * CELL + CELL / 2} r={4} className={styles.pathDot} /> : null}
+                      <rect x={xPos * CELL} y={y * CELL} width={CELL} height={CELL} className={isWall(point) ? styles.wall : styles.floor} />
+                      {typeof value === "number" && !isWall(point) ? (
+                        <rect
+                          x={xPos * CELL + 3}
+                          y={y * CELL + 3}
+                          width={CELL - 6}
+                          height={CELL - 6}
+                          rx={3}
+                          className={`${x.valueCell} ${value >= 0 ? x.valuePositive : x.valueNegative}`}
+                          opacity={valueOpacity}
+                        />
+                      ) : null}
+                      {belief > 0 ? <rect x={xPos * CELL + 3} y={y * CELL + 3} width={CELL - 6} height={CELL - 6} rx={4} className={styles.belief} opacity={Math.min(0.88, 0.08 + belief * 18)} /> : null}
+                      {explored.has(key) ? <rect x={xPos * CELL + 6} y={y * CELL + 6} width={CELL - 12} height={CELL - 12} rx={3} className={styles.explored} /> : null}
+                      {frontier.has(key) ? <circle cx={xPos * CELL + CELL / 2} cy={y * CELL + CELL / 2} r={7} className={styles.frontier} /> : null}
+                      {path.has(key) ? <circle cx={xPos * CELL + CELL / 2} cy={y * CELL + CELL / 2} r={4} className={styles.pathDot} /> : null}
+                      {policy ? (
+                        <text x={xPos * CELL + CELL / 2} y={y * CELL + CELL / 2 + 5} textAnchor="middle" className={x.policyGlyph}>
+                          {POLICY_GLYPHS[policy]}
+                        </text>
+                      ) : null}
                     </g>
                   );
                 }))}
@@ -214,9 +287,10 @@ export function RepresentationLab() {
 
             <div className={styles.legend} aria-label="Visualization legend">
               <span><i className={styles.legendAgent} /> agent</span>
-              <span><i className={styles.legendPursuer} /> pursuer</span>
+              <span><i className={styles.legendPursuer} /> pursuer / hazard</span>
               <span><i className={styles.legendTarget} /> target</span>
-              {mode === "bfs" ? <span><i className={styles.legendSearch} /> explored / frontier</span> : null}
+              {searchMode ? <span><i className={styles.legendSearch} /> explored / frontier</span> : null}
+              {mode === "mdp" ? <span><i className={x.legendValue} /> value / policy</span> : null}
               {mode === "bayes" ? <span><i className={styles.legendBelief} /> belief probability</span> : null}
             </div>
           </section>
@@ -230,6 +304,18 @@ export function RepresentationLab() {
             <ModelSection title="ASSUMPTIONS" items={trace.worldModel.assumed} />
             <div className={styles.outputBlock}><span>OUTPUT OBJECT</span><strong>{trace.worldModel.output}</strong></div>
             <div className={styles.equation}>{trace.worldModel.equation}</div>
+            <div className={x.metricBlock}>
+              <span>TRACE SUMMARY</span>
+              <strong>{trace.summary.signal}</strong>
+              <small>{trace.summary.detail}</small>
+            </div>
+
+            {frame.searchCost ? (
+              <div className={x.metricBlock}>
+                <span>SEARCH COST</span>
+                <div className={x.costTriplet}><code>g {frame.searchCost.g}</code><code>h {frame.searchCost.h}</code><code>f {frame.searchCost.f}</code></div>
+              </div>
+            ) : null}
 
             {frame.candidateScores ? (
               <div className={styles.candidateBlock}>
@@ -239,6 +325,14 @@ export function RepresentationLab() {
                     <strong>{ACTION_LABELS[candidate.action]}</strong><code>{scoreText(candidate.score)}</code>
                   </div>
                 ))}
+              </div>
+            ) : null}
+
+            {mode === "mdp" && frame.selectedAction ? (
+              <div className={x.metricBlock}>
+                <span>POLICY AT START</span>
+                <strong>{POLICY_GLYPHS[frame.selectedAction]} {ACTION_LABELS[frame.selectedAction]}</strong>
+                <small>The output is a policy over states, not a single recovered route.</small>
               </div>
             ) : null}
 
@@ -264,17 +358,54 @@ export function RepresentationLab() {
         <section className={styles.eventLedger} aria-live="polite">
           <div><span>CURRENT EVENT</span><p>{frame.narration}</p></div>
           <div><span>REPRESENTATIONAL CONSEQUENCE</span><p>{trace.worldModel.accent}</p></div>
-          <div className={closureReached ? styles.closureReached : styles.closureOpen}>
+          <div className={`${closureState === "reached" ? styles.closureReached : styles.closureOpen} ${closureState === "defect" ? x.closureDefect : ""}`}>
             <span>CLOSURE STATE</span>
-            <strong>{closureReached ? "TRACE RECONCILED" : "BOUNDARY OPEN"}</strong>
+            <strong>{closureState === "defect" ? "REPRESENTATIONAL DEFECT" : closureState === "reached" ? "TRACE RECONCILED" : "BOUNDARY OPEN"}</strong>
           </div>
         </section>
+      </section>
+
+      <section className={x.experimentRack} aria-label="Counterfactual comparison rack">
+        <header className={x.rackHeader}>
+          <div><span>COUNTERFACTUAL RACK</span><h2>Freeze WORLD-01. Compare the consequences.</h2></div>
+          <p>Every cartridge below is evaluated against the same carrier world. Select one to load it into the apparatus above.</p>
+        </header>
+
+        <div className={x.contrastBank}>
+          <article>
+            <span>ATTENTION POLICY</span>
+            <strong>BFS {bfsSummary?.signal} → A* {astarSummary?.signal}</strong>
+            <p>Same graph and same optimal route. The heuristic changes which frontier states deserve attention first.</p>
+          </article>
+          <article>
+            <span>ONTOLOGY SWITCH</span>
+            <strong>MIN {minimaxSummary?.selectedAction ?? "?"} ≠ E {expectimaxSummary?.selectedAction ?? "?"}</strong>
+            <p>Same pursuer sprite. Adversary semantics and stochastic semantics produce different rational actions.</p>
+          </article>
+          <article>
+            <span>OUTPUT TYPE</span>
+            <strong>path → action → policy → belief</strong>
+            <p>The carrier world stays recognizable while the computational object produced by inference changes category.</p>
+          </article>
+        </div>
+
+        <div className={x.comparisonGrid}>
+          {comparison.map((row) => (
+            <button key={row.mode} type="button" onClick={() => loadMode(row.mode)} aria-pressed={mode === row.mode} className={mode === row.mode ? x.compareCardActive : x.compareCard}>
+              <span>{MODE_LABELS[row.mode].technical}</span>
+              <strong>{row.label}</strong>
+              <code>{row.signal}</code>
+              <small>{row.detail}</small>
+              <p>{row.output}</p>
+            </button>
+          ))}
+        </div>
       </section>
 
       <section className={styles.why}>
         <div><p className={styles.eyebrow}>Why this matters</p><h2>The algorithm is downstream of a choice about what the world is.</h2></div>
         <p>This apparatus keeps one semantic world persistent while changing what crosses the representation boundary, what assumptions enter inference, and what kind of output object is produced.</p>
-        <p>Intellectual lineage: the UC Berkeley CS188 Pac-Man projects use one common environment to teach search, multi-agent reasoning, probabilistic inference, and reinforcement learning. This clean-room BFL laboratory does not publish course assignment solutions or reuse branded game assets.</p>
+        <p>The stress rig goes further: it can remove one apparently small distinction and make the downstream consequence impossible, exposing representation as an engineering dependency rather than a passive description.</p>
         <a href="https://ai.berkeley.edu/project_overview.html" target="_blank" rel="noreferrer">View the Berkeley project overview ↗</a>
       </section>
     </main>
@@ -292,8 +423,8 @@ function PortBank({ label, items, state }: { label: string; items: string[]; sta
   );
 }
 
-function StatusLamp({ label, value, state }: { label: string; value: string; state: "valid" | "attention" | "unknown" }) {
-  return <div className={styles.statusLamp} data-state={state}><i aria-hidden="true" /><span>{label}</span><strong>{value}</strong></div>;
+function StatusLamp({ label, value, state }: { label: string; value: string; state: "valid" | "attention" | "unknown" | "defect" }) {
+  return <div className={`${styles.statusLamp} ${state === "defect" ? x.defectLamp : ""}`} data-state={state}><i aria-hidden="true" /><span>{label}</span><strong>{value}</strong></div>;
 }
 
 function ModelSection({ title, items }: { title: string; items: string[] }) {
