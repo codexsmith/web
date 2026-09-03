@@ -230,7 +230,7 @@
   }
 
   /* ---------------------------------------------------------------------- */
-  /* BOTTOM MEMBER · durable-output content is mounted by cycle-footer        */
+  /* BOTTOM MEMBER · durable-output content is part of this chassis          */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__return-manifold {
@@ -239,12 +239,28 @@
     box-sizing: border-box;
     width: 100% !important;
     min-height: var(--capital-cycle-bottom-band) !important;
+    height: var(--capital-cycle-bottom-band) !important;
+    max-height: var(--capital-cycle-bottom-band) !important;
+    display: grid !important;
+    grid-template-rows: 48px minmax(0, 1fr) !important;
+    align-content: stretch !important;
     margin: 0 !important;
+    padding: 0 !important;
     overflow: visible !important;
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
+  }
+
+  .capital-frame__return-manifold > header {
+    align-self: stretch !important;
+    min-height: 0 !important;
+  }
+
+  .capital-frame__return-manifold > div {
+    min-height: 0 !important;
+    align-self: stretch !important;
   }
 }
 
@@ -275,5 +291,11 @@
   .capital-frame__conversion-stage {
     height: auto !important;
     max-height: none !important;
+  }
+
+  .capital-frame__return-manifold {
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
   }
 }
