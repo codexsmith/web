@@ -182,8 +182,11 @@
 /* Diligence / right rail cards                                                */
 /* -------------------------------------------------------------------------- */
 
+/* The gate rail now carries only the five irreducible diligence tests. Its
+   earlier 126px floor was sized for long examples + required-state metadata;
+   after compression the cards should be allowed to become physically shorter. */
 .capital-frame__diligence-gates li {
-  min-height: 126px !important;
+  min-height: 96px !important;
 }
 
 .capital-frame__diligence-gates li > span {
@@ -196,9 +199,9 @@
 }
 
 .capital-frame__diligence-gates p {
-  margin-top: 8px !important;
+  margin-top: 5px !important;
   font-size: .69rem !important;
-  line-height: 1.48 !important;
+  line-height: 1.42 !important;
 }
 
 .capital-frame__diligence-gates small {
