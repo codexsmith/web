@@ -318,66 +318,68 @@ export function LabMachine({
         <strong>THE LAB MACHINE</strong>
         <span>Powered by Research. Built for People.</span>
       </div>
-      <div className="bf-machine__board">
+      <div
+        className="bf-machine__board"
+        data-dragging={isDraggingApparatus ? "true" : undefined}
+        tabIndex={skin === "physical" ? 0 : undefined}
+        role={skin === "physical" ? "group" : undefined}
+        aria-label={skin === "physical" ? "Draggable Lab workspace. Use the pointer anywhere on the machine field to drag the apparatus, arrow keys to nudge, or Home to reset." : undefined}
+        title={skin === "physical" ? "Drag anywhere in the machine field to reposition the apparatus · Double-click or press Home to reset" : undefined}
+        onPointerDown={skin === "physical" ? (event) => {
+          if (event.button !== 0) return;
+          if ((event.target as HTMLElement).closest('[data-machine-node-interactive="true"], a, button, input, select, textarea')) return;
+          apparatusDrag.current = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            startY: event.clientY,
+            originX: apparatusOffset.x,
+            originY: apparatusOffset.y,
+          };
+          event.currentTarget.setPointerCapture(event.pointerId);
+          setIsDraggingApparatus(true);
+        } : undefined}
+        onPointerMove={skin === "physical" ? (event) => {
+          const drag = apparatusDrag.current;
+          if (!drag || drag.pointerId !== event.pointerId) return;
+          const x = Math.max(-700, Math.min(700, drag.originX + event.clientX - drag.startX));
+          const y = Math.max(-260, Math.min(260, drag.originY + event.clientY - drag.startY));
+          setApparatusOffset({ x, y });
+        } : undefined}
+        onPointerUp={skin === "physical" ? (event) => {
+          if (apparatusDrag.current?.pointerId !== event.pointerId) return;
+          apparatusDrag.current = null;
+          setIsDraggingApparatus(false);
+          event.currentTarget.releasePointerCapture(event.pointerId);
+        } : undefined}
+        onPointerCancel={skin === "physical" ? () => {
+          apparatusDrag.current = null;
+          setIsDraggingApparatus(false);
+        } : undefined}
+        onDoubleClick={skin === "physical" ? () => setApparatusOffset({ x: 0, y: 0 }) : undefined}
+        onKeyDown={skin === "physical" ? (event) => {
+          if (event.key === "Home") {
+            event.preventDefault();
+            setApparatusOffset({ x: 0, y: 0 });
+            return;
+          }
+          const delta = event.shiftKey ? 40 : 12;
+          let movement: { x: number; y: number } | null = null;
+          if (event.key === "ArrowLeft") movement = { x: -delta, y: 0 };
+          if (event.key === "ArrowRight") movement = { x: delta, y: 0 };
+          if (event.key === "ArrowUp") movement = { x: 0, y: -delta };
+          if (event.key === "ArrowDown") movement = { x: 0, y: delta };
+          if (movement === null) return;
+          event.preventDefault();
+          setApparatusOffset((current) => ({
+            x: Math.max(-700, Math.min(700, current.x + movement.x)),
+            y: Math.max(-260, Math.min(260, current.y + movement.y)),
+          }));
+        } : undefined}
+      >
         {skin === "physical" ? <PhysicalStatus /> : null}
         <div
           className="bf-machine__apparatus"
-          data-dragging={isDraggingApparatus ? "true" : undefined}
           style={skin === "physical" ? { transform: `translate3d(${apparatusOffset.x}px, ${apparatusOffset.y}px, 0)` } : undefined}
-          tabIndex={skin === "physical" ? 0 : undefined}
-          role={skin === "physical" ? "group" : undefined}
-          aria-label={skin === "physical" ? "Draggable Lab apparatus. Use the pointer to drag, arrow keys to nudge, or Home to reset." : undefined}
-          title={skin === "physical" ? "Drag to reposition the apparatus · Double-click or press Home to reset" : undefined}
-          onPointerDown={skin === "physical" ? (event) => {
-            if (event.button !== 0) return;
-            if ((event.target as HTMLElement).closest('[data-machine-node-interactive="true"], a, button, input, select, textarea')) return;
-            apparatusDrag.current = {
-              pointerId: event.pointerId,
-              startX: event.clientX,
-              startY: event.clientY,
-              originX: apparatusOffset.x,
-              originY: apparatusOffset.y,
-            };
-            event.currentTarget.setPointerCapture(event.pointerId);
-            setIsDraggingApparatus(true);
-          } : undefined}
-          onPointerMove={skin === "physical" ? (event) => {
-            const drag = apparatusDrag.current;
-            if (!drag || drag.pointerId !== event.pointerId) return;
-            const x = Math.max(-700, Math.min(700, drag.originX + event.clientX - drag.startX));
-            const y = Math.max(-260, Math.min(260, drag.originY + event.clientY - drag.startY));
-            setApparatusOffset({ x, y });
-          } : undefined}
-          onPointerUp={skin === "physical" ? (event) => {
-            if (apparatusDrag.current?.pointerId !== event.pointerId) return;
-            apparatusDrag.current = null;
-            setIsDraggingApparatus(false);
-            event.currentTarget.releasePointerCapture(event.pointerId);
-          } : undefined}
-          onPointerCancel={skin === "physical" ? () => {
-            apparatusDrag.current = null;
-            setIsDraggingApparatus(false);
-          } : undefined}
-          onDoubleClick={skin === "physical" ? () => setApparatusOffset({ x: 0, y: 0 }) : undefined}
-          onKeyDown={skin === "physical" ? (event) => {
-            if (event.key === "Home") {
-              event.preventDefault();
-              setApparatusOffset({ x: 0, y: 0 });
-              return;
-            }
-            const delta = event.shiftKey ? 40 : 12;
-            let movement: { x: number; y: number } | null = null;
-            if (event.key === "ArrowLeft") movement = { x: -delta, y: 0 };
-            if (event.key === "ArrowRight") movement = { x: delta, y: 0 };
-            if (event.key === "ArrowUp") movement = { x: 0, y: -delta };
-            if (event.key === "ArrowDown") movement = { x: 0, y: delta };
-            if (movement === null) return;
-            event.preventDefault();
-            setApparatusOffset((current) => ({
-              x: Math.max(-700, Math.min(700, current.x + movement.x)),
-              y: Math.max(-260, Math.min(260, current.y + movement.y)),
-            }));
-          } : undefined}
         >
           <svg className="bf-machine__traces" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
             {visibleEdges.map((edge) => {
