@@ -42,6 +42,7 @@
   flex: 1 1 auto !important;
   flex-direction: column !important;
   justify-content: center !important;
+  align-items: flex-start !important;
   min-width: 0 !important;
   width: 100% !important;
   height: 100% !important;
@@ -50,23 +51,68 @@
   overflow: hidden;
 }
 
-.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header span,
+/* The compact card reads as one title followed by two small operational badges.
+ * We intentionally reuse the existing eyebrow/title slots so the launcher keeps
+ * its proven geometry while the information hierarchy becomes much cleaner. */
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
+  order: 0;
   display: block;
   min-width: 0;
   max-width: 100%;
+  margin: 0 !important;
   overflow: hidden;
-  text-overflow: ellipsis;
+  color: transparent;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  text-overflow: clip;
   white-space: nowrap;
 }
 
-.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header span {
-  font-size: clamp(.42rem, .46vw, .5rem) !important;
-  line-height: 1.1 !important;
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong::before {
+  content: "Tour";
+  display: block;
+  color: #f0efe9;
+  font: 500 clamp(.98rem, 1vw, 1.08rem)/1.02 Georgia, serif;
+  letter-spacing: -.015em;
 }
 
-.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
-  margin-top: .18rem !important;
-  font-size: clamp(.88rem, .96vw, 1.04rem) !important;
-  line-height: 1.02 !important;
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span {
+  order: 1;
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  min-width: 0;
+  max-width: 100%;
+  margin-top: 5px;
+  overflow: visible;
+  color: transparent;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span::before,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span::after {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  min-height: 14px;
+  padding: 2px 5px;
+  border: 1px solid color-mix(in srgb, var(--tone) 44%, #45504d);
+  border-radius: 2px;
+  color: color-mix(in srgb, var(--tone) 88%, #eef2ee);
+  background: color-mix(in srgb, var(--tone) 7%, #0b1110);
+  box-shadow: inset 0 1px rgba(255,255,255,.04), 0 1px 2px rgba(0,0,0,.5);
+  font: 700 .42rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span::before {
+  content: "Start here";
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span::after {
+  content: "5 min";
 }
