@@ -95,32 +95,32 @@
   box-shadow: none !important;
 }
 
-/* Static engagement cadence, revised from the earlier perimeter teeth. Two
-   shallow guide rails with spaced mounting slots suggest a machine bed / track
-   while leaving the engine visually open and subordinate to the cycle conduit. */
+/* Quiet mounting datum. The earlier teeth/track treatment was too surface-like;
+   two thin guide rails with widely spaced registration slots imply engagement
+   without becoming a competing texture. */
 .capital-frame__machine-bed-body::before {
   content: "";
   position: absolute;
   z-index: 0;
   left: 10px;
   right: 10px;
-  top: 5px;
-  bottom: 5px;
+  top: 6px;
+  bottom: 6px;
   pointer-events: none;
   background:
     repeating-linear-gradient(90deg,
-      color-mix(in srgb, var(--engine-drive) 24%, transparent) 0 12px,
-      transparent 12px 44px) top left / 100% 5px no-repeat,
+      color-mix(in srgb, var(--engine-drive) 18%, transparent) 0 14px,
+      transparent 14px 58px) top left / 100% 3px no-repeat,
     linear-gradient(90deg,
-      color-mix(in srgb, var(--engine-drive) 13%, transparent),
-      color-mix(in srgb, var(--engine-drive) 5%, transparent)) top 4px left / 100% 1px no-repeat,
+      color-mix(in srgb, var(--engine-drive) 8%, transparent),
+      color-mix(in srgb, var(--engine-drive) 3%, transparent)) top 2px left / 100% 1px no-repeat,
     repeating-linear-gradient(90deg,
-      color-mix(in srgb, var(--engine-return) 22%, transparent) 0 12px,
-      transparent 12px 44px) bottom left / 100% 5px no-repeat,
+      color-mix(in srgb, var(--engine-return) 17%, transparent) 0 14px,
+      transparent 14px 58px) bottom left / 100% 3px no-repeat,
     linear-gradient(90deg,
-      color-mix(in srgb, var(--engine-return) 5%, transparent),
-      color-mix(in srgb, var(--engine-return) 13%, transparent)) bottom 4px left / 100% 1px no-repeat;
-  opacity: .48;
+      color-mix(in srgb, var(--engine-return) 3%, transparent),
+      color-mix(in srgb, var(--engine-return) 8%, transparent)) bottom 2px left / 100% 1px no-repeat;
+  opacity: .30;
 }
 
 /* -------------------------------------------------------------------------- */
