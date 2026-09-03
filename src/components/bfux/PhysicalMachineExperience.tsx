@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
@@ -9,6 +9,20 @@ import "./five-minute-tour.css";
 import "./five-minute-tour-fit.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
+const desktopFitQuery = "(min-width: 1025px)";
+const targetMachineWidthRatio = 0.82;
+
+type MachineFit = {
+  enabled: boolean;
+  scale: number;
+  height: number;
+};
+
+const defaultMachineFit: MachineFit = {
+  enabled: false,
+  scale: 1,
+  height: 0,
+};
 
 function readStoredResolution() {
   if (typeof window === "undefined") return undefined;
@@ -57,7 +71,9 @@ export function PhysicalMachineExperience({
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
+  const [machineFit, setMachineFit] = useState<MachineFit>(defaultMachineFit);
   const machineHostRef = useRef<HTMLDivElement>(null);
+  const machineStackRef = useRef<HTMLDivElement>(null);
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
@@ -78,6 +94,66 @@ export function PhysicalMachineExperience({
 
     return () => window.cancelAnimationFrame(frame);
   }, [initialResolution, onResolutionChange, sectionLabel]);
+
+  useLayoutEffect(() => {
+    if (sectionSurface) {
+      setMachineFit(defaultMachineFit);
+      return;
+    }
+
+    const host = machineHostRef.current;
+    const stack = machineStackRef.current;
+    if (!host || !stack) return;
+
+    let frame = 0;
+
+    const updateFit = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        if (!window.matchMedia(desktopFitQuery).matches) {
+          setMachineFit((current) => current.enabled ? defaultMachineFit : current);
+          return;
+        }
+
+        const hostWidth = host.clientWidth;
+        const sourceWidth = Math.max(stack.offsetWidth, stack.scrollWidth);
+        const sourceHeight = Math.max(stack.offsetHeight, stack.scrollHeight);
+        if (!hostWidth || !sourceWidth || !sourceHeight) return;
+
+        const targetWidth = hostWidth * targetMachineWidthRatio;
+        const horizontalScale = targetWidth / sourceWidth;
+        const availableHeight = Math.max(360, window.innerHeight - host.getBoundingClientRect().top - 20);
+        const verticalScale = availableHeight / sourceHeight;
+        const scale = Math.max(0.6, Math.min(0.9, horizontalScale, verticalScale));
+        const height = Math.ceil(sourceHeight * scale);
+
+        setMachineFit((current) => {
+          if (
+            current.enabled
+            && Math.abs(current.scale - scale) < 0.002
+            && Math.abs(current.height - height) < 2
+          ) {
+            return current;
+          }
+
+          return { enabled: true, scale, height };
+        });
+      });
+    };
+
+    updateFit();
+    window.addEventListener("resize", updateFit, { passive: true });
+
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(updateFit);
+    observer?.observe(host);
+    observer?.observe(stack);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", updateFit);
+      observer?.disconnect();
+    };
+  }, [activeResolution, sectionSurface]);
 
   useEffect(() => {
     if (sectionSurface) {
@@ -107,13 +183,23 @@ export function PhysicalMachineExperience({
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
       ) : (
-        <div className="physical-machine-experience__machine-stack">
-          <LabMachine
-            skin="physical"
-            showSchematic={showSchematic}
-            resolution={activeResolution}
-            onOpenNode={openNode}
-          />
+        <div
+          className="physical-machine-experience__fit-stage"
+          data-auto-fit={machineFit.enabled ? "true" : undefined}
+          style={machineFit.enabled ? { height: machineFit.height } : undefined}
+        >
+          <div
+            className="physical-machine-experience__machine-stack"
+            ref={machineStackRef}
+            style={machineFit.enabled ? { transform: `scale(${machineFit.scale})` } : undefined}
+          >
+            <LabMachine
+              skin="physical"
+              showSchematic={showSchematic}
+              resolution={activeResolution}
+              onOpenNode={openNode}
+            />
+          </div>
         </div>
       )}
 

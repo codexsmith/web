@@ -1,5 +1,21 @@
 .physical-machine-experience{position:relative;min-width:0}
+.physical-machine-experience__fit-stage{position:relative;width:100%;min-width:0}
 .physical-machine-experience__machine-stack{position:relative;min-width:0}
+
+@media(min-width:1025px){
+  .physical-machine-experience__fit-stage{
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    justify-items:center;
+    overflow:clip;
+  }
+
+  .physical-machine-experience__fit-stage .physical-machine-experience__machine-stack{
+    width:max(100%,1120px);
+    transform-origin:top center;
+  }
+}
+
 .world-machine-resolution{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem .55rem;margin:.5rem .65rem .25rem;padding:.42rem .5rem;border:1px solid #314047;border-radius:8px;background:#0d1518;color:#cfd7d8}
 .world-machine-resolution__label{order:1;display:grid;gap:.1rem;min-width:8rem;flex:0 0 auto}
 .world-machine-resolution__label small{color:#79b3d2;font:700 .42rem/1 ui-monospace,monospace;letter-spacing:.15em}
