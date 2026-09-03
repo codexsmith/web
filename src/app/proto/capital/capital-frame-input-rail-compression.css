@@ -1,0 +1,75 @@
+/* Capital prototype · Left intake rail compression
+
+   The structured funding object keeps the full relationship type, legal posture,
+   closure semantics, and claim boundaries. The intake rail does not need to
+   repeat all of that metadata on its front panel.
+
+   Projection law:
+     - preserve the four funding routes and the difficult-system input;
+     - show each port as title + one useful capability line;
+     - suppress IN-xx / capital-type register strips in this projection;
+     - remove the redundant Resource Manifold eyebrow;
+     - keep connector hardware and semantic affinity unchanged.
+*/
+
+.capital-frame__input-console {
+  gap: 8px !important;
+}
+
+.capital-frame__input-console > .capital-frame__console-heading {
+  padding: 9px 10px !important;
+}
+
+.capital-frame__input-console > .capital-frame__console-heading > span {
+  display: none !important;
+}
+
+.capital-frame__input-console > .capital-frame__console-heading h2 {
+  margin: 0 !important;
+  font-size: .78rem !important;
+  line-height: 1.15 !important;
+}
+
+.capital-frame__funding-ports {
+  gap: 7px !important;
+}
+
+.capital-frame__funding-port,
+.capital-frame__problem-port {
+  min-height: 0 !important;
+  padding: 9px 10px !important;
+}
+
+/* IN-xx + capitalType / REALITY INPUT + PROBLEM are useful source metadata,
+   but visually duplicate the already-distinct port identity and affinity. */
+.capital-frame__funding-port > header,
+.capital-frame__problem-port > header {
+  display: none !important;
+}
+
+.capital-frame__funding-port h3,
+.capital-frame__problem-port h3 {
+  margin: 0 !important;
+  font-size: .78rem !important;
+  line-height: 1.16 !important;
+}
+
+.capital-frame__funding-port p,
+.capital-frame__problem-port p {
+  margin: 5px 0 0 !important;
+  font-size: .69rem !important;
+  line-height: 1.42 !important;
+}
+
+.capital-frame__problem-port {
+  margin-top: 0 !important;
+}
+
+/* The manifold terminal remains vertically centered against the now-shorter
+   cards; no connector geometry changes are needed. */
+.capital-frame__funding-port > i,
+.capital-frame__problem-port > i,
+.capital-frame__funding-port::after,
+.capital-frame__problem-port::after {
+  top: 50% !important;
+}
