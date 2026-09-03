@@ -36,26 +36,27 @@
   max-height: 100% !important;
 }
 
+/* The compact launcher is one horizontal assembly:
+ * clock cartridge | Tour | stacked Start here / 5 min badges. */
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header {
   box-sizing: border-box !important;
-  display: flex !important;
-  flex: 1 1 auto !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: flex-start !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  grid-template-rows: 1fr !important;
+  align-items: center !important;
+  column-gap: 12px !important;
   min-width: 0 !important;
   width: 100% !important;
   height: 100% !important;
   min-height: 0 !important;
-  padding: 0 8px 0 62px !important;
+  padding: 0 10px 0 62px !important;
   overflow: hidden;
 }
 
-/* The compact card reads as one title followed by two small operational badges.
- * We intentionally reuse the existing eyebrow/title slots so the launcher keeps
- * its proven geometry while the information hierarchy becomes much cleaner. */
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
-  order: 0;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
   display: block;
   min-width: 0;
   max-width: 100%;
@@ -77,14 +78,17 @@
 }
 
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span {
-  order: 1;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
   display: flex !important;
   flex-direction: column;
   align-items: flex-start;
   gap: 3px;
   min-width: 0;
   max-width: 100%;
-  margin-top: 5px;
+  margin: 0;
   overflow: visible;
   color: transparent;
   font-size: 0 !important;
