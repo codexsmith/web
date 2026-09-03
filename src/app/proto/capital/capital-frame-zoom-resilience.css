@@ -1,19 +1,20 @@
 /* Capital prototype · Zoom Resilience Pass
 
-   Browser zoom changes the effective CSS viewport. On a desktop that should not
-   silently turn a spatial machine into a different topology or stretch one side
-   of the apparatus away from the other.
+   Browser zoom changes the effective CSS viewport. A spatial machine should
+   magnify or recede without changing its own proportions.
 
    Law:
-     - the page shell may fill the viewport;
+     - the apparatus has a bounded desktop design-width envelope;
+     - zooming IN preserves the machine and produces horizontal pan;
+     - zooming OUT stops expanding the machine once the design width is reached;
+     - the side manifolds remain fixed-width reference assemblies;
+     - only the engine absorbs the small permitted desktop width range;
      - the apparatus is content-sized vertically;
-     - fine-pointer desktop preserves the three-column machine topology;
-     - heavy desktop zoom produces horizontal pan, not asymmetric reflow;
-     - coarse-pointer / mobile may collapse to the linear projection;
-     - conversion cards grow only when their content actually requires it.
+     - coarse-pointer / mobile may collapse to the linear projection.
 
-   End-interface geometry remains:
-     CONDUIT | 20px BANK | 20px BANK | STAGE
+   Current end-interface geometry:
+     LEFT  : CONDUIT | INTAKE PLATE | 5-PORT BANK | CAPITAL
+     RIGHT : RETAINED | 5-PORT BANK | INSPECT PLATE | CONDUIT
 */
 
 .capital-prototype-page {
@@ -53,7 +54,7 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* DESKTOP TOPOLOGY · zoom preserves the machine                              */
+/* DESKTOP TOPOLOGY · bounded design width                                    */
 /* -------------------------------------------------------------------------- */
 
 @media (hover: hover) and (pointer: fine) {
@@ -62,29 +63,64 @@
     overflow-y: visible;
   }
 
-  /* The complete apparatus needs enough physical width for both manifolds and
-     the conversion engine. Browser zoom may shrink the CSS viewport, but the
-     machine itself does not change identity merely because that happened. */
   .capital-frame {
-    min-width: 1500px;
+    /*
+     * 1500px is the narrowest width at which the complete three-part apparatus
+     * remains lawful without reflowing. 1694px is the natural design width:
+     *
+     *   32px body padding
+     * + 270px intake manifold
+     * + 16px gap
+     * + 1040px engine
+     * + 16px gap
+     * + 320px diligence manifold
+     * = 1694px
+     *
+     * At browser zoom > 100%, the frame remains at least 1500px and the page
+     * scrolls horizontally. At browser zoom < 100%, it stops growing at 1694px
+     * and auto margins center it in the larger effective CSS viewport.
+     */
+    --capital-apparatus-min-width: 1500px;
+    --capital-apparatus-max-width: 1694px;
+    --capital-engine-max-width: 1040px;
+
+    box-sizing: border-box;
+    width: clamp(
+      var(--capital-apparatus-min-width),
+      100%,
+      var(--capital-apparatus-max-width)
+    );
+    min-width: var(--capital-apparatus-min-width);
+    max-width: var(--capital-apparatus-max-width);
+    margin-inline: auto;
   }
 
+  /* The side assemblies are reference geometry. The engine is the only column
+     allowed to absorb the modest 194px design-width range. This prevents low
+     browser zoom from turning the conversion rail into an ultra-wide pancake. */
   .capital-frame__body {
-    grid-template-columns: 270px minmax(840px, 1fr) 320px;
+    grid-template-columns: 270px minmax(840px, var(--capital-engine-max-width)) 320px;
+    justify-content: center;
     gap: 16px;
     min-width: 0;
   }
 
   .capital-frame__input-console {
+    width: 270px;
     min-width: 270px;
+    max-width: 270px;
   }
 
   .capital-frame__engine {
+    width: 100%;
     min-width: 840px;
+    max-width: var(--capital-engine-max-width);
   }
 
   .capital-frame__diligence-console {
+    width: 320px;
     min-width: 320px;
+    max-width: 320px;
   }
 
   /* Keep both side assemblies independently content-led. The right diligence
@@ -102,7 +138,7 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* END INTERFACES · 20px + 20px bridge                                        */
+/* END INTERFACES · 20px interface module + 20px five-port bank               */
 /* -------------------------------------------------------------------------- */
 
 @media (hover: hover) and (pointer: fine) {
@@ -111,6 +147,7 @@
     --capital-end-gap: 40px;
   }
 
+  /* Left boundary: INTAKE is the outer 20px module; ::after is the live bank. */
   .capital-frame__conversion-stage[data-stage-id="capital"]::before {
     left: calc(var(--capital-end-gap) * -1) !important;
     width: var(--capital-end-bank-width) !important;
@@ -121,6 +158,7 @@
     width: var(--capital-end-bank-width) !important;
   }
 
+  /* Right boundary: the terminal is the live bank; ::after is INSPECT. */
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
     right: calc(var(--capital-end-bank-width) * -1) !important;
     width: var(--capital-end-bank-width) !important;
@@ -138,7 +176,10 @@
 
 @media (pointer: coarse), (max-width: 760px) {
   .capital-frame {
+    width: auto;
     min-width: 0;
+    max-width: none;
+    margin-inline: 0;
   }
 
   .capital-frame__conversion-stage {
@@ -148,7 +189,9 @@
   .capital-frame__input-console,
   .capital-frame__engine,
   .capital-frame__diligence-console {
+    width: auto;
     min-width: 0;
+    max-width: none;
     height: auto;
   }
 }
