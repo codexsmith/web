@@ -1,0 +1,189 @@
+/* Capital prototype · Primary conversion rail assembly
+
+   The six conversion stages are no longer a separate row beneath a header.
+   The conduit housing itself is the rail assembly:
+
+     PRIMARY CONVERSION RAIL
+     [ Capital ][ Capacity ][ Work ][ Validation ][ Transfer ][ Retained ]
+
+   Important invariants:
+     - preserve the existing stage cards and every connector exactly;
+     - keep the paired five-contact multiplex banks at both rail boundaries;
+     - attach INTAKE / INSPECT to those actual boundary interfaces;
+     - retire the old shoulder fittings and shoulder-mounted labels;
+     - preserve the coarse-pointer/mobile linear projection.
+*/
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-frame {
+    --capital-rail-shell-height: 272px;
+    --capital-rail-card-top: 76px;
+    --capital-end-label-width: 34px;
+    --capital-end-label-height: 76px;
+  }
+
+  .capital-frame__engine {
+    position: relative !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* One tall conduit housing                                                */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__engine-heading {
+    order: 10;
+    position: relative !important;
+    z-index: 40 !important;
+    min-height: var(--capital-rail-shell-height) !important;
+    height: var(--capital-rail-shell-height) !important;
+    display: block !important;
+    margin-top: 18px !important;
+    margin-bottom: 18px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border-radius: 18px !important;
+  }
+
+  .capital-frame__engine-heading > div {
+    position: absolute !important;
+    z-index: 90 !important;
+    top: 17px !important;
+    left: calc(var(--capital-header-side-extension) + 18px) !important;
+    width: auto !important;
+  }
+
+  .capital-frame__engine-heading h2 {
+    margin: 0 !important;
+    font-size: clamp(.78rem, .9vw, .98rem) !important;
+    line-height: 1 !important;
+    letter-spacing: .16em !important;
+  }
+
+  /* The old elbow/fitting pieces represented the previous topology, where the
+     rail was only a narrow trunk. The enlarged housing now owns its own rounded
+     silhouette; side risers meet the real end interfaces instead. */
+  .capital-frame__engine-heading::before,
+  .capital-frame__engine-heading::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* Existing conversion cards mounted inside the conduit                    */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__conversion-rail {
+    order: 20;
+    position: absolute !important;
+    z-index: 80 !important;
+    top: var(--capital-rail-card-top) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: auto !important;
+    margin: 0 !important;
+    isolation: isolate;
+  }
+
+  /* Preserve the card family literally. Only allow the two boundary cards to
+     expose their already-established multiplex hardware and attached plaques. */
+  .capital-frame__conversion-stage[data-stage-id="capital"],
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
+    overflow: visible !important;
+  }
+
+  /* Side risers are infrastructure behind the cards but in front of the large
+     conduit face. That makes the bank pairs visibly terminate into a real rail
+     instead of disappearing beneath the enlarged housing. */
+  .capital-frame__input-console::after,
+  .capital-frame__diligence-console::after {
+    top: 18px !important;
+    z-index: 55 !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* Retire shoulder labels                                                  */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__input-console::before,
+  .capital-frame__diligence-console::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* Boundary labels mounted to the multiplex connector ends                 */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__conversion-stage[data-stage-id="capital"] > header,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header {
+    position: static !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"] > header::before,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header::after {
+    position: absolute;
+    z-index: 1600;
+    top: 50%;
+    box-sizing: border-box;
+    width: var(--capital-end-label-width);
+    height: var(--capital-end-label-height);
+    display: grid;
+    place-items: center;
+    padding: 8px 6px;
+    transform: translateY(-50%);
+    border: 1px solid var(--bf-etched-line-strong);
+    border-radius: 5px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.055), transparent 32%),
+      linear-gradient(180deg, #303a3f, #151c20);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.05),
+      inset 0 -1px 0 rgba(0,0,0,.48),
+      0 4px 10px rgba(0,0,0,.38);
+    color: var(--bf-text-primary);
+    text-shadow: 0 1px 0 rgba(0,0,0,.72);
+    font: 900 .54rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: .12em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    pointer-events: none;
+  }
+
+  /* The pair occupies exactly --capital-end-gap from the card edge. The label
+     touches the OUTER edge of that pair: no decorative arm, no floating gap. */
+  .capital-frame__conversion-stage[data-stage-id="capital"] > header::before {
+    content: "INTAKE";
+    left: calc(0px - var(--capital-end-gap) - var(--capital-end-label-width));
+    border-color: color-mix(in srgb, var(--capital-end-input-tone) 60%, var(--bf-etched-line-strong));
+    color: color-mix(in srgb, var(--capital-end-input-tone) 72%, var(--bf-white-050));
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header::after {
+    content: "INSPECT";
+    left: calc(100% + var(--capital-end-gap));
+    border-color: color-mix(in srgb, var(--capital-end-return-tone) 60%, var(--bf-etched-line-strong));
+    color: color-mix(in srgb, var(--capital-end-return-tone) 76%, var(--bf-white-050));
+  }
+
+  /* The next major machine begins after the tall rail housing. Because the
+     conversion row is absolutely mounted inside the housing, it contributes no
+     separate grid track of its own. */
+  .capital-frame__machine-bed {
+    order: 30;
+  }
+}
+
+/* Mobile/coarse-pointer retains the content-led linear projection. The rail
+   cards return to normal flow and the top conduit is again just a compact name. */
+@media (pointer: coarse), (max-width: 760px) {
+  .capital-frame__engine-heading {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .capital-frame__conversion-rail {
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+  }
+}
