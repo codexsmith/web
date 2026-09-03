@@ -20,13 +20,21 @@
 
    The labels are therefore hardware, not annotations. This removes the extra
    z-layer entirely and makes the interface legible as one manufactured unit.
+
+   Geometry law:
+     - the rail housing owns the rounded silhouette;
+     - side risers pass behind that housing, never over its upper corners;
+     - the six-card bank is explicitly sized as machinery inside the rail;
+     - the title occupies a compact service bay rather than a large empty header.
 */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
-    /* Compact upper service bay + enough lower lip to contain the full cards. */
-    --capital-rail-shell-height: 292px;
-    --capital-rail-card-top: 60px;
+    /* Spend less rail height above the cards and enough below them to leave a
+       real structural lip. The bank itself gets an explicit desktop scale. */
+    --capital-rail-shell-height: 300px;
+    --capital-rail-card-top: 44px;
+    --capital-rail-card-min-height: 208px;
   }
 
   .capital-frame__engine {
@@ -45,13 +53,17 @@
     height: var(--capital-rail-shell-height) !important;
     display: block !important;
     margin-top: 18px !important;
-    margin-bottom: 18px !important;
+    margin-bottom: 16px !important;
     padding: 0 !important;
-    overflow: visible !important;
+    /* The rail housing owns the visible silhouette. Its own texture/background
+       is clipped to the radius, while the conversion cards remain a sibling
+       layer and therefore are not clipped by this overflow rule. */
+    overflow: hidden !important;
     border-radius: 22px 22px 12px 12px !important;
     border-top-left-radius: 22px !important;
     border-top-right-radius: 22px !important;
     background-clip: padding-box !important;
+    isolation: isolate;
     box-shadow:
       inset 0 2px 0 rgba(255,255,255,.035),
       inset 0 -3px 0 rgba(0,0,0,.30),
@@ -62,7 +74,7 @@
   .capital-frame__engine-heading > div {
     position: absolute !important;
     z-index: 90 !important;
-    top: 13px !important;
+    top: 9px !important;
     left: calc(var(--capital-header-side-extension) + 18px) !important;
     width: auto !important;
   }
@@ -70,7 +82,7 @@
   .capital-frame__engine-heading h2 {
     margin: 0 !important;
     color: color-mix(in srgb, #dce9ec 92%, #8ba2aa) !important;
-    font-size: clamp(.82rem, .94vw, 1rem) !important;
+    font-size: clamp(.84rem, .96vw, 1.02rem) !important;
     line-height: 1 !important;
     font-weight: 850 !important;
     letter-spacing: .17em !important;
@@ -99,7 +111,32 @@
     right: 0 !important;
     width: auto !important;
     margin: 0 !important;
+    align-items: stretch !important;
     isolation: isolate;
+    transform: none !important;
+  }
+
+  /* The housing grew during integration but the cards were still relying on
+     inherited minimums. Give the complete bank a deliberate physical scale so
+     it reads as the rail's machinery rather than a miniature row inside it. */
+  .capital-frame__conversion-stage {
+    min-height: var(--capital-rail-card-min-height) !important;
+    align-self: stretch !important;
+  }
+
+  .capital-frame__conversion-stage > div {
+    padding-top: 18px !important;
+    padding-bottom: 38px !important;
+  }
+
+  .capital-frame__conversion-stage h3 {
+    font-size: .88rem !important;
+    line-height: 1.14 !important;
+  }
+
+  .capital-frame__conversion-stage p {
+    font-size: .74rem !important;
+    line-height: 1.46 !important;
   }
 
   .capital-frame__conversion-stage[data-stage-id="capital"],
@@ -127,11 +164,13 @@
       0 2px 5px rgba(0,0,0,.26) !important;
   }
 
-  /* Side risers remain infrastructure behind the card bank. */
+  /* Side risers are infrastructure BEHIND the rail shell. The prior z=55 put
+     them above the z=40 housing and visually squared the top corners. Connector
+     hardware remains at z=1600, so the actual end interfaces still sit on top. */
   .capital-frame__input-console::after,
   .capital-frame__diligence-console::after {
     top: 18px !important;
-    z-index: 55 !important;
+    z-index: 35 !important;
   }
 
   /* Shoulder-era labels are fully retired. */
@@ -160,8 +199,8 @@
   /* ---------------------------------------------------------------------- */
 
   /* `capital::before` is already the conduit-side member of the paired end
-     interface. Keep its exact 20px x 74px geometry and position, but replace
-     the five hollow contacts with a labeled mounted interface plate. */
+     interface. Keep its exact bank geometry and position, but replace the five
+     hollow contacts with a labeled mounted interface plate. */
   .capital-frame__conversion-stage[data-stage-id="capital"]::before {
     content: "INTAKE" !important;
     display: grid !important;
@@ -247,11 +286,16 @@
   .capital-frame__engine-heading {
     min-height: 0 !important;
     height: auto !important;
+    overflow: visible !important;
   }
 
   .capital-frame__conversion-rail {
     position: relative !important;
     inset: auto !important;
     width: auto !important;
+  }
+
+  .capital-frame__conversion-stage {
+    min-height: 0 !important;
   }
 }
