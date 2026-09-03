@@ -379,83 +379,107 @@ export function CapitalEconomicsFrame() {
         </aside>
 
         <main className="capital-frame__engine" aria-labelledby="conversion-engine-title">
-          <header className="capital-frame__engine-heading">
-            <div>
-              <h2 id="conversion-engine-title">Primary conversion rail</h2>
-            </div>
-          </header>
+          <section className="capital-frame__cycle-loop" aria-label="Primary capital conversion cycle">
+            <div className="capital-frame__cycle-loop-shell" aria-hidden="true" />
 
-          <section className="capital-frame__conversion-rail" aria-label="Capital conversion sequence">
-            {conversionStages.map((stage) => (
-              <ConversionStagePlate key={stage.id} stage={stage} />
-            ))}
-          </section>
-
-          <section className="capital-frame__machine-bed" aria-labelledby="machine-bed-title">
-            <header>
-              <span>Where conversion work happens</span>
-              <h2 id="machine-bed-title">The Lab holds the middle of the rail</h2>
+            <header className="capital-frame__engine-heading">
+              <div>
+                <h2 id="conversion-engine-title">Primary conversion rail</h2>
+              </div>
             </header>
-            <div className="capital-frame__machine-bed-body">
-              <div className="capital-frame__chassis">
-                <span className="capital-frame__chassis-mark" aria-hidden="true">BFL</span>
-                <div>
-                  <strong>Boundary First Labs</strong>
-                  <small>Research · engineering · governance · stewardship</small>
-                </div>
-              </div>
 
-              <div className="capital-frame__machine-functions" aria-label="Operational Lab machinery">
-                {machineFunctions.map((item, index) => (
-                  <article
-                    className="capital-frame__machine-function"
-                    key={item.id}
-                    data-machine-id={item.id}
-                    data-boundary-operation={item.operation}
-                    data-affinity={item.affinity}
-                  >
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <div>
-                      <small className="capital-frame__operation-label">{item.operation}</small>
-                      <h3>{item.label}</h3>
-                      <p>{item.copy}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
+            <section className="capital-frame__conversion-rail" aria-label="Capital conversion sequence">
+              {conversionStages.map((stage) => (
+                <ConversionStagePlate key={stage.id} stage={stage} />
+              ))}
+            </section>
 
-              <section className="capital-frame__stewardship-module" aria-labelledby="civics-stewardship-title">
-                <header>
+            <section className="capital-frame__machine-bed" aria-labelledby="machine-bed-title">
+              <header>
+                <span>Where conversion work happens</span>
+                <h2 id="machine-bed-title">The Lab holds the middle of the rail</h2>
+              </header>
+              <div className="capital-frame__machine-bed-body">
+                <div className="capital-frame__chassis">
+                  <span className="capital-frame__chassis-mark" aria-hidden="true">BFL</span>
                   <div>
-                    <span>Foundational responsibility module</span>
-                    <h3 id="civics-stewardship-title">Civics &amp; Stewardship</h3>
+                    <strong>Boundary First Labs</strong>
+                    <small>Research · engineering · governance · stewardship</small>
                   </div>
-                  <strong>PUBLIC CONSEQUENCE</strong>
-                </header>
+                </div>
 
-                <div className="capital-frame__stewardship-grid">
-                  {stewardshipFunctions.map((item, index) => (
+                <div className="capital-frame__machine-functions" aria-label="Operational Lab machinery">
+                  {machineFunctions.map((item, index) => (
                     <article
-                      className={`capital-frame__stewardship-card${item.id === "public-value" ? " is-public-value" : ""}`}
+                      className="capital-frame__machine-function"
                       key={item.id}
                       data-machine-id={item.id}
                       data-boundary-operation={item.operation}
                       data-affinity={item.affinity}
                     >
-                      <header>
-                        <span>S-{String(index + 1).padStart(2, "0")}</span>
-                        <span className="capital-frame__operation-label">{item.operation}</span>
-                        {item.id === "public-value" ? <strong>CONSEQUENCE TEST</strong> : null}
-                      </header>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
                       <div>
-                        <h4>{item.label}</h4>
+                        <small className="capital-frame__operation-label">{item.operation}</small>
+                        <h3>{item.label}</h3>
                         <p>{item.copy}</p>
                       </div>
                     </article>
                   ))}
                 </div>
-              </section>
-            </div>
+
+                <section className="capital-frame__stewardship-module" aria-labelledby="civics-stewardship-title">
+                  <header>
+                    <div>
+                      <span>Foundational responsibility module</span>
+                      <h3 id="civics-stewardship-title">Civics &amp; Stewardship</h3>
+                    </div>
+                    <strong>PUBLIC CONSEQUENCE</strong>
+                  </header>
+
+                  <div className="capital-frame__stewardship-grid">
+                    {stewardshipFunctions.map((item, index) => (
+                      <article
+                        className={`capital-frame__stewardship-card${item.id === "public-value" ? " is-public-value" : ""}`}
+                        key={item.id}
+                        data-machine-id={item.id}
+                        data-boundary-operation={item.operation}
+                        data-affinity={item.affinity}
+                      >
+                        <header>
+                          <span>S-{String(index + 1).padStart(2, "0")}</span>
+                          <span className="capital-frame__operation-label">{item.operation}</span>
+                          {item.id === "public-value" ? <strong>CONSEQUENCE TEST</strong> : null}
+                        </header>
+                        <div>
+                          <h4>{item.label}</h4>
+                          <p>{item.copy}</p>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            </section>
+
+            <section
+              className="capital-frame__return-manifold"
+              aria-labelledby="return-manifold-title"
+              data-boundary-operation="return"
+            >
+              <header>
+                <span>Value return / retained capability</span>
+                <h2 id="return-manifold-title">What remains after a cycle closes</h2>
+                <strong>feeds the next coherent-capacity state ↺</strong>
+              </header>
+              <div>
+                {retainedReturns.map((item) => (
+                  <article key={item.label} data-affinity={item.affinity}>
+                    <h3>{item.label}</h3>
+                    <p>{item.copy}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
           </section>
 
           <section className="capital-frame__institutional-rail" aria-labelledby="institutional-conversion-title">
@@ -466,26 +490,6 @@ export function CapitalEconomicsFrame() {
             <div className="capital-frame__institutional-stages">
               {institutionalStages.map((stage) => (
                 <InstitutionalStagePlate key={stage.id} stage={stage} />
-              ))}
-            </div>
-          </section>
-
-          <section
-            className="capital-frame__return-manifold"
-            aria-labelledby="return-manifold-title"
-            data-boundary-operation="return"
-          >
-            <header>
-              <span>Value return / retained capability</span>
-              <h2 id="return-manifold-title">What remains after a cycle closes</h2>
-              <strong>feeds the next coherent-capacity state ↺</strong>
-            </header>
-            <div>
-              {retainedReturns.map((item) => (
-                <article key={item.label} data-affinity={item.affinity}>
-                  <h3>{item.label}</h3>
-                  <p>{item.copy}</p>
-                </article>
               ))}
             </div>
           </section>
