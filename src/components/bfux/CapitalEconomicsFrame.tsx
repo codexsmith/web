@@ -386,13 +386,13 @@ export function CapitalEconomicsFrame() {
               <div>
                 <h2 id="conversion-engine-title">Primary conversion rail</h2>
               </div>
-            </header>
 
-            <section className="capital-frame__conversion-rail" aria-label="Capital conversion sequence">
-              {conversionStages.map((stage) => (
-                <ConversionStagePlate key={stage.id} stage={stage} />
-              ))}
-            </section>
+              <section className="capital-frame__conversion-rail" aria-label="Capital conversion sequence">
+                {conversionStages.map((stage) => (
+                  <ConversionStagePlate key={stage.id} stage={stage} />
+                ))}
+              </section>
+            </header>
 
             <section className="capital-frame__machine-bed" aria-labelledby="machine-bed-title">
               <header>
