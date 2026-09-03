@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./representation-lab.module.css";
 import x from "./representation-lab-expansion.module.css";
+import { TaskWorkbench } from "./TaskWorkbench";
 import {
   buildComparison,
   buildTrace,
@@ -176,6 +177,8 @@ export function RepresentationLab() {
             })}
           </div>
         </div>
+
+        <TaskWorkbench mode={mode} worldModel={trace.worldModel} comparison={comparison} onModeChange={loadMode} />
 
         <div className={styles.boundaryRail} aria-label="Representation boundary">
           <div className={styles.boundaryTitle}>
