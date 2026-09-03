@@ -4,21 +4,28 @@
 
 @media(min-width:1025px){
   .physical-machine-experience__fit-stage{
-    display:grid;
-    grid-template-columns:minmax(0,1fr);
-    justify-items:center;
-    overflow:clip;
+    width:100%;
+    overflow:visible;
   }
 
   .physical-machine-experience__fit-stage .physical-machine-experience__machine-stack{
-    width:max(100%,1120px);
+    width:100%;
+  }
+
+  /* Auto-fit belongs to the machine object itself, not its surrounding context.
+   * LabMachine renders the board and legend as siblings; scale only the board so
+   * the visual-grammar legend remains a full-width page-context instrument. */
+  .physical-machine-experience__fit-stage[data-auto-fit="true"]
+    .bf-machine[data-skin="physical"] .bf-machine__board{
+    transform:scale(var(--machine-fit-scale));
     transform-origin:top center;
+    margin-bottom:var(--machine-fit-margin-bottom);
   }
 
   /* The legacy ultra-wide skin swaps --machine-u from vw to vh at a 2:1
    * viewport ratio. That was useful when the entire machine had to stay above
    * the fold, but it fights the homepage auto-fit contract. While auto-fit is
-   * active, one width-governed ruler owns the whole physical instrument. */
+   * active, one width-governed ruler owns the physical instrument. */
   .physical-machine-experience__fit-stage[data-auto-fit="true"]
     .bf-machine[data-skin="physical"]{
     --machine-u:1vw !important;
