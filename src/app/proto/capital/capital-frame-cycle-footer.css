@@ -1,0 +1,232 @@
+/* Capital prototype · Conversion cycle footer
+
+   Durable output belongs to the primary conversion cycle.
+
+     PRIMARY CONVERSION RAIL
+              ↓
+       conversion stages
+              ↓
+          Lab engine
+              ↓
+     DURABLE / RETAINED OUTPUT
+
+   The institutional-conversion projection is still useful, but it is secondary
+   to this cycle. Keep it last for now so it does not interrupt the main machine.
+*/
+
+/* Preserve the conceptual order even while the prototype markup still carries
+   the earlier source order. The next markup cleanup can make DOM order match. */
+.capital-frame__engine-heading {
+  order: 10;
+}
+
+.capital-frame__conversion-rail {
+  order: 20;
+}
+
+.capital-frame__machine-bed {
+  order: 30;
+}
+
+.capital-frame__return-manifold {
+  order: 40;
+}
+
+.capital-frame__institutional-rail {
+  order: 50;
+  margin-top: 12px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Durable output footer                                                       */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__return-manifold {
+  position: relative;
+  z-index: 5;
+  overflow: hidden !important;
+  border: 1px solid var(--capital-conduit-edge, var(--bf-etched-line-strong)) !important;
+  border-radius: 14px !important;
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,.052) 0 1px,
+      transparent 1px 5px,
+      rgba(0,0,0,.16) 5px calc(100% - 5px),
+      rgba(255,255,255,.016) calc(100% - 5px) calc(100% - 2px),
+      rgba(0,0,0,.48) calc(100% - 2px) 100%),
+    repeating-linear-gradient(90deg,
+      var(--capital-conduit-highlight, rgba(255,255,255,.025)) 0 1px,
+      rgba(0,0,0,.10) 1px 4px,
+      transparent 4px 14px,
+      rgba(0,0,0,.065) 14px 16px,
+      transparent 16px 24px),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--capital-conduit-face, var(--bf-bg-raised)) 84%, #1c262c),
+      var(--capital-conduit-dark, #10171b)) !important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.024),
+    inset 0 -3px 0 rgba(0,0,0,.26),
+    0 7px 18px rgba(0,0,0,.26) !important;
+}
+
+/* Treat the existing header as the stamped lower nameplate of the same machine
+   family as PRIMARY CONVERSION RAIL. */
+.capital-frame__return-manifold > header {
+  min-height: 48px;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  grid-template-rows: auto auto !important;
+  align-content: center;
+  column-gap: 18px !important;
+  padding: 9px 18px 8px !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 78%, transparent) !important;
+  background: rgba(5,9,12,.22) !important;
+}
+
+.capital-frame__return-manifold > header span {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  color: color-mix(in srgb, var(--bf-valid) 58%, var(--bf-white-050)) !important;
+  font-size: .52rem !important;
+  letter-spacing: .12em !important;
+}
+
+.capital-frame__return-manifold > header h2 {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  margin: 3px 0 0 !important;
+  color: var(--bf-text-primary) !important;
+  font-size: .78rem !important;
+  line-height: 1.08 !important;
+  letter-spacing: .055em !important;
+}
+
+.capital-frame__return-manifold > header > strong {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  align-self: center !important;
+  color: color-mix(in srgb, var(--bf-valid) 78%, var(--bf-white-050)) !important;
+  font-size: .53rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: .075em !important;
+}
+
+/* Durable outputs are readouts mounted into the footer housing, not another
+   unrelated row of content cards. */
+.capital-frame__return-manifold > div {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  margin: 0 12px 12px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--bf-valid) 24%, var(--bf-etched-line-strong));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--bf-bg-base) 92%, #070c10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    inset 0 -1px 0 rgba(0,0,0,.52),
+    0 3px 10px rgba(0,0,0,.16);
+}
+
+.capital-frame__return-manifold article {
+  min-height: 82px !important;
+  display: grid;
+  align-content: center;
+  padding: 12px 14px !important;
+  border-right: 1px solid var(--bf-etched-line) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity, var(--bf-valid)) 4%, transparent), transparent 44%),
+    rgba(255,255,255,.01) !important;
+}
+
+.capital-frame__return-manifold article:last-child {
+  border-right: 0 !important;
+}
+
+.capital-frame__return-manifold article h3 {
+  margin: 0 !important;
+  color: color-mix(in srgb, var(--bfux-affinity, var(--bf-valid)) 66%, var(--bf-white-050)) !important;
+  font-size: .76rem !important;
+  line-height: 1.15 !important;
+}
+
+.capital-frame__return-manifold article p {
+  margin-top: 6px !important;
+  color: color-mix(in srgb, var(--bf-white-050) 86%, var(--bf-text-secondary)) !important;
+  font-size: .67rem !important;
+  line-height: 1.42 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Desktop: mirror the top conduit span                                         */
+/* -------------------------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-frame__return-manifold {
+    box-sizing: border-box;
+    width: calc(100% + (var(--capital-header-side-extension, 54px) * 2));
+    margin-left: calc(var(--capital-header-side-extension, 54px) * -1);
+    margin-right: calc(var(--capital-header-side-extension, 54px) * -1);
+    border-radius: var(--capital-header-corner-radius, 15px) !important;
+  }
+
+  .capital-frame__return-manifold > header {
+    padding-left: calc(18px + var(--capital-header-side-extension, 54px)) !important;
+    padding-right: calc(18px + var(--capital-header-side-extension, 54px)) !important;
+  }
+
+  .capital-frame__return-manifold > div {
+    margin-left: calc(12px + var(--capital-header-side-extension, 54px));
+    margin-right: calc(12px + var(--capital-header-side-extension, 54px));
+  }
+}
+
+/* The institutional projection is intentionally downstream and visually quiet
+   for this iteration. It remains available without competing with the durable
+   output footer for semantic priority. */
+.capital-frame__institutional-rail {
+  opacity: .88;
+  border-color: color-mix(in srgb, var(--bf-etched-line) 82%, transparent) !important;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .capital-frame__return-manifold {
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 9px !important;
+  }
+
+  .capital-frame__return-manifold > header {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    gap: 4px;
+    padding: 10px 12px !important;
+  }
+
+  .capital-frame__return-manifold > header span,
+  .capital-frame__return-manifold > header h2,
+  .capital-frame__return-manifold > header > strong {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+  .capital-frame__return-manifold > div {
+    grid-template-columns: 1fr !important;
+    margin: 0 8px 8px;
+  }
+
+  .capital-frame__return-manifold article {
+    min-height: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 1px solid var(--bf-etched-line) !important;
+  }
+
+  .capital-frame__return-manifold article:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .capital-frame__institutional-rail {
+    margin-top: 4px;
+    opacity: 1;
+  }
+}
