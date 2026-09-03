@@ -8,14 +8,10 @@
      ║                                          ║
      ╰════════ DURABLE / RETAINED OUTPUT ══════╯
 
-   This layer owns the global cycle boundary. Cards and connectors remain local
-   hardware mounted to it.
-
-   Geometry law:
-     - one rounded outer chassis, not four overlapping bars;
-     - one rounded inner void establishes the two side risers and the elbows;
-     - top / bottom member depth follows content and the engine's bounded width;
-     - local connector geometry is not responsible for drawing the global loop.
+   Cards and connectors are mounted hardware. The cycle chassis owns the global
+   boundary. Desktop geometry is deliberately fixed inside the apparatus's
+   bounded 840–1040px engine envelope so browser zoom magnifies/recedes one
+   machine rather than changing its aspect ratio.
 */
 
 @media (hover: hover) and (pointer: fine) {
@@ -24,35 +20,30 @@
     --capital-cycle-side-width: 18px;
     --capital-cycle-radius: 22px;
     --capital-cycle-inner-radius: 16px;
+    --capital-cycle-top-band: 282px;
+    --capital-cycle-bottom-band: 150px;
+    --capital-cycle-stage-height: 212px;
   }
 
-  /* Container-relative vertical geometry keeps the chassis proportions stable
-     across the engine's lawful 840–1040px desktop width envelope. */
   .capital-frame__engine {
     overflow: visible !important;
-    container-type: inline-size;
-    container-name: capital-cycle-engine;
-  }
-
-  .capital-frame__cycle-loop {
-    --capital-cycle-top-band: clamp(258px, 28.85cqi, 300px);
-    --capital-cycle-bottom-band: 150px;
-    --capital-rail-card-top: clamp(38px, 4.23cqi, 44px);
-    --capital-rail-card-min-height: clamp(182px, 20cqi, 208px);
-
-    position: relative;
-    isolation: isolate;
-    display: grid;
-    align-content: start;
-    gap: 12px;
-    min-width: 0;
-    margin-top: 18px;
-    overflow: visible;
   }
 
   /* ---------------------------------------------------------------------- */
   /* ONE CONTINUOUS CYCLE CHASSIS                                             */
   /* ---------------------------------------------------------------------- */
+
+  .capital-frame__cycle-loop {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: 0;
+    min-width: 0;
+    margin-top: 18px;
+    overflow: visible;
+  }
 
   .capital-frame__cycle-loop-shell {
     position: absolute;
@@ -88,8 +79,6 @@
       0 8px 18px rgba(0,0,0,.24);
   }
 
-  /* Edge lighting belongs to the same chassis, not to independent conduit
-     pieces. It is deliberately quiet so the silhouette carries the geometry. */
   .capital-frame__cycle-loop-shell::before {
     content: "";
     position: absolute;
@@ -102,12 +91,8 @@
       inset 0 -1px 0 rgba(0,0,0,.20);
   }
 
-  /* The inner void is what makes the chassis one continuous pipe/frame rather
-     than four rectangular sticks. Its rounded corners create real inner elbows.
-
-     The body background is reproduced here because this shell sits behind the
-     machine; visible gaps therefore continue the page's field rather than
-     becoming an opaque center slab. */
+  /* One rounded inner void produces continuous inner elbows. Its top/bottom
+     coordinates match the actual designed top and bottom members. */
   .capital-frame__cycle-loop-shell::after {
     content: "";
     position: absolute;
@@ -129,9 +114,6 @@
       inset 0 0 18px rgba(0,0,0,.16);
   }
 
-  /* The previous side-manifold pseudos are obsolete. The chassis itself now
-     owns both vertical members. Existing card connectors still terminate at
-     the same established x coordinates. */
   .capital-frame__input-console::after,
   .capital-frame__diligence-console::after {
     display: none !important;
@@ -139,18 +121,22 @@
   }
 
   /* ---------------------------------------------------------------------- */
-  /* TOP MEMBER · label + six mounted conversion modules                     */
+  /* TOP MEMBER · title and cards are one intrinsic DOM assembly             */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__engine-heading {
     position: relative !important;
-    z-index: 2 !important;
+    z-index: 3 !important;
     box-sizing: border-box !important;
     width: 100% !important;
     min-height: var(--capital-cycle-top-band) !important;
     height: var(--capital-cycle-top-band) !important;
+    display: grid !important;
+    grid-template-rows: auto var(--capital-cycle-stage-height) !important;
+    align-content: start !important;
+    row-gap: 12px !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 13px 0 20px !important;
     overflow: visible !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -158,21 +144,51 @@
     box-shadow: none !important;
   }
 
+  /* The title is now normal-flow content of the rail, so it cannot drift above
+     or outside the conduit when browser zoom changes effective viewport size. */
   .capital-frame__engine-heading > div {
-    position: absolute !important;
+    position: relative !important;
+    inset: auto !important;
     z-index: 6 !important;
-    top: 10px !important;
-    left: 18px !important;
     width: auto !important;
+    margin: 0 18px !important;
+    align-self: start !important;
   }
 
-  .capital-frame__conversion-rail {
+  .capital-frame__engine-heading h2 {
+    margin: 0 !important;
+  }
+
+  /* The card bank now lives inside the header in DOM and in flow. Retire every
+     absolute-placement assumption from the earlier sibling topology. */
+  .capital-frame__engine-heading > .capital-frame__conversion-rail {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
     z-index: 5 !important;
-    top: var(--capital-rail-card-top) !important;
+    width: 100% !important;
+    height: var(--capital-cycle-stage-height) !important;
+    margin: 0 !important;
+    align-items: stretch !important;
+    isolation: isolate;
+    transform: none !important;
   }
 
   .capital-frame__conversion-stage {
-    min-height: var(--capital-rail-card-min-height) !important;
+    box-sizing: border-box !important;
+    min-height: var(--capital-cycle-stage-height) !important;
+    height: var(--capital-cycle-stage-height) !important;
+    max-height: var(--capital-cycle-stage-height) !important;
+    align-self: stretch !important;
+  }
+
+  /* End interfaces need visible overflow; their card bodies remain fixed to
+     the same designed height as their peer modules. */
+  .capital-frame__conversion-stage[data-stage-id="capital"],
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
+    overflow: visible !important;
   }
 
   /* ---------------------------------------------------------------------- */
@@ -182,7 +198,7 @@
   .capital-frame__machine-bed {
     position: relative;
     z-index: 3;
-    margin-block: 0 !important;
+    margin: 0 !important;
   }
 
   /* ---------------------------------------------------------------------- */
@@ -203,9 +219,6 @@
     box-shadow: none !important;
   }
 
-  /* The old footer owned the full-width side extensions and therefore carried
-     72px horizontal header padding. The chassis owns those extensions now, so
-     the footer content returns to a normal local inset. */
   .capital-frame__return-manifold > header {
     margin: 0 12px !important;
     padding: 9px 18px 8px !important;
@@ -216,16 +229,12 @@
     margin: 0 12px 12px !important;
   }
 
-  /* The institutional-conversion projection is deliberately outside the
-     closed cycle in source and visual order. */
   .capital-frame__institutional-rail {
-    margin-top: 0 !important;
+    margin-top: 12px !important;
   }
 }
 
-/* Mobile/coarse-pointer keeps the simpler linear projection. The DOM grouping
-   remains semantically useful, but the persistent closed-cycle chassis is a
-   desktop spatial affordance rather than a requirement for reading the page. */
+/* Mobile/coarse-pointer keeps the simpler linear projection. */
 @media (pointer: coarse), (max-width: 760px) {
   .capital-frame__cycle-loop {
     display: grid;
@@ -235,5 +244,22 @@
 
   .capital-frame__cycle-loop-shell {
     display: none;
+  }
+
+  .capital-frame__engine-heading {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .capital-frame__engine-heading > .capital-frame__conversion-rail {
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .capital-frame__conversion-stage {
+    height: auto !important;
+    max-height: none !important;
   }
 }
