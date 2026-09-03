@@ -53,6 +53,8 @@
   overflow: hidden;
 }
 
+/* The ordinary machine cards use this same strong element as their title.
+ * Keep its inherited title face and only substitute the compact Tour text. */
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong {
   grid-column: 1;
   grid-row: 1;
@@ -72,9 +74,13 @@
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header strong::before {
   content: "Tour";
   display: block;
-  color: #f0efe9;
-  font: 500 clamp(.98rem, 1vw, 1.08rem)/1.02 Georgia, serif;
-  letter-spacing: -.015em;
+  color: #e9e7e1;
+  font-family: inherit;
+  font-size: clamp(1.15rem, 1.35vw, 1.45rem);
+  font-weight: inherit;
+  line-height: 1;
+  letter-spacing: normal;
+  text-shadow: 0 1px 2px #000;
 }
 
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span {
@@ -96,6 +102,8 @@
   white-space: nowrap;
 }
 
+/* Badges use the exact visual grammar of WHO / WHAT / WHY / ENGINE while
+ * retaining their small physical badge housings. */
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span::before,
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span::after {
   display: inline-flex;
@@ -105,11 +113,15 @@
   padding: 2px 5px;
   border: 1px solid color-mix(in srgb, var(--tone) 44%, #45504d);
   border-radius: 2px;
-  color: color-mix(in srgb, var(--tone) 88%, #eef2ee);
+  color: color-mix(in srgb, var(--tone) 88%, #e3e7e6);
   background: color-mix(in srgb, var(--tone) 7%, #0b1110);
   box-shadow: inset 0 1px rgba(255,255,255,.04), 0 1px 2px rgba(0,0,0,.5);
-  font: 700 .42rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  letter-spacing: .08em;
+  font-family: inherit;
+  font-size: .59rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .085em;
+  text-shadow: 0 1px #000;
   text-transform: uppercase;
 }
 
@@ -119,4 +131,10 @@
 
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header > span::after {
   content: "5 min";
+}
+
+/* The normal card header accent is redundant beside the badge column. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header::after {
+  display: none !important;
+  content: none !important;
 }
