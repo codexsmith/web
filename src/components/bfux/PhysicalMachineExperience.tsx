@@ -117,6 +117,17 @@ export function PhysicalMachineExperience({
         </div>
       )}
 
+      {!sectionSurface && activeResolution === "focus" && aboutHost
+        ? createPortal(
+            <div className="bf-machine-tour-about-dock" aria-hidden="true">
+              <i />
+              <i />
+            </div>,
+            aboutHost,
+            "five-minute-tour-core-dock",
+          )
+        : null}
+
       {!sectionSurface && activeResolution === "focus" && apparatusHost
         ? createPortal(
             <FiveMinuteTourCard resolution={activeResolution} />,

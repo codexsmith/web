@@ -14,19 +14,24 @@
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="focus"] {
     --core-left: 3.2%;
-    --core-top: 7%;
     --core-bottom-top: 51.5%;
-    --core-card-width: 21.2%;
+    --core-left-card-width: 21.2%;
+    --core-upper-card-width: 23.2%;
     --core-card-height: 41.5%;
-    --core-field-gap: 3%;
-    --core-card-gap: 2.9%;
-    --core-research-left: calc(var(--core-left) + var(--core-card-width) + var(--core-field-gap));
-    --core-products-left: calc(var(--core-research-left) + var(--core-card-width) + var(--core-card-gap));
-    --core-publications-left: calc(var(--core-products-left) + var(--core-card-width) + var(--core-card-gap));
-    --core-research-width: 69.4%;
+    --core-field-gap: .8%;
+    --core-card-gap: 1%;
+    --core-tour-height: clamp(72px, 5vw, 82px);
+    --core-tour-dock-gap: clamp(10px, .8vw, 14px);
+    --core-research-left: calc(var(--core-left) + var(--core-left-card-width) + var(--core-field-gap));
+    --core-products-left: calc(var(--core-research-left) + var(--core-upper-card-width) + var(--core-card-gap));
+    --core-publications-left: calc(var(--core-products-left) + var(--core-upper-card-width) + var(--core-card-gap));
+    --core-research-width: calc((var(--core-upper-card-width) * 3) + (var(--core-card-gap) * 2));
+    --core-tour-bottom: calc(100% - var(--core-bottom-top) + var(--core-tour-dock-gap));
   }
 
-  /* Tour / About form the left institutional column. */
+  /* Tour / About form the left institutional column. The Tour is a sibling of
+   * About, but its lower edge is derived from About's upper edge so the fixed
+   * About-owned dock remains the mechanical datum while the Tour expands. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="focus"]
     .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
@@ -35,7 +40,7 @@
     top: var(--core-bottom-top) !important;
     right: auto !important;
     bottom: auto !important;
-    width: var(--core-card-width) !important;
+    width: var(--core-left-card-width) !important;
     height: var(--core-card-height) !important;
   }
 
@@ -44,13 +49,13 @@
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
     position: absolute !important;
     left: var(--core-left) !important;
-    top: var(--core-top) !important;
+    top: auto !important;
     right: auto !important;
-    bottom: auto !important;
-    width: var(--core-card-width) !important;
-    height: clamp(72px, 5vw, 82px) !important;
+    bottom: var(--core-tour-bottom) !important;
+    width: var(--core-left-card-width) !important;
+    height: var(--core-tour-height) !important;
     z-index: 12 !important;
-    transform-origin: left top !important;
+    transform-origin: left bottom !important;
   }
 
   .site-shell[data-root-focus="true"]
@@ -58,13 +63,13 @@
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"] {
     position: absolute !important;
     left: var(--core-left) !important;
-    top: var(--core-top) !important;
+    top: auto !important;
     right: auto !important;
-    bottom: auto !important;
+    bottom: var(--core-tour-bottom) !important;
     width: 34.7% !important;
     height: max(48.5%, 300px) !important;
     z-index: 40 !important;
-    transform-origin: left top !important;
+    transform-origin: left bottom !important;
   }
 
   /* People / Products / Publications span the Research field in equal cards. */
@@ -73,10 +78,10 @@
     .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
     position: absolute !important;
     left: var(--core-research-left) !important;
-    top: var(--core-top) !important;
+    top: 7% !important;
     right: auto !important;
     bottom: auto !important;
-    width: var(--core-card-width) !important;
+    width: var(--core-upper-card-width) !important;
     height: var(--core-card-height) !important;
   }
 
@@ -85,10 +90,10 @@
     .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
     position: absolute !important;
     left: var(--core-products-left) !important;
-    top: var(--core-top) !important;
+    top: 7% !important;
     right: auto !important;
     bottom: auto !important;
-    width: var(--core-card-width) !important;
+    width: var(--core-upper-card-width) !important;
     height: var(--core-card-height) !important;
   }
 
@@ -97,10 +102,10 @@
     .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
     position: absolute !important;
     left: var(--core-publications-left) !important;
-    top: var(--core-top) !important;
+    top: 7% !important;
     right: auto !important;
     bottom: auto !important;
-    width: var(--core-card-width) !important;
+    width: var(--core-upper-card-width) !important;
     height: var(--core-card-height) !important;
   }
 
