@@ -1,40 +1,21 @@
 /* Capital prototype · Operational machinery control flags
 
-   The six operating cards already carry a dedicated left-side instrument tab.
-   Use that boundary surface for the operation itself rather than spending both
-   a numeric tab and an interior operation chip on the same card.
-
-   Result:
-     - numeric tabs disappear;
-     - INQUIRE / CONSTRAIN / MEDIATE / EXECUTE / EXPOSE / RECORD become
-       vertically mounted control flags, rotated 90deg clockwise;
-     - the card body begins with the semantic title instead of metadata;
-     - reclaimed vertical space is spent on larger, more readable copy.
+   The six operating cards use their left boundary as the operation control
+   surface. This layer owns the mounted flags and card-face spacing only; grid
+   geometry belongs to engine-core and stewardship belongs to stewardship-polish.
 */
 
-/* -------------------------------------------------------------------------- */
-/* Card chassis and left mounting channel                                      */
-/* -------------------------------------------------------------------------- */
-
-.capital-frame__machine-functions {
-  grid-template-rows: repeat(2, minmax(108px, 1fr)) !important;
-}
-
 .capital-frame__machine-functions .capital-frame__machine-function {
-  position: relative !important;
   display: block !important;
-  grid-template-columns: 1fr !important;
-  min-height: 108px !important;
   overflow: visible !important;
 }
 
-/* Retire the old numeric tab. The operation flag now owns this boundary. */
+/* Retire the old numeric tab. The operation flag owns this boundary. */
 .capital-frame__machine-functions .capital-frame__machine-function > span {
   display: none !important;
 }
 
-/* A recessed mounting channel keeps the rotated label attached to the card
-   rather than making it read as a floating pill. */
+/* Recessed mounting channel. */
 .capital-frame__machine-functions .capital-frame__machine-function::before {
   content: "" !important;
   display: block !important;
@@ -56,21 +37,16 @@
     2px 0 7px rgba(0,0,0,.16);
 }
 
-/* The body is now title + copy only. Keep enough right clearance for the
-   established operation glyph while allowing the larger text to breathe. */
 .capital-frame__machine-function > div {
   position: static !important;
   min-height: 108px !important;
   display: grid !important;
   align-content: center !important;
   gap: 7px !important;
-  padding: 14px 46px 14px 46px !important;
+  padding: 14px 46px !important;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Mounted control flag                                                        */
-/* -------------------------------------------------------------------------- */
-
+/* Mounted vertical control plate. */
 .capital-frame__machine-function .capital-frame__operation-label {
   position: absolute !important;
   z-index: 14 !important;
@@ -88,7 +64,6 @@
   transform: translate(-50%, -50%) rotate(90deg) !important;
   transform-origin: center !important;
   white-space: nowrap !important;
-
   border: 1px solid color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 70%, var(--bf-etched-line-strong)) !important;
   border-radius: 3px !important;
   background:
@@ -101,14 +76,11 @@
     inset 0 1px 0 rgba(255,255,255,.07),
     inset 0 -1px 0 rgba(0,0,0,.48),
     0 2px 7px rgba(0,0,0,.32) !important;
-
   font: 800 .56rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
   letter-spacing: .09em !important;
   text-transform: uppercase !important;
 }
 
-/* Two small fasteners make the flag read as a mounted control plate. Because
-   the plate rotates as a unit, these become the upper/lower fasteners. */
 .capital-frame__machine-function .capital-frame__operation-label::before,
 .capital-frame__machine-function .capital-frame__operation-label::after {
   content: "";
@@ -132,10 +104,6 @@
   right: 6px;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Spend the reclaimed space on readability                                    */
-/* -------------------------------------------------------------------------- */
-
 .capital-frame__machine-function h3 {
   margin: 0 !important;
   font-size: .86rem !important;
@@ -150,75 +118,12 @@
   color: color-mix(in srgb, var(--bf-white-050) 86%, var(--bf-text-secondary)) !important;
 }
 
-/* Keep the right-side operation glyph subordinate to the now-prominent flag. */
+/* The right-side geometric glyph is secondary to the operation flag. */
 .capital-frame__machine-function::after {
   opacity: .78 !important;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Civics & Stewardship · inspection labels                                    */
-/* -------------------------------------------------------------------------- */
-
-/* These labels carry real governance semantics. They should read as apparatus
-   labels at normal viewing distance, not as decorative microtype. */
-.capital-frame__stewardship-module > header {
-  min-height: 50px !important;
-  padding-block: 10px !important;
-}
-
-.capital-frame__stewardship-module > header span {
-  font-size: .58rem !important;
-  line-height: 1.16 !important;
-  letter-spacing: .105em !important;
-  color: color-mix(in srgb, var(--bf-white-050) 72%, var(--bf-text-muted)) !important;
-}
-
-.capital-frame__stewardship-module > header > strong {
-  padding: 6px 9px !important;
-  font-size: .56rem !important;
-  line-height: 1 !important;
-  letter-spacing: .09em !important;
-}
-
-.capital-frame__stewardship-card > header {
-  min-height: 32px !important;
-  padding: 6px 9px !important;
-  font-size: .54rem !important;
-  letter-spacing: .085em !important;
-}
-
-/* S-01 / S-02 / S-03 indices */
-.capital-frame__stewardship-card > header > span:first-child {
-  font-size: .53rem !important;
-  color: color-mix(in srgb, var(--bf-white-050) 70%, var(--bf-text-muted)) !important;
-}
-
-/* BIND / ANSWER / EXTERNALIZE */
-.capital-frame__stewardship-card .capital-frame__operation-label {
-  min-height: 19px !important;
-  padding: 4px 7px 3px !important;
-  font-size: .53rem !important;
-  line-height: 1 !important;
-  letter-spacing: .095em !important;
-}
-
-/* CONSEQUENCE TEST */
-.capital-frame__stewardship-card > header strong {
-  font-size: .50rem !important;
-  line-height: 1 !important;
-  letter-spacing: .075em !important;
-}
-
 @media (max-width: 760px), (pointer: coarse) {
-  .capital-frame__machine-functions {
-    grid-template-rows: repeat(3, minmax(108px, 1fr)) !important;
-  }
-
-  .capital-frame__machine-functions .capital-frame__machine-function,
-  .capital-frame__machine-function > div {
-    min-height: 108px !important;
-  }
-
   .capital-frame__machine-function > div {
     padding: 12px 40px 12px 42px !important;
   }
@@ -242,14 +147,5 @@
 
   .capital-frame__machine-function p {
     font-size: .70rem !important;
-  }
-
-  .capital-frame__stewardship-module > header span {
-    font-size: .54rem !important;
-  }
-
-  .capital-frame__stewardship-module > header > strong,
-  .capital-frame__stewardship-card .capital-frame__operation-label {
-    font-size: .50rem !important;
   }
 }

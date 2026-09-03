@@ -1,122 +1,58 @@
-/* Capital prototype · Canonical Connector + Conduit Pass
+/* Capital prototype · Canonical connector hardware
 
-   Reuse the square Research lower-dock connector already present on the full-loop
-   Lab Machine rather than inventing a parallel connector vocabulary.
+   One connector vocabulary for the apparatus:
 
-   Source morphology:
-   - square / compact metal housing
-   - tone-mixed border and face
-   - dark inset collar
-   - centered colored geometric contact
+     side cards   CARD | SQUARE CONTACT | CYCLE CHASSIS
+     rail stages  STAGE | SQUARE CONTACT | STAGE
+     left bound   CHASSIS | INTAKE | 5-PORT BANK | CAPITAL
+     right bound  RETAINED | 5-PORT BANK | INSPECT | CHASSIS
 
-   Conduits are a separate material class: quiet, broad-corrugated infrastructure
-   that is visually distinct from the board but subordinate to the modules.
+   This file owns local crossing hardware only. The unified cycle shell owns
+   global conduit geometry; cards own their own boundaries.
 */
 
 @media (min-width: 1121px) {
   .capital-frame {
-    --capital-conduit-face: color-mix(in srgb, #334850 66%, var(--bf-bg-raised));
-    --capital-conduit-dark: color-mix(in srgb, #172328 78%, black);
-    --capital-conduit-edge: color-mix(in srgb, #6a7d84 54%, var(--bf-etched-line-strong));
-    --capital-conduit-highlight: rgba(210, 226, 230, .085);
     --capital-connector-size: 20px;
     --capital-connector-contact: 7px;
   }
 
-  /* ---------------------------------------------------------------------- */
-  /* CONDUIT MATERIAL                                                        */
-  /* ---------------------------------------------------------------------- */
-
-  /* Vertical side buses: broad horizontal ribs, not hatch or scanline noise. */
-  .capital-frame__input-console::after,
-  .capital-frame__diligence-console::after {
-    width: 18px;
-    border: 1px solid var(--capital-conduit-edge);
-    border-radius: 4px;
-    background:
-      linear-gradient(90deg,
-        rgba(255,255,255,.07) 0 1px,
-        transparent 1px 4px,
-        rgba(0,0,0,.2) 4px 14px,
-        rgba(255,255,255,.025) 14px 17px,
-        rgba(0,0,0,.55) 17px 18px),
-      repeating-linear-gradient(180deg,
-        var(--capital-conduit-highlight) 0 1px,
-        rgba(0,0,0,.12) 1px 4px,
-        transparent 4px 11px,
-        rgba(0,0,0,.1) 11px 13px,
-        transparent 13px 19px),
-      linear-gradient(90deg, var(--capital-conduit-face), var(--capital-conduit-dark));
-    box-shadow:
-      inset 2px 0 0 rgba(255,255,255,.025),
-      inset -2px 0 0 rgba(0,0,0,.36),
-      0 5px 15px rgba(0,0,0,.24);
+  /* Leave a service channel between each side rail and the cycle chassis. */
+  .capital-frame__input-console {
+    padding-right: 58px;
   }
 
-  .capital-frame__diligence-console::after {
-    border-color: color-mix(in srgb, var(--bf-region-about) 24%, var(--capital-conduit-edge));
-    background:
-      linear-gradient(90deg,
-        rgba(255,255,255,.065) 0 1px,
-        transparent 1px 4px,
-        color-mix(in srgb, var(--bf-region-about) 5%, rgba(0,0,0,.2)) 4px 14px,
-        rgba(255,255,255,.02) 14px 17px,
-        rgba(0,0,0,.55) 17px 18px),
-      repeating-linear-gradient(180deg,
-        color-mix(in srgb, var(--bf-region-about) 12%, var(--capital-conduit-highlight)) 0 1px,
-        rgba(0,0,0,.12) 1px 4px,
-        transparent 4px 11px,
-        rgba(0,0,0,.1) 11px 13px,
-        transparent 13px 19px),
-      linear-gradient(90deg,
-        color-mix(in srgb, var(--bf-region-about) 7%, var(--capital-conduit-face)),
-        var(--capital-conduit-dark));
+  .capital-frame__diligence-console {
+    padding-left: 58px;
   }
 
-  /* Primary horizontal conversion conduit: visible infrastructure, not a line. */
-  .capital-frame__conversion-rail::before {
-    left: 2.5%;
-    right: 2.5%;
-    top: 50%;
-    height: 18px;
-    transform: translateY(-50%);
-    border: 1px solid var(--capital-conduit-edge);
-    border-radius: 5px;
-    background:
-      linear-gradient(180deg,
-        rgba(255,255,255,.075) 0 1px,
-        transparent 1px 4px,
-        rgba(0,0,0,.18) 4px 13px,
-        rgba(255,255,255,.02) 13px 17px,
-        rgba(0,0,0,.5) 17px 18px),
-      repeating-linear-gradient(90deg,
-        var(--capital-conduit-highlight) 0 1px,
-        rgba(0,0,0,.13) 1px 4px,
-        transparent 4px 12px,
-        rgba(0,0,0,.08) 12px 14px,
-        transparent 14px 21px),
-      linear-gradient(180deg, var(--capital-conduit-face), var(--capital-conduit-dark));
-    box-shadow:
-      inset 0 2px 0 rgba(255,255,255,.025),
-      inset 0 -3px 0 rgba(0,0,0,.24),
-      0 4px 12px rgba(0,0,0,.2);
+  /* The old card-to-bus arms and conversion substrate are obsolete. Local
+     connectors are the crossing; the cycle shell is the persistent conduit. */
+  .capital-frame__funding-port::after,
+  .capital-frame__problem-port::after,
+  .capital-frame__conversion-rail::before,
+  .capital-frame__conversion-rail::after,
+  .capital-frame__conversion-stage:not([data-stage-id="retained-capability"]) .capital-frame__stage-terminal::after {
+    content: none !important;
+    display: none !important;
   }
 
-  .capital-frame__conversion-rail::after {
-    display: none;
+  .capital-frame__conversion-rail {
+    isolation: isolate;
+  }
+
+  .capital-frame__conversion-stage {
+    z-index: auto !important;
   }
 
   /* ---------------------------------------------------------------------- */
-  /* CANONICAL CONNECTOR MORPHOLOGY                                          */
-  /* Mirrored from Research lower-dock construction in lab-machine-reference */
+  /* SQUARE BFUX CONTACT                                                     */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__funding-port > i,
   .capital-frame__problem-port > i,
   .capital-frame__stage-terminal,
-  .capital-frame__diligence-gates li::before,
-  .capital-frame__boundary-note::before,
-  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+  .capital-frame__diligence-gates li::before {
     box-sizing: border-box;
     width: var(--capital-connector-size);
     height: var(--capital-connector-size);
@@ -131,19 +67,9 @@
     box-shadow:
       inset 0 0 0 2px #090b0c,
       0 3px 5px rgba(0,0,0,.5);
+    pointer-events: none;
   }
 
-  /* The geometric contact: same colored ring/contact language as Research. */
-  .capital-frame__funding-port > i::before,
-  .capital-frame__problem-port > i::before,
-  .capital-frame__stage-terminal::before,
-  .capital-frame__diligence-gates li::before,
-  .capital-frame__boundary-note::before,
-  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
-    /* contact is added by layered background below where pseudo nesting is unavailable */
-  }
-
-  /* Existing <i> connectors can carry the contact as their own pseudo-element. */
   .capital-frame__funding-port > i::after,
   .capital-frame__problem-port > i::after,
   .capital-frame__stage-terminal::before {
@@ -160,189 +86,35 @@
     box-shadow: 0 0 5px color-mix(in srgb, var(--connector-tone, var(--bfux-affinity, var(--bf-silver-300))) 45%, transparent);
   }
 
-  /* ---------------------------------------------------------------------- */
-  /* LEFT RESOURCE MANIFOLD                                                   */
-  /* ---------------------------------------------------------------------- */
-
+  /* Side inputs terminate directly at the chassis-side service channel. */
   .capital-frame__funding-port > i,
   .capital-frame__problem-port > i {
     --connector-tone: var(--bfux-affinity);
-    z-index: 7;
-    right: -12px;
+    z-index: 1000 !important;
+    right: calc(var(--capital-connector-size) * -1) !important;
     top: 50%;
     transform: translateY(-50%);
+    border-left: 1px solid color-mix(in srgb, var(--connector-tone) 54%, #858b8d) !important;
   }
 
-  /* Branch from card connector to shared vertical conduit. */
-  .capital-frame__funding-port::after,
-  .capital-frame__problem-port::after {
-    content: "";
-    position: absolute;
-    z-index: 4;
-    top: 50%;
-    right: -31px;
-    width: 20px;
-    height: 10px;
-    transform: translateY(-50%);
-    border-top: 1px solid var(--capital-conduit-edge);
-    border-bottom: 1px solid rgba(0,0,0,.46);
-    border-radius: 2px;
-    background:
-      repeating-linear-gradient(90deg,
-        color-mix(in srgb, var(--bfux-affinity) 10%, var(--capital-conduit-highlight)) 0 1px,
-        rgba(0,0,0,.1) 1px 4px,
-        transparent 4px 9px),
-      linear-gradient(180deg,
-        color-mix(in srgb, var(--bfux-affinity) 8%, var(--capital-conduit-face)),
-        var(--capital-conduit-dark));
-    box-shadow: 0 2px 4px rgba(0,0,0,.22);
-    pointer-events: none;
-  }
-
-  /* ---------------------------------------------------------------------- */
-  /* PRIMARY RAIL CONNECTORS                                                  */
-  /* ---------------------------------------------------------------------- */
-
+  /* Direct stage adjacency. No hidden pipe lives beneath the connector. */
   .capital-frame__stage-terminal {
     --connector-tone: var(--bfux-affinity);
-    z-index: 10;
+    z-index: 1000 !important;
     right: -13px;
     top: 50%;
     transform: translateY(-50%);
     overflow: visible;
   }
 
-  /* Short corrugated conduit continues from each connector to the next socket. */
-  .capital-frame__conversion-stage:not([data-stage-id="retained-capability"]) .capital-frame__stage-terminal::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: 18px;
-    top: 50%;
-    width: 12px;
-    height: 10px;
-    transform: translateY(-50%);
-    border-top: 1px solid var(--capital-conduit-edge);
-    border-bottom: 1px solid rgba(0,0,0,.46);
-    border-radius: 2px;
-    background:
-      repeating-linear-gradient(90deg,
-        color-mix(in srgb, var(--connector-tone) 8%, var(--capital-conduit-highlight)) 0 1px,
-        rgba(0,0,0,.1) 1px 4px,
-        transparent 4px 9px),
-      linear-gradient(180deg,
-        color-mix(in srgb, var(--connector-tone) 6%, var(--capital-conduit-face)),
-        var(--capital-conduit-dark));
-    box-shadow: 0 2px 3px rgba(0,0,0,.2);
-  }
-
-  /* Capital's left boundary becomes the same square dock instead of a funnel. */
-  .capital-frame__conversion-stage[data-stage-id="capital"]::before {
-    content: "";
-    position: absolute;
-    z-index: 3;
-    left: -30px;
-    top: 50%;
-    width: 18px;
-    height: 10px;
-    transform: translateY(-50%);
-    border-top: 1px solid var(--capital-conduit-edge);
-    border-bottom: 1px solid rgba(0,0,0,.46);
-    border-radius: 2px;
-    background:
-      repeating-linear-gradient(90deg,
-        var(--capital-conduit-highlight) 0 1px,
-        rgba(0,0,0,.1) 1px 4px,
-        transparent 4px 9px),
-      linear-gradient(180deg, var(--capital-conduit-face), var(--capital-conduit-dark));
-    box-shadow: 0 2px 3px rgba(0,0,0,.2);
-    pointer-events: none;
-  }
-
-  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
-    --connector-tone: var(--bf-silver-300);
-    content: "";
-    position: absolute;
-    z-index: 8;
-    left: -14px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 1;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 50% 50%, #090b0c 0 2px, transparent 2.5px),
-      radial-gradient(circle at 50% 50%, transparent 0 2px, var(--connector-tone) 2.5px 3.5px, transparent 4px),
-      linear-gradient(90deg, rgba(255,255,255,.07), transparent 30% 70%, rgba(0,0,0,.28)),
-      linear-gradient(
-        color-mix(in srgb, var(--connector-tone) 28%, #25302a),
-        color-mix(in srgb, var(--connector-tone) 8%, #0b0e0f)
-      );
-  }
-
-  /* Transfer no longer has a bespoke egress symbol. Its normal rail connector is enough. */
-  .capital-frame__conversion-stage[data-boundary-operation="egress"] {
-    border-right: 1px solid color-mix(in srgb, var(--bfux-affinity) 40%, var(--bf-etched-line));
-    border-radius: 6px;
-    padding-right: 0;
-  }
-
-  .capital-frame__conversion-stage[data-boundary-operation="egress"]::after {
-    display: none;
-  }
-
-  /* Retained Capability uses the same square connector, simply with institutional tone. */
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
-    --connector-tone: color-mix(in srgb, var(--bf-region-about) 72%, var(--bf-silver-300));
-    right: -13px;
-    width: var(--capital-connector-size);
-    height: var(--capital-connector-size);
-    border: 1px solid color-mix(in srgb, var(--connector-tone) 54%, #858b8d);
-    border-radius: 4px;
-    background:
-      linear-gradient(90deg, rgba(255,255,255,.07), transparent 30% 70%, rgba(0,0,0,.28)),
-      linear-gradient(
-        color-mix(in srgb, var(--connector-tone) 28%, #25302a),
-        color-mix(in srgb, var(--connector-tone) 8%, #0b0e0f)
-      );
-    box-shadow:
-      inset 0 0 0 2px #090b0c,
-      0 3px 5px rgba(0,0,0,.5);
-  }
-
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    left: 18px;
-    top: 50%;
-    width: 25px;
-    height: 10px;
-    transform: translateY(-50%);
-    border-top: 1px solid var(--capital-conduit-edge);
-    border-bottom: 1px solid rgba(0,0,0,.46);
-    border-radius: 2px;
-    background:
-      repeating-linear-gradient(90deg,
-        color-mix(in srgb, var(--connector-tone) 9%, var(--capital-conduit-highlight)) 0 1px,
-        rgba(0,0,0,.1) 1px 4px,
-        transparent 4px 9px),
-      linear-gradient(180deg,
-        color-mix(in srgb, var(--connector-tone) 7%, var(--capital-conduit-face)),
-        var(--capital-conduit-dark));
-    box-shadow: 0 2px 3px rgba(0,0,0,.2);
-  }
-
-  /* ---------------------------------------------------------------------- */
-  /* RIGHT DILIGENCE MANIFOLD                                                 */
-  /* ---------------------------------------------------------------------- */
-
-  /* Diligence taps are the same connector block, with the contact embedded via background. */
+  /* Right-side diligence gates use the same square/ring contact but cannot
+     host a nested pseudo, so the ring is painted into the face. */
   .capital-frame__diligence-gates li::before {
     --connector-tone: color-mix(in srgb, var(--bf-region-about) 68%, var(--bf-silver-300));
     content: "";
     position: absolute;
-    z-index: 8;
-    left: -30px;
+    z-index: 1000 !important;
+    left: calc(var(--capital-connector-size) * -1) !important;
     top: 50%;
     transform: translateY(-50%);
     background:
@@ -353,45 +125,122 @@
         color-mix(in srgb, var(--connector-tone) 28%, #25302a),
         color-mix(in srgb, var(--connector-tone) 8%, #0b0e0f)
       );
-    filter: none;
-    pointer-events: none;
   }
 
-  .capital-frame__boundary-note::before {
-    --connector-tone: color-mix(in srgb, var(--bf-attention) 72%, var(--bf-silver-300));
-    content: "";
-    position: absolute;
-    z-index: 8;
-    left: -30px;
-    top: 26px;
-    transform: translateY(-50%);
-    background:
-      radial-gradient(circle at 50% 50%, #090b0c 0 2px, transparent 2.5px),
-      radial-gradient(circle at 50% 50%, transparent 0 2px, var(--connector-tone) 2.5px 3.5px, transparent 4px),
-      linear-gradient(90deg, rgba(255,255,255,.07), transparent 30% 70%, rgba(0,0,0,.28)),
-      linear-gradient(
-        color-mix(in srgb, var(--connector-tone) 28%, #25302a),
-        color-mix(in srgb, var(--connector-tone) 8%, #0b0e0f)
-      );
-    pointer-events: none;
-  }
-
-  /* Remove the older tiny socket ticks; the canonical connector now owns the interface. */
-  .capital-frame__diligence-gates li > span::before,
-  .capital-frame__diligence-gates li > span::after {
-    display: none;
-  }
-
-  /* Keep operation crossbars on diligence cards: those are gate semantics, not connectors. */
+  /* The gate cards no longer need an additional literal crossbar. */
   .capital-frame__diligence-gates li::after {
-    opacity: .72;
+    content: none !important;
+    display: none !important;
   }
 }
 
-@media (max-width: 1120px) {
-  /* Spatial conduit hardware is desktop-only; semantic ordering remains intact below it. */
-  .capital-frame__conversion-rail::before,
-  .capital-frame__conversion-rail::after {
-    display: none;
+/* -------------------------------------------------------------------------- */
+/* CONVERSION-RAIL BOUNDARY INTERFACES                                        */
+/* -------------------------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-frame {
+    --capital-end-bank-width: 18px;
+    --capital-end-bank-height: 74px;
+    --capital-end-gap: 36px;
+    --capital-end-input-tone: color-mix(in srgb, var(--bf-region-about) 58%, var(--bf-silver-300));
+    --capital-end-return-tone: color-mix(in srgb, var(--bf-valid) 62%, var(--bf-silver-300));
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"],
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
+    overflow: visible !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before,
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    box-sizing: border-box !important;
+    width: var(--capital-end-bank-width) !important;
+    height: var(--capital-end-bank-height) !important;
+    pointer-events: none !important;
+    box-shadow:
+      inset 0 0 0 2px #090b0c,
+      inset 0 1px rgba(255,255,255,.08),
+      0 4px 8px rgba(0,0,0,.58) !important;
+  }
+
+  /* Card-side bank: five hollow colored contacts. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    --bank-tone: var(--bf-silver-300);
+    display: block !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border: 1px solid color-mix(in srgb, var(--bank-tone) 72%, #596266) !important;
+    background:
+      radial-gradient(circle at 50% 11px, #090b0c 0 1.5px, var(--bank-tone) 1.9px 3.4px, #090b0c 3.8px 5px, transparent 5.4px),
+      radial-gradient(circle at 50% 24px, #090b0c 0 1.5px, var(--bank-tone) 1.9px 3.4px, #090b0c 3.8px 5px, transparent 5.4px),
+      radial-gradient(circle at 50% 37px, #090b0c 0 1.5px, var(--bank-tone) 1.9px 3.4px, #090b0c 3.8px 5px, transparent 5.4px),
+      radial-gradient(circle at 50% 50px, #090b0c 0 1.5px, var(--bank-tone) 1.9px 3.4px, #090b0c 3.8px 5px, transparent 5.4px),
+      radial-gradient(circle at 50% 63px, #090b0c 0 1.5px, var(--bank-tone) 1.9px 3.4px, #090b0c 3.8px 5px, transparent 5.4px),
+      linear-gradient(90deg, rgba(255,255,255,.08), transparent 38% 68%, rgba(0,0,0,.3)),
+      linear-gradient(#30382b, #0d110c) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::after {
+    --bank-tone: var(--capital-end-input-tone);
+    left: calc(var(--capital-end-bank-width) * -1) !important;
+    z-index: 1601 !important;
+    border-radius: 0 4px 4px 0 !important;
+    border-left-color: color-mix(in srgb, var(--bank-tone) 36%, #090b0c) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal {
+    --bank-tone: var(--capital-end-return-tone);
+    right: calc(var(--capital-end-bank-width) * -1) !important;
+    z-index: 1601 !important;
+    border-radius: 4px 0 0 4px !important;
+    border-right-color: color-mix(in srgb, var(--bank-tone) 36%, #090b0c) !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::before {
+    display: none !important;
+  }
+
+  /* Chassis-side module: interface name replaces the former second bank. */
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    display: grid !important;
+    place-items: center !important;
+    top: 50% !important;
+    padding: 6px 3px !important;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.075), transparent 38% 68%, rgba(0,0,0,.30)),
+      linear-gradient(180deg, #303a3f, #11171a) !important;
+    color: color-mix(in srgb, var(--interface-tone) 84%, var(--bf-white-050)) !important;
+    text-shadow: 0 1px 0 rgba(0,0,0,.78) !important;
+    font: 900 8px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    letter-spacing: 1px !important;
+    writing-mode: vertical-rl !important;
+    text-orientation: mixed !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"]::before {
+    --interface-tone: var(--capital-end-input-tone);
+    content: "INTAKE" !important;
+    left: calc(var(--capital-end-gap) * -1) !important;
+    z-index: 1600 !important;
+    transform: translateY(-50%) !important;
+    border: 1px solid color-mix(in srgb, var(--interface-tone) 62%, #596266) !important;
+    border-right-color: color-mix(in srgb, var(--interface-tone) 34%, #090b0c) !important;
+    border-radius: 5px 0 0 5px !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] .capital-frame__stage-terminal::after {
+    --interface-tone: var(--capital-end-return-tone);
+    content: "INSPECT" !important;
+    left: var(--capital-end-bank-width) !important;
+    z-index: 1600 !important;
+    transform: translateY(-50%) !important;
+    border: 1px solid color-mix(in srgb, var(--interface-tone) 62%, #596266) !important;
+    border-left-color: color-mix(in srgb, var(--interface-tone) 34%, #090b0c) !important;
+    border-radius: 0 5px 5px 0 !important;
   }
 }
