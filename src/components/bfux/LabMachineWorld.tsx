@@ -168,28 +168,36 @@ export function LabMachineWorld({
   };
 
   const resolutionControls = (
-    <div className="lab-machine-frame-zoom" role="group" aria-label="Lab Machine resolution">
+    <>
       <button
         type="button"
         onClick={() => setResolution("mid")}
-        disabled={machineResolution === "mid"}
-        aria-label="Show full Lab Machine loop"
-        title="Show full Lab Machine loop"
+        aria-pressed={machineResolution === "mid"}
+        aria-label="Full loop: show the complete Lab Machine"
+        title="Show the complete Lab Machine"
+        data-machine-resolution="mid"
       >
-        <BfuxIcon name="widen" />
-        <span>Full loop</span>
+        <BfuxIcon name="widen" className="projection-switcher__glyph" />
+        <span className="projection-switcher__copy">
+          <span className="projection-switcher__mode-name">Full</span>
+          <small className="projection-switcher__mode-purpose">Loop</small>
+        </span>
       </button>
       <button
         type="button"
         onClick={() => setResolution("focus")}
-        disabled={machineResolution === "focus"}
-        aria-label="Show core Lab set"
-        title="Show core Lab set"
+        aria-pressed={machineResolution === "focus"}
+        aria-label="Core set: show the core Lab Machine"
+        title="Show the core Lab Machine"
+        data-machine-resolution="focus"
       >
-        <BfuxIcon name="narrow" />
-        <span>Core set</span>
+        <BfuxIcon name="narrow" className="projection-switcher__glyph" />
+        <span className="projection-switcher__copy">
+          <span className="projection-switcher__mode-name">Core</span>
+          <small className="projection-switcher__mode-purpose">Set</small>
+        </span>
       </button>
-    </div>
+    </>
   );
 
   if (projection === "world") {
@@ -255,7 +263,7 @@ export function LabMachineWorld({
           canProcessZoomOut={false}
           canProcessZoomIn={false}
           surfaceLabel="Lab Machine"
-          contextControls={resolutionControls}
+          viewControls={resolutionControls}
           onHome={returnToMachine}
           onUp={returnToMachine}
           onBack={currentCursor > 1 ? rewind : returnToMachine}
@@ -336,7 +344,7 @@ export function LabMachineWorld({
         canProcessZoomOut={canProcessZoomOut}
         canProcessZoomIn={canProcessZoomIn}
         surfaceLabel="Lab Machine"
-        contextControls={resolutionControls}
+        viewControls={resolutionControls}
         onHome={returnToMachine}
         onUp={returnToMachine}
         onBack={() => section ? closeSection() : router.back()}
