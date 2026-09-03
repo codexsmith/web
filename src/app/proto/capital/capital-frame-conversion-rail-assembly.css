@@ -12,6 +12,14 @@
      - attach INTAKE / INSPECT to those actual boundary interfaces;
      - retire the old shoulder fittings and shoulder-mounted labels;
      - preserve the coarse-pointer/mobile linear projection.
+
+   Polish law:
+     - the two boundary cards use the exact same faceplate grammar as the four
+       interior cards; end-interface labels must never consume card layout;
+     - the rail nameplate belongs to the conduit housing, not to a floating
+       caption layer;
+     - interface labels touch the outer connector banks directly and remain
+       readable at normal inspection distance.
 */
 
 @media (hover: hover) and (pointer: fine) {
@@ -19,7 +27,7 @@
     --capital-rail-shell-height: 272px;
     --capital-rail-card-top: 76px;
     --capital-end-label-width: 34px;
-    --capital-end-label-height: 76px;
+    --capital-end-label-height: 82px;
   }
 
   .capital-frame__engine {
@@ -42,21 +50,31 @@
     padding: 0 !important;
     overflow: visible !important;
     border-radius: 18px !important;
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.035),
+      inset 0 -3px 0 rgba(0,0,0,.30),
+      inset 0 0 0 1px rgba(255,255,255,.012),
+      0 7px 18px rgba(0,0,0,.25) !important;
   }
 
   .capital-frame__engine-heading > div {
     position: absolute !important;
     z-index: 90 !important;
-    top: 17px !important;
+    top: 16px !important;
     left: calc(var(--capital-header-side-extension) + 18px) !important;
     width: auto !important;
   }
 
   .capital-frame__engine-heading h2 {
     margin: 0 !important;
-    font-size: clamp(.78rem, .9vw, .98rem) !important;
+    color: color-mix(in srgb, #dce9ec 92%, #8ba2aa) !important;
+    font-size: clamp(.82rem, .94vw, 1rem) !important;
     line-height: 1 !important;
-    letter-spacing: .16em !important;
+    font-weight: 850 !important;
+    letter-spacing: .17em !important;
+    text-shadow:
+      0 1px 0 rgba(0,0,0,.72),
+      0 0 10px rgba(184,203,211,.07) !important;
   }
 
   /* The old elbow/fitting pieces represented the previous topology, where the
@@ -91,6 +109,29 @@
     overflow: visible !important;
   }
 
+  /* Critical correction: the first integration pass made the two end-card
+     headers static so their external labels had an anchor. That resurrected the
+     obsolete full-width register strips visible in the screenshot. Restore the
+     exact iconography-pass number badge on both boundary cards. */
+  .capital-frame__conversion-stage[data-stage-id="capital"] > header,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header {
+    position: absolute !important;
+    z-index: 18 !important;
+    top: auto !important;
+    left: 10px !important;
+    bottom: 9px !important;
+    min-height: 0 !important;
+    width: auto !important;
+    display: block !important;
+    padding: 4px 5px 3px !important;
+    border: 1px solid color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 30%, var(--bf-etched-line)) !important;
+    border-radius: 3px !important;
+    background: color-mix(in srgb, var(--bf-bg-frame) 90%, black) !important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.035),
+      0 2px 5px rgba(0,0,0,.26) !important;
+  }
+
   /* Side risers are infrastructure behind the cards but in front of the large
      conduit face. That makes the bank pairs visibly terminate into a real rail
      instead of disappearing beneath the enlarged housing. */
@@ -114,55 +155,55 @@
   /* Boundary labels mounted to the multiplex connector ends                 */
   /* ---------------------------------------------------------------------- */
 
-  .capital-frame__conversion-stage[data-stage-id="capital"] > header,
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header {
-    position: static !important;
-  }
-
-  .capital-frame__conversion-stage[data-stage-id="capital"] > header::before,
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header::after {
-    position: absolute;
-    z-index: 1600;
-    top: 50%;
-    box-sizing: border-box;
-    width: var(--capital-end-label-width);
-    height: var(--capital-end-label-height);
-    display: grid;
-    place-items: center;
-    padding: 8px 6px;
-    transform: translateY(-50%);
-    border: 1px solid var(--bf-etched-line-strong);
-    border-radius: 5px;
+  /* Mount the labels on the content field instead of the number badge. The
+     content field already spans the card face, so these coordinates resolve
+     against the actual card boundary without changing any card layout. */
+  .capital-frame__conversion-stage[data-stage-id="capital"] > div::before,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div::after {
+    position: absolute !important;
+    z-index: 1600 !important;
+    top: 50% !important;
+    box-sizing: border-box !important;
+    width: var(--capital-end-label-width) !important;
+    height: var(--capital-end-label-height) !important;
+    display: grid !important;
+    place-items: center !important;
+    padding: 8px 6px !important;
+    transform: translateY(-50%) !important;
+    border: 1px solid var(--bf-etched-line-strong) !important;
+    border-radius: 5px !important;
     background:
-      linear-gradient(180deg, rgba(255,255,255,.055), transparent 32%),
-      linear-gradient(180deg, #303a3f, #151c20);
+      linear-gradient(180deg, rgba(255,255,255,.065), transparent 30%),
+      linear-gradient(180deg, #333e43, #151c20) !important;
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.05),
-      inset 0 -1px 0 rgba(0,0,0,.48),
-      0 4px 10px rgba(0,0,0,.38);
-    color: var(--bf-text-primary);
-    text-shadow: 0 1px 0 rgba(0,0,0,.72);
-    font: 900 .54rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    letter-spacing: .12em;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    pointer-events: none;
+      inset 0 1px 0 rgba(255,255,255,.055),
+      inset 0 -1px 0 rgba(0,0,0,.5),
+      0 4px 10px rgba(0,0,0,.4) !important;
+    color: var(--bf-text-primary) !important;
+    text-shadow: 0 1px 0 rgba(0,0,0,.75) !important;
+    font: 900 .60rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    letter-spacing: .13em !important;
+    writing-mode: vertical-rl !important;
+    text-orientation: mixed !important;
+    pointer-events: none !important;
   }
 
-  /* The pair occupies exactly --capital-end-gap from the card edge. The label
-     touches the OUTER edge of that pair: no decorative arm, no floating gap. */
-  .capital-frame__conversion-stage[data-stage-id="capital"] > header::before {
-    content: "INTAKE";
-    left: calc(0px - var(--capital-end-gap) - var(--capital-end-label-width));
-    border-color: color-mix(in srgb, var(--capital-end-input-tone) 60%, var(--bf-etched-line-strong));
-    color: color-mix(in srgb, var(--capital-end-input-tone) 72%, var(--bf-white-050));
+  /* The pair occupies exactly --capital-end-gap from the card edge. Each label
+     touches the OUTER edge of that pair: no decorative arm and no air gap. */
+  .capital-frame__conversion-stage[data-stage-id="capital"] > div::before {
+    content: "INTAKE" !important;
+    left: calc(0px - var(--capital-end-gap) - var(--capital-end-label-width)) !important;
+    right: auto !important;
+    border-color: color-mix(in srgb, var(--capital-end-input-tone) 64%, var(--bf-etched-line-strong)) !important;
+    color: color-mix(in srgb, var(--capital-end-input-tone) 78%, var(--bf-white-050)) !important;
   }
 
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > header::after {
-    content: "INSPECT";
-    left: calc(100% + var(--capital-end-gap));
-    border-color: color-mix(in srgb, var(--capital-end-return-tone) 60%, var(--bf-etched-line-strong));
-    color: color-mix(in srgb, var(--capital-end-return-tone) 76%, var(--bf-white-050));
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div::after {
+    content: "INSPECT" !important;
+    left: auto !important;
+    right: calc(0px - var(--capital-end-gap) - var(--capital-end-label-width)) !important;
+    border-color: color-mix(in srgb, var(--capital-end-return-tone) 64%, var(--bf-etched-line-strong)) !important;
+    color: color-mix(in srgb, var(--capital-end-return-tone) 80%, var(--bf-white-050)) !important;
   }
 
   /* The next major machine begins after the tall rail housing. Because the
@@ -185,5 +226,12 @@
     position: relative !important;
     inset: auto !important;
     width: auto !important;
+  }
+
+  /* External boundary labels belong only to the spatial desktop apparatus. */
+  .capital-frame__conversion-stage[data-stage-id="capital"] > div::before,
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] > div::after {
+    display: none !important;
+    content: none !important;
   }
 }
