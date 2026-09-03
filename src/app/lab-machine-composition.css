@@ -14,14 +14,16 @@
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="focus"] {
     --core-left: 3.2%;
-    --core-bottom-top: 51.5%;
+    --core-upper-top: 7%;
     --core-left-card-width: 21.2%;
     --core-upper-card-width: 23.2%;
     --core-card-height: 41.5%;
-    --core-field-gap: .8%;
-    --core-card-gap: 1%;
+    --core-gap: clamp(8px, .55vw, 10px);
+    --core-field-gap: var(--core-gap);
+    --core-card-gap: var(--core-gap);
     --core-tour-height: clamp(72px, 5vw, 82px);
-    --core-tour-dock-gap: clamp(10px, .8vw, 14px);
+    --core-tour-dock-gap: var(--core-gap);
+    --core-bottom-top: calc(var(--core-upper-top) + var(--core-card-height) + var(--core-gap));
     --core-research-left: calc(var(--core-left) + var(--core-left-card-width) + var(--core-field-gap));
     --core-products-left: calc(var(--core-research-left) + var(--core-upper-card-width) + var(--core-card-gap));
     --core-publications-left: calc(var(--core-products-left) + var(--core-upper-card-width) + var(--core-card-gap));
@@ -42,6 +44,13 @@
     bottom: auto !important;
     width: var(--core-left-card-width) !important;
     height: var(--core-card-height) !important;
+    z-index: 50 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-about-dock {
+    z-index: 80 !important;
   }
 
   .site-shell[data-root-focus="true"]
@@ -78,7 +87,7 @@
     .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
     position: absolute !important;
     left: var(--core-research-left) !important;
-    top: 7% !important;
+    top: var(--core-upper-top) !important;
     right: auto !important;
     bottom: auto !important;
     width: var(--core-upper-card-width) !important;
@@ -90,7 +99,7 @@
     .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
     position: absolute !important;
     left: var(--core-products-left) !important;
-    top: 7% !important;
+    top: var(--core-upper-top) !important;
     right: auto !important;
     bottom: auto !important;
     width: var(--core-upper-card-width) !important;
@@ -102,7 +111,7 @@
     .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
     position: absolute !important;
     left: var(--core-publications-left) !important;
-    top: 7% !important;
+    top: var(--core-upper-top) !important;
     right: auto !important;
     bottom: auto !important;
     width: var(--core-upper-card-width) !important;
