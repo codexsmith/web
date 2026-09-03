@@ -248,6 +248,29 @@ const retainedReturns: RetainedReturn[] = [
   { label: "Institutional memory", copy: "Reusable methods, software, standards, relationships, and stewardship.", affinity: "institution" },
 ];
 
+const diligenceGateCopy: Record<string, { label: string; question: string }> = {
+  exists: {
+    label: "What already exists?",
+    question: "What is already real and source-backed?",
+  },
+  "convert-next": {
+    label: "What does capital convert next?",
+    question: "What specific work or capability does this input enable?",
+  },
+  closure: {
+    label: "What closes the work?",
+    question: "What counts as success, failure, narrowing, transfer, or stop?",
+  },
+  "external-legibility": {
+    label: "How does it become legible?",
+    question: "What external artifact or witness makes the result inspectable?",
+  },
+  "decrease-dependence": {
+    label: "How does dependence decrease?",
+    question: "How does this reduce dependence on the funder, founder, or hidden Lab interpretation?",
+  },
+};
+
 function ConversionStagePlate({ stage }: { stage: ConversionStage }) {
   return (
     <article
@@ -470,28 +493,27 @@ export function CapitalEconomicsFrame() {
 
         <aside className="capital-frame__diligence-console" aria-labelledby="diligence-title">
           <header className="capital-frame__console-heading">
-            <span>Capital ask grammar</span>
             <h2 id="diligence-title">Five gates every ask must close</h2>
           </header>
 
           <ol className="capital-frame__diligence-gates">
-            {capital.diligenceQuestions.map((item, index) => (
-              <li key={item.id} data-boundary-operation="gate" data-affinity="institution">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h3>{item.label}</h3>
-                  <p>{item.question}</p>
-                  <small>{item.requiredState}</small>
-                </div>
-              </li>
-            ))}
-          </ol>
+            {capital.diligenceQuestions.map((item, index) => {
+              const display = diligenceGateCopy[item.id] ?? {
+                label: item.label,
+                question: item.question,
+              };
 
-          <article className="capital-frame__boundary-note">
-            <span>Boundary condition</span>
-            <strong>Capital does not bypass evidence.</strong>
-            <p>Funding, attention, product demand, expert interest, and technical reproduction are different witnesses. None substitutes for the others.</p>
-          </article>
+              return (
+                <li key={item.id} data-boundary-operation="gate" data-affinity="institution">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{display.label}</h3>
+                    <p>{display.question}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
         </aside>
       </div>
 
