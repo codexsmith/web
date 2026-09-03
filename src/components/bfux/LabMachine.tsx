@@ -14,6 +14,7 @@ import "./lab-machine.css";
 import "./lab-machine-physical.css";
 import "./lab-machine-reference-cards.css";
 import "./lab-machine-reference-match.css";
+import "./lab-machine-structure.css";
 
 const nodeIcons: Record<string, BfuxIconName> = {
   products: "object",
@@ -115,6 +116,7 @@ function Node({
   return (
     <article
       className={`bf-machine-node bf-machine-node--${node.kind} ${isConjoinedBlock ? "bf-machine-node--conjoined" : ""}`}
+      data-machine-layer="node"
       data-node-id={node.id}
       data-machine-node-interactive={onOpen ? "true" : undefined}
       data-tone={node.tone}
@@ -221,7 +223,7 @@ function Node({
 
 function PhysicalStatus() {
   return (
-    <aside className="bf-machine__status" aria-label="Lab Machine graph status">
+    <aside className="bf-machine__status" data-machine-layer="context" aria-label="Lab Machine graph status">
       <strong>THE LAB MACHINE</strong>
       <small>Powered by Research. Built for People.</small>
     </aside>
@@ -240,7 +242,7 @@ function PhysicalLegend() {
   ];
 
   return (
-    <footer className="bf-machine__legend" aria-label="Boundary First visual grammar legend">
+    <footer className="bf-machine__legend" data-machine-layer="context" aria-label="Boundary First visual grammar legend">
       <strong>LEGEND · BOUNDARY-FIRST VISUAL GRAMMAR</strong>
       <div>
         {items.map(([icon, label, detail]) => (
@@ -318,10 +320,11 @@ export function LabMachine({
         <strong>THE LAB MACHINE</strong>
         <span>Powered by Research. Built for People.</span>
       </div>
-      <div className="bf-machine__board">
+      <div className="bf-machine__board" data-machine-layer="viewport">
         {skin === "physical" ? <PhysicalStatus /> : null}
         <div
           className="bf-machine__apparatus"
+          data-machine-layer="apparatus"
           data-dragging={isDraggingApparatus ? "true" : undefined}
           style={skin === "physical" ? { transform: `translate3d(${apparatusOffset.x}px, ${apparatusOffset.y}px, 0)` } : undefined}
           tabIndex={skin === "physical" ? 0 : undefined}

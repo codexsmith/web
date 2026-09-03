@@ -196,6 +196,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
       <article
         ref={tourRef}
         className="bf-machine-node bf-machine-tour-card"
+        data-machine-layer="node"
         data-node-id="tour"
         data-expanded={expanded ? "true" : "false"}
         data-map-open={mapOpen ? "true" : "false"}
