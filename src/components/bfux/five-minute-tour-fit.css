@@ -138,3 +138,36 @@
   display: none !important;
   content: none !important;
 }
+
+/* Expanded Tour viewport safety.
+ *
+ * The closed launcher keeps its mechanical dock geometry. The expanded reading
+ * surface may overlap neighboring modules, but it must not begin outside the
+ * fixed machine viewport. These desktop overrides preserve the authored width
+ * while clamping the chassis just inside the left edge.
+ */
+@media (min-width: 1025px) {
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    > .bf-machine-tour-card[data-node-id="tour"][data-expanded="true"] {
+    left: max(10px, 1%) !important;
+    right: auto !important;
+    width: 34.7% !important;
+    transform-origin: left bottom !important;
+  }
+
+  /* Full Loop nests Tour inside About. About begins at 2.5% of the board and is
+   * 18% wide; -8.33% of that local width places the expanded Tour at roughly a
+   * 1% board inset while retaining its 213% reading width. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-tour-card[data-node-id="tour"][data-expanded="true"] {
+    left: -8.33% !important;
+    right: auto !important;
+    width: 213% !important;
+    transform-origin: left bottom !important;
+  }
+}
