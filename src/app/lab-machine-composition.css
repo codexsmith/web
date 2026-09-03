@@ -71,14 +71,14 @@
     .bf-machine[data-skin="physical"][data-resolution="focus"]
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"] {
     position: absolute !important;
-    left: var(--core-left) !important;
+    left: auto !important;
     top: auto !important;
-    right: auto !important;
+    right: calc(100% - var(--core-left) - var(--core-left-card-width)) !important;
     bottom: var(--core-tour-bottom) !important;
     width: 34.7% !important;
     height: max(48.5%, 300px) !important;
     z-index: 40 !important;
-    transform-origin: left bottom !important;
+    transform-origin: right bottom !important;
   }
 
   /* People / Products / Publications span the Research field in equal cards. */
