@@ -14,6 +14,15 @@
     width:max(100%,1120px);
     transform-origin:top center;
   }
+
+  /* The legacy ultra-wide skin swaps --machine-u from vw to vh at a 2:1
+   * viewport ratio. That was useful when the entire machine had to stay above
+   * the fold, but it fights the homepage auto-fit contract. While auto-fit is
+   * active, one width-governed ruler owns the whole physical instrument. */
+  .physical-machine-experience__fit-stage[data-auto-fit="true"]
+    .bf-machine[data-skin="physical"]{
+    --machine-u:1vw !important;
+  }
 }
 
 .world-machine-resolution{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem .55rem;margin:.5rem .65rem .25rem;padding:.42rem .5rem;border:1px solid #314047;border-radius:8px;background:#0d1518;color:#cfd7d8}
