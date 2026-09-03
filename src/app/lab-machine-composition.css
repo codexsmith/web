@@ -122,8 +122,6 @@
 
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="mid"] {
-    /* These are the same machinery dimensions currently used by the lower deck.
-     * Keeping them here makes composition the explicit owner of the shared datum. */
     --adjacency-port-width: calc(var(--machine-u) * 1.45);
     --adjacency-bay: calc(var(--machine-u) * 2.9);
     --research-width: 36%;
@@ -222,5 +220,30 @@
     z-index: 8 !important;
     width: 18% !important;
     height: 21% !important;
+  }
+}
+
+/* Root-machine presentation belongs with the machine, not the frame. */
+.site-shell[data-root-focus="true"] .bf-machine__status {
+  display: none !important;
+}
+
+.site-shell[data-root-focus="true"] .bf-machine__legend-actions p {
+  display: none !important;
+}
+
+.site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
+  content: "HOVER: PREVIEW · CLICK / ENTER: OPEN";
+  display: block;
+  color: #b7c1c5;
+  font: 700 .54rem/1.35 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .055em;
+  white-space: nowrap;
+}
+
+@media (max-width: 430px) {
+  .site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
+    white-space: normal;
+    font-size: .49rem;
   }
 }

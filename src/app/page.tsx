@@ -6,9 +6,7 @@ import { HomeEntryExperience } from "@/components/home-entry-experience";
 import "./world/world-machine-preview.css";
 import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
-import "./lab-machine-frame-polish.css";
-import "./lab-machine-frame-resolution.css";
-import "./lab-machine-home-final.css";
+import "./lab-machine-frame.css";
 import "./lab-machine-composition.css";
 
 export const metadata: Metadata = {
