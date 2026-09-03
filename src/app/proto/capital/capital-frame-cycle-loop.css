@@ -144,8 +144,9 @@
     box-shadow: none !important;
   }
 
-  /* The title is now normal-flow content of the rail, so it cannot drift above
-     or outside the conduit when browser zoom changes effective viewport size. */
+  /* The title is normal-flow content of the rail. Desktop instrument text uses
+     fixed CSS-pixel metrics: browser zoom scales these uniformly, whereas the
+     old vw-based clamp changed size as zoom changed the effective viewport. */
   .capital-frame__engine-heading > div {
     position: relative !important;
     inset: auto !important;
@@ -157,9 +158,12 @@
 
   .capital-frame__engine-heading h2 {
     margin: 0 !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    letter-spacing: 2.2px !important;
   }
 
-  /* The card bank now lives inside the header in DOM and in flow. Retire every
+  /* The card bank lives inside the header in DOM and in flow. Retire every
      absolute-placement assumption from the earlier sibling topology. */
   .capital-frame__engine-heading > .capital-frame__conversion-rail {
     position: relative !important;
@@ -182,6 +186,31 @@
     height: var(--capital-cycle-stage-height) !important;
     max-height: var(--capital-cycle-stage-height) !important;
     align-self: stretch !important;
+  }
+
+  /* Rail-face typography follows the same fixed-design law as its hardware.
+     The slightly tighter vertical metrics keep the two longest cards inside the
+     212px faceplate without returning to decorative microtype. */
+  .capital-frame__conversion-stage > div {
+    padding-top: 14px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .capital-frame__conversion-stage h3 {
+    font-size: 14px !important;
+    line-height: 1.12 !important;
+    letter-spacing: .45px !important;
+  }
+
+  .capital-frame__conversion-stage p {
+    margin-top: 7px !important;
+    font-size: 12px !important;
+    line-height: 1.38 !important;
+  }
+
+  .capital-frame__conversion-stage > header > span {
+    font-size: 8px !important;
+    line-height: 1 !important;
   }
 
   /* End interfaces need visible overflow; their card bodies remain fixed to
