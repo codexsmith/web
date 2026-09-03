@@ -1,6 +1,6 @@
-/* Capital prototype · Unified conversion-cycle shell
+/* Capital prototype · Unified conversion-cycle chassis
 
-   The primary capital cycle is one DOM object and one structural chassis:
+   One DOM object owns one structural loop:
 
      ╭════════ PRIMARY CONVERSION RAIL ════════╮
      ║                                          ║
@@ -8,15 +8,16 @@
      ║                                          ║
      ╰════════ DURABLE / RETAINED OUTPUT ══════╯
 
-   Cards and connectors are mounted hardware. The cycle chassis owns the global
-   boundary. Desktop geometry is deliberately fixed inside the apparatus's
-   bounded 840–1040px engine envelope so browser zoom magnifies/recedes one
-   machine rather than changing its aspect ratio.
+   Global cycle geometry lives here. Cards, icons, local connectors, end
+   interfaces, and retained-output readouts are mounted hardware owned by their
+   respective component layers.
 */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-frame {
-    --capital-cycle-side-extension: var(--capital-header-side-extension, 54px);
+    --capital-cycle-side-extension: 54px;
+    /* Compatibility alias while older non-cycle connector layers are reduced. */
+    --capital-header-side-extension: var(--capital-cycle-side-extension);
     --capital-cycle-side-width: 18px;
     --capital-cycle-radius: 22px;
     --capital-cycle-inner-radius: 16px;
@@ -26,12 +27,9 @@
   }
 
   .capital-frame__engine {
+    position: relative !important;
     overflow: visible !important;
   }
-
-  /* ---------------------------------------------------------------------- */
-  /* ONE CONTINUOUS CYCLE CHASSIS                                             */
-  /* ---------------------------------------------------------------------- */
 
   .capital-frame__cycle-loop {
     position: relative;
@@ -44,6 +42,10 @@
     margin-top: 18px;
     overflow: visible;
   }
+
+  /* ---------------------------------------------------------------------- */
+  /* ONE CONTINUOUS CYCLE CHASSIS                                            */
+  /* ---------------------------------------------------------------------- */
 
   .capital-frame__cycle-loop-shell {
     position: absolute;
@@ -91,8 +93,7 @@
       inset 0 -1px 0 rgba(0,0,0,.20);
   }
 
-  /* One rounded inner void produces continuous inner elbows. Its top/bottom
-     coordinates match the actual designed top and bottom members. */
+  /* A single rounded inner void creates both side risers and all four elbows. */
   .capital-frame__cycle-loop-shell::after {
     content: "";
     position: absolute;
@@ -114,14 +115,19 @@
       inset 0 0 18px rgba(0,0,0,.16);
   }
 
+  /* Retire the pre-loop conduit and shoulder drawing surfaces. */
+  .capital-frame__input-console::before,
   .capital-frame__input-console::after,
-  .capital-frame__diligence-console::after {
+  .capital-frame__diligence-console::before,
+  .capital-frame__diligence-console::after,
+  .capital-frame__conversion-rail::before,
+  .capital-frame__conversion-rail::after {
     display: none !important;
     content: none !important;
   }
 
   /* ---------------------------------------------------------------------- */
-  /* TOP MEMBER · title and cards are one intrinsic DOM assembly             */
+  /* TOP MEMBER · title + six mounted conversion modules                     */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__engine-heading {
@@ -144,9 +150,6 @@
     box-shadow: none !important;
   }
 
-  /* The title is normal-flow content of the rail. Desktop instrument text uses
-     fixed CSS-pixel metrics: browser zoom scales these uniformly, whereas the
-     old vw-based clamp changed size as zoom changed the effective viewport. */
   .capital-frame__engine-heading > div {
     position: relative !important;
     inset: auto !important;
@@ -157,20 +160,24 @@
   }
 
   .capital-frame__engine-heading h2 {
+    max-width: none !important;
     margin: 0 !important;
+    overflow: visible !important;
+    color: color-mix(in srgb, #dce9ec 92%, #8ba2aa) !important;
     font-size: 16px !important;
     line-height: 1 !important;
+    font-weight: 850 !important;
     letter-spacing: 2.2px !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    text-shadow:
+      0 1px 0 rgba(0,0,0,.72),
+      0 0 10px rgba(184,203,211,.07) !important;
   }
 
-  /* The card bank lives inside the header in DOM and in flow. Retire every
-     absolute-placement assumption from the earlier sibling topology. */
   .capital-frame__engine-heading > .capital-frame__conversion-rail {
     position: relative !important;
     inset: auto !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
     z-index: 5 !important;
     width: 100% !important;
     height: var(--capital-cycle-stage-height) !important;
@@ -188,9 +195,8 @@
     align-self: stretch !important;
   }
 
-  /* Rail-face typography follows the same fixed-design law as its hardware.
-     The slightly tighter vertical metrics keep the two longest cards inside the
-     212px faceplate without returning to decorative microtype. */
+  /* Fixed instrument-face metrics: browser zoom scales the complete apparatus
+     uniformly instead of recalculating text from viewport width. */
   .capital-frame__conversion-stage > div {
     padding-top: 14px !important;
     padding-bottom: 30px !important;
@@ -213,15 +219,8 @@
     line-height: 1 !important;
   }
 
-  /* End interfaces need visible overflow; their card bodies remain fixed to
-     the same designed height as their peer modules. */
-  .capital-frame__conversion-stage[data-stage-id="capital"],
-  .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
-    overflow: visible !important;
-  }
-
   /* ---------------------------------------------------------------------- */
-  /* CENTER VOID · actual engine machinery                                   */
+  /* CENTER VOID · operational engine                                        */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__machine-bed {
@@ -231,7 +230,7 @@
   }
 
   /* ---------------------------------------------------------------------- */
-  /* BOTTOM MEMBER · durable output mounted into the same chassis             */
+  /* BOTTOM MEMBER · durable-output content is mounted by cycle-footer        */
   /* ---------------------------------------------------------------------- */
 
   .capital-frame__return-manifold {
@@ -247,23 +246,9 @@
     background: transparent !important;
     box-shadow: none !important;
   }
-
-  .capital-frame__return-manifold > header {
-    margin: 0 12px !important;
-    padding: 9px 18px 8px !important;
-    background: rgba(5,9,12,.14) !important;
-  }
-
-  .capital-frame__return-manifold > div {
-    margin: 0 12px 12px !important;
-  }
-
-  .capital-frame__institutional-rail {
-    margin-top: 12px !important;
-  }
 }
 
-/* Mobile/coarse-pointer keeps the simpler linear projection. */
+/* Mobile/coarse pointer uses the simpler linear projection. */
 @media (pointer: coarse), (max-width: 760px) {
   .capital-frame__cycle-loop {
     display: grid;
