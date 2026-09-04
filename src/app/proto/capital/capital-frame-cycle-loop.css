@@ -16,7 +16,7 @@
      - corrugation says conduit;
      - explicit right-pointing header stamps say flow;
      - a visible left→right state tint says conversion;
-     - bottom-mounted capacity blocks accumulate toward retained capability.
+     - stage N carries exactly N bottom-mounted capacity blocks.
 */
 
 @media (hover: hover) and (pointer: fine) {
@@ -64,20 +64,17 @@
     border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 88%, transparent);
     border-radius: var(--capital-cycle-radius);
     background:
-      /* surface-state tint: neutral input, greener retained side */
       linear-gradient(90deg,
         color-mix(in srgb, var(--bf-silver-300) 3.5%, transparent) 0%,
         transparent 30%,
         color-mix(in srgb, var(--bf-valid) 4%, transparent) 66%,
         color-mix(in srgb, var(--bf-valid) 7%, transparent) 100%),
-      /* physical edge lighting */
       linear-gradient(180deg,
         rgba(255,255,255,.070) 0 1px,
         transparent 1px 5px,
         rgba(0,0,0,.15) 5px calc(100% - 5px),
         rgba(255,255,255,.022) calc(100% - 5px) calc(100% - 2px),
         rgba(0,0,0,.46) calc(100% - 2px) 100%),
-      /* conduit ribs remain material, not foreground pattern */
       repeating-linear-gradient(90deg,
         var(--capital-conduit-highlight, rgba(255,255,255,.032)) 0 1px,
         rgba(0,0,0,.10) 1px 4px,
@@ -106,7 +103,6 @@
       inset 0 -1px 0 rgba(0,0,0,.20);
   }
 
-  /* A single rounded inner void creates both side risers and all four elbows. */
   .capital-frame__cycle-loop-shell::after {
     content: "";
     position: absolute;
@@ -128,7 +124,6 @@
       inset 0 0 18px rgba(0,0,0,.16);
   }
 
-  /* Retire the pre-loop conduit and shoulder drawing surfaces. */
   .capital-frame__input-console::before,
   .capital-frame__input-console::after,
   .capital-frame__diligence-console::before,
@@ -163,8 +158,6 @@
     box-shadow: none !important;
   }
 
-  /* The rail substrate keeps only a quiet accumulation datum. The actual
-     capacity signal is carried by the stage-mounted block bands below. */
   .capital-frame__engine-heading::before {
     content: "";
     position: absolute;
@@ -208,8 +201,6 @@
     align-self: start !important;
   }
 
-  /* Explicit rightward stamped flow marks. A tiny inline SVG avoids the
-     ambiguous crossed-gradient / diamond-plate read of the earlier version. */
   .capital-frame__engine-heading > div::after {
     content: "";
     position: absolute;
@@ -256,12 +247,14 @@
     transform: none !important;
   }
 
+  /* Bottom hardware row: capacity band on the left, operation icon on the
+     right. The former number badge is deliberately suppressed. */
   .capital-frame__conversion-stage {
     --capacity-tone: var(--bfux-affinity, var(--bf-silver-300));
-    --capacity-band-width: 58%;
-    --capacity-band-height: 8px;
-    --capacity-block-width: 10px;
-    --capacity-block-step: 20px;
+    --capacity-band-width: 8px;
+    --capacity-band-height: 7px;
+    --capacity-block-width: 8px;
+    --capacity-block-step: 12px;
     --capacity-band-opacity: .48;
     box-sizing: border-box !important;
     min-height: var(--capital-cycle-stage-height) !important;
@@ -273,62 +266,52 @@
       linear-gradient(180deg, #263238, #182025) !important;
   }
 
+  .capital-frame__conversion-stage > header {
+    display: none !important;
+  }
+
   .capital-frame__conversion-stage[data-stage-id="capital"] {
     --capacity-tone: color-mix(in srgb, var(--bf-region-about) 54%, var(--bf-silver-300));
-    --capacity-band-width: 56%;
-    --capacity-band-height: 8px;
-    --capacity-block-width: 10px;
-    --capacity-block-step: 21px;
+    --capacity-band-width: 8px;
+    --capacity-band-height: 7px;
     --capacity-band-opacity: .46;
   }
 
   .capital-frame__conversion-stage[data-stage-id="coherent-capacity"] {
     --capacity-tone: color-mix(in srgb, var(--bf-region-about) 36%, var(--bf-silver-300));
-    --capacity-band-width: 66%;
-    --capacity-band-height: 11px;
-    --capacity-block-width: 10px;
-    --capacity-block-step: 19px;
-    --capacity-band-opacity: .54;
+    --capacity-band-width: 20px;
+    --capacity-band-height: 9px;
+    --capacity-band-opacity: .55;
   }
 
   .capital-frame__conversion-stage[data-stage-id="bounded-work"] {
     --capacity-tone: var(--bf-region-research);
-    --capacity-band-width: 76%;
-    --capacity-band-height: 14px;
-    --capacity-block-width: 10px;
-    --capacity-block-step: 18px;
-    --capacity-band-opacity: .61;
+    --capacity-band-width: 32px;
+    --capacity-band-height: 11px;
+    --capacity-band-opacity: .63;
   }
 
   .capital-frame__conversion-stage[data-stage-id="validation"] {
     --capacity-tone: var(--bf-info);
-    --capacity-band-width: 84%;
-    --capacity-band-height: 17px;
-    --capacity-block-width: 11px;
-    --capacity-block-step: 17px;
-    --capacity-band-opacity: .67;
+    --capacity-band-width: 44px;
+    --capacity-band-height: 13px;
+    --capacity-band-opacity: .70;
   }
 
   .capital-frame__conversion-stage[data-stage-id="transfer"] {
     --capacity-tone: color-mix(in srgb, var(--bf-valid) 52%, var(--bf-info));
-    --capacity-band-width: 92%;
-    --capacity-band-height: 20px;
-    --capacity-block-width: 11px;
-    --capacity-block-step: 16px;
-    --capacity-band-opacity: .74;
+    --capacity-band-width: 56px;
+    --capacity-band-height: 15px;
+    --capacity-band-opacity: .77;
   }
 
   .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
     --capacity-tone: var(--bf-valid);
-    --capacity-band-width: 100%;
-    --capacity-band-height: 25px;
-    --capacity-block-width: 12px;
-    --capacity-block-step: 15px;
-    --capacity-band-opacity: .84;
+    --capacity-band-width: 68px;
+    --capacity-band-height: 17px;
+    --capacity-band-opacity: .86;
   }
 
-  /* The content well owns the accumulation display so it never collides with
-     Capital's INTAKE pseudo-elements or Retained Capability's INSPECT bank. */
   .capital-frame__conversion-stage > div {
     position: relative !important;
     z-index: 1;
@@ -341,7 +324,7 @@
     position: absolute;
     z-index: 1;
     left: 10px;
-    bottom: 9px;
+    bottom: 8px;
     width: var(--capacity-band-width);
     height: var(--capacity-band-height);
     pointer-events: none;
@@ -377,11 +360,6 @@
     margin-top: 7px !important;
     font-size: 12px !important;
     line-height: 1.38 !important;
-  }
-
-  .capital-frame__conversion-stage > header > span {
-    font-size: 8px !important;
-    line-height: 1 !important;
   }
 
   /* ---------------------------------------------------------------------- */
@@ -429,7 +407,6 @@
   }
 }
 
-/* Mobile/coarse pointer uses the simpler linear projection. */
 @media (pointer: coarse), (max-width: 760px) {
   .capital-frame__cycle-loop {
     display: grid;
