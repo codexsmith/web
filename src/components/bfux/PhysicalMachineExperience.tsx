@@ -74,6 +74,7 @@ export function PhysicalMachineExperience({
   const [machineFit, setMachineFit] = useState<MachineFit>(defaultMachineFit);
   const machineHostRef = useRef<HTMLDivElement>(null);
   const machineStackRef = useRef<HTMLDivElement>(null);
+  const hasMeasuredInitialFitRef = useRef(false);
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
@@ -96,65 +97,44 @@ export function PhysicalMachineExperience({
   }, [initialResolution, onResolutionChange, sectionLabel]);
 
   useLayoutEffect(() => {
-    if (sectionSurface) {
-      setMachineFit(defaultMachineFit);
-      return;
-    }
+    /* Auto-fit is an initialization aid, not a responsive zoom controller.
+     * Measure once when the homepage machine first exists, then preserve that
+     * presentation scale for the lifetime of this mounted page. Browser zoom,
+     * viewport resize, and Core/Full switching must not trigger recalculation. */
+    if (sectionSurface || hasMeasuredInitialFitRef.current) return;
 
     const host = machineHostRef.current;
     const stack = machineStackRef.current;
     const board = stack?.querySelector<HTMLElement>(".bf-machine__board") ?? null;
     if (!host || !stack || !board) return;
 
-    let frame = 0;
+    let frame = window.requestAnimationFrame(() => {
+      if (!window.matchMedia(desktopFitQuery).matches) {
+        hasMeasuredInitialFitRef.current = true;
+        return;
+      }
 
-    const updateFit = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(() => {
-        if (!window.matchMedia(desktopFitQuery).matches) {
-          setMachineFit((current) => current.enabled ? defaultMachineFit : current);
-          return;
-        }
+      const hostWidth = host.clientWidth;
+      const sourceWidth = board.offsetWidth;
+      const sourceHeight = board.offsetHeight;
+      if (!hostWidth || !sourceWidth || !sourceHeight) return;
 
-        const hostWidth = host.clientWidth;
-        const sourceWidth = board.offsetWidth;
-        const sourceHeight = board.offsetHeight;
-        if (!hostWidth || !sourceWidth || !sourceHeight) return;
+      /* The board is the machine object. The legend below it is page context,
+       * so it deliberately stays outside the fitted transform. */
+      const targetWidth = hostWidth * targetMachineWidthRatio;
+      const horizontalScale = targetWidth / sourceWidth;
+      const scale = Math.max(0.72, Math.min(0.96, horizontalScale));
+      const collapse = Math.max(0, sourceHeight * (1 - scale));
 
-        /* The board is the machine object. The legend below it is page context,
-         * so it deliberately stays outside the fitted transform. */
-        const targetWidth = hostWidth * targetMachineWidthRatio;
-        const horizontalScale = targetWidth / sourceWidth;
-        const scale = Math.max(0.72, Math.min(0.96, horizontalScale));
-        const collapse = Math.max(0, sourceHeight * (1 - scale));
-
-        setMachineFit((current) => {
-          if (
-            current.enabled
-            && Math.abs(current.scale - scale) < 0.002
-            && Math.abs(current.collapse - collapse) < 2
-          ) {
-            return current;
-          }
-
-          return { enabled: true, scale, collapse };
-        });
-      });
-    };
-
-    updateFit();
-    window.addEventListener("resize", updateFit, { passive: true });
-
-    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(updateFit);
-    observer?.observe(host);
-    observer?.observe(board);
+      setMachineFit({ enabled: true, scale, collapse });
+      hasMeasuredInitialFitRef.current = true;
+    });
 
     return () => {
       window.cancelAnimationFrame(frame);
-      window.removeEventListener("resize", updateFit);
-      observer?.disconnect();
+      frame = 0;
     };
-  }, [activeResolution, sectionSurface]);
+  }, [sectionSurface]);
 
   useEffect(() => {
     if (sectionSurface) {
