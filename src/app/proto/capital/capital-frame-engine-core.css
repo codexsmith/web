@@ -1,0 +1,248 @@
+/* Capital prototype · Lab conversion engine
+
+   Canonical structural layer for the machinery between the conversion rail and
+   retained-output member:
+
+     six operational modules
+              ↓
+     civics / stewardship governor
+
+   The unified cycle chassis owns the large enclosure. This file owns only the
+   mounted engine layout and its couplings. Operation flags and stewardship-card
+   presentation live in their own focused layers.
+*/
+
+.capital-frame__machine-bed {
+  --engine-shell-edge: color-mix(in srgb, var(--bf-silver-300) 58%, var(--bf-etched-line-strong));
+  --engine-shell-face: color-mix(in srgb, var(--bf-bg-raised) 88%, #10171b);
+  --engine-drive: color-mix(in srgb, var(--bf-info) 46%, var(--bf-silver-300));
+  --engine-return: color-mix(in srgb, var(--bf-valid) 44%, var(--bf-silver-300));
+  --engine-cycle-gutter: calc(var(--capital-cycle-side-extension, 54px) - var(--capital-cycle-side-width, 18px));
+
+  position: relative;
+  z-index: 4;
+  overflow: visible !important;
+  width: calc(100% + var(--engine-cycle-gutter) + var(--engine-cycle-gutter));
+  max-width: none !important;
+  justify-self: center !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* The retired narrative strip and redundant BFL identity card no longer
+   consume space inside the mechanism. */
+.capital-frame__machine-bed > header,
+.capital-frame__chassis {
+  display: none !important;
+}
+
+/* The engine physically engages the conversion rail above and retained-output
+   machinery below. These are couplings, not arrows. */
+.capital-frame__machine-bed::before,
+.capital-frame__machine-bed::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 54px;
+  height: 18px;
+  transform: translateX(-50%);
+  z-index: 12;
+  pointer-events: none;
+  border: 1px solid var(--engine-shell-edge);
+  background:
+    radial-gradient(circle at 50% 50%,
+      #091014 0 4px,
+      var(--engine-coupler-color) 4px 6px,
+      #0b1115 6px 9px,
+      transparent 9px),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--engine-shell-face) 92%, #42535a),
+      color-mix(in srgb, var(--engine-shell-face) 84%, #0b1013));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 -1px 0 rgba(0,0,0,.45),
+    0 3px 8px rgba(0,0,0,.26);
+}
+
+.capital-frame__machine-bed::before {
+  --engine-coupler-color: var(--engine-drive);
+  top: -18px;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+
+.capital-frame__machine-bed::after {
+  --engine-coupler-color: var(--engine-return);
+  bottom: -18px;
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+}
+
+.capital-frame__machine-bed-body {
+  position: relative;
+  z-index: 1;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: 12px !important;
+  padding: 12px 12px 14px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Quiet mounting datum. The earlier teeth/track treatment was too surface-like;
+   two thin guide rails with widely spaced registration slots imply engagement
+   without becoming a competing texture. */
+.capital-frame__machine-bed-body::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 10px;
+  right: 10px;
+  top: 6px;
+  bottom: 6px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg,
+      color-mix(in srgb, var(--engine-drive) 18%, transparent) 0 14px,
+      transparent 14px 58px) top left / 100% 3px no-repeat,
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--engine-drive) 8%, transparent),
+      color-mix(in srgb, var(--engine-drive) 3%, transparent)) top 2px left / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg,
+      color-mix(in srgb, var(--engine-return) 17%, transparent) 0 14px,
+      transparent 14px 58px) bottom left / 100% 3px no-repeat,
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--engine-return) 3%, transparent),
+      color-mix(in srgb, var(--engine-return) 8%, transparent)) bottom 2px left / 100% 1px no-repeat;
+  opacity: .30;
+}
+
+/* -------------------------------------------------------------------------- */
+/* SIX OPERATIONAL MODULES                                                     */
+/* -------------------------------------------------------------------------- */
+
+.capital-frame__machine-functions {
+  position: relative;
+  z-index: 3;
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(2, minmax(108px, 1fr)) !important;
+  grid-auto-flow: row !important;
+  align-items: stretch !important;
+  align-content: stretch !important;
+  padding: 0 !important;
+  gap: 9px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.capital-frame__machine-functions .capital-frame__machine-function {
+  position: relative;
+  z-index: 2;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 108px !important;
+  height: 100% !important;
+  align-self: stretch !important;
+  border-color: color-mix(in srgb, var(--bfux-affinity, var(--bf-silver-300)) 34%, var(--bf-etched-line)) !important;
+  box-shadow:
+    var(--bf-shadow-control),
+    var(--bf-shadow-inset),
+    0 2px 5px rgba(0,0,0,.12) !important;
+}
+
+/* Transmission coupling from active machinery into the stewardship governor. */
+.capital-frame__machine-functions::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -19px;
+  width: 46px;
+  height: 19px;
+  transform: translateX(-50%);
+  z-index: 8;
+  pointer-events: none;
+  border: 1px solid color-mix(in srgb, var(--engine-return) 42%, var(--bf-etched-line-strong));
+  border-top: 0;
+  border-radius: 0 0 7px 7px;
+  background:
+    radial-gradient(circle at 50% 42%,
+      #091014 0 3px,
+      var(--engine-return) 3px 5px,
+      #0b1115 5px 8px,
+      transparent 8px),
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--engine-shell-face) 94%, #3e5056),
+      color-mix(in srgb, var(--engine-shell-face) 84%, #0b1013));
+  box-shadow: 0 4px 8px rgba(0,0,0,.22);
+}
+
+/* Stewardship is the lower governor/baseplate, not a peer card row. */
+.capital-frame__stewardship-module {
+  position: relative;
+  z-index: 4;
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  margin-top: 5px;
+  border-width: 1px !important;
+  border-color: color-mix(in srgb, var(--engine-return) 38%, var(--bf-etched-line-strong)) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--bf-info) 3%, transparent), transparent 24%),
+    var(--bf-brushed-metal),
+    color-mix(in srgb, var(--bf-bg-raised) 90%, #0b1013) !important;
+  box-shadow:
+    0 7px 18px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.045),
+    inset 0 -2px 0 rgba(0,0,0,.44),
+    0 0 0 1px color-mix(in srgb, var(--engine-return) 8%, transparent) !important;
+}
+
+.capital-frame__institutional-rail {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .capital-frame__machine-bed {
+    width: auto;
+    max-width: none !important;
+    justify-self: stretch !important;
+    margin: 0;
+    border-radius: 0 !important;
+  }
+
+  .capital-frame__machine-bed::before,
+  .capital-frame__machine-bed::after,
+  .capital-frame__machine-bed-body::before,
+  .capital-frame__machine-functions::after {
+    display: none;
+  }
+
+  .capital-frame__machine-bed-body {
+    padding: 9px !important;
+    gap: 9px !important;
+    background: color-mix(in srgb, var(--bf-bg-base) 92%, #0a1013) !important;
+  }
+
+  .capital-frame__machine-functions {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: repeat(3, minmax(108px, 1fr)) !important;
+    gap: 7px !important;
+  }
+
+  .capital-frame__stewardship-module {
+    margin-top: 0;
+  }
+}

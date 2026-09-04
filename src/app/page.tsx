@@ -8,6 +8,15 @@ import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
 import "./lab-machine-frame.css";
 import "./lab-machine-composition.css";
+import "./proto/capital/capital-frame.css";
+import "./proto/capital/capital-frame-canonical-connectors.css";
+import "./proto/capital/capital-frame-zoom-resilience.css";
+import "./proto/capital/capital-frame-conversion-iconography.css";
+import "./proto/capital/capital-frame-engine-core.css";
+import "./proto/capital/capital-frame-surface-system.css";
+import "./proto/capital/capital-frame-machine-function-control-flags.css";
+import "./proto/capital/capital-frame-stewardship-polish.css";
+import "./proto/capital/capital-frame-cycle-loop.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },
@@ -23,6 +32,8 @@ type Props = {
     view?: string | string[];
     scope?: string | string[];
     schematic?: string | string[];
+    mode?: string | string[];
+    resolution?: string | string[];
   }>;
 };
 
@@ -36,6 +47,8 @@ export default async function HomePage({ searchParams }: Props) {
   const projection = parseProjection(one(query.view)) ?? "world";
   const processScope = parseProcessScope(one(query.scope)) ?? "full";
   const showSchematic = one(query.schematic) === "1";
+  const initialSurface = one(query.mode) === "capital" ? "capital" : "machine";
+  const initialResolution = section || one(query.resolution) === "full" ? "mid" : "focus";
 
   return (
     <LabMachineHomeBoundary resetTraversal={!section}>
@@ -43,6 +56,8 @@ export default async function HomePage({ searchParams }: Props) {
         section={section}
         initialProjection={projection}
         initialProcessScope={processScope}
+        initialSurface={initialSurface}
+        initialResolution={initialResolution}
         showSchematic={showSchematic}
         machinePath="/"
       />

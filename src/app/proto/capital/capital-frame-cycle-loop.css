@@ -1,0 +1,461 @@
+/* Capital prototype · Unified conversion-cycle chassis
+
+   One DOM object owns one structural loop:
+
+     ╭════════ PRIMARY CONVERSION RAIL ════════╮
+     ║                                          ║
+     ║            LAB CONVERSION ENGINE         ║
+     ║                                          ║
+     ╰════════ DURABLE / RETAINED OUTPUT ══════╯
+
+   Global cycle geometry lives here. Cards, icons, local connectors, end
+   interfaces, and retained-output readouts are mounted hardware owned by their
+   respective component layers.
+
+   Surface grammar is static but directional:
+     - corrugation says conduit;
+     - explicit right-pointing header stamps say flow;
+     - a visible left→right state tint says conversion;
+     - stage N carries exactly N bottom-mounted capacity blocks.
+*/
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-frame {
+    --capital-cycle-side-extension: 54px;
+    --capital-header-side-extension: var(--capital-cycle-side-extension);
+    --capital-cycle-side-width: 18px;
+    --capital-cycle-radius: 22px;
+    --capital-cycle-inner-radius: 16px;
+    --capital-cycle-top-band: 282px;
+    --capital-cycle-bottom-band: 150px;
+    --capital-cycle-stage-height: 212px;
+  }
+
+  .capital-frame__engine {
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .capital-frame__cycle-loop {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: 0;
+    min-width: 0;
+    margin-top: 18px;
+    overflow: visible;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* ONE CONTINUOUS CYCLE CHASSIS                                            */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__cycle-loop-shell {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--capital-cycle-side-extension) * -1);
+    right: calc(var(--capital-cycle-side-extension) * -1);
+    overflow: hidden;
+    pointer-events: none;
+    border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 88%, transparent);
+    border-radius: var(--capital-cycle-radius);
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-silver-300) 3.5%, transparent) 0%,
+        transparent 30%,
+        color-mix(in srgb, var(--bf-valid) 4%, transparent) 66%,
+        color-mix(in srgb, var(--bf-valid) 7%, transparent) 100%),
+      linear-gradient(180deg,
+        rgba(255,255,255,.070) 0 1px,
+        transparent 1px 5px,
+        rgba(0,0,0,.15) 5px calc(100% - 5px),
+        rgba(255,255,255,.022) calc(100% - 5px) calc(100% - 2px),
+        rgba(0,0,0,.46) calc(100% - 2px) 100%),
+      repeating-linear-gradient(90deg,
+        var(--capital-conduit-highlight, rgba(255,255,255,.032)) 0 1px,
+        rgba(0,0,0,.10) 1px 4px,
+        transparent 4px 15px,
+        rgba(0,0,0,.065) 15px 17px,
+        transparent 17px 25px),
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--capital-conduit-face, var(--bf-bg-raised)) 86%, #1c262c),
+        var(--capital-conduit-dark, #10171b));
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.042),
+      inset 0 -3px 0 rgba(0,0,0,.30),
+      inset 0 0 0 1px rgba(255,255,255,.014),
+      0 8px 18px rgba(0,0,0,.24);
+  }
+
+  .capital-frame__cycle-loop-shell::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset: 1px;
+    border: 1px solid rgba(210,224,229,.064);
+    border-radius: calc(var(--capital-cycle-radius) - 1px);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.022),
+      inset 0 -1px 0 rgba(0,0,0,.20);
+  }
+
+  .capital-frame__cycle-loop-shell::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: var(--capital-cycle-top-band);
+    right: var(--capital-cycle-side-width);
+    bottom: var(--capital-cycle-bottom-band);
+    left: var(--capital-cycle-side-width);
+    border: 1px solid color-mix(in srgb, var(--capital-conduit-edge, var(--bf-etched-line-strong)) 72%, transparent);
+    border-radius: var(--capital-cycle-inner-radius);
+    background:
+      var(--bf-fine-grid),
+      linear-gradient(180deg, rgba(255,255,255,.010), transparent 22%),
+      color-mix(in srgb, var(--bf-bg-base) 94%, black);
+    background-size: 36px 36px, auto, auto;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.28),
+      inset 0 1px 0 rgba(255,255,255,.018),
+      inset 0 0 18px rgba(0,0,0,.16);
+  }
+
+  .capital-frame__input-console::before,
+  .capital-frame__input-console::after,
+  .capital-frame__diligence-console::before,
+  .capital-frame__diligence-console::after,
+  .capital-frame__conversion-rail::before,
+  .capital-frame__conversion-rail::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* TOP MEMBER · title + six mounted conversion modules                     */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__engine-heading {
+    position: relative !important;
+    z-index: 3 !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-height: var(--capital-cycle-top-band) !important;
+    height: var(--capital-cycle-top-band) !important;
+    display: grid !important;
+    grid-template-rows: auto var(--capital-cycle-stage-height) !important;
+    align-content: start !important;
+    row-gap: 12px !important;
+    margin: 0 !important;
+    padding: 13px 0 20px !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .capital-frame__engine-heading::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    right: 10px;
+    top: 40px;
+    bottom: 12px;
+    pointer-events: none;
+    border-radius: 10px;
+    background:
+      linear-gradient(90deg,
+        rgba(203,217,222,.010) 0%,
+        color-mix(in srgb, var(--bf-valid) 2%, transparent) 58%,
+        color-mix(in srgb, var(--bf-valid) 4.5%, transparent) 100%),
+      repeating-linear-gradient(90deg,
+        rgba(203,217,222,.022) 0 14px,
+        transparent 14px 58px) left bottom 9px / 100% 5px no-repeat,
+      repeating-linear-gradient(90deg,
+        color-mix(in srgb, var(--bf-valid) 4.5%, transparent) 0 14px,
+        transparent 14px 38px) right bottom 9px / 54% 5px no-repeat;
+    -webkit-mask-image: linear-gradient(90deg,
+      rgba(0,0,0,.18) 0%,
+      rgba(0,0,0,.34) 36%,
+      rgba(0,0,0,.62) 72%,
+      #000 100%);
+    mask-image: linear-gradient(90deg,
+      rgba(0,0,0,.18) 0%,
+      rgba(0,0,0,.34) 36%,
+      rgba(0,0,0,.62) 72%,
+      #000 100%);
+    opacity: .58;
+  }
+
+  .capital-frame__engine-heading > div {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 6 !important;
+    width: auto !important;
+    margin: 0 18px !important;
+    align-self: start !important;
+  }
+
+  .capital-frame__engine-heading > div::after {
+    content: "";
+    position: absolute;
+    left: 305px;
+    right: 0;
+    top: 50%;
+    height: 18px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: .62;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='18' viewBox='0 0 28 18'%3E%3Cpath d='M4 2 L12 9 L4 16' fill='none' stroke='%23c8b98f' stroke-opacity='.82' stroke-width='2.25' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: left center;
+    background-size: 28px 18px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .capital-frame__engine-heading h2 {
+    max-width: none !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    color: color-mix(in srgb, #dce9ec 92%, #8ba2aa) !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    font-weight: 850 !important;
+    letter-spacing: 2.2px !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    text-shadow:
+      0 1px 0 rgba(0,0,0,.72),
+      0 0 10px rgba(184,203,211,.07) !important;
+  }
+
+  .capital-frame__engine-heading > .capital-frame__conversion-rail {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 5 !important;
+    width: 100% !important;
+    height: var(--capital-cycle-stage-height) !important;
+    margin: 0 !important;
+    align-items: stretch !important;
+    isolation: isolate;
+    transform: none !important;
+  }
+
+  /* Bottom hardware row: capacity band on the left, operation icon on the
+     right. The former number badge is deliberately suppressed. */
+  .capital-frame__conversion-stage {
+    --capacity-tone: var(--bfux-affinity, var(--bf-silver-300));
+    --capacity-band-width: 8px;
+    --capacity-band-height: 7px;
+    --capacity-block-width: 8px;
+    --capacity-block-step: 12px;
+    --capacity-band-opacity: .48;
+    box-sizing: border-box !important;
+    min-height: var(--capital-cycle-stage-height) !important;
+    height: var(--capital-cycle-stage-height) !important;
+    max-height: var(--capital-cycle-stage-height) !important;
+    align-self: stretch !important;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity) 8%, transparent), transparent 32%),
+      linear-gradient(180deg, #263238, #182025) !important;
+  }
+
+  .capital-frame__conversion-stage > header {
+    display: none !important;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="capital"] {
+    --capacity-tone: color-mix(in srgb, var(--bf-region-about) 54%, var(--bf-silver-300));
+    --capacity-band-width: 8px;
+    --capacity-band-height: 7px;
+    --capacity-band-opacity: .46;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="coherent-capacity"] {
+    --capacity-tone: color-mix(in srgb, var(--bf-region-about) 36%, var(--bf-silver-300));
+    --capacity-band-width: 20px;
+    --capacity-band-height: 9px;
+    --capacity-band-opacity: .55;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="bounded-work"] {
+    --capacity-tone: var(--bf-region-research);
+    --capacity-band-width: 32px;
+    --capacity-band-height: 11px;
+    --capacity-band-opacity: .63;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="validation"] {
+    --capacity-tone: var(--bf-info);
+    --capacity-band-width: 44px;
+    --capacity-band-height: 13px;
+    --capacity-band-opacity: .70;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="transfer"] {
+    --capacity-tone: color-mix(in srgb, var(--bf-valid) 52%, var(--bf-info));
+    --capacity-band-width: 56px;
+    --capacity-band-height: 15px;
+    --capacity-band-opacity: .77;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
+    --capacity-tone: var(--bf-valid);
+    --capacity-band-width: 68px;
+    --capacity-band-height: 17px;
+    --capacity-band-opacity: .86;
+  }
+
+  .capital-frame__conversion-stage > div {
+    position: relative !important;
+    z-index: 1;
+    padding-top: 14px !important;
+    padding-bottom: 36px !important;
+  }
+
+  .capital-frame__conversion-stage > div::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    bottom: 8px;
+    width: var(--capacity-band-width);
+    height: var(--capacity-band-height);
+    pointer-events: none;
+    opacity: var(--capacity-band-opacity);
+    background:
+      repeating-linear-gradient(90deg,
+        color-mix(in srgb, var(--capacity-tone) 78%, var(--bf-white-050)) 0 var(--capacity-block-width),
+        transparent var(--capacity-block-width) var(--capacity-block-step));
+    clip-path: polygon(
+      0 100%,
+      0 72%,
+      18% 72%,
+      18% 62%,
+      36% 62%,
+      36% 52%,
+      54% 52%,
+      54% 42%,
+      72% 42%,
+      72% 30%,
+      100% 30%,
+      100% 100%
+    );
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.08)) drop-shadow(0 2px 2px rgba(0,0,0,.26));
+  }
+
+  .capital-frame__conversion-stage h3 {
+    font-size: 14px !important;
+    line-height: 1.12 !important;
+    letter-spacing: .45px !important;
+  }
+
+  .capital-frame__conversion-stage p {
+    margin-top: 7px !important;
+    font-size: 12px !important;
+    line-height: 1.38 !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* CENTER VOID · operational engine                                        */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__machine-bed {
+    position: relative;
+    z-index: 3;
+    margin: 0 !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* BOTTOM MEMBER · durable-output content is part of this chassis          */
+  /* ---------------------------------------------------------------------- */
+
+  .capital-frame__return-manifold {
+    position: relative;
+    z-index: 3;
+    box-sizing: border-box;
+    width: 100% !important;
+    min-height: var(--capital-cycle-bottom-band) !important;
+    height: var(--capital-cycle-bottom-band) !important;
+    max-height: var(--capital-cycle-bottom-band) !important;
+    display: grid !important;
+    grid-template-rows: 48px minmax(0, 1fr) !important;
+    align-content: stretch !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .capital-frame__return-manifold > header {
+    align-self: stretch !important;
+    min-height: 0 !important;
+  }
+
+  .capital-frame__return-manifold > div {
+    min-height: 0 !important;
+    align-self: stretch !important;
+  }
+
+  /* The retained-capability interface already closes the right boundary.
+     Do not add a second inspection spine beside it. */
+  .capital-frame__diligence-gates::before,
+  .capital-frame__diligence-gates li::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+
+@media (pointer: coarse), (max-width: 760px) {
+  .capital-frame__cycle-loop {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+  }
+
+  .capital-frame__cycle-loop-shell {
+    display: none;
+  }
+
+  .capital-frame__engine-heading {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .capital-frame__engine-heading::before,
+  .capital-frame__engine-heading > div::after {
+    display: none;
+  }
+
+  .capital-frame__engine-heading > .capital-frame__conversion-rail {
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .capital-frame__conversion-stage {
+    height: auto !important;
+    max-height: none !important;
+    background: inherit !important;
+  }
+
+  .capital-frame__conversion-stage > div::after {
+    display: none;
+  }
+
+  .capital-frame__return-manifold {
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
+  }
+}

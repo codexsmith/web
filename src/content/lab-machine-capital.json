@@ -1,0 +1,325 @@
+{
+  "schemaVersion": "0.1.0",
+  "status": "working capital-case projection seed",
+  "purpose": "Provide a first-class website synthesis explaining why Boundary First Labs is worth capitalizing, what already exists, what additional resources would convert next, which institutional capacities would increase, how those capacities are validated, and where the Lab's current claim ceilings remain.",
+  "posture": "Capital is represented as an input to responsible capacity, not as proof of growth, impact, traction, scientific validity, or financial return. This object is a synthesis layer over governed Lab Machine objects; it must not become a second authority source for product standing, research evidence, public value, governance, founder identity, or partner relationships.",
+  "title": "The Case for Boundary First Labs",
+  "apparatusLabel": "CAPITAL",
+  "coreQuestion": "Why should additional resources be entrusted to this institution, and what would those resources make possible?",
+  "hero": {
+    "eyebrow": "Institutional capacity",
+    "headline": "Capitalizing Boundary First Labs means funding the machinery between insight and validated capability.",
+    "body": "Boundary First Labs has already built a substantial research, engineering, and public-interest machine for difficult systems. The capital question is not whether to invent the Lab from zero. It is how much more of that machinery can be tested, validated, transferred, and responsibly maintained when the institution has capacity beyond a single founder.",
+    "formationDisclosure": "Boundary First Labs remains formation-stage and founder-led. Independent multi-person governance, broad external validation, self-sufficient stewardship, and durable succession are objectives under construction, not facts implied by this projection."
+  },
+  "theses": [
+    {
+      "id": "conversion-engine",
+      "label": "Fund the conversion engine",
+      "statement": "Fund the conversion engine, not an unbounded theory.",
+      "explanation": "The core funding problem is converting accumulated private capability into public, testable, useful, externally criticized, maintainable, and increasingly self-sustaining forms."
+    },
+    {
+      "id": "capacity-before-expansion",
+      "label": "Capacity before expansion",
+      "statement": "Capital is useful when it increases what the Lab can responsibly hold, test, maintain, govern, repair, and transfer.",
+      "explanation": "Growth is not the default success condition. Additional scale is justified only when roots and accountability grow with it."
+    },
+    {
+      "id": "diligence-object",
+      "label": "Due diligence",
+      "statement": "The due-diligence object is accumulated productive capacity plus a bounded validation program.",
+      "explanation": "Visitors should be able to distinguish what already exists from the specific work, closure events, and evidence that a capital input would make possible next."
+    },
+    {
+      "id": "stewarded-compounding",
+      "label": "What compounds",
+      "statement": "What compounds is stewarded capability, not secrecy.",
+      "explanation": "Methods, software, evidence, standards, institutional memory, critic protocols, and transferable practice can become stronger through use when defects are preserved and repaired rather than hidden."
+    },
+    {
+      "id": "institutionalization",
+      "label": "Why an institution",
+      "statement": "The work has become too interconnected to remain responsibly represented as a collection of founder projects.",
+      "explanation": "The institution supplies stewardship: the ability to review, challenge, correct, promote, maintain, retire, transfer, and preserve work beyond the originating person."
+    }
+  ],
+  "conversionEngine": {
+    "capitalFlow": ["Capital", "Capacity", "Work Package", "Closure Event", "Evidence", "Repair or Promotion", "Transfer", "Retained Capability"],
+    "innerMaterialization": ["Research", "Method", "Instrument", "Software", "Pilot or Testbed", "Public Artifact"],
+    "validationLoop": ["Artifact", "Evidence", "Criticism", "Repair", "Promotion or Rejection", "Transfer"],
+    "institutionalRail": ["Private Capacity", "Public Laboratory", "Useful Capability", "External Validation", "Earned or Public Support", "Durable Institution"],
+    "rule": "Capital may increase the capacity of one or more stages; it does not bypass evidence, criticism, maintenance, governance, or repair."
+  },
+  "capacityCategories": [
+    {
+      "id": "research",
+      "label": "Research capacity",
+      "shortLabel": "RESEARCH",
+      "bottleneck": "Formalization, prior-art comparison, reproducible testing, criticism, and publication all compete for limited founder attention.",
+      "unlocks": ["formal definitions", "theorem and counterexample work", "literature calibration", "reproducible experiments", "bounded manuscripts", "negative-result packets", "review packages"],
+      "roots": ["provenance", "claim/question register", "evidence standard", "negative-result retention", "reviewer path", "publication/supersession discipline"],
+      "closureEvents": ["claim strengthened", "claim narrowed", "claim rejected", "explicitly unresolved result", "reproducible artifact", "attributed review"],
+      "evidenceGenerated": ["formal or computational witness", "prior-art map", "review record", "publication candidate", "failure boundary"],
+      "goalIds": ["GOAL-002", "GOAL-004"]
+    },
+    {
+      "id": "engineering",
+      "label": "Engineering capacity",
+      "shortLabel": "ENGINEER",
+      "bottleneck": "Methods and research candidates can outpace the ability to turn them into runnable instruments, maintained software, or operationally testable interfaces.",
+      "unlocks": ["reference implementations", "test harnesses", "workbenches", "software products", "public sandboxes", "instrumentation", "integration prototypes"],
+      "roots": ["bounded specification", "protected invariants", "test and observability path", "maintenance owner", "defect intake", "rollback/retirement rule"],
+      "closureEvents": ["runnable artifact", "test witness", "user or operational task closure", "known limitations", "maintenance state declared"],
+      "evidenceGenerated": ["execution trace", "test result", "operational defect record", "user task evidence", "reference implementation"],
+      "goalIds": ["GOAL-005", "GOAL-007"]
+    },
+    {
+      "id": "validation",
+      "label": "Validation capacity",
+      "shortLabel": "VALIDATE",
+      "bottleneck": "Internal coherence is not enough; strong claims require domain-native criticism, baselines, pilots, and independent or external witnesses.",
+      "unlocks": ["domain review", "benchmark comparison", "external pilots", "replication", "adversarial critique", "affected-party feedback"],
+      "roots": ["success and failure criteria", "baseline", "reviewer independence declaration", "contradiction retention", "response and repair path"],
+      "closureEvents": ["external review record", "benchmark or pilot result", "reproduction state", "explicit non-promotion", "bounded transfer failure"],
+      "evidenceGenerated": ["market evidence", "domain criticism", "technical reproduction", "pilot closeout", "independent reuse evidence"],
+      "goalIds": ["GOAL-002", "GOAL-003", "GOAL-004"]
+    },
+    {
+      "id": "distribution",
+      "label": "Distribution capacity",
+      "shortLabel": "TRANSFER",
+      "bottleneck": "Useful capability is not fully real outside the Lab until another party can recover what it is, how to use it, what it may claim, and how corrections propagate.",
+      "unlocks": ["standards", "methods and guides", "audit and pilot packets", "curricula", "integrations", "public records", "APIs or SDKs when mature", "standalone reference implementations"],
+      "roots": ["stable identity", "versioning", "instructions", "claim ceiling", "reuse witness", "repair/update channel", "legible equivalent"],
+      "closureEvents": ["independent reuse", "semantic fidelity witness", "maintained public package", "partner implementation", "external stewardship or transfer"],
+      "evidenceGenerated": ["reuse evidence", "support burden", "adaptation record", "correction history", "distribution reach when measured"],
+      "goalIds": ["GOAL-001", "GOAL-003", "GOAL-007"]
+    },
+    {
+      "id": "institutional",
+      "label": "Institutional stewardship capacity",
+      "shortLabel": "STEWARD",
+      "bottleneck": "One founder currently carries multiple semantically distinct roles across research, review, release, maintenance, partnership, administration, and institutional memory.",
+      "unlocks": ["additional humans and separated roles", "review and governance capacity", "partnership operations", "legal and administrative support", "publication/release operations", "continuity and succession work", "maintenance ownership"],
+      "roots": ["authority model", "role boundaries", "operating budget", "decision records", "correction/supersession process", "institutional memory", "founder/provenance boundary"],
+      "closureEvents": ["bounded work operated by someone other than founder", "independent review", "maintained handoff", "attributable authority", "succession or transfer mechanism demonstrated"],
+      "evidenceGenerated": ["role separation", "handoff record", "maintenance continuity", "governance witness", "reduced founder mediation"],
+      "goalIds": ["GOAL-001", "GOAL-003", "GOAL-005", "GOAL-006", "GOAL-007"]
+    }
+  ],
+  "branchRootInterlock": {
+    "label": "Roots before branches",
+    "description": "Every capital-enabled branch creates a stewardship load. The interface should show opportunity and maintenance obligation together.",
+    "pairs": [
+      {"branch": "new research lane", "root": "provenance + evidence standard + criticism + closeout"},
+      {"branch": "new product", "root": "user boundary + maintenance owner + support + retirement path"},
+      {"branch": "new partnership", "root": "comparative advantage + authority + attribution + repair/exit"},
+      {"branch": "new public claim", "root": "evidence + claim ceiling + correction path + named responsibility"},
+      {"branch": "new automation", "root": "authorization + observability + suspension + accountability"},
+      {"branch": "new standard", "root": "versioning + conformance evidence + stewardship + repair"}
+    ]
+  },
+  "diligenceQuestions": [
+    {
+      "id": "exists",
+      "label": "What already exists?",
+      "question": "Which corpus, method, prototype, product, publication, public-value, governance, or distribution objects are present now?",
+      "requiredState": "source-backed present-tense object"
+    },
+    {
+      "id": "convert-next",
+      "label": "What does capital convert next?",
+      "question": "Which bounded artifact, review, pilot, launch, experiment, role, or transfer becomes possible because of the input?",
+      "requiredState": "specific work package or capability delta"
+    },
+    {
+      "id": "closure",
+      "label": "What are the closure events?",
+      "question": "What would count as success, failure, narrowing, completion, stop, transfer, or retirement?",
+      "requiredState": "declared witness before work begins"
+    },
+    {
+      "id": "external-legibility",
+      "label": "How does it become externally legible?",
+      "question": "What publication, code, benchmark, independent review, market response, pilot record, public artifact, or affected-party witness lets someone outside the Lab inspect the result?",
+      "requiredState": "external evidence path"
+    },
+    {
+      "id": "decrease-dependence",
+      "label": "How does dependence decrease?",
+      "question": "How can the resulting program become less dependent on this funder, this founder, or hidden Lab interpretation?",
+      "requiredState": "earned support, transfer, independent use, maintenance, or institutionalization path"
+    }
+  ],
+  "feedbackSystems": [
+    {
+      "id": "market",
+      "label": "Market feedback",
+      "shortLabel": "MARKET",
+      "measures": ["demand", "willingness to engage or pay", "adoption", "practical friction", "retention when meaningful"],
+      "doesNotProve": "Revenue, attention, or demand does not validate a theory or scientific claim."
+    },
+    {
+      "id": "domain-review",
+      "label": "Domain-expert criticism",
+      "shortLabel": "DOMAIN REVIEW",
+      "measures": ["prior art", "domain constraints", "invalid assumptions", "professional judgment", "implementation conditions"],
+      "doesNotProve": "Expert interest or participation does not by itself validate the strongest result or imply endorsement of the whole framework."
+    },
+    {
+      "id": "reproduction",
+      "label": "Scientific / technical reproduction",
+      "shortLabel": "REPRODUCE",
+      "measures": ["calculation", "implementation", "benchmark", "simulation", "replication", "formal or empirical witness"],
+      "doesNotProve": "A reproducible technical result does not establish market demand, public value, or cross-domain generality."
+    }
+  ],
+  "feedbackStates": ["not-yet-exercised", "intake-defined", "active", "evidence-captured", "mixed", "failed-or-bounded", "repeated", "independent"],
+  "fundingRelationships": [
+    {
+      "id": "sponsorship",
+      "label": "Founding sponsorship / patronage",
+      "buys": "concentrated runway and translation capacity",
+      "closure": "bounded artifacts, reporting, launch and validation milestones",
+      "capitalType": "gift, recoverable sponsorship, or another explicitly defined sponsorship structure",
+      "claimBoundary": "Do not imply investment terms or financial return where none are defined."
+    },
+    {
+      "id": "consulting",
+      "label": "Consulting / prepayment / retainer",
+      "buys": "applied professional capability on a bounded problem",
+      "closure": "delivered service, practical evidence, and earned revenue",
+      "capitalType": "earned revenue",
+      "claimBoundary": "A consulting engagement is not scientific validation and does not make the client a research endorser."
+    },
+    {
+      "id": "open-science",
+      "label": "Open-science campaign",
+      "buys": "a scoped public artifact or research infrastructure",
+      "closure": "reproducibility, public availability, usefulness, and reviewability",
+      "capitalType": "public or philanthropic support",
+      "claimBoundary": "Public release is not proof of usefulness or impact."
+    },
+    {
+      "id": "grant",
+      "label": "Grant / research philanthropy",
+      "buys": "public-good research, validation, collaboration, or infrastructure",
+      "closure": "research outputs, external review, public capability, or explicit negative result",
+      "capitalType": "restricted or mission-aligned research capital",
+      "claimBoundary": "Funding does not endorse a conclusion and should support falsifiable work."
+    },
+    {
+      "id": "academic",
+      "label": "Academic / technical collaboration",
+      "buys": "domain criticism, bridgework, reproduction, or access",
+      "closure": "review, co-developed evidence, or a bounded finding",
+      "capitalType": "collaboration rather than necessarily cash",
+      "claimBoundary": "Participation in inquiry is not endorsement of the whole theory."
+    },
+    {
+      "id": "public-support",
+      "label": "Membership / crowdfunding",
+      "buys": "publication cadence, public-lab continuity, or a bounded deliverable",
+      "closure": "visible output and declared milestone completion",
+      "capitalType": "public support",
+      "claimBoundary": "Audience support is not evidence of scientific validity or broad public impact."
+    },
+    {
+      "id": "product-revenue",
+      "label": "Product / publication revenue",
+      "buys": "a bounded useful output",
+      "closure": "earned revenue, demand evidence, and maintenance capacity",
+      "capitalType": "earned revenue",
+      "claimBoundary": "Product success does not validate unrelated theory or application domains."
+    },
+    {
+      "id": "strategic-capital",
+      "label": "Strategic / patient capital",
+      "buys": "institutional and product optionality under an explicitly negotiated structure",
+      "closure": "must be defined by the actual capital instrument and program milestones",
+      "capitalType": "TBD; do not infer equity, debt, valuation, or return profile",
+      "claimBoundary": "The website may describe strategic optionality but must not imply investment terms, valuation, expected return, or financial performance that have not been established."
+    },
+    {
+      "id": "stewardship-transfer",
+      "label": "Stewardship / transfer relationship",
+      "buys": "a lawful path for another capable party to carry work forward",
+      "closure": "maintained handoff, preserved provenance, explicit authority, and repair path",
+      "capitalType": "may be funded, licensed, acquired, sponsored, or nonfinancial depending on the specific relationship",
+      "claimBoundary": "Transfer should not be represented as success unless the receiving steward can actually maintain the relevant capability."
+    }
+  ],
+  "portfolioNarrative": {
+    "headline": "One machinery. Multiple test environments. Evidence accumulates by surviving different kinds of failure.",
+    "posture": "The portfolio is experimental infrastructure, not a bag of unrelated projects and not evidence that success in one domain validates another.",
+    "examples": [
+      {"id": "chess", "label": "Chess", "systemType": "formal / strategic", "stress": "explicit state, legal transitions, bounded rules, inspectable consequences"},
+      {"id": "software", "label": "Software", "systemType": "engineered", "stress": "executable representations, implementation constraints, users, failure and repair"},
+      {"id": "institutions", "label": "Institutions", "systemType": "authority-bearing / reflexive", "stress": "partial observability, human consequence, authority, contestability, responsibility"},
+      {"id": "weather", "label": "Weather", "systemType": "physical / predictive", "stress": "continuous dynamics, uncertainty, mature baselines, external physical reality"}
+    ]
+  },
+  "openOptions": [
+    {
+      "id": "financial-markets",
+      "label": "Unexplored quantitative applications",
+      "status": "opportunity-identified-validation-not-performed",
+      "headline": "Financial systems appear to be a structurally appropriate quantitative test environment for Distinction Space. The Lab has not yet tested that hypothesis.",
+      "body": "Distinction Space is being developed as mathematics, not as a financial product. Its objects naturally describe bounded state spaces, admissible transformations, structural change, and evolving possibility. The framework has not yet been calibrated on financial markets or other quantitative forecasting environments.",
+      "teaser": "We think it is worth finding out.",
+      "notEstablished": ["financial-market calibration", "trading strategy", "predictive advantage", "alpha", "out-of-sample improvement", "economic usefulness", "deployable financial product"],
+      "promotionLadder": [
+        "structural resemblance",
+        "formal bridge",
+        "descriptive signal",
+        "replicated structural signal",
+        "predictive signal",
+        "out-of-sample improvement",
+        "economic usefulness",
+        "deployable strategy or product"
+      ],
+      "sourceRef": "Boundary First Labs funding supporting note: Distinction Space financial-markets testbed"
+    }
+  ],
+  "institutionalGoalRefs": ["GOAL-001", "GOAL-002", "GOAL-003", "GOAL-004", "GOAL-005", "GOAL-006", "GOAL-007"],
+  "copyModules": {
+    "capacity": "Capacity before expansion. Capital is useful when it increases what the Lab can responsibly hold, test, maintain, govern, repair, and transfer.",
+    "conversion": "Fund the conversion engine, not an unbounded theory.",
+    "diligence": "The due-diligence object is accumulated productive capacity plus a bounded validation program.",
+    "institution": "The work has become too interconnected to remain responsibly represented as a collection of founder projects. The institution exists to preserve unity while separating claims, invite criticism, maintain what crosses into consequence, and create continuity beyond the founder.",
+    "strategic": "What compounds is not secrecy. It is stewarded capability: methods, software, evidence, standards, institutional memory, critic protocols, and transferable practice that become stronger when use exposes defects and the system can repair them.",
+    "funder": "A successful research investment does not require every hypothesis to survive. It requires the program to produce sharper boundaries, reproducible artifacts, useful capability, external criticism, and a record strong enough to know what should continue.",
+    "relationship": "The right capital relationship is the smallest one that gives the work the capacity, criticism, infrastructure, or stewardship it cannot responsibly manufacture alone.",
+    "optionValue": "Some research directions have the right structural shape to justify an experiment without yet supporting an application claim. The Lab should be able to say both things at once."
+  },
+  "uxContract": {
+    "primaryModules": ["capacity-console", "conversion-engine", "branch-root-interlock", "diligence-gates", "feedback-triad", "capability-export", "sufficiency-stop-control", "relationship-selector"],
+    "capacityConsoleQuestion": "What additional responsible capacity does this input create?",
+    "relationshipSelectorQuestion": "Which relationship supplies the missing capacity, criticism, infrastructure, distribution, or stewardship?",
+    "stopControlQuestions": ["What would tell us to continue?", "What would tell us to narrow?", "What would tell us to stop?", "Can the change be reversed?", "Who owns retirement or transfer?"],
+    "visualRule": "Capital must not flow directly to impact or return. It must visibly pass through capacity, work, validation, repair/promotion, and transfer.",
+    "absenceRule": "Not-yet-established institutional states must render as explicit states rather than empty space or implied completion."
+  },
+  "objectRefs": {
+    "institutionalCapacity": "src/content/lab-machine-institutional-capacity.json",
+    "about": "src/content/lab-machine-about.json",
+    "publicValue": "src/content/lab-machine-public-value.json",
+    "service": "src/content/lab-machine-service.json",
+    "products": "src/content/lab-machine-products.json",
+    "governance": "src/content/lab-machine-governance.json",
+    "backlog": "backlog/16_public_site_positioning_and_pitch_readiness/12_case_for_boundary_first_labs_capital_projection.md"
+  },
+  "sourceRefs": [
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/09_lab_funding__strategy/01_funding_architecture__canonical.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/09_lab_funding__strategy/02_emergent_ventures__funding_packet.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/03_The_Institute.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/05_Collaboration_Doctrine.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/06_Institutional_Objectives.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/08_lab_ethos_and_strategy__foundation/02_institutional_scope_and_stewardship__strategy.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/08_lab_ethos_and_strategy__foundation/03_growth_capacity_and_sufficiency__institutional_doctrine.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/08_lab_ethos_and_strategy__foundation/04_claim_boundaries__governance.md",
+    "boundary-first-labs: organized_library_curated/999_Library/01_Foundations/08_lab_ethos_and_strategy__foundation/06_witness_domain_portfolio__validation_strategy.md"
+  ],
+  "claimFirewall": "This projection may explain institutional capacity, capital-use logic, conversion stages, feedback systems, formation gaps, and bounded option value. It may not imply investment terms, valuation, expected returns, market performance, staffing, independent governance, partnerships, certified practices, scientific validity, public impact, or financial-market advantage beyond evidence explicitly carried by the referenced governed objects."
+}

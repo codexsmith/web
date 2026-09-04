@@ -11,6 +11,7 @@ import { hydrateContentNode } from "@/lib/content-projections";
 import { getNode, getPathForNode } from "@/lib/content-registry";
 import { processScopes, type ProcessScope } from "@/lib/bfl-process";
 import type { ProjectionMode } from "@/lib/view-projection";
+import { CapitalEconomicsFrame } from "./CapitalEconomicsFrame";
 import { LabMachineAboutProjection } from "./LabMachineAboutProjection";
 import { LabMachineApplicationsProjection } from "./LabMachineApplicationsProjection";
 import { LabMachineDetailPanel } from "./LabMachineDetailPanel";
@@ -29,10 +30,14 @@ import type { LabMachineResolution } from "./LabMachine";
 import { PhysicalMachineExperience } from "./PhysicalMachineExperience";
 import { getLabMachineConnectingEdge, getLabMachineNode, labMachineEdgeKey } from "./lab-machine-model";
 
+type LabMachineSurface = "machine" | "capital";
+
 type Props = {
   section?: string;
   initialProjection: ProjectionMode;
   initialProcessScope: ProcessScope;
+  initialSurface?: LabMachineSurface;
+  initialResolution?: LabMachineResolution;
   showSchematic?: boolean;
   machinePath?: string;
   intermediateLayer?: boolean;
@@ -54,6 +59,19 @@ function machineUrl(basePath: string, projection: ProjectionMode = "world", scop
   if (projection === "evidence") params.set("view", "evidence");
   if (projection === "gestalt") params.set("view", "timeline");
   if (projection === "gestalt" && scope !== "full") params.set("scope", scope);
+  return `${basePath}?${params.toString()}`;
+}
+
+function machineResolutionUrl(basePath: string, resolution: LabMachineResolution) {
+  const params = new URLSearchParams({
+    skin: "physical",
+    resolution: resolution === "mid" ? "full" : "core",
+  });
+  return `${basePath}?${params.toString()}`;
+}
+
+function capitalUrl(basePath: string) {
+  const params = new URLSearchParams({ skin: "physical", mode: "capital" });
   return `${basePath}?${params.toString()}`;
 }
 
@@ -97,15 +115,20 @@ export function LabMachineWorld({
   section,
   initialProjection,
   initialProcessScope,
+  initialSurface = "machine",
+  initialResolution,
   showSchematic = false,
   machinePath = "/world",
   intermediateLayer = false,
 }: Props) {
   const router = useRouter();
   const rootNode = useMemo(() => hydrateContentNode(getNode("root")), []);
+  const resolvedInitialSurface: LabMachineSurface = section ? "machine" : initialSurface;
+  const resolvedInitialResolution: LabMachineResolution = initialResolution ?? (section ? "mid" : "focus");
   const [projection, setProjection] = useState<ProjectionMode>(initialProjection);
   const [processScope, setProcessScope] = useState<ProcessScope>(initialProcessScope);
-  const [machineResolution, setMachineResolution] = useState<LabMachineResolution>(section ? "mid" : "focus");
+  const [machineSurface, setMachineSurface] = useState<LabMachineSurface>(resolvedInitialSurface);
+  const [machineResolution, setMachineResolution] = useState<LabMachineResolution>(resolvedInitialResolution);
   const [searchOpen, setSearchOpen] = useState(false);
   const [navigationFocusId, setNavigationFocusId] = useState(section ?? "research");
   const [navigationTrail, setNavigationTrail] = useState<LabMachineTraversalStep[]>([]);
@@ -113,17 +136,27 @@ export function LabMachineWorld({
 
   useEffect(() => setProjection(initialProjection), [initialProjection]);
   useEffect(() => setProcessScope(initialProcessScope), [initialProcessScope]);
+  useEffect(() => setMachineSurface(section ? "machine" : initialSurface), [initialSurface, section]);
+  useEffect(() => setMachineResolution(initialResolution ?? (section ? "mid" : "focus")), [initialResolution, section]);
 
   const processScopeIndex = processScopes.indexOf(processScope);
   const canProcessZoomOut = processScopeIndex > 0;
   const canProcessZoomIn = processScopeIndex < processScopes.length - 1;
 
   const setResolution = (nextResolution: LabMachineResolution) => {
+    const returningFromCapital = machineSurface === "capital";
+    setMachineSurface("machine");
     setMachineResolution(nextResolution);
     try {
       window.sessionStorage.setItem(resolutionStorageKey, nextResolution);
     } catch {
       // Resolution remains functional when browser storage is unavailable.
+    }
+
+    if (returningFromCapital) {
+      setProjection("world");
+      router.push(machineResolutionUrl(machinePath, nextResolution), { scroll: false });
+      return;
     }
 
     /* Evidence and Timeline are Core projections. Full Loop is a World-only
@@ -140,6 +173,11 @@ export function LabMachineWorld({
     }
   };
 
+  const openCapital = () => {
+    setMachineSurface("capital");
+    setProjection("world");
+    router.push(capitalUrl(machinePath), { scroll: false });
+  };
   const closeSection = () => router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
   const openSection = (nodeId: string) => {
     if (intermediateLayer && !section) {
@@ -154,9 +192,18 @@ export function LabMachineWorld({
     else openSection(nodeId);
   };
   const returnToMachine = () => {
+    setMachineSurface("machine");
+    setProjection("world");
+    if (machineSurface === "capital") {
+      setMachineResolution("focus");
+      router.push(machineResolutionUrl(machinePath, "focus"), { scroll: false });
+      return;
+    }
     router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
   };
   const changeProjection = (nextProjection: ProjectionMode) => {
+    setMachineSurface("machine");
+    setMachineResolution("focus");
     router.push(machineUrl(machinePath, nextProjection, processScope), { scroll: false });
   };
   const changeProcessScope = (nextScope: ProcessScope) => {
@@ -171,8 +218,22 @@ export function LabMachineWorld({
     <>
       <button
         type="button"
+        onClick={openCapital}
+        aria-pressed={machineSurface === "capital"}
+        aria-label="Capital cycle: show how resources become retained Lab capability"
+        title="Show the capital conversion cycle"
+        data-machine-surface="capital"
+      >
+        <BfuxIcon name="pressure" className="projection-switcher__glyph" />
+        <span className="projection-switcher__copy">
+          <span className="projection-switcher__mode-name">Capital</span>
+          <small className="projection-switcher__mode-purpose">Cycle</small>
+        </span>
+      </button>
+      <button
+        type="button"
         onClick={() => setResolution("mid")}
-        aria-pressed={machineResolution === "mid"}
+        aria-pressed={machineSurface === "machine" && machineResolution === "mid"}
         aria-label="Full loop: show the complete Lab Machine"
         title="Show the complete Lab Machine"
         data-machine-resolution="mid"
@@ -186,7 +247,7 @@ export function LabMachineWorld({
       <button
         type="button"
         onClick={() => setResolution("focus")}
-        aria-pressed={machineResolution === "focus"}
+        aria-pressed={machineSurface === "machine" && machineResolution === "focus"}
         aria-label="Core set: show the core Lab Machine"
         title="Show the core Lab Machine"
         data-machine-resolution="focus"
@@ -202,6 +263,7 @@ export function LabMachineWorld({
 
   if (projection === "world") {
     const sectionNode = section ? getLabMachineNode(section) : null;
+    const isCapitalSurface = machineSurface === "capital" && !section;
     const navigateTo = (nodeId: string) => {
       const from = section ?? navigationFocusId;
       const edge = getLabMachineConnectingEdge(from, nodeId);
@@ -241,14 +303,15 @@ export function LabMachineWorld({
     const experience = (
       <div
         className="site-shell"
-        data-world-mode="world"
+        data-world-mode={isCapitalSurface ? "capital" : "world"}
         data-projection="world"
-        data-projection-intent="world"
+        data-projection-intent={isCapitalSurface ? "capital" : "world"}
         data-projection-fallback="false"
         data-ui-renderer="cards"
         data-root-focus="true"
         data-has-siblings="false"
         data-show-traversal="false"
+        data-machine-surface={isCapitalSurface ? "capital" : "machine"}
       >
         <BoundaryFrame
           visible
@@ -262,7 +325,7 @@ export function LabMachineWorld({
           canTraceForward={false}
           canProcessZoomOut={false}
           canProcessZoomIn={false}
-          surfaceLabel="Lab Machine"
+          surfaceLabel={isCapitalSurface ? "Capital" : "Lab Machine"}
           viewControls={resolutionControls}
           onHome={returnToMachine}
           onUp={returnToMachine}
@@ -271,24 +334,34 @@ export function LabMachineWorld({
           onLocalNavigate={navigateAway}
           onProcessZoomOut={() => undefined}
           onProcessZoomIn={() => undefined}
-          onProjectionChange={machineResolution === "mid" ? undefined : changeProjection}
+          onProjectionChange={isCapitalSurface || machineResolution !== "mid" ? changeProjection : undefined}
           onSearch={() => setSearchOpen(true)}
         />
 
-        <main className="world-machine-preview">
-          <PhysicalMachineExperience
-            showSchematic={showSchematic}
-            initialResolution={section ? "mid" : "focus"}
-            resolution={machineResolution}
-            onResolutionChange={setMachineResolution}
-            showResolutionControls={Boolean(section)}
-            sectionLabel={sectionNode?.label}
-            sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} intermediateLayer={intermediateLayer} /> : undefined}
-            onCloseSection={closeSection}
-            onOpenNode={openSection}
-            onOpenCoreNode={openCoreNode}
-          />
-        </main>
+        {isCapitalSurface ? (
+          <main
+            className="capital-prototype-page"
+            data-machine-surface="capital"
+            style={{ paddingTop: "calc(var(--frame-top) + clamp(12px, 1.5vw, 22px))" }}
+          >
+            <CapitalEconomicsFrame />
+          </main>
+        ) : (
+          <main className="world-machine-preview">
+            <PhysicalMachineExperience
+              showSchematic={showSchematic}
+              initialResolution={resolvedInitialResolution}
+              resolution={machineResolution}
+              onResolutionChange={setMachineResolution}
+              showResolutionControls={Boolean(section)}
+              sectionLabel={sectionNode?.label}
+              sectionSurface={section ? <SectionSurface section={section} onClose={closeSection} intermediateLayer={intermediateLayer} /> : undefined}
+              onCloseSection={closeSection}
+              onOpenNode={openSection}
+              onOpenCoreNode={openCoreNode}
+            />
+          </main>
+        )}
         {searchOpen ? <SearchPanel onClose={() => setSearchOpen(false)} onNavigate={navigateAway} /> : null}
       </div>
     );
@@ -330,6 +403,7 @@ export function LabMachineWorld({
       data-root-focus="true"
       data-has-siblings="false"
       data-show-traversal="false"
+      data-machine-surface="machine"
     >
       <BoundaryFrame
         visible
