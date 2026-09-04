@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { CapitalEconomicsFrame } from "@/components/bfux/CapitalEconomicsFrame";
+import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
+import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import "./capital-frame.css";
 import "./capital-frame-canonical-connectors.css";
 import "./capital-frame-zoom-resilience.css";
@@ -18,8 +19,14 @@ export const metadata: Metadata = {
 
 export default function CapitalPrototypePage() {
   return (
-    <main className="capital-prototype-page">
-      <CapitalEconomicsFrame />
-    </main>
+    <LabMachineHomeBoundary resetTraversal>
+      <LabMachineWorld
+        initialProjection="world"
+        initialProcessScope="full"
+        initialSurface="capital"
+        initialResolution="focus"
+        machinePath="/"
+      />
+    </LabMachineHomeBoundary>
   );
 }
