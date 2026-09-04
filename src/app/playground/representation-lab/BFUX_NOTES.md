@@ -12,7 +12,8 @@ This note records the semantic topology applied to the MVP so later visual refin
 - Representation budget is an explicit engineering variable. Approximation must expose both the retained carrier and the measurable defect against a reference when one is available.
 - Admissible forgetting is consequence-relative. Compression is not good because it is small; it is admissible only while distinctions required by the declared consequence remain preserved.
 - Observation uncertainty and model mismatch are distinct defect classes. A posterior can become more concentrated while becoming less faithful to world truth when its generative assumptions are wrong.
-- The causal path remains visible: `WORLD -> OBSERVE -> REPRESENT -> INFER -> ACT -> CONSEQUENCE`.
+- Causal phase is semantic state, not elapsed playback. A trace stage must name the operation actually being performed rather than infer meaning from percentage-through-animation.
+- Exact and bounded carriers should expose the same causal decomposition when the computation contains distinct stages. Approximation may change the carrier without erasing `PREDICT -> OBSERVE -> UPDATE`.
 - Closure is displayed as earned state after the bounded trace completes; it is not a world-action control.
 - World truth and agent-visible state remain distinct, especially in Bayesian mode.
 - Responsive and accessibility representations preserve the same semantic distinctions rather than degrading to a simplified copy.
@@ -30,7 +31,9 @@ This note records the semantic topology applied to the MVP so later visual refin
 - alias witness = concrete pair of represented-as-equivalent cases whose reference consequences materially diverge;
 - model assumption bay = explicit generative assumptions held against a fixed world-truth and evidence tape;
 - calibration witness = a concrete frame where model confidence rises while probability assigned to truth falls;
-- bus / trace line = causal propagation;
+- causal particle chamber = finite-carrier view where transport, weighting, and resampling remain separately inspectable;
+- weighted particle = persistent hypothesis identity whose relative mass changes under observation before resampling changes multiplicity;
+- bus / trace line = causal propagation, not completion percentage;
 - wells = subordinate internal state;
 - status lamps / labels = machine state, never decoration.
 
@@ -107,8 +110,6 @@ EXACT -> 500 -> 100 -> 20 -> 5 particles
 
 The exact mode retains an explicit probability for every candidate hidden state. Finite modes replace that field with sampled hypotheses propagated through the same transition model, weighted by the same noisy observation likelihood, and systematically resampled.
 
-The active maze rendering changes with the carrier: the exact posterior is a probability field; finite representations are literal particle tokens.
-
 The exact posterior remains available only to the laboratory as a diagnostic reference. It is outside the active particle representation and is used to compute total-variation distance. This lets the interface expose a graded approximation defect instead of treating approximate inference as simply correct or incorrect.
 
 The important BFUX distinction is:
@@ -119,9 +120,38 @@ bounded representation != broken representation
 
 A finite carrier can preserve enough structure for useful inference while accumulating measurable defect. The budget rail makes that trade visible and operable.
 
+### Causal particle carrier
+
+Finite inference must not collapse its internal causal steps merely because the carrier is approximate. The bounded carrier therefore exposes the same Bayesian cycle as the exact carrier:
+
+```text
+PREDICT -> OBSERVE -> UPDATE
+```
+
+with carrier-specific operations:
+
+```text
+TRANSPORT -> WEIGHT -> RESAMPLE
+```
+
+The distinctions are operational:
+
+- **PREDICT / TRANSPORT** — particle identities move through the hidden-state transition model before the new ping crosses the observation boundary. Tokens still carry equal mass.
+- **OBSERVE / WEIGHT** — particle locations remain fixed while the sensor likelihood changes their relative mass. Effective sample size becomes meaningful here. Resampling has not happened yet.
+- **UPDATE / RESAMPLE** — high-weight hypotheses replicate and low-weight hypotheses disappear while the total token budget stays fixed. The resulting empirical distribution is the bounded posterior carrier.
+
+The causal particle chamber renders those states directly. During observation, token size and intensity encode relative likelihood weight without moving the hypotheses. During update, multiplicity changes visibly. Phase-relative total-variation defect is measured against the exact belief available at that same semantic stage rather than against a future posterior.
+
+This yields another BFUX constraint:
+
+```text
+approximation may change representation fidelity
+approximation must not falsify causal order
+```
+
 ## Bayesian model mismatch
 
-The Bayesian cartridge now also exposes a **model assumption bay**. This experiment holds the canonical hidden trajectory and six noisy distance observations fixed while changing the generative assumptions used by inference.
+The Bayesian cartridge also exposes a **model assumption bay**. This experiment holds the canonical hidden trajectory and six noisy distance observations fixed while changing the generative assumptions used by inference.
 
 Sensor models:
 
@@ -204,6 +234,23 @@ forget a required distinction -> alias incompatible consequences
 ```
 
 A small representation is therefore not automatically better. The relevant question is whether the quotient preserves the distinctions required by the active consequence.
+
+## Semantic causal trace
+
+The primary trace bus uses explicit semantic operations rather than normalized playback position.
+
+- BFS / A*: setup is `WORLD -> REPRESENT`, frontier expansion is `INFER`, recovered route motion is `ACT`, and final route or reconstruction defect is `CONSEQUENCE`.
+- Minimax / Expectimax: branch aggregation is `INFER`, selected move is `ACT`, and modeled reply is `CONSEQUENCE`.
+- MDP: value propagation remains `INFER` until the policy is exposed as `CONSEQUENCE`.
+- Bayes: every observation repeats `PREDICT -> OBSERVE -> UPDATE`.
+
+For the six-observation Bayesian tape the semantic timeline is:
+
+```text
+WORLD -> REPRESENT -> [PREDICT -> OBSERVE -> UPDATE] x 6 -> CONSEQUENCE
+```
+
+A causal bus may therefore revisit a phase. It is an operation indicator, not a progress meter.
 
 ## Controlled defect
 

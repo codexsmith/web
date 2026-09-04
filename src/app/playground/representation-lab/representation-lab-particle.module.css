@@ -14,7 +14,10 @@
 .header span,
 .status span,
 .metrics span,
-.note span {
+.note span,
+.phaseHeader span,
+.cloudReadout span,
+.exactPhaseNote span {
   font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -29,7 +32,10 @@
 }
 
 .header p,
-.note p {
+.note p,
+.phaseHeader p,
+.cloudReadout p,
+.exactPhaseNote p {
   margin: .35rem 0 0;
   color: var(--lab-muted);
   font-size: .76rem;
@@ -88,6 +94,131 @@
   box-shadow: inset 0 -3px 0 var(--lab-attention);
 }
 
+.phaseChamber {
+  border-bottom: 1px solid var(--lab-border);
+  background: color-mix(in srgb, var(--bf-bezel-surface) 72%, transparent);
+}
+
+.phaseHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  padding: .85rem 1rem;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.phaseHeader strong,
+.exactPhaseNote strong {
+  display: block;
+  margin-top: .25rem;
+  font: 760 .86rem/1.2 var(--font-mono, monospace);
+  color: var(--lab-text);
+}
+
+.phaseHeader code {
+  padding: .35rem .5rem;
+  border: 1px solid var(--lab-border-strong);
+  border-radius: var(--bf-radius-instrument);
+  color: var(--lab-attention);
+  background: var(--bf-well-surface);
+  font-size: .64rem;
+}
+
+.phaseRail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.phaseRail > div {
+  min-height: 66px;
+  padding: .65rem .8rem;
+  border-right: 1px solid var(--lab-border);
+  opacity: .46;
+}
+
+.phaseRail > div:last-child { border-right: 0; }
+
+.phaseRail > div[data-active="true"] {
+  opacity: 1;
+  background: color-mix(in srgb, var(--lab-info) 8%, transparent);
+  box-shadow: inset 0 -3px 0 var(--lab-info);
+}
+
+.phaseRail span,
+.phaseRail strong,
+.phaseRail small {
+  display: block;
+  font-family: var(--font-mono, monospace);
+}
+
+.phaseRail span {
+  color: var(--lab-faint);
+  font-size: .55rem;
+  letter-spacing: .12em;
+}
+
+.phaseRail strong {
+  margin-top: .18rem;
+  color: var(--lab-text);
+  font-size: .72rem;
+}
+
+.phaseRail small {
+  margin-top: .16rem;
+  color: var(--lab-muted);
+  font-size: .58rem;
+}
+
+.cloudRack {
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  padding: .9rem 1rem 1rem;
+}
+
+.particleMap {
+  display: block;
+  width: 100%;
+  max-height: 255px;
+  border: 1px solid var(--lab-border-strong);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-well-surface);
+}
+
+.phaseWall {
+  fill: color-mix(in srgb, var(--lab-text) 12%, transparent);
+  stroke: color-mix(in srgb, var(--lab-text) 7%, transparent);
+  stroke-width: .025;
+}
+
+.phaseParticle {
+  fill: var(--lab-info);
+  stroke: color-mix(in srgb, var(--lab-text) 70%, transparent);
+  stroke-width: .015;
+}
+
+.cloudReadout {
+  padding: .8rem;
+  border-left: 2px solid var(--lab-info);
+  background: color-mix(in srgb, var(--lab-info) 5%, transparent);
+}
+
+.cloudReadout strong {
+  display: block;
+  margin-top: .3rem;
+  font: 760 .82rem/1.3 var(--font-mono, monospace);
+  color: var(--lab-info);
+}
+
+.exactPhaseNote {
+  padding: .8rem 1rem;
+  border-bottom: 1px solid var(--lab-border);
+  background: color-mix(in srgb, var(--lab-valid) 4%, transparent);
+}
+
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -144,8 +275,10 @@
 }
 
 @media (max-width: 900px) {
-  .header { grid-template-columns: 1fr; }
+  .header,
+  .phaseHeader { grid-template-columns: 1fr; }
   .status { min-width: 0; }
+  .cloudRack { grid-template-columns: 1fr; }
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metrics > div:nth-child(2) { border-right: 0; }
   .metrics > div:nth-child(-n+2) { border-bottom: 1px solid var(--lab-border); }
@@ -156,12 +289,22 @@
   .rail { grid-template-columns: 1fr; }
   .rail button { min-height: 48px; border-right: 0; border-bottom: 1px solid var(--lab-border); }
   .rail button:last-child { border-bottom: 0; }
+  .phaseRail { grid-template-columns: 1fr; }
+  .phaseRail > div { min-height: 50px; border-right: 0; border-bottom: 1px solid var(--lab-border); }
+  .phaseRail > div:last-child { border-bottom: 0; }
   .metrics { grid-template-columns: 1fr; }
   .metrics > div { border-right: 0; border-bottom: 1px solid var(--lab-border); }
   .metrics > div:last-child { border-bottom: 0; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .phaseParticle { transition: none; }
+}
+
 @media (forced-colors: active) {
-  .particle { fill: Highlight; stroke: CanvasText; }
+  .particle,
+  .phaseParticle { fill: Highlight; stroke: CanvasText; }
+  .phaseWall { fill: CanvasText; stroke: Canvas; }
+  .phaseRail > div[data-active="true"] { outline: 2px solid Highlight; outline-offset: -2px; }
   .rail button[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -3px; }
 }
