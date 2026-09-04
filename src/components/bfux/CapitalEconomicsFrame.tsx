@@ -375,14 +375,12 @@ export function CapitalEconomicsFrame() {
           </article>
         </aside>
 
-        <section className="capital-frame__engine" aria-labelledby="conversion-engine-title">
+        <section className="capital-frame__engine" aria-label="Capital conversion engine">
           <section className="capital-frame__cycle-loop" aria-label="Primary capital conversion cycle">
             <div className="capital-frame__cycle-loop-shell" aria-hidden="true" />
 
             <header className="capital-frame__engine-heading">
-              <div>
-                <h2 id="conversion-engine-title">Primary conversion rail</h2>
-              </div>
+              <div className="capital-frame__flow-band" aria-hidden="true" />
 
               <section className="capital-frame__conversion-rail" aria-label="Capital conversion sequence">
                 {conversionStages.map((stage) => (

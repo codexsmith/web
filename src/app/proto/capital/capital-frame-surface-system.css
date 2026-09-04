@@ -602,3 +602,272 @@
     opacity: 1;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* PROCESS RAIL REFINEMENT · manifolds and gates, not cards                   */
+/* -------------------------------------------------------------------------- */
+
+/* The conversion sequence is self-explanatory once the cards are mounted.
+   Remove the redundant rail label but keep the top conduit as a direction band. */
+.capital-frame__engine-heading h2 {
+  display: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .capital-frame__engine-heading > div {
+    min-height: 18px !important;
+  }
+
+  .capital-frame__engine-heading > div::after {
+    left: 0 !important;
+    right: 0 !important;
+    opacity: .76 !important;
+  }
+
+  /* Conversion titles need to carry the first read at a glance. */
+  .capital-frame .capital-frame__conversion-stage h3 {
+    font-size: 16px !important;
+    line-height: 1.08 !important;
+    letter-spacing: .5px !important;
+  }
+
+  /* Shared instrument labels: names belong to the assembly, not another card. */
+  .capital-frame__input-console,
+  .capital-frame__diligence-console {
+    position: relative;
+    gap: 0 !important;
+  }
+
+  .capital-frame__input-console > .capital-frame__console-heading,
+  .capital-frame__diligence-console > .capital-frame__console-heading {
+    position: relative;
+    margin: 0 0 6px !important;
+    padding: 5px 4px 9px !important;
+    border: 0 !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--bf-silver-300) 28%, var(--bf-etched-line)) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .capital-frame__input-console > .capital-frame__console-heading h2,
+  .capital-frame__diligence-console > .capital-frame__console-heading h2 {
+    margin: 0 !important;
+    font-size: .76rem !important;
+    line-height: 1.12 !important;
+    letter-spacing: .07em !important;
+  }
+
+  .capital-frame__input-console > .capital-frame__console-heading h2::after,
+  .capital-frame__diligence-console > .capital-frame__console-heading h2::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    margin-top: 7px;
+    opacity: .48;
+    background: repeating-linear-gradient(90deg,
+      color-mix(in srgb, var(--bf-silver-300) 58%, transparent) 0 14px,
+      transparent 14px 21px);
+  }
+
+  /* LEFT · one intake rack feeding one bus. Individual entries are ports, not cards. */
+  .capital-frame__funding-ports {
+    position: relative;
+    gap: 0 !important;
+    padding: 5px 0 !important;
+    overflow: visible;
+    border: 1px solid color-mix(in srgb, var(--bf-silver-300) 22%, var(--bf-etched-line));
+    border-radius: 3px;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,.018), transparent 36%),
+      color-mix(in srgb, var(--bf-bg-base) 94%, #080d10);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.022),
+      inset 0 -1px 0 rgba(0,0,0,.46);
+  }
+
+  .capital-frame__funding-ports::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 8px;
+    bottom: 8px;
+    right: -38px;
+    width: 8px;
+    pointer-events: none;
+    border: 1px solid color-mix(in srgb, var(--bf-silver-300) 38%, var(--bf-etched-line-strong));
+    border-radius: 2px;
+    background:
+      repeating-linear-gradient(180deg,
+        color-mix(in srgb, var(--bf-silver-300) 22%, transparent) 0 9px,
+        transparent 9px 15px),
+      linear-gradient(90deg, #1c262b, #0c1215);
+    box-shadow:
+      inset 0 0 0 1px rgba(0,0,0,.34),
+      0 2px 5px rgba(0,0,0,.28);
+  }
+
+  .capital-frame__funding-port {
+    position: relative;
+    min-height: 74px !important;
+    display: grid;
+    align-content: center;
+    padding: 10px 12px 10px 14px !important;
+    border: 0 !important;
+    border-left: 4px solid color-mix(in srgb, var(--bfux-affinity) 74%, var(--bf-etched-line-strong)) !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--bfux-affinity) 18%, var(--bf-etched-line)) !important;
+    border-radius: 0 !important;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 8%, transparent), transparent 56%),
+      rgba(12,18,22,.42) !important;
+    box-shadow: none !important;
+  }
+
+  .capital-frame__funding-port:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .capital-frame__funding-port::before,
+  .capital-frame__problem-port::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    right: -38px;
+    top: 50%;
+    width: 38px;
+    height: 6px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    border-top: 1px solid color-mix(in srgb, var(--bfux-affinity) 34%, var(--bf-etched-line-strong));
+    border-bottom: 1px solid rgba(0,0,0,.42);
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bfux-affinity) 14%, #263238),
+      #10171b);
+  }
+
+  .capital-frame__problem-port {
+    margin-top: 10px !important;
+    min-height: 86px !important;
+    display: grid;
+    align-content: center;
+    padding: 11px 12px 11px 14px !important;
+    border: 0 !important;
+    border-top: 1px solid color-mix(in srgb, var(--bf-info) 28%, var(--bf-etched-line)) !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--bf-info) 28%, var(--bf-etched-line)) !important;
+    border-left: 5px solid color-mix(in srgb, var(--bf-info) 58%, var(--bf-etched-line-strong)) !important;
+    border-radius: 0 !important;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bf-info) 8%, transparent), transparent 58%),
+      rgba(10,16,20,.36) !important;
+    box-shadow: none !important;
+  }
+
+  /* RIGHT · one inspection rack with five sequential gates on one spine. */
+  .capital-frame__diligence-gates {
+    position: relative;
+    gap: 0 !important;
+    padding: 5px 0 !important;
+    overflow: visible;
+    border: 1px solid color-mix(in srgb, var(--bf-region-about) 24%, var(--bf-etched-line));
+    border-radius: 3px;
+    background:
+      linear-gradient(270deg, color-mix(in srgb, var(--bf-region-about) 4%, transparent), transparent 48%),
+      color-mix(in srgb, var(--bf-bg-base) 94%, #080d10);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.022),
+      inset 0 -1px 0 rgba(0,0,0,.46);
+  }
+
+  .capital-frame__diligence-gates::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 8px;
+    bottom: 8px;
+    left: -38px;
+    width: 8px;
+    pointer-events: none;
+    border: 1px solid color-mix(in srgb, var(--bf-region-about) 38%, var(--bf-etched-line-strong));
+    border-radius: 2px;
+    background:
+      repeating-linear-gradient(180deg,
+        color-mix(in srgb, var(--bf-region-about) 24%, transparent) 0 9px,
+        transparent 9px 15px),
+      linear-gradient(90deg, #1c262b, #0c1215);
+    box-shadow:
+      inset 0 0 0 1px rgba(0,0,0,.34),
+      0 2px 5px rgba(0,0,0,.28);
+  }
+
+  .capital-frame__diligence-gates li {
+    position: relative;
+    min-height: 88px !important;
+    display: grid !important;
+    grid-template-columns: 32px minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 12px 10px 8px !important;
+    border: 0 !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--bf-region-about) 18%, var(--bf-etched-line)) !important;
+    border-radius: 0 !important;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--bfux-affinity) 6%, transparent), transparent 54%),
+      rgba(12,18,22,.42) !important;
+    box-shadow: none !important;
+  }
+
+  .capital-frame__diligence-gates li:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .capital-frame__diligence-gates li::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute;
+    z-index: 0;
+    left: -31px;
+    top: 50%;
+    width: 12px;
+    height: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    border-top: 1px solid color-mix(in srgb, var(--bf-region-about) 34%, var(--bf-etched-line-strong));
+    border-bottom: 1px solid rgba(0,0,0,.42);
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--bf-region-about) 14%, #263238),
+      #10171b);
+  }
+
+  .capital-frame__diligence-gates li > span {
+    width: 27px;
+    height: 27px;
+    display: grid !important;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--bf-region-about) 46%, var(--bf-etched-line));
+    border-radius: 2px;
+    background: #0a0f12;
+    color: color-mix(in srgb, var(--bf-region-about) 66%, var(--bf-white-050)) !important;
+    font-size: .48rem !important;
+    letter-spacing: .08em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  }
+
+  .capital-frame__diligence-gates li > div {
+    min-width: 0;
+    padding-left: 10px;
+    border-left: 1px solid color-mix(in srgb, var(--bf-region-about) 24%, var(--bf-etched-line));
+  }
+
+  .capital-frame__diligence-gates h3 {
+    margin: 0 !important;
+    font-size: .78rem !important;
+    line-height: 1.16 !important;
+  }
+
+  .capital-frame__diligence-gates p {
+    margin-top: 5px !important;
+    font-size: .67rem !important;
+    line-height: 1.38 !important;
+  }
+}
