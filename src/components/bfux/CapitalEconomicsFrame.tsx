@@ -378,7 +378,7 @@ export function CapitalEconomicsFrame() {
           </article>
         </aside>
 
-        <main className="capital-frame__engine" aria-labelledby="conversion-engine-title">
+        <section className="capital-frame__engine" aria-labelledby="conversion-engine-title">
           <section className="capital-frame__cycle-loop" aria-label="Primary capital conversion cycle">
             <div className="capital-frame__cycle-loop-shell" aria-hidden="true" />
 
@@ -493,7 +493,7 @@ export function CapitalEconomicsFrame() {
               ))}
             </div>
           </section>
-        </main>
+        </section>
 
         <aside className="capital-frame__diligence-console" aria-labelledby="diligence-title">
           <header className="capital-frame__console-heading">
