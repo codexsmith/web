@@ -405,6 +405,14 @@
     min-height: 0 !important;
     align-self: stretch !important;
   }
+
+  /* The retained-capability interface already closes the right boundary.
+     Do not add a second inspection spine beside it. */
+  .capital-frame__diligence-gates::before,
+  .capital-frame__diligence-gates li::after {
+    display: none !important;
+    content: none !important;
+  }
 }
 
 @media (pointer: coarse), (max-width: 760px) {
