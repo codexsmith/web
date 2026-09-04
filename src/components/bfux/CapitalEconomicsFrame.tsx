@@ -492,7 +492,7 @@ export function CapitalEconomicsFrame() {
 
         <aside className="capital-frame__diligence-console" aria-labelledby="diligence-title">
           <header className="capital-frame__console-heading">
-            <h2 id="diligence-title">Five checks for every capital commitment</h2>
+            <h2 id="diligence-title">Funding criteria</h2>
           </header>
 
           <ol className="capital-frame__diligence-gates">
