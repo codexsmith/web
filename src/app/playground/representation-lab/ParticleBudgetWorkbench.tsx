@@ -1,5 +1,6 @@
 "use client";
 
+import { BayesModelWorkbench } from "./BayesModelWorkbench";
 import type { LabFrame } from "./engine";
 import {
   PARTICLE_BUDGETS,
@@ -81,6 +82,8 @@ export function ParticleBudgetWorkbench({
         <span>REFERENCE BOUNDARY</span>
         <p>The exact posterior is retained only as a laboratory reference for measuring defect. It is outside the active finite-particle representation.</p>
       </div>
+
+      <BayesModelWorkbench />
     </section>
   );
 }

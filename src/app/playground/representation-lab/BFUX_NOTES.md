@@ -11,6 +11,7 @@ This note records the semantic topology applied to the MVP so later visual refin
 - State sufficiency is task-relative: a projection may close one task and fail another without any algorithmic failure.
 - Representation budget is an explicit engineering variable. Approximation must expose both the retained carrier and the measurable defect against a reference when one is available.
 - Admissible forgetting is consequence-relative. Compression is not good because it is small; it is admissible only while distinctions required by the declared consequence remain preserved.
+- Observation uncertainty and model mismatch are distinct defect classes. A posterior can become more concentrated while becoming less faithful to world truth when its generative assumptions are wrong.
 - The causal path remains visible: `WORLD -> OBSERVE -> REPRESENT -> INFER -> ACT -> CONSEQUENCE`.
 - Closure is displayed as earned state after the bounded trace completes; it is not a world-action control.
 - World truth and agent-visible state remain distinct, especially in Bayesian mode.
@@ -27,6 +28,8 @@ This note records the semantic topology applied to the MVP so later visual refin
 - budget rail = explicit bound on the carrier used to preserve a representation;
 - feature boundary = explicit projection of concrete state-action identity into retained, coarsened, or forgotten features;
 - alias witness = concrete pair of represented-as-equivalent cases whose reference consequences materially diverge;
+- model assumption bay = explicit generative assumptions held against a fixed world-truth and evidence tape;
+- calibration witness = a concrete frame where model confidence rises while probability assigned to truth falls;
 - bus / trace line = causal propagation;
 - wells = subordinate internal state;
 - status lamps / labels = machine state, never decoration.
@@ -40,7 +43,7 @@ The laboratory now holds six projections over the same carrier world:
 3. **Minimax** — pursuer typed as adversary; output is a worst-case action.
 4. **Expectimax** — pursuer typed as stochastic variable; output is an expected-value action.
 5. **MDP / value iteration** — transition probability, reward, and discount become load-bearing; output is a value field + policy. This cartridge can now replace tabular state-action identity with a learned linear feature projection.
-6. **Bayesian filter** — true pursuer state is outside the agent boundary; output is a belief distribution. This cartridge can now replace the explicit posterior with a bounded particle carrier.
+6. **Bayesian filter** — true pursuer state is outside the agent boundary; output is a belief distribution. This cartridge can replace the explicit posterior with a bounded particle carrier and can independently stress the sensor and hidden-state transition assumptions used to construct that posterior.
 
 The counterfactual rack exists to compare these outputs without changing `WORLD-01`.
 
@@ -115,6 +118,42 @@ bounded representation != broken representation
 ```
 
 A finite carrier can preserve enough structure for useful inference while accumulating measurable defect. The budget rail makes that trade visible and operable.
+
+## Bayesian model mismatch
+
+The Bayesian cartridge now also exposes a **model assumption bay**. This experiment holds the canonical hidden trajectory and six noisy distance observations fixed while changing the generative assumptions used by inference.
+
+Sensor models:
+
+- calibrated bounded-noise likelihood;
+- overconfident likelihood concentrated sharply on exact range matches;
+- `+2` range bias, representing an assumption that the sensor under-reports true distance.
+
+Transition models:
+
+- calibrated local random walk;
+- sticky dynamics with 80% probability of remaining in place;
+- false westward drift with 80% probability assigned to westward motion when available.
+
+The interface compares the active posterior with the calibrated reference on the same evidence and reports:
+
+- posterior peak confidence;
+- probability mass assigned to the actual hidden state;
+- posterior entropy;
+- graph-distance miss between posterior peak and truth;
+- total-variation distance from the calibrated posterior.
+
+The compound `CONFIDENTLY WRONG` preset supplies a concrete pathology. On the final observation, the active model reaches roughly 91% posterior confidence at a location 13 cells from truth while assigning only about 0.08% probability to the actual hidden state. Its posterior is roughly 73% TV from the calibrated reference.
+
+This demonstrates a separate defect class from observation noise or particle approximation:
+
+```text
+uncertain evidence -> posterior uncertainty
+bounded carrier -> approximation defect
+wrong generative model -> confident inference about the wrong world
+```
+
+More samples or more computation can reduce approximation error inside a model. They cannot repair a false model assumption by themselves.
 
 ## Feature projection and admissible forgetting
 
