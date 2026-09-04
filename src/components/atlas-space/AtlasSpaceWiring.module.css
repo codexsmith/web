@@ -1,0 +1,110 @@
+.backplaneHousing {
+  fill: rgba(12, 17, 14, .88);
+  stroke: #727b72;
+  stroke-width: 1.5;
+  filter: drop-shadow(3px 5px 6px rgba(0, 0, 0, .42));
+}
+
+.backplaneLabel {
+  fill: #9aa89e;
+  font: 700 8px "Courier New", monospace;
+  letter-spacing: .14em;
+}
+
+.backplaneBus,
+.boardTrace,
+.traceSleeve {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.backplaneBus {
+  stroke: #5f6d63;
+  stroke-width: 3;
+  opacity: .66;
+}
+
+.traceSleeve {
+  stroke: rgba(0, 0, 0, .62);
+  stroke-width: 6;
+}
+
+.boardTrace {
+  stroke: #607466;
+  stroke-width: 1.8;
+  opacity: .48;
+}
+
+.backplaneBusActive,
+.boardTraceActive {
+  stroke: #79c875;
+  opacity: 1;
+  filter: drop-shadow(0 0 4px rgba(121, 200, 117, .42));
+}
+
+.connector_through {
+  stroke-dasharray: none;
+}
+
+.connector_keyed {
+  stroke-dasharray: 2 2;
+}
+
+.connector_test {
+  stroke-dasharray: 8 5;
+}
+
+.edgeConnector {
+  fill: #949a91;
+  stroke: #c5cabf;
+  stroke-width: 1;
+}
+
+.edge_through {
+  fill: #7d887e;
+}
+
+.edge_keyed {
+  fill: #6f786e;
+  stroke-width: 1.5;
+}
+
+.edge_test {
+  fill: #9a9180;
+  stroke: #d0c4ad;
+}
+
+.edgeConnectorActive {
+  fill: #79c875;
+  stroke: #d5eed1;
+  filter: drop-shadow(0 0 5px rgba(121, 200, 117, .46));
+}
+
+.jack_through {
+  stroke-width: 1;
+}
+
+.jack_keyed {
+  stroke-width: 2.5;
+  stroke-dasharray: 2 1;
+}
+
+.jack_test {
+  stroke: #cbbd9f;
+  stroke-width: 2;
+}
+
+.patch_through .patchJack {
+  border-radius: 50%;
+}
+
+.patch_keyed .patchJack {
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.16), inset 4px 0 0 rgba(38,45,39,.18);
+}
+
+.patch_test .patchJack {
+  border-radius: 2px;
+  background: linear-gradient(#b8ad96, #817865);
+}
