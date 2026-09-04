@@ -21,6 +21,26 @@
   min-height: 100svh;
 }
 
+/* Capital is mounted inside the fixed BoundaryFrame. Give the apparatus its
+   own page-height scroll surface so the site frame remains stationary while
+   the capital machine can be inspected vertically and horizontally. */
+.site-shell[data-machine-surface="capital"] .capital-prototype-page {
+  box-sizing: border-box;
+  height: 100svh;
+  max-height: 100svh;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable both-edges;
+  padding-bottom: calc(var(--frame-bottom) + clamp(12px, 1.5vw, 22px));
+}
+
+/* Capital is itself the selected root representation. Keep the machine-surface
+   controls (Capital / Full / Core), but suppress the orthogonal root
+   World / Evidence / Timeline projection buttons while Capital is active. */
+.site-shell[data-machine-surface="capital"] .projection-switcher [data-projection-mode] {
+  display: none !important;
+}
+
 .capital-frame {
   min-height: 0;
   grid-template-rows: auto auto auto auto;
@@ -61,6 +81,10 @@
   .capital-prototype-page {
     overflow-x: auto;
     overflow-y: visible;
+  }
+
+  .site-shell[data-machine-surface="capital"] .capital-prototype-page {
+    overflow: auto;
   }
 
   .capital-frame {
