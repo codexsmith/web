@@ -152,7 +152,7 @@
     .bf-machine__apparatus[data-machine-layer="apparatus"]
     > .bf-machine-tour-card[data-node-id="tour"][data-expanded="true"] {
     left: max(10px, 1%) !important;
-    top: max(10px, 1%) !important;
+    top: max(0px, calc(max(10px, 1%) - 14px)) !important;
     right: calc(100% - var(--core-left) - var(--core-left-card-width)) !important;
     bottom: var(--core-tour-bottom) !important;
     width: auto !important;
@@ -163,8 +163,9 @@
   /* Full Loop nests Tour inside About. About begins at 2.5% of the board and is
    * 18% wide. A -8.33% local left inset reaches roughly the 1% board safety
    * margin. Keeping right: 0 fixes the Tour's right edge to About's right edge,
-   * safely before People at 23.5%. 158% of About's height fills the otherwise
-   * empty vertical bay without crossing the board's top safety inset. */
+   * safely before People at 23.5%. The +14px height grows upward from the fixed
+   * About dock datum without crossing another card.
+   */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine__apparatus[data-machine-layer="apparatus"]
@@ -175,7 +176,7 @@
     right: 0 !important;
     bottom: calc(100% + .78vw) !important;
     width: auto !important;
-    height: 158% !important;
+    height: calc(158% + 14px) !important;
     transform-origin: right bottom !important;
   }
 }
@@ -206,21 +207,16 @@
   z-index: 39 !important;
 }
 
-/* Core and Full share the same map eyebrow geometry. Lift the open eyebrow a
- * few pixels so its top edge aligns with the expanded Tour chassis and leaves
- * a small visual air gap above People / Products / Publications. */
+/* Core gets another 7px of eyebrow lift to track the taller Tour chassis. */
 .bf-machine-tour-map-layer[data-open="true"]
   .bf-machine-tour-map-layer__arm[data-ready="true"] {
-  transform: translateY(calc(-100% - clamp(14px, 1vw, 18px))) !important;
+  transform: translateY(calc(-100% - clamp(21px, 1vw, 25px))) !important;
 }
 
-/* Full nests the Tour inside About, so its chassis top sits slightly higher in
- * apparatus coordinates than Core even though the map arm shares the same
- * People-row datum. Give Full the additional small lift required to restore the
- * same visual top alignment without disturbing the now-correct Core view. */
+/* Full retains its separate nested-About datum and receives the same +7px lift. */
 .site-shell[data-root-focus="true"]
   .bf-machine[data-skin="physical"][data-resolution="mid"]
   .bf-machine-tour-map-layer[data-open="true"]
   .bf-machine-tour-map-layer__arm[data-ready="true"] {
-  transform: translateY(calc(-100% - clamp(21px, 1.4vw, 25px))) !important;
+  transform: translateY(calc(-100% - clamp(28px, 1.4vw, 32px))) !important;
 }
