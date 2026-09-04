@@ -205,3 +205,11 @@
   > .bf-machine-tour-map-layer {
   z-index: 39 !important;
 }
+
+/* Core and Full share the same map eyebrow geometry. Lift the open eyebrow a
+ * few pixels so its top edge aligns with the expanded Tour chassis and leaves
+ * a small visual air gap above People / Products / Publications. */
+.bf-machine-tour-map-layer[data-open="true"]
+  .bf-machine-tour-map-layer__arm[data-ready="true"] {
+  transform: translateY(calc(-100% - clamp(14px, 1vw, 18px))) !important;
+}
