@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import styles from "./representation-lab.module.css";
 import x from "./representation-lab-expansion.module.css";
 import particleStyles from "./representation-lab-particle.module.css";
+import { FeatureQWorkbench } from "./FeatureQWorkbench";
 import { ParticleBudgetWorkbench } from "./ParticleBudgetWorkbench";
 import { TaskWorkbench } from "./TaskWorkbench";
 import {
@@ -19,6 +20,14 @@ import {
   type WorldModel,
   WORLD,
 } from "./engine";
+import {
+  buildFeatureQ,
+  DEFAULT_FEATURE_CONFIG,
+  FEATURE_DEFINITIONS,
+  featureResolutionLabel,
+  type FeatureConfig,
+  type QCarrier,
+} from "./feature-q";
 import {
   buildParticleApproximation,
   type ParticleBudget,
@@ -83,12 +92,15 @@ export function RepresentationLab() {
   const [revealTruth, setRevealTruth] = useState(false);
   const [breakModel, setBreakModel] = useState(false);
   const [particleBudget, setParticleBudget] = useState<ParticleBudget>("exact");
+  const [qCarrier, setQCarrier] = useState<QCarrier>("tabular");
+  const [featureConfig, setFeatureConfig] = useState<FeatureConfig>({ ...DEFAULT_FEATURE_CONFIG });
   const searchMode = isSearchMode(mode);
   const trace = useMemo(
     () => buildTrace(mode, { retainParents: searchMode ? !breakModel : true }),
     [mode, breakModel, searchMode],
   );
   const comparison = useMemo(() => buildComparison(), []);
+  const featureResult = useMemo(() => buildFeatureQ(featureConfig), [featureConfig]);
   const frame = trace.frames[Math.min(step, trace.frames.length - 1)];
   const particleFrames = useMemo(
     () => mode === "bayes" && particleBudget !== "exact"
@@ -98,13 +110,50 @@ export function RepresentationLab() {
   );
   const particleFrame = particleFrames?.[Math.min(step, trace.frames.length - 1)] ?? null;
   const particleMode = mode === "bayes" && particleBudget !== "exact" && particleFrame !== null;
+  const featureMode = mode === "mdp" && qCarrier === "features";
   const activeBeliefs = particleFrame?.beliefs ?? frame.beliefs;
   const beliefPeak = currentBeliefPeak(activeBeliefs);
-  const closureReached = step >= trace.frames.length - 1;
+  const closureReached = featureMode || step >= trace.frames.length - 1;
   const closureState = closureReached ? trace.closure : "open";
-  const traceStage = activeTraceStage(step, trace.frames.length);
+  const traceStage = featureMode ? TRACE_STAGES.length - 1 : activeTraceStage(step, trace.frames.length);
 
   const activeWorldModel = useMemo<WorldModel>(() => {
+    if (mode === "mdp" && qCarrier === "features") {
+      const representedFeatures = FEATURE_DEFINITIONS
+        .filter((definition) => featureConfig[definition.id] !== "off")
+        .map((definition) => `${definition.label} [${featureResolutionLabel(featureConfig[definition.id]).toLowerCase()}]`);
+      const forgottenFeatures = FEATURE_DEFINITIONS.flatMap((definition) => {
+        const resolution = featureConfig[definition.id];
+        if (resolution === "off") return [definition.label];
+        if (resolution === "coarse") return [`fine-grained ${definition.label}`];
+        return [];
+      });
+      return {
+        ...trace.worldModel,
+        label: `Feature Q / ${featureResult.parameters} Learned Weights`,
+        shortLabel: `FEATURE Q · ${featureResult.parameters}W`,
+        represented: [
+          "feature vector f(s,a)",
+          ...representedFeatures,
+          "weight vector w",
+          "temporal-difference error δ",
+          "reward and transition samples",
+        ],
+        hidden: ["tabular state-action identity", "explicit Q* table", ...forgottenFeatures],
+        assumed: [
+          ...trace.worldModel.assumed,
+          "linear action-value approximation",
+          `${featureResult.trainingEpisodes} deterministic seeded training episodes`,
+        ],
+        output: `a generalized action-value function carried by ${featureResult.parameters} learned parameters`,
+        equation: "Q(s,a)=w·f(s,a);  w ← w + αδf(s,a)",
+        explanation: "State-action identity is projected into a feature vector, allowing one learned weight to generalize across many concrete situations.",
+        accent: featureResult.conflictedAliasClasses > 0
+          ? "Compression crossed a consequential boundary: some feature-identical cases require materially different Q* values."
+          : "The active projection forgets identity while preserving the tested action-value distinctions within the current collision threshold.",
+      };
+    }
+
     if (mode !== "bayes" || particleBudget === "exact") return trace.worldModel;
     return {
       ...trace.worldModel,
@@ -124,16 +173,16 @@ export function RepresentationLab() {
       explanation: "The Bayesian update is carried by a finite sample rather than an explicit probability for every candidate state.",
       accent: "A bounded carrier trades posterior fidelity for bounded representation cost.",
     };
-  }, [mode, particleBudget, trace.worldModel]);
+  }, [featureConfig, featureResult, mode, particleBudget, qCarrier, trace.worldModel]);
 
   useEffect(() => {
     setStep(0);
     setPlaying(false);
     setRevealTruth(false);
-  }, [mode, breakModel]);
+  }, [mode, breakModel, qCarrier]);
 
   useEffect(() => {
-    if (!playing) return;
+    if (!playing || featureMode) return;
     const interval = window.setInterval(() => {
       setStep((current) => {
         if (current >= trace.frames.length - 1) {
@@ -144,30 +193,42 @@ export function RepresentationLab() {
       });
     }, playbackInterval(mode));
     return () => window.clearInterval(interval);
-  }, [mode, playing, trace.frames.length]);
+  }, [featureMode, mode, playing, trace.frames.length]);
 
   const explored = useMemo(() => new Set(frame.explored.map(keyOf)), [frame.explored]);
   const frontier = useMemo(() => new Set(frame.frontier.map(keyOf)), [frame.frontier]);
   const path = useMemo(() => new Set(frame.path.map(keyOf)), [frame.path]);
   const beliefs = useMemo(() => new Map(activeBeliefs.map((cell) => [keyOf(cell.point), cell.probability])), [activeBeliefs]);
-  const values = useMemo(() => new Map((frame.values ?? []).map((cell) => [keyOf(cell.point), cell.value])), [frame.values]);
-  const policies = useMemo(() => new Map((frame.policy ?? []).map((cell) => [keyOf(cell.point), cell.action])), [frame.policy]);
+  const activeValueCells = featureMode ? featureResult.values : (frame.values ?? []);
+  const activePolicyCells = featureMode ? featureResult.policy : (frame.policy ?? []);
+  const values = useMemo(() => new Map(activeValueCells.map((cell) => [keyOf(cell.point), cell.value])), [activeValueCells]);
+  const policies = useMemo(() => new Map(activePolicyCells.map((cell) => [keyOf(cell.point), cell.action])), [activePolicyCells]);
   const maxAbsValue = useMemo(
-    () => Math.max(1, ...(frame.values ?? []).map((cell) => Math.abs(cell.value))),
-    [frame.values],
+    () => Math.max(1, ...activeValueCells.map((cell) => Math.abs(cell.value))),
+    [activeValueCells],
   );
 
   const minimaxSummary = comparison.find((row) => row.mode === "minimax");
   const expectimaxSummary = comparison.find((row) => row.mode === "expectimax");
   const bfsSummary = comparison.find((row) => row.mode === "bfs");
   const astarSummary = comparison.find((row) => row.mode === "astar");
+  const activePolicyAtStart = featureMode ? featureResult.startAction : frame.selectedAction;
+  const activeNarration = featureMode
+    ? `Approximate Q-learning has converged to a learned snapshot after ${featureResult.trainingEpisodes} seeded episodes. The current feature projection agrees with tabular Q* on ${(featureResult.policyAgreement * 100).toFixed(1)}% of represented states.`
+    : frame.narration;
+  const activeTraceSignal = featureMode ? `${(featureResult.policyAgreement * 100).toFixed(1)}% policy agreement` : trace.summary.signal;
+  const activeTraceDetail = featureMode
+    ? `${featureResult.parameters} learned weights replace ${featureResult.referenceEntries} tabular Q entries`
+    : trace.summary.detail;
 
   const reset = () => {
+    if (featureMode) return;
     setPlaying(false);
     setStep(0);
   };
 
   const togglePlayback = () => {
+    if (featureMode) return;
     if (playing) {
       setPlaying(false);
       return;
@@ -228,6 +289,16 @@ export function RepresentationLab() {
 
         <TaskWorkbench mode={mode} worldModel={activeWorldModel} comparison={comparison} onModeChange={loadMode} />
 
+        {mode === "mdp" ? (
+          <FeatureQWorkbench
+            carrier={qCarrier}
+            onCarrierChange={setQCarrier}
+            config={featureConfig}
+            onConfigChange={setFeatureConfig}
+            result={featureResult}
+          />
+        ) : null}
+
         {mode === "bayes" ? (
           <ParticleBudgetWorkbench
             budget={particleBudget}
@@ -282,20 +353,20 @@ export function RepresentationLab() {
 
             <div className={styles.worldToolbar}>
               <div className={styles.runControls}>
-                <button type="button" className={styles.primaryControl} onClick={togglePlayback}>
-                  {playing ? "PAUSE TRACE" : closureReached ? "REPLAY TRACE" : "RUN TRACE"}
+                <button type="button" className={styles.primaryControl} onClick={togglePlayback} disabled={featureMode}>
+                  {featureMode ? "LEARNED SNAPSHOT" : playing ? "PAUSE TRACE" : closureReached ? "REPLAY TRACE" : "RUN TRACE"}
                 </button>
-                <button type="button" className={styles.secondaryControl} onClick={reset}>RESET STATE</button>
-                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={step === 0} aria-label="Previous frame">←</button>
-                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.min(trace.frames.length - 1, value + 1))} disabled={closureReached} aria-label="Next frame">→</button>
+                <button type="button" className={styles.secondaryControl} onClick={reset} disabled={featureMode}>RESET STATE</button>
+                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={featureMode || step === 0} aria-label="Previous frame">←</button>
+                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.min(trace.frames.length - 1, value + 1))} disabled={featureMode || closureReached} aria-label="Next frame">→</button>
               </div>
-              <div className={styles.frameCounter}>state {step + 1} / {trace.frames.length}</div>
+              <div className={styles.frameCounter}>{featureMode ? `${featureResult.trainingEpisodes} training episodes` : `state ${step + 1} / ${trace.frames.length}`}</div>
             </div>
 
             <div className={styles.mazeFrame}>
               <svg className={styles.maze} viewBox={`0 0 ${WORLD.width * CELL} ${WORLD.height * CELL}`} role="img" aria-labelledby="representation-lab-maze-title representation-lab-maze-desc">
                 <title id="representation-lab-maze-title">WORLD-01 rendered through the active reasoner</title>
-                <desc id="representation-lab-maze-desc">The maze and object identity remain fixed while overlays expose search frontiers, value fields, policies, game-tree decisions, exact beliefs, or finite particle beliefs.</desc>
+                <desc id="representation-lab-maze-desc">The maze and object identity remain fixed while overlays expose search frontiers, exact or feature-projected value policies, game-tree decisions, exact beliefs, or finite particle beliefs.</desc>
                 {MAZE_ROWS.map((row, y) => [...row].map((_, xPos) => {
                   const point: Point = [xPos, y];
                   const key = keyOf(point);
@@ -362,7 +433,7 @@ export function RepresentationLab() {
               <span><i className={styles.legendPursuer} /> pursuer / hazard</span>
               <span><i className={styles.legendTarget} /> target</span>
               {searchMode ? <span><i className={styles.legendSearch} /> explored / frontier</span> : null}
-              {mode === "mdp" ? <span><i className={x.legendValue} /> value / policy</span> : null}
+              {mode === "mdp" ? <span><i className={x.legendValue} /> {featureMode ? "feature-Q value / policy" : "value / policy"}</span> : null}
               {mode === "bayes" && particleMode ? <span><i className={particleStyles.legendParticle} /> particle hypotheses</span> : null}
               {mode === "bayes" && !particleMode ? <span><i className={styles.legendBelief} /> exact belief probability</span> : null}
             </div>
@@ -379,8 +450,8 @@ export function RepresentationLab() {
             <div className={styles.equation}>{activeWorldModel.equation}</div>
             <div className={x.metricBlock}>
               <span>TRACE SUMMARY</span>
-              <strong>{trace.summary.signal}</strong>
-              <small>{trace.summary.detail}</small>
+              <strong>{activeTraceSignal}</strong>
+              <small>{activeTraceDetail}</small>
             </div>
 
             {frame.searchCost ? (
@@ -401,11 +472,11 @@ export function RepresentationLab() {
               </div>
             ) : null}
 
-            {mode === "mdp" && frame.selectedAction ? (
+            {mode === "mdp" && activePolicyAtStart ? (
               <div className={x.metricBlock}>
                 <span>POLICY AT START</span>
-                <strong>{POLICY_GLYPHS[frame.selectedAction]} {ACTION_LABELS[frame.selectedAction]}</strong>
-                <small>The output is a policy over states, not a single recovered route.</small>
+                <strong>{POLICY_GLYPHS[activePolicyAtStart]} {ACTION_LABELS[activePolicyAtStart]}</strong>
+                <small>{featureMode ? `Tabular reference chooses ${ACTION_LABELS[featureResult.referenceStartAction]}.` : "The output is a policy over states, not a single recovered route."}</small>
               </div>
             ) : null}
 
@@ -429,7 +500,7 @@ export function RepresentationLab() {
         </div>
 
         <section className={styles.eventLedger} aria-live="polite">
-          <div><span>CURRENT EVENT</span><p>{frame.narration}</p></div>
+          <div><span>CURRENT EVENT</span><p>{activeNarration}</p></div>
           <div><span>REPRESENTATIONAL CONSEQUENCE</span><p>{activeWorldModel.accent}</p></div>
           <div className={`${closureState === "reached" ? styles.closureReached : styles.closureOpen} ${closureState === "defect" ? x.closureDefect : ""}`}>
             <span>CLOSURE STATE</span>
@@ -478,7 +549,7 @@ export function RepresentationLab() {
       <section className={styles.why}>
         <div><p className={styles.eyebrow}>Why this matters</p><h2>The algorithm is downstream of a choice about what the world is.</h2></div>
         <p>This apparatus keeps one semantic world persistent while changing what crosses the representation boundary, what assumptions enter inference, and what kind of output object is produced.</p>
-        <p>The stress rigs can now remove a required relation or bound a probabilistic carrier, making both catastrophic closure failure and graded approximation defect directly measurable.</p>
+        <p>The stress rigs now expose three distinct regimes: catastrophic closure failure, graded probabilistic approximation, and feature compression that can remain admissible or become defective when consequentially different cases alias.</p>
         <a href="https://ai.berkeley.edu/project_overview.html" target="_blank" rel="noreferrer">View the Berkeley project overview ↗</a>
       </section>
     </main>
