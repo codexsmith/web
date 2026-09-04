@@ -1,5 +1,100 @@
 .physical-machine-experience{position:relative;min-width:0}
+.physical-machine-experience__fit-stage{position:relative;width:100%;min-width:0}
 .physical-machine-experience__machine-stack{position:relative;min-width:0}
+
+/* The root Lab Machine is an instrument viewport, not a document canvas.
+ * Hardware may move outside its authored board without creating a new page
+ * scroll range. Desktop is fully viewport-locked; the mobile rack may still
+ * scroll vertically, but never advertises browser scrollbars. */
+html:has(.site-shell[data-root-focus="true"]),
+body:has(.site-shell[data-root-focus="true"]){
+  max-width:100%;
+  overscroll-behavior:none;
+  scrollbar-width:none;
+}
+html:has(.site-shell[data-root-focus="true"])::-webkit-scrollbar,
+body:has(.site-shell[data-root-focus="true"])::-webkit-scrollbar{
+  width:0;
+  height:0;
+  display:none;
+}
+.site-shell[data-root-focus="true"]{
+  max-width:100vw;
+  overflow-x:clip;
+}
+.site-shell[data-root-focus="true"] .world-machine-preview{
+  max-width:100vw;
+  overflow-x:clip!important;
+}
+/* Apparatus motion is allowed to leave the board. The root viewport, not the
+ * machine board, is the final clipping boundary. */
+.site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__board{
+  overflow:visible!important;
+}
+
+@media(min-width:1025px){
+  html:has(.site-shell[data-root-focus="true"]),
+  body:has(.site-shell[data-root-focus="true"]){
+    width:100%;
+    height:100%;
+    overflow:hidden!important;
+  }
+
+  .site-shell[data-root-focus="true"]{
+    width:100%;
+    height:100dvh;
+    min-height:0;
+    overflow:clip;
+  }
+
+  .site-shell[data-root-focus="true"] .world-machine-preview{
+    box-sizing:border-box;
+    width:100%;
+    height:100dvh;
+    min-height:0!important;
+    max-height:100dvh;
+    overflow:clip!important;
+  }
+
+  .physical-machine-experience__fit-stage{
+    width:100%;
+    overflow:visible;
+  }
+
+  .physical-machine-experience__fit-stage .physical-machine-experience__machine-stack{
+    width:100%;
+  }
+
+  /* Auto-fit belongs to the machine object itself, not its surrounding context.
+   * LabMachine renders the board and legend as siblings; scale only the board so
+   * the visual-grammar legend remains a full-width page-context instrument. */
+  .physical-machine-experience__fit-stage[data-auto-fit="true"]
+    .bf-machine[data-skin="physical"] .bf-machine__board{
+    transform:scale(var(--machine-fit-scale));
+    transform-origin:top center;
+    margin-bottom:var(--machine-fit-margin-bottom);
+  }
+
+  /* The legacy ultra-wide skin swaps --machine-u from vw to vh at a 2:1
+   * viewport ratio. That was useful when the entire machine had to stay above
+   * the fold, but it fights the homepage auto-fit contract. While auto-fit is
+   * active, one width-governed ruler owns the physical instrument. */
+  .physical-machine-experience__fit-stage[data-auto-fit="true"]
+    .bf-machine[data-skin="physical"]{
+    --machine-u:1vw !important;
+  }
+}
+
+@media(max-width:1024px){
+  html:has(.site-shell[data-root-focus="true"]),
+  body:has(.site-shell[data-root-focus="true"]){
+    overflow-x:hidden;
+  }
+  body:has(.site-shell[data-root-focus="true"]){
+    overflow-y:auto;
+  }
+}
+
 .world-machine-resolution{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem .55rem;margin:.5rem .65rem .25rem;padding:.42rem .5rem;border:1px solid #314047;border-radius:8px;background:#0d1518;color:#cfd7d8}
 .world-machine-resolution__label{order:1;display:grid;gap:.1rem;min-width:8rem;flex:0 0 auto}
 .world-machine-resolution__label small{color:#79b3d2;font:700 .42rem/1 ui-monospace,monospace;letter-spacing:.15em}

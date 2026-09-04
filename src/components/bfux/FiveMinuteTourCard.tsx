@@ -60,6 +60,7 @@ const mapColumns = [
 ] as const;
 
 const mapArmRightInset = 6;
+const mapArmSafeAnchorTop = 64;
 
 type MapGeometry = Record<string, { left: number; top: number; width: number }>;
 type MapArmGeometry = {
@@ -68,6 +69,19 @@ type MapArmGeometry = {
   width: number;
   connectorSide: "left" | "right";
 } | null;
+
+function measureWithinHost(element: HTMLElement, host: HTMLElement) {
+  const hostRect = host.getBoundingClientRect();
+  const elementRect = element.getBoundingClientRect();
+  const scaleX = host.offsetWidth > 0 ? hostRect.width / host.offsetWidth : 1;
+  const scaleY = host.offsetHeight > 0 ? hostRect.height / host.offsetHeight : scaleX;
+
+  return {
+    left: (elementRect.left - hostRect.left) / (scaleX || 1),
+    top: (elementRect.top - hostRect.top) / (scaleY || 1),
+    width: elementRect.width / (scaleX || 1),
+  };
+}
 
 export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResolution }) {
   const [expanded, setExpanded] = useState(false);
@@ -99,11 +113,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
             `.bf-machine-node[data-node-id="${column.target}"]`,
           );
           if (!target) continue;
-          next[column.target] = {
-            left: target.offsetLeft,
-            top: target.offsetTop,
-            width: target.offsetWidth,
-          };
+          next[column.target] = measureWithinHost(target, mapHost);
         }
 
         setMapGeometry(next);
@@ -117,20 +127,19 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
           return;
         }
 
-        const hostRect = mapHost.getBoundingClientRect();
-        const tourRect = tourRef.current.getBoundingClientRect();
+        const tourGeometry = measureWithinHost(tourRef.current, mapHost);
         const targetLeft = Math.min(...measuredTargets.map((geometry) => geometry.left));
         const targetTop = Math.min(...measuredTargets.map((geometry) => geometry.top));
         const targetRight = Math.max(...measuredTargets.map((geometry) => geometry.left + geometry.width));
-        const tourLeft = tourRect.left - hostRect.left;
-        const tourRight = tourRect.right - hostRect.left;
+        const tourLeft = tourGeometry.left;
+        const tourRight = tourGeometry.left + tourGeometry.width;
         const tourIsLeft = tourRight <= targetLeft;
         const armLeft = tourIsLeft ? tourRight : targetLeft;
         const armRight = tourIsLeft ? targetRight : Math.max(targetRight, tourLeft);
 
         setMapArmGeometry({
           left: armLeft,
-          top: targetTop,
+          top: Math.max(targetTop, mapArmSafeAnchorTop),
           width: Math.max(0, armRight - armLeft - (tourIsLeft ? mapArmRightInset : 0)),
           connectorSide: tourIsLeft ? "left" : "right",
         });
@@ -196,6 +205,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
       <article
         ref={tourRef}
         className="bf-machine-node bf-machine-tour-card"
+        data-machine-layer="node"
         data-node-id="tour"
         data-expanded={expanded ? "true" : "false"}
         data-map-open={mapOpen ? "true" : "false"}

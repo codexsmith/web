@@ -138,3 +138,85 @@
   display: none !important;
   content: none !important;
 }
+
+/* Expanded Tour containment.
+ *
+ * The Tour is not an overlay. It expands only into the empty bay above About:
+ * leftward toward the viewport edge and upward toward the board edge. Its right
+ * edge remains attached to the About column, so it cannot cover People; its
+ * lower edge remains above the About dock, so it cannot cover About.
+ */
+@media (min-width: 1025px) {
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    > .bf-machine-tour-card[data-node-id="tour"][data-expanded="true"] {
+    left: max(10px, 1%) !important;
+    top: max(0px, calc(max(10px, 1%) - 14px)) !important;
+    right: calc(100% - var(--core-left) - var(--core-left-card-width)) !important;
+    bottom: var(--core-tour-bottom) !important;
+    width: auto !important;
+    height: auto !important;
+    transform-origin: right bottom !important;
+  }
+
+  /* Full Loop nests Tour inside About. About begins at 2.5% of the board and is
+   * 18% wide. A -8.33% local left inset reaches roughly the 1% board safety
+   * margin. Keeping right: 0 fixes the Tour's right edge to About's right edge,
+   * safely before People at 23.5%. The +14px height grows upward from the fixed
+   * About dock datum without crossing another card.
+   */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-tour-card[data-node-id="tour"][data-expanded="true"] {
+    left: -8.33% !important;
+    top: auto !important;
+    right: 0 !important;
+    bottom: calc(100% + .78vw) !important;
+    width: auto !important;
+    height: calc(158% + 14px) !important;
+    transform-origin: right bottom !important;
+  }
+}
+
+/* The expanded Tour is sized to its available bay, so the reading stage is a
+ * fixed instrument surface rather than a nested scrolling document. */
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__stage {
+  overflow: hidden !important;
+  scrollbar-width: none !important;
+}
+
+.bf-machine[data-skin="physical"]
+  .bf-machine-tour-card[data-expanded="true"] .bf-machine-tour-card__stage::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* The map eyebrow is apparatus hardware, but it is physically behind the Tour
+ * chassis. When their geometries overlap, the eyebrow should disappear under
+ * the expanded card and emerge from its edge rather than painting across the
+ * Tour title, controls, or reading surface. It remains well above ordinary
+ * machine nodes, whose stacking levels are much lower. */
+.bf-machine[data-skin="physical"]
+  .bf-machine__apparatus[data-machine-layer="apparatus"]
+  > .bf-machine-tour-map-layer {
+  z-index: 39 !important;
+}
+
+/* Core gets another 7px of eyebrow lift to track the taller Tour chassis. */
+.bf-machine-tour-map-layer[data-open="true"]
+  .bf-machine-tour-map-layer__arm[data-ready="true"] {
+  transform: translateY(calc(-100% - clamp(21px, 1vw, 25px))) !important;
+}
+
+/* Full retains its separate nested-About datum and receives the same +7px lift. */
+.site-shell[data-root-focus="true"]
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine-tour-map-layer[data-open="true"]
+  .bf-machine-tour-map-layer__arm[data-ready="true"] {
+  transform: translateY(calc(-100% - clamp(28px, 1.4vw, 32px))) !important;
+}
