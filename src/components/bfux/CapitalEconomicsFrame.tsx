@@ -337,7 +337,7 @@ export function CapitalEconomicsFrame() {
         <aside className="capital-frame__input-console" aria-labelledby="funding-input-title">
           <header className="capital-frame__console-heading">
             <span>Resource manifold</span>
-            <h2 id="funding-input-title">Ways capacity enters</h2>
+            <h2 id="funding-input-title">Lab inputs</h2>
           </header>
 
           <div className="capital-frame__funding-ports">
