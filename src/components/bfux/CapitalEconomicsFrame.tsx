@@ -310,8 +310,7 @@ export function CapitalEconomicsFrame() {
         <div className="capital-frame__identity">
           <span className="capital-frame__mark" aria-hidden="true">BFL</span>
           <div>
-            <small>Boundary First Labs</small>
-            <strong id="capital-frame-title">The conversion engine</strong>
+            <strong id="capital-frame-title">Boundary First Labs</strong>
           </div>
         </div>
 
@@ -320,16 +319,14 @@ export function CapitalEconomicsFrame() {
           <strong>Fund the conversion engine, not an unbounded theory.</strong>
         </div>
 
-        <div className="capital-frame__prototype-state" aria-label="Prototype state">
-          <span>Capital projection</span>
-          <strong>Prototype 04</strong>
+        <div className="capital-frame__prototype-state" aria-label="Capital projection">
+          <strong>Capital projection</strong>
         </div>
       </header>
 
       <section className="capital-frame__orientation" aria-labelledby="capital-orientation-title">
         <div>
-          <span>What capital actually does</span>
-          <h1 id="capital-orientation-title">Capital becomes capability only by passing through bounded work and evidence.</h1>
+          <h1 id="capital-orientation-title">Capital becomes Capability</h1>
         </div>
         <p>
           The central object is not a list of projects or funding channels. It is a conversion system: resources increase coherent capacity; capacity closes bounded work; bounded work produces witnesses; validated capability transfers; what survives returns to the institution.
