@@ -329,7 +329,7 @@ export function CapitalEconomicsFrame() {
           <h1 id="capital-orientation-title">Capital becomes Capability</h1>
         </div>
         <p>
-          The central object is not a list of projects or funding channels. It is a conversion system: resources increase coherent capacity; capacity closes bounded work; bounded work produces witnesses; validated capability transfers; what survives returns to the institution.
+          Capital funds bounded work that produces evidence, transferable capability, and reusable institutional capacity. Each cycle is designed to leave the Lab stronger and less dependent on any single source of funding.
         </p>
       </section>
 
@@ -492,7 +492,7 @@ export function CapitalEconomicsFrame() {
 
         <aside className="capital-frame__diligence-console" aria-labelledby="diligence-title">
           <header className="capital-frame__console-heading">
-            <h2 id="diligence-title">Five gates every ask must close</h2>
+            <h2 id="diligence-title">Five checks for every capital commitment</h2>
           </header>
 
           <ol className="capital-frame__diligence-gates">
