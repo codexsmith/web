@@ -1,0 +1,263 @@
+/*
+ * Canonical desktop composition for the physical Lab Machine.
+ *
+ * Component styles own how a module looks. This file owns where the modules
+ * live. Core is the institutional composition; Full Loop is the extended machine
+ * composition that admits the lower Research machinery.
+ */
+
+@media (min-width: 1025px) {
+  /* ------------------------------------------------------------------------ */
+  /* Core set                                                                 */
+  /* ------------------------------------------------------------------------ */
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"] {
+    --core-left: 3.2%;
+    --core-upper-top: 7%;
+    --core-left-card-width: 21.2%;
+    --core-upper-card-width: 23.2%;
+    --core-card-height: 41.5%;
+    --core-gap: clamp(8px, .55vw, 10px);
+    --core-field-gap: var(--core-gap);
+    --core-card-gap: var(--core-gap);
+    --core-tour-height: clamp(72px, 5vw, 82px);
+    --core-tour-dock-gap: var(--core-gap);
+    --core-bottom-top: calc(var(--core-upper-top) + var(--core-card-height) + var(--core-gap));
+    --core-research-left: calc(var(--core-left) + var(--core-left-card-width) + var(--core-field-gap));
+    --core-products-left: calc(var(--core-research-left) + var(--core-upper-card-width) + var(--core-card-gap));
+    --core-publications-left: calc(var(--core-products-left) + var(--core-upper-card-width) + var(--core-card-gap));
+    --core-research-width: calc((var(--core-upper-card-width) * 3) + (var(--core-card-gap) * 2));
+    --core-tour-bottom: calc(100% - var(--core-bottom-top) + var(--core-tour-dock-gap));
+  }
+
+  /* Tour / About form the left institutional column. The Tour is a sibling of
+   * About, but its lower edge is derived from About's upper edge so the fixed
+   * About-owned dock remains the mechanical datum while the Tour expands. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+    position: absolute !important;
+    left: var(--core-left) !important;
+    top: var(--core-bottom-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-left-card-width) !important;
+    height: var(--core-card-height) !important;
+    z-index: 50 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-about-dock {
+    z-index: 80 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
+    position: absolute !important;
+    left: var(--core-left) !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: var(--core-tour-bottom) !important;
+    width: var(--core-left-card-width) !important;
+    height: var(--core-tour-height) !important;
+    z-index: 12 !important;
+    transform-origin: left bottom !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"] {
+    position: absolute !important;
+    left: auto !important;
+    top: auto !important;
+    right: calc(100% - var(--core-left) - var(--core-left-card-width)) !important;
+    bottom: var(--core-tour-bottom) !important;
+    width: 34.7% !important;
+    height: max(48.5%, 300px) !important;
+    z-index: 40 !important;
+    transform-origin: right bottom !important;
+  }
+
+  /* People / Products / Publications span the Research field in equal cards. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+    position: absolute !important;
+    left: var(--core-research-left) !important;
+    top: var(--core-upper-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-upper-card-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+    position: absolute !important;
+    left: var(--core-products-left) !important;
+    top: var(--core-upper-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-upper-card-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+    position: absolute !important;
+    left: var(--core-publications-left) !important;
+    top: var(--core-upper-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-upper-card-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    position: absolute !important;
+    left: var(--core-research-left) !important;
+    top: var(--core-bottom-top) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--core-research-width) !important;
+    height: var(--core-card-height) !important;
+  }
+
+  /* ------------------------------------------------------------------------ */
+  /* Full Loop                                                                */
+  /* ------------------------------------------------------------------------ */
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"] {
+    --adjacency-port-width: calc(var(--machine-u) * 1.45);
+    --adjacency-bay: calc(var(--machine-u) * 2.9);
+    --research-width: 36%;
+    --research-bottom: 60.5%;
+    --lower-deck-left: calc(20.5% + var(--adjacency-bay));
+    --lower-dock-height: calc(var(--machine-u) * 1.45);
+    --lower-deck-top: calc(var(--research-bottom) + var(--lower-dock-height));
+    --compact-link-bay: calc(var(--machine-u) * 1.32);
+    --compact-side-shoulder: calc(var(--machine-u) * 1.68);
+    --compact-card-inset: calc(var(--machine-u) * .53);
+    --governance-gap: var(--lower-dock-height);
+    --lower-deck-width: var(--research-width);
+    --lower-dock-span: 100%;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+    left: 23.5% !important;
+    top: 5% !important;
+    width: 20% !important;
+    height: 22% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+    left: 45.5% !important;
+    top: 5% !important;
+    width: 18.5% !important;
+    height: 22% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+    left: 66.5% !important;
+    top: 5% !important;
+    width: 19.5% !important;
+    height: 22% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+    left: 2.5% !important;
+    top: 35.5% !important;
+    width: 18% !important;
+    height: 21% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    left: var(--lower-deck-left) !important;
+    top: 31.5% !important;
+    width: var(--research-width) !important;
+    height: 29% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="pipeline"] {
+    left: calc(var(--lower-deck-left) + var(--compact-side-shoulder)) !important;
+    top: calc(var(--lower-deck-top) + var(--compact-card-inset)) !important;
+    z-index: 7 !important;
+    width: 10% !important;
+    height: 12.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="method"] {
+    left: calc(var(--lower-deck-left) + var(--compact-side-shoulder) + 10% + var(--compact-link-bay)) !important;
+    top: calc(var(--lower-deck-top) + var(--compact-card-inset)) !important;
+    z-index: 6 !important;
+    width: 10% !important;
+    height: 12.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="timeline"] {
+    left: calc(var(--lower-deck-left) + var(--compact-side-shoulder) + 20% + var(--compact-link-bay) + var(--compact-link-bay)) !important;
+    top: calc(var(--lower-deck-top) + var(--compact-card-inset)) !important;
+    z-index: 5 !important;
+    width: 10% !important;
+    height: 12.5% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] {
+    left: calc(var(--lower-deck-left) + var(--research-width) + var(--governance-gap)) !important;
+    top: calc(var(--lower-deck-top) - 8.5% + var(--compact-link-bay)) !important;
+    z-index: 8 !important;
+    width: 18% !important;
+    height: 21% !important;
+  }
+}
+
+/* Root-machine presentation belongs with the machine, not the frame. */
+.site-shell[data-root-focus="true"] .bf-machine__status {
+  display: none !important;
+}
+
+.site-shell[data-root-focus="true"] .bf-machine__legend-actions p {
+  display: none !important;
+}
+
+.site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
+  content: "HOVER: PREVIEW · CLICK / ENTER: OPEN";
+  display: block;
+  color: #b7c1c5;
+  font: 700 .54rem/1.35 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .055em;
+  white-space: nowrap;
+}
+
+@media (max-width: 430px) {
+  .site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
+    white-space: normal;
+    font-size: .49rem;
+  }
+}

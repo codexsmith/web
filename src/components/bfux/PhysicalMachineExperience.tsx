@@ -1,16 +1,28 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
-import { BfuxIcon } from "@/components/bfux-icons";
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
+import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import "./physical-machine-experience.css";
-
-const resolutionLabels: Record<LabMachineResolution, string> = {
-  mid: "Full loop",
-  focus: "Core set",
-};
+import "./five-minute-tour.css";
+import "./five-minute-tour-fit.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
+const desktopFitQuery = "(min-width: 1025px)";
+const targetMachineWidthRatio = 0.88;
+
+type MachineFit = {
+  enabled: boolean;
+  scale: number;
+  collapse: number;
+};
+
+const defaultMachineFit: MachineFit = {
+  enabled: false,
+  scale: 1,
+  collapse: 0,
+};
 
 function readStoredResolution() {
   if (typeof window === "undefined") return undefined;
@@ -57,6 +69,12 @@ export function PhysicalMachineExperience({
   onOpenCoreNode?: (nodeId: string) => void;
 }) {
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
+  const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
+  const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
+  const [machineFit, setMachineFit] = useState<MachineFit>(defaultMachineFit);
+  const machineHostRef = useRef<HTMLDivElement>(null);
+  const machineStackRef = useRef<HTMLDivElement>(null);
+  const hasMeasuredInitialFitRef = useRef(false);
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
@@ -65,11 +83,6 @@ export function PhysicalMachineExperience({
     if (controlledResolution === undefined) setInternalResolution(nextResolution);
     onResolutionChange?.(nextResolution);
     writeStoredResolution(nextResolution);
-  };
-
-  const narrowProcessContext = () => {
-    rememberResolution("focus");
-    if (sectionSurface) onCloseSection?.();
   };
 
   useEffect(() => {
@@ -83,15 +96,130 @@ export function PhysicalMachineExperience({
     return () => window.cancelAnimationFrame(frame);
   }, [initialResolution, onResolutionChange, sectionLabel]);
 
+  useLayoutEffect(() => {
+    /* Auto-fit is an initialization aid, not a responsive zoom controller.
+     * Measure once when the homepage machine first exists, then preserve that
+     * presentation scale for the lifetime of this mounted page. Browser zoom,
+     * viewport resize, and Core/Full switching must not trigger recalculation. */
+    if (sectionSurface || hasMeasuredInitialFitRef.current) return;
+
+    const host = machineHostRef.current;
+    const stack = machineStackRef.current;
+    const board = stack?.querySelector<HTMLElement>(".bf-machine__board") ?? null;
+    if (!host || !stack || !board) return;
+
+    let frame = window.requestAnimationFrame(() => {
+      if (!window.matchMedia(desktopFitQuery).matches) {
+        hasMeasuredInitialFitRef.current = true;
+        return;
+      }
+
+      const hostWidth = host.clientWidth;
+      const sourceWidth = board.offsetWidth;
+      const sourceHeight = board.offsetHeight;
+      if (!hostWidth || !sourceWidth || !sourceHeight) return;
+
+      /* The board is the machine object. The legend below it is page context,
+       * so it deliberately stays outside the fitted transform. */
+      const targetWidth = hostWidth * targetMachineWidthRatio;
+      const horizontalScale = targetWidth / sourceWidth;
+      const scale = Math.max(0.72, Math.min(0.96, horizontalScale));
+      const collapse = Math.max(0, sourceHeight * (1 - scale));
+
+      setMachineFit({ enabled: true, scale, collapse });
+      hasMeasuredInitialFitRef.current = true;
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      frame = 0;
+    };
+  }, [sectionSurface]);
+
+  useEffect(() => {
+    if (sectionSurface) {
+      setApparatusHost(null);
+      setAboutHost(null);
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      const apparatus = machineHostRef.current?.querySelector<HTMLElement>(".bf-machine__apparatus") ?? null;
+      const about = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
+      ) ?? null;
+      setApparatusHost(apparatus);
+      setAboutHost(about);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeResolution, sectionSurface]);
+
+  void showResolutionControls;
+  void onCloseSection;
+  void rememberResolution;
+
+  const fitStyle = machineFit.enabled ? ({
+    "--machine-fit-scale": machineFit.scale,
+    "--machine-fit-margin-bottom": `${-machineFit.collapse}px`,
+  } as CSSProperties) : undefined;
+
   return (
-    <div className="physical-machine-experience">
-
-
+    <div className="physical-machine-experience" ref={machineHostRef}>
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
       ) : (
-        <LabMachine skin="physical" showSchematic={showSchematic} resolution={activeResolution} onOpenNode={openNode} />
+        <div
+          className="physical-machine-experience__fit-stage"
+          data-auto-fit={machineFit.enabled ? "true" : undefined}
+          style={fitStyle}
+        >
+          <div
+            className="physical-machine-experience__machine-stack"
+            ref={machineStackRef}
+          >
+            <LabMachine
+              skin="physical"
+              showSchematic={showSchematic}
+              resolution={activeResolution}
+              onOpenNode={openNode}
+            />
+          </div>
+        </div>
       )}
+
+      {!sectionSurface && activeResolution === "focus" && aboutHost
+        ? createPortal(
+            <div className="bf-machine-tour-about-dock" aria-hidden="true">
+              <i />
+              <i />
+            </div>,
+            aboutHost,
+            "five-minute-tour-core-dock",
+          )
+        : null}
+
+      {!sectionSurface && activeResolution === "focus" && apparatusHost
+        ? createPortal(
+            <FiveMinuteTourCard resolution={activeResolution} />,
+            apparatusHost,
+            "five-minute-tour-core",
+          )
+        : null}
+
+      {!sectionSurface && activeResolution === "mid" && aboutHost
+        ? createPortal(
+            <>
+              <div className="bf-machine-tour-about-dock" aria-hidden="true">
+                <i />
+                <i />
+              </div>
+              <FiveMinuteTourCard resolution={activeResolution} />
+            </>,
+            aboutHost,
+            "five-minute-tour-full",
+          )
+        : null}
     </div>
   );
 }

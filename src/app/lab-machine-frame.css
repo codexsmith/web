@@ -1,14 +1,16 @@
 /*
- * Canonical homepage frame.
- * This file is loaded last and deliberately replaces the accumulated root-frame
- * overrides with one stable geometry that survives browser zoom and viewport changes.
+ * Canonical root frame for the Lab Machine.
+ *
+ * This file is the sole owner of the homepage header geometry, root View
+ * instrument, and frame-responsive behavior. Machine composition and rack
+ * reflow live elsewhere.
  */
 
 .site-shell[data-root-focus="true"] {
   --frame-top: 64px;
 }
 
-/* Do not allow legacy labels or generated decoration to leak into the home cluster. */
+/* Keep the root identity cluster intentionally compact. */
 .site-shell[data-root-focus="true"] .brand-anchor__copy,
 .site-shell[data-root-focus="true"] .frame-home-tray::before,
 .site-shell[data-root-focus="true"] .frame-home-tray::after,
@@ -92,8 +94,7 @@
   font-size: .72rem !important;
 }
 
-.site-shell[data-root-focus="true"] .frame-tools,
-.site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+.site-shell[data-root-focus="true"] .frame-tools {
   grid-column: 3;
   grid-row: 1;
   justify-self: stretch;
@@ -115,34 +116,12 @@
   padding: 0 !important;
 }
 
-.site-shell[data-root-focus="true"] .frame-context-controls {
-  flex: 0 0 auto;
-  min-width: 0;
-  margin: 0 !important;
-}
-
-.site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
-  display: flex !important;
-  align-items: stretch;
-  gap: 4px !important;
-  min-width: 0;
-  min-height: 42px;
-  padding: 4px !important;
-}
-
-.site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-  width: 82px;
-  min-width: 82px !important;
-  min-height: 32px !important;
-  grid-template-columns: 15px auto !important;
-  gap: .34rem !important;
-  padding: .3rem .52rem !important;
-}
-
+/* Ordinary root projection switcher. */
 .site-shell .projection-switcher--legible {
   flex: 0 0 auto;
   width: auto !important;
   min-width: 0;
+  justify-self: end;
   min-height: 42px;
   display: grid !important;
   grid-template-columns: auto auto auto auto !important;
@@ -177,28 +156,48 @@
   white-space: nowrap;
 }
 
-/* Keep the machine clearly below the fixed navigation frame. */
+/* Root View is intentionally terse: icons plus the primary mode names carry
+ * enough information. Rich purpose/description copy remains in aria-labels and
+ * titles without consuming a second visual line. */
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible .projection-switcher__mode-purpose {
+  display: none !important;
+}
+
+/*
+ * The Lab Machine extends View with Full/Core before the ordinary projections.
+ * All controls are siblings and size from their own icon + copy.
+ */
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible:has(> [data-machine-resolution]) {
+  display: flex !important;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: max-content !important;
+  max-width: 100%;
+  min-width: 0;
+  gap: 3px !important;
+}
+
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible:has(> [data-machine-resolution]) > .projection-switcher__label {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-resolution],
+.site-shell[data-root-focus="true"]
+  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-projection-mode] {
+  flex: 0 0 auto;
+  width: max-content;
+  min-width: max-content !important;
+}
+
+/* The fixed frame owns the clearance above the machine. */
 .site-shell[data-root-focus="true"] .world-machine-preview {
   padding-top: calc(var(--frame-top) + 18px) !important;
-}
-
-/* The apparatus title is sufficient; the old status plate is duplicate identity. */
-.site-shell[data-root-focus="true"] .bf-machine__status {
-  display: none !important;
-}
-
-/* Match the legend to the actual interaction contract. */
-.site-shell[data-root-focus="true"] .bf-machine__legend-actions p {
-  display: none !important;
-}
-
-.site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
-  content: "HOVER: PREVIEW · CLICK / ENTER: OPEN";
-  display: block;
-  color: #b7c1c5;
-  font: 700 .54rem/1.35 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  letter-spacing: .055em;
-  white-space: nowrap;
 }
 
 @media (max-width: 1500px) {
@@ -235,17 +234,9 @@
     font-size: .66rem !important;
   }
 
-  .site-shell[data-root-focus="true"] .frame-tools,
-  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+  .site-shell[data-root-focus="true"] .frame-tools {
     gap: 7px !important;
   }
-
-  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-    width: 72px;
-    min-width: 72px !important;
-    padding-inline: .4rem !important;
-  }
-
 }
 
 @media (max-width: 900px) {
@@ -258,8 +249,7 @@
     display: none !important;
   }
 
-  .site-shell[data-root-focus="true"] .frame-tools,
-  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+  .site-shell[data-root-focus="true"] .frame-tools {
     grid-column: 2;
     gap: 6px !important;
   }
@@ -267,6 +257,19 @@
   .site-shell .projection-switcher--legible {
     flex: 1 1 auto;
     width: auto !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .projection-switcher--legible:has(> [data-machine-resolution]) {
+    flex: 0 1 auto;
+    width: max-content !important;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-shell[data-root-focus="true"] .projection-switcher__mode-name {
+    font-size: .49rem !important;
   }
 }
 
@@ -302,8 +305,7 @@
     flex-basis: 28px !important;
   }
 
-  .site-shell[data-root-focus="true"] .frame-tools,
-  .site-shell[data-root-focus="true"] .frame-tools:has(.frame-context-controls) {
+  .site-shell[data-root-focus="true"] .frame-tools {
     gap: 4px !important;
   }
 
@@ -313,29 +315,6 @@
     min-width: 36px !important;
     height: 36px !important;
     min-height: 36px !important;
-  }
-
-  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom {
-    min-height: 38px;
-    gap: 2px !important;
-    padding: 2px !important;
-  }
-
-  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-    width: 32px;
-    min-width: 32px !important;
-    min-height: 32px !important;
-    grid-template-columns: 15px !important;
-    padding: 0 !important;
-  }
-
-  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
   }
 
   .site-shell .projection-switcher--legible {
@@ -398,19 +377,8 @@
     min-height: 32px !important;
   }
 
-  .site-shell[data-root-focus="true"] .lab-machine-frame-zoom button {
-    width: 28px;
-    min-width: 28px !important;
-    min-height: 28px !important;
-  }
-
   .site-shell[data-root-focus="true"] .projection-switcher__mode-name {
     font-size: .44rem !important;
     letter-spacing: .035em;
-  }
-
-  .site-shell[data-root-focus="true"] .bf-machine__legend-actions::before {
-    white-space: normal;
-    font-size: .49rem;
   }
 }

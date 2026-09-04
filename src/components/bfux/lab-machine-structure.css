@@ -1,0 +1,85 @@
+/*
+ * Canonical structural contract for the Lab Machine DOM.
+ *
+ * This file owns only interaction/layout-layer semantics:
+ *   viewport  = fixed machine field
+ *   apparatus = movable transform layer
+ *   node      = semantic/clickable object inside the apparatus
+ *   context   = fixed readout/legend outside apparatus motion
+ *
+ * Visual composition, card materials, routing geometry, and responsive rack
+ * layout belong to their existing style sheets. Keep pointer/touch/user-select
+ * behavior here so those visual passes cannot silently redefine the drag model.
+ */
+
+/* Non-physical projections do not need an extra layout box. */
+.bf-machine__apparatus {
+  display: contents;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="viewport"] {
+  position: relative;
+  isolation: isolate;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"] {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform-origin: 0 0;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+  -webkit-user-drag: none;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"][data-dragging="true"] {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]:focus-visible {
+  outline: none;
+}
+
+/* Decorative hardware must never become an accidental hit target. The node
+ * article remains the semantic target; these layers are paint only. */
+.bf-machine[data-skin="physical"] .bf-machine__traces,
+.bf-machine[data-skin="physical"] .bf-machine__lower-deck,
+.bf-machine[data-skin="physical"] [data-machine-layer="node"] > .bf-machine-node__mount,
+.bf-machine[data-skin="physical"] [data-machine-layer="node"] > .bf-machine-node__shell,
+.bf-machine[data-skin="physical"] [data-machine-layer="node"] > .bf-machine-node__fasteners {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="context"] {
+  -webkit-user-drag: none;
+}
+
+/* The tablet/phone projection is a document rack, not a pannable canvas. */
+@media (max-width: 1024px) {
+  .bf-machine[data-skin="physical"] [data-machine-layer="apparatus"] {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    cursor: default;
+    touch-action: pan-y;
+    will-change: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine[data-skin="physical"] [data-machine-layer="apparatus"] {
+    will-change: auto;
+  }
+}
