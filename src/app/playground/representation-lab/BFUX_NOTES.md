@@ -9,6 +9,7 @@ This note records the semantic topology applied to the MVP so later visual refin
 - Task specification is independent from reasoner selection. Changing the question must not silently change the represented world or algorithm.
 - The representation boundary must expose admitted and withheld distinctions.
 - State sufficiency is task-relative: a projection may close one task and fail another without any algorithmic failure.
+- Representation budget is an explicit engineering variable. Approximation must expose both the retained carrier and the measurable defect against a reference when one is available.
 - The causal path remains visible: `WORLD -> OBSERVE -> REPRESENT -> INFER -> ACT -> CONSEQUENCE`.
 - Closure is displayed as earned state after the bounded trace completes; it is not a world-action control.
 - World truth and agent-visible state remain distinct, especially in Bayesian mode.
@@ -22,6 +23,7 @@ This note records the semantic topology applied to the MVP so later visual refin
 - task bus = replaceable consequence/question while carrier identity remains fixed;
 - assumption lever = one declared semantic operator changing while neighboring structure remains fixed;
 - representation diff = explicit record of distinctions admitted, removed, or retyped across an interaction;
+- budget rail = explicit bound on the carrier used to preserve a representation;
 - bus / trace line = causal propagation;
 - wells = subordinate internal state;
 - status lamps / labels = machine state, never decoration.
@@ -85,9 +87,31 @@ The world geometry and visible pursuer remain fixed while branch aggregation cha
 
 ## Representation diff
 
-Task changes, reasoner changes, state-definition changes, assumption changes, output-type changes, and stressed distinctions are recorded as an explicit `previous -> current` semantic diff.
+Task changes, reasoner changes, state-definition changes, assumption changes, output-type changes, stressed distinctions, and representation-budget changes are recorded as an explicit `previous -> current` semantic diff.
 
 The goal is to remove mental bookkeeping from comparison: the apparatus should say exactly what crossed, left, or changed at the representation boundary.
+
+## Bounded belief representation
+
+The Bayesian cartridge exposes the posterior carrier as an explicit budget:
+
+```text
+EXACT -> 500 -> 100 -> 20 -> 5 particles
+```
+
+The exact mode retains an explicit probability for every candidate hidden state. Finite modes replace that field with sampled hypotheses propagated through the same transition model, weighted by the same noisy observation likelihood, and systematically resampled.
+
+The active maze rendering changes with the carrier: the exact posterior is a probability field; finite representations are literal particle tokens.
+
+The exact posterior remains available only to the laboratory as a diagnostic reference. It is outside the active particle representation and is used to compute total-variation distance. This lets the interface expose a graded approximation defect instead of treating approximate inference as simply correct or incorrect.
+
+The important BFUX distinction is:
+
+```text
+bounded representation != broken representation
+```
+
+A finite carrier can preserve enough structure for useful inference while accumulating measurable defect. The budget rail makes that trade visible and operable.
 
 ## Controlled defect
 

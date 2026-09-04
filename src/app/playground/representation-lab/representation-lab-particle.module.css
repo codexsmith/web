@@ -1,0 +1,167 @@
+.workbench {
+  border-bottom: 1px solid var(--lab-border-strong);
+  background: var(--bf-well-surface);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: .9rem 1rem;
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.header span,
+.status span,
+.metrics span,
+.note span {
+  font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--lab-faint);
+  font-size: .56rem;
+}
+
+.header strong {
+  display: block;
+  margin-top: .25rem;
+  font-size: .92rem;
+}
+
+.header p,
+.note p {
+  margin: .35rem 0 0;
+  color: var(--lab-muted);
+  font-size: .76rem;
+  line-height: 1.45;
+}
+
+.status {
+  min-width: 150px;
+  padding: .65rem .75rem;
+  border: 1px solid var(--lab-border-strong);
+  border-radius: var(--bf-radius-instrument);
+  background: var(--bf-bezel-surface);
+}
+
+.status strong {
+  display: block;
+  margin-top: .3rem;
+  font: 700 .7rem/1.2 var(--font-mono, monospace);
+}
+
+.status[data-mode="exact"] strong { color: var(--lab-valid); }
+.status[data-mode="approximate"] strong { color: var(--lab-attention); }
+
+.rail {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.rail button {
+  min-height: 64px;
+  border: 0;
+  border-right: 1px solid var(--lab-border);
+  background: transparent;
+  color: var(--lab-muted);
+  cursor: pointer;
+}
+
+.rail button:last-child { border-right: 0; }
+
+.rail button span,
+.rail button small {
+  display: block;
+  font-family: var(--font-mono, monospace);
+}
+
+.rail button span { font-weight: 760; }
+.rail button small { margin-top: .2rem; color: var(--lab-faint); font-size: .58rem; }
+
+.rail button:hover,
+.rail button:focus-visible { background: rgba(255,255,255,.035); }
+
+.rail button[aria-pressed="true"] {
+  color: var(--lab-text);
+  background: color-mix(in srgb, var(--lab-attention) 10%, transparent);
+  box-shadow: inset 0 -3px 0 var(--lab-attention);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--lab-border);
+}
+
+.metrics > div {
+  min-width: 0;
+  padding: .8rem 1rem;
+  border-right: 1px solid var(--lab-border);
+}
+
+.metrics > div:last-child { border-right: 0; }
+
+.metrics strong {
+  display: block;
+  margin-top: .3rem;
+  font: 760 1rem/1.1 var(--font-mono, monospace);
+  color: var(--lab-info);
+}
+
+.metrics small {
+  display: block;
+  margin-top: .35rem;
+  color: var(--lab-muted);
+  font-size: .66rem;
+  line-height: 1.4;
+}
+
+.note {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: .8rem;
+  align-items: start;
+  padding: .75rem 1rem;
+}
+
+.particle {
+  fill: var(--lab-info);
+  stroke: color-mix(in srgb, var(--lab-text) 75%, transparent);
+  stroke-width: .45;
+  opacity: .82;
+}
+
+.exactGhost {
+  fill: var(--lab-info);
+  opacity: .07;
+}
+
+.legendParticle {
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--lab-info) 0 28%, transparent 30% 100%);
+  border: 1px dotted var(--lab-info);
+}
+
+@media (max-width: 900px) {
+  .header { grid-template-columns: 1fr; }
+  .status { min-width: 0; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metrics > div:nth-child(2) { border-right: 0; }
+  .metrics > div:nth-child(-n+2) { border-bottom: 1px solid var(--lab-border); }
+  .note { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 650px) {
+  .rail { grid-template-columns: 1fr; }
+  .rail button { min-height: 48px; border-right: 0; border-bottom: 1px solid var(--lab-border); }
+  .rail button:last-child { border-bottom: 0; }
+  .metrics { grid-template-columns: 1fr; }
+  .metrics > div { border-right: 0; border-bottom: 1px solid var(--lab-border); }
+  .metrics > div:last-child { border-bottom: 0; }
+}
+
+@media (forced-colors: active) {
+  .particle { fill: Highlight; stroke: CanvasText; }
+  .rail button[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -3px; }
+}

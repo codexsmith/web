@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./representation-lab.module.css";
 import x from "./representation-lab-expansion.module.css";
+import particleStyles from "./representation-lab-particle.module.css";
+import { ParticleBudgetWorkbench } from "./ParticleBudgetWorkbench";
 import { TaskWorkbench } from "./TaskWorkbench";
 import {
   buildComparison,
@@ -14,8 +16,13 @@ import {
   type LabFrame,
   type Mode,
   type Point,
+  type WorldModel,
   WORLD,
 } from "./engine";
+import {
+  buildParticleApproximation,
+  type ParticleBudget,
+} from "./particle-filter";
 
 const MODE_LABELS: Record<Mode, { title: string; technical: string; port: string }> = {
   bfs: { title: "Pathfinder", technical: "BFS", port: "GRAPH / QUEUE" },
@@ -44,9 +51,9 @@ function scoreText(score: number) {
   return Number.isInteger(score) ? score.toFixed(0) : score.toFixed(1);
 }
 
-function currentBeliefPeak(frame: LabFrame) {
-  if (frame.beliefs.length === 0) return null;
-  return frame.beliefs.reduce((best, cell) => (cell.probability > best.probability ? cell : best));
+function currentBeliefPeak(beliefs: LabFrame["beliefs"]) {
+  if (beliefs.length === 0) return null;
+  return beliefs.reduce((best, cell) => (cell.probability > best.probability ? cell : best));
 }
 
 function activeTraceStage(step: number, total: number) {
@@ -60,12 +67,22 @@ function playbackInterval(mode: Mode) {
   return 900;
 }
 
+function particleOffset(index: number) {
+  const slot = index % 49;
+  const layer = Math.floor(index / 49) % 3;
+  return {
+    x: ((slot % 7) - 3) * 3 + (layer - 1) * 0.7,
+    y: (Math.floor(slot / 7) - 3) * 3 - (layer - 1) * 0.7,
+  };
+}
+
 export function RepresentationLab() {
   const [mode, setMode] = useState<Mode>("bfs");
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [revealTruth, setRevealTruth] = useState(false);
   const [breakModel, setBreakModel] = useState(false);
+  const [particleBudget, setParticleBudget] = useState<ParticleBudget>("exact");
   const searchMode = isSearchMode(mode);
   const trace = useMemo(
     () => buildTrace(mode, { retainParents: searchMode ? !breakModel : true }),
@@ -73,10 +90,41 @@ export function RepresentationLab() {
   );
   const comparison = useMemo(() => buildComparison(), []);
   const frame = trace.frames[Math.min(step, trace.frames.length - 1)];
-  const beliefPeak = currentBeliefPeak(frame);
+  const particleFrames = useMemo(
+    () => mode === "bayes" && particleBudget !== "exact"
+      ? buildParticleApproximation(trace.frames, particleBudget)
+      : null,
+    [mode, particleBudget, trace.frames],
+  );
+  const particleFrame = particleFrames?.[Math.min(step, trace.frames.length - 1)] ?? null;
+  const particleMode = mode === "bayes" && particleBudget !== "exact" && particleFrame !== null;
+  const activeBeliefs = particleFrame?.beliefs ?? frame.beliefs;
+  const beliefPeak = currentBeliefPeak(activeBeliefs);
   const closureReached = step >= trace.frames.length - 1;
   const closureState = closureReached ? trace.closure : "open";
   const traceStage = activeTraceStage(step, trace.frames.length);
+
+  const activeWorldModel = useMemo<WorldModel>(() => {
+    if (mode !== "bayes" || particleBudget === "exact") return trace.worldModel;
+    return {
+      ...trace.worldModel,
+      label: `Particle Bayesian / ${particleBudget} Samples`,
+      shortLabel: `PARTICLE ${particleBudget}`,
+      represented: [
+        "agent position",
+        "noisy distance ping",
+        `${particleBudget} sampled pursuer hypotheses`,
+        "pursuer transition model",
+        "resampling operator",
+      ],
+      hidden: ["true pursuer position", "exact posterior distribution"],
+      assumed: [...trace.worldModel.assumed, "finite empirical posterior after resampling"],
+      output: `an empirical belief distribution carried by ${particleBudget} particles`,
+      equation: "particles → predict → weight → resample",
+      explanation: "The Bayesian update is carried by a finite sample rather than an explicit probability for every candidate state.",
+      accent: "A bounded carrier trades posterior fidelity for bounded representation cost.",
+    };
+  }, [mode, particleBudget, trace.worldModel]);
 
   useEffect(() => {
     setStep(0);
@@ -101,7 +149,7 @@ export function RepresentationLab() {
   const explored = useMemo(() => new Set(frame.explored.map(keyOf)), [frame.explored]);
   const frontier = useMemo(() => new Set(frame.frontier.map(keyOf)), [frame.frontier]);
   const path = useMemo(() => new Set(frame.path.map(keyOf)), [frame.path]);
-  const beliefs = useMemo(() => new Map(frame.beliefs.map((cell) => [keyOf(cell.point), cell.probability])), [frame.beliefs]);
+  const beliefs = useMemo(() => new Map(activeBeliefs.map((cell) => [keyOf(cell.point), cell.probability])), [activeBeliefs]);
   const values = useMemo(() => new Map((frame.values ?? []).map((cell) => [keyOf(cell.point), cell.value])), [frame.values]);
   const policies = useMemo(() => new Map((frame.policy ?? []).map((cell) => [keyOf(cell.point), cell.action])), [frame.policy]);
   const maxAbsValue = useMemo(
@@ -178,15 +226,24 @@ export function RepresentationLab() {
           </div>
         </div>
 
-        <TaskWorkbench mode={mode} worldModel={trace.worldModel} comparison={comparison} onModeChange={loadMode} />
+        <TaskWorkbench mode={mode} worldModel={activeWorldModel} comparison={comparison} onModeChange={loadMode} />
+
+        {mode === "bayes" ? (
+          <ParticleBudgetWorkbench
+            budget={particleBudget}
+            onBudgetChange={setParticleBudget}
+            exactFrame={frame}
+            particleFrame={particleFrame}
+          />
+        ) : null}
 
         <div className={styles.boundaryRail} aria-label="Representation boundary">
           <div className={styles.boundaryTitle}>
             <span>REPRESENTATION BOUNDARY</span>
             <strong>What crosses into the active model?</strong>
           </div>
-          <PortBank label="ADMITTED" items={trace.worldModel.represented} state="open" />
-          <PortBank label="WITHHELD / FORGOTTEN" items={trace.worldModel.hidden} state="closed" />
+          <PortBank label="ADMITTED" items={activeWorldModel.represented} state="open" />
+          <PortBank label="WITHHELD / FORGOTTEN" items={activeWorldModel.hidden} state="closed" />
         </div>
 
         <div className={x.stressRig} data-active={searchMode ? "true" : "false"} data-defect={breakModel && searchMode ? "true" : "false"}>
@@ -214,7 +271,7 @@ export function RepresentationLab() {
               </div>
               <div className={styles.statusCluster}>
                 <StatusLamp label="WORLD" value="FIXED" state="valid" />
-                <StatusLamp label="MODEL" value={trace.worldModel.shortLabel} state="attention" />
+                <StatusLamp label="MODEL" value={activeWorldModel.shortLabel} state="attention" />
                 <StatusLamp
                   label="CLOSURE"
                   value={closureState === "defect" ? "DEFECT" : closureState === "reached" ? "REACHED" : "OPEN"}
@@ -238,7 +295,7 @@ export function RepresentationLab() {
             <div className={styles.mazeFrame}>
               <svg className={styles.maze} viewBox={`0 0 ${WORLD.width * CELL} ${WORLD.height * CELL}`} role="img" aria-labelledby="representation-lab-maze-title representation-lab-maze-desc">
                 <title id="representation-lab-maze-title">WORLD-01 rendered through the active reasoner</title>
-                <desc id="representation-lab-maze-desc">The maze and object identity remain fixed while overlays expose search frontiers, value fields, policies, game-tree decisions, or belief state.</desc>
+                <desc id="representation-lab-maze-desc">The maze and object identity remain fixed while overlays expose search frontiers, value fields, policies, game-tree decisions, exact beliefs, or finite particle beliefs.</desc>
                 {MAZE_ROWS.map((row, y) => [...row].map((_, xPos) => {
                   const point: Point = [xPos, y];
                   const key = keyOf(point);
@@ -260,7 +317,7 @@ export function RepresentationLab() {
                           opacity={valueOpacity}
                         />
                       ) : null}
-                      {belief > 0 ? <rect x={xPos * CELL + 3} y={y * CELL + 3} width={CELL - 6} height={CELL - 6} rx={4} className={styles.belief} opacity={Math.min(0.88, 0.08 + belief * 18)} /> : null}
+                      {!particleMode && belief > 0 ? <rect x={xPos * CELL + 3} y={y * CELL + 3} width={CELL - 6} height={CELL - 6} rx={4} className={styles.belief} opacity={Math.min(0.88, 0.08 + belief * 18)} /> : null}
                       {explored.has(key) ? <rect x={xPos * CELL + 6} y={y * CELL + 6} width={CELL - 12} height={CELL - 12} rx={3} className={styles.explored} /> : null}
                       {frontier.has(key) ? <circle cx={xPos * CELL + CELL / 2} cy={y * CELL + CELL / 2} r={7} className={styles.frontier} /> : null}
                       {path.has(key) ? <circle cx={xPos * CELL + CELL / 2} cy={y * CELL + CELL / 2} r={4} className={styles.pathDot} /> : null}
@@ -272,6 +329,18 @@ export function RepresentationLab() {
                     </g>
                   );
                 }))}
+                {particleMode ? particleFrame.particles.map((particle, index) => {
+                  const offset = particleOffset(index);
+                  return (
+                    <circle
+                      key={`${particle[0]}-${particle[1]}-${index}`}
+                      cx={particle[0] * CELL + CELL / 2 + offset.x}
+                      cy={particle[1] * CELL + CELL / 2 + offset.y}
+                      r={1.7}
+                      className={particleStyles.particle}
+                    />
+                  );
+                }) : null}
                 <circle cx={frame.target[0] * CELL + CELL / 2} cy={frame.target[1] * CELL + CELL / 2} r={10} className={styles.target} />
                 <circle cx={frame.agent[0] * CELL + CELL / 2} cy={frame.agent[1] * CELL + CELL / 2} r={12} className={styles.agent} />
                 <path d={`M ${frame.agent[0] * CELL + 13} ${frame.agent[1] * CELL + CELL / 2} h 12`} className={styles.agentDirection} />
@@ -294,19 +363,20 @@ export function RepresentationLab() {
               <span><i className={styles.legendTarget} /> target</span>
               {searchMode ? <span><i className={styles.legendSearch} /> explored / frontier</span> : null}
               {mode === "mdp" ? <span><i className={x.legendValue} /> value / policy</span> : null}
-              {mode === "bayes" ? <span><i className={styles.legendBelief} /> belief probability</span> : null}
+              {mode === "bayes" && particleMode ? <span><i className={particleStyles.legendParticle} /> particle hypotheses</span> : null}
+              {mode === "bayes" && !particleMode ? <span><i className={styles.legendBelief} /> exact belief probability</span> : null}
             </div>
           </section>
 
           <aside className={styles.modelPanel} aria-live="polite">
             <div className={styles.panelHeading}>
               <span>LOADED CARTRIDGE</span>
-              <strong>{trace.worldModel.label}</strong>
-              <small>{trace.worldModel.explanation}</small>
+              <strong>{activeWorldModel.label}</strong>
+              <small>{activeWorldModel.explanation}</small>
             </div>
-            <ModelSection title="ASSUMPTIONS" items={trace.worldModel.assumed} />
-            <div className={styles.outputBlock}><span>OUTPUT OBJECT</span><strong>{trace.worldModel.output}</strong></div>
-            <div className={styles.equation}>{trace.worldModel.equation}</div>
+            <ModelSection title="ASSUMPTIONS" items={activeWorldModel.assumed} />
+            <div className={styles.outputBlock}><span>OUTPUT OBJECT</span><strong>{activeWorldModel.output}</strong></div>
+            <div className={styles.equation}>{activeWorldModel.equation}</div>
             <div className={x.metricBlock}>
               <span>TRACE SUMMARY</span>
               <strong>{trace.summary.signal}</strong>
@@ -343,7 +413,7 @@ export function RepresentationLab() {
               <div className={styles.pingBlock}>
                 <span>OBSERVATION PORT · NOISY RANGE</span>
                 <strong>{frame.ping}</strong>
-                {beliefPeak ? <small>peak belief: ({beliefPeak.point[0]}, {beliefPeak.point[1]}) at {(beliefPeak.probability * 100).toFixed(1)}%</small> : null}
+                {beliefPeak ? <small>active peak: ({beliefPeak.point[0]}, {beliefPeak.point[1]}) at {(beliefPeak.probability * 100).toFixed(1)}%</small> : null}
               </div>
             ) : null}
           </aside>
@@ -360,7 +430,7 @@ export function RepresentationLab() {
 
         <section className={styles.eventLedger} aria-live="polite">
           <div><span>CURRENT EVENT</span><p>{frame.narration}</p></div>
-          <div><span>REPRESENTATIONAL CONSEQUENCE</span><p>{trace.worldModel.accent}</p></div>
+          <div><span>REPRESENTATIONAL CONSEQUENCE</span><p>{activeWorldModel.accent}</p></div>
           <div className={`${closureState === "reached" ? styles.closureReached : styles.closureOpen} ${closureState === "defect" ? x.closureDefect : ""}`}>
             <span>CLOSURE STATE</span>
             <strong>{closureState === "defect" ? "REPRESENTATIONAL DEFECT" : closureState === "reached" ? "TRACE RECONCILED" : "BOUNDARY OPEN"}</strong>
@@ -408,7 +478,7 @@ export function RepresentationLab() {
       <section className={styles.why}>
         <div><p className={styles.eyebrow}>Why this matters</p><h2>The algorithm is downstream of a choice about what the world is.</h2></div>
         <p>This apparatus keeps one semantic world persistent while changing what crosses the representation boundary, what assumptions enter inference, and what kind of output object is produced.</p>
-        <p>The stress rig goes further: it can remove one apparently small distinction and make the downstream consequence impossible, exposing representation as an engineering dependency rather than a passive description.</p>
+        <p>The stress rigs can now remove a required relation or bound a probabilistic carrier, making both catastrophic closure failure and graded approximation defect directly measurable.</p>
         <a href="https://ai.berkeley.edu/project_overview.html" target="_blank" rel="noreferrer">View the Berkeley project overview ↗</a>
       </section>
     </main>
