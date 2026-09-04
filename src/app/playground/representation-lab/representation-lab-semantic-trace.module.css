@@ -1,0 +1,136 @@
+.wrapper {
+  display: grid;
+  gap: 10px;
+}
+
+.bus {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.stage,
+.stageActive,
+.subphase,
+.subphaseActive {
+  border: 1px solid var(--bf-border, rgba(255,255,255,.16));
+  background: var(--bf-bg-control, rgba(255,255,255,.035));
+  min-width: 0;
+}
+
+.stage,
+.stageActive {
+  display: grid;
+  gap: 3px;
+  padding: 9px 10px;
+}
+
+.stage span,
+.stageActive span,
+.subphase span,
+.subphaseActive span,
+.readout span,
+.subcycleLabel span {
+  font-size: 10px;
+  letter-spacing: .12em;
+  opacity: .62;
+}
+
+.stage strong,
+.stageActive strong {
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.stageActive,
+.subphaseActive {
+  border-color: var(--bf-action, currentColor);
+  box-shadow: inset 0 0 0 1px var(--bf-action, currentColor);
+  background: var(--bf-bg-raised, rgba(255,255,255,.075));
+}
+
+.readout {
+  display: grid;
+  gap: 3px;
+  border-left: 3px solid var(--bf-action, currentColor);
+  padding: 8px 11px;
+  background: var(--bf-bg-surface, rgba(0,0,0,.12));
+}
+
+.readout strong {
+  font-size: 13px;
+}
+
+.readout small {
+  opacity: .68;
+}
+
+.subcycle {
+  display: grid;
+  grid-template-columns: minmax(120px, .55fr) minmax(0, 2.45fr);
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--bf-border, rgba(255,255,255,.16));
+  background: var(--bf-bg-well, rgba(0,0,0,.15));
+}
+
+.subcycleLabel {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 8px;
+}
+
+.subcycleLabel strong {
+  font-size: 20px;
+}
+
+.subcycleRail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.subphase,
+.subphaseActive {
+  display: grid;
+  gap: 3px;
+  padding: 8px 10px;
+}
+
+.subphase strong,
+.subphaseActive strong {
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.subphase small,
+.subphaseActive small {
+  opacity: .68;
+}
+
+@media (max-width: 760px) {
+  .bus {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .subcycle {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .bus,
+  .subcycleRail {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  .stageActive,
+  .subphaseActive,
+  .readout,
+  .subcycle {
+    border-color: CanvasText;
+  }
+}

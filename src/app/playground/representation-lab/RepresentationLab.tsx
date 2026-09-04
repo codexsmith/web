@@ -6,6 +6,7 @@ import x from "./representation-lab-expansion.module.css";
 import particleStyles from "./representation-lab-particle.module.css";
 import { FeatureQWorkbench } from "./FeatureQWorkbench";
 import { ParticleBudgetWorkbench } from "./ParticleBudgetWorkbench";
+import { SemanticTraceBus } from "./SemanticTraceBus";
 import { TaskWorkbench } from "./TaskWorkbench";
 import {
   buildComparison,
@@ -32,6 +33,7 @@ import {
   buildParticleApproximation,
   type ParticleBudget,
 } from "./particle-filter";
+import { buildSemanticTimeline } from "./semantic-trace";
 
 const MODE_LABELS: Record<Mode, { title: string; technical: string; port: string }> = {
   bfs: { title: "Pathfinder", technical: "BFS", port: "GRAPH / QUEUE" },
@@ -51,7 +53,6 @@ const ACTION_LABELS: Record<Action, string> = {
 };
 
 const POLICY_GLYPHS: Record<Action, string> = { N: "↑", S: "↓", E: "→", W: "←", STOP: "·" };
-const TRACE_STAGES = ["WORLD", "OBSERVE", "REPRESENT", "INFER", "ACT", "CONSEQUENCE"] as const;
 const CELL = 38;
 const keyOf = ([x, y]: Point) => `${x},${y}`;
 const isSearchMode = (mode: Mode) => mode === "bfs" || mode === "astar";
@@ -65,14 +66,10 @@ function currentBeliefPeak(beliefs: LabFrame["beliefs"]) {
   return beliefs.reduce((best, cell) => (cell.probability > best.probability ? cell : best));
 }
 
-function activeTraceStage(step: number, total: number) {
-  if (total <= 1) return TRACE_STAGES.length - 1;
-  return Math.min(TRACE_STAGES.length - 1, Math.floor((step / (total - 1)) * TRACE_STAGES.length));
-}
-
 function playbackInterval(mode: Mode) {
   if (mode === "bfs" || mode === "astar") return 90;
   if (mode === "mdp") return 420;
+  if (mode === "bayes") return 520;
   return 900;
 }
 
@@ -95,27 +92,29 @@ export function RepresentationLab() {
   const [qCarrier, setQCarrier] = useState<QCarrier>("tabular");
   const [featureConfig, setFeatureConfig] = useState<FeatureConfig>({ ...DEFAULT_FEATURE_CONFIG });
   const searchMode = isSearchMode(mode);
+  const featureMode = mode === "mdp" && qCarrier === "features";
   const trace = useMemo(
     () => buildTrace(mode, { retainParents: searchMode ? !breakModel : true }),
     [mode, breakModel, searchMode],
   );
+  const semanticFrames = useMemo(() => buildSemanticTimeline(trace), [trace]);
   const comparison = useMemo(() => buildComparison(), []);
   const featureResult = useMemo(() => buildFeatureQ(featureConfig), [featureConfig]);
-  const frame = trace.frames[Math.min(step, trace.frames.length - 1)];
+  const frame = featureMode
+    ? semanticFrames[semanticFrames.length - 1]
+    : semanticFrames[Math.min(step, semanticFrames.length - 1)];
   const particleFrames = useMemo(
     () => mode === "bayes" && particleBudget !== "exact"
       ? buildParticleApproximation(trace.frames, particleBudget)
       : null,
     [mode, particleBudget, trace.frames],
   );
-  const particleFrame = particleFrames?.[Math.min(step, trace.frames.length - 1)] ?? null;
+  const particleFrame = particleFrames?.[Math.min(frame.sourceFrame, trace.frames.length - 1)] ?? null;
   const particleMode = mode === "bayes" && particleBudget !== "exact" && particleFrame !== null;
-  const featureMode = mode === "mdp" && qCarrier === "features";
   const activeBeliefs = particleFrame?.beliefs ?? frame.beliefs;
   const beliefPeak = currentBeliefPeak(activeBeliefs);
-  const closureReached = featureMode || step >= trace.frames.length - 1;
+  const closureReached = featureMode || step >= semanticFrames.length - 1;
   const closureState = closureReached ? trace.closure : "open";
-  const traceStage = featureMode ? TRACE_STAGES.length - 1 : activeTraceStage(step, trace.frames.length);
 
   const activeWorldModel = useMemo<WorldModel>(() => {
     if (mode === "mdp" && qCarrier === "features") {
@@ -185,7 +184,7 @@ export function RepresentationLab() {
     if (!playing || featureMode) return;
     const interval = window.setInterval(() => {
       setStep((current) => {
-        if (current >= trace.frames.length - 1) {
+        if (current >= semanticFrames.length - 1) {
           setPlaying(false);
           return current;
         }
@@ -193,7 +192,7 @@ export function RepresentationLab() {
       });
     }, playbackInterval(mode));
     return () => window.clearInterval(interval);
-  }, [featureMode, mode, playing, trace.frames.length]);
+  }, [featureMode, mode, playing, semanticFrames.length]);
 
   const explored = useMemo(() => new Set(frame.explored.map(keyOf)), [frame.explored]);
   const frontier = useMemo(() => new Set(frame.frontier.map(keyOf)), [frame.frontier]);
@@ -358,9 +357,9 @@ export function RepresentationLab() {
                 </button>
                 <button type="button" className={styles.secondaryControl} onClick={reset} disabled={featureMode}>RESET STATE</button>
                 <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={featureMode || step === 0} aria-label="Previous frame">←</button>
-                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.min(trace.frames.length - 1, value + 1))} disabled={featureMode || closureReached} aria-label="Next frame">→</button>
+                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.min(semanticFrames.length - 1, value + 1))} disabled={featureMode || closureReached} aria-label="Next frame">→</button>
               </div>
-              <div className={styles.frameCounter}>{featureMode ? `${featureResult.trainingEpisodes} training episodes` : `state ${step + 1} / ${trace.frames.length}`}</div>
+              <div className={styles.frameCounter}>{featureMode ? `${featureResult.trainingEpisodes} training episodes` : `operation ${step + 1} / ${semanticFrames.length}`}</div>
             </div>
 
             <div className={styles.mazeFrame}>
@@ -490,14 +489,7 @@ export function RepresentationLab() {
           </aside>
         </div>
 
-        <div className={styles.traceBus} aria-label="Causal trace">
-          {TRACE_STAGES.map((stage, index) => (
-            <div key={stage} className={index <= traceStage ? styles.traceStageActive : styles.traceStage}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{stage}</strong>
-            </div>
-          ))}
-        </div>
+        <SemanticTraceBus frame={frame} />
 
         <section className={styles.eventLedger} aria-live="polite">
           <div><span>CURRENT EVENT</span><p>{activeNarration}</p></div>
@@ -549,7 +541,7 @@ export function RepresentationLab() {
       <section className={styles.why}>
         <div><p className={styles.eyebrow}>Why this matters</p><h2>The algorithm is downstream of a choice about what the world is.</h2></div>
         <p>This apparatus keeps one semantic world persistent while changing what crosses the representation boundary, what assumptions enter inference, and what kind of output object is produced.</p>
-        <p>The stress rigs now expose three distinct regimes: catastrophic closure failure, graded probabilistic approximation, and feature compression that can remain admissible or become defective when consequentially different cases alias.</p>
+        <p>The stress rigs expose closure failure, bounded approximation, consequential feature aliasing, and generative-model mismatch while the causal trace now names the actual semantic operation being performed.</p>
         <a href="https://ai.berkeley.edu/project_overview.html" target="_blank" rel="noreferrer">View the Berkeley project overview ↗</a>
       </section>
     </main>
