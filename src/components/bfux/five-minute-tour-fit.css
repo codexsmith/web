@@ -213,3 +213,14 @@
   .bf-machine-tour-map-layer__arm[data-ready="true"] {
   transform: translateY(calc(-100% - clamp(14px, 1vw, 18px))) !important;
 }
+
+/* Full nests the Tour inside About, so its chassis top sits slightly higher in
+ * apparatus coordinates than Core even though the map arm shares the same
+ * People-row datum. Give Full the additional small lift required to restore the
+ * same visual top alignment without disturbing the now-correct Core view. */
+.site-shell[data-root-focus="true"]
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine-tour-map-layer[data-open="true"]
+  .bf-machine-tour-map-layer__arm[data-ready="true"] {
+  transform: translateY(calc(-100% - clamp(21px, 1.4vw, 25px))) !important;
+}
