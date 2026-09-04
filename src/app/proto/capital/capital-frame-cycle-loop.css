@@ -14,9 +14,9 @@
 
    Surface grammar is static but directional:
      - corrugation says conduit;
-     - sparse stamped chevrons say flow;
+     - explicit right-pointing header stamps say flow;
      - a visible left→right state tint says conversion;
-     - stage-face capacity blocks accumulate toward retained capability.
+     - bottom-mounted capacity blocks accumulate toward retained capability.
 */
 
 @media (hover: hover) and (pointer: fine) {
@@ -29,8 +29,6 @@
     --capital-cycle-top-band: 282px;
     --capital-cycle-bottom-band: 150px;
     --capital-cycle-stage-height: 212px;
-    --capital-conduit-flow-mark: rgba(205, 220, 225, .055);
-    --capital-conduit-flow-mark-soft: rgba(205, 220, 225, .032);
   }
 
   .capital-frame__engine {
@@ -72,24 +70,6 @@
         transparent 30%,
         color-mix(in srgb, var(--bf-valid) 4%, transparent) 66%,
         color-mix(in srgb, var(--bf-valid) 7%, transparent) 100%),
-      /* isolated top-run chevron stamps; these do not tile the whole surface */
-      linear-gradient(135deg,
-        transparent 39%,
-        var(--capital-conduit-flow-mark) 40% 49%,
-        transparent 50%) left 16px top 8px / 58px 18px repeat-x,
-      linear-gradient(45deg,
-        transparent 39%,
-        var(--capital-conduit-flow-mark-soft) 40% 49%,
-        transparent 50%) left 28px top 8px / 58px 18px repeat-x,
-      /* a quieter return-run stamp along the bottom member */
-      linear-gradient(135deg,
-        transparent 39%,
-        var(--capital-conduit-flow-mark-soft) 40% 49%,
-        transparent 50%) left 16px bottom 8px / 58px 18px repeat-x,
-      linear-gradient(45deg,
-        transparent 39%,
-        rgba(205, 220, 225, .022) 40% 49%,
-        transparent 50%) left 28px bottom 8px / 58px 18px repeat-x,
       /* physical edge lighting */
       linear-gradient(180deg,
         rgba(255,255,255,.070) 0 1px,
@@ -183,9 +163,8 @@
     box-shadow: none !important;
   }
 
-  /* The rail substrate now uses sparse rectangular index marks rather than a
-     two-axis lattice. It reads as an assembly bed that grows denser toward the
-     retained side without becoming graph paper or diamond plate. */
+  /* The rail substrate keeps only a quiet accumulation datum. The actual
+     capacity signal is carried by the stage-mounted block bands below. */
   .capital-frame__engine-heading::before {
     content: "";
     position: absolute;
@@ -198,26 +177,26 @@
     border-radius: 10px;
     background:
       linear-gradient(90deg,
-        rgba(203,217,222,.012) 0%,
-        color-mix(in srgb, var(--bf-valid) 2.5%, transparent) 54%,
-        color-mix(in srgb, var(--bf-valid) 6%, transparent) 100%),
+        rgba(203,217,222,.010) 0%,
+        color-mix(in srgb, var(--bf-valid) 2%, transparent) 58%,
+        color-mix(in srgb, var(--bf-valid) 4.5%, transparent) 100%),
       repeating-linear-gradient(90deg,
-        rgba(203,217,222,.032) 0 15px,
-        transparent 15px 54px) left bottom 10px / 100% 7px no-repeat,
+        rgba(203,217,222,.022) 0 14px,
+        transparent 14px 58px) left bottom 9px / 100% 5px no-repeat,
       repeating-linear-gradient(90deg,
-        color-mix(in srgb, var(--bf-valid) 6%, transparent) 0 15px,
-        transparent 15px 34px) right bottom 10px / 58% 7px no-repeat;
+        color-mix(in srgb, var(--bf-valid) 4.5%, transparent) 0 14px,
+        transparent 14px 38px) right bottom 9px / 54% 5px no-repeat;
     -webkit-mask-image: linear-gradient(90deg,
-      rgba(0,0,0,.22) 0%,
-      rgba(0,0,0,.42) 34%,
-      rgba(0,0,0,.72) 70%,
+      rgba(0,0,0,.18) 0%,
+      rgba(0,0,0,.34) 36%,
+      rgba(0,0,0,.62) 72%,
       #000 100%);
     mask-image: linear-gradient(90deg,
-      rgba(0,0,0,.22) 0%,
-      rgba(0,0,0,.42) 34%,
-      rgba(0,0,0,.72) 70%,
+      rgba(0,0,0,.18) 0%,
+      rgba(0,0,0,.34) 36%,
+      rgba(0,0,0,.62) 72%,
       #000 100%);
-    opacity: .78;
+    opacity: .58;
   }
 
   .capital-frame__engine-heading > div {
@@ -227,6 +206,26 @@
     width: auto !important;
     margin: 0 18px !important;
     align-self: start !important;
+  }
+
+  /* Explicit rightward stamped flow marks. A tiny inline SVG avoids the
+     ambiguous crossed-gradient / diamond-plate read of the earlier version. */
+  .capital-frame__engine-heading > div::after {
+    content: "";
+    position: absolute;
+    left: 305px;
+    right: 0;
+    top: 50%;
+    height: 18px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    opacity: .62;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='18' viewBox='0 0 28 18'%3E%3Cpath d='M4 2 L12 9 L4 16' fill='none' stroke='%23c8b98f' stroke-opacity='.82' stroke-width='2.25' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-position: left center;
+    background-size: 28px 18px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   }
 
   .capital-frame__engine-heading h2 {
@@ -258,38 +257,114 @@
   }
 
   .capital-frame__conversion-stage {
-    --stage-block-step: 38px;
-    --stage-block-height: 9px;
-    --stage-block-tone: 3%;
+    --capacity-tone: var(--bfux-affinity, var(--bf-silver-300));
+    --capacity-band-width: 58%;
+    --capacity-band-height: 8px;
+    --capacity-block-width: 10px;
+    --capacity-block-step: 20px;
+    --capacity-band-opacity: .48;
     box-sizing: border-box !important;
     min-height: var(--capital-cycle-stage-height) !important;
     height: var(--capital-cycle-stage-height) !important;
     max-height: var(--capital-cycle-stage-height) !important;
     align-self: stretch !important;
     background:
-      /* discrete capacity blocks collect along the base of each stage */
-      repeating-linear-gradient(90deg,
-        color-mix(in srgb, var(--bf-valid) var(--stage-block-tone), transparent) 0 8px,
-        transparent 8px var(--stage-block-step)) left bottom / 100% var(--stage-block-height) no-repeat,
-      linear-gradient(90deg,
-        transparent 0 58%,
-        color-mix(in srgb, var(--bf-valid) calc(var(--stage-block-tone) * .35), transparent) 100%),
       linear-gradient(180deg, color-mix(in srgb, var(--bfux-affinity) 8%, transparent), transparent 32%),
       linear-gradient(180deg, #263238, #182025) !important;
   }
 
-  .capital-frame__conversion-stage:nth-child(1) { --stage-block-step: 40px; --stage-block-height: 7px;  --stage-block-tone: 3%; }
-  .capital-frame__conversion-stage:nth-child(2) { --stage-block-step: 37px; --stage-block-height: 9px;  --stage-block-tone: 4%; }
-  .capital-frame__conversion-stage:nth-child(3) { --stage-block-step: 34px; --stage-block-height: 11px; --stage-block-tone: 5%; }
-  .capital-frame__conversion-stage:nth-child(4) { --stage-block-step: 31px; --stage-block-height: 13px; --stage-block-tone: 6%; }
-  .capital-frame__conversion-stage:nth-child(5) { --stage-block-step: 28px; --stage-block-height: 15px; --stage-block-tone: 7%; }
-  .capital-frame__conversion-stage:nth-child(6) { --stage-block-step: 24px; --stage-block-height: 18px; --stage-block-tone: 9%; }
+  .capital-frame__conversion-stage[data-stage-id="capital"] {
+    --capacity-tone: color-mix(in srgb, var(--bf-region-about) 54%, var(--bf-silver-300));
+    --capacity-band-width: 56%;
+    --capacity-band-height: 8px;
+    --capacity-block-width: 10px;
+    --capacity-block-step: 21px;
+    --capacity-band-opacity: .46;
+  }
 
-  /* Fixed instrument-face metrics: browser zoom scales the complete apparatus
-     uniformly instead of recalculating text from viewport width. */
+  .capital-frame__conversion-stage[data-stage-id="coherent-capacity"] {
+    --capacity-tone: color-mix(in srgb, var(--bf-region-about) 36%, var(--bf-silver-300));
+    --capacity-band-width: 66%;
+    --capacity-band-height: 11px;
+    --capacity-block-width: 10px;
+    --capacity-block-step: 19px;
+    --capacity-band-opacity: .54;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="bounded-work"] {
+    --capacity-tone: var(--bf-region-research);
+    --capacity-band-width: 76%;
+    --capacity-band-height: 14px;
+    --capacity-block-width: 10px;
+    --capacity-block-step: 18px;
+    --capacity-band-opacity: .61;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="validation"] {
+    --capacity-tone: var(--bf-info);
+    --capacity-band-width: 84%;
+    --capacity-band-height: 17px;
+    --capacity-block-width: 11px;
+    --capacity-block-step: 17px;
+    --capacity-band-opacity: .67;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="transfer"] {
+    --capacity-tone: color-mix(in srgb, var(--bf-valid) 52%, var(--bf-info));
+    --capacity-band-width: 92%;
+    --capacity-band-height: 20px;
+    --capacity-block-width: 11px;
+    --capacity-block-step: 16px;
+    --capacity-band-opacity: .74;
+  }
+
+  .capital-frame__conversion-stage[data-stage-id="retained-capability"] {
+    --capacity-tone: var(--bf-valid);
+    --capacity-band-width: 100%;
+    --capacity-band-height: 25px;
+    --capacity-block-width: 12px;
+    --capacity-block-step: 15px;
+    --capacity-band-opacity: .84;
+  }
+
+  /* The content well owns the accumulation display so it never collides with
+     Capital's INTAKE pseudo-elements or Retained Capability's INSPECT bank. */
   .capital-frame__conversion-stage > div {
+    position: relative !important;
+    z-index: 1;
     padding-top: 14px !important;
-    padding-bottom: 30px !important;
+    padding-bottom: 36px !important;
+  }
+
+  .capital-frame__conversion-stage > div::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    bottom: 9px;
+    width: var(--capacity-band-width);
+    height: var(--capacity-band-height);
+    pointer-events: none;
+    opacity: var(--capacity-band-opacity);
+    background:
+      repeating-linear-gradient(90deg,
+        color-mix(in srgb, var(--capacity-tone) 78%, var(--bf-white-050)) 0 var(--capacity-block-width),
+        transparent var(--capacity-block-width) var(--capacity-block-step));
+    clip-path: polygon(
+      0 100%,
+      0 72%,
+      18% 72%,
+      18% 62%,
+      36% 62%,
+      36% 52%,
+      54% 52%,
+      54% 42%,
+      72% 42%,
+      72% 30%,
+      100% 30%,
+      100% 100%
+    );
+    filter: drop-shadow(0 1px 0 rgba(255,255,255,.08)) drop-shadow(0 2px 2px rgba(0,0,0,.26));
   }
 
   .capital-frame__conversion-stage h3 {
@@ -371,7 +446,8 @@
     min-height: 0 !important;
   }
 
-  .capital-frame__engine-heading::before {
+  .capital-frame__engine-heading::before,
+  .capital-frame__engine-heading > div::after {
     display: none;
   }
 
@@ -386,6 +462,10 @@
     height: auto !important;
     max-height: none !important;
     background: inherit !important;
+  }
+
+  .capital-frame__conversion-stage > div::after {
+    display: none;
   }
 
   .capital-frame__return-manifold {
