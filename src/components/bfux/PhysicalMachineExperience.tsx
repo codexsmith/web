@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type 
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
+import { startMachineCardFlight } from "./MachineCardFlightLayer";
 import "./physical-machine-experience.css";
 import "./five-minute-tour.css";
 import "./five-minute-tour-fit.css";
@@ -11,18 +12,11 @@ import "./five-minute-tour-fit.css";
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 const desktopFitQuery = "(min-width: 1025px)";
 const targetMachineWidthRatio = 0.88;
-
-type MachineFit = {
-  enabled: boolean;
-  scale: number;
-  collapse: number;
-};
-
-const defaultMachineFit: MachineFit = {
-  enabled: false,
-  scale: 1,
-  collapse: 0,
-};
+const machineWidthInUnits = 100;
+// Let the first outline register before routing, but do not make the animation
+// itself a gate: the global flight layer persists across the page transition.
+const cardFlightNavigationDelay =45;
+const reducedCardFlightNavigationDelay=15;
 
 function readStoredResolution() {
   if (typeof window === "undefined") return undefined;
@@ -71,13 +65,29 @@ export function PhysicalMachineExperience({
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
-  const [machineFit, setMachineFit] = useState<MachineFit>(defaultMachineFit);
+  const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
   const machineHostRef = useRef<HTMLDivElement>(null);
   const machineStackRef = useRef<HTMLDivElement>(null);
   const hasMeasuredInitialFitRef = useRef(false);
+  const cardFlightNavigateTimerRef = useRef<number | null>(null);
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
+
+  const openNodeWithFlight = (nodeId: string, source: HTMLElement) => {
+    if (!openNode || cardFlightNavigateTimerRef.current !== null) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!startMachineCardFlight(source)) {
+      openNode(nodeId);
+      return;
+    }
+
+    cardFlightNavigateTimerRef.current = window.setTimeout(() => {
+      cardFlightNavigateTimerRef.current = null;
+      openNode(nodeId);
+    }, reducedMotion ? reducedCardFlightNavigationDelay : cardFlightNavigationDelay);
+  };
 
   const rememberResolution = (nextResolution: LabMachineResolution) => {
     if (controlledResolution === undefined) setInternalResolution(nextResolution);
@@ -96,11 +106,16 @@ export function PhysicalMachineExperience({
     return () => window.cancelAnimationFrame(frame);
   }, [initialResolution, onResolutionChange, sectionLabel]);
 
+  useEffect(() => () => {
+    if (cardFlightNavigateTimerRef.current !== null) {
+      window.clearTimeout(cardFlightNavigateTimerRef.current);
+    }
+  }, []);
+
   useLayoutEffect(() => {
-    /* Auto-fit is an initialization aid, not a responsive zoom controller.
-     * Measure once when the homepage machine first exists, then preserve that
-     * presentation scale for the lifetime of this mounted page. Browser zoom,
-     * viewport resize, and Core/Full switching must not trigger recalculation. */
+    /* Auto-fit chooses the machine's fixed CSS-pixel ruler once. It must not
+     * leave a transform behind: browser zoom then scales the board and its UI
+     * together, while apparatus translation remains a one-to-one drag. */
     if (sectionSurface || hasMeasuredInitialFitRef.current) return;
 
     const host = machineHostRef.current;
@@ -116,17 +131,14 @@ export function PhysicalMachineExperience({
 
       const hostWidth = host.clientWidth;
       const sourceWidth = board.offsetWidth;
-      const sourceHeight = board.offsetHeight;
-      if (!hostWidth || !sourceWidth || !sourceHeight) return;
+      if (!hostWidth || !sourceWidth) return;
 
-      /* The board is the machine object. The legend below it is page context,
-       * so it deliberately stays outside the fitted transform. */
       const targetWidth = hostWidth * targetMachineWidthRatio;
       const horizontalScale = targetWidth / sourceWidth;
       const scale = Math.max(0.72, Math.min(0.96, horizontalScale));
-      const collapse = Math.max(0, sourceHeight * (1 - scale));
+      const machineUnit = Number(((sourceWidth * scale) / machineWidthInUnits).toFixed(3));
 
-      setMachineFit({ enabled: true, scale, collapse });
+      setInitialMachineUnit(machineUnit);
       hasMeasuredInitialFitRef.current = true;
     });
 
@@ -159,10 +171,9 @@ export function PhysicalMachineExperience({
   void onCloseSection;
   void rememberResolution;
 
-  const fitStyle = machineFit.enabled ? ({
-    "--machine-fit-scale": machineFit.scale,
-    "--machine-fit-margin-bottom": `${-machineFit.collapse}px`,
-  } as CSSProperties) : undefined;
+  const fitStyle = initialMachineUnit === null ? undefined : ({
+    "--world-machine-u": `${initialMachineUnit}px`,
+  } as CSSProperties);
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
@@ -171,7 +182,6 @@ export function PhysicalMachineExperience({
       ) : (
         <div
           className="physical-machine-experience__fit-stage"
-          data-auto-fit={machineFit.enabled ? "true" : undefined}
           style={fitStyle}
         >
           <div
@@ -182,7 +192,7 @@ export function PhysicalMachineExperience({
               skin="physical"
               showSchematic={showSchematic}
               resolution={activeResolution}
-              onOpenNode={openNode}
+              onOpenNode={openNodeWithFlight}
             />
           </div>
         </div>
@@ -220,6 +230,7 @@ export function PhysicalMachineExperience({
             "five-minute-tour-full",
           )
         : null}
+
     </div>
   );
 }

@@ -5,7 +5,7 @@ export const projectionModes = ["world", "evidence", "gestalt"] as const;
 export type ProjectionMode = (typeof projectionModes)[number];
 
 export const projectionLabels: Record<ProjectionMode, string> = {
-  world: "World",
+  world: "Core",
   evidence: "Evidence",
   gestalt: "Process",
 };
@@ -44,12 +44,13 @@ export function normalizeProjectionForNode(nodeId: string, projection: Projectio
 }
 
 /**
- * World is the ordinary public surface for every content object. It carries enough
+ * Core is the ordinary public surface for every content object. It carries enough
  * inline content and interaction to understand and traverse the subject without first
  * selecting a specialized projection. Evidence and Process deepen that state without
  * repeating its narrative content. `record` remains a URL compatibility alias for World;
  * `gestalt` remains the compatibility key while the Boundary First Labs root presents the
- * same projection as Timeline.
+ * same projection as Timeline. The internal `world` key and URL compatibility aliases
+ * remain unchanged.
  */
 export function defaultProjectionForNode(nodeId: string): ProjectionMode {
   void nodeId;

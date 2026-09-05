@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ApparatusPrototypeFrame, ApparatusPrototypeWorld } from "@/components/apparatus-prototype";
 import { BoundaryFrame } from "@/components/boundary-frame";
+import { MachineViewControls } from "@/components/bfux/MachineViewControls";
 import { EvidenceView } from "@/components/evidence-view";
 import { GestaltView } from "@/components/gestalt-view";
 import { InspectionPanel } from "@/components/inspection-panel";
@@ -420,6 +421,13 @@ export function WorldApp({
 
   const openInspection = useCallback((nextInspectionId: string) => setInspectionId(nextInspectionId), []);
 
+  const machineViewControls = (
+    <MachineViewControls
+      onCapital={() => router.push("/?skin=physical&mode=capital", { scroll: false })}
+      onFull={() => router.push("/?skin=physical&resolution=full", { scroll: false })}
+    />
+  );
+
   const projectionSurface = renderedProjection === "world" ? (
     uiShell === "apparatus" ? (
       <ApparatusPrototypeWorld node={focusNode} onNavigate={(targetId) => navigate(targetId)} onInspect={openInspection} />
@@ -481,6 +489,7 @@ export function WorldApp({
             canTraceForward={canTraceForward}
             canProcessZoomOut={canProcessZoomOut}
             canProcessZoomIn={canProcessZoomIn}
+            viewControls={machineViewControls}
             onHome={navigateHome}
             onUp={navigateUp}
             onBack={navigateTraceBack}

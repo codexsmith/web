@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Box, Clock3, ListTree, Network, Share2, ShieldPlus, Users, type LucideIcon } from "lucide-react";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import {
@@ -46,6 +46,49 @@ const aboutResearchConnectorKinds: LabMachineEdge["kind"][] = [
 const pipelineMethodConnectorKinds: LabMachineEdge["kind"][] = ["feeds", "feeds"];
 const methodTimelineConnectorKinds: LabMachineEdge["kind"][] = ["records", "records"];
 const lowerDeckContactCount = 5;
+const apparatusDragThreshold = 6;
+const apparatusControlSelector = 'a, button, input, select, textarea, summary, [contenteditable="true"]';
+export const labMachineRevealEvent = "bf-machine-request-reveal";
+
+type MachineVisibleBounds = {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+};
+
+function getMachineVisibleBounds(board: HTMLElement): MachineVisibleBounds {
+  const margin = 10;
+  const frame = document.querySelector<HTMLElement>(".boundary-frame__top");
+  const shell = board.closest<HTMLElement>(".site-shell");
+  const frameRuler = shell
+    ? Number.parseFloat(window.getComputedStyle(shell).getPropertyValue("--frame-top")) || 0
+    : 0;
+  const frameBottom = Math.max(frame?.getBoundingClientRect().bottom ?? 0, frameRuler);
+  const legendTop = board.closest<HTMLElement>(".bf-machine")
+    ?.querySelector<HTMLElement>(".bf-machine__legend")
+    ?.getBoundingClientRect().top ?? window.innerHeight;
+
+  return {
+    left: margin,
+    top: Math.max(margin, frameBottom + 8),
+    right: window.innerWidth - margin,
+    bottom: legendTop - 8,
+  };
+}
+
+function getContainmentPan(rect: DOMRect, visible: MachineVisibleBounds) {
+  let x = 0;
+  let y = 0;
+
+  if (rect.right > visible.right) x = visible.right - rect.right;
+  else if (rect.left < visible.left) x = visible.left - rect.left;
+
+  if (rect.bottom > visible.bottom) y = visible.bottom - rect.bottom;
+  else if (rect.top < visible.top) y = visible.top - rect.top;
+
+  return { x, y };
+}
 
 const physicalNodeIds = new Set([
   "products",
@@ -88,7 +131,7 @@ function Node({
   node: LabMachineNode;
   edges: LabMachineEdge[];
   skin: "apparatus" | "physical";
-  onOpen?: (nodeId: string) => void;
+  onOpen?: (nodeId: string, source: HTMLElement) => void;
 }) {
   const inbound = edges.filter((edge) => edge.to === node.id);
   const outbound = edges.filter((edge) => edge.from === node.id);
@@ -127,12 +170,12 @@ function Node({
       role={onOpen ? "button" : undefined}
       tabIndex={onOpen ? 0 : undefined}
       aria-label={onOpen ? `Open ${node.label}` : undefined}
-      onClick={onOpen ? () => onOpen(node.id) : undefined}
+      onClick={onOpen ? (event) => onOpen(node.id, event.currentTarget) : undefined}
       onKeyDown={onOpen ? (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           event.stopPropagation();
-          onOpen(node.id);
+          onOpen(node.id, event.currentTarget);
         }
       } : undefined}
     >
@@ -266,19 +309,82 @@ export function LabMachine({
   showSchematic?: boolean;
   skin?: "apparatus" | "physical";
   resolution?: LabMachineResolution;
-  onOpenNode?: (nodeId: string) => void;
+  onOpenNode?: (nodeId: string, source: HTMLElement) => void;
 }) {
   const id = useId().replaceAll(":", "");
   const [svg, setSvg] = useState("");
   const [apparatusOffset, setApparatusOffset] = useState({ x: 0, y: 0 });
   const [isDraggingApparatus, setIsDraggingApparatus] = useState(false);
+  const [isAutoPanningApparatus, setIsAutoPanningApparatus] = useState(false);
+  const boardRef = useRef<HTMLDivElement>(null);
+  const apparatusRef = useRef<HTMLDivElement>(null);
+  const autoPanTimer = useRef<number | null>(null);
   const apparatusDrag = useRef<{
     pointerId: number;
     startX: number;
     startY: number;
     originX: number;
     originY: number;
+    dragging: boolean;
   } | null>(null);
+  const suppressApparatusClick = useRef(false);
+
+  const panApparatusIntoView = useCallback((x: number, y: number) => {
+    if (x === 0 && y === 0) return;
+
+    if (autoPanTimer.current !== null) window.clearTimeout(autoPanTimer.current);
+    setIsAutoPanningApparatus(true);
+    setApparatusOffset((current) => ({
+      x: Math.max(-700, Math.min(700, current.x + x)),
+      y: Math.max(-260, Math.min(260, current.y + y)),
+    }));
+    autoPanTimer.current = window.setTimeout(() => {
+      autoPanTimer.current = null;
+      setIsAutoPanningApparatus(false);
+    }, 280);
+  }, []);
+
+  useEffect(() => {
+    if (skin !== "physical") return;
+
+    const board = boardRef.current;
+    if (!board) return;
+
+    const reveal = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+
+      const pan = getContainmentPan(target.getBoundingClientRect(), getMachineVisibleBounds(board));
+      panApparatusIntoView(pan.x, pan.y);
+    };
+
+    board.addEventListener(labMachineRevealEvent, reveal);
+    return () => {
+      board.removeEventListener(labMachineRevealEvent, reveal);
+      if (autoPanTimer.current !== null) window.clearTimeout(autoPanTimer.current);
+    };
+  }, [panApparatusIntoView, skin]);
+
+  useEffect(() => {
+    if (skin !== "physical") return;
+
+    let secondFrame = 0;
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        const board = boardRef.current;
+        const apparatus = apparatusRef.current;
+        if (!board || !apparatus) return;
+
+        const pan = getContainmentPan(apparatus.getBoundingClientRect(), getMachineVisibleBounds(board));
+        panApparatusIntoView(pan.x, pan.y);
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+    };
+  }, [panApparatusIntoView, resolution, skin]);
 
   useEffect(() => {
     if (!showSchematic) return;
@@ -320,48 +426,93 @@ export function LabMachine({
         <strong>THE LAB MACHINE</strong>
         <span>Powered by Research. Built for People.</span>
       </div>
-      <div className="bf-machine__board" data-machine-layer="viewport">
+      <div
+        className="bf-machine__board"
+        ref={boardRef}
+        data-machine-layer="viewport"
+        data-dragging={isDraggingApparatus ? "true" : undefined}
+        onPointerDown={skin === "physical" ? (event) => {
+          if (!event.isPrimary || event.button !== 0) return;
+          if ((event.target as HTMLElement).closest(apparatusControlSelector)) return;
+          if (autoPanTimer.current !== null) {
+            window.clearTimeout(autoPanTimer.current);
+            autoPanTimer.current = null;
+          }
+          setIsAutoPanningApparatus(false);
+          apparatusDrag.current = {
+            pointerId: event.pointerId,
+            startX: event.clientX,
+            startY: event.clientY,
+            originX: apparatusOffset.x,
+            originY: apparatusOffset.y,
+            dragging: false,
+          };
+        } : undefined}
+        onPointerMove={skin === "physical" ? (event) => {
+          const drag = apparatusDrag.current;
+          if (!drag || drag.pointerId !== event.pointerId) return;
+
+          if (!drag.dragging) {
+            const distance = Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY);
+            if (distance < apparatusDragThreshold) return;
+            drag.dragging = true;
+            event.currentTarget.setPointerCapture(event.pointerId);
+            setIsDraggingApparatus(true);
+          }
+
+          event.preventDefault();
+          const x = Math.max(-700, Math.min(700, drag.originX + event.clientX - drag.startX));
+          const y = Math.max(-260, Math.min(260, drag.originY + event.clientY - drag.startY));
+          setApparatusOffset({ x, y });
+        } : undefined}
+        onPointerUp={skin === "physical" ? (event) => {
+          const drag = apparatusDrag.current;
+          if (!drag || drag.pointerId !== event.pointerId) return;
+          apparatusDrag.current = null;
+          setIsDraggingApparatus(false);
+          if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+            event.currentTarget.releasePointerCapture(event.pointerId);
+          }
+          if (drag.dragging) {
+            suppressApparatusClick.current = true;
+            window.setTimeout(() => {
+              suppressApparatusClick.current = false;
+            }, 0);
+          }
+        } : undefined}
+        onPointerCancel={skin === "physical" ? (event) => {
+          apparatusDrag.current = null;
+          setIsDraggingApparatus(false);
+          if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+            event.currentTarget.releasePointerCapture(event.pointerId);
+          }
+        } : undefined}
+        onClickCapture={skin === "physical" ? (event) => {
+          if (!suppressApparatusClick.current) return;
+          suppressApparatusClick.current = false;
+          event.preventDefault();
+          event.stopPropagation();
+        } : undefined}
+        onDoubleClick={skin === "physical" ? (event) => {
+          if ((event.target as HTMLElement).closest(`[data-machine-node-interactive="true"], ${apparatusControlSelector}`)) return;
+          setApparatusOffset({ x: 0, y: 0 });
+        } : undefined}
+      >
+        {skin === "physical" ? (
+          <div className="bf-machine__pan-surface" data-machine-layer="pan-surface" aria-hidden="true" />
+        ) : null}
         {skin === "physical" ? <PhysicalStatus /> : null}
         <div
           className="bf-machine__apparatus"
+          ref={apparatusRef}
           data-machine-layer="apparatus"
           data-dragging={isDraggingApparatus ? "true" : undefined}
+          data-auto-panning={isAutoPanningApparatus ? "true" : undefined}
           style={skin === "physical" ? { transform: `translate3d(${apparatusOffset.x}px, ${apparatusOffset.y}px, 0)` } : undefined}
           tabIndex={skin === "physical" ? 0 : undefined}
           role={skin === "physical" ? "group" : undefined}
           aria-label={skin === "physical" ? "Draggable Lab apparatus. Use the pointer to drag, arrow keys to nudge, or Home to reset." : undefined}
           title={skin === "physical" ? "Drag to reposition the apparatus · Double-click or press Home to reset" : undefined}
-          onPointerDown={skin === "physical" ? (event) => {
-            if (event.button !== 0) return;
-            if ((event.target as HTMLElement).closest('[data-machine-node-interactive="true"], a, button, input, select, textarea')) return;
-            apparatusDrag.current = {
-              pointerId: event.pointerId,
-              startX: event.clientX,
-              startY: event.clientY,
-              originX: apparatusOffset.x,
-              originY: apparatusOffset.y,
-            };
-            event.currentTarget.setPointerCapture(event.pointerId);
-            setIsDraggingApparatus(true);
-          } : undefined}
-          onPointerMove={skin === "physical" ? (event) => {
-            const drag = apparatusDrag.current;
-            if (!drag || drag.pointerId !== event.pointerId) return;
-            const x = Math.max(-700, Math.min(700, drag.originX + event.clientX - drag.startX));
-            const y = Math.max(-260, Math.min(260, drag.originY + event.clientY - drag.startY));
-            setApparatusOffset({ x, y });
-          } : undefined}
-          onPointerUp={skin === "physical" ? (event) => {
-            if (apparatusDrag.current?.pointerId !== event.pointerId) return;
-            apparatusDrag.current = null;
-            setIsDraggingApparatus(false);
-            event.currentTarget.releasePointerCapture(event.pointerId);
-          } : undefined}
-          onPointerCancel={skin === "physical" ? () => {
-            apparatusDrag.current = null;
-            setIsDraggingApparatus(false);
-          } : undefined}
-          onDoubleClick={skin === "physical" ? () => setApparatusOffset({ x: 0, y: 0 }) : undefined}
           onKeyDown={skin === "physical" ? (event) => {
             if (event.key === "Home") {
               event.preventDefault();

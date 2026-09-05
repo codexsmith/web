@@ -3,44 +3,44 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowLeft, ArrowRight, Clock3, Map, Play, X } from "lucide-react";
-import type { LabMachineResolution } from "./LabMachine";
+import { labMachineRevealEvent, type LabMachineResolution } from "./LabMachine";
 
 const tourSteps = [
   {
     eyebrow: "01 / Problem",
-    title: "Difficult systems hide consequential distinctions.",
-    body: "Important assumptions disappear into interfaces, models, procedures, institutions, and software. The system still acts on them even when the people using it can no longer see them.",
-    takeaway: "Hidden assumptions become operational consequences.",
+    title: "Systems hide consequential distinctions.",
+    body: "Assumptions disappear into interfaces, models, procedures, institutions, and software — while continuing to shape behavior.",
+    takeaway: "Invisible assumptions still have consequences.",
   },
   {
     eyebrow: "02 / Insight",
-    title: "Representation is the control.",
-    body: "A representation is not merely a picture of a system. It determines what the system — or the person using it — can distinguish, reason about, change, and act upon.",
-    takeaway: "What can be represented constrains what can be done.",
+    title: "Representation governs action.",
+    body: "What a system makes visible determines what people can distinguish, reason about, and change.",
+    takeaway: "Change the representation to change what becomes possible.",
   },
   {
     eyebrow: "03 / Method",
-    title: "Start with the distinctions that actually matter.",
-    body: "Find the boundaries. Make them explicit. Determine what can cross them. Preserve what must remain invariant. Then build outward from there.",
-    takeaway: "Boundary First is a method for making consequential structure explicit.",
+    title: "Start with consequential boundaries.",
+    body: "Specify what may cross them and what must remain invariant. Build from those constraints.",
+    takeaway: "Make consequential structure explicit.",
   },
   {
     eyebrow: "04 / Machinery",
-    title: "Turn the method into inspectable apparatus.",
-    body: "Foundational research becomes engineering procedure, then executable representations, research systems, formal workflows, interfaces, and computational experiments.",
-    takeaway: "The work is meant to become machinery, not remain a slogan.",
+    title: "Make the method executable.",
+    body: "Encode the research in procedures, representations, workflows, interfaces, and experiments.",
+    takeaway: "Build machinery, not slogans.",
   },
   {
     eyebrow: "05 / Recurrence",
-    title: "One structural move appears across many domains.",
-    body: "Software, AI, science, mathematics, education, law, civic systems, and organizations all create boundaries, admit distinctions, transform information, and hide structure.",
-    takeaway: "The domains differ. The representational mechanics recur.",
+    title: "The pattern recurs.",
+    body: "Across software, AI, science, law, education, and organizations, boundaries shape what information can move and change.",
+    takeaway: "Different domains can share representational mechanics.",
   },
   {
     eyebrow: "06 / Purpose",
-    title: "Make abstraction accountable to the structure it preserves.",
-    body: "Boundary First Labs builds toward systems that are more inspectable, testable, executable, understandable, and usable — increasing capacity, agency, accessibility, and competence.",
-    takeaway: "Do not eliminate abstraction. Make it answerable to reality.",
+    title: "Make abstraction accountable.",
+    body: "Build inspectable, testable, usable systems that increase capacity, agency, accessibility, and competence.",
+    takeaway: "Abstraction should answer to reality.",
   },
 ] as const;
 
@@ -139,7 +139,7 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
 
         setMapArmGeometry({
           left: armLeft,
-          top: Math.max(targetTop, mapArmSafeAnchorTop),
+          top: resolution === "mid" ? targetTop : Math.max(targetTop, mapArmSafeAnchorTop),
           width: Math.max(0, armRight - armLeft - (tourIsLeft ? mapArmRightInset : 0)),
           connectorSide: tourIsLeft ? "left" : "right",
         });
@@ -186,6 +186,16 @@ export function FiveMinuteTourCard({ resolution }: { resolution: LabMachineResol
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [expanded, mapOpen]);
+
+  useEffect(() => {
+    if (!expanded) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      tourRef.current?.dispatchEvent(new CustomEvent(labMachineRevealEvent, { bubbles: true }));
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [expanded, resolution]);
 
   const open = () => {
     setActiveStep(0);

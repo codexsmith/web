@@ -14,6 +14,9 @@ type CorpusFilter = "all" | "controlled" | "mined";
 type StageFilter = "all" | "A" | "B" | "C" | "discovery";
 type HistoryMode = "push" | "replace";
 
+const INITIAL_PAPER_CARD_LIMIT = 12;
+const PAPER_CARD_INCREMENT = 12;
+
 type ViewState = {
   q: string;
   corpus: CorpusFilter;
@@ -206,6 +209,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
     [data.papers],
   );
   const [view, setView] = useState<ViewState>(defaultViewState);
+  const [paperCardLimit, setPaperCardLimit] = useState(INITIAL_PAPER_CARD_LIMIT);
 
   useEffect(() => {
     const restore = () => {
@@ -254,6 +258,52 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
         }),
       ] as const);
   }, [frontierById, visible]);
+
+  useEffect(() => {
+    setPaperCardLimit(INITIAL_PAPER_CARD_LIMIT);
+  }, [
+    view.q,
+    view.corpus,
+    view.discipline,
+    view.stage,
+    view.field,
+    view.readiness,
+    view.disposition,
+    view.frontierOnly,
+  ]);
+
+  const displayedGrouped = useMemo(() => {
+    const selectedByField = new Map<string, PaperMinePaper[]>();
+    let displayed = 0;
+    let row = 0;
+
+    while (displayed < paperCardLimit) {
+      let foundPaper = false;
+
+      for (const [field, papers] of grouped) {
+        const paper = papers[row];
+        if (!paper || displayed >= paperCardLimit) continue;
+
+        const selected = selectedByField.get(field) ?? [];
+        selected.push(paper);
+        selectedByField.set(field, selected);
+        displayed += 1;
+        foundPaper = true;
+      }
+
+      if (!foundPaper) break;
+      row += 1;
+    }
+
+    return grouped.flatMap(([field, papers]) => {
+      const selected = selectedByField.get(field);
+      return selected?.length ? [[field, selected, papers.length] as const] : [];
+    });
+  }, [grouped, paperCardLimit]);
+
+  const displayedPaperCount = displayedGrouped.reduce((count, [, papers]) => count + papers.length, 0);
+  const displayedPapers = displayedGrouped.flatMap(([, papers]) => papers);
+  const hasMorePaperCards = displayedPaperCount < visible.length;
 
   const sourceCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -472,45 +522,58 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
           <section className={styles.panel}>
             <header>
               <div><span>Corpus field</span><h2>Canonical paper field</h2></div>
-              <p>{visible.length} of {data.summary.canonical_paper_count} canonical papers are inside the current boundary. Card copy is the public catalog summary, not a manuscript abstract.</p>
+              <p>{displayedPaperCount} of {visible.length} matching papers shown. Card copy is the public catalog summary, not a manuscript abstract.</p>
             </header>
             <div className={styles.fieldGroups}>
-              {grouped.length ? grouped.map(([field, papers]) => (
-                <section key={field} className={styles.fieldGroup}>
-                  <div className={styles.fieldGroupHeader}>
-                    <h3>{humanize(field)}</h3><span>{papers.length} visible</span>
+              {displayedPapers.length ? (
+                <div className={styles.cardGrid}>
+                  {displayedPapers.map((paper) => {
+                    const frontier = frontierById.get(paper.id);
+                    return (
+                      <button
+                        type="button"
+                        key={paper.id}
+                        className={styles.paperCard}
+                        data-frontier={frontier ? "true" : "false"}
+                        data-selected={view.paper === paper.id ? "true" : "false"}
+                        onClick={() => selectPaper(paper)}
+                      >
+                        <div className={styles.cardMeta}>
+                          <span>{humanize(paper.field_group)} · {stageLabel(paper)}</span>
+                          <span>R{paper.readiness_hint}</span>
+                        </div>
+                        <h4>{paper.title}</h4>
+                        <p>{summaryPreview(paper.summary)}</p>
+                        <div className={styles.chips}>
+                          <span>{paper.record_class === "controlled_publication" ? "controlled" : "mined"}</span>
+                          {frontier ? <span>frontier #{frontier.rank}</span> : null}
+                          {paper.abstract_status === "source_reading_priority" ? <span>source-read next</span> : null}
+                          <span>{humanize(paper.discipline)}</span>
+                          <span>{humanize(paper.recommended_disposition)}</span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : <div className={styles.empty}>No papers satisfy the current boundary.</div>}
+              {visible.length ? (
+                <div className={styles.paperListControls}>
+                  <span>Showing {displayedPaperCount} of {visible.length} matching papers</span>
+                  <div>
+                    {paperCardLimit > INITIAL_PAPER_CARD_LIMIT ? (
+                      <button type="button" onClick={() => setPaperCardLimit(INITIAL_PAPER_CARD_LIMIT)}>Collapse</button>
+                    ) : null}
+                    {hasMorePaperCards ? (
+                      <button
+                        type="button"
+                        onClick={() => setPaperCardLimit((limit) => Math.min(limit + PAPER_CARD_INCREMENT, visible.length))}
+                      >
+                        Show {Math.min(PAPER_CARD_INCREMENT, visible.length - displayedPaperCount)} more
+                      </button>
+                    ) : null}
                   </div>
-                  <div className={styles.cardGrid}>
-                    {papers.map((paper) => {
-                      const frontier = frontierById.get(paper.id);
-                      return (
-                        <button
-                          type="button"
-                          key={paper.id}
-                          className={styles.paperCard}
-                          data-frontier={frontier ? "true" : "false"}
-                          data-selected={view.paper === paper.id ? "true" : "false"}
-                          onClick={() => selectPaper(paper)}
-                        >
-                          <div className={styles.cardMeta}>
-                            <span>{stageLabel(paper)}</span>
-                            <span>R{paper.readiness_hint}</span>
-                          </div>
-                          <h4>{paper.title}</h4>
-                          <p>{summaryPreview(paper.summary)}</p>
-                          <div className={styles.chips}>
-                            <span>{paper.record_class === "controlled_publication" ? "controlled" : "mined"}</span>
-                            {frontier ? <span>frontier #{frontier.rank}</span> : null}
-                            {paper.abstract_status === "source_reading_priority" ? <span>source-read next</span> : null}
-                            <span>{humanize(paper.discipline)}</span>
-                            <span>{humanize(paper.recommended_disposition)}</span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </section>
-              )) : <div className={styles.empty}>No papers satisfy the current boundary.</div>}
+                </div>
+              ) : null}
             </div>
           </section>
 

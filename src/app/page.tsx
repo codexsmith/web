@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { permanentRedirect } from "next/navigation";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { parseProjection } from "@/lib/view-projection";
 import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
@@ -34,6 +35,7 @@ type Props = {
     schematic?: string | string[];
     mode?: string | string[];
     resolution?: string | string[];
+    skin?: string | string[];
   }>;
 };
 
@@ -43,6 +45,11 @@ function one(value: string | string[] | undefined) {
 
 export default async function HomePage({ searchParams }: Props) {
   const query = await searchParams;
+  const machineStateKeys = ["section", "view", "scope", "schematic", "mode", "resolution"] as const;
+  const hasMachineState = machineStateKeys.some((key) => Boolean(one(query[key])));
+
+  if (one(query.skin) === "physical" && !hasMachineState) permanentRedirect("/");
+
   const section = one(query.section);
   const projection = parseProjection(one(query.view)) ?? "world";
   const processScope = parseProcessScope(one(query.scope)) ?? "full";

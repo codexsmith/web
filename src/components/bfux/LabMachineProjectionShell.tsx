@@ -84,7 +84,6 @@ type LabMachineProjectionShellProps = {
 export function LabMachineProjectionShell(props: LabMachineProjectionShellProps) {
   const { subsystem, projection, eyebrow, title, description, status, children } = props;
   const shellRef = useRef<HTMLElement>(null);
-  const rings = ["Boundary First Labs", "Lab Machine", subsystem, projection];
   const navigation = useLabMachineNavigation();
   const statusBadges = status?.split("·").map((item) => item.trim()).filter(Boolean) ?? [];
   const [glanceDetails, setGlanceDetails] = useState<string[]>([]);
@@ -139,6 +138,11 @@ export function LabMachineProjectionShell(props: LabMachineProjectionShellProps)
           <div>
             <p>{eyebrow}</p>
             <h2>{title}</h2>
+            {allBadges.length ? (
+              <div className="bf-projection-shell__badges" aria-label={`${subsystem} summary figures`}>
+                {allBadges.map((badge) => <span key={badge}>{badge}</span>)}
+              </div>
+            ) : null}
           </div>
         </div>
         <div className="bf-projection-shell__commands">
@@ -150,35 +154,9 @@ export function LabMachineProjectionShell(props: LabMachineProjectionShellProps)
                 {glanceDetails.map((detail) => <p key={detail}>{detail}</p>)}
               </div>
             ) : null}
-            {allBadges.length ? (
-              <div className="bf-projection-shell__badges" aria-label={`${subsystem} summary figures`}>
-                {allBadges.map((badge) => <span key={badge}>{badge}</span>)}
-              </div>
-            ) : null}
           </div>
         </div>
       </header>
-
-      <aside className="bf-projection-map" aria-label="Boundary depth map">
-        <div className="bf-projection-map__graphic" aria-hidden="true">
-          <i data-ring="0" />
-          <i data-ring="1" />
-          <i data-ring="2" />
-          <i data-ring="3" />
-          <span />
-        </div>
-        <div className="bf-projection-map__legend">
-          <small>BOUNDARY DEPTH</small>
-          <ol>
-            {rings.map((ring, index) => (
-              <li key={ring} data-focus={index === rings.length - 1 ? "true" : "false"}>
-                <span>{String(index).padStart(2, "0")}</span>
-                <strong>{ring}</strong>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </aside>
 
       {navigation?.currentNodeId ? <div className="bf-projection-shell__traversal">
         <LabMachineObjectCarrier compact />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { BfuxIcon, projectionGlyph } from "@/components/bfux-icons";
 import { type ContentNode } from "@/lib/content-registry";
 import { processScopeLabels, type ProcessScope } from "@/lib/bfl-process";
@@ -28,6 +28,8 @@ type BoundaryFrameProps = {
   surfaceLabel?: string;
   viewControls?: ReactNode;
   contextControls?: ReactNode;
+  projectionModeSubset?: ProjectionMode[];
+  activeProjection?: ProjectionMode | null;
   onHome: () => void;
   onUp: () => void;
   onBack: () => void;
@@ -41,19 +43,19 @@ type BoundaryFrameProps = {
 };
 
 const rootProjectionLabels: Record<ProjectionMode, string> = {
-  world: "World",
+  world: "Core",
   evidence: "Evidence",
   gestalt: "Timeline",
 };
 
 const rootProjectionPurposes: Record<ProjectionMode, string> = {
-  world: "Public regions",
+  world: "Lab apparatus",
   evidence: "Founder provenance",
   gestalt: "Development history",
 };
 
 const rootProjectionDescriptions: Record<ProjectionMode, string> = {
-  world: "The Lab's five public operating regions.",
+  world: "The Lab Machine and its public operating regions.",
   evidence: "Evidence supporting founder provenance and operating history, with explicit claim boundaries.",
   gestalt: "Founder and institutional development timeline from practice to Boundary First Labs.",
 };
@@ -112,6 +114,8 @@ export function BoundaryFrame({
   surfaceLabel,
   viewControls,
   contextControls,
+  projectionModeSubset,
+  activeProjection,
   onHome,
   onBack,
   onForward,
@@ -123,7 +127,11 @@ export function BoundaryFrame({
   onSearch,
 }: BoundaryFrameProps) {
   const isRootFocus = focusNode.id === "root";
-  const availableProjectionModes = projectionModesForNode(focusNode.id);
+  const supportedProjectionModes = projectionModesForNode(focusNode.id);
+  const availableProjectionModes = projectionModeSubset
+    ? projectionModeSubset.filter((mode) => supportedProjectionModes.includes(mode))
+    : supportedProjectionModes;
+  const selectedProjection = activeProjection === undefined ? projection : activeProjection;
   const siblingNodes = siblings.filter((node) => node.id !== focusNode.id);
   const hasTrace = traversalPath.length > 1;
   const activeTrace = traversalPath
@@ -303,26 +311,30 @@ export function BoundaryFrame({
             >
               <span className="projection-switcher__label">View</span>
               {viewControls}
-              {onProjectionChange ? availableProjectionModes.map((mode) => {
+              {onProjectionChange ? availableProjectionModes.map((mode, index) => {
                 const label = isRootFocus ? rootProjectionLabels[mode] : projectionLabels[mode];
                 const purpose = isRootFocus ? rootProjectionPurposes[mode] : projectionPurposes[mode];
                 const description = isRootFocus ? rootProjectionDescriptions[mode] : projectionDescriptions[mode];
 
                 return (
-                  <button
-                    key={mode}
-                    onClick={() => onProjectionChange(mode)}
-                    aria-pressed={projection === mode}
-                    aria-label={`${label}: ${description}`}
-                    title={description}
-                    data-projection-mode={mode}
-                  >
-                    <BfuxIcon name={projectionGlyph(mode)} className="projection-switcher__glyph" />
-                    <span className="projection-switcher__copy">
-                      <span className="projection-switcher__mode-name">{label}</span>
-                      <small className="projection-switcher__mode-purpose">{purpose}</small>
-                    </span>
-                  </button>
+                  <Fragment key={mode}>
+                    <button
+                      onClick={() => onProjectionChange(mode)}
+                      aria-pressed={selectedProjection === mode}
+                      aria-label={`${label}: ${description}`}
+                      title={description}
+                      data-projection-mode={mode}
+                    >
+                      <BfuxIcon name={projectionGlyph(mode)} className="projection-switcher__glyph" />
+                      <span className="projection-switcher__copy">
+                        <span className="projection-switcher__mode-name">{label}</span>
+                        <small className="projection-switcher__mode-purpose">{purpose}</small>
+                      </span>
+                    </button>
+                    {viewControls && mode === "world" && index < availableProjectionModes.length - 1 ? (
+                      <span className="projection-switcher__axis-divider" aria-hidden="true" />
+                    ) : null}
+                  </Fragment>
                 );
               }) : null}
             </div>

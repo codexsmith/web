@@ -117,11 +117,12 @@
 }
 
 .capital-frame__orientation {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
-  gap: 28px;
-  align-items: end;
-  padding: clamp(20px, 2.2vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  padding: clamp(32px, 4vw, 56px) clamp(20px, 3vw, 40px);
   border-bottom: 1px solid var(--bf-etched-line);
   background:
     linear-gradient(180deg, rgba(255,255,255,.018), transparent 60%),
@@ -129,21 +130,36 @@
 }
 
 .capital-frame__orientation h1 {
-  max-width: 17ch;
-  margin: 8px 0 0;
+  max-width: none;
+  margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 3.7vw, 4.5rem);
+  font-size: clamp(2.5rem, 4.5vw, 5.5rem);
   font-weight: 400;
   letter-spacing: -.05em;
   line-height: .95;
 }
 
 .capital-frame__orientation p {
-  max-width: 48rem;
+  max-width: 52rem;
   margin: 0;
   color: var(--bf-text-secondary);
-  font-size: clamp(.82rem, 1vw, 1rem);
+  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
   line-height: 1.6;
+}
+
+.capital-frame__orientation strong {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 24px;
+  border: 1px solid var(--bf-etched-line);
+  border-radius: 8px;
+  background: var(--bf-well-surface);
+  box-shadow: var(--bf-shadow-well), 0 1px 0 var(--bf-seam-light);
+  color: var(--bf-text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(.85rem, 1.1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: .03em;
 }
 
 .capital-frame__body {
@@ -652,7 +668,6 @@
 
 @media (max-width: 1120px) {
   .capital-frame__topbar,
-  .capital-frame__orientation,
   .capital-frame__body,
   .capital-frame__commitment {
     grid-template-columns: 1fr;

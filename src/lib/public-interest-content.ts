@@ -11,7 +11,7 @@ const publicInterestOverrides: Record<string, PublicInterestOverride> = {
     summary:
       "The part of Boundary First Labs concerned with what technical capacity is for: keeping consequential systems answerable to the people, conditions, communities, and futures that bear their effects.",
     body: [
-      "Public Interest is not a charitable layer attached to otherwise neutral technical work. It is where the lab states which consequences it believes engineering, research, and institutional design should be able to see, and where current projects are separated from principles and future aspirations so intent never masquerades as delivery.",
+      "People are not a charitable layer attached to otherwise neutral technical work. They are the ones who bear the consequences of engineering, research, and institutional design. This is where current projects are separated from principles and future aspirations so intent never masquerades as delivery.",
     ],
   },
   "public-mission": {

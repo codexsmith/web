@@ -2,7 +2,8 @@
  * Canonical structural contract for the Lab Machine DOM.
  *
  * This file owns only interaction/layout-layer semantics:
- *   viewport  = fixed machine field
+ *   viewport  = fixed machine field and pointer-event owner
+ *   pan       = viewport-sized background hit surface
  *   apparatus = movable transform layer
  *   node      = semantic/clickable object inside the apparatus
  *   context   = fixed readout/legend outside apparatus motion
@@ -22,6 +23,35 @@
   isolation: isolate;
 }
 
+/* The authored board is deliberately smaller than the visible root field. This
+ * fixed, paint-free layer extends its drag target through that entire field
+ * without changing the apparatus coordinate system or intercepting fixed frame
+ * controls. Pointer handlers live on the viewport parent, so this surface and
+ * ordinary gaps inside the apparatus share exactly one drag implementation. */
+.bf-machine[data-skin="physical"] [data-machine-layer="pan-surface"] {
+  position: fixed;
+  inset: var(--frame-top, calc(var(--world-frame-u, 15.36px) * 4.2)) 0 calc(var(--machine-u, 13.6px) * 3.2);
+  z-index: 0;
+  cursor: grab;
+  touch-action: none;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="viewport"][data-dragging="true"]
+  [data-machine-layer="pan-surface"] {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="viewport"][data-dragging="true"]
+  [data-machine-layer="apparatus"],
+.bf-machine[data-skin="physical"] [data-machine-layer="viewport"][data-dragging="true"]
+  [data-machine-layer="apparatus"] * {
+  cursor: grabbing !important;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 .bf-machine[data-skin="physical"] [data-machine-layer="apparatus"] {
   position: absolute;
   inset: 0;
@@ -35,6 +65,10 @@
   touch-action: none;
   will-change: transform;
   -webkit-user-drag: none;
+}
+
+.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"][data-auto-panning="true"] {
+  transition: transform 260ms cubic-bezier(.2, .78, .2, 1);
 }
 
 .bf-machine[data-skin="physical"] [data-machine-layer="apparatus"][data-dragging="true"] {
@@ -66,6 +100,10 @@
 
 /* The tablet/phone projection is a document rack, not a pannable canvas. */
 @media (max-width: 1024px) {
+  .bf-machine[data-skin="physical"] [data-machine-layer="pan-surface"] {
+    display: none;
+  }
+
   .bf-machine[data-skin="physical"] [data-machine-layer="apparatus"] {
     position: relative !important;
     inset: auto !important;

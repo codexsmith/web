@@ -1,0 +1,1605 @@
+/* P18 - Core / Full UI presentation parity.
+   These selectors only restyle the existing top-level Core World surfaces.
+   Content, route ownership, DOM structure, and projection behavior stay untouched. */
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport:has(
+    > :is(
+        [data-world-id="public-interest"],
+        [data-world-id="research"],
+        [data-world-id="people"],
+        [data-world-id="products"],
+        [data-world-id="about"]
+      )
+  ) {
+  background: #080b0d;
+  box-shadow:
+    inset 12px 0 32px rgba(0, 0, 0, 0.12),
+    inset 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  ) {
+  --core-parity-accent: #77b8da;
+  --core-parity-accent-strong: #86c0da;
+  --core-parity-body: #b5bec0;
+  --core-parity-border: #37464d;
+  --core-parity-card-border: #37464d;
+  --core-parity-control: #111a1e;
+  --core-parity-control-border: #43525a;
+  --core-parity-control-radius: 8px;
+  --core-parity-heading: #eef2ef;
+  --core-parity-hero-accent: #72b5df;
+  --core-parity-hero-heading: #eef2ef;
+  --core-parity-muted: #7f99a2;
+  --core-parity-page-background: #0a1013;
+  --core-parity-page-border: 0 solid transparent;
+  --core-parity-page-radius: 14px;
+  --core-parity-page-shadow: none;
+  --core-parity-panel: #10181c;
+  --core-parity-panel-radius: 10px;
+  --core-parity-card: linear-gradient(180deg, #151f23, #10171a);
+  --core-parity-card-hover: #1f3038;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  gap: 0.6rem;
+  padding: 0.55rem;
+  border: var(--core-parity-page-border);
+  border-radius: var(--core-parity-page-radius);
+  background: var(--core-parity-page-background);
+  color: #d9dfe0;
+  box-shadow: var(--core-parity-page-shadow);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"] {
+  --core-parity-accent: #e3574e;
+  --core-parity-accent-strong: color-mix(in srgb, #e3574e 78%, #f3f5f2);
+  --core-parity-hero-accent: #e3574e;
+  --core-parity-card-hover: color-mix(in srgb, #e3574e 12%, #151f23);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="about"] {
+  --core-parity-accent: #dda329;
+  --core-parity-accent-strong: color-mix(in srgb, #dda329 78%, #f3f5f2);
+  --core-parity-hero-accent: #dda329;
+  --core-parity-card-hover: color-mix(in srgb, #dda329 12%, #151f23);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="research"] {
+  --core-parity-accent: #a466e7;
+  --core-parity-accent-strong: color-mix(in srgb, #a466e7 78%, #f3f5f2);
+  --core-parity-body: #a2a9b0;
+  --core-parity-border: #424954;
+  --core-parity-card-border: #4c5360;
+  --core-parity-control: #11171d;
+  --core-parity-control-border: #4c5360;
+  --core-parity-control-radius: 8px;
+  --core-parity-heading: #e3e3e8;
+  --core-parity-hero-accent: #a466e7;
+  --core-parity-hero-heading: #e2e6e4;
+  --core-parity-muted: #87798f;
+  --core-parity-page-background: linear-gradient(180deg, #121a1f, #0a0f12 24%, #070b0d);
+  --core-parity-page-border: 1px solid #4f5b61;
+  --core-parity-page-radius: 14px;
+  --core-parity-page-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 3px #06090b,
+    0 10px 28px rgba(0, 0, 0, 0.67);
+  --core-parity-panel: #0d1217;
+  --core-parity-panel-radius: 10px;
+  --core-parity-card: #11171d;
+  --core-parity-card-hover: #211926;
+
+  gap: 0.42rem;
+  padding: 0;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"] {
+  --core-parity-accent: #969978;
+  --core-parity-accent-strong: #9a9c75;
+  --core-parity-body: #a0a18d;
+  --core-parity-border: #4c5043;
+  --core-parity-card-border: #50564a;
+  --core-parity-control: #151611;
+  --core-parity-control-border: #50564a;
+  --core-parity-control-radius: 8px;
+  --core-parity-heading: #e5e5d4;
+  --core-parity-hero-accent: #87aaa8;
+  --core-parity-hero-heading: #e2e6e4;
+  --core-parity-muted: #898c71;
+  --core-parity-page-background: linear-gradient(180deg, #121a1f, #0a0f12 24%, #070b0d);
+  --core-parity-page-border: 1px solid #4f5b61;
+  --core-parity-page-radius: 14px;
+  --core-parity-page-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 0 0 3px #06090b,
+    0 10px 28px rgba(0, 0, 0, 0.67);
+  --core-parity-panel: #11120d;
+  --core-parity-panel-radius: 10px;
+  --core-parity-card: #0d0e0a;
+  --core-parity-card-hover: #222316;
+
+  padding: 0;
+}
+
+/* Shared Full UI shell rhythm ------------------------------------------- */
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  :is(.world-hero__title-area, .subject-pane--glance, .section-region-card, .branch-world__context-section) {
+  text-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="research"], [data-world-id="products"], [data-world-id="about"], [data-world-id="people"])
+  > .world-hero,
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  > .public-interest-page--overview
+  > .world-hero {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+  gap: 0.65rem;
+  align-items: stretch;
+  padding: 0.55rem 0.65rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  > .world-hero {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="research"]
+  > .world-hero,
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  > .public-interest-page--overview
+  > .world-hero {
+  border-bottom: 1px solid #46535a;
+  background: linear-gradient(#19242a, #0d1418);
+  box-shadow: inset 0 -2px rgba(0, 0, 0, 0.53);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="products"], [data-world-id="about"], [data-world-id="people"])
+  .world-hero__title-area {
+  align-items: flex-start;
+  gap: 0;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #26343a;
+  border-left: 2px solid var(--core-parity-accent);
+  border-radius: 12px;
+  background: #111c22;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="research"], [data-world-id="public-interest"])
+  .world-hero__title-area {
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .world-hero__title-area
+  .eyebrow {
+  margin: 0.1rem 0 0.75rem;
+  color: var(--core-parity-hero-accent);
+  font: 700 0.58rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.58rem !important;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="research"], [data-world-id="public-interest"])
+  .world-hero__title-area
+  .eyebrow {
+  margin-bottom: 0.45rem;
+  font-size: 0.48rem !important;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .world-hero__title-area
+  h1 {
+  max-width: 18ch;
+  margin: 0 0 0.85rem;
+  color: var(--core-parity-hero-heading);
+  font: 500 clamp(2.15rem, 4vw, 3.7rem)/0.96 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="research"], [data-world-id="public-interest"])
+  .world-hero__title-area
+  h1 {
+  max-width: none;
+  margin-bottom: 0.45rem;
+  font-size: clamp(1.25rem, 2vw, 1.9rem);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .world-hero__title-area
+  > p:not(.eyebrow) {
+  max-width: 48rem;
+  margin: 0;
+  color: #d7ddde;
+  font: 400 clamp(0.82rem, 1.2vw, 1rem)/1.58 system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="research"], [data-world-id="public-interest"])
+  .world-hero__title-area
+  > p:not(.eyebrow) {
+  color: #aeb9bc;
+  font-size: 0.7rem;
+  line-height: 1.48;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .world-hero
+  > .subject-pane--glance {
+  height: auto;
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 0.42rem;
+  align-content: start;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid #38474e;
+  border-color: #38474e !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg, #172126, #11191d) !important;
+  color: #d0d7d8;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.027) !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .world-hero
+  > .subject-pane--glance
+  > .public-interest-panel__kind {
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid #37454b;
+  color: var(--core-parity-accent);
+  font: 700 0.54rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.54rem !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .world-hero
+  > .subject-pane--glance
+  > strong {
+  margin: 0.1rem 0 0;
+  padding: 0;
+  color: #e2e7e6;
+  font: 500 0.78rem/1.3 Georgia, "Times New Roman", serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .world-hero
+  > .subject-pane--glance
+  > p {
+  align-self: center;
+  margin: 0;
+  color: #d0d7d8;
+  font: 400 0.78rem/1.52 system-ui, sans-serif;
+  font-size: 0.78rem !important;
+}
+
+/* Region cards ---------------------------------------------------------- */
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-grid {
+  gap: 0.65rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="research"], [data-world-id="public-interest"])
+  .section-region-grid {
+  padding: 0.7rem;
+  border: 1px solid var(--core-parity-border);
+  background: var(--core-parity-panel);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="research"]
+  > .section-region-grid {
+  width: calc(100% - 0.84rem);
+  margin-inline: 0.42rem;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-card {
+  appearance: none;
+  overflow: hidden;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid var(--core-parity-card-border);
+  border-color: var(--core-parity-card-border) !important;
+  border-radius: var(--core-parity-panel-radius) !important;
+  outline: 1px solid color-mix(in srgb, var(--core-parity-accent) 17%, transparent);
+  outline-offset: -2px;
+  background: var(--core-parity-card) !important;
+  color: #c6cecf;
+  box-shadow: none !important;
+  text-align: left;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease,
+    outline-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-card:is(:hover, :focus-visible, .district-card--focused, [data-carries-focus="true"]) {
+  transform: translateY(-1px);
+  border-color: var(--core-parity-accent-strong) !important;
+  outline-color: color-mix(in srgb, var(--core-parity-accent-strong) 53%, transparent);
+  background: var(--core-parity-card-hover) !important;
+  box-shadow:
+    inset 3px 0 var(--core-parity-accent),
+    inset 0 -2px color-mix(in srgb, var(--core-parity-accent) 33%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--core-parity-accent) 13%, transparent) !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-card:is(:focus-visible) {
+  outline: 2px solid var(--core-parity-accent-strong);
+  outline-offset: 2px;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-card::before,
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-card::after {
+  display: none;
+  content: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  :is(.district-card__kind, .public-interest-panel__kind, .product-catalog-card__kind) {
+  color: var(--core-parity-muted);
+  font: 700 0.48rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is([data-world-id="research"], [data-world-id="public-interest"])
+  .section-region-card
+  :is(.district-card__kind, .public-interest-panel__kind) {
+  font-weight: 600;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-card__glyph {
+  color: var(--core-parity-accent);
+  filter: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .district-card__number {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--core-parity-muted);
+  font: 700 0.44rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.44rem !important;
+  letter-spacing: 0.1em;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .section-region-card
+  > strong {
+  color: var(--core-parity-heading);
+  font: 500 clamp(0.95rem, 1.25vw, 1.35rem)/1.08 Georgia, "Times New Roman", serif;
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="research"]
+  .section-region-card
+  > strong {
+  font-size: 1.18rem;
+  font-weight: 400;
+  line-height: 1.08;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .section-region-card
+  > strong {
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  :is(.section-region-card > p, .section-region-card__boundary) {
+  color: var(--core-parity-body);
+  font: 400 0.66rem/1.5 system-ui, sans-serif;
+  font-size: 0.66rem !important;
+  letter-spacing: 0;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  :is(.district-card__action, .public-interest-panel__action) {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 0.55rem;
+  border-top: 1px solid color-mix(in srgb, var(--core-parity-border) 84%, transparent);
+  color: var(--core-parity-accent);
+  font: 700 0.48rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem !important;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .district-card__action::after {
+  border-color: var(--core-parity-border);
+  border-radius: var(--core-parity-control-radius);
+  background: var(--core-parity-control);
+  color: var(--core-parity-accent);
+  box-shadow: none;
+}
+
+/* Supporting context and actions --------------------------------------- */
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .branch-world__context-section {
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--core-parity-border);
+  border-left: 1px solid var(--core-parity-border);
+  border-radius: var(--core-parity-panel-radius);
+  background: var(--core-parity-panel);
+  color: #d9dfe0;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="research"]
+  > .branch-world__context-section {
+  width: calc(100% - 0.84rem);
+  margin: 0 0.42rem 0.42rem;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .branch-world__context-header {
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--core-parity-border);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .branch-world__context-header
+  > span {
+  color: var(--core-parity-accent);
+  font: 700 0.5rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .branch-world__context-body
+  p {
+  margin: 0;
+  padding-left: 0.8rem;
+  border-left: 1px solid var(--core-parity-border);
+  color: var(--core-parity-body);
+  font: 400 0.72rem/1.58 system-ui, sans-serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .branch-world__context-group
+  > .subject-pane__group-label {
+  color: var(--core-parity-muted);
+  font: 700 0.48rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .subject-pane__action-grid
+  > :is(a, button) {
+  padding: 0.65rem 0.7rem;
+  border: 1px solid var(--core-parity-control-border);
+  border-color: var(--core-parity-control-border) !important;
+  border-radius: var(--core-parity-control-radius) !important;
+  outline: 1px solid color-mix(in srgb, var(--core-parity-accent) 17%, transparent);
+  outline-offset: -2px;
+  background: var(--core-parity-control) !important;
+  color: #c6cecf;
+  box-shadow: none !important;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease,
+    outline-color 140ms ease;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .subject-pane__action-grid
+  > :is(a, button):is(:hover, :focus-visible) {
+  transform: translateY(-1px);
+  border-color: var(--core-parity-accent-strong) !important;
+  outline-color: color-mix(in srgb, var(--core-parity-accent-strong) 53%, transparent);
+  background: var(--core-parity-card-hover) !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .subject-pane__action-copy
+  > span {
+  color: var(--core-parity-accent);
+  font: 700 0.48rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .subject-pane__action-copy
+  > strong {
+  color: var(--core-parity-heading);
+  font: 500 0.75rem/1.2 Georgia, "Times New Roman", serif;
+  font-size: 0.75rem !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .subject-pane__action-copy
+  > small {
+  color: var(--core-parity-body);
+  font: 400 0.58rem/1.4 system-ui, sans-serif;
+  font-size: 0.58rem !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .subject-pane__action-glyph {
+  color: var(--core-parity-accent);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .branch-world__context-disclosure {
+  border-top-color: var(--core-parity-border);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="people"],
+    [data-world-id="products"],
+    [data-world-id="about"]
+  )
+  .branch-world__context-disclosure
+  summary {
+  color: var(--core-parity-accent);
+  font: 700 0.52rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.08em;
+}
+
+/* Products: use the red categorical signal carried by the machine card. -- */
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  :is(.products-world__intro, .product-catalog-group, .products-world__lifecycle) {
+  border-color: #324147;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .products-world__intro {
+  border: 1px solid #324147;
+  border-radius: 10px;
+  background: #10181c;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-group::before {
+  background: linear-gradient(
+    180deg,
+    var(--core-parity-accent) 0 1.8rem,
+    color-mix(in srgb, var(--core-parity-accent) 24%, transparent) 1.8rem 65%,
+    transparent
+  );
+  opacity: 0.72;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  :is(.products-world__intro h2, .product-catalog-group__header h2, .products-world__lifecycle-header h2) {
+  color: #e3e8e7;
+  font: 500 1.1rem/1.2 Georgia, "Times New Roman", serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  :is(.products-world__intro > p, .product-catalog-group__header p, .products-world__lifecycle-header p) {
+  color: #aeb7b9;
+  font: 400 0.7rem/1.5 system-ui, sans-serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  :is(.products-world__intro > span, .product-catalog-group__header > span, .products-world__lifecycle-header > span) {
+  color: #7f99a2;
+  font: 700 0.48rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.1em;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-card {
+  border: 1px solid #37464d;
+  border-radius: 11px;
+  outline: 1px solid rgba(111, 155, 173, 0.17);
+  outline-offset: -2px;
+  background: linear-gradient(180deg, #151f23, #10171a);
+  color: #c6cecf;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-card::after {
+  display: none;
+  content: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-card:is(:hover, :focus-visible) {
+  transform: translateY(-1px);
+  border-color: var(--core-parity-accent-strong);
+  outline-color: color-mix(in srgb, var(--core-parity-accent-strong) 53%, transparent);
+  background: var(--core-parity-card-hover);
+  box-shadow:
+    inset 3px 0 var(--core-parity-accent),
+    inset 0 -2px color-mix(in srgb, var(--core-parity-accent) 33%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--core-parity-accent) 13%, transparent);
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-card
+  > strong {
+  color: #e5eae9;
+  font: 500 1.35rem/1.05 Georgia, "Times New Roman", serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-card
+  > p {
+  color: #b5bec0;
+  font: 400 0.66rem/1.5 system-ui, sans-serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-card__home {
+  color: #819399;
+  font: 400 0.58rem/1.4 system-ui, sans-serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .product-catalog-card__action {
+  border-top-color: #344147;
+  color: var(--core-parity-accent);
+  font: 700 0.48rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.1em;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="products"]
+  .work-status-chip {
+  min-height: 1.65rem;
+  padding: 0.32rem 0.48rem;
+  border: 1px solid color-mix(in srgb, var(--core-parity-accent) 48%, #37464d);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--core-parity-accent) 10%, #10181c);
+  color: color-mix(in srgb, var(--core-parity-accent) 72%, #f3f5f2);
+  box-shadow: none;
+  font: 700 0.45rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.45rem !important;
+  letter-spacing: 0.07em;
+}
+
+/* Public Interest: pair the existing civic content with Public Value's
+   olive consequence/evidence surfaces, without changing that content. */
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-page {
+  gap: 0.6rem;
+  padding: 0.55rem;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature {
+  gap: 0.75rem;
+  padding: clamp(1rem, 1.8vw, 1.6rem);
+  border: 1px solid #4c5043;
+  border-top: 2px solid #9a9c75;
+  border-radius: 0;
+  background: #11120d;
+  color: #e5e5d4;
+  box-shadow: none;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__header {
+  border-bottom-color: #3f4237;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__header
+  .eyebrow {
+  color: #969978;
+  font: 700 0.5rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.13em;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature
+  h2 {
+  color: #ececda;
+  font: 400 clamp(2.1rem, 4vw, 4.2rem)/0.94 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.035em;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__deck {
+  color: #d7d9c2;
+  font: 400 clamp(1rem, 1.35vw, 1.35rem)/1.35 Georgia, "Times New Roman", serif;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__body {
+  border-top-color: #303226;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__body
+  p {
+  color: #a0a18d;
+  font: 400 clamp(0.74rem, 0.86vw, 0.9rem)/1.62 system-ui, sans-serif;
+  font-size: clamp(0.74rem, 0.86vw, 0.9rem) !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__footer {
+  border-top-color: #3f4237;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__footer
+  > span {
+  color: #898c71;
+  font: 700 0.48rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.48rem !important;
+  letter-spacing: 0.1em;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__footer
+  button {
+  border: 1px solid #9a9c75;
+  border-radius: 0;
+  background: #151611;
+  color: #f0f0df;
+  box-shadow: none;
+  font: 700 0.52rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.52rem !important;
+  letter-spacing: 0.08em;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .public-interest-feature__footer
+  button:is(:hover, :focus-visible) {
+  border-color: #b4b68e;
+  background: #222316;
+}
+
+/* Research and Publications use the same rounded box language as the other
+   top-level Core sections. Their content and section palettes remain intact. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="research"]
+  > .world-hero {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="research"]
+  > .section-region-grid {
+  border-radius: 10px;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  > .public-interest-page--overview
+  > .world-hero {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  :is(.section-region-grid, .section-region-card, .branch-world__context-section) {
+  border-radius: 10px !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="public-interest"]
+  .subject-pane__action {
+  border-radius: 8px !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="publications"]
+  > .world-hero {
+  border-radius: 12px;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="publications"]
+  :is(.subject-pane--glance, .section-region-card, .branch-world__context-section, .publication-status-panel) {
+  border-radius: 10px;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > [data-world-id="publications"]
+  .subject-pane__action {
+  border-radius: 8px;
+}
+
+/* Responsive behavior mirrors the Full UI's one-column editorial shell. */
+
+@media (max-width: 900px) {
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is([data-world-id="research"], [data-world-id="products"], [data-world-id="about"], [data-world-id="people"])
+    > .world-hero,
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > [data-world-id="public-interest"]
+    > .public-interest-page--overview
+    > .world-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is(
+      [data-world-id="public-interest"],
+      [data-world-id="research"],
+      [data-world-id="people"],
+      [data-world-id="products"],
+      [data-world-id="about"]
+    )
+    .world-hero__title-area {
+    width: 100%;
+    padding: 0.85rem 0.95rem;
+    border-bottom: 1px solid #26343a;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is([data-world-id="research"], [data-world-id="public-interest"])
+    .world-hero__title-area {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is(
+      [data-world-id="public-interest"],
+      [data-world-id="research"],
+      [data-world-id="people"],
+      [data-world-id="products"],
+      [data-world-id="about"]
+    )
+    .world-hero__title-area
+    h1 {
+    max-width: 14ch;
+    font-size: clamp(2rem, 10vw, 3.25rem);
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is([data-world-id="research"], [data-world-id="public-interest"])
+    .world-hero__title-area
+    h1 {
+    max-width: none;
+    font-size: clamp(1.5rem, 7vw, 2.1rem);
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is(
+      [data-world-id="public-interest"],
+      [data-world-id="research"],
+      [data-world-id="people"],
+      [data-world-id="products"],
+      [data-world-id="about"]
+    )
+    .world-hero
+    > .subject-pane--glance {
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    border: 1px solid #38474e;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #172126, #11191d);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.027);
+  }
+
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is(
+      [data-world-id="public-interest"],
+      [data-world-id="research"],
+      [data-world-id="people"],
+      [data-world-id="products"],
+      [data-world-id="about"]
+    )
+    .branch-world__context-section {
+    padding: 0.8rem 0.85rem;
+    border: 1px solid var(--core-parity-border);
+    border-radius: var(--core-parity-panel-radius);
+    background: var(--core-parity-panel);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is(
+      [data-world-id="public-interest"],
+      [data-world-id="research"],
+      [data-world-id="people"],
+      [data-world-id="products"],
+      [data-world-id="about"]
+    )
+    :is(.section-region-card, .product-catalog-card, .subject-pane__action) {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  body[data-ui-shell="cards"]
+    .site-shell[data-root-focus="false"][data-projection="world"]
+    .world-viewport
+    > :is(
+      [data-world-id="public-interest"],
+      [data-world-id="research"],
+      [data-world-id="people"],
+      [data-world-id="products"],
+      [data-world-id="about"]
+    )
+    :is(
+      .world-hero,
+      .world-hero__title-area,
+      .subject-pane--glance,
+      .section-region-grid,
+      .section-region-card,
+      .branch-world__context-section,
+      .subject-pane__action,
+      .products-world__intro,
+      .product-catalog-card,
+      .public-interest-feature
+    ) {
+    border-color: CanvasText;
+    outline-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+    box-shadow: none;
+  }
+}
+
+/* One typographic voice across the five Core hero cards. Publications is the
+   reference; section color and each page's existing composition remain local. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="products"],
+    [data-world-id="publications"],
+    [data-world-id="about"]
+  )
+  .world-hero__title-area
+  .eyebrow {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: var(--bf-type-caption) !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.17em !important;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="products"],
+    [data-world-id="publications"],
+    [data-world-id="about"]
+  )
+  .world-hero__title-area
+  h1 {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(2.6rem, min(4.7vw, 7svh), 5.25rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.012em !important;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="products"],
+    [data-world-id="publications"],
+    [data-world-id="about"]
+  )
+  .world-hero__title-area
+  > p:not(.eyebrow) {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: clamp(0.92rem, 1.1vw, 1.15rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  letter-spacing: normal !important;
+}
+
+/* The People orientation cards are compact choices, not viewport-filling
+   columns. Keep the overview page's height, but stop its card row from absorbing
+   all remaining space. */
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .public-interest-world[data-world-id="public-interest"]
+  > .public-interest-page--overview {
+  min-height: 0;
+  grid-template-rows: auto auto;
+  align-content: start;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .public-interest-world[data-world-id="public-interest"]
+  .public-interest-hero__panels {
+  align-items: start;
+  align-content: start;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .public-interest-world[data-world-id="public-interest"]
+  .public-interest-hero__panels
+  > .section-region-card {
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="products"],
+    [data-world-id="publications"],
+    [data-world-id="about"]
+  )
+  .world-hero
+  > .subject-pane--glance
+  > .public-interest-panel__kind {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: var(--bf-type-micro) !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase;
+}
+
+body[data-ui-shell="cards"]
+  .site-shell[data-root-focus="false"][data-projection="world"]
+  .world-viewport
+  > :is(
+    [data-world-id="public-interest"],
+    [data-world-id="research"],
+    [data-world-id="products"],
+    [data-world-id="publications"],
+    [data-world-id="about"]
+  )
+  .world-hero
+  > .subject-pane--glance
+  > p {
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  letter-spacing: normal !important;
+}

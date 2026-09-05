@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { activeUiShell } from "@/lib/ui-shell";
+import { MachineCardFlightLayer } from "@/components/bfux/MachineCardFlightLayer";
 import "./globals.css";
 import "./bf-industrial-tokens.css";
 import "./portfolio.css";
@@ -74,6 +75,9 @@ import "./p14-root-instrumentation.css";
 import "./p15-product-catalog.css";
 import "./p16-public-interest-layout-repair.css";
 import "./p17-root-card-visual-grammar.css";
+import "./p18-core-projection-style-parity.css";
+import "./machine-view-controls.css";
+import "./machine-card-flight.css";
 
 export const metadata: Metadata = {
   title: {
@@ -92,7 +96,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body data-ui-shell={activeUiShell}>{children}</body>
+      <body data-ui-shell={activeUiShell}>
+        {children}
+        <MachineCardFlightLayer />
+      </body>
     </html>
   );
 }

@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BoundaryFrame } from "@/components/boundary-frame";
-import { BfuxIcon } from "@/components/bfux-icons";
 import { EvidenceView } from "@/components/evidence-view";
 import { GestaltView } from "@/components/gestalt-view";
 import { SearchPanel } from "@/components/search-panel";
@@ -27,6 +26,7 @@ import { LabMachineServiceProjection } from "./LabMachineServiceProjection";
 import { LabMachineTimelineProjection } from "./LabMachineTimelineProjection";
 import { LabMachineNavigationProvider, type LabMachineTraversalStep } from "./LabMachineNavigationContext";
 import type { LabMachineResolution } from "./LabMachine";
+import { MachineViewControls } from "./MachineViewControls";
 import { PhysicalMachineExperience } from "./PhysicalMachineExperience";
 import { getLabMachineConnectingEdge, getLabMachineNode, labMachineEdgeKey } from "./lab-machine-model";
 
@@ -44,7 +44,7 @@ type Props = {
 };
 
 const coreNodePaths: Partial<Record<string, string>> = {
-  people: "/public-interest",
+  people: "/people",
   products: "/products",
   publications: "/publications",
   about: "/about",
@@ -54,6 +54,8 @@ const coreNodePaths: Partial<Record<string, string>> = {
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 
 function machineUrl(basePath: string, projection: ProjectionMode = "world", scope: ProcessScope = "full", section?: string) {
+  if (!section && projection === "world" && scope === "full") return basePath;
+
   const params = new URLSearchParams({ skin: "physical" });
   if (section && projection === "world") params.set("section", section);
   if (projection === "evidence") params.set("view", "evidence");
@@ -63,9 +65,11 @@ function machineUrl(basePath: string, projection: ProjectionMode = "world", scop
 }
 
 function machineResolutionUrl(basePath: string, resolution: LabMachineResolution) {
+  if (resolution === "focus") return basePath;
+
   const params = new URLSearchParams({
     skin: "physical",
-    resolution: resolution === "mid" ? "full" : "core",
+    resolution: "full",
   });
   return `${basePath}?${params.toString()}`;
 }
@@ -178,7 +182,7 @@ export function LabMachineWorld({
     setProjection("world");
     router.push(capitalUrl(machinePath), { scroll: false });
   };
-  const closeSection = () => router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
+  const closeSection = () => router.push(machineResolutionUrl(machinePath, "mid"), { scroll: false });
   const openSection = (nodeId: string) => {
     if (intermediateLayer && !section) {
       setNavigationFocusId(nodeId);
@@ -199,11 +203,19 @@ export function LabMachineWorld({
       router.push(machineResolutionUrl(machinePath, "focus"), { scroll: false });
       return;
     }
-    router.push(machineUrl(machinePath, "world", "full"), { scroll: false });
+
+    const destinationResolution = section ? "mid" : machineResolution;
+    setMachineResolution(destinationResolution);
+    router.push(machineResolutionUrl(machinePath, destinationResolution), { scroll: false });
   };
   const changeProjection = (nextProjection: ProjectionMode) => {
     setMachineSurface("machine");
     setMachineResolution("focus");
+    try {
+      window.sessionStorage.setItem(resolutionStorageKey, "focus");
+    } catch {
+      // Resolution remains functional when browser storage is unavailable.
+    }
     router.push(machineUrl(machinePath, nextProjection, processScope), { scroll: false });
   };
   const changeProcessScope = (nextScope: ProcessScope) => {
@@ -215,50 +227,11 @@ export function LabMachineWorld({
   };
 
   const resolutionControls = (
-    <>
-      <button
-        type="button"
-        onClick={openCapital}
-        aria-pressed={machineSurface === "capital"}
-        aria-label="Capital cycle: show how resources become retained Lab capability"
-        title="Show the capital conversion cycle"
-        data-machine-surface="capital"
-      >
-        <BfuxIcon name="pressure" className="projection-switcher__glyph" />
-        <span className="projection-switcher__copy">
-          <span className="projection-switcher__mode-name">Capital</span>
-          <small className="projection-switcher__mode-purpose">Cycle</small>
-        </span>
-      </button>
-      <button
-        type="button"
-        onClick={() => setResolution("mid")}
-        aria-pressed={machineSurface === "machine" && machineResolution === "mid"}
-        aria-label="Full loop: show the complete Lab Machine"
-        title="Show the complete Lab Machine"
-        data-machine-resolution="mid"
-      >
-        <BfuxIcon name="widen" className="projection-switcher__glyph" />
-        <span className="projection-switcher__copy">
-          <span className="projection-switcher__mode-name">Full</span>
-          <small className="projection-switcher__mode-purpose">Loop</small>
-        </span>
-      </button>
-      <button
-        type="button"
-        onClick={() => setResolution("focus")}
-        aria-pressed={machineSurface === "machine" && machineResolution === "focus"}
-        aria-label="Core set: show the core Lab Machine"
-        title="Show the core Lab Machine"
-        data-machine-resolution="focus"
-      >
-        <BfuxIcon name="narrow" className="projection-switcher__glyph" />
-        <span className="projection-switcher__copy">
-          <span className="projection-switcher__mode-name">Core</span>
-          <small className="projection-switcher__mode-purpose">Set</small>
-        </span>
-      </button>
-    </>
+    <MachineViewControls
+      activeSurface={machineSurface === "capital" ? "capital" : machineResolution === "mid" ? "full" : undefined}
+      onCapital={openCapital}
+      onFull={() => setResolution("mid")}
+    />
   );
 
   if (projection === "world") {
@@ -312,6 +285,7 @@ export function LabMachineWorld({
         data-has-siblings="false"
         data-show-traversal="false"
         data-machine-surface={isCapitalSurface ? "capital" : "machine"}
+        data-machine-section={section ?? undefined}
       >
         <BoundaryFrame
           visible
@@ -327,6 +301,8 @@ export function LabMachineWorld({
           canProcessZoomIn={false}
           surfaceLabel={isCapitalSurface ? "Capital" : "Lab Machine"}
           viewControls={resolutionControls}
+          projectionModeSubset={machineSurface === "machine" && machineResolution === "mid" ? ["world"] : undefined}
+          activeProjection={machineSurface === "machine" && machineResolution === "focus" ? "world" : null}
           onHome={returnToMachine}
           onUp={returnToMachine}
           onBack={currentCursor > 1 ? rewind : returnToMachine}
@@ -334,7 +310,7 @@ export function LabMachineWorld({
           onLocalNavigate={navigateAway}
           onProcessZoomOut={() => undefined}
           onProcessZoomIn={() => undefined}
-          onProjectionChange={isCapitalSurface || machineResolution !== "mid" ? changeProjection : undefined}
+          onProjectionChange={changeProjection}
           onSearch={() => setSearchOpen(true)}
         />
 
@@ -419,6 +395,8 @@ export function LabMachineWorld({
         canProcessZoomIn={canProcessZoomIn}
         surfaceLabel="Lab Machine"
         viewControls={resolutionControls}
+        projectionModeSubset={machineSurface === "machine" && machineResolution === "mid" ? ["world"] : undefined}
+        activeProjection={machineSurface === "machine" && machineResolution === "mid" ? null : projection}
         onHome={returnToMachine}
         onUp={returnToMachine}
         onBack={() => section ? closeSection() : router.back()}
@@ -426,7 +404,7 @@ export function LabMachineWorld({
         onLocalNavigate={navigateAway}
         onProcessZoomOut={() => canProcessZoomOut && changeProcessScope(processScopes[processScopeIndex - 1])}
         onProcessZoomIn={() => canProcessZoomIn && changeProcessScope(processScopes[processScopeIndex + 1])}
-        onProjectionChange={machineResolution === "mid" ? undefined : changeProjection}
+        onProjectionChange={changeProjection}
         onSearch={() => setSearchOpen(true)}
       />
 

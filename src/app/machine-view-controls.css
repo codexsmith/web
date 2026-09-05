@@ -1,0 +1,45 @@
+/* One machine navigation instrument is shared by the machine and content routes.
+   Keep it on one line regardless of which route loaded first. */
+
+.site-shell .projection-switcher--legible:has(> [data-machine-resolution]) {
+  display: flex !important;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: max-content !important;
+  max-width: 100%;
+  min-width: 0;
+  gap: 3px !important;
+}
+
+.site-shell
+  .projection-switcher--legible:has(> [data-machine-resolution]) > .projection-switcher__label {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.site-shell
+  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-surface],
+.site-shell
+  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-resolution],
+.site-shell
+  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-projection-mode] {
+  flex: 0 0 auto;
+  width: max-content;
+  min-width: max-content !important;
+}
+
+/* The accessible label and title preserve the secondary explanation without
+   making the shared instrument taller on content routes. */
+.site-shell
+  .projection-switcher--legible:has(> [data-machine-resolution]) .projection-switcher__mode-purpose {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .site-shell .projection-switcher--legible:has(> [data-machine-resolution]) {
+    flex: 0 1 auto;
+    width: max-content !important;
+    max-width: 100%;
+  }
+}

@@ -28,6 +28,7 @@ type BoundedStandaloneSurfaceProps = {
   focus: StandaloneFocus;
   parentNodeId: string;
   sectionTheme: string;
+  showSiblingNavigation?: boolean;
 };
 
 function routeForNode(node: ContentNode) {
@@ -39,6 +40,7 @@ export function BoundedStandaloneSurface({
   focus,
   parentNodeId,
   sectionTheme,
+  showSiblingNavigation = true,
 }: BoundedStandaloneSurfaceProps) {
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -46,7 +48,7 @@ export function BoundedStandaloneSurface({
   const focusNode: ContentNode = { ...focus, parentId: parentNode.id };
   const traversalPath = [...getAncestors(parentNode.id), parentNode, focusNode];
   const traversalCursor = traversalPath.length - 1;
-  const siblings = getChildren(parentNode.id);
+  const siblings = showSiblingNavigation ? getChildren(parentNode.id) : [];
   const hasSiblings = siblings.length > 0;
 
   function navigateNode(id: string) {

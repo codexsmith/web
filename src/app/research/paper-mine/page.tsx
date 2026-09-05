@@ -15,6 +15,7 @@ export default function PaperMinePage() {
     <BoundedStandaloneSurface
       parentNodeId="research"
       sectionTheme="research"
+      showSiblingNavigation={false}
       focus={{
         id: "paper-mine",
         label: "Paper Mine",

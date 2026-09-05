@@ -21,23 +21,24 @@
   min-height: 100svh;
 }
 
-/* Capital is mounted inside the fixed BoundaryFrame. Give the apparatus its
-   own page-height scroll surface so the site frame remains stationary while
-   the capital machine can be inspected vertically and horizontally. */
+/* Capital is mounted inside the fixed BoundaryFrame. Give the apparatus one
+   page-wide vertical scroll surface while the site frame remains stationary. */
 .site-shell[data-machine-surface="capital"] .capital-prototype-page {
   box-sizing: border-box;
   height: 100svh;
   max-height: 100svh;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
   padding-bottom: calc(var(--frame-bottom) + clamp(12px, 1.5vw, 22px));
 }
 
-/* Capital is itself the selected root representation. Keep the machine-surface
-   controls (Capital / Full / Core), but suppress the orthogonal root
-   World / Evidence / Timeline projection buttons while Capital is active. */
-.site-shell[data-machine-surface="capital"] .projection-switcher [data-projection-mode] {
+/* Capital keeps Core as its active representation while suppressing the
+   orthogonal Evidence and Timeline projections. */
+.site-shell[data-machine-surface="capital"]
+  .projection-switcher [data-projection-mode]:not([data-projection-mode="world"]),
+.site-shell[data-machine-surface="capital"] .projection-switcher__axis-divider {
   display: none !important;
 }
 
@@ -74,77 +75,53 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* DESKTOP TOPOLOGY · bounded design width                                    */
+/* DESKTOP TOPOLOGY · fluid page width                                        */
 /* -------------------------------------------------------------------------- */
 
 @media (hover: hover) and (pointer: fine) {
   .capital-prototype-page {
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .site-shell[data-machine-surface="capital"] .capital-prototype-page {
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
+}
 
+@media (hover: hover) and (pointer: fine) and (min-width: 1121px) {
   .capital-frame {
-    /*
-     * 1500px is the narrowest width at which the complete three-part apparatus
-     * remains lawful without reflowing. 1694px is the natural design width:
-     *
-     *   32px body padding
-     * + 270px intake manifold
-     * + 16px gap
-     * + 1040px engine
-     * + 16px gap
-     * + 320px diligence manifold
-     * = 1694px
-     *
-     * At browser zoom > 100%, the frame remains at least 1500px and the page
-     * scrolls horizontally. At browser zoom < 100%, it stops growing at 1694px
-     * and auto margins center it in the larger effective CSS viewport.
-     */
-    --capital-apparatus-min-width: 1500px;
-    --capital-apparatus-max-width: 1694px;
-    --capital-engine-max-width: 1040px;
-
     box-sizing: border-box;
-    width: clamp(
-      var(--capital-apparatus-min-width),
-      100%,
-      var(--capital-apparatus-max-width)
-    );
-    min-width: var(--capital-apparatus-min-width);
-    max-width: var(--capital-apparatus-max-width);
-    margin-inline: auto;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    margin-inline: 0;
   }
 
-  /* The side assemblies are reference geometry. The engine is the only column
-     allowed to absorb the modest 194px design-width range. This prevents low
-     browser zoom from turning the conversion rail into an ultra-wide pancake. */
+  /* Side assemblies keep useful minimums while all three regions participate
+     in the available page width. The engine absorbs the remaining space. */
   .capital-frame__body {
-    grid-template-columns: 270px minmax(840px, var(--capital-engine-max-width)) 320px;
-    justify-content: center;
-    gap: 16px;
+    grid-template-columns:
+      minmax(220px, .72fr)
+      minmax(0, 2.5fr)
+      minmax(250px, .9fr);
+    justify-content: stretch;
+    gap: clamp(10px, 1vw, 16px);
     min-width: 0;
   }
 
-  .capital-frame__input-console {
-    width: 270px;
-    min-width: 270px;
-    max-width: 270px;
-  }
-
+  .capital-frame__input-console,
   .capital-frame__engine {
     width: 100%;
-    min-width: 840px;
-    max-width: var(--capital-engine-max-width);
+    min-width: 0;
+    max-width: none;
   }
 
   .capital-frame__diligence-console {
-    width: 320px;
-    min-width: 320px;
-    max-width: 320px;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
   }
 
   /* Keep both side assemblies independently content-led. The right diligence

@@ -305,31 +305,16 @@ function InstitutionalStagePlate({ stage }: { stage: InstitutionalStage }) {
 
 export function CapitalEconomicsFrame() {
   return (
-    <section className="capital-frame" aria-labelledby="capital-frame-title">
-      <header className="capital-frame__topbar">
-        <div className="capital-frame__identity">
-          <span className="capital-frame__mark" aria-hidden="true">BFL</span>
-          <div>
-            <strong id="capital-frame-title">Boundary First Labs</strong>
-          </div>
-        </div>
-
-        <div className="capital-frame__thesis-plate">
-          <span>Capital posture</span>
-          <strong>Fund the conversion engine, not an unbounded theory.</strong>
-        </div>
-
-        <div className="capital-frame__prototype-state" aria-label="Capital projection">
-          <strong>Capital projection</strong>
-        </div>
-      </header>
-
+    <section className="capital-frame" aria-labelledby="capital-orientation-title">
       <section className="capital-frame__orientation" aria-labelledby="capital-orientation-title">
         <div>
           <h1 id="capital-orientation-title">Capital becomes Capability</h1>
         </div>
         <p>
           Capital funds bounded work that produces evidence, transferable capability, and reusable institutional capacity. Each cycle is designed to leave the Lab stronger and less dependent on any single source of funding.
+        </p>
+        <p>
+          <strong>Fund the conversion engine, not an unbounded theory.</strong>
         </p>
       </section>
 

@@ -136,6 +136,15 @@
   padding-inline: .25rem;
 }
 
+.site-shell .projection-switcher--legible .projection-switcher__axis-divider {
+  align-self: stretch;
+  flex: 0 0 1px;
+  width: 1px;
+  min-width: 1px;
+  margin: 0 1px;
+  background: var(--bf-etched-line, #344247);
+}
+
 .site-shell .projection-switcher--legible button {
   min-width: 0 !important;
   min-height: 34px !important;
@@ -154,45 +163,6 @@
 .site-shell .projection-switcher__mode-name,
 .site-shell .projection-switcher__mode-purpose {
   white-space: nowrap;
-}
-
-/* Root View is intentionally terse: icons plus the primary mode names carry
- * enough information. Rich purpose/description copy remains in aria-labels and
- * titles without consuming a second visual line. */
-.site-shell[data-root-focus="true"]
-  .projection-switcher--legible .projection-switcher__mode-purpose {
-  display: none !important;
-}
-
-/*
- * The Lab Machine extends View with Full/Core before the ordinary projections.
- * All controls are siblings and size from their own icon + copy.
- */
-.site-shell[data-root-focus="true"]
-  .projection-switcher--legible:has(> [data-machine-resolution]) {
-  display: flex !important;
-  flex: 0 0 auto;
-  flex-wrap: nowrap;
-  align-items: stretch;
-  width: max-content !important;
-  max-width: 100%;
-  min-width: 0;
-  gap: 3px !important;
-}
-
-.site-shell[data-root-focus="true"]
-  .projection-switcher--legible:has(> [data-machine-resolution]) > .projection-switcher__label {
-  flex: 0 0 auto;
-  align-self: center;
-}
-
-.site-shell[data-root-focus="true"]
-  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-machine-resolution],
-.site-shell[data-root-focus="true"]
-  .projection-switcher--legible:has(> [data-machine-resolution]) > button[data-projection-mode] {
-  flex: 0 0 auto;
-  width: max-content;
-  min-width: max-content !important;
 }
 
 /* The fixed frame owns the clearance above the machine. */
@@ -259,12 +229,6 @@
     width: auto !important;
   }
 
-  .site-shell[data-root-focus="true"]
-    .projection-switcher--legible:has(> [data-machine-resolution]) {
-    flex: 0 1 auto;
-    width: max-content !important;
-    max-width: 100%;
-  }
 }
 
 @media (max-width: 768px) {
