@@ -32,7 +32,12 @@ import {
 } from "@/lib/bridge-event-ledger";
 import { validateProductLandingManifest } from "@/lib/product-landing-routing";
 
-const bridgeEventOperationSet = new Set<string>(BRIDGE_EVENT_OPERATIONS);
+type BridgeMutationOperation = Exclude<BridgeEventOperation, "register">;
+
+const bridgeMutationOperations = BRIDGE_EVENT_OPERATIONS.filter(
+  (operation): operation is BridgeMutationOperation => operation !== "register",
+);
+const bridgeMutationOperationSet = new Set<string>(bridgeMutationOperations);
 
 function text(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -63,11 +68,11 @@ function operatorIdentity() {
   return process.env.BFL_BRIDGE_OPS_ACTOR?.trim() || "operator";
 }
 
-function requireBridgeEventOperation(value: string): BridgeEventOperation {
-  if (!bridgeEventOperationSet.has(value)) {
-    throw new Error(`Unsupported bridge operation ${value}`);
+function requireBridgeMutationOperation(value: string): BridgeMutationOperation {
+  if (!bridgeMutationOperationSet.has(value)) {
+    throw new Error(`Unsupported Bridge operator mutation ${value}`);
   }
-  return value as BridgeEventOperation;
+  return value as BridgeMutationOperation;
 }
 
 export async function loginBridgeOpsAction(formData: FormData) {
@@ -103,7 +108,7 @@ export async function mutateBridgeAction(formData: FormData) {
   let errorMessage: string | undefined;
 
   try {
-    const operation = requireBridgeEventOperation(operationText);
+    const operation = requireBridgeMutationOperation(operationText);
     const snapshot = await loadBridgeOpsManifest();
     const index = snapshot.manifest.pages.findIndex(
       (entry) => entry.id === id && entry.collection === "bridge",
