@@ -14,7 +14,7 @@
 
   .bf-machine[data-skin="physical"] {
     --machine-u: 8px;
-    padding: 0 .55rem .7rem;
+    padding: 0 .55rem 50vh;
     overflow-x: hidden;
   }
 

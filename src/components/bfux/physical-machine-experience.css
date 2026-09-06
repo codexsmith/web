@@ -225,15 +225,6 @@ body:has(.site-shell[data-root-focus="true"])::-webkit-scrollbar{
 
 }
 
-@media(max-width:1024px){
-  html:has(.site-shell[data-root-focus="true"]),
-  body:has(.site-shell[data-root-focus="true"]){
-    overflow-x:hidden;
-  }
-  body:has(.site-shell[data-root-focus="true"]){
-    overflow-y:auto;
-  }
-}
 
 .world-machine-resolution{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem .55rem;margin:.5rem .65rem .25rem;padding:.42rem .5rem;border:1px solid #314047;border-radius:8px;background:#0d1518;color:#cfd7d8}
 .world-machine-resolution__label{order:1;display:grid;gap:.1rem;min-width:8rem;flex:0 0 auto}

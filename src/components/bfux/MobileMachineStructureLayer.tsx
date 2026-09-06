@@ -85,11 +85,11 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
     };
 
     measure();
-    window.addEventListener("scroll", scheduleMeasure, { passive: true });
+    window.addEventListener("scroll", scheduleMeasure, { passive: true, capture: true });
     window.addEventListener("resize", scheduleMeasure);
 
     return () => {
-      window.removeEventListener("scroll", scheduleMeasure);
+      window.removeEventListener("scroll", scheduleMeasure, { capture: true });
       window.removeEventListener("resize", scheduleMeasure);
       if (frame !== 0) window.cancelAnimationFrame(frame);
     };
