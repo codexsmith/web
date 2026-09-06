@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "epochId": "bridge-ledger-epoch-2026-09-06",
+  "establishedAt": "2026-09-06T16:05:00.000Z",
+  "source": "bridge-ops-ledger-epoch",
+  "commit": "self",
+  "parentCommit": "24b6e33a2688dd702b7465b4611b1c76ea8487a4",
+  "manifestVersion": "0.6.0",
+  "states": {
+    "ground-news": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "exploratory-no-affiliation"
+    },
+    "gothamchess": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "exploratory-no-affiliation"
+    },
+    "rupaul-world-of-wonder": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "exploratory-no-affiliation"
+    },
+    "augusta-citywatch": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "historical-project-no-current-affiliation"
+    },
+    "boundary-first-robocup": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "exploratory-no-affiliation"
+    },
+    "georgia-tech-gtri-research-bridge": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "exploratory-no-affiliation"
+    },
+    "topos-institute-research-bridge": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "exploratory-no-affiliation"
+    },
+    "santa-fe-institute-research-bridge": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "exploratory-no-affiliation"
+    },
+    "south-carolina-legal-modernization-bridge": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "target-class-no-affiliation"
+    },
+    "weather-research-operations-bridge": {
+      "lifecycle": "draft",
+      "visibility": "unlisted",
+      "routingEligibility": "unlisted-only",
+      "relationshipStatus": "target-class-no-affiliation"
+    }
+  }
+}

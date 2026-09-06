@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { Network } from "lucide-react";
+import { useMobileStructureHoldReveal } from "./useMobileStructureHoldReveal";
 import "./mobile-capital-structure.css";
 
 type CapitalStage = {
@@ -27,8 +28,16 @@ function stageById(id: string | undefined) {
 export function MobileCapitalStructureLayer() {
   const rootRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
-  const [open, setOpen] = useState(false);
+  const [latchedOpen, setLatchedOpen] = useState(false);
+  const [transientOpen, setTransientOpen] = useState(false);
   const [activeStageId, setActiveStageId] = useState(stages[0].id);
+  const open = latchedOpen || transientOpen;
+
+  useMobileStructureHoldReveal({
+    targetSelector: '.capital-prototype-page[data-machine-surface="capital"]',
+    enabled: !latchedOpen,
+    onTransientChange: setTransientOpen,
+  });
 
   useEffect(() => {
     if (!open) return;
@@ -90,11 +99,13 @@ export function MobileCapitalStructureLayer() {
   const previous = activeIndex === 0 ? null : stages[activeIndex - 1];
   const next = active.id === "retained-capability" ? stages[1] : stages[activeIndex + 1] ?? null;
   const nextLabel = active.id === "retained-capability" ? "feeds next cycle" : "becomes";
+  const revealMode = latchedOpen ? "latched" : transientOpen ? "transient" : "closed";
 
   return (
     <div
       className="bf-mobile-capital-structure"
       data-open={open ? "true" : "false"}
+      data-reveal-mode={revealMode}
       data-active-stage={active.id}
       ref={rootRef}
     >
@@ -102,15 +113,22 @@ export function MobileCapitalStructureLayer() {
         className="bf-mobile-capital-structure__toggle"
         type="button"
         aria-expanded={open}
+        aria-pressed={latchedOpen}
         aria-controls={panelId}
-        onClick={() => setOpen((value) => !value)}
+        aria-label={latchedOpen
+          ? "Hide the mobile capital conversion gutter"
+          : "Reveal the mobile capital conversion gutter. Press and hold the Capital surface to reveal it transiently."}
+        onClick={() => {
+          setTransientOpen(false);
+          setLatchedOpen((value) => !value);
+        }}
       >
         <Network aria-hidden="true" />
         <span>
-          <small>CAPITAL</small>
+          <small>CAPITAL · HOLD</small>
           <strong>Conversion</strong>
         </span>
-        <b>{open ? "Hide" : "Reveal"}</b>
+        <b>{latchedOpen ? "Hide" : transientOpen ? "Pin" : "Reveal"}</b>
       </button>
 
       <aside

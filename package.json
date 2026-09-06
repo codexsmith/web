@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run bridge:contracts && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "contracts:check": "node scripts/check_v2_contracts.mjs && node scripts/check_navigation_frame_contracts.mjs && node scripts/check_bounded_special_surfaces.mjs && node scripts/check_product_catalog_contracts.mjs && node scripts/check_public_interest_layout_contracts.mjs",
+    "bridge:contracts": "node scripts/check_bridge_transition_behavior.mjs && node scripts/check_bridge_governance_contracts.mjs && node scripts/check_bridge_ledger_contracts.mjs && node scripts/check_bridge_ops_security_contracts.mjs",
+    "contracts:check": "node scripts/check_v2_contracts.mjs && node scripts/check_navigation_frame_contracts.mjs && node scripts/check_bounded_special_surfaces.mjs && node scripts/check_product_catalog_contracts.mjs && node scripts/check_public_interest_layout_contracts.mjs && npm run bridge:contracts",
     "runtime:check": "node scripts/check_v2_runtime.mjs",
     "verify": "npm run lint && npm run typecheck && npm run contracts:check && npm run build && npm run runtime:check"
   },

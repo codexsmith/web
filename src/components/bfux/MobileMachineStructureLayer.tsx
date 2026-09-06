@@ -4,6 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { Network } from "lucide-react";
 import { getLabMachineNode, labMachineEdges, type LabMachineEdge } from "./lab-machine-model";
 import type { LabMachineResolution } from "./LabMachine";
+import { useMobileStructureHoldReveal } from "./useMobileStructureHoldReveal";
 import "./mobile-machine-structure.css";
 
 type RelationView = {
@@ -22,9 +23,17 @@ function sameIds(left: string[], right: string[]) {
 export function MobileMachineStructureLayer({ resolution }: { resolution: LabMachineResolution }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
-  const [open, setOpen] = useState(false);
+  const [latchedOpen, setLatchedOpen] = useState(false);
+  const [transientOpen, setTransientOpen] = useState(false);
   const [activeNodeId, setActiveNodeId] = useState("research");
   const [visibleNodeIds, setVisibleNodeIds] = useState<string[]>([]);
+  const open = latchedOpen || transientOpen;
+
+  useMobileStructureHoldReveal({
+    targetSelector: ".physical-machine-experience__machine-stack",
+    enabled: !latchedOpen,
+    onTransientChange: setTransientOpen,
+  });
 
   useEffect(() => {
     if (!open) return;
@@ -113,11 +122,13 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
 
   const shownRelations = relations.slice(0, 4);
   const hiddenRelationCount = Math.max(0, relations.length - shownRelations.length);
+  const revealMode = latchedOpen ? "latched" : transientOpen ? "transient" : "closed";
 
   return (
     <div
       className="bf-mobile-machine-structure"
       data-open={open ? "true" : "false"}
+      data-reveal-mode={revealMode}
       data-resolution={resolution}
       data-active-node={activeNodeId}
       ref={rootRef}
@@ -126,15 +137,22 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         className="bf-mobile-machine-structure__toggle"
         type="button"
         aria-expanded={open}
+        aria-pressed={latchedOpen}
         aria-controls={panelId}
-        onClick={() => setOpen((value) => !value)}
+        aria-label={latchedOpen
+          ? "Hide the mobile relation gutter"
+          : "Reveal the mobile relation gutter. Press and hold the machine to reveal it transiently."}
+        onClick={() => {
+          setTransientOpen(false);
+          setLatchedOpen((value) => !value);
+        }}
       >
         <Network aria-hidden="true" />
         <span>
-          <small>{resolution === "focus" ? "CORE" : "FULL"}</small>
+          <small>{resolution === "focus" ? "CORE · HOLD" : "FULL · HOLD"}</small>
           <strong>Relations</strong>
         </span>
-        <b>{open ? "Hide" : "Reveal"}</b>
+        <b>{latchedOpen ? "Hide" : transientOpen ? "Pin" : "Reveal"}</b>
       </button>
 
       <aside
