@@ -387,3 +387,269 @@
     white-space: nowrap !important;
   }
 }
+
+/* Relations-open Full projection: the gutter already carries relationship
+ * detail, so the machine-side operational nodes become short identity plates.
+ * Research remains the only large work surface in this lower tier. */
+@media (max-width: 768px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) {
+    height: 3.45rem !important;
+    min-height: 3.45rem !important;
+    max-height: 3.45rem !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) > .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 1fr !important;
+    place-items: center !important;
+    height: 3.45rem !important;
+    min-height: 3.45rem !important;
+    max-height: 3.45rem !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__boundary,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__icon-plate,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) footer {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    align-content: center !important;
+    justify-items: center !important;
+    gap: .1rem !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: .38rem .28rem !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    text-align: center !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) header > span {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    color: var(--tone) !important;
+    font-size: .4rem !important;
+    line-height: 1 !important;
+    letter-spacing: .055em !important;
+    text-align: center !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) header > strong {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    color: #e4e7e8 !important;
+    font-size: .76rem !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] {
+    height: 2.8rem !important;
+    min-height: 2.8rem !important;
+    max-height: 2.8rem !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    > .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 1fr !important;
+    place-items: center !important;
+    height: 2.8rem !important;
+    min-height: 2.8rem !important;
+    max-height: 2.8rem !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    align-content: center !important;
+    justify-items: center !important;
+    gap: .08rem !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: .3rem .25rem !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    text-align: center !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] header > span {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    color: var(--tone) !important;
+    font-size: .36rem !important;
+    line-height: 1 !important;
+    letter-spacing: .06em !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] header > strong {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    color: #e4e7e8 !important;
+    font-size: .7rem !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ),
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) > .bf-machine-node__face {
+    height: 3.05rem !important;
+    min-height: 3.05rem !important;
+    max-height: 3.05rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) header {
+    padding: .3rem .22rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"],
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    > .bf-machine-node__face {
+    height: 2.55rem !important;
+    min-height: 2.55rem !important;
+    max-height: 2.55rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] header {
+    padding: .24rem .2rem !important;
+  }
+}
