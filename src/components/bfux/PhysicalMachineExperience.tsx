@@ -13,7 +13,7 @@ import "./mobile-machine-card-flow.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 const desktopFitQuery = "(min-width: 1025px)";
-const mobileProjectionQuery = "(max-width: 768px)";
+const mobileProjectionQuery = "(max-width: 1024px)";
 const targetMachineWidthRatio = 0.88;
 const machineWidthInUnits = 100;
 // Let the first outline register before routing, but do not make the animation
