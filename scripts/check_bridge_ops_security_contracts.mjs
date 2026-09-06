@@ -139,7 +139,7 @@ requireMatch(
 );
 requireMatch(
   actions,
-  /await requireSession\(\)[\s\S]*export async function mutateBridgeAction/,
+  /export async function mutateBridgeAction\(formData: FormData\) \{[\s\S]*?await requireSession\(\);/,
   "Bridge mutation Server Action must remain session-gated.",
 );
 
