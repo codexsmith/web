@@ -273,9 +273,7 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
 
       // Pipes describe topology, not just the cards currently mirrored in the
       // gutter. Keep an edge alive when either endpoint is visible and the other
-      // endpoint still belongs to the current machine projection. This lets a
-      // relation such as About -> Research continue into the viewport after the
-      // About card itself has scrolled away.
+      // endpoint still belongs to the current machine projection.
       const pipeSeeds = labMachineEdges.flatMap<PipeSeed>((edge) => {
         const fromCard = cardById.get(edge.from);
         const toCard = cardById.get(edge.to);
@@ -302,9 +300,9 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         }];
       });
 
-      // Shared nodes need physical ports of their own. Fan incident edges across
-      // a bounded segment of the card edge so multiple Research connections do
-      // not paint the same horizontal segment on top of one another.
+      // Shared cards get distinct physical ports. Use substantially more of a
+      // tall card's edge than the first pass did so Research reads as a real
+      // multi-port hub instead of a tight stack of arrowheads.
       const incidentsByNode = new Map<string, Array<{ key: string; otherY: number }>>();
       const addIncident = (nodeId: string, key: string, otherY: number) => {
         const incidents = incidentsByNode.get(nodeId) ?? [];
@@ -326,7 +324,10 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         const sorted = [...incidents].sort((left, right) =>
           left.otherY - right.otherY || left.key.localeCompare(right.key),
         );
-        const usableSpread = Math.max(0, Math.min(64, rect.height - 24));
+        const edgeInset = clamp(rect.height * 0.14, 12, 24);
+        const usableSpread = sorted.length === 1
+          ? 0
+          : Math.max(0, Math.min(132, rect.height - edgeInset * 2));
         const startY = rect.top + rect.height / 2 - usableSpread / 2;
 
         sorted.forEach((incident, index) => {
@@ -337,15 +338,17 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         });
       }
 
-      // Give every visible local edge an independent vertical bus lane. Longer
-      // spans use the outer lanes, producing a nested fan rather than coincident
-      // trunks. Endpoint port fan-out above removes the remaining shared segments.
+      // Spend the available card-to-gutter gap on the routing field. Each edge
+      // gets its own lane across nearly the full width instead of clustering in
+      // the middle third of the gap.
       const rightmostCardEdge = pipeSeeds.reduce(
         (rightmost, seed) => Math.max(rightmost, seed.fromRect.right, seed.toRect.right),
         0,
       );
-      const busRight = gutterRect.left - 4;
-      const busLeft = Math.min(rightmostCardEdge + 5, busRight - 2);
+      const routingGap = Math.max(0, gutterRect.left - rightmostCardEdge);
+      const laneInset = clamp(routingGap * 0.12, 7, 12);
+      const busLeft = Math.min(rightmostCardEdge + laneInset, gutterRect.left - laneInset);
+      const busRight = Math.max(busLeft, gutterRect.left - laneInset);
       const laneOrder = [...pipeSeeds].sort((left, right) => {
         const leftSpan = Math.abs(
           (portYByEdgeNode.get(`${left.key}:${left.toId}`) ?? left.toRect.top + left.toRect.height / 2)
@@ -358,12 +361,12 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         return rightSpan - leftSpan || left.key.localeCompare(right.key);
       });
       const laneXByEdge = new Map<string, number>();
-      const busSpan = Math.max(2, busRight - busLeft);
+      const busSpan = Math.max(0, busRight - busLeft);
 
       laneOrder.forEach((seed, index) => {
         const fraction = laneOrder.length === 1
           ? 0.5
-          : (laneOrder.length - index) / (laneOrder.length + 1);
+          : 1 - index / (laneOrder.length - 1);
         laneXByEdge.set(seed.key, Math.round((busLeft + busSpan * fraction) * 10) / 10);
       });
 
@@ -373,11 +376,11 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         focus: seed.focus,
         fromId: seed.fromId,
         toId: seed.toId,
-        fromX: Math.round((seed.fromRect.right + 1) * 10) / 10,
+        fromX: Math.round(seed.fromRect.right * 10) / 10,
         fromY: portYByEdgeNode.get(`${seed.key}:${seed.fromId}`)
           ?? Math.round((seed.fromRect.top + seed.fromRect.height / 2) * 10) / 10,
-        busX: laneXByEdge.get(seed.key) ?? Math.round((gutterRect.left - 8) * 10) / 10,
-        toX: Math.round((seed.toRect.right + 1) * 10) / 10,
+        busX: laneXByEdge.get(seed.key) ?? Math.round((gutterRect.left - laneInset) * 10) / 10,
+        toX: Math.round(seed.toRect.right * 10) / 10,
         toY: portYByEdgeNode.get(`${seed.key}:${seed.toId}`)
           ?? Math.round((seed.toRect.top + seed.toRect.height / 2) * 10) / 10,
       })).sort((left, right) => left.fromY - right.fromY || left.key.localeCompare(right.key));
@@ -456,14 +459,14 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
           <defs>
             <marker
               id={pipeArrowId}
-              markerWidth="7"
-              markerHeight="7"
-              refX="6"
-              refY="3.5"
+              markerWidth="6"
+              markerHeight="6"
+              refX="5.25"
+              refY="3"
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0 0 L7 3.5 L0 7 z" fill="context-stroke" />
+              <path d="M0 0 L6 3 L0 6 z" fill="context-stroke" />
             </marker>
           </defs>
           {pipes.map((pipe) => {
@@ -483,8 +486,7 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
                 style={style}
               >
                 <path d={path} markerEnd={`url(#${pipeArrowId})`} />
-                <circle cx={pipe.busX} cy={pipe.fromY} r="3.25" />
-                <circle cx={pipe.busX} cy={pipe.toY} r="3.25" />
+                <circle cx={pipe.fromX} cy={pipe.fromY} r="2.6" />
               </g>
             );
           })}
