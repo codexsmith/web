@@ -26,13 +26,20 @@
 
 @media (max-width: 768px) {
   /* Mobile Capital v2 is activated by the controller's state marker on the
-   * canonical Capital page. Keep the center engine in normal flow while the
-   * left/right consoles are removed until their bumper is opened. */
-  .capital-prototype-page[data-mobile-capital-rail]
+   * canonical Capital page. Only the selected side console is admitted back
+   * into the projection; the opposite rail remains out of normal flow. */
+  .capital-prototype-page[data-mobile-capital-rail]:not([data-mobile-capital-rail="inputs"])
     .capital-frame__input-console,
-  .capital-prototype-page[data-mobile-capital-rail]
+  .capital-prototype-page[data-mobile-capital-rail]:not([data-mobile-capital-rail="criteria"])
     .capital-frame__diligence-console {
     display: none !important;
+  }
+
+  .capital-prototype-page[data-mobile-capital-rail="inputs"]
+    .capital-frame__input-console,
+  .capital-prototype-page[data-mobile-capital-rail="criteria"]
+    .capital-frame__diligence-console {
+    display: grid !important;
   }
 
   .capital-prototype-page[data-mobile-capital-rail]
