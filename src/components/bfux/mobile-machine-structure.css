@@ -29,12 +29,13 @@
     touch-action: pan-y !important;
   }
 
+  /* Closed-rack column geometry belongs to mobile-machine-card-flow.css.
+   * This layer owns only scroll/touch behavior until Relations is opened. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"] .bf-machine__apparatus {
     position: relative !important;
     inset: auto !important;
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
     grid-auto-flow: row;
     grid-auto-rows: max-content;
     align-items: start;
@@ -76,10 +77,6 @@
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id] footer {
     margin-top: 0 !important;
-  }
-
-  .bf-machine[data-skin="physical"] .bf-machine__apparatus {
-    grid-template-columns: minmax(0, 1fr) !important;
   }
 
   .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] {
@@ -307,6 +304,7 @@
     min-width: 0;
   }
 
+  /* Relations-open is the only state in this layer that owns rack columns. */
   .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
     .bf-machine[data-skin="physical"] .bf-machine__apparatus {
     grid-template-columns: minmax(0, 1fr) !important;
