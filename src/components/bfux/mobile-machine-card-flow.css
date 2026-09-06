@@ -3,28 +3,28 @@
  *
  * Desktop nodes carry authored named grid areas and absolute composition. On a
  * narrow screen those identities must not survive as placement instructions:
- * the machine becomes an ordered, one-column card rack. This file owns the
- * complete Core / Full card sets and the mobile Tour card form.
+ * the machine becomes a compact ordered card rack with a paired entry row.
+ * This file owns the complete Core / Full card sets and the mobile Tour form.
  */
 
 @media (max-width: 768px) {
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"] .bf-machine__apparatus {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     grid-auto-flow: row !important;
     grid-auto-rows: max-content !important;
     align-items: start !important;
-    gap: .65rem !important;
+    gap: .5rem !important;
   }
 
-  /* Clear the inline desktop `gridArea` written by Node. Every visible mobile
-   * machine card owns exactly one ordinary row. */
+  /* Clear the inline desktop `gridArea` written by Node. Ordinary mobile
+   * machine cards span the rack; Tour and About form the paired entry row. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-node[data-node-id] {
     grid-area: auto !important;
-    grid-column: 1 !important;
+    grid-column: 1 / -1 !important;
     grid-row: auto !important;
     position: relative !important;
     inset: auto !important;
@@ -59,32 +59,54 @@
     .bf-machine[data-skin="physical"][data-resolution="focus"]
     .bf-machine__apparatus > .bf-machine-node:is(
       [data-node-id="tour"],
+      [data-node-id="about"],
       [data-node-id="people"],
       [data-node-id="products"],
       [data-node-id="publications"],
-      [data-node-id="research"],
-      [data-node-id="about"]
+      [data-node-id="research"]
     ) {
     display: block !important;
   }
 
-  /* Stable linear order for both mobile resolutions. */
-  .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="tour"] { order: -1 !important; }
-  .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] { order: 0 !important; }
+  /* Shared leading hierarchy: Tour + About, then People, Products,
+   * Publications, Research. Full continues with the remaining machine cards. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="tour"] {
+    grid-column: 1 !important;
+    order: 0 !important;
+    align-self: stretch !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] {
+    grid-column: 2 !important;
+    order: 0 !important;
+    align-self: stretch !important;
+  }
+
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] { order: 1 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] { order: 2 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="publications"] { order: 3 !important; }
-  .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="about"] { order: 4 !important; }
+  .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] { order: 4 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"] { order: 5 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"] { order: 6 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] { order: 7 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"] { order: 8 !important; }
 
-  /* Ordinary mobile cards retain the complete readable About-style body. */
+  /* Card footers are desktop instrumentation. The mobile rack keeps identity,
+   * title and boundary content, then moves directly to the next card. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id] footer {
+    display: none !important;
+  }
+
+  /* Removing the footer lets the ordinary card chassis tighten materially
+   * without reducing the readable boundary surface. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card) {
-    min-height: 9.5rem !important;
+    min-height: 7.35rem !important;
   }
 
   .site-shell[data-root-focus="true"]
@@ -92,7 +114,67 @@
     .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
     > .bf-machine-node__face {
     height: auto !important;
-    min-height: 9.5rem !important;
+    min-height: 7.35rem !important;
+  }
+
+  /* Tour and About are the compact paired entry row. Their full boundary text
+   * remains visible, but the hardware and typography use less horizontal room. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is([data-node-id="tour"], [data-node-id="about"]) {
+    min-height: 8.25rem !important;
+    height: 100% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-node__face {
+    grid-template-columns: 2.7rem minmax(0, 1fr) !important;
+    height: 100% !important;
+    min-height: 8.25rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+    .bf-machine-node__icon-plate {
+    width: 2.1rem !important;
+    height: 2.1rem !important;
+    margin: .44rem 0 .08rem .44rem !important;
+    padding: .22rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] header {
+    padding: .48rem .42rem .28rem .18rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] header span {
+    font-size: .5rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] header strong {
+    font-size: .9rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] .bf-machine-node__boundary {
+    margin: 0 .4rem .4rem !important;
+    padding: .4rem .44rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] .bf-machine-node__boundary p {
+    font-size: .66rem !important;
+    line-height: 1.34 !important;
   }
 
   /* On mobile the Tour is another machine card, not the desktop shallow
@@ -100,7 +182,7 @@
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
-    min-height: 9.5rem !important;
+    min-height: 8.25rem !important;
   }
 
   .site-shell[data-root-focus="true"]
@@ -108,8 +190,8 @@
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
     > .bf-machine-node__face {
     display: block !important;
-    height: auto !important;
-    min-height: 9.5rem !important;
+    height: 100% !important;
+    min-height: 8.25rem !important;
   }
 
   .site-shell[data-root-focus="true"]
@@ -117,11 +199,11 @@
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
     .bf-machine-tour-card__compact {
     display: grid !important;
-    grid-template-columns: 3.55rem minmax(0, 1fr) !important;
+    grid-template-columns: 2.7rem minmax(0, 1fr) !important;
     grid-template-rows: auto auto !important;
     align-content: start !important;
-    height: auto !important;
-    min-height: 9.5rem !important;
+    height: 100% !important;
+    min-height: 8.25rem !important;
   }
 
   .site-shell[data-root-focus="true"]
@@ -135,10 +217,10 @@
     grid-column: 1 !important;
     grid-row: 1 !important;
     align-self: start !important;
-    width: 2.75rem !important;
-    height: 2.75rem !important;
-    margin: .52rem 0 .1rem .52rem !important;
-    padding: .3rem !important;
+    width: 2.1rem !important;
+    height: 2.1rem !important;
+    margin: .44rem 0 .08rem .44rem !important;
+    padding: .22rem !important;
     transform: none !important;
   }
 
@@ -152,11 +234,11 @@
     grid-column: 2 !important;
     grid-row: 1 !important;
     align-content: center !important;
-    gap: .2rem !important;
+    gap: .16rem !important;
     width: auto !important;
     height: auto !important;
     min-height: 0 !important;
-    padding: .55rem .55rem .35rem .3rem !important;
+    padding: .48rem .42rem .28rem .18rem !important;
     overflow: visible !important;
   }
 
@@ -171,9 +253,9 @@
     display: block !important;
     margin: 0 !important;
     color: var(--tone) !important;
-    font-size: .58rem !important;
+    font-size: .5rem !important;
     line-height: 1.15 !important;
-    letter-spacing: .075em !important;
+    letter-spacing: .06em !important;
     white-space: normal !important;
   }
 
@@ -202,7 +284,7 @@
     display: block !important;
     margin: 0 !important;
     color: #e4e7e8 !important;
-    font-size: 1.06rem !important;
+    font-size: .9rem !important;
     line-height: 1.05 !important;
     white-space: normal !important;
   }
@@ -215,14 +297,24 @@
     grid-column: 1 / -1 !important;
     grid-row: 2 !important;
     min-height: 0 !important;
-    margin: 0 .5rem .5rem !important;
-    padding: .48rem .52rem !important;
+    margin: 0 .4rem .4rem !important;
+    padding: .4rem .44rem !important;
   }
 
-  /* Expanded Tour remains a bounded card in the same mobile flow. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > .bf-machine-node__boundary p {
+    font-size: .66rem !important;
+    line-height: 1.34 !important;
+  }
+
+  /* Expanded Tour becomes a full-width bounded card before opening its reading
+   * surface; About naturally moves to the next row while Tour is expanded. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="true"] {
+    grid-column: 1 / -1 !important;
     width: 100% !important;
     height: min(72dvh, 34rem) !important;
     min-height: 25rem !important;
@@ -237,7 +329,19 @@
     min-height: 0 !important;
   }
 
-  /* Opening the relation gutter changes card width, not membership. */
+  /* Opening the relation gutter changes card width, not membership. The paired
+   * entry row collapses back to one column when the structural gutter is open. */
+  .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is([data-node-id="tour"], [data-node-id="about"]) {
+    grid-column: 1 / -1 !important;
+  }
+
   .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-tour-card[data-node-id="tour"] {
