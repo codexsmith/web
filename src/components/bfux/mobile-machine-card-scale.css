@@ -1,13 +1,203 @@
 /*
- * Intermediate responsive density for the public navigation row.
+ * Responsive density for the compact public navigation rows.
  *
- * The six-track rack topology is unchanged. At ordinary responsive widths the
- * three public navigation cards have enough horizontal room to use a compact
- * icon-left / label-right grammar. Ultra-small screens keep the vertical
- * eyebrow -> icon -> title projection defined by mobile-machine-card-flow.css.
+ * Topology belongs to mobile-machine-card-flow.css. This layer only controls
+ * internal density. The apparatus itself is the responsive boundary: when it
+ * has enough inline room, compact cards use icon-left / label-right geometry;
+ * when it does not, the ultra-small vertical projection remains in force.
  */
 
-@media (min-width: 481px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    container-name: bf-mobile-nav-rack;
+    container-type: inline-size;
+  }
+}
+
+@container bf-mobile-nav-rack (min-width: 20.5rem) {
+  /* Tour + About keep their 50/50 rack placement, but the chassis now follows
+   * the icon/text content instead of a fixed mobile height. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="tour"],
+      [data-node-id="about"]
+    ) {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: clamp(1.8rem, 8cqi, 2.05rem) minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
+    align-items: center !important;
+    column-gap: clamp(.28rem, 1.5cqi, .42rem) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(.28rem, 1.35cqi, .4rem) clamp(.34rem, 1.7cqi, .5rem) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"]
+    .bf-machine-node__icon-plate {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    width: clamp(1.8rem, 8cqi, 2.05rem) !important;
+    height: clamp(1.8rem, 8cqi, 2.05rem) !important;
+    margin: 0 !important;
+    padding: .18rem !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-content: center !important;
+    justify-items: start !important;
+    gap: .08rem !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border-bottom: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] header span {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: clamp(.42rem, 1.9cqi, .5rem) !important;
+    line-height: 1.05 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] header strong {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: clamp(.78rem, 3.7cqi, .94rem) !important;
+    line-height: 1.02 !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    > .bf-machine-node__face {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact {
+    display: grid !important;
+    grid-template-columns: clamp(1.8rem, 8cqi, 2.05rem) minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
+    align-items: center !important;
+    column-gap: clamp(.28rem, 1.5cqi, .42rem) !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(.28rem, 1.35cqi, .4rem) clamp(.34rem, 1.7cqi, .5rem) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-node__icon-plate {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    width: clamp(1.8rem, 8cqi, 2.05rem) !important;
+    height: clamp(1.8rem, 8cqi, 2.05rem) !important;
+    margin: 0 !important;
+    padding: .18rem !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-content: center !important;
+    justify-items: start !important;
+    gap: .08rem !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > header > span {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: clamp(.42rem, 1.9cqi, .5rem) !important;
+    line-height: 1.05 !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > header > strong {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: clamp(.78rem, 3.7cqi, .94rem) !important;
+    line-height: 1.02 !important;
+    white-space: nowrap !important;
+  }
+
+  /* People / Products / Publications preserve the three-across topology while
+   * becoming shallow content-sized controls. */
   .site-shell[data-root-focus="true"]
     .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
     .bf-machine[data-skin="physical"]
@@ -29,14 +219,14 @@
       [data-node-id="publications"]
     ) > .bf-machine-node__face {
     display: grid !important;
-    grid-template-columns: 2.1rem minmax(0, 1fr) !important;
+    grid-template-columns: clamp(1.5rem, 7cqi, 1.8rem) minmax(0, 1fr) !important;
     grid-template-rows: auto !important;
     align-items: center !important;
     justify-items: stretch !important;
-    column-gap: .42rem !important;
+    column-gap: clamp(.22rem, 1.15cqi, .34rem) !important;
     height: auto !important;
     min-height: 0 !important;
-    padding: .38rem .46rem !important;
+    padding: clamp(.24rem, 1.1cqi, .34rem) clamp(.28rem, 1.25cqi, .38rem) !important;
   }
 
   .site-shell[data-root-focus="true"]
@@ -49,16 +239,14 @@
     ) .bf-machine-node__icon-plate {
     position: relative !important;
     inset: auto !important;
-    left: auto !important;
-    top: auto !important;
     grid-column: 1 !important;
     grid-row: 1 !important;
     justify-self: start !important;
     align-self: center !important;
-    width: 2rem !important;
-    height: 2rem !important;
+    width: clamp(1.5rem, 7cqi, 1.8rem) !important;
+    height: clamp(1.5rem, 7cqi, 1.8rem) !important;
     margin: 0 !important;
-    padding: .2rem !important;
+    padding: .15rem !important;
     transform: none !important;
   }
 
@@ -77,7 +265,7 @@
     grid-row: 1 !important;
     align-content: center !important;
     justify-items: start !important;
-    gap: .1rem !important;
+    gap: .06rem !important;
     width: 100% !important;
     min-width: 0 !important;
     min-height: 0 !important;
@@ -99,7 +287,7 @@
     align-self: end !important;
     margin: 0 !important;
     padding: 0 !important;
-    font-size: .48rem !important;
+    font-size: clamp(.38rem, 1.7cqi, .46rem) !important;
     line-height: 1.05 !important;
     text-align: left !important;
     white-space: nowrap !important;
@@ -120,8 +308,8 @@
     max-width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    font-size: clamp(.74rem, 1.45vw, .92rem) !important;
-    line-height: 1.04 !important;
+    font-size: clamp(.66rem, 3.1cqi, .82rem) !important;
+    line-height: 1.02 !important;
     text-align: left !important;
     overflow-wrap: normal !important;
     white-space: nowrap !important;
