@@ -35,6 +35,16 @@ type AlignedCardView = {
   relations: CardRelation[];
 };
 
+type PipeSeed = {
+  key: string;
+  tone: string;
+  focus: number;
+  fromId: string;
+  toId: string;
+  fromRect: DOMRect;
+  toRect: DOMRect;
+};
+
 type PipeView = {
   key: string;
   tone: string;
@@ -258,41 +268,119 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         }];
       }).sort((left, right) => left.anchor - right.anchor);
 
-      const pipeCandidates = new Map<string, PipeView>();
-      for (const card of nextCards) {
-        const primary = card.relations[0];
-        if (!primary) continue;
+      const visibleCardIds = new Set(nextCards.map((card) => card.sourceId));
+      const focusById = new Map(nextCards.map((card) => [card.sourceId, card.focus] as const));
 
-        const fromCard = cardById.get(primary.fromId);
-        const toCard = cardById.get(primary.toId);
-        if (!fromCard || !toCard) continue;
+      // Pipes describe topology, not just the cards currently mirrored in the
+      // gutter. Keep an edge alive when either endpoint is visible and the other
+      // endpoint still belongs to the current machine projection. This lets a
+      // relation such as About -> Research continue into the viewport after the
+      // About card itself has scrolled away.
+      const pipeSeeds = labMachineEdges.flatMap<PipeSeed>((edge) => {
+        const fromCard = cardById.get(edge.from);
+        const toCard = cardById.get(edge.to);
+        if (!fromCard || !toCard) return [];
+        if (!visibleCardIds.has(edge.from) && !visibleCardIds.has(edge.to)) return [];
 
-        const fromRect = fromCard.getBoundingClientRect();
-        const toRect = toCard.getBoundingClientRect();
-        const rightmostCardEdge = Math.max(fromRect.right, toRect.right);
-        const busMinimum = Math.min(rightmostCardEdge + 5, gutterRect.left - 4);
-        const busX = Math.round(clamp(gutterRect.left - 10, busMinimum, gutterRect.left - 4));
-        const candidate: PipeView = {
-          key: primary.edgeKey,
-          tone: card.sourceTone,
-          focus: card.focus,
-          fromId: primary.fromId,
-          toId: primary.toId,
-          fromX: Math.round(fromRect.right + 1),
-          fromY: Math.round(fromRect.top + fromRect.height / 2),
-          busX,
-          toX: Math.round(toRect.right + 1),
-          toY: Math.round(toRect.top + toRect.height / 2),
-        };
+        const peripheralId = edge.from === "research"
+          ? edge.to
+          : edge.to === "research"
+            ? edge.from
+            : edge.from;
+        const toneCard = cardById.get(peripheralId) ?? fromCard;
+        const tone = window.getComputedStyle(toneCard).getPropertyValue("--tone").trim() || "#8eb8cc";
+        const focus = Math.max(focusById.get(edge.from) ?? 0.12, focusById.get(edge.to) ?? 0.12);
 
-        const existing = pipeCandidates.get(candidate.key);
-        if (!existing || candidate.focus > existing.focus) {
-          pipeCandidates.set(candidate.key, candidate);
-        }
+        return [{
+          key: `${edge.from}->${edge.to}:${edge.relation}`,
+          tone,
+          focus,
+          fromId: edge.from,
+          toId: edge.to,
+          fromRect: fromCard.getBoundingClientRect(),
+          toRect: toCard.getBoundingClientRect(),
+        }];
+      });
+
+      // Shared nodes need physical ports of their own. Fan incident edges across
+      // a bounded segment of the card edge so multiple Research connections do
+      // not paint the same horizontal segment on top of one another.
+      const incidentsByNode = new Map<string, Array<{ key: string; otherY: number }>>();
+      const addIncident = (nodeId: string, key: string, otherY: number) => {
+        const incidents = incidentsByNode.get(nodeId) ?? [];
+        incidents.push({ key, otherY });
+        incidentsByNode.set(nodeId, incidents);
+      };
+
+      for (const seed of pipeSeeds) {
+        addIncident(seed.fromId, seed.key, seed.toRect.top + seed.toRect.height / 2);
+        addIncident(seed.toId, seed.key, seed.fromRect.top + seed.fromRect.height / 2);
       }
 
-      const nextPipes = Array.from(pipeCandidates.values())
-        .sort((left, right) => left.fromY - right.fromY);
+      const portYByEdgeNode = new Map<string, number>();
+      for (const [nodeId, incidents] of incidentsByNode) {
+        const card = cardById.get(nodeId);
+        if (!card) continue;
+
+        const rect = card.getBoundingClientRect();
+        const sorted = [...incidents].sort((left, right) =>
+          left.otherY - right.otherY || left.key.localeCompare(right.key),
+        );
+        const usableSpread = Math.max(0, Math.min(64, rect.height - 24));
+        const startY = rect.top + rect.height / 2 - usableSpread / 2;
+
+        sorted.forEach((incident, index) => {
+          const y = sorted.length === 1
+            ? rect.top + rect.height / 2
+            : startY + usableSpread * (index / (sorted.length - 1));
+          portYByEdgeNode.set(`${incident.key}:${nodeId}`, Math.round(y * 10) / 10);
+        });
+      }
+
+      // Give every visible local edge an independent vertical bus lane. Longer
+      // spans use the outer lanes, producing a nested fan rather than coincident
+      // trunks. Endpoint port fan-out above removes the remaining shared segments.
+      const rightmostCardEdge = pipeSeeds.reduce(
+        (rightmost, seed) => Math.max(rightmost, seed.fromRect.right, seed.toRect.right),
+        0,
+      );
+      const busRight = gutterRect.left - 4;
+      const busLeft = Math.min(rightmostCardEdge + 5, busRight - 2);
+      const laneOrder = [...pipeSeeds].sort((left, right) => {
+        const leftSpan = Math.abs(
+          (portYByEdgeNode.get(`${left.key}:${left.toId}`) ?? left.toRect.top + left.toRect.height / 2)
+          - (portYByEdgeNode.get(`${left.key}:${left.fromId}`) ?? left.fromRect.top + left.fromRect.height / 2),
+        );
+        const rightSpan = Math.abs(
+          (portYByEdgeNode.get(`${right.key}:${right.toId}`) ?? right.toRect.top + right.toRect.height / 2)
+          - (portYByEdgeNode.get(`${right.key}:${right.fromId}`) ?? right.fromRect.top + right.fromRect.height / 2),
+        );
+        return rightSpan - leftSpan || left.key.localeCompare(right.key);
+      });
+      const laneXByEdge = new Map<string, number>();
+      const busSpan = Math.max(2, busRight - busLeft);
+
+      laneOrder.forEach((seed, index) => {
+        const fraction = laneOrder.length === 1
+          ? 0.5
+          : (laneOrder.length - index) / (laneOrder.length + 1);
+        laneXByEdge.set(seed.key, Math.round((busLeft + busSpan * fraction) * 10) / 10);
+      });
+
+      const nextPipes = pipeSeeds.map<PipeView>((seed) => ({
+        key: seed.key,
+        tone: seed.tone,
+        focus: seed.focus,
+        fromId: seed.fromId,
+        toId: seed.toId,
+        fromX: Math.round((seed.fromRect.right + 1) * 10) / 10,
+        fromY: portYByEdgeNode.get(`${seed.key}:${seed.fromId}`)
+          ?? Math.round((seed.fromRect.top + seed.fromRect.height / 2) * 10) / 10,
+        busX: laneXByEdge.get(seed.key) ?? Math.round((gutterRect.left - 8) * 10) / 10,
+        toX: Math.round((seed.toRect.right + 1) * 10) / 10,
+        toY: portYByEdgeNode.get(`${seed.key}:${seed.toId}`)
+          ?? Math.round((seed.toRect.top + seed.toRect.height / 2) * 10) / 10,
+      })).sort((left, right) => left.fromY - right.fromY || left.key.localeCompare(right.key));
 
       setAlignedCards((current) => sameCards(current, nextCards) ? current : nextCards);
       setPipes((current) => samePipes(current, nextPipes) ? current : nextPipes);
