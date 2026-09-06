@@ -2,7 +2,8 @@
  * Mobile/tablet card-set projection for the physical Lab Machine.
  *
  * The authored desktop machine becomes a compact ordered rack below the
- * 1025px apparatus breakpoint. Tour + About form a small launcher row; the
+ * 1025px apparatus breakpoint. Tour + About form a small launcher row;
+ * People + Products + Publications form a compact three-card row; the
  * remaining cards retain their readable boundary surfaces.
  */
 
@@ -10,15 +11,15 @@
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"] .bf-machine__apparatus {
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
     grid-auto-flow: row !important;
     grid-auto-rows: max-content !important;
     align-items: start !important;
-    gap: .42rem !important;
+    gap: .36rem !important;
   }
 
   /* Desktop nodes carry inline named grid areas. The responsive rack owns
-   * placement instead: ordinary cards span the rack, with Tour/About explicit. */
+   * placement instead: ordinary cards span the rack, with compact rows explicit. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-node[data-node-id] {
@@ -68,12 +69,12 @@
   }
 
   /* Deterministic first row: these direct-child selectors outrank the generic
-   * full-width card rule above. */
+   * full-width card rule above. Six tracks keep the launcher row exactly 50/50. */
   .site-shell[data-root-focus="true"]
     .physical-machine-experience
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-node[data-node-id="tour"] {
-    grid-column: 1 !important;
+    grid-column: 1 / 4 !important;
     grid-row: 1 !important;
     order: 0 !important;
     align-self: stretch !important;
@@ -83,15 +84,43 @@
     .physical-machine-experience
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
-    grid-column: 2 !important;
+    grid-column: 4 / 7 !important;
     grid-row: 1 !important;
     order: 0 !important;
     align-self: stretch !important;
   }
 
-  .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] { order: 1 !important; }
-  .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] { order: 2 !important; }
-  .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="publications"] { order: 3 !important; }
+  /* Second row: three equal navigation plates. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+    grid-column: 1 / 3 !important;
+    grid-row: 2 !important;
+    order: 1 !important;
+    align-self: stretch !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+    grid-column: 3 / 5 !important;
+    grid-row: 2 !important;
+    order: 2 !important;
+    align-self: stretch !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+    grid-column: 5 / 7 !important;
+    grid-row: 2 !important;
+    order: 3 !important;
+    align-self: stretch !important;
+  }
+
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] { order: 4 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"] { order: 5 !important; }
   .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"] { order: 6 !important; }
@@ -124,6 +153,167 @@
     > .bf-machine-node__face {
     height: auto !important;
     min-height: 6.75rem !important;
+  }
+
+  /* People + Products + Publications are vertical navigation plates. The DOM
+   * header becomes transparent to the grid so the visible order is precisely:
+   * eyebrow -> icon -> title. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) {
+    height: 6.15rem !important;
+    min-height: 6.15rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) > .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto 2.05rem auto !important;
+    align-content: center !important;
+    justify-items: center !important;
+    height: 6.15rem !important;
+    min-height: 6.15rem !important;
+    padding: .22rem .18rem .28rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) .bf-machine-node__boundary {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header {
+    display: contents !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > span {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    align-self: end !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: .22rem .12rem .08rem !important;
+    color: var(--tone) !important;
+    font-size: .46rem !important;
+    line-height: 1.05 !important;
+    letter-spacing: .065em !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) .bf-machine-node__icon-plate {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    margin: 0 !important;
+    padding: .2rem !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > strong {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    justify-self: center !important;
+    align-self: start !important;
+    display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: .08rem .12rem .3rem !important;
+    color: #e4e7e8 !important;
+    font-size: clamp(.68rem, 2vw, .82rem) !important;
+    line-height: 1.02 !important;
+    text-align: center !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > span::before,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > span::after,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > strong::before,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > strong::after {
+    display: none !important;
+    content: none !important;
   }
 
   /* Tour + About are fixed compact launchers: icon, eyebrow and title only. */
@@ -353,7 +543,7 @@
     min-height: 0 !important;
   }
 
-  /* Structural reveal narrows the machine, so the paired launchers become
+  /* Structural reveal narrows the machine, so both compact rows become
    * stacked full-width cards without changing membership. */
   .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
     .bf-machine[data-skin="physical"] .bf-machine__apparatus {
@@ -362,9 +552,65 @@
 
   .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
     .bf-machine[data-skin="physical"]
-    .bf-machine__apparatus > .bf-machine-node:is([data-node-id="tour"], [data-node-id="about"]) {
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="tour"],
+      [data-node-id="about"],
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) {
     grid-column: 1 / -1 !important;
     grid-row: auto !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) > .bf-machine-node__face {
+    grid-template-rows: auto auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: .38rem .34rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > span {
+    grid-row: 1 !important;
+    padding: .08rem .1rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > strong {
+    grid-row: 2 !important;
+    padding: .1rem !important;
   }
 
   .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
@@ -375,7 +621,7 @@
 }
 
 /* The relations control is part of the mobile machine chrome. Reserve its own
- * narrow band so it no longer paints over the Tour/About launcher row. */
+ * narrow band so it no longer paints over the compact navigation rows. */
 @media (max-width: 768px) {
   .physical-machine-experience__fit-stage > .bf-mobile-machine-structure {
     height: 3.35rem !important;
