@@ -1,0 +1,129 @@
+/*
+ * Intermediate responsive density for the public navigation row.
+ *
+ * The six-track rack topology is unchanged. At ordinary responsive widths the
+ * three public navigation cards have enough horizontal room to use a compact
+ * icon-left / label-right grammar. Ultra-small screens keep the vertical
+ * eyebrow -> icon -> title projection defined by mobile-machine-card-flow.css.
+ */
+
+@media (min-width: 481px) and (max-width: 1024px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) > .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: 2.1rem minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    column-gap: .42rem !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: .38rem .46rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) .bf-machine-node__icon-plate {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    width: 2rem !important;
+    height: 2rem !important;
+    margin: 0 !important;
+    padding: .2rem !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-content: center !important;
+    justify-items: start !important;
+    gap: .1rem !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border-bottom: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > span {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: end !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: .48rem !important;
+    line-height: 1.05 !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) header > strong {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    justify-self: start !important;
+    align-self: start !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: clamp(.74rem, 1.45vw, .92rem) !important;
+    line-height: 1.04 !important;
+    text-align: left !important;
+    overflow-wrap: normal !important;
+    white-space: nowrap !important;
+  }
+}
