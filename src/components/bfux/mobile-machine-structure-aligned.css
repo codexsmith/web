@@ -1,0 +1,139 @@
+/*
+ * Source-aligned mobile relation rail.
+ *
+ * The base structure stylesheet owns reveal geometry and machine contraction.
+ * This layer makes the gutter a literal side-by-side projection: relation
+ * plates are positioned against the source card that owns them rather than
+ * against one inferred "active" node.
+ */
+
+@media (max-width: 768px) {
+  .bf-mobile-machine-structure[data-open="true"]
+    .bf-mobile-machine-structure__gutter {
+    display: block;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .bf-mobile-machine-structure__relations {
+    position: absolute;
+    inset: 0;
+    display: block;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .bf-mobile-machine-structure__relations::before {
+    top: 0;
+    bottom: 0;
+    left: .72rem;
+    background: linear-gradient(180deg, transparent, #526b77 7%, #526b77 93%, transparent);
+    opacity: .82;
+  }
+
+  .bf-mobile-machine-structure__relations[data-empty="true"]::before {
+    opacity: .28;
+  }
+
+  .bf-mobile-machine-structure__relation {
+    --bf-relation-source-tone: #8eb8cc;
+    position: absolute;
+    left: 1.18rem;
+    right: .06rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+    gap: .13rem .28rem;
+    min-width: 0;
+    margin: 0;
+    padding: .4rem .4rem .38rem .48rem;
+    transform: translateY(-50%);
+    border: 1px solid #31434b;
+    border-left-color: var(--bf-relation-source-tone);
+    border-radius: 6px;
+    background: linear-gradient(180deg, #111b20f2, #0a1216f2);
+    box-shadow: 0 5px 14px #0008, inset 0 1px #ffffff08;
+  }
+
+  .bf-mobile-machine-structure__relation::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    width: .46rem;
+    height: 1px;
+    transform: translateY(-50%);
+    background: color-mix(in srgb, var(--bf-relation-source-tone) 76%, #536b76);
+  }
+
+  .bf-mobile-machine-structure__relation > i {
+    top: 50%;
+    left: -.69rem;
+    width: .45rem;
+    height: .45rem;
+    border-color: var(--bf-relation-source-tone);
+    background: #0d171b;
+    box-shadow:
+      0 0 0 2px #0d171b,
+      0 0 7px color-mix(in srgb, var(--bf-relation-source-tone) 34%, transparent);
+  }
+
+  .bf-mobile-machine-structure__source {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: color-mix(in srgb, var(--bf-relation-source-tone) 72%, #9fb1b8);
+    font: 800 .4rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: .1em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .bf-mobile-machine-structure__relation small {
+    grid-column: 1;
+    grid-row: 2;
+    color: #8eb8cc;
+    overflow-wrap: anywhere;
+  }
+
+  .bf-mobile-machine-structure__relation strong {
+    grid-column: 1;
+    grid-row: 3;
+    color: #e2e8e6;
+    font: 650 .66rem/1.15 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    overflow-wrap: anywhere;
+  }
+
+  .bf-mobile-machine-structure__arrow {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: end;
+    justify-self: end;
+    color: color-mix(in srgb, var(--bf-relation-source-tone) 58%, #6f858e);
+    font: 800 .6rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .bf-mobile-machine-structure__relation[data-direction="inbound"] {
+    border-left-color: var(--bf-relation-source-tone);
+  }
+
+  .bf-mobile-machine-structure__relation[data-direction="inbound"] > i {
+    border-color: var(--bf-relation-source-tone);
+  }
+}
+
+@media (max-width: 430px) {
+  .bf-mobile-machine-structure__relation {
+    left: 1.08rem;
+    right: 0;
+    padding: .36rem .31rem .34rem .4rem;
+  }
+
+  .bf-mobile-machine-structure__relation > i {
+    left: -.62rem;
+  }
+}
