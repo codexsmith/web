@@ -203,6 +203,42 @@
     transform: none !important;
   }
 
+  /* The older mobile projection fixes every SVG at 1.8rem. Compact plates can
+   * be smaller than that, so the glyph itself must scale inside the well. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) .bf-machine-node__icon-well {
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) .bf-machine-node__icon-well svg {
+    display: block !important;
+    width: 76% !important;
+    height: 76% !important;
+    max-width: 76% !important;
+    max-height: 76% !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
   .site-shell[data-root-focus="true"]
     .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
     .bf-machine[data-skin="physical"]
