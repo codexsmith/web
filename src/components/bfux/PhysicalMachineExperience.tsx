@@ -12,6 +12,7 @@ import "./five-minute-tour-fit.css";
 import "./mobile-machine-card-flow.css";
 import "./mobile-machine-card-scale.css";
 import "./mobile-machine-full-flow.css";
+import "./adaptive-machine-card.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 const desktopFitQuery = "(min-width: 1025px)";

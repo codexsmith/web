@@ -30,7 +30,7 @@ This is intentionally a short snapshot. Git history preserves the full sequence 
 
 Proceed directly with the first consolidation slice:
 
-- annotate stable card facets in the DOM;
+- reuse the existing stable card facet classes rather than adding a second semantic DOM vocabulary;
 - make physical machine cards inline-size query containers;
 - establish shared `Control -> Plate -> Micro` projection behavior from actual card width;
 - retain a hub-specific Research policy;
