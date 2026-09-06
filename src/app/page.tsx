@@ -21,6 +21,7 @@ import "./proto/capital/capital-frame-stewardship-polish.css";
 import "./proto/capital/capital-frame-cycle-loop.css";
 import "./mobile-capital-projection-v2.css";
 import "./mobile-apparatus-layering.css";
+import "./mobile-machine-row-projection.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },

@@ -1,0 +1,359 @@
+/*
+ * Mobile machine row projection.
+ *
+ * The relation gutter can leave the machine rail too narrow for the ordinary
+ * midsize controls while still leaving substantially more room than a true
+ * micro plate needs. This layer owns that intermediate geometry band.
+ *
+ * Projection rule:
+ *   micro        < ~8.25rem  -> existing identity-only plates
+ *   row      8.25–13.75rem  -> icon | eyebrow + title
+ *   midsize      > ~13.75rem -> existing richer responsive controls
+ *
+ * Width is the actual rack inline size, not the viewport width.
+ */
+
+@container bf-mobile-nav-rack (min-width: 8.25rem) and (max-width: 13.75rem) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card) {
+    --bf-row-projection-icon: clamp(1.4rem, 17cqi, 1.72rem);
+    --bf-row-projection-gap: clamp(.24rem, 3.1cqi, .4rem);
+    --bf-row-projection-pad-x: clamp(.3rem, 3.8cqi, .46rem);
+    --bf-row-projection-pad-y: clamp(.28rem, 3.3cqi, .42rem);
+    --bf-row-projection-min-height: clamp(3.35rem, 34cqi, 3.8rem);
+    height: auto !important;
+    min-height: var(--bf-row-projection-min-height) !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    > .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: var(--bf-row-projection-icon) minmax(0, 1fr) !important;
+    grid-template-rows: 1fr !important;
+    align-items: center !important;
+    justify-items: stretch !important;
+    column-gap: var(--bf-row-projection-gap) !important;
+    height: auto !important;
+    min-height: var(--bf-row-projection-min-height) !important;
+    max-height: none !important;
+    padding: var(--bf-row-projection-pad-y) var(--bf-row-projection-pad-x) !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    .bf-machine-node__icon-plate {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    display: grid !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    place-items: center !important;
+    justify-self: start !important;
+    align-self: center !important;
+    width: var(--bf-row-projection-icon) !important;
+    height: var(--bf-row-projection-icon) !important;
+    margin: 0 !important;
+    padding: .13rem !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    .bf-machine-node__icon-well {
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    .bf-machine-node__icon-well svg {
+    display: block !important;
+    width: 82% !important;
+    height: 82% !important;
+    max-width: 82% !important;
+    max-height: 82% !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-content: center !important;
+    justify-items: start !important;
+    gap: clamp(.055rem, .9cqi, .1rem) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    text-align: left !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    header > span {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: end !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    color: var(--tone) !important;
+    font-size: clamp(.36rem, 4cqi, .44rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: .055em !important;
+    text-align: left !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    header > strong {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    justify-self: start !important;
+    align-self: start !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    color: #e4e7e8 !important;
+    font-size: clamp(.68rem, 7.2cqi, .82rem) !important;
+    line-height: 1.02 !important;
+    text-align: left !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    :is(header > span, header > strong)::before,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    :is(header > span, header > strong)::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id]:not(.bf-machine-tour-card)
+    :is(.bf-machine-node__boundary, footer) {
+    display: none !important;
+  }
+
+  /* Research remains the structural hub. It uses the same row grammar but
+   * retains a taller chassis so several relation endpoints can fan across its
+   * boundary without collapsing onto one another. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    --bf-row-projection-icon: clamp(1.58rem, 19cqi, 1.88rem);
+    --bf-row-projection-min-height: clamp(4.45rem, 47cqi, 5.05rem);
+  }
+
+  /* Tour has a slightly different DOM, but at this scale it is still the same
+   * semantic object: icon on the left, START HERE over its compact identity. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"] {
+    --bf-row-projection-icon: clamp(1.45rem, 17cqi, 1.72rem);
+    --bf-row-projection-gap: clamp(.24rem, 3.1cqi, .4rem);
+    --bf-row-projection-pad-x: clamp(.3rem, 3.8cqi, .46rem);
+    --bf-row-projection-pad-y: clamp(.28rem, 3.3cqi, .42rem);
+    --bf-row-projection-min-height: clamp(3.45rem, 35cqi, 3.85rem);
+    display: block !important;
+    height: auto !important;
+    min-height: var(--bf-row-projection-min-height) !important;
+    max-height: none !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    > .bf-machine-node__face {
+    display: block !important;
+    height: auto !important;
+    min-height: var(--bf-row-projection-min-height) !important;
+    max-height: none !important;
+    padding: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact {
+    display: grid !important;
+    grid-template-columns: var(--bf-row-projection-icon) minmax(0, 1fr) !important;
+    grid-template-rows: 1fr !important;
+    align-items: center !important;
+    column-gap: var(--bf-row-projection-gap) !important;
+    min-height: var(--bf-row-projection-min-height) !important;
+    padding: var(--bf-row-projection-pad-y) var(--bf-row-projection-pad-x) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-node__icon-plate {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    top: auto !important;
+    display: grid !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    place-items: center !important;
+    justify-self: start !important;
+    align-self: center !important;
+    width: var(--bf-row-projection-icon) !important;
+    height: var(--bf-row-projection-icon) !important;
+    margin: 0 !important;
+    padding: .13rem !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-node__icon-well {
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-node__icon-well svg {
+    width: 82% !important;
+    height: 82% !important;
+    max-width: 82% !important;
+    max-height: 82% !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-content: center !important;
+    justify-items: start !important;
+    gap: clamp(.055rem, .9cqi, .1rem) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > header > span {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    color: var(--tone) !important;
+    font-size: clamp(.34rem, 3.8cqi, .42rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: .045em !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > header > strong {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    color: #e4e7e8 !important;
+    font-size: 0 !important;
+    line-height: 1.02 !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-tour-card__compact > header > strong::after {
+    content: "Tour" !important;
+    display: inline !important;
+    color: inherit !important;
+    font: 600 clamp(.7rem, 7.2cqi, .82rem)/1.02 Georgia, serif !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    .bf-machine-node__boundary {
+    display: none !important;
+  }
+}
