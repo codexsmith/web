@@ -2,14 +2,10 @@
 
 **Parent work item:** `backlog/20_bridge_governance_ops_local_pickup.md`  
 **Checkpoint date:** 2026-09-06  
-**Status:** correctness + provenance + core security are CI-gated; browser mutation, real concurrency, and operator UX remain local  
+**Status:** correctness + provenance + core application security are CI-gated; browser mutation, real concurrency, production outer-access verification, and UX polish remain local  
 **Work stream:** Bridge governance / operations
 
-## Purpose
-
-This checkpoint records what has actually been implemented since the original item-20 handoff so the remaining local pass does not repeat completed work or treat unverified browser/GitHub behavior as proven.
-
-The architectural invariant remains:
+## Current invariant
 
 ```text
 canonical Bridge record
@@ -17,84 +13,61 @@ canonical Bridge record
 -> legal transition
 -> operational queue
 -> append-only provenance event
--> Git commit
--> replay/coherence check
+-> atomic Git commit
+-> epoch + ledger replay
+-> manifest coherence check
 ```
 
 Lifecycle, visibility, and relationship status remain independently governed dimensions.
 
 ---
 
-## Implemented and CI-gated
+## Implemented since the original item-20 handoff
 
-### C. Governance + transition behavior + public/private leakage contracts
+### C. Governance + executable transition contracts — IMPLEMENTED / CI-GATED
 
-The Bridge contract layer now has both static/structural checks and executable behavior checks.
+New checks:
 
 ```text
 scripts/check_bridge_transition_behavior.mjs
 scripts/check_bridge_governance_contracts.mjs
 ```
 
-The executable behavior harness transpiles the real `bridge-governance.ts` and `bridge-transitions.ts` source with the repository's installed TypeScript compiler, then exercises the actual transition functions with Node assertions.
+The behavior checker transpiles the real `bridge-governance.ts` and `bridge-transitions.ts` source with the installed TypeScript compiler and executes the transition functions with Node assertions.
 
-It proves, at code level:
+Covered legal behavior includes:
 
 ```text
 draft -> ready -> sent -> discussion -> scoped -> active -> historical
-```
 
-plus:
-
-```text
 draft -> declined -> draft
 active -> publish -> unpublish
 historical -> publish
 ```
 
-and representative invalid operations including:
+Representative invalid operations are also exercised, including illegal lifecycle jumps, contact outside sent/discussion, publish/unpublish no-ops, incomplete next-action metadata, and missing scoped ownership.
 
-- draft -> sent;
-- draft -> scoped;
-- draft -> active;
-- active -> declined;
-- historical -> draft;
-- publish before active/historical;
-- publish when already public;
-- unpublish when not public;
-- contact outside sent/discussion;
-- incomplete next-action metadata;
-- empty scoped owner.
+Key non-equivalences are executable contracts:
 
-The behavior contract also proves two key non-equivalences:
+- activation does not publish;
+- contact does not advance lifecycle;
+- lifecycle transitions do not silently change visibility.
 
-- activation does **not** publish;
-- contact updates do **not** advance lifecycle.
+The governance checker independently protects:
 
-The independent governance checker additionally protects:
-
-- exact lifecycle transition topology;
+- exact lifecycle topology;
 - lifecycle/relationship tuples;
 - visibility/routing tuples;
-- lifecycle-dependent operational metadata;
-- closure requirements;
-- publish/unpublish guards;
-- reopen reset behavior;
+- operational metadata requirements;
+- closure behavior;
+- reopen reset semantics;
 - generic Bridge-class graph projection;
-- source/class edge deduplication;
-- absence of recipient-specific ids/slugs as public edge targets or labels;
-- public discoverability remaining an explicit `public + public-candidate` state.
+- source/class deduplication;
+- absence of recipient-specific ids/slugs as public graph edge targets or labels.
 
-Still required locally:
+### D. Ledger schema validation — IMPLEMENTED / CI-GATED
 
-- perform the same transitions through the real operator UI against a disposable remote branch;
-- inspect rendered public navigation in a browser.
-
-### D. Ledger schema validation
-
-`src/lib/bridge-event-ledger.ts` now validates event structure and meaning rather than merely parsing JSON Lines.
-
-Validated properties include:
+`src/lib/bridge-event-ledger.ts` now validates event structure and semantics:
 
 - schema version;
 - unique event id;
@@ -105,14 +78,14 @@ Validated properties include:
 - expected source;
 - `commit: "self"` convention;
 - parent Git SHA shape;
-- governance-valid `from` and `to` states;
-- operational metadata validity;
-- evidence consistency with resulting state;
+- governance-valid before/after states;
+- operational metadata;
+- evidence consistency;
 - operation-specific transition semantics.
 
-Malformed or semantically invalid event history fails closed.
+Malformed or semantically invalid history fails closed.
 
-### E. Append-only ledger semantics
+### E. Append-only ledger semantics — IMPLEMENTED FOR OPERATOR PATH / CI-GATED
 
 The operator transaction requires:
 
@@ -120,12 +93,7 @@ The operator transaction requires:
 newLedger = oldLedger + exactlyOneValidEvent
 ```
 
-Runtime enforcement includes:
-
-- old ledger must be an exact prefix of new ledger;
-- exactly one event must be added;
-- duplicate event ids are rejected;
-- the complete resulting ledger must parse and validate before Git blobs are created.
+Runtime enforcement requires exact prefix continuity, exactly one appended event, unique event ids, and a valid resulting ledger before any Git blobs are created.
 
 Independent checker:
 
@@ -133,11 +101,7 @@ Independent checker:
 scripts/check_bridge_ledger_contracts.mjs
 ```
 
-validates the repository's current ledger/replay/coherence state.
-
-A repository-history/PR-prefix checker could add a further historical gate later, but the operator mutation path itself is append-only by construction.
-
-### F. Ledger genesis boundary
+### F. Ledger genesis boundary — IMPLEMENTED
 
 Chosen model:
 
@@ -149,34 +113,27 @@ Canonical genesis file:
 src/content/bridge-ops/epoch.json
 ```
 
-The epoch snapshots the governed state of the ten pre-ledger Bridge records.
+It snapshots the governed state of the ten pre-ledger Bridge records.
 
 Semantics:
 
 - epoch is genesis state, not an operator event;
-- no pre-ledger outreach activity is invented;
+- no pre-ledger outreach history is invented;
 - `commit: "self"` avoids self-referential Git hashing;
-- `parentCommit` anchors the epoch to repository state immediately before creation;
-- `manifestVersion` is historical metadata, not a lock on future manifest versions.
+- `parentCommit` anchors the epoch to prior repository state;
+- `manifestVersion` is historical metadata, not a permanent version lock.
 
-Future Bridges do not mutate the epoch. A special `register` event exists for post-epoch Bridge creation, and the ordinary operator mutation form explicitly excludes `register`.
+Future Bridges use a separately governed `register` event rather than mutating the epoch. The ordinary operator mutation surface explicitly excludes `register`.
 
-### G. Replay + manifest coherence
+### G. Replay + manifest coherence — IMPLEMENTED / CI-GATED
 
-The ledger can reconstruct current governed state from:
+Current governed state is reconstructible from:
 
 ```text
 epoch + ordered events
 ```
 
-Replay rejects:
-
-- events before the epoch;
-- duplicate event ids;
-- unknown Bridge references;
-- discontinuous `from` states;
-- duplicate registration;
-- invalid transition semantics.
+Replay rejects events before epoch, duplicate ids, unknown Bridge references, discontinuous `from` states, duplicate registration, and invalid transition semantics.
 
 Required invariant:
 
@@ -184,78 +141,65 @@ Required invariant:
 replay(epoch, ledger) == current Bridge governed state in manifest
 ```
 
-`src/lib/bridge-ops-store.ts` enforces this:
+`src/lib/bridge-ops-store.ts` enforces this both when the operator surface loads and against candidate manifest + appended event before write blobs are created.
 
-1. when the operator surface loads;
-2. against candidate manifest + appended event before any write blobs are created.
+### H. Core application security — HARDENED / CI-GATED; OUTER BOUNDARY STILL OPEN
 
-A malformed or incoherent history therefore blocks operation rather than becoming a later audit observation.
-
-### H. Core operator security boundary
-
-Implemented and protected by:
+New checker:
 
 ```text
 scripts/check_bridge_ops_security_contracts.mjs
 ```
 
-Current application-level protections:
+Application-level protections now include:
 
 - HMAC-signed session cookie;
 - timing-safe password/signature comparison;
 - signed issued-at timestamp;
 - server-side 12-hour expiry;
-- future-issued session rejection;
+- future-issued-session rejection;
 - `HttpOnly`;
 - `SameSite=Strict`;
 - `Secure` in production;
-- cookie path `/ops/bridges`;
+- path `/ops/bridges`;
 - high cookie priority;
-- path-correct logout by expiring the same cookie tuple;
-- locked/unconfigured surface does not reveal env names, repository, or branch;
-- raw GitHub error bodies are never reflected into operator UI;
-- GitHub failures use sanitized status-class messages;
-- stale-head guard before transaction construction;
+- path-correct logout;
+- locked/unconfigured UI does not expose env names, repository, or branch;
+- raw GitHub response bodies are not reflected into UI errors;
+- sanitized GitHub error categories;
+- explicit stale-head guard;
 - non-forced Git ref update;
-- mutation Server Action requires an authenticated operator session;
-- ordinary mutation surface cannot emit `register`;
-- `/ops/bridges` and `/ops/bridges/events` remain `noindex`, `nofollow`, `nocache`.
+- session-gated mutation Server Action;
+- ordinary mutation path cannot emit `register`;
+- both ops routes remain `noindex`, `nofollow`, `nocache`.
 
-Still open / intentionally not faked with process-local serverless state:
+Still open:
 
 - durable brute-force/rate-limit boundary;
-- outer production access decision (Vercel protection, identity-aware proxy, VPN, IP boundary, or equivalent);
+- production outer-access decision/verification;
 - multi-operator identity model;
 - live Server Action CSRF/origin verification;
-- minimum-permission GitHub token verification against a disposable branch.
+- minimum-permission GitHub token verification on a disposable branch.
 
-Security posture:
+Do not fake durable distributed rate limiting with process-local serverless state.
 
-> `noindex` is not privacy. The application password is one boundary; intentional production exposure should have an appropriate outer access boundary too.
+### J. Failure semantics — PARTIAL / HARDENED
 
-### J. Failure semantics
-
-Improved:
-
-- stale head has a specific refresh/retry error;
-- GitHub auth, permission, missing-resource, validation, rate-limit, and upstream availability errors are categorized without exposing arbitrary upstream payloads;
-- invalid transitions fail before writes;
-- malformed manifest/epoch/ledger/coherence state fails closed;
-- publish/unpublish no-op requests fail explicitly.
+Implemented categories include stale head, GitHub auth/permission/not-found/validation/rate-limit/upstream failures, invalid transition, malformed manifest/epoch/ledger/coherence, and explicit visibility no-op failures.
 
 The full browser error matrix remains local work.
 
 ---
 
-## Bridge-specific CI gate
+## Bridge-specific deployment gate
 
-A dedicated script now exists:
+Dedicated contract command:
 
 ```text
 npm run bridge:contracts
 ```
 
-which runs:
+runs:
 
 ```text
 check_bridge_transition_behavior.mjs
@@ -264,13 +208,13 @@ check_bridge_ledger_contracts.mjs
 check_bridge_ops_security_contracts.mjs
 ```
 
-The production build now begins with:
+The application build begins with:
 
 ```text
 npm run bridge:contracts && next build
 ```
 
-so Vercel executes the Bridge contracts on every non-ignored application build.
+so Vercel executes the Bridge contract stack before compiling the application.
 
 ### Verified Vercel run
 
@@ -280,7 +224,7 @@ Commit:
 4c92ba0100ff43821407ecf3680360cf085f0474
 ```
 
-Vercel build output reported:
+Build output:
 
 ```text
 Bridge transition behavior contracts passed.
@@ -295,23 +239,71 @@ Then:
 Next.js compiled successfully
 TypeScript finished successfully
 101/101 static pages generated
-/ops/bridges          dynamic server route
-/ops/bridges/events   dynamic server route
 Build Completed
 Deployment completed
 ```
 
-This is the first checkpoint where the Bridge contract stack is not only present in the repository but demonstrably executed by the deployment pipeline.
+Vercel deployment state was observed as `READY`.
 
-### Unrelated global contract drift discovered and kept outside item 20
+---
 
-An earlier attempt to gate `next build` on the repository-wide `contracts:check` exposed pre-existing v2 contract drift in `scripts/check_v2_contracts.mjs`: it still references the retired optional catch-all route
+## Runtime access-boundary observations
+
+### Direct deployment URL
+
+The direct Vercel deployment URL returned a Vercel SSO/Deployment Protection redirect rather than exposing the application directly.
+
+Observed response properties included:
+
+```text
+302 Found
+Vercel SSO redirect
+x-robots-tag: noindex
+```
+
+This demonstrates an outer access boundary on the direct deployment URL.
+
+### Production application routes
+
+Using Vercel's authenticated deployment-fetch mechanism, both production paths were inspected:
+
+```text
+/ops/bridges
+/ops/bridges/events
+```
+
+Current app-level behavior is fail-closed because production Bridge operator configuration is absent.
+
+`/ops/bridges` rendered only:
+
+```text
+This route fails closed until its server-side operator boundary is configured.
+Operator configuration is unavailable. No operational state is exposed.
+```
+
+and returned private/no-store cache semantics plus `noindex, nofollow, nocache` metadata.
+
+`/ops/bridges/events` rendered only the authentication boundary and no event data.
+
+Important limitation:
+
+> Vercel's authenticated/share fetch can bypass deployment protection for inspection, so this observation does **not** prove whether the production custom domain has an independent outer access boundary.
+
+Therefore the production access setting still must be checked explicitly **before enabling Bridge operator secrets in production**. Current safety depends on the application failing closed while unconfigured.
+
+---
+
+## Unrelated repository contract drift discovered
+
+An attempt to gate `next build` on the entire repository-wide `contracts:check` exposed pre-existing v2 contract drift in `scripts/check_v2_contracts.mjs`.
+
+It still references the retired optional catch-all route:
 
 ```text
 src/app/[[...slug]]/page.tsx
 ```
 
-while the current application uses:
+while the current application has:
 
 ```text
 src/app/[...slug]/page.tsx
@@ -320,39 +312,19 @@ src/app/page.tsx
 
 and the older root/hero assumptions have also changed.
 
-That is real repository debt, but it is **not a Bridge governance concern**. Item 20 therefore uses the dedicated `bridge:contracts` build gate rather than silently absorbing a broader v2 contract-rewrite work stream.
+That is real repository debt, but it is not Bridge governance work. Item 20 therefore uses the dedicated `bridge:contracts` build gate rather than silently absorbing a separate v2-contract rewrite.
 
-The global `contracts:check` remains available to surface that debt during the larger local verification pass.
-
----
-
-## Vercel schema feedback already incorporated
-
-The first build after making `BridgeEventRecord.from` nullable failed because the event viewer assumed every event had a prior state.
-
-That failure was correct: post-epoch `register` uses:
-
-```text
-from = null
-```
-
-The viewer was repaired to render registration as:
-
-```text
-∅ -> draft
-```
-
-rather than weakening the event model. The corrected viewer subsequently built cleanly.
+The broader `contracts:check` remains useful locally because it continues to expose that debt.
 
 ---
 
-## Remaining high-value local work
+## Remaining local work
 
 ### A. Real operator lifecycle exercise — OPEN
 
-Use a disposable remote branch, never initial mutation testing on `main`.
+Use a disposable remote branch, not `main`.
 
-Exercise through the browser:
+Exercise through the actual browser/Server Action path:
 
 ```text
 draft
@@ -362,108 +334,99 @@ draft
 -> scoped
 -> active
 -> historical
-```
 
-Also:
-
-```text
 draft -> declined -> draft
 active -> publish -> unpublish
 ```
 
-For every action prove:
+For every operation prove:
 
 - manifest validity;
-- exactly one appended event;
-- manifest + ledger land in one commit;
+- exactly one event appended;
+- manifest + ledger in one commit;
 - event `from` equals prior replay state;
 - event `to` equals resulting manifest state;
-- operator reflects committed GitHub state;
-- invalid operations change neither control file.
+- UI reflects the GitHub commit;
+- invalid operations mutate neither control file.
 
-The transition functions themselves now have executable CI coverage; this remaining item is specifically the **browser + Server Action + GitHub transaction** path.
+Transition functions themselves now pass executable CI; this remaining item is specifically the integrated browser + Server Action + GitHub transaction path.
 
-### B. Deliberate real GitHub concurrency race — OPEN
+### B. Real optimistic-concurrency race — OPEN
 
 Use two stale snapshots against the same disposable branch.
 
 Required result:
 
-> at most one stale-head mutation may advance the branch; the other must fail without overwriting the first event/state transition.
-
-Static inspection and unit-like behavior contracts do not substitute for this real API race.
+> at most one stale-head operation advances the branch; the other fails without overwriting the first transition/event.
 
 ### H. Production outer access boundary — OPEN
 
-Before intentionally exposing `/ops/bridges` as an operational production surface, choose and document an outer access boundary.
+Before configuring production Bridge secrets, inspect and choose the actual custom-domain protection posture.
 
-Candidates:
+Possible outer boundaries:
 
-- Vercel Deployment Protection / team authentication;
+- Vercel Deployment Protection/team authentication;
 - identity-aware access proxy;
-- VPN/private network boundary;
-- restrictive IP allowlist where operationally appropriate.
+- VPN/private network;
+- restrictive IP allowlist where appropriate.
 
-Do not simulate durable distributed rate limiting with a process-local serverless counter.
+### I. Operator UX — OPEN
 
-### I. Operator UX refinement — OPEN
-
-Still needed locally:
+Remaining local polish:
 
 - queue-first grouping;
-- stronger stale/overdue treatment;
-- visual distinction between transition, contact, closure, and visibility operations;
-- confirmation for destructive/relationship-significant actions;
-- pending/submission state;
-- success state with resulting commit identity;
+- clearer stale/overdue state;
+- visual distinction between transition/contact/closure/visibility actions;
+- confirmations for destructive/relationship-significant actions;
+- pending state;
+- success state with commit identity;
 - obvious control-surface <-> event-ledger navigation;
-- event filtering by Bridge and operation;
+- event filters;
 - keyboard/focus review;
-- useful mobile inspection behavior;
-- real-browser review of locked, configured, error, empty-ledger, and populated-ledger states.
+- useful mobile inspection;
+- browser review of locked, configured, error, empty-ledger, and populated-ledger states.
 
-It should remain machinery, not public outreach collateral.
+Keep it machinery, not outreach collateral.
 
 ---
 
-## Updated completion map
+## Completion map
 
 | Original item | State | Notes |
 |---|---|---|
-| A. Browser lifecycle proof | OPEN | Transition functions pass CI; browser/Server Action/GitHub path still needs disposable branch |
-| B. Optimistic concurrency race | OPEN | Must exercise real GitHub ref behavior |
-| C. Governance contracts | IMPLEMENTED + CI-GATED | Includes executable transition behavior and public leakage contracts |
+| A. Browser lifecycle proof | OPEN | Function behavior passes CI; integrated path requires disposable branch |
+| B. Optimistic concurrency race | OPEN | Must exercise real GitHub behavior |
+| C. Governance contracts | IMPLEMENTED + CI-GATED | Includes executable transition behavior + leakage contracts |
 | D. Ledger schema validation | IMPLEMENTED + CI-GATED | Runtime + independent checker |
-| E. Append-only semantics | IMPLEMENTED FOR OPERATOR PATH + CI-GATED | Prefix + exactly-one-event enforced before write |
-| F. Genesis boundary | IMPLEMENTED | Explicit immutable epoch model |
-| G. Replay/coherence | IMPLEMENTED + CI-GATED | Fail-closed load + candidate pre-write check |
-| H. Security review | PARTIAL / HARDENED + CI-GATED | App boundary protected; outer access/rate-limit/multi-operator questions remain |
-| I. Operator UX | OPEN | Local visual/interaction pass |
-| J. Failure semantics | PARTIAL / HARDENED | Core categories implemented; browser error matrix remains |
-| Public/private leakage | IMPLEMENTED + CI-GATED | Generic class projection + no recipient edge target leakage |
-| Analytics | DEFERRED CORRECTLY | Wait for real event history and completed local hardening |
-| Agent mutation | DEFERRED CORRECTLY | Human operator boundary must be proven first |
+| E. Append-only semantics | IMPLEMENTED FOR OPERATOR PATH + CI-GATED | Exact prefix + one event before write |
+| F. Genesis boundary | IMPLEMENTED | Explicit epoch |
+| G. Replay/coherence | IMPLEMENTED + CI-GATED | Load-time + candidate pre-write fail-closed checks |
+| H. Security | PARTIAL / HARDENED + CI-GATED | App boundary proven; production outer boundary still open |
+| I. Operator UX | OPEN | Local browser/interaction pass |
+| J. Failure semantics | PARTIAL / HARDENED | Browser matrix remains |
+| Public/private leakage | IMPLEMENTED + CI-GATED | Generic class projection only |
+| Analytics | DEFERRED CORRECTLY | Wait for real history + local hardening |
+| Agent mutation | DEFERRED CORRECTLY | Human operator chain must be proven first |
 
 ---
 
 ## Resume point
 
-Do **not** add more lifecycle or provenance abstractions next.
-
-The next trustworthy move is local execution:
+Do not add more lifecycle/provenance abstractions next.
 
 ```text
 latest main
 -> disposable remote branch
 -> npm run bridge:contracts
 -> npm run typecheck
+-> configure local/test operator secrets
 -> authenticated browser exercise
 -> full lifecycle
 -> deliberate stale-head race
--> inspect Git commits + ledger replay
+-> inspect commits + ledger replay
 -> UX/failure polish discovered by use
--> production access-boundary decision
+-> verify production custom-domain access boundary
 -> normal PR
 ```
 
-The machinery is now substantially constrained and continuously checked. The remaining question is operational: whether the real browser + Server Action + GitHub + deployment chain behaves exactly as the model requires under success, invalid input, and concurrency.
+The model and its guards are now continuously executable. The remaining question is operational: whether the real browser + Server Action + GitHub chain behaves exactly as required under success, invalid input, and concurrency.
