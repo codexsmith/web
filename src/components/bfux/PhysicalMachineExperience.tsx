@@ -12,6 +12,7 @@ import "./five-minute-tour-fit.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 const desktopFitQuery = "(min-width: 1025px)";
+const mobileProjectionQuery = "(max-width: 768px)";
 const targetMachineWidthRatio = 0.88;
 const machineWidthInUnits = 100;
 // Let the first outline register before routing, but do not make the animation
@@ -163,6 +164,26 @@ export function PhysicalMachineExperience({
       ) ?? null;
       setApparatusHost(apparatus);
       setAboutHost(about);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeResolution, sectionSurface]);
+
+  useEffect(() => {
+    if (sectionSurface) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      if (!window.matchMedia(mobileProjectionQuery).matches) return;
+
+      const research = machineHostRef.current?.querySelector<HTMLElement>(
+        `.bf-machine[data-skin="physical"][data-resolution="${activeResolution}"] .bf-machine__apparatus > .bf-machine-node[data-node-id="research"]`,
+      ) ?? null;
+
+      research?.scrollIntoView({
+        behavior: "auto",
+        block: "start",
+        inline: "nearest",
+      });
     });
 
     return () => window.cancelAnimationFrame(frame);
