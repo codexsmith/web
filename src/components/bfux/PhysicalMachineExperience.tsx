@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type 
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
+import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
 import { startMachineCardFlight } from "./MachineCardFlightLayer";
 import "./physical-machine-experience.css";
 import "./five-minute-tour.css";
@@ -184,6 +185,7 @@ export function PhysicalMachineExperience({
           className="physical-machine-experience__fit-stage"
           style={fitStyle}
         >
+          <MobileMachineStructureLayer resolution={activeResolution} />
           <div
             className="physical-machine-experience__machine-stack"
             ref={machineStackRef}
