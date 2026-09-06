@@ -24,6 +24,7 @@ import "./mobile-capital-projection-v2.css";
 import "./mobile-apparatus-layering.css";
 import "./mobile-machine-row-projection.css";
 import "./mobile-machine-noncrossing-pipes.css";
+import "./mobile-machine-scroll-projection.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },
