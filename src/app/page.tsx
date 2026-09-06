@@ -4,6 +4,7 @@ import { parseProcessScope } from "@/lib/bfl-process";
 import { parseProjection } from "@/lib/view-projection";
 import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
+import { MobileCapitalProjectionControls } from "@/components/bfux/MobileCapitalProjectionControls";
 import { MobileCapitalStructureLayer } from "@/components/bfux/MobileCapitalStructureLayer";
 import "./world/world-machine-preview.css";
 import "./lab-machine-responsive.css";
@@ -19,6 +20,7 @@ import "./proto/capital/capital-frame-surface-system.css";
 import "./proto/capital/capital-frame-machine-function-control-flags.css";
 import "./proto/capital/capital-frame-stewardship-polish.css";
 import "./proto/capital/capital-frame-cycle-loop.css";
+import "./mobile-capital-projection-v2.css";
 import "./mobile-apparatus-layering.css";
 
 export const metadata: Metadata = {
@@ -61,6 +63,7 @@ export default async function HomePage({ searchParams }: Props) {
 
   return (
     <LabMachineHomeBoundary resetTraversal={!section}>
+      <MobileCapitalProjectionControls />
       {initialSurface === "capital" && !section ? <MobileCapitalStructureLayer /> : null}
       <LabMachineWorld
         section={section}

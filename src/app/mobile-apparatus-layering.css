@@ -25,6 +25,32 @@
 }
 
 @media (max-width: 768px) {
+  /* Mobile Capital v2 is activated by the controller's state marker on the
+   * canonical Capital page. Keep the center engine in normal flow while the
+   * left/right consoles are removed until their bumper is opened. */
+  .capital-prototype-page[data-mobile-capital-rail]
+    .capital-frame__input-console,
+  .capital-prototype-page[data-mobile-capital-rail]
+    .capital-frame__diligence-console {
+    display: none !important;
+  }
+
+  .capital-prototype-page[data-mobile-capital-rail]
+    .capital-frame__body {
+    display: block !important;
+    padding: .55rem !important;
+  }
+
+  .capital-prototype-page[data-mobile-capital-rail]
+    .capital-frame__engine {
+    display: grid !important;
+    gap: .5rem !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    container-name: capital-mobile-engine;
+    container-type: inline-size;
+  }
+
   /* Capital keeps its canonical mobile composition. Opening Conversion reserves
    * a sibling strip for the gutter instead of turning that reserve into giant
    * internal page padding. */
@@ -45,7 +71,7 @@
   }
 
   /* Main's mobile Capital grammar intentionally keeps the machine-function
-   * controls two-up. Do not let the gutter stylesheet replace that topology. */
+   * controls two-up while the Conversion gutter is consuming page width. */
   body:has(.bf-mobile-capital-structure[data-open="true"])
     .capital-prototype-page[data-machine-surface="capital"]
     .capital-frame__machine-functions {
