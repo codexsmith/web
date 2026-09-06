@@ -9,6 +9,7 @@ import { startMachineCardFlight } from "./MachineCardFlightLayer";
 import "./physical-machine-experience.css";
 import "./five-minute-tour.css";
 import "./five-minute-tour-fit.css";
+import "./mobile-machine-card-flow.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 const desktopFitQuery = "(min-width: 1025px)";
@@ -68,6 +69,7 @@ export function PhysicalMachineExperience({
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
   const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
+  const [isMobileProjection, setIsMobileProjection] = useState(false);
   const machineHostRef = useRef<HTMLDivElement>(null);
   const machineStackRef = useRef<HTMLDivElement>(null);
   const hasMeasuredInitialFitRef = useRef(false);
@@ -75,6 +77,7 @@ export function PhysicalMachineExperience({
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
+  const tourHost = activeResolution === "focus" || isMobileProjection ? apparatusHost : aboutHost;
 
   const openNodeWithFlight = (nodeId: string, source: HTMLElement) => {
     if (!openNode || cardFlightNavigateTimerRef.current !== null) return;
@@ -112,6 +115,15 @@ export function PhysicalMachineExperience({
     if (cardFlightNavigateTimerRef.current !== null) {
       window.clearTimeout(cardFlightNavigateTimerRef.current);
     }
+  }, []);
+
+  useEffect(() => {
+    const query = window.matchMedia(mobileProjectionQuery);
+    const syncProjection = () => setIsMobileProjection(query.matches);
+
+    syncProjection();
+    query.addEventListener("change", syncProjection);
+    return () => query.removeEventListener("change", syncProjection);
   }, []);
 
   useLayoutEffect(() => {
@@ -227,36 +239,22 @@ export function PhysicalMachineExperience({
         </div>
       )}
 
-      {!sectionSurface && activeResolution === "focus" && aboutHost
+      {!sectionSurface && aboutHost
         ? createPortal(
             <div className="bf-machine-tour-about-dock" aria-hidden="true">
               <i />
               <i />
             </div>,
             aboutHost,
-            "five-minute-tour-core-dock",
+            activeResolution === "focus" ? "five-minute-tour-core-dock" : "five-minute-tour-full-dock",
           )
         : null}
 
-      {!sectionSurface && activeResolution === "focus" && apparatusHost
+      {!sectionSurface && tourHost
         ? createPortal(
             <FiveMinuteTourCard resolution={activeResolution} />,
-            apparatusHost,
-            "five-minute-tour-core",
-          )
-        : null}
-
-      {!sectionSurface && activeResolution === "mid" && aboutHost
-        ? createPortal(
-            <>
-              <div className="bf-machine-tour-about-dock" aria-hidden="true">
-                <i />
-                <i />
-              </div>
-              <FiveMinuteTourCard resolution={activeResolution} />
-            </>,
-            aboutHost,
-            "five-minute-tour-full",
+            tourHost,
+            activeResolution === "focus" ? "five-minute-tour-core" : "five-minute-tour-full",
           )
         : null}
 
