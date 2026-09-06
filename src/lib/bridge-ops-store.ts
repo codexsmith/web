@@ -1,12 +1,16 @@
 import type { ProductLandingManifest } from "@/lib/product-landing-routing";
 import {
   appendBridgeEventLedger,
+  assertBridgeLedgerCoherence,
   parseBridgeEventLedger,
+  parseBridgeLedgerEpoch,
   type BridgeEventRecord,
+  type BridgeLedgerEpoch,
 } from "@/lib/bridge-event-ledger";
 
 const MANIFEST_PATH = "src/content/product-landing-pages/manifest.json";
 const LEDGER_PATH = "src/content/bridge-ops/events.jsonl";
+const EPOCH_PATH = "src/content/bridge-ops/epoch.json";
 const DEFAULT_REPOSITORY = "codexsmith/web";
 const DEFAULT_BRANCH = "main";
 
@@ -39,6 +43,9 @@ export type BridgeOpsManifestSnapshot = {
   ledgerContent: string;
   ledgerSha: string;
   events: BridgeEventRecord[];
+  epochContent: string;
+  epochSha: string;
+  epoch: BridgeLedgerEpoch;
   repository: string;
   branch: string;
   parentCommit: string;
@@ -138,13 +145,17 @@ export async function loadBridgeOpsManifest(): Promise<BridgeOpsManifestSnapshot
   const branch = getBranch();
   const base = apiBase(repository);
 
-  const [manifestPayload, ledgerPayload, refPayload] = await Promise.all([
+  const [manifestPayload, ledgerPayload, epochPayload, refPayload] = await Promise.all([
     githubJson<GitHubContentsResponse>(
       `${base}/contents/${MANIFEST_PATH}?ref=${encodeURIComponent(branch)}`,
       token,
     ),
     githubJson<GitHubContentsResponse>(
       `${base}/contents/${LEDGER_PATH}?ref=${encodeURIComponent(branch)}`,
+      token,
+    ),
+    githubJson<GitHubContentsResponse>(
+      `${base}/contents/${EPOCH_PATH}?ref=${encodeURIComponent(branch)}`,
       token,
     ),
     githubJson<GitHubRefResponse>(
@@ -161,8 +172,12 @@ export async function loadBridgeOpsManifest(): Promise<BridgeOpsManifestSnapshot
 
   const manifestContent = decodeContents(manifestPayload, "Bridge manifest");
   const ledgerContent = decodeContents(ledgerPayload, "Bridge event ledger");
+  const epochContent = decodeContents(epochPayload, "Bridge ledger epoch");
   const manifest = JSON.parse(manifestContent) as ProductLandingManifest;
   const events = parseBridgeEventLedger(ledgerContent);
+  const epoch = parseBridgeLedgerEpoch(epochContent);
+
+  assertBridgeLedgerCoherence(epoch, events, manifest);
 
   return {
     manifest,
@@ -170,6 +185,9 @@ export async function loadBridgeOpsManifest(): Promise<BridgeOpsManifestSnapshot
     ledgerContent,
     ledgerSha: ledgerPayload.sha,
     events,
+    epochContent,
+    epochSha: epochPayload.sha,
+    epoch,
     repository,
     branch,
     parentCommit,
@@ -199,6 +217,12 @@ export async function commitBridgeOpsTransaction(
   const token = requireToken();
   const base = apiBase(snapshot.repository);
 
+  if (event.parentCommit !== snapshot.parentCommit) {
+    throw new Error(
+      "Bridge event parentCommit does not match the snapshot being committed",
+    );
+  }
+
   const currentRef = await githubJson<GitHubRefResponse>(
     `${base}/git/ref/heads/${encodeURIComponent(snapshot.branch)}`,
     token,
@@ -211,6 +235,16 @@ export async function commitBridgeOpsTransaction(
 
   const manifestContent = `${JSON.stringify(manifest, null, 2)}\n`;
   const ledgerContent = appendBridgeEventLedger(snapshot.ledgerContent, event);
+  const events = parseBridgeEventLedger(ledgerContent);
+
+  assertBridgeLedgerCoherence(snapshot.epoch, events, manifest);
+
+  if (!ledgerContent.startsWith(snapshot.ledgerContent)) {
+    throw new Error("Bridge event ledger transaction violated append-only prefix continuity");
+  }
+  if (events.length !== snapshot.events.length + 1) {
+    throw new Error("Bridge event ledger transaction must append exactly one event");
+  }
 
   const [manifestBlob, ledgerBlob] = await Promise.all([
     createBlob(base, token, manifestContent),
