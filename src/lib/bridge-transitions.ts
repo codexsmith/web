@@ -313,6 +313,9 @@ export function publishBridge(entry: ProductLandingEntry): BridgeEntry {
       `Bridge ${bridge.id} can only become public when active or historical`,
     );
   }
+  if (bridge.visibility === "public") {
+    throw new Error(`Bridge ${bridge.id} is already public`);
+  }
 
   return assertValid({
     ...bridge,
@@ -323,6 +326,10 @@ export function publishBridge(entry: ProductLandingEntry): BridgeEntry {
 
 export function unpublishBridge(entry: ProductLandingEntry): BridgeEntry {
   const bridge = requireBridge(entry);
+  if (bridge.visibility !== "public") {
+    throw new Error(`Bridge ${bridge.id} is not public`);
+  }
+
   return assertValid({
     ...bridge,
     visibility: "unlisted",
