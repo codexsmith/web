@@ -172,21 +172,27 @@ export function PhysicalMachineExperience({
   useEffect(() => {
     if (sectionSurface) return;
 
-    const frame = window.requestAnimationFrame(() => {
-      if (!window.matchMedia(mobileProjectionQuery).matches) return;
+    let secondFrame = 0;
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        if (!window.matchMedia(mobileProjectionQuery).matches) return;
 
-      const research = machineHostRef.current?.querySelector<HTMLElement>(
-        `.bf-machine[data-skin="physical"][data-resolution="${activeResolution}"] .bf-machine__apparatus > .bf-machine-node[data-node-id="research"]`,
-      ) ?? null;
+        const host = machineHostRef.current;
+        const preview = host?.closest<HTMLElement>(".world-machine-preview") ?? null;
+        const shell = host?.closest<HTMLElement>(".site-shell") ?? null;
+        const scrollingElement = document.scrollingElement as HTMLElement | null;
 
-      research?.scrollIntoView({
-        behavior: "auto",
-        block: "start",
-        inline: "nearest",
+        preview?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        shell?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        scrollingElement?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       });
     });
 
-    return () => window.cancelAnimationFrame(frame);
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+    };
   }, [activeResolution, sectionSurface]);
 
   void showResolutionControls;

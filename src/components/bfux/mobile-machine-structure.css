@@ -5,10 +5,77 @@
 @media (max-width: 768px) {
   .physical-machine-experience {
     --bf-mobile-structure-gutter: clamp(7.75rem, 38vw, 10.5rem);
+    overflow-anchor: none;
+  }
+
+  .physical-machine-experience__fit-stage,
+  .physical-machine-experience__machine-stack,
+  .bf-machine[data-skin="physical"],
+  .bf-machine[data-skin="physical"] .bf-machine__board,
+  .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    overflow-anchor: none;
   }
 
   .physical-machine-experience__fit-stage {
     position: relative;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine__board,
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine__apparatus,
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id] {
+    touch-action: pan-y !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine__apparatus {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-flow: row;
+    grid-auto-rows: max-content;
+    align-items: start;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine__apparatus > .bf-machine-node[data-node-id] {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    align-self: start !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id] .bf-machine-node__face {
+    display: grid !important;
+    grid-template-columns: 3.55rem minmax(0, 1fr) !important;
+    grid-template-rows: auto auto auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id] .bf-machine-node__boundary {
+    flex: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id] footer {
+    margin-top: 0 !important;
   }
 
   .bf-machine[data-skin="physical"] .bf-machine__apparatus {
