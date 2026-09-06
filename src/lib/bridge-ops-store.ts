@@ -108,6 +108,28 @@ function headers(token: string) {
   };
 }
 
+function githubFailureMessage(response: Response) {
+  switch (response.status) {
+    case 401:
+      return "Bridge ops GitHub authentication failed. Verify the configured token.";
+    case 403:
+      return "Bridge ops GitHub access was denied or rate-limited. Verify token permissions and repository access.";
+    case 404:
+      return "Bridge ops could not find the configured repository, branch, or required control file.";
+    case 409:
+      return "Bridge ops GitHub state changed during the request. Refresh the control surface and retry.";
+    case 422:
+      return "GitHub rejected the Bridge ops update. Refresh and retry; if it persists, verify branch state and token permissions.";
+    case 429:
+      return "Bridge ops GitHub requests are temporarily rate-limited. Retry after the limit clears.";
+    default:
+      if (response.status >= 500) {
+        return "GitHub is temporarily unavailable to Bridge ops. No local state was changed.";
+      }
+      return `Bridge ops GitHub request failed (${response.status} ${response.statusText}).`;
+  }
+}
+
 async function githubJson<T>(
   url: string,
   token: string,
@@ -123,10 +145,7 @@ async function githubJson<T>(
   });
 
   if (!response.ok) {
-    const detail = await response.text();
-    throw new Error(
-      `GitHub request failed (${response.status} ${response.statusText}): ${detail.slice(0, 500)}`,
-    );
+    throw new Error(githubFailureMessage(response));
   }
 
   return (await response.json()) as T;
