@@ -160,13 +160,8 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         id={panelId}
         aria-label={`Local relations for ${activeNode?.label ?? "the current machine node"}`}
         aria-hidden={!open}
+        style={{ gridTemplateRows: "minmax(0, 1fr) auto" }}
       >
-        <header>
-          <small>LOCAL STRUCTURE</small>
-          <strong>{activeNode?.label ?? "Lab Machine"}</strong>
-          <span>Scroll to inspect the assembly.</span>
-        </header>
-
         <div className="bf-mobile-machine-structure__relations">
           {shownRelations.length > 0 ? shownRelations.map((relation) => (
             <div
