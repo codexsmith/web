@@ -105,47 +105,54 @@ export default async function BridgeEventsPage() {
             <span className={styles.statValue}>{snapshot.parentCommit.slice(0, 8)}</span>
             <span className={styles.statLabel}>Current head</span>
           </div>
+          <div className={styles.stat}>
+            <span className={styles.statValue}>{snapshot.epoch.epochId.replace("bridge-ledger-epoch-", "")}</span>
+            <span className={styles.statLabel}>Ledger epoch</span>
+          </div>
         </section>
 
         {events.length === 0 ? (
           <section className={styles.locked}>
-            The ledger is initialized and empty. The next successful Bridge operation will create the first event.
+            The ledger is initialized at {compactDate(snapshot.epoch.establishedAt)} and has no post-epoch events yet. The next successful Bridge operation will create the first event.
           </section>
         ) : (
           <section className={styles.grid}>
-            {events.map((event) => (
-              <article className={styles.card} key={event.eventId}>
-                <header className={styles.cardHeader}>
-                  <div>
-                    <h2 className={styles.cardTitle}>{event.bridgeId}</h2>
-                    <div className={styles.slug}>{event.operation} · {compactDate(event.occurredAt)}</div>
-                  </div>
-                  <div className={styles.badges}>
-                    <span className={styles.badge}>{event.from.lifecycle} → {event.to.lifecycle}</span>
-                    <span className={styles.badge}>{event.actor}</span>
-                  </div>
-                </header>
+            {events.map((event) => {
+              const from = event.from;
+              return (
+                <article className={styles.card} key={event.eventId}>
+                  <header className={styles.cardHeader}>
+                    <div>
+                      <h2 className={styles.cardTitle}>{event.bridgeId}</h2>
+                      <div className={styles.slug}>{event.operation} · {compactDate(event.occurredAt)}</div>
+                    </div>
+                    <div className={styles.badges}>
+                      <span className={styles.badge}>{from?.lifecycle ?? "∅"} → {event.to.lifecycle}</span>
+                      <span className={styles.badge}>{event.actor}</span>
+                    </div>
+                  </header>
 
-                <div className={styles.cardBody}>
-                  <div className={styles.meta}>
-                    <div>Visibility: <strong>{event.from.visibility} → {event.to.visibility}</strong></div>
-                    <div>Relationship: <strong>{event.from.relationshipStatus ?? "—"} → {event.to.relationshipStatus ?? "—"}</strong></div>
-                    <div>Owner: <strong>{event.evidence.owner ?? "—"}</strong></div>
-                    <div>Last contact: <strong>{event.evidence.lastContactAt ? compactDate(event.evidence.lastContactAt) : "—"}</strong></div>
-                    <div>Next action: <strong>{event.evidence.nextAction ?? "—"}</strong></div>
-                    <div>Closure reason: <strong>{event.evidence.closureReason ?? "—"}</strong></div>
-                    <div>Event ID: <strong>{event.eventId}</strong></div>
-                    <div>Parent commit: <strong>{event.parentCommit.slice(0, 12)}</strong></div>
-                    <div>Commit binding: <strong>{event.commit}</strong></div>
+                  <div className={styles.cardBody}>
+                    <div className={styles.meta}>
+                      <div>Visibility: <strong>{from?.visibility ?? "∅"} → {event.to.visibility}</strong></div>
+                      <div>Relationship: <strong>{from?.relationshipStatus ?? "∅"} → {event.to.relationshipStatus}</strong></div>
+                      <div>Owner: <strong>{event.evidence.owner ?? "—"}</strong></div>
+                      <div>Last contact: <strong>{event.evidence.lastContactAt ? compactDate(event.evidence.lastContactAt) : "—"}</strong></div>
+                      <div>Next action: <strong>{event.evidence.nextAction ?? "—"}</strong></div>
+                      <div>Closure reason: <strong>{event.evidence.closureReason ?? "—"}</strong></div>
+                      <div>Event ID: <strong>{event.eventId}</strong></div>
+                      <div>Parent commit: <strong>{event.parentCommit.slice(0, 12)}</strong></div>
+                      <div>Commit binding: <strong>{event.commit}</strong></div>
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </section>
         )}
 
         <p className={styles.footerNote}>
-          commit=self means the event is bound to the Git commit that contains the ledger line. The exact resulting SHA is obtained from repository history; storing it inside the same event would create a self-referential hash dependency.
+          The epoch is the explicit genesis state for pre-ledger Bridge records. commit=self means each later event is bound to the Git commit that contains its ledger line; the exact resulting SHA is obtained from repository history rather than embedded self-referentially.
         </p>
       </div>
     </main>
