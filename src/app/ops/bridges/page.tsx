@@ -84,12 +84,12 @@ export default async function BridgeOpsPage({
               <p className={styles.eyebrow}>Boundary First Labs · Internal operations</p>
               <h1 className={styles.title}>Bridge control surface</h1>
               <p className={styles.subhead}>
-                This route fails closed until its server-only operator credentials are configured.
+                This route fails closed until its server-side operator boundary is configured.
               </p>
             </div>
           </header>
           <section className={styles.locked}>
-            Missing environment variables: {configuration.missing.join(", ")}. Repository target is {configuration.repository} on {configuration.branch}.
+            Operator configuration is unavailable. No operational state is exposed.
           </section>
         </div>
       </main>
