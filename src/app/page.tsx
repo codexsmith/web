@@ -5,6 +5,7 @@ import { parseProjection } from "@/lib/view-projection";
 import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import { MobileCapitalProjectionControls } from "@/components/bfux/MobileCapitalProjectionControls";
+import { MobileMachineNonCrossingPipeLayer } from "@/components/bfux/MobileMachineNonCrossingPipeLayer";
 import "./world/world-machine-preview.css";
 import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
@@ -22,6 +23,7 @@ import "./proto/capital/capital-frame-cycle-loop.css";
 import "./mobile-capital-projection-v2.css";
 import "./mobile-apparatus-layering.css";
 import "./mobile-machine-row-projection.css";
+import "./mobile-machine-noncrossing-pipes.css";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },
@@ -64,6 +66,7 @@ export default async function HomePage({ searchParams }: Props) {
   return (
     <LabMachineHomeBoundary resetTraversal={!section}>
       <MobileCapitalProjectionControls />
+      <MobileMachineNonCrossingPipeLayer />
       <LabMachineWorld
         section={section}
         initialProjection={projection}

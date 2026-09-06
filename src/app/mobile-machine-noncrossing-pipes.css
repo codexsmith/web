@@ -1,0 +1,82 @@
+/*
+ * Non-crossing mobile relation routing.
+ *
+ * MobileMachineStructureLayer still owns gutter cards / semantic focus. This
+ * layer replaces only the literal connector field with channel-routed traces.
+ */
+
+.bf-mobile-machine-noncrossing-pipe-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 43;
+  pointer-events: none;
+}
+
+.bf-mobile-machine-noncrossing-pipe-layer__svg {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bf-mobile-machine-noncrossing-pipe-layer__pipe {
+  opacity: var(--bf-pipe-opacity, .55);
+}
+
+.bf-mobile-machine-noncrossing-pipe-layer__casing,
+.bf-mobile-machine-noncrossing-pipe-layer__trace {
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.bf-mobile-machine-noncrossing-pipe-layer__casing {
+  stroke: #061014;
+  stroke-width: calc(var(--bf-pipe-width, 1.2) + 2.6px);
+  opacity: .92;
+}
+
+.bf-mobile-machine-noncrossing-pipe-layer__trace {
+  stroke: var(--bf-pipe-tone, #8eb8cc);
+  stroke-width: var(--bf-pipe-width, 1.2);
+  filter: drop-shadow(
+    0 0 3px color-mix(in srgb, var(--bf-pipe-tone, #8eb8cc) 25%, transparent)
+  );
+}
+
+.bf-mobile-machine-noncrossing-pipe-layer__pipe > circle {
+  fill: #091216;
+  stroke: var(--bf-pipe-tone, #8eb8cc);
+  stroke-width: var(--bf-pipe-width, 1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.bf-mobile-machine-noncrossing-pipe-layer__pipe[data-persistent="true"]
+  .bf-mobile-machine-noncrossing-pipe-layer__trace {
+  stroke-dasharray: 2.5 2;
+}
+
+@media (max-width: 768px) {
+  /* The former pipe renderer remains in the structure component for now, but
+   * the channel router is authoritative in the mobile reveal projection. */
+  .site-shell[data-root-focus="true"]
+    .bf-mobile-machine-structure__pipes {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .bf-mobile-machine-noncrossing-pipe-layer {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-mobile-machine-noncrossing-pipe-layer__pipe {
+    transition: none !important;
+  }
+}
