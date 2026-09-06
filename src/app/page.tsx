@@ -6,6 +6,7 @@ import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import { MobileCapitalProjectionControls } from "@/components/bfux/MobileCapitalProjectionControls";
 import { MobileMachineNonCrossingPipeLayer } from "@/components/bfux/MobileMachineNonCrossingPipeLayer";
+import { MobileTimelineProjectionRedirect } from "@/components/bfux/MobileTimelineProjectionRedirect";
 import "./world/world-machine-preview.css";
 import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
@@ -66,6 +67,7 @@ export default async function HomePage({ searchParams }: Props) {
 
   return (
     <LabMachineHomeBoundary resetTraversal={!section}>
+      <MobileTimelineProjectionRedirect projection={projection} />
       <MobileCapitalProjectionControls />
       <MobileMachineNonCrossingPipeLayer />
       <LabMachineWorld
