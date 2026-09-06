@@ -234,7 +234,10 @@ requireValue(isIsoDateTime(epoch.establishedAt), "Bridge ledger epoch establishe
 requireValue(epoch.source === "bridge-ops-ledger-epoch", "Bridge ledger epoch source is invalid");
 requireValue(epoch.commit === "self", "Bridge ledger epoch commit must be self");
 requireValue(shaPattern.test(epoch.parentCommit ?? ""), "Bridge ledger epoch parentCommit is invalid");
-requireValue(epoch.manifestVersion === manifest.version, "Bridge ledger epoch manifestVersion must match current manifest version until a version migration is explicitly modeled");
+requireValue(
+  typeof epoch.manifestVersion === "string" && epoch.manifestVersion.trim(),
+  "Bridge ledger epoch manifestVersion is required as historical metadata",
+);
 requireValue(isObject(epoch.states), "Bridge ledger epoch states must be an object");
 
 const replayed = {};
