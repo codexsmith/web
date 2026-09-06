@@ -2,9 +2,9 @@
  * Source-aligned mobile relation rail.
  *
  * The base structure stylesheet owns reveal geometry and machine contraction.
- * This layer mirrors the visible machine cards one-for-one in the gutter so
- * source identity is conveyed by geometry before the relation text is read.
- * The source card defines the vertical anchor; gutter cards size to content.
+ * This layer mirrors visible machine cards one-for-one in the gutter. Source
+ * cards define vertical anchors, while semantic focus controls information
+ * density. Literal routed pipes use the gap as a relation bus.
  */
 
 @media (max-width: 768px) {
@@ -22,9 +22,42 @@
     top: calc(var(--frame-top, 60px) + .35rem);
   }
 
+  .bf-mobile-machine-structure__pipes {
+    position: fixed;
+    inset: 0;
+    z-index: 43;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .bf-mobile-machine-structure__pipe {
+    opacity: var(--bf-pipe-opacity, .55);
+  }
+
+  .bf-mobile-machine-structure__pipe > path {
+    fill: none;
+    stroke: var(--bf-pipe-tone, #8eb8cc);
+    stroke-width: var(--bf-pipe-width, 1.2);
+    stroke-linecap: square;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--bf-pipe-tone, #8eb8cc) 28%, transparent));
+  }
+
+  .bf-mobile-machine-structure__pipe > circle {
+    fill: #091216;
+    stroke: var(--bf-pipe-tone, #8eb8cc);
+    stroke-width: var(--bf-pipe-width, 1.2);
+    vector-effect: non-scaling-stroke;
+  }
+
   .bf-mobile-machine-structure__relations {
     position: absolute;
     inset: 0;
+    z-index: 1;
     display: block;
     min-height: 0;
     padding: 0;
@@ -35,11 +68,11 @@
     bottom: 0;
     left: .72rem;
     background: linear-gradient(180deg, transparent, #526b77 4%, #526b77 96%, transparent);
-    opacity: .82;
+    opacity: .5;
   }
 
   .bf-mobile-machine-structure__relations[data-empty="true"]::before {
-    opacity: .22;
+    opacity: .18;
   }
 
   .bf-mobile-machine-structure__relation {
@@ -47,19 +80,22 @@
     position: absolute;
     left: 1.18rem;
     right: .06rem;
+    z-index: var(--bf-card-z, 1);
     box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     align-content: start;
-    gap: clamp(.16rem, .7vw, .22rem) .28rem;
+    gap: clamp(.14rem, .62vw, .2rem) .28rem;
     min-width: 0;
     min-height: 0;
     height: auto;
     margin: 0;
-    padding: clamp(.3rem, 1.35vw, .4rem) clamp(.34rem, 1.65vw, .48rem);
+    padding: clamp(.28rem, 1.22vw, .38rem) clamp(.33rem, 1.55vw, .46rem);
     overflow: hidden;
-    transform: translateY(-50%);
+    opacity: var(--bf-card-opacity, .82);
+    transform: translateY(-50%) scale(var(--bf-card-scale, 1));
+    transform-origin: left center;
     border: 1px solid color-mix(in srgb, var(--bf-relation-source-tone) 48%, #31434b);
     border-left-color: var(--bf-relation-source-tone);
     border-radius: 6px;
@@ -67,6 +103,12 @@
       linear-gradient(90deg, color-mix(in srgb, var(--bf-relation-source-tone) 7%, transparent), transparent 42%),
       linear-gradient(180deg, #111b20f2, #0a1216f2);
     box-shadow: 0 5px 14px #0008, inset 0 1px #ffffff08;
+    transition:
+      opacity 120ms ease,
+      transform 120ms ease,
+      padding 120ms ease,
+      border-color 120ms ease,
+      box-shadow 120ms ease;
   }
 
   .bf-mobile-machine-structure__relation::before {
@@ -89,7 +131,7 @@
     background: #0d171b;
     box-shadow:
       0 0 0 2px #0d171b,
-      0 0 7px color-mix(in srgb, var(--bf-relation-source-tone) 34%, transparent);
+      0 0 var(--bf-focus-glow, 3px) color-mix(in srgb, var(--bf-relation-source-tone) 34%, transparent);
   }
 
   .bf-mobile-machine-structure__source {
@@ -111,12 +153,13 @@
     grid-row: 2;
     align-self: start;
     display: grid;
-    gap: .14rem;
+    gap: .13rem;
     min-width: 0;
   }
 
   .bf-mobile-machine-structure__detail small,
-  .bf-mobile-machine-structure__placeholder small {
+  .bf-mobile-machine-structure__placeholder small,
+  .bf-mobile-machine-structure__secondary small {
     color: color-mix(in srgb, var(--bf-relation-source-tone) 72%, #8eb8cc);
     overflow: hidden;
     font: 800 .42rem/1.08 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -142,20 +185,83 @@
     font: inherit;
   }
 
+  .bf-mobile-machine-structure__secondary {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: grid;
+    gap: .14rem;
+    min-width: 0;
+    padding-top: .16rem;
+    border-top: 1px solid color-mix(in srgb, var(--bf-relation-source-tone) 18%, transparent);
+  }
+
+  .bf-mobile-machine-structure__secondary > span {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: .18rem;
+    min-width: 0;
+  }
+
+  .bf-mobile-machine-structure__secondary b,
+  .bf-mobile-machine-structure__secondary strong {
+    min-width: 0;
+    overflow: hidden;
+    color: #82969e;
+    font: 700 .42rem/1.05 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .bf-mobile-machine-structure__secondary b {
+    color: color-mix(in srgb, var(--bf-relation-source-tone) 62%, #71858d);
+  }
+
   .bf-mobile-machine-structure__relation > em {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: end;
-    justify-self: end;
+    position: absolute;
+    right: .36rem;
+    bottom: .3rem;
     color: #71858d;
     font: 800 .4rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-style: normal;
     letter-spacing: .05em;
   }
 
+  /* Fisheye semantic zoom: preserve anchor geometry while progressively
+   * increasing information density near the focal region. */
+  .bf-mobile-machine-structure__relation[data-detail-level="compact"] {
+    gap: 0;
+    padding-block: .25rem;
+  }
+
+  .bf-mobile-machine-structure__relation[data-detail-level="compact"]
+    .bf-mobile-machine-structure__detail,
+  .bf-mobile-machine-structure__relation[data-detail-level="compact"]
+    .bf-mobile-machine-structure__placeholder,
+  .bf-mobile-machine-structure__relation[data-detail-level="compact"]
+    .bf-mobile-machine-structure__secondary,
+  .bf-mobile-machine-structure__relation[data-detail-level="compact"] > em {
+    display: none;
+  }
+
+  .bf-mobile-machine-structure__relation[data-detail-level="near"]
+    .bf-mobile-machine-structure__secondary,
+  .bf-mobile-machine-structure__relation[data-detail-level="near"] > em {
+    display: none;
+  }
+
+  .bf-mobile-machine-structure__relation[data-detail-level="focus"] {
+    padding-block: clamp(.34rem, 1.45vw, .44rem);
+    border-color: color-mix(in srgb, var(--bf-relation-source-tone) 68%, #41535b);
+    box-shadow:
+      0 8px 18px #000a,
+      0 0 12px color-mix(in srgb, var(--bf-relation-source-tone) 12%, transparent),
+      inset 0 1px #ffffff0d;
+  }
+
   .bf-mobile-machine-structure__relation[data-placeholder="true"] {
-    gap: .12rem .28rem;
-    padding-block: clamp(.27rem, 1.15vw, .34rem);
+    gap: .1rem .28rem;
+    padding-block: clamp(.25rem, 1.05vw, .32rem);
     border-style: dashed;
     border-left-style: solid;
     background:
@@ -165,7 +271,7 @@
 
   .bf-mobile-machine-structure__relation[data-placeholder="true"]
     .bf-mobile-machine-structure__placeholder {
-    gap: .08rem;
+    gap: .07rem;
   }
 
   .bf-mobile-machine-structure__relation[data-placeholder="true"]
@@ -178,14 +284,20 @@
   .bf-mobile-machine-structure__relation {
     left: 1.08rem;
     right: 0;
-    padding: .3rem .3rem;
+    padding-inline: .3rem;
   }
 
   .bf-mobile-machine-structure__relation[data-placeholder="true"] {
-    padding-block: .26rem;
+    padding-block: .24rem;
   }
 
   .bf-mobile-machine-structure__relation > i {
     left: -.62rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-mobile-machine-structure__relation {
+    transition: none !important;
   }
 }

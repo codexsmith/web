@@ -12,12 +12,17 @@ const relationDiscoveryKey = "bfl:mobile-relation-discovery-dismissed";
 
 type CardRelation = {
   key: string;
+  edgeKey: string;
   relation: string;
   kind: LabMachineEdge["kind"];
   direction: "inbound" | "outbound";
+  fromId: string;
+  toId: string;
   otherId: string;
   otherLabel: string;
 };
+
+type DetailLevel = "compact" | "near" | "focus";
 
 type AlignedCardView = {
   key: string;
@@ -25,12 +30,53 @@ type AlignedCardView = {
   sourceLabel: string;
   sourceTone: string;
   anchor: number;
+  focus: number;
+  detailLevel: DetailLevel;
   relations: CardRelation[];
+};
+
+type PipeView = {
+  key: string;
+  tone: string;
+  focus: number;
+  fromId: string;
+  toId: string;
+  fromX: number;
+  fromY: number;
+  busX: number;
+  toX: number;
+  toY: number;
 };
 
 type CardStyle = CSSProperties & {
   "--bf-relation-source-tone": string;
+  "--bf-focus": string;
+  "--bf-card-scale": string;
+  "--bf-card-opacity": string;
+  "--bf-card-z": string;
+  "--bf-focus-glow": string;
 };
+
+type PipeStyle = CSSProperties & {
+  "--bf-pipe-tone": string;
+  "--bf-pipe-opacity": string;
+  "--bf-pipe-width": string;
+};
+
+function clamp(value: number, minimum: number, maximum: number) {
+  return Math.max(minimum, Math.min(maximum, value));
+}
+
+function smoothstep(value: number) {
+  const normalized = clamp(value, 0, 1);
+  return normalized * normalized * (3 - 2 * normalized);
+}
+
+function detailLevelFor(focus: number): DetailLevel {
+  if (focus >= 0.72) return "focus";
+  if (focus >= 0.34) return "near";
+  return "compact";
+}
 
 function relationsFor(sourceId: string): CardRelation[] {
   return labMachineEdges
@@ -43,9 +89,12 @@ function relationsFor(sourceId: string): CardRelation[] {
 
       return [{
         key: `${edge.from}->${edge.to}:${sourceId}`,
+        edgeKey: `${edge.from}->${edge.to}:${edge.relation}`,
         relation: edge.relation,
         kind: edge.kind,
         direction,
+        fromId: edge.from,
+        toId: edge.to,
         otherId,
         otherLabel: other.label,
       }];
@@ -61,6 +110,8 @@ function sameCards(left: AlignedCardView[], right: AlignedCardView[]) {
       card.sourceId !== other.sourceId
       || card.sourceTone !== other.sourceTone
       || card.anchor !== other.anchor
+      || card.focus !== other.focus
+      || card.detailLevel !== other.detailLevel
       || card.relations.length !== other.relations.length
     ) {
       return false;
@@ -70,13 +121,30 @@ function sameCards(left: AlignedCardView[], right: AlignedCardView[]) {
   });
 }
 
+function samePipes(left: PipeView[], right: PipeView[]) {
+  return left.length === right.length && left.every((pipe, index) => {
+    const other = right[index];
+    return Boolean(other)
+      && pipe.key === other.key
+      && pipe.tone === other.tone
+      && pipe.focus === other.focus
+      && pipe.fromX === other.fromX
+      && pipe.fromY === other.fromY
+      && pipe.busX === other.busX
+      && pipe.toX === other.toX
+      && pipe.toY === other.toY;
+  });
+}
+
 export function MobileMachineStructureLayer({ resolution }: { resolution: LabMachineResolution }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
+  const pipeArrowId = `${panelId.replace(/:/g, "")}-pipe-arrow`;
   const [latchedOpen, setLatchedOpen] = useState(false);
   const [transientOpen, setTransientOpen] = useState(false);
   const [discoveryDismissed, setDiscoveryDismissed] = useState(false);
   const [alignedCards, setAlignedCards] = useState<AlignedCardView[]>([]);
+  const [pipes, setPipes] = useState<PipeView[]>([]);
   const open = latchedOpen || transientOpen;
 
   useEffect(() => {
@@ -112,6 +180,7 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
   useEffect(() => {
     if (!open) {
       setAlignedCards([]);
+      setPipes([]);
       return;
     }
 
@@ -132,16 +201,29 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
       const tourCards = Array.from(
         experience.querySelectorAll<HTMLElement>(".bf-machine-tour-card"),
       );
-      const cards = Array.from(new Set([...nodeCards, ...tourCards]))
+      const projectedCards = Array.from(new Set([...nodeCards, ...tourCards]))
         .filter((card) => {
           const style = window.getComputedStyle(card);
           return card.getClientRects().length > 0 && style.display !== "none" && style.visibility !== "hidden";
         });
 
+      const cardById = new Map<string, HTMLElement>();
+      for (const card of projectedCards) {
+        if (card.classList.contains("bf-machine-tour-card")) {
+          cardById.set("tour", card);
+          continue;
+        }
+        const nodeId = card.dataset.nodeId;
+        if (nodeId) cardById.set(nodeId, card);
+      }
+
       const gutterRect = gutter.getBoundingClientRect();
       if (gutterRect.height <= 0) return;
 
-      const nextCards = cards.flatMap<AlignedCardView>((card) => {
+      const focalY = gutterRect.top + gutterRect.height * 0.48;
+      const focusRadius = Math.max(130, gutterRect.height * 0.5);
+
+      const nextCards = projectedCards.flatMap<AlignedCardView>((card) => {
         const isTour = card.classList.contains("bf-machine-tour-card");
         const sourceId = isTour ? "tour" : card.dataset.nodeId;
         if (!sourceId) return [];
@@ -157,8 +239,10 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         // portion enters the viewport, its visible center becomes the rail anchor.
         if (visibleHeight < 28) return [];
 
-        const visibleCenter = visibleTop + visibleHeight / 2 - gutterRect.top;
-        const safeAnchor = Math.round(Math.max(28, Math.min(gutterRect.height - 28, visibleCenter)));
+        const visibleCenter = visibleTop + visibleHeight / 2;
+        const safeAnchor = Math.round(clamp(visibleCenter - gutterRect.top, 24, gutterRect.height - 24));
+        const rawFocus = 1 - Math.abs(visibleCenter - focalY) / focusRadius;
+        const focus = Math.round(smoothstep(rawFocus) * 100) / 100;
         const sourceTone = window.getComputedStyle(card).getPropertyValue("--tone").trim()
           || (sourceId === "tour" ? "#98f24d" : "#8eb8cc");
 
@@ -168,11 +252,50 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
           sourceLabel,
           sourceTone,
           anchor: safeAnchor,
+          focus,
+          detailLevel: detailLevelFor(focus),
           relations: sourceId === "tour" ? [] : relationsFor(sourceId),
         }];
       }).sort((left, right) => left.anchor - right.anchor);
 
+      const pipeCandidates = new Map<string, PipeView>();
+      for (const card of nextCards) {
+        const primary = card.relations[0];
+        if (!primary) continue;
+
+        const fromCard = cardById.get(primary.fromId);
+        const toCard = cardById.get(primary.toId);
+        if (!fromCard || !toCard) continue;
+
+        const fromRect = fromCard.getBoundingClientRect();
+        const toRect = toCard.getBoundingClientRect();
+        const rightmostCardEdge = Math.max(fromRect.right, toRect.right);
+        const busMinimum = Math.min(rightmostCardEdge + 5, gutterRect.left - 4);
+        const busX = Math.round(clamp(gutterRect.left - 10, busMinimum, gutterRect.left - 4));
+        const candidate: PipeView = {
+          key: primary.edgeKey,
+          tone: card.sourceTone,
+          focus: card.focus,
+          fromId: primary.fromId,
+          toId: primary.toId,
+          fromX: Math.round(fromRect.right + 1),
+          fromY: Math.round(fromRect.top + fromRect.height / 2),
+          busX,
+          toX: Math.round(toRect.right + 1),
+          toY: Math.round(toRect.top + toRect.height / 2),
+        };
+
+        const existing = pipeCandidates.get(candidate.key);
+        if (!existing || candidate.focus > existing.focus) {
+          pipeCandidates.set(candidate.key, candidate);
+        }
+      }
+
+      const nextPipes = Array.from(pipeCandidates.values())
+        .sort((left, right) => left.fromY - right.fromY);
+
       setAlignedCards((current) => sameCards(current, nextCards) ? current : nextCards);
+      setPipes((current) => samePipes(current, nextPipes) ? current : nextPipes);
     };
 
     const scheduleMeasure = () => {
@@ -237,6 +360,49 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         </button>
       ) : null}
 
+      {open && pipes.length > 0 ? (
+        <svg
+          className="bf-mobile-machine-structure__pipes"
+          aria-hidden="true"
+        >
+          <defs>
+            <marker
+              id={pipeArrowId}
+              markerWidth="7"
+              markerHeight="7"
+              refX="6"
+              refY="3.5"
+              orient="auto"
+              markerUnits="strokeWidth"
+            >
+              <path d="M0 0 L7 3.5 L0 7 z" fill="context-stroke" />
+            </marker>
+          </defs>
+          {pipes.map((pipe) => {
+            const style: PipeStyle = {
+              "--bf-pipe-tone": pipe.tone,
+              "--bf-pipe-opacity": String(0.34 + pipe.focus * 0.58),
+              "--bf-pipe-width": String(1 + pipe.focus * 0.8),
+            };
+            const path = `M ${pipe.fromX} ${pipe.fromY} H ${pipe.busX} V ${pipe.toY} H ${pipe.toX}`;
+
+            return (
+              <g
+                className="bf-mobile-machine-structure__pipe"
+                data-from-id={pipe.fromId}
+                data-to-id={pipe.toId}
+                key={pipe.key}
+                style={style}
+              >
+                <path d={path} markerEnd={`url(#${pipeArrowId})`} />
+                <circle cx={pipe.busX} cy={pipe.fromY} r="3.25" />
+                <circle cx={pipe.busX} cy={pipe.toY} r="3.25" />
+              </g>
+            );
+          })}
+        </svg>
+      ) : null}
+
       <aside
         className="bf-mobile-machine-structure__gutter"
         id={panelId}
@@ -249,10 +415,17 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         >
           {alignedCards.map((card) => {
             const primary = card.relations[0];
-            const hiddenRelationCount = Math.max(0, card.relations.length - 1);
+            const secondary = card.relations.slice(1, 3);
+            const hiddenRelationCount = Math.max(0, card.relations.length - 1 - secondary.length);
+            const cardScale = 0.96 + card.focus * 0.05;
             const style: CardStyle = {
               top: card.anchor,
               "--bf-relation-source-tone": card.sourceTone,
+              "--bf-focus": String(card.focus),
+              "--bf-card-scale": cardScale.toFixed(3),
+              "--bf-card-opacity": String(0.68 + card.focus * 0.32),
+              "--bf-card-z": String(1 + Math.round(card.focus * 10)),
+              "--bf-focus-glow": `${Math.round(3 + card.focus * 5)}px`,
             };
             const arrow = primary?.direction === "inbound" ? "<-" : "->";
 
@@ -263,6 +436,7 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
                 data-placeholder={primary ? "false" : "true"}
                 data-direction={primary?.direction ?? "none"}
                 data-kind={primary?.kind ?? "none"}
+                data-detail-level={card.detailLevel}
                 key={card.key}
                 style={style}
                 aria-label={primary
@@ -288,6 +462,18 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
                     <span>—</span>
                   </div>
                 )}
+
+                {secondary.length > 0 ? (
+                  <div className="bf-mobile-machine-structure__secondary">
+                    {secondary.map((relation) => (
+                      <span key={relation.key}>
+                        <small>{relation.relation}</small>
+                        <b aria-hidden="true">{relation.direction === "inbound" ? "<-" : "->"}</b>
+                        <strong>{relation.otherLabel}</strong>
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
 
                 {hiddenRelationCount > 0 ? (
                   <em>+{hiddenRelationCount}</em>
