@@ -24,8 +24,7 @@ type AlignedCardView = {
   sourceId: string;
   sourceLabel: string;
   sourceTone: string;
-  top: number;
-  height: number;
+  anchor: number;
   relations: CardRelation[];
 };
 
@@ -61,8 +60,7 @@ function sameCards(left: AlignedCardView[], right: AlignedCardView[]) {
     if (
       card.sourceId !== other.sourceId
       || card.sourceTone !== other.sourceTone
-      || card.top !== other.top
-      || card.height !== other.height
+      || card.anchor !== other.anchor
       || card.relations.length !== other.relations.length
     ) {
       return false;
@@ -156,9 +154,11 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
         const visibleHeight = visibleBottom - visibleTop;
 
         // Tiny edge slivers are not useful as paired cards. Once a meaningful
-        // portion enters the viewport, the gutter mirrors exactly that visible span.
+        // portion enters the viewport, its visible center becomes the rail anchor.
         if (visibleHeight < 28) return [];
 
+        const visibleCenter = visibleTop + visibleHeight / 2 - gutterRect.top;
+        const safeAnchor = Math.round(Math.max(28, Math.min(gutterRect.height - 28, visibleCenter)));
         const sourceTone = window.getComputedStyle(card).getPropertyValue("--tone").trim()
           || (sourceId === "tour" ? "#98f24d" : "#8eb8cc");
 
@@ -167,11 +167,10 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
           sourceId,
           sourceLabel,
           sourceTone,
-          top: Math.round(visibleTop - gutterRect.top),
-          height: Math.round(visibleHeight),
+          anchor: safeAnchor,
           relations: sourceId === "tour" ? [] : relationsFor(sourceId),
         }];
-      }).sort((left, right) => left.top - right.top);
+      }).sort((left, right) => left.anchor - right.anchor);
 
       setAlignedCards((current) => sameCards(current, nextCards) ? current : nextCards);
     };
@@ -252,8 +251,7 @@ export function MobileMachineStructureLayer({ resolution }: { resolution: LabMac
             const primary = card.relations[0];
             const hiddenRelationCount = Math.max(0, card.relations.length - 1);
             const style: CardStyle = {
-              top: card.top,
-              height: card.height,
+              top: card.anchor,
               "--bf-relation-source-tone": card.sourceTone,
             };
             const arrow = primary?.direction === "inbound" ? "<-" : "->";

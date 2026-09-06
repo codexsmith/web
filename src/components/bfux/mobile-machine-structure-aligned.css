@@ -4,6 +4,7 @@
  * The base structure stylesheet owns reveal geometry and machine contraction.
  * This layer mirrors the visible machine cards one-for-one in the gutter so
  * source identity is conveyed by geometry before the relation text is read.
+ * The source card defines the vertical anchor; gutter cards size to content.
  */
 
 @media (max-width: 768px) {
@@ -49,15 +50,16 @@
     box-sizing: border-box;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto minmax(0, 1fr);
-    align-content: center;
-    gap: .22rem .28rem;
+    grid-template-rows: auto auto;
+    align-content: start;
+    gap: clamp(.16rem, .7vw, .22rem) .28rem;
     min-width: 0;
     min-height: 0;
+    height: auto;
     margin: 0;
-    padding: clamp(.34rem, 1.7vw, .48rem) clamp(.34rem, 1.8vw, .5rem);
+    padding: clamp(.3rem, 1.35vw, .4rem) clamp(.34rem, 1.65vw, .48rem);
     overflow: hidden;
-    transform: none;
+    transform: translateY(-50%);
     border: 1px solid color-mix(in srgb, var(--bf-relation-source-tone) 48%, #31434b);
     border-left-color: var(--bf-relation-source-tone);
     border-radius: 6px;
@@ -109,7 +111,7 @@
     grid-row: 2;
     align-self: start;
     display: grid;
-    gap: .16rem;
+    gap: .14rem;
     min-width: 0;
   }
 
@@ -117,7 +119,7 @@
   .bf-mobile-machine-structure__placeholder small {
     color: color-mix(in srgb, var(--bf-relation-source-tone) 72%, #8eb8cc);
     overflow: hidden;
-    font: 800 .42rem/1.05 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font: 800 .42rem/1.08 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     letter-spacing: .09em;
     text-overflow: ellipsis;
     text-transform: uppercase;
@@ -129,7 +131,7 @@
     min-width: 0;
     overflow: hidden;
     color: #dce4e2;
-    font: 650 clamp(.48rem, 2.25vw, .6rem)/1.12 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font: 650 clamp(.5rem, 2.3vw, .62rem)/1.18 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -152,11 +154,18 @@
   }
 
   .bf-mobile-machine-structure__relation[data-placeholder="true"] {
+    gap: .12rem .28rem;
+    padding-block: clamp(.27rem, 1.15vw, .34rem);
     border-style: dashed;
     border-left-style: solid;
     background:
       linear-gradient(90deg, color-mix(in srgb, var(--bf-relation-source-tone) 5%, transparent), transparent 50%),
       linear-gradient(180deg, #10191dde, #091014e8);
+  }
+
+  .bf-mobile-machine-structure__relation[data-placeholder="true"]
+    .bf-mobile-machine-structure__placeholder {
+    gap: .08rem;
   }
 
   .bf-mobile-machine-structure__relation[data-placeholder="true"]
@@ -169,7 +178,11 @@
   .bf-mobile-machine-structure__relation {
     left: 1.08rem;
     right: 0;
-    padding: .32rem .3rem;
+    padding: .3rem .3rem;
+  }
+
+  .bf-mobile-machine-structure__relation[data-placeholder="true"] {
+    padding-block: .26rem;
   }
 
   .bf-mobile-machine-structure__relation > i {
