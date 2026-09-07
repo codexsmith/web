@@ -1,0 +1,74 @@
+{
+  "schema_version": "0.1",
+  "generated_at": "2026-09-07T20:16:05Z",
+  "title": "Boundary First Labs Research Log",
+  "description": "A bounded public projection of recent research activity. Entries report work performed and state changes without silently promoting scientific authority.",
+  "authority_note": "This feed is a public projection of governed research events. An update is not a proof, validation, publication, deployment, or adoption claim unless the entry explicitly says so.",
+  "entries": [
+    {
+      "entry_id": "RLOG-2026-09-06-INSTRUMENTED-KNOWLEDGE-001",
+      "occurred_at": "2026-09-06T19:54:24Z",
+      "published_at": "2026-09-07T20:16:03Z",
+      "title": "Formalizing instrumented knowledge as an institutional method",
+      "summary": "A new research-method thread is being formalized around instrumented knowledge: treating the production, transformation, provenance, validation, and repair of knowledge as inspectable infrastructure rather than an opaque sequence of documents. The current artifact is explicitly a method candidate with founder-method provenance attached.",
+      "section": "Research method",
+      "activity_class": "research_method",
+      "status_label": "candidate methodology",
+      "claim_ceiling": "Method candidate under development; not an established general theory of knowledge production.",
+      "tags": ["instrumented-knowledge", "method", "provenance"],
+      "source_event_count": 2
+    },
+    {
+      "entry_id": "RLOG-2026-09-06-KTG-001",
+      "occurred_at": "2026-09-06T16:43:24Z",
+      "published_at": "2026-09-07T20:16:01Z",
+      "title": "Making research objects durable and addressable",
+      "summary": "The Knowledge Transform Graph machinery gained a first durable-object type registry and reference schema. The immediate goal is practical: research lanes, experiments, publications, products, representations, transforms, events, and machines can remain independently addressable without being collapsed into one generic artifact type.",
+      "section": "Knowledge infrastructure",
+      "activity_class": "knowledge_infrastructure",
+      "status_label": "v0.1 machinery",
+      "claim_ceiling": "Institutional type and routing machinery; it does not establish truth or promote the objects it references.",
+      "tags": ["knowledge-transform-graph", "provenance", "research-infrastructure"],
+      "source_event_count": 2
+    },
+    {
+      "entry_id": "RLOG-2026-09-06-PUBLIC-INTERFACE-001",
+      "occurred_at": "2026-09-06T16:18:51Z",
+      "published_at": "2026-09-07T20:16:02Z",
+      "title": "Designing explicit paths into the Lab",
+      "summary": "The public-interface architecture now distinguishes four participation paths instead of treating every visitor as the same audience: critique and criticism, public-infrastructure analysis, collaboration or support, and submission of work/history/goals for bounded Lab engagement.",
+      "section": "Public interface",
+      "activity_class": "public_interface",
+      "status_label": "active design",
+      "claim_ceiling": "Website and participation architecture; not a claim that every path is already operational or staffed.",
+      "tags": ["website", "participation", "stewardship"],
+      "source_event_count": 2
+    },
+    {
+      "entry_id": "RLOG-2026-09-06-ERDOS-1094-001",
+      "occurred_at": "2026-09-06T01:49:12Z",
+      "published_at": "2026-09-07T20:16:00Z",
+      "title": "Narrowing the Erdős 1094 search space",
+      "summary": "Work on the active Erdős 1094 investigation eliminated several additional split-factor and edge cases, including a fixed-parameter finiteness step. The result is a smaller remaining configuration space and a more explicit set of obligations for the next pass.",
+      "section": "Mathematics",
+      "activity_class": "proof_step",
+      "status_label": "active investigation",
+      "claim_ceiling": "Research progress inside an active argument; not a complete-proof announcement.",
+      "tags": ["erdos-1094", "discrete-mathematics", "proof-search"],
+      "source_event_count": 4
+    },
+    {
+      "entry_id": "RLOG-2026-09-04-BFUX-ADMISSION-001",
+      "occurred_at": "2026-09-04T20:44:54Z",
+      "published_at": "2026-09-07T20:16:04Z",
+      "title": "A Boundary First UX admission gate for incoming work",
+      "summary": "The BFUX pattern atlas gained a small interactive admission mechanism that asks what kind of object or workflow is entering the system before choosing how to process it. The work includes an authority model plus routing and export plumbing so the classification step is explicit rather than hidden in downstream behavior.",
+      "section": "Boundary First UX",
+      "activity_class": "bfux",
+      "status_label": "prototype",
+      "claim_ceiling": "Interaction-pattern prototype and authority model; not evidence of broad usability or deployment effectiveness.",
+      "tags": ["bfux", "admission-gate", "interaction-design"],
+      "source_event_count": 4
+    }
+  ]
+}
