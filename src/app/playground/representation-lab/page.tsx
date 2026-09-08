@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { RepresentationLab } from "./RepresentationLab";
+import "./representation-lab-physical.css";
 
 export const metadata: Metadata = {
   title: "Same World, Different Reasoner",
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function RepresentationLabPage() {
-  return <RepresentationLab />;
+  return (
+    <div className="representation-lab-physical-shell" data-bfux-skin="physical" data-section-theme="research">
+      <RepresentationLab />
+    </div>
+  );
 }
