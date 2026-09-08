@@ -4,13 +4,18 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type 
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
+import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
 import { startMachineCardFlight } from "./MachineCardFlightLayer";
 import "./physical-machine-experience.css";
 import "./five-minute-tour.css";
 import "./five-minute-tour-fit.css";
+import "./mobile-machine-card-flow.css";
+import "./mobile-machine-card-scale.css";
+import "./mobile-machine-full-flow.css";
 
 const resolutionStorageKey = "bfl_lab_machine_resolution";
 const desktopFitQuery = "(min-width: 1025px)";
+const mobileProjectionQuery = "(max-width: 1024px)";
 const targetMachineWidthRatio = 0.88;
 const machineWidthInUnits = 100;
 // Let the first outline register before routing, but do not make the animation
@@ -66,6 +71,7 @@ export function PhysicalMachineExperience({
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
   const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
+  const [isMobileProjection, setIsMobileProjection] = useState(false);
   const machineHostRef = useRef<HTMLDivElement>(null);
   const machineStackRef = useRef<HTMLDivElement>(null);
   const hasMeasuredInitialFitRef = useRef(false);
@@ -73,6 +79,7 @@ export function PhysicalMachineExperience({
   const resolution = controlledResolution ?? internalResolution;
   const activeResolution = sectionSurface ? "mid" : resolution;
   const openNode = activeResolution === "focus" ? onOpenCoreNode ?? onOpenNode : onOpenNode;
+  const tourHost = activeResolution === "focus" || isMobileProjection ? apparatusHost : aboutHost;
 
   const openNodeWithFlight = (nodeId: string, source: HTMLElement) => {
     if (!openNode || cardFlightNavigateTimerRef.current !== null) return;
@@ -110,6 +117,15 @@ export function PhysicalMachineExperience({
     if (cardFlightNavigateTimerRef.current !== null) {
       window.clearTimeout(cardFlightNavigateTimerRef.current);
     }
+  }, []);
+
+  useEffect(() => {
+    const query = window.matchMedia(mobileProjectionQuery);
+    const syncProjection = () => setIsMobileProjection(query.matches);
+
+    syncProjection();
+    query.addEventListener("change", syncProjection);
+    return () => query.removeEventListener("change", syncProjection);
   }, []);
 
   useLayoutEffect(() => {
@@ -167,6 +183,32 @@ export function PhysicalMachineExperience({
     return () => window.cancelAnimationFrame(frame);
   }, [activeResolution, sectionSurface]);
 
+  useEffect(() => {
+    if (sectionSurface) return;
+
+    let secondFrame = 0;
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => {
+        if (!window.matchMedia(mobileProjectionQuery).matches) return;
+
+        const host = machineHostRef.current;
+        const preview = host?.closest<HTMLElement>(".world-machine-preview") ?? null;
+        const shell = host?.closest<HTMLElement>(".site-shell") ?? null;
+        const scrollingElement = document.scrollingElement as HTMLElement | null;
+
+        preview?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        shell?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        scrollingElement?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+    };
+  }, [activeResolution, sectionSurface]);
+
   void showResolutionControls;
   void onCloseSection;
   void rememberResolution;
@@ -184,6 +226,7 @@ export function PhysicalMachineExperience({
           className="physical-machine-experience__fit-stage"
           style={fitStyle}
         >
+          <MobileMachineStructureLayer resolution={activeResolution} />
           <div
             className="physical-machine-experience__machine-stack"
             ref={machineStackRef}
@@ -198,36 +241,22 @@ export function PhysicalMachineExperience({
         </div>
       )}
 
-      {!sectionSurface && activeResolution === "focus" && aboutHost
+      {!sectionSurface && aboutHost
         ? createPortal(
             <div className="bf-machine-tour-about-dock" aria-hidden="true">
               <i />
               <i />
             </div>,
             aboutHost,
-            "five-minute-tour-core-dock",
+            activeResolution === "focus" ? "five-minute-tour-core-dock" : "five-minute-tour-full-dock",
           )
         : null}
 
-      {!sectionSurface && activeResolution === "focus" && apparatusHost
+      {!sectionSurface && tourHost
         ? createPortal(
             <FiveMinuteTourCard resolution={activeResolution} />,
-            apparatusHost,
-            "five-minute-tour-core",
-          )
-        : null}
-
-      {!sectionSurface && activeResolution === "mid" && aboutHost
-        ? createPortal(
-            <>
-              <div className="bf-machine-tour-about-dock" aria-hidden="true">
-                <i />
-                <i />
-              </div>
-              <FiveMinuteTourCard resolution={activeResolution} />
-            </>,
-            aboutHost,
-            "five-minute-tour-full",
+            tourHost,
+            activeResolution === "focus" ? "five-minute-tour-core" : "five-minute-tour-full",
           )
         : null}
 

@@ -1,0 +1,73 @@
+/*
+ * Mobile machine scroll ownership.
+ *
+ * The Relations projection can grow taller than the viewport once cards enter
+ * the intermediate row presentation. In that state the document must own the
+ * vertical scroll range; the machine viewport must not clip the rack.
+ */
+
+@media (max-width: 768px) {
+  /* Once discovery is complete the Relations control no longer exists, so its
+   * old reservation band must collapse as well. The gutter itself is fixed and
+   * does not require in-flow height. */
+  .physical-machine-experience__fit-stage
+    > .bf-mobile-machine-structure[data-discovery-dismissed="true"] {
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Relations-open is a scrollable rack, not a viewport-locked schematic. Make
+   * each enclosing boundary contribute its intrinsic height to document flow. */
+  html:has(.site-shell[data-root-focus="true"] .bf-mobile-machine-structure[data-open="true"]),
+  body:has(.site-shell[data-root-focus="true"] .bf-mobile-machine-structure[data-open="true"]) {
+    height: auto !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: auto !important;
+  }
+
+  .site-shell[data-root-focus="true"]:has(.bf-mobile-machine-structure[data-open="true"]) {
+    height: auto !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+  }
+
+  .site-shell[data-root-focus="true"]:has(.bf-mobile-machine-structure[data-open="true"])
+    .world-machine-preview {
+    height: auto !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+  }
+
+  .site-shell[data-root-focus="true"]:has(.bf-mobile-machine-structure[data-open="true"])
+    :is(
+      .physical-machine-experience,
+      .physical-machine-experience__fit-stage,
+      .physical-machine-experience__machine-stack,
+      .bf-machine[data-skin="physical"],
+      .bf-machine[data-skin="physical"] .bf-machine__board,
+      .bf-machine[data-skin="physical"] .bf-machine__apparatus
+    ) {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  /* Keep a small physical landing zone after the final card in addition to the
+   * structural runway owned by mobile-apparatus-layering.css. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:has(.bf-mobile-machine-structure[data-open="true"])
+    .physical-machine-experience__machine-stack {
+    padding-bottom: 1rem;
+  }
+}

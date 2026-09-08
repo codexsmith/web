@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { activeUiShell } from "@/lib/ui-shell";
 import { MachineCardFlightLayer } from "@/components/bfux/MachineCardFlightLayer";
+import { ProductCatalogAccordionController } from "@/components/product-catalog-accordion-controller";
 import "./globals.css";
 import "./bf-industrial-tokens.css";
 import "./portfolio.css";
@@ -76,6 +77,7 @@ import "./p15-product-catalog.css";
 import "./p16-public-interest-layout-repair.css";
 import "./p17-root-card-visual-grammar.css";
 import "./p18-core-projection-style-parity.css";
+import "./p19-products-responsive-accordion.css";
 import "./machine-view-controls.css";
 import "./machine-card-flight.css";
 
@@ -98,6 +100,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body data-ui-shell={activeUiShell}>
         {children}
+        <ProductCatalogAccordionController />
         <MachineCardFlightLayer />
       </body>
     </html>

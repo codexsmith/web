@@ -179,327 +179,33 @@ Make difficult systems easier to understand, operate, challenge, maintain, and r
 
 Briefly show current software, methods, audits/pilots, public-interest work, research testbeds, publications, and formal research without presenting all of them as equivalent maturity claims.
 
-### Five exits
+---
 
-- See what we have built
-- See the research
-- See the public mission
-- See the provenance
-- Work with us
+## 2. Flagship triangle
 
-This should become the canonical "send this first" URL.
+Make the current three-part institutional story explicit:
+
+- Software — build systems.
+- Institutional audit — diagnose consequential systems.
+- Weather — test representations against systems the Lab does not control.
+
+The triangle should not erase smaller testbeds or imply cross-domain validation by analogy.
 
 ---
 
-## 2. Explicit collaborators / partners surface
+## 3. Evidence-first flagship presentation
 
-Create a public collaboration page rather than burying collaboration entirely inside Contact.
+For each flagship, show:
 
-Possible names:
+`Problem -> Representation -> Defect -> Intervention -> Evidence -> Limits`
 
-- Collaborators & Partners
-- Collaborate
-- Work With the Lab
-
-Avoid a generic logo wall or implied relationships.
-
-Core proposition:
-
-> Boundary First Labs is designed to work across boundaries it cannot responsibly occupy alone.
-
-The page should explain complementarity:
-
-- domain experts bring domain authority and native constraints;
-- institutions bring operational context, access, implementation capacity, stewardship, and standing;
-- engineers bring implementation and infrastructure capability;
-- researchers and reviewers bring criticism, validation, and specialized methods;
-- communities and affected people bring situated knowledge and standing;
-- funders bring capital and capacity;
-- BFL brings systems reconstruction, representation, software, research infrastructure, synthesis, instrumentation, prototypes, and cross-domain methods.
-
-Distinguish clearly among:
-
-- current collaborators;
-- historical professional relationships;
-- reviewers/advisors;
-- prospective relationships;
-- organizations or capabilities the Lab is actively seeking.
-
-Do not borrow prestige from unformed relationships. Name partnerships only when they actually exist and their scope is known.
+The evidence should be inspectable and typed.
 
 ---
 
-## 3. Finish the global Evidence system
+## 4. Collaboration / partnership surface
 
-There is already a top-right Evidence view across the site. Do **not** build a redundant standalone evidence page as the primary solution.
-
-The strategic task is to finish the global evidence projection so every public object can answer:
-
-> What supports this, how strongly, and what remains unresolved?
-
-The current content is spotty. Weak or empty Evidence views are especially visible because the interface itself promises inspectability.
-
-### Common evidence anatomy
-
-Every node should be able to project some subset of:
-
-- **Status** — delivered, supported, partially supported, demonstration, pilot, conjectural, aspirational, unresolved, etc.
-- **What supports this** — artifacts, sources, tests, deployments, derivations, measurements, reviews.
-- **What this supports** — the exact bounded claim licensed by the evidence.
-- **What this does not support** — explicit claim ceiling / non-implications.
-- **Open evidence obligations** — what would be required to promote the claim or artifact.
-- **Contradictions / negative results** — failures, counterexamples, rejected approaches.
-- **Provenance** — source lineage and evidence origin.
-
-### Evidence varies by object type
-
-| Object | Typical evidence |
-| --- | --- |
-| Product | working artifact, screenshots, demo, repo, deployment history, pilot/customer evidence, bounded result |
-| Research claim | sources, derivation, experiment, computation, counterexample search, external review |
-| Method | worked examples, failure cases, practitioner use, baseline comparison |
-| Public-interest claim | primary records/data, reports, statutes/policies, economic records, affected-party evidence, uncertainty |
-| Provenance claim | dated artifacts, commits, notebooks, correspondence, retrospective testimony |
-| Aspiration | usually no validating evidence; show prerequisites and promotion requirements instead |
-| Shipped work | historical delivery record and exact bounded claim about what was delivered |
-
-### Missing evidence is itself a represented state
-
-Do not leave weak nodes visually empty.
-
-Example:
-
-> Evidence status: incomplete  
-> No public evidence package has yet been assembled for this object.  
-> Current standing: developed concept.  
-> Promotion requires: working artifact, bounded evaluation, source register, and documented failure cases.
-
-### Automation direction
-
-The public evidence view should increasingly become a projection of Lab machinery rather than hand-authored website copy.
-
-Target graph:
-
-`object -> claims -> evidence -> sources -> evaluations -> defects -> open obligations`
-
-The website should improve automatically as the Lab's claim ledgers, source registers, artifact metadata, status typing, provenance records, and work packets improve.
-
-Case studies and Evidence have different jobs:
-
-- **Case study = narrative proof** ("here is what happened")
-- **Evidence view = inspectable proof** ("here is why you are entitled to believe precisely this much")
-
----
-
-## 4. Civic Accounting / Persistence Accounting
-
-Add a stronger economic and operational spine to Public Interest.
-
-This should not be merely "maintenance is important." The sharper proposition is:
-
-> A system can report local financial success while consuming the conditions required for its own continued operation.
-
-A public system may balance a budget, complete a project, or report successful service while accumulating maintenance, repair, replacement, institutional knowledge, staffing, accessibility, resilience, or retirement obligations outside the active accounting boundary.
-
-### Core public proposition
-
-> Deferred maintenance is borrowing from future capability.
-
-Use care with formal accounting language: a deferred maintenance backlog may not be recognized as a financial liability under a given accounting regime. The public claim is economic and operational: someone eventually pays through money, degraded service, emergency repair, increased replacement cost, reduced capacity, risk, inconvenience, or failure.
-
-### Lifecycle framing
-
-A useful conceptual decomposition:
-
-`lifecycle cost = build + operate + maintain + repair + replace + retire`
-
-A representation that optimizes only build + operate has not eliminated the remaining terms. It has moved them outside the active accounting boundary.
-
-Public-facing formulation:
-
-> A balanced budget can coexist with a growing maintenance deficit.
-
-or:
-
-> Financial closure is not necessarily system closure.
-
-### Candidate broader doctrine
-
-**Persistence Accounting** may become the general method; **Civic Accounting** can be the public-institutional specialization.
-
-Central question:
-
-> What must continually be supplied for this capability to remain real?
-
-This connects construction, maintenance, repair, replacement, and retirement directly to closure and lifecycle responsibility.
-
-### Possible first civic application
-
-Use a bounded Augusta-area infrastructure question as an inspectable case, without claiming current municipal partnership.
-
-Start with one infrastructure class or question and expose:
-
-- source register;
-- lifecycle obligations;
-- maintenance backlog / condition where data supports it;
-- uncertainty;
-- affected capacities;
-- timeline and geography;
-- repair / replacement obligations;
-- correction path.
-
-Avoid beginning with "map the city." Begin with the smallest coherent civic accounting unit that can be verified and maintained.
-
----
-
-# Flagship program architecture
-
-The strongest marketizable and externally legible BFL capabilities currently form a three-part flagship structure.
-
-## Flagship 1: Software systems
-
-Public promise:
-
-> Build better representations.
-
-Primary commercial engine.
-
-Candidate components:
-
-- Boundary First Engineering
-- Boundary First UX
-- Software Before Code
-- Closure-Driven Software Development
-- Boundary First Architecture
-- Ontological Software
-- Executable Representation
-- Verification & Governance
-- Corpus Forge
-- engineering / architecture consulting
-- software audits
-- practitioner kits
-- standards
-- white papers
-- products and developer tools
-
-This leg proves the method can produce executable systems, reusable engineering doctrine, products, consulting engagements, and immediately marketable IP.
-
-## Flagship 2: Institutional systems / governance auditing
-
-Public promise:
-
-> Make consequential systems answerable.
-
-Candidate components:
-
-- Agency & Representation Audit
-- institutional systems audit
-- civic governance audit
-- Civic Accounting / Persistence Accounting
-- lifecycle and maintenance accounting
-- public-system observability
-- authority / representation / consequence / contestability / repair mapping
-- public infrastructure analysis
-- governance and institutional design instruments
-
-This leg proves that the method can leave the software boundary and reconstruct real organizational systems involving authority, responsibility, representation, maintenance, contestability, and repair.
-
-This is a strong consulting, civic, public-sector, institutional, and grant-funded wedge.
-
-## Flagship 3: Weather / operational Earth systems
-
-Public promise:
-
-> Test the representation against physical reality.
-
-Candidate components:
-
-- Boundary First Weather
-- NOAA-relevant weather research directions
-- measurement and observability
-- uncertainty representation
-- physical dynamics
-- model comparison
-- computational efficiency / parallelization work
-- forecasting and diagnostics where evidence supports claims
-
-Weather should **not** disappear into a generic miscellaneous-testbeds bucket.
-
-Strategic reason:
-
-> The atmosphere does not care about the Lab's theory.
-
-Weather provides an independent quantitative environment with mature baselines, enormous datasets, uncertainty, operational forecasting, and measurable failure. It is therefore one of the strongest ways to test whether the representation reveals useful structure or improves anything measurable.
-
-Weather also sits at the intersection of:
-
-- science;
-- public infrastructure;
-- software;
-- data;
-- governance;
-- operational consequence.
-
-It can function as a Boundary First integration test.
-
-## Triangle-level narrative
-
-The three flagships demonstrate different capabilities of the same underlying system:
-
-- **Software:** we can build systems.
-- **Institutional audit:** we can diagnose consequential systems.
-- **Weather:** we can test representations against systems we do not control.
-
-Each leg protects the others from a predictable criticism:
-
-- software alone could look like a novel consultancy/methodology;
-- audits alone could look like management consulting with unusual vocabulary;
-- weather/formal research alone could look like an independent theory project.
-
-Together:
-
-> We build systems, inspect systems, and test our representations against systems we do not control.
-
-This is a strong institutional description of a lab.
-
----
-
-## Preserve smaller testbeds and programs
-
-Flagship emphasis should not cause smaller or less commercial testbeds to disappear.
-
-Chess remains particularly useful because it provides a comparatively closed environment:
-
-- fully inspectable state;
-- explicit legal transitions;
-- rigid rules;
-- known objectives;
-- rich strategy.
-
-Weather provides nearly the opposite environment:
-
-- continuous;
-- noisy;
-- uncertain;
-- partially observed;
-- high-dimensional;
-- dynamically evolving.
-
-Institutions add another regime:
-
-- partially observable;
-- reflexive;
-- human;
-- norm-governed;
-- authority-bearing.
-
-A useful future experimental spectrum may be:
-
-`Chess -> Software -> Institutions -> Weather`
-
-The point is not that every domain validates every other domain. The point is that different domains test different closure, observability, admissibility, representation, and repair conditions.
-
-Soccer, law, mathematics, physics, formal theory, and other programs should remain traversable and typed without competing for equal homepage prominence.
+Make collaboration first-class while preserving role, authority, endorsement, ownership, publication, and credit boundaries.
 
 ---
 
@@ -531,6 +237,23 @@ Potential navigation/CTA groups:
 - Use a Tool / Method
 
 Do not force customers, civic institutions, researchers, investors, philanthropies, and collaborators through a single undifferentiated contact path.
+
+### Concrete BFUX implementation
+
+See:
+
+- `14_bring_us_your_difficult_system_problem_intake.md` — earlier generalized difficult-system intake design.
+- `16_bfux_guided_intake_problem_response_receipt_b2b_portfolio_refresh.md` — current v2 synthesis: simplified wizard / workflow / decision-tree intake, explicit problem and response classes, user-visible problem-response receipt, and refreshed B2B portfolio.
+
+The v2 design should preserve a core interaction law:
+
+> If the system classifies the visitor, the visitor should receive that classification back with the signals used, uncertainty retained, proposed response, and conditions that would change the result.
+
+The intended public flow is:
+
+`orient -> preserve distinctions -> classify -> explain -> route -> return state`
+
+This makes the action layer itself a practical demonstration of Boundary First UX rather than a conventional lead funnel.
 
 ---
 
@@ -833,6 +556,8 @@ The website should increasingly function as a public demonstration of Boundary F
 - [ ] Add **Boundary First Labs in One Page / Takeaways**.
 - [ ] Make the **software / institutional audit / weather** flagship triangle explicit somewhere in the public architecture.
 - [ ] Add **What can I do with BFL today?** / Work With Us action surface.
+- [ ] Implement the **BFUX Guided Intake v2** synthesis in `16_bfux_guided_intake_problem_response_receipt_b2b_portfolio_refresh.md`, beginning with the difficult-system path and a user-visible problem-response receipt.
+- [ ] Refresh the **B2B portfolio** around problem classes, response classes, concrete artifacts, evidence, and limits rather than generic consultancy capability labels.
 - [ ] Add explicit **Collaborators / Partners** surface with strict relationship typing.
 - [ ] Strengthen Evidence content on the flagship nodes first.
 
@@ -884,9 +609,11 @@ A successful next public-site iteration should make the following statements tru
 5. **I can distinguish shipped work, active development, pilots, concepts, research, aspirations, and historical provenance.**
 6. **I know what I can do with the Lab today.**
 7. **I know how to collaborate, fund, review, hire, or pilot work without guessing which contact path applies.**
-8. **I understand the public-interest thesis in concrete economic/operational terms, especially maintenance and lifecycle responsibility.**
-9. **I can understand the Lab in five minutes without losing access to the deep corpus underneath it.**
-10. **The website itself demonstrates Boundary First information architecture: typed objects, explicit boundaries, provenance, projections, evidence, and repair.**
+8. **If the site classifies my problem or intent, I can see the classification, why it was proposed, what remains uncertain, what response follows, and what would change the result.**
+9. **I can leave with a portable problem-response state even if I do not contact the Lab.**
+10. **I understand the public-interest thesis in concrete economic/operational terms, especially maintenance and lifecycle responsibility.**
+11. **I can understand the Lab in five minutes without losing access to the deep corpus underneath it.**
+12. **The website itself demonstrates Boundary First information architecture: typed objects, explicit boundaries, provenance, projections, evidence, state transmission, and repair.**
 
 ---
 
@@ -911,6 +638,6 @@ Around that triangle:
 - **Provenance** shows where the work came from without validating it by biography.
 - **Collaborators** explains who can join the work and what each party contributes.
 - **Takeaways** compresses the institution for a five-minute visitor.
-- **Work With Us** converts curiosity into an explicit next action.
+- **Work With Us / Guided Intake** converts curiosity into an explicit, context-preserving next action and returns the resulting problem/response classification to the user.
 
 The website should remain strange enough to be memorable, restrained enough to be credible, and increasingly easy to inspect, evaluate, and act upon.
