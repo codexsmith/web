@@ -1,0 +1,295 @@
+/* Representation Lab · physical BFUX integration
+   Matches the Lab Machine's mounted-instrument grammar without changing the
+   semantic experiment underneath. Signal colors remain semantic; Research
+   violet becomes the housing/accent family for this research instrument. */
+
+.representation-lab-physical-shell {
+  --rl-violet: var(--bf-region-research, #a98cff);
+  --rl-violet-soft: color-mix(in srgb, var(--rl-violet) 18%, transparent);
+  --rl-violet-line: color-mix(in srgb, var(--rl-violet) 44%, #4f595d);
+  --rl-board: #070a0c;
+  --rl-iron: #0b1012;
+  --rl-face: #111619;
+  --rl-steel: #20272a;
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(111,139,151,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111,139,151,.025) 1px, transparent 1px),
+    radial-gradient(circle at 50% 18%, #10161a 0, #090d0f 44%, #06090b 100%);
+  background-size: 28px 28px, 28px 28px, auto;
+}
+
+.representation-lab-physical-shell > main {
+  --lab-bg: var(--rl-board);
+  --lab-panel: var(--rl-face);
+  --lab-panel-2: var(--rl-steel);
+  --lab-border: rgba(170, 180, 184, .2);
+  --lab-border-strong: rgba(170, 180, 184, .42);
+  --lab-action: var(--rl-violet);
+  padding: clamp(1rem, 2vw, 2rem) clamp(.8rem, 2.4vw, 2.4rem) 3rem;
+  background: transparent;
+}
+
+/* The title becomes a mounted research instrument plate rather than a website hero. */
+.representation-lab-physical-shell > main > header {
+  position: relative;
+  width: min(1180px, 100%);
+  margin: 0 auto .75rem;
+  grid-template-columns: minmax(0, 1fr) minmax(235px, .3fr);
+  gap: 0;
+  overflow: hidden;
+  border: 2px solid var(--rl-violet-line);
+  border-radius: 4px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, color-mix(in srgb, var(--rl-violet) 9%, #171c1f), #0c1114 66%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.09),
+    inset 0 -20px 34px #0005,
+    0 0 0 3px #050708,
+    0 8px 20px #000a;
+}
+
+.representation-lab-physical-shell > main > header::before,
+.representation-lab-physical-shell > main > header::after,
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"]::before,
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"]::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  width: 7px;
+  height: 7px;
+  border: 1px solid #7d8588;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #c1c5c6 0 10%, #4d5356 13% 42%, #111517 45%);
+  box-shadow: 0 1px 2px #000;
+  pointer-events: none;
+}
+
+.representation-lab-physical-shell > main > header::before { left: 7px; top: 7px; }
+.representation-lab-physical-shell > main > header::after { right: 7px; top: 7px; }
+
+.representation-lab-physical-shell > main > header > div:first-child {
+  padding: 1rem 1.2rem 1.05rem;
+}
+
+.representation-lab-physical-shell > main > header a {
+  margin-bottom: .7rem;
+  color: #89969b;
+  font-size: .58rem;
+  letter-spacing: .11em;
+}
+
+.representation-lab-physical-shell > main > header p:first-of-type {
+  color: var(--rl-violet);
+  font-size: .56rem;
+  letter-spacing: .12em;
+}
+
+.representation-lab-physical-shell > main > header h1 {
+  max-width: none;
+  margin-top: .2rem;
+  color: #e4e7e8;
+  font: 500 clamp(1.8rem, 3.7vw, 3.25rem)/1.02 Georgia, "Times New Roman", serif;
+  letter-spacing: -.025em;
+  text-shadow: 0 1px 1px #000;
+}
+
+.representation-lab-physical-shell > main > header p:last-of-type {
+  max-width: 760px;
+  margin-top: .65rem;
+  color: #aeb8bc;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.representation-lab-physical-shell > main > header > div:last-child {
+  align-self: stretch;
+  margin: 0;
+  padding: .9rem 1rem;
+  border: 0;
+  border-left: 1px solid color-mix(in srgb, var(--rl-violet) 28%, #30383c);
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 22%),
+    linear-gradient(#141a1d, #090d0f);
+  box-shadow: inset 2px 0 8px #0008;
+}
+
+.representation-lab-physical-shell > main > header > div:last-child > strong {
+  color: var(--rl-violet);
+  text-shadow: 0 0 7px color-mix(in srgb, var(--rl-violet) 42%, transparent);
+}
+
+/* Main apparatus: hard-edged mounted chassis like the home Lab Machine. */
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] {
+  position: relative;
+  width: min(1180px, 100%);
+  border: 3px solid var(--rl-violet-line);
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(169,140,255,.07), transparent 13%),
+    var(--rl-face);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.08),
+    inset 0 -26px 40px #0004,
+    0 0 0 4px #050708,
+    0 14px 30px #000c;
+}
+
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"]::before { left: 7px; top: 7px; }
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"]::after { right: 7px; top: 7px; }
+
+/* Replace rounded/pill dashboard language with ports, plates, and cartridge bays. */
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] button,
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] code {
+  border-radius: 2px;
+}
+
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] button {
+  transition: background-color .12s ease, border-color .12s ease, color .12s ease, box-shadow .12s ease;
+}
+
+.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] button:hover {
+  background-color: color-mix(in srgb, var(--rl-violet) 7%, #151b1e);
+}
+
+.representation-lab-physical-shell section[aria-label="Representation boundary"] {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.28), rgba(255,255,255,.01)),
+    #0b1012;
+  box-shadow: inset 0 2px 8px #0008;
+}
+
+.representation-lab-physical-shell section[aria-label="Representation boundary"] > div {
+  border-color: rgba(170,180,184,.18);
+}
+
+.representation-lab-physical-shell section[aria-label="Representation boundary"] div div span,
+.representation-lab-physical-shell section[aria-label="Representation boundary"] small {
+  border-radius: 2px !important;
+}
+
+/* Carrier-world bay becomes the main recessed viewport. */
+.representation-lab-physical-shell section[aria-label="Persistent carrier world"] {
+  background: #0a0e10;
+  box-shadow: inset -1px 0 #000, inset 0 0 24px #0007;
+}
+
+.representation-lab-physical-shell section[aria-label="Persistent carrier world"] > header,
+.representation-lab-physical-shell section[aria-label="Persistent carrier world"] > div:first-of-type {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent 25%),
+    linear-gradient(#171d20, #0e1315);
+}
+
+.representation-lab-physical-shell section[aria-label="Persistent carrier world"] svg {
+  filter: drop-shadow(0 6px 10px #0008);
+}
+
+/* SVG world reads as a CRT/instrument display rather than a generic visualization. */
+.representation-lab-physical-shell section[aria-label="Persistent carrier world"] svg rect {
+  shape-rendering: crispEdges;
+}
+
+.representation-lab-physical-shell aside[aria-label="Current world model"] {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+    linear-gradient(#111719, #080c0e);
+  box-shadow: inset 3px 0 12px #0009;
+}
+
+.representation-lab-physical-shell aside[aria-label="Current world model"] > div:first-child {
+  border-top: 2px solid color-mix(in srgb, var(--rl-violet) 42%, #41494d);
+  background: color-mix(in srgb, var(--rl-violet) 6%, #111719);
+}
+
+.representation-lab-physical-shell aside[aria-label="Current world model"] strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+/* Status and signal cells borrow the home-card footer grammar. */
+.representation-lab-physical-shell [data-state="valid"] i,
+.representation-lab-physical-shell [data-state="attention"] i {
+  box-shadow: 0 0 6px currentColor;
+}
+
+.representation-lab-physical-shell [aria-label="Representation laboratory apparatus"] [role="group"] button[aria-pressed="true"] {
+  border-top-color: color-mix(in srgb, var(--rl-violet) 74%, #d6d9da);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--rl-violet) 14%, #20272a), #111619);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.08),
+    inset 0 -3px var(--rl-violet),
+    0 0 12px color-mix(in srgb, var(--rl-violet) 15%, transparent);
+}
+
+/* Lower experiment racks should feel like attached modules, not cards floating below. */
+.representation-lab-physical-shell > main > section:not([aria-label="Representation laboratory apparatus"]),
+.representation-lab-physical-shell > main > div + section {
+  width: min(1180px, 100%);
+}
+
+.representation-lab-physical-shell > main > section:not([aria-label="Representation laboratory apparatus"]) {
+  border-radius: 3px;
+  border-color: rgba(170,180,184,.34);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 14%),
+    #0d1214;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.05),
+    0 7px 18px #0009;
+}
+
+/* The explanatory footer remains editorial, but is visually coupled to the machine. */
+.representation-lab-physical-shell > main > section:last-child {
+  width: min(1180px, 100%);
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(170,180,184,.28);
+  border-top-color: var(--rl-violet-line);
+  background: linear-gradient(#101619, #090d0f);
+  box-shadow: inset 0 1px rgba(255,255,255,.04);
+}
+
+.representation-lab-physical-shell > main > section:last-child h2 {
+  color: #e4e7e8;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -.02em;
+}
+
+.representation-lab-physical-shell > main > section:last-child a {
+  color: var(--rl-violet);
+}
+
+@media (max-width: 980px) {
+  .representation-lab-physical-shell > main > header {
+    grid-template-columns: 1fr;
+  }
+
+  .representation-lab-physical-shell > main > header > div:last-child {
+    border-left: 0;
+    border-top: 1px solid color-mix(in srgb, var(--rl-violet) 28%, #30383c);
+  }
+}
+
+@media (max-width: 680px) {
+  .representation-lab-physical-shell > main {
+    padding-inline: .55rem;
+  }
+
+  .representation-lab-physical-shell > main > header h1 {
+    font-size: clamp(1.8rem, 10vw, 2.7rem);
+  }
+
+  .representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] {
+    border-width: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .representation-lab-physical-shell * {
+    transition-duration: .01ms !important;
+  }
+}
