@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
+import { BoundaryFascinator } from "./BoundaryFascinator";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
 import { startMachineCardFlight } from "./MachineCardFlightLayer";
@@ -219,6 +220,7 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
+      {!sectionSurface ? <BoundaryFascinator resolution={activeResolution} /> : null}
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
       ) : (
