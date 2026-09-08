@@ -11,6 +11,15 @@
   display: none;
 }
 
+/*
+ * Keep Process addressable as a direct projection without advertising the still-generic
+ * workflow on subpages. The root uses the same gestalt mode as the founder Timeline, so
+ * the root control remains visible.
+ */
+.boundary-frame:not(.boundary-frame--root) .projection-switcher [data-projection-mode="gestalt"] {
+  display: none;
+}
+
 /* Spatial traversal beacons belong to the same operating language as the frame. */
 .direction-control {
   min-height: 44px;
