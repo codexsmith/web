@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type 
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { BoundaryFascinator } from "./BoundaryFascinator";
+import { BoundaryFascinatorInstrument } from "./BoundaryFascinatorInstrument";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
 import { startMachineCardFlight } from "./MachineCardFlightLayer";
@@ -73,6 +74,7 @@ export function PhysicalMachineExperience({
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
   const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
   const [isMobileProjection, setIsMobileProjection] = useState(false);
+  const [fascinatorOpen, setFascinatorOpen] = useState(false);
   const machineHostRef = useRef<HTMLDivElement>(null);
   const machineStackRef = useRef<HTMLDivElement>(null);
   const hasMeasuredInitialFitRef = useRef(false);
@@ -119,6 +121,15 @@ export function PhysicalMachineExperience({
       window.clearTimeout(cardFlightNavigateTimerRef.current);
     }
   }, []);
+
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    if (query.get("fascinator") === "boundary-attractor") setFascinatorOpen(true);
+  }, []);
+
+  useEffect(() => {
+    if (sectionSurface) setFascinatorOpen(false);
+  }, [sectionSurface]);
 
   useEffect(() => {
     const query = window.matchMedia(mobileProjectionQuery);
@@ -220,7 +231,12 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
-      {!sectionSurface ? <BoundaryFascinator resolution={activeResolution} /> : null}
+      {!sectionSurface ? (
+        <>
+          <BoundaryFascinator resolution={activeResolution} onInspect={() => setFascinatorOpen(true)} />
+          <BoundaryFascinatorInstrument open={fascinatorOpen} onClose={() => setFascinatorOpen(false)} />
+        </>
+      ) : null}
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
       ) : (

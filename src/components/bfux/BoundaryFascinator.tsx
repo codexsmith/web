@@ -100,7 +100,13 @@ function phaseColor(phase: number, alpha: number) {
   return `hsla(${hue}, 96%, 68%, ${alpha})`;
 }
 
-export function BoundaryFascinator({ resolution }: { resolution: LabMachineResolution }) {
+export function BoundaryFascinator({
+  resolution,
+  onInspect,
+}: {
+  resolution: LabMachineResolution;
+  onInspect?: () => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -235,7 +241,10 @@ export function BoundaryFascinator({ resolution }: { resolution: LabMachineResol
       <span className={styles.mounts} aria-hidden="true"><i /><i /><i /><i /></span>
       <header className={styles.header}>
         <span><b>FASCINATOR</b> · VISUAL MATHEMATICS</span>
-        <span>LIVE MODEL</span>
+        <span className={styles.headerActions}>
+          <span>LIVE MODEL</span>
+          {onInspect ? <button className={styles.inspectButton} type="button" onClick={onInspect}>INSPECT</button> : null}
+        </span>
       </header>
       <div className={styles.viewport}>
         <canvas ref={canvasRef} aria-hidden="true" />
