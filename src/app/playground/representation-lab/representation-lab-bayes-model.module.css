@@ -1,0 +1,306 @@
+.workbench {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--bf-seam, var(--bf-border));
+  background: var(--bf-bg-surface);
+  box-shadow: inset 0 0 0 1px var(--bf-edge, transparent);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: start;
+}
+
+.header > div:first-child,
+.status,
+.modelBank,
+.tape,
+.mapPanel,
+.metric,
+.diagnostic,
+.note {
+  display: grid;
+  gap: 6px;
+}
+
+.header span,
+.status span,
+.modelBank > span,
+.tape span,
+.mapPanel > span,
+.metric span,
+.diagnostic span,
+.note span {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bf-text-muted);
+}
+
+.header strong {
+  font-size: 1.05rem;
+}
+
+.header p,
+.diagnostic p,
+.note p {
+  margin: 0;
+  color: var(--bf-text-muted);
+  line-height: 1.5;
+}
+
+.status {
+  min-width: 190px;
+  padding: 12px 14px;
+  border: 1px solid var(--bf-border);
+  background: var(--bf-bg-control);
+}
+
+.status[data-state="matched"] strong { color: var(--bf-valid); }
+.status[data-state="mismatch"] strong { color: var(--bf-attention); }
+.status[data-state="pathology"] strong { color: var(--bf-defect); }
+
+.presets,
+.modelBanks,
+.mapRack,
+.metrics {
+  display: grid;
+  gap: 10px;
+}
+
+.presets {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.presets button,
+.modelBank button,
+.tickRail button {
+  text-align: left;
+  border: 1px solid var(--bf-border);
+  background: var(--bf-bg-control);
+  color: var(--bf-text);
+}
+
+.presets button {
+  display: grid;
+  gap: 4px;
+  min-height: 72px;
+  padding: 10px;
+}
+
+.presets button[aria-pressed="true"],
+.modelBank button[aria-pressed="true"],
+.tickRail button[aria-pressed="true"] {
+  border-color: var(--bf-action);
+  box-shadow: inset 0 0 0 1px var(--bf-action);
+}
+
+.presets small,
+.modelBank small,
+.tickRail small,
+.metric small,
+.mapPanel small {
+  color: var(--bf-text-muted);
+}
+
+.modelBanks {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.modelBank {
+  padding: 12px;
+  border: 1px solid var(--bf-border);
+  background: var(--bf-bg-raised);
+}
+
+.modelBank > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.modelBank button {
+  display: grid;
+  gap: 5px;
+  min-height: 92px;
+  padding: 10px;
+}
+
+.tape {
+  padding: 12px;
+  border: 1px solid var(--bf-border);
+  background: var(--bf-bg-raised);
+}
+
+.tape > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.tape code {
+  color: var(--bf-info);
+}
+
+.tickRail {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.tickRail button {
+  display: grid;
+  gap: 2px;
+  padding: 8px;
+}
+
+.mapRack {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mapPanel {
+  padding: 12px;
+  border: 1px solid var(--bf-border);
+  background: var(--bf-bg-raised);
+}
+
+.map {
+  display: grid;
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+  aspect-ratio: 15 / 11;
+  gap: 1px;
+  padding: 6px;
+  background: var(--bf-bg-base);
+  border: 1px solid var(--bf-border);
+}
+
+.map i {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+}
+
+.wall {
+  background: var(--bf-iron-950, var(--bf-bg-frame));
+}
+
+.cell {
+  background: var(--bf-bg-control);
+}
+
+.cell b {
+  position: absolute;
+  inset: 1px;
+  background: var(--bf-info);
+}
+
+.cell[data-truth="true"] {
+  outline: 2px solid var(--bf-valid);
+  outline-offset: -2px;
+  z-index: 2;
+}
+
+.cell[data-peak="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--bf-attention);
+  z-index: 3;
+}
+
+.metrics {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.metric {
+  padding: 11px;
+  border: 1px solid var(--bf-border);
+  background: var(--bf-bg-control);
+}
+
+.metric strong {
+  font-size: 1.1rem;
+}
+
+.metric[data-defect="true"] {
+  border-color: var(--bf-defect);
+}
+
+.metric[data-defect="true"] strong {
+  color: var(--bf-defect);
+}
+
+.diagnostic,
+.note {
+  padding: 13px;
+  border: 1px solid var(--bf-border);
+  background: var(--bf-bg-raised);
+}
+
+.diagnostic[data-state="pathology"] {
+  border-color: var(--bf-defect);
+}
+
+.diagnostic[data-state="pathology"] strong {
+  color: var(--bf-defect);
+}
+
+.diagnostic[data-state="matched"] strong {
+  color: var(--bf-valid);
+}
+
+@media (max-width: 1080px) {
+  .presets,
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .modelBanks,
+  .mapRack {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+  .status {
+    min-width: 0;
+  }
+  .presets,
+  .metrics,
+  .modelBank > div {
+    grid-template-columns: 1fr;
+  }
+  .tickRail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .tape > div:first-child {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (forced-colors: active) {
+  .status,
+  .presets button,
+  .modelBank,
+  .modelBank button,
+  .tape,
+  .mapPanel,
+  .metric,
+  .diagnostic,
+  .note,
+  .map {
+    border: 1px solid CanvasText;
+  }
+  .cell[data-truth="true"],
+  .cell[data-peak="true"]::after {
+    outline-color: Highlight;
+    border-color: Highlight;
+  }
+}
