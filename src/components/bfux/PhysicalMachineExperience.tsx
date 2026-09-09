@@ -3,10 +3,10 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
-import { BoundaryFascinatorRack } from "./BoundaryFascinator";
 import { BoundaryFascinatorInstrument } from "./BoundaryFascinatorInstrument";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
+import { ResearchHopfVisualization } from "./ResearchHopfVisualization";
 import { startMachineCardFlight } from "./MachineCardFlightLayer";
 import "./physical-machine-experience.css";
 import "./five-minute-tour.css";
@@ -72,7 +72,7 @@ export function PhysicalMachineExperience({
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
-  const [researchHost, setResearchHost] = useState<HTMLElement | null>(null);
+  const [researchIconHost, setResearchIconHost] = useState<HTMLElement | null>(null);
   const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
   const [isMobileProjection, setIsMobileProjection] = useState(false);
   const [fascinatorOpen, setFascinatorOpen] = useState(false);
@@ -181,7 +181,7 @@ export function PhysicalMachineExperience({
     if (sectionSurface) {
       setApparatusHost(null);
       setAboutHost(null);
-      setResearchHost(null);
+      setResearchIconHost(null);
       return;
     }
 
@@ -190,12 +190,12 @@ export function PhysicalMachineExperience({
       const about = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
       ) ?? null;
-      const research = machineHostRef.current?.querySelector<HTMLElement>(
-        '.bf-machine__apparatus > .bf-machine-node[data-node-id="research"]',
+      const researchIcon = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well',
       ) ?? null;
       setApparatusHost(apparatus);
       setAboutHost(about);
-      setResearchHost(research);
+      setResearchIconHost(researchIcon);
     });
 
     return () => window.cancelAnimationFrame(frame);
@@ -237,11 +237,11 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
-      {!sectionSurface && researchHost
+      {!sectionSurface && researchIconHost
         ? createPortal(
-            <BoundaryFascinatorRack resolution={activeResolution} onInspect={() => setFascinatorOpen(true)} />,
-            researchHost,
-            `boundary-fascinator-rack-${activeResolution}`,
+            <ResearchHopfVisualization resolution={activeResolution} />,
+            researchIconHost,
+            `research-hopf-core-${activeResolution}`,
           )
         : null}
       {!sectionSurface
