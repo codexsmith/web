@@ -6,6 +6,7 @@ import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { BoundaryFascinatorInstrument } from "./BoundaryFascinatorInstrument";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
+import { PublicationsLpVisualization } from "./PublicationsLpVisualization";
 import { ResearchHopfVisualization } from "./ResearchHopfVisualization";
 import { startMachineCardFlight } from "./MachineCardFlightLayer";
 import "./physical-machine-experience.css";
@@ -72,6 +73,7 @@ export function PhysicalMachineExperience({
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
+  const [publicationsIconHost, setPublicationsIconHost] = useState<HTMLElement | null>(null);
   const [researchIconHost, setResearchIconHost] = useState<HTMLElement | null>(null);
   const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
   const [isMobileProjection, setIsMobileProjection] = useState(false);
@@ -181,6 +183,7 @@ export function PhysicalMachineExperience({
     if (sectionSurface) {
       setApparatusHost(null);
       setAboutHost(null);
+      setPublicationsIconHost(null);
       setResearchIconHost(null);
       return;
     }
@@ -190,11 +193,15 @@ export function PhysicalMachineExperience({
       const about = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
       ) ?? null;
+      const publicationsIcon = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] .bf-machine-node__icon-well',
+      ) ?? null;
       const researchIcon = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well',
       ) ?? null;
       setApparatusHost(apparatus);
       setAboutHost(about);
+      setPublicationsIconHost(publicationsIcon);
       setResearchIconHost(researchIcon);
     });
 
@@ -242,6 +249,13 @@ export function PhysicalMachineExperience({
             <ResearchHopfVisualization resolution={activeResolution} />,
             researchIconHost,
             `research-hopf-core-${activeResolution}`,
+          )
+        : null}
+      {!sectionSurface && publicationsIconHost
+        ? createPortal(
+            <PublicationsLpVisualization resolution={activeResolution} />,
+            publicationsIconHost,
+            `publications-lp-core-${activeResolution}`,
           )
         : null}
       {!sectionSurface
