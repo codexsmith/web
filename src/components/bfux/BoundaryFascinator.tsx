@@ -86,7 +86,15 @@ function phaseColor(phase: number, alpha: number) {
   return `hsla(${hue}, 96%, 68%, ${alpha})`;
 }
 
-function sceneRotation(loopPhase: number): [number, number, number] {
+function sceneRotation(loopPhase: number, reduced: boolean): [number, number, number] {
+  if (reduced) {
+    return [
+      0.42 + Math.sin(loopPhase) * 0.18,
+      -0.32 + Math.sin(loopPhase) * 0.08,
+      Math.sin(loopPhase * 2) * 0.06,
+    ];
+  }
+
   return [
     loopPhase + 0.42,
     -0.32 + Math.sin(loopPhase) * 0.22,
@@ -94,13 +102,20 @@ function sceneRotation(loopPhase: number): [number, number, number] {
   ];
 }
 
-function sampleFiber(fiber: Fiber, loopPhase: number): Vec3[] {
-  const animatedBase = rotate(
-    fiber.base,
-    loopPhase,
-    Math.sin(loopPhase) * 0.24,
-    Math.sin(loopPhase * 2) * 0.16,
-  );
+function sampleFiber(fiber: Fiber, loopPhase: number, reduced: boolean): Vec3[] {
+  const animatedBase = reduced
+    ? rotate(
+        fiber.base,
+        Math.sin(loopPhase) * 0.24,
+        Math.sin(loopPhase) * 0.08,
+        Math.sin(loopPhase * 2) * 0.05,
+      )
+    : rotate(
+        fiber.base,
+        loopPhase,
+        Math.sin(loopPhase) * 0.24,
+        Math.sin(loopPhase * 2) * 0.16,
+      );
   const section = hopfSection(animatedBase[0], animatedBase[1], animatedBase[2]);
   const points: Vec3[] = [];
 
@@ -148,15 +163,18 @@ export function BoundaryFascinator({
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    const project = (point: Vec3, loopPhase: number): [number, number, number] => {
-      const [yaw, pitch, roll] = sceneRotation(loopPhase);
+    const project = (point: Vec3, loopPhase: number, reduced: boolean): [number, number, number] => {
+      const [yaw, pitch, roll] = sceneRotation(loopPhase, reduced);
       const rotated = rotate(point, yaw, pitch, roll);
       const camera = 9.4;
       const perspective = camera / Math.max(3.4, camera + rotated[2]);
-      const pulse = 0.95 + 0.05 * Math.cos(loopPhase * 2);
+      const pulseAmount = reduced ? 0.015 : 0.05;
+      const orbitAmountX = reduced ? 0.022 : 0.085;
+      const orbitAmountY = reduced ? 0.014 : 0.055;
+      const pulse = 1 - pulseAmount + pulseAmount * Math.cos(loopPhase * 2);
       const scale = Math.min(width, height) * 0.158 * pulse;
-      const orbitX = Math.sin(loopPhase) * width * 0.085;
-      const orbitY = Math.sin(loopPhase * 2) * height * 0.055;
+      const orbitX = Math.sin(loopPhase) * width * orbitAmountX;
+      const orbitY = Math.sin(loopPhase * 2) * height * orbitAmountY;
       return [
         width * 0.5 + orbitX + rotated[0] * scale * perspective,
         height * 0.52 + orbitY - rotated[1] * scale * perspective,
@@ -168,9 +186,12 @@ export function BoundaryFascinator({
       resize();
       context.clearRect(0, 0, width, height);
 
+      const reduced = reducedMotion.matches;
       const loopPhase = ((time % loopDurationMs) / loopDurationMs) * TAU;
-      const orbitX = Math.sin(loopPhase) * width * 0.085;
-      const orbitY = Math.sin(loopPhase * 2) * height * 0.055;
+      const orbitAmountX = reduced ? 0.022 : 0.085;
+      const orbitAmountY = reduced ? 0.014 : 0.055;
+      const orbitX = Math.sin(loopPhase) * width * orbitAmountX;
+      const orbitY = Math.sin(loopPhase * 2) * height * orbitAmountY;
       const glowX = width * 0.5 + orbitX;
       const glowY = height * 0.52 + orbitY;
       const glow = context.createRadialGradient(
@@ -187,10 +208,10 @@ export function BoundaryFascinator({
       context.fillStyle = glow;
       context.fillRect(0, 0, width, height);
 
-      const [yaw, pitch, roll] = sceneRotation(loopPhase);
+      const [yaw, pitch, roll] = sceneRotation(loopPhase, reduced);
       const ordered = fibers
         .map((fiber) => {
-          const points = sampleFiber(fiber, loopPhase);
+          const points = sampleFiber(fiber, loopPhase, reduced);
           const depth = points.length
             ? points.reduce((sum, point) => sum + rotate(point, yaw, pitch, roll)[2], 0) / points.length
             : 0;
@@ -200,7 +221,7 @@ export function BoundaryFascinator({
         .sort((a, b) => a.depth - b.depth);
 
       ordered.forEach(({ fiber, points }, fiberIndex) => {
-        const projected = points.map((point) => project(point, loopPhase));
+        const projected = points.map((point) => project(point, loopPhase, reduced));
         const alpha = 0.2 + fiber.strength * 0.3;
 
         context.beginPath();
@@ -248,19 +269,15 @@ export function BoundaryFascinator({
 
     const animate = (time: number) => {
       draw(time);
-      if (!reducedMotion.matches) animationFrame = window.requestAnimationFrame(animate);
+      animationFrame = window.requestAnimationFrame(animate);
     };
 
     const observer = new ResizeObserver(() => draw(performance.now()));
     observer.observe(canvas);
     draw(performance.now());
-    if (!reducedMotion.matches) animationFrame = window.requestAnimationFrame(animate);
+    animationFrame = window.requestAnimationFrame(animate);
 
-    const onMotionChange = () => {
-      window.cancelAnimationFrame(animationFrame);
-      draw(performance.now());
-      if (!reducedMotion.matches) animationFrame = window.requestAnimationFrame(animate);
-    };
+    const onMotionChange = () => draw(performance.now());
     reducedMotion.addEventListener("change", onMotionChange);
 
     return () => {
