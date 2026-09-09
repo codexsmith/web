@@ -206,43 +206,50 @@ export function TaskWorkbench({
         </div>
       ) : null}
 
-      <div className={s.lowerRack}>
-        <div className={s.assumptionBay} data-loaded={gameTreeLoaded ? "true" : "false"}>
-          <div>
-            <span>ASSUMPTION BAY · PURSUER SEMANTICS</span>
-            <strong>Change one operator. Hold WORLD-01 fixed.</strong>
-          </div>
-          <div className={s.lever} role="group" aria-label="Pursuer semantics">
-            <button type="button" aria-pressed={mode === "minimax"} onClick={() => onModeChange("minimax")}>
-              <span>MIN</span><small>adversary</small><code>→ {minimax?.selectedAction ?? "?"}</code>
-            </button>
-            <div aria-hidden="true"><i data-side={mode === "expectimax" ? "right" : "left"} /></div>
-            <button type="button" aria-pressed={mode === "expectimax"} onClick={() => onModeChange("expectimax")}>
-              <span>EXPECTATION</span><small>random variable</small><code>→ {expectimax?.selectedAction ?? "?"}</code>
-            </button>
-          </div>
-          <p>The pursuer geometry is unchanged. Only branch aggregation changes; the rational action flips when the formal type flips.</p>
-        </div>
-
-        <div className={s.diffPanel} aria-live="polite">
-          <div className={s.diffHeading}>
-            <span>REPRESENTATION DIFF</span>
-            <strong>{previous ? "PREVIOUS → CURRENT" : "ARMED"}</strong>
-          </div>
-          {previous && diff.length > 0 ? (
-            <div className={s.diffItems}>
-              {diff.map((item, index) => (
-                <div key={`${item.kind}-${item.label}-${index}`} data-kind={item.kind}>
-                  <span>{item.kind === "add" ? "+" : item.kind === "remove" ? "−" : "Δ"} {item.label}</span>
-                  <code>{item.value}</code>
-                </div>
-              ))}
+      <details className={s.lowerRackDrawer}>
+        <summary className={s.lowerRackSummary}>
+          <span>SECONDARY ANALYSIS BAY</span>
+          <strong>Assumptions + representation diff</strong>
+          <small>{gameTreeLoaded ? "PURSUER OPERATOR ACTIVE" : previous ? `${diff.length} RECORDED CHANGE${diff.length === 1 ? "" : "S"}` : "ARMED"}</small>
+        </summary>
+        <div className={s.lowerRack}>
+          <div className={s.assumptionBay} data-loaded={gameTreeLoaded ? "true" : "false"}>
+            <div>
+              <span>ASSUMPTION BAY · PURSUER SEMANTICS</span>
+              <strong>Change one operator. Hold WORLD-01 fixed.</strong>
             </div>
-          ) : (
-            <p>Change a task, state definition, reasoner, or stressed distinction. This instrument records exactly what crossed the representation boundary.</p>
-          )}
+            <div className={s.lever} role="group" aria-label="Pursuer semantics">
+              <button type="button" aria-pressed={mode === "minimax"} onClick={() => onModeChange("minimax")}>
+                <span>MIN</span><small>adversary</small><code>→ {minimax?.selectedAction ?? "?"}</code>
+              </button>
+              <div aria-hidden="true"><i data-side={mode === "expectimax" ? "right" : "left"} /></div>
+              <button type="button" aria-pressed={mode === "expectimax"} onClick={() => onModeChange("expectimax")}>
+                <span>EXPECTATION</span><small>random variable</small><code>→ {expectimax?.selectedAction ?? "?"}</code>
+              </button>
+            </div>
+            <p>The pursuer geometry is unchanged. Only branch aggregation changes; the rational action flips when the formal type flips.</p>
+          </div>
+
+          <div className={s.diffPanel} aria-live="polite">
+            <div className={s.diffHeading}>
+              <span>REPRESENTATION DIFF</span>
+              <strong>{previous ? "PREVIOUS → CURRENT" : "ARMED"}</strong>
+            </div>
+            {previous && diff.length > 0 ? (
+              <div className={s.diffItems}>
+                {diff.map((item, index) => (
+                  <div key={`${item.kind}-${item.label}-${index}`} data-kind={item.kind}>
+                    <span>{item.kind === "add" ? "+" : item.kind === "remove" ? "−" : "Δ"} {item.label}</span>
+                    <code>{item.value}</code>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>Change a task, state definition, reasoner, or stressed distinction. This instrument records exactly what crossed the representation boundary.</p>
+            )}
+          </div>
         </div>
-      </div>
+      </details>
     </section>
   );
 }
