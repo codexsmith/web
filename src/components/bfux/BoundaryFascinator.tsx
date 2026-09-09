@@ -98,10 +98,15 @@ function rotate4Plane(point: Vec4, a: number, b: number, angle: number): Vec4 {
 }
 
 function rotate4(point: Vec4, phase: number, reduced = false): Vec4 {
-  const rate = reduced ? 0.22 : 1;
-  let next = rotate4Plane(point, 0, 3, phase * rate);
-  next = rotate4Plane(next, 1, 2, phase * rate * 0.73 + 0.42);
-  next = rotate4Plane(next, 0, 2, Math.sin(phase) * (reduced ? 0.09 : 0.32));
+  const primary = reduced ? Math.sin(phase) * 0.22 : phase;
+  const secondary = reduced
+    ? 0.42 + Math.sin(phase * 2) * 0.18
+    : phase * 2 + 0.42;
+  const tertiary = Math.sin(phase) * (reduced ? 0.09 : 0.32);
+
+  let next = rotate4Plane(point, 0, 3, primary);
+  next = rotate4Plane(next, 1, 2, secondary);
+  next = rotate4Plane(next, 0, 2, tertiary);
   return next;
 }
 
@@ -211,21 +216,21 @@ function drawHopf(environment: DrawEnvironment) {
 
     const travel = (2 * phase / TAU + fiberIndex / ordered.length) % 1;
     const markerIndex = Math.floor(travel * (projected.length - 1));
-    const tail = Math.min(12, markerIndex);
-    if (tail > 2) {
-      context.beginPath();
-      for (let offset = tail; offset >= 0; offset -= 1) {
-        const point = projected[markerIndex - offset];
-        if (!point) continue;
-        if (offset === tail) context.moveTo(point[0], point[1]);
-        else context.lineTo(point[0], point[1]);
-      }
-      context.strokeStyle = sceneColor("hopf", seed.phase + phase, 0.9);
-      context.lineWidth = 1.35 * Math.max(1, dpr * 0.66);
-      context.shadowBlur = 10;
-      context.shadowColor = sceneColor("hopf", seed.phase + phase, 0.7);
-      context.stroke();
+    const tailLength = 10;
+
+    context.beginPath();
+    for (let offset = tailLength; offset >= 0; offset -= 1) {
+      const index = (markerIndex - offset + projected.length) % projected.length;
+      const point = projected[index];
+      if (!point) continue;
+      if (offset === tailLength) context.moveTo(point[0], point[1]);
+      else context.lineTo(point[0], point[1]);
     }
+    context.strokeStyle = sceneColor("hopf", seed.phase + phase, 0.88);
+    context.lineWidth = 1.3 * Math.max(1, dpr * 0.66);
+    context.shadowBlur = 10;
+    context.shadowColor = sceneColor("hopf", seed.phase + phase, 0.68);
+    context.stroke();
   });
 }
 
@@ -275,11 +280,9 @@ function drawProjectedSegments(
 
 function drawClifford(environment: DrawEnvironment) {
   const { context, phase, reduced, dpr } = environment;
-  const rotation3: [number, number, number] = [
-    phase * (reduced ? 0.08 : 0.34) + 0.52,
-    -0.36 + Math.sin(phase) * 0.12,
-    0.12 * Math.sin(phase * 2),
-  ];
+  const rotation3: [number, number, number] = reduced
+    ? [0.52 + Math.sin(phase) * 0.12, -0.36 + Math.sin(phase) * 0.08, 0.08 * Math.sin(phase * 2)]
+    : [phase + 0.52, -0.36 + Math.sin(phase) * 0.12, 0.12 * Math.sin(phase * 2)];
 
   cliffordLines.forEach((line, index) => {
     const projected = line.map((point) => {
@@ -318,12 +321,10 @@ function project4To3(point: Vec4): Vec3 {
 
 function drawTesseract(environment: DrawEnvironment) {
   const { context, phase, reduced, dpr } = environment;
-  const rotated4 = tesseractVertices.map((point) => rotate4(point, phase * 0.82 + 0.3, reduced));
-  const rotation3: [number, number, number] = [
-    phase * (reduced ? 0.06 : 0.22) + 0.54,
-    -0.34 + 0.12 * Math.sin(phase),
-    0.16 * Math.sin(phase * 2),
-  ];
+  const rotated4 = tesseractVertices.map((point) => rotate4(point, phase + 0.3, reduced));
+  const rotation3: [number, number, number] = reduced
+    ? [0.54 + Math.sin(phase) * 0.1, -0.34 + 0.08 * Math.sin(phase), 0.08 * Math.sin(phase * 2)]
+    : [phase + 0.54, -0.34 + 0.12 * Math.sin(phase), 0.16 * Math.sin(phase * 2)];
   const projected = rotated4.map((point) => project3(project4To3(point), environment, 0.24, rotation3, reduced ? 0.006 : 0.018));
 
   tesseractEdges.forEach(([a, b], index) => {
@@ -370,11 +371,9 @@ function drawLpMorph(environment: DrawEnvironment) {
   const { context, phase, reduced, dpr } = environment;
   const mix = 0.5 - 0.5 * Math.cos(phase);
   const p = 1.18 + mix * 6.7;
-  const rotation: [number, number, number] = [
-    phase * (reduced ? 0.06 : 0.28) + 0.62,
-    -0.42 + 0.16 * Math.sin(phase),
-    0.12 * Math.sin(phase * 2),
-  ];
+  const rotation: [number, number, number] = reduced
+    ? [0.62 + Math.sin(phase) * 0.1, -0.42 + 0.1 * Math.sin(phase), 0.07 * Math.sin(phase * 2)]
+    : [phase + 0.62, -0.42 + 0.16 * Math.sin(phase), 0.12 * Math.sin(phase * 2)];
   const latitudeCount = 7;
   const longitudeCount = 10;
   const samples = 54;
@@ -516,9 +515,9 @@ export function BoundaryFascinator({
     >
       <span className={styles.mounts} aria-hidden="true"><i /><i /><i /><i /></span>
       <header className={styles.header}>
-        <span><b>FASCINATOR</b><span className={styles.sceneLabel}> · {meta.label}</span></span>
+        <span className={styles.sceneName}>{meta.label}</span>
         <span className={styles.headerActions}>
-          <span>LIVE</span>
+          <span className={styles.liveStatus}>LIVE</span>
           {onInspect ? <button className={styles.inspectButton} type="button" onClick={inspect}>INSPECT</button> : null}
         </span>
       </header>
