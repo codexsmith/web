@@ -248,12 +248,28 @@ export function ResearchHopfVisualization({
   }, []);
 
   return (
-    <div
-      className={styles.field}
-      data-resolution={resolution}
-      aria-hidden="true"
-    >
-      <canvas ref={canvasRef} />
-    </div>
+    <>
+      <div
+        className={styles.field}
+        data-resolution={resolution}
+        aria-hidden="true"
+      >
+        <canvas ref={canvasRef} />
+      </div>
+      <a
+        className={styles.sandboxCard}
+        data-resolution={resolution}
+        href="/sandbox/distinction-space?fascinator=boundary-attractor"
+        aria-label="Open the Distinction Space visual sandbox"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <span className={styles.sandboxSignal} aria-hidden="true"><i /><i /><i /></span>
+        <span className={styles.sandboxCopy}>
+          <small>EXPERIMENT · VISUAL MATH</small>
+          <strong>Distinction Space</strong>
+          <span>Sandbox <b>OPEN ↗</b></span>
+        </span>
+      </a>
+    </>
   );
 }
