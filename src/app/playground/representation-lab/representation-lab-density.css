@@ -1,0 +1,326 @@
+/* Representation Lab · density + hierarchy pass
+   Primary operator path stays in view; diagnostic racks remain available but
+   subordinate. Each semantic layer gets a distinct physical depth and signal. */
+
+@media (min-width: 981px) {
+  .representation-lab-physical-shell > main {
+    padding: .7rem clamp(.8rem, 2vw, 1.6rem) 1.4rem;
+  }
+
+  /* Compact title plate: instrument identity, not a landing-page hero. */
+  .representation-lab-physical-shell > main > header {
+    width: min(1180px, 100%);
+    margin-bottom: .48rem;
+    grid-template-columns: minmax(0, 1fr) 230px;
+  }
+  .representation-lab-physical-shell > main > header > div:first-child {
+    padding: .58rem .82rem .62rem;
+  }
+  .representation-lab-physical-shell > main > header a {
+    margin-bottom: .34rem;
+    font-size: .5rem;
+  }
+  .representation-lab-physical-shell > main > header p:first-of-type {
+    margin-bottom: .18rem;
+    font-size: .49rem;
+  }
+  .representation-lab-physical-shell > main > header h1 {
+    margin-top: 0;
+    font-size: clamp(1.55rem, 2.45vw, 2.25rem);
+    line-height: 1;
+  }
+  .representation-lab-physical-shell > main > header p:last-of-type {
+    margin-top: .35rem;
+    font-size: .68rem;
+    line-height: 1.3;
+  }
+  .representation-lab-physical-shell > main > header > div:last-child {
+    padding: .55rem .65rem;
+  }
+  .representation-lab-physical-shell > main > header > div:last-child > span {
+    font-size: .48rem;
+  }
+  .representation-lab-physical-shell > main > header > div:last-child > strong {
+    margin: .14rem 0 .38rem;
+    font-size: 1rem;
+  }
+  .representation-lab-physical-shell > main > header dl {
+    gap: .16rem;
+  }
+  .representation-lab-physical-shell > main > header dl div {
+    padding-top: .2rem;
+  }
+  .representation-lab-physical-shell > main > header dt,
+  .representation-lab-physical-shell > main > header dd {
+    font-size: .54rem;
+  }
+
+  /* REASONER BUS · raised replaceable cartridges. */
+  .representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > div:first-child {
+    grid-template-columns: 190px 1fr;
+    border-top: 3px solid color-mix(in srgb, var(--rl-violet) 72%, #6d7478);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.035), transparent 34%),
+      #12181b;
+    box-shadow: inset 0 1px rgba(255,255,255,.05), inset 0 -2px 7px #0007;
+  }
+  .representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > div:first-child > div:first-child {
+    padding: .48rem .64rem;
+    background: linear-gradient(90deg, color-mix(in srgb,var(--rl-violet) 9%,#171c1f), #0b1012);
+    box-shadow: inset -3px 0 9px #0008;
+  }
+  .representation-lab-physical-shell [aria-label="Reasoning cartridge"] button {
+    min-height: 56px;
+    padding: .46rem .55rem;
+    border-right: 1px solid rgba(170,180,184,.22);
+    border-top: 1px solid rgba(255,255,255,.06);
+    border-bottom: 2px solid #06090a;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.045), transparent 38%),
+      linear-gradient(#20272a, #121719);
+    box-shadow: inset 0 1px rgba(255,255,255,.04), inset 0 -2px 5px #0007;
+  }
+  .representation-lab-physical-shell [aria-label="Reasoning cartridge"] button:hover {
+    background:
+      linear-gradient(180deg, color-mix(in srgb,var(--rl-violet) 8%,#283034), #13191c);
+  }
+  .representation-lab-physical-shell [aria-label="Reasoning cartridge"] button[aria-pressed="true"] {
+    border-top-color: color-mix(in srgb,var(--rl-violet) 76%,#d6d9da);
+    border-bottom-color: var(--rl-violet);
+    background:
+      linear-gradient(180deg, color-mix(in srgb,var(--rl-violet) 18%,#293035), #111619);
+    box-shadow: inset 0 1px rgba(255,255,255,.1), inset 0 -4px 0 var(--rl-violet), 0 0 12px color-mix(in srgb,var(--rl-violet) 18%,transparent);
+  }
+  .representation-lab-physical-shell [aria-label="Reasoning cartridge"] button span {
+    font-size: .68rem;
+  }
+  .representation-lab-physical-shell [aria-label="Reasoning cartridge"] button small {
+    margin-top: .13rem;
+    font-size: .51rem;
+  }
+  .representation-lab-physical-shell [aria-label="Reasoning cartridge"] button code {
+    margin-top: .12rem;
+    font-size: .45rem;
+  }
+
+  /* TASK BUS · blue logic deck, visually separate from replaceable cartridges. */
+  .representation-lab-physical-shell section[aria-label="Task and representation workbench"] {
+    border-top: 3px solid color-mix(in srgb,var(--bf-info) 65%,#59656a);
+    background: #0b1012;
+    box-shadow: inset 0 2px 9px #0007;
+  }
+
+  /* REPRESENTATION BOUNDARY · recessed I/O well. Correct selector is a div. */
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] {
+    grid-template-columns: 190px 1fr 1fr;
+    border-top: 3px solid #39454a;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.32), rgba(255,255,255,.012)),
+      #080c0e;
+    box-shadow: inset 0 4px 12px #000a, inset 0 -1px rgba(255,255,255,.035);
+  }
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] > div {
+    padding: .42rem .58rem;
+  }
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] > div:first-child {
+    background: linear-gradient(90deg, #111719, #0a0e10);
+    box-shadow: inset -3px 0 8px #0007;
+  }
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] > div:nth-child(2) {
+    border-top: 2px solid color-mix(in srgb,var(--bf-valid) 44%,transparent);
+  }
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] > div:nth-child(3) {
+    border-top: 2px solid color-mix(in srgb,var(--bf-defect) 38%,transparent);
+  }
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] div div {
+    gap: .24rem;
+    margin-top: .26rem;
+  }
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] div div > div {
+    padding: .22rem .3rem;
+    border-radius: 2px !important;
+    background: #0d1214;
+    box-shadow: inset 0 2px 5px #0008;
+  }
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] small {
+    font-size: .49rem;
+  }
+
+  /* STRESS RIG · maintenance strip; warm warning tone is intentional. */
+  .representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > div[data-active][data-defect] {
+    min-height: 43px;
+    padding: .36rem .62rem;
+    border-top: 2px solid color-mix(in srgb,var(--bf-attention) 45%,#4a4f50);
+    background:
+      linear-gradient(90deg, color-mix(in srgb,var(--bf-attention) 6%,#171b1c), #0b1012 60%);
+    box-shadow: inset 0 1px rgba(255,255,255,.035), inset 0 -2px 6px #0007;
+  }
+  .representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > div[data-active][data-defect] button {
+    min-height: 30px;
+    padding: .38rem .58rem;
+    border: 1px solid #667176;
+    border-top-color: #899296;
+    background: linear-gradient(#30383c,#151a1d);
+    box-shadow: inset 0 1px rgba(255,255,255,.08), 0 2px 5px #0009;
+  }
+
+  /* WORLD-01 · the dominant viewport. */
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] {
+    border-top: 3px solid color-mix(in srgb,var(--rl-violet) 34%,#556066);
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] > div:nth-child(1) {
+    min-height: 52px;
+    padding: .4rem .58rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] > div:nth-child(2) {
+    min-height: 43px;
+    padding: .34rem .46rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] > div:nth-child(2) button {
+    min-height: 31px;
+    border: 1px solid #606a6f;
+    border-top-color: #879095;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.07), transparent 38%),
+      linear-gradient(#2a3236,#111719);
+    box-shadow: inset 0 1px rgba(255,255,255,.08), inset 0 -2px 3px #0007, 0 2px 4px #0008;
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] > div:nth-child(2) button:first-child {
+    border-color: color-mix(in srgb,var(--rl-violet) 62%,#687176);
+    color: #eee9ff;
+    background:
+      linear-gradient(180deg, color-mix(in srgb,var(--rl-violet) 18%,#30363b), #15151d);
+    box-shadow: inset 0 1px rgba(255,255,255,.1), inset 0 -3px 0 var(--rl-violet), 0 0 9px color-mix(in srgb,var(--rl-violet) 15%,transparent);
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] > div:nth-child(3) {
+    padding: .5rem .65rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] svg {
+    width: 100%;
+    height: clamp(320px, 43vh, 455px);
+    max-height: 455px;
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] > div:nth-child(4) {
+    min-height: 32px;
+    padding: .4rem .62rem;
+    background: #0b1012;
+    box-shadow: inset 0 2px 5px #0006;
+  }
+
+  /* CURRENT MODEL · vertical diagnostic well, bounded to world height. */
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] + aside {
+    max-height: 582px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    border-top: 3px solid var(--rl-violet-line);
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+      linear-gradient(#101618,#070b0d);
+    box-shadow: inset 4px 0 13px #000a;
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] + aside > div {
+    padding: .58rem .68rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Persistent carrier world"] + aside > div:first-child {
+    border-top: 0;
+    border-left: 3px solid var(--rl-violet);
+    background: color-mix(in srgb,var(--rl-violet) 7%,#111719);
+  }
+
+  /* Trace and event output read as a bus + ledger, not more cards. */
+  .representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > section[aria-live="polite"] {
+    border-top: 2px solid #374248;
+    background: #090d0f;
+    box-shadow: inset 0 3px 8px #0007;
+  }
+  .representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > section[aria-live="polite"] > div {
+    padding: .5rem .62rem;
+  }
+
+  /* Counterfactual rack stays available but no longer consumes another screen. */
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] {
+    margin-top: .58rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] > header {
+    grid-template-columns: minmax(0,1fr) minmax(260px,.65fr);
+    padding: .5rem .7rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] > header h2 {
+    margin-top: .16rem;
+    font-size: 1rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] > header p {
+    font-size: .64rem;
+    line-height: 1.3;
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] article {
+    padding: .48rem .58rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] article strong {
+    margin-top: .2rem;
+    font-size: .67rem;
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] article p {
+    margin-top: .22rem;
+    font-size: .58rem;
+    line-height: 1.3;
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] button {
+    min-height: 112px;
+    padding: .5rem;
+    border-top: 1px solid rgba(255,255,255,.045);
+    background: linear-gradient(#151b1e,#0b1012);
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] button[aria-pressed="true"] {
+    background: color-mix(in srgb,var(--rl-violet) 8%,#111719);
+  }
+  .representation-lab-physical-shell section[aria-label="Counterfactual comparison rack"] button p {
+    margin-top: .35rem;
+    font-size: .56rem;
+    line-height: 1.25;
+  }
+
+  /* Editorial close becomes one compact machine label. */
+  .representation-lab-physical-shell > main > section:last-child {
+    margin-top: .58rem;
+    padding: .62rem .72rem;
+    gap: .75rem;
+  }
+  .representation-lab-physical-shell > main > section:last-child h2 {
+    font-size: 1.15rem;
+  }
+  .representation-lab-physical-shell > main > section:last-child p {
+    font-size: .7rem;
+    line-height: 1.4;
+  }
+}
+
+/* Cross-size button morphology: raised controls should never read like flat text cells. */
+.representation-lab-physical-shell button {
+  text-shadow: 0 1px #000;
+}
+.representation-lab-physical-shell button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 5px #000a !important;
+}
+.representation-lab-physical-shell button:disabled {
+  filter: saturate(.45);
+}
+
+@media (max-width: 980px) {
+  .representation-lab-physical-shell div[aria-label="Representation boundary"] {
+    background: #080c0e;
+    box-shadow: inset 0 3px 10px #0009;
+  }
+  .representation-lab-physical-shell [aria-label="Reasoning cartridge"] button,
+  .representation-lab-physical-shell [aria-label="Task specification"] button {
+    background: linear-gradient(#1c2326,#101517);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .representation-lab-physical-shell button:active:not(:disabled) {
+    transform: none;
+  }
+}
