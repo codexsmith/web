@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type 
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { BoundaryFascinatorInstrument } from "./BoundaryFascinatorInstrument";
+import { CardMathVisualization } from "./CardMathVisualization";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
 import { PublicationsLpVisualization } from "./PublicationsLpVisualization";
@@ -73,6 +74,8 @@ export function PhysicalMachineExperience({
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
+  const [peopleIconHost, setPeopleIconHost] = useState<HTMLElement | null>(null);
+  const [productsIconHost, setProductsIconHost] = useState<HTMLElement | null>(null);
   const [publicationsIconHost, setPublicationsIconHost] = useState<HTMLElement | null>(null);
   const [researchIconHost, setResearchIconHost] = useState<HTMLElement | null>(null);
   const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
@@ -183,6 +186,8 @@ export function PhysicalMachineExperience({
     if (sectionSurface) {
       setApparatusHost(null);
       setAboutHost(null);
+      setPeopleIconHost(null);
+      setProductsIconHost(null);
       setPublicationsIconHost(null);
       setResearchIconHost(null);
       return;
@@ -193,6 +198,12 @@ export function PhysicalMachineExperience({
       const about = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
       ) ?? null;
+      const peopleIcon = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="people"] .bf-machine-node__icon-well',
+      ) ?? null;
+      const productsIcon = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="products"] .bf-machine-node__icon-well',
+      ) ?? null;
       const publicationsIcon = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] .bf-machine-node__icon-well',
       ) ?? null;
@@ -201,6 +212,8 @@ export function PhysicalMachineExperience({
       ) ?? null;
       setApparatusHost(apparatus);
       setAboutHost(about);
+      setPeopleIconHost(peopleIcon);
+      setProductsIconHost(productsIcon);
       setPublicationsIconHost(publicationsIcon);
       setResearchIconHost(researchIcon);
     });
@@ -249,6 +262,20 @@ export function PhysicalMachineExperience({
             <ResearchHopfVisualization resolution={activeResolution} />,
             researchIconHost,
             `research-hopf-core-${activeResolution}`,
+          )
+        : null}
+      {!sectionSurface && peopleIconHost
+        ? createPortal(
+            <CardMathVisualization scene="clifford" resolution={activeResolution} />,
+            peopleIconHost,
+            `people-clifford-core-${activeResolution}`,
+          )
+        : null}
+      {!sectionSurface && productsIconHost
+        ? createPortal(
+            <CardMathVisualization scene="tesseract" resolution={activeResolution} />,
+            productsIconHost,
+            `products-tesseract-core-${activeResolution}`,
           )
         : null}
       {!sectionSurface && publicationsIconHost
