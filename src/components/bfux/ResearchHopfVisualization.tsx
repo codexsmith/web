@@ -40,7 +40,7 @@ function stereographic([a, b, c, d]: Vec4): Vec3 | null {
   if (Math.abs(denominator) < 0.075) return null;
   const scale = 1 / denominator;
   const point: Vec3 = [a * scale, b * scale, c * scale];
-  return Math.hypot(...point) < 8.5 ? point : null;
+  return Math.hypot(...point) < 7.2 ? point : null;
 }
 
 function rotate([x, y, z]: Vec3, yaw: number, pitch: number, roll: number): Vec3 {
@@ -160,7 +160,7 @@ export function ResearchHopfVisualization({
         0,
         glowX,
         glowY,
-        Math.max(width, height) * 0.54,
+        Math.max(width, height) * 0.48,
       );
       glow.addColorStop(0, "rgba(176, 70, 255, 0.19)");
       glow.addColorStop(0.44, "rgba(123, 46, 194, 0.055)");
@@ -172,7 +172,7 @@ export function ResearchHopfVisualization({
         const rotated = rotate(point, ...rotation);
         const camera = 9.2;
         const perspective = camera / Math.max(3.3, camera + rotated[2]);
-        const scale = Math.min(width, height) * 0.215;
+        const scale = Math.min(width, height) * 0.165;
         return [
           width * 0.5 + rotated[0] * scale * perspective,
           height * 0.5 - rotated[1] * scale * perspective,
