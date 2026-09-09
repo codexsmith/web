@@ -7,14 +7,14 @@ import styles from "./BoundaryFascinator.module.css";
 type Vec3 = [number, number, number];
 type Vec4 = [number, number, number, number];
 type Fiber = {
-  points: Vec3[];
+  base: Vec3;
   phase: number;
   strength: number;
 };
 
 const TAU = Math.PI * 2;
 const fiberSamples = 92;
-const loopDurationMs = 18_000;
+const loopDurationMs = 10_000;
 const latitudeBands = [-0.72, -0.36, 0, 0.36, 0.72];
 const azimuthCounts = [3, 4, 5, 4, 3];
 
@@ -54,26 +54,11 @@ function buildFibers(): Fiber[] {
 
     for (let index = 0; index < count; index += 1) {
       const azimuth = offset + (index / count) * TAU;
-      const section = hopfSection(
-        radius * Math.cos(azimuth),
-        radius * Math.sin(azimuth),
-        z,
-      );
-      const points: Vec3[] = [];
-
-      for (let sample = 0; sample <= fiberSamples; sample += 1) {
-        const phase = (sample / fiberSamples) * TAU;
-        const point = stereographic(multiplyPhase(section, phase));
-        if (point) points.push(point);
-      }
-
-      if (points.length > 18) {
-        fibers.push({
-          points,
-          phase: (azimuth + (z + 1) * Math.PI * 0.42) % TAU,
-          strength: 0.58 + 0.42 * (1 - Math.abs(z)),
-        });
-      }
+      fibers.push({
+        base: [radius * Math.cos(azimuth), radius * Math.sin(azimuth), z],
+        phase: (azimuth + (z + 1) * Math.PI * 0.42) % TAU,
+        strength: 0.58 + 0.42 * (1 - Math.abs(z)),
+      });
     }
   });
 
@@ -104,9 +89,28 @@ function phaseColor(phase: number, alpha: number) {
 function sceneRotation(loopPhase: number): [number, number, number] {
   return [
     loopPhase + 0.42,
-    -0.34 + Math.sin(loopPhase) * 0.11,
-    Math.sin(loopPhase * 2) * 0.14,
+    -0.32 + Math.sin(loopPhase) * 0.22,
+    Math.sin(loopPhase * 2) * 0.2,
   ];
+}
+
+function sampleFiber(fiber: Fiber, loopPhase: number): Vec3[] {
+  const animatedBase = rotate(
+    fiber.base,
+    loopPhase,
+    Math.sin(loopPhase) * 0.24,
+    Math.sin(loopPhase * 2) * 0.16,
+  );
+  const section = hopfSection(animatedBase[0], animatedBase[1], animatedBase[2]);
+  const points: Vec3[] = [];
+
+  for (let sample = 0; sample <= fiberSamples; sample += 1) {
+    const fiberPhase = (sample / fiberSamples) * TAU;
+    const point = stereographic(multiplyPhase(section, fiberPhase));
+    if (point) points.push(point);
+  }
+
+  return points;
 }
 
 export function BoundaryFascinator({
@@ -149,10 +153,10 @@ export function BoundaryFascinator({
       const rotated = rotate(point, yaw, pitch, roll);
       const camera = 9.4;
       const perspective = camera / Math.max(3.4, camera + rotated[2]);
-      const pulse = 0.97 + 0.03 * Math.cos(loopPhase * 2);
-      const scale = Math.min(width, height) * 0.152 * pulse;
-      const orbitX = Math.sin(loopPhase) * width * 0.06;
-      const orbitY = Math.sin(loopPhase * 2) * height * 0.04;
+      const pulse = 0.95 + 0.05 * Math.cos(loopPhase * 2);
+      const scale = Math.min(width, height) * 0.158 * pulse;
+      const orbitX = Math.sin(loopPhase) * width * 0.085;
+      const orbitY = Math.sin(loopPhase * 2) * height * 0.055;
       return [
         width * 0.5 + orbitX + rotated[0] * scale * perspective,
         height * 0.52 + orbitY - rotated[1] * scale * perspective,
@@ -165,8 +169,8 @@ export function BoundaryFascinator({
       context.clearRect(0, 0, width, height);
 
       const loopPhase = ((time % loopDurationMs) / loopDurationMs) * TAU;
-      const orbitX = Math.sin(loopPhase) * width * 0.06;
-      const orbitY = Math.sin(loopPhase * 2) * height * 0.04;
+      const orbitX = Math.sin(loopPhase) * width * 0.085;
+      const orbitY = Math.sin(loopPhase * 2) * height * 0.055;
       const glowX = width * 0.5 + orbitX;
       const glowY = height * 0.52 + orbitY;
       const glow = context.createRadialGradient(
@@ -175,25 +179,29 @@ export function BoundaryFascinator({
         0,
         glowX,
         glowY,
-        Math.max(width, height) * 0.48,
+        Math.max(width, height) * 0.5,
       );
-      glow.addColorStop(0, "rgba(129, 50, 202, 0.12)");
-      glow.addColorStop(0.45, "rgba(86, 36, 146, 0.035)");
+      glow.addColorStop(0, "rgba(150, 58, 226, 0.16)");
+      glow.addColorStop(0.42, "rgba(96, 39, 158, 0.045)");
       glow.addColorStop(1, "rgba(0, 0, 0, 0)");
       context.fillStyle = glow;
       context.fillRect(0, 0, width, height);
 
       const [yaw, pitch, roll] = sceneRotation(loopPhase);
       const ordered = fibers
-        .map((fiber) => ({
-          fiber,
-          depth: fiber.points.reduce((sum, point) => sum + rotate(point, yaw, pitch, roll)[2], 0) / fiber.points.length,
-        }))
+        .map((fiber) => {
+          const points = sampleFiber(fiber, loopPhase);
+          const depth = points.length
+            ? points.reduce((sum, point) => sum + rotate(point, yaw, pitch, roll)[2], 0) / points.length
+            : 0;
+          return { fiber, points, depth };
+        })
+        .filter(({ points }) => points.length > 18)
         .sort((a, b) => a.depth - b.depth);
 
-      ordered.forEach(({ fiber }, fiberIndex) => {
-        const projected = fiber.points.map((point) => project(point, loopPhase));
-        const alpha = 0.18 + fiber.strength * 0.28;
+      ordered.forEach(({ fiber, points }, fiberIndex) => {
+        const projected = points.map((point) => project(point, loopPhase));
+        const alpha = 0.2 + fiber.strength * 0.3;
 
         context.beginPath();
         projected.forEach(([x, y], index) => {
@@ -201,19 +209,36 @@ export function BoundaryFascinator({
           else context.lineTo(x, y);
         });
         context.strokeStyle = phaseColor(fiber.phase + loopPhase, alpha);
-        context.lineWidth = (0.72 + fiber.strength * 0.72) * Math.max(1, dpr * 0.72);
+        context.lineWidth = (0.8 + fiber.strength * 0.78) * Math.max(1, dpr * 0.72);
         context.shadowBlur = 5 * fiber.strength;
-        context.shadowColor = phaseColor(fiber.phase, 0.32);
+        context.shadowColor = phaseColor(fiber.phase, 0.34);
         context.stroke();
 
-        const travel = ((loopPhase / TAU + fiberIndex / fibers.length) % 1) * (projected.length - 1);
-        const marker = projected[Math.floor(travel)];
+        const travelUnit = (2 * (loopPhase / TAU) + fiberIndex / fibers.length) % 1;
+        const markerIndex = Math.floor(travelUnit * (projected.length - 1));
+        const tailLength = Math.min(16, markerIndex);
+        if (tailLength > 2) {
+          context.beginPath();
+          for (let offset = tailLength; offset >= 0; offset -= 1) {
+            const point = projected[markerIndex - offset];
+            if (!point) continue;
+            if (offset === tailLength) context.moveTo(point[0], point[1]);
+            else context.lineTo(point[0], point[1]);
+          }
+          context.strokeStyle = phaseColor(fiber.phase + loopPhase, 0.88);
+          context.lineWidth = (1.3 + fiber.strength) * Math.max(1, dpr * 0.68);
+          context.shadowBlur = 12;
+          context.shadowColor = phaseColor(fiber.phase + loopPhase, 0.74);
+          context.stroke();
+        }
+
+        const marker = projected[markerIndex];
         if (marker) {
           context.beginPath();
-          context.fillStyle = phaseColor(fiber.phase + loopPhase, 0.82);
-          context.shadowBlur = 10;
-          context.shadowColor = phaseColor(fiber.phase, 0.75);
-          context.arc(marker[0], marker[1], 1.25 + fiber.strength * 0.75, 0, TAU);
+          context.fillStyle = phaseColor(fiber.phase + loopPhase, 0.98);
+          context.shadowBlur = 14;
+          context.shadowColor = phaseColor(fiber.phase, 0.88);
+          context.arc(marker[0], marker[1], 1.7 + fiber.strength * 1.05, 0, TAU);
           context.fill();
         }
       });
@@ -269,7 +294,7 @@ export function BoundaryFascinator({
         </div>
         <footer className={styles.footer}>
           <span>HOPF FIBRATION</span>
-          <span>S³ → S² · 18 S CLOSED LOOP</span>
+          <span>S³ → S² · 10 S CLOSED LOOP</span>
         </footer>
       </aside>
     </div>

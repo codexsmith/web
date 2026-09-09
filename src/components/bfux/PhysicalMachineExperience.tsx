@@ -231,10 +231,10 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
-      {!sectionSurface && apparatusHost
+      {!sectionSurface && aboutHost
         ? createPortal(
             <BoundaryFascinator resolution={activeResolution} onInspect={() => setFascinatorOpen(true)} />,
-            apparatusHost,
+            aboutHost,
             `boundary-fascinator-${activeResolution}`,
           )
         : null}

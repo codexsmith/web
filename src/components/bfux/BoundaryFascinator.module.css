@@ -4,11 +4,10 @@
   --fascinator-panel-height: clamp(154px, 19vh, 194px);
   position: absolute;
   z-index: 65;
-  left: 60%;
-  top: calc(var(--core-upper-top, 7%) - var(--fascinator-panel-height) + 1px);
-  width: clamp(308px, 32%, 458px);
+  left: 0;
+  top: calc(100% + 12px);
+  width: clamp(308px, 145%, 438px);
   height: var(--fascinator-panel-height);
-  transform: translateX(-50%);
   overflow: visible;
   pointer-events: none;
   isolation: isolate;
@@ -23,16 +22,16 @@
 
 .dockClamps i {
   position: absolute;
-  bottom: -8px;
+  top: -8px;
   width: 34px;
   height: 10px;
   border: 1px solid #4c565b;
-  border-top-color: #6b7478;
+  border-bottom-color: #6b7478;
   border-radius: 1px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.08), transparent 35%),
-    linear-gradient(#282f33, #101416);
-  box-shadow: 0 3px 5px #0009;
+    linear-gradient(0deg, rgba(255,255,255,.08), transparent 35%),
+    linear-gradient(#101416, #282f33);
+  box-shadow: 0 -2px 5px #0008;
 }
 
 .dockClamps i::after {
@@ -40,15 +39,15 @@
   position: absolute;
   left: 8px;
   right: 8px;
-  bottom: -4px;
+  top: -4px;
   height: 4px;
   border-left: 2px solid #3d464a;
   border-right: 2px solid #22292c;
   background: #111719;
 }
 
-.dockClamps i:first-child { left: 14%; }
-.dockClamps i:last-child { right: 14%; }
+.dockClamps i:first-child { left: 28px; }
+.dockClamps i:last-child { left: 94px; }
 
 .fascinator {
   --fascinator-signal: #a64dff;
@@ -273,9 +272,8 @@
 @media (min-width: 1025px) {
   .directMount[data-resolution="mid"] {
     --fascinator-panel-height: clamp(126px, 15vh, 152px);
-    left: 55%;
-    top: calc(5% - var(--fascinator-panel-height) + 1px);
-    width: clamp(252px, 25%, 350px);
+    top: calc(100% + 10px);
+    width: clamp(252px, 135%, 350px);
   }
 
   .directMount[data-resolution="mid"] .header {
