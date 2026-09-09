@@ -17,7 +17,7 @@
  * the root control remains visible.
  */
 .boundary-frame:not(.boundary-frame--root) .projection-switcher [data-projection-mode="gestalt"] {
-  display: none;
+  display: none !important;
 }
 
 /* Spatial traversal beacons belong to the same operating language as the frame. */
