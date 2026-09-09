@@ -97,12 +97,15 @@ function rotate4Plane(point: Vec4, a: number, b: number, angle: number): Vec4 {
   return next;
 }
 
-function rotate4(point: Vec4, phase: number, reduced = false): Vec4 {
-  const primary = reduced ? Math.sin(phase) * 0.22 : phase;
-  const secondary = reduced
-    ? 0.42 + Math.sin(phase * 2) * 0.18
-    : phase * 2 + 0.42;
-  const tertiary = Math.sin(phase) * (reduced ? 0.09 : 0.32);
+/**
+ * Closed four-dimensional motion. Every angle is a periodic function of the
+ * shared loop phase, so both pose and velocity agree at the loop boundary.
+ */
+function rotate4Loop(point: Vec4, phase: number, offset = 0, reduced = false): Vec4 {
+  const amplitude = reduced ? 0.34 : 1;
+  const primary = Math.sin(phase + offset) * 1.08 * amplitude;
+  const secondary = 0.42 + Math.sin(phase * 2 + offset * 0.7) * 0.82 * amplitude;
+  const tertiary = Math.cos(phase - offset * 0.4) * 0.42 * amplitude;
 
   let next = rotate4Plane(point, 0, 3, primary);
   next = rotate4Plane(next, 1, 2, secondary);
@@ -174,24 +177,33 @@ function buildHopfSeeds(): HopfSeed[] {
 const hopfSeeds = buildHopfSeeds();
 
 function sampleHopfFiber(seed: HopfSeed, phase: number, reduced: boolean): Vec3[] {
-  const animatedBase = reduced
-    ? rotate3(seed.base, Math.sin(phase) * 0.24, Math.sin(phase) * 0.08, Math.sin(phase * 2) * 0.05)
-    : rotate3(seed.base, phase, Math.sin(phase) * 0.24, Math.sin(phase * 2) * 0.16);
+  const amplitude = reduced ? 0.32 : 1;
+  const animatedBase = rotate3(
+    seed.base,
+    Math.sin(phase) * 0.9 * amplitude,
+    Math.sin(phase * 2) * 0.24 * amplitude,
+    Math.cos(phase) * 0.16 * amplitude,
+  );
   const section = hopfSection(animatedBase[0], animatedBase[1], animatedBase[2]);
   const points: Vec3[] = [];
+
   for (let sample = 0; sample <= fiberSamples; sample += 1) {
     const fiberPhase = (sample / fiberSamples) * TAU;
     const point = stereographicS3(multiplyPhase(section, fiberPhase));
     if (point) points.push(point);
   }
+
   return points;
 }
 
 function drawHopf(environment: DrawEnvironment) {
   const { context, phase, reduced, dpr } = environment;
-  const rotation: [number, number, number] = reduced
-    ? [0.42 + Math.sin(phase) * 0.18, -0.32 + Math.sin(phase) * 0.08, Math.sin(phase * 2) * 0.06]
-    : [phase + 0.42, -0.32 + Math.sin(phase) * 0.22, Math.sin(phase * 2) * 0.2];
+  const amplitude = reduced ? 0.34 : 1;
+  const rotation: [number, number, number] = [
+    0.42 + Math.sin(phase) * 0.82 * amplitude,
+    -0.32 + Math.sin(phase * 2) * 0.22 * amplitude,
+    Math.cos(phase) * 0.2 * amplitude,
+  ];
 
   const ordered = hopfSeeds
     .map((seed) => {
@@ -214,8 +226,8 @@ function drawHopf(environment: DrawEnvironment) {
     context.shadowColor = sceneColor("hopf", seed.phase, 0.32);
     context.stroke();
 
-    const travel = (2 * phase / TAU + fiberIndex / ordered.length) % 1;
-    const markerIndex = Math.floor(travel * (projected.length - 1));
+    const travel = 0.5 - 0.5 * Math.cos(phase + fiberIndex * 0.11);
+    const markerIndex = Math.floor(travel * Math.max(1, projected.length - 1));
     const tailLength = 10;
 
     context.beginPath();
@@ -240,7 +252,7 @@ function buildCliffordLines(): CliffordLine[] {
   const lines: CliffordLine[] = [];
   const fixedCount = 8;
   const samples = 70;
-  const r = Math.SQRT1_2;
+  const radius = Math.SQRT1_2;
 
   for (let fixed = 0; fixed < fixedCount; fixed += 1) {
     const u = (fixed / fixedCount) * TAU;
@@ -248,11 +260,12 @@ function buildCliffordLines(): CliffordLine[] {
     const vLine: Vec4[] = [];
     for (let sample = 0; sample <= samples; sample += 1) {
       const t = (sample / samples) * TAU;
-      uLine.push([r * Math.cos(u), r * Math.sin(u), r * Math.cos(t), r * Math.sin(t)]);
-      vLine.push([r * Math.cos(t), r * Math.sin(t), r * Math.cos(u), r * Math.sin(u)]);
+      uLine.push([radius * Math.cos(u), radius * Math.sin(u), radius * Math.cos(t), radius * Math.sin(t)]);
+      vLine.push([radius * Math.cos(t), radius * Math.sin(t), radius * Math.cos(u), radius * Math.sin(u)]);
     }
     lines.push(uLine, vLine);
   }
+
   return lines;
 }
 
@@ -280,13 +293,16 @@ function drawProjectedSegments(
 
 function drawClifford(environment: DrawEnvironment) {
   const { context, phase, reduced, dpr } = environment;
-  const rotation3: [number, number, number] = reduced
-    ? [0.52 + Math.sin(phase) * 0.12, -0.36 + Math.sin(phase) * 0.08, 0.08 * Math.sin(phase * 2)]
-    : [phase + 0.52, -0.36 + Math.sin(phase) * 0.12, 0.12 * Math.sin(phase * 2)];
+  const amplitude = reduced ? 0.34 : 1;
+  const rotation3: [number, number, number] = [
+    0.52 + Math.sin(phase) * 0.68 * amplitude,
+    -0.36 + Math.sin(phase * 2) * 0.18 * amplitude,
+    Math.cos(phase) * 0.16 * amplitude,
+  ];
 
   cliffordLines.forEach((line, index) => {
     const projected = line.map((point) => {
-      const spatial = stereographicS3(rotate4(point, phase + index * 0.018, reduced));
+      const spatial = stereographicS3(rotate4Loop(point, phase, index * 0.11, reduced));
       return spatial ? project3(spatial, environment, 0.17, rotation3, reduced ? 0.008 : 0.026) : null;
     });
     drawProjectedSegments(context, projected);
@@ -321,11 +337,16 @@ function project4To3(point: Vec4): Vec3 {
 
 function drawTesseract(environment: DrawEnvironment) {
   const { context, phase, reduced, dpr } = environment;
-  const rotated4 = tesseractVertices.map((point) => rotate4(point, phase + 0.3, reduced));
-  const rotation3: [number, number, number] = reduced
-    ? [0.54 + Math.sin(phase) * 0.1, -0.34 + 0.08 * Math.sin(phase), 0.08 * Math.sin(phase * 2)]
-    : [phase + 0.54, -0.34 + 0.12 * Math.sin(phase), 0.16 * Math.sin(phase * 2)];
-  const projected = rotated4.map((point) => project3(project4To3(point), environment, 0.24, rotation3, reduced ? 0.006 : 0.018));
+  const amplitude = reduced ? 0.34 : 1;
+  const rotated4 = tesseractVertices.map((point) => rotate4Loop(point, phase, 0.64, reduced));
+  const rotation3: [number, number, number] = [
+    0.54 + Math.sin(phase) * 0.72 * amplitude,
+    -0.34 + Math.sin(phase * 2) * 0.18 * amplitude,
+    Math.cos(phase) * 0.18 * amplitude,
+  ];
+  const projected = rotated4.map((point) =>
+    project3(project4To3(point), environment, 0.24, rotation3, reduced ? 0.006 : 0.018),
+  );
 
   tesseractEdges.forEach(([a, b], index) => {
     const start = projected[a];
@@ -360,8 +381,8 @@ function lpPoint(theta: number, phi: number, p: number): Vec3 {
   ];
   const norm = Math.pow(
     Math.pow(Math.abs(direction[0]), p) +
-    Math.pow(Math.abs(direction[1]), p) +
-    Math.pow(Math.abs(direction[2]), p),
+      Math.pow(Math.abs(direction[1]), p) +
+      Math.pow(Math.abs(direction[2]), p),
     1 / p,
   );
   return [direction[0] / norm, direction[1] / norm, direction[2] / norm];
@@ -371,9 +392,12 @@ function drawLpMorph(environment: DrawEnvironment) {
   const { context, phase, reduced, dpr } = environment;
   const mix = 0.5 - 0.5 * Math.cos(phase);
   const p = 1.18 + mix * 6.7;
-  const rotation: [number, number, number] = reduced
-    ? [0.62 + Math.sin(phase) * 0.1, -0.42 + 0.1 * Math.sin(phase), 0.07 * Math.sin(phase * 2)]
-    : [phase + 0.62, -0.42 + 0.16 * Math.sin(phase), 0.12 * Math.sin(phase * 2)];
+  const amplitude = reduced ? 0.34 : 1;
+  const rotation: [number, number, number] = [
+    0.62 + Math.sin(phase) * 0.64 * amplitude,
+    -0.42 + Math.sin(phase * 2) * 0.18 * amplitude,
+    Math.cos(phase) * 0.14 * amplitude,
+  ];
   const latitudeCount = 7;
   const longitudeCount = 10;
   const samples = 54;
@@ -515,12 +539,29 @@ export function BoundaryFascinator({
     >
       <span className={styles.mounts} aria-hidden="true"><i /><i /><i /><i /></span>
       <header className={styles.header}>
-        <span className={styles.sceneName}>{meta.label}</span>
-        <span className={styles.headerActions}>
-          <span className={styles.liveStatus}>LIVE</span>
-          {onInspect ? <button className={styles.inspectButton} type="button" onClick={inspect}>INSPECT</button> : null}
+        <span
+          className={styles.sceneName}
+          style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)" }}
+        >
+          {meta.label}
+        </span>
+        <span
+          className={styles.liveStatus}
+          style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)" }}
+        >
+          LIVE
         </span>
       </header>
+      {onInspect ? (
+        <button
+          className={styles.inspectButton}
+          style={{ position: "absolute", right: 9, top: 33 }}
+          type="button"
+          onClick={inspect}
+        >
+          INSPECT
+        </button>
+      ) : null}
       <div className={styles.viewport}>
         <canvas ref={canvasRef} aria-hidden="true" />
         <div className={styles.reticle} aria-hidden="true"><i /><i /></div>
