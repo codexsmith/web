@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef } from "react";
 import type { LabMachineResolution } from "./LabMachine";
 import styles from "./BoundaryFascinator.module.css";
 
@@ -11,13 +11,10 @@ type Fiber = {
   phase: number;
   strength: number;
 };
-type TrackingState = {
-  x: number;
-  label: string;
-};
 
 const TAU = Math.PI * 2;
 const fiberSamples = 92;
+const loopDurationMs = 18_000;
 const latitudeBands = [-0.72, -0.36, 0, 0.36, 0.72];
 const azimuthCounts = [3, 4, 5, 4, 3];
 
@@ -104,6 +101,14 @@ function phaseColor(phase: number, alpha: number) {
   return `hsla(${hue}, 96%, 68%, ${alpha})`;
 }
 
+function sceneRotation(loopPhase: number): [number, number, number] {
+  return [
+    loopPhase + 0.42,
+    -0.34 + Math.sin(loopPhase) * 0.11,
+    Math.sin(loopPhase * 2) * 0.14,
+  ];
+}
+
 export function BoundaryFascinator({
   resolution,
   onInspect,
@@ -112,48 +117,6 @@ export function BoundaryFascinator({
   onInspect?: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const carriageRef = useRef<HTMLDivElement>(null);
-  const shuttleRef = useRef<HTMLDivElement>(null);
-  const [tracking, setTracking] = useState<TrackingState | null>(null);
-
-  useEffect(() => {
-    const carriage = carriageRef.current;
-    const shuttle = shuttleRef.current;
-    const apparatus = carriage?.closest<HTMLElement>(".bf-machine__apparatus") ?? null;
-    if (!carriage || !shuttle || !apparatus) return;
-
-    const trackTarget = (target: EventTarget | null) => {
-      if (!(target instanceof Element)) return;
-      if (target.closest('[data-fascinator-carriage="true"]')) return;
-
-      const node = target.closest(".bf-machine-node[data-node-id]") as HTMLElement | null;
-      if (!node || !apparatus.contains(node)) return;
-
-      const railRect = carriage.getBoundingClientRect();
-      const shuttleRect = shuttle.getBoundingClientRect();
-      const nodeRect = node.getBoundingClientRect();
-      const maxX = Math.max(0, railRect.width - shuttleRect.width);
-      const desiredX = nodeRect.left + nodeRect.width / 2 - railRect.left - shuttleRect.width / 2;
-      const x = Math.max(0, Math.min(maxX, desiredX));
-      const rawLabel = node.querySelector("header strong")?.textContent?.trim() || node.dataset.nodeId || "apparatus";
-      const label = rawLabel.toUpperCase();
-
-      setTracking((current) => {
-        if (current && Math.abs(current.x - x) < 0.5 && current.label === label) return current;
-        return { x: Number(x.toFixed(2)), label };
-      });
-    };
-
-    const onPointerOver = (event: PointerEvent) => trackTarget(event.target);
-    const onFocusIn = (event: FocusEvent) => trackTarget(event.target);
-
-    apparatus.addEventListener("pointerover", onPointerOver);
-    apparatus.addEventListener("focusin", onFocusIn);
-    return () => {
-      apparatus.removeEventListener("pointerover", onPointerOver);
-      apparatus.removeEventListener("focusin", onFocusIn);
-    };
-  }, [resolution]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -181,19 +144,18 @@ export function BoundaryFascinator({
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    const project = (point: Vec3, time: number): [number, number, number] => {
-      const rotated = rotate(
-        point,
-        time * 0.000095 + 0.42,
-        -0.36 + Math.sin(time * 0.000071) * 0.08,
-        0.16 * Math.sin(time * 0.000053),
-      );
+    const project = (point: Vec3, loopPhase: number): [number, number, number] => {
+      const [yaw, pitch, roll] = sceneRotation(loopPhase);
+      const rotated = rotate(point, yaw, pitch, roll);
       const camera = 9.4;
       const perspective = camera / Math.max(3.4, camera + rotated[2]);
-      const scale = Math.min(width, height) * 0.152;
+      const pulse = 0.97 + 0.03 * Math.cos(loopPhase * 2);
+      const scale = Math.min(width, height) * 0.152 * pulse;
+      const orbitX = Math.sin(loopPhase) * width * 0.06;
+      const orbitY = Math.sin(loopPhase * 2) * height * 0.04;
       return [
-        width * 0.5 + rotated[0] * scale * perspective,
-        height * 0.52 - rotated[1] * scale * perspective,
+        width * 0.5 + orbitX + rotated[0] * scale * perspective,
+        height * 0.52 + orbitY - rotated[1] * scale * perspective,
         rotated[2],
       ];
     };
@@ -202,12 +164,17 @@ export function BoundaryFascinator({
       resize();
       context.clearRect(0, 0, width, height);
 
+      const loopPhase = ((time % loopDurationMs) / loopDurationMs) * TAU;
+      const orbitX = Math.sin(loopPhase) * width * 0.06;
+      const orbitY = Math.sin(loopPhase * 2) * height * 0.04;
+      const glowX = width * 0.5 + orbitX;
+      const glowY = height * 0.52 + orbitY;
       const glow = context.createRadialGradient(
-        width * 0.5,
-        height * 0.52,
+        glowX,
+        glowY,
         0,
-        width * 0.5,
-        height * 0.52,
+        glowX,
+        glowY,
         Math.max(width, height) * 0.48,
       );
       glow.addColorStop(0, "rgba(129, 50, 202, 0.12)");
@@ -216,15 +183,16 @@ export function BoundaryFascinator({
       context.fillStyle = glow;
       context.fillRect(0, 0, width, height);
 
+      const [yaw, pitch, roll] = sceneRotation(loopPhase);
       const ordered = fibers
         .map((fiber) => ({
           fiber,
-          depth: fiber.points.reduce((sum, point) => sum + rotate(point, time * 0.000095 + 0.42, -0.36, 0)[2], 0) / fiber.points.length,
+          depth: fiber.points.reduce((sum, point) => sum + rotate(point, yaw, pitch, roll)[2], 0) / fiber.points.length,
         }))
         .sort((a, b) => a.depth - b.depth);
 
       ordered.forEach(({ fiber }, fiberIndex) => {
-        const projected = fiber.points.map((point) => project(point, time));
+        const projected = fiber.points.map((point) => project(point, loopPhase));
         const alpha = 0.18 + fiber.strength * 0.28;
 
         context.beginPath();
@@ -232,17 +200,17 @@ export function BoundaryFascinator({
           if (index === 0) context.moveTo(x, y);
           else context.lineTo(x, y);
         });
-        context.strokeStyle = phaseColor(fiber.phase + time * 0.00008, alpha);
+        context.strokeStyle = phaseColor(fiber.phase + loopPhase, alpha);
         context.lineWidth = (0.72 + fiber.strength * 0.72) * Math.max(1, dpr * 0.72);
         context.shadowBlur = 5 * fiber.strength;
         context.shadowColor = phaseColor(fiber.phase, 0.32);
         context.stroke();
 
-        const travel = ((time * 0.000055 + fiberIndex / fibers.length) % 1) * (projected.length - 1);
+        const travel = ((loopPhase / TAU + fiberIndex / fibers.length) % 1) * (projected.length - 1);
         const marker = projected[Math.floor(travel)];
         if (marker) {
           context.beginPath();
-          context.fillStyle = phaseColor(fiber.phase + time * 0.00018, 0.82);
+          context.fillStyle = phaseColor(fiber.phase + loopPhase, 0.82);
           context.shadowBlur = 10;
           context.shadowColor = phaseColor(fiber.phase, 0.75);
           context.arc(marker[0], marker[1], 1.25 + fiber.strength * 0.75, 0, TAU);
@@ -277,45 +245,33 @@ export function BoundaryFascinator({
     };
   }, []);
 
-  const shuttleStyle = tracking
-    ? ({ "--fascinator-x": `${tracking.x}px` } as CSSProperties)
-    : undefined;
-
   return (
-    <div
-      ref={carriageRef}
-      className={styles.carriage}
-      data-fascinator-carriage="true"
-      data-resolution={resolution}
-      data-tracking={tracking ? "true" : "false"}
-    >
-      <span className={styles.rail} aria-hidden="true"><i /><i /><i /></span>
-      <div ref={shuttleRef} className={styles.shuttle} style={shuttleStyle}>
-        <span className={styles.mast} aria-hidden="true" />
-        <aside
-          className={styles.fascinator}
-          data-scene="hopf-fibration"
-          aria-label="Fascinator visualization: Hopf fibration projected from four-dimensional sphere coordinates into three-dimensional space"
-        >
-          <span className={styles.mounts} aria-hidden="true"><i /><i /><i /><i /></span>
-          <header className={styles.header}>
-            <span><b>FASCINATOR</b> · VISUAL MATHEMATICS</span>
-            <span className={styles.headerActions}>
-              <span className={styles.liveLabel}>{tracking ? `TRACK · ${tracking.label}` : "LIVE MODEL"}</span>
-              {onInspect ? <button className={styles.inspectButton} type="button" onClick={onInspect}>INSPECT</button> : null}
-            </span>
-          </header>
-          <div className={styles.viewport}>
-            <canvas ref={canvasRef} aria-hidden="true" />
-            <div className={styles.reticle} aria-hidden="true"><i /><i /></div>
-            <div className={styles.scanline} aria-hidden="true" />
-          </div>
-          <footer className={styles.footer}>
-            <span>HOPF FIBRATION</span>
-            <span>S³ → S² · STEREOGRAPHIC PROJECTION</span>
-          </footer>
-        </aside>
-      </div>
+    <div className={styles.directMount} data-resolution={resolution}>
+      <span className={styles.dockClamps} aria-hidden="true"><i /><i /></span>
+      <aside
+        className={styles.fascinator}
+        data-scene="hopf-fibration"
+        data-loop-duration-ms={loopDurationMs}
+        aria-label="Fascinator visualization: animated Hopf fibration projected from four-dimensional sphere coordinates into three-dimensional space"
+      >
+        <span className={styles.mounts} aria-hidden="true"><i /><i /><i /><i /></span>
+        <header className={styles.header}>
+          <span><b>FASCINATOR</b> · VISUAL MATHEMATICS</span>
+          <span className={styles.headerActions}>
+            <span>LIVE LOOP</span>
+            {onInspect ? <button className={styles.inspectButton} type="button" onClick={onInspect}>INSPECT</button> : null}
+          </span>
+        </header>
+        <div className={styles.viewport}>
+          <canvas ref={canvasRef} aria-hidden="true" />
+          <div className={styles.reticle} aria-hidden="true"><i /><i /></div>
+          <div className={styles.scanline} aria-hidden="true" />
+        </div>
+        <footer className={styles.footer}>
+          <span>HOPF FIBRATION</span>
+          <span>S³ → S² · 18 S CLOSED LOOP</span>
+        </footer>
+      </aside>
     </div>
   );
 }
