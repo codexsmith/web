@@ -1,0 +1,46 @@
+/* Live mathematical readouts used in the existing People / Products icon cartridges.
+ * The card hardware stays intact; only the static glyph is replaced. */
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] .bf-machine-node__icon-well),
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] .bf-machine-node__icon-well) {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="people"] .bf-machine-node__icon-well > svg),
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="products"] .bf-machine-node__icon-well > svg) {
+  display: none !important;
+}
+
+.field {
+  position: absolute;
+  z-index: 4;
+  inset: -14%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.field[data-scene="clifford"] {
+  filter: drop-shadow(0 0 6px rgba(83, 156, 236, .28));
+}
+
+.field[data-scene="tesseract"] {
+  filter: drop-shadow(0 0 6px rgba(227, 87, 78, .28));
+}
+
+.field canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 1025px) {
+  .field[data-resolution="mid"] {
+    inset: -10%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .field {
+    inset: -7%;
+  }
+}
