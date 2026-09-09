@@ -231,12 +231,16 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
-      {!sectionSurface ? (
-        <>
-          <BoundaryFascinator resolution={activeResolution} onInspect={() => setFascinatorOpen(true)} />
-          <BoundaryFascinatorInstrument open={fascinatorOpen} onClose={() => setFascinatorOpen(false)} />
-        </>
-      ) : null}
+      {!sectionSurface && apparatusHost
+        ? createPortal(
+            <BoundaryFascinator resolution={activeResolution} onInspect={() => setFascinatorOpen(true)} />,
+            apparatusHost,
+            `boundary-fascinator-${activeResolution}`,
+          )
+        : null}
+      {!sectionSurface
+        ? <BoundaryFascinatorInstrument open={fascinatorOpen} onClose={() => setFascinatorOpen(false)} />
+        : null}
       {sectionSurface ? (
         <div className="world-machine-section">{sectionSurface}</div>
       ) : (

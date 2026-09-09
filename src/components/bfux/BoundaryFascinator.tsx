@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type { LabMachineResolution } from "./LabMachine";
 import styles from "./BoundaryFascinator.module.css";
 
@@ -10,6 +10,10 @@ type Fiber = {
   points: Vec3[];
   phase: number;
   strength: number;
+};
+type TrackingState = {
+  x: number;
+  label: string;
 };
 
 const TAU = Math.PI * 2;
@@ -108,6 +112,48 @@ export function BoundaryFascinator({
   onInspect?: () => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const carriageRef = useRef<HTMLDivElement>(null);
+  const shuttleRef = useRef<HTMLDivElement>(null);
+  const [tracking, setTracking] = useState<TrackingState | null>(null);
+
+  useEffect(() => {
+    const carriage = carriageRef.current;
+    const shuttle = shuttleRef.current;
+    const apparatus = carriage?.closest<HTMLElement>(".bf-machine__apparatus") ?? null;
+    if (!carriage || !shuttle || !apparatus) return;
+
+    const trackTarget = (target: EventTarget | null) => {
+      if (!(target instanceof Element)) return;
+      if (target.closest('[data-fascinator-carriage="true"]')) return;
+
+      const node = target.closest(".bf-machine-node[data-node-id]") as HTMLElement | null;
+      if (!node || !apparatus.contains(node)) return;
+
+      const railRect = carriage.getBoundingClientRect();
+      const shuttleRect = shuttle.getBoundingClientRect();
+      const nodeRect = node.getBoundingClientRect();
+      const maxX = Math.max(0, railRect.width - shuttleRect.width);
+      const desiredX = nodeRect.left + nodeRect.width / 2 - railRect.left - shuttleRect.width / 2;
+      const x = Math.max(0, Math.min(maxX, desiredX));
+      const rawLabel = node.querySelector("header strong")?.textContent?.trim() || node.dataset.nodeId || "apparatus";
+      const label = rawLabel.toUpperCase();
+
+      setTracking((current) => {
+        if (current && Math.abs(current.x - x) < 0.5 && current.label === label) return current;
+        return { x: Number(x.toFixed(2)), label };
+      });
+    };
+
+    const onPointerOver = (event: PointerEvent) => trackTarget(event.target);
+    const onFocusIn = (event: FocusEvent) => trackTarget(event.target);
+
+    apparatus.addEventListener("pointerover", onPointerOver);
+    apparatus.addEventListener("focusin", onFocusIn);
+    return () => {
+      apparatus.removeEventListener("pointerover", onPointerOver);
+      apparatus.removeEventListener("focusin", onFocusIn);
+    };
+  }, [resolution]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -231,30 +277,45 @@ export function BoundaryFascinator({
     };
   }, []);
 
+  const shuttleStyle = tracking
+    ? ({ "--fascinator-x": `${tracking.x}px` } as CSSProperties)
+    : undefined;
+
   return (
-    <aside
-      className={styles.fascinator}
+    <div
+      ref={carriageRef}
+      className={styles.carriage}
+      data-fascinator-carriage="true"
       data-resolution={resolution}
-      data-scene="hopf-fibration"
-      aria-label="Fascinator visualization: Hopf fibration projected from four-dimensional sphere coordinates into three-dimensional space"
+      data-tracking={tracking ? "true" : "false"}
     >
-      <span className={styles.mounts} aria-hidden="true"><i /><i /><i /><i /></span>
-      <header className={styles.header}>
-        <span><b>FASCINATOR</b> · VISUAL MATHEMATICS</span>
-        <span className={styles.headerActions}>
-          <span>LIVE MODEL</span>
-          {onInspect ? <button className={styles.inspectButton} type="button" onClick={onInspect}>INSPECT</button> : null}
-        </span>
-      </header>
-      <div className={styles.viewport}>
-        <canvas ref={canvasRef} aria-hidden="true" />
-        <div className={styles.reticle} aria-hidden="true"><i /><i /></div>
-        <div className={styles.scanline} aria-hidden="true" />
+      <span className={styles.rail} aria-hidden="true"><i /><i /><i /></span>
+      <div ref={shuttleRef} className={styles.shuttle} style={shuttleStyle}>
+        <span className={styles.mast} aria-hidden="true" />
+        <aside
+          className={styles.fascinator}
+          data-scene="hopf-fibration"
+          aria-label="Fascinator visualization: Hopf fibration projected from four-dimensional sphere coordinates into three-dimensional space"
+        >
+          <span className={styles.mounts} aria-hidden="true"><i /><i /><i /><i /></span>
+          <header className={styles.header}>
+            <span><b>FASCINATOR</b> · VISUAL MATHEMATICS</span>
+            <span className={styles.headerActions}>
+              <span className={styles.liveLabel}>{tracking ? `TRACK · ${tracking.label}` : "LIVE MODEL"}</span>
+              {onInspect ? <button className={styles.inspectButton} type="button" onClick={onInspect}>INSPECT</button> : null}
+            </span>
+          </header>
+          <div className={styles.viewport}>
+            <canvas ref={canvasRef} aria-hidden="true" />
+            <div className={styles.reticle} aria-hidden="true"><i /><i /></div>
+            <div className={styles.scanline} aria-hidden="true" />
+          </div>
+          <footer className={styles.footer}>
+            <span>HOPF FIBRATION</span>
+            <span>S³ → S² · STEREOGRAPHIC PROJECTION</span>
+          </footer>
+        </aside>
       </div>
-      <footer className={styles.footer}>
-        <span>HOPF FIBRATION</span>
-        <span>S³ → S² · STEREOGRAPHIC PROJECTION</span>
-      </footer>
-    </aside>
+    </div>
   );
 }
