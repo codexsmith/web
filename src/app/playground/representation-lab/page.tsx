@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { RepresentationLab } from "./RepresentationLab";
 import "./representation-lab-physical.css";
+import "./representation-lab-density.css";
 
 export const metadata: Metadata = {
   title: "Same World, Different Reasoner",
