@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { LabMachine, type LabMachineResolution } from "./LabMachine";
-import { BoundaryFascinator } from "./BoundaryFascinator";
+import { BoundaryFascinatorRack } from "./BoundaryFascinator";
 import { BoundaryFascinatorInstrument } from "./BoundaryFascinatorInstrument";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
 import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
@@ -72,6 +72,7 @@ export function PhysicalMachineExperience({
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
+  const [researchHost, setResearchHost] = useState<HTMLElement | null>(null);
   const [initialMachineUnit, setInitialMachineUnit] = useState<number | null>(null);
   const [isMobileProjection, setIsMobileProjection] = useState(false);
   const [fascinatorOpen, setFascinatorOpen] = useState(false);
@@ -180,6 +181,7 @@ export function PhysicalMachineExperience({
     if (sectionSurface) {
       setApparatusHost(null);
       setAboutHost(null);
+      setResearchHost(null);
       return;
     }
 
@@ -188,8 +190,12 @@ export function PhysicalMachineExperience({
       const about = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
       ) ?? null;
+      const research = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="research"]',
+      ) ?? null;
       setApparatusHost(apparatus);
       setAboutHost(about);
+      setResearchHost(research);
     });
 
     return () => window.cancelAnimationFrame(frame);
@@ -231,11 +237,11 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
-      {!sectionSurface && aboutHost
+      {!sectionSurface && researchHost
         ? createPortal(
-            <BoundaryFascinator resolution={activeResolution} onInspect={() => setFascinatorOpen(true)} />,
-            aboutHost,
-            `boundary-fascinator-${activeResolution}`,
+            <BoundaryFascinatorRack resolution={activeResolution} onInspect={() => setFascinatorOpen(true)} />,
+            researchHost,
+            `boundary-fascinator-rack-${activeResolution}`,
           )
         : null}
       {!sectionSurface
