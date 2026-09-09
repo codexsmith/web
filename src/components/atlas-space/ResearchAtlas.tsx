@@ -7,6 +7,7 @@ import styles from "./ResearchAtlas.module.css";
 
 type ResearchAtlasProps = {
   regions: ContentNode[];
+  onNavigate: (id: string) => void;
 };
 
 const researchRegionOrder = [
@@ -22,7 +23,7 @@ function connectorCode(kind: AtlasConnectorKind) {
   return "TST";
 }
 
-export function ResearchAtlas({ regions }: ResearchAtlasProps) {
+export function ResearchAtlas({ regions, onNavigate }: ResearchAtlasProps) {
   const position = new Map(researchRegionOrder.map((id, index) => [id, index]));
   const orderedRegions = [...regions].sort((a, b) => {
     const aIndex = position.get(a.id as (typeof researchRegionOrder)[number]) ?? Number.MAX_SAFE_INTEGER;
@@ -48,7 +49,7 @@ export function ResearchAtlas({ regions }: ResearchAtlasProps) {
 
             return (
               <li key={region.id} className={styles.region}>
-                <a href={`/${region.path}`} title={region.summary}>
+                <button type="button" onClick={() => onNavigate(region.id)} title={region.summary}>
                   <span className={styles.index}>{String(index + 1).padStart(2, "0")}</span>
                   <span className={styles.identity}>
                     <small>{region.eyebrow}</small>
@@ -56,7 +57,7 @@ export function ResearchAtlas({ regions }: ResearchAtlasProps) {
                   </span>
                   <span className={styles.count}>{childCount} objects</span>
                   <span className={styles.enter} aria-hidden="true">→</span>
-                </a>
+                </button>
               </li>
             );
           })}
