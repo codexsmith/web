@@ -85,16 +85,19 @@ function buildDiff(before: Snapshot | null, after: Snapshot): DiffItem[] {
 
 export function TaskWorkbench({
   mode,
+  task,
   worldModel,
   comparison,
   onModeChange,
+  onTaskChange,
 }: {
   mode: Mode;
+  task: TaskId;
   worldModel: WorldModel;
   comparison: ComparisonRow[];
   onModeChange: (mode: Mode) => void;
+  onTaskChange: (task: TaskId) => void;
 }) {
-  const [task, setTask] = useState<TaskId>("reach");
   const [stateDefinition, setStateDefinition] = useState<StateDefinition>("position");
   const currentSnapshot = useMemo<Snapshot>(() => ({ mode, task, stateDefinition, worldModel }), [mode, task, stateDefinition, worldModel]);
   const currentFingerprint = fingerprint(currentSnapshot);
@@ -124,15 +127,15 @@ export function TaskWorkbench({
     <section className={s.workbench} aria-label="Task and representation workbench">
       <div className={s.taskBus}>
         <div className={s.busLabel}>
-          <span>TASK BUS</span>
-          <strong>Hold the world. Change the question.</strong>
+          <span>QUESTION CONTROLS</span>
+          <strong>Try a different job in the same maze.</strong>
         </div>
         <div className={s.taskButtons} role="group" aria-label="Task specification">
           {TASK_ORDER.map((item) => {
             const spec = TASK_SPECS[item];
             const selected = task === item;
             return (
-              <button key={item} type="button" aria-pressed={selected} className={selected ? s.taskActive : s.taskButton} onClick={() => setTask(item)}>
+              <button key={item} type="button" aria-pressed={selected} className={selected ? s.taskActive : s.taskButton} onClick={() => onTaskChange(item)}>
                 <span>{spec.label}</span>
                 <small>{spec.shortLabel}</small>
               </button>
@@ -147,11 +150,11 @@ export function TaskWorkbench({
           <strong>{taskSpec.question}</strong>
         </div>
         <div className={s.requiredBank}>
-          <span>REQUIRED DISTINCTIONS</span>
+          <span>INFORMATION THIS QUESTION NEEDS</span>
           <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
         </div>
         <div className={s.relation} data-state={relation.state}>
-          <span>TASK / REASONER</span>
+          <span>METHOD FIT</span>
           <strong>{relation.label}</strong>
           <small>{relation.detail}</small>
         </div>
@@ -160,8 +163,8 @@ export function TaskWorkbench({
       {task === "visit-all" ? (
         <div className={s.sufficiencyRig} data-closure={stateResult.closure}>
           <div className={s.stateSelector}>
-            <span>STATE SUFFICIENCY RIG</span>
-            <strong>What must count as state?</strong>
+            <span>MEMORY TEST</span>
+            <strong>Does position alone tell us enough?</strong>
             <div role="group" aria-label="State definition">
               <button type="button" aria-pressed={stateDefinition === "position"} onClick={() => setStateDefinition("position")}>POSITION ONLY</button>
               <button type="button" aria-pressed={stateDefinition === "position+visited"} onClick={() => setStateDefinition("position+visited")}>POSITION + VISITED TARGETS</button>
@@ -169,26 +172,26 @@ export function TaskWorkbench({
           </div>
 
           <div className={s.taskMap} aria-label="Four target obligations">
-            <span>TASK OBLIGATIONS</span>
+            <span>TARGETS TO VISIT</span>
             <div>
               {VISIT_ALL_TARGETS.map((target) => <code key={target.label}>{target.label}<small>({target.point[0]},{target.point[1]})</small></code>)}
             </div>
           </div>
 
           <div className={s.sufficiencyResult}>
-            <span>CLOSURE TEST</span>
-            <strong>{stateResult.closure === "reached" ? "SUFFICIENT" : "INSUFFICIENT"}</strong>
+            <span>DOES THE MODEL HAVE ENOUGH MEMORY?</span>
+            <strong>{stateResult.closure === "reached" ? "YES" : "NO"}</strong>
             <dl>
               <div><dt>state</dt><dd>{stateResult.stateLabel}</dd></div>
               <div><dt>expansions</dt><dd>{stateResult.expansions}</dd></div>
-              <div><dt>route</dt><dd>{stateResult.routeSteps === null ? "NO CLOSURE" : `${stateResult.routeSteps} steps`}</dd></div>
+              <div><dt>route</dt><dd>{stateResult.routeSteps === null ? "NO COMPLETE ROUTE" : `${stateResult.routeSteps} steps`}</dd></div>
             </dl>
             <p>{stateResult.output}</p>
           </div>
 
           <div className={s.witness}>
-            <span>COLLISION WITNESS · SAME POSITION</span>
-            <strong>Both histories project to {STATE_WITNESS.historyA.projectedPosition}</strong>
+            <span>WHY POSITION ALONE CAN FAIL</span>
+            <strong>Both histories end at {STATE_WITNESS.historyA.projectedPosition}</strong>
             <div className={s.historyGrid}>
               <article>
                 <span>HISTORY A</span>
@@ -201,7 +204,7 @@ export function TaskWorkbench({
                 <small>visited {STATE_WITNESS.historyB.visited.join(", ")} · remaining {STATE_WITNESS.historyB.remaining.join(", ")}</small>
               </article>
             </div>
-            <p>{stateDefinition === "position" ? "The projection identifies consequentially different histories as the same state." : "The augmented state preserves the distinction required by the task."}</p>
+            <p>{stateDefinition === "position" ? "The computer sees these as the same state even though the remaining job is different." : "Adding visit history keeps the difference the task actually needs."}</p>
           </div>
         </div>
       ) : null}
@@ -215,24 +218,24 @@ export function TaskWorkbench({
         <div className={s.lowerRack}>
           <div className={s.assumptionBay} data-loaded={gameTreeLoaded ? "true" : "false"}>
             <div>
-              <span>ASSUMPTION BAY · PURSUER SEMANTICS</span>
-              <strong>Change one operator. Hold WORLD-01 fixed.</strong>
+              <span>HOW SHOULD WE TREAT THE PURSUER?</span>
+              <strong>Same pursuer. Different assumption.</strong>
             </div>
             <div className={s.lever} role="group" aria-label="Pursuer semantics">
               <button type="button" aria-pressed={mode === "minimax"} onClick={() => onModeChange("minimax")}>
-                <span>MIN</span><small>adversary</small><code>→ {minimax?.selectedAction ?? "?"}</code>
+                <span>MIN</span><small>acts against you</small><code>→ {minimax?.selectedAction ?? "?"}</code>
               </button>
               <div aria-hidden="true"><i data-side={mode === "expectimax" ? "right" : "left"} /></div>
               <button type="button" aria-pressed={mode === "expectimax"} onClick={() => onModeChange("expectimax")}>
-                <span>EXPECTATION</span><small>random variable</small><code>→ {expectimax?.selectedAction ?? "?"}</code>
+                <span>EXPECTATION</span><small>uncertain / random</small><code>→ {expectimax?.selectedAction ?? "?"}</code>
               </button>
             </div>
-            <p>The pursuer geometry is unchanged. Only branch aggregation changes; the rational action flips when the formal type flips.</p>
+            <p>The geometry does not change. Only our assumption about the pursuer changes, and that can change the rational move.</p>
           </div>
 
           <div className={s.diffPanel} aria-live="polite">
             <div className={s.diffHeading}>
-              <span>REPRESENTATION DIFF</span>
+              <span>WHAT CHANGED IN THE MODEL?</span>
               <strong>{previous ? "PREVIOUS → CURRENT" : "ARMED"}</strong>
             </div>
             {previous && diff.length > 0 ? (
@@ -245,7 +248,7 @@ export function TaskWorkbench({
                 ))}
               </div>
             ) : (
-              <p>Change a task, state definition, reasoner, or stressed distinction. This instrument records exactly what crossed the representation boundary.</p>
+              <p>Change the job, reasoning method, memory, or another assumption. This panel records exactly what changed.</p>
             )}
           </div>
         </div>
