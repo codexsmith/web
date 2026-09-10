@@ -3,6 +3,7 @@ import { DistinctionSpaceSandboxSurface } from "@/components/bfux/DistinctionSpa
 import "./instrument-lab.css";
 import "./specimen-canvas-fix.css";
 import "./instrument-layout.css";
+import "./instrument-trim.css";
 
 export const metadata: Metadata = {
   title: "Distinction Space Visual Sandbox | Boundary First Labs",
