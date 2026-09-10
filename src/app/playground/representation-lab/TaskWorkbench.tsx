@@ -2,13 +2,12 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ComparisonRow, Mode, WorldModel } from "./engine";
+import { SetupConsole } from "./SetupConsole";
 import {
   STATE_WITNESS,
-  TASK_ORDER,
   TASK_SPECS,
   VISIT_ALL_RESULTS,
   VISIT_ALL_TARGETS,
-  taskRelation,
   type StateDefinition,
   type TaskId,
 } from "./state-sufficiency";
@@ -115,8 +114,6 @@ export function TaskWorkbench({
     lastRef.current = { fingerprint: currentFingerprint, snapshot: currentSnapshot };
   }, [currentFingerprint, currentSnapshot]);
 
-  const taskSpec = TASK_SPECS[task];
-  const relation = taskRelation(task, mode);
   const diff = useMemo(() => buildDiff(previous, currentSnapshot), [previous, currentSnapshot]);
   const stateResult = stateDefinition === "position" ? VISIT_ALL_RESULTS.lossy : VISIT_ALL_RESULTS.sufficient;
   const minimax = comparison.find((row) => row.mode === "minimax");
@@ -125,40 +122,7 @@ export function TaskWorkbench({
 
   return (
     <section className={s.workbench} aria-label="Task and representation workbench">
-      <div className={s.taskBus}>
-        <div className={s.busLabel}>
-          <span>QUESTION CONTROLS</span>
-          <strong>Try a different job in the same maze.</strong>
-        </div>
-        <div className={s.taskButtons} role="group" aria-label="Task specification">
-          {TASK_ORDER.map((item) => {
-            const spec = TASK_SPECS[item];
-            const selected = task === item;
-            return (
-              <button key={item} type="button" aria-pressed={selected} className={selected ? s.taskActive : s.taskButton} onClick={() => onTaskChange(item)}>
-                <span>{spec.label}</span>
-                <small>{spec.shortLabel}</small>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className={s.taskSpec}>
-        <div>
-          <span>CURRENT QUESTION</span>
-          <strong>{taskSpec.question}</strong>
-        </div>
-        <div className={s.requiredBank}>
-          <span>INFORMATION THIS QUESTION NEEDS</span>
-          <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
-        </div>
-        <div className={s.relation} data-state={relation.state}>
-          <span>METHOD FIT</span>
-          <strong>{relation.label}</strong>
-          <small>{relation.detail}</small>
-        </div>
-      </div>
+      <SetupConsole mode={mode} task={task} onModeChange={onModeChange} onTaskChange={onTaskChange} />
 
       {task === "visit-all" ? (
         <div className={s.sufficiencyRig} data-closure={stateResult.closure}>
