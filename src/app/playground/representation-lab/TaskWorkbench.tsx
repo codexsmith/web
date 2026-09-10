@@ -12,6 +12,7 @@ import {
   type TaskId,
 } from "./state-sufficiency";
 import s from "./representation-lab-task.module.css";
+import a from "./representation-lab-alignment.module.css";
 
 type Snapshot = {
   mode: Mode;
@@ -119,6 +120,7 @@ export function TaskWorkbench({
   const minimax = comparison.find((row) => row.mode === "minimax");
   const expectimax = comparison.find((row) => row.mode === "expectimax");
   const gameTreeLoaded = mode === "minimax" || mode === "expectimax";
+  const recommended = TASK_SPECS[task].canonicalModes.includes(mode);
 
   return (
     <section className={s.workbench} aria-label="Task and representation workbench">
@@ -217,6 +219,39 @@ export function TaskWorkbench({
           </div>
         </div>
       </details>
+
+      <section className={a.modelInputRow} aria-label="Model inputs and pairing">
+        <aside className={a.modelRail} data-fit={recommended ? "recommended" : "experimental"}>
+          <div className={a.modelRailStep}>
+            <b>03</b>
+            <span>MODEL</span>
+            <small>inputs</small>
+          </div>
+          <div className={a.modelRailFit}>
+            <span>FIT</span>
+            <strong>{recommended ? "NATURAL" : "EXPERIMENTAL"}</strong>
+            <small>{recommended ? "standard pairing" : "comparison pairing"}</small>
+          </div>
+        </aside>
+
+        <div className={a.modelInputPanel}>
+          <header className={a.modelInputHeader}>
+            <span>MODEL INPUTS</span>
+            <strong>What information can this method use?</strong>
+            <small>Compare these inputs with what the job needs above.</small>
+          </header>
+          <div className={a.modelInputBanks}>
+            <div className={a.modelBank} data-kind="used">
+              <span>USED BY MODEL</span>
+              <div>{worldModel.represented.map((item) => <code key={item}>{item}</code>)}</div>
+            </div>
+            <div className={a.modelBank} data-kind="hidden">
+              <span>NOT USED / HIDDEN</span>
+              <div>{worldModel.hidden.map((item) => <code key={item}>{item}</code>)}</div>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
   );
 }
