@@ -4,6 +4,7 @@ import type { Mode } from "./engine";
 import { MODE_ORDER } from "./engine";
 import { TASK_ORDER, TASK_SPECS, type TaskId } from "./state-sufficiency";
 import s from "./representation-lab-guided.module.css";
+import a from "./representation-lab-alignment.module.css";
 
 const TASK_LABELS: Record<TaskId, { title: string; short: string }> = {
   reach: { title: "Get to the goal", short: "Reach one target" },
@@ -36,101 +37,105 @@ export function SetupConsole({
   const taskSpec = TASK_SPECS[task];
   const taskLabel = TASK_LABELS[task];
   const modeLabel = MODE_LABELS[mode];
-  const recommended = taskSpec.canonicalModes.includes(mode);
 
   return (
-    <section className={s.setupConsole} aria-label="Active demonstration setup">
-      <div className={s.setupFrame}>
-        <aside className={s.setupSpine} aria-label="Live setup status">
-          <div className={s.spineHead}>
-            <span><i aria-hidden="true" /> LIVE SETUP</span>
+    <section className={`${s.setupConsole} ${a.setupConsole}`} aria-label="Active demonstration setup">
+      <header className={a.liveHeader}>
+        <div className={a.liveIdentity}>
+          <i aria-hidden="true" />
+          <div>
+            <span>LIVE SETUP</span>
             <strong>WORLD-01</strong>
             <small>FIXED WORLD</small>
           </div>
-
-          <div className={s.spineSequence} aria-hidden="true">
-            <div className={s.spineStep} data-channel="job">
-              <b>01</b>
-              <span>JOB</span>
-              <small>question</small>
-            </div>
-            <div className={s.spineLink} />
-            <div className={s.spineStep} data-channel="method">
-              <b>02</b>
-              <span>METHOD</span>
-              <small>reasoner</small>
-            </div>
+        </div>
+        <div className={a.liveContext}>
+          <div>
+            <span>CONFIGURATION</span>
+            <strong>Change the question or the reasoning method.</strong>
           </div>
+          <small>THE MAZE STAYS THE SAME</small>
+        </div>
+      </header>
 
-          <div className={s.spineFit} data-fit={recommended ? "recommended" : "experimental"}>
-            <span>FIT</span>
-            <strong>{recommended ? "NATURAL" : "EXPERIMENTAL"}</strong>
-            <small>{recommended ? "standard pairing" : "comparison pairing"}</small>
-          </div>
+      <div className={a.setupGrid}>
+        <aside className={a.stepRail} data-channel="job" aria-label="Step 01 job">
+          <b>01</b>
+          <span>JOB</span>
+          <small>question</small>
         </aside>
 
-        <div className={s.setupBody}>
-          <div className={s.controlBand} data-channel="job">
-            <article className={s.selectedModule} data-channel="job">
-              <span>01 · JOB</span>
-              <strong>{taskLabel.title}</strong>
-              <small>{taskSpec.question}</small>
-              <em>ACTIVE</em>
-            </article>
+        <div className={`${s.controlBand} ${a.controlBand}`} data-channel="job">
+          <article className={s.selectedModule} data-channel="job">
+            <span>01 · JOB</span>
+            <strong>{taskLabel.title}</strong>
+            <small>{taskSpec.question}</small>
+            <em>ACTIVE</em>
+          </article>
 
-            <div className={s.controlRack} data-channel="job">
-              <header className={s.controlRackHeader}>
-                <span>CONTROL A</span>
-                <strong>Change the job</strong>
-                <small>Change the question. Keep the maze fixed.</small>
-              </header>
-              <div className={s.controlButtons} data-count="5" role="group" aria-label="Change the job">
-                {TASK_ORDER.map((item) => {
-                  const selected = item === task;
-                  const label = TASK_LABELS[item];
-                  return (
-                    <button key={item} type="button" aria-pressed={selected} onClick={() => onTaskChange(item)}>
-                      <span>{label.title}</span>
-                      <small>{label.short}</small>
-                    </button>
-                  );
-                })}
-              </div>
+          <div className={s.controlRack} data-channel="job">
+            <header className={s.controlRackHeader}>
+              <span>CONTROL A</span>
+              <strong>Change the job</strong>
+              <small>Change the question. Keep the maze fixed.</small>
+            </header>
+            <div className={s.controlButtons} data-count="5" role="group" aria-label="Change the job">
+              {TASK_ORDER.map((item) => {
+                const selected = item === task;
+                const label = TASK_LABELS[item];
+                return (
+                  <button key={item} type="button" aria-pressed={selected} onClick={() => onTaskChange(item)}>
+                    <span>{label.title}</span>
+                    <small>{label.short}</small>
+                  </button>
+                );
+              })}
             </div>
           </div>
+        </div>
 
-          <div className={s.requirementStrip}>
-            <span>THE JOB CURRENTLY NEEDS</span>
-            <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
-            <small>These facts must survive the representation.</small>
-          </div>
+        <aside className={a.bridgeRail} aria-label="Information required by the job">
+          <span>NEEDS</span>
+          <small>what the job must know</small>
+        </aside>
 
-          <div className={s.controlBand} data-channel="method">
-            <article className={s.selectedModule} data-channel="method">
-              <span>02 · METHOD</span>
-              <strong>{modeLabel.title}</strong>
-              <small>{modeLabel.technical} · {modeLabel.short}</small>
-              <em>ACTIVE</em>
-            </article>
+        <div className={`${s.requirementStrip} ${a.requirementStrip}`}>
+          <span>THE JOB CURRENTLY NEEDS</span>
+          <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
+          <small>These facts must survive the representation.</small>
+        </div>
 
-            <div className={s.controlRack} data-channel="method">
-              <header className={s.controlRackHeader}>
-                <span>CONTROL B</span>
-                <strong>Change how it reasons</strong>
-                <small>Swap the reasoning module. Keep the job and maze visible.</small>
-              </header>
-              <div className={s.controlButtons} data-count="6" role="group" aria-label="Change the reasoning method">
-                {MODE_ORDER.map((item) => {
-                  const selected = item === mode;
-                  const label = MODE_LABELS[item];
-                  return (
-                    <button key={item} type="button" aria-pressed={selected} onClick={() => onModeChange(item)}>
-                      <span>{label.title}</span>
-                      <small>{label.technical}</small>
-                    </button>
-                  );
-                })}
-              </div>
+        <aside className={a.stepRail} data-channel="method" aria-label="Step 02 method">
+          <b>02</b>
+          <span>METHOD</span>
+          <small>reasoner</small>
+        </aside>
+
+        <div className={`${s.controlBand} ${a.controlBand}`} data-channel="method">
+          <article className={s.selectedModule} data-channel="method">
+            <span>02 · METHOD</span>
+            <strong>{modeLabel.title}</strong>
+            <small>{modeLabel.technical} · {modeLabel.short}</small>
+            <em>ACTIVE</em>
+          </article>
+
+          <div className={s.controlRack} data-channel="method">
+            <header className={s.controlRackHeader}>
+              <span>CONTROL B</span>
+              <strong>Change how it reasons</strong>
+              <small>Swap the reasoning module. Keep the job and maze visible.</small>
+            </header>
+            <div className={s.controlButtons} data-count="6" role="group" aria-label="Change the reasoning method">
+              {MODE_ORDER.map((item) => {
+                const selected = item === mode;
+                const label = MODE_LABELS[item];
+                return (
+                  <button key={item} type="button" aria-pressed={selected} onClick={() => onModeChange(item)}>
+                    <span>{label.title}</span>
+                    <small>{label.technical}</small>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
