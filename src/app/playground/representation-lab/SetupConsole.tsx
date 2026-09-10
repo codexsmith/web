@@ -40,88 +40,99 @@ export function SetupConsole({
 
   return (
     <section className={s.setupConsole} aria-label="Active demonstration setup">
-      <header className={s.setupHeader}>
-        <div className={s.setupIndex}>LIVE SETUP</div>
-        <div>
-          <span>THIS IS WHAT YOU ARE CHANGING</span>
-          <strong>One job + one reasoning method</strong>
-          <small>The maze stays the same. Change either control bank and watch the model below rebuild around the new choice.</small>
-        </div>
-      </header>
+      <div className={s.setupFrame}>
+        <aside className={s.setupSpine} aria-label="Live setup status">
+          <div className={s.spineHead}>
+            <span><i aria-hidden="true" /> LIVE SETUP</span>
+            <strong>WORLD-01</strong>
+            <small>FIXED WORLD</small>
+          </div>
 
-      <div className={s.activeSetup}>
-        <div className={s.activeSetupLabel}>
-          <span>ACTIVE SETUP</span>
-          <strong>Current configuration</strong>
-          <small>These two selected choices define the demonstration.</small>
-        </div>
+          <div className={s.spineSequence} aria-hidden="true">
+            <div className={s.spineStep} data-channel="job">
+              <b>01</b>
+              <span>JOB</span>
+              <small>question</small>
+            </div>
+            <div className={s.spineLink} />
+            <div className={s.spineStep} data-channel="method">
+              <b>02</b>
+              <span>METHOD</span>
+              <small>reasoner</small>
+            </div>
+          </div>
 
-        <article className={s.selectedModule} data-channel="job">
-          <span>01 · JOB</span>
-          <strong>{taskLabel.title}</strong>
-          <small>{taskSpec.question}</small>
-          <em>SELECTED</em>
-        </article>
+          <div className={s.spineFit} data-fit={recommended ? "recommended" : "experimental"}>
+            <span>FIT</span>
+            <strong>{recommended ? "NATURAL" : "EXPERIMENTAL"}</strong>
+            <small>{recommended ? "standard pairing" : "comparison pairing"}</small>
+          </div>
+        </aside>
 
-        <div className={s.setupJoin} aria-hidden="true">+</div>
+        <div className={s.setupBody}>
+          <div className={s.controlBand} data-channel="job">
+            <article className={s.selectedModule} data-channel="job">
+              <span>01 · JOB</span>
+              <strong>{taskLabel.title}</strong>
+              <small>{taskSpec.question}</small>
+              <em>ACTIVE</em>
+            </article>
 
-        <article className={s.selectedModule} data-channel="method">
-          <span>02 · METHOD</span>
-          <strong>{modeLabel.title}</strong>
-          <small>{modeLabel.technical} · {modeLabel.short}</small>
-          <em>SELECTED</em>
-        </article>
+            <div className={s.controlRack} data-channel="job">
+              <header className={s.controlRackHeader}>
+                <span>CONTROL A</span>
+                <strong>Change the job</strong>
+                <small>Change the question. Keep the maze fixed.</small>
+              </header>
+              <div className={s.controlButtons} data-count="5" role="group" aria-label="Change the job">
+                {TASK_ORDER.map((item) => {
+                  const selected = item === task;
+                  const label = TASK_LABELS[item];
+                  return (
+                    <button key={item} type="button" aria-pressed={selected} onClick={() => onTaskChange(item)}>
+                      <span>{label.title}</span>
+                      <small>{label.short}</small>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
-        <div className={s.fitModule} data-fit={recommended ? "recommended" : "experimental"}>
-          <span>PAIRING</span>
-          <strong>{recommended ? "NATURAL FIT" : "EXPERIMENTAL PAIRING"}</strong>
-          <small>{recommended ? "This is a standard match between the job and the reasoning method." : "This is not the usual match. That makes it useful for comparison."}</small>
-        </div>
-      </div>
+          <div className={s.requirementStrip}>
+            <span>THE JOB CURRENTLY NEEDS</span>
+            <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
+            <small>These facts must survive the representation.</small>
+          </div>
 
-      <div className={s.controlRail} data-channel="job">
-        <div className={s.controlLabel}>
-          <span>CONTROL A</span>
-          <strong>Change the job</strong>
-          <small>This changes the question the agent is trying to answer.</small>
-        </div>
-        <div className={s.controlButtons} data-count="5" role="group" aria-label="Change the job">
-          {TASK_ORDER.map((item) => {
-            const selected = item === task;
-            const label = TASK_LABELS[item];
-            return (
-              <button key={item} type="button" aria-pressed={selected} onClick={() => onTaskChange(item)}>
-                <span>{label.title}</span>
-                <small>{label.short}</small>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+          <div className={s.controlBand} data-channel="method">
+            <article className={s.selectedModule} data-channel="method">
+              <span>02 · METHOD</span>
+              <strong>{modeLabel.title}</strong>
+              <small>{modeLabel.technical} · {modeLabel.short}</small>
+              <em>ACTIVE</em>
+            </article>
 
-      <div className={s.requirementStrip}>
-        <span>THE JOB CURRENTLY NEEDS</span>
-        <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
-        <small>These are the facts the current job depends on. Compare them with the model inputs below.</small>
-      </div>
-
-      <div className={s.controlRail} data-channel="method">
-        <div className={s.controlLabel}>
-          <span>CONTROL B</span>
-          <strong>Change how it reasons</strong>
-          <small>Swap the reasoning module used on the same maze.</small>
-        </div>
-        <div className={s.controlButtons} data-count="6" role="group" aria-label="Change the reasoning method">
-          {MODE_ORDER.map((item) => {
-            const selected = item === mode;
-            const label = MODE_LABELS[item];
-            return (
-              <button key={item} type="button" aria-pressed={selected} onClick={() => onModeChange(item)}>
-                <span>{label.title}</span>
-                <small>{label.technical}</small>
-              </button>
-            );
-          })}
+            <div className={s.controlRack} data-channel="method">
+              <header className={s.controlRackHeader}>
+                <span>CONTROL B</span>
+                <strong>Change how it reasons</strong>
+                <small>Swap the reasoning module. Keep the job and maze visible.</small>
+              </header>
+              <div className={s.controlButtons} data-count="6" role="group" aria-label="Change the reasoning method">
+                {MODE_ORDER.map((item) => {
+                  const selected = item === mode;
+                  const label = MODE_LABELS[item];
+                  return (
+                    <button key={item} type="button" aria-pressed={selected} onClick={() => onModeChange(item)}>
+                      <span>{label.title}</span>
+                      <small>{label.technical}</small>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
