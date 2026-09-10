@@ -72,14 +72,15 @@ export function DistinctionSpacePanelCollapseController() {
       {targets.controlsHeading
         ? createPortal(
             <button
-              className="bfl-panel-collapse-toggle"
+              className="bfl-panel-collapse-toggle bfl-panel-collapse-toggle--controls"
               type="button"
               aria-expanded={!controlsCollapsed}
               aria-label={controlsCollapsed ? "Expand input panel" : "Collapse input panel"}
               title={controlsCollapsed ? "Expand input panel" : "Collapse input panel"}
               onClick={() => setControlsCollapsed((value) => !value)}
             >
-              {controlsCollapsed ? "+" : "−"}
+              <span className="bfl-panel-collapse-toggle__label">{controlsCollapsed ? "OPEN" : "HIDE"}</span>
+              <span className="bfl-panel-collapse-toggle__icon" aria-hidden="true">{controlsCollapsed ? "›" : "‹"}</span>
             </button>,
             targets.controlsHeading,
           )
@@ -88,14 +89,15 @@ export function DistinctionSpacePanelCollapseController() {
       {targets.telemetryHeading
         ? createPortal(
             <button
-              className="bfl-panel-collapse-toggle"
+              className="bfl-panel-collapse-toggle bfl-panel-collapse-toggle--telemetry"
               type="button"
               aria-expanded={!telemetryCollapsed}
               aria-label={telemetryCollapsed ? "Expand telemetry panel" : "Collapse telemetry panel"}
               title={telemetryCollapsed ? "Expand telemetry panel" : "Collapse telemetry panel"}
               onClick={() => setTelemetryCollapsed((value) => !value)}
             >
-              {telemetryCollapsed ? "+" : "−"}
+              <span className="bfl-panel-collapse-toggle__label">{telemetryCollapsed ? "OPEN" : "HIDE"}</span>
+              <span className="bfl-panel-collapse-toggle__icon" aria-hidden="true">{telemetryCollapsed ? "⌃" : "⌄"}</span>
             </button>,
             targets.telemetryHeading,
           )
