@@ -92,62 +92,54 @@ export function RepresentationIntro({
     if (!recommended.includes(mode) && firstRecommended) onModeChange(firstRecommended);
   };
 
-  if (loaded) {
-    return (
-      <section className={s.loadedSummary} aria-label="WORLD-01 setup complete">
-        <div className={s.loadedBadge}>04</div>
-        <div>
-          <span>WORLD-01 READY</span>
-          <strong>{taskCopy.title} · {modeCopy.title}</strong>
-          <small>The maze is now loaded below. Run it, step through it, or reopen setup to try another combination.</small>
+  const collapsedIntro = (actionLabel: "OPEN INTRO" | "RESTART", onAction: () => void) => (
+    <header className={`${s.intro} ${g.introCollapsed}`} data-intro-state="collapsed" aria-label="Same World, Different Reasoner introduction">
+      <div className={g.compactIntroCopy}>
+        <div className={g.compactIntroIndex}>INTRO</div>
+        <div className={g.compactIntroText}>
+          <span>INTERACTIVE INTRODUCTION · BOUNDARY FIRST LABS</span>
+          <strong>Same World, Different Reasoner</strong>
         </div>
-        <button type="button" onClick={() => { setActiveStep(1); onEdit(); }}>CHANGE SETUP</button>
-      </section>
-    );
+      </div>
+      <button type="button" className={g.compactIntroAction} onClick={onAction}>{actionLabel}</button>
+    </header>
+  );
+
+  if (loaded) {
+    return collapsedIntro("RESTART", () => {
+      setActiveStep(1);
+      onEdit();
+    });
   }
 
   return (
     <>
       {introCollapsed ? (
-        <header className={s.intro} data-collapsed>
+        collapsedIntro("OPEN INTRO", () => setActiveStep(1))
+      ) : (
+        <header className={s.intro}>
           <div className={s.introCopy}>
             <a href="/">Boundary First Labs / Playground</a>
             <p className={s.kicker}>INTERACTIVE INTRODUCTION · ABOUT 3 MINUTES</p>
             <h1>Same World, Different Reasoner</h1>
             <p className={s.lede}>A computer can only reason about the version of a problem we give it.</p>
-            <p>In this demo the world stays the same. You will change the goal, choose how the computer reasons, and see which facts those choices makes important. Then you can choose again and watch the difference.</p>
+            <p>In this small maze, the scene stays the same. You will change the goal, choose how the computer reasons, and see which facts that choice makes important. Then you can run the same world and watch the difference.</p>
             <div className={s.idea}>
               <span>THE BOUNDARY FIRST IDEA</span>
               <strong>Before trusting an answer, make the problem representation visible.</strong>
               <small>What does the system know? What does it ignore? Which assumptions are doing real work?</small>
             </div>
-            <button type="button" className={g.compactIntroAction} onClick={() => setActiveStep(1)}>REVIEW INTRO + STEP 01</button>
           </div>
+          <aside className={s.introPlate}>
+            <span>YOU WILL CHANGE</span>
+            <ol>
+              <li><b>01</b> the job</li>
+              <li><b>02</b> the reasoning method</li>
+              <li><b>03</b> the information in the model</li>
+            </ol>
+            <div><b>04</b><strong>run WORLD-01</strong></div>
+          </aside>
         </header>
-      ) : (
-        <header className={s.intro}>
-        <div className={s.introCopy}>
-          <a href="/">Boundary First Labs / Playground</a>
-          <p className={s.kicker}>INTERACTIVE INTRODUCTION · ABOUT 3 MINUTES</p>
-          <h1>Same World, Different Reasoner</h1>
-          <p className={s.lede}>A computer can only reason about the version of a problem we give it.</p>
-          <p>In this small maze, the scene stays the same. You will change the goal, choose how the computer reasons, and see which facts that choice makes important. Then you can run the same world and watch the difference.</p>
-          <div className={s.idea}>
-            <span>THE BOUNDARY FIRST IDEA</span>
-            <strong>Before trusting an answer, make the problem representation visible.</strong>
-            <small>What does the system know? What does it ignore? Which assumptions are doing real work?</small>
-          </div>
-        </div>
-        <aside className={s.introPlate}>
-          <span>YOU WILL CHANGE</span>
-          <ol>
-            <li><b>01</b> the job</li>
-            <li><b>02</b> the reasoning method</li>
-            <li><b>03</b> the information in the model</li>
-          </ol>
-          <div><b>04</b><strong>run WORLD-01</strong></div>
-        </aside>
-      </header>
       )}
 
       <section className={s.wizard} aria-label="Representation Lab introduction">
