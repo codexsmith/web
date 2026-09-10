@@ -23,8 +23,6 @@ export function DistinctionSpaceSandboxCard({
       </span>
       <span className={styles.copy}>
         <small>EXPERIMENT · VISUAL MATH</small>
-        <strong>Distinction Space</strong>
-        <p>Move the parameters. Watch higher-dimensional structure respond.</p>
         <span className={styles.action}>OPEN SANDBOX <b>↗</b></span>
       </span>
     </a>
