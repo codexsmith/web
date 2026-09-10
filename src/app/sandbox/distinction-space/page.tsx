@@ -4,6 +4,7 @@ import "./instrument-lab.css";
 import "./specimen-canvas-fix.css";
 import "./instrument-layout.css";
 import "./instrument-trim.css";
+import "./instrument-command-pods.css";
 
 export const metadata: Metadata = {
   title: "Distinction Space Visual Sandbox | Boundary First Labs",
