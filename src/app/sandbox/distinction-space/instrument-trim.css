@@ -1,0 +1,157 @@
+/*
+ * Distinction Space sandbox trim pass.
+ *
+ * Removes non-working bezel space from the installed instrument and folds
+ * explanatory/status text back into the surfaces where it is useful.
+ */
+
+@media (min-width: 851px) {
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] {
+    grid-template-rows: 70px minmax(0, 1fr) !important;
+  }
+
+  /* One metadata rail: eyebrow + operating sentence, then the instrument name. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header {
+    min-height: 70px !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:first-child {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: 16px minmax(0, 1fr);
+    align-content: center;
+    align-items: center;
+    column-gap: 13px;
+    padding-top: 7px !important;
+    padding-bottom: 6px !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:first-child > small {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:first-child > p {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    margin: 0 !important;
+    overflow: hidden;
+    color: #7b898f;
+    font: 500 .56rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: .015em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:first-child > h2 {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    align-self: center;
+    margin: 1px 0 0 !important;
+    font-size: 1.58rem !important;
+  }
+
+  /* Keep the 2 x 3 status/control matrix, but tighten it to the shorter chassis. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) {
+    height: 34px !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav {
+    top: 34px !important;
+    min-height: 33px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button {
+    min-height: 28px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+
+  /*
+   * The old footer was a full-width bezel whose only live value was feedback.
+   * Pull it entirely out of layout and reuse only that feedback string as an
+   * in-chamber readout. The identity engraving is intentionally suppressed.
+   */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > footer {
+    position: absolute !important;
+    z-index: 24 !important;
+    top: 86px !important;
+    right: 24px !important;
+    bottom: auto !important;
+    left: auto !important;
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: min(520px, 52vw);
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    pointer-events: none;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > footer > span:first-child {
+    display: none !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > footer > span:last-child {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 4px 7px 4px 9px;
+    border-left: 2px solid rgba(164, 102, 231, .48);
+    background: rgba(2, 5, 7, .56);
+    color: #7f7089;
+    font: 650 .42rem/1.15 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: .07em;
+    text-align: right !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 851px) and (max-width: 1020px) {
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:first-child > p {
+    font-size: .49rem;
+  }
+}
+
+@media (max-width: 850px) {
+  /* No dedicated bezel on compact layouts either. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > footer {
+    display: none !important;
+  }
+}
