@@ -112,7 +112,7 @@ export function RepresentationIntro({
           <p className={s.kicker}>INTERACTIVE INTRODUCTION · ABOUT 3 MINUTES</p>
           <h1>Same World, Different Reasoner</h1>
           <p className={s.lede}>A computer can only reason about the version of a problem we give it.</p>
-          <p>In this small maze, the scene stays the same. You will change the goal, choose how the computer reasons, and see which facts that choice makes important. Then you can run the same world and watch the difference.</p>
+          <p>In this demo the world stays the same. You will change the goal, choose how the computer reasons, and see which facts those choices makes important. Then you can choose again and watch the difference.</p>
           <div className={s.idea}>
             <span>THE BOUNDARY FIRST IDEA</span>
             <strong>Before trusting an answer, make the problem representation visible.</strong>
