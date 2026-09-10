@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { Mode, WorldModel } from "./engine";
 import { TASK_ORDER, TASK_SPECS, type TaskId } from "./state-sufficiency";
 import s from "./representation-lab-intro.module.css";
+import g from "./representation-lab-guided.module.css";
 
 const TASK_COPY: Record<TaskId, { title: string; detail: string }> = {
   reach: { title: "Get to the goal", detail: "Find a route from the start to one target." },
@@ -82,6 +83,7 @@ export function RepresentationIntro({
   const [activeStep, setActiveStep] = useState<1 | 2 | 3>(1);
   const taskCopy = TASK_COPY[task];
   const modeCopy = MODE_COPY[mode];
+  const introCollapsed = activeStep > 1;
 
   const chooseTask = (nextTask: TaskId) => {
     onTaskChange(nextTask);
@@ -106,29 +108,43 @@ export function RepresentationIntro({
 
   return (
     <>
-      <header className={s.intro}>
-        <div className={s.introCopy}>
-          <a href="/">Boundary First Labs / Playground</a>
-          <p className={s.kicker}>INTERACTIVE INTRODUCTION · ABOUT 3 MINUTES</p>
-          <h1>Same World, Different Reasoner</h1>
-          <p className={s.lede}>A computer can only reason about the version of a problem we give it.</p>
-          <p>In this small maze, the scene stays the same. You will change the goal, choose how the computer reasons, and see which facts that choice makes important. Then you can run the same world and watch the difference.</p>
-          <div className={s.idea}>
-            <span>THE BOUNDARY FIRST IDEA</span>
-            <strong>Before trusting an answer, make the problem representation visible.</strong>
-            <small>What does the system know? What does it ignore? Which assumptions are doing real work?</small>
+      {introCollapsed ? (
+        <header className={`${s.intro} ${g.introCollapsed}`} data-intro-state="collapsed">
+          <div className={g.compactIntroCopy}>
+            <div className={g.compactIntroIndex}>INTRO</div>
+            <div className={g.compactIntroText}>
+              <span>BOUNDARY FIRST LABS · PLAYGROUND</span>
+              <strong>Same World, Different Reasoner</strong>
+              <small>A computer can only reason about the version of a problem we give it.</small>
+            </div>
           </div>
-        </div>
-        <aside className={s.introPlate}>
-          <span>YOU WILL CHANGE</span>
-          <ol>
-            <li><b>01</b> the job</li>
-            <li><b>02</b> the reasoning method</li>
-            <li><b>03</b> the information in the model</li>
-          </ol>
-          <div><b>04</b><strong>run WORLD-01</strong></div>
-        </aside>
-      </header>
+          <button type="button" className={g.compactIntroAction} onClick={() => setActiveStep(1)}>REVIEW INTRO + STEP 01</button>
+        </header>
+      ) : (
+        <header className={s.intro}>
+          <div className={s.introCopy}>
+            <a href="/">Boundary First Labs / Playground</a>
+            <p className={s.kicker}>INTERACTIVE INTRODUCTION · ABOUT 3 MINUTES</p>
+            <h1>Same World, Different Reasoner</h1>
+            <p className={s.lede}>A computer can only reason about the version of a problem we give it.</p>
+            <p>In this small maze, the scene stays the same. You will change the goal, choose how the computer reasons, and see which facts that choice makes important. Then you can run the same world and watch the difference.</p>
+            <div className={s.idea}>
+              <span>THE BOUNDARY FIRST IDEA</span>
+              <strong>Before trusting an answer, make the problem representation visible.</strong>
+              <small>What does the system know? What does it ignore? Which assumptions are doing real work?</small>
+            </div>
+          </div>
+          <aside className={s.introPlate}>
+            <span>YOU WILL CHANGE</span>
+            <ol>
+              <li><b>01</b> the job</li>
+              <li><b>02</b> the reasoning method</li>
+              <li><b>03</b> the information in the model</li>
+            </ol>
+            <div><b>04</b><strong>run WORLD-01</strong></div>
+          </aside>
+        </header>
+      )}
 
       <section className={s.wizard} aria-label="Representation Lab introduction">
         <section className={s.step} data-state={activeStep === 1 ? "active" : "done"}>
