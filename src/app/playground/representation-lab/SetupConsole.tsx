@@ -99,11 +99,17 @@ export function SetupConsole({
         </div>
       </div>
 
+      <div className={s.requirementStrip}>
+        <span>THE JOB CURRENTLY NEEDS</span>
+        <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
+        <small>These are the facts the current job depends on. Compare them with the model inputs below.</small>
+      </div>
+
       <div className={s.controlRail} data-channel="method">
         <div className={s.controlLabel}>
           <span>CONTROL B</span>
           <strong>Change how it reasons</strong>
-          <small>This changes the structure the computer uses to work on the same maze.</small>
+          <small>Swap the reasoning module used on the same maze.</small>
         </div>
         <div className={s.controlButtons} data-count="6" role="group" aria-label="Change the reasoning method">
           {MODE_ORDER.map((item) => {
@@ -117,12 +123,6 @@ export function SetupConsole({
             );
           })}
         </div>
-      </div>
-
-      <div className={s.requirementStrip}>
-        <span>THE JOB CURRENTLY NEEDS</span>
-        <div>{taskSpec.required.map((item) => <code key={item}>{item}</code>)}</div>
-        <small>Compare this list with the model inputs below. If the model leaves out something the job needs, the mismatch becomes visible.</small>
       </div>
     </section>
   );
