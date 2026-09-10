@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DistinctionSpaceSandboxSurface } from "@/components/bfux/DistinctionSpaceSandboxSurface";
 import "./instrument-lab.css";
+import "./specimen-canvas-fix.css";
 
 export const metadata: Metadata = {
   title: "Distinction Space Visual Sandbox | Boundary First Labs",
