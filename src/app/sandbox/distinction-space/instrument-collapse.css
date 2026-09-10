@@ -1,0 +1,143 @@
+/*
+ * Distinction Space sandbox collapsible workstation racks.
+ *
+ * The input rack collapses laterally into a slim service rail; telemetry
+ * collapses vertically into a shallow observation rail. The specimen bay
+ * receives the reclaimed space in both cases.
+ */
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  .bfl-panel-collapse-toggle {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  min-height: 24px;
+  padding: 0 !important;
+  border: 1px solid #44535a !important;
+  border-radius: 5px !important;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.06), transparent 42%),
+    #0a1013 !important;
+  color: #a99ab5 !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.045),
+    0 1px 2px rgba(0,0,0,.45) !important;
+  font: 700 14px/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  cursor: pointer;
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  .bfl-panel-collapse-toggle:hover {
+  border-color: #755e87 !important;
+  color: #d1b5e8 !important;
+}
+
+@media (min-width: 851px) {
+  /* Input panel collapsed: reclaim horizontal specimen space. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> aside select):has(> section canvas[aria-label="Boundary attractor visualization"]):has(> aside:first-of-type[data-bfl-collapsed="true"]) {
+    grid-template-columns: 46px minmax(0, 1fr) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside:has(select)[data-bfl-collapsed="true"] {
+    padding: 5px !important;
+    overflow: hidden !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside:has(select)[data-bfl-collapsed="true"] > :not(:first-child) {
+    display: none !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside:has(select)[data-bfl-collapsed="true"] > div:first-child {
+    display: grid !important;
+    place-items: center;
+    min-height: 100%;
+    margin: 0 !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside:has(select)[data-bfl-collapsed="true"] > div:first-child > *:not(.bfl-panel-collapse-toggle) {
+    display: none !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside:has(select)[data-bfl-collapsed="true"] .bfl-panel-collapse-toggle {
+    width: 28px;
+    min-width: 28px;
+    height: 34px;
+  }
+
+  /* Telemetry collapsed: reclaim vertical specimen space. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> aside select):has(> section canvas[aria-label="Boundary attractor visualization"])
+    > aside:last-of-type[data-bfl-collapsed="true"] {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 34px !important;
+    height: 34px;
+    padding: 4px 8px !important;
+    overflow: hidden !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> aside select):has(> section canvas[aria-label="Boundary attractor visualization"])
+    > aside:last-of-type[data-bfl-collapsed="true"] > :not(:first-child) {
+    display: none !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> aside select):has(> section canvas[aria-label="Boundary attractor visualization"])
+    > aside:last-of-type[data-bfl-collapsed="true"] > div:first-child {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> aside select):has(> section canvas[aria-label="Boundary attractor visualization"])
+    > aside:last-of-type[data-bfl-collapsed="true"] > div:first-child > div {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> aside select):has(> section canvas[aria-label="Boundary attractor visualization"])
+    > aside:last-of-type[data-bfl-collapsed="true"] > div:first-child small,
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> aside select):has(> section canvas[aria-label="Boundary attractor visualization"])
+    > aside:last-of-type[data-bfl-collapsed="true"] > div:first-child strong {
+    margin: 0 !important;
+  }
+}
+
+@media (max-width: 850px) {
+  /* Compact layouts retain simple vertical collapsing without changing columns. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside[data-bfl-collapsed="true"] > :not(:first-child) {
+    display: none !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside[data-bfl-collapsed="true"] {
+    min-height: 38px !important;
+    max-height: 38px !important;
+    overflow: hidden !important;
+    padding: 6px 8px !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    aside[data-bfl-collapsed="true"] > div:first-child {
+    margin: 0 !important;
+    align-items: center;
+  }
+}
