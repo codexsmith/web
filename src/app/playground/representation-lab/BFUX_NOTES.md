@@ -260,6 +260,31 @@ With predecessor retention enabled, goal recognition closes into a reconstructib
 
 This is an important BFUX constraint: the interface should show *which distinction was lost* and *which downstream consequence became impossible*.
 
+## Guided introductory pass
+
+The public-facing version now adds a numbered onboarding sequence ahead of the raw apparatus:
+
+1. **Choose the job.** Start with what the agent is trying to accomplish.
+2. **Choose how it reasons.** Introduce methods in plain language, with technical names secondary.
+3. **See what the model gets.** Show information included, excluded, and the output type before execution.
+4. **Load WORLD-01.** Render the large apparatus only after those choices have acquired meaning.
+
+After Step 01 advances, the large Playground introduction collapses into a compact identity strip so the active wizard stage owns the page. Completed steps collapse in the same direction.
+
+Once WORLD-01 is loaded, the two old visually parallel control rows are reorganized into a single **LIVE SETUP** module. The key BFUX distinction is object-versus-control:
+
+- **ACTIVE SETUP** is the object being changed. It visibly contains the selected **JOB** and **METHOD** as mounted modules.
+- **CONTROL A** changes the job/question.
+- **CONTROL B** changes the reasoning method.
+- Selected controls are visibly keyed back to their corresponding mounted module and labeled `SELECTED`.
+- Job uses the blue/information family; method uses the Research-violet family. This is categorical signaling, not decoration.
+- A pairing module reports `NATURAL FIT` versus `EXPERIMENTAL PAIRING` in beginner language.
+- The information required by the current job is condensed into one requirement strip immediately below the controls.
+
+The design goal is legibility at a glance: **what am I changing, and which controls change it?**
+
+Research-heavy machinery remains available through progressive disclosure rather than competing with the first-use path: Secondary Analysis Bay, Feature-Q compression, particle-budget approximation, route-memory deletion, and the counterfactual comparison rack remain advanced surfaces.
+
 ## Standing
 
 This surface is a **laboratory demonstration** of Boundary First UX and Representational Mechanics. It is not a certification surface and does not claim canonical BFUX conformance.
