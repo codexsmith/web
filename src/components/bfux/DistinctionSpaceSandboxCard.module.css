@@ -1,0 +1,156 @@
+.card {
+  --sandbox-tone: #bd50ff;
+  position: absolute;
+  z-index: 14;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  width: 220px;
+  min-height: 78px;
+  padding: 9px 10px 9px 9px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--sandbox-tone) 52%, #5b6065);
+  border-radius: 3px;
+  color: #e8e1eb;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 28%),
+    linear-gradient(135deg, color-mix(in srgb, var(--sandbox-tone) 11%, #1a141e), #0d0b10 66%, #09090b 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.07),
+    inset 0 -8px 14px rgba(0,0,0,.35),
+    0 0 0 2px #050506,
+    0 5px 10px rgba(0,0,0,.48),
+    0 0 18px color-mix(in srgb, var(--sandbox-tone) 10%, transparent);
+  text-decoration: none;
+  pointer-events: auto;
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+  transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+.card[data-resolution="focus"] {
+  top: 14px;
+  right: 14px;
+  width: 258px;
+  min-height: 82px;
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: color-mix(in srgb, var(--sandbox-tone) 82%, #86898e);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.08),
+    inset 0 -8px 14px rgba(0,0,0,.35),
+    0 0 0 2px #050506,
+    0 6px 12px rgba(0,0,0,.52),
+    0 0 24px color-mix(in srgb, var(--sandbox-tone) 20%, transparent);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.signal {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid color-mix(in srgb, var(--sandbox-tone) 48%, #4a4f54);
+  border-radius: 2px;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--sandbox-tone) 12%, #151218), #08090b 72%);
+  box-shadow: inset 0 0 0 3px #070709, 0 0 8px color-mix(in srgb, var(--sandbox-tone) 18%, transparent);
+}
+
+.signal::before,
+.signal::after,
+.signal i {
+  content: "";
+  position: absolute;
+  border: 1px solid color-mix(in srgb, var(--sandbox-tone) 72%, #a0a4a7);
+  border-radius: 50%;
+  opacity: .82;
+}
+
+.signal::before {
+  width: 22px;
+  height: 11px;
+  transform: rotate(28deg);
+}
+
+.signal::after {
+  width: 22px;
+  height: 11px;
+  transform: rotate(-28deg);
+}
+
+.signal i:nth-child(1) {
+  width: 11px;
+  height: 22px;
+  transform: rotate(12deg);
+}
+
+.signal i:nth-child(2) {
+  width: 4px;
+  height: 4px;
+  border: 0;
+  background: var(--sandbox-tone);
+  box-shadow: 0 0 7px var(--sandbox-tone);
+}
+
+.signal i:nth-child(3) {
+  width: 27px;
+  height: 27px;
+  opacity: .18;
+}
+
+.copy {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+}
+
+.copy small {
+  color: #c7aecf;
+  font: 700 .42rem/1.15 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.copy strong {
+  overflow: hidden;
+  color: #f0e8f3;
+  font: 500 .96rem/1.05 Georgia, serif;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy p {
+  margin: 2px 0 0;
+  color: #bbaac4;
+  font: 500 .5rem/1.28 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .01em;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  color: #9f8ca8;
+  font: 750 .42rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.action b {
+  color: var(--sandbox-tone);
+  font-size: .56rem;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    display: none;
+  }
+}
