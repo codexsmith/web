@@ -209,9 +209,13 @@
   height: 12px;
 }
 
+/* Full resolution keeps the same right shoulder as the first mount, but the
+   billboard grows leftward across the upper bank so it reads like the same
+   physical cap seen in Core rather than a narrower centered promo strip. */
 :global(.bf-machine[data-skin="physical"][data-resolution="mid"]) .billboard {
+  left: 45%;
   top: .4%;
-  width: 43%;
+  width: 53%;
   height: 4.1%;
   min-height: 32px;
   max-height: 42px;
