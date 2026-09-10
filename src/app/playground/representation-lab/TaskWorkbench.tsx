@@ -175,7 +175,7 @@ export function TaskWorkbench({
 
       <details className={s.lowerRackDrawer}>
         <summary className={s.lowerRackSummary}>
-          <span>SECONDARY ANALYSIS BAY</span>
+          <span>ANALYSIS BAY</span>
           <strong>Assumptions + representation diff</strong>
           <small>{gameTreeLoaded ? "PURSUER OPERATOR ACTIVE" : previous ? `${diff.length} RECORDED CHANGE${diff.length === 1 ? "" : "S"}` : "ARMED"}</small>
         </summary>
