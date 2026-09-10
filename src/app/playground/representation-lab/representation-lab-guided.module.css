@@ -275,6 +275,13 @@
 }
 .requirementStrip > small { color: #77858a; font-size: .54rem; line-height: 1.32; }
 
+/* Once WORLD-01 is loaded, the legacy cartridge strip is replaced by the
+   explicit BFUX setup console above. The semantic controls remain the same;
+   only the visual/operator organization changes. */
+:global(.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > div:first-child) {
+  display: none;
+}
+
 @media (max-width: 1050px) {
   .activeSetup { grid-template-columns: 150px 1fr 28px 1fr; }
   .fitModule { grid-column: 1 / -1; }
