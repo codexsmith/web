@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "./RepresentationLabBillboardMount.module.css";
+import "./representation-lab-billboard-placement.css";
 
 const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
 
@@ -43,6 +44,7 @@ export function RepresentationLabBillboardMount() {
   return createPortal(
     <a
       className={styles.billboard}
+      data-representation-lab-billboard
       href="/playground/representation-lab"
       aria-label="Open Same World, Different Reasoner, an interactive Boundary First introduction"
       onPointerDown={(event) => event.stopPropagation()}
