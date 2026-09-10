@@ -22,7 +22,8 @@ export function DistinctionSpaceSandboxCard({
         <i /><i /><i />
       </span>
       <span className={styles.copy}>
-        <small>EXPERIMENT · VISUAL MATH</small>
+        <span className={styles.eyebrow}>EXPERIMENT</span>
+        <span className={styles.eyebrow}>VISUAL MATH</span>
         <span className={styles.action}>OPEN SANDBOX <b>↗</b></span>
       </span>
     </a>
