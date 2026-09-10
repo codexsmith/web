@@ -1,0 +1,431 @@
+.setupConsole {
+  --setup-spine-width: 158px;
+}
+
+.liveHeader {
+  display: grid;
+  grid-template-columns: var(--setup-spine-width) minmax(0, 1fr);
+  min-height: 48px;
+  border-top: 1px solid rgba(170,180,184,.18);
+  border-bottom: 1px solid rgba(170,180,184,.24);
+  background: #0b1013;
+}
+
+.liveIdentity,
+.liveContext {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.liveIdentity {
+  gap: .55rem;
+  padding: .48rem .62rem .48rem .72rem;
+  border-right: 1px solid rgba(170,180,184,.24);
+  border-left: 4px solid var(--bf-region-research, #a98cff);
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(169,140,255,.08), transparent 65%),
+    #10141a;
+  box-shadow: inset -4px 0 10px #0008;
+}
+
+.liveIdentity i {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border: 1px solid #91e49f;
+  border-radius: 50%;
+  background: #4c9b58;
+  box-shadow: 0 0 8px rgba(111,220,128,.45);
+}
+
+.liveIdentity div,
+.liveContext div {
+  min-width: 0;
+  display: grid;
+  gap: .08rem;
+}
+
+.liveIdentity span,
+.liveIdentity small,
+.liveContext span,
+.liveContext small,
+.stepRail span,
+.stepRail small,
+.bridgeRail span,
+.bridgeRail small,
+.modelRail span,
+.modelRail small,
+.modelInputHeader span,
+.modelBank > span {
+  font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.liveIdentity span {
+  color: #c7baff;
+  font-size: .4rem;
+}
+
+.liveIdentity strong {
+  color: #edf0f1;
+  font-size: .76rem;
+  line-height: 1.05;
+}
+
+.liveIdentity small {
+  color: #758187;
+  font-size: .34rem;
+}
+
+.liveContext {
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .42rem .62rem;
+  background: linear-gradient(90deg, rgba(169,140,255,.035), transparent 42%), #0c1114;
+}
+
+.liveContext span {
+  color: #9387c9;
+  font-size: .38rem;
+}
+
+.liveContext strong {
+  color: #dfe4e6;
+  font-size: .66rem;
+  line-height: 1.15;
+}
+
+.liveContext small {
+  color: #727f84;
+  font-size: .38rem;
+  white-space: nowrap;
+}
+
+.setupGrid {
+  display: grid;
+  grid-template-columns: var(--setup-spine-width) minmax(0, 1fr);
+  align-items: stretch;
+  min-width: 0;
+}
+
+.stepRail,
+.bridgeRail {
+  min-width: 0;
+  border-right: 1px solid rgba(170,180,184,.24);
+  box-shadow: inset -4px 0 10px #0008;
+}
+
+.stepRail {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-areas:
+    "number label"
+    "number detail";
+  column-gap: .5rem;
+  align-content: center;
+  align-items: center;
+  padding: .55rem .5rem .55rem .62rem;
+  background: #0b1013;
+}
+
+.stepRail b {
+  grid-area: number;
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(170,180,184,.34);
+  background: #070a0c;
+  font: 800 .55rem/1 var(--font-mono, monospace);
+}
+
+.stepRail span {
+  grid-area: label;
+  font-size: .43rem;
+}
+
+.stepRail small {
+  grid-area: detail;
+  margin-top: .08rem;
+  color: #6f7b80;
+  font-size: .33rem;
+}
+
+.stepRail[data-channel="job"] {
+  border-left: 4px solid #72a7df;
+  background: linear-gradient(180deg, rgba(83,142,202,.09), transparent 65%), #0f171d;
+}
+.stepRail[data-channel="job"] b,
+.stepRail[data-channel="job"] span {
+  color: #96c0e8;
+  border-color: rgba(114,167,223,.45);
+}
+
+.stepRail[data-channel="method"] {
+  border-left: 4px solid var(--bf-region-research, #a98cff);
+  background: linear-gradient(180deg, rgba(169,140,255,.1), transparent 65%), #13121a;
+}
+.stepRail[data-channel="method"] b,
+.stepRail[data-channel="method"] span {
+  color: #c7b9ff;
+  border-color: rgba(169,140,255,.45);
+}
+
+.bridgeRail {
+  display: grid;
+  align-content: center;
+  gap: .08rem;
+  padding: .34rem .55rem .34rem .72rem;
+  border-left: 4px solid #5f91c4;
+  background: linear-gradient(180deg, rgba(72,135,204,.065), transparent), #080d10;
+}
+
+.bridgeRail span {
+  color: #88b4df;
+  font-size: .36rem;
+}
+
+.bridgeRail small {
+  color: #65747a;
+  font-size: .3rem;
+}
+
+.controlBand {
+  min-width: 0;
+  align-self: stretch;
+}
+
+.requirementStrip {
+  border-left: 0 !important;
+}
+
+.modelInputRow {
+  --setup-spine-width: 158px;
+  display: grid;
+  grid-template-columns: var(--setup-spine-width) minmax(0, 1fr);
+  align-items: stretch;
+  min-width: 0;
+  border-top: 1px solid rgba(170,180,184,.22);
+  border-bottom: 1px solid rgba(170,180,184,.28);
+  background: #080c0e;
+}
+
+.modelRail {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-right: 1px solid rgba(170,180,184,.24);
+  border-left: 4px solid #65a786;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.01) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(82,156,117,.075), transparent 52%),
+    #0c1210;
+  box-shadow: inset -4px 0 10px #0008;
+}
+
+.modelRail[data-fit="experimental"] {
+  border-left-color: #b7983d;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.01) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(216,178,73,.075), transparent 52%),
+    #12110c;
+}
+
+.modelRailStep {
+  display: grid;
+  grid-template-columns: 34px minmax(0,1fr);
+  grid-template-areas:
+    "number label"
+    "number detail";
+  column-gap: .5rem;
+  align-items: center;
+  padding: .58rem .5rem .48rem .62rem;
+  border-bottom: 1px solid rgba(170,180,184,.18);
+}
+
+.modelRailStep b {
+  grid-area: number;
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(111,182,139,.45);
+  background: #070b09;
+  color: #a8dfbb;
+  font: 800 .55rem/1 var(--font-mono, monospace);
+}
+
+.modelRail[data-fit="experimental"] .modelRailStep b {
+  border-color: rgba(216,178,73,.46);
+  color: #e5c558;
+}
+
+.modelRailStep span {
+  grid-area: label;
+  color: #9ed8b2;
+  font-size: .42rem;
+}
+.modelRail[data-fit="experimental"] .modelRailStep span { color: #dcc25f; }
+
+.modelRailStep small {
+  grid-area: detail;
+  color: #697a70;
+  font-size: .32rem;
+}
+
+.modelRailFit {
+  display: grid;
+  align-content: center;
+  gap: .13rem;
+  padding: .48rem .62rem .58rem .72rem;
+}
+
+.modelRailFit span {
+  color: #78877d;
+  font-size: .34rem;
+}
+
+.modelRailFit strong {
+  color: #8fdfa0;
+  font: 800 .56rem/1.1 var(--font-mono, monospace);
+  letter-spacing: .05em;
+}
+
+.modelRail[data-fit="experimental"] .modelRailFit strong { color: #e5c558; }
+
+.modelRailFit small {
+  color: #6f7b73;
+  font-size: .31rem;
+}
+
+.modelInputPanel {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(230px, .72fr) minmax(0, 1.6fr);
+  background: #080d0f;
+}
+
+.modelInputHeader {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: .68rem .78rem;
+  border-right: 1px solid rgba(170,180,184,.22);
+  background: linear-gradient(90deg, rgba(111,182,139,.055), transparent 78%), #0d1314;
+  box-shadow: inset -3px 0 8px #0006;
+}
+
+.modelInputHeader span {
+  color: #8fc9a6;
+  font-size: .42rem;
+}
+
+.modelInputHeader strong {
+  margin-top: .22rem;
+  color: #edf0f1;
+  font-size: .83rem;
+  line-height: 1.2;
+}
+
+.modelInputHeader small {
+  margin-top: .25rem;
+  color: #77858a;
+  font-size: .48rem;
+  line-height: 1.3;
+  text-transform: none;
+  letter-spacing: .02em;
+}
+
+.modelInputBanks {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.modelBank {
+  min-width: 0;
+  padding: .62rem .7rem;
+  border-right: 1px solid rgba(170,180,184,.2);
+  background: #0a0f11;
+}
+.modelBank:last-child { border-right: 0; }
+.modelBank[data-kind="used"] { box-shadow: inset 3px 0 rgba(111,182,139,.72); }
+.modelBank[data-kind="hidden"] { box-shadow: inset 3px 0 rgba(198,82,82,.55); }
+
+.modelBank > span {
+  color: #7c898e;
+  font-size: .38rem;
+}
+.modelBank[data-kind="used"] > span { color: #8fd0a5; }
+.modelBank[data-kind="hidden"] > span { color: #ca8585; }
+
+.modelBank > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .28rem;
+  margin-top: .38rem;
+}
+
+.modelBank code {
+  padding: .24rem .32rem;
+  border: 1px solid rgba(170,180,184,.25);
+  border-radius: 2px;
+  background: #080c0e;
+  color: #aeb9bd;
+  font-size: .48rem;
+  line-height: 1.2;
+}
+.modelBank[data-kind="used"] code {
+  border-color: rgba(111,182,139,.36);
+  color: #b8d9c2;
+}
+.modelBank[data-kind="hidden"] code {
+  border-style: dashed;
+  border-color: rgba(198,82,82,.35);
+  color: #b79797;
+}
+
+/* The original model-input rail is replaced by the aligned 03 row above. */
+:global(section[aria-label="Representation laboratory apparatus"] > div[aria-label="Representation boundary"]) {
+  display: none;
+}
+
+@media (max-width: 1120px) {
+  .liveHeader,
+  .setupGrid,
+  .modelInputRow {
+    --setup-spine-width: 132px;
+  }
+
+  .liveContext small { display: none; }
+  .modelInputPanel { grid-template-columns: 210px minmax(0,1fr); }
+}
+
+@media (max-width: 780px) {
+  .liveHeader,
+  .setupGrid,
+  .modelInputRow {
+    grid-template-columns: 1fr;
+  }
+
+  .liveIdentity,
+  .stepRail,
+  .bridgeRail,
+  .modelRail {
+    border-right: 0;
+    box-shadow: none;
+  }
+
+  .liveContext { border-top: 1px solid rgba(170,180,184,.18); }
+  .stepRail { min-height: 50px; }
+  .bridgeRail { min-height: 34px; }
+  .modelInputPanel { grid-template-columns: 1fr; }
+  .modelInputHeader { border-right: 0; border-bottom: 1px solid rgba(170,180,184,.2); }
+  .modelInputBanks { grid-template-columns: 1fr; }
+  .modelBank { border-right: 0; border-bottom: 1px solid rgba(170,180,184,.18); }
+  .modelBank:last-child { border-bottom: 0; }
+}
