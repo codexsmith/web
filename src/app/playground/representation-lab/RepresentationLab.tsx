@@ -3,9 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import styles from "./representation-lab.module.css";
 import x from "./representation-lab-expansion.module.css";
+import introStyles from "./representation-lab-intro.module.css";
 import particleStyles from "./representation-lab-particle.module.css";
 import { FeatureQWorkbench } from "./FeatureQWorkbench";
 import { ParticleBudgetWorkbench } from "./ParticleBudgetWorkbench";
+import { RepresentationIntro } from "./RepresentationIntro";
 import { SemanticTraceBus } from "./SemanticTraceBus";
 import { TaskWorkbench } from "./TaskWorkbench";
 import {
@@ -34,14 +36,15 @@ import {
   type ParticleBudget,
 } from "./particle-filter";
 import { buildSemanticTimeline } from "./semantic-trace";
+import type { TaskId } from "./state-sufficiency";
 
 const MODE_LABELS: Record<Mode, { title: string; technical: string; port: string }> = {
-  bfs: { title: "Pathfinder", technical: "BFS", port: "GRAPH / QUEUE" },
-  astar: { title: "Directed Search", technical: "A*", port: "GRAPH / HEURISTIC" },
-  minimax: { title: "Adversary", technical: "Minimax", port: "GAME TREE / MIN" },
-  expectimax: { title: "Stochastic", technical: "Expectimax", port: "GAME TREE / E" },
-  mdp: { title: "Planner", technical: "Value iteration", port: "MDP / POLICY" },
-  bayes: { title: "Blind Bayesian", technical: "Bayes filter", port: "BELIEF / SENSOR" },
+  bfs: { title: "Search outward", technical: "BFS", port: "GRAPH / QUEUE" },
+  astar: { title: "Search with a hint", technical: "A*", port: "GRAPH / HEURISTIC" },
+  minimax: { title: "Plan for worst case", technical: "Minimax", port: "GAME TREE / MIN" },
+  expectimax: { title: "Plan under uncertainty", technical: "Expectimax", port: "GAME TREE / E" },
+  mdp: { title: "Plan future rewards", technical: "Value iteration", port: "MDP / POLICY" },
+  bayes: { title: "Track what is hidden", technical: "Bayes filter", port: "BELIEF / SENSOR" },
 };
 
 const ACTION_LABELS: Record<Action, string> = {
@@ -84,6 +87,8 @@ function particleOffset(index: number) {
 
 export function RepresentationLab() {
   const [mode, setMode] = useState<Mode>("bfs");
+  const [task, setTask] = useState<TaskId>("reach");
+  const [worldLoaded, setWorldLoaded] = useState(false);
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [revealTruth, setRevealTruth] = useState(false);
@@ -240,31 +245,32 @@ export function RepresentationLab() {
     setMode(nextMode);
   };
 
+  const intro = (
+    <RepresentationIntro
+      mode={mode}
+      task={task}
+      worldModel={activeWorldModel}
+      loaded={worldLoaded}
+      onModeChange={loadMode}
+      onTaskChange={setTask}
+      onLaunch={() => setWorldLoaded(true)}
+      onEdit={() => setWorldLoaded(false)}
+    />
+  );
+
+  if (!worldLoaded) {
+    return <main className={styles.page}>{intro}</main>;
+  }
+
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
-        <div>
-          <a className={styles.crumb} href="/">Boundary First Labs / Playground</a>
-          <p className={styles.eyebrow}>Representational Mechanics Instrument 001 · BFUX laboratory demonstration</p>
-          <h1>Same World, Different Reasoner</h1>
-          <p className={styles.lede}>Hold the carrier world fixed. Replace the formal apparatus. Watch different distinctions become load-bearing.</p>
-        </div>
-        <div className={styles.identityPlate} aria-label="Persistent world identity">
-          <span>SEMANTIC OBJECT</span>
-          <strong>WORLD-01</strong>
-          <dl>
-            <div><dt>identity</dt><dd>persistent</dd></div>
-            <div><dt>geometry</dt><dd>fixed</dd></div>
-            <div><dt>reasoner</dt><dd>replaceable</dd></div>
-          </dl>
-        </div>
-      </header>
+      {intro}
 
       <section className={styles.apparatus} aria-label="Representation laboratory apparatus">
         <div className={styles.cartridgeBank}>
           <div className={styles.bankLabel}>
-            <span>REASONER BUS</span>
-            <strong>Replace one formal cartridge</strong>
+            <span>REASONING CONTROLS</span>
+            <strong>Try another way to think</strong>
           </div>
           <div className={`${styles.modeStrip} ${x.modeStripExpanded}`} role="group" aria-label="Reasoning cartridge">
             {MODE_ORDER.map((item) => {
@@ -286,65 +292,74 @@ export function RepresentationLab() {
           </div>
         </div>
 
-        <TaskWorkbench mode={mode} worldModel={activeWorldModel} comparison={comparison} onModeChange={loadMode} />
+        <TaskWorkbench mode={mode} task={task} worldModel={activeWorldModel} comparison={comparison} onModeChange={loadMode} onTaskChange={setTask} />
 
         {mode === "mdp" ? (
-          <FeatureQWorkbench
-            carrier={qCarrier}
-            onCarrierChange={setQCarrier}
-            config={featureConfig}
-            onConfigChange={setFeatureConfig}
-            result={featureResult}
-          />
+          <details className={introStyles.advancedDrawer}>
+            <summary><span>ADVANCED EXPERIMENT</span> Compress the world into learned features</summary>
+            <FeatureQWorkbench
+              carrier={qCarrier}
+              onCarrierChange={setQCarrier}
+              config={featureConfig}
+              onConfigChange={setFeatureConfig}
+              result={featureResult}
+            />
+          </details>
         ) : null}
 
         {mode === "bayes" ? (
-          <ParticleBudgetWorkbench
-            budget={particleBudget}
-            onBudgetChange={setParticleBudget}
-            exactFrame={frame}
-            particleFrame={particleFrame}
-          />
+          <details className={introStyles.advancedDrawer}>
+            <summary><span>ADVANCED EXPERIMENT</span> Limit the number of belief samples</summary>
+            <ParticleBudgetWorkbench
+              budget={particleBudget}
+              onBudgetChange={setParticleBudget}
+              exactFrame={frame}
+              particleFrame={particleFrame}
+            />
+          </details>
         ) : null}
 
         <div className={styles.boundaryRail} aria-label="Representation boundary">
           <div className={styles.boundaryTitle}>
-            <span>REPRESENTATION BOUNDARY</span>
-            <strong>What crosses into the active model?</strong>
+            <span>MODEL INPUTS</span>
+            <strong>What information can this method use?</strong>
           </div>
-          <PortBank label="ADMITTED" items={activeWorldModel.represented} state="open" />
-          <PortBank label="WITHHELD / FORGOTTEN" items={activeWorldModel.hidden} state="closed" />
+          <PortBank label="USED BY MODEL" items={activeWorldModel.represented} state="open" />
+          <PortBank label="NOT USED / HIDDEN" items={activeWorldModel.hidden} state="closed" />
         </div>
 
-        <div className={x.stressRig} data-active={searchMode ? "true" : "false"} data-defect={breakModel && searchMode ? "true" : "false"}>
-          <div>
-            <span>STRESS RIG · RETENTION PORT</span>
-            <strong>Predecessor relation</strong>
-            <small>{searchMode ? "Required after goal recognition to reconstruct the route." : "Load BFS or A* to stress a required search distinction."}</small>
+        <details className={introStyles.advancedDrawer}>
+          <summary><span>ADVANCED TEST</span> Forget one piece of search memory and see what breaks</summary>
+          <div className={x.stressRig} data-active={searchMode ? "true" : "false"} data-defect={breakModel && searchMode ? "true" : "false"}>
+            <div>
+              <span>ROUTE MEMORY</span>
+              <strong>Remember where each visited square came from</strong>
+              <small>{searchMode ? "The search can find the goal without this memory, but it cannot reconstruct the route afterward." : "Choose BFS or A* to run this test."}</small>
+            </div>
+            <button
+              type="button"
+              disabled={!searchMode}
+              aria-pressed={breakModel && searchMode}
+              onClick={() => setBreakModel((value) => !value)}
+            >
+              {breakModel && searchMode ? "FORGOTTEN · ROUTE BREAKS" : "FORGET ROUTE HISTORY"}
+            </button>
           </div>
-          <button
-            type="button"
-            disabled={!searchMode}
-            aria-pressed={breakModel && searchMode}
-            onClick={() => setBreakModel((value) => !value)}
-          >
-            {breakModel && searchMode ? "DROPPED · MODEL BROKEN" : "RETAINED · DROP DISTINCTION"}
-          </button>
-        </div>
+        </details>
 
         <div className={styles.instrument}>
           <section className={styles.worldHousing} aria-label="Persistent carrier world">
             <div className={styles.worldHeader}>
               <div>
-                <span>WORLD-01 · CARRIER STATE</span>
-                <strong>Maze geometry remains invariant</strong>
+                <span>04 · WORLD-01</span>
+                <strong>Run the same maze with your setup</strong>
               </div>
               <div className={styles.statusCluster}>
-                <StatusLamp label="WORLD" value="FIXED" state="valid" />
-                <StatusLamp label="MODEL" value={activeWorldModel.shortLabel} state="attention" />
+                <StatusLamp label="WORLD" value="SAME MAZE" state="valid" />
+                <StatusLamp label="METHOD" value={activeWorldModel.shortLabel} state="attention" />
                 <StatusLamp
-                  label="CLOSURE"
-                  value={closureState === "defect" ? "DEFECT" : closureState === "reached" ? "REACHED" : "OPEN"}
+                  label="RESULT"
+                  value={closureState === "defect" ? "BROKEN" : closureState === "reached" ? "COMPLETE" : "RUNNING"}
                   state={closureState === "defect" ? "defect" : closureState === "reached" ? "valid" : "unknown"}
                 />
               </div>
@@ -353,13 +368,13 @@ export function RepresentationLab() {
             <div className={styles.worldToolbar}>
               <div className={styles.runControls}>
                 <button type="button" className={styles.primaryControl} onClick={togglePlayback} disabled={featureMode}>
-                  {featureMode ? "LEARNED SNAPSHOT" : playing ? "PAUSE TRACE" : closureReached ? "REPLAY TRACE" : "RUN TRACE"}
+                  {featureMode ? "LEARNED SNAPSHOT" : playing ? "PAUSE" : closureReached ? "REPLAY DEMO" : "RUN DEMO"}
                 </button>
-                <button type="button" className={styles.secondaryControl} onClick={reset} disabled={featureMode}>RESET STATE</button>
-                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={featureMode || step === 0} aria-label="Previous frame">←</button>
-                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.min(semanticFrames.length - 1, value + 1))} disabled={featureMode || closureReached} aria-label="Next frame">→</button>
+                <button type="button" className={styles.secondaryControl} onClick={reset} disabled={featureMode}>RESET</button>
+                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={featureMode || step === 0} aria-label="Previous step">←</button>
+                <button type="button" className={styles.stepControl} onClick={() => setStep((value) => Math.min(semanticFrames.length - 1, value + 1))} disabled={featureMode || closureReached} aria-label="Next step">→</button>
               </div>
-              <div className={styles.frameCounter}>{featureMode ? `${featureResult.trainingEpisodes} training episodes` : `operation ${step + 1} / ${semanticFrames.length}`}</div>
+              <div className={styles.frameCounter}>{featureMode ? `${featureResult.trainingEpisodes} training episodes` : `step ${step + 1} / ${semanticFrames.length}`}</div>
             </div>
 
             <div className={styles.mazeFrame}>
@@ -421,8 +436,8 @@ export function RepresentationLab() {
 
               {mode === "bayes" ? (
                 <div className={styles.truthControl}>
-                  <span>OUTSIDE AGENT BOUNDARY</span>
-                  <button type="button" onClick={() => setRevealTruth((value) => !value)} aria-pressed={revealTruth}>{revealTruth ? "HIDE WORLD TRUTH" : "REVEAL WORLD TRUTH"}</button>
+                  <span>HIDDEN FROM THE AGENT</span>
+                  <button type="button" onClick={() => setRevealTruth((value) => !value)} aria-pressed={revealTruth}>{revealTruth ? "HIDE TRUE POSITION" : "SHOW TRUE POSITION"}</button>
                 </div>
               ) : null}
             </div>
@@ -431,38 +446,38 @@ export function RepresentationLab() {
               <span><i className={styles.legendAgent} /> agent</span>
               <span><i className={styles.legendPursuer} /> pursuer / hazard</span>
               <span><i className={styles.legendTarget} /> target</span>
-              {searchMode ? <span><i className={styles.legendSearch} /> explored / frontier</span> : null}
+              {searchMode ? <span><i className={styles.legendSearch} /> explored / waiting</span> : null}
               {mode === "mdp" ? <span><i className={x.legendValue} /> {featureMode ? "feature-Q value / policy" : "value / policy"}</span> : null}
-              {mode === "bayes" && particleMode ? <span><i className={particleStyles.legendParticle} /> particle hypotheses</span> : null}
-              {mode === "bayes" && !particleMode ? <span><i className={styles.legendBelief} /> exact belief probability</span> : null}
+              {mode === "bayes" && particleMode ? <span><i className={particleStyles.legendParticle} /> particle guesses</span> : null}
+              {mode === "bayes" && !particleMode ? <span><i className={styles.legendBelief} /> belief probability</span> : null}
             </div>
           </section>
 
-          <aside className={styles.modelPanel} aria-live="polite">
+          <aside className={styles.modelPanel} aria-label="Current world model" aria-live="polite">
             <div className={styles.panelHeading}>
-              <span>LOADED CARTRIDGE</span>
+              <span>CURRENT METHOD</span>
               <strong>{activeWorldModel.label}</strong>
               <small>{activeWorldModel.explanation}</small>
             </div>
-            <ModelSection title="ASSUMPTIONS" items={activeWorldModel.assumed} />
-            <div className={styles.outputBlock}><span>OUTPUT OBJECT</span><strong>{activeWorldModel.output}</strong></div>
+            <ModelSection title="WHAT THIS METHOD ASSUMES" items={activeWorldModel.assumed} />
+            <div className={styles.outputBlock}><span>WHAT IT PRODUCES</span><strong>{activeWorldModel.output}</strong></div>
             <div className={styles.equation}>{activeWorldModel.equation}</div>
             <div className={x.metricBlock}>
-              <span>TRACE SUMMARY</span>
+              <span>RESULT SO FAR</span>
               <strong>{activeTraceSignal}</strong>
               <small>{activeTraceDetail}</small>
             </div>
 
             {frame.searchCost ? (
               <div className={x.metricBlock}>
-                <span>SEARCH COST</span>
+                <span>SEARCH SCORE</span>
                 <div className={x.costTriplet}><code>g {frame.searchCost.g}</code><code>h {frame.searchCost.h}</code><code>f {frame.searchCost.f}</code></div>
               </div>
             ) : null}
 
             {frame.candidateScores ? (
               <div className={styles.candidateBlock}>
-                <span>DECISION SURFACE</span>
+                <span>MOVES BEING COMPARED</span>
                 {frame.candidateScores.map((candidate) => (
                   <div key={candidate.action} className={candidate.action === frame.selectedAction ? styles.candidateSelected : styles.candidate}>
                     <strong>{ACTION_LABELS[candidate.action]}</strong><code>{scoreText(candidate.score)}</code>
@@ -473,17 +488,17 @@ export function RepresentationLab() {
 
             {mode === "mdp" && activePolicyAtStart ? (
               <div className={x.metricBlock}>
-                <span>POLICY AT START</span>
+                <span>CHOSEN MOVE AT START</span>
                 <strong>{POLICY_GLYPHS[activePolicyAtStart]} {ACTION_LABELS[activePolicyAtStart]}</strong>
-                <small>{featureMode ? `Tabular reference chooses ${ACTION_LABELS[featureResult.referenceStartAction]}.` : "The output is a policy over states, not a single recovered route."}</small>
+                <small>{featureMode ? `Tabular reference chooses ${ACTION_LABELS[featureResult.referenceStartAction]}.` : "This method builds a reusable plan for many states, not just one route."}</small>
               </div>
             ) : null}
 
             {typeof frame.ping === "number" ? (
               <div className={styles.pingBlock}>
-                <span>OBSERVATION PORT · NOISY RANGE</span>
+                <span>NOISY DISTANCE CLUE</span>
                 <strong>{frame.ping}</strong>
-                {beliefPeak ? <small>active peak: ({beliefPeak.point[0]}, {beliefPeak.point[1]}) at {(beliefPeak.probability * 100).toFixed(1)}%</small> : null}
+                {beliefPeak ? <small>most likely position: ({beliefPeak.point[0]}, {beliefPeak.point[1]}) at {(beliefPeak.probability * 100).toFixed(1)}%</small> : null}
               </div>
             ) : null}
           </aside>
@@ -492,36 +507,36 @@ export function RepresentationLab() {
         <SemanticTraceBus frame={frame} />
 
         <section className={styles.eventLedger} aria-live="polite">
-          <div><span>CURRENT EVENT</span><p>{activeNarration}</p></div>
-          <div><span>REPRESENTATIONAL CONSEQUENCE</span><p>{activeWorldModel.accent}</p></div>
+          <div><span>WHAT IS HAPPENING</span><p>{activeNarration}</p></div>
+          <div><span>WHY THE REPRESENTATION MATTERS</span><p>{activeWorldModel.accent}</p></div>
           <div className={`${closureState === "reached" ? styles.closureReached : styles.closureOpen} ${closureState === "defect" ? x.closureDefect : ""}`}>
-            <span>CLOSURE STATE</span>
-            <strong>{closureState === "defect" ? "REPRESENTATIONAL DEFECT" : closureState === "reached" ? "TRACE RECONCILED" : "BOUNDARY OPEN"}</strong>
+            <span>DEMO STATUS</span>
+            <strong>{closureState === "defect" ? "MODEL IS MISSING SOMETHING IT NEEDS" : closureState === "reached" ? "DEMO COMPLETE" : "KEEP RUNNING"}</strong>
           </div>
         </section>
       </section>
 
-      <section className={x.experimentRack} aria-label="Counterfactual comparison rack">
-        <header className={x.rackHeader}>
-          <div><span>COUNTERFACTUAL RACK</span><h2>Freeze WORLD-01. Compare the consequences.</h2></div>
-          <p>Every cartridge below is evaluated against the same carrier world. Select one to load it into the apparatus above.</p>
-        </header>
+      <details className={x.experimentRack} aria-label="Compare all reasoning methods">
+        <summary className={x.rackHeader}>
+          <div><span>COMPARE METHODS</span><h2>Same maze. Six different ways to think about it.</h2></div>
+          <p>Open this rack to compare what each method pays attention to and what kind of answer it produces.</p>
+        </summary>
 
         <div className={x.contrastBank}>
           <article>
-            <span>ATTENTION POLICY</span>
+            <span>SEARCH ATTENTION</span>
             <strong>BFS {bfsSummary?.signal} → A* {astarSummary?.signal}</strong>
-            <p>Same graph and same optimal route. The heuristic changes which frontier states deserve attention first.</p>
+            <p>Both find a shortest route here. A* uses a distance estimate to decide which possibilities deserve attention first.</p>
           </article>
           <article>
-            <span>ONTOLOGY SWITCH</span>
+            <span>PURSUER ASSUMPTION</span>
             <strong>MIN {minimaxSummary?.selectedAction ?? "?"} ≠ E {expectimaxSummary?.selectedAction ?? "?"}</strong>
-            <p>Same pursuer sprite. Adversary semantics and stochastic semantics produce different rational actions.</p>
+            <p>The pursuer is in the same place. Treating it as hostile versus uncertain can change the rational move.</p>
           </article>
           <article>
-            <span>OUTPUT TYPE</span>
-            <strong>path → action → policy → belief</strong>
-            <p>The carrier world stays recognizable while the computational object produced by inference changes category.</p>
+            <span>KIND OF ANSWER</span>
+            <strong>route → move → policy → belief</strong>
+            <p>The visible world stays recognizable while the object produced by the reasoning process changes category.</p>
           </article>
         </div>
 
@@ -536,13 +551,13 @@ export function RepresentationLab() {
             </button>
           ))}
         </div>
-      </section>
+      </details>
 
       <section className={styles.why}>
-        <div><p className={styles.eyebrow}>Why this matters</p><h2>The algorithm is downstream of a choice about what the world is.</h2></div>
-        <p>This apparatus keeps one semantic world persistent while changing what crosses the representation boundary, what assumptions enter inference, and what kind of output object is produced.</p>
-        <p>The stress rigs expose closure failure, bounded approximation, consequential feature aliasing, and generative-model mismatch while the causal trace now names the actual semantic operation being performed.</p>
-        <a href="https://ai.berkeley.edu/project_overview.html" target="_blank" rel="noreferrer">View the Berkeley project overview ↗</a>
+        <div><p className={styles.eyebrow}>What you just saw</p><h2>The method cannot be separated from the way the problem was represented.</h2></div>
+        <p>The maze stayed the same. But changing the job, available information, or assumptions changed what the computer had to build and what counted as a useful answer.</p>
+        <p>Boundary First Labs makes those choices explicit so they can be inspected, tested, and changed instead of disappearing inside a black box.</p>
+        <a href="https://ai.berkeley.edu/project_overview.html" target="_blank" rel="noreferrer">See the classic Berkeley AI project that inspired the maze ↗</a>
       </section>
     </main>
   );
