@@ -86,7 +86,8 @@ export function RepresentationIntro({
   const chooseTask = (nextTask: TaskId) => {
     onTaskChange(nextTask);
     const recommended = TASK_SPECS[nextTask].canonicalModes;
-    if (!recommended.includes(mode)) onModeChange(recommended[0]);
+    const firstRecommended = recommended[0];
+    if (!recommended.includes(mode) && firstRecommended) onModeChange(firstRecommended);
   };
 
   if (loaded) {
