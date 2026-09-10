@@ -7,7 +7,7 @@ import "./representation-lab-wizard-global.css";
 export const metadata: Metadata = {
   title: "Same World, Different Reasoner",
   description:
-    "An interactive Boundary First Labs introduction showing how the same maze changes when we change the question, reasoning method, and information available to the model.",
+    "A guided Boundary First Labs introduction: keep one maze fixed, change the task, reasoning method, and information available to the model, then watch the result.",
 };
 
 export default function RepresentationLabPage() {
