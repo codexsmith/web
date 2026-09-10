@@ -1,0 +1,144 @@
+/*
+ * Distinction Space sandbox command pods.
+ *
+ * STATE/OPERATE, CLAIM/RECORD, and ENGINE/EXPLAIN are paired as three
+ * vertical instrument channels. The underlying component markup remains
+ * reusable; this installed-sandbox skin makes the semantic column pairing
+ * visually explicit.
+ */
+
+@media (min-width: 851px) {
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2),
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav {
+    gap: 7px !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) {
+    padding: 3px 0 0;
+    background: transparent;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav {
+    top: 34px !important;
+    padding: 0 0 3px !important;
+    background: transparent !important;
+  }
+
+  /* Shared channel grammar. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span,
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button {
+    --channel: #a466e7;
+    --channel-soft: rgba(164, 102, 231, .12);
+    position: relative;
+    min-width: 0;
+    border: 1px solid color-mix(in srgb, var(--channel) 35%, #344149) !important;
+    background:
+      linear-gradient(90deg, var(--channel-soft), transparent 26%),
+      linear-gradient(180deg, rgba(255,255,255,.025), transparent 42%),
+      #0c1317 !important;
+    box-shadow:
+      inset 2px 0 var(--channel),
+      inset 0 1px rgba(255,255,255,.035),
+      0 1px 2px rgba(0,0,0,.44) !important;
+  }
+
+  /* Column 1: STATE / OPERATE */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span:nth-child(1),
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:nth-child(1) {
+    --channel: #b36cff;
+    --channel-soft: rgba(179, 108, 255, .13);
+  }
+
+  /* Column 2: CLAIM / RECORD */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span:nth-child(2),
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:nth-child(2) {
+    --channel: #7f9fc8;
+    --channel-soft: rgba(127, 159, 200, .11);
+  }
+
+  /* Column 3: ENGINE / EXPLAIN */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span:nth-child(3),
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:nth-child(3) {
+    --channel: #79d995;
+    --channel-soft: rgba(121, 217, 149, .10);
+  }
+
+  /* Top readout and lower action become one vertical cartridge. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span {
+    min-height: 31px;
+    padding: 4px 10px 3px 12px !important;
+    border-bottom-color: color-mix(in srgb, var(--channel) 18%, #263239) !important;
+    border-radius: 4px 4px 0 0;
+    color: color-mix(in srgb, var(--channel) 74%, #eef3f3);
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span small {
+    color: color-mix(in srgb, var(--channel) 48%, #89979d) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button {
+    min-height: 30px !important;
+    padding: 4px 10px 4px 12px !important;
+    border-top-color: color-mix(in srgb, var(--channel) 18%, #263239) !important;
+    border-radius: 0 0 4px 4px !important;
+    color: #d6dddd !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button small {
+    color: color-mix(in srgb, var(--channel) 55%, #89979d) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button[aria-pressed="true"] {
+    border-color: color-mix(in srgb, var(--channel) 74%, #56656c) !important;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--channel) 19%, transparent), transparent 34%),
+      linear-gradient(180deg, color-mix(in srgb, var(--channel) 10%, #11191d), #0a1014) !important;
+    box-shadow:
+      inset 2px 0 var(--channel),
+      inset 0 -2px var(--channel),
+      0 0 12px color-mix(in srgb, var(--channel) 12%, transparent) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:hover {
+    border-color: color-mix(in srgb, var(--channel) 58%, #56656c) !important;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--channel) 15%, transparent), transparent 32%),
+      #11191e !important;
+  }
+}
