@@ -3,6 +3,27 @@
   outline-offset: 5px;
 }
 
+.bfux-layout-editing .bf-machine-billboard__visual {
+  outline: 1px dashed rgba(97, 215, 255, .72) !important;
+  outline-offset: -2px;
+}
+
+.bfux-layout-editing .bf-machine-billboard__copy {
+  outline: 1px dashed rgba(189, 116, 255, .72) !important;
+  outline-offset: -2px;
+}
+
+.bfux-layout-editing .bf-machine-billboard__copy > strong {
+  outline: 1px dashed rgba(255, 214, 94, .68) !important;
+  outline-offset: 2px;
+}
+
+.bfux-layout-editing .bf-machine-billboard__eyebrow,
+.bfux-layout-editing .bf-machine-billboard__cta {
+  outline: 1px dashed rgba(151, 225, 108, .58) !important;
+  outline-offset: -1px;
+}
+
 .bfux-layout-studio {
   position: fixed;
   top: 5.5rem;
