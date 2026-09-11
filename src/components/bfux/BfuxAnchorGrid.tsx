@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import "./bfux-anchor-grid.css";
 
@@ -48,8 +48,6 @@ type DragState = {
 type SnapCandidate = BfuxNodeAnchorPlacement & {
   x: number;
   y: number;
-  left: number;
-  top: number;
   width: number;
   height: number;
 };
@@ -121,8 +119,6 @@ function candidateForPointer(host: HTMLElement, event: DragEvent, spec: BfuxAnch
             corner,
             x,
             y,
-            left,
-            top,
             width: drag.width,
             height: drag.height,
           },
@@ -250,6 +246,7 @@ export function BfuxAnchorGridLayer({
   const [host, setHost] = useState<HTMLElement | null>(null);
   const [drag, setDrag] = useState<DragState | null>(null);
   const [candidate, setCandidate] = useState<SnapCandidate | null>(null);
+  const dragRef = useRef<DragState | null>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -287,6 +284,7 @@ export function BfuxAnchorGridLayer({
 
       if (!placement) {
         delete node.dataset.bfuxGridPlaced;
+        delete node.dataset.bfuxGridCorner;
         node.style.removeProperty("--bfux-node-anchor-x");
         node.style.removeProperty("--bfux-node-anchor-y");
         node.style.removeProperty("--bfux-node-anchor-tx");
@@ -368,41 +366,47 @@ export function BfuxAnchorGridLayer({
       event.dataTransfer.setData(nodeTransferType, JSON.stringify({ schema: "bfux.node/v1", nodeId }));
       event.dataTransfer.setData("text/plain", nodeId);
       node.dataset.bfuxGridDragging = "true";
+      dragRef.current = nextDrag;
       setDrag(nextDrag);
       setCandidate(null);
       onSelectedNodeChange?.(nodeId);
     };
 
     const dragOver = (event: DragEvent) => {
-      if (!drag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
+      const activeDrag = dragRef.current;
+      if (!activeDrag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
       event.preventDefault();
       event.stopPropagation();
       event.dataTransfer.dropEffect = "move";
-      setCandidate(candidateForPointer(host, event, state.spec, drag));
+      setCandidate(candidateForPointer(host, event, state.spec, activeDrag));
     };
 
     const drop = (event: DragEvent) => {
-      if (!drag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
+      const activeDrag = dragRef.current;
+      if (!activeDrag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
       event.preventDefault();
       event.stopPropagation();
-      const next = candidateForPointer(host, event, state.spec, drag) ?? candidate;
+      const next = candidateForPointer(host, event, state.spec, activeDrag);
       if (next) {
         onPlacementsChange([
-          ...state.placements.filter((placement) => placement.nodeId !== drag.nodeId),
-          { nodeId: drag.nodeId, column: next.column, row: next.row, corner: next.corner },
+          ...state.placements.filter((placement) => placement.nodeId !== activeDrag.nodeId),
+          { nodeId: activeDrag.nodeId, column: next.column, row: next.row, corner: next.corner },
         ]);
       }
-      const node = host.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(drag.nodeId)}"]`);
+      const node = host.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(activeDrag.nodeId)}"]`);
       if (node) delete node.dataset.bfuxGridDragging;
+      dragRef.current = null;
       setDrag(null);
       setCandidate(null);
     };
 
     const dragEnd = () => {
-      if (drag) {
-        const node = host.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(drag.nodeId)}"]`);
+      const activeDrag = dragRef.current;
+      if (activeDrag) {
+        const node = host.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(activeDrag.nodeId)}"]`);
         if (node) delete node.dataset.bfuxGridDragging;
       }
+      dragRef.current = null;
       setDrag(null);
       setCandidate(null);
     };
@@ -421,8 +425,9 @@ export function BfuxAnchorGridLayer({
       host.removeEventListener("dragover", dragOver, true);
       host.removeEventListener("drop", drop, true);
       window.removeEventListener("dragend", dragEnd);
+      dragRef.current = null;
     };
-  }, [candidate, drag, host, onPlacementsChange, onSelectedNodeChange, state]);
+  }, [host, onPlacementsChange, onSelectedNodeChange, state.placements, state.spec]);
 
   const points = useMemo(() => {
     const next: Array<{ column: number; row: number; x: number; y: number }> = [];
