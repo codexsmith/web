@@ -1,9 +1,9 @@
 /* Cascade lock for the first-class Representation Lab billboard card.
  *
  * The billboard is a normal Lab Machine card whose function is invitation.
- * Products is now its physical mounting datum in both desktop resolutions:
- * the billboard rides above the Products face in z-space instead of consuming
- * Tour's expandable left-hand bay or forcing a fourth institutional column.
+ * In both desktop resolutions it is mounted ABOVE Products in the Y direction:
+ * same horizontal datum, separate vertical card, no z-overlap with Products and
+ * no use of Tour's expandable left-hand bay.
  */
 
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__status {
@@ -12,90 +12,151 @@
   pointer-events: none !important;
 }
 
-/* FULL / MID
- * Products occupies 45.5% / 5% / 18.5% / 22% in the canonical composition.
- * Center the slightly larger billboard over that card and let it overhang only
- * into the local card gutter. The face gets enough area to read as a small
- * poster while preserving the surrounding machine geometry.
+/* -------------------------------------------------------------------------- */
+/* Shared desktop billboard face                                                */
+/* -------------------------------------------------------------------------- */
+
+@media (min-width: 1025px) {
+  /* A billboard wants a landscape face. Keep the ordinary machine-card shell,
+   * fasteners, and mounting behavior, but arrange the pictogram and invitation
+   * side-by-side so the card can live naturally in the narrow deck above the
+   * institutional row. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__face {
+    display: grid !important;
+    grid-template-columns: 42% minmax(0, 58%) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    padding: calc(var(--machine-u, 12px) * .42) calc(var(--machine-u, 12px) * .46) calc(var(--machine-u, 12px) * .34) !important;
+    border-right: 1px solid color-mix(in srgb, var(--tone) 28%, #31383d);
+    border-bottom: 0 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__world-label {
+    left: calc(var(--machine-u, 12px) * .48) !important;
+    top: calc(var(--machine-u, 12px) * .34) !important;
+    font-size: calc(var(--machine-u, 12px) * .39) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    width: 100%;
+    height: 100%;
+    min-height: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    left: calc(var(--machine-u, 12px) * .42) !important;
+    right: calc(var(--machine-u, 12px) * .42) !important;
+    bottom: calc(var(--machine-u, 12px) * .24) !important;
+    gap: calc(var(--machine-u, 12px) * .28) !important;
+    font-size: calc(var(--machine-u, 12px) * .34) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+      "eyebrow eyebrow"
+      "title cta" !important;
+    align-content: center;
+    gap: calc(var(--machine-u, 12px) * .28) calc(var(--machine-u, 12px) * .48) !important;
+    min-width: 0;
+    padding: calc(var(--machine-u, 12px) * .52) calc(var(--machine-u, 12px) * .6) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > p {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    grid-area: title;
+    align-self: center;
+    font-size: calc(var(--machine-u, 12px) * 1.16) !important;
+    line-height: .96 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    font-size: calc(var(--machine-u, 12px) * .39) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta {
+    grid-area: cta;
+    align-self: center !important;
+    min-width: calc(var(--machine-u, 12px) * 5.25) !important;
+    min-height: calc(var(--machine-u, 12px) * 2.7);
+    padding: 0 calc(var(--machine-u, 12px) * .5) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cue-row {
+    display: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* FULL / MID                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/* Canonical Products: left 45.5%, top 5%, width 18.5%, height 22%.
+ * Billboard: centered on that same X datum, but its entire card ends at 3%.
+ * That leaves a small physical gap before Products begins at 5%.
  */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node--billboard {
   position: absolute !important;
-  left: 43.75% !important;
-  top: 1% !important;
-  width: 22% !important;
-  height: 27% !important;
+  left: 41.75% !important;
+  top: -13% !important;
+  width: 26% !important;
+  height: 16% !important;
   z-index: 9 !important;
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
 }
 
-/* Full remains the denser projection, so keep the visual first and use a short
- * full-width invitation beneath it. The maze already carries JOB -> METHOD ->
- * MODEL; a third footer strip would only repeat information at this density.
- */
-.bf-machine[data-skin="physical"][data-resolution="mid"]
-  .bf-machine-node--billboard .bf-machine-billboard__face {
-  grid-template-rows: minmax(0, 1fr) auto !important;
-}
-
-.bf-machine[data-skin="physical"][data-resolution="mid"]
-  .bf-machine-node--billboard .bf-machine-billboard__cue-row {
-  display: none !important;
-}
-
-.bf-machine[data-skin="physical"][data-resolution="mid"]
-  .bf-machine-node--billboard .bf-machine-billboard__copy {
-  grid-template-columns: minmax(0, 1fr) !important;
-  grid-template-areas:
-    "eyebrow"
-    "title"
-    "cta" !important;
-  gap: calc(var(--machine-u, 12px) * .28) !important;
-  padding: calc(var(--machine-u, 12px) * .48) calc(var(--machine-u, 12px) * .58) !important;
-}
-
-.bf-machine[data-skin="physical"][data-resolution="mid"]
-  .bf-machine-node--billboard .bf-machine-billboard__copy > p {
-  display: none !important;
-}
-
 .bf-machine[data-skin="physical"][data-resolution="mid"]
   .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
-  font-size: calc(var(--machine-u, 12px) * 1.2) !important;
-  line-height: .97 !important;
+  font-size: calc(var(--machine-u, 12px) * 1.08) !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="mid"]
   .bf-machine-node--billboard .bf-machine-billboard__cta {
-  min-width: 0 !important;
-  min-height: calc(var(--machine-u, 12px) * 2.05);
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-  gap: calc(var(--machine-u, 12px) * .45);
-  padding: calc(var(--machine-u, 12px) * .32) calc(var(--machine-u, 12px) * .5) !important;
+  min-width: calc(var(--machine-u, 12px) * 4.7) !important;
+  min-height: calc(var(--machine-u, 12px) * 2.35);
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"]
-  .bf-machine-node--billboard .bf-machine-billboard__visual svg {
-  min-height: calc(var(--machine-u, 12px) * 6.35) !important;
-}
+/* -------------------------------------------------------------------------- */
+/* CORE / FOCUS                                                                */
+/* -------------------------------------------------------------------------- */
 
-/* CORE / FOCUS
- * Use the canonical Products column itself as the horizontal datum. Core liked
- * the existing face composition, so only give the billboard a little more
- * vertical presence and move it onto Products; do not rearrange People,
- * Products, or Publications around the billboard.
+/* Core Products is defined by --core-products-left / --core-upper-card-width
+ * and begins at --core-upper-top (7%). Center the billboard over that column;
+ * its bottom lands at 5%, leaving the same small Y gap before Products.
  */
 .site-shell[data-root-focus="true"]
   .bf-machine[data-skin="physical"][data-resolution="focus"]
   .bf-machine__apparatus > .bf-machine-node--billboard {
   position: absolute !important;
-  left: var(--core-products-left) !important;
-  top: 4% !important;
-  width: var(--core-upper-card-width) !important;
-  height: 44.5% !important;
+  left: calc(var(--core-products-left) - 1.4%) !important;
+  top: -13% !important;
+  width: calc(var(--core-upper-card-width) + 2.8%) !important;
+  height: 18% !important;
   z-index: 9 !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -104,17 +165,13 @@
 
 .bf-machine[data-skin="physical"][data-resolution="focus"]
   .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
-  font-size: calc(var(--machine-u, 12px) * 1.36) !important;
+  font-size: calc(var(--machine-u, 12px) * 1.2) !important;
 }
 
-/* Products remains part of the machine graph underneath the billboard. The
- * billboard is simply the front-most invitation plate at that mounting point.
- * Tour expands in the left institutional bay, so these two instruments no
- * longer compete for either geometry or stacking order.
- */
-.bf-machine[data-skin="physical"] .bf-machine-node--billboard {
-  z-index: 9 !important;
-}
+/* Products remains in its canonical machine position. The billboard is above
+ * it in Y, not layered over it in z-space. Board overflow is intentionally
+ * visible in the root machine, so this top-deck card can project above the
+ * authored board while remaining part of the draggable apparatus. */
 
 @media (max-width: 1024px) {
   .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
