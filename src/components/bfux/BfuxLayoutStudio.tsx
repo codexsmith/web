@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { BfuxPartsBox } from "./BfuxPartsBox";
+import { BfuxPlacementLayer, type BfuxPlacedPart } from "./BfuxPlacementLayer";
 import "./bfux-layout-studio.css";
 
 const targetSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
@@ -137,6 +138,7 @@ export function BfuxLayoutStudio() {
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [resolution, setResolution] = useState<ResolutionKey>("focus");
   const [values, setValues] = useState<LayoutValues>(defaults.focus);
+  const [placedParts, setPlacedParts] = useState<BfuxPlacedPart[]>([]);
   const [measuredHeight, setMeasuredHeight] = useState(140);
   const [metrics, setMetrics] = useState("waiting for billboard");
   const [copyState, setCopyState] = useState("COPY CONFIG");
@@ -219,7 +221,8 @@ export function BfuxLayoutStudio() {
     component: "representation-lab-billboard",
     resolution,
     values,
-  }, null, 2), [resolution, values]);
+    placedParts,
+  }, null, 2), [placedParts, resolution, values]);
 
   if (!enabled) return null;
 
@@ -254,53 +257,56 @@ export function BfuxLayoutStudio() {
   const heightValue = values.height ?? measuredHeight;
 
   return (
-    <aside className="bfux-layout-studio" aria-label="BFUX layout studio">
-      <header>
-        <div>
-          <small>BFUX LAYOUT STUDIO · V0.2</small>
-          <strong>Representation Lab billboard</strong>
+    <>
+      <BfuxPlacementLayer resolution={resolution} onPlacementsChange={setPlacedParts} />
+      <aside className="bfux-layout-studio" aria-label="BFUX layout studio">
+        <header>
+          <div>
+            <small>BFUX LAYOUT STUDIO · V0.3</small>
+            <strong>Representation Lab billboard</strong>
+          </div>
+          <button type="button" onClick={exit}>×</button>
+        </header>
+
+        <div className="bfux-layout-studio__status">
+          <span>{resolution === "focus" ? "CORE" : "FULL"}</span>
+          <code>{metrics} · {placedParts.length} parts</code>
         </div>
-        <button type="button" onClick={exit}>×</button>
-      </header>
 
-      <div className="bfux-layout-studio__status">
-        <span>{resolution === "focus" ? "CORE" : "FULL"}</span>
-        <code>{metrics}</code>
-      </div>
+        <RangeControl label="CARD WIDTH" value={values.width} min={20} max={60} step={0.5} unit="%" onChange={(value) => update("width", value)} />
+        <RangeControl
+          label="CARD HEIGHT"
+          value={heightValue}
+          min={128}
+          max={420}
+          step={1}
+          unit="px"
+          displayValue={values.height === null ? `AUTO · ${heightValue}px` : `${heightValue}px`}
+          onChange={(value) => update("height", value)}
+        />
+        <div className="bfux-layout-studio__height-mode">
+          <small>{values.height === null ? "HEIGHT FOLLOWS CONTENT" : "HEIGHT FIXED BY CONTRACT"}</small>
+          <button type="button" data-active={values.height === null ? "true" : undefined} onClick={() => update("height", null)}>AUTO HEIGHT</button>
+        </div>
+        <RangeControl label="GAP ABOVE PRODUCTS" value={values.gapY} min={-20} max={40} step={1} unit="px" onChange={(value) => update("gapY", value)} />
+        <RangeControl label="MAZE / COPY SPLIT" value={values.visualWidth} min={25} max={65} step={0.5} unit="%" onChange={(value) => update("visualWidth", value)} />
+        <RangeControl label="MAZE SCALE" value={values.mazeScale} min={0.7} max={1.6} step={0.02} onChange={(value) => update("mazeScale", value)} />
+        <RangeControl label="MAZE X" value={values.mazeLeft} min={-40} max={5} step={1} unit="%" onChange={(value) => update("mazeLeft", value)} />
+        <RangeControl label="MAZE PAD X" value={values.visualPadX} min={0} max={1.2} step={0.02} unit="u" onChange={(value) => update("visualPadX", value)} />
+        <RangeControl label="MAZE PAD Y" value={values.visualPadY} min={0} max={1.2} step={0.02} unit="u" onChange={(value) => update("visualPadY", value)} />
+        <RangeControl label="COPY PAD X" value={values.copyPadX} min={0} max={1.4} step={0.02} unit="u" onChange={(value) => update("copyPadX", value)} />
+        <RangeControl label="COPY PAD Y" value={values.copyPadY} min={0} max={1.4} step={0.02} unit="u" onChange={(value) => update("copyPadY", value)} />
+        <RangeControl label="TITLE SCALE" value={values.titleScale} min={0.8} max={1.8} step={0.02} unit="u" onChange={(value) => update("titleScale", value)} />
+        <RangeControl label="LOWER ROW HEIGHT" value={values.controlsHeight} min={1.4} max={3.2} step={0.05} unit="u" onChange={(value) => update("controlsHeight", value)} />
 
-      <RangeControl label="CARD WIDTH" value={values.width} min={20} max={60} step={0.5} unit="%" onChange={(value) => update("width", value)} />
-      <RangeControl
-        label="CARD HEIGHT"
-        value={heightValue}
-        min={128}
-        max={420}
-        step={1}
-        unit="px"
-        displayValue={values.height === null ? `AUTO · ${heightValue}px` : `${heightValue}px`}
-        onChange={(value) => update("height", value)}
-      />
-      <div className="bfux-layout-studio__height-mode">
-        <small>{values.height === null ? "HEIGHT FOLLOWS CONTENT" : "HEIGHT FIXED BY CONTRACT"}</small>
-        <button type="button" data-active={values.height === null ? "true" : undefined} onClick={() => update("height", null)}>AUTO HEIGHT</button>
-      </div>
-      <RangeControl label="GAP ABOVE PRODUCTS" value={values.gapY} min={-20} max={40} step={1} unit="px" onChange={(value) => update("gapY", value)} />
-      <RangeControl label="MAZE / COPY SPLIT" value={values.visualWidth} min={25} max={65} step={0.5} unit="%" onChange={(value) => update("visualWidth", value)} />
-      <RangeControl label="MAZE SCALE" value={values.mazeScale} min={0.7} max={1.6} step={0.02} onChange={(value) => update("mazeScale", value)} />
-      <RangeControl label="MAZE X" value={values.mazeLeft} min={-40} max={5} step={1} unit="%" onChange={(value) => update("mazeLeft", value)} />
-      <RangeControl label="MAZE PAD X" value={values.visualPadX} min={0} max={1.2} step={0.02} unit="u" onChange={(value) => update("visualPadX", value)} />
-      <RangeControl label="MAZE PAD Y" value={values.visualPadY} min={0} max={1.2} step={0.02} unit="u" onChange={(value) => update("visualPadY", value)} />
-      <RangeControl label="COPY PAD X" value={values.copyPadX} min={0} max={1.4} step={0.02} unit="u" onChange={(value) => update("copyPadX", value)} />
-      <RangeControl label="COPY PAD Y" value={values.copyPadY} min={0} max={1.4} step={0.02} unit="u" onChange={(value) => update("copyPadY", value)} />
-      <RangeControl label="TITLE SCALE" value={values.titleScale} min={0.8} max={1.8} step={0.02} unit="u" onChange={(value) => update("titleScale", value)} />
-      <RangeControl label="LOWER ROW HEIGHT" value={values.controlsHeight} min={1.4} max={3.2} step={0.05} unit="u" onChange={(value) => update("controlsHeight", value)} />
+        <BfuxPartsBox placedCount={placedParts.length} />
 
-      <BfuxPartsBox />
-
-      <footer>
-        <button type="button" onClick={reset}>RESET {resolution === "focus" ? "CORE" : "FULL"}</button>
-        <button type="button" onClick={copy}>{copyState}</button>
-      </footer>
-      <p>Changes are live and saved locally per view. Copy the config when the card looks right; the Parts Box emits stable BFUX part payloads for the coming placement canvas.</p>
-    </aside>
+        <footer>
+          <button type="button" onClick={reset}>RESET {resolution === "focus" ? "CORE" : "FULL"}</button>
+          <button type="button" onClick={copy}>{copyState}</button>
+        </footer>
+        <p>Drag a part from the Parts Box directly onto the Lab Machine. Every drop creates a new instance. Drag a placed part to move it; double-click it or press Delete while selected to remove it. Placements persist locally per view and are included in COPY CONFIG.</p>
+      </aside>
+    </>
   );
 }
