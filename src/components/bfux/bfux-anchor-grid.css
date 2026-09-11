@@ -210,7 +210,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(97,215,255,.08);
+  background: rgba(97,215,255,.012);
 }
 .bfux-anchor-grid-overlay > i::before { width: 200vw; height: 1px; }
 .bfux-anchor-grid-overlay > i::after { width: 1px; height: 200vh; }
