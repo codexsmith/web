@@ -1,0 +1,62 @@
+/* Cascade lock for the first-class billboard card.
+ * Existing Lab Machine focus rules intentionally rewrite node geometry late in
+ * the stylesheet stack, so these node-bay assignments are explicit overrides.
+ */
+
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__status {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node--billboard {
+  left: 2.5% !important;
+  top: 5% !important;
+  width: 18.5% !important;
+  height: 22% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node--billboard {
+  left: 4% !important;
+  top: 7% !important;
+  width: 21% !important;
+  height: 41.5% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="people"] {
+  left: 27.5% !important;
+  top: 7% !important;
+  width: 21% !important;
+  height: 41.5% !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="products"] {
+  left: 51% !important;
+  top: 7% !important;
+  width: 21% !important;
+  height: 41.5% !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="publications"] {
+  left: 74.5% !important;
+  top: 7% !important;
+  width: 21% !important;
+  height: 41.5% !important;
+}
+
+@media (max-width: 1024px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 260px !important;
+  }
+}
