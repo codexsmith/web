@@ -8,6 +8,7 @@ import {
   RepresentationalLabStatus,
   RepresentationalLabTrace,
 } from "./RepresentationalLabShell";
+import { CANTOR_CLOSURE_LAB } from "./lab-definitions";
 import type {
   RepresentationalLabTone,
   RepresentationalLabTraceEvent,
@@ -29,6 +30,7 @@ function invert(bit: string) {
 }
 
 export function CantorClosureLab() {
+  const definition = CANTOR_CLOSURE_LAB;
   const [rows, setRows] = useState<string[]>(INITIAL_ROWS);
   const [stage, setStage] = useState(INITIAL_ROWS.length);
   const [witness, setWitness] = useState<string | null>(null);
@@ -169,32 +171,19 @@ export function CantorClosureLab() {
 
   return (
     <RepresentationalLabShell
-      labId="cantor-lab"
+      labId={definition.id}
       identity={{
-        eyebrow: "BOUNDARY FIRST LABS // REPRESENTATIONAL LAB 02",
-        title: "Cantor Closure & Defect",
-        description: (
-          <p>
-            Construct a row that differs from every currently admitted row by changing the diagonal.
-            Then decide whether to extend the represented space to admit what the operation produced.
-          </p>
-        ),
+        eyebrow: definition.eyebrow,
+        title: definition.title,
+        description: <p>{definition.description}</p>,
       }}
       metric={{
         label: "STAGE",
         value: `S${stage}`,
         detail: `${stage} rows / ${stage} visible coordinates`,
       }}
-      claimBoundary={{
-        label: "FINITE CALIBRATION FIXTURE",
-        detail: (
-          <span>
-            This instrument demonstrates the diagonal construction mechanism on bounded 8-bit rows.
-            It does not by itself prove Cantor&apos;s uncountability theorem or a transfinite extension claim.
-          </span>
-        ),
-      }}
-      layout="instrument-inspector"
+      claimBoundary={definition.claimBoundary}
+      layout={definition.layout}
       primary={(
         <RepresentationalLabPanel ariaLabel="Diagonal construction instrument">
           <div className={styles.instrumentHeader}>
