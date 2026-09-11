@@ -7,7 +7,7 @@ import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import { MobileCapitalProjectionControls } from "@/components/bfux/MobileCapitalProjectionControls";
 import { MobileMachineNonCrossingPipeLayer } from "@/components/bfux/MobileMachineNonCrossingPipeLayer";
 import { MobileTimelineProjectionRedirect } from "@/components/bfux/MobileTimelineProjectionRedirect";
-import { RepresentationLabBillboardMount } from "@/components/bfux/RepresentationLabBillboardMount";
+import { RepresentationLabBillboardCardMount } from "@/components/bfux/RepresentationLabBillboardCardMount";
 import "./world/world-machine-preview.css";
 import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
@@ -71,7 +71,7 @@ export default async function HomePage({ searchParams }: Props) {
       <MobileTimelineProjectionRedirect projection={projection} />
       <MobileCapitalProjectionControls />
       <MobileMachineNonCrossingPipeLayer />
-      <RepresentationLabBillboardMount />
+      <RepresentationLabBillboardCardMount />
       <LabMachineWorld
         section={section}
         initialProjection={projection}
