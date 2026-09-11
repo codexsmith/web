@@ -108,6 +108,31 @@
   font-size: .62rem;
 }
 
+.bfux-layout-studio__section-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .65rem;
+  padding: .54rem .8rem .48rem;
+  border-top: 1px solid #344047;
+  border-bottom: 1px solid #263137;
+  background: linear-gradient(180deg, #151d21, #101619);
+}
+.bfux-layout-studio__section-label span {
+  color: #cfc1e6;
+  font-size: .57rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+.bfux-layout-studio__section-label small {
+  min-width: 0;
+  overflow: hidden;
+  color: #788a92;
+  font-size: .5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .bfux-layout-studio__control {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
