@@ -2,6 +2,17 @@
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
+/* The maze is the primary visual object in the world bay. The base stylesheet
+ * capped it at 610px tall, which left a large inactive moat around the SVG on
+ * wide layouts. Let the viewBox preserve its own 15:11 geometry while using
+ * the full available width of the world housing. */
+:global(svg[aria-labelledby~="representation-lab-maze-title"]) {
+  width: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
 .stressRig {
   display: grid;
   grid-template-columns: 1fr auto;
