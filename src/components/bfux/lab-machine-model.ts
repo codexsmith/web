@@ -9,7 +9,8 @@ export type LabMachineNodeKind =
   | "record"
   | "identity"
   | "service"
-  | "output";
+  | "output"
+  | "billboard";
 
 export type LabMachineNode = {
   id: string;
@@ -21,6 +22,8 @@ export type LabMachineNode = {
   state?: string;
   meta?: string[];
   area: string;
+  href?: string;
+  duration?: string;
 };
 
 export type LabMachineEdge = {
@@ -34,6 +37,20 @@ export type LabMachineRelation = {
   edge: LabMachineEdge;
   direction: "inbound" | "outbound";
   other: LabMachineNode;
+};
+
+export const representationLabBillboardNode: LabMachineNode = {
+  id: "representation-lab",
+  label: "Same World, Different Reasoner",
+  question: "PLAYGROUND",
+  boundary: "Change the question. Change the method. Watch the model change.",
+  kind: "billboard",
+  tone: "violet",
+  state: "INTERACTIVE",
+  meta: ["mode · hands-on", "entry · start here"],
+  area: "representation-lab",
+  href: "/playground/representation-lab",
+  duration: "3 MIN",
 };
 
 export const labMachineNodes: LabMachineNode[] = [
