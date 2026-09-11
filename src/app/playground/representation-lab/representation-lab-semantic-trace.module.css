@@ -29,8 +29,8 @@
 .stageActive span,
 .subphase span,
 .subphaseActive span,
-.readout span,
-.subcycleLabel span {
+.subcycleLabel span,
+.resultMetaRow span {
   font-size: 10px;
   letter-spacing: .12em;
   opacity: .62;
@@ -49,47 +49,38 @@
   background: var(--bf-bg-raised, rgba(255,255,255,.075));
 }
 
-.readout {
+.resultMeta {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bf-border, rgba(255,255,255,.16));
+}
+
+.resultMetaRow {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: baseline;
-  gap: 12px;
-  border-left: 3px solid var(--bf-action, currentColor);
-  padding: 8px 11px;
-  background: var(--bf-bg-surface, rgba(0,0,0,.12));
-}
-
-.readout strong {
-  min-width: 0;
-  font-size: 13px;
-}
-
-/* The legacy narration ledger immediately following this trace repeated the
- * current operation, explained why it mattered, and then repeated status again.
- * Keep only the status cell on the default surface; deeper explanation already
- * exists in the model/analysis panels. */
-.wrapper + :global(section[aria-live="polite"]) {
-  grid-template-columns: 1fr !important;
-}
-
-.wrapper + :global(section[aria-live="polite"]) > :global(div:nth-child(1)),
-.wrapper + :global(section[aria-live="polite"]) > :global(div:nth-child(2)) {
-  display: none !important;
-}
-
-.wrapper + :global(section[aria-live="polite"]) > :global(div:last-child) {
-  min-height: 38px;
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center;
-  justify-content: flex-start !important;
   gap: 10px;
-  padding: 7px 11px !important;
-  border-right: 0 !important;
 }
 
-.wrapper + :global(section[aria-live="polite"]) > :global(div:last-child) > :global(strong) {
-  margin-top: 0 !important;
+.resultMetaRow strong {
+  min-width: 0;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: right;
+}
+
+.resultMetaRow strong[data-state="complete"] {
+  color: var(--bf-valid, #9bf56d);
+}
+
+.resultMetaRow strong[data-state="defect"] {
+  color: var(--bf-defect, #ff746c);
+}
+
+.resultMetaRow strong[data-state="running"] {
+  color: var(--bf-attention, #e0bb3f);
 }
 
 .subcycle {
@@ -151,13 +142,22 @@
   .subcycleRail {
     grid-template-columns: 1fr;
   }
+
+  .resultMetaRow {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .resultMetaRow strong {
+    text-align: left;
+  }
 }
 
 @media (forced-colors: active) {
   .stageActive,
   .subphaseActive,
-  .readout,
-  .subcycle {
+  .subcycle,
+  .resultMeta {
     border-color: CanvasText;
   }
 }
