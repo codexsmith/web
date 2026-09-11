@@ -6,7 +6,7 @@
  * no use of Tour's expandable left-hand bay.
  */
 
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__status {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -24,7 +24,7 @@
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__face {
     display: grid !important;
-    grid-template-columns: 38% minmax(0, 62%) !important;
+    grid-template-columns: 34% minmax(0, 66%) !important;
     grid-template-rows: minmax(0, 1fr) !important;
     width: 100% !important;
     height: 100% !important;
@@ -67,10 +67,12 @@
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__legend {
-    left: .54rem !important;
-    right: .54rem !important;
-    bottom: .34rem !important;
-    gap: .42rem !important;
+    left: auto !important;
+    right: .24rem !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    gap: .15rem !important;
     font-size: .44rem !important;
   }
 
@@ -79,12 +81,11 @@
     grid-column: 2;
     grid-row: 1;
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: 1rem minmax(0, 1fr) 3rem !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: minmax(0, 1fr) 2.2rem !important;
     grid-template-areas:
-      "eyebrow"
-      "title"
-      "cta" !important;
+      "title title"
+      "eyebrow cta" !important;
     align-content: stretch !important;
     align-items: stretch !important;
     gap: .28rem !important;
@@ -130,7 +131,12 @@
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
     min-width: 0;
-    align-self: start;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: .15rem;
     line-height: 1 !important;
     font-size: .47rem !important;
     overflow: hidden;
@@ -138,7 +144,7 @@
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__eyebrow small {
-    margin-left: auto;
+    margin-left: 0;
   }
 
   .bf-machine[data-skin="physical"]
@@ -150,8 +156,7 @@
     height: 100%;
     display: flex !important;
     align-items: center;
-    justify-content: space-between;
-    gap: .7rem;
+    justify-content: center;
     box-sizing: border-box;
     padding: .42rem .62rem !important;
     overflow: hidden;
@@ -164,7 +169,7 @@
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__cta b {
-    font-size: .62rem !important;
+    font-size: .52rem !important;
     white-space: nowrap;
   }
 
@@ -182,34 +187,35 @@
  * Grow the billboard upward rather than downward so its bottom still lands at
  * 3%, preserving a clean physical gap before Products at 5%.
  */
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node--billboard {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-node--billboard {
   position: absolute !important;
   left: 37.25% !important;
-  top: -23% !important;
+  top: auto !important;
+  bottom: calc(95% + 4px) !important;
   width: 35% !important;
-  height: 26% !important;
+  height: auto !important;
   z-index: 9 !important;
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"]
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
   .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
   font-size: clamp(1.2rem, 1.46vw, 1.6rem) !important;
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"]
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
   .bf-machine-node--billboard .bf-machine-billboard__visual {
   padding: .54rem .62rem .44rem !important;
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"]
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
   .bf-machine-node--billboard .bf-machine-billboard__world-label {
   font-size: .54rem !important;
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"]
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
   .bf-machine-node--billboard .bf-machine-billboard__legend {
   font-size: .46rem !important;
 }
@@ -226,9 +232,10 @@
   .bf-machine__apparatus > .bf-machine-node--billboard {
   position: absolute !important;
   left: calc(var(--core-products-left) - 7%) !important;
-  top: -23% !important;
+  top: auto !important;
+  bottom: calc(93% - 13px) !important;
   width: calc(var(--core-upper-card-width) + 14%) !important;
-  height: 28% !important;
+  height: auto !important;
   z-index: 9 !important;
   opacity: 1 !important;
   visibility: visible !important;

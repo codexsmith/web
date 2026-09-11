@@ -25,7 +25,6 @@ export function RepresentationLabBillboardCard() {
 
       <div className="bf-machine-node__face bf-machine-billboard__face">
         <div className="bf-machine-billboard__visual" aria-hidden="true">
-          <span className="bf-machine-billboard__world-label">WORLD-01 · FIXED</span>
           <svg viewBox="0 0 180 104" role="presentation">
             <defs>
               <filter id="billboard-soft-glow" x="-40%" y="-40%" width="180%" height="180%">
@@ -40,6 +39,9 @@ export function RepresentationLabBillboardCard() {
               </marker>
               <marker id="billboard-arrow-violet" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
                 <path d="M0,0 L5,2.5 L0,5 Z" fill="#bd74ff" />
+              </marker>
+              <marker id="billboard-arrow-cyan" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+                <path d="M0,0 L5,2.5 L0,5 Z" fill="#4dd0e1" />
               </marker>
             </defs>
 
@@ -60,31 +62,34 @@ export function RepresentationLabBillboardCard() {
               className="bf-machine-billboard__route bf-machine-billboard__route--violet"
               markerEnd="url(#billboard-arrow-violet)"
             />
+            <path
+              d="M27 80 L48 71 L61 68 L73 53 L91 60 L108 45 L126 52 L146 36"
+              className="bf-machine-billboard__route bf-machine-billboard__route--cyan"
+              markerEnd="url(#billboard-arrow-cyan)"
+            />
           </svg>
 
           <div className="bf-machine-billboard__legend">
             <span data-tone="blue"><i /> JOB</span>
-            <b>→</b>
-            <span data-tone="violet"><i /> METHOD</span>
-            <b>→</b>
-            <span data-tone="green"><i /> MODEL</span>
+            <span data-tone="cyan"><i /> METHOD</span>
+            <span data-tone="violet"><i /> MODEL</span>
+            <span data-tone="green"><i /> GOAL</span>
           </div>
         </div>
 
         <div className="bf-machine-billboard__copy">
           <div className="bf-machine-billboard__eyebrow">
             <span>{node.question}</span>
-            <small>INTERACTIVE · {node.duration}</small>
+            <small>INTERACTIVE</small>
           </div>
 
           <strong>
-            <span>Same World,</span>
-            <span>Different Representation</span>
+            <span>One World, Many</span>
+            <span>Representations</span>
           </strong>
           <p>{node.boundary}</p>
 
           <span className="bf-machine-billboard__cta">
-            <small>START HERE</small>
             <b>TRY THE LAB <i>→</i></b>
           </span>
         </div>

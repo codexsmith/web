@@ -68,14 +68,17 @@
   font: 720 calc(var(--machine-u, 12px) * .52)/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   letter-spacing: .1em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .bf-machine-billboard__visual svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: calc(var(--machine-u, 12px) * 5.7);
-  margin-top: calc(var(--machine-u, 12px) * .28);
+  position: absolute;
+  left: -18%;
+  top: 50%;
+  width: 110%;
+  height: 110%;
+  transform: translateY(-50%) rotate(-90deg) scale(0.95);
+  transform-origin: center center;
 }
 
 .bf-machine-billboard__maze-frame {
@@ -122,15 +125,21 @@
   stroke-dasharray: 4 3;
 }
 
+.bf-machine-billboard__route--cyan {
+  stroke: #4dd0e1;
+}
+
 .bf-machine-billboard__legend {
   position: absolute;
-  left: calc(var(--machine-u, 12px) * .8);
-  right: calc(var(--machine-u, 12px) * .8);
-  bottom: calc(var(--machine-u, 12px) * .4);
+  left: auto;
+  right: calc(var(--machine-u, 12px) * .5);
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  gap: calc(var(--machine-u, 12px) * .42);
+  gap: calc(var(--machine-u, 12px) * .22);
   color: #87949a;
   font: 680 calc(var(--machine-u, 12px) * .46)/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   letter-spacing: .07em;
@@ -157,6 +166,8 @@
 
 .bf-machine-billboard__legend [data-tone="blue"],
 .bf-machine-billboard__cue-row [data-tone="blue"] { color: #73b6ff; }
+.bf-machine-billboard__legend [data-tone="cyan"],
+.bf-machine-billboard__cue-row [data-tone="cyan"] { color: #4dd0e1; }
 .bf-machine-billboard__legend [data-tone="violet"],
 .bf-machine-billboard__cue-row [data-tone="violet"] { color: #bd74ff; }
 .bf-machine-billboard__legend [data-tone="green"],
@@ -291,18 +302,18 @@
 /* FULL / MID: the machine already has an unused first top-row card bay.
  * The billboard takes that bay, replacing the fixed status instrument there.
  * People, Products, and Publications remain exactly where they already are. */
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine__status {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node--billboard {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-node--billboard {
   position: absolute !important;
   left: 2.5%;
   top: 5%;
   width: 18.5%;
-  height: 22%;
+  height: auto;
   z-index: 8;
 }
 
@@ -313,7 +324,7 @@
   left: 4%;
   top: 7%;
   width: 21%;
-  height: 41.5%;
+  height: auto;
   z-index: 8;
   opacity: 1;
   visibility: visible;
@@ -343,19 +354,19 @@
 
 /* On the compact top-row bay, keep the invitation visual first and the copy
  * short. This preserves billboard character without turning it into a banner. */
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-billboard__copy > p {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__copy > p {
   display: none;
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-billboard__copy > strong {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__copy > strong {
   font-size: calc(var(--machine-u, 12px) * 1.05);
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-billboard__cta {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__cta {
   min-width: calc(var(--machine-u, 12px) * 4.9);
 }
 
-.bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-billboard__cue-row > span {
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__cue-row > span {
   font-size: calc(var(--machine-u, 12px) * .38);
 }
 
