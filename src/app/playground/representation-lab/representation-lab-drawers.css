@@ -1,0 +1,256 @@
+/* Representation Lab · expandable bay treatment
+   Advanced experiments/tests and the comparison rack are secondary machine
+   bays. Their closed state should read like the Analysis Bay: one compact
+   mounted header with an explicit affordance to open it. */
+
+/* Direct advanced drawers inside the primary apparatus. The Analysis Bay lives
+   inside TaskWorkbench, so this selector intentionally does not touch it. */
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details
+  > summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .75rem;
+  align-items: center;
+  min-height: 42px;
+  padding: .5rem 6.8rem .5rem .78rem;
+  list-style: none;
+  cursor: pointer;
+  border-top: 1px solid rgba(255,255,255,.045);
+  border-bottom: 1px solid var(--lab-border-strong);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 40%),
+    linear-gradient(#151b1e, #0b1012);
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb, var(--lab-info) 68%, #48555b),
+    inset 0 1px rgba(255,255,255,.035),
+    inset 0 -1px #000;
+}
+
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details
+  > summary::-webkit-details-marker {
+  display: none;
+}
+
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details
+  > summary > span {
+  color: var(--lab-info);
+  font: 700 .53rem/1 var(--font-mono, monospace);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details
+  > summary::after {
+  content: "EXPAND  +";
+  position: absolute;
+  right: .78rem;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 78px;
+  padding: .28rem .42rem;
+  border: 1px solid color-mix(in srgb, var(--lab-info) 40%, var(--lab-border-strong));
+  background: #0a1013;
+  color: var(--lab-info);
+  font: 700 .48rem/1 var(--font-mono, monospace);
+  letter-spacing: .09em;
+  text-align: center;
+}
+
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details[open]
+  > summary {
+  background: color-mix(in srgb, var(--lab-info) 5%, #111719);
+  box-shadow:
+    inset 3px 0 0 var(--lab-info),
+    inset 0 1px rgba(255,255,255,.045),
+    inset 0 -1px #000;
+}
+
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details[open]
+  > summary::after {
+  content: "COLLAPSE  −";
+  border-color: color-mix(in srgb, var(--lab-info) 58%, var(--lab-border-strong));
+  background: color-mix(in srgb, var(--lab-info) 7%, #0a1013);
+}
+
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details
+  > summary:hover,
+.representation-lab-physical-shell
+  section[aria-label="Representation laboratory apparatus"]
+  > details
+  > summary:focus-visible {
+  background: color-mix(in srgb, var(--lab-info) 6%, #12181b);
+}
+
+/* Compare Methods is the same kind of expandable secondary bay, only wider and
+   outside the primary apparatus chassis. Preserve its descriptive copy while
+   giving the closed bar the same mounted-header grammar. */
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"] {
+  overflow: hidden;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr) auto;
+  gap: .8rem;
+  align-items: center;
+  min-height: 46px;
+  padding: .5rem 7rem .5rem .78rem;
+  list-style: none;
+  cursor: pointer;
+  border-bottom: 1px solid var(--lab-border-strong);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 40%),
+    linear-gradient(#151b1e, #0b1012);
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb, var(--lab-info) 68%, #48555b),
+    inset 0 1px rgba(255,255,255,.035),
+    inset 0 -1px #000;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary::-webkit-details-marker {
+  display: none;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary > div {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: .65rem;
+  min-width: 0;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary span {
+  color: var(--lab-info);
+  font: 700 .53rem/1 var(--font-mono, monospace);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary h2 {
+  margin: 0;
+  min-width: 0;
+  color: var(--lab-text);
+  font-size: .74rem;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary p {
+  margin: 0;
+  color: var(--lab-faint);
+  font: 600 .52rem/1.35 var(--font-mono, monospace);
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary::after {
+  content: "EXPAND  +";
+  position: absolute;
+  right: .78rem;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 78px;
+  padding: .28rem .42rem;
+  border: 1px solid color-mix(in srgb, var(--lab-info) 40%, var(--lab-border-strong));
+  background: #0a1013;
+  color: var(--lab-info);
+  font: 700 .48rem/1 var(--font-mono, monospace);
+  letter-spacing: .09em;
+  text-align: center;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"][open]
+  > summary {
+  background: color-mix(in srgb, var(--lab-info) 5%, #111719);
+  box-shadow:
+    inset 3px 0 0 var(--lab-info),
+    inset 0 1px rgba(255,255,255,.045),
+    inset 0 -1px #000;
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"][open]
+  > summary::after {
+  content: "COLLAPSE  −";
+  border-color: color-mix(in srgb, var(--lab-info) 58%, var(--lab-border-strong));
+  background: color-mix(in srgb, var(--lab-info) 7%, #0a1013);
+}
+
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary:hover,
+.representation-lab-physical-shell
+  details[aria-label="Compare all reasoning methods"]
+  > summary:focus-visible {
+  background: color-mix(in srgb, var(--lab-info) 6%, #12181b);
+}
+
+@media (max-width: 760px) {
+  .representation-lab-physical-shell
+    section[aria-label="Representation laboratory apparatus"]
+    > details
+    > summary,
+  .representation-lab-physical-shell
+    details[aria-label="Compare all reasoning methods"]
+    > summary {
+    grid-template-columns: 1fr;
+    gap: .24rem;
+    padding-right: 6.6rem;
+  }
+
+  .representation-lab-physical-shell
+    details[aria-label="Compare all reasoning methods"]
+    > summary > div {
+    grid-template-columns: 1fr;
+    gap: .2rem;
+  }
+
+  .representation-lab-physical-shell
+    details[aria-label="Compare all reasoning methods"]
+    > summary p {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .representation-lab-physical-shell
+    section[aria-label="Representation laboratory apparatus"]
+    > details
+    > summary,
+  .representation-lab-physical-shell
+    details[aria-label="Compare all reasoning methods"]
+    > summary {
+    border-color: CanvasText;
+  }
+}
