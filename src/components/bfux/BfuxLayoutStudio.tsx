@@ -127,7 +127,6 @@ function RangeControl({
 export function BfuxLayoutStudio() {
   const [enabled, setEnabled] = useState(false);
   const [target, setTarget] = useState<HTMLElement | null>(null);
-  const [machine, setMachine] = useState<HTMLElement | null>(null);
   const [resolution, setResolution] = useState<ResolutionKey>("focus");
   const [values, setValues] = useState<LayoutValues>(defaults.focus);
   const [metrics, setMetrics] = useState("waiting for billboard");
@@ -146,7 +145,6 @@ export function BfuxLayoutStudio() {
       const nextTarget = document.querySelector<HTMLElement>(targetSelector);
       const nextMachine = nextTarget?.closest<HTMLElement>(machineSelector) ?? document.querySelector<HTMLElement>(machineSelector);
       setTarget((current) => (current === nextTarget ? current : nextTarget));
-      setMachine((current) => (current === nextMachine ? current : nextMachine));
       setResolution(currentResolution(nextMachine));
     };
     const schedule = () => {
@@ -214,7 +212,7 @@ export function BfuxLayoutStudio() {
 
   if (!enabled) return null;
 
-  const update = <K extends keyof LayoutValues>(key: K, value: LayoutValues[K]) => {
+  const update = (key: keyof LayoutValues, value: number) => {
     setValues((current) => ({ ...current, [key]: value }));
   };
 
