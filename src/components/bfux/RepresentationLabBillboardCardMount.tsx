@@ -48,24 +48,28 @@ export function RepresentationLabBillboardCardMount() {
     let resizeObserver: ResizeObserver | null = null;
     const machine = host.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
 
-    const revealBillboard = () => {
-      const billboard = host.querySelector<HTMLElement>(billboardSelector);
-      if (!billboard) return;
-      billboard.dispatchEvent(new CustomEvent(labMachineRevealEvent, { bubbles: true }));
-
-      if (!resizeObserver) {
-        resizeObserver = new ResizeObserver(() => scheduleReveal());
-        resizeObserver.observe(billboard);
-      }
-    };
-
-    const scheduleReveal = () => {
+    function scheduleReveal() {
       window.cancelAnimationFrame(firstFrame);
       window.cancelAnimationFrame(secondFrame);
       firstFrame = window.requestAnimationFrame(() => {
         secondFrame = window.requestAnimationFrame(revealBillboard);
       });
-    };
+    }
+
+    function revealBillboard() {
+      const billboard = host.querySelector<HTMLElement>(billboardSelector);
+      if (!billboard) return;
+
+      // LabMachine already knows how to pan a revealed node into the visible
+      // instrument viewport. Reuse that contract so the new card participates
+      // in initial framing instead of being treated as decorative overflow.
+      billboard.dispatchEvent(new CustomEvent(labMachineRevealEvent, { bubbles: true }));
+
+      if (!resizeObserver) {
+        resizeObserver = new ResizeObserver(scheduleReveal);
+        resizeObserver.observe(billboard);
+      }
+    }
 
     scheduleReveal();
 
