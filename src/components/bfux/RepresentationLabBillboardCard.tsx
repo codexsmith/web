@@ -15,7 +15,7 @@ export function RepresentationLabBillboardCard() {
       data-node-id={node.id}
       data-tone={node.tone}
       href={node.href ?? "/playground/representation-lab"}
-      aria-label="Open Same World, Different Reasoner, an interactive Boundary First introduction"
+      aria-label={`Open ${node.label}, an interactive Boundary First introduction`}
     >
       <div className="bf-machine-node__mount" aria-hidden="true" />
       <div className="bf-machine-node__shell" aria-hidden="true" />
@@ -77,7 +77,7 @@ export function RepresentationLabBillboardCard() {
             <small>INTERACTIVE · {node.duration}</small>
           </div>
 
-          <strong>Same World,<br />Different Reasoner</strong>
+          <strong>{node.label}</strong>
           <p>{node.boundary}</p>
 
           <span className="bf-machine-billboard__cta">
@@ -88,8 +88,8 @@ export function RepresentationLabBillboardCard() {
 
         <div className="bf-machine-billboard__cue-row" aria-hidden="true">
           <span><i data-tone="blue" /> ONE WORLD</span>
-          <span><i data-tone="violet" /> SWAP REASONER</span>
-          <span><i data-tone="green" /> SEE CONSEQUENCE</span>
+          <span><i data-tone="violet" /> SWAP METHOD</span>
+          <span><i data-tone="green" /> SEE REPRESENTATION</span>
         </div>
       </div>
     </a>
