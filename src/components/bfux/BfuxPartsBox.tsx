@@ -3,8 +3,10 @@
 import { useState, type DragEvent } from "react";
 import "./bfux-parts-box.css";
 
-type PartFamily = "connector" | "tube" | "panel";
-type PartKind =
+export const bfuxPartTransferType = "application/x-bfux-part";
+
+export type BfuxPartFamily = "connector" | "tube" | "panel";
+export type BfuxPartKind =
   | "single"
   | "multi"
   | "plex"
@@ -15,15 +17,15 @@ type PartKind =
   | "module"
   | "module-wide";
 
-type PartDefinition = {
+export type BfuxPartDefinition = {
   id: string;
-  family: PartFamily;
-  kind: PartKind;
+  family: BfuxPartFamily;
+  kind: BfuxPartKind;
   label: string;
   detail: string;
 };
 
-const partGroups: Array<{ label: string; parts: PartDefinition[] }> = [
+export const bfuxPartGroups: Array<{ label: string; parts: BfuxPartDefinition[] }> = [
   {
     label: "CONNECTORS",
     parts: [
@@ -50,11 +52,19 @@ const partGroups: Array<{ label: string; parts: PartDefinition[] }> = [
   },
 ];
 
+const bfuxPartCatalog = new Map(
+  bfuxPartGroups.flatMap((group) => group.parts).map((part) => [part.id, part]),
+);
+
+export function getBfuxPartDefinition(id: string) {
+  return bfuxPartCatalog.get(id) ?? null;
+}
+
 function Contacts({ count }: { count: number }) {
   return <>{Array.from({ length: count }, (_, index) => <i key={index} />)}</>;
 }
 
-function PartPreview({ kind }: { kind: PartKind }) {
+export function BfuxPartGlyph({ kind }: { kind: BfuxPartKind }) {
   if (kind === "single") {
     return <span className="bfux-part-glyph bfux-part-glyph--single"><span className="bfux-part-bank"><Contacts count={1} /></span></span>;
   }
@@ -95,10 +105,10 @@ function PartPreview({ kind }: { kind: PartKind }) {
   );
 }
 
-export function BfuxPartsBox() {
+export function BfuxPartsBox({ placedCount = 0 }: { placedCount?: number }) {
   const [selected, setSelected] = useState("connector.single");
 
-  const beginDrag = (event: DragEvent<HTMLButtonElement>, part: PartDefinition) => {
+  const beginDrag = (event: DragEvent<HTMLButtonElement>, part: BfuxPartDefinition) => {
     const payload = JSON.stringify({
       schema: "bfux.part/v1",
       id: part.id,
@@ -107,7 +117,7 @@ export function BfuxPartsBox() {
     });
 
     event.dataTransfer.effectAllowed = "copy";
-    event.dataTransfer.setData("application/x-bfux-part", payload);
+    event.dataTransfer.setData(bfuxPartTransferType, payload);
     event.dataTransfer.setData("text/plain", part.id);
     setSelected(part.id);
   };
@@ -116,11 +126,11 @@ export function BfuxPartsBox() {
     <details className="bfux-parts-box" open>
       <summary>
         <span>PARTS BOX</span>
-        <small>LIVE MACHINE PRIMITIVES · DRAG-READY</small>
+        <small>LIVE MACHINE PRIMITIVES · DRAG TO PLACE</small>
       </summary>
 
       <div className="bfux-parts-box__body">
-        {partGroups.map((group) => (
+        {bfuxPartGroups.map((group) => (
           <section className="bfux-parts-box__group" key={group.label}>
             <header>{group.label}</header>
             <div className="bfux-parts-box__grid">
@@ -135,7 +145,7 @@ export function BfuxPartsBox() {
                   onDragStart={(event) => beginDrag(event, part)}
                   title={`${part.label} · ${part.detail}`}
                 >
-                  <PartPreview kind={part.kind} />
+                  <BfuxPartGlyph kind={part.kind} />
                   <span className="bfux-parts-box__label">
                     <b>{part.label}</b>
                     <small>{part.detail}</small>
@@ -149,7 +159,7 @@ export function BfuxPartsBox() {
         <div className="bfux-parts-box__selection">
           <span>SELECTED</span>
           <code>{selected}</code>
-          <small>PART PAYLOAD READY</small>
+          <small>{placedCount === 0 ? "DROP ON MACHINE" : `${placedCount} PLACED · DRAG TO MOVE`}</small>
         </div>
       </div>
     </details>
