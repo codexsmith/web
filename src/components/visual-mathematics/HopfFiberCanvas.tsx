@@ -224,8 +224,8 @@ export function HopfFiberCanvas({
         context.shadowColor = color(seed.phase, 0.42);
         context.stroke();
 
-        const automaticTravel = animate ? ((time % loopDurationMs) / loopDurationMs) : 0;
-        const travel = (automaticTravel + fiberPhase + fiberIndex * 0.011) % 1;
+        const automaticTravel = 0.5 - 0.5 * Math.cos(basePhase + fiberIndex * 0.11);
+        const travel = animate ? (automaticTravel + fiberPhase) % 1 : fiberPhase;
         const markerIndex = Math.floor(travel * Math.max(1, projected.length - 1));
         const tailLength = 10;
 
