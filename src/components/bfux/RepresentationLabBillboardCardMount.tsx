@@ -48,8 +48,12 @@ export function RepresentationLabBillboardCardMount() {
 
     let firstFrame = 0;
     let secondFrame = 0;
-    let resizeObserver: ResizeObserver | null = null;
+    let revealFrameOne = 0;
+    let revealFrameTwo = 0;
+    let pendingReveal = false;
+    let productsObserver: ResizeObserver | null = null;
     const machine = host.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
+    let lastResolution = machine?.dataset.resolution ?? "";
 
     function alignBillboardToProducts() {
       const billboard = host.querySelector<HTMLElement>(billboardSelector);
@@ -59,6 +63,7 @@ export function RepresentationLabBillboardCardMount() {
       if (!window.matchMedia(desktopProjectionQuery).matches) {
         billboard.style.removeProperty("left");
         billboard.style.removeProperty("top");
+        delete billboard.dataset.billboardAnchor;
         return billboard;
       }
 
@@ -71,8 +76,6 @@ export function RepresentationLabBillboardCardMount() {
       const left = productCenterX - billboard.offsetWidth / 2;
       const top = productTop - billboard.offsetHeight - billboardGap;
 
-      // These two coordinates are the only runtime override. Width, height,
-      // content layout, and every other card remain owned by their CSS.
       billboard.style.setProperty("left", `${left}px`, "important");
       billboard.style.setProperty("top", `${top}px`, "important");
       billboard.dataset.billboardAnchor = "products-above";
@@ -80,23 +83,43 @@ export function RepresentationLabBillboardCardMount() {
       return billboard;
     }
 
+    function requestOneShotReveal(billboard: HTMLElement) {
+      window.cancelAnimationFrame(revealFrameOne);
+      window.cancelAnimationFrame(revealFrameTwo);
+
+      // LabMachine's own resolution containment also settles over two frames.
+      // Wait for that pass to finish, then reveal this extra top-deck card once.
+      // Repeating this event while auto-pan is still moving causes additive pan
+      // deltas and was the source of the runaway "scrolling upward" behavior.
+      revealFrameOne = window.requestAnimationFrame(() => {
+        revealFrameTwo = window.requestAnimationFrame(() => {
+          billboard.dispatchEvent(new CustomEvent(labMachineRevealEvent, { bubbles: true }));
+        });
+      });
+    }
+
     function settleBillboard() {
       const billboard = alignBillboardToProducts();
       if (!billboard) return;
 
-      // Request containment only after the billboard is in its final position,
-      // so on-load framing includes the actual Products-anchored card.
-      billboard.dispatchEvent(new CustomEvent(labMachineRevealEvent, { bubbles: true }));
+      if (pendingReveal) {
+        pendingReveal = false;
+        requestOneShotReveal(billboard);
+      }
 
-      if (!resizeObserver) {
+      // Products may change physical size as the machine projection settles.
+      // Re-align to that geometry, but never turn a resize into another reveal.
+      if (!productsObserver) {
         const products = host.querySelector<HTMLElement>(productsSelector);
-        resizeObserver = new ResizeObserver(scheduleSettle);
-        resizeObserver.observe(billboard);
-        if (products) resizeObserver.observe(products);
+        if (products) {
+          productsObserver = new ResizeObserver(() => scheduleSettle(false));
+          productsObserver.observe(products);
+        }
       }
     }
 
-    function scheduleSettle() {
+    function scheduleSettle(reveal = false) {
+      pendingReveal = pendingReveal || reveal;
       window.cancelAnimationFrame(firstFrame);
       window.cancelAnimationFrame(secondFrame);
       firstFrame = window.requestAnimationFrame(() => {
@@ -104,23 +127,37 @@ export function RepresentationLabBillboardCardMount() {
       });
     }
 
-    scheduleSettle();
+    // Initial mount: align first, then ask the machine to include the billboard
+    // in its visible framing exactly once.
+    scheduleSettle(true);
 
-    const machineObserver = new MutationObserver(scheduleSettle);
+    const machineObserver = new MutationObserver(() => {
+      const nextResolution = machine?.dataset.resolution ?? "";
+      const resolutionChanged = nextResolution !== lastResolution;
+      lastResolution = nextResolution;
+      scheduleSettle(resolutionChanged);
+    });
+
     if (machine) {
       machineObserver.observe(machine, {
         attributes: true,
         attributeFilter: ["data-resolution", "data-skin"],
       });
     }
-    window.addEventListener("resize", scheduleSettle);
+
+    // Browser resizing should keep the card attached to Products, but must not
+    // repeatedly auto-pan the whole machine underneath the user's pointer.
+    const handleResize = () => scheduleSettle(false);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       machineObserver.disconnect();
-      resizeObserver?.disconnect();
-      window.removeEventListener("resize", scheduleSettle);
+      productsObserver?.disconnect();
+      window.removeEventListener("resize", handleResize);
       window.cancelAnimationFrame(firstFrame);
       window.cancelAnimationFrame(secondFrame);
+      window.cancelAnimationFrame(revealFrameOne);
+      window.cancelAnimationFrame(revealFrameTwo);
     };
   }, [host]);
 
