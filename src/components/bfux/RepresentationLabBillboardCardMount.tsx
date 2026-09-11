@@ -7,6 +7,9 @@ import { RepresentationLabBillboardCard } from "./RepresentationLabBillboardCard
 
 const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
 const billboardSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
+const productsSelector = '.bf-machine-node[data-node-id="products"]';
+const desktopProjectionQuery = "(min-width: 1025px)";
+const billboardGap = 8;
 
 export function RepresentationLabBillboardCardMount() {
   const [host, setHost] = useState<HTMLElement | null>(null);
@@ -48,44 +51,74 @@ export function RepresentationLabBillboardCardMount() {
     let resizeObserver: ResizeObserver | null = null;
     const machine = host.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
 
-    function scheduleReveal() {
-      window.cancelAnimationFrame(firstFrame);
-      window.cancelAnimationFrame(secondFrame);
-      firstFrame = window.requestAnimationFrame(() => {
-        secondFrame = window.requestAnimationFrame(revealBillboard);
-      });
+    function alignBillboardToProducts() {
+      const billboard = host.querySelector<HTMLElement>(billboardSelector);
+      const products = host.querySelector<HTMLElement>(productsSelector);
+      if (!billboard || !products) return billboard;
+
+      if (!window.matchMedia(desktopProjectionQuery).matches) {
+        billboard.style.removeProperty("left");
+        billboard.style.removeProperty("top");
+        return billboard;
+      }
+
+      const hostRect = host.getBoundingClientRect();
+      const productsRect = products.getBoundingClientRect();
+      const scaleX = host.offsetWidth > 0 ? hostRect.width / host.offsetWidth : 1;
+      const scaleY = host.offsetHeight > 0 ? hostRect.height / host.offsetHeight : scaleX;
+      const productCenterX = (productsRect.left - hostRect.left + productsRect.width / 2) / scaleX;
+      const productTop = (productsRect.top - hostRect.top) / scaleY;
+      const left = productCenterX - billboard.offsetWidth / 2;
+      const top = productTop - billboard.offsetHeight - billboardGap;
+
+      // These two coordinates are the only runtime override. Width, height,
+      // content layout, and every other card remain owned by their CSS.
+      billboard.style.setProperty("left", `${left}px`, "important");
+      billboard.style.setProperty("top", `${top}px`, "important");
+      billboard.dataset.billboardAnchor = "products-above";
+
+      return billboard;
     }
 
-    function revealBillboard() {
-      const billboard = host.querySelector<HTMLElement>(billboardSelector);
+    function settleBillboard() {
+      const billboard = alignBillboardToProducts();
       if (!billboard) return;
 
-      // LabMachine already knows how to pan a revealed node into the visible
-      // instrument viewport. Reuse that contract so the new card participates
-      // in initial framing instead of being treated as decorative overflow.
+      // Request containment only after the billboard is in its final position,
+      // so on-load framing includes the actual Products-anchored card.
       billboard.dispatchEvent(new CustomEvent(labMachineRevealEvent, { bubbles: true }));
 
       if (!resizeObserver) {
-        resizeObserver = new ResizeObserver(scheduleReveal);
+        const products = host.querySelector<HTMLElement>(productsSelector);
+        resizeObserver = new ResizeObserver(scheduleSettle);
         resizeObserver.observe(billboard);
+        if (products) resizeObserver.observe(products);
       }
     }
 
-    scheduleReveal();
+    function scheduleSettle() {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+      firstFrame = window.requestAnimationFrame(() => {
+        secondFrame = window.requestAnimationFrame(settleBillboard);
+      });
+    }
 
-    const machineObserver = new MutationObserver(scheduleReveal);
+    scheduleSettle();
+
+    const machineObserver = new MutationObserver(scheduleSettle);
     if (machine) {
       machineObserver.observe(machine, {
         attributes: true,
         attributeFilter: ["data-resolution", "data-skin"],
       });
     }
-    window.addEventListener("resize", scheduleReveal);
+    window.addEventListener("resize", scheduleSettle);
 
     return () => {
       machineObserver.disconnect();
       resizeObserver?.disconnect();
-      window.removeEventListener("resize", scheduleReveal);
+      window.removeEventListener("resize", scheduleSettle);
       window.cancelAnimationFrame(firstFrame);
       window.cancelAnimationFrame(secondFrame);
     };
