@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { CantorClosureLab } from "@/components/representational-labs/CantorClosureLab";
+import { CANTOR_CLOSURE_LAB } from "@/components/representational-labs/lab-definitions";
 
 export const metadata: Metadata = {
-  title: "Cantor Closure & Defect Lab | Boundary First Labs",
-  description:
-    "A finite interactive calibration fixture for inspecting diagonal construction, representational closure failure, and successor-stage admission.",
+  title: `${CANTOR_CLOSURE_LAB.title} Lab | Boundary First Labs`,
+  description: CANTOR_CLOSURE_LAB.description,
   robots: { index: false, follow: false },
 };
 
