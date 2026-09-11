@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { RepresentationLab } from "./RepresentationLab";
 import "./representation-lab-physical.css";
 import "./representation-lab-density.css";
+import "./representation-lab-instrument-sync.css";
 import "./representation-lab-wizard-global.css";
 
 export const metadata: Metadata = {
