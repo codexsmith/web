@@ -1,56 +1,54 @@
 /* Representation Lab billboard · internal density polish.
  *
  * Placement is intentionally out of scope here. The runtime mount and authored
- * Core/Full geometry own the card position; this file trims dead space inside
- * the face while preserving the centered billboard composition.
+ * Core/Full geometry own the card position; this file only trims dead space
+ * inside the face while preserving the centered billboard composition.
  */
 
 @media (min-width: 1025px) {
-  /* The billboard should size around its actual pictogram + two-line title,
-   * rather than inherit the taller visual rhythm of an ordinary machine card.
-   * This is only a floor: text can still grow the card if the viewport narrows. */
+  /* Let the card shrink toward the content instead of reserving the old tall
+   * face. If the two-line title needs more room, intrinsic content can still
+   * grow the card rather than clip it. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__face {
-    min-height: 5.35rem !important;
+    min-height: 6.35rem !important;
   }
 
-  /* Cut the dead bands above and below the maze. The SVG remains centered and
-   * gets only a modest scale bump; most of the gain comes from shortening the
-   * face itself instead of pushing the drawing around inside an oversized bay. */
+  /* The SVG viewBox is cropped to the maze itself. Keep only a hair of panel
+   * padding so the graphic nearly reaches the chassis above and below. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__visual {
-    padding: 0 .06rem !important;
+    padding: .02rem .08rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__visual svg {
-    left: -20% !important;
-    width: 120% !important;
-    height: 116% !important;
+    left: -18% !important;
+    width: 114% !important;
+    height: 114% !important;
     transform: translateY(-50%) rotate(-90deg) !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__legend {
-    right: .06rem !important;
-    gap: .06rem !important;
+    right: .08rem !important;
+    gap: .07rem !important;
   }
 
-  /* Let the title occupy its intrinsic two-line height. Any small remainder is
-   * shared around the title/control group instead of becoming a large elastic
-   * title bay. This keeps the heading visually centered without clipping it. */
+  /* Keep the title centered. The title row has a content floor and receives any
+   * remaining height, so the space above/below it can contract naturally while
+   * never becoming smaller than the actual two-line heading. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__copy {
-    grid-template-rows: min-content 1.68rem !important;
-    align-content: center !important;
-    gap: .08rem !important;
-    padding: .08rem .3rem .1rem !important;
+    grid-template-rows: minmax(min-content, 1fr) 1.72rem !important;
+    gap: .04rem !important;
+    padding: .08rem .3rem .12rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
     justify-content: center !important;
-    align-self: center !important;
+    align-self: stretch !important;
     margin: 0 !important;
     padding: 0 !important;
     line-height: .91 !important;
@@ -58,11 +56,11 @@
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
-    gap: .03rem !important;
+    gap: .04rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__cta {
-    padding: .2rem .42rem !important;
+    padding: .22rem .44rem !important;
   }
 }
