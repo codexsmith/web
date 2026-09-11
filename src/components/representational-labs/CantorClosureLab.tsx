@@ -1,6 +1,17 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import {
+  RepresentationalLabPanel,
+  RepresentationalLabSectionLabel,
+  RepresentationalLabShell,
+  RepresentationalLabStatus,
+  RepresentationalLabTrace,
+} from "./RepresentationalLabShell";
+import type {
+  RepresentationalLabTone,
+  RepresentationalLabTraceEvent,
+} from "./lab-patterns";
 import styles from "./cantor-closure-lab.module.css";
 
 const MAX_WIDTH = 8;
@@ -12,14 +23,6 @@ const INITIAL_ROWS = [
 ];
 
 type LabStatus = "ready" | "defect" | "extended" | "bounded";
-type TraceTone = "info" | "change" | "defect" | "repair";
-
-type TraceEvent = {
-  seq: number;
-  label: string;
-  detail: string;
-  tone: TraceTone;
-};
 
 function invert(bit: string) {
   return bit === "0" ? "1" : "0";
@@ -31,7 +34,7 @@ export function CantorClosureLab() {
   const [witness, setWitness] = useState<string | null>(null);
   const [status, setStatus] = useState<LabStatus>("ready");
   const [hoodOpen, setHoodOpen] = useState(false);
-  const [trace, setTrace] = useState<TraceEvent[]>([
+  const [trace, setTrace] = useState<RepresentationalLabTraceEvent[]>([
     {
       seq: 1,
       label: "fixture_loaded",
@@ -56,7 +59,11 @@ export function CantorClosureLab() {
 
   const passedChecks = invariantChecks.filter((check) => check.passes).length;
 
-  function appendTrace(label: string, detail: string, tone: TraceTone) {
+  function appendTrace(
+    label: string,
+    detail: string,
+    tone: RepresentationalLabTone,
+  ) {
     setTrace((current) => [
       ...current,
       { seq: current.length + 1, label, detail, tone },
@@ -100,7 +107,7 @@ export function CantorClosureLab() {
       appendTrace(
         "fixture_boundary_reached",
         "The eight-coordinate calibration fixture cannot promote again without increasing its declared width.",
-        "info",
+        "warning",
       );
       return;
     }
@@ -132,62 +139,74 @@ export function CantorClosureLab() {
     ]);
   }
 
-  const statusCopy: Record<LabStatus, { label: string; detail: string }> = {
+  const statusCopy: Record<
+    LabStatus,
+    { label: string; detail: string; tone: RepresentationalLabTone }
+  > = {
     ready: {
       label: "READY",
       detail: "Change the represented rows or construct the diagonal witness.",
+      tone: "info",
     },
     defect: {
       label: "DEFECT EXPOSED",
       detail: "The constructed witness is outside the currently admitted row set.",
+      tone: "defect",
     },
     extended: {
       label: "REPRESENTATION EXTENDED",
       detail: "The prior witness is now admitted. Re-run the operation against the larger stage.",
+      tone: "repair",
     },
     bounded: {
       label: "FIXTURE BOUNDARY",
       detail: "This finite calibration object has reached its declared eight-coordinate limit.",
+      tone: "warning",
     },
   };
 
+  const currentStatus = statusCopy[status];
+
   return (
-    <main className={styles.lab} aria-labelledby="cantor-lab-title">
-      <header className={styles.header}>
-        <div>
-          <p className={styles.eyebrow}>BOUNDARY FIRST LABS // REPRESENTATIONAL LAB 02</p>
-          <h1 id="cantor-lab-title">Cantor Closure &amp; Defect</h1>
-          <p className={styles.lede}>
+    <RepresentationalLabShell
+      labId="cantor-lab"
+      identity={{
+        eyebrow: "BOUNDARY FIRST LABS // REPRESENTATIONAL LAB 02",
+        title: "Cantor Closure & Defect",
+        description: (
+          <p>
             Construct a row that differs from every currently admitted row by changing the diagonal.
             Then decide whether to extend the represented space to admit what the operation produced.
           </p>
-        </div>
-        <div className={styles.stageBadge} aria-label={`Current stage S${stage}`}>
-          <span>STAGE</span>
-          <strong>S{stage}</strong>
-          <small>{stage} rows / {stage} visible coordinates</small>
-        </div>
-      </header>
-
-      <section className={styles.callout} aria-label="Claim boundary">
-        <strong>FINITE CALIBRATION FIXTURE</strong>
-        <span>
-          This instrument demonstrates the diagonal construction mechanism on bounded 8-bit rows.
-          It does not by itself prove Cantor&apos;s uncountability theorem or a transfinite extension claim.
-        </span>
-      </section>
-
-      <div className={styles.workspace}>
-        <section className={styles.instrument} aria-label="Diagonal construction instrument">
+        ),
+      }}
+      metric={{
+        label: "STAGE",
+        value: `S${stage}`,
+        detail: `${stage} rows / ${stage} visible coordinates`,
+      }}
+      claimBoundary={{
+        label: "FINITE CALIBRATION FIXTURE",
+        detail: (
+          <span>
+            This instrument demonstrates the diagonal construction mechanism on bounded 8-bit rows.
+            It does not by itself prove Cantor&apos;s uncountability theorem or a transfinite extension claim.
+          </span>
+        ),
+      }}
+      layout="instrument-inspector"
+      primary={(
+        <RepresentationalLabPanel ariaLabel="Diagonal construction instrument">
           <div className={styles.instrumentHeader}>
             <div>
-              <p className={styles.sectionLabel}>ADMITTED REPRESENTATION</p>
+              <RepresentationalLabSectionLabel>ADMITTED REPRESENTATION</RepresentationalLabSectionLabel>
               <h2>Change a row. Then construct what is missing.</h2>
             </div>
-            <div className={styles.status} data-status={status} aria-live="polite">
-              <span>{statusCopy[status].label}</span>
-              <small>{statusCopy[status].detail}</small>
-            </div>
+            <RepresentationalLabStatus
+              label={currentStatus.label}
+              detail={currentStatus.detail}
+              tone={currentStatus.tone}
+            />
           </div>
 
           <div className={styles.matrixWrap}>
@@ -257,11 +276,16 @@ export function CantorClosureLab() {
               <strong>{witness ? `${passedChecks}/${stage} differ` : "not run"}</strong>
             </div>
           </div>
-        </section>
-
-        <aside className={styles.inspector} aria-label="Representation inspector">
+        </RepresentationalLabPanel>
+      )}
+      secondary={(
+        <RepresentationalLabPanel
+          as="aside"
+          ariaLabel="Representation inspector"
+          className={styles.inspector}
+        >
           <section>
-            <p className={styles.sectionLabel}>CURRENT REPRESENTATION</p>
+            <RepresentationalLabSectionLabel>CURRENT REPRESENTATION</RepresentationalLabSectionLabel>
             <dl className={styles.definitionList}>
               <div><dt>Alphabet</dt><dd>{"{0, 1}"}</dd></div>
               <div><dt>Stored width</dt><dd>{MAX_WIDTH} bits</dd></div>
@@ -272,18 +296,8 @@ export function CantorClosureLab() {
           </section>
 
           <section>
-            <p className={styles.sectionLabel}>CONSEQUENCE TRACE</p>
-            <ol className={styles.trace}>
-              {trace.map((event) => (
-                <li key={`${event.seq}-${event.label}`} data-tone={event.tone}>
-                  <span>{String(event.seq).padStart(2, "0")}</span>
-                  <div>
-                    <strong>{event.label}</strong>
-                    <p>{event.detail}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
+            <RepresentationalLabSectionLabel>CONSEQUENCE TRACE</RepresentationalLabSectionLabel>
+            <RepresentationalLabTrace events={trace} />
           </section>
 
           <section>
@@ -304,8 +318,8 @@ export function CantorClosureLab() {
               </div>
             )}
           </section>
-        </aside>
-      </div>
-    </main>
+        </RepresentationalLabPanel>
+      )}
+    />
   );
 }
