@@ -78,8 +78,8 @@ export function RepresentationLabBillboardCard() {
           </div>
 
           <strong>
-            Same World,<br />
-            Different Representation
+            <span>Same World,</span>
+            <span>Different Representation</span>
           </strong>
           <p>{node.boundary}</p>
 
