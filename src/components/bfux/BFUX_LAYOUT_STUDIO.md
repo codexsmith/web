@@ -11,17 +11,16 @@ A tunable instrument should have exactly two active styling layers:
 
 Do not add a third `*-polish.css`, cascade-lock patch, or resolution-specific override for the same geometry. If a value needs tuning, expose it as a named CSS custom property in the geometry contract.
 
-## Representation Lab billboard pilot
+## Active editor pieces
 
-Active files:
-
-- `RepresentationLabBillboardCard.tsx` — semantic DOM only;
-- `representation-lab-billboard-card.css` — visual skin;
-- `representation-lab-billboard-contract.css` — the single active geometry contract;
-- `RepresentationLabBillboardCardMount.tsx` — one job only: anchor the billboard above Products and request one initial reveal;
+- `RepresentationLabBillboardCard.tsx` — semantic billboard DOM only;
+- `representation-lab-billboard-card.css` — billboard visual skin;
+- `representation-lab-billboard-contract.css` — the single active billboard geometry contract;
+- `RepresentationLabBillboardCardMount.tsx` — default anchor above Products; yields when the editor assigns an anchor-grid position;
 - `BfuxLayoutStudio.tsx` — live visual tuning surface;
 - `BfuxPartsBox.tsx` / `bfux-parts-box.css` — reusable physical-part palette;
-- `BfuxPlacementLayer.tsx` / `bfux-placement-layer.css` — bounded part instantiation, placement, movement, and selection.
+- `BfuxPlacementLayer.tsx` / `bfux-placement-layer.css` — bounded loose-part instantiation, placement, movement, and selection;
+- `BfuxAnchorGrid.tsx` / `bfux-anchor-grid.css` — shared-point card placement system.
 
 Legacy `representation-lab-billboard-layout.css` and `representation-lab-billboard-polish.css` are retained as history but are no longer imported by the card and must not receive new fixes.
 
@@ -41,11 +40,35 @@ The billboard pilot exposes:
 - title scale;
 - lower control-row height.
 
-Changing the height slider establishes an explicit pixel height for that projection. `AUTO HEIGHT` removes the explicit height and returns the card to content-driven sizing. The existing billboard mount observes the resulting resize and re-anchors the card above Products, so changing height does not require a second positioning system.
+Changing the height slider establishes an explicit pixel height for that projection. `AUTO HEIGHT` removes the explicit height and returns the card to content-driven sizing.
 
-Changes apply immediately to the rendered card and persist in browser `localStorage` separately for Core and Full. `COPY CONFIG` exports the current layout values plus the placed-parts record so a finished visual state can be baked into a contract rather than recreated through screenshot iteration.
+Changes apply immediately and persist in browser `localStorage` separately for Core and Full. `COPY CONFIG` exports the billboard geometry, anchor-grid state, and free parts in one JSON payload so a finished visual state can be baked into code instead of recreated through screenshot iteration.
 
-## Parts Box
+## Anchor Grid
+
+Layout Studio v0.4 uses an Excel-style `PICK YOUR GRID` control, but the selected geometry is interpreted as a lattice of **points**, not boxes.
+
+A card placement is represented by:
+
+- node id;
+- anchor point `(column, row)`;
+- one attached corner: `NW`, `NE`, `SW`, or `SE`.
+
+This is intentionally different from storing arbitrary `left/top` offsets. The point is the shared alignment primitive; the corner tells the renderer which side of that point the object occupies.
+
+Consequences:
+
+- two cards can share one point with opposite corners and become exactly adjacent;
+- multiple cards can share a row or column without independently tuned offsets;
+- changing grid density remaps existing anchors to the nearest corresponding points;
+- a card whose own dimensions change remains attached by the same corner;
+- `RELEASE` removes the grid placement and restores the authored CSS position.
+
+During drag, the editor tests every valid `(point, corner)` pair that keeps the card inside the apparatus. The nearest valid corner/point relationship is previewed as a ghost before drop. The active point and its row/column are emphasized; the rest of the lattice remains subordinate.
+
+The grid is stored separately for Core and Full. It is an editor contract, not production positioning, until a copied configuration is deliberately baked into the machine layout.
+
+## Parts Box and free placement
 
 The Parts Box is a palette of primitives already represented by the physical Lab Machine language rather than a new visual vocabulary. It includes:
 
@@ -57,22 +80,19 @@ The connector forms are derived from the machine's existing contact banks, adjac
 
 Every part tile emits a stable `application/x-bfux-part` payload with schema `bfux.part/v1` plus a plain-text part id. The catalog and glyph renderer are exported from `BfuxPartsBox.tsx` so the palette and placed instances use the same primitive definition rather than parallel copies.
 
-## Placement contract
+Dragging a Parts Box primitive onto the machine creates a new instance at that location. Each drag from the palette creates another independent instance. Placed parts are bounded to the apparatus and stored as normalized center coordinates rather than raw screen coordinates.
 
-Layout Studio v0.3 installs a drop receiver on the physical Lab Machine apparatus. Dragging a Parts Box primitive onto the machine creates a new instance at that location. Each drag from the palette creates another independent instance of the selected primitive.
+A placed part can be selected, moved by dragging, and removed by double-click or Delete / Backspace. Placed parts persist independently for Core and Full.
 
-Placed parts are bounded to the apparatus and stored as normalized center coordinates instead of raw screen coordinates. That keeps a placement tied to the machine surface as the viewport geometry changes. The renderer maps those declared coordinates through `--bfux-part-x`, `--bfux-part-y`, `--bfux-part-width`, and `--bfux-part-height`; it does not write arbitrary layout rules into the machine stylesheet.
-
-A placed instance can be:
-
-- selected by clicking it;
-- moved by dragging it to another location on the apparatus;
-- removed by double-clicking it or pressing Delete / Backspace while it has focus.
-
-Placed parts persist in browser `localStorage` independently for Core and Full. A placed-instance drag uses schema `bfux.placement/v1`; a new palette drag continues to use `bfux.part/v1`.
-
-The drop target is intentionally the apparatus surface, not arbitrary document DOM. This is the first bounded placement canvas and gives us a controlled base for future snapping, attachment semantics, rotation, resizing, and connector routing.
+Cards and loose parts deliberately use different placement contracts: cards use the stricter shared anchor lattice because their mutual alignment is structural; loose machine parts currently use free normalized placement. A later pass can add magnetic card-edge/port attachment without collapsing those two models into one.
 
 ## Next
 
-Generalize the editor registry from the billboard to any `[data-bfux-editable]` instrument, then add direct resize/rotation handles, named child-region selection, snapping/attachment points, and semantic connector routing for placed Parts Box primitives. The important constraint is unchanged: the editor manipulates declared layout/placement variables; it does not write arbitrary CSS overrides.
+Useful next increments are:
+
+- make grid points nestable / locally refinable so a coarse apparatus lattice can contain denser sub-lattices;
+- expose direct card resize handles against the same geometry contracts;
+- add magnetic attachment rules between card edges, ports, connectors, and tubes;
+- promote a copied editor configuration into declarative production layout data rather than CSS literals.
+
+The important constraint is unchanged: the editor manipulates declared geometry and attachment relationships; it does not accumulate arbitrary corrective CSS.
