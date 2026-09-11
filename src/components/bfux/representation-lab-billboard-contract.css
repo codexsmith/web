@@ -1,0 +1,224 @@
+/* Representation Lab billboard geometry contract.
+ *
+ * This is the ONE active geometry layer for the billboard. The base card file
+ * owns material/visual styling. This file owns layout, sizing, and tunable CSS
+ * variables. Do not add post-hoc billboard geometry overrides elsewhere.
+ *
+ * The Layout Studio writes these variables live:
+ *   --billboard-width
+ *   --billboard-gap-y
+ *   --billboard-visual-width
+ *   --billboard-maze-scale
+ *   --billboard-maze-left
+ *   --billboard-visual-pad-x
+ *   --billboard-visual-pad-y
+ *   --billboard-copy-pad-x
+ *   --billboard-copy-pad-y
+ *   --billboard-title-scale
+ *   --billboard-controls-height
+ */
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+@media (min-width: 1025px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
+    --billboard-width: 35%;
+    --billboard-gap-y: 0px;
+    --billboard-visual-width: 44%;
+    --billboard-maze-scale: 1;
+    --billboard-maze-left: -18%;
+    --billboard-visual-pad-x: .56;
+    --billboard-visual-pad-y: .42;
+    --billboard-copy-pad-x: .72;
+    --billboard-copy-pad-y: .56;
+    --billboard-title-scale: 1.32;
+    --billboard-controls-height: 2.2;
+
+    position: absolute !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: var(--billboard-width) !important;
+    height: auto !important;
+    z-index: 9 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node--billboard {
+    --billboard-title-scale: 1.38;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__face {
+    display: grid !important;
+    grid-template-columns: var(--billboard-visual-width) minmax(0, calc(100% - var(--billboard-visual-width))) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 8rem !important;
+    box-sizing: border-box;
+    overflow: hidden !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    overflow: hidden !important;
+    padding:
+      calc(var(--machine-u, 12px) * var(--billboard-visual-pad-y))
+      calc(var(--machine-u, 12px) * var(--billboard-visual-pad-x)) !important;
+    border-right: 1px solid color-mix(in srgb, var(--tone) 28%, #31383d);
+    border-bottom: 0 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    display: block;
+    left: var(--billboard-maze-left) !important;
+    top: 50% !important;
+    width: 110% !important;
+    height: 110% !important;
+    max-width: none !important;
+    min-width: 0;
+    min-height: 0 !important;
+    margin: 0 !important;
+    transform: translateY(-50%) rotate(-90deg) scale(var(--billboard-maze-scale)) !important;
+    transform-origin: center center !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    left: auto !important;
+    right: .24rem !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    gap: .15rem !important;
+    font-size: .44rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows:
+      minmax(min-content, 1fr)
+      calc(var(--machine-u, 12px) * var(--billboard-controls-height)) !important;
+    grid-template-areas:
+      "title title"
+      "eyebrow cta" !important;
+    align-content: stretch !important;
+    align-items: stretch !important;
+    gap: .28rem !important;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    overflow: hidden !important;
+    padding:
+      calc(var(--machine-u, 12px) * var(--billboard-copy-pad-y))
+      calc(var(--machine-u, 12px) * var(--billboard-copy-pad-x)) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > p {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    grid-area: title;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    gap: .02em;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: calc(var(--machine-u, 12px) * var(--billboard-title-scale)) !important;
+    line-height: .91 !important;
+    overflow: visible !important;
+    overflow-wrap: normal;
+    word-break: normal;
+    text-wrap: initial;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong > span {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    grid-area: eyebrow;
+    min-width: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: .15rem;
+    line-height: 1 !important;
+    font-size: .47rem !important;
+    overflow: hidden;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow small {
+    margin-left: 0;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta {
+    grid-area: cta;
+    align-self: stretch !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: .42rem .62rem !important;
+    overflow: hidden;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta b {
+    font-size: .52rem !important;
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cue-row {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    z-index: auto !important;
+  }
+}
