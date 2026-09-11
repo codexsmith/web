@@ -29,7 +29,7 @@
     width: 100% !important;
     height: 100% !important;
     min-width: 0 !important;
-    min-height: 0 !important;
+    min-height: 8rem !important;
     box-sizing: border-box;
     overflow: hidden !important;
   }
@@ -183,15 +183,14 @@
 /* FULL / MID                                                                  */
 /* -------------------------------------------------------------------------- */
 
-/* Canonical Products: left 45.5%, top 5%, width 18.5%, height 22%.
- * Grow the billboard upward rather than downward so its bottom still lands at
- * 3%, preserving a clean physical gap before Products at 5%.
- */
+/* Products supplies the billboard's horizontal and vertical datum at runtime.
+ * Keep the opposite inset explicitly unset so `height: auto` remains intrinsic;
+ * constraining both top and bottom stretches the card after it is measured. */
 .bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-node--billboard {
   position: absolute !important;
   left: 37.25% !important;
   top: auto !important;
-  bottom: calc(95% + 4px) !important;
+  bottom: auto !important;
   width: 35% !important;
   height: auto !important;
   z-index: 9 !important;
@@ -224,16 +223,14 @@
 /* CORE / FOCUS                                                                */
 /* -------------------------------------------------------------------------- */
 
-/* Core Products begins at --core-upper-top (7%). The larger billboard keeps
- * its lower edge at 5%, so it gains usable height without entering the Products
- * card. It is also widened symmetrically around the Products datum. */
+/* Core uses the same runtime edge alignment as the other desktop projections. */
 .site-shell[data-root-focus="true"]
   .bf-machine[data-skin="physical"][data-resolution="focus"]
   .bf-machine__apparatus > .bf-machine-node--billboard {
   position: absolute !important;
   left: calc(var(--core-products-left) - 7%) !important;
   top: auto !important;
-  bottom: calc(93% - 13px) !important;
+  bottom: auto !important;
   width: calc(var(--core-upper-card-width) + 14%) !important;
   height: auto !important;
   z-index: 9 !important;
@@ -272,6 +269,7 @@
     position: relative !important;
     left: auto !important;
     top: auto !important;
+    bottom: auto !important;
     width: auto !important;
     height: auto !important;
     min-height: 260px !important;

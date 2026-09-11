@@ -9,7 +9,6 @@ const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer
 const billboardSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
 const productsSelector = '.bf-machine-node[data-node-id="products"]';
 const desktopProjectionQuery = "(min-width: 1025px)";
-const billboardGap = 8;
 
 export function RepresentationLabBillboardCardMount() {
   const [host, setHost] = useState<HTMLElement | null>(null);
@@ -45,6 +44,7 @@ export function RepresentationLabBillboardCardMount() {
 
   useEffect(() => {
     if (!host) return;
+    const currentHost = host;
 
     let firstFrame = 0;
     let secondFrame = 0;
@@ -52,12 +52,12 @@ export function RepresentationLabBillboardCardMount() {
     let revealFrameTwo = 0;
     let pendingReveal = false;
     let productsObserver: ResizeObserver | null = null;
-    const machine = host.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
+    const machine = currentHost.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
     let lastResolution = machine?.dataset.resolution ?? "";
 
     function alignBillboardToProducts() {
-      const billboard = host.querySelector<HTMLElement>(billboardSelector);
-      const products = host.querySelector<HTMLElement>(productsSelector);
+      const billboard = currentHost.querySelector<HTMLElement>(billboardSelector);
+      const products = currentHost.querySelector<HTMLElement>(productsSelector);
       if (!billboard || !products) return billboard;
 
       if (!window.matchMedia(desktopProjectionQuery).matches) {
@@ -67,14 +67,24 @@ export function RepresentationLabBillboardCardMount() {
         return billboard;
       }
 
-      const hostRect = host.getBoundingClientRect();
+      const hostRect = currentHost.getBoundingClientRect();
+      const billboardRect = billboard.getBoundingClientRect();
       const productsRect = products.getBoundingClientRect();
-      const scaleX = host.offsetWidth > 0 ? hostRect.width / host.offsetWidth : 1;
-      const scaleY = host.offsetHeight > 0 ? hostRect.height / host.offsetHeight : scaleX;
+      const billboardShellRect = billboard
+        .querySelector<HTMLElement>(".bf-machine-node__shell")
+        ?.getBoundingClientRect();
+      const productsShellRect = products
+        .querySelector<HTMLElement>(".bf-machine-node__shell")
+        ?.getBoundingClientRect();
+      const scaleX = currentHost.offsetWidth > 0 ? hostRect.width / currentHost.offsetWidth : 1;
+      const scaleY = currentHost.offsetHeight > 0 ? hostRect.height / currentHost.offsetHeight : scaleX;
       const productCenterX = (productsRect.left - hostRect.left + productsRect.width / 2) / scaleX;
-      const productTop = (productsRect.top - hostRect.top) / scaleY;
+      const productTop = ((productsShellRect?.top ?? productsRect.top) - hostRect.top) / scaleY;
+      const billboardBottomOffset = (
+        (billboardShellRect?.bottom ?? billboardRect.bottom) - billboardRect.top
+      ) / scaleY;
       const left = productCenterX - billboard.offsetWidth / 2;
-      const top = productTop - billboard.offsetHeight - billboardGap;
+      const top = productTop - billboardBottomOffset;
 
       billboard.style.setProperty("left", `${left}px`, "important");
       billboard.style.setProperty("top", `${top}px`, "important");
@@ -110,7 +120,7 @@ export function RepresentationLabBillboardCardMount() {
       // Products may change physical size as the machine projection settles.
       // Re-align to that geometry, but never turn a resize into another reveal.
       if (!productsObserver) {
-        const products = host.querySelector<HTMLElement>(productsSelector);
+        const products = currentHost.querySelector<HTMLElement>(productsSelector);
         if (products) {
           productsObserver = new ResizeObserver(() => scheduleSettle(false));
           productsObserver.observe(products);
