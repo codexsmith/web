@@ -76,6 +76,7 @@ function partSize(kind: BfuxPartKind) {
 export function BfuxAuthoredLayoutLayer() {
   const [host, setHost] = useState<HTMLElement | null>(null);
   const [resolution, setResolution] = useState<BfuxLayoutResolution>("focus");
+  const [revision, setRevision] = useState(0);
 
   useEffect(() => {
     let frame = 0;
@@ -83,6 +84,7 @@ export function BfuxAuthoredLayoutLayer() {
       const next = document.querySelector<HTMLElement>(apparatusSelector);
       setHost((current) => current === next ? current : next);
       if (next) setResolution(currentResolution(next));
+      setRevision((current) => current + 1);
     };
     const schedule = () => {
       cancelAnimationFrame(frame);
@@ -145,7 +147,7 @@ export function BfuxAuthoredLayoutLayer() {
       }
       host.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
     };
-  }, [host, resolution]);
+  }, [host, resolution, revision]);
 
   if (!host) return null;
   const layout = bfuxAuthoredLayout[resolution];
