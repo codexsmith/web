@@ -1,0 +1,50 @@
+/* Representation Lab billboard · internal density polish.
+ *
+ * Placement is intentionally out of scope here. The runtime mount and authored
+ * Core/Full geometry own the card position; this file only lets the pictogram
+ * and invitation use more of the face they already have. */
+
+@media (min-width: 1025px) {
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual {
+    padding: .16rem .22rem .14rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    left: -23% !important;
+    width: 118% !important;
+    height: 118% !important;
+    transform: translateY(-50%) rotate(-90deg) scale(1.04) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    right: .14rem !important;
+    gap: .1rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    grid-template-rows: minmax(0, 1fr) 1.9rem !important;
+    gap: .1rem !important;
+    padding: .22rem .42rem .26rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    justify-content: flex-start !important;
+    padding-top: .08rem;
+    line-height: .88 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    gap: .08rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta {
+    padding: .28rem .5rem !important;
+  }
+}
