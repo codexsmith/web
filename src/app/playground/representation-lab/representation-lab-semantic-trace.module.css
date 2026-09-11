@@ -51,18 +51,45 @@
 
 .readout {
   display: grid;
-  gap: 3px;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
   border-left: 3px solid var(--bf-action, currentColor);
   padding: 8px 11px;
   background: var(--bf-bg-surface, rgba(0,0,0,.12));
 }
 
 .readout strong {
+  min-width: 0;
   font-size: 13px;
 }
 
-.readout small {
-  opacity: .68;
+/* The legacy narration ledger immediately following this trace repeated the
+ * current operation, explained why it mattered, and then repeated status again.
+ * Keep only the status cell on the default surface; deeper explanation already
+ * exists in the model/analysis panels. */
+.wrapper + :global(section[aria-live="polite"]) {
+  grid-template-columns: 1fr !important;
+}
+
+.wrapper + :global(section[aria-live="polite"]) > :global(div:nth-child(1)),
+.wrapper + :global(section[aria-live="polite"]) > :global(div:nth-child(2)) {
+  display: none !important;
+}
+
+.wrapper + :global(section[aria-live="polite"]) > :global(div:last-child) {
+  min-height: 38px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 10px;
+  padding: 7px 11px !important;
+  border-right: 0 !important;
+}
+
+.wrapper + :global(section[aria-live="polite"]) > :global(div:last-child) > :global(strong) {
+  margin-top: 0 !important;
 }
 
 .subcycle {
