@@ -2,8 +2,7 @@
 
 import { representationLabBillboardNode } from "./lab-machine-model";
 import "./representation-lab-billboard-card.css";
-import "./representation-lab-billboard-layout.css";
-import "./representation-lab-billboard-polish.css";
+import "./representation-lab-billboard-contract.css";
 
 export function RepresentationLabBillboardCard() {
   const node = representationLabBillboardNode;
@@ -13,6 +12,7 @@ export function RepresentationLabBillboardCard() {
       className="bf-machine-node bf-machine-node--billboard"
       data-machine-layer="node"
       data-machine-node-interactive="true"
+      data-bfux-editable="representation-lab-billboard"
       data-node-id={node.id}
       data-tone={node.tone}
       href={node.href ?? "/playground/representation-lab"}
