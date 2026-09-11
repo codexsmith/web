@@ -57,7 +57,10 @@ export function RepresentationLabBillboardCardMount() {
       const products = currentHost.querySelector<HTMLElement>(productsSelector);
       if (!billboard || !products) return;
 
-      if (billboard.dataset.bfuxGridPlaced === "true") {
+      if (
+        billboard.dataset.bfuxGridPlaced === "true" ||
+        billboard.dataset.bfuxAuthoredGridPlaced === "true"
+      ) {
         billboard.dataset.billboardAnchor = "anchor-grid";
         revealAfterAlign = false;
         return;
