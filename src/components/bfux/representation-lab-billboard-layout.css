@@ -17,14 +17,13 @@
 /* -------------------------------------------------------------------------- */
 
 @media (min-width: 1025px) {
-  /* Give both halves explicit bounded tracks. The previous centered intrinsic
-   * copy stack could become taller than the face, which made the title and CTA
-   * escape symmetrically. This layout keeps the eyebrow and CTA pinned inside
-   * the plate while the title owns the flexible middle row. */
+  /* The marked dead space in the current billboard is horizontal, not vertical.
+   * Give that width to the pictogram instead of carrying an oversized copy bay.
+   * The outer card, title centering, lower control row, and Y geometry stay put. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__face {
     display: grid !important;
-    grid-template-columns: 34% minmax(0, 66%) !important;
+    grid-template-columns: 44% minmax(0, 56%) !important;
     grid-template-rows: minmax(0, 1fr) !important;
     width: 100% !important;
     height: 100% !important;
