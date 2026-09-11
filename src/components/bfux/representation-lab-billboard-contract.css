@@ -6,6 +6,7 @@
  *
  * The Layout Studio writes these variables live:
  *   --billboard-width
+ *   --billboard-height
  *   --billboard-gap-y
  *   --billboard-visual-width
  *   --billboard-maze-scale
@@ -27,6 +28,7 @@
 @media (min-width: 1025px) {
   .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
     --billboard-width: 35%;
+    --billboard-height: auto;
     --billboard-gap-y: 0px;
     --billboard-visual-width: 44%;
     --billboard-maze-scale: 1;
@@ -42,7 +44,7 @@
     top: auto !important;
     bottom: auto !important;
     width: var(--billboard-width) !important;
-    height: auto !important;
+    height: var(--billboard-height) !important;
     z-index: 9 !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -59,7 +61,7 @@
     grid-template-columns: var(--billboard-visual-width) minmax(0, calc(100% - var(--billboard-visual-width))) !important;
     grid-template-rows: minmax(0, 1fr) !important;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     min-width: 0 !important;
     min-height: 8rem !important;
     box-sizing: border-box;
