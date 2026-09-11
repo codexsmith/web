@@ -24,7 +24,7 @@
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__face {
     display: grid !important;
-    grid-template-columns: 40% minmax(0, 60%) !important;
+    grid-template-columns: 38% minmax(0, 62%) !important;
     grid-template-rows: minmax(0, 1fr) !important;
     width: 100% !important;
     height: 100% !important;
@@ -80,19 +80,19 @@
     grid-row: 1;
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    grid-template-rows: 1rem minmax(0, 1fr) 3rem !important;
     grid-template-areas:
       "eyebrow"
       "title"
       "cta" !important;
     align-content: stretch !important;
     align-items: stretch !important;
-    gap: .34rem !important;
+    gap: .28rem !important;
     min-width: 0;
     min-height: 0;
     box-sizing: border-box;
     overflow: hidden !important;
-    padding: .58rem .76rem !important;
+    padding: .58rem .72rem .56rem !important;
   }
 
   .bf-machine[data-skin="physical"]
@@ -103,36 +103,58 @@
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
     grid-area: title;
-    align-self: center;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .02em;
     min-width: 0;
     min-height: 0;
     max-width: 100%;
     margin: 0;
-    font-size: clamp(1.28rem, 1.55vw, 1.72rem) !important;
-    line-height: .94 !important;
+    font-size: clamp(1.16rem, 1.42vw, 1.58rem) !important;
+    line-height: .91 !important;
+    overflow: hidden;
     overflow-wrap: normal;
     word-break: normal;
-    text-wrap: balance;
+    text-wrap: initial;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong > span {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
     min-width: 0;
-    font-size: .5rem !important;
+    align-self: start;
+    line-height: 1 !important;
+    font-size: .47rem !important;
+    overflow: hidden;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow small {
+    margin-left: auto;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__cta {
     grid-area: cta;
-    align-self: end !important;
+    align-self: stretch !important;
     min-width: 0 !important;
-    min-height: 2.42rem;
+    min-height: 0 !important;
+    height: 100%;
     display: flex !important;
     align-items: center;
     justify-content: space-between;
     gap: .7rem;
     box-sizing: border-box;
     padding: .42rem .62rem !important;
+    overflow: hidden;
   }
 
   .bf-machine[data-skin="physical"]
@@ -143,6 +165,7 @@
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__cta b {
     font-size: .62rem !important;
+    white-space: nowrap;
   }
 
   .bf-machine[data-skin="physical"]
@@ -173,7 +196,7 @@
 
 .bf-machine[data-skin="physical"][data-resolution="mid"]
   .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
-  font-size: clamp(1.34rem, 1.7vw, 1.82rem) !important;
+  font-size: clamp(1.2rem, 1.46vw, 1.6rem) !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="mid"]
@@ -214,7 +237,7 @@
 
 .bf-machine[data-skin="physical"][data-resolution="focus"]
   .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
-  font-size: clamp(1.42rem, 1.85vw, 1.94rem) !important;
+  font-size: clamp(1.25rem, 1.55vw, 1.66rem) !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="focus"]
