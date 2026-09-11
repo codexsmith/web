@@ -1,0 +1,36 @@
+.bf-machine[data-skin="physical"]
+  [data-machine-layer="apparatus"]
+  .bf-machine-node[data-bfux-authored-grid-placed="true"] {
+  left: var(--bfux-node-anchor-x) !important;
+  top: var(--bfux-node-anchor-y) !important;
+  transform: translate(var(--bfux-node-anchor-tx), var(--bfux-node-anchor-ty)) !important;
+}
+
+.bfux-authored-parts-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 22;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bfux-authored-part {
+  position: absolute;
+  left: var(--bfux-part-x);
+  top: var(--bfux-part-y);
+  width: var(--bfux-part-width);
+  height: var(--bfux-part-height);
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 4px 5px rgba(0,0,0,.55));
+}
+
+.bfux-authored-part .bfux-part-glyph {
+  transform: scale(1.38);
+  transform-origin: center;
+}
+
+.bfux-authored-part[data-part-family="tube"] .bfux-part-glyph { transform: scale(1.58); }
+.bfux-authored-part[data-part-family="panel"] .bfux-part-glyph { transform: scale(1.66); }
+.bfux-authored-part[data-part-kind="port"] .bfux-part-glyph { transform: scale(1.48); }
