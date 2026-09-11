@@ -19,9 +19,8 @@ export function SemanticTraceBus({ frame }: { frame: SemanticLabFrame }) {
       </div>
 
       <div className={s.readout}>
-        <span>ACTIVE SEMANTIC OPERATION</span>
+        <span>NOW</span>
         <strong>{frame.semanticLabel}</strong>
-        <small>This is an operation label, not a percentage-through-animation estimate.</small>
       </div>
 
       {frame.subphase ? (
