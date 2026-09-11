@@ -9,6 +9,7 @@ const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer
 const billboardSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
 const productsSelector = '.bf-machine-node[data-node-id="products"]';
 const desktopProjectionQuery = "(min-width: 1025px)";
+const layoutTuningEvent = "bfux-layout-tuning";
 
 export function RepresentationLabBillboardCardMount() {
   const [host, setHost] = useState<HTMLElement | null>(null);
@@ -22,12 +23,11 @@ export function RepresentationLabBillboardCardMount() {
     };
 
     const scheduleFind = () => {
-      window.cancelAnimationFrame(frame);
-      frame = window.requestAnimationFrame(findHost);
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(findHost);
     };
 
     scheduleFind();
-
     const observer = new MutationObserver(scheduleFind);
     observer.observe(document.body, {
       childList: true,
@@ -38,114 +38,86 @@ export function RepresentationLabBillboardCardMount() {
 
     return () => {
       observer.disconnect();
-      window.cancelAnimationFrame(frame);
+      cancelAnimationFrame(frame);
     };
   }, []);
 
   useEffect(() => {
     if (!host) return;
     const currentHost = host;
-
-    let firstFrame = 0;
-    let secondFrame = 0;
-    let revealFrameOne = 0;
-    let revealFrameTwo = 0;
-    let pendingReveal = false;
-    let productsObserver: ResizeObserver | null = null;
     const machine = currentHost.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
     let lastResolution = machine?.dataset.resolution ?? "";
+    let frameOne = 0;
+    let frameTwo = 0;
+    let revealFrame = 0;
+    let revealAfterAlign = true;
 
-    function alignBillboardToProducts() {
+    const align = () => {
       const billboard = currentHost.querySelector<HTMLElement>(billboardSelector);
       const products = currentHost.querySelector<HTMLElement>(productsSelector);
-      if (!billboard || !products) return billboard;
+      if (!billboard || !products) return;
 
-      if (!window.matchMedia(desktopProjectionQuery).matches) {
+      if (!matchMedia(desktopProjectionQuery).matches) {
         billboard.style.removeProperty("left");
         billboard.style.removeProperty("top");
         delete billboard.dataset.billboardAnchor;
-        return billboard;
+        return;
       }
 
       const hostRect = currentHost.getBoundingClientRect();
       const billboardRect = billboard.getBoundingClientRect();
       const productsRect = products.getBoundingClientRect();
-      const billboardShellRect = billboard
-        .querySelector<HTMLElement>(".bf-machine-node__shell")
-        ?.getBoundingClientRect();
-      const productsShellRect = products
-        .querySelector<HTMLElement>(".bf-machine-node__shell")
-        ?.getBoundingClientRect();
+      const billboardShellRect = billboard.querySelector<HTMLElement>(".bf-machine-node__shell")?.getBoundingClientRect();
+      const productsShellRect = products.querySelector<HTMLElement>(".bf-machine-node__shell")?.getBoundingClientRect();
       const scaleX = currentHost.offsetWidth > 0 ? hostRect.width / currentHost.offsetWidth : 1;
       const scaleY = currentHost.offsetHeight > 0 ? hostRect.height / currentHost.offsetHeight : scaleX;
       const productCenterX = (productsRect.left - hostRect.left + productsRect.width / 2) / scaleX;
       const productTop = ((productsShellRect?.top ?? productsRect.top) - hostRect.top) / scaleY;
-      const billboardBottomOffset = (
-        (billboardShellRect?.bottom ?? billboardRect.bottom) - billboardRect.top
-      ) / scaleY;
+      const billboardBottomOffset = ((billboardShellRect?.bottom ?? billboardRect.bottom) - billboardRect.top) / scaleY;
+      const gapY = Number.parseFloat(getComputedStyle(billboard).getPropertyValue("--billboard-gap-y")) || 0;
       const left = productCenterX - billboard.offsetWidth / 2;
-      const top = productTop - billboardBottomOffset;
+      const top = productTop - billboardBottomOffset - gapY;
 
       billboard.style.setProperty("left", `${left}px`, "important");
       billboard.style.setProperty("top", `${top}px`, "important");
       billboard.dataset.billboardAnchor = "products-above";
 
-      return billboard;
-    }
-
-    function requestOneShotReveal(billboard: HTMLElement) {
-      window.cancelAnimationFrame(revealFrameOne);
-      window.cancelAnimationFrame(revealFrameTwo);
-
-      // LabMachine's own resolution containment also settles over two frames.
-      // Wait for that pass to finish, then reveal this extra top-deck card once.
-      // Repeating this event while auto-pan is still moving causes additive pan
-      // deltas and was the source of the runaway "scrolling upward" behavior.
-      revealFrameOne = window.requestAnimationFrame(() => {
-        revealFrameTwo = window.requestAnimationFrame(() => {
+      if (revealAfterAlign) {
+        revealAfterAlign = false;
+        cancelAnimationFrame(revealFrame);
+        revealFrame = requestAnimationFrame(() => {
           billboard.dispatchEvent(new CustomEvent(labMachineRevealEvent, { bubbles: true }));
         });
-      });
-    }
-
-    function settleBillboard() {
-      const billboard = alignBillboardToProducts();
-      if (!billboard) return;
-
-      if (pendingReveal) {
-        pendingReveal = false;
-        requestOneShotReveal(billboard);
       }
+    };
 
-      // Products may change physical size as the machine projection settles.
-      // Re-align to that geometry, but never turn a resize into another reveal.
-      if (!productsObserver) {
-        const products = currentHost.querySelector<HTMLElement>(productsSelector);
-        if (products) {
-          productsObserver = new ResizeObserver(() => scheduleSettle(false));
-          productsObserver.observe(products);
-        }
-      }
-    }
-
-    function scheduleSettle(reveal = false) {
-      pendingReveal = pendingReveal || reveal;
-      window.cancelAnimationFrame(firstFrame);
-      window.cancelAnimationFrame(secondFrame);
-      firstFrame = window.requestAnimationFrame(() => {
-        secondFrame = window.requestAnimationFrame(settleBillboard);
+    const scheduleAlign = (reveal = false) => {
+      revealAfterAlign = revealAfterAlign || reveal;
+      cancelAnimationFrame(frameOne);
+      cancelAnimationFrame(frameTwo);
+      frameOne = requestAnimationFrame(() => {
+        frameTwo = requestAnimationFrame(align);
       });
-    }
+    };
 
-    // Initial mount: align first, then ask the machine to include the billboard
-    // in its visible framing exactly once.
-    scheduleSettle(true);
+    scheduleAlign(true);
+
+    const resizeObserver = new ResizeObserver(() => scheduleAlign(false));
+    const observeCurrentGeometry = () => {
+      resizeObserver.disconnect();
+      const billboard = currentHost.querySelector<HTMLElement>(billboardSelector);
+      const products = currentHost.querySelector<HTMLElement>(productsSelector);
+      if (billboard) resizeObserver.observe(billboard);
+      if (products) resizeObserver.observe(products);
+    };
+    observeCurrentGeometry();
 
     const machineObserver = new MutationObserver(() => {
       const nextResolution = machine?.dataset.resolution ?? "";
       const resolutionChanged = nextResolution !== lastResolution;
       lastResolution = nextResolution;
-      scheduleSettle(resolutionChanged);
+      observeCurrentGeometry();
+      scheduleAlign(resolutionChanged);
     });
 
     if (machine) {
@@ -155,19 +127,19 @@ export function RepresentationLabBillboardCardMount() {
       });
     }
 
-    // Browser resizing should keep the card attached to Products, but must not
-    // repeatedly auto-pan the whole machine underneath the user's pointer.
-    const handleResize = () => scheduleSettle(false);
+    const handleResize = () => scheduleAlign(false);
+    const handleTuning = () => scheduleAlign(false);
     window.addEventListener("resize", handleResize);
+    currentHost.addEventListener(layoutTuningEvent, handleTuning);
 
     return () => {
+      resizeObserver.disconnect();
       machineObserver.disconnect();
-      productsObserver?.disconnect();
       window.removeEventListener("resize", handleResize);
-      window.cancelAnimationFrame(firstFrame);
-      window.cancelAnimationFrame(secondFrame);
-      window.cancelAnimationFrame(revealFrameOne);
-      window.cancelAnimationFrame(revealFrameTwo);
+      currentHost.removeEventListener(layoutTuningEvent, handleTuning);
+      cancelAnimationFrame(frameOne);
+      cancelAnimationFrame(frameTwo);
+      cancelAnimationFrame(revealFrame);
     };
   }, [host]);
 
