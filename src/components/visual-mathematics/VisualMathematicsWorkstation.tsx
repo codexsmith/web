@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BoundaryAttractorSpecimen } from "./BoundaryAttractorSpecimen";
 import { HopfSpecimen } from "./HopfSpecimen";
@@ -25,6 +25,15 @@ export function VisualMathematicsWorkstation({
   const [selectedId, setSelectedId] = useState<VisualMathSpecimenId>(initialSpecimen);
   const [command, setCommand] = useState<VisualMathCommand>("operate");
   const definition = getVisualMathSpecimen(selectedId);
+
+  // The route owns specimen identity. React state is still kept locally so
+  // cartridge changes can respond immediately, but any server-resolved query
+  // change must re-synchronize the workstation rather than being treated only
+  // as the initial useState seed.
+  useEffect(() => {
+    setSelectedId(initialSpecimen);
+    setCommand("operate");
+  }, [initialSpecimen]);
 
   const selectSpecimen = (id: VisualMathSpecimenId) => {
     setSelectedId(id);
