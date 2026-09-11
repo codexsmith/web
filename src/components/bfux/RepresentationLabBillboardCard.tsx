@@ -26,7 +26,7 @@ export function RepresentationLabBillboardCard() {
 
       <div className="bf-machine-node__face bf-machine-billboard__face">
         <div className="bf-machine-billboard__visual" aria-hidden="true">
-          <svg viewBox="0 0 180 104" role="presentation">
+          <svg viewBox="10 10 160 84" role="presentation">
             <defs>
               <filter id="billboard-soft-glow" x="-40%" y="-40%" width="180%" height="180%">
                 <feGaussianBlur stdDeviation="1.8" result="blur" />
