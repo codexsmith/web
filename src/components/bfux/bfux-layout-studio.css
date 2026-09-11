@@ -129,6 +129,35 @@
   cursor: ew-resize;
 }
 
+.bfux-layout-studio__height-mode {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .65rem;
+  padding: .38rem .8rem .48rem;
+  border-bottom: 1px solid #1f2a2f;
+  background: #0d1316;
+}
+
+.bfux-layout-studio__height-mode small {
+  color: #71848d;
+  font-size: .5rem;
+  letter-spacing: .08em;
+}
+
+.bfux-layout-studio__height-mode button {
+  min-height: 1.65rem;
+  padding: .28rem .48rem;
+  font-size: .52rem;
+  color: #b7c3c8;
+}
+
+.bfux-layout-studio__height-mode button[data-active="true"] {
+  border-color: #678f9e;
+  color: #8fe0ff;
+  box-shadow: inset 0 0 0 1px rgba(97,215,255,.12);
+}
+
 .bfux-layout-studio > footer {
   position: sticky;
   bottom: 0;
