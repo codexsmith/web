@@ -1,117 +1,96 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   BfuxAnchorGridLayer,
   BfuxAnchorGridPicker,
-  defaultBfuxAnchorGridState,
   remapBfuxAnchorPlacements,
   type BfuxAnchorGridSpec,
   type BfuxAnchorGridState,
   type BfuxNodeAnchorPlacement,
 } from "./BfuxAnchorGrid";
+import { BfuxAuthoredLayoutLayer } from "./BfuxAuthoredLayoutLayer";
 import { BfuxPartsBox } from "./BfuxPartsBox";
 import { BfuxPlacementLayer, type BfuxPlacedPart } from "./BfuxPlacementLayer";
+import { bfuxAuthoredLayout } from "./bfux-layout-authored.generated";
+import {
+  bfuxAuthoredLayoutSourcePath,
+  renderBfuxAuthoredLayoutSource,
+} from "./bfux-layout-compiler";
+import type {
+  BfuxBillboardLayout,
+  BfuxLayoutResolution,
+  BfuxMachineLayoutSource,
+  BfuxProjectionLayout,
+} from "./bfux-layout-source";
 import "./bfux-layout-studio.css";
 
 const targetSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
 const machineSelector = '.bf-machine[data-skin="physical"]';
 const storageKey = "bfl_bfux_layout_studio_billboard_v1";
 const gridStorageKey = "bfl_bfux_anchor_grid_v1";
+const placementStorageKey = "bfl_bfux_placed_parts_v1";
 const tuningEvent = "bfux-layout-tuning";
 
-type ResolutionKey = "focus" | "mid";
-
-type LayoutValues = {
-  width: number;
-  height: number | null;
-  gapY: number;
-  visualWidth: number;
-  mazeScale: number;
-  mazeLeft: number;
-  visualPadX: number;
-  visualPadY: number;
-  copyPadX: number;
-  copyPadY: number;
-  titleScale: number;
-  controlsHeight: number;
-};
-
+type ResolutionKey = BfuxLayoutResolution;
+type LayoutValues = BfuxBillboardLayout;
 type SavedLayout = Partial<Record<ResolutionKey, Partial<LayoutValues>>>;
 type SavedAnchorGrid = Partial<Record<ResolutionKey, Partial<BfuxAnchorGridState>>>;
+type SavedParts = Partial<Record<ResolutionKey, BfuxPlacedPart[]>>;
 
-const defaults: Record<ResolutionKey, LayoutValues> = {
-  focus: {
-    width: 35,
-    height: null,
-    gapY: 0,
-    visualWidth: 44,
-    mazeScale: 1,
-    mazeLeft: -18,
-    visualPadX: 0.56,
-    visualPadY: 0.42,
-    copyPadX: 0.72,
-    copyPadY: 0.56,
-    titleScale: 1.38,
-    controlsHeight: 2.2,
-  },
-  mid: {
-    width: 35,
-    height: null,
-    gapY: 0,
-    visualWidth: 44,
-    mazeScale: 1,
-    mazeLeft: -18,
-    visualPadX: 0.56,
-    visualPadY: 0.42,
-    copyPadX: 0.72,
-    copyPadY: 0.56,
-    titleScale: 1.32,
-    controlsHeight: 2.2,
-  },
-};
+function authoredProjection(resolution: ResolutionKey): BfuxProjectionLayout {
+  return bfuxAuthoredLayout[resolution];
+}
+
+function readJson<T>(key: string, fallback: T): T {
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw ? (JSON.parse(raw) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeJson(key: string, value: unknown) {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // The studio remains functional for the active session when storage is blocked.
+  }
+}
 
 function readSaved(): SavedLayout {
-  try {
-    const raw = window.localStorage.getItem(storageKey);
-    return raw ? (JSON.parse(raw) as SavedLayout) : {};
-  } catch {
-    return {};
-  }
+  return readJson<SavedLayout>(storageKey, {});
 }
 
 function writeSaved(saved: SavedLayout) {
-  try {
-    window.localStorage.setItem(storageKey, JSON.stringify(saved));
-  } catch {
-    // The editor still works for the current session when storage is blocked.
-  }
+  writeJson(storageKey, saved);
 }
 
 function readSavedGrid(): SavedAnchorGrid {
-  try {
-    const raw = window.localStorage.getItem(gridStorageKey);
-    return raw ? (JSON.parse(raw) as SavedAnchorGrid) : {};
-  } catch {
-    return {};
-  }
+  return readJson<SavedAnchorGrid>(gridStorageKey, {});
 }
 
 function writeSavedGrid(saved: SavedAnchorGrid) {
-  try {
-    window.localStorage.setItem(gridStorageKey, JSON.stringify(saved));
-  } catch {
-    // Grid editing remains live for the current session when storage is blocked.
-  }
+  writeJson(gridStorageKey, saved);
 }
 
-function hydratedGrid(saved: SavedAnchorGrid[ResolutionKey]): BfuxAnchorGridState {
+function readSavedParts(): SavedParts {
+  return readJson<SavedParts>(placementStorageKey, {});
+}
+
+function hydratedGrid(
+  saved: SavedAnchorGrid[ResolutionKey],
+  fallback: BfuxProjectionLayout["anchorGrid"],
+): BfuxAnchorGridState {
   return {
     spec: {
-      ...defaultBfuxAnchorGridState.spec,
+      ...fallback.spec,
       ...(saved?.spec ?? {}),
     },
-    placements: Array.isArray(saved?.placements) ? saved.placements : [],
+    placements: Array.isArray(saved?.placements)
+      ? saved.placements
+      : fallback.placements.map((placement) => ({ ...placement })),
   };
 }
 
@@ -171,23 +150,54 @@ function RangeControl({
   );
 }
 
+function cloneProjection(projection: BfuxProjectionLayout): BfuxProjectionLayout {
+  return {
+    billboard: { ...projection.billboard },
+    anchorGrid: {
+      spec: { ...projection.anchorGrid.spec },
+      placements: projection.anchorGrid.placements.map((placement) => ({ ...placement })),
+    },
+    placedParts: projection.placedParts.map((placement) => ({ ...placement })),
+  };
+}
+
 export function BfuxLayoutStudio() {
   const [enabled, setEnabled] = useState(false);
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [resolution, setResolution] = useState<ResolutionKey>("focus");
-  const [values, setValues] = useState<LayoutValues>(defaults.focus);
+  const [values, setValues] = useState<LayoutValues>({ ...authoredProjection("focus").billboard });
   const [placedParts, setPlacedParts] = useState<BfuxPlacedPart[]>([]);
-  const [gridState, setGridState] = useState<BfuxAnchorGridState>(defaultBfuxAnchorGridState);
+  const [partsReady, setPartsReady] = useState(false);
+  const [gridState, setGridState] = useState<BfuxAnchorGridState>(() => hydratedGrid(undefined, authoredProjection("focus").anchorGrid));
   const [gridHydratedFor, setGridHydratedFor] = useState<ResolutionKey | null>(null);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [measuredHeight, setMeasuredHeight] = useState(140);
+  const [copyState, setCopyState] = useState("COPY SOURCE");
+  const [specState, setSpecState] = useState("COPY SPEC");
+  const [writeState, setWriteState] = useState("WRITE REPO");
   const [metrics, setMetrics] = useState("waiting for billboard");
-  const [copyState, setCopyState] = useState("COPY CONFIG");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setEnabled(params.get("bfux") === "edit");
   }, []);
+
+  useEffect(() => {
+    if (!enabled) {
+      setPartsReady(false);
+      return;
+    }
+
+    const saved = readSavedParts();
+    let changed = false;
+    for (const key of ["focus", "mid"] as const) {
+      if (Array.isArray(saved[key])) continue;
+      saved[key] = authoredProjection(key).placedParts.map((placement) => ({ ...placement }));
+      changed = true;
+    }
+    if (changed) writeJson(placementStorageKey, saved);
+    setPartsReady(true);
+  }, [enabled]);
 
   useEffect(() => {
     if (!enabled) return;
@@ -216,13 +226,13 @@ export function BfuxLayoutStudio() {
   useEffect(() => {
     if (!enabled) return;
     const saved = readSaved();
-    setValues({ ...defaults[resolution], ...(saved[resolution] ?? {}) });
+    setValues({ ...authoredProjection(resolution).billboard, ...(saved[resolution] ?? {}) });
   }, [enabled, resolution]);
 
   useEffect(() => {
     if (!enabled) return;
     const saved = readSavedGrid();
-    setGridState(hydratedGrid(saved[resolution]));
+    setGridState(hydratedGrid(saved[resolution], authoredProjection(resolution).anchorGrid));
     setSelectedNodeId(null);
     setGridHydratedFor(resolution);
   }, [enabled, resolution]);
@@ -303,15 +313,97 @@ export function BfuxLayoutStudio() {
     setSelectedNodeId(null);
   }, []);
 
-  const exported = useMemo(() => JSON.stringify({
-    component: "lab-machine-layout",
-    resolution,
-    billboard: values,
-    anchorGrid: gridState,
-    placedParts,
-  }, null, 2), [gridState, placedParts, resolution, values]);
+  const compileLayout = (): BfuxMachineLayoutSource => {
+    const savedLayouts = readSaved();
+    const savedGrids = readSavedGrid();
+    const savedParts = readSavedParts();
 
-  if (!enabled) return null;
+    const projection = (key: ResolutionKey): BfuxProjectionLayout => {
+      const base = cloneProjection(authoredProjection(key));
+      const billboard = key === resolution
+        ? { ...values }
+        : { ...base.billboard, ...(savedLayouts[key] ?? {}) };
+      const anchorGrid = key === resolution
+        ? {
+            spec: { ...gridState.spec },
+            placements: gridState.placements.map((placement) => ({ ...placement })),
+          }
+        : hydratedGrid(savedGrids[key], base.anchorGrid);
+      const parts = key === resolution
+        ? placedParts.map((placement) => ({ ...placement }))
+        : (savedParts[key] ?? base.placedParts).map((placement) => ({ ...placement }));
+
+      return { billboard, anchorGrid, placedParts: parts };
+    };
+
+    return {
+      schema: "bfux.machine-layout/v1",
+      focus: projection("focus"),
+      mid: projection("mid"),
+    };
+  };
+
+  const compiledSource = () => renderBfuxAuthoredLayoutSource(compileLayout());
+
+  const copySource = async () => {
+    try {
+      await navigator.clipboard.writeText(compiledSource());
+      setCopyState("SOURCE COPIED");
+      window.setTimeout(() => setCopyState("COPY SOURCE"), 1300);
+    } catch {
+      setCopyState("COPY FAILED");
+    }
+  };
+
+  const copySpec = async () => {
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(compileLayout(), null, 2));
+      setSpecState("SPEC COPIED");
+      window.setTimeout(() => setSpecState("COPY SPEC"), 1300);
+    } catch {
+      setSpecState("COPY FAILED");
+    }
+  };
+
+  const downloadSource = () => {
+    const blob = new Blob([compiledSource()], { type: "text/typescript;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "bfux-layout-authored.generated.ts";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  const writeSource = async () => {
+    setWriteState("WRITING…");
+    try {
+      const response = await fetch("/api/bfux/layout-studio", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          schema: "bfux.layout-source/v1",
+          source: compiledSource(),
+        }),
+      });
+
+      if (!response.ok) {
+        setWriteState(response.status === 403 ? "LOCAL DEV ONLY" : "WRITE FAILED");
+        window.setTimeout(() => setWriteState("WRITE REPO"), 1800);
+        return;
+      }
+
+      setWriteState("SOURCE WRITTEN");
+      window.setTimeout(() => setWriteState("WRITE REPO"), 1600);
+    } catch {
+      setWriteState("WRITE FAILED");
+      window.setTimeout(() => setWriteState("WRITE REPO"), 1800);
+    }
+  };
+
+  if (!enabled) return <BfuxAuthoredLayoutLayer />;
 
   function update<K extends keyof LayoutValues>(key: K, value: LayoutValues[K]) {
     setValues((current) => ({ ...current, [key]: value }));
@@ -321,7 +413,7 @@ export function BfuxLayoutStudio() {
     const saved = readSaved();
     delete saved[resolution];
     writeSaved(saved);
-    setValues(defaults[resolution]);
+    setValues({ ...authoredProjection(resolution).billboard });
   };
 
   const exit = () => {
@@ -331,21 +423,11 @@ export function BfuxLayoutStudio() {
     setEnabled(false);
   };
 
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(exported);
-      setCopyState("COPIED");
-      window.setTimeout(() => setCopyState("COPY CONFIG"), 1200);
-    } catch {
-      setCopyState("COPY FAILED");
-    }
-  };
-
   const heightValue = values.height ?? measuredHeight;
 
   return (
     <>
-      <BfuxPlacementLayer resolution={resolution} onPlacementsChange={setPlacedParts} />
+      {partsReady ? <BfuxPlacementLayer resolution={resolution} onPlacementsChange={setPlacedParts} /> : null}
       <BfuxAnchorGridLayer
         state={gridState}
         onPlacementsChange={handleNodePlacements}
@@ -354,7 +436,7 @@ export function BfuxLayoutStudio() {
       <aside className="bfux-layout-studio" aria-label="BFUX layout studio">
         <header>
           <div>
-            <small>BFUX LAYOUT STUDIO · V0.4</small>
+            <small>BFUX LAYOUT STUDIO · V0.5</small>
             <strong>Lab Machine layout</strong>
           </div>
           <button type="button" onClick={exit}>×</button>
@@ -405,11 +487,27 @@ export function BfuxLayoutStudio() {
 
         <BfuxPartsBox placedCount={placedParts.length} />
 
+        <section className="bfux-layout-studio__source">
+          <header>
+            <div>
+              <span>EXECUTABLE SOURCE</span>
+              <small>RUNTIME CONSUMES THIS FILE DIRECTLY</small>
+            </div>
+            <code>{bfuxAuthoredLayoutSourcePath}</code>
+          </header>
+          <div>
+            <button type="button" onClick={downloadSource}>DOWNLOAD .TS</button>
+            <button type="button" onClick={writeSource}>{writeState}</button>
+            <button type="button" onClick={copySpec}>{specState}</button>
+          </div>
+          <p><b>WRITE REPO</b> is a fixed-path, development-only writer for a local <code>next dev</code> checkout. On a Vercel preview, use COPY SOURCE or DOWNLOAD .TS; both are exact replacements, not instructions for an agent.</p>
+        </section>
+
         <footer>
           <button type="button" onClick={reset}>RESET BILLBOARD</button>
-          <button type="button" onClick={copy}>{copyState}</button>
+          <button type="button" onClick={copySource}>{copyState}</button>
         </footer>
-        <p>Pick an anchor lattice like an Excel table, then drag a machine card. The nearest valid corner snaps to a shared point. Multiple cards may hang from opposite sides of the same point or share a row/column without hand-tuned offsets. RELEASE returns a card to its authored CSS position. Parts remain freely placeable on the same apparatus.</p>
+        <p>The editor is now a compiler. Card anchors, billboard geometry, and placed parts compile into one versioned source module for both Core and Full. Runtime reads that module directly; no AI interpretation step is required.</p>
       </aside>
     </>
   );
