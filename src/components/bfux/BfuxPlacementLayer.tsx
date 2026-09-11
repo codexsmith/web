@@ -158,8 +158,8 @@ function PlacedPart({
 }) {
   const size = partSize(part.kind);
   const style = {
-    "--bfux-part-x": placement.x,
-    "--bfux-part-y": placement.y,
+    "--bfux-part-x": `${placement.x * 100}%`,
+    "--bfux-part-y": `${placement.y * 100}%`,
     "--bfux-part-width": `${size.width}px`,
     "--bfux-part-height": `${size.height}px`,
   } as CSSProperties;
