@@ -41,9 +41,9 @@ export type LabMachineRelation = {
 
 export const representationLabBillboardNode: LabMachineNode = {
   id: "representation-lab",
-  label: "Same World, Different Reasoner",
+  label: "Same World, Different Representation",
   question: "PLAYGROUND",
-  boundary: "Change the question. Change the method. Watch the model change.",
+  boundary: "Change the question. Change the method. Watch the representation change.",
   kind: "billboard",
   tone: "violet",
   state: "INTERACTIVE",
