@@ -1,0 +1,469 @@
+.room {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% -12%, rgba(93, 52, 133, 0.22), transparent 34rem),
+    #05070a;
+  color: #eef3f5;
+  padding: clamp(0.7rem, 1.6vw, 1.4rem);
+}
+
+.programContext {
+  max-width: 1440px;
+  margin: 0 auto 0.7rem;
+  min-height: 72px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.2rem 0.2rem 0.55rem;
+}
+
+.programContext small,
+.instrumentHeader small,
+.statusBus small,
+.panelHeading small,
+.metric span,
+.specimenButton small,
+.commandButton small,
+.chamberBadge,
+.claimBoundary strong,
+.inspectionLabel,
+.transport label span,
+.rangeField span,
+.definitionList dt {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.programContext small { color: #c69af6; }
+.programContext h1 {
+  margin: 0.18rem 0 0;
+  font-size: clamp(1.35rem, 2.8vw, 2.1rem);
+  line-height: 1;
+}
+.programContext p {
+  margin: 0.35rem 0 0;
+  color: #8d9aa3;
+  font-size: 0.84rem;
+}
+
+.returnButton,
+.panelHeading button,
+.secondaryButton,
+.primaryButton,
+.commandButton,
+.specimenButton,
+.constructionPath button {
+  font: inherit;
+}
+
+.returnButton {
+  min-height: 38px;
+  padding: 0 0.9rem;
+  border: 1px solid #2a3540;
+  background: #0b1015;
+  color: #c6d0d5;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+
+.instrument {
+  --vm-line: #26323b;
+  --vm-panel: #0c1116;
+  --vm-panel-2: #101820;
+  --vm-muted: #8999a2;
+  --vm-accent: #aa72e6;
+  --vm-accent-soft: rgba(170, 114, 230, 0.12);
+  --vm-good: #79e0cb;
+  --vm-warn: #f0c36a;
+  --vm-defect: #ef8f8f;
+  max-width: 1440px;
+  margin: 0 auto;
+  border: 1px solid #303d47;
+  background: rgba(7, 10, 13, 0.985);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+}
+
+.instrumentHeader {
+  min-height: 84px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--vm-line);
+}
+
+.instrumentIdentity small { color: var(--vm-accent); }
+.instrumentIdentity h2 {
+  margin: 0.15rem 0 0;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+}
+.instrumentIdentity p {
+  margin: 0.3rem 0 0;
+  color: var(--vm-muted);
+  max-width: 760px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.statusBus {
+  display: flex;
+  gap: 1px;
+  background: var(--vm-line);
+  border: 1px solid var(--vm-line);
+}
+.statusBus > span {
+  min-width: 120px;
+  background: #0b1116;
+  padding: 0.55rem 0.65rem;
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.statusBus small { color: #71818b; }
+.statusBus [data-status="established-control"] { color: var(--vm-good); }
+.statusBus [data-status="experimental-bfl-dynamics"] { color: var(--vm-warn); }
+
+.specimenRack {
+  display: flex;
+  align-items: stretch;
+  gap: 1px;
+  padding: 0.5rem;
+  background: #070a0d;
+  border-bottom: 1px solid var(--vm-line);
+  overflow-x: auto;
+}
+
+.specimenRackLabel {
+  width: 84px;
+  flex: 0 0 84px;
+  display: grid;
+  place-items: center start;
+  padding-left: 0.45rem;
+  color: #70808a;
+  font-size: 0.64rem;
+  font-weight: 850;
+  letter-spacing: 0.11em;
+}
+
+.specimenButton {
+  min-width: 180px;
+  min-height: 54px;
+  border: 1px solid #202b33;
+  background: #0b1015;
+  color: #c9d1d5;
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+}
+.specimenButton strong { display: block; font-size: 0.82rem; }
+.specimenButton small { display: block; margin-top: 0.28rem; color: #687983; }
+.specimenButton[data-active="true"] {
+  border-color: var(--vm-accent);
+  background: var(--vm-accent-soft);
+  color: #f3eafa;
+}
+.specimenButton[data-active="true"] small { color: #c9a9eb; }
+
+.commandBar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: 1px;
+  background: var(--vm-line);
+  border-bottom: 1px solid var(--vm-line);
+}
+.commandButton {
+  min-height: 52px;
+  border: 0;
+  background: #0d1318;
+  color: #84949d;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  gap: 0.1rem;
+}
+.commandButton strong { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.commandButton small { color: #63747d; }
+.commandButton[data-active="true"] {
+  background: #151d24;
+  color: var(--vm-accent);
+  box-shadow: inset 0 -2px 0 var(--vm-accent);
+}
+.commandMeta {
+  min-width: 190px;
+  background: #090e12;
+  padding: 0.55rem 0.8rem;
+  display: grid;
+  align-content: center;
+  gap: 0.1rem;
+  color: #7a8a93;
+  font-size: 0.68rem;
+}
+.commandMeta strong { color: #b9c4c9; font-size: 0.72rem; }
+
+.claimBoundary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: baseline;
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--vm-line);
+  background: rgba(240, 195, 106, 0.055);
+}
+.claimBoundary strong { color: var(--vm-warn); white-space: nowrap; }
+.claimBoundary span { color: #aab6bc; font-size: 0.75rem; line-height: 1.45; }
+
+.specimenRuntime[hidden] { display: none; }
+
+.specimenFrame {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(420px, 1.7fr) minmax(220px, 0.72fr);
+  grid-template-areas:
+    "controls chamber telemetry"
+    "inspection inspection inspection";
+  gap: 0.65rem;
+  padding: 0.65rem;
+  align-items: stretch;
+}
+
+.panel {
+  border: 1px solid var(--vm-line);
+  background: var(--vm-panel);
+}
+.controlsPanel { grid-area: controls; padding: 0.75rem; }
+.chamberStack { grid-area: chamber; display: grid; grid-template-rows: minmax(420px, 1fr) auto; gap: 0.65rem; min-width: 0; }
+.telemetryPanel { grid-area: telemetry; padding: 0.75rem; }
+.inspectionBay { grid-area: inspection; padding: 0.85rem; }
+
+.panelHeading {
+  min-height: 42px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--vm-line);
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+.panelHeading > div { display: grid; gap: 0.15rem; }
+.panelHeading small { color: #74858e; }
+.panelHeading strong { font-size: 0.85rem; }
+.panelHeading button,
+.secondaryButton {
+  min-height: 30px;
+  border: 1px solid var(--vm-line);
+  background: #101820;
+  color: #93a3ab;
+  padding: 0 0.55rem;
+  cursor: pointer;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.primaryButton {
+  min-height: 38px;
+  border: 1px solid var(--vm-accent);
+  background: var(--vm-accent);
+  color: #100817;
+  padding: 0 0.8rem;
+  cursor: pointer;
+  font-size: 0.69rem;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+}
+.primaryButton:disabled,
+.secondaryButton:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.chamber {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, rgba(111, 58, 155, 0.14), transparent 55%),
+    #030609;
+}
+.chamber canvas { display: block; width: 100%; height: 100%; min-height: 420px; }
+.chamberBadge {
+  position: absolute;
+  z-index: 3;
+  top: 0.7rem;
+  left: 0.7rem;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(3,6,9,0.78);
+  padding: 0.35rem 0.5rem;
+  color: #9bacb5;
+  backdrop-filter: blur(5px);
+}
+.chamberBadgeRight { left: auto; right: 0.7rem; text-align: right; }
+.chamberEmpty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: #83929a;
+}
+.chamberEmpty strong { display: block; color: #dbe1e4; font-size: 1.2rem; }
+.chamberEmpty p { max-width: 420px; line-height: 1.5; }
+
+.transport {
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: auto minmax(120px, 1fr) auto minmax(120px, 0.6fr);
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.5rem 0.65rem;
+}
+.transport button { min-width: 42px; min-height: 32px; }
+.transport input[type="range"] { width: 100%; accent-color: var(--vm-accent); }
+.transport output { color: #9cabaf; font-size: 0.7rem; font-variant-numeric: tabular-nums; }
+.transport label { display: grid; grid-template-columns: auto minmax(80px,1fr); align-items: center; gap: 0.45rem; }
+.transport label span { color: #6d7d85; }
+
+.controlGroup { display: grid; gap: 0.7rem; margin-top: 0.8rem; }
+.controlGroup + .controlGroup { border-top: 1px solid var(--vm-line); padding-top: 0.8rem; }
+.controlGroup header { display: flex; align-items: center; gap: 0.45rem; color: #7b8b93; font-size: 0.64rem; font-weight: 850; letter-spacing: 0.1em; }
+.controlGroup header i { height: 1px; background: var(--vm-line); flex: 1; }
+
+.rangeField { display: grid; gap: 0.35rem; }
+.rangeField > span { display: flex; justify-content: space-between; gap: 0.6rem; color: #8f9da5; }
+.rangeField output { color: #d8e0e3; font-variant-numeric: tabular-nums; }
+.rangeField input { width: 100%; accent-color: var(--vm-accent); }
+
+.selectField,
+.numberField { display: grid; gap: 0.35rem; color: #8f9da5; font-size: 0.72rem; }
+.selectField select,
+.numberField input,
+.noteField textarea {
+  width: 100%;
+  border: 1px solid var(--vm-line);
+  background: #080e13;
+  color: #dce3e6;
+  padding: 0.55rem;
+  font: inherit;
+}
+.selectField small { color: #687880; line-height: 1.4; }
+
+.metricGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; }
+.metric {
+  min-height: 74px;
+  border: 1px solid #202b33;
+  background: #080d11;
+  padding: 0.6rem;
+  display: grid;
+  align-content: space-between;
+  gap: 0.25rem;
+}
+.metric span { color: #71818a; }
+.metric strong { font-size: 1rem; color: #dce4e7; font-variant-numeric: tabular-nums; }
+.metric small { color: #697a83; font-size: 0.65rem; }
+
+.definitionList { margin: 0.8rem 0 0; display: grid; gap: 0.35rem; }
+.definitionList div { display: flex; justify-content: space-between; gap: 0.8rem; border-bottom: 1px solid rgba(38,50,59,.6); padding-bottom: 0.35rem; }
+.definitionList dt { color: #71818a; }
+.definitionList dd { margin: 0; text-align: right; color: #cad3d7; font-size: 0.72rem; }
+
+.claimCard {
+  margin-top: 0.8rem;
+  border-left: 2px solid var(--vm-warn);
+  background: rgba(240,195,106,.055);
+  padding: 0.65rem;
+}
+.claimCard small { color: var(--vm-warn); font-size: 0.62rem; font-weight: 800; letter-spacing: .1em; }
+.claimCard p { margin: .35rem 0 0; color: #99a7ae; font-size: .7rem; line-height: 1.45; }
+
+.inspectionGrid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.6fr); gap: 0.8rem; }
+.inspectionLabel { color: var(--vm-accent); }
+.inspectionBay h3 { margin: 0.2rem 0 0.5rem; font-size: 1.1rem; }
+.inspectionBay p { color: #95a4ab; font-size: 0.78rem; line-height: 1.55; }
+.inspectionBay pre {
+  max-height: 240px;
+  overflow: auto;
+  margin: 0;
+  border: 1px solid var(--vm-line);
+  background: #05090c;
+  padding: 0.7rem;
+  color: #a9bac2;
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+.noteField { display: grid; gap: 0.35rem; }
+.noteField span { color: #71818a; font-size: .64rem; font-weight: 800; letter-spacing: .1em; }
+.inspectionActions { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .65rem; }
+
+.constructionPath {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+}
+.constructionPath li { display: flex; align-items: center; min-width: max-content; }
+.constructionPath button {
+  min-width: 130px;
+  min-height: 70px;
+  border: 1px solid var(--vm-line);
+  background: #090e12;
+  color: #9daab0;
+  padding: 0.55rem;
+  text-align: left;
+  cursor: pointer;
+}
+.constructionPath button:disabled { cursor: default; }
+.constructionPath span { display: block; color: #596a73; font-size: .6rem; }
+.constructionPath strong { display: block; margin-top: .15rem; font-size: .7rem; }
+.constructionPath em { display: block; margin-top: .25rem; color: var(--vm-accent); font-size: .62rem; font-style: normal; }
+.constructionPath li[data-selected="true"] button { border-color: var(--vm-accent); background: var(--vm-accent-soft); color: #eee6f5; }
+.constructionPath i { padding: 0 .35rem; color: #5f7079; font-style: normal; }
+
+.footer {
+  min-height: 38px;
+  border-top: 1px solid var(--vm-line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.45rem 0.8rem;
+  color: #687981;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+}
+.footer strong { color: #8d9da5; }
+
+@media (max-width: 1050px) {
+  .statusBus { display: none; }
+  .specimenFrame {
+    grid-template-columns: minmax(210px, .72fr) minmax(0, 1.6fr);
+    grid-template-areas:
+      "controls chamber"
+      "telemetry chamber"
+      "inspection inspection";
+  }
+  .chamberStack { min-height: 560px; }
+}
+
+@media (max-width: 760px) {
+  .room { padding: 0.45rem; }
+  .programContext { min-height: auto; align-items: flex-start; padding: .45rem .2rem; }
+  .programContext p { display: none; }
+  .instrumentHeader { grid-template-columns: 1fr; }
+  .specimenFrame { grid-template-columns: 1fr; grid-template-areas: "chamber" "controls" "telemetry" "inspection"; }
+  .chamberStack { min-height: auto; grid-template-rows: minmax(360px, 55vh) auto; }
+  .chamber, .chamber canvas { min-height: 360px; }
+  .commandBar { grid-template-columns: repeat(3, 1fr); }
+  .commandMeta { display: none; }
+  .claimBoundary { grid-template-columns: 1fr; gap: .25rem; }
+  .claimBoundary strong { white-space: normal; }
+  .transport { grid-template-columns: auto minmax(100px, 1fr) auto; }
+  .transport label { grid-column: 1 / -1; }
+  .inspectionGrid { grid-template-columns: 1fr; }
+}
