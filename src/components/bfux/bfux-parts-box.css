@@ -1,0 +1,317 @@
+.bfux-parts-box {
+  border-top: 1px solid #344047;
+  border-bottom: 1px solid #263137;
+  background: #0a0f12;
+}
+
+.bfux-parts-box > summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: .65rem;
+  padding: .62rem .8rem;
+  cursor: pointer;
+  list-style: none;
+  background: linear-gradient(180deg, #182126, #11181c);
+  border-bottom: 1px solid #263137;
+}
+
+.bfux-parts-box > summary::-webkit-details-marker { display: none; }
+
+.bfux-parts-box > summary::after {
+  content: "−";
+  grid-column: 3;
+  color: #a6b4ba;
+  font: 700 .75rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.bfux-parts-box:not([open]) > summary::after { content: "+"; }
+
+.bfux-parts-box > summary > span {
+  color: #d9e0e2;
+  font: 700 .66rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .11em;
+}
+
+.bfux-parts-box > summary > small {
+  color: #7f929b;
+  font: 500 .52rem/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .08em;
+}
+
+.bfux-parts-box__body { display: grid; }
+
+.bfux-parts-box__group {
+  padding: .55rem .7rem .65rem;
+  border-bottom: 1px solid #1d282d;
+}
+
+.bfux-parts-box__group > header {
+  margin-bottom: .42rem;
+  color: #81929a;
+  font: 600 .52rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .12em;
+}
+
+.bfux-parts-box__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .38rem;
+}
+
+.bfux-parts-box__grid > button {
+  min-width: 0;
+  min-height: 4.4rem;
+  display: grid;
+  grid-template-rows: 2.5rem auto;
+  align-items: center;
+  gap: .2rem;
+  padding: .38rem .34rem .32rem;
+  border: 1px solid #35434a;
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 28%),
+    #11181c;
+  color: #dbe2e4;
+  box-shadow: inset 0 1px rgba(255,255,255,.035), inset 0 -1px #050708;
+  cursor: grab;
+}
+
+.bfux-parts-box__grid > button:active { cursor: grabbing; }
+.bfux-parts-box__grid > button:hover { border-color: #64767e; background-color: #151e23; }
+.bfux-parts-box__grid > button[data-selected="true"] {
+  border-color: #9b6ac8;
+  box-shadow: inset 0 0 0 1px rgba(155,106,200,.22), 0 0 9px rgba(155,106,200,.12);
+}
+
+.bfux-parts-box__label {
+  min-width: 0;
+  display: grid;
+  gap: .1rem;
+  text-align: left;
+}
+
+.bfux-parts-box__label b {
+  overflow: hidden;
+  color: #dce3e5;
+  font: 700 .52rem/1.1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .07em;
+  text-overflow: ellipsis;
+}
+
+.bfux-parts-box__label small {
+  overflow: hidden;
+  color: #778a93;
+  font: 500 .46rem/1.1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bfux-part-glyph {
+  position: relative;
+  display: block;
+  place-self: center;
+  width: 3rem;
+  height: 2.15rem;
+}
+
+.bfux-part-bank,
+.bfux-part-rail,
+.bfux-part-neck {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 1px solid #627078;
+  background: linear-gradient(#222b30, #0a0f12);
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 2px 3px #0008;
+}
+
+.bfux-part-bank i,
+.bfux-part-rail i,
+.bfux-part-neck i {
+  width: .38rem;
+  height: .38rem;
+  border: 1px solid #8b9aa1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #080b0d 0 42%, #2c353a 45% 100%);
+  box-shadow: 0 0 3px rgba(120,210,255,.18);
+}
+
+.bfux-part-glyph--single .bfux-part-bank {
+  inset: .38rem .9rem;
+  border-radius: 3px;
+}
+
+.bfux-part-glyph--multi .bfux-part-bank {
+  top: .18rem;
+  left: 1.02rem;
+  width: .9rem;
+  height: 1.78rem;
+  grid-template-rows: repeat(4, 1fr);
+  border-radius: 3px;
+}
+
+.bfux-part-glyph--plex .bfux-part-bank {
+  inset: .24rem .58rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  border-radius: 3px;
+}
+
+.bfux-part-glyph--extended .bfux-part-rail {
+  left: .1rem;
+  top: .76rem;
+  width: 2.3rem;
+  height: .66rem;
+  grid-template-columns: repeat(5, 1fr);
+  border-radius: 3px;
+}
+
+.bfux-part-glyph--extended .bfux-part-neck {
+  right: .14rem;
+  top: .42rem;
+  width: .58rem;
+  height: 1.34rem;
+  border-radius: 2px;
+}
+
+.bfux-part-glyph--port {
+  display: grid;
+  place-items: center;
+}
+
+.bfux-part-glyph--port::before {
+  content: "";
+  position: absolute;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1px solid #66747b;
+  border-radius: 4px;
+  background: linear-gradient(#222a2f, #0b1013);
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 2px 3px #0008;
+}
+
+.bfux-part-glyph--port > i {
+  z-index: 1;
+  width: .72rem;
+  height: .72rem;
+  border: 2px solid #8d9ba1;
+  border-radius: 50%;
+  background: #06090a;
+  box-shadow: inset 0 0 0 2px #20292e;
+}
+
+.bfux-part-glyph--tube > i,
+.bfux-part-glyph--tube > b {
+  position: absolute;
+  left: .12rem;
+  right: .12rem;
+  top: .88rem;
+  height: .48rem;
+  border: 1px solid #4f5d63;
+  border-radius: 999px;
+  background: linear-gradient(#2a3439, #101619);
+  box-shadow: 0 2px 3px #0009;
+}
+
+.bfux-part-glyph--tube > b {
+  left: .25rem;
+  right: .25rem;
+  top: 1.02rem;
+  height: .1rem;
+  border: 0;
+  background: #80a85d;
+  box-shadow: 0 0 4px rgba(128,168,93,.5);
+}
+
+.bfux-part-glyph--elbow > i {
+  position: absolute;
+  left: .45rem;
+  top: .25rem;
+  width: 2rem;
+  height: 1.55rem;
+  border-left: .52rem solid #283237;
+  border-bottom: .52rem solid #283237;
+  border-radius: 0 0 0 .55rem;
+  filter: drop-shadow(0 2px 2px #0009);
+}
+
+.bfux-part-glyph--elbow > b {
+  position: absolute;
+  left: .68rem;
+  top: .46rem;
+  width: 1.62rem;
+  height: 1.16rem;
+  border-left: .1rem solid #9a76bd;
+  border-bottom: .1rem solid #9a76bd;
+  border-radius: 0 0 0 .3rem;
+  box-shadow: -2px 2px 4px rgba(154,118,189,.22);
+}
+
+.bfux-part-glyph--module {
+  width: 2.7rem;
+  height: 1.9rem;
+  border: 1px solid #59676d;
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent 25%),
+    #151d21;
+  box-shadow: inset 0 1px rgba(255,255,255,.05), 0 3px 4px #0009;
+}
+
+.bfux-part-glyph--module-wide { width: 3.25rem; }
+
+.bfux-part-glyph--module > i {
+  position: absolute;
+  width: .18rem;
+  height: .18rem;
+  border-radius: 50%;
+  background: #7d888d;
+}
+.bfux-part-glyph--module > i:nth-child(1) { left: .16rem; top: .16rem; }
+.bfux-part-glyph--module > i:nth-child(2) { right: .16rem; top: .16rem; }
+.bfux-part-glyph--module > i:nth-child(3) { left: .16rem; bottom: .16rem; }
+.bfux-part-glyph--module > i:nth-child(4) { right: .16rem; bottom: .16rem; }
+
+.bfux-part-glyph--module > b {
+  position: absolute;
+  left: .42rem;
+  right: .42rem;
+  top: .48rem;
+  bottom: .42rem;
+  border: 1px solid #334147;
+  background: #0b1114;
+  box-shadow: inset 0 2px 4px #0008;
+}
+
+.bfux-part-glyph--module > b::before {
+  content: "";
+  position: absolute;
+  left: .28rem;
+  right: .28rem;
+  top: .28rem;
+  border-top: 1px solid #9a76bd;
+}
+
+.bfux-parts-box__selection {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .45rem;
+  align-items: center;
+  padding: .5rem .7rem;
+  background: #0e1518;
+}
+
+.bfux-parts-box__selection span,
+.bfux-parts-box__selection small {
+  color: #7e929b;
+  font: 600 .48rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .08em;
+}
+
+.bfux-parts-box__selection code {
+  overflow: hidden;
+  color: #d8c9ff;
+  font-size: .55rem;
+  text-overflow: ellipsis;
+}
