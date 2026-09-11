@@ -5,46 +5,51 @@
  * and invitation use more of the face they already have. */
 
 @media (min-width: 1025px) {
+  /* Keep the maze visually centered, but let it consume the dead air above and
+   * below it. The panel boundary still provides the breathing room. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__visual {
-    padding: .16rem .22rem .14rem !important;
+    padding: .06rem .14rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__visual svg {
-    left: -23% !important;
-    width: 118% !important;
-    height: 118% !important;
-    transform: translateY(-50%) rotate(-90deg) scale(1.04) !important;
+    left: -25% !important;
+    width: 128% !important;
+    height: 128% !important;
+    transform: translateY(-50%) rotate(-90deg) scale(1.06) !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__legend {
-    right: .14rem !important;
-    gap: .1rem !important;
+    right: .1rem !important;
+    gap: .08rem !important;
   }
 
+  /* Reduce face padding and inter-row spacing without changing the billboard's
+   * composition: title stays centered in its field; controls remain anchored
+   * on the lower instrument row. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__copy {
-    grid-template-rows: minmax(0, 1fr) 1.9rem !important;
-    gap: .1rem !important;
-    padding: .22rem .42rem .26rem !important;
+    grid-template-rows: minmax(0, 1fr) 1.8rem !important;
+    gap: .06rem !important;
+    padding: .14rem .34rem .18rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
-    justify-content: flex-start !important;
-    padding-top: .08rem;
-    line-height: .88 !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+    line-height: .9 !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
-    gap: .08rem !important;
+    gap: .05rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__cta {
-    padding: .28rem .5rem !important;
+    padding: .24rem .46rem !important;
   }
 }
