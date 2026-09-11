@@ -1,6 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  BfuxAnchorGridLayer,
+  BfuxAnchorGridPicker,
+  defaultBfuxAnchorGridState,
+  remapBfuxAnchorPlacements,
+  type BfuxAnchorGridSpec,
+  type BfuxAnchorGridState,
+  type BfuxNodeAnchorPlacement,
+} from "./BfuxAnchorGrid";
 import { BfuxPartsBox } from "./BfuxPartsBox";
 import { BfuxPlacementLayer, type BfuxPlacedPart } from "./BfuxPlacementLayer";
 import "./bfux-layout-studio.css";
@@ -8,6 +17,7 @@ import "./bfux-layout-studio.css";
 const targetSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
 const machineSelector = '.bf-machine[data-skin="physical"]';
 const storageKey = "bfl_bfux_layout_studio_billboard_v1";
+const gridStorageKey = "bfl_bfux_anchor_grid_v1";
 const tuningEvent = "bfux-layout-tuning";
 
 type ResolutionKey = "focus" | "mid";
@@ -28,6 +38,7 @@ type LayoutValues = {
 };
 
 type SavedLayout = Partial<Record<ResolutionKey, Partial<LayoutValues>>>;
+type SavedAnchorGrid = Partial<Record<ResolutionKey, Partial<BfuxAnchorGridState>>>;
 
 const defaults: Record<ResolutionKey, LayoutValues> = {
   focus: {
@@ -75,6 +86,33 @@ function writeSaved(saved: SavedLayout) {
   } catch {
     // The editor still works for the current session when storage is blocked.
   }
+}
+
+function readSavedGrid(): SavedAnchorGrid {
+  try {
+    const raw = window.localStorage.getItem(gridStorageKey);
+    return raw ? (JSON.parse(raw) as SavedAnchorGrid) : {};
+  } catch {
+    return {};
+  }
+}
+
+function writeSavedGrid(saved: SavedAnchorGrid) {
+  try {
+    window.localStorage.setItem(gridStorageKey, JSON.stringify(saved));
+  } catch {
+    // Grid editing remains live for the current session when storage is blocked.
+  }
+}
+
+function hydratedGrid(saved: SavedAnchorGrid[ResolutionKey]): BfuxAnchorGridState {
+  return {
+    spec: {
+      ...defaultBfuxAnchorGridState.spec,
+      ...(saved?.spec ?? {}),
+    },
+    placements: Array.isArray(saved?.placements) ? saved.placements : [],
+  };
 }
 
 function currentResolution(machine: HTMLElement | null): ResolutionKey {
@@ -139,6 +177,9 @@ export function BfuxLayoutStudio() {
   const [resolution, setResolution] = useState<ResolutionKey>("focus");
   const [values, setValues] = useState<LayoutValues>(defaults.focus);
   const [placedParts, setPlacedParts] = useState<BfuxPlacedPart[]>([]);
+  const [gridState, setGridState] = useState<BfuxAnchorGridState>(defaultBfuxAnchorGridState);
+  const [gridHydratedFor, setGridHydratedFor] = useState<ResolutionKey | null>(null);
+  const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [measuredHeight, setMeasuredHeight] = useState(140);
   const [metrics, setMetrics] = useState("waiting for billboard");
   const [copyState, setCopyState] = useState("COPY CONFIG");
@@ -179,6 +220,21 @@ export function BfuxLayoutStudio() {
   }, [enabled, resolution]);
 
   useEffect(() => {
+    if (!enabled) return;
+    const saved = readSavedGrid();
+    setGridState(hydratedGrid(saved[resolution]));
+    setSelectedNodeId(null);
+    setGridHydratedFor(resolution);
+  }, [enabled, resolution]);
+
+  useEffect(() => {
+    if (!enabled || gridHydratedFor !== resolution) return;
+    const saved = readSavedGrid();
+    saved[resolution] = gridState;
+    writeSavedGrid(saved);
+  }, [enabled, gridHydratedFor, gridState, resolution]);
+
+  useEffect(() => {
     if (!enabled || !target) return;
     applyValues(target, values);
     target.classList.add("bfux-layout-editing");
@@ -217,12 +273,43 @@ export function BfuxLayoutStudio() {
     };
   }, [enabled, target]);
 
+  const handleNodePlacements = useCallback((placements: BfuxNodeAnchorPlacement[]) => {
+    setGridState((current) => ({ ...current, placements }));
+  }, []);
+
+  const updateGridSpec = useCallback((spec: BfuxAnchorGridSpec) => {
+    setGridState((current) => {
+      const dimensionsChanged = current.spec.columns !== spec.columns || current.spec.rows !== spec.rows;
+      return {
+        spec,
+        placements: dimensionsChanged
+          ? remapBfuxAnchorPlacements(current.placements, current.spec, spec)
+          : current.placements,
+      };
+    });
+  }, []);
+
+  const releaseSelectedNode = useCallback(() => {
+    if (!selectedNodeId) return;
+    setGridState((current) => ({
+      ...current,
+      placements: current.placements.filter((placement) => placement.nodeId !== selectedNodeId),
+    }));
+    setSelectedNodeId(null);
+  }, [selectedNodeId]);
+
+  const releaseAllNodes = useCallback(() => {
+    setGridState((current) => ({ ...current, placements: [] }));
+    setSelectedNodeId(null);
+  }, []);
+
   const exported = useMemo(() => JSON.stringify({
-    component: "representation-lab-billboard",
+    component: "lab-machine-layout",
     resolution,
-    values,
+    billboard: values,
+    anchorGrid: gridState,
     placedParts,
-  }, null, 2), [placedParts, resolution, values]);
+  }, null, 2), [gridState, placedParts, resolution, values]);
 
   if (!enabled) return null;
 
@@ -259,20 +346,37 @@ export function BfuxLayoutStudio() {
   return (
     <>
       <BfuxPlacementLayer resolution={resolution} onPlacementsChange={setPlacedParts} />
+      <BfuxAnchorGridLayer
+        state={gridState}
+        onPlacementsChange={handleNodePlacements}
+        onSelectedNodeChange={setSelectedNodeId}
+      />
       <aside className="bfux-layout-studio" aria-label="BFUX layout studio">
         <header>
           <div>
-            <small>BFUX LAYOUT STUDIO · V0.3</small>
-            <strong>Representation Lab billboard</strong>
+            <small>BFUX LAYOUT STUDIO · V0.4</small>
+            <strong>Lab Machine layout</strong>
           </div>
           <button type="button" onClick={exit}>×</button>
         </header>
 
         <div className="bfux-layout-studio__status">
           <span>{resolution === "focus" ? "CORE" : "FULL"}</span>
-          <code>{metrics} · {placedParts.length} parts</code>
+          <code>{gridState.placements.length} cards · {placedParts.length} parts</code>
         </div>
 
+        <BfuxAnchorGridPicker
+          state={gridState}
+          selectedNodeId={selectedNodeId}
+          onSpecChange={updateGridSpec}
+          onReleaseSelected={releaseSelectedNode}
+          onReleaseAll={releaseAllNodes}
+        />
+
+        <div className="bfux-layout-studio__section-label">
+          <span>BILLBOARD GEOMETRY</span>
+          <small>{metrics}</small>
+        </div>
         <RangeControl label="CARD WIDTH" value={values.width} min={20} max={60} step={0.5} unit="%" onChange={(value) => update("width", value)} />
         <RangeControl
           label="CARD HEIGHT"
@@ -302,10 +406,10 @@ export function BfuxLayoutStudio() {
         <BfuxPartsBox placedCount={placedParts.length} />
 
         <footer>
-          <button type="button" onClick={reset}>RESET {resolution === "focus" ? "CORE" : "FULL"}</button>
+          <button type="button" onClick={reset}>RESET BILLBOARD</button>
           <button type="button" onClick={copy}>{copyState}</button>
         </footer>
-        <p>Drag a part from the Parts Box directly onto the Lab Machine. Every drop creates a new instance. Drag a placed part to move it; double-click it or press Delete while selected to remove it. Placements persist locally per view and are included in COPY CONFIG.</p>
+        <p>Pick an anchor lattice like an Excel table, then drag a machine card. The nearest valid corner snaps to a shared point. Multiple cards may hang from opposite sides of the same point or share a row/column without hand-tuned offsets. RELEASE returns a card to its authored CSS position. Parts remain freely placeable on the same apparatus.</p>
       </aside>
     </>
   );
