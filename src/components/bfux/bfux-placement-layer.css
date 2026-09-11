@@ -43,13 +43,13 @@
 }
 
 .bfux-placed-part {
-  --bfux-part-x: .5;
-  --bfux-part-y: .5;
+  --bfux-part-x: 50%;
+  --bfux-part-y: 50%;
   --bfux-part-width: 72px;
   --bfux-part-height: 62px;
   position: absolute;
-  left: calc(var(--bfux-part-x) * 100%);
-  top: calc(var(--bfux-part-y) * 100%);
+  left: var(--bfux-part-x);
+  top: var(--bfux-part-y);
   width: var(--bfux-part-width);
   height: var(--bfux-part-height);
   display: grid;
