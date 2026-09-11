@@ -20,7 +20,8 @@ Active files:
 - `representation-lab-billboard-contract.css` — the single active geometry contract;
 - `RepresentationLabBillboardCardMount.tsx` — one job only: anchor the billboard above Products and request one initial reveal;
 - `BfuxLayoutStudio.tsx` — live visual tuning surface;
-- `BfuxPartsBox.tsx` / `bfux-parts-box.css` — reusable physical-part palette.
+- `BfuxPartsBox.tsx` / `bfux-parts-box.css` — reusable physical-part palette;
+- `BfuxPlacementLayer.tsx` / `bfux-placement-layer.css` — bounded part instantiation, placement, movement, and selection.
 
 Legacy `representation-lab-billboard-layout.css` and `representation-lab-billboard-polish.css` are retained as history but are no longer imported by the card and must not receive new fixes.
 
@@ -42,11 +43,11 @@ The billboard pilot exposes:
 
 Changing the height slider establishes an explicit pixel height for that projection. `AUTO HEIGHT` removes the explicit height and returns the card to content-driven sizing. The existing billboard mount observes the resulting resize and re-anchors the card above Products, so changing height does not require a second positioning system.
 
-Changes apply immediately to the rendered card and persist in browser `localStorage` separately for Core and Full. `COPY CONFIG` exports the current values as JSON so a finished visual state can be baked into the contract in one commit instead of recreated through screenshot iteration.
+Changes apply immediately to the rendered card and persist in browser `localStorage` separately for Core and Full. `COPY CONFIG` exports the current layout values plus the placed-parts record so a finished visual state can be baked into a contract rather than recreated through screenshot iteration.
 
 ## Parts Box
 
-The first Parts Box is a palette of primitives already represented by the physical Lab Machine language rather than a new visual vocabulary. It includes:
+The Parts Box is a palette of primitives already represented by the physical Lab Machine language rather than a new visual vocabulary. It includes:
 
 - connector: `SINGLE`, `MULTI`, `PLEX`, `EXTENDED`, `PORT`;
 - tube: straight `TUBE` and `ELBOW`;
@@ -54,8 +55,24 @@ The first Parts Box is a palette of primitives already represented by the physic
 
 The connector forms are derived from the machine's existing contact banks, adjacency connectors, lower dock, and dedicated ports. The tube forms are derived from the conjoined-module underpipe and its couplings. The module panels reuse the mounted face/shell/fastener grammar.
 
-Every part tile is draggable now and emits a stable `application/x-bfux-part` payload with schema `bfux.part/v1` plus a plain-text part id. V0.2 intentionally stops at a drag-ready palette; the machine does not yet accept arbitrary dropped parts. That receiver should be implemented against declared placement contracts rather than by writing ad hoc inline CSS.
+Every part tile emits a stable `application/x-bfux-part` payload with schema `bfux.part/v1` plus a plain-text part id. The catalog and glyph renderer are exported from `BfuxPartsBox.tsx` so the palette and placed instances use the same primitive definition rather than parallel copies.
+
+## Placement contract
+
+Layout Studio v0.3 installs a drop receiver on the physical Lab Machine apparatus. Dragging a Parts Box primitive onto the machine creates a new instance at that location. Each drag from the palette creates another independent instance of the selected primitive.
+
+Placed parts are bounded to the apparatus and stored as normalized center coordinates instead of raw screen coordinates. That keeps a placement tied to the machine surface as the viewport geometry changes. The renderer maps those declared coordinates through `--bfux-part-x`, `--bfux-part-y`, `--bfux-part-width`, and `--bfux-part-height`; it does not write arbitrary layout rules into the machine stylesheet.
+
+A placed instance can be:
+
+- selected by clicking it;
+- moved by dragging it to another location on the apparatus;
+- removed by double-clicking it or pressing Delete / Backspace while it has focus.
+
+Placed parts persist in browser `localStorage` independently for Core and Full. A placed-instance drag uses schema `bfux.placement/v1`; a new palette drag continues to use `bfux.part/v1`.
+
+The drop target is intentionally the apparatus surface, not arbitrary document DOM. This is the first bounded placement canvas and gives us a controlled base for future snapping, attachment semantics, rotation, resizing, and connector routing.
 
 ## Next
 
-Generalize the editor registry from the billboard to any `[data-bfux-editable]` instrument, then add direct drag/resize handles, named child-region selection, and a bounded drop/placement canvas for Parts Box primitives. The important constraint is unchanged: the editor manipulates declared layout/placement variables; it does not write arbitrary CSS overrides.
+Generalize the editor registry from the billboard to any `[data-bfux-editable]` instrument, then add direct resize/rotation handles, named child-region selection, snapping/attachment points, and semantic connector routing for placed Parts Box primitives. The important constraint is unchanged: the editor manipulates declared layout/placement variables; it does not write arbitrary CSS overrides.
