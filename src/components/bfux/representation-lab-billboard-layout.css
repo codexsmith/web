@@ -13,18 +13,17 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* Shared desktop billboard face                                                */
+/* Shared desktop billboard face                                               */
 /* -------------------------------------------------------------------------- */
 
 @media (min-width: 1025px) {
-  /* A billboard wants a landscape face. Keep the ordinary machine-card shell,
-   * fasteners, and mounting behavior, but arrange the pictogram and invitation
-   * side-by-side so the card can live naturally in the narrow deck above the
-   * institutional row. */
+  /* The sign is now large enough to behave like a true billboard instead of a
+   * miniaturized machine card. The maze owns a substantial visual field and the
+   * invitation gets its own full-width title/CTA stack. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__face {
     display: grid !important;
-    grid-template-columns: 42% minmax(0, 58%) !important;
+    grid-template-columns: 44% minmax(0, 56%) !important;
     grid-template-rows: minmax(0, 1fr) !important;
   }
 
@@ -33,20 +32,21 @@
     grid-column: 1;
     grid-row: 1;
     min-width: 0;
-    padding: calc(var(--machine-u, 12px) * .42) calc(var(--machine-u, 12px) * .46) calc(var(--machine-u, 12px) * .34) !important;
+    padding: .46rem .52rem .4rem !important;
     border-right: 1px solid color-mix(in srgb, var(--tone) 28%, #31383d);
     border-bottom: 0 !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__world-label {
-    left: calc(var(--machine-u, 12px) * .48) !important;
-    top: calc(var(--machine-u, 12px) * .34) !important;
-    font-size: calc(var(--machine-u, 12px) * .39) !important;
+    left: .56rem !important;
+    top: .42rem !important;
+    font-size: .5rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    display: block;
     width: 100%;
     height: 100%;
     min-height: 0 !important;
@@ -55,11 +55,11 @@
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__legend {
-    left: calc(var(--machine-u, 12px) * .42) !important;
-    right: calc(var(--machine-u, 12px) * .42) !important;
-    bottom: calc(var(--machine-u, 12px) * .24) !important;
-    gap: calc(var(--machine-u, 12px) * .28) !important;
-    font-size: calc(var(--machine-u, 12px) * .34) !important;
+    left: .52rem !important;
+    right: .52rem !important;
+    bottom: .34rem !important;
+    gap: .42rem !important;
+    font-size: .43rem !important;
   }
 
   .bf-machine[data-skin="physical"]
@@ -67,14 +67,15 @@
     grid-column: 2;
     grid-row: 1;
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     grid-template-areas:
-      "eyebrow eyebrow"
-      "title cta" !important;
+      "eyebrow"
+      "title"
+      "cta" !important;
     align-content: center;
-    gap: calc(var(--machine-u, 12px) * .28) calc(var(--machine-u, 12px) * .48) !important;
+    gap: .5rem !important;
     min-width: 0;
-    padding: calc(var(--machine-u, 12px) * .52) calc(var(--machine-u, 12px) * .6) !important;
+    padding: .72rem .82rem !important;
   }
 
   .bf-machine[data-skin="physical"]
@@ -86,22 +87,38 @@
     .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
     grid-area: title;
     align-self: center;
-    font-size: calc(var(--machine-u, 12px) * 1.16) !important;
+    margin: 0;
+    font-size: clamp(1.25rem, 1.55vw, 1.72rem) !important;
     line-height: .96 !important;
+    text-wrap: balance;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
-    font-size: calc(var(--machine-u, 12px) * .39) !important;
+    font-size: .5rem !important;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__cta {
     grid-area: cta;
-    align-self: center !important;
-    min-width: calc(var(--machine-u, 12px) * 5.25) !important;
-    min-height: calc(var(--machine-u, 12px) * 2.7);
-    padding: 0 calc(var(--machine-u, 12px) * .5) !important;
+    align-self: stretch !important;
+    min-width: 0 !important;
+    min-height: 2.55rem;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: .7rem;
+    padding: .48rem .62rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta small {
+    font-size: .48rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta b {
+    font-size: .62rem !important;
   }
 
   .bf-machine[data-skin="physical"]
@@ -115,15 +132,15 @@
 /* -------------------------------------------------------------------------- */
 
 /* Canonical Products: left 45.5%, top 5%, width 18.5%, height 22%.
- * Billboard: centered on that same X datum, but its entire card ends at 3%.
- * That leaves a small physical gap before Products begins at 5%.
+ * The billboard is centered over Products, widened to read as a featured sign,
+ * and ends at 3%, preserving a clean physical gap before Products at 5%.
  */
 .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node--billboard {
   position: absolute !important;
-  left: 41.75% !important;
-  top: -13% !important;
-  width: 26% !important;
-  height: 16% !important;
+  left: 39.25% !important;
+  top: -17% !important;
+  width: 31% !important;
+  height: 20% !important;
   z-index: 9 !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -132,13 +149,22 @@
 
 .bf-machine[data-skin="physical"][data-resolution="mid"]
   .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
-  font-size: calc(var(--machine-u, 12px) * 1.08) !important;
+  font-size: clamp(1.32rem, 1.65vw, 1.78rem) !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="mid"]
-  .bf-machine-node--billboard .bf-machine-billboard__cta {
-  min-width: calc(var(--machine-u, 12px) * 4.7) !important;
-  min-height: calc(var(--machine-u, 12px) * 2.35);
+  .bf-machine-node--billboard .bf-machine-billboard__visual {
+  padding: .5rem .58rem .42rem !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine-node--billboard .bf-machine-billboard__world-label {
+  font-size: .52rem !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  .bf-machine-node--billboard .bf-machine-billboard__legend {
+  font-size: .45rem !important;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -146,17 +172,17 @@
 /* -------------------------------------------------------------------------- */
 
 /* Core Products is defined by --core-products-left / --core-upper-card-width
- * and begins at --core-upper-top (7%). Center the billboard over that column;
- * its bottom lands at 5%, leaving the same small Y gap before Products.
+ * and begins at --core-upper-top (7%). Make the sign wider and taller while its
+ * lower edge remains at 5%, leaving the same physical gap before Products.
  */
 .site-shell[data-root-focus="true"]
   .bf-machine[data-skin="physical"][data-resolution="focus"]
   .bf-machine__apparatus > .bf-machine-node--billboard {
   position: absolute !important;
-  left: calc(var(--core-products-left) - 1.4%) !important;
-  top: -13% !important;
-  width: calc(var(--core-upper-card-width) + 2.8%) !important;
-  height: 18% !important;
+  left: calc(var(--core-products-left) - 4%) !important;
+  top: -17% !important;
+  width: calc(var(--core-upper-card-width) + 8%) !important;
+  height: 22% !important;
   z-index: 9 !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -165,7 +191,22 @@
 
 .bf-machine[data-skin="physical"][data-resolution="focus"]
   .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
-  font-size: calc(var(--machine-u, 12px) * 1.2) !important;
+  font-size: clamp(1.42rem, 1.8vw, 1.95rem) !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine-node--billboard .bf-machine-billboard__visual {
+  padding: .54rem .62rem .46rem !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine-node--billboard .bf-machine-billboard__world-label {
+  font-size: .54rem !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine-node--billboard .bf-machine-billboard__legend {
+  font-size: .47rem !important;
 }
 
 /* Products remains in its canonical machine position. The billboard is above
