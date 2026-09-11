@@ -183,9 +183,81 @@
   box-shadow: inset 0 0 0 1px rgba(97,215,255,.12);
 }
 
+.bfux-layout-studio__source {
+  display: grid;
+  gap: .55rem;
+  padding: .68rem .8rem .75rem;
+  border-top: 1px solid #4b3c5f;
+  border-bottom: 1px solid #2a2334;
+  background:
+    linear-gradient(90deg, rgba(164,102,231,.075), transparent 56%),
+    #0d1215;
+}
+
+.bfux-layout-studio__source > header {
+  display: grid;
+  gap: .3rem;
+}
+
+.bfux-layout-studio__source > header > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .65rem;
+}
+
+.bfux-layout-studio__source > header span {
+  color: #d8c6ee;
+  font-size: .57rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.bfux-layout-studio__source > header small {
+  color: #7f929b;
+  font-size: .45rem;
+  letter-spacing: .06em;
+}
+
+.bfux-layout-studio__source > header code {
+  overflow: hidden;
+  color: #8aa1aa;
+  font-size: .48rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bfux-layout-studio__source > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .42rem;
+}
+
+.bfux-layout-studio__source button {
+  min-height: 2rem;
+  padding: .35rem .38rem;
+  font-size: .5rem;
+}
+
+.bfux-layout-studio__source button:nth-child(2) {
+  border-color: #7e5ca0;
+  color: #eadcff;
+}
+
+.bfux-layout-studio__source p {
+  margin: 0;
+  color: #7f9098;
+  font-size: .52rem;
+  line-height: 1.4;
+}
+
+.bfux-layout-studio__source p b { color: #a9bbc2; }
+.bfux-layout-studio__source p code { color: #cdb8e2; }
+
 .bfux-layout-studio > footer {
   position: sticky;
   bottom: 0;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: .5rem;
