@@ -1,0 +1,28 @@
+/* DEPRECATED: retained for visual-history/reference only.
+ * The active billboard now occupies a normal Lab Machine card bay.
+ */
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  [data-representation-lab-billboard] {
+  left: 36% !important;
+  width: 59% !important;
+  transform: none !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  [data-representation-lab-billboard] {
+  left: 45.5% !important;
+  width: 40.5% !important;
+  transform: none !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  [data-representation-lab-billboard]:hover,
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  [data-representation-lab-billboard]:focus-visible,
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  [data-representation-lab-billboard]:hover,
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  [data-representation-lab-billboard]:focus-visible {
+  transform: translateY(-1px) !important;
+}
