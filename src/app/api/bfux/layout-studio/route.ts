@@ -20,13 +20,17 @@ export async function POST(request: Request) {
     schema?: string;
     source?: string;
   } | null;
+  const sourceHasLayoutSchema = typeof body?.source === "string" && (
+    body.source.includes('schema: "bfux.machine-layout/v1"') ||
+    body.source.includes('"schema": "bfux.machine-layout/v1"')
+  );
 
   if (
     !body ||
     body.schema !== "bfux.layout-source/v1" ||
     typeof body.source !== "string" ||
     !body.source.startsWith(bfuxAuthoredLayoutSourceMarker) ||
-    !body.source.includes('schema: "bfux.machine-layout/v1"') && !body.source.includes('"schema": "bfux.machine-layout/v1"') ||
+    !sourceHasLayoutSchema ||
     body.source.length > 200_000
   ) {
     return NextResponse.json(
