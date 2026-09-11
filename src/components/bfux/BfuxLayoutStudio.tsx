@@ -199,7 +199,7 @@ export function BfuxLayoutStudio() {
       const productsRect = products?.getBoundingClientRect();
       const gap = productsRect ? productsRect.top - rect.bottom : 0;
       const localHeight = target.offsetHeight || Math.round(rect.height) || 140;
-      setMeasuredHeight(Math.max(80, Math.round(localHeight)));
+      setMeasuredHeight(Math.max(128, Math.round(localHeight)));
       setMetrics(`${Math.round(rect.width)} × ${Math.round(rect.height)} px · gap ${Math.round(gap)} px`);
     };
 
@@ -272,7 +272,7 @@ export function BfuxLayoutStudio() {
       <RangeControl
         label="CARD HEIGHT"
         value={heightValue}
-        min={80}
+        min={128}
         max={420}
         step={1}
         unit="px"
