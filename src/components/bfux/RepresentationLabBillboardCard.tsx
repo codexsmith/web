@@ -77,7 +77,10 @@ export function RepresentationLabBillboardCard() {
             <small>INTERACTIVE · {node.duration}</small>
           </div>
 
-          <strong>{node.label}</strong>
+          <strong>
+            Same World,<br />
+            Different Representation
+          </strong>
           <p>{node.boundary}</p>
 
           <span className="bf-machine-billboard__cta">
