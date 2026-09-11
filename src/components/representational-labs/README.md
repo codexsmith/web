@@ -4,6 +4,17 @@ This directory contains the web implementation chassis for the curated Represent
 
 The chassis is intentionally **smaller than the theory** and **smaller than the experiment runtime**. It standardizes repeated web anatomy without pretending that chess, diagonalization, topology, partial observability, and Distinction Space share one visual world or one domain model.
 
+## Two separate contracts
+
+Future labs should separate two things that are easy to accidentally couple:
+
+1. **Lab definition** — serializable identity and catalog information: ID, version, route, layout, experimental question, description, claim ceiling, status, and supported operations.
+2. **Lab implementation** — React state, domain logic, visualization, controls, traces, and other executable behavior.
+
+`RepresentationalLabDefinition` is deliberately free of React nodes and local experiment state. It can therefore be reused later by the Screen Wall, route metadata, registries, telemetry, or a Schemathematics-facing apparatus without importing the executable client component.
+
+Current definitions live in `lab-definitions.ts`. New labs should add a definition before or alongside their implementation.
+
 ## Stable shared anatomy
 
 A representational lab normally has five layers:
@@ -67,6 +78,14 @@ Comparison is a layout contract, not an assertion of equivalence. The experiment
 `RepresentationalLabSectionLabel`
 : Consistent instrument/inspector labeling.
 
+## Shared operation vocabulary
+
+The definition contract currently admits these operation labels:
+
+`distinguish`, `bound`, `admit`, `represent`, `execute`, `observe`, `stress`, `detect`, `trace`, `repair`, `compare`, `promote`, `reset`.
+
+These are capability/catalog labels, not a universal state machine. A lab should only declare operations it actually exposes or makes materially inspectable.
+
 ## What should NOT be abstracted yet
 
 Do not put these into the shared shell merely because two labs currently need them:
@@ -93,11 +112,13 @@ Phase 2 may reveal common Schemathematical operations behind the labs, but that 
 
 Before adding a new sandbox:
 
+- add its serializable lab definition;
 - choose the closest layout mode;
 - write the one-sentence experimental question;
 - state the claim boundary;
 - identify what the user can change;
 - identify what operational consequence changes;
+- declare only supported operations;
 - emit a trace when reconstructability matters;
 - provide reset/replay;
 - keep the domain-native visualization local;
