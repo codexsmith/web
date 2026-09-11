@@ -3,6 +3,7 @@
 import { representationLabBillboardNode } from "./lab-machine-model";
 import "./representation-lab-billboard-card.css";
 import "./representation-lab-billboard-layout.css";
+import "./representation-lab-billboard-polish.css";
 
 export function RepresentationLabBillboardCard() {
   const node = representationLabBillboardNode;
