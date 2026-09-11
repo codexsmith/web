@@ -28,6 +28,7 @@ A workstream-local `STATUS.md` is authoritative when an older README preserves s
 | 25 | Bridge Governance + Operations | Active hardening | Core governance/security CI-gated; browser mutation, concurrency, production access verification, and UX polish remain |
 | 26 | Fallacies of Distributed Reality | Publication candidate | Develop and publish the public engineering essay |
 | 27 | Temporal Observation Vessel BFUX | Concept / design-ready | Prototype a fixed-time, rotatable branching timeline with controlled observability, spatial-memory preservation, and planar accessibility fallback |
+| 28 | Representational Laboratory Suite | Backlog / implementation-ready umbrella | Build five curated Representational Mechanics instruments and later reveal their shared Schemathematics apparatus |
 
 ## Retired / absorbed root IDs
 
@@ -40,6 +41,8 @@ Several previously root-numbered 20/21 artifacts are now supporting material ins
 - representation / boundary / human stewardship framing.
 
 Bridge progress notes now live with workstream 25 instead of consuming separate root IDs.
+
+The older root-level `20_pacman_representational_sandbox_mvp.md` is a predecessor specification for workstream 28. Preserve its historical content; reconcile its long-term location/ownership when workstream 28 implementation begins rather than maintaining a competing active workstream identity.
 
 There is intentionally no requirement that active IDs be gapless. **Uniqueness and current semantic ownership matter more than cosmetic continuity.**
 
