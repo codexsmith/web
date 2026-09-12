@@ -117,16 +117,16 @@ export const bfuxAuthoredLayout = {
         },
         {
           "nodeId": "publications",
-          "column": 12.15,
+          "column": 12.37,
           "row": 1,
           "corner": "nw",
-          "columnSpan": 4,
+          "columnSpan": 3.92,
           "rowSpan": 1.75
         },
         {
           "nodeId": "about",
           "column": 3.6,
-          "row": 3.25,
+          "row": 3.2,
           "corner": "ne",
           "columnSpan": 3.6,
           "rowSpan": 1.75
@@ -134,23 +134,23 @@ export const bfuxAuthoredLayout = {
         {
           "nodeId": "research",
           "column": 4,
-          "row": 2.85,
+          "row": 2.9,
           "corner": "nw",
           "columnSpan": 7.25,
           "rowSpan": 2.25
         },
         {
           "nodeId": "governance",
-          "column": 11.5,
-          "row": 5,
+          "column": 11.33,
+          "row": 4.97,
           "corner": "nw",
-          "columnSpan": 3.75,
-          "rowSpan": 1.75
+          "columnSpan": 3.68,
+          "rowSpan": 1.7
         },
         {
           "nodeId": "pipeline",
           "column": 4.1,
-          "row": 5.1,
+          "row": 5.37,
           "corner": "nw",
           "columnSpan": 2,
           "rowSpan": 1
@@ -158,7 +158,7 @@ export const bfuxAuthoredLayout = {
         {
           "nodeId": "method",
           "column": 6.1,
-          "row": 5.1,
+          "row": 5.37,
           "corner": "nw",
           "columnSpan": 2.25,
           "rowSpan": 1
@@ -166,7 +166,7 @@ export const bfuxAuthoredLayout = {
         {
           "nodeId": "timeline",
           "column": 8.35,
-          "row": 5.1,
+          "row": 5.37,
           "corner": "nw",
           "columnSpan": 2.25,
           "rowSpan": 1
