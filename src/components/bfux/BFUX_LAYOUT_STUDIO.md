@@ -23,6 +23,7 @@ The editor is not merely a spec generator. It is a small source compiler: the sa
 - `BfuxPartsBox.tsx` / `bfux-parts-box.css` — reusable physical-part palette;
 - `BfuxPlacementLayer.tsx` / `bfux-placement-layer.css` — bounded loose-part instantiation, placement, movement, and selection;
 - `BfuxAnchorGrid.tsx` / `bfux-anchor-grid.css` — shared-point card placement system;
+- `bfux-grid-geometry.ts` — canonical workfield, pitch, span, and card-envelope math shared by editor and runtime;
 - `bfux-layout-source.ts` — stable serializable source contract;
 - `bfux-layout-authored.generated.ts` — generated source of truth consumed by normal runtime;
 - `BfuxAuthoredLayoutLayer.tsx` / `bfux-authored-layout.css` — runtime interpreter for authored layout source;
@@ -35,13 +36,15 @@ Legacy `representation-lab-billboard-layout.css` and `representation-lab-billboa
 
 Append `?bfux=edit` to the Lab Machine URL.
 
-The billboard pilot exposes card width/height, gap above Products, maze/copy split, maze scale/X position, visual/copy padding, title scale, and lower control-row height. `AUTO HEIGHT` returns the billboard to content-driven sizing.
+The billboard pilot exposes card width/height, gap above Products, maze/copy split, maze scale/X position, visual/copy padding, title scale, and lower control-row height. `AUTO HEIGHT` returns the billboard to content-driven sizing while the billboard remains in its default authored position.
+
+Once a card is placed on the anchor lattice, its **outer envelope** is owned by the grid span instead. Internal billboard controls still tune its content allocation; the lattice owns the physical exterior box.
 
 Changes apply immediately and persist in browser `localStorage` separately for Core and Full while editing.
 
 ## Source compiler
 
-Layout Studio v0.5 compiles the complete editor state for **both** Core and Full into:
+Layout Studio compiles the complete editor state for **both** Core and Full into:
 
 `src/components/bfux/bfux-layout-authored.generated.ts`
 
@@ -50,7 +53,7 @@ That file is a drop-in source replacement, not an instruction packet for another
 The source output includes:
 
 - billboard geometry;
-- anchor-grid specification and card placements;
+- anchor-grid specification, card anchors, and card spans;
 - instantiated loose parts and normalized positions.
 
 The studio exposes four output paths:
@@ -62,7 +65,7 @@ The studio exposes four output paths:
 
 `WRITE REPO` is intentionally development-only. The API accepts no destination path from the browser, writes only the canonical generated file, validates the generated marker/schema, rejects oversized payloads, and returns `LOCAL_DEV_ONLY` outside development. A Vercel preview therefore cannot mutate repository source, but COPY SOURCE / DOWNLOAD .TS still require no AI interpretation.
 
-On a fresh browser or after clearing editor-local state, v0.5 hydrates the editor from the authored generated module. Thus the loop is now:
+On a fresh browser or after clearing editor-local state, the editor hydrates from the authored generated module. Thus the loop is:
 
 `runtime source -> visual edit -> compile -> source -> runtime`
 
@@ -72,26 +75,38 @@ rather than:
 
 ## Anchor Grid
 
-The Excel-style `PICK YOUR GRID` control is interpreted as a lattice of **points**, not boxes.
+The Excel-style `PICK YOUR GRID` control is interpreted as a lattice of **points connected by tracks**, not a set of unrelated boxes.
 
-A card placement is represented by node id, anchor point `(column, row)`, and one attached corner: `NW`, `NE`, `SW`, or `SE`. The point is the shared alignment primitive; the corner tells the renderer which side of that point the object occupies.
+A card placement is represented by:
+
+- node id;
+- anchor point `(column, row)`;
+- attached corner: `NW`, `NE`, `SW`, or `SE`;
+- horizontal `columnSpan`;
+- vertical `rowSpan`.
+
+The point is the shared alignment primitive. The corner tells the renderer which side of that point the object occupies. The spans tell the renderer how many grid tracks the card occupies. Position **and size therefore use the same grammar**.
 
 The coordinate space is an expanded **apparatus-local workfield**. The lattice is mounted inside the same transformed DOM subtree as the semantic cards, then extended beyond the authored apparatus by the machine's full pan envelope. Panning therefore moves cards, rails, snap points, and drag ghosts as one physical drafting plane. The fixed pan surface remains only a background hit target; it is not the grid coordinate system.
 
 Consequences:
 
 - every visible grid point across the expanded workfield is a real snap target;
-- grid rails are rendered from the same row/column fractions used by snapping rather than painted as overflow from a smaller grid;
+- grid rails are rendered from the same row/column fractions used by snapping;
 - panning cannot cause the apparatus to drift relative to the lattice because both share the same transform ancestry;
+- a dropped card is quantized to a whole-number width and height span derived from its existing physical envelope;
+- the card root, shell, and face inherit that same snapped outer envelope instead of letting nested DOM height rules silently change placement geometry;
 - two cards can share one point with opposite corners and become exactly adjacent;
-- multiple cards can share a row or column without independently tuned offsets;
-- changing grid density remaps existing anchors to the nearest corresponding points;
-- a card whose own dimensions change remains attached by the same corner;
-- `RELEASE` removes the grid placement and restores its underlying authored/default placement.
+- multiple cards can share a row or column and their edges can also land on shared downstream points because dimensions are grid spans;
+- `W− / W+ / H− / H+` adjust the selected card by one grid track at a time;
+- changing grid density remaps both anchors and existing spans;
+- `RELEASE` removes the grid placement and restores the underlying authored/default geometry.
 
-During drag, the editor tests every valid `(point, corner)` pair that keeps the card inside the expanded workfield. The nearest valid relationship is previewed as a ghost before drop. Drag-over/drop capture is workfield-wide, so machine margins remain functional placement space.
+During drag, the editor first converts the card's current exterior dimensions to the nearest safe grid spans. It then tests valid `(point, corner)` placements for that fixed snapped envelope. The drag ghost therefore previews the **actual card rectangle that will be committed**, including its `W x H` span, rather than previewing a point while a separate CSS hierarchy determines size afterward.
 
-The generated source contract does not change: it still stores `(column, row, corner)`. Normal runtime interpretation reconstructs the same expanded apparatus-local workfield before resolving those anchors, so a layout written by the editor lands in the same place when the editor is closed. On mobile, where the machine becomes a document rack rather than a pannable desktop field, runtime retains the apparatus-relative percentage interpretation.
+Legacy saved placements that predate spans remain readable. The renderer derives a best-fit span from their current outer dimensions until the card is moved or resized, after which the explicit spans are serialized.
+
+Normal runtime uses the same `bfux-grid-geometry.ts` functions as the editor to reconstruct the apparatus-local workfield, anchor location, pitch, and exterior card dimensions. That shared geometry module is the critical WYSIWYG boundary.
 
 ## Parts Box and free placement
 
@@ -103,15 +118,15 @@ The Parts Box uses the physical Lab Machine vocabulary already present on the pa
 
 Dragging a primitive onto the machine creates an independent instance. Placed parts are bounded to the apparatus and stored as normalized center coordinates rather than raw screen coordinates. A part can be selected, moved by dragging, and removed by double-click or Delete / Backspace.
 
-Cards and loose parts deliberately use different placement contracts: cards use the stricter shared workfield anchor lattice because mutual alignment is structural; loose machine parts currently use free apparatus-relative normalized placement.
+Cards and loose parts deliberately use different placement contracts: cards use the stricter shared workfield anchor + span lattice because mutual alignment and exterior size are structural; loose machine parts currently use free apparatus-relative normalized placement.
 
 ## Next
 
 Useful next increments are:
 
-- make the generated source module the broader canonical desktop-machine geometry registry, not only the editor-authored deltas;
+- add direct resize handles that mutate the same `columnSpan` / `rowSpan` values instead of introducing pixel dimensions;
 - make grid points nestable / locally refinable so a coarse workfield lattice can contain denser sub-lattices;
-- expose direct card resize handles against the same geometry contracts;
+- make the generated source module the broader canonical desktop-machine geometry registry, not only editor-authored deltas;
 - add magnetic attachment rules between card edges, ports, connectors, and tubes;
 - add a guarded Git/GitHub commit action only if repository authentication is deliberately provisioned, rather than embedding credentials in the public editor.
 
