@@ -21,6 +21,7 @@ const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const nodeTransferType = "application/x-bfux-node";
 const layoutTuningEvent = "bfux-layout-tuning";
+const spanAdjustEvent = "bfux-grid-span-adjust";
 const maxPickerColumns = 12;
 const maxPickerRows = 8;
 
@@ -212,7 +213,7 @@ export function BfuxAnchorGridPicker({
   state: BfuxAnchorGridState;
   selectedNodeId: string | null;
   onSpecChange: (spec: BfuxAnchorGridSpec) => void;
-  onResizeSelected: (axis: "column" | "row", delta: number) => void;
+  onResizeSelected?: (axis: "column" | "row", delta: number) => void;
   onReleaseSelected: () => void;
   onReleaseAll: () => void;
 }) {
@@ -224,6 +225,17 @@ export function BfuxAnchorGridPicker({
   const selectedRowSpan = selectedPlacement ? bfuxGridSpan(selectedPlacement.rowSpan) : 0;
   const selectedMaxColumnSpan = selectedPlacement ? bfuxGridMaxColumnSpan(selectedPlacement, state.spec) : 0;
   const selectedMaxRowSpan = selectedPlacement ? bfuxGridMaxRowSpan(selectedPlacement, state.spec) : 0;
+
+  const adjustSelected = (axis: "column" | "row", delta: number) => {
+    if (!selectedNodeId) return;
+    if (onResizeSelected) {
+      onResizeSelected(axis, delta);
+      return;
+    }
+    window.dispatchEvent(new CustomEvent(spanAdjustEvent, {
+      detail: { nodeId: selectedNodeId, axis, delta },
+    }));
+  };
 
   return (
     <details className="bfux-anchor-grid-picker" open>
@@ -298,10 +310,10 @@ export function BfuxAnchorGridPicker({
             <code>{selectedPlacement ? `${selectedColumnSpan} W × ${selectedRowSpan} H` : "DROP A CARD TO SIZE IT"}</code>
           </div>
           <div className="bfux-anchor-grid-picker__span-controls">
-            <button type="button" disabled={!selectedPlacement || selectedColumnSpan <= 1} onClick={() => onResizeSelected("column", -1)}>W−</button>
-            <button type="button" disabled={!selectedPlacement || selectedColumnSpan >= selectedMaxColumnSpan} onClick={() => onResizeSelected("column", 1)}>W+</button>
-            <button type="button" disabled={!selectedPlacement || selectedRowSpan <= 1} onClick={() => onResizeSelected("row", -1)}>H−</button>
-            <button type="button" disabled={!selectedPlacement || selectedRowSpan >= selectedMaxRowSpan} onClick={() => onResizeSelected("row", 1)}>H+</button>
+            <button type="button" disabled={!selectedPlacement || selectedColumnSpan <= 1} onClick={() => adjustSelected("column", -1)}>W−</button>
+            <button type="button" disabled={!selectedPlacement || selectedColumnSpan >= selectedMaxColumnSpan} onClick={() => adjustSelected("column", 1)}>W+</button>
+            <button type="button" disabled={!selectedPlacement || selectedRowSpan <= 1} onClick={() => adjustSelected("row", -1)}>H−</button>
+            <button type="button" disabled={!selectedPlacement || selectedRowSpan >= selectedMaxRowSpan} onClick={() => adjustSelected("row", 1)}>H+</button>
           </div>
         </div>
       </div>
@@ -352,6 +364,29 @@ export function BfuxAnchorGridLayer({
   useEffect(() => {
     setWorkfield(null);
   }, [apparatus]);
+
+  useEffect(() => {
+    const adjust = (event: Event) => {
+      const detail = (event as CustomEvent<{ nodeId?: string; axis?: "column" | "row"; delta?: number }>).detail;
+      if (!detail?.nodeId || !detail.axis || !Number.isFinite(detail.delta)) return;
+      const delta = Math.sign(detail.delta ?? 0);
+      if (!delta) return;
+
+      const placements = state.placements.map((placement) => {
+        if (placement.nodeId !== detail.nodeId) return placement;
+        if (detail.axis === "column") {
+          const max = bfuxGridMaxColumnSpan(placement, state.spec);
+          return { ...placement, columnSpan: clampInteger(bfuxGridSpan(placement.columnSpan) + delta, 1, Math.max(1, max)) };
+        }
+        const max = bfuxGridMaxRowSpan(placement, state.spec);
+        return { ...placement, rowSpan: clampInteger(bfuxGridSpan(placement.rowSpan) + delta, 1, Math.max(1, max)) };
+      });
+      onPlacementsChange(placements);
+    };
+
+    window.addEventListener(spanAdjustEvent, adjust);
+    return () => window.removeEventListener(spanAdjustEvent, adjust);
+  }, [onPlacementsChange, state]);
 
   useEffect(() => {
     if (!apparatus || !workfield) return;
