@@ -9,8 +9,8 @@ const machineSelector = '.bf-machine[data-skin="physical"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
-const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v3";
-const upperFieldNodeIds = new Set(["people", "products", "publications"]);
+const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v4";
+const upperFieldNodeIds = new Set(["representation-lab", "people", "products", "publications"]);
 export const bfuxCardSizeQuantumPx = 60;
 const measurementNoiseTolerancePx = 0.75;
 
@@ -41,11 +41,10 @@ function measureLocalSize(node: HTMLElement, apparatus: HTMLElement) {
 function canonicalHeight(node: HTMLElement, measuredHeight: number) {
   const nodeId = node.dataset.nodeId ?? "";
 
-  /* The upper People / Products / Publications bank is intentionally two 90px
-   * tracks tall. Research is intentionally three tracks tall. These are the
-   * first explicit machine-size families in the grid grammar: they preserve the
-   * visual hierarchy while making the cards mechanically miscible on the same
-   * lattice. */
+  /* The billboard and upper People / Products / Publications bank are the same
+   * physical card family: two 90px tracks tall. Research is three tracks tall.
+   * The billboard differs only in what its face renders, not in its chassis
+   * geometry. */
   if (upperFieldNodeIds.has(nodeId)) return bfuxGridPitchPx * 2;
   if (nodeId === "research") return bfuxGridPitchPx * 3;
 
@@ -109,9 +108,9 @@ function migrateEditorSizeProfile() {
   try {
     if (window.localStorage.getItem(sizeProfileMigrationKey) === "1") return;
 
-    /* Preserve the user's existing anchor/corner work. Only migrate the vertical
-     * spans for the card families whose canonical heights changed in this pass.
-     * The 90px ruler means 2 tracks = 180px and 3 tracks = 270px. */
+    /* Preserve the user's anchor/corner work. Only migrate vertical spans for
+     * card families whose canonical heights are grid-native. The billboard is
+     * now deliberately the same two-track chassis family as the upper cards. */
     const raw = window.localStorage.getItem(legacyGridStorageKey);
     if (raw) {
       const saved = JSON.parse(raw) as Record<string, { placements?: Array<{ nodeId?: string; rowSpan?: number }> }>;
@@ -137,10 +136,10 @@ function migrateEditorSizeProfile() {
  * Canonical desktop geometry bridge.
  *
  * Widths still derive from the existing machine and round UP to the next 60px
- * module. Heights now begin to use explicit grid-native families: the upper
- * People / Products / Publications cards are 180px (2 x 90px tracks), while
- * Research is 270px (3 x 90px tracks). Other cards retain the 60px rounding
- * bridge until their own grid-native size families are chosen.
+ * module. Heights use explicit grid-native families: the Representation Lab
+ * billboard plus People / Products / Publications are 180px (2 x 90px tracks),
+ * while Research is 270px (3 x 90px tracks). Other cards retain the 60px
+ * rounding bridge until their own grid-native size families are chosen.
  *
  * Position remains owned by the authored composition until a card is explicitly
  * placed on the lattice. Once placed, the anchor-grid contract owns the same
