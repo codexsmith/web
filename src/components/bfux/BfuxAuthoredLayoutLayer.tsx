@@ -149,6 +149,24 @@ export function BfuxAuthoredLayoutLayer() {
       }
     }
 
+    /* The Full process chassis is existing Lab Machine hardware, not a separate
+     * authored card. Keep that bus bay on the same geometry contract as the
+     * authored Research and Pipeline placements so the physical connector bay
+     * cannot drift back to its legacy percentage-based composition. */
+    const lowerDeck = apparatus.querySelector<HTMLElement>(".bf-machine__lower-deck");
+    const researchPlacement = placementByNode.get("research");
+    const pipelinePlacement = placementByNode.get("pipeline");
+    if (resolution === "mid" && lowerDeck && researchPlacement && pipelinePlacement) {
+      const researchGeometry = bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, researchPlacement);
+      const pipelineGeometry = bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, pipelinePlacement);
+      apparatus.style.setProperty("--lower-deck-left", `${researchGeometry.left}px`);
+      apparatus.style.setProperty(
+        "--lower-deck-top",
+        `calc(${pipelineGeometry.top}px - var(--compact-card-inset))`,
+      );
+      apparatus.style.setProperty("--lower-deck-width", `${researchGeometry.width}px`);
+    }
+
     apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
 
     return () => {
@@ -164,6 +182,9 @@ export function BfuxAuthoredLayoutLayer() {
         node.style.removeProperty("--bfux-node-grid-width");
         node.style.removeProperty("--bfux-node-grid-height");
       }
+      apparatus.style.removeProperty("--lower-deck-left");
+      apparatus.style.removeProperty("--lower-deck-top");
+      apparatus.style.removeProperty("--lower-deck-width");
       apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
     };
   }, [apparatus, resolution, revision]);
