@@ -2,6 +2,19 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
+import {
+  bfuxGridAxisFraction,
+  bfuxGridFitSpan,
+  bfuxGridMaxColumnSpan,
+  bfuxGridMaxRowSpan,
+  bfuxGridPanX,
+  bfuxGridPanY,
+  bfuxGridPitch,
+  bfuxGridPlacementGeometry,
+  bfuxGridRemapSpan,
+  bfuxGridSpan,
+  type BfuxGridCorner,
+} from "./bfux-grid-geometry";
 import "./bfux-anchor-grid.css";
 
 const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
@@ -12,7 +25,7 @@ const maxPickerColumns = 12;
 const maxPickerRows = 8;
 
 export type BfuxAnchorGridResolution = "focus" | "mid";
-export type BfuxAnchorCorner = "nw" | "ne" | "sw" | "se";
+export type BfuxAnchorCorner = BfuxGridCorner;
 
 export type BfuxAnchorGridSpec = {
   columns: number;
@@ -25,6 +38,8 @@ export type BfuxNodeAnchorPlacement = {
   column: number;
   row: number;
   corner: BfuxAnchorCorner;
+  columnSpan?: number;
+  rowSpan?: number;
 };
 
 export type BfuxAnchorGridState = {
@@ -39,13 +54,13 @@ export const defaultBfuxAnchorGridState: BfuxAnchorGridState = {
 
 type DragState = {
   nodeId: string;
-  width: number;
-  height: number;
-  grabX: number;
-  grabY: number;
+  columnSpan: number;
+  rowSpan: number;
+  grabRatioX: number;
+  grabRatioY: number;
 };
 
-type SnapCandidate = BfuxNodeAnchorPlacement & {
+type SnapCandidate = Required<Pick<BfuxNodeAnchorPlacement, "nodeId" | "column" | "row" | "corner" | "columnSpan" | "rowSpan">> & {
   x: number;
   y: number;
   width: number;
@@ -56,8 +71,8 @@ function clampInteger(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, Math.round(value)));
 }
 
-function axisFraction(index: number, count: number) {
-  return count <= 1 ? 0.5 : index / (count - 1);
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value));
 }
 
 function cornerTranslation(corner: BfuxAnchorCorner) {
@@ -80,8 +95,6 @@ function nodeLocalSize(node: HTMLElement, workfield: HTMLElement) {
   return {
     width: nodeRect.width / workfieldScale.scaleX,
     height: nodeRect.height / workfieldScale.scaleY,
-    scaleX: workfieldScale.scaleX,
-    scaleY: workfieldScale.scaleY,
   };
 }
 
@@ -91,25 +104,33 @@ function candidateForPointer(workfield: HTMLElement, event: DragEvent, spec: Bfu
   const workfieldHeight = workfield.offsetHeight || rect.height;
   const pointerX = (event.clientX - rect.left) / scaleX;
   const pointerY = (event.clientY - rect.top) / scaleY;
+  const pitchX = bfuxGridPitch(workfieldWidth, spec.columns);
+  const pitchY = bfuxGridPitch(workfieldHeight, spec.rows);
+  const width = pitchX * drag.columnSpan;
+  const height = pitchY * drag.rowSpan;
   const corners: BfuxAnchorCorner[] = ["nw", "ne", "sw", "se"];
   let best: { candidate: SnapCandidate; distance: number } | null = null;
 
   for (let row = 0; row < spec.rows; row += 1) {
-    const y = axisFraction(row, spec.rows) * workfieldHeight;
+    const y = bfuxGridAxisFraction(row, spec.rows) * workfieldHeight;
     for (let column = 0; column < spec.columns; column += 1) {
-      const x = axisFraction(column, spec.columns) * workfieldWidth;
+      const x = bfuxGridAxisFraction(column, spec.columns) * workfieldWidth;
       for (const corner of corners) {
+        const placement = { column, row, corner };
+        if (drag.columnSpan > bfuxGridMaxColumnSpan(placement, spec)) continue;
+        if (drag.rowSpan > bfuxGridMaxRowSpan(placement, spec)) continue;
+
         const rightAnchored = corner === "ne" || corner === "se";
         const bottomAnchored = corner === "sw" || corner === "se";
-        const left = x - (rightAnchored ? drag.width : 0);
-        const top = y - (bottomAnchored ? drag.height : 0);
-        const right = left + drag.width;
-        const bottom = top + drag.height;
+        const left = x - (rightAnchored ? width : 0);
+        const top = y - (bottomAnchored ? height : 0);
+        const right = left + width;
+        const bottom = top + height;
 
         if (left < -0.5 || top < -0.5 || right > workfieldWidth + 0.5 || bottom > workfieldHeight + 0.5) continue;
 
-        const expectedPointerX = left + drag.grabX;
-        const expectedPointerY = top + drag.grabY;
+        const expectedPointerX = left + width * drag.grabRatioX;
+        const expectedPointerY = top + height * drag.grabRatioY;
         const distance = Math.hypot(pointerX - expectedPointerX, pointerY - expectedPointerY);
         if (best && distance >= best.distance) continue;
 
@@ -120,10 +141,12 @@ function candidateForPointer(workfield: HTMLElement, event: DragEvent, spec: Bfu
             column,
             row,
             corner,
+            columnSpan: drag.columnSpan,
+            rowSpan: drag.rowSpan,
             x,
             y,
-            width: drag.width,
-            height: drag.height,
+            width,
+            height,
           },
         };
       }
@@ -138,35 +161,43 @@ function pointerInsideWorkfield(workfield: HTMLElement, event: DragEvent) {
   return event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
 }
 
-function anchorPointInApparatus(
-  workfield: HTMLElement,
-  apparatus: HTMLElement,
-  placement: BfuxNodeAnchorPlacement,
-  spec: BfuxAnchorGridSpec,
-) {
-  const workfieldRect = workfield.getBoundingClientRect();
-  const apparatusScale = elementScale(apparatus);
-  const clientX = workfieldRect.left + axisFraction(placement.column, spec.columns) * workfieldRect.width;
-  const clientY = workfieldRect.top + axisFraction(placement.row, spec.rows) * workfieldRect.height;
-  return {
-    x: (clientX - apparatusScale.rect.left) / apparatusScale.scaleX,
-    y: (clientY - apparatusScale.rect.top) / apparatusScale.scaleY,
-  };
-}
-
 export function remapBfuxAnchorPlacements(
   placements: BfuxNodeAnchorPlacement[],
   previous: BfuxAnchorGridSpec,
   next: BfuxAnchorGridSpec,
 ) {
   return placements.map((placement) => {
-    const x = axisFraction(placement.column, previous.columns);
-    const y = axisFraction(placement.row, previous.rows);
-    return {
+    const x = bfuxGridAxisFraction(placement.column, previous.columns);
+    const y = bfuxGridAxisFraction(placement.row, previous.rows);
+    const nextPlacement: BfuxNodeAnchorPlacement = {
       ...placement,
       column: next.columns <= 1 ? 0 : clampInteger(x * (next.columns - 1), 0, next.columns - 1),
       row: next.rows <= 1 ? 0 : clampInteger(y * (next.rows - 1), 0, next.rows - 1),
+      columnSpan: bfuxGridRemapSpan(placement.columnSpan, previous.columns, next.columns),
+      rowSpan: bfuxGridRemapSpan(placement.rowSpan, previous.rows, next.rows),
     };
+
+    if (nextPlacement.columnSpan != null) {
+      const span = bfuxGridSpan(nextPlacement.columnSpan);
+      if (nextPlacement.corner === "ne" || nextPlacement.corner === "se") {
+        nextPlacement.column = Math.max(nextPlacement.column, span);
+      } else {
+        nextPlacement.column = Math.min(nextPlacement.column, Math.max(0, next.columns - 1 - span));
+      }
+      nextPlacement.columnSpan = Math.min(span, Math.max(1, bfuxGridMaxColumnSpan(nextPlacement, next)));
+    }
+
+    if (nextPlacement.rowSpan != null) {
+      const span = bfuxGridSpan(nextPlacement.rowSpan);
+      if (nextPlacement.corner === "sw" || nextPlacement.corner === "se") {
+        nextPlacement.row = Math.max(nextPlacement.row, span);
+      } else {
+        nextPlacement.row = Math.min(nextPlacement.row, Math.max(0, next.rows - 1 - span));
+      }
+      nextPlacement.rowSpan = Math.min(span, Math.max(1, bfuxGridMaxRowSpan(nextPlacement, next)));
+    }
+
+    return nextPlacement;
   });
 }
 
@@ -174,24 +205,31 @@ export function BfuxAnchorGridPicker({
   state,
   selectedNodeId,
   onSpecChange,
+  onResizeSelected,
   onReleaseSelected,
   onReleaseAll,
 }: {
   state: BfuxAnchorGridState;
   selectedNodeId: string | null;
   onSpecChange: (spec: BfuxAnchorGridSpec) => void;
+  onResizeSelected: (axis: "column" | "row", delta: number) => void;
   onReleaseSelected: () => void;
   onReleaseAll: () => void;
 }) {
   const [hover, setHover] = useState<{ columns: number; rows: number } | null>(null);
   const activeColumns = hover?.columns ?? state.spec.columns;
   const activeRows = hover?.rows ?? state.spec.rows;
+  const selectedPlacement = state.placements.find((placement) => placement.nodeId === selectedNodeId) ?? null;
+  const selectedColumnSpan = selectedPlacement ? bfuxGridSpan(selectedPlacement.columnSpan) : 0;
+  const selectedRowSpan = selectedPlacement ? bfuxGridSpan(selectedPlacement.rowSpan) : 0;
+  const selectedMaxColumnSpan = selectedPlacement ? bfuxGridMaxColumnSpan(selectedPlacement, state.spec) : 0;
+  const selectedMaxRowSpan = selectedPlacement ? bfuxGridMaxRowSpan(selectedPlacement, state.spec) : 0;
 
   return (
     <details className="bfux-anchor-grid-picker" open>
       <summary>
         <span>ANCHOR GRID</span>
-        <small>CORNERS HANG FROM SHARED POINTS</small>
+        <small>CORNERS + CARD SPANS SHARE THE SAME POINT LATTICE</small>
       </summary>
 
       <div className="bfux-anchor-grid-picker__body">
@@ -241,8 +279,8 @@ export function BfuxAnchorGridPicker({
         </div>
 
         <div className="bfux-anchor-grid-picker__explain">
-          <span><b>↖ ↗ ↙ ↘</b> nearest card corner snaps to a point</span>
-          <span>Cards may share a point from opposite sides or share a row/column without inventing offsets.</span>
+          <span><b>↖ ↗ ↙ ↘</b> a corner hangs from a point; width + height occupy whole grid tracks.</span>
+          <span>Dropped cards therefore share the same location and size grammar instead of mixing grid anchors with unrelated CSS dimensions.</span>
         </div>
 
         <div className="bfux-anchor-grid-picker__selection">
@@ -252,6 +290,19 @@ export function BfuxAnchorGridPicker({
           </div>
           <button type="button" disabled={!selectedNodeId} onClick={onReleaseSelected}>RELEASE</button>
           <button type="button" disabled={state.placements.length === 0} onClick={onReleaseAll}>RELEASE ALL</button>
+        </div>
+
+        <div className="bfux-anchor-grid-picker__span" data-active={selectedPlacement ? "true" : undefined}>
+          <div>
+            <small>GRID SPAN</small>
+            <code>{selectedPlacement ? `${selectedColumnSpan} W × ${selectedRowSpan} H` : "DROP A CARD TO SIZE IT"}</code>
+          </div>
+          <div className="bfux-anchor-grid-picker__span-controls">
+            <button type="button" disabled={!selectedPlacement || selectedColumnSpan <= 1} onClick={() => onResizeSelected("column", -1)}>W−</button>
+            <button type="button" disabled={!selectedPlacement || selectedColumnSpan >= selectedMaxColumnSpan} onClick={() => onResizeSelected("column", 1)}>W+</button>
+            <button type="button" disabled={!selectedPlacement || selectedRowSpan <= 1} onClick={() => onResizeSelected("row", -1)}>H−</button>
+            <button type="button" disabled={!selectedPlacement || selectedRowSpan >= selectedMaxRowSpan} onClick={() => onResizeSelected("row", 1)}>H+</button>
+          </div>
         </div>
       </div>
     </details>
@@ -323,21 +374,28 @@ export function BfuxAnchorGridLayer({
         if (!placement) {
           delete node.dataset.bfuxGridPlaced;
           delete node.dataset.bfuxGridCorner;
+          delete node.dataset.bfuxGridSpan;
           node.style.removeProperty("--bfux-node-anchor-x");
           node.style.removeProperty("--bfux-node-anchor-y");
           node.style.removeProperty("--bfux-node-anchor-tx");
           node.style.removeProperty("--bfux-node-anchor-ty");
+          node.style.removeProperty("--bfux-node-grid-width");
+          node.style.removeProperty("--bfux-node-grid-height");
           continue;
         }
 
-        const anchor = anchorPointInApparatus(workfield, apparatus, placement, state.spec);
+        const size = nodeLocalSize(node, workfield);
+        const geometry = bfuxGridPlacementGeometry(apparatus, state.spec, placement, size);
         const translation = cornerTranslation(placement.corner);
         node.dataset.bfuxGridPlaced = "true";
         node.dataset.bfuxGridCorner = placement.corner;
-        node.style.setProperty("--bfux-node-anchor-x", `${anchor.x}px`);
-        node.style.setProperty("--bfux-node-anchor-y", `${anchor.y}px`);
+        node.dataset.bfuxGridSpan = `${geometry.columnSpan}x${geometry.rowSpan}`;
+        node.style.setProperty("--bfux-node-anchor-x", `${geometry.anchorX}px`);
+        node.style.setProperty("--bfux-node-anchor-y", `${geometry.anchorY}px`);
         node.style.setProperty("--bfux-node-anchor-tx", translation.x);
         node.style.setProperty("--bfux-node-anchor-ty", translation.y);
+        node.style.setProperty("--bfux-node-grid-width", `${geometry.width}px`);
+        node.style.setProperty("--bfux-node-grid-height", `${geometry.height}px`);
 
         if (node.classList.contains("bf-machine-node--billboard")) {
           node.style.removeProperty("left");
@@ -372,10 +430,13 @@ export function BfuxAnchorGridLayer({
         delete node.dataset.bfuxGridEditable;
         delete node.dataset.bfuxGridPlaced;
         delete node.dataset.bfuxGridCorner;
+        delete node.dataset.bfuxGridSpan;
         node.style.removeProperty("--bfux-node-anchor-x");
         node.style.removeProperty("--bfux-node-anchor-y");
         node.style.removeProperty("--bfux-node-anchor-tx");
         node.style.removeProperty("--bfux-node-anchor-ty");
+        node.style.removeProperty("--bfux-node-grid-width");
+        node.style.removeProperty("--bfux-node-grid-height");
       }
       apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
     };
@@ -413,9 +474,18 @@ export function BfuxAnchorGridLayer({
 
       const size = nodeLocalSize(node, workfield);
       const nodeRect = node.getBoundingClientRect();
-      const grabX = (event.clientX - nodeRect.left) / size.scaleX;
-      const grabY = (event.clientY - nodeRect.top) / size.scaleY;
-      const nextDrag = { nodeId, width: size.width, height: size.height, grabX, grabY };
+      const existing = state.placements.find((placement) => placement.nodeId === nodeId);
+      const pitchX = bfuxGridPitch(workfield.offsetWidth, state.spec.columns);
+      const pitchY = bfuxGridPitch(workfield.offsetHeight, state.spec.rows);
+      const columnSpan = existing?.columnSpan == null
+        ? bfuxGridFitSpan(size.width, pitchX, Math.max(1, state.spec.columns - 1))
+        : bfuxGridSpan(existing.columnSpan);
+      const rowSpan = existing?.rowSpan == null
+        ? bfuxGridFitSpan(size.height, pitchY, Math.max(1, state.spec.rows - 1))
+        : bfuxGridSpan(existing.rowSpan);
+      const grabRatioX = nodeRect.width > 0 ? clamp01((event.clientX - nodeRect.left) / nodeRect.width) : 0.5;
+      const grabRatioY = nodeRect.height > 0 ? clamp01((event.clientY - nodeRect.top) / nodeRect.height) : 0.5;
+      const nextDrag = { nodeId, columnSpan, rowSpan, grabRatioX, grabRatioY };
 
       event.stopPropagation();
       event.dataTransfer.effectAllowed = "move";
@@ -451,7 +521,14 @@ export function BfuxAnchorGridLayer({
       if (next) {
         onPlacementsChange([
           ...state.placements.filter((placement) => placement.nodeId !== activeDrag.nodeId),
-          { nodeId: activeDrag.nodeId, column: next.column, row: next.row, corner: next.corner },
+          {
+            nodeId: activeDrag.nodeId,
+            column: next.column,
+            row: next.row,
+            corner: next.corner,
+            columnSpan: next.columnSpan,
+            rowSpan: next.rowSpan,
+          },
         ]);
       }
       const node = apparatus.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(activeDrag.nodeId)}"]`);
@@ -494,7 +571,7 @@ export function BfuxAnchorGridLayer({
     const next: Array<{ column: number; row: number; x: number; y: number }> = [];
     for (let row = 0; row < state.spec.rows; row += 1) {
       for (let column = 0; column < state.spec.columns; column += 1) {
-        next.push({ column, row, x: axisFraction(column, state.spec.columns), y: axisFraction(row, state.spec.rows) });
+        next.push({ column, row, x: bfuxGridAxisFraction(column, state.spec.columns), y: bfuxGridAxisFraction(row, state.spec.rows) });
       }
     }
     return next;
@@ -510,6 +587,11 @@ export function BfuxAnchorGridLayer({
     transform: `translate(${cornerTranslation(candidate.corner).x}, ${cornerTranslation(candidate.corner).y})`,
   } as CSSProperties : undefined;
 
+  const workfieldStyle = {
+    "--bfux-grid-pan-x": `${bfuxGridPanX}px`,
+    "--bfux-grid-pan-y": `${bfuxGridPanY}px`,
+  } as CSSProperties;
+
   return createPortal(
     <div
       ref={setWorkfield}
@@ -517,20 +599,21 @@ export function BfuxAnchorGridLayer({
       data-visible={state.spec.visible || drag ? "true" : undefined}
       data-dragging={drag ? "true" : undefined}
       data-coordinate-space="apparatus-workfield"
+      style={workfieldStyle}
       aria-hidden="true"
     >
       {Array.from({ length: state.spec.columns }, (_, column) => (
         <span
           key={`column:${column}`}
           data-axis="column"
-          style={{ left: `${axisFraction(column, state.spec.columns) * 100}%` }}
+          style={{ left: `${bfuxGridAxisFraction(column, state.spec.columns) * 100}%` }}
         />
       ))}
       {Array.from({ length: state.spec.rows }, (_, row) => (
         <span
           key={`row:${row}`}
           data-axis="row"
-          style={{ top: `${axisFraction(row, state.spec.rows) * 100}%` }}
+          style={{ top: `${bfuxGridAxisFraction(row, state.spec.rows) * 100}%` }}
         />
       ))}
       {points.map((point) => {
@@ -546,7 +629,7 @@ export function BfuxAnchorGridLayer({
       {candidate && drag ? (
         <div className="bfux-anchor-grid-ghost" style={ghostStyle} data-corner={candidate.corner}>
           <span>{drag.nodeId}</span>
-          <b>{candidate.corner.toUpperCase()} · {candidate.column + 1},{candidate.row + 1}</b>
+          <b>{candidate.corner.toUpperCase()} · {candidate.column + 1},{candidate.row + 1} · {candidate.columnSpan}×{candidate.rowSpan}</b>
         </div>
       ) : null}
     </div>,
