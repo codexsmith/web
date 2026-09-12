@@ -94,7 +94,7 @@ export const bfuxAuthoredLayout = {
     },
     "anchorGrid": {
       "spec": {
-        "columns": 16,
+        "columns": 12,
         "rows": 7,
         "visible": true
       },
