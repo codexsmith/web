@@ -1,21 +1,23 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import {
-  bfuxGridAxisFraction,
+  bfuxGridCoordinate,
   bfuxGridFitSpan,
   bfuxGridMaxColumnSpan,
   bfuxGridMaxRowSpan,
   bfuxGridPanX,
   bfuxGridPanY,
-  bfuxGridPitch,
   bfuxGridPlacementGeometry,
+  bfuxGridRemapCoordinate,
   bfuxGridRemapSpan,
   bfuxGridSpan,
+  bfuxGridWorkfieldMetrics,
   type BfuxGridCorner,
 } from "./bfux-grid-geometry";
 import "./bfux-anchor-grid.css";
+import "./bfux-grid-card-envelope.css";
 
 const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
@@ -99,36 +101,40 @@ function nodeLocalSize(node: HTMLElement, workfield: HTMLElement) {
   };
 }
 
-function candidateForPointer(workfield: HTMLElement, event: DragEvent, spec: BfuxAnchorGridSpec, drag: DragState) {
+function candidateForPointer(
+  apparatus: HTMLElement,
+  workfield: HTMLElement,
+  event: DragEvent,
+  spec: BfuxAnchorGridSpec,
+  drag: DragState,
+) {
+  const metrics = bfuxGridWorkfieldMetrics(apparatus, spec);
   const { rect, scaleX, scaleY } = elementScale(workfield);
-  const workfieldWidth = workfield.offsetWidth || rect.width;
-  const workfieldHeight = workfield.offsetHeight || rect.height;
-  const pointerX = (event.clientX - rect.left) / scaleX;
-  const pointerY = (event.clientY - rect.top) / scaleY;
-  const pitchX = bfuxGridPitch(workfieldWidth, spec.columns);
-  const pitchY = bfuxGridPitch(workfieldHeight, spec.rows);
-  const width = pitchX * drag.columnSpan;
-  const height = pitchY * drag.rowSpan;
+  const pointerX = metrics.left + (event.clientX - rect.left) / scaleX;
+  const pointerY = metrics.top + (event.clientY - rect.top) / scaleY;
+  const width = metrics.pitchX * drag.columnSpan;
+  const height = metrics.pitchY * drag.rowSpan;
   const corners: BfuxAnchorCorner[] = ["nw", "ne", "sw", "se"];
   let best: { candidate: SnapCandidate; distance: number } | null = null;
 
-  for (let row = 0; row < spec.rows; row += 1) {
-    const y = bfuxGridAxisFraction(row, spec.rows) * workfieldHeight;
-    for (let column = 0; column < spec.columns; column += 1) {
-      const x = bfuxGridAxisFraction(column, spec.columns) * workfieldWidth;
+  for (let row = metrics.minRow; row <= metrics.maxRow; row += 1) {
+    const anchorY = bfuxGridCoordinate(row, metrics.apparatusHeight, spec.rows);
+    for (let column = metrics.minColumn; column <= metrics.maxColumn; column += 1) {
+      const anchorX = bfuxGridCoordinate(column, metrics.apparatusWidth, spec.columns);
       for (const corner of corners) {
-        const placement = { column, row, corner };
-        if (drag.columnSpan > bfuxGridMaxColumnSpan(placement, spec)) continue;
-        if (drag.rowSpan > bfuxGridMaxRowSpan(placement, spec)) continue;
-
         const rightAnchored = corner === "ne" || corner === "se";
         const bottomAnchored = corner === "sw" || corner === "se";
-        const left = x - (rightAnchored ? width : 0);
-        const top = y - (bottomAnchored ? height : 0);
+        const left = anchorX - (rightAnchored ? width : 0);
+        const top = anchorY - (bottomAnchored ? height : 0);
         const right = left + width;
         const bottom = top + height;
 
-        if (left < -0.5 || top < -0.5 || right > workfieldWidth + 0.5 || bottom > workfieldHeight + 0.5) continue;
+        if (
+          left < metrics.left - 0.5 ||
+          top < metrics.top - 0.5 ||
+          right > metrics.right + 0.5 ||
+          bottom > metrics.bottom + 0.5
+        ) continue;
 
         const expectedPointerX = left + width * drag.grabRatioX;
         const expectedPointerY = top + height * drag.grabRatioY;
@@ -144,8 +150,8 @@ function candidateForPointer(workfield: HTMLElement, event: DragEvent, spec: Bfu
             corner,
             columnSpan: drag.columnSpan,
             rowSpan: drag.rowSpan,
-            x,
-            y,
+            x: anchorX - metrics.left,
+            y: anchorY - metrics.top,
             width,
             height,
           },
@@ -167,39 +173,23 @@ export function remapBfuxAnchorPlacements(
   previous: BfuxAnchorGridSpec,
   next: BfuxAnchorGridSpec,
 ) {
-  return placements.map((placement) => {
-    const x = bfuxGridAxisFraction(placement.column, previous.columns);
-    const y = bfuxGridAxisFraction(placement.row, previous.rows);
-    const nextPlacement: BfuxNodeAnchorPlacement = {
-      ...placement,
-      column: next.columns <= 1 ? 0 : clampInteger(x * (next.columns - 1), 0, next.columns - 1),
-      row: next.rows <= 1 ? 0 : clampInteger(y * (next.rows - 1), 0, next.rows - 1),
-      columnSpan: bfuxGridRemapSpan(placement.columnSpan, previous.columns, next.columns),
-      rowSpan: bfuxGridRemapSpan(placement.rowSpan, previous.rows, next.rows),
-    };
-
-    if (nextPlacement.columnSpan != null) {
-      const span = bfuxGridSpan(nextPlacement.columnSpan);
-      if (nextPlacement.corner === "ne" || nextPlacement.corner === "se") {
-        nextPlacement.column = Math.max(nextPlacement.column, span);
-      } else {
-        nextPlacement.column = Math.min(nextPlacement.column, Math.max(0, next.columns - 1 - span));
-      }
-      nextPlacement.columnSpan = Math.min(span, Math.max(1, bfuxGridMaxColumnSpan(nextPlacement, next)));
-    }
-
-    if (nextPlacement.rowSpan != null) {
-      const span = bfuxGridSpan(nextPlacement.rowSpan);
-      if (nextPlacement.corner === "sw" || nextPlacement.corner === "se") {
-        nextPlacement.row = Math.max(nextPlacement.row, span);
-      } else {
-        nextPlacement.row = Math.min(nextPlacement.row, Math.max(0, next.rows - 1 - span));
-      }
-      nextPlacement.rowSpan = Math.min(span, Math.max(1, bfuxGridMaxRowSpan(nextPlacement, next)));
-    }
-
-    return nextPlacement;
-  });
+  return placements.map((placement) => ({
+    ...placement,
+    column: bfuxGridRemapCoordinate(placement.column, previous.columns, next.columns),
+    row: bfuxGridRemapCoordinate(placement.row, previous.rows, next.rows),
+    columnSpan: placement.columnSpan == null
+      ? undefined
+      : Math.min(
+          bfuxGridRemapSpan(placement.columnSpan, previous.columns, next.columns) ?? 1,
+          bfuxGridMaxColumnSpan(placement, next),
+        ),
+    rowSpan: placement.rowSpan == null
+      ? undefined
+      : Math.min(
+          bfuxGridRemapSpan(placement.rowSpan, previous.rows, next.rows) ?? 1,
+          bfuxGridMaxRowSpan(placement, next),
+        ),
+  }));
 }
 
 export function BfuxAnchorGridPicker({
@@ -292,7 +282,7 @@ export function BfuxAnchorGridPicker({
 
         <div className="bfux-anchor-grid-picker__explain">
           <span><b>↖ ↗ ↙ ↘</b> a corner hangs from a point; width + height occupy whole grid tracks.</span>
-          <span>Dropped cards therefore share the same location and size grammar instead of mixing grid anchors with unrelated CSS dimensions.</span>
+          <span>The chosen grid describes the apparatus itself; that same pitch repeats through the pan margins.</span>
         </div>
 
         <div className="bfux-anchor-grid-picker__selection">
@@ -334,6 +324,7 @@ export function BfuxAnchorGridLayer({
   const [workfield, setWorkfield] = useState<HTMLDivElement | null>(null);
   const [drag, setDrag] = useState<DragState | null>(null);
   const [candidate, setCandidate] = useState<SnapCandidate | null>(null);
+  const [, setGeometryRevision] = useState(0);
   const dragRef = useRef<DragState | null>(null);
 
   useEffect(() => {
@@ -374,19 +365,38 @@ export function BfuxAnchorGridLayer({
 
       const placements = state.placements.map((placement) => {
         if (placement.nodeId !== detail.nodeId) return placement;
-        if (detail.axis === "column") {
-          const max = bfuxGridMaxColumnSpan(placement, state.spec);
-          return { ...placement, columnSpan: clampInteger(bfuxGridSpan(placement.columnSpan) + delta, 1, Math.max(1, max)) };
-        }
-        const max = bfuxGridMaxRowSpan(placement, state.spec);
-        return { ...placement, rowSpan: clampInteger(bfuxGridSpan(placement.rowSpan) + delta, 1, Math.max(1, max)) };
+        const next = detail.axis === "column"
+          ? {
+              ...placement,
+              columnSpan: clampInteger(
+                bfuxGridSpan(placement.columnSpan) + delta,
+                1,
+                bfuxGridMaxColumnSpan(placement, state.spec),
+              ),
+            }
+          : {
+              ...placement,
+              rowSpan: clampInteger(
+                bfuxGridSpan(placement.rowSpan) + delta,
+                1,
+                bfuxGridMaxRowSpan(placement, state.spec),
+              ),
+            };
+
+        if (!apparatus) return next;
+        const geometry = bfuxGridPlacementGeometry(apparatus, state.spec, next);
+        return {
+          ...next,
+          columnSpan: geometry.columnSpan,
+          rowSpan: geometry.rowSpan,
+        };
       });
       onPlacementsChange(placements);
     };
 
     window.addEventListener(spanAdjustEvent, adjust);
     return () => window.removeEventListener(spanAdjustEvent, adjust);
-  }, [onPlacementsChange, state]);
+  }, [apparatus, onPlacementsChange, state]);
 
   useEffect(() => {
     if (!apparatus || !workfield) return;
@@ -443,7 +453,10 @@ export function BfuxAnchorGridLayer({
 
     const scheduleApply = () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(applyPlacementStyles);
+      frame = requestAnimationFrame(() => {
+        applyPlacementStyles();
+        setGeometryRevision((current) => current + 1);
+      });
     };
 
     applyPlacementStyles();
@@ -510,13 +523,12 @@ export function BfuxAnchorGridLayer({
       const size = nodeLocalSize(node, workfield);
       const nodeRect = node.getBoundingClientRect();
       const existing = state.placements.find((placement) => placement.nodeId === nodeId);
-      const pitchX = bfuxGridPitch(workfield.offsetWidth, state.spec.columns);
-      const pitchY = bfuxGridPitch(workfield.offsetHeight, state.spec.rows);
+      const metrics = bfuxGridWorkfieldMetrics(apparatus, state.spec);
       const columnSpan = existing?.columnSpan == null
-        ? bfuxGridFitSpan(size.width, pitchX, Math.max(1, state.spec.columns - 1))
+        ? bfuxGridFitSpan(size.width, metrics.pitchX, bfuxGridMaxColumnSpan({ column: 0, corner: "nw" }, state.spec))
         : bfuxGridSpan(existing.columnSpan);
       const rowSpan = existing?.rowSpan == null
-        ? bfuxGridFitSpan(size.height, pitchY, Math.max(1, state.spec.rows - 1))
+        ? bfuxGridFitSpan(size.height, metrics.pitchY, bfuxGridMaxRowSpan({ row: 0, corner: "nw" }, state.spec))
         : bfuxGridSpan(existing.rowSpan);
       const grabRatioX = nodeRect.width > 0 ? clamp01((event.clientX - nodeRect.left) / nodeRect.width) : 0.5;
       const grabRatioY = nodeRect.height > 0 ? clamp01((event.clientY - nodeRect.top) / nodeRect.height) : 0.5;
@@ -543,7 +555,7 @@ export function BfuxAnchorGridLayer({
       event.preventDefault();
       event.stopPropagation();
       event.dataTransfer.dropEffect = "move";
-      setCandidate(candidateForPointer(workfield, event, state.spec, activeDrag));
+      setCandidate(candidateForPointer(apparatus, workfield, event, state.spec, activeDrag));
     };
 
     const drop = (event: DragEvent) => {
@@ -552,7 +564,7 @@ export function BfuxAnchorGridLayer({
       if (!pointerInsideWorkfield(workfield, event)) return;
       event.preventDefault();
       event.stopPropagation();
-      const next = candidateForPointer(workfield, event, state.spec, activeDrag);
+      const next = candidateForPointer(apparatus, workfield, event, state.spec, activeDrag);
       if (next) {
         onPlacementsChange([
           ...state.placements.filter((placement) => placement.nodeId !== activeDrag.nodeId),
@@ -602,17 +614,23 @@ export function BfuxAnchorGridLayer({
     };
   }, [apparatus, onPlacementsChange, onSelectedNodeChange, state.placements, state.spec, workfield]);
 
-  const points = useMemo(() => {
-    const next: Array<{ column: number; row: number; x: number; y: number }> = [];
-    for (let row = 0; row < state.spec.rows; row += 1) {
-      for (let column = 0; column < state.spec.columns; column += 1) {
-        next.push({ column, row, x: bfuxGridAxisFraction(column, state.spec.columns), y: bfuxGridAxisFraction(row, state.spec.rows) });
-      }
-    }
-    return next;
-  }, [state.spec.columns, state.spec.rows]);
-
   if (!apparatus) return null;
+
+  const metrics = bfuxGridWorkfieldMetrics(apparatus, state.spec);
+  const columns = Array.from(
+    { length: Math.max(0, metrics.maxColumn - metrics.minColumn + 1) },
+    (_, index) => metrics.minColumn + index,
+  );
+  const rows = Array.from(
+    { length: Math.max(0, metrics.maxRow - metrics.minRow + 1) },
+    (_, index) => metrics.minRow + index,
+  );
+  const points = rows.flatMap((row) => columns.map((column) => ({
+    column,
+    row,
+    x: bfuxGridCoordinate(column, metrics.apparatusWidth, state.spec.columns) - metrics.left,
+    y: bfuxGridCoordinate(row, metrics.apparatusHeight, state.spec.rows) - metrics.top,
+  })));
 
   const ghostStyle = candidate ? {
     left: `${candidate.x}px`,
@@ -637,18 +655,18 @@ export function BfuxAnchorGridLayer({
       style={workfieldStyle}
       aria-hidden="true"
     >
-      {Array.from({ length: state.spec.columns }, (_, column) => (
+      {columns.map((column) => (
         <span
           key={`column:${column}`}
           data-axis="column"
-          style={{ left: `${bfuxGridAxisFraction(column, state.spec.columns) * 100}%` }}
+          style={{ left: `${bfuxGridCoordinate(column, metrics.apparatusWidth, state.spec.columns) - metrics.left}px` }}
         />
       ))}
-      {Array.from({ length: state.spec.rows }, (_, row) => (
+      {rows.map((row) => (
         <span
           key={`row:${row}`}
           data-axis="row"
-          style={{ top: `${bfuxGridAxisFraction(row, state.spec.rows) * 100}%` }}
+          style={{ top: `${bfuxGridCoordinate(row, metrics.apparatusHeight, state.spec.rows) - metrics.top}px` }}
         />
       ))}
       {points.map((point) => {
@@ -657,14 +675,14 @@ export function BfuxAnchorGridLayer({
           <i
             key={`${point.column}:${point.row}`}
             data-active={active ? "true" : undefined}
-            style={{ left: `${point.x * 100}%`, top: `${point.y * 100}%` }}
+            style={{ left: `${point.x}px`, top: `${point.y}px` }}
           />
         );
       })}
       {candidate && drag ? (
         <div className="bfux-anchor-grid-ghost" style={ghostStyle} data-corner={candidate.corner}>
           <span>{drag.nodeId}</span>
-          <b>{candidate.corner.toUpperCase()} · {candidate.column + 1},{candidate.row + 1} · {candidate.columnSpan}×{candidate.rowSpan}</b>
+          <b>{candidate.corner.toUpperCase()} · C{candidate.column} R{candidate.row} · {candidate.columnSpan}×{candidate.rowSpan}</b>
         </div>
       ) : null}
     </div>,
