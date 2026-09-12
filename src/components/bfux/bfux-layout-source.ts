@@ -1,5 +1,7 @@
+import type { BfuxGridCorner } from "./bfux-grid-geometry";
+
 export type BfuxLayoutResolution = "focus" | "mid";
-export type BfuxLayoutCorner = "nw" | "ne" | "sw" | "se";
+export type BfuxLayoutCorner = BfuxGridCorner;
 
 export type BfuxBillboardLayout = {
   width: number;
@@ -27,6 +29,10 @@ export type BfuxLayoutNodePlacement = {
   column: number;
   row: number;
   corner: BfuxLayoutCorner;
+  /** Horizontal grid-track span. Absent means legacy/intrinsic sizing. */
+  columnSpan?: number;
+  /** Vertical grid-track span. Absent means legacy/intrinsic sizing. */
+  rowSpan?: number;
 };
 
 export type BfuxLayoutPartPlacement = {
