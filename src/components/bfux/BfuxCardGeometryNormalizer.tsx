@@ -7,6 +7,8 @@ const desktopQuery = "(min-width: 1025px)";
 const machineSelector = '.bf-machine[data-skin="physical"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
+const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
+const fixedPitchMigrationKey = "bfl_bfux_anchor_grid_30px_migrated_v1";
 export const bfuxCardSizeQuantumPx = 60;
 
 function roundUpToQuantum(value: number, quantum = bfuxCardSizeQuantumPx) {
@@ -55,6 +57,22 @@ function applyCanonicalSizes(apparatus: HTMLElement) {
   }
 }
 
+function migrateLegacyEditorGridState() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("bfux") !== "edit") return;
+
+  try {
+    if (window.localStorage.getItem(fixedPitchMigrationKey) === "1") return;
+    /* Old placements encoded column/row against a stretched apparatus grid.
+     * Those coordinates do not mean the same thing on the new fixed 30px ruler,
+     * so carrying them forward would manufacture apparent placement bugs. */
+    window.localStorage.removeItem(legacyGridStorageKey);
+    window.localStorage.setItem(fixedPitchMigrationKey, "1");
+  } catch {
+    // Storage is optional; the editor still hydrates from authored source.
+  }
+}
+
 /**
  * Canonical desktop geometry bridge.
  *
@@ -69,6 +87,8 @@ function applyCanonicalSizes(apparatus: HTMLElement) {
  */
 export function BfuxCardGeometryNormalizer() {
   useEffect(() => {
+    migrateLegacyEditorGridState();
+
     const desktop = window.matchMedia(desktopQuery);
     let frame = 0;
     let activeApparatus: HTMLElement | null = null;
