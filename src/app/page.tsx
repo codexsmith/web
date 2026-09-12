@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { permanentRedirect } from "next/navigation";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { parseProjection } from "@/lib/view-projection";
+import { BfuxCardGeometryNormalizer } from "@/components/bfux/BfuxCardGeometryNormalizer";
 import { BfuxLayoutStudio } from "@/components/bfux/BfuxLayoutStudio";
 import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
@@ -75,6 +76,7 @@ export default async function HomePage({ searchParams }: Props) {
       <MobileCapitalProjectionControls />
       <MobileMachineNonCrossingPipeLayer />
       <RepresentationLabBillboardCardMount />
+      <BfuxCardGeometryNormalizer />
       <BfuxLayoutStudio />
       <LabMachineWorld
         section={section}
