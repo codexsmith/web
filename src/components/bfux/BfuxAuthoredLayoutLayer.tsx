@@ -12,6 +12,8 @@ const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const billboardSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
 const layoutTuningEvent = "bfux-layout-tuning";
+const traceViewBoxWidth = 1200;
+const traceViewBoxHeight = 760;
 
 function currentResolution(host: HTMLElement): BfuxLayoutResolution {
   const machine = host.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
@@ -122,6 +124,10 @@ export function BfuxAuthoredLayoutLayer() {
 
     const placementByNode = new Map(layout.anchorGrid.placements.map((placement) => [placement.nodeId, placement]));
     const nodes = Array.from(apparatus.querySelectorAll<HTMLElement>(nodeSelector));
+    const geometryFor = (nodeId: string) => {
+      const placement = placementByNode.get(nodeId);
+      return placement ? bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, placement) : null;
+    };
 
     for (const node of nodes) {
       const nodeId = node.dataset.nodeId ?? "";
@@ -158,9 +164,7 @@ export function BfuxAuthoredLayoutLayer() {
     const researchPlacement = placementByNode.get("research");
     const pipelinePlacement = placementByNode.get("pipeline");
     const governancePlacement = placementByNode.get("governance");
-    const researchGeometry = researchPlacement
-      ? bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, researchPlacement)
-      : null;
+    const researchGeometry = geometryFor("research");
 
     if (resolution === "mid" && lowerDeck && researchGeometry && pipelinePlacement) {
       const pipelineGeometry = bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, pipelinePlacement);
@@ -176,19 +180,88 @@ export function BfuxAuthoredLayoutLayer() {
     /* Research and Governance use paired physical sockets. Derive the purple
      * lead from the same authored rectangles as the cards: its horizontal run
      * ends directly above Governance's top socket, and its vertical position
-     * stacks the two sockets without a floating gap. */
+     * stacks the two sockets without a floating gap. The final 3px trim matches
+     * the painted socket edges rather than their border boxes. */
     if (resolution === "mid" && researchNode && researchGeometry && governancePlacement) {
       const governanceGeometry = bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, governancePlacement);
       const governanceRun = governanceGeometry.left - (researchGeometry.left + researchGeometry.width);
       const governanceTopOffset = governanceGeometry.top - researchGeometry.top;
       researchNode.style.setProperty(
         "--bfux-research-governance-run",
-        `calc(${governanceRun}px + calc(var(--machine-u) * .35))`,
+        `calc(${governanceRun}px + calc(var(--machine-u) * .35) + 3px)`,
       );
       researchNode.style.setProperty(
         "--bfux-research-governance-top",
         `calc(${governanceTopOffset}px - var(--lower-dock-height) - var(--lower-dock-height))`,
       );
+    }
+
+    /* Full's upper pipes are part of the authored apparatus too. The SVG keeps
+     * its stable 1200x760 drawing space, but each route is projected from the
+     * same live card rectangles used above. That keeps People/Product/Publications
+     * mechanically attached to Research as the cards move in Layout Studio. */
+    const traceLayer = apparatus.querySelector<SVGSVGElement>(".bf-machine__traces");
+    if (resolution === "mid" && traceLayer && researchGeometry) {
+      const peopleGeometry = geometryFor("people");
+      const productsGeometry = geometryFor("products");
+      const publicationsGeometry = geometryFor("publications");
+      const apparatusWidth = Math.max(1, apparatus.offsetWidth);
+      const apparatusHeight = Math.max(1, apparatus.offsetHeight);
+      const overlap = 2;
+      const sx = (value: number) => value / apparatusWidth * traceViewBoxWidth;
+      const sy = (value: number) => value / apparatusHeight * traceViewBoxHeight;
+      const n = (value: number) => Math.round(value * 100) / 100;
+      const setCablePath = (selector: string, d: string, tone?: string) => {
+        const cable = traceLayer.querySelector<SVGGElement>(selector);
+        if (!cable) return;
+        if (tone) cable.setAttribute("data-tone", tone);
+        cable.querySelectorAll<SVGPathElement>("path").forEach((path) => path.setAttribute("d", d));
+      };
+
+      if (peopleGeometry) {
+        const x = sx(peopleGeometry.left + peopleGeometry.width * .5);
+        const fromY = sy(peopleGeometry.top + peopleGeometry.height - overlap);
+        const toY = sy(researchGeometry.top + overlap);
+        setCablePath(
+          '.bf-machine__cable[data-from="people"][data-to="research"]',
+          `M${n(x)} ${n(fromY)} V${n(toY)}`,
+          "blue",
+        );
+      }
+
+      if (productsGeometry) {
+        const x = sx(productsGeometry.left + productsGeometry.width * .5);
+        const fromY = sy(researchGeometry.top + overlap);
+        const toY = sy(productsGeometry.top + productsGeometry.height - overlap);
+        setCablePath(
+          '.bf-machine__cable[data-from="research"][data-to="products"]',
+          `M${n(x)} ${n(fromY)} V${n(toY)}`,
+        );
+      }
+
+      if (publicationsGeometry) {
+        const fromX = sx(researchGeometry.left + researchGeometry.width - overlap);
+        const fromY = sy(researchGeometry.top + researchGeometry.height * .23);
+        const toX = sx(publicationsGeometry.left + publicationsGeometry.width * .5);
+        const toY = sy(publicationsGeometry.top + publicationsGeometry.height - overlap);
+        setCablePath(
+          '.bf-machine__cable[data-from="research"][data-to="publications"]',
+          `M${n(fromX)} ${n(fromY)} H${n(toX)} V${n(toY)}`,
+        );
+      }
+
+      if (productsGeometry && publicationsGeometry) {
+        const fromX = sx(productsGeometry.left + productsGeometry.width - overlap);
+        const toX = sx(publicationsGeometry.left + overlap);
+        const y = sy((
+          productsGeometry.top + productsGeometry.height * .5
+          + publicationsGeometry.top + publicationsGeometry.height * .5
+        ) / 2);
+        setCablePath(
+          ".bf-machine__cable--product-publication",
+          `M${n(fromX)} ${n(y)} H${n(toX)}`,
+        );
+      }
     }
 
     apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
