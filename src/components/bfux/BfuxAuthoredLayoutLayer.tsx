@@ -154,10 +154,15 @@ export function BfuxAuthoredLayoutLayer() {
      * the authored Research and Pipeline placements so it follows both the
      * Research envelope and the compact process-card row. */
     const lowerDeck = apparatus.querySelector<HTMLElement>(".bf-machine__lower-deck");
+    const researchNode = nodes.find((node) => node.dataset.nodeId === "research");
     const researchPlacement = placementByNode.get("research");
     const pipelinePlacement = placementByNode.get("pipeline");
-    if (resolution === "mid" && lowerDeck && researchPlacement && pipelinePlacement) {
-      const researchGeometry = bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, researchPlacement);
+    const governancePlacement = placementByNode.get("governance");
+    const researchGeometry = researchPlacement
+      ? bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, researchPlacement)
+      : null;
+
+    if (resolution === "mid" && lowerDeck && researchGeometry && pipelinePlacement) {
       const pipelineGeometry = bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, pipelinePlacement);
       apparatus.style.setProperty("--lower-deck-left", `${researchGeometry.left}px`);
       apparatus.style.setProperty(
@@ -166,6 +171,24 @@ export function BfuxAuthoredLayoutLayer() {
       );
       apparatus.style.setProperty("--lower-deck-width", `${researchGeometry.width}px`);
       lowerDeck.style.height = `calc(${pipelineGeometry.height}px + var(--compact-card-inset))`;
+    }
+
+    /* Research and Governance use paired physical sockets. Derive the purple
+     * lead from the same authored rectangles as the cards: its horizontal run
+     * ends directly above Governance's top socket, and its vertical position
+     * stacks the two sockets without a floating gap. */
+    if (resolution === "mid" && researchNode && researchGeometry && governancePlacement) {
+      const governanceGeometry = bfuxGridPlacementGeometry(apparatus, layout.anchorGrid.spec, governancePlacement);
+      const governanceRun = governanceGeometry.left - (researchGeometry.left + researchGeometry.width);
+      const governanceTopOffset = governanceGeometry.top - researchGeometry.top;
+      researchNode.style.setProperty(
+        "--bfux-research-governance-run",
+        `calc(${governanceRun}px + calc(var(--machine-u) * .35))`,
+      );
+      researchNode.style.setProperty(
+        "--bfux-research-governance-top",
+        `calc(${governanceTopOffset}px - var(--lower-dock-height) - var(--lower-dock-height))`,
+      );
     }
 
     apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
@@ -184,6 +207,10 @@ export function BfuxAuthoredLayoutLayer() {
         node.style.removeProperty("--bfux-node-grid-height");
       }
       if (lowerDeck) lowerDeck.style.removeProperty("height");
+      if (researchNode) {
+        researchNode.style.removeProperty("--bfux-research-governance-run");
+        researchNode.style.removeProperty("--bfux-research-governance-top");
+      }
       apparatus.style.removeProperty("--lower-deck-left");
       apparatus.style.removeProperty("--lower-deck-top");
       apparatus.style.removeProperty("--lower-deck-width");

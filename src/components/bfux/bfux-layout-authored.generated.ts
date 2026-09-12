@@ -126,7 +126,7 @@ export const bfuxAuthoredLayout = {
         {
           "nodeId": "about",
           "column": 4.17,
-          "row": 3.1,
+          "row": 3.065,
           "corner": "ne",
           "columnSpan": 3.5,
           "rowSpan": 1.57
@@ -149,26 +149,26 @@ export const bfuxAuthoredLayout = {
         },
         {
           "nodeId": "pipeline",
-          "column": 4.89,
+          "column": 4.7,
           "row": 5.15,
           "corner": "nw",
-          "columnSpan": 1.94,
+          "columnSpan": 2.12,
           "rowSpan": 0.96
         },
         {
           "nodeId": "method",
-          "column": 6.83,
+          "column": 6.82,
           "row": 5.15,
           "corner": "nw",
-          "columnSpan": 2.04,
+          "columnSpan": 2.12,
           "rowSpan": 0.96
         },
         {
           "nodeId": "timeline",
-          "column": 8.87,
+          "column": 8.94,
           "row": 5.15,
           "corner": "nw",
-          "columnSpan": 2.07,
+          "columnSpan": 2.12,
           "rowSpan": 0.96
         }
       ]

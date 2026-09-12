@@ -28,6 +28,24 @@
   min-height: 0 !important;
 }
 
+/* Full's Research/Governance lead is authored hardware. Its runtime variables
+ * are derived from the same card rectangles as the BFUX grid, so the paired
+ * sockets stay attached when the cards are tuned in Layout Studio. */
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  [data-machine-layer="apparatus"]
+  .bf-machine-node[data-node-id="research"][data-bfux-authored-grid-placed="true"]
+  > .bf-machine-node__research-governance-dock {
+  left: calc(100% + var(--bfux-research-governance-run, calc(var(--machine-u) * 1.8))) !important;
+  top: var(--bfux-research-governance-top, 69.5%) !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  [data-machine-layer="apparatus"]
+  .bf-machine-node[data-node-id="research"][data-bfux-authored-grid-placed="true"]
+  > .bf-machine-node__research-governance-dock::before {
+  width: var(--bfux-research-governance-run, calc(var(--machine-u) * 1.8)) !important;
+}
+
 .bfux-authored-parts-layer {
   position: absolute;
   inset: 0;
