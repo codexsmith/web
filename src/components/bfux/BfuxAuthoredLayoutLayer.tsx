@@ -150,9 +150,9 @@ export function BfuxAuthoredLayoutLayer() {
     }
 
     /* The Full process chassis is existing Lab Machine hardware, not a separate
-     * authored card. Keep that bus bay on the same geometry contract as the
-     * authored Research and Pipeline placements so the physical connector bay
-     * cannot drift back to its legacy percentage-based composition. */
+     * authored card. Keep the entire bus bay on the same geometry contract as
+     * the authored Research and Pipeline placements so it follows both the
+     * Research envelope and the compact process-card row. */
     const lowerDeck = apparatus.querySelector<HTMLElement>(".bf-machine__lower-deck");
     const researchPlacement = placementByNode.get("research");
     const pipelinePlacement = placementByNode.get("pipeline");
@@ -165,6 +165,7 @@ export function BfuxAuthoredLayoutLayer() {
         `calc(${pipelineGeometry.top}px - var(--compact-card-inset))`,
       );
       apparatus.style.setProperty("--lower-deck-width", `${researchGeometry.width}px`);
+      lowerDeck.style.height = `calc(${pipelineGeometry.height}px + var(--compact-card-inset))`;
     }
 
     apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
@@ -182,6 +183,7 @@ export function BfuxAuthoredLayoutLayer() {
         node.style.removeProperty("--bfux-node-grid-width");
         node.style.removeProperty("--bfux-node-grid-height");
       }
+      if (lowerDeck) lowerDeck.style.removeProperty("height");
       apparatus.style.removeProperty("--lower-deck-left");
       apparatus.style.removeProperty("--lower-deck-top");
       apparatus.style.removeProperty("--lower-deck-width");

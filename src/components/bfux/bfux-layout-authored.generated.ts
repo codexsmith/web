@@ -101,75 +101,75 @@ export const bfuxAuthoredLayout = {
       "placements": [
         {
           "nodeId": "people",
-          "column": 8,
+          "column": 8.35,
           "row": 1,
           "corner": "ne",
-          "columnSpan": 4,
-          "rowSpan": 1.75
+          "columnSpan": 3.79,
+          "rowSpan": 1.67
         },
         {
           "nodeId": "products",
-          "column": 12,
-          "row": 2.75,
+          "column": 12.08,
+          "row": 2.67,
           "corner": "se",
-          "columnSpan": 3.75,
-          "rowSpan": 1.75
+          "columnSpan": 3.54,
+          "rowSpan": 1.67
         },
         {
           "nodeId": "publications",
-          "column": 12.37,
+          "column": 12.4,
           "row": 1,
           "corner": "nw",
-          "columnSpan": 3.92,
-          "rowSpan": 1.75
+          "columnSpan": 3.76,
+          "rowSpan": 1.67
         },
         {
           "nodeId": "about",
-          "column": 3.6,
-          "row": 3.2,
+          "column": 4.17,
+          "row": 3.1,
           "corner": "ne",
-          "columnSpan": 3.6,
-          "rowSpan": 1.75
+          "columnSpan": 3.5,
+          "rowSpan": 1.57
         },
         {
           "nodeId": "research",
-          "column": 4,
-          "row": 2.9,
+          "column": 4.5,
+          "row": 2.8,
           "corner": "nw",
-          "columnSpan": 7.25,
-          "rowSpan": 2.25
+          "columnSpan": 6.75,
+          "rowSpan": 2.1
         },
         {
           "nodeId": "governance",
-          "column": 11.33,
-          "row": 4.97,
+          "column": 11.36,
+          "row": 4.7,
           "corner": "nw",
-          "columnSpan": 3.68,
-          "rowSpan": 1.7
+          "columnSpan": 3.47,
+          "rowSpan": 1.61
         },
         {
           "nodeId": "pipeline",
-          "column": 4.375,
-          "row": 5.37,
+          "column": 4.89,
+          "row": 5.15,
           "corner": "nw",
-          "columnSpan": 2,
-          "rowSpan": 1
+          "columnSpan": 1.94,
+          "rowSpan": 0.96
         },
         {
           "nodeId": "method",
-          "column": 6.375,
-          "row": 5.37,
+          "column": 6.83,
+          "row": 5.15,
           "corner": "nw",
-          "columnSpan": 2.25,
-          "rowSpan": 1
+          "columnSpan": 2.04,
+          "rowSpan": 0.96
         },
         {
           "nodeId": "timeline",
-          "column": 8.625,
-          "row": 5.37,
+          "column": 8.87,
+          "row": 5.15,
           "corner": "nw",
-          "columnSpan": 2.25,
-          "rowSpan": 1
+          "columnSpan": 2.07,
+          "rowSpan": 0.96
         }
       ]
     },
