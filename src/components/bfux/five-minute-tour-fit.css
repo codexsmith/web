@@ -71,6 +71,7 @@
   font-size: 0 !important;
   line-height: 1 !important;
   text-overflow: clip;
+  text-shadow: none !important;
   white-space: nowrap;
 }
 
@@ -161,6 +162,23 @@
     width: max(34.7%, 24rem) !important;
     height: max(39%, 14.25rem) !important;
     transform-origin: right bottom !important;
+  }
+
+  /* In Full, compact Tour is attached hardware rather than an independently
+   * normalized card. Its outside width is exactly About's width and its shallow
+   * 76% height preserves the reference launcher/About proportion. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-tour-card[data-node-id="tour"][data-expanded="false"] {
+    left: 0 !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: calc(100% + .45vw) !important;
+    width: 100% !important;
+    height: 76% !important;
+    transform-origin: left bottom !important;
   }
 
   /* Full Loop nests Tour above About. Its lower-right edge stays on the About
