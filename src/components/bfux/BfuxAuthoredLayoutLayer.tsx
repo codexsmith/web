@@ -8,16 +8,13 @@ import type { BfuxBillboardLayout, BfuxLayoutCorner, BfuxLayoutResolution } from
 import "./bfux-authored-layout.css";
 
 const machineSelector = '.bf-machine[data-skin="physical"]';
-const workfieldSelector = '[data-machine-layer="pan-surface"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const billboardSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
 const layoutTuningEvent = "bfux-layout-tuning";
-
-type LayoutHosts = {
-  workfield: HTMLElement;
-  apparatus: HTMLElement;
-};
+const desktopProjectionQuery = "(min-width: 1025px)";
+const workfieldPanX = 700;
+const workfieldPanY = 260;
 
 function currentResolution(host: HTMLElement): BfuxLayoutResolution {
   const machine = host.closest<HTMLElement>(machineSelector);
@@ -35,15 +32,7 @@ function cornerTranslation(corner: BfuxLayoutCorner) {
   };
 }
 
-function elementScale(element: HTMLElement) {
-  const rect = element.getBoundingClientRect();
-  const scaleX = element.offsetWidth > 0 ? rect.width / element.offsetWidth : 1;
-  const scaleY = element.offsetHeight > 0 ? rect.height / element.offsetHeight : scaleX;
-  return { rect, scaleX: scaleX || 1, scaleY: scaleY || 1 };
-}
-
 function anchorPositionInApparatus(
-  workfield: HTMLElement,
   apparatus: HTMLElement,
   column: number,
   row: number,
@@ -52,21 +41,20 @@ function anchorPositionInApparatus(
 ) {
   const xFraction = axisFraction(column, columns);
   const yFraction = axisFraction(row, rows);
-  const workfieldRect = workfield.getBoundingClientRect();
 
-  /* Mobile hides the desktop workfield entirely. Keep the old apparatus-local
-   * percentage interpretation there; desktop authored layouts use the full
-   * workfield and are converted back into apparatus-local pixels. */
-  if (!workfieldRect.width || !workfieldRect.height) {
+  /* Mobile remains a document rack rather than a pannable drafting field. */
+  if (!window.matchMedia(desktopProjectionQuery).matches) {
     return { x: `${xFraction * 100}%`, y: `${yFraction * 100}%` };
   }
 
-  const apparatusScale = elementScale(apparatus);
-  const clientX = workfieldRect.left + xFraction * workfieldRect.width;
-  const clientY = workfieldRect.top + yFraction * workfieldRect.height;
+  /* The editor's lattice is an apparatus child expanded by the full pan
+   * envelope. Reconstruct that exact local coordinate plane at runtime so the
+   * generated source is WYSIWYG rather than an editor-only approximation. */
+  const width = apparatus.offsetWidth;
+  const height = apparatus.offsetHeight;
   return {
-    x: `${(clientX - apparatusScale.rect.left) / apparatusScale.scaleX}px`,
-    y: `${(clientY - apparatusScale.rect.top) / apparatusScale.scaleY}px`,
+    x: `${-workfieldPanX + xFraction * (width + workfieldPanX * 2)}px`,
+    y: `${-workfieldPanY + yFraction * (height + workfieldPanY * 2)}px`,
   };
 }
 
@@ -116,7 +104,7 @@ function partSize(kind: BfuxPartKind) {
 }
 
 export function BfuxAuthoredLayoutLayer() {
-  const [hosts, setHosts] = useState<LayoutHosts | null>(null);
+  const [apparatus, setApparatus] = useState<HTMLElement | null>(null);
   const [resolution, setResolution] = useState<BfuxLayoutResolution>("focus");
   const [revision, setRevision] = useState(0);
 
@@ -124,14 +112,9 @@ export function BfuxAuthoredLayoutLayer() {
     let frame = 0;
     const find = () => {
       const machine = document.querySelector<HTMLElement>(machineSelector);
-      const workfield = machine?.querySelector<HTMLElement>(workfieldSelector) ?? null;
-      const apparatus = machine?.querySelector<HTMLElement>(apparatusSelector) ?? null;
-      setHosts((current) => {
-        if (!workfield || !apparatus) return current === null ? current : null;
-        if (current?.workfield === workfield && current.apparatus === apparatus) return current;
-        return { workfield, apparatus };
-      });
-      if (apparatus) setResolution(currentResolution(apparatus));
+      const next = machine?.querySelector<HTMLElement>(apparatusSelector) ?? null;
+      setApparatus((current) => current === next ? current : next);
+      if (next) setResolution(currentResolution(next));
       setRevision((current) => current + 1);
     };
     const schedule = () => {
@@ -154,21 +137,19 @@ export function BfuxAuthoredLayoutLayer() {
   }, []);
 
   useEffect(() => {
-    if (!hosts) return;
+    if (!apparatus) return;
     const bump = () => setRevision((current) => current + 1);
     const resizeObserver = new ResizeObserver(bump);
-    resizeObserver.observe(hosts.workfield);
-    resizeObserver.observe(hosts.apparatus);
+    resizeObserver.observe(apparatus);
     window.addEventListener("resize", bump);
     return () => {
       resizeObserver.disconnect();
       window.removeEventListener("resize", bump);
     };
-  }, [hosts]);
+  }, [apparatus]);
 
   useEffect(() => {
-    if (!hosts) return;
-    const { workfield, apparatus } = hosts;
+    if (!apparatus) return;
     const layout = bfuxAuthoredLayout[resolution];
     const billboard = apparatus.querySelector<HTMLElement>(billboardSelector);
     if (billboard) applyBillboardValues(billboard, layout.billboard);
@@ -182,7 +163,6 @@ export function BfuxAuthoredLayoutLayer() {
       if (!placement) continue;
 
       const anchor = anchorPositionInApparatus(
-        workfield,
         apparatus,
         placement.column,
         placement.row,
@@ -217,10 +197,9 @@ export function BfuxAuthoredLayoutLayer() {
       }
       apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
     };
-  }, [hosts, resolution, revision]);
+  }, [apparatus, resolution, revision]);
 
-  if (!hosts) return null;
-  const { apparatus } = hosts;
+  if (!apparatus) return null;
   const layout = bfuxAuthoredLayout[resolution];
 
   return createPortal(
