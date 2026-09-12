@@ -2,21 +2,21 @@
 import type { BfuxMachineLayoutSource } from "./bfux-layout-source";
 
 export const bfuxAuthoredLayout = {
-  "schema": "bfux.machine-layout/v1",
-  "focus": {
-    "billboard": {
-      "width": 35,
-      "height": null,
-      "gapY": 0,
-      "visualWidth": 44,
-      "mazeScale": 1,
-      "mazeLeft": -18,
-      "visualPadX": 0.56,
-      "visualPadY": 0.42,
-      "copyPadX": 0.72,
-      "copyPadY": 0.56,
-      "titleScale": 1.38,
-      "controlsHeight": 2.2
+  schema: "bfux.machine-layout/v1",
+  focus: {
+    billboard: {
+      width: 35,
+      height: null,
+      gapY: 0,
+      visualWidth: 40,
+      mazeScale: 0.92,
+      mazeLeft: -14,
+      visualPadX: 0.5,
+      visualPadY: 0.36,
+      copyPadX: 0.62,
+      copyPadY: 0.48,
+      titleScale: 1.6,
+      controlsHeight: 2.5
     },
     "anchorGrid": {
       "spec": {
@@ -77,20 +77,20 @@ export const bfuxAuthoredLayout = {
     },
     "placedParts": []
   },
-  "mid": {
-    "billboard": {
-      "width": 35,
-      "height": null,
-      "gapY": 0,
-      "visualWidth": 44,
-      "mazeScale": 1,
-      "mazeLeft": -18,
-      "visualPadX": 0.56,
-      "visualPadY": 0.42,
-      "copyPadX": 0.72,
-      "copyPadY": 0.56,
-      "titleScale": 1.32,
-      "controlsHeight": 2.2
+  mid: {
+    billboard: {
+      width: 35,
+      height: null,
+      gapY: 0,
+      visualWidth: 40,
+      mazeScale: 0.92,
+      mazeLeft: -14,
+      visualPadX: 0.5,
+      visualPadY: 0.36,
+      copyPadX: 0.62,
+      copyPadY: 0.48,
+      titleScale: 1.55,
+      controlsHeight: 2.5
     },
     "anchorGrid": {
       "spec": {
