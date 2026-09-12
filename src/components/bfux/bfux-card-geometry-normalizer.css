@@ -69,5 +69,5 @@
   display: none;
 }
 .bfux-anchor-grid-picker__explain::before {
-  content: "The drafting ruler is 90px. People / Products / Publications are 180px tall (2 tracks); Research is 270px tall (3 tracks). Other card families retain the 60px normalization bridge until their grid-native sizes are chosen.";
+  content: "The drafting ruler is 90px. Representation Lab / People / Products / Publications are one upper-row chassis family at 180px tall (2 tracks); Research is 270px tall (3 tracks). Other card families retain the 60px normalization bridge until their grid-native sizes are chosen.";
 }
