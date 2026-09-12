@@ -1,6 +1,6 @@
 /* Edit-mode bridge from the legacy percentage composition into the modular
  * BFUX drafting grammar. Position remains where the authored composition put
- * the card; only its exterior size is quantized. Once a card is actually grid
+ * the card; only its exterior size is normalized. Once a card is actually grid
  * placed, the anchor-grid composition bridge takes over its envelope. */
 
 @media (min-width: 1025px) {
@@ -47,7 +47,7 @@
   font-size: 0 !important;
 }
 .bfux-anchor-grid-picker > summary > small::before {
-  content: "FIXED 30PX POINT LATTICE";
+  content: "FIXED 90PX POINT LATTICE";
   font-size: .52rem;
 }
 .bfux-anchor-grid-picker__body > header small,
@@ -59,7 +59,7 @@
   font-size: .48rem;
 }
 .bfux-anchor-grid-picker__body > header strong::before {
-  content: "30 PX";
+  content: "90 PX";
   font-size: .7rem;
 }
 .bfux-anchor-grid-picker__matrix {
@@ -69,5 +69,5 @@
   display: none;
 }
 .bfux-anchor-grid-picker__explain::before {
-  content: "Cards are rounded up to 60px width/height modules. Adjacent snap points are 30px apart, so every canonical card edge spans an even number of tracks.";
+  content: "The drafting ruler is 90px. People / Products / Publications are 180px tall (2 tracks); Research is 270px tall (3 tracks). Other card families retain the 60px normalization bridge until their grid-native sizes are chosen.";
 }
