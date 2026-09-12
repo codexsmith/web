@@ -51,13 +51,15 @@
   }
 
   /* Layout editing treats the whole compact card as one physical object. This
-   * prevents embedded SVGs, visualizers, links, and Tour internals from stealing
-   * the pointer/drag gesture from the root node. Expanded instruments retain
-   * their normal controls and are intentionally not draggable. */
+   * prevents embedded SVGs, visualizers, links, and card internals from stealing
+   * the pointer/drag gesture from the root node. A nested machine node (the Full
+   * Tour is the current example) is deliberately excluded here so it remains an
+   * independent draggable object rather than becoming inert with its parent. */
   html body .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"]
     .bf-machine__apparatus[data-bfux-grid-editing="true"]
-    .bf-machine-node[data-bfux-grid-editable="true"]:not([data-expanded="true"]) > * {
+    .bf-machine-node[data-bfux-grid-editable="true"]:not([data-expanded="true"])
+    > :not(.bf-machine-node[data-machine-layer="node"]) {
     pointer-events: none !important;
     user-select: none !important;
     -webkit-user-select: none !important;
