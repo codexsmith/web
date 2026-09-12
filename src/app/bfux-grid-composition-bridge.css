@@ -96,6 +96,25 @@
     transform: translate(var(--bfux-node-anchor-tx), var(--bfux-node-anchor-ty)) !important;
   }
 
+  /* A grid-owned node is a normal Lab Machine card first. Its ordinary face is
+   * always projected into the full root rectangle. Card variants may change the
+   * content inside that face, but they may not establish a second exterior box.
+   * This deliberately replaces the earlier billboard-only envelope workaround. */
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"]:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]):not([data-expanded="true"])
+    > .bf-machine-node__face {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+  }
+
   /* Layout editing treats the whole compact card as one physical object. This
    * prevents embedded SVGs, visualizers, links, and card internals from stealing
    * the pointer/drag gesture from the root node. A nested machine node (the Full
