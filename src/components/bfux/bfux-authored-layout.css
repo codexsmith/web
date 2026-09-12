@@ -78,6 +78,73 @@
   text-align: left;
 }
 
+/* Shared billboard copy treatment for both desktop projections. The billboard
+ * should read like mounted signage rather than another institutional card: its
+ * headline gets a deliberately asymmetric editorial hierarchy, while the lower
+ * PLAYGROUND / INTERACTIVE plaque stacks vertically so the CTA can never mask
+ * the second label in either Core or Full. Exterior card geometry is unchanged. */
+@media (min-width: 1025px) {
+  .bf-machine[data-skin="physical"]
+    [data-machine-layer="apparatus"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-weight: 600 !important;
+    letter-spacing: -.035em !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    [data-machine-layer="apparatus"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong > span:first-child {
+    margin-bottom: .08em;
+    color: #cab7e6;
+    font-size: .72em !important;
+    font-style: italic;
+    font-weight: 500;
+    letter-spacing: .02em;
+  }
+
+  .bf-machine[data-skin="physical"]
+    [data-machine-layer="apparatus"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong > span:last-child {
+    color: #f5f0e8;
+    font-size: 1.08em !important;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -.045em;
+  }
+
+  .bf-machine[data-skin="physical"]
+    [data-machine-layer="apparatus"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: min-content;
+    align-content: center !important;
+    justify-items: start;
+    gap: .08rem !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    [data-machine-layer="apparatus"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow > span,
+  .bf-machine[data-skin="physical"]
+    [data-machine-layer="apparatus"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow > small {
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    [data-machine-layer="apparatus"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow > small {
+    margin-left: 0 !important;
+    color: #8f9ba0;
+    font-size: .72em !important;
+    letter-spacing: .16em;
+  }
+}
+
 .bfux-authored-parts-layer {
   position: absolute;
   inset: 0;
