@@ -15,7 +15,7 @@ export type BfuxGridPlacementLike = {
 
 export const bfuxGridPanX = 700;
 export const bfuxGridPanY = 260;
-export const bfuxGridPitchPx = 60;
+export const bfuxGridPitchPx = 90;
 const bfuxGridMinimumSpan = 0.05;
 const bfuxGridMaxSpan = 128;
 
@@ -30,9 +30,9 @@ export function bfuxGridAxisFraction(index: number, count: number) {
 /* Layout Studio uses one physical drafting ruler. The old point-count picker
  * remains part of the serialized contract for backwards compatibility, but it
  * no longer stretches the lattice to fit the apparatus. Every adjacent point
- * is exactly 60 CSS pixels apart in apparatus-local coordinates. This matches
- * the canonical card-size quantum, so card edges and grid points share the same
- * physical module without the visual noise of the earlier 30px half-module. */
+ * is exactly 90 CSS pixels apart in apparatus-local coordinates. The coarser
+ * pitch keeps the drafting plane browser-friendly while card dimensions remain
+ * independent and geometry-preserving during drag/drop. */
 export function bfuxGridPitch(_size: number, _pointCount: number) {
   return bfuxGridPitchPx;
 }
@@ -72,7 +72,7 @@ export function bfuxGridFitSpan(size: number, pitch: number, maxSpan: number) {
   return stableSpan(Math.min(maxSpan, Math.max(bfuxGridMinimumSpan, size / pitch)));
 }
 
-/* The drafting plane is a 60px Cartesian lattice rooted at apparatus (0,0).
+/* The drafting plane is a 90px Cartesian lattice rooted at apparatus (0,0).
  * It repeats into the same pan envelope on every side, so the visual rails and
  * legal drop points share one stable physical ruler independent of viewport or
  * card composition. */
@@ -147,7 +147,7 @@ export function bfuxGridPlacementGeometry(
   };
 }
 
-/* Grid density is physical (60px), so legacy picker dimensions no longer
+/* Grid density is physical (90px), so legacy picker dimensions no longer
  * change coordinate meaning. Keep existing placements stable if that UI state
  * changes while we migrate the picker to the fixed-ruler model. */
 export function bfuxGridRemapCoordinate(index: number, _previousPoints: number, _nextPoints: number) {
