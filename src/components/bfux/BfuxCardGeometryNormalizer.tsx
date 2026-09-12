@@ -8,12 +8,20 @@ const machineSelector = '.bf-machine[data-skin="physical"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
-const fixedPitchMigrationKey = "bfl_bfux_anchor_grid_90px_migrated_v1";
+const fixedPitchMigrationKey = "bfl_bfux_anchor_grid_90px_stable_sizes_v2";
 export const bfuxCardSizeQuantumPx = 60;
+const measurementNoiseTolerancePx = 0.75;
 
 function roundUpToQuantum(value: number, quantum = bfuxCardSizeQuantumPx) {
   if (!Number.isFinite(value) || value <= 0) return quantum;
-  return Math.ceil(value / quantum) * quantum;
+
+  /* DOMRect values can land a fraction of a pixel above an exact module after
+   * apparatus scaling (360.0002, 420.0001, ...). A raw Math.ceil would then add
+   * another full 60px every time the normalizer observed the machine. Ignore a
+   * sub-pixel tolerance before rounding so normalization is mathematically
+   * idempotent. */
+  const stableValue = Math.max(0, value - measurementNoiseTolerancePx);
+  return Math.max(quantum, Math.ceil(stableValue / quantum) * quantum);
 }
 
 function measureLocalSize(node: HTMLElement, apparatus: HTMLElement) {
@@ -37,11 +45,21 @@ function clearCanonicalSizes(apparatus: HTMLElement) {
 }
 
 function applyCanonicalSizes(apparatus: HTMLElement) {
+  /* Normalization is a one-time migration for each card in the current
+   * apparatus/resolution. Grid portals and drag/drop mutate the DOM frequently;
+   * re-measuring already-normalized cards would feed their own rounded output
+   * back into the next measurement and can create runaway growth. Newly mounted
+   * cards are still discovered and normalized when they appear. */
   const nodes = Array.from(apparatus.querySelectorAll<HTMLElement>(nodeSelector))
-    .filter((node) => node.dataset.expanded !== "true");
+    .filter((node) => (
+      node.dataset.expanded !== "true"
+      && node.dataset.bfuxGridCanonicalSize !== "true"
+    ));
 
-  /* Measure every card before mutating any card. This is important for nested
-   * hardware such as Tour: resizing its parent must not change the source
+  if (nodes.length === 0) return;
+
+  /* Measure every new card before mutating any card. This is important for
+   * nested hardware such as Tour: resizing its parent must not change the source
    * measurement we are trying to quantize. */
   const measurements = nodes.map((node) => ({
     node,
@@ -57,15 +75,27 @@ function applyCanonicalSizes(apparatus: HTMLElement) {
   }
 }
 
+function mutationMayAddMachineCard(record: MutationRecord) {
+  if (record.type === "attributes") return record.attributeName === "data-resolution";
+  if (record.type !== "childList") return false;
+
+  return Array.from(record.addedNodes).some((added) => {
+    if (!(added instanceof Element)) return false;
+    return added.matches(nodeSelector, machineSelector)
+      || Boolean(added.querySelector(nodeSelector));
+  });
+}
+
 function migrateLegacyEditorGridState() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("bfux") !== "edit") return;
 
   try {
     if (window.localStorage.getItem(fixedPitchMigrationKey) === "1") return;
-    /* Old placements encoded column/row against the stretched, 30px, or 60px
-     * lattices. Those coordinates do not mean the same thing on the 90px ruler,
-     * so carrying them forward would manufacture apparent placement bugs. */
+    /* The first 90px implementation could persist spans sampled after repeated
+     * 60px re-normalization. Clear those contaminated editor placements once so
+     * the stable-size model starts from the canonical composition rather than
+     * preserving accidental growth. */
     window.localStorage.removeItem(legacyGridStorageKey);
     window.localStorage.setItem(fixedPitchMigrationKey, "1");
   } catch {
@@ -77,11 +107,11 @@ function migrateLegacyEditorGridState() {
  * Canonical desktop geometry bridge.
  *
  * The existing Lab Machine composition was authored in percentages, clamps and
- * content-sized special cases. We sample those live exterior sizes, then round
- * each width and height UP to the next 60px module. The BFUX drafting lattice is
- * intentionally coarser at 90px to keep the editor performant and visually calm.
- * Card dimensions remain independent of that ruler, so drag/drop moves cards
- * without resizing them even when a card spans a fractional number of tracks.
+ * content-sized special cases. We sample each live exterior size once, then
+ * round width and height UP to the next 60px module. The BFUX drafting lattice
+ * is intentionally coarser at 90px to keep the editor performant and visually
+ * calm. Card dimensions remain independent of that ruler, so drag/drop moves
+ * cards without resizing them even when a card spans a fractional track count.
  *
  * Position remains owned by the authored composition until a card is explicitly
  * placed on the lattice. Once placed, the anchor-grid contract owns the same
@@ -120,7 +150,8 @@ export function BfuxCardGeometryNormalizer() {
       activeApparatus = apparatus;
       activeResolution = resolution;
 
-      /* Let canonical composition CSS settle before sampling it. */
+      /* Let canonical composition CSS settle before sampling newly mounted
+       * cards. Existing normalized cards are never sampled again. */
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => applyCanonicalSizes(apparatus));
     };
@@ -133,9 +164,7 @@ export function BfuxCardGeometryNormalizer() {
     schedule();
     desktop.addEventListener("change", schedule);
     const observer = new MutationObserver((records) => {
-      if (records.some((record) => record.type === "childList" || record.attributeName === "data-resolution")) {
-        schedule();
-      }
+      if (records.some(mutationMayAddMachineCard)) schedule();
     });
     observer.observe(document.body, {
       childList: true,
