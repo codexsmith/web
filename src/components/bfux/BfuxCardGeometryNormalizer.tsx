@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { bfuxGridPitchPx } from "./bfux-grid-geometry";
 import "./bfux-card-geometry-normalizer.css";
 
 const desktopQuery = "(min-width: 1025px)";
@@ -8,7 +9,8 @@ const machineSelector = '.bf-machine[data-skin="physical"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
-const fixedPitchMigrationKey = "bfl_bfux_anchor_grid_90px_stable_sizes_v2";
+const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v3";
+const upperFieldNodeIds = new Set(["people", "products", "publications"]);
 export const bfuxCardSizeQuantumPx = 60;
 const measurementNoiseTolerancePx = 0.75;
 
@@ -34,6 +36,20 @@ function measureLocalSize(node: HTMLElement, apparatus: HTMLElement) {
     width: nodeRect.width / (scaleX || 1),
     height: nodeRect.height / (scaleY || 1),
   };
+}
+
+function canonicalHeight(node: HTMLElement, measuredHeight: number) {
+  const nodeId = node.dataset.nodeId ?? "";
+
+  /* The upper People / Products / Publications bank is intentionally two 90px
+   * tracks tall. Research is intentionally three tracks tall. These are the
+   * first explicit machine-size families in the grid grammar: they preserve the
+   * visual hierarchy while making the cards mechanically miscible on the same
+   * lattice. */
+  if (upperFieldNodeIds.has(nodeId)) return bfuxGridPitchPx * 2;
+  if (nodeId === "research") return bfuxGridPitchPx * 3;
+
+  return roundUpToQuantum(measuredHeight);
 }
 
 function clearCanonicalSizes(apparatus: HTMLElement) {
@@ -68,7 +84,7 @@ function applyCanonicalSizes(apparatus: HTMLElement) {
 
   for (const { node, size } of measurements) {
     const width = roundUpToQuantum(size.width);
-    const height = roundUpToQuantum(size.height);
+    const height = canonicalHeight(node, size.height);
     node.dataset.bfuxGridCanonicalSize = "true";
     node.style.setProperty("--bfux-node-canonical-width", `${width}px`);
     node.style.setProperty("--bfux-node-canonical-height", `${height}px`);
@@ -86,18 +102,32 @@ function mutationMayAddMachineCard(record: MutationRecord) {
   });
 }
 
-function migrateLegacyEditorGridState() {
+function migrateEditorSizeProfile() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("bfux") !== "edit") return;
 
   try {
-    if (window.localStorage.getItem(fixedPitchMigrationKey) === "1") return;
-    /* The first 90px implementation could persist spans sampled after repeated
-     * 60px re-normalization. Clear those contaminated editor placements once so
-     * the stable-size model starts from the canonical composition rather than
-     * preserving accidental growth. */
-    window.localStorage.removeItem(legacyGridStorageKey);
-    window.localStorage.setItem(fixedPitchMigrationKey, "1");
+    if (window.localStorage.getItem(sizeProfileMigrationKey) === "1") return;
+
+    /* Preserve the user's existing anchor/corner work. Only migrate the vertical
+     * spans for the card families whose canonical heights changed in this pass.
+     * The 90px ruler means 2 tracks = 180px and 3 tracks = 270px. */
+    const raw = window.localStorage.getItem(legacyGridStorageKey);
+    if (raw) {
+      const saved = JSON.parse(raw) as Record<string, { placements?: Array<{ nodeId?: string; rowSpan?: number }> }>;
+      for (const projection of Object.values(saved)) {
+        if (!projection || !Array.isArray(projection.placements)) continue;
+        projection.placements = projection.placements.map((placement) => {
+          const nodeId = placement.nodeId ?? "";
+          if (upperFieldNodeIds.has(nodeId)) return { ...placement, rowSpan: 2 };
+          if (nodeId === "research") return { ...placement, rowSpan: 3 };
+          return placement;
+        });
+      }
+      window.localStorage.setItem(legacyGridStorageKey, JSON.stringify(saved));
+    }
+
+    window.localStorage.setItem(sizeProfileMigrationKey, "1");
   } catch {
     // Storage is optional; the editor still hydrates from authored source.
   }
@@ -106,12 +136,11 @@ function migrateLegacyEditorGridState() {
 /**
  * Canonical desktop geometry bridge.
  *
- * The existing Lab Machine composition was authored in percentages, clamps and
- * content-sized special cases. We sample each live exterior size once, then
- * round width and height UP to the next 60px module. The BFUX drafting lattice
- * is intentionally coarser at 90px to keep the editor performant and visually
- * calm. Card dimensions remain independent of that ruler, so drag/drop moves
- * cards without resizing them even when a card spans a fractional track count.
+ * Widths still derive from the existing machine and round UP to the next 60px
+ * module. Heights now begin to use explicit grid-native families: the upper
+ * People / Products / Publications cards are 180px (2 x 90px tracks), while
+ * Research is 270px (3 x 90px tracks). Other cards retain the 60px rounding
+ * bridge until their own grid-native size families are chosen.
  *
  * Position remains owned by the authored composition until a card is explicitly
  * placed on the lattice. Once placed, the anchor-grid contract owns the same
@@ -119,7 +148,7 @@ function migrateLegacyEditorGridState() {
  */
 export function BfuxCardGeometryNormalizer() {
   useEffect(() => {
-    migrateLegacyEditorGridState();
+    migrateEditorSizeProfile();
 
     const desktop = window.matchMedia(desktopQuery);
     let frame = 0;
