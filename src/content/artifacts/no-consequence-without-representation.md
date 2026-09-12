@@ -15,8 +15,9 @@ A compact working sequence is:
 
 ```text
 Authorization
-  -> representation
-  -> admissible decision
+  -> admitted representation
+  -> executable representation
+  -> admissible decision / transition
   -> consequence
   -> notice and reasons
   -> contestability
@@ -30,8 +31,8 @@ The diagnostic does not ask whether an institution or AI system is globally good
 
 1. Who authorized the system or decision?
 2. Who and what does the system represent?
-3. Which affected people or conditions are omitted?
-4. What evidence and transformations produce the decision?
+3. Which affected people, facts, distinctions, or conditions are omitted?
+4. What evidence and transformations produce the **executable representation** that actually drives the consequential action?
 5. What distinctions and invariants must the process preserve?
 6. What notice and reasons are provided?
 7. Can an affected person meaningfully interrupt, contest, or correct the process?
@@ -44,6 +45,37 @@ The diagnostic does not ask whether an institution or AI system is globally good
 A system may be formally complete while the affected person is represented incompletely or falsely. A category, score, case file, record, model output, or interface can stand in for a person or condition and then become actionable downstream.
 
 That is not necessarily defective. Representation is unavoidable. The governance question is whether the representation preserves the distinctions needed for legitimate action and whether errors can be discovered, contested, corrected, and propagated through the systems that relied on them.
+
+## The executable representation
+
+Possessing information is not the same as using it in the consequence-bearing path.
+
+An institution may possess a rich record—hundreds of fields, documents, notes, exceptions, and contextual facts—while the operational process acts on a much smaller state such as:
+
+```text
+risk_score = 0.81
+eligible = false
+fraud_flag = true
+priority = low
+```
+
+For this diagnostic, the **executable representation** is the representation the operating process can actually recognize and act upon: the score, category, state, record, model output, interface condition, or derived value that triggers or authorizes a consequential transition.
+
+The review should therefore distinguish:
+
+```text
+person / world condition
+-> available source information
+-> admitted representation
+-> executable representation
+-> authorized transition
+-> consequence
+-> contest
+-> responsibility
+-> repair
+```
+
+A process can fail even when its upstream record is rich if the downstream executable representation discards a distinction that materially matters.
 
 ## Why consequence matters
 
@@ -68,12 +100,41 @@ Consequential action often passes through chains of people, policies, vendors, m
 
 The diagnostic resists that diffusion. Consequence may be distributed, but responsibility cannot terminate in “the system decided.” The chain should remain inspectable until it reaches accountable human or legal persons with actual authority and obligation to respond.
 
+## A worked miniature
+
+Consider a hypothetical benefits workflow:
+
+```text
+Source record:
+  income documents
+  household composition
+  disability accommodation request
+  prior eligibility history
+
+Derived executable representation:
+  eligibility_state = denied
+  reason_code = income_threshold
+
+Transition:
+  benefits suspended
+
+Contest question:
+  Can the applicant discover which inputs and transformation produced the state?
+
+Repair question:
+  If the income representation was wrong, does correction restore only the record,
+  or also the missed payment, downstream status, fees, and other consequences?
+```
+
+The point is not that this example establishes any legal rule. It shows what the diagnostic tries to make reconstructable: the representation that actually drove consequence, the authority for the transition, and the path from correction to material repair.
+
 ## Authority boundaries
 
 Boundary First Labs may contribute:
 
 - system and authority mapping;
 - representation and data-boundary analysis;
+- executable-representation identification;
 - decision, consequence, appeal, and repair-path mapping;
 - software and workflow analysis;
 - source-controlled synthesis and provenance;
@@ -94,6 +155,7 @@ It does not provide:
 - algorithmic fairness, safety, or bias certification;
 - cybersecurity or penetration-test certification;
 - proof that every affected case or downstream consequence has been discovered;
+- proof that every relevant representation has been recovered;
 - automatic endorsement of the system or institution under review.
 
 ## First proposed use
@@ -103,6 +165,7 @@ Apply the diagnostic to one real or representative case and ask:
 - where it reveals something useful;
 - where it duplicates existing legal or technical practice;
 - where it is wrong, incomplete, or inaccessible;
+- which representation actually drove the consequence;
 - which evidence cannot be obtained;
 - whether the contest and repair paths work in practice; and
 - what must change before the diagnostic could be responsibly reused.
