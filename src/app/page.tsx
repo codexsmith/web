@@ -17,6 +17,7 @@ import "./lab-machine-responsive-pass2.css";
 import "./lab-machine-frame.css";
 import "./lab-machine-composition.css";
 import "./bfux-grid-composition-bridge.css";
+import "./lab-machine-type-step.css";
 import "./proto/capital/capital-frame.css";
 import "./proto/capital/capital-frame-canonical-connectors.css";
 import "./proto/capital/capital-frame-zoom-resilience.css";
