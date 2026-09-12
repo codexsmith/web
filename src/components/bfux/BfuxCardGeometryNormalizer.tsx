@@ -8,7 +8,7 @@ const machineSelector = '.bf-machine[data-skin="physical"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
-const fixedPitchMigrationKey = "bfl_bfux_anchor_grid_30px_migrated_v1";
+const fixedPitchMigrationKey = "bfl_bfux_anchor_grid_60px_migrated_v1";
 export const bfuxCardSizeQuantumPx = 60;
 
 function roundUpToQuantum(value: number, quantum = bfuxCardSizeQuantumPx) {
@@ -63,9 +63,10 @@ function migrateLegacyEditorGridState() {
 
   try {
     if (window.localStorage.getItem(fixedPitchMigrationKey) === "1") return;
-    /* Old placements encoded column/row against a stretched apparatus grid.
-     * Those coordinates do not mean the same thing on the new fixed 30px ruler,
-     * so carrying them forward would manufacture apparent placement bugs. */
+    /* Old placements encoded column/row against either the stretched lattice or
+     * the short-lived 30px lattice. Those coordinates do not mean the same thing
+     * on the canonical 60px ruler, so carrying them forward would manufacture
+     * apparent placement bugs. */
     window.localStorage.removeItem(legacyGridStorageKey);
     window.localStorage.setItem(fixedPitchMigrationKey, "1");
   } catch {
@@ -79,7 +80,8 @@ function migrateLegacyEditorGridState() {
  * The existing Lab Machine composition was authored in percentages, clamps and
  * content-sized special cases. We sample those live exterior sizes, then round
  * each width and height UP to the next 60px module. The BFUX drafting lattice is
- * 30px, so every canonical card edge occupies an even number of tracks.
+ * also 60px, so every canonical card edge lands directly on the same modular
+ * ruler without introducing a visually noisy half-module grid.
  *
  * Position remains owned by the authored composition until a card is explicitly
  * placed on the lattice. Once placed, the anchor-grid contract owns the same
