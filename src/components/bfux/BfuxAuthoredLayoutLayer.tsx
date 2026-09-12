@@ -285,11 +285,13 @@ export function BfuxAuthoredLayoutLayer() {
 
         const stackGap = researchGeometry.top - (productsGeometry.top + productsGeometry.height);
         if (stackGap > 0) {
+          const billboardXOne = sx(productsGeometry.left + productsGeometry.width / 3);
+          const billboardXTwo = sx(productsGeometry.left + productsGeometry.width * 2 / 3);
           const billboardFromY = sy(productsGeometry.top + overlap);
           const billboardToY = sy(productsGeometry.top - stackGap - overlap);
           setCablePath(
             ".bf-machine__cable--billboard-product",
-            `M${n(x)} ${n(billboardFromY)} V${n(billboardToY)}`,
+            `M${n(billboardXOne)} ${n(billboardFromY)} V${n(billboardToY)} M${n(billboardXTwo)} ${n(billboardFromY)} V${n(billboardToY)}`,
             "red",
           );
         }
