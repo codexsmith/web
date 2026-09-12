@@ -39,3 +39,35 @@
     box-sizing: border-box !important;
   }
 }
+
+/* The lattice is now a fixed physical ruler rather than a stretched NxM grid.
+ * Keep the old picker state readable in saved specs, but do not present controls
+ * that no longer alter geometry. */
+.bfux-anchor-grid-picker > summary > small {
+  font-size: 0 !important;
+}
+.bfux-anchor-grid-picker > summary > small::before {
+  content: "FIXED 30PX POINT LATTICE";
+  font-size: .52rem;
+}
+.bfux-anchor-grid-picker__body > header small,
+.bfux-anchor-grid-picker__body > header strong {
+  font-size: 0 !important;
+}
+.bfux-anchor-grid-picker__body > header small::before {
+  content: "GRID PITCH";
+  font-size: .48rem;
+}
+.bfux-anchor-grid-picker__body > header strong::before {
+  content: "30 PX";
+  font-size: .7rem;
+}
+.bfux-anchor-grid-picker__matrix {
+  display: none !important;
+}
+.bfux-anchor-grid-picker__explain > span {
+  display: none;
+}
+.bfux-anchor-grid-picker__explain::before {
+  content: "Cards are rounded up to 60px width/height modules. Adjacent snap points are 30px apart, so every canonical card edge spans an even number of tracks.";
+}
