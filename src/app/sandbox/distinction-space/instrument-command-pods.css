@@ -1,0 +1,199 @@
+/*
+ * Distinction Space sandbox command bus.
+ *
+ * The header is intentionally read as two related horizontal rows:
+ *   STATE / CLAIM / ENGINE     = flat instrument readout bus
+ *   OPERATE / RECORD / EXPLAIN = tactile push-button bank
+ *
+ * Both rows share the same three-column geometry, but not the same physical
+ * treatment. The upper row is sharp and informational; the lower row is a
+ * grouped control surface with obvious button depth.
+ */
+
+@media (min-width: 851px) {
+  /* Remove the faint divider between the title block and command bus. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:first-child {
+    border-right: 0 !important;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* Upper row: flat segmented readout                                      */
+  /* ---------------------------------------------------------------------- */
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) {
+    align-self: start;
+    height: 32px !important;
+    margin-top: 2px;
+    padding: 0 !important;
+    gap: 0 !important;
+    overflow: hidden;
+    border: 1px solid #35434a;
+    border-radius: 3px;
+    background: #0a1013 !important;
+    box-shadow: none !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span {
+    position: relative;
+    min-width: 0;
+    min-height: 30px;
+    padding: 6px 14px 5px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #d4dcdd;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span + span {
+    border-left: 1px solid #35434a !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span small {
+    color: #75858b !important;
+  }
+
+  /* Keep the existing semantic indicator colors without making them boxes. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span:nth-child(1) {
+    color: #c792f6;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span:nth-child(2) {
+    color: #d8dee5;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > header > div:nth-child(2) > span:nth-child(3)[data-api="ready"] {
+    color: #8ee5a5;
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* Lower row: one three-button push-button bank                           */
+  /* ---------------------------------------------------------------------- */
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav {
+    top: 39px !important;
+    min-height: 31px !important;
+    padding: 2px !important;
+    gap: 4px !important;
+    overflow: hidden;
+    border: 1px solid #405058 !important;
+    border-radius: 8px !important;
+    background: #080d10 !important;
+    box-shadow:
+      0 2px 3px rgba(0,0,0,.52),
+      inset 0 1px rgba(255,255,255,.025) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button {
+    --push-accent: #a466e7;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    min-height: 25px !important;
+    padding: 4px 11px 5px !important;
+    border: 0 !important;
+    border-radius: 6px !important;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.085) 0, rgba(255,255,255,.025) 30%, rgba(0,0,0,.14) 100%),
+      linear-gradient(180deg, #172126, #0d1418) !important;
+    color: #d9e0df !important;
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.10),
+      inset 0 -2px rgba(0,0,0,.58),
+      0 1px 1px rgba(0,0,0,.48) !important;
+    transform: translateY(0);
+    transition:
+      transform 80ms ease,
+      filter 100ms ease,
+      box-shadow 100ms ease,
+      background 100ms ease;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button + button {
+    border-left: 0 !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:first-child {
+    --push-accent: #b36cff;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:nth-child(2) {
+    --push-accent: #8aa7ca;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:nth-child(3) {
+    --push-accent: #79d995;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button small {
+    color: color-mix(in srgb, var(--push-accent) 68%, #93a0a5) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:hover {
+    filter: brightness(1.12);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.11) 0, rgba(255,255,255,.035) 32%, rgba(0,0,0,.13) 100%),
+      linear-gradient(180deg, #1b272d, #10181c) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button:active,
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button[aria-pressed="true"] {
+    transform: translateY(1px);
+    border-color: transparent !important;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--push-accent) 18%, #0c1216), #080d10) !important;
+    box-shadow:
+      inset 0 2px 5px rgba(0,0,0,.62),
+      inset 0 -1px color-mix(in srgb, var(--push-accent) 58%, transparent),
+      inset 0 0 12px color-mix(in srgb, var(--push-accent) 12%, transparent) !important;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > button[aria-pressed="true"] small {
+    color: var(--push-accent) !important;
+  }
+
+  /* ENGINE version is already represented by the upper row. */
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+    > nav > span {
+    display: none !important;
+  }
+}

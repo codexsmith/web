@@ -1,0 +1,54 @@
+/* The Research core replaces the old static invariant target in-place.
+ * Keep the authored icon cartridge as the positioning datum, then remove its
+ * visible housing so only the animated mathematics remains. */
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate) {
+  padding: 0 !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate::before),
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate::after) {
+  display: none !important;
+}
+
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well) {
+  position: relative !important;
+  overflow: visible !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+:global(.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well > svg) {
+  display: none !important;
+}
+
+.field {
+  position: absolute;
+  z-index: 4;
+  inset: -22%;
+  pointer-events: none;
+  overflow: visible;
+  filter: drop-shadow(0 0 7px rgba(171, 76, 255, .24));
+}
+
+.field canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 1025px) {
+  .field[data-resolution="mid"] {
+    inset: -16%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .field {
+    inset: -10%;
+  }
+}

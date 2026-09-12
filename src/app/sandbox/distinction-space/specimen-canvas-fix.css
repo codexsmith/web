@@ -1,0 +1,39 @@
+/*
+ * Keep the simulation canvas out of document flow.
+ *
+ * BoundaryFascinatorInstrument measures the viewport to size the canvas backing
+ * buffer. The canvas also receives inline CSS width/height from that renderer.
+ * When it remains a normal-flow child, those measurements can feed back into
+ * the viewport's own grid size and make the specimen bay grow frame by frame.
+ *
+ * The sandbox installs the canvas as a true contained rendering layer instead:
+ * CSS owns the displayed size; JavaScript may still resize the bitmap buffer.
+ */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > canvas[aria-label="Boundary attractor visualization"] {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2;
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* The center specimen stack should consume its assigned instrument bay, never
+ * derive its outer height from the bitmap layer living inside the viewport. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section:has(> div > canvas[aria-label="Boundary attractor visualization"]) {
+  min-height: 0;
+  overflow: hidden;
+}

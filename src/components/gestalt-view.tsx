@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import dynamic from "next/dynamic";
 import type { ContentNode } from "@/lib/content";
 import { ProcessCircuit } from "@/components/process-circuit";
 import {
@@ -12,6 +12,13 @@ import {
 } from "@/lib/bfl-process";
 import { hydrateContentNode } from "@/lib/content-projections";
 import { founderProfile, founderTimeline } from "@/lib/founder-content";
+
+const FounderProvenanceTimelineEmbedded = dynamic(
+  () =>
+    import("@/components/founder-provenance-timeline-embedded").then(
+      (module) => module.FounderProvenanceTimelineEmbedded,
+    ),
+);
 
 type GestaltViewProps = {
   focusNode: ContentNode;
@@ -104,7 +111,7 @@ export function GestaltView({ focusNode, scope, onNavigate }: GestaltViewProps) 
 
 function FounderTimelineView() {
   return (
-    <main className="world-viewport gestalt-viewport">
+    <div className="world-viewport gestalt-viewport">
       <section className="gestalt-view founder-timeline-view" aria-label={`Founder timeline for ${founderProfile.name}`}>
         <header className="gestalt-view__heading">
           <div>
@@ -160,41 +167,8 @@ function FounderTimelineView() {
           </ol>
         </section>
 
-        <div className="gestalt-lower-grid">
-          <section className="gestalt-placement-notes">
-            <div className="gestalt-section-label">Present institutional task</div>
-            <h2>Convert founder-held coherence into shared structure</h2>
-            <p>{founderProfile.currentPhase}</p>
-            <p className="gestalt-placement-notes__boundary">
-              The success condition is not founder indispensability. It is work that other capable people can understand,
-              criticize, test, improve, teach, operate, maintain, and steward without erasing where it came from.
-            </p>
-          </section>
-
-          <section className="gestalt-placement-notes">
-            <div className="gestalt-section-label">Continue the institutional record</div>
-            <h2>Provenance and the Lab</h2>
-            <p>
-              The About branch carries the fuller split between origin, work substance, operating method, and present
-              institutional responsibility.
-            </p>
-            <div className="record-links">
-              <Link href="/about/provenance/timeline">
-                <span>Full development history</span>
-                <strong>Founder &amp; Intellectual Provenance Timeline</strong>
-              </Link>
-              <Link href="/about/provenance">
-                <span>Origin and lineage</span>
-                <strong>Provenance</strong>
-              </Link>
-              <Link href="/about/the-lab">
-                <span>Present institution</span>
-                <strong>The Lab</strong>
-              </Link>
-            </div>
-          </section>
-        </div>
+        <FounderProvenanceTimelineEmbedded />
       </section>
-    </main>
+    </div>
   );
 }

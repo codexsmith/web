@@ -1,0 +1,307 @@
+/*
+ * Distinction Space sandbox: route-specific physicalization of the reusable
+ * BoundaryFascinatorInstrument. The modal can still be used elsewhere without
+ * inheriting this heavier specimen-bay treatment.
+ */
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"]) {
+  background:
+    linear-gradient(rgba(95, 116, 126, .025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(95, 116, 126, .025) 1px, transparent 1px),
+    #05080a;
+  background-size: 24px 24px;
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] {
+  border-radius: 4px;
+  outline: 1px solid #1c252a;
+  outline-offset: 6px;
+  box-shadow:
+    inset 0 0 0 2px #030506,
+    inset 0 0 0 5px rgba(255,255,255,.024),
+    inset 0 -52px 110px rgba(0,0,0,.44),
+    0 0 0 1px #566269,
+    0 0 0 8px #080d10,
+    0 30px 90px rgba(0,0,0,.78),
+    0 0 48px rgba(105,53,151,.12);
+}
+
+/* Header reads as a bolted identity + status rack. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] > header {
+  border-bottom: 2px solid #26333a;
+  background:
+    linear-gradient(90deg, transparent 0 49.8%, rgba(255,255,255,.018) 50%, transparent 50.2%),
+    linear-gradient(180deg, #1b262c, #11191d 70%, #0d1316);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.06),
+    inset 0 -1px #050708,
+    0 3px 0 #070b0d;
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] > nav {
+  border-bottom: 1px solid #354249;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.018), transparent 45%),
+    #090f12;
+  box-shadow: inset 0 -2px #050809;
+}
+
+/* Explorer columns become physical racks around a recessed experiment bay. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] aside:has(select),
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] aside:has(article) {
+  border-radius: 3px;
+  border-color: #435159;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.035), transparent 7%, transparent 93%, rgba(0,0,0,.32)),
+    repeating-linear-gradient(180deg, transparent 0 25px, rgba(255,255,255,.012) 25px 26px),
+    linear-gradient(145deg, rgba(164,102,231,.035), transparent 36%),
+    #0d1418;
+  box-shadow:
+    inset 0 0 0 2px #070b0d,
+    inset 0 1px rgba(255,255,255,.04),
+    inset 0 -18px 34px rgba(0,0,0,.28),
+    0 2px 5px rgba(0,0,0,.46);
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] aside:has(select)::before,
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] aside:has(article)::before {
+  position: absolute;
+  z-index: 3;
+  top: 5px;
+  right: 7px;
+  padding: 3px 5px;
+  border: 1px solid #27343a;
+  color: #586a72;
+  background: #080d10;
+  font: 700 .4rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .11em;
+  pointer-events: none;
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] aside:has(select)::before {
+  content: "INPUT RACK";
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] aside:has(article)::before {
+  content: "OBSERVATION RACK";
+}
+
+/* The center column is one contiguous recessed specimen bay. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+  section:has(> div > canvas[aria-label="Boundary attractor visualization"]) {
+  position: relative;
+  padding: 6px;
+  gap: 6px;
+  border: 1px solid #263239;
+  border-left-color: #435159;
+  border-right-color: #435159;
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.026), transparent 4%, transparent 96%, rgba(255,255,255,.018)),
+    #070b0e;
+  box-shadow:
+    inset 0 0 0 2px #030506,
+    inset 0 18px 26px rgba(0,0,0,.28),
+    0 2px 5px rgba(0,0,0,.46);
+}
+
+/* Top and bottom modules become the chamber's control/transport rails. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+  section:has(> div > canvas[aria-label="Boundary attractor visualization"])
+  > div:has(+ div > canvas[aria-label="Boundary attractor visualization"]),
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"]
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) + div {
+  border-radius: 2px;
+  border-color: #3c4a51;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 45%),
+    #0d1418;
+  box-shadow:
+    inset 0 0 0 2px #060a0c,
+    inset 0 1px rgba(255,255,255,.035);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Specimen chamber                                                           */
+/* -------------------------------------------------------------------------- */
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) {
+  isolation: isolate;
+  border-radius: 2px;
+  border-color: #526169 !important;
+  background:
+    linear-gradient(90deg, transparent calc(50% - .5px), rgba(154,112,195,.10) 50%, transparent calc(50% + .5px)),
+    linear-gradient(0deg, transparent calc(50% - .5px), rgba(154,112,195,.08) 50%, transparent calc(50% + .5px)),
+    repeating-linear-gradient(90deg, rgba(112,139,151,.022) 0 1px, transparent 1px 48px),
+    repeating-linear-gradient(0deg, rgba(112,139,151,.018) 0 1px, transparent 1px 48px),
+    radial-gradient(circle at 50% 50%, rgba(108,51,160,.15), transparent 44%),
+    #020507 !important;
+  box-shadow:
+    inset 0 0 0 3px #020405,
+    inset 0 0 0 4px #263138,
+    inset 0 0 0 10px #05090b,
+    inset 0 0 54px rgba(0,0,0,.72),
+    0 1px rgba(255,255,255,.025);
+}
+
+/* Chamber identity occupies formerly empty space without pretending to be data. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"])::before {
+  content: "SPECIMEN CHAMBER  ·  BOUNDED PROJECTION VOLUME";
+  position: absolute;
+  z-index: 8;
+  top: 12px;
+  left: 14px;
+  padding-left: 10px;
+  border-left: 2px solid rgba(164,102,231,.64);
+  color: #697b83;
+  font: 700 .43rem/1.1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .12em;
+  pointer-events: none;
+}
+
+/* Fine scan + containment ticks; the canvas remains the specimen layer. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"])::after {
+  content: "" !important;
+  position: absolute;
+  inset: 10px !important;
+  z-index: 7;
+  opacity: .42 !important;
+  pointer-events: none;
+  border: 1px solid rgba(92,111,120,.18);
+  background:
+    linear-gradient(90deg, #5b6970 0 14px, transparent 14px calc(100% - 14px), #5b6970 calc(100% - 14px)) top left / 100% 1px no-repeat,
+    linear-gradient(90deg, #5b6970 0 14px, transparent 14px calc(100% - 14px), #5b6970 calc(100% - 14px)) bottom left / 100% 1px no-repeat,
+    linear-gradient(#5b6970 0 14px, transparent 14px calc(100% - 14px), #5b6970 calc(100% - 14px)) top left / 1px 100% no-repeat,
+    linear-gradient(#5b6970 0 14px, transparent 14px calc(100% - 14px), #5b6970 calc(100% - 14px)) top right / 1px 100% no-repeat,
+    repeating-linear-gradient(180deg, transparent 0 3px, rgba(255,255,255,.014) 3px 4px);
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > canvas {
+  position: relative;
+  z-index: 2;
+}
+
+/* Run/frame badges become chamber witness tags along the lower rail. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > span {
+  top: auto !important;
+  bottom: 13px;
+  border-radius: 2px;
+  border-color: #35434a;
+  background: rgba(4,8,10,.9);
+  color: #778991;
+  box-shadow: 0 0 0 2px rgba(2,4,5,.72);
+}
+
+/* Before a run, show an empty specimen cradle rather than an opaque blank-state veil. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > div:has(> h3) {
+  z-index: 6;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(88,44,128,.10), transparent 36%),
+    rgba(2,5,7,.48);
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > div:has(> h3)::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 49%;
+  width: min(42%, 310px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(122,91,151,.28);
+  border-radius: 50%;
+  background:
+    linear-gradient(90deg, transparent calc(50% - .5px), rgba(164,102,231,.12) 50%, transparent calc(50% + .5px)),
+    linear-gradient(0deg, transparent calc(50% - .5px), rgba(164,102,231,.12) 50%, transparent calc(50% + .5px));
+  box-shadow:
+    0 0 0 14px rgba(57,42,70,.035),
+    0 0 0 34px rgba(57,42,70,.022),
+    inset 0 0 38px rgba(111,61,157,.08);
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > div:has(> h3) > div {
+  width: 92px;
+  height: 92px;
+  border-color: #4a365c;
+  box-shadow:
+    0 0 0 8px rgba(85,54,110,.045),
+    0 0 0 18px rgba(85,54,110,.025),
+    0 0 26px rgba(164,102,231,.08);
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > div:has(> h3) h3 {
+  margin-top: 18px;
+  font-size: 1.42rem;
+}
+
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  div:has(> canvas[aria-label="Boundary attractor visualization"]) > div:has(> h3) p {
+  max-width: 390px;
+  color: #77878e;
+  line-height: 1.5;
+}
+
+/* Telemetry cells read like removable meter cartridges. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  aside:has(article) article {
+  border-radius: 2px;
+  border-color: #344249;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.025), transparent 35%),
+    #070c0f;
+  box-shadow:
+    inset 0 0 0 2px #040708,
+    inset 0 1px rgba(255,255,255,.025);
+}
+
+/* Footer becomes a narrow chassis engraving/status bus. */
+body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+  section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] > footer {
+  min-height: 32px;
+  border-top: 2px solid #263239;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.015), transparent),
+    #080d10;
+  box-shadow: inset 0 2px #030506;
+}
+
+@media (max-width: 1180px) {
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] aside:has(article)::before {
+    content: "OBSERVATION BUS";
+  }
+}
+
+@media (max-width: 850px) {
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    section[role="dialog"][aria-label="Boundary First Visual Mathematics instrument"] {
+    outline: none;
+  }
+
+  body:has(main[aria-label="Distinction Space visual mathematics sandbox"])
+    div:has(> canvas[aria-label="Boundary attractor visualization"])::before {
+    content: "SPECIMEN CHAMBER";
+  }
+}
