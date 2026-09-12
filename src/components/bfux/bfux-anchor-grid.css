@@ -48,7 +48,8 @@
 }
 .bfux-anchor-grid-picker__body > header > div { display: grid; gap: .13rem; }
 .bfux-anchor-grid-picker__body > header small,
-.bfux-anchor-grid-picker__selection small {
+.bfux-anchor-grid-picker__selection small,
+.bfux-anchor-grid-picker__span small {
   color: #7e929b;
   font: 600 .48rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   letter-spacing: .09em;
@@ -138,8 +139,10 @@
   padding-top: .48rem;
   border-top: 1px solid #202c31;
 }
-.bfux-anchor-grid-picker__selection > div { min-width: 0; display: grid; gap: .16rem; }
-.bfux-anchor-grid-picker__selection code {
+.bfux-anchor-grid-picker__selection > div,
+.bfux-anchor-grid-picker__span > div:first-child { min-width: 0; display: grid; gap: .16rem; }
+.bfux-anchor-grid-picker__selection code,
+.bfux-anchor-grid-picker__span code {
   overflow: hidden;
   color: #cdb8e2;
   font-size: .56rem;
@@ -150,9 +153,37 @@
   min-height: 1.8rem;
   padding: .32rem .46rem;
 }
-.bfux-anchor-grid-picker__selection button:disabled {
+.bfux-anchor-grid-picker__selection button:disabled,
+.bfux-anchor-grid-picker__span button:disabled {
   opacity: .35;
   cursor: not-allowed;
+}
+
+.bfux-anchor-grid-picker__span {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem;
+  border: 1px solid #253239;
+  background: linear-gradient(180deg, #0e171b, #091014);
+  opacity: .68;
+}
+.bfux-anchor-grid-picker__span[data-active="true"] {
+  border-color: #39576a;
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px rgba(97,215,255,.05);
+}
+.bfux-anchor-grid-picker__span-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(2rem, auto));
+  gap: 2px;
+}
+.bfux-anchor-grid-picker__span-controls button {
+  min-height: 1.65rem;
+  padding: .28rem .34rem;
+  border-color: #3d5662;
+  color: #bfefff;
 }
 
 /* The functional drafting plane now lives inside the apparatus transform tree.
@@ -169,11 +200,33 @@
   .bf-machine-node[data-machine-layer="node"]:hover {
   outline-color: rgba(97,215,255,.58);
 }
+
+/* A placed card now gets its complete outer envelope from the lattice. Its
+ * anchor and its size therefore use one coordinate grammar. Nested face/shell
+ * DOM may lay out content, but it no longer decides the card's exterior box. */
 [data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
   .bf-machine-node[data-bfux-grid-placed="true"] {
   left: var(--bfux-node-anchor-x) !important;
   top: var(--bfux-node-anchor-y) !important;
+  width: var(--bfux-node-grid-width) !important;
+  height: var(--bfux-node-grid-height) !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
   transform: translate(var(--bfux-node-anchor-tx), var(--bfux-node-anchor-ty)) !important;
+}
+[data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
+  .bf-machine-node[data-bfux-grid-placed="true"] > .bf-machine-node__face {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+}
+[data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
+  .bf-machine-node--billboard[data-bfux-grid-placed="true"] .bf-machine-billboard__face {
+  height: 100% !important;
+  min-height: 0 !important;
 }
 [data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
   .bf-machine-node[data-bfux-grid-dragging="true"] {
@@ -183,7 +236,8 @@
 
 /* Rails and points are the actual snapping lattice, not decorative overflow.
  * The negative inset creates one continuous apparatus-local world plane large
- * enough for the machine's +/-700 x and +/-260 y pan range. */
+ * enough for the machine pan range. React supplies the pan envelope variables
+ * from the same geometry module used by the placement solver. */
 .bfux-anchor-grid-overlay {
   --bfux-grid-pan-x: 700px;
   --bfux-grid-pan-y: 260px;
