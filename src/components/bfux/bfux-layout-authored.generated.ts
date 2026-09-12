@@ -117,7 +117,7 @@ export const bfuxAuthoredLayout = {
         },
         {
           "nodeId": "publications",
-          "column": 12.5,
+          "column": 12.15,
           "row": 1,
           "corner": "nw",
           "columnSpan": 4,
@@ -125,16 +125,16 @@ export const bfuxAuthoredLayout = {
         },
         {
           "nodeId": "about",
-          "column": 3.5,
+          "column": 3.6,
           "row": 3.25,
           "corner": "ne",
-          "columnSpan": 3.75,
+          "columnSpan": 3.6,
           "rowSpan": 1.75
         },
         {
           "nodeId": "research",
           "column": 4,
-          "row": 3,
+          "row": 2.85,
           "corner": "nw",
           "columnSpan": 7.25,
           "rowSpan": 2.25
@@ -149,24 +149,24 @@ export const bfuxAuthoredLayout = {
         },
         {
           "nodeId": "pipeline",
-          "column": 4.25,
-          "row": 5.5,
+          "column": 4.1,
+          "row": 5.1,
           "corner": "nw",
           "columnSpan": 2,
           "rowSpan": 1
         },
         {
           "nodeId": "method",
-          "column": 6.25,
-          "row": 5.5,
+          "column": 6.1,
+          "row": 5.1,
           "corner": "nw",
           "columnSpan": 2.25,
           "rowSpan": 1
         },
         {
           "nodeId": "timeline",
-          "column": 8.5,
-          "row": 5.5,
+          "column": 8.35,
+          "row": 5.1,
           "corner": "nw",
           "columnSpan": 2.25,
           "rowSpan": 1
