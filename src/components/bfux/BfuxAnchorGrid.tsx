@@ -4,9 +4,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { createPortal } from "react-dom";
 import "./bfux-anchor-grid.css";
 
-const machineSelector = '.bf-machine[data-skin="physical"]';
-const workfieldSelector = '[data-machine-layer="pan-surface"]';
-const apparatusSelector = '[data-machine-layer="apparatus"]';
+const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const nodeTransferType = "application/x-bfux-node";
 const layoutTuningEvent = "bfux-layout-tuning";
@@ -52,11 +50,6 @@ type SnapCandidate = BfuxNodeAnchorPlacement & {
   y: number;
   width: number;
   height: number;
-};
-
-type GridHosts = {
-  workfield: HTMLElement;
-  apparatus: HTMLElement;
 };
 
 function clampInteger(value: number, min: number, max: number) {
@@ -274,31 +267,31 @@ export function BfuxAnchorGridLayer({
   onPlacementsChange: (placements: BfuxNodeAnchorPlacement[]) => void;
   onSelectedNodeChange?: (nodeId: string | null) => void;
 }) {
-  const [hosts, setHosts] = useState<GridHosts | null>(null);
+  const [apparatus, setApparatus] = useState<HTMLElement | null>(null);
+  const [workfield, setWorkfield] = useState<HTMLDivElement | null>(null);
   const [drag, setDrag] = useState<DragState | null>(null);
   const [candidate, setCandidate] = useState<SnapCandidate | null>(null);
   const dragRef = useRef<DragState | null>(null);
 
   useEffect(() => {
     let frame = 0;
-    const findHosts = () => {
-      const machine = document.querySelector<HTMLElement>(machineSelector);
-      const workfield = machine?.querySelector<HTMLElement>(workfieldSelector) ?? null;
-      const apparatus = machine?.querySelector<HTMLElement>(apparatusSelector) ?? null;
-      setHosts((current) => {
-        if (!workfield || !apparatus) return current === null ? current : null;
-        if (current?.workfield === workfield && current.apparatus === apparatus) return current;
-        return { workfield, apparatus };
-      });
+    const findApparatus = () => {
+      const next = document.querySelector<HTMLElement>(apparatusSelector);
+      setApparatus((current) => current === next ? current : next);
     };
     const schedule = () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(findHosts);
+      frame = requestAnimationFrame(findApparatus);
     };
 
     schedule();
     const observer = new MutationObserver(schedule);
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["data-skin", "data-resolution"] });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["data-skin", "data-resolution"],
+    });
     return () => {
       observer.disconnect();
       cancelAnimationFrame(frame);
@@ -306,13 +299,16 @@ export function BfuxAnchorGridLayer({
   }, []);
 
   useEffect(() => {
-    if (!hosts) return;
-    const { workfield, apparatus } = hosts;
+    setWorkfield(null);
+  }, [apparatus]);
+
+  useEffect(() => {
+    if (!apparatus || !workfield) return;
     let frame = 0;
 
     workfield.dataset.bfuxGridEditing = "true";
     workfield.dataset.bfuxGridVisible = state.spec.visible ? "true" : "false";
-    workfield.dataset.bfuxGridCoordinateSpace = "workfield";
+    workfield.dataset.bfuxGridCoordinateSpace = "apparatus-workfield";
     apparatus.dataset.bfuxGridEditing = "true";
 
     const applyPlacementStyles = () => {
@@ -361,14 +357,11 @@ export function BfuxAnchorGridLayer({
     const resizeObserver = new ResizeObserver(scheduleApply);
     resizeObserver.observe(workfield);
     resizeObserver.observe(apparatus);
-    const apparatusObserver = new MutationObserver(scheduleApply);
-    apparatusObserver.observe(apparatus, { attributes: true, attributeFilter: ["style"] });
     window.addEventListener("resize", scheduleApply);
 
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
-      apparatusObserver.disconnect();
       window.removeEventListener("resize", scheduleApply);
       delete workfield.dataset.bfuxGridEditing;
       delete workfield.dataset.bfuxGridVisible;
@@ -386,11 +379,10 @@ export function BfuxAnchorGridLayer({
       }
       apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
     };
-  }, [hosts, state]);
+  }, [apparatus, state, workfield]);
 
   useEffect(() => {
-    if (!hosts) return;
-    const { workfield, apparatus } = hosts;
+    if (!apparatus || !workfield) return;
 
     const pointerDown = (event: PointerEvent) => {
       const target = event.target;
@@ -496,7 +488,7 @@ export function BfuxAnchorGridLayer({
       window.removeEventListener("dragend", dragEnd);
       dragRef.current = null;
     };
-  }, [hosts, onPlacementsChange, onSelectedNodeChange, state.placements, state.spec]);
+  }, [apparatus, onPlacementsChange, onSelectedNodeChange, state.placements, state.spec, workfield]);
 
   const points = useMemo(() => {
     const next: Array<{ column: number; row: number; x: number; y: number }> = [];
@@ -508,8 +500,7 @@ export function BfuxAnchorGridLayer({
     return next;
   }, [state.spec.columns, state.spec.rows]);
 
-  if (!hosts) return null;
-  const { workfield } = hosts;
+  if (!apparatus) return null;
 
   const ghostStyle = candidate ? {
     left: `${candidate.x}px`,
@@ -520,47 +511,46 @@ export function BfuxAnchorGridLayer({
   } as CSSProperties : undefined;
 
   return createPortal(
-    <>
-      <div
-        className="bfux-anchor-grid-overlay"
-        data-visible={state.spec.visible || drag ? "true" : undefined}
-        data-dragging={drag ? "true" : undefined}
-        data-coordinate-space="workfield"
-        aria-hidden="true"
-      >
-        {Array.from({ length: state.spec.columns }, (_, column) => (
-          <span
-            key={`column:${column}`}
-            data-axis="column"
-            style={{ left: `${axisFraction(column, state.spec.columns) * 100}%` }}
+    <div
+      ref={setWorkfield}
+      className="bfux-anchor-grid-overlay"
+      data-visible={state.spec.visible || drag ? "true" : undefined}
+      data-dragging={drag ? "true" : undefined}
+      data-coordinate-space="apparatus-workfield"
+      aria-hidden="true"
+    >
+      {Array.from({ length: state.spec.columns }, (_, column) => (
+        <span
+          key={`column:${column}`}
+          data-axis="column"
+          style={{ left: `${axisFraction(column, state.spec.columns) * 100}%` }}
+        />
+      ))}
+      {Array.from({ length: state.spec.rows }, (_, row) => (
+        <span
+          key={`row:${row}`}
+          data-axis="row"
+          style={{ top: `${axisFraction(row, state.spec.rows) * 100}%` }}
+        />
+      ))}
+      {points.map((point) => {
+        const active = candidate?.column === point.column && candidate?.row === point.row;
+        return (
+          <i
+            key={`${point.column}:${point.row}`}
+            data-active={active ? "true" : undefined}
+            style={{ left: `${point.x * 100}%`, top: `${point.y * 100}%` }}
           />
-        ))}
-        {Array.from({ length: state.spec.rows }, (_, row) => (
-          <span
-            key={`row:${row}`}
-            data-axis="row"
-            style={{ top: `${axisFraction(row, state.spec.rows) * 100}%` }}
-          />
-        ))}
-        {points.map((point) => {
-          const active = candidate?.column === point.column && candidate?.row === point.row;
-          return (
-            <i
-              key={`${point.column}:${point.row}`}
-              data-active={active ? "true" : undefined}
-              style={{ left: `${point.x * 100}%`, top: `${point.y * 100}%` }}
-            />
-          );
-        })}
-      </div>
+        );
+      })}
       {candidate && drag ? (
-        <div className="bfux-anchor-grid-ghost" style={ghostStyle} data-corner={candidate.corner} aria-hidden="true">
+        <div className="bfux-anchor-grid-ghost" style={ghostStyle} data-corner={candidate.corner}>
           <span>{drag.nodeId}</span>
           <b>{candidate.corner.toUpperCase()} · {candidate.column + 1},{candidate.row + 1}</b>
         </div>
       ) : null}
-    </>,
-    workfield,
+    </div>,
+    apparatus,
     "bfux-anchor-grid",
   );
 }
