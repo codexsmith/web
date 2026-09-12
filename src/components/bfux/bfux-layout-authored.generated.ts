@@ -94,11 +94,84 @@ export const bfuxAuthoredLayout = {
     },
     "anchorGrid": {
       "spec": {
-        "columns": 8,
-        "rows": 6,
+        "columns": 16,
+        "rows": 7,
         "visible": true
       },
-      "placements": []
+      "placements": [
+        {
+          "nodeId": "people",
+          "column": 8,
+          "row": 1,
+          "corner": "ne",
+          "columnSpan": 4,
+          "rowSpan": 2
+        },
+        {
+          "nodeId": "products",
+          "column": 12,
+          "row": 3,
+          "corner": "se",
+          "columnSpan": 4,
+          "rowSpan": 2
+        },
+        {
+          "nodeId": "publications",
+          "column": 12,
+          "row": 1,
+          "corner": "nw",
+          "columnSpan": 4,
+          "rowSpan": 2
+        },
+        {
+          "nodeId": "about",
+          "column": 4,
+          "row": 3,
+          "corner": "ne",
+          "columnSpan": 3.3338,
+          "rowSpan": 2
+        },
+        {
+          "nodeId": "research",
+          "column": 4,
+          "row": 3,
+          "corner": "nw",
+          "columnSpan": 8,
+          "rowSpan": 3
+        },
+        {
+          "nodeId": "governance",
+          "column": 12,
+          "row": 3,
+          "corner": "nw",
+          "columnSpan": 4,
+          "rowSpan": 2
+        },
+        {
+          "nodeId": "pipeline",
+          "column": 4,
+          "row": 6,
+          "corner": "nw",
+          "columnSpan": 3,
+          "rowSpan": 1
+        },
+        {
+          "nodeId": "method",
+          "column": 7,
+          "row": 6,
+          "corner": "nw",
+          "columnSpan": 2,
+          "rowSpan": 1
+        },
+        {
+          "nodeId": "timeline",
+          "column": 9,
+          "row": 6,
+          "corner": "nw",
+          "columnSpan": 3,
+          "rowSpan": 1
+        }
+      ]
     },
     "placedParts": []
   }
