@@ -20,15 +20,15 @@
   .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
     --billboard-width: 35%;
     --billboard-gap-y: 0px;
-    --billboard-visual-width: 44%;
-    --billboard-maze-scale: 1;
-    --billboard-maze-left: -18%;
-    --billboard-visual-pad-x: .56;
-    --billboard-visual-pad-y: .42;
-    --billboard-copy-pad-x: .72;
-    --billboard-copy-pad-y: .56;
-    --billboard-title-scale: 1.32;
-    --billboard-controls-height: 2.2;
+    --billboard-visual-width: 40%;
+    --billboard-maze-scale: .92;
+    --billboard-maze-left: -14%;
+    --billboard-visual-pad-x: .5;
+    --billboard-visual-pad-y: .36;
+    --billboard-copy-pad-x: .62;
+    --billboard-copy-pad-y: .48;
+    --billboard-title-scale: 1.55;
+    --billboard-controls-height: 2.5;
     z-index: 9 !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -49,7 +49,7 @@
   }
 
   .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node--billboard {
-    --billboard-title-scale: 1.38;
+    --billboard-title-scale: 1.6;
   }
 
   /* The face keeps the standard Lab Machine exterior box. Only its interior is
@@ -91,13 +91,16 @@
     border-bottom: 0 !important;
   }
 
+  /* Keep the instrument comfortably inside the same two-track card family.
+   * Previously the rotated SVG intentionally overfilled its column; that made
+   * the maze read taller than every neighboring machine card. */
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__visual svg {
     display: block;
     left: var(--billboard-maze-left) !important;
     top: 50% !important;
-    width: 110% !important;
-    height: 110% !important;
+    width: 92% !important;
+    height: 92% !important;
     max-width: none !important;
     min-width: 0;
     min-height: 0 !important;
@@ -109,12 +112,12 @@
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__legend {
     left: auto !important;
-    right: .24rem !important;
+    right: .34rem !important;
     top: 50% !important;
     bottom: auto !important;
     transform: translateY(-50%) !important;
-    gap: .15rem !important;
-    font-size: .44rem !important;
+    gap: .18rem !important;
+    font-size: .54rem !important;
   }
 
   .bf-machine[data-skin="physical"]
@@ -131,7 +134,7 @@
       "eyebrow cta" !important;
     align-content: stretch !important;
     align-items: stretch !important;
-    gap: .28rem !important;
+    gap: .34rem !important;
     min-width: 0;
     min-height: 0;
     height: 100%;
@@ -154,14 +157,14 @@
     display: flex !important;
     flex-direction: column;
     justify-content: center !important;
-    gap: .02em;
+    gap: .04em;
     min-width: 0;
     min-height: 0;
     max-width: 100%;
     margin: 0 !important;
     padding: 0 !important;
-    font-size: calc(var(--machine-u, 12px) * var(--billboard-title-scale)) !important;
-    line-height: .91 !important;
+    font-size: max(1.2rem, calc(var(--machine-u, 12px) * var(--billboard-title-scale))) !important;
+    line-height: .94 !important;
     overflow: visible !important;
     overflow-wrap: normal;
     word-break: normal;
@@ -181,13 +184,14 @@
     min-width: 0;
     align-self: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: .15rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .38rem;
     line-height: 1 !important;
-    font-size: .47rem !important;
+    font-size: .56rem !important;
     overflow: hidden;
+    white-space: nowrap;
   }
 
   .bf-machine[data-skin="physical"]
@@ -206,13 +210,13 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    padding: .42rem .62rem !important;
+    padding: .42rem .72rem !important;
     overflow: hidden;
   }
 
   .bf-machine[data-skin="physical"]
     .bf-machine-node--billboard .bf-machine-billboard__cta b {
-    font-size: .52rem !important;
+    font-size: .62rem !important;
     white-space: nowrap;
   }
 
