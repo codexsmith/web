@@ -17,6 +17,10 @@
  *   --billboard-copy-pad-y
  *   --billboard-title-scale
  *   --billboard-controls-height
+ *
+ * --billboard-height is a requested minimum, not a clipping box. The face is
+ * content-sized and the node/shell follow it, so title/control content can
+ * never grow through the physical bottom edge of the card.
  */
 
 .bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
@@ -28,7 +32,6 @@
 @media (min-width: 1025px) {
   .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
     --billboard-width: 35%;
-    --billboard-height: auto;
     --billboard-gap-y: 0px;
     --billboard-visual-width: 44%;
     --billboard-maze-scale: 1;
@@ -43,8 +46,12 @@
     position: absolute !important;
     top: auto !important;
     bottom: auto !important;
+    display: grid !important;
+    grid-template-rows: max-content;
+    align-content: start;
     width: var(--billboard-width) !important;
-    height: var(--billboard-height) !important;
+    height: auto !important;
+    min-height: 0 !important;
     z-index: 9 !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -61,9 +68,9 @@
     grid-template-columns: var(--billboard-visual-width) minmax(0, calc(100% - var(--billboard-visual-width))) !important;
     grid-template-rows: minmax(0, 1fr) !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     min-width: 0 !important;
-    min-height: 8rem !important;
+    min-height: var(--billboard-height, 8rem) !important;
     box-sizing: border-box;
     overflow: hidden !important;
   }
