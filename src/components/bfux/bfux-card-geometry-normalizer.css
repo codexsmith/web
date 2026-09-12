@@ -1,0 +1,41 @@
+/* Edit-mode bridge from the legacy percentage composition into the modular
+ * BFUX drafting grammar. Position remains where the authored composition put
+ * the card; only its exterior size is quantized. Once a card is actually grid
+ * placed, the anchor-grid composition bridge takes over its envelope. */
+
+@media (min-width: 1025px) {
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-canonical-size="true"]
+    :is(.bf-machine-node__face) {
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-canonical-size="true"]:not([data-bfux-grid-placed="true"]):not([data-bfux-authored-grid-placed="true"]):not([data-expanded="true"]) {
+    width: var(--bfux-node-canonical-width) !important;
+    height: var(--bfux-node-canonical-height) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-canonical-size="true"]:not([data-expanded="true"])
+    > .bf-machine-node__face {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
