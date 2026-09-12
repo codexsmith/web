@@ -56,7 +56,17 @@
   .bf-machine-node__icon-plate {
   left: 50% !important;
   top: 50% !important;
+  width: calc(var(--machine-u) * 10.25) !important;
+  height: calc(var(--machine-u) * 10.25) !important;
   transform: translate(-50%, -50%) !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="mid"]
+  [data-machine-layer="apparatus"]
+  .bf-machine-node[data-node-id="research"][data-bfux-authored-grid-placed="true"]
+  .bf-machine-node__icon-well svg {
+  width: calc(var(--machine-u) * 4.4) !important;
+  height: calc(var(--machine-u) * 4.4) !important;
 }
 
 .bf-machine[data-skin="physical"][data-resolution="mid"]
