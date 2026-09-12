@@ -10,7 +10,7 @@ const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
 const billboardLayoutStorageKey = "bfl_bfux_layout_studio_billboard_v1";
-const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v5";
+const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v6";
 const twoTrackNodeIds = new Set(["representation-lab", "people", "products", "publications", "about"]);
 export const bfuxCardSizeQuantumPx = 60;
 const measurementNoiseTolerancePx = 0.75;
@@ -135,7 +135,9 @@ function migrateEditorSizeProfile() {
     if (window.localStorage.getItem(sizeProfileMigrationKey) === "1") return;
 
     /* Preserve the user's anchor/corner work. Only migrate vertical spans for
-     * card families whose canonical heights are grid-native. */
+     * card families whose canonical heights are grid-native. Bumping the
+     * migration key guarantees About is corrected even for edit sessions that
+     * already consumed the previous two-track migration. */
     const rawGrid = window.localStorage.getItem(legacyGridStorageKey);
     if (rawGrid) {
       const saved = JSON.parse(rawGrid) as Record<string, { placements?: Array<{ nodeId?: string; rowSpan?: number }> }>;
