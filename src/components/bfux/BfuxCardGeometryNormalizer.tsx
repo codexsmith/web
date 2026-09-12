@@ -70,7 +70,6 @@ export function BfuxCardGeometryNormalizer() {
 
     let frame = 0;
     let activeApparatus: HTMLElement | null = null;
-    let activeMachine: HTMLElement | null = null;
     let activeResolution = "";
 
     const apply = () => {
@@ -86,7 +85,6 @@ export function BfuxCardGeometryNormalizer() {
         clearCanonicalSizes(activeApparatus);
       }
 
-      activeMachine = machine;
       activeApparatus = apparatus;
       activeResolution = resolution;
 
@@ -117,7 +115,6 @@ export function BfuxCardGeometryNormalizer() {
       observer.disconnect();
       cancelAnimationFrame(frame);
       if (activeApparatus) clearCanonicalSizes(activeApparatus);
-      activeMachine = null;
     };
   }, []);
 
