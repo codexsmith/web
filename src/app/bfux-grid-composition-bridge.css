@@ -1,0 +1,73 @@
+/*
+ * BFUX grid / canonical machine-composition bridge.
+ *
+ * The desktop Lab Machine still carries a carefully authored fallback composition
+ * in lab-machine-composition.css. Those selectors intentionally use !important
+ * because they protect the public machine from older component-local geometry.
+ *
+ * Layout Studio is a stronger authority: once a card is snapped to the BFUX
+ * lattice, its exterior rectangle must come from the lattice and the legacy
+ * composition becomes only the fallback used after RELEASE. This bridge makes
+ * that ownership explicit instead of relying on stylesheet order or selector
+ * accidents.
+ *
+ * Structural/card DOM remains free to lay out *inside* the rectangle. The grid
+ * owns only the root node's containing block geometry.
+ */
+
+@media (min-width: 1025px) {
+  /* Editor projection. Deliberately more specific than the canonical fallback
+   * composition so the same !important declarations cannot fight each other. */
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"][data-resolution]
+    .bf-machine__board[data-machine-layer="viewport"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-placed="true"]:not([data-expanded="true"]),
+  /* Authored/runtime projection emitted by Layout Studio. */
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"][data-resolution]
+    .bf-machine__board[data-machine-layer="viewport"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-authored-grid-placed="true"]:not([data-expanded="true"]) {
+    position: absolute !important;
+    left: var(--bfux-node-anchor-x) !important;
+    top: var(--bfux-node-anchor-y) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--bfux-node-grid-width) !important;
+    height: var(--bfux-node-grid-height) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    grid-area: auto !important;
+    align-self: auto !important;
+    justify-self: auto !important;
+    box-sizing: border-box !important;
+    transform: translate(var(--bfux-node-anchor-tx), var(--bfux-node-anchor-ty)) !important;
+  }
+
+  /* Layout editing treats the whole compact card as one physical object. This
+   * prevents embedded SVGs, visualizers, links, and Tour internals from stealing
+   * the pointer/drag gesture from the root node. Expanded instruments retain
+   * their normal controls and are intentionally not draggable. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-bfux-grid-editing="true"]
+    .bf-machine-node[data-bfux-grid-editable="true"]:not([data-expanded="true"]) > * {
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-bfux-grid-editing="true"]
+    .bf-machine-node[data-bfux-grid-dragging="true"] {
+    z-index: 90 !important;
+    transition: none !important;
+  }
+}
