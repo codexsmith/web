@@ -12,10 +12,92 @@
  * accidents.
  *
  * Structural/card DOM remains free to lay out *inside* the rectangle. The grid
- * owns only the root node's containing block geometry.
+ * owns the rendered mechanical envelope: the visible shell edge, not merely the
+ * root node's content box, is what terminates on grid points.
  */
 
 @media (min-width: 1025px) {
+  /* ---------------------------------------------------------------------- */
+  /* Mechanical envelope                                                     */
+  /* ---------------------------------------------------------------------- */
+
+  /* Most cards draw a chassis shell 7px outside the root node. If the root is
+   * given the full grid width, two cards which share a grid point overlap by
+   * 14px even though their calculated rectangles are perfectly adjacent.
+   *
+   * Treat those outboard shell dimensions as part of the grid-owned envelope:
+   * shrink the root by the chrome bleed and offset the root inward so the shell
+   * itself lands exactly on the requested lattice rectangle. */
+  .bf-machine-node[data-bfux-grid-placed="true"],
+  .bf-machine-node[data-bfux-authored-grid-placed="true"] {
+    --bfux-node-chrome-left: 7px;
+    --bfux-node-chrome-right: 7px;
+    --bfux-node-chrome-top: 7px;
+    --bfux-node-chrome-bottom: 7px;
+    --bfux-node-chrome-anchor-x: var(--bfux-node-chrome-left);
+    --bfux-node-chrome-anchor-y: var(--bfux-node-chrome-top);
+  }
+
+  /* Card variants with intentionally different chassis depth. These values
+   * mirror the shell geometry in lab-machine.css so every variant participates
+   * in the same outer-envelope contract. */
+  .bf-machine-node--core:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]) {
+    --bfux-node-chrome-left: 12px;
+    --bfux-node-chrome-right: 12px;
+    --bfux-node-chrome-top: 12px;
+    --bfux-node-chrome-bottom: 12px;
+  }
+
+  .bf-machine-node--package:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]) {
+    --bfux-node-chrome-left: 10px;
+    --bfux-node-chrome-right: 10px;
+    --bfux-node-chrome-top: 8px;
+    --bfux-node-chrome-bottom: 8px;
+  }
+
+  .bf-machine-node--identity:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]) {
+    --bfux-node-chrome-bottom: 14px;
+  }
+
+  .bf-machine-node--attachment:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]) {
+    --bfux-node-chrome-left: 6px;
+    --bfux-node-chrome-right: 14px;
+    --bfux-node-chrome-top: 8px;
+    --bfux-node-chrome-bottom: 8px;
+  }
+
+  /* Publication shells are translated 4px down/right after the normal 7px
+   * outboard inset, so their effective visible shell envelope is asymmetric. */
+  .bf-machine-node--publication:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]) {
+    --bfux-node-chrome-left: 3px;
+    --bfux-node-chrome-right: 11px;
+    --bfux-node-chrome-top: 3px;
+    --bfux-node-chrome-bottom: 11px;
+  }
+
+  /* The anchor describes the OUTER shell corner. Move the root inward by the
+   * appropriate side's chrome amount before applying the existing corner
+   * translation. */
+  .bf-machine-node[data-bfux-grid-corner="nw"],
+  .bf-machine-node[data-bfux-grid-corner="sw"] {
+    --bfux-node-chrome-anchor-x: var(--bfux-node-chrome-left);
+  }
+
+  .bf-machine-node[data-bfux-grid-corner="ne"],
+  .bf-machine-node[data-bfux-grid-corner="se"] {
+    --bfux-node-chrome-anchor-x: calc(0px - var(--bfux-node-chrome-right));
+  }
+
+  .bf-machine-node[data-bfux-grid-corner="nw"],
+  .bf-machine-node[data-bfux-grid-corner="ne"] {
+    --bfux-node-chrome-anchor-y: var(--bfux-node-chrome-top);
+  }
+
+  .bf-machine-node[data-bfux-grid-corner="sw"],
+  .bf-machine-node[data-bfux-grid-corner="se"] {
+    --bfux-node-chrome-anchor-y: calc(0px - var(--bfux-node-chrome-bottom));
+  }
+
   /* Editor projection. Deliberately more specific than the canonical fallback
    * composition so the same !important declarations cannot fight each other. */
   html body .site-shell[data-root-focus="true"]
@@ -32,12 +114,20 @@
     .bf-machine__apparatus[data-machine-layer="apparatus"]
     .bf-machine-node[data-machine-layer="node"][data-bfux-authored-grid-placed="true"]:not([data-expanded="true"]) {
     position: absolute !important;
-    left: var(--bfux-node-anchor-x) !important;
-    top: var(--bfux-node-anchor-y) !important;
+    left: calc(var(--bfux-node-anchor-x) + var(--bfux-node-chrome-anchor-x, 0px)) !important;
+    top: calc(var(--bfux-node-anchor-y) + var(--bfux-node-chrome-anchor-y, 0px)) !important;
     right: auto !important;
     bottom: auto !important;
-    width: var(--bfux-node-grid-width) !important;
-    height: var(--bfux-node-grid-height) !important;
+    width: max(1px, calc(
+      var(--bfux-node-grid-width)
+      - var(--bfux-node-chrome-left, 0px)
+      - var(--bfux-node-chrome-right, 0px)
+    )) !important;
+    height: max(1px, calc(
+      var(--bfux-node-grid-height)
+      - var(--bfux-node-chrome-top, 0px)
+      - var(--bfux-node-chrome-bottom, 0px)
+    )) !important;
     min-width: 0 !important;
     min-height: 0 !important;
     max-width: none !important;
