@@ -15,11 +15,26 @@
   align-content: stretch !important;
 }
 
+/* The billboard has a structural mount element before its face. It is physical
+ * chrome, not layout content. Once the root becomes a one-row grid, leaving the
+ * mount in normal flow creates an implicit second row and pushes the real face
+ * to the bottom of the snapped envelope. Keep structural chrome out of flow. */
+[data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
+  .bf-machine-node--billboard[data-bfux-grid-placed="true"] > .bf-machine-node__mount,
+.bf-machine[data-skin="physical"]
+  [data-machine-layer="apparatus"]
+  .bf-machine-node--billboard[data-bfux-authored-grid-placed="true"] > .bf-machine-node__mount {
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+}
+
 [data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
   .bf-machine-node--billboard[data-bfux-grid-placed="true"] > .bf-machine-billboard__face,
 .bf-machine[data-skin="physical"]
   [data-machine-layer="apparatus"]
   .bf-machine-node--billboard[data-bfux-authored-grid-placed="true"] > .bf-machine-billboard__face {
+  grid-row: 1 !important;
   align-self: stretch !important;
   width: 100% !important;
   height: 100% !important;
