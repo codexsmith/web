@@ -50,12 +50,13 @@ export function bfuxGridFitSpan(size: number, pitch: number, maxSpan: number) {
   if (maxSpan <= 0) return 0;
   if (!Number.isFinite(size) || size <= 0 || !Number.isFinite(pitch) || pitch <= 0) return 1;
 
-  // Preserve almost all of the authored card envelope while snapping it onto
-  // the lattice. A small (<6%) shrink is allowed to avoid a one-pixel/content
-  // rounding difference doubling the card to the next full grid span.
-  const minimumToFit = Math.max(1, Math.ceil((size * 0.94) / pitch));
+  // First contact with the grid is a quantization step, not a promise to
+  // preserve the legacy pixel envelope. The lattice owns exterior geometry;
+  // authored CSS is only the seed used to choose the nearest whole-track span.
+  // This avoids a 1.2-track card being inflated to 2 tracks simply because its
+  // previous DOM happened to be a few pixels taller than one grid row.
   const nearest = Math.max(1, Math.round(size / pitch));
-  return Math.min(maxSpan, Math.max(minimumToFit, nearest));
+  return Math.min(maxSpan, nearest);
 }
 
 /* The grid spec describes points ACROSS THE APPARATUS, not points across the
