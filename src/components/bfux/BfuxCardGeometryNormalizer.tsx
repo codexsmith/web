@@ -12,7 +12,7 @@ const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
 const billboardLayoutStorageKey = "bfl_bfux_layout_studio_billboard_v1";
-const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v7";
+const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v8";
 const twoTrackNodeIds = new Set(["representation-lab", "people", "products", "publications", "about"]);
 export const bfuxCardSizeQuantumPx = 60;
 const measurementNoiseTolerancePx = 0.75;
@@ -47,6 +47,46 @@ type SavedGridProjection = {
   placements?: BfuxLayoutNodePlacement[];
 };
 
+type LegacyFullPlacement = Pick<
+  BfuxLayoutNodePlacement,
+  "nodeId" | "column" | "row" | "corner" | "columnSpan" | "rowSpan"
+>;
+
+const legacyFullComposition: LegacyFullPlacement[] = [
+  { nodeId: "people", column: 8, row: 1, corner: "ne", columnSpan: 4, rowSpan: 2 },
+  { nodeId: "products", column: 12, row: 3, corner: "se", columnSpan: 4, rowSpan: 2 },
+  { nodeId: "publications", column: 12, row: 1, corner: "nw", columnSpan: 4, rowSpan: 2 },
+  { nodeId: "about", column: 4, row: 3, corner: "ne", columnSpan: 3.3338, rowSpan: 2 },
+  { nodeId: "research", column: 4, row: 3, corner: "nw", columnSpan: 8, rowSpan: 3 },
+  { nodeId: "governance", column: 12, row: 3, corner: "nw", columnSpan: 4, rowSpan: 2 },
+  { nodeId: "pipeline", column: 4, row: 6, corner: "nw", columnSpan: 3, rowSpan: 1 },
+  { nodeId: "method", column: 7, row: 6, corner: "nw", columnSpan: 2, rowSpan: 1 },
+  { nodeId: "timeline", column: 9, row: 6, corner: "nw", columnSpan: 3, rowSpan: 1 },
+];
+
+function approximatelyEqual(left: number | undefined, right: number | undefined) {
+  if (left == null || right == null) return left === right;
+  return Math.abs(left - right) < 0.001;
+}
+
+function isLegacyFullComposition(projection: SavedGridProjection | undefined) {
+  const placements = projection?.placements;
+  if (!Array.isArray(placements) || placements.length !== legacyFullComposition.length) return false;
+
+  const byId = new Map(placements.map((placement) => [placement.nodeId, placement]));
+  return legacyFullComposition.every((expected) => {
+    const actual = byId.get(expected.nodeId);
+    return Boolean(
+      actual
+      && actual.corner === expected.corner
+      && approximatelyEqual(actual.column, expected.column)
+      && approximatelyEqual(actual.row, expected.row)
+      && approximatelyEqual(actual.columnSpan, expected.columnSpan)
+      && approximatelyEqual(actual.rowSpan, expected.rowSpan)
+    );
+  });
+}
+
 function roundUpToQuantum(value: number, quantum = bfuxCardSizeQuantumPx) {
   if (!Number.isFinite(value) || value <= 0) return quantum;
 
@@ -74,10 +114,10 @@ function measureLocalSize(node: HTMLElement, apparatus: HTMLElement) {
 function canonicalHeight(node: HTMLElement, measuredHeight: number) {
   const nodeId = node.dataset.nodeId ?? "";
 
-  /* The billboard, upper People / Products / Publications bank, and About are
-   * now the same two-track physical card family. Research remains the larger
-   * three-track engine card. Card contents may differ; their outside chassis
-   * geometry is deliberately shared. */
+  /* These are fallback card families for nodes that have not been explicitly
+   * authored onto the lattice. A placed projection owns its own exterior span,
+   * so Full Loop can use reference-tuned fractional tracks without this bridge
+   * rewriting them. */
   if (twoTrackNodeIds.has(nodeId)) return bfuxGridPitchPx * 2;
   if (nodeId === "research") return bfuxGridPitchPx * 3;
 
@@ -141,16 +181,19 @@ function migrateEditorSizeProfile() {
   try {
     if (window.localStorage.getItem(sizeProfileMigrationKey) === "1") return;
 
-    /* Preserve authored editor work. The old Full Loop had no authored grid at
-     * all, so an existing empty mid projection is legacy state rather than a
-     * deliberate composition. Seed only that empty projection from the new
-     * canonical Full layout; never overwrite a Full grid the user has already
-     * placed by hand. */
+    /* Full Loop now has a reference-tuned authored projection. Replace only the
+     * empty pre-grid state or the immediately preceding generated Full profile;
+     * hand-authored Full arrangements remain untouched. */
     const rawGrid = window.localStorage.getItem(legacyGridStorageKey);
     if (rawGrid) {
       const saved = JSON.parse(rawGrid) as Record<string, SavedGridProjection | undefined>;
       const mid = saved.mid;
-      if (!mid || !Array.isArray(mid.placements) || mid.placements.length === 0) {
+      if (
+        !mid
+        || !Array.isArray(mid.placements)
+        || mid.placements.length === 0
+        || isLegacyFullComposition(mid)
+      ) {
         saved.mid = {
           ...(mid ?? {}),
           spec: { ...bfuxAuthoredLayout.mid.anchorGrid.spec },
@@ -158,16 +201,18 @@ function migrateEditorSizeProfile() {
         };
       }
 
-      /* Keep the shared height families coherent in every saved projection. */
-      for (const projection of Object.values(saved)) {
-        if (!projection || !Array.isArray(projection.placements)) continue;
-        projection.placements = projection.placements.map((placement) => {
+      /* Core keeps the shared fallback height families. Full owns its explicit
+       * fractional row spans and must not be coerced back to 2/3-track cards. */
+      const focus = saved.focus;
+      if (focus && Array.isArray(focus.placements)) {
+        focus.placements = focus.placements.map((placement) => {
           const nodeId = placement.nodeId ?? "";
           if (twoTrackNodeIds.has(nodeId)) return { ...placement, rowSpan: 2 };
           if (nodeId === "research") return { ...placement, rowSpan: 3 };
           return placement;
         });
       }
+
       window.localStorage.setItem(legacyGridStorageKey, JSON.stringify(saved));
     }
 
@@ -197,10 +242,11 @@ function migrateEditorSizeProfile() {
  * Canonical desktop geometry bridge.
  *
  * Widths still derive from the existing machine and round UP to the next 60px
- * module. Heights use explicit grid-native families: the Representation Lab
- * billboard, People / Products / Publications, and About are 180px (2 x 90px
- * tracks), while Research is 270px (3 x 90px tracks). Other cards retain the
- * 60px rounding bridge until their own grid-native size families are chosen.
+ * module. Unplaced card heights use explicit fallback families: the
+ * Representation Lab billboard, People / Products / Publications, and About
+ * use 180px (2 x 90px tracks), while unplaced Research uses 270px (3 x 90px
+ * tracks). Authored grid placement supersedes those fallback envelopes and may
+ * use fractional spans where the physical reference composition requires them.
  *
  * Position remains owned by the authored composition until a card is explicitly
  * placed on the lattice. Once placed, the anchor-grid contract owns the same
