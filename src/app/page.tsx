@@ -10,6 +10,7 @@ import { MobileMachineNonCrossingPipeLayer } from "@/components/bfux/MobileMachi
 import { MobileTimelineProjectionRedirect } from "@/components/bfux/MobileTimelineProjectionRedirect";
 import { RepresentationLabBillboardCardMount } from "@/components/bfux/RepresentationLabBillboardCardMount";
 import "./world/world-machine-preview.css";
+import "./world/world-machine-grid-contract.css";
 import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
 import "./lab-machine-frame.css";
