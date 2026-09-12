@@ -76,21 +76,22 @@ The Excel-style `PICK YOUR GRID` control is interpreted as a lattice of **points
 
 A card placement is represented by node id, anchor point `(column, row)`, and one attached corner: `NW`, `NE`, `SW`, or `SE`. The point is the shared alignment primitive; the corner tells the renderer which side of that point the object occupies.
 
-The coordinate space is the **machine workfield**, not the apparatus box. The existing viewport-sized pan surface is the workfield DOM boundary; the movable apparatus remains a separate child layer containing semantic cards. The editor renders the complete lattice on the workfield and converts a selected workfield anchor back into apparatus-local coordinates only when positioning a card. This is a structural distinction, not an overflow trick.
+The coordinate space is an expanded **apparatus-local workfield**. The lattice is mounted inside the same transformed DOM subtree as the semantic cards, then extended beyond the authored apparatus by the machine's full pan envelope. Panning therefore moves cards, rails, snap points, and drag ghosts as one physical drafting plane. The fixed pan surface remains only a background hit target; it is not the grid coordinate system.
 
 Consequences:
 
-- every visible grid point across the workfield is a real snap target;
-- grid rails are tiled from the same row/column fractions used by snapping rather than painted as long pseudo-lines from apparatus points;
+- every visible grid point across the expanded workfield is a real snap target;
+- grid rails are rendered from the same row/column fractions used by snapping rather than painted as overflow from a smaller grid;
+- panning cannot cause the apparatus to drift relative to the lattice because both share the same transform ancestry;
 - two cards can share one point with opposite corners and become exactly adjacent;
 - multiple cards can share a row or column without independently tuned offsets;
 - changing grid density remaps existing anchors to the nearest corresponding points;
 - a card whose own dimensions change remains attached by the same corner;
 - `RELEASE` removes the grid placement and restores its underlying authored/default placement.
 
-During drag, the editor tests every valid `(point, corner)` pair that keeps the card inside the **workfield**. The nearest valid relationship is previewed as a ghost before drop. Drag-over/drop capture is workfield-wide, so blank machine margins are as functional as the original authored board. While editing, placed cards are continuously reprojected from workfield anchors if the apparatus transform changes, so panning does not silently detach a card from its selected lattice point.
+During drag, the editor tests every valid `(point, corner)` pair that keeps the card inside the expanded workfield. The nearest valid relationship is previewed as a ghost before drop. Drag-over/drop capture is workfield-wide, so machine margins remain functional placement space.
 
-The generated source contract does not change: it still stores `(column, row, corner)`. Normal runtime interpretation uses the current desktop workfield to resolve those anchors and then projects them into apparatus-local coordinates. On mobile, where the desktop pan surface is intentionally hidden and the machine becomes a document rack, the runtime falls back to the prior apparatus-relative percentage interpretation.
+The generated source contract does not change: it still stores `(column, row, corner)`. Normal runtime interpretation reconstructs the same expanded apparatus-local workfield before resolving those anchors, so a layout written by the editor lands in the same place when the editor is closed. On mobile, where the machine becomes a document rack rather than a pannable desktop field, runtime retains the apparatus-relative percentage interpretation.
 
 ## Parts Box and free placement
 
