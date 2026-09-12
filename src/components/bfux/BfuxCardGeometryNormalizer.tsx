@@ -12,7 +12,7 @@ const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
 const billboardLayoutStorageKey = "bfl_bfux_layout_studio_billboard_v1";
-const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v8";
+const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v9";
 const twoTrackNodeIds = new Set(["representation-lab", "people", "products", "publications", "about"]);
 export const bfuxCardSizeQuantumPx = 60;
 const measurementNoiseTolerancePx = 0.75;
@@ -52,16 +52,19 @@ type LegacyFullPlacement = Pick<
   "nodeId" | "column" | "row" | "corner" | "columnSpan" | "rowSpan"
 >;
 
+/* Immediately preceding generated Full profile. This lets the migration advance
+ * the known WIP reference composition without touching a genuinely hand-edited
+ * Full arrangement. */
 const legacyFullComposition: LegacyFullPlacement[] = [
-  { nodeId: "people", column: 8, row: 1, corner: "ne", columnSpan: 4, rowSpan: 2 },
-  { nodeId: "products", column: 12, row: 3, corner: "se", columnSpan: 4, rowSpan: 2 },
-  { nodeId: "publications", column: 12, row: 1, corner: "nw", columnSpan: 4, rowSpan: 2 },
-  { nodeId: "about", column: 4, row: 3, corner: "ne", columnSpan: 3.3338, rowSpan: 2 },
-  { nodeId: "research", column: 4, row: 3, corner: "nw", columnSpan: 8, rowSpan: 3 },
-  { nodeId: "governance", column: 12, row: 3, corner: "nw", columnSpan: 4, rowSpan: 2 },
-  { nodeId: "pipeline", column: 4, row: 6, corner: "nw", columnSpan: 3, rowSpan: 1 },
-  { nodeId: "method", column: 7, row: 6, corner: "nw", columnSpan: 2, rowSpan: 1 },
-  { nodeId: "timeline", column: 9, row: 6, corner: "nw", columnSpan: 3, rowSpan: 1 },
+  { nodeId: "people", column: 8, row: 1, corner: "ne", columnSpan: 4, rowSpan: 1.75 },
+  { nodeId: "products", column: 12, row: 2.75, corner: "se", columnSpan: 3.75, rowSpan: 1.75 },
+  { nodeId: "publications", column: 12.5, row: 1, corner: "nw", columnSpan: 4, rowSpan: 1.75 },
+  { nodeId: "about", column: 3.5, row: 3.25, corner: "ne", columnSpan: 3.75, rowSpan: 1.75 },
+  { nodeId: "research", column: 4, row: 3, corner: "nw", columnSpan: 7.25, rowSpan: 2.25 },
+  { nodeId: "governance", column: 11.5, row: 5, corner: "nw", columnSpan: 3.75, rowSpan: 1.75 },
+  { nodeId: "pipeline", column: 4.25, row: 5.5, corner: "nw", columnSpan: 2, rowSpan: 1 },
+  { nodeId: "method", column: 6.25, row: 5.5, corner: "nw", columnSpan: 2.25, rowSpan: 1 },
+  { nodeId: "timeline", column: 8.5, row: 5.5, corner: "nw", columnSpan: 2.25, rowSpan: 1 },
 ];
 
 function approximatelyEqual(left: number | undefined, right: number | undefined) {
@@ -133,22 +136,20 @@ function clearCanonicalSizes(apparatus: HTMLElement) {
 }
 
 function applyCanonicalSizes(apparatus: HTMLElement) {
-  /* Normalization is a one-time migration for each card in the current
-   * apparatus/resolution. Grid portals and drag/drop mutate the DOM frequently;
-   * re-measuring already-normalized cards would feed their own rounded output
-   * back into the next measurement and can create runaway growth. Newly mounted
-   * cards are still discovered and normalized when they appear. */
+  /* Normalization is a one-time migration for each top-level card in the current
+   * apparatus/resolution. Attached hardware such as Full Loop Tour derives its
+   * geometry from its parent card and must never be independently quantized. */
   const nodes = Array.from(apparatus.querySelectorAll<HTMLElement>(nodeSelector))
     .filter((node) => (
       node.dataset.expanded !== "true"
+      && node.dataset.attachedTo == null
       && node.dataset.bfuxGridCanonicalSize !== "true"
     ));
 
   if (nodes.length === 0) return;
 
-  /* Measure every new card before mutating any card. This is important for
-   * nested hardware such as Tour: resizing its parent must not change the source
-   * measurement we are trying to quantize. */
+  /* Measure every new card before mutating any card so sibling measurements do
+   * not feed back through another card's newly normalized envelope. */
   const measurements = nodes.map((node) => ({
     node,
     size: measureLocalSize(node, apparatus),
@@ -247,6 +248,8 @@ function migrateEditorSizeProfile() {
  * use 180px (2 x 90px tracks), while unplaced Research uses 270px (3 x 90px
  * tracks). Authored grid placement supersedes those fallback envelopes and may
  * use fractional spans where the physical reference composition requires them.
+ * Attached hardware derives its envelope from its parent instead of being
+ * independently normalized.
  *
  * Position remains owned by the authored composition until a card is explicitly
  * placed on the lattice. Once placed, the anchor-grid contract owns the same
