@@ -161,6 +161,24 @@ function cloneProjection(projection: BfuxProjectionLayout): BfuxProjectionLayout
   };
 }
 
+function authoredEditState() {
+  const layouts: SavedLayout = {};
+  const grids: SavedAnchorGrid = {};
+  const parts: SavedParts = {};
+
+  for (const key of ["focus", "mid"] as const) {
+    const projection = authoredProjection(key);
+    layouts[key] = { ...projection.billboard };
+    grids[key] = {
+      spec: { ...projection.anchorGrid.spec },
+      placements: projection.anchorGrid.placements.map((placement) => ({ ...placement })),
+    };
+    parts[key] = projection.placedParts.map((placement) => ({ ...placement }));
+  }
+
+  return { layouts, grids, parts };
+}
+
 export function BfuxLayoutStudio() {
   const [enabled, setEnabled] = useState(false);
   const [target, setTarget] = useState<HTMLElement | null>(null);
@@ -168,6 +186,7 @@ export function BfuxLayoutStudio() {
   const [values, setValues] = useState<LayoutValues>({ ...authoredProjection("focus").billboard });
   const [placedParts, setPlacedParts] = useState<BfuxPlacedPart[]>([]);
   const [partsReady, setPartsReady] = useState(false);
+  const [editResetEpoch, setEditResetEpoch] = useState(0);
   const [gridState, setGridState] = useState<BfuxAnchorGridState>(() => hydratedGrid(undefined, authoredProjection("focus").anchorGrid));
   const [gridHydratedFor, setGridHydratedFor] = useState<ResolutionKey | null>(null);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
@@ -409,11 +428,21 @@ export function BfuxLayoutStudio() {
     setValues((current) => ({ ...current, [key]: value }));
   }
 
-  const reset = () => {
-    const saved = readSaved();
-    delete saved[resolution];
-    writeSaved(saved);
-    setValues({ ...authoredProjection(resolution).billboard });
+  const resetEditState = () => {
+    const authored = authoredEditState();
+    writeSaved(authored.layouts);
+    writeSavedGrid(authored.grids);
+    writeJson(placementStorageKey, authored.parts);
+
+    const projection = cloneProjection(authoredProjection(resolution));
+    setValues(projection.billboard);
+    setGridState(projection.anchorGrid);
+    setPlacedParts(projection.placedParts);
+    setSelectedNodeId(null);
+    setCopyState("COPY SOURCE");
+    setSpecState("COPY SPEC");
+    setWriteState("WRITE REPO");
+    setEditResetEpoch((current) => current + 1);
   };
 
   const exit = () => {
@@ -427,8 +456,15 @@ export function BfuxLayoutStudio() {
 
   return (
     <>
-      {partsReady ? <BfuxPlacementLayer resolution={resolution} onPlacementsChange={setPlacedParts} /> : null}
+      {partsReady ? (
+        <BfuxPlacementLayer
+          key={`parts-${editResetEpoch}`}
+          resolution={resolution}
+          onPlacementsChange={setPlacedParts}
+        />
+      ) : null}
       <BfuxAnchorGridLayer
+        key={`grid-${editResetEpoch}`}
         state={gridState}
         onPlacementsChange={handleNodePlacements}
         onSelectedNodeChange={setSelectedNodeId}
@@ -436,7 +472,7 @@ export function BfuxLayoutStudio() {
       <aside className="bfux-layout-studio" aria-label="BFUX layout studio">
         <header>
           <div>
-            <small>BFUX LAYOUT STUDIO · V0.5</small>
+            <small>BFUX LAYOUT STUDIO · V0.6</small>
             <strong>Lab Machine layout</strong>
           </div>
           <button type="button" onClick={exit}>×</button>
@@ -504,10 +540,10 @@ export function BfuxLayoutStudio() {
         </section>
 
         <footer>
-          <button type="button" onClick={reset}>RESET BILLBOARD</button>
+          <button type="button" onClick={resetEditState} title="Restore Core and Full to the authored layout source">RESET ALL EDITS</button>
           <button type="button" onClick={copySource}>{copyState}</button>
         </footer>
-        <p>The editor is now a compiler. Card anchors, billboard geometry, and placed parts compile into one versioned source module for both Core and Full. Runtime reads that module directly; no AI interpretation step is required.</p>
+        <p>RESET ALL EDITS restores billboard geometry, card anchors, grid settings, placed parts, and transient editor selection for both Core and Full from the authored source. The editor compiles those same systems back into one versioned source module.</p>
       </aside>
     </>
   );
