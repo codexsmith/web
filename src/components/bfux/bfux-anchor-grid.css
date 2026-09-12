@@ -155,16 +155,10 @@
   cursor: not-allowed;
 }
 
-/* Grid editing has two coordinate spaces: the viewport-sized pan surface is the
- * workfield lattice, while semantic cards remain children of the movable
- * apparatus. During editing the workfield becomes a paint-only overlay; drag
- * events are captured globally by the grid controller so cards remain the hit
- * targets and background panning cannot steal the gesture. */
-[data-machine-layer="pan-surface"][data-bfux-grid-editing="true"] {
-  z-index: 20 !important;
-  pointer-events: none;
-}
-
+/* The functional drafting plane now lives inside the apparatus transform tree.
+ * Cards and lattice therefore pan as one coordinate system. The plane extends
+ * beyond the authored apparatus by exactly the allowed pan envelope so the
+ * user never exposes an ungridded dead zone while panning. */
 [data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
   .bf-machine-node[data-machine-layer="node"] {
   cursor: grab !important;
@@ -187,12 +181,17 @@
   outline-color: #61d7ff;
 }
 
-/* The lattice is genuinely tiled across the workfield. Rails and points share
- * the same fractions used by snapping; no line is a decorative overflow from
- * an apparatus-sized grid. */
+/* Rails and points are the actual snapping lattice, not decorative overflow.
+ * The negative inset creates one continuous apparatus-local world plane large
+ * enough for the machine's +/-700 x and +/-260 y pan range. */
 .bfux-anchor-grid-overlay {
+  --bfux-grid-pan-x: 700px;
+  --bfux-grid-pan-y: 260px;
   position: absolute;
-  inset: 0;
+  left: calc(0px - var(--bfux-grid-pan-x));
+  right: calc(0px - var(--bfux-grid-pan-x));
+  top: calc(0px - var(--bfux-grid-pan-y));
+  bottom: calc(0px - var(--bfux-grid-pan-y));
   z-index: 21;
   overflow: visible;
   pointer-events: none;
@@ -281,6 +280,15 @@
 }
 .bfux-anchor-grid-ghost > span { top: .34rem; }
 .bfux-anchor-grid-ghost > b { bottom: .34rem; color: #d6c3eb; }
+
+@media (max-width: 1024px) {
+  .bfux-anchor-grid-overlay {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .bfux-anchor-grid-overlay { transition: none; }
