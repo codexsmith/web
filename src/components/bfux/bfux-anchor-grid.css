@@ -155,6 +155,16 @@
   cursor: not-allowed;
 }
 
+/* Grid editing has two coordinate spaces: the viewport-sized pan surface is the
+ * workfield lattice, while semantic cards remain children of the movable
+ * apparatus. During editing the workfield becomes a paint-only overlay; drag
+ * events are captured globally by the grid controller so cards remain the hit
+ * targets and background panning cannot steal the gesture. */
+[data-machine-layer="pan-surface"][data-bfux-grid-editing="true"] {
+  z-index: 20 !important;
+  pointer-events: none;
+}
+
 [data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
   .bf-machine-node[data-machine-layer="node"] {
   cursor: grab !important;
@@ -177,6 +187,9 @@
   outline-color: #61d7ff;
 }
 
+/* The lattice is genuinely tiled across the workfield. Rails and points share
+ * the same fractions used by snapping; no line is a decorative overflow from
+ * an apparatus-sized grid. */
 .bfux-anchor-grid-overlay {
   position: absolute;
   inset: 0;
@@ -185,33 +198,45 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity .08s ease;
-  background: transparent;
+  background: rgba(7,16,21,.025);
 }
 .bfux-anchor-grid-overlay[data-visible="true"] { opacity: 1; }
 .bfux-anchor-grid-overlay[data-dragging="true"] {
-  background: transparent;
+  background: rgba(7,16,21,.08);
+}
+.bfux-anchor-grid-overlay > span[data-axis] {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  background: rgba(97,215,255,.075);
+}
+.bfux-anchor-grid-overlay > span[data-axis="column"] {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-.5px);
+}
+.bfux-anchor-grid-overlay > span[data-axis="row"] {
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-.5px);
+}
+.bfux-anchor-grid-overlay[data-dragging="true"] > span[data-axis] {
+  background: rgba(97,215,255,.16);
 }
 .bfux-anchor-grid-overlay > i {
   position: absolute;
+  z-index: 1;
   width: 7px;
   height: 7px;
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(108,143,157,.72);
+  border: 1px solid rgba(108,143,157,.78);
   border-radius: 50%;
   background: #071015;
-  box-shadow: 0 0 0 3px rgba(7,16,21,.66);
+  box-shadow: 0 0 0 3px rgba(7,16,21,.72);
 }
-.bfux-anchor-grid-overlay > i::before,
-.bfux-anchor-grid-overlay > i::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(97,215,255,.012);
-}
-.bfux-anchor-grid-overlay > i::before { width: 200vw; height: 1px; }
-.bfux-anchor-grid-overlay > i::after { width: 1px; height: 200vh; }
 .bfux-anchor-grid-overlay > i[data-active="true"] {
   width: 11px;
   height: 11px;
@@ -219,10 +244,6 @@
   border-color: #9cecff;
   background: #61d7ff;
   box-shadow: 0 0 0 4px rgba(97,215,255,.12), 0 0 12px rgba(97,215,255,.64);
-}
-.bfux-anchor-grid-overlay > i[data-active="true"]::before,
-.bfux-anchor-grid-overlay > i[data-active="true"]::after {
-  background: rgba(97,215,255,.38);
 }
 
 .bfux-anchor-grid-ghost {

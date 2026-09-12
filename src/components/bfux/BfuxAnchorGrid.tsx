@@ -4,7 +4,9 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import { createPortal } from "react-dom";
 import "./bfux-anchor-grid.css";
 
-const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
+const machineSelector = '.bf-machine[data-skin="physical"]';
+const workfieldSelector = '[data-machine-layer="pan-surface"]';
+const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const nodeTransferType = "application/x-bfux-node";
 const layoutTuningEvent = "bfux-layout-tuning";
@@ -52,6 +54,11 @@ type SnapCandidate = BfuxNodeAnchorPlacement & {
   height: number;
 };
 
+type GridHosts = {
+  workfield: HTMLElement;
+  apparatus: HTMLElement;
+};
+
 function clampInteger(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, Math.round(value)));
 }
@@ -67,34 +74,37 @@ function cornerTranslation(corner: BfuxAnchorCorner) {
   };
 }
 
-function nodeLocalSize(node: HTMLElement, host: HTMLElement) {
-  const hostRect = host.getBoundingClientRect();
+function elementScale(element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+  const scaleX = element.offsetWidth > 0 ? rect.width / element.offsetWidth : 1;
+  const scaleY = element.offsetHeight > 0 ? rect.height / element.offsetHeight : scaleX;
+  return { rect, scaleX: scaleX || 1, scaleY: scaleY || 1 };
+}
+
+function nodeLocalSize(node: HTMLElement, workfield: HTMLElement) {
+  const workfieldScale = elementScale(workfield);
   const nodeRect = node.getBoundingClientRect();
-  const scaleX = host.offsetWidth > 0 ? hostRect.width / host.offsetWidth : 1;
-  const scaleY = host.offsetHeight > 0 ? hostRect.height / host.offsetHeight : scaleX;
   return {
-    width: nodeRect.width / (scaleX || 1),
-    height: nodeRect.height / (scaleY || 1),
-    scaleX: scaleX || 1,
-    scaleY: scaleY || 1,
+    width: nodeRect.width / workfieldScale.scaleX,
+    height: nodeRect.height / workfieldScale.scaleY,
+    scaleX: workfieldScale.scaleX,
+    scaleY: workfieldScale.scaleY,
   };
 }
 
-function candidateForPointer(host: HTMLElement, event: DragEvent, spec: BfuxAnchorGridSpec, drag: DragState) {
-  const hostRect = host.getBoundingClientRect();
-  const hostWidth = host.offsetWidth || hostRect.width;
-  const hostHeight = host.offsetHeight || hostRect.height;
-  const scaleX = hostWidth > 0 ? hostRect.width / hostWidth : 1;
-  const scaleY = hostHeight > 0 ? hostRect.height / hostHeight : scaleX;
-  const pointerX = (event.clientX - hostRect.left) / (scaleX || 1);
-  const pointerY = (event.clientY - hostRect.top) / (scaleY || 1);
+function candidateForPointer(workfield: HTMLElement, event: DragEvent, spec: BfuxAnchorGridSpec, drag: DragState) {
+  const { rect, scaleX, scaleY } = elementScale(workfield);
+  const workfieldWidth = workfield.offsetWidth || rect.width;
+  const workfieldHeight = workfield.offsetHeight || rect.height;
+  const pointerX = (event.clientX - rect.left) / scaleX;
+  const pointerY = (event.clientY - rect.top) / scaleY;
   const corners: BfuxAnchorCorner[] = ["nw", "ne", "sw", "se"];
   let best: { candidate: SnapCandidate; distance: number } | null = null;
 
   for (let row = 0; row < spec.rows; row += 1) {
-    const y = axisFraction(row, spec.rows) * hostHeight;
+    const y = axisFraction(row, spec.rows) * workfieldHeight;
     for (let column = 0; column < spec.columns; column += 1) {
-      const x = axisFraction(column, spec.columns) * hostWidth;
+      const x = axisFraction(column, spec.columns) * workfieldWidth;
       for (const corner of corners) {
         const rightAnchored = corner === "ne" || corner === "se";
         const bottomAnchored = corner === "sw" || corner === "se";
@@ -103,7 +113,7 @@ function candidateForPointer(host: HTMLElement, event: DragEvent, spec: BfuxAnch
         const right = left + drag.width;
         const bottom = top + drag.height;
 
-        if (left < -0.5 || top < -0.5 || right > hostWidth + 0.5 || bottom > hostHeight + 0.5) continue;
+        if (left < -0.5 || top < -0.5 || right > workfieldWidth + 0.5 || bottom > workfieldHeight + 0.5) continue;
 
         const expectedPointerX = left + drag.grabX;
         const expectedPointerY = top + drag.grabY;
@@ -128,6 +138,27 @@ function candidateForPointer(host: HTMLElement, event: DragEvent, spec: BfuxAnch
   }
 
   return best?.candidate ?? null;
+}
+
+function pointerInsideWorkfield(workfield: HTMLElement, event: DragEvent) {
+  const rect = workfield.getBoundingClientRect();
+  return event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+}
+
+function anchorPointInApparatus(
+  workfield: HTMLElement,
+  apparatus: HTMLElement,
+  placement: BfuxNodeAnchorPlacement,
+  spec: BfuxAnchorGridSpec,
+) {
+  const workfieldRect = workfield.getBoundingClientRect();
+  const apparatusScale = elementScale(apparatus);
+  const clientX = workfieldRect.left + axisFraction(placement.column, spec.columns) * workfieldRect.width;
+  const clientY = workfieldRect.top + axisFraction(placement.row, spec.rows) * workfieldRect.height;
+  return {
+    x: (clientX - apparatusScale.rect.left) / apparatusScale.scaleX,
+    y: (clientY - apparatusScale.rect.top) / apparatusScale.scaleY,
+  };
 }
 
 export function remapBfuxAnchorPlacements(
@@ -243,20 +274,26 @@ export function BfuxAnchorGridLayer({
   onPlacementsChange: (placements: BfuxNodeAnchorPlacement[]) => void;
   onSelectedNodeChange?: (nodeId: string | null) => void;
 }) {
-  const [host, setHost] = useState<HTMLElement | null>(null);
+  const [hosts, setHosts] = useState<GridHosts | null>(null);
   const [drag, setDrag] = useState<DragState | null>(null);
   const [candidate, setCandidate] = useState<SnapCandidate | null>(null);
   const dragRef = useRef<DragState | null>(null);
 
   useEffect(() => {
     let frame = 0;
-    const findHost = () => {
-      const next = document.querySelector<HTMLElement>(apparatusSelector);
-      setHost((current) => current === next ? current : next);
+    const findHosts = () => {
+      const machine = document.querySelector<HTMLElement>(machineSelector);
+      const workfield = machine?.querySelector<HTMLElement>(workfieldSelector) ?? null;
+      const apparatus = machine?.querySelector<HTMLElement>(apparatusSelector) ?? null;
+      setHosts((current) => {
+        if (!workfield || !apparatus) return current === null ? current : null;
+        if (current?.workfield === workfield && current.apparatus === apparatus) return current;
+        return { workfield, apparatus };
+      });
     };
     const schedule = () => {
       cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(findHost);
+      frame = requestAnimationFrame(findHosts);
     };
 
     schedule();
@@ -269,49 +306,75 @@ export function BfuxAnchorGridLayer({
   }, []);
 
   useEffect(() => {
-    if (!host) return;
+    if (!hosts) return;
+    const { workfield, apparatus } = hosts;
+    let frame = 0;
 
-    const placementByNode = new Map(state.placements.map((placement) => [placement.nodeId, placement]));
-    const nodes = Array.from(host.querySelectorAll<HTMLElement>(nodeSelector));
+    workfield.dataset.bfuxGridEditing = "true";
+    workfield.dataset.bfuxGridVisible = state.spec.visible ? "true" : "false";
+    workfield.dataset.bfuxGridCoordinateSpace = "workfield";
+    apparatus.dataset.bfuxGridEditing = "true";
 
-    host.dataset.bfuxGridEditing = "true";
-    host.dataset.bfuxGridVisible = state.spec.visible ? "true" : "false";
+    const applyPlacementStyles = () => {
+      const placementByNode = new Map(state.placements.map((placement) => [placement.nodeId, placement]));
+      const nodes = Array.from(apparatus.querySelectorAll<HTMLElement>(nodeSelector));
 
-    for (const node of nodes) {
-      node.draggable = node.dataset.expanded !== "true";
-      node.dataset.bfuxGridEditable = "true";
-      const placement = placementByNode.get(node.dataset.nodeId ?? "");
+      for (const node of nodes) {
+        node.draggable = node.dataset.expanded !== "true";
+        node.dataset.bfuxGridEditable = "true";
+        const placement = placementByNode.get(node.dataset.nodeId ?? "");
 
-      if (!placement) {
-        delete node.dataset.bfuxGridPlaced;
-        delete node.dataset.bfuxGridCorner;
-        node.style.removeProperty("--bfux-node-anchor-x");
-        node.style.removeProperty("--bfux-node-anchor-y");
-        node.style.removeProperty("--bfux-node-anchor-tx");
-        node.style.removeProperty("--bfux-node-anchor-ty");
-        continue;
+        if (!placement) {
+          delete node.dataset.bfuxGridPlaced;
+          delete node.dataset.bfuxGridCorner;
+          node.style.removeProperty("--bfux-node-anchor-x");
+          node.style.removeProperty("--bfux-node-anchor-y");
+          node.style.removeProperty("--bfux-node-anchor-tx");
+          node.style.removeProperty("--bfux-node-anchor-ty");
+          continue;
+        }
+
+        const anchor = anchorPointInApparatus(workfield, apparatus, placement, state.spec);
+        const translation = cornerTranslation(placement.corner);
+        node.dataset.bfuxGridPlaced = "true";
+        node.dataset.bfuxGridCorner = placement.corner;
+        node.style.setProperty("--bfux-node-anchor-x", `${anchor.x}px`);
+        node.style.setProperty("--bfux-node-anchor-y", `${anchor.y}px`);
+        node.style.setProperty("--bfux-node-anchor-tx", translation.x);
+        node.style.setProperty("--bfux-node-anchor-ty", translation.y);
+
+        if (node.classList.contains("bf-machine-node--billboard")) {
+          node.style.removeProperty("left");
+          node.style.removeProperty("top");
+        }
       }
 
-      const translation = cornerTranslation(placement.corner);
-      node.dataset.bfuxGridPlaced = "true";
-      node.dataset.bfuxGridCorner = placement.corner;
-      node.style.setProperty("--bfux-node-anchor-x", `${axisFraction(placement.column, state.spec.columns) * 100}%`);
-      node.style.setProperty("--bfux-node-anchor-y", `${axisFraction(placement.row, state.spec.rows) * 100}%`);
-      node.style.setProperty("--bfux-node-anchor-tx", translation.x);
-      node.style.setProperty("--bfux-node-anchor-ty", translation.y);
+      apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
+    };
 
-      if (node.classList.contains("bf-machine-node--billboard")) {
-        node.style.removeProperty("left");
-        node.style.removeProperty("top");
-      }
-    }
+    const scheduleApply = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(applyPlacementStyles);
+    };
 
-    host.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
+    applyPlacementStyles();
+    const resizeObserver = new ResizeObserver(scheduleApply);
+    resizeObserver.observe(workfield);
+    resizeObserver.observe(apparatus);
+    const apparatusObserver = new MutationObserver(scheduleApply);
+    apparatusObserver.observe(apparatus, { attributes: true, attributeFilter: ["style"] });
+    window.addEventListener("resize", scheduleApply);
 
     return () => {
-      delete host.dataset.bfuxGridEditing;
-      delete host.dataset.bfuxGridVisible;
-      for (const node of Array.from(host.querySelectorAll<HTMLElement>(nodeSelector))) {
+      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      apparatusObserver.disconnect();
+      window.removeEventListener("resize", scheduleApply);
+      delete workfield.dataset.bfuxGridEditing;
+      delete workfield.dataset.bfuxGridVisible;
+      delete workfield.dataset.bfuxGridCoordinateSpace;
+      delete apparatus.dataset.bfuxGridEditing;
+      for (const node of Array.from(apparatus.querySelectorAll<HTMLElement>(nodeSelector))) {
         node.removeAttribute("draggable");
         delete node.dataset.bfuxGridEditable;
         delete node.dataset.bfuxGridPlaced;
@@ -321,18 +384,19 @@ export function BfuxAnchorGridLayer({
         node.style.removeProperty("--bfux-node-anchor-tx");
         node.style.removeProperty("--bfux-node-anchor-ty");
       }
-      host.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
+      apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
     };
-  }, [host, state]);
+  }, [hosts, state]);
 
   useEffect(() => {
-    if (!host) return;
+    if (!hosts) return;
+    const { workfield, apparatus } = hosts;
 
     const pointerDown = (event: PointerEvent) => {
       const target = event.target;
       if (!(target instanceof HTMLElement)) return;
       const node = target.closest<HTMLElement>(nodeSelector);
-      if (!node || node.dataset.expanded === "true") return;
+      if (!node || !apparatus.contains(node) || node.dataset.expanded === "true") return;
       event.stopPropagation();
       onSelectedNodeChange?.(node.dataset.nodeId ?? null);
     };
@@ -341,7 +405,7 @@ export function BfuxAnchorGridLayer({
       const target = event.target;
       if (!(target instanceof HTMLElement)) return;
       const node = target.closest<HTMLElement>(nodeSelector);
-      if (!node || node.dataset.expanded === "true") return;
+      if (!node || !apparatus.contains(node) || node.dataset.expanded === "true") return;
       event.preventDefault();
       event.stopPropagation();
       onSelectedNodeChange?.(node.dataset.nodeId ?? null);
@@ -351,11 +415,11 @@ export function BfuxAnchorGridLayer({
       const target = event.target;
       if (!(target instanceof HTMLElement)) return;
       const node = target.closest<HTMLElement>(nodeSelector);
-      if (!node || node.dataset.expanded === "true") return;
+      if (!node || !apparatus.contains(node) || node.dataset.expanded === "true") return;
       const nodeId = node.dataset.nodeId;
       if (!nodeId) return;
 
-      const size = nodeLocalSize(node, host);
+      const size = nodeLocalSize(node, workfield);
       const nodeRect = node.getBoundingClientRect();
       const grabX = (event.clientX - nodeRect.left) / size.scaleX;
       const grabY = (event.clientY - nodeRect.top) / size.scaleY;
@@ -375,25 +439,30 @@ export function BfuxAnchorGridLayer({
     const dragOver = (event: DragEvent) => {
       const activeDrag = dragRef.current;
       if (!activeDrag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
+      if (!pointerInsideWorkfield(workfield, event)) {
+        setCandidate(null);
+        return;
+      }
       event.preventDefault();
       event.stopPropagation();
       event.dataTransfer.dropEffect = "move";
-      setCandidate(candidateForPointer(host, event, state.spec, activeDrag));
+      setCandidate(candidateForPointer(workfield, event, state.spec, activeDrag));
     };
 
     const drop = (event: DragEvent) => {
       const activeDrag = dragRef.current;
       if (!activeDrag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
+      if (!pointerInsideWorkfield(workfield, event)) return;
       event.preventDefault();
       event.stopPropagation();
-      const next = candidateForPointer(host, event, state.spec, activeDrag);
+      const next = candidateForPointer(workfield, event, state.spec, activeDrag);
       if (next) {
         onPlacementsChange([
           ...state.placements.filter((placement) => placement.nodeId !== activeDrag.nodeId),
           { nodeId: activeDrag.nodeId, column: next.column, row: next.row, corner: next.corner },
         ]);
       }
-      const node = host.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(activeDrag.nodeId)}"]`);
+      const node = apparatus.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(activeDrag.nodeId)}"]`);
       if (node) delete node.dataset.bfuxGridDragging;
       dragRef.current = null;
       setDrag(null);
@@ -403,7 +472,7 @@ export function BfuxAnchorGridLayer({
     const dragEnd = () => {
       const activeDrag = dragRef.current;
       if (activeDrag) {
-        const node = host.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(activeDrag.nodeId)}"]`);
+        const node = apparatus.querySelector<HTMLElement>(`${nodeSelector}[data-node-id="${CSS.escape(activeDrag.nodeId)}"]`);
         if (node) delete node.dataset.bfuxGridDragging;
       }
       dragRef.current = null;
@@ -411,23 +480,23 @@ export function BfuxAnchorGridLayer({
       setCandidate(null);
     };
 
-    host.addEventListener("pointerdown", pointerDown, true);
-    host.addEventListener("click", click, true);
-    host.addEventListener("dragstart", dragStart, true);
-    host.addEventListener("dragover", dragOver, true);
-    host.addEventListener("drop", drop, true);
+    apparatus.addEventListener("pointerdown", pointerDown, true);
+    apparatus.addEventListener("click", click, true);
+    apparatus.addEventListener("dragstart", dragStart, true);
+    window.addEventListener("dragover", dragOver, true);
+    window.addEventListener("drop", drop, true);
     window.addEventListener("dragend", dragEnd);
 
     return () => {
-      host.removeEventListener("pointerdown", pointerDown, true);
-      host.removeEventListener("click", click, true);
-      host.removeEventListener("dragstart", dragStart, true);
-      host.removeEventListener("dragover", dragOver, true);
-      host.removeEventListener("drop", drop, true);
+      apparatus.removeEventListener("pointerdown", pointerDown, true);
+      apparatus.removeEventListener("click", click, true);
+      apparatus.removeEventListener("dragstart", dragStart, true);
+      window.removeEventListener("dragover", dragOver, true);
+      window.removeEventListener("drop", drop, true);
       window.removeEventListener("dragend", dragEnd);
       dragRef.current = null;
     };
-  }, [host, onPlacementsChange, onSelectedNodeChange, state.placements, state.spec]);
+  }, [hosts, onPlacementsChange, onSelectedNodeChange, state.placements, state.spec]);
 
   const points = useMemo(() => {
     const next: Array<{ column: number; row: number; x: number; y: number }> = [];
@@ -439,7 +508,8 @@ export function BfuxAnchorGridLayer({
     return next;
   }, [state.spec.columns, state.spec.rows]);
 
-  if (!host) return null;
+  if (!hosts) return null;
+  const { workfield } = hosts;
 
   const ghostStyle = candidate ? {
     left: `${candidate.x}px`,
@@ -455,8 +525,23 @@ export function BfuxAnchorGridLayer({
         className="bfux-anchor-grid-overlay"
         data-visible={state.spec.visible || drag ? "true" : undefined}
         data-dragging={drag ? "true" : undefined}
+        data-coordinate-space="workfield"
         aria-hidden="true"
       >
+        {Array.from({ length: state.spec.columns }, (_, column) => (
+          <span
+            key={`column:${column}`}
+            data-axis="column"
+            style={{ left: `${axisFraction(column, state.spec.columns) * 100}%` }}
+          />
+        ))}
+        {Array.from({ length: state.spec.rows }, (_, row) => (
+          <span
+            key={`row:${row}`}
+            data-axis="row"
+            style={{ top: `${axisFraction(row, state.spec.rows) * 100}%` }}
+          />
+        ))}
         {points.map((point) => {
           const active = candidate?.column === point.column && candidate?.row === point.row;
           return (
@@ -475,7 +560,7 @@ export function BfuxAnchorGridLayer({
         </div>
       ) : null}
     </>,
-    host,
+    workfield,
     "bfux-anchor-grid",
   );
 }

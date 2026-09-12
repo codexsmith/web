@@ -7,13 +7,20 @@ import { bfuxAuthoredLayout } from "./bfux-layout-authored.generated";
 import type { BfuxBillboardLayout, BfuxLayoutCorner, BfuxLayoutResolution } from "./bfux-layout-source";
 import "./bfux-authored-layout.css";
 
-const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
+const machineSelector = '.bf-machine[data-skin="physical"]';
+const workfieldSelector = '[data-machine-layer="pan-surface"]';
+const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const billboardSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
 const layoutTuningEvent = "bfux-layout-tuning";
 
+type LayoutHosts = {
+  workfield: HTMLElement;
+  apparatus: HTMLElement;
+};
+
 function currentResolution(host: HTMLElement): BfuxLayoutResolution {
-  const machine = host.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
+  const machine = host.closest<HTMLElement>(machineSelector);
   return machine?.dataset.resolution === "mid" || machine?.dataset.resolution === "full" ? "mid" : "focus";
 }
 
@@ -25,6 +32,41 @@ function cornerTranslation(corner: BfuxLayoutCorner) {
   return {
     x: corner === "ne" || corner === "se" ? "-100%" : "0%",
     y: corner === "sw" || corner === "se" ? "-100%" : "0%",
+  };
+}
+
+function elementScale(element: HTMLElement) {
+  const rect = element.getBoundingClientRect();
+  const scaleX = element.offsetWidth > 0 ? rect.width / element.offsetWidth : 1;
+  const scaleY = element.offsetHeight > 0 ? rect.height / element.offsetHeight : scaleX;
+  return { rect, scaleX: scaleX || 1, scaleY: scaleY || 1 };
+}
+
+function anchorPositionInApparatus(
+  workfield: HTMLElement,
+  apparatus: HTMLElement,
+  column: number,
+  row: number,
+  columns: number,
+  rows: number,
+) {
+  const xFraction = axisFraction(column, columns);
+  const yFraction = axisFraction(row, rows);
+  const workfieldRect = workfield.getBoundingClientRect();
+
+  /* Mobile hides the desktop workfield entirely. Keep the old apparatus-local
+   * percentage interpretation there; desktop authored layouts use the full
+   * workfield and are converted back into apparatus-local pixels. */
+  if (!workfieldRect.width || !workfieldRect.height) {
+    return { x: `${xFraction * 100}%`, y: `${yFraction * 100}%` };
+  }
+
+  const apparatusScale = elementScale(apparatus);
+  const clientX = workfieldRect.left + xFraction * workfieldRect.width;
+  const clientY = workfieldRect.top + yFraction * workfieldRect.height;
+  return {
+    x: `${(clientX - apparatusScale.rect.left) / apparatusScale.scaleX}px`,
+    y: `${(clientY - apparatusScale.rect.top) / apparatusScale.scaleY}px`,
   };
 }
 
@@ -74,16 +116,22 @@ function partSize(kind: BfuxPartKind) {
 }
 
 export function BfuxAuthoredLayoutLayer() {
-  const [host, setHost] = useState<HTMLElement | null>(null);
+  const [hosts, setHosts] = useState<LayoutHosts | null>(null);
   const [resolution, setResolution] = useState<BfuxLayoutResolution>("focus");
   const [revision, setRevision] = useState(0);
 
   useEffect(() => {
     let frame = 0;
     const find = () => {
-      const next = document.querySelector<HTMLElement>(apparatusSelector);
-      setHost((current) => current === next ? current : next);
-      if (next) setResolution(currentResolution(next));
+      const machine = document.querySelector<HTMLElement>(machineSelector);
+      const workfield = machine?.querySelector<HTMLElement>(workfieldSelector) ?? null;
+      const apparatus = machine?.querySelector<HTMLElement>(apparatusSelector) ?? null;
+      setHosts((current) => {
+        if (!workfield || !apparatus) return current === null ? current : null;
+        if (current?.workfield === workfield && current.apparatus === apparatus) return current;
+        return { workfield, apparatus };
+      });
+      if (apparatus) setResolution(currentResolution(apparatus));
       setRevision((current) => current + 1);
     };
     const schedule = () => {
@@ -106,24 +154,46 @@ export function BfuxAuthoredLayoutLayer() {
   }, []);
 
   useEffect(() => {
-    if (!host) return;
+    if (!hosts) return;
+    const bump = () => setRevision((current) => current + 1);
+    const resizeObserver = new ResizeObserver(bump);
+    resizeObserver.observe(hosts.workfield);
+    resizeObserver.observe(hosts.apparatus);
+    window.addEventListener("resize", bump);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", bump);
+    };
+  }, [hosts]);
+
+  useEffect(() => {
+    if (!hosts) return;
+    const { workfield, apparatus } = hosts;
     const layout = bfuxAuthoredLayout[resolution];
-    const billboard = host.querySelector<HTMLElement>(billboardSelector);
+    const billboard = apparatus.querySelector<HTMLElement>(billboardSelector);
     if (billboard) applyBillboardValues(billboard, layout.billboard);
 
     const placementByNode = new Map(layout.anchorGrid.placements.map((placement) => [placement.nodeId, placement]));
-    const nodes = Array.from(host.querySelectorAll<HTMLElement>(nodeSelector));
+    const nodes = Array.from(apparatus.querySelectorAll<HTMLElement>(nodeSelector));
 
     for (const node of nodes) {
       const nodeId = node.dataset.nodeId ?? "";
       const placement = placementByNode.get(nodeId);
       if (!placement) continue;
 
+      const anchor = anchorPositionInApparatus(
+        workfield,
+        apparatus,
+        placement.column,
+        placement.row,
+        layout.anchorGrid.spec.columns,
+        layout.anchorGrid.spec.rows,
+      );
       const translation = cornerTranslation(placement.corner);
       node.dataset.bfuxAuthoredGridPlaced = "true";
       node.dataset.bfuxGridCorner = placement.corner;
-      node.style.setProperty("--bfux-node-anchor-x", `${axisFraction(placement.column, layout.anchorGrid.spec.columns) * 100}%`);
-      node.style.setProperty("--bfux-node-anchor-y", `${axisFraction(placement.row, layout.anchorGrid.spec.rows) * 100}%`);
+      node.style.setProperty("--bfux-node-anchor-x", anchor.x);
+      node.style.setProperty("--bfux-node-anchor-y", anchor.y);
       node.style.setProperty("--bfux-node-anchor-tx", translation.x);
       node.style.setProperty("--bfux-node-anchor-ty", translation.y);
 
@@ -133,7 +203,7 @@ export function BfuxAuthoredLayoutLayer() {
       }
     }
 
-    host.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
+    apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
 
     return () => {
       if (billboard) clearBillboardValues(billboard);
@@ -145,11 +215,12 @@ export function BfuxAuthoredLayoutLayer() {
         node.style.removeProperty("--bfux-node-anchor-tx");
         node.style.removeProperty("--bfux-node-anchor-ty");
       }
-      host.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
+      apparatus.dispatchEvent(new CustomEvent(layoutTuningEvent, { bubbles: true }));
     };
-  }, [host, resolution, revision]);
+  }, [hosts, resolution, revision]);
 
-  if (!host) return null;
+  if (!hosts) return null;
+  const { apparatus } = hosts;
   const layout = bfuxAuthoredLayout[resolution];
 
   return createPortal(
@@ -177,7 +248,7 @@ export function BfuxAuthoredLayoutLayer() {
         );
       })}
     </div>,
-    host,
+    apparatus,
     "bfux-authored-layout",
   );
 }

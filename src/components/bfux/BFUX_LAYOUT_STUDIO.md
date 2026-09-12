@@ -76,15 +76,21 @@ The Excel-style `PICK YOUR GRID` control is interpreted as a lattice of **points
 
 A card placement is represented by node id, anchor point `(column, row)`, and one attached corner: `NW`, `NE`, `SW`, or `SE`. The point is the shared alignment primitive; the corner tells the renderer which side of that point the object occupies.
 
+The coordinate space is the **machine workfield**, not the apparatus box. The existing viewport-sized pan surface is the workfield DOM boundary; the movable apparatus remains a separate child layer containing semantic cards. The editor renders the complete lattice on the workfield and converts a selected workfield anchor back into apparatus-local coordinates only when positioning a card. This is a structural distinction, not an overflow trick.
+
 Consequences:
 
+- every visible grid point across the workfield is a real snap target;
+- grid rails are tiled from the same row/column fractions used by snapping rather than painted as long pseudo-lines from apparatus points;
 - two cards can share one point with opposite corners and become exactly adjacent;
 - multiple cards can share a row or column without independently tuned offsets;
 - changing grid density remaps existing anchors to the nearest corresponding points;
 - a card whose own dimensions change remains attached by the same corner;
 - `RELEASE` removes the grid placement and restores its underlying authored/default placement.
 
-During drag, the editor tests every valid `(point, corner)` pair that keeps the card inside the apparatus. The nearest valid relationship is previewed as a ghost before drop.
+During drag, the editor tests every valid `(point, corner)` pair that keeps the card inside the **workfield**. The nearest valid relationship is previewed as a ghost before drop. Drag-over/drop capture is workfield-wide, so blank machine margins are as functional as the original authored board. While editing, placed cards are continuously reprojected from workfield anchors if the apparatus transform changes, so panning does not silently detach a card from its selected lattice point.
+
+The generated source contract does not change: it still stores `(column, row, corner)`. Normal runtime interpretation uses the current desktop workfield to resolve those anchors and then projects them into apparatus-local coordinates. On mobile, where the desktop pan surface is intentionally hidden and the machine becomes a document rack, the runtime falls back to the prior apparatus-relative percentage interpretation.
 
 ## Parts Box and free placement
 
@@ -96,14 +102,14 @@ The Parts Box uses the physical Lab Machine vocabulary already present on the pa
 
 Dragging a primitive onto the machine creates an independent instance. Placed parts are bounded to the apparatus and stored as normalized center coordinates rather than raw screen coordinates. A part can be selected, moved by dragging, and removed by double-click or Delete / Backspace.
 
-Cards and loose parts deliberately use different placement contracts: cards use the stricter shared anchor lattice because mutual alignment is structural; loose machine parts currently use free normalized placement.
+Cards and loose parts deliberately use different placement contracts: cards use the stricter shared workfield anchor lattice because mutual alignment is structural; loose machine parts currently use free apparatus-relative normalized placement.
 
 ## Next
 
 Useful next increments are:
 
 - make the generated source module the broader canonical desktop-machine geometry registry, not only the editor-authored deltas;
-- make grid points nestable / locally refinable so a coarse apparatus lattice can contain denser sub-lattices;
+- make grid points nestable / locally refinable so a coarse workfield lattice can contain denser sub-lattices;
 - expose direct card resize handles against the same geometry contracts;
 - add magnetic attachment rules between card edges, ports, connectors, and tubes;
 - add a guarded Git/GitHub commit action only if repository authentication is deliberately provisioned, rather than embedding credentials in the public editor.
