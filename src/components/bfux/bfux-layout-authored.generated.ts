@@ -2,47 +2,104 @@
 import type { BfuxMachineLayoutSource } from "./bfux-layout-source";
 
 export const bfuxAuthoredLayout = {
-  schema: "bfux.machine-layout/v1",
-  focus: {
-    billboard: {
-      width: 35,
-      height: null,
-      gapY: 0,
-      visualWidth: 44,
-      mazeScale: 1,
-      mazeLeft: -18,
-      visualPadX: 0.56,
-      visualPadY: 0.42,
-      copyPadX: 0.72,
-      copyPadY: 0.56,
-      titleScale: 1.38,
-      controlsHeight: 2.2
+  "schema": "bfux.machine-layout/v1",
+  "focus": {
+    "billboard": {
+      "width": 35,
+      "height": null,
+      "gapY": 0,
+      "visualWidth": 44,
+      "mazeScale": 1,
+      "mazeLeft": -18,
+      "visualPadX": 0.56,
+      "visualPadY": 0.42,
+      "copyPadX": 0.72,
+      "copyPadY": 0.56,
+      "titleScale": 1.38,
+      "controlsHeight": 2.2
     },
-    anchorGrid: {
-      spec: { columns: 8, rows: 6, visible: true },
-      placements: []
+    "anchorGrid": {
+      "spec": {
+        "columns": 8,
+        "rows": 6,
+        "visible": true
+      },
+      "placements": [
+        {
+          "nodeId": "research",
+          "column": 4,
+          "row": 3,
+          "corner": "nw",
+          "columnSpan": 11.335,
+          "rowSpan": 3
+        },
+        {
+          "nodeId": "about",
+          "column": 4,
+          "row": 3,
+          "corner": "ne",
+          "columnSpan": 3.3338,
+          "rowSpan": 2.6659
+        },
+        {
+          "nodeId": "tour",
+          "column": 4,
+          "row": 3,
+          "corner": "se",
+          "columnSpan": 3.3338,
+          "rowSpan": 1.3328
+        },
+        {
+          "nodeId": "people",
+          "column": 8,
+          "row": 1,
+          "corner": "ne",
+          "columnSpan": 4.0004,
+          "rowSpan": 2
+        },
+        {
+          "nodeId": "products",
+          "column": 12,
+          "row": 3,
+          "corner": "se",
+          "columnSpan": 4.0004,
+          "rowSpan": 2
+        },
+        {
+          "nodeId": "publications",
+          "column": 12,
+          "row": 1,
+          "corner": "nw",
+          "columnSpan": 4.0004,
+          "rowSpan": 2
+        }
+      ]
     },
-    placedParts: []
+    "placedParts": []
   },
-  mid: {
-    billboard: {
-      width: 35,
-      height: null,
-      gapY: 0,
-      visualWidth: 44,
-      mazeScale: 1,
-      mazeLeft: -18,
-      visualPadX: 0.56,
-      visualPadY: 0.42,
-      copyPadX: 0.72,
-      copyPadY: 0.56,
-      titleScale: 1.32,
-      controlsHeight: 2.2
+  "mid": {
+    "billboard": {
+      "width": 35,
+      "height": null,
+      "gapY": 0,
+      "visualWidth": 44,
+      "mazeScale": 1,
+      "mazeLeft": -18,
+      "visualPadX": 0.56,
+      "visualPadY": 0.42,
+      "copyPadX": 0.72,
+      "copyPadY": 0.56,
+      "titleScale": 1.32,
+      "controlsHeight": 2.2
     },
-    anchorGrid: {
-      spec: { columns: 8, rows: 6, visible: true },
-      placements: []
+    "anchorGrid": {
+      "spec": {
+        "columns": 8,
+        "rows": 6,
+        "visible": true
+      },
+      "placements": []
     },
-    placedParts: []
+    "placedParts": []
   }
 } satisfies BfuxMachineLayoutSource;
