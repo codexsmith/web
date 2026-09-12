@@ -24,22 +24,26 @@ export function bfuxGridPitch(size: number, pointCount: number) {
   return size / Math.max(1, pointCount - 1);
 }
 
+export function bfuxGridCoordinate(index: number, size: number, pointCount: number) {
+  const pitch = bfuxGridPitch(size, pointCount);
+  const origin = pointCount <= 1 ? size / 2 : 0;
+  return origin + index * pitch;
+}
+
 export function bfuxGridSpan(value: number | undefined) {
   return Math.max(1, Math.round(value ?? 1));
 }
 
-export function bfuxGridMaxColumnSpan(placement: Pick<BfuxGridPlacementLike, "column" | "corner">, spec: BfuxGridSpecLike) {
-  if (spec.columns <= 1) return 1;
-  return placement.corner === "ne" || placement.corner === "se"
-    ? Math.max(0, placement.column)
-    : Math.max(0, spec.columns - 1 - placement.column);
+/* Picker-level span limits describe the apparatus lattice itself. Placement
+ * geometry applies the tighter workfield-edge bound once apparatus dimensions
+ * are known. Keeping these independent of anchor position is important because
+ * valid anchors may live on repeated grid points outside the apparatus box. */
+export function bfuxGridMaxColumnSpan(_placement: Pick<BfuxGridPlacementLike, "column" | "corner">, spec: BfuxGridSpecLike) {
+  return Math.max(1, spec.columns - 1);
 }
 
-export function bfuxGridMaxRowSpan(placement: Pick<BfuxGridPlacementLike, "row" | "corner">, spec: BfuxGridSpecLike) {
-  if (spec.rows <= 1) return 1;
-  return placement.corner === "sw" || placement.corner === "se"
-    ? Math.max(0, placement.row)
-    : Math.max(0, spec.rows - 1 - placement.row);
+export function bfuxGridMaxRowSpan(_placement: Pick<BfuxGridPlacementLike, "row" | "corner">, spec: BfuxGridSpecLike) {
+  return Math.max(1, spec.rows - 1);
 }
 
 export function bfuxGridFitSpan(size: number, pitch: number, maxSpan: number) {
@@ -54,16 +58,41 @@ export function bfuxGridFitSpan(size: number, pitch: number, maxSpan: number) {
   return Math.min(maxSpan, Math.max(minimumToFit, nearest));
 }
 
+/* The grid spec describes points ACROSS THE APPARATUS, not points across the
+ * apparatus plus its pan margins. The same pitch then repeats into those
+ * margins. This keeps card dimensions stable while making the surrounding
+ * drafting plane genuinely tiled and functional. */
 export function bfuxGridWorkfieldMetrics(apparatus: HTMLElement, spec: BfuxGridSpecLike) {
-  const width = apparatus.offsetWidth + bfuxGridPanX * 2;
-  const height = apparatus.offsetHeight + bfuxGridPanY * 2;
+  const apparatusWidth = Math.max(1, apparatus.offsetWidth);
+  const apparatusHeight = Math.max(1, apparatus.offsetHeight);
+  const pitchX = bfuxGridPitch(apparatusWidth, spec.columns);
+  const pitchY = bfuxGridPitch(apparatusHeight, spec.rows);
+  const left = -bfuxGridPanX;
+  const top = -bfuxGridPanY;
+  const right = apparatusWidth + bfuxGridPanX;
+  const bottom = apparatusHeight + bfuxGridPanY;
+  const originX = spec.columns <= 1 ? apparatusWidth / 2 : 0;
+  const originY = spec.rows <= 1 ? apparatusHeight / 2 : 0;
+  const minColumn = Math.ceil((left - originX) / pitchX);
+  const maxColumn = Math.floor((right - originX) / pitchX);
+  const minRow = Math.ceil((top - originY) / pitchY);
+  const maxRow = Math.floor((bottom - originY) / pitchY);
+
   return {
-    left: -bfuxGridPanX,
-    top: -bfuxGridPanY,
-    width,
-    height,
-    pitchX: bfuxGridPitch(width, spec.columns),
-    pitchY: bfuxGridPitch(height, spec.rows),
+    apparatusWidth,
+    apparatusHeight,
+    left,
+    top,
+    right,
+    bottom,
+    width: right - left,
+    height: bottom - top,
+    pitchX,
+    pitchY,
+    minColumn,
+    maxColumn,
+    minRow,
+    maxRow,
   };
 }
 
@@ -74,21 +103,24 @@ export function bfuxGridPlacementGeometry(
   fallbackSize?: { width: number; height: number },
 ) {
   const metrics = bfuxGridWorkfieldMetrics(apparatus, spec);
-  const maxColumnSpan = Math.max(1, bfuxGridMaxColumnSpan(placement, spec));
-  const maxRowSpan = Math.max(1, bfuxGridMaxRowSpan(placement, spec));
+  const anchorX = bfuxGridCoordinate(placement.column, metrics.apparatusWidth, spec.columns);
+  const anchorY = bfuxGridCoordinate(placement.row, metrics.apparatusHeight, spec.rows);
+  const rightAnchored = placement.corner === "ne" || placement.corner === "se";
+  const bottomAnchored = placement.corner === "sw" || placement.corner === "se";
+  const maxColumnSpan = Math.max(1, Math.floor(
+    (rightAnchored ? anchorX - metrics.left : metrics.right - anchorX) / metrics.pitchX + 1e-6,
+  ));
+  const maxRowSpan = Math.max(1, Math.floor(
+    (bottomAnchored ? anchorY - metrics.top : metrics.bottom - anchorY) / metrics.pitchY + 1e-6,
+  ));
   const columnSpan = placement.columnSpan == null
     ? bfuxGridFitSpan(fallbackSize?.width ?? metrics.pitchX, metrics.pitchX, maxColumnSpan)
     : Math.min(maxColumnSpan, bfuxGridSpan(placement.columnSpan));
   const rowSpan = placement.rowSpan == null
     ? bfuxGridFitSpan(fallbackSize?.height ?? metrics.pitchY, metrics.pitchY, maxRowSpan)
     : Math.min(maxRowSpan, bfuxGridSpan(placement.rowSpan));
-
-  const anchorX = metrics.left + bfuxGridAxisFraction(placement.column, spec.columns) * metrics.width;
-  const anchorY = metrics.top + bfuxGridAxisFraction(placement.row, spec.rows) * metrics.height;
   const width = metrics.pitchX * columnSpan;
   const height = metrics.pitchY * rowSpan;
-  const rightAnchored = placement.corner === "ne" || placement.corner === "se";
-  const bottomAnchored = placement.corner === "sw" || placement.corner === "se";
 
   return {
     ...metrics,
@@ -101,6 +133,15 @@ export function bfuxGridPlacementGeometry(
     columnSpan,
     rowSpan,
   };
+}
+
+export function bfuxGridRemapCoordinate(index: number, previousPoints: number, nextPoints: number) {
+  const previousTracks = Math.max(1, previousPoints - 1);
+  const nextTracks = Math.max(1, nextPoints - 1);
+  const normalized = previousPoints <= 1 ? index + 0.5 : index / previousTracks;
+  return nextPoints <= 1
+    ? Math.round(normalized - 0.5)
+    : Math.round(normalized * nextTracks);
 }
 
 export function bfuxGridRemapSpan(value: number | undefined, previousPoints: number, nextPoints: number) {
