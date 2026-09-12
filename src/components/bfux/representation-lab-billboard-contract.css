@@ -1,26 +1,13 @@
-/* Representation Lab billboard geometry contract.
+/* Representation Lab billboard interior contract.
  *
- * This is the ONE active geometry layer for the billboard. The base card file
- * owns material/visual styling. This file owns layout, sizing, and tunable CSS
- * variables. Do not add post-hoc billboard geometry overrides elsewhere.
+ * The billboard is a normal Lab Machine card. Its root, shell, fasteners, face
+ * envelope, drag/drop geometry and grid sizing all come from the same machinery
+ * as People / Products / Publications. This file owns only the billboard's
+ * internal split and the visual tuning variables used by Layout Studio.
  *
- * The Layout Studio writes these variables live:
- *   --billboard-width
- *   --billboard-height
- *   --billboard-gap-y
- *   --billboard-visual-width
- *   --billboard-maze-scale
- *   --billboard-maze-left
- *   --billboard-visual-pad-x
- *   --billboard-visual-pad-y
- *   --billboard-copy-pad-x
- *   --billboard-copy-pad-y
- *   --billboard-title-scale
- *   --billboard-controls-height
- *
- * --billboard-height is a requested minimum, not a clipping box. The face is
- * content-sized and the node/shell follow it, so title/control content can
- * never grow through the physical bottom edge of the card.
+ * The only root geometry retained here is the pre-grid fallback used by the
+ * legacy Products-relative mount. Once the card is grid/authored placed, the
+ * shared BFUX grid composition bridge owns the complete exterior rectangle.
  */
 
 .bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
@@ -42,37 +29,50 @@
     --billboard-copy-pad-y: .56;
     --billboard-title-scale: 1.32;
     --billboard-controls-height: 2.2;
-
-    position: absolute !important;
-    top: auto !important;
-    bottom: auto !important;
-    display: grid !important;
-    grid-template-rows: max-content;
-    align-content: start;
-    width: var(--billboard-width) !important;
-    height: auto !important;
-    min-height: 0 !important;
     z-index: 9 !important;
     opacity: 1 !important;
     visibility: visible !important;
     pointer-events: auto !important;
   }
 
+  /* Before the user/grid owns this card, preserve the old Products-relative
+   * placement path. Do not let these fallback declarations participate once a
+   * normal BFUX grid placement exists. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard:not([data-bfux-grid-placed="true"]):not([data-bfux-authored-grid-placed="true"]) {
+    position: absolute !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: var(--billboard-width) !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
   .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node--billboard {
     --billboard-title-scale: 1.38;
   }
 
+  /* The face keeps the standard Lab Machine exterior box. Only its interior is
+   * different: visual instrument on the left, invitation copy on the right. */
   .bf-machine[data-skin="physical"]
-    .bf-machine-node--billboard .bf-machine-billboard__face {
+    .bf-machine-node--billboard > .bf-machine-billboard__face {
     display: grid !important;
     grid-template-columns: var(--billboard-visual-width) minmax(0, calc(100% - var(--billboard-visual-width))) !important;
     grid-template-rows: minmax(0, 1fr) !important;
     width: 100% !important;
-    height: auto !important;
     min-width: 0 !important;
-    min-height: var(--billboard-height, 8rem) !important;
-    box-sizing: border-box;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
     overflow: hidden !important;
+  }
+
+  /* Only the unplaced fallback may be content/minimum sized. Grid-owned cards
+   * inherit the common 100%-height face rule from bfux-grid-composition-bridge. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard:not([data-bfux-grid-placed="true"]):not([data-bfux-authored-grid-placed="true"])
+    > .bf-machine-billboard__face {
+    height: auto !important;
+    min-height: var(--billboard-height, 8rem) !important;
   }
 
   .bf-machine[data-skin="physical"]
@@ -81,6 +81,7 @@
     grid-row: 1;
     min-width: 0;
     min-height: 0;
+    height: 100%;
     box-sizing: border-box;
     overflow: hidden !important;
     padding:
@@ -133,6 +134,7 @@
     gap: .28rem !important;
     min-width: 0;
     min-height: 0;
+    height: 100%;
     box-sizing: border-box;
     overflow: hidden !important;
     padding:
