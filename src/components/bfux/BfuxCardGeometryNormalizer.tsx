@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
+import { bfuxAuthoredLayout } from "./bfux-layout-authored.generated";
 import { bfuxGridPitchPx } from "./bfux-grid-geometry";
+import type { BfuxLayoutNodePlacement } from "./bfux-layout-source";
 import "./bfux-card-geometry-normalizer.css";
 
 const desktopQuery = "(min-width: 1025px)";
@@ -10,7 +12,7 @@ const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
 const billboardLayoutStorageKey = "bfl_bfux_layout_studio_billboard_v1";
-const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v6";
+const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v7";
 const twoTrackNodeIds = new Set(["representation-lab", "people", "products", "publications", "about"]);
 export const bfuxCardSizeQuantumPx = 60;
 const measurementNoiseTolerancePx = 0.75;
@@ -39,6 +41,11 @@ const billboardInteriorDefaults = {
     controlsHeight: 2.5,
   },
 } as const;
+
+type SavedGridProjection = {
+  spec?: { columns?: number; rows?: number; visible?: boolean };
+  placements?: BfuxLayoutNodePlacement[];
+};
 
 function roundUpToQuantum(value: number, quantum = bfuxCardSizeQuantumPx) {
   if (!Number.isFinite(value) || value <= 0) return quantum;
@@ -134,13 +141,24 @@ function migrateEditorSizeProfile() {
   try {
     if (window.localStorage.getItem(sizeProfileMigrationKey) === "1") return;
 
-    /* Preserve the user's anchor/corner work. Only migrate vertical spans for
-     * card families whose canonical heights are grid-native. Bumping the
-     * migration key guarantees About is corrected even for edit sessions that
-     * already consumed the previous two-track migration. */
+    /* Preserve authored editor work. The old Full Loop had no authored grid at
+     * all, so an existing empty mid projection is legacy state rather than a
+     * deliberate composition. Seed only that empty projection from the new
+     * canonical Full layout; never overwrite a Full grid the user has already
+     * placed by hand. */
     const rawGrid = window.localStorage.getItem(legacyGridStorageKey);
     if (rawGrid) {
-      const saved = JSON.parse(rawGrid) as Record<string, { placements?: Array<{ nodeId?: string; rowSpan?: number }> }>;
+      const saved = JSON.parse(rawGrid) as Record<string, SavedGridProjection | undefined>;
+      const mid = saved.mid;
+      if (!mid || !Array.isArray(mid.placements) || mid.placements.length === 0) {
+        saved.mid = {
+          ...(mid ?? {}),
+          spec: { ...bfuxAuthoredLayout.mid.anchorGrid.spec },
+          placements: bfuxAuthoredLayout.mid.anchorGrid.placements.map((placement) => ({ ...placement })),
+        };
+      }
+
+      /* Keep the shared height families coherent in every saved projection. */
       for (const projection of Object.values(saved)) {
         if (!projection || !Array.isArray(projection.placements)) continue;
         projection.placements = projection.placements.map((placement) => {
