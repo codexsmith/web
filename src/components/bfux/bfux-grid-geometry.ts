@@ -15,6 +15,11 @@ export type BfuxGridPlacementLike = {
 
 export const bfuxGridPanX = 700;
 export const bfuxGridPanY = 260;
+const bfuxGridMinimumSpan = 0.05;
+
+function stableSpan(value: number) {
+  return Math.round(value * 10000) / 10000;
+}
 
 export function bfuxGridAxisFraction(index: number, count: number) {
   return count <= 1 ? 0.5 : index / (count - 1);
@@ -30,8 +35,13 @@ export function bfuxGridCoordinate(index: number, size: number, pointCount: numb
   return origin + index * pitch;
 }
 
+/* A span is a measurement in grid-track units, not inherently an integer.
+ * Drag/drop uses fractional spans so snapping a corner never resizes the card.
+ * Explicit resize controls may still quantize a span to whole tracks. */
 export function bfuxGridSpan(value: number | undefined) {
-  return Math.max(1, Math.round(value ?? 1));
+  const next = value ?? 1;
+  if (!Number.isFinite(next)) return 1;
+  return stableSpan(Math.max(bfuxGridMinimumSpan, next));
 }
 
 /* Picker-level span limits describe the apparatus lattice itself. Placement
@@ -50,13 +60,11 @@ export function bfuxGridFitSpan(size: number, pitch: number, maxSpan: number) {
   if (maxSpan <= 0) return 0;
   if (!Number.isFinite(size) || size <= 0 || !Number.isFinite(pitch) || pitch <= 0) return 1;
 
-  // First contact with the grid is a quantization step, not a promise to
-  // preserve the legacy pixel envelope. The lattice owns exterior geometry;
-  // authored CSS is only the seed used to choose the nearest whole-track span.
-  // This avoids a 1.2-track card being inflated to 2 tracks simply because its
-  // previous DOM happened to be a few pixels taller than one grid row.
-  const nearest = Math.max(1, Math.round(size / pitch));
-  return Math.min(maxSpan, nearest);
+  // Moving and snapping are geometry-preserving operations. Express the live
+  // card dimension in track units without quantizing it. This makes the point
+  // lattice own alignment while the card keeps exactly the size it had when the
+  // drag began. Resizing is a separate, explicit operation.
+  return stableSpan(Math.min(maxSpan, Math.max(bfuxGridMinimumSpan, size / pitch)));
 }
 
 /* The grid spec describes points ACROSS THE APPARATUS, not points across the
@@ -149,5 +157,9 @@ export function bfuxGridRemapSpan(value: number | undefined, previousPoints: num
   if (value == null) return undefined;
   const previousTracks = Math.max(1, previousPoints - 1);
   const nextTracks = Math.max(1, nextPoints - 1);
-  return Math.max(1, Math.round((value / previousTracks) * nextTracks));
+
+  // Preserve physical size when grid density changes. A card that occupies
+  // 1.5 tracks on one lattice may occupy 2.25 tracks on a denser one; only its
+  // anchor is quantized. Explicit resize operations can choose whole tracks.
+  return stableSpan(Math.max(bfuxGridMinimumSpan, (value / previousTracks) * nextTracks));
 }
