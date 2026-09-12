@@ -103,6 +103,7 @@
   color: transparent;
   font-size: 0 !important;
   line-height: 1 !important;
+  text-shadow: none !important;
   white-space: nowrap;
 }
 
@@ -165,8 +166,8 @@
   }
 
   /* In Full, compact Tour is attached hardware rather than an independently
-   * normalized card. Its outside width is exactly About's width and its shallow
-   * 76% height preserves the reference launcher/About proportion. */
+   * normalized card. Its outside width is exactly About's width; the reference
+   * launcher is intentionally shallower than the About chassis. */
   .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine__apparatus[data-machine-layer="apparatus"]
@@ -175,9 +176,9 @@
     left: 0 !important;
     top: auto !important;
     right: auto !important;
-    bottom: calc(100% + .45vw) !important;
+    bottom: calc(100% + .35vw) !important;
     width: 100% !important;
-    height: 76% !important;
+    height: 72% !important;
     transform-origin: left bottom !important;
   }
 
