@@ -161,7 +161,6 @@ export function BfuxAuthoredLayoutLayer() {
      * Research envelope and the compact process-card row. */
     const lowerDeck = apparatus.querySelector<HTMLElement>(".bf-machine__lower-deck");
     const researchNode = nodes.find((node) => node.dataset.nodeId === "research");
-    const researchPlacement = placementByNode.get("research");
     const pipelinePlacement = placementByNode.get("pipeline");
     const governancePlacement = placementByNode.get("governance");
     const researchGeometry = geometryFor("research");
@@ -201,6 +200,9 @@ export function BfuxAuthoredLayoutLayer() {
      * same live card rectangles used above. That keeps People/Product/Publications
      * mechanically attached to Research as the cards move in Layout Studio. */
     const traceLayer = apparatus.querySelector<SVGSVGElement>(".bf-machine__traces");
+    const peopleResearchCable = traceLayer?.querySelector<SVGGElement>(
+      '.bf-machine__cable[data-from="people"][data-to="research"]',
+    ) ?? null;
     if (resolution === "mid" && traceLayer && researchGeometry) {
       const peopleGeometry = geometryFor("people");
       const productsGeometry = geometryFor("products");
@@ -284,6 +286,7 @@ export function BfuxAuthoredLayoutLayer() {
         researchNode.style.removeProperty("--bfux-research-governance-run");
         researchNode.style.removeProperty("--bfux-research-governance-top");
       }
+      if (peopleResearchCable) peopleResearchCable.setAttribute("data-tone", "violet");
       apparatus.style.removeProperty("--lower-deck-left");
       apparatus.style.removeProperty("--lower-deck-top");
       apparatus.style.removeProperty("--lower-deck-width");
