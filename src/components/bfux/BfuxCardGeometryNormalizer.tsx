@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import "./bfux-card-geometry-normalizer.css";
 
+const desktopQuery = "(min-width: 1025px)";
 const machineSelector = '.bf-machine[data-skin="physical"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
@@ -55,19 +56,20 @@ function applyCanonicalSizes(apparatus: HTMLElement) {
 }
 
 /**
- * Edit-mode migration bridge.
+ * Canonical desktop geometry bridge.
  *
  * The existing Lab Machine composition was authored in percentages, clamps and
- * content-sized special cases. Layout Studio needs a miscible physical grammar,
- * so on entry we measure those live cards once and round each exterior dimension
- * UP to the next 60px module. A 30px lattice then divides every card edge into
- * an even number of snap tracks without changing size during drag/drop.
+ * content-sized special cases. We sample those live exterior sizes, then round
+ * each width and height UP to the next 60px module. The BFUX drafting lattice is
+ * 30px, so every canonical card edge occupies an even number of tracks.
+ *
+ * Position remains owned by the authored composition until a card is explicitly
+ * placed on the lattice. Once placed, the anchor-grid contract owns the same
+ * exterior envelope; drag/drop therefore moves rather than resizes the card.
  */
 export function BfuxCardGeometryNormalizer() {
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("bfux") !== "edit") return;
-
+    const desktop = window.matchMedia(desktopQuery);
     let frame = 0;
     let activeApparatus: HTMLElement | null = null;
     let activeResolution = "";
@@ -75,6 +77,14 @@ export function BfuxCardGeometryNormalizer() {
     const apply = () => {
       const machine = document.querySelector<HTMLElement>(machineSelector);
       const apparatus = machine?.querySelector<HTMLElement>(apparatusSelector) ?? null;
+
+      if (!desktop.matches) {
+        if (activeApparatus) clearCanonicalSizes(activeApparatus);
+        activeApparatus = apparatus;
+        activeResolution = machine?.dataset.resolution ?? "";
+        return;
+      }
+
       if (!machine || !apparatus) return;
 
       const resolution = machine.dataset.resolution ?? "focus";
@@ -99,6 +109,7 @@ export function BfuxCardGeometryNormalizer() {
     };
 
     schedule();
+    desktop.addEventListener("change", schedule);
     const observer = new MutationObserver((records) => {
       if (records.some((record) => record.type === "childList" || record.attributeName === "data-resolution")) {
         schedule();
@@ -113,6 +124,7 @@ export function BfuxCardGeometryNormalizer() {
 
     return () => {
       observer.disconnect();
+      desktop.removeEventListener("change", schedule);
       cancelAnimationFrame(frame);
       if (activeApparatus) clearCanonicalSizes(activeApparatus);
     };
