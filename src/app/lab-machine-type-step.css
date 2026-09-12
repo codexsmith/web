@@ -11,6 +11,13 @@
     --bfux-apparatus-type-step: 1px;
   }
 
+  /* Full gets one additional type increment. Keep this resolution-scoped so
+   * Core/focus retains its established typography and hierarchy unchanged. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"] {
+    --bfux-apparatus-type-step: 2px;
+  }
+
   /* Ordinary card identity. Compact Tour substitutes pseudo-labels below. */
   html body .site-shell[data-root-focus="true"]
     .bf-machine[data-skin="physical"]
