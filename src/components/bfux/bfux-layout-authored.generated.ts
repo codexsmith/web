@@ -39,7 +39,7 @@ export const bfuxAuthoredLayout = {
           "row": 3,
           "corner": "ne",
           "columnSpan": 3.3338,
-          "rowSpan": 2.6659
+          "rowSpan": 2
         },
         {
           "nodeId": "tour",
