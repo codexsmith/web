@@ -14,6 +14,7 @@ const billboardSelector = '.bf-machine-node--billboard[data-node-id="representat
 const layoutTuningEvent = "bfux-layout-tuning";
 const traceViewBoxWidth = 1200;
 const traceViewBoxHeight = 760;
+const svgNamespace = "http://www.w3.org/2000/svg";
 
 function currentResolution(host: HTMLElement): BfuxLayoutResolution {
   const machine = host.closest<HTMLElement>('.bf-machine[data-skin="physical"]');
@@ -70,6 +71,38 @@ function partSize(kind: BfuxPartKind) {
     case "module-wide": return { width: 152, height: 78 };
     default: return { width: 72, height: 62 };
   }
+}
+
+function ensureTraceCable(
+  traceLayer: SVGSVGElement,
+  modifierClass: string,
+  tone: string,
+  from: string,
+  to: string,
+) {
+  const existing = traceLayer.querySelector<SVGGElement>(`.${modifierClass}`);
+  if (existing) return existing;
+
+  const cable = document.createElementNS(svgNamespace, "g");
+  cable.setAttribute("class", `bf-machine__cable ${modifierClass}`);
+  cable.setAttribute("data-kind", "feeds");
+  cable.setAttribute("data-tone", tone);
+  cable.setAttribute("data-from", from);
+  cable.setAttribute("data-to", to);
+
+  for (const className of [
+    "bf-machine__cable-sheath",
+    "bf-machine__cable-core",
+    "bf-machine__cable-highlight",
+  ]) {
+    const path = document.createElementNS(svgNamespace, "path");
+    path.setAttribute("class", className);
+    path.setAttribute("d", "");
+    cable.appendChild(path);
+  }
+
+  traceLayer.appendChild(cable);
+  return cable;
 }
 
 export function BfuxAuthoredLayoutLayer() {
@@ -203,6 +236,16 @@ export function BfuxAuthoredLayoutLayer() {
     const peopleResearchCable = traceLayer?.querySelector<SVGGElement>(
       '.bf-machine__cable[data-from="people"][data-to="research"]',
     ) ?? null;
+    const billboardProductCable = resolution === "mid" && traceLayer
+      ? ensureTraceCable(
+        traceLayer,
+        "bf-machine__cable--billboard-product",
+        "red",
+        "representation-lab",
+        "products",
+      )
+      : null;
+
     if (resolution === "mid" && traceLayer && researchGeometry) {
       const peopleGeometry = geometryFor("people");
       const productsGeometry = geometryFor("products");
@@ -239,6 +282,17 @@ export function BfuxAuthoredLayoutLayer() {
           '.bf-machine__cable[data-from="research"][data-to="products"]',
           `M${n(x)} ${n(fromY)} V${n(toY)}`,
         );
+
+        const stackGap = researchGeometry.top - (productsGeometry.top + productsGeometry.height);
+        if (stackGap > 0) {
+          const billboardFromY = sy(productsGeometry.top + overlap);
+          const billboardToY = sy(productsGeometry.top - stackGap - overlap);
+          setCablePath(
+            ".bf-machine__cable--billboard-product",
+            `M${n(x)} ${n(billboardFromY)} V${n(billboardToY)}`,
+            "red",
+          );
+        }
       }
 
       if (publicationsGeometry) {
@@ -287,6 +341,7 @@ export function BfuxAuthoredLayoutLayer() {
         researchNode.style.removeProperty("--bfux-research-governance-top");
       }
       if (peopleResearchCable) peopleResearchCable.setAttribute("data-tone", "violet");
+      if (billboardProductCable) billboardProductCable.remove();
       apparatus.style.removeProperty("--lower-deck-left");
       apparatus.style.removeProperty("--lower-deck-top");
       apparatus.style.removeProperty("--lower-deck-width");
