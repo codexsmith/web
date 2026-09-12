@@ -9,10 +9,36 @@ const machineSelector = '.bf-machine[data-skin="physical"]';
 const apparatusSelector = '[data-machine-layer="apparatus"]';
 const nodeSelector = '.bf-machine-node[data-machine-layer="node"]';
 const legacyGridStorageKey = "bfl_bfux_anchor_grid_v1";
-const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v4";
-const upperFieldNodeIds = new Set(["representation-lab", "people", "products", "publications"]);
+const billboardLayoutStorageKey = "bfl_bfux_layout_studio_billboard_v1";
+const sizeProfileMigrationKey = "bfl_bfux_anchor_grid_90px_size_profile_v5";
+const twoTrackNodeIds = new Set(["representation-lab", "people", "products", "publications", "about"]);
 export const bfuxCardSizeQuantumPx = 60;
 const measurementNoiseTolerancePx = 0.75;
+
+const billboardInteriorDefaults = {
+  focus: {
+    visualWidth: 40,
+    mazeScale: 0.92,
+    mazeLeft: -14,
+    visualPadX: 0.5,
+    visualPadY: 0.36,
+    copyPadX: 0.62,
+    copyPadY: 0.48,
+    titleScale: 1.6,
+    controlsHeight: 2.5,
+  },
+  mid: {
+    visualWidth: 40,
+    mazeScale: 0.92,
+    mazeLeft: -14,
+    visualPadX: 0.5,
+    visualPadY: 0.36,
+    copyPadX: 0.62,
+    copyPadY: 0.48,
+    titleScale: 1.55,
+    controlsHeight: 2.5,
+  },
+} as const;
 
 function roundUpToQuantum(value: number, quantum = bfuxCardSizeQuantumPx) {
   if (!Number.isFinite(value) || value <= 0) return quantum;
@@ -41,11 +67,11 @@ function measureLocalSize(node: HTMLElement, apparatus: HTMLElement) {
 function canonicalHeight(node: HTMLElement, measuredHeight: number) {
   const nodeId = node.dataset.nodeId ?? "";
 
-  /* The billboard and upper People / Products / Publications bank are the same
-   * physical card family: two 90px tracks tall. Research is three tracks tall.
-   * The billboard differs only in what its face renders, not in its chassis
-   * geometry. */
-  if (upperFieldNodeIds.has(nodeId)) return bfuxGridPitchPx * 2;
+  /* The billboard, upper People / Products / Publications bank, and About are
+   * now the same two-track physical card family. Research remains the larger
+   * three-track engine card. Card contents may differ; their outside chassis
+   * geometry is deliberately shared. */
+  if (twoTrackNodeIds.has(nodeId)) return bfuxGridPitchPx * 2;
   if (nodeId === "research") return bfuxGridPitchPx * 3;
 
   return roundUpToQuantum(measuredHeight);
@@ -109,21 +135,36 @@ function migrateEditorSizeProfile() {
     if (window.localStorage.getItem(sizeProfileMigrationKey) === "1") return;
 
     /* Preserve the user's anchor/corner work. Only migrate vertical spans for
-     * card families whose canonical heights are grid-native. The billboard is
-     * now deliberately the same two-track chassis family as the upper cards. */
-    const raw = window.localStorage.getItem(legacyGridStorageKey);
-    if (raw) {
-      const saved = JSON.parse(raw) as Record<string, { placements?: Array<{ nodeId?: string; rowSpan?: number }> }>;
+     * card families whose canonical heights are grid-native. */
+    const rawGrid = window.localStorage.getItem(legacyGridStorageKey);
+    if (rawGrid) {
+      const saved = JSON.parse(rawGrid) as Record<string, { placements?: Array<{ nodeId?: string; rowSpan?: number }> }>;
       for (const projection of Object.values(saved)) {
         if (!projection || !Array.isArray(projection.placements)) continue;
         projection.placements = projection.placements.map((placement) => {
           const nodeId = placement.nodeId ?? "";
-          if (upperFieldNodeIds.has(nodeId)) return { ...placement, rowSpan: 2 };
+          if (twoTrackNodeIds.has(nodeId)) return { ...placement, rowSpan: 2 };
           if (nodeId === "research") return { ...placement, rowSpan: 3 };
           return placement;
         });
       }
       window.localStorage.setItem(legacyGridStorageKey, JSON.stringify(saved));
+    }
+
+    /* The billboard's old local tuning values were authored before its chassis
+     * was folded back into the normal machine-card geometry. Keep width, height,
+     * gap and any other user choices, but refresh the internal visual/copy split
+     * so existing edit sessions pick up the repaired billboard immediately. */
+    const rawBillboard = window.localStorage.getItem(billboardLayoutStorageKey);
+    if (rawBillboard) {
+      const saved = JSON.parse(rawBillboard) as Record<string, Record<string, unknown> | undefined>;
+      for (const key of ["focus", "mid"] as const) {
+        saved[key] = {
+          ...(saved[key] ?? {}),
+          ...billboardInteriorDefaults[key],
+        };
+      }
+      window.localStorage.setItem(billboardLayoutStorageKey, JSON.stringify(saved));
     }
 
     window.localStorage.setItem(sizeProfileMigrationKey, "1");
@@ -137,9 +178,9 @@ function migrateEditorSizeProfile() {
  *
  * Widths still derive from the existing machine and round UP to the next 60px
  * module. Heights use explicit grid-native families: the Representation Lab
- * billboard plus People / Products / Publications are 180px (2 x 90px tracks),
- * while Research is 270px (3 x 90px tracks). Other cards retain the 60px
- * rounding bridge until their own grid-native size families are chosen.
+ * billboard, People / Products / Publications, and About are 180px (2 x 90px
+ * tracks), while Research is 270px (3 x 90px tracks). Other cards retain the
+ * 60px rounding bridge until their own grid-native size families are chosen.
  *
  * Position remains owned by the authored composition until a card is explicitly
  * placed on the lattice. Once placed, the anchor-grid contract owns the same
