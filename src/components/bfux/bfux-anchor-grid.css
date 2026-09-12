@@ -181,17 +181,15 @@
   position: absolute;
   inset: 0;
   z-index: 21;
-  overflow: hidden;
+  overflow: visible;
   pointer-events: none;
   opacity: 0;
   transition: opacity .08s ease;
-  background:
-    linear-gradient(rgba(97,215,255,.018), rgba(97,215,255,.018));
+  background: transparent;
 }
 .bfux-anchor-grid-overlay[data-visible="true"] { opacity: 1; }
 .bfux-anchor-grid-overlay[data-dragging="true"] {
-  background:
-    linear-gradient(rgba(97,215,255,.028), rgba(97,215,255,.028));
+  background: transparent;
 }
 .bfux-anchor-grid-overlay > i {
   position: absolute;
