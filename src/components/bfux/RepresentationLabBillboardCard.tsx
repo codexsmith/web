@@ -85,8 +85,13 @@ export function RepresentationLabBillboardCard() {
           </div>
 
           <strong>
-            <span>One World, Many</span>
-            <span>Representations</span>
+            <span className="bf-machine-billboard__title-line bf-machine-billboard__title-line--top">
+              <span className="bf-machine-billboard__title-prefix">One World, </span>
+              <span className="bf-machine-billboard__title-many">Many</span>
+            </span>
+            <span className="bf-machine-billboard__title-line bf-machine-billboard__title-line--bottom">
+              Representations
+            </span>
           </strong>
           <p>{node.boundary}</p>
 
