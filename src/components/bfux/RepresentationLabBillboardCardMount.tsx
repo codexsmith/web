@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { labMachineRevealEvent } from "./LabMachine";
 import { RepresentationLabBillboardCard } from "./RepresentationLabBillboardCard";
+import "./representation-lab-billboard-mobile-flow.css";
 
 const apparatusSelector = '.bf-machine[data-skin="physical"] [data-machine-layer="apparatus"]';
 const billboardSelector = '.bf-machine-node--billboard[data-node-id="representation-lab"]';
