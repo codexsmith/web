@@ -28,6 +28,7 @@ A workstream-local `STATUS.md` is authoritative when an older README preserves s
 | 25 | Bridge Governance + Operations | Active hardening | Core governance/security CI-gated; browser mutation, concurrency, production access verification, and UX polish remain |
 | 26 | Fallacies of Distributed Reality | Publication candidate | Develop and publish the public engineering essay |
 | 27 | Temporal Observation Vessel BFUX | Concept / design-ready | Prototype a fixed-time, rotatable branching timeline with controlled observability, spatial-memory preservation, and planar accessibility fallback |
+| 28 | Lab Machine Physical UI Refinement | Design-ready / implementation open | Implement Forge, plexiglass Research Engine, Research Exhaust telemetry, shared physical primitives, and responsive/accessibility polish |
 
 ## Retired / absorbed root IDs
 
