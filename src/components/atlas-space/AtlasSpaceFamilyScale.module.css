@@ -1,0 +1,42 @@
+.track {
+  grid-template-columns: 14px 1fr 14px 1fr 14px 1fr 14px 1fr 14px;
+}
+
+.labels {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.carriageDown {
+  animation: familyCarriageDown .56s cubic-bezier(.2,.72,.22,1) both !important;
+}
+
+.carriageUp {
+  animation: familyCarriageUp .56s cubic-bezier(.2,.72,.22,1) both !important;
+}
+
+.familyStage::before {
+  content: "DOMAIN FAMILY ATLAS";
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  z-index: 10;
+  color: #78756d;
+  font: 700 7px/1 "Courier New", monospace;
+  letter-spacing: .14em;
+  pointer-events: none;
+}
+
+@keyframes familyCarriageDown {
+  from { left: calc(25% - 4px); }
+  to { left: calc(50% - 4px); }
+}
+
+@keyframes familyCarriageUp {
+  from { left: calc(50% - 4px); }
+  to { left: calc(25% - 4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carriageDown,
+  .carriageUp { animation-duration: .01ms !important; }
+}
