@@ -324,3 +324,107 @@
     display: none !important;
   }
 }
+
+/* Full-mobile compact controls reuse the desktop glyphs, but some of those SVG
+ * drawings intentionally overfill their wells on the large apparatus. Contain
+ * them here so the icon lane and identity lane remain mechanically separate. */
+@media (max-width: 1024px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) {
+    --bf-full-control-icon: clamp(1.5rem, 5.4cqi, 1.68rem);
+    --bf-full-control-gap: clamp(.42rem, 1.6cqi, .56rem);
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__icon-plate,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__icon-well {
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__icon-well {
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) .bf-machine-node__icon-well svg {
+    display: block !important;
+    width: 76% !important;
+    height: 76% !important;
+    max-width: 76% !important;
+    max-height: 76% !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    > .bf-machine-node__face {
+    grid-template-columns: 1.75rem minmax(0, 1fr) !important;
+    column-gap: .58rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    .bf-machine-node__icon-plate {
+    width: 1.65rem !important;
+    height: 1.65rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    .bf-machine-node__icon-well svg {
+    display: block !important;
+    width: 74% !important;
+    height: 74% !important;
+    max-width: 74% !important;
+    max-height: 74% !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
