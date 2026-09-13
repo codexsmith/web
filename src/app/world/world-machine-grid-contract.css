@@ -1,0 +1,13 @@
+/*
+ * Lab Machine world-field coverage.
+ *
+ * world-machine-preview.css owns the grid texture itself. This small contract
+ * only makes that texture cover the complete preview surface instead of
+ * beginning below the fixed frame and ending above the lower frame allowance.
+ * The fixed frame remains above it on z-index 20.
+ */
+.world-machine-preview:has(> .world-machine-frame)::before {
+  top: 0;
+  bottom: 0;
+  min-height: 100%;
+}

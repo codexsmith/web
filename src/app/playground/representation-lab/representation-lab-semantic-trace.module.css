@@ -1,0 +1,163 @@
+.wrapper {
+  display: grid;
+  gap: 10px;
+}
+
+.bus {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.stage,
+.stageActive,
+.subphase,
+.subphaseActive {
+  border: 1px solid var(--bf-border, rgba(255,255,255,.16));
+  background: var(--bf-bg-control, rgba(255,255,255,.035));
+  min-width: 0;
+}
+
+.stage,
+.stageActive {
+  display: grid;
+  gap: 3px;
+  padding: 9px 10px;
+}
+
+.stage span,
+.stageActive span,
+.subphase span,
+.subphaseActive span,
+.subcycleLabel span,
+.resultMetaRow span {
+  font-size: 10px;
+  letter-spacing: .12em;
+  opacity: .62;
+}
+
+.stage strong,
+.stageActive strong {
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.stageActive,
+.subphaseActive {
+  border-color: var(--bf-action, currentColor);
+  box-shadow: inset 0 0 0 1px var(--bf-action, currentColor);
+  background: var(--bf-bg-raised, rgba(255,255,255,.075));
+}
+
+.resultMeta {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bf-border, rgba(255,255,255,.16));
+}
+
+.resultMetaRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 10px;
+}
+
+.resultMetaRow strong {
+  min-width: 0;
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: right;
+}
+
+.resultMetaRow strong[data-state="complete"] {
+  color: var(--bf-valid, #9bf56d);
+}
+
+.resultMetaRow strong[data-state="defect"] {
+  color: var(--bf-defect, #ff746c);
+}
+
+.resultMetaRow strong[data-state="running"] {
+  color: var(--bf-attention, #e0bb3f);
+}
+
+.subcycle {
+  display: grid;
+  grid-template-columns: minmax(120px, .55fr) minmax(0, 2.45fr);
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--bf-border, rgba(255,255,255,.16));
+  background: var(--bf-bg-well, rgba(0,0,0,.15));
+}
+
+.subcycleLabel {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 8px;
+}
+
+.subcycleLabel strong {
+  font-size: 20px;
+}
+
+.subcycleRail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.subphase,
+.subphaseActive {
+  display: grid;
+  gap: 3px;
+  padding: 8px 10px;
+}
+
+.subphase strong,
+.subphaseActive strong {
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.subphase small,
+.subphaseActive small {
+  opacity: .68;
+}
+
+@media (max-width: 760px) {
+  .bus {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .subcycle {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .bus,
+  .subcycleRail {
+    grid-template-columns: 1fr;
+  }
+
+  .resultMetaRow {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .resultMetaRow strong {
+    text-align: left;
+  }
+}
+
+@media (forced-colors: active) {
+  .stageActive,
+  .subphaseActive,
+  .subcycle,
+  .resultMeta {
+    border-color: CanvasText;
+  }
+}

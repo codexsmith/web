@@ -1,0 +1,73 @@
+/* Edit-mode bridge from the legacy percentage composition into the modular
+ * BFUX drafting grammar. Position remains where the authored composition put
+ * the card; only its exterior size is normalized. Once a card is actually grid
+ * placed, the anchor-grid composition bridge takes over its envelope. */
+
+@media (min-width: 1025px) {
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-canonical-size="true"]
+    :is(.bf-machine-node__face) {
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-canonical-size="true"]:not([data-bfux-grid-placed="true"]):not([data-bfux-authored-grid-placed="true"]):not([data-expanded="true"]) {
+    width: var(--bfux-node-canonical-width) !important;
+    height: var(--bfux-node-canonical-height) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-canonical-size="true"]:not([data-expanded="true"])
+    > .bf-machine-node__face {
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* The lattice is now a fixed physical ruler rather than a stretched NxM grid.
+ * Keep the old picker state readable in saved specs, but do not present controls
+ * that no longer alter geometry. */
+.bfux-anchor-grid-picker > summary > small {
+  font-size: 0 !important;
+}
+.bfux-anchor-grid-picker > summary > small::before {
+  content: "FIXED 90PX POINT LATTICE";
+  font-size: .52rem;
+}
+.bfux-anchor-grid-picker__body > header small,
+.bfux-anchor-grid-picker__body > header strong {
+  font-size: 0 !important;
+}
+.bfux-anchor-grid-picker__body > header small::before {
+  content: "GRID PITCH";
+  font-size: .48rem;
+}
+.bfux-anchor-grid-picker__body > header strong::before {
+  content: "90 PX";
+  font-size: .7rem;
+}
+.bfux-anchor-grid-picker__matrix {
+  display: none !important;
+}
+.bfux-anchor-grid-picker__explain > span {
+  display: none;
+}
+.bfux-anchor-grid-picker__explain::before {
+  content: "The drafting ruler is 90px. Representation Lab / People / Products / Publications / About are the shared 180px two-track card family; Research is the 270px three-track engine family. Other cards retain the 60px normalization bridge until their grid-native sizes are chosen.";
+}

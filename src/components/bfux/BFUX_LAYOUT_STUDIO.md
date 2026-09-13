@@ -1,0 +1,133 @@
+# BFUX Layout Studio
+
+The Lab Machine has accumulated enough responsive and physical-layout behavior that screenshot -> CSS -> screenshot tuning is no longer an acceptable primary workflow.
+
+## Rule
+
+A tunable instrument should have exactly two active styling layers:
+
+1. **skin** — material, color, typography, iconography;
+2. **geometry contract** — position, size, internal allocation, and named tuning variables.
+
+Do not add a third `*-polish.css`, cascade-lock patch, or resolution-specific override for the same geometry. If a value needs tuning, expose it as a named geometry value.
+
+The editor is not merely a spec generator. It is a small source compiler: the same authored layout module it emits is consumed directly by the runtime.
+
+## Active editor pieces
+
+- `RepresentationLabBillboardCard.tsx` — semantic billboard DOM only;
+- `representation-lab-billboard-card.css` — billboard visual skin;
+- `representation-lab-billboard-contract.css` — the single active billboard geometry contract;
+- `RepresentationLabBillboardCardMount.tsx` — default anchor above Products; yields when an editor or authored layout assigns an anchor-grid position;
+- `BfuxLayoutStudio.tsx` — live visual tuning and source compilation surface;
+- `BfuxPartsBox.tsx` / `bfux-parts-box.css` — reusable physical-part palette;
+- `BfuxPlacementLayer.tsx` / `bfux-placement-layer.css` — bounded loose-part instantiation, placement, movement, and selection;
+- `BfuxAnchorGrid.tsx` / `bfux-anchor-grid.css` — shared-point card placement system;
+- `bfux-grid-geometry.ts` — canonical workfield, pitch, span, and card-envelope math shared by editor and runtime;
+- `bfux-layout-source.ts` — stable serializable source contract;
+- `bfux-layout-authored.generated.ts` — generated source of truth consumed by normal runtime;
+- `BfuxAuthoredLayoutLayer.tsx` / `bfux-authored-layout.css` — runtime interpreter for authored layout source;
+- `bfux-layout-compiler.ts` — deterministic source-file emitter;
+- `src/app/api/bfux/layout-studio/route.ts` — fixed-path local-development source writer.
+
+Legacy `representation-lab-billboard-layout.css` and `representation-lab-billboard-polish.css` are retained as history but are no longer imported by the card and must not receive new fixes.
+
+## Open the studio
+
+Append `?bfux=edit` to the Lab Machine URL.
+
+The billboard pilot exposes card width/height, gap above Products, maze/copy split, maze scale/X position, visual/copy padding, title scale, and lower control-row height. `AUTO HEIGHT` returns the billboard to content-driven sizing while the billboard remains in its default authored position.
+
+Once a card is placed on the anchor lattice, its **outer envelope** is owned by the grid span instead. Internal billboard controls still tune its content allocation; the lattice owns the physical exterior box.
+
+Changes apply immediately and persist in browser `localStorage` separately for Core and Full while editing.
+
+## Source compiler
+
+Layout Studio compiles the complete editor state for **both** Core and Full into:
+
+`src/components/bfux/bfux-layout-authored.generated.ts`
+
+That file is a drop-in source replacement, not an instruction packet for another agent. It contains the versioned `bfux.machine-layout/v1` object and is imported directly by `BfuxAuthoredLayoutLayer` during normal non-editor rendering.
+
+The source output includes:
+
+- billboard geometry;
+- anchor-grid specification, card anchors, and card spans;
+- instantiated loose parts and normalized positions.
+
+The studio exposes four output paths:
+
+- **COPY SOURCE** — copies the exact generated TypeScript file contents;
+- **DOWNLOAD .TS** — downloads the exact generated source file;
+- **WRITE REPO** — under local `next dev`, writes the exact generated source to the fixed canonical repository path and lets normal HMR pick it up;
+- **COPY SPEC** — retains the plain data object as a secondary debugging/interchange form.
+
+`WRITE REPO` is intentionally development-only. The API accepts no destination path from the browser, writes only the canonical generated file, validates the generated marker/schema, rejects oversized payloads, and returns `LOCAL_DEV_ONLY` outside development. A Vercel preview therefore cannot mutate repository source, but COPY SOURCE / DOWNLOAD .TS still require no AI interpretation.
+
+On a fresh browser or after clearing editor-local state, the editor hydrates from the authored generated module. Thus the loop is:
+
+`runtime source -> visual edit -> compile -> source -> runtime`
+
+rather than:
+
+`screenshot -> prose/spec -> AI -> CSS -> screenshot`.
+
+## Anchor Grid
+
+The Excel-style `PICK YOUR GRID` control is interpreted as a lattice of **points connected by tracks**, not a set of unrelated boxes.
+
+A card placement is represented by:
+
+- node id;
+- anchor point `(column, row)`;
+- attached corner: `NW`, `NE`, `SW`, or `SE`;
+- horizontal `columnSpan`;
+- vertical `rowSpan`.
+
+The point is the shared alignment primitive. The corner tells the renderer which side of that point the object occupies. The spans tell the renderer how many grid tracks the card occupies. Position **and size therefore use the same grammar**.
+
+The coordinate space is an expanded **apparatus-local workfield**. The lattice is mounted inside the same transformed DOM subtree as the semantic cards, then extended beyond the authored apparatus by the machine's full pan envelope. Panning therefore moves cards, rails, snap points, and drag ghosts as one physical drafting plane. The fixed pan surface remains only a background hit target; it is not the grid coordinate system.
+
+Consequences:
+
+- every visible grid point across the expanded workfield is a real snap target;
+- grid rails are rendered from the same row/column fractions used by snapping;
+- panning cannot cause the apparatus to drift relative to the lattice because both share the same transform ancestry;
+- a dropped card is quantized to a whole-number width and height span derived from its existing physical envelope;
+- the card root, shell, and face inherit that same snapped outer envelope instead of letting nested DOM height rules silently change placement geometry;
+- two cards can share one point with opposite corners and become exactly adjacent;
+- multiple cards can share a row or column and their edges can also land on shared downstream points because dimensions are grid spans;
+- `W− / W+ / H− / H+` adjust the selected card by one grid track at a time;
+- changing grid density remaps both anchors and existing spans;
+- `RELEASE` removes the grid placement and restores the underlying authored/default geometry.
+
+During drag, the editor first converts the card's current exterior dimensions to the nearest safe grid spans. It then tests valid `(point, corner)` placements for that fixed snapped envelope. The drag ghost therefore previews the **actual card rectangle that will be committed**, including its `W x H` span, rather than previewing a point while a separate CSS hierarchy determines size afterward.
+
+Legacy saved placements that predate spans remain readable. The renderer derives a best-fit span from their current outer dimensions until the card is moved or resized, after which the explicit spans are serialized.
+
+Normal runtime uses the same `bfux-grid-geometry.ts` functions as the editor to reconstruct the apparatus-local workfield, anchor location, pitch, and exterior card dimensions. That shared geometry module is the critical WYSIWYG boundary.
+
+## Parts Box and free placement
+
+The Parts Box uses the physical Lab Machine vocabulary already present on the page:
+
+- connector: `SINGLE`, `MULTI`, `PLEX`, `EXTENDED`, `PORT`;
+- tube: straight `TUBE` and `ELBOW`;
+- panel: `MODULE` and `WIDE MODULE`.
+
+Dragging a primitive onto the machine creates an independent instance. Placed parts are bounded to the apparatus and stored as normalized center coordinates rather than raw screen coordinates. A part can be selected, moved by dragging, and removed by double-click or Delete / Backspace.
+
+Cards and loose parts deliberately use different placement contracts: cards use the stricter shared workfield anchor + span lattice because mutual alignment and exterior size are structural; loose machine parts currently use free apparatus-relative normalized placement.
+
+## Next
+
+Useful next increments are:
+
+- add direct resize handles that mutate the same `columnSpan` / `rowSpan` values instead of introducing pixel dimensions;
+- make grid points nestable / locally refinable so a coarse workfield lattice can contain denser sub-lattices;
+- make the generated source module the broader canonical desktop-machine geometry registry, not only editor-authored deltas;
+- add magnetic attachment rules between card edges, ports, connectors, and tubes;
+- add a guarded Git/GitHub commit action only if repository authentication is deliberately provisioned, rather than embedding credentials in the public editor.
+
+The important constraint is unchanged: the editor manipulates declared geometry and attachment relationships; it does not accumulate arbitrary corrective CSS.

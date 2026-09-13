@@ -2,16 +2,22 @@ import type { Metadata } from "next";
 import { permanentRedirect } from "next/navigation";
 import { parseProcessScope } from "@/lib/bfl-process";
 import { parseProjection } from "@/lib/view-projection";
+import { BfuxCardGeometryNormalizer } from "@/components/bfux/BfuxCardGeometryNormalizer";
+import { BfuxLayoutStudio } from "@/components/bfux/BfuxLayoutStudio";
 import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
 import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
 import { MobileCapitalProjectionControls } from "@/components/bfux/MobileCapitalProjectionControls";
 import { MobileMachineNonCrossingPipeLayer } from "@/components/bfux/MobileMachineNonCrossingPipeLayer";
 import { MobileTimelineProjectionRedirect } from "@/components/bfux/MobileTimelineProjectionRedirect";
+import { RepresentationLabBillboardCardMount } from "@/components/bfux/RepresentationLabBillboardCardMount";
 import "./world/world-machine-preview.css";
+import "./world/world-machine-grid-contract.css";
 import "./lab-machine-responsive.css";
 import "./lab-machine-responsive-pass2.css";
 import "./lab-machine-frame.css";
 import "./lab-machine-composition.css";
+import "./bfux-grid-composition-bridge.css";
+import "./lab-machine-type-step.css";
 import "./proto/capital/capital-frame.css";
 import "./proto/capital/capital-frame-canonical-connectors.css";
 import "./proto/capital/capital-frame-zoom-resilience.css";
@@ -70,6 +76,9 @@ export default async function HomePage({ searchParams }: Props) {
       <MobileTimelineProjectionRedirect projection={projection} />
       <MobileCapitalProjectionControls />
       <MobileMachineNonCrossingPipeLayer />
+      <RepresentationLabBillboardCardMount />
+      <BfuxCardGeometryNormalizer />
+      <BfuxLayoutStudio />
       <LabMachineWorld
         section={section}
         initialProjection={projection}

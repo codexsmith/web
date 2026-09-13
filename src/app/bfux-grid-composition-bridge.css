@@ -1,0 +1,140 @@
+/*
+ * BFUX grid / canonical machine-composition bridge.
+ *
+ * The desktop Lab Machine still carries a carefully authored fallback composition
+ * in lab-machine-composition.css. Those selectors intentionally use !important
+ * because they protect the public machine from older component-local geometry.
+ *
+ * Layout Studio is a stronger authority: once a card is snapped to the BFUX
+ * lattice, its exterior rectangle must come from the lattice and the legacy
+ * composition becomes only the fallback used after RELEASE. This bridge makes
+ * that ownership explicit instead of relying on stylesheet order or selector
+ * accidents.
+ *
+ * Structural/card DOM remains free to lay out *inside* the rectangle. The grid
+ * owns the rendered mechanical envelope. In assembled/grid mode, cards use a
+ * compact shared chassis seam so adjacent modules read as one machine rather
+ * than either overlapping or leaving the full decorative shell depth between
+ * their faces.
+ */
+
+@media (min-width: 1025px) {
+  /* ---------------------------------------------------------------------- */
+  /* Mechanical envelope                                                     */
+  /* ---------------------------------------------------------------------- */
+
+  /* Grid geometry is the outside envelope. Keep a shallow 2px chassis seam in
+   * the placed projection: the root is inset by 2px on each side and the shell
+   * is correspondingly compressed to 2px. This gives neighboring cards a tight
+   * 4px face-to-face mechanical joint while their visible shell edges terminate
+   * exactly on the same lattice boundary. */
+  .bf-machine-node:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]) {
+    --bfux-node-grid-seam: 2px;
+    --bfux-node-chrome-anchor-x: var(--bfux-node-grid-seam);
+    --bfux-node-chrome-anchor-y: var(--bfux-node-grid-seam);
+  }
+
+  .bf-machine-node:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"])
+    > .bf-machine-node__shell {
+    inset: calc(0px - var(--bfux-node-grid-seam)) !important;
+    transform: none !important;
+  }
+
+  /* Fasteners belong to the same compact seam when modules are assembled. */
+  .bf-machine-node:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"])
+    > .bf-machine-node__fasteners {
+    inset: -1px !important;
+  }
+
+  .bf-machine-node[data-bfux-grid-corner="ne"],
+  .bf-machine-node[data-bfux-grid-corner="se"] {
+    --bfux-node-chrome-anchor-x: calc(0px - var(--bfux-node-grid-seam));
+  }
+
+  .bf-machine-node[data-bfux-grid-corner="sw"],
+  .bf-machine-node[data-bfux-grid-corner="se"] {
+    --bfux-node-chrome-anchor-y: calc(0px - var(--bfux-node-grid-seam));
+  }
+
+  /* Editor projection. Deliberately more specific than the canonical fallback
+   * composition so the same !important declarations cannot fight each other. */
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"][data-resolution]
+    .bf-machine__board[data-machine-layer="viewport"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"][data-bfux-grid-editing="true"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-grid-placed="true"]:not([data-expanded="true"]),
+  /* Authored/runtime projection emitted by Layout Studio. */
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"][data-resolution]
+    .bf-machine__board[data-machine-layer="viewport"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"][data-bfux-authored-grid-placed="true"]:not([data-expanded="true"]) {
+    position: absolute !important;
+    left: calc(var(--bfux-node-anchor-x) + var(--bfux-node-chrome-anchor-x, 0px)) !important;
+    top: calc(var(--bfux-node-anchor-y) + var(--bfux-node-chrome-anchor-y, 0px)) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: max(1px, calc(
+      var(--bfux-node-grid-width)
+      - (var(--bfux-node-grid-seam, 0px) * 2)
+    )) !important;
+    height: max(1px, calc(
+      var(--bfux-node-grid-height)
+      - (var(--bfux-node-grid-seam, 0px) * 2)
+    )) !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    grid-area: auto !important;
+    align-self: auto !important;
+    justify-self: auto !important;
+    box-sizing: border-box !important;
+    transform: translate(var(--bfux-node-anchor-tx), var(--bfux-node-anchor-ty)) !important;
+  }
+
+  /* A grid-owned node is a normal Lab Machine card first. Its ordinary face is
+   * always projected into the full root rectangle. Card variants may change the
+   * content inside that face, but they may not establish a second exterior box.
+   * This deliberately replaces the earlier billboard-only envelope workaround. */
+  html body .site-shell[data-root-focus="true"]
+    .physical-machine-experience
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    .bf-machine-node[data-machine-layer="node"]:is([data-bfux-grid-placed="true"], [data-bfux-authored-grid-placed="true"]):not([data-expanded="true"])
+    > .bf-machine-node__face {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Layout editing treats the whole compact card as one physical object. This
+   * prevents embedded SVGs, visualizers, links, and card internals from stealing
+   * the pointer/drag gesture from the root node. A nested machine node (the Full
+   * Tour is the current example) is deliberately excluded here so it remains an
+   * independent draggable object rather than becoming inert with its parent. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-bfux-grid-editing="true"]
+    .bf-machine-node[data-bfux-grid-editable="true"]:not([data-expanded="true"])
+    > :not(.bf-machine-node[data-machine-layer="node"]) {
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine__apparatus[data-bfux-grid-editing="true"]
+    .bf-machine-node[data-bfux-grid-dragging="true"] {
+    z-index: 90 !important;
+    transition: none !important;
+  }
+}

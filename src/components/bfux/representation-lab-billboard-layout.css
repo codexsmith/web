@@ -1,0 +1,277 @@
+/* Cascade lock for the first-class Representation Lab billboard card.
+ *
+ * The billboard is a normal Lab Machine card whose function is invitation.
+ * In both desktop resolutions it is mounted ABOVE Products in the Y direction:
+ * same horizontal datum, separate vertical card, no z-overlap with Products and
+ * no use of Tour's expandable left-hand bay.
+ */
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Shared desktop billboard face                                               */
+/* -------------------------------------------------------------------------- */
+
+@media (min-width: 1025px) {
+  /* The marked dead space in the current billboard is horizontal, not vertical.
+   * Give that width to the pictogram instead of carrying an oversized copy bay.
+   * The outer card, title centering, lower control row, and Y geometry stay put. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__face {
+    display: grid !important;
+    grid-template-columns: 44% minmax(0, 56%) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 8rem !important;
+    box-sizing: border-box;
+    overflow: hidden !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    overflow: hidden !important;
+    padding: .5rem .56rem .42rem !important;
+    border-right: 1px solid color-mix(in srgb, var(--tone) 28%, #31383d);
+    border-bottom: 0 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__world-label {
+    left: .58rem !important;
+    top: .44rem !important;
+    font-size: .52rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    left: auto !important;
+    right: .24rem !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    gap: .15rem !important;
+    font-size: .44rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: minmax(0, 1fr) 2.2rem !important;
+    grid-template-areas:
+      "title title"
+      "eyebrow cta" !important;
+    align-content: stretch !important;
+    align-items: stretch !important;
+    gap: .28rem !important;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    overflow: hidden !important;
+    padding: .58rem .72rem .56rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > p {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    grid-area: title;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .02em;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    margin: 0;
+    font-size: clamp(1.16rem, 1.42vw, 1.58rem) !important;
+    line-height: .91 !important;
+    overflow: hidden;
+    overflow-wrap: normal;
+    word-break: normal;
+    text-wrap: initial;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong > span {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    min-width: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: .15rem;
+    line-height: 1 !important;
+    font-size: .47rem !important;
+    overflow: hidden;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow small {
+    margin-left: 0;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta {
+    grid-area: cta;
+    align-self: stretch !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: .42rem .62rem !important;
+    overflow: hidden;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta small {
+    font-size: .48rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta b {
+    font-size: .52rem !important;
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cue-row {
+    display: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* FULL / MID                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/* Products supplies the billboard's horizontal and vertical datum at runtime.
+ * Keep the opposite inset explicitly unset so `height: auto` remains intrinsic;
+ * constraining both top and bottom stretches the card after it is measured. */
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-node--billboard {
+  position: absolute !important;
+  left: 37.25% !important;
+  top: auto !important;
+  bottom: auto !important;
+  width: 35% !important;
+  height: auto !important;
+  z-index: 9 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
+  .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+  font-size: clamp(1.2rem, 1.46vw, 1.6rem) !important;
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
+  .bf-machine-node--billboard .bf-machine-billboard__visual {
+  padding: .54rem .62rem .44rem !important;
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
+  .bf-machine-node--billboard .bf-machine-billboard__world-label {
+  font-size: .54rem !important;
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"])
+  .bf-machine-node--billboard .bf-machine-billboard__legend {
+  font-size: .46rem !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CORE / FOCUS                                                                */
+/* -------------------------------------------------------------------------- */
+
+/* Core uses the same runtime edge alignment as the other desktop projections. */
+.site-shell[data-root-focus="true"]
+  .bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine__apparatus > .bf-machine-node--billboard {
+  position: absolute !important;
+  left: calc(var(--core-products-left) - 7%) !important;
+  top: auto !important;
+  bottom: auto !important;
+  width: calc(var(--core-upper-card-width) + 14%) !important;
+  height: auto !important;
+  z-index: 9 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+  font-size: clamp(1.25rem, 1.55vw, 1.66rem) !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine-node--billboard .bf-machine-billboard__visual {
+  padding: .58rem .66rem .48rem !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine-node--billboard .bf-machine-billboard__world-label {
+  font-size: .56rem !important;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"]
+  .bf-machine-node--billboard .bf-machine-billboard__legend {
+  font-size: .48rem !important;
+}
+
+/* Products remains in its canonical machine position. The billboard is above
+ * it in Y, not layered over it in z-space. Board overflow is intentionally
+ * visible in the root machine, so this top-deck card can project above the
+ * authored board while remaining part of the draggable apparatus. */
+
+@media (max-width: 1024px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 260px !important;
+    z-index: auto !important;
+  }
+}

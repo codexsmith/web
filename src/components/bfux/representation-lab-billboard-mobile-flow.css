@@ -1,0 +1,430 @@
+/* Representation Lab billboard + Full mobile integration.
+ *
+ * Desktop Core/Full geometry is intentionally untouched. Below the apparatus
+ * breakpoint the authored desktop translations are released and Full becomes a
+ * dense semantic rack: launchers -> public navigation -> playground -> Research
+ * -> operational controls -> Governance. The billboard gets a compact mobile
+ * face instead of carrying the desktop sign chassis into the rack.
+ */
+
+@media (max-width: 1024px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus {
+    grid-auto-flow: row dense !important;
+    align-items: stretch !important;
+  }
+
+  /* Mobile owns flow. Do not let authored desktop translation survive after
+   * the cards have been returned to relative grid positioning. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id] {
+    grid-row: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Launchers stay paired but no longer reserve an explicit row when one is
+   * unavailable. Dense auto-placement closes the hole instead. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="tour"],
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+    grid-column: span 3 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="tour"] { order: 0 !important; }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] { order: 1 !important; }
+
+  /* Public navigation is a compact three-plate rack. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) {
+    grid-column: span 2 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] { order: 2 !important; }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] { order: 3 !important; }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] { order: 4 !important; }
+
+  /* The playground is an invitation between navigation and the Research engine. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="representation-lab"] {
+    grid-column: 1 / -1 !important;
+    order: 5 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    order: 6 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="pipeline"] {
+    grid-column: span 2 !important;
+    grid-row: auto !important;
+    order: 7 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="method"] {
+    grid-column: span 2 !important;
+    grid-row: auto !important;
+    order: 8 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="timeline"] {
+    grid-column: span 2 !important;
+    grid-row: auto !important;
+    order: 9 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"] {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    order: 10 !important;
+  }
+
+  /* Compact horizontal billboard: instrument, invitation, one action. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard > .bf-machine-billboard__face {
+    display: grid !important;
+    grid-template-columns: minmax(7.2rem, 31%) minmax(0, 1fr) !important;
+    grid-template-rows: minmax(7.15rem, auto) !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 7.15rem !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    padding: .38rem .42rem !important;
+    border-right: 1px solid color-mix(in srgb, var(--tone) 28%, #31383d) !important;
+    border-bottom: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    left: -14% !important;
+    top: 50% !important;
+    width: 104% !important;
+    height: 104% !important;
+    min-height: 0 !important;
+    transform: translateY(-50%) rotate(-90deg) scale(.92) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    right: .28rem !important;
+    gap: .12rem !important;
+    font-size: .42rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+      "title title"
+      "eyebrow cta" !important;
+    align-items: stretch !important;
+    gap: .34rem .48rem !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    padding: .52rem .58rem !important;
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    grid-area: title !important;
+    align-self: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: .02em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: .94 !important;
+    overflow: visible !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-line {
+    display: block !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-line--top {
+    font-size: clamp(.82rem, 2.7vw, 1.04rem) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-line--bottom {
+    font-size: clamp(1.02rem, 3.45vw, 1.32rem) !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    grid-area: eyebrow !important;
+    align-self: center !important;
+    justify-content: flex-start !important;
+    gap: .28rem !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    font-size: .46rem !important;
+    white-space: nowrap !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > p,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__cue-row {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta {
+    grid-area: cta !important;
+    align-self: stretch !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    padding: .38rem .55rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta b {
+    font-size: .54rem !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard > .bf-machine-billboard__face {
+    grid-template-columns: 6.3rem minmax(0, 1fr) !important;
+    min-height: 6.55rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    gap: .28rem .34rem !important;
+    padding: .46rem .48rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow small {
+    display: none !important;
+  }
+}
+
+/* Full-mobile compact controls reuse the desktop glyphs, but some of those SVG
+ * drawings intentionally overfill their wells on the large apparatus. Contain
+ * them here so the icon lane and identity lane remain mechanically separate. */
+@media (max-width: 1024px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) {
+    --bf-full-control-icon: clamp(1.5rem, 5.4cqi, 1.68rem);
+    --bf-full-control-gap: clamp(.42rem, 1.6cqi, .56rem);
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__icon-plate,
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__icon-well {
+    overflow: hidden !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"],
+      [data-node-id="governance"]
+    ) .bf-machine-node__icon-well {
+    display: grid !important;
+    place-items: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="pipeline"],
+      [data-node-id="method"],
+      [data-node-id="timeline"]
+    ) .bf-machine-node__icon-well svg {
+    display: block !important;
+    width: 76% !important;
+    height: 76% !important;
+    max-width: 76% !important;
+    max-height: 76% !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    > .bf-machine-node__face {
+    grid-template-columns: 1.75rem minmax(0, 1fr) !important;
+    column-gap: .58rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    .bf-machine-node__icon-plate {
+    width: 1.65rem !important;
+    height: 1.65rem !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="governance"]
+    .bf-machine-node__icon-well svg {
+    display: block !important;
+    width: 74% !important;
+    height: 74% !important;
+    max-width: 74% !important;
+    max-height: 74% !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}

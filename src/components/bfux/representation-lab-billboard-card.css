@@ -1,0 +1,398 @@
+/*
+ * Representation Lab billboard card.
+ *
+ * This is intentionally a normal Lab Machine card: same apparatus layer,
+ * same housing, same fasteners, same drag behavior. Its difference is function:
+ * the face is pictographic and invitational rather than metadata-first.
+ */
+
+.bf-machine-node--billboard {
+  --tone: #a466e7;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bf-machine-node--billboard .bf-machine-billboard__face {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: minmax(0, 1.18fr) auto auto !important;
+  height: 100%;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--tone) 42%, #565e62);
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.009) 0 1px, transparent 1px 4px),
+    linear-gradient(135deg, color-mix(in srgb, var(--tone) 12%, #17131d), #0a0d10 68%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.08),
+    inset 0 -18px 30px rgba(0,0,0,.48),
+    inset 4px 0 16px color-mix(in srgb, var(--tone) 7%, transparent);
+}
+
+.bf-machine-node--billboard:hover .bf-machine-node__shell,
+.bf-machine-node--billboard:focus-visible .bf-machine-node__shell {
+  border-color: color-mix(in srgb, var(--tone) 72%, #8d9396);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.16),
+    inset 0 -3px rgba(0,0,0,.84),
+    0 0 0 3px #050607,
+    0 10px 20px rgba(0,0,0,.74),
+    0 0 22px color-mix(in srgb, var(--tone) 18%, transparent);
+}
+
+.bf-machine-node--billboard:focus-visible {
+  outline: none;
+}
+
+.bf-machine-billboard__visual {
+  position: relative;
+  min-height: 0;
+  padding: calc(var(--machine-u, 12px) * .7) calc(var(--machine-u, 12px) * .72) calc(var(--machine-u, 12px) * .45);
+  overflow: hidden;
+  border-bottom: 1px solid color-mix(in srgb, var(--tone) 28%, #31383d);
+  background:
+    radial-gradient(circle at 72% 25%, color-mix(in srgb, var(--tone) 11%, transparent), transparent 34%),
+    linear-gradient(rgba(104,130,143,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(104,130,143,.045) 1px, transparent 1px),
+    #080c0f;
+  background-size: auto, 12px 12px, 12px 12px, auto;
+  box-shadow: inset 0 -8px 18px rgba(0,0,0,.42);
+}
+
+.bf-machine-billboard__world-label {
+  position: absolute;
+  z-index: 2;
+  left: calc(var(--machine-u, 12px) * .8);
+  top: calc(var(--machine-u, 12px) * .56);
+  color: #aeb7bc;
+  font: 720 calc(var(--machine-u, 12px) * .52)/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bf-machine-billboard__visual svg {
+  position: absolute;
+  left: -18%;
+  top: 50%;
+  width: 110%;
+  height: 110%;
+  transform: translateY(-50%) rotate(-90deg) scale(0.95);
+  transform-origin: center center;
+}
+
+.bf-machine-billboard__maze-frame {
+  fill: rgba(10,15,19,.56);
+  stroke: rgba(152,167,174,.34);
+  stroke-width: 1.3;
+}
+
+.bf-machine-billboard__walls {
+  fill: none;
+  stroke: rgba(151,164,171,.26);
+  stroke-width: 2.2;
+  stroke-linecap: square;
+}
+
+.bf-machine-billboard__start {
+  fill: #73b6ff;
+}
+
+.bf-machine-billboard__goal-ring {
+  fill: rgba(7,11,12,.88);
+  stroke: #9bdd63;
+  stroke-width: 2;
+}
+
+.bf-machine-billboard__goal {
+  fill: #9bdd63;
+}
+
+.bf-machine-billboard__route {
+  fill: none;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .94;
+}
+
+.bf-machine-billboard__route--blue {
+  stroke: #73b6ff;
+}
+
+.bf-machine-billboard__route--violet {
+  stroke: #bd74ff;
+  stroke-dasharray: 4 3;
+}
+
+.bf-machine-billboard__route--cyan {
+  stroke: #4dd0e1;
+}
+
+.bf-machine-billboard__legend {
+  position: absolute;
+  left: auto;
+  right: calc(var(--machine-u, 12px) * .5);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: calc(var(--machine-u, 12px) * .22);
+  color: #87949a;
+  font: 680 calc(var(--machine-u, 12px) * .46)/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.bf-machine-billboard__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--machine-u, 12px) * .24);
+  white-space: nowrap;
+}
+
+.bf-machine-billboard__legend i,
+.bf-machine-billboard__cue-row i {
+  display: inline-block;
+  width: calc(var(--machine-u, 12px) * .42);
+  height: calc(var(--machine-u, 12px) * .42);
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 calc(var(--machine-u, 12px) * .42) currentColor;
+}
+
+.bf-machine-billboard__legend [data-tone="blue"],
+.bf-machine-billboard__cue-row [data-tone="blue"] { color: #73b6ff; }
+.bf-machine-billboard__legend [data-tone="cyan"],
+.bf-machine-billboard__cue-row [data-tone="cyan"] { color: #4dd0e1; }
+.bf-machine-billboard__legend [data-tone="violet"],
+.bf-machine-billboard__cue-row [data-tone="violet"] { color: #bd74ff; }
+.bf-machine-billboard__legend [data-tone="green"],
+.bf-machine-billboard__cue-row [data-tone="green"] { color: #9bdd63; }
+
+.bf-machine-billboard__legend b {
+  color: #59666d;
+  font-weight: 500;
+}
+
+.bf-machine-billboard__copy {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "eyebrow eyebrow"
+    "title cta"
+    "body cta";
+  gap: calc(var(--machine-u, 12px) * .22) calc(var(--machine-u, 12px) * .55);
+  align-items: center;
+  padding: calc(var(--machine-u, 12px) * .62) calc(var(--machine-u, 12px) * .72);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--tone) 11%, #17131d), #0c1012 72%);
+}
+
+.bf-machine-billboard__eyebrow {
+  grid-area: eyebrow;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  min-width: 0;
+  color: #c9b8ee;
+  font: 720 calc(var(--machine-u, 12px) * .48)/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.bf-machine-billboard__eyebrow small {
+  color: #8f9ba0;
+  font: inherit;
+  font-size: .9em;
+  white-space: nowrap;
+}
+
+.bf-machine-billboard__copy > strong {
+  grid-area: title;
+  min-width: 0;
+  color: #f1eee8;
+  font: 500 calc(var(--machine-u, 12px) * 1.22)/.98 Georgia, "Times New Roman", serif;
+  letter-spacing: -.015em;
+  text-shadow: 0 1px 2px #000;
+}
+
+.bf-machine-billboard__copy > p {
+  grid-area: body;
+  margin: calc(var(--machine-u, 12px) * .08) 0 0;
+  color: #9fa9ad;
+  font-size: calc(var(--machine-u, 12px) * .58);
+  line-height: 1.32;
+}
+
+.bf-machine-billboard__cta {
+  grid-area: cta;
+  align-self: stretch;
+  min-width: calc(var(--machine-u, 12px) * 5.8);
+  display: grid;
+  align-content: center;
+  gap: calc(var(--machine-u, 12px) * .28);
+  padding: 0 calc(var(--machine-u, 12px) * .58);
+  border: 1px solid color-mix(in srgb, var(--tone) 33%, #4b5357);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 36%),
+    color-mix(in srgb, var(--tone) 10%, #0c1012);
+  box-shadow: inset 0 0 0 2px #080b0d;
+}
+
+.bf-machine-billboard__cta small,
+.bf-machine-billboard__cta b {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.bf-machine-billboard__cta small {
+  color: #7f8a90;
+  font-size: calc(var(--machine-u, 12px) * .43);
+}
+
+.bf-machine-billboard__cta b {
+  color: #e0d4fb;
+  font-size: calc(var(--machine-u, 12px) * .58);
+  line-height: 1;
+}
+
+.bf-machine-billboard__cta i {
+  margin-left: calc(var(--machine-u, 12px) * .28);
+  color: #bd74ff;
+  font-size: 1.22em;
+  font-style: normal;
+  text-shadow: 0 0 6px rgba(189,116,255,.58);
+}
+
+.bf-machine-billboard__cue-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: calc(var(--machine-u, 12px) * 2.05);
+  border-top: 1px solid color-mix(in srgb, var(--tone) 18%, #2e363a);
+  background: #090d0f;
+}
+
+.bf-machine-billboard__cue-row > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--machine-u, 12px) * .28);
+  min-width: 0;
+  padding: calc(var(--machine-u, 12px) * .38) calc(var(--machine-u, 12px) * .28);
+  border-right: 1px solid #1e292e;
+  color: #9ba5a9;
+  font: 650 calc(var(--machine-u, 12px) * .43)/1.08 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: .055em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.bf-machine-billboard__cue-row > span:last-child {
+  border-right: 0;
+}
+
+/* FULL / MID: the machine already has an unused first top-row card bay.
+ * The billboard takes that bay, replacing the fixed status instrument there.
+ * People, Products, and Publications remain exactly where they already are. */
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-node--billboard {
+  position: absolute !important;
+  left: 2.5%;
+  top: 5%;
+  width: 18.5%;
+  height: auto;
+  z-index: 8;
+}
+
+/* CORE / FOCUS: make the upper bank a real four-card row. The billboard is
+ * simply card one; the three institutional cards move one bay to the right. */
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node--billboard {
+  position: absolute !important;
+  left: 4%;
+  top: 7%;
+  width: 21%;
+  height: auto;
+  z-index: 8;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="people"] {
+  left: 27.5%;
+  top: 7%;
+  width: 21%;
+  height: 41.5%;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="products"] {
+  left: 51%;
+  top: 7%;
+  width: 21%;
+  height: 41.5%;
+}
+
+.bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node[data-node-id="publications"] {
+  left: 74.5%;
+  top: 7%;
+  width: 21%;
+  height: 41.5%;
+}
+
+/* On the compact top-row bay, keep the invitation visual first and the copy
+ * short. This preserves billboard character without turning it into a banner. */
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__copy > p {
+  display: none;
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__copy > strong {
+  font-size: calc(var(--machine-u, 12px) * 1.05);
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__cta {
+  min-width: calc(var(--machine-u, 12px) * 4.9);
+}
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine-billboard__cue-row > span {
+  font-size: calc(var(--machine-u, 12px) * .38);
+}
+
+/* Mobile physical projection is a document rack, so the billboard becomes its
+ * first ordinary rack card instead of preserving desktop absolute geometry. */
+@media (max-width: 1024px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 260px;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-billboard__visual svg {
+    min-height: 132px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine-node--billboard,
+  .bf-machine-node--billboard * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,295 @@
+/* Representation Lab billboard interior contract.
+ *
+ * The billboard is a normal Lab Machine card. Its root, shell, fasteners, face
+ * envelope, drag/drop geometry and grid sizing all come from the same machinery
+ * as People / Products / Publications. This file owns only the billboard's
+ * internal split and the visual tuning variables used by Layout Studio.
+ *
+ * The only root geometry retained here is the pre-grid fallback used by the
+ * legacy Products-relative mount. Once the card is grid/authored placed, the
+ * shared BFUX grid composition bridge owns the complete exterior rectangle.
+ */
+
+.bf-machine[data-skin="physical"]:is([data-resolution="full"], [data-resolution="mid"]) .bf-machine__status {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+@media (min-width: 1025px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
+    --billboard-width: 35%;
+    --billboard-gap-y: 0px;
+    --billboard-visual-width: 40%;
+    --billboard-maze-scale: .92;
+    --billboard-maze-left: -14%;
+    --billboard-visual-pad-x: .5;
+    --billboard-visual-pad-y: .36;
+    --billboard-copy-pad-x: .62;
+    --billboard-copy-pad-y: .48;
+    --billboard-title-scale: 1.55;
+    --billboard-controls-height: 2.5;
+    z-index: 9 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    filter: none !important;
+  }
+
+  /* The billboard is mounted signage, so keep the chassis edge but remove the
+   * ordinary card's hanging drop shadow beneath it in both Core and Full. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard > .bf-machine-node__shell {
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.11),
+      inset 0 -1px rgba(0,0,0,.8),
+      0 0 0 1px #050607 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard:hover > .bf-machine-node__shell,
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard:focus-visible > .bf-machine-node__shell {
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.16),
+      inset 0 -1px rgba(0,0,0,.84),
+      0 0 0 1px #050607,
+      0 0 22px color-mix(in srgb, var(--tone) 18%, transparent) !important;
+  }
+
+  /* Before the user/grid owns this card, preserve the old Products-relative
+   * placement path. Do not let these fallback declarations participate once a
+   * normal BFUX grid placement exists. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard:not([data-bfux-grid-placed="true"]):not([data-bfux-authored-grid-placed="true"]) {
+    position: absolute !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: var(--billboard-width) !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-node--billboard {
+    --billboard-title-scale: 1.6;
+  }
+
+  /* The face keeps the standard Lab Machine exterior box. Only its interior is
+   * different: visual instrument on the left, invitation copy on the right. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard > .bf-machine-billboard__face {
+    display: grid !important;
+    grid-template-columns: var(--billboard-visual-width) minmax(0, calc(100% - var(--billboard-visual-width))) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* Only the unplaced fallback may be content/minimum sized. Grid-owned cards
+   * inherit the common 100%-height face rule from bfux-grid-composition-bridge. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard:not([data-bfux-grid-placed="true"]):not([data-bfux-authored-grid-placed="true"])
+    > .bf-machine-billboard__face {
+    height: auto !important;
+    min-height: var(--billboard-height, 8rem) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden !important;
+    padding:
+      calc(var(--machine-u, 12px) * var(--billboard-visual-pad-y))
+      calc(var(--machine-u, 12px) * var(--billboard-visual-pad-x)) !important;
+    border-right: 1px solid color-mix(in srgb, var(--tone) 28%, #31383d);
+    border-bottom: 0 !important;
+  }
+
+  /* Keep the instrument comfortably inside the same two-track card family.
+   * Previously the rotated SVG intentionally overfilled its column; that made
+   * the maze read taller than every neighboring machine card. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    display: block;
+    left: var(--billboard-maze-left) !important;
+    top: 50% !important;
+    width: 92% !important;
+    height: 92% !important;
+    max-width: none !important;
+    min-width: 0;
+    min-height: 0 !important;
+    margin: 0 !important;
+    transform: translateY(-50%) rotate(-90deg) scale(var(--billboard-maze-scale)) !important;
+    transform-origin: center center !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    left: auto !important;
+    right: .34rem !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    gap: .18rem !important;
+    font-size: .54rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows:
+      minmax(min-content, 1fr)
+      calc(var(--machine-u, 12px) * var(--billboard-controls-height)) !important;
+    grid-template-areas:
+      "title title"
+      "eyebrow cta" !important;
+    align-content: stretch !important;
+    align-items: stretch !important;
+    gap: .34rem !important;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden !important;
+    padding:
+      calc(var(--machine-u, 12px) * var(--billboard-copy-pad-y))
+      calc(var(--machine-u, 12px) * var(--billboard-copy-pad-x)) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > p {
+    display: none !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    grid-area: title;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    gap: .02em;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: .94 !important;
+    overflow: visible !important;
+    overflow-wrap: normal;
+    word-break: normal;
+    text-wrap: initial;
+    text-shadow: 0 1px 2px #000;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-line {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-line--top {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: calc(var(--machine-u, 12px) * 1.48) !important;
+    font-weight: 500;
+    letter-spacing: -.012em;
+    color: #e6d7f5;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-prefix {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 500;
+    color: #d8c0f2;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-many {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: normal;
+    font-weight: 700;
+    color: #f1eee8;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__title-line--bottom {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: calc(var(--machine-u, 12px) * 1.62) !important;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    color: #f1eee8;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    grid-area: eyebrow;
+    min-width: 0;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .38rem;
+    line-height: 1 !important;
+    font-size: .56rem !important;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow small {
+    margin-left: 0;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta {
+    grid-area: cta;
+    align-self: stretch !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    height: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: .42rem .72rem !important;
+    overflow: hidden;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta b {
+    font-size: .62rem !important;
+    white-space: nowrap;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cue-row {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .bf-machine[data-skin="physical"] .bf-machine-node--billboard {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    height: auto !important;
+    z-index: auto !important;
+  }
+}

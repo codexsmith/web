@@ -1,0 +1,16 @@
+/* Representation Lab · world/model column synchronization
+   Desktop WORLD-01 is one two-column instrument. The current-model panel
+   should stretch with the carrier-world column instead of becoming its own
+   independently scrolling viewport. */
+
+@media (min-width: 981px) {
+  .representation-lab-physical-shell
+    section[aria-label="Representation laboratory apparatus"]
+    section[aria-label="Persistent carrier world"] + aside[aria-label="Current world model"] {
+    align-self: stretch;
+    max-height: none !important;
+    overflow: visible !important;
+    overscroll-behavior: auto !important;
+    scrollbar-gutter: auto !important;
+  }
+}

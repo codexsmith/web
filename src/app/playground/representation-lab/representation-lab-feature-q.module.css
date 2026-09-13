@@ -1,0 +1,363 @@
+.workbench {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid var(--bf-edge-strong);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bf-bg-raised) 92%, transparent), var(--bf-bg-surface));
+  box-shadow: inset 0 0 0 1px var(--bf-seam), var(--bf-shadow-panel);
+}
+
+.header,
+.lowerRack,
+.aliasRack {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(220px, 0.8fr);
+  gap: 12px;
+}
+
+.header > div,
+.status,
+.presets,
+.featureBank,
+.metrics article,
+.aliasMetrics > div,
+.witness,
+.weights,
+.startDecision,
+.note {
+  border: 1px solid var(--bf-edge);
+  background: var(--bf-bg-control);
+  box-shadow: inset 0 0 0 1px var(--bf-seam);
+}
+
+.header > div:first-child,
+.status,
+.presets,
+.featureBank,
+.witness,
+.weights,
+.startDecision,
+.note {
+  padding: 12px;
+}
+
+.header span,
+.status span,
+.presets > span,
+.bankLabel span,
+.metrics span,
+.aliasMetrics span,
+.witness > span,
+.weights > span,
+.startDecision > span,
+.note > span {
+  display: block;
+  margin-bottom: 5px;
+  font: 700 0.64rem/1.2 var(--font-mono, monospace);
+  letter-spacing: 0.12em;
+  color: var(--bf-text-muted);
+}
+
+.header strong,
+.status strong,
+.bankLabel strong,
+.witness > strong,
+.startDecision > strong {
+  display: block;
+  font-size: 0.94rem;
+  color: var(--bf-text-strong);
+}
+
+.header p,
+.note p,
+.witness p {
+  margin: 6px 0 0;
+  color: var(--bf-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.status[data-mode="features"] {
+  border-color: color-mix(in srgb, var(--bf-attention) 68%, var(--bf-edge));
+}
+
+.carrierRail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.carrierRail button,
+.presets button,
+.featureGrid button {
+  appearance: none;
+  border: 1px solid var(--bf-edge);
+  background: var(--bf-bg-control);
+  color: var(--bf-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.carrierRail button {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+}
+
+.carrierRail button[aria-pressed="true"] {
+  border-color: var(--bf-attention);
+  box-shadow: inset 3px 0 0 var(--bf-attention);
+  background: color-mix(in srgb, var(--bf-attention) 8%, var(--bf-bg-control));
+}
+
+.carrierRail span,
+.presets strong,
+.featureGrid span {
+  font: 700 0.72rem/1.2 var(--font-mono, monospace);
+  letter-spacing: 0.06em;
+}
+
+.carrierRail small,
+.presets small,
+.featureGrid small,
+.metrics small,
+.aliasMetrics small,
+.startDecision small {
+  color: var(--bf-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.presets > div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.presets button {
+  display: grid;
+  gap: 4px;
+  padding: 9px;
+}
+
+.presets button[aria-pressed="true"] {
+  border-color: var(--bf-info);
+  background: color-mix(in srgb, var(--bf-info) 8%, var(--bf-bg-control));
+}
+
+.featureBank {
+  display: grid;
+  gap: 10px;
+}
+
+.featureBank[data-active="false"] {
+  opacity: 0.55;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.featureGrid button {
+  min-height: 104px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 9px;
+}
+
+.featureGrid button strong {
+  font: 800 0.68rem/1.2 var(--font-mono, monospace);
+  letter-spacing: 0.08em;
+}
+
+.featureGrid button[data-resolution="full"] {
+  border-color: color-mix(in srgb, var(--bf-valid) 60%, var(--bf-edge));
+}
+
+.featureGrid button[data-resolution="full"] strong {
+  color: var(--bf-valid);
+}
+
+.featureGrid button[data-resolution="coarse"] {
+  border-color: color-mix(in srgb, var(--bf-attention) 65%, var(--bf-edge));
+  background: color-mix(in srgb, var(--bf-attention) 5%, var(--bf-bg-control));
+}
+
+.featureGrid button[data-resolution="coarse"] strong {
+  color: var(--bf-attention);
+}
+
+.featureGrid button[data-resolution="off"] {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--bf-defect) 60%, var(--bf-edge));
+  background: color-mix(in srgb, var(--bf-defect) 4%, var(--bf-bg-control));
+}
+
+.featureGrid button[data-resolution="off"] strong {
+  color: var(--bf-defect);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.metrics article,
+.aliasMetrics > div {
+  padding: 10px;
+}
+
+.metrics strong,
+.aliasMetrics strong {
+  display: block;
+  margin-bottom: 5px;
+  font: 800 1rem/1 var(--font-mono, monospace);
+  color: var(--bf-text-strong);
+}
+
+.aliasRack {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+}
+
+.aliasMetrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.aliasMetrics > div[data-defect="true"] {
+  border-color: color-mix(in srgb, var(--bf-defect) 68%, var(--bf-edge));
+  background: color-mix(in srgb, var(--bf-defect) 5%, var(--bf-bg-control));
+}
+
+.aliasMetrics > div[data-defect="true"] strong {
+  color: var(--bf-defect);
+}
+
+.witness[data-state="defect"] {
+  border-color: color-mix(in srgb, var(--bf-defect) 72%, var(--bf-edge));
+}
+
+.witness[data-state="clear"] {
+  border-color: color-mix(in srgb, var(--bf-valid) 58%, var(--bf-edge));
+}
+
+.witness > div {
+  display: grid;
+  gap: 6px;
+  margin-top: 9px;
+}
+
+.witness code {
+  padding: 7px;
+  border: 1px solid var(--bf-edge);
+  background: var(--bf-bg-surface);
+  color: var(--bf-text);
+  font-size: 0.72rem;
+  white-space: normal;
+}
+
+.weights > div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.weights > div > div {
+  display: grid;
+  gap: 3px;
+  padding: 7px;
+  border: 1px solid var(--bf-edge);
+  background: var(--bf-bg-surface);
+}
+
+.weights small {
+  color: var(--bf-text-muted);
+  font-size: 0.66rem;
+}
+
+.weights code {
+  color: var(--bf-info);
+  font-size: 0.74rem;
+}
+
+.startDecision {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.note {
+  border-left: 3px solid var(--bf-info);
+}
+
+@media (max-width: 980px) {
+  .header,
+  .lowerRack,
+  .aliasRack {
+    grid-template-columns: 1fr;
+  }
+
+  .presets > div,
+  .featureGrid,
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .carrierRail,
+  .presets > div,
+  .featureGrid,
+  .metrics,
+  .aliasMetrics,
+  .weights > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workbench *,
+  .workbench *::before,
+  .workbench *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .workbench,
+  .header > div,
+  .status,
+  .presets,
+  .featureBank,
+  .metrics article,
+  .aliasMetrics > div,
+  .witness,
+  .weights,
+  .startDecision,
+  .note,
+  .carrierRail button,
+  .presets button,
+  .featureGrid button {
+    border-color: CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .carrierRail button[aria-pressed="true"],
+  .presets button[aria-pressed="true"] {
+    outline: 2px solid Highlight;
+  }
+}

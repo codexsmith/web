@@ -39,7 +39,7 @@
 /* The compact launcher is one horizontal assembly:
  * clock cartridge | Tour | stacked Start here / 5 min badges.
  * Reserve enough title track for the whole word at the minimum desktop machine
- * width; let the badge spacing tighten before the label is allowed to collapse.
+ * width; let badge spacing tighten before the label is allowed to collapse.
  */
 .bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="false"] header {
   box-sizing: border-box !important;
@@ -71,6 +71,7 @@
   font-size: 0 !important;
   line-height: 1 !important;
   text-overflow: clip;
+  text-shadow: none !important;
   white-space: nowrap;
 }
 
@@ -102,6 +103,7 @@
   color: transparent;
   font-size: 0 !important;
   line-height: 1 !important;
+  text-shadow: none !important;
   white-space: nowrap;
 }
 
@@ -161,6 +163,23 @@
     width: max(34.7%, 24rem) !important;
     height: max(39%, 14.25rem) !important;
     transform-origin: right bottom !important;
+  }
+
+  /* In Full, compact Tour is attached hardware rather than an independently
+   * normalized card. Its outside width is exactly About's width; the reference
+   * launcher is intentionally shallower than the About chassis. */
+  .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus[data-machine-layer="apparatus"]
+    > .bf-machine-node[data-node-id="about"]
+    > .bf-machine-tour-card[data-node-id="tour"][data-expanded="false"] {
+    left: 0 !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: calc(100% + .35vw) !important;
+    width: 100% !important;
+    height: 72% !important;
+    transform-origin: left bottom !important;
   }
 
   /* Full Loop nests Tour above About. Its lower-right edge stays on the About

@@ -1,0 +1,186 @@
+/*
+ * Lab Machine typography step.
+ *
+ * One apparatus type increment is +1 CSS px. Geometry stays unchanged; this
+ * file is loaded after the canonical machine composition and applies the step
+ * to the visible text-bearing primitives across the physical apparatus.
+ */
+
+@media (min-width: 1025px) {
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] {
+    --bfux-apparatus-type-step: 1px;
+  }
+
+  /* Full gets one additional type increment. Keep this resolution-scoped so
+   * Core/focus retains its established typography and hierarchy unchanged. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="mid"] {
+    --bfux-apparatus-type-step: 2px;
+  }
+
+  /* Ordinary card identity. Compact Tour substitutes pseudo-labels below. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine-node:not(.bf-machine-tour-card) header > span {
+    font-size: calc((var(--machine-u) * 1.15) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine-node:not(.bf-machine-tour-card) header > strong {
+    font-size: calc((var(--machine-u) * 1.9) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine-node--research header > span {
+    font-size: calc((var(--machine-u) * 1.25) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine-node--research header > strong {
+    font-size: calc((var(--machine-u) * 2.15) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  /* Boundary and state strips. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node__boundary small {
+    font-size: calc((var(--machine-u) * .8) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node__boundary p {
+    font-size: calc((var(--machine-u) * .95) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node--people .bf-machine-node__boundary p {
+    font-size: calc((var(--machine-u) * 1) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node footer > span {
+    font-size: calc((var(--machine-u) * .88) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node footer small {
+    font-size: calc((var(--machine-u) * .82) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node--people footer > span {
+    font-size: calc((var(--machine-u) * .83) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node--about footer > span {
+    font-size: calc((var(--machine-u) * .82) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-node--timeline footer > span {
+    font-size: calc((var(--machine-u) * .78) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  /* Apparatus status and legend hardware. */
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__status strong {
+    font-size: calc((var(--machine-u) * 1.3) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__status small {
+    font-size: calc((var(--machine-u) * .8) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__status dt {
+    font-size: calc((var(--machine-u) * .65) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__status dd {
+    font-size: calc((var(--machine-u) * 1) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__legend > strong {
+    font-size: calc((var(--machine-u) * .6) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__legend b {
+    font-size: calc((var(--machine-u) * .72) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__legend small {
+    font-size: calc((var(--machine-u) * .6) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__legend-label {
+    font-size: calc((var(--machine-u) * .563) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__legend-label small {
+    font-size: calc((var(--machine-u) * .573) + var(--bfux-apparatus-type-step)) !important;
+  }
+  html body .site-shell[data-root-focus="true"] .bf-machine[data-skin="physical"] .bf-machine__legend-actions p {
+    font-size: calc((var(--machine-u) * .58) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  /* Billboard uses normal card geometry but its own face vocabulary. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-billboard__legend {
+    font-size: calc(.54rem + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-billboard__copy > strong {
+    font-size: max(
+      calc(1.2rem + var(--bfux-apparatus-type-step)),
+      calc((var(--machine-u, 12px) * var(--billboard-title-scale)) + var(--bfux-apparatus-type-step))
+    ) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-billboard__eyebrow {
+    font-size: calc(.56rem + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"] .bf-machine-billboard__cta b {
+    font-size: calc(.62rem + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  /* Compact Tour replaces the normal header text with these two pseudo-label
+   * families; step the visible replacement rather than reviving hidden text. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine-tour-card[data-expanded="false"] header strong::before {
+    font-size: calc(clamp(1.15rem, 1.35vw, 1.45rem) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine-tour-card[data-expanded="false"] header > span::before,
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"]
+    .bf-machine-tour-card[data-expanded="false"] header > span::after {
+    font-size: calc(clamp(.53rem, .58vw, .59rem) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  /* Preserve Core's intentional larger title hierarchy while applying the same
+   * one-pixel step rather than collapsing it back to the Full/Mid baseline. */
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine-node:not(.bf-machine-tour-card) header > span {
+    font-size: calc((var(--machine-u) * 1.3) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine-node:not(.bf-machine-tour-card) header > strong {
+    font-size: calc((var(--machine-u) * 2.15) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine-node--research header > span {
+    font-size: calc((var(--machine-u) * 1.4) + var(--bfux-apparatus-type-step)) !important;
+  }
+
+  html body .site-shell[data-root-focus="true"]
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine-node--research header > strong {
+    font-size: calc((var(--machine-u) * 2.55) + var(--bfux-apparatus-type-step)) !important;
+  }
+}

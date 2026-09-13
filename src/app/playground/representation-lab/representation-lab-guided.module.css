@@ -1,0 +1,466 @@
+.introCollapsed[data-intro-state="collapsed"] {
+  grid-template-columns: 1fr auto;
+  min-height: 62px;
+  margin-bottom: .45rem;
+  border-color: color-mix(in srgb, var(--bf-region-research, #a98cff) 44%, #4f595d);
+  background: linear-gradient(180deg, rgba(169,140,255,.055), transparent), #0c1114;
+  box-shadow: 0 0 0 3px #050708, 0 5px 12px #0009;
+}
+
+.compactIntroCopy {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: .7rem;
+  align-items: center;
+  padding: .52rem .72rem;
+}
+
+.compactIntroIndex {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--bf-region-research, #a98cff);
+  background: #080c0e;
+  color: #d7cdff;
+  font: 800 .56rem/1 var(--font-mono, monospace);
+  letter-spacing: .08em;
+}
+
+.compactIntroText {
+  display: grid;
+  gap: .08rem;
+}
+
+.compactIntroText span,
+.compactIntroAction {
+  font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.compactIntroText span {
+  color: #aa98ef;
+  font-size: .44rem;
+}
+
+.compactIntroText strong {
+  color: #edf0f1;
+  font: 500 1rem/1.08 Georgia, "Times New Roman", serif;
+}
+
+.compactIntroText small {
+  color: #8f9ba0;
+  font-size: .6rem;
+  line-height: 1.3;
+}
+
+.compactIntroAction {
+  align-self: stretch;
+  min-width: 132px;
+  padding: 0 .72rem;
+  border: 0;
+  border-left: 1px solid rgba(170,180,184,.22);
+  background: linear-gradient(180deg, rgba(255,255,255,.025), transparent), #101619;
+  color: #9ba7ab;
+  font-size: .46rem;
+  cursor: pointer;
+}
+.compactIntroAction:hover { color: #d7cdff; background: #141b1e; }
+
+.setupConsole {
+  border-bottom: 1px solid rgba(170,180,184,.3);
+  background: #080c0e;
+}
+
+.setupFrame {
+  display: grid;
+  grid-template-columns: 158px minmax(0,1fr);
+  min-width: 0;
+  border-top: 1px solid rgba(170,180,184,.18);
+}
+
+.setupSpine {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+  border-right: 1px solid rgba(170,180,184,.24);
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, rgba(169,140,255,.075), transparent 36%),
+    #0d1216;
+  box-shadow: inset 4px 0 var(--bf-region-research, #a98cff), inset -4px 0 10px #0008;
+}
+
+.spineHead {
+  display: grid;
+  gap: .16rem;
+  padding: .66rem .68rem .62rem .8rem;
+  border-bottom: 1px solid rgba(170,180,184,.2);
+}
+.spineHead > span,
+.spineHead > small,
+.spineStep span,
+.spineStep small,
+.spineFit span,
+.spineFit small,
+.selectedModule span,
+.controlRackHeader span,
+.requirementStrip > span {
+  font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.spineHead > span {
+  display: flex;
+  align-items: center;
+  gap: .38rem;
+  color: #c7baff;
+  font-size: .46rem;
+}
+.spineHead > span i {
+  width: 7px;
+  height: 7px;
+  border: 1px solid #91e49f;
+  border-radius: 50%;
+  background: #4c9b58;
+  box-shadow: 0 0 8px rgba(111,220,128,.45);
+}
+.spineHead > strong {
+  color: #edf0f1;
+  font-size: .82rem;
+  line-height: 1.1;
+}
+.spineHead > small {
+  color: #758187;
+  font-size: .39rem;
+}
+
+.spineSequence {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: stretch;
+  padding: .62rem .48rem;
+}
+.spineStep {
+  display: grid;
+  grid-template-columns: 31px 1fr;
+  grid-template-areas:
+    "num label"
+    "num detail";
+  column-gap: .48rem;
+  align-items: center;
+  padding: .46rem .48rem;
+  border: 1px solid rgba(170,180,184,.18);
+  background: #0a0f12;
+}
+.spineStep b {
+  grid-area: num;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid rgba(170,180,184,.34);
+  background: #070a0c;
+  font: 800 .54rem/1 var(--font-mono, monospace);
+}
+.spineStep span { grid-area: label; font-size: .44rem; }
+.spineStep small { grid-area: detail; margin-top: .08rem; color: #6f7b80; font-size: .34rem; }
+.spineStep[data-channel="job"] { border-color: rgba(95,145,196,.42); }
+.spineStep[data-channel="job"] b,
+.spineStep[data-channel="job"] span { color: #91bce6; }
+.spineStep[data-channel="method"] { border-color: rgba(169,140,255,.4); }
+.spineStep[data-channel="method"] b,
+.spineStep[data-channel="method"] span { color: #c3b5ff; }
+.spineLink {
+  width: 1px;
+  min-height: 20px;
+  margin: .25rem 0 .25rem 14px;
+  background: linear-gradient(#5f91c4, #7d7495 50%, var(--bf-region-research, #a98cff));
+  box-shadow: 0 0 6px rgba(169,140,255,.15);
+}
+
+.spineFit {
+  display: grid;
+  gap: .16rem;
+  margin: 0 .48rem .48rem;
+  padding: .54rem .56rem;
+  border: 1px solid #4d7654;
+  background: linear-gradient(180deg, rgba(90,181,108,.075), transparent), #0c120e;
+}
+.spineFit span { color: #7f8c91; font-size: .38rem; }
+.spineFit strong { color: #8fe0a0; font: 800 .56rem/1.1 var(--font-mono, monospace); letter-spacing: .05em; }
+.spineFit small { color: #728078; font-size: .34rem; }
+.spineFit[data-fit="experimental"] {
+  border-color: #806b30;
+  background: linear-gradient(180deg, rgba(216,178,73,.08), transparent), #13120d;
+}
+.spineFit[data-fit="experimental"] strong { color: #e5c558; }
+
+.setupBody {
+  display: grid;
+  min-width: 0;
+  background: #090d0f;
+}
+
+.controlBand {
+  display: grid;
+  grid-template-columns: minmax(250px, 31%) minmax(0,1fr);
+  min-width: 0;
+  border-bottom: 1px solid rgba(170,180,184,.23);
+}
+.controlBand[data-channel="job"] {
+  background: linear-gradient(90deg, rgba(75,128,181,.045), transparent 30%), #0b1013;
+}
+.controlBand[data-channel="method"] {
+  background: linear-gradient(90deg, rgba(169,140,255,.05), transparent 34%), #090b10;
+}
+
+.selectedModule {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 84px;
+  padding: .58rem 4rem .62rem .72rem;
+  border-right: 1px solid rgba(170,180,184,.24);
+  background: #111719;
+  box-shadow: inset -4px 0 10px #0007;
+}
+.selectedModule[data-channel="job"] {
+  border-left: 4px solid #72a7df;
+  background: linear-gradient(180deg, rgba(83,142,202,.15), transparent 60%), #121b24;
+}
+.selectedModule[data-channel="method"] {
+  min-height: 74px;
+  border-left: 4px solid var(--bf-region-research, #a98cff);
+  background: linear-gradient(180deg, rgba(169,140,255,.15), transparent 60%), #181521;
+}
+.selectedModule span { color: #8f9ba0; font-size: .42rem; }
+.selectedModule[data-channel="job"] span { color: #93bce7; }
+.selectedModule[data-channel="method"] span { color: #c6b8ff; }
+.selectedModule strong {
+  display: block;
+  margin-top: .28rem;
+  color: #f0f2f3;
+  font-size: .86rem;
+  line-height: 1.16;
+}
+.selectedModule small {
+  display: block;
+  margin-top: .24rem;
+  color: #929fa4;
+  font-size: .56rem;
+  line-height: 1.35;
+}
+.selectedModule em {
+  position: absolute;
+  right: .48rem;
+  top: .48rem;
+  padding: .2rem .28rem;
+  border: 1px solid #6aa875;
+  color: #aee8b7;
+  background: #09110b;
+  font: 700 .34rem/1 var(--font-mono, monospace);
+  font-style: normal;
+  letter-spacing: .09em;
+}
+
+.controlRack {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+}
+.controlRackHeader {
+  min-height: 29px;
+  display: grid;
+  grid-template-columns: auto auto minmax(0,1fr);
+  gap: .5rem;
+  align-items: center;
+  padding: .3rem .48rem;
+  border-bottom: 1px solid rgba(170,180,184,.18);
+  background: #0f1518;
+}
+.controlRackHeader span { color: #7f8b90; font-size: .38rem; }
+.controlRackHeader strong { color: #dce2e4; font-size: .62rem; }
+.controlRackHeader small { justify-self: end; color: #748087; font-size: .48rem; line-height: 1.2; }
+.controlRack[data-channel="job"] .controlRackHeader span { color: #86b1dd; }
+.controlRack[data-channel="method"] .controlRackHeader {
+  background: linear-gradient(90deg, rgba(169,140,255,.075), transparent 60%), #111018;
+}
+.controlRack[data-channel="method"] .controlRackHeader span { color: #c2b3ff; }
+
+.controlButtons {
+  display: grid;
+  min-width: 0;
+}
+.controlButtons[data-count="5"] { grid-template-columns: repeat(5, minmax(0,1fr)); }
+.controlButtons[data-count="6"] { grid-template-columns: repeat(6, minmax(0,1fr)); }
+.controlButtons button {
+  position: relative;
+  min-width: 0;
+  color: #dce2e4;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* CONTROL A: broad segmented plates. */
+.controlRack[data-channel="job"] .controlButtons button {
+  min-height: 55px;
+  padding: .48rem .5rem .58rem;
+  border: 0;
+  border-right: 1px solid rgba(170,180,184,.2);
+  border-bottom: 3px solid #050809;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), transparent 42%), #151b1e;
+}
+.controlRack[data-channel="job"] .controlButtons button:last-child { border-right: 0; }
+.controlRack[data-channel="job"] .controlButtons button:hover { background-color: #1b2326; }
+.controlRack[data-channel="job"] .controlButtons button span {
+  display: block;
+  font-size: .65rem;
+  line-height: 1.2;
+}
+.controlRack[data-channel="job"] .controlButtons button small {
+  display: block;
+  margin-top: .22rem;
+  color: #7f8b90;
+  font-size: .45rem;
+  line-height: 1.25;
+}
+.controlRack[data-channel="job"] .controlButtons button[aria-pressed="true"] {
+  background: linear-gradient(180deg, rgba(83,142,202,.18), transparent 55%), #18222d;
+  border-bottom-color: #72a7df;
+  box-shadow: inset 0 0 0 1px #5e8ebd, inset 0 1px rgba(255,255,255,.06), 0 0 10px rgba(83,142,202,.09);
+}
+
+/* CONTROL B: a denser rack of replaceable reasoning cartridges. */
+.controlRack[data-channel="method"] .controlButtons {
+  gap: .28rem;
+  padding: .3rem;
+  background: #07090d;
+}
+.controlRack[data-channel="method"] .controlButtons button {
+  min-height: 45px;
+  padding: .38rem .45rem .42rem .56rem;
+  border: 1px solid rgba(170,157,220,.25);
+  border-bottom: 2px solid rgba(117,101,166,.4);
+  border-radius: 2px 10px 2px 2px;
+  background: linear-gradient(180deg, rgba(169,140,255,.055), transparent 48%), #15141d;
+  box-shadow: inset 0 1px rgba(255,255,255,.035), 0 2px 5px #0008;
+}
+.controlRack[data-channel="method"] .controlButtons button::before {
+  content: "";
+  position: absolute;
+  left: .28rem;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  transform: translateY(-50%);
+  background: rgba(169,140,255,.2);
+  box-shadow: 0 0 5px rgba(169,140,255,.08);
+}
+.controlRack[data-channel="method"] .controlButtons button:hover {
+  border-color: rgba(193,179,240,.46);
+  background-color: #1d1a28;
+}
+.controlRack[data-channel="method"] .controlButtons button span {
+  display: block;
+  font-size: .58rem;
+  line-height: 1.16;
+}
+.controlRack[data-channel="method"] .controlButtons button small {
+  display: block;
+  margin-top: .18rem;
+  color: #938ba9;
+  font-size: .42rem;
+  line-height: 1.2;
+}
+.controlRack[data-channel="method"] .controlButtons button[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--bf-region-research, #a98cff) 78%, #697178);
+  border-bottom: 3px solid var(--bf-region-research, #a98cff);
+  background: linear-gradient(180deg, rgba(169,140,255,.2), transparent 58%), #211d31;
+  box-shadow: inset 0 0 0 1px rgba(206,194,255,.18), inset 0 1px rgba(255,255,255,.07), 0 0 12px rgba(169,140,255,.13);
+}
+.controlRack[data-channel="method"] .controlButtons button[aria-pressed="true"]::before {
+  background: #c5b4ff;
+  box-shadow: 0 0 7px rgba(169,140,255,.5);
+}
+
+.controlButtons button[aria-pressed="true"]::after {
+  content: "SELECTED";
+  position: absolute;
+  right: .3rem;
+  top: .25rem;
+  color: #aee8b7;
+  font: 700 .31rem/1 var(--font-mono, monospace);
+  letter-spacing: .07em;
+}
+
+.requirementStrip {
+  display: grid;
+  grid-template-columns: 190px minmax(0,1fr) auto;
+  align-items: center;
+  min-height: 40px;
+  gap: .55rem;
+  padding: .35rem .55rem;
+  border-left: 4px solid #5f91c4;
+  border-bottom: 1px solid rgba(95,145,196,.28);
+  background: linear-gradient(90deg, rgba(72,135,204,.08), transparent 34%), #070b0e;
+}
+.requirementStrip > span { color: #88b4df; font-size: .39rem; }
+.requirementStrip > div { display: flex; flex-wrap: wrap; gap: .24rem; }
+.requirementStrip code {
+  padding: .22rem .3rem;
+  border: 1px solid rgba(111,145,178,.5);
+  border-radius: 2px;
+  color: #b9cce0;
+  background: #0b1116;
+  font-size: .48rem;
+}
+.requirementStrip > small {
+  color: #77858a;
+  font-size: .47rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+/* WORLD-01 uses this explicit setup console instead of the legacy reasoner strip. */
+:global(.representation-lab-physical-shell section[aria-label="Representation laboratory apparatus"] > div:first-child) {
+  display: none;
+}
+
+@media (max-width: 1120px) {
+  .setupFrame { grid-template-columns: 132px minmax(0,1fr); }
+  .controlBand { grid-template-columns: minmax(220px, 32%) minmax(0,1fr); }
+  .controlRackHeader { grid-template-columns: auto 1fr; }
+  .controlRackHeader small { display: none; }
+  .controlButtons[data-count="6"] { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .controlButtons[data-count="5"] { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .requirementStrip { grid-template-columns: 170px 1fr; }
+  .requirementStrip > small { grid-column: 2; white-space: normal; }
+}
+
+@media (max-width: 780px) {
+  .introCollapsed[data-intro-state="collapsed"] { grid-template-columns: 1fr; }
+  .compactIntroAction { min-height: 34px; border-left: 0; border-top: 1px solid rgba(170,180,184,.22); }
+  .setupFrame { grid-template-columns: 1fr; }
+  .setupSpine {
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto;
+    align-items: stretch;
+    border-right: 0;
+    border-bottom: 1px solid rgba(170,180,184,.22);
+  }
+  .spineHead { border-bottom: 0; }
+  .spineSequence { grid-template-columns: auto 18px auto; grid-template-rows: 1fr; align-items: center; padding: .35rem; }
+  .spineLink { width: 18px; min-height: 1px; height: 1px; margin: 0; }
+  .spineFit { margin: .35rem; }
+  .controlBand { grid-template-columns: 1fr; }
+  .selectedModule { min-height: 68px; padding-right: .72rem; border-right: 0; border-bottom: 1px solid rgba(170,180,184,.22); }
+  .selectedModule em { position: static; width: fit-content; margin-top: .35rem; }
+  .controlButtons[data-count="5"],
+  .controlButtons[data-count="6"] { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .requirementStrip { grid-template-columns: 1fr; }
+  .requirementStrip > small { grid-column: auto; white-space: normal; }
+}

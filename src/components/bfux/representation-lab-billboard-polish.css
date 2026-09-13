@@ -1,0 +1,66 @@
+/* Representation Lab billboard · internal density polish.
+ *
+ * Placement is intentionally out of scope here. The runtime mount and authored
+ * Core/Full geometry own the card position; this file only trims dead space
+ * inside the face while preserving the centered billboard composition.
+ */
+
+@media (min-width: 1025px) {
+  /* Let the card shrink toward the content instead of reserving the old tall
+   * face. If the two-line title needs more room, intrinsic content can still
+   * grow the card rather than clip it. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__face {
+    min-height: 6.35rem !important;
+  }
+
+  /* The SVG viewBox is cropped to the maze itself. Keep only a hair of panel
+   * padding so the graphic nearly reaches the chassis above and below. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual {
+    padding: .02rem .08rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__visual svg {
+    left: -18% !important;
+    width: 114% !important;
+    height: 114% !important;
+    transform: translateY(-50%) rotate(-90deg) !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__legend {
+    right: .08rem !important;
+    gap: .07rem !important;
+  }
+
+  /* Keep the title centered. The title row has a content floor and receives any
+   * remaining height, so the space above/below it can contract naturally while
+   * never becoming smaller than the actual two-line heading. */
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy {
+    grid-template-rows: minmax(min-content, 1fr) 1.72rem !important;
+    gap: .04rem !important;
+    padding: .08rem .3rem .12rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__copy > strong {
+    justify-content: center !important;
+    align-self: stretch !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: .91 !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__eyebrow {
+    gap: .04rem !important;
+  }
+
+  .bf-machine[data-skin="physical"]
+    .bf-machine-node--billboard .bf-machine-billboard__cta {
+    padding: .22rem .44rem !important;
+  }
+}
