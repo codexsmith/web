@@ -29,6 +29,7 @@ A workstream-local `STATUS.md` is authoritative when an older README preserves s
 | 26 | Fallacies of Distributed Reality | Publication candidate | Develop and publish the public engineering essay |
 | 27 | Temporal Observation Vessel BFUX | Concept / design-ready | Prototype a fixed-time, rotatable branching timeline with controlled observability, spatial-memory preservation, and planar accessibility fallback |
 | 28 | Lab Machine Physical UI Refinement | Design-ready / implementation open | Implement Forge, plexiglass Research Engine, Research Exhaust telemetry, shared physical primitives, and responsive/accessibility polish |
+| 29 | Representational Laboratory Suite | Implementation-ready umbrella | Stage five public Representational Mechanics laboratories; begin with a bounded Cantor vertical slice, then validate the shared shell with Chess |
 
 ## Retired / absorbed root IDs
 
@@ -41,6 +42,8 @@ Several previously root-numbered 20/21 artifacts are now supporting material ins
 - representation / boundary / human stewardship framing.
 
 Bridge progress notes now live with workstream 25 instead of consuming separate root IDs.
+
+The Representational Laboratory Suite was initially drafted as workstream 28 in PR #59. During backlog consolidation on 2026-09-13 it was canonicalized as **workstream 29** because workstream 28 had already become the Lab Machine Physical UI Refinement program on `main`.
 
 There is intentionally no requirement that active IDs be gapless. **Uniqueness and current semantic ownership matter more than cosmetic continuity.**
 
