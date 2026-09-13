@@ -1,0 +1,235 @@
+.instrumentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.instrumentHeader h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+}
+
+.matrixWrap {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.matrixHeader,
+.row,
+.witnessRail {
+  display: grid;
+  grid-template-columns: 3rem repeat(8, minmax(2.7rem, 1fr));
+  min-width: 510px;
+}
+
+.matrixHeader {
+  margin-bottom: 0.35rem;
+  color: var(--rl-muted);
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.rowLabel {
+  display: grid;
+  place-items: center start;
+  color: var(--rl-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.bit,
+.witnessBit {
+  min-width: 2.7rem;
+  height: 3.15rem;
+  border: 1px solid var(--rl-line);
+  background: #091016;
+  color: var(--rl-text);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.bit {
+  cursor: pointer;
+}
+
+.bit:hover,
+.bit:focus-visible {
+  background: #13202a;
+  outline: 2px solid var(--rl-accent);
+  outline-offset: -2px;
+}
+
+.bit[data-diagonal="true"] {
+  background: var(--rl-accent-soft);
+  color: var(--rl-accent);
+  border-color: color-mix(in srgb, var(--rl-accent) 48%, transparent);
+}
+
+.witnessRail {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--rl-line);
+}
+
+.witnessRail[data-visible="true"] .witnessBit {
+  color: var(--rl-defect);
+  border-color: color-mix(in srgb, var(--rl-defect) 45%, transparent);
+  background: color-mix(in srgb, var(--rl-defect) 8%, transparent);
+}
+
+.actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: 1.35rem;
+}
+
+.actions button,
+.hoodToggle {
+  min-height: 44px;
+  border: 1px solid var(--rl-line);
+  padding: 0.7rem 0.95rem;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  cursor: pointer;
+}
+
+.primaryAction {
+  color: #04110e;
+  background: var(--rl-accent);
+  border-color: var(--rl-accent) !important;
+}
+
+.secondaryAction {
+  color: var(--rl-text);
+  background: #142028;
+}
+
+.secondaryAction:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.ghostAction,
+.hoodToggle {
+  color: var(--rl-muted);
+  background: transparent;
+}
+
+.mechanism {
+  margin-top: 1rem;
+  border-top: 1px solid var(--rl-line);
+  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.mechanism > div:not(.arrow) {
+  min-width: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.mechanism span {
+  color: var(--rl-muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+}
+
+.mechanism strong {
+  overflow-wrap: anywhere;
+}
+
+.arrow {
+  color: var(--rl-accent);
+}
+
+.inspector {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.inspector section + section {
+  border-top: 1px solid var(--rl-line);
+  padding-top: 1rem;
+}
+
+.definitionList {
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.definitionList div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--rl-line) 55%, transparent);
+}
+
+.definitionList dt {
+  color: var(--rl-muted);
+}
+
+.definitionList dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 700;
+}
+
+.hoodToggle {
+  width: 100%;
+}
+
+.hood {
+  margin-top: 0.75rem;
+  background: #081016;
+  border: 1px solid var(--rl-line);
+  padding: 0.8rem;
+}
+
+.hood p {
+  margin: 0 0 0.65rem;
+  color: var(--rl-muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.hood p:last-child {
+  margin-bottom: 0;
+}
+
+.hood strong {
+  color: var(--rl-text);
+}
+
+@media (max-width: 900px) {
+  .instrumentHeader {
+    display: grid;
+  }
+}
+
+@media (max-width: 620px) {
+  .mechanism {
+    grid-template-columns: 1fr;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+    justify-self: start;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}
