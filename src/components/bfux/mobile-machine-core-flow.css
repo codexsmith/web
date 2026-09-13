@@ -1,0 +1,176 @@
+/*
+ * Core-only responsive machine hierarchy.
+ *
+ * Core is a deliberate six-card public/institutional projection, not the
+ * authored desktop constellation squeezed into a narrow viewport. Below the
+ * apparatus breakpoint it reuses the same compact control grammar as Full:
+ * launchers -> public navigation -> Research. Desktop Core remains untouched.
+ */
+
+@media (max-width: 1024px) {
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus {
+    display: grid !important;
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+    grid-auto-flow: row dense !important;
+    grid-auto-rows: max-content !important;
+    align-items: stretch !important;
+    gap: .36rem !important;
+  }
+
+  /* Core owns placement at this breakpoint. Release every piece of authored
+   * desktop card geometry before assigning the compact rack. This is purposely
+   * more specific than the generic mobile reset because Core previously kept
+   * enough desktop geometry to leave large holes and clipped cards. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id] {
+    grid-area: auto !important;
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    align-self: stretch !important;
+  }
+
+  /* Membership is explicit. Core remains the small public projection even when
+   * Full grows new machine nodes later. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id] {
+    display: none !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="tour"],
+      [data-node-id="about"],
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"],
+      [data-node-id="research"]
+    ) {
+    display: block !important;
+  }
+
+  /* 01 — entry launchers. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="tour"] {
+    grid-column: 1 / 4 !important;
+    grid-row: 1 !important;
+    order: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] {
+    grid-column: 4 / 7 !important;
+    grid-row: 1 !important;
+    order: 1 !important;
+  }
+
+  /* 02 — public navigation rack. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="people"] {
+    grid-column: 1 / 3 !important;
+    grid-row: 2 !important;
+    order: 2 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="products"] {
+    grid-column: 3 / 5 !important;
+    grid-row: 2 !important;
+    order: 3 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="publications"] {
+    grid-column: 5 / 7 !important;
+    grid-row: 2 !important;
+    order: 4 !important;
+  }
+
+  /* 03 — Research is the Core anchor. It spans the rack with no empty authored
+   * bays around it; its internal morphology still comes from the shared mobile
+   * card treatment so Core and Full remain one visual system. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="research"] {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    order: 5 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* Core cards are content-sized rather than inheriting desktop chassis
+   * heights. Compact launcher/navigation sizing is refined by
+   * mobile-machine-card-scale.css. */
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="tour"],
+      [data-node-id="about"],
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) {
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-node:is(
+      [data-node-id="about"],
+      [data-node-id="people"],
+      [data-node-id="products"],
+      [data-node-id="publications"]
+    ) > .bf-machine-node__face {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"],
+  .site-shell[data-root-focus="true"]
+    .physical-machine-experience:not(:has(.bf-mobile-machine-structure[data-open="true"]))
+    .bf-machine[data-skin="physical"][data-resolution="focus"]
+    .bf-machine__apparatus > .bf-machine-tour-card[data-expanded="false"]
+    > .bf-machine-node__face {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
