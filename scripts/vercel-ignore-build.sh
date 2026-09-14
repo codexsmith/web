@@ -1,6 +1,10 @@
 #!/bin/sh
 set -eu
 
+if [ -n "${VERCEL_GIT_COMMIT_REF:-}" ] && [ "$VERCEL_GIT_COMMIT_REF" != "main" ]; then
+  exit 0
+fi
+
 build_inputs="src public scripts package.json package-lock.json next.config.ts postcss.config.mjs tsconfig.json vercel.json"
 
 if [ -n "${VERCEL_GIT_PREVIOUS_SHA:-}" ] && git cat-file -e "${VERCEL_GIT_PREVIOUS_SHA}^{commit}" 2>/dev/null; then

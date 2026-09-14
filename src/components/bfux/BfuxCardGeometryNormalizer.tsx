@@ -170,7 +170,8 @@ function mutationMayAddMachineCard(record: MutationRecord) {
 
   return Array.from(record.addedNodes).some((added) => {
     if (!(added instanceof Element)) return false;
-    return added.matches(nodeSelector, machineSelector)
+    return added.matches(nodeSelector)
+      || added.matches(machineSelector)
       || Boolean(added.querySelector(nodeSelector));
   });
 }

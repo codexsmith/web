@@ -287,11 +287,12 @@ export function BfuxPlacementLayer({
     if (suppliedPosition) host.style.position = "relative";
 
     const dragOver = (event: DragEvent) => {
-      if (!acceptedTransfer(event.dataTransfer)) return;
+      const dataTransfer = event.dataTransfer;
+      if (!dataTransfer || !acceptedTransfer(dataTransfer)) return;
       event.preventDefault();
       event.stopPropagation();
-      const types = Array.from(event.dataTransfer.types);
-      event.dataTransfer.dropEffect = types.includes(placementTransferType) ? "move" : "copy";
+      const types = Array.from(dataTransfer.types);
+      dataTransfer.dropEffect = types.includes(placementTransferType) ? "move" : "copy";
       setDropActive(true);
     };
 
@@ -302,12 +303,13 @@ export function BfuxPlacementLayer({
     };
 
     const drop = (event: DragEvent) => {
-      if (!acceptedTransfer(event.dataTransfer)) return;
+      const dataTransfer = event.dataTransfer;
+      if (!dataTransfer || !acceptedTransfer(dataTransfer)) return;
       event.preventDefault();
       event.stopPropagation();
       setDropActive(false);
 
-      const moving = parsePlacementTransfer(event.dataTransfer);
+      const moving = parsePlacementTransfer(dataTransfer);
       if (moving) {
         setSaved((current) => {
           const currentPlacements = current[resolution] ?? [];
@@ -327,7 +329,7 @@ export function BfuxPlacementLayer({
         return;
       }
 
-      const part = parsePartTransfer(event.dataTransfer);
+      const part = parsePartTransfer(dataTransfer);
       if (!part) return;
       const instanceId = newInstanceId(part.id);
       const point = pointForDrop(host, event, partSize(part.kind), null);
