@@ -518,7 +518,8 @@ export function BfuxAnchorGridLayer({
       const node = target.closest<HTMLElement>(nodeSelector);
       if (!node || !apparatus.contains(node) || node.dataset.expanded === "true") return;
       const nodeId = node.dataset.nodeId;
-      if (!nodeId) return;
+      const dataTransfer = event.dataTransfer;
+      if (!nodeId || !dataTransfer) return;
 
       const size = nodeLocalSize(node, workfield);
       const nodeRect = node.getBoundingClientRect();
@@ -535,9 +536,9 @@ export function BfuxAnchorGridLayer({
       const nextDrag = { nodeId, columnSpan, rowSpan, grabRatioX, grabRatioY };
 
       event.stopPropagation();
-      event.dataTransfer.effectAllowed = "move";
-      event.dataTransfer.setData(nodeTransferType, JSON.stringify({ schema: "bfux.node/v1", nodeId }));
-      event.dataTransfer.setData("text/plain", nodeId);
+      dataTransfer.effectAllowed = "move";
+      dataTransfer.setData(nodeTransferType, JSON.stringify({ schema: "bfux.node/v1", nodeId }));
+      dataTransfer.setData("text/plain", nodeId);
       node.dataset.bfuxGridDragging = "true";
       dragRef.current = nextDrag;
       setDrag(nextDrag);
@@ -547,20 +548,22 @@ export function BfuxAnchorGridLayer({
 
     const dragOver = (event: DragEvent) => {
       const activeDrag = dragRef.current;
-      if (!activeDrag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
+      const dataTransfer = event.dataTransfer;
+      if (!activeDrag || !dataTransfer || !Array.from(dataTransfer.types).includes(nodeTransferType)) return;
       if (!pointerInsideWorkfield(workfield, event)) {
         setCandidate(null);
         return;
       }
       event.preventDefault();
       event.stopPropagation();
-      event.dataTransfer.dropEffect = "move";
+      dataTransfer.dropEffect = "move";
       setCandidate(candidateForPointer(apparatus, workfield, event, state.spec, activeDrag));
     };
 
     const drop = (event: DragEvent) => {
       const activeDrag = dragRef.current;
-      if (!activeDrag || !Array.from(event.dataTransfer.types).includes(nodeTransferType)) return;
+      const dataTransfer = event.dataTransfer;
+      if (!activeDrag || !dataTransfer || !Array.from(dataTransfer.types).includes(nodeTransferType)) return;
       if (!pointerInsideWorkfield(workfield, event)) return;
       event.preventDefault();
       event.stopPropagation();
