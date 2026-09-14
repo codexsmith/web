@@ -24,3 +24,10 @@ All code and configuration changes in this repository should be completed in as 
 ## Vercel deployment discipline
 
 Automatic Vercel Git deployments are reserved for `main`. Development and agent branches must not generate automatic preview builds unless a task explicitly requires one. This protects the deployment budget and keeps production deployment tied to reviewed integration state.
+
+The repo-level `vercel.json` is the source of truth for that deployment boundary:
+
+- `git.deploymentEnabled` permits automatic Git deployments only for `main`.
+- `ignoreCommand` treats only `src`, `public`, `scripts`, the package manifests, Next/PostCSS/TypeScript configuration, and `vercel.json` itself as Vercel-build-relevant inputs.
+- Documentation, backlog, CI metadata, and local QA artifacts should not consume Vercel builds.
+- If a new build-time input is introduced outside that allowlist, update `vercel.json` in the same coherent change.
