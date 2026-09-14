@@ -12,8 +12,8 @@ export function DistinctionSpaceSandboxCard({
     <a
       className={styles.card}
       data-resolution={resolution}
-      href="/sandbox/distinction-space?fascinator=boundary-attractor"
-      aria-label="Open the Distinction Space visual sandbox"
+      href="/sandbox/distinction-space?specimen=hopf"
+      aria-label="Open the Hopf specimen in the Visual Mathematics workstation"
       onPointerDown={(event) => event.stopPropagation()}
       onClick={(event) => event.stopPropagation()}
       onKeyDown={(event) => event.stopPropagation()}
@@ -22,9 +22,9 @@ export function DistinctionSpaceSandboxCard({
         <i /><i /><i />
       </span>
       <span className={styles.copy}>
-        <span className={styles.eyebrow}>EXPERIMENT</span>
+        <span className={styles.eyebrow}>SPECIMEN</span>
         <span className={styles.eyebrow}>VISUAL MATH</span>
-        <span className={styles.action}>OPEN SANDBOX <b>↗</b></span>
+        <span className={styles.action}>OPEN WORKSTATION <b>↗</b></span>
       </span>
     </a>
   );
