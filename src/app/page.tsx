@@ -1,15 +1,7 @@
 import type { Metadata } from "next";
-import { permanentRedirect } from "next/navigation";
-import { parseProcessScope } from "@/lib/bfl-process";
-import { parseProjection } from "@/lib/view-projection";
-import { BfuxCardGeometryNormalizer } from "@/components/bfux/BfuxCardGeometryNormalizer";
-import { BfuxLayoutStudio } from "@/components/bfux/BfuxLayoutStudio";
-import { LabMachineHomeBoundary } from "@/components/bfux/LabMachineHomeBoundary";
-import { LabMachineWorld } from "@/components/bfux/LabMachineWorld";
-import { MobileCapitalProjectionControls } from "@/components/bfux/MobileCapitalProjectionControls";
-import { MobileMachineNonCrossingPipeLayer } from "@/components/bfux/MobileMachineNonCrossingPipeLayer";
-import { MobileTimelineProjectionRedirect } from "@/components/bfux/MobileTimelineProjectionRedirect";
-import { RepresentationLabBillboardCardMount } from "@/components/bfux/RepresentationLabBillboardCardMount";
+import { Suspense } from "react";
+import { LabMachineHomeExperience } from "@/components/bfux/LabMachineHomeExperience";
+import { LabMachineHomeRoute } from "@/components/bfux/LabMachineHomeRoute";
 import "./world/world-machine-preview.css";
 import "./world/world-machine-grid-contract.css";
 import "./lab-machine-responsive.css";
@@ -41,53 +33,22 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-type Props = {
-  searchParams: Promise<{
-    section?: string | string[];
-    view?: string | string[];
-    scope?: string | string[];
-    schematic?: string | string[];
-    mode?: string | string[];
-    resolution?: string | string[];
-    skin?: string | string[];
-  }>;
-};
-
-function one(value: string | string[] | undefined) {
-  return Array.isArray(value) ? value[0] : value;
+function HomeFallback() {
+  return (
+    <LabMachineHomeExperience
+      projection="world"
+      processScope="full"
+      initialSurface="machine"
+      initialResolution="focus"
+      showSchematic={false}
+    />
+  );
 }
 
-export default async function HomePage({ searchParams }: Props) {
-  const query = await searchParams;
-  const machineStateKeys = ["section", "view", "scope", "schematic", "mode", "resolution"] as const;
-  const hasMachineState = machineStateKeys.some((key) => Boolean(one(query[key])));
-
-  if (one(query.skin) === "physical" && !hasMachineState) permanentRedirect("/");
-
-  const section = one(query.section);
-  const projection = parseProjection(one(query.view)) ?? "world";
-  const processScope = parseProcessScope(one(query.scope)) ?? "full";
-  const showSchematic = one(query.schematic) === "1";
-  const initialSurface = one(query.mode) === "capital" ? "capital" : "machine";
-  const initialResolution = section || one(query.resolution) === "full" ? "mid" : "focus";
-
+export default function HomePage() {
   return (
-    <LabMachineHomeBoundary resetTraversal={!section}>
-      <MobileTimelineProjectionRedirect projection={projection} />
-      <MobileCapitalProjectionControls />
-      <MobileMachineNonCrossingPipeLayer />
-      <RepresentationLabBillboardCardMount />
-      <BfuxCardGeometryNormalizer />
-      <BfuxLayoutStudio />
-      <LabMachineWorld
-        section={section}
-        initialProjection={projection}
-        initialProcessScope={processScope}
-        initialSurface={initialSurface}
-        initialResolution={initialResolution}
-        showSchematic={showSchematic}
-        machinePath="/"
-      />
-    </LabMachineHomeBoundary>
+    <Suspense fallback={<HomeFallback />}>
+      <LabMachineHomeRoute />
+    </Suspense>
   );
 }
