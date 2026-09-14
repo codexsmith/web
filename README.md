@@ -4,11 +4,27 @@ The Boundary First Labs site is a multi-route Next.js application built around a
 
 This is not a conventional collection of independently authored pages. Canonical content, route relationships, evidence standing, and presentation depth remain separate so the same subject can be understood as ordinary content, inspected as evidence, or placed in the Boundary First process without duplicating its narrative.
 
+## Repository boundary
+
+This repository is the **deployable website implementation boundary**.
+
+Website strategy, product-owner intent, backlog state, positioning, UX exploration, public-projection planning, and retained planning/source packets belong in the Boundary First Labs corpus:
+
+`codexsmith/boundary-first-labs/organized_library_curated/06_Website_Content/`
+
+The active website backlog is:
+
+`0600_Control/BACKLOG.md`
+
+The former `backlog/` directory in this repository was retired on 2026-09-14. Its final state remains recoverable from Git history at commit `8f369070ad89eb94e64f096ea383f7f167f52d0b` (tree `56e20f29aff68704673c0a6909b34bad8f038c1a`). Do not recreate it.
+
+`docs/` may retain implementation-local specifications, contracts, and architecture that must remain version-coupled to code. A planning artifact belongs here only when the implementation itself is its primary authority.
+
 ## Run locally
 
 Requirements:
 
-- Node.js 20.9 or newer
+- Node.js 24.x
 - npm
 
 ```bash
@@ -75,7 +91,7 @@ See [Public interface system](docs/PUBLIC-INTERFACE-SYSTEM.md) before changing a
 
 The canonical graph begins in `src/lib/content.ts`; Publications are added through `src/lib/publication-portfolio.ts`. Content hydration modules such as `product-content.ts`, `research-content.ts`, `about-content.ts`, and `public-depth-content.ts` add bounded public copy over those canonical nodes.
 
-Rich retained sources remain under `src/content` and `backlog`. They are source material, not automatically public UI. Promotion into a page requires editorial selection, an accurate maturity boundary, and an appropriate route or disclosure surface.
+Rich implementation-local retained sources may remain under `src/content`. Broader research, planning, backlog, public-copy development, and source packets belong in the Lab corpus. Promotion into a page requires editorial selection, an accurate maturity boundary, and an appropriate route or disclosure surface.
 
 ## Design invariants
 
