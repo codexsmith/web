@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { ResearchAtlas } from "@/components/atlas-space/ResearchAtlas";
 import { BfuxIcon, type BfuxIconName } from "@/components/bfux-icons";
 import {
   ContentNode,
@@ -147,6 +148,15 @@ function RegionGrid({ node, regions, onNavigate, variant = "district" }: RegionG
   const isRoot = node.id === "root";
   const isTopLevelSection = node.parentId === "root";
   const usesBoundaryOrientation = isRoot || isTopLevelSection;
+
+  if (node.id === "research" && !isOrientation) {
+    return (
+      <ResearchAtlas
+        regions={regions}
+        onNavigate={(targetId) => onNavigate(targetId, "down")}
+      />
+    );
+  }
 
   return (
     <div

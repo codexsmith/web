@@ -1,0 +1,51 @@
+.boardGroup {
+  transition: opacity 180ms ease, filter 180ms ease;
+}
+
+.boardRecessed {
+  opacity: .34;
+  filter: saturate(.55) brightness(.72);
+}
+
+.boardExtracted {
+  opacity: 1;
+  filter: drop-shadow(10px 16px 14px rgba(0, 0, 0, .42));
+}
+
+.boardPattern {
+  pointer-events: none;
+  opacity: .22;
+  stroke: none;
+}
+
+.boardPatternLine {
+  fill: none;
+  stroke: rgba(152, 177, 158, .24);
+  stroke-width: 1;
+}
+
+.boardMark {
+  fill: rgba(177, 197, 181, .42);
+  font: 700 28px/1 Georgia, serif;
+  paint-order: stroke;
+  stroke: rgba(10, 16, 13, .75);
+  stroke-width: 2px;
+}
+
+.registrationHole {
+  fill: #070b09;
+  stroke: #8d958d;
+  stroke-width: 2;
+  filter: drop-shadow(1px 2px 1px rgba(0,0,0,.55));
+}
+
+.anchorRecessed {
+  opacity: .18;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boardGroup {
+    transition: none;
+  }
+}
