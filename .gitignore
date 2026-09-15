@@ -6,3 +6,13 @@ build
 *.log
 .env*
 !.env.example
+
+# Generated local/tooling exhaust
+.playwright-cli/
+output.html
+*.tsbuildinfo
+__pycache__/
+*.py[cod]
+
+# Historical implementation is preserved in Git history, not the live deployable tree
+retired_v1/

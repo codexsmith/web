@@ -22,6 +22,8 @@ This repository is the deployable website implementation boundary, not the Lab's
 
 The former `web/backlog/` working tree was retired on 2026-09-14. Its final source snapshot remains in Git history at commit `8f369070ad89eb94e64f096ea383f7f167f52d0b`, tree `56e20f29aff68704673c0a6909b34bad8f038c1a`.
 
+The former `retired_v1/` implementation snapshot was removed from the live deployable tree on 2026-09-14. Its final snapshot remains in Git history at commit `9689517e5f6eaf57b6b683fe5f73c16e99ef4c98`, tree `5509d2cf609e3e81ee3bb3a4108b4916a6252e55`. Do not restore historical implementations, Playwright CLI captures, generated HTML dumps, TypeScript build-info files, Python bytecode, or similar local/tooling exhaust to `main`; preserve useful history through Git provenance or promote genuinely authoritative material into the Lab corpus.
+
 ## Commit discipline
 
 All code and configuration changes in this repository should be completed in as few commits as possible, ideally one coherent commit per task or pull request.
@@ -42,6 +44,7 @@ Automatic Vercel Git deployments are intended for `main`; development/agent bran
 Therefore:
 
 - Keep high-churn planning/backlog work in the Lab repository rather than here.
+- Keep generated local/tooling exhaust out of Git; `.gitignore` covers the known capture/build artifacts.
 - Minimize commits and prefer one coherent integration commit.
 - Validate branch work with local/GitHub tooling where possible instead of relying on Vercel as a test runner.
 - `scripts/vercel-ignore-build.sh` cancels non-`main` Git builds before `vercel build` and skips full builds for changes outside the runtime/build-input allowlist.
