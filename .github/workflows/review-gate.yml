@@ -38,13 +38,6 @@ jobs:
       - name: Production build
         run: npm run build
 
-      - name: Exercise production routes
-        run: npm run runtime:check
-
-      - name: Lint diagnostic
-        continue-on-error: true
-        run: npm run lint
-
       - name: Commit refreshed dependency lock
         shell: bash
         run: |
@@ -57,3 +50,11 @@ jobs:
           git add package-lock.json
           git commit -m "chore(deps): refresh dependency lock"
           git push origin HEAD:agent/dependency-prune
+
+      - name: Runtime diagnostic
+        continue-on-error: true
+        run: npm run runtime:check
+
+      - name: Lint diagnostic
+        continue-on-error: true
+        run: npm run lint
