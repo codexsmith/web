@@ -25,6 +25,7 @@ export function LabMachineHomeRoute() {
   const searchParams = useSearchParams();
   const hasMachineState = machineStateKeys.some((key) => Boolean(searchParams.get(key)));
   const shouldCanonicalize = searchParams.get("skin") === "physical" && !hasMachineState;
+  const enableLayoutStudio = searchParams.get("bfux") === "edit";
 
   useEffect(() => {
     if (shouldCanonicalize) router.replace("/", { scroll: false });
@@ -47,6 +48,7 @@ export function LabMachineHomeRoute() {
       initialSurface={initialSurface}
       initialResolution={initialResolution}
       showSchematic={showSchematic}
+      enableLayoutStudio={enableLayoutStudio}
     />
   );
 }
