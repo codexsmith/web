@@ -72,7 +72,7 @@
 }
 
 .bf-machine[data-skin="physical"] .bf-machine-forge__nameplate {
-  left: -19px;
+  left: -58px;
   top: 79px;
 }
 
@@ -151,6 +151,10 @@
   .bf-machine[data-skin="physical"] .bf-machine-forge__data span {
     max-height: 76px;
     font-size: .3rem;
+  }
+
+  .bf-machine[data-skin="physical"] .bf-machine-forge__nameplate {
+    left: -24px;
   }
 
   .bf-machine[data-skin="physical"] .bf-research-exhaust__rail i::after {
