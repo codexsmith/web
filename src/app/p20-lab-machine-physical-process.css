@@ -1,9 +1,7 @@
 /* Workstream 28 — Lab Machine Physical UI Refinement.
  *
- * This layer is intentionally additive. The Lab Machine's existing semantic
- * nodes, routing, card geometry, and interaction contract remain authoritative;
- * this file supplies the restrained physical-material grammar used by the
- * Research Engine first, then Forge and Research Exhaust.
+ * Shared material grammar only. Forge and Research Exhaust now live in their
+ * own React components and component-local stylesheets.
  */
 
 .bf-machine[data-skin="physical"] {
@@ -144,151 +142,14 @@
     inset 0 -12px 26px rgba(0, 0, 0, 0.32);
 }
 
-/* -------------------------------------------------------------------------- */
-/* Forge — installed fabrication hardware above the existing Tour instrument. */
-/* -------------------------------------------------------------------------- */
-
-.bf-machine[data-skin="physical"] .bf-machine-tour-card {
-  overflow: visible;
-}
-
-.bf-machine[data-skin="physical"] .bf-machine-tour-card::before,
-.bf-machine[data-skin="physical"] .bf-machine-tour-card::after {
-  position: absolute;
-  left: 50%;
-  pointer-events: none;
-  z-index: -1;
-  transform: translateX(-50%);
-}
-
-.bf-machine[data-skin="physical"] .bf-machine-tour-card::before {
-  content: "FORGE   ·   MATTER → MEANING";
-  bottom: calc(100% + 10px);
-  width: min(92%, 250px);
-  height: 58px;
-  box-sizing: border-box;
-  padding: 9px 13px 8px;
-  border: 1px solid #536168;
-  border-top-color: #6d7b81;
-  border-radius: 4px 4px 2px 2px;
-  color: #b9dfe0;
-  background:
-    repeating-linear-gradient(90deg, transparent 0 15px, rgba(88,203,210,.045) 15px 16px),
-    linear-gradient(90deg, #111719 0 12%, rgba(22,77,82,.82) 12% 88%, #111719 88%),
-    linear-gradient(180deg, #30383c, #101517);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.12),
-    inset 0 -2px rgba(0,0,0,.75),
-    0 0 0 2px #06090a,
-    0 8px 13px rgba(0,0,0,.48),
-    inset 0 0 16px rgba(88,203,210,.10);
-  font: 700 .48rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .09em;
-  text-align: center;
-  text-shadow: 0 0 5px rgba(88,203,210,.2);
-}
-
-.bf-machine[data-skin="physical"] .bf-machine-tour-card::after {
-  content: "0101  ·  1100  ·  0011";
-  bottom: calc(100% + 25px);
-  width: min(68%, 180px);
-  height: 20px;
-  padding: 3px 8px;
-  box-sizing: border-box;
-  border: 1px solid rgba(88,203,210,.24);
-  border-radius: 2px;
-  color: #62d3d7;
-  background: rgba(4,16,18,.88);
-  box-shadow: inset 0 0 9px rgba(88,203,210,.08);
-  font: 600 .43rem/12px ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .14em;
-  text-align: center;
-}
-
-.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"]::before,
-.bf-machine[data-skin="physical"] .bf-machine-tour-card[data-expanded="true"]::after {
-  opacity: .38;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Research Exhaust — physical output routing from the existing lower dock.    */
-/* -------------------------------------------------------------------------- */
-
+/* Research and Tour remain the physical containing blocks for the Workstream
+ * 28 hardware components. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card,
 .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] {
   overflow: visible;
 }
 
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"]::before {
-  content: "";
-  position: absolute;
-  left: -17%;
-  top: calc(100% + 33px);
-  width: 134%;
-  height: 34px;
-  z-index: -2;
-  pointer-events: none;
-  border: 1px solid #4b565b;
-  border-top-color: #677277;
-  border-radius: 5px;
-  background:
-    linear-gradient(90deg,
-      transparent 0 9%, rgba(190,117,237,.18) 9% 9.7%, transparent 9.7% 29%,
-      rgba(147,206,112,.18) 29% 29.7%, transparent 29.7% 50%,
-      rgba(147,206,112,.18) 50% 50.7%, transparent 50.7% 71%,
-      rgba(147,206,112,.18) 71% 71.7%, transparent 71.7% 91%,
-      rgba(190,117,237,.18) 91% 91.7%, transparent 91.7%),
-    linear-gradient(180deg, #2b3337, #12181b 48%, #090d0f 100%);
-  box-shadow:
-    inset 0 1px rgba(255,255,255,.11),
-    inset 0 -2px rgba(0,0,0,.8),
-    0 0 0 2px #050708,
-    0 7px 12px rgba(0,0,0,.48);
-}
-
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"]::after {
-  content: "RESEARCH EXHAUST   ·   LIVE OUTPUT";
-  position: absolute;
-  left: 50%;
-  top: calc(100% + 42px);
-  z-index: -1;
-  width: 71%;
-  min-width: 220px;
-  height: 17px;
-  box-sizing: border-box;
-  padding: 2px 8px;
-  transform: translateX(-50%);
-  pointer-events: none;
-  border: 1px solid #344146;
-  border-radius: 2px;
-  color: #aeb9bc;
-  background:
-    linear-gradient(90deg, rgba(190,117,237,.08), transparent 24% 78%, rgba(147,206,112,.06)),
-    #081014;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,.65);
-  font: 700 .43rem/11px ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .09em;
-  text-align: center;
-}
-
-/* Five-contact dock → riser → manifold. The riser belongs to the existing dock,
- * so the visual causal path remains Research → output hardware. */
-.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__lower-dock::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  width: 18px;
-  height: 35px;
-  transform: translateX(-50%);
-  border-left: 1px solid #596368;
-  border-right: 1px solid #30383c;
-  background:
-    linear-gradient(90deg, #111719, #343e42 42% 58%, #101517),
-    linear-gradient(180deg, rgba(190,117,237,.12), transparent);
-  box-shadow: 0 2px 4px rgba(0,0,0,.45);
-}
-
-/* Branch taps: the lower deck becomes process plumbing rather than ornament. */
+/* Branch taps retain the lower deck's process-plumbing treatment. */
 .bf-machine[data-skin="physical"] .bf-machine__lower-deck {
   opacity: .82;
   background:
@@ -296,45 +157,10 @@
     linear-gradient(180deg, #1f282b, #0c1113);
 }
 
-@media (max-width: 1024px) {
-  /* Mobile keeps the machine sequence while avoiding desktop overlap. */
-  .bf-machine[data-skin="physical"] .bf-machine-tour-card::before {
-    bottom: calc(100% + 7px);
-    width: 88%;
-    height: 46px;
-    padding-top: 7px;
-  }
-
-  .bf-machine[data-skin="physical"] .bf-machine-tour-card::after {
-    bottom: calc(100% + 18px);
-    width: 62%;
-  }
-
-  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"]::before {
-    left: 4%;
-    top: calc(100% + 24px);
-    width: 92%;
-    height: 30px;
-  }
-
-  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"]::after {
-    top: calc(100% + 31px);
-    width: 76%;
-    min-width: 0;
-    font-size: .39rem;
-  }
-
-  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__lower-dock::after {
-    height: 26px;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] *,
   .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] *::before,
-  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] *::after,
-  .bf-machine[data-skin="physical"] .bf-machine-tour-card::before,
-  .bf-machine[data-skin="physical"] .bf-machine-tour-card::after {
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
