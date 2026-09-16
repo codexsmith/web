@@ -1,74 +1,92 @@
-/* Workstream 28: Full Forge proportion calibration.
+/* Workstream 28: Full Forge canonical proportion calibration.
  *
- * The integrated mockup reads as a tall fabrication portal: narrow shoulders,
- * a long central chamber, and a distinct neck/head above the chassis. Keep
- * these overrides scoped to Full so Core retains its independent projection.
+ * Geometry authority: the isolated original Forge reference supplied during
+ * implementation. It is a tall portal machine, not a broad cabinet:
+ * - central chamber is the visual spine
+ * - shoulders stay close to that spine
+ * - side service ears sit low and small
+ * - a long structural neck separates body from emitter
+ * - the data plume continues the vertical axis
+ *
+ * Keep these overrides scoped to Full so Core retains its independent
+ * projection and layout contract.
  */
 
 @media (min-width: 1025px) {
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge[data-resolution="mid"] {
-    width: clamp(330px, 150%, 420px);
-    height: 350px;
+    width: clamp(295px, 134%, 355px);
+    height: 424px;
     bottom: calc(100% - 8px);
     transform: translateX(-45%);
-    filter: drop-shadow(0 22px 27px rgba(0,0,0,.47));
+    filter: drop-shadow(0 23px 28px rgba(0,0,0,.48));
   }
 
-  /* Narrow the shoulder line and let the central body carry the mass. */
+  /* The original has no horizontal title band across its shoulders. Keeping
+   * that decorative register out of the silhouette lets the portal read tall. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__header {
+    display: none;
+  }
+
+  /* Main portal body begins well below the emitter. Its upper corners taper
+   * inward instead of presenting a wide roofline. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing {
-    inset: 34px 7% 24px;
+    inset: 88px 8% 24px;
     clip-path: polygon(
-      25% 0,
-      75% 0,
-      83% 5%,
+      31% 0,
+      69% 0,
+      79% 4%,
       83% 10%,
-      93% 16%,
-      100% 27%,
-      100% 73%,
-      93% 84%,
-      93% 89%,
-      77% 93%,
-      70% 100%,
-      30% 100%,
-      23% 93%,
-      7% 89%,
-      7% 84%,
-      0 73%,
-      0 27%,
-      7% 16%,
+      91% 14%,
+      100% 25%,
+      100% 74%,
+      91% 84%,
+      88% 91%,
+      73% 94%,
+      67% 100%,
+      33% 100%,
+      27% 94%,
+      12% 91%,
+      9% 84%,
+      0 74%,
+      0 25%,
+      9% 14%,
       17% 10%,
-      17% 5%
+      21% 4%
     );
   }
 
+  /* The side armor is deliberately lower than the central portal. These are
+   * cheek/service masses, not shoulders. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing::before,
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing::after {
-    top: 84px;
+    top: 150px;
     bottom: 58px;
-    width: 40px;
+    width: 34px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing::before {
-    left: -25px;
+    left: -20px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing::after {
-    right: -25px;
+    right: -20px;
   }
 
-  /* A visible collar/neck separates the fabrication body from the emitter. */
+  /* Long neck stack: central stem -> wide collar -> emitter. This is the key
+   * vertical gesture visible in the isolated reference. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__top-rail {
-    left: 31%;
-    right: 31%;
-    top: -13px;
-    height: 16px;
+    left: 29%;
+    right: 29%;
+    top: -10px;
+    height: 18px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
@@ -77,17 +95,18 @@
     position: absolute;
     left: 50%;
     bottom: 100%;
-    width: 50px;
-    height: 31px;
+    width: 52px;
+    height: 68px;
     transform: translateX(-50%);
     border: 1px solid #59666b;
     border-bottom: 0;
-    clip-path: polygon(20% 0,80% 0,100% 28%,100% 100%,0 100%,0 28%);
+    clip-path: polygon(26% 0,74% 0,88% 15%,88% 72%,100% 84%,100% 100%,0 100%,0 84%,12% 72%,12% 15%);
     background:
-      linear-gradient(90deg, #111719, #465156 38% 62%, #111719),
-      linear-gradient(180deg, #3d474b, #101719);
+      linear-gradient(90deg, #111719 0 17%, #404b50 18% 42%, #4b565a 43% 57%, #404b50 58% 82%, #111719 83%),
+      linear-gradient(180deg, #333d41, #101719);
     box-shadow:
       inset 0 1px rgba(255,255,255,.1),
+      inset 0 -4px rgba(0,0,0,.45),
       0 -3px 8px rgba(0,0,0,.38);
   }
 
@@ -96,117 +115,207 @@
     content: "";
     position: absolute;
     left: 50%;
-    bottom: calc(100% + 25px);
-    width: 30px;
-    height: 17px;
+    bottom: calc(100% + 58px);
+    width: 66px;
+    height: 22px;
     transform: translateX(-50%);
     border: 1px solid #647176;
-    border-radius: 3px 3px 1px 1px;
-    background: linear-gradient(180deg, #4d585c, #151c1f);
-    box-shadow: inset 0 1px rgba(255,255,255,.12);
+    clip-path: polygon(12% 0,88% 0,100% 36%,100% 84%,88% 100%,12% 100%,0 84%,0 36%);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.07), transparent 34%),
+      linear-gradient(90deg, #171e21, #4e595d 38% 62%, #171e21);
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.12),
+      0 -2px 7px rgba(0,0,0,.42),
+      0 0 8px rgba(45,231,236,.07);
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
-    .bf-machine-forge__header {
-    left: 48px;
-    right: 48px;
-    top: 55px;
-    height: 27px;
+    .bf-machine-forge__emitter {
+    top: 4px;
+    width: 54px;
+    height: 31px;
   }
 
+  /* Chamber dominates. Side modules are narrow and live in the lower half. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__body {
-    left: 31px;
-    right: 31px;
-    top: 90px;
-    height: 194px;
-    grid-template-columns: 48px minmax(0,1fr) 48px;
+    left: 25px;
+    right: 25px;
+    top: 18px;
+    height: 270px;
+    grid-template-columns: 35px minmax(0,1fr) 35px;
     gap: 7px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__service {
+    align-self: end;
+    height: 49%;
+    margin-bottom: 18px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__service::before {
-    left: 13px;
-    right: 8px;
-    top: 28px;
-    height: 78px;
+    left: 9px;
+    right: 6px;
+    top: 16px;
+    height: 46px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__service::after {
+    right: 5px;
+    top: 72px;
+    width: 18px;
+    height: 25px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__service-trace {
-    left: 10px;
-    right: 6px;
-    top: 121px;
+    left: 7px;
+    right: 4px;
+    top: 82px;
+    height: 14px;
   }
 
-  /* Stretch the chamber itself; this is the visual spine of the Forge. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__chamber {
+    border-width: 3px;
     clip-path: polygon(
-      21% 0,
-      79% 0,
-      94% 8%,
-      94% 18%,
+      24% 0,
+      76% 0,
+      91% 7%,
+      97% 17%,
       100% 23%,
-      100% 90%,
-      88% 100%,
-      12% 100%,
-      0 90%,
+      100% 93%,
+      92% 100%,
+      8% 100%,
+      0 93%,
       0 23%,
-      6% 18%,
-      6% 8%
+      3% 17%,
+      9% 7%
     );
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__chamber-rim {
-    inset: 9px 10px 10px;
+    inset: 9px 8px 10px;
+    clip-path: polygon(20% 0,80% 0,96% 9%,100% 16%,100% 93%,93% 100%,7% 100%,0 93%,0 16%,4% 9%);
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__chamber-frame {
-    inset: 22px 20px 24px;
+    inset: 19px 14px 19px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__data {
-    top: 28px;
-    bottom: 37px;
-    gap: 8px;
+    top: 24px;
+    bottom: 31px;
+    gap: 7px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__data span {
-    max-height: 136px;
+    max-height: 202px;
     font-size: .35rem;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__scan {
-    top: 92px;
+    top: 126px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__workbed {
+    left: 11%;
+    right: 11%;
+    bottom: 10px;
+  }
+
+  /* The isolated original has feet rather than a long dashboard. Suppress the
+   * decorative bus so the lower silhouette stays architectural. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__lower-deck {
-    left: 43px;
-    right: 43px;
-    bottom: 35px;
+    display: none;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__mount {
+    bottom: 8px;
+    width: 52px;
+    height: 34px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__mount--left {
+    left: 19%;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__mount--right {
+    right: 19%;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__base-rail {
+    left: 17%;
+    right: 17%;
+    bottom: 3px;
+    height: 19px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__nameplate {
-    left: -54px;
-    top: 122px;
-    width: 92px;
-    height: 43px;
+    left: -59px;
+    top: 205px;
+    width: 89px;
+    height: 41px;
   }
 
-  /* Give the head more air above the roof; the plume should read as output from
-   * a necked emitter rather than decoration sitting on broad shoulders. */
+  /* Keep integrated-UI pipework, but tuck it close to the canonical body so it
+   * does not recreate the broad silhouette we just removed. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__pipe {
+    top: 136px;
+    width: 34px;
+    height: 126px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__pipe--left {
+    left: -14px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__pipe--right {
+    right: -14px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__conduit {
+    top: 255px;
+    width: 58px;
+    height: 92px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__conduit--left {
+    left: 8px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__conduit--right {
+    right: 8px;
+  }
+
+  /* The plume in the original is a tall continuation of the neck rather than
+   * a compact sparkle. Stretch vertically without increasing lateral spread. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__plume {
-    top: -71px;
-    transform: translateX(-50%) scale(.96);
+    top: -116px;
+    transform: translateX(-50%) scale(.9, 1.48);
     transform-origin: center bottom;
   }
 }
