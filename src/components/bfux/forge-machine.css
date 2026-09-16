@@ -1,0 +1,159 @@
+.bf-machine-forge {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  z-index: -1;
+  width: min(92%, 250px);
+  height: 58px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.bf-machine-forge__housing {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 1px solid #536168;
+  border-top-color: #6d7b81;
+  border-radius: 4px 4px 2px 2px;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 15px, rgba(88,203,210,.045) 15px 16px),
+    linear-gradient(90deg, #111719 0 12%, rgba(22,77,82,.82) 12% 88%, #111719 88%),
+    linear-gradient(180deg, #30383c, #101517);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.12),
+    inset 0 -2px rgba(0,0,0,.75),
+    0 0 0 2px #06090a,
+    0 8px 13px rgba(0,0,0,.48),
+    inset 0 0 16px rgba(88,203,210,.10);
+}
+
+.bf-machine-forge__plate {
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+  text-shadow: 0 0 5px rgba(88,203,210,.2);
+}
+
+.bf-machine-forge__plate strong {
+  color: #d3eaeb;
+  font-size: .5rem;
+}
+
+.bf-machine-forge__plate small {
+  color: #8eb6b8;
+  font-size: .39rem;
+}
+
+.bf-machine-forge__chamber {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 9px;
+  height: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(88,203,210,.24);
+  border-radius: 2px;
+  background: rgba(4,16,18,.88);
+  box-shadow: inset 0 0 9px rgba(88,203,210,.08);
+}
+
+.bf-machine-forge__data {
+  position: absolute;
+  inset: 3px 8px auto;
+  color: #62d3d7;
+  font: 600 .43rem/12px ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
+  text-align: center;
+}
+
+.bf-machine-forge__scan {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 2px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(88,203,210,.65), transparent);
+  opacity: .56;
+}
+
+.bf-machine-forge__fasteners i {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #20282b;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 34%, #9ba3a6 0 12%, #6e797d 15% 35%, #252b2e 38% 100%);
+  box-shadow: 0 0 0 1px #090c0d;
+}
+
+.bf-machine-forge__fasteners i:nth-child(1) { left: 5px; top: 5px; }
+.bf-machine-forge__fasteners i:nth-child(2) { right: 5px; top: 5px; }
+.bf-machine-forge__fasteners i:nth-child(3) { left: 5px; bottom: 5px; }
+.bf-machine-forge__fasteners i:nth-child(4) { right: 5px; bottom: 5px; }
+
+.bf-machine-forge__mount {
+  position: absolute;
+  bottom: -8px;
+  width: 12px;
+  height: 10px;
+  border: 1px solid #465157;
+  border-top: 0;
+  background: linear-gradient(90deg, #101618, #30393d 50%, #101618);
+}
+
+.bf-machine-forge__mount--left { left: 20%; }
+.bf-machine-forge__mount--right { right: 20%; }
+
+.bf-machine-forge__coupler {
+  position: absolute;
+  left: 50%;
+  bottom: -12px;
+  width: 24px;
+  height: 7px;
+  transform: translateX(-50%);
+  border: 1px solid #4f5b60;
+  border-top: 0;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(90deg, #111719, #384347, #111719);
+}
+
+.bf-machine-tour-card[data-expanded="true"] > .bf-machine-forge {
+  opacity: .38;
+}
+
+@media (max-width: 1024px) {
+  .bf-machine-forge {
+    bottom: calc(100% + 7px);
+    width: 88%;
+    height: 46px;
+  }
+
+  .bf-machine-forge__plate {
+    top: 6px;
+  }
+
+  .bf-machine-forge__chamber {
+    bottom: 6px;
+    height: 17px;
+  }
+
+  .bf-machine-forge__data {
+    top: 2px;
+    font-size: .39rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine-forge,
+  .bf-machine-forge * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
