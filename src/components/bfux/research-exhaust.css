@@ -118,7 +118,7 @@
 .bf-research-exhaust__plenum::before {
   content: "";
   position: absolute;
-  inset: 9px 12px 9px;
+  inset: 9px 12px;
   border: 1px solid #29363a;
   border-radius: 2px;
   background:
@@ -395,8 +395,8 @@
   }
 
   .bf-research-exhaust__plenum::before {
-    inset-left: 7px;
-    inset-right: 7px;
+    left: 7px;
+    right: 7px;
   }
 }
 
