@@ -28,7 +28,8 @@
     display: none;
   }
 
-  /* Leave more headroom above the body for the neck and fume stack. */
+  /* Main body remains tall, but the fume stack now physically overlaps the
+   * roof so there is no visually disconnected gap between systems. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing {
     inset: 108px 8% 24px;
@@ -76,75 +77,51 @@
     right: -20px;
   }
 
-  /* Neck stack from the portal body into the fume stack. */
+  /* The roof rail is just the body-side mounting collar now. The visible fume
+   * stack lives outside the clipped housing so it can actually bridge the roof. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__top-rail {
-    left: 30%;
-    right: 30%;
-    top: -9px;
+    left: 29%;
+    right: 29%;
+    top: -7px;
     height: 18px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
-    .bf-machine-forge__top-rail::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    width: 48px;
-    height: 48px;
-    transform: translateX(-50%);
-    border: 1px solid #59666b;
-    border-bottom: 0;
-    clip-path: polygon(24% 0,76% 0,88% 16%,88% 74%,100% 86%,100% 100%,0 100%,0 86%,12% 74%,12% 16%);
-    background:
-      linear-gradient(90deg, #111719 0 17%, #404b50 18% 42%, #4b565a 43% 57%, #404b50 58% 82%, #111719 83%),
-      linear-gradient(180deg, #333d41, #101719);
-    box-shadow:
-      inset 0 1px rgba(255,255,255,.1),
-      inset 0 -4px rgba(0,0,0,.45),
-      0 -3px 8px rgba(0,0,0,.38);
-  }
-
-  /* Broad transition collar at the base of the fume stack. */
+    .bf-machine-forge__top-rail::before,
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__top-rail::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: calc(100% + 39px);
-    width: 68px;
-    height: 22px;
-    transform: translateX(-50%);
-    border: 1px solid #647176;
-    clip-path: polygon(12% 0,88% 0,100% 36%,100% 84%,88% 100%,12% 100%,0 84%,0 36%);
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.07), transparent 34%),
-      linear-gradient(90deg, #171e21, #4e595d 38% 62%, #171e21);
-    box-shadow:
-      inset 0 1px rgba(255,255,255,.12),
-      0 -2px 7px rgba(0,0,0,.42),
-      0 0 8px rgba(45,231,236,.07);
+    display: none;
   }
 
-  /* The previous emitter was a small cap. The reference calls for a real
-   * industrial fume stack: tall dark flue, wide cap, cyan hot seam. */
+  /* Broad industrial fume stack. Its base collar overlaps the body roof; its
+   * hot cyan seam remains inside the flue instead of floating in the gap. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__emitter {
-    top: 8px;
-    width: 44px;
-    height: 82px;
+    top: 12px;
+    width: 64px;
+    height: 100px;
     border-radius: 1px;
-    clip-path: polygon(18% 0,82% 0,94% 9%,94% 86%,82% 100%,18% 100%,6% 86%,6% 9%);
-    border-color: #556368;
+    clip-path: none;
+    border: 1px solid #556368;
     background:
-      linear-gradient(90deg, #101619 0 17%, #384348 18% 38%, #465156 39% 61%, #384348 62% 82%, #101619 83%),
-      linear-gradient(180deg, #3a4549, #11181b);
+      linear-gradient(180deg,
+        transparent 0 23px,
+        rgba(53,232,237,.88) 23px 26px,
+        transparent 26px 100%),
+      linear-gradient(90deg,
+        #0d1417 0 15%,
+        #323d42 16% 34%,
+        #4b565b 35% 65%,
+        #323d42 66% 84%,
+        #0d1417 85%),
+      linear-gradient(180deg, #3d484d, #10171a);
     box-shadow:
       inset 0 1px rgba(255,255,255,.1),
-      inset 0 -5px rgba(0,0,0,.5),
+      inset 0 -5px rgba(0,0,0,.52),
       0 0 0 2px #070a0c,
-      0 7px 10px rgba(0,0,0,.38);
+      0 7px 10px rgba(0,0,0,.38),
+      0 0 8px rgba(53,232,237,.08);
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
@@ -152,13 +129,13 @@
     content: "";
     position: absolute;
     left: 50%;
-    top: -9px;
-    width: 64px;
-    height: 17px;
+    top: -10px;
+    width: 86px;
+    height: 19px;
     transform: translateX(-50%);
     border: 1px solid #647176;
     clip-path: polygon(10% 0,90% 0,100% 38%,100% 82%,88% 100%,12% 100%,0 82%,0 38%);
-    background: linear-gradient(180deg, #4c585c, #161e21);
+    background: linear-gradient(180deg, #4f5b60, #171f22);
     box-shadow: inset 0 1px rgba(255,255,255,.12), 0 -2px 6px rgba(0,0,0,.38);
   }
 
@@ -166,16 +143,24 @@
     .bf-machine-forge__emitter::after {
     content: "";
     position: absolute;
-    left: -5px;
-    right: -5px;
-    top: 17px;
-    height: 3px;
-    background: rgba(53,232,237,.88);
-    box-shadow: 0 0 7px rgba(53,232,237,.38);
+    left: 50%;
+    bottom: -7px;
+    width: 98px;
+    height: 23px;
+    transform: translateX(-50%);
+    border: 1px solid #647176;
+    clip-path: polygon(8% 0,92% 0,100% 34%,100% 82%,90% 100%,10% 100%,0 82%,0 34%);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.06), transparent 30%),
+      linear-gradient(90deg, #151d20, #465156 37% 63%, #151d20);
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.11),
+      0 2px 5px rgba(0,0,0,.44),
+      0 0 8px rgba(53,232,237,.07);
   }
 
-  /* The portal opening was too tall. Keep the overall machine tall, but move
-   * that height into neck/stack and upper armor instead of glass aperture. */
+  /* The portal opening stays shorter than the total body so the stack carries
+   * part of the Forge's vertical character. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__body {
     left: 25px;
@@ -312,22 +297,36 @@
     height: 41px;
   }
 
-  /* Keep the integrated-UI utility lines tucked close to the canonical body. */
+  /* Remove the freestanding risers. These are now short attached utility loops
+   * whose open side terminates inside the Forge housing at both ends. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__pipe {
-    top: 151px;
-    width: 34px;
-    height: 119px;
+    top: 192px;
+    width: 31px;
+    height: 91px;
+    opacity: .9;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.45));
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__pipe::before,
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__pipe::after {
+    display: none;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__pipe--left {
-    left: -14px;
+    left: 11px;
+    border-left-width: 5px;
+    border-radius: 16px 0 0 16px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__pipe--right {
-    right: -14px;
+    right: 11px;
+    border-right-width: 5px;
+    border-radius: 0 16px 16px 0;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
@@ -347,12 +346,11 @@
     right: 8px;
   }
 
-  /* Plume now emerges from the fume-stack cap instead of directly from the
-   * body roof. Keep it tall and narrow. */
+  /* Plume emerges directly from the wider fume-stack cap. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__plume {
-    top: -68px;
-    transform: translateX(-50%) scale(.82, 1.38);
+    top: -69px;
+    transform: translateX(-50%) scale(.88, 1.4);
     transform-origin: center bottom;
   }
 }
