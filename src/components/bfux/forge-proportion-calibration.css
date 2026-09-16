@@ -5,8 +5,8 @@
  * - central chamber is the visual spine
  * - shoulders stay close to that spine
  * - side service ears sit low and small
- * - a long structural neck separates body from emitter
- * - the data plume continues the vertical axis
+ * - a real fume stack separates body from the data plume
+ * - the data plume continues the same vertical exhaust axis
  *
  * Keep these overrides scoped to Full so Core retains its independent
  * projection and layout contract.
@@ -22,18 +22,16 @@
     filter: drop-shadow(0 23px 28px rgba(0,0,0,.48));
   }
 
-  /* The original has no horizontal title band across its shoulders. Keeping
-   * that decorative register out of the silhouette lets the portal read tall. */
+  /* The original has no horizontal title band across its shoulders. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__header {
     display: none;
   }
 
-  /* Main portal body begins well below the emitter. Its upper corners taper
-   * inward instead of presenting a wide roofline. */
+  /* Leave more headroom above the body for the neck and fume stack. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing {
-    inset: 88px 8% 24px;
+    inset: 108px 8% 24px;
     clip-path: polygon(
       31% 0,
       69% 0,
@@ -58,14 +56,13 @@
     );
   }
 
-  /* The side armor is deliberately lower than the central portal. These are
-   * cheek/service masses, not shoulders. */
+  /* Low cheek/service masses, never full-height shoulders. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing::before,
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__housing::after {
-    top: 150px;
-    bottom: 58px;
+    top: 136px;
+    bottom: 54px;
     width: 34px;
   }
 
@@ -79,13 +76,12 @@
     right: -20px;
   }
 
-  /* Long neck stack: central stem -> wide collar -> emitter. This is the key
-   * vertical gesture visible in the isolated reference. */
+  /* Neck stack from the portal body into the fume stack. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__top-rail {
-    left: 29%;
-    right: 29%;
-    top: -10px;
+    left: 30%;
+    right: 30%;
+    top: -9px;
     height: 18px;
   }
 
@@ -95,12 +91,12 @@
     position: absolute;
     left: 50%;
     bottom: 100%;
-    width: 52px;
-    height: 68px;
+    width: 48px;
+    height: 48px;
     transform: translateX(-50%);
     border: 1px solid #59666b;
     border-bottom: 0;
-    clip-path: polygon(26% 0,74% 0,88% 15%,88% 72%,100% 84%,100% 100%,0 100%,0 84%,12% 72%,12% 15%);
+    clip-path: polygon(24% 0,76% 0,88% 16%,88% 74%,100% 86%,100% 100%,0 100%,0 86%,12% 74%,12% 16%);
     background:
       linear-gradient(90deg, #111719 0 17%, #404b50 18% 42%, #4b565a 43% 57%, #404b50 58% 82%, #111719 83%),
       linear-gradient(180deg, #333d41, #101719);
@@ -110,13 +106,14 @@
       0 -3px 8px rgba(0,0,0,.38);
   }
 
+  /* Broad transition collar at the base of the fume stack. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__top-rail::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: calc(100% + 58px);
-    width: 66px;
+    bottom: calc(100% + 39px);
+    width: 68px;
     height: 22px;
     transform: translateX(-50%);
     border: 1px solid #647176;
@@ -130,20 +127,61 @@
       0 0 8px rgba(45,231,236,.07);
   }
 
+  /* The previous emitter was a small cap. The reference calls for a real
+   * industrial fume stack: tall dark flue, wide cap, cyan hot seam. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__emitter {
-    top: 4px;
-    width: 54px;
-    height: 31px;
+    top: 8px;
+    width: 44px;
+    height: 82px;
+    border-radius: 1px;
+    clip-path: polygon(18% 0,82% 0,94% 9%,94% 86%,82% 100%,18% 100%,6% 86%,6% 9%);
+    border-color: #556368;
+    background:
+      linear-gradient(90deg, #101619 0 17%, #384348 18% 38%, #465156 39% 61%, #384348 62% 82%, #101619 83%),
+      linear-gradient(180deg, #3a4549, #11181b);
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.1),
+      inset 0 -5px rgba(0,0,0,.5),
+      0 0 0 2px #070a0c,
+      0 7px 10px rgba(0,0,0,.38);
   }
 
-  /* Chamber dominates. Side modules are narrow and live in the lower half. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__emitter::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    width: 64px;
+    height: 17px;
+    transform: translateX(-50%);
+    border: 1px solid #647176;
+    clip-path: polygon(10% 0,90% 0,100% 38%,100% 82%,88% 100%,12% 100%,0 82%,0 38%);
+    background: linear-gradient(180deg, #4c585c, #161e21);
+    box-shadow: inset 0 1px rgba(255,255,255,.12), 0 -2px 6px rgba(0,0,0,.38);
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine-forge__emitter::after {
+    content: "";
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    top: 17px;
+    height: 3px;
+    background: rgba(53,232,237,.88);
+    box-shadow: 0 0 7px rgba(53,232,237,.38);
+  }
+
+  /* The portal opening was too tall. Keep the overall machine tall, but move
+   * that height into neck/stack and upper armor instead of glass aperture. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__body {
     left: 25px;
     right: 25px;
-    top: 18px;
-    height: 270px;
+    top: 16px;
+    height: 238px;
     grid-template-columns: 35px minmax(0,1fr) 35px;
     gap: 7px;
   }
@@ -151,36 +189,38 @@
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__service {
     align-self: end;
-    height: 49%;
-    margin-bottom: 18px;
+    height: 52%;
+    margin-bottom: 15px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__service::before {
     left: 9px;
     right: 6px;
-    top: 16px;
-    height: 46px;
+    top: 14px;
+    height: 43px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__service::after {
     right: 5px;
-    top: 72px;
+    top: 67px;
     width: 18px;
-    height: 25px;
+    height: 24px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__service-trace {
     left: 7px;
     right: 4px;
-    top: 82px;
-    height: 14px;
+    top: 77px;
+    height: 13px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__chamber {
+    align-self: end;
+    height: 82%;
     border-width: 3px;
     clip-path: polygon(
       24% 0,
@@ -206,25 +246,25 @@
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__chamber-frame {
-    inset: 19px 14px 19px;
+    inset: 18px 14px 18px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__data {
-    top: 24px;
-    bottom: 31px;
-    gap: 7px;
+    top: 21px;
+    bottom: 28px;
+    gap: 6px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__data span {
-    max-height: 202px;
-    font-size: .35rem;
+    max-height: 144px;
+    font-size: .34rem;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__scan {
-    top: 126px;
+    top: 88px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
@@ -234,8 +274,6 @@
     bottom: 10px;
   }
 
-  /* The isolated original has feet rather than a long dashboard. Suppress the
-   * decorative bus so the lower silhouette stays architectural. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__lower-deck {
     display: none;
@@ -269,18 +307,17 @@
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__nameplate {
     left: -59px;
-    top: 205px;
+    top: 216px;
     width: 89px;
     height: 41px;
   }
 
-  /* Keep integrated-UI pipework, but tuck it close to the canonical body so it
-   * does not recreate the broad silhouette we just removed. */
+  /* Keep the integrated-UI utility lines tucked close to the canonical body. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__pipe {
-    top: 136px;
+    top: 151px;
     width: 34px;
-    height: 126px;
+    height: 119px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
@@ -295,9 +332,9 @@
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__conduit {
-    top: 255px;
+    top: 270px;
     width: 58px;
-    height: 92px;
+    height: 82px;
   }
 
   .bf-machine[data-skin="physical"][data-resolution="mid"]
@@ -310,12 +347,12 @@
     right: 8px;
   }
 
-  /* The plume in the original is a tall continuation of the neck rather than
-   * a compact sparkle. Stretch vertically without increasing lateral spread. */
+  /* Plume now emerges from the fume-stack cap instead of directly from the
+   * body roof. Keep it tall and narrow. */
   .bf-machine[data-skin="physical"][data-resolution="mid"]
     .bf-machine-forge__plume {
-    top: -116px;
-    transform: translateX(-50%) scale(.9, 1.48);
+    top: -68px;
+    transform: translateX(-50%) scale(.82, 1.38);
     transform-origin: center bottom;
   }
 }
