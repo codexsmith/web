@@ -15,24 +15,28 @@ export function ResearchExhaust({ resolution }: { resolution: LabMachineResoluti
 
       <div className="bf-research-exhaust__housing">
         <span className="bf-research-exhaust__fasteners">
-          <i /><i /><i /><i /><i /><i />
+          <i /><i /><i /><i /><i /><i /><i /><i />
         </span>
 
-        <aside className="bf-research-exhaust__plenum bf-research-exhaust__plenum--left">
-          <span /><span /><span />
-        </aside>
-
-        <div className="bf-research-exhaust__core">
-          <div className="bf-research-exhaust__display">
-            <strong>RESEARCH EXHAUST</strong>
+        <aside className="bf-research-exhaust__identity">
+          <div className="bf-research-exhaust__identity-plate">
+            <strong>RESEARCH<br />EXHAUST</strong>
             <small>LIVE OUTPUT</small>
           </div>
-          <span className="bf-research-exhaust__scope" />
-          <span className="bf-research-exhaust__status"><i /><i /><i /></span>
+          <div className="bf-research-exhaust__identity-vents">
+            <i /><i /><i /><i /><i />
+          </div>
+        </aside>
+
+        <div className="bf-research-exhaust__screen">
+          <span className="bf-research-exhaust__screen-grid" />
+          <span className="bf-research-exhaust__screen-scan" />
+          <span className="bf-research-exhaust__screen-baseline" />
         </div>
 
-        <aside className="bf-research-exhaust__plenum bf-research-exhaust__plenum--right">
-          <span /><span /><span />
+        <aside className="bf-research-exhaust__service">
+          <span className="bf-research-exhaust__service-lights"><i /><i /><i /></span>
+          <span className="bf-research-exhaust__service-vents"><i /><i /><i /><i /><i /></span>
         </aside>
 
         <div className="bf-research-exhaust__rail" aria-hidden="true">
