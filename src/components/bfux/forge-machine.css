@@ -1,0 +1,384 @@
+.bf-machine-forge {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 5px);
+  z-index: -1;
+  width: clamp(365px, 176%, 490px);
+  height: 262px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  filter: drop-shadow(0 19px 23px rgba(0, 0, 0, .42));
+}
+
+/* The Forge is intentionally a machine behind the Tour card, not another card. */
+.bf-machine-forge__housing {
+  position: absolute;
+  inset: 12px 7% 22px;
+  box-sizing: border-box;
+  overflow: visible;
+  border: 1px solid #657176;
+  clip-path: polygon(17% 0, 83% 0, 91% 7%, 91% 13%, 100% 22%, 100% 76%, 91% 86%, 91% 93%, 76% 93%, 71% 100%, 29% 100%, 24% 93%, 9% 93%, 9% 86%, 0 76%, 0 22%, 9% 13%, 9% 7%);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.09), transparent 4% 96%, rgba(0,0,0,.44)),
+    repeating-linear-gradient(90deg, transparent 0 31px, rgba(255,255,255,.012) 31px 32px),
+    linear-gradient(180deg, #465055 0 7%, #30393d 7% 22%, #20282c 22% 80%, #0a0f11 80% 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.2),
+    inset 0 -5px rgba(0,0,0,.88),
+    inset 10px 0 rgba(0,0,0,.16),
+    inset -10px 0 rgba(0,0,0,.16),
+    0 0 0 3px #050708,
+    0 12px 22px rgba(0,0,0,.54);
+}
+
+.bf-machine-forge__housing::before,
+.bf-machine-forge__housing::after {
+  content: "";
+  position: absolute;
+  top: 54px;
+  bottom: 43px;
+  width: 56px;
+  z-index: -1;
+  border: 1px solid #536066;
+  clip-path: polygon(24% 0, 100% 10%, 100% 90%, 24% 100%, 0 79%, 0 21%);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 14px, rgba(88,203,210,.08) 14px 16px),
+    linear-gradient(90deg, #0b1113, #384348 45%, #141b1e 74%, #080c0e);
+  box-shadow: inset 1px 0 rgba(255,255,255,.08), 0 0 0 2px #080b0d;
+}
+.bf-machine-forge__housing::before { left: -39px; }
+.bf-machine-forge__housing::after { right: -39px; transform: scaleX(-1); }
+
+.bf-machine-forge__top-rail {
+  position: absolute;
+  left: 28%;
+  right: 28%;
+  top: -11px;
+  height: 15px;
+  border: 1px solid #647176;
+  border-bottom: 0;
+  clip-path: polygon(12% 0, 88% 0, 100% 100%, 0 100%);
+  background: linear-gradient(180deg, #515c61, #161e21);
+  box-shadow: inset 0 1px rgba(255,255,255,.14);
+}
+
+.bf-machine-forge__header {
+  position: absolute;
+  left: 56px;
+  right: 56px;
+  top: 23px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(118,134,140,.35);
+}
+
+.bf-machine-forge__plate {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+.bf-machine-forge__plate strong { color: #aebcbe; font-size: .42rem; }
+.bf-machine-forge__plate small { color: #65777a; font-size: .31rem; }
+.bf-machine-forge__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #617679;
+  font: 700 .31rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+}
+.bf-machine-forge__status i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #55d7db;
+  box-shadow: 0 0 8px rgba(53,230,235,.5);
+}
+
+.bf-machine-forge__body {
+  position: absolute;
+  left: 39px;
+  right: 39px;
+  top: 56px;
+  height: 157px;
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) 62px;
+  gap: 8px;
+}
+
+/* Stepped service wings mimic the angular side armor in the visual authority. */
+.bf-machine-forge__service {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #4f5c61;
+  clip-path: polygon(22% 0, 100% 10%, 100% 90%, 22% 100%, 0 81%, 0 19%);
+  background:
+    linear-gradient(110deg, rgba(255,255,255,.07), transparent 25%),
+    repeating-linear-gradient(0deg, transparent 0 12px, rgba(255,255,255,.026) 12px 13px),
+    linear-gradient(180deg, #2e383c, #101618);
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.3), inset 0 1px rgba(255,255,255,.07);
+}
+.bf-machine-forge__service::before {
+  content: "";
+  position: absolute;
+  left: 17px;
+  right: 10px;
+  top: 22px;
+  height: 64px;
+  border: 1px solid #28363a;
+  background: repeating-linear-gradient(0deg, #0c1315 0 6px, #2c393d 6px 9px);
+  box-shadow: inset 0 0 7px rgba(0,0,0,.5);
+}
+.bf-machine-forge__service-trace {
+  position: absolute;
+  left: 14px;
+  right: 8px;
+  top: 99px;
+  height: 18px;
+  border-top: 2px solid rgba(61,226,230,.72);
+  border-right: 2px solid rgba(61,226,230,.52);
+  filter: drop-shadow(0 0 4px rgba(61,226,230,.28));
+}
+.bf-machine-forge__service i {
+  position: absolute;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  transform: translateX(-50%);
+  border: 1px solid #263035;
+  border-radius: 50%;
+  background: #667479;
+  box-shadow: 0 0 0 1px #090c0d;
+}
+.bf-machine-forge__service i:nth-child(2) { bottom: 34px; }
+.bf-machine-forge__service i:nth-child(3) { bottom: 20px; background: rgba(61,226,230,.68); box-shadow: 0 0 7px rgba(61,226,230,.22), 0 0 0 1px #090c0d; }
+.bf-machine-forge__service i:nth-child(4) { bottom: 6px; }
+.bf-machine-forge__service--right { transform: scaleX(-1); }
+.bf-machine-forge__service--right i { transform: translateX(50%); }
+
+/* The chamber is the dominant object: cyan glass surrounded by thick gunmetal armor. */
+.bf-machine-forge__chamber {
+  position: relative;
+  overflow: hidden;
+  border: 3px solid #657278;
+  clip-path: polygon(17% 0, 83% 0, 96% 11%, 96% 23%, 100% 28%, 100% 87%, 90% 100%, 10% 100%, 0 87%, 0 28%, 4% 23%, 4% 11%);
+  background:
+    linear-gradient(90deg, rgba(58,230,235,.12), transparent 18% 82%, rgba(58,230,235,.1)),
+    radial-gradient(ellipse at 50% 45%, rgba(27,235,241,.28), transparent 60%),
+    linear-gradient(180deg, #0a1a1d, #031012 72%, #061315);
+  box-shadow:
+    inset 0 0 0 5px #101719,
+    inset 0 0 42px rgba(39,229,235,.22),
+    0 0 0 2px #06090b,
+    0 0 15px rgba(39,229,235,.14);
+}
+.bf-machine-forge__chamber-rim {
+  position: absolute;
+  inset: 7px 9px 8px;
+  z-index: 1;
+  clip-path: polygon(16% 0, 84% 0, 100% 14%, 100% 88%, 90% 100%, 10% 100%, 0 88%, 0 14%);
+  border: 2px solid rgba(58,236,241,.8);
+  box-shadow: inset 0 0 11px rgba(58,236,241,.35), 0 0 8px rgba(58,236,241,.3);
+}
+.bf-machine-forge__chamber-frame {
+  position: absolute;
+  inset: 18px 21px 21px;
+  z-index: 1;
+  border: 1px solid rgba(93,233,236,.34);
+  background: linear-gradient(90deg, rgba(39,221,227,.045), transparent 50%, rgba(39,221,227,.04));
+  box-shadow: inset 0 0 22px rgba(58,230,235,.14);
+}
+.bf-machine-forge__data {
+  position: absolute;
+  z-index: 2;
+  left: 23px;
+  right: 23px;
+  top: 22px;
+  display: grid;
+  gap: 7px;
+  color: rgba(74,235,239,.87);
+  font: 700 .45rem/1.18 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .16em;
+  text-align: center;
+  text-shadow: 0 0 8px rgba(58,230,235,.42);
+}
+.bf-machine-forge__data span:nth-child(2) { opacity: .78; }
+.bf-machine-forge__data span:nth-child(3) { opacity: .58; }
+.bf-machine-forge__data span:nth-child(4) { opacity: .4; }
+.bf-machine-forge__scan {
+  position: absolute;
+  z-index: 3;
+  left: 11%;
+  right: 11%;
+  top: 74px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(91,247,250,.98), transparent);
+  box-shadow: 0 0 11px rgba(58,230,235,.52);
+}
+.bf-machine-forge__workbed {
+  position: absolute;
+  z-index: 2;
+  left: 15%;
+  right: 15%;
+  bottom: 16px;
+  height: 13px;
+  border: 1px solid #405156;
+  background: repeating-linear-gradient(90deg, #121c1f 0 11px, #2d3e42 11px 12px);
+  box-shadow: 0 5px 7px rgba(0,0,0,.52), 0 -3px 8px rgba(58,230,235,.08);
+}
+
+.bf-machine-forge__lower-deck {
+  position: absolute;
+  left: 51px;
+  right: 51px;
+  bottom: 29px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(105,121,127,.38);
+}
+.bf-machine-forge__bus {
+  width: 37%;
+  height: 7px;
+  border: 1px solid #2c3a3e;
+  background: linear-gradient(90deg, rgba(58,230,235,.22), #071012 28% 72%, rgba(58,230,235,.18));
+  box-shadow: inset 0 0 5px rgba(58,230,235,.08);
+}
+.bf-machine-forge__lower-label { margin-left: 9px; color: #5e7074; font: 600 .29rem/1 ui-monospace,SFMono-Regular,Menlo,monospace; letter-spacing: .1em; }
+.bf-machine-forge__lower-status { margin-left: auto; display: flex; gap: 5px; }
+.bf-machine-forge__lower-status i { width: 5px; height: 5px; border-radius: 50%; background: #526267; }
+.bf-machine-forge__lower-status i:nth-child(2) { background: rgba(58,230,235,.84); box-shadow: 0 0 6px rgba(58,230,235,.32); }
+
+/* External Forge nameplate: a separate physical label bolted beside the machine. */
+.bf-machine-forge__nameplate {
+  position: absolute;
+  left: -16px;
+  top: 71px;
+  z-index: 5;
+  width: 96px;
+  height: 43px;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  border: 1px solid #8a795f;
+  border-radius: 4px;
+  color: #e4ddd0;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.12), transparent 24%),
+    linear-gradient(180deg, #4d463b, #24231f 62%, #161714);
+  box-shadow: inset 0 1px rgba(255,255,255,.13), inset 0 -2px rgba(0,0,0,.65), 0 0 0 2px #0a0b0a, 0 5px 9px rgba(0,0,0,.4);
+  font-family: Georgia, 'Times New Roman', serif;
+}
+.bf-machine-forge__nameplate strong { font-size: 1rem; font-weight: 500; text-shadow: 0 1px #000; }
+.bf-machine-forge__nameplate i { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #9b8d73; box-shadow: inset 0 0 0 1px #4a4032; }
+.bf-machine-forge__nameplate i:nth-child(1) { left: 5px; top: 5px; }
+.bf-machine-forge__nameplate i:nth-child(2) { right: 5px; top: 5px; }
+.bf-machine-forge__nameplate i:nth-child(3) { left: 5px; bottom: 5px; }
+.bf-machine-forge__nameplate i:nth-child(4) { right: 5px; bottom: 5px; }
+
+/* Top emitter and blocky data plume reproduce the mockup's visual exhaust/flame. */
+.bf-machine-forge__emitter {
+  position: absolute;
+  left: 50%;
+  top: -2px;
+  z-index: 3;
+  width: 48px;
+  height: 27px;
+  transform: translateX(-50%);
+  clip-path: polygon(20% 0, 80% 0, 100% 55%, 82% 100%, 18% 100%, 0 55%);
+  border: 1px solid #5e6b70;
+  background: linear-gradient(180deg, #3c484c, #0c1315);
+  box-shadow: inset 0 1px rgba(255,255,255,.11), 0 0 0 2px #070a0c;
+}
+.bf-machine-forge__plume {
+  position: absolute;
+  left: 50%;
+  top: -64px;
+  z-index: 2;
+  width: 76px;
+  height: 69px;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 7px rgba(45,231,236,.38));
+}
+.bf-machine-forge__plume i { position: absolute; width: 7px; height: 7px; background: #35e8ed; box-shadow: 0 0 5px rgba(53,232,237,.56); opacity: .82; }
+.bf-machine-forge__plume i:nth-child(1) { left: 34px; bottom: 2px; width: 13px; height: 17px; }
+.bf-machine-forge__plume i:nth-child(2) { left: 27px; bottom: 16px; width: 10px; height: 12px; }
+.bf-machine-forge__plume i:nth-child(3) { left: 42px; bottom: 19px; width: 9px; height: 11px; }
+.bf-machine-forge__plume i:nth-child(4) { left: 20px; bottom: 28px; }
+.bf-machine-forge__plume i:nth-child(5) { left: 35px; bottom: 33px; width: 9px; height: 9px; }
+.bf-machine-forge__plume i:nth-child(6) { left: 49px; bottom: 35px; width: 6px; height: 8px; }
+.bf-machine-forge__plume i:nth-child(7) { left: 28px; bottom: 46px; width: 6px; height: 7px; }
+.bf-machine-forge__plume i:nth-child(8) { left: 43px; bottom: 49px; width: 5px; height: 6px; }
+.bf-machine-forge__plume i:nth-child(9) { left: 15px; bottom: 17px; width: 5px; height: 5px; opacity: .56; }
+.bf-machine-forge__plume i:nth-child(10) { left: 56px; bottom: 24px; width: 5px; height: 5px; opacity: .58; }
+.bf-machine-forge__plume i:nth-child(11) { left: 23px; bottom: 59px; width: 4px; height: 4px; opacity: .48; }
+.bf-machine-forge__plume i:nth-child(12) { left: 53px; bottom: 56px; width: 4px; height: 4px; opacity: .44; }
+.bf-machine-forge__plume i:nth-child(13) { left: 9px; bottom: 38px; width: 4px; height: 4px; opacity: .4; }
+.bf-machine-forge__plume i:nth-child(14) { left: 64px; bottom: 44px; width: 3px; height: 3px; opacity: .36; }
+
+/* Dark utility pipework rises beside the Forge; cyan conduits descend behind Tour. */
+.bf-machine-forge__pipe {
+  position: absolute;
+  top: 28px;
+  z-index: -3;
+  width: 48px;
+  height: 128px;
+  border-top: 6px solid #20292c;
+  border-bottom: 6px solid #111719;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.45));
+}
+.bf-machine-forge__pipe::before,
+.bf-machine-forge__pipe::after { content: ""; position: absolute; width: 6px; background: linear-gradient(90deg,#0b1012,#3b4549 48%,#111719); border: 1px solid #111719; }
+.bf-machine-forge__pipe::before { top: -45px; bottom: -6px; }
+.bf-machine-forge__pipe::after { top: -25px; bottom: 18px; }
+.bf-machine-forge__pipe--left { left: -30px; border-left: 6px solid #252f32; border-radius: 18px 0 0 18px; }
+.bf-machine-forge__pipe--left::before { left: 7px; }.bf-machine-forge__pipe--left::after { left: 20px; }
+.bf-machine-forge__pipe--right { right: -30px; border-right: 6px solid #252f32; border-radius: 0 18px 18px 0; }
+.bf-machine-forge__pipe--right::before { right: 7px; }.bf-machine-forge__pipe--right::after { right: 20px; }
+
+.bf-machine-forge__conduit {
+  position: absolute;
+  top: 150px;
+  z-index: -2;
+  width: 84px;
+  height: 91px;
+  border-bottom: 5px solid rgba(47,222,226,.78);
+  filter: drop-shadow(0 0 4px rgba(47,222,226,.26));
+}
+.bf-machine-forge__conduit--left { left: 5px; border-left: 5px solid rgba(47,222,226,.78); border-radius: 0 0 0 21px; transform: skewX(-4deg); }
+.bf-machine-forge__conduit--right { right: 5px; border-right: 5px solid rgba(47,222,226,.78); border-radius: 0 0 21px 0; transform: skewX(4deg); }
+
+.bf-machine-forge__fasteners i { position:absolute;z-index:3;width:6px;height:6px;border:1px solid #20282b;border-radius:50%;background:radial-gradient(circle at 38% 34%,#a6adaf 0 12%,#737f83 15% 35%,#252b2e 38% 100%);box-shadow:0 0 0 1px #090c0d; }
+.bf-machine-forge__fasteners i:nth-child(1){left:12px;top:12px}.bf-machine-forge__fasteners i:nth-child(2){right:12px;top:12px}.bf-machine-forge__fasteners i:nth-child(3){left:12px;bottom:14px}.bf-machine-forge__fasteners i:nth-child(4){right:12px;bottom:14px}.bf-machine-forge__fasteners i:nth-child(5){left:50%;top:10px}.bf-machine-forge__fasteners i:nth-child(6){left:50%;bottom:13px}
+
+.bf-machine-forge__mount { position:absolute;bottom:0;z-index:-1;width:35px;height:53px;border:1px solid #465157;border-top:0;background:linear-gradient(90deg,#0d1315,#354044 50%,#0d1315);box-shadow:inset 0 -2px rgba(0,0,0,.55); }
+.bf-machine-forge__mount--left{left:29%}.bf-machine-forge__mount--right{right:29%}
+.bf-machine-forge__base-rail { position:absolute;left:24%;right:24%;bottom:8px;height:17px;z-index:-1;border:1px solid #4c585d;border-radius:0 0 4px 4px;background:linear-gradient(180deg,#303a3e,#0f1517); }
+.bf-machine-forge__coupler { position:absolute;left:50%;bottom:-25px;width:82px;height:46px;transform:translateX(-50%);border:1px solid #4f5b60;border-top:0;border-radius:0 0 5px 5px;background:linear-gradient(90deg,#0e1416,#3a4549 37% 63%,#0e1416);box-shadow:inset 0 -2px rgba(0,0,0,.45),0 3px 5px rgba(0,0,0,.35); }
+
+.bf-machine-tour-card[data-expanded="true"] > .bf-machine-forge { opacity: .24; }
+
+@media (max-width:1024px) {
+  .bf-machine-forge { bottom: calc(100% - 2px); width: min(94vw, 410px); height: 216px; }
+  .bf-machine-forge__housing { inset: 10px 8% 20px; }
+  .bf-machine-forge__nameplate { left: -6px; top: 61px; width: 82px; height: 37px; }
+  .bf-machine-forge__nameplate strong { font-size: .86rem; }
+  .bf-machine-forge__plume { top: -53px; transform: translateX(-50%) scale(.8); }
+  .bf-machine-forge__header { left: 47px; right: 47px; top: 18px; height: 25px; }
+  .bf-machine-forge__plate strong { font-size: .36rem; }.bf-machine-forge__plate small { display: none; }.bf-machine-forge__status { display: none; }
+  .bf-machine-forge__body { left: 34px; right: 34px; top: 49px; height: 128px; grid-template-columns: 50px minmax(0,1fr) 50px; gap: 7px; }
+  .bf-machine-forge__data { top: 18px; font-size: .38rem; gap: 5px; }
+  .bf-machine-forge__lower-deck { left: 42px; right: 42px; bottom: 27px; }.bf-machine-forge__lower-label { display: none; }
+  .bf-machine-forge__conduit { top: 125px; height: 78px; width: 68px; }
+  .bf-machine-forge__pipe { transform: scale(.86); transform-origin: center top; }
+  .bf-machine-forge__mount { height: 43px; }.bf-machine-forge__coupler { bottom: -19px; height: 36px; width: 68px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine-forge,
+  .bf-machine-forge * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

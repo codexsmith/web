@@ -6,8 +6,10 @@ import { LabMachine, type LabMachineResolution } from "./LabMachine";
 import { BoundaryFascinatorInstrument } from "./BoundaryFascinatorInstrument";
 import { CardMathVisualization } from "./CardMathVisualization";
 import { FiveMinuteTourCard } from "./FiveMinuteTourCard";
+import { ForgeMachine } from "./ForgeMachine";
 import { MobileMachineStructureLayer } from "./MobileMachineStructureLayer";
 import { PublicationsLpVisualization } from "./PublicationsLpVisualization";
+import { ResearchExhaust } from "./ResearchExhaust";
 import { ResearchHopfVisualization } from "./ResearchHopfVisualization";
 import { startMachineCardFlight } from "./MachineCardFlightLayer";
 import "./physical-machine-experience.css";
@@ -75,6 +77,8 @@ export function PhysicalMachineExperience({
   const [internalResolution, setInternalResolution] = useState<LabMachineResolution>(initialResolution);
   const [apparatusHost, setApparatusHost] = useState<HTMLElement | null>(null);
   const [aboutHost, setAboutHost] = useState<HTMLElement | null>(null);
+  const [tourNodeHost, setTourNodeHost] = useState<HTMLElement | null>(null);
+  const [researchNodeHost, setResearchNodeHost] = useState<HTMLElement | null>(null);
   const [peopleIconHost, setPeopleIconHost] = useState<HTMLElement | null>(null);
   const [productsIconHost, setProductsIconHost] = useState<HTMLElement | null>(null);
   const [publicationsIconHost, setPublicationsIconHost] = useState<HTMLElement | null>(null);
@@ -187,6 +191,8 @@ export function PhysicalMachineExperience({
     if (sectionSurface) {
       setApparatusHost(null);
       setAboutHost(null);
+      setTourNodeHost(null);
+      setResearchNodeHost(null);
       setPeopleIconHost(null);
       setProductsIconHost(null);
       setPublicationsIconHost(null);
@@ -198,6 +204,9 @@ export function PhysicalMachineExperience({
       const apparatus = machineHostRef.current?.querySelector<HTMLElement>(".bf-machine__apparatus") ?? null;
       const about = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="about"]',
+      ) ?? null;
+      const researchNode = machineHostRef.current?.querySelector<HTMLElement>(
+        '.bf-machine__apparatus > .bf-machine-node[data-node-id="research"]',
       ) ?? null;
       const peopleIcon = machineHostRef.current?.querySelector<HTMLElement>(
         '.bf-machine__apparatus > .bf-machine-node[data-node-id="people"] .bf-machine-node__icon-well',
@@ -213,6 +222,7 @@ export function PhysicalMachineExperience({
       ) ?? null;
       setApparatusHost(apparatus);
       setAboutHost(about);
+      setResearchNodeHost(researchNode);
       setPeopleIconHost(peopleIcon);
       setProductsIconHost(productsIcon);
       setPublicationsIconHost(publicationsIcon);
@@ -221,6 +231,19 @@ export function PhysicalMachineExperience({
 
     return () => window.cancelAnimationFrame(frame);
   }, [activeResolution, sectionSurface]);
+
+  useEffect(() => {
+    if (sectionSurface || !tourHost) {
+      setTourNodeHost(null);
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setTourNodeHost(tourHost.querySelector<HTMLElement>(".bf-machine-tour-card") ?? null);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeResolution, sectionSurface, tourHost]);
 
   useEffect(() => {
     if (sectionSurface) return;
@@ -258,6 +281,20 @@ export function PhysicalMachineExperience({
 
   return (
     <div className="physical-machine-experience" ref={machineHostRef}>
+      {!sectionSurface && tourNodeHost
+        ? createPortal(
+            <ForgeMachine resolution={activeResolution} />,
+            tourNodeHost,
+            `forge-machine-${activeResolution}`,
+          )
+        : null}
+      {!sectionSurface && researchNodeHost
+        ? createPortal(
+            <ResearchExhaust resolution={activeResolution} />,
+            researchNodeHost,
+            `research-exhaust-${activeResolution}`,
+          )
+        : null}
       {!sectionSurface && researchIconHost
         ? createPortal(
             <ResearchHopfVisualization resolution={activeResolution} />,

@@ -78,6 +78,9 @@ import "./p16-public-interest-layout-repair.css";
 import "./p17-root-card-visual-grammar.css";
 import "./p18-core-projection-style-parity.css";
 import "./p19-products-responsive-accordion.css";
+import "./p20-lab-machine-physical-process.css";
+import "../components/bfux/lab-machine-mockup-fidelity.css";
+import "../components/bfux/forge-proportion-calibration.css";
 import "./machine-view-controls.css";
 import "./machine-card-flight.css";
 

@@ -1,0 +1,168 @@
+/* Workstream 28 — Lab Machine Physical UI Refinement.
+ *
+ * Shared material grammar only. Forge and Research Exhaust now live in their
+ * own React components and component-local stylesheets.
+ */
+
+.bf-machine[data-skin="physical"] {
+  --ws28-metal-edge: #596469;
+  --ws28-metal-face: #252c30;
+  --ws28-metal-dark: #0b0f11;
+  --ws28-metal-highlight: rgba(255, 255, 255, 0.13);
+  --ws28-fastener: #7a8589;
+  --ws28-research-glass: rgba(83, 31, 112, 0.42);
+  --ws28-research-glass-deep: rgba(29, 10, 42, 0.86);
+  --ws28-research-light: rgba(190, 117, 237, 0.34);
+  --ws28-research-line: rgba(207, 154, 241, 0.58);
+  --ws28-cyan-signal: #58cbd2;
+  --ws28-green-signal: #93ce70;
+}
+
+/* Shared physical primitive: machined edge/corner treatment. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__shell {
+  border-color: var(--ws28-metal-edge);
+  background:
+    linear-gradient(90deg, var(--ws28-metal-highlight), transparent 8% 92%, rgba(0, 0, 0, 0.42)),
+    linear-gradient(180deg, #31393d 0, var(--ws28-metal-face) 13%, #13191c 56%, var(--ws28-metal-dark) 100%);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 -3px rgba(0, 0, 0, 0.86),
+    0 0 0 2px #050708,
+    0 13px 24px rgba(0, 0, 0, 0.58);
+}
+
+/* Research is the reference implementation for smoked, illuminated acrylic.
+ * The light is kept inside the material rather than blooming around the card. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__face {
+  border: 1px solid rgba(211, 173, 237, 0.22);
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.075), transparent 18% 68%, rgba(206, 154, 237, 0.035)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 26% 54%, var(--ws28-research-light), transparent 30%),
+    linear-gradient(145deg, var(--ws28-research-glass), var(--ws28-research-glass-deep) 68%, rgba(10, 8, 13, 0.97));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.11),
+    inset 0 0 34px rgba(167, 84, 208, 0.11),
+    inset 0 -12px 26px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(1.2px);
+}
+
+/* Metal bindings make the transparent face read as a mounted material sheet. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__face::before,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__face::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  width: 8px;
+  z-index: 2;
+  pointer-events: none;
+  border: 1px solid #596368;
+  background: linear-gradient(90deg, #111719, #3b4549 48%, #151b1e);
+  box-shadow: inset 1px 0 rgba(255, 255, 255, 0.11), 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__face::before {
+  left: 7px;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__face::after {
+  right: 7px;
+  transform: scaleX(-1);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__fasteners {
+  z-index: 5;
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__fasteners i {
+  border-color: #2b3235;
+  background: radial-gradient(circle at 38% 34%, #9aa2a5 0 13%, var(--ws28-fastener) 15% 34%, #252b2e 38% 100%);
+  box-shadow: 0 0 0 1px #090c0d, inset 0 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Keep the core as a contained instrument/lens instead of a reactor effect. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-plate {
+  border-color: #626d72;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), transparent 34%),
+    linear-gradient(180deg, #30383c, #111719 72%);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.13),
+    inset 0 -2px rgba(0, 0, 0, 0.82),
+    0 0 0 4px #090c0e,
+    0 7px 15px rgba(0, 0, 0, 0.52);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__icon-well {
+  border-color: rgba(205, 154, 237, 0.4);
+  background:
+    radial-gradient(circle at 42% 36%, rgba(221, 179, 246, 0.2), transparent 28%),
+    radial-gradient(circle at 50% 56%, rgba(149, 73, 190, 0.28), rgba(22, 12, 28, 0.94) 68%);
+  box-shadow:
+    inset 0 0 18px rgba(185, 107, 226, 0.22),
+    0 0 7px rgba(185, 107, 226, 0.13);
+}
+
+/* The five-contact lower dock is the canonical exhaust interface. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__lower-dock {
+  border-color: #4f5b60;
+  background: linear-gradient(180deg, #2d363a, #101619 72%);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.56);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__lower-dock i {
+  background: var(--ws28-research-line);
+  box-shadow: 0 0 5px rgba(190, 117, 237, 0.2);
+}
+
+/* The boundary readout remains semantic text, but now reads as an inset
+ * instrument mounted behind the acrylic surface. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__boundary {
+  border-color: rgba(195, 154, 219, 0.25);
+  background: rgba(11, 10, 14, 0.54);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    inset 0 0 12px rgba(0, 0, 0, 0.42);
+}
+
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] header > span,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__boundary > small,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] footer small {
+  color: color-mix(in srgb, var(--ws28-research-line) 68%, #aeb6b7);
+}
+
+/* Hover/focus energizes existing material only; no card-scale HUD animation. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"]:is(:hover, :focus-visible) .bf-machine-node__face {
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.13),
+    inset 0 0 38px rgba(167, 84, 208, 0.15),
+    inset 0 -12px 26px rgba(0, 0, 0, 0.32);
+}
+
+/* Research and Tour remain the physical containing blocks for the Workstream
+ * 28 hardware components. */
+.bf-machine[data-skin="physical"] .bf-machine-tour-card,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] {
+  overflow: visible;
+}
+
+/* Branch taps retain the lower deck's process-plumbing treatment. */
+.bf-machine[data-skin="physical"] .bf-machine__lower-deck {
+  opacity: .82;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 14%, rgba(147,206,112,.08) 14% 14.5%, transparent 14.5% 28%),
+    linear-gradient(180deg, #1f282b, #0c1113);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] *,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] *::before,
+  .bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

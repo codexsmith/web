@@ -1,0 +1,304 @@
+.bf-research-exhaust {
+  position: absolute;
+  left: 46%;
+  top: calc(100% + 96px);
+  z-index: -1;
+  width: clamp(780px, 292%, 1060px);
+  height: 174px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  filter: drop-shadow(0 18px 22px rgba(0,0,0,.42));
+}
+
+/* Wide base machine: heavy end blocks + large recessed output bay. */
+.bf-research-exhaust__housing {
+  position: absolute;
+  inset: 0 0 15px;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(158px,18%) minmax(0,1fr) minmax(96px,11.5%);
+  gap: 11px;
+  padding: 20px 20px 25px;
+  border: 1px solid #626d72;
+  border-top-color: #7c888d;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.075), transparent 3% 97%, rgba(0,0,0,.42)),
+    repeating-linear-gradient(90deg, transparent 0 44px, rgba(255,255,255,.012) 44px 45px),
+    linear-gradient(180deg, #3b4448 0 12%, #293236 12% 76%, #0b1012 76% 100%);
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.17),
+    inset 0 -5px rgba(0,0,0,.88),
+    0 0 0 3px #050708,
+    0 11px 22px rgba(0,0,0,.5);
+}
+
+/* Thick service end-caps make the assembly read as a machine chassis. */
+.bf-research-exhaust__housing::before,
+.bf-research-exhaust__housing::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  bottom: 18px;
+  width: 29px;
+  z-index: -1;
+  border: 1px solid #566267;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 17px, rgba(255,255,255,.025) 17px 18px),
+    linear-gradient(90deg, #0c1214, #3a4549 43%, #1a2225 72%, #090d0f);
+  box-shadow: inset 1px 0 rgba(255,255,255,.08), 0 0 0 2px #070a0c;
+}
+.bf-research-exhaust__housing::before { left: -25px; border-radius: 8px 2px 2px 8px; }
+.bf-research-exhaust__housing::after { right: -25px; border-radius: 2px 8px 8px 2px; transform: scaleX(-1); }
+
+/* Research lower dock → physical trunk → manifold. */
+.bf-research-exhaust__riser {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 82px;
+  height: 116px;
+  transform: translateX(-50%);
+  border-left: 1px solid #606a6f;
+  border-right: 1px solid #30383c;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 8px, rgba(198,90,236,.25) 8px 11px, transparent 11px 16px),
+    linear-gradient(90deg, #0c1214, #384348 19% 81%, #0d1315);
+  box-shadow: inset 0 1px rgba(255,255,255,.06), 0 4px 7px rgba(0,0,0,.48), 0 0 8px rgba(190,87,232,.09);
+}
+.bf-research-exhaust__neck {
+  position: absolute;
+  left: 50%;
+  top: -30px;
+  z-index: 2;
+  width: 61px;
+  height: 34px;
+  transform: translateX(-50%);
+  border: 1px solid #536066;
+  background: linear-gradient(90deg,#0d1315,#3b464a 42% 58%,#0d1315);
+  box-shadow: inset 0 1px rgba(255,255,255,.08);
+}
+.bf-research-exhaust__coupler {
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  z-index: 4;
+  width: 134px;
+  height: 22px;
+  transform: translateX(-50%);
+  border: 1px solid #5c686d;
+  border-radius: 4px;
+  background: linear-gradient(90deg,#0c1214,#414c50 22% 78%,#0c1214);
+  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 4px 7px rgba(0,0,0,.45);
+}
+
+.bf-research-exhaust__identity,
+.bf-research-exhaust__service {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #4c585d;
+  border-radius: 4px;
+  background:
+    linear-gradient(110deg, rgba(255,255,255,.06), transparent 23%),
+    linear-gradient(180deg,#2d3539,#0d1315);
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.06);
+}
+
+/* Warm metal plate intentionally contrasts the cool output screen. */
+.bf-research-exhaust__identity-plate {
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  top: 13px;
+  min-height: 61px;
+  box-sizing: border-box;
+  padding: 9px 11px 8px;
+  border: 1px solid #807767;
+  border-radius: 3px;
+  color: #d6d0c5;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.12), transparent 25%),
+    linear-gradient(180deg,#514d45,#2d2d29 56%,#181b1a);
+  box-shadow: inset 0 1px rgba(255,255,255,.11), inset 0 -2px rgba(0,0,0,.55), 0 0 0 2px #090d0e;
+  font-family: ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing: .055em;
+}
+.bf-research-exhaust__identity-plate strong { display:block; font-size:.73rem; line-height:1.02; }
+.bf-research-exhaust__identity-plate small { display:block; margin-top:7px; color:#aaa99f; font-size:.38rem; letter-spacing:.12em; }
+
+.bf-research-exhaust__identity-vents {
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  bottom: 14px;
+  height: 48px;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 4px;
+}
+.bf-research-exhaust__identity-vents i,
+.bf-research-exhaust__service-vents i {
+  border: 1px solid #2d393d;
+  border-radius: 2px;
+  background: repeating-linear-gradient(0deg,#0b1113 0 4px,#303d41 4px 6px);
+  box-shadow: inset 0 0 5px rgba(0,0,0,.52);
+}
+
+/* The mockup's main output surface is a deep cyan CRT-like window. */
+.bf-research-exhaust__screen {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 2px solid #59666b;
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg,rgba(74,221,225,.035),transparent 23%),
+    radial-gradient(ellipse at 50% 48%,rgba(47,196,201,.075),transparent 68%),
+    #061012;
+  box-shadow:
+    inset 0 0 0 5px #11191c,
+    inset 0 0 31px rgba(58,221,225,.075),
+    0 0 0 1px #05090b;
+}
+.bf-research-exhaust__screen::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #263438;
+  box-shadow: inset 0 0 12px rgba(0,0,0,.55);
+  pointer-events: none;
+}
+.bf-research-exhaust__screen-grid {
+  position: absolute;
+  inset: 14px 16px 15px;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 20px,rgba(72,221,224,.035) 20px 21px),
+    repeating-linear-gradient(90deg,transparent 0 54px,rgba(72,221,224,.026) 54px 55px);
+}
+.bf-research-exhaust__screen-scan {
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  top: 46%;
+  height: 1px;
+  background: linear-gradient(90deg,transparent,rgba(71,230,233,.42),transparent);
+  box-shadow: 0 0 7px rgba(71,230,233,.2);
+}
+.bf-research-exhaust__screen-baseline { position:absolute;left:5%;right:5%;bottom:17px;height:1px;background:rgba(71,224,228,.14); }
+
+.bf-research-exhaust__screen-lines {
+  position: absolute;
+  z-index: 2;
+  left: 27px;
+  right: 24px;
+  top: 22px;
+  display: grid;
+  gap: 7px;
+  font: 700 .49rem/1.05 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing: .08em;
+  color: #72d9dc;
+  text-shadow: 0 0 5px rgba(73,218,222,.18);
+}
+.bf-research-exhaust__screen-line {
+  display: grid;
+  grid-template-columns: 14px 50px minmax(0,1fr) 54px 8px;
+  gap: 7px;
+  align-items: center;
+  white-space: nowrap;
+}
+.bf-research-exhaust__prompt { color:#82e3e6; font-size:.7rem; line-height:.7; }
+.bf-research-exhaust__time { color:#62c8cb; }
+.bf-research-exhaust__event { overflow:hidden; color:#75d7da; }
+.bf-research-exhaust__code { color:#57b5b9; text-align:right; }
+.bf-research-exhaust__screen-line i { width:6px;height:6px;border-radius:50%;background:#4bd981;box-shadow:0 0 6px rgba(75,217,129,.35); }
+.bf-research-exhaust__screen-line:nth-child(2) { opacity:.9; }
+.bf-research-exhaust__screen-line:nth-child(3) { opacity:.8; }
+.bf-research-exhaust__screen-line:nth-child(4) { opacity:.7; }
+.bf-research-exhaust__screen-line:nth-child(5) { opacity:.6; }
+
+/* Right service tower matches the mockup's three colored indicators over vents. */
+.bf-research-exhaust__service-lights {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  display: grid;
+  gap: 13px;
+}
+.bf-research-exhaust__service-lights i {
+  width: 13px;
+  height: 13px;
+  border: 1px solid #273136;
+  border-radius: 50%;
+  background: #bd4ae3;
+  box-shadow: 0 0 10px rgba(190,75,227,.45),0 0 0 2px #080c0e;
+}
+.bf-research-exhaust__service-lights i:nth-child(2) { background:#e9a52c; box-shadow:0 0 10px rgba(233,165,44,.4),0 0 0 2px #080c0e; }
+.bf-research-exhaust__service-lights i:nth-child(3) { background:#59d779; box-shadow:0 0 10px rgba(89,215,121,.4),0 0 0 2px #080c0e; }
+.bf-research-exhaust__service-vents { position:absolute;left:17px;right:17px;bottom:14px;height:53px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px; }
+
+/* Five exposed top ports physically receive the process cards above. */
+.bf-research-exhaust__rail {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: -14px;
+  height: 19px;
+  border: 1px solid #566267;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg,#384348,#101618);
+  box-shadow: inset 0 1px rgba(255,255,255,.09), 0 -2px 4px rgba(0,0,0,.25);
+}
+.bf-research-exhaust__rail i {
+  position: absolute;
+  top: -8px;
+  width: 15px;
+  height: 15px;
+  transform: translateX(-50%);
+  border: 1px solid #5b686d;
+  border-radius: 50%;
+  background: #101719;
+  box-shadow: inset 0 0 0 3px #080c0e,0 2px 4px rgba(0,0,0,.48);
+}
+.bf-research-exhaust__rail i:nth-child(1){left:8%}.bf-research-exhaust__rail i:nth-child(2){left:29%}.bf-research-exhaust__rail i:nth-child(3){left:50%}.bf-research-exhaust__rail i:nth-child(4){left:71%}.bf-research-exhaust__rail i:nth-child(5){left:92%}
+.bf-research-exhaust__rail i:nth-child(1),.bf-research-exhaust__rail i:nth-child(5){background:rgba(197,82,232,.56)}
+.bf-research-exhaust__rail i:nth-child(2),.bf-research-exhaust__rail i:nth-child(3),.bf-research-exhaust__rail i:nth-child(4){background:rgba(158,213,97,.6)}
+
+.bf-research-exhaust__routing { position:absolute;left:7%;right:7%;bottom:7px;height:12px; }
+.bf-research-exhaust__routing i { position:absolute;bottom:0;width:16%;height:9px;border-bottom:1px solid #3b4a4e;opacity:.86; }
+.bf-research-exhaust__routing i::after { content:"";position:absolute;right:0;bottom:-2px;width:5px;height:5px;border-radius:50%;background:#506469; }
+.bf-research-exhaust__routing i:nth-child(1){left:0;border-color:rgba(196,83,231,.34)}.bf-research-exhaust__routing i:nth-child(2){left:21%;border-color:rgba(153,211,96,.34)}.bf-research-exhaust__routing i:nth-child(3){left:42%;border-color:rgba(153,211,96,.34)}.bf-research-exhaust__routing i:nth-child(4){left:63%;border-color:rgba(153,211,96,.34)}.bf-research-exhaust__routing i:nth-child(5){left:84%;border-color:rgba(196,83,231,.34)}
+
+.bf-research-exhaust__lower-rail { position:absolute;left:7%;right:7%;bottom:0;height:16px;z-index:-1;border:1px solid #4b575c;border-top:0;border-radius:0 0 5px 5px;background:linear-gradient(180deg,#2b3539,#0c1214); }
+
+.bf-research-exhaust__fasteners i { position:absolute;z-index:5;width:6px;height:6px;border:1px solid #20282b;border-radius:50%;background:radial-gradient(circle at 38% 34%,#a0a9ac 0 12%,#6d797d 15% 35%,#252b2e 38% 100%);box-shadow:0 0 0 1px #090c0d; }
+.bf-research-exhaust__fasteners i:nth-child(1){left:9px;top:9px}.bf-research-exhaust__fasteners i:nth-child(2){right:9px;top:9px}.bf-research-exhaust__fasteners i:nth-child(3){left:9px;bottom:9px}.bf-research-exhaust__fasteners i:nth-child(4){right:9px;bottom:9px}.bf-research-exhaust__fasteners i:nth-child(5){left:18%;top:9px}.bf-research-exhaust__fasteners i:nth-child(6){left:18%;bottom:9px}.bf-research-exhaust__fasteners i:nth-child(7){right:11.5%;top:9px}.bf-research-exhaust__fasteners i:nth-child(8){right:11.5%;bottom:9px}
+
+/* Existing semantic cards are instrument faces mounted over the exhaust chassis. */
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="pipeline"],
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="method"],
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="timeline"],
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="governance"] { z-index: 8; }
+
+@media (max-width:1024px) {
+  .bf-research-exhaust { left:50%;top:calc(100% + 72px);width:min(97vw,780px);height:142px; }
+  .bf-research-exhaust__housing { grid-template-columns:minmax(120px,20%) minmax(0,1fr) minmax(78px,13%);gap:8px;padding:16px 14px 21px; }
+  .bf-research-exhaust__riser { height:82px;width:64px; }.bf-research-exhaust__coupler { width:108px;height:18px; }.bf-research-exhaust__neck { height:25px;width:50px;top:-22px; }
+  .bf-research-exhaust__identity-plate { left:10px;right:10px;top:10px;min-height:50px;padding:7px 8px; }.bf-research-exhaust__identity-plate strong { font-size:.6rem; }.bf-research-exhaust__identity-plate small { font-size:.31rem; }
+  .bf-research-exhaust__identity-vents { left:12px;right:12px;bottom:10px;height:35px; }.bf-research-exhaust__service-vents { left:12px;right:12px;bottom:10px;height:39px; }
+  .bf-research-exhaust__screen-lines { left:21px;right:18px;top:18px;gap:5px;font-size:.42rem; }.bf-research-exhaust__screen-line { grid-template-columns:12px 43px minmax(0,1fr) 46px 7px;gap:5px; }
+}
+
+@media (max-width:620px) {
+  .bf-research-exhaust { top:calc(100% + 56px);width:min(95vw,570px);height:121px; }
+  .bf-research-exhaust__housing { grid-template-columns:98px minmax(0,1fr) 60px;gap:6px;padding:12px 10px 18px; }
+  .bf-research-exhaust__identity-plate { left:7px;right:7px;top:7px;min-height:43px;padding:6px 7px; }.bf-research-exhaust__identity-plate strong { font-size:.5rem; }.bf-research-exhaust__identity-plate small { font-size:.27rem;margin-top:4px; }
+  .bf-research-exhaust__identity-vents { height:27px;bottom:8px; }.bf-research-exhaust__service-lights { top:12px;gap:8px; }.bf-research-exhaust__service-lights i { width:9px;height:9px; }.bf-research-exhaust__service-vents { height:30px;bottom:8px; }
+  .bf-research-exhaust__screen-lines { left:17px;right:14px;top:15px;gap:4px;font-size:.35rem; }.bf-research-exhaust__screen-line { grid-template-columns:9px 34px minmax(0,1fr) 35px 5px;gap:4px; }.bf-research-exhaust__event { text-overflow:clip; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .bf-research-exhaust,
+  .bf-research-exhaust * { animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important; }
+}
