@@ -1,401 +1,160 @@
 .bf-machine-forge {
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 14px);
-  z-index: 0;
-  width: clamp(330px, 175%, 460px);
-  height: 156px;
+  bottom: calc(100% + 4px);
+  z-index: -1;
+  width: clamp(350px, 168%, 470px);
+  height: 248px;
   transform: translateX(-50%);
   pointer-events: none;
-  filter: drop-shadow(0 16px 18px rgba(0, 0, 0, .34));
+  filter: drop-shadow(0 18px 22px rgba(0,0,0,.36));
 }
 
 .bf-machine-forge__housing {
   position: absolute;
-  inset: 0;
+  inset: 0 4% 22px;
   box-sizing: border-box;
   overflow: visible;
-  border: 1px solid #59666b;
-  border-top-color: #78858a;
-  border-radius: 6px 6px 4px 4px;
+  border: 1px solid #5d696e;
+  border-top-color: #7a878c;
+  border-radius: 10px 10px 7px 7px;
+  clip-path: polygon(13% 0,87% 0,100% 15%,100% 82%,91% 96%,68% 96%,64% 100%,36% 100%,32% 96%,9% 96%,0 82%,0 15%);
   background:
-    linear-gradient(90deg, rgba(255,255,255,.055), transparent 4% 96%, rgba(0,0,0,.32)),
-    linear-gradient(180deg, #343d41 0 18%, #20282c 18% 82%, #0c1113 82% 100%);
+    linear-gradient(90deg,rgba(255,255,255,.07),transparent 7% 93%,rgba(0,0,0,.35)),
+    linear-gradient(180deg,#394247 0 12%,#242d31 12% 82%,#0c1113 82% 100%);
   box-shadow:
     inset 0 1px rgba(255,255,255,.16),
-    inset 0 -3px rgba(0,0,0,.8),
-    0 0 0 2px #050708,
-    0 10px 20px rgba(0,0,0,.48);
+    inset 0 -4px rgba(0,0,0,.82),
+    0 0 0 3px #050708,
+    0 12px 22px rgba(0,0,0,.5);
 }
 
 .bf-machine-forge__housing::before,
 .bf-machine-forge__housing::after {
-  content: "";
-  position: absolute;
-  top: 28px;
-  bottom: 27px;
-  width: 11px;
-  border: 1px solid #4f5b60;
-  background: linear-gradient(90deg, #0f1517, #364045 46%, #101618);
-  box-shadow: inset 1px 0 rgba(255,255,255,.08), 0 0 0 1px #080b0d;
+  content:"";
+  position:absolute;
+  top:44px;
+  bottom:38px;
+  width:46px;
+  border:1px solid #4e5b60;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 13px,rgba(88,203,210,.08) 13px 15px),
+    linear-gradient(90deg,#0e1416,#354045 48%,#101618);
+  box-shadow: inset 1px 0 rgba(255,255,255,.07),0 0 0 2px #080b0d;
 }
-
-.bf-machine-forge__housing::before {
-  left: -10px;
-  border-radius: 3px 0 0 3px;
-}
-
-.bf-machine-forge__housing::after {
-  right: -10px;
-  border-radius: 0 3px 3px 0;
-  transform: scaleX(-1);
-}
+.bf-machine-forge__housing::before { left:-30px; transform:skewY(-7deg); border-radius:8px 2px 2px 8px; }
+.bf-machine-forge__housing::after { right:-30px; transform:skewY(7deg) scaleX(-1); border-radius:2px 8px 8px 2px; }
 
 .bf-machine-forge__top-rail {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: -8px;
-  height: 8px;
-  border: 1px solid #566268;
-  border-bottom: 0;
-  border-radius: 3px 3px 0 0;
-  background: linear-gradient(180deg, #3d474b, #131a1d);
-  box-shadow: inset 0 1px rgba(255,255,255,.11), 0 -2px 4px rgba(0,0,0,.38);
+  position:absolute;
+  left:18%;
+  right:18%;
+  top:-10px;
+  height:12px;
+  border:1px solid #5c686d;
+  border-bottom:0;
+  border-radius:6px 6px 0 0;
+  background:linear-gradient(180deg,#434d51,#141b1e);
+  box-shadow:inset 0 1px rgba(255,255,255,.12);
 }
 
 .bf-machine-forge__header {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  top: 10px;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(110,126,132,.46);
+  position:absolute;
+  left:42px;
+  right:42px;
+  top:18px;
+  height:31px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(110,126,132,.46);
 }
 
 .bf-machine-forge__plate {
-  display: flex;
-  align-items: baseline;
-  gap: 9px;
-  padding-left: 4px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .1em;
-  text-shadow: 0 0 5px rgba(88,203,210,.16);
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing:.1em;
+  text-shadow:0 0 5px rgba(88,203,210,.16);
 }
-
-.bf-machine-forge__plate strong {
-  color: #d8ecec;
-  font-size: .64rem;
-}
-
-.bf-machine-forge__plate small {
-  color: #91b7b9;
-  font-size: .41rem;
-}
-
-.bf-machine-forge__status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-right: 4px;
-  color: #718b8d;
-  font: 600 .34rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .12em;
-}
-
-.bf-machine-forge__status i {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #67cdd1;
-  box-shadow: 0 0 7px rgba(88,203,210,.42);
-}
+.bf-machine-forge__plate strong { color:#d8ecec; font-size:.7rem; }
+.bf-machine-forge__plate small { color:#91b7b9; font-size:.4rem; }
+.bf-machine-forge__status { display:flex;align-items:center;gap:6px;color:#718b8d;font:600 .34rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em; }
+.bf-machine-forge__status i { width:6px;height:6px;border-radius:50%;background:#67cdd1;box-shadow:0 0 8px rgba(88,203,210,.5); }
 
 .bf-machine-forge__body {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  top: 43px;
-  height: 82px;
-  display: grid;
-  grid-template-columns: 46px minmax(0, 1fr) 46px;
-  gap: 8px;
+  position:absolute;
+  left:35px;
+  right:35px;
+  top:58px;
+  height:140px;
+  display:grid;
+  grid-template-columns:58px minmax(0,1fr) 58px;
+  gap:10px;
 }
 
 .bf-machine-forge__service {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #3f4a4f;
-  border-radius: 3px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid #465257;
+  border-radius:4px;
   background:
-    repeating-linear-gradient(0deg, transparent 0 9px, rgba(255,255,255,.025) 9px 10px),
-    linear-gradient(180deg, #222b2f, #0d1315);
-  box-shadow: inset 0 0 0 2px rgba(0,0,0,.27), inset 0 1px rgba(255,255,255,.05);
+    repeating-linear-gradient(0deg,transparent 0 11px,rgba(255,255,255,.028) 11px 12px),
+    linear-gradient(180deg,#252e32,#0c1214);
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.05);
 }
-
 .bf-machine-forge__service::before {
-  content: "";
-  position: absolute;
-  inset: 9px 9px auto;
-  height: 28px;
-  border: 1px solid #263337;
-  border-radius: 2px;
-  background:
-    repeating-linear-gradient(0deg, #111719 0 3px, #283338 3px 5px);
-  opacity: .8;
+  content:"";position:absolute;inset:14px 11px auto;height:54px;border:1px solid #263337;border-radius:2px;
+  background:repeating-linear-gradient(0deg,#111719 0 5px,#29363a 5px 8px);opacity:.86;
 }
-
-.bf-machine-forge__service i {
-  position: absolute;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  transform: translateX(-50%);
-  border: 1px solid #263035;
-  border-radius: 50%;
-  background: #697579;
-  box-shadow: 0 0 0 1px #090c0d;
-}
-
-.bf-machine-forge__service i:nth-child(1) { bottom: 24px; }
-.bf-machine-forge__service i:nth-child(2) { bottom: 14px; background: rgba(88,203,210,.58); }
-.bf-machine-forge__service i:nth-child(3) { bottom: 4px; }
-
-.bf-machine-forge__service--right {
-  transform: scaleX(-1);
-}
-
-.bf-machine-forge__service--right i {
-  transform: translateX(50%);
-}
+.bf-machine-forge__service i { position:absolute;left:50%;width:7px;height:7px;transform:translateX(-50%);border:1px solid #263035;border-radius:50%;background:#697579;box-shadow:0 0 0 1px #090c0d; }
+.bf-machine-forge__service i:nth-child(1){bottom:35px}.bf-machine-forge__service i:nth-child(2){bottom:21px;background:rgba(88,203,210,.65)}.bf-machine-forge__service i:nth-child(3){bottom:7px}
+.bf-machine-forge__service--right{transform:scaleX(-1)}.bf-machine-forge__service--right i{transform:translateX(50%)}
 
 .bf-machine-forge__chamber {
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #49585d;
-  border-top-color: #607177;
-  border-radius: 4px;
+  position:relative;
+  overflow:hidden;
+  border:3px solid #4e5d62;
+  border-top-color:#68797f;
+  border-radius:12px 12px 7px 7px;
+  clip-path:polygon(16% 0,84% 0,100% 14%,100% 88%,91% 100%,9% 100%,0 88%,0 14%);
   background:
-    linear-gradient(90deg, rgba(88,203,210,.06), transparent 20% 80%, rgba(88,203,210,.045)),
-    radial-gradient(ellipse at 50% 45%, rgba(67,190,196,.12), transparent 54%),
-    #071012;
-  box-shadow:
-    inset 0 0 0 3px #11191c,
-    inset 0 0 24px rgba(88,203,210,.08),
-    0 0 0 1px #070a0c;
+    linear-gradient(90deg,rgba(88,203,210,.08),transparent 21% 79%,rgba(88,203,210,.06)),
+    radial-gradient(ellipse at 50% 46%,rgba(45,230,236,.22),transparent 58%),
+    #061012;
+  box-shadow:inset 0 0 0 4px #11191c,inset 0 0 36px rgba(88,203,210,.16),0 0 0 2px #070a0c;
+}
+.bf-machine-forge__chamber-frame { position:absolute;inset:14px 17px 19px;border:2px solid rgba(88,203,210,.36);border-radius:4px;box-shadow:inset 0 0 22px rgba(88,203,210,.15),0 0 8px rgba(88,203,210,.14); }
+.bf-machine-forge__data { position:absolute;left:20px;right:20px;top:18px;display:grid;gap:8px;color:rgba(98,230,235,.82);font:700 .48rem/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.18em;text-align:center;text-shadow:0 0 7px rgba(88,203,210,.32); }
+.bf-machine-forge__data span:nth-child(2){opacity:.7}.bf-machine-forge__data span:nth-child(3){opacity:.5}
+.bf-machine-forge__scan { position:absolute;left:10%;right:10%;top:54px;height:2px;background:linear-gradient(90deg,transparent,rgba(88,235,240,.95),transparent);box-shadow:0 0 10px rgba(88,203,210,.45);opacity:.84; }
+.bf-machine-forge__workbed { position:absolute;left:15%;right:15%;bottom:15px;height:13px;border:1px solid #3b4b50;border-radius:2px;background:repeating-linear-gradient(90deg,#141d20 0 11px,#2b3a3f 11px 12px);box-shadow:0 4px 6px rgba(0,0,0,.5); }
+
+.bf-machine-forge__lower-deck { position:absolute;left:39px;right:39px;bottom:31px;height:20px;display:flex;align-items:center;border-top:1px solid rgba(99,114,120,.4); }
+.bf-machine-forge__bus { width:34%;height:6px;border:1px solid #29373a;border-radius:1px;background:linear-gradient(90deg,rgba(88,203,210,.16),#0b1113 24% 76%,rgba(88,203,210,.14)); }
+.bf-machine-forge__lower-label { margin-left:9px;color:#65767a;font:600 .31rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.11em; }
+.bf-machine-forge__lower-status { margin-left:auto;display:flex;gap:5px; }.bf-machine-forge__lower-status i{width:5px;height:5px;border-radius:50%;background:#56666a}.bf-machine-forge__lower-status i:nth-child(2){background:rgba(88,203,210,.8);box-shadow:0 0 6px rgba(88,203,210,.3)}
+
+.bf-machine-forge__fasteners i { position:absolute;z-index:3;width:6px;height:6px;border:1px solid #20282b;border-radius:50%;background:radial-gradient(circle at 38% 34%,#a2aaad 0 12%,#707c80 15% 35%,#252b2e 38% 100%);box-shadow:0 0 0 1px #090c0d; }
+.bf-machine-forge__fasteners i:nth-child(1){left:10px;top:10px}.bf-machine-forge__fasteners i:nth-child(2){right:10px;top:10px}.bf-machine-forge__fasteners i:nth-child(3){left:10px;bottom:10px}.bf-machine-forge__fasteners i:nth-child(4){right:10px;bottom:10px}.bf-machine-forge__fasteners i:nth-child(5){left:50%;top:9px}.bf-machine-forge__fasteners i:nth-child(6){left:50%;bottom:9px}
+
+.bf-machine-forge__mount { position:absolute;bottom:2px;z-index:-1;width:34px;height:46px;border:1px solid #465157;border-top:0;background:linear-gradient(90deg,#0d1315,#354044 50%,#0d1315);box-shadow:inset 0 -2px rgba(0,0,0,.55); }
+.bf-machine-forge__mount--left{left:28%}.bf-machine-forge__mount--right{right:28%}
+.bf-machine-forge__base-rail { position:absolute;left:22%;right:22%;bottom:9px;height:16px;z-index:-1;border:1px solid #4c585d;border-radius:0 0 4px 4px;background:linear-gradient(180deg,#303a3e,#0f1517); }
+.bf-machine-forge__coupler { position:absolute;left:50%;bottom:-18px;width:78px;height:38px;transform:translateX(-50%);border:1px solid #4f5b60;border-top:0;border-radius:0 0 5px 5px;background:linear-gradient(90deg,#0e1416,#3a4549 38% 62%,#0e1416);box-shadow:inset 0 -2px rgba(0,0,0,.45); }
+
+.bf-machine-tour-card[data-expanded="true"] > .bf-machine-forge { opacity:.24; }
+
+@media (max-width:1024px){
+  .bf-machine-forge{bottom:calc(100% + 4px);width:min(92vw,400px);height:205px}
+  .bf-machine-forge__housing{inset:0 5% 20px}
+  .bf-machine-forge__header{left:34px;right:34px;top:14px;height:27px}
+  .bf-machine-forge__plate strong{font-size:.58rem}.bf-machine-forge__plate small{font-size:.33rem}.bf-machine-forge__status{display:none}
+  .bf-machine-forge__body{left:29px;right:29px;top:49px;height:112px;grid-template-columns:46px minmax(0,1fr) 46px;gap:8px}
+  .bf-machine-forge__data{top:15px;font-size:.4rem;gap:6px}
+  .bf-machine-forge__lower-deck{left:32px;right:32px;bottom:28px}.bf-machine-forge__lower-label{display:none}
+  .bf-machine-forge__mount{height:37px}.bf-machine-forge__coupler{bottom:-14px;height:30px;width:65px}
 }
 
-.bf-machine-forge__chamber-frame {
-  position: absolute;
-  inset: 8px 10px 14px;
-  border: 1px solid rgba(88,203,210,.18);
-  border-radius: 2px;
-  box-shadow: inset 0 0 11px rgba(88,203,210,.06);
-}
-
-.bf-machine-forge__data {
-  position: absolute;
-  left: 17px;
-  right: 17px;
-  top: 13px;
-  display: grid;
-  gap: 4px;
-  color: rgba(98,211,215,.72);
-  font: 600 .39rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .16em;
-  text-align: center;
-}
-
-.bf-machine-forge__data span:nth-child(2) { opacity: .62; }
-.bf-machine-forge__data span:nth-child(3) { opacity: .42; }
-
-.bf-machine-forge__scan {
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 34px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(88,203,210,.72), transparent);
-  box-shadow: 0 0 7px rgba(88,203,210,.3);
-  opacity: .72;
-}
-
-.bf-machine-forge__workbed {
-  position: absolute;
-  left: 17%;
-  right: 17%;
-  bottom: 10px;
-  height: 9px;
-  border: 1px solid #39494e;
-  border-radius: 2px;
-  background:
-    repeating-linear-gradient(90deg, #141d20 0 10px, #28373b 10px 11px),
-    #11191c;
-  box-shadow: 0 3px 5px rgba(0,0,0,.48);
-}
-
-.bf-machine-forge__lower-deck {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 8px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  border-top: 1px solid rgba(99,114,120,.4);
-}
-
-.bf-machine-forge__bus {
-  width: 30%;
-  height: 5px;
-  border: 1px solid #29373a;
-  border-radius: 1px;
-  background: linear-gradient(90deg, rgba(88,203,210,.12), #0b1113 24% 76%, rgba(88,203,210,.1));
-}
-
-.bf-machine-forge__lower-label {
-  margin-left: 9px;
-  color: #65767a;
-  font: 600 .31rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .11em;
-}
-
-.bf-machine-forge__lower-status {
-  margin-left: auto;
-  display: flex;
-  gap: 4px;
-}
-
-.bf-machine-forge__lower-status i {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #56666a;
-}
-
-.bf-machine-forge__lower-status i:nth-child(2) {
-  background: rgba(88,203,210,.72);
-  box-shadow: 0 0 5px rgba(88,203,210,.24);
-}
-
-.bf-machine-forge__fasteners i {
-  position: absolute;
-  z-index: 3;
-  width: 5px;
-  height: 5px;
-  border: 1px solid #20282b;
-  border-radius: 50%;
-  background: radial-gradient(circle at 38% 34%, #a2aaad 0 12%, #707c80 15% 35%, #252b2e 38% 100%);
-  box-shadow: 0 0 0 1px #090c0d;
-}
-
-.bf-machine-forge__fasteners i:nth-child(1) { left: 6px; top: 6px; }
-.bf-machine-forge__fasteners i:nth-child(2) { right: 6px; top: 6px; }
-.bf-machine-forge__fasteners i:nth-child(3) { left: 6px; bottom: 6px; }
-.bf-machine-forge__fasteners i:nth-child(4) { right: 6px; bottom: 6px; }
-.bf-machine-forge__fasteners i:nth-child(5) { left: 50%; top: 6px; }
-.bf-machine-forge__fasteners i:nth-child(6) { left: 50%; bottom: 6px; }
-
-.bf-machine-forge__mount {
-  position: absolute;
-  bottom: -18px;
-  z-index: -1;
-  width: 24px;
-  height: 25px;
-  border: 1px solid #465157;
-  border-top: 0;
-  background: linear-gradient(90deg, #0d1315, #354044 50%, #0d1315);
-  box-shadow: inset 0 -2px rgba(0,0,0,.55);
-}
-
-.bf-machine-forge__mount--left { left: 24%; }
-.bf-machine-forge__mount--right { right: 24%; }
-
-.bf-machine-forge__base-rail {
-  position: absolute;
-  left: 17%;
-  right: 17%;
-  bottom: -12px;
-  height: 10px;
-  z-index: -1;
-  border: 1px solid #4c585d;
-  border-radius: 0 0 3px 3px;
-  background: linear-gradient(180deg, #303a3e, #0f1517);
-}
-
-.bf-machine-forge__coupler {
-  position: absolute;
-  left: 50%;
-  bottom: -29px;
-  width: 56px;
-  height: 17px;
-  transform: translateX(-50%);
-  border: 1px solid #4f5b60;
-  border-top: 0;
-  border-radius: 0 0 4px 4px;
-  background:
-    linear-gradient(90deg, #0e1416, #3a4549 38% 62%, #0e1416),
-    linear-gradient(180deg, #30393d, #111719);
-  box-shadow: inset 0 -2px rgba(0,0,0,.45);
-}
-
-.bf-machine-tour-card[data-expanded="true"] > .bf-machine-forge {
-  opacity: .28;
-}
-
-@media (max-width: 1024px) {
-  .bf-machine-forge {
-    bottom: calc(100% + 10px);
-    width: min(92vw, 390px);
-    height: 132px;
-  }
-
-  .bf-machine-forge__header {
-    left: 11px;
-    right: 11px;
-    top: 8px;
-    height: 24px;
-  }
-
-  .bf-machine-forge__plate strong { font-size: .55rem; }
-  .bf-machine-forge__plate small { font-size: .35rem; }
-  .bf-machine-forge__status { display: none; }
-
-  .bf-machine-forge__body {
-    left: 11px;
-    right: 11px;
-    top: 38px;
-    height: 69px;
-    grid-template-columns: 36px minmax(0, 1fr) 36px;
-    gap: 6px;
-  }
-
-  .bf-machine-forge__data {
-    top: 10px;
-    font-size: .34rem;
-    gap: 3px;
-  }
-
-  .bf-machine-forge__lower-deck {
-    left: 11px;
-    right: 11px;
-    bottom: 6px;
-    height: 15px;
-  }
-
-  .bf-machine-forge__lower-label { display: none; }
-  .bf-machine-forge__mount { height: 20px; bottom: -15px; }
-  .bf-machine-forge__coupler { bottom: -24px; height: 14px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .bf-machine-forge,
-  .bf-machine-forge * {
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important;
-  }
-}
+@media (prefers-reduced-motion:reduce){.bf-machine-forge,.bf-machine-forge *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
