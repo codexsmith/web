@@ -134,156 +134,215 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* Core-projection calibration from the localhost screenshot.                  */
-/*                                                                            */
-/* At <=1024px the existing Core projection intentionally hides the lower      */
-/* process cards. Keep that semantic contract and make the machinery itself    */
-/* carry the mockup's physical hierarchy instead of forcing hidden nodes back. */
+/* Full projection: match the integrated Workstream 28 composition.            */
 /* -------------------------------------------------------------------------- */
 
-@media (max-width: 1024px) {
-  .bf-machine[data-skin="physical"] .bf-machine-forge__data {
-    gap: 7px;
-    top: 17px;
-    bottom: 27px;
+@media (min-width: 1025px) {
+  /* The reference is not a card grid. It is one assembled machine with the
+   * semantic cards mounted as serviceable control faces. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="about"] {
+    left: 15.9%;
+    top: 50.2%;
+    width: 14.6%;
+    height: 10.3%;
   }
 
-  .bf-machine[data-skin="physical"] .bf-machine-forge__data span {
-    max-height: 86px;
-    font-size: .31rem;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="people"] {
+    left: 36.2%;
+    top: 30.4%;
+    width: 15.8%;
+    height: 12.7%;
   }
 
-  .bf-machine[data-skin="physical"] .bf-machine-forge__nameplate {
-    left: -42px;
-    top: 82px;
-    width: 104px;
-    height: 46px;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="products"] {
+    left: 52.9%;
+    top: 31.6%;
+    width: 14.8%;
+    height: 12.2%;
   }
 
-  .bf-machine[data-skin="physical"] .bf-research-exhaust__rail i::after {
-    height: 48px;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="publications"] {
+    left: 69.2%;
+    top: 33.8%;
+    width: 15.4%;
+    height: 11.6%;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-forge[data-resolution="focus"] {
-    bottom: calc(100% - 11px);
-    width: min(47vw, 468px);
-    height: 244px;
-    transform: translateX(-45%);
-    filter: drop-shadow(0 18px 23px rgba(0,0,0,.44));
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="research"] {
+    left: 32.4%;
+    top: 43.0%;
+    width: 41.2%;
+    height: 22.7%;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-forge__housing {
-    inset: 9px 5.5% 19px;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="pipeline"] {
+    left: 30.6%;
+    top: 66.9%;
+    width: 11.6%;
+    height: 9.4%;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-forge__body {
-    left: 35px;
-    right: 35px;
-    top: 52px;
-    height: 149px;
-    grid-template-columns: 58px minmax(0,1fr) 58px;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="method"] {
+    left: 42.4%;
+    top: 67.8%;
+    width: 10.5%;
+    height: 9.0%;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-forge__chamber-rim {
-    border-color: rgba(74, 242, 246, .9);
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="timeline"] {
+    left: 53.5%;
+    top: 68.5%;
+    width: 11.7%;
+    height: 9.1%;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="governance"] {
+    left: 65.4%;
+    top: 65.9%;
+    width: 15.8%;
+    height: 10.8%;
+  }
+
+  /* Tour remains mechanically attached to About, so moving About places both
+   * the launcher and the Forge anchor in the correct left-hand bay. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"]
+    .bf-machine__apparatus > .bf-machine-node[data-node-id="about"] > .bf-machine-tour-card[data-expanded="false"] {
+    bottom: calc(100% + .46vw);
+    width: 100%;
+    height: clamp(76px, 5.4vw, 88px);
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-forge[data-resolution="mid"] {
+    bottom: calc(100% - 7px);
+    width: clamp(390px, 188%, 530px);
+    height: 292px;
+    transform: translateX(-46%);
+    filter: drop-shadow(0 21px 26px rgba(0,0,0,.46));
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-forge__housing {
+    inset: 10px 5.5% 22px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-forge__body {
+    left: 38px;
+    right: 38px;
+    top: 57px;
+    height: 178px;
+    grid-template-columns: 66px minmax(0,1fr) 66px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-forge__nameplate {
+    left: -66px;
+    top: 91px;
+    width: 103px;
+    height: 47px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-forge__plume {
+    top: -48px;
+    transform: translateX(-50%) scale(1.08);
+    transform-origin: center bottom;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-forge__chamber-rim {
+    border-color: rgba(72, 244, 248, .92);
     box-shadow:
-      inset 0 0 13px rgba(58,236,241,.42),
-      0 0 11px rgba(58,236,241,.34);
+      inset 0 0 15px rgba(58,236,241,.45),
+      0 0 13px rgba(58,236,241,.38);
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-forge__pipe {
-    opacity: .92;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-forge__data span {
+    max-height: 112px;
+    font-size: .36rem;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-forge__conduit {
-    filter: drop-shadow(0 0 5px rgba(53, 228, 233, .32));
+  /* The Exhaust is one base chassis beneath Research and the four process
+   * instruments, not a separate card or a loose footer. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust[data-resolution="mid"] {
+    left: 43%;
+    top: calc(100% + 83px);
+    width: clamp(850px, 245%, 1060px);
+    height: 184px;
+    filter: drop-shadow(0 18px 23px rgba(0,0,0,.43));
   }
 
-  /* The Core screenshot showed the exhaust as a detached pedestal. Pull it
-   * upward, widen it beyond Research, and let the dark output bay dominate. */
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust[data-resolution="focus"] {
-    left: 50%;
-    top: calc(100% + 31px);
-    width: min(84vw, 900px);
-    height: 158px;
-    filter: drop-shadow(0 16px 20px rgba(0,0,0,.4));
-  }
-
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__housing {
-    grid-template-columns: minmax(138px, 19%) minmax(0, 1fr) minmax(82px, 12%);
-    gap: 10px;
-    padding: 14px 14px 21px;
-    border-color: #606d72;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__housing {
+    grid-template-columns: minmax(172px, 18%) minmax(0,1fr) minmax(108px, 12%);
+    gap: 12px;
+    padding: 18px 18px 25px;
+    border-color: #626f74;
     background:
-      linear-gradient(90deg, rgba(255,255,255,.055), transparent 3% 97%, rgba(0,0,0,.36)),
-      linear-gradient(180deg, #394246 0 16%, #242d31 16% 77%, #0b1113 77% 100%);
+      linear-gradient(90deg, rgba(255,255,255,.06), transparent 3% 97%, rgba(0,0,0,.36)),
+      linear-gradient(180deg, #3a4347 0 16%, #252e32 16% 78%, #0b1113 78% 100%);
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__screen {
-    border-color: #66767c;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__identity-plate {
+    left: 14px;
+    right: 14px;
+    top: 14px;
+    min-height: 66px;
+  }
+
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__screen {
+    border-color: #66757b;
     background:
       linear-gradient(180deg, rgba(74,221,225,.065), transparent 24%),
       radial-gradient(ellipse at 50% 52%, rgba(47,196,201,.14), transparent 68%),
       #031014;
     box-shadow:
       inset 0 0 0 5px #0d171a,
-      inset 0 0 40px rgba(58,221,225,.14),
+      inset 0 0 42px rgba(58,221,225,.14),
       0 0 0 1px #04090b,
       0 0 10px rgba(58,221,225,.08);
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__screen-lines {
-    left: 23px;
-    right: 20px;
-    top: 19px;
-    gap: 6px;
-    font-size: .46rem;
-    opacity: .92;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__screen-lines {
+    left: 30px;
+    right: 27px;
+    top: 24px;
+    gap: 8px;
+    font-size: .55rem;
+    opacity: .94;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__screen-grid {
-    inset: 12px 14px 14px;
-    opacity: .72;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__screen-line {
+    grid-template-columns: 14px 54px minmax(0,1fr) 58px 8px;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__riser {
-    height: 46px;
-    width: 70px;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__screen-grid {
+    inset: 14px 18px 17px;
+    opacity: .78;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__coupler {
-    width: 116px;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__riser {
+    height: 100px;
+    width: 78px;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__rail {
-    left: 8%;
-    right: 8%;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__coupler {
+    width: 134px;
+    height: 22px;
   }
 
-  /* Empty sockets stay obvious in Core, where the process cards are correctly
-   * omitted by the projection. They become literal card mounts again in Full. */
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust__rail i {
-    width: 17px;
-    height: 17px;
-    top: -9px;
-    box-shadow:
-      inset 0 0 0 4px #080c0e,
-      0 2px 4px rgba(0,0,0,.5),
-      0 0 7px rgba(161,105,201,.1);
-  }
-}
-
-@media (max-width: 620px) {
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-machine-forge[data-resolution="focus"] {
-    width: min(88vw, 430px);
-    height: 220px;
-    transform: translateX(-47%);
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__rail {
+    left: 9%;
+    right: 9%;
+    top: -15px;
   }
 
-  .bf-machine[data-skin="physical"][data-resolution="focus"] .bf-research-exhaust[data-resolution="focus"] {
-    top: calc(100% + 25px);
-    width: min(96vw, 620px);
-    height: 135px;
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-research-exhaust__rail i::after {
+    height: 76px;
+  }
+
+  /* The process cards should feel bolted to the base chassis rather than
+   * floating above it. */
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="pipeline"],
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="method"],
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="timeline"],
+  .bf-machine[data-skin="physical"][data-resolution="mid"] .bf-machine-node[data-node-id="governance"] {
+    z-index: 10;
+    filter: drop-shadow(0 8px 7px rgba(0,0,0,.38));
   }
 }
 
