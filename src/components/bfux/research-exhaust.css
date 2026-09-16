@@ -1,3 +1,9 @@
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"]::before,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"]::after,
+.bf-machine[data-skin="physical"] .bf-machine-node[data-node-id="research"] .bf-machine-node__lower-dock::after {
+  content: none !important;
+}
+
 .bf-research-exhaust {
   position: absolute;
   left: -17%;
