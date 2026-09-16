@@ -1,3 +1,8 @@
+.bf-machine[data-skin="physical"] .bf-machine-tour-card::before,
+.bf-machine[data-skin="physical"] .bf-machine-tour-card::after {
+  content: none !important;
+}
+
 .bf-machine-forge {
   position: absolute;
   left: 50%;
