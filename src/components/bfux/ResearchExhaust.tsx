@@ -1,6 +1,8 @@
 import type { LabMachineResolution } from "./LabMachine";
 import "./research-exhaust.css";
 
+const exhaustChannels = ["CH-01", "CH-02", "CH-03", "CH-04", "CH-05"];
+
 export function ResearchExhaust({ resolution }: { resolution: LabMachineResolution }) {
   return (
     <div
@@ -31,6 +33,17 @@ export function ResearchExhaust({ resolution }: { resolution: LabMachineResoluti
         <div className="bf-research-exhaust__screen">
           <span className="bf-research-exhaust__screen-grid" />
           <span className="bf-research-exhaust__screen-scan" />
+          <div className="bf-research-exhaust__screen-lines">
+            {exhaustChannels.map((channel) => (
+              <div className="bf-research-exhaust__screen-line" key={channel}>
+                <span className="bf-research-exhaust__prompt">›</span>
+                <span className="bf-research-exhaust__time">--:--</span>
+                <span className="bf-research-exhaust__event">EVENT CHANNEL</span>
+                <span className="bf-research-exhaust__code">{channel}</span>
+                <i />
+              </div>
+            ))}
+          </div>
           <span className="bf-research-exhaust__screen-baseline" />
         </div>
 
