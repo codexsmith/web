@@ -19,29 +19,6 @@ const capabilityStrip = [
   ["04", "Measurement & verification"],
 ] as const;
 
-const institutionCards = [
-  {
-    index: "01",
-    title: "Research",
-    description: "Theory, experiments, and working papers across computation, mathematics, physics, information, and scientific method.",
-  },
-  {
-    index: "02",
-    title: "Apparatus",
-    description: "Registries, evidence systems, transforms, and operational machinery for making complex work inspectable.",
-  },
-  {
-    index: "03",
-    title: "Products",
-    description: "Durable utility-bearing things made for people to use, learn from, support, buy, license, or carry elsewhere.",
-  },
-  {
-    index: "04",
-    title: "Projects",
-    description: "Places where the method is applied, transferred, deployed, or deliberately stress-tested against real systems.",
-  },
-] as const;
-
 const methodSteps = [
   ["01", "Show the structure", "Representation", "Make the important parts, relationships, and boundaries visible."],
   ["02", "Track what changes", "State", "Know where the system is now, what can change, and what must remain true."],
@@ -58,15 +35,15 @@ const featuredWork = [
   {
     tag: "PRODUCT",
     title: "Projectr / YouTube Knowledge Explorer",
-    description: "A source-linked software wedge for turning long-form video into searchable, timestamped, structured knowledge.",
+    description: "A source-linked software tool for turning long-form video into searchable, timestamped, structured knowledge.",
   },
   {
-    tag: "RESEARCH APPARATUS",
+    tag: "RESEARCH TOOL",
     title: "Agentic Scientific Method",
     description: "Executable machinery for research, evidence handling, critique, verification, defect localization, and repair.",
   },
   {
-    tag: "PUBLIC INTEREST",
+    tag: "APPLIED WORK",
     title: "Public Infrastructure Analysis",
     description: "Applied systems analysis for public records, workflows, institutions, uncertainty, and consequence-bearing processes.",
   },
@@ -149,19 +126,6 @@ export function InstitutionalHomePreview() {
           </aside>
         </section>
 
-        <section className={styles.institutionCards} aria-label="Institutional routes">
-          {institutionCards.map((card) => (
-            <article className={styles.institutionCard} key={card.title}>
-              <span className={styles.cardIndex}>{card.index}</span>
-              <div>
-                <h2>{card.title}</h2>
-                <p>{card.description}</p>
-              </div>
-              <span className={styles.cardArrow} aria-hidden="true">→</span>
-            </article>
-          ))}
-        </section>
-
         <section className={styles.methodSection}>
           <div className={styles.sectionLead}>
             <p className={styles.sectionIndex}>OUR APPROACH</p>
@@ -198,9 +162,9 @@ export function InstitutionalHomePreview() {
           <div className={styles.sectionHeader}>
             <div>
               <p className={styles.sectionIndex}>FEATURED WORK</p>
-              <h2>Research that leaves the Lab.</h2>
+              <h2>Things we are building, testing, and publishing.</h2>
             </div>
-            <span>Selected products, projects, and research machinery</span>
+            <span>Concrete examples first. The labels simply tell you what kind of work each one is.</span>
           </div>
 
           <div className={styles.featuredGrid}>

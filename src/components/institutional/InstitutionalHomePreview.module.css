@@ -1900,3 +1900,33 @@
   font-size: 0.96rem;
   line-height: 1.48;
 }
+
+
+/* Homepage sequence refinement: do not teach the Lab's internal work ontology
+ * as an abstract card row. The distinctions now appear only on concrete
+ * Featured Work objects. */
+.institutionCards {
+  display: none;
+}
+
+.featuredTag {
+  color: var(--royal-blue-deep);
+  background:
+    linear-gradient(180deg, #f8eebf 0%, #d8bd65 100%);
+}
+
+.featuredCard:nth-child(3) .featuredTag {
+  border-color: color-mix(in srgb, var(--osha-blue) 52%, #5f4e1f);
+  box-shadow:
+    inset 3px 0 0 var(--osha-blue),
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 1px rgba(89,70,21,.18);
+}
+
+.featuredCard:nth-child(4) .featuredTag {
+  border-color: color-mix(in srgb, var(--osha-green) 52%, #5f4e1f);
+  box-shadow:
+    inset 3px 0 0 var(--osha-green),
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 1px rgba(89,70,21,.18);
+}
