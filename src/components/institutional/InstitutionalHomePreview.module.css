@@ -1097,3 +1097,341 @@
     transform: none;
   }
 }
+
+
+/* BFUX physical panel pass.
+ * Editorial hierarchy remains institutional; the surfaces now read as
+ * machined plates mounted into a larger instrument rather than paper cards.
+ * Travel is reserved for controls that actually act. */
+.page {
+  --bfux-panel-face: #f4f6f5;
+  --bfux-panel-face-high: #ffffff;
+  --bfux-panel-bed: #e6eaea;
+  --bfux-panel-edge: rgba(16, 32, 54, 0.34);
+  --bfux-panel-edge-dark: rgba(16, 32, 54, 0.52);
+  --bfux-panel-groove: rgba(16, 32, 54, 0.16);
+  --bfux-fastener: #697782;
+}
+
+/* A section is a chassis bay: slightly recessed, ruled, and bounded. */
+.capabilityStrip,
+.institutionCards,
+.methodSection,
+.featuredSection,
+.posture {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.52), transparent 14%),
+    linear-gradient(180deg, #eef1f1 0%, #e8ecec 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(16, 32, 54, 0.08);
+}
+
+.institutionCards,
+.featuredSection {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 12%),
+    linear-gradient(180deg, #edf0ef, #e7ebea);
+}
+
+/* Mounted plates: crisp bevel, a darker lower edge, and corner fasteners.
+ * These do not move on hover: they are fixtures, not buttons. */
+.institutionCard,
+.featuredCard {
+  position: relative;
+  transform: none;
+  overflow: hidden;
+  border: 1px solid var(--bfux-panel-edge);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0 2px, transparent 2px),
+    linear-gradient(180deg, #fbfcfb 0%, #f0f3f2 100%);
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.95),
+    inset -1px 0 0 rgba(16, 32, 54, 0.06),
+    inset 0 -1px 0 rgba(16, 32, 54, 0.12),
+    0 2px 0 rgba(16, 32, 54, 0.22),
+    0 5px 10px rgba(16, 32, 54, 0.08);
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.institutionCard::after,
+.featuredCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  background:
+    radial-gradient(circle at 8px 8px, rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) 8px, rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px),
+    radial-gradient(circle at 8px calc(100% - 8px), rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px);
+}
+
+.cardIndex,
+.featuredTag {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 19px;
+  padding: 0 6px;
+  border: 1px solid rgba(16, 32, 54, 0.14);
+  border-radius: 1px;
+  background: #e8eceb;
+  box-shadow:
+    inset 0 1px 2px rgba(16, 32, 54, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.82);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.11em;
+}
+
+/* Capability strip becomes a row of inset identification plates. */
+.capability {
+  min-height: 74px;
+  position: relative;
+  margin: 7px 0;
+  padding: 16px 26px;
+  border-top: 1px solid var(--bfux-panel-edge);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  border-right: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, #e9eded 0%, #f7f8f7 18%, #f2f4f3 100%);
+  box-shadow:
+    inset 0 2px 4px rgba(16, 32, 54, 0.11),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.capability::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border: 1px solid rgba(16, 32, 54, 0.32);
+  border-radius: 50%;
+  background: #73808a;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    0 1px 1px rgba(16,32,54,.24);
+}
+
+.capability strong {
+  letter-spacing: 0.01em;
+}
+
+/* The method is literally fitted into a recessed instrument tray. */
+.methodGrid {
+  gap: 7px;
+  padding: 9px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, #dbe0df, #e7ebea);
+  box-shadow:
+    inset 0 3px 7px rgba(16, 32, 54, 0.18),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.methodStep,
+.methodStep:nth-child(-n + 2) {
+  min-height: 132px;
+  margin: 0;
+  padding: 17px 20px 18px 22px;
+  border: 1px solid rgba(16, 32, 54, 0.25);
+  border-radius: 1px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92) 0 2px, transparent 2px),
+    linear-gradient(180deg, #f9faf9, #eff2f1);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 2px 0 rgba(16, 32, 54, 0.16);
+}
+
+.methodStep span {
+  display: inline-block;
+  padding: 2px 5px;
+  border: 1px solid rgba(16, 32, 54, 0.15);
+  background: #e6eae9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.61rem;
+  letter-spacing: 0.12em;
+}
+
+.featuredVisual {
+  margin: 7px 0 7px 7px;
+  min-height: 156px;
+  border: 1px solid rgba(16, 32, 54, 0.48);
+  border-radius: 1px;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.08),
+    inset 0 3px 8px rgba(0, 0, 0, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Working posture reads as one broad engraved plate. */
+.posture {
+  margin: 18px clamp(24px, 4vw, 62px);
+  border: 1px solid var(--bfux-panel-edge);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.9) 0 2px, transparent 2px),
+    linear-gradient(180deg, #f5f7f6, #ecefee);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -1px 0 rgba(16, 32, 54, 0.12),
+    0 2px 0 rgba(16, 32, 54, 0.2),
+    0 7px 15px rgba(16, 32, 54, 0.08);
+}
+
+/* Actual controls are raised above their bezels and visibly travel when
+ * pressed. Keep the geometry square and instrument-like. */
+.primaryAction,
+.secondaryAction {
+  position: relative;
+  min-height: 44px;
+  padding: 0 20px;
+  cursor: pointer;
+  user-select: none;
+  border-width: 1px;
+  border-radius: 2px;
+  transform: translateY(-4px);
+  transition:
+    transform 70ms ease,
+    box-shadow 70ms ease,
+    background 70ms ease,
+    color 70ms ease,
+    border-color 70ms ease;
+}
+
+.primaryAction {
+  border-color: #07111f;
+  background:
+    linear-gradient(180deg, #21364f 0%, #102036 58%, #0a1729 100%);
+  text-shadow: 0 1px 0 rgba(0,0,0,.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.2),
+    inset 1px 0 0 rgba(255,255,255,.07),
+    inset -1px 0 0 rgba(0,0,0,.18),
+    0 5px 0 #06101d,
+    0 8px 13px rgba(16,32,54,.22);
+}
+
+.secondaryAction {
+  border-color: rgba(16, 32, 54, 0.46);
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7f8f7 45%, #e8eceb 100%);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 1px 0 0 rgba(255,255,255,.9),
+    inset -1px 0 0 rgba(16,32,54,.08),
+    0 5px 0 #9ca7aa,
+    0 8px 13px rgba(16,32,54,.15);
+}
+
+.primaryAction span,
+.secondaryAction span {
+  display: inline-block;
+  transition: transform 90ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .institutionCard:hover,
+  .featuredCard:hover {
+    transform: none;
+    border-color: var(--bfux-panel-edge-dark);
+    box-shadow:
+      inset 1px 0 0 rgba(255, 255, 255, 0.95),
+      inset -1px 0 0 rgba(16, 32, 54, 0.06),
+      inset 0 -1px 0 rgba(16, 32, 54, 0.12),
+      0 2px 0 rgba(16, 32, 54, 0.24),
+      0 6px 12px rgba(16, 32, 54, 0.1);
+  }
+
+  .primaryAction:hover,
+  .secondaryAction:hover {
+    transform: translateY(-5px);
+  }
+
+  .primaryAction:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.24),
+      inset 1px 0 0 rgba(255,255,255,.08),
+      inset -1px 0 0 rgba(0,0,0,.2),
+      0 6px 0 #06101d,
+      0 10px 16px rgba(16,32,54,.25);
+  }
+
+  .secondaryAction:hover {
+    border-color: rgba(16, 32, 54, 0.62);
+    box-shadow:
+      inset 0 1px 0 #fff,
+      inset 1px 0 0 rgba(255,255,255,.95),
+      inset -1px 0 0 rgba(16,32,54,.09),
+      0 6px 0 #929da0,
+      0 10px 16px rgba(16,32,54,.17);
+  }
+
+  .primaryAction:hover span,
+  .secondaryAction:hover span {
+    transform: translateX(2px);
+  }
+}
+
+.primaryAction:active,
+.secondaryAction:active {
+  transform: translateY(1px);
+  transition-duration: 30ms;
+}
+
+.primaryAction:active {
+  background: linear-gradient(180deg, #0d1b2e, #14263d);
+  box-shadow:
+    inset 0 3px 7px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 0 #06101d,
+    0 2px 4px rgba(16,32,54,.16);
+}
+
+.secondaryAction:active {
+  background: linear-gradient(180deg, #dfe4e3, #eef1f0);
+  box-shadow:
+    inset 0 3px 7px rgba(16,32,54,.2),
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 0 0 #929da0,
+    0 2px 4px rgba(16,32,54,.12);
+}
+
+.primaryAction:active span,
+.secondaryAction:active span {
+  transform: translateX(0);
+}
+
+@media (max-width: 680px) {
+  .posture {
+    margin: 14px 18px;
+  }
+
+  .capability {
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction {
+    transition: none;
+  }
+
+  .primaryAction:hover,
+  .secondaryAction:hover,
+  .primaryAction:active,
+  .secondaryAction:active {
+    transform: translateY(-2px);
+  }
+}
