@@ -1510,3 +1510,357 @@
     border-bottom: 0;
   }
 }
+
+
+/* Institutional palette v1
+ * Royal blue + old gold define the Lab's institutional hardware.
+ * OSHA-style colors are reserved for small informational/status accents,
+ * not broad branding fields. */
+.page {
+  --royal-blue: #153a78;
+  --royal-blue-deep: #0b2554;
+  --royal-blue-dark: #071a3d;
+  --royal-blue-light: #dfe8f6;
+  --old-gold: #b89a47;
+  --old-gold-bright: #d2b75f;
+  --old-gold-dark: #776126;
+
+  --osha-red: #c83a32;
+  --osha-orange: #e77b24;
+  --osha-yellow: #e4bd27;
+  --osha-green: #3f7f4f;
+  --osha-blue: #2873b9;
+
+  --institution-ink: #0b2147;
+  --institution-muted: #52627b;
+  --institution-paper: #f4f7fb;
+  --institution-surface: #ffffff;
+  --institution-soft: #e8edf5;
+  --institution-line: rgba(11, 33, 71, 0.18);
+  --institution-line-strong: rgba(11, 33, 71, 0.38);
+  --institution-accent: var(--old-gold-dark);
+
+  --bfux-panel-face: #f2f6fb;
+  --bfux-panel-face-high: #ffffff;
+  --bfux-panel-bed: #dbe4ef;
+  --bfux-panel-edge: rgba(11, 37, 84, 0.42);
+  --bfux-panel-edge-dark: rgba(7, 26, 61, 0.62);
+  --bfux-panel-groove: rgba(11, 37, 84, 0.18);
+  --bfux-fastener: #657797;
+  --bfux-drop: rgba(7, 26, 61, 0.14);
+  --bfux-press: rgba(7, 26, 61, 0.2);
+
+  background:
+    linear-gradient(180deg, #f8faff 0%, #edf2f8 100%);
+}
+
+/* Institutional rails: blue hardware with gold engraved lines. */
+.header {
+  border-bottom: 3px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, #1a4387 0%, var(--royal-blue) 54%, #11336b 100%);
+  color: #f7f9fc;
+  box-shadow:
+    inset 0 -1px 0 rgba(255,255,255,.12),
+    0 2px 8px rgba(7, 26, 61, 0.14);
+}
+
+.header .brandCopy strong,
+.header .nav,
+.header .labLink {
+  color: #f8f9fb;
+}
+
+.header .brandCopy span {
+  color: var(--old-gold-bright);
+}
+
+.header .logo {
+  filter: saturate(.8) brightness(1.8);
+}
+
+.header .labLink {
+  border-bottom-color: var(--old-gold-bright);
+}
+
+.footer {
+  border-top: 3px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #f4f7fb;
+}
+
+.footerBrand strong,
+.footerNav,
+.footerMeta,
+.footerMeta a {
+  color: #f4f7fb;
+}
+
+.footerBrand span {
+  color: var(--old-gold-bright);
+}
+
+.footerLogo {
+  filter: saturate(.75) brightness(1.8);
+}
+
+/* Hero: bright editorial face framed by institutional blue/gold. */
+.hero {
+  border-bottom-color: var(--old-gold);
+  background:
+    linear-gradient(90deg, #ffffff 0%, #fbfcff 49.8%, #dfe7f2 50%);
+}
+
+.heroCopy {
+  border-left: 6px solid var(--old-gold);
+  background:
+    linear-gradient(90deg, rgba(21, 58, 120, 0.025), transparent 28%),
+    #fff;
+}
+
+.hero h1 {
+  color: var(--royal-blue-deep);
+}
+
+.eyebrow,
+.sectionIndex {
+  color: var(--old-gold-dark);
+}
+
+.lead {
+  color: #20385f;
+}
+
+.bodyCopy {
+  color: #586882;
+}
+
+.heroVisual {
+  border-left-color: var(--old-gold);
+  background:
+    linear-gradient(180deg, #d8e4f0 0%, #c4d3e2 30%, #8fa8bf 68%, #54779b 100%);
+}
+
+.mountainFar {
+  background: rgba(40, 78, 121, 0.38);
+}
+
+.mountainNear {
+  background: rgba(12, 44, 84, 0.58);
+}
+
+.water {
+  background:
+    linear-gradient(180deg, rgba(219, 231, 240, 0.78), rgba(64, 101, 139, 0.95)),
+    repeating-linear-gradient(0deg, transparent 0 13px, rgba(255, 255, 255, 0.15) 13px 14px);
+}
+
+.structure {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 45%),
+    var(--royal-blue-deep);
+  box-shadow: -24px 0 60px rgba(7, 26, 61, 0.2);
+}
+
+.structure::before {
+  background: var(--royal-blue);
+  border-bottom-color: rgba(210, 183, 95, 0.52);
+}
+
+.structureWords {
+  color: var(--old-gold-bright);
+}
+
+.structure strong {
+  color: #fff8df;
+}
+
+/* Panel bays become cool blue steel instead of beige/grey paper. */
+.institutionCards,
+.methodSection,
+.featuredSection,
+.posture {
+  border-bottom-color: rgba(7, 26, 61, 0.48);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.46), transparent 13%),
+    linear-gradient(180deg, #e9eef6 0%, #dbe4ef 100%);
+}
+
+.institutionCards,
+.featuredSection {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.52), transparent 12%),
+    linear-gradient(180deg, #e5ebf4, #d7e1ed);
+}
+
+.institutionCard,
+.featuredCard,
+.methodStep,
+.methodStep:nth-child(-n + 2),
+.posture {
+  border-color: rgba(11, 37, 84, 0.42);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.95) 0 2px, transparent 2px),
+    linear-gradient(180deg, #f9fbff 0%, #eaf0f8 100%);
+  box-shadow:
+    inset 1px 0 0 rgba(255,255,255,.96),
+    inset -1px 0 0 rgba(11,37,84,.07),
+    inset 0 -1px 0 rgba(11,37,84,.14),
+    0 2px 0 rgba(7,26,61,.24),
+    0 6px 13px rgba(7,26,61,.11);
+}
+
+.institutionCard h2,
+.featuredCard h3,
+.methodStep h3,
+.sectionLead h2,
+.sectionHeader h2,
+.posture h2 {
+  color: var(--royal-blue-deep);
+}
+
+.institutionCard::after,
+.featuredCard::after {
+  border-color: rgba(255, 255, 255, 0.42);
+  background:
+    radial-gradient(circle at 8px 8px, #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) 8px, #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px),
+    radial-gradient(circle at 8px calc(100% - 8px), #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px);
+}
+
+.cardIndex,
+.featuredTag,
+.methodStep span {
+  border-color: rgba(119, 97, 38, 0.38);
+  background:
+    linear-gradient(180deg, #f7e8aa 0%, #d6bc67 100%);
+  color: #3d3212;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 1px rgba(89,70,21,.18);
+}
+
+.methodGrid,
+.methodWorkbench .capabilityStrip {
+  border-color: rgba(7, 26, 61, 0.66);
+  background:
+    linear-gradient(180deg, #b9c8da 0%, #d1dce8 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(7,26,61,.2),
+    inset 0 -1px 0 rgba(255,255,255,.72);
+}
+
+.methodWorkbench .capability {
+  border-right-color: rgba(7,26,61,.26);
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #e7eef7 100%);
+}
+
+.methodWorkbench .capability strong {
+  color: var(--royal-blue-deep);
+}
+
+/* OSHA-style signal accents: small indicators, never the main field. */
+.methodWorkbench .capability:nth-child(1)::before {
+  background: var(--osha-blue);
+}
+.methodWorkbench .capability:nth-child(2)::before {
+  background: var(--osha-green);
+}
+.methodWorkbench .capability:nth-child(3)::before {
+  background: var(--osha-orange);
+}
+.methodWorkbench .capability:nth-child(4)::before {
+  background: var(--osha-yellow);
+}
+
+.methodStep:nth-child(1) {
+  border-top: 4px solid var(--osha-blue);
+}
+.methodStep:nth-child(2) {
+  border-top: 4px solid var(--osha-green);
+}
+.methodStep:nth-child(3) {
+  border-top: 4px solid var(--osha-orange);
+}
+.methodStep:nth-child(4) {
+  border-top: 4px solid var(--osha-red);
+}
+
+/* Primary pushbutton: royal-blue housing with a gold actuator face. */
+.primaryAction {
+  border-color: #6f581d;
+  background:
+    linear-gradient(180deg, #e2c96f 0%, var(--old-gold-bright) 34%, #b18f35 100%);
+  color: var(--royal-blue-dark) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 1px 0 0 rgba(255,255,255,.18),
+    inset -1px 0 0 rgba(79,58,11,.16),
+    0 5px 0 #6d571e,
+    0 8px 14px rgba(7,26,61,.23);
+}
+
+.secondaryAction {
+  border-color: var(--royal-blue-deep);
+  background:
+    linear-gradient(180deg, #2a5aa5 0%, var(--royal-blue) 47%, #0f326b 100%);
+  color: #fff !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.2),
+    inset 1px 0 0 rgba(255,255,255,.08),
+    inset -1px 0 0 rgba(0,0,0,.16),
+    0 5px 0 #071a3d,
+    0 8px 14px rgba(7,26,61,.22);
+}
+
+.primaryAction:active {
+  background: linear-gradient(180deg, #aa8a31, #c5a750);
+  box-shadow:
+    inset 0 3px 7px rgba(81,61,14,.3),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 0 #6d571e,
+    0 2px 4px rgba(7,26,61,.15);
+}
+
+.secondaryAction:active {
+  background: linear-gradient(180deg, #0d2d61, #1b4382);
+  box-shadow:
+    inset 0 3px 7px rgba(0,0,0,.3),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 0 #071a3d,
+    0 2px 4px rgba(7,26,61,.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primaryAction:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.62),
+      inset 1px 0 0 rgba(255,255,255,.2),
+      inset -1px 0 0 rgba(79,58,11,.18),
+      0 6px 0 #6d571e,
+      0 10px 17px rgba(7,26,61,.27);
+  }
+
+  .secondaryAction:hover {
+    border-color: var(--old-gold-bright);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.24),
+      inset 1px 0 0 rgba(255,255,255,.1),
+      inset -1px 0 0 rgba(0,0,0,.18),
+      0 6px 0 #071a3d,
+      0 10px 17px rgba(7,26,61,.27);
+  }
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible,
+.labLink:focus-visible,
+.brand:focus-visible,
+.footerMeta a:focus-visible {
+  outline-color: var(--old-gold-bright);
+}
