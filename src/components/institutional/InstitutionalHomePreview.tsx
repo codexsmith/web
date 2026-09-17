@@ -149,15 +149,6 @@ export function InstitutionalHomePreview() {
           </aside>
         </section>
 
-        <section className={styles.capabilityStrip} aria-label="Boundary First Labs capabilities">
-          {capabilityStrip.map(([index, label]) => (
-            <div className={styles.capability} key={label}>
-              <span>{index}</span>
-              <strong>{label}</strong>
-            </div>
-          ))}
-        </section>
-
         <section className={styles.institutionCards} aria-label="Institutional routes">
           {institutionCards.map((card) => (
             <article className={styles.institutionCard} key={card.title}>
@@ -178,14 +169,25 @@ export function InstitutionalHomePreview() {
             <p>Knowledge is treated as a system: represented, transformed, tested, measured, revised, and acted upon.</p>
           </div>
 
-          <div className={styles.methodGrid}>
-            {methodSteps.map(([index, title, description]) => (
-              <article className={styles.methodStep} key={title}>
-                <span>{index}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
-            ))}
+          <div className={styles.methodWorkbench}>
+            <div className={styles.capabilityStrip} aria-label="What the Lab produces and supports">
+              {capabilityStrip.map(([index, label]) => (
+                <div className={styles.capability} key={label}>
+                  <span>{index}</span>
+                  <strong>{label}</strong>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.methodGrid}>
+              {methodSteps.map(([index, title, description]) => (
+                <article className={styles.methodStep} key={title}>
+                  <span>{index}</span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
