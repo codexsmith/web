@@ -1,0 +1,74 @@
+.switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid rgba(23, 32, 29, 0.24);
+  border-radius: 999px;
+  background: rgba(250, 248, 242, 0.94);
+  color: #17201d;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0 8px 24px rgba(23, 32, 29, 0.08);
+}
+
+.label {
+  padding: 0 8px 0 7px;
+  color: #6b716d;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.switcher a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: inherit;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.switcher a small {
+  font-size: 0.52rem;
+  font-weight: 700;
+  opacity: 0.62;
+}
+
+.switcher a:hover,
+.switcher a:focus-visible {
+  background: rgba(23, 32, 29, 0.08);
+}
+
+.switcher a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.switcher a.active {
+  background: #17201d;
+  color: #faf8f2;
+}
+
+.floating {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 1000;
+}
+
+@media (max-width: 620px) {
+  .label {
+    display: none;
+  }
+
+  .switcher a {
+    padding: 7px 9px;
+    font-size: 0.6rem;
+  }
+}

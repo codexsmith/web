@@ -1,4 +1,5 @@
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
+import { DevProductSwitch } from "@/components/version-switch/DevProductSwitch";
 import styles from "./InstitutionalHomePreview.module.css";
 
 const primaryRoutes = [
@@ -24,7 +25,7 @@ export function InstitutionalHomePreview() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <a className={styles.brand} href="/institutional-preview" aria-label="Boundary First Labs institutional preview home">
+        <a className={styles.brand} href="/v3" aria-label="Boundary First Labs Website v3 home">
           <BoundaryFirstWaveLogo className={styles.logo} variant="compact" decorative />
           <span className={styles.brandWords}>
             <strong>BOUNDARY FIRST</strong>
@@ -38,10 +39,13 @@ export function InstitutionalHomePreview() {
           ))}
         </nav>
 
-        <a className={styles.labLink} href="/">
-          Enter the Lab
-          <span aria-hidden="true">↗</span>
-        </a>
+        <div className={styles.headerTools}>
+          <DevProductSwitch active="product" />
+          <a className={styles.labLink} href="/v2">
+            Enter the Lab
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </header>
 
       <main>
@@ -56,11 +60,11 @@ export function InstitutionalHomePreview() {
               We build research, methods, products, and operational tools for making consequential systems more legible, reasoning more inspectable, and useful capability easier to transfer.
             </p>
             <div className={styles.heroActions}>
-              <a className={styles.primaryAction} href="/">
+              <a className={styles.primaryAction} href="/v2">
                 Explore the Lab
                 <span aria-hidden="true">→</span>
               </a>
-              <span className={styles.previewLabel}>Institutional shell preview</span>
+              <span className={styles.previewLabel}>Product surface · Website v3</span>
             </div>
           </div>
 
@@ -98,8 +102,8 @@ export function InstitutionalHomePreview() {
 
       <footer className={styles.footer}>
         <span>© 2026 Boundary First Labs</span>
-        <span>Institutional preview · Website v3</span>
-        <a href="/">Enter the Lab ↗</a>
+        <span>Product surface · Website v3</span>
+        <a href="/v2">Enter the Lab ↗</a>
       </footer>
     </div>
   );
