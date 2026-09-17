@@ -1864,3 +1864,39 @@
 .footerMeta a:focus-visible {
   outline-color: var(--old-gold-bright);
 }
+
+
+/* Plain-language bridge for the homepage method sampler. */
+.workbenchLabel {
+  margin: 1px 0 -2px 2px;
+  color: var(--old-gold-dark);
+  font: 800 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.18em;
+}
+
+.methodStep h3 {
+  margin-bottom: 4px;
+}
+
+.methodStep .methodFormal {
+  margin: 0 0 9px;
+  color: var(--royal-blue);
+  font: 800 0.58rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.methodStep .methodFormal + p {
+  margin-top: 0;
+  color: #435470;
+  font-size: 0.84rem;
+  line-height: 1.42;
+}
+
+.sectionLead > p:last-child {
+  max-width: 390px;
+  color: #435470;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.96rem;
+  line-height: 1.48;
+}

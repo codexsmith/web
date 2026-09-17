@@ -13,10 +13,10 @@ const primaryRoutes = [
 ];
 
 const capabilityStrip = [
-  ["01", "Research artifacts"],
-  ["02", "Operational tools"],
-  ["03", "Public-interest analysis"],
-  ["04", "Formal metrology"],
+  ["01", "Research & experiments"],
+  ["02", "Tools & working systems"],
+  ["03", "Analysis for public systems"],
+  ["04", "Measurement & verification"],
 ] as const;
 
 const institutionCards = [
@@ -43,10 +43,10 @@ const institutionCards = [
 ] as const;
 
 const methodSteps = [
-  ["01", "Representation", "Make the structure legible."],
-  ["02", "State", "Model what changes and what persists."],
-  ["03", "Transform", "Track lawful movement between forms."],
-  ["04", "Defect", "Inspect breakdowns, closure failures, and edge cases."],
+  ["01", "Show the structure", "Representation", "Make the important parts, relationships, and boundaries visible."],
+  ["02", "Track what changes", "State", "Know where the system is now, what can change, and what must remain true."],
+  ["03", "Follow the change", "Transform", "See how one valid condition becomes another, and what rules govern the move."],
+  ["04", "Find where it fails", "Defect", "Expose breakdowns, missing cases, and places where the model or system stops working."],
 ] as const;
 
 const featuredWork = [
@@ -166,10 +166,11 @@ export function InstitutionalHomePreview() {
           <div className={styles.sectionLead}>
             <p className={styles.sectionIndex}>OUR APPROACH</p>
             <h2>What the Lab does</h2>
-            <p>Knowledge is treated as a system: represented, transformed, tested, measured, revised, and acted upon.</p>
+            <p>We make complex systems easier to understand, test, improve, and explain. The basic move is simple: show the structure, track what changes, follow the change, and find where it breaks.</p>
           </div>
 
           <div className={styles.methodWorkbench}>
+            <p className={styles.workbenchLabel}>WHAT WE PRODUCE</p>
             <div className={styles.capabilityStrip} aria-label="What the Lab produces and supports">
               {capabilityStrip.map(([index, label]) => (
                 <div className={styles.capability} key={label}>
@@ -179,11 +180,13 @@ export function InstitutionalHomePreview() {
               ))}
             </div>
 
+            <p className={styles.workbenchLabel}>HOW WE WORK</p>
             <div className={styles.methodGrid}>
-              {methodSteps.map(([index, title, description]) => (
-                <article className={styles.methodStep} key={title}>
+              {methodSteps.map(([index, plainTitle, formalTitle, description]) => (
+                <article className={styles.methodStep} key={formalTitle}>
                   <span>{index}</span>
-                  <h3>{title}</h3>
+                  <h3>{plainTitle}</h3>
+                  <p className={styles.methodFormal}>{formalTitle}</p>
                   <p>{description}</p>
                 </article>
               ))}
