@@ -15,6 +15,18 @@ for (const required of [
   expect(fs.existsSync(`${root}/${required}`), `missing shared component ${required}`);
 }
 
+const chrome = read(`${root}/InstitutionalChrome.tsx`);
+const primitives = read(`${root}/InstitutionalPrimitives.tsx`);
+const homePage = read(`${root}/InstitutionalHomePage.tsx`);
+
+expect(chrome.startsWith('"use client";'), "Institutional chrome must own route/scroll interaction as a client boundary");
+expect(chrome.includes("usePathname"), "Institutional header must derive active navigation from the current route");
+expect(chrome.includes("IntersectionObserver"), "Institutional header must observe the route hero before compacting the brand");
+expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
+expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
+expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
+expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
+
 const pageShell = read(`${root}/InstitutionalPageShell.tsx`);
 expect(pageShell.includes("<InstitutionalHeader />"), "PageShell must own the shared header");
 expect(pageShell.includes("<InstitutionalFooter />"), "PageShell must own the shared footer");

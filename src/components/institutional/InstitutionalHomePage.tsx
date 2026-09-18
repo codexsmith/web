@@ -7,7 +7,7 @@ import { capabilityStrip, methodSteps, featuredWork, postureCommitments } from "
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
-        <section className={styles.hero}>
+        <section className={styles.hero} data-institutional-hero>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>Practice-born. Research-backed. Formally generalized.</p>
             <h1>Systematizing knowledge for science, engineering, and public reasoning.</h1>

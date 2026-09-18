@@ -23,7 +23,7 @@ export function InstitutionalRouteHero({
   children?: ReactNode;
 }) {
   return (
-    <section className={className}>
+    <section className={className} data-institutional-hero>
       <div>
         <p className={styles.eyebrow}>{eyebrow}</p>
         <h1>{title}</h1>
