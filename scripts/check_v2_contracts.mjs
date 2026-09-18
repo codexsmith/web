@@ -46,56 +46,42 @@ requireMatch(
   "Legacy Record URLs must resolve to their canonical World or Provenance destination",
 );
 
-// Hero = threshold; entered root = structural world. The threshold must not become a second root map.
+// The Lab Machine is the canonical public home. The retired hero / ?world=1
+// threshold state must not reappear as a parallel root state machine.
 requireMatch(
-  "src/components/hero-screen.tsx",
-  /Software for difficult systems\.[\s\S]*Enter the lab/,
-  "Hero must make the public proposition and expose an explicit entry action",
+  "src/app/page.tsx",
+  /LabMachineHomeRoute/,
+  "The bare public root must render the canonical Lab Machine home route",
 );
-forbidMatch(
-  "src/components/hero-screen.tsx",
-  /district-grid|rootBranches|Enter region|onNavigate/,
-  "Hero must not duplicate entered-world structure or traversal controls",
+requireMatch(
+  "src/app/world/page.tsx",
+  /permanentRedirect\(params\.size[\s\S]*:"\/"\)/,
+  "Legacy /world URLs must redirect into the canonical root Lab Machine",
 );
 requireMatch(
   "src/app/[...slug]/page.tsx",
-  /initialHeroVisible\s*=\s*node\.id\s*===\s*"root"\s*&&\s*worldState\s*!==\s*"1"/,
-  "Bare root URL must resolve to the entry threshold while ?world=1 resolves to the entered world",
+  /initialHeroVisible=\{false\}/,
+  "Deep World routes must not revive the retired root hero threshold",
+);
+forbidMatch(
+  "src/components/world-app.tsx",
+  /HeroScreen|params\.set\("world",\s*"1"\)|router\.replace\("\/world"/,
+  "WorldApp must not revive the retired hero or ?world=1 root-state machinery",
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /focusId\s*===\s*"root"\)\s*params\.set\("world",\s*"1"\)/,
-  "Entered root state must be reconstructible in the URL",
-);
-requireMatch(
-  "src/components/world-app.tsx",
-  /router\.replace\("\/world"/,
-  "Crossing the hero threshold must replace into the canonical Lab route rather than pollute browser history",
-);
-requireMatch(
-  "src/components/world-app.tsx",
-  /const navigateHome = useCallback\(\(\) => \{[\s\S]*?router\.push\("\/world"\);[\s\S]*?\}, \[router\]\)/,
-  "The standard frame logo must return to the Lab Machine rather than the legacy entered root world",
-);
-requireMatch(
-  "src/components/bounded-standalone-surface.tsx",
-  /onHome=\{\(\) => router\.push\("\/world"\)\}/,
-  "Standalone frame logos must return to the Lab Machine",
+  /const navigateHome = useCallback\(\(\) => \{[\s\S]*?router\.push\("\/"\);[\s\S]*?\}, \[router\]\)/,
+  "The standard content frame logo must return to the canonical root Lab Machine",
 );
 requireMatch(
   "src/components/bfux/LabMachineWorld.tsx",
-  /const openMachine = \(\) => router\.push\("\/world"\)[\s\S]*onHome=\{openMachine\}/,
-  "Lab Machine fallback frame logos must return to the Lab Machine",
+  /const returnToMachine = \(\) => \{[\s\S]*machineResolutionUrl\(machinePath,[\s\S]*onHome=\{returnToMachine\}/,
+  "Lab Machine navigation must preserve machine-path state while returning to the machine",
 );
 requireMatch(
   "src/components/bfux/PhysicalMachineExperience.tsx",
   /resolutionStorageKey[\s\S]*sessionStorage\.getItem[\s\S]*sessionStorage\.setItem[\s\S]*rememberResolution/,
   "The Lab Machine must remember the visitor's Core set or Full loop resolution",
-);
-requireMatch(
-  "src/components/bfux/PhysicalMachineExperience.tsx",
-  /<Link href="\/world" aria-label="Boundary First Labs home">/,
-  "The physical frame logo must return to the Lab Machine",
 );
 requireMatch(
   "src/components/bfux/PhysicalMachineExperience.tsx",
@@ -180,8 +166,13 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /const ids\s*=\s*\[\.\.\.activePath,\s*targetId\][\s\S]*cursor:\s*ids\.length\s*-\s*1/,
-  "A new graph traversal must append the actual target to the active traversal branch",
+  /return boundTraversal\(\[\.\.\.activePath,\s*targetId\]\)/,
+  "A new graph traversal must append the target and re-bound the active traversal branch",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /const traversalHistoryLimit\s*=\s*8[\s\S]*const rootless\s*=\s*ids\.filter\(\(id\) => id !== "root"\)/,
+  "Traversal memory must remain bounded and exclude the retired root content node",
 );
 requireMatch(
   "src/components/world-app.tsx",
@@ -190,8 +181,8 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /function resolveExistingTraversalCursor[\s\S]*path\.lastIndexOf\(targetId\)/,
-  "Browser and remembered traversal must resolve an existing temporal cursor before branching",
+  /function resolveExistingTraversalCursor[\s\S]*path\[normalizedCursor\][\s\S]*path\[normalizedCursor - 1\][\s\S]*path\[normalizedCursor \+ 1\][\s\S]*return -1/,
+  "Browser and remembered traversal must resolve only the active or adjacent temporal cursor before branching",
 );
 requireMatch(
   "src/components/world-app.tsx",
