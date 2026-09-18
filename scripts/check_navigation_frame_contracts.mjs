@@ -103,7 +103,7 @@ requireMatch(
 
 requireMatch(
   "src/components/boundary-frame.tsx",
-  /Local relational neighborhood for[\s\S]*<strong>Adjacent<\/strong>/,
+  /Local relational neighborhood for[\s\S]*aria-label="Adjacent nodes"[\s\S]*<SiblingChoices/,
   "The left frame must identify itself as the current node's local relational neighborhood",
 );
 
