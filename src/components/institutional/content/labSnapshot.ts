@@ -57,7 +57,7 @@ export const homeLabSnapshot = {
         ],
         note:
           "Registry membership is inventory and routing metadata. It does not make a claim true, a product ready, or a system operational.",
-        source: registrySource,
+        source: registrySource + " Derived from registries.length.",
       },
     },
     {
@@ -82,7 +82,7 @@ export const homeLabSnapshot = {
           { value: "2", label: "Machinery & capability registries" },
           { value: "1", label: "Domain-local registry" },
         ],
-        source: registrySource,
+        source: registrySource + ' Derived from status === "active".',
       },
     },
     {
@@ -159,7 +159,7 @@ export const homeLabSnapshot = {
         ],
         note:
           "These classes describe representation and institutional function, not importance or maturity.",
-        source: registrySource,
+        source: registrySource + " Derived from distinct registry_class values.",
       },
     },
     {
@@ -186,7 +186,7 @@ export const homeLabSnapshot = {
         ],
         note:
           "The remaining 28 surfaces are not declared machine-readable in this snapshot. That does not mean they are unreadable to people or less authoritative.",
-        source: registrySource,
+        source: registrySource + " Derived from machine_readable === true.",
       },
     },
     {
