@@ -1,0 +1,2079 @@
+.page {
+  --institution-ink: #102036;
+  --institution-muted: #536071;
+  --institution-paper: #f7f8f7;
+  --institution-surface: #ffffff;
+  --institution-soft: #eef2f3;
+  --institution-line: rgba(16, 32, 54, 0.16);
+  --institution-line-strong: rgba(16, 32, 54, 0.34);
+  --institution-accent: #536f78;
+  min-height: 100vh;
+  background: var(--institution-paper);
+  color: var(--institution-ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page * {
+  box-sizing: border-box;
+}
+
+.page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: minmax(285px, 1fr) auto minmax(260px, 0.55fr);
+  align-items: center;
+  gap: 28px;
+  padding: 10px clamp(30px, 5vw, 86px);
+  border-bottom: 1px solid var(--institution-line);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.brand {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+}
+
+.brandCopy {
+  display: grid;
+  gap: 4px;
+}
+
+.brandCopy strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.brandCopy span {
+  color: var(--institution-muted);
+  font-size: 0.57rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 1.65vw, 28px);
+  color: #26364b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.headerTools {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.labLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--institution-ink);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero {
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(430px, 1fr);
+  border-bottom: 1px solid var(--institution-line);
+  background: var(--institution-surface);
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(54px, 5.5vw, 82px) clamp(42px, 5.3vw, 86px);
+}
+
+.eyebrow,
+.sectionIndex {
+  margin: 0;
+  color: var(--institution-accent);
+  font-size: 0.61rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 18px 0 22px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.2rem, 4.4vw, 5.35rem);
+  font-weight: 500;
+  letter-spacing: -0.052em;
+  line-height: 0.94;
+}
+
+.lead {
+  max-width: 720px;
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.12rem, 1.35vw, 1.42rem);
+  line-height: 1.43;
+}
+
+.bodyCopy {
+  max-width: 700px;
+  margin: 14px 0 0;
+  color: var(--institution-muted);
+  font-size: 0.91rem;
+  line-height: 1.58;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.primaryAction,
+.secondaryAction {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 18px;
+  border: 1px solid var(--institution-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.88rem;
+}
+
+.primaryAction {
+  background: var(--institution-ink);
+  color: #fff !important;
+}
+
+.secondaryAction {
+  background: #fff;
+}
+
+.heroVisual {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  border-left: 1px solid var(--institution-line);
+  background:
+    linear-gradient(180deg, #dce5e9 0%, #eef2f3 32%, #bcc9cf 68%, #8ea1aa 100%);
+}
+
+.mountainFar,
+.mountainNear,
+.water,
+.structure,
+.visualMark {
+  position: absolute;
+}
+
+.mountainFar {
+  inset: 29% 0 23%;
+  background: rgba(88, 112, 123, 0.34);
+  clip-path: polygon(0 72%, 9% 53%, 17% 63%, 25% 38%, 34% 58%, 43% 34%, 51% 57%, 63% 42%, 71% 62%, 79% 39%, 89% 55%, 100% 35%, 100% 100%, 0 100%);
+}
+
+.mountainNear {
+  inset: 43% 0 17%;
+  background: rgba(53, 77, 88, 0.5);
+  clip-path: polygon(0 58%, 12% 45%, 24% 61%, 34% 39%, 45% 67%, 57% 46%, 68% 70%, 82% 52%, 91% 68%, 100% 55%, 100% 100%, 0 100%);
+}
+
+.water {
+  inset: auto 0 0;
+  height: 31%;
+  background:
+    linear-gradient(180deg, rgba(227, 234, 236, 0.78), rgba(145, 164, 173, 0.95)),
+    repeating-linear-gradient(0deg, transparent 0 13px, rgba(255, 255, 255, 0.17) 13px 14px);
+}
+
+.structure {
+  top: 0;
+  right: 0;
+  width: 43%;
+  height: 79%;
+  padding: 86px 30px 28px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 45%),
+    #687278;
+  box-shadow: -24px 0 60px rgba(16, 32, 54, 0.15);
+}
+
+.structure::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 136%;
+  height: 86px;
+  background: #727d83;
+  transform: skewX(-31deg);
+  transform-origin: 100% 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.structureWords {
+  display: grid;
+  gap: 9px;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+}
+
+.structure strong {
+  position: absolute;
+  right: 28px;
+  bottom: 48px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.35;
+}
+
+.visualMark {
+  right: 28px;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+}
+
+.visualLogo {
+  width: 34px;
+  height: 34px;
+  filter: grayscale(1) brightness(6);
+}
+
+.visualMark div {
+  display: grid;
+  gap: 2px;
+}
+
+.visualMark span,
+.visualMark small {
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+}
+
+.visualMark small {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.capabilityStrip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-height: 78px;
+  border-bottom: 1px solid var(--institution-line);
+  background: #fff;
+}
+
+.capability {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 20px 26px;
+  border-right: 1px solid var(--institution-line);
+}
+
+.capability:last-child {
+  border-right: 0;
+}
+
+.capability span {
+  color: var(--institution-accent);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.capability strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+.institutionCards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  padding: 28px clamp(30px, 5vw, 78px);
+  border-bottom: 1px solid var(--institution-line);
+  background: var(--institution-paper);
+}
+
+.institutionCard {
+  min-height: 170px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 16px;
+  padding: 22px;
+  border: 1px solid var(--institution-line);
+  background: #fff;
+}
+
+.cardIndex {
+  color: var(--institution-accent);
+  font-size: 0.61rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.institutionCard h2 {
+  margin: 0 0 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  font-weight: 600;
+}
+
+.institutionCard p {
+  margin: 0;
+  color: var(--institution-muted);
+  font-size: 0.79rem;
+  line-height: 1.47;
+}
+
+.cardArrow {
+  align-self: center;
+  font-size: 1.3rem;
+}
+
+.methodSection {
+  display: grid;
+  grid-template-columns: minmax(270px, 0.82fr) minmax(0, 2.18fr);
+  gap: 28px;
+  padding: 34px clamp(30px, 5vw, 78px);
+  border-bottom: 1px solid var(--institution-line);
+  background: #fff;
+}
+
+.sectionLead {
+  padding-right: 28px;
+  border-right: 1px solid var(--institution-line);
+}
+
+.sectionLead h2,
+.sectionHeader h2,
+.posture h2 {
+  margin: 10px 0 8px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 2.55vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.sectionLead > p:last-child {
+  max-width: 360px;
+  margin: 0;
+  color: var(--institution-muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.38;
+}
+
+.methodGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.methodStep {
+  min-height: 140px;
+  padding: 5px 20px 10px 22px;
+  border-right: 1px solid var(--institution-line);
+}
+
+.methodStep:last-child {
+  border-right: 0;
+}
+
+.methodStep span {
+  color: var(--institution-accent);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.77rem;
+}
+
+.methodStep h3 {
+  margin: 16px 0 6px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.methodStep p {
+  margin: 0;
+  color: var(--institution-muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.91rem;
+  line-height: 1.38;
+}
+
+.featuredSection {
+  padding: 24px clamp(30px, 5vw, 78px) 34px;
+  border-bottom: 1px solid var(--institution-line);
+  background: var(--institution-paper);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+
+.sectionHeader h2 {
+  margin-bottom: 0;
+}
+
+.sectionHeader > span {
+  max-width: 360px;
+  color: var(--institution-muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.featuredCard {
+  min-height: 172px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: 0 14px 0 0;
+  border: 1px solid var(--institution-line);
+  background: #fff;
+}
+
+.featuredVisual {
+  position: relative;
+  min-height: 170px;
+  display: grid;
+  place-items: end start;
+  padding: 12px;
+  overflow: hidden;
+  background:
+    linear-gradient(155deg, rgba(255, 255, 255, 0.18), transparent 46%),
+    #23374d;
+}
+
+.featuredVisual::before,
+.featuredVisual::after {
+  content: "";
+  position: absolute;
+  inset: 18% -34% auto;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.44);
+  transform: rotate(-29deg);
+  box-shadow:
+    0 18px rgba(255, 255, 255, 0.23),
+    0 36px rgba(255, 255, 255, 0.18),
+    0 54px rgba(255, 255, 255, 0.14),
+    0 72px rgba(255, 255, 255, 0.1);
+}
+
+.featuredVisual::after {
+  transform: rotate(32deg);
+}
+
+.featuredVisual[data-variant="2"] {
+  background-color: #526b77;
+}
+
+.featuredVisual[data-variant="3"] {
+  background-color: #223329;
+}
+
+.featuredVisual[data-variant="4"] {
+  background-color: #69767e;
+}
+
+.featuredVisual span {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+}
+
+.featuredCopy {
+  align-self: center;
+  padding: 16px 0;
+}
+
+.featuredTag {
+  color: var(--institution-accent);
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.featuredCard h3 {
+  margin: 7px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.08;
+}
+
+.featuredCard p {
+  margin: 0;
+  color: var(--institution-muted);
+  font-size: 0.72rem;
+  line-height: 1.38;
+}
+
+.featuredArrow {
+  align-self: end;
+  padding-bottom: 14px;
+  font-size: 1.05rem;
+}
+
+.posture {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.6fr) minmax(240px, 0.7fr);
+  align-items: center;
+  gap: 36px;
+  padding: 28px clamp(30px, 5vw, 78px);
+  border-bottom: 1px solid var(--institution-line);
+  background: #fff;
+}
+
+.posture > div {
+  padding-right: 28px;
+  border-right: 1px solid var(--institution-line);
+}
+
+.posture h2 {
+  font-size: clamp(1.8rem, 2.3vw, 2.7rem);
+}
+
+.posture > p {
+  margin: 0;
+  color: var(--institution-muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.posture blockquote {
+  margin: 0;
+  color: #39485b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.92rem;
+  font-style: italic;
+  text-align: right;
+}
+
+.footer {
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) auto minmax(210px, 1fr);
+  align-items: center;
+  gap: 28px;
+  padding: 18px clamp(30px, 5vw, 78px);
+  background: #fff;
+}
+
+.footerBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footerLogo {
+  width: 40px;
+  height: 40px;
+}
+
+.footerBrand div {
+  display: grid;
+  gap: 3px;
+}
+
+.footerBrand strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.98rem;
+}
+
+.footerBrand span {
+  color: var(--institution-muted);
+  font-size: 0.49rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.footerNav {
+  display: flex;
+  gap: 16px;
+  color: var(--institution-muted);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.68rem;
+}
+
+.footerMeta {
+  justify-self: end;
+  display: grid;
+  justify-items: end;
+  gap: 7px;
+  color: var(--institution-muted);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footerMeta a {
+  color: var(--institution-ink);
+  font-weight: 800;
+}
+
+@media (max-width: 1240px) {
+  .header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 5px 0 2px;
+  }
+
+  .headerTools {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .institutionCards,
+  .featuredGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .methodSection {
+    grid-template-columns: 1fr;
+  }
+
+  .sectionLead {
+    padding-right: 0;
+    padding-bottom: 24px;
+    border-right: 0;
+    border-bottom: 1px solid var(--institution-line);
+  }
+
+  .posture {
+    grid-template-columns: 0.8fr 1.6fr;
+  }
+
+  .posture blockquote {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .footer {
+    grid-template-columns: 1fr auto;
+  }
+
+  .footerNav {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroVisual {
+    min-height: 440px;
+    border-top: 1px solid var(--institution-line);
+    border-left: 0;
+  }
+
+  .capabilityStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .capability:nth-child(2) {
+    border-right: 0;
+  }
+
+  .capability:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--institution-line);
+  }
+
+  .methodGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .methodStep:nth-child(2) {
+    border-right: 0;
+  }
+
+  .methodStep:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--institution-line);
+    padding-bottom: 22px;
+    margin-bottom: 20px;
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+  }
+
+  .footerMeta {
+    justify-self: start;
+    justify-items: start;
+  }
+}
+
+@media (max-width: 680px) {
+  .header {
+    min-height: auto;
+    padding: 12px 18px;
+  }
+
+  .brandCopy span {
+    display: none;
+  }
+
+  .brandCopy strong {
+    font-size: 1rem;
+  }
+
+  .logo {
+    width: 39px;
+    height: 39px;
+  }
+
+  .nav {
+    gap: 17px;
+    font-size: 0.72rem;
+  }
+
+  .headerTools {
+    gap: 8px;
+  }
+
+  .labLink {
+    display: none;
+  }
+
+  .heroCopy {
+    padding: 58px 22px 54px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 13.5vw, 4.4rem);
+  }
+
+  .lead {
+    font-size: 1.08rem;
+  }
+
+  .heroActions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+
+  .heroVisual {
+    min-height: 360px;
+  }
+
+  .structure {
+    width: 49%;
+    padding: 72px 18px 22px;
+  }
+
+  .structure strong {
+    right: 18px;
+  }
+
+  .capabilityStrip,
+  .institutionCards,
+  .featuredGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .capability {
+    justify-content: flex-start;
+    border-right: 0;
+    border-bottom: 1px solid var(--institution-line);
+  }
+
+  .capability:last-child {
+    border-bottom: 0;
+  }
+
+  .institutionCards {
+    padding: 20px 18px;
+  }
+
+  .methodSection,
+  .featuredSection,
+  .posture {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .methodGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .methodStep {
+    border-right: 0;
+    border-bottom: 1px solid var(--institution-line);
+    padding: 18px 0;
+    margin: 0 !important;
+  }
+
+  .methodStep:last-child {
+    border-bottom: 0;
+  }
+
+  .sectionHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sectionHeader > span {
+    text-align: left;
+  }
+
+  .featuredCard {
+    grid-template-columns: 92px minmax(0, 1fr) auto;
+  }
+
+  .posture {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .posture > div {
+    padding-right: 0;
+    padding-bottom: 20px;
+    border-right: 0;
+    border-bottom: 1px solid var(--institution-line);
+  }
+
+  .footer {
+    padding: 18px;
+  }
+}
+
+
+/* BFUX physicality pass: keep the institutional surface calm, but make
+ * consequential controls and bounded objects read as things with depth,
+ * pressure, and a visible resting state. */
+.page {
+  --bfux-edge-light: rgba(255, 255, 255, 0.96);
+  --bfux-edge-mid: rgba(16, 32, 54, 0.17);
+  --bfux-edge-dark: rgba(16, 32, 54, 0.34);
+  --bfux-drop: rgba(16, 32, 54, 0.11);
+  --bfux-press: rgba(16, 32, 54, 0.18);
+}
+
+.primaryAction,
+.secondaryAction {
+  position: relative;
+  transform: translateY(-1px);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+.primaryAction {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 3px 0 #07111f,
+    0 7px 14px rgba(16, 32, 54, 0.16);
+}
+
+.secondaryAction {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f7f7 100%);
+  box-shadow:
+    inset 0 1px 0 var(--bfux-edge-light),
+    0 3px 0 rgba(16, 32, 54, 0.28),
+    0 7px 14px rgba(16, 32, 54, 0.09);
+}
+
+.labLink {
+  position: relative;
+  transition:
+    transform 120ms ease,
+    color 120ms ease,
+    border-color 120ms ease;
+}
+
+.heroVisual {
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 0 rgba(16, 32, 54, 0.22);
+}
+
+.capability {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f8f8 100%);
+  box-shadow:
+    inset 0 1px 0 var(--bfux-edge-light),
+    inset 0 -2px 0 rgba(16, 32, 54, 0.08);
+}
+
+.institutionCard,
+.featuredCard {
+  position: relative;
+  transform: translateY(-1px);
+  border-color: rgba(16, 32, 54, 0.2);
+  background: linear-gradient(180deg, #ffffff 0%, #fafbfb 100%);
+  box-shadow:
+    inset 0 1px 0 var(--bfux-edge-light),
+    0 2px 0 rgba(16, 32, 54, 0.16),
+    0 7px 16px var(--bfux-drop);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease;
+}
+
+.institutionCard::after,
+.featuredCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid transparent;
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.58),
+    inset -1px 0 0 rgba(16, 32, 54, 0.035);
+}
+
+.methodGrid {
+  padding: 8px;
+  border: 1px solid rgba(16, 32, 54, 0.1);
+  background: #eef1f1;
+  box-shadow:
+    inset 0 2px 5px rgba(16, 32, 54, 0.09),
+    inset 0 1px 0 rgba(16, 32, 54, 0.08);
+}
+
+.methodStep {
+  padding: 16px 20px 18px 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(249, 250, 250, 0.82));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+.featuredVisual {
+  box-shadow:
+    inset -1px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 0 0 1px rgba(16, 32, 54, 0.08);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primaryAction:hover,
+  .secondaryAction:hover {
+    transform: translateY(-2px);
+  }
+
+  .primaryAction:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.16),
+      0 4px 0 #07111f,
+      0 10px 18px rgba(16, 32, 54, 0.18);
+  }
+
+  .secondaryAction:hover {
+    border-color: rgba(16, 32, 54, 0.58);
+    box-shadow:
+      inset 0 1px 0 var(--bfux-edge-light),
+      0 4px 0 rgba(16, 32, 54, 0.3),
+      0 10px 18px rgba(16, 32, 54, 0.11);
+  }
+
+  .labLink:hover {
+    transform: translateY(-1px);
+    color: #36535e;
+    border-color: #36535e;
+  }
+
+  .institutionCard:hover,
+  .featuredCard:hover {
+    transform: translateY(-3px);
+    border-color: rgba(16, 32, 54, 0.3);
+    box-shadow:
+      inset 0 1px 0 var(--bfux-edge-light),
+      0 3px 0 rgba(16, 32, 54, 0.18),
+      0 12px 22px rgba(16, 32, 54, 0.13);
+  }
+}
+
+.primaryAction:active,
+.secondaryAction:active {
+  transform: translateY(2px);
+  transition-duration: 45ms;
+}
+
+.primaryAction:active {
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.24),
+    0 1px 0 #07111f,
+    0 2px 5px rgba(16, 32, 54, 0.11);
+}
+
+.secondaryAction:active {
+  background: #edf1f1;
+  box-shadow:
+    inset 0 2px 5px var(--bfux-press),
+    0 1px 0 rgba(16, 32, 54, 0.24);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible,
+.labLink:focus-visible,
+.brand:focus-visible,
+.footerMeta a:focus-visible {
+  outline: 2px solid #4f7381;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction,
+  .labLink,
+  .institutionCard,
+  .featuredCard {
+    transition: none;
+  }
+
+  .primaryAction:hover,
+  .secondaryAction:hover,
+  .labLink:hover,
+  .institutionCard:hover,
+  .featuredCard:hover,
+  .primaryAction:active,
+  .secondaryAction:active {
+    transform: none;
+  }
+}
+
+
+/* BFUX physical panel pass.
+ * Editorial hierarchy remains institutional; the surfaces now read as
+ * machined plates mounted into a larger instrument rather than paper cards.
+ * Travel is reserved for controls that actually act. */
+.page {
+  --bfux-panel-face: #f4f6f5;
+  --bfux-panel-face-high: #ffffff;
+  --bfux-panel-bed: #e6eaea;
+  --bfux-panel-edge: rgba(16, 32, 54, 0.34);
+  --bfux-panel-edge-dark: rgba(16, 32, 54, 0.52);
+  --bfux-panel-groove: rgba(16, 32, 54, 0.16);
+  --bfux-fastener: #697782;
+}
+
+/* A section is a chassis bay: slightly recessed, ruled, and bounded. */
+.capabilityStrip,
+.institutionCards,
+.methodSection,
+.featuredSection,
+.posture {
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.52), transparent 14%),
+    linear-gradient(180deg, #eef1f1 0%, #e8ecec 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(16, 32, 54, 0.08);
+}
+
+.institutionCards,
+.featuredSection {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 12%),
+    linear-gradient(180deg, #edf0ef, #e7ebea);
+}
+
+/* Mounted plates: crisp bevel, a darker lower edge, and corner fasteners.
+ * These do not move on hover: they are fixtures, not buttons. */
+.institutionCard,
+.featuredCard {
+  position: relative;
+  transform: none;
+  overflow: hidden;
+  border: 1px solid var(--bfux-panel-edge);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0 2px, transparent 2px),
+    linear-gradient(180deg, #fbfcfb 0%, #f0f3f2 100%);
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.95),
+    inset -1px 0 0 rgba(16, 32, 54, 0.06),
+    inset 0 -1px 0 rgba(16, 32, 54, 0.12),
+    0 2px 0 rgba(16, 32, 54, 0.22),
+    0 5px 10px rgba(16, 32, 54, 0.08);
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.institutionCard::after,
+.featuredCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  background:
+    radial-gradient(circle at 8px 8px, rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) 8px, rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px),
+    radial-gradient(circle at 8px calc(100% - 8px), rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), rgba(255,255,255,.8) 0 1px, var(--bfux-fastener) 1.5px 2.7px, rgba(16,32,54,.35) 3px, transparent 3.5px);
+}
+
+.cardIndex,
+.featuredTag {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 19px;
+  padding: 0 6px;
+  border: 1px solid rgba(16, 32, 54, 0.14);
+  border-radius: 1px;
+  background: #e8eceb;
+  box-shadow:
+    inset 0 1px 2px rgba(16, 32, 54, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.82);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.11em;
+}
+
+/* Capability strip becomes a row of inset identification plates. */
+.capability {
+  min-height: 74px;
+  position: relative;
+  margin: 7px 0;
+  padding: 16px 26px;
+  border-top: 1px solid var(--bfux-panel-edge);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  border-right: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, #e9eded 0%, #f7f8f7 18%, #f2f4f3 100%);
+  box-shadow:
+    inset 0 2px 4px rgba(16, 32, 54, 0.11),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.capability::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border: 1px solid rgba(16, 32, 54, 0.32);
+  border-radius: 50%;
+  background: #73808a;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    0 1px 1px rgba(16,32,54,.24);
+}
+
+.capability strong {
+  letter-spacing: 0.01em;
+}
+
+/* The method is literally fitted into a recessed instrument tray. */
+.methodGrid {
+  gap: 7px;
+  padding: 9px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, #dbe0df, #e7ebea);
+  box-shadow:
+    inset 0 3px 7px rgba(16, 32, 54, 0.18),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.methodStep,
+.methodStep:nth-child(-n + 2) {
+  min-height: 132px;
+  margin: 0;
+  padding: 17px 20px 18px 22px;
+  border: 1px solid rgba(16, 32, 54, 0.25);
+  border-radius: 1px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92) 0 2px, transparent 2px),
+    linear-gradient(180deg, #f9faf9, #eff2f1);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 2px 0 rgba(16, 32, 54, 0.16);
+}
+
+.methodStep span {
+  display: inline-block;
+  padding: 2px 5px;
+  border: 1px solid rgba(16, 32, 54, 0.15);
+  background: #e6eae9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.61rem;
+  letter-spacing: 0.12em;
+}
+
+.featuredVisual {
+  margin: 7px 0 7px 7px;
+  min-height: 156px;
+  border: 1px solid rgba(16, 32, 54, 0.48);
+  border-radius: 1px;
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.08),
+    inset 0 3px 8px rgba(0, 0, 0, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* Working posture reads as one broad engraved plate. */
+.posture {
+  margin: 18px clamp(24px, 4vw, 62px);
+  border: 1px solid var(--bfux-panel-edge);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.9) 0 2px, transparent 2px),
+    linear-gradient(180deg, #f5f7f6, #ecefee);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -1px 0 rgba(16, 32, 54, 0.12),
+    0 2px 0 rgba(16, 32, 54, 0.2),
+    0 7px 15px rgba(16, 32, 54, 0.08);
+}
+
+/* Actual controls are raised above their bezels and visibly travel when
+ * pressed. Keep the geometry square and instrument-like. */
+.primaryAction,
+.secondaryAction {
+  position: relative;
+  min-height: 44px;
+  padding: 0 20px;
+  cursor: pointer;
+  user-select: none;
+  border-width: 1px;
+  border-radius: 2px;
+  transform: translateY(-4px);
+  transition:
+    transform 70ms ease,
+    box-shadow 70ms ease,
+    background 70ms ease,
+    color 70ms ease,
+    border-color 70ms ease;
+}
+
+.primaryAction {
+  border-color: #07111f;
+  background:
+    linear-gradient(180deg, #21364f 0%, #102036 58%, #0a1729 100%);
+  text-shadow: 0 1px 0 rgba(0,0,0,.42);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.2),
+    inset 1px 0 0 rgba(255,255,255,.07),
+    inset -1px 0 0 rgba(0,0,0,.18),
+    0 5px 0 #06101d,
+    0 8px 13px rgba(16,32,54,.22);
+}
+
+.secondaryAction {
+  border-color: rgba(16, 32, 54, 0.46);
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7f8f7 45%, #e8eceb 100%);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 1px 0 0 rgba(255,255,255,.9),
+    inset -1px 0 0 rgba(16,32,54,.08),
+    0 5px 0 #9ca7aa,
+    0 8px 13px rgba(16,32,54,.15);
+}
+
+.primaryAction span,
+.secondaryAction span {
+  display: inline-block;
+  transition: transform 90ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .institutionCard:hover,
+  .featuredCard:hover {
+    transform: none;
+    border-color: var(--bfux-panel-edge-dark);
+    box-shadow:
+      inset 1px 0 0 rgba(255, 255, 255, 0.95),
+      inset -1px 0 0 rgba(16, 32, 54, 0.06),
+      inset 0 -1px 0 rgba(16, 32, 54, 0.12),
+      0 2px 0 rgba(16, 32, 54, 0.24),
+      0 6px 12px rgba(16, 32, 54, 0.1);
+  }
+
+  .primaryAction:hover,
+  .secondaryAction:hover {
+    transform: translateY(-5px);
+  }
+
+  .primaryAction:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.24),
+      inset 1px 0 0 rgba(255,255,255,.08),
+      inset -1px 0 0 rgba(0,0,0,.2),
+      0 6px 0 #06101d,
+      0 10px 16px rgba(16,32,54,.25);
+  }
+
+  .secondaryAction:hover {
+    border-color: rgba(16, 32, 54, 0.62);
+    box-shadow:
+      inset 0 1px 0 #fff,
+      inset 1px 0 0 rgba(255,255,255,.95),
+      inset -1px 0 0 rgba(16,32,54,.09),
+      0 6px 0 #929da0,
+      0 10px 16px rgba(16,32,54,.17);
+  }
+
+  .primaryAction:hover span,
+  .secondaryAction:hover span {
+    transform: translateX(2px);
+  }
+}
+
+.primaryAction:active,
+.secondaryAction:active {
+  transform: translateY(1px);
+  transition-duration: 30ms;
+}
+
+.primaryAction:active {
+  background: linear-gradient(180deg, #0d1b2e, #14263d);
+  box-shadow:
+    inset 0 3px 7px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 0 #06101d,
+    0 2px 4px rgba(16,32,54,.16);
+}
+
+.secondaryAction:active {
+  background: linear-gradient(180deg, #dfe4e3, #eef1f0);
+  box-shadow:
+    inset 0 3px 7px rgba(16,32,54,.2),
+    inset 0 1px 0 rgba(255,255,255,.45),
+    0 0 0 #929da0,
+    0 2px 4px rgba(16,32,54,.12);
+}
+
+.primaryAction:active span,
+.secondaryAction:active span {
+  transform: translateX(0);
+}
+
+@media (max-width: 680px) {
+  .posture {
+    margin: 14px 18px;
+  }
+
+  .capability {
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction {
+    transition: none;
+  }
+
+  .primaryAction:hover,
+  .secondaryAction:hover,
+  .primaryAction:active,
+  .secondaryAction:active {
+    transform: translateY(-2px);
+  }
+}
+
+
+/* Sequence refinement: capability outputs belong to the What the Lab does
+ * instrument, not as a separate taxonomy between hero and route plates. */
+.methodWorkbench {
+  min-width: 0;
+  display: grid;
+  gap: 9px;
+}
+
+.methodWorkbench .capabilityStrip {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-radius: 2px;
+  background:
+    linear-gradient(180deg, #dce1e0, #e7ebea);
+  box-shadow:
+    inset 0 3px 7px rgba(16, 32, 54, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.82);
+}
+
+.methodWorkbench .capability {
+  min-height: 54px;
+  margin: 7px 0;
+  padding: 10px 14px;
+  justify-content: flex-start;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 1px solid rgba(16, 32, 54, 0.25);
+  background:
+    linear-gradient(180deg, #f7f8f7 0%, #edf1f0 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.94),
+    inset 0 -1px 0 rgba(16, 32, 54, 0.08);
+}
+
+.methodWorkbench .capability:last-child {
+  border-right: 0;
+}
+
+.methodWorkbench .capability strong {
+  font-size: 0.86rem;
+}
+
+@media (max-width: 980px) {
+  .methodWorkbench .capabilityStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .methodWorkbench .capability:nth-child(2) {
+    border-right: 0;
+  }
+
+  .methodWorkbench .capability:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(16, 32, 54, 0.2);
+  }
+}
+
+@media (max-width: 680px) {
+  .methodWorkbench .capabilityStrip {
+    grid-template-columns: 1fr;
+  }
+
+  .methodWorkbench .capability {
+    margin: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(16, 32, 54, 0.2);
+  }
+
+  .methodWorkbench .capability:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+/* Institutional palette v1
+ * Royal blue + old gold define the Lab's institutional hardware.
+ * OSHA-style colors are reserved for small informational/status accents,
+ * not broad branding fields. */
+.page {
+  --royal-blue: #153a78;
+  --royal-blue-deep: #0b2554;
+  --royal-blue-dark: #071a3d;
+  --royal-blue-light: #dfe8f6;
+  --old-gold: #b89a47;
+  --old-gold-bright: #d2b75f;
+  --old-gold-dark: #776126;
+
+  --osha-red: #c83a32;
+  --osha-orange: #e77b24;
+  --osha-yellow: #e4bd27;
+  --osha-green: #3f7f4f;
+  --osha-blue: #2873b9;
+
+  --institution-ink: #0b2147;
+  --institution-muted: #52627b;
+  --institution-paper: #f4f7fb;
+  --institution-surface: #ffffff;
+  --institution-soft: #e8edf5;
+  --institution-line: rgba(11, 33, 71, 0.18);
+  --institution-line-strong: rgba(11, 33, 71, 0.38);
+  --institution-accent: var(--old-gold-dark);
+
+  --bfux-panel-face: #f2f6fb;
+  --bfux-panel-face-high: #ffffff;
+  --bfux-panel-bed: #dbe4ef;
+  --bfux-panel-edge: rgba(11, 37, 84, 0.42);
+  --bfux-panel-edge-dark: rgba(7, 26, 61, 0.62);
+  --bfux-panel-groove: rgba(11, 37, 84, 0.18);
+  --bfux-fastener: #657797;
+  --bfux-drop: rgba(7, 26, 61, 0.14);
+  --bfux-press: rgba(7, 26, 61, 0.2);
+
+  background:
+    linear-gradient(180deg, #f8faff 0%, #edf2f8 100%);
+}
+
+/* Institutional rails: blue hardware with gold engraved lines. */
+.header {
+  border-bottom: 3px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, #1a4387 0%, var(--royal-blue) 54%, #11336b 100%);
+  color: #f7f9fc;
+  box-shadow:
+    inset 0 -1px 0 rgba(255,255,255,.12),
+    0 2px 8px rgba(7, 26, 61, 0.14);
+}
+
+.header .brandCopy strong,
+.header .nav,
+.header .labLink {
+  color: #f8f9fb;
+}
+
+.header .brandCopy span {
+  color: var(--old-gold-bright);
+}
+
+.header .logo {
+  filter: saturate(.8) brightness(1.8);
+}
+
+.header .labLink {
+  border-bottom-color: var(--old-gold-bright);
+}
+
+.footer {
+  border-top: 3px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #f4f7fb;
+}
+
+.footerBrand strong,
+.footerNav,
+.footerMeta,
+.footerMeta a {
+  color: #f4f7fb;
+}
+
+.footerBrand span {
+  color: var(--old-gold-bright);
+}
+
+.footerLogo {
+  filter: saturate(.75) brightness(1.8);
+}
+
+/* Hero: bright editorial face framed by institutional blue/gold. */
+.hero {
+  border-bottom-color: var(--old-gold);
+  background:
+    linear-gradient(90deg, #ffffff 0%, #fbfcff 49.8%, #dfe7f2 50%);
+}
+
+.heroCopy {
+  border-left: 6px solid var(--old-gold);
+  background:
+    linear-gradient(90deg, rgba(21, 58, 120, 0.025), transparent 28%),
+    #fff;
+}
+
+.hero h1 {
+  color: var(--royal-blue-deep);
+}
+
+.eyebrow,
+.sectionIndex {
+  color: var(--old-gold-dark);
+}
+
+.lead {
+  color: #20385f;
+}
+
+.bodyCopy {
+  color: #586882;
+}
+
+.heroVisual {
+  border-left-color: var(--old-gold);
+  background:
+    linear-gradient(180deg, #d8e4f0 0%, #c4d3e2 30%, #8fa8bf 68%, #54779b 100%);
+}
+
+.mountainFar {
+  background: rgba(40, 78, 121, 0.38);
+}
+
+.mountainNear {
+  background: rgba(12, 44, 84, 0.58);
+}
+
+.water {
+  background:
+    linear-gradient(180deg, rgba(219, 231, 240, 0.78), rgba(64, 101, 139, 0.95)),
+    repeating-linear-gradient(0deg, transparent 0 13px, rgba(255, 255, 255, 0.15) 13px 14px);
+}
+
+.structure {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07), transparent 45%),
+    var(--royal-blue-deep);
+  box-shadow: -24px 0 60px rgba(7, 26, 61, 0.2);
+}
+
+.structure::before {
+  background: var(--royal-blue);
+  border-bottom-color: rgba(210, 183, 95, 0.52);
+}
+
+.structureWords {
+  color: var(--old-gold-bright);
+}
+
+.structure strong {
+  color: #fff8df;
+}
+
+/* Panel bays become cool blue steel instead of beige/grey paper. */
+.institutionCards,
+.methodSection,
+.featuredSection,
+.posture {
+  border-bottom-color: rgba(7, 26, 61, 0.48);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.46), transparent 13%),
+    linear-gradient(180deg, #e9eef6 0%, #dbe4ef 100%);
+}
+
+.institutionCards,
+.featuredSection {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.52), transparent 12%),
+    linear-gradient(180deg, #e5ebf4, #d7e1ed);
+}
+
+.institutionCard,
+.featuredCard,
+.methodStep,
+.methodStep:nth-child(-n + 2),
+.posture {
+  border-color: rgba(11, 37, 84, 0.42);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.95) 0 2px, transparent 2px),
+    linear-gradient(180deg, #f9fbff 0%, #eaf0f8 100%);
+  box-shadow:
+    inset 1px 0 0 rgba(255,255,255,.96),
+    inset -1px 0 0 rgba(11,37,84,.07),
+    inset 0 -1px 0 rgba(11,37,84,.14),
+    0 2px 0 rgba(7,26,61,.24),
+    0 6px 13px rgba(7,26,61,.11);
+}
+
+.institutionCard h2,
+.featuredCard h3,
+.methodStep h3,
+.sectionLead h2,
+.sectionHeader h2,
+.posture h2 {
+  color: var(--royal-blue-deep);
+}
+
+.institutionCard::after,
+.featuredCard::after {
+  border-color: rgba(255, 255, 255, 0.42);
+  background:
+    radial-gradient(circle at 8px 8px, #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) 8px, #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px),
+    radial-gradient(circle at 8px calc(100% - 8px), #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 8px) calc(100% - 8px), #fff 0 1px, var(--old-gold) 1.5px 2.7px, rgba(7,26,61,.42) 3px, transparent 3.5px);
+}
+
+.cardIndex,
+.featuredTag,
+.methodStep span {
+  border-color: rgba(119, 97, 38, 0.38);
+  background:
+    linear-gradient(180deg, #f7e8aa 0%, #d6bc67 100%);
+  color: #3d3212;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 1px rgba(89,70,21,.18);
+}
+
+.methodGrid,
+.methodWorkbench .capabilityStrip {
+  border-color: rgba(7, 26, 61, 0.66);
+  background:
+    linear-gradient(180deg, #b9c8da 0%, #d1dce8 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(7,26,61,.2),
+    inset 0 -1px 0 rgba(255,255,255,.72);
+}
+
+.methodWorkbench .capability {
+  border-right-color: rgba(7,26,61,.26);
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #e7eef7 100%);
+}
+
+.methodWorkbench .capability strong {
+  color: var(--royal-blue-deep);
+}
+
+/* OSHA-style signal accents: small indicators, never the main field. */
+.methodWorkbench .capability:nth-child(1)::before {
+  background: var(--osha-blue);
+}
+.methodWorkbench .capability:nth-child(2)::before {
+  background: var(--osha-green);
+}
+.methodWorkbench .capability:nth-child(3)::before {
+  background: var(--osha-orange);
+}
+.methodWorkbench .capability:nth-child(4)::before {
+  background: var(--osha-yellow);
+}
+
+.methodStep:nth-child(1) {
+  border-top: 4px solid var(--osha-blue);
+}
+.methodStep:nth-child(2) {
+  border-top: 4px solid var(--osha-green);
+}
+.methodStep:nth-child(3) {
+  border-top: 4px solid var(--osha-orange);
+}
+.methodStep:nth-child(4) {
+  border-top: 4px solid var(--osha-red);
+}
+
+/* Primary pushbutton: royal-blue housing with a gold actuator face. */
+.primaryAction {
+  border-color: #6f581d;
+  background:
+    linear-gradient(180deg, #e2c96f 0%, var(--old-gold-bright) 34%, #b18f35 100%);
+  color: var(--royal-blue-dark) !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 1px 0 0 rgba(255,255,255,.18),
+    inset -1px 0 0 rgba(79,58,11,.16),
+    0 5px 0 #6d571e,
+    0 8px 14px rgba(7,26,61,.23);
+}
+
+.secondaryAction {
+  border-color: var(--royal-blue-deep);
+  background:
+    linear-gradient(180deg, #2a5aa5 0%, var(--royal-blue) 47%, #0f326b 100%);
+  color: #fff !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.2),
+    inset 1px 0 0 rgba(255,255,255,.08),
+    inset -1px 0 0 rgba(0,0,0,.16),
+    0 5px 0 #071a3d,
+    0 8px 14px rgba(7,26,61,.22);
+}
+
+.primaryAction:active {
+  background: linear-gradient(180deg, #aa8a31, #c5a750);
+  box-shadow:
+    inset 0 3px 7px rgba(81,61,14,.3),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 0 #6d571e,
+    0 2px 4px rgba(7,26,61,.15);
+}
+
+.secondaryAction:active {
+  background: linear-gradient(180deg, #0d2d61, #1b4382);
+  box-shadow:
+    inset 0 3px 7px rgba(0,0,0,.3),
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 0 #071a3d,
+    0 2px 4px rgba(7,26,61,.15);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primaryAction:hover {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.62),
+      inset 1px 0 0 rgba(255,255,255,.2),
+      inset -1px 0 0 rgba(79,58,11,.18),
+      0 6px 0 #6d571e,
+      0 10px 17px rgba(7,26,61,.27);
+  }
+
+  .secondaryAction:hover {
+    border-color: var(--old-gold-bright);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.24),
+      inset 1px 0 0 rgba(255,255,255,.1),
+      inset -1px 0 0 rgba(0,0,0,.18),
+      0 6px 0 #071a3d,
+      0 10px 17px rgba(7,26,61,.27);
+  }
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible,
+.labLink:focus-visible,
+.brand:focus-visible,
+.footerMeta a:focus-visible {
+  outline-color: var(--old-gold-bright);
+}
+
+
+/* Plain-language bridge for the homepage method sampler. */
+.workbenchLabel {
+  margin: 1px 0 -2px 2px;
+  color: var(--old-gold-dark);
+  font: 800 0.55rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.18em;
+}
+
+.methodStep h3 {
+  margin-bottom: 4px;
+}
+
+.methodStep .methodFormal {
+  margin: 0 0 9px;
+  color: var(--royal-blue);
+  font: 800 0.58rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.methodStep .methodFormal + p {
+  margin-top: 0;
+  color: #435470;
+  font-size: 0.84rem;
+  line-height: 1.42;
+}
+
+.sectionLead > p:last-child {
+  max-width: 390px;
+  color: #435470;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.96rem;
+  line-height: 1.48;
+}
+
+
+/* Homepage sequence refinement: do not teach the Lab's internal work ontology
+ * as an abstract card row. The distinctions now appear only on concrete
+ * Featured Work objects. */
+.institutionCards {
+  display: none;
+}
+
+.featuredTag {
+  color: var(--royal-blue-deep);
+  background:
+    linear-gradient(180deg, #f8eebf 0%, #d8bd65 100%);
+}
+
+.featuredCard:nth-child(3) .featuredTag {
+  border-color: color-mix(in srgb, var(--osha-blue) 52%, #5f4e1f);
+  box-shadow:
+    inset 3px 0 0 var(--osha-blue),
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 1px rgba(89,70,21,.18);
+}
+
+.featuredCard:nth-child(4) .featuredTag {
+  border-color: color-mix(in srgb, var(--osha-green) 52%, #5f4e1f);
+  box-shadow:
+    inset 3px 0 0 var(--osha-green),
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 1px rgba(89,70,21,.18);
+}
+
+
+/* Hero asset + hidden Lab-engine boundary.
+ * The institutional surface uses the approved backlog graphic directly.
+ * /v2 remains routable but is not advertised from the public homepage. */
+.header {
+  grid-template-columns: minmax(285px, 1fr) auto;
+}
+
+.nav {
+  justify-self: end;
+}
+
+.heroVisual {
+  position: relative;
+  display: block;
+  min-height: 520px;
+  overflow: hidden;
+  border-left: 2px solid var(--old-gold);
+  background: var(--royal-blue-deep);
+  box-shadow:
+    inset 1px 0 0 rgba(255,255,255,.16),
+    inset 0 -1px 0 rgba(7,26,61,.28);
+}
+
+.heroGraphic {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.footerMeta {
+  align-self: center;
+}
+
+@media (max-width: 1240px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: stretch;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 980px) {
+  .heroGraphic {
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 680px) {
+  .heroGraphic {
+    min-height: 360px;
+  }
+}
+
+
+/* Hero proportion refinement.
+ * The editorial copy owns the desktop hero height; the image is cropped into
+ * that frame instead of expanding the row from its intrinsic aspect ratio. */
+.hero {
+  min-height: 0;
+  align-items: stretch;
+}
+
+.heroCopy {
+  padding:
+    clamp(42px, 4vw, 62px)
+    clamp(42px, 5.3vw, 86px)
+    clamp(46px, 4.4vw, 68px);
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 14px 0 18px;
+  font-size: clamp(3.05rem, 3.35vw, 4.15rem);
+  line-height: 0.96;
+}
+
+.lead {
+  max-width: 690px;
+  font-size: clamp(1.04rem, 1.15vw, 1.28rem);
+  line-height: 1.42;
+}
+
+.bodyCopy {
+  max-width: 670px;
+  margin-top: 11px;
+  line-height: 1.52;
+}
+
+.heroActions {
+  margin-top: 22px;
+}
+
+.heroVisual {
+  min-height: 0;
+}
+
+.heroGraphic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header .brandCopy {
+  gap: 0;
+}
+
+@media (max-width: 980px) {
+  .heroVisual {
+    min-height: 440px;
+  }
+
+  .heroGraphic {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .heroCopy {
+    padding: 44px 22px 48px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.85rem, 12.4vw, 4rem);
+  }
+
+  .heroVisual {
+    min-height: 340px;
+  }
+
+  .heroGraphic {
+    min-height: 0;
+  }
+}
