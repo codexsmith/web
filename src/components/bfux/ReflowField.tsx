@@ -47,11 +47,15 @@ function clickBelongsToNestedControl(
   return Boolean(interactive && interactive !== event.currentTarget);
 }
 
-const layoutSpring = {
-  type: "spring",
-  stiffness: 340,
-  damping: 34,
-  mass: 0.7,
+const layoutTransition = {
+  type: "tween",
+  duration: 0.42,
+  ease: [0.22, 1, 0.36, 1],
+} as const;
+
+const detailTransition = {
+  duration: 0.18,
+  ease: [0.22, 1, 0.36, 1],
 } as const;
 
 /**
@@ -80,7 +84,9 @@ export function ReflowField({
   const reducedMotion = useReducedMotion();
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
-  const transition = reducedMotion ? { duration: 0 } : { layout: layoutSpring };
+  const transition = reducedMotion
+    ? { duration: 0 }
+    : { layout: layoutTransition };
 
   const setSelection = useCallback((id: string | null) => {
     setSelectedId(id);
@@ -143,7 +149,9 @@ export function ReflowFieldItem({
 
   const selected = context.selectedId === id;
   const detailId = `${context.fieldId}-${safeFragment(id)}-detail`;
-  const transition = reducedMotion ? { duration: 0 } : { layout: layoutSpring };
+  const transition = reducedMotion
+    ? { duration: 0 }
+    : { layout: layoutTransition };
   const toggle = () => context.setSelection(selected ? null : id);
 
   const remainingIds = context.selectedId
@@ -172,6 +180,7 @@ export function ReflowFieldItem({
   return (
     <motion.article
       layout
+      layoutAnchor={{ x: 0.5, y: 0.5 }}
       layoutDependency={context.selectedId}
       transition={transition}
       className={[styles.item, className].filter(Boolean).join(" ")}
@@ -193,16 +202,20 @@ export function ReflowFieldItem({
         {summary}
       </motion.div>
 
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode="popLayout">
         {selected ? (
           <motion.div
             key="detail"
             id={detailId}
             className={styles.detail}
-            initial={reducedMotion ? false : { opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
-            transition={reducedMotion ? { duration: 0 } : { duration: 0.18 }}
+            initial={reducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={
+              reducedMotion
+                ? { duration: 0 }
+                : { ...detailTransition, delay: 0.1 }
+            }
           >
             {detail}
           </motion.div>

@@ -19,7 +19,11 @@ expect(component.includes('event.key === "Escape"'), "Escape must collapse commi
 expect(component.includes("useReducedMotion"), "Motion reduced-motion preference must gate layout animation");
 expect(component.includes("LayoutGroup"), "reference renderer must coordinate sibling layout animation with Motion");
 expect(component.includes("<motion.article"), "Reflow items must delegate geometry interpolation to Motion");
+expect(component.includes('layoutAnchor={{ x: 0.5, y: 0.5 }}'), "focus-stage resize should grow around the card center rather than snap from a corner");
+expect(component.includes("duration: 0.42"), "focus-stage layout interpolation should use a deliberate visible resize duration");
 expect(component.includes("AnimatePresence"), "expanded detail should use a maintained enter/exit primitive");
+expect(component.includes('mode="popLayout"'), "detail exit must not hold the parent card in its expanded geometry");
+expect(component.includes("delay: 0.1"), "detail content should stage after geometry begins moving rather than compete with resize");
 expect(component.includes('data-reflow-state={selected ? "selected" : "rest"}'), "item state must be explicit in DOM");
 expect(component.includes('data-reflow-placement={placement}'), "focus-stage placement must be explicit in DOM");
 expect(component.includes('layoutMode?: ReflowLayoutMode'), "Reflow Field must expose a reusable layout-mode contract");
