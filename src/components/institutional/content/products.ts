@@ -44,4 +44,6 @@ export const productPageQuestions = [
   "What is the next product milestone?",
   "How can I give feedback or report a defect?",
   "What rights or stewardship boundary matters?",
+  "Who maintains, repairs, transfers, or retires it?",
+  "What data, attention, energy, infrastructure, or ecological burden does continued use impose?",
 ] as const;
