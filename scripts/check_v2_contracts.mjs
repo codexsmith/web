@@ -41,7 +41,7 @@ requireMatch(
   "Specialized projections must add a distinct representation rather than repeat World content",
 );
 requireMatch(
-  "src/app/[[...slug]]/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /legacyRecordDestination[\s\S]*permanentRedirect\(recordDestination\)/,
   "Legacy Record URLs must resolve to their canonical World or Provenance destination",
 );
@@ -58,7 +58,7 @@ forbidMatch(
   "Hero must not duplicate entered-world structure or traversal controls",
 );
 requireMatch(
-  "src/app/[[...slug]]/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /initialHeroVisible\s*=\s*node\.id\s*===\s*"root"\s*&&\s*worldState\s*!==\s*"1"/,
   "Bare root URL must resolve to the entry threshold while ?world=1 resolves to the entered world",
 );
