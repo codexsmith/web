@@ -107,7 +107,10 @@ export function InstitutionalOpenLabPage() {
           <p>
             Open Lab is the designed public boundary of the institution. The contracts are
             now legible; the submission machinery should only become active when its
-            stewardship controls are ready.
+            stewardship controls are ready. That stewardship is intellectual, human, and
+            ecological: preserve provenance and contributor credit, protect people and
+            communities from extractive participation, and account for the infrastructural
+            or material consequences of work invited into the Lab.
           </p>
           <nav className={styles.openLabCloseLinks} aria-label="Open Lab next steps">
             <Link href="/v3/contact?type=open-lab&source=open-lab">
