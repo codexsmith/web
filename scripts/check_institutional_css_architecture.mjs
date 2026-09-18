@@ -22,6 +22,7 @@ const requiredStyles = [
   "Publications.module.css",
   "About.module.css",
   "Funding.module.css",
+  "Founder.module.css",
   "OpenLab.module.css",
 ];
 
@@ -42,6 +43,7 @@ for (const sharedClass of [".routeLead", ".routeSupport", ".routeHero", ".routeM
 
 expect(foundation.includes(".nav a"), "Foundation must own shared navigation behavior");
 expect(foundation.includes(".footerNav a"), "Foundation must own shared footer navigation behavior");
+expect(foundation.includes("flex-wrap: wrap"), "footer navigation must wrap when contextual child routes are exposed");
 expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
 expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared site chrome");
 
@@ -53,6 +55,7 @@ const routeContracts = [
   ["InstitutionalPublicationsPage.tsx", "Publications.module.css"],
   ["InstitutionalAboutPage.tsx", "About.module.css"],
   ["InstitutionalFundingPage.tsx", "Funding.module.css"],
+  ["InstitutionalFounderPage.tsx", "Founder.module.css"],
   ["InstitutionalOpenLabPage.tsx", "OpenLab.module.css"],
 ];
 

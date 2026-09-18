@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
-import { institutionalRoutes } from "./institutionalRoutes";
+import { institutionalFooterRoutes, institutionalRoutes } from "./institutionalRoutes";
 import styles from "./styles/InstitutionalFoundation.module.css";
 
 function routeIsActive(pathname: string, href: string) {
@@ -86,7 +86,7 @@ export function InstitutionalFooter() {
       </div>
 
       <nav className={styles.footerNav} aria-label="Boundary First Labs footer">
-        {institutionalRoutes.map((route) => (
+        {institutionalFooterRoutes.map((route) => (
           <a key={route.href} href={route.href}>
             {route.label}
           </a>

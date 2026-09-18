@@ -1,0 +1,368 @@
+/* Founder child route */
+.founderPage {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.84), rgba(232,240,248,.97)),
+    var(--institution-paper);
+}
+
+.founderHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(340px, .75fr);
+  gap: clamp(40px, 7vw, 108px);
+  align-items: end;
+  padding: clamp(60px, 7vw, 106px) clamp(30px, 8vw, 128px);
+  border-bottom: 2px solid var(--old-gold);
+  background:
+    linear-gradient(90deg, #fff 0 66%, #eef3f9 100%);
+}
+
+.founderHero h1 {
+  margin: 12px 0 18px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(5rem, 8vw, 10rem);
+  font-weight: 500;
+  letter-spacing: -.075em;
+  line-height: .82;
+}
+
+.founderIdentityPlate {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 20px;
+  align-items: center;
+  padding: 22px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 6px solid var(--old-gold);
+  background: linear-gradient(180deg, #fbfdff, #e9f0f8);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 4px 0 rgba(7,26,61,.18),
+    0 14px 26px rgba(7,26,61,.11);
+}
+
+.founderMonogram {
+  width: 92px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #05070d;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 32%, #28345e, #080a16 58%, #03040a 100%);
+  color: #fff6d4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.5rem;
+  box-shadow:
+    inset 0 0 0 2px rgba(184,154,71,.34),
+    0 4px 10px rgba(7,26,61,.2);
+}
+
+.founderIdentityPlate span,
+.founderRoleCard small,
+.founderTimeline small,
+.founderPrincipleGrid span {
+  color: var(--old-gold-dark);
+  font: 800 .52rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
+}
+
+.founderIdentityPlate strong {
+  display: block;
+  margin: 8px 0 6px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+}
+
+.founderIdentityPlate p {
+  margin: 0;
+  color: #52627b;
+  font-size: .77rem;
+  line-height: 1.48;
+}
+
+.founderRolesSection,
+.founderMethodSection {
+  padding: 44px clamp(30px, 6vw, 96px) 54px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+}
+
+.founderRolesSection {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.5), transparent 15%),
+    linear-gradient(180deg, #dce6f0, #edf2f7);
+}
+
+.founderRoleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.founderRoleCard {
+  min-height: 250px;
+  padding: 19px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 5px solid var(--osha-blue);
+  background: linear-gradient(180deg, #fff, #edf3f9);
+  box-shadow: 0 3px 0 rgba(7,26,61,.16), 0 10px 20px rgba(7,26,61,.08);
+}
+
+.founderRoleCard:nth-child(2) { border-top-color: var(--osha-green); }
+.founderRoleCard:nth-child(3) { border-top-color: var(--old-gold); }
+
+.founderRoleCard > span {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.founderRoleCard h3 {
+  margin: 10px 0 10px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.founderRoleCard p {
+  margin: 0;
+  color: #52627b;
+  font-size: .79rem;
+  line-height: 1.52;
+}
+
+.founderFormation {
+  display: grid;
+  grid-template-columns: minmax(280px, .68fr) minmax(0, 1.32fr);
+  gap: 40px;
+  padding: 50px clamp(30px, 6vw, 96px) 58px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background: #fff;
+}
+
+.founderFormationLead {
+  padding-right: 30px;
+  border-right: 1px solid rgba(7,26,61,.2);
+}
+
+.founderFormationLead h2,
+.founderBoundary h2 {
+  margin: 10px 0 14px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 3.1vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.founderFormationLead > p:last-child,
+.founderBoundary > div > p:last-child {
+  margin: 0;
+  color: #435470;
+  font-size: .92rem;
+  line-height: 1.62;
+}
+
+.founderTimeline {
+  display: grid;
+  gap: 9px;
+}
+
+.founderTimeline article {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 15px;
+  padding: 15px 17px;
+  border: 1px solid rgba(7,26,61,.26);
+  border-left: 5px solid var(--osha-blue);
+  background: linear-gradient(180deg, #fbfdff, #eef4f9);
+  box-shadow: 0 2px 0 rgba(7,26,61,.1);
+}
+
+.founderTimeline article:nth-child(2) { border-left-color: var(--osha-green); }
+.founderTimeline article:nth-child(3) { border-left-color: var(--osha-orange); }
+.founderTimeline article:nth-child(4) { border-left-color: var(--old-gold); }
+.founderTimeline article:nth-child(5) { border-left-color: var(--royal-blue); }
+
+.founderTimeline article > span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.founderTimeline h3 {
+  margin: 7px 0 6px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.founderTimeline p {
+  margin: 0;
+  color: #52627b;
+  font-size: .75rem;
+  line-height: 1.48;
+}
+
+.founderMethodSection {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.5), transparent 14%),
+    linear-gradient(180deg, #dbe5ef, #edf2f7);
+}
+
+.founderMethodRail {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  margin-top: 22px;
+  padding: 9px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  background: linear-gradient(180deg, #b8c8da, #d1dce8);
+  box-shadow: inset 0 3px 8px rgba(7,26,61,.18);
+}
+
+.founderMethodRail > div {
+  position: relative;
+  min-height: 112px;
+  display: grid;
+  align-content: center;
+  gap: 9px;
+  padding: 12px 9px;
+  border: 1px solid rgba(7,26,61,.24);
+  background: #fff;
+  text-align: center;
+}
+
+.founderMethodRail > div:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -8px;
+  top: 47%;
+  z-index: 2;
+  color: var(--old-gold-dark);
+  font-weight: 800;
+}
+
+.founderMethodRail span {
+  color: var(--old-gold-dark);
+  font: 800 .48rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.founderMethodRail strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .78rem;
+  line-height: 1.18;
+}
+
+.founderPrincipleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.founderPrincipleGrid article {
+  padding: 16px;
+  border: 1px solid rgba(7,26,61,.25);
+  border-top: 4px solid var(--old-gold);
+  background: rgba(255,255,255,.82);
+}
+
+.founderPrincipleGrid article:nth-child(2) { border-top-color: var(--osha-blue); }
+.founderPrincipleGrid article:nth-child(3) { border-top-color: var(--osha-green); }
+
+.founderPrincipleGrid p {
+  margin: 9px 0 0;
+  color: #52627b;
+  font-size: .76rem;
+  line-height: 1.5;
+}
+
+.founderBoundary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr);
+  gap: clamp(40px, 7vw, 100px);
+  align-items: center;
+  padding: 54px clamp(30px, 7vw, 112px) 66px;
+  background: #fff;
+}
+
+.founderBoundary blockquote {
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  line-height: 1.48;
+  box-shadow: 0 4px 0 #071a3d, 0 14px 26px rgba(7,26,61,.16);
+}
+
+@media (max-width: 1100px) {
+  .founderMethodRail {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .founderMethodRail > div:nth-child(4)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .founderHero,
+  .founderFormation,
+  .founderBoundary {
+    grid-template-columns: 1fr;
+  }
+
+  .founderRoleGrid,
+  .founderPrincipleGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .founderFormationLead {
+    padding-right: 0;
+    padding-bottom: 24px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(7,26,61,.2);
+  }
+}
+
+@media (max-width: 680px) {
+  .founderHero,
+  .founderRolesSection,
+  .founderFormation,
+  .founderMethodSection,
+  .founderBoundary {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .founderHero h1 {
+    font-size: clamp(4rem, 24vw, 6.3rem);
+  }
+
+  .founderIdentityPlate {
+    grid-template-columns: 1fr;
+  }
+
+  .founderMethodRail {
+    grid-template-columns: 1fr;
+  }
+
+  .founderMethodRail > div:not(:last-child)::after {
+    content: "↓";
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: -10px;
+    display: block;
+  }
+}

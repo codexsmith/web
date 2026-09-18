@@ -72,6 +72,10 @@ const routeContracts = [
     "funding"
   ],
   [
+    "InstitutionalFounderPage.tsx",
+    "founder"
+  ],
+  [
     "InstitutionalOpenLabPage.tsx",
     "openLab"
   ]
@@ -102,6 +106,7 @@ for (const file of [
   "InstitutionalPublicationsPage.tsx",
   "InstitutionalAboutPage.tsx",
   "InstitutionalFundingPage.tsx",
+  "InstitutionalFounderPage.tsx",
   "InstitutionalOpenLabPage.tsx",
 ]) {
   const source = read(`${root}/${file}`);
@@ -117,8 +122,13 @@ const routeRegistry = read(`${root}/institutionalRoutes.ts`);
 const topLevelRouteRegistry = routeRegistry.slice(0, routeRegistry.indexOf("export const institutionalChildRoutes"));
 expect(!routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" },\n  { label: "Publications"'), "Apparatus must not remain in top-level institutional navigation");
 expect(!topLevelRouteRegistry.includes('/v3/funding'), "Funding must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/founder'), "Founder must remain a contextual child route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
-expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" }'), "About must own Funding as a child-page link");
+expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Founder", href: "/v3/founder" }'), "About must expose Funding and Founder as child-page links");
+expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
+expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
+expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
 expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" }'), "Research must expose Apparatus and Funding as child-page links");
 expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" }'), "Open Lab must expose Apparatus and Funding as child-page links");
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
@@ -127,6 +137,8 @@ expect(primitives.includes("<small>DEPENDENCY</small>"), "child-page cards must 
 expect(primitives.includes('aria-label="Child pages"'), "child-page navigation must expose semantic navigation labeling");
 expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry must not duplicate page copy");
 expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");
+expect(chrome.includes("institutionalFooterRoutes"), "footer must use the explicit footer route collection");
+expect(chrome.includes("institutionalFooterRoutes.map"), "footer must render direct child-page links");
 
 const researchPage = read(`${root}/InstitutionalResearchPage.tsx`);
 expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), "Research hero must expose its contextual child pages");
@@ -170,6 +182,12 @@ expect((aboutGroups.match(/<ReflowField/g) || []).length === 3, "About must use 
 expect(aboutGroups.includes('data-about-group="representation"'), "About must preserve Representation + Method");
 expect(aboutGroups.includes('data-about-group="agency"'), "About must preserve Agency + Stewardship");
 expect(aboutGroups.includes('data-about-group="institution"'), "About must preserve Institutional Practice");
+
+const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
+expect(founderPage.includes("./content/founder"), "Founder page must own a route-local content model");
+expect(founderPage.includes("Nicholas T. Smith"), "Founder page must identify Nicholas T. Smith");
+expect(founderPage.includes("computer scientist, systems engineer"), "Founder hero must state the requested professional identity");
+expect(founderPage.includes('className={styles.founderBoundary}'), "Founder page must state the founder-dependence boundary");
 
 const fundingPage = read(`${root}/InstitutionalFundingPage.tsx`);
 expect(fundingPage.includes("./content/funding"), "Funding page must own a route-local content model");

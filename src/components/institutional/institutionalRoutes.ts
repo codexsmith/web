@@ -11,6 +11,7 @@ export const institutionalRoutes = [
 export const institutionalChildRoutes = {
   about: [
     { label: "Funding", href: "/v3/funding" },
+    { label: "Founder", href: "/v3/founder" },
   ],
   research: [
     { label: "Apparatus", href: "/v3/apparatus" },
@@ -21,3 +22,11 @@ export const institutionalChildRoutes = {
     { label: "Funding", href: "/v3/funding" },
   ],
 } as const;
+
+
+export const institutionalFooterRoutes = [
+  ...institutionalRoutes,
+  { label: "Funding", href: "/v3/funding" },
+  { label: "Apparatus", href: "/v3/apparatus" },
+  { label: "Founder", href: "/v3/founder" },
+] as const;
