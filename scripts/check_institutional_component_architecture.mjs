@@ -35,12 +35,23 @@ expect(homeContent.includes('href: "/v3/products/youtube-knowledge-explorer"'), 
 expect(!homeContent.includes("Projectr"), "v3 homepage public naming must not expose Projectr");
 expect(!homeContent.includes('title: "Public Infrastructure Analysis"'), "Public Infrastructure Analysis must no longer occupy featured work slot four");
 expect(homePage.includes("item.href ?"), "Homepage featured work must support direct product entry links");
+expect(homePage.includes("styles.inMotionSection"), "Homepage must expose the Lab in Motion institutional access layer");
+expect(homeContent.includes("homeNowSnapshot"), "Homepage content must expose a current Now / Roadmap snapshot");
+expect(homeContent.includes('href: "/v3/now"'), "Homepage Now snapshot must link to the public roadmap");
+expect(homeContent.includes('href: "/v3/applied-work"'), "Homepage must expose Applied Work as an institutional front door");
+expect(homeContent.includes('href: "/v3/collaboration"'), "Homepage must expose Collaboration as an institutional front door");
+expect(homeContent.includes('href: "/v3/funding"'), "Homepage must expose Funding as an institutional front door");
+expect(homeContent.includes("Externalize → test → repair → repeat → transfer."), "Homepage Now snapshot must preserve the current operating thesis");
+expect(homePage.includes("homeInstitutionalFrontDoors.map"), "Homepage institutional front doors must render from the content model");
 
 const foundationCss = read(`${root}/styles/InstitutionalFoundation.module.css`);
 expect(foundationCss.includes('border-color: rgba(184, 154, 71, .46)'), "Institutional header must carry a muted antique-gold perimeter");
 expect(foundationCss.includes("border-bottom-width: .5px"), "Institutional header bottom rule must remain the thinnest perimeter edge");
 expect(foundationCss.includes('.header[data-header-compact="true"] {\n  min-height: 44px;'), "Post-hero header must physically contract to the compact rail");
 expect(foundationCss.includes('.header[data-header-compact="true"] .logo {\n  width: 28px;\n  height: 28px;'), "Compact header must shrink the persistent logo");
+expect(foundationCss.includes(".inMotionSection"), "Homepage foundation must style the Lab in Motion layer");
+expect(foundationCss.includes(".nowSnapshot"), "Homepage foundation must style the current-state roadmap surface");
+expect(foundationCss.includes(".frontDoorStack"), "Homepage foundation must style the Applied Work / Collaboration / Funding entry stack");
 
 const pageShell = read(`${root}/InstitutionalPageShell.tsx`);
 expect(pageShell.includes("<InstitutionalHeader />"), "PageShell must own the shared header");
