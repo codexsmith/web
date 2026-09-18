@@ -20,15 +20,17 @@ export function InstitutionalApparatusPage() {
           lead={<>Research creates more structure than a paper can hold.</>}
           support={<>Boundary First Labs builds apparatus for preserving, inspecting, and
               transferring questions, experiments, claims, evidence, provenance,
-              criticism, defects, authority, repair, and forward state. Its operating
-              ancestry includes laboratory recordkeeping, software configuration control,
-              and Lean–Agile habits of visible state, bounded flow, feedback, and explicit
-              promotion gates.</>}
+              criticism, defects, authority, repair, and forward state. Lean–Agile flow
+              keeps work and capacity visible; scientific method supplies evidence and
+              falsification discipline; agentic reasoning supplies bounded search,
+              decomposition, tool use, and critique. The apparatus makes those loops
+              durable enough to inspect and hand off.</>}
           >
           <blockquote className={styles.apparatusThesis}>
             <span>DESIGN POSTURE</span>
             Legible by humans. Executable by machines. Repairable under critique.
-            Transferable without hidden dependence.
+            Transferable without hidden dependence.<br />
+            Agent proposes. Machine verifies. World adjudicates.
           </blockquote>
         </InstitutionalRouteHero>
 

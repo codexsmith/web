@@ -22,7 +22,7 @@ const styles = composeCssModules(
 const researchContextOrder = [
   "reader-agency",
   "working-principles",
-  "lean-agile-lineage",
+  "operating-braid",
   "equivalence-firewall",
   "research-state",
   "public-research-object",
@@ -145,33 +145,51 @@ export function ResearchContextSection() {
           </ContextCard>
 
           <ContextCard
-            id="lean-agile-lineage"
-            label="Lean–Agile Lineage"
-            eyebrow="PRACTICE LINEAGE"
-            title="Research operations inherit an empirical delivery discipline."
-            description="Visible state, bounded work, short feedback loops, and repair are operating habits—not scientific authority."
+            id="operating-braid"
+            label="Operating Braid"
+            eyebrow="THREE RECURSIVE DISCIPLINES"
+            title="Flow, evidence, and search constrain one another."
+            description="Lean–Agile practice, scientific method, and agentic reasoning are distinct lineages that meet in the Lab's operating loop."
             className={styles.contextPrinciples}
             tone="principles"
           >
-            <div className={styles.contextDetail}>
-              <div>
+            <div className={styles.principleGrid}>
+              <article className={styles.principlePlate}>
+                <h3>Lean–Agile</h3>
                 <p>
-                  Agile, Lean, Kanban, and Lean Startup entered the Lab through years of
-                  professional practice rather than retrospective analogy. Their durable
-                  contribution is operational: externalize state, respect capacity, reduce
-                  work in progress, build the smallest coherent next object, inspect what
-                  happened, preserve the defect, and update the plan.
+                  Externalize state, limit work in progress, respect capacity, deliver a
+                  coherent increment, inspect the result, and adapt the next move.
                 </p>
+              </article>
+              <article className={styles.principlePlate}>
+                <h3>Scientific method</h3>
                 <p>
-                  Research adds stronger evidence obligations. A short feedback loop can
-                  expose an error faster; it cannot make a scientific claim true by itself.
+                  Ask a discriminating question, state hypotheses and alternatives, test
+                  under explicit conditions, preserve nulls, separate observation from
+                  interpretation, and let evidence constrain the claim.
                 </p>
-              </div>
-              <blockquote className={styles.contextQuote}>
-                “Working software made feedback executable. The Lab generalizes the loop,
-                not the ceremony.”
-              </blockquote>
+              </article>
+              <article className={styles.principlePlate}>
+                <h3>Agentic reasoning</h3>
+                <p>
+                  Search alternatives, decompose the problem, select tools, construct and
+                  compare representations, localize defects, synthesize evidence, and
+                  propose repairs under explicit authority boundaries.
+                </p>
+              </article>
+              <article className={styles.principlePlate}>
+                <h3>The braid</h3>
+                <p>
+                  Flow decides what can be attempted next. Evidence decides what was
+                  learned. Agentic search decides what alternatives deserve attention.
+                  Boundary First records the representation, consequence, defect, repair,
+                  and successor state that connect the loop.
+                </p>
+              </article>
             </div>
+            <blockquote className={styles.contextQuote}>
+              “Agent proposes; machine verifies; world adjudicates.”
+            </blockquote>
           </ContextCard>
 
           <ContextCard

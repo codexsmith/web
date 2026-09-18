@@ -34,15 +34,15 @@ export const projects = [
   {
     code: "ASM",
     title: "Agentic Scientific Method",
-    type: "Registered research product / active research lane",
+    type: "Agentic reasoning × scientific-method research product",
     status: "research_product",
     tone: "research",
-    domain: "Scientific research / AI",
+    domain: "Scientific research / AI / research automation",
     stress: "Theory representation, evaluation, repair, authority",
     transfer:
       "Research machinery becoming executable while preserving provenance, authority ceilings, human gates, and handoff context.",
     question:
-      "What would it take to treat theory change as an inspectable, typed operation without confusing technical execution with scientific truth?",
+      "How can agentic search, scientific testing, and typed theory transformation work together without confusing computational success, model fluency, or automated agreement with scientific truth?",
     result:
       "Theory Transformation work completed a bounded six-case comparative series and produced a candidate v0.2 executable specification; the next control is a small deterministic runtime.",
     agency:
