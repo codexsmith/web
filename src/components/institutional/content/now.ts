@@ -6,9 +6,9 @@ export const nowPriorityLanes = [
     description:
       "Make the Lab understandable to people who do not already know the vocabulary, while keeping the deeper corpus available for inspection.",
     work: [
-      "Complete the institutional website and remaining engagement surfaces.",
-      "Keep Funding, Collaboration, Applied Work, Evidence, and the roadmap connected to the substantive work beneath them.",
-      "Add clear contact and trust/governance surfaces without turning the site into a marketing shell detached from the corpus.",
+      "Finish the institutional website's remaining trust/governance surface and connect the contextual inquiry receiver.",
+      "Keep Funding, Collaboration, Applied Work, Evidence, Contact, and the roadmap connected to the substantive work beneath them.",
+      "Verify the full path from public explanation to inquiry, routing, evidence capture, and repair without turning the site into a marketing shell detached from the corpus.",
     ],
     closure:
       "A first-time visitor can understand what BFL is, what it does, what is still uncertain, and where to go next without founder narration.",
