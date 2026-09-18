@@ -2609,9 +2609,13 @@
 .practiceLineageInputs article {
   position: relative;
   transform-origin: 50% 12%;
+  border-color: rgba(7,26,61,.2);
+  background:
+    linear-gradient(180deg, #fff 0%, #fbfcfd 68%, #f2f5f8 100%);
   box-shadow:
-    0 10px 22px rgba(20,37,58,.08),
-    0 2px 0 rgba(20,37,58,.07);
+    0 14px 28px rgba(20,37,58,.09),
+    0 3px 0 rgba(20,37,58,.07),
+    inset 0 1px 0 rgba(255,255,255,.95);
 }
 .practiceLineageInputs article:nth-child(1) {
   z-index: 1;
@@ -2626,9 +2630,9 @@
 }
 .practiceLineageInputs article:nth-child(3) {
   z-index: 2;
-  margin-left: -18px;
+  margin-left: -6px;
   border-top: 4px solid var(--osha-blue);
-  transform: rotate(1.5deg) translateY(7px);
+  transform: translate(8px, 9px) rotate(2.4deg);
 }
 .practiceLineageOrdinal {
   color: #6f7d8e;
@@ -2645,9 +2649,10 @@
 }
 .practiceLineageGrid article p {
   margin: 8px 0 0;
-  color: #52627b;
-  font-size: .66rem;
-  line-height: 1.42;
+  color: #485b75;
+  font-size: .7rem;
+  font-weight: 500;
+  line-height: 1.46;
 }
 .practiceLineageMerge {
   position: relative;
