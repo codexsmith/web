@@ -80,6 +80,7 @@ export const appliedWorkGoodFit = [
   "A critical workflow depends on spreadsheets, meetings, memory, or manual glue to preserve context.",
   "Research or institutional knowledge exists, but provenance, status, handoff, or reproducibility are weak.",
   "You need a pilot small enough to learn something before committing to a large transformation.",
+  "A local success metric is hiding maintenance, labor, infrastructure, community, resource, or ecological costs outside the frame.",
 ] as const;
 
 export const appliedWorkOutputs = [
@@ -107,6 +108,10 @@ export const appliedWorkOutputs = [
     title: "Handoff-ready artifacts",
     description: "Documentation and operating structure designed to remain useful after the engagement ends.",
   },
+  {
+    title: "Stewardship plan",
+    description: "Named ownership for maintenance, repair, transfer, retirement, affected people, and material or ecological consequences that persist after delivery.",
+  },
 ] as const;
 
 export const appliedWorkProcess = [
@@ -132,6 +137,11 @@ export const appliedWorkBoundaries = [
     label: "AGENTIC REASONING, HUMAN AUTHORITY",
     description:
       "AI and automation may search, decompose, compare, simulate, draft, or critique. They do not silently acquire decision rights, domain authority, or the power to promote a consequential conclusion without the evidence and human gate the engagement requires.",
+  },
+  {
+    label: "STEWARDSHIP OUTLIVES DELIVERY",
+    description:
+      "A successful engagement still leaves obligations behind. Intellectual stewardship preserves provenance and handoff; humanist stewardship preserves agency and local knowledge; ecological stewardship keeps material, infrastructural, and environmental costs inside the consequence model.",
   },
   {
     label: "NO THEORY BUY-IN REQUIRED",
