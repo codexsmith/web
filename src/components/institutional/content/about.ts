@@ -83,6 +83,27 @@ export const capabilityOutputs = [
   "A handoff to a better long-term steward",
 ] as const;
 
+export const stewardshipFacets = [
+  {
+    label: "INTELLECTUAL",
+    title: "Steward the knowledge.",
+    description:
+      "Preserve provenance, uncertainty, criticism, negative results, supersession, rights, and enough context for the work to remain inspectable and transferable.",
+  },
+  {
+    label: "HUMANIST",
+    title: "Steward human agency.",
+    description:
+      "Protect dignity, local knowledge, accessibility, contestability, repair, and capability transfer so a useful system does not make the people it serves less able to act.",
+  },
+  {
+    label: "ECOLOGICAL",
+    title: "Steward the substrate.",
+    description:
+      "Follow material, energy, infrastructure, social, and ecological consequences beyond the local boundary, including burdens shifted onto communities, ecosystems, maintainers, or future generations.",
+  },
+] as const;
+
 export const stewardshipQuestions = [
   "Who exercises power?",
   "Who bears its effects?",
