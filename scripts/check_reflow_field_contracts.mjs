@@ -21,6 +21,9 @@ const openLabCss = fs.readFileSync("src/components/institutional/styles/OpenLab.
 const about = fs.readFileSync("src/components/institutional/InstitutionalAboutPage.tsx", "utf8");
 const aboutGroups = fs.readFileSync("src/components/institutional/sections/AboutReflowGroups.tsx", "utf8");
 const aboutCss = fs.readFileSync("src/components/institutional/styles/About.module.css", "utf8");
+const augusta = fs.readFileSync("src/components/institutional/InstitutionalAugustaMaintenanceDebtPage.tsx", "utf8");
+const augustaCycle = fs.readFileSync("src/components/institutional/sections/AugustaCaseCycleSection.tsx", "utf8");
+const augustaCss = fs.readFileSync("src/components/institutional/styles/AugustaMaintenanceDebt.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -181,5 +184,19 @@ for (const [name, source] of [
   expect(source.includes("min-height: 166px"), `${name} REST Reflow cards should use the compact card floor`);
   expect(source.includes("height: 112px"), `${name} focus-stage peers should use the compact peer height`);
 }
+
+expect(augusta.includes("<AugustaCaseCycleSection />"), "Augusta civic case must compose its six substantive stages as one Reflow cycle");
+expect(augustaCycle.includes('layoutMode="focus-stage"'), "Augusta civic case cycle must use focus-stage reflow");
+expect(augustaCycle.includes("itemOrder={cycleOrder}"), "Augusta civic case cycle must declare stable source ordering");
+expect((augustaCycle.match(/<CycleStage/g) || []).length === 6, "Augusta civic case must expose exactly six Reflow stages");
+for (const id of ["finding", "ledger", "evidence", "fleet-test", "controls", "next-gate"]) {
+  expect(augustaCycle.includes(`id={stage.id}`) || augustaCycle.includes(`id="${id}"`) || augustaCycle.includes(id), `Augusta civic case must retain the ${id} stage`);
+}
+expect(augustaCss.includes(".caseCycleGrid"), "Augusta civic case must style a dedicated Reflow cycle field");
+expect(augustaCss.includes("--reflow-columns: 12"), "Augusta civic case REST cycle must use the authored twelve-column field");
+expect(augustaCss.includes('grid-row: 2'), "Augusta civic case REST state must visually continue onto a second process row");
+expect(augustaCss.includes("height: 112px"), "Augusta focus-stage peers must contract to compact context plates");
+expect(augustaCss.includes('.caseStage[data-reflow-state="selected"]'), "Augusta selected stage must have an explicit committed-inspection state");
+expect(augustaCss.includes(".caseCycleReturn"), "Augusta cycle must visibly return new evidence to the claim-boundary stage");
 
 console.log("BFUX Reflow Field contracts passed.");
