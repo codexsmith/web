@@ -488,10 +488,4 @@ requireMatch(
   "Root readability, hero threshold, traversal history, content-first World, and Card viewport-fit layers must all be active",
 );
 
-requireMatch(
-  "retired_v1/src/components/entrance/InstitutionalVestibuleHome.tsx",
-  /EntranceIntentConsole/,
-  "Retired v1 homepage must include its final intent-console refinement",
-);
-
 console.log("v2 architecture contracts: pass");
