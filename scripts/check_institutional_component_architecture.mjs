@@ -146,7 +146,7 @@ expect(
 );
 
 const routeRegistry = read(`${root}/institutionalRoutes.ts`);
-const topLevelRouteRegistry = routeRegistry.slice(0, routeRegistry.indexOf("export const institutionalChildRoutes"));
+const topLevelRouteRegistry = routeRegistry.slice(0, routeRegistry.indexOf("const institutionalChildPages"));
 expect(!routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" },\n  { label: "Publications"'), "Apparatus must not remain in top-level institutional navigation");
 expect(!topLevelRouteRegistry.includes('/v3/funding'), "Funding must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must remain a contextual child route rather than top-level navigation");
