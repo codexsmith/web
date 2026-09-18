@@ -37,7 +37,7 @@ export type LabSnapshotBreakdown = {
   title: string;
   intro: string;
   items: readonly LabSnapshotBreakdownItem[];
-  variant?: "grid" | "flow" | "single-row" | "split-tags";
+  variant?: "grid" | "flow" | "single-row" | "split-tags" | "corpus-split";
   note?: string;
   source?: string;
 };
