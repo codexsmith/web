@@ -138,19 +138,22 @@
 }
 
 .routeChildLinks {
-  width: min(100%, 360px);
+  width: min(100%, 440px);
   display: grid;
-  gap: 8px;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 7px;
 }
 
 .routeChildLink {
   width: 100%;
-  min-height: 74px;
+  min-height: 58px;
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) auto;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 13px;
-  padding: 11px 13px 11px 10px;
+  gap: 9px;
+  padding: 8px 9px 8px 8px;
   border: 1px solid var(--bfux-panel-edge-dark);
   border-left: 6px solid var(--osha-blue);
   background:
@@ -168,8 +171,8 @@
 }
 
 .routeChildDependencyMark {
-  width: 38px;
-  height: 38px;
+  width: 28px;
+  height: 28px;
   display: grid;
   place-items: center;
   border: 1px solid rgba(21,58,120,.28);
@@ -177,8 +180,8 @@
 }
 
 .routeChildDependencyIcon {
-  width: 25px;
-  height: 25px;
+  width: 19px;
+  height: 19px;
   fill: rgba(21,58,120,.12);
   stroke: var(--royal-blue);
   stroke-width: 1.6;
@@ -189,7 +192,7 @@
 .routeChildCopy {
   min-width: 0;
   display: grid;
-  gap: 5px;
+  gap: 3px;
 }
 
 .routeChildCopy small {
@@ -202,7 +205,7 @@
   overflow-wrap: anywhere;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.02rem;
+  font-size: .92rem;
   font-weight: 600;
   line-height: 1.05;
 }
@@ -239,5 +242,16 @@
 
   .routeChildLink:hover {
     transform: none;
+  }
+}
+
+
+@media (max-width: 620px) {
+  .routeChildLinks {
+    width: min(100%, 320px);
+    grid-template-rows: none;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    grid-auto-columns: auto;
   }
 }
