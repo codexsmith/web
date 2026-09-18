@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -40,55 +41,72 @@ export function InstitutionalProjectsPage() {
             />
 
           <div className={styles.projectCaseGrid}>
-            {projects.map((project) => (
-              <article
-                className={styles.projectCaseCard}
-                data-project-tone={project.tone}
-                key={project.title}
-              >
-                <div className={styles.projectCaseTopline}>
-                  <span className={styles.projectCaseCode}>{project.code}</span>
-                  <span className={styles.projectNativeStatus}>{project.status}</span>
-                </div>
-
-                <p className={styles.projectCaseType}>{project.type}</p>
-                <h3>{project.title}</h3>
-
-                <div className={styles.projectCaseFacts}>
-                  <div>
-                    <span>NATIVE DOMAIN</span>
-                    <strong>{project.domain}</strong>
+            {projects.map((project) => {
+              const content = (
+                <>
+                  <div className={styles.projectCaseTopline}>
+                    <span className={styles.projectCaseCode}>{project.code}</span>
+                    <span className={styles.projectNativeStatus}>{project.status}</span>
                   </div>
-                  <div>
-                    <span>PRIMARY STRESS</span>
-                    <strong>{project.stress}</strong>
+
+                  <p className={styles.projectCaseType}>{project.type}</p>
+                  <h3>{project.title}</h3>
+
+                  <div className={styles.projectCaseFacts}>
+                    <div>
+                      <span>NATIVE DOMAIN</span>
+                      <strong>{project.domain}</strong>
+                    </div>
+                    <div>
+                      <span>PRIMARY STRESS</span>
+                      <strong>{project.stress}</strong>
+                    </div>
                   </div>
-                </div>
 
-                <blockquote>{project.question}</blockquote>
+                  <blockquote>{project.question}</blockquote>
 
-                <div className={styles.projectCaseResult}>
-                  <span>WHAT EXISTS / CURRENT RESULT</span>
-                  <p>{project.result}</p>
-                </div>
-
-                <div className={styles.projectConsequenceGrid}>
-                  <div>
-                    <span>AGENCY</span>
-                    <p>{project.agency}</p>
+                  <div className={styles.projectCaseResult}>
+                    <span>WHAT EXISTS / CURRENT RESULT</span>
+                    <p>{project.result}</p>
                   </div>
-                  <div>
-                    <span>STEWARDSHIP</span>
-                    <p>{project.stewardship}</p>
-                  </div>
-                </div>
 
-                <div className={styles.projectTransferSignal}>
-                  <span>TRANSFER SIGNAL</span>
-                  {project.transfer}
-                </div>
-              </article>
-            ))}
+                  <div className={styles.projectConsequenceGrid}>
+                    <div>
+                      <span>AGENCY</span>
+                      <p>{project.agency}</p>
+                    </div>
+                    <div>
+                      <span>STEWARDSHIP</span>
+                      <p>{project.stewardship}</p>
+                    </div>
+                  </div>
+
+                  <div className={styles.projectTransferSignal}>
+                    <span>TRANSFER SIGNAL</span>
+                    {project.transfer}
+                  </div>
+                </>
+              );
+
+              return "href" in project ? (
+                <Link
+                  className={styles.projectCaseCard}
+                  data-project-tone={project.tone}
+                  href={project.href}
+                  key={project.title}
+                >
+                  {content}
+                </Link>
+              ) : (
+                <article
+                  className={styles.projectCaseCard}
+                  data-project-tone={project.tone}
+                  key={project.title}
+                >
+                  {content}
+                </article>
+              );
+            })}
           </div>
         </section>
 
