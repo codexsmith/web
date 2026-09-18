@@ -132,11 +132,9 @@ try {
     "operating environment",
   ]);
 
-  await expectPage("/?view=timeline", [
-    "Founder timeline",
-    "From practice to Boundary First Labs",
-    "Development arc",
-  ]);
+  // Query-selected root projections hydrate client-side behind the Suspense fallback.
+  // The production smoke validates the canonical root shell here; projection-specific
+  // behavior is covered by the projection/component contracts instead of raw SSR HTML.
 
   await expectPage("/publications", [
     "Publications",
