@@ -24,7 +24,10 @@ export function InstitutionalApparatusPage() {
               keeps work and capacity visible; scientific method supplies evidence and
               falsification discipline; agentic reasoning supplies bounded search,
               decomposition, tool use, and critique. The apparatus makes those loops
-              durable enough to inspect and hand off.</>}
+              durable enough to inspect and hand off. That is intellectual stewardship made
+              operational; when the machinery reaches people, institutions, infrastructure,
+              or the physical world, humanist and ecological stewardship bound what
+              technically successful operation is allowed to mean.</>}
           >
           <blockquote className={styles.apparatusThesis}>
             <span>DESIGN POSTURE</span>
