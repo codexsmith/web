@@ -34,6 +34,15 @@
   --product-paper: #dfe8e9;
 }
 
+.productExperienceFrame[data-product-theme="explorer"] {
+  --product-accent: #8a6ff1;
+  --product-accent-bright: #d6c9ff;
+  --product-accent-rgb: 138, 111, 241;
+  --product-dark: #171522;
+  --product-darker: #0b0a11;
+  --product-paper: #ece8f4;
+}
+
 .productExperienceHero {
   min-height: min(820px, calc(100vh - 74px));
   display: grid;
