@@ -325,7 +325,7 @@
 
 .aboutMethodOrigins {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin-top: 14px;
 }
@@ -338,8 +338,9 @@
   background: #fff;
 }
 
-.aboutMethodOrigins article:nth-child(2) { border-top-color: var(--osha-blue); }
-.aboutMethodOrigins article:nth-child(3) { border-top-color: var(--osha-green); }
+.aboutMethodOrigins article:nth-child(2) { border-top-color: var(--osha-orange); }
+.aboutMethodOrigins article:nth-child(3) { border-top-color: var(--osha-blue); }
+.aboutMethodOrigins article:nth-child(4) { border-top-color: var(--osha-green); }
 
 .aboutMethodOrigins article > span {
   color: var(--old-gold-dark);

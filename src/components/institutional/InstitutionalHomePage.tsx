@@ -4,7 +4,7 @@ import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 
-import { capabilityStrip, methodSteps, featuredWork, postureCommitments } from "./content/home";
+import { capabilityStrip, methodSteps, featuredWork, postureCommitments, practiceLineage } from "./content/home";
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
@@ -69,6 +69,29 @@ export function InstitutionalHomePage() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className={styles.practiceLineage}>
+          <div className={styles.practiceLineageLead}>
+            <p className={styles.sectionIndex}>PRACTICE LINEAGE</p>
+            <h2>Lean–Agile practice is part of the Lab&apos;s operating ancestry.</h2>
+            <p>
+              Boundary First did not begin as a theory imposed on software work. Years of
+              Agile, Lean, Kanban, consulting, startup iteration, and production delivery
+              made state, capacity, feedback, uncertainty, and repair concrete before those
+              patterns were generalized.
+            </p>
+          </div>
+
+          <div className={styles.practiceLineageGrid}>
+            {practiceLineage.map((item) => (
+              <article key={item.label}>
+                <span>{item.label}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
           </div>
         </section>
 

@@ -30,6 +30,9 @@ export const oldMachinery = [
   "Probability",
   "Information theory",
   "Software architecture",
+  "Agile delivery",
+  "Kanban",
+  "Lean Startup",
 ] as const;
 
 export const recurringStructures = [

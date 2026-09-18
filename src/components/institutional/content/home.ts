@@ -65,3 +65,30 @@ export const postureCommitments = [
     tone: "transfer",
   },
 ] as const;
+
+export const practiceLineage = [
+  {
+    label: "VISIBLE STATE",
+    title: "Make the work and the system observable.",
+    description:
+      "Agile and Kanban sharpened a habit that remains central to BFL: externalize current state, blockers, assumptions, queues, ownership, and next decisions instead of hiding them in memory.",
+  },
+  {
+    label: "BOUNDED FLOW",
+    title: "Capacity constrains what is actually reachable.",
+    description:
+      "Work in progress, time, attention, dependencies, and consequence are real constraints. Scope is treated as a state-space problem, not a wish list.",
+  },
+  {
+    label: "SHORT EVIDENCE LOOPS",
+    title: "Turn assumptions into working evidence quickly.",
+    description:
+      "Prototypes, demos, tests, and small coherent increments shorten the distance between a model of the system and what the system actually does.",
+  },
+  {
+    label: "INSPECT + REPAIR",
+    title: "Feedback should be allowed to change the plan.",
+    description:
+      "A defect, counterexample, failed increment, or changed condition is new state. Preserve it, revise the representation, and run the loop again.",
+  },
+] as const;

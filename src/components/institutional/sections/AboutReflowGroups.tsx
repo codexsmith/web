@@ -266,6 +266,17 @@ export function AboutReflowGroups() {
                   </p>
                 </article>
                 <article>
+                  <span>LEAN–AGILE LINEAGE</span>
+                  <h3>Make state visible and shorten the path to evidence.</h3>
+                  <p>
+                    Agile, Lean, Kanban, and Lean Startup were practiced in consulting,
+                    product, and delivery work before Boundary First was formalized. They
+                    contributed visible work state, bounded work in progress, empirical
+                    feedback, capacity awareness, small increments, and adaptation under
+                    changing conditions.
+                  </p>
+                </article>
+                <article>
                   <span>RESEARCH-BACKED</span>
                   <h3>Compare against deep neighboring traditions.</h3>
                   <p>
