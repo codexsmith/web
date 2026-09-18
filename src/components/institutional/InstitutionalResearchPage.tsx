@@ -1,4 +1,5 @@
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import { LabObjectIdentity } from "./LabObjectIdentity";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Research.module.css";
@@ -75,13 +76,14 @@ export function InstitutionalResearchPage() {
                 data-tone={program.tone}
                 key={program.title}
               >
-                <div className={styles.programTopline}>
-                  <span className={styles.programCode}>{program.code}</span>
-                  <div className={styles.programState}>
-                    <span className={styles.programStateLamp} aria-hidden="true" />
-                    {program.state}
-                  </div>
-                </div>
+                <LabObjectIdentity
+                  identifier={program.code}
+                  identifierLabel="CODE"
+                  kind="research"
+                  status={program.state}
+                  statusLabel="STATE"
+                  variant="compact"
+                />
 
                 <p className={styles.programRole}>{program.role}</p>
                 <h3>{program.title}</h3>

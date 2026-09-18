@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import { LabObjectIdentity } from "./LabObjectIdentity";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Projects.module.css";
@@ -44,10 +45,14 @@ export function InstitutionalProjectsPage() {
             {projects.map((project) => {
               const content = (
                 <>
-                  <div className={styles.projectCaseTopline}>
-                    <span className={styles.projectCaseCode}>{project.code}</span>
-                    <span className={styles.projectNativeStatus}>{project.status}</span>
-                  </div>
+                  <LabObjectIdentity
+                    identifier={project.code}
+                    identifierLabel="CODE"
+                    kind="project"
+                    status={project.status}
+                    statusLabel="SOURCE STATUS"
+                    variant="compact"
+                  />
 
                   <p className={styles.projectCaseType}>{project.type}</p>
                   <h3>{project.title}</h3>

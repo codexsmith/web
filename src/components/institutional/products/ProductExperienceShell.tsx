@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { InstitutionalPageShell } from "../InstitutionalPageShell";
+import { LabObjectIdentity } from "../LabObjectIdentity";
 import styles from "../styles/ProductExperience.module.css";
 
 export type ProductExperienceNavItem = {
@@ -47,7 +48,15 @@ export function ProductExperienceShell({
               Products / {product.family}
             </Link>
 
-            <p className={styles.productHeroEyebrow}>{product.status}</p>
+            <LabObjectIdentity
+              appearance="inverse"
+              kind="product"
+              secondary={product.family}
+              secondaryLabel="FAMILY"
+              status={product.status}
+              statusLabel="PUBLIC STATUS"
+              variant="compact"
+            />
             <h1>{product.name}</h1>
             <p className={styles.productHeroTagline}>{product.tagline}</p>
             <p className={styles.productHeroLead}>{product.lead}</p>
