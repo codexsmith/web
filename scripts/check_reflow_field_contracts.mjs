@@ -15,10 +15,12 @@ expect(component.includes("prefers-reduced-motion: reduce") === false, "motion p
 expect(component.includes("matchMedia"), "reduced-motion preference must gate animated view transitions");
 expect(component.includes("startViewTransition"), "reference renderer should progressively enhance spatial reflow");
 expect(component.includes('data-reflow-state={selected ? "selected" : "rest"}'), "item state must be explicit in DOM");
-expect(research.includes("<ReflowField"), "Research program collection must use the BFUX primitive");
-expect(research.includes("<ReflowFieldItem"), "Research programs must be individually selectable");
-expect(!research.includes('<div className={styles.researchProgramGrid}>'), "Research must not retain the old static program grid");
-expect(researchCss.includes('[data-reflow-state="selected"]'), "Research renderer must visibly distinguish committed inspection");
-expect(researchCss.includes("grid-template-columns: repeat(3"), "wide Research projection should use a two-dimensional compact field");
+expect(research.includes('<div className={styles.researchProgramGrid}>'), "Active Surfaces must remain ordinary always-visible substantive content");
+expect(research.includes('className={styles.researchContextGrid}'), "supporting Research context must own the Reflow Field");
+expect(research.includes('id="reader-agency"'), "Reader Agency must be represented in the context field");
+expect(research.includes('id="closing-test"'), "Closing Test must be represented in the context field");
+expect(research.indexOf('className={styles.researchProgramGrid}') < research.indexOf('className={styles.researchContextGrid}'), "substantive Active Surfaces must precede the contextual Reflow Field");
+expect(researchCss.includes('.researchContextCard[data-reflow-state="selected"]'), "Research context renderer must visibly distinguish committed inspection");
+expect(researchCss.includes(".contextWide"), "wide Research context should support magazine-like footprint variation");
 
 console.log("BFUX Reflow Field contracts passed.");

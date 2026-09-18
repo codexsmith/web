@@ -3,7 +3,7 @@ import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Research.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
-import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 import { ReflowField, ReflowFieldItem } from "@/components/bfux/ReflowField";
 
@@ -58,165 +58,240 @@ export function InstitutionalResearchPage() {
             eyebrow={<>ACTIVE SURFACES</>}
             title={<>Research programs and working lanes.</>}
             note={<>Common analytical roles do not imply formal equivalence across domains.</>}
-            />
+          />
+
+          <div className={styles.researchProgramGrid}>
+            {programs.map((program) => (
+              <article
+                className={styles.researchProgramCard}
+                data-tone={program.tone}
+                key={program.title}
+              >
+                <div className={styles.programTopline}>
+                  <span className={styles.programCode}>{program.code}</span>
+                  <span className={styles.programStatus}>{program.status}</span>
+                </div>
+                <h3>{program.title}</h3>
+                <p className={styles.programRole}>{program.role}</p>
+                <p className={styles.programSummary}>{program.summary}</p>
+                <blockquote>{program.question}</blockquote>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.researchContext}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>RESEARCH CONTEXT</>}
+            title={<>The machinery around the research.</>}
+            note={<>Select a plate to inspect it without leaving the page context.</>}
+          />
 
           <ReflowField
-            className={styles.researchProgramGrid}
-            ariaLabel="Research programs and working lanes"
+            className={styles.researchContextGrid}
+            ariaLabel="Research context and interpretation"
           >
-            {programs.map((program) => (
-              <ReflowFieldItem
-                key={program.title}
-                id={program.code}
-                label={program.title}
-                className={styles.researchProgramCard}
-                dataTone={program.tone}
-                summary={
-                  <>
-                    <div className={styles.programTopline}>
-                      <span className={styles.programCode}>{program.code}</span>
-                      <span className={styles.programStatus}>{program.status}</span>
-                    </div>
-                    <h3>{program.title}</h3>
-                    <p className={styles.programRole}>{program.role}</p>
-                    <p className={styles.programSummary}>{program.summary}</p>
-                  </>
-                }
-                detail={
-                  <div className={styles.programInspection}>
-                    <div>
-                      <span>INSPECTION VIEW</span>
-                      <strong>Governing question</strong>
-                      <p>
-                        Selection increases local representational bandwidth. It does not
-                        change this program&apos;s source-governed status or maturity.
-                      </p>
-                    </div>
-                    <blockquote>{program.question}</blockquote>
+            <ReflowFieldItem
+              id="reader-agency"
+              label="Reader Agency"
+              className={[styles.researchContextCard, styles.contextWide].join(" ")}
+              dataTone="agency"
+              summary={
+                <div className={styles.contextSummary}>
+                  <span>01</span>
+                  <p className={styles.sectionIndex}>READER AGENCY</p>
+                  <h3>Research should increase epistemic agency.</h3>
+                  <p>What a reader should be able to inspect, challenge, and judge independently.</p>
+                </div>
+              }
+              detail={
+                <div className={styles.contextDetail}>
+                  <div>
+                    <p>
+                      Inspectability changes the relationship between researcher and reader.
+                      A reader should be able to see what is claimed, what supports it, what
+                      remains uncertain, what failed, and what would change the conclusion.
+                    </p>
                   </div>
-                }
-              />
-            ))}
+                  <blockquote className={styles.contextQuote}>
+                    “Here is enough structure for you to make a better judgment of your own.”
+                  </blockquote>
+                </div>
+              }
+            />
+
+            <ReflowFieldItem
+              id="working-principles"
+              label="Working Principles"
+              className={styles.researchContextCard}
+              dataTone="principles"
+              summary={
+                <div className={styles.contextSummary}>
+                  <span>02</span>
+                  <p className={styles.sectionIndex}>WORKING PRINCIPLES</p>
+                  <h3>How research is handled.</h3>
+                  <p>Six operating rules for building, testing, criticizing, and transferring work.</p>
+                </div>
+              }
+              detail={
+                <div className={styles.principleGrid}>
+                  {principles.map(([index, title, description]) => (
+                    <article className={styles.principlePlate} key={title}>
+                      <span>{index}</span>
+                      <h3>{title}</h3>
+                      <p>{description}</p>
+                    </article>
+                  ))}
+                </div>
+              }
+            />
+
+            <ReflowFieldItem
+              id="equivalence-firewall"
+              label="Permanent Firewall"
+              className={styles.researchContextCard}
+              dataTone="firewall"
+              summary={
+                <div className={styles.contextSummary}>
+                  <span>03</span>
+                  <p className={styles.sectionIndex}>PERMANENT FIREWALL</p>
+                  <h3>Common role is not equivalence.</h3>
+                  <p>Cross-domain comparison must not silently become a theorem or shared ontology.</p>
+                </div>
+              }
+              detail={
+                <div className={styles.firewallDetail}>
+                  <blockquote>
+                    Similar vocabulary is not mathematical equivalence. A useful analogy is
+                    not a theorem. A shared representation is not a shared ontology.
+                  </blockquote>
+                  <p>
+                    Software state, physical state, mathematical state, institutional state,
+                    and epistemic state may occupy comparable analytical roles while remaining
+                    different objects with different native semantics.
+                  </p>
+                </div>
+              }
+            />
+
+            <ReflowFieldItem
+              id="research-state"
+              label="Research State"
+              className={[styles.researchContextCard, styles.contextWide].join(" ")}
+              dataTone="state"
+              summary={
+                <div className={styles.contextSummary}>
+                  <span>04</span>
+                  <p className={styles.sectionIndex}>RESEARCH STATE</p>
+                  <h3>“Published” is not the only useful status.</h3>
+                  <p>Source-governed states make uncertainty and maturity visible without scoring the work.</p>
+                </div>
+              }
+              detail={
+                <>
+                  <p className={styles.contextDetailNote}>
+                    Use the canonical status when a source system has a more precise state.
+                  </p>
+                  <div className={styles.stateRail}>
+                    {maturityStates.map(([state, description], index) => (
+                      <div className={styles.statePlate} key={state}>
+                        <span>{formatOrdinal(index)}</span>
+                        <strong>{state}</strong>
+                        <p>{description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              }
+            />
+
+            <ReflowFieldItem
+              id="public-research-object"
+              label="Public Research Object"
+              className={styles.researchContextCard}
+              dataTone="object"
+              summary={
+                <div className={styles.contextSummary}>
+                  <span>05</span>
+                  <p className={styles.sectionIndex}>PUBLIC RESEARCH OBJECT</p>
+                  <h3>What a mature object should expose.</h3>
+                  <p>Enough connected state for independent inspection, criticism, and continuation.</p>
+                </div>
+              }
+              detail={
+                <>
+                  <p className={styles.contextDetailNote}>
+                    A research page should answer more than “what is this about?”
+                  </p>
+                  <div className={styles.objectFieldGrid}>
+                    {researchObjectFields.map((field, index) => (
+                      <div className={styles.objectField} key={field}>
+                        <span>{formatOrdinal(index)}</span>
+                        <strong>{field}</strong>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              }
+            />
+
+            <ReflowFieldItem
+              id="artifact-families"
+              label="Research Artifact Families"
+              className={styles.researchContextCard}
+              dataTone="artifacts"
+              summary={
+                <div className={styles.contextSummary}>
+                  <span>06</span>
+                  <p className={styles.sectionIndex}>MORE THAN PAPERS</p>
+                  <h3>Research connects prose to machinery.</h3>
+                  <p>Arguments, evidence, provenance, packets, and executable artifacts stay connected.</p>
+                </div>
+              }
+              detail={
+                <div className={styles.artifactGrid}>
+                  {artifactFamilies.map(([title, description]) => (
+                    <article className={styles.artifactPlate} key={title}>
+                      <h3>{title}</h3>
+                      <p>{description}</p>
+                    </article>
+                  ))}
+                </div>
+              }
+            />
+
+            <ReflowFieldItem
+              id="closing-test"
+              label="Closing Test"
+              className={[styles.researchContextCard, styles.contextWide].join(" ")}
+              dataTone="closing"
+              summary={
+                <div className={styles.contextSummary}>
+                  <span>07</span>
+                  <p className={styles.sectionIndex}>CLOSING TEST</p>
+                  <h3>A theory should survive instrumentation.</h3>
+                  <p>Can another person represent, test, criticize, reconstruct, and continue the work?</p>
+                </div>
+              }
+              detail={
+                <div className={styles.closingDetail}>
+                  <p>
+                    A useful theory should increasingly be representable, testable, refinable,
+                    and inspectable by people other than its author.
+                  </p>
+                  <div className={styles.instrumentQuestions}>
+                    <span>Can its objects be represented clearly?</span>
+                    <span>Can its assumptions be made explicit?</span>
+                    <span>Can its transformations be tested?</span>
+                    <span>Can its failure modes be localized?</span>
+                    <span>Can another person reconstruct what was done?</span>
+                    <span>Can another qualified person criticize or continue the work?</span>
+                  </div>
+                </div>
+              }
+            />
           </ReflowField>
-        </section>
-
-        <section className={styles.epistemicAgency}>
-          <div>
-            <p className={styles.sectionIndex}>READER AGENCY</p>
-            <h2>Research should increase epistemic agency.</h2>
-            <p>
-              Inspectability changes the relationship between researcher and reader. A
-              reader should be able to see what is claimed, what supports it, what remains
-              uncertain, what failed, and what would change the conclusion.
-            </p>
-          </div>
-          <blockquote>
-            “Here is enough structure for you to make a better judgment of your own.”
-          </blockquote>
-        </section>
-
-        <section className={styles.researchPrinciples}>
-          <InstitutionalSectionHeader
-            styles={styles}
-            eyebrow={<>WORKING PRINCIPLES</>}
-            title={<>How research is handled.</>}
-            />
-
-          <div className={styles.principleGrid}>
-            {principles.map(([index, title, description]) => (
-              <article className={styles.principlePlate} key={title}>
-                <span>{index}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.equivalenceFirewall}>
-          <p className={styles.sectionIndex}>PERMANENT FIREWALL</p>
-          <h2>Common role is not equivalence.</h2>
-          <blockquote>
-            Similar vocabulary is not mathematical equivalence. A useful analogy is not a
-            theorem. A shared representation is not a shared ontology.
-          </blockquote>
-          <p>
-            Software state, physical state, mathematical state, institutional state, and
-            epistemic state may occupy comparable analytical roles while remaining
-            different objects with different native semantics.
-          </p>
-        </section>
-
-        <section className={styles.researchState}>
-          <InstitutionalSectionHeader
-            styles={styles}
-            eyebrow={<>RESEARCH STATE</>}
-            title={<>“Published” is not the only useful status.</>}
-            note={<>Use the canonical status when a source system has a more precise state.</>}
-            />
-
-          <div className={styles.stateRail}>
-            {maturityStates.map(([state, description], index) => (
-              <div className={styles.statePlate} key={state}>
-                <span>{formatOrdinal(index)}</span>
-                <strong>{state}</strong>
-                <p>{description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.researchObject}>
-          <InstitutionalSectionLead
-            styles={styles}
-            eyebrow={<>PUBLIC RESEARCH OBJECT</>}
-            title={<>What a mature object should expose.</>}
-            description={<>A research page should answer more than “what is this about?” It should expose
-              enough state for independent inspection and continuation.</>}
-            />
-
-          <div className={styles.objectFieldGrid}>
-            {researchObjectFields.map((field, index) => (
-              <div className={styles.objectField} key={field}>
-                <span>{formatOrdinal(index)}</span>
-                <strong>{field}</strong>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.artifactFamilies}>
-          <InstitutionalSectionHeader
-            styles={styles}
-            eyebrow={<>MORE THAN PAPERS</>}
-            title={<>Research connects prose to machinery.</>}
-            />
-
-          <div className={styles.artifactGrid}>
-            {artifactFamilies.map(([title, description]) => (
-              <article className={styles.artifactPlate} key={title}>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.instrumentationClose}>
-          <p className={styles.sectionIndex}>CLOSING TEST</p>
-          <h2>A theory should survive instrumentation.</h2>
-          <p>
-            A useful theory should increasingly be representable, testable, refinable, and
-            inspectable by people other than its author.
-          </p>
-          <div className={styles.instrumentQuestions}>
-            <span>Can its objects be represented clearly?</span>
-            <span>Can its assumptions be made explicit?</span>
-            <span>Can its transformations be tested?</span>
-            <span>Can its failure modes be localized?</span>
-            <span>Can another person reconstruct what was done?</span>
-            <span>Can another qualified person criticize or continue the work?</span>
-          </div>
         </section>
       </InstitutionalPageShell>
   );
