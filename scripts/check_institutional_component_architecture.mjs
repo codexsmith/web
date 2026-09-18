@@ -93,4 +93,10 @@ expect(researchPage.includes("<ResearchContextSection />"), "Research must compo
 expect(!researchPage.includes('id="reader-agency"'), "Research page must not inline Reflow Field context cards");
 expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchContextSection must exist as the route-local composition boundary");
 
+const productsPage = read(`${root}/InstitutionalProductsPage.tsx`);
+expect(productsPage.includes("<ProductContextSection />"), "Products must compose its commercialization context as a section component");
+expect(!productsPage.includes('className={styles.productConversion}'), "Products page must not inline the superseded Research-to-Market section");
+expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Products page must not inline the superseded Public Product Object section");
+expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");
+
 console.log("Institutional component architecture passed.");

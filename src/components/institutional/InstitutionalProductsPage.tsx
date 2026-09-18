@@ -6,7 +6,8 @@ import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 
-import { productEvidence, secondaryProducts, productPageQuestions } from "./content/products";
+import { productEvidence } from "./content/products";
+import { ProductContextSection } from "./sections/ProductContextSection";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalProductsPage() {
@@ -165,93 +166,7 @@ export function InstitutionalProductsPage() {
           </div>
         </section>
 
-        <section className={styles.productConversion}>
-          <div>
-            <p className={styles.sectionIndex}>RESEARCH → MARKET</p>
-            <h2>One body of work can support several bounded product tests.</h2>
-            <p>
-              The Lab should not count every conceivable extension as a separate product
-              before evidence exists.
-            </p>
-          </div>
-
-          <div className={styles.conversionRail}>
-            <span>Existing core asset</span>
-            <span>Bounded derivative</span>
-            <span>User / partner test</span>
-            <span>Paid / adoption evidence</span>
-            <span>Durable extension or explicit product split</span>
-          </div>
-        </section>
-
-        <section className={styles.secondaryPipeline}>
-          <InstitutionalSectionHeader
-            styles={styles}
-            eyebrow={<>SECONDARY PIPELINE</>}
-            title={<>Product-shaped work, not yet the near-term edge.</>}
-            />
-
-          <div className={styles.secondaryProductGrid}>
-            {secondaryProducts.map((product, index) => (
-              <article className={styles.secondaryProductCard} key={product.name}>
-                <div>
-                  <span className={styles.productOrdinal}>{formatOrdinal(index, 3)}</span>
-                  <span className={styles.secondaryState}>{product.state}</span>
-                </div>
-                <h3>{product.name}</h3>
-                <p>{product.description}</p>
-                <div className={styles.nextGate}>
-                  <span>NEXT GATE</span>
-                  {product.next}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.consumerEthos}>
-          <div>
-            <p className={styles.sectionIndex}>CONSUMER ETHOS</p>
-            <h2>A good product leaves the user more capable than it found them.</h2>
-          </div>
-          <p>
-            A book should help someone see or do something. A course should teach a
-            transferable skill. A tool should expose useful structure. A knowledge explorer
-            should improve navigation rather than merely summarize more aggressively.
-          </p>
-        </section>
-
-        <section className={styles.commercialFirewall}>
-          <p className={styles.sectionIndex}>COMMERCIAL TRUTH</p>
-          <h2>Do not confuse a promising artifact with a validated market.</h2>
-
-          <div className={styles.firewallEquations}>
-            <code>existing asset ≠ production-ready release ≠ paid transaction ≠ retained customer ≠ product-market fit</code>
-            <code>active build ≠ available now ≠ market validated</code>
-            <code>audience interest ≠ willingness to pay ≠ retention</code>
-            <code>product success ≠ scientific validation</code>
-            <code>revenue ≠ research truth</code>
-          </div>
-        </section>
-
-        <section className={styles.productObjectGrammar}>
-          <InstitutionalSectionLead
-            styles={styles}
-            eyebrow={<>PUBLIC PRODUCT OBJECT</>}
-            title={<>What a product page should answer.</>}
-            description={<>The product counterpart to the Lab&apos;s research-object grammar: enough state
-              for a user or partner to understand the offer without guessing.</>}
-            />
-
-          <div className={styles.productQuestionGrid}>
-            {productPageQuestions.map((question, index) => (
-              <div className={styles.productQuestionPlate} key={question}>
-                <span>{formatOrdinal(index)}</span>
-                <strong>{question}</strong>
-              </div>
-            ))}
-          </div>
-        </section>
+        <ProductContextSection />
 
         <section className={styles.productClose}>
           <p className={styles.sectionIndex}>FAST FEEDBACK</p>

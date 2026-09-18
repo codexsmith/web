@@ -36,3 +36,6 @@ Once a route has a real page renderer, do not keep a second preview/front-door r
 ## Section composition
 
 Large route-local interaction surfaces should be extracted when they have their own internal grammar. The first reference is `sections/ResearchContextSection.tsx`: the Research page owns ordering, while the section owns its contextual Reflow Field, card summaries, and expanded detail composition.
+
+
+The Products route follows the same boundary with `sections/ProductContextSection.tsx`: primary product objects remain directly readable, while the supporting Research-to-Market through Public Product Object sequence is compressed into a focus-stage Reflow field.

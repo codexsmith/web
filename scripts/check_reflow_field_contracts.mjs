@@ -3,6 +3,9 @@ import fs from "node:fs";
 const component = fs.readFileSync("src/components/bfux/ReflowField.tsx", "utf8");
 const research = fs.readFileSync("src/components/institutional/InstitutionalResearchPage.tsx", "utf8");
 const researchContext = fs.readFileSync("src/components/institutional/sections/ResearchContextSection.tsx", "utf8");
+const products = fs.readFileSync("src/components/institutional/InstitutionalProductsPage.tsx", "utf8");
+const productContext = fs.readFileSync("src/components/institutional/sections/ProductContextSection.tsx", "utf8");
+const productCss = fs.readFileSync("src/components/institutional/styles/Products.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -55,5 +58,13 @@ expect(researchCss.includes(".contextClosing { --reflow-span: 7; }"), "Research 
 expect(researchCss.includes("--reflow-focus-span: 4"), "wide focus-stage must place three compact cards per row");
 expect(researchCss.includes("--reflow-selected-start: 2"), "wide selected card must be centered rather than edge-to-edge");
 expect(researchCss.includes("height: 142px"), "unselected focus-stage cards must contract to a predetermined compact height");
+expect(products.includes("<ProductContextSection />"), "Products page must compose its commercialization context as one modular Reflow section");
+expect(productContext.includes('layoutMode="focus-stage"'), "Product Context must use focus-stage reflow");
+expect(productContext.includes("itemOrder={productContextOrder}"), "Product Context must declare stable source ordering");
+expect(productContext.includes('id="research-market"'), "Product Context must begin with Research to Market");
+expect(productContext.includes('id="public-product-object"'), "Product Context must include Public Product Object");
+expect(productCss.includes("--reflow-focus-span: 6"), "five-card Product focus-stage must place two compact cards per wide row");
+expect(productCss.includes(".productContextResearchMarket { --reflow-span: 5; }"), "Product Context REST state must retain authored magazine spans");
+expect(productCss.includes(".productContextObject { --reflow-span: 6; }"), "Product Object must participate in the authored REST composition");
 
 console.log("BFUX Reflow Field contracts passed.");
