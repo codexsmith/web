@@ -4,7 +4,16 @@ import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 
-import { capabilityStrip, methodSteps, featuredWork, postureCommitments, practiceLineage, stewardshipFacets } from "./content/home";
+import {
+  capabilityStrip,
+  featuredWork,
+  homeInstitutionalFrontDoors,
+  homeNowSnapshot,
+  methodSteps,
+  postureCommitments,
+  practiceLineage,
+  stewardshipFacets,
+} from "./content/home";
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
@@ -152,6 +161,68 @@ export function InstitutionalHomePage() {
                 </article>
               );
             })}
+          </div>
+        </section>
+
+        <section className={styles.inMotionSection}>
+          <div className={styles.inMotionLead}>
+            <p className={styles.sectionIndex}>THE LAB IN MOTION</p>
+            <h2>See the current state. Choose a way in.</h2>
+            <p>
+              The public site should not stop at describing what Boundary First Labs is.
+              It should also show what is active now and how an outside person or institution
+              can enter the work without having to understand the entire Lab first.
+            </p>
+          </div>
+
+          <div className={styles.inMotionGrid}>
+            <Link className={styles.nowSnapshot} href={homeNowSnapshot.href}>
+              <div className={styles.nowSnapshotTopline}>
+                <span>{homeNowSnapshot.eyebrow}</span>
+                <strong>{homeNowSnapshot.status}</strong>
+              </div>
+
+              <h3>{homeNowSnapshot.title}</h3>
+              <p>{homeNowSnapshot.description}</p>
+
+              <blockquote>{homeNowSnapshot.thesis}</blockquote>
+
+              <div className={styles.nowLaneGrid} aria-label="Current Lab priority lanes">
+                {homeNowSnapshot.lanes.map((lane, index) => (
+                  <span key={lane}>
+                    <i>{String(index + 1).padStart(2, "0")}</i>
+                    {lane}
+                  </span>
+                ))}
+              </div>
+
+              <strong className={styles.inMotionCta}>
+                Open Now / Roadmap
+                <span aria-hidden="true">→</span>
+              </strong>
+            </Link>
+
+            <div className={styles.frontDoorStack}>
+              {homeInstitutionalFrontDoors.map((door) => (
+                <Link
+                  className={styles.frontDoorCard}
+                  data-front-door-tone={door.tone}
+                  href={door.href}
+                  key={door.eyebrow}
+                >
+                  <div>
+                    <span>{door.eyebrow}</span>
+                    <small>{door.note}</small>
+                  </div>
+                  <h3>{door.title}</h3>
+                  <p>{door.description}</p>
+                  <strong>
+                    {door.cta}
+                    <span aria-hidden="true">→</span>
+                  </strong>
+                </Link>
+              ))}
+            </div>
           </div>
         </section>
 
