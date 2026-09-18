@@ -158,10 +158,15 @@ for (const [name, source] of [
   ["Apparatus", apparatusContext],
   ["Publications", publicationContext],
   ["Open Lab", openLabContext],
-  ["About", aboutGroups],
 ]) {
   expect(!/index="\d+"/.test(source), `${name} Reflow summaries must not render ordinal number plates`);
 }
+
+const aboutSummarySource = aboutGroups.slice(
+  aboutGroups.indexOf("function AboutContextSummary"),
+  aboutGroups.indexOf("function AboutContextCard"),
+);
+expect(!/\bindex\b/.test(aboutSummarySource), "About Reflow summaries must not render ordinal number plates");
 
 for (const [name, source] of [
   ["Research", researchCss],
