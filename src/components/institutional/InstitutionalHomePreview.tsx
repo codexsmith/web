@@ -1,15 +1,5 @@
-import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
+import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
 import styles from "./InstitutionalHomePreview.module.css";
-
-const primaryRoutes = [
-  "About",
-  "Research",
-  "Products",
-  "Projects",
-  "Apparatus",
-  "Publications",
-  "Open Lab",
-];
 
 const capabilityStrip = [
   ["01", "Research & experiments"],
@@ -51,21 +41,7 @@ const featuredWork = [
 export function InstitutionalHomePreview() {
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <a className={styles.brand} href="/v3" aria-label="Boundary First Labs Website v3 home">
-          <BoundaryFirstWaveLogo className={styles.logo} variant="compact" decorative />
-          <span className={styles.brandCopy}>
-            <strong>Boundary First Labs</strong>
-          </span>
-        </a>
-
-        <nav className={styles.nav} aria-label="Website v3 route preview">
-          {primaryRoutes.map((route) => (
-            <span key={route}>{route}</span>
-          ))}
-        </nav>
-
-      </header>
+      <InstitutionalHeader />
 
       <main>
         <section className={styles.hero}>
@@ -169,23 +145,7 @@ export function InstitutionalHomePreview() {
         </section>
       </main>
 
-      <footer className={styles.footer}>
-        <div className={styles.footerBrand}>
-          <BoundaryFirstWaveLogo className={styles.footerLogo} variant="compact" decorative />
-          <div>
-            <strong>Boundary First Labs</strong>
-            <span>Practice-born. Research-backed. Formally generalized.</span>
-          </div>
-        </div>
-
-        <div className={styles.footerNav}>
-          {primaryRoutes.map((route) => <span key={route}>{route}</span>)}
-        </div>
-
-        <div className={styles.footerMeta}>
-          <span>© 2026 Boundary First Labs</span>
-        </div>
-      </footer>
+      <InstitutionalFooter />
     </div>
   );
 }
