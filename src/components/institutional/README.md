@@ -120,3 +120,6 @@ The homepage now includes a **Lab in Motion** institutional access layer between
 
 
 The Lab Atlas route at `/v3/atlas` is a bounded public relationship projection across existing source-governed objects. Its first boundary includes research programs, immersive products, project cases, and selected publication records. Atlas-local routing IDs exist only to connect the public projection and are never rendered as canonical Lab identities. Every visible edge is declared explicitly in `content/atlas.ts`; the Atlas must not infer equivalence, dependency, validation, or authority from title similarity, shared vocabulary, or visual proximity. Missing edges remain missing until an authoritative public relationship is deliberately admitted.
+
+
+Global Lab command navigation is owned by `LabCommandPalette.tsx` and is mounted once in the shared institutional header. Its search corpus is deliberately bounded: public Lab Objects from the Atlas, explicit Atlas relationship text, and institutional route labels. It does not crawl rendered page text, perform semantic inference, or create new relationships. Object results deep-link to `/v3/atlas?focus=<atlas-id>`, where the selected object is inspected through the existing Atlas and can then open its source-governed public surface. The `focus` parameter is routing state only; it is not a canonical identifier.

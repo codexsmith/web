@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { LabObjectIdentity, type LabObjectKind } from "./LabObjectIdentity";
 import {
   atlasEdges,
@@ -21,11 +22,23 @@ function relationLabel(edge: AtlasEdge, selectedId: string) {
   return edge.from === selectedId ? edge.relation : `← ${edge.relation}`;
 }
 
-export function LabAtlasExplorer() {
-  const [selectedId, setSelectedId] = useState<string>(
-    atlasNodes.find((node) => node.atlasId === "research-asm")?.atlasId ??
-      atlasNodes[0]?.atlasId ??
-      "",
+function resolveSelection(candidate?: string) {
+  return (
+    (candidate && findNode(candidate)?.atlasId) ||
+    atlasNodes.find((node) => node.atlasId === "research-asm")?.atlasId ||
+    atlasNodes[0]?.atlasId ||
+    ""
+  );
+}
+
+export function LabAtlasExplorer({
+  initialSelectedId,
+}: {
+  initialSelectedId?: string;
+}) {
+  const router = useRouter();
+  const [selectedId, setSelectedId] = useState<string>(() =>
+    resolveSelection(initialSelectedId),
   );
 
   const selected = findNode(selectedId) ?? atlasNodes[0];
@@ -36,6 +49,14 @@ export function LabAtlasExplorer() {
       ),
     [selected?.atlasId],
   );
+
+  const selectNode = (atlasId: string) => {
+    if (!findNode(atlasId)) return;
+    setSelectedId(atlasId);
+    router.push(`/v3/atlas?focus=${encodeURIComponent(atlasId)}`, {
+      scroll: false,
+    });
+  };
 
   if (!selected) return null;
 
@@ -60,7 +81,7 @@ export function LabAtlasExplorer() {
                     className={styles.nodeButton}
                     data-selected={node.atlasId === selected.atlasId ? "true" : "false"}
                     key={node.atlasId}
-                    onClick={() => setSelectedId(node.atlasId)}
+                    onClick={() => selectNode(node.atlasId)}
                   >
                     <span>{node.identifier ?? node.kind.toUpperCase()}</span>
                     <strong>{node.title}</strong>
@@ -113,7 +134,7 @@ export function LabAtlasExplorer() {
                   type="button"
                   className={styles.relationship}
                   key={`${edge.from}:${edge.to}:${edge.relation}`}
-                  onClick={() => setSelectedId(other.atlasId)}
+                  onClick={() => selectNode(other.atlasId)}
                 >
                   <span>{relationLabel(edge, selected.atlasId)}</span>
                   <strong>{other.title}</strong>
