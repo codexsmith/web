@@ -18,7 +18,7 @@ export function PublicationStripSection() {
         styles={styles}
         eyebrow={<>MORE FROM THE PUBLICATION FIELD</>}
         title={<>Follow the machinery across established domains.</>}
-        note={<>Supporting controlled readings and technical calibrations. Selection is editorial; stage and readiness remain source-governed.</>}
+        note={<>Computer science leads this supporting layer, followed by mathematics and physics calibrations. Selection is editorial; stage and readiness remain source-governed.</>}
       />
 
       <div
