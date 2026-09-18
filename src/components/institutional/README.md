@@ -71,3 +71,6 @@ The Founder route is an About child rather than a global header route. It presen
 
 
 The Collaboration route is the public relationship front door rather than a generic partnership pitch. It projects the canonical comparative-advantage doctrine, multiple bounded relationship forms, and the existing named collaboration/outreach landscape into one governed surface. The named map explicitly distinguishes readiness/dependency states and states that inclusion does not imply contact, partnership, endorsement, agreement, or current fit. This lets the site carry a large and evolving set of institutions, businesses, researchers, creators, funders, critics, and public-interest organizations without flattening them into one undifferentiated logo wall.
+
+
+The Collaboration page's public copy intentionally translates internal operating language into ordinary business language. Internal concepts such as bounded engagement, evidence gates, routing state, provenance, and comparative advantage remain preserved in the underlying doctrine, while the public surface answers simpler visitor questions: what BFL already has, what another party might bring, what the first step could be, what useful outcomes can result, and what must stay clear around ownership, evidence, endorsement, and exit.

@@ -10,8 +10,10 @@ import {
   collaborationExchange,
   collaborationLanes,
   collaborationModes,
+  collaborationOutcomes,
   collaborationProcess,
   collaborationRoles,
+  collaborationStageLabels,
   collaborationStageLegend,
 } from "./content/collaboration";
 
@@ -24,18 +26,20 @@ export function InstitutionalCollaborationPage() {
         styles={styles}
         className={styles.collaborationHero}
         eyebrow={<>COLLABORATION</>}
-        title={<>Build the smallest relationship that lets the work meet reality.</>}
+        title={<>Work together where each side brings something the other needs.</>}
         lead={
           <>
-            Boundary First Labs collaborates where there is a genuine division of
-            comparative advantage.
+            Boundary First Labs develops research, software, methods, and prototypes. It
+            looks for people and organizations who can test them, challenge them, put them
+            to work, reach users, or help them scale.
           </>
         }
         support={
           <>
-            The Lab does not seek association for its own sake. It looks for people and
-            institutions that possess something the work genuinely needs and that BFL
-            cannot, should not, or does not want to reproduce itself.
+            A collaboration can be as small as one expert review or as substantial as a
+            funded pilot, co-developed product, publication, licensing arrangement, or
+            transfer to a better long-term home. We start with the smallest useful
+            relationship and expand only when the work earns it.
           </>
         }
       >
@@ -55,12 +59,12 @@ export function InstitutionalCollaborationPage() {
       <section className={styles.collaborationModesSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>RELATIONSHIP FORMS</>}
-          title={<>A useful relationship does not have to become a partnership.</>}
+          eyebrow={<>WHAT COLLABORATION CAN LOOK LIKE</>}
+          title={<>You do not need to become a strategic partner to do useful work together.</>}
           note={
             <>
-              Expert criticism, one pilot, one publication, one introduction, or a clean
-              transfer can be the right complete relationship.
+              One review, one pilot, one workshop, one funded milestone, or one introduction
+              can be a complete and valuable relationship.
             </>
           }
         />
@@ -76,9 +80,16 @@ export function InstitutionalCollaborationPage() {
         </div>
 
         <div className={styles.collaborationRoleStrip}>
-          <span>USEFUL ROLES</span>
+          <span>WAYS TO CONTRIBUTE</span>
           <div>
             {collaborationRoles.map((role) => <strong key={role}>{role}</strong>)}
+          </div>
+        </div>
+
+        <div className={styles.collaborationRoleStrip}>
+          <span>POSSIBLE RESULTS</span>
+          <div>
+            {collaborationOutcomes.map((outcome) => <strong key={outcome}>{outcome}</strong>)}
           </div>
         </div>
       </section>
@@ -86,23 +97,24 @@ export function InstitutionalCollaborationPage() {
       <section className={styles.collaborationMapSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>COLLABORATION MAP</>}
-          title={<>A large named surface, without pretending the names mean the same thing.</>}
+          eyebrow={<>WHO WE ARE DESIGNED TO WORK WITH</>}
+          title={<>Different collaborators bring different kinds of reality to the work.</>}
           note={
             <>
-              The Lab already maintains named routes across local institutions, research
-              ecosystems, businesses, public-interest organizations, creators, critics,
-              funders, and potential distribution partners.
+              Some can test research. Some have users, customers, data, or infrastructure.
+              Some can distribute products, fund public-interest work, or simply tell us
+              where an idea is wrong.
             </>
           }
         />
 
         <aside className={styles.collaborationMapDisclaimer}>
-          <span>MAPPED POSSIBILITIES, NOT AFFILIATIONS</span>
+          <span>POSSIBLE FITS, NOT AFFILIATIONS</span>
           <p>
-            Inclusion here does not imply contact, partnership, endorsement, agreement, or
-            current fit. The state badge describes BFL&apos;s present readiness or dependency,
-            not the other party&apos;s interest. Every route should be reverified before use.
+            These names come from BFL&apos;s collaboration and outreach planning. Inclusion
+            does not mean we have contacted them, they have expressed interest, or they
+            endorse the Lab. The status badge describes what BFL still needs before a serious
+            approach; every route should be checked again before use.
           </p>
         </aside>
 
@@ -128,7 +140,7 @@ export function InstitutionalCollaborationPage() {
                       <strong>{entry.name}</strong>
                       <p>{entry.role}</p>
                     </div>
-                    <span data-stage={entry.stage}>{entry.stage}</span>
+                    <span data-stage={entry.stage}>{collaborationStageLabels[entry.stage]}</span>
                   </article>
                 ))}
               </div>
@@ -139,7 +151,7 @@ export function InstitutionalCollaborationPage() {
         <div className={styles.collaborationLegend}>
           {collaborationStageLegend.map(([stage, description]) => (
             <div key={stage}>
-              <strong>{stage}</strong>
+              <strong>{collaborationStageLabels[stage]}</strong>
               <p>{description}</p>
             </div>
           ))}
@@ -149,9 +161,9 @@ export function InstitutionalCollaborationPage() {
       <section className={styles.collaborationProcessSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>FROM CONTACT TO EVIDENCE</>}
-          title={<>Recognized problem → bounded relationship → next decision.</>}
-          note={<>The goal is not to maximize the number of relationships. It is to make each relationship evidence-generating and governable.</>}
+          eyebrow={<>HOW A COLLABORATION STARTS</>}
+          title={<>Start small. Define success. Expand only if the work earns it.</>}
+          note={<>The same basic process works for a business, researcher, funder, community, creator, or institution.</>}
         />
 
         <div className={styles.collaborationProcessRail}>
@@ -167,12 +179,12 @@ export function InstitutionalCollaborationPage() {
 
       <section className={styles.collaborationBoundaries}>
         <div className={styles.collaborationBoundaryLead}>
-          <p className={styles.sectionIndex}>COLLABORATION WITHOUT ABSORPTION</p>
-          <h2>Work can cross an institutional boundary without losing its provenance.</h2>
+          <p className={styles.sectionIndex}>CLEAR TERMS, CLEAN BOUNDARIES</p>
+          <h2>A collaboration should make responsibility clearer, not blur it.</h2>
           <p>
-            Good collaboration makes the exchange clearer: who brought what, who has
-            authority over which claim, what evidence was produced, what can be published,
-            and what happens when the relationship ends.
+            Good collaborations say who is doing what, who owns what, what evidence is
+            being produced, what may be published, and what happens if the work succeeds,
+            changes direction, or stops.
           </p>
         </div>
 
@@ -187,15 +199,18 @@ export function InstitutionalCollaborationPage() {
       </section>
 
       <section className={styles.collaborationClose}>
-        <p className={styles.sectionIndex}>THE COLLABORATION QUESTION</p>
-        <h2>What do you have that the Lab should not rebuild—and what does the Lab have that would be expensive for you to recreate?</h2>
+        <p className={styles.sectionIndex}>A GOOD FIRST CONVERSATION</p>
+        <h2>Bring a real problem, capability, audience, or resource. We will look for the smallest useful thing we can do together.</h2>
         <p>
-          That is enough to start. The Open Lab is the designed public boundary for future
-          intake; until that pipeline is live, the collaboration map remains an inspectable
-          statement of where the Lab expects outside capability, criticism, and stewardship
-          to matter.
+          That might be a review, pilot, workshop, co-developed artifact, funding
+          conversation, distribution test, or introduction. If there is no clear exchange
+          of value, there may simply be nothing to do yet—and that is a useful answer too.
         </p>
-        <a href="/v3/open-lab">See the Open Lab boundary <span aria-hidden="true">-&gt;</span></a>
+        <nav className={styles.collaborationCloseLinks} aria-label="Collaboration next steps">
+          <a href="/v3/open-lab">Explore Open Lab <span aria-hidden="true">-&gt;</span></a>
+          <a href="/v3/funding">How funding works <span aria-hidden="true">-&gt;</span></a>
+          <a href="/v3/projects">See current projects <span aria-hidden="true">-&gt;</span></a>
+        </nav>
       </section>
     </InstitutionalPageShell>
   );

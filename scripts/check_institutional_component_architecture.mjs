@@ -196,10 +196,12 @@ expect(aboutGroups.includes('data-about-group="institution"'), "About must prese
 
 const collaborationPage = read(`${root}/InstitutionalCollaborationPage.tsx`);
 expect(collaborationPage.includes("./content/collaboration"), "Collaboration page must own a route-local content model");
-expect(collaborationPage.includes("MAPPED POSSIBILITIES, NOT AFFILIATIONS"), "Collaboration map must explicitly prevent endorsement inference");
+expect(collaborationPage.includes("POSSIBLE FITS, NOT AFFILIATIONS"), "Collaboration map must explicitly prevent endorsement inference");
 expect(collaborationPage.includes('className={styles.collaborationMapFrame}'), "Collaboration page must expose the named relationship map as a primary surface");
 expect(collaborationPage.includes("collaborationStageLegend"), "Collaboration page must explain readiness semantics");
-expect(collaborationPage.includes("smallest relationship"), "Collaboration hero must preserve the smallest-lawful-relationship doctrine");
+expect(collaborationPage.includes("smallest useful"), "Collaboration hero must preserve the smallest-useful-relationship doctrine");
+expect(collaborationPage.includes("collaborationOutcomes"), "Collaboration page must state concrete business and funding outcomes");
+expect(collaborationPage.includes("How funding works"), "Collaboration page must give potential funders a direct Funding route");
 
 const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
 expect(founderPage.includes("./content/founder"), "Founder page must own a route-local content model");
