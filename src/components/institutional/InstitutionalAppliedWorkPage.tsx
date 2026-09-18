@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -182,10 +183,10 @@ export function InstitutionalAppliedWorkPage() {
         </p>
 
         <nav className={styles.appliedWorkCloseLinks} aria-label="Applied work next steps">
-          <a href="/v3/contact?type=applied-work&source=applied-work">Start an applied-work conversation <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/collaboration">Explore collaboration <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/projects">See applied projects <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/funding">See the funding model <span aria-hidden="true">-&gt;</span></a>
+          <Link href="/v3/contact?type=applied-work&source=applied-work">Start an applied-work conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/collaboration">Explore collaboration <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/projects">See applied projects <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/funding">See the funding model <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
