@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useCallback,
   useId,
   useMemo,
   useState,
@@ -69,7 +70,7 @@ export function ReflowField({
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
 
-  const setSelection = (id: string | null) => {
+  const setSelection = useCallback((id: string | null) => {
     const commit = () => flushSync(() => setSelectedId(id));
     const documentWithTransitions = document as ViewTransitionDocument;
 
@@ -79,7 +80,7 @@ export function ReflowField({
     }
 
     commit();
-  };
+  }, [reducedMotion]);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "Escape" && selectedId !== null) {
@@ -90,7 +91,7 @@ export function ReflowField({
 
   const context = useMemo(
     () => ({ selectedId, fieldId, setSelection }),
-    [selectedId, fieldId],
+    [selectedId, fieldId, setSelection],
   );
 
   return (
@@ -158,13 +159,11 @@ export function ReflowFieldItem({
           className={styles.trigger}
           aria-expanded={selected}
           aria-controls={detailId}
+          aria-label={selected ? `Collapse ${label}` : `Inspect ${label}`}
           onClick={() => context.setSelection(selected ? null : id)}
         >
           <span>{selected ? collapseLabel : inspectLabel}</span>
           <span aria-hidden="true">{selected ? "−" : "+"}</span>
-          <span className={styles.srOnly}>
-            {selected ? `Collapse ${label}` : `Inspect ${label}`}
-          </span>
         </button>
       </div>
 
