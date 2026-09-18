@@ -29,6 +29,9 @@ expect(primitives.includes("data-institutional-hero"), "Shared route heroes must
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
 expect(homeContent.includes('title: "Boundary First Weather"'), "Featured work slot four must be Boundary First Weather");
 expect(homeContent.includes('href: "/v3/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
+expect(homeContent.includes('title: "YouTube Knowledge Explorer"'), "Featured work must use the YouTube Knowledge Explorer public name");
+expect(homeContent.includes('href: "/v3/products/youtube-knowledge-explorer"'), "Featured YouTube Knowledge Explorer must link to its immersive product page");
+expect(!homeContent.includes("Projectr"), "v3 homepage public naming must not expose Projectr");
 expect(!homeContent.includes('title: "Public Infrastructure Analysis"'), "Public Infrastructure Analysis must no longer occupy featured work slot four");
 expect(homePage.includes("item.href ?"), "Homepage featured work must support direct product entry links");
 
@@ -222,6 +225,9 @@ expect(!productsPage.includes('className={styles.productConversion}'), "Products
 expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Products page must not inline the superseded Public Product Object section");
 expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");
 expect(productsPage.includes('/v3/products/boundary-first-chess'), "Products must link Boundary-First Chess to its immersive product page");
+expect(productsPage.includes('/v3/products/youtube-knowledge-explorer'), "Products must link YouTube Knowledge Explorer to its immersive product page");
+expect(productsPage.includes("<h3>YouTube Knowledge Explorer</h3>"), "Products must use the YouTube Knowledge Explorer public name");
+expect(!productsPage.includes("Projectr"), "Products public surface must not expose the retired Projectr name");
 
 const productExperienceShell = read(`${root}/products/ProductExperienceShell.tsx`);
 const chessExperience = read(`${root}/products/BoundaryFirstChessExperience.tsx`);
@@ -252,6 +258,22 @@ expect(weatherField.includes("aria-pressed"), "Boundary First Weather diagnostic
 expect(weatherContent.includes("Matched baseline") || weatherContent.includes("MATCHED BASELINE"), "Boundary First Weather must preserve matched-baseline comparison");
 expect(weatherContent.includes("weatherRecord.program.claimBoundary"), "Boundary First Weather must project the canonical operational-forecast claim boundary");
 expect(weatherRoute.includes("BoundaryFirstWeatherExperience"), "Boundary First Weather route must render the product experience");
+
+const explorerExperience = read(`${root}/products/YouTubeKnowledgeExplorerExperience.tsx`);
+const explorerInstrument = read(`${root}/products/YouTubeKnowledgeExplorerInstrument.tsx`);
+const explorerContent = read(`${root}/content/youtubeKnowledgeExplorer.ts`);
+const explorerRoute = read("src/app/v3/products/youtube-knowledge-explorer/page.tsx");
+expect(explorerExperience.includes("<ProductExperienceShell"), "YouTube Knowledge Explorer must use the shared product experience shell");
+expect(explorerExperience.includes("<YouTubeKnowledgeExplorerInstrument"), "YouTube Knowledge Explorer must expose an interactive source-navigation instrument");
+expect(explorerExperience.includes("Ask the video. Make the answer show its work."), "YouTube Knowledge Explorer must foreground evidence-bound answering");
+expect(explorerExperience.includes("The product model should outlive its current stack."), "YouTube Knowledge Explorer must expose portability as a product property");
+expect(explorerInstrument.startsWith('"use client";'), "YouTube Knowledge Explorer instrument must own its client boundary");
+expect(explorerInstrument.includes("aria-pressed"), "YouTube Knowledge Explorer modes and source moments must expose pressed state accessibly");
+expect(explorerContent.includes("insufficient evidence") || explorerContent.includes("Insufficient evidence"), "YouTube Knowledge Explorer must preserve insufficient-evidence as a valid answer state");
+expect(explorerContent.includes("timestamp"), "YouTube Knowledge Explorer must preserve timestamped source navigation");
+expect(!explorerContent.includes("Projectr"), "YouTube Knowledge Explorer public content model must not expose Projectr");
+expect(!explorerExperience.includes("Projectr"), "YouTube Knowledge Explorer public experience must not expose Projectr");
+expect(explorerRoute.includes("YouTubeKnowledgeExplorerExperience"), "YouTube Knowledge Explorer route must render the product experience");
 
 const projectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
 expect(projectsPage.includes("childLinks={institutionalChildRoutes.projects}"), "Projects hero must expose its contextual child pages");
