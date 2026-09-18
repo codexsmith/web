@@ -123,6 +123,7 @@
 }
 
 .routeChildNav {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -131,59 +132,103 @@
 }
 
 .routeChildLabel {
-  color: var(--old-gold-dark);
-  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .17em;
+  color: #61728b;
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .15em;
 }
 
 .routeChildLinks {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 7px;
+  width: min(100%, 360px);
+  display: grid;
+  gap: 8px;
 }
 
 .routeChildLink {
-  display: inline-flex;
+  width: 100%;
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 18px;
-  min-height: 38px;
-  padding: 9px 11px 8px 13px;
+  gap: 13px;
+  padding: 11px 13px 11px 10px;
   border: 1px solid var(--bfux-panel-edge-dark);
-  border-top: 3px solid var(--old-gold);
+  border-left: 6px solid var(--osha-blue);
   background:
-    linear-gradient(180deg, rgba(255,255,255,.96), rgba(233,239,247,.98));
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(231,239,248,.98));
   color: var(--royal-blue-deep);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: .78rem;
-  font-weight: 600;
   box-shadow:
     inset 0 1px 0 #fff,
     0 2px 0 rgba(7,26,61,.16),
-    0 6px 12px rgba(7,26,61,.07);
+    0 7px 15px rgba(7,26,61,.08);
   transition:
     transform 100ms ease,
     border-color 100ms ease,
-    box-shadow 100ms ease;
+    box-shadow 100ms ease,
+    background 100ms ease;
 }
 
-.routeChildLink > span:last-child {
+.routeChildDependencyMark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(21,58,120,.28);
+  background: rgba(21,58,120,.07);
+}
+
+.routeChildDependencyIcon {
+  width: 25px;
+  height: 25px;
+  fill: rgba(21,58,120,.12);
+  stroke: var(--royal-blue);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.routeChildCopy {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.routeChildCopy small {
+  color: var(--osha-blue);
+  font: 800 .48rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .16em;
+}
+
+.routeChildCopy strong {
+  overflow-wrap: anywhere;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.routeChildArrow {
   color: var(--old-gold-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .routeChildLink:hover {
     transform: translateY(-1px);
-    border-color: var(--royal-blue-deep);
+    border-color: rgba(11,37,84,.54);
+    border-left-color: var(--osha-blue);
+    background:
+      linear-gradient(180deg, #fff, #e4edf7);
     box-shadow:
       inset 0 1px 0 #fff,
       0 3px 0 rgba(7,26,61,.18),
-      0 8px 15px rgba(7,26,61,.09);
+      0 9px 17px rgba(7,26,61,.1);
   }
 }
 
 .routeChildLink:focus-visible {
-  outline: 2px solid var(--old-gold);
+  outline: 2px solid var(--osha-blue);
   outline-offset: 3px;
 }
 

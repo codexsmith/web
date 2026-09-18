@@ -2332,3 +2332,41 @@
     transition: none;
   }
 }
+
+
+/* Compact rail v2: quieter perimeter, smaller persistent footprint. */
+.header {
+  border-color: rgba(184, 154, 71, .46);
+  border-width: 1px;
+  border-bottom-width: .5px;
+}
+
+.header[data-header-compact="true"] {
+  min-height: 44px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  gap: 16px;
+}
+
+.header[data-header-compact="true"] .logo {
+  width: 28px;
+  height: 28px;
+}
+
+.header[data-header-compact="true"] .nav {
+  gap: clamp(13px, 1.15vw, 20px);
+  font-size: .75rem;
+}
+
+@media (max-width: 1240px) {
+  .header[data-header-compact="true"] {
+    min-height: 42px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+
+  .header[data-header-compact="true"] .logo {
+    width: 27px;
+    height: 27px;
+  }
+}

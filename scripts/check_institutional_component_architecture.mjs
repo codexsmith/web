@@ -28,10 +28,10 @@ expect(primitives.includes("data-institutional-hero"), "Shared route heroes must
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
 
 const foundationCss = read(`${root}/styles/InstitutionalFoundation.module.css`);
-expect(foundationCss.includes('border: 2px solid var(--old-gold)'), "Institutional header must carry a gold perimeter");
-expect(foundationCss.includes("border-bottom-width: 1px"), "Institutional header bottom rule must remain the thinnest perimeter edge");
-expect(foundationCss.includes('.header[data-header-compact="true"] {\n  min-height: 52px;'), "Post-hero header must physically contract");
-expect(foundationCss.includes('.header[data-header-compact="true"] .logo {\n  width: 34px;\n  height: 34px;'), "Compact header must shrink the persistent logo");
+expect(foundationCss.includes('border-color: rgba(184, 154, 71, .46)'), "Institutional header must carry a muted antique-gold perimeter");
+expect(foundationCss.includes("border-bottom-width: .5px"), "Institutional header bottom rule must remain the thinnest perimeter edge");
+expect(foundationCss.includes('.header[data-header-compact="true"] {\n  min-height: 44px;'), "Post-hero header must physically contract to the compact rail");
+expect(foundationCss.includes('.header[data-header-compact="true"] .logo {\n  width: 28px;\n  height: 28px;'), "Compact header must shrink the persistent logo");
 
 const pageShell = read(`${root}/InstitutionalPageShell.tsx`);
 expect(pageShell.includes("<InstitutionalHeader />"), "PageShell must own the shared header");
@@ -112,6 +112,8 @@ expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must 
 expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Research must own Apparatus as a child-page link");
 expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Open Lab must expose Apparatus as a child-page link");
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
+expect(primitives.includes("routeChildDependencyIcon"), "child-page cards must expose a dependency icon");
+expect(primitives.includes("<small>DEPENDENCY</small>"), "child-page cards must label their dependency relationship");
 expect(primitives.includes('aria-label="Child pages"'), "child-page navigation must expose semantic navigation labeling");
 expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry must not duplicate page copy");
 expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");

@@ -50,8 +50,23 @@ export function InstitutionalRouteHero({
               <div className={styles.routeChildLinks}>
                 {childLinks.map((link) => (
                   <a className={styles.routeChildLink} href={link.href} key={link.href}>
-                    <span>{link.label}</span>
-                    <span aria-hidden="true">→</span>
+                    <span className={styles.routeChildDependencyMark} aria-hidden="true">
+                      <svg
+                        className={styles.routeChildDependencyIcon}
+                        viewBox="0 0 28 28"
+                        role="presentation"
+                      >
+                        <rect x="3" y="4" width="8" height="8" rx="1.5" />
+                        <rect x="17" y="16" width="8" height="8" rx="1.5" />
+                        <path d="M10.5 10.5L17.5 17.5" />
+                        <path d="M15 17.5H17.5V15" />
+                      </svg>
+                    </span>
+                    <span className={styles.routeChildCopy}>
+                      <small>DEPENDENCY</small>
+                      <strong>{link.label}</strong>
+                    </span>
+                    <span className={styles.routeChildArrow} aria-hidden="true">→</span>
                   </a>
                 ))}
               </div>
