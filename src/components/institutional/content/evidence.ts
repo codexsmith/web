@@ -148,6 +148,13 @@ export const nativeEvidence = [
     linkLabel: "Inspect Agentic Scientific Method",
   },
   {
+    title: "Stewardship machinery",
+    description:
+      "Source/provenance records, claim-state controls, handoff packets, human authority boundaries, critique intake, maintenance responsibilities, and explicit consequence tracking show how the Lab tries to preserve knowledge, agency, and long-horizon responsibility rather than treating publication or deployment as closure.",
+    href: "/v3/apparatus",
+    linkLabel: "Inspect Stewardship Machinery",
+  },
+  {
     title: "Publication discipline",
     description:
       "The publication surface distinguishes manuscripts, stubs, release state, review state, and bound canonical documents rather than calling every substantial draft a publication.",
@@ -192,6 +199,11 @@ export const evidenceToEarn = [
       "Strong technical and scientific claims become much more credible when another party can reproduce the result from the stated method and inputs.",
   },
   {
+    title: "Stewardship under real use",
+    description:
+      "The Lab still needs longitudinal evidence that its products, collaborations, research objects, and applied work are maintained, corrected, transferred, or retired well—and that human or ecological costs are not merely displaced outside the visible metric.",
+  },
+  {
     title: "Transfer beyond the founder",
     description:
       "The Lab's strongest institutional evidence will be other people successfully operating, criticizing, repairing, or extending the machinery without long oral context transfer.",
@@ -199,6 +211,7 @@ export const evidenceToEarn = [
 ] as const;
 
 export const evidenceNonImplications = [
+  ["Stewardship language != stewardship performance", "Calling a system responsible, human-centered, sustainable, or stewarded is not evidence that it preserves provenance, agency, maintainability, or ecological conditions in practice."],
   ["Agent output != scientific authority", "Search, synthesis, code execution, critic agreement, or a successful automated run may produce useful evidence; none of them alone promote a scientific claim."],
   ["Method discipline != validated method", "A well-instrumented scientific or agentic workflow can improve traceability and error detection without proving that the workflow is complete, novel, or universally superior."],
   ["Prior career != BFL traction", "Earlier professional delivery supports capability; it does not create current BFL customers or revenue."],
