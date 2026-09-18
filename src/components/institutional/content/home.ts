@@ -21,9 +21,9 @@ export const featuredWork = [
   },
   {
     tag: "PRODUCT",
-    title: "Projectr / YouTube Knowledge Explorer",
+    title: "YouTube Knowledge Explorer",
     description: "A source-linked software tool for turning long-form video into searchable, timestamped, structured knowledge.",
-    href: null,
+    href: "/v3/products/youtube-knowledge-explorer",
   },
   {
     tag: "RESEARCH TOOL",
