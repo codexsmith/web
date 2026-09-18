@@ -327,9 +327,13 @@
   color: #fff;
 }
 
-.roadmapChangeSection :global(.sectionHeader),
-.roadmapChangeSection :global(.sectionLead) {
+.roadmapChangeHeader h2,
+.roadmapChangeHeader > span {
   color: #fff;
+}
+
+.roadmapChangeHeader p {
+  color: var(--old-gold-bright);
 }
 
 .roadmapChangeGrid {

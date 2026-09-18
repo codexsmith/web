@@ -51,7 +51,7 @@ export function InstitutionalNowPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>CURRENT PRIORITIES</>}
-          title={<>Six active lanes, each with a closure condition.</>}
+          title={<>Six priority lanes, each with a closure condition.</>}
           note={
             <>
               Priority means the Lab is allocating current attention or near-term conversion
@@ -77,7 +77,7 @@ export function InstitutionalNowPage() {
               </header>
 
               <div className={styles.nowPriorityWork}>
-                <span>ACTIVE WORK</span>
+                <span>WORK IN THIS LANE</span>
                 <ul>
                   {lane.work.map((item) => <li key={item}>{item}</li>)}
                 </ul>
@@ -149,6 +149,7 @@ export function InstitutionalNowPage() {
       <section className={styles.roadmapChangeSection}>
         <InstitutionalSectionHeader
           styles={styles}
+          className={styles.roadmapChangeHeader}
           eyebrow={<>WHAT CAN CHANGE THE ROADMAP?</>}
           title={<>The plan is allowed to learn.</>}
           note={
