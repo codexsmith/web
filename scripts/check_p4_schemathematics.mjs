@@ -21,7 +21,7 @@ function forbidMatch(path, pattern, message) {
 const component = "src/components/schemathematics-formal-record-detail.tsx";
 const css = "src/app/p4-schemathematics-formal-program.css";
 const contract = "docs/schemathematics-formal-program-contract.md";
-const page = "src/app/[[...slug]]/page.tsx";
+const page = "src/app/[...slug]/page.tsx";
 
 for (const path of [component, css, contract]) {
   requireExists(path, "Schemathematics specialized formal-program artifact must remain present");

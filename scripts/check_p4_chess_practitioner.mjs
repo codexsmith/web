@@ -21,7 +21,7 @@ function forbidMatch(path, pattern, message) {
 const component = "src/components/chess-practitioner-record-detail.tsx";
 const css = "src/app/p4-chess-practitioner-decision-board.css";
 const contract = "docs/chess-practitioner-decision-board-contract.md";
-const page = "src/app/[[...slug]]/page.tsx";
+const page = "src/app/[...slug]/page.tsx";
 
 for (const path of [component, css, contract]) {
   requireExists(path, "Chess specialized practitioner artifact must remain present");

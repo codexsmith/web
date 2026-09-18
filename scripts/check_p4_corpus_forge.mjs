@@ -21,7 +21,7 @@ function forbidMatch(path, pattern, message) {
 const component = "src/components/corpus-forge-record-detail.tsx";
 const css = "src/app/p4-corpus-forge-workbench.css";
 const contract = "docs/corpus-forge-workbench-contract.md";
-const page = "src/app/[[...slug]]/page.tsx";
+const page = "src/app/[...slug]/page.tsx";
 
 for (const path of [component, css, contract]) {
   requireExists(path, "Corpus Forge specialized workbench artifact must remain present");
