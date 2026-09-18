@@ -112,12 +112,17 @@ export const appliedWorkOutputs = [
 export const appliedWorkProcess = [
   ["Bring a real problem", "Start with the system, decision, failure, or opportunity—not a request for a fashionable methodology."],
   ["Inspect what exists", "Review the software, workflow, documents, data, people, constraints, and prior attempts that already shape the problem."],
-  ["Bound the engagement", "Agree on the smallest useful review, workshop, prototype, pilot, or advisory scope and define what it should produce."],
+  ["Bound the engagement", "Respect actual capacity and agree on the smallest coherent review, workshop, prototype, pilot, or advisory scope that can finish, produce evidence, and change the next decision."],
   ["Make the work inspectable", "Deliver maps, artifacts, findings, code, decisions, or evidence that someone other than the consultant can examine."],
-  ["Decide from evidence", "Repair, build, continue, transfer, pause, or stop based on what the engagement actually revealed."],
+  ["Inspect and adapt", "Treat the result as new system state: repair, build, continue, transfer, pause, or stop based on what the engagement actually revealed."],
 ] as const;
 
 export const appliedWorkBoundaries = [
+  {
+    label: "LEAN–AGILE BY PRACTICE, NOT CEREMONY",
+    description:
+      "The delivery lineage favors visible state, bounded work, real capacity, small coherent increments, short evidence loops, and adaptation from observed results. Clients are not required to adopt Scrum rituals, BFL vocabulary, or a process brand.",
+  },
   {
     label: "NO THEORY BUY-IN REQUIRED",
     description:

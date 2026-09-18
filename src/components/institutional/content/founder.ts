@@ -34,9 +34,9 @@ export const founderTimeline = [
   },
   {
     period: "CONSULTING + DELIVERY",
-    title: "Constraint became part of the model.",
+    title: "Lean–Agile practice made state, capacity, and feedback operational.",
     description:
-      "Agile, Lean, Kanban, prototypes, demos, and project leadership sharpened a practical rule: scope, time, capacity, priority, and consequence define a reachable state space. A plan cannot make every future admissible.",
+      "Agile, Lean, Kanban, Lean Startup, prototypes, demos, and repeated project leadership turned abstract ideas about uncertainty into daily operating constraints: make work visible, limit work in progress, respect real capacity, deliver a coherent increment, inspect the result, and let feedback change the next state.",
   },
   {
     period: "INDEPENDENT LAB",
@@ -68,6 +68,11 @@ export const founderPrinciples = [
     label: "PRACTICE-BORN",
     description:
       "The method was sharpened first in software, systems delivery, research work, and the repeated need to repair models that did not survive contact with reality.",
+  },
+  {
+    label: "LEAN–AGILE LINEAGE",
+    description:
+      "Years of Agile, Lean, Kanban, and startup practice supplied an empirical operating grammar: visible state, bounded flow, short feedback loops, capacity-aware planning, working increments, and revision when reality disagrees.",
   },
   {
     label: "RESEARCH-BACKED",
