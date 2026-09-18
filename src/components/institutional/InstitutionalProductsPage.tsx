@@ -166,6 +166,41 @@ export function InstitutionalProductsPage() {
           </div>
         </section>
 
+        <section className={styles.researchProducts}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>RESEARCH PRODUCTS</>}
+            title={<>Useful machinery can remain research-bounded.</>}
+            note={<>These products are built to be used and tested without turning internal implementation evidence into scientific validation.</>}
+          />
+
+          <div className={styles.researchProductGrid}>
+            <Link className={styles.researchProductCard} data-product="weather" href="/v3/products/boundary-first-weather">
+              <div>
+                <span>03 · RESEARCH PRODUCT</span>
+                <strong>Boundary First Weather</strong>
+              </div>
+              <p>
+                A computational weather testbed and decision-support surface for boundary-aware
+                diagnostics, forecast disagreement, and selective refinement.
+              </p>
+              <small>Enter Weather <i aria-hidden="true">→</i></small>
+            </Link>
+
+            <Link className={styles.researchProductCard} data-product="asm" href="/v3/products/agentic-scientific-method">
+              <div>
+                <span>04 · RESEARCH PRODUCT</span>
+                <strong>Agentic Scientific Method</strong>
+              </div>
+              <p>
+                An operational inquiry protocol for making goals, evidence, action, criticism,
+                authority, defect, repair, closure, and scientific memory inspectable.
+              </p>
+              <small>Enter Agentic Scientific Method <i aria-hidden="true">→</i></small>
+            </Link>
+          </div>
+        </section>
+
         <ProductContextSection />
 
         <section className={styles.productClose}>
