@@ -2591,20 +2591,45 @@
   min-width: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  gap: 0;
+  align-items: start;
+  overflow: visible;
+  padding: 8px 12px 12px 4px;
 }
 .practiceLineageGrid article {
   min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-self: start;
   padding: 14px 15px 15px;
   border: 1px solid rgba(7,26,61,.24);
   background: linear-gradient(180deg, #fff, #f4f7fa);
 }
-.practiceLineageInputs article:nth-child(1) { border-top: 4px solid var(--osha-orange); }
-.practiceLineageInputs article:nth-child(2) { border-top: 4px solid var(--old-gold); }
-.practiceLineageInputs article:nth-child(3) { border-top: 4px solid var(--osha-blue); }
+.practiceLineageInputs article {
+  position: relative;
+  transform-origin: 50% 12%;
+  box-shadow:
+    0 10px 22px rgba(20,37,58,.08),
+    0 2px 0 rgba(20,37,58,.07);
+}
+.practiceLineageInputs article:nth-child(1) {
+  z-index: 1;
+  border-top: 4px solid var(--osha-orange);
+  transform: rotate(-1.8deg) translateY(8px);
+}
+.practiceLineageInputs article:nth-child(2) {
+  z-index: 3;
+  margin-left: -10px;
+  border-top: 4px solid var(--old-gold);
+  transform: rotate(.7deg) translateY(-3px);
+}
+.practiceLineageInputs article:nth-child(3) {
+  z-index: 2;
+  margin-left: -18px;
+  border-top: 4px solid var(--osha-blue);
+  transform: rotate(1.5deg) translateY(7px);
+}
 .practiceLineageOrdinal {
   color: #6f7d8e;
   font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -2653,6 +2678,7 @@
   font: 700 1.05rem/1 Georgia, "Times New Roman", serif;
 }
 .practiceLineageOutput {
+  align-self: center !important;
   border-top: 5px solid var(--osha-green) !important;
   background:
     linear-gradient(135deg, rgba(61,132,76,.08), transparent 48%),
@@ -2694,7 +2720,17 @@
 }
 @media (max-width: 680px) {
   .practiceLineage { padding-left: 18px; padding-right: 18px; }
-  .practiceLineageInputs { grid-template-columns: 1fr; }
+  .practiceLineageInputs {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 0;
+  }
+  .practiceLineageInputs article:nth-child(1),
+  .practiceLineageInputs article:nth-child(2),
+  .practiceLineageInputs article:nth-child(3) {
+    margin-left: 0;
+    transform: none;
+  }
 }
 
 /* Stewardship is an obligation layer across knowledge, people, and substrate. */
