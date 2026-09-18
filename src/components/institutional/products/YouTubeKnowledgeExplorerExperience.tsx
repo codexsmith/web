@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { ProductExperienceShell } from "./ProductExperienceShell";
 import { YouTubeKnowledgeExplorerInstrument } from "./YouTubeKnowledgeExplorerInstrument";
 import {
@@ -191,7 +192,7 @@ export function YouTubeKnowledgeExplorerExperience() {
 
         <div className={styles.explorerArchitectureStack}>
           {explorerArchitecture.map(([title, description], index) => (
-            <article key={title} style={{ "--layer-index": index } as React.CSSProperties}>
+            <article key={title} style={{ "--layer-index": index } as CSSProperties}>
               <span>0{index + 1}</span>
               <strong>{title}</strong>
               <p>{description}</p>
