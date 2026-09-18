@@ -4763,3 +4763,572 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* About route projection */
+.aboutPage {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(233,240,248,.96)),
+    var(--institution-paper);
+}
+
+.aboutHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(330px, .75fr);
+  gap: clamp(40px, 7vw, 108px);
+  align-items: end;
+  padding: clamp(60px, 7vw, 106px) clamp(30px, 8vw, 128px);
+  border-bottom: 2px solid var(--old-gold);
+  background: #fff;
+}
+
+.aboutHero h1 {
+  max-width: 980px;
+  margin: 14px 0 20px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.8rem, 5.6vw, 7.1rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+
+.aboutAgencyQuestion {
+  margin: 0;
+  padding: 26px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #f9fbfe, #edf3f9);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.22rem;
+  line-height: 1.52;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 rgba(7,26,61,.16),
+    0 10px 22px rgba(7,26,61,.09);
+}
+
+.aboutAgencyQuestion span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--old-gold-dark);
+  font: 800 .57rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .17em;
+}
+
+.knowledgeInfrastructure,
+.constructiveHumanism,
+.aboutStewardship {
+  display: grid;
+  grid-template-columns: minmax(280px, .78fr) minmax(0, 2fr);
+  gap: 32px;
+  align-items: start;
+  padding: 40px clamp(30px, 6vw, 96px);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background: linear-gradient(180deg, #eef3f9, #e5edf5);
+}
+
+.representationGrid,
+.capabilityOutputGrid,
+.aboutStewardshipGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.representationPlate,
+.capabilityOutputPlate,
+.aboutStewardshipPlate,
+.agencyRoutePlate {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 11px 13px;
+  border: 1px solid rgba(7,26,61,.27);
+  background: linear-gradient(180deg, #fbfdff, #edf3f9);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.12);
+}
+
+.representationPlate > span,
+.capabilityOutputPlate > span,
+.aboutStewardshipPlate > span,
+.agencyRoutePlate > span {
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.representationPlate strong,
+.capabilityOutputPlate strong,
+.aboutStewardshipPlate strong,
+.agencyRoutePlate strong {
+  color: var(--royal-blue-deep);
+  font-size: .77rem;
+}
+
+.representationPlate {
+  display: grid;
+  grid-template-columns: auto minmax(90px, .55fr) minmax(0, 1.45fr);
+}
+
+.representationPlate p {
+  margin: 0;
+  color: #52627b;
+  font-size: .72rem;
+  line-height: 1.38;
+}
+
+.humanRepresentation,
+.aboutAgencySection,
+.whyLabSection,
+.collaborationSection,
+.publicGoodSection {
+  display: grid;
+  grid-template-columns: minmax(290px, .84fr) minmax(0, 1.7fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: center;
+  padding: 44px clamp(30px, 7vw, 112px);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background: #fff;
+}
+
+.humanRepresentation h2,
+.oldMachineryCopy h2,
+.aboutAgencySection h2,
+.constructiveHumanism h2,
+.aboutStewardship h2,
+.whyLabSection h2,
+.criticismFriendlyInstitution h2,
+.collaborationSection h2,
+.publicGoodSection h2,
+.aboutClose h2 {
+  margin: 9px 0 12px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 2.8vw, 3.5rem);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.humanRepresentation > div > p:last-child,
+.oldMachineryCopy > p:last-child,
+.aboutAgencySection > div:first-child > p:last-child,
+.constructiveHumanism > div:first-child > p:last-child,
+.aboutStewardship > div:first-child > p:last-child,
+.whyLabSection > div:first-child > p:last-child,
+.criticismFriendlyInstitution > div > p:last-child,
+.collaborationSection > div:first-child > p:last-child,
+.publicGoodSection > div:first-child > p:last-child,
+.publicGoodSection > p,
+.aboutClose > p {
+  margin: 0;
+  color: #435470;
+  font-size: .94rem;
+  line-height: 1.6;
+}
+
+.humanRepresentation blockquote,
+.criticismFriendlyInstitution blockquote {
+  margin: 0;
+  padding: 26px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.27rem;
+  line-height: 1.48;
+  box-shadow: 0 3px 0 #071a3d, 0 10px 20px rgba(7,26,61,.16);
+}
+
+.recurringProblemSection,
+.aboutMethodCycle {
+  padding: 40px clamp(30px, 6vw, 96px) 50px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.68), transparent 12%),
+    linear-gradient(180deg, #e4edf6, #d8e4ef);
+}
+
+.recurringFailureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.recurringFailureCard {
+  min-height: 176px;
+  padding: 16px;
+  border: 1px solid rgba(7,26,61,.27);
+  border-top: 4px solid var(--osha-orange);
+  background: #fff;
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.13);
+}
+
+.recurringFailureCard:nth-child(2),
+.recurringFailureCard:nth-child(5) { border-top-color: var(--osha-yellow); }
+.recurringFailureCard:nth-child(3),
+.recurringFailureCard:nth-child(6) { border-top-color: var(--osha-red); }
+
+.recurringFailureCard > span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.recurringFailureCard h3 {
+  margin: 12px 0 8px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.recurringFailureCard p {
+  margin: 0;
+  color: #52627b;
+  font-size: .74rem;
+  line-height: 1.48;
+}
+
+.oldMachinerySection {
+  display: grid;
+  grid-template-columns: minmax(300px, .8fr) minmax(0, 1.8fr);
+  gap: clamp(38px, 6vw, 96px);
+  align-items: center;
+  padding: 46px clamp(30px, 7vw, 112px);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background: #fff;
+}
+
+.oldMachineryWorkbench {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  background: linear-gradient(180deg, #bccbdc, #d2dce8);
+  box-shadow: inset 0 3px 8px rgba(7,26,61,.18);
+}
+
+.oldMachineryList,
+.recurringStructureList {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 6px;
+  padding: 15px;
+  border: 1px solid rgba(7,26,61,.25);
+  background: linear-gradient(180deg, #fbfdff, #edf3f9);
+}
+
+.oldMachineryList > span,
+.recurringStructureList > span {
+  width: 100%;
+  margin-bottom: 6px;
+  color: var(--old-gold-dark);
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.oldMachineryList strong,
+.recurringStructureList strong {
+  padding: 6px 8px;
+  border: 1px solid rgba(7,26,61,.2);
+  background: #fff;
+  color: var(--royal-blue-deep);
+  font-size: .68rem;
+}
+
+.aboutCycleRail {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  margin-top: 22px;
+  padding: 9px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  background: linear-gradient(180deg, #b8c8da, #d1dce8);
+  box-shadow: inset 0 3px 8px rgba(7,26,61,.18);
+}
+
+.aboutCycleStep {
+  position: relative;
+  min-height: 145px;
+  padding: 13px 10px;
+  border: 1px solid rgba(7,26,61,.24);
+  background: #fff;
+  text-align: center;
+}
+
+.aboutCycleStep:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  z-index: 2;
+  color: var(--old-gold-dark);
+  font-weight: 800;
+}
+
+.aboutCycleStep > span {
+  color: var(--old-gold-dark);
+  font: 800 .48rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.aboutCycleStep strong {
+  display: block;
+  margin: 12px 0 7px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .82rem;
+}
+
+.aboutCycleStep p {
+  margin: 0;
+  color: #52627b;
+  font-size: .64rem;
+  line-height: 1.36;
+}
+
+.aboutMethodOrigins {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.aboutMethodOrigins article {
+  min-height: 210px;
+  padding: 18px;
+  border: 1px solid rgba(7,26,61,.26);
+  border-top: 5px solid var(--old-gold);
+  background: #fff;
+}
+
+.aboutMethodOrigins article:nth-child(2) { border-top-color: var(--osha-blue); }
+.aboutMethodOrigins article:nth-child(3) { border-top-color: var(--osha-green); }
+
+.aboutMethodOrigins article > span {
+  color: var(--old-gold-dark);
+  font: 800 .53rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.aboutMethodOrigins h3 {
+  margin: 13px 0 8px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.07rem;
+}
+
+.aboutMethodOrigins p {
+  margin: 0;
+  color: #52627b;
+  font-size: .75rem;
+  line-height: 1.5;
+}
+
+.agencyRouteGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.constructiveHumanism {
+  background: linear-gradient(180deg, #eef3f9, #e3ecf5);
+}
+
+.aboutStewardship {
+  background: #fff;
+}
+
+.labInstrumentRail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  background: linear-gradient(180deg, #bdcbdc, #d2dce8);
+  box-shadow: inset 0 3px 8px rgba(7,26,61,.18);
+}
+
+.labInstrumentRail > div {
+  min-height: 74px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid rgba(7,26,61,.24);
+  background: #fff;
+}
+
+.labInstrumentRail span {
+  color: var(--old-gold-dark);
+  font: 800 .48rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.labInstrumentRail strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .82rem;
+}
+
+.criticismFriendlyInstitution {
+  display: grid;
+  grid-template-columns: minmax(300px, .9fr) minmax(0, 1.3fr);
+  gap: clamp(38px, 6vw, 90px);
+  align-items: center;
+  padding: 44px clamp(30px, 7vw, 112px);
+  border-top: 7px solid var(--osha-orange);
+  border-bottom: 7px solid var(--osha-orange);
+  background:
+    repeating-linear-gradient(135deg, rgba(231,123,36,.06) 0 8px, transparent 8px 16px),
+    #fffaf4;
+}
+
+.collaborationQuestions {
+  display: grid;
+  gap: 10px;
+}
+
+.collaborationQuestions blockquote {
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid rgba(7,26,61,.25);
+  border-left: 5px solid var(--osha-blue);
+  background: linear-gradient(180deg, #fbfdff, #edf3f9);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.collaborationQuestions blockquote:nth-child(2) {
+  border-left-color: var(--osha-green);
+}
+
+.publicGoodSection {
+  background: linear-gradient(180deg, #eef3f9, #e5edf5);
+}
+
+.publicGoodSection > p {
+  padding: 22px;
+  border: 1px solid rgba(7,26,61,.24);
+  border-left: 6px solid var(--old-gold);
+  background: #fff;
+}
+
+.aboutClose {
+  padding: 54px clamp(30px, 8vw, 128px) 68px;
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+}
+
+.aboutClose .sectionIndex {
+  color: var(--old-gold-bright);
+}
+
+.aboutClose h2 {
+  max-width: 1180px;
+  color: #fff;
+  font-size: clamp(2.35rem, 4vw, 4.7rem);
+  line-height: .98;
+}
+
+.aboutClose > p {
+  max-width: 860px;
+  color: #dce6f3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 1120px) {
+  .aboutCycleRail {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .aboutCycleStep:nth-child(4)::after {
+    display: none;
+  }
+
+  .recurringFailureGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .agencyRouteGrid,
+  .labInstrumentRail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .aboutHero,
+  .knowledgeInfrastructure,
+  .humanRepresentation,
+  .oldMachinerySection,
+  .aboutAgencySection,
+  .constructiveHumanism,
+  .aboutStewardship,
+  .whyLabSection,
+  .criticismFriendlyInstitution,
+  .collaborationSection,
+  .publicGoodSection {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutMethodOrigins {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .aboutHero,
+  .knowledgeInfrastructure,
+  .humanRepresentation,
+  .recurringProblemSection,
+  .oldMachinerySection,
+  .aboutMethodCycle,
+  .aboutAgencySection,
+  .constructiveHumanism,
+  .aboutStewardship,
+  .whyLabSection,
+  .criticismFriendlyInstitution,
+  .collaborationSection,
+  .publicGoodSection,
+  .aboutClose {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .aboutHero h1 {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .representationGrid,
+  .capabilityOutputGrid,
+  .aboutStewardshipGrid,
+  .recurringFailureGrid,
+  .oldMachineryWorkbench,
+  .aboutCycleRail,
+  .agencyRouteGrid,
+  .labInstrumentRail {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutCycleStep:not(:last-child)::after {
+    content: "↓";
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: -10px;
+    display: block;
+  }
+
+  .representationPlate {
+    grid-template-columns: auto 1fr;
+  }
+
+  .representationPlate p {
+    grid-column: 2;
+  }
+}
