@@ -25,7 +25,8 @@ export function InstitutionalResearchPage() {
               and evidence explicit; agentic reasoning expands search, decomposition,
               comparison, tool use, and critique. Boundary First supplies the shared
               representation-and-repair grammar. None of those mechanisms substitutes for
-              scientific validation.</>}
+              scientific validation. Stewardship then governs what the work owes to its
+              sources, readers, affected people, maintainers, and shared material substrate.</>}
           childLinks={institutionalChildRoutes.research}
           >
           <blockquote className={styles.researchQuestion}>
