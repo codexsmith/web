@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
 import { institutionalFooterRoutes, institutionalRoutes } from "./institutionalRoutes";
@@ -15,32 +16,35 @@ export function InstitutionalHeader() {
   const [heroPassed, setHeroPassed] = useState(false);
 
   useEffect(() => {
-    const hero = document.querySelector<HTMLElement>(
-      "main [data-institutional-hero]",
-    );
+    let observer: IntersectionObserver | undefined;
 
-    if (!hero) {
-      setHeroPassed(false);
-      return;
-    }
+    const frame = window.requestAnimationFrame(() => {
+      const hero = document.querySelector<HTMLElement>(
+        "main [data-institutional-hero]",
+      );
 
-    const updateFromRect = () => {
+      if (!hero) {
+        setHeroPassed(false);
+        return;
+      }
+
       setHeroPassed(hero.getBoundingClientRect().bottom <= 0);
+
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry) return;
+          setHeroPassed(entry.boundingClientRect.bottom <= 0);
+        },
+        { threshold: [0, 0.01] },
+      );
+
+      observer.observe(hero);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer?.disconnect();
     };
-
-    updateFromRect();
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) return;
-        setHeroPassed(entry.boundingClientRect.bottom <= 0);
-      },
-      { threshold: [0, 0.01] },
-    );
-
-    observer.observe(hero);
-
-    return () => observer.disconnect();
   }, [pathname]);
 
   return (
@@ -48,12 +52,12 @@ export function InstitutionalHeader() {
       className={styles.header}
       data-header-compact={heroPassed ? "true" : "false"}
     >
-      <a className={styles.brand} href="/v3" aria-label="Boundary First Labs Website v3 home">
+      <Link className={styles.brand} href="/v3" aria-label="Boundary First Labs Website v3 home">
         <BoundaryFirstWaveLogo className={styles.logo} variant="compact" decorative />
         <span className={styles.brandCopy} aria-hidden={heroPassed ? "true" : undefined}>
           <strong>Boundary First Labs</strong>
         </span>
-      </a>
+      </Link>
 
       <nav className={styles.nav} aria-label="Boundary First Labs">
         {institutionalRoutes.map((route) => {
@@ -66,7 +70,7 @@ export function InstitutionalHeader() {
               aria-current={active ? "page" : undefined}
             >
               {route.label}
-            </a>
+            </Link>
           );
         })}
       </nav>
@@ -87,9 +91,9 @@ export function InstitutionalFooter() {
 
       <nav className={styles.footerNav} aria-label="Boundary First Labs footer">
         {institutionalFooterRoutes.map((route) => (
-          <a key={route.href} href={route.href}>
+          <Link key={route.href} href={route.href}>
             {route.label}
-          </a>
+          </Link>
         ))}
       </nav>
 
