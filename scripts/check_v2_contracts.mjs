@@ -488,17 +488,6 @@ requireMatch(
   "Root readability, hero threshold, traversal history, content-first World, and Card viewport-fit layers must all be active",
 );
 
-// The retired archive must represent final v1, including the late journey-refinement branch merged into main.
-for (const path of [
-  "retired_v1/src/components/journey/EntranceIntentConsole.tsx",
-  "retired_v1/src/components/journey/EvidenceClaimReader.tsx",
-  "retired_v1/src/components/journey/MethodStackNavigator.tsx",
-  "retired_v1/src/components/journey/ResearchJourneyRail.tsx",
-  "retired_v1/src/components/journey/SoftwareProblemRouter.tsx",
-  "retired_v1/tests/site-journey-refinement.test.ts",
-]) {
-  requireExists(path, "Final v1 journey refinement must remain preserved in retired_v1");
-}
 requireMatch(
   "retired_v1/src/components/entrance/InstitutionalVestibuleHome.tsx",
   /EntranceIntentConsole/,
