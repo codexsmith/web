@@ -64,7 +64,7 @@ export function InstitutionalHeader() {
           const active = routeIsActive(pathname, route.href);
 
           return (
-            <a
+            <Link
               key={route.href}
               href={route.href}
               aria-current={active ? "page" : undefined}
