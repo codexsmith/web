@@ -7,6 +7,7 @@ export type LabObjectKind =
   | "publication"
   | "evidence"
   | "experiment"
+  | "claim"
   | "method"
   | "apparatus";
 
@@ -31,6 +32,7 @@ const kindLabels: Record<LabObjectKind, string> = {
   publication: "Publication",
   evidence: "Evidence",
   experiment: "Experiment",
+  claim: "Claim",
   method: "Method",
   apparatus: "Apparatus",
 };

@@ -9,6 +9,7 @@ import { agenticScientificMethodProduct } from "./agenticScientificMethod";
 import { priorExecution } from "./evidence";
 import { experimentRecords } from "./experiments";
 import { machineryRecords } from "./machinery";
+import { claimProjection, claimRecords } from "./claims";
 
 export type AtlasNode = {
   atlasId: string;
@@ -186,6 +187,28 @@ const apparatusNodes: AtlasNode[] = machineryRecords.map((machine) => ({
   ],
 }));
 
+const claimNodes: AtlasNode[] = claimRecords.map((claim) => ({
+  atlasId: `claim-${claim.id.toLowerCase()}`,
+  kind: "claim",
+  title: claim.claim,
+  href: `/v3/claims#claim-${claim.id.toLowerCase()}`,
+  identifier: claim.id,
+  identifierLabel: "CLAIM",
+  status: claim.status,
+  statusLabel: "STATUS",
+  secondary: claimProjection.ownerResearch.title,
+  secondaryLabel: "OWNER PROGRAM",
+  summary: claim.claim,
+  searchTerms: [
+    claimProjection.ledgerProgram,
+    claimProjection.authority,
+    claim.requiresValidation === true ? "validation required" : "",
+    claim.noveltyClaim === false ? "novelty not claimed" : "",
+    claim.source ?? "",
+    ...claim.evidence,
+  ],
+}));
+
 export const atlasNodes = [
   ...researchNodes,
   ...productNodes,
@@ -194,6 +217,7 @@ export const atlasNodes = [
   ...evidenceNodes,
   ...experimentNodes,
   ...apparatusNodes,
+  ...claimNodes,
 ] as const satisfies readonly AtlasNode[];
 
 const projectProductEdges: AtlasEdge[] = [
@@ -250,16 +274,25 @@ const experimentResearchEdges: AtlasEdge[] = experimentRecords.flatMap((experime
   })),
 );
 
+const claimOwnerEdges: AtlasEdge[] = claimRecords.map((claim) => ({
+  from: `claim-${claim.id.toLowerCase()}`,
+  to: claimProjection.ownerResearch.atlasId,
+  relation: "OWNER PROGRAM",
+  note: `${claim.id} is owned by the Information Mechanics claim ledger; registrar authority remains owner-local claim/evidence state only.`,
+}));
+
 export const atlasEdges = [
   ...projectProductEdges,
   ...researchProductEdges,
   ...informationMechanicsPublicationEdges,
   ...experimentResearchEdges,
+  ...claimOwnerEdges,
 ] as const satisfies readonly AtlasEdge[];
 
 export const atlasKindOrder = [
   "research",
   "experiment",
+  "claim",
   "apparatus",
   "product",
   "project",
@@ -270,6 +303,7 @@ export const atlasKindOrder = [
 export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
   research: "Research programs",
   experiment: "Experiment records",
+  claim: "Claim records",
   apparatus: "Machinery components",
   product: "Products",
   project: "Project cases",
