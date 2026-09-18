@@ -682,3 +682,108 @@ button.pill {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Representational taxonomy: four canonical regimes plus a cross-cutting language bridge. */
+.breakdownPanel[data-variant="taxonomy"] .breakdownGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 34px;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownGrid::before {
+  content: "STATIC REPRESENTATION                                      DYNAMIC REPRESENTATION";
+  position: absolute;
+  inset: 0 0 auto;
+  color: #65788b;
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+  white-space: pre;
+  text-align: center;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem {
+  min-height: 205px;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 15px;
+  padding: 18px;
+  border-top: 5px solid #617f98;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(247,250,251,.82));
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem:nth-child(1),
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem:nth-child(2) {
+  border-top-color: #597c95;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem:nth-child(3),
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem:nth-child(4) {
+  border-top-color: #7d759c;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem:nth-child(5) {
+  grid-column: 1 / -1;
+  min-height: 150px;
+  border-top-color: #9a7a4b;
+  background:
+    linear-gradient(90deg, rgba(247,242,232,.82), rgba(255,255,255,.96), rgba(247,242,232,.82));
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem > strong {
+  min-width: 34px;
+  color: #6d7c8d;
+  font: 800 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem > div > span {
+  color: #173653;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 1.7vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -.035em;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem p {
+  max-width: 760px;
+  margin-top: 8px;
+  color: #5b6b7c;
+  font-size: .7rem;
+  line-height: 1.48;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownItem code {
+  margin-top: 13px;
+  border-color: rgba(23,54,83,.1);
+  background: #edf2f5;
+  color: #526b80;
+  font-size: .5rem;
+  letter-spacing: .08em;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownTags {
+  margin-top: 13px;
+}
+
+.breakdownPanel[data-variant="taxonomy"] .breakdownTag {
+  min-height: 25px;
+  padding: 5px 8px;
+}
+
+@media (max-width: 760px) {
+  .breakdownPanel[data-variant="taxonomy"] .breakdownGrid {
+    grid-template-columns: 1fr;
+    padding-top: 0;
+  }
+
+  .breakdownPanel[data-variant="taxonomy"] .breakdownGrid::before {
+    display: none;
+  }
+
+  .breakdownPanel[data-variant="taxonomy"] .breakdownItem:nth-child(5) {
+    grid-column: 1;
+  }
+}
