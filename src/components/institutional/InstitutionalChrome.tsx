@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
-import { institutionalFooterRoutes, institutionalRoutes } from "./institutionalRoutes";
+import { institutionalFooterGroups, institutionalRoutes } from "./institutionalRoutes";
 import styles from "./styles/InstitutionalFoundation.module.css";
 
 function routeIsActive(pathname: string, href: string) {
@@ -81,19 +81,30 @@ export function InstitutionalHeader() {
 export function InstitutionalFooter() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerBrand}>
+      <Link
+        className={styles.footerBrand}
+        href="/v3"
+        aria-label="Boundary First Labs Website v3 home"
+      >
         <BoundaryFirstWaveLogo className={styles.footerLogo} variant="compact" decorative />
         <div>
           <strong>Boundary First Labs</strong>
           <span>Practice-born. Research-backed. Formally generalized.</span>
         </div>
-      </div>
+      </Link>
 
       <nav className={styles.footerNav} aria-label="Boundary First Labs footer">
-        {institutionalFooterRoutes.map((route) => (
-          <Link key={route.href} href={route.href}>
-            {route.label}
-          </Link>
+        {institutionalFooterGroups.map((group) => (
+          <div className={styles.footerNavGroup} key={group.label}>
+            <p className={styles.footerNavLabel}>{group.label}</p>
+            <div className={styles.footerNavLinks}>
+              {group.routes.map((route) => (
+                <Link key={route.href} href={route.href}>
+                  {route.label}
+                </Link>
+              ))}
+            </div>
+          </div>
         ))}
       </nav>
 
