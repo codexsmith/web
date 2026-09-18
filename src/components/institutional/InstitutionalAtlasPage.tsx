@@ -5,7 +5,7 @@ import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Atlas.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
-import { atlasStats } from "./content/atlas";
+import { atlasProjection, atlasStats } from "./content/atlas";
 
 const styles = composeCssModules(
   foundationStyles,
@@ -49,14 +49,13 @@ export function InstitutionalAtlasPage({
 
       <section className={styles.atlasBoundary}>
         <div>
-          <span>CURRENT PUBLIC BOUNDARY</span>
+          <span>PUBLIC PROJECTION · V{atlasProjection.version}</span>
           <strong>Research · Experiments · Claims · Machinery · Products · Projects · Publications · Evidence</strong>
         </div>
         <p>
-          Source-bound Experiment, Claim, and Lab Machinery registry snapshots are now admitted
-          alongside evidence. Claim edges remain owner-local unless a source explicitly identifies
-          stronger evidence, experiment, publication, or derivation relationships. Mentioning the same project or institution does not
-          create an edge; missing relationships remain missing rather than being guessed.
+          Atlas v{atlasProjection.version} is now {atlasProjection.status}. {atlasProjection.omissionRule}
+          Existing relationships remain explicit source-backed declarations; missing edges stay
+          missing rather than being guessed.
         </p>
       </section>
 

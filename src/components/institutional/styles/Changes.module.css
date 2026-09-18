@@ -1,0 +1,241 @@
+.changesPage {
+  --change-ink: #102036;
+  --change-muted: #58677a;
+  --change-line: rgba(16,32,54,.18);
+  background: #f2f4f3;
+}
+
+.changesHero {
+  display: grid;
+  grid-template-columns: minmax(0,1.15fr) minmax(370px,.85fr);
+  gap: clamp(34px,5vw,82px);
+  align-items: end;
+  padding: clamp(58px,7vw,102px) clamp(30px,7vw,112px);
+  border-bottom: 2px solid var(--old-gold);
+  background: linear-gradient(90deg,#fff 0 62%,#edf2f0 100%);
+}
+
+.changesHero h1 {
+  max-width: 900px;
+  margin: 14px 0 20px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.7rem,5.4vw,6.8rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+
+.projectionPanel {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid rgba(16,32,54,.28);
+  border-left: 6px solid var(--osha-green);
+  background: rgba(255,255,255,.92);
+}
+
+.projectionPanel > span,
+.changeBoundary > span,
+.changeTopline span,
+.consequence span,
+.provenance span {
+  color: var(--osha-green);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.projectionPanel > strong {
+  color: var(--change-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+}
+
+.projectionPanel dl {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+  margin: 2px 0 0;
+}
+
+.projectionPanel dl div {
+  display: grid;
+  gap: 5px;
+  padding: 9px;
+  border: 1px solid var(--change-line);
+  background: #f7f9f8;
+}
+
+.projectionPanel dt {
+  color: var(--change-muted);
+  font: 800 .46rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.projectionPanel dd {
+  margin: 0;
+  color: var(--change-ink);
+  font: 700 .63rem/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.projectionPanel p,
+.changeBoundary p {
+  margin: 0;
+  color: var(--change-muted);
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.changeBoundary {
+  display: grid;
+  grid-template-columns: minmax(140px,.28fr) minmax(240px,.62fr) minmax(0,1.1fr);
+  gap: 22px;
+  padding: 24px clamp(30px,6vw,96px);
+  border-bottom: 1px solid var(--change-line);
+  background: #fff;
+}
+
+.changeBoundary strong {
+  color: var(--change-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.changeCatalog {
+  padding: 46px clamp(30px,6vw,96px) 64px;
+}
+
+.changeStack {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.changeCard {
+  --delta-accent: #536f78;
+  display: grid;
+  grid-template-columns: minmax(0,.75fr) minmax(260px,.8fr);
+  gap: 12px 22px;
+  padding: 18px;
+  border: 1px solid rgba(16,32,54,.25);
+  border-left: 7px solid var(--delta-accent);
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(16,32,54,.05);
+}
+
+.changeCard[data-scope="Research"] { --delta-accent: #5b63ad; }
+.changeCard[data-scope="Method"] { --delta-accent: #916b3f; }
+.changeCard[data-scope="Institution"] { --delta-accent: #3c7e57; }
+.changeCard[data-scope="Public interface"] { --delta-accent: #356f9f; }
+
+.changeTopline,
+.changeCard > h2,
+.changeCard > p,
+.changeCard > nav {
+  grid-column: 1 / -1;
+}
+
+.changeTopline {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.changeTopline span {
+  color: var(--delta-accent);
+}
+
+.changeTopline time {
+  color: var(--change-muted);
+  font: 700 .55rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.changeCard h2 {
+  margin: 0;
+  color: var(--change-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem,2vw,2.35rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.08;
+}
+
+.changeCard > p,
+.consequence p {
+  margin: 0;
+  color: var(--change-muted);
+  font-size: .72rem;
+  line-height: 1.55;
+}
+
+.consequence,
+.provenance {
+  padding: 12px;
+  border: 1px solid var(--change-line);
+  background: #f8f9f8;
+}
+
+.consequence p {
+  margin-top: 8px;
+}
+
+.provenance {
+  display: grid;
+  gap: 10px;
+}
+
+.provenance > div {
+  display: grid;
+  gap: 5px;
+}
+
+.provenance strong,
+.provenance code {
+  color: var(--change-ink);
+  font: 700 .63rem/1.35 ui-monospace,SFMono-Regular,Menlo,monospace;
+  overflow-wrap: anywhere;
+}
+
+.changeCard nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+}
+
+.changeCard nav a {
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--delta-accent);
+  color: var(--change-ink);
+  font-size: .68rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .changesHero,
+  .changeBoundary,
+  .changeCard {
+    grid-template-columns: 1fr;
+  }
+
+  .changeTopline,
+  .changeCard > h2,
+  .changeCard > p,
+  .changeCard > nav {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 680px) {
+  .changesHero,
+  .changeBoundary,
+  .changeCatalog {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .projectionPanel dl {
+    grid-template-columns: 1fr;
+  }
+}

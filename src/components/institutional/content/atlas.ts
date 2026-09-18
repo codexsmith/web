@@ -311,6 +311,16 @@ export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
   evidence: "Evidence records",
 };
 
+export const atlasProjection = {
+  version: "0.1",
+  status: "feature-frozen bounded public projection",
+  closedDate: "2026-09-18",
+  boundary:
+    "Research, Experiments, Claims, Machinery, Products, Projects, Publications, and Evidence.",
+  omissionRule:
+    "Unmodeled object families and undeclared relationships remain absent until a later feature has a concrete need and a source-governed contract.",
+} as const;
+
 export const atlasStats = {
   objects: atlasNodes.length,
   relationships: atlasEdges.length,

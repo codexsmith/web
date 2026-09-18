@@ -132,3 +132,8 @@ The Lab Atlas route at `/v3/atlas` is a bounded public relationship projection a
 
 
 Global Lab command navigation is owned by `LabCommandPalette.tsx` and is mounted once in the shared institutional header. Its search corpus is deliberately bounded: public Lab Objects from the Atlas, explicit Atlas relationship text, and institutional route labels. It does not crawl rendered page text, perform semantic inference, or create new relationships. Object results deep-link to `/v3/atlas?focus=<atlas-id>`, where the selected object is inspected through the existing Atlas and can then open its source-governed public surface. The `focus` parameter is routing state only; it is not a canonical identifier.
+
+
+Atlas v0.1 is feature-frozen as of 2026-09-18. Its public boundary is Research, Experiments, Claims, Machinery, Products, Projects, Publications, and Evidence. New object families or relationship types should not be added merely to make the public graph more ontologically complete; reopen Atlas expansion only when another user-facing feature has a concrete need and the source contract is explicit.
+
+The public delta layer is owned by `content/changes.ts`, `RecentChangesStrip.tsx`, and `/v3/changes`. It is a curated state-transition projection, not a complete commit log. Every public change record must point to an exact repository revision and explain the practical state change. Intermediate replay commits, CSS-only work, queue churn, and speculative notes are excluded unless they materially change canonical or public state.
