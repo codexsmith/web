@@ -3211,3 +3211,70 @@
     display: none;
   }
 }
+
+
+/* Header rail final placement guard.
+ * Keep brand, primary navigation, and utility controls on the same desktop rail.
+ * Earlier responsive rules may wrap the nav, but utility controls should never
+ * fall into an implicit grid row. */
+.header {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  column-gap: clamp(22px, 2.2vw, 38px);
+  row-gap: 8px;
+}
+
+.brand {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.nav {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  justify-self: end;
+  justify-content: flex-end;
+}
+
+.headerTools {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+  gap: 10px;
+}
+
+.header .labLink {
+  padding: 7px 0 6px;
+}
+
+@media (min-width: 1241px) {
+  .header[data-header-compact="true"] {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 1240px) {
+  .header {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .brand {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .headerTools {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: stretch;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 5px 0 2px;
+  }
+}

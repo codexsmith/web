@@ -104,7 +104,6 @@ export const institutionalChildRoutes = {
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
     institutionalChildPages.funding,
-    institutionalChildPages.now,
     institutionalChildPages.collaboration,
   ],
   products: [
