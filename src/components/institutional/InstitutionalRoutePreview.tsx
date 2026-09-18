@@ -3,7 +3,7 @@ import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeStyles from "./styles/InstitutionalRouteShared.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
-import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { InstitutionalRouteHero } from "./InstitutionalPrimitives";
 
 const styles = composeCssModules(foundationStyles, routeStyles);
 
@@ -14,12 +14,14 @@ export function InstitutionalRoutePreview({
 }) {
   return (
     <InstitutionalPageShell mainClassName={styles.routeMain}>
-        <section className={styles.routeHero}>
-          <p className={styles.eyebrow}>{route.eyebrow}</p>
-          <h1>{route.title}</h1>
-          <p className={styles.routeLead}>{route.lead}</p>
-          <p className={styles.routeSupport}>{route.support}</p>
-        </section>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.routeHero}
+          eyebrow={route.eyebrow}
+          title={route.title}
+          lead={route.lead}
+          support={route.support}
+        />
 
         <section className={styles.routeWiringPlate} aria-label="Website v3 projection status">
           <span className={styles.routeSignal} aria-hidden="true" />
