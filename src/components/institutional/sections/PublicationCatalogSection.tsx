@@ -1,4 +1,5 @@
 import { InstitutionalSectionHeader } from "../InstitutionalPrimitives";
+import { LabObjectIdentity } from "../LabObjectIdentity";
 import foundationStyles from "../styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "../styles/InstitutionalRouteShared.module.css";
 import routeStyles from "../styles/Publications.module.css";
@@ -85,10 +86,14 @@ export function PublicationCatalogSection() {
           </div>
 
           <div className={styles.featuredPublicationBody}>
-            <div className={styles.publicationRecordTopline}>
-              <span>{featuredPublication.id}</span>
-              <span>{featuredPublication.recordState}</span>
-            </div>
+            <LabObjectIdentity
+              identifier={featuredPublication.id}
+              identifierLabel="RECORD"
+              kind="publication"
+              status={featuredPublication.recordState}
+              statusLabel="STATE"
+              variant="compact"
+            />
             <p className={styles.publicationLane}>{featuredPublication.lane}</p>
             <h3>{featuredPublication.title}</h3>
             <p className={styles.publicationAbstract}>{featuredPublication.abstract}</p>
@@ -117,10 +122,14 @@ export function PublicationCatalogSection() {
             data-tone={publication.tone}
             key={publication.id}
           >
-            <div className={styles.publicationRecordTopline}>
-              <span>{publication.id}</span>
-              <span>{publication.recordState}</span>
-            </div>
+            <LabObjectIdentity
+              identifier={publication.id}
+              identifierLabel="RECORD"
+              kind="publication"
+              status={publication.recordState}
+              statusLabel="STATE"
+              variant="compact"
+            />
 
             <div className={styles.publicationTypeLine}>
               <span>{publication.typeCode}</span>

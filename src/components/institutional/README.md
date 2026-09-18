@@ -7,6 +7,7 @@ The institutional surface separates **content**, **composition**, and **presenta
 - **InstitutionalChrome.tsx** — shared header/footer only.
 - **InstitutionalPageShell.tsx** — owns the page wrapper, shared chrome, and semantic `<main>`.
 - **LabSnapshotRow.tsx** — reusable compact observational-metrics row; receives data by props and owns no Lab authority or fetching.
+- **LabObjectIdentity.tsx** — shared object-kind / source-identifier / source-state grammar used across products, research, projects, publications, and later evidence-bearing objects.
 - **InstitutionalPrimitives.tsx** — stable structural grammar:
   - route hero
   - section header
@@ -28,6 +29,10 @@ A new institutional route should:
 7. avoid direct ownership of global header/footer markup.
 
 Do not create a universal schema-driven page renderer. Shared structure belongs in primitives; domain meaning stays local.
+
+### Lab object identity contract
+
+`LabObjectIdentity` standardizes presentation, not authority. It may render an object kind, a source-provided identifier or local code, a source-reported status/state, and one secondary classification. It must not fabricate a canonical ID, translate native lifecycle states into a universal maturity score, or promote an object because it appears on a public route. Registered IDs remain IDs; local codes remain codes; unadmitted identities remain unadmitted.
 
 ## Dead-code rule
 

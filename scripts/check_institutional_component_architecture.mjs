@@ -10,6 +10,7 @@ for (const required of [
   "InstitutionalChrome.tsx",
   "InstitutionalPageShell.tsx",
   "InstitutionalPrimitives.tsx",
+  "LabObjectIdentity.tsx",
   "institutionalFormat.ts",
 ]) {
   expect(fs.existsSync(`${root}/${required}`), `missing shared component ${required}`);
@@ -17,6 +18,7 @@ for (const required of [
 
 const chrome = read(`${root}/InstitutionalChrome.tsx`);
 const primitives = read(`${root}/InstitutionalPrimitives.tsx`);
+const labObjectIdentity = read(`${root}/LabObjectIdentity.tsx`);
 const homePage = read(`${root}/InstitutionalHomePage.tsx`);
 const homeContent = read(`${root}/content/home.ts`);
 
@@ -26,6 +28,9 @@ expect(chrome.includes("IntersectionObserver"), "Institutional header must obser
 expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
 expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
 expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
+expect(labObjectIdentity.includes("data-kind={kind}"), "LabObjectIdentity must expose object-kind semantics to presentation");
+expect(labObjectIdentity.includes("identifierLabel = \"ID\""), "LabObjectIdentity must distinguish source identifiers from local codes");
+expect(labObjectIdentity.includes("statusLabel = \"STATUS\""), "LabObjectIdentity must preserve source-native status labeling");
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
 expect(homeContent.includes('title: "Boundary First Weather"'), "Featured work slot four must be Boundary First Weather");
 expect(homeContent.includes('href: "/v3/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
@@ -441,3 +446,24 @@ expect(publicationCatalog.includes("selectedPublications.length"), "Publication 
 expect(publicationCatalog.includes("publicationClaimCeiling"), "Publication catalog must keep claim ceilings attached to visible records");
 
 console.log("Institutional component architecture passed.");
+
+
+const labObjectProductExperienceShell = read(`${root}/products/ProductExperienceShell.tsx`);
+const projectsPageForObjects = read(`${root}/InstitutionalProjectsPage.tsx`);
+const publicationsCatalogForObjects = read(`${root}/sections/PublicationCatalogSection.tsx`);
+
+expect(labObjectProductExperienceShell.includes("LabObjectIdentity"), "ProductExperienceShell must compose LabObjectIdentity");
+expect(labObjectProductExperienceShell.includes('kind="product"'), "ProductExperienceShell must identify product objects without inventing IDs");
+expect(labObjectProductExperienceShell.includes("status={product.status}"), "ProductExperienceShell must preserve source product status");
+expect(researchPage.includes("LabObjectIdentity"), "Research program cards must compose LabObjectIdentity");
+expect(researchPage.includes('kind="research"'), "Research program cards must identify research objects");
+expect(researchPage.includes("identifier={program.code}"), "Research local codes must remain explicit codes");
+expect(researchPage.includes("status={program.state}"), "Research program identity must preserve source state");
+expect(projectsPageForObjects.includes("LabObjectIdentity"), "Project cards must compose LabObjectIdentity");
+expect(projectsPageForObjects.includes('kind="project"'), "Project cards must identify project objects");
+expect(projectsPageForObjects.includes("identifier={project.code}"), "Project local codes must remain explicit codes");
+expect(projectsPageForObjects.includes("status={project.status}"), "Project identity must preserve source status");
+expect(publicationsCatalogForObjects.includes("LabObjectIdentity"), "Publication records must compose LabObjectIdentity");
+expect(publicationsCatalogForObjects.includes('kind="publication"'), "Publication records must identify publication objects");
+expect(publicationsCatalogForObjects.includes("identifier={publication.id}"), "Publication record identifiers must remain source-provided records");
+expect(publicationsCatalogForObjects.includes("status={publication.recordState}"), "Publication identity must preserve record state");
