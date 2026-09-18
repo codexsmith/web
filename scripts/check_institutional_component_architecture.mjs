@@ -250,7 +250,7 @@ expect(weatherExperience.includes("A compelling visualization is not forecast sk
 expect(weatherField.startsWith('"use client";'), "Boundary First Weather field interaction must own its client boundary");
 expect(weatherField.includes("aria-pressed"), "Boundary First Weather diagnostic modes must expose pressed state accessibly");
 expect(weatherContent.includes("Matched baseline") || weatherContent.includes("MATCHED BASELINE"), "Boundary First Weather must preserve matched-baseline comparison");
-expect(weatherContent.includes("operational") || weatherContent.includes("Operational"), "Boundary First Weather must preserve its operational-forecast boundary");
+expect(weatherContent.includes("weatherRecord.program.claimBoundary"), "Boundary First Weather must project the canonical operational-forecast claim boundary");
 expect(weatherRoute.includes("BoundaryFirstWeatherExperience"), "Boundary First Weather route must render the product experience");
 
 const projectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
