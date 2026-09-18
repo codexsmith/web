@@ -26,9 +26,9 @@ export function InstitutionalAppliedWorkPage() {
         title={<>What can Boundary First Labs help your organization do?</>}
         lead={
           <>
-            Diagnose difficult systems. Repair software and architecture. Review
-            consequence-bearing AI. Design bounded pilots. Make research and institutional
-            knowledge easier to inspect, operate, and hand off.
+            Diagnose difficult systems. Repair software and architecture. Review AI
+            used in consequential decisions and workflows. Design small pilots. Make research
+            and institutional knowledge easier to inspect, operate, and hand off.
           </>
         }
         support={
@@ -41,9 +41,9 @@ export function InstitutionalAppliedWorkPage() {
       >
         <aside className={styles.appliedWorkStatus}>
           <span>CURRENT COMMERCIAL POSTURE</span>
-          <strong>Packaged enough to scope. Still building BFL-native market evidence.</strong>
+          <strong>Ready to scope. Still building BFL-specific case studies and repeat-client evidence.</strong>
           <p>
-            These offers formalize work with professional ancestry in software engineering,
+            These offers grow out of prior professional work in software engineering,
             architecture, consulting, delivery, and systems diagnosis. The public site does
             not imply that Boundary First Labs already has repeat external service revenue
             or a mature client case-study portfolio.
