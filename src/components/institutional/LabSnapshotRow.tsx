@@ -36,6 +36,7 @@ export type LabSnapshotBreakdown = {
   title: string;
   intro: string;
   items: readonly LabSnapshotBreakdownItem[];
+  variant?: "grid" | "flow";
   note?: string;
   source?: string;
 };
@@ -161,6 +162,7 @@ export function LabSnapshotRow({
         <div
           className={styles.breakdownPanel}
           id={`${panelId}-breakdown`}
+          data-variant={breakdown.variant ?? "grid"}
           aria-live="polite"
         >
           <header className={styles.breakdownHeader}>
