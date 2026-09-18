@@ -54,3 +54,6 @@ The Publications route now has a separate `sections/PublicationCatalogSection.ts
 
 
 Institutional navigation distinguishes global routes from contextual child routes. Child pages are not repeated in the top-level header/footer navigation; parent routes expose them through the shared lower-right hero child-page rail. Apparatus is currently reachable as a child of both Research and Open Lab while retaining its canonical `/v3/apparatus` route.
+
+
+The Open Lab route uses `sections/OpenLabContextSection.tsx`: Intake Status is promoted into the hero, Public Participation and the Institutional Promise remain directly readable, and Agency, Stewardship, Shared Infrastructure, Humanist Interface, and Capability Transfer are compressed into a five-object focus-stage Reflow field.

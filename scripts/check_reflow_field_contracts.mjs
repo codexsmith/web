@@ -15,6 +15,9 @@ const apparatusCss = fs.readFileSync("src/components/institutional/styles/Appara
 const publications = fs.readFileSync("src/components/institutional/InstitutionalPublicationsPage.tsx", "utf8");
 const publicationContext = fs.readFileSync("src/components/institutional/sections/PublicationContextSection.tsx", "utf8");
 const publicationCss = fs.readFileSync("src/components/institutional/styles/Publications.module.css", "utf8");
+const openLab = fs.readFileSync("src/components/institutional/InstitutionalOpenLabPage.tsx", "utf8");
+const openLabContext = fs.readFileSync("src/components/institutional/sections/OpenLabContextSection.tsx", "utf8");
+const openLabCss = fs.readFileSync("src/components/institutional/styles/OpenLab.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -109,6 +112,20 @@ expect(publicationCss.includes("--reflow-columns: 10"), "eleven-card Publication
 expect(publicationCss.includes("--reflow-focus-span: 2"), "eleven-card Publication focus-stage must place five compact cards per wide row");
 expect(publicationCss.includes(".publicationContextProjection { --reflow-span: 4; }"), "Publication Context REST state must retain authored magazine spans");
 expect(publicationCss.includes(".publicationContextCovenant { --reflow-span: 5; }"), "Publication Covenant must participate in the authored REST composition");
+expect(openLab.includes("<OpenLabContextSection />"), "Open Lab must compose supporting governance machinery as one modular Reflow section");
+expect(openLab.includes('className={styles.openLabContracts}'), "Public Participation must remain ordinary always-visible substantive content");
+expect(openLab.includes('className={styles.openLabClose}'), "Institutional Promise must remain ordinary always-visible closing content");
+expect(!openLab.includes('className={styles.openLabAvailability}'), "Intake Status must move out of the body and into the hero");
+expect(openLabContext.includes('layoutMode="focus-stage"'), "Open Lab Context must use focus-stage reflow");
+expect(openLabContext.includes("itemOrder={openLabContextOrder}"), "Open Lab Context must declare stable source ordering");
+expect(openLabContext.includes('id="agency"'), "Open Lab Context must include Agency in Both Directions");
+expect(openLabContext.includes('id="stewardship"'), "Open Lab Context must include Stewardship");
+expect(openLabContext.includes('id="shared-infrastructure"'), "Open Lab Context must include shared infrastructure");
+expect(openLabContext.includes('id="humanist-interface"'), "Open Lab Context must include the Humanist Interface Rule");
+expect(openLabContext.includes('id="capability-transfer"'), "Open Lab Context must include Capability, Not Dependence");
+expect(openLabCss.includes("--reflow-focus-span: 6"), "five-card Open Lab focus-stage must place two compact cards per wide row");
+expect(openLabCss.includes(".openLabContextAgency { --reflow-span: 5; }"), "Open Lab Context REST state must retain authored magazine spans");
+expect(openLabCss.includes(".openLabContextCapability { --reflow-span: 6; }"), "Open Lab capability transfer must participate in the authored REST composition");
 
 for (const [name, source] of [
   ["Research", researchContext],
@@ -116,6 +133,7 @@ for (const [name, source] of [
   ["Projects", projectContext],
   ["Apparatus", apparatusContext],
   ["Publications", publicationContext],
+  ["Open Lab", openLabContext],
 ]) {
   expect(!/index="\d+"/.test(source), `${name} Reflow summaries must not render ordinal number plates`);
 }
@@ -126,6 +144,7 @@ for (const [name, source] of [
   ["Projects", projectCss],
   ["Apparatus", apparatusCss],
   ["Publications", publicationCss],
+  ["Open Lab", openLabCss],
 ]) {
   expect(!source.includes("ContextSummary > span"), `${name} Reflow CSS must not retain ordinal plate styling`);
   expect(source.includes("min-height: 166px"), `${name} REST Reflow cards should use the compact card floor`);

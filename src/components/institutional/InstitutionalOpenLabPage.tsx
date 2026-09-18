@@ -3,10 +3,10 @@ import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/OpenLab.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
-import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
-import { formatOrdinal } from "./institutionalFormat";
+import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 
-import { participationContracts, stewardshipGates, sharedEnvelope, capabilityOutcomes } from "./content/openLab";
+import { participationContracts } from "./content/openLab";
+import { OpenLabContextSection } from "./sections/OpenLabContextSection";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -24,28 +24,29 @@ export function InstitutionalOpenLabPage() {
               learning the Lab&apos;s internal vocabulary.</>}
           childLinks={institutionalChildRoutes.openLab}
           >
-          <blockquote className={styles.openLabThesis}>
-            <span>FOUR PUBLIC CONTRACTS</span>
-            We inspect public systems.<br />
-            Inspect us.<br />
-            Build with us.<br />
-            Bring us what does not fit.
-          </blockquote>
-        </InstitutionalRouteHero>
+          <div className={styles.openLabHeroAsideStack}>
+            <aside className={styles.openLabHeroIntake} aria-label="Open Lab intake status">
+              <div className={styles.openLabHeroIntakeSignal} aria-hidden="true" />
+              <div>
+                <span>INTAKE STATUS</span>
+                <strong>Submission pipeline not yet live.</strong>
+                <p>
+                  Participation contracts are designed. Privacy, consent, retention,
+                  security, moderation, and response-capacity controls must be ready before
+                  public submission opens.
+                </p>
+              </div>
+            </aside>
 
-        <section className={styles.openLabAvailability}>
-          <div className={styles.openLabAvailabilitySignal} aria-hidden="true" />
-          <div>
-            <span>INTAKE STATUS</span>
-            <h2>Participation contracts designed. Submission pipeline not yet live.</h2>
-            <p>
-              Privacy, retention, security, moderation, consent, and response-capacity
-              rules must be defined before the site invites people to send material.
-              Please do not submit sensitive information through ad hoc channels in the
-              meantime.
-            </p>
+            <blockquote className={styles.openLabThesis}>
+              <span>FOUR PUBLIC CONTRACTS</span>
+              We inspect public systems.<br />
+              Inspect us.<br />
+              Build with us.<br />
+              Bring us what does not fit.
+            </blockquote>
           </div>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.openLabContracts}>
           <InstitutionalSectionHeader
@@ -92,99 +93,7 @@ export function InstitutionalOpenLabPage() {
           </div>
         </section>
 
-        <section className={styles.openLabAgency}>
-          <div>
-            <p className={styles.sectionIndex}>AGENCY IN BOTH DIRECTIONS</p>
-            <h2>Permeability with governance.</h2>
-            <p>
-              The Lab may inspect a public system, and the public may inspect the Lab.
-              A collaborator may reject BFL&apos;s framing. A critic may expose a missing
-              distinction. A community may know consequences the public record does not
-              represent adequately.
-            </p>
-          </div>
-
-          <blockquote>
-            The institution should be able to receive information without pretending every
-            submission is correct, actionable, or within scope.
-          </blockquote>
-        </section>
-
-        <section className={styles.openLabStewardship}>
-          <InstitutionalSectionLead
-            styles={styles}
-            eyebrow={<>STEWARDSHIP BEGINS AT COLLECTION</>}
-            title={<>Intake creates obligations before it creates opportunities.</>}
-            description={<>The site should not invite disclosure merely because a form can technically
-              accept it. These controls must exist before public submission goes live.</>}
-            />
-
-          <div className={styles.openLabGateGrid}>
-            {stewardshipGates.map((gate, index) => (
-              <div className={styles.openLabGatePlate} key={gate}>
-                <span>{formatOrdinal(index)}</span>
-                <strong>{gate}</strong>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.openLabInfrastructure}>
-          <div>
-            <p className={styles.sectionIndex}>SHARED INFRASTRUCTURE, DISTINCT CONTRACTS</p>
-            <h2>One envelope can route four typed intents.</h2>
-            <p>
-              A future backend may share identity, consent, provenance, privacy, and routing
-              machinery while preserving what kind of relationship the person actually
-              requested.
-            </p>
-          </div>
-
-          <div className={styles.openLabEnvelope}>
-            <span>COMMON ENVELOPE — CANDIDATE</span>
-            <div>
-              {sharedEnvelope.map((field) => <code key={field}>{field}</code>)}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.openLabInterfaceRule}>
-          <div>
-            <p className={styles.sectionIndex}>HUMANIST INTERFACE RULE</p>
-            <h2>The institution owns the burden of routing.</h2>
-            <p>
-              People should not need to translate themselves into research lanes,
-              registries, critique objects, evidence-source types, or product categories
-              before the Lab is willing to understand what they are trying to say.
-            </p>
-          </div>
-
-          <div className={styles.openLabTranslation}>
-            <span>PUBLIC LANGUAGE</span>
-            <strong>What happened? What do you have? What keeps failing? What are you trying to do?</strong>
-            <span>INTERNAL ROUTING — LATER</span>
-            <strong>Research lane · critique object · collaboration record · project candidate · evidence source · civic case</strong>
-          </div>
-        </section>
-
-        <section className={styles.openLabCapability}>
-          <InstitutionalSectionLead
-            styles={styles}
-            eyebrow={<>CAPABILITY, NOT DEPENDENCE</>}
-            title={<>Useful work should leave something behind.</>}
-            description={<>When BFL does work with a person or institution, the preferred outcome is
-              increased durable capability rather than manufactured dependency on the Lab.</>}
-            />
-
-          <div className={styles.openLabCapabilityGrid}>
-            {capabilityOutcomes.map((outcome, index) => (
-              <div className={styles.openLabCapabilityPlate} key={outcome}>
-                <span>{formatOrdinal(index)}</span>
-                <strong>{outcome}</strong>
-              </div>
-            ))}
-          </div>
-        </section>
+        <OpenLabContextSection />
 
         <section className={styles.openLabClose}>
           <p className={styles.sectionIndex}>INSTITUTIONAL PROMISE</p>
