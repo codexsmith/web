@@ -13,6 +13,7 @@ import {
   methodCycle,
   agencyRoutes,
   capabilityOutputs,
+  stewardshipFacets,
   stewardshipQuestions,
   labInstruments,
 } from "../content/about";
@@ -380,8 +381,8 @@ export function AboutReflowGroups() {
             id="stewardship"
             label="Stewardship"
             eyebrow="STEWARDSHIP"
-            title="Capability creates obligations."
-            description="Launch is not closure when people depend on the system; maintenance, correction, repair, transfer, and retirement remain part of the work."
+            title="Stewardship spans knowledge, people, and the conditions they depend on."
+            description="Intellectual, humanist, and ecological stewardship make consequence chains visible beyond launch, publication, or local optimization."
             className={styles.aboutContextStewardship}
             tone="stewardship"
           >
@@ -391,6 +392,16 @@ export function AboutReflowGroups() {
                 Maintenance, correction, provenance, migration, retirement, repair, and
                 transfer become part of the engineering problem.
               </p>
+              <div className={styles.aboutStewardshipModes}>
+                {stewardshipFacets.map((facet) => (
+                  <article key={facet.label}>
+                    <span>{facet.label}</span>
+                    <h3>{facet.title}</h3>
+                    <p>{facet.description}</p>
+                  </article>
+                ))}
+              </div>
+
               <div className={styles.aboutStewardshipGrid}>
                 {stewardshipQuestions.map((question, index) => (
                   <div className={styles.aboutStewardshipPlate} key={question}>
