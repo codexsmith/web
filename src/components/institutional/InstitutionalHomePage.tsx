@@ -130,6 +130,7 @@ export function InstitutionalHomePage() {
                 <article key={item.label}>
                   <span className={styles.practiceLineageOrdinal}>{formatOrdinal(index)}</span>
                   <h3>{item.label}</h3>
+                  <p>{item.description}</p>
                 </article>
               ))}
             </div>
@@ -141,6 +142,7 @@ export function InstitutionalHomePage() {
             <article className={styles.practiceLineageOutput}>
               <span className={styles.practiceLineageOrdinal}>{formatOrdinal(3)}</span>
               <h3>{practiceLineage[3].label}</h3>
+              <p>{practiceLineage[3].description}</p>
             </article>
           </div>
         </section>
