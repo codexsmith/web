@@ -54,6 +54,9 @@ expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared s
 expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
 expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
 expect(routeShared.includes("min-height: 58px"), "child-page cards must remain compact enough for dense contextual navigation");
+expect(routeShared.includes("grid-auto-columns: minmax(200px, 1fr)"), "child-page columns must preserve a hard readable minimum width");
+expect(routeShared.includes("min-width: 200px"), "child-page links must not collapse below their readable label width");
+expect(routeShared.includes("white-space: nowrap"), "child-page labels must remain intact rather than hyphenating across lines");
 
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
