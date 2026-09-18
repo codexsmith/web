@@ -6,6 +6,7 @@
 .productExperienceFrame {
   --product-accent: #c9aa5b;
   --product-accent-bright: #f0d681;
+  --product-accent-rgb: 201, 170, 91;
   --product-ink: #f4efe2;
   --product-dark: #111925;
   --product-darker: #090e15;
@@ -18,9 +19,19 @@
 .productExperienceFrame[data-product-theme="chess"] {
   --product-accent: #c6a14c;
   --product-accent-bright: #f4dc91;
+  --product-accent-rgb: 198, 161, 76;
   --product-dark: #101722;
   --product-darker: #080d13;
   --product-paper: #ece5d6;
+}
+
+.productExperienceFrame[data-product-theme="weather"] {
+  --product-accent: #67cbd6;
+  --product-accent-bright: #baf2f4;
+  --product-accent-rgb: 103, 203, 214;
+  --product-dark: #0d1b25;
+  --product-darker: #061117;
+  --product-paper: #dfe8e9;
 }
 
 .productExperienceHero {
@@ -30,7 +41,7 @@
   overflow: hidden;
   border-bottom: 1px solid rgba(255,255,255,.1);
   background:
-    radial-gradient(circle at 18% 12%, rgba(198,161,76,.13), transparent 28%),
+    radial-gradient(circle at 18% 12%, rgba(var(--product-accent-rgb), .13), transparent 28%),
     linear-gradient(135deg, #182332, var(--product-darker) 72%);
   color: var(--product-ink);
 }
@@ -132,7 +143,7 @@
   gap: 7px;
   margin-top: clamp(38px, 6vh, 72px);
   padding-top: 16px;
-  border-top: 1px solid rgba(240,214,129,.25);
+  border-top: 1px solid rgba(var(--product-accent-rgb), .28);
 }
 
 .productHeroStatus span {
