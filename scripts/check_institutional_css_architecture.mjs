@@ -63,7 +63,7 @@ for (const [component, routeModule] of routeContracts) {
   expect(!source.includes("InstitutionalHomePreview.module.css"), `${component} references legacy monolith`);
 }
 
-for (const component of ["InstitutionalHomePreview.tsx", "InstitutionalChrome.tsx"]) {
+for (const component of ["InstitutionalHomePage.tsx", "InstitutionalChrome.tsx"]) {
   const source = read(`${root}/${component}`);
   expect(source.includes("InstitutionalFoundation.module.css"), `${component} must use Foundation`);
   expect(!source.includes("InstitutionalHomePreview.module.css"), `${component} references legacy monolith`);

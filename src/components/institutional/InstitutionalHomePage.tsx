@@ -4,7 +4,7 @@ import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./Institut
 import { formatOrdinal } from "./institutionalFormat";
 
 import { capabilityStrip, methodSteps, featuredWork } from "./content/home";
-export function InstitutionalHomePreview() {
+export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
         <section className={styles.hero}>

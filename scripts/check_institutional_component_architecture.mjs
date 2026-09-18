@@ -22,7 +22,7 @@ expect(pageShell.includes("<main"), "PageShell must own the semantic main bounda
 
 const routeContracts = [
   [
-    "InstitutionalHomePreview.tsx",
+    "InstitutionalHomePage.tsx",
     "home"
   ],
   [

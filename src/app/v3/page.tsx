@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { InstitutionalHomePreview } from "@/components/institutional/InstitutionalHomePreview";
+import { InstitutionalHomePage } from "@/components/institutional/InstitutionalHomePage";
 
 export const metadata: Metadata = {
   title: "Boundary First Labs · Website v3",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function V3Page() {
-  return <InstitutionalHomePreview />;
+  return <InstitutionalHomePage />;
 }

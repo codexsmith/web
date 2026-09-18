@@ -10,11 +10,11 @@ const v2Page = read("src/app/v2/page.tsx");
 const v3Page = read("src/app/v3/page.tsx");
 const previewAlias = read("src/app/institutional-preview/page.tsx");
 const switcher = read("src/components/version-switch/DevProductSwitch.tsx");
-const institutionalHome = read("src/components/institutional/InstitutionalHomePreview.tsx");
+const institutionalHome = read("src/components/institutional/InstitutionalHomePage.tsx");
 const institutionalChrome = read("src/components/institutional/InstitutionalChrome.tsx");
 
 expect(
-  rootPage.includes("LabMachineHomeRoute") && !rootPage.includes("InstitutionalHomePreview"),
+  rootPage.includes("LabMachineHomeRoute") && !rootPage.includes("InstitutionalHomePage"),
   "root must remain the existing Lab Machine compatibility surface until an explicit cutover",
 );
 expect(
@@ -24,7 +24,7 @@ expect(
   "/v2 must own the Dev / Lab Machine surface and expose the version switch",
 );
 expect(
-  v3Page.includes("InstitutionalHomePreview") &&
+  v3Page.includes("InstitutionalHomePage") &&
     v3Page.includes('canonical: "/v3"') &&
     !v3Page.includes("LabMachineHomeRoute"),
   "/v3 must own the Product / institutional surface without embedding the Lab Machine",
