@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
+import { LabCommandPalette } from "./LabCommandPalette";
 import { institutionalFooterGroups, institutionalRoutes } from "./institutionalRoutes";
 import styles from "./styles/InstitutionalFoundation.module.css";
 
@@ -74,6 +75,10 @@ export function InstitutionalHeader() {
           );
         })}
       </nav>
+
+      <div className={styles.headerTools}>
+        <LabCommandPalette />
+      </div>
     </header>
   );
 }

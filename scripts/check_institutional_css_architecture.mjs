@@ -16,6 +16,7 @@ const requiredStyles = [
   "InstitutionalFoundation.module.css",
   "InstitutionalRouteShared.module.css",
   "LabObjectIdentity.module.css",
+  "LabCommandPalette.module.css",
   "Research.module.css",
   "Products.module.css",
   "ProductExperience.module.css",
@@ -45,6 +46,7 @@ for (const file of requiredStyles) {
 const foundation = read(`${stylesRoot}/InstitutionalFoundation.module.css`);
 const routeShared = read(`${stylesRoot}/InstitutionalRouteShared.module.css`);
 const labObjectIdentity = read(`${stylesRoot}/LabObjectIdentity.module.css`);
+const commandPaletteCss = read(`${stylesRoot}/LabCommandPalette.module.css`);
 
 for (const token of ["--royal-blue", "--old-gold", "--osha-red", "--osha-green"]) {
   expect(foundation.includes(token), `Foundation must own design token ${token}`);
@@ -62,6 +64,9 @@ expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared s
 expect(labObjectIdentity.includes('[data-kind="product"]'), "Lab object identity must expose object-family accents");
 expect(labObjectIdentity.includes('[data-variant="compact"]'), "Lab object identity must support compact embedding inside cards");
 expect(labObjectIdentity.includes('[data-appearance="inverse"]'), "Lab object identity must support inverse product-hero presentation");
+expect(commandPaletteCss.includes(".dialog::backdrop"), "Lab command palette must own a modal backdrop");
+expect(commandPaletteCss.includes('[data-active="true"]'), "Lab command palette must expose keyboard-active result state");
+expect(commandPaletteCss.includes('[data-kind="research"]'), "Lab command palette must preserve object-kind visual distinction");
 expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
 expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
 expect(routeShared.includes(".routeChildLinks:has(> .routeChildLink:nth-child(4):last-child)"), "exactly four child-page links must rebalance into a two-by-two grid");

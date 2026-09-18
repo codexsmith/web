@@ -7,6 +7,13 @@ export const metadata: Metadata = {
     "A bounded public relationship atlas across Boundary First Labs research, products, projects, and publication records.",
 };
 
-export default function AtlasPage() {
-  return <InstitutionalAtlasPage />;
+export default async function AtlasPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ focus?: string | string[] }>;
+}) {
+  const params = await searchParams;
+  const focus = Array.isArray(params.focus) ? params.focus[0] : params.focus;
+
+  return <InstitutionalAtlasPage initialFocus={focus} />;
 }

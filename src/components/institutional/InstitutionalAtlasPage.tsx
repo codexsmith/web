@@ -13,7 +13,11 @@ const styles = composeCssModules(
   routeStyles,
 );
 
-export function InstitutionalAtlasPage() {
+export function InstitutionalAtlasPage({
+  initialFocus,
+}: {
+  initialFocus?: string;
+}) {
   return (
     <InstitutionalPageShell mainClassName={styles.atlasPage}>
       <InstitutionalRouteHero
@@ -54,7 +58,10 @@ export function InstitutionalAtlasPage() {
         </p>
       </section>
 
-      <LabAtlasExplorer />
+      <LabAtlasExplorer
+        key={initialFocus ?? "atlas-default"}
+        initialSelectedId={initialFocus}
+      />
     </InstitutionalPageShell>
   );
 }

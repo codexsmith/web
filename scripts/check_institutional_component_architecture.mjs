@@ -11,6 +11,7 @@ for (const required of [
   "InstitutionalPageShell.tsx",
   "InstitutionalPrimitives.tsx",
   "LabObjectIdentity.tsx",
+  "LabCommandPalette.tsx",
   "institutionalFormat.ts",
 ]) {
   expect(fs.existsSync(`${root}/${required}`), `missing shared component ${required}`);
@@ -19,6 +20,8 @@ for (const required of [
 const chrome = read(`${root}/InstitutionalChrome.tsx`);
 const primitives = read(`${root}/InstitutionalPrimitives.tsx`);
 const labObjectIdentity = read(`${root}/LabObjectIdentity.tsx`);
+const commandPalette = read(`${root}/LabCommandPalette.tsx`);
+const commandPaletteContent = read(`${root}/content/commandPalette.ts`);
 const homePage = read(`${root}/InstitutionalHomePage.tsx`);
 const homeContent = read(`${root}/content/home.ts`);
 
@@ -27,6 +30,14 @@ expect(chrome.includes("usePathname"), "Institutional header must derive active 
 expect(chrome.includes("IntersectionObserver"), "Institutional header must observe the route hero before compacting the brand");
 expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
 expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
+expect(chrome.includes("<LabCommandPalette />"), "Institutional header must mount global Lab command navigation");
+expect(commandPalette.startsWith('"use client";'), "Lab command palette must own its bounded browser interaction");
+expect(commandPalette.includes("event.metaKey || event.ctrlKey"), "Lab command palette must support Command/Ctrl-K");
+expect(commandPalette.includes("dialog.showModal()"), "Lab command palette must use a modal dialog boundary");
+expect(commandPalette.includes('role="listbox"'), "Lab command palette must expose keyboard-search result semantics");
+expect(commandPaletteContent.includes("atlasNodes"), "Lab command search must derive object entries from the public Atlas");
+expect(commandPaletteContent.includes("atlasEdges"), "Lab command search must include only explicit Atlas relationship data");
+expect(commandPaletteContent.includes('/v3/atlas?focus='), "Lab object search results must deep-link to Atlas focus state");
 expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
 expect(labObjectIdentity.includes("data-kind={kind}"), "LabObjectIdentity must expose object-kind semantics to presentation");
 expect(labObjectIdentity.includes("identifierLabel = \"ID\""), "LabObjectIdentity must distinguish source identifiers from local codes");
@@ -479,10 +490,19 @@ expect(publicationsCatalogForObjects.includes("status={publication.recordState}"
 const atlasPage = read(`${root}/InstitutionalAtlasPage.tsx`);
 const atlasExplorer = read(`${root}/LabAtlasExplorer.tsx`);
 const atlasContent = read(`${root}/content/atlas.ts`);
-expect(atlasPage.includes("<LabAtlasExplorer />"), "Lab Atlas route must compose the relationship explorer");
+expect(atlasPage.includes("<LabAtlasExplorer"), "Lab Atlas route must compose the relationship explorer");
+expect(atlasPage.includes("initialSelectedId={initialFocus}"), "Lab Atlas route must pass deep-link focus into the explorer");
+expect(atlasPage.includes('key={initialFocus ?? "atlas-default"}'), "Lab Atlas route must remount selection state when URL focus changes");
 expect(atlasExplorer.startsWith('"use client";'), "Lab Atlas relationship selection must remain inside a bounded client component");
 expect(atlasExplorer.includes("LabObjectIdentity"), "Lab Atlas inspector must reuse the canonical object identity grammar");
 expect(atlasContent.includes("export const atlasEdges"), "Lab Atlas relationships must live in an explicit content model");
 expect(atlasContent.includes("PROJECT CASE OF"), "Lab Atlas must declare project-to-product relationships explicitly");
 expect(atlasContent.includes("PUBLIC PRODUCT SURFACE"), "Lab Atlas must declare the ASM research-to-product relationship explicitly");
 expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");
+
+
+const atlasRoute = read("src/app/v3/atlas/page.tsx");
+expect(atlasRoute.includes("await searchParams"), "Atlas route must await Next.js searchParams before reading focus");
+expect(atlasRoute.includes("initialFocus={focus}"), "Atlas route must pass focus as routing state into the institutional Atlas");
+expect(atlasExplorer.includes("useRouter"), "Atlas explorer must use App Router navigation for focus-state URLs");
+expect(atlasExplorer.includes("/v3/atlas?focus="), "Atlas explorer selection must preserve exact focus in the URL");
