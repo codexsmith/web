@@ -149,6 +149,7 @@ export const institutionalFooterGroups = [
   },
 ] as const;
 
-export const institutionalFooterRoutes = institutionalFooterGroups.flatMap(
-  (group) => group.routes,
-);
+export const institutionalFooterRoutes = institutionalFooterGroups.flatMap<{
+  readonly label: string;
+  readonly href: string;
+}>((group) => group.routes);
