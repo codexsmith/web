@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -107,9 +108,9 @@ export function InstitutionalOpenLabPage() {
             stewardship controls are ready.
           </p>
           <nav className={styles.openLabCloseLinks} aria-label="Open Lab next steps">
-            <a href="/v3/contact?type=open-lab&source=open-lab">
+            <Link href="/v3/contact?type=open-lab&source=open-lab">
               Start a conversation without submitting material <span aria-hidden="true">-&gt;</span>
-            </a>
+            </Link>
           </nav>
         </section>
       </InstitutionalPageShell>
