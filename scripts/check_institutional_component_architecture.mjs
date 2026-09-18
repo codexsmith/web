@@ -88,4 +88,9 @@ const routeRegistry = read(`${root}/institutionalRoutes.ts`);
 expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry must not duplicate page copy");
 expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");
 
+const researchPage = read(`${root}/InstitutionalResearchPage.tsx`);
+expect(researchPage.includes("<ResearchContextSection />"), "Research must compose its contextual bento as a section component");
+expect(!researchPage.includes('id="reader-agency"'), "Research page must not inline Reflow Field context cards");
+expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchContextSection must exist as the route-local composition boundary");
+
 console.log("Institutional component architecture passed.");

@@ -31,3 +31,8 @@ Do not create a universal schema-driven page renderer. Shared structure belongs 
 ## Dead-code rule
 
 Once a route has a real page renderer, do not keep a second preview/front-door renderer or duplicate route copy in the navigation registry. One route has one composition authority.
+
+
+## Section composition
+
+Large route-local interaction surfaces should be extracted when they have their own internal grammar. The first reference is `sections/ResearchContextSection.tsx`: the Research page owns ordering, while the section owns its contextual Reflow Field, card summaries, and expanded detail composition.
