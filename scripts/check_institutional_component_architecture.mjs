@@ -18,6 +18,7 @@ for (const required of [
 const chrome = read(`${root}/InstitutionalChrome.tsx`);
 const primitives = read(`${root}/InstitutionalPrimitives.tsx`);
 const homePage = read(`${root}/InstitutionalHomePage.tsx`);
+const homeContent = read(`${root}/content/home.ts`);
 
 expect(chrome.startsWith('"use client";'), "Institutional chrome must own route/scroll interaction as a client boundary");
 expect(chrome.includes("usePathname"), "Institutional header must derive active navigation from the current route");
@@ -26,6 +27,10 @@ expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "
 expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
 expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
+expect(homeContent.includes('title: "Boundary First Weather"'), "Featured work slot four must be Boundary First Weather");
+expect(homeContent.includes('href: "/v3/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
+expect(!homeContent.includes('title: "Public Infrastructure Analysis"'), "Public Infrastructure Analysis must no longer occupy featured work slot four");
+expect(homePage.includes("item.href ?"), "Homepage featured work must support direct product entry links");
 
 const foundationCss = read(`${root}/styles/InstitutionalFoundation.module.css`);
 expect(foundationCss.includes('border-color: rgba(184, 154, 71, .46)'), "Institutional header must carry a muted antique-gold perimeter");
@@ -234,6 +239,19 @@ expect(chessBoard.includes("aria-pressed"), "Boundary-First Chess lenses must ex
 expect(chessContent.includes("Create") && chessContent.includes("Repair") && chessContent.includes("Weaken") && chessContent.includes("Exploit") && chessContent.includes("Transform"), "Boundary-First Chess must preserve the five-operation learner grammar");
 expect(chessContent.includes("Engine superiority"), "Boundary-First Chess must preserve its claim firewall");
 expect(chessRoute.includes("BoundaryFirstChessExperience"), "Boundary-First Chess route must render the product experience");
+
+const weatherExperience = read(`${root}/products/BoundaryFirstWeatherExperience.tsx`);
+const weatherField = read(`${root}/products/BoundaryFirstWeatherField.tsx`);
+const weatherContent = read(`${root}/content/boundaryFirstWeather.ts`);
+const weatherRoute = read("src/app/v3/products/boundary-first-weather/page.tsx");
+expect(weatherExperience.includes("<ProductExperienceShell"), "Boundary First Weather must use the shared product experience shell");
+expect(weatherExperience.includes("<BoundaryFirstWeatherField"), "Boundary First Weather must expose an interactive simulation-field instrument");
+expect(weatherExperience.includes("A compelling visualization is not forecast skill."), "Boundary First Weather must keep visualization separate from forecast-skill claims");
+expect(weatherField.startsWith('"use client";'), "Boundary First Weather field interaction must own its client boundary");
+expect(weatherField.includes("aria-pressed"), "Boundary First Weather diagnostic modes must expose pressed state accessibly");
+expect(weatherContent.includes("Matched baseline") || weatherContent.includes("MATCHED BASELINE"), "Boundary First Weather must preserve matched-baseline comparison");
+expect(weatherContent.includes("operational") || weatherContent.includes("Operational"), "Boundary First Weather must preserve its operational-forecast boundary");
+expect(weatherRoute.includes("BoundaryFirstWeatherExperience"), "Boundary First Weather route must render the product experience");
 
 const projectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
 expect(projectsPage.includes("childLinks={institutionalChildRoutes.projects}"), "Projects hero must expose its contextual child pages");
