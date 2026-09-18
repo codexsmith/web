@@ -146,21 +146,15 @@ export const practiceLineage = [
 
 export const stewardshipFacets = [
   {
-    label: "INTELLECTUAL STEWARDSHIP",
+    label: "Intellectual Stewardship",
     title: "Knowledge should remain attributable, criticizable, and recoverable.",
-    description:
-      "Preserve provenance, uncertainty, disagreement, null results, superseded states, source boundaries, and enough handoff context that another person can inspect or continue the work without inheriting hidden authority.",
   },
   {
-    label: "HUMANIST STEWARDSHIP",
+    label: "Humanist Stewardship",
     title: "Capability should accumulate with people, not above them.",
-    description:
-      "Preserve agency, dignity, local knowledge, accessibility, contestability, repair, and the practical ability of people and institutions to understand and act without permanent dependence on the Lab.",
   },
   {
-    label: "ECOLOGICAL STEWARDSHIP",
+    label: "Ecological Stewardship",
     title: "Local success must not erase the wider substrate.",
-    description:
-      "Track material, energy, infrastructure, community, and ecological burdens across the consequence chain. A system is not well-optimized if its apparent success depends on exporting damage to other places or future people.",
   },
 ] as const;
