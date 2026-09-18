@@ -140,3 +140,6 @@ The public delta layer is owned by `content/changes.ts`, `RecentChangesStrip.tsx
 
 
 Audience-specific traversal is owned by `content/audiences.ts`, `AudienceJourneyGrid.tsx`, and `/v3/start`. Audience paths are ordered traversals over the same institutional pages; they must not fork claims, evidence, status, authority, or source content by audience. The current public paths are Researcher, Engineer / Practitioner, Funder / Sponsor, Collaborator / Institutional Partner, Prospective Client, Critic / Adversarial Reviewer, and Curious Visitor. The Home page reuses the same journey model in compact form, while the header exposes `Start here` as a utility route rather than promoting it into the main top-level taxonomy.
+
+
+The shared audience surface is a BFUX Reflow Field. At rest, the seven audience summaries share a dense field; selecting one reallocates representational bandwidth so the chosen path becomes the focal stage while the other six reflow around it. Expansion reveals the ordered route and terminal action without changing any underlying audience model, page state, claim, or authority. Both the Home compact surface and `/v3/start` use this same reflow interaction.

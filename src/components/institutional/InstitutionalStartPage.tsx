@@ -75,7 +75,7 @@ export function InstitutionalStartPage() {
       <section className={styles.journeysSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>CHOOSE YOUR PATH</>}
+          eyebrow={<>CHOOSE YOUR OWN PATH</>}
           title={<>Start with intent, then follow the smallest useful sequence.</>}
           note={
             <>
