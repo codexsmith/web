@@ -172,6 +172,7 @@ export const institutionalFooterGroups = [
     label: "Institution",
     routes: [
       { label: "About", href: "/v3/about" },
+      { label: "Start here", href: "/v3/start" },
       { label: "Founder", href: "/v3/founder" },
       { label: "Now", href: "/v3/now" },
       { label: "What changed", href: "/v3/changes" },

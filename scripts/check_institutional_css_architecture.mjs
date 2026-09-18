@@ -18,6 +18,7 @@ const requiredStyles = [
   "LabObjectIdentity.module.css",
   "LabCommandPalette.module.css",
   "RecentChangesStrip.module.css",
+  "AudienceJourneyGrid.module.css",
   "Research.module.css",
   "Products.module.css",
   "ProductExperience.module.css",
@@ -38,6 +39,7 @@ const requiredStyles = [
   "Claims.module.css",
   "Now.module.css",
   "Changes.module.css",
+  "Start.module.css",
   "Contact.module.css",
   "OpenLab.module.css",
   "Atlas.module.css",
@@ -63,6 +65,8 @@ for (const sharedClass of [".routeLead", ".routeSupport", ".routeHero", ".routeM
 
 expect(foundation.includes(".nav a"), "Foundation must own shared navigation behavior");
 expect(foundation.includes(".footerNav a"), "Foundation must own shared footer navigation behavior");
+expect(foundation.includes(".audienceEntrySection"), "Homepage foundation must style audience-specific traversal");
+expect(foundation.includes(".audienceEntryLink"), "Homepage foundation must expose the full Start here path from the compact journey layer");
 expect(foundation.includes("flex-wrap: wrap"), "footer navigation must wrap when contextual child routes are exposed");
 expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
 expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared site chrome");
@@ -135,6 +139,7 @@ const routeContracts = [
   ["InstitutionalClaimsPage.tsx", "Claims.module.css"],
   ["InstitutionalNowPage.tsx", "Now.module.css"],
   ["InstitutionalChangesPage.tsx", "Changes.module.css"],
+  ["InstitutionalStartPage.tsx", "Start.module.css"],
   ["InstitutionalContactPage.tsx", "Contact.module.css"],
   ["InstitutionalOpenLabPage.tsx", "OpenLab.module.css"],
   ["InstitutionalAtlasPage.tsx", "Atlas.module.css"],
