@@ -112,7 +112,9 @@ for (const [file, slug] of routeContracts) {
     (slug === "publications" &&
       read(`${root}/sections/PublicationContextSection.tsx`).includes("../content/publications")) ||
     (slug === "about" &&
-      read(`${root}/sections/AboutReflowGroups.tsx`).includes("../content/about"));
+      read(`${root}/sections/AboutReflowGroups.tsx`).includes("../content/about")) ||
+    (slug === "products" &&
+      read(`${root}/sections/ProductContextSection.tsx`).includes("../content/products"));
   expect(routeOwnsContent || sectionOwnsContent, `${file} or its route-local section must import the content model`);
   expect(fs.existsSync(`${root}/content/${slug}.ts`), `missing content model for ${file}`);
   expect(!source.includes('padStart(2, "0")'), `${file} must use formatOrdinal rather than inline formatting`);
