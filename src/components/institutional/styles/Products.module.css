@@ -662,3 +662,106 @@
     transform: translateX(3px);
   }
 }
+
+
+.researchProducts {
+  padding: 38px clamp(30px, 6vw, 96px) 48px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.38), transparent 24%),
+    #cfdbe6;
+}
+
+.researchProductGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.researchProductCard {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 6px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(234,241,248,.96));
+  color: inherit;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 rgba(7,26,61,.16),
+    0 10px 20px rgba(7,26,61,.1);
+}
+
+.researchProductCard[data-product="asm"] {
+  border-top-color: var(--osha-green);
+}
+
+.researchProductCard > div {
+  display: grid;
+  gap: 10px;
+}
+
+.researchProductCard > div span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.researchProductCard > div strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 2.2vw, 2.55rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: .98;
+}
+
+.researchProductCard > p {
+  max-width: 700px;
+  margin: 22px 0 0;
+  color: #4d5f77;
+  font-size: .78rem;
+  line-height: 1.52;
+}
+
+.researchProductCard > small {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 24px;
+  border-bottom: 1px solid var(--old-gold-dark);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .77rem;
+}
+
+.researchProductCard > small i {
+  color: var(--old-gold-dark);
+  font-style: normal;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .researchProductCard:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 #fff,
+      0 4px 0 rgba(7,26,61,.18),
+      0 15px 28px rgba(7,26,61,.13);
+  }
+}
+
+@media (max-width: 680px) {
+  .researchProducts {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .researchProductGrid {
+    grid-template-columns: 1fr;
+  }
+}
