@@ -190,7 +190,7 @@ export function InstitutionalHomePage() {
               <div className={styles.nowLaneGrid} aria-label="Current Lab priority lanes">
                 {homeNowSnapshot.lanes.map((lane, index) => (
                   <span key={lane}>
-                    <i>{String(index + 1).padStart(2, "0")}</i>
+                    <i>{formatOrdinal(index)}</i>
                     {lane}
                   </span>
                 ))}
