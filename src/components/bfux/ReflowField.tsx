@@ -22,6 +22,7 @@ type ReflowLayoutMode = "flow" | "focus-stage";
 
 type ReflowFieldContextValue = {
   selectedId: string | null;
+  previousSelectedId: string | null;
   fieldId: string;
   layoutMode: ReflowLayoutMode;
   itemOrder: readonly string[];
@@ -49,7 +50,7 @@ function clickBelongsToNestedControl(
 
 const focusLayoutTransition = {
   type: "tween",
-  duration: 0.82,
+  duration: 0.52,
   ease: [0.45, 0, 0.55, 1],
 } as const;
 
@@ -85,15 +86,31 @@ export function ReflowField({
   itemOrder?: readonly string[];
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
+  const [previousSelectedId, setPreviousSelectedId] = useState<string | null>(null);
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
   const setSelection = useCallback((id: string | null) => {
+    setPreviousSelectedId(selectedId);
     setSelectedId(id);
-  }, []);
+  }, [selectedId]);
 
   const context = useMemo(
-    () => ({ selectedId, fieldId, layoutMode, itemOrder, setSelection }),
-    [selectedId, fieldId, layoutMode, itemOrder, setSelection],
+    () => ({
+      selectedId,
+      previousSelectedId,
+      fieldId,
+      layoutMode,
+      itemOrder,
+      setSelection,
+    }),
+    [
+      selectedId,
+      previousSelectedId,
+      fieldId,
+      layoutMode,
+      itemOrder,
+      setSelection,
+    ],
   );
 
   return (
@@ -146,8 +163,10 @@ export function ReflowFieldItem({
 
   const selected = context.selectedId === id;
   const detailId = `${context.fieldId}-${safeFragment(id)}-detail`;
+  const carriesMotion =
+    selected || context.previousSelectedId === id;
   const transition =
-    reducedMotion || !selected
+    reducedMotion || !carriesMotion
       ? { layout: snapLayoutTransition }
       : { layout: focusLayoutTransition };
   const toggle = () => context.setSelection(selected ? null : id);
@@ -212,13 +231,18 @@ export function ReflowFieldItem({
             id={detailId}
             className={styles.detail}
             initial={reducedMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={
-              reducedMotion
+            animate={{
+              opacity: 1,
+              transition: reducedMotion
                 ? { duration: 0 }
-                : { ...detailTransition, delay: 0.24 }
-            }
+                : { ...detailTransition, delay: 0.12 },
+            }}
+            exit={{
+              opacity: 0,
+              transition: reducedMotion
+                ? { duration: 0 }
+                : { duration: 0.12 },
+            }}
           >
             {detail}
           </motion.div>
