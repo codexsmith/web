@@ -567,3 +567,26 @@
     text-align: left;
   }
 }
+
+
+.openLabCloseLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 24px;
+}
+
+.openLabCloseLinks a {
+  display: inline-flex;
+  gap: 10px;
+  padding: 8px 0 4px;
+  border-bottom: 1px solid var(--old-gold-dark);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .87rem;
+  text-decoration: none;
+}
+
+.openLabCloseLinks a span {
+  color: var(--old-gold-dark);
+}

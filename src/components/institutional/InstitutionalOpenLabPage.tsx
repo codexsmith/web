@@ -106,6 +106,11 @@ export function InstitutionalOpenLabPage() {
             now legible; the submission machinery should only become active when its
             stewardship controls are ready.
           </p>
+          <nav className={styles.openLabCloseLinks} aria-label="Open Lab next steps">
+            <a href="/v3/contact?type=open-lab&source=open-lab">
+              Start a conversation without submitting material <span aria-hidden="true">-&gt;</span>
+            </a>
+          </nav>
         </section>
       </InstitutionalPageShell>
   );

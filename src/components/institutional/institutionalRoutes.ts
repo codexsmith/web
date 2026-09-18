@@ -69,4 +69,5 @@ export const institutionalFooterRoutes = [
   { label: "Apparatus", href: "/v3/apparatus" },
   { label: "Collaboration", href: "/v3/collaboration" },
   { label: "Founder", href: "/v3/founder" },
+  { label: "Contact", href: "/v3/contact" },
 ] as const;
