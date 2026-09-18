@@ -239,7 +239,7 @@ expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "foo
 
 const childRouteContracts = [
   ["about", ["funding", "appliedWork", "evidence", "now", "changes", "collaboration", "founder"]],
-  ["research", ["atlas", "apparatus", "experiments", "claims", "funding", "now", "collaboration"]],
+  ["research", ["atlas", "apparatus", "experiments", "claims", "funding", "collaboration"]],
   ["products", ["appliedWork", "evidence", "collaboration"]],
   ["projects", ["appliedWork", "evidence", "now", "collaboration"]],
   ["funding", ["appliedWork", "evidence", "now"]],
@@ -267,6 +267,11 @@ for (const [routeKey, childKeys] of childRouteContracts) {
     );
   }
 }
+
+const researchChildRouteStart = routeRegistry.indexOf("  research: [");
+const researchChildRouteEnd = routeRegistry.indexOf("  ],", researchChildRouteStart);
+const researchChildRouteSlice = routeRegistry.slice(researchChildRouteStart, researchChildRouteEnd);
+expect(!researchChildRouteSlice.includes("institutionalChildPages.now"), "Research contextual navigation must not include Now");
 
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
 expect(primitives.includes("routeChildIcon"), "child-page cards must expose typed relationship icons");

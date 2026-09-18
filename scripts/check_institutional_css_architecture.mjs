@@ -68,10 +68,14 @@ expect(foundation.includes(".nav a"), "Foundation must own shared navigation beh
 expect(foundation.includes(".footerNav a"), "Foundation must own shared footer navigation behavior");
 expect(foundation.includes(".audienceEntrySection"), "Homepage foundation must style audience-specific traversal");
 expect(foundation.includes(".audienceEntryLink"), "Homepage foundation must expose the full Start here path from the compact journey layer");
+expect(foundation.includes("grid-template-columns: auto minmax(0, 1fr) auto"), "Header must end with a three-column desktop placement guard");
+expect(foundation.includes(".headerTools {\n  grid-column: 3;"), "Desktop header tools must occupy the explicit third column");
+expect(foundation.includes(".nav {\n  grid-column: 2;"), "Desktop primary navigation must remain on the first header row");
 expect(audienceJourneyCss.includes("--reflow-columns: 12"), "Audience journey field must define the reflow grid");
 expect(audienceJourneyCss.includes("--reflow-selected-span: 10"), "Audience journey field must reserve a centered focal stage");
 expect(audienceJourneyCss.includes('.journey[data-reflow-state="selected"]'), "Audience journey styling must distinguish the selected focal state");
 expect(audienceJourneyCss.includes(".fieldCompact"), "Audience journey reflow must support the compact homepage projection");
+expect(audienceJourneyCss.includes("min-height: 0"), "Audience journey cards must not force artificial minimum height");
 expect(audienceJourneyCss.includes("@media (max-width: 720px)"), "Audience journey reflow must collapse to a single-column mobile field");
 expect(foundation.includes("flex-wrap: wrap"), "footer navigation must wrap when contextual child routes are exposed");
 expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
