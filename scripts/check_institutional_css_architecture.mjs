@@ -35,6 +35,7 @@ const requiredStyles = [
   "Now.module.css",
   "Contact.module.css",
   "OpenLab.module.css",
+  "Atlas.module.css",
 ];
 
 for (const file of requiredStyles) {
@@ -108,6 +109,7 @@ const routeContracts = [
   ["InstitutionalNowPage.tsx", "Now.module.css"],
   ["InstitutionalContactPage.tsx", "Contact.module.css"],
   ["InstitutionalOpenLabPage.tsx", "OpenLab.module.css"],
+  ["InstitutionalAtlasPage.tsx", "Atlas.module.css"],
 ];
 
 for (const [component, routeModule] of routeContracts) {

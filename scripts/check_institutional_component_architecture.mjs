@@ -123,6 +123,10 @@ const routeContracts = [
   [
     "InstitutionalOpenLabPage.tsx",
     "openLab"
+  ],
+  [
+    "InstitutionalAtlasPage.tsx",
+    "atlas"
   ]
 ];
 
@@ -160,6 +164,7 @@ for (const file of [
   "InstitutionalNowPage.tsx",
   "InstitutionalContactPage.tsx",
   "InstitutionalOpenLabPage.tsx",
+  "InstitutionalAtlasPage.tsx",
 ]) {
   const source = read(`${root}/${file}`);
   expect(source.includes("InstitutionalRouteHero"), `${file} must compose the shared route hero`);
@@ -181,9 +186,11 @@ expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must r
 expect(!topLevelRouteRegistry.includes('/v3/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/now'), "Now / Roadmap must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/contact'), "Contact must remain outside top-level header navigation");
+expect(!topLevelRouteRegistry.includes('/v3/atlas'), "Lab Atlas must remain a contextual route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
+expect(routeRegistry.includes('{ label: "Lab Atlas", href: "/v3/atlas" }'), "footer route collection must include Lab Atlas");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
 expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboration" }'), "footer route collection must include Collaboration");
 expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
@@ -193,7 +200,7 @@ expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "foo
 
 const childRouteContracts = [
   ["about", ["funding", "appliedWork", "evidence", "now", "collaboration", "founder"]],
-  ["research", ["apparatus", "funding", "now", "collaboration"]],
+  ["research", ["atlas", "apparatus", "funding", "now", "collaboration"]],
   ["products", ["appliedWork", "evidence", "collaboration"]],
   ["projects", ["appliedWork", "evidence", "now", "collaboration"]],
   ["funding", ["appliedWork", "evidence", "now"]],
@@ -467,3 +474,15 @@ expect(publicationsCatalogForObjects.includes("LabObjectIdentity"), "Publication
 expect(publicationsCatalogForObjects.includes('kind="publication"'), "Publication records must identify publication objects");
 expect(publicationsCatalogForObjects.includes("identifier={publication.id}"), "Publication record identifiers must remain source-provided records");
 expect(publicationsCatalogForObjects.includes("status={publication.recordState}"), "Publication identity must preserve record state");
+
+
+const atlasPage = read(`${root}/InstitutionalAtlasPage.tsx`);
+const atlasExplorer = read(`${root}/LabAtlasExplorer.tsx`);
+const atlasContent = read(`${root}/content/atlas.ts`);
+expect(atlasPage.includes("<LabAtlasExplorer />"), "Lab Atlas route must compose the relationship explorer");
+expect(atlasExplorer.startsWith('"use client";'), "Lab Atlas relationship selection must remain inside a bounded client component");
+expect(atlasExplorer.includes("LabObjectIdentity"), "Lab Atlas inspector must reuse the canonical object identity grammar");
+expect(atlasContent.includes("export const atlasEdges"), "Lab Atlas relationships must live in an explicit content model");
+expect(atlasContent.includes("PROJECT CASE OF"), "Lab Atlas must declare project-to-product relationships explicitly");
+expect(atlasContent.includes("PUBLIC PRODUCT SURFACE"), "Lab Atlas must declare the ASM research-to-product relationship explicitly");
+expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");

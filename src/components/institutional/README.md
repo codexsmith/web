@@ -117,3 +117,6 @@ The v3 homepage now links Featured Work 03 directly to the ASM product page. The
 
 
 The homepage now includes a **Lab in Motion** institutional access layer between Featured Work and Working Posture. It treats the homepage as more than a descriptive front page: a large Now / Roadmap control surface exposes the current operating cycle and priority lanes, while Applied Work, Collaboration, and Funding are presented as distinct ways an outside person or institution can enter the work. This keeps the top navigation focused on what the Lab is while giving the newer operational child pages meaningful homepage prominence without promoting them into the global header.
+
+
+The Lab Atlas route at `/v3/atlas` is a bounded public relationship projection across existing source-governed objects. Its first boundary includes research programs, immersive products, project cases, and selected publication records. Atlas-local routing IDs exist only to connect the public projection and are never rendered as canonical Lab identities. Every visible edge is declared explicitly in `content/atlas.ts`; the Atlas must not infer equivalence, dependency, validation, or authority from title similarity, shared vocabulary, or visual proximity. Missing edges remain missing until an authoritative public relationship is deliberately admitted.

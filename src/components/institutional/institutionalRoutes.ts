@@ -58,6 +58,13 @@ const institutionalChildPages = {
     kind: "apparatus",
     tone: "indigo",
   },
+  atlas: {
+    label: "Lab Atlas",
+    href: "/v3/atlas",
+    relation: "MAP",
+    kind: "atlas",
+    tone: "indigo",
+  },
 } as const;
 
 export const institutionalChildRoutes = {
@@ -70,6 +77,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.founder,
   ],
   research: [
+    institutionalChildPages.atlas,
     institutionalChildPages.apparatus,
     institutionalChildPages.funding,
     institutionalChildPages.now,
@@ -125,6 +133,7 @@ export const institutionalFooterGroups = [
     label: "Research",
     routes: [
       { label: "Research", href: "/v3/research" },
+      { label: "Lab Atlas", href: "/v3/atlas" },
       { label: "Publications", href: "/v3/publications" },
       { label: "Evidence", href: "/v3/evidence" },
       { label: "Apparatus", href: "/v3/apparatus" },
