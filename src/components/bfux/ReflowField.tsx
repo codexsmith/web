@@ -47,14 +47,18 @@ function clickBelongsToNestedControl(
   return Boolean(interactive && interactive !== event.currentTarget);
 }
 
-const layoutTransition = {
+const focusLayoutTransition = {
   type: "tween",
-  duration: 0.42,
-  ease: [0.22, 1, 0.36, 1],
+  duration: 0.82,
+  ease: [0.45, 0, 0.55, 1],
+} as const;
+
+const snapLayoutTransition = {
+  duration: 0,
 } as const;
 
 const detailTransition = {
-  duration: 0.18,
+  duration: 0.2,
   ease: [0.22, 1, 0.36, 1],
 } as const;
 
@@ -84,9 +88,7 @@ export function ReflowField({
   const reducedMotion = useReducedMotion();
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
-  const transition = reducedMotion
-    ? { duration: 0 }
-    : { layout: layoutTransition };
+  const transition = { layout: snapLayoutTransition };
 
   const setSelection = useCallback((id: string | null) => {
     setSelectedId(id);
@@ -149,9 +151,10 @@ export function ReflowFieldItem({
 
   const selected = context.selectedId === id;
   const detailId = `${context.fieldId}-${safeFragment(id)}-detail`;
-  const transition = reducedMotion
-    ? { duration: 0 }
-    : { layout: layoutTransition };
+  const transition =
+    reducedMotion || !selected
+      ? { layout: snapLayoutTransition }
+      : { layout: focusLayoutTransition };
   const toggle = () => context.setSelection(selected ? null : id);
 
   const remainingIds = context.selectedId
@@ -198,7 +201,11 @@ export function ReflowFieldItem({
         onClick={toggle}
       />
 
-      <motion.div layout="position" className={styles.summary}>
+      <motion.div
+        layout="position"
+        transition={transition}
+        className={styles.summary}
+      >
         {summary}
       </motion.div>
 
@@ -214,7 +221,7 @@ export function ReflowFieldItem({
             transition={
               reducedMotion
                 ? { duration: 0 }
-                : { ...detailTransition, delay: 0.1 }
+                : { ...detailTransition, delay: 0.24 }
             }
           >
             {detail}
@@ -222,7 +229,12 @@ export function ReflowFieldItem({
         ) : null}
       </AnimatePresence>
 
-      <motion.div layout="position" className={styles.controlStrip} aria-hidden="true">
+      <motion.div
+        layout="position"
+        transition={transition}
+        className={styles.controlStrip}
+        aria-hidden="true"
+      >
         <span className={styles.stateReadout}>
           {selected ? "INSPECTING" : "AVAILABLE"}
         </span>

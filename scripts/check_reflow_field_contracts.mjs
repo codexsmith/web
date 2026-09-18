@@ -20,10 +20,13 @@ expect(component.includes("useReducedMotion"), "Motion reduced-motion preference
 expect(component.includes("LayoutGroup"), "reference renderer must coordinate sibling layout animation with Motion");
 expect(component.includes("<motion.article"), "Reflow items must delegate geometry interpolation to Motion");
 expect(component.includes('layoutAnchor={{ x: 0.5, y: 0.5 }}'), "focus-stage resize should grow around the card center rather than snap from a corner");
-expect(component.includes("duration: 0.42"), "focus-stage layout interpolation should use a deliberate visible resize duration");
+expect(component.includes("duration: 0.82"), "selected focus-stage card should use a slow, perceptible translation and resize");
+expect(component.includes("ease: [0.45, 0, 0.55, 1]"), "selected card motion should ease in and out rather than snap toward its destination");
+expect(component.includes("const snapLayoutTransition"), "non-selected field objects must have an explicit snap transition");
+expect(component.includes("reducedMotion || !selected"), "only the selected card should receive animated layout continuity");
 expect(component.includes("AnimatePresence"), "expanded detail should use a maintained enter/exit primitive");
 expect(component.includes('mode="popLayout"'), "detail exit must not hold the parent card in its expanded geometry");
-expect(component.includes("delay: 0.1"), "detail content should stage after geometry begins moving rather than compete with resize");
+expect(component.includes("delay: 0.24"), "detail content should wait until the selected card is visibly in motion before appearing");
 expect(component.includes('data-reflow-state={selected ? "selected" : "rest"}'), "item state must be explicit in DOM");
 expect(component.includes('data-reflow-placement={placement}'), "focus-stage placement must be explicit in DOM");
 expect(component.includes('layoutMode?: ReflowLayoutMode'), "Reflow Field must expose a reusable layout-mode contract");
