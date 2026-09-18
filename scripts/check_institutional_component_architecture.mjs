@@ -31,6 +31,8 @@ expect(chrome.includes("IntersectionObserver"), "Institutional header must obser
 expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
 expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
 expect(chrome.includes("<LabCommandPalette />"), "Institutional header must mount global Lab command navigation");
+expect(chrome.includes('href="/v3/start"'), "Institutional header must expose the audience traversal utility");
+expect(chrome.includes(">\n          Start here\n        </Link>"), "Audience traversal utility must remain visibly labeled Start here");
 expect(commandPalette.startsWith('"use client";'), "Lab command palette must own its bounded browser interaction");
 expect(commandPalette.includes("event.metaKey || event.ctrlKey"), "Lab command palette must support Command/Ctrl-K");
 expect(commandPalette.includes("dialog.showModal()"), "Lab command palette must use a modal dialog boundary");
@@ -140,6 +142,10 @@ const routeContracts = [
     "changes"
   ],
   [
+    "InstitutionalStartPage.tsx",
+    "audiences"
+  ],
+  [
     "InstitutionalContactPage.tsx",
     "contact"
   ],
@@ -187,6 +193,7 @@ for (const file of [
   "InstitutionalExperimentsPage.tsx",
   "InstitutionalNowPage.tsx",
   "InstitutionalChangesPage.tsx",
+  "InstitutionalStartPage.tsx",
   "InstitutionalContactPage.tsx",
   "InstitutionalOpenLabPage.tsx",
   "InstitutionalAtlasPage.tsx",
@@ -214,6 +221,7 @@ expect(!topLevelRouteRegistry.includes('/v3/claims'), "Claims must remain a cont
 expect(!topLevelRouteRegistry.includes('/v3/now'), "Now / Roadmap must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/contact'), "Contact must remain outside top-level header navigation");
 expect(!topLevelRouteRegistry.includes('/v3/atlas'), "Lab Atlas must remain a contextual route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/start'), "Start here must remain a utility route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
@@ -226,6 +234,7 @@ expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work"
 expect(routeRegistry.includes('{ label: "Evidence", href: "/v3/evidence" }'), "footer route collection must include Evidence");
 expect(routeRegistry.includes('{ label: "Now", href: "/v3/now" }'), "footer route collection must include Now / Roadmap");
 expect(routeRegistry.includes('{ label: "What changed", href: "/v3/changes" }'), "footer route collection must include What changed");
+expect(routeRegistry.includes('{ label: "Start here", href: "/v3/start" }'), "footer route collection must include Start here");
 expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "footer route collection must include Contact");
 
 const childRouteContracts = [
@@ -620,3 +629,22 @@ expect(homePageForChanges.includes("<RecentChangesStrip"), "Homepage must surfac
 expect(nowPageForChanges.includes('title="What materially changed?"'), "Now page must surface recent material deltas");
 expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
 expect(atlasContent.includes("feature-frozen bounded public projection"), "Atlas v0.1 must declare feature-frozen status");
+
+
+const startPage = read(`${root}/InstitutionalStartPage.tsx`);
+const audiencesContent = read(`${root}/content/audiences.ts`);
+const audienceGrid = read(`${root}/AudienceJourneyGrid.tsx`);
+const homeForAudienceTraversal = read(`${root}/InstitutionalHomePage.tsx`);
+expect(startPage.includes("./content/audiences"), "Start page must consume the canonical audience traversal model");
+expect(startPage.includes("You do not need to understand the whole Lab first."), "Start page must lead with reduced orientation cost");
+expect(startPage.includes("<AudienceJourneyGrid"), "Start page must compose the shared journey grid");
+for (const audienceId of ["researcher", "engineer", "funder", "collaborator", "client", "critic", "curious"]) {
+  expect(audiencesContent.includes(`id: "${audienceId}"`), `Audience traversal must expose ${audienceId}`);
+}
+expect((audiencesContent.match(/id: "/g) ?? []).length >= 7, "Audience traversal must expose all seven declared visitor paths");
+expect(audiencesContent.includes('href: "/v3/contact?type=research-review&source=start-researcher"'), "Researcher path must terminate in typed research-review contact");
+expect(audiencesContent.includes('href: "/v3/contact?type=applied-work&source=start-client"'), "Client path must terminate in typed applied-work contact");
+expect(audiencesContent.includes('href: "/v3/contact?type=funding&source=start-funder"'), "Funder path must terminate in typed funding contact");
+expect(audienceGrid.includes("journey.steps.map"), "Audience journey grid must render ordered steps from the shared model");
+expect(homeForAudienceTraversal.includes("homeAudienceJourneys"), "Homepage must reuse the same canonical audience traversal model");
+expect(homeForAudienceTraversal.includes("<AudienceJourneyGrid"), "Homepage must expose compact audience-specific traversal");

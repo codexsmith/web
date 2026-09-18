@@ -3092,3 +3092,81 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Audience-specific traversal: same institutional surfaces, reordered by visitor intent. */
+.audienceEntrySection {
+  display: grid;
+  grid-template-columns: minmax(250px, .56fr) minmax(0, 2.44fr);
+  gap: 24px;
+  padding: 42px clamp(30px, 5vw, 78px) 50px;
+  border-bottom: 1px solid var(--institution-line);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.74), transparent 18%),
+    linear-gradient(180deg, #e7edef, #f4f6f5);
+}
+
+.audienceEntryLead {
+  align-self: start;
+  padding: 4px 22px 22px 0;
+  border-right: 1px solid var(--institution-line);
+}
+
+.audienceEntryLead h2 {
+  margin: 10px 0 12px;
+  color: var(--institution-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 2.7vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.audienceEntryLead > p:not(.sectionIndex) {
+  margin: 0;
+  color: var(--institution-muted);
+  font-size: .78rem;
+  line-height: 1.55;
+}
+
+.audienceEntryLink {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 8px 0 4px;
+  border-bottom: 1px solid var(--institution-accent);
+  color: var(--institution-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .8rem;
+}
+
+.labLink[aria-current="page"] {
+  border-bottom-color: var(--old-gold-dark);
+  color: var(--royal-blue-deep);
+}
+
+@media (max-width: 1180px) {
+  .audienceEntrySection {
+    grid-template-columns: 1fr;
+  }
+
+  .audienceEntryLead {
+    padding-right: 0;
+    padding-bottom: 20px;
+    border-right: 0;
+    border-bottom: 1px solid var(--institution-line);
+  }
+}
+
+@media (max-width: 680px) {
+  .audienceEntrySection {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .labLink {
+    display: none;
+  }
+}
