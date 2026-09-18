@@ -6,6 +6,9 @@ import routeStyles from "./styles/Now.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { RecentChangesStrip } from "./RecentChangesStrip";
+import { nowRecentChanges } from "./content/changes";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   nowPriorityLanes,
   roadmapChangeRules,
@@ -36,6 +39,7 @@ export function InstitutionalNowPage() {
             dependencies, and what would count as meaningful closure.
           </>
         }
+        childLinks={institutionalChildRoutes.now}
       >
         <aside className={styles.nowOperatingThesis}>
           <span>CURRENT OPERATING THESIS</span>
@@ -47,6 +51,8 @@ export function InstitutionalNowPage() {
           </p>
         </aside>
       </InstitutionalRouteHero>
+
+      <RecentChangesStrip changes={nowRecentChanges} title="What materially changed?" />
 
       <section className={styles.nowPrioritiesSection}>
         <InstitutionalSectionHeader

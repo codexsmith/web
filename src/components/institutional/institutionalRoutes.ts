@@ -51,6 +51,13 @@ const institutionalChildPages = {
     kind: "status",
     tone: "blue",
   },
+  changes: {
+    label: "What changed",
+    href: "/v3/changes",
+    relation: "DELTA",
+    kind: "status",
+    tone: "green",
+  },
   collaboration: {
     label: "Collaboration",
     href: "/v3/collaboration",
@@ -87,6 +94,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.appliedWork,
     institutionalChildPages.evidence,
     institutionalChildPages.now,
+    institutionalChildPages.changes,
     institutionalChildPages.collaboration,
     institutionalChildPages.founder,
   ],
@@ -128,6 +136,14 @@ export const institutionalChildRoutes = {
     institutionalChildPages.claims,
     institutionalChildPages.now,
   ],
+  now: [
+    institutionalChildPages.changes,
+  ],
+  changes: [
+    institutionalChildPages.now,
+    institutionalChildPages.atlas,
+    institutionalChildPages.evidence,
+  ],
   apparatus: [
     institutionalChildPages.experiments,
   ],
@@ -158,6 +174,7 @@ export const institutionalFooterGroups = [
       { label: "About", href: "/v3/about" },
       { label: "Founder", href: "/v3/founder" },
       { label: "Now", href: "/v3/now" },
+      { label: "What changed", href: "/v3/changes" },
     ],
   },
   {

@@ -1,0 +1,134 @@
+.strip {
+  border-top: 1px solid var(--institution-line);
+  border-bottom: 1px solid var(--institution-line);
+  background: #fff;
+}
+
+.header {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 10px clamp(30px, 5vw, 86px);
+  border-bottom: 1px solid var(--institution-line);
+  background: #f7f8f7;
+}
+
+.header > div {
+  display: grid;
+  gap: 4px;
+}
+
+.header span,
+.topline span {
+  color: #536f78;
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.header strong {
+  color: var(--institution-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.header > a,
+.item > a {
+  color: var(--institution-ink);
+  font-size: .63rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.item {
+  --change-accent: #536f78;
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 16px clamp(18px, 2vw, 28px);
+  border-right: 1px solid var(--institution-line);
+  border-left: 4px solid var(--change-accent);
+}
+
+.item:last-child {
+  border-right: 0;
+}
+
+.item[data-scope="Research"] { --change-accent: #5b63ad; }
+.item[data-scope="Method"] { --change-accent: #916b3f; }
+.item[data-scope="Institution"] { --change-accent: #3c7e57; }
+.item[data-scope="Public interface"] { --change-accent: #356f9f; }
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.topline span {
+  color: var(--change-accent);
+}
+
+.topline time {
+  color: var(--institution-muted);
+  font: 700 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.item > strong {
+  color: var(--institution-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .93rem;
+  line-height: 1.2;
+}
+
+.item p {
+  margin: 0;
+  color: var(--institution-muted);
+  font-size: .68rem;
+  line-height: 1.48;
+}
+
+.item > a {
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 3px;
+  border-bottom: 1px solid var(--change-accent);
+}
+
+.strip[data-compact="true"] .item {
+  min-height: 128px;
+}
+
+@media (max-width: 900px) {
+  .items {
+    grid-template-columns: 1fr;
+  }
+
+  .item,
+  .item:last-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--institution-line);
+  }
+
+  .item:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}

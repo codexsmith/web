@@ -136,6 +136,10 @@ const routeContracts = [
     "now"
   ],
   [
+    "InstitutionalChangesPage.tsx",
+    "changes"
+  ],
+  [
     "InstitutionalContactPage.tsx",
     "contact"
   ],
@@ -182,6 +186,7 @@ for (const file of [
   "InstitutionalEvidencePage.tsx",
   "InstitutionalExperimentsPage.tsx",
   "InstitutionalNowPage.tsx",
+  "InstitutionalChangesPage.tsx",
   "InstitutionalContactPage.tsx",
   "InstitutionalOpenLabPage.tsx",
   "InstitutionalAtlasPage.tsx",
@@ -220,10 +225,11 @@ expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboratio
 expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
 expect(routeRegistry.includes('{ label: "Evidence", href: "/v3/evidence" }'), "footer route collection must include Evidence");
 expect(routeRegistry.includes('{ label: "Now", href: "/v3/now" }'), "footer route collection must include Now / Roadmap");
+expect(routeRegistry.includes('{ label: "What changed", href: "/v3/changes" }'), "footer route collection must include What changed");
 expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "footer route collection must include Contact");
 
 const childRouteContracts = [
-  ["about", ["funding", "appliedWork", "evidence", "now", "collaboration", "founder"]],
+  ["about", ["funding", "appliedWork", "evidence", "now", "changes", "collaboration", "founder"]],
   ["research", ["atlas", "apparatus", "experiments", "claims", "funding", "now", "collaboration"]],
   ["products", ["appliedWork", "evidence", "collaboration"]],
   ["projects", ["appliedWork", "evidence", "now", "collaboration"]],
@@ -235,6 +241,8 @@ const childRouteContracts = [
   ["apparatus", ["experiments"]],
   ["experiments", ["atlas", "apparatus", "claims", "evidence"]],
   ["claims", ["atlas", "evidence", "experiments"]],
+  ["now", ["changes"]],
+  ["changes", ["now", "atlas", "evidence"]],
   ["openLab", ["apparatus", "funding", "now", "collaboration"]],
 ];
 
@@ -597,3 +605,18 @@ expect(atlasRoute.includes("await searchParams"), "Atlas route must await Next.j
 expect(atlasRoute.includes("initialFocus={focus}"), "Atlas route must pass focus as routing state into the institutional Atlas");
 expect(atlasExplorer.includes("useRouter"), "Atlas explorer must use App Router navigation for focus-state URLs");
 expect(atlasExplorer.includes("/v3/atlas?focus="), "Atlas explorer selection must preserve exact focus in the URL");
+
+
+const changesPage = read(`${root}/InstitutionalChangesPage.tsx`);
+const changesContent = read(`${root}/content/changes.ts`);
+const homePageForChanges = read(`${root}/InstitutionalHomePage.tsx`);
+const nowPageForChanges = read(`${root}/InstitutionalNowPage.tsx`);
+expect(changesPage.includes("./content/changes"), "What changed route must consume the curated delta projection");
+expect(changesPage.includes("State changes, not activity theater."), "What changed route must state its material-delta boundary");
+expect(changesContent.includes('webRevision: "f6fc94a7dc84225c2718f16adef32b260775eb4f"'), "Change projection must pin the public web source revision");
+expect(changesContent.includes('labRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Change projection must pin the Lab source revision");
+expect(changesContent.includes("It reports selected material changes"), "Change projection must reject complete-activity-feed semantics");
+expect(homePageForChanges.includes("<RecentChangesStrip"), "Homepage must surface the compact recent-change layer");
+expect(nowPageForChanges.includes('title="What materially changed?"'), "Now page must surface recent material deltas");
+expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
+expect(atlasContent.includes("feature-frozen bounded public projection"), "Atlas v0.1 must declare feature-frozen status");

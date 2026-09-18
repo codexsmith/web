@@ -4,6 +4,7 @@ import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 import { LabSnapshotRow } from "./LabSnapshotRow";
+import { RecentChangesStrip } from "./RecentChangesStrip";
 
 import {
   capabilityStrip,
@@ -16,6 +17,7 @@ import {
   stewardshipFacets,
 } from "./content/home";
 import { homeLabSnapshot } from "./content/labSnapshot";
+import { homeRecentChanges } from "./content/changes";
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
@@ -51,6 +53,8 @@ export function InstitutionalHomePage() {
         </section>
 
         <LabSnapshotRow {...homeLabSnapshot} />
+
+        <RecentChangesStrip changes={homeRecentChanges} compact />
 
         <section className={styles.methodSection}>
           <InstitutionalSectionLead
