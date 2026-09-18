@@ -1,0 +1,1113 @@
+.asmInstrument {
+  width: min(100%, 840px);
+  display: grid;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid rgba(105, 219, 186, .34);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), transparent 16%),
+    #0d1718;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.025),
+    0 22px 56px rgba(0,0,0,.38);
+}
+
+.asmInstrumentTopline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 4px 4px 2px;
+}
+
+.asmInstrumentTopline > div {
+  display: grid;
+  gap: 5px;
+}
+
+.asmInstrumentTopline span,
+.asmMethodLead > p,
+.asmCorrespondenceLead > p,
+.asmAuthorityLead p,
+.asmMemoryLead > p,
+.asmValidationLead p,
+.asmClose > div:first-child > span {
+  color: #84e3c6;
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.asmInstrumentTopline strong {
+  color: #deece7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .84rem;
+  font-weight: 500;
+}
+
+.asmInstrumentLamp {
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgba(0,0,0,.7);
+  border-radius: 50%;
+  background: #5dd3ae;
+  box-shadow: 0 0 15px rgba(93,211,174,.62);
+}
+
+.asmProgress {
+  height: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(105,219,186,.18);
+  background: #162324;
+}
+
+.asmProgress i {
+  height: 100%;
+  display: block;
+  background: linear-gradient(90deg, #4d9c87, #78e0bf);
+  transition: width 160ms ease;
+}
+
+.asmPhaseGroups {
+  display: grid;
+  gap: 6px;
+}
+
+.asmPhaseGroup {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.asmPhaseGroup:last-child {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.asmPhaseGroup button {
+  min-height: 54px;
+  display: grid;
+  gap: 6px;
+  padding: 9px;
+  border: 1px solid rgba(105,219,186,.17);
+  background: #132122;
+  color: #94a8a3;
+  text-align: left;
+  cursor: pointer;
+}
+
+.asmPhaseGroup button > span {
+  color: #58756d;
+  font: 800 .42rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.asmPhaseGroup button strong {
+  font-size: .61rem;
+  line-height: 1;
+}
+
+.asmPhaseGroup button[data-complete="true"] {
+  background: #152928;
+  color: #a9c8be;
+}
+
+.asmPhaseGroup button[aria-pressed="true"] {
+  border-color: #74ddbd;
+  background: #5dd3ae;
+  color: #0a1615;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+.asmPhaseGroup button[aria-pressed="true"] > span {
+  color: #1c5143;
+}
+
+.asmStateWindow {
+  overflow: hidden;
+  border: 1px solid rgba(105,219,186,.24);
+  background:
+    linear-gradient(180deg, rgba(93,211,174,.045), transparent 32%),
+    #111d1f;
+}
+
+.asmStateHeader {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(105,219,186,.15);
+}
+
+.asmStateHeader span {
+  color: #86d8c0;
+  font: 800 .46rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.asmStateHeader strong {
+  color: #98aaa5;
+  font-size: .56rem;
+}
+
+.asmStateBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(180px, .65fr);
+  gap: 14px;
+  padding: 20px;
+}
+
+.asmStateBody small {
+  color: #6f8c83;
+  font: 800 .44rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.asmStateBody blockquote {
+  margin: 10px 0 0;
+  color: #f0f7f4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.7rem);
+  line-height: 1.15;
+}
+
+.asmArtifactReadout {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px;
+  border: 1px solid rgba(105,219,186,.18);
+  background: rgba(255,255,255,.025);
+}
+
+.asmArtifactReadout strong {
+  margin-top: 10px;
+  color: #a6ead6;
+  font: 700 .68rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow-wrap: anywhere;
+}
+
+.asmTransitionRail {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 12px 14px 14px;
+  border-top: 1px solid rgba(105,219,186,.13);
+}
+
+.asmTransitionRail > div {
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  padding: 7px;
+  border: 1px solid rgba(105,219,186,.13);
+  color: #849992;
+  text-align: center;
+}
+
+.asmTransitionRail > div[data-active="true"] {
+  border-color: rgba(105,219,186,.5);
+  background: rgba(93,211,174,.08);
+  color: #d9f3eb;
+}
+
+.asmTransitionRail span {
+  color: #648077;
+  font: 800 .4rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+}
+
+.asmTransitionRail strong {
+  font-size: .55rem;
+}
+
+.asmTransitionRail > i {
+  color: #65c2a8;
+  font-style: normal;
+}
+
+.asmInstrumentRule {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 12px;
+  border-left: 4px solid #e09b5e;
+  background: rgba(224,155,94,.06);
+}
+
+.asmInstrumentRule span {
+  color: #d99a61;
+  font: 800 .44rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.asmInstrumentRule strong {
+  color: #c9d6d2;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .72rem;
+  font-weight: 500;
+}
+
+.asmMethodSection,
+.asmCorrespondenceSection,
+.asmAuthoritySection,
+.asmMemorySection,
+.asmValidationSection {
+  scroll-margin-top: 62px;
+}
+
+.asmMethodSection {
+  padding: clamp(58px, 7vw, 108px) clamp(28px, 7vw, 112px);
+  background:
+    radial-gradient(circle at 85% 12%, rgba(93,211,174,.10), transparent 26%),
+    #eef3ef;
+}
+
+.asmMethodLead,
+.asmCorrespondenceLead,
+.asmMemoryLead {
+  display: grid;
+  grid-template-columns: minmax(180px, .28fr) minmax(0, 1fr) minmax(280px, .62fr);
+  gap: 30px;
+  align-items: end;
+}
+
+.asmMethodLead h2,
+.asmCorrespondenceLead h2,
+.asmAuthorityLead h2,
+.asmMemoryLead h2,
+.asmValidationLead h2,
+.asmClose h2 {
+  margin: 0;
+  color: #11201c;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.55rem, 4.7vw, 5.9rem);
+  font-weight: 500;
+  letter-spacing: -.055em;
+  line-height: .9;
+}
+
+.asmMethodLead > span,
+.asmCorrespondenceLead > span,
+.asmMemoryLead > span {
+  color: #596b65;
+  font-size: .82rem;
+  line-height: 1.62;
+}
+
+.asmCanonicalCompression {
+  max-width: 1180px;
+  margin: 48px 0 0;
+  padding: 25px 0 25px 28px;
+  border-left: 7px solid #4ca88d;
+  color: #294b41;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 3vw, 3.3rem);
+  line-height: 1.05;
+}
+
+.asmContributionGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 36px;
+}
+
+.asmContributionGrid article {
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border-top: 5px solid #4ca88d;
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 3px 0 rgba(31,82,66,.12);
+}
+
+.asmContributionGrid article:nth-child(2) { border-top-color: #607fc5; }
+.asmContributionGrid article:nth-child(3) { border-top-color: #cf8c4e; }
+.asmContributionGrid article:nth-child(4) { border-top-color: #8e71c2; }
+
+.asmContributionGrid span {
+  color: #3d806e;
+  font: 800 .48rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+}
+
+.asmContributionGrid strong {
+  margin-top: 30px;
+  color: #14231f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  line-height: 1.08;
+}
+
+.asmContributionGrid p {
+  margin: auto 0 0;
+  padding-top: 20px;
+  color: #62716c;
+  font-size: .7rem;
+  line-height: 1.5;
+}
+
+.asmKernelRail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 26px;
+  padding: 16px;
+  border-top: 1px solid #82958f;
+  border-bottom: 1px solid #82958f;
+  color: #315f52;
+  font: 800 .55rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+}
+
+.asmKernelRail i {
+  color: #c17d40;
+  font-style: normal;
+}
+
+.asmCorrespondenceSection {
+  padding: clamp(58px, 7vw, 108px) clamp(28px, 7vw, 112px);
+  background: #0e181a;
+  color: #fff;
+}
+
+.asmCorrespondenceLead h2 {
+  color: #f4f8f6;
+}
+
+.asmCorrespondenceLead > span {
+  color: #a7b7b2;
+}
+
+.asmTwinSpaces {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 120px minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+  margin-top: 38px;
+}
+
+.asmTwinSpaces article {
+  min-height: 320px;
+  padding: 20px;
+  border: 1px solid rgba(105,219,186,.2);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 32%),
+    #142326;
+}
+
+.asmTwinSpaces article[data-space="observed"] {
+  border-color: rgba(224,155,94,.28);
+}
+
+.asmSpaceTopline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.asmSpaceTopline span {
+  color: #7ddabf;
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+[data-space="observed"] .asmSpaceTopline span {
+  color: #e2a66e;
+}
+
+.asmSpaceTopline strong {
+  color: #758b84;
+  font-size: .5rem;
+}
+
+.asmStateMap {
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 64px;
+}
+
+.asmStateMap > div {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(105,219,186,.28);
+  border-radius: 50%;
+  background: rgba(93,211,174,.08);
+  color: #c9eee2;
+  font: 800 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.asmStateMap > div[data-state="expected"] {
+  border-color: #72dcb9;
+  box-shadow: 0 0 0 5px rgba(93,211,174,.08);
+}
+
+.asmStateMap > div[data-state="defect"] {
+  border-color: #e29a5d;
+  background: rgba(224,155,94,.1);
+  color: #f0c39a;
+  box-shadow: 0 0 0 5px rgba(224,155,94,.08);
+}
+
+.asmStateMap i {
+  color: #6b887f;
+  font-style: normal;
+}
+
+.asmTwinSpaces article > p {
+  max-width: 570px;
+  margin: 62px auto 0;
+  color: #98aaa5;
+  font-size: .72rem;
+  line-height: 1.52;
+  text-align: center;
+}
+
+.asmCompareMachine {
+  display: grid;
+  grid-template-rows: auto 1fr auto 1fr auto;
+  place-items: center;
+  gap: 10px;
+  padding: 20px 0;
+  color: #88a59d;
+  font: 800 .43rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+}
+
+.asmCompareMachine i {
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(#5fc9aa, #d89356);
+}
+
+.asmCompareMachine strong {
+  padding: 8px 7px;
+  border: 1px solid rgba(105,219,186,.32);
+  background: rgba(93,211,174,.06);
+  color: #bcdfd5;
+  font-size: .52rem;
+}
+
+.asmDefectWorkbench {
+  display: grid;
+  grid-template-columns: minmax(260px, .6fr) minmax(0, 1.4fr);
+  gap: 18px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid rgba(224,155,94,.25);
+  border-top: 6px solid #d98e50;
+  background:
+    repeating-linear-gradient(135deg, rgba(224,155,94,.025) 0 8px, transparent 8px 16px),
+    #131e20;
+}
+
+.asmDefectWorkbench > div:first-child > span {
+  color: #e0a268;
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.asmDefectWorkbench h3 {
+  margin: 24px 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 2.4vw, 2.8rem);
+  font-weight: 500;
+  line-height: .98;
+}
+
+.asmDefectWorkbench p {
+  color: #9eaaa6;
+  font-size: .75rem;
+  line-height: 1.55;
+}
+
+.asmDefectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 6px;
+  align-content: center;
+}
+
+.asmDefectGrid span {
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 9px;
+  border: 1px solid rgba(224,155,94,.15);
+  background: rgba(255,255,255,.018);
+  color: #b8c0bd;
+  font-size: .62rem;
+}
+
+.asmDefectGrid i {
+  color: #d99154;
+  font: 800 .44rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-style: normal;
+}
+
+.asmAuthoritySection {
+  padding: clamp(58px, 7vw, 108px) clamp(28px, 7vw, 112px);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.54), transparent 18%),
+    #e9ece5;
+}
+
+.asmAuthorityLead,
+.asmValidationLead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(300px, .72fr);
+  gap: 42px;
+  align-items: end;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #86918b;
+}
+
+.asmAuthorityLead blockquote,
+.asmValidationLead blockquote {
+  margin: 0;
+  padding-left: 22px;
+  border-left: 6px solid #d28a49;
+  color: #6b4f37;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  line-height: 1.42;
+}
+
+.asmRoleStack {
+  display: grid;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.asmRoleStack article {
+  display: grid;
+  grid-template-columns: 54px minmax(200px, .4fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  min-height: 74px;
+  padding: 13px 16px;
+  border: 1px solid #8c9691;
+  background: rgba(255,255,255,.7);
+}
+
+.asmRoleStack article > span {
+  color: #4d8977;
+  font: 800 .48rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.asmRoleStack strong {
+  color: #16241f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+}
+
+.asmRoleStack p {
+  margin: 0;
+  color: #67736e;
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.asmPromotionGate {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1.25fr);
+  gap: 7px;
+  align-items: stretch;
+  margin-top: 28px;
+  padding: 14px;
+  border: 1px solid #53645e;
+  background: #13231f;
+}
+
+.asmPromotionGate > div {
+  min-height: 94px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 11px;
+  border: 1px solid rgba(105,219,186,.16);
+  background: rgba(255,255,255,.025);
+}
+
+.asmPromotionGate > div[data-final="true"] {
+  border-color: rgba(224,155,94,.42);
+  background: rgba(224,155,94,.07);
+}
+
+.asmPromotionGate span {
+  color: #73b9a4;
+  font: 800 .42rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+}
+
+.asmPromotionGate [data-final="true"] span {
+  color: #dea166;
+}
+
+.asmPromotionGate strong {
+  margin-top: 13px;
+  color: #e0ebe7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .76rem;
+  font-weight: 500;
+}
+
+.asmPromotionGate > i {
+  display: grid;
+  place-items: center;
+  color: #67b59f;
+  font-style: normal;
+}
+
+.asmAuthorityNote {
+  max-width: 1000px;
+  margin: 18px 0 0 auto;
+  color: #66716d;
+  font-size: .75rem;
+  line-height: 1.55;
+}
+
+.asmMemorySection {
+  padding: clamp(58px, 7vw, 108px) clamp(28px, 7vw, 112px);
+  background: #f4f0e7;
+}
+
+.asmArtifactLedger {
+  display: grid;
+  gap: 1px;
+  margin-top: 38px;
+  border: 1px solid #7d857e;
+  background: #7d857e;
+}
+
+.asmArtifactLedger article {
+  min-height: 86px;
+  display: grid;
+  grid-template-columns: 88px minmax(180px, .35fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  padding: 13px 18px;
+  background: #fffaf0;
+}
+
+.asmArtifactLedger article > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.asmArtifactLedger article > div span {
+  color: #3c826f;
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.asmArtifactLedger article > div i {
+  width: 32px;
+  height: 1px;
+  background: #8ea39b;
+}
+
+.asmArtifactLedger strong {
+  color: #192620;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+}
+
+.asmArtifactLedger p {
+  margin: 0;
+  color: #677169;
+  font-size: .71rem;
+  line-height: 1.5;
+}
+
+.asmSelfHost {
+  display: grid;
+  grid-template-columns: 110px minmax(0,1fr) minmax(220px,.38fr);
+  gap: 24px;
+  align-items: center;
+  margin-top: 28px;
+  padding: 24px;
+  border: 1px solid #4f615a;
+  border-top: 6px solid #4ca88d;
+  background: #15251f;
+  color: #fff;
+}
+
+.asmSelfHostMark {
+  display: grid;
+  place-items: center;
+  color: #72dbbb;
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+.asmSelfHost > div:nth-child(2) > span,
+.asmSelfHostRule span {
+  color: #80ceb6;
+  font: 800 .46rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.asmSelfHost h3 {
+  margin: 15px 0 9px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 2.3vw, 2.7rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.asmSelfHost p {
+  max-width: 850px;
+  margin: 0;
+  color: #afc0ba;
+  font-size: .74rem;
+  line-height: 1.55;
+}
+
+.asmSelfHostRule {
+  padding: 18px;
+  border: 1px solid rgba(224,155,94,.28);
+  background: rgba(224,155,94,.055);
+}
+
+.asmSelfHostRule span {
+  color: #dea166;
+}
+
+.asmSelfHostRule strong {
+  display: block;
+  margin-top: 13px;
+  color: #f2d4b8;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.asmValidationSection {
+  padding: clamp(58px, 7vw, 108px) clamp(28px, 7vw, 112px) 0;
+  background: #0d1718;
+  color: #fff;
+}
+
+.asmValidationLead h2 {
+  color: #f3f8f6;
+}
+
+.asmValidationLead {
+  border-bottom-color: rgba(105,219,186,.22);
+}
+
+.asmValidationLead blockquote {
+  border-left-color: #5dd3ae;
+  color: #bde7db;
+}
+
+.asmValidationLadder {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0,1fr));
+  gap: 5px;
+  margin-top: 28px;
+}
+
+.asmValidationLadder article {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-top: 5px solid #4da88d;
+  background:
+    linear-gradient(180deg, rgba(93,211,174,.035), transparent 28%),
+    #162224;
+}
+
+.asmValidationLadder article:nth-child(2),
+.asmValidationLadder article:nth-child(3) {
+  border-top-color: #6289ca;
+}
+
+.asmValidationLadder article:nth-child(4),
+.asmValidationLadder article:nth-child(5) {
+  border-top-color: #b38a55;
+}
+
+.asmValidationLadder article:nth-child(6),
+.asmValidationLadder article:nth-child(7) {
+  border-top-color: #8c73c5;
+}
+
+.asmValidationLadder span {
+  color: #82d7bd;
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.asmValidationLadder strong {
+  margin-top: 30px;
+  color: #ecf5f2;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.asmValidationLadder p {
+  margin: auto 0 0;
+  padding-top: 18px;
+  color: #98aaa5;
+  font-size: .64rem;
+  line-height: 1.48;
+}
+
+.asmValidationBottom {
+  display: grid;
+  grid-template-columns: minmax(0,1.25fr) minmax(300px,.75fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.asmProductState,
+.asmClaimFirewall {
+  padding: 22px;
+  border: 1px solid rgba(105,219,186,.2);
+  background: #152224;
+}
+
+.asmProductState > span,
+.asmClaimFirewall > span {
+  color: #7bd3b8;
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.asmProductState > strong,
+.asmClaimFirewall > strong {
+  display: block;
+  margin-top: 23px;
+  color: #eff7f4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.asmProductState > p {
+  max-width: 760px;
+  color: #a4b6b0;
+  font-size: .76rem;
+  line-height: 1.55;
+}
+
+.asmProductState > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.asmProductState small {
+  padding: 7px 9px;
+  border: 1px solid rgba(105,219,186,.17);
+  background: rgba(255,255,255,.025);
+  color: #a9c2ba;
+  font-size: .6rem;
+}
+
+.asmClaimFirewall {
+  border-top: 6px solid #d99154;
+  background:
+    repeating-linear-gradient(135deg, rgba(217,145,84,.035) 0 8px, transparent 8px 16px),
+    #1b211f;
+}
+
+.asmClaimFirewall > span {
+  color: #e0a169;
+}
+
+.asmClaimFirewall p {
+  margin: 0;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(224,155,94,.13);
+  color: #b6aaa0;
+  font-size: .7rem;
+  line-height: 1.46;
+}
+
+.asmClaimFirewall p:first-of-type {
+  margin-top: 13px;
+}
+
+.asmClaimFirewall p:last-child {
+  border-bottom: 0;
+}
+
+.asmClose {
+  display: grid;
+  grid-template-columns: minmax(0,1.3fr) minmax(300px,.7fr);
+  gap: 40px;
+  align-items: end;
+  margin-top: 34px;
+  padding: clamp(58px, 7vw, 100px) 0;
+  border-top: 1px solid rgba(105,219,186,.2);
+}
+
+.asmClose h2 {
+  margin-top: 14px;
+  color: #fff;
+}
+
+.asmClose > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.asmClose a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #60c4a6;
+  color: #bceadb;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .83rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .asmPhaseGroup button:hover:not([aria-pressed="true"]) {
+    border-color: rgba(105,219,186,.42);
+    color: #d4e4df;
+  }
+
+  .asmClose a:hover span {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asmProgress i {
+    transition: none;
+  }
+}
+
+@media (max-width: 1180px) {
+  .asmMethodLead,
+  .asmCorrespondenceLead,
+  .asmMemoryLead,
+  .asmAuthorityLead,
+  .asmValidationLead,
+  .asmClose {
+    grid-template-columns: 1fr;
+  }
+
+  .asmContributionGrid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .asmTwinSpaces {
+    grid-template-columns: 1fr;
+  }
+
+  .asmCompareMachine {
+    min-height: 80px;
+    grid-template-columns: auto 1fr auto 1fr auto;
+    grid-template-rows: auto;
+  }
+
+  .asmCompareMachine i {
+    width: 100%;
+    height: 1px;
+  }
+
+  .asmPromotionGate {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+
+  .asmPromotionGate > i {
+    display: none;
+  }
+
+  .asmValidationLadder {
+    grid-template-columns: repeat(4, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .asmInstrument {
+    padding: 9px;
+  }
+
+  .asmPhaseGroup,
+  .asmPhaseGroup:last-child {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .asmStateBody,
+  .asmDefectWorkbench,
+  .asmSelfHost,
+  .asmValidationBottom {
+    grid-template-columns: 1fr;
+  }
+
+  .asmTransitionRail {
+    grid-template-columns: 1fr;
+  }
+
+  .asmTransitionRail > i {
+    transform: rotate(90deg);
+  }
+
+  .asmMethodSection,
+  .asmCorrespondenceSection,
+  .asmAuthoritySection,
+  .asmMemorySection,
+  .asmValidationSection {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .asmContributionGrid,
+  .asmDefectGrid,
+  .asmPromotionGate,
+  .asmValidationLadder {
+    grid-template-columns: 1fr;
+  }
+
+  .asmKernelRail {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .asmKernelRail i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+
+  .asmRoleStack article,
+  .asmArtifactLedger article {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .asmSelfHostMark {
+    justify-content: start;
+  }
+
+  .asmClose {
+    padding-bottom: 68px;
+  }
+}
