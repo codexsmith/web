@@ -4,7 +4,6 @@ const registrySource = "Source: Lab Registry Catalog · Sep 16, 2026 · 57 regis
 
 export const homeLabSnapshot = {
   label: "Lab snapshot",
-  status: "Static",
   updated: "Sep 17, 2026",
   note:
     "Point-in-time observational measurements from the curated Library, Lab Registry Catalog, and Corpus Forge semantic index. Not live telemetry.",
@@ -22,43 +21,6 @@ export const homeLabSnapshot = {
       label: "",
       icon: "storage",
       detail: "25.06 GB in the curated Library snapshot generated 2026-09-13.",
-    },
-    {
-      id: "surfaces",
-      value: "57",
-      label: "surfaces",
-      icon: "surfaces",
-      detail: "57 registered control surfaces in the Lab Registry Catalog dated 2026-09-16.",
-      breakdown: {
-        title: "57 persistent institutional surfaces are registered.",
-        intro:
-          "Here, a surface is a persistent register, queue, index, graph, projection, or other state-bearing Lab control surface tracked by the Registry Registrar—not a website page. The registrar records what the surface is and where its authority lives.",
-        items: [
-          {
-            value: "45",
-            label: "Active",
-            detail: "Catalog status: active.",
-          },
-          {
-            value: "10",
-            label: "Seeded",
-            detail: "Admitted to the catalog but not marked active.",
-          },
-          {
-            value: "1",
-            label: "Superseded",
-            detail: "Retained for lineage after a newer surface replaced its role.",
-          },
-          {
-            value: "1",
-            label: "Unresolved",
-            detail: "Known to the registrar, but its canonical locator is unresolved in this snapshot.",
-          },
-        ],
-        note:
-          "Registry membership is inventory and routing metadata. It does not make a claim true, a product ready, or a system operational.",
-        source: registrySource + " Derived from registries.length.",
-      },
     },
     {
       id: "active",
