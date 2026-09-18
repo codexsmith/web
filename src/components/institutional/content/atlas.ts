@@ -8,6 +8,7 @@ import { youtubeKnowledgeExplorerProduct } from "./youtubeKnowledgeExplorer";
 import { agenticScientificMethodProduct } from "./agenticScientificMethod";
 import { priorExecution } from "./evidence";
 import { experimentRecords } from "./experiments";
+import { machineryRecords } from "./machinery";
 
 export type AtlasNode = {
   atlasId: string;
@@ -160,6 +161,31 @@ const experimentNodes: AtlasNode[] = experimentRecords.map((experiment) => ({
   ],
 }));
 
+const apparatusNodes: AtlasNode[] = machineryRecords.map((machine) => ({
+  atlasId: `machinery-${machine.machineId.toLowerCase()}`,
+  kind: "apparatus",
+  title: machine.name,
+  href: `/v3/apparatus#machinery-${machine.machineId.toLowerCase()}`,
+  identifier: machine.machineId,
+  identifierLabel: "MACHINE",
+  status: machine.maturity,
+  statusLabel: "MATURITY",
+  secondary: machine.integrationLevel,
+  secondaryLabel: "INTEGRATION",
+  summary: `Function roles: ${machine.functionRoles.join(", ")}.`,
+  searchTerms: [
+    machine.canonicalHome,
+    machine.manifestStatus,
+    machine.sideEffectClass,
+    machine.authorityCeiling,
+    machine.nextIntegrationStep,
+    machine.projectionPolicy ?? "",
+    ...machine.functionRoles,
+    ...machine.durableProjections,
+    ...machine.entrypoints.flatMap((entrypoint) => [entrypoint.kind, entrypoint.locator]),
+  ],
+}));
+
 export const atlasNodes = [
   ...researchNodes,
   ...productNodes,
@@ -167,6 +193,7 @@ export const atlasNodes = [
   ...publicationNodes,
   ...evidenceNodes,
   ...experimentNodes,
+  ...apparatusNodes,
 ] as const satisfies readonly AtlasNode[];
 
 const projectProductEdges: AtlasEdge[] = [
@@ -233,6 +260,7 @@ export const atlasEdges = [
 export const atlasKindOrder = [
   "research",
   "experiment",
+  "apparatus",
   "product",
   "project",
   "publication",
@@ -242,6 +270,7 @@ export const atlasKindOrder = [
 export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
   research: "Research programs",
   experiment: "Experiment records",
+  apparatus: "Machinery components",
   product: "Products",
   project: "Project cases",
   publication: "Publication records",

@@ -100,6 +100,238 @@
   font-size: .76rem;
 }
 
+
+.machineryRegistry {
+  padding: 42px clamp(30px, 6vw, 96px) 52px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.74), transparent 13%),
+    linear-gradient(180deg, #edf1f4, #dce5ed);
+}
+
+.machinerySnapshot {
+  display: grid;
+  grid-template-columns: minmax(250px, .8fr) minmax(220px, .55fr) minmax(0, 1.2fr);
+  gap: 12px;
+  align-items: stretch;
+  margin-top: 22px;
+  padding: 12px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 6px solid var(--osha-blue);
+  background: rgba(255,255,255,.82);
+}
+
+.machinerySnapshot > div:first-child {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 10px;
+}
+
+.machinerySnapshot > div:first-child > span,
+.machinerySnapshot dt,
+.machineryCard span,
+.machineryHome > span,
+.machineryIoGrid > div > span,
+.machineryAuthorityGrid > div > span,
+.machineryProjectionPolicy > span {
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.machinerySnapshot > div:first-child strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.machinerySnapshot > div:first-child p,
+.machineryAuthority {
+  margin: 0;
+  color: #52627b;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.machinerySnapshot dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 7px;
+  margin: 0;
+}
+
+.machinerySnapshot dl div {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  border: 1px solid rgba(7,26,61,.2);
+  background: #f7f9fb;
+}
+
+.machinerySnapshot dd {
+  margin: 0;
+  color: var(--royal-blue-deep);
+  font: 750 .63rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.machineryAuthority {
+  padding: 10px;
+  border: 1px solid rgba(231,123,36,.26);
+  border-left: 5px solid var(--osha-orange);
+  background: #fff9f3;
+}
+
+.machinerySnapshot > a {
+  grid-column: 1 / -1;
+  width: fit-content;
+  display: inline-flex;
+  gap: 8px;
+  padding: 4px 0 3px;
+  border-bottom: 1px solid var(--old-gold-dark);
+  color: var(--royal-blue-deep);
+  font-size: .66rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.machineryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.machineryCard {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 6px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96) 0 2px, transparent 2px),
+    linear-gradient(180deg, #fbfdff, #e8eff8);
+  box-shadow: 0 3px 0 rgba(7,26,61,.18), 0 10px 22px rgba(7,26,61,.1);
+  scroll-margin-top: 76px;
+}
+
+.machineryCard:target {
+  outline: 2px solid var(--old-gold);
+  outline-offset: 4px;
+}
+
+.machineryHeading {
+  display: grid;
+  gap: 10px;
+}
+
+.machineryHeading h3 {
+  margin: 0;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.45rem, 2vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.03;
+}
+
+.machineryRoles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.machineryRoles span {
+  padding: 5px 7px;
+  border: 1px solid rgba(21,58,120,.22);
+  background: #e7eef7;
+  color: var(--royal-blue);
+}
+
+.machineryMeta,
+.machineryIoGrid,
+.machineryAuthorityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.machineryMeta > div,
+.machineryHome,
+.machineryIoGrid > div,
+.machineryAuthorityGrid > div,
+.machineryProjectionPolicy {
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid rgba(7,26,61,.22);
+  background: rgba(255,255,255,.66);
+}
+
+.machineryMeta strong {
+  display: block;
+  margin-top: 6px;
+  color: #435470;
+  font: 750 .65rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow-wrap: anywhere;
+}
+
+.machineryHome code,
+.machineryIoGrid code {
+  display: block;
+  margin-top: 7px;
+  color: #435470;
+  font: 600 .58rem/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow-wrap: anywhere;
+}
+
+.machineryIoGrid ul {
+  display: grid;
+  gap: 7px;
+  margin: 9px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.machineryIoGrid li {
+  color: #52627b;
+  font-size: .68rem;
+  line-height: 1.4;
+}
+
+.machineryIoGrid li strong {
+  display: inline-flex;
+  margin-right: 7px;
+  color: var(--royal-blue-deep);
+  font: 800 .53rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-transform: uppercase;
+}
+
+.machineryIoGrid p,
+.machineryAuthorityGrid p,
+.machineryProjectionPolicy p {
+  margin: 8px 0 0;
+  color: #52627b;
+  font-size: .7rem;
+  line-height: 1.48;
+}
+
+.machineryAuthorityGrid > div:first-child {
+  border-left: 5px solid var(--osha-orange);
+  background: #fff9f3;
+}
+
+.machineryAuthorityGrid > div:last-child {
+  border-left: 5px solid var(--osha-blue);
+}
+
+.machineryProjectionPolicy {
+  border-left: 5px solid var(--osha-green);
+  background: #f4faf6;
+}
+
 .instrumentBench {
   padding: 40px clamp(30px, 6vw, 96px) 50px;
   border-bottom: 1px solid var(--bfux-panel-edge);
@@ -593,6 +825,7 @@
     grid-template-columns: 1fr;
   }
 
+  .machineryGrid,
   .instrumentGrid,
   .instrumentTrustGrid {
     grid-template-columns: 1fr;
@@ -629,6 +862,7 @@
 
 @media (max-width: 680px) {
   .apparatusHero,
+  .machineryRegistry,
   .instrumentBench,
   .apparatusContext {
     padding-left: 22px;
@@ -653,6 +887,10 @@
   .apparatusQuestions,
   .designQuestionGrid,
   .authorityFirewall,
+  .machinerySnapshot,
+  .machineryMeta,
+  .machineryIoGrid,
+  .machineryAuthorityGrid,
   .instrumentDetailGrid,
   .apparatusPath,
   .apparatusSurround,
