@@ -562,6 +562,10 @@
 }
 
 @media (max-width: 980px) {
+  .productsHero {
+    grid-template-columns: 1fr;
+  }
+
   .primaryProductGrid {
     grid-template-columns: 1fr;
   }
