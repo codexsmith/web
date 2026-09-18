@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./DevProductSwitch.module.css";
 
 type DevProductSwitchProps = {
@@ -12,22 +13,22 @@ export function DevProductSwitch({ active, floating = false }: DevProductSwitchP
       aria-label="Website version"
     >
       <span className={styles.label}>View</span>
-      <a
+      <Link
         className={active === "dev" ? styles.active : undefined}
         href="/v2"
         aria-current={active === "dev" ? "page" : undefined}
       >
         <span>Dev</span>
         <small>v2</small>
-      </a>
-      <a
+      </Link>
+      <Link
         className={active === "product" ? styles.active : undefined}
         href="/v3"
         aria-current={active === "product" ? "page" : undefined}
       >
         <span>Product</span>
         <small>v3</small>
-      </a>
+      </Link>
     </nav>
   );
 }
