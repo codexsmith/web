@@ -134,7 +134,7 @@ expect(openLabCss.includes("--reflow-focus-span: 6"), "five-card Open Lab focus-
 expect(openLabCss.includes(".openLabContextAgency { --reflow-span: 5; }"), "Open Lab Context REST state must retain authored magazine spans");
 expect(openLabCss.includes(".openLabContextCapability { --reflow-span: 6; }"), "Open Lab capability transfer must participate in the authored REST composition");
 expect(about.includes("<AboutReflowGroups />"), "About page must compose its three doctrine chapters as Reflow groups");
-expect((aboutGroups.match(/<ReflowField/g) || []).length === 3, "About must expose one independent Reflow field per narrative chapter");
+expect((aboutGroups.match(/<ReflowField(?:\s|>)/g) || []).length === 3, "About must expose one independent Reflow field per narrative chapter");
 expect((aboutGroups.match(/layoutMode="focus-stage"/g) || []).length === 3, "All About chapter fields must use focus-stage reflow");
 expect(aboutGroups.includes("itemOrder={representationOrder}"), "Representation + Method must declare stable ordering");
 expect(aboutGroups.includes("itemOrder={agencyOrder}"), "Agency + Stewardship must declare stable ordering");
