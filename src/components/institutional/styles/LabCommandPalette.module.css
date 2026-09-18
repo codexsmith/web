@@ -187,6 +187,7 @@
 
 .result[data-kind="research"] { --command-accent: #5b63ad; }
 .result[data-kind="experiment"] { --command-accent: #916b3f; }
+.result[data-kind="claim"] { --command-accent: #8c4f62; }
 .result[data-kind="apparatus"] { --command-accent: #356f9f; }
 .result[data-kind="product"] { --command-accent: #b26c2f; }
 .result[data-kind="project"] { --command-accent: #4f8e97; }

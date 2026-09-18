@@ -128,6 +128,10 @@ const routeContracts = [
     "experiments"
   ],
   [
+    "InstitutionalClaimsPage.tsx",
+    "claims"
+  ],
+  [
     "InstitutionalNowPage.tsx",
     "now"
   ],
@@ -201,6 +205,7 @@ expect(!topLevelRouteRegistry.includes('/v3/collaboration'), "Collaboration must
 expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/experiments'), "Experiments must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/claims'), "Claims must remain a contextual route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/now'), "Now / Roadmap must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/contact'), "Contact must remain outside top-level header navigation");
 expect(!topLevelRouteRegistry.includes('/v3/atlas'), "Lab Atlas must remain a contextual route rather than top-level navigation");
@@ -209,6 +214,7 @@ expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
 expect(routeRegistry.includes('{ label: "Lab Atlas", href: "/v3/atlas" }'), "footer route collection must include Lab Atlas");
 expect(routeRegistry.includes('{ label: "Experiments", href: "/v3/experiments" }'), "footer route collection must include Experiments");
+expect(routeRegistry.includes('{ label: "Claims", href: "/v3/claims" }'), "footer route collection must include Claims");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
 expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboration" }'), "footer route collection must include Collaboration");
 expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
@@ -218,16 +224,17 @@ expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "foo
 
 const childRouteContracts = [
   ["about", ["funding", "appliedWork", "evidence", "now", "collaboration", "founder"]],
-  ["research", ["atlas", "apparatus", "experiments", "funding", "now", "collaboration"]],
+  ["research", ["atlas", "apparatus", "experiments", "claims", "funding", "now", "collaboration"]],
   ["products", ["appliedWork", "evidence", "collaboration"]],
   ["projects", ["appliedWork", "evidence", "now", "collaboration"]],
   ["funding", ["appliedWork", "evidence", "now"]],
   ["collaboration", ["appliedWork"]],
   ["appliedWork", ["evidence"]],
   ["founder", ["evidence"]],
-  ["evidence", ["now"]],
+  ["evidence", ["claims", "now"]],
   ["apparatus", ["experiments"]],
-  ["experiments", ["atlas", "apparatus", "evidence"]],
+  ["experiments", ["atlas", "apparatus", "claims", "evidence"]],
+  ["claims", ["atlas", "evidence", "experiments"]],
   ["openLab", ["apparatus", "funding", "now", "collaboration"]],
 ];
 
@@ -406,6 +413,20 @@ expect(machineryContent.includes('"BFL-MACH-UX-RECIPE-ADMISSION-PILOT"'), "Machi
 expect(machineryContent.includes('"sourceRevision": "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Machinery projection must pin the Lab source revision");
 expect(machineryContent.includes("does not supersede component-local contracts"), "Machinery projection must preserve the registry authority ceiling");
 
+const claimsPage = read(`${root}/InstitutionalClaimsPage.tsx`);
+const claimsContent = read(`${root}/content/claims.ts`);
+expect(claimsPage.includes("./content/claims"), "Claims page must own a route-local content model");
+expect(claimsPage.includes("What is the Lab actually asserting?"), "Claims hero must lead with the claim-control question");
+expect(claimsPage.includes("childLinks={institutionalChildRoutes.claims}"), "Claims hero must expose Atlas, Evidence, and Experiments as contextual child pages");
+expect(claimsPage.includes('kind="claim"'), "Claim records must identify as Claim objects");
+expect(claimsPage.includes("identifier={claim.id}"), "Claim records must preserve canonical IM-C* identities");
+expect(claimsPage.includes("status={claim.status}"), "Claim identity must preserve source status");
+expect(claimsContent.includes('"IM-C001"'), "Claims projection must include the first Information Mechanics claim");
+expect(claimsContent.includes('"IM-C008"'), "Claims projection must include the full eight-claim Information Mechanics cohort");
+expect(claimsContent.includes('"sourceRevision": "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Claims projection must pin the Lab source revision");
+expect(claimsContent.includes("no claim truth, theorem proof, novelty, publication promotion, or cross-domain authority"), "Claims projection must preserve the registrar authority ceiling");
+expect(claimsContent.includes('"atlasId": "research-im"'), "Claims projection must bind only to the declared Information Mechanics owner program");
+
 const experimentsPage = read(`${root}/InstitutionalExperimentsPage.tsx`);
 const experimentsContent = read(`${root}/content/experiments.ts`);
 expect(experimentsPage.includes("./content/experiments"), "Experiments page must own a route-local content model");
@@ -547,6 +568,13 @@ expect(atlasContent.includes("priorExecution"), "Lab Atlas must admit the source
 expect(atlasContent.includes('kind: "evidence"'), "Lab Atlas must expose Evidence as an object family");
 expect(atlasContent.includes('kind: "experiment"'), "Lab Atlas must expose Experiment as an object family");
 expect(atlasContent.includes('kind: "apparatus"'), "Lab Atlas must expose Apparatus as an object family");
+expect(atlasContent.includes('kind: "claim"'), "Lab Atlas must expose Claim as an object family");
+expect(atlasContent.includes("claimRecords.map"), "Lab Atlas must admit the source-bound Information Mechanics claim cohort");
+expect(atlasContent.includes("claimOwnerEdges"), "Lab Atlas must expose only the source-backed claim owner-program relationship in the initial claim cohort");
+expect(atlasContent.includes('relation: "OWNER PROGRAM"'), "Claim edges must preserve owner-program semantics rather than imply validation");
+expect(atlasContent.includes('/v3/claims#claim-'), "Claim Atlas nodes must route to exact native claim records");
+expect(atlasContent.includes("claim.requiresValidation"), "Claim search must preserve validation posture");
+expect(atlasContent.includes("claim.evidence"), "Claim search must preserve source evidence annotations");
 expect(atlasContent.includes("machineryRecords.map"), "Lab Atlas must admit the source-bound machinery component cohort");
 expect(atlasContent.includes('/v3/apparatus#machinery-'), "Machinery Atlas nodes must route to exact native machinery records");
 expect(atlasContent.includes("machine.authorityCeiling"), "Machinery search must preserve authority ceilings");
@@ -559,7 +587,7 @@ expect(atlasContent.includes("experiment.firewall"), "Experiment search must pre
 expect(atlasContent.includes('/v3/evidence#evidence-'), "Evidence Atlas nodes must route back to their exact native surface");
 expect(atlasContent.includes("searchTerms: [record.evidence, record.boundary]"), "Evidence search must preserve both basis and claim ceiling");
 expect(!atlasContent.includes("identifier: record.surfaceKey"), "Atlas-local evidence routing keys must not become identifiers");
-expect(atlasPage.includes("Research · Experiments · Machinery · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Machinery, Experiment, and Evidence object families");
+expect(atlasPage.includes("Research · Experiments · Claims · Machinery · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Claim, Machinery, Experiment, and Evidence object families");
 expect(commandPaletteContent.includes("node.searchTerms"), "Global object search must admit bounded object-specific search terms without inferring edges");
 expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");
 

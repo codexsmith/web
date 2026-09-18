@@ -27,9 +27,9 @@ export function InstitutionalAtlasPage({
         title={<>Follow the objects, not the org chart.</>}
         lead={
           <>
-            A bounded public map of how research programs, experiments, machinery components,
-            products, project cases, publication records, and evidence records relate across
-            Boundary First Labs.
+            A bounded public map of how research programs, experiments, claims, machinery
+            components, products, project cases, publication records, and evidence records
+            relate across Boundary First Labs.
           </>
         }
         support={
@@ -50,12 +50,12 @@ export function InstitutionalAtlasPage({
       <section className={styles.atlasBoundary}>
         <div>
           <span>CURRENT PUBLIC BOUNDARY</span>
-          <strong>Research · Experiments · Machinery · Products · Projects · Publications · Evidence</strong>
+          <strong>Research · Experiments · Claims · Machinery · Products · Projects · Publications · Evidence</strong>
         </div>
         <p>
-          Source-bound Experiment and Lab Machinery registry snapshots are now admitted alongside
-          evidence. People and finer-grained source relationships can join as their public object
-          contracts become explicit. Mentioning the same project or institution does not
+          Source-bound Experiment, Claim, and Lab Machinery registry snapshots are now admitted
+          alongside evidence. Claim edges remain owner-local unless a source explicitly identifies
+          stronger evidence, experiment, publication, or derivation relationships. Mentioning the same project or institution does not
           create an edge; missing relationships remain missing rather than being guessed.
         </p>
       </section>

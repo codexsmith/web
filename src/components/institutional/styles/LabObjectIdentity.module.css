@@ -38,6 +38,10 @@
   --object-accent: #916b3f;
 }
 
+.identity[data-kind="claim"] {
+  --object-accent: #8c4f62;
+}
+
 .identity[data-kind="method"] {
   --object-accent: #536f78;
 }

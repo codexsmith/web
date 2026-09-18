@@ -37,6 +37,13 @@ const institutionalChildPages = {
     kind: "experiment",
     tone: "orange",
   },
+  claims: {
+    label: "Claims",
+    href: "/v3/claims",
+    relation: "CLAIMS",
+    kind: "claim",
+    tone: "gold",
+  },
   now: {
     label: "Now",
     href: "/v3/now",
@@ -87,6 +94,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.atlas,
     institutionalChildPages.apparatus,
     institutionalChildPages.experiments,
+    institutionalChildPages.claims,
     institutionalChildPages.funding,
     institutionalChildPages.now,
     institutionalChildPages.collaboration,
@@ -117,6 +125,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.evidence,
   ],
   evidence: [
+    institutionalChildPages.claims,
     institutionalChildPages.now,
   ],
   apparatus: [
@@ -125,7 +134,13 @@ export const institutionalChildRoutes = {
   experiments: [
     institutionalChildPages.atlas,
     institutionalChildPages.apparatus,
+    institutionalChildPages.claims,
     institutionalChildPages.evidence,
+  ],
+  claims: [
+    institutionalChildPages.atlas,
+    institutionalChildPages.evidence,
+    institutionalChildPages.experiments,
   ],
   openLab: [
     institutionalChildPages.apparatus,
@@ -151,6 +166,7 @@ export const institutionalFooterGroups = [
       { label: "Research", href: "/v3/research" },
       { label: "Lab Atlas", href: "/v3/atlas" },
       { label: "Experiments", href: "/v3/experiments" },
+      { label: "Claims", href: "/v3/claims" },
       { label: "Publications", href: "/v3/publications" },
       { label: "Evidence", href: "/v3/evidence" },
       { label: "Apparatus", href: "/v3/apparatus" },
