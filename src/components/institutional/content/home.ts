@@ -26,10 +26,10 @@ export const featuredWork = [
     href: "/v3/products/youtube-knowledge-explorer",
   },
   {
-    tag: "RESEARCH TOOL",
+    tag: "RESEARCH PRODUCT",
     title: "Agentic Scientific Method",
-    description: "Executable machinery for research, evidence handling, critique, verification, defect localization, and repair.",
-    href: null,
+    description: "An operational inquiry protocol for research, evidence, criticism, defect localization, repair, authority, and closure.",
+    href: "/v3/products/agentic-scientific-method",
   },
   {
     tag: "RESEARCH PRODUCT",
