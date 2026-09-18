@@ -2212,3 +2212,468 @@
     overflow-wrap: anywhere;
   }
 }
+
+
+/* Research route projection */
+.researchPage {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(234,240,248,.94)),
+    var(--institution-paper);
+}
+
+.researchHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(330px, .75fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: end;
+  padding: clamp(58px, 7vw, 104px) clamp(30px, 7vw, 112px);
+  border-bottom: 2px solid var(--old-gold);
+  background:
+    linear-gradient(90deg, #fff 0%, #f8fbff 68%, #edf3fa 100%);
+}
+
+.researchHero h1 {
+  max-width: 900px;
+  margin: 14px 0 20px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.7rem, 5.7vw, 7.2rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: .92;
+}
+
+.researchQuestion {
+  margin: 0;
+  padding: 24px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 5px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(230,238,248,.96));
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  line-height: 1.5;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 rgba(7,26,61,.18),
+    0 10px 22px rgba(7,26,61,.11);
+}
+
+.researchQuestion span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--old-gold-dark);
+  font: 800 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .18em;
+}
+
+.researchOrientation,
+.researchObject {
+  display: grid;
+  grid-template-columns: minmax(240px, .7fr) minmax(0, 1.45fr) minmax(220px, .55fr);
+  gap: 28px;
+  align-items: start;
+  padding: 34px clamp(30px, 6vw, 96px);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background: linear-gradient(180deg, #eef3f8, #e5edf6);
+}
+
+.researchOrientation h2,
+.epistemicAgency h2,
+.equivalenceFirewall h2,
+.instrumentationClose h2 {
+  margin: 9px 0 0;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 2.8vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.orientationCopy {
+  color: #435470;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .98rem;
+  line-height: 1.5;
+}
+
+.orientationCopy p {
+  margin: 0 0 12px;
+}
+
+.orientationRule {
+  padding: 15px;
+  border: 1px solid var(--bfux-panel-edge);
+  border-top: 4px solid var(--osha-green);
+  background: linear-gradient(180deg, #fbfdff, #eaf1f8);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.16);
+}
+
+.orientationRule strong {
+  display: block;
+  margin: 8px 0 5px;
+  color: var(--royal-blue-deep);
+  font: 800 .58rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+}
+
+.orientationRule p {
+  margin: 0;
+  color: #52627b;
+  font-size: .76rem;
+  line-height: 1.4;
+}
+
+.researchPrograms,
+.researchPrinciples,
+.researchState,
+.artifactFamilies {
+  padding: 38px clamp(30px, 6vw, 96px) 46px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+}
+
+.researchPrograms,
+.researchState {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.5), transparent 12%),
+    linear-gradient(180deg, #dfe8f3, #d3dfec);
+}
+
+.researchProgramGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.researchProgramCard {
+  position: relative;
+  min-height: 310px;
+  padding: 22px 22px 20px;
+  border: 1px solid var(--bfux-panel-edge);
+  border-top: 5px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96) 0 2px, transparent 2px),
+    linear-gradient(180deg, #fbfdff, #eaf1f8);
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.1),
+    0 2px 0 rgba(7,26,61,.2),
+    0 7px 15px rgba(7,26,61,.1);
+}
+
+.researchProgramCard[data-tone="review"] { border-top-color: var(--osha-orange); }
+.researchProgramCard[data-tone="internal"] { border-top-color: var(--osha-yellow); }
+.researchProgramCard[data-tone="registered"] { border-top-color: var(--osha-green); }
+.researchProgramCard[data-tone="mixed"] { border-top-color: var(--old-gold); }
+.researchProgramCard[data-tone="experiment"] { border-top-color: var(--osha-red); }
+
+.programTopline {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: start;
+}
+
+.programCode,
+.programStatus {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.programCode {
+  display: inline-flex;
+  min-width: 38px;
+  justify-content: center;
+  padding: 4px 6px;
+  border: 1px solid rgba(119,97,38,.45);
+  background: linear-gradient(180deg, #f8eebf, #d8bd65);
+  color: #443817;
+  font-size: .57rem;
+  font-weight: 800;
+}
+
+.programStatus {
+  max-width: 68%;
+  color: #5a6678;
+  font-size: .5rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.researchProgramCard h3 {
+  margin: 18px 0 6px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  line-height: 1.05;
+}
+
+.programRole {
+  margin: 0 0 14px;
+  color: var(--old-gold-dark);
+  font: 800 .57rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.programSummary {
+  margin: 0;
+  color: #435470;
+  font-size: .82rem;
+  line-height: 1.52;
+}
+
+.researchProgramCard blockquote {
+  margin: 18px 0 0;
+  padding: 13px 14px;
+  border-left: 3px solid var(--old-gold);
+  background: rgba(21,58,120,.045);
+  color: #20385f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .87rem;
+  line-height: 1.45;
+}
+
+.epistemicAgency {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: clamp(34px, 6vw, 100px);
+  align-items: center;
+  padding: 44px clamp(30px, 7vw, 112px);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background: #fff;
+}
+
+.epistemicAgency > div > p:last-child,
+.equivalenceFirewall > p:last-child,
+.instrumentationClose > p {
+  max-width: 780px;
+  margin: 14px 0 0;
+  color: #435470;
+  font-size: .94rem;
+  line-height: 1.58;
+}
+
+.epistemicAgency blockquote {
+  margin: 0;
+  padding: 26px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  box-shadow: 0 3px 0 #071a3d, 0 10px 20px rgba(7,26,61,.16);
+}
+
+.principleGrid,
+.artifactGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.principlePlate,
+.artifactPlate {
+  min-height: 158px;
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge);
+  background: linear-gradient(180deg, #fbfdff, #edf3f9);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.18);
+}
+
+.principlePlate > span {
+  display: inline-block;
+  padding: 3px 5px;
+  background: var(--old-gold);
+  color: #2d250e;
+  font: 800 .54rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.principlePlate h3,
+.artifactPlate h3 {
+  margin: 13px 0 7px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.principlePlate p,
+.artifactPlate p {
+  margin: 0;
+  color: #52627b;
+  font-size: .77rem;
+  line-height: 1.48;
+}
+
+.equivalenceFirewall {
+  padding: 42px clamp(30px, 7vw, 112px);
+  border-top: 7px solid var(--osha-orange);
+  border-bottom: 7px solid var(--osha-orange);
+  background:
+    repeating-linear-gradient(135deg, rgba(231,123,36,.08) 0 8px, transparent 8px 16px),
+    #fffaf4;
+}
+
+.equivalenceFirewall blockquote {
+  max-width: 1040px;
+  margin: 20px 0 0;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.38;
+}
+
+.stateRail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 18px;
+  padding: 9px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  background: linear-gradient(180deg, #b9c8da, #d1dce8);
+  box-shadow: inset 0 3px 8px rgba(7,26,61,.2);
+}
+
+.statePlate {
+  min-height: 128px;
+  padding: 14px;
+  border: 1px solid rgba(7,26,61,.28);
+  background: linear-gradient(180deg, #f9fbff, #eaf1f8);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.14);
+}
+
+.statePlate > span {
+  color: var(--old-gold-dark);
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.statePlate strong {
+  display: block;
+  margin: 10px 0 6px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .95rem;
+}
+
+.statePlate p {
+  margin: 0;
+  color: #52627b;
+  font-size: .7rem;
+  line-height: 1.42;
+}
+
+.researchObject {
+  grid-template-columns: minmax(260px, .72fr) minmax(0, 2fr);
+}
+
+.objectFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.objectField {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 1px solid rgba(7,26,61,.3);
+  background: linear-gradient(180deg, #fbfdff, #eaf1f8);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.14);
+}
+
+.objectField span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.objectField strong {
+  color: var(--royal-blue-deep);
+  font-size: .76rem;
+}
+
+.instrumentationClose {
+  padding: 46px clamp(30px, 7vw, 112px) 56px;
+  background: linear-gradient(180deg, #fff, #edf3f9);
+}
+
+.instrumentQuestions {
+  max-width: 1080px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.instrumentQuestions span {
+  padding: 13px 14px;
+  border: 1px solid var(--bfux-panel-edge);
+  border-left: 4px solid var(--osha-blue);
+  background: #f8fbff;
+  color: #435470;
+  font-size: .75rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 980px) {
+  .researchHero,
+  .researchOrientation,
+  .researchObject,
+  .epistemicAgency {
+    grid-template-columns: 1fr;
+  }
+
+  .researchProgramGrid,
+  .principleGrid,
+  .artifactGrid,
+  .stateRail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .objectFieldGrid,
+  .instrumentQuestions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .researchHero,
+  .researchOrientation,
+  .researchPrograms,
+  .researchPrinciples,
+  .researchState,
+  .researchObject,
+  .artifactFamilies,
+  .epistemicAgency,
+  .equivalenceFirewall,
+  .instrumentationClose {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .researchHero h1 {
+    font-size: clamp(3rem, 14vw, 4.4rem);
+  }
+
+  .researchProgramGrid,
+  .principleGrid,
+  .artifactGrid,
+  .stateRail,
+  .objectFieldGrid,
+  .instrumentQuestions {
+    grid-template-columns: 1fr;
+  }
+
+  .programStatus {
+    max-width: 62%;
+  }
+}
