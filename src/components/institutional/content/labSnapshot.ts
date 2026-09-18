@@ -19,9 +19,47 @@ export const homeLabSnapshot = {
     {
       id: "storage",
       value: "25 GB",
-      label: "",
+      label: "corpus",
       icon: "storage",
-      detail: "25.06 GB in the curated Library snapshot generated 2026-09-13.",
+      detail: "25.06 GB in the curated Library snapshot generated 2026-09-13; nearly half is experimental or generated research data.",
+      breakdown: {
+        title: "Nearly half of the Library by size is experimental research data.",
+        intro:
+          "The 25 GB figure is not 25 GB of prose. Large numerical datasets and research outputs account for roughly 11.4 GB of the snapshot, while the remaining roughly 13.7 GB contains documents, source code, working corpora, operational material, and other artifacts.",
+        variant: "corpus-split",
+        items: [
+          {
+            value: "13.7 GB",
+            label: "Documents & working corpus",
+            detail: "About 55% of the Library: writing, source code, working corpora, operational material, provenance, and other research artifacts.",
+            tags: [
+              "61K+ Markdown files",
+              "Source code",
+              "Corpus Forge working material",
+              "Research packages",
+              "Operations & provenance",
+              "Publication material",
+            ],
+          },
+          {
+            value: "11.4 GB",
+            label: "Experimental & generated research data",
+            detail: "About 45% of the Library: large numerical datasets and bulk outputs produced or retained by formal and computational research programs.",
+            tags: [
+              "Transcendental Grammars data · ~6.9 GB",
+              "Spectral / volumetric outputs · ~4.4 GB",
+              "Interim datasets",
+              "Processed datasets",
+              "Experimental exports",
+              "Computational evidence",
+            ],
+          },
+        ],
+        note:
+          "This is a coarse public composition, not a byte-perfect semantic classifier. The experimental/data bucket is grounded in the two dominant data/output trees visible in the Sep 13 Library folder map; the remainder is grouped as the broader working corpus.",
+        source:
+          "Source: generated Library Survey / Folder TOC · Sep 13, 2026 · 25.06 GB total. Experimental/data estimate ≈ 6.94 GB Transcendental Grammars data + 4.44 GB Volumetrics/Spectral archive.",
+      },
     },
     {
       id: "active",
