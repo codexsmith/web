@@ -6,6 +6,7 @@ import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 
 import { ProductContextSection } from "./sections/ProductContextSection";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalProductsPage() {
@@ -20,6 +21,7 @@ export function InstitutionalProductsPage() {
           support={<>Some work becomes papers, methods, datasets, experiments, and research infrastructure.
               Some becomes a product that a person can directly use, learn from, buy, subscribe to,
               support, license, or carry elsewhere.</>}
+          childLinks={institutionalChildRoutes.products}
           >
           <blockquote className={styles.productThesis}>
             <span>PRODUCT DISCIPLINE</span>

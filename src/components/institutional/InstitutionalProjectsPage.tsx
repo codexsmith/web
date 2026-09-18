@@ -7,6 +7,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 
 import { projects } from "./content/projects";
 import { ProjectContextSection } from "./sections/ProjectContextSection";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalProjectsPage() {
@@ -21,6 +22,7 @@ export function InstitutionalProjectsPage() {
               in which it was developed.</>}
           support={<>Projects put ideas, representations, instruments, and workflows under
               different kinds of pressure in bounded real systems.</>}
+          childLinks={institutionalChildRoutes.projects}
           >
           <blockquote className={styles.projectHeroQuestion}>
             <span>PROJECT QUESTION</span>

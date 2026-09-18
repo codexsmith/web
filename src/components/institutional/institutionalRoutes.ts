@@ -11,15 +11,24 @@ export const institutionalRoutes = [
 export const institutionalChildRoutes = {
   about: [
     { label: "Funding", href: "/v3/funding" },
+    { label: "Collaboration", href: "/v3/collaboration" },
     { label: "Founder", href: "/v3/founder" },
   ],
   research: [
     { label: "Apparatus", href: "/v3/apparatus" },
     { label: "Funding", href: "/v3/funding" },
+    { label: "Collaboration", href: "/v3/collaboration" },
+  ],
+  products: [
+    { label: "Collaboration", href: "/v3/collaboration" },
+  ],
+  projects: [
+    { label: "Collaboration", href: "/v3/collaboration" },
   ],
   openLab: [
     { label: "Apparatus", href: "/v3/apparatus" },
     { label: "Funding", href: "/v3/funding" },
+    { label: "Collaboration", href: "/v3/collaboration" },
   ],
 } as const;
 
@@ -28,5 +37,6 @@ export const institutionalFooterRoutes = [
   ...institutionalRoutes,
   { label: "Funding", href: "/v3/funding" },
   { label: "Apparatus", href: "/v3/apparatus" },
+  { label: "Collaboration", href: "/v3/collaboration" },
   { label: "Founder", href: "/v3/founder" },
 ] as const;
