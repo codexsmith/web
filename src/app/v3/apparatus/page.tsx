@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { InstitutionalRoutePreview } from "@/components/institutional/InstitutionalRoutePreview";
-import { institutionalRouteFrontDoors } from "@/components/institutional/institutionalRoutes";
+import { InstitutionalApparatusPage } from "@/components/institutional/InstitutionalApparatusPage";
 
 export const metadata: Metadata = {
   title: "Apparatus · Boundary First Labs",
+  description: "Operational research instruments, authority boundaries, and knowledge infrastructure at Boundary First Labs.",
   alternates: { canonical: "/v3/apparatus" },
   robots: { index: false, follow: false },
 };
 
 export default function Page() {
-  return <InstitutionalRoutePreview route={institutionalRouteFrontDoors["apparatus"]} />;
+  return <InstitutionalApparatusPage />;
 }
