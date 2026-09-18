@@ -125,7 +125,7 @@
     0 10px 22px rgba(7,26,61,.12);
 }
 
-.primaryProductCard[data-product="projectr"] {
+.primaryProductCard[data-product="explorer"] {
   border-top-color: var(--osha-blue);
 }
 
@@ -164,7 +164,7 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 1px 2px rgba(7,26,61,.2);
 }
 
-[data-product="projectr"] .productStateLamp {
+[data-product="explorer"] .productStateLamp {
   background: var(--osha-blue);
 }
 
@@ -240,7 +240,7 @@
 }
 
 .operationGrammar,
-.projectrPipeline {
+.explorerPipeline {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -252,7 +252,7 @@
 }
 
 .operationGrammar span,
-.projectrPipeline span {
+.explorerPipeline span {
   padding: 6px 8px;
   border: 1px solid rgba(7,26,61,.27);
   background: linear-gradient(180deg, #fbfdff, #edf3f9);
