@@ -4,6 +4,7 @@ import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Publications.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero } from "./InstitutionalPrimitives";
+import { PublicationCatalogSection } from "./sections/PublicationCatalogSection";
 import { PublicationContextSection } from "./sections/PublicationContextSection";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
@@ -28,6 +29,8 @@ export function InstitutionalPublicationsPage() {
           not merely increase the author&apos;s authority.
         </blockquote>
       </InstitutionalRouteHero>
+
+      <PublicationCatalogSection />
 
       <PublicationContextSection />
     </InstitutionalPageShell>

@@ -48,3 +48,6 @@ The Apparatus route uses `sections/ApparatusContextSection.tsx`: the Instrument 
 
 
 The Publications route currently uses `sections/PublicationContextSection.tsx` as a temporary whole-body context scaffold because no genuine publication-object catalog is directly rendered yet. All existing publication discipline/page-grammar sections live in an eleven-object focus-stage Reflow field. Future publication objects belong directly on the route above this context section, following the same substantive-object / contextual-machinery split used elsewhere.
+
+
+The Publications route now has a separate `sections/PublicationCatalogSection.tsx` substantive surface above its context field. Its initial records are explicit UI stubs used only to design the catalog grammar; they claim no publication date, DOI, review state, release state, or scientific authority. Replace those stubs with source-governed publication records when canonical documents are ingested.

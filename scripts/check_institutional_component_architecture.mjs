@@ -119,9 +119,15 @@ expect(!apparatusPage.includes('className={styles.apparatusClose}'), "Apparatus 
 expect(fs.existsSync(`${root}/sections/ApparatusContextSection.tsx`), "ApparatusContextSection must exist as the route-local composition boundary");
 
 const publicationsPage = read(`${root}/InstitutionalPublicationsPage.tsx`);
+expect(publicationsPage.includes("<PublicationCatalogSection />"), "Publications must expose a substantive publication-catalog surface before context");
 expect(publicationsPage.includes("<PublicationContextSection />"), "Publications must compose its current body as one context section");
+expect(publicationsPage.indexOf("<PublicationCatalogSection />") < publicationsPage.indexOf("<PublicationContextSection />"), "Publication catalog must precede contextual publication machinery");
 expect(!publicationsPage.includes('className={styles.publicationProjection}'), "Publications page must not inline Projection / Authority");
 expect(!publicationsPage.includes('className={styles.publicationCovenant}'), "Publications page must not inline the Publication Covenant");
+expect(fs.existsSync(`${root}/sections/PublicationCatalogSection.tsx`), "PublicationCatalogSection must exist as the substantive publication-object boundary");
 expect(fs.existsSync(`${root}/sections/PublicationContextSection.tsx`), "PublicationContextSection must exist as the route-local composition boundary");
+const publicationCatalog = read(`${root}/sections/PublicationCatalogSection.tsx`);
+expect(publicationCatalog.includes("publicationStubs"), "Publication catalog must use explicit stub records until source-governed documents are bound");
+expect(publicationCatalog.includes("0 BOUND"), "Publication catalog must make the absence of canonical documents explicit");
 
 console.log("Institutional component architecture passed.");
