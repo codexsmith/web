@@ -20,6 +20,7 @@ const requiredStyles = [
   "ProductExperience.module.css",
   "BoundaryFirstChess.module.css",
   "BoundaryFirstWeather.module.css",
+  "YouTubeKnowledgeExplorer.module.css",
   "Projects.module.css",
   "Apparatus.module.css",
   "Publications.module.css",
@@ -64,14 +65,19 @@ expect(routeShared.includes("white-space: nowrap"), "child-page labels must rema
 const productExperience = read(`${stylesRoot}/ProductExperience.module.css`);
 const boundaryFirstChess = read(`${stylesRoot}/BoundaryFirstChess.module.css`);
 const boundaryFirstWeather = read(`${stylesRoot}/BoundaryFirstWeather.module.css`);
+const youtubeKnowledgeExplorer = read(`${stylesRoot}/YouTubeKnowledgeExplorer.module.css`);
 expect(productExperience.includes(".productExperienceHero"), "shared product-detail stylesheet must own the immersive hero");
 expect(productExperience.includes(".productExperienceNav"), "shared product-detail stylesheet must own local sticky navigation");
 expect(productExperience.includes('[data-product-theme="weather"]'), "shared product-detail stylesheet must expose a Weather visual theme");
+expect(productExperience.includes('[data-product-theme="explorer"]'), "shared product-detail stylesheet must expose an Explorer visual theme");
 expect(boundaryFirstChess.includes(".chessBoard"), "Boundary-First Chess must own a board visualization");
 expect(boundaryFirstChess.includes(".chessLensControls"), "Boundary-First Chess must own interactive analysis-lens controls");
 expect(boundaryFirstWeather.includes(".weatherField"), "Boundary First Weather must own a simulation-field visualization");
 expect(boundaryFirstWeather.includes(".weatherModeControls"), "Boundary First Weather must own interactive diagnostic-mode controls");
 expect(boundaryFirstWeather.includes(".weatherClaimLadder"), "Boundary First Weather must expose the W0-W5 claim ladder");
+expect(youtubeKnowledgeExplorer.includes(".explorerVideo"), "YouTube Knowledge Explorer must own a source-video visualization");
+expect(youtubeKnowledgeExplorer.includes(".explorerModeControls"), "YouTube Knowledge Explorer must own interactive exploration-mode controls");
+expect(youtubeKnowledgeExplorer.includes(".explorerArchitectureStack"), "YouTube Knowledge Explorer must expose the portable-core architecture stack");
 
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
