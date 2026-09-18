@@ -122,30 +122,10 @@ export const postureCommitments = [
 ] as const;
 
 export const practiceLineage = [
-  {
-    label: "LEAN–AGILE",
-    title: "Flow, capacity, and feedback.",
-    description:
-      "Make state visible. Bound work in progress. Respect real capacity. Deliver the smallest coherent increment that can teach something, then let observed results change the next state.",
-  },
-  {
-    label: "SCIENTIFIC METHOD",
-    title: "Questions, tests, and evidence.",
-    description:
-      "State a discriminating question, make assumptions and alternatives visible, run a bounded test, separate observation from interpretation, preserve null results, and revise when evidence disagrees.",
-  },
-  {
-    label: "AGENTIC REASONING",
-    title: "Search, decomposition, and critique.",
-    description:
-      "Let human, computational, or hybrid agents explore alternatives, decompose problems, choose tools, compare representations, localize defects, and propose next moves without silently inheriting authority.",
-  },
-  {
-    label: "BOUNDARY FIRST",
-    title: "Representation, consequence, and repair.",
-    description:
-      "Make the system boundary explicit, preserve consequential distinctions, track lawful change, expose what was lost or omitted, repair the representation, and leave enough state for another agent to continue.",
-  },
+  { label: "Lean–Agile" },
+  { label: "Scientific Method" },
+  { label: "Agentic Reasoning" },
+  { label: "Boundary First" },
 ] as const;
 
 export const stewardshipFacets = [
