@@ -207,8 +207,6 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   const initialProjection = parseProjection(query.view) ?? defaultProjectionForNode(node.id);
   const initialProcessScope = parseProcessScope(query.scope) ?? "full";
-  const worldState = firstQueryValue(query.world);
-  const initialHeroVisible = node.id === "root" && worldState !== "1";
   const initialUiShell = parseUiShell(query.ui);
   const recordDetail = resolveRecordDetailForNode(node, firstQueryValue(query.detail));
   const recordContent = recordDetail ? getProductLandingContent(recordDetail.entry) : undefined;
@@ -219,7 +217,7 @@ export default async function Page({ params, searchParams }: PageProps) {
         initialNodeId={node.id}
         initialProjection={initialProjection}
         initialProcessScope={initialProcessScope}
-        initialHeroVisible={initialHeroVisible}
+        initialHeroVisible={false}
         initialUiShell={initialUiShell}
       />
       {recordDetail && recordContent ? (
