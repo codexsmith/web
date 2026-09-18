@@ -17,21 +17,25 @@ export const featuredWork = [
     tag: "PRODUCT",
     title: "Boundary-First Chess",
     description: "A book-length teaching asset and developed pedagogy for making structural change on the board more legible.",
+    href: "/v3/products/boundary-first-chess",
   },
   {
     tag: "PRODUCT",
     title: "Projectr / YouTube Knowledge Explorer",
     description: "A source-linked software tool for turning long-form video into searchable, timestamped, structured knowledge.",
+    href: null,
   },
   {
     tag: "RESEARCH TOOL",
     title: "Agentic Scientific Method",
     description: "Executable machinery for research, evidence handling, critique, verification, defect localization, and repair.",
+    href: null,
   },
   {
-    tag: "APPLIED WORK",
-    title: "Public Infrastructure Analysis",
-    description: "Applied systems analysis for public records, workflows, institutions, uncertainty, and consequence-bearing processes.",
+    tag: "RESEARCH PRODUCT",
+    title: "Boundary First Weather",
+    description: "A pilot-ready computational testbed for boundary-aware diagnostics, forecast disagreement, and selective refinement.",
+    href: "/v3/products/boundary-first-weather",
   },
 ] as const;
 
