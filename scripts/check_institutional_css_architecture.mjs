@@ -17,6 +17,8 @@ const requiredStyles = [
   "InstitutionalRouteShared.module.css",
   "Research.module.css",
   "Products.module.css",
+  "ProductExperience.module.css",
+  "BoundaryFirstChess.module.css",
   "Projects.module.css",
   "Apparatus.module.css",
   "Publications.module.css",
@@ -58,6 +60,12 @@ expect(routeShared.includes("min-height: 58px"), "child-page cards must remain c
 expect(routeShared.includes("grid-auto-columns: minmax(200px, 1fr)"), "child-page columns must preserve a hard readable minimum width");
 expect(routeShared.includes("min-width: 200px"), "child-page links must not collapse below their readable label width");
 expect(routeShared.includes("white-space: nowrap"), "child-page labels must remain intact rather than hyphenating across lines");
+const productExperience = read(`${stylesRoot}/ProductExperience.module.css`);
+const boundaryFirstChess = read(`${stylesRoot}/BoundaryFirstChess.module.css`);
+expect(productExperience.includes(".productExperienceHero"), "shared product-detail stylesheet must own the immersive hero");
+expect(productExperience.includes(".productExperienceNav"), "shared product-detail stylesheet must own local sticky navigation");
+expect(boundaryFirstChess.includes(".chessBoard"), "Boundary-First Chess must own a board visualization");
+expect(boundaryFirstChess.includes(".chessLensControls"), "Boundary-First Chess must own interactive analysis-lens controls");
 
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
