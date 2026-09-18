@@ -7,6 +7,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 
 import { instruments } from "./content/apparatus";
 import { ApparatusContextSection } from "./sections/ApparatusContextSection";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalApparatusPage() {
@@ -28,6 +29,7 @@ export function InstitutionalApparatusPage() {
               operational; when the machinery reaches people, institutions, infrastructure,
               or the physical world, humanist and ecological stewardship bound what
               technically successful operation is allowed to mean.</>}
+          childLinks={institutionalChildRoutes.apparatus}
           >
           <blockquote className={styles.apparatusThesis}>
             <span>DESIGN POSTURE</span>

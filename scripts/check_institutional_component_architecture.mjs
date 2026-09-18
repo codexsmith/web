@@ -124,6 +124,10 @@ const routeContracts = [
     "evidence"
   ],
   [
+    "InstitutionalExperimentsPage.tsx",
+    "experiments"
+  ],
+  [
     "InstitutionalNowPage.tsx",
     "now"
   ],
@@ -172,6 +176,7 @@ for (const file of [
   "InstitutionalCollaborationPage.tsx",
   "InstitutionalAppliedWorkPage.tsx",
   "InstitutionalEvidencePage.tsx",
+  "InstitutionalExperimentsPage.tsx",
   "InstitutionalNowPage.tsx",
   "InstitutionalContactPage.tsx",
   "InstitutionalOpenLabPage.tsx",
@@ -195,6 +200,7 @@ expect(!topLevelRouteRegistry.includes('/v3/founder'), "Founder must remain a co
 expect(!topLevelRouteRegistry.includes('/v3/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/experiments'), "Experiments must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/now'), "Now / Roadmap must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/contact'), "Contact must remain outside top-level header navigation");
 expect(!topLevelRouteRegistry.includes('/v3/atlas'), "Lab Atlas must remain a contextual route rather than top-level navigation");
@@ -202,6 +208,7 @@ expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must 
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
 expect(routeRegistry.includes('{ label: "Lab Atlas", href: "/v3/atlas" }'), "footer route collection must include Lab Atlas");
+expect(routeRegistry.includes('{ label: "Experiments", href: "/v3/experiments" }'), "footer route collection must include Experiments");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
 expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboration" }'), "footer route collection must include Collaboration");
 expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
@@ -211,7 +218,7 @@ expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "foo
 
 const childRouteContracts = [
   ["about", ["funding", "appliedWork", "evidence", "now", "collaboration", "founder"]],
-  ["research", ["atlas", "apparatus", "funding", "now", "collaboration"]],
+  ["research", ["atlas", "apparatus", "experiments", "funding", "now", "collaboration"]],
   ["products", ["appliedWork", "evidence", "collaboration"]],
   ["projects", ["appliedWork", "evidence", "now", "collaboration"]],
   ["funding", ["appliedWork", "evidence", "now"]],
@@ -219,6 +226,8 @@ const childRouteContracts = [
   ["appliedWork", ["evidence"]],
   ["founder", ["evidence"]],
   ["evidence", ["now"]],
+  ["apparatus", ["experiments"]],
+  ["experiments", ["atlas", "apparatus", "evidence"]],
   ["openLab", ["apparatus", "funding", "now", "collaboration"]],
 ];
 
@@ -382,6 +391,21 @@ expect(evidenceContent.includes("EMERGING / NOT YET ESTABLISHED"), "Evidence mus
 expect(evidenceContent.includes("Prior career != BFL traction"), "Evidence must forbid prior-career inflation into BFL traction");
 expect(evidencePage.includes("EVIDENCE STILL TO EARN"), "Evidence page must expose the next proof points directly");
 expect(evidencePage.includes("childLinks={institutionalChildRoutes.evidence}"), "Evidence hero must expose Now / Roadmap as a child page");
+
+const experimentsPage = read(`${root}/InstitutionalExperimentsPage.tsx`);
+const experimentsContent = read(`${root}/content/experiments.ts`);
+expect(experimentsPage.includes("./content/experiments"), "Experiments page must own a route-local content model");
+expect(experimentsPage.includes("What has the Lab actually tried?"), "Experiments hero must lead with the operational experiment question");
+expect(experimentsPage.includes("childLinks={institutionalChildRoutes.experiments}"), "Experiments hero must expose its contextual child pages");
+expect(experimentsPage.includes("LabObjectIdentity"), "Experiment records must compose LabObjectIdentity");
+expect(experimentsPage.includes('kind="experiment"'), "Experiment records must identify as Experiment objects");
+expect(experimentsPage.includes("identifier={experiment.id}"), "Experiment records must preserve canonical EXP-* identities");
+expect(experimentsPage.includes("status={experiment.status}"), "Experiment identity must preserve source status");
+expect(experimentsPage.includes("secondary={experiment.resultPosture}"), "Experiment identity must preserve source result posture");
+expect(experimentsContent.includes('id: "EXP-ATLAS-001"'), "Experiment projection must include Atlas seed experiments");
+expect(experimentsContent.includes('id: "EXP-ASM-004"'), "Experiment projection must include ASM seed experiments through EXP-ASM-004");
+expect(experimentsContent.includes('sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Experiment projection must pin the Lab source revision");
+expect(experimentsContent.includes("Registration and evidence routing only"), "Experiment projection must preserve the register authority ceiling");
 expect(evidencePage.includes("LabObjectIdentity"), "Evidence prior-execution records must compose LabObjectIdentity");
 expect(evidencePage.includes('kind="evidence"'), "Prior-execution records must identify as Evidence objects");
 expect(evidencePage.includes("status={item.status}"), "Evidence object identity must preserve source evidence class");
@@ -449,6 +473,7 @@ expect(fundingPage.includes('/v3/contact?type=funding&source=funding'), "Funding
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
+expect(apparatusPage.includes("childLinks={institutionalChildRoutes.apparatus}"), "Apparatus hero must expose Experiments as a contextual child page");
 expect(apparatusPage.includes('className={styles.instrumentBench}'), "Instrument Bench must remain directly composed on the Apparatus page");
 expect(!apparatusPage.includes('className={styles.apparatusWhy}'), "Apparatus page must not inline Why Apparatus Matters");
 expect(!apparatusPage.includes('className={styles.apparatusPathSection}'), "Apparatus page must not inline the research path");
@@ -506,10 +531,16 @@ expect(atlasContent.includes("PROJECT CASE OF"), "Lab Atlas must declare project
 expect(atlasContent.includes("PUBLIC PRODUCT SURFACE"), "Lab Atlas must declare the ASM research-to-product relationship explicitly");
 expect(atlasContent.includes("priorExecution"), "Lab Atlas must admit the source-bound prior-execution evidence cohort");
 expect(atlasContent.includes('kind: "evidence"'), "Lab Atlas must expose Evidence as an object family");
+expect(atlasContent.includes('kind: "experiment"'), "Lab Atlas must expose Experiment as an object family");
+expect(atlasContent.includes("experimentResearchEdges"), "Lab Atlas must derive Experiment-to-Research edges from declared lane links");
+expect(atlasContent.includes('relation: lane.role === "primary" ? "PRIMARY RESEARCH LANE" : "RELATED RESEARCH LANE"'), "Experiment edges must preserve primary versus secondary research-lane semantics");
+expect(atlasContent.includes('/v3/experiments#experiment-'), "Experiment Atlas nodes must route to exact native experiment records");
+expect(atlasContent.includes("experiment.acceptancePredicate"), "Experiment search must preserve acceptance predicates where present");
+expect(atlasContent.includes("experiment.firewall"), "Experiment search must preserve authority firewalls");
 expect(atlasContent.includes('/v3/evidence#evidence-'), "Evidence Atlas nodes must route back to their exact native surface");
 expect(atlasContent.includes("searchTerms: [record.evidence, record.boundary]"), "Evidence search must preserve both basis and claim ceiling");
 expect(!atlasContent.includes("identifier: record.surfaceKey"), "Atlas-local evidence routing keys must not become identifiers");
-expect(atlasPage.includes("Research · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the Evidence object family");
+expect(atlasPage.includes("Research · Experiments · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Experiment and Evidence object families");
 expect(commandPaletteContent.includes("node.searchTerms"), "Global object search must admit bounded object-specific search terms without inferring edges");
 expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");
 
