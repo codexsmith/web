@@ -551,19 +551,6 @@
   line-height: 1.4;
 }
 
-.humanGateSection blockquote {
-  margin: 0;
-  padding: 25px;
-  border: 1px solid var(--bfux-panel-edge-dark);
-  border-left: 7px solid var(--old-gold);
-  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
-  line-height: 1.45;
-  box-shadow: 0 3px 0 #071a3d, 0 10px 20px rgba(7,26,61,.16);
-}
-
 .paperProjectionRail {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
