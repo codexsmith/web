@@ -4,7 +4,7 @@ import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 
-import { capabilityStrip, methodSteps, featuredWork, postureCommitments, practiceLineage } from "./content/home";
+import { capabilityStrip, methodSteps, featuredWork, postureCommitments, practiceLineage, stewardshipFacets } from "./content/home";
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
@@ -90,6 +90,29 @@ export function InstitutionalHomePage() {
                 <span>{item.label}</span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className={styles.stewardshipBand}>
+          <div className={styles.stewardshipBandLead}>
+            <p className={styles.sectionIndex}>STEWARDSHIP</p>
+            <h2>What succeeds still has to be cared for.</h2>
+            <p>
+              Boundary First Labs treats stewardship as a concrete engineering and
+              institutional obligation: tend what is shared, maintain what others depend
+              on, repair what has been neglected, cultivate future capacity, and refuse
+              success that works only by pushing its costs outside the frame.
+            </p>
+          </div>
+
+          <div className={styles.stewardshipBandGrid}>
+            {stewardshipFacets.map((facet) => (
+              <article key={facet.label}>
+                <span>{facet.label}</span>
+                <h3>{facet.title}</h3>
+                <p>{facet.description}</p>
               </article>
             ))}
           </div>
