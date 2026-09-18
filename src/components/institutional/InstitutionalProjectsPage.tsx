@@ -3,10 +3,10 @@ import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Projects.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
-import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
-import { formatOrdinal } from "./institutionalFormat";
+import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 
-import { projectGrammar, projects, capabilityOutcomes } from "./content/projects";
+import { projects } from "./content/projects";
+import { ProjectContextSection } from "./sections/ProjectContextSection";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalProjectsPage() {
@@ -28,45 +28,6 @@ export function InstitutionalProjectsPage() {
             machinery encountered an actual bounded system?
           </blockquote>
         </InstitutionalRouteHero>
-
-        <section className={styles.transferEvidence}>
-          <InstitutionalSectionLead
-            styles={styles}
-            eyebrow={<>TRANSFER EVIDENCE</>}
-            title={<>Deployment is another experiment.</>}
-            description={<>Projects are not a victory lap. They are places where usefulness, burden,
-              ambiguity, failure, marketability, agency, maintenance, and transfer become
-              visible.</>}
-            />
-
-          <div className={styles.deploymentLoop}>
-            <span>Research</span>
-            <span>Instrument</span>
-            <span>Project</span>
-            <span>Use / test / failure</span>
-            <span>Human &amp; system consequence</span>
-            <span>Revised research / product state</span>
-          </div>
-        </section>
-
-        <section className={styles.projectGrammarSection}>
-          <InstitutionalSectionHeader
-            styles={styles}
-            eyebrow={<>PROJECT-PAGE GRAMMAR</>}
-            title={<>Ten questions keep a project honest.</>}
-            note={<>Describe the native domain before translating it into Boundary First language.</>}
-            />
-
-          <div className={styles.projectGrammarGrid}>
-            {projectGrammar.map(([index, title, description]) => (
-              <article className={styles.projectGrammarPlate} key={title}>
-                <span>{index}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </article>
-            ))}
-          </div>
-        </section>
 
         <section className={styles.featuredProjectsRoute}>
           <InstitutionalSectionHeader
@@ -129,72 +90,7 @@ export function InstitutionalProjectsPage() {
           </div>
         </section>
 
-        <section className={styles.projectNativeStatusRule}>
-          <div>
-            <p className={styles.sectionIndex}>STATUS RULE</p>
-            <h2>Normalize the display. Preserve the meaning.</h2>
-            <p>
-              A Product, Research Scaffold, Civic Case, and Experiment may all have status,
-              but they do not move through the same lifecycle.
-            </p>
-          </div>
-
-          <div className={styles.nativeStatusExamples}>
-            <div>
-              <span>PRODUCT</span>
-              <code>active_build</code>
-              <code>research_product</code>
-              <code>pilot</code>
-              <code>released</code>
-            </div>
-            <div>
-              <span>RESEARCH / APPLIED SCAFFOLD</span>
-              <code>exploration</code>
-              <code>working model</code>
-              <code>benchmark plan</code>
-              <code>experimented</code>
-            </div>
-            <div>
-              <span>CIVIC CASE</span>
-              <code>candidate</code>
-              <code>research active</code>
-              <code>promoted / not promoted</code>
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.projectFirewall}>
-          <p className={styles.sectionIndex}>PERMANENT FIREWALL</p>
-          <h2>Products are not research results.</h2>
-          <div className={styles.firewallEquations}>
-            <code>research maturity ≠ product maturity</code>
-            <code>scientific evidence ≠ product validation</code>
-            <code>product adoption ≠ theory validation</code>
-            <code>feature / wedge ≠ durable Product identity</code>
-            <code>intended agency benefit ≠ demonstrated human outcome</code>
-            <code>technical handoff ≠ successful stewardship transfer</code>
-          </div>
-        </section>
-
-        <section className={styles.capabilityTransfer}>
-          <div>
-            <p className={styles.sectionIndex}>CAPABILITY TRANSFER</p>
-            <h2>What can someone else do after BFL leaves?</h2>
-            <p>
-              Permanent dependence on Boundary First Labs is not the default success
-              condition.
-            </p>
-          </div>
-
-          <div className={styles.capabilityOutcomeGrid}>
-            {capabilityOutcomes.map((outcome, index) => (
-              <div className={styles.capabilityOutcome} key={outcome}>
-                <span>{formatOrdinal(index)}</span>
-                <strong>{outcome}</strong>
-              </div>
-            ))}
-          </div>
-        </section>
+        <ProjectContextSection />
 
         <section className={styles.projectsClose}>
           <p className={styles.sectionIndex}>CLOSING TEST</p>

@@ -6,6 +6,9 @@ const researchContext = fs.readFileSync("src/components/institutional/sections/R
 const products = fs.readFileSync("src/components/institutional/InstitutionalProductsPage.tsx", "utf8");
 const productContext = fs.readFileSync("src/components/institutional/sections/ProductContextSection.tsx", "utf8");
 const productCss = fs.readFileSync("src/components/institutional/styles/Products.module.css", "utf8");
+const projects = fs.readFileSync("src/components/institutional/InstitutionalProjectsPage.tsx", "utf8");
+const projectContext = fs.readFileSync("src/components/institutional/sections/ProjectContextSection.tsx", "utf8");
+const projectCss = fs.readFileSync("src/components/institutional/styles/Projects.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -66,5 +69,15 @@ expect(productContext.includes('id="public-product-object"'), "Product Context m
 expect(productCss.includes("--reflow-focus-span: 6"), "five-card Product focus-stage must place two compact cards per wide row");
 expect(productCss.includes(".productContextResearchMarket { --reflow-span: 5; }"), "Product Context REST state must retain authored magazine spans");
 expect(productCss.includes(".productContextObject { --reflow-span: 6; }"), "Product Object must participate in the authored REST composition");
+expect(projects.includes("<ProjectContextSection />"), "Projects page must compose its transfer context as one modular Reflow section");
+expect(projectContext.includes('layoutMode="focus-stage"'), "Project Context must use focus-stage reflow");
+expect(projectContext.includes("itemOrder={projectContextOrder}"), "Project Context must declare stable source ordering");
+expect(projectContext.includes('id="transfer-evidence"'), "Project Context must include Transfer Evidence");
+expect(projectContext.includes('id="project-page-grammar"'), "Project Context must include Project-Page Grammar");
+expect(projectContext.includes('id="status-rule"'), "Project Context must include Status Rule");
+expect(projectContext.includes('id="capability-transfer"'), "Project Context must include Capability Transfer");
+expect(projectCss.includes("--reflow-focus-span: 6"), "five-card Project focus-stage must place two compact cards per wide row");
+expect(projectCss.includes(".projectContextTransfer { --reflow-span: 5; }"), "Project Context REST state must retain authored magazine spans");
+expect(projectCss.includes(".projectContextCapability { --reflow-span: 6; }"), "Capability Transfer must participate in the authored REST composition");
 
 console.log("BFUX Reflow Field contracts passed.");

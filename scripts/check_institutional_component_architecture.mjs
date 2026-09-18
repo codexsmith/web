@@ -99,4 +99,11 @@ expect(!productsPage.includes('className={styles.productConversion}'), "Products
 expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Products page must not inline the superseded Public Product Object section");
 expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");
 
+const projectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
+expect(projectsPage.includes("<ProjectContextSection />"), "Projects must compose its transfer context as a section component");
+expect(!projectsPage.includes('className={styles.transferEvidence}'), "Projects page must not inline Transfer Evidence");
+expect(!projectsPage.includes('className={styles.projectNativeStatusRule}'), "Projects page must not inline Status Rule");
+expect(!projectsPage.includes('className={styles.capabilityTransfer}'), "Projects page must not inline Capability Transfer");
+expect(fs.existsSync(`${root}/sections/ProjectContextSection.tsx`), "ProjectContextSection must exist as the route-local composition boundary");
+
 console.log("Institutional component architecture passed.");
