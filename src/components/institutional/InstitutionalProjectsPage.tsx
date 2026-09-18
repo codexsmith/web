@@ -88,7 +88,7 @@ export function InstitutionalProjectsPage() {
                 </>
               );
 
-              return "href" in project ? (
+              return (
                 <Link
                   className={styles.projectCaseCard}
                   data-project-tone={project.tone}
@@ -97,14 +97,6 @@ export function InstitutionalProjectsPage() {
                 >
                   {content}
                 </Link>
-              ) : (
-                <article
-                  className={styles.projectCaseCard}
-                  data-project-tone={project.tone}
-                  key={project.title}
-                >
-                  {content}
-                </article>
               );
             })}
           </div>
