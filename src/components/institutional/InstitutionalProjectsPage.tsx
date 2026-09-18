@@ -1,8 +1,10 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Projects.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -134,41 +136,33 @@ const capabilityOutcomes = [
 
 export function InstitutionalProjectsPage() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main className={styles.projectsPage}>
-        <section className={styles.projectsHero}>
-          <div>
-            <p className={styles.eyebrow}>PROJECTS</p>
-            <h1>Theory should travel.</h1>
-            <p className={styles.routeLead}>
-              A method becomes more interesting when it survives outside the environment
-              in which it was developed.
-            </p>
-            <p className={styles.routeSupport}>
-              Projects put ideas, representations, instruments, and workflows under
-              different kinds of pressure in bounded real systems.
-            </p>
-          </div>
-
+    <InstitutionalPageShell mainClassName={styles.projectsPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.projectsHero}
+          eyebrow={<>PROJECTS</>}
+          title={<>Theory should travel.</>}
+          lead={<>A method becomes more interesting when it survives outside the environment
+              in which it was developed.</>}
+          support={<>Projects put ideas, representations, instruments, and workflows under
+              different kinds of pressure in bounded real systems.</>}
+          >
           <blockquote className={styles.projectHeroQuestion}>
             <span>PROJECT QUESTION</span>
             What happened — or what are we preparing to test — when the Lab&apos;s
             machinery encountered an actual bounded system?
           </blockquote>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.transferEvidence}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>TRANSFER EVIDENCE</p>
-            <h2>Deployment is another experiment.</h2>
-            <p>
-              Projects are not a victory lap. They are places where usefulness, burden,
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>TRANSFER EVIDENCE</>}
+            title={<>Deployment is another experiment.</>}
+            description={<>Projects are not a victory lap. They are places where usefulness, burden,
               ambiguity, failure, marketability, agency, maintenance, and transfer become
-              visible.
-            </p>
-          </div>
+              visible.</>}
+            />
 
           <div className={styles.deploymentLoop}>
             <span>Research</span>
@@ -181,15 +175,12 @@ export function InstitutionalProjectsPage() {
         </section>
 
         <section className={styles.projectGrammarSection}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>PROJECT-PAGE GRAMMAR</p>
-              <h2>Ten questions keep a project honest.</h2>
-            </div>
-            <span>
-              Describe the native domain before translating it into Boundary First language.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>PROJECT-PAGE GRAMMAR</>}
+            title={<>Ten questions keep a project honest.</>}
+            note={<>Describe the native domain before translating it into Boundary First language.</>}
+            />
 
           <div className={styles.projectGrammarGrid}>
             {projectGrammar.map(([index, title, description]) => (
@@ -203,15 +194,12 @@ export function InstitutionalProjectsPage() {
         </section>
 
         <section className={styles.featuredProjectsRoute}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>FEATURED PROJECTS</p>
-              <h2>Five different places for the machinery to succeed, bend, or fail.</h2>
-            </div>
-            <span>
-              Status comes from the source object. These projects do not share one lifecycle.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>FEATURED PROJECTS</>}
+            title={<>Five different places for the machinery to succeed, bend, or fail.</>}
+            note={<>Status comes from the source object. These projects do not share one lifecycle.</>}
+            />
 
           <div className={styles.projectCaseGrid}>
             {projects.map((project) => (
@@ -326,7 +314,7 @@ export function InstitutionalProjectsPage() {
           <div className={styles.capabilityOutcomeGrid}>
             {capabilityOutcomes.map((outcome, index) => (
               <div className={styles.capabilityOutcome} key={outcome}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{outcome}</strong>
               </div>
             ))}
@@ -345,9 +333,6 @@ export function InstitutionalProjectsPage() {
             consequence remain visible.
           </p>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

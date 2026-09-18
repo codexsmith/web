@@ -1,8 +1,10 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Products.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -56,44 +58,36 @@ const productPageQuestions = [
 
 export function InstitutionalProductsPage() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main className={styles.productsPage}>
-        <section className={styles.productsHero}>
-          <div>
-            <p className={styles.eyebrow}>PRODUCTS</p>
-            <h1>Research should sometimes become something a person can use.</h1>
-            <p className={styles.routeLead}>
-              Boundary First Labs is a research laboratory. It is also a place that makes things.
-            </p>
-            <p className={styles.routeSupport}>
-              Some work becomes papers, methods, datasets, experiments, and research infrastructure.
+    <InstitutionalPageShell mainClassName={styles.productsPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.productsHero}
+          eyebrow={<>PRODUCTS</>}
+          title={<>Research should sometimes become something a person can use.</>}
+          lead={<>Boundary First Labs is a research laboratory. It is also a place that makes things.</>}
+          support={<>Some work becomes papers, methods, datasets, experiments, and research infrastructure.
               Some becomes a product that a person can directly use, learn from, buy, subscribe to,
-              support, license, or carry elsewhere.
-            </p>
-          </div>
-
+              support, license, or carry elsewhere.</>}
+          >
           <blockquote className={styles.productThesis}>
             <span>PRODUCT DISCIPLINE</span>
             Show the user capability before claiming the market.
           </blockquote>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.productEvidenceSection}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>WHY PRODUCTS MATTER</p>
-            <h2>Usefulness should meet reality.</h2>
-            <p>
-              Direct products put bounded artifacts in front of real people and turn usefulness
-              into observable evidence rather than an internal judgment.
-            </p>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>WHY PRODUCTS MATTER</>}
+            title={<>Usefulness should meet reality.</>}
+            description={<>Direct products put bounded artifacts in front of real people and turn usefulness
+              into observable evidence rather than an internal judgment.</>}
+            />
 
           <div className={styles.productEvidenceGrid}>
             {productEvidence.map(([title, description], index) => (
               <div className={styles.productEvidencePlate} key={title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{title}</strong>
                 <p>{description}</p>
               </div>
@@ -102,15 +96,12 @@ export function InstitutionalProductsPage() {
         </section>
 
         <section className={styles.primaryProducts}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>NEAR-TERM B2C EDGE</p>
-              <h2>Two concrete product tests.</h2>
-            </div>
-            <span>
-              What exists now is separated from what still has to be earned.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>NEAR-TERM B2C EDGE</>}
+            title={<>Two concrete product tests.</>}
+            note={<>What exists now is separated from what still has to be earned.</>}
+            />
 
           <div className={styles.primaryProductGrid}>
             <article className={styles.primaryProductCard} data-product="chess">
@@ -241,18 +232,17 @@ export function InstitutionalProductsPage() {
         </section>
 
         <section className={styles.secondaryPipeline}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>SECONDARY PIPELINE</p>
-              <h2>Product-shaped work, not yet the near-term edge.</h2>
-            </div>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>SECONDARY PIPELINE</>}
+            title={<>Product-shaped work, not yet the near-term edge.</>}
+            />
 
           <div className={styles.secondaryProductGrid}>
             {secondaryProducts.map((product, index) => (
               <article className={styles.secondaryProductCard} key={product.name}>
                 <div>
-                  <span className={styles.productOrdinal}>{String(index + 3).padStart(2, "0")}</span>
+                  <span className={styles.productOrdinal}>{formatOrdinal(index, 3)}</span>
                   <span className={styles.secondaryState}>{product.state}</span>
                 </div>
                 <h3>{product.name}</h3>
@@ -292,19 +282,18 @@ export function InstitutionalProductsPage() {
         </section>
 
         <section className={styles.productObjectGrammar}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>PUBLIC PRODUCT OBJECT</p>
-            <h2>What a product page should answer.</h2>
-            <p>
-              The product counterpart to the Lab&apos;s research-object grammar: enough state
-              for a user or partner to understand the offer without guessing.
-            </p>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>PUBLIC PRODUCT OBJECT</>}
+            title={<>What a product page should answer.</>}
+            description={<>The product counterpart to the Lab&apos;s research-object grammar: enough state
+              for a user or partner to understand the offer without guessing.</>}
+            />
 
           <div className={styles.productQuestionGrid}>
             {productPageQuestions.map((question, index) => (
               <div className={styles.productQuestionPlate} key={question}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{question}</strong>
               </div>
             ))}
@@ -319,9 +308,6 @@ export function InstitutionalProductsPage() {
             returns — or does not. That interaction is evidence.
           </p>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

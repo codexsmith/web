@@ -1,8 +1,10 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/OpenLab.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -140,24 +142,17 @@ const capabilityOutcomes = [
 
 export function InstitutionalOpenLabPage() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main className={styles.openLabPage}>
-        <section className={styles.openLabHero}>
-          <div>
-            <p className={styles.eyebrow}>OPEN LAB</p>
-            <h1>A research institution should have a permeable boundary.</h1>
-            <p className={styles.routeLead}>
-              Boundary First Labs should not be a one-way publishing machine.
-            </p>
-            <p className={styles.routeSupport}>
-              The public should be able to bring consequential systems, criticism,
+    <InstitutionalPageShell mainClassName={styles.openLabPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.openLabHero}
+          eyebrow={<>OPEN LAB</>}
+          title={<>A research institution should have a permeable boundary.</>}
+          lead={<>Boundary First Labs should not be a one-way publishing machine.</>}
+          support={<>The public should be able to bring consequential systems, criticism,
               expertise, collaboration, and unusual work to the Lab without first
-              learning the Lab&apos;s internal vocabulary.
-            </p>
-          </div>
-
+              learning the Lab&apos;s internal vocabulary.</>}
+          >
           <blockquote className={styles.openLabThesis}>
             <span>FOUR PUBLIC CONTRACTS</span>
             We inspect public systems.<br />
@@ -165,7 +160,7 @@ export function InstitutionalOpenLabPage() {
             Build with us.<br />
             Bring us what does not fit.
           </blockquote>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.openLabAvailability}>
           <div className={styles.openLabAvailabilitySignal} aria-hidden="true" />
@@ -182,15 +177,12 @@ export function InstitutionalOpenLabPage() {
         </section>
 
         <section className={styles.openLabContracts}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>PUBLIC PARTICIPATION</p>
-              <h2>Four routes. Four different relationships.</h2>
-            </div>
-            <span>
-              Shared infrastructure may route them later, but the public contracts stay distinct.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>PUBLIC PARTICIPATION</>}
+            title={<>Four routes. Four different relationships.</>}
+            note={<>Shared infrastructure may route them later, but the public contracts stay distinct.</>}
+            />
 
           <div className={styles.openLabContractGrid}>
             {participationContracts.map((contract) => (
@@ -248,19 +240,18 @@ export function InstitutionalOpenLabPage() {
         </section>
 
         <section className={styles.openLabStewardship}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>STEWARDSHIP BEGINS AT COLLECTION</p>
-            <h2>Intake creates obligations before it creates opportunities.</h2>
-            <p>
-              The site should not invite disclosure merely because a form can technically
-              accept it. These controls must exist before public submission goes live.
-            </p>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>STEWARDSHIP BEGINS AT COLLECTION</>}
+            title={<>Intake creates obligations before it creates opportunities.</>}
+            description={<>The site should not invite disclosure merely because a form can technically
+              accept it. These controls must exist before public submission goes live.</>}
+            />
 
           <div className={styles.openLabGateGrid}>
             {stewardshipGates.map((gate, index) => (
               <div className={styles.openLabGatePlate} key={gate}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{gate}</strong>
               </div>
             ))}
@@ -306,19 +297,18 @@ export function InstitutionalOpenLabPage() {
         </section>
 
         <section className={styles.openLabCapability}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>CAPABILITY, NOT DEPENDENCE</p>
-            <h2>Useful work should leave something behind.</h2>
-            <p>
-              When BFL does work with a person or institution, the preferred outcome is
-              increased durable capability rather than manufactured dependency on the Lab.
-            </p>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>CAPABILITY, NOT DEPENDENCE</>}
+            title={<>Useful work should leave something behind.</>}
+            description={<>When BFL does work with a person or institution, the preferred outcome is
+              increased durable capability rather than manufactured dependency on the Lab.</>}
+            />
 
           <div className={styles.openLabCapabilityGrid}>
             {capabilityOutcomes.map((outcome, index) => (
               <div className={styles.openLabCapabilityPlate} key={outcome}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{outcome}</strong>
               </div>
             ))}
@@ -337,9 +327,6 @@ export function InstitutionalOpenLabPage() {
             stewardship controls are ready.
           </p>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

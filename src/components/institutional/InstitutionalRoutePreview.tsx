@@ -1,8 +1,9 @@
 import type { InstitutionalRouteFrontDoor } from "./institutionalRoutes";
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeStyles from "./styles/InstitutionalRouteShared.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 
 const styles = composeCssModules(foundationStyles, routeStyles);
 
@@ -12,9 +13,7 @@ export function InstitutionalRoutePreview({
   route: InstitutionalRouteFrontDoor;
 }) {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-      <main className={styles.routeMain}>
+    <InstitutionalPageShell mainClassName={styles.routeMain}>
         <section className={styles.routeHero}>
           <p className={styles.eyebrow}>{route.eyebrow}</p>
           <h1>{route.title}</h1>
@@ -33,8 +32,6 @@ export function InstitutionalRoutePreview({
             </p>
           </div>
         </section>
-      </main>
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

@@ -1,8 +1,10 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Research.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -132,26 +134,21 @@ const artifactFamilies = [
 
 export function InstitutionalResearchPage() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main className={styles.researchPage}>
-        <section className={styles.researchHero}>
-          <div>
-            <p className={styles.eyebrow}>RESEARCH</p>
-            <h1>Research as inspectable machinery.</h1>
-            <p className={styles.routeLead}>
-              Boundary First Labs develops theories, experiments, computational models,
-              formal artifacts, and working systems.
-            </p>
-          </div>
-
+    <InstitutionalPageShell mainClassName={styles.researchPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.researchHero}
+          eyebrow={<>RESEARCH</>}
+          title={<>Research as inspectable machinery.</>}
+          lead={<>Boundary First Labs develops theories, experiments, computational models,
+              formal artifacts, and working systems.</>}
+          >
           <blockquote className={styles.researchQuestion}>
             <span>GOVERNING QUESTION</span>
             Can the machinery used to reason about complex systems itself be made more
             explicit, testable, comparable, and operational?
           </blockquote>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.researchOrientation}>
           <div>
@@ -178,13 +175,12 @@ export function InstitutionalResearchPage() {
         </section>
 
         <section className={styles.researchPrograms}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>ACTIVE SURFACES</p>
-              <h2>Research programs and working lanes.</h2>
-            </div>
-            <span>Common analytical roles do not imply formal equivalence across domains.</span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>ACTIVE SURFACES</>}
+            title={<>Research programs and working lanes.</>}
+            note={<>Common analytical roles do not imply formal equivalence across domains.</>}
+            />
 
           <div className={styles.researchProgramGrid}>
             {programs.map((program) => (
@@ -218,12 +214,11 @@ export function InstitutionalResearchPage() {
         </section>
 
         <section className={styles.researchPrinciples}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>WORKING PRINCIPLES</p>
-              <h2>How research is handled.</h2>
-            </div>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>WORKING PRINCIPLES</>}
+            title={<>How research is handled.</>}
+            />
 
           <div className={styles.principleGrid}>
             {principles.map(([index, title, description]) => (
@@ -251,18 +246,17 @@ export function InstitutionalResearchPage() {
         </section>
 
         <section className={styles.researchState}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>RESEARCH STATE</p>
-              <h2>“Published” is not the only useful status.</h2>
-            </div>
-            <span>Use the canonical status when a source system has a more precise state.</span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>RESEARCH STATE</>}
+            title={<>“Published” is not the only useful status.</>}
+            note={<>Use the canonical status when a source system has a more precise state.</>}
+            />
 
           <div className={styles.stateRail}>
             {maturityStates.map(([state, description], index) => (
               <div className={styles.statePlate} key={state}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{state}</strong>
                 <p>{description}</p>
               </div>
@@ -271,19 +265,18 @@ export function InstitutionalResearchPage() {
         </section>
 
         <section className={styles.researchObject}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>PUBLIC RESEARCH OBJECT</p>
-            <h2>What a mature object should expose.</h2>
-            <p>
-              A research page should answer more than “what is this about?” It should expose
-              enough state for independent inspection and continuation.
-            </p>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>PUBLIC RESEARCH OBJECT</>}
+            title={<>What a mature object should expose.</>}
+            description={<>A research page should answer more than “what is this about?” It should expose
+              enough state for independent inspection and continuation.</>}
+            />
 
           <div className={styles.objectFieldGrid}>
             {researchObjectFields.map((field, index) => (
               <div className={styles.objectField} key={field}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{field}</strong>
               </div>
             ))}
@@ -291,12 +284,11 @@ export function InstitutionalResearchPage() {
         </section>
 
         <section className={styles.artifactFamilies}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>MORE THAN PAPERS</p>
-              <h2>Research connects prose to machinery.</h2>
-            </div>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>MORE THAN PAPERS</>}
+            title={<>Research connects prose to machinery.</>}
+            />
 
           <div className={styles.artifactGrid}>
             {artifactFamilies.map(([title, description]) => (
@@ -324,9 +316,6 @@ export function InstitutionalResearchPage() {
             <span>Can another qualified person criticize or continue the work?</span>
           </div>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

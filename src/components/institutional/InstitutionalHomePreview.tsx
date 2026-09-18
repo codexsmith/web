@@ -1,5 +1,7 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import styles from "./styles/InstitutionalFoundation.module.css";
+import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const capabilityStrip = [
   ["01", "Research & experiments"],
@@ -40,10 +42,7 @@ const featuredWork = [
 
 export function InstitutionalHomePreview() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main>
+    <InstitutionalPageShell>
         <section className={styles.hero}>
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}>Practice-born. Research-backed. Formally generalized.</p>
@@ -76,11 +75,12 @@ export function InstitutionalHomePreview() {
         </section>
 
         <section className={styles.methodSection}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>OUR APPROACH</p>
-            <h2>What the Lab does</h2>
-            <p>We make complex systems easier to understand, test, improve, and explain. The basic move is simple: show the structure, track what changes, follow the change, and find where it breaks.</p>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>OUR APPROACH</>}
+            title={<>What the Lab does</>}
+            description={<>We make complex systems easier to understand, test, improve, and explain. The basic move is simple: show the structure, track what changes, follow the change, and find where it breaks.</>}
+            />
 
           <div className={styles.methodWorkbench}>
             <p className={styles.workbenchLabel}>WHAT WE PRODUCE</p>
@@ -108,19 +108,18 @@ export function InstitutionalHomePreview() {
         </section>
 
         <section className={styles.featuredSection} id="featured-work">
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>FEATURED WORK</p>
-              <h2>Things we are building, testing, and publishing.</h2>
-            </div>
-            <span>Concrete examples first. The labels simply tell you what kind of work each one is.</span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>FEATURED WORK</>}
+            title={<>Things we are building, testing, and publishing.</>}
+            note={<>Concrete examples first. The labels simply tell you what kind of work each one is.</>}
+            />
 
           <div className={styles.featuredGrid}>
             {featuredWork.map((item, index) => (
               <article className={styles.featuredCard} key={item.title}>
                 <div className={styles.featuredVisual} data-variant={index + 1} aria-hidden="true">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>{formatOrdinal(index)}</span>
                 </div>
                 <div className={styles.featuredCopy}>
                   <span className={styles.featuredTag}>{item.tag}</span>
@@ -143,9 +142,6 @@ export function InstitutionalHomePreview() {
           </p>
           <blockquote>“Better systems for a more legible world.”</blockquote>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

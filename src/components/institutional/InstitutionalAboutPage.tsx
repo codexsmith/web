@@ -1,8 +1,10 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/About.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -111,45 +113,37 @@ const labInstruments = [
 
 export function InstitutionalAboutPage() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main className={styles.aboutPage}>
-        <section className={styles.aboutHero}>
-          <div>
-            <p className={styles.eyebrow}>ABOUT BOUNDARY FIRST LABS</p>
-            <h1>A laboratory for the machinery beneath knowledge.</h1>
-            <p className={styles.routeLead}>
-              Boundary First Labs studies how complex systems are represented,
-              transformed, tested, measured, and made operational.
-            </p>
-            <p className={styles.routeSupport}>
-              The technical question is paired with a human one: what happens to people&apos;s
+    <InstitutionalPageShell mainClassName={styles.aboutPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.aboutHero}
+          eyebrow={<>ABOUT BOUNDARY FIRST LABS</>}
+          title={<>A laboratory for the machinery beneath knowledge.</>}
+          lead={<>Boundary First Labs studies how complex systems are represented,
+              transformed, tested, measured, and made operational.</>}
+          support={<>The technical question is paired with a human one: what happens to people&apos;s
               ability to understand, choose, contest, repair, and act when those
-              representations become consequential?
-            </p>
-          </div>
-
+              representations become consequential?</>}
+          >
           <blockquote className={styles.aboutAgencyQuestion}>
             <span>THE HUMAN QUESTION</span>
             What happens to human agency when a system&apos;s representation becomes operational?
           </blockquote>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.knowledgeInfrastructure}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>KNOWLEDGE IS INFRASTRUCTURE</p>
-            <h2>Complex reasoning depends on representations.</h2>
-            <p>
-              Representations make difficult systems manageable. They also determine what
-              a system can see, distinguish, store, transform, and sometimes act upon.
-            </p>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>KNOWLEDGE IS INFRASTRUCTURE</>}
+            title={<>Complex reasoning depends on representations.</>}
+            description={<>Representations make difficult systems manageable. They also determine what
+              a system can see, distinguish, store, transform, and sometimes act upon.</>}
+            />
 
           <div className={styles.representationGrid}>
             {representations.map(([title, description], index) => (
               <div className={styles.representationPlate} key={title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{title}</strong>
                 <p>{description}</p>
               </div>
@@ -175,18 +169,17 @@ export function InstitutionalAboutPage() {
         </section>
 
         <section className={styles.recurringProblemSection}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>THE RECURRING PROBLEM</p>
-              <h2>Many hard systems failures have the same shape.</h2>
-            </div>
-            <span>The representation and the reality it stands for have drifted apart.</span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>THE RECURRING PROBLEM</>}
+            title={<>Many hard systems failures have the same shape.</>}
+            note={<>The representation and the reality it stands for have drifted apart.</>}
+            />
 
           <div className={styles.recurringFailureGrid}>
             {recurringFailures.map(([title, description], index) => (
               <article className={styles.recurringFailureCard} key={title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <h3>{title}</h3>
                 <p>{description}</p>
               </article>
@@ -218,13 +211,12 @@ export function InstitutionalAboutPage() {
         </section>
 
         <section className={styles.aboutMethodCycle}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>HOW THE METHOD DEVELOPED</p>
-              <h2>Practice first. Then comparison, formalization, and test.</h2>
-            </div>
-            <span>Systematize before speculating.</span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>HOW THE METHOD DEVELOPED</>}
+            title={<>Practice first. Then comparison, formalization, and test.</>}
+            note={<>Systematize before speculating.</>}
+            />
 
           <div className={styles.aboutCycleRail}>
             {methodCycle.map(([index, title, description]) => (
@@ -281,7 +273,7 @@ export function InstitutionalAboutPage() {
           <div className={styles.agencyRouteGrid}>
             {agencyRoutes.map((route, index) => (
               <div className={styles.agencyRoutePlate} key={route}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{route}</strong>
               </div>
             ))}
@@ -302,7 +294,7 @@ export function InstitutionalAboutPage() {
           <div className={styles.capabilityOutputGrid}>
             {capabilityOutputs.map((output, index) => (
               <div className={styles.capabilityOutputPlate} key={output}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{output}</strong>
               </div>
             ))}
@@ -323,7 +315,7 @@ export function InstitutionalAboutPage() {
           <div className={styles.aboutStewardshipGrid}>
             {stewardshipQuestions.map((question, index) => (
               <div className={styles.aboutStewardshipPlate} key={question}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{question}</strong>
               </div>
             ))}
@@ -345,7 +337,7 @@ export function InstitutionalAboutPage() {
           <div className={styles.labInstrumentRail}>
             {labInstruments.map((instrument, index) => (
               <div key={instrument}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{instrument}</strong>
               </div>
             ))}
@@ -417,9 +409,6 @@ export function InstitutionalAboutPage() {
             more clearly, act more capably, exercise power more accountably, and repair what fails.
           </p>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

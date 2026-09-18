@@ -1,8 +1,10 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Publications.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -134,31 +136,24 @@ const flagshipPattern = [
 
 export function InstitutionalPublicationsPage() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main className={styles.publicationsPage}>
-        <section className={styles.publicationsHero}>
-          <div>
-            <p className={styles.eyebrow}>PUBLICATIONS</p>
-            <h1>Read the argument. Inspect the machinery behind it.</h1>
-            <p className={styles.routeLead}>
-              Boundary First Labs publishes papers, technical reports, research notes,
+    <InstitutionalPageShell mainClassName={styles.publicationsPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.publicationsHero}
+          eyebrow={<>PUBLICATIONS</>}
+          title={<>Read the argument. Inspect the machinery behind it.</>}
+          lead={<>Boundary First Labs publishes papers, technical reports, research notes,
               formal specifications, experiment reports, public-interest analyses,
-              reference implementations, and Research Deployment Packets.
-            </p>
-            <p className={styles.routeSupport}>
-              A publication is an important artifact. It is not automatically the whole
-              research object.
-            </p>
-          </div>
-
+              reference implementations, and Research Deployment Packets.</>}
+          support={<>A publication is an important artifact. It is not automatically the whole
+              research object.</>}
+          >
           <blockquote className={styles.publicationCovenantLead}>
             <span>PUBLICATION PRINCIPLE</span>
             Publication should increase the reader&apos;s ability to inspect the work,
             not merely increase the author&apos;s authority.
           </blockquote>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.publicationProjection}>
           <div>
@@ -180,15 +175,12 @@ export function InstitutionalPublicationsPage() {
         </section>
 
         <section className={styles.publicationAnatomy}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>PUBLICATION ANATOMY</p>
-              <h2>What a publication page should expose.</h2>
-            </div>
-            <span>
-              Enough surrounding state for the reader to judge the work independently.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>PUBLICATION ANATOMY</>}
+            title={<>What a publication page should expose.</>}
+            note={<>Enough surrounding state for the reader to judge the work independently.</>}
+            />
 
           <div className={styles.publicationFieldGrid}>
             {publicationFields.map(([index, title, description]) => (
@@ -202,20 +194,19 @@ export function InstitutionalPublicationsPage() {
         </section>
 
         <section className={styles.publicationStatusSection}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>SOURCE-OWNED STATUS</p>
-            <h2>Publication state should be visible.</h2>
-            <p>
-              The website may render status, but it does not invent or promote it.
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>SOURCE-OWNED STATUS</>}
+            title={<>Publication state should be visible.</>}
+            description={<>The website may render status, but it does not invent or promote it.
               Where canonical research or publication control has a more precise state,
-              that source wins.
-            </p>
-          </div>
+              that source wins.</>}
+            />
 
           <div className={styles.publicationStateRail}>
             {publicationStates.map((state, index) => (
               <div className={styles.publicationStatePlate} key={state}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{state}</strong>
               </div>
             ))}
@@ -236,7 +227,7 @@ export function InstitutionalPublicationsPage() {
           <div className={styles.readerDistinctionRail}>
             {readerDistinctions.map((item, index) => (
               <span key={item}>
-                <small>{String(index + 1).padStart(2, "0")}</small>
+                <small>{formatOrdinal(index)}</small>
                 {item}
               </span>
             ))}
@@ -244,12 +235,11 @@ export function InstitutionalPublicationsPage() {
         </section>
 
         <section className={styles.publicationTypesSection}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>PUBLICATION TYPES</p>
-              <h2>Different artifacts carry different burdens.</h2>
-            </div>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>PUBLICATION TYPES</>}
+            title={<>Different artifacts carry different burdens.</>}
+            />
 
           <div className={styles.publicationTypeGrid}>
             {publicationTypes.map((type) => (
@@ -276,7 +266,7 @@ export function InstitutionalPublicationsPage() {
           <div className={styles.critiqueInputGrid}>
             {critiqueInputs.map((item, index) => (
               <div className={styles.critiqueInputPlate} key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{item}</strong>
               </div>
             ))}
@@ -284,16 +274,13 @@ export function InstitutionalPublicationsPage() {
         </section>
 
         <section className={styles.publicationPortfolioModel}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>PUBLIC INDEX</p>
-              <h2>Simple outside. Richer underneath.</h2>
-            </div>
-            <span>
-              The public index should help people find and understand work without turning
-              into the Lab&apos;s internal operations dashboard.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>PUBLIC INDEX</>}
+            title={<>Simple outside. Richer underneath.</>}
+            note={<>The public index should help people find and understand work without turning
+              into the Lab&apos;s internal operations dashboard.</>}
+            />
 
           <div className={styles.publicIndexModel}>
             <div className={styles.publicIndexFilters}>
@@ -328,7 +315,7 @@ export function InstitutionalPublicationsPage() {
           <div className={styles.stewardshipQuestionGrid}>
             {stewardshipQuestions.map((question, index) => (
               <div className={styles.stewardshipQuestionPlate} key={question}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{question}</strong>
               </div>
             ))}
@@ -336,21 +323,18 @@ export function InstitutionalPublicationsPage() {
         </section>
 
         <section className={styles.flagshipPatternSection}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>FLAGSHIP RESEARCH-OBJECT PATTERN</p>
-              <h2>A reusable public research page.</h2>
-            </div>
-            <span>
-              Representational Mechanics establishes the first flagship pattern; the site
-              should generalize the grammar rather than duplicate a one-off.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>FLAGSHIP RESEARCH-OBJECT PATTERN</>}
+            title={<>A reusable public research page.</>}
+            note={<>Representational Mechanics establishes the first flagship pattern; the site
+              should generalize the grammar rather than duplicate a one-off.</>}
+            />
 
           <div className={styles.flagshipPatternRail}>
             {flagshipPattern.map((item, index) => (
               <div key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{item}</strong>
               </div>
             ))}
@@ -382,9 +366,6 @@ export function InstitutionalPublicationsPage() {
             I know whether it has changed.
           </blockquote>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }

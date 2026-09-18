@@ -1,8 +1,10 @@
-import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Apparatus.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -208,41 +210,33 @@ const designQuestions = [
 
 export function InstitutionalApparatusPage() {
   return (
-    <div className={styles.page}>
-      <InstitutionalHeader />
-
-      <main className={styles.apparatusPage}>
-        <section className={styles.apparatusHero}>
-          <div>
-            <p className={styles.eyebrow}>APPARATUS</p>
-            <h1>Operational tools for knowledge infrastructure.</h1>
-            <p className={styles.routeLead}>
-              Research creates more structure than a paper can hold.
-            </p>
-            <p className={styles.routeSupport}>
-              Boundary First Labs builds apparatus for preserving, inspecting, and
+    <InstitutionalPageShell mainClassName={styles.apparatusPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.apparatusHero}
+          eyebrow={<>APPARATUS</>}
+          title={<>Operational tools for knowledge infrastructure.</>}
+          lead={<>Research creates more structure than a paper can hold.</>}
+          support={<>Boundary First Labs builds apparatus for preserving, inspecting, and
               transferring questions, experiments, claims, evidence, provenance,
-              criticism, defects, authority, repair, and forward state.
-            </p>
-          </div>
-
+              criticism, defects, authority, repair, and forward state.</>}
+          >
           <blockquote className={styles.apparatusThesis}>
             <span>DESIGN POSTURE</span>
             Legible by humans. Executable by machines. Repairable under critique.
             Transferable without hidden dependence.
           </blockquote>
-        </section>
+        </InstitutionalRouteHero>
 
         <section className={styles.apparatusWhy}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>WHY APPARATUS MATTERS</p>
-            <h2>Good ideas can fail because their machinery is opaque.</h2>
-            <p>
-              Apparatus makes claims, evidence, experiments, sources, failures,
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>WHY APPARATUS MATTERS</>}
+            title={<>Good ideas can fail because their machinery is opaque.</>}
+            description={<>Apparatus makes claims, evidence, experiments, sources, failures,
               authority, and handoff state easier to inspect instead of leaving them in
-              memory, prose, or disconnected folders.
-            </p>
-          </div>
+              memory, prose, or disconnected folders.</>}
+            />
 
           <div className={styles.apparatusQuestions}>
             {[
@@ -258,7 +252,7 @@ export function InstitutionalApparatusPage() {
               "Who owns correction and maintenance?",
             ].map((question, index) => (
               <div className={styles.apparatusQuestionPlate} key={question}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{question}</strong>
               </div>
             ))}
@@ -287,15 +281,12 @@ export function InstitutionalApparatusPage() {
         </section>
 
         <section className={styles.instrumentBench}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>INSTRUMENT BENCH</p>
-              <h2>Different tools. Explicit authority ceilings.</h2>
-            </div>
-            <span>
-              The apparatus is a federation of instruments, not one fictional master database.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>INSTRUMENT BENCH</>}
+            title={<>Different tools. Explicit authority ceilings.</>}
+            note={<>The apparatus is a federation of instruments, not one fictional master database.</>}
+            />
 
           <div className={styles.instrumentGrid}>
             {instruments.map((instrument) => (
@@ -343,13 +334,12 @@ export function InstitutionalApparatusPage() {
         </section>
 
         <section className={styles.apparatusPathSection}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>HOW IT WORKS TOGETHER</p>
-              <h2>A simplified research path.</h2>
-            </div>
-            <span>No box silently inherits the authority of the next one.</span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>HOW IT WORKS TOGETHER</>}
+            title={<>A simplified research path.</>}
+            note={<>No box silently inherits the authority of the next one.</>}
+            />
 
           <div className={styles.apparatusPath}>
             {apparatusPath.map(([index, title, description]) => (
@@ -428,16 +418,13 @@ export function InstitutionalApparatusPage() {
         </section>
 
         <section className={styles.publicExposureSection}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <p className={styles.sectionIndex}>PUBLIC EXPOSURE</p>
-              <h2>Inspectability needs boundaries too.</h2>
-            </div>
-            <span>
-              Transparency is not indiscriminate disclosure. Stewardship requires both
-              legibility and boundary discipline.
-            </span>
-          </div>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>PUBLIC EXPOSURE</>}
+            title={<>Inspectability needs boundaries too.</>}
+            note={<>Transparency is not indiscriminate disclosure. Stewardship requires both
+              legibility and boundary discipline.</>}
+            />
 
           <div className={styles.exposureGrid}>
             {publicExposure.map((group) => (
@@ -456,14 +443,15 @@ export function InstitutionalApparatusPage() {
         </section>
 
         <section className={styles.apparatusDesignQuestions}>
-          <div className={styles.sectionLead}>
-            <p className={styles.sectionIndex}>DESIGN POSTURE</p>
-            <h2>Every instrument should answer six questions quickly.</h2>
-          </div>
+          <InstitutionalSectionLead
+            styles={styles}
+            eyebrow={<>DESIGN POSTURE</>}
+            title={<>Every instrument should answer six questions quickly.</>}
+            />
           <div className={styles.designQuestionGrid}>
             {designQuestions.map((question, index) => (
               <div className={styles.designQuestionPlate} key={question}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span>{formatOrdinal(index)}</span>
                 <strong>{question}</strong>
               </div>
             ))}
@@ -501,9 +489,6 @@ export function InstitutionalApparatusPage() {
             state—leaving the next person with more capability and less hidden dependence.
           </p>
         </section>
-      </main>
-
-      <InstitutionalFooter />
-    </div>
+      </InstitutionalPageShell>
   );
 }
