@@ -143,6 +143,9 @@ expect(aboutCss.includes(".aboutAgencyGrid"), "About must style a dedicated Agen
 expect(aboutCss.includes(".aboutInstitutionGrid"), "About must style a dedicated Institutional Reflow field");
 expect(aboutCss.includes("min-height: 166px"), "About REST Reflow cards should use the compact card floor");
 expect(aboutCss.includes("height: 112px"), "About focus-stage peers should use the compact peer height");
+expect(aboutCss.includes('border-top: 7px solid var(--old-gold)'), "About chapters must own a dominant outer plate perimeter");
+expect(aboutCss.includes('.aboutGroupGrid {\n  margin: 16px 18px 0;'), "About Reflow fields must read as inset work surfaces inside chapter plates");
+expect(aboutCss.includes('border-top-width: 3px'), "About child cards must use lower visual elevation than their chapter container");
 
 for (const [name, source] of [
   ["Research", researchContext],

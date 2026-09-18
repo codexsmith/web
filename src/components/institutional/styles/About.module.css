@@ -926,3 +926,121 @@
     grid-column: 1;
   }
 }
+
+
+/* Nested chapter hierarchy.
+ * The chapter is the dominant object; its Reflow cards are instruments inside it.
+ * This deliberately reads as three large plates containing smaller plates rather
+ * than one continuous wall of peer cards. */
+.aboutGroup {
+  margin: 30px clamp(24px, 4.5vw, 76px);
+  padding: 0 0 22px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 7px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.76), rgba(225,234,244,.94));
+  box-shadow:
+    0 3px 0 rgba(7,26,61,.2),
+    0 18px 34px rgba(7,26,61,.12);
+}
+
+.aboutGroup[data-about-group="agency"] {
+  border-top-color: var(--osha-green);
+}
+
+.aboutGroup[data-about-group="institution"] {
+  border-top-color: var(--osha-blue);
+}
+
+.aboutGroupHeader {
+  margin: 0;
+  padding: 20px 22px 19px;
+  border-top: 0;
+  border-bottom: 1px solid rgba(7,26,61,.24);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(235,241,248,.9));
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.aboutGroupIndex {
+  min-width: 46px;
+  min-height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  font-size: .62rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.78),
+    0 2px 0 rgba(84,66,18,.2);
+}
+
+.aboutGroupHeader > div {
+  grid-template-columns: minmax(180px, .45fr) minmax(300px, 1fr) minmax(320px, 1.25fr);
+  gap: 24px;
+}
+
+.aboutGroupHeader strong {
+  font-size: clamp(1.18rem, 1.45vw, 1.42rem);
+}
+
+.aboutGroupGrid {
+  margin: 16px 18px 0;
+  padding: 12px;
+  border: 1px solid rgba(7,26,61,.2);
+  background:
+    linear-gradient(180deg, rgba(202,216,231,.56), rgba(238,243,248,.5));
+  box-shadow:
+    inset 0 2px 8px rgba(7,26,61,.1),
+    inset 0 1px 0 rgba(255,255,255,.64);
+}
+
+.aboutContextCard {
+  border-color: rgba(7,26,61,.3);
+  border-top-width: 3px;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.07),
+    0 2px 0 rgba(7,26,61,.13),
+    0 5px 10px rgba(7,26,61,.055);
+}
+
+.aboutContextCard[data-reflow-state="selected"] {
+  border-top-width: 6px;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.08),
+    0 3px 0 rgba(7,26,61,.2),
+    0 13px 24px rgba(7,26,61,.13);
+}
+
+@media (max-width: 980px) {
+  .aboutGroup {
+    margin: 24px clamp(18px, 3vw, 34px);
+  }
+
+  .aboutGroupHeader > div {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 680px) {
+  .aboutGroup {
+    margin: 16px 12px;
+    padding: 0 0 14px;
+  }
+
+  .aboutGroupHeader {
+    padding: 16px;
+  }
+
+  .aboutGroupIndex {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .aboutGroupGrid {
+    margin: 12px 12px 0;
+    padding: 8px;
+  }
+}

@@ -59,7 +59,7 @@ Institutional navigation distinguishes global routes from contextual child route
 The Open Lab route uses `sections/OpenLabContextSection.tsx`: Intake Status is promoted into the hero, Public Participation and the Institutional Promise remain directly readable, and Agency, Stewardship, Shared Infrastructure, Humanist Interface, and Capability Transfer are compressed into a five-object focus-stage Reflow field.
 
 
-The About route now treats its three narrative chapters as three independent focus-stage Reflow fields in `sections/AboutReflowGroups.tsx`: Representation + Method (5 objects), Agency + Stewardship (3 objects), and Institutional Practice (4 objects). The closing “Lab in one sentence” synthesis remains directly readable outside the fields.
+The About route now treats its three narrative chapters as three independent focus-stage Reflow fields in `sections/AboutReflowGroups.tsx`: Representation + Method (5 objects), Agency + Stewardship (3 objects), and Institutional Practice (4 objects). Visually, each chapter owns the dominant outer plate and its Reflow objects sit on an inset work surface inside it, so the page reads as three chapter cards containing subordinate cards rather than one wall of peers. The closing “Lab in one sentence” synthesis remains directly readable outside the fields.
 
 
 The Funding route is a contextual child route at `/v3/funding`. It is intentionally absent from the global header/footer navigation and is exposed through the About, Research, and Open Lab hero child-page rails. Funding owns one coherent public narrative: existing capacity -> bounded conversion -> inspectable evidence -> external contact -> renewed capacity.
