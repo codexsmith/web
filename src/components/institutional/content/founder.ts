@@ -90,6 +90,11 @@ export const founderPrinciples = [
       "AI and systems training supplied a search-and-action grammar: agents perceive bounded state, choose among admissible actions, use tools, compare alternatives, evaluate results, and revise policy. Later human–AI work makes that loop explicit while preserving authority boundaries.",
   },
   {
+    label: "STEWARDSHIP",
+    description:
+      "The work is treated as something held in trust rather than merely produced: steward the intellectual record, preserve human agency and capability, and follow material and ecological consequence far enough that success is not purchased by invisible externalities.",
+  },
+  {
     label: "FORMALLY GENERALIZED",
     description:
       "Patterns are promoted only when they can be stated precisely enough to recover prior cases, expose assumptions, preserve invariants, and fail under test.",
