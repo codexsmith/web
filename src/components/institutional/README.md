@@ -53,7 +53,7 @@ The Publications route currently uses `sections/PublicationContextSection.tsx` a
 The Publications route now has a separate `sections/PublicationCatalogSection.tsx` substantive surface above its context field. Its initial records are explicit UI stubs used only to design the catalog grammar; they claim no publication date, DOI, review state, release state, or scientific authority. Replace those stubs with source-governed publication records when canonical documents are ingested.
 
 
-Institutional navigation distinguishes global routes from contextual child routes. Child pages are not repeated in the top-level header/footer navigation; parent routes expose them through the shared lower-right hero child-page rail. Apparatus is currently reachable as a child of both Research and Open Lab while retaining its canonical `/v3/apparatus` route.
+Institutional navigation distinguishes global routes from contextual child routes. Child pages are not repeated in the top-level header/footer navigation; parent routes expose them through the shared lower-right hero child-page rail. Apparatus is currently reachable as a child of both Research and Open Lab while retaining its canonical `/v3/apparatus` route. Funding is reachable as a child of About, Research, and Open Lab while retaining its canonical `/v3/funding` route.
 
 
 The Open Lab route uses `sections/OpenLabContextSection.tsx`: Intake Status is promoted into the hero, Public Participation and the Institutional Promise remain directly readable, and Agency, Stewardship, Shared Infrastructure, Humanist Interface, and Capability Transfer are compressed into a five-object focus-stage Reflow field.
@@ -62,6 +62,6 @@ The Open Lab route uses `sections/OpenLabContextSection.tsx`: Intake Status is p
 The About route now treats its three narrative chapters as three independent focus-stage Reflow fields in `sections/AboutReflowGroups.tsx`: Representation + Method (5 objects), Agency + Stewardship (3 objects), and Institutional Practice (4 objects). The closing “Lab in one sentence” synthesis remains directly readable outside the fields.
 
 
-The Funding route is a contextual child of About at `/v3/funding`. It is intentionally absent from the global header/footer navigation and is exposed through the About hero child-page rail. Funding owns one coherent public narrative: existing capacity -> bounded conversion -> inspectable evidence -> external contact -> renewed capacity.
+The Funding route is a contextual child route at `/v3/funding`. It is intentionally absent from the global header/footer navigation and is exposed through the About, Research, and Open Lab hero child-page rails. Funding owns one coherent public narrative: existing capacity -> bounded conversion -> inspectable evidence -> external contact -> renewed capacity.
 
 The public Funding route does not duplicate internal target lists or financing operations. It projects the canonical funding doctrine into an institutional explanation of what support makes possible, which channels fit different kinds of work, how a funder can evaluate a bounded program, and why capital state must remain orthogonal to epistemic state.

@@ -14,8 +14,10 @@ export const institutionalChildRoutes = {
   ],
   research: [
     { label: "Apparatus", href: "/v3/apparatus" },
+    { label: "Funding", href: "/v3/funding" },
   ],
   openLab: [
     { label: "Apparatus", href: "/v3/apparatus" },
+    { label: "Funding", href: "/v3/funding" },
   ],
 } as const;

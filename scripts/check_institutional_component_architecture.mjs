@@ -119,8 +119,8 @@ expect(!routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" },\n
 expect(!topLevelRouteRegistry.includes('/v3/funding'), "Funding must remain a contextual child route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
 expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" }'), "About must own Funding as a child-page link");
-expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Research must own Apparatus as a child-page link");
-expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Open Lab must expose Apparatus as a child-page link");
+expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" }'), "Research must expose Apparatus and Funding as child-page links");
+expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" }'), "Open Lab must expose Apparatus and Funding as child-page links");
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
 expect(primitives.includes("routeChildDependencyIcon"), "child-page cards must expose a dependency icon");
 expect(primitives.includes("<small>DEPENDENCY</small>"), "child-page cards must label their dependency relationship");
@@ -129,7 +129,7 @@ expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry 
 expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");
 
 const researchPage = read(`${root}/InstitutionalResearchPage.tsx`);
-expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), "Research hero must expose Apparatus as a child page");
+expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), "Research hero must expose its contextual child pages");
 expect(researchPage.includes("<ResearchContextSection />"), "Research must compose its contextual bento as a section component");
 expect(!researchPage.includes('id="reader-agency"'), "Research page must not inline Reflow Field context cards");
 expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchContextSection must exist as the route-local composition boundary");
@@ -148,7 +148,7 @@ expect(!projectsPage.includes('className={styles.capabilityTransfer}'), "Project
 expect(fs.existsSync(`${root}/sections/ProjectContextSection.tsx`), "ProjectContextSection must exist as the route-local composition boundary");
 
 const openLabPage = read(`${root}/InstitutionalOpenLabPage.tsx`);
-expect(openLabPage.includes("childLinks={institutionalChildRoutes.openLab}"), "Open Lab hero must expose Apparatus as a child page");
+expect(openLabPage.includes("childLinks={institutionalChildRoutes.openLab}"), "Open Lab hero must expose its contextual child pages");
 expect(openLabPage.includes("openLabHeroIntake"), "Open Lab must surface Intake Status in the hero");
 expect(!openLabPage.includes('className={styles.openLabAvailability}'), "Open Lab must not keep Intake Status as a body section");
 expect(openLabPage.includes('className={styles.openLabContracts}'), "Open Lab must keep Public Participation directly readable");
