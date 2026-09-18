@@ -40,6 +40,57 @@ export const featuredWork = [
 ] as const;
 
 
+export const homeNowSnapshot = {
+  eyebrow: "NOW / ROADMAP",
+  status: "SEPTEMBER 2026 · CURRENT CYCLE",
+  title: "Externalize, test, and close the obvious gaps.",
+  description:
+    "The immediate problem is not generating more ideas. It is turning existing capability into bounded artifacts, outside evidence, criticism, revenue, publication, and repeatable institutional practice.",
+  thesis: "Externalize → test → repair → repeat → transfer.",
+  href: "/v3/now",
+  lanes: [
+    "Public institutional interface",
+    "BFL-native external evidence",
+    "Representational laboratory program",
+    "Bounded publications + criticism",
+    "Relationships, funding + distribution",
+    "One coherent body of work",
+  ],
+} as const;
+
+export const homeInstitutionalFrontDoors = [
+  {
+    eyebrow: "APPLIED WORK",
+    title: "Bring one system that is expensive to misunderstand.",
+    description:
+      "Architecture, modernization, AI governance, system diagnosis, research infrastructure, workshops, prototypes, and bounded pilots.",
+    note: "Ready to scope · case-study evidence still growing",
+    href: "/v3/applied-work",
+    cta: "See Applied Work",
+    tone: "applied",
+  },
+  {
+    eyebrow: "COLLABORATION",
+    title: "Bring a real problem, capability, audience, or resource.",
+    description:
+      "Start with the smallest useful relationship: one review, one workshop, one pilot, one funded milestone, one introduction, or one co-developed artifact.",
+    note: "Review · test · build · distribute · transfer",
+    href: "/v3/collaboration",
+    cta: "Explore Collaboration",
+    tone: "collaboration",
+  },
+  {
+    eyebrow: "FUNDING",
+    title: "Fund the conversion, not the theory.",
+    description:
+      "Support turns existing research, software, methods, prototypes, and product candidates into public, reviewable, useful work that can meet external evidence.",
+    note: "Capital can change capacity. It does not change truth.",
+    href: "/v3/funding",
+    cta: "See the Funding model",
+    tone: "funding",
+  },
+] as const;
+
 export const postureCommitments = [
   {
     eyebrow: "INSPECTABILITY",
