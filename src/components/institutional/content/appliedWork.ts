@@ -124,6 +124,16 @@ export const appliedWorkBoundaries = [
       "The delivery lineage favors visible state, bounded work, real capacity, small coherent increments, short evidence loops, and adaptation from observed results. Clients are not required to adopt Scrum rituals, BFL vocabulary, or a process brand.",
   },
   {
+    label: "SCIENTIFIC METHOD AS DELIVERY DISCIPLINE",
+    description:
+      "Treat important assumptions as testable. Define what evidence would change the decision, distinguish observation from interpretation, preserve negative results, and prefer a bounded pilot when a larger commitment would merely hide uncertainty.",
+  },
+  {
+    label: "AGENTIC REASONING, HUMAN AUTHORITY",
+    description:
+      "AI and automation may search, decompose, compare, simulate, draft, or critique. They do not silently acquire decision rights, domain authority, or the power to promote a consequential conclusion without the evidence and human gate the engagement requires.",
+  },
+  {
     label: "NO THEORY BUY-IN REQUIRED",
     description:
       "Clients do not need to adopt Boundary First terminology or agree with the Lab's broader research program. The engagement has to stand on the usefulness of the work itself.",

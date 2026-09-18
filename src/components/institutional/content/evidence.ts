@@ -141,6 +141,13 @@ export const nativeEvidence = [
     linkLabel: "Inspect Applied Work",
   },
   {
+    title: "Agentic scientific machinery",
+    description:
+      "The Agentic Scientific Method, Corpus Forge, experiment records, critic loops, claim/source controls, and human promotion gates make the Lab's research process itself inspectable. The machinery records search, alternatives, tests, nulls, defects, repair, provenance, and authority state.",
+    href: "/v3/projects",
+    linkLabel: "Inspect Agentic Scientific Method",
+  },
+  {
     title: "Publication discipline",
     description:
       "The publication surface distinguishes manuscripts, stubs, release state, review state, and bound canonical documents rather than calling every substantial draft a publication.",
@@ -192,6 +199,8 @@ export const evidenceToEarn = [
 ] as const;
 
 export const evidenceNonImplications = [
+  ["Agent output != scientific authority", "Search, synthesis, code execution, critic agreement, or a successful automated run may produce useful evidence; none of them alone promote a scientific claim."],
+  ["Method discipline != validated method", "A well-instrumented scientific or agentic workflow can improve traceability and error detection without proving that the workflow is complete, novel, or universally superior."],
   ["Prior career != BFL traction", "Earlier professional delivery supports capability; it does not create current BFL customers or revenue."],
   ["Institutional award != personal award", "CityWatch recognition belongs to the municipal project and institution unless a source establishes a narrower attribution."],
   ["Artifact exists != claim is true", "A large corpus, working prototype, or formal derivation proves existence and inspectability—not scientific correctness."],

@@ -80,6 +80,16 @@ export const founderPrinciples = [
       "Claims are compared against established disciplines, prior art, experiments, external criticism, and the strongest available neighboring machinery.",
   },
   {
+    label: "SCIENTIFIC METHOD",
+    description:
+      "Research apprenticeship and later independent work supplied the evidence discipline: literature, explicit hypotheses, measurement, controls, null results, competing explanations, falsification conditions, and conclusions bounded by what was actually tested.",
+  },
+  {
+    label: "AGENTIC REASONING",
+    description:
+      "AI and systems training supplied a search-and-action grammar: agents perceive bounded state, choose among admissible actions, use tools, compare alternatives, evaluate results, and revise policy. Later human–AI work makes that loop explicit while preserving authority boundaries.",
+  },
+  {
     label: "FORMALLY GENERALIZED",
     description:
       "Patterns are promoted only when they can be stated precisely enough to recover prior cases, expose assumptions, preserve invariants, and fail under test.",

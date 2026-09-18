@@ -31,9 +31,10 @@ export function InstitutionalFounderPage() {
         }
         support={
           <>
-            His work sits where software engineering, research practice, formal systems,
-            and institutional consequence meet: understand the representation, make the
-            state explicit, build the smallest coherent artifact, and learn from what fails.
+            His work sits where software engineering, Lean–Agile practice, scientific method,
+            agentic reasoning, formal systems, and institutional consequence meet:
+            understand the representation, make state explicit, build the smallest coherent
+            test, inspect what happens, and repair what fails.
           </>
         }
         childLinks={institutionalChildRoutes.founder}

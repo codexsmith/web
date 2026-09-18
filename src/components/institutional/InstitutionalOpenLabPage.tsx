@@ -21,8 +21,10 @@ export function InstitutionalOpenLabPage() {
           title={<>A research institution should have a permeable boundary.</>}
           lead={<>Boundary First Labs should not be a one-way publishing machine.</>}
           support={<>The public should be able to bring consequential systems, criticism,
-              expertise, collaboration, and unusual work to the Lab without first
-              learning the Lab&apos;s internal vocabulary.</>}
+              expertise, collaboration, failed reproductions, counterexamples, and unusual
+              work to the Lab without first learning the Lab&apos;s internal vocabulary.
+              Scientific method needs disconfirming evidence; agentic reasoning needs
+              outside observations it did not generate for itself.</>}
           childLinks={institutionalChildRoutes.openLab}
           >
           <div className={styles.openLabHeroAsideStack}>

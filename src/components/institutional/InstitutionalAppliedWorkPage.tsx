@@ -47,7 +47,8 @@ export function InstitutionalAppliedWorkPage() {
           <strong>Ready to scope. Still building BFL-specific case studies and repeat-client evidence.</strong>
           <p>
             These offers grow out of prior professional work in software engineering,
-            architecture, consulting, Lean–Agile delivery, startup iteration, and systems diagnosis. The public site does
+            architecture, consulting, Lean–Agile delivery, scientific-method discipline,
+            agentic problem solving, startup iteration, and systems diagnosis. The public site does
             not imply that Boundary First Labs already has repeat external service revenue
             or a mature client case-study portfolio.
           </p>
