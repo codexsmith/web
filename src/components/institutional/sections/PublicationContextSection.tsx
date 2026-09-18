@@ -37,19 +37,16 @@ const publicationContextOrder = [
 ] as const;
 
 function PublicationContextSummary({
-  index,
   eyebrow,
   title,
   description,
 }: {
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
 }) {
   return (
     <div className={styles.publicationContextSummary}>
-      <span>{index}</span>
       <p className={styles.sectionIndex}>{eyebrow}</p>
       <h3>{title}</h3>
       <p>{description}</p>
@@ -60,7 +57,6 @@ function PublicationContextSummary({
 function PublicationContextCard({
   id,
   label,
-  index,
   eyebrow,
   title,
   description,
@@ -70,7 +66,6 @@ function PublicationContextCard({
 }: {
   id: string;
   label: string;
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -86,7 +81,6 @@ function PublicationContextCard({
       dataTone={tone}
       summary={
         <PublicationContextSummary
-          index={index}
           eyebrow={eyebrow}
           title={title}
           description={description}
@@ -117,7 +111,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="projection-authority"
             label="Projection and Authority"
-            index="01"
             eyebrow="PROJECTION ≠ AUTHORITY"
             title="Publications are views of research state."
             description="Visibility, polish, execution, and release never silently promote scientific authority."
@@ -142,7 +135,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="publication-anatomy"
             label="Publication Anatomy"
-            index="02"
             eyebrow="PUBLICATION ANATOMY"
             title="What a publication page should expose."
             description="Enough surrounding state for a reader to judge the work independently."
@@ -152,7 +144,6 @@ export function PublicationContextSection() {
             <div className={styles.publicationFieldGrid}>
               {publicationFields.map(([index, title, description]) => (
                 <article className={styles.publicationFieldCard} key={title}>
-                  <span>{index}</span>
                   <h3>{title}</h3>
                   <p>{description}</p>
                 </article>
@@ -163,7 +154,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="source-owned-status"
             label="Source-Owned Status"
-            index="03"
             eyebrow="SOURCE-OWNED STATUS"
             title="Publication state should be visible."
             description="The website may render status, but it does not invent or promote it."
@@ -189,7 +179,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="reader-agency"
             label="Reader Agency"
-            index="04"
             eyebrow="READER AGENCY"
             title="Do not make the reader inherit confidence from typography."
             description="Expose the distinctions that let a reader tell observation, inference, conjecture, result, and deployment apart."
@@ -216,7 +205,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="publication-types"
             label="Publication Types"
-            index="05"
             eyebrow="PUBLICATION TYPES"
             title="Different artifacts carry different burdens."
             description="Working papers, reports, notes, specifications, implementations, analyses, and packets are not interchangeable."
@@ -237,7 +225,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="critique-route"
             label="Critique This Work"
-            index="06"
             eyebrow="CRITIQUE THIS WORK"
             title="A criticism-friendly publication is one whose state can change."
             description="Corrections and objections should enter research machinery instead of disappearing into a generic inbox."
@@ -264,7 +251,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="public-index"
             label="Public Index"
-            index="07"
             eyebrow="PUBLIC INDEX"
             title="Simple outside. Richer underneath."
             description="The public index should aid discovery without becoming the Lab's internal operations dashboard."
@@ -293,7 +279,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="stewardship"
             label="Stewardship"
-            index="08"
             eyebrow="STEWARDSHIP"
             title="Publication creates long-lived obligations."
             description="Discoverability can outlive assumptions, terminology, evidence, and successor work."
@@ -320,7 +305,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="flagship-pattern"
             label="Flagship Research-Object Pattern"
-            index="09"
             eyebrow="FLAGSHIP RESEARCH-OBJECT PATTERN"
             title="A reusable public research page."
             description="Representational Mechanics establishes a first pattern; the site should generalize the grammar rather than duplicate a one-off."
@@ -340,7 +324,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="design-posture"
             label="Design Posture"
-            index="10"
             eyebrow="DESIGN POSTURE"
             title="Publication pages should look calmer than the claims they contain."
             description="Readable typography and restrained metadata should invite inspection rather than manufacture confidence."
@@ -360,7 +343,6 @@ export function PublicationContextSection() {
           <PublicationContextCard
             id="publication-covenant"
             label="Publication Covenant"
-            index="11"
             eyebrow="THE PUBLICATION COVENANT"
             title="A reader should be able to say:"
             description="The publication succeeds when the reader can locate claims, evidence, uncertainty, machinery, critique, and revision."

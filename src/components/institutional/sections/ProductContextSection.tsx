@@ -26,19 +26,16 @@ const productContextOrder = [
 ] as const;
 
 function ProductContextSummary({
-  index,
   eyebrow,
   title,
   description,
 }: {
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
 }) {
   return (
     <div className={styles.productContextSummary}>
-      <span>{index}</span>
       <p className={styles.sectionIndex}>{eyebrow}</p>
       <h3>{title}</h3>
       <p>{description}</p>
@@ -49,7 +46,6 @@ function ProductContextSummary({
 function ProductContextCard({
   id,
   label,
-  index,
   eyebrow,
   title,
   description,
@@ -59,7 +55,6 @@ function ProductContextCard({
 }: {
   id: string;
   label: string;
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -75,7 +70,6 @@ function ProductContextCard({
       dataTone={tone}
       summary={
         <ProductContextSummary
-          index={index}
           eyebrow={eyebrow}
           title={title}
           description={description}
@@ -106,7 +100,6 @@ export function ProductContextSection() {
           <ProductContextCard
             id="research-market"
             label="Research to Market"
-            index="01"
             eyebrow="RESEARCH → MARKET"
             title="One body of work can support several bounded product tests."
             description="Do not count every conceivable extension as a separate product before evidence exists."
@@ -131,7 +124,6 @@ export function ProductContextSection() {
           <ProductContextCard
             id="secondary-pipeline"
             label="Secondary Pipeline"
-            index="02"
             eyebrow="SECONDARY PIPELINE"
             title="Product-shaped work, not yet the near-term edge."
             description="Additional product candidates retain explicit next gates instead of being promoted early."
@@ -159,7 +151,6 @@ export function ProductContextSection() {
           <ProductContextCard
             id="consumer-ethos"
             label="Consumer Ethos"
-            index="03"
             eyebrow="CONSUMER ETHOS"
             title="A good product leaves the user more capable than it found them."
             description="The product should transfer useful capability rather than merely retain attention."
@@ -178,7 +169,6 @@ export function ProductContextSection() {
           <ProductContextCard
             id="commercial-truth"
             label="Commercial Truth"
-            index="04"
             eyebrow="COMMERCIAL TRUTH"
             title="Do not confuse a promising artifact with a validated market."
             description="Product evidence, market evidence, and scientific validation remain different claims."
@@ -199,7 +189,6 @@ export function ProductContextSection() {
           <ProductContextCard
             id="public-product-object"
             label="Public Product Object"
-            index="05"
             eyebrow="PUBLIC PRODUCT OBJECT"
             title="What a product page should answer."
             description="Enough state for a user or partner to understand the offer without guessing."

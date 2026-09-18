@@ -26,19 +26,16 @@ const projectContextOrder = [
 ] as const;
 
 function ProjectContextSummary({
-  index,
   eyebrow,
   title,
   description,
 }: {
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
 }) {
   return (
     <div className={styles.projectContextSummary}>
-      <span>{index}</span>
       <p className={styles.sectionIndex}>{eyebrow}</p>
       <h3>{title}</h3>
       <p>{description}</p>
@@ -49,7 +46,6 @@ function ProjectContextSummary({
 function ProjectContextCard({
   id,
   label,
-  index,
   eyebrow,
   title,
   description,
@@ -59,7 +55,6 @@ function ProjectContextCard({
 }: {
   id: string;
   label: string;
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -75,7 +70,6 @@ function ProjectContextCard({
       dataTone={tone}
       summary={
         <ProjectContextSummary
-          index={index}
           eyebrow={eyebrow}
           title={title}
           description={description}
@@ -106,7 +100,6 @@ export function ProjectContextSection() {
           <ProjectContextCard
             id="transfer-evidence"
             label="Transfer Evidence"
-            index="01"
             eyebrow="TRANSFER EVIDENCE"
             title="Deployment is another experiment."
             description="Usefulness, burden, ambiguity, failure, agency, maintenance, and transfer become visible in bounded systems."
@@ -133,7 +126,6 @@ export function ProjectContextSection() {
           <ProjectContextCard
             id="project-page-grammar"
             label="Project-Page Grammar"
-            index="02"
             eyebrow="PROJECT-PAGE GRAMMAR"
             title="Ten questions keep a project honest."
             description="Describe the native domain before translating it into Boundary First language."
@@ -143,7 +135,6 @@ export function ProjectContextSection() {
             <div className={styles.projectGrammarGrid}>
               {projectGrammar.map(([index, title, description]) => (
                 <article className={styles.projectGrammarPlate} key={title}>
-                  <span>{index}</span>
                   <h3>{title}</h3>
                   <p>{description}</p>
                 </article>
@@ -154,7 +145,6 @@ export function ProjectContextSection() {
           <ProjectContextCard
             id="status-rule"
             label="Status Rule"
-            index="03"
             eyebrow="STATUS RULE"
             title="Normalize the display. Preserve the meaning."
             description="Different project types can expose status without pretending they share one lifecycle."
@@ -194,7 +184,6 @@ export function ProjectContextSection() {
           <ProjectContextCard
             id="permanent-firewall"
             label="Permanent Firewall"
-            index="04"
             eyebrow="PERMANENT FIREWALL"
             title="Products are not research results."
             description="Research maturity, adoption, validation, agency benefit, and stewardship transfer remain distinct claims."
@@ -216,7 +205,6 @@ export function ProjectContextSection() {
           <ProjectContextCard
             id="capability-transfer"
             label="Capability Transfer"
-            index="05"
             eyebrow="CAPABILITY TRANSFER"
             title="What can someone else do after BFL leaves?"
             description="Permanent dependence on Boundary First Labs is not the default success condition."

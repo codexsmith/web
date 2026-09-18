@@ -30,19 +30,16 @@ const researchContextOrder = [
 ] as const;
 
 function ContextSummary({
-  index,
   eyebrow,
   title,
   description,
 }: {
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
 }) {
   return (
     <div className={styles.contextSummary}>
-      <span>{index}</span>
       <p className={styles.sectionIndex}>{eyebrow}</p>
       <h3>{title}</h3>
       <p>{description}</p>
@@ -53,7 +50,6 @@ function ContextSummary({
 function ContextCard({
   id,
   label,
-  index,
   eyebrow,
   title,
   description,
@@ -63,7 +59,6 @@ function ContextCard({
 }: {
   id: string;
   label: string;
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -79,7 +74,6 @@ function ContextCard({
       dataTone={tone}
       summary={
         <ContextSummary
-          index={index}
           eyebrow={eyebrow}
           title={title}
           description={description}
@@ -110,7 +104,6 @@ export function ResearchContextSection() {
           <ContextCard
             id="reader-agency"
             label="Reader Agency"
-            index="01"
             eyebrow="READER AGENCY"
             title="Research should increase epistemic agency."
             description="What a reader should be able to inspect, challenge, and judge independently."
@@ -134,7 +127,6 @@ export function ResearchContextSection() {
           <ContextCard
             id="working-principles"
             label="Working Principles"
-            index="02"
             eyebrow="WORKING PRINCIPLES"
             title="How research is handled."
             description="Six operating rules for building, testing, criticizing, and transferring work."
@@ -144,7 +136,6 @@ export function ResearchContextSection() {
             <div className={styles.principleGrid}>
               {principles.map(([index, title, description]) => (
                 <article className={styles.principlePlate} key={title}>
-                  <span>{index}</span>
                   <h3>{title}</h3>
                   <p>{description}</p>
                 </article>
@@ -155,7 +146,6 @@ export function ResearchContextSection() {
           <ContextCard
             id="equivalence-firewall"
             label="Permanent Firewall"
-            index="03"
             eyebrow="PERMANENT FIREWALL"
             title="Common role is not equivalence."
             description="Cross-domain comparison must not silently become a theorem or shared ontology."
@@ -178,7 +168,6 @@ export function ResearchContextSection() {
           <ContextCard
             id="research-state"
             label="Research State"
-            index="04"
             eyebrow="RESEARCH STATE"
             title="“Published” is not the only useful status."
             description="Source-governed states make uncertainty and maturity visible without scoring the work."
@@ -204,7 +193,6 @@ export function ResearchContextSection() {
           <ContextCard
             id="public-research-object"
             label="Public Research Object"
-            index="05"
             eyebrow="PUBLIC RESEARCH OBJECT"
             title="What a mature object should expose."
             description="Enough connected state for independent inspection, criticism, and continuation."
@@ -229,7 +217,6 @@ export function ResearchContextSection() {
           <ContextCard
             id="artifact-families"
             label="Research Artifact Families"
-            index="06"
             eyebrow="MORE THAN PAPERS"
             title="Research connects prose to machinery."
             description="Arguments, evidence, provenance, packets, and executable artifacts stay connected."
@@ -249,7 +236,6 @@ export function ResearchContextSection() {
           <ContextCard
             id="closing-test"
             label="Closing Test"
-            index="07"
             eyebrow="CLOSING TEST"
             title="A theory should survive instrumentation."
             description="Can another person represent, test, criticize, reconstruct, and continue the work?"

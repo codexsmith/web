@@ -393,8 +393,8 @@
 }
 
 .publicationContextCard {
-  min-height: 220px;
-  padding: 18px;
+  min-height: 166px;
+  padding: 15px;
   border: 1px solid var(--bfux-panel-edge-dark);
   border-top: 5px solid var(--osha-blue);
   background:
@@ -432,18 +432,10 @@
 
 .publicationContextGrid[data-reflow-active="true"]
   .publicationContextCard:not([data-reflow-state="selected"]) {
-  height: 142px;
-  min-height: 142px;
-  padding: 12px 14px;
+  height: 112px;
+  min-height: 112px;
+  padding: 10px 12px;
   overflow: hidden;
-}
-
-.publicationContextGrid[data-reflow-active="true"]
-  .publicationContextCard:not([data-reflow-state="selected"])
-  .publicationContextSummary > span {
-  margin-bottom: 7px;
-  padding: 3px 5px;
-  font-size: .48rem;
 }
 
 .publicationContextGrid[data-reflow-active="true"]
@@ -467,13 +459,6 @@
   display: none;
 }
 
-.publicationContextGrid[data-reflow-active="true"]
-  .publicationContextCard:not([data-reflow-state="selected"])
-  [class*="controlStrip"] {
-  margin-top: 9px;
-  padding-top: 7px;
-}
-
 .publicationContextCard[data-reflow-state="selected"] {
   min-height: 0;
   border-top-width: 7px;
@@ -482,16 +467,6 @@
     inset 0 -1px 0 rgba(7,26,61,.08),
     0 4px 0 rgba(7,26,61,.22),
     0 16px 30px rgba(7,26,61,.15);
-}
-
-.publicationContextSummary > span {
-  display: inline-block;
-  margin-bottom: 14px;
-  padding: 4px 6px;
-  border: 1px solid rgba(119,97,38,.4);
-  background: linear-gradient(180deg, #f8eebf, #d8bd65);
-  color: #443817;
-  font: 800 .54rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .publicationContextSummary h3 {

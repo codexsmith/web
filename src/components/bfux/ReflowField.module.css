@@ -87,36 +87,6 @@
   overflow: hidden;
   margin-top: 18px;
 }
-
-.controlStrip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(7, 26, 61, .14);
-}
-
-.stateReadout,
-.surfaceCue {
-  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .12em;
-}
-
-.stateReadout {
-  color: #5a6678;
-}
-
-.surfaceCue {
-  color: #0b2554;
-  text-transform: uppercase;
-}
-
-.surfaceCue > span {
-  color: var(--old-gold-dark, #776126);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .item {
     transition: none;

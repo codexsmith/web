@@ -156,8 +156,6 @@ export function ReflowFieldItem({
   detail,
   className,
   dataTone,
-  inspectLabel = "Inspect",
-  collapseLabel = "Close",
 }: {
   id: string;
   label: string;
@@ -165,8 +163,6 @@ export function ReflowFieldItem({
   detail: ReactNode;
   className?: string;
   dataTone?: string;
-  inspectLabel?: string;
-  collapseLabel?: string;
 }) {
   const context = useContext(ReflowFieldContext);
   const reducedMotion = useReducedMotion();
@@ -264,20 +260,6 @@ export function ReflowFieldItem({
         ) : null}
       </AnimatePresence>
 
-      <motion.div
-        layout="position"
-        transition={transition}
-        className={styles.controlStrip}
-        aria-hidden="true"
-      >
-        <span className={styles.stateReadout}>
-          {selected ? "INSPECTING" : "AVAILABLE"}
-        </span>
-        <span className={styles.surfaceCue}>
-          {selected ? collapseLabel : inspectLabel}
-          <span>{selected ? " −" : " +"}</span>
-        </span>
-      </motion.div>
     </motion.article>
   );
 }

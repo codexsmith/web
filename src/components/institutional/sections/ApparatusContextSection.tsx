@@ -59,19 +59,16 @@ const apparatusContextOrder = [
 ] as const;
 
 function ApparatusContextSummary({
-  index,
   eyebrow,
   title,
   description,
 }: {
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
 }) {
   return (
     <div className={styles.apparatusContextSummary}>
-      <span>{index}</span>
       <p className={styles.sectionIndex}>{eyebrow}</p>
       <h3>{title}</h3>
       <p>{description}</p>
@@ -82,7 +79,6 @@ function ApparatusContextSummary({
 function ApparatusContextCard({
   id,
   label,
-  index,
   eyebrow,
   title,
   description,
@@ -92,7 +88,6 @@ function ApparatusContextCard({
 }: {
   id: string;
   label: string;
-  index: string;
   eyebrow: string;
   title: string;
   description: string;
@@ -108,7 +103,6 @@ function ApparatusContextCard({
       dataTone={tone}
       summary={
         <ApparatusContextSummary
-          index={index}
           eyebrow={eyebrow}
           title={title}
           description={description}
@@ -139,7 +133,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="why-apparatus"
             label="Why Apparatus Matters"
-            index="01"
             eyebrow="WHY APPARATUS MATTERS"
             title="Good ideas can fail because their machinery is opaque."
             description="Apparatus makes research state inspectable instead of leaving it in memory, prose, or disconnected folders."
@@ -166,7 +159,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="federated-architecture"
             label="Federated Architecture"
-            index="02"
             eyebrow="FEDERATED ARCHITECTURE"
             title="No universal research database."
             description="Different instruments own different state and preserve separate authority boundaries."
@@ -193,7 +185,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="research-path"
             label="How It Works Together"
-            index="03"
             eyebrow="HOW IT WORKS TOGETHER"
             title="A simplified research path."
             description="No box silently inherits the authority of the next one."
@@ -204,7 +195,6 @@ export function ApparatusContextSection() {
               <div className={styles.apparatusPath}>
                 {apparatusPath.map(([index, title, description]) => (
                   <div className={styles.apparatusPathStep} key={title}>
-                    <span>{index}</span>
                     <strong>{title}</strong>
                     <p>{description}</p>
                   </div>
@@ -234,7 +224,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="human-gates"
             label="Human Gates"
-            index="04"
             eyebrow="HUMAN GATES"
             title="Human gates are not anti-automation."
             description="Automation can extend capability aggressively without silently absorbing responsibility."
@@ -257,7 +246,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="publication-model"
             label="Publication Model"
-            index="05"
             eyebrow="PUBLICATION MODEL"
             title="A paper is one view of the machine."
             description="Readable publication can remain the front door while apparatus preserves inspectable research state."
@@ -281,7 +269,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="public-exposure"
             label="Public Exposure"
-            index="06"
             eyebrow="PUBLIC EXPOSURE"
             title="Inspectability needs boundaries too."
             description="Transparency is not indiscriminate disclosure; stewardship needs both legibility and boundary discipline."
@@ -307,7 +294,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="design-posture"
             label="Design Posture"
-            index="07"
             eyebrow="DESIGN POSTURE"
             title="Every instrument should answer six questions quickly."
             description="An instrument should expose what it observes, prevents, may do, may not do, and how responsibility survives handoff."
@@ -327,7 +313,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="trust-stewardship"
             label="Trust and Stewardship"
-            index="08"
             eyebrow="TRUST + STEWARDSHIP"
             title="No instrument promotes itself. Launch is not closure."
             description="Validation, visibility, publication, and completeness never erase authority ceilings or maintenance obligations."
@@ -360,7 +345,6 @@ export function ApparatusContextSection() {
           <ApparatusContextCard
             id="closing-test"
             label="Closing Test"
-            index="09"
             eyebrow="CLOSING TEST"
             title="Research becomes durable when its state can survive transfer."
             description="The apparatus preserves questions, sources, defects, criticism, repair, authority, and forward state—not only conclusions."

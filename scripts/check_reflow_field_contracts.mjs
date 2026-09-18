@@ -27,6 +27,9 @@ expect(component.includes("onClick={handleSurfaceClick}"), "the card surface its
 expect(component.includes("clickBelongsToNestedControl"), "nested controls must not accidentally toggle the card");
 expect(component.includes("window.getSelection"), "text selection must not accidentally toggle the card");
 expect(component.includes("className={styles.surfaceAction}"), "keyboard semantics must remain available without a visible button");
+expect(!component.includes("controlStrip"), "Reflow cards must not render redundant visible footer chrome");
+expect(!component.includes("stateReadout"), "Reflow cards must not render AVAILABLE / INSPECTING readouts");
+expect(!component.includes("surfaceCue"), "Reflow cards must not render redundant Inspect / Close footer cues");
 expect(component.includes('event.key === "Escape"'), "Escape must collapse committed inspection");
 expect(component.includes("useReducedMotion"), "Motion reduced-motion preference must gate layout animation");
 expect(component.includes("LayoutGroup"), "reference renderer must coordinate sibling layout animation with Motion");
@@ -66,7 +69,7 @@ expect(researchCss.includes(".contextReader { --reflow-span: 5; }"), "Research c
 expect(researchCss.includes(".contextClosing { --reflow-span: 7; }"), "Research context should pack the final row without dead field space");
 expect(researchCss.includes("--reflow-focus-span: 4"), "wide focus-stage must place three compact cards per row");
 expect(researchCss.includes("--reflow-selected-start: 2"), "wide selected card must be centered rather than edge-to-edge");
-expect(researchCss.includes("height: 142px"), "unselected focus-stage cards must contract to a predetermined compact height");
+expect(researchCss.includes("height: 112px"), "unselected focus-stage cards must contract to a compact predetermined height");
 expect(products.includes("<ProductContextSection />"), "Products page must compose its commercialization context as one modular Reflow section");
 expect(productContext.includes('layoutMode="focus-stage"'), "Product Context must use focus-stage reflow");
 expect(productContext.includes("itemOrder={productContextOrder}"), "Product Context must declare stable source ordering");
@@ -106,5 +109,27 @@ expect(publicationCss.includes("--reflow-columns: 10"), "eleven-card Publication
 expect(publicationCss.includes("--reflow-focus-span: 2"), "eleven-card Publication focus-stage must place five compact cards per wide row");
 expect(publicationCss.includes(".publicationContextProjection { --reflow-span: 4; }"), "Publication Context REST state must retain authored magazine spans");
 expect(publicationCss.includes(".publicationContextCovenant { --reflow-span: 5; }"), "Publication Covenant must participate in the authored REST composition");
+
+for (const [name, source] of [
+  ["Research", researchContext],
+  ["Products", productContext],
+  ["Projects", projectContext],
+  ["Apparatus", apparatusContext],
+  ["Publications", publicationContext],
+]) {
+  expect(!/index="\d+"/.test(source), `${name} Reflow summaries must not render ordinal number plates`);
+}
+
+for (const [name, source] of [
+  ["Research", researchCss],
+  ["Products", productCss],
+  ["Projects", projectCss],
+  ["Apparatus", apparatusCss],
+  ["Publications", publicationCss],
+]) {
+  expect(!source.includes("ContextSummary > span"), `${name} Reflow CSS must not retain ordinal plate styling`);
+  expect(source.includes("min-height: 166px"), `${name} REST Reflow cards should use the compact card floor`);
+  expect(source.includes("height: 112px"), `${name} focus-stage peers should use the compact peer height`);
+}
 
 console.log("BFUX Reflow Field contracts passed.");
