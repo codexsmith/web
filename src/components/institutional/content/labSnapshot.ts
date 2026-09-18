@@ -52,7 +52,7 @@ export const homeLabSnapshot = {
           {
             value: "1",
             label: "Unresolved",
-            detail: "Known to the registrar, with an unresolved current state or canonical routing boundary.",
+            detail: "Known to the registrar, but its canonical locator is unresolved in this snapshot.",
           },
         ],
         note:
