@@ -18,6 +18,7 @@ import {
 } from "@/lib/product-catalog";
 import { getWorldOrientation } from "@/lib/world-orientation";
 import { ActionCard, getSubjectActions, SubjectPane } from "@/components/subject-pane";
+import { LabSnapshot } from "@/components/lab-snapshot";
 
 export type TransitionDirection =
   | "none"
@@ -649,6 +650,8 @@ function BranchWorld({ node, regions, onNavigate, onInspect }: BranchWorldProps)
         eyebrow={!isRoot ? <p className="eyebrow">{node.eyebrow}</p> : null}
         glance={!isRoot ? <SubjectPane node={node} variant="glance" /> : null}
       />
+
+      {isRoot ? <LabSnapshot /> : null}
 
       <RegionGrid node={node} regions={displayedRegions} onNavigate={onNavigate} />
 
