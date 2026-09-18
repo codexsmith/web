@@ -85,7 +85,6 @@ export function ReflowField({
   itemOrder?: readonly string[];
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
-  const reducedMotion = useReducedMotion();
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
   const transition = { layout: snapLayoutTransition };
