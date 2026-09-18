@@ -18,6 +18,9 @@ const publicationCss = fs.readFileSync("src/components/institutional/styles/Publ
 const openLab = fs.readFileSync("src/components/institutional/InstitutionalOpenLabPage.tsx", "utf8");
 const openLabContext = fs.readFileSync("src/components/institutional/sections/OpenLabContextSection.tsx", "utf8");
 const openLabCss = fs.readFileSync("src/components/institutional/styles/OpenLab.module.css", "utf8");
+const about = fs.readFileSync("src/components/institutional/InstitutionalAboutPage.tsx", "utf8");
+const aboutGroups = fs.readFileSync("src/components/institutional/sections/AboutReflowGroups.tsx", "utf8");
+const aboutCss = fs.readFileSync("src/components/institutional/styles/About.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -126,6 +129,20 @@ expect(openLabContext.includes('id="capability-transfer"'), "Open Lab Context mu
 expect(openLabCss.includes("--reflow-focus-span: 6"), "five-card Open Lab focus-stage must place two compact cards per wide row");
 expect(openLabCss.includes(".openLabContextAgency { --reflow-span: 5; }"), "Open Lab Context REST state must retain authored magazine spans");
 expect(openLabCss.includes(".openLabContextCapability { --reflow-span: 6; }"), "Open Lab capability transfer must participate in the authored REST composition");
+expect(about.includes("<AboutReflowGroups />"), "About page must compose its three doctrine chapters as Reflow groups");
+expect((aboutGroups.match(/<ReflowField/g) || []).length === 3, "About must expose one independent Reflow field per narrative chapter");
+expect((aboutGroups.match(/layoutMode="focus-stage"/g) || []).length === 3, "All About chapter fields must use focus-stage reflow");
+expect(aboutGroups.includes("itemOrder={representationOrder}"), "Representation + Method must declare stable ordering");
+expect(aboutGroups.includes("itemOrder={agencyOrder}"), "Agency + Stewardship must declare stable ordering");
+expect(aboutGroups.includes("itemOrder={institutionOrder}"), "Institutional Practice must declare stable ordering");
+expect(aboutGroups.includes('id="knowledge-infrastructure"'), "About Representation field must include Knowledge Is Infrastructure");
+expect(aboutGroups.includes('id="stewardship"'), "About Agency field must include Stewardship");
+expect(aboutGroups.includes('id="public-good"'), "About Institutional Practice field must include Public Good");
+expect(aboutCss.includes(".aboutRepresentationGrid"), "About must style a dedicated Representation Reflow field");
+expect(aboutCss.includes(".aboutAgencyGrid"), "About must style a dedicated Agency Reflow field");
+expect(aboutCss.includes(".aboutInstitutionGrid"), "About must style a dedicated Institutional Reflow field");
+expect(aboutCss.includes("min-height: 166px"), "About REST Reflow cards should use the compact card floor");
+expect(aboutCss.includes("height: 112px"), "About focus-stage peers should use the compact peer height");
 
 for (const [name, source] of [
   ["Research", researchContext],
@@ -134,6 +151,7 @@ for (const [name, source] of [
   ["Apparatus", apparatusContext],
   ["Publications", publicationContext],
   ["Open Lab", openLabContext],
+  ["About", aboutGroups],
 ]) {
   expect(!/index="\d+"/.test(source), `${name} Reflow summaries must not render ordinal number plates`);
 }
@@ -145,6 +163,7 @@ for (const [name, source] of [
   ["Apparatus", apparatusCss],
   ["Publications", publicationCss],
   ["Open Lab", openLabCss],
+  ["About", aboutCss],
 ]) {
   expect(!source.includes("ContextSummary > span"), `${name} Reflow CSS must not retain ordinal plate styling`);
   expect(source.includes("min-height: 166px"), `${name} REST Reflow cards should use the compact card floor`);

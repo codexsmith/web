@@ -81,8 +81,10 @@ for (const [file, slug] of routeContracts) {
   expect(!source.includes("className={styles.page}"), `${file} must not recreate the page shell`);
   const routeOwnsContent = source.includes(`./content/${slug}`);
   const sectionOwnsContent =
-    slug === "publications" &&
-    read(`${root}/sections/PublicationContextSection.tsx`).includes("../content/publications");
+    (slug === "publications" &&
+      read(`${root}/sections/PublicationContextSection.tsx`).includes("../content/publications")) ||
+    (slug === "about" &&
+      read(`${root}/sections/AboutReflowGroups.tsx`).includes("../content/about"));
   expect(routeOwnsContent || sectionOwnsContent, `${file} or its route-local section must import the content model`);
   expect(fs.existsSync(`${root}/content/${slug}.ts`), `missing content model for ${file}`);
   expect(!source.includes('padStart(2, "0")'), `${file} must use formatOrdinal rather than inline formatting`);
@@ -147,13 +149,15 @@ expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must k
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
-expect((aboutPage.match(/className={styles.aboutGroup}/g) || []).length === 3, "About page must organize its doctrine sections into three narrative groups");
-expect(aboutPage.includes('data-about-group="representation"'), "About must group representation and method material");
-expect(aboutPage.includes('data-about-group="agency"'), "About must group agency and stewardship material");
-expect(aboutPage.includes('data-about-group="institution"'), "About must group institutional-practice material");
-expect(aboutPage.indexOf('data-about-group="representation"') < aboutPage.indexOf('data-about-group="agency"'), "About group order must move from representation to agency");
-expect(aboutPage.indexOf('data-about-group="agency"') < aboutPage.indexOf('data-about-group="institution"'), "About group order must move from agency to institutional practice");
-expect(aboutPage.indexOf('data-about-group="institution"') < aboutPage.indexOf('className={styles.aboutClose}'), "About closing synthesis must remain outside the grouped chapters");
+expect(aboutPage.includes("<AboutReflowGroups />"), "About page must delegate grouped doctrine to the Reflow section component");
+expect(aboutPage.indexOf("<AboutReflowGroups />") < aboutPage.indexOf('className={styles.aboutClose}'), "About closing synthesis must remain outside and after the Reflow chapters");
+expect(fs.existsSync(`${root}/sections/AboutReflowGroups.tsx`), "AboutReflowGroups must exist as the About doctrine composition boundary");
+const aboutGroups = read(`${root}/sections/AboutReflowGroups.tsx`);
+expect((aboutGroups.match(/className={styles.aboutGroup}/g) || []).length === 3, "About Reflow component must preserve three narrative groups");
+expect((aboutGroups.match(/<ReflowField/g) || []).length === 3, "About must use one Reflow field per narrative group");
+expect(aboutGroups.includes('data-about-group="representation"'), "About must preserve Representation + Method");
+expect(aboutGroups.includes('data-about-group="agency"'), "About must preserve Agency + Stewardship");
+expect(aboutGroups.includes('data-about-group="institution"'), "About must preserve Institutional Practice");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");

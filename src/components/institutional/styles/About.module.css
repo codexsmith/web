@@ -662,3 +662,267 @@
     padding-right: 22px;
   }
 }
+
+
+/* About chapters now use three independent Reflow fields. */
+.aboutGroup {
+  padding: 0 clamp(30px, 6vw, 96px) 34px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.4), transparent 16%),
+    linear-gradient(180deg, #dce6f0, #edf2f7);
+}
+
+.aboutGroupHeader {
+  margin: 0 calc(clamp(30px, 6vw, 96px) * -1) 16px;
+}
+
+.aboutGroupGrid {
+  --reflow-columns: 12;
+  --reflow-gap: 14px;
+  --reflow-selected-start: 2;
+  --reflow-selected-span: 10;
+}
+
+.aboutRepresentationGrid {
+  --reflow-focus-span: 6;
+}
+
+.aboutAgencyGrid {
+  --reflow-focus-span: 6;
+}
+
+.aboutInstitutionGrid {
+  --reflow-focus-span: 6;
+}
+
+.aboutContextCard {
+  min-height: 166px;
+  padding: 15px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 5px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(234,241,248,.98));
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.09),
+    0 3px 0 rgba(7,26,61,.17),
+    0 9px 18px rgba(7,26,61,.09);
+}
+
+.aboutContextCard[data-tone="representation"],
+.aboutContextCard[data-tone="machinery"],
+.aboutContextCard[data-tone="method"] {
+  border-top-color: var(--old-gold);
+}
+
+.aboutContextCard[data-tone="human"],
+.aboutContextCard[data-tone="humanism"],
+.aboutContextCard[data-tone="agency"],
+.aboutContextCard[data-tone="stewardship"] {
+  border-top-color: var(--osha-green);
+}
+
+.aboutContextCard[data-tone="problem"],
+.aboutContextCard[data-tone="criticism"] {
+  border-top-color: var(--osha-orange);
+}
+
+.aboutContextCard[data-tone="lab"],
+.aboutContextCard[data-tone="collaboration"],
+.aboutContextCard[data-tone="public"] {
+  border-top-color: var(--osha-blue);
+}
+
+.aboutContextKnowledge { --reflow-span: 5; }
+.aboutContextConsequences { --reflow-span: 4; }
+.aboutContextProblem { --reflow-span: 3; }
+.aboutContextMachinery { --reflow-span: 6; }
+.aboutContextMethod { --reflow-span: 6; }
+
+.aboutContextAgency,
+.aboutContextHumanism,
+.aboutContextStewardship { --reflow-span: 4; }
+
+.aboutContextWhyLab,
+.aboutContextCriticism,
+.aboutContextCollaboration,
+.aboutContextPublicGood { --reflow-span: 3; }
+
+.aboutGroupGrid[data-reflow-active="true"]
+  .aboutContextCard:not([data-reflow-state="selected"]) {
+  height: 112px;
+  min-height: 112px;
+  padding: 10px 12px;
+  overflow: hidden;
+}
+
+.aboutGroupGrid[data-reflow-active="true"]
+  .aboutContextCard:not([data-reflow-state="selected"])
+  .sectionIndex {
+  margin-bottom: 5px;
+  font-size: .48rem;
+}
+
+.aboutGroupGrid[data-reflow-active="true"]
+  .aboutContextCard:not([data-reflow-state="selected"])
+  .aboutContextSummary h3 {
+  margin: 4px 0 0;
+  font-size: clamp(.92rem, 1.05vw, 1.08rem);
+  line-height: 1.05;
+}
+
+.aboutGroupGrid[data-reflow-active="true"]
+  .aboutContextCard:not([data-reflow-state="selected"])
+  .aboutContextSummary > p:last-child {
+  display: none;
+}
+
+.aboutAgencyGrid[data-reflow-active="true"]
+  .aboutContextCard[data-reflow-placement="before"],
+.aboutAgencyGrid[data-reflow-active="true"]
+  .aboutContextCard[data-reflow-placement="after"] {
+  grid-column: 4 / span 6;
+}
+
+.aboutInstitutionGrid[data-reflow-active="true"]
+  .aboutContextCard[data-reflow-placement="after"] {
+  grid-column: 4 / span 6;
+}
+
+.aboutContextCard[data-reflow-state="selected"] {
+  min-height: 0;
+  border-top-width: 7px;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.08),
+    0 4px 0 rgba(7,26,61,.22),
+    0 16px 30px rgba(7,26,61,.15);
+}
+
+.aboutContextSummary h3 {
+  margin: 8px 0 9px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.aboutContextSummary > p:last-child {
+  max-width: 660px;
+  margin: 0;
+  color: #52627b;
+  font-size: .78rem;
+  line-height: 1.48;
+}
+
+.aboutContextDetail,
+.aboutContextSplit {
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge);
+  background: rgba(255,255,255,.7);
+}
+
+.aboutContextDetail > p,
+.aboutContextSplit > p {
+  max-width: 940px;
+  margin: 0 0 16px;
+  color: #435470;
+  font-size: .88rem;
+  line-height: 1.58;
+}
+
+.aboutContextSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+  gap: 20px;
+  align-items: center;
+}
+
+.aboutContextSplit > p {
+  margin: 0;
+}
+
+.aboutContextSplit blockquote {
+  margin: 0;
+  padding: 22px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  line-height: 1.48;
+}
+
+@media (max-width: 980px) {
+  .aboutGroupGrid {
+    --reflow-columns: 6;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 6;
+    --reflow-focus-span: 3;
+  }
+
+  .aboutContextKnowledge,
+  .aboutContextMachinery,
+  .aboutContextMethod {
+    --reflow-span: 6;
+  }
+
+  .aboutContextConsequences,
+  .aboutContextProblem,
+  .aboutContextAgency,
+  .aboutContextHumanism,
+  .aboutContextStewardship,
+  .aboutContextWhyLab,
+  .aboutContextCriticism,
+  .aboutContextCollaboration,
+  .aboutContextPublicGood {
+    --reflow-span: 3;
+  }
+
+  .aboutAgencyGrid[data-reflow-active="true"]
+    .aboutContextCard[data-reflow-placement="before"],
+  .aboutAgencyGrid[data-reflow-active="true"]
+    .aboutContextCard[data-reflow-placement="after"],
+  .aboutInstitutionGrid[data-reflow-active="true"]
+    .aboutContextCard[data-reflow-placement="after"] {
+    grid-column: 2 / span 4;
+  }
+
+  .aboutContextSplit {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .aboutGroup {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .aboutGroupHeader {
+    margin-left: -22px;
+    margin-right: -22px;
+  }
+
+  .aboutGroupGrid {
+    --reflow-columns: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 1;
+    --reflow-focus-span: 1;
+  }
+
+  .aboutContextCard {
+    --reflow-span: 1;
+  }
+
+  .aboutAgencyGrid[data-reflow-active="true"]
+    .aboutContextCard[data-reflow-placement="before"],
+  .aboutAgencyGrid[data-reflow-active="true"]
+    .aboutContextCard[data-reflow-placement="after"],
+  .aboutInstitutionGrid[data-reflow-active="true"]
+    .aboutContextCard[data-reflow-placement="after"] {
+    grid-column: 1;
+  }
+}
