@@ -20,7 +20,10 @@ export function InstitutionalApparatusPage() {
           lead={<>Research creates more structure than a paper can hold.</>}
           support={<>Boundary First Labs builds apparatus for preserving, inspecting, and
               transferring questions, experiments, claims, evidence, provenance,
-              criticism, defects, authority, repair, and forward state.</>}
+              criticism, defects, authority, repair, and forward state. Its operating
+              ancestry includes laboratory recordkeeping, software configuration control,
+              and Lean–Agile habits of visible state, bounded flow, feedback, and explicit
+              promotion gates.</>}
           >
           <blockquote className={styles.apparatusThesis}>
             <span>DESIGN POSTURE</span>

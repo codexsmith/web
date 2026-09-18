@@ -22,6 +22,7 @@ const styles = composeCssModules(
 const researchContextOrder = [
   "reader-agency",
   "working-principles",
+  "lean-agile-lineage",
   "equivalence-firewall",
   "research-state",
   "public-research-object",
@@ -140,6 +141,36 @@ export function ResearchContextSection() {
                   <p>{description}</p>
                 </article>
               ))}
+            </div>
+          </ContextCard>
+
+          <ContextCard
+            id="lean-agile-lineage"
+            label="Lean–Agile Lineage"
+            eyebrow="PRACTICE LINEAGE"
+            title="Research operations inherit an empirical delivery discipline."
+            description="Visible state, bounded work, short feedback loops, and repair are operating habits—not scientific authority."
+            className={styles.contextPrinciples}
+            tone="principles"
+          >
+            <div className={styles.contextDetail}>
+              <div>
+                <p>
+                  Agile, Lean, Kanban, and Lean Startup entered the Lab through years of
+                  professional practice rather than retrospective analogy. Their durable
+                  contribution is operational: externalize state, respect capacity, reduce
+                  work in progress, build the smallest coherent next object, inspect what
+                  happened, preserve the defect, and update the plan.
+                </p>
+                <p>
+                  Research adds stronger evidence obligations. A short feedback loop can
+                  expose an error faster; it cannot make a scientific claim true by itself.
+                </p>
+              </div>
+              <blockquote className={styles.contextQuote}>
+                “Working software made feedback executable. The Lab generalizes the loop,
+                not the ceremony.”
+              </blockquote>
             </div>
           </ContextCard>
 
