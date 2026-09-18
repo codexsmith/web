@@ -126,15 +126,13 @@
 }
 
 .researchProgramGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 20px;
 }
 
 .researchProgramCard {
   position: relative;
-  min-height: 310px;
+  min-height: 238px;
   padding: 22px 22px 20px;
   border: 1px solid var(--bfux-panel-edge);
   border-top: 5px solid var(--osha-blue);
@@ -205,21 +203,78 @@
 }
 
 .programSummary {
+  display: -webkit-box;
   margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   color: #435470;
   font-size: .82rem;
   line-height: 1.52;
 }
 
-.researchProgramCard blockquote {
-  margin: 18px 0 0;
-  padding: 13px 14px;
-  border-left: 3px solid var(--old-gold);
+.researchProgramCard[data-reflow-state="selected"] {
+  min-height: 0;
+  border-top-width: 7px;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.1),
+    0 4px 0 rgba(7,26,61,.22),
+    0 14px 28px rgba(7,26,61,.14);
+}
+
+.researchProgramCard[data-reflow-state="selected"] .programSummary {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+}
+
+.programInspection {
+  display: grid;
+  grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.programInspection > div {
+  padding: 16px;
+  border: 1px solid rgba(7,26,61,.2);
+  border-left: 5px solid var(--osha-blue);
+  background: rgba(255,255,255,.72);
+}
+
+.programInspection > div > span {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--old-gold-dark);
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.programInspection > div > strong {
+  display: block;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.programInspection > div > p {
+  margin: 8px 0 0;
+  color: #52627b;
+  font-size: .75rem;
+  line-height: 1.48;
+}
+
+.programInspection blockquote {
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid rgba(7,26,61,.22);
+  border-left: 5px solid var(--old-gold);
   background: rgba(21,58,120,.045);
   color: #20385f;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: .87rem;
-  line-height: 1.45;
+  font-size: clamp(.98rem, 1.25vw, 1.16rem);
+  line-height: 1.48;
 }
 
 .epistemicAgency {
@@ -426,6 +481,10 @@
   .objectFieldGrid,
   .instrumentQuestions {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .programInspection {
+    grid-template-columns: 1fr;
   }
 }
 

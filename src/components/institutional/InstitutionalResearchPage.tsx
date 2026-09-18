@@ -5,6 +5,7 @@ import routeStyles from "./styles/Research.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { ReflowField, ReflowFieldItem } from "@/components/bfux/ReflowField";
 
 import { programs, principles, maturityStates, researchObjectFields, artifactFamilies } from "./content/research";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
@@ -59,20 +60,44 @@ export function InstitutionalResearchPage() {
             note={<>Common analytical roles do not imply formal equivalence across domains.</>}
             />
 
-          <div className={styles.researchProgramGrid}>
+          <ReflowField
+            className={styles.researchProgramGrid}
+            ariaLabel="Research programs and working lanes"
+          >
             {programs.map((program) => (
-              <article className={styles.researchProgramCard} data-tone={program.tone} key={program.title}>
-                <div className={styles.programTopline}>
-                  <span className={styles.programCode}>{program.code}</span>
-                  <span className={styles.programStatus}>{program.status}</span>
-                </div>
-                <h3>{program.title}</h3>
-                <p className={styles.programRole}>{program.role}</p>
-                <p className={styles.programSummary}>{program.summary}</p>
-                <blockquote>{program.question}</blockquote>
-              </article>
+              <ReflowFieldItem
+                key={program.title}
+                id={program.code}
+                label={program.title}
+                className={styles.researchProgramCard}
+                dataTone={program.tone}
+                summary={
+                  <>
+                    <div className={styles.programTopline}>
+                      <span className={styles.programCode}>{program.code}</span>
+                      <span className={styles.programStatus}>{program.status}</span>
+                    </div>
+                    <h3>{program.title}</h3>
+                    <p className={styles.programRole}>{program.role}</p>
+                    <p className={styles.programSummary}>{program.summary}</p>
+                  </>
+                }
+                detail={
+                  <div className={styles.programInspection}>
+                    <div>
+                      <span>INSPECTION VIEW</span>
+                      <strong>Governing question</strong>
+                      <p>
+                        Selection increases local representational bandwidth. It does not
+                        change this program&apos;s source-governed status or maturity.
+                      </p>
+                    </div>
+                    <blockquote>{program.question}</blockquote>
+                  </div>
+                }
+              />
             ))}
-          </div>
+          </ReflowField>
         </section>
 
         <section className={styles.epistemicAgency}>
