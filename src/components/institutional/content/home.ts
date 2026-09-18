@@ -140,7 +140,7 @@ export const practiceLineage = [
   {
     label: "Boundary First",
     description:
-      "Synthesizes those practices around explicit representation, consequential boundaries, defect, repair, and handoff.",
+      "Synthesizes those practices through state-based and dynamical-systems reasoning: make state explicit, track lawful change, preserve consequential boundaries, localize defect, repair representations, and leave enough state for the next handoff.",
   },
 ] as const;
 
