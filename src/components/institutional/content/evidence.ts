@@ -34,6 +34,56 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    title: "Georgia Tech undergraduate research — materials, HPC, and NUMA",
+    summary:
+      "The founder's undergraduate formation included four semesters of research spanning materials work and high-performance-computing / NUMA performance analysis, alongside the ordinary work of literature review, hypothesis formation, measurement, and interpreting results that did not support the starting hypothesis.",
+    evidence:
+      "The Lab's provenance archive records four semesters of Georgia Tech research across materials and HPC/NUMA, including literature synthesis, hypothesis formation, performance-oriented analysis, and a confirmed null result. This sits alongside the B.S. Computer Science program in Systems & Architecture and Artificial Intelligence.",
+    boundary:
+      "Undergraduate research experience establishes real research practice and exposure to experimental discipline. It does not transfer Georgia Tech authority to later BFL theories, papers, or scientific claims.",
+  },
+  {
+    status: "PROFESSIONAL RECORD",
+    title: "Lean, Agile, Kanban, and repeated delivery under constraint",
+    summary:
+      "From 2016–2018, Agile and Lean practice became an operating discipline rather than a vocabulary: make state visible, shorten the assumption-to-evidence loop, limit work in progress, expose capacity, demonstrate working increments, and repair from observed failure.",
+    evidence:
+      "The professional record covers repeated short-cycle consulting at Rural Sourcing Inc., roughly six client engagements, Agile/Kanban/Lean Startup practice, local Agile-community participation, project leadership, and the period in which the early Agile Diamond method was being formed. The provenance archive also preserves David Gentry as a named mentor and candidate historical witness to that developmental period.",
+    boundary:
+      "This establishes method lineage and professional practice. Founder recollections about mentorship, succession discussions, or particular leadership judgments remain recollections unless separately corroborated; Agile practice does not validate later Boundary First formal claims.",
+  },
+  {
+    status: "PROFESSIONAL RECORD",
+    title: "Global Web Advisors — early startup NLP product engineering",
+    summary:
+      "An early startup role put natural-language processing, cloud infrastructure, data systems, and product iteration into one operating environment rather than treating them as separate specialties.",
+    evidence:
+      "The career record lists Global Web Advisors (2014–2015) as a startup where the founder served as lead software engineer, developing an NLP-assisted authoring platform in Java, improving output through automation and data analysis, and operating MongoDB-backed infrastructure on AWS.",
+    boundary:
+      "This is evidence of early startup and NLP product work. It does not establish novelty of the underlying NLP methods or provide current BFL market traction.",
+  },
+  {
+    status: "PROFESSIONAL RECORD",
+    title: "Projectr.Live — solo founder, architecture through market testing",
+    summary:
+      "Projectr turned zero-to-one product work into full-system responsibility: product direction, architecture, implementation, infrastructure, deployment, budgets, user behavior, and repeated pivots all became one coupled engineering problem.",
+    evidence:
+      "The 2019–2022 career record identifies the founder as Projectr.Live's founder and lead software architect. It records a social platform with Kanban-style workflows, visualization and AI-assisted discovery, built with Next.js, Postgres, Redis, OAuth, and Docker, with ownership from product direction and architecture through deployment, market testing, and iteration.",
+    boundary:
+      "Founder-level execution is evidence of end-to-end product capability and exposure to market feedback. It does not imply product-market fit, durable company traction, or that later BFL products inherit Projectr's evidence.",
+  },
+  {
+    status: "PROFESSIONAL RECORD",
+    title: "CarLabs.ai — startup cloud systems during an acquisition transition",
+    summary:
+      "A short startup engagement exercised a different part of the stack: chatbot architecture, integrations, serverless systems, and production debugging during a period of organizational change.",
+    evidence:
+      "The 2022 career record lists CarLabs.ai as a full-stack development engagement contributing to chatbot architecture and integrations using AWS Lambda and Node.js while maintaining and debugging production cloud infrastructure during the company's acquisition period.",
+    boundary:
+      "This supports breadth across startup stages and cloud operations. It does not imply ownership of the broader CarLabs product, acquisition outcome, or later Impel systems.",
+  },
+  {
+    status: "PROFESSIONAL RECORD",
     title: "More than a decade of production software and systems delivery",
     summary:
       "The founder's career record spans public-sector software, consulting, startups, education technology, cloud systems, and regulated or compliance-sensitive environments.",
@@ -44,23 +94,13 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
-    title: "Repeated short-cycle consulting and cross-domain delivery",
+    title: "Repeated consulting, search systems, and cross-domain delivery",
     summary:
       "The systems method was sharpened in consulting environments where the code, domain, architecture, process, client communication, testing, and delivery boundary all had to close together.",
     evidence:
-      "The founder's RSI record describes six short-term client engagements delivered across roughly eighteen months, while surviving 2016–2018 engineering notes preserve contemporaneous thinking about architecture, change isolation, requirements, complexity, and deployment.",
+      "The founder's RSI record describes six short-term client engagements delivered across roughly eighteen months, enterprise work across .NET and Java ecosystems, natural-language search capability work for Cars.com, monolith-to-microservice transition work, technical interviewing, and surviving 2016–2018 engineering notes about architecture, requirements, complexity, and deployment.",
     boundary:
-      "Historical consulting success supports the ancestry of Applied Work. It does not count as a Boundary First Labs client case study or current market validation.",
-  },
-  {
-    status: "PROFESSIONAL RECORD",
-    title: "Georgia Tech computer-science and research formation",
-    summary:
-      "The founder's training joins computer science, systems, artificial intelligence, mathematics, physics, and laboratory research habits.",
-    evidence:
-      "The current provenance record identifies a Georgia Tech B.S. in Computer Science with Systems & Architecture and Artificial Intelligence concentrations, alongside multiple semesters of research experience.",
-    boundary:
-      "Education and research participation explain formation. They do not validate later Boundary First scientific or mathematical claims.",
+      "Historical consulting success supports the ancestry of Applied Work. It does not count as a Boundary First Labs client case study, current market validation, or independent confirmation of founder-recalled details about the Cars.com research structure.",
   },
 ] as const;
 

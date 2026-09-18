@@ -55,11 +55,11 @@ export function InstitutionalEvidencePage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>PRIOR EXECUTION</>}
-          title={<>The Lab did not begin with an untested founder.</>}
+          title={<>The Lab began with research practice, shipped systems, startups, and repeated delivery.</>}
           note={
             <>
-              Historical work can establish capability and provenance. It must remain
-              clearly separated from current BFL traction and from validation of later theory.
+              Historical work can establish capability, research formation, and method provenance.
+              It remains separate from current BFL traction and from validation of later theory.
             </>
           }
         />
