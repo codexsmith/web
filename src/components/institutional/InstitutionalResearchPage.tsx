@@ -123,7 +123,7 @@ export function InstitutionalResearchPage() {
             <ReflowFieldItem
               id="reader-agency"
               label="Reader Agency"
-              className={[styles.researchContextCard, styles.contextWide].join(" ")}
+              className={[styles.researchContextCard, styles.contextReader].join(" ")}
               dataTone="agency"
               summary={
                 <div className={styles.contextSummary}>
@@ -152,7 +152,7 @@ export function InstitutionalResearchPage() {
             <ReflowFieldItem
               id="working-principles"
               label="Working Principles"
-              className={styles.researchContextCard}
+              className={[styles.researchContextCard, styles.contextPrinciples].join(" ")}
               dataTone="principles"
               summary={
                 <div className={styles.contextSummary}>
@@ -178,7 +178,7 @@ export function InstitutionalResearchPage() {
             <ReflowFieldItem
               id="equivalence-firewall"
               label="Permanent Firewall"
-              className={styles.researchContextCard}
+              className={[styles.researchContextCard, styles.contextFirewall].join(" ")}
               dataTone="firewall"
               summary={
                 <div className={styles.contextSummary}>
@@ -206,7 +206,7 @@ export function InstitutionalResearchPage() {
             <ReflowFieldItem
               id="research-state"
               label="Research State"
-              className={[styles.researchContextCard, styles.contextWide].join(" ")}
+              className={[styles.researchContextCard, styles.contextState].join(" ")}
               dataTone="state"
               summary={
                 <div className={styles.contextSummary}>
@@ -237,7 +237,7 @@ export function InstitutionalResearchPage() {
             <ReflowFieldItem
               id="public-research-object"
               label="Public Research Object"
-              className={styles.researchContextCard}
+              className={[styles.researchContextCard, styles.contextObject].join(" ")}
               dataTone="object"
               summary={
                 <div className={styles.contextSummary}>
@@ -267,7 +267,7 @@ export function InstitutionalResearchPage() {
             <ReflowFieldItem
               id="artifact-families"
               label="Research Artifact Families"
-              className={styles.researchContextCard}
+              className={[styles.researchContextCard, styles.contextArtifacts].join(" ")}
               dataTone="artifacts"
               summary={
                 <div className={styles.contextSummary}>
@@ -292,7 +292,7 @@ export function InstitutionalResearchPage() {
             <ReflowFieldItem
               id="closing-test"
               label="Closing Test"
-              className={[styles.researchContextCard, styles.contextWide].join(" ")}
+              className={[styles.researchContextCard, styles.contextClosing].join(" ")}
               dataTone="closing"
               summary={
                 <div className={styles.contextSummary}>

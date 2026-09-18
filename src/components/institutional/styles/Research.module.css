@@ -299,7 +299,8 @@
 }
 
 .researchContextGrid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  --reflow-columns: 12;
+  --reflow-gap: 14px;
   margin-top: 20px;
 }
 
@@ -325,9 +326,13 @@
 .researchContextCard[data-tone="artifacts"] { border-top-color: var(--osha-green); }
 .researchContextCard[data-tone="closing"] { border-top-color: var(--osha-red); }
 
-.contextWide {
-  grid-column: span 2;
-}
+.contextReader { --reflow-span: 5; }
+.contextPrinciples { --reflow-span: 4; }
+.contextFirewall { --reflow-span: 3; }
+.contextState { --reflow-span: 7; }
+.contextObject { --reflow-span: 5; }
+.contextArtifacts { --reflow-span: 5; }
+.contextClosing { --reflow-span: 7; }
 
 .researchContextCard[data-reflow-state="selected"] {
   min-height: 0;
@@ -564,7 +569,6 @@
   }
 
   .researchProgramGrid,
-  .researchContextGrid,
   .principleGrid,
   .artifactGrid,
   .stateRail,
@@ -573,8 +577,21 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .contextWide {
-    grid-column: auto;
+  .researchContextGrid {
+    --reflow-columns: 6;
+  }
+
+  .contextReader,
+  .contextState,
+  .contextClosing {
+    --reflow-span: 6;
+  }
+
+  .contextPrinciples,
+  .contextFirewall,
+  .contextObject,
+  .contextArtifacts {
+    --reflow-span: 3;
   }
 
   .contextDetail,
@@ -597,13 +614,20 @@
   }
 
   .researchProgramGrid,
-  .researchContextGrid,
   .principleGrid,
   .artifactGrid,
   .stateRail,
   .objectFieldGrid,
   .instrumentQuestions {
     grid-template-columns: 1fr;
+  }
+
+  .researchContextGrid {
+    --reflow-columns: 1;
+  }
+
+  .researchContextCard {
+    --reflow-span: 1;
   }
 
   .programState {

@@ -2,17 +2,19 @@
 
 import {
   createContext,
-  useContext,
-  useEffect,
   useCallback,
+  useContext,
   useId,
   useMemo,
   useState,
-  type CSSProperties,
-  type KeyboardEvent,
   type ReactNode,
 } from "react";
-import { flushSync } from "react-dom";
+import {
+  AnimatePresence,
+  LayoutGroup,
+  motion,
+  useReducedMotion,
+} from "motion/react";
 import styles from "./ReflowField.module.css";
 
 type ReflowFieldContextValue = {
@@ -23,36 +25,24 @@ type ReflowFieldContextValue = {
 
 const ReflowFieldContext = createContext<ReflowFieldContextValue | null>(null);
 
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (update: () => void) => unknown;
-};
-
 function safeFragment(value: string) {
   return value.replace(/[^a-zA-Z0-9_-]/g, "-");
 }
 
-function useReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  return reduced;
-}
+const layoutSpring = {
+  type: "spring",
+  stiffness: 340,
+  damping: 34,
+  mass: 0.7,
+} as const;
 
 /**
- * BFUX Reflow Field reference implementation.
+ * BFUX Reflow Field.
  *
- * Canonical semantics:
- * boundary-first-labs/.../Boundary First UX/operational/reflow_field_pattern.md
- *
- * Selection reallocates representational bandwidth. It does not mutate or
- * promote the represented object.
+ * Motion owns geometry interpolation. CSS owns the final layout.
+ * The semantic invariant remains BFUX-owned:
+ * selection reallocates representational bandwidth; it does not mutate,
+ * promote, rank, or otherwise change the represented object.
  */
 export function ReflowField({
   children,
@@ -66,28 +56,12 @@ export function ReflowField({
   defaultSelectedId?: string | null;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
-  const reducedMotion = useReducedMotion();
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
 
   const setSelection = useCallback((id: string | null) => {
-    const commit = () => flushSync(() => setSelectedId(id));
-    const documentWithTransitions = document as ViewTransitionDocument;
-
-    if (!reducedMotion && typeof documentWithTransitions.startViewTransition === "function") {
-      documentWithTransitions.startViewTransition(commit);
-      return;
-    }
-
-    commit();
-  }, [reducedMotion]);
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === "Escape" && selectedId !== null) {
-      event.preventDefault();
-      setSelection(null);
-    }
-  };
+    setSelectedId(id);
+  }, []);
 
   const context = useMemo(
     () => ({ selectedId, fieldId, setSelection }),
@@ -96,14 +70,21 @@ export function ReflowField({
 
   return (
     <ReflowFieldContext.Provider value={context}>
-      <section
-        className={[styles.field, className].filter(Boolean).join(" ")}
-        aria-label={ariaLabel}
-        data-reflow-active={selectedId ? "true" : "false"}
-        onKeyDown={handleKeyDown}
-      >
-        {children}
-      </section>
+      <LayoutGroup id={fieldId}>
+        <section
+          className={[styles.field, className].filter(Boolean).join(" ")}
+          aria-label={ariaLabel}
+          data-reflow-active={selectedId ? "true" : "false"}
+          onKeyDown={(event) => {
+            if (event.key === "Escape" && selectedId !== null) {
+              event.preventDefault();
+              setSelection(null);
+            }
+          }}
+        >
+          {children}
+        </section>
+      </LayoutGroup>
     </ReflowFieldContext.Provider>
   );
 }
@@ -128,29 +109,30 @@ export function ReflowFieldItem({
   collapseLabel?: string;
 }) {
   const context = useContext(ReflowFieldContext);
+  const reducedMotion = useReducedMotion();
+
   if (!context) {
     throw new Error("ReflowFieldItem must be rendered inside ReflowField.");
   }
 
   const selected = context.selectedId === id;
-  const safeId = safeFragment(id);
-  const detailId = `${context.fieldId}-${safeId}-detail`;
-  const transitionName = `bfux-${context.fieldId}-${safeId}`;
-
-  const transitionStyle = {
-    viewTransitionName: transitionName,
-  } as CSSProperties;
+  const detailId = `${context.fieldId}-${safeFragment(id)}-detail`;
+  const transition = reducedMotion ? { duration: 0 } : { layout: layoutSpring };
 
   return (
-    <article
+    <motion.article
+      layout
+      layoutDependency={context.selectedId}
+      transition={transition}
       className={[styles.item, className].filter(Boolean).join(" ")}
       data-reflow-state={selected ? "selected" : "rest"}
       data-tone={dataTone}
-      style={transitionStyle}
     >
-      <div className={styles.summary}>{summary}</div>
+      <motion.div layout="position" className={styles.summary}>
+        {summary}
+      </motion.div>
 
-      <div className={styles.controlStrip}>
+      <motion.div layout="position" className={styles.controlStrip}>
         <span className={styles.stateReadout}>
           {selected ? "INSPECTING" : "AVAILABLE"}
         </span>
@@ -165,15 +147,23 @@ export function ReflowFieldItem({
           <span>{selected ? collapseLabel : inspectLabel}</span>
           <span aria-hidden="true">{selected ? "−" : "+"}</span>
         </button>
-      </div>
+      </motion.div>
 
-      <div
-        id={detailId}
-        className={styles.detail}
-        hidden={!selected}
-      >
-        {detail}
-      </div>
-    </article>
+      <AnimatePresence initial={false}>
+        {selected ? (
+          <motion.div
+            key="detail"
+            id={detailId}
+            className={styles.detail}
+            initial={reducedMotion ? false : { opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={reducedMotion ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            transition={reducedMotion ? { duration: 0 } : { duration: 0.18 }}
+          >
+            {detail}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </motion.article>
   );
 }

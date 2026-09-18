@@ -1,23 +1,17 @@
 .field {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-  grid-auto-flow: row;
-  gap: 16px;
+  grid-template-columns: repeat(var(--reflow-columns, 12), minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: var(--reflow-gap, 14px);
   align-items: stretch;
 }
 
 .item {
   min-width: 0;
+  grid-column: span var(--reflow-span, 4);
   transition:
-    transform 150ms ease,
     box-shadow 150ms ease,
     border-color 150ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .item:not([data-reflow-state="selected"]):hover {
-    transform: translateY(-2px);
-  }
 }
 
 .item:focus-within {
@@ -27,6 +21,15 @@
 
 .item[data-reflow-state="selected"] {
   grid-column: 1 / -1;
+  z-index: 2;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item:not([data-reflow-state="selected"]):hover {
+    box-shadow:
+      0 4px 0 rgba(7, 26, 61, .18),
+      0 14px 28px rgba(7, 26, 61, .14);
+  }
 }
 
 .summary {
@@ -86,6 +89,7 @@
 }
 
 .detail {
+  overflow: hidden;
   margin-top: 18px;
 }
 
@@ -95,7 +99,6 @@
     transition: none;
   }
 
-  .item:not([data-reflow-state="selected"]):hover,
   .trigger,
   .trigger:hover,
   .trigger:active {
