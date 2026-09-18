@@ -34,3 +34,34 @@ export const featuredWork = [
     description: "Applied systems analysis for public records, workflows, institutions, uncertainty, and consequence-bearing processes.",
   },
 ] as const;
+
+
+export const postureCommitments = [
+  {
+    eyebrow: "INSPECTABILITY",
+    title: "Show enough of the machinery to be challenged.",
+    description:
+      "Claims should travel with their representations, evidence, uncertainty, dependencies, and repair paths so another person can inspect more than the conclusion.",
+    href: "/v3/about",
+    linkLabel: "Why representation and repair matter",
+    tone: "inspect",
+  },
+  {
+    eyebrow: "CONTESTABILITY",
+    title: "Criticism should be able to change institutional state.",
+    description:
+      "Counterexamples, missing distinctions, implementation defects, accessibility failures, and stronger evidence should have a route into revision rather than disappearing into a generic inbox.",
+    href: "/v3/open-lab",
+    linkLabel: "See the Open Lab participation model",
+    tone: "contest",
+  },
+  {
+    eyebrow: "CAPABILITY TRANSFER",
+    title: "Useful work should leave more capability behind.",
+    description:
+      "The preferred outcome is not permanent dependence on the Lab. It is clearer models, reusable tools, repair paths, documented processes, and handoff to people who can carry the work forward.",
+    href: "/v3/about",
+    linkLabel: "Read the stewardship posture",
+    tone: "transfer",
+  },
+] as const;

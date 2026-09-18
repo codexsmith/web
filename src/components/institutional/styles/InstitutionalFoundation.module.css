@@ -565,16 +565,21 @@
 }
 
 .posture {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.6fr) minmax(240px, 0.7fr);
-  align-items: center;
-  gap: 36px;
-  padding: 28px clamp(30px, 5vw, 78px);
+  padding: 30px clamp(30px, 5vw, 78px) 38px;
   border-bottom: 1px solid var(--institution-line);
   background: #fff;
 }
 
-.posture > div {
+.postureIntro {
+  display: grid;
+  grid-template-columns: minmax(220px, .72fr) minmax(0, 1.6fr) minmax(220px, .68fr);
+  align-items: center;
+  gap: 34px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--institution-line);
+}
+
+.postureTitle {
   padding-right: 28px;
   border-right: 1px solid var(--institution-line);
 }
@@ -583,21 +588,103 @@
   font-size: clamp(1.8rem, 2.3vw, 2.7rem);
 }
 
-.posture > p {
+.postureLead {
   margin: 0;
   color: var(--institution-muted);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.98rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.52;
 }
 
-.posture blockquote {
+.postureIntro blockquote {
   margin: 0;
   color: #39485b;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.92rem;
+  font-size: .96rem;
   font-style: italic;
+  line-height: 1.38;
   text-align: right;
+}
+
+.postureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.postureCard {
+  position: relative;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 19px 16px;
+  border: 1px solid var(--bfux-panel-edge);
+  border-top: 4px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94) 0 2px, transparent 2px),
+    linear-gradient(180deg, #fbfdff, #eaf0f8);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 2px 0 rgba(7,26,61,.16),
+    0 7px 15px rgba(7,26,61,.07);
+}
+
+.postureCard[data-posture-tone="contest"] {
+  border-top-color: var(--osha-orange);
+}
+
+.postureCard[data-posture-tone="transfer"] {
+  border-top-color: var(--osha-green);
+}
+
+.postureEyebrow {
+  margin: 0 0 10px;
+  color: var(--old-gold-dark);
+  font: 800 .54rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .16em;
+}
+
+.postureCard h3 {
+  margin: 0 0 9px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.18rem, 1.45vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  line-height: 1.08;
+}
+
+.postureCard > p:not(.postureEyebrow) {
+  margin: 0;
+  color: #52627b;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.postureCard a {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 14px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .76rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(11,37,84,.3);
+}
+
+.postureCard a span {
+  color: var(--old-gold-dark);
+  transition: transform 100ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .postureCard a:hover span {
+    transform: translateX(3px);
+  }
 }
 
 .footer {
@@ -697,13 +784,21 @@
     border-bottom: 1px solid var(--institution-line);
   }
 
-  .posture {
-    grid-template-columns: 0.8fr 1.6fr;
+  .postureIntro {
+    grid-template-columns: minmax(220px, .75fr) minmax(0, 1.6fr);
   }
 
-  .posture blockquote {
+  .postureIntro blockquote {
     grid-column: 1 / -1;
     text-align: left;
+  }
+
+  .postureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .postureCard {
+    min-height: 0;
   }
 
   .footer {
@@ -884,16 +979,24 @@
     grid-template-columns: 92px minmax(0, 1fr) auto;
   }
 
-  .posture {
+  .postureIntro {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
-  .posture > div {
+  .postureTitle {
     padding-right: 0;
-    padding-bottom: 20px;
+    padding-bottom: 18px;
     border-right: 0;
     border-bottom: 1px solid var(--institution-line);
+  }
+
+  .postureIntro blockquote {
+    grid-column: auto;
+  }
+
+  .postureGrid {
+    grid-template-columns: 1fr;
   }
 
   .footer {
@@ -1274,19 +1377,16 @@
     0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-/* Working posture reads as one broad engraved plate. */
+/* Working posture is a closing institutional bay: substantive enough to
+ * justify the stance, but lighter than a full route page. */
 .posture {
-  margin: 18px clamp(24px, 4vw, 62px);
-  border: 1px solid var(--bfux-panel-edge);
-  border-radius: 2px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.9) 0 2px, transparent 2px),
-    linear-gradient(180deg, #f5f7f6, #ecefee);
-  box-shadow:
-    inset 0 1px 0 #fff,
-    inset 0 -1px 0 rgba(16, 32, 54, 0.12),
-    0 2px 0 rgba(16, 32, 54, 0.2),
-    0 7px 15px rgba(16, 32, 54, 0.08);
+    linear-gradient(180deg, rgba(255,255,255,.44), transparent 14%),
+    linear-gradient(180deg, #e7edf5, #dbe4ef);
+  box-shadow: none;
 }
 
 /* Actual controls are raised above their bezels and visibly travel when
@@ -1413,10 +1513,6 @@
 }
 
 @media (max-width: 680px) {
-  .posture {
-    margin: 14px 18px;
-  }
-
   .capability {
     margin: 0;
   }
@@ -1697,8 +1793,7 @@
 .institutionCard,
 .featuredCard,
 .methodStep,
-.methodStep:nth-child(-n + 2),
-.posture {
+.methodStep:nth-child(-n + 2) {
   border-color: rgba(11, 37, 84, 0.42);
   background:
     linear-gradient(180deg, rgba(255,255,255,.95) 0 2px, transparent 2px),

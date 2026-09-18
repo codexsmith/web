@@ -3,7 +3,7 @@ import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 
-import { capabilityStrip, methodSteps, featuredWork } from "./content/home";
+import { capabilityStrip, methodSteps, featuredWork, postureCommitments } from "./content/home";
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
@@ -97,14 +97,38 @@ export function InstitutionalHomePage() {
         </section>
 
         <section className={styles.posture}>
-          <div>
-            <p className={styles.sectionIndex}>OUR STANCE</p>
-            <h2>Working posture</h2>
+          <div className={styles.postureIntro}>
+            <div className={styles.postureTitle}>
+              <p className={styles.sectionIndex}>OUR STANCE</p>
+              <h2>Working posture</h2>
+            </div>
+
+            <p className={styles.postureLead}>
+              Sober, inspectable, and criticism-friendly. The Lab is built to absorb
+              counterexamples, revise its machinery, preserve human agency, and leave
+              useful capability behind.
+            </p>
+
+            <blockquote>“Better systems for a more legible world.”</blockquote>
           </div>
-          <p>
-            Sober, inspectable, and criticism-friendly. The Lab is built to absorb counterexamples, refine its machinery, and produce artifacts that can be examined by others.
-          </p>
-          <blockquote>“Better systems for a more legible world.”</blockquote>
+
+          <div className={styles.postureGrid}>
+            {postureCommitments.map((commitment) => (
+              <article
+                className={styles.postureCard}
+                data-posture-tone={commitment.tone}
+                key={commitment.title}
+              >
+                <p className={styles.postureEyebrow}>{commitment.eyebrow}</p>
+                <h3>{commitment.title}</h3>
+                <p>{commitment.description}</p>
+                <a href={commitment.href}>
+                  {commitment.linkLabel}
+                  <span aria-hidden="true">→</span>
+                </a>
+              </article>
+            ))}
+          </div>
         </section>
       </InstitutionalPageShell>
   );
