@@ -74,13 +74,13 @@ export function InstitutionalHomePage() {
 
         <section className={styles.practiceLineage}>
           <div className={styles.practiceLineageLead}>
-            <p className={styles.sectionIndex}>PRACTICE LINEAGE</p>
-            <h2>Lean–Agile practice is part of the Lab&apos;s operating ancestry.</h2>
+            <p className={styles.sectionIndex}>OPERATING BRAID</p>
+            <h2>Three practical lineages braid into one recursive method.</h2>
             <p>
-              Boundary First did not begin as a theory imposed on software work. Years of
-              Agile, Lean, Kanban, consulting, startup iteration, and production delivery
-              made state, capacity, feedback, uncertainty, and repair concrete before those
-              patterns were generalized.
+              Lean–Agile practice governs flow and feedback. Scientific method governs
+              evidence and correction. Agentic reasoning governs search, decomposition,
+              tool use, and critique. Boundary First connects them through explicit
+              representation, consequence, defect, repair, and handoff.
             </p>
           </div>
 

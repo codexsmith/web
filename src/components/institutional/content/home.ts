@@ -68,27 +68,27 @@ export const postureCommitments = [
 
 export const practiceLineage = [
   {
-    label: "VISIBLE STATE",
-    title: "Make the work and the system observable.",
+    label: "LEAN–AGILE",
+    title: "Flow, capacity, and feedback.",
     description:
-      "Agile and Kanban sharpened a habit that remains central to BFL: externalize current state, blockers, assumptions, queues, ownership, and next decisions instead of hiding them in memory.",
+      "Make state visible. Bound work in progress. Respect real capacity. Deliver the smallest coherent increment that can teach something, then let observed results change the next state.",
   },
   {
-    label: "BOUNDED FLOW",
-    title: "Capacity constrains what is actually reachable.",
+    label: "SCIENTIFIC METHOD",
+    title: "Questions, tests, and evidence.",
     description:
-      "Work in progress, time, attention, dependencies, and consequence are real constraints. Scope is treated as a state-space problem, not a wish list.",
+      "State a discriminating question, make assumptions and alternatives visible, run a bounded test, separate observation from interpretation, preserve null results, and revise when evidence disagrees.",
   },
   {
-    label: "SHORT EVIDENCE LOOPS",
-    title: "Turn assumptions into working evidence quickly.",
+    label: "AGENTIC REASONING",
+    title: "Search, decomposition, and critique.",
     description:
-      "Prototypes, demos, tests, and small coherent increments shorten the distance between a model of the system and what the system actually does.",
+      "Let human, computational, or hybrid agents explore alternatives, decompose problems, choose tools, compare representations, localize defects, and propose next moves without silently inheriting authority.",
   },
   {
-    label: "INSPECT + REPAIR",
-    title: "Feedback should be allowed to change the plan.",
+    label: "BOUNDARY FIRST",
+    title: "Representation, consequence, and repair.",
     description:
-      "A defect, counterexample, failed increment, or changed condition is new state. Preserve it, revise the representation, and run the loop again.",
+      "Make the system boundary explicit, preserve consequential distinctions, track lawful change, expose what was lost or omitted, repair the representation, and leave enough state for another agent to continue.",
   },
 ] as const;

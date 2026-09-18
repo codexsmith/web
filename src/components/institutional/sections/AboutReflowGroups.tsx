@@ -277,12 +277,22 @@ export function AboutReflowGroups() {
                   </p>
                 </article>
                 <article>
-                  <span>RESEARCH-BACKED</span>
-                  <h3>Compare against deep neighboring traditions.</h3>
+                  <span>SCIENTIFIC METHOD</span>
+                  <h3>Reality gets a veto.</h3>
                   <p>
-                    Mathematics, physics, computer science, information theory, statistics,
-                    logic, systems engineering, and scientific method provide mature ways of
-                    reasoning about structure, state, evidence, uncertainty, and change.
+                    Questions, hypotheses, controls, measurement, comparison, null results,
+                    falsification, replication, and explicit uncertainty constrain what the
+                    Lab is allowed to conclude from a useful idea or a successful run.
+                  </p>
+                </article>
+                <article>
+                  <span>AGENTIC REASONING</span>
+                  <h3>Search the problem space without surrendering authority.</h3>
+                  <p>
+                    Agents can decompose questions, explore alternatives, select tools,
+                    compare representations, synthesize evidence, criticize candidates, and
+                    propose repairs. Generated fluency and technical execution remain
+                    subordinate to evidence, verification, and human promotion gates.
                   </p>
                 </article>
                 <article>
