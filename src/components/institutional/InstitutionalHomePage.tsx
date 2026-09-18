@@ -3,6 +3,7 @@ import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { LabSnapshotRow } from "./LabSnapshotRow";
 
 import {
   capabilityStrip,
@@ -14,6 +15,7 @@ import {
   practiceLineage,
   stewardshipFacets,
 } from "./content/home";
+import { homeLabSnapshot } from "./content/labSnapshot";
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
@@ -47,6 +49,8 @@ export function InstitutionalHomePage() {
             />
           </aside>
         </section>
+
+        <LabSnapshotRow {...homeLabSnapshot} />
 
         <section className={styles.methodSection}>
           <InstitutionalSectionLead

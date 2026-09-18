@@ -6,6 +6,7 @@ The institutional surface separates **content**, **composition**, and **presenta
 
 - **InstitutionalChrome.tsx** — shared header/footer only.
 - **InstitutionalPageShell.tsx** — owns the page wrapper, shared chrome, and semantic `<main>`.
+- **LabSnapshotRow.tsx** — reusable compact observational-metrics row; receives data by props and owns no Lab authority or fetching.
 - **InstitutionalPrimitives.tsx** — stable structural grammar:
   - route hero
   - section header
