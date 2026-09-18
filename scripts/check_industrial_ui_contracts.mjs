@@ -22,9 +22,6 @@ function forbidMatch(path, pattern, message) {
   if (pattern.test(source)) throw new Error(`${message} (${path})`);
 }
 
-const apparatusGrammar = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_interaction_grammar_v0_1.md";
-const apparatusStudies = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_static_studies_v0_1.md";
-const apparatusMorphology = "backlog/3_bfl_boundary_first_ux/bfl_apparatus_visual_morphology_v0_1.md";
 const apparatusPrototype = "src/components/apparatus-prototype.tsx";
 const apparatusPrototypeCss = "src/app/apparatus-prototype.css";
 
@@ -32,9 +29,6 @@ for (const path of [
   "src/lib/ui-shell.ts",
   "src/app/bf-industrial-tokens.css",
   "src/app/industrial-card-ui.css",
-  apparatusGrammar,
-  apparatusStudies,
-  apparatusMorphology,
   apparatusPrototype,
   apparatusPrototypeCss,
 ]) {
@@ -72,127 +66,8 @@ forbidExists(
   "Production Apparatus World renderer must remain absent during bounded prototype review",
 );
 
-// Apparatus grammar: one semantic engine, small primitive set, no cockpit theater.
-requireMatch(
-  apparatusGrammar,
-  /Card explains the system as bounded readable modules[\s\S]*Apparatus explains the same system as a bounded operational assembly/,
-  "Apparatus must remain a second representation of the same semantic system",
-);
-requireMatch(
-  apparatusGrammar,
-  /Boundary[\s\S]*State[\s\S]*Path[\s\S]*Constraint[\s\S]*Agency[\s\S]*Consequence[\s\S]*Recovery/,
-  "Apparatus expressive test must preserve the seven Boundary First UX questions",
-);
-requireMatch(
-  apparatusGrammar,
-  /Module \/ boundary[\s\S]*Port[\s\S]*Trace[\s\S]*Gate[\s\S]*State readout[\s\S]*Command[\s\S]*Repair path/,
-  "Apparatus primitive vocabulary must remain compact and explicit",
-);
-requireMatch(
-  apparatusGrammar,
-  /reflow topologically, not miniaturize geometrically/,
-  "Apparatus responsive behavior must preserve semantics rather than shrink schematics",
-);
-requireMatch(
-  apparatusGrammar,
-  /not a cockpit skin[\s\S]*not a cyberpunk dashboard/,
-  "Apparatus must reject cockpit/dashboard theater",
-);
-
-// Static studies preserve real BFL content at root, branch, and leaf scales.
-requireMatch(
-  apparatusStudies,
-  /Study A — Root apparatus[\s\S]*Products[\s\S]*Public Interest[\s\S]*Research[\s\S]*Publications[\s\S]*About/,
-  "Root Apparatus study must preserve the five first-class Lab regions",
-);
-requireMatch(
-  apparatusStudies,
-  /Study B — Branch apparatus[\s\S]*Software[\s\S]*Boundary First Engineering[\s\S]*Executable Representation[\s\S]*Boundary First UX[\s\S]*Verification & Governance/,
-  "Branch Apparatus study must exercise real Software modules and local relation topology",
-);
-requireMatch(
-  apparatusStudies,
-  /Study C — Leaf \/ publication apparatus[\s\S]*Software Before Code[\s\S]*Working Public Method[\s\S]*External practitioner review[\s\S]*worked cases/,
-  "Leaf Apparatus study must expose real publication standing and its next gate",
-);
-requireMatch(
-  apparatusStudies,
-  /Root is a backplane\. Branch is an assembly\. Leaf is an instrument\./,
-  "Static studies must preserve the scale-dependent Apparatus topology finding",
-);
-requireMatch(
-  apparatusStudies,
-  /Ports carry meaning before wires do/,
-  "Static studies must preserve port-first connector discipline",
-);
-requireMatch(
-  apparatusStudies,
-  /Did any study require an eighth primitive\?[\s\S]*No\./,
-  "Static studies must explicitly pressure-test the primitive count",
-);
-
-// Visual morphology resolves the physical grammar without creating a type-shape zoo.
-requireMatch(
-  apparatusMorphology,
-  /Root\s+= backplane[\s\S]*Branch\s+= assembly[\s\S]*Leaf\s+= instrument/,
-  "Morphology must preserve the converged root/branch/leaf physical scale",
-);
-requireMatch(
-  apparatusMorphology,
-  /Do \*\*not\*\* create a shape zoo[\s\S]*explicit type label[\s\S]*Color never encodes object type/,
-  "Morphology must keep type explicit without proliferating decorative shapes",
-);
-requireMatch(
-  apparatusMorphology,
-  /canonical port is a small \*\*rectilinear terminal integrated into a module boundary\*\*/,
-  "Ports must remain labeled edge-mounted terminals",
-);
-requireMatch(
-  apparatusMorphology,
-  /orthogonal routed traces[\s\S]*Prefer zero crossings[\s\S]*at most \*\*three persistent labeled structural connectors\*\*[\s\S]*four simultaneous visible routed relations/,
-  "Connector morphology must preserve orthogonal routing and the density budget",
-);
-requireMatch(
-  apparatusMorphology,
-  /left chassis rail[\s\S]*Duplicate visits remain visible[\s\S]*Do not turn it into breadcrumbs/,
-  "Trace morphology must preserve actual traversal history rather than ancestry",
-);
-requireMatch(
-  apparatusMorphology,
-  /Gate is a crossbar on a transition[\s\S]*expands \*\*inline from the transition it constrains\*\*/,
-  "Gate morphology must stay attached to the constrained transition",
-);
-requireMatch(
-  apparatusMorphology,
-  /signal strip[\s\S]*publication maturity, research standing, and product delivery/,
-  "State morphology must preserve independent status axes",
-);
-requireMatch(
-  apparatusMorphology,
-  /Commands are \*\*operator plates\*\*[\s\S]*violet edge\/underline\/terminal/,
-  "Commands must use operator-agency semantics rather than state colors",
-);
-requireMatch(
-  apparatusMorphology,
-  /Through is a \*\*recessed inspection aperture\*\*[\s\S]*without adding a Focus traversal step/,
-  "Through morphology must preserve inspection without traversal",
-);
-requireMatch(
-  apparatusMorphology,
-  /Peers remain a \*\*right chassis bank\*\*[\s\S]*Peers do not draw wires into the subject/,
-  "Peers must remain sibling navigation rather than decorative graph wiring",
-);
-requireMatch(
-  apparatusMorphology,
-  /four-position depth selector[\s\S]*does not add a trace step/,
-  "Depth morphology must preserve projection changes without traversal",
-);
-requireMatch(
-  apparatusMorphology,
-  /wide spatial → medium banked → narrow linear/,
-  "Responsive morphology must reflow topology rather than miniaturize it",
-);
-
+// Retired backlog-only Apparatus doctrine files were removed from the active repository.
+// The executable prototype and its scoped CSS are now the enforceable source of truth.
 // Bounded implementation prototype: real registry data, shared World state, explicit query.
 requireMatch(
   apparatusPrototype,
@@ -252,12 +127,12 @@ requireMatch(
 );
 
 requireMatch(
-  "src/app/[[...slug]]/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /ui\?: string \| string\[\][\s\S]*parseUiShell\(query\.ui\)[\s\S]*robots: uiShell === "apparatus" \? \{ index: false, follow: false \}/,
   "Apparatus prototype pages must be explicitly addressed and no-index",
 );
 requireMatch(
-  "src/app/[[...slug]]/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /initialUiShell=\{initialUiShell\}/,
   "Page routing must pass the requested prototype renderer into WorldApp",
 );
