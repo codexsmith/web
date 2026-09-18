@@ -9,6 +9,9 @@ const productCss = fs.readFileSync("src/components/institutional/styles/Products
 const projects = fs.readFileSync("src/components/institutional/InstitutionalProjectsPage.tsx", "utf8");
 const projectContext = fs.readFileSync("src/components/institutional/sections/ProjectContextSection.tsx", "utf8");
 const projectCss = fs.readFileSync("src/components/institutional/styles/Projects.module.css", "utf8");
+const apparatus = fs.readFileSync("src/components/institutional/InstitutionalApparatusPage.tsx", "utf8");
+const apparatusContext = fs.readFileSync("src/components/institutional/sections/ApparatusContextSection.tsx", "utf8");
+const apparatusCss = fs.readFileSync("src/components/institutional/styles/Apparatus.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -79,5 +82,15 @@ expect(projectContext.includes('id="capability-transfer"'), "Project Context mus
 expect(projectCss.includes("--reflow-focus-span: 6"), "five-card Project focus-stage must place two compact cards per wide row");
 expect(projectCss.includes(".projectContextTransfer { --reflow-span: 5; }"), "Project Context REST state must retain authored magazine spans");
 expect(projectCss.includes(".projectContextCapability { --reflow-span: 6; }"), "Capability Transfer must participate in the authored REST composition");
+expect(apparatus.includes("<ApparatusContextSection />"), "Apparatus page must compose all non-bench sections as one modular Reflow surface");
+expect(apparatus.includes('className={styles.instrumentBench}'), "Instrument Bench must remain ordinary always-visible substantive content");
+expect(apparatusContext.includes('layoutMode="focus-stage"'), "Apparatus Context must use focus-stage reflow");
+expect(apparatusContext.includes("itemOrder={apparatusContextOrder}"), "Apparatus Context must declare stable source ordering");
+expect(apparatusContext.includes('id="why-apparatus"'), "Apparatus Context must include Why Apparatus Matters");
+expect(apparatusContext.includes('id="closing-test"'), "Apparatus Context must include Closing Test");
+expect(apparatusContext.includes('id="trust-stewardship"'), "Apparatus Context must include Trust and Stewardship");
+expect(apparatusCss.includes("--reflow-focus-span: 3"), "nine-card Apparatus focus-stage must place four compact cards per wide row");
+expect(apparatusCss.includes(".apparatusContextWhy { --reflow-span: 5; }"), "Apparatus Context REST state must retain authored magazine spans");
+expect(apparatusCss.includes(".apparatusContextClosing { --reflow-span: 3; }"), "Apparatus Closing Test must participate in the authored REST composition");
 
 console.log("BFUX Reflow Field contracts passed.");

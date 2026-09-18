@@ -50,17 +50,6 @@
   letter-spacing: .17em;
 }
 
-.apparatusWhy,
-.apparatusDesignQuestions {
-  display: grid;
-  grid-template-columns: minmax(280px, .78fr) minmax(0, 2fr);
-  gap: 30px;
-  align-items: start;
-  padding: 38px clamp(30px, 6vw, 96px);
-  border-bottom: 1px solid var(--bfux-panel-edge);
-  background: linear-gradient(180deg, #edf3f9, #e2ebf5);
-}
-
 .apparatusQuestions,
 .designQuestionGrid {
   display: grid;
@@ -92,43 +81,6 @@
   font-size: .76rem;
 }
 
-.apparatusFederation,
-.humanGateSection,
-.paperProjectionSection {
-  display: grid;
-  grid-template-columns: minmax(280px, .82fr) minmax(0, 1.7fr);
-  gap: clamp(36px, 6vw, 96px);
-  align-items: center;
-  padding: 42px clamp(30px, 7vw, 112px);
-  border-bottom: 1px solid var(--bfux-panel-edge);
-  background: #fff;
-}
-
-.apparatusFederation h2,
-.humanGateSection h2,
-.paperProjectionSection h2,
-.instrumentTrust h2,
-.apparatusClose h2 {
-  margin: 9px 0 10px;
-  color: var(--royal-blue-deep);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 2.8vw, 3.5rem);
-  font-weight: 500;
-  letter-spacing: -.04em;
-  line-height: 1;
-}
-
-.apparatusFederation > div:first-child > p:last-child,
-.humanGateSection > div > p:last-child,
-.paperProjectionSection > div > p:last-child,
-.instrumentTrust p,
-.apparatusClose > p {
-  margin: 0;
-  color: #435470;
-  font-size: .94rem;
-  line-height: 1.56;
-}
-
 .authorityFirewall {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -148,15 +100,12 @@
   font-size: .76rem;
 }
 
-.instrumentBench,
-.apparatusPathSection,
-.publicExposureSection {
+.instrumentBench {
   padding: 40px clamp(30px, 6vw, 96px) 50px;
   border-bottom: 1px solid var(--bfux-panel-edge);
 }
 
-.instrumentBench,
-.publicExposureSection {
+.instrumentBench {
   background:
     linear-gradient(180deg, rgba(255,255,255,.5), transparent 12%),
     linear-gradient(180deg, #dde7f2, #cfdeeb);
@@ -306,8 +255,210 @@
   line-height: 1.43;
 }
 
-.apparatusPathSection {
-  background: #fff;
+.apparatusContext {
+  padding: 42px clamp(30px, 6vw, 96px) 58px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.44), transparent 18%),
+    linear-gradient(180deg, #c9d6e4, #dde6ef);
+}
+
+.apparatusContextFrame {
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 3px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.5), rgba(232,239,247,.45));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 0 0 4px rgba(255,255,255,.16),
+    0 3px 0 rgba(7,26,61,.12),
+    0 14px 30px rgba(7,26,61,.08);
+}
+
+.apparatusContextGrid {
+  --reflow-columns: 12;
+  --reflow-gap: 14px;
+  --reflow-focus-span: 3;
+  --reflow-selected-start: 2;
+  --reflow-selected-span: 10;
+  margin-top: 20px;
+}
+
+.apparatusContextCard {
+  min-height: 220px;
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 5px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(234,241,248,.98));
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.09),
+    0 3px 0 rgba(7,26,61,.17),
+    0 9px 18px rgba(7,26,61,.1);
+}
+
+.apparatusContextCard[data-tone="why"] { border-top-color: var(--old-gold); }
+.apparatusContextCard[data-tone="federation"] { border-top-color: var(--osha-orange); }
+.apparatusContextCard[data-tone="path"] { border-top-color: var(--osha-blue); }
+.apparatusContextCard[data-tone="human"] { border-top-color: var(--osha-green); }
+.apparatusContextCard[data-tone="publication"] { border-top-color: var(--old-gold); }
+.apparatusContextCard[data-tone="exposure"] { border-top-color: var(--osha-yellow); }
+.apparatusContextCard[data-tone="design"] { border-top-color: var(--osha-blue); }
+.apparatusContextCard[data-tone="trust"] { border-top-color: var(--osha-orange); }
+.apparatusContextCard[data-tone="closing"] { border-top-color: var(--osha-green); }
+
+.apparatusContextWhy { --reflow-span: 5; }
+.apparatusContextFederation { --reflow-span: 4; }
+.apparatusContextPath { --reflow-span: 3; }
+.apparatusContextHuman { --reflow-span: 4; }
+.apparatusContextPublication { --reflow-span: 4; }
+.apparatusContextExposure { --reflow-span: 4; }
+.apparatusContextDesign { --reflow-span: 6; }
+.apparatusContextTrust { --reflow-span: 3; }
+.apparatusContextClosing { --reflow-span: 3; }
+
+.apparatusContextGrid[data-reflow-active="true"]
+  .apparatusContextCard:not([data-reflow-state="selected"]) {
+  height: 142px;
+  min-height: 142px;
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+.apparatusContextGrid[data-reflow-active="true"]
+  .apparatusContextCard:not([data-reflow-state="selected"])
+  .apparatusContextSummary > span {
+  margin-bottom: 7px;
+  padding: 3px 5px;
+  font-size: .48rem;
+}
+
+.apparatusContextGrid[data-reflow-active="true"]
+  .apparatusContextCard:not([data-reflow-state="selected"])
+  .sectionIndex {
+  margin-bottom: 5px;
+  font-size: .48rem;
+}
+
+.apparatusContextGrid[data-reflow-active="true"]
+  .apparatusContextCard:not([data-reflow-state="selected"])
+  .apparatusContextSummary h3 {
+  margin: 4px 0 0;
+  font-size: clamp(.92rem, 1.05vw, 1.08rem);
+  line-height: 1.05;
+}
+
+.apparatusContextGrid[data-reflow-active="true"]
+  .apparatusContextCard:not([data-reflow-state="selected"])
+  .apparatusContextSummary > p:last-child {
+  display: none;
+}
+
+.apparatusContextGrid[data-reflow-active="true"]
+  .apparatusContextCard:not([data-reflow-state="selected"])
+  [class*="controlStrip"] {
+  margin-top: 9px;
+  padding-top: 7px;
+}
+
+.apparatusContextCard[data-reflow-state="selected"] {
+  min-height: 0;
+  border-top-width: 7px;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.08),
+    0 4px 0 rgba(7,26,61,.22),
+    0 16px 30px rgba(7,26,61,.15);
+}
+
+.apparatusContextSummary > span {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 6px;
+  border: 1px solid rgba(119,97,38,.4);
+  background: linear-gradient(180deg, #f8eebf, #d8bd65);
+  color: #443817;
+  font: 800 .54rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.apparatusContextSummary h3 {
+  margin: 8px 0 9px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.apparatusContextSummary > p:last-child {
+  max-width: 650px;
+  margin: 0;
+  color: #52627b;
+  font-size: .78rem;
+  line-height: 1.48;
+}
+
+.apparatusContextDetail,
+.apparatusHumanDetail,
+.instrumentTrustGrid {
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge);
+  background: rgba(255,255,255,.68);
+}
+
+.apparatusContextDetail > p,
+.apparatusHumanDetail > p {
+  max-width: 940px;
+  margin: 0 0 16px;
+  color: #435470;
+  font-size: .88rem;
+  line-height: 1.58;
+}
+
+.apparatusHumanDetail blockquote {
+  margin: 16px 0 0;
+  padding: 25px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.25rem;
+  line-height: 1.45;
+  box-shadow: 0 3px 0 #071a3d, 0 10px 20px rgba(7,26,61,.16);
+}
+
+.instrumentTrustGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  border-top: 6px solid var(--osha-orange);
+  background:
+    repeating-linear-gradient(135deg, rgba(231,123,36,.07) 0 8px, transparent 8px 16px),
+    #fffaf4;
+}
+
+.instrumentTrustGrid > div {
+  padding: 18px;
+  border: 1px solid rgba(7,26,61,.22);
+  background: rgba(255,255,255,.72);
+}
+
+.instrumentTrustGrid h3 {
+  margin: 8px 0 10px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.instrumentTrustGrid p:last-child {
+  margin: 0;
+  color: #435470;
+  font-size: .85rem;
+  line-height: 1.55;
 }
 
 .apparatusPath {
@@ -465,29 +616,6 @@
   line-height: 1.55;
 }
 
-.instrumentTrust {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  padding: 44px clamp(30px, 7vw, 112px);
-  border-top: 7px solid var(--osha-orange);
-  border-bottom: 7px solid var(--osha-orange);
-  background:
-    repeating-linear-gradient(135deg, rgba(231,123,36,.07) 0 8px, transparent 8px 16px),
-    #fffaf4;
-}
-
-.instrumentTrust > div {
-  padding: 20px;
-  border: 1px solid rgba(7,26,61,.22);
-  background: rgba(255,255,255,.7);
-}
-
-.apparatusClose {
-  padding: 50px clamp(30px, 7vw, 112px) 60px;
-  background: linear-gradient(180deg, #fff, #edf3f9);
-}
-
 @media (max-width: 1180px) {
   .apparatusPath {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -499,17 +627,12 @@
 }
 
 @media (max-width: 980px) {
-  .apparatusHero,
-  .apparatusWhy,
-  .apparatusDesignQuestions,
-  .apparatusFederation,
-  .humanGateSection,
-  .paperProjectionSection {
+  .apparatusHero {
     grid-template-columns: 1fr;
   }
 
   .instrumentGrid,
-  .instrumentTrust {
+  .instrumentTrustGrid {
     grid-template-columns: 1fr;
   }
 
@@ -521,26 +644,48 @@
   .paperProjectionRail {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .apparatusContextGrid {
+    --reflow-columns: 8;
+    --reflow-focus-span: 2;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 8;
+  }
+
+  .apparatusContextWhy,
+  .apparatusContextFederation,
+  .apparatusContextPath,
+  .apparatusContextHuman,
+  .apparatusContextPublication,
+  .apparatusContextExposure,
+  .apparatusContextDesign,
+  .apparatusContextTrust,
+  .apparatusContextClosing {
+    --reflow-span: 4;
+  }
 }
 
 @media (max-width: 680px) {
   .apparatusHero,
-  .apparatusWhy,
-  .apparatusFederation,
   .instrumentBench,
-  .apparatusPathSection,
-  .humanGateSection,
-  .paperProjectionSection,
-  .publicExposureSection,
-  .apparatusDesignQuestions,
-  .instrumentTrust,
-  .apparatusClose {
+  .apparatusContext {
     padding-left: 22px;
     padding-right: 22px;
   }
 
   .apparatusHero h1 {
     font-size: clamp(3rem, 14vw, 4.4rem);
+  }
+
+  .apparatusContextGrid {
+    --reflow-columns: 1;
+    --reflow-focus-span: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 1;
+  }
+
+  .apparatusContextCard {
+    --reflow-span: 1;
   }
 
   .apparatusQuestions,
