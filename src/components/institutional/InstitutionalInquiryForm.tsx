@@ -24,7 +24,7 @@ export function InstitutionalInquiryForm({
 }) {
   const [inquiryType, setInquiryType] = useState<InquiryTypeId>(initialType);
   const [state, setState] = useState<FormState>({ kind: "idle", message: "" });
-  const startedAt = useRef(Date.now());
+  const startedAt = useRef<number | null>(null);
 
   const selected = inquiryTypes.find((item) => item.id === inquiryType) ?? inquiryTypes[0];
 
@@ -50,7 +50,7 @@ export function InstitutionalInquiryForm({
           message: formData.get("message"),
           website: formData.get("website"),
           sourceContext,
-          startedAt: startedAt.current,
+          startedAt: startedAt.current ?? Date.now(),
         }),
       });
 
@@ -68,7 +68,7 @@ export function InstitutionalInquiryForm({
       });
       form.reset();
       setInquiryType(initialType);
-      startedAt.current = Date.now();
+      startedAt.current = null;
     } catch (error) {
       setState({
         kind: "error",
@@ -81,7 +81,13 @@ export function InstitutionalInquiryForm({
   }
 
   return (
-    <form className={styles.inquiryForm} onSubmit={submitInquiry}>
+    <form
+      className={styles.inquiryForm}
+      onFocusCapture={() => {
+        if (startedAt.current === null) startedAt.current = Date.now();
+      }}
+      onSubmit={submitInquiry}
+    >
       {!intakeEnabled ? (
         <div className={styles.inquiryUnavailable} role="status">
           <span>DIRECT SUBMISSION NOT LIVE ON THIS DEPLOYMENT</span>
