@@ -118,7 +118,7 @@ const topLevelRouteRegistry = routeRegistry.slice(0, routeRegistry.indexOf("expo
 expect(!routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" },\n  { label: "Publications"'), "Apparatus must not remain in top-level institutional navigation");
 expect(!topLevelRouteRegistry.includes('/v3/funding'), "Funding must remain a contextual child route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
-expect(routeRegistry.includes('about: [\\n    { label: "Funding", href: "/v3/funding" }'), "About must own Funding as a child-page link");
+expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" }'), "About must own Funding as a child-page link");
 expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Research must own Apparatus as a child-page link");
 expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Open Lab must expose Apparatus as a child-page link");
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
