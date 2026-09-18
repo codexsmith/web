@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
@@ -18,14 +19,14 @@ export function InstitutionalHomePage() {
               We build research, methods, products, and operational tools for making consequential systems more legible, reasoning more inspectable, and useful capability easier to transfer.
             </p>
             <div className={styles.heroActions}>
-              <a className={styles.primaryAction} href="#featured-work">
+              <Link className={styles.primaryAction} href="#featured-work">
                 See Featured Work
                 <span aria-hidden="true">→</span>
-              </a>
-              <a className={styles.secondaryAction} href="/research">
+              </Link>
+              <Link className={styles.secondaryAction} href="/v3/research">
                 Read the Research
                 <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -122,10 +123,10 @@ export function InstitutionalHomePage() {
                 <p className={styles.postureEyebrow}>{commitment.eyebrow}</p>
                 <h3>{commitment.title}</h3>
                 <p>{commitment.description}</p>
-                <a href={commitment.href}>
+                <Link href={commitment.href}>
                   {commitment.linkLabel}
                   <span aria-hidden="true">→</span>
-                </a>
+                </Link>
               </article>
             ))}
           </div>
