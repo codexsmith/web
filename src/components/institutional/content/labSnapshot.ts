@@ -2,6 +2,7 @@ import type { LabSnapshotRowProps } from "../LabSnapshotRow";
 
 const registrySource = "Source: Lab Registry Catalog · Sep 16, 2026 · 57 registered descriptors.";
 const machinerySource = "Source: Lab Machinery Registry · Sep 5, 2026 · 10 registered machinery components.";
+const taxonomySource = "Source: Representation Modality Kernel · Sep 13, 2026 + Representational Quadrature · Sep 15, 2026 + current Library domain-family layout.";
 
 export const homeLabSnapshot = {
   label: "Lab snapshot",
@@ -59,6 +60,59 @@ export const homeLabSnapshot = {
           "This is a coarse public composition, not a byte-perfect semantic classifier. The experimental/data bucket is grounded in the two dominant data/output trees visible in the Sep 13 Library folder map; the remainder is grouped as the broader working corpus.",
         source:
           "Source: generated Library Survey / Folder TOC · Sep 13, 2026 · 25.06 GB total. Experimental/data estimate ≈ 6.94 GB Transcendental Grammars data + 4.44 GB Volumetrics/Spectral archive.",
+      },
+    },
+    {
+      id: "taxonomy",
+      value: "5",
+      label: "domain lenses",
+      icon: "surfaces",
+      detail: "Five familiar domain lenses organize the Lab's representational taxonomy: information, mathematics, physics, computation, and language.",
+      breakdown: {
+        title: "Five domain lenses organize how the Lab moves between representations.",
+        intro:
+          "Two partially independent axes—continuous ↔ discrete and static ↔ dynamic—provide a small routing frame. Four familiar domains sit near the canonical corners; language crosses the whole frame as the symbolic and semantic layer used to describe, translate, and coordinate them.",
+        variant: "taxonomy",
+        items: [
+          {
+            value: "01",
+            label: "Mathematics",
+            detail: "Continuous + static: structure, geometry, form, invariants, and objects considered without making evolution the primary content.",
+            code: "CONTINUOUS · STATIC",
+            tags: ["Formal systems", "Geometry", "Proof", "Structure"],
+          },
+          {
+            value: "02",
+            label: "Physics",
+            detail: "Continuous + dynamic: flow, fields, trajectories, transport, evolution, and physical state changing through time.",
+            code: "CONTINUOUS · DYNAMIC",
+            tags: ["Natural systems", "Fields", "Flow", "Dynamics"],
+          },
+          {
+            value: "03",
+            label: "Information",
+            detail: "Discrete + static: distinctions, symbolic state, records, partitions, identity, provenance, and what a representation preserves or forgets.",
+            code: "DISCRETE · STATIC",
+            tags: ["Information Mechanics", "Distinction", "State", "Provenance"],
+          },
+          {
+            value: "04",
+            label: "Computation",
+            detail: "Discrete + dynamic: transitions, algorithms, execution, automata, state machines, and transformations that can be run.",
+            code: "DISCRETE · DYNAMIC",
+            tags: ["Engineered systems", "Algorithms", "Execution", "Transitions"],
+          },
+          {
+            value: "05",
+            label: "Language",
+            detail: "Cross-cutting symbolic and semantic representation: names, grammars, rules, narratives, institutions, and interfaces that carry meaning across the other regimes.",
+            code: "CROSSES THE QUADRATURE",
+            tags: ["Linguistic systems", "Grammar", "Semantics", "Translation"],
+          },
+        ],
+        note:
+          "This is a public reconstruction of the Lab's representational routing logic, not an ontology of disciplines. Mathematics can be discrete and dynamic; physics can be discrete; information can be continuous; computation can be analog or hybrid. Language is shown as a bridge rather than a fifth corner for exactly that reason.",
+        source: taxonomySource,
       },
     },
     {
