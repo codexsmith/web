@@ -157,7 +157,6 @@ expect(!topLevelRouteRegistry.includes('/v3/evidence'), "Evidence must remain a 
 expect(!topLevelRouteRegistry.includes('/v3/now'), "Now / Roadmap must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/contact'), "Contact must remain outside top-level header navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
-expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" },\n    { label: "Founder", href: "/v3/founder" }'), "About must expose Funding, Applied Work, Evidence, Now, Collaboration, and Founder as child-page links");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
@@ -166,23 +165,41 @@ expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work"
 expect(routeRegistry.includes('{ label: "Evidence", href: "/v3/evidence" }'), "footer route collection must include Evidence");
 expect(routeRegistry.includes('{ label: "Now", href: "/v3/now" }'), "footer route collection must include Now / Roadmap");
 expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "footer route collection must include Contact");
-expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Research must expose Apparatus, Funding, Now, and Collaboration as child-page links");
-expect(routeRegistry.includes('products: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Products must expose Applied Work, Evidence, and Collaboration as child-page links");
-expect(routeRegistry.includes('projects: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Projects must expose Applied Work, Evidence, Now, and Collaboration as child-page links");
-expect(routeRegistry.includes('funding: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Now", href: "/v3/now" }'), "Funding must expose Applied Work, Evidence, and Now as child routes");
-expect(routeRegistry.includes('collaboration: [\n    { label: "Applied Work", href: "/v3/applied-work" }'), "Collaboration must expose Applied Work as a child route");
-expect(routeRegistry.includes('appliedWork: [\n    { label: "Evidence", href: "/v3/evidence" }'), "Applied Work must expose Evidence as a child route");
-expect(routeRegistry.includes('founder: [\n    { label: "Evidence", href: "/v3/evidence" }'), "Founder must expose Evidence as a child route");
-expect(routeRegistry.includes('evidence: [\n    { label: "Now", href: "/v3/now" }'), "Evidence must expose Now / Roadmap as a child route");
-expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Open Lab must expose Apparatus, Funding, Now, and Collaboration as child-page links");
+
+const childRouteContracts = [
+  ["about", ["funding", "appliedWork", "evidence", "now", "collaboration", "founder"]],
+  ["research", ["apparatus", "funding", "now", "collaboration"]],
+  ["products", ["appliedWork", "evidence", "collaboration"]],
+  ["projects", ["appliedWork", "evidence", "now", "collaboration"]],
+  ["funding", ["appliedWork", "evidence", "now"]],
+  ["collaboration", ["appliedWork"]],
+  ["appliedWork", ["evidence"]],
+  ["founder", ["evidence"]],
+  ["evidence", ["now"]],
+  ["openLab", ["apparatus", "funding", "now", "collaboration"]],
+];
+
+for (const [routeKey, childKeys] of childRouteContracts) {
+  const routeStart = routeRegistry.indexOf(`  ${routeKey}: [`);
+  expect(routeStart >= 0, `${routeKey} must exist in institutionalChildRoutes`);
+  const routeEnd = routeRegistry.indexOf("  ],", routeStart);
+  const routeSlice = routeRegistry.slice(routeStart, routeEnd);
+  for (const childKey of childKeys) {
+    expect(
+      routeSlice.includes(`institutionalChildPages.${childKey}`),
+      `${routeKey} must expose ${childKey} as a contextual child route`,
+    );
+  }
+}
+
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
-expect(primitives.includes("routeChildDependencyIcon"), "child-page cards must expose a dependency icon");
-expect(primitives.includes("<small>DEPENDENCY</small>"), "child-page cards must label their dependency relationship");
+expect(primitives.includes("routeChildIcon"), "child-page cards must expose typed relationship icons");
+expect(primitives.includes("<small>{link.relation}</small>"), "child-page cards must render their relationship label");
 expect(primitives.includes('aria-label="Child pages"'), "child-page navigation must expose semantic navigation labeling");
 expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry must not duplicate page copy");
 expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");
-expect(chrome.includes("institutionalFooterRoutes"), "footer must use the explicit footer route collection");
-expect(chrome.includes("institutionalFooterRoutes.map"), "footer must render direct child-page links");
+expect(chrome.includes("institutionalFooterGroups"), "footer must use grouped institutional footer navigation");
+expect(chrome.includes("institutionalFooterGroups.map"), "footer must render grouped footer navigation");
 
 const researchPage = read(`${root}/InstitutionalResearchPage.tsx`);
 expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), "Research hero must expose its contextual child pages");
