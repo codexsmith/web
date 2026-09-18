@@ -11,12 +11,87 @@ export const augustaCase = {
 } as const;
 
 export const augustaCaseNav = [
-  ["#finding", "Finding"],
-  ["#ledger", "Lifecycle ledger"],
-  ["#evidence", "Evidence"],
-  ["#fleet-test", "Fleet test"],
-  ["#controls", "Accounting controls"],
-  ["#next-gate", "Next gate"],
+  ["#finding", "01 Bound"],
+  ["#ledger", "02 Join"],
+  ["#evidence", "03 Classify"],
+  ["#fleet-test", "04 Measure"],
+  ["#controls", "05 Control"],
+  ["#next-gate", "06 Reopen"],
+] as const;
+
+export const augustaCaseCycle = [
+  {
+    id: "finding",
+    index: "01",
+    verb: "BOUND",
+    title: "Establish the claim ceiling.",
+    description:
+      "Start with what the public record actually supports before deciding what the case should mean.",
+    input: "source records",
+    output: "bounded finding",
+    connector: "→",
+    tone: "finding",
+  },
+  {
+    id: "ledger",
+    index: "02",
+    verb: "JOIN",
+    title: "Reconstruct the obligation.",
+    description:
+      "Resolve many administrative representations back to the same physical lifecycle object.",
+    input: "many records",
+    output: "canonical obligation",
+    connector: "→",
+    tone: "ledger",
+  },
+  {
+    id: "evidence",
+    index: "03",
+    verb: "CLASSIFY",
+    title: "Keep unlike states unlike.",
+    description:
+      "Separate backlog, funding, renewal, capital scope, conventional liability, and external shock.",
+    input: "canonical obligations",
+    output: "typed evidence",
+    connector: "↓",
+    tone: "evidence",
+  },
+  {
+    id: "fleet-test",
+    index: "04",
+    verb: "MEASURE",
+    title: "Quantify in native units first.",
+    description:
+      "Measure a defensible physical stock or obligation-time before introducing a dollar balance.",
+    input: "typed due state",
+    output: "native measure",
+    connector: "←",
+    tone: "fleet",
+  },
+  {
+    id: "controls",
+    index: "05",
+    verb: "CONTROL",
+    title: "Protect the aggregate.",
+    description:
+      "Apply identity, stock-flow, shock, capital, funding, valuation, and missingness rules before summing.",
+    input: "candidate quantities",
+    output: "admissible accounting",
+    connector: "←",
+    tone: "controls",
+  },
+  {
+    id: "next-gate",
+    index: "06",
+    verb: "REOPEN",
+    title: "Acquire the missing join.",
+    description:
+      "Turn uncertainty into explicit evidence targets, then return to the claim boundary with a better record.",
+    input: "known uncertainty",
+    output: "new evidence",
+    connector: "↺",
+    tone: "next",
+  },
 ] as const;
 
 export const augustaMetrics = [
