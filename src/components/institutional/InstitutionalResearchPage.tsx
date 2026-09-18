@@ -69,12 +69,40 @@ export function InstitutionalResearchPage() {
               >
                 <div className={styles.programTopline}>
                   <span className={styles.programCode}>{program.code}</span>
-                  <span className={styles.programStatus}>{program.status}</span>
+                  <div className={styles.programState}>
+                    <span className={styles.programStateLamp} aria-hidden="true" />
+                    {program.state}
+                  </div>
                 </div>
-                <h3>{program.title}</h3>
+
                 <p className={styles.programRole}>{program.role}</p>
+                <h3>{program.title}</h3>
                 <p className={styles.programSummary}>{program.summary}</p>
-                <blockquote>{program.question}</blockquote>
+
+                <div className={styles.programStatusGrid}>
+                  <div>
+                    <span>{program.statusLabel}</span>
+                    <strong>{program.status}</strong>
+                  </div>
+                  <div className={styles.programQuestionPanel}>
+                    <span>GOVERNING QUESTION</span>
+                    <p>{program.question}</p>
+                  </div>
+                </div>
+
+                <div className={styles.programWorkingSurface}>
+                  <span>WORKING SURFACE</span>
+                  <div>
+                    {program.workingSurface.map((item) => (
+                      <strong key={item}>{item}</strong>
+                    ))}
+                  </div>
+                </div>
+
+                <div className={styles.programBoundary}>
+                  <span>CLAIM / AUTHORITY BOUNDARY</span>
+                  {program.boundary}
+                </div>
               </article>
             ))}
           </div>

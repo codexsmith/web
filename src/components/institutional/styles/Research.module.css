@@ -126,18 +126,18 @@
 
 .researchProgramCard {
   position: relative;
-  min-height: 310px;
-  padding: 22px 22px 20px;
+  min-height: 0;
+  padding: 22px;
   border: 1px solid var(--bfux-panel-edge);
-  border-top: 5px solid var(--osha-blue);
+  border-top: 6px solid var(--osha-blue);
   background:
     linear-gradient(180deg, rgba(255,255,255,.96) 0 2px, transparent 2px),
     linear-gradient(180deg, #fbfdff, #eaf1f8);
   box-shadow:
     inset 1px 0 0 #fff,
     inset 0 -1px 0 rgba(7,26,61,.1),
-    0 2px 0 rgba(7,26,61,.2),
-    0 7px 15px rgba(7,26,61,.1);
+    0 3px 0 rgba(7,26,61,.22),
+    0 10px 22px rgba(7,26,61,.12);
 }
 
 .researchProgramCard[data-tone="review"] { border-top-color: var(--osha-orange); }
@@ -149,15 +149,8 @@
 .programTopline {
   display: flex;
   justify-content: space-between;
-  gap: 14px;
-  align-items: start;
-}
-
-.programCode,
-.programStatus {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  gap: 16px;
+  align-items: center;
 }
 
 .programCode {
@@ -168,50 +161,133 @@
   border: 1px solid rgba(119,97,38,.45);
   background: linear-gradient(180deg, #f8eebf, #d8bd65);
   color: #443817;
-  font-size: .57rem;
-  font-weight: 800;
+  font: 800 .57rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
 }
 
-.programStatus {
-  max-width: 68%;
-  color: #5a6678;
-  font-size: .5rem;
-  line-height: 1.4;
+.programState {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #46566d;
+  font: 800 .5rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
   text-align: right;
 }
 
-.researchProgramCard h3 {
-  margin: 18px 0 6px;
-  color: var(--royal-blue-deep);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.45rem;
-  line-height: 1.05;
+.programStateLamp {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(7,26,61,.5);
+  border-radius: 50%;
+  background: var(--osha-blue);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 1px 2px rgba(7,26,61,.2);
 }
 
+[data-tone="review"] .programStateLamp { background: var(--osha-orange); }
+[data-tone="internal"] .programStateLamp { background: var(--osha-yellow); }
+[data-tone="registered"] .programStateLamp { background: var(--osha-green); }
+[data-tone="mixed"] .programStateLamp { background: var(--old-gold); }
+[data-tone="experiment"] .programStateLamp { background: var(--osha-red); }
+
 .programRole {
-  margin: 0 0 14px;
+  margin: 22px 0 6px;
   color: var(--old-gold-dark);
-  font: 800 .57rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .08em;
+  font: 800 .56rem/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
   text-transform: uppercase;
 }
 
-.programSummary {
-  margin: 0;
-  color: #435470;
-  font-size: .82rem;
-  line-height: 1.52;
+.researchProgramCard h3 {
+  margin: 0 0 12px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 2.25vw, 2.55rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1;
 }
 
-.researchProgramCard blockquote {
-  margin: 18px 0 0;
+.programSummary {
+  margin: 0 0 18px;
+  color: #354967;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .93rem;
+  line-height: 1.48;
+}
+
+.programStatusGrid {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+  gap: 8px;
+}
+
+.programStatusGrid > div,
+.programWorkingSurface,
+.programBoundary {
   padding: 13px 14px;
-  border-left: 3px solid var(--old-gold);
-  background: rgba(21,58,120,.045);
+  border: 1px solid rgba(7,26,61,.28);
+  background: rgba(255,255,255,.66);
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.programStatusGrid span,
+.programWorkingSurface > span,
+.programBoundary > span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.programStatusGrid strong {
+  display: block;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .86rem;
+  line-height: 1.35;
+}
+
+.programQuestionPanel {
+  border-left: 5px solid var(--old-gold) !important;
+}
+
+.programQuestionPanel p {
+  margin: 0;
   color: #20385f;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: .87rem;
+  font-size: .82rem;
   line-height: 1.45;
+}
+
+.programWorkingSurface {
+  margin-top: 9px;
+  background: #dce5f0;
+  box-shadow: inset 0 2px 5px rgba(7,26,61,.12);
+}
+
+.programWorkingSurface > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.programWorkingSurface strong {
+  padding: 6px 8px;
+  border: 1px solid rgba(7,26,61,.25);
+  background: linear-gradient(180deg, #fbfdff, #edf3f9);
+  color: var(--royal-blue-deep);
+  font: 700 .61rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.programBoundary {
+  margin-top: 9px;
+  border-left: 5px solid var(--osha-orange);
+  color: #52627b;
+  font-size: .72rem;
+  line-height: 1.46;
 }
 
 .researchContext {
@@ -501,7 +577,8 @@
     grid-column: auto;
   }
 
-  .contextDetail {
+  .contextDetail,
+  .programStatusGrid {
     grid-template-columns: 1fr;
   }
 }
@@ -529,7 +606,7 @@
     grid-template-columns: 1fr;
   }
 
-  .programStatus {
-    max-width: 62%;
+  .programState {
+    max-width: 68%;
   }
 }
