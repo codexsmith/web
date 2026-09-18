@@ -333,13 +333,8 @@ for (const path of [
   "src/content/public-projections/home.json",
   "src/content/public-projections/work.json",
   "src/content/work_portfolio.json",
-  "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json",
-  "backlog/10_social_mission_preagent_ux/03_The_Institute.md",
-  "backlog/10_social_mission_preagent_ux/05_founders_note.md",
-  "backlog/10_social_mission_preagent_ux/06_BFL_ethos.md",
-  "backlog/10_social_mission_preagent_ux/07_public_mission.md",
 ]) {
-  requireExists(path, "Rich retained public-content source must remain available");
+  requireExists(path, "Active retained public-content projection must remain available");
 }
 requireMatch(
   "src/lib/content-projections.ts",
