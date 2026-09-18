@@ -539,3 +539,82 @@ button.pill {
 .breakdownPanel[data-variant="single-row"] .breakdownItem {
   scroll-snap-align: start;
 }
+
+
+/* Machine-facing vs human-first: make the concrete surfaces the visual payload. */
+.breakdownPanel[data-variant="split-tags"] .breakdownGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.breakdownPanel[data-variant="split-tags"] .breakdownItem {
+  min-height: 250px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+  padding: 20px;
+  border-top: 5px solid #5d8197;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(248,250,251,.78));
+}
+
+.breakdownPanel[data-variant="split-tags"] .breakdownItem:nth-child(2) {
+  border-top-color: #8b7d63;
+}
+
+.breakdownPanel[data-variant="split-tags"] .breakdownItem > strong {
+  min-width: 64px;
+  color: #173a5b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.4rem, 3vw, 3.8rem);
+  font-weight: 500;
+  letter-spacing: -.055em;
+  line-height: .88;
+}
+
+.breakdownPanel[data-variant="split-tags"] .breakdownItem > div > span {
+  color: #173653;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.breakdownPanel[data-variant="split-tags"] .breakdownItem p {
+  max-width: 620px;
+  margin: 7px 0 0;
+  color: #5d6c7d;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.breakdownTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 17px;
+}
+
+.breakdownTag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 10px;
+  border: 1px solid rgba(24,58,91,.13);
+  border-radius: 3px;
+  background: #edf3f6;
+  color: #29455f;
+  font: 700 .57rem/1.15 Arial, Helvetica, sans-serif;
+  box-shadow: inset 0 1px rgba(255,255,255,.72);
+}
+
+.breakdownPanel[data-variant="split-tags"] .breakdownItem:nth-child(2) .breakdownTag {
+  border-color: rgba(99,85,63,.14);
+  background: #f2f0eb;
+  color: #5b5144;
+}
+
+@media (max-width: 900px) {
+  .breakdownPanel[data-variant="split-tags"] .breakdownGrid {
+    grid-template-columns: 1fr;
+  }
+}
