@@ -104,19 +104,31 @@ export function InstitutionalHomePage() {
             />
 
           <div className={styles.featuredGrid}>
-            {featuredWork.map((item, index) => (
-              <article className={styles.featuredCard} key={item.title}>
-                <div className={styles.featuredVisual} data-variant={index + 1} aria-hidden="true">
-                  <span>{formatOrdinal(index)}</span>
-                </div>
-                <div className={styles.featuredCopy}>
-                  <span className={styles.featuredTag}>{item.tag}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-                <span className={styles.featuredArrow} aria-hidden="true">→</span>
-              </article>
-            ))}
+            {featuredWork.map((item, index) => {
+              const content = (
+                <>
+                  <div className={styles.featuredVisual} data-variant={index + 1} aria-hidden="true">
+                    <span>{formatOrdinal(index)}</span>
+                  </div>
+                  <div className={styles.featuredCopy}>
+                    <span className={styles.featuredTag}>{item.tag}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  <span className={styles.featuredArrow} aria-hidden="true">→</span>
+                </>
+              );
+
+              return item.href ? (
+                <Link className={styles.featuredCard} href={item.href} key={item.title}>
+                  {content}
+                </Link>
+              ) : (
+                <article className={styles.featuredCard} key={item.title}>
+                  {content}
+                </article>
+              );
+            })}
           </div>
         </section>
 
