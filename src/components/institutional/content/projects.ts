@@ -98,6 +98,7 @@ export const projects = [
     type: "Active public-interest research case",
     status: "CASE_CANDIDATE / RESEARCH_ACTIVE / NOT_PROMOTED",
     tone: "civic",
+    href: "/v3/projects/augusta-maintenance-debt",
     domain: "Public infrastructure / institutions",
     stress: "Provenance, accounting distinctions, uncertainty, public consequence",
     transfer:
