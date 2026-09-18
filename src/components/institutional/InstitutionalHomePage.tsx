@@ -114,10 +114,8 @@ export function InstitutionalHomePage() {
             <p className={styles.sectionIndex}>OPERATING BRAID</p>
             <h2>Three practical lineages braid into one recursive method.</h2>
             <p>
-              Lean–Agile practice governs flow and feedback. Scientific method governs
-              evidence and correction. Agentic reasoning governs search, decomposition,
-              tool use, and critique. Boundary First connects them through explicit
-              representation, consequence, defect, repair, and handoff.
+              Lean–Agile, scientific method, and agentic reasoning connect through
+              state-based reasoning to create Boundary First.
             </p>
           </div>
 
@@ -153,8 +151,8 @@ export function InstitutionalHomePage() {
             <h2>What succeeds still has to be cared for.</h2>
             <p>
               Boundary First Labs treats stewardship as a concrete engineering and
-              institutional obligation: tend what is shared, maintain what others depend
-              on, repair what has been neglected, cultivate future capacity, and refuse
+              institutional obligation: <strong>tend</strong> what is shared, <strong>maintain</strong> what others depend
+              on, <strong>repair</strong> what has been neglected, <strong>cultivate</strong> future capacity, and <strong>refuse</strong>
               success that works only by pushing its costs outside the frame.
             </p>
           </div>
@@ -162,9 +160,8 @@ export function InstitutionalHomePage() {
           <div className={styles.stewardshipBandGrid}>
             {stewardshipFacets.map((facet) => (
               <article key={facet.label}>
-                <span>{facet.label}</span>
-                <h3>{facet.title}</h3>
-                <p>{facet.description}</p>
+                <h3>{facet.label}</h3>
+                <p>{facet.title}</p>
               </article>
             ))}
           </div>
