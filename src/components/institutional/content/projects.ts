@@ -18,6 +18,7 @@ export const projects = [
     type: "Registered research product / product family",
     status: "research_product",
     tone: "product",
+    href: "/v3/products/boundary-first-chess",
     domain: "Game / education / media / analysis",
     stress: "Bounded state, explanation, pedagogy, audience legibility",
     transfer:
@@ -37,6 +38,7 @@ export const projects = [
     type: "Agentic reasoning × scientific-method research product",
     status: "research_product",
     tone: "research",
+    href: "/v3/products/agentic-scientific-method",
     domain: "Scientific research / AI / research automation",
     stress: "Theory representation, evaluation, repair, authority",
     transfer:
@@ -56,6 +58,7 @@ export const projects = [
     type: "Registered software product family",
     status: "active_build",
     tone: "build",
+    href: "/v3/products/youtube-knowledge-explorer",
     domain: "Software / media knowledge",
     stress: "Representation change, navigation, provenance",
     transfer:
@@ -75,6 +78,7 @@ export const projects = [
     type: "Applied computational research scaffold / benchmark program / pilot candidate",
     status: "NO ADMITTED PROD-* IDENTITY",
     tone: "scaffold",
+    href: "/v3/products/boundary-first-weather",
     domain: "Atmospheric computation / public science",
     stress: "Physical baselines, flux, multiscale closure, computational evidence",
     transfer:
