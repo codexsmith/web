@@ -28,7 +28,7 @@ export function InstitutionalAtlasPage({
         lead={
           <>
             A bounded public map of how research programs, products, project cases,
-            and publication records relate across Boundary First Labs.
+            publication records, and evidence records relate across Boundary First Labs.
           </>
         }
         support={
@@ -48,13 +48,14 @@ export function InstitutionalAtlasPage({
 
       <section className={styles.atlasBoundary}>
         <div>
-          <span>FIRST PUBLIC BOUNDARY</span>
-          <strong>Research · Products · Projects · Publications</strong>
+          <span>CURRENT PUBLIC BOUNDARY</span>
+          <strong>Research · Products · Projects · Publications · Evidence</strong>
         </div>
         <p>
-          Evidence records, experiments, apparatus, people, and finer-grained source
-          relationships can join this map as their public object contracts become explicit.
-          Missing edges remain missing rather than being guessed.
+          The first prior-execution evidence records are now admitted as objects. Experiments,
+          apparatus, people, and finer-grained source relationships can join as their public
+          object contracts become explicit. Mentioning the same project or institution does not
+          create an edge; missing relationships remain missing rather than being guessed.
         </p>
       </section>
 

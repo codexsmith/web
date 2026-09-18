@@ -90,6 +90,7 @@
   border: 1px solid var(--bfux-panel-edge-dark);
   border-left: 8px solid var(--osha-blue);
   background: rgba(255,255,255,.8);
+  scroll-margin-top: 76px;
   box-shadow:
     0 3px 0 rgba(7,26,61,.15),
     0 10px 20px rgba(7,26,61,.07);
@@ -97,6 +98,11 @@
 
 .priorExecutionCard:first-child {
   border-left-color: var(--old-gold);
+}
+
+.priorExecutionCard:target {
+  outline: 2px solid var(--osha-green);
+  outline-offset: 4px;
 }
 
 .priorExecutionCard > header,

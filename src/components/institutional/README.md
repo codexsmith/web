@@ -34,6 +34,9 @@ Do not create a universal schema-driven page renderer. Shared structure belongs 
 
 `LabObjectIdentity` standardizes presentation, not authority. It may render an object kind, a source-provided identifier or local code, a source-reported status/state, and one secondary classification. It must not fabricate a canonical ID, translate native lifecycle states into a universal maturity score, or promote an object because it appears on a public route. Registered IDs remain IDs; local codes remain codes; unadmitted identities remain unadmitted.
 
+The first public Evidence-object cohort is `priorExecution` in `content/evidence.ts`. Each record keeps its source-native evidence class and its explicit “what this does not prove” ceiling. `surfaceKey` is only a stable public-surface routing key for Evidence-page fragments and Atlas focus; it is not a canonical evidence identifier and must not be rendered as one. Evidence basis and boundary text may improve deterministic command search, but they do not create Atlas relationships. Evidence edges remain explicit declarations only.
+
+
 ## Dead-code rule
 
 Once a route has a real page renderer, do not keep a second preview/front-door renderer or duplicate route copy in the navigation registry. One route has one composition authority.

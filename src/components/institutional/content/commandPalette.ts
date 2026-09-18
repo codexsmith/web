@@ -81,6 +81,7 @@ const objectEntries: CommandPaletteEntry[] = atlasNodes.map((node) => {
       node.status,
       node.secondary ?? "",
       node.summary,
+      ...(node.searchTerms ?? []),
       ...relationshipText,
     ].join(" "),
   };

@@ -24,6 +24,7 @@ export const evidenceClasses = [
 export const priorExecution = [
   {
     status: "EXTERNALLY CORROBORATED",
+    surfaceKey: "citywatch",
     title: "CityWatch — civic software delivered inside Augusta–Richmond County",
     summary:
       "CityWatch was a public transparency system for project status and finance information built during Nicholas T. Smith's Augusta–Richmond County application-development work.",
@@ -34,6 +35,7 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    surfaceKey: "georgia-tech-research",
     title: "Georgia Tech undergraduate research — materials, HPC, and NUMA",
     summary:
       "The founder's undergraduate formation included four semesters of research spanning materials work and high-performance-computing / NUMA performance analysis, alongside the ordinary work of literature review, hypothesis formation, measurement, and interpreting results that did not support the starting hypothesis.",
@@ -44,6 +46,7 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    surfaceKey: "lean-agile-delivery",
     title: "Lean, Agile, Kanban, and repeated delivery under constraint",
     summary:
       "From 2016–2018, Agile and Lean practice became an operating discipline rather than a vocabulary: make state visible, shorten the assumption-to-evidence loop, limit work in progress, expose capacity, demonstrate working increments, and repair from observed failure.",
@@ -54,6 +57,7 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    surfaceKey: "global-web-advisors",
     title: "Global Web Advisors — early startup NLP product engineering",
     summary:
       "An early startup role put natural-language processing, cloud infrastructure, data systems, and product iteration into one operating environment rather than treating them as separate specialties.",
@@ -64,6 +68,7 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    surfaceKey: "projectr-live",
     title: "Projectr.Live — solo founder, architecture through market testing",
     summary:
       "Projectr turned zero-to-one product work into full-system responsibility: product direction, architecture, implementation, infrastructure, deployment, budgets, user behavior, and repeated pivots all became one coupled engineering problem.",
@@ -74,6 +79,7 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    surfaceKey: "carlabs",
     title: "CarLabs.ai — startup cloud systems during an acquisition transition",
     summary:
       "A short startup engagement exercised a different part of the stack: chatbot architecture, integrations, serverless systems, and production debugging during a period of organizational change.",
@@ -84,6 +90,7 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    surfaceKey: "production-delivery",
     title: "More than a decade of production software and systems delivery",
     summary:
       "The founder's career record spans public-sector software, consulting, startups, education technology, cloud systems, and regulated or compliance-sensitive environments.",
@@ -94,6 +101,7 @@ export const priorExecution = [
   },
   {
     status: "PROFESSIONAL RECORD",
+    surfaceKey: "consulting-search",
     title: "Repeated consulting, search systems, and cross-domain delivery",
     summary:
       "The systems method was sharpened in consulting environments where the code, domain, architecture, process, client communication, testing, and delivery boundary all had to close together.",

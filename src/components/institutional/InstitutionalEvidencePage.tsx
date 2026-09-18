@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import { LabObjectIdentity } from "./LabObjectIdentity";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Evidence.module.css";
@@ -66,10 +67,21 @@ export function InstitutionalEvidencePage() {
 
         <div className={styles.priorExecutionStack}>
           {priorExecution.map((item, index) => (
-            <article className={styles.priorExecutionCard} key={item.title}>
+            <article
+              className={styles.priorExecutionCard}
+              id={`evidence-${item.surfaceKey}`}
+              key={item.title}
+            >
               <header>
+                <LabObjectIdentity
+                  kind="evidence"
+                  status={item.status}
+                  statusLabel="EVIDENCE CLASS"
+                  secondary="Prior execution"
+                  secondaryLabel="COHORT"
+                  variant="compact"
+                />
                 <span>{formatOrdinal(index)}</span>
-                <small>{item.status}</small>
                 <h3>{item.title}</h3>
                 <p>{item.summary}</p>
               </header>

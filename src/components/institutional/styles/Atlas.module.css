@@ -129,6 +129,7 @@
 .kindGroup[data-kind="product"] { --atlas-kind: #b26c2f; }
 .kindGroup[data-kind="project"] { --atlas-kind: #4f8e97; }
 .kindGroup[data-kind="publication"] { --atlas-kind: #9a7a2d; }
+.kindGroup[data-kind="evidence"] { --atlas-kind: #3c7e57; }
 
 .kindGroup > header {
   min-height: 40px;

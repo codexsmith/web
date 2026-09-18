@@ -6,6 +6,7 @@ import { boundaryFirstChessProduct } from "./boundaryFirstChess";
 import { boundaryFirstWeatherProduct } from "./boundaryFirstWeather";
 import { youtubeKnowledgeExplorerProduct } from "./youtubeKnowledgeExplorer";
 import { agenticScientificMethodProduct } from "./agenticScientificMethod";
+import { priorExecution } from "./evidence";
 
 export type AtlasNode = {
   atlasId: string;
@@ -19,6 +20,7 @@ export type AtlasNode = {
   secondary?: string;
   secondaryLabel?: string;
   summary: string;
+  searchTerms?: readonly string[];
 };
 
 export type AtlasEdge = {
@@ -117,11 +119,25 @@ const publicationNodes: AtlasNode[] = selectedPublications.map((publication) => 
   summary: publication.abstract,
 }));
 
+const evidenceNodes: AtlasNode[] = priorExecution.map((record) => ({
+  atlasId: `evidence-${record.surfaceKey}`,
+  kind: "evidence",
+  title: record.title,
+  href: `/v3/evidence#evidence-${record.surfaceKey}`,
+  status: record.status,
+  statusLabel: "EVIDENCE CLASS",
+  secondary: "Prior execution",
+  secondaryLabel: "COHORT",
+  summary: record.summary,
+  searchTerms: [record.evidence, record.boundary],
+}));
+
 export const atlasNodes = [
   ...researchNodes,
   ...productNodes,
   ...projectNodes,
   ...publicationNodes,
+  ...evidenceNodes,
 ] as const satisfies readonly AtlasNode[];
 
 const projectProductEdges: AtlasEdge[] = [
@@ -180,6 +196,7 @@ export const atlasKindOrder = [
   "product",
   "project",
   "publication",
+  "evidence",
 ] as const satisfies readonly LabObjectKind[];
 
 export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
@@ -187,6 +204,7 @@ export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
   product: "Products",
   project: "Project cases",
   publication: "Publication records",
+  evidence: "Evidence records",
 };
 
 export const atlasStats = {

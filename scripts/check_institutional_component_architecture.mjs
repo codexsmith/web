@@ -382,6 +382,12 @@ expect(evidenceContent.includes("EMERGING / NOT YET ESTABLISHED"), "Evidence mus
 expect(evidenceContent.includes("Prior career != BFL traction"), "Evidence must forbid prior-career inflation into BFL traction");
 expect(evidencePage.includes("EVIDENCE STILL TO EARN"), "Evidence page must expose the next proof points directly");
 expect(evidencePage.includes("childLinks={institutionalChildRoutes.evidence}"), "Evidence hero must expose Now / Roadmap as a child page");
+expect(evidencePage.includes("LabObjectIdentity"), "Evidence prior-execution records must compose LabObjectIdentity");
+expect(evidencePage.includes('kind="evidence"'), "Prior-execution records must identify as Evidence objects");
+expect(evidencePage.includes("status={item.status}"), "Evidence object identity must preserve source evidence class");
+expect(evidencePage.includes('id={`evidence-${item.surfaceKey}`}'), "Evidence records must expose stable local surface anchors");
+expect(!evidencePage.includes("identifier={item.surfaceKey}"), "Evidence surface keys must never be promoted into canonical identifiers");
+expect(evidenceContent.includes('surfaceKey: "citywatch"'), "Evidence source must expose local routing keys for admitted evidence objects");
 
 const nowPage = read(`${root}/InstitutionalNowPage.tsx`);
 const nowContent = read(`${root}/content/now.ts`);
@@ -498,6 +504,13 @@ expect(atlasExplorer.includes("LabObjectIdentity"), "Lab Atlas inspector must re
 expect(atlasContent.includes("export const atlasEdges"), "Lab Atlas relationships must live in an explicit content model");
 expect(atlasContent.includes("PROJECT CASE OF"), "Lab Atlas must declare project-to-product relationships explicitly");
 expect(atlasContent.includes("PUBLIC PRODUCT SURFACE"), "Lab Atlas must declare the ASM research-to-product relationship explicitly");
+expect(atlasContent.includes("priorExecution"), "Lab Atlas must admit the source-bound prior-execution evidence cohort");
+expect(atlasContent.includes('kind: "evidence"'), "Lab Atlas must expose Evidence as an object family");
+expect(atlasContent.includes('/v3/evidence#evidence-'), "Evidence Atlas nodes must route back to their exact native surface");
+expect(atlasContent.includes("searchTerms: [record.evidence, record.boundary]"), "Evidence search must preserve both basis and claim ceiling");
+expect(!atlasContent.includes("identifier: record.surfaceKey"), "Atlas-local evidence routing keys must not become identifiers");
+expect(atlasPage.includes("Research · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the Evidence object family");
+expect(commandPaletteContent.includes("node.searchTerms"), "Global object search must admit bounded object-specific search terms without inferring edges");
 expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");
 
 

@@ -189,6 +189,7 @@
 .result[data-kind="product"] { --command-accent: #b26c2f; }
 .result[data-kind="project"] { --command-accent: #4f8e97; }
 .result[data-kind="publication"] { --command-accent: #9a7a2d; }
+.result[data-kind="evidence"] { --command-accent: #3c7e57; }
 .result[data-entry-type="page"] { --command-accent: #536f78; }
 
 .result[data-active="true"] {
