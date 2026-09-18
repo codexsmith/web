@@ -30,13 +30,14 @@ export type LabSnapshotBreakdownItem = {
   label: string;
   detail?: string;
   code?: string;
+  tags?: readonly string[];
 };
 
 export type LabSnapshotBreakdown = {
   title: string;
   intro: string;
   items: readonly LabSnapshotBreakdownItem[];
-  variant?: "grid" | "flow" | "single-row";
+  variant?: "grid" | "flow" | "single-row" | "split-tags";
   note?: string;
   source?: string;
 };
@@ -188,6 +189,13 @@ export function LabSnapshotRow({
                 <div>
                   <span>{item.label}</span>
                   {item.detail ? <p>{item.detail}</p> : null}
+                  {item.tags?.length ? (
+                    <div className={styles.breakdownTags} aria-label={`${item.label} examples`}>
+                      {item.tags.map((tag) => (
+                        <span className={styles.breakdownTag} key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  ) : null}
                   {item.code ? <code>{item.code}</code> : null}
                 </div>
               </article>
