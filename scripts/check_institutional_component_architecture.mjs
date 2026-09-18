@@ -27,6 +27,12 @@ expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Instituti
 expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
 
+const foundationCss = read(`${root}/styles/InstitutionalFoundation.module.css`);
+expect(foundationCss.includes('border: 2px solid var(--old-gold)'), "Institutional header must carry a gold perimeter");
+expect(foundationCss.includes("border-bottom-width: 1px"), "Institutional header bottom rule must remain the thinnest perimeter edge");
+expect(foundationCss.includes('.header[data-header-compact="true"] {\n  min-height: 52px;'), "Post-hero header must physically contract");
+expect(foundationCss.includes('.header[data-header-compact="true"] .logo {\n  width: 34px;\n  height: 34px;'), "Compact header must shrink the persistent logo");
+
 const pageShell = read(`${root}/InstitutionalPageShell.tsx`);
 expect(pageShell.includes("<InstitutionalHeader />"), "PageShell must own the shared header");
 expect(pageShell.includes("<InstitutionalFooter />"), "PageShell must own the shared footer");

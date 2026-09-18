@@ -2267,3 +2267,68 @@
     transition: none;
   }
 }
+
+
+/* Compact sticky rail refinement.
+ * The masthead keeps its full identity while the hero is visible. After the
+ * hero passes, the rail physically contracts around the persistent logo/nav.
+ * Gold frames the rail on all sides; the lower rule is deliberately thinnest. */
+.header {
+  border: 2px solid var(--old-gold);
+  border-bottom-width: 1px;
+  transition:
+    min-height 180ms ease,
+    padding 180ms ease,
+    grid-template-columns 180ms ease,
+    gap 180ms ease;
+}
+
+.logo {
+  transition:
+    width 180ms ease,
+    height 180ms ease;
+}
+
+.nav {
+  transition:
+    gap 180ms ease,
+    font-size 180ms ease;
+}
+
+.header[data-header-compact="true"] {
+  min-height: 52px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  gap: 20px;
+}
+
+.header[data-header-compact="true"] .logo {
+  width: 34px;
+  height: 34px;
+}
+
+.header[data-header-compact="true"] .nav {
+  gap: clamp(15px, 1.35vw, 23px);
+  font-size: .78rem;
+}
+
+@media (max-width: 1240px) {
+  .header[data-header-compact="true"] {
+    min-height: 50px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+
+  .header[data-header-compact="true"] .logo {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .logo,
+  .nav {
+    transition: none;
+  }
+}
