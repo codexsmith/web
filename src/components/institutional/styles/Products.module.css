@@ -636,3 +636,29 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.productDetailLink {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 16px;
+  padding: 8px 0 5px;
+  border-bottom: 1px solid var(--old-gold-dark);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .82rem;
+  font-weight: 600;
+}
+
+.productDetailLink span {
+  color: var(--old-gold-dark);
+  transition: transform 100ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .productDetailLink:hover span {
+    transform: translateX(3px);
+  }
+}
