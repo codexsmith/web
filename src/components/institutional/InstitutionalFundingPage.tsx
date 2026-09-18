@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -155,11 +156,11 @@ export function InstitutionalFundingPage() {
         </p>
 
         <nav className={styles.fundingEvidenceLinks} aria-label="Funding evidence routes">
-          <a href="/v3/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/research">Inspect the research <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/projects">Inspect applied work <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/products">Inspect products <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/publications">Inspect publications <span aria-hidden="true">-&gt;</span></a>
+          <Link href="/v3/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/research">Inspect the research <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/projects">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/products">Inspect products <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/publications">Inspect publications <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
