@@ -97,35 +97,42 @@ try {
   await waitForServer();
 
   await expectPage("/", [
-    "Software for difficult systems.",
-    "Enter the lab",
     "Boundary First Labs",
+    "THE LAB MACHINE",
+    "Powered by Research. Built for People.",
+    "Products",
+    "People",
+    "Research",
+    "Publications",
+    "About",
+    "Capital",
+    "Full",
+    "Core",
+    "Evidence",
+    "Timeline",
   ], [
-    "Enter region",
+    "Enter the lab",
     "Root World · operating environment",
     "The hero is the threshold",
     "Cross the threshold to activate",
     "One proposition · one action · one world beyond it",
   ]);
 
+  // The retired ?world=1 query is harmless legacy noise; it must not revive
+  // the old hero / entered-root split.
   await expectPage("/?world=1", [
-    "Boundary First Labs",
-    "Follow the work, the evidence behind it, and the obligations it creates.",
+    "THE LAB MACHINE",
+    "Powered by Research. Built for People.",
     "Products",
-    "Public Interest",
+    "People",
     "Research",
-    "Publications",
-    "About",
-    "View",
   ], [
     "Enter the lab",
     "Root World",
     "operating environment",
-    "Back through trace",
-    "Forward through trace",
   ]);
 
-  await expectPage("/?world=1&view=timeline", [
+  await expectPage("/?view=timeline", [
     "Founder timeline",
     "From practice to Boundary First Labs",
     "Development arc",
@@ -241,8 +248,8 @@ try {
     "remains preferred and will resume when supported.",
   ]);
 
-  await expectPage("/public-interest", [
-    "Public Interest",
+  await expectPage("/people", [
+    "People",
     "At a glance",
     "Mission",
     "Principles",
@@ -251,14 +258,14 @@ try {
     "Open project record",
   ]);
 
-  await expectRedirect("/public-interest?view=record", "/public-interest");
+  await expectRedirect("/people?view=record", "/people");
 
-  await expectPage("/public-interest?view=process", [
+  await expectPage("/people?view=process", [
     "Process projection",
     "Agentic · Lean Startup · Agile · Scientific · Computational · Constructive",
   ]);
 
-  await expectPage("/public-interest/goals-aspirations", [
+  await expectPage("/people/goals-aspirations", [
     "Goals &amp; Aspirations",
     "At a glance",
   ]);
@@ -303,21 +310,8 @@ try {
     ["Governed public landing"],
   );
 
-  // Explicitly addressed, no-index Apparatus prototype. Card remains the default route.
-  await expectPage("/?world=1&ui=apparatus", [
-    "APPARATUS",
-    "bounded prototype",
-    "ROOT WORLD · BACKPLANE",
-    "Products",
-    "Public Interest",
-    "Research",
-    "Publications",
-    "About",
-    "Return to Card",
-    "noindex",
-  ], [
-    "Enter region",
-  ]);
+  // Apparatus remains explicitly addressed on content routes. The canonical
+  // root is now the Lab Machine rather than the retired root Apparatus prototype.
 
   await expectPage("/research/software?ui=apparatus", [
     "APPARATUS",
