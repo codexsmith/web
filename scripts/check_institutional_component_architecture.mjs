@@ -204,9 +204,10 @@ expect(aboutGroups.includes('data-about-group="agency"'), "About must preserve A
 expect(aboutGroups.includes('data-about-group="institution"'), "About must preserve Institutional Practice");
 
 const appliedWorkPage = read(`${root}/InstitutionalAppliedWorkPage.tsx`);
+const appliedWorkContent = read(`${root}/content/appliedWork.ts`);
 expect(appliedWorkPage.includes("./content/appliedWork"), "Applied Work page must own a route-local content model");
 expect(appliedWorkPage.includes("What can Boundary First Labs help your organization do?"), "Applied Work hero must lead with the ordinary commercial question");
-expect(appliedWorkPage.includes("NO THEORY BUY-IN REQUIRED"), "Applied Work must separate service value from theory adoption");
+expect(appliedWorkContent.includes("NO THEORY BUY-IN REQUIRED"), "Applied Work must separate service value from theory adoption");
 expect(appliedWorkPage.includes("CURRENT COMMERCIAL POSTURE"), "Applied Work must disclose current BFL service maturity");
 expect(appliedWorkPage.includes("appliedServiceFamily"), "Applied Work must group concrete offers inside larger service families");
 
