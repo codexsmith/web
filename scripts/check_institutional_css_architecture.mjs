@@ -51,6 +51,9 @@ expect(foundation.includes(".footerNav a"), "Foundation must own shared footer n
 expect(foundation.includes("flex-wrap: wrap"), "footer navigation must wrap when contextual child routes are exposed");
 expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
 expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared site chrome");
+expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
+expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
+expect(routeShared.includes("min-height: 58px"), "child-page cards must remain compact enough for dense contextual navigation");
 
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
