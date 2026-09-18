@@ -12,6 +12,7 @@ export function InstitutionalRouteHero({
   title,
   lead,
   support,
+  childLinks,
   children,
 }: {
   styles: CssModule;
@@ -20,6 +21,10 @@ export function InstitutionalRouteHero({
   title: ReactNode;
   lead?: ReactNode;
   support?: ReactNode;
+  childLinks?: readonly {
+    label: string;
+    href: string;
+  }[];
   children?: ReactNode;
 }) {
   return (
@@ -30,7 +35,30 @@ export function InstitutionalRouteHero({
         {lead ? <p className={styles.routeLead}>{lead}</p> : null}
         {support ? <p className={styles.routeSupport}>{support}</p> : null}
       </div>
-      {children}
+
+      {children || childLinks?.length ? (
+        <div className={styles.routeHeroAside}>
+          {children ? (
+            <div className={styles.routeHeroAsideContent}>{children}</div>
+          ) : null}
+
+          {childLinks?.length ? (
+            <nav className={styles.routeChildNav} aria-label="Child pages">
+              <span className={styles.routeChildLabel}>
+                {childLinks.length === 1 ? "CHILD PAGE" : "CHILD PAGES"}
+              </span>
+              <div className={styles.routeChildLinks}>
+                {childLinks.map((link) => (
+                  <a className={styles.routeChildLink} href={link.href} key={link.href}>
+                    <span>{link.label}</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                ))}
+              </div>
+            </nav>
+          ) : null}
+        </div>
+      ) : null}
     </section>
   );
 }

@@ -101,10 +101,17 @@ expect(
 );
 
 const routeRegistry = read(`${root}/institutionalRoutes.ts`);
+expect(!routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" },\n  { label: "Publications"'), "Apparatus must not remain in top-level institutional navigation");
+expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
+expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Research must own Apparatus as a child-page link");
+expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Open Lab must expose Apparatus as a child-page link");
+expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
+expect(primitives.includes('aria-label="Child pages"'), "child-page navigation must expose semantic navigation labeling");
 expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry must not duplicate page copy");
 expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");
 
 const researchPage = read(`${root}/InstitutionalResearchPage.tsx`);
+expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), "Research hero must expose Apparatus as a child page");
 expect(researchPage.includes("<ResearchContextSection />"), "Research must compose its contextual bento as a section component");
 expect(!researchPage.includes('id="reader-agency"'), "Research page must not inline Reflow Field context cards");
 expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchContextSection must exist as the route-local composition boundary");
@@ -121,6 +128,9 @@ expect(!projectsPage.includes('className={styles.transferEvidence}'), "Projects 
 expect(!projectsPage.includes('className={styles.projectNativeStatusRule}'), "Projects page must not inline Status Rule");
 expect(!projectsPage.includes('className={styles.capabilityTransfer}'), "Projects page must not inline Capability Transfer");
 expect(fs.existsSync(`${root}/sections/ProjectContextSection.tsx`), "ProjectContextSection must exist as the route-local composition boundary");
+
+const openLabPage = read(`${root}/InstitutionalOpenLabPage.tsx`);
+expect(openLabPage.includes("childLinks={institutionalChildRoutes.openLab}"), "Open Lab hero must expose Apparatus as a child page");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");

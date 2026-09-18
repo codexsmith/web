@@ -51,3 +51,6 @@ The Publications route currently uses `sections/PublicationContextSection.tsx` a
 
 
 The Publications route now has a separate `sections/PublicationCatalogSection.tsx` substantive surface above its context field. Its initial records are explicit UI stubs used only to design the catalog grammar; they claim no publication date, DOI, review state, release state, or scientific authority. Replace those stubs with source-governed publication records when canonical documents are ingested.
+
+
+Institutional navigation distinguishes global routes from contextual child routes. Child pages are not repeated in the top-level header/footer navigation; parent routes expose them through the shared lower-right hero child-page rail. Apparatus is currently reachable as a child of both Research and Open Lab while retaining its canonical `/v3/apparatus` route.

@@ -7,6 +7,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectio
 import { formatOrdinal } from "./institutionalFormat";
 
 import { participationContracts, stewardshipGates, sharedEnvelope, capabilityOutcomes } from "./content/openLab";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalOpenLabPage() {
@@ -21,6 +22,7 @@ export function InstitutionalOpenLabPage() {
           support={<>The public should be able to bring consequential systems, criticism,
               expertise, collaboration, and unusual work to the Lab without first
               learning the Lab&apos;s internal vocabulary.</>}
+          childLinks={institutionalChildRoutes.openLab}
           >
           <blockquote className={styles.openLabThesis}>
             <span>FOUR PUBLIC CONTRACTS</span>

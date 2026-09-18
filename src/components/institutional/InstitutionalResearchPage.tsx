@@ -7,6 +7,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 
 import { programs } from "./content/research";
 import { ResearchContextSection } from "./sections/ResearchContextSection";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalResearchPage() {
@@ -19,6 +20,7 @@ export function InstitutionalResearchPage() {
           title={<>Research as inspectable machinery.</>}
           lead={<>Boundary First Labs develops theories, experiments, computational models,
               formal artifacts, and working systems.</>}
+          childLinks={institutionalChildRoutes.research}
           >
           <blockquote className={styles.researchQuestion}>
             <span>GOVERNING QUESTION</span>
