@@ -56,7 +56,6 @@ export function InstitutionalHomePreview() {
           <BoundaryFirstWaveLogo className={styles.logo} variant="compact" decorative />
           <span className={styles.brandCopy}>
             <strong>Boundary First Labs</strong>
-            <span>Practice-born. Research-backed. Formally generalized.</span>
           </span>
         </a>
 
