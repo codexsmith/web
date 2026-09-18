@@ -618,3 +618,67 @@ button.pill {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Corpus composition: distinguish intellectual working corpus from bulk experimental data. */
+.breakdownPanel[data-variant="corpus-split"] .breakdownGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.breakdownPanel[data-variant="corpus-split"] .breakdownItem {
+  min-height: 245px;
+  display: grid;
+  grid-template-columns: minmax(120px, .26fr) minmax(0, 1fr);
+  gap: 18px;
+  padding: 22px;
+  border-top: 6px solid #617d93;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(246,249,250,.82));
+}
+
+.breakdownPanel[data-variant="corpus-split"] .breakdownItem:nth-child(2) {
+  border-top-color: #786a9a;
+}
+
+.breakdownPanel[data-variant="corpus-split"] .breakdownItem > strong {
+  min-width: 0;
+  color: #173a5b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.25rem, 3.2vw, 4.2rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .9;
+}
+
+.breakdownPanel[data-variant="corpus-split"] .breakdownItem > div > span {
+  color: #173653;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+
+.breakdownPanel[data-variant="corpus-split"] .breakdownItem p {
+  max-width: 720px;
+  margin-top: 8px;
+  color: #5b6b7d;
+  font-size: .7rem;
+  line-height: 1.48;
+}
+
+.breakdownPanel[data-variant="corpus-split"] .breakdownTags {
+  margin-top: 18px;
+}
+
+.breakdownPanel[data-variant="corpus-split"] .breakdownItem:nth-child(2) .breakdownTag {
+  border-color: rgba(92,72,126,.14);
+  background: #f0edf5;
+  color: #554672;
+}
+
+@media (max-width: 900px) {
+  .breakdownPanel[data-variant="corpus-split"] .breakdownGrid {
+    grid-template-columns: 1fr;
+  }
+}
