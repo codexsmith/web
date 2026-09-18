@@ -565,3 +565,100 @@
     grid-column: 2;
   }
 }
+
+
+/* About-page chapters.
+ * Individual labels remain specific; these wrappers make the larger narrative
+ * legible as three chapters rather than a flat stack of doctrines. */
+.aboutGroup {
+  position: relative;
+  border-bottom: 1px solid var(--bfux-panel-edge-dark);
+}
+
+.aboutGroupHeader {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 15px;
+  align-items: start;
+  padding: 18px clamp(30px, 6vw, 96px) 17px;
+  border-top: 1px solid rgba(7,26,61,.28);
+  border-bottom: 1px solid rgba(7,26,61,.22);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.74), rgba(229,236,245,.84));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 6px 0 0 var(--old-gold);
+}
+
+.aboutGroup[data-about-group="agency"] .aboutGroupHeader {
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 6px 0 0 var(--osha-green);
+}
+
+.aboutGroup[data-about-group="institution"] .aboutGroupHeader {
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 6px 0 0 var(--osha-blue);
+}
+
+.aboutGroupIndex {
+  min-width: 34px;
+  padding: 6px 7px 5px;
+  border: 1px solid rgba(119,97,38,.4);
+  background: linear-gradient(180deg, #f8eebf, #d8bd65);
+  color: #443817;
+  font: 800 .54rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-align: center;
+}
+
+.aboutGroupHeader > div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(180px, .48fr) minmax(260px, .9fr) minmax(320px, 1.35fr);
+  gap: 22px;
+  align-items: baseline;
+}
+
+.aboutGroupHeader p {
+  margin: 0;
+  color: var(--old-gold-dark);
+  font: 800 .54rem/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .16em;
+}
+
+.aboutGroup[data-about-group="agency"] .aboutGroupHeader p {
+  color: var(--osha-green);
+}
+
+.aboutGroup[data-about-group="institution"] .aboutGroupHeader p {
+  color: var(--osha-blue);
+}
+
+.aboutGroupHeader strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.aboutGroupHeader > div > span {
+  color: #52627b;
+  font-size: .73rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  .aboutGroupHeader > div {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 680px) {
+  .aboutGroupHeader {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}

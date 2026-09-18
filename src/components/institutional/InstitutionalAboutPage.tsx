@@ -29,6 +29,16 @@ export function InstitutionalAboutPage() {
           </blockquote>
         </InstitutionalRouteHero>
 
+        <div className={styles.aboutGroup} data-about-group="representation">
+          <div className={styles.aboutGroupHeader}>
+            <span className={styles.aboutGroupIndex}>01</span>
+            <div>
+              <p>REPRESENTATION + METHOD</p>
+              <strong>How the Lab understands complex systems.</strong>
+              <span>Representations, recurring failure shapes, mature machinery, and the method used to compare and formalize them.</span>
+            </div>
+          </div>
+
         <section className={styles.knowledgeInfrastructure}>
           <InstitutionalSectionLead
             styles={styles}
@@ -157,6 +167,18 @@ export function InstitutionalAboutPage() {
           </div>
         </section>
 
+        </div>
+
+        <div className={styles.aboutGroup} data-about-group="agency">
+          <div className={styles.aboutGroupHeader}>
+            <span className={styles.aboutGroupIndex}>02</span>
+            <div>
+              <p>AGENCY + STEWARDSHIP</p>
+              <strong>What the machinery should preserve for people.</strong>
+              <span>Agency, repair, capability transfer, responsibility, and the obligations created by consequential systems.</span>
+            </div>
+          </div>
+
         <section className={styles.aboutAgencySection}>
           <div>
             <p className={styles.sectionIndex}>AGENCY IS NOT AUTONOMY ALONE</p>
@@ -219,6 +241,18 @@ export function InstitutionalAboutPage() {
             ))}
           </div>
         </section>
+
+        </div>
+
+        <div className={styles.aboutGroup} data-about-group="institution">
+          <div className={styles.aboutGroupHeader}>
+            <span className={styles.aboutGroupIndex}>03</span>
+            <div>
+              <p>INSTITUTIONAL PRACTICE</p>
+              <strong>How Boundary First Labs should behave as an institution.</strong>
+              <span>Apparatus, criticism, collaboration, public-interest work, and the discipline required to remain answerable.</span>
+            </div>
+          </div>
 
         <section className={styles.whyLabSection}>
           <div>
@@ -294,6 +328,8 @@ export function InstitutionalAboutPage() {
             become more legible and more answerable to the people who depend on them.
           </p>
         </section>
+
+        </div>
 
         <section className={styles.aboutClose}>
           <p className={styles.sectionIndex}>THE LAB IN ONE SENTENCE</p>

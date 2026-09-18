@@ -146,6 +146,15 @@ expect(openLabPage.includes("<OpenLabContextSection />"), "Open Lab must compose
 expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must keep Institutional Promise directly readable");
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
 
+const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
+expect((aboutPage.match(/className={styles.aboutGroup}/g) || []).length === 3, "About page must organize its doctrine sections into three narrative groups");
+expect(aboutPage.includes('data-about-group="representation"'), "About must group representation and method material");
+expect(aboutPage.includes('data-about-group="agency"'), "About must group agency and stewardship material");
+expect(aboutPage.includes('data-about-group="institution"'), "About must group institutional-practice material");
+expect(aboutPage.indexOf('data-about-group="representation"') < aboutPage.indexOf('data-about-group="agency"'), "About group order must move from representation to agency");
+expect(aboutPage.indexOf('data-about-group="agency"') < aboutPage.indexOf('data-about-group="institution"'), "About group order must move from agency to institutional practice");
+expect(aboutPage.indexOf('data-about-group="institution"') < aboutPage.indexOf('className={styles.aboutClose}'), "About closing synthesis must remain outside the grouped chapters");
+
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
 expect(apparatusPage.includes('className={styles.instrumentBench}'), "Instrument Bench must remain directly composed on the Apparatus page");
