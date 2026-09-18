@@ -122,10 +122,26 @@ export const postureCommitments = [
 ] as const;
 
 export const practiceLineage = [
-  { label: "Lean–Agile" },
-  { label: "Scientific Method" },
-  { label: "Agentic Reasoning" },
-  { label: "Boundary First" },
+  {
+    label: "Lean–Agile",
+    description:
+      "Brings visible work, bounded work in progress, short feedback loops, and respect for real capacity.",
+  },
+  {
+    label: "Scientific Method",
+    description:
+      "Brings discriminating questions, bounded tests, evidence, falsification, and revision when observation disagrees.",
+  },
+  {
+    label: "Agentic Reasoning",
+    description:
+      "Brings decomposition, search, tool selection, comparison, and critique across human and computational agents.",
+  },
+  {
+    label: "Boundary First",
+    description:
+      "Synthesizes those practices around explicit representation, consequential boundaries, defect, repair, and handoff.",
+  },
 ] as const;
 
 export const stewardshipFacets = [
