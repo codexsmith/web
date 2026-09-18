@@ -225,7 +225,7 @@ expect(aboutPage.indexOf("<AboutReflowGroups />") < aboutPage.indexOf('className
 expect(fs.existsSync(`${root}/sections/AboutReflowGroups.tsx`), "AboutReflowGroups must exist as the About doctrine composition boundary");
 const aboutGroups = read(`${root}/sections/AboutReflowGroups.tsx`);
 expect((aboutGroups.match(/className={styles.aboutGroup}/g) || []).length === 3, "About Reflow component must preserve three narrative groups");
-expect((aboutGroups.match(/<ReflowField/g) || []).length === 3, "About must use one Reflow field per narrative group");
+expect((aboutGroups.match(/<ReflowField(?:\s|>)/g) || []).length === 3, "About must use one Reflow field per narrative group");
 expect(aboutGroups.includes('data-about-group="representation"'), "About must preserve Representation + Method");
 expect(aboutGroups.includes('data-about-group="agency"'), "About must preserve Agency + Stewardship");
 expect(aboutGroups.includes('data-about-group="institution"'), "About must preserve Institutional Practice");
