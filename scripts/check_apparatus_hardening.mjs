@@ -74,7 +74,7 @@ requireMatch(
 );
 
 requireMatch(
-  "src/app/[[...slug]]/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /uiShell\s*===\s*"apparatus"[\s\S]*robots:[\s\S]*index:\s*false[\s\S]*follow:\s*false/,
   "Apparatus prototype pages must remain noindex and nofollow",
 );
