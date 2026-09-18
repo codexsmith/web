@@ -88,6 +88,10 @@ const routeContracts = [
     "evidence"
   ],
   [
+    "InstitutionalNowPage.tsx",
+    "now"
+  ],
+  [
     "InstitutionalOpenLabPage.tsx",
     "openLab"
   ]
@@ -122,6 +126,7 @@ for (const file of [
   "InstitutionalCollaborationPage.tsx",
   "InstitutionalAppliedWorkPage.tsx",
   "InstitutionalEvidencePage.tsx",
+  "InstitutionalNowPage.tsx",
   "InstitutionalOpenLabPage.tsx",
 ]) {
   const source = read(`${root}/${file}`);
@@ -142,22 +147,25 @@ expect(!topLevelRouteRegistry.includes('/v3/founder'), "Founder must remain a co
 expect(!topLevelRouteRegistry.includes('/v3/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/now'), "Now / Roadmap must remain a contextual child route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
-expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Collaboration", href: "/v3/collaboration" },\n    { label: "Founder", href: "/v3/founder" }'), "About must expose Funding, Applied Work, Evidence, Collaboration, and Founder as child-page links");
+expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" },\n    { label: "Founder", href: "/v3/founder" }'), "About must expose Funding, Applied Work, Evidence, Now, Collaboration, and Founder as child-page links");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
 expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboration" }'), "footer route collection must include Collaboration");
 expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
 expect(routeRegistry.includes('{ label: "Evidence", href: "/v3/evidence" }'), "footer route collection must include Evidence");
-expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Research must expose Apparatus, Funding, and Collaboration as child-page links");
+expect(routeRegistry.includes('{ label: "Now", href: "/v3/now" }'), "footer route collection must include Now / Roadmap");
+expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Research must expose Apparatus, Funding, Now, and Collaboration as child-page links");
 expect(routeRegistry.includes('products: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Products must expose Applied Work, Evidence, and Collaboration as child-page links");
-expect(routeRegistry.includes('projects: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Projects must expose Applied Work, Evidence, and Collaboration as child-page links");
-expect(routeRegistry.includes('funding: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" }'), "Funding must expose Applied Work and Evidence as child routes");
+expect(routeRegistry.includes('projects: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Projects must expose Applied Work, Evidence, Now, and Collaboration as child-page links");
+expect(routeRegistry.includes('funding: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Evidence", href: "/v3/evidence" },\n    { label: "Now", href: "/v3/now" }'), "Funding must expose Applied Work, Evidence, and Now as child routes");
 expect(routeRegistry.includes('collaboration: [\n    { label: "Applied Work", href: "/v3/applied-work" }'), "Collaboration must expose Applied Work as a child route");
 expect(routeRegistry.includes('appliedWork: [\n    { label: "Evidence", href: "/v3/evidence" }'), "Applied Work must expose Evidence as a child route");
 expect(routeRegistry.includes('founder: [\n    { label: "Evidence", href: "/v3/evidence" }'), "Founder must expose Evidence as a child route");
-expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Open Lab must expose Apparatus, Funding, and Collaboration as child-page links");
+expect(routeRegistry.includes('evidence: [\n    { label: "Now", href: "/v3/now" }'), "Evidence must expose Now / Roadmap as a child route");
+expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Now", href: "/v3/now" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Open Lab must expose Apparatus, Funding, Now, and Collaboration as child-page links");
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
 expect(primitives.includes("routeChildDependencyIcon"), "child-page cards must expose a dependency icon");
 expect(primitives.includes("<small>DEPENDENCY</small>"), "child-page cards must label their dependency relationship");
@@ -231,6 +239,18 @@ expect(evidenceContent.includes("BFL-NATIVE + INSPECTABLE"), "Evidence must dist
 expect(evidenceContent.includes("EMERGING / NOT YET ESTABLISHED"), "Evidence must expose proof gaps");
 expect(evidenceContent.includes("Prior career != BFL traction"), "Evidence must forbid prior-career inflation into BFL traction");
 expect(evidencePage.includes("EVIDENCE STILL TO EARN"), "Evidence page must expose the next proof points directly");
+expect(evidencePage.includes("childLinks={institutionalChildRoutes.evidence}"), "Evidence hero must expose Now / Roadmap as a child page");
+
+const nowPage = read(`${root}/InstitutionalNowPage.tsx`);
+const nowContent = read(`${root}/content/now.ts`);
+expect(nowPage.includes("./content/now"), "Now / Roadmap page must own a route-local content model");
+expect(nowPage.includes("What is Boundary First Labs doing now?"), "Now hero must lead with the current-work question");
+expect(nowPage.includes("NOW → NEXT → LATER"), "Now page must expose the roadmap horizon sequence");
+expect(nowPage.includes("WHAT CAN CHANGE THE ROADMAP?"), "Now page must make reprioritization rules explicit");
+expect(nowContent.includes("Finish the public institutional boundary"), "Now priorities must include public institutional conversion");
+expect(nowContent.includes("Turn capability into outside evidence"), "Now priorities must include BFL-native external evidence");
+expect(nowContent.includes("Execute the representational laboratory program"), "Now priorities must include the active laboratory program");
+expect(nowContent.includes("Independent use"), "Now roadmap gates must include transfer beyond the founder");
 
 const collaborationPage = read(`${root}/InstitutionalCollaborationPage.tsx`);
 expect(collaborationPage.includes("./content/collaboration"), "Collaboration page must own a route-local content model");

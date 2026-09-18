@@ -5,6 +5,7 @@ import routeStyles from "./styles/Evidence.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   evidenceClasses,
   evidenceLadder,
@@ -37,6 +38,7 @@ export function InstitutionalEvidencePage() {
             the same thing as BFL customer traction.
           </>
         }
+        childLinks={institutionalChildRoutes.evidence}
       >
         <div className={styles.evidenceClassLedger}>
           {evidenceClasses.map((item) => (

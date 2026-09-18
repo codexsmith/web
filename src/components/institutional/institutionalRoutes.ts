@@ -13,12 +13,14 @@ export const institutionalChildRoutes = {
     { label: "Funding", href: "/v3/funding" },
     { label: "Applied Work", href: "/v3/applied-work" },
     { label: "Evidence", href: "/v3/evidence" },
+    { label: "Now", href: "/v3/now" },
     { label: "Collaboration", href: "/v3/collaboration" },
     { label: "Founder", href: "/v3/founder" },
   ],
   research: [
     { label: "Apparatus", href: "/v3/apparatus" },
     { label: "Funding", href: "/v3/funding" },
+    { label: "Now", href: "/v3/now" },
     { label: "Collaboration", href: "/v3/collaboration" },
   ],
   products: [
@@ -29,11 +31,13 @@ export const institutionalChildRoutes = {
   projects: [
     { label: "Applied Work", href: "/v3/applied-work" },
     { label: "Evidence", href: "/v3/evidence" },
+    { label: "Now", href: "/v3/now" },
     { label: "Collaboration", href: "/v3/collaboration" },
   ],
   funding: [
     { label: "Applied Work", href: "/v3/applied-work" },
     { label: "Evidence", href: "/v3/evidence" },
+    { label: "Now", href: "/v3/now" },
   ],
   collaboration: [
     { label: "Applied Work", href: "/v3/applied-work" },
@@ -44,9 +48,13 @@ export const institutionalChildRoutes = {
   founder: [
     { label: "Evidence", href: "/v3/evidence" },
   ],
+  evidence: [
+    { label: "Now", href: "/v3/now" },
+  ],
   openLab: [
     { label: "Apparatus", href: "/v3/apparatus" },
     { label: "Funding", href: "/v3/funding" },
+    { label: "Now", href: "/v3/now" },
     { label: "Collaboration", href: "/v3/collaboration" },
   ],
 } as const;
@@ -57,6 +65,7 @@ export const institutionalFooterRoutes = [
   { label: "Funding", href: "/v3/funding" },
   { label: "Applied Work", href: "/v3/applied-work" },
   { label: "Evidence", href: "/v3/evidence" },
+  { label: "Now", href: "/v3/now" },
   { label: "Apparatus", href: "/v3/apparatus" },
   { label: "Collaboration", href: "/v3/collaboration" },
   { label: "Founder", href: "/v3/founder" },
