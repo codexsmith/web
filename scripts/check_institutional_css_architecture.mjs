@@ -19,6 +19,7 @@ const requiredStyles = [
   "Products.module.css",
   "ProductExperience.module.css",
   "BoundaryFirstChess.module.css",
+  "BoundaryFirstWeather.module.css",
   "Projects.module.css",
   "Apparatus.module.css",
   "Publications.module.css",
@@ -62,10 +63,15 @@ expect(routeShared.includes("min-width: 200px"), "child-page links must not coll
 expect(routeShared.includes("white-space: nowrap"), "child-page labels must remain intact rather than hyphenating across lines");
 const productExperience = read(`${stylesRoot}/ProductExperience.module.css`);
 const boundaryFirstChess = read(`${stylesRoot}/BoundaryFirstChess.module.css`);
+const boundaryFirstWeather = read(`${stylesRoot}/BoundaryFirstWeather.module.css`);
 expect(productExperience.includes(".productExperienceHero"), "shared product-detail stylesheet must own the immersive hero");
 expect(productExperience.includes(".productExperienceNav"), "shared product-detail stylesheet must own local sticky navigation");
+expect(productExperience.includes('[data-product-theme="weather"]'), "shared product-detail stylesheet must expose a Weather visual theme");
 expect(boundaryFirstChess.includes(".chessBoard"), "Boundary-First Chess must own a board visualization");
 expect(boundaryFirstChess.includes(".chessLensControls"), "Boundary-First Chess must own interactive analysis-lens controls");
+expect(boundaryFirstWeather.includes(".weatherField"), "Boundary First Weather must own a simulation-field visualization");
+expect(boundaryFirstWeather.includes(".weatherModeControls"), "Boundary First Weather must own interactive diagnostic-mode controls");
+expect(boundaryFirstWeather.includes(".weatherClaimLadder"), "Boundary First Weather must expose the W0-W5 claim ladder");
 
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
