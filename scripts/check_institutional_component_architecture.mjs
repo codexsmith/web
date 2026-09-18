@@ -327,7 +327,9 @@ expect(!publicationsPage.includes('className={styles.publicationCovenant}'), "Pu
 expect(fs.existsSync(`${root}/sections/PublicationCatalogSection.tsx`), "PublicationCatalogSection must exist as the substantive publication-object boundary");
 expect(fs.existsSync(`${root}/sections/PublicationContextSection.tsx`), "PublicationContextSection must exist as the route-local composition boundary");
 const publicationCatalog = read(`${root}/sections/PublicationCatalogSection.tsx`);
-expect(publicationCatalog.includes("publicationStubs"), "Publication catalog must use explicit stub records until source-governed documents are bound");
-expect(publicationCatalog.includes("0 BOUND"), "Publication catalog must make the absence of canonical documents explicit");
+expect(publicationCatalog.includes("selectedPublications"), "Publication catalog must render the curated source-bound publication selection");
+expect(publicationCatalog.includes("SOURCE-BOUND RECORDS"), "Publication catalog must expose that its visible records are source-bound");
+expect(publicationCatalog.includes("selectedPublications.length"), "Publication catalog must derive its bound-record count from the selected publication source");
+expect(publicationCatalog.includes("publicationClaimCeiling"), "Publication catalog must keep claim ceilings attached to visible records");
 
 console.log("Institutional component architecture passed.");
