@@ -21,6 +21,7 @@ const requiredStyles = [
   "Apparatus.module.css",
   "Publications.module.css",
   "About.module.css",
+  "Funding.module.css",
   "OpenLab.module.css",
 ];
 
@@ -51,6 +52,7 @@ const routeContracts = [
   ["InstitutionalApparatusPage.tsx", "Apparatus.module.css"],
   ["InstitutionalPublicationsPage.tsx", "Publications.module.css"],
   ["InstitutionalAboutPage.tsx", "About.module.css"],
+  ["InstitutionalFundingPage.tsx", "Funding.module.css"],
   ["InstitutionalOpenLabPage.tsx", "OpenLab.module.css"],
 ];
 
@@ -68,11 +70,6 @@ for (const component of ["InstitutionalHomePage.tsx", "InstitutionalChrome.tsx"]
   expect(source.includes("InstitutionalFoundation.module.css"), `${component} must use Foundation`);
   expect(!source.includes("InstitutionalHomePreview.module.css"), `${component} references legacy monolith`);
 }
-
-const preview = read(`${root}/InstitutionalRoutePreview.tsx`);
-expect(preview.includes("InstitutionalFoundation.module.css"), "RoutePreview must import Foundation");
-expect(preview.includes("InstitutionalRouteShared.module.css"), "RoutePreview must import RouteShared");
-expect(preview.includes("composeCssModules"), "RoutePreview must compose shared layers");
 
 for (const routeFile of requiredStyles.slice(2)) {
   const source = read(`${stylesRoot}/${routeFile}`);

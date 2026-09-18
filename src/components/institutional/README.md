@@ -60,3 +60,8 @@ The Open Lab route uses `sections/OpenLabContextSection.tsx`: Intake Status is p
 
 
 The About route now treats its three narrative chapters as three independent focus-stage Reflow fields in `sections/AboutReflowGroups.tsx`: Representation + Method (5 objects), Agency + Stewardship (3 objects), and Institutional Practice (4 objects). The closing “Lab in one sentence” synthesis remains directly readable outside the fields.
+
+
+The Funding route is a contextual child of About at `/v3/funding`. It is intentionally absent from the global header/footer navigation and is exposed through the About hero child-page rail. Funding owns one coherent public narrative: existing capacity -> bounded conversion -> inspectable evidence -> external contact -> renewed capacity.
+
+The public Funding route does not duplicate internal target lists or financing operations. It projects the canonical funding doctrine into an institutional explanation of what support makes possible, which channels fit different kinds of work, how a funder can evaluate a bounded program, and why capital state must remain orthogonal to epistemic state.

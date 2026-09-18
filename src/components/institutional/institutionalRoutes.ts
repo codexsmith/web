@@ -9,6 +9,9 @@ export const institutionalRoutes = [
 
 
 export const institutionalChildRoutes = {
+  about: [
+    { label: "Funding", href: "/v3/funding" },
+  ],
   research: [
     { label: "Apparatus", href: "/v3/apparatus" },
   ],

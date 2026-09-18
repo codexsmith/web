@@ -68,6 +68,10 @@ const routeContracts = [
     "about"
   ],
   [
+    "InstitutionalFundingPage.tsx",
+    "funding"
+  ],
+  [
     "InstitutionalOpenLabPage.tsx",
     "openLab"
   ]
@@ -97,6 +101,7 @@ for (const file of [
   "InstitutionalApparatusPage.tsx",
   "InstitutionalPublicationsPage.tsx",
   "InstitutionalAboutPage.tsx",
+  "InstitutionalFundingPage.tsx",
   "InstitutionalOpenLabPage.tsx",
 ]) {
   const source = read(`${root}/${file}`);
@@ -109,8 +114,11 @@ expect(
 );
 
 const routeRegistry = read(`${root}/institutionalRoutes.ts`);
+const topLevelRouteRegistry = routeRegistry.slice(0, routeRegistry.indexOf("export const institutionalChildRoutes"));
 expect(!routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" },\n  { label: "Publications"'), "Apparatus must not remain in top-level institutional navigation");
+expect(!topLevelRouteRegistry.includes('/v3/funding'), "Funding must remain a contextual child route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
+expect(routeRegistry.includes('about: [\\n    { label: "Funding", href: "/v3/funding" }'), "About must own Funding as a child-page link");
 expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Research must own Apparatus as a child-page link");
 expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" }'), "Open Lab must expose Apparatus as a child-page link");
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
@@ -149,6 +157,7 @@ expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must k
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
+expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose Funding as a child page");
 expect(aboutPage.includes("<AboutReflowGroups />"), "About page must delegate grouped doctrine to the Reflow section component");
 expect(aboutPage.indexOf("<AboutReflowGroups />") < aboutPage.indexOf('className={styles.aboutClose}'), "About closing synthesis must remain outside and after the Reflow chapters");
 expect(fs.existsSync(`${root}/sections/AboutReflowGroups.tsx`), "AboutReflowGroups must exist as the About doctrine composition boundary");
@@ -158,6 +167,13 @@ expect((aboutGroups.match(/<ReflowField/g) || []).length === 3, "About must use 
 expect(aboutGroups.includes('data-about-group="representation"'), "About must preserve Representation + Method");
 expect(aboutGroups.includes('data-about-group="agency"'), "About must preserve Agency + Stewardship");
 expect(aboutGroups.includes('data-about-group="institution"'), "About must preserve Institutional Practice");
+
+const fundingPage = read(`${root}/InstitutionalFundingPage.tsx`);
+expect(fundingPage.includes("./content/funding"), "Funding page must own a route-local content model");
+expect(fundingPage.includes('className={styles.fundingConversion}'), "Funding must expose the conversion model directly");
+expect(fundingPage.includes('className={styles.fundingChannelsSection}'), "Funding must expose channel options directly");
+expect(fundingPage.includes('className={styles.fundingEvaluation}'), "Funding must expose evaluation and epistemic boundaries directly");
+expect(fundingPage.includes("Fund the conversion, not the theory."), "Funding hero must state the public funding thesis");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");

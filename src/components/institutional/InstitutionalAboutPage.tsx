@@ -5,6 +5,7 @@ import routeStyles from "./styles/About.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero } from "./InstitutionalPrimitives";
 import { AboutReflowGroups } from "./sections/AboutReflowGroups";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalAboutPage() {
@@ -20,6 +21,7 @@ export function InstitutionalAboutPage() {
           support={<>The technical question is paired with a human one: what happens to people&apos;s
               ability to understand, choose, contest, repair, and act when those
               representations become consequential?</>}
+          childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
             <span>THE HUMAN QUESTION</span>
