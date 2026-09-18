@@ -104,7 +104,7 @@ export function InstitutionalProductsPage() {
               </Link>
             </article>
 
-            <article className={styles.primaryProductCard} data-product="projectr">
+            <article className={styles.primaryProductCard} data-product="explorer">
               <div className={styles.productCardTopline}>
                 <span className={styles.productOrdinal}>02</span>
                 <div className={styles.productState}>
@@ -114,13 +114,13 @@ export function InstitutionalProductsPage() {
               </div>
 
               <p className={styles.productRole}>FIRST ACTIVE-BUILD CONSUMER SOFTWARE WEDGE</p>
-              <h3>Projectr / YouTube Knowledge Explorer</h3>
+              <h3>YouTube Knowledge Explorer</h3>
               <p className={styles.productPromise}>
                 Turn long-form YouTube into searchable, timestamped, structured knowledge
                 while preserving a direct path back to the source.
               </p>
 
-              <div className={styles.projectrPipeline}>
+              <div className={styles.explorerPipeline}>
                 <span>YouTube video</span>
                 <span>Transcript</span>
                 <span>Timestamped segments</span>
@@ -133,9 +133,10 @@ export function InstitutionalProductsPage() {
               <div className={styles.productStatusGrid}>
                 <div>
                   <span>EXISTS NOW</span>
-                  <strong>Bounded MVP direction</strong>
+                  <strong>Working vertical slice</strong>
                   <p>
-                    The near-term product is deliberately smaller than the full Projectr vision.
+                    Source parsing, transcript normalization, outlines, concept-linked search,
+                    evidence-bound answers, local persistence, and portable interchange exist now.
                   </p>
                 </div>
                 <div>
@@ -153,6 +154,14 @@ export function InstitutionalProductsPage() {
                 Availability, recurring use, pricing, market validation, retention, or
                 product-market fit.
               </div>
+
+              <Link
+                className={styles.productDetailLink}
+                href="/v3/products/youtube-knowledge-explorer"
+              >
+                Enter YouTube Knowledge Explorer
+                <span aria-hidden="true">→</span>
+              </Link>
             </article>
           </div>
         </section>
