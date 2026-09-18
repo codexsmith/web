@@ -47,6 +47,7 @@ const foundation = read(`${stylesRoot}/InstitutionalFoundation.module.css`);
 const routeShared = read(`${stylesRoot}/InstitutionalRouteShared.module.css`);
 const labObjectIdentity = read(`${stylesRoot}/LabObjectIdentity.module.css`);
 const commandPaletteCss = read(`${stylesRoot}/LabCommandPalette.module.css`);
+const atlasCss = read(`${stylesRoot}/Atlas.module.css`);
 
 for (const token of ["--royal-blue", "--old-gold", "--osha-red", "--osha-green"]) {
   expect(foundation.includes(token), `Foundation must own design token ${token}`);
@@ -67,6 +68,9 @@ expect(labObjectIdentity.includes('[data-appearance="inverse"]'), "Lab object id
 expect(commandPaletteCss.includes(".dialog::backdrop"), "Lab command palette must own a modal backdrop");
 expect(commandPaletteCss.includes('[data-active="true"]'), "Lab command palette must expose keyboard-active result state");
 expect(commandPaletteCss.includes('[data-kind="research"]'), "Lab command palette must preserve object-kind visual distinction");
+expect(commandPaletteCss.includes('[data-kind="evidence"]'), "Lab command palette must preserve Evidence object distinction");
+expect(atlasCss.includes('.kindGroup[data-kind="evidence"]'), "Lab Atlas must preserve Evidence object-family distinction");
+expect(labObjectIdentity.includes('[data-kind="evidence"]'), "Lab object identity must preserve Evidence semantics");
 expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
 expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
 expect(routeShared.includes(".routeChildLinks:has(> .routeChildLink:nth-child(4):last-child)"), "exactly four child-page links must rebalance into a two-by-two grid");
