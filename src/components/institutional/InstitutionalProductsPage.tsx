@@ -21,7 +21,9 @@ export function InstitutionalProductsPage() {
           lead={<>Boundary First Labs is a research laboratory. It is also a place that makes things.</>}
           support={<>Some work becomes papers, methods, datasets, experiments, and research infrastructure.
               Some becomes a product that a person can directly use, learn from, buy, subscribe to,
-              support, license, or carry elsewhere.</>}
+              support, license, or carry elsewhere. A usable product also creates stewardship
+              obligations: maintenance, accessibility, data and attention costs, repair,
+              transfer, retirement, and the material or ecological burden of continued use.</>}
           childLinks={institutionalChildRoutes.products}
           >
           <blockquote className={styles.productThesis}>
