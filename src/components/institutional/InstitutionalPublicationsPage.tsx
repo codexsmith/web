@@ -5,6 +5,7 @@ import routeStyles from "./styles/Publications.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero } from "./InstitutionalPrimitives";
 import { PublicationCatalogSection } from "./sections/PublicationCatalogSection";
+import { PublicationStripSection } from "./sections/PublicationStripSection";
 import { PublicationContextSection } from "./sections/PublicationContextSection";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
@@ -31,6 +32,8 @@ export function InstitutionalPublicationsPage() {
       </InstitutionalRouteHero>
 
       <PublicationCatalogSection />
+
+      <PublicationStripSection />
 
       <PublicationContextSection />
     </InstitutionalPageShell>

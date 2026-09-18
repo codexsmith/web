@@ -287,3 +287,117 @@ export const selectedPublications = [
     tone: "gold",
   },
 ] as const;
+
+/**
+ * Supporting v3 publication rail.
+ *
+ * These records remain controlled Paper Mine/publication-graph objects. Their
+ * inclusion here is editorial discovery only; it does not promote stage,
+ * readiness, review state, or scientific authority.
+ */
+export const publicationStrip = [
+  {
+    id: "math_schur_dtn",
+    stage: "A",
+    readiness: 5,
+    discipline: "Mathematics",
+    domain: "Linear algebra / numerical analysis / PDE",
+    title: "Schur Complements, Static Condensation, and Dirichlet-to-Neumann Reduction",
+    summary:
+      "Interior degrees of freedom may be eliminated while retaining the response required at an exposed boundary. Schur reduction becomes an exact calibration of obligation-relative forgetting.",
+    sourceRef: "PUBLICATION_GRAPH.json#math_schur_dtn",
+    signals: ["Exact reduction", "Boundary response", "Source-read priority"],
+    tone: "blue",
+  },
+  {
+    id: "phys_petz",
+    stage: "A",
+    readiness: 5,
+    discipline: "Physics",
+    domain: "Quantum information / operator algebras",
+    title: "Petz Recovery: Recovery Is Not Inversion",
+    summary:
+      "Recovery depends on the channel, reference state, and sufficient family. Successful recovery is conditional and typed; it does not make coarse-graining globally invertible.",
+    sourceRef: "PUBLICATION_GRAPH.json#phys_petz",
+    signals: ["Recovery", "Sufficiency", "Source-read priority"],
+    tone: "green",
+  },
+  {
+    id: "math_poincare_perelman",
+    stage: "A",
+    readiness: 5,
+    discipline: "Mathematics",
+    domain: "Geometric topology / geometric analysis",
+    title: "Poincaré–Perelman as a Boundary Repair Architecture",
+    summary:
+      "Ricci flow exposes continuation defects while surgery performs controlled local repair under global proof obligations, without altering the status or content of Perelman’s theorem.",
+    sourceRef: "PUBLICATION_GRAPH.json#math_poincare_perelman",
+    signals: ["Repair", "Monotone witness", "Proof-status firewall"],
+    tone: "gold",
+  },
+  {
+    id: "math_galerkin",
+    stage: "A",
+    readiness: 5,
+    discipline: "Mathematics",
+    domain: "Numerical analysis / PDE",
+    title: "Galerkin Projection as Obligation-Preserving Reduction",
+    summary:
+      "Projection may forget degrees of freedom only relative to the quantity, norm, or proof obligation that must survive. Later obligations can require reopening the representation.",
+    sourceRef: "PUBLICATION_GRAPH.json#math_galerkin",
+    signals: ["Projection", "Error obligation", "Source-read priority"],
+    tone: "yellow",
+  },
+  {
+    id: "phys_cr3bp",
+    stage: "A",
+    readiness: 5,
+    discipline: "Physics",
+    domain: "Celestial mechanics / dynamical systems",
+    title: "CR3BP: Hill Regions and Transport Boundaries",
+    summary:
+      "Integrals and invariant structures define admissible regions and transport channels in phase space, making boundary language concrete as reachable dynamical geometry.",
+    sourceRef: "PUBLICATION_GRAPH.json#phys_cr3bp",
+    signals: ["Transport", "Reachability", "Phase space"],
+    tone: "orange",
+  },
+  {
+    id: "phys_gauge",
+    stage: "A",
+    readiness: 4,
+    discipline: "Physics",
+    domain: "Classical / quantum gauge theory",
+    title: "Gauge Symmetry: Redundant Representation versus Physical Distinction",
+    summary:
+      "Different mathematical descriptions may encode the same physical state. Representational difference must not be promoted to physical difference without gauge-invariant content.",
+    sourceRef: "PUBLICATION_GRAPH.json#phys_gauge",
+    signals: ["Gauge", "Equivalence", "Invariant content"],
+    tone: "blue",
+  },
+  {
+    id: "math_sheaves",
+    stage: "A",
+    readiness: 4,
+    discipline: "Mathematics",
+    domain: "Topology / algebraic geometry",
+    title: "Sheaves and Gluing as Local-to-Global Closure",
+    summary:
+      "Local representations form a global object only when overlap and compatibility obligations close; failed gluing makes the local-to-global defect explicit.",
+    sourceRef: "PUBLICATION_GRAPH.json#math_sheaves",
+    signals: ["Gluing", "Compatibility", "Local → global"],
+    tone: "green",
+  },
+  {
+    id: "cs_cegar",
+    stage: "A",
+    readiness: 3,
+    discipline: "Computer science",
+    domain: "Formal methods / verification",
+    title: "Abstract Interpretation and CEGAR as Distinction Forgetting and Repair",
+    summary:
+      "Abstraction forgets distinctions; spurious counterexamples witness harmful forgetting; refinement restores what the proof obligation requires.",
+    sourceRef: "PUBLICATION_GRAPH.json#cs_cegar",
+    signals: ["Abstraction", "Witness", "Repair loop"],
+    tone: "gold",
+  },
+] as const;
