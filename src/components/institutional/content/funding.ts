@@ -94,6 +94,7 @@ export const fundingEvaluationQuestions = [
   "What would count as failure, revision, or successful closure?",
   "Who can inspect, criticize, reproduce, use, or reject the result?",
   "What useful value remains if the strongest hypothesis fails?",
+  "What human, institutional, or ecological cost could apparent success push outside the funded metric?",
 ] as const;
 
 export const fundingBoundaries = [
@@ -111,6 +112,11 @@ export const fundingBoundaries = [
     label: "NEGATIVE RESULTS CAN CLOSE WORK",
     description:
       "A well-run experiment that falsifies a path, exposes a boundary, or prevents wasted scale is a legitimate output when the evidence and reasoning remain inspectable.",
+  },
+  {
+    label: "CAPITAL IS A STEWARDSHIP INPUT",
+    description:
+      "Funding allocates scarce time, attention, infrastructure, and material capacity. A good funding structure should preserve intellectual independence, human agency, and the ecological or infrastructural conditions on which the work depends rather than externalizing those costs.",
   },
   {
     label: "DEPENDENCY IS NOT THE GOAL",
