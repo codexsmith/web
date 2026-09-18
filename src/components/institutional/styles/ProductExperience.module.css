@@ -43,6 +43,15 @@
   --product-paper: #ece8f4;
 }
 
+.productExperienceFrame[data-product-theme="asm"] {
+  --product-accent: #5dd3ae;
+  --product-accent-bright: #bcebdc;
+  --product-accent-rgb: 93, 211, 174;
+  --product-dark: #10201d;
+  --product-darker: #07100f;
+  --product-paper: #e8eee9;
+}
+
 .productExperienceHero {
   min-height: min(820px, calc(100vh - 74px));
   display: grid;
