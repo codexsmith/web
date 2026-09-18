@@ -19,6 +19,16 @@ const styles = composeCssModules(
   routeStyles,
 );
 
+const researchContextOrder = [
+  "reader-agency",
+  "working-principles",
+  "equivalence-firewall",
+  "research-state",
+  "public-research-object",
+  "artifact-families",
+  "closing-test",
+] as const;
+
 function ContextSummary({
   index,
   eyebrow,
@@ -94,6 +104,8 @@ export function ResearchContextSection() {
         <ReflowField
           className={styles.researchContextGrid}
           ariaLabel="Research context and interpretation"
+          layoutMode="focus-stage"
+          itemOrder={researchContextOrder}
         >
           <ContextCard
             id="reader-agency"

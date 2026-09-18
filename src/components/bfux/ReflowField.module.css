@@ -21,9 +21,37 @@
   outline-offset: 3px;
 }
 
-.item[data-reflow-state="selected"] {
+.field[data-reflow-mode="flow"] .item[data-reflow-state="selected"] {
   grid-column: 1 / -1;
   z-index: 2;
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
+  grid-auto-flow: row;
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  .item:not([data-reflow-state="selected"]) {
+  grid-column: span var(--reflow-focus-span, 4);
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  .item[data-reflow-placement="before"] {
+  order: 1;
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  .item[data-reflow-placement="selected"] {
+  order: 2;
+  grid-column:
+    var(--reflow-selected-start, 2)
+    / span var(--reflow-selected-span, 10);
+  z-index: 2;
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  .item[data-reflow-placement="after"] {
+  order: 3;
 }
 
 @media (hover: hover) and (pointer: fine) {

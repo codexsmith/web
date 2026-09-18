@@ -18,9 +18,13 @@ import {
 } from "motion/react";
 import styles from "./ReflowField.module.css";
 
+type ReflowLayoutMode = "flow" | "focus-stage";
+
 type ReflowFieldContextValue = {
   selectedId: string | null;
   fieldId: string;
+  layoutMode: ReflowLayoutMode;
+  itemOrder: readonly string[];
   setSelection: (id: string | null) => void;
 };
 
@@ -62,11 +66,15 @@ export function ReflowField({
   className,
   ariaLabel,
   defaultSelectedId = null,
+  layoutMode = "flow",
+  itemOrder = [],
 }: {
   children: ReactNode;
   className?: string;
   ariaLabel: string;
   defaultSelectedId?: string | null;
+  layoutMode?: ReflowLayoutMode;
+  itemOrder?: readonly string[];
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
   const reducedMotion = useReducedMotion();
@@ -79,8 +87,8 @@ export function ReflowField({
   }, []);
 
   const context = useMemo(
-    () => ({ selectedId, fieldId, setSelection }),
-    [selectedId, fieldId, setSelection],
+    () => ({ selectedId, fieldId, layoutMode, itemOrder, setSelection }),
+    [selectedId, fieldId, layoutMode, itemOrder, setSelection],
   );
 
   return (
@@ -92,6 +100,7 @@ export function ReflowField({
           className={[styles.field, className].filter(Boolean).join(" ")}
           aria-label={ariaLabel}
           data-reflow-active={selectedId ? "true" : "false"}
+          data-reflow-mode={layoutMode}
           onKeyDown={(event) => {
             if (event.key === "Escape" && selectedId !== null) {
               event.preventDefault();
@@ -137,6 +146,20 @@ export function ReflowFieldItem({
   const transition = reducedMotion ? { duration: 0 } : { layout: layoutSpring };
   const toggle = () => context.setSelection(selected ? null : id);
 
+  const remainingIds = context.selectedId
+    ? context.itemOrder.filter((itemId) => itemId !== context.selectedId)
+    : [];
+  const remainingIndex = remainingIds.indexOf(id);
+  const splitIndex = Math.ceil(remainingIds.length / 2);
+  const placement =
+    context.layoutMode !== "focus-stage" || context.selectedId === null
+      ? "rest"
+      : selected
+        ? "selected"
+        : remainingIndex >= 0 && remainingIndex < splitIndex
+          ? "before"
+          : "after";
+
   const handleSurfaceClick = (event: ReactMouseEvent<HTMLElement>) => {
     if (clickBelongsToNestedControl(event)) return;
 
@@ -153,6 +176,7 @@ export function ReflowFieldItem({
       transition={transition}
       className={[styles.item, className].filter(Boolean).join(" ")}
       data-reflow-state={selected ? "selected" : "rest"}
+      data-reflow-placement={placement}
       data-tone={dataTone}
       onClick={handleSurfaceClick}
     >

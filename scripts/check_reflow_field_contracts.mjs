@@ -21,15 +21,23 @@ expect(component.includes("LayoutGroup"), "reference renderer must coordinate si
 expect(component.includes("<motion.article"), "Reflow items must delegate geometry interpolation to Motion");
 expect(component.includes("AnimatePresence"), "expanded detail should use a maintained enter/exit primitive");
 expect(component.includes('data-reflow-state={selected ? "selected" : "rest"}'), "item state must be explicit in DOM");
+expect(component.includes('data-reflow-placement={placement}'), "focus-stage placement must be explicit in DOM");
+expect(component.includes('layoutMode?: ReflowLayoutMode'), "Reflow Field must expose a reusable layout-mode contract");
+expect(component.includes("Math.ceil(remainingIds.length / 2)"), "focus-stage must balance remaining items above and below the selected object");
 expect(research.includes('<div className={styles.researchProgramGrid}>'), "Active Surfaces must remain ordinary always-visible substantive content");
 expect(research.includes("<ResearchContextSection />"), "Research page must compose the contextual field as one modular section");
 expect(researchContext.includes('className={styles.researchContextGrid}'), "supporting Research context must own the Reflow Field");
 expect(researchContext.includes('id="reader-agency"'), "Reader Agency must be represented in the context field");
 expect(researchContext.includes('id="closing-test"'), "Closing Test must be represented in the context field");
+expect(researchContext.includes('layoutMode="focus-stage"'), "Research Context must use focus-stage reflow");
+expect(researchContext.includes("itemOrder={researchContextOrder}"), "Research Context must declare stable source ordering for focus-stage placement");
 expect(research.indexOf('className={styles.researchProgramGrid}') < research.indexOf("<ResearchContextSection />"), "substantive Active Surfaces must precede the contextual Reflow Field");
 expect(researchCss.includes('.researchContextCard[data-reflow-state="selected"]'), "Research context renderer must visibly distinguish committed inspection");
 expect(researchCss.includes("--reflow-columns: 12"), "wide Research context should use an authored bento grid rather than auto-fit columns");
 expect(researchCss.includes(".contextReader { --reflow-span: 5; }"), "Research context should declare magazine-like compact spans");
 expect(researchCss.includes(".contextClosing { --reflow-span: 7; }"), "Research context should pack the final row without dead field space");
+expect(researchCss.includes("--reflow-focus-span: 4"), "wide focus-stage must place three compact cards per row");
+expect(researchCss.includes("--reflow-selected-start: 2"), "wide selected card must be centered rather than edge-to-edge");
+expect(researchCss.includes("height: 142px"), "unselected focus-stage cards must contract to a predetermined compact height");
 
 console.log("BFUX Reflow Field contracts passed.");

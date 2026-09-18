@@ -314,6 +314,9 @@
 .researchContextGrid {
   --reflow-columns: 12;
   --reflow-gap: 14px;
+  --reflow-focus-span: 4;
+  --reflow-selected-start: 2;
+  --reflow-selected-span: 10;
   margin-top: 20px;
 }
 
@@ -346,6 +349,51 @@
 .contextObject { --reflow-span: 5; }
 .contextArtifacts { --reflow-span: 5; }
 .contextClosing { --reflow-span: 7; }
+
+
+.researchContextGrid[data-reflow-active="true"]
+  .researchContextCard:not([data-reflow-state="selected"]) {
+  height: 142px;
+  min-height: 142px;
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+.researchContextGrid[data-reflow-active="true"]
+  .researchContextCard:not([data-reflow-state="selected"])
+  .contextSummary > span {
+  margin-bottom: 7px;
+  padding: 3px 5px;
+  font-size: .48rem;
+}
+
+.researchContextGrid[data-reflow-active="true"]
+  .researchContextCard:not([data-reflow-state="selected"])
+  .sectionIndex {
+  margin-bottom: 5px;
+  font-size: .48rem;
+}
+
+.researchContextGrid[data-reflow-active="true"]
+  .researchContextCard:not([data-reflow-state="selected"])
+  .contextSummary h3 {
+  margin: 4px 0 0;
+  font-size: clamp(.92rem, 1.05vw, 1.08rem);
+  line-height: 1.05;
+}
+
+.researchContextGrid[data-reflow-active="true"]
+  .researchContextCard:not([data-reflow-state="selected"])
+  .contextSummary > p:last-child {
+  display: none;
+}
+
+.researchContextGrid[data-reflow-active="true"]
+  .researchContextCard:not([data-reflow-state="selected"])
+  [class*="controlStrip"] {
+  margin-top: 9px;
+  padding-top: 7px;
+}
 
 .researchContextCard[data-reflow-state="selected"] {
   min-height: 0;
@@ -592,6 +640,9 @@
 
   .researchContextGrid {
     --reflow-columns: 6;
+    --reflow-focus-span: 2;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 6;
   }
 
   .contextReader,
@@ -637,6 +688,9 @@
 
   .researchContextGrid {
     --reflow-columns: 1;
+    --reflow-focus-span: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 1;
   }
 
   .researchContextCard {
