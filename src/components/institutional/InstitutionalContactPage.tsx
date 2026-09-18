@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -92,11 +93,11 @@ export function InstitutionalContactPage({
                   if (!type) return null;
 
                   return (
-                    <a href={`/v3/contact?type=${type.id}`} key={type.id}>
+                    <Link href={`/v3/contact?type=${type.id}`} key={type.id}>
                       <strong>{type.label}</strong>
                       <p>{type.short}</p>
                       <span aria-hidden="true">-&gt;</span>
-                    </a>
+                    </Link>
                   );
                 })}
               </div>
@@ -183,11 +184,11 @@ export function InstitutionalContactPage({
         </p>
 
         <nav className={styles.contactCloseLinks} aria-label="Contact context routes">
-          <a href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/evidence">Evidence <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></a>
+          <Link href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
