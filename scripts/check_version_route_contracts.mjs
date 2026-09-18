@@ -11,6 +11,7 @@ const v3Page = read("src/app/v3/page.tsx");
 const previewAlias = read("src/app/institutional-preview/page.tsx");
 const switcher = read("src/components/version-switch/DevProductSwitch.tsx");
 const institutionalHome = read("src/components/institutional/InstitutionalHomePreview.tsx");
+const institutionalChrome = read("src/components/institutional/InstitutionalChrome.tsx");
 
 expect(
   rootPage.includes("LabMachineHomeRoute") && !rootPage.includes("InstitutionalHomePreview"),
@@ -40,10 +41,12 @@ expect(
   "the Dev / Product switch must link the two versioned surfaces explicitly",
 );
 expect(
-  institutionalHome.includes('<DevProductSwitch active="product" />') &&
-    institutionalHome.includes('href="/v2"') &&
-    institutionalHome.includes("Enter the Lab"),
-  "the institutional surface must expose Product as active and route Lab entry to /v2",
+  !institutionalHome.includes("DevProductSwitch") &&
+    !institutionalHome.includes('href="/v2"') &&
+    !institutionalChrome.includes('href="/v2"') &&
+    !institutionalHome.includes("Enter the Lab") &&
+    !institutionalChrome.includes("Enter the Lab"),
+  "the institutional surface must keep /v2 available by route without publicly advertising the Lab engine",
 );
 
 console.log("Version route contracts passed.");
