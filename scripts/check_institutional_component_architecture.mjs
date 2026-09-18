@@ -238,6 +238,8 @@ expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Produ
 expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");
 expect(productsPage.includes('/v3/products/boundary-first-chess'), "Products must link Boundary-First Chess to its immersive product page");
 expect(productsPage.includes('/v3/products/youtube-knowledge-explorer'), "Products must link YouTube Knowledge Explorer to its immersive product page");
+expect((productsPage.match(/<Link\s+[\s\S]*?className=\{styles\.primaryProductCard\}/g) || []).length === 2, "Primary product cards must be full-card links");
+expect(!productsPage.includes("<article className={styles.primaryProductCard}"), "Primary product cards must not require a nested detail link for navigation");
 expect(productsPage.includes("<h3>YouTube Knowledge Explorer</h3>"), "Products must use the YouTube Knowledge Explorer public name");
 expect(!productsPage.includes("Projectr"), "Products public surface must not expose the retired Projectr name");
 expect(productsPage.includes('className={styles.researchProducts}'), "Products must distinguish research products from the near-term B2C edge");
