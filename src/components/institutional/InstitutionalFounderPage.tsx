@@ -5,6 +5,7 @@ import routeStyles from "./styles/Founder.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   founderMethod,
   founderPrinciples,
@@ -35,6 +36,7 @@ export function InstitutionalFounderPage() {
             state explicit, build the smallest coherent artifact, and learn from what fails.
           </>
         }
+        childLinks={institutionalChildRoutes.founder}
       >
         <div className={styles.founderIdentityPlate}>
           <div className={styles.founderMonogram} aria-hidden="true">N</div>

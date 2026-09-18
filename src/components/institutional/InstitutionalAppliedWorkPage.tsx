@@ -5,6 +5,7 @@ import routeStyles from "./styles/AppliedWork.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   appliedWorkAudiences,
   appliedWorkBoundaries,
@@ -38,6 +39,7 @@ export function InstitutionalAppliedWorkPage() {
             useful enough to inspect, use, test, or make a decision from.
           </>
         }
+        childLinks={institutionalChildRoutes.appliedWork}
       >
         <aside className={styles.appliedWorkStatus}>
           <span>CURRENT COMMERCIAL POSTURE</span>

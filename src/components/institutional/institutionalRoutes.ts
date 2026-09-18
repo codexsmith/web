@@ -12,6 +12,7 @@ export const institutionalChildRoutes = {
   about: [
     { label: "Funding", href: "/v3/funding" },
     { label: "Applied Work", href: "/v3/applied-work" },
+    { label: "Evidence", href: "/v3/evidence" },
     { label: "Collaboration", href: "/v3/collaboration" },
     { label: "Founder", href: "/v3/founder" },
   ],
@@ -22,17 +23,26 @@ export const institutionalChildRoutes = {
   ],
   products: [
     { label: "Applied Work", href: "/v3/applied-work" },
+    { label: "Evidence", href: "/v3/evidence" },
     { label: "Collaboration", href: "/v3/collaboration" },
   ],
   projects: [
     { label: "Applied Work", href: "/v3/applied-work" },
+    { label: "Evidence", href: "/v3/evidence" },
     { label: "Collaboration", href: "/v3/collaboration" },
   ],
   funding: [
     { label: "Applied Work", href: "/v3/applied-work" },
+    { label: "Evidence", href: "/v3/evidence" },
   ],
   collaboration: [
     { label: "Applied Work", href: "/v3/applied-work" },
+  ],
+  appliedWork: [
+    { label: "Evidence", href: "/v3/evidence" },
+  ],
+  founder: [
+    { label: "Evidence", href: "/v3/evidence" },
   ],
   openLab: [
     { label: "Apparatus", href: "/v3/apparatus" },
@@ -46,6 +56,7 @@ export const institutionalFooterRoutes = [
   ...institutionalRoutes,
   { label: "Funding", href: "/v3/funding" },
   { label: "Applied Work", href: "/v3/applied-work" },
+  { label: "Evidence", href: "/v3/evidence" },
   { label: "Apparatus", href: "/v3/apparatus" },
   { label: "Collaboration", href: "/v3/collaboration" },
   { label: "Founder", href: "/v3/founder" },
