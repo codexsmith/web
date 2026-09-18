@@ -6,13 +6,13 @@ export function composeCssModules(
   const composed: Record<string, string> = {};
   const keys = new Set<string>();
 
-  for (const module of modules) {
-    for (const key of Object.keys(module)) keys.add(key);
+  for (const cssModule of modules) {
+    for (const key of Object.keys(cssModule)) keys.add(key);
   }
 
   for (const key of keys) {
     composed[key] = modules
-      .map((module) => module[key])
+      .map((cssModule) => cssModule[key])
       .filter(Boolean)
       .join(" ");
   }
