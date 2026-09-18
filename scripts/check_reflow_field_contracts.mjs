@@ -18,6 +18,8 @@ expect(component.includes("className={styles.surfaceAction}"), "keyboard semanti
 expect(component.includes('event.key === "Escape"'), "Escape must collapse committed inspection");
 expect(component.includes("useReducedMotion"), "Motion reduced-motion preference must gate layout animation");
 expect(component.includes("LayoutGroup"), "reference renderer must coordinate sibling layout animation with Motion");
+expect(!component.includes("<motion.section"), "the field container must snap rather than participate in the selected card layout animation");
+expect(component.includes("layoutId={"), "each plate must expose a stable Motion identity across grid reflow");
 expect(component.includes("<motion.article"), "Reflow items must delegate geometry interpolation to Motion");
 expect(component.includes('layoutAnchor={{ x: 0.5, y: 0.5 }}'), "focus-stage resize should grow around the card center rather than snap from a corner");
 expect(component.includes("duration: 0.82"), "selected focus-stage card should use a slow, perceptible translation and resize");

@@ -87,8 +87,6 @@ export function ReflowField({
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
-  const transition = { layout: snapLayoutTransition };
-
   const setSelection = useCallback((id: string | null) => {
     setSelectedId(id);
   }, []);
@@ -101,9 +99,7 @@ export function ReflowField({
   return (
     <ReflowFieldContext.Provider value={context}>
       <LayoutGroup id={fieldId}>
-        <motion.section
-          layout
-          transition={transition}
+        <section
           className={[styles.field, className].filter(Boolean).join(" ")}
           aria-label={ariaLabel}
           data-reflow-active={selectedId ? "true" : "false"}
@@ -116,7 +112,7 @@ export function ReflowField({
           }}
         >
           {children}
-        </motion.section>
+        </section>
       </LayoutGroup>
     </ReflowFieldContext.Provider>
   );
@@ -182,6 +178,7 @@ export function ReflowFieldItem({
   return (
     <motion.article
       layout
+      layoutId={`${context.fieldId}-${safeFragment(id)}`}
       layoutAnchor={{ x: 0.5, y: 0.5 }}
       layoutDependency={context.selectedId}
       transition={transition}
