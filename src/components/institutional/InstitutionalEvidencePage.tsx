@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -106,7 +107,7 @@ export function InstitutionalEvidencePage() {
               <span>{formatOrdinal(index)}</span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
-              <a href={item.href}>{item.linkLabel} <span aria-hidden="true">-&gt;</span></a>
+              <Link href={item.href}>{item.linkLabel} <span aria-hidden="true">-&gt;</span></Link>
             </article>
           ))}
         </div>
@@ -191,11 +192,11 @@ export function InstitutionalEvidencePage() {
         </p>
 
         <nav className={styles.evidenceCloseLinks} aria-label="Evidence next steps">
-          <a href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/projects">Projects <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/research">Research <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/publications">Publications <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></a>
+          <Link href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/projects">Projects <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/research">Research <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/publications">Publications <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
