@@ -79,10 +79,13 @@ for (const file of [
   expect(source.includes("InstitutionalRouteHero"), `${file} must compose the shared route hero`);
 }
 
-const preview = read(`${root}/InstitutionalRoutePreview.tsx`);
-expect(preview.includes("InstitutionalPageShell"), "RoutePreview must use PageShell");
-expect(preview.includes("InstitutionalRouteHero"), "RoutePreview must use the shared route hero");
-expect(!preview.includes("InstitutionalSectionHeader"), "RoutePreview must not carry unused structural imports");
-expect(!preview.includes("InstitutionalSectionLead"), "RoutePreview must not carry unused structural imports");
+expect(
+  !fs.existsSync(`${root}/InstitutionalRoutePreview.tsx`),
+  "obsolete route preview scaffold must stay removed",
+);
+
+const routeRegistry = read(`${root}/institutionalRoutes.ts`);
+expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry must not duplicate page copy");
+expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");
 
 console.log("Institutional component architecture passed.");

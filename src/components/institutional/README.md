@@ -27,3 +27,7 @@ A new institutional route should:
 7. avoid direct ownership of global header/footer markup.
 
 Do not create a universal schema-driven page renderer. Shared structure belongs in primitives; domain meaning stays local.
+
+## Dead-code rule
+
+Once a route has a real page renderer, do not keep a second preview/front-door renderer or duplicate route copy in the navigation registry. One route has one composition authority.
