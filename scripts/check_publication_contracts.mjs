@@ -87,12 +87,12 @@ forbidMatch(
 
 requireMatch(
   "src/lib/content-registry.ts",
-  /const rawNodes:\s*ContentNode\[\]\s*=\s*\[\.\.\.baseNodes,\s*\.\.\.publicationNodes\][\s\S]*export const nodes:\s*ContentNode\[\]\s*=\s*rawNodes\.map[\s\S]*getLocalSections\(node\.id\)[\s\S]*export const edges:\s*GraphEdge\[\]\s*=\s*\[\.\.\.baseEdges,\s*\.\.\.publicationEdges\]/,
-  "Active graph registry must combine the base spine with publication nodes, hydrate local coordinates, and retain typed publication relations",
+  /const rawNodes:\s*ContentNode\[\]\s*=\s*\[[\s\S]*\.\.\.baseNodes[\s\S]*\.\.\.bridgeSystemNodes[\s\S]*\.\.\.publicationNodes[\s\S]*\.\.\.persistencePublicationNodes[\s\S]*\][\s\S]*export const nodes:\s*ContentNode\[\]\s*=\s*rawNodes\.map[\s\S]*getLocalSections\(node\.id\)[\s\S]*export const edges:\s*GraphEdge\[\]\s*=\s*\[[\s\S]*\.\.\.baseEdges[\s\S]*\.\.\.bridgeSystemEdges[\s\S]*\.\.\.publicationEdges[\s\S]*\][\s\S]*edges\.push\(\.\.\.persistencePublicationEdges\)/,
+  "Active graph registry must compose base, bridge, publication, and persistence nodes while preserving local coordinates and typed publication relations",
 );
 
 for (const path of [
-  "src/app/[[...slug]]/page.tsx",
+  "src/app/[...slug]/page.tsx",
   "src/components/world-app.tsx",
   "src/components/world-view.tsx",
   "src/components/evidence-view.tsx",
