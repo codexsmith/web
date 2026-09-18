@@ -21,6 +21,7 @@ const requiredStyles = [
   "BoundaryFirstChess.module.css",
   "BoundaryFirstWeather.module.css",
   "YouTubeKnowledgeExplorer.module.css",
+  "AgenticScientificMethod.module.css",
   "Projects.module.css",
   "Apparatus.module.css",
   "Publications.module.css",
@@ -66,10 +67,12 @@ const productExperience = read(`${stylesRoot}/ProductExperience.module.css`);
 const boundaryFirstChess = read(`${stylesRoot}/BoundaryFirstChess.module.css`);
 const boundaryFirstWeather = read(`${stylesRoot}/BoundaryFirstWeather.module.css`);
 const youtubeKnowledgeExplorer = read(`${stylesRoot}/YouTubeKnowledgeExplorer.module.css`);
+const agenticScientificMethod = read(`${stylesRoot}/AgenticScientificMethod.module.css`);
 expect(productExperience.includes(".productExperienceHero"), "shared product-detail stylesheet must own the immersive hero");
 expect(productExperience.includes(".productExperienceNav"), "shared product-detail stylesheet must own local sticky navigation");
 expect(productExperience.includes('[data-product-theme="weather"]'), "shared product-detail stylesheet must expose a Weather visual theme");
 expect(productExperience.includes('[data-product-theme="explorer"]'), "shared product-detail stylesheet must expose an Explorer visual theme");
+expect(productExperience.includes('[data-product-theme="asm"]'), "shared product-detail stylesheet must expose an ASM visual theme");
 expect(boundaryFirstChess.includes(".chessBoard"), "Boundary-First Chess must own a board visualization");
 expect(boundaryFirstChess.includes(".chessLensControls"), "Boundary-First Chess must own interactive analysis-lens controls");
 expect(boundaryFirstWeather.includes(".weatherField"), "Boundary First Weather must own a simulation-field visualization");
@@ -78,6 +81,9 @@ expect(boundaryFirstWeather.includes(".weatherClaimLadder"), "Boundary First Wea
 expect(youtubeKnowledgeExplorer.includes(".explorerVideo"), "YouTube Knowledge Explorer must own a source-video visualization");
 expect(youtubeKnowledgeExplorer.includes(".explorerModeControls"), "YouTube Knowledge Explorer must own interactive exploration-mode controls");
 expect(youtubeKnowledgeExplorer.includes(".explorerArchitectureStack"), "YouTube Knowledge Explorer must expose the portable-core architecture stack");
+expect(agenticScientificMethod.includes(".asmPhaseGroups"), "Agentic Scientific Method must own an inquiry-state machine visualization");
+expect(agenticScientificMethod.includes(".asmTwinSpaces"), "Agentic Scientific Method must visualize represented and observed state spaces");
+expect(agenticScientificMethod.includes(".asmValidationLadder"), "Agentic Scientific Method must expose its validation ladder");
 
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
