@@ -552,19 +552,17 @@
     --reflow-selected-span: 5;
   }
 
-  .publicationContextProjection,
-  .publicationContextAnatomy,
-  .publicationContextStatus,
-  .publicationContextReader,
-  .publicationContextTypes,
-  .publicationContextCritique,
-  .publicationContextIndex,
-  .publicationContextStewardship,
-  .publicationContextFlagship,
-  .publicationContextDesign,
-  .publicationContextCovenant {
-    --reflow-span: 5;
-  }
+  .publicationContextProjection { --reflow-span: 3; }
+  .publicationContextAnatomy { --reflow-span: 2; }
+  .publicationContextStatus { --reflow-span: 2; }
+  .publicationContextReader { --reflow-span: 3; }
+  .publicationContextTypes { --reflow-span: 3; }
+  .publicationContextCritique { --reflow-span: 2; }
+  .publicationContextIndex { --reflow-span: 2; }
+  .publicationContextStewardship { --reflow-span: 3; }
+  .publicationContextFlagship { --reflow-span: 2; }
+  .publicationContextDesign { --reflow-span: 3; }
+  .publicationContextCovenant { --reflow-span: 5; }
 
   .publicationStateRail {
     grid-template-columns: repeat(2, minmax(0, 1fr));
