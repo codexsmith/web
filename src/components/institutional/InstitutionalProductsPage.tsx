@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -91,6 +92,14 @@ export function InstitutionalProductsPage() {
                 Pedagogical superiority, rating improvement, market demand, product-market fit,
                 recurring revenue, or commentary engagement lift.
               </div>
+
+              <Link
+                className={styles.productDetailLink}
+                href="/v3/products/boundary-first-chess"
+              >
+                Enter Boundary-First Chess
+                <span aria-hidden="true">→</span>
+              </Link>
             </article>
 
             <article className={styles.primaryProductCard} data-product="projectr">
