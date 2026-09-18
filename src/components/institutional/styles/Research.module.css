@@ -52,8 +52,7 @@
   letter-spacing: .18em;
 }
 
-.researchOrientation,
-.researchObject {
+.researchOrientation {
   display: grid;
   grid-template-columns: minmax(240px, .7fr) minmax(0, 1.45fr) minmax(220px, .55fr);
   gap: 28px;
@@ -63,10 +62,7 @@
   background: linear-gradient(180deg, #eef3f8, #e5edf6);
 }
 
-.researchOrientation h2,
-.epistemicAgency h2,
-.equivalenceFirewall h2,
-.instrumentationClose h2 {
+.researchOrientation h2 {
   margin: 9px 0 0;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
@@ -110,16 +106,12 @@
   line-height: 1.4;
 }
 
-.researchPrograms,
-.researchPrinciples,
-.researchState,
-.artifactFamilies {
+.researchPrograms {
   padding: 38px clamp(30px, 6vw, 96px) 46px;
   border-bottom: 1px solid var(--bfux-panel-edge);
 }
 
-.researchPrograms,
-.researchState {
+.researchPrograms {
   background:
     linear-gradient(180deg, rgba(255,255,255,.5), transparent 12%),
     linear-gradient(180deg, #dfe8f3, #d3dfec);
