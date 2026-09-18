@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -180,12 +181,12 @@ export function InstitutionalNowPage() {
         </p>
 
         <nav className={styles.nowCloseLinks} aria-label="Roadmap next steps">
-          <a href="/v3/contact?type=general&source=now">Start a conversation <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/evidence">Evidence <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></a>
-          <a href="/v3/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></a>
+          <Link href="/v3/contact?type=general&source=now">Start a conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/v3/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
