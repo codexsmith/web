@@ -118,11 +118,15 @@
   background:
     linear-gradient(180deg, rgba(255,255,255,.96) 0 2px, transparent 2px),
     linear-gradient(180deg, #fbfdff, #e8eff8);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
   box-shadow:
     inset 1px 0 0 #fff,
     inset 0 -1px 0 rgba(7,26,61,.1),
     0 3px 0 rgba(7,26,61,.22),
     0 10px 22px rgba(7,26,61,.12);
+  transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
 .primaryProductCard[data-product="explorer"] {
@@ -658,9 +662,24 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .productDetailLink:hover span {
+  .primaryProductCard:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 1px 0 0 #fff,
+      inset 0 -1px 0 rgba(7,26,61,.1),
+      0 4px 0 rgba(7,26,61,.24),
+      0 15px 28px rgba(7,26,61,.15);
+  }
+
+  .primaryProductCard:hover .productDetailLink span {
     transform: translateX(3px);
   }
+}
+
+.primaryProductCard:focus-visible,
+.researchProductCard:focus-visible {
+  outline: 3px solid var(--osha-blue);
+  outline-offset: 4px;
 }
 
 
