@@ -208,6 +208,11 @@ export const collaborationBoundaries = [
       "For civic, legal, educational, health-adjacent, or governance work, the people who experience the consequences need a real voice in defining the problem and judging repair.",
   },
   {
+    label: "STEWARDSHIP MUST LAND SOMEWHERE",
+    description:
+      "Every durable collaboration should make clear who tends the knowledge, who remains answerable to affected people, and who owns maintenance, resource, ecological, transfer, and retirement obligations when the active project ends.",
+  },
+  {
     label: "STOPPING CAN BE THE RIGHT RESULT",
     description:
       "A useful relationship may end after one review or pilot. A clear no, a negative result, or transfer to a better long-term owner can be successful closure.",
