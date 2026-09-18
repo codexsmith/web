@@ -53,6 +53,7 @@ expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site ch
 expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared site chrome");
 expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
 expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
+expect(routeShared.includes(".routeChildLinks:has(> .routeChildLink:nth-child(4):last-child)"), "exactly four child-page links must rebalance into a two-by-two grid");
 expect(routeShared.includes("min-height: 58px"), "child-page cards must remain compact enough for dense contextual navigation");
 expect(routeShared.includes("grid-auto-columns: minmax(200px, 1fr)"), "child-page columns must preserve a hard readable minimum width");
 expect(routeShared.includes("min-width: 200px"), "child-page links must not collapse below their readable label width");
