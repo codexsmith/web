@@ -41,7 +41,9 @@ export function InstitutionalCollaborationPage() {
             A collaboration can be as small as one expert review or as substantial as a
             funded pilot, co-developed product, publication, licensing arrangement, or
             transfer to a better long-term home. We start with the smallest useful
-            relationship and expand only when the work earns it.
+            relationship and expand only when the work earns it. Stewardship stays explicit:
+            who tends the knowledge, who answers to affected people, and who maintains,
+            transfers, or retires the work after the active collaboration ends.
           </>
         }
         childLinks={institutionalChildRoutes.collaboration}
