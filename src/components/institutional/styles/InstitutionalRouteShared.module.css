@@ -146,6 +146,10 @@
   gap: 7px;
 }
 
+.routeChildLinks:has(> .routeChildLink:nth-child(4):last-child) {
+  grid-template-rows: repeat(2, auto);
+}
+
 .routeChildLink {
   --child-accent: var(--osha-blue);
   --child-accent-ink: #244f9a;
@@ -288,7 +292,8 @@
 
 
 @media (max-width: 620px) {
-  .routeChildLinks {
+  .routeChildLinks,
+  .routeChildLinks:has(> .routeChildLink:nth-child(4):last-child) {
     width: min(100%, 320px);
     grid-template-rows: none;
     grid-auto-flow: row;
