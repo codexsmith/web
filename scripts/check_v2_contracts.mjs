@@ -55,7 +55,7 @@ requireMatch(
 );
 requireMatch(
   "src/app/world/page.tsx",
-  /permanentRedirect\(params\.size[\s\S]*:"\/"\)/,
+  /permanentRedirect\(params\.size[\s\S]*:\s*"\/"\)/,
   "Legacy /world URLs must redirect into the canonical root Lab Machine",
 );
 requireMatch(
