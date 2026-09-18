@@ -392,6 +392,20 @@ expect(evidenceContent.includes("Prior career != BFL traction"), "Evidence must 
 expect(evidencePage.includes("EVIDENCE STILL TO EARN"), "Evidence page must expose the next proof points directly");
 expect(evidencePage.includes("childLinks={institutionalChildRoutes.evidence}"), "Evidence hero must expose Now / Roadmap as a child page");
 
+const apparatusMachineryPage = read(`${root}/InstitutionalApparatusPage.tsx`);
+const machineryContent = read(`${root}/content/machinery.ts`);
+expect(apparatusMachineryPage.includes("./content/machinery"), "Apparatus page must consume the source-bound machinery registry projection");
+expect(apparatusMachineryPage.includes("machineryRecords.map"), "Apparatus page must render registered machinery records directly");
+expect(apparatusMachineryPage.includes('kind="apparatus"'), "Registered machinery must identify as Apparatus objects");
+expect(apparatusMachineryPage.includes('kindLabel="Machinery"'), "Registered machinery must distinguish component identity from conceptual apparatus vocabulary");
+expect(apparatusMachineryPage.includes("identifier={machine.machineId}"), "Machinery projection must preserve canonical BFL-MACH-* identities");
+expect(apparatusMachineryPage.includes("status={machine.maturity}"), "Machinery identity must preserve source maturity");
+expect(apparatusMachineryPage.includes("secondary={machine.integrationLevel}"), "Machinery identity must preserve source integration level");
+expect(machineryContent.includes('"BFL-MACH-CORPUS-FORGE"'), "Machinery projection must include Corpus Forge");
+expect(machineryContent.includes('"BFL-MACH-UX-RECIPE-ADMISSION-PILOT"'), "Machinery projection must include the full ten-component seed cohort");
+expect(machineryContent.includes('"sourceRevision": "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Machinery projection must pin the Lab source revision");
+expect(machineryContent.includes("does not supersede component-local contracts"), "Machinery projection must preserve the registry authority ceiling");
+
 const experimentsPage = read(`${root}/InstitutionalExperimentsPage.tsx`);
 const experimentsContent = read(`${root}/content/experiments.ts`);
 expect(experimentsPage.includes("./content/experiments"), "Experiments page must own a route-local content model");
@@ -472,9 +486,9 @@ expect(fundingPage.includes("childLinks={institutionalChildRoutes.funding}"), "F
 expect(fundingPage.includes('/v3/contact?type=funding&source=funding'), "Funding must expose a contextual Contact route");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
-expect(apparatusPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
-expect(apparatusPage.includes("childLinks={institutionalChildRoutes.apparatus}"), "Apparatus hero must expose Experiments as a contextual child page");
-expect(apparatusPage.includes('className={styles.instrumentBench}'), "Instrument Bench must remain directly composed on the Apparatus page");
+expect(apparatusMachineryPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
+expect(apparatusMachineryPage.includes("childLinks={institutionalChildRoutes.apparatus}"), "Apparatus hero must expose Experiments as a contextual child page");
+expect(apparatusMachineryPage.includes('className={styles.instrumentBench}'), "Instrument Bench must remain directly composed on the Apparatus page");
 expect(!apparatusPage.includes('className={styles.apparatusWhy}'), "Apparatus page must not inline Why Apparatus Matters");
 expect(!apparatusPage.includes('className={styles.apparatusPathSection}'), "Apparatus page must not inline the research path");
 expect(!apparatusPage.includes('className={styles.apparatusClose}'), "Apparatus page must not inline Closing Test");
@@ -532,6 +546,11 @@ expect(atlasContent.includes("PUBLIC PRODUCT SURFACE"), "Lab Atlas must declare 
 expect(atlasContent.includes("priorExecution"), "Lab Atlas must admit the source-bound prior-execution evidence cohort");
 expect(atlasContent.includes('kind: "evidence"'), "Lab Atlas must expose Evidence as an object family");
 expect(atlasContent.includes('kind: "experiment"'), "Lab Atlas must expose Experiment as an object family");
+expect(atlasContent.includes('kind: "apparatus"'), "Lab Atlas must expose Apparatus as an object family");
+expect(atlasContent.includes("machineryRecords.map"), "Lab Atlas must admit the source-bound machinery component cohort");
+expect(atlasContent.includes('/v3/apparatus#machinery-'), "Machinery Atlas nodes must route to exact native machinery records");
+expect(atlasContent.includes("machine.authorityCeiling"), "Machinery search must preserve authority ceilings");
+expect(atlasContent.includes("machine.sideEffectClass"), "Machinery search must preserve side-effect classes");
 expect(atlasContent.includes("experimentResearchEdges"), "Lab Atlas must derive Experiment-to-Research edges from declared lane links");
 expect(atlasContent.includes('relation: lane.role === "primary" ? "PRIMARY RESEARCH LANE" : "RELATED RESEARCH LANE"'), "Experiment edges must preserve primary versus secondary research-lane semantics");
 expect(atlasContent.includes('/v3/experiments#experiment-'), "Experiment Atlas nodes must route to exact native experiment records");
@@ -540,7 +559,7 @@ expect(atlasContent.includes("experiment.firewall"), "Experiment search must pre
 expect(atlasContent.includes('/v3/evidence#evidence-'), "Evidence Atlas nodes must route back to their exact native surface");
 expect(atlasContent.includes("searchTerms: [record.evidence, record.boundary]"), "Evidence search must preserve both basis and claim ceiling");
 expect(!atlasContent.includes("identifier: record.surfaceKey"), "Atlas-local evidence routing keys must not become identifiers");
-expect(atlasPage.includes("Research · Experiments · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Experiment and Evidence object families");
+expect(atlasPage.includes("Research · Experiments · Machinery · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Machinery, Experiment, and Evidence object families");
 expect(commandPaletteContent.includes("node.searchTerms"), "Global object search must admit bounded object-specific search terms without inferring edges");
 expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");
 

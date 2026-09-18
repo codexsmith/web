@@ -71,8 +71,10 @@ expect(commandPaletteCss.includes('[data-active="true"]'), "Lab command palette 
 expect(commandPaletteCss.includes('[data-kind="research"]'), "Lab command palette must preserve object-kind visual distinction");
 expect(commandPaletteCss.includes('[data-kind="evidence"]'), "Lab command palette must preserve Evidence object distinction");
 expect(commandPaletteCss.includes('[data-kind="experiment"]'), "Lab command palette must preserve Experiment object distinction");
+expect(commandPaletteCss.includes('[data-kind="apparatus"]'), "Lab command palette must preserve Apparatus object distinction");
 expect(atlasCss.includes('.kindGroup[data-kind="evidence"]'), "Lab Atlas must preserve Evidence object-family distinction");
 expect(atlasCss.includes('.kindGroup[data-kind="experiment"]'), "Lab Atlas must preserve Experiment object-family distinction");
+expect(atlasCss.includes('.kindGroup[data-kind="apparatus"]'), "Lab Atlas must preserve Apparatus object-family distinction");
 expect(labObjectIdentity.includes('[data-kind="evidence"]'), "Lab object identity must preserve Evidence semantics");
 expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
 expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
@@ -105,6 +107,11 @@ expect(youtubeKnowledgeExplorer.includes(".explorerArchitectureStack"), "YouTube
 expect(agenticScientificMethod.includes(".asmPhaseGroups"), "Agentic Scientific Method must own an inquiry-state machine visualization");
 expect(agenticScientificMethod.includes(".asmTwinSpaces"), "Agentic Scientific Method must visualize represented and observed state spaces");
 expect(agenticScientificMethod.includes(".asmValidationLadder"), "Agentic Scientific Method must expose its validation ladder");
+
+const apparatusCss = read(`${stylesRoot}/Apparatus.module.css`);
+expect(apparatusCss.includes(".machineryRegistry"), "Apparatus must style the registered machinery surface");
+expect(apparatusCss.includes(".machineryGrid"), "Apparatus must style the machinery object grid");
+expect(apparatusCss.includes(".machineryAuthorityGrid"), "Apparatus must preserve authority and integration-step distinction");
 
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
