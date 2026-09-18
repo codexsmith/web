@@ -41,7 +41,11 @@ export function InstitutionalProductsPage() {
             />
 
           <div className={styles.primaryProductGrid}>
-            <article className={styles.primaryProductCard} data-product="chess">
+            <Link
+              className={styles.primaryProductCard}
+              data-product="chess"
+              href="/v3/products/boundary-first-chess"
+            >
               <div className={styles.productCardTopline}>
                 <span className={styles.productOrdinal}>01</span>
                 <div className={styles.productState}>
@@ -95,16 +99,17 @@ export function InstitutionalProductsPage() {
                 recurring revenue, or commentary engagement lift.
               </div>
 
-              <Link
-                className={styles.productDetailLink}
-                href="/v3/products/boundary-first-chess"
-              >
+              <span className={styles.productDetailLink}>
                 Enter Boundary-First Chess
                 <span aria-hidden="true">→</span>
-              </Link>
-            </article>
+              </span>
+            </Link>
 
-            <article className={styles.primaryProductCard} data-product="explorer">
+            <Link
+              className={styles.primaryProductCard}
+              data-product="explorer"
+              href="/v3/products/youtube-knowledge-explorer"
+            >
               <div className={styles.productCardTopline}>
                 <span className={styles.productOrdinal}>02</span>
                 <div className={styles.productState}>
@@ -155,14 +160,11 @@ export function InstitutionalProductsPage() {
                 product-market fit.
               </div>
 
-              <Link
-                className={styles.productDetailLink}
-                href="/v3/products/youtube-knowledge-explorer"
-              >
+              <span className={styles.productDetailLink}>
                 Enter YouTube Knowledge Explorer
                 <span aria-hidden="true">→</span>
-              </Link>
-            </article>
+              </span>
+            </Link>
           </div>
         </section>
 
