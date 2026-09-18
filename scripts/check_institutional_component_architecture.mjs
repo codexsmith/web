@@ -29,6 +29,7 @@ expect(primitives.includes("data-institutional-hero"), "Shared route heroes must
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
 expect(homeContent.includes('title: "Boundary First Weather"'), "Featured work slot four must be Boundary First Weather");
 expect(homeContent.includes('href: "/v3/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
+expect(homeContent.includes('href: "/v3/products/agentic-scientific-method"'), "Featured Agentic Scientific Method must link to its immersive product page");
 expect(homeContent.includes('title: "YouTube Knowledge Explorer"'), "Featured work must use the YouTube Knowledge Explorer public name");
 expect(homeContent.includes('href: "/v3/products/youtube-knowledge-explorer"'), "Featured YouTube Knowledge Explorer must link to its immersive product page");
 expect(!homeContent.includes("Projectr"), "v3 homepage public naming must not expose Projectr");
@@ -228,6 +229,9 @@ expect(productsPage.includes('/v3/products/boundary-first-chess'), "Products mus
 expect(productsPage.includes('/v3/products/youtube-knowledge-explorer'), "Products must link YouTube Knowledge Explorer to its immersive product page");
 expect(productsPage.includes("<h3>YouTube Knowledge Explorer</h3>"), "Products must use the YouTube Knowledge Explorer public name");
 expect(!productsPage.includes("Projectr"), "Products public surface must not expose the retired Projectr name");
+expect(productsPage.includes('className={styles.researchProducts}'), "Products must distinguish research products from the near-term B2C edge");
+expect(productsPage.includes('/v3/products/boundary-first-weather'), "Products research-product rail must link Boundary First Weather");
+expect(productsPage.includes('/v3/products/agentic-scientific-method'), "Products research-product rail must link Agentic Scientific Method");
 
 const productExperienceShell = read(`${root}/products/ProductExperienceShell.tsx`);
 const chessExperience = read(`${root}/products/BoundaryFirstChessExperience.tsx`);
@@ -274,6 +278,22 @@ expect(explorerContent.includes("timestamp"), "YouTube Knowledge Explorer must p
 expect(!explorerContent.includes("Projectr"), "YouTube Knowledge Explorer public content model must not expose Projectr");
 expect(!explorerExperience.includes("Projectr"), "YouTube Knowledge Explorer public experience must not expose Projectr");
 expect(explorerRoute.includes("YouTubeKnowledgeExplorerExperience"), "YouTube Knowledge Explorer route must render the product experience");
+
+const asmExperience = read(`${root}/products/AgenticScientificMethodExperience.tsx`);
+const asmInstrument = read(`${root}/products/AgenticScientificMethodInstrument.tsx`);
+const asmContent = read(`${root}/content/agenticScientificMethod.ts`);
+const asmRoute = read("src/app/v3/products/agentic-scientific-method/page.tsx");
+expect(asmExperience.includes("<ProductExperienceShell"), "Agentic Scientific Method must use the shared product experience shell");
+expect(asmExperience.includes("<AgenticScientificMethodInstrument"), "Agentic Scientific Method must expose an interactive inquiry-machine instrument");
+expect(asmExperience.includes("Scientific method, with the hidden operations opened up."), "ASM must foreground the operational inquiry thesis");
+expect(asmExperience.includes("Capability is not authority, and authority is not evidence."), "ASM must preserve its authority firewall");
+expect(asmExperience.includes("No consequential transition should depend only on chat memory."), "ASM must expose durable scientific memory as a product property");
+expect(asmInstrument.startsWith('"use client";'), "ASM inquiry-machine interaction must own its client boundary");
+expect(asmInstrument.includes("aria-pressed"), "ASM phase transitions must expose pressed state accessibly");
+expect(asmContent.includes("Orient") && asmContent.includes("Declare") && asmContent.includes("Bind") && asmContent.includes("Map") && asmContent.includes("Close") && asmContent.includes("Preserve"), "ASM must preserve the controlled inquiry lifecycle");
+expect(asmContent.includes("External user pilot"), "ASM must preserve external validation as an unmet evidence gate");
+expect(asmContent.includes("not a proven universal method"), "ASM must preserve its universality claim firewall");
+expect(asmRoute.includes("AgenticScientificMethodExperience"), "ASM route must render the product experience");
 
 const projectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
 expect(projectsPage.includes("childLinks={institutionalChildRoutes.projects}"), "Projects hero must expose its contextual child pages");
