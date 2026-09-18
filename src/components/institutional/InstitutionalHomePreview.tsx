@@ -1,5 +1,4 @@
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
-import { DevProductSwitch } from "@/components/version-switch/DevProductSwitch";
 import styles from "./InstitutionalHomePreview.module.css";
 
 const primaryRoutes = [
@@ -67,13 +66,6 @@ export function InstitutionalHomePreview() {
           ))}
         </nav>
 
-        <div className={styles.headerTools}>
-          <DevProductSwitch active="product" />
-          <a className={styles.labLink} href="/v2">
-            Enter the Lab
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
       </header>
 
       <main>
@@ -88,8 +80,8 @@ export function InstitutionalHomePreview() {
               We build research, methods, products, and operational tools for making consequential systems more legible, reasoning more inspectable, and useful capability easier to transfer.
             </p>
             <div className={styles.heroActions}>
-              <a className={styles.primaryAction} href="/v2">
-                Explore the Lab
+              <a className={styles.primaryAction} href="#featured-work">
+                See Featured Work
                 <span aria-hidden="true">→</span>
               </a>
               <a className={styles.secondaryAction} href="/research">
@@ -99,30 +91,12 @@ export function InstitutionalHomePreview() {
             </div>
           </div>
 
-          <aside
-            className={styles.heroVisual}
-            role="img"
-            aria-label="Concept study for the Boundary First Labs institutional visual language"
-          >
-            <div className={styles.mountainFar} aria-hidden="true" />
-            <div className={styles.mountainNear} aria-hidden="true" />
-            <div className={styles.water} aria-hidden="true" />
-            <div className={styles.structure} aria-hidden="true">
-              <div className={styles.structureWords}>
-                <span>IDEAS</span>
-                <span>METHODS</span>
-                <span>INSTRUMENTS</span>
-                <span>PUBLIC GOOD</span>
-              </div>
-              <strong>A MORE<br />LEGIBLE<br />WORLD</strong>
-            </div>
-            <div className={styles.visualMark}>
-              <BoundaryFirstWaveLogo className={styles.visualLogo} variant="compact" decorative />
-              <div>
-                <span>BOUNDARY FIRST LABS</span>
-                <small>CONCEPT STUDY</small>
-              </div>
-            </div>
+          <aside className={styles.heroVisual}>
+            <img
+              className={styles.heroGraphic}
+              src="/institutional/pie-manifold-hero.jpg"
+              alt="Boundary First Labs manifold study: a geometric field illustrating representation, curvature, and structured transformation."
+            />
           </aside>
         </section>
 
@@ -158,7 +132,7 @@ export function InstitutionalHomePreview() {
           </div>
         </section>
 
-        <section className={styles.featuredSection}>
+        <section className={styles.featuredSection} id="featured-work">
           <div className={styles.sectionHeader}>
             <div>
               <p className={styles.sectionIndex}>FEATURED WORK</p>
@@ -211,7 +185,6 @@ export function InstitutionalHomePreview() {
 
         <div className={styles.footerMeta}>
           <span>© 2026 Boundary First Labs</span>
-          <a href="/v2">Enter the Lab ↗</a>
         </div>
       </footer>
     </div>
