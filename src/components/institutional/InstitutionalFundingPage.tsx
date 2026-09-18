@@ -5,6 +5,7 @@ import routeStyles from "./styles/Funding.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   fundingBoundaries,
   fundingChannels,
@@ -36,6 +37,7 @@ export function InstitutionalFundingPage() {
             reviewable, useful work that can meet external evidence.
           </>
         }
+        childLinks={institutionalChildRoutes.funding}
       >
         <blockquote className={styles.fundingThesis}>
           <span>CAPITAL FIREWALL</span>

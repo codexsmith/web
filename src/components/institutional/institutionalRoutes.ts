@@ -11,6 +11,7 @@ export const institutionalRoutes = [
 export const institutionalChildRoutes = {
   about: [
     { label: "Funding", href: "/v3/funding" },
+    { label: "Applied Work", href: "/v3/applied-work" },
     { label: "Collaboration", href: "/v3/collaboration" },
     { label: "Founder", href: "/v3/founder" },
   ],
@@ -20,10 +21,18 @@ export const institutionalChildRoutes = {
     { label: "Collaboration", href: "/v3/collaboration" },
   ],
   products: [
+    { label: "Applied Work", href: "/v3/applied-work" },
     { label: "Collaboration", href: "/v3/collaboration" },
   ],
   projects: [
+    { label: "Applied Work", href: "/v3/applied-work" },
     { label: "Collaboration", href: "/v3/collaboration" },
+  ],
+  funding: [
+    { label: "Applied Work", href: "/v3/applied-work" },
+  ],
+  collaboration: [
+    { label: "Applied Work", href: "/v3/applied-work" },
   ],
   openLab: [
     { label: "Apparatus", href: "/v3/apparatus" },
@@ -36,6 +45,7 @@ export const institutionalChildRoutes = {
 export const institutionalFooterRoutes = [
   ...institutionalRoutes,
   { label: "Funding", href: "/v3/funding" },
+  { label: "Applied Work", href: "/v3/applied-work" },
   { label: "Apparatus", href: "/v3/apparatus" },
   { label: "Collaboration", href: "/v3/collaboration" },
   { label: "Founder", href: "/v3/founder" },

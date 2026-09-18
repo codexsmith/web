@@ -5,6 +5,7 @@ import routeStyles from "./styles/Collaboration.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   collaborationBoundaries,
   collaborationExchange,
@@ -42,6 +43,7 @@ export function InstitutionalCollaborationPage() {
             relationship and expand only when the work earns it.
           </>
         }
+        childLinks={institutionalChildRoutes.collaboration}
       >
         <div className={styles.collaborationExchange}>
           {collaborationExchange.map((side) => (

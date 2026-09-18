@@ -24,6 +24,7 @@ const requiredStyles = [
   "Funding.module.css",
   "Founder.module.css",
   "Collaboration.module.css",
+  "AppliedWork.module.css",
   "OpenLab.module.css",
 ];
 
@@ -58,6 +59,7 @@ const routeContracts = [
   ["InstitutionalFundingPage.tsx", "Funding.module.css"],
   ["InstitutionalFounderPage.tsx", "Founder.module.css"],
   ["InstitutionalCollaborationPage.tsx", "Collaboration.module.css"],
+  ["InstitutionalAppliedWorkPage.tsx", "AppliedWork.module.css"],
   ["InstitutionalOpenLabPage.tsx", "OpenLab.module.css"],
 ];
 

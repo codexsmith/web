@@ -80,6 +80,10 @@ const routeContracts = [
     "collaboration"
   ],
   [
+    "InstitutionalAppliedWorkPage.tsx",
+    "appliedWork"
+  ],
+  [
     "InstitutionalOpenLabPage.tsx",
     "openLab"
   ]
@@ -112,6 +116,7 @@ for (const file of [
   "InstitutionalFundingPage.tsx",
   "InstitutionalFounderPage.tsx",
   "InstitutionalCollaborationPage.tsx",
+  "InstitutionalAppliedWorkPage.tsx",
   "InstitutionalOpenLabPage.tsx",
 ]) {
   const source = read(`${root}/${file}`);
@@ -130,15 +135,19 @@ expect(!topLevelRouteRegistry.includes('/v3/funding'), "Funding must remain a co
 expect(!topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/founder'), "Founder must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
-expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Collaboration", href: "/v3/collaboration" },\n    { label: "Founder", href: "/v3/founder" }'), "About must expose Funding, Collaboration, and Founder as child-page links");
+expect(routeRegistry.includes('about: [\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Collaboration", href: "/v3/collaboration" },\n    { label: "Founder", href: "/v3/founder" }'), "About must expose Funding, Applied Work, Collaboration, and Founder as child-page links");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
 expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboration" }'), "footer route collection must include Collaboration");
+expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
 expect(routeRegistry.includes('research: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Research must expose Apparatus, Funding, and Collaboration as child-page links");
-expect(routeRegistry.includes('products: [\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Products must expose Collaboration as a child-page link");
-expect(routeRegistry.includes('projects: [\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Projects must expose Collaboration as a child-page link");
+expect(routeRegistry.includes('products: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Products must expose Applied Work and Collaboration as child-page links");
+expect(routeRegistry.includes('projects: [\n    { label: "Applied Work", href: "/v3/applied-work" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Projects must expose Applied Work and Collaboration as child-page links");
+expect(routeRegistry.includes('funding: [\n    { label: "Applied Work", href: "/v3/applied-work" }'), "Funding must expose Applied Work as an earned-revenue child route");
+expect(routeRegistry.includes('collaboration: [\n    { label: "Applied Work", href: "/v3/applied-work" }'), "Collaboration must expose Applied Work as a child route");
 expect(routeRegistry.includes('openLab: [\n    { label: "Apparatus", href: "/v3/apparatus" },\n    { label: "Funding", href: "/v3/funding" },\n    { label: "Collaboration", href: "/v3/collaboration" }'), "Open Lab must expose Apparatus, Funding, and Collaboration as child-page links");
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
 expect(primitives.includes("routeChildDependencyIcon"), "child-page cards must expose a dependency icon");
@@ -156,7 +165,7 @@ expect(!researchPage.includes('id="reader-agency"'), "Research page must not inl
 expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchContextSection must exist as the route-local composition boundary");
 
 const productsPage = read(`${root}/InstitutionalProductsPage.tsx`);
-expect(productsPage.includes("childLinks={institutionalChildRoutes.products}"), "Products hero must expose Collaboration as a child page");
+expect(productsPage.includes("childLinks={institutionalChildRoutes.products}"), "Products hero must expose its contextual child pages");
 expect(productsPage.includes("<ProductContextSection />"), "Products must compose its commercialization context as a section component");
 expect(!productsPage.includes('className={styles.productEvidenceSection}'), "Why Products Matter must not remain a standalone Products section");
 const productContext = read(`${root}/sections/ProductContextSection.tsx`);
@@ -166,7 +175,7 @@ expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Produ
 expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");
 
 const projectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
-expect(projectsPage.includes("childLinks={institutionalChildRoutes.projects}"), "Projects hero must expose Collaboration as a child page");
+expect(projectsPage.includes("childLinks={institutionalChildRoutes.projects}"), "Projects hero must expose its contextual child pages");
 expect(projectsPage.includes("<ProjectContextSection />"), "Projects must compose its transfer context as a section component");
 expect(!projectsPage.includes('className={styles.transferEvidence}'), "Projects page must not inline Transfer Evidence");
 expect(!projectsPage.includes('className={styles.projectNativeStatusRule}'), "Projects page must not inline Status Rule");
@@ -194,6 +203,13 @@ expect(aboutGroups.includes('data-about-group="representation"'), "About must pr
 expect(aboutGroups.includes('data-about-group="agency"'), "About must preserve Agency + Stewardship");
 expect(aboutGroups.includes('data-about-group="institution"'), "About must preserve Institutional Practice");
 
+const appliedWorkPage = read(`${root}/InstitutionalAppliedWorkPage.tsx`);
+expect(appliedWorkPage.includes("./content/appliedWork"), "Applied Work page must own a route-local content model");
+expect(appliedWorkPage.includes("What can Boundary First Labs help your organization do?"), "Applied Work hero must lead with the ordinary commercial question");
+expect(appliedWorkPage.includes("NO THEORY BUY-IN REQUIRED"), "Applied Work must separate service value from theory adoption");
+expect(appliedWorkPage.includes("CURRENT COMMERCIAL POSTURE"), "Applied Work must disclose current BFL service maturity");
+expect(appliedWorkPage.includes("appliedServiceFamily"), "Applied Work must group concrete offers inside larger service families");
+
 const collaborationPage = read(`${root}/InstitutionalCollaborationPage.tsx`);
 expect(collaborationPage.includes("./content/collaboration"), "Collaboration page must own a route-local content model");
 expect(collaborationPage.includes("POSSIBLE FITS, NOT AFFILIATIONS"), "Collaboration map must explicitly prevent endorsement inference");
@@ -202,6 +218,7 @@ expect(collaborationPage.includes("collaborationStageLegend"), "Collaboration pa
 expect(collaborationPage.includes("smallest useful"), "Collaboration hero must preserve the smallest-useful-relationship doctrine");
 expect(collaborationPage.includes("collaborationOutcomes"), "Collaboration page must state concrete business and funding outcomes");
 expect(collaborationPage.includes("How funding works"), "Collaboration page must give potential funders a direct Funding route");
+expect(collaborationPage.includes("childLinks={institutionalChildRoutes.collaboration}"), "Collaboration hero must expose Applied Work as a child page");
 
 const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
 expect(founderPage.includes("./content/founder"), "Founder page must own a route-local content model");
@@ -215,6 +232,7 @@ expect(fundingPage.includes('className={styles.fundingConversion}'), "Funding mu
 expect(fundingPage.includes('className={styles.fundingChannelsSection}'), "Funding must expose channel options directly");
 expect(fundingPage.includes('className={styles.fundingEvaluation}'), "Funding must expose evaluation and epistemic boundaries directly");
 expect(fundingPage.includes("Fund the conversion, not the theory."), "Funding hero must state the public funding thesis");
+expect(fundingPage.includes("childLinks={institutionalChildRoutes.funding}"), "Funding hero must expose Applied Work as an earned-revenue route");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
