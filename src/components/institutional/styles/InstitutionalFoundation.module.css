@@ -2077,3 +2077,33 @@
     min-height: 0;
   }
 }
+
+/* Shared institutional navigation behavior belongs to the site chrome. */
+.nav a,
+.footerNav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav a {
+  position: relative;
+  padding: 8px 0;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 2px;
+  height: 2px;
+  background: var(--old-gold-bright);
+  transition: right 120ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav a:hover::after {
+    right: 0;
+  }
+}
+

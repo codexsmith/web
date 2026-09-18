@@ -1,34 +1,6 @@
 /* Institutional route wiring scaffold.
  * Reuses the same visual grammar while route bodies are projected from the
  * Website v3 source documents one route at a time. */
-.nav a,
-.footerNav a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.nav a {
-  position: relative;
-  padding: 8px 0;
-}
-
-.nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 100%;
-  bottom: 2px;
-  height: 2px;
-  background: var(--old-gold-bright);
-  transition: right 120ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .nav a:hover::after {
-    right: 0;
-  }
-}
-
 .routeMain {
   min-height: calc(100vh - 166px);
   padding: clamp(54px, 7vw, 110px) clamp(30px, 8vw, 132px);

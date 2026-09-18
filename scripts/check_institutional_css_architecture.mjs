@@ -39,6 +39,11 @@ for (const sharedClass of [".routeLead", ".routeSupport", ".routeHero", ".routeM
   expect(routeShared.includes(sharedClass), `RouteShared must own ${sharedClass}`);
 }
 
+expect(foundation.includes(".nav a"), "Foundation must own shared navigation behavior");
+expect(foundation.includes(".footerNav a"), "Foundation must own shared footer navigation behavior");
+expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
+expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared site chrome");
+
 const routeContracts = [
   ["InstitutionalResearchPage.tsx", "Research.module.css"],
   ["InstitutionalProductsPage.tsx", "Products.module.css"],
