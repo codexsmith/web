@@ -646,5 +646,16 @@ expect(audiencesContent.includes('href: "/v3/contact?type=research-review&source
 expect(audiencesContent.includes('href: "/v3/contact?type=applied-work&source=start-client"'), "Client path must terminate in typed applied-work contact");
 expect(audiencesContent.includes('href: "/v3/contact?type=funding&source=start-funder"'), "Funder path must terminate in typed funding contact");
 expect(audienceGrid.includes("journey.steps.map"), "Audience journey grid must render ordered steps from the shared model");
+expect(audienceGrid.includes("@/components/bfux/ReflowField"), "Audience journey UI must use the BFUX ReflowField primitive");
+expect(audienceGrid.includes("<ReflowField"), "Audience journey UI must expose a shared reflow field");
+expect(audienceGrid.includes('layoutMode="focus-stage"'), "Audience journey UI must reflow into a focused stage on selection");
+expect(audienceGrid.includes("itemOrder={itemOrder}"), "Audience journey reflow must preserve explicit source order");
+expect(audienceGrid.includes("<ReflowFieldItem"), "Each audience path must be an inspectable reflow item");
+expect(audienceGrid.includes("summary={<AudienceJourneySummary"), "Audience reflow must separate compact summary from expanded detail");
+expect(audienceGrid.includes("detail={<AudienceJourneyDetail"), "Audience reflow must reveal ordered path detail only after selection");
 expect(homeForAudienceTraversal.includes("homeAudienceJourneys"), "Homepage must reuse the same canonical audience traversal model");
 expect(homeForAudienceTraversal.includes("<AudienceJourneyGrid"), "Homepage must expose compact audience-specific traversal");
+
+
+expect(homeForAudienceTraversal.includes("CHOOSE YOUR OWN PATH"), "Homepage audience layer must identify the reflow surface as Choose your own path");
+expect(startPage.includes("CHOOSE YOUR OWN PATH"), "Start route must identify the full audience reflow surface as Choose your own path");

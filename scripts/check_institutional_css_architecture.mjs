@@ -54,6 +54,7 @@ const routeShared = read(`${stylesRoot}/InstitutionalRouteShared.module.css`);
 const labObjectIdentity = read(`${stylesRoot}/LabObjectIdentity.module.css`);
 const commandPaletteCss = read(`${stylesRoot}/LabCommandPalette.module.css`);
 const atlasCss = read(`${stylesRoot}/Atlas.module.css`);
+const audienceJourneyCss = read(`${stylesRoot}/AudienceJourneyGrid.module.css`);
 
 for (const token of ["--royal-blue", "--old-gold", "--osha-red", "--osha-green"]) {
   expect(foundation.includes(token), `Foundation must own design token ${token}`);
@@ -67,6 +68,11 @@ expect(foundation.includes(".nav a"), "Foundation must own shared navigation beh
 expect(foundation.includes(".footerNav a"), "Foundation must own shared footer navigation behavior");
 expect(foundation.includes(".audienceEntrySection"), "Homepage foundation must style audience-specific traversal");
 expect(foundation.includes(".audienceEntryLink"), "Homepage foundation must expose the full Start here path from the compact journey layer");
+expect(audienceJourneyCss.includes("--reflow-columns: 12"), "Audience journey field must define the reflow grid");
+expect(audienceJourneyCss.includes("--reflow-selected-span: 10"), "Audience journey field must reserve a centered focal stage");
+expect(audienceJourneyCss.includes('.journey[data-reflow-state="selected"]'), "Audience journey styling must distinguish the selected focal state");
+expect(audienceJourneyCss.includes(".fieldCompact"), "Audience journey reflow must support the compact homepage projection");
+expect(audienceJourneyCss.includes("@media (max-width: 720px)"), "Audience journey reflow must collapse to a single-column mobile field");
 expect(foundation.includes("flex-wrap: wrap"), "footer navigation must wrap when contextual child routes are exposed");
 expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
 expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared site chrome");
