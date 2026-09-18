@@ -24,11 +24,11 @@ function forbidMatch(path, pattern, message) {
   }
 }
 
-// World owns narrative content; Evidence and Process remain genuinely different depths.
+// Core (internal key: world) owns narrative content; Evidence and Process remain genuinely different depths.
 requireMatch(
   "src/lib/view-projection.ts",
   /projectionModes\s*=\s*\["world",\s*"evidence",\s*"gestalt"\]/,
-  "Projection vocabulary must remain World / Evidence / Process",
+  "Internal projection keys must remain world / evidence / gestalt",
 );
 requireMatch(
   "src/lib/view-projection.ts",
@@ -99,7 +99,7 @@ requireMatch(
   "The physical frame must persist while its machine and detail workfields swap",
 );
 for (const [nodeId, path] of Object.entries({
-  people: "/public-interest",
+  people: "/people",
   products: "/products",
   publications: "/publications",
   about: "/about",
