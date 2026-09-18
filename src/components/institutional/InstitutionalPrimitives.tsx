@@ -13,6 +13,7 @@ type ChildLinkKind =
   | "participation"
   | "provenance"
   | "apparatus"
+  | "experiment"
   | "atlas";
 
 function ChildLinkIcon({
@@ -83,6 +84,14 @@ function ChildLinkIcon({
           <circle cx="14" cy="14" r="3.5" />
           <path d="M14 4.5v3M14 20.5v3M4.5 14h3M20.5 14h3M7.3 7.3l2.1 2.1M18.6 18.6l2.1 2.1M20.7 7.3l-2.1 2.1M9.4 18.6l-2.1 2.1" />
           <circle cx="14" cy="14" r="8" />
+        </svg>
+      );
+    case "experiment":
+      return (
+        <svg {...common}>
+          <path d="M10.5 4.5h7M12 4.5v6.2l-5 9a2.3 2.3 0 0 0 2 3.3h10a2.3 2.3 0 0 0 2-3.3l-5-9V4.5" />
+          <path d="M9.5 17h9" />
+          <circle cx="13" cy="19.5" r="1" />
         </svg>
       );
     case "atlas":

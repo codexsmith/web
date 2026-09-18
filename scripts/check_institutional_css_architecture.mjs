@@ -33,6 +33,7 @@ const requiredStyles = [
   "Collaboration.module.css",
   "AppliedWork.module.css",
   "Evidence.module.css",
+  "Experiments.module.css",
   "Now.module.css",
   "Contact.module.css",
   "OpenLab.module.css",
@@ -69,7 +70,9 @@ expect(commandPaletteCss.includes(".dialog::backdrop"), "Lab command palette mus
 expect(commandPaletteCss.includes('[data-active="true"]'), "Lab command palette must expose keyboard-active result state");
 expect(commandPaletteCss.includes('[data-kind="research"]'), "Lab command palette must preserve object-kind visual distinction");
 expect(commandPaletteCss.includes('[data-kind="evidence"]'), "Lab command palette must preserve Evidence object distinction");
+expect(commandPaletteCss.includes('[data-kind="experiment"]'), "Lab command palette must preserve Experiment object distinction");
 expect(atlasCss.includes('.kindGroup[data-kind="evidence"]'), "Lab Atlas must preserve Evidence object-family distinction");
+expect(atlasCss.includes('.kindGroup[data-kind="experiment"]'), "Lab Atlas must preserve Experiment object-family distinction");
 expect(labObjectIdentity.includes('[data-kind="evidence"]'), "Lab object identity must preserve Evidence semantics");
 expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
 expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
@@ -115,6 +118,7 @@ const routeContracts = [
   ["InstitutionalCollaborationPage.tsx", "Collaboration.module.css"],
   ["InstitutionalAppliedWorkPage.tsx", "AppliedWork.module.css"],
   ["InstitutionalEvidencePage.tsx", "Evidence.module.css"],
+  ["InstitutionalExperimentsPage.tsx", "Experiments.module.css"],
   ["InstitutionalNowPage.tsx", "Now.module.css"],
   ["InstitutionalContactPage.tsx", "Contact.module.css"],
   ["InstitutionalOpenLabPage.tsx", "OpenLab.module.css"],

@@ -7,6 +7,7 @@ import { boundaryFirstWeatherProduct } from "./boundaryFirstWeather";
 import { youtubeKnowledgeExplorerProduct } from "./youtubeKnowledgeExplorer";
 import { agenticScientificMethodProduct } from "./agenticScientificMethod";
 import { priorExecution } from "./evidence";
+import { experimentRecords } from "./experiments";
 
 export type AtlasNode = {
   atlasId: string;
@@ -132,12 +133,40 @@ const evidenceNodes: AtlasNode[] = priorExecution.map((record) => ({
   searchTerms: [record.evidence, record.boundary],
 }));
 
+const experimentNodes: AtlasNode[] = experimentRecords.map((experiment) => ({
+  atlasId: `experiment-${experiment.id.toLowerCase()}`,
+  kind: "experiment",
+  title: experiment.title,
+  href: `/v3/experiments#experiment-${experiment.id.toLowerCase()}`,
+  identifier: experiment.id,
+  identifierLabel: "EXPERIMENT",
+  status: experiment.status,
+  statusLabel: "STATUS",
+  secondary: experiment.resultPosture,
+  secondaryLabel: "RESULT POSTURE",
+  summary: experiment.questionOrPurpose,
+  searchTerms: [
+    experiment.program,
+    experiment.resultPosture,
+    experiment.carrierOrTestbed ?? "",
+    experiment.control ?? "",
+    experiment.method ?? "",
+    experiment.acceptancePredicate ?? "",
+    experiment.resultSummary ?? "",
+    experiment.limitations ?? "",
+    experiment.firewall,
+    experiment.canonicalSource,
+    ...experiment.researchLanes.flatMap((lane) => [lane.laneId, lane.label]),
+  ],
+}));
+
 export const atlasNodes = [
   ...researchNodes,
   ...productNodes,
   ...projectNodes,
   ...publicationNodes,
   ...evidenceNodes,
+  ...experimentNodes,
 ] as const satisfies readonly AtlasNode[];
 
 const projectProductEdges: AtlasEdge[] = [
@@ -185,14 +214,25 @@ const informationMechanicsPublicationEdges: AtlasEdge[] = selectedPublications
     note: "The publication record declares Information Mechanics as its research lane.",
   }));
 
+const experimentResearchEdges: AtlasEdge[] = experimentRecords.flatMap((experiment) =>
+  experiment.researchLanes.map((lane) => ({
+    from: `experiment-${experiment.id.toLowerCase()}`,
+    to: lane.atlasId,
+    relation: lane.role === "primary" ? "PRIMARY RESEARCH LANE" : "RELATED RESEARCH LANE",
+    note: `The Lab-wide Experiment Register explicitly links ${experiment.id} to ${lane.laneId} — ${lane.label}.`,
+  })),
+);
+
 export const atlasEdges = [
   ...projectProductEdges,
   ...researchProductEdges,
   ...informationMechanicsPublicationEdges,
+  ...experimentResearchEdges,
 ] as const satisfies readonly AtlasEdge[];
 
 export const atlasKindOrder = [
   "research",
+  "experiment",
   "product",
   "project",
   "publication",
@@ -201,6 +241,7 @@ export const atlasKindOrder = [
 
 export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
   research: "Research programs",
+  experiment: "Experiment records",
   product: "Products",
   project: "Project cases",
   publication: "Publication records",
