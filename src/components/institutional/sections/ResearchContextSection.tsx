@@ -23,6 +23,7 @@ const researchContextOrder = [
   "reader-agency",
   "working-principles",
   "operating-braid",
+  "stewardship-of-knowledge",
   "equivalence-firewall",
   "research-state",
   "public-research-object",
@@ -190,6 +191,50 @@ export function ResearchContextSection() {
             <blockquote className={styles.contextQuote}>
               “Agent proposes; machine verifies; world adjudicates.”
             </blockquote>
+          </ContextCard>
+
+          <ContextCard
+            id="stewardship-of-knowledge"
+            label="Stewardship"
+            eyebrow="INTELLECTUAL / HUMAN / ECOLOGICAL"
+            title="Research creates obligations beyond producing a result."
+            description="A mature research object should preserve the knowledge, respect the people around it, and keep wider material consequences visible."
+            className={styles.contextPrinciples}
+            tone="principles"
+          >
+            <div className={styles.principleGrid}>
+              <article className={styles.principlePlate}>
+                <h3>Intellectual stewardship</h3>
+                <p>
+                  Preserve sources, provenance, uncertainty, failed attempts, criticism,
+                  supersession, attribution, and handoff so the record remains usable after
+                  the originating researcher or tool is gone.
+                </p>
+              </article>
+              <article className={styles.principlePlate}>
+                <h3>Humanist stewardship</h3>
+                <p>
+                  Do not treat research subjects, users, collaborators, or affected
+                  communities as mere inputs. Preserve consent, standing, local knowledge,
+                  contestability, credit, and routes to correction where consequence reaches them.
+                </p>
+              </article>
+              <article className={styles.principlePlate}>
+                <h3>Ecological stewardship</h3>
+                <p>
+                  Keep material and computational substrate inside the model where it
+                  matters: energy, infrastructure, equipment, waste, land, water, supply
+                  chains, and burdens shifted onto future people or ecosystems.
+                </p>
+              </article>
+              <article className={styles.principlePlate}>
+                <h3>Stewardship test</h3>
+                <p>
+                  What must still be maintained, explained, repaired, transferred, or
+                  retired after the paper, experiment, model run, or product milestone is complete?
+                </p>
+              </article>
+            </div>
           </ContextCard>
 
           <ContextCard
