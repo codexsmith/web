@@ -199,6 +199,24 @@ expect(productContext.includes('id="why-products-matter"'), "Product Context mus
 expect(!productsPage.includes('className={styles.productConversion}'), "Products page must not inline the superseded Research-to-Market section");
 expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Products page must not inline the superseded Public Product Object section");
 expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");
+expect(productsPage.includes('/v3/products/boundary-first-chess'), "Products must link Boundary-First Chess to its immersive product page");
+
+const productExperienceShell = read(`${root}/products/ProductExperienceShell.tsx`);
+const chessExperience = read(`${root}/products/BoundaryFirstChessExperience.tsx`);
+const chessBoard = read(`${root}/products/BoundaryFirstChessBoard.tsx`);
+const chessContent = read(`${root}/content/boundaryFirstChess.ts`);
+const chessRoute = read("src/app/v3/products/boundary-first-chess/page.tsx");
+expect(productExperienceShell.includes("ProductExperienceShell"), "Product detail pages must share a reusable experience shell");
+expect(productExperienceShell.includes("data-institutional-hero"), "Product experience hero must participate in compact institutional header behavior");
+expect(productExperienceShell.includes("productExperienceNav"), "Product experience shell must expose reusable local product navigation");
+expect(chessExperience.includes("<ProductExperienceShell"), "Boundary-First Chess must use the shared product experience shell");
+expect(chessExperience.includes("<BoundaryFirstChessBoard"), "Boundary-First Chess must expose an interactive board as its hero instrument");
+expect(chessExperience.includes("This is not a Grandmaster course."), "Boundary-First Chess must preserve learner-facing positioning");
+expect(chessBoard.startsWith('"use client";'), "Boundary-First Chess board interaction must own its client boundary");
+expect(chessBoard.includes("aria-pressed"), "Boundary-First Chess lenses must expose pressed state accessibly");
+expect(chessContent.includes("Create") && chessContent.includes("Repair") && chessContent.includes("Weaken") && chessContent.includes("Exploit") && chessContent.includes("Transform"), "Boundary-First Chess must preserve the five-operation learner grammar");
+expect(chessContent.includes("Engine superiority"), "Boundary-First Chess must preserve its claim firewall");
+expect(chessRoute.includes("BoundaryFirstChessExperience"), "Boundary-First Chess route must render the product experience");
 
 const projectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
 expect(projectsPage.includes("childLinks={institutionalChildRoutes.projects}"), "Projects hero must expose its contextual child pages");
