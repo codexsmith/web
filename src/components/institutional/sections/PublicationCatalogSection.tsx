@@ -3,7 +3,7 @@ import foundationStyles from "../styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "../styles/InstitutionalRouteShared.module.css";
 import routeStyles from "../styles/Publications.module.css";
 import { composeCssModules } from "../styles/composeCssModules";
-import { publicationStubs } from "../content/publications";
+import { selectedPublications } from "../content/publications";
 
 const styles = composeCssModules(
   foundationStyles,
@@ -11,8 +11,8 @@ const styles = composeCssModules(
   routeStyles,
 );
 
-const featuredPublication = publicationStubs.find((publication) => publication.featured);
-const supportingPublications = publicationStubs.filter((publication) => !publication.featured);
+const featuredPublication = selectedPublications.find((publication) => publication.featured);
+const supportingPublications = selectedPublications.filter((publication) => !publication.featured);
 
 function PublicationMeta({
   label,
@@ -50,21 +50,21 @@ export function PublicationCatalogSection() {
         styles={styles}
         eyebrow={<>PUBLICATION INDEX</>}
         title={<>Research artifacts, with their state attached.</>}
-        note={<>UI stubs only. Canonical documents, dates, identifiers, links, and source-owned publication states will be bound later.</>}
+        note={<>Curated first-contact projection. Status and claim ceilings remain source-governed; selection here does not promote publication maturity or scientific authority.</>}
       />
 
       <div className={styles.publicationCatalogState} aria-label="Publication catalog placeholder state">
         <div>
           <span>CATALOG MODE</span>
-          <strong>UI STUBS</strong>
+          <strong>SELECTED PUBLICATIONS</strong>
         </div>
         <div>
-          <span>CANONICAL DOCUMENTS</span>
-          <strong>0 BOUND</strong>
+          <span>SOURCE-BOUND RECORDS</span>
+          <strong>{selectedPublications.length} BOUND</strong>
         </div>
         <div>
           <span>NEXT INTEGRATION</span>
-          <strong>SOURCE-GOVERNED RECORDS</strong>
+          <strong>FULL TEXT / RDP BINDING</strong>
         </div>
       </div>
 
@@ -76,12 +76,12 @@ export function PublicationCatalogSection() {
           <div className={styles.publicationFolio} aria-hidden="true">
             <div className={styles.folioTopline}>
               <span>{featuredPublication.typeCode}</span>
-              <span>UI STUB</span>
+              <span>SELECTED</span>
             </div>
             <div className={styles.folioMark}>BFL</div>
             <p>{featuredPublication.id}</p>
             <strong>{featuredPublication.type}</strong>
-            <small>NO DOCUMENT BOUND</small>
+            <small>{featuredPublication.sourceState}</small>
           </div>
 
           <div className={styles.featuredPublicationBody}>

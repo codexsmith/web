@@ -99,7 +99,7 @@ export function PublicationContextSection() {
           styles={styles}
           eyebrow={<>PUBLICATION CONTEXT</>}
           title={<>The machinery around public research artifacts.</>}
-          note={<>The current route contains publication discipline and page grammar. Genuine publication objects will sit above this field as they are admitted.</>}
+          note={<>The selected records above are source-bound public projections. This field explains the publication discipline that keeps visibility, maturity, evidence, and authority from collapsing into one another.</>}
         />
 
         <ReflowField
