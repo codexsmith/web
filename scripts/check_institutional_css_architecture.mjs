@@ -63,11 +63,14 @@ expect(routeShared.includes("min-height: 58px"), "child-page cards must remain c
 expect(routeShared.includes("grid-auto-columns: minmax(200px, 1fr)"), "child-page columns must preserve a hard readable minimum width");
 expect(routeShared.includes("min-width: 200px"), "child-page links must not collapse below their readable label width");
 expect(routeShared.includes("white-space: nowrap"), "child-page labels must remain intact rather than hyphenating across lines");
+const products = read(`${stylesRoot}/Products.module.css`);
 const productExperience = read(`${stylesRoot}/ProductExperience.module.css`);
 const boundaryFirstChess = read(`${stylesRoot}/BoundaryFirstChess.module.css`);
 const boundaryFirstWeather = read(`${stylesRoot}/BoundaryFirstWeather.module.css`);
 const youtubeKnowledgeExplorer = read(`${stylesRoot}/YouTubeKnowledgeExplorer.module.css`);
 const agenticScientificMethod = read(`${stylesRoot}/AgenticScientificMethod.module.css`);
+expect(products.includes(".primaryProductCard:focus-visible"), "Clickable primary product cards must expose keyboard focus");
+expect(products.includes(".primaryProductCard:hover .productDetailLink span"), "Full-card product hover must animate its directional cue");
 expect(productExperience.includes(".productExperienceHero"), "shared product-detail stylesheet must own the immersive hero");
 expect(productExperience.includes(".productExperienceNav"), "shared product-detail stylesheet must own local sticky navigation");
 expect(productExperience.includes('[data-product-theme="weather"]'), "shared product-detail stylesheet must expose a Weather visual theme");
