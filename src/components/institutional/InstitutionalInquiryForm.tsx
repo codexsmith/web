@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import {
   inquiryTypes,
   type InquiryTypeId,
@@ -28,7 +28,7 @@ export function InstitutionalInquiryForm({
 
   const selected = inquiryTypes.find((item) => item.id === inquiryType) ?? inquiryTypes[0];
 
-  async function submitInquiry(event: React.FormEvent<HTMLFormElement>) {
+  async function submitInquiry(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!intakeEnabled || state.kind === "sending") return;
 
