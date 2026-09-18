@@ -151,14 +151,10 @@ export function InstitutionalHomePage() {
                 </>
               );
 
-              return item.href ? (
+              return (
                 <Link className={styles.featuredCard} href={item.href} key={item.title}>
                   {content}
                 </Link>
-              ) : (
-                <article className={styles.featuredCard} key={item.title}>
-                  {content}
-                </article>
               );
             })}
           </div>
