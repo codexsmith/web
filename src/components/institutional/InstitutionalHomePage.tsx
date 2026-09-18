@@ -101,14 +101,27 @@ export function InstitutionalHomePage() {
             </p>
           </div>
 
-          <div className={styles.practiceLineageGrid}>
-            {practiceLineage.map((item) => (
-              <article key={item.label}>
-                <span>{item.label}</span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </article>
-            ))}
+          <div
+            className={styles.practiceLineageGrid}
+            aria-label="Lean–Agile, scientific method, and agentic reasoning converge into Boundary First"
+          >
+            <div className={styles.practiceLineageInputs}>
+              {practiceLineage.slice(0, 3).map((item, index) => (
+                <article key={item.label}>
+                  <span className={styles.practiceLineageOrdinal}>{formatOrdinal(index)}</span>
+                  <h3>{item.label}</h3>
+                </article>
+              ))}
+            </div>
+
+            <div className={styles.practiceLineageMerge} aria-hidden="true">
+              <span>⇒</span>
+            </div>
+
+            <article className={styles.practiceLineageOutput}>
+              <span className={styles.practiceLineageOrdinal}>{formatOrdinal(3)}</span>
+              <h3>{practiceLineage[3].label}</h3>
+            </article>
           </div>
         </section>
 
