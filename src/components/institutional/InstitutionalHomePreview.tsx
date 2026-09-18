@@ -1,5 +1,5 @@
 import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
-import styles from "./InstitutionalHomePreview.module.css";
+import styles from "./styles/InstitutionalFoundation.module.css";
 
 const capabilityStrip = [
   ["01", "Research & experiments"],

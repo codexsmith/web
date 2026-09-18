@@ -1,6 +1,6 @@
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
 import { institutionalRoutes } from "./institutionalRoutes";
-import styles from "./InstitutionalHomePreview.module.css";
+import styles from "./styles/InstitutionalFoundation.module.css";
 
 export function InstitutionalHeader() {
   return (

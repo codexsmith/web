@@ -1,5 +1,10 @@
 import { InstitutionalFooter, InstitutionalHeader } from "./InstitutionalChrome";
-import styles from "./InstitutionalHomePreview.module.css";
+import foundationStyles from "./styles/InstitutionalFoundation.module.css";
+import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
+import routeStyles from "./styles/Research.module.css";
+import { composeCssModules } from "./styles/composeCssModules";
+
+const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 const programs = [
   {
