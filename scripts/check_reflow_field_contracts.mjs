@@ -12,6 +12,9 @@ const projectCss = fs.readFileSync("src/components/institutional/styles/Projects
 const apparatus = fs.readFileSync("src/components/institutional/InstitutionalApparatusPage.tsx", "utf8");
 const apparatusContext = fs.readFileSync("src/components/institutional/sections/ApparatusContextSection.tsx", "utf8");
 const apparatusCss = fs.readFileSync("src/components/institutional/styles/Apparatus.module.css", "utf8");
+const publications = fs.readFileSync("src/components/institutional/InstitutionalPublicationsPage.tsx", "utf8");
+const publicationContext = fs.readFileSync("src/components/institutional/sections/PublicationContextSection.tsx", "utf8");
+const publicationCss = fs.readFileSync("src/components/institutional/styles/Publications.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -92,5 +95,16 @@ expect(apparatusContext.includes('id="trust-stewardship"'), "Apparatus Context m
 expect(apparatusCss.includes("--reflow-focus-span: 3"), "nine-card Apparatus focus-stage must place four compact cards per wide row");
 expect(apparatusCss.includes(".apparatusContextWhy { --reflow-span: 5; }"), "Apparatus Context REST state must retain authored magazine spans");
 expect(apparatusCss.includes(".apparatusContextClosing { --reflow-span: 3; }"), "Apparatus Closing Test must participate in the authored REST composition");
+expect(publications.includes("<PublicationContextSection />"), "Publications page must compose its current body as one modular Reflow surface");
+expect(!publications.includes("publicationTypeGrid"), "Publication objects are not yet directly composed on the Publications page");
+expect(publicationContext.includes('layoutMode="focus-stage"'), "Publication Context must use focus-stage reflow");
+expect(publicationContext.includes("itemOrder={publicationContextOrder}"), "Publication Context must declare stable source ordering");
+expect(publicationContext.includes('id="projection-authority"'), "Publication Context must include Projection and Authority");
+expect(publicationContext.includes('id="publication-covenant"'), "Publication Context must include the Publication Covenant");
+expect(publicationContext.includes('id="flagship-pattern"'), "Publication Context must include the flagship page grammar");
+expect(publicationCss.includes("--reflow-columns: 10"), "eleven-card Publication Context must use a ten-column wide field");
+expect(publicationCss.includes("--reflow-focus-span: 2"), "eleven-card Publication focus-stage must place five compact cards per wide row");
+expect(publicationCss.includes(".publicationContextProjection { --reflow-span: 4; }"), "Publication Context REST state must retain authored magazine spans");
+expect(publicationCss.includes(".publicationContextCovenant { --reflow-span: 5; }"), "Publication Covenant must participate in the authored REST composition");
 
 console.log("BFUX Reflow Field contracts passed.");

@@ -50,41 +50,192 @@
   letter-spacing: .17em;
 }
 
-.publicationProjection,
-.readerAgencySection,
-.publicationStewardship,
-.publicationDesignPosture {
-  display: grid;
-  grid-template-columns: minmax(280px, .82fr) minmax(0, 1.7fr);
-  gap: clamp(36px, 6vw, 96px);
-  align-items: center;
-  padding: 42px clamp(30px, 7vw, 112px);
+.publicationContext {
+  padding: 42px clamp(30px, 6vw, 96px) 58px;
   border-bottom: 1px solid var(--bfux-panel-edge);
-  background: #fff;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.44), transparent 18%),
+    linear-gradient(180deg, #c9d6e4, #dde6ef);
 }
 
-.publicationProjection h2,
-.readerAgencySection h2,
-.publicationStewardship h2,
-.publicationDesignPosture h2,
-.publicationCovenant h2 {
-  margin: 9px 0 10px;
+.publicationContextFrame {
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 3px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.5), rgba(232,239,247,.45));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 0 0 4px rgba(255,255,255,.16),
+    0 3px 0 rgba(7,26,61,.12),
+    0 14px 30px rgba(7,26,61,.08);
+}
+
+.publicationContextGrid {
+  --reflow-columns: 10;
+  --reflow-gap: 14px;
+  --reflow-focus-span: 2;
+  --reflow-selected-start: 2;
+  --reflow-selected-span: 8;
+  margin-top: 20px;
+}
+
+.publicationContextCard {
+  min-height: 220px;
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 5px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(234,241,248,.98));
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.09),
+    0 3px 0 rgba(7,26,61,.17),
+    0 9px 18px rgba(7,26,61,.1);
+}
+
+.publicationContextCard[data-tone="authority"] { border-top-color: var(--osha-orange); }
+.publicationContextCard[data-tone="anatomy"] { border-top-color: var(--osha-blue); }
+.publicationContextCard[data-tone="status"] { border-top-color: var(--old-gold); }
+.publicationContextCard[data-tone="reader"] { border-top-color: var(--osha-green); }
+.publicationContextCard[data-tone="types"] { border-top-color: var(--osha-blue); }
+.publicationContextCard[data-tone="critique"] { border-top-color: var(--osha-orange); }
+.publicationContextCard[data-tone="index"] { border-top-color: var(--osha-yellow); }
+.publicationContextCard[data-tone="stewardship"] { border-top-color: var(--osha-green); }
+.publicationContextCard[data-tone="flagship"] { border-top-color: var(--old-gold); }
+.publicationContextCard[data-tone="design"] { border-top-color: var(--osha-blue); }
+.publicationContextCard[data-tone="covenant"] { border-top-color: var(--old-gold); }
+
+.publicationContextProjection { --reflow-span: 4; }
+.publicationContextAnatomy { --reflow-span: 3; }
+.publicationContextStatus { --reflow-span: 3; }
+.publicationContextReader { --reflow-span: 3; }
+.publicationContextTypes { --reflow-span: 4; }
+.publicationContextCritique { --reflow-span: 3; }
+.publicationContextIndex { --reflow-span: 4; }
+.publicationContextStewardship { --reflow-span: 3; }
+.publicationContextFlagship { --reflow-span: 3; }
+.publicationContextDesign { --reflow-span: 5; }
+.publicationContextCovenant { --reflow-span: 5; }
+
+.publicationContextGrid[data-reflow-active="true"]
+  .publicationContextCard:not([data-reflow-state="selected"]) {
+  height: 142px;
+  min-height: 142px;
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+.publicationContextGrid[data-reflow-active="true"]
+  .publicationContextCard:not([data-reflow-state="selected"])
+  .publicationContextSummary > span {
+  margin-bottom: 7px;
+  padding: 3px 5px;
+  font-size: .48rem;
+}
+
+.publicationContextGrid[data-reflow-active="true"]
+  .publicationContextCard:not([data-reflow-state="selected"])
+  .sectionIndex {
+  margin-bottom: 5px;
+  font-size: .48rem;
+}
+
+.publicationContextGrid[data-reflow-active="true"]
+  .publicationContextCard:not([data-reflow-state="selected"])
+  .publicationContextSummary h3 {
+  margin: 4px 0 0;
+  font-size: clamp(.9rem, 1vw, 1.04rem);
+  line-height: 1.05;
+}
+
+.publicationContextGrid[data-reflow-active="true"]
+  .publicationContextCard:not([data-reflow-state="selected"])
+  .publicationContextSummary > p:last-child {
+  display: none;
+}
+
+.publicationContextGrid[data-reflow-active="true"]
+  .publicationContextCard:not([data-reflow-state="selected"])
+  [class*="controlStrip"] {
+  margin-top: 9px;
+  padding-top: 7px;
+}
+
+.publicationContextCard[data-reflow-state="selected"] {
+  min-height: 0;
+  border-top-width: 7px;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.08),
+    0 4px 0 rgba(7,26,61,.22),
+    0 16px 30px rgba(7,26,61,.15);
+}
+
+.publicationContextSummary > span {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 6px;
+  border: 1px solid rgba(119,97,38,.4);
+  background: linear-gradient(180deg, #f8eebf, #d8bd65);
+  color: #443817;
+  font: 800 .54rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.publicationContextSummary h3 {
+  margin: 8px 0 9px;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 2.8vw, 3.5rem);
+  font-size: clamp(1.15rem, 1.4vw, 1.5rem);
   font-weight: 500;
-  letter-spacing: -.04em;
-  line-height: 1;
+  line-height: 1.08;
 }
 
-.publicationProjection > div:first-child > p:last-child,
-.readerAgencySection > div:first-child > p:last-child,
-.publicationStewardship > div:first-child > p:last-child,
-.publicationDesignPosture > p {
+.publicationContextSummary > p:last-child {
+  max-width: 680px;
   margin: 0;
+  color: #52627b;
+  font-size: .78rem;
+  line-height: 1.48;
+}
+
+.publicationContextDetail,
+.publicationCritiqueDetail,
+.publicationCovenantDetail {
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge);
+  background: rgba(255,255,255,.68);
+}
+
+.publicationContextDetail > p,
+.publicationCritiqueDetail > p {
+  max-width: 940px;
+  margin: 0 0 16px;
   color: #435470;
-  font-size: .94rem;
-  line-height: 1.62;
+  font-size: .88rem;
+  line-height: 1.58;
+}
+
+.publicationCritiqueDetail {
+  border-top: 6px solid var(--osha-orange);
+  background:
+    repeating-linear-gradient(135deg, rgba(231,123,36,.06) 0 8px, transparent 8px 16px),
+    #fffaf4;
+}
+
+.publicationCovenantDetail {
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+}
+
+.publicationCovenantDetail blockquote {
+  max-width: 980px;
+  margin: 0;
+  padding: 0 0 0 24px;
+  border-left: 7px solid var(--old-gold);
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.15rem, 1.8vw, 1.65rem);
+  line-height: 1.7;
 }
 
 .publicationBoundaryGrid {
@@ -100,17 +251,6 @@
   background: #fffaf4;
   color: var(--royal-blue-deep);
   font-size: .75rem;
-}
-
-.publicationAnatomy,
-.publicationTypesSection,
-.publicationPortfolioModel,
-.flagshipPatternSection {
-  padding: 40px clamp(30px, 6vw, 96px) 50px;
-  border-bottom: 1px solid var(--bfux-panel-edge);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.72), transparent 12%),
-    linear-gradient(180deg, #eef3f9, #e5edf5);
 }
 
 .publicationFieldGrid {
@@ -153,16 +293,6 @@
   color: #52627b;
   font-size: .72rem;
   line-height: 1.45;
-}
-
-.publicationStatusSection {
-  display: grid;
-  grid-template-columns: minmax(270px, .74fr) minmax(0, 2fr);
-  gap: 30px;
-  align-items: center;
-  padding: 38px clamp(30px, 6vw, 96px);
-  border-bottom: 1px solid var(--bfux-panel-edge);
-  background: #fff;
 }
 
 .publicationStateRail {
@@ -257,35 +387,6 @@
   color: #52627b;
   font-size: .72rem;
   line-height: 1.48;
-}
-
-.critiquePublication {
-  display: grid;
-  grid-template-columns: minmax(300px, .85fr) minmax(0, 1.65fr);
-  gap: clamp(36px, 6vw, 90px);
-  padding: 44px clamp(30px, 7vw, 112px);
-  border-top: 7px solid var(--osha-orange);
-  border-bottom: 7px solid var(--osha-orange);
-  background:
-    repeating-linear-gradient(135deg, rgba(231,123,36,.06) 0 8px, transparent 8px 16px),
-    #fffaf4;
-}
-
-.critiquePublication h2 {
-  margin: 9px 0 12px;
-  color: var(--royal-blue-deep);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 2.8vw, 3.5rem);
-  font-weight: 500;
-  letter-spacing: -.04em;
-  line-height: 1;
-}
-
-.critiquePublication > div:first-child > p:last-child {
-  margin: 0;
-  color: #435470;
-  font-size: .94rem;
-  line-height: 1.58;
 }
 
 .critiqueInputGrid {
@@ -423,35 +524,6 @@
   line-height: 1.25;
 }
 
-.publicationDesignPosture {
-  background: #fff;
-}
-
-.publicationCovenant {
-  padding: 54px clamp(30px, 8vw, 128px) 66px;
-  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
-  color: #fff;
-}
-
-.publicationCovenant .sectionIndex {
-  color: var(--old-gold-bright);
-}
-
-.publicationCovenant h2 {
-  color: #fff;
-}
-
-.publicationCovenant blockquote {
-  max-width: 980px;
-  margin: 24px 0 0;
-  padding: 0 0 0 24px;
-  border-left: 7px solid var(--old-gold);
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  line-height: 1.7;
-}
-
 @media (max-width: 1080px) {
   .publicationFieldGrid,
   .publicationTypeGrid {
@@ -469,14 +541,29 @@
 
 @media (max-width: 980px) {
   .publicationsHero,
-  .publicationProjection,
-  .publicationStatusSection,
-  .readerAgencySection,
-  .critiquePublication,
-  .publicationStewardship,
-  .publicationDesignPosture,
   .publicIndexModel {
     grid-template-columns: 1fr;
+  }
+
+  .publicationContextGrid {
+    --reflow-columns: 5;
+    --reflow-focus-span: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 5;
+  }
+
+  .publicationContextProjection,
+  .publicationContextAnatomy,
+  .publicationContextStatus,
+  .publicationContextReader,
+  .publicationContextTypes,
+  .publicationContextCritique,
+  .publicationContextIndex,
+  .publicationContextStewardship,
+  .publicationContextFlagship,
+  .publicationContextDesign,
+  .publicationContextCovenant {
+    --reflow-span: 5;
   }
 
   .publicationStateRail {
@@ -486,23 +573,24 @@
 
 @media (max-width: 680px) {
   .publicationsHero,
-  .publicationProjection,
-  .publicationAnatomy,
-  .publicationStatusSection,
-  .readerAgencySection,
-  .publicationTypesSection,
-  .critiquePublication,
-  .publicationPortfolioModel,
-  .publicationStewardship,
-  .flagshipPatternSection,
-  .publicationDesignPosture,
-  .publicationCovenant {
+  .publicationContext {
     padding-left: 22px;
     padding-right: 22px;
   }
 
   .publicationsHero h1 {
     font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .publicationContextGrid {
+    --reflow-columns: 1;
+    --reflow-focus-span: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 1;
+  }
+
+  .publicationContextCard {
+    --reflow-span: 1;
   }
 
   .publicationBoundaryGrid,

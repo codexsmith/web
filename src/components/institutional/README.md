@@ -45,3 +45,6 @@ The Projects route follows the same section boundary with `sections/ProjectConte
 
 
 The Apparatus route uses `sections/ApparatusContextSection.tsx`: the Instrument Bench remains directly readable as the substantive apparatus surface, while every supporting Apparatus section is compressed into a nine-object focus-stage Reflow field.
+
+
+The Publications route currently uses `sections/PublicationContextSection.tsx` as a temporary whole-body context scaffold because no genuine publication-object catalog is directly rendered yet. All existing publication discipline/page-grammar sections live in an eleven-object focus-stage Reflow field. Future publication objects belong directly on the route above this context section, following the same substantive-object / contextual-machinery split used elsewhere.

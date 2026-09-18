@@ -61,7 +61,11 @@ for (const [file, slug] of routeContracts) {
   expect(!source.includes("InstitutionalHeader"), `${file} must not own global header markup`);
   expect(!source.includes("InstitutionalFooter"), `${file} must not own global footer markup`);
   expect(!source.includes("className={styles.page}"), `${file} must not recreate the page shell`);
-  expect(source.includes(`./content/${slug}`), `${file} must import its content model`);
+  const routeOwnsContent = source.includes(`./content/${slug}`);
+  const sectionOwnsContent =
+    slug === "publications" &&
+    read(`${root}/sections/PublicationContextSection.tsx`).includes("../content/publications");
+  expect(routeOwnsContent || sectionOwnsContent, `${file} or its route-local section must import the content model`);
   expect(fs.existsSync(`${root}/content/${slug}.ts`), `missing content model for ${file}`);
   expect(!source.includes('padStart(2, "0")'), `${file} must use formatOrdinal rather than inline formatting`);
 }
@@ -113,5 +117,11 @@ expect(!apparatusPage.includes('className={styles.apparatusWhy}'), "Apparatus pa
 expect(!apparatusPage.includes('className={styles.apparatusPathSection}'), "Apparatus page must not inline the research path");
 expect(!apparatusPage.includes('className={styles.apparatusClose}'), "Apparatus page must not inline Closing Test");
 expect(fs.existsSync(`${root}/sections/ApparatusContextSection.tsx`), "ApparatusContextSection must exist as the route-local composition boundary");
+
+const publicationsPage = read(`${root}/InstitutionalPublicationsPage.tsx`);
+expect(publicationsPage.includes("<PublicationContextSection />"), "Publications must compose its current body as one context section");
+expect(!publicationsPage.includes('className={styles.publicationProjection}'), "Publications page must not inline Projection / Authority");
+expect(!publicationsPage.includes('className={styles.publicationCovenant}'), "Publications page must not inline the Publication Covenant");
+expect(fs.existsSync(`${root}/sections/PublicationContextSection.tsx`), "PublicationContextSection must exist as the route-local composition boundary");
 
 console.log("Institutional component architecture passed.");
