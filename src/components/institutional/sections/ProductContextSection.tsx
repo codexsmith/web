@@ -7,6 +7,7 @@ import routeSharedStyles from "../styles/InstitutionalRouteShared.module.css";
 import routeStyles from "../styles/Products.module.css";
 import { composeCssModules } from "../styles/composeCssModules";
 import {
+  productEvidence,
   productPageQuestions,
   secondaryProducts,
 } from "../content/products";
@@ -18,6 +19,7 @@ const styles = composeCssModules(
 );
 
 const productContextOrder = [
+  "why-products-matter",
   "research-market",
   "secondary-pipeline",
   "consumer-ethos",
@@ -97,6 +99,33 @@ export function ProductContextSection() {
           layoutMode="focus-stage"
           itemOrder={productContextOrder}
         >
+          <ProductContextCard
+            id="why-products-matter"
+            label="Why Products Matter"
+            eyebrow="WHY PRODUCTS MATTER"
+            title="Usefulness should meet reality."
+            description="Direct products turn usefulness into observable evidence rather than an internal judgment."
+            className={styles.productContextWhy}
+            tone="evidence"
+          >
+            <div className={styles.productContextDetail}>
+              <p>
+                A product creates direct contact between a bounded artifact and a real user.
+                Attention, comprehension, return use, willingness to pay, retention, and criticism
+                become evidence about whether the thing is actually useful.
+              </p>
+              <div className={styles.productEvidenceGrid}>
+                {productEvidence.map(([title, description], index) => (
+                  <div className={styles.productEvidencePlate} key={title}>
+                    <span>{formatOrdinal(index)}</span>
+                    <strong>{title}</strong>
+                    <p>{description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </ProductContextCard>
+
           <ProductContextCard
             id="research-market"
             label="Research to Market"

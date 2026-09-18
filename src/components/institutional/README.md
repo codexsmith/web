@@ -38,7 +38,7 @@ Once a route has a real page renderer, do not keep a second preview/front-door r
 Large route-local interaction surfaces should be extracted when they have their own internal grammar. The first reference is `sections/ResearchContextSection.tsx`: the Research page owns ordering, while the section owns its contextual Reflow Field, card summaries, and expanded detail composition.
 
 
-The Products route follows the same boundary with `sections/ProductContextSection.tsx`: primary product objects remain directly readable, while the supporting Research-to-Market through Public Product Object sequence is compressed into a focus-stage Reflow field.
+The Products route follows the same boundary with `sections/ProductContextSection.tsx`: primary product objects remain directly readable, while Why Products Matter and the supporting Research-to-Market through Public Product Object sequence are compressed into a six-object focus-stage Reflow field.
 
 
 The Projects route follows the same section boundary with `sections/ProjectContextSection.tsx`: featured project objects remain directly readable, while Transfer Evidence, Project-Page Grammar, Status Rule, Permanent Firewall, and Capability Transfer are compressed into a focus-stage Reflow field.

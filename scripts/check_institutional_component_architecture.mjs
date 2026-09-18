@@ -136,6 +136,9 @@ expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchCo
 
 const productsPage = read(`${root}/InstitutionalProductsPage.tsx`);
 expect(productsPage.includes("<ProductContextSection />"), "Products must compose its commercialization context as a section component");
+expect(!productsPage.includes('className={styles.productEvidenceSection}'), "Why Products Matter must not remain a standalone Products section");
+const productContext = read(`${root}/sections/ProductContextSection.tsx`);
+expect(productContext.includes('id="why-products-matter"'), "Product Context must own Why Products Matter");
 expect(!productsPage.includes('className={styles.productConversion}'), "Products page must not inline the superseded Research-to-Market section");
 expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Products page must not inline the superseded Public Product Object section");
 expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");

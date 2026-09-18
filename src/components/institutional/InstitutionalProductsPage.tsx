@@ -3,10 +3,8 @@ import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Products.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
-import { InstitutionalRouteHero, InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
-import { formatOrdinal } from "./institutionalFormat";
+import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 
-import { productEvidence } from "./content/products";
 import { ProductContextSection } from "./sections/ProductContextSection";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -28,26 +26,6 @@ export function InstitutionalProductsPage() {
             Show the user capability before claiming the market.
           </blockquote>
         </InstitutionalRouteHero>
-
-        <section className={styles.productEvidenceSection}>
-          <InstitutionalSectionLead
-            styles={styles}
-            eyebrow={<>WHY PRODUCTS MATTER</>}
-            title={<>Usefulness should meet reality.</>}
-            description={<>Direct products put bounded artifacts in front of real people and turn usefulness
-              into observable evidence rather than an internal judgment.</>}
-            />
-
-          <div className={styles.productEvidenceGrid}>
-            {productEvidence.map(([title, description], index) => (
-              <div className={styles.productEvidencePlate} key={title}>
-                <span>{formatOrdinal(index)}</span>
-                <strong>{title}</strong>
-                <p>{description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
 
         <section className={styles.primaryProducts}>
           <InstitutionalSectionHeader
