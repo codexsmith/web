@@ -1,5 +1,9 @@
+"use client";
+
+import { useId, useState } from "react";
 import {
   Boxes,
+  ChevronDown,
   CircleDot,
   Database,
   FileJson2,
@@ -7,6 +11,7 @@ import {
   Grid3X3,
   Info,
   Network,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import styles from "./styles/LabSnapshotRow.module.css";
@@ -20,11 +25,28 @@ export type LabSnapshotIcon =
   | "machine"
   | "semantic";
 
+export type LabSnapshotBreakdownItem = {
+  value: string;
+  label: string;
+  detail?: string;
+  code?: string;
+};
+
+export type LabSnapshotBreakdown = {
+  title: string;
+  intro: string;
+  items: readonly LabSnapshotBreakdownItem[];
+  note?: string;
+  source?: string;
+};
+
 export type LabSnapshotMetric = {
+  id: string;
   value: string;
   label: string;
   icon: LabSnapshotIcon;
   detail?: string;
+  breakdown?: LabSnapshotBreakdown;
 };
 
 export type LabSnapshotRowProps = {
@@ -54,50 +76,129 @@ export function LabSnapshotRow({
   note,
   ariaLabel = "Boundary First Labs snapshot",
 }: LabSnapshotRowProps) {
+  const [openMetricId, setOpenMetricId] = useState<string | null>(null);
+  const panelId = useId();
+  const openMetric = metrics.find((metric) => metric.id === openMetricId);
+  const breakdown = openMetric?.breakdown;
+
   return (
-    <section className={styles.snapshot} aria-label={ariaLabel}>
-      <div className={styles.identity}>
-        <span className={styles.label}>{label}</span>
-        {status ? <span className={styles.status}>{status}</span> : null}
-      </div>
+    <section
+      className={styles.snapshot}
+      aria-label={ariaLabel}
+      data-expanded={breakdown ? "true" : "false"}
+    >
+      <div className={styles.snapshotRow}>
+        <div className={styles.identity}>
+          <span className={styles.label}>{label}</span>
+          {status ? <span className={styles.status}>{status}</span> : null}
+        </div>
 
-      <div className={styles.divider} aria-hidden="true" />
+        <div className={styles.divider} aria-hidden="true" />
 
-      <div className={styles.metrics}>
-        {metrics.map((metric) => {
-          const Icon = icons[metric.icon];
+        <div className={styles.metrics}>
+          {metrics.map((metric) => {
+            const Icon = icons[metric.icon];
+            const expandable = Boolean(metric.breakdown);
+            const expanded = openMetricId === metric.id;
+            const contents = (
+              <>
+                <Icon className={styles.icon} aria-hidden="true" />
+                <strong>{metric.value}</strong>
+                {metric.label ? <span>{metric.label}</span> : null}
+                {expandable ? (
+                  <ChevronDown className={styles.chevron} aria-hidden="true" />
+                ) : null}
+              </>
+            );
 
-          return (
-            <div
-              className={styles.pill}
-              key={`${metric.value}-${metric.label}`}
-              title={metric.detail}
-            >
-              <Icon className={styles.icon} aria-hidden="true" />
-              <strong>{metric.value}</strong>
-              {metric.label ? <span>{metric.label}</span> : null}
+            return expandable ? (
+              <button
+                type="button"
+                className={styles.pill}
+                data-expandable="true"
+                data-expanded={expanded ? "true" : "false"}
+                key={metric.id}
+                title={metric.detail}
+                aria-expanded={expanded}
+                aria-controls={`${panelId}-breakdown`}
+                onClick={() => setOpenMetricId(expanded ? null : metric.id)}
+              >
+                {contents}
+              </button>
+            ) : (
+              <div
+                className={styles.pill}
+                key={metric.id}
+                title={metric.detail}
+              >
+                {contents}
+              </div>
+            );
+          })}
+        </div>
+
+        {(updated || note) ? (
+          <>
+            <div className={styles.divider} aria-hidden="true" />
+            <div className={styles.meta}>
+              {updated ? (
+                <span className={styles.updated}>
+                  <small>Updated</small>
+                  <strong>{updated}</strong>
+                </span>
+              ) : null}
+              {note ? (
+                <span className={styles.info} title={note} aria-label={note}>
+                  <Info aria-hidden="true" />
+                </span>
+              ) : null}
             </div>
-          );
-        })}
+          </>
+        ) : null}
       </div>
 
-      {(updated || note) ? (
-        <>
-          <div className={styles.divider} aria-hidden="true" />
-          <div className={styles.meta}>
-            {updated ? (
-              <span className={styles.updated}>
-                <small>Updated</small>
-                <strong>{updated}</strong>
-              </span>
-            ) : null}
-            {note ? (
-              <span className={styles.info} title={note} aria-label={note}>
-                <Info aria-hidden="true" />
-              </span>
-            ) : null}
+      {breakdown && openMetric ? (
+        <div
+          className={styles.breakdownPanel}
+          id={`${panelId}-breakdown`}
+          aria-live="polite"
+        >
+          <header className={styles.breakdownHeader}>
+            <div>
+              <span>SNAPSHOT BREAKDOWN · {openMetric.value} {openMetric.label}</span>
+              <h3>{breakdown.title}</h3>
+              <p>{breakdown.intro}</p>
+            </div>
+            <button
+              type="button"
+              className={styles.closeBreakdown}
+              aria-label={`Close ${openMetric.label} breakdown`}
+              onClick={() => setOpenMetricId(null)}
+            >
+              <X aria-hidden="true" />
+            </button>
+          </header>
+
+          <div className={styles.breakdownGrid}>
+            {breakdown.items.map((item) => (
+              <article className={styles.breakdownItem} key={item.label}>
+                <strong>{item.value}</strong>
+                <div>
+                  <span>{item.label}</span>
+                  {item.detail ? <p>{item.detail}</p> : null}
+                  {item.code ? <code>{item.code}</code> : null}
+                </div>
+              </article>
+            ))}
           </div>
-        </>
+
+          {(breakdown.note || breakdown.source) ? (
+            <footer className={styles.breakdownFooter}>
+              {breakdown.note ? <p>{breakdown.note}</p> : null}
+              {breakdown.source ? <span>{breakdown.source}</span> : null}
+            </footer>
+          ) : null}
+        </div>
       ) : null}
     </section>
   );
