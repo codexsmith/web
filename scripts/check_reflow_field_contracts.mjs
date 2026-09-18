@@ -34,6 +34,10 @@ expect(component.includes("delay: 0.12"), "detail content should stage shortly a
 expect(component.includes("duration: 0.12"), "detail content should clear immediately when closing begins");
 expect(component.includes('data-reflow-state={selected ? "selected" : "rest"}'), "item state must be explicit in DOM");
 expect(component.includes('data-reflow-placement={placement}'), "focus-stage placement must be explicit in DOM");
+expect(component.includes('data-reflow-motion-carrier={carriesMotion ? "true" : "false"}'), "the moving focus card must expose a transient top-layer state");
+expect(component.includes("window.setTimeout"), "the prior motion carrier must clear after the return transition completes");
+expect(component.includes("560"), "motion-carrier lifetime must cover the 0.52s return transition");
+expect(fs.readFileSync("src/components/bfux/ReflowField.module.css", "utf8").includes('z-index: var(--reflow-motion-z, 100)'), "the moving focus card must remain above the already-resized module while returning");
 expect(component.includes('layoutMode?: ReflowLayoutMode'), "Reflow Field must expose a reusable layout-mode contract");
 expect(component.includes("Math.ceil(remainingIds.length / 2)"), "focus-stage must balance remaining items above and below the selected object");
 expect(research.includes('<div className={styles.researchProgramGrid}>'), "Active Surfaces must remain ordinary always-visible substantive content");

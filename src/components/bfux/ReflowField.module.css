@@ -21,6 +21,10 @@
   outline-offset: 3px;
 }
 
+.item[data-reflow-motion-carrier="true"] {
+  z-index: var(--reflow-motion-z, 100);
+}
+
 .field[data-reflow-mode="flow"] .item[data-reflow-state="selected"] {
   grid-column: 1 / -1;
   z-index: 2;

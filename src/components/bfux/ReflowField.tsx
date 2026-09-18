@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useId,
   useMemo,
   useState,
@@ -89,6 +90,19 @@ export function ReflowField({
   const [previousSelectedId, setPreviousSelectedId] = useState<string | null>(null);
   const reactId = useId();
   const fieldId = useMemo(() => safeFragment(`reflow-${reactId}`), [reactId]);
+
+  useEffect(() => {
+    if (previousSelectedId === null) return;
+
+    const clearPrevious = window.setTimeout(() => {
+      setPreviousSelectedId((current) =>
+        current === previousSelectedId ? null : current,
+      );
+    }, 560);
+
+    return () => window.clearTimeout(clearPrevious);
+  }, [previousSelectedId]);
+
   const setSelection = useCallback((id: string | null) => {
     setPreviousSelectedId(selectedId);
     setSelectedId(id);
@@ -204,6 +218,7 @@ export function ReflowFieldItem({
       className={[styles.item, className].filter(Boolean).join(" ")}
       data-reflow-state={selected ? "selected" : "rest"}
       data-reflow-placement={placement}
+      data-reflow-motion-carrier={carriesMotion ? "true" : "false"}
       data-tone={dataTone}
       onClick={handleSurfaceClick}
     >
