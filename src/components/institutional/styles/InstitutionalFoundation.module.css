@@ -2618,6 +2618,12 @@
   font-weight: 600;
   line-height: 1.05;
 }
+.practiceLineageGrid article p {
+  margin: 10px 0 0;
+  color: #52627b;
+  font-size: .68rem;
+  line-height: 1.46;
+}
 .practiceLineageMerge {
   position: relative;
   display: grid;
