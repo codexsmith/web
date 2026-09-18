@@ -5,6 +5,88 @@ function cx(...classes: Array<string | undefined | false>) {
   return classes.filter(Boolean).join(" ");
 }
 
+type ChildLinkKind =
+  | "support"
+  | "application"
+  | "evidence"
+  | "status"
+  | "participation"
+  | "provenance"
+  | "apparatus";
+
+function ChildLinkIcon({
+  kind,
+  className,
+}: {
+  kind: ChildLinkKind;
+  className: string;
+}) {
+  const common = {
+    className,
+    viewBox: "0 0 28 28",
+    role: "presentation" as const,
+    "aria-hidden": true,
+  };
+
+  switch (kind) {
+    case "support":
+      return (
+        <svg {...common}>
+          <circle cx="14" cy="14" r="9" />
+          <path d="M16.8 10.2c-.7-.8-1.7-1.2-3-1.2-1.7 0-2.8.8-2.8 2s1 1.8 3 2.2c2 .4 3 1.1 3 2.4 0 1.4-1.2 2.4-3.1 2.4-1.5 0-2.7-.5-3.5-1.4" />
+          <path d="M14 7.5v13" />
+        </svg>
+      );
+    case "application":
+      return (
+        <svg {...common}>
+          <path d="M5 21.5l7.3-7.3" />
+          <path d="M16.1 4.5a5 5 0 0 0-4.4 7.4l-6.8 6.8 4.4 4.4 6.8-6.8a5 5 0 0 0 6.9-6.1l-3.4 3.4-3.2-.9-.9-3.2L18.9 6a5 5 0 0 0-2.8-1.5Z" />
+        </svg>
+      );
+    case "evidence":
+      return (
+        <svg {...common}>
+          <path d="M7 4.5h10l4 4v15H7z" />
+          <path d="M17 4.5v4h4" />
+          <path d="m10.5 16 2.3 2.3 4.8-5" />
+        </svg>
+      );
+    case "status":
+      return (
+        <svg {...common}>
+          <circle cx="14" cy="14" r="9.5" />
+          <path d="M14 8.5V14l4 2.3" />
+        </svg>
+      );
+    case "participation":
+      return (
+        <svg {...common}>
+          <circle cx="10" cy="10" r="3" />
+          <circle cx="19" cy="11" r="2.5" />
+          <path d="M4.5 22c.6-4.1 2.5-6.2 5.7-6.2 3.3 0 5.2 2.1 5.8 6.2" />
+          <path d="M15.8 17.1c1-.8 2.1-1.2 3.3-1.2 2.5 0 4 1.7 4.4 5" />
+        </svg>
+      );
+    case "provenance":
+      return (
+        <svg {...common}>
+          <circle cx="14" cy="9" r="3.5" />
+          <path d="M7.5 22c.8-4.6 3-6.9 6.5-6.9s5.7 2.3 6.5 6.9" />
+          <path d="M4.5 6.5h3M6 5v3M20.5 6.5h3M22 5v3" />
+        </svg>
+      );
+    case "apparatus":
+      return (
+        <svg {...common}>
+          <circle cx="14" cy="14" r="3.5" />
+          <path d="M14 4.5v3M14 20.5v3M4.5 14h3M20.5 14h3M7.3 7.3l2.1 2.1M18.6 18.6l2.1 2.1M20.7 7.3l-2.1 2.1M9.4 18.6l-2.1 2.1" />
+          <circle cx="14" cy="14" r="8" />
+        </svg>
+      );
+  }
+}
+
 export function InstitutionalRouteHero({
   styles,
   className,
@@ -24,6 +106,9 @@ export function InstitutionalRouteHero({
   childLinks?: readonly {
     label: string;
     href: string;
+    relation: string;
+    kind: ChildLinkKind;
+    tone: "blue" | "gold" | "green" | "orange" | "teal" | "slate" | "indigo";
   }[];
   children?: ReactNode;
 }) {
@@ -49,21 +134,20 @@ export function InstitutionalRouteHero({
               </span>
               <div className={styles.routeChildLinks}>
                 {childLinks.map((link) => (
-                  <a className={styles.routeChildLink} href={link.href} key={link.href}>
-                    <span className={styles.routeChildDependencyMark} aria-hidden="true">
-                      <svg
-                        className={styles.routeChildDependencyIcon}
-                        viewBox="0 0 28 28"
-                        role="presentation"
-                      >
-                        <rect x="3" y="4" width="8" height="8" rx="1.5" />
-                        <rect x="17" y="16" width="8" height="8" rx="1.5" />
-                        <path d="M10.5 10.5L17.5 17.5" />
-                        <path d="M15 17.5H17.5V15" />
-                      </svg>
+                  <a
+                    className={styles.routeChildLink}
+                    data-tone={link.tone}
+                    href={link.href}
+                    key={link.href}
+                  >
+                    <span className={styles.routeChildMark} aria-hidden="true">
+                      <ChildLinkIcon
+                        kind={link.kind}
+                        className={styles.routeChildIcon}
+                      />
                     </span>
                     <span className={styles.routeChildCopy}>
-                      <small>DEPENDENCY</small>
+                      <small>{link.relation}</small>
                       <strong>{link.label}</strong>
                     </span>
                     <span className={styles.routeChildArrow} aria-hidden="true">→</span>

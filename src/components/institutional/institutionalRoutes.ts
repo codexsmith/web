@@ -8,54 +8,106 @@ export const institutionalRoutes = [
 ] as const;
 
 
+const institutionalChildPages = {
+  funding: {
+    label: "Funding",
+    href: "/v3/funding",
+    relation: "SUPPORT",
+    kind: "support",
+    tone: "gold",
+  },
+  appliedWork: {
+    label: "Applied Work",
+    href: "/v3/applied-work",
+    relation: "APPLICATION",
+    kind: "application",
+    tone: "orange",
+  },
+  evidence: {
+    label: "Evidence",
+    href: "/v3/evidence",
+    relation: "EVIDENCE",
+    kind: "evidence",
+    tone: "green",
+  },
+  now: {
+    label: "Now",
+    href: "/v3/now",
+    relation: "STATUS",
+    kind: "status",
+    tone: "blue",
+  },
+  collaboration: {
+    label: "Collaboration",
+    href: "/v3/collaboration",
+    relation: "PARTICIPATION",
+    kind: "participation",
+    tone: "teal",
+  },
+  founder: {
+    label: "Founder",
+    href: "/v3/founder",
+    relation: "PROVENANCE",
+    kind: "provenance",
+    tone: "slate",
+  },
+  apparatus: {
+    label: "Apparatus",
+    href: "/v3/apparatus",
+    relation: "APPARATUS",
+    kind: "apparatus",
+    tone: "indigo",
+  },
+} as const;
+
 export const institutionalChildRoutes = {
   about: [
-    { label: "Funding", href: "/v3/funding" },
-    { label: "Applied Work", href: "/v3/applied-work" },
-    { label: "Evidence", href: "/v3/evidence" },
-    { label: "Now", href: "/v3/now" },
-    { label: "Collaboration", href: "/v3/collaboration" },
-    { label: "Founder", href: "/v3/founder" },
+    institutionalChildPages.funding,
+    institutionalChildPages.appliedWork,
+    institutionalChildPages.evidence,
+    institutionalChildPages.now,
+    institutionalChildPages.collaboration,
+    institutionalChildPages.founder,
   ],
   research: [
-    { label: "Apparatus", href: "/v3/apparatus" },
-    { label: "Funding", href: "/v3/funding" },
-    { label: "Now", href: "/v3/now" },
-    { label: "Collaboration", href: "/v3/collaboration" },
+    institutionalChildPages.apparatus,
+    institutionalChildPages.funding,
+    institutionalChildPages.now,
+    institutionalChildPages.collaboration,
   ],
   products: [
-    { label: "Applied Work", href: "/v3/applied-work" },
-    { label: "Evidence", href: "/v3/evidence" },
-    { label: "Collaboration", href: "/v3/collaboration" },
+    institutionalChildPages.appliedWork,
+    institutionalChildPages.evidence,
+    institutionalChildPages.collaboration,
   ],
   projects: [
-    { label: "Applied Work", href: "/v3/applied-work" },
-    { label: "Evidence", href: "/v3/evidence" },
-    { label: "Now", href: "/v3/now" },
-    { label: "Collaboration", href: "/v3/collaboration" },
+    institutionalChildPages.appliedWork,
+    institutionalChildPages.evidence,
+    institutionalChildPages.now,
+    institutionalChildPages.collaboration,
   ],
   funding: [
-    { label: "Applied Work", href: "/v3/applied-work" },
-    { label: "Evidence", href: "/v3/evidence" },
-    { label: "Now", href: "/v3/now" },
+    institutionalChildPages.appliedWork,
+    institutionalChildPages.evidence,
+    institutionalChildPages.now,
   ],
   collaboration: [
-    { label: "Applied Work", href: "/v3/applied-work" },
+    institutionalChildPages.appliedWork,
   ],
   appliedWork: [
-    { label: "Evidence", href: "/v3/evidence" },
+    institutionalChildPages.evidence,
   ],
   founder: [
-    { label: "Evidence", href: "/v3/evidence" },
+    institutionalChildPages.evidence,
   ],
   evidence: [
-    { label: "Now", href: "/v3/now" },
+    institutionalChildPages.now,
   ],
   openLab: [
-    { label: "Apparatus", href: "/v3/apparatus" },
-    { label: "Funding", href: "/v3/funding" },
-    { label: "Now", href: "/v3/now" },
-    { label: "Collaboration", href: "/v3/collaboration" },
+    institutionalChildPages.apparatus,
+    institutionalChildPages.funding,
+    institutionalChildPages.now,
+    institutionalChildPages.collaboration,
   ],
 } as const;
 
