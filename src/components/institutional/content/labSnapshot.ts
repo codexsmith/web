@@ -31,6 +31,7 @@ export const homeLabSnapshot = {
       detail: "7 of 10 registered Lab machinery components are marked stable in the current Machinery Registry.",
       breakdown: {
         title: "Seven stable machines carry the recurring operational load.",
+        variant: "single-row",
         intro:
           "The Lab is not operated by manually tending dozens of independent files or registers. A smaller set of stable machinery handles recurring jobs such as routing, intake, research refinement, provenance, management rollups, and publication control.",
         items: [
