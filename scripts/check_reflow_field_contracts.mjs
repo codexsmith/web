@@ -189,7 +189,7 @@ for (const [name, source] of [
 }
 
 expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choose Your Own Path through Stewardship as one Reflow field");
-expect(!home.includes("\\\\n\\\\n"), "Homepage must not render escaped newline literals around the orientation field");
+expect(!home.includes("\\n\\n"), "Homepage must not render escaped newline literals around the orientation field");
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
 expect(homeOrientation.includes("itemOrder={homeOrientationOrder}"), "Homepage orientation must declare stable source ordering");
