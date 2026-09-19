@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "AI Governance · Boundary First Labs",
   description:
     "Boundary First Labs' practical doctrine for bounded AI assistance, consequential artificial agency, authority, contestability, repair, and accountable deployment.",
-  alternates: { canonical: "/v3/ai-governance" },
+  alternates: { canonical: "/ai-governance" },
 };
 
 export default function Page() {

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Contact · Boundary First Labs",
   description:
     "Start a conversation with Boundary First Labs about applied work, collaboration, funding, research review, products, media, education, or an unusual Open Lab case.",
-  alternates: { canonical: "/v3/contact" },
+  alternates: { canonical: "/contact" },
 };
 
 type ContactSearchParams = {
