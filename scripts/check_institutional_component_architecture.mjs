@@ -217,9 +217,9 @@ expect(
 
 const routeRegistry = read(`${root}/institutionalRoutes.ts`);
 const topLevelRouteRegistry = routeRegistry.slice(0, routeRegistry.indexOf("const institutionalChildPages"));
-expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "Apparatus must remain in primary institutional navigation per the v3 phase-close route authority");
+expect(!topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/funding'), "Funding must remain a contextual child route rather than top-level navigation");
-expect(topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must remain a primary route while also being available contextually");
+expect(!topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must stay out of the primary header route set");
 expect(!topLevelRouteRegistry.includes('/v3/founder'), "Founder must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
