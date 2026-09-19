@@ -34,7 +34,16 @@ jobs:
         run: node scripts/check_runtime_hardening.mjs
 
       - name: Audit high-severity dependency vulnerabilities
-        run: npm audit --audit-level=high
+        run: |
+          if npm audit --audit-level=high; then
+            exit 0
+          fi
+
+          echo "::group::npm audit compatible lockfile proposal"
+          npm audit fix --package-lock-only --ignore-scripts || true
+          git diff -- package.json package-lock.json
+          echo "::endgroup::"
+          exit 1
 
       - name: Check v2 architecture contracts
         run: npm run contracts:check
