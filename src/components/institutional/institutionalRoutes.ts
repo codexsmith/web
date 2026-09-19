@@ -73,6 +73,13 @@ const institutionalChildPages = {
     kind: "provenance",
     tone: "slate",
   },
+  aiGovernance: {
+    label: "AI Governance",
+    href: "/v3/ai-governance",
+    relation: "GOVERNANCE",
+    kind: "governance",
+    tone: "orange",
+  },
   apparatus: {
     label: "Apparatus",
     href: "/v3/apparatus",
@@ -100,6 +107,7 @@ export const institutionalChildRoutes = {
   about: [
     institutionalChildPages.funding,
     institutionalChildPages.appliedWork,
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.evidence,
     institutionalChildPages.now,
     institutionalChildPages.changes,
@@ -109,6 +117,7 @@ export const institutionalChildRoutes = {
   research: [
     institutionalChildPages.atlas,
     institutionalChildPages.representationAtlas,
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.apparatus,
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
@@ -122,6 +131,7 @@ export const institutionalChildRoutes = {
   ],
   projects: [
     institutionalChildPages.appliedWork,
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.evidence,
     institutionalChildPages.now,
     institutionalChildPages.collaboration,
@@ -135,7 +145,14 @@ export const institutionalChildRoutes = {
     institutionalChildPages.appliedWork,
   ],
   appliedWork: [
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.evidence,
+  ],
+  aiGovernance: [
+    institutionalChildPages.appliedWork,
+    institutionalChildPages.evidence,
+    institutionalChildPages.collaboration,
+    institutionalChildPages.apparatus,
   ],
   founder: [
     institutionalChildPages.evidence,
@@ -172,6 +189,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.collaboration,
   ],
   openLab: [
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.apparatus,
     institutionalChildPages.funding,
     institutionalChildPages.now,
@@ -185,6 +203,7 @@ export const institutionalFooterGroups = [
     label: "Institution",
     routes: [
       { label: "About", href: "/v3/about" },
+      { label: "AI Governance", href: "/v3/ai-governance" },
       { label: "Start here", href: "/v3/start" },
       { label: "Founder", href: "/v3/founder" },
       { label: "Now", href: "/v3/now" },
