@@ -174,6 +174,7 @@ export function LabCommandPalette() {
         onClick={openPalette}
         aria-haspopup="dialog"
         aria-label="Search Lab objects and pages. Keyboard shortcut Command or Control K."
+        title="Search Lab (⌘/Ctrl K)"
       >
         <svg
           viewBox="0 0 24 24"
@@ -183,8 +184,6 @@ export function LabCommandPalette() {
           <circle cx="10.5" cy="10.5" r="5.5" />
           <path d="m15 15 5 5" />
         </svg>
-        <span>Search Lab</span>
-        <kbd>⌘/Ctrl K</kbd>
       </button>
 
       <dialog
