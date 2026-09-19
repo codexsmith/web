@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Representation Atlas · Boundary First Labs",
   description:
     "Trace recurring representation, state, transformation, boundary, defect, evidence, agency, and stewardship patterns across Lab work.",
-  alternates: { canonical: "/v3/representation-atlas" },
+  alternates: { canonical: "/representation-atlas" },
 };
 
 export default function RepresentationAtlasPage() {
