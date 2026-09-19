@@ -18,6 +18,8 @@ export const institutionalPublicRoutes = [
   "/contact",
   "/evidence",
   "/experiments",
+  "/labs/distinction-space",
+  "/labs/representation-lab",
   "/founder",
   "/funding",
   "/now",
