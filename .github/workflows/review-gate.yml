@@ -39,9 +39,28 @@ jobs:
             exit 0
           fi
 
-          echo "::group::npm audit compatible lockfile proposal"
+          cp package-lock.json /tmp/package-lock.before.json
           npm audit fix --package-lock-only --ignore-scripts || true
-          git diff -- package.json package-lock.json
+
+          echo "::group::npm audit compatible lockfile proposal"
+          node <<'NODE'
+          const fs = require("node:fs");
+          const before = JSON.parse(fs.readFileSync("/tmp/package-lock.before.json", "utf8"));
+          const after = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
+          const keys = new Set([
+            ...Object.keys(before.packages || {}),
+            ...Object.keys(after.packages || {}),
+          ]);
+          const changed = {};
+          for (const key of [...keys].sort()) {
+            const a = before.packages?.[key];
+            const b = after.packages?.[key];
+            if (JSON.stringify(a) !== JSON.stringify(b)) {
+              changed[key] = b ?? null;
+            }
+          }
+          console.log(JSON.stringify(changed));
+          NODE
           echo "::endgroup::"
           exit 1
 
