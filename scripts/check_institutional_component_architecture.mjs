@@ -660,6 +660,7 @@ expect(audienceGrid.includes("summary={<AudienceJourneySummary"), "Audience refl
 expect(audienceGrid.includes("detail={<AudienceJourneyDetail"), "Audience reflow must reveal ordered path detail only after selection");
 expect(homeForAudienceTraversal.includes("homeAudienceJourneys"), "Homepage must reuse the same canonical audience traversal model");
 expect(homeForAudienceTraversal.includes("<AudienceJourneyGrid"), "Homepage must expose compact audience-specific traversal");
+expect(!homeForAudienceTraversal.includes("The same institution looks different depending on whether you came"), "Homepage audience lead must not repeat the audience-explanation paragraph");
 
 
 expect(homeForAudienceTraversal.includes("CHOOSE YOUR OWN PATH"), "Homepage audience layer must identify the reflow surface as Choose your own path");
