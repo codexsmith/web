@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:
     "Boundary-First Chess is a visual teaching framework and explainable-analysis research product for helping chess learners see structural change on the board.",
   alternates: { canonical: "/v3/products/boundary-first-chess" },
-  robots: { index: false, follow: false },
 };
 
 export default function Page() {
