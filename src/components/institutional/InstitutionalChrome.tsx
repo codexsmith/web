@@ -53,7 +53,7 @@ export function InstitutionalHeader() {
       className={styles.header}
       data-header-compact={heroPassed ? "true" : "false"}
     >
-      <Link className={styles.brand} href="/v3" aria-label="Boundary First Labs Website v3 home">
+      <Link className={styles.brand} href="/" aria-label="Boundary First Labs home">
         <BoundaryFirstWaveLogo className={styles.logo} variant="compact" decorative />
         <span className={styles.brandCopy} aria-hidden={heroPassed ? "true" : undefined}>
           <strong>Boundary First Labs</strong>
@@ -89,8 +89,8 @@ export function InstitutionalFooter() {
     <footer className={styles.footer}>
       <Link
         className={styles.footerBrand}
-        href="/v3"
-        aria-label="Boundary First Labs Website v3 home"
+        href="/"
+        aria-label="Boundary First Labs home"
       >
         <BoundaryFirstWaveLogo className={styles.footerLogo} variant="compact" decorative />
         <div>
