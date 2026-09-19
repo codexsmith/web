@@ -149,6 +149,8 @@ export function InstitutionalRouteHero({
   }[];
   children?: ReactNode;
 }) {
+  const visibleChildLinks = childLinks?.slice(0, 6);
+
   return (
     <section className={className} data-institutional-hero>
       <div>
@@ -158,19 +160,19 @@ export function InstitutionalRouteHero({
         {support ? <p className={styles.routeSupport}>{support}</p> : null}
       </div>
 
-      {children || childLinks?.length ? (
+      {children || visibleChildLinks?.length ? (
         <div className={styles.routeHeroAside}>
           {children ? (
             <div className={styles.routeHeroAsideContent}>{children}</div>
           ) : null}
 
-          {childLinks?.length ? (
+          {visibleChildLinks?.length ? (
             <nav className={styles.routeChildNav} aria-label="Child pages">
               <span className={styles.routeChildLabel}>
-                {childLinks.length === 1 ? "CHILD PAGE" : "CHILD PAGES"}
+                {visibleChildLinks.length === 1 ? "CHILD PAGE" : "CHILD PAGES"}
               </span>
               <div className={styles.routeChildLinks}>
-                {childLinks.map((link) => (
+                {visibleChildLinks.map((link) => (
                   <a
                     className={styles.routeChildLink}
                     data-tone={link.tone}

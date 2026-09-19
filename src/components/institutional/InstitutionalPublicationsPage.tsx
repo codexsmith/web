@@ -4,6 +4,7 @@ import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Publications.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero } from "./InstitutionalPrimitives";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import { PublicationCatalogSection } from "./sections/PublicationCatalogSection";
 import { PublicationStripSection } from "./sections/PublicationStripSection";
 import { PublicationContextSection } from "./sections/PublicationContextSection";
@@ -23,6 +24,7 @@ export function InstitutionalPublicationsPage() {
           reference implementations, and Research Deployment Packets.</>}
         support={<>A publication is an important artifact. It is not automatically the whole
           research object.</>}
+        childLinks={institutionalChildRoutes.publications}
       >
         <blockquote className={styles.publicationCovenantLead}>
           <span>PUBLICATION PRINCIPLE</span>
