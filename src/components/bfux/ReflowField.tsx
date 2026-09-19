@@ -20,6 +20,7 @@ import {
 import styles from "./ReflowField.module.css";
 
 type ReflowLayoutMode = "flow" | "focus-stage";
+type ReflowFocusPeerPlacement = "split" | "before" | "after";
 
 type ReflowFieldContextValue = {
   selectedId: string | null;
@@ -28,6 +29,7 @@ type ReflowFieldContextValue = {
   layoutMode: ReflowLayoutMode;
   itemOrder: readonly string[];
   animatePeers: boolean;
+  focusPeerPlacement: ReflowFocusPeerPlacement;
   setSelection: (id: string | null) => void;
 };
 
@@ -48,6 +50,22 @@ function clickBelongsToNestedControl(
   );
 
   return Boolean(interactive && interactive !== event.currentTarget);
+}
+
+function clickBelongsToNestedReflowField(
+  event: ReactMouseEvent<HTMLElement>,
+) {
+  const target = event.target;
+  if (!(target instanceof Element)) return false;
+
+  const targetField = target.closest("[data-reflow-field]");
+  const currentField = event.currentTarget.closest("[data-reflow-field]");
+
+  return Boolean(
+    targetField &&
+      currentField &&
+      targetField !== currentField,
+  );
 }
 
 const focusLayoutTransition = {
@@ -80,6 +98,7 @@ export function ReflowField({
   layoutMode = "flow",
   itemOrder = [],
   animatePeers = false,
+  focusPeerPlacement = "split",
 }: {
   children: ReactNode;
   className?: string;
@@ -88,6 +107,7 @@ export function ReflowField({
   layoutMode?: ReflowLayoutMode;
   itemOrder?: readonly string[];
   animatePeers?: boolean;
+  focusPeerPlacement?: ReflowFocusPeerPlacement;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
   const [previousSelectedId, setPreviousSelectedId] = useState<string | null>(null);
@@ -119,6 +139,7 @@ export function ReflowField({
       layoutMode,
       itemOrder,
       animatePeers,
+      focusPeerPlacement,
       setSelection,
     }),
     [
@@ -128,6 +149,7 @@ export function ReflowField({
       layoutMode,
       itemOrder,
       animatePeers,
+      focusPeerPlacement,
       setSelection,
     ],
   );
@@ -138,6 +160,7 @@ export function ReflowField({
         <section
           className={[styles.field, className].filter(Boolean).join(" ")}
           aria-label={ariaLabel}
+          data-reflow-field={fieldId}
           data-reflow-active={selectedId ? "true" : "false"}
           data-reflow-mode={layoutMode}
           onKeyDown={(event) => {
@@ -196,11 +219,16 @@ export function ReflowFieldItem({
       ? "rest"
       : selected
         ? "selected"
-        : remainingIndex >= 0 && remainingIndex < splitIndex
+        : context.focusPeerPlacement === "before"
           ? "before"
-          : "after";
+          : context.focusPeerPlacement === "after"
+            ? "after"
+            : remainingIndex >= 0 && remainingIndex < splitIndex
+              ? "before"
+              : "after";
 
   const handleSurfaceClick = (event: ReactMouseEvent<HTMLElement>) => {
+    if (clickBelongsToNestedReflowField(event)) return;
     if (clickBelongsToNestedControl(event)) return;
 
     const selection = window.getSelection();
