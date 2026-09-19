@@ -31,31 +31,48 @@
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
-  grid-auto-flow: row;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
 }
 
+/*
+ * Focus-stage invariant:
+ * every non-selected context card shares one compact peer rail.
+ * Cards divide the available row evenly rather than wrapping into orphan rows.
+ */
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
   > .item:not([data-reflow-state="selected"]) {
-  grid-column: span var(--reflow-focus-span, 4);
+  order: 1;
+  flex: 1 1 0;
+  width: 0;
+  min-width: 0;
+  grid-column: auto;
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  > .item[data-reflow-placement="before"] {
+  > .item[data-reflow-placement="before"],
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  > .item[data-reflow-placement="after"] {
   order: 1;
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
   > .item[data-reflow-placement="selected"] {
   order: 2;
-  grid-column:
-    var(--reflow-selected-start, 2)
-    / span var(--reflow-selected-span, 10);
+  flex: 0 0 var(--reflow-selected-width, 83.333333%);
+  width: var(--reflow-selected-width, 83.333333%);
+  margin-inline: auto;
+  grid-column: auto;
   z-index: 2;
 }
 
-.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  > .item[data-reflow-placement="after"] {
-  order: 3;
+@media (max-width: 760px) {
+  .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+    > .item[data-reflow-placement="selected"] {
+    flex-basis: 100%;
+    width: 100%;
+  }
 }
 
 
