@@ -1142,3 +1142,99 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.publicationNextGate {
+  margin-top: 9px;
+  padding: 12px 13px;
+  border: 1px solid rgba(7,26,61,.22);
+  border-left: 5px solid var(--osha-green);
+  background: rgba(247,251,248,.9);
+}
+
+.publicationNextGate span,
+.publicationProvenance span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.publicationNextGate p {
+  margin: 0;
+  color: #52627b;
+  font-size: .72rem;
+  line-height: 1.45;
+}
+
+.publicationActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.publicationActions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid rgba(7,26,61,.28);
+  background: linear-gradient(180deg, #fff, #e8eef5);
+  color: var(--royal-blue-deep);
+  font: 800 .54rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.publicationActions a:hover {
+  border-color: var(--osha-blue);
+  background: #fff;
+}
+
+.publicationActions a:focus-visible,
+.publicationProvenance a:focus-visible {
+  outline: 3px solid var(--osha-blue);
+  outline-offset: 2px;
+}
+
+.publicationProvenance {
+  display: grid;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.publicationProvenance > div {
+  min-width: 0;
+  padding: 11px 12px;
+  border: 1px solid rgba(7,26,61,.18);
+  background: rgba(255,255,255,.58);
+}
+
+.publicationProvenance code,
+.publicationProvenance p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #52627b;
+  font-size: .62rem;
+  line-height: 1.45;
+}
+
+.publicationProvenance nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.publicationProvenance nav a {
+  padding: 5px 7px;
+  border: 1px solid rgba(7,26,61,.18);
+  background: #edf2f7;
+  color: var(--royal-blue-deep);
+  font-size: .58rem;
+  font-weight: 750;
+  line-height: 1.25;
+  text-decoration: none;
+}
