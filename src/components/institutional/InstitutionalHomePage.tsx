@@ -53,7 +53,9 @@ export function InstitutionalHomePage() {
 
         <RecentChangesStrip changes={homeRecentChanges} compact />
 
-        <HomeOrientationSection />\n\n        <section className={styles.featuredSection} id="featured-work">
+        <HomeOrientationSection />
+
+        <section className={styles.featuredSection} id="featured-work">
           <InstitutionalSectionHeader
             styles={styles}
             eyebrow={<>FEATURED WORK</>}
