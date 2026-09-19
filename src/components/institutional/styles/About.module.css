@@ -1090,3 +1090,18 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+.aboutGovernanceBridge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 9px 0 5px;
+  border-bottom: 1px solid rgba(11,37,84,.32);
+  color: var(--royal-blue-deep, #0b2554);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .78rem;
+  font-weight: 600;
+}
