@@ -255,47 +255,92 @@ expect(routeRegistry.includes('{ label: "Start here", href: "/v3/start" }'), "fo
 expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "footer route collection must include Contact");
 
 const childRouteContracts = [
-  ["about", ["funding", "appliedWork", "aiGovernance", "evidence", "now", "changes", "collaboration", "founder"]],
-  ["research", ["atlas", "representationAtlas", "aiGovernance", "apparatus", "experiments", "claims", "funding", "collaboration"]],
-  ["products", ["appliedWork", "evidence", "collaboration"]],
-  ["projects", ["appliedWork", "aiGovernance", "evidence", "now", "collaboration"]],
-  ["funding", ["appliedWork", "evidence", "now"]],
-  ["collaboration", ["appliedWork"]],
-  ["appliedWork", ["aiGovernance", "evidence"]],
+  ["about", ["founder", "aiGovernance", "now", "funding", "collaboration", "appliedWork"]],
+  ["research", ["atlas", "representationAtlas", "aiGovernance", "experiments", "claims", "apparatus"]],
+  ["products", ["appliedWork", "evidence", "collaboration", "now"]],
+  ["projects", ["appliedWork", "aiGovernance", "evidence", "now", "collaboration", "apparatus"]],
+  ["publications", ["evidence", "claims", "experiments", "atlas", "apparatus"]],
+  ["funding", ["now", "appliedWork", "evidence", "collaboration"]],
+  ["collaboration", ["appliedWork", "funding", "evidence", "now"]],
+  ["appliedWork", ["aiGovernance", "evidence", "collaboration", "funding", "now"]],
   ["aiGovernance", ["appliedWork", "evidence", "collaboration", "apparatus"]],
-  ["founder", ["evidence"]],
-  ["evidence", ["claims", "now"]],
-  ["apparatus", ["experiments"]],
-  ["experiments", ["atlas", "apparatus", "claims", "evidence"]],
-  ["claims", ["atlas", "evidence", "experiments"]],
-  ["representationAtlas", ["atlas", "apparatus", "collaboration"]],
-  ["now", ["changes"]],
-  ["changes", ["now", "atlas", "evidence"]],
-  ["openLab", ["aiGovernance", "apparatus", "funding", "now", "collaboration"]],
+  ["founder", ["evidence", "now", "collaboration"]],
+  ["evidence", ["claims", "experiments", "atlas", "now"]],
+  ["now", ["changes", "funding", "appliedWork", "collaboration"]],
+  ["changes", ["now", "atlas", "evidence", "apparatus"]],
+  ["apparatus", ["experiments", "atlas", "evidence", "claims"]],
+  ["experiments", ["evidence", "claims", "apparatus", "atlas", "representationAtlas"]],
+  ["claims", ["evidence", "experiments", "atlas", "representationAtlas"]],
+  ["atlas", ["representationAtlas", "apparatus", "experiments", "claims", "evidence"]],
+  ["representationAtlas", ["atlas", "apparatus", "experiments", "collaboration"]],
+  ["openLab", ["collaboration", "aiGovernance", "experiments", "claims", "evidence", "apparatus"]],
+  ["contact", ["collaboration", "appliedWork", "funding"]],
+  ["start", ["appliedWork", "funding", "collaboration", "evidence", "atlas", "now"]],
 ];
+
+const contextualChildPageKeys = [
+  "funding",
+  "appliedWork",
+  "evidence",
+  "experiments",
+  "claims",
+  "now",
+  "changes",
+  "collaboration",
+  "founder",
+  "aiGovernance",
+  "apparatus",
+  "atlas",
+  "representationAtlas",
+];
+
+const coveredChildPages = new Set();
 
 for (const [routeKey, childKeys] of childRouteContracts) {
   const routeStart = routeRegistry.indexOf(`  ${routeKey}: [`);
   expect(routeStart >= 0, `${routeKey} must exist in institutionalChildRoutes`);
   const routeEnd = routeRegistry.indexOf("  ],", routeStart);
   const routeSlice = routeRegistry.slice(routeStart, routeEnd);
+  const declaredChildKeys = [
+    ...routeSlice.matchAll(/institutionalChildPages\.([A-Za-z]+)/g),
+  ].map((match) => match[1]);
+
+  expect(
+    declaredChildKeys.length <= 6,
+    `${routeKey} hero must expose at most six contextual child pages`,
+  );
+  expect(
+    declaredChildKeys.length === childKeys.length,
+    `${routeKey} hero child-page set must stay deliberately curated`,
+  );
+
   for (const childKey of childKeys) {
     expect(
       routeSlice.includes(`institutionalChildPages.${childKey}`),
       `${routeKey} must expose ${childKey} as a contextual child route`,
     );
+    coveredChildPages.add(childKey);
   }
 }
 
-const researchChildRouteStart = routeRegistry.indexOf("  research: [");
-const researchChildRouteEnd = routeRegistry.indexOf("  ],", researchChildRouteStart);
-const researchChildRouteSlice = routeRegistry.slice(researchChildRouteStart, researchChildRouteEnd);
-expect(!researchChildRouteSlice.includes("institutionalChildPages.now"), "Research contextual navigation must not include Now");
+for (const childKey of contextualChildPageKeys) {
+  expect(
+    coveredChildPages.has(childKey),
+    `contextual child page ${childKey} must be linked from at least one route hero`,
+  );
+}
+
+expect(primitives.includes("childLinks?.slice(0, 6)"), "Shared route hero must enforce the six-child visual ceiling");
+expect(primitives.includes("visibleChildLinks.map"), "Shared route hero must render only the bounded child-link set");
 
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
 expect(primitives.includes("routeChildIcon"), "child-page cards must expose typed relationship icons");
 expect(primitives.includes("<small>{link.relation}</small>"), "child-page cards must render their relationship label");
 expect(primitives.includes('aria-label="Child pages"'), "child-page navigation must expose semantic navigation labeling");
+expect(read(`${root}/InstitutionalPublicationsPage.tsx`).includes("childLinks={institutionalChildRoutes.publications}"), "Publications hero must expose relevant contextual children");
+expect(read(`${root}/InstitutionalAtlasPage.tsx`).includes("childLinks={institutionalChildRoutes.atlas}"), "Lab Atlas hero must expose relevant contextual children");
+expect(read(`${root}/InstitutionalContactPage.tsx`).includes("childLinks={institutionalChildRoutes.contact}"), "Contact hero must expose relevant contextual children");
+expect(read(`${root}/InstitutionalStartPage.tsx`).includes("childLinks={institutionalChildRoutes.start}"), "Start hero must expose relevant contextual children");
 expect(!routeRegistry.includes("institutionalRouteFrontDoors"), "route registry must not duplicate page copy");
 expect(!routeRegistry.includes("InstitutionalRouteFrontDoor"), "route registry must remain navigation-only");
 expect(chrome.includes("institutionalFooterGroups"), "footer must use grouped institutional footer navigation");

@@ -110,7 +110,6 @@ export const institutionalChildRoutes = {
     institutionalChildPages.funding,
     institutionalChildPages.collaboration,
     institutionalChildPages.appliedWork,
-    institutionalChildPages.evidence,
   ],
   research: [
     institutionalChildPages.atlas,
@@ -119,7 +118,6 @@ export const institutionalChildRoutes = {
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
     institutionalChildPages.apparatus,
-    institutionalChildPages.evidence,
   ],
   products: [
     institutionalChildPages.appliedWork,
@@ -228,7 +226,6 @@ export const institutionalChildRoutes = {
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
     institutionalChildPages.evidence,
-    institutionalChildPages.funding,
     institutionalChildPages.apparatus,
   ],
   contact: [
