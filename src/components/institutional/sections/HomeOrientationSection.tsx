@@ -60,7 +60,45 @@ function HomeOrientationMiniature({
         className={[styles.homeOrientationMiniature, styles.homeOrientationMosaic].join(" ")}
         aria-hidden="true"
       >
-        {Array.from({ length: 7 }, (_, index) => <span key={index} />)}
+        <span data-kind="people">
+          <svg viewBox="0 0 24 24">
+            <circle cx="9" cy="8" r="2.6" />
+            <circle cx="16.5" cy="9" r="2.1" />
+            <path d="M4.8 18c.5-3 2-4.6 4.5-4.6s4 1.6 4.5 4.6M13.6 14.2c.8-.7 1.8-1 2.9-1 2.1 0 3.4 1.4 3.8 4.1" />
+          </svg>
+        </span>
+        <span data-kind="book">
+          <svg viewBox="0 0 24 24">
+            <path d="M4.5 6.2c2.7-.8 5-.4 7 1.1v11.1c-1.9-1.4-4.2-1.8-7-1zM19.5 6.2c-2.7-.8-5-.4-7 1.1v11.1c1.9-1.4 4.2-1.8 7-1z" />
+          </svg>
+        </span>
+        <span data-kind="idea">
+          <svg viewBox="0 0 24 24">
+            <path d="M8.2 10.1a3.8 3.8 0 1 1 7.6 0c0 1.7-.8 2.7-1.8 3.8-.7.7-1 1.4-1 2.1h-2c0-.7-.3-1.4-1-2.1-1-1.1-1.8-2.1-1.8-3.8zM10.1 19h3.8" />
+          </svg>
+          <i>→</i>
+        </span>
+        <span data-kind="growth">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 19v-7M12 14c-4.1-.2-6.1-2.2-6.3-6.1 4 .2 6 2.2 6.3 6.1zM12 11.5c.3-3.8 2.2-5.7 5.8-5.8-.1 3.7-2 5.6-5.8 5.8z" />
+          </svg>
+        </span>
+        <span data-kind="evidence">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 18h3V12H5zM10.5 18h3V8h-3zM16 18h3V4.5h-3z" />
+          </svg>
+        </span>
+        <span data-kind="document">
+          <svg viewBox="0 0 24 24">
+            <path d="M6.5 3.8h7l4 4v12.4h-11zM13.5 3.8v4h4M9 12h6M9 15.5h5" />
+          </svg>
+        </span>
+        <span data-kind="compass">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="7.3" />
+            <path d="m14.8 8.5-1.7 4.2-4 2 1.7-4.2z" />
+          </svg>
+        </span>
       </div>
     );
   }
@@ -71,7 +109,13 @@ function HomeOrientationMiniature({
         className={[styles.homeOrientationMiniature, styles.homeOrientationStack].join(" ")}
         aria-hidden="true"
       >
-        <span /><span /><span /><span /><span />
+        {["Explore", "Synthesize", "Build", "Transfer"].map((label, index) => (
+          <span key={label}>
+            <b>{String(index + 1).padStart(2, "0")}</b>
+            <em>{label}</em>
+            <i>→</i>
+          </span>
+        ))}
       </div>
     );
   }
@@ -82,9 +126,26 @@ function HomeOrientationMiniature({
         className={[styles.homeOrientationMiniature, styles.homeOrientationBraidMini].join(" ")}
         aria-hidden="true"
       >
-        <div><span /><span /><span /></div>
-        <i>→</i>
-        <strong />
+        <div className={styles.homeOrientationBraidLabels}>
+          <span data-stream="lean">Lean–Agile</span>
+          <span data-stream="science">Scientific method</span>
+          <span data-stream="agentic">Agentic reasoning</span>
+        </div>
+        <svg
+          className={styles.homeOrientationBraidFlow}
+          viewBox="0 0 120 96"
+          preserveAspectRatio="none"
+        >
+          <path data-stream="lean" d="M0 16 C 48 16, 52 47, 103 48" />
+          <path data-stream="science" d="M0 48 C 48 48, 55 48, 103 48" />
+          <path data-stream="agentic" d="M0 80 C 48 80, 52 50, 103 48" />
+          <path className={styles.homeOrientationBraidArrow} d="M98 39 L118 48 L98 57 Z" />
+        </svg>
+        <strong>
+          <svg viewBox="0 0 24 24">
+            <path d="M6 4.5h9l3 3v12H6zM15 4.5v3h3M9 11h6M9 14h6M9 17h4" />
+          </svg>
+        </strong>
       </div>
     );
   }
@@ -94,9 +155,26 @@ function HomeOrientationMiniature({
       className={[styles.homeOrientationMiniature, styles.homeOrientationStewardMini].join(" ")}
       aria-hidden="true"
     >
-      <span>I</span>
-      <span>H</span>
-      <span>E</span>
+      <span data-kind="intellectual">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 4.2c2.2 1.6 4.6 2.2 6.4 2.4-.2 5.8-2.2 9.9-6.4 12.5-4.2-2.6-6.2-6.7-6.4-12.5 1.8-.2 4.2-.8 6.4-2.4z" />
+        </svg>
+        <b>I</b>
+      </span>
+      <span data-kind="humanist">
+        <svg viewBox="0 0 24 24">
+          <circle cx="9" cy="8" r="2.5" />
+          <circle cx="16.5" cy="9" r="2.1" />
+          <path d="M4.8 18c.5-3 2-4.6 4.5-4.6s4 1.6 4.5 4.6M13.7 14.1c.8-.6 1.7-.9 2.8-.9 2.2 0 3.5 1.4 3.9 4.2" />
+        </svg>
+        <b>H</b>
+      </span>
+      <span data-kind="ecological">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 19v-7M12 14c-4.1-.2-6.1-2.2-6.3-6.1 4 .2 6 2.2 6.3 6.1zM12 11.5c.3-3.8 2.2-5.7 5.8-5.8-.1 3.7-2 5.6-5.8 5.8z" />
+        </svg>
+        <b>E</b>
+      </span>
     </div>
   );
 }
