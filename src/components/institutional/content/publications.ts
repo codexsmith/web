@@ -1,3 +1,10 @@
+import { getNode } from "@/lib/content-registry";
+import {
+  publicationEdges,
+  publicationNodes,
+  type PublicationContentNode,
+} from "@/lib/publication-portfolio";
+
 export const publicationFields = [
   ["01", "Status", "What stage has this work actually reached?"],
   ["02", "Claim ceiling", "What can this artifact responsibly support?"],
@@ -123,6 +130,112 @@ export const flagshipPattern = [
   "Revision",
   "Critique",
 ] as const;
+
+
+type CanonicalPublicationNode = PublicationContentNode & {
+  publication: NonNullable<PublicationContentNode["publication"]>;
+};
+
+function hasCanonicalPublication(
+  node: PublicationContentNode,
+): node is CanonicalPublicationNode {
+  return Boolean(node.publication);
+}
+
+const canonicalPublicationCategories = new Map(
+  publicationNodes
+    .filter((node) => !node.publication)
+    .map((node) => [node.id, node.label]),
+);
+
+const canonicalPublicationTone: Record<string, string> = {
+  "publication-essays": "gold",
+  "publication-methods": "blue",
+  "publication-research": "green",
+  "publication-learning": "yellow",
+};
+
+const canonicalPublicationTypeCode: Record<string, string> = {
+  "publication-essays": "ESSAY",
+  "publication-methods": "METHOD",
+  "publication-research": "RESEARCH",
+  "publication-learning": "LEARN",
+};
+
+const publicationSourceBranch = "site/v3-institutional-face";
+
+function sourceHref(sourceRef: string) {
+  return `https://github.com/codexsmith/web/blob/${publicationSourceBranch}/${sourceRef}`;
+}
+
+function rawSourceHref(sourceRef: string) {
+  return `https://raw.githubusercontent.com/codexsmith/web/${publicationSourceBranch}/${sourceRef}`;
+}
+
+/**
+ * Canonical v3 publication registry projection.
+ *
+ * Unlike selectedPublications below (the frozen Atlas/Paper-Mine projection), this
+ * index is derived from the first-class publication portfolio. The website renders
+ * source-owned lifecycle state; it does not invent maturity, version, or relations.
+ */
+export const canonicalPublications = publicationNodes
+  .filter(hasCanonicalPublication)
+  .map((node) => {
+    const publication = node.publication;
+    const href = `/${node.path}`;
+    const related = publicationEdges
+      .filter((edge) => edge.from === node.id)
+      .map((edge) => {
+        const target = getNode(edge.to);
+        return {
+          relation: edge.label,
+          title: target.label,
+          href: target.path ? `/${target.path}` : "/v3/research",
+        };
+      });
+
+    return {
+      id: node.id,
+      featured: node.id === "pub-closure-driven-development",
+      typeCode: canonicalPublicationTypeCode[node.parentId ?? ""] ?? "PUB",
+      type: publication.documentClass,
+      lane: canonicalPublicationCategories.get(node.parentId ?? "") ?? "Publications",
+      domain: publication.audience,
+      title: node.label,
+      abstract: node.summary,
+      claimCeiling:
+        node.body?.[1] ??
+        "The canonical publication record does not declare a stronger claim boundary.",
+      sourceState: `SOURCE OWNED · ${publication.stage.toUpperCase()}`,
+      recordState: publication.label,
+      sourceRef: publication.sourceRef,
+      nextGate: publication.nextGate,
+      surfaces: [
+        publication.version ? `Version ${publication.version}` : "No stable version declared",
+        publication.claimMaturity,
+        publication.audience,
+      ],
+      tone: canonicalPublicationTone[node.parentId ?? ""] ?? "blue",
+      version: publication.version,
+      stage: publication.stage,
+      claimMaturity: publication.claimMaturity,
+      audience: publication.audience,
+      href,
+      sourceHref: sourceHref(publication.sourceRef),
+      rawSourceHref: rawSourceHref(publication.sourceRef),
+      citation: `Boundary First Labs. “${node.label}.” ${publication.documentClass}${publication.version ? `, ${publication.version}` : ""}. Canonical record: ${href}.`,
+      related,
+    };
+  });
+
+export const canonicalPublicationStageCounts = canonicalPublications.reduce<Record<string, number>>(
+  (counts, publication) => {
+    counts[publication.stage] = (counts[publication.stage] ?? 0) + 1;
+    return counts;
+  },
+  {},
+);
 
 
 /**
