@@ -25,7 +25,7 @@
   z-index: var(--reflow-motion-z, 100);
 }
 
-.field[data-reflow-mode="flow"] .item[data-reflow-state="selected"] {
+.field[data-reflow-mode="flow"] > .item[data-reflow-state="selected"] {
   grid-column: 1 / -1;
   z-index: 2;
 }
@@ -35,17 +35,17 @@
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  .item:not([data-reflow-state="selected"]) {
+  > .item:not([data-reflow-state="selected"]) {
   grid-column: span var(--reflow-focus-span, 4);
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  .item[data-reflow-placement="before"] {
+  > .item[data-reflow-placement="before"] {
   order: 1;
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  .item[data-reflow-placement="selected"] {
+  > .item[data-reflow-placement="selected"] {
   order: 2;
   grid-column:
     var(--reflow-selected-start, 2)
@@ -54,7 +54,7 @@
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  .item[data-reflow-placement="after"] {
+  > .item[data-reflow-placement="after"] {
   order: 3;
 }
 
@@ -64,7 +64,7 @@
   grid-auto-flow: row;
 }
 
-.field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] .item {
+.field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item {
   grid-column: span var(--reflow-rectangle-span, 20);
 }
 
@@ -73,7 +73,7 @@
     grid-template-columns: 1fr;
   }
 
-  .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] .item {
+  .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item {
     grid-column: 1;
   }
 }
