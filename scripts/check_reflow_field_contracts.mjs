@@ -205,6 +205,9 @@ expect(!homeOrientation.includes("Start with why you came, not with the Lab&apos
 expect(!homeOrientation.includes("<h2>Three practical lineages braid into one recursive method.</h2>"), "Operating Braid detail must not repeat its selected summary title");
 expect(!homeOrientation.includes("<h2>What succeeds still has to be cared for.</h2>"), "Stewardship detail must not repeat its selected summary title");
 expect(!homeOrientation.includes("InstitutionalSectionLead"), "Our Approach detail must use a title-free inner lead");
+expect(!homeOrientation.includes("audienceEntryLead"), "Choose Your Own Path detail must not retain a redundant left sidebar");
+expect(homeOrientation.includes("homeOrientationSummaryAction"), "Choose Your Own Path must expose its all-paths action in the selected header");
+expect(homeOrientation.includes("homeOrientationAudienceDetail"), "Choose Your Own Path audience grid must use the full expanded detail width");
 expect(homeCss.includes(".homeOrientationMosaic"), "Choose Your Own Path must expose a mosaic preview");
 expect(homeCss.includes(".homeOrientationStack"), "Our Approach must expose stacked-row preview");
 expect(homeCss.includes(".homeOrientationBraidMini"), "Operating Braid must expose a three-to-one preview");
