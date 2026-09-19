@@ -24,11 +24,45 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Check runtime and dependency floors
+        run: node scripts/check_runtime_hardening.mjs
+
+      - name: Audit high-severity dependency vulnerabilities
+        run: |
+          if npm audit --audit-level=high; then
+            exit 0
+          fi
+
+          cp package-lock.json /tmp/package-lock.before.json
+          npm audit fix --package-lock-only --ignore-scripts || true
+
+          echo "::group::npm audit compatible lockfile proposal"
+          node <<'NODE'
+          const fs = require("node:fs");
+          const before = JSON.parse(fs.readFileSync("/tmp/package-lock.before.json", "utf8"));
+          const after = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
+          const keys = new Set([
+            ...Object.keys(before.packages || {}),
+            ...Object.keys(after.packages || {}),
+          ]);
+          const changed = {};
+          for (const key of [...keys].sort()) {
+            const a = before.packages?.[key];
+            const b = after.packages?.[key];
+            if (JSON.stringify(a) !== JSON.stringify(b)) {
+              changed[key] = b ?? null;
+            }
+          }
+          console.log(JSON.stringify(changed));
+          NODE
+          echo "::endgroup::"
+          exit 1
 
       - name: Check v2 architecture contracts
         run: npm run contracts:check

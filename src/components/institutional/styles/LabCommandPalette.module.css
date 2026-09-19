@@ -17,11 +17,15 @@
   background: rgba(255,255,255,.10);
 }
 
+.trigger:focus,
 .trigger:focus-visible,
+.closeButton:focus,
 .closeButton:focus-visible,
+.result:focus,
 .result:focus-visible {
-  outline: 2px solid var(--old-gold);
-  outline-offset: 2px;
+  outline: 3px solid #d6b449 !important;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(214, 180, 73, .42) !important;
 }
 
 .triggerIcon {
