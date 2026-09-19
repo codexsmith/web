@@ -31,7 +31,11 @@ expect(chrome.includes("IntersectionObserver"), "Institutional header must obser
 expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
 expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
 expect(chrome.includes("<LabCommandPalette />"), "Institutional header must mount global Lab command navigation");
-expect(chrome.includes('href="/v3/start"'), "Institutional header must expose the audience traversal utility");
+expect(!chrome.includes('href="/v3/start"'), "Institutional header must not duplicate the homepage audience traversal entry");
+expect(!chrome.includes("Start here"), "Institutional header must not render the retired Start here control");
+expect(commandPalette.includes('title="Search Lab (⌘/Ctrl K)"'), "Lab search trigger must preserve a discoverable shortcut tooltip");
+expect(!commandPalette.includes("<span>Search Lab</span>"), "Lab search trigger must remain icon-only");
+expect(!commandPalette.includes("<kbd>⌘/Ctrl K</kbd>"), "Lab search trigger must not render shortcut chrome in the header");
 expect(chrome.includes(">\n          Start here\n        </Link>"), "Audience traversal utility must remain visibly labeled Start here");
 expect(commandPalette.startsWith('"use client";'), "Lab command palette must own its bounded browser interaction");
 expect(commandPalette.includes("event.metaKey || event.ctrlKey"), "Lab command palette must support Command/Ctrl-K");
