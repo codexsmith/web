@@ -18,7 +18,7 @@ export const projects = [
     type: "Registered research product / product family",
     status: "research_product",
     tone: "product",
-    href: "/v3/products/boundary-first-chess",
+    href: "/products/boundary-first-chess",
     domain: "Game / education / media / analysis",
     stress: "Bounded state, explanation, pedagogy, audience legibility",
     transfer:
@@ -38,7 +38,7 @@ export const projects = [
     type: "Agentic reasoning × scientific-method research product",
     status: "research_product",
     tone: "research",
-    href: "/v3/products/agentic-scientific-method",
+    href: "/products/agentic-scientific-method",
     domain: "Scientific research / AI / research automation",
     stress: "Theory representation, evaluation, repair, authority",
     transfer:
@@ -58,7 +58,7 @@ export const projects = [
     type: "Registered software product family",
     status: "active_build",
     tone: "build",
-    href: "/v3/products/youtube-knowledge-explorer",
+    href: "/products/youtube-knowledge-explorer",
     domain: "Software / media knowledge",
     stress: "Representation change, navigation, provenance",
     transfer:
@@ -78,7 +78,7 @@ export const projects = [
     type: "Applied computational research scaffold / benchmark program / pilot candidate",
     status: "NO ADMITTED PROD-* IDENTITY",
     tone: "scaffold",
-    href: "/v3/products/boundary-first-weather",
+    href: "/products/boundary-first-weather",
     domain: "Atmospheric computation / public science",
     stress: "Physical baselines, flux, multiscale closure, computational evidence",
     transfer:
@@ -98,7 +98,7 @@ export const projects = [
     type: "Active public-interest research case",
     status: "CASE_CANDIDATE / RESEARCH_ACTIVE / NOT_PROMOTED",
     tone: "civic",
-    href: "/v3/projects/augusta-maintenance-debt",
+    href: "/projects/augusta-maintenance-debt",
     domain: "Public infrastructure / institutions",
     stress: "Provenance, accounting distinctions, uncertainty, public consequence",
     transfer:
