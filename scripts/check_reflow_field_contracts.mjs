@@ -193,6 +193,7 @@ expect(!home.includes("\\n\\n"), "Homepage must not render escaped newline liter
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
 expect(homeOrientation.includes("animatePeers"), "Homepage orientation must animate context peers with the selected card");
+expect(homeOrientation.includes('focusPeerPlacement="before"'), "Homepage orientation must keep all three context peers together before the selected card");
 expect(homeOrientation.includes("itemOrder={homeOrientationOrder}"), "Homepage orientation must declare stable source ordering");
 expect((homeOrientation.match(/<ReflowFieldItem/g) || []).length === 4, "Homepage orientation must expose exactly four Reflow sections");
 for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) {
@@ -224,5 +225,8 @@ expect(augustaCss.includes('grid-row: 2'), "Augusta civic case REST state must v
 expect(augustaCss.includes("height: 112px"), "Augusta focus-stage peers must contract to compact context plates");
 expect(augustaCss.includes('.caseStage[data-reflow-state="selected"]'), "Augusta selected stage must have an explicit committed-inspection state");
 expect(augustaCss.includes(".caseCycleReturn"), "Augusta cycle must visibly return new evidence to the claim-boundary stage");
+
+expect(reflow.includes('data-reflow-field={fieldId}'), "Reflow must mark field boundaries for nested interaction");
+expect(reflow.includes("clickBelongsToNestedReflowField"), "Reflow must let nested fields own their own card clicks");
 
 console.log("BFUX Reflow Field contracts passed.");
