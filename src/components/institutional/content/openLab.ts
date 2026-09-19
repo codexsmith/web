@@ -1,3 +1,43 @@
+export const openLabSourceProjection = {
+  repository: "codexsmith/boundary-first-labs",
+  sourceRevision: "1dbd3f5b53e55c8feff5230836ce11dc928cba69",
+  sourceDate: "2026-09-18",
+  authorityCeiling:
+    "Source-governed design semantics for public participation. These sources do not by themselves authorize collection, promise response capacity, or permit sensitive-material intake.",
+  pageProjection: {
+    path: "organized_library_curated/06_Website_Content/0602_Public_Projection/open_lab_participation_v3_v0_1.md",
+    lifecycle: "candidate",
+    institutionalStage: "design / backlog",
+    humanReviewed: false,
+  },
+  privacyProtocol: {
+    path: "organized_library_curated/999_Library/03_Domains/00_socio_technical_systems__cross_domain_program/08_bfl_participation_protocol__socio_technical_system/03_PRIVACY_DIGITAL_RIGHTS_AND_DISCLOSURE.md",
+    rule: "Collect the distinction required for the operation, not the maximum information available.",
+  },
+  criticismProtocol: {
+    path: "organized_library_curated/999_Library/03_Domains/03_engineered_systems__domain_family/01_software_engineering__domain/01_boundary_first_ux__product/operational/governed_criticism_and_defect_intake.md",
+    authorityStatus: "working_operational_protocol",
+  },
+} as const;
+
+export const OPEN_LAB_INTAKE_SCHEMA = "bfl.open-lab-intake.v1";
+
+export type OpenLabRuntimeGate = {
+  id: string;
+  label: string;
+  ready: boolean;
+  detail: string;
+};
+
+export type OpenLabRuntimeConfig = {
+  enabled: boolean;
+  schema: typeof OPEN_LAB_INTAKE_SCHEMA;
+  policyVersion: string | null;
+  retentionDays: number | null;
+  sourceRevision: string;
+  gates: readonly OpenLabRuntimeGate[];
+};
+
 export const participationContracts = [
   {
     code: "01",
@@ -128,4 +168,71 @@ export const capabilityOutcomes = [
   "Research infrastructure",
   "A public artifact",
   "A relationship with a better long-term steward",
+] as const;
+
+
+export type OpenLabSubmissionType = (typeof participationContracts)[number]["type"];
+
+export function isOpenLabSubmissionType(value: string): value is OpenLabSubmissionType {
+  return participationContracts.some((contract) => contract.type === value);
+}
+
+export const openLabReviewStates = [
+  {
+    state: "received",
+    meaning: "The governed receiver accepted the versioned intake envelope. No substantive judgment has been made.",
+  },
+  {
+    state: "acknowledged",
+    meaning: "A receipt or human acknowledgement has been issued when the contact mode permits it.",
+  },
+  {
+    state: "triaged",
+    meaning: "The submission has a declared route, owner, duplicate status, or bounded reason it cannot proceed.",
+  },
+  {
+    state: "under_review",
+    meaning: "Evidence, reproduction, fit, authority, safety, or stewardship questions are being examined.",
+  },
+  {
+    state: "dispositioned",
+    meaning: "The Lab has declared an outcome such as proceed, request evidence, refer, accept criticism, dispute with reasons, archive, or decline.",
+  },
+  {
+    state: "closed",
+    meaning: "Required downstream actions are resolved, routed, or explicitly preserved as open. Closed does not mean disproven.",
+  },
+] as const;
+
+export const openLabCollectionRules = [
+  {
+    label: "PRIVATE REVIEW FIRST",
+    description:
+      "Initial submission authorizes bounded internal review and routing only. Publication permission is not granted by intake.",
+  },
+  {
+    label: "NO FILE UPLOADS / NO SECRETS",
+    description:
+      "The public boundary accepts text and public links only. Credentials, private keys, protected personal data, confidential proprietary material, and other sensitive payloads stay out.",
+  },
+  {
+    label: "PSEUDONYMOUS OR NO-REPLY IS ALLOWED",
+    description:
+      "A submitter may use a pseudonym and may decline a reply path. Epistemic force is not made dependent on prestige or legal identity.",
+  },
+  {
+    label: "RETENTION MUST BE DECLARED",
+    description:
+      "The site does not enable submission unless a deployment declares a policy version and retention window alongside an authenticated receiver.",
+  },
+  {
+    label: "NO AUTOMATIC PUBLICATION",
+    description:
+      "A public response request is not publication consent. Quotation, attribution, or publication requires a separate consent decision.",
+  },
+  {
+    label: "ROUTING PRESERVES THE ORIGINAL",
+    description:
+      "Internal classification may add state, but it must not silently rewrite the submitter's original statement, evidence links, or requested outcome.",
+  },
 ] as const;
