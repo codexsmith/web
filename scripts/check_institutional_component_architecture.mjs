@@ -193,6 +193,7 @@ for (const file of [
   "InstitutionalFounderPage.tsx",
   "InstitutionalCollaborationPage.tsx",
   "InstitutionalAppliedWorkPage.tsx",
+  "InstitutionalAiGovernancePage.tsx",
   "InstitutionalEvidencePage.tsx",
   "InstitutionalExperimentsPage.tsx",
   "InstitutionalNowPage.tsx",
@@ -219,6 +220,7 @@ expect(topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must remain a
 expect(!topLevelRouteRegistry.includes('/v3/founder'), "Founder must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/ai-governance'), "AI Governance must remain a first-class secondary route rather than primary top navigation");
 expect(!topLevelRouteRegistry.includes('/v3/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/experiments'), "Experiments must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/claims'), "Claims must remain a contextual route rather than top-level navigation");
@@ -235,6 +237,7 @@ expect(routeRegistry.includes('{ label: "Representation Atlas", href: "/v3/repre
 expect(routeRegistry.includes('{ label: "Experiments", href: "/v3/experiments" }'), "footer route collection must include Experiments");
 expect(routeRegistry.includes('{ label: "Claims", href: "/v3/claims" }'), "footer route collection must include Claims");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
+expect(routeRegistry.includes('{ label: "AI Governance", href: "/v3/ai-governance" }'), "footer route collection must include AI Governance");
 expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboration" }'), "footer route collection must include Collaboration");
 expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
 expect(routeRegistry.includes('{ label: "Evidence", href: "/v3/evidence" }'), "footer route collection must include Evidence");
