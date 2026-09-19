@@ -44,6 +44,7 @@ function safeFragment(value: string) {
 
 const RECTANGLE_GRID_COLUMNS = 60;
 const MAX_RECTANGLE_ROW_ITEMS = 6;
+const MAX_FOCUS_PEER_ROW_ITEMS = 4;
 
 function rectangleTileForIndex(itemCount: number, itemIndex: number) {
   if (itemCount <= 0 || itemIndex < 0 || itemIndex >= itemCount) return null;
@@ -65,6 +66,37 @@ function rectangleTileForIndex(itemCount: number, itemIndex: number) {
       return {
         rowIndex,
         rowSize,
+        span: RECTANGLE_GRID_COLUMNS / rowSize,
+      };
+    }
+    cursor += rowSize;
+  }
+
+  return null;
+}
+
+function focusPeerRowCount(peerCount: number) {
+  if (peerCount <= 0) return 1;
+  return peerCount <= MAX_FOCUS_PEER_ROW_ITEMS
+    ? 1
+    : Math.ceil(peerCount / MAX_FOCUS_PEER_ROW_ITEMS);
+}
+
+function focusPeerTileForIndex(peerCount: number, peerIndex: number) {
+  if (peerCount <= 0 || peerIndex < 0 || peerIndex >= peerCount) return null;
+
+  const rowCount = focusPeerRowCount(peerCount);
+  const baseRowSize = Math.floor(peerCount / rowCount);
+  const widerRows = peerCount % rowCount;
+
+  let cursor = 0;
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+    const rowSize = baseRowSize + (rowIndex < widerRows ? 1 : 0);
+    if (peerIndex < cursor + rowSize) {
+      return {
+        rowIndex,
+        rowSize,
+        rowCount,
         span: RECTANGLE_GRID_COLUMNS / rowSize,
       };
     }
@@ -122,7 +154,8 @@ const detailTransition = {
  * BFUX Reflow Field.
  *
  * Motion owns geometry interpolation. CSS owns final layout.
- * Rectangle rest layout tiles every row edge-to-edge; ragged orphan cards are not permitted.
+ * Focus-stage rests tile into a closed rectangle by default.
+ * Selected focus peers use one row through four peers, then balanced rows of at most four.
  * Selection reallocates representational bandwidth; it does not mutate,
  * promote, rank, or otherwise change the represented object.
  */
@@ -135,7 +168,7 @@ export function ReflowField({
   itemOrder = [],
   animatePeers = false,
   focusPeerPlacement = "split",
-  restLayout = "natural",
+  restLayout,
 }: {
   children: ReactNode;
   className?: string;
@@ -172,8 +205,13 @@ export function ReflowField({
   const peerCount = selectedId
     ? Math.max(itemOrder.length - 1, 1)
     : Math.max(itemOrder.length, 1);
+  const peerRowCount = focusPeerRowCount(peerCount);
+  const resolvedRestLayout =
+    restLayout ?? (layoutMode === "focus-stage" ? "rectangle" : "natural");
   const fieldStyle = {
     "--reflow-peer-count": peerCount,
+    "--reflow-peer-row-count": peerRowCount,
+    "--reflow-selected-row": peerRowCount + 1,
   } as CSSProperties;
 
   const context = useMemo(
@@ -185,7 +223,7 @@ export function ReflowField({
       itemOrder,
       animatePeers,
       focusPeerPlacement,
-      restLayout,
+      restLayout: resolvedRestLayout,
       setSelection,
     }),
     [
@@ -196,7 +234,7 @@ export function ReflowField({
       itemOrder,
       animatePeers,
       focusPeerPlacement,
-      restLayout,
+      resolvedRestLayout,
       setSelection,
     ],
   );
@@ -210,7 +248,7 @@ export function ReflowField({
           data-reflow-field={fieldId}
           data-reflow-active={selectedId ? "true" : "false"}
           data-reflow-mode={layoutMode}
-          data-reflow-rest-layout={restLayout}
+          data-reflow-rest-layout={resolvedRestLayout}
           style={fieldStyle}
           onKeyDown={(event) => {
             if (event.key === "Escape" && selectedId !== null) {
@@ -268,11 +306,23 @@ export function ReflowFieldItem({
     context.restLayout === "rectangle"
       ? rectangleTileForIndex(context.itemOrder.length, itemIndex)
       : null;
-  const rectangleStyle = rectangleTile
-    ? ({
-        "--reflow-rectangle-span": rectangleTile.span,
-      } as CSSProperties)
-    : undefined;
+  const peerTile =
+    context.layoutMode === "focus-stage" &&
+    context.selectedId !== null &&
+    !selected
+      ? focusPeerTileForIndex(remainingIds.length, remainingIndex)
+      : null;
+  const itemStyle = {
+    ...(rectangleTile
+      ? { "--reflow-rectangle-span": rectangleTile.span }
+      : {}),
+    ...(peerTile
+      ? {
+          "--reflow-peer-span": peerTile.span,
+          "--reflow-peer-row": peerTile.rowIndex + 1,
+        }
+      : {}),
+  } as CSSProperties;
   const placement =
     context.layoutMode !== "focus-stage" || context.selectedId === null
       ? "rest"
@@ -309,8 +359,10 @@ export function ReflowFieldItem({
       data-reflow-motion-carrier={carriesMotion ? "true" : "false"}
       data-reflow-row={rectangleTile?.rowIndex}
       data-reflow-row-size={rectangleTile?.rowSize}
+      data-reflow-peer-row={peerTile?.rowIndex}
+      data-reflow-peer-row-size={peerTile?.rowSize}
       data-tone={dataTone}
-      style={rectangleStyle}
+      style={itemStyle}
       onClick={handleSurfaceClick}
     >
       <button
