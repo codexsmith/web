@@ -2902,6 +2902,24 @@
   line-height: 1.45;
 }
 
+.homeOrientationSummaryAction {
+  width: fit-content;
+  display: none;
+  align-items: center;
+  gap: 9px;
+  margin-top: 11px;
+  padding: 5px 0 3px;
+  border-bottom: 1px solid var(--institution-accent);
+  color: var(--institution-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .74rem;
+  text-decoration: none;
+}
+
+.homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummaryAction {
+  display: inline-flex;
+}
+
 .homeOrientationMiniature {
   width: 100%;
   max-width: 210px;
@@ -3130,7 +3148,13 @@
   border-top: 1px solid #fff;
 }
 
-.homeOrientationDetail .audienceEntrySection,
+.homeOrientationAudienceDetail {
+  padding: 28px 24px 30px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.74), transparent 18%),
+    linear-gradient(180deg, #e7edef, #f4f6f5);
+}
+
 .homeOrientationDetail .methodSection,
 .homeOrientationDetail .practiceLineage,
 .homeOrientationDetail .stewardshipBand {
@@ -3208,7 +3232,7 @@
     gap: 10px;
   }
 
-  .homeOrientationDetail .audienceEntrySection,
+  .homeOrientationAudienceDetail,
   .homeOrientationDetail .methodSection,
   .homeOrientationDetail .practiceLineage,
   .homeOrientationDetail .stewardshipBand {
