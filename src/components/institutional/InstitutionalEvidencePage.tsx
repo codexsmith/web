@@ -8,6 +8,7 @@ import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 import { institutionalChildRoutes } from "./institutionalRoutes";
+import { EpistemicChainSection } from "./sections/EpistemicChainSection";
 import {
   evidenceClasses,
   evidenceLadder,
@@ -124,6 +125,8 @@ export function InstitutionalEvidencePage() {
           ))}
         </div>
       </section>
+
+      <EpistemicChainSection />
 
       <section className={styles.evidenceLadderSection}>
         <div className={styles.evidenceLadderLead}>
