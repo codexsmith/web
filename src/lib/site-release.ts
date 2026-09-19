@@ -6,7 +6,7 @@ export const institutionalIndexingEnabled =
   process.env.BFL_V3_INDEXABLE?.trim().toLowerCase() === "true";
 
 export const institutionalPublicRoutes = [
-  "/v3",
+  "/",
   "/v3/about",
   "/v3/apparatus",
   "/v3/applied-work",
