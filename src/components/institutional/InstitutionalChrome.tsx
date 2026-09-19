@@ -77,13 +77,6 @@ export function InstitutionalHeader() {
       </nav>
 
       <div className={styles.headerTools}>
-        <Link
-          className={styles.labLink}
-          href="/v3/start"
-          aria-current={pathname === "/v3/start" ? "page" : undefined}
-        >
-          Start here
-        </Link>
         <LabCommandPalette />
       </div>
     </header>

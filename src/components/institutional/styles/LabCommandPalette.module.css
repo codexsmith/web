@@ -1,22 +1,20 @@
 .trigger {
-  min-height: 38px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 10px;
-  border: 1px solid var(--institution-line-strong);
-  background: rgba(255, 255, 255, 0.82);
-  color: var(--institution-ink);
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #f7f9fc;
+  box-shadow: none;
   cursor: pointer;
-  font: 700 0.62rem/1 Arial, Helvetica, sans-serif;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
 }
 
 .trigger:hover,
 .trigger:focus-visible {
-  border-color: var(--old-gold-dark);
-  background: #fff;
+  background: rgba(255,255,255,.10);
 }
 
 .trigger:focus-visible,
@@ -26,7 +24,16 @@
   outline-offset: 2px;
 }
 
-.triggerIcon,
+.triggerIcon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .inputRow svg {
   width: 15px;
   height: 15px;
