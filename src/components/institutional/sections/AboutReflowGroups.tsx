@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { ReflowField, ReflowFieldItem } from "@/components/bfux/ReflowField";
 import { formatOrdinal } from "../institutionalFormat";
 import foundationStyles from "../styles/InstitutionalFoundation.module.css";
@@ -410,6 +411,11 @@ export function AboutReflowGroups() {
                   </div>
                 ))}
               </div>
+
+              <Link className={styles.aboutGovernanceBridge} href="/v3/ai-governance">
+                AI makes this agency question operational: inspect the Lab&apos;s AI governance doctrine
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </AboutContextCard>
         </ReflowField>

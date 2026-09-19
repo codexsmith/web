@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { ReflowField, ReflowFieldItem } from "@/components/bfux/ReflowField";
 import { InstitutionalSectionHeader } from "../InstitutionalPrimitives";
 import { formatOrdinal } from "../institutionalFormat";
@@ -118,6 +119,10 @@ export function OpenLabContextSection() {
                 The institution should be able to receive information without pretending every
                 submission is correct, actionable, or within scope.
               </blockquote>
+              <Link className={styles.openLabGovernanceBridge} href="/v3/ai-governance">
+                Inspect the Lab&apos;s AI agency and accountability doctrine
+                <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </OpenLabContextCard>
 

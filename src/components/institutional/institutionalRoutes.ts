@@ -72,6 +72,13 @@ const institutionalChildPages = {
     kind: "provenance",
     tone: "slate",
   },
+  aiGovernance: {
+    label: "AI Governance",
+    href: "/v3/ai-governance",
+    relation: "GOVERNANCE",
+    kind: "governance",
+    tone: "orange",
+  },
   apparatus: {
     label: "Apparatus",
     href: "/v3/apparatus",
@@ -98,19 +105,19 @@ const institutionalChildPages = {
 export const institutionalChildRoutes = {
   about: [
     institutionalChildPages.founder,
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.now,
     institutionalChildPages.funding,
     institutionalChildPages.collaboration,
     institutionalChildPages.appliedWork,
-    institutionalChildPages.evidence,
   ],
   research: [
     institutionalChildPages.atlas,
     institutionalChildPages.representationAtlas,
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
     institutionalChildPages.apparatus,
-    institutionalChildPages.evidence,
   ],
   products: [
     institutionalChildPages.appliedWork,
@@ -120,6 +127,7 @@ export const institutionalChildRoutes = {
   ],
   projects: [
     institutionalChildPages.appliedWork,
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.evidence,
     institutionalChildPages.now,
     institutionalChildPages.collaboration,
@@ -145,10 +153,17 @@ export const institutionalChildRoutes = {
     institutionalChildPages.now,
   ],
   appliedWork: [
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.evidence,
     institutionalChildPages.collaboration,
     institutionalChildPages.funding,
     institutionalChildPages.now,
+  ],
+  aiGovernance: [
+    institutionalChildPages.appliedWork,
+    institutionalChildPages.evidence,
+    institutionalChildPages.collaboration,
+    institutionalChildPages.apparatus,
   ],
   founder: [
     institutionalChildPages.evidence,
@@ -207,10 +222,10 @@ export const institutionalChildRoutes = {
   ],
   openLab: [
     institutionalChildPages.collaboration,
+    institutionalChildPages.aiGovernance,
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
     institutionalChildPages.evidence,
-    institutionalChildPages.funding,
     institutionalChildPages.apparatus,
   ],
   contact: [
@@ -234,6 +249,7 @@ export const institutionalFooterGroups = [
     label: "Institution",
     routes: [
       { label: "About", href: "/v3/about" },
+      { label: "AI Governance", href: "/v3/ai-governance" },
       { label: "Start here", href: "/v3/start" },
       { label: "Founder", href: "/v3/founder" },
       { label: "Now", href: "/v3/now" },

@@ -126,6 +126,10 @@ const routeContracts = [
     "appliedWork"
   ],
   [
+    "InstitutionalAiGovernancePage.tsx",
+    "aiGovernance"
+  ],
+  [
     "InstitutionalEvidencePage.tsx",
     "evidence"
   ],
@@ -197,6 +201,7 @@ for (const file of [
   "InstitutionalFounderPage.tsx",
   "InstitutionalCollaborationPage.tsx",
   "InstitutionalAppliedWorkPage.tsx",
+  "InstitutionalAiGovernancePage.tsx",
   "InstitutionalEvidencePage.tsx",
   "InstitutionalExperimentsPage.tsx",
   "InstitutionalNowPage.tsx",
@@ -223,6 +228,7 @@ expect(!topLevelRouteRegistry.includes('/v3/apparatus'), "Apparatus must stay ou
 expect(!topLevelRouteRegistry.includes('/v3/founder'), "Founder must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/ai-governance'), "AI Governance must remain a first-class secondary route rather than primary top navigation");
 expect(!topLevelRouteRegistry.includes('/v3/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/experiments'), "Experiments must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/claims'), "Claims must remain a contextual route rather than top-level navigation");
@@ -239,6 +245,7 @@ expect(routeRegistry.includes('{ label: "Representation Atlas", href: "/v3/repre
 expect(routeRegistry.includes('{ label: "Experiments", href: "/v3/experiments" }'), "footer route collection must include Experiments");
 expect(routeRegistry.includes('{ label: "Claims", href: "/v3/claims" }'), "footer route collection must include Claims");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
+expect(routeRegistry.includes('{ label: "AI Governance", href: "/v3/ai-governance" }'), "footer route collection must include AI Governance");
 expect(routeRegistry.includes('{ label: "Collaboration", href: "/v3/collaboration" }'), "footer route collection must include Collaboration");
 expect(routeRegistry.includes('{ label: "Applied Work", href: "/v3/applied-work" }'), "footer route collection must include Applied Work");
 expect(routeRegistry.includes('{ label: "Evidence", href: "/v3/evidence" }'), "footer route collection must include Evidence");
@@ -248,14 +255,15 @@ expect(routeRegistry.includes('{ label: "Start here", href: "/v3/start" }'), "fo
 expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "footer route collection must include Contact");
 
 const childRouteContracts = [
-  ["about", ["founder", "now", "funding", "collaboration", "appliedWork", "evidence"]],
-  ["research", ["atlas", "representationAtlas", "experiments", "claims", "apparatus", "evidence"]],
+  ["about", ["founder", "aiGovernance", "now", "funding", "collaboration", "appliedWork"]],
+  ["research", ["atlas", "representationAtlas", "aiGovernance", "experiments", "claims", "apparatus"]],
   ["products", ["appliedWork", "evidence", "collaboration", "now"]],
-  ["projects", ["appliedWork", "evidence", "now", "collaboration", "apparatus"]],
+  ["projects", ["appliedWork", "aiGovernance", "evidence", "now", "collaboration", "apparatus"]],
   ["publications", ["evidence", "claims", "experiments", "atlas", "apparatus"]],
   ["funding", ["now", "appliedWork", "evidence", "collaboration"]],
   ["collaboration", ["appliedWork", "funding", "evidence", "now"]],
-  ["appliedWork", ["evidence", "collaboration", "funding", "now"]],
+  ["appliedWork", ["aiGovernance", "evidence", "collaboration", "funding", "now"]],
+  ["aiGovernance", ["appliedWork", "evidence", "collaboration", "apparatus"]],
   ["founder", ["evidence", "now", "collaboration"]],
   ["evidence", ["claims", "experiments", "atlas", "now"]],
   ["now", ["changes", "funding", "appliedWork", "collaboration"]],
@@ -265,7 +273,7 @@ const childRouteContracts = [
   ["claims", ["evidence", "experiments", "atlas", "representationAtlas"]],
   ["atlas", ["representationAtlas", "apparatus", "experiments", "claims", "evidence"]],
   ["representationAtlas", ["atlas", "apparatus", "experiments", "collaboration"]],
-  ["openLab", ["collaboration", "experiments", "claims", "evidence", "funding", "apparatus"]],
+  ["openLab", ["collaboration", "aiGovernance", "experiments", "claims", "evidence", "apparatus"]],
   ["contact", ["collaboration", "appliedWork", "funding"]],
   ["start", ["appliedWork", "funding", "collaboration", "evidence", "atlas", "now"]],
 ];
@@ -280,6 +288,7 @@ const contextualChildPageKeys = [
   "changes",
   "collaboration",
   "founder",
+  "aiGovernance",
   "apparatus",
   "atlas",
   "representationAtlas",

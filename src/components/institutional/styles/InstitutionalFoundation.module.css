@@ -640,7 +640,7 @@
 
 .postureGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   margin-top: 16px;
 }
@@ -668,6 +668,10 @@
 
 .postureCard[data-posture-tone="transfer"] {
   border-top-color: var(--osha-green);
+}
+
+.postureCard[data-posture-tone="governance"] {
+  border-top-color: var(--old-gold);
 }
 
 .postureEyebrow {

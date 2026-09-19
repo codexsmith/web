@@ -1277,3 +1277,18 @@
 .openLabCloseLinks a span {
   color: var(--old-gold-bright);
 }
+
+
+.openLabGovernanceBridge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 8px 0 5px;
+  border-bottom: 1px solid rgba(11,37,84,.32);
+  color: var(--royal-blue-deep, #0b2554);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .76rem;
+  font-weight: 600;
+}
