@@ -1,9 +1,6 @@
 name: Website v3 release QA
 
 on:
-  push:
-    branches:
-      - agent/v3-release-sweep
   pull_request:
     branches:
       - site/v3-institutional-face
