@@ -156,6 +156,10 @@ const routeContracts = [
   [
     "InstitutionalAtlasPage.tsx",
     "atlas"
+  ],
+  [
+    "InstitutionalRepresentationAtlasPage.tsx",
+    "representationAtlas"
   ]
 ];
 
@@ -221,11 +225,13 @@ expect(!topLevelRouteRegistry.includes('/v3/claims'), "Claims must remain a cont
 expect(!topLevelRouteRegistry.includes('/v3/now'), "Now / Roadmap must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/contact'), "Contact must remain outside top-level header navigation");
 expect(!topLevelRouteRegistry.includes('/v3/atlas'), "Lab Atlas must remain a contextual route rather than top-level navigation");
+expect(!topLevelRouteRegistry.includes('/v3/representation-atlas'), "Representation Atlas must remain a contextual route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/v3/start'), "Start here must remain a utility route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/v3/apparatus" }'), "footer route collection must include Apparatus");
 expect(routeRegistry.includes('{ label: "Lab Atlas", href: "/v3/atlas" }'), "footer route collection must include Lab Atlas");
+expect(routeRegistry.includes('{ label: "Representation Atlas", href: "/v3/representation-atlas" }'), "footer route collection must include Representation Atlas");
 expect(routeRegistry.includes('{ label: "Experiments", href: "/v3/experiments" }'), "footer route collection must include Experiments");
 expect(routeRegistry.includes('{ label: "Claims", href: "/v3/claims" }'), "footer route collection must include Claims");
 expect(routeRegistry.includes('{ label: "Founder", href: "/v3/founder" }'), "footer route collection must include Founder");
@@ -239,7 +245,7 @@ expect(routeRegistry.includes('{ label: "Contact", href: "/v3/contact" }'), "foo
 
 const childRouteContracts = [
   ["about", ["funding", "appliedWork", "evidence", "now", "changes", "collaboration", "founder"]],
-  ["research", ["atlas", "apparatus", "experiments", "claims", "funding", "collaboration"]],
+  ["research", ["atlas", "representationAtlas", "apparatus", "experiments", "claims", "funding", "collaboration"]],
   ["products", ["appliedWork", "evidence", "collaboration"]],
   ["projects", ["appliedWork", "evidence", "now", "collaboration"]],
   ["funding", ["appliedWork", "evidence", "now"]],
@@ -250,6 +256,7 @@ const childRouteContracts = [
   ["apparatus", ["experiments"]],
   ["experiments", ["atlas", "apparatus", "claims", "evidence"]],
   ["claims", ["atlas", "evidence", "experiments"]],
+  ["representationAtlas", ["atlas", "apparatus", "collaboration"]],
   ["now", ["changes"]],
   ["changes", ["now", "atlas", "evidence"]],
   ["openLab", ["apparatus", "funding", "now", "collaboration"]],
@@ -640,6 +647,7 @@ const startPage = read(`${root}/InstitutionalStartPage.tsx`);
 const audiencesContent = read(`${root}/content/audiences.ts`);
 const audienceGrid = read(`${root}/AudienceJourneyGrid.tsx`);
 const homeForAudienceTraversal = read(`${root}/InstitutionalHomePage.tsx`);
+const homeOrientationSection = read(`${root}/sections/HomeOrientationSection.tsx`);
 expect(startPage.includes("./content/audiences"), "Start page must consume the canonical audience traversal model");
 expect(startPage.includes("You do not need to understand the whole Lab first."), "Start page must lead with reduced orientation cost");
 expect(startPage.includes("<AudienceJourneyGrid"), "Start page must compose the shared journey grid");
@@ -658,10 +666,33 @@ expect(audienceGrid.includes("itemOrder={itemOrder}"), "Audience journey reflow 
 expect(audienceGrid.includes("<ReflowFieldItem"), "Each audience path must be an inspectable reflow item");
 expect(audienceGrid.includes("summary={<AudienceJourneySummary"), "Audience reflow must separate compact summary from expanded detail");
 expect(audienceGrid.includes("detail={<AudienceJourneyDetail"), "Audience reflow must reveal ordered path detail only after selection");
-expect(homeForAudienceTraversal.includes("homeAudienceJourneys"), "Homepage must reuse the same canonical audience traversal model");
-expect(homeForAudienceTraversal.includes("<AudienceJourneyGrid"), "Homepage must expose compact audience-specific traversal");
-expect(!homeForAudienceTraversal.includes("The same institution looks different depending on whether you came"), "Homepage audience lead must not repeat the audience-explanation paragraph");
+expect(homeForAudienceTraversal.includes("<HomeOrientationSection"), "Homepage must delegate orientation content to HomeOrientationSection");
+expect(homeOrientationSection.includes("homeAudienceJourneys"), "Homepage orientation section must reuse the same canonical audience traversal model");
+expect(homeOrientationSection.includes("<AudienceJourneyGrid"), "Homepage orientation section must expose compact audience-specific traversal");
+expect(!homeOrientationSection.includes("The same institution looks different depending on whether you came"), "Homepage audience lead must not repeat the audience-explanation paragraph");
 
 
-expect(homeForAudienceTraversal.includes("CHOOSE YOUR OWN PATH"), "Homepage audience layer must identify the reflow surface as Choose your own path");
+expect(homeOrientationSection.includes("CHOOSE YOUR OWN PATH"), "Homepage audience layer must identify the reflow surface as Choose your own path");
 expect(startPage.includes("CHOOSE YOUR OWN PATH"), "Start route must identify the full audience reflow surface as Choose your own path");
+
+
+const representationAtlasPage = read(`${root}/InstitutionalRepresentationAtlasPage.tsx`);
+const representationAtlasContent = read(`${root}/content/representationAtlas.ts`);
+const representationAtlasExplorer = read(`${root}/RepresentationAtlasExplorer.tsx`);
+expect(representationAtlasPage.includes("./content/representationAtlas"), "Representation Atlas route must own its comparative content model");
+expect(representationAtlasPage.includes("<RepresentationAtlasExplorer"), "Representation Atlas route must mount the interactive explorer");
+expect(representationAtlasPage.includes("One structural lens. Five very different worlds."), "Representation Atlas hero must lead with cross-domain structural comparison");
+expect(representationAtlasPage.includes("mathematically equivalent."), "Representation Atlas hero must expose the non-equivalence firewall");
+expect(representationAtlasContent.includes('sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Representation Atlas must pin the Lab source revision");
+for (const domainId of ["social", "knowledge", "strategy", "agency", "physical"]) {
+  expect(representationAtlasContent.includes(`id: "${domainId}"`), `Representation Atlas must expose ${domainId} witness domain`);
+}
+for (const slotId of ["frame", "representation", "transport", "invariant", "defect", "repair"]) {
+  expect(representationAtlasContent.includes(`id: "${slotId}"`), `Representation Atlas must expose ${slotId} mechanics slot`);
+}
+expect(representationAtlasContent.includes("Similar placement does not establish formal equivalence"), "Representation Atlas content model must preserve the comparative-lens authority ceiling");
+expect(representationAtlasExplorer.includes('useState<RepresentationDomainId>("strategy")'), "Representation Atlas explorer must expose interactive domain selection");
+expect(representationAtlasExplorer.includes('useState<RepresentationMechanicId>("representation")'), "Representation Atlas explorer must expose interactive mechanics selection");
+expect(representationAtlasExplorer.includes("representationDomains.map"), "Representation Atlas explorer must render all witness domains from the shared model");
+expect(representationAtlasExplorer.includes("representationMechanicSlots.map"), "Representation Atlas explorer must render the fixed mechanics spine");
+expect(representationAtlasExplorer.includes("item.mechanics[mechanic.id]"), "Representation Atlas explorer must compare one selected mechanics role across domains");

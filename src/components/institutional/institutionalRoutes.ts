@@ -86,6 +86,13 @@ const institutionalChildPages = {
     kind: "atlas",
     tone: "indigo",
   },
+  representationAtlas: {
+    label: "Representation Atlas",
+    href: "/v3/representation-atlas",
+    relation: "LENS",
+    kind: "atlas",
+    tone: "teal",
+  },
 } as const;
 
 export const institutionalChildRoutes = {
@@ -100,6 +107,7 @@ export const institutionalChildRoutes = {
   ],
   research: [
     institutionalChildPages.atlas,
+    institutionalChildPages.representationAtlas,
     institutionalChildPages.apparatus,
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
@@ -157,6 +165,11 @@ export const institutionalChildRoutes = {
     institutionalChildPages.evidence,
     institutionalChildPages.experiments,
   ],
+  representationAtlas: [
+    institutionalChildPages.atlas,
+    institutionalChildPages.apparatus,
+    institutionalChildPages.collaboration,
+  ],
   openLab: [
     institutionalChildPages.apparatus,
     institutionalChildPages.funding,
@@ -182,6 +195,7 @@ export const institutionalFooterGroups = [
     routes: [
       { label: "Research", href: "/v3/research" },
       { label: "Lab Atlas", href: "/v3/atlas" },
+      { label: "Representation Atlas", href: "/v3/representation-atlas" },
       { label: "Experiments", href: "/v3/experiments" },
       { label: "Claims", href: "/v3/claims" },
       { label: "Publications", href: "/v3/publications" },
