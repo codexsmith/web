@@ -322,6 +322,9 @@ export function AgenticScientificMethodExperience() {
             <Link href="/v3/research">
               Explore the research program <span aria-hidden="true">→</span>
             </Link>
+            <Link href="/v3/ai-governance">
+              See the AI Governance boundary <span aria-hidden="true">→</span>
+            </Link>
             <Link href="/v3/products">
               Back to Products <span aria-hidden="true">→</span>
             </Link>
