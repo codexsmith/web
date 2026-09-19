@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { ReflowField, ReflowFieldItem } from "@/components/bfux/ReflowField";
 import { InstitutionalSectionHeader } from "../InstitutionalPrimitives";
 import { formatOrdinal } from "../institutionalFormat";
@@ -235,6 +236,10 @@ export function ResearchContextSection() {
                 </p>
               </article>
             </div>
+            <Link className={styles.researchGovernanceBridge} href="/v3/ai-governance">
+              When agentic systems become consequential, inspect the AI Governance boundary
+              <span aria-hidden="true">→</span>
+            </Link>
           </ContextCard>
 
           <ContextCard
