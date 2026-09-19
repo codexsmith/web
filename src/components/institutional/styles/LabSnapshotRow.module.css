@@ -23,19 +23,34 @@
 }
 
 .identity,
-.meta,
+.identityHeading,
+.identityMeta,
 .metrics,
 .pill,
 .updated {
   min-width: 0;
-  display: flex;
-  align-items: center;
 }
 
 .identity {
   flex: 0 0 auto;
-  gap: 9px;
+  display: grid;
+  gap: 6px;
+  align-content: center;
   white-space: nowrap;
+}
+
+.identityHeading,
+.identityMeta {
+  display: flex;
+  align-items: center;
+}
+
+.identityHeading {
+  gap: 9px;
+}
+
+.identityMeta {
+  gap: 7px;
 }
 
 .label {
@@ -139,37 +154,35 @@ button.pill {
   fill: color-mix(in srgb, var(--snapshot-active) 24%, transparent);
 }
 
-.meta {
-  flex: 0 0 auto;
-  gap: 12px;
-}
-
 .updated {
-  display: grid;
-  gap: 2px;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
   white-space: nowrap;
 }
 
 .updated small {
   color: var(--snapshot-muted);
-  font: 500 0.57rem/1 Arial, Helvetica, sans-serif;
+  font: 600 0.5rem/1 Arial, Helvetica, sans-serif;
+  letter-spacing: .04em;
 }
 
 .updated strong {
-  font: 600 0.68rem/1.1 Arial, Helvetica, sans-serif;
+  color: #394b60;
+  font: 600 0.57rem/1.1 Arial, Helvetica, sans-serif;
 }
 
 .info {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   display: grid;
   place-items: center;
   color: #60748a;
 }
 
 .info svg {
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
 }
 
 .breakdownPanel {
@@ -354,13 +367,7 @@ button.pill {
     flex-basis: 100%;
   }
 
-  .meta {
-    margin-left: auto;
-  }
 
-  .snapshotRow > .divider:nth-of-type(2) {
-    display: none;
-  }
 }
 
 @media (max-width: 820px) {
@@ -387,14 +394,8 @@ button.pill {
     display: none;
   }
 
-  .identity,
-  .meta {
+  .identity {
     width: 100%;
-  }
-
-  .meta {
-    justify-content: space-between;
-    margin-left: 0;
   }
 
   .metrics {
