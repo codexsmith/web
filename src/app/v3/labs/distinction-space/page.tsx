@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function DistinctionSpaceLabPage() {
   return (
     <InstitutionalInstrumentShell>
-      <DistinctionSpaceSandboxSurface />
+      <DistinctionSpaceSandboxSurface closeHref="/experiments" />
       <DistinctionSpacePanelCollapseController />
     </InstitutionalInstrumentShell>
   );
