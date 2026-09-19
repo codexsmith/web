@@ -10,6 +10,7 @@ export const institutionalPublicRoutes = [
   "/v3/about",
   "/v3/apparatus",
   "/v3/applied-work",
+  "/v3/ai-governance",
   "/v3/atlas",
   "/v3/changes",
   "/v3/claims",
