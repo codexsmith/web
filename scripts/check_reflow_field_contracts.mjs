@@ -68,6 +68,9 @@ expect(component.includes('data-reflow-motion-carrier={carriesMotion ? "true" : 
 expect(component.includes("window.setTimeout"), "the prior motion carrier must clear after the return transition completes");
 expect(component.includes("560"), "motion-carrier lifetime must cover the 0.52s return transition");
 expect(fs.readFileSync("src/components/bfux/ReflowField.module.css", "utf8").includes('z-index: var(--reflow-motion-z, 100)'), "the moving focus card must remain above the already-resized module while returning");
+expect(reflowCss.includes("column-gap: 0"), "60-track virtual grids must not multiply the visible card gap across every virtual track");
+expect(reflowCss.includes("margin-inline: calc(var(--reflow-gap, 14px) / 2)"), "virtual-grid cards must restore authored visual spacing without widening the field");
+expect(reflowCss.includes("row-gap: var(--reflow-gap, 14px)"), "virtual-grid rows must retain the authored vertical gap");
 expect(component.includes('layoutMode?: ReflowLayoutMode'), "Reflow Field must expose a reusable layout-mode contract");
 expect(component.includes("Math.ceil(remainingIds.length / 2)"), "focus-stage must balance remaining items above and below the selected object");
 expect(research.includes('<div className={styles.researchProgramGrid}>'), "Active Surfaces must remain ordinary always-visible substantive content");
