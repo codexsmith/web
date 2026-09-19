@@ -21,13 +21,9 @@ export function InstitutionalResearchPage() {
           title={<>Research as inspectable machinery.</>}
           lead={<>Boundary First Labs develops theories, experiments, computational models,
               formal artifacts, and working systems.</>}
-          support={<>The research operation braids three disciplines: Lean–Agile flow makes
-              state and capacity visible; scientific method makes questions, tests, nulls,
-              and evidence explicit; agentic reasoning expands search, decomposition,
-              comparison, tool use, and critique. Boundary First supplies the shared
-              representation-and-repair grammar. None of those mechanisms substitutes for
-              scientific validation. Stewardship then governs what the work owes to its
-              sources, readers, affected people, maintainers, and shared material substrate.</>}
+          support={<>Research is handled as an inspectable operation: flow, evidence, search,
+              representation, defect, and repair remain visible from question through handoff.
+              The machinery supports scientific work; it does not substitute for validation.</>}
           childLinks={institutionalChildRoutes.research}
           >
           <blockquote className={styles.researchQuestion}>
