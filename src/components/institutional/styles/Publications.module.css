@@ -572,6 +572,9 @@
 }
 
 .publicationStrip {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
   padding: 42px clamp(30px, 6vw, 96px) 46px;
   border-bottom: 1px solid var(--bfux-panel-edge);
   background:
@@ -581,6 +584,10 @@
 
 .publicationCarouselFrame {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  contain: inline-size;
   margin-top: 20px;
   border: 1px solid rgba(7,26,61,.2);
   background: #dce5ef;
@@ -592,6 +599,9 @@
 }
 
 .publicationStripTrack {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(300px, 28vw);
