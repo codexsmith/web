@@ -31,15 +31,15 @@ const viewports = {
 };
 
 const stressRoutes = new Set([
-  "/v3",
-  "/v3/research",
-  "/v3/projects",
-  "/v3/publications",
-  "/v3/ai-governance",
-  "/v3/open-lab",
-  "/v3/products",
-  "/v3/products/agentic-scientific-method",
-  "/v3/representation-atlas",
+  "/",
+  "/research",
+  "/projects",
+  "/publications",
+  "/ai-governance",
+  "/open-lab",
+  "/products",
+  "/products/agentic-scientific-method",
+  "/representation-atlas",
 ]);
 
 const screenshotRoutes = new Set(stressRoutes);
@@ -80,7 +80,7 @@ async function waitForServer(server) {
       );
     }
     try {
-      const response = await fetch(`${base}/v3`, {
+      const response = await fetch(`${base}/`, {
         signal: AbortSignal.timeout(3000),
       });
       if (response.ok) return;
@@ -412,7 +412,7 @@ async function checkSkipAndFocus(browser, viewportName) {
   const page = await context.newPage();
   const issues = [];
 
-  await page.goto(`${base}/v3`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/`, { waitUntil: "networkidle" });
   await page.keyboard.press("Tab");
 
   const firstFocus = await page.evaluate(() => {
@@ -445,7 +445,7 @@ async function checkSkipAndFocus(browser, viewportName) {
   );
   if (!mainFocused) issues.push("skip link did not move focus to #institutional-main");
 
-  await page.goto(`${base}/v3`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/`, { waitUntil: "networkidle" });
   const focusSamples = [];
   for (let index = 0; index < 10; index += 1) {
     await page.keyboard.press("Tab");
@@ -506,7 +506,7 @@ async function checkCommandPalette(browser, viewportName) {
   const page = await context.newPage();
   const issues = [];
 
-  await page.goto(`${base}/v3`, { waitUntil: "networkidle" });
+  await page.goto(`${base}/`, { waitUntil: "networkidle" });
   const trigger = page.getByRole("button", { name: /Search Lab objects and pages/i });
   await trigger.focus();
   await page.keyboard.press("Enter");

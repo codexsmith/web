@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import {
   institutionalIndexingEnabled,
+  institutionalPublicRoutes,
   siteOrigin,
 } from "@/lib/site-release";
 
@@ -16,6 +17,7 @@ export default function robots(): MetadataRoute.Robots {
 
   if (!institutionalIndexingEnabled) {
     disallow.push("/v3/");
+    disallow.push(...institutionalPublicRoutes.filter((route) => route !== "/"));
   }
 
   return {

@@ -46,12 +46,13 @@ requireMatch(
   "Legacy Record URLs must resolve to their canonical World or Provenance destination",
 );
 
-// The Lab Machine is the canonical public home. The retired hero / ?world=1
-// threshold state must not reappear as a parallel root state machine.
+// The Lab Machine remains available as the versioned development surface. The
+// retired hero / ?world=1 threshold state must not reappear as a parallel root
+// state machine.
 requireMatch(
-  "src/app/page.tsx",
+  "src/app/v2/page.tsx",
   /LabMachineHomeRoute/,
-  "The bare public root must render the canonical Lab Machine home route",
+  "The versioned /v2 route must retain the Lab Machine development surface",
 );
 requireMatch(
   "src/app/world/page.tsx",
