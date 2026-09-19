@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ReflowField, ReflowFieldItem } from "@/components/bfux/ReflowField";
 import { AudienceJourneyGrid } from "../AudienceJourneyGrid";
-import { InstitutionalSectionLead } from "../InstitutionalPrimitives";
 import { formatOrdinal } from "../institutionalFormat";
 import styles from "../styles/InstitutionalFoundation.module.css";
 import {
@@ -143,7 +142,6 @@ export function HomeOrientationSection() {
               <div className={styles.audienceEntrySection}>
                 <div className={styles.audienceEntryLead}>
                   <p className={styles.sectionIndex}>CHOOSE YOUR OWN PATH</p>
-                  <h2>Start with why you came, not with the Lab&apos;s org chart.</h2>
                   <Link className={styles.audienceEntryLink} href="/v3/start">
                     Open all audience paths
                     <span aria-hidden="true">→</span>
@@ -165,12 +163,14 @@ export function HomeOrientationSection() {
           detail={
             <div className={styles.homeOrientationDetail}>
               <div className={styles.methodSection}>
-                <InstitutionalSectionLead
-                  styles={styles}
-                  eyebrow={<>OUR APPROACH</>}
-                  title={<>What the Lab does</>}
-                  description={<>We make complex systems easier to understand, test, improve, and explain. The basic move is simple: show the structure, track what changes, follow the change, and find where it breaks.</>}
-                />
+                <div className={styles.sectionLead}>
+                  <p className={styles.sectionIndex}>OUR APPROACH</p>
+                  <p>
+                    We make complex systems easier to understand, test, improve, and explain.
+                    The basic move is simple: show the structure, track what changes, follow the
+                    change, and find where it breaks.
+                  </p>
+                </div>
 
                 <div className={styles.methodWorkbench}>
                   <p className={styles.workbenchLabel}>WHAT WE PRODUCE</p>
@@ -211,7 +211,6 @@ export function HomeOrientationSection() {
               <div className={styles.practiceLineage}>
                 <div className={styles.practiceLineageLead}>
                   <p className={styles.sectionIndex}>OPERATING BRAID</p>
-                  <h2>Three practical lineages braid into one recursive method.</h2>
                   <p>
                     Lean–Agile, scientific method, and agentic reasoning connect through
                     state-based reasoning to create Boundary First.
@@ -258,7 +257,6 @@ export function HomeOrientationSection() {
               <div className={styles.stewardshipBand}>
                 <div className={styles.stewardshipBandLead}>
                   <p className={styles.sectionIndex}>STEWARDSHIP</p>
-                  <h2>What succeeds still has to be cared for.</h2>
                   <p>
                     Boundary First Labs treats stewardship as a concrete engineering and
                     institutional obligation: <strong>tend</strong> what is shared, <strong>maintain</strong> what others depend
