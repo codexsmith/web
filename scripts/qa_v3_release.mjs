@@ -465,6 +465,14 @@ async function checkSkipAndFocus(browser, viewportName) {
           active.getAttribute("aria-label") ||
           (active.textContent ?? "").trim().replace(/\s+/g, " ").slice(0, 100),
         hasVisibleFocus: hasOutline || hasBoxShadow,
+        focusVisible: active.matches(":focus-visible"),
+        outline: {
+          style: style.outlineStyle,
+          width: style.outlineWidth,
+          color: style.outlineColor,
+          offset: style.outlineOffset,
+        },
+        boxShadow: style.boxShadow,
         visible:
           rect.width > 0 &&
           rect.height > 0 &&
