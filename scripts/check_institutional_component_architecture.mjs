@@ -426,6 +426,18 @@ expect(evidenceContent.includes("BFL-NATIVE + INSPECTABLE"), "Evidence must dist
 expect(evidenceContent.includes("EMERGING / NOT YET ESTABLISHED"), "Evidence must expose proof gaps");
 expect(evidenceContent.includes("Prior career != BFL traction"), "Evidence must forbid prior-career inflation into BFL traction");
 expect(evidencePage.includes("EVIDENCE STILL TO EARN"), "Evidence page must expose the next proof points directly");
+const epistemicChainSection = read(`${root}/sections/EpistemicChainSection.tsx`);
+const epistemicChainContent = read(`${root}/content/epistemicChains.ts`);
+expect(evidencePage.includes("<EpistemicChainSection />"), "Evidence must compose the inspectable epistemic-chain surface");
+expect(epistemicChainContent.includes('"PUB-001B-CLAIM-EVIDENCE-MAP"'), "Epistemic chain must bind the canonical PUB-001 claim/evidence map");
+expect(epistemicChainContent.includes('"3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Epistemic chain must pin the Lab source revision");
+expect(epistemicChainContent.includes('"CLM-011"'), "Epistemic chain must preserve the authored negative-result claim");
+expect(epistemicChainContent.includes('"CLM-017"') && epistemicChainContent.includes('"false"'), "Epistemic chain must preserve explicit false publication-state claims");
+expect(epistemicChainContent.includes('id: "claim-experiment"') && epistemicChainContent.includes('state: "not declared"'), "Epistemic chain must expose missing Claim-to-Experiment relations instead of inventing them");
+expect(epistemicChainContent.includes('state: "source discrepancy retained"'), "Epistemic chain must retain lifecycle-source disagreement");
+expect(epistemicChainSection.includes("Missing cross-registry relations stay missing."), "Epistemic-chain UI must state its no-inference edge rule");
+expect(epistemicChainSection.includes("NO ARTIFACT EDGE DECLARED"), "Epistemic-chain UI must visibly preserve unsupported or negative claim rows");
+
 expect(evidencePage.includes("childLinks={institutionalChildRoutes.evidence}"), "Evidence hero must expose Now / Roadmap as a child page");
 
 const apparatusMachineryPage = read(`${root}/InstitutionalApparatusPage.tsx`);

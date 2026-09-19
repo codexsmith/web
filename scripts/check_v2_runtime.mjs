@@ -138,14 +138,12 @@ try {
 
   await expectPage("/publications", [
     "Publications",
-    "At a glance",
-    "Related paths",
-    "Publication status is tracked separately",
-    "Essays &amp; Arguments",
-    "Methods &amp; Standards",
-    "Research Programs",
-    "Learning &amp; Visuals",
-    "View",
+    "Paper Mine",
+    "Corpus-wide publication discovery",
+    "Projection + summary layer",
+    "Current boundary",
+    "All canonical public Paper Mine records",
+    "Bound the corpus",
   ], [
     "A public essay presents a bounded argument",
     "Enter region",
