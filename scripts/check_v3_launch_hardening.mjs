@@ -30,14 +30,17 @@ function routeFromPage(file) {
 
 const v3PageFiles = walk(path.join(root, "src/app/v3"))
   .filter((file) => file.endsWith(path.sep + "page.tsx"))
-  .filter((file) => !file.includes("["));
+  .filter((file) => !file.includes("["))
+  .filter((file) => routeFromPage(file) !== "/v3");
+const rootPageFile = path.join(root, "src/app/page.tsx");
+const publicPageFiles = [rootPageFile, ...v3PageFiles];
 
-const routeSet = new Set(v3PageFiles.map(routeFromPage));
+const routeSet = new Set(["/", ...v3PageFiles.map(routeFromPage)]);
 const routeInventory = read("src/lib/site-release.ts");
 const inventoryRoutes = new Set(
   [...routeInventory.matchAll(/"((?:\\.|[^"])*)"/g)]
     .map((match) => match[1])
-    .filter((value) => value === "/v3" || value.startsWith("/v3/")),
+    .filter((value) => value === "/" || value.startsWith("/v3/")),
 );
 
 for (const route of [...routeSet].sort()) {
@@ -52,7 +55,7 @@ for (const route of [...inventoryRoutes].sort()) {
   }
 }
 
-for (const file of v3PageFiles) {
+for (const file of publicPageFiles) {
   const route = routeFromPage(file);
   const source = fs.readFileSync(file, "utf8");
 
@@ -68,12 +71,17 @@ for (const file of v3PageFiles) {
     fail(route + " must declare its own canonical URL");
   }
 
-  if (/robots\s*:\s*\{[\s\S]*?index\s*:\s*false/.test(source)) {
+  if (route !== "/" && /robots\s*:\s*\{[\s\S]*?index\s*:\s*false/.test(source)) {
     fail(
       route +
-        " hard-codes noindex; v3 indexing must be controlled by src/app/v3/layout.tsx",
+        " hard-codes noindex; v3 child-route indexing must be controlled by src/app/v3/layout.tsx",
     );
   }
+}
+
+const v3Alias = read("src/app/v3/page.tsx");
+if (!v3Alias.includes('permanentRedirect("/")')) {
+  fail("/v3 must redirect to the canonical institutional root");
 }
 
 const scanFiles = [
