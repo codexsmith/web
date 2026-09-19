@@ -14,31 +14,36 @@ const institutionalHome = read("src/components/institutional/InstitutionalHomePa
 const institutionalChrome = read("src/components/institutional/InstitutionalChrome.tsx");
 
 expect(
-  rootPage.includes("LabMachineHomeRoute") && !rootPage.includes("InstitutionalHomePage"),
-  "root must remain the existing Lab Machine compatibility surface until an explicit cutover",
+  rootPage.includes("InstitutionalHomePage") &&
+    rootPage.includes('canonical: "/"') &&
+    !rootPage.includes("LabMachineHomeRoute"),
+  "root must own the Product / institutional Website v3 home after cutover",
 );
 expect(
   v2Page.includes("LabMachineHomeRoute") &&
     v2Page.includes('canonical: "/v2"') &&
     v2Page.includes('<DevProductSwitch active="dev" floating />'),
-  "/v2 must own the Dev / Lab Machine surface and expose the version switch",
+  "/v2 must retain the Dev / Lab Machine surface and expose the version switch",
 );
 expect(
-  v3Page.includes("InstitutionalHomePage") &&
-    v3Page.includes('canonical: "/v3"') &&
-    !v3Page.includes("LabMachineHomeRoute"),
-  "/v3 must own the Product / institutional surface without embedding the Lab Machine",
+  v3Page.includes('permanentRedirect("/")'),
+  "/v3 must remain a compatibility alias to the canonical root home",
 );
 expect(
-  previewAlias.includes('permanentRedirect("/v3")'),
-  "/institutional-preview must remain an alias redirect to /v3",
+  previewAlias.includes('permanentRedirect("/")'),
+  "/institutional-preview must remain an alias redirect to the canonical root home",
 );
 expect(
   switcher.includes('href="/v2"') &&
-    switcher.includes('href="/v3"') &&
+    switcher.includes('href="/"') &&
     switcher.includes("Dev") &&
     switcher.includes("Product"),
-  "the Dev / Product switch must link the two versioned surfaces explicitly",
+  "the Dev / Product switch must link the Lab Machine and canonical institutional home",
+);
+expect(
+  institutionalChrome.includes('href="/"') &&
+    !institutionalChrome.includes('href="/v3" aria-label="Boundary First Labs Website v3 home"'),
+  "institutional chrome home links must resolve to the canonical root",
 );
 expect(
   !institutionalHome.includes("DevProductSwitch") &&
