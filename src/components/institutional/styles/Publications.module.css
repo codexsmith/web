@@ -1,5 +1,7 @@
 /* Publications route projection — calmer editorial surface over research machinery. */
 .publicationsPage {
+  max-width: 100%;
+  overflow-x: clip;
   background:
     linear-gradient(180deg, #ffffff 0%, #f0f4f9 100%),
     var(--institution-paper);
