@@ -194,6 +194,8 @@ expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orie
 expect(reflow.includes('type ReflowRestLayout = "natural" | "rectangle"'), "Reflow must expose an explicit rectangle REST layout rule");
 expect(reflow.includes("rectangleTileForIndex"), "Rectangle Reflow must compute balanced full-width rows");
 expect(reflowCss.includes('data-reflow-rest-layout="rectangle"'), "Rectangle Reflow must own its REST grid geometry");
+expect(reflowCss.includes('> .item:not([data-reflow-state="selected"])'), "Reflow focus-stage layout rules must target direct child cards only");
+expect(reflowCss.includes('data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item'), "Rectangle layout rules must not leak into nested Reflow fields");
 expect(audienceJourneys.includes('restLayout="rectangle"'), "Audience journey REST cards must tile into a complete rectangle");
 
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
