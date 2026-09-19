@@ -212,6 +212,10 @@ expect(!homeOrientation.includes("Start with why you came, not with the Lab&apos
 expect(!homeOrientation.includes("<h2>Three practical lineages braid into one recursive method.</h2>"), "Operating Braid detail must not repeat its selected summary title");
 expect(!homeOrientation.includes("<h2>What succeeds still has to be cared for.</h2>"), "Stewardship detail must not repeat its selected summary title");
 expect(!homeOrientation.includes("InstitutionalSectionLead"), "Our Approach detail must use a title-free inner lead");
+expect(!homeOrientation.includes('<p className={styles.sectionIndex}>OUR APPROACH</p>'), "Our Approach detail must not repeat its header eyebrow");
+expect(!homeOrientation.includes('<p className={styles.sectionIndex}>OPERATING BRAID</p>'), "Operating Braid detail must not repeat its header eyebrow");
+expect(!homeOrientation.includes('<p className={styles.sectionIndex}>STEWARDSHIP</p>'), "Stewardship detail must not repeat its header eyebrow");
+expect(homeOrientation.includes("The braid is recursive:"), "Operating Braid detail must explain how the practices compose rather than repeat the header summary");
 expect(!homeOrientation.includes("audienceEntryLead"), "Choose Your Own Path detail must not retain a redundant left sidebar");
 expect(homeOrientation.includes("homeOrientationSummaryAction"), "Choose Your Own Path must expose its all-paths action in the selected header");
 expect(homeOrientation.includes("homeOrientationAudienceDetail"), "Choose Your Own Path audience grid must use the full expanded detail width");
