@@ -7,6 +7,7 @@ import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { InstitutionalInquiryForm } from "./InstitutionalInquiryForm";
 import { formatOrdinal } from "./institutionalFormat";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   inquiryBoundaries,
   inquiryFamilies,
@@ -47,6 +48,7 @@ export function InstitutionalContactPage({
             material out of the initial message.
           </>
         }
+        childLinks={institutionalChildRoutes.contact}
       >
         <aside className={styles.contactIntakeStatus} data-live={intakeEnabled ? "true" : "false"}>
           <span>INTAKE STATUS</span>
