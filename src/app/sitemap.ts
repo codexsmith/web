@@ -7,12 +7,12 @@ import {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = institutionalIndexingEnabled
-    ? ["/", ...institutionalPublicRoutes]
+    ? institutionalPublicRoutes
     : ["/"];
 
   return routes.map((route) => ({
     url: new URL(route, siteOrigin).toString(),
-    changeFrequency: route === "/" || route === "/v3" ? "weekly" : "monthly",
-    priority: route === "/" ? 1 : route === "/v3" ? 0.9 : 0.7,
+    changeFrequency: route === "/" ? "weekly" : "monthly",
+    priority: route === "/" ? 1 : 0.7,
   }));
 }
