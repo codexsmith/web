@@ -408,8 +408,26 @@
   }
 
   .nativeEvidenceGrid,
-  .evidenceToEarnGrid {
+  .evidenceToEarnGrid,
+  .chainGapGrid,
+  .chainGateGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chainSourceBand,
+  .chainStats,
+  .chainLifecycle,
+  .chainClaimCard,
+  .chainGapSection {
+    grid-template-columns: 1fr;
+  }
+
+  .chainLiteratureRefs {
+    grid-column: auto;
+  }
+
+  .chainFlowHeader {
+    grid-template-columns: 1fr auto 1fr auto 1.35fr;
   }
 
   .evidenceLadderLead,
@@ -428,8 +446,14 @@
 @media (max-width: 720px) {
   .nativeEvidenceGrid,
   .evidenceToEarnGrid,
-  .nonImplicationGrid {
+  .nonImplicationGrid,
+  .chainGapGrid,
+  .chainGateGrid {
     grid-template-columns: 1fr;
+  }
+
+  .chainFlowHeader {
+    display: none;
   }
 }
 
@@ -440,6 +464,7 @@
   .evidenceLadderSection,
   .evidenceToEarnSection,
   .nonImplicationSection,
+  .epistemicChainSection,
   .evidenceClose {
     padding-left: 22px;
     padding-right: 22px;
@@ -448,4 +473,331 @@
   .evidenceHero h1 {
     font-size: clamp(3.1rem, 14vw, 4.7rem);
   }
+}
+
+
+.epistemicChainSection {
+  padding: 48px clamp(30px, 6vw, 96px) 58px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.62), transparent 14%),
+    linear-gradient(180deg, #e6edf4, #f4f7fa);
+}
+
+.chainSourceBand {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.chainSourceBand > div,
+.chainStats > div {
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid rgba(7,26,61,.23);
+  background: rgba(255,255,255,.82);
+}
+
+.chainSourceBand > div {
+  border-top: 5px solid var(--osha-blue);
+}
+
+.chainSourceBand > div:nth-child(2) { border-top-color: var(--old-gold); }
+.chainSourceBand > div:nth-child(3) { border-top-color: var(--osha-green); }
+
+.chainSourceBand span,
+.chainAuthority span,
+.chainStats span,
+.chainLifecycle span,
+.chainClaimIdentity span,
+.chainArtifactLinks span,
+.chainNoArtifact span,
+.chainLiteratureRefs span,
+.chainGapSection > div:first-child > span,
+.chainGapGrid span,
+.chainGateGrid > article > span {
+  display: block;
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1.1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.chainSourceBand strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .98rem;
+  font-weight: 600;
+}
+
+.chainSourceBand p,
+.chainSourceBand a {
+  margin: 6px 0 0;
+  color: #52627b;
+  font-size: .65rem;
+  line-height: 1.4;
+}
+
+.chainSourceBand a {
+  display: inline-block;
+  color: var(--royal-blue-deep);
+  font-weight: 800;
+  text-decoration: none;
+  border-bottom: 1px solid var(--old-gold-dark);
+}
+
+.chainAuthority {
+  margin-top: 9px;
+  padding: 12px 14px;
+  border: 1px solid rgba(231,123,36,.26);
+  border-left: 6px solid var(--osha-orange);
+  background: #fff9f2;
+}
+
+.chainAuthority p {
+  margin: 7px 0 0;
+  color: #52627b;
+  font-size: .7rem;
+  line-height: 1.48;
+}
+
+.chainStats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 8px;
+  margin-top: 9px;
+}
+
+.chainStats strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.chainLifecycle {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) repeat(2, minmax(170px, .65fr));
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.chainLifecycle > div {
+  padding: 14px;
+  border: 1px solid rgba(7,26,61,.22);
+  background: #fff;
+}
+
+.chainLifecycleLead {
+  border-left: 6px solid var(--osha-blue) !important;
+}
+
+.chainLifecycle h3 {
+  margin: 9px 0 8px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.chainLifecycle p,
+.chainLifecycle small {
+  margin: 0;
+  color: #5b6980;
+  font-size: .65rem;
+  line-height: 1.45;
+}
+
+.chainLifecycle strong {
+  display: block;
+  margin: 9px 0 7px;
+  overflow-wrap: anywhere;
+  color: var(--royal-blue-deep);
+  font: 800 .66rem/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.chainFlowHeader {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1.35fr;
+  gap: 12px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 10px 14px;
+  border: 1px solid rgba(7,26,61,.22);
+  background: var(--royal-blue-deep);
+  color: #fff;
+}
+
+.chainFlowHeader span {
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.chainFlowHeader i {
+  color: var(--old-gold-bright);
+  font-style: normal;
+}
+
+.chainClaimStack {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chainClaimCard {
+  display: grid;
+  grid-template-columns: minmax(145px,.38fr) minmax(220px,.92fr) minmax(0,1.7fr);
+  gap: 10px;
+  align-items: start;
+  padding: 11px;
+  border: 1px solid rgba(7,26,61,.22);
+  background: rgba(255,255,255,.86);
+}
+
+.chainClaimCard > h3 {
+  margin: 0;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .91rem;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.chainClaimIdentity {
+  min-width: 0;
+}
+
+.chainClaimIdentity strong {
+  display: block;
+  margin-top: 7px;
+  overflow-wrap: anywhere;
+  color: #52627b;
+  font: 750 .58rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-transform: uppercase;
+}
+
+.chainArtifactLinks {
+  display: grid;
+  gap: 6px;
+}
+
+.chainArtifactLinks a {
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(7,26,61,.18);
+  border-left: 4px solid var(--osha-green);
+  background: #f5f9f6;
+  text-decoration: none;
+}
+
+.chainArtifactLinks code {
+  display: block;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+  color: var(--royal-blue-deep);
+  font-size: .59rem;
+  line-height: 1.35;
+}
+
+.chainNoArtifact {
+  padding: 9px 10px;
+  border: 1px solid rgba(231,123,36,.24);
+  border-left: 4px solid var(--osha-orange);
+  background: #fff8f1;
+}
+
+.chainNoArtifact p,
+.chainLiteratureRefs p {
+  margin: 6px 0 0;
+  color: #657289;
+  font-size: .62rem;
+  line-height: 1.4;
+}
+
+.chainLiteratureRefs {
+  grid-column: 3;
+  padding: 8px 10px;
+  border: 1px dashed rgba(7,26,61,.22);
+  background: #f7f9fb;
+}
+
+.chainGapSection {
+  display: grid;
+  grid-template-columns: minmax(240px,.6fr) minmax(0,1.4fr);
+  gap: 22px;
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid rgba(7,26,61,.24);
+  background: #fff;
+}
+
+.chainGapSection h3 {
+  margin: 9px 0 8px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.chainGapSection > div:first-child > p,
+.chainGapGrid p {
+  margin: 0;
+  color: #5b6980;
+  font-size: .68rem;
+  line-height: 1.48;
+}
+
+.chainGapGrid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+}
+
+.chainGapGrid article {
+  padding: 11px 12px;
+  border: 1px solid rgba(7,26,61,.18);
+  border-top: 4px solid var(--osha-orange);
+  background: #fbfcfd;
+}
+
+.chainGapGrid strong {
+  display: block;
+  margin: 7px 0;
+  color: var(--royal-blue-deep);
+  font-size: .68rem;
+  text-transform: uppercase;
+}
+
+.chainGateGrid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.chainGateGrid > article {
+  padding: 14px;
+  border: 1px solid rgba(7,26,61,.2);
+  background: rgba(255,255,255,.8);
+}
+
+.chainGateGrid ul {
+  display: grid;
+  gap: 5px;
+  margin: 9px 0 0;
+  padding-left: 18px;
+  color: #52627b;
+  font-size: .65rem;
+  line-height: 1.4;
+}
+
+.chainSourceBand a:focus-visible,
+.chainArtifactLinks a:focus-visible {
+  outline: 3px solid var(--osha-blue);
+  outline-offset: 2px;
 }
