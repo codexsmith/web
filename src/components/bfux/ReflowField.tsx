@@ -27,6 +27,7 @@ type ReflowFieldContextValue = {
   fieldId: string;
   layoutMode: ReflowLayoutMode;
   itemOrder: readonly string[];
+  animatePeers: boolean;
   setSelection: (id: string | null) => void;
 };
 
@@ -78,6 +79,7 @@ export function ReflowField({
   defaultSelectedId = null,
   layoutMode = "flow",
   itemOrder = [],
+  animatePeers = false,
 }: {
   children: ReactNode;
   className?: string;
@@ -85,6 +87,7 @@ export function ReflowField({
   defaultSelectedId?: string | null;
   layoutMode?: ReflowLayoutMode;
   itemOrder?: readonly string[];
+  animatePeers?: boolean;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
   const [previousSelectedId, setPreviousSelectedId] = useState<string | null>(null);
@@ -115,6 +118,7 @@ export function ReflowField({
       fieldId,
       layoutMode,
       itemOrder,
+      animatePeers,
       setSelection,
     }),
     [
@@ -123,6 +127,7 @@ export function ReflowField({
       fieldId,
       layoutMode,
       itemOrder,
+      animatePeers,
       setSelection,
     ],
   );
@@ -174,7 +179,7 @@ export function ReflowFieldItem({
   const selected = context.selectedId === id;
   const detailId = `${context.fieldId}-${safeFragment(id)}-detail`;
   const carriesMotion =
-    selected || context.previousSelectedId === id;
+    context.animatePeers || selected || context.previousSelectedId === id;
   const transition =
     reducedMotion || !carriesMotion
       ? { layout: snapLayoutTransition }
