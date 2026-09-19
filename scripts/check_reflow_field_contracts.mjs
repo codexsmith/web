@@ -198,8 +198,11 @@ expect(reflow.includes('type ReflowRestLayout = "natural" | "rectangle"'), "Refl
 expect(reflow.includes("rectangleTileForIndex"), "Rectangle Reflow must compute balanced full-width rows");
 expect(reflowCss.includes('data-reflow-rest-layout="rectangle"'), "Rectangle Reflow must own its REST grid geometry");
 expect(reflowCss.includes('> .item:not([data-reflow-state="selected"])'), "Reflow focus-stage layout rules must target direct child cards only");
-expect(reflowCss.includes("flex: 1 1 0;"), "Shrunk Reflow peers must divide one compact row evenly");
-expect(reflowCss.includes('> .item[data-reflow-placement="after"] {\n  order: 1;'), "Before and after peers must collapse into the same focus-stage row");
+expect(reflow.includes('"--reflow-peer-count": peerCount'), "Reflow must publish the exact active peer count to CSS");
+expect(reflowCss.includes("repeat(var(--reflow-peer-count, 3), minmax(0, 1fr))"), "Focus-stage must allocate exactly one grid column per shrunk peer");
+expect(reflowCss.includes("grid-row: 1;"), "All shrunk Reflow peers must occupy the same first row");
+expect(reflowCss.includes("grid-row: 2;"), "Selected Reflow content must occupy its own second row");
+expect(reflowCss.includes("grid-column: 1 / -1;"), "Selected Reflow content must span the full peer grid before applying its bounded width");
 expect(reflowCss.includes("--reflow-selected-width, 83.333333%"), "Selected Reflow content must retain a bounded second-row stage");
 expect(reflowCss.includes('data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item'), "Rectangle layout rules must not leak into nested Reflow fields");
 expect(audienceJourneys.includes('restLayout="rectangle"'), "Audience journey REST cards must tile into a complete rectangle");
