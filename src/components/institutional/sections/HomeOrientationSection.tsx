@@ -129,6 +129,7 @@ export function HomeOrientationSection() {
         ariaLabel="Choose a homepage section to inspect"
         layoutMode="focus-stage"
         itemOrder={homeOrientationOrder}
+        focusPeerPlacement="before"
         animatePeers
       >
         <ReflowFieldItem
