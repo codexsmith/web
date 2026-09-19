@@ -68,6 +68,7 @@ export function InstitutionalHeader() {
             <Link
               key={route.href}
               href={route.href}
+              className={styles.navLink}
               aria-current={active ? "page" : undefined}
             >
               {route.label}
