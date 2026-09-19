@@ -87,6 +87,7 @@ export function AudienceJourneyGrid({
       ariaLabel="Audience-specific paths through Boundary First Labs"
       layoutMode="focus-stage"
       itemOrder={itemOrder}
+      restLayout="rectangle"
     >
       {journeys.map((journey) => (
         <ReflowFieldItem

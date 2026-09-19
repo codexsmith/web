@@ -58,6 +58,26 @@
   order: 3;
 }
 
+
+.field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] {
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  grid-auto-flow: row;
+}
+
+.field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] .item {
+  grid-column: span var(--reflow-rectangle-span, 20);
+}
+
+@media (max-width: 720px) {
+  .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] {
+    grid-template-columns: 1fr;
+  }
+
+  .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] .item {
+    grid-column: 1;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .item:not([data-reflow-state="selected"]):hover {
     box-shadow:

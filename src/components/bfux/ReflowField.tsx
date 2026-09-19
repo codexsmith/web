@@ -8,6 +8,7 @@ import {
   useId,
   useMemo,
   useState,
+  type CSSProperties,
   type MouseEvent as ReactMouseEvent,
   type ReactNode,
 } from "react";
@@ -21,6 +22,7 @@ import styles from "./ReflowField.module.css";
 
 type ReflowLayoutMode = "flow" | "focus-stage";
 type ReflowFocusPeerPlacement = "split" | "before" | "after";
+type ReflowRestLayout = "natural" | "rectangle";
 
 type ReflowFieldContextValue = {
   selectedId: string | null;
@@ -30,6 +32,7 @@ type ReflowFieldContextValue = {
   itemOrder: readonly string[];
   animatePeers: boolean;
   focusPeerPlacement: ReflowFocusPeerPlacement;
+  restLayout: ReflowRestLayout;
   setSelection: (id: string | null) => void;
 };
 
@@ -37,6 +40,38 @@ const ReflowFieldContext = createContext<ReflowFieldContextValue | null>(null);
 
 function safeFragment(value: string) {
   return value.replace(/[^a-zA-Z0-9_-]/g, "-");
+}
+
+const RECTANGLE_GRID_COLUMNS = 60;
+const MAX_RECTANGLE_ROW_ITEMS = 6;
+
+function rectangleTileForIndex(itemCount: number, itemIndex: number) {
+  if (itemCount <= 0 || itemIndex < 0 || itemIndex >= itemCount) return null;
+
+  // Prefer a near-square silhouette, but never allow a row wider than six cards.
+  // Each row is then stretched to the full field width, eliminating orphan cells.
+  const rowCount = Math.max(
+    Math.ceil(itemCount / MAX_RECTANGLE_ROW_ITEMS),
+    Math.floor(Math.sqrt(itemCount)),
+    1,
+  );
+  const baseRowSize = Math.floor(itemCount / rowCount);
+  const widerRows = itemCount % rowCount;
+
+  let cursor = 0;
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+    const rowSize = baseRowSize + (rowIndex < widerRows ? 1 : 0);
+    if (itemIndex < cursor + rowSize) {
+      return {
+        rowIndex,
+        rowSize,
+        span: RECTANGLE_GRID_COLUMNS / rowSize,
+      };
+    }
+    cursor += rowSize;
+  }
+
+  return null;
 }
 
 function clickBelongsToNestedControl(
@@ -87,6 +122,7 @@ const detailTransition = {
  * BFUX Reflow Field.
  *
  * Motion owns geometry interpolation. CSS owns final layout.
+ * Rectangle rest layout tiles every row edge-to-edge; ragged orphan cards are not permitted.
  * Selection reallocates representational bandwidth; it does not mutate,
  * promote, rank, or otherwise change the represented object.
  */
@@ -99,6 +135,7 @@ export function ReflowField({
   itemOrder = [],
   animatePeers = false,
   focusPeerPlacement = "split",
+  restLayout = "natural",
 }: {
   children: ReactNode;
   className?: string;
@@ -108,6 +145,7 @@ export function ReflowField({
   itemOrder?: readonly string[];
   animatePeers?: boolean;
   focusPeerPlacement?: ReflowFocusPeerPlacement;
+  restLayout?: ReflowRestLayout;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
   const [previousSelectedId, setPreviousSelectedId] = useState<string | null>(null);
@@ -140,6 +178,7 @@ export function ReflowField({
       itemOrder,
       animatePeers,
       focusPeerPlacement,
+      restLayout,
       setSelection,
     }),
     [
@@ -150,6 +189,7 @@ export function ReflowField({
       itemOrder,
       animatePeers,
       focusPeerPlacement,
+      restLayout,
       setSelection,
     ],
   );
@@ -163,6 +203,7 @@ export function ReflowField({
           data-reflow-field={fieldId}
           data-reflow-active={selectedId ? "true" : "false"}
           data-reflow-mode={layoutMode}
+          data-reflow-rest-layout={restLayout}
           onKeyDown={(event) => {
             if (event.key === "Escape" && selectedId !== null) {
               event.preventDefault();
@@ -214,6 +255,16 @@ export function ReflowFieldItem({
     : [];
   const remainingIndex = remainingIds.indexOf(id);
   const splitIndex = Math.ceil(remainingIds.length / 2);
+  const itemIndex = context.itemOrder.indexOf(id);
+  const rectangleTile =
+    context.restLayout === "rectangle"
+      ? rectangleTileForIndex(context.itemOrder.length, itemIndex)
+      : null;
+  const rectangleStyle = rectangleTile
+    ? ({
+        "--reflow-rectangle-span": rectangleTile.span,
+      } as CSSProperties)
+    : undefined;
   const placement =
     context.layoutMode !== "focus-stage" || context.selectedId === null
       ? "rest"
@@ -248,7 +299,10 @@ export function ReflowFieldItem({
       data-reflow-state={selected ? "selected" : "rest"}
       data-reflow-placement={placement}
       data-reflow-motion-carrier={carriesMotion ? "true" : "false"}
+      data-reflow-row={rectangleTile?.rowIndex}
+      data-reflow-row-size={rectangleTile?.rowSize}
       data-tone={dataTone}
+      style={rectangleStyle}
       onClick={handleSurfaceClick}
     >
       <button

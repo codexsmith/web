@@ -28,9 +28,6 @@
   scroll-margin-top: 76px;
 }
 
-.journey:nth-child(n + 4) {
-  --reflow-span: 3;
-}
 
 .journey[data-tone="research"] { --journey-accent: #5b63ad; }
 .journey[data-tone="practice"] { --journey-accent: #356f9f; }
@@ -334,8 +331,7 @@
     --reflow-selected-span: 6;
   }
 
-  .journey,
-  .journey:nth-child(n + 4) {
+  .journey {
     --reflow-span: 3;
   }
 
@@ -356,8 +352,7 @@
     --reflow-selected-span: 1;
   }
 
-  .journey,
-  .journey:nth-child(n + 4) {
+  .journey {
     --reflow-span: 1;
     min-height: 0;
   }

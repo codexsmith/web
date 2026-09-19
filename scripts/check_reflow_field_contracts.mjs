@@ -191,6 +191,11 @@ for (const [name, source] of [
 expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choose Your Own Path through Stewardship as one Reflow field");
 expect(!home.includes("\\n\\n"), "Homepage must not render escaped newline literals around the orientation field");
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
+expect(reflow.includes('type ReflowRestLayout = "natural" | "rectangle"'), "Reflow must expose an explicit rectangle REST layout rule");
+expect(reflow.includes("rectangleTileForIndex"), "Rectangle Reflow must compute balanced full-width rows");
+expect(reflowCss.includes('data-reflow-rest-layout="rectangle"'), "Rectangle Reflow must own its REST grid geometry");
+expect(audienceJourneys.includes('restLayout="rectangle"'), "Audience journey REST cards must tile into a complete rectangle");
+
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
 expect(homeOrientation.includes("animatePeers"), "Homepage orientation must animate context peers with the selected card");
 expect(homeOrientation.includes('focusPeerPlacement="before"'), "Homepage orientation must keep all three context peers together before the selected card");
