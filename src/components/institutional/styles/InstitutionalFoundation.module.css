@@ -24,6 +24,17 @@
   outline: none;
 }
 
+:where(.page) :where(a[href], button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #d6b449;
+  outline-offset: 3px;
+}
+
+@media (forced-colors: active) {
+  :where(.page) :where(a[href], button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid CanvasText;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .skipLink {
     transition: none;
@@ -4054,4 +4065,17 @@
   margin-top: 20px;
   color: var(--institution-muted);
   font-size: .62rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.page),
+  :where(.page) *,
+  :where(.page) *::before,
+  :where(.page) *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
 }
