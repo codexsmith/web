@@ -6,6 +6,7 @@ import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Atlas.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { atlasProjection, atlasStats } from "./content/atlas";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 
 const styles = composeCssModules(
   foundationStyles,
@@ -39,6 +40,7 @@ export function InstitutionalAtlasPage({
             shared language, or conceptual similarity.
           </>
         }
+        childLinks={institutionalChildRoutes.atlas}
       >
         <div className={styles.atlasHeroStats} aria-label="Atlas boundary">
           <div><span>OBJECTS</span><strong>{atlasStats.objects}</strong></div>
