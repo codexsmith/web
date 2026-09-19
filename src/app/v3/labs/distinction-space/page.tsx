@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   description:
     "Interactive Boundary First visual-mathematics laboratory for exploring bounded dynamics, closure, defect, and higher-dimensional structure.",
   alternates: { canonical: "/labs/distinction-space" },
-  robots: { index: false, follow: true },
 };
 
 export default function DistinctionSpaceLabPage() {
