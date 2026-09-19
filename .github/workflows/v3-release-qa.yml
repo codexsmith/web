@@ -1,0 +1,56 @@
+name: Website v3 release QA
+
+on:
+  push:
+    branches:
+      - agent/v3-release-sweep
+  pull_request:
+    branches:
+      - site/v3-institutional-face
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v3-release-qa-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-release-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install application dependencies
+        run: npm ci
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Install pinned browser QA harness
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Run Website v3 release QA
+        run: node scripts/qa_v3_release.mjs
+
+      - name: Upload Website v3 release QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v3-release-qa
+          path: qa-artifacts/v3-release
+          if-no-files-found: warn
+          retention-days: 14
