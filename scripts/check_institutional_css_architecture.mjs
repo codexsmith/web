@@ -43,6 +43,7 @@ const requiredStyles = [
   "Contact.module.css",
   "OpenLab.module.css",
   "Atlas.module.css",
+  "RepresentationAtlas.module.css",
 ];
 
 for (const file of requiredStyles) {
@@ -55,6 +56,7 @@ const labObjectIdentity = read(`${stylesRoot}/LabObjectIdentity.module.css`);
 const commandPaletteCss = read(`${stylesRoot}/LabCommandPalette.module.css`);
 const atlasCss = read(`${stylesRoot}/Atlas.module.css`);
 const audienceJourneyCss = read(`${stylesRoot}/AudienceJourneyGrid.module.css`);
+const representationAtlasCss = read(`${stylesRoot}/RepresentationAtlas.module.css`);
 
 for (const token of ["--royal-blue", "--old-gold", "--osha-red", "--osha-green"]) {
   expect(foundation.includes(token), `Foundation must own design token ${token}`);
@@ -81,6 +83,12 @@ expect(audienceJourneyCss.includes("grid-auto-rows: max-content"), "Audience ref
 expect(audienceJourneyCss.includes("font-size: .58rem"), "Compact audience path tags must remain legible at the larger tag scale");
 expect(foundation.includes("align-items: start"), "Homepage audience section must not stretch the reflow field to the lead column");
 expect(audienceJourneyCss.includes("@media (max-width: 720px)"), "Audience journey reflow must collapse to a single-column mobile field");
+expect(representationAtlasCss.includes(".mechanicsCircuit"), "Representation Atlas must style the six-slot mechanics circuit");
+expect(representationAtlasCss.includes("grid-template-columns: repeat(6,minmax(0,1fr))"), "Representation Atlas mechanics circuit must expose all six structural roles on wide screens");
+expect(representationAtlasCss.includes(".compareRows"), "Representation Atlas must style cross-domain role comparison");
+expect(representationAtlasCss.includes('[data-tone="violet"]'), "Representation Atlas must preserve distinct witness-domain tones");
+expect(representationAtlasCss.includes('[data-tone="green"]'), "Representation Atlas must preserve the physical witness-domain tone");
+expect(representationAtlasCss.includes("@media (max-width: 720px)"), "Representation Atlas must collapse its interaction for mobile");
 expect(foundation.includes("flex-wrap: wrap"), "footer navigation must wrap when contextual child routes are exposed");
 expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
 expect(!routeShared.includes(".footerNav a"), "RouteShared must not own shared site chrome");
@@ -157,6 +165,7 @@ const routeContracts = [
   ["InstitutionalContactPage.tsx", "Contact.module.css"],
   ["InstitutionalOpenLabPage.tsx", "OpenLab.module.css"],
   ["InstitutionalAtlasPage.tsx", "Atlas.module.css"],
+  ["InstitutionalRepresentationAtlasPage.tsx", "RepresentationAtlas.module.css"],
 ];
 
 for (const [component, routeModule] of routeContracts) {
