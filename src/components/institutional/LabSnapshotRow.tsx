@@ -91,8 +91,26 @@ export function LabSnapshotRow({
     >
       <div className={styles.snapshotRow}>
         <div className={styles.identity}>
-          <span className={styles.label}>{label}</span>
-          {status ? <span className={styles.status}>{status}</span> : null}
+          <div className={styles.identityHeading}>
+            <span className={styles.label}>{label}</span>
+            {status ? <span className={styles.status}>{status}</span> : null}
+          </div>
+
+          {(updated || note) ? (
+            <div className={styles.identityMeta}>
+              {updated ? (
+                <span className={styles.updated}>
+                  <small>Updated</small>
+                  <strong>{updated}</strong>
+                </span>
+              ) : null}
+              {note ? (
+                <span className={styles.info} title={note} aria-label={note}>
+                  <Info aria-hidden="true" />
+                </span>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         <div className={styles.divider} aria-hidden="true" />
@@ -139,24 +157,6 @@ export function LabSnapshotRow({
           })}
         </div>
 
-        {(updated || note) ? (
-          <>
-            <div className={styles.divider} aria-hidden="true" />
-            <div className={styles.meta}>
-              {updated ? (
-                <span className={styles.updated}>
-                  <small>Updated</small>
-                  <strong>{updated}</strong>
-                </span>
-              ) : null}
-              {note ? (
-                <span className={styles.info} title={note} aria-label={note}>
-                  <Info aria-hidden="true" />
-                </span>
-              ) : null}
-            </div>
-          </>
-        ) : null}
       </div>
 
       {breakdown && openMetric ? (
