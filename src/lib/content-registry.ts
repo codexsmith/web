@@ -15,6 +15,10 @@ import {
   persistencePublicationNodes,
 } from "@/lib/persistence-effectiveness-publication";
 import { publicationEdges, publicationNodes } from "@/lib/publication-portfolio";
+import {
+  aiGovernancePublicationEdges,
+  aiGovernancePublicationNodes,
+} from "@/lib/ai-governance-publications";
 import type { PublicationMetadata } from "@/lib/publication-types";
 import {
   getDirectedRelationLabel,
@@ -122,6 +126,7 @@ const rawNodes: ContentNode[] = [
   ...baseNodes,
   ...bridgeSystemNodes,
   ...publicationNodes,
+  ...aiGovernancePublicationNodes,
   ...persistencePublicationNodes,
 ];
 
@@ -135,6 +140,7 @@ export const edges: GraphEdge[] = [
   ...baseEdges,
   ...bridgeSystemEdges,
   ...publicationEdges,
+  ...aiGovernancePublicationEdges,
 ];
 edges.push(...persistencePublicationEdges);
 
