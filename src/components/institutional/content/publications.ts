@@ -126,69 +126,192 @@ export const flagshipPattern = [
 
 
 /**
- * Source-bound v3 publication selection.
+ * Source-governed v3 publication selection.
  *
- * This is a curated first-contact projection, not a publication-status promotion.
- * Status, readiness, claim ceilings, and next gates are inherited from the Lab's
- * publication program, publication graph, systems-kernel publication candidates,
- * and the existing public publication portfolio.
+ * These are curated first-contact records over three distinct publication-control
+ * authorities. The website may select and orient records; it must not translate
+ * routing/readiness/planning state into publication promotion or scientific authority.
  */
-export const selectedPublications = [
+export type PublicationSourceKind =
+  | "publication_sequence"
+  | "publication_graph"
+  | "publication_source_registry";
+
+export type PublicationDependency = {
+  id: string;
+  title: string;
+  status: string;
+};
+
+export type PublicationRecord = {
+  id: string;
+  featured: boolean;
+  typeCode: string;
+  type: string;
+  lane: string;
+  domain: string;
+  title: string;
+  orientation: string;
+  claimCeiling: string;
+  sourceKind: PublicationSourceKind;
+  sourceRegistryId: string;
+  sourceLabel: string;
+  sourceState: string;
+  recordState: string;
+  statusLabel: string;
+  sourceRef: string;
+  sourceHref: string;
+  sourceAuthority: string;
+  stage?: string;
+  readiness?: number;
+  readinessHint?: number;
+  wave?: number;
+  claimRisk?: string;
+  publicationGate?: string;
+  priority?: string;
+  dependencies?: readonly PublicationDependency[];
+  evidencePlan?: readonly string[];
+  feeds?: readonly string[];
+  surfaces: readonly string[];
+  tone: "blue" | "green" | "gold" | "yellow" | "orange";
+};
+
+export const publicationProjection = {
+  sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15",
+  sourceRevisionDate: "2026-09-18",
+  authority:
+    "The public catalog is a curated projection. Sequence position, graph readiness, source registration, and website selection do not establish publication, peer review, truth, novelty, or release authorization.",
+  sources: [
+    {
+      registryId: "REG-PUBLICATION-SEQUENCE",
+      label: "Publication Sequence",
+      recordCount: 24,
+      role: "Governance / dependency state",
+      authority:
+        "publication planning, sequence, and dependency-control state only; no scientific validity, readiness guarantee, publication promotion, truth, novelty, or release authorization",
+      href:
+        "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
+    },
+    {
+      registryId: "REG-PUBLICATION-GRAPH",
+      label: "Global Publication Graph",
+      recordCount: 112,
+      role: "Routing / readiness projection",
+      authority:
+        "operational publication routing, dependency, and readiness analysis only; no local scientific authority, publication promotion, institutional promotion, or source-state replacement",
+      href:
+        "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+    },
+    {
+      registryId: "REG-PUBLICATION-SOURCES",
+      label: "Publication Source Registry",
+      recordCount: 10,
+      role: "Identity / provenance routing",
+      authority:
+        "source identity, provenance, import decision, local/canonical correspondence, and routing metadata only; local publication-control artifacts remain authoritative and registration does not promote publication state",
+      href:
+        "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_SOURCE_REGISTRY.json",
+    },
+  ],
+} as const;
+
+const sequenceAuthority =
+  publicationProjection.sources[0].authority;
+const graphAuthority =
+  publicationProjection.sources[1].authority;
+const sourceRegistryAuthority =
+  publicationProjection.sources[2].authority;
+
+export const selectedPublications: readonly PublicationRecord[] = [
   {
-    id: "pub-closure-driven-development",
+    id: "PUB-001",
     featured: true,
     typeCode: "WP",
     type: "Working paper",
-    lane: "Boundary First Engineering",
+    lane: "Applied method",
     domain: "Software engineering / delivery methodology",
     title: "Closure-Driven Software Development",
-    abstract:
-      "A Boundary First engineering method for turning uncertainty into executable evidence before unresolved assumptions harden into architecture. The manuscript organizes delivery as progressive closure: discover, bound, build the delivery skeleton, execute, witness, then repair or promote.",
-    claimCeiling:
-      "Advanced practitioner draft. The current source does not establish that the method outperforms established engineering practice; worked cases, literature comparison, and external practitioner review remain publication gates.",
-    sourceState: "WEB PORTFOLIO + LAB PROGRAM",
-    recordState: "SELECTED · DRAFT",
-    sourceRef: "src/lib/publication-portfolio.ts + Lab publication_program.md",
-    nextGate: "Worked cases, practitioner review, literature comparison, and release editing.",
-    surfaces: ["Working manuscript", "Method source", "Worked cases pending", "External review pending"],
+    orientation:
+      "A Boundary First engineering method for turning uncertainty into executable evidence before unresolved assumptions harden into architecture. The current public orientation follows the source sequence record without treating sequence state as external validation.",
+    claimCeiling: "method proposal with worked case and comparative analysis",
+    sourceKind: "publication_sequence",
+    sourceRegistryId: "REG-PUBLICATION-SEQUENCE",
+    sourceLabel: "Publication Sequence",
+    sourceState: "adversarially_tested",
+    recordState: "adversarially_tested",
+    statusLabel: "SEQUENCE STATUS",
+    sourceRef:
+      "04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json#PUB-001",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
+    sourceAuthority: sequenceAuthority,
+    wave: 1,
+    dependencies: [
+      { id: "EN-003", title: "Software Worked-Case Pack", status: "source_complete" },
+      { id: "EN-005", title: "Independent Review Roster", status: "planned" },
+      { id: "EN-006", title: "Publication Declaration Template", status: "complete_internal" },
+    ],
+    surfaces: ["Wave 1", "adversarially_tested", "EN-005 planned"],
     tone: "blue",
   },
   {
-    id: "pub-corpus-forge-provenance",
+    id: "PUB-002",
     featured: false,
     typeCode: "WP",
     type: "Working paper",
-    lane: "Corpus Forge",
+    lane: "Research methods",
     domain: "Research methods / information science",
     title: "Corpus Forge: Provenance and Claim Discipline for AI-Assisted Knowledge Work",
-    abstract:
-      "A research-methods paper centered on the Operator–Critic–Human Gate workflow and durable source, claim, provenance, and promotion records for AI-assisted knowledge work.",
-    claimCeiling:
-      "Near-term publication candidate. The protocol is substantial, but publication still requires a live vertical-slice study; the machinery does not treat AI-generated fluency or execution as scientific validation.",
-    sourceState: "LAB PUBLICATION PROGRAM",
-    recordState: "SELECTED · CANDIDATE",
-    sourceRef: "Lab publication_program.md §4.1 / submission Phase A",
-    nextGate: "Execute and document a live Corpus Forge vertical slice with bounded evaluation and failure analysis.",
-    surfaces: ["Protocol", "Claim / source records", "Vertical slice pending", "Human gate required"],
+    orientation:
+      "A research-methods publication record centered on durable source, claim, provenance, criticism, and human-promotion controls for AI-assisted knowledge work.",
+    claimCeiling: "protocol and case study",
+    sourceKind: "publication_sequence",
+    sourceRegistryId: "REG-PUBLICATION-SEQUENCE",
+    sourceLabel: "Publication Sequence",
+    sourceState: "adversarially_tested",
+    recordState: "adversarially_tested",
+    statusLabel: "SEQUENCE STATUS",
+    sourceRef:
+      "04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json#PUB-002",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
+    sourceAuthority: sequenceAuthority,
+    wave: 1,
+    dependencies: [
+      { id: "EN-004", title: "Corpus Forge Vertical-Slice Pack", status: "adversarially_tested" },
+      { id: "EN-005", title: "Independent Review Roster", status: "planned" },
+      { id: "EN-006", title: "Publication Declaration Template", status: "complete_internal" },
+    ],
+    surfaces: ["Wave 1", "adversarially_tested", "EN-005 planned"],
     tone: "green",
   },
   {
-    id: "target-6a-interface-contracts",
+    id: "systems_interface_contracts",
     featured: false,
     typeCode: "WP",
-    type: "Working paper",
+    type: "Working paper candidate",
     lane: "Boundary-First Systems Kernel",
     domain: "Formal methods / interface and contract theory",
-    title: "Consequence- and Provenance-Aware Interface Contracts: A Translation Study from Boundary-First System Records",
-    abstract:
-      "A translation study that maps Boundary-First consequence, provenance, responsibility, repair, and forgetting records into an established interface or contract formalism, then tests what ordinary judgments are preserved and what the translation forgets.",
+    title:
+      "Consequence- and Provenance-Aware Interface Contracts: A Translation Study from Boundary-First System Records",
+    orientation:
+      "A source-registered translation-study candidate asking what Boundary-First consequence and provenance records preserve, add, or forget when mapped into established interface or contract formalisms.",
     claimCeiling:
-      "Academic candidate, not a new generic interface theory. Conservative decoration, a non-reducibility witness, and full redundancy are all acceptable outcomes; the contribution must survive direct comparison with mature interface and contract semantics.",
-    sourceState: "SYSTEM KERNEL CANDIDATE",
-    recordState: "SELECTED · TARGET-6A",
-    sourceRef: "Lab system_kernel/publication_candidates.md",
-    nextGate: "Choose a mature interface or contract formalism, define the translation, and complete preservation / forgetting tests.",
-    surfaces: ["Translation study", "Prior-art audit", "Preservation test", "Redundancy is valid"],
+      "typed provenance-aware systems metamodel under translation testing; no new generic interface/contract/refinement/equivalence/substitutability theory",
+    sourceKind: "publication_source_registry",
+    sourceRegistryId: "REG-PUBLICATION-SOURCES",
+    sourceLabel: "Publication Source Registry",
+    sourceState: "post prior-art audit publication planning",
+    recordState: "readiness_hint 3",
+    statusLabel: "READINESS HINT",
+    sourceRef:
+      "PUBLICATION_SOURCE_REGISTRY.json#src_system_kernel_publications / canonical_id=systems_interface_contracts",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_SOURCE_REGISTRY.json",
+    sourceAuthority: sourceRegistryAuthority,
+    readinessHint: 3,
+    priority: "highest",
+    surfaces: ["Canonical candidate ID", "Readiness hint 3", "Priority highest"],
     tone: "gold",
   },
   {
@@ -199,15 +322,24 @@ export const selectedPublications = [
     lane: "Information Mechanics",
     domain: "Databases / information / computation",
     title: "Relational Databases as Information Mechanics",
-    abstract:
-      "A Boundary-native Information Mechanics paper using relational databases as a calibration domain for retained and forgotten distinctions, reconstruction obligations, testing, reachability, and failure.",
+    orientation:
+      "A Boundary-native Information Mechanics publication node using relational databases as a calibration domain for retained and forgotten distinctions, reconstruction obligations, testing, reachability, and failure.",
     claimCeiling:
-      "Controlled Stage C candidate. The current publication gate requires theorem audit, calibrated novelty posture, and external review; database-theory machinery is treated as calibration and prior art rather than re-invention.",
-    sourceState: "PUBLICATION GRAPH · CONTROLLED",
-    recordState: "SELECTED · C5",
+      "candidate new formal contribution; requires full prior-art, theorem, countermodel, and review gates",
+    sourceKind: "publication_graph",
+    sourceRegistryId: "REG-PUBLICATION-GRAPH",
+    sourceLabel: "Global Publication Graph",
+    sourceState: "Stage C / readiness 5",
+    recordState: "Stage C · readiness 5",
+    statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#im_database_calibration",
-    nextGate: "Theorem audit, calibrated novelty posture, and external review.",
-    surfaces: ["Stage C", "Readiness 5", "Source-read priority", "External review pending"],
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+    sourceAuthority: graphAuthority,
+    stage: "C",
+    readiness: 5,
+    publicationGate: "theorem audit, calibrated novelty posture, external review",
+    surfaces: ["Stage C", "Readiness 5", "External review gate"],
     tone: "yellow",
   },
   {
@@ -218,15 +350,24 @@ export const selectedPublications = [
     lane: "Information Mechanics",
     domain: "Information / representation / computation",
     title: "Admissible Forgetting",
-    abstract:
-      "A Boundary-native Information Mechanics paper asking which distinctions a representation may safely forget relative to the testing, reachability, reconstruction, and consequence obligations that must survive.",
+    orientation:
+      "A Boundary-native Information Mechanics publication node asking which distinctions a representation may safely forget relative to testing, reachability, reconstruction, and consequence obligations.",
     claimCeiling:
-      "Controlled Stage C candidate. The paper remains bounded by its static theorem audit and prior-art completion gate; it does not claim that ordinary quotient, abstraction, or reduction machinery is novel.",
-    sourceState: "PUBLICATION GRAPH · CONTROLLED",
-    recordState: "SELECTED · C5",
+      "candidate new formal contribution; requires full prior-art, theorem, countermodel, and review gates",
+    sourceKind: "publication_graph",
+    sourceRegistryId: "REG-PUBLICATION-GRAPH",
+    sourceLabel: "Global Publication Graph",
+    sourceState: "Stage C / readiness 5",
+    recordState: "Stage C · readiness 5",
+    statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#im_admissible_forgetting",
-    nextGate: "Complete static theorem audit and prior-art review.",
-    surfaces: ["Stage C", "Readiness 5", "Source-read priority", "Theorem audit pending"],
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+    sourceAuthority: graphAuthority,
+    stage: "C",
+    readiness: 5,
+    publicationGate: "static theorem audit and prior-art completion",
+    surfaces: ["Stage C", "Readiness 5", "Theorem audit gate"],
     tone: "orange",
   },
   {
@@ -234,18 +375,33 @@ export const selectedPublications = [
     featured: false,
     typeCode: "RN",
     type: "Research note",
-    lane: "Classical mathematics calibration",
+    lane: "Boundary Readings of Classical Mathematics",
     domain: "Algebra / topology",
     title: "Quotient Spaces and Equivalence Relations as Admissible Forgetting",
-    abstract:
-      "A Boundary First reading of ordinary quotient mathematics: a quotient deliberately ceases to distinguish objects equivalent under a declared relation, with the universal property making the allowed forgetting explicit.",
+    orientation:
+      "A classical-mathematics calibration node: a quotient deliberately ceases to distinguish objects equivalent under a declared relation.",
     claimCeiling:
-      "Controlled Stage A classical reading. The point is calibration and translation: forgetting distinctions here is ordinary quotient mathematics when the equivalence relation is justified, not a claim to a new quotient theory.",
-    sourceState: "PUBLICATION GRAPH · CONTROLLED",
-    recordState: "SELECTED · A4",
+      "interpretive synthesis; underlying theorem or construction remains established native mathematics",
+    sourceKind: "publication_graph",
+    sourceRegistryId: "REG-PUBLICATION-GRAPH",
+    sourceLabel: "Global Publication Graph",
+    sourceState: "Stage A / readiness 4",
+    recordState: "Stage A · readiness 4",
+    statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#math_quotient_spaces",
-    nextGate: "Complete source-read manuscript treatment and preserve the unsafe-identification counterexample.",
-    surfaces: ["Stage A", "Readiness 4", "Classical calibration", "Counterexample retained"],
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+    sourceAuthority: graphAuthority,
+    stage: "A",
+    readiness: 4,
+    claimRisk: "low",
+    evidencePlan: [
+      "set/group/topological quotient examples",
+      "universal property",
+      "unsafe identification counterexample",
+    ],
+    feeds: ["syn_controlled_forgetting_math_physics", "schem_exact_quotients"],
+    surfaces: ["Stage A", "Readiness 4", "Claim risk low"],
     tone: "blue",
   },
   {
@@ -253,18 +409,38 @@ export const selectedPublications = [
     featured: false,
     typeCode: "RN",
     type: "Research note",
-    lane: "Classical physics calibration",
+    lane: "Boundary Readings of Classical Physics",
     domain: "Quantum information",
     title: "Partial Trace as Admissible Forgetting",
-    abstract:
-      "A Boundary First reading of subsystem reduction in quantum information: global distinctions are erased while a declared class of local observables is preserved, and erased correlations cannot be inferred from the reduced state alone.",
+    orientation:
+      "A classical-physics calibration node in which subsystem reduction erases global distinctions while preserving a declared class of local observables.",
     claimCeiling:
-      "Controlled Stage A classical reading. Adequacy is relative to the observation algebra; successful subsystem reduction does not make discarded global correlations recoverable or establish new quantum theory.",
-    sourceState: "PUBLICATION GRAPH · CONTROLLED",
-    recordState: "SELECTED · A5",
+      "interpretive synthesis; established mathematical structure must be separated from physical interpretation and empirical adequacy",
+    sourceKind: "publication_graph",
+    sourceRegistryId: "REG-PUBLICATION-GRAPH",
+    sourceLabel: "Global Publication Graph",
+    sourceState: "Stage A / readiness 5",
+    recordState: "Stage A · readiness 5",
+    statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#phys_partial_trace",
-    nextGate: "Complete source-read treatment around the Bell-state control, local expectations, contraction, and lost-correlation witness.",
-    surfaces: ["Stage A", "Readiness 5", "Quantum information", "Lost-correlation witness"],
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+    sourceAuthority: graphAuthority,
+    stage: "A",
+    readiness: 5,
+    claimRisk: "low",
+    evidencePlan: [
+      "Bell-state vs maximally mixed control",
+      "local expectation preservation",
+      "relative entropy contraction",
+      "lost-correlation witness",
+    ],
+    feeds: [
+      "syn_controlled_forgetting_math_physics",
+      "syn_recovery_not_inverse",
+      "rm_commuting_reductions",
+    ],
+    surfaces: ["Stage A", "Readiness 5", "Claim risk low"],
     tone: "green",
   },
   {
@@ -272,18 +448,33 @@ export const selectedPublications = [
     featured: false,
     typeCode: "RN",
     type: "Research note",
-    lane: "Classical physics calibration",
+    lane: "Boundary Readings of Classical Physics",
     domain: "Electromagnetism",
     title: "Gauss’s Law and Maxwell Boundary Conditions",
-    abstract:
-      "A Boundary First reading of electromagnetism in which sources, fluxes, and interface matching are connected by exact field equations and jump conditions, making boundary structure literal rather than metaphorical.",
+    orientation:
+      "A classical-physics calibration node connecting sources, fluxes, interface matching, exact field equations, and jump conditions.",
     claimCeiling:
-      "Controlled Stage A classical reading. The governing equations and interface conditions are established electromagnetism; the contribution is a bounded translation and calibration, not a replacement or extension of Maxwell theory.",
-    sourceState: "PUBLICATION GRAPH · CONTROLLED",
-    recordState: "SELECTED · A4",
+      "interpretive synthesis; established mathematical structure must be separated from physical interpretation and empirical adequacy",
+    sourceKind: "publication_graph",
+    sourceRegistryId: "REG-PUBLICATION-GRAPH",
+    sourceLabel: "Global Publication Graph",
+    sourceState: "Stage A / readiness 4",
+    recordState: "Stage A · readiness 4",
+    statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#phys_maxwell_gauss",
-    nextGate: "Complete source-read treatment of integral Gauss law, interface conditions, and surface charge/current examples.",
-    surfaces: ["Stage A", "Readiness 4", "Electromagnetism", "Interface conditions"],
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+    sourceAuthority: graphAuthority,
+    stage: "A",
+    readiness: 4,
+    claimRisk: "low",
+    evidencePlan: [
+      "integral Gauss law",
+      "interface boundary conditions",
+      "surface charge/current examples",
+    ],
+    feeds: ["syn_bulk_boundary_transport"],
+    surfaces: ["Stage A", "Readiness 4", "Claim risk low"],
     tone: "gold",
   },
 ] as const;

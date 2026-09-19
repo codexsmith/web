@@ -226,7 +226,7 @@ expect(augustaCss.includes("height: 112px"), "Augusta focus-stage peers must con
 expect(augustaCss.includes('.caseStage[data-reflow-state="selected"]'), "Augusta selected stage must have an explicit committed-inspection state");
 expect(augustaCss.includes(".caseCycleReturn"), "Augusta cycle must visibly return new evidence to the claim-boundary stage");
 
-expect(reflow.includes('data-reflow-field={fieldId}'), "Reflow must mark field boundaries for nested interaction");
-expect(reflow.includes("clickBelongsToNestedReflowField"), "Reflow must let nested fields own their own card clicks");
+expect(component.includes('data-reflow-field={fieldId}'), "Reflow must mark field boundaries for nested interaction");
+expect(component.includes("clickBelongsToNestedReflowField"), "Reflow must let nested fields own their own card clicks");
 
 console.log("BFUX Reflow Field contracts passed.");

@@ -557,6 +557,12 @@ expect(publicationCatalog.includes("selectedPublications"), "Publication catalog
 expect(publicationCatalog.includes("SOURCE-BOUND RECORDS"), "Publication catalog must expose that its visible records are source-bound");
 expect(publicationCatalog.includes("selectedPublications.length"), "Publication catalog must derive its bound-record count from the selected publication source");
 expect(publicationCatalog.includes("publicationClaimCeiling"), "Publication catalog must keep claim ceilings attached to visible records");
+expect(publicationCatalog.includes("publicationProjection"), "Publication catalog must expose the pinned publication-control projection");
+expect(publicationCatalog.includes("publicationProjection.sources.map"), "Publication catalog must expose all three publication-control authorities");
+expect(publicationCatalog.includes("PublicationSourceContract"), "Publication catalog must bind every visible record back to its controlling source");
+expect(publicationCatalog.includes("PublicationControlDetails"), "Publication catalog must expose source dependencies, gates, or evidence plans where declared");
+expect(publicationCatalog.includes("PublicationAuthorityFirewall"), "Publication catalog must preserve the controlling registry authority ceiling");
+expect(publicationCatalog.includes('id={"publication-" + publication.id}'), "Publication catalog records must support exact deep links");
 
 console.log("Institutional component architecture passed.");
 
@@ -579,6 +585,16 @@ expect(projectsPageForObjects.includes("status={project.status}"), "Project iden
 expect(publicationsCatalogForObjects.includes("LabObjectIdentity"), "Publication records must compose LabObjectIdentity");
 expect(publicationsCatalogForObjects.includes('kind="publication"'), "Publication records must identify publication objects");
 expect(publicationsCatalogForObjects.includes("identifier={publication.id}"), "Publication record identifiers must remain source-provided records");
+expect(publicationsCatalogForObjects.includes('identifierLabel="SOURCE ID"'), "Publication identities must disclose source-governed identifiers");
+const publicationContentForObjects = read(`${root}/content/publications.ts`);
+expect(publicationContentForObjects.includes('id: "PUB-001"'), "Publication source IDs must replace website-local publication aliases");
+expect(publicationContentForObjects.includes('id: "PUB-002"'), "Publication source IDs must preserve the second sequence artifact");
+expect(publicationContentForObjects.includes('id: "systems_interface_contracts"'), "Publication Source Registry canonical IDs must remain intact");
+expect(!publicationContentForObjects.includes('id: "pub-closure-driven-development"'), "Website-local publication aliases must not survive as canonical publication IDs");
+expect(publicationContentForObjects.includes('sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Publication projection must pin the Lab source revision");
+expect(publicationContentForObjects.includes('"REG-PUBLICATION-SEQUENCE"'), "Publication projection must include Publication Sequence authority");
+expect(publicationContentForObjects.includes('"REG-PUBLICATION-GRAPH"'), "Publication projection must include Publication Graph authority");
+expect(publicationContentForObjects.includes('"REG-PUBLICATION-SOURCES"'), "Publication projection must include Publication Source Registry authority");
 expect(publicationsCatalogForObjects.includes("status={publication.recordState}"), "Publication identity must preserve record state");
 
 
@@ -608,6 +624,10 @@ expect(atlasContent.includes("machineryRecords.map"), "Lab Atlas must admit the 
 expect(atlasContent.includes('/v3/apparatus#machinery-'), "Machinery Atlas nodes must route to exact native machinery records");
 expect(atlasContent.includes("machine.authorityCeiling"), "Machinery search must preserve authority ceilings");
 expect(atlasContent.includes("machine.sideEffectClass"), "Machinery search must preserve side-effect classes");
+expect(atlasContent.includes('/v3/publications#publication-'), "Publication Atlas nodes must deep-link exact publication records");
+expect(atlasContent.includes("publication.sourceAuthority"), "Publication search must preserve source authority ceilings");
+expect(atlasContent.includes("publication.dependencies"), "Publication search must preserve declared sequence dependencies");
+expect(atlasContent.includes("publication.evidencePlan"), "Publication search must preserve graph evidence plans");
 expect(atlasContent.includes("experimentResearchEdges"), "Lab Atlas must derive Experiment-to-Research edges from declared lane links");
 expect(atlasContent.includes('relation: lane.role === "primary" ? "PRIMARY RESEARCH LANE" : "RELATED RESEARCH LANE"'), "Experiment edges must preserve primary versus secondary research-lane semantics");
 expect(atlasContent.includes('/v3/experiments#experiment-'), "Experiment Atlas nodes must route to exact native experiment records");
