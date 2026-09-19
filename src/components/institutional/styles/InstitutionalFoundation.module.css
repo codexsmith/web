@@ -2245,14 +2245,15 @@
   transition: right 120ms ease;
 }
 
-.nav a:focus,
-.nav a:focus-visible {
-  outline: 3px solid #d6b449;
+.header .navLink:focus,
+.header .navLink:focus-visible {
+  outline: 3px solid #d6b449 !important;
   outline-offset: 4px;
+  box-shadow: 0 0 0 3px rgba(214, 180, 73, .42) !important;
 }
 
-.nav a:focus::after,
-.nav a:focus-visible::after {
+.header .navLink:focus::after,
+.header .navLink:focus-visible::after {
   right: 0;
 }
 
@@ -3998,12 +3999,20 @@
     grid-row: 1;
   }
 
+  .header {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
   .nav {
     grid-column: 1 / -1;
     grid-row: 2;
+    width: 100%;
+    max-width: 100%;
     justify-self: stretch;
     justify-content: flex-start;
     overflow-x: auto;
+    overscroll-behavior-inline: contain;
     padding: 5px 0 2px;
   }
 }
