@@ -166,7 +166,6 @@ export function HomeOrientationSection() {
             <div className={styles.homeOrientationDetail}>
               <div className={styles.methodSection}>
                 <div className={styles.sectionLead}>
-                  <p className={styles.sectionIndex}>OUR APPROACH</p>
                   <p>
                     We make complex systems easier to understand, test, improve, and explain.
                     The basic move is simple: show the structure, track what changes, follow the
@@ -212,10 +211,11 @@ export function HomeOrientationSection() {
             <div className={styles.homeOrientationDetail}>
               <div className={styles.practiceLineage}>
                 <div className={styles.practiceLineageLead}>
-                  <p className={styles.sectionIndex}>OPERATING BRAID</p>
                   <p>
-                    Lean–Agile, scientific method, and agentic reasoning connect through
-                    state-based reasoning to create Boundary First.
+                    The braid is recursive: make work visible, formulate a discriminating question,
+                    let agents search or act, then inspect the resulting state before the next move.
+                    Boundary First supplies the shared state model, admissibility boundaries, and
+                    handoff discipline that let those loops compose.
                   </p>
                 </div>
 
@@ -258,7 +258,6 @@ export function HomeOrientationSection() {
             <div className={styles.homeOrientationDetail}>
               <div className={styles.stewardshipBand}>
                 <div className={styles.stewardshipBandLead}>
-                  <p className={styles.sectionIndex}>STEWARDSHIP</p>
                   <p>
                     Boundary First Labs treats stewardship as a concrete engineering and
                     institutional obligation: <strong>tend</strong> what is shared, <strong>maintain</strong> what others depend
