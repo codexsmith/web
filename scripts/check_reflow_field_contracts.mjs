@@ -1,6 +1,9 @@
 import fs from "node:fs";
 
 const component = fs.readFileSync("src/components/bfux/ReflowField.tsx", "utf8");
+const reflow = component;
+const reflowCss = fs.readFileSync("src/components/bfux/ReflowField.module.css", "utf8");
+const audienceJourneys = fs.readFileSync("src/components/institutional/AudienceJourneyGrid.tsx", "utf8");
 const research = fs.readFileSync("src/components/institutional/InstitutionalResearchPage.tsx", "utf8");
 const researchContext = fs.readFileSync("src/components/institutional/sections/ResearchContextSection.tsx", "utf8");
 const products = fs.readFileSync("src/components/institutional/InstitutionalProductsPage.tsx", "utf8");
