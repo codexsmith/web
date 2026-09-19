@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description:
     "The public participation boundary for critique, collaboration, public-system inspection, and unusual work at Boundary First Labs.",
   alternates: { canonical: "/v3/open-lab" },
-  robots: { index: false, follow: false },
 };
 
 type OpenLabSearchParams = {

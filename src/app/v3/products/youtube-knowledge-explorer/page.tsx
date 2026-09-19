@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:
     "Turn long-form YouTube into searchable, timestamped, structured knowledge while preserving direct paths back to source evidence.",
   alternates: { canonical: "/v3/products/youtube-knowledge-explorer" },
-  robots: { index: false, follow: false },
 };
 
 export default function Page() {

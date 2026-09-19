@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:
     "Applied systems work from Boundary First Labs: software and architecture review, AI governance, bounded pilots, systems diagnosis, research infrastructure, workshops, and technical advisory.",
   alternates: { canonical: "/v3/applied-work" },
-  robots: { index: false, follow: false },
 };
 
 export default function Page() {

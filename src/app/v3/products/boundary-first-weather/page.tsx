@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:
     "Boundary First Weather is a computational research and decision-support product for testing boundary-aware diagnostics, forecast disagreement, and selective refinement.",
   alternates: { canonical: "/v3/products/boundary-first-weather" },
-  robots: { index: false, follow: false },
 };
 
 export default function Page() {

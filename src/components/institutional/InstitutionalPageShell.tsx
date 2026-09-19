@@ -11,8 +11,17 @@ export function InstitutionalPageShell({
 }) {
   return (
     <div className={styles.page}>
+      <a className={styles.skipLink} href="#institutional-main">
+        Skip to main content
+      </a>
       <InstitutionalHeader />
-      <main className={mainClassName}>{children}</main>
+      <main
+        className={mainClassName}
+        id="institutional-main"
+        tabIndex={-1}
+      >
+        {children}
+      </main>
       <InstitutionalFooter />
     </div>
   );
