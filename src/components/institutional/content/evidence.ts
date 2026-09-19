@@ -117,56 +117,56 @@ export const nativeEvidence = [
     title: "Research corpus",
     description:
       "A large source-controlled body of research notes, formalizations, claim records, domain programs, literature work, and manuscript material can be inspected at artifact level rather than described only from memory.",
-    href: "/v3/research",
+    href: "/research",
     linkLabel: "Inspect Research",
   },
   {
     title: "Projects + prototypes",
     description:
       "The Lab maintains bounded projects that turn methods into software, experiments, simulations, public tools, and domain-specific demonstrations with explicit maturity states.",
-    href: "/v3/projects",
+    href: "/projects",
     linkLabel: "Inspect Projects",
   },
   {
     title: "Product objects",
     description:
       "Product candidates are represented as concrete objects with audience, purpose, evidence needs, and commercialization boundaries rather than as a list of ideas.",
-    href: "/v3/products",
+    href: "/products",
     linkLabel: "Inspect Products",
   },
   {
     title: "Research apparatus",
     description:
       "Registries, source records, claim/evidence machinery, review loops, manifests, and executable tooling make the Lab's operating method more inspectable than a private notebook or founder narrative.",
-    href: "/v3/apparatus",
+    href: "/apparatus",
     linkLabel: "Inspect Apparatus",
   },
   {
     title: "Applied offers",
     description:
       "Commercial work is packaged into bounded reviews, pilots, workshops, architecture work, governance analysis, and technical advisory—with explicit scope and claim boundaries.",
-    href: "/v3/applied-work",
+    href: "/applied-work",
     linkLabel: "Inspect Applied Work",
   },
   {
     title: "Agentic scientific machinery",
     description:
       "The Agentic Scientific Method, Corpus Forge, experiment records, critic loops, claim/source controls, and human promotion gates make the Lab's research process itself inspectable. The machinery records search, alternatives, tests, nulls, defects, repair, provenance, and authority state.",
-    href: "/v3/projects",
+    href: "/projects",
     linkLabel: "Inspect Agentic Scientific Method",
   },
   {
     title: "Stewardship machinery",
     description:
       "Source/provenance records, claim-state controls, handoff packets, human authority boundaries, critique intake, maintenance responsibilities, and explicit consequence tracking show how the Lab tries to preserve knowledge, agency, and long-horizon responsibility rather than treating publication or deployment as closure.",
-    href: "/v3/apparatus",
+    href: "/apparatus",
     linkLabel: "Inspect Stewardship Machinery",
   },
   {
     title: "Publication discipline",
     description:
       "The publication surface distinguishes manuscripts, stubs, release state, review state, and bound canonical documents rather than calling every substantial draft a publication.",
-    href: "/v3/publications",
+    href: "/publications",
     linkLabel: "Inspect Publications",
   },
 ] as const;
