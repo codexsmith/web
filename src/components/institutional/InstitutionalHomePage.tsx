@@ -62,11 +62,6 @@ export function InstitutionalHomePage() {
           <div className={styles.audienceEntryLead}>
             <p className={styles.sectionIndex}>CHOOSE YOUR OWN PATH</p>
             <h2>Start with why you came, not with the Lab&apos;s org chart.</h2>
-            <p>
-              The same institution looks different depending on whether you came to evaluate
-              research, solve an engineering problem, fund work, collaborate, commission applied
-              work, challenge a claim, or simply understand what this place is.
-            </p>
             <Link className={styles.audienceEntryLink} href="/v3/start">
               Open all audience paths
               <span aria-hidden="true">→</span>

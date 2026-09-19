@@ -5,6 +5,10 @@
   --reflow-selected-start: 2;
   --reflow-selected-span: 10;
   min-width: 0;
+  align-self: start;
+  align-items: start;
+  align-content: start;
+  grid-auto-rows: max-content;
 }
 
 .journey {
@@ -76,7 +80,7 @@
 
 .summaryTopline > small {
   color: #718091;
-  font: 700 .46rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 700 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .08em;
   text-transform: uppercase;
 }
@@ -103,12 +107,12 @@
 .routePreview {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 15px;
+  gap: 7px;
+  margin-top: 13px;
 }
 
 .routePreview span {
-  padding: 5px 7px;
+  padding: 7px 9px;
   border: 1px solid rgba(16,32,54,.13);
   background: rgba(255,255,255,.72);
   color: #526277;
@@ -287,16 +291,17 @@
 }
 
 .fieldCompact .routePreview {
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 10px;
 }
 
 .fieldCompact .routePreview span {
-  padding: 4px 6px;
-  font-size: .42rem;
+  padding: 7px 9px;
+  font-size: .58rem;
 }
 
 .fieldCompact .inspectCue {
-  margin-top: 10px;
+  margin-top: 9px;
   padding-top: 0;
   font-size: .45rem;
 }

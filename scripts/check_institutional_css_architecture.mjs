@@ -76,6 +76,10 @@ expect(audienceJourneyCss.includes("--reflow-selected-span: 10"), "Audience jour
 expect(audienceJourneyCss.includes('.journey[data-reflow-state="selected"]'), "Audience journey styling must distinguish the selected focal state");
 expect(audienceJourneyCss.includes(".fieldCompact"), "Audience journey reflow must support the compact homepage projection");
 expect(audienceJourneyCss.includes("min-height: 0"), "Audience journey cards must not force artificial minimum height");
+expect(audienceJourneyCss.includes("align-items: start"), "Audience reflow must top-align content-sized cards");
+expect(audienceJourneyCss.includes("grid-auto-rows: max-content"), "Audience reflow rows must size to card content");
+expect(audienceJourneyCss.includes("font-size: .58rem"), "Compact audience path tags must remain legible at the larger tag scale");
+expect(foundation.includes("align-items: start"), "Homepage audience section must not stretch the reflow field to the lead column");
 expect(audienceJourneyCss.includes("@media (max-width: 720px)"), "Audience journey reflow must collapse to a single-column mobile field");
 expect(foundation.includes("flex-wrap: wrap"), "footer navigation must wrap when contextual child routes are exposed");
 expect(!routeShared.includes(".nav a"), "RouteShared must not own shared site chrome");
