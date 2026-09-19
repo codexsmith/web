@@ -140,6 +140,12 @@ expect(agenticScientificMethod.includes(".asmPhaseGroups"), "Agentic Scientific 
 expect(agenticScientificMethod.includes(".asmTwinSpaces"), "Agentic Scientific Method must visualize represented and observed state spaces");
 expect(agenticScientificMethod.includes(".asmValidationLadder"), "Agentic Scientific Method must expose its validation ladder");
 
+const publicationCss = read(`${stylesRoot}/Publications.module.css`);
+expect(publicationCss.includes(".publicationControlSources"), "Publications must style the three publication-control authorities");
+expect(publicationCss.includes(".publicationSourceContract"), "Publications must style source-record provenance contracts");
+expect(publicationCss.includes(".publicationControlDetails"), "Publications must style source governance details");
+expect(publicationCss.includes(".publicationAuthorityFirewall"), "Publications must style per-record authority ceilings");
+
 const apparatusCss = read(`${stylesRoot}/Apparatus.module.css`);
 expect(apparatusCss.includes(".machineryRegistry"), "Apparatus must style the registered machinery surface");
 expect(apparatusCss.includes(".machineryGrid"), "Apparatus must style the machinery object grid");
