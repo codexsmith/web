@@ -21,6 +21,9 @@ const openLabCss = fs.readFileSync("src/components/institutional/styles/OpenLab.
 const about = fs.readFileSync("src/components/institutional/InstitutionalAboutPage.tsx", "utf8");
 const aboutGroups = fs.readFileSync("src/components/institutional/sections/AboutReflowGroups.tsx", "utf8");
 const aboutCss = fs.readFileSync("src/components/institutional/styles/About.module.css", "utf8");
+const home = fs.readFileSync("src/components/institutional/InstitutionalHomePage.tsx", "utf8");
+const homeOrientation = fs.readFileSync("src/components/institutional/sections/HomeOrientationSection.tsx", "utf8");
+const homeCss = fs.readFileSync("src/components/institutional/styles/InstitutionalFoundation.module.css", "utf8");
 const augusta = fs.readFileSync("src/components/institutional/InstitutionalAugustaMaintenanceDebtPage.tsx", "utf8");
 const augustaCycle = fs.readFileSync("src/components/institutional/sections/AugustaCaseCycleSection.tsx", "utf8");
 const augustaCss = fs.readFileSync("src/components/institutional/styles/AugustaMaintenanceDebt.module.css", "utf8");
@@ -184,6 +187,20 @@ for (const [name, source] of [
   expect(source.includes("min-height: 166px"), `${name} REST Reflow cards should use the compact card floor`);
   expect(source.includes("height: 112px"), `${name} focus-stage peers should use the compact peer height`);
 }
+
+expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choose Your Own Path through Stewardship as one Reflow field");
+expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
+expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
+expect(homeOrientation.includes("itemOrder={homeOrientationOrder}"), "Homepage orientation must declare stable source ordering");
+expect((homeOrientation.match(/<ReflowFieldItem/g) || []).length === 4, "Homepage orientation must expose exactly four Reflow sections");
+for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) {
+  expect(homeOrientation.includes(`id="${id}"`), `Homepage orientation must retain the ${id} section`);
+}
+expect(homeCss.includes(".homeOrientationGrid"), "Homepage orientation must style a dedicated Reflow field");
+expect(homeCss.includes("--reflow-columns: 12"), "Homepage orientation REST state must use a twelve-column field");
+expect(homeCss.includes("--reflow-span: 3"), "Four homepage orientation cards must share the REST row evenly");
+expect(homeCss.includes("height: 112px"), "Homepage focus-stage peers must contract to compact context plates");
+expect(homeCss.includes('.homeOrientationCard[data-reflow-state="selected"]'), "Homepage selected section must have an explicit committed-inspection state");
 
 expect(augusta.includes("<AugustaCaseCycleSection />"), "Augusta civic case must compose its six substantive stages as one Reflow cycle");
 expect(augustaCycle.includes('layoutMode="focus-stage"'), "Augusta civic case cycle must use focus-stage reflow");
