@@ -73,13 +73,15 @@
 
 .divider {
   width: 1px;
-  height: 24px;
+  height: 38px;
   flex: 0 0 1px;
   background: var(--snapshot-line);
 }
 
 .metrics {
   flex: 1 1 auto;
+  display: flex;
+  align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
@@ -87,6 +89,8 @@
 .pill {
   appearance: none;
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
   gap: 7px;
   min-height: 34px;
   padding: 7px 11px;
