@@ -26,6 +26,7 @@ function atLeast(actual, minimum) {
 
 const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
 const packageLock = JSON.parse(fs.readFileSync("package-lock.json", "utf8"));
+const vercelConfig = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
 const workflow = fs.readFileSync(".github/workflows/review-gate.yml", "utf8");
 const nvmrc = fs.readFileSync(".nvmrc", "utf8").trim();
 
@@ -39,6 +40,21 @@ if (nvmrc !== "24") {
 
 if (!/node-version:\s*24(?:\.x)?\s*$/m.test(workflow)) {
   fail("Review Gate must run on Node 24");
+}
+
+const deploymentEnabled = vercelConfig.git?.deploymentEnabled;
+if (
+  deploymentEnabled?.["**"] !== false ||
+  deploymentEnabled?.main !== true ||
+  Object.prototype.hasOwnProperty.call(deploymentEnabled ?? {}, "*")
+) {
+  fail(
+    'vercel.json must disable automatic Git deployments with "**": false and explicitly enable only main; "*" does not cover slash-delimited branches',
+  );
+}
+
+if (vercelConfig.ignoreCommand !== "sh scripts/vercel-ignore-build.sh") {
+  fail("vercel.json must retain the quota-preserving ignored-build script");
 }
 
 const nextDeclared = packageJson.dependencies?.next;
