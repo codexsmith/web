@@ -50,6 +50,58 @@ const homeOrientationSummaries = {
   },
 } as const;
 
+function HomeOrientationMiniature({
+  id,
+}: {
+  id: (typeof homeOrientationOrder)[number];
+}) {
+  if (id === "choose-path") {
+    return (
+      <div
+        className={[styles.homeOrientationMiniature, styles.homeOrientationMosaic].join(" ")}
+        aria-hidden="true"
+      >
+        {Array.from({ length: 7 }, (_, index) => <span key={index} />)}
+      </div>
+    );
+  }
+
+  if (id === "approach") {
+    return (
+      <div
+        className={[styles.homeOrientationMiniature, styles.homeOrientationStack].join(" ")}
+        aria-hidden="true"
+      >
+        <span /><span /><span /><span /><span />
+      </div>
+    );
+  }
+
+  if (id === "operating-braid") {
+    return (
+      <div
+        className={[styles.homeOrientationMiniature, styles.homeOrientationBraidMini].join(" ")}
+        aria-hidden="true"
+      >
+        <div><span /><span /><span /></div>
+        <i>→</i>
+        <strong />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={[styles.homeOrientationMiniature, styles.homeOrientationStewardMini].join(" ")}
+      aria-hidden="true"
+    >
+      <span>I</span>
+      <span>H</span>
+      <span>E</span>
+    </div>
+  );
+}
+
 function HomeOrientationSummary({
   id,
 }: {
@@ -59,9 +111,12 @@ function HomeOrientationSummary({
 
   return (
     <div className={styles.homeOrientationSummary} id={id}>
-      <span>{summary.eyebrow}</span>
-      <h3>{summary.title}</h3>
-      <p>{summary.description}</p>
+      <div className={styles.homeOrientationSummaryCopy}>
+        <span>{summary.eyebrow}</span>
+        <h3>{summary.title}</h3>
+        <p>{summary.description}</p>
+      </div>
+      <HomeOrientationMiniature id={id} />
     </div>
   );
 }
