@@ -1,4 +1,7 @@
 .field {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: grid;
   grid-template-columns: repeat(var(--reflow-columns, 12), minmax(0, 1fr));
   grid-auto-flow: dense;
