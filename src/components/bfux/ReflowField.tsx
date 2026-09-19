@@ -169,6 +169,13 @@ export function ReflowField({
     setSelectedId(id);
   }, [selectedId]);
 
+  const peerCount = selectedId
+    ? Math.max(itemOrder.length - 1, 1)
+    : Math.max(itemOrder.length, 1);
+  const fieldStyle = {
+    "--reflow-peer-count": peerCount,
+  } as CSSProperties;
+
   const context = useMemo(
     () => ({
       selectedId,
@@ -204,6 +211,7 @@ export function ReflowField({
           data-reflow-active={selectedId ? "true" : "false"}
           data-reflow-mode={layoutMode}
           data-reflow-rest-layout={restLayout}
+          style={fieldStyle}
           onKeyDown={(event) => {
             if (event.key === "Escape" && selectedId !== null) {
               event.preventDefault();
