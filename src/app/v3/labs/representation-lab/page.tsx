@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description:
     "Interactive representation laboratory: keep one grid world fixed while changing the task, reasoning method, information boundary, and representational carrier.",
   alternates: { canonical: "/labs/representation-lab" },
-  robots: { index: false, follow: true },
 };
 
 export default function RepresentationLabPage() {
