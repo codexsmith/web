@@ -189,6 +189,7 @@ for (const [name, source] of [
 }
 
 expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choose Your Own Path through Stewardship as one Reflow field");
+expect(!home.includes("\\\\n\\\\n"), "Homepage must not render escaped newline literals around the orientation field");
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
 expect(homeOrientation.includes("itemOrder={homeOrientationOrder}"), "Homepage orientation must declare stable source ordering");
@@ -197,8 +198,13 @@ for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) 
   expect(homeOrientation.includes(`id="${id}"`), `Homepage orientation must retain the ${id} section`);
 }
 expect(homeCss.includes(".homeOrientationGrid"), "Homepage orientation must style a dedicated Reflow field");
+expect(homeOrientation.includes("HomeOrientationMiniature"), "Homepage orientation summaries must preview their internal content grammar");
+expect(homeCss.includes(".homeOrientationMosaic"), "Choose Your Own Path must expose a mosaic preview");
+expect(homeCss.includes(".homeOrientationStack"), "Our Approach must expose stacked-row preview");
+expect(homeCss.includes(".homeOrientationBraidMini"), "Operating Braid must expose a three-to-one preview");
+expect(homeCss.includes(".homeOrientationStewardMini"), "Stewardship must expose a three-box preview");
 expect(homeCss.includes("--reflow-columns: 12"), "Homepage orientation REST state must use a twelve-column field");
-expect(homeCss.includes("--reflow-span: 3"), "Four homepage orientation cards must share the REST row evenly");
+expect(homeCss.includes("--reflow-span: 6"), "Homepage orientation REST state must compose as a two-by-two field");
 expect(homeCss.includes("height: 112px"), "Homepage focus-stage peers must contract to compact context plates");
 expect(homeCss.includes('.homeOrientationCard[data-reflow-state="selected"]'), "Homepage selected section must have an explicit committed-inspection state");
 
