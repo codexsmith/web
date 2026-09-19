@@ -137,7 +137,11 @@ async function inspectPage(page) {
         if (text) return text;
       }
 
-      if (element instanceof HTMLInputElement) {
+      if (
+        element instanceof HTMLInputElement ||
+        element instanceof HTMLTextAreaElement ||
+        element instanceof HTMLSelectElement
+      ) {
         const labels = Array.from(element.labels ?? [])
           .map((label) => label.textContent?.trim() ?? "")
           .filter(Boolean)
@@ -161,24 +165,46 @@ async function inspectPage(page) {
           typeof element.className === "string" ? element.className.slice(0, 120) : "",
       }));
 
-    const undersizedControls = interactive
-      .filter((element) => {
-        if (element.matches("a") && getComputedStyle(element).display === "inline") {
+    const interactiveGeometry = interactive.map((element) => {
+      const rect = element.getBoundingClientRect();
+      return {
+        element,
+        rect,
+        centerX: rect.left + rect.width / 2,
+        centerY: rect.top + rect.height / 2,
+      };
+    });
+
+    const targetSpacingViolations = interactiveGeometry
+      .filter(({ element, rect }) => {
+        if (rect.width >= 24 && rect.height >= 24) return false;
+
+        if (
+          element.matches("a") &&
+          (getComputedStyle(element).display === "inline" ||
+            Boolean(element.closest("p, li, dd, dt, figcaption, blockquote")))
+        ) {
           return false;
         }
-        const rect = element.getBoundingClientRect();
-        return rect.width < 24 || rect.height < 24;
+
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        return interactiveGeometry.some((other) => {
+          if (other.element === element) return false;
+          return (
+            Math.abs(other.centerX - centerX) < 24 &&
+            Math.abs(other.centerY - centerY) < 24
+          );
+        });
       })
       .slice(0, 20)
-      .map((element) => {
-        const rect = element.getBoundingClientRect();
-        return {
-          tag: element.tagName.toLowerCase(),
-          name: accessibleName(element).slice(0, 100),
-          width: Math.round(rect.width * 10) / 10,
-          height: Math.round(rect.height * 10) / 10,
-        };
-      });
+      .map(({ element, rect }) => ({
+        tag: element.tagName.toLowerCase(),
+        name: accessibleName(element).slice(0, 100),
+        width: Math.round(rect.width * 10) / 10,
+        height: Math.round(rect.height * 10) / 10,
+      }));
 
     const clippedText = Array.from(
       document.querySelectorAll("h1,h2,h3,h4,p,li,strong,small,a,button,span"),
@@ -233,6 +259,28 @@ async function inspectPage(page) {
       })
       .slice(0, 20);
 
+    const overflowElements = Array.from(document.querySelectorAll("body *"))
+      .filter(visible)
+      .filter((element) => {
+        const rect = element.getBoundingClientRect();
+        return rect.right > innerWidth + 2 || rect.left < -2;
+      })
+      .slice(0, 30)
+      .map((element) => {
+        const rect = element.getBoundingClientRect();
+        return {
+          tag: element.tagName.toLowerCase(),
+          className:
+            typeof element.className === "string" ? element.className.slice(0, 180) : "",
+          text: (element.textContent ?? "").trim().replace(/\s+/g, " ").slice(0, 120),
+          rect: [
+            Math.round(rect.left * 10) / 10,
+            Math.round(rect.right * 10) / 10,
+            Math.round(rect.width * 10) / 10,
+          ],
+        };
+      });
+
     const h1s = Array.from(document.querySelectorAll("h1")).filter(visible);
     const mains = Array.from(document.querySelectorAll("main")).filter(visible);
     const imagesWithoutAlt = Array.from(document.querySelectorAll("img"))
@@ -254,7 +302,8 @@ async function inspectPage(page) {
       headerCount: document.querySelectorAll("header").length,
       footerCount: document.querySelectorAll("footer").length,
       unnamedInteractive,
-      undersizedControls,
+      targetSpacingViolations,
+      overflowElements,
       clippedText,
       longMotion,
       imagesWithoutAlt,
@@ -301,8 +350,18 @@ async function visit(browser, config) {
   if (metrics.unnamedInteractive.length) {
     issues.push(`${metrics.unnamedInteractive.length} unnamed interactive control(s)`);
   }
-  if (metrics.undersizedControls.length) {
-    issues.push(`${metrics.undersizedControls.length} interactive target(s) below 24px`);
+  if (metrics.targetSpacingViolations.length) {
+    issues.push(
+      `${metrics.targetSpacingViolations.length} undersized interactive target(s) violate 24px spacing`,
+    );
+  }
+  if (metrics.horizontalOverflow && metrics.overflowElements.length) {
+    issues.push(
+      `overflowing elements: ${metrics.overflowElements
+        .slice(0, 8)
+        .map((item) => `${item.tag}.${item.className || "(no-class)"} [${item.rect.join(", ")}]`)
+        .join(" | ")}`,
+    );
   }
   if (metrics.clippedText.length) {
     issues.push(`${metrics.clippedText.length} potentially clipped text element(s)`);
@@ -440,7 +499,9 @@ async function checkCommandPalette(browser, viewportName) {
   const issues = [];
 
   await page.goto(`${base}/v3`, { waitUntil: "networkidle" });
-  await page.keyboard.press("Control+K");
+  const trigger = page.getByRole("button", { name: /Search Lab objects and pages/i });
+  await trigger.focus();
+  await page.keyboard.press("Enter");
   await page.waitForTimeout(80);
 
   const dialog = page.locator("dialog[open]");
@@ -477,7 +538,15 @@ async function checkCommandPalette(browser, viewportName) {
       "Search Lab objects and pages. Keyboard shortcut Command or Control K.",
   );
   if (!triggerRestored) {
-    issues.push("closing the command palette did not restore focus to its trigger");
+    issues.push("closing a trigger-opened command palette did not restore focus to its trigger");
+  }
+
+  await page.keyboard.press("Control+K");
+  await page.waitForTimeout(60);
+  if (!(await dialog.isVisible().catch(() => false))) {
+    issues.push("Control+K did not open the Lab command palette");
+  } else {
+    await page.keyboard.press("Escape");
   }
 
   const name = `command palette @ ${viewportName}`;
@@ -559,13 +628,13 @@ function writeReport() {
   lines.push(
     "## Route matrix",
     "",
-    "| Route | Viewport | HTTP | Overflow | H1 | Main | Clipped | Unnamed | <24px | Motion |",
+    "| Route | Viewport | HTTP | Overflow | H1 | Main | Clipped | Unnamed | Target spacing | Motion |",
     "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
   );
 
   for (const result of results.filter((item) => item.metrics)) {
     lines.push(
-      `| ${result.route} | ${result.viewportName} | ${result.responseStatus ?? "—"} | ${result.metrics.horizontalOverflow ? "FAIL" : "ok"} | ${result.metrics.h1Count} | ${result.metrics.mainCount} | ${result.metrics.clippedText.length} | ${result.metrics.unnamedInteractive.length} | ${result.metrics.undersizedControls.length} | ${result.metrics.longMotion.length} |`,
+      `| ${result.route} | ${result.viewportName} | ${result.responseStatus ?? "—"} | ${result.metrics.horizontalOverflow ? "FAIL" : "ok"} | ${result.metrics.h1Count} | ${result.metrics.mainCount} | ${result.metrics.clippedText.length} | ${result.metrics.unnamedInteractive.length} | ${result.metrics.targetSpacingViolations.length} | ${result.metrics.longMotion.length} |`,
     );
   }
 
