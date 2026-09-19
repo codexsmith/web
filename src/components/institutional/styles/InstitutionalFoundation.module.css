@@ -2243,6 +2243,15 @@
   transition: right 120ms ease;
 }
 
+.nav a:focus-visible {
+  outline: 3px solid #d6b449;
+  outline-offset: 4px;
+}
+
+.nav a:focus-visible::after {
+  right: 0;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .nav a:hover::after {
     right: 0;
