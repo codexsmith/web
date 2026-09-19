@@ -2818,6 +2818,207 @@
 }
 
 
+/* Homepage orientation: four major front-page bands share one inspectable Reflow field. */
+.homeOrientationSection {
+  padding: 28px clamp(30px, 5vw, 78px) 34px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.58), transparent 18%),
+    linear-gradient(180deg, #dfe7ed, #eef2f4);
+}
+
+.homeOrientationGrid {
+  --reflow-columns: 12;
+  --reflow-gap: 10px;
+  --reflow-focus-span: 6;
+  --reflow-selected-start: 2;
+  --reflow-selected-span: 10;
+}
+
+.homeOrientationCard {
+  --reflow-span: 3;
+  min-height: 166px;
+  overflow: hidden;
+  border: 1px solid rgba(7,26,61,.25);
+  border-top: 5px solid var(--osha-orange);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(244,247,249,.96));
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.08),
+    0 3px 0 rgba(7,26,61,.12);
+}
+
+.homeOrientationCard[data-tone="method"] {
+  border-top-color: var(--old-gold);
+}
+
+.homeOrientationCard[data-tone="braid"] {
+  border-top-color: var(--osha-blue);
+}
+
+.homeOrientationCard[data-tone="stewardship"] {
+  border-top-color: var(--osha-green);
+}
+
+.homeOrientationSummary {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  padding: 17px 18px 16px;
+}
+
+.homeOrientationSummary > span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+}
+
+.homeOrientationSummary h3 {
+  margin: 28px 0 9px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.55vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+
+.homeOrientationSummary p {
+  max-width: 340px;
+  margin: auto 0 0;
+  color: #56677b;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.homeOrientationGrid[data-reflow-active="true"]
+  .homeOrientationCard:not([data-reflow-state="selected"]) {
+  height: 112px;
+  min-height: 112px;
+}
+
+.homeOrientationGrid[data-reflow-active="true"]
+  .homeOrientationCard:not([data-reflow-state="selected"])
+  .homeOrientationSummary {
+  min-height: 112px;
+  padding: 12px 14px;
+}
+
+.homeOrientationGrid[data-reflow-active="true"]
+  .homeOrientationCard:not([data-reflow-state="selected"])
+  .homeOrientationSummary h3 {
+  margin: 13px 0 0;
+  font-size: 1.02rem;
+}
+
+.homeOrientationGrid[data-reflow-active="true"]
+  .homeOrientationCard:not([data-reflow-state="selected"])
+  .homeOrientationSummary p {
+  display: none;
+}
+
+.homeOrientationCard[data-reflow-state="selected"] {
+  min-height: 0;
+  border-top-width: 7px;
+  background: #f7f9fa;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.08),
+    0 4px 0 rgba(7,26,61,.18),
+    0 18px 34px rgba(7,26,61,.12);
+}
+
+.homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummary {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(180px, .42fr) minmax(260px, .58fr);
+  gap: 24px;
+  align-items: center;
+  padding: 17px 20px 18px;
+  border-bottom: 1px solid rgba(7,26,61,.14);
+}
+
+.homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummary > span {
+  grid-column: 1 / -1;
+}
+
+.homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummary h3 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+}
+
+.homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummary p {
+  max-width: 620px;
+  margin: 0;
+  font-size: .72rem;
+}
+
+.homeOrientationCard[data-reflow-state="selected"] > div:last-child {
+  margin-top: 0;
+}
+
+.homeOrientationDetail {
+  border-top: 1px solid #fff;
+}
+
+.homeOrientationDetail .audienceEntrySection,
+.homeOrientationDetail .methodSection,
+.homeOrientationDetail .practiceLineage,
+.homeOrientationDetail .stewardshipBand {
+  margin: 0;
+  padding: 28px 24px 30px;
+  border-bottom: 0;
+}
+
+.homeOrientationDetail .practiceLineageInputs {
+  padding-right: 18px;
+}
+
+@media (max-width: 1100px) {
+  .homeOrientationGrid {
+    --reflow-columns: 6;
+    --reflow-focus-span: 3;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 6;
+  }
+
+  .homeOrientationCard {
+    --reflow-span: 3;
+  }
+}
+
+@media (max-width: 760px) {
+  .homeOrientationSection {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .homeOrientationGrid {
+    --reflow-columns: 1;
+    --reflow-focus-span: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 1;
+  }
+
+  .homeOrientationCard {
+    --reflow-span: 1;
+  }
+
+  .homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .homeOrientationDetail .audienceEntrySection,
+  .homeOrientationDetail .methodSection,
+  .homeOrientationDetail .practiceLineage,
+  .homeOrientationDetail .stewardshipBand {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
 /* Homepage institutional access layer: current Lab state plus concrete ways to enter the work. */
 .inMotionSection {
   display: grid;
