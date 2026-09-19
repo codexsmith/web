@@ -48,10 +48,19 @@ if (!nextDeclared || !atLeast(nextDeclared, "16.3.3")) {
 
 const floors = [
   ["node_modules/next", "16.3.3", "Next.js"],
-  ["node_modules/js-yaml", "4.3.1", "js-yaml"],
+  ["node_modules/js-yaml", "4.3.2", "js-yaml"],
   ["node_modules/mermaid", "11.16.1", "Mermaid"],
   ["node_modules/dompurify", "3.4.13", "DOMPurify"],
-  ["node_modules/nanoid", "3.3.16", "nanoid"],
+  ["node_modules/nanoid", "3.3.19", "nanoid"],
+  ["node_modules/sharp", "0.35.4", "Sharp"],
+  ["node_modules/baseline-browser-mapping", "2.11.25", "baseline-browser-mapping"],
+  ["node_modules/browserslist", "4.29.0", "Browserslist"],
+  ["node_modules/brace-expansion", "1.1.21", "brace-expansion"],
+  [
+    "node_modules/@typescript-eslint/typescript-estree/node_modules/brace-expansion",
+    "5.0.12",
+    "typescript-estree brace-expansion",
+  ],
 ];
 
 for (const [path, minimum, label] of floors) {
