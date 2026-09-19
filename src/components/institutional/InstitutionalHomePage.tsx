@@ -43,8 +43,8 @@ export function InstitutionalHomePage() {
           <aside className={styles.heroVisual}>
             <img
               className={styles.heroGraphic}
-              src="/institutional/pie-manifold-hero.jpg"
-              alt="Boundary First Labs manifold study: a geometric field illustrating representation, curvature, and structured transformation."
+              src="/institutional/lab-scene-hero.jpg"
+              alt="Boundary First Labs workspace scene: a desk with books, a robot arm, and a whiteboard illustrating 'Smaller Abstractions, Brighter Tomorrows'."
             />
           </aside>
         </section>
