@@ -1,25 +1,20 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import styles from "./styles/InstitutionalFoundation.module.css";
-import { InstitutionalSectionHeader, InstitutionalSectionLead } from "./InstitutionalPrimitives";
+import { InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 import { LabSnapshotRow } from "./LabSnapshotRow";
 import { RecentChangesStrip } from "./RecentChangesStrip";
-import { AudienceJourneyGrid } from "./AudienceJourneyGrid";
 
 import {
-  capabilityStrip,
   featuredWork,
   homeInstitutionalFrontDoors,
   homeNowSnapshot,
-  methodSteps,
   postureCommitments,
-  practiceLineage,
-  stewardshipFacets,
 } from "./content/home";
 import { homeLabSnapshot } from "./content/labSnapshot";
 import { homeRecentChanges } from "./content/changes";
-import { homeAudienceJourneys } from "./content/audiences";
+import { HomeOrientationSection } from "./sections/HomeOrientationSection";
 export function InstitutionalHomePage() {
   return (
     <InstitutionalPageShell>
@@ -58,111 +53,7 @@ export function InstitutionalHomePage() {
 
         <RecentChangesStrip changes={homeRecentChanges} compact />
 
-        <section className={styles.audienceEntrySection}>
-          <div className={styles.audienceEntryLead}>
-            <p className={styles.sectionIndex}>CHOOSE YOUR OWN PATH</p>
-            <h2>Start with why you came, not with the Lab&apos;s org chart.</h2>
-            <Link className={styles.audienceEntryLink} href="/v3/start">
-              Open all audience paths
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-
-          <AudienceJourneyGrid journeys={homeAudienceJourneys} compact />
-        </section>
-
-        <section className={styles.methodSection}>
-          <InstitutionalSectionLead
-            styles={styles}
-            eyebrow={<>OUR APPROACH</>}
-            title={<>What the Lab does</>}
-            description={<>We make complex systems easier to understand, test, improve, and explain. The basic move is simple: show the structure, track what changes, follow the change, and find where it breaks.</>}
-            />
-
-          <div className={styles.methodWorkbench}>
-            <p className={styles.workbenchLabel}>WHAT WE PRODUCE</p>
-            <div className={styles.capabilityStrip} aria-label="What the Lab produces and supports">
-              {capabilityStrip.map(([index, label]) => (
-                <div className={styles.capability} key={label}>
-                  <span>{index}</span>
-                  <strong>{label}</strong>
-                </div>
-              ))}
-            </div>
-
-            <p className={styles.workbenchLabel}>HOW WE WORK</p>
-            <div className={styles.methodGrid}>
-              {methodSteps.map(([index, plainTitle, formalTitle, description]) => (
-                <article className={styles.methodStep} key={formalTitle}>
-                  <span>{index}</span>
-                  <h3>{plainTitle}</h3>
-                  <p className={styles.methodFormal}>{formalTitle}</p>
-                  <p>{description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className={styles.practiceLineage}>
-          <div className={styles.practiceLineageLead}>
-            <p className={styles.sectionIndex}>OPERATING BRAID</p>
-            <h2>Three practical lineages braid into one recursive method.</h2>
-            <p>
-              Lean–Agile, scientific method, and agentic reasoning connect through
-              state-based reasoning to create Boundary First.
-            </p>
-          </div>
-
-          <div
-            className={styles.practiceLineageGrid}
-            aria-label="Lean–Agile, scientific method, and agentic reasoning converge into Boundary First"
-          >
-            <div className={styles.practiceLineageInputs}>
-              {practiceLineage.slice(0, 3).map((item, index) => (
-                <article key={item.label}>
-                  <span className={styles.practiceLineageOrdinal}>{formatOrdinal(index)}</span>
-                  <h3>{item.label}</h3>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
-
-            <div className={styles.practiceLineageMerge} aria-hidden="true">
-              <span>⇒</span>
-            </div>
-
-            <article className={styles.practiceLineageOutput}>
-              <span className={styles.practiceLineageOrdinal}>{formatOrdinal(3)}</span>
-              <h3>{practiceLineage[3].label}</h3>
-              <p>{practiceLineage[3].description}</p>
-            </article>
-          </div>
-        </section>
-
-        <section className={styles.stewardshipBand}>
-          <div className={styles.stewardshipBandLead}>
-            <p className={styles.sectionIndex}>STEWARDSHIP</p>
-            <h2>What succeeds still has to be cared for.</h2>
-            <p>
-              Boundary First Labs treats stewardship as a concrete engineering and
-              institutional obligation: <strong>tend</strong> what is shared, <strong>maintain</strong> what others depend
-              on, <strong>repair</strong> what has been neglected, <strong>cultivate</strong> future capacity, and <strong>refuse</strong>
-              success that works only by pushing its costs outside the frame.
-            </p>
-          </div>
-
-          <div className={styles.stewardshipBandGrid}>
-            {stewardshipFacets.map((facet) => (
-              <article key={facet.label}>
-                <h3>{facet.label}</h3>
-                <p>{facet.title}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className={styles.featuredSection} id="featured-work">
+        <HomeOrientationSection />\n\n        <section className={styles.featuredSection} id="featured-work">
           <InstitutionalSectionHeader
             styles={styles}
             eyebrow={<>FEATURED WORK</>}
