@@ -31,23 +31,24 @@
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  grid-auto-flow: row;
   align-items: stretch;
 }
 
 /*
  * Focus-stage invariant:
- * every non-selected context card shares one compact peer rail.
- * Cards divide the available row evenly rather than wrapping into orphan rows.
+ * - 1–4 peers share one full-width row.
+ * - 5+ peers tile into balanced full-width rows, max four cards per row.
+ * - the selected card begins on the row immediately after the peer rail.
  */
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
   > .item:not([data-reflow-state="selected"]) {
   order: 1;
-  flex: 1 1 0;
-  width: 0;
   min-width: 0;
-  grid-column: auto;
+  grid-row: var(--reflow-peer-row, 1);
+  grid-column: span var(--reflow-peer-span, 15);
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
@@ -60,17 +61,18 @@
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
   > .item[data-reflow-placement="selected"] {
   order: 2;
-  flex: 0 0 var(--reflow-selected-width, 83.333333%);
+  grid-row: var(--reflow-selected-row, 2);
+  grid-column: 1 / -1;
   width: var(--reflow-selected-width, 83.333333%);
-  margin-inline: auto;
-  grid-column: auto;
+  max-width: 100%;
+  justify-self: center;
+  margin-inline: 0;
   z-index: 2;
 }
 
 @media (max-width: 760px) {
   .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
     > .item[data-reflow-placement="selected"] {
-    flex-basis: 100%;
     width: 100%;
   }
 }

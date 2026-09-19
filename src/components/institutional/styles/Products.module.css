@@ -7,20 +7,20 @@
 
 .productsHero {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(320px, .7fr);
-  gap: clamp(36px, 6vw, 100px);
+  grid-template-columns: minmax(0, 1.25fr) minmax(330px, .75fr);
+  gap: clamp(40px, 7vw, 108px);
   align-items: end;
-  padding: clamp(58px, 7vw, 104px) clamp(30px, 7vw, 112px);
+  padding: clamp(60px, 7vw, 106px) clamp(30px, 8vw, 128px);
   border-bottom: 2px solid var(--old-gold);
   background: linear-gradient(90deg, #fff, #f8fbff 68%, #edf3fa);
 }
 
 .productsHero h1 {
-  max-width: 940px;
+  max-width: 980px;
   margin: 14px 0 20px;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.7rem, 5.55vw, 7rem);
+  font-size: clamp(3.8rem, 5.6vw, 7.1rem);
   font-weight: 500;
   letter-spacing: -.06em;
   line-height: .92;
