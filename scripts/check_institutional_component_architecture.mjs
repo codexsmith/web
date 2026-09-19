@@ -385,14 +385,63 @@ expect(!projectsPage.includes('className={styles.capabilityTransfer}'), "Project
 expect(fs.existsSync(`${root}/sections/ProjectContextSection.tsx`), "ProjectContextSection must exist as the route-local composition boundary");
 
 const openLabPage = read(`${root}/InstitutionalOpenLabPage.tsx`);
+const openLabContent = read(`${root}/content/openLab.ts`);
+const openLabIntake = read(`${root}/OpenLabIntakeInstrument.tsx`);
+const openLabServerConfig = read("src/lib/open-lab-intake.ts");
+const openLabApi = read("src/app/api/open-lab/route.ts");
+const openLabRoute = read("src/app/v3/open-lab/page.tsx");
+const environmentExample = read(".env.example");
 expect(openLabPage.includes("childLinks={institutionalChildRoutes.openLab}"), "Open Lab hero must expose its contextual child pages");
 expect(openLabPage.includes("openLabHeroIntake"), "Open Lab must surface Intake Status in the hero");
 expect(!openLabPage.includes('className={styles.openLabAvailability}'), "Open Lab must not keep Intake Status as a body section");
 expect(openLabPage.includes('className={styles.openLabContracts}'), "Open Lab must keep Public Participation directly readable");
+expect(openLabPage.includes("<OpenLabIntakeInstrument"), "Open Lab must compose the governed intake instrument");
 expect(openLabPage.includes("<OpenLabContextSection />"), "Open Lab must compose supporting sections as one context module");
 expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must keep Institutional Promise directly readable");
-expect(openLabPage.includes('/v3/contact?type=open-lab&source=open-lab'), "Open Lab must expose conversational contact without opening formal submission");
+expect(openLabPage.includes('/v3/contact?type=open-lab&source=open-lab'), "Open Lab must preserve a conversational path distinct from formal intake");
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
+expect(fs.existsSync(`${root}/OpenLabIntakeInstrument.tsx`), "OpenLabIntakeInstrument must exist as the governed public-intake boundary");
+
+expect(openLabContent.includes('sourceRevision: "1dbd3f5b53e55c8feff5230836ce11dc928cba69"'), "Open Lab must pin the governing Lab source revision");
+expect(openLabContent.includes('lifecycle: "candidate"'), "Open Lab must preserve the candidate lifecycle of the page projection");
+expect(openLabContent.includes("humanReviewed: false"), "Open Lab must not rewrite the source projection as human-reviewed");
+expect(openLabContent.includes('OPEN_LAB_INTAKE_SCHEMA = "bfl.open-lab-intake.v1"'), "Open Lab must version its intake envelope");
+expect(openLabContent.includes('"PUBLIC_INFRASTRUCTURE_NOMINATION"'), "Open Lab must preserve the public-system nomination contract");
+expect(openLabContent.includes('"BFL_CRITIQUE"'), "Open Lab must preserve the criticism contract");
+expect(openLabContent.includes('"COLLABORATION_INQUIRY"'), "Open Lab must preserve the collaboration contract");
+expect(openLabContent.includes('"WORK_HISTORY_GOALS_INTAKE"'), "Open Lab must preserve the unusual-work intake contract");
+expect(openLabContent.includes("PRIVATE REVIEW FIRST"), "Open Lab collection rules must default to private review");
+expect(openLabContent.includes("NO FILE UPLOADS / NO SECRETS"), "Open Lab must forbid sensitive file intake");
+expect(openLabContent.includes("NO AUTOMATIC PUBLICATION"), "Open Lab must separate intake from publication consent");
+
+expect(openLabServerConfig.includes("BFL_OPEN_LAB_WEBHOOK_URL"), "Open Lab activation must require a dedicated receiver");
+expect(openLabServerConfig.includes("BFL_OPEN_LAB_WEBHOOK_TOKEN"), "Open Lab activation must require authenticated receiver handoff");
+expect(openLabServerConfig.includes("BFL_OPEN_LAB_POLICY_VERSION"), "Open Lab activation must require a declared policy version");
+expect(openLabServerConfig.includes("BFL_OPEN_LAB_RETENTION_DAYS"), "Open Lab activation must require a declared retention window");
+expect(openLabServerConfig.includes("reviewed:"), "Open Lab activation must require pinned-source review acknowledgement");
+expect(openLabServerConfig.includes("gates.every((gate) => gate.ready)"), "Open Lab must stay closed unless every governance gate is ready");
+
+expect(openLabApi.includes("isOpenLabSubmissionType"), "Open Lab API must validate the four typed participation contracts");
+expect(openLabApi.includes('initialVisibility: "private_intake"'), "Open Lab intake must begin private");
+expect(openLabApi.includes('publicationConsent: "separate_consent_required"'), "Open Lab API must require separate publication consent");
+expect(openLabApi.includes("publicationPermissionGranted: false"), "Open Lab intake must never imply publication permission");
+expect(openLabApi.includes("fileUploadsAccepted: false"), "Open Lab API must prohibit file uploads");
+expect(openLabApi.includes("noSensitiveMaterialAcknowledged: true"), "Open Lab API must preserve the sensitive-material acknowledgement");
+expect(openLabApi.includes("authorization: `Bearer ${token}`"), "Open Lab receiver handoff must be authenticated");
+expect(openLabApi.includes('"OL-"'), "Open Lab must issue a stable receipt identifier after accepted handoff");
+expect(openLabApi.indexOf("await fetch(receiver") < openLabApi.indexOf("submissionId,\n      state: \"received\""), "Open Lab receipt response must follow receiver acceptance");
+
+expect(openLabIntake.includes("NO PUBLIC COLLECTION ON THIS DEPLOYMENT"), "Open Lab UI must make a closed collection boundary explicit");
+expect(openLabIntake.includes("Anonymous / pseudonymous"), "Open Lab must support non-prestige-gated submitter identity");
+expect(openLabIntake.includes("No reply path"), "Open Lab must support intake without a forced response identity");
+expect(openLabIntake.includes("not publication consent"), "Open Lab must distinguish public-response preference from publication consent");
+expect(openLabIntake.includes("Submission closed"), "Open Lab submit action must visibly close when governance gates are incomplete");
+expect(openLabIntake.includes("Receipt is a state transition, not a verdict."), "Open Lab must expose the review state model");
+
+expect(openLabRoute.includes("readOpenLabIntakeConfig"), "Open Lab route must derive runtime state from server governance configuration");
+expect(openLabRoute.includes("isOpenLabSubmissionType"), "Open Lab route must deep-link only declared submission types");
+expect(environmentExample.includes("BFL_OPEN_LAB_GOVERNANCE_ACK"), "Open Lab deployment variables must document the governance acknowledgement");
+expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928cba69"), "Open Lab env example must document the exact pinned-source acknowledgement");
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
 expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose its contextual child pages");
