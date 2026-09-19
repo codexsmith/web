@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:
     "A public-interest lifecycle-accounting case studying Augusta–Richmond County infrastructure obligations without manufacturing a false citywide maintenance-debt total.",
   alternates: { canonical: "/v3/projects/augusta-maintenance-debt" },
-  robots: { index: false, follow: false },
 };
 
 export default function Page() {
