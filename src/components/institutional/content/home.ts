@@ -119,6 +119,15 @@ export const postureCommitments = [
     linkLabel: "Read the stewardship posture",
     tone: "transfer",
   },
+  {
+    eyebrow: "AI GOVERNANCE",
+    title: "Forge what helps. Certify what acts. Forbid what dominates.",
+    description:
+      "AI makes the agency question concrete: bounded assistance can accelerate, while consequential delegated authority needs explicit boundaries, contestability, repair, and accountable ownership.",
+    href: "/v3/ai-governance",
+    linkLabel: "How we govern AI",
+    tone: "governance",
+  },
 ] as const;
 
 export const practiceLineage = [
