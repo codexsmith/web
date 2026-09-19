@@ -24,11 +24,11 @@ function forbidMatch(path, pattern, message) {
   }
 }
 
-// World owns narrative content; Evidence and Process remain genuinely different depths.
+// Core (internal key: world) owns narrative content; Evidence and Process remain genuinely different depths.
 requireMatch(
   "src/lib/view-projection.ts",
   /projectionModes\s*=\s*\["world",\s*"evidence",\s*"gestalt"\]/,
-  "Projection vocabulary must remain World / Evidence / Process",
+  "Internal projection keys must remain world / evidence / gestalt",
 );
 requireMatch(
   "src/lib/view-projection.ts",
@@ -41,61 +41,47 @@ requireMatch(
   "Specialized projections must add a distinct representation rather than repeat World content",
 );
 requireMatch(
-  "src/app/[[...slug]]/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /legacyRecordDestination[\s\S]*permanentRedirect\(recordDestination\)/,
   "Legacy Record URLs must resolve to their canonical World or Provenance destination",
 );
 
-// Hero = threshold; entered root = structural world. The threshold must not become a second root map.
+// The Lab Machine is the canonical public home. The retired hero / ?world=1
+// threshold state must not reappear as a parallel root state machine.
 requireMatch(
-  "src/components/hero-screen.tsx",
-  /Software for difficult systems\.[\s\S]*Enter the lab/,
-  "Hero must make the public proposition and expose an explicit entry action",
+  "src/app/page.tsx",
+  /LabMachineHomeRoute/,
+  "The bare public root must render the canonical Lab Machine home route",
+);
+requireMatch(
+  "src/app/world/page.tsx",
+  /permanentRedirect\(params\.size[\s\S]*:\s*"\/"\)/,
+  "Legacy /world URLs must redirect into the canonical root Lab Machine",
+);
+requireMatch(
+  "src/app/[...slug]/page.tsx",
+  /initialHeroVisible=\{false\}/,
+  "Deep World routes must not revive the retired root hero threshold",
 );
 forbidMatch(
-  "src/components/hero-screen.tsx",
-  /district-grid|rootBranches|Enter region|onNavigate/,
-  "Hero must not duplicate entered-world structure or traversal controls",
-);
-requireMatch(
-  "src/app/[[...slug]]/page.tsx",
-  /initialHeroVisible\s*=\s*node\.id\s*===\s*"root"\s*&&\s*worldState\s*!==\s*"1"/,
-  "Bare root URL must resolve to the entry threshold while ?world=1 resolves to the entered world",
+  "src/components/world-app.tsx",
+  /HeroScreen|params\.set\("world",\s*"1"\)|router\.replace\("\/world"/,
+  "WorldApp must not revive the retired hero or ?world=1 root-state machinery",
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /focusId\s*===\s*"root"\)\s*params\.set\("world",\s*"1"\)/,
-  "Entered root state must be reconstructible in the URL",
-);
-requireMatch(
-  "src/components/world-app.tsx",
-  /router\.replace\("\/world"/,
-  "Crossing the hero threshold must replace into the canonical Lab route rather than pollute browser history",
-);
-requireMatch(
-  "src/components/world-app.tsx",
-  /const navigateHome = useCallback\(\(\) => \{[\s\S]*?router\.push\("\/world"\);[\s\S]*?\}, \[router\]\)/,
-  "The standard frame logo must return to the Lab Machine rather than the legacy entered root world",
-);
-requireMatch(
-  "src/components/bounded-standalone-surface.tsx",
-  /onHome=\{\(\) => router\.push\("\/world"\)\}/,
-  "Standalone frame logos must return to the Lab Machine",
+  /const navigateHome = useCallback\(\(\) => \{[\s\S]*?router\.push\("\/"\);[\s\S]*?\}, \[router\]\)/,
+  "The standard content frame logo must return to the canonical root Lab Machine",
 );
 requireMatch(
   "src/components/bfux/LabMachineWorld.tsx",
-  /const openMachine = \(\) => router\.push\("\/world"\)[\s\S]*onHome=\{openMachine\}/,
-  "Lab Machine fallback frame logos must return to the Lab Machine",
+  /const returnToMachine = \(\) => \{[\s\S]*machineResolutionUrl\(machinePath,[\s\S]*onHome=\{returnToMachine\}/,
+  "Lab Machine navigation must preserve machine-path state while returning to the machine",
 );
 requireMatch(
   "src/components/bfux/PhysicalMachineExperience.tsx",
   /resolutionStorageKey[\s\S]*sessionStorage\.getItem[\s\S]*sessionStorage\.setItem[\s\S]*rememberResolution/,
   "The Lab Machine must remember the visitor's Core set or Full loop resolution",
-);
-requireMatch(
-  "src/components/bfux/PhysicalMachineExperience.tsx",
-  /<Link href="\/world" aria-label="Boundary First Labs home">/,
-  "The physical frame logo must return to the Lab Machine",
 );
 requireMatch(
   "src/components/bfux/PhysicalMachineExperience.tsx",
@@ -113,7 +99,7 @@ requireMatch(
   "The physical frame must persist while its machine and detail workfields swap",
 );
 for (const [nodeId, path] of Object.entries({
-  people: "/public-interest",
+  people: "/people",
   products: "/products",
   publications: "/publications",
   about: "/about",
@@ -180,8 +166,13 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /const ids\s*=\s*\[\.\.\.activePath,\s*targetId\][\s\S]*cursor:\s*ids\.length\s*-\s*1/,
-  "A new graph traversal must append the actual target to the active traversal branch",
+  /return boundTraversal\(\[\.\.\.activePath,\s*targetId\]\)/,
+  "A new graph traversal must append the target and re-bound the active traversal branch",
+);
+requireMatch(
+  "src/components/world-app.tsx",
+  /const traversalHistoryLimit\s*=\s*8[\s\S]*const rootless\s*=\s*ids\.filter\(\(id\) => id !== "root"\)/,
+  "Traversal memory must remain bounded and exclude the retired root content node",
 );
 requireMatch(
   "src/components/world-app.tsx",
@@ -190,8 +181,8 @@ requireMatch(
 );
 requireMatch(
   "src/components/world-app.tsx",
-  /function resolveExistingTraversalCursor[\s\S]*path\.lastIndexOf\(targetId\)/,
-  "Browser and remembered traversal must resolve an existing temporal cursor before branching",
+  /function resolveExistingTraversalCursor[\s\S]*path\[normalizedCursor\][\s\S]*path\[normalizedCursor - 1\][\s\S]*path\[normalizedCursor \+ 1\][\s\S]*return -1/,
+  "Browser and remembered traversal must resolve only the active or adjacent temporal cursor before branching",
 );
 requireMatch(
   "src/components/world-app.tsx",
@@ -342,13 +333,8 @@ for (const path of [
   "src/content/public-projections/home.json",
   "src/content/public-projections/work.json",
   "src/content/work_portfolio.json",
-  "backlog/10_social_mission_preagent_ux/bfl_public_content_flat_dedup_v0_3.json",
-  "backlog/10_social_mission_preagent_ux/03_The_Institute.md",
-  "backlog/10_social_mission_preagent_ux/05_founders_note.md",
-  "backlog/10_social_mission_preagent_ux/06_BFL_ethos.md",
-  "backlog/10_social_mission_preagent_ux/07_public_mission.md",
 ]) {
-  requireExists(path, "Rich retained public-content source must remain available");
+  requireExists(path, "Active retained public-content projection must remain available");
 }
 requireMatch(
   "src/lib/content-projections.ts",
@@ -500,23 +486,6 @@ requireMatch(
   "src/app/layout.tsx",
   /root-world-and-content-stability\.css[\s\S]*hero-screen\.css[\s\S]*traversal-history\.css[\s\S]*content-first-world\.css[\s\S]*industrial-card-ui\.css[\s\S]*card-world-viewport-fit\.css/,
   "Root readability, hero threshold, traversal history, content-first World, and Card viewport-fit layers must all be active",
-);
-
-// The retired archive must represent final v1, including the late journey-refinement branch merged into main.
-for (const path of [
-  "retired_v1/src/components/journey/EntranceIntentConsole.tsx",
-  "retired_v1/src/components/journey/EvidenceClaimReader.tsx",
-  "retired_v1/src/components/journey/MethodStackNavigator.tsx",
-  "retired_v1/src/components/journey/ResearchJourneyRail.tsx",
-  "retired_v1/src/components/journey/SoftwareProblemRouter.tsx",
-  "retired_v1/tests/site-journey-refinement.test.ts",
-]) {
-  requireExists(path, "Final v1 journey refinement must remain preserved in retired_v1");
-}
-requireMatch(
-  "retired_v1/src/components/entrance/InstitutionalVestibuleHome.tsx",
-  /EntranceIntentConsole/,
-  "Retired v1 homepage must include its final intent-console refinement",
 );
 
 console.log("v2 architecture contracts: pass");

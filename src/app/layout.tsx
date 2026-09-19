@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { siteOrigin } from "@/lib/site-release";
 import { activeUiShell } from "@/lib/ui-shell";
 import { MachineCardFlightLayer } from "@/components/bfux/MachineCardFlightLayer";
 import { ProductCatalogAccordionController } from "@/components/product-catalog-accordion-controller";
@@ -83,12 +84,34 @@ import "./machine-view-controls.css";
 import "./machine-card-flight.css";
 
 export const metadata: Metadata = {
+  metadataBase: siteOrigin,
+  applicationName: "Boundary First Labs",
   title: {
     default: "Boundary First Labs",
     template: "%s | Boundary First Labs",
   },
   description:
     "Software for difficult systems, public-interest projects, publications, and research into executable representation.",
+  referrer: "strict-origin-when-cross-origin",
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Boundary First Labs",
+    title: "Boundary First Labs",
+    description:
+      "Applied research, research apparatus, products, projects, and public-interest systems work.",
+    url: "/",
+  },
+  twitter: {
+    card: "summary",
+    title: "Boundary First Labs",
+    description:
+      "Applied research, research apparatus, products, projects, and public-interest systems work.",
+  },
 };
 
 export const viewport: Viewport = {

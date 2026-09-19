@@ -1,0 +1,173 @@
+.startPage {
+  background: #f3f5f4;
+}
+
+.startHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(360px, .82fr);
+  gap: clamp(38px, 5vw, 82px);
+  align-items: end;
+  padding: clamp(58px, 7vw, 102px) clamp(30px, 7vw, 112px);
+  border-bottom: 2px solid var(--old-gold);
+  background:
+    radial-gradient(circle at 88% 18%, rgba(40,123,121,.12), transparent 23rem),
+    linear-gradient(90deg, #fff 0 62%, #edf4f3 100%);
+}
+
+.startHero h1 {
+  max-width: 990px;
+  margin: 14px 0 20px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.7rem, 5.4vw, 6.8rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+
+.pathIndex {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgba(16,32,54,.25);
+  border-left: 6px solid #287b79;
+  background: rgba(255,255,255,.92);
+}
+
+.pathIndex > span {
+  color: #287b79;
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+}
+
+.pathIndex nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pathIndex a {
+  padding: 8px 10px;
+  border: 1px solid rgba(16,32,54,.17);
+  background: #f7f9f9;
+  color: #102036;
+  font-size: .68rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.principlesSection,
+.journeysSection {
+  padding: 46px clamp(30px, 6vw, 96px) 58px;
+  border-bottom: 1px solid rgba(16,32,54,.16);
+}
+
+.principlesSection {
+  background: #fff;
+}
+
+.journeysSection {
+  background: linear-gradient(180deg, #e8eef0, #f3f5f4);
+}
+
+.principleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.principleGrid article {
+  padding: 17px;
+  border: 1px solid rgba(16,32,54,.2);
+  border-top: 5px solid #287b79;
+  background: #f8faf9;
+}
+
+.principleGrid span {
+  color: #287b79;
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.principleGrid h3 {
+  margin: 10px 0 8px;
+  color: #102036;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+}
+
+.principleGrid p,
+.startClose > p {
+  margin: 0;
+  color: #58677a;
+  font-size: .74rem;
+  line-height: 1.52;
+}
+
+.journeysSection > div:last-child {
+  margin-top: 24px;
+}
+
+.startClose {
+  padding: 54px clamp(30px, 7vw, 112px) 66px;
+  background: var(--royal-blue-deep);
+  color: #fff;
+}
+
+.startClose .sectionIndex {
+  color: var(--old-gold-bright);
+}
+
+.startClose h2 {
+  max-width: 900px;
+  margin: 10px 0 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 3.4vw, 4.2rem);
+  font-weight: 500;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.startClose > p {
+  max-width: 800px;
+  color: #dce6f3;
+  font-size: .86rem;
+}
+
+.startClose > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 26px;
+  margin-top: 22px;
+}
+
+.startClose a {
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--old-gold-bright);
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .86rem;
+  text-decoration: none;
+}
+
+@media (max-width: 940px) {
+  .startHero,
+  .principleGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .startHero,
+  .principlesSection,
+  .journeysSection,
+  .startClose {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .startHero h1 {
+    font-size: clamp(3rem, 13.5vw, 4.6rem);
+  }
+}

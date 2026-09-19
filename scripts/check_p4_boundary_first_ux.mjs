@@ -21,7 +21,7 @@ function forbidMatch(path, pattern, message) {
 const component = "src/components/boundary-first-ux-record-detail.tsx";
 const css = "src/app/p4-boundary-first-ux-conformance.css";
 const contract = "docs/boundary-first-ux-conformance-contract.md";
-const page = "src/app/[[...slug]]/page.tsx";
+const page = "src/app/[...slug]/page.tsx";
 
 for (const path of [component, css, contract]) {
   requireExists(path, "Boundary First UX specialized conformance artifact must remain present");

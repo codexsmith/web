@@ -70,12 +70,12 @@ requireMatch(
   "Record detail URLs must resolve only on their one canonical graph owner",
 );
 requireMatch(
-  "src/app\/[[...slug]]\/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /getCanonicalRecordOwner[\s\S]*permanentRedirect\(buildRecordDetailPath\(owner, decision\.entry\)\)/,
   "Legacy landing aliases must redirect to canonical graph-owned record detail",
 );
 requireMatch(
-  "src/app\/[[...slug]]\/page.tsx",
+  "src/app/[...slug]/page.tsx",
   /RecordDetailSurface[\s\S]*recordDetail && recordContent/,
   "Canonical node routes must project retained record detail into the bounded content area",
 );

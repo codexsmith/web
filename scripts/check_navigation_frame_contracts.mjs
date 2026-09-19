@@ -43,8 +43,8 @@ requireExists(
 
 requireMatch(
   "src/lib/traversal-state.ts",
-  /bootstrapTraversal[\s\S]*while \(cursor\.parentId\)[\s\S]*ids\.unshift\(cursor\.id\)/,
-  "A deep canonical entry must bootstrap a usable ancestry-backed traversal trace",
+  /bootstrapTraversal[\s\S]*while \(cursor\.id !== "root"\)[\s\S]*ids\.unshift\(cursor\.id\)[\s\S]*cursor = getNode\(cursor\.parentId\)/,
+  "A deep canonical entry must bootstrap a usable rootless ancestry-backed traversal trace",
 );
 
 requireMatch(
@@ -55,14 +55,14 @@ requireMatch(
 
 requireMatch(
   "src/components/world-app.tsx",
-  /else if \(remembered\.ids\[remembered\.cursor\] === initialNodeId\)[\s\S]*branchTraversal\(remembered\.ids, remembered\.cursor, initialNodeId\)/,
-  "A newly loaded route must append to remembered traversal unless it is already the active state",
+  /const rememberedFocus = remembered\.ids\[remembered\.cursor\][\s\S]*rememberedFocus === initialNodeId \? remembered : boundTraversal\(initialTraversal\.ids, initialTraversal\.cursor\)/,
+  "A newly loaded route must preserve matching remembered traversal or rebuild a bounded canonical trace",
 );
 
 requireMatch(
   "src/components/world-app.tsx",
-  /navigateHome[\s\S]*router\.push\("\/world"\)/,
-  "The institutional home control must return to the Lab Machine",
+  /navigateHome[\s\S]*router\.push\("\/"\)/,
+  "The institutional home control must return to the canonical root Lab Machine",
 );
 
 requireMatch(
@@ -103,7 +103,7 @@ requireMatch(
 
 requireMatch(
   "src/components/boundary-frame.tsx",
-  /Local relational neighborhood for[\s\S]*<strong>Adjacent<\/strong>/,
+  /Local relational neighborhood for[\s\S]*aria-label="Adjacent nodes"[\s\S]*<SiblingChoices/,
   "The left frame must identify itself as the current node's local relational neighborhood",
 );
 

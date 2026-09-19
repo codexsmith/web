@@ -21,7 +21,7 @@ function forbidMatch(path, pattern, message) {
 const component = "src/components/closure-driven-record-detail.tsx";
 const css = "src/app/p4-closure-driven-control-surface.css";
 const contract = "docs/closure-driven-delivery-contract.md";
-const page = "src/app/[[...slug]]/page.tsx";
+const page = "src/app/[...slug]/page.tsx";
 
 for (const path of [component, css, contract]) {
   requireExists(path, "Closure-Driven specialized delivery artifact must remain present");

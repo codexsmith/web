@@ -1,0 +1,216 @@
+import Link from "next/link";
+import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import foundationStyles from "./styles/InstitutionalFoundation.module.css";
+import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
+import routeStyles from "./styles/Products.module.css";
+import { composeCssModules } from "./styles/composeCssModules";
+import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
+
+import { ProductContextSection } from "./sections/ProductContextSection";
+import { institutionalChildRoutes } from "./institutionalRoutes";
+const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
+
+export function InstitutionalProductsPage() {
+  return (
+    <InstitutionalPageShell mainClassName={styles.productsPage}>
+        <InstitutionalRouteHero
+          styles={styles}
+          className={styles.productsHero}
+          eyebrow={<>PRODUCTS</>}
+          title={<>Research should sometimes become something a person can use.</>}
+          lead={<>Boundary First Labs is a research laboratory. It is also a place that makes things.</>}
+          support={<>Some research becomes papers, methods, datasets, or instruments. Some becomes
+              something a person can use directly. Products test whether a bounded capability
+              survives contact with real users and remains maintainable afterward.</>}
+          childLinks={institutionalChildRoutes.products}
+          >
+          <blockquote className={styles.productThesis}>
+            <span>PRODUCT DISCIPLINE</span>
+            Show the user capability before claiming the market.
+          </blockquote>
+        </InstitutionalRouteHero>
+
+        <section className={styles.primaryProducts}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>NEAR-TERM B2C EDGE</>}
+            title={<>Two concrete product tests.</>}
+            note={<>What exists now is separated from what still has to be earned.</>}
+            />
+
+          <div className={styles.primaryProductGrid}>
+            <Link
+              className={styles.primaryProductCard}
+              data-product="chess"
+              href="/v3/products/boundary-first-chess"
+            >
+              <div className={styles.productCardTopline}>
+                <span className={styles.productOrdinal}>01</span>
+                <div className={styles.productState}>
+                  <span className={styles.productStateLamp} aria-hidden="true" />
+                  RESEARCH_PRODUCT
+                </div>
+              </div>
+
+              <p className={styles.productRole}>FIRST CONCRETE COMMERCIALIZATION CANDIDATE</p>
+              <h3>Boundary-First Chess</h3>
+              <p className={styles.productPromise}>
+                A book-length teaching asset and developed pedagogy for helping learners ask
+                better questions about what changed on the board.
+              </p>
+
+              <div className={styles.productStatusGrid}>
+                <div>
+                  <span>EXISTS NOW</span>
+                  <strong>Roughly 140-page manuscript</strong>
+                  <p>
+                    Complete teaching manuscript, explanatory grammar, worked material, and
+                    a preserved chess-specific rights / stewardship surface.
+                  </p>
+                </div>
+                <div>
+                  <span>NEXT COMMERCIAL TEST</span>
+                  <strong>Package the existing asset</strong>
+                  <p>
+                    External review, production, pricing, preorder/publication, pilot,
+                    licensing, or partner evaluation — not first-offer invention.
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.productMiniPanel}>
+                <span>CURRENT TITLE DIRECTION</span>
+                <strong>Boundary-First Chess: A Field Guide for Seeing the Board</strong>
+              </div>
+
+              <div className={styles.operationGrammar}>
+                <span>Create</span>
+                <span>Repair</span>
+                <span>Weaken</span>
+                <span>Exploit</span>
+                <span>Transform</span>
+              </div>
+
+              <div className={styles.productTruth}>
+                <span>NOT YET ESTABLISHED</span>
+                Pedagogical superiority, rating improvement, market demand, product-market fit,
+                recurring revenue, or commentary engagement lift.
+              </div>
+
+              <span className={styles.productDetailLink}>
+                Enter Boundary-First Chess
+                <span aria-hidden="true">→</span>
+              </span>
+            </Link>
+
+            <Link
+              className={styles.primaryProductCard}
+              data-product="explorer"
+              href="/v3/products/youtube-knowledge-explorer"
+            >
+              <div className={styles.productCardTopline}>
+                <span className={styles.productOrdinal}>02</span>
+                <div className={styles.productState}>
+                  <span className={styles.productStateLamp} aria-hidden="true" />
+                  ACTIVE_BUILD
+                </div>
+              </div>
+
+              <p className={styles.productRole}>FIRST ACTIVE-BUILD CONSUMER SOFTWARE WEDGE</p>
+              <h3>YouTube Knowledge Explorer</h3>
+              <p className={styles.productPromise}>
+                Turn long-form YouTube into searchable, timestamped, structured knowledge
+                while preserving a direct path back to the source.
+              </p>
+
+              <div className={styles.explorerPipeline}>
+                <span>YouTube video</span>
+                <span>Transcript</span>
+                <span>Timestamped segments</span>
+                <span>Topic / outline map</span>
+                <span>Search</span>
+                <span>Source navigation</span>
+                <span>Persistent knowledge object</span>
+              </div>
+
+              <div className={styles.productStatusGrid}>
+                <div>
+                  <span>EXISTS NOW</span>
+                  <strong>Working vertical slice</strong>
+                  <p>
+                    Source parsing, transcript normalization, outlines, concept-linked search,
+                    evidence-bound answers, local persistence, and portable interchange exist now.
+                  </p>
+                </div>
+                <div>
+                  <span>NEXT COMMERCIAL TEST</span>
+                  <strong>Repeated voluntary use</strong>
+                  <p>
+                    Build a usable MVP, see whether people return, and only then test willingness
+                    to pay for the bounded capability.
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.productTruth}>
+                <span>NOT YET ESTABLISHED</span>
+                Availability, recurring use, pricing, market validation, retention, or
+                product-market fit.
+              </div>
+
+              <span className={styles.productDetailLink}>
+                Enter YouTube Knowledge Explorer
+                <span aria-hidden="true">→</span>
+              </span>
+            </Link>
+          </div>
+        </section>
+
+        <section className={styles.researchProducts}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>RESEARCH PRODUCTS</>}
+            title={<>Useful machinery can remain research-bounded.</>}
+            note={<>These products are built to be used and tested without turning internal implementation evidence into scientific validation.</>}
+          />
+
+          <div className={styles.researchProductGrid}>
+            <Link className={styles.researchProductCard} data-product="weather" href="/v3/products/boundary-first-weather">
+              <div>
+                <span>03 · RESEARCH PRODUCT</span>
+                <strong>Boundary First Weather</strong>
+              </div>
+              <p>
+                A computational weather testbed and decision-support surface for boundary-aware
+                diagnostics, forecast disagreement, and selective refinement.
+              </p>
+              <small>Enter Weather <i aria-hidden="true">→</i></small>
+            </Link>
+
+            <Link className={styles.researchProductCard} data-product="asm" href="/v3/products/agentic-scientific-method">
+              <div>
+                <span>04 · RESEARCH PRODUCT</span>
+                <strong>Agentic Scientific Method</strong>
+              </div>
+              <p>
+                An operational inquiry protocol for making goals, evidence, action, criticism,
+                authority, defect, repair, closure, and scientific memory inspectable.
+              </p>
+              <small>Enter Agentic Scientific Method <i aria-hidden="true">→</i></small>
+            </Link>
+          </div>
+        </section>
+
+        <ProductContextSection />
+
+        <section className={styles.productClose}>
+          <p className={styles.sectionIndex}>FAST FEEDBACK</p>
+          <h2>Build the artifact. Put it in front of a person. Learn what survives contact.</h2>
+          <p>
+            A person buys the book, uses the tool, tries the interface, finds a defect,
+            returns — or does not. That interaction is evidence.
+          </p>
+        </section>
+      </InstitutionalPageShell>
+  );
+}

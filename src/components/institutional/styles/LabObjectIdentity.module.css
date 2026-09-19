@@ -1,0 +1,157 @@
+.identity {
+  --object-accent: #748396;
+  --object-ink: #102036;
+  --object-muted: #607086;
+  --object-line: rgba(16, 32, 54, 0.16);
+  --object-surface: rgba(255, 255, 255, 0.86);
+
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid var(--object-line);
+  background: var(--object-surface);
+  color: var(--object-ink);
+}
+
+.identity[data-kind="product"] {
+  --object-accent: #b26c2f;
+}
+
+.identity[data-kind="research"] {
+  --object-accent: #5b63ad;
+}
+
+.identity[data-kind="project"] {
+  --object-accent: #4f8e97;
+}
+
+.identity[data-kind="publication"] {
+  --object-accent: #9a7a2d;
+}
+
+.identity[data-kind="evidence"] {
+  --object-accent: #3c7e57;
+}
+
+.identity[data-kind="experiment"] {
+  --object-accent: #916b3f;
+}
+
+.identity[data-kind="claim"] {
+  --object-accent: #8c4f62;
+}
+
+.identity[data-kind="method"] {
+  --object-accent: #536f78;
+}
+
+.identity[data-kind="apparatus"] {
+  --object-accent: #6c5da7;
+}
+
+.field {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 9px 12px;
+  border-left: 1px solid var(--object-line);
+}
+
+.field:first-child {
+  border-left: 0;
+}
+
+.field span {
+  color: var(--object-muted);
+  font: 800 0.46rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.field strong {
+  min-width: 0;
+  color: inherit;
+  font: 700 0.66rem/1.25 Arial, Helvetica, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.kindField {
+  flex: 0 0 auto;
+  border-left: 4px solid var(--object-accent) !important;
+}
+
+.kindField strong {
+  color: var(--object-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.statusField {
+  flex: 1 1 220px;
+}
+
+.secondaryField {
+  flex: 0 1 260px;
+}
+
+.identity[data-variant="compact"] {
+  flex-wrap: wrap;
+  gap: 6px;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.identity[data-variant="compact"] .field {
+  min-height: 34px;
+  padding: 6px 9px;
+  border: 1px solid var(--object-line);
+  background: var(--object-surface);
+}
+
+.identity[data-variant="compact"] .kindField {
+  border-left: 4px solid var(--object-accent) !important;
+}
+
+.identity[data-variant="compact"] .statusField {
+  flex: 1 1 180px;
+}
+
+.identity[data-variant="compact"] .secondaryField {
+  flex: 1 1 190px;
+}
+
+.identity[data-appearance="inverse"] {
+  --object-ink: #f4efe2;
+  --object-muted: #aeb8c3;
+  --object-line: rgba(255, 255, 255, 0.14);
+  --object-surface: rgba(255, 255, 255, 0.045);
+  --object-accent: var(--product-accent-bright, #f0d681);
+}
+
+.identity[data-appearance="inverse"] .kindField strong {
+  color: var(--object-accent);
+}
+
+@media (max-width: 720px) {
+  .identity {
+    flex-wrap: wrap;
+  }
+
+  .field,
+  .statusField,
+  .secondaryField {
+    flex: 1 1 calc(50% - 1px);
+  }
+
+  .kindField {
+    flex: 0 0 auto;
+  }
+
+  .identity[data-variant="compact"] .statusField,
+  .identity[data-variant="compact"] .secondaryField {
+    flex-basis: 100%;
+  }
+}

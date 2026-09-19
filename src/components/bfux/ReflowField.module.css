@@ -1,0 +1,143 @@
+.field {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--reflow-columns, 12), minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: var(--reflow-gap, 14px);
+  align-items: stretch;
+}
+
+.item {
+  position: relative;
+  min-width: 0;
+  grid-column: span var(--reflow-span, 4);
+  cursor: pointer;
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
+}
+
+.item:focus-within {
+  outline: 3px solid var(--old-gold, #b89a47);
+  outline-offset: 3px;
+}
+
+.item[data-reflow-motion-carrier="true"] {
+  z-index: var(--reflow-motion-z, 100);
+}
+
+.field[data-reflow-mode="flow"] > .item[data-reflow-state="selected"] {
+  grid-column: 1 / -1;
+  z-index: 2;
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
+  display: grid;
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  grid-auto-flow: row;
+  column-gap: 0;
+  row-gap: var(--reflow-gap, 14px);
+  align-items: stretch;
+}
+
+/*
+ * Focus-stage invariant:
+ * - 1–4 peers share one full-width row.
+ * - 5+ peers tile into balanced full-width rows, max four cards per row.
+ * - the selected card begins on the row immediately after the peer rail.
+ */
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  > .item:not([data-reflow-state="selected"]) {
+  order: 1;
+  min-width: 0;
+  grid-row: var(--reflow-peer-row, 1);
+  grid-column: span var(--reflow-peer-span, 15);
+  margin-inline: calc(var(--reflow-gap, 14px) / 2);
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  > .item[data-reflow-placement="before"],
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  > .item[data-reflow-placement="after"] {
+  order: 1;
+}
+
+.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+  > .item[data-reflow-placement="selected"] {
+  order: 2;
+  grid-row: var(--reflow-selected-row, 2);
+  grid-column: 1 / -1;
+  width: var(--reflow-selected-width, 83.333333%);
+  max-width: 100%;
+  justify-self: center;
+  margin-inline: 0;
+  z-index: 2;
+}
+
+@media (max-width: 760px) {
+  .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
+    > .item[data-reflow-placement="selected"] {
+    width: 100%;
+  }
+}
+
+
+.field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] {
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  grid-auto-flow: row;
+  column-gap: 0;
+  row-gap: var(--reflow-gap, 14px);
+}
+
+.field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item {
+  grid-column: span var(--reflow-rectangle-span, 20);
+  margin-inline: calc(var(--reflow-gap, 14px) / 2);
+}
+
+@media (max-width: 720px) {
+  .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] {
+    grid-template-columns: 1fr;
+  }
+
+  .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item {
+    grid-column: 1;
+    margin-inline: 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item:not([data-reflow-state="selected"]):hover {
+    box-shadow:
+      0 4px 0 rgba(7, 26, 61, .18),
+      0 14px 28px rgba(7, 26, 61, .14);
+  }
+}
+
+.surfaceAction {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.summary {
+  min-width: 0;
+}
+
+.detail {
+  overflow: hidden;
+  margin-top: 18px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+}

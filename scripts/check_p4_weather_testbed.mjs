@@ -21,7 +21,7 @@ function forbidMatch(path, pattern, message) {
 const component = "src/components/weather-research-record-detail.tsx";
 const css = "src/app/p4-weather-research-testbed.css";
 const contract = "docs/weather-research-testbed-contract.md";
-const page = "src/app/[[...slug]]/page.tsx";
+const page = "src/app/[...slug]/page.tsx";
 
 for (const path of [component, css, contract]) {
   requireExists(path, "Weather specialized research-testbed artifact must remain present");

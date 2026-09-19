@@ -1,0 +1,1294 @@
+/* Open Lab route projection */
+.openLabPage {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.86), rgba(233,240,248,.96)),
+    var(--institution-paper);
+}
+
+.openLabHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(330px, .75fr);
+  gap: clamp(40px, 7vw, 108px);
+  align-items: end;
+  padding: clamp(60px, 7vw, 106px) clamp(30px, 8vw, 128px);
+  border-bottom: 2px solid var(--old-gold);
+  background: #fff;
+}
+
+.openLabHero h1 {
+  max-width: 980px;
+  margin: 14px 0 20px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.8rem, 5.6vw, 7.1rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+
+.openLabThesis {
+  margin: 0;
+  padding: 26px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  line-height: 1.58;
+  box-shadow: 0 3px 0 #071a3d, 0 10px 20px rgba(7,26,61,.16);
+}
+
+.openLabThesis span {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--old-gold-bright);
+  font: 800 .57rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .17em;
+}
+
+.openLabContracts {
+  padding: 40px clamp(30px, 6vw, 96px) 50px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.65), transparent 12%),
+    linear-gradient(180deg, #e3ecf6, #d5e2ee);
+}
+
+.openLabContractGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.openLabContractCard {
+  padding: 22px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 6px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.97) 0 2px, transparent 2px),
+    linear-gradient(180deg, #fbfdff, #e8eff8);
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.1),
+    0 3px 0 rgba(7,26,61,.22),
+    0 9px 19px rgba(7,26,61,.11);
+}
+
+.openLabContractCard[data-open-lab-tone="critique"] { border-top-color: var(--osha-orange); }
+.openLabContractCard[data-open-lab-tone="collaboration"] { border-top-color: var(--osha-green); }
+.openLabContractCard[data-open-lab-tone="intake"] { border-top-color: var(--old-gold); }
+
+.openLabContractTopline {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: start;
+}
+
+.openLabContractCode {
+  display: inline-flex;
+  padding: 4px 7px;
+  border: 1px solid rgba(119,97,38,.45);
+  background: linear-gradient(180deg, #f8eebf, #d8bd65);
+  color: #443817;
+  font: 800 .55rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.openLabContractTopline code {
+  color: #52627b;
+  font-size: .51rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.openLabContractCard h3 {
+  margin: 18px 0 4px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 2.4vw, 2.7rem);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.openLabContractSubtitle {
+  margin: 0 0 12px;
+  color: var(--old-gold-dark);
+  font: 800 .56rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.openLabContractDescription {
+  margin: 0 0 15px;
+  color: #435470;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.openLabOrdinaryLanguage,
+.openLabOutcome,
+.openLabBoundary {
+  padding: 13px 14px;
+  border: 1px solid rgba(7,26,61,.25);
+  background: rgba(255,255,255,.7);
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.openLabOrdinaryLanguage > span,
+.openLabOutcome > span,
+.openLabBoundary > span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.openLabOrdinaryLanguage ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #52627b;
+  font-size: .71rem;
+  line-height: 1.48;
+}
+
+.openLabOutcome {
+  margin-top: 8px;
+  border-left: 5px solid var(--osha-green);
+}
+
+.openLabBoundary {
+  margin-top: 8px;
+  border-left: 5px solid var(--osha-orange);
+}
+
+.openLabOutcome p,
+.openLabBoundary p {
+  margin: 0;
+  color: #52627b;
+  font-size: .72rem;
+  line-height: 1.45;
+}
+
+.openLabHeroAsideStack {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.openLabHeroIntake {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 11px;
+  align-items: start;
+  margin: 0 0 auto;
+  padding: 13px 14px;
+  border: 1px solid rgba(119,97,38,.42);
+  border-top: 5px solid var(--osha-yellow);
+  background:
+    repeating-linear-gradient(135deg, rgba(228,189,39,.055) 0 7px, transparent 7px 14px),
+    #fffdf3;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 2px 0 rgba(7,26,61,.14),
+    0 7px 14px rgba(7,26,61,.07);
+}
+
+.openLabHeroIntakeSignal {
+  width: 10px;
+  height: 10px;
+  margin-top: 2px;
+  border: 1px solid rgba(7,26,61,.45);
+  border-radius: 50%;
+  background: var(--osha-yellow);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+.openLabHeroIntake span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+}
+
+.openLabHeroIntake strong {
+  display: block;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .92rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.openLabHeroIntake p {
+  margin: 5px 0 0;
+  color: #52627b;
+  font-size: .67rem;
+  line-height: 1.42;
+}
+
+.openLabContext {
+  padding: 42px clamp(30px, 6vw, 96px) 58px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.44), transparent 18%),
+    linear-gradient(180deg, #c9d6e4, #dde6ef);
+}
+
+.openLabContextFrame {
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 3px solid var(--old-gold);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.5), rgba(232,239,247,.45));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 0 0 4px rgba(255,255,255,.16),
+    0 3px 0 rgba(7,26,61,.12),
+    0 14px 30px rgba(7,26,61,.08);
+}
+
+.openLabContextGrid {
+  --reflow-columns: 12;
+  --reflow-gap: 14px;
+  --reflow-focus-span: 6;
+  --reflow-selected-start: 2;
+  --reflow-selected-span: 10;
+  margin-top: 20px;
+}
+
+.openLabContextCard {
+  min-height: 166px;
+  padding: 15px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 5px solid var(--osha-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(234,241,248,.98));
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.09),
+    0 3px 0 rgba(7,26,61,.17),
+    0 9px 18px rgba(7,26,61,.1);
+}
+
+.openLabContextCard[data-tone="agency"] { border-top-color: var(--old-gold); }
+.openLabContextCard[data-tone="stewardship"] { border-top-color: var(--osha-yellow); }
+.openLabContextCard[data-tone="infrastructure"] { border-top-color: var(--osha-blue); }
+.openLabContextCard[data-tone="interface"] { border-top-color: var(--osha-orange); }
+.openLabContextCard[data-tone="capability"] { border-top-color: var(--osha-green); }
+
+.openLabContextAgency { --reflow-span: 5; }
+.openLabContextStewardship { --reflow-span: 4; }
+.openLabContextInfrastructure { --reflow-span: 3; }
+.openLabContextInterface { --reflow-span: 6; }
+.openLabContextCapability { --reflow-span: 6; }
+
+.openLabContextGrid[data-reflow-active="true"]
+  .openLabContextCard:not([data-reflow-state="selected"]) {
+  height: 112px;
+  min-height: 112px;
+  padding: 10px 12px;
+  overflow: hidden;
+}
+
+.openLabContextGrid[data-reflow-active="true"]
+  .openLabContextCard:not([data-reflow-state="selected"])
+  .sectionIndex {
+  margin-bottom: 5px;
+  font-size: .48rem;
+}
+
+.openLabContextGrid[data-reflow-active="true"]
+  .openLabContextCard:not([data-reflow-state="selected"])
+  .openLabContextSummary h3 {
+  margin: 4px 0 0;
+  font-size: clamp(.92rem, 1.05vw, 1.08rem);
+  line-height: 1.05;
+}
+
+.openLabContextGrid[data-reflow-active="true"]
+  .openLabContextCard:not([data-reflow-state="selected"])
+  .openLabContextSummary > p:last-child {
+  display: none;
+}
+
+.openLabContextCard[data-reflow-state="selected"] {
+  min-height: 0;
+  border-top-width: 7px;
+  box-shadow:
+    inset 1px 0 0 #fff,
+    inset 0 -1px 0 rgba(7,26,61,.08),
+    0 4px 0 rgba(7,26,61,.22),
+    0 16px 30px rgba(7,26,61,.15);
+}
+
+.openLabContextSummary h3 {
+  margin: 8px 0 9px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.2rem, 1.5vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.openLabContextSummary > p:last-child {
+  max-width: 650px;
+  margin: 0;
+  color: #52627b;
+  font-size: .78rem;
+  line-height: 1.48;
+}
+
+.openLabContextDetail,
+.openLabAgencyDetail {
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge);
+  background: rgba(255,255,255,.68);
+}
+
+.openLabContextDetail > p,
+.openLabAgencyDetail > p {
+  max-width: 940px;
+  margin: 0 0 16px;
+  color: #435470;
+  font-size: .88rem;
+  line-height: 1.58;
+}
+
+.openLabAgencyDetail blockquote {
+  margin: 0;
+  padding: 22px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-left: 7px solid var(--old-gold);
+  background: linear-gradient(180deg, #f9fbfe, #edf3f9);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.openLabGateGrid,
+.openLabCapabilityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.openLabGatePlate,
+.openLabCapabilityPlate {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 13px;
+  border: 1px solid rgba(7,26,61,.27);
+  background: linear-gradient(180deg, #fbfdff, #edf3f9);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.12);
+}
+
+.openLabGatePlate {
+  border-top: 4px solid var(--osha-yellow);
+}
+
+.openLabGatePlate span,
+.openLabCapabilityPlate span {
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.openLabGatePlate strong,
+.openLabCapabilityPlate strong {
+  color: var(--royal-blue-deep);
+  font-size: .75rem;
+}
+
+.openLabEnvelope {
+  padding: 16px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  background: linear-gradient(180deg, #c0cede, #d8e2ed);
+  box-shadow: inset 0 3px 8px rgba(7,26,61,.18);
+}
+
+.openLabEnvelope > span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--old-gold-dark);
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.openLabEnvelope > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.openLabEnvelope code {
+  padding: 6px 8px;
+  border: 1px solid rgba(7,26,61,.23);
+  background: #fff;
+  color: var(--royal-blue-deep);
+  font-size: .67rem;
+}
+
+.openLabTranslation {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  background: linear-gradient(180deg, #fbfdff, #eaf1f8);
+  box-shadow: inset 0 1px 0 #fff, 0 3px 0 rgba(7,26,61,.15);
+}
+
+.openLabTranslation span {
+  color: var(--old-gold-dark);
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.openLabTranslation strong {
+  padding: 12px 13px;
+  border-left: 5px solid var(--osha-blue);
+  background: #fff;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .9rem;
+  line-height: 1.42;
+}
+
+.openLabTranslation strong:last-child {
+  border-left-color: var(--osha-green);
+}
+
+.openLabClose {
+  padding: 54px clamp(30px, 8vw, 128px) 68px;
+  background: linear-gradient(180deg, #173d7d, var(--royal-blue-deep));
+  color: #fff;
+}
+
+.openLabClose .sectionIndex {
+  color: var(--old-gold-bright);
+}
+
+.openLabClose h2 {
+  max-width: 1180px;
+  margin: 9px 0 12px;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.35rem, 4vw, 4.7rem);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: .98;
+}
+
+.openLabClose > p {
+  max-width: 880px;
+  margin: 0;
+  color: #dce6f3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 980px) {
+  .openLabHero {
+    grid-template-columns: 1fr;
+  }
+
+  .openLabContextGrid {
+    --reflow-columns: 6;
+    --reflow-focus-span: 3;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 6;
+  }
+
+  .openLabContextAgency,
+  .openLabContextInterface,
+  .openLabContextCapability {
+    --reflow-span: 6;
+  }
+
+  .openLabContextStewardship,
+  .openLabContextInfrastructure {
+    --reflow-span: 3;
+  }
+
+  .openLabContractGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .openLabGateGrid,
+  .openLabCapabilityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .openLabHero,
+  .openLabContracts,
+  .openLabContext,
+  .openLabClose {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .openLabHero h1 {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .openLabContextGrid {
+    --reflow-columns: 1;
+    --reflow-focus-span: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 1;
+  }
+
+  .openLabContextCard {
+    --reflow-span: 1;
+  }
+
+  .openLabGateGrid,
+  .openLabCapabilityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .openLabContractTopline {
+    display: grid;
+  }
+
+  .openLabContractTopline code {
+    text-align: left;
+  }
+}
+
+
+.openLabCloseLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 24px;
+}
+
+.openLabCloseLinks a {
+  display: inline-flex;
+  gap: 10px;
+  padding: 8px 0 4px;
+  border-bottom: 1px solid var(--old-gold-dark);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .87rem;
+  text-decoration: none;
+}
+
+.openLabCloseLinks a span {
+  color: var(--old-gold-dark);
+}
+
+
+.openLabHeroIntake[data-live="true"] {
+  border-top-color: var(--osha-green);
+  background:
+    repeating-linear-gradient(135deg, rgba(56,132,75,.05) 0 7px, transparent 7px 14px),
+    #f6fbf7;
+}
+
+.openLabHeroIntake[data-live="true"] .openLabHeroIntakeSignal {
+  background: var(--osha-green);
+}
+
+.openLabHeroIntake small {
+  display: block;
+  margin-top: 8px;
+  color: #66758b;
+  font: 750 .48rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .06em;
+}
+
+.openLabContractAction {
+  display: inline-flex;
+  gap: 9px;
+  margin-top: 14px;
+  padding: 8px 0 4px;
+  border-bottom: 1px solid var(--old-gold-dark);
+  color: var(--royal-blue-deep);
+  font: 800 .68rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.openLabContractAction span {
+  color: var(--old-gold-dark);
+}
+
+.openLabIntakeSection {
+  scroll-margin-top: 76px;
+  padding: 46px clamp(30px, 6vw, 96px) 60px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.68), transparent 12%),
+    linear-gradient(180deg, #e7edf4, #dce6ef);
+}
+
+.openLabReadiness {
+  display: grid;
+  grid-template-columns: minmax(270px, .7fr) minmax(0, 1.3fr);
+  gap: 12px;
+  margin-top: 22px;
+  padding: 13px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 6px solid var(--osha-yellow);
+  background: #cbd7e3;
+  box-shadow:
+    inset 0 2px 6px rgba(7,26,61,.12),
+    0 3px 0 rgba(7,26,61,.14);
+}
+
+.openLabReadiness[data-live="true"] {
+  border-top-color: var(--osha-green);
+}
+
+.openLabReadinessLead {
+  padding: 17px;
+  border: 1px solid rgba(7,26,61,.24);
+  background: #fff;
+}
+
+.openLabReadinessLead > span,
+.openLabReadinessGrid article > span,
+.openLabRuntimeBoundary span,
+.openLabClosedNotice > div > span,
+.openLabSelectedContract > span,
+.openLabSelectedContract > div > strong,
+.openLabCollectionRuleGrid span,
+.openLabFormHeader > span,
+.openLabReviewRail > div > span {
+  display: block;
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1.1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.openLabReadinessLead strong {
+  display: block;
+  margin: 10px 0 8px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.openLabReadinessLead p,
+.openLabReadinessGrid p {
+  margin: 0;
+  color: #52627b;
+  font-size: .7rem;
+  line-height: 1.48;
+}
+
+.openLabReadinessGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.openLabReadinessGrid article {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid rgba(7,26,61,.22);
+  border-top: 4px solid var(--osha-orange);
+  background: #fbfcfd;
+}
+
+.openLabReadinessGrid article[data-ready="true"] {
+  border-top-color: var(--osha-green);
+  background: #f6faf7;
+}
+
+.openLabReadinessGrid article[data-ready="true"] > span {
+  color: #376f43;
+}
+
+.openLabReadinessGrid article > strong {
+  display: block;
+  margin: 8px 0 6px;
+  color: var(--royal-blue-deep);
+  font-size: .7rem;
+  line-height: 1.25;
+}
+
+.openLabRuntimeBoundary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.openLabRuntimeBoundary > div {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(7,26,61,.22);
+  background: rgba(255,255,255,.76);
+}
+
+.openLabRuntimeBoundary code {
+  display: block;
+  margin-top: 7px;
+  overflow-wrap: anywhere;
+  color: var(--royal-blue-deep);
+  font-size: .61rem;
+  line-height: 1.35;
+}
+
+.openLabClosedNotice {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  align-items: center;
+  margin-top: 10px;
+  padding: 15px 17px;
+  border: 1px solid rgba(231,123,36,.3);
+  border-left: 6px solid var(--osha-orange);
+  background: #fff8f1;
+}
+
+.openLabClosedNotice strong {
+  display: block;
+  margin: 7px 0 5px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .94rem;
+  font-weight: 600;
+}
+
+.openLabClosedNotice p {
+  max-width: 780px;
+  margin: 0;
+  color: #5b6980;
+  font-size: .68rem;
+  line-height: 1.45;
+}
+
+.openLabClosedNotice > a {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  border: 1px solid rgba(7,26,61,.26);
+  background: #fff;
+  color: var(--royal-blue-deep);
+  font: 800 .61rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.openLabIntakeLayout {
+  display: grid;
+  grid-template-columns: minmax(290px, .72fr) minmax(0, 1.28fr);
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.openLabIntakeGuide,
+.openLabIntakeForm {
+  min-width: 0;
+}
+
+.openLabRouteSelector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 7px;
+}
+
+.openLabRouteSelector button {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: 5px 9px;
+  min-height: 88px;
+  padding: 11px;
+  border: 1px solid rgba(7,26,61,.24);
+  border-left: 5px solid #93a3b4;
+  background: rgba(255,255,255,.72);
+  color: var(--royal-blue-deep);
+  text-align: left;
+  cursor: pointer;
+}
+
+.openLabRouteSelector button[data-selected="true"] {
+  border-left-color: var(--osha-blue);
+  background: #fff;
+  box-shadow: 0 2px 0 rgba(7,26,61,.14);
+}
+
+.openLabRouteSelector button > span {
+  grid-row: 1 / span 2;
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.openLabRouteSelector button strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .85rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.openLabRouteSelector button small {
+  color: #637188;
+  font-size: .61rem;
+  line-height: 1.35;
+}
+
+.openLabSelectedContract {
+  margin-top: 8px;
+  padding: 16px;
+  border: 1px solid rgba(7,26,61,.24);
+  border-top: 6px solid var(--osha-blue);
+  background: #fff;
+}
+
+.openLabSelectedContract[data-open-lab-tone="critique"] {
+  border-top-color: var(--osha-orange);
+}
+
+.openLabSelectedContract[data-open-lab-tone="collaboration"] {
+  border-top-color: var(--osha-green);
+}
+
+.openLabSelectedContract[data-open-lab-tone="intake"] {
+  border-top-color: var(--old-gold);
+}
+
+.openLabSelectedContract h3 {
+  margin: 10px 0 7px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.openLabSelectedContract > p {
+  margin: 0;
+  color: #4f5f77;
+  font-size: .75rem;
+  line-height: 1.5;
+}
+
+.openLabSelectedContract > div {
+  margin-top: 12px;
+  padding: 11px 12px;
+  border: 1px solid rgba(7,26,61,.17);
+  background: #f4f7fa;
+}
+
+.openLabSelectedContract ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: #52627b;
+  font-size: .67rem;
+  line-height: 1.45;
+}
+
+.openLabSelectedContract blockquote {
+  margin: 9px 0 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(231,123,36,.25);
+  border-left: 5px solid var(--osha-orange);
+  background: #fff9f3;
+  color: #56647a;
+  font-size: .67rem;
+  line-height: 1.45;
+}
+
+.openLabCollectionRuleGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.openLabCollectionRuleGrid article {
+  padding: 10px 11px;
+  border: 1px solid rgba(7,26,61,.18);
+  background: rgba(255,255,255,.68);
+}
+
+.openLabCollectionRuleGrid p {
+  margin: 7px 0 0;
+  color: #667389;
+  font-size: .61rem;
+  line-height: 1.42;
+}
+
+.openLabIntakeForm {
+  padding: 13px;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 6px solid var(--old-gold);
+  background: linear-gradient(180deg, #c9d6e3, #d9e3ed);
+  box-shadow:
+    inset 0 2px 6px rgba(7,26,61,.14),
+    0 3px 0 rgba(7,26,61,.14);
+}
+
+.openLabFormHeader {
+  padding: 14px;
+  border: 1px solid rgba(7,26,61,.23);
+  background: #fff;
+}
+
+.openLabFormHeader > strong {
+  display: block;
+  margin: 8px 0 6px;
+  overflow-wrap: anywhere;
+  color: var(--royal-blue-deep);
+  font: 800 .72rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.openLabFormHeader p {
+  margin: 0;
+  color: #5a687e;
+  font-size: .68rem;
+  line-height: 1.46;
+}
+
+.openLabIntakeForm fieldset {
+  min-width: 0;
+  margin: 9px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+.openLabFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 8px;
+}
+
+.openLabIntakeForm label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.openLabIntakeForm label > span:first-child {
+  color: var(--royal-blue-deep);
+  font: 800 .58rem/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .04em;
+}
+
+.openLabIntakeForm label small {
+  color: #6c788b;
+  font-size: .55rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.openLabIntakeForm input,
+.openLabIntakeForm select,
+.openLabIntakeForm textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(7,26,61,.3);
+  border-radius: 0;
+  background: #fff;
+  color: #172b4b;
+  font: 500 .75rem/1.42 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  outline: none;
+}
+
+.openLabIntakeForm input,
+.openLabIntakeForm select {
+  min-height: 42px;
+  padding: 9px 10px;
+}
+
+.openLabIntakeForm textarea {
+  resize: vertical;
+  padding: 10px;
+}
+
+.openLabIntakeForm input:focus,
+.openLabIntakeForm select:focus,
+.openLabIntakeForm textarea:focus {
+  border-color: var(--osha-blue);
+  outline: 3px solid rgba(38,102,179,.14);
+  outline-offset: 0;
+}
+
+.openLabWideField {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+
+.openLabCheckRow,
+.openLabConsentStack label {
+  grid-template-columns: auto minmax(0,1fr) !important;
+  align-items: start;
+  gap: 9px !important;
+}
+
+.openLabCheckRow {
+  margin-top: 10px;
+  padding: 11px 12px;
+  border: 1px solid rgba(7,26,61,.19);
+  background: #f5f8fb;
+}
+
+.openLabCheckRow input,
+.openLabConsentStack input {
+  width: auto;
+  min-height: 0;
+  margin-top: 2px;
+}
+
+.openLabCheckRow > span,
+.openLabConsentStack label > span {
+  color: #52627b !important;
+  font: 600 .67rem/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+.openLabConsentStack {
+  display: grid;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.openLabConsentStack label {
+  padding: 11px 12px;
+  border: 1px solid rgba(7,26,61,.19);
+  border-left: 4px solid var(--osha-blue);
+  background: #fff;
+}
+
+.openLabHoneypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+.openLabSubmitRow {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: 14px;
+  align-items: center;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid rgba(7,26,61,.2);
+  background: rgba(255,255,255,.65);
+}
+
+.openLabSubmitRow button {
+  min-height: 42px;
+  padding: 10px 15px;
+  border: 1px solid #071a3d;
+  background: var(--royal-blue-deep);
+  color: #fff;
+  font: 800 .62rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.openLabSubmitRow button:disabled {
+  border-color: #8693a4;
+  background: #aeb8c4;
+  cursor: not-allowed;
+}
+
+.openLabSubmitRow p {
+  margin: 0;
+  color: #667389;
+  font-size: .62rem;
+  line-height: 1.42;
+}
+
+.openLabSubmissionStatus {
+  min-height: 0;
+  margin-top: 8px;
+  padding: 0;
+  color: #53627a;
+  font-size: .67rem;
+  line-height: 1.45;
+}
+
+.openLabSubmissionStatus[data-state="sending"],
+.openLabSubmissionStatus[data-state="success"],
+.openLabSubmissionStatus[data-state="error"] {
+  min-height: 48px;
+  padding: 11px 12px;
+  border: 1px solid rgba(7,26,61,.2);
+  background: #fff;
+}
+
+.openLabSubmissionStatus[data-state="success"] {
+  border-left: 5px solid var(--osha-green);
+}
+
+.openLabSubmissionStatus[data-state="error"] {
+  border-left: 5px solid var(--osha-orange);
+}
+
+.openLabSubmissionStatus > span {
+  display: block;
+  margin-bottom: 5px;
+  color: #376f43;
+  font: 800 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.openLabSubmissionStatus p {
+  margin: 0;
+}
+
+.openLabReviewRail {
+  display: grid;
+  grid-template-columns: minmax(240px,.55fr) minmax(0,1.45fr);
+  gap: 18px;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid rgba(7,26,61,.24);
+  background: #fff;
+}
+
+.openLabReviewRail h3 {
+  margin: 9px 0 7px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.openLabReviewRail > div > p {
+  margin: 0;
+  color: #5e6c82;
+  font-size: .7rem;
+  line-height: 1.5;
+}
+
+.openLabReviewRail ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.openLabReviewRail li {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid rgba(7,26,61,.18);
+  border-top: 4px solid var(--osha-blue);
+  background: #f5f8fb;
+}
+
+.openLabReviewRail li > span {
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.openLabReviewRail li strong {
+  color: var(--royal-blue-deep);
+  font: 800 .61rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-transform: uppercase;
+}
+
+.openLabReviewRail li p {
+  margin: 5px 0 0;
+  color: #657289;
+  font-size: .6rem;
+  line-height: 1.4;
+}
+
+.openLabContractAction:focus-visible,
+.openLabClosedNotice > a:focus-visible,
+.openLabRouteSelector button:focus-visible,
+.openLabSubmitRow button:focus-visible {
+  outline: 3px solid var(--osha-blue);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1180px) {
+  .openLabReadinessGrid {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .openLabReadiness,
+  .openLabIntakeLayout,
+  .openLabReviewRail {
+    grid-template-columns: 1fr;
+  }
+
+  .openLabRuntimeBoundary {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .openLabReviewRail ol {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .openLabIntakeSection {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .openLabReadinessGrid,
+  .openLabRuntimeBoundary,
+  .openLabRouteSelector,
+  .openLabFieldGrid,
+  .openLabCollectionRuleGrid,
+  .openLabReviewRail ol {
+    grid-template-columns: 1fr;
+  }
+
+  .openLabClosedNotice {
+    display: grid;
+  }
+
+  .openLabSubmitRow {
+    grid-template-columns: 1fr;
+  }
+
+  .openLabSubmitRow button {
+    width: 100%;
+  }
+}
+
+
+.openLabCloseLinks a {
+  border-bottom-color: var(--old-gold-bright);
+  color: #fff;
+}
+
+.openLabCloseLinks a span {
+  color: var(--old-gold-bright);
+}
+
+
+.openLabGovernanceBridge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 8px 0 5px;
+  border-bottom: 1px solid rgba(11,37,84,.32);
+  color: var(--royal-blue-deep, #0b2554);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .76rem;
+  font-weight: 600;
+}
