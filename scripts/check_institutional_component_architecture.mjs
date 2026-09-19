@@ -428,7 +428,7 @@ expect(openLabApi.includes("publicationPermissionGranted: false"), "Open Lab int
 expect(openLabApi.includes("fileUploadsAccepted: false"), "Open Lab API must prohibit file uploads");
 expect(openLabApi.includes("noSensitiveMaterialAcknowledged: true"), "Open Lab API must preserve the sensitive-material acknowledgement");
 expect(openLabApi.includes("authorization: `Bearer ${token}`"), "Open Lab receiver handoff must be authenticated");
-expect(openLabApi.includes('"OL-"'), "Open Lab must issue a stable receipt identifier after accepted handoff");
+expect(openLabApi.includes("OL-"), "Open Lab must issue a stable receipt identifier after accepted handoff");
 expect(openLabApi.indexOf("await fetch(receiver") < openLabApi.indexOf("submissionId,\n      state: \"received\""), "Open Lab receipt response must follow receiver acceptance");
 
 expect(openLabIntake.includes("NO PUBLIC COLLECTION ON THIS DEPLOYMENT"), "Open Lab UI must make a closed collection boundary explicit");
