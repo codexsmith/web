@@ -1366,3 +1366,15 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+@media (max-width: 360px) {
+  .publicationStripTrack {
+    grid-auto-columns: minmax(220px, min(260px, calc(100vw - 90px)));
+    padding-inline: 38px;
+  }
+
+  .publicationStripCard {
+    padding: 16px;
+  }
+}
