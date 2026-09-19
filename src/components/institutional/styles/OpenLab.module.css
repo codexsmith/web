@@ -1267,3 +1267,13 @@
     width: 100%;
   }
 }
+
+
+.openLabCloseLinks a {
+  border-bottom-color: var(--old-gold-bright);
+  color: #fff;
+}
+
+.openLabCloseLinks a span {
+  color: var(--old-gold-bright);
+}
