@@ -192,6 +192,7 @@ expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choos
 expect(!home.includes("\\n\\n"), "Homepage must not render escaped newline literals around the orientation field");
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
+expect(homeOrientation.includes("animatePeers"), "Homepage orientation must animate context peers with the selected card");
 expect(homeOrientation.includes("itemOrder={homeOrientationOrder}"), "Homepage orientation must declare stable source ordering");
 expect((homeOrientation.match(/<ReflowFieldItem/g) || []).length === 4, "Homepage orientation must expose exactly four Reflow sections");
 for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) {
@@ -205,6 +206,8 @@ expect(homeCss.includes(".homeOrientationBraidMini"), "Operating Braid must expo
 expect(homeCss.includes(".homeOrientationStewardMini"), "Stewardship must expose a three-box preview");
 expect(homeCss.includes("--reflow-columns: 12"), "Homepage orientation REST state must use a twelve-column field");
 expect(homeCss.includes("--reflow-span: 6"), "Homepage orientation REST state must compose as a two-by-two field");
+expect(homeCss.includes("--reflow-focus-span: 4"), "Homepage focus-stage must fit all three desktop context cards on one row");
+expect(homeCss.includes("order: 1"), "Homepage non-selected context cards must share one row before the selected card");
 expect(homeCss.includes("height: 112px"), "Homepage focus-stage peers must contract to compact context plates");
 expect(homeCss.includes('.homeOrientationCard[data-reflow-state="selected"]'), "Homepage selected section must have an explicit committed-inspection state");
 
