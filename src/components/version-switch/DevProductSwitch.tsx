@@ -23,7 +23,7 @@ export function DevProductSwitch({ active, floating = false }: DevProductSwitchP
       </Link>
       <Link
         className={active === "product" ? styles.active : undefined}
-        href="/v3"
+        href="/"
         aria-current={active === "product" ? "page" : undefined}
       >
         <span>Product</span>
