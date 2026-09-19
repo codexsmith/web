@@ -2868,6 +2868,10 @@
   gap: 24px;
   align-items: center;
   padding: 18px 20px;
+  transition:
+    grid-template-columns 420ms cubic-bezier(.22, 1, .36, 1),
+    gap 420ms cubic-bezier(.22, 1, .36, 1),
+    padding 420ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .homeOrientationSummaryCopy {
@@ -2909,6 +2913,11 @@
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.86),
     0 2px 0 rgba(7,26,61,.06);
+  transition:
+    min-height 420ms cubic-bezier(.22, 1, .36, 1),
+    max-height 420ms cubic-bezier(.22, 1, .36, 1),
+    max-width 420ms cubic-bezier(.22, 1, .36, 1),
+    opacity 180ms ease;
 }
 
 .homeOrientationMosaic {
@@ -3032,6 +3041,10 @@
 .homeOrientationStewardMini span:nth-child(2) { border-top-color: var(--old-gold); }
 .homeOrientationStewardMini span:nth-child(3) { border-top-color: var(--osha-green); }
 
+.homeOrientationGrid[data-reflow-active="true"] .homeOrientationCard {
+  will-change: transform;
+}
+
 .homeOrientationGrid[data-reflow-active="true"]
   .homeOrientationCard:not([data-reflow-state="selected"]) {
   order: 1;
@@ -3128,6 +3141,17 @@
 
 .homeOrientationDetail .practiceLineageInputs {
   padding-right: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homeOrientationSummary,
+  .homeOrientationMiniature {
+    transition: none;
+  }
+
+  .homeOrientationGrid[data-reflow-active="true"] .homeOrientationCard {
+    will-change: auto;
+  }
 }
 
 @media (max-width: 1100px) {
