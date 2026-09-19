@@ -399,82 +399,6 @@
   color: var(--old-gold-dark);
 }
 
-@media (max-width: 1080px) {
-  .evidenceHero,
-  .priorExecutionCard,
-  .evidenceLadderSection,
-  .nonImplicationSection {
-    grid-template-columns: 1fr;
-  }
-
-  .nativeEvidenceGrid,
-  .evidenceToEarnGrid,
-  .chainGapGrid,
-  .chainGateGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .chainSourceBand,
-  .chainStats,
-  .chainLifecycle,
-  .chainClaimCard,
-  .chainGapSection {
-    grid-template-columns: 1fr;
-  }
-
-  .chainLiteratureRefs {
-    grid-column: auto;
-  }
-
-  .chainFlowHeader {
-    grid-template-columns: 1fr auto 1fr auto 1.35fr;
-  }
-
-  .evidenceLadderLead,
-  .nonImplicationLead {
-    padding-right: 0;
-    padding-bottom: 24px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(7,26,61,.2);
-  }
-
-  .nonImplicationLead {
-    border-bottom-color: rgba(255,255,255,.2);
-  }
-}
-
-@media (max-width: 720px) {
-  .nativeEvidenceGrid,
-  .evidenceToEarnGrid,
-  .nonImplicationGrid,
-  .chainGapGrid,
-  .chainGateGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .chainFlowHeader {
-    display: none;
-  }
-}
-
-@media (max-width: 680px) {
-  .evidenceHero,
-  .priorExecutionSection,
-  .nativeEvidenceSection,
-  .evidenceLadderSection,
-  .evidenceToEarnSection,
-  .nonImplicationSection,
-  .epistemicChainSection,
-  .evidenceClose {
-    padding-left: 22px;
-    padding-right: 22px;
-  }
-
-  .evidenceHero h1 {
-    font-size: clamp(3.1rem, 14vw, 4.7rem);
-  }
-}
-
 
 .epistemicChainSection {
   padding: 48px clamp(30px, 6vw, 96px) 58px;
@@ -800,4 +724,80 @@
 .chainArtifactLinks a:focus-visible {
   outline: 3px solid var(--osha-blue);
   outline-offset: 2px;
+}
+
+@media (max-width: 1080px) {
+  .evidenceHero,
+  .priorExecutionCard,
+  .evidenceLadderSection,
+  .nonImplicationSection {
+    grid-template-columns: 1fr;
+  }
+
+  .nativeEvidenceGrid,
+  .evidenceToEarnGrid,
+  .chainGapGrid,
+  .chainGateGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chainSourceBand,
+  .chainStats,
+  .chainLifecycle,
+  .chainClaimCard,
+  .chainGapSection {
+    grid-template-columns: 1fr;
+  }
+
+  .chainLiteratureRefs {
+    grid-column: auto;
+  }
+
+  .chainFlowHeader {
+    grid-template-columns: 1fr auto 1fr auto 1.35fr;
+  }
+
+  .evidenceLadderLead,
+  .nonImplicationLead {
+    padding-right: 0;
+    padding-bottom: 24px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(7,26,61,.2);
+  }
+
+  .nonImplicationLead {
+    border-bottom-color: rgba(255,255,255,.2);
+  }
+}
+
+@media (max-width: 720px) {
+  .nativeEvidenceGrid,
+  .evidenceToEarnGrid,
+  .nonImplicationGrid,
+  .chainGapGrid,
+  .chainGateGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .chainFlowHeader {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .evidenceHero,
+  .priorExecutionSection,
+  .nativeEvidenceSection,
+  .evidenceLadderSection,
+  .evidenceToEarnSection,
+  .nonImplicationSection,
+  .epistemicChainSection,
+  .evidenceClose {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .evidenceHero h1 {
+    font-size: clamp(3.1rem, 14vw, 4.7rem);
+  }
 }
