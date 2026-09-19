@@ -70,7 +70,7 @@ const objectEntries: CommandPaletteEntry[] = atlasNodes.map((node) => {
     id: `object:${node.atlasId}`,
     type: "object",
     label: node.title,
-    href: `/v3/atlas?focus=${encodeURIComponent(node.atlasId)}`,
+    href: `/atlas?focus=${encodeURIComponent(node.atlasId)}`,
     kind: node.kind,
     identifier: node.identifier,
     meta: `${atlasKindLabels[node.kind] ?? node.kind} · ${node.status}`,
@@ -88,7 +88,7 @@ const objectEntries: CommandPaletteEntry[] = atlasNodes.map((node) => {
 });
 
 const routeMap = new Map<string, { label: string; href: string }>([
-  ["/v3", { label: "Home", href: "/v3" }],
+  ["/", { label: "Home", href: "/" }],
   ...institutionalFooterRoutes.map((route) => [
     route.href,
     { label: route.label, href: route.href },

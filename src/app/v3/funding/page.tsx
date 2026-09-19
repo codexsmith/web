@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Funding · Boundary First Labs",
   description:
     "How Boundary First Labs uses funding to convert existing research capacity into inspectable evidence, useful artifacts, external review, and sustainable operations.",
-  alternates: { canonical: "/v3/funding" },
+  alternates: { canonical: "/funding" },
 };
 
 export default function Page() {

@@ -3,7 +3,8 @@
   "git": {
     "deploymentEnabled": {
       "**": false,
-      "main": true
+      "main": true,
+      "site/v3-institutional-face": true
     }
   },
   "ignoreCommand": "sh scripts/vercel-ignore-build.sh"

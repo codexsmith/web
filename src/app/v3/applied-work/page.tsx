@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Applied Work · Boundary First Labs",
   description:
     "Applied systems work from Boundary First Labs: software and architecture review, AI governance, bounded pilots, systems diagnosis, research infrastructure, workshops, and technical advisory.",
-  alternates: { canonical: "/v3/applied-work" },
+  alternates: { canonical: "/applied-work" },
 };
 
 export default function Page() {

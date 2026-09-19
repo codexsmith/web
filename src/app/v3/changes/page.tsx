@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "What Changed · Boundary First Labs",
   description:
     "Material state changes across Boundary First Labs: new work, revised claims, changed status, and consequential institutional updates.",
-  alternates: { canonical: "/v3/changes" },
+  alternates: { canonical: "/changes" },
 };
 
 export default function ChangesPage() {

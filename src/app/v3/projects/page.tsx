@@ -4,7 +4,7 @@ import { InstitutionalProjectsPage } from "@/components/institutional/Institutio
 export const metadata: Metadata = {
   title: "Projects · Boundary First Labs",
   description: "Bounded projects, transfer evidence, and applied work from Boundary First Labs.",
-  alternates: { canonical: "/v3/projects" },
+  alternates: { canonical: "/projects" },
 };
 
 export default function Page() {

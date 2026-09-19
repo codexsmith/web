@@ -195,7 +195,7 @@ function HomeOrientationSummary({
         {id === "choose-path" ? (
           <Link
             className={styles.homeOrientationSummaryAction}
-            href="/v3/start"
+            href="/start"
             data-reflow-stop-toggle
           >
             Open all audience paths

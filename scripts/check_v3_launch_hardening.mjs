@@ -28,6 +28,12 @@ function routeFromPage(file) {
   return withoutPage ? "/" + withoutPage : "/";
 }
 
+function canonicalRouteFromPage(file) {
+  const route = file === rootPageFile ? "/" : canonicalRouteFromPage(file);
+  if (route === "/v3") return "/";
+  return route.startsWith("/v3/") ? route.slice(3) : route;
+}
+
 const v3PageFiles = walk(path.join(root, "src/app/v3"))
   .filter((file) => file.endsWith(path.sep + "page.tsx"))
   .filter((file) => !file.includes("["))
@@ -35,12 +41,13 @@ const v3PageFiles = walk(path.join(root, "src/app/v3"))
 const rootPageFile = path.join(root, "src/app/page.tsx");
 const publicPageFiles = [rootPageFile, ...v3PageFiles];
 
-const routeSet = new Set(["/", ...v3PageFiles.map(routeFromPage)]);
+const routeSet = new Set(["/", ...v3PageFiles.map(canonicalRouteFromPage)]);
 const routeInventory = read("src/lib/site-release.ts");
+const routeBlock = routeInventory.match(
+  /institutionalPublicRoutes\s*=\s*\[([\s\S]*?)\]\s*as const/,
+)?.[1];
 const inventoryRoutes = new Set(
-  [...routeInventory.matchAll(/"((?:\\.|[^"])*)"/g)]
-    .map((match) => match[1])
-    .filter((value) => value === "/" || value.startsWith("/v3/")),
+  routeBlock ? [...routeBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1]) : [],
 );
 
 for (const route of [...routeSet].sort()) {
@@ -122,8 +129,11 @@ if (!v3Layout.includes("institutionalIndexingEnabled")) {
 }
 
 const robots = read("src/app/robots.ts");
-if (!robots.includes('disallow.push("/v3/")')) {
-  fail("robots.ts must keep /v3 closed while the release gate is false");
+if (
+  !robots.includes('disallow.push("/v3/")') ||
+  !robots.includes("institutionalPublicRoutes.filter")
+) {
+  fail("robots.ts must keep legacy and canonical institutional child routes closed while the release gate is false");
 }
 
 const sitemap = read("src/app/sitemap.ts");
@@ -142,6 +152,13 @@ if (
 }
 
 const nextConfig = read("next.config.ts");
+if (
+  !nextConfig.includes("institutionalPublicRoutes") ||
+  !nextConfig.includes("async redirects()") ||
+  !nextConfig.includes("async rewrites()")
+) {
+  fail("next.config.ts must own canonical institutional rewrites plus /v3 compatibility redirects");
+}
 for (const header of [
   "X-Content-Type-Options",
   "Referrer-Policy",

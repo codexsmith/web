@@ -1,7 +1,9 @@
 #!/bin/sh
 set -eu
 
-if [ -n "${VERCEL_GIT_COMMIT_REF:-}" ] && [ "$VERCEL_GIT_COMMIT_REF" != "main" ]; then
+if [ -n "${VERCEL_GIT_COMMIT_REF:-}" ] \
+  && [ "$VERCEL_GIT_COMMIT_REF" != "main" ] \
+  && [ "$VERCEL_GIT_COMMIT_REF" != "site/v3-institutional-face" ]; then
   exit 0
 fi
 

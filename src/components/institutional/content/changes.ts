@@ -33,7 +33,7 @@ export const recentChanges: readonly PublicChange[] = [
     sourceRevision: "f6fc94a7dc84225c2718f16adef32b260775eb4f",
     sourceHref:
       "https://github.com/codexsmith/web/commit/f6fc94a7dc84225c2718f16adef32b260775eb4f",
-    surfaceHref: "/v3",
+    surfaceHref: "/",
   },
   {
     id: "chg-quadrature-entropy",
@@ -48,7 +48,7 @@ export const recentChanges: readonly PublicChange[] = [
     sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15",
     sourceHref:
       "https://github.com/codexsmith/boundary-first-labs/commit/3a8c984712ae1d87c7ec714876c356c20242cb15",
-    surfaceHref: "/v3/research",
+    surfaceHref: "/research",
   },
   {
     id: "chg-singularity-calibration",
@@ -63,7 +63,7 @@ export const recentChanges: readonly PublicChange[] = [
     sourceRevision: "36f8f15d0968d353931a2bec3a803f21e2abd9db",
     sourceHref:
       "https://github.com/codexsmith/boundary-first-labs/commit/36f8f15d0968d353931a2bec3a803f21e2abd9db",
-    surfaceHref: "/v3/research",
+    surfaceHref: "/research",
   },
   {
     id: "chg-knowledge-normalization",
@@ -78,7 +78,7 @@ export const recentChanges: readonly PublicChange[] = [
     sourceRevision: "57be67134804f30f3435936ddbfcc8b38ddefda3",
     sourceHref:
       "https://github.com/codexsmith/boundary-first-labs/commit/57be67134804f30f3435936ddbfcc8b38ddefda3",
-    surfaceHref: "/v3/apparatus",
+    surfaceHref: "/apparatus",
   },
   {
     id: "chg-website-v3-architecture",
@@ -93,7 +93,7 @@ export const recentChanges: readonly PublicChange[] = [
     sourceRevision: "298786157b261f20533a778c63b84e87145cd379",
     sourceHref:
       "https://github.com/codexsmith/boundary-first-labs/commit/298786157b261f20533a778c63b84e87145cd379",
-    surfaceHref: "/v3/about",
+    surfaceHref: "/about",
   },
   {
     id: "chg-regime-recovery",
@@ -108,7 +108,7 @@ export const recentChanges: readonly PublicChange[] = [
     sourceRevision: "6d2bf7e7b2ff9331138b4f42ccdb2c51cc4ba952",
     sourceHref:
       "https://github.com/codexsmith/boundary-first-labs/commit/6d2bf7e7b2ff9331138b4f42ccdb2c51cc4ba952",
-    surfaceHref: "/v3/research",
+    surfaceHref: "/research",
   },
   {
     id: "chg-ai-verification",
@@ -123,7 +123,7 @@ export const recentChanges: readonly PublicChange[] = [
     sourceRevision: "2a120b9bd17648f520c3ec869d8287d5c7f26189",
     sourceHref:
       "https://github.com/codexsmith/boundary-first-labs/commit/2a120b9bd17648f520c3ec869d8287d5c7f26189",
-    surfaceHref: "/v3/research",
+    surfaceHref: "/research",
   },
 ] as const;
 

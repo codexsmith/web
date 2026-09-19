@@ -17,25 +17,25 @@ export const featuredWork = [
     tag: "PRODUCT",
     title: "Boundary-First Chess",
     description: "A book-length teaching asset and developed pedagogy for making structural change on the board more legible.",
-    href: "/v3/products/boundary-first-chess",
+    href: "/products/boundary-first-chess",
   },
   {
     tag: "PRODUCT",
     title: "YouTube Knowledge Explorer",
     description: "A source-linked software tool for turning long-form video into searchable, timestamped, structured knowledge.",
-    href: "/v3/products/youtube-knowledge-explorer",
+    href: "/products/youtube-knowledge-explorer",
   },
   {
     tag: "RESEARCH PRODUCT",
     title: "Agentic Scientific Method",
     description: "An operational inquiry protocol for research, evidence, criticism, defect localization, repair, authority, and closure.",
-    href: "/v3/products/agentic-scientific-method",
+    href: "/products/agentic-scientific-method",
   },
   {
     tag: "RESEARCH PRODUCT",
     title: "Boundary First Weather",
     description: "A pilot-ready computational testbed for boundary-aware diagnostics, forecast disagreement, and selective refinement.",
-    href: "/v3/products/boundary-first-weather",
+    href: "/products/boundary-first-weather",
   },
 ] as const;
 
@@ -47,7 +47,7 @@ export const homeNowSnapshot = {
   description:
     "The immediate problem is not generating more ideas. It is turning existing capability into bounded artifacts, outside evidence, criticism, revenue, publication, and repeatable institutional practice.",
   thesis: "Externalize → test → repair → repeat → transfer.",
-  href: "/v3/now",
+  href: "/now",
   lanes: [
     "Public institutional interface",
     "BFL-native external evidence",
@@ -65,7 +65,7 @@ export const homeInstitutionalFrontDoors = [
     description:
       "Architecture, modernization, AI governance, system diagnosis, research infrastructure, workshops, prototypes, and bounded pilots.",
     note: "Ready to scope · case-study evidence still growing",
-    href: "/v3/applied-work",
+    href: "/applied-work",
     cta: "See Applied Work",
     tone: "applied",
   },
@@ -75,7 +75,7 @@ export const homeInstitutionalFrontDoors = [
     description:
       "Start with the smallest useful relationship: one review, one workshop, one pilot, one funded milestone, one introduction, or one co-developed artifact.",
     note: "Review · test · build · distribute · transfer",
-    href: "/v3/collaboration",
+    href: "/collaboration",
     cta: "Explore Collaboration",
     tone: "collaboration",
   },
@@ -85,7 +85,7 @@ export const homeInstitutionalFrontDoors = [
     description:
       "Support turns existing research, software, methods, prototypes, and product candidates into public, reviewable, useful work that can meet external evidence.",
     note: "Capital can change capacity. It does not change truth.",
-    href: "/v3/funding",
+    href: "/funding",
     cta: "See the Funding model",
     tone: "funding",
   },
@@ -97,7 +97,7 @@ export const postureCommitments = [
     title: "Show enough of the machinery to be challenged.",
     description:
       "Claims should travel with their representations, evidence, uncertainty, dependencies, and repair paths so another person can inspect more than the conclusion.",
-    href: "/v3/about",
+    href: "/about",
     linkLabel: "Why representation and repair matter",
     tone: "inspect",
   },
@@ -106,7 +106,7 @@ export const postureCommitments = [
     title: "Criticism should be able to change institutional state.",
     description:
       "Counterexamples, missing distinctions, implementation defects, accessibility failures, and stronger evidence should have a route into revision rather than disappearing into a generic inbox.",
-    href: "/v3/open-lab",
+    href: "/open-lab",
     linkLabel: "See the Open Lab participation model",
     tone: "contest",
   },
@@ -115,7 +115,7 @@ export const postureCommitments = [
     title: "Useful work should leave more capability behind.",
     description:
       "The preferred outcome is not permanent dependence on the Lab. It is clearer models, reusable tools, repair paths, documented processes, and handoff to people who can carry the work forward.",
-    href: "/v3/about",
+    href: "/about",
     linkLabel: "Read the stewardship posture",
     tone: "transfer",
   },
@@ -124,7 +124,7 @@ export const postureCommitments = [
     title: "Forge what helps. Certify what acts. Forbid what dominates.",
     description:
       "AI makes the agency question concrete: bounded assistance can accelerate, while consequential delegated authority needs explicit boundaries, contestability, repair, and accountable ownership.",
-    href: "/v3/ai-governance",
+    href: "/ai-governance",
     linkLabel: "How we govern AI",
     tone: "governance",
   },

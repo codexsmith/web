@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Open Lab · Boundary First Labs",
   description:
     "The public participation boundary for critique, collaboration, public-system inspection, and unusual work at Boundary First Labs.",
-  alternates: { canonical: "/v3/open-lab" },
+  alternates: { canonical: "/open-lab" },
 };
 
 type OpenLabSearchParams = {

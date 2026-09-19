@@ -184,10 +184,10 @@ export function InstitutionalAppliedWorkPage() {
         </p>
 
         <nav className={styles.appliedWorkCloseLinks} aria-label="Applied work next steps">
-          <Link href="/v3/contact?type=applied-work&source=applied-work">Start an applied-work conversation <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/collaboration">Explore collaboration <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/projects">See applied projects <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/funding">See the funding model <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=applied-work&source=applied-work">Start an applied-work conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/collaboration">Explore collaboration <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/projects">See applied projects <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/funding">See the funding model <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>

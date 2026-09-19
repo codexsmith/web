@@ -1,4 +1,9 @@
 import type { NextConfig } from "next";
+import { institutionalPublicRoutes } from "./src/lib/site-release";
+
+const institutionalChildRoutes = institutionalPublicRoutes.filter(
+  (route) => route !== "/",
+);
 
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -13,6 +18,24 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      { source: "/v3", destination: "/", permanent: true },
+      ...institutionalChildRoutes.map((route) => ({
+        source: `/v3${route}`,
+        destination: route,
+        permanent: true,
+      })),
+    ];
+  },
+  async rewrites() {
+    return {
+      beforeFiles: institutionalChildRoutes.map((route) => ({
+        source: route,
+        destination: `/v3${route}`,
+      })),
+    };
+  },
   async headers() {
     return [
       {

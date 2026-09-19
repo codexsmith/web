@@ -33,7 +33,7 @@ export function InstitutionalHomePage() {
                 See Featured Work
                 <span aria-hidden="true">→</span>
               </Link>
-              <Link className={styles.secondaryAction} href="/v3/research">
+              <Link className={styles.secondaryAction} href="/research">
                 Read the Research
                 <span aria-hidden="true">→</span>
               </Link>
