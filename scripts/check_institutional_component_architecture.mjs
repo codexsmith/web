@@ -36,7 +36,7 @@ expect(!chrome.includes("Start here"), "Institutional header must not render the
 expect(commandPalette.includes('title="Search Lab (⌘/Ctrl K)"'), "Lab search trigger must preserve a discoverable shortcut tooltip");
 expect(!commandPalette.includes("<span>Search Lab</span>"), "Lab search trigger must remain icon-only");
 expect(!commandPalette.includes("<kbd>⌘/Ctrl K</kbd>"), "Lab search trigger must not render shortcut chrome in the header");
-expect(chrome.includes(">\n          Start here\n        </Link>"), "Audience traversal utility must remain visibly labeled Start here");
+expect(!chrome.includes("Start here"), "Retired Start here utility must stay out of the institutional header");
 expect(commandPalette.startsWith('"use client";'), "Lab command palette must own its bounded browser interaction");
 expect(commandPalette.includes("event.metaKey || event.ctrlKey"), "Lab command palette must support Command/Ctrl-K");
 expect(commandPalette.includes("dialog.showModal()"), "Lab command palette must use a modal dialog boundary");
