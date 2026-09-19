@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description:
     "Nicholas T. Smith — computer scientist, systems engineer, independent researcher, and founder of Boundary First Labs.",
   alternates: { canonical: "/v3/founder" },
-  robots: { index: false, follow: false },
 };
 
 export default function Page() {
