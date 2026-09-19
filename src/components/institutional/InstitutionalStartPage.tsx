@@ -10,6 +10,7 @@ import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Start.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
+import { institutionalChildRoutes } from "./institutionalRoutes";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -35,6 +36,7 @@ export function InstitutionalStartPage() {
             audience entered through a different door.
           </>
         }
+        childLinks={institutionalChildRoutes.start}
       >
         <aside className={styles.pathIndex}>
           <span>SEVEN WAYS IN</span>
