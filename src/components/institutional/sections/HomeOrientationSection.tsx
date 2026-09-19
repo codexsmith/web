@@ -114,6 +114,16 @@ function HomeOrientationSummary({
         <span>{summary.eyebrow}</span>
         <h3>{summary.title}</h3>
         <p>{summary.description}</p>
+        {id === "choose-path" ? (
+          <Link
+            className={styles.homeOrientationSummaryAction}
+            href="/v3/start"
+            data-reflow-stop-toggle
+          >
+            Open all audience paths
+            <span aria-hidden="true">→</span>
+          </Link>
+        ) : null}
       </div>
       <HomeOrientationMiniature id={id} />
     </div>
@@ -139,15 +149,7 @@ export function HomeOrientationSection() {
           summary={<HomeOrientationSummary id="choose-path" />}
           detail={
             <div className={styles.homeOrientationDetail}>
-              <div className={styles.audienceEntrySection}>
-                <div className={styles.audienceEntryLead}>
-                  <p className={styles.sectionIndex}>CHOOSE YOUR OWN PATH</p>
-                  <Link className={styles.audienceEntryLink} href="/v3/start">
-                    Open all audience paths
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                </div>
-
+              <div className={styles.homeOrientationAudienceDetail}>
                 <AudienceJourneyGrid journeys={homeAudienceJourneys} compact />
               </div>
             </div>
