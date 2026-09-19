@@ -109,6 +109,8 @@
 }
 
 .nav {
+  min-width: 0;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2243,11 +2245,13 @@
   transition: right 120ms ease;
 }
 
+.nav a:focus,
 .nav a:focus-visible {
   outline: 3px solid #d6b449;
   outline-offset: 4px;
 }
 
+.nav a:focus::after,
 .nav a:focus-visible::after {
   right: 0;
 }
