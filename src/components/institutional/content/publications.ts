@@ -1,4 +1,4 @@
-import { getNode } from "@/lib/content-registry";
+import { nodes as baseContentNodes } from "@/lib/content";
 import {
   publicationEdges,
   publicationNodes,
@@ -187,11 +187,11 @@ export const canonicalPublications = publicationNodes
     const related = publicationEdges
       .filter((edge) => edge.from === node.id)
       .map((edge) => {
-        const target = getNode(edge.to);
+        const target = baseContentNodes.find((candidate) => candidate.id === edge.to);
         return {
           relation: edge.label,
-          title: target.label,
-          href: target.path ? `/${target.path}` : "/v3/research",
+          title: target?.label ?? edge.to,
+          href: target?.path ? `/${target.path}` : "/v3/research",
         };
       });
 
