@@ -1,4 +1,7 @@
 .field {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: grid;
   grid-template-columns: repeat(var(--reflow-columns, 12), minmax(0, 1fr));
   grid-auto-flow: dense;
@@ -34,6 +37,8 @@
   display: grid;
   grid-template-columns: repeat(60, minmax(0, 1fr));
   grid-auto-flow: row;
+  column-gap: 0;
+  row-gap: var(--reflow-gap, 14px);
   align-items: stretch;
 }
 
@@ -49,6 +54,7 @@
   min-width: 0;
   grid-row: var(--reflow-peer-row, 1);
   grid-column: span var(--reflow-peer-span, 15);
+  margin-inline: calc(var(--reflow-gap, 14px) / 2);
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
@@ -81,10 +87,13 @@
 .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] {
   grid-template-columns: repeat(60, minmax(0, 1fr));
   grid-auto-flow: row;
+  column-gap: 0;
+  row-gap: var(--reflow-gap, 14px);
 }
 
 .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item {
   grid-column: span var(--reflow-rectangle-span, 20);
+  margin-inline: calc(var(--reflow-gap, 14px) / 2);
 }
 
 @media (max-width: 720px) {
@@ -94,6 +103,7 @@
 
   .field[data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item {
     grid-column: 1;
+    margin-inline: 0;
   }
 }
 

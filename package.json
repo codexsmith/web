@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "bridge:contracts": "node scripts/check_bridge_transition_behavior.mjs && node scripts/check_bridge_governance_contracts.mjs && node scripts/check_bridge_ledger_contracts.mjs && node scripts/check_bridge_ops_security_contracts.mjs",
-    "contracts:check": "node scripts/check_v2_contracts.mjs && node scripts/check_version_route_contracts.mjs && node scripts/check_institutional_css_architecture.mjs && node scripts/check_institutional_component_architecture.mjs && node scripts/check_reflow_field_contracts.mjs && node scripts/check_navigation_frame_contracts.mjs && node scripts/check_bounded_special_surfaces.mjs && node scripts/check_product_catalog_contracts.mjs && node scripts/check_public_interest_layout_contracts.mjs && node scripts/check_v3_launch_hardening.mjs && npm run bridge:contracts",
+    "contracts:check": "node scripts/check_v2_contracts.mjs && node scripts/check_version_route_contracts.mjs && node scripts/check_institutional_css_architecture.mjs && node scripts/check_institutional_component_architecture.mjs && node scripts/check_reflow_field_contracts.mjs && node scripts/check_navigation_frame_contracts.mjs && node scripts/check_bounded_special_surfaces.mjs && node scripts/check_product_catalog_contracts.mjs && node scripts/check_public_interest_layout_contracts.mjs && node scripts/check_v3_launch_hardening.mjs && node scripts/check_v3_release_qa_contracts.mjs && npm run bridge:contracts",
     "runtime:check": "node scripts/check_v2_runtime.mjs",
     "verify": "npm run lint && npm run typecheck && npm run contracts:check && npm run build && npm run runtime:check"
   },

@@ -530,6 +530,9 @@
 
 .authorityNote a {
   width: fit-content;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
   color: var(--representation-ink);
   font-size: .58rem;
   font-weight: 800;
