@@ -31,7 +31,7 @@ expect(qa.includes("__release-qa-missing__"), "v3 release QA must exercise the i
 expect(qa.includes("horizontalOverflow"), "v3 release QA must check horizontal overflow");
 expect(qa.includes("clippedText"), "v3 release QA must check clipped text");
 expect(qa.includes("unnamedInteractive"), "v3 release QA must check interactive accessible names");
-expect(qa.includes("undersizedControls"), "v3 release QA must check minimum control targets");
+expect(qa.includes("targetSpacingViolations"), "v3 release QA must check minimum target size and spacing");
 expect(qa.includes("longMotion"), "v3 release QA must check reduced-motion regressions");
 
 expect(
