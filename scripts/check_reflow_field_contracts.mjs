@@ -201,6 +201,10 @@ for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) 
 }
 expect(homeCss.includes(".homeOrientationGrid"), "Homepage orientation must style a dedicated Reflow field");
 expect(homeOrientation.includes("HomeOrientationMiniature"), "Homepage orientation summaries must preview their internal content grammar");
+expect(!homeOrientation.includes("Start with why you came, not with the Lab&apos;s org chart."), "Expanded homepage Reflow details must not repeat the selected summary title");
+expect(!homeOrientation.includes("<h2>Three practical lineages braid into one recursive method.</h2>"), "Operating Braid detail must not repeat its selected summary title");
+expect(!homeOrientation.includes("<h2>What succeeds still has to be cared for.</h2>"), "Stewardship detail must not repeat its selected summary title");
+expect(!homeOrientation.includes("InstitutionalSectionLead"), "Our Approach detail must use a title-free inner lead");
 expect(homeCss.includes(".homeOrientationMosaic"), "Choose Your Own Path must expose a mosaic preview");
 expect(homeCss.includes(".homeOrientationStack"), "Our Approach must expose stacked-row preview");
 expect(homeCss.includes(".homeOrientationBraidMini"), "Operating Braid must expose a three-to-one preview");
