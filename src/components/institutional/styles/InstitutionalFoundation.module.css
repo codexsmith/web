@@ -2942,10 +2942,6 @@
   gap: 24px;
   align-items: center;
   padding: 18px 20px;
-  transition:
-    grid-template-columns 420ms cubic-bezier(.22, 1, .36, 1),
-    gap 420ms cubic-bezier(.22, 1, .36, 1),
-    padding 420ms cubic-bezier(.22, 1, .36, 1);
 }
 
 .homeOrientationSummaryCopy {
@@ -3009,9 +3005,6 @@
     0 2px 6px rgba(20,37,58,.06);
   transform: translateY(-1px);
   transition:
-    min-height 420ms cubic-bezier(.22, 1, .36, 1),
-    max-height 420ms cubic-bezier(.22, 1, .36, 1),
-    max-width 420ms cubic-bezier(.22, 1, .36, 1),
     opacity 180ms ease,
     box-shadow 180ms ease;
 }

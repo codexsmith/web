@@ -136,9 +136,9 @@ function clickBelongsToNestedReflowField(
 }
 
 const focusLayoutTransition = {
-  type: "tween",
-  duration: 0.52,
-  ease: [0.45, 0, 0.55, 1],
+  type: "spring",
+  bounce: 0.15,
+  duration: 0.5,
 } as const;
 
 const snapLayoutTransition = {
@@ -362,7 +362,7 @@ export function ReflowFieldItem({
       data-reflow-peer-row={peerTile?.rowIndex}
       data-reflow-peer-row-size={peerTile?.rowSize}
       data-tone={dataTone}
-      style={itemStyle}
+      style={{ borderRadius: "var(--reflow-item-radius, 22px)", ...itemStyle }}
       onClick={handleSurfaceClick}
     >
       <button
