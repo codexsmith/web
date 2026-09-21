@@ -856,6 +856,315 @@ export const nodes: ContentNode[] = [
     ],
   },
   {
+    id: "moonshots",
+    label: "Moonshots",
+    path: "research/moonshots",
+    parentId: "research",
+    kind: "research",
+    eyebrow: "Long-horizon research objectives",
+    summary:
+      "Six long-horizon objectives that organize where the Lab's research machinery is pointed without treating ambition as present-tense capability.",
+    body: [
+      "Moonshots are long-horizon research objectives, not claims of completion. Each one must remain decomposable into bounded programs, measurable work, explicit open problems, and evidence that can survive criticism.",
+      "The shared test is practical: current footholds should be visible now, progress should be measurable, and stronger capability claims should wait for prototypes, adversarial review, replication, and broader deployment evidence.",
+    ],
+    links: [
+      {
+        label: "How We Work",
+        href: "/about/how-we-work",
+        eyebrow: "Method and release discipline",
+        summary: "How source, hypothesis, execution, observation, repair, and promotion remain distinct.",
+      },
+      {
+        label: "Current Work",
+        href: "/products/current",
+        eyebrow: "Present-tense operative surface",
+        summary: "Where pieces of the longer-horizon architecture are already being turned into software and bounded services.",
+      },
+    ],
+    inspection: [
+      {
+        id: "moonshots-evaluation",
+        label: "How the moonshots are judged",
+        eyebrow: "Evidence before rhetoric",
+        summary:
+          "The long-horizon program is useful only if it creates measurable intermediate capability rather than aspirational language.",
+        bullets: [
+          "Track accepted persistent work per unit of human supervisory effort.",
+          "Measure repair rates, evidence validity, provenance completeness, and downstream reuse.",
+          "Test whether independent agents can continue prior work without reconstructing hidden conversational context.",
+          "Compare cross-domain transfer against native disciplinary baselines rather than conceptual resemblance.",
+          "Treat negative results, demotions, and exposed limits as successful research when they block stronger false claims.",
+          "Keep technical ambition separate from claims about scientific validation, market value, external adoption, or inevitability.",
+        ],
+        sourceRef:
+          "Boundary First Labs — Moonshots: Long-Horizon Research Strategy, 2026-09-20",
+      },
+    ],
+  },
+  {
+    id: "research-operating-system",
+    label: "Research Operating System",
+    shortLabel: "Research OS",
+    path: "research/moonshots/research-operating-system",
+    parentId: "moonshots",
+    kind: "research",
+    eyebrow: "Hybrid research infrastructure",
+    summary:
+      "A durable research substrate where humans, neural models, symbolic state, formal tools, experiments, and computation can accumulate coherent work over time.",
+    body: [
+      "The target is not an AI that does research by itself. It is an operating environment in which heterogeneous actors can inherit explicit state, execute bounded work, attach evidence and provenance, and leave the institution in a better inspectable state.",
+      "Current footholds include Corpus Forge, recursive research-system architecture, durable registers and queues, work transactions, evidence surfaces, and sustained human-agent repository construction. Open work includes a rigorous symbolic state model, cross-agent continuation, auditability, failure repair, and measurable supervision cost.",
+    ],
+    links: [
+      {
+        label: "Corpus Forge",
+        href: "/products/current/corpus-forge",
+        eyebrow: "Current foothold",
+        summary: "Governed research memory, claim state, criticism, promotion, supersession, and repair.",
+      },
+      {
+        label: "Verification & Governance",
+        href: "/research/software/verification-governance",
+        eyebrow: "Closure discipline",
+        summary: "Evidence, authority, discrepancy, repair, and earned closure for executable claims.",
+      },
+    ],
+    inspection: [
+      {
+        id: "research-os-progress",
+        label: "What would count as progress",
+        eyebrow: "Operational test",
+        summary:
+          "The Research OS earns credibility when work can persist and compose across actors without relying on hidden conversational reconstruction.",
+        bullets: [
+          "Typed shared research state survives model and session changes.",
+          "Independent workers can inherit bounded state and produce reusable additions.",
+          "Work units retain inputs, constraints, transforms, outputs, evidence, and validation status.",
+          "Human review cost decreases without hiding failure or authority boundaries.",
+          "Accepted outputs remain useful to later work instead of evaporating as one-shot generations.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "distributed-scientific-intelligence",
+    label: "Distributed Scientific Intelligence",
+    shortLabel: "Distributed Science",
+    path: "research/moonshots/distributed-scientific-intelligence",
+    parentId: "moonshots",
+    kind: "research",
+    eyebrow: "Networked bounded contribution",
+    summary:
+      "A distributed research network where people, agents, formal solvers, simulations, instruments, and institutions can contribute bounded work to shared state.",
+    body: [
+      "A node should not need the entire Lab in context. It should receive a typed work unit with relevant state, goal, constraints, authority, evidence requirements, and a validation contract, then return a result that can be evaluated independently.",
+      "The unresolved problems are coordination problems as much as intelligence problems: identity, synchronization, conflict reconciliation, evidence transport, reproducible execution, authority across institutions, and governance for open contribution.",
+    ],
+    inspection: [
+      {
+        id: "distributed-science-contract",
+        label: "Minimum distributed contract",
+        eyebrow: "Candidate interface",
+        summary:
+          "A distributed contribution becomes meaningful when the receiving system can determine what was authorized, what changed, and what evidence supports the change.",
+        bullets: [
+          "Relevant input state is explicit.",
+          "Goal and constraints are bounded.",
+          "Authority is carried with the work rather than inferred.",
+          "Evidence and provenance requirements are known before execution.",
+          "Validation can occur independently of the worker that produced the result.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mathematical-interoperability",
+    label: "Mathematical Interoperability",
+    shortLabel: "Math Interoperability",
+    path: "research/moonshots/mathematical-interoperability",
+    parentId: "moonshots",
+    kind: "research",
+    eyebrow: "Formal tools across disciplinary boundaries",
+    summary:
+      "Make more of the mathematics and formal machinery that already exists across disciplines practically translatable, composable, and testable.",
+    body: [
+      "The working premise is narrower than a universal mathematics: difficult problems are often blocked not only by missing tools, but by disciplinary separation, incompatible vocabularies, inaccessible representations, and the cost of recognizing which existing formal machinery applies.",
+      "AI is useful here as a search and translation layer across formal dialects, but the mathematics remains the constraint. The research burden is to state what a translation preserves, weakens, strengthens, introduces, forgets, or breaks.",
+    ],
+    links: [
+      {
+        label: "Boundary Theory",
+        href: "/research/formal-theory/boundary-theory",
+        eyebrow: "Formal bridge",
+        summary: "Structure-preserving comparison under explicit claim control.",
+      },
+      {
+        label: "Distinction Space",
+        href: "/research/foundations/distinction-space",
+        eyebrow: "Formal substrate",
+        summary: "A candidate setting for path-dependent possibility, admissibility, and transformation.",
+      },
+    ],
+    inspection: [
+      {
+        id: "math-interoperability-burden",
+        label: "Interoperability burden",
+        eyebrow: "Translation must expose loss",
+        summary:
+          "A useful crossing should say more than that two disciplines use similar words or diagrams.",
+        bullets: [
+          "Declare the native objects on both sides before translating.",
+          "Name preserved invariants and any structure that is weakened or forgotten.",
+          "Distinguish equivalence, compatibility, reduction, analogy, and convenience.",
+          "Test composition rather than isolated pairwise resemblance.",
+          "Compare against competent native methods and retain counterexamples.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "executable-science",
+    label: "Executable Science",
+    path: "research/moonshots/executable-science",
+    parentId: "moonshots",
+    kind: "research",
+    eyebrow: "Machine-addressable scientific work",
+    summary:
+      "Move more claims, assumptions, evidence, experiments, theories, contradictions, and proof obligations into inspectable machine-addressable research objects.",
+    body: [
+      "The objective is not to reduce science to software. It is to make more of the scientific process executable where execution is appropriate while preserving uncertainty, domain expertise, peer criticism, negative results, and human judgment.",
+      "Current footholds include executable-representation research, machine-addressable artifact contracts, experiment registers, research-state review, evidence/provenance machinery, and bounded execution queues.",
+    ],
+    links: [
+      {
+        label: "Executable Representation",
+        href: "/research/software/executable-representation",
+        eyebrow: "Nearest operational bridge",
+        summary: "Representation, state, admissible transitions, invariants, and execution made explicit.",
+      },
+      {
+        label: "Paper Mine",
+        href: "/research/paper-mine",
+        eyebrow: "Publication workbench",
+        summary: "A controlled field for candidate papers, evidence obligations, readiness, and promotion state.",
+      },
+    ],
+    inspection: [
+      {
+        id: "executable-science-open-problems",
+        label: "Open problems",
+        eyebrow: "What remains unsolved",
+        summary:
+          "Executable research objects become scientifically useful only if they preserve the differences among proof, simulation, measurement, inference, and narrative argument.",
+        bullets: [
+          "Formal semantics for machine-addressable theories and evidence.",
+          "Interoperability among proofs, simulations, measurements, datasets, and prose arguments.",
+          "Reproducibility as tools, models, and environments change.",
+          "Explicit preservation of uncertainty, negative results, and unresolved contradictions.",
+          "Interfaces between executable machinery and ordinary scientific peer review.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "formal-representation-mechanics",
+    label: "Formal Representation Mechanics",
+    shortLabel: "Representation Mechanics",
+    path: "research/moonshots/formal-representation-mechanics",
+    parentId: "moonshots",
+    kind: "theory",
+    eyebrow: "Categorical-algebraic formalization",
+    summary:
+      "Develop Boundary Theory into a rigorous grammar-centered framework for decomposition, admissible transformation, closure, defect, and lawful recomposition of representations.",
+    body: [
+      "The current direction is categorical-algebraic. Formal grammars define representational regimes; states inhabit path-dependent possibility spaces; admissibility determines lawful states and transforms; categorical structure governs composition; algebraic structure governs operations inside particular regimes; closure and defect track completion, mismatch, loss, obstruction, and repair.",
+      "The in-house Distinction Space term is provisionally grounded as a path-dependent possibility space: lawful continuation can depend on the path or history by which a represented state was reached. The open burden is to connect that formulation cleanly to established mathematics and produce nontrivial witness results without renaming existing structure unnecessarily.",
+    ],
+    links: [
+      {
+        label: "Boundary Theory",
+        href: "/research/formal-theory/boundary-theory",
+        eyebrow: "Core formal program",
+        summary: "Cross-domain formal research under adversarial claim control.",
+      },
+      {
+        label: "Schemathematics",
+        href: "/research/formal-theory/schemathematics",
+        eyebrow: "Algebraic and atlas machinery",
+        summary: "Operational structure, constraints, and transforms across representations.",
+      },
+      {
+        label: "Distinction Space",
+        href: "/research/foundations/distinction-space",
+        eyebrow: "Core object",
+        summary: "The path-dependent possibility-space direction underlying the current formalization.",
+      },
+    ],
+    inspection: [
+      {
+        id: "representation-mechanics-compression",
+        label: "Current formal compression",
+        eyebrow: "Working grammar",
+        summary:
+          "One useful compression of the emerging mechanics is a sequence of bounded construction, lawful transformation, and tested recomposition.",
+        bullets: [
+          "Bound: establish the representational regime.",
+          "Distinguish: expose the state-bearing differences that matter.",
+          "Grammarize: declare admissible constructions and operations.",
+          "Transform: apply lawful state or representation changes.",
+          "Close: test the declared completion or stabilization conditions.",
+          "Recompose: return the transformed local result to a larger regime without silently losing required structure.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "self-improving-research-infrastructure",
+    label: "Self-Improving Research Infrastructure",
+    shortLabel: "Self-Improving Infrastructure",
+    path: "research/moonshots/self-improving-research-infrastructure",
+    parentId: "moonshots",
+    kind: "research",
+    eyebrow: "Research that improves its own machinery",
+    summary:
+      "A governed feedback loop where successful research can improve the representations, methods, tools, and infrastructure used by later research.",
+    body: [
+      "The target is institutional learning, not an autonomous self-modification mandate. Research should be able to produce validated improvements to its own routing, formalization, evidence handling, execution, review, and repair machinery.",
+      "Any such change remains bounded by provenance, validation, rollback, authority, and human consequence gates. The central risk is self-confirming drift: machinery that optimizes for its own internal signals while degrading contact with external evidence.",
+    ],
+    links: [
+      {
+        label: "How We Work",
+        href: "/about/how-we-work",
+        eyebrow: "Institutional discipline",
+        summary: "The release and correction boundaries that keep improvement separate from uncontrolled promotion.",
+      },
+      {
+        label: "Verification & Governance",
+        href: "/research/software/verification-governance",
+        eyebrow: "Repair and closure",
+        summary: "Independent consequence channels, discrepancy ownership, repair, and earned closure.",
+      },
+    ],
+    inspection: [
+      {
+        id: "self-improving-infrastructure-guardrails",
+        label: "Required guardrails",
+        eyebrow: "Improvement must remain reversible and inspectable",
+        summary:
+          "The machinery should be able to learn from use without making its own success criteria unchallengeable.",
+        bullets: [
+          "Separate genuine process improvement from local metric optimization.",
+          "Promote new machinery through explicit review rather than silent replacement.",
+          "Regression-test new machinery against prior successful and failed cases.",
+          "Preserve provenance across versions so changed behavior remains reconstructable.",
+          "Retain rollback and human authority for consequential changes.",
+        ],
+      },
+    ],
+  },
+  {
     id: "about",
     label: "About",
     path: "about",
@@ -931,6 +1240,13 @@ export const edges: GraphEdge[] = [
   { from: "boundary-first-weather", to: "executable-representation", type: "demonstrates", label: "tests transport of" },
   { from: "boundary-theory", to: "distinction-space", type: "extends", label: "extends" },
   { from: "schemathematics", to: "boundary-theory", type: "applies-to", label: "formal apparatus for" },
+  { from: "research-operating-system", to: "corpus-forge", type: "extends", label: "builds toward" },
+  { from: "research-operating-system", to: "verification-governance", type: "depends-on", label: "requires" },
+  { from: "mathematical-interoperability", to: "boundary-theory", type: "applies-to", label: "tests through" },
+  { from: "executable-science", to: "executable-representation", type: "extends", label: "extends" },
+  { from: "formal-representation-mechanics", to: "boundary-theory", type: "extends", label: "formalizes" },
+  { from: "formal-representation-mechanics", to: "distinction-space", type: "depends-on", label: "develops from" },
+  { from: "self-improving-research-infrastructure", to: "verification-governance", type: "depends-on", label: "requires" },
 ];
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
