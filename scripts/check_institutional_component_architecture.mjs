@@ -502,7 +502,8 @@ expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
 expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose its contextual child pages");
-expect(aboutPage.includes("founder-led, single-person"), "About must state the current single-person founder-led operating model");
+expect(aboutPage.includes("founder-led solopreneur operation"), "About may use solopreneur as shorthand for the current founder-led operating model");
+expect(aboutPage.includes("single-person"), "About must define the operating model in plain language rather than relying on the solopreneur label");
 expect(aboutPage.includes("computationally leveraged"), "About must state that the Lab is computationally leveraged");
 expect(aboutPage.includes("<AboutReflowGroups />"), "About page must delegate grouped doctrine to the Reflow section component");
 expect(aboutPage.indexOf("<AboutReflowGroups />") < aboutPage.indexOf('className={styles.aboutClose}'), "About closing synthesis must remain outside and after the Reflow chapters");
