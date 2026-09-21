@@ -1,6 +1,9 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { ReflowField, ReflowFieldItem } from "@/components/bfux/ReflowField";
+import { CollapsibleSection } from "../CollapsibleSection";
 import { formatOrdinal } from "../institutionalFormat";
 import foundationStyles from "../styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "../styles/InstitutionalRouteShared.module.css";
@@ -106,34 +109,67 @@ function AboutGroupHeader({
   group,
   title,
   description,
+  isOpen,
+  toggle,
 }: {
   index: string;
   group: string;
   title: string;
   description: string;
+  isOpen: boolean;
+  toggle: () => void;
 }) {
   return (
-    <div className={styles.aboutGroupHeader}>
+    <button 
+      className={styles.aboutGroupHeader}
+      onClick={toggle}
+      aria-expanded={isOpen}
+      style={{
+        appearance: "none",
+        background: "transparent",
+        borderLeft: "none",
+        borderRight: "none",
+        textAlign: "left",
+        whiteSpace: "normal",
+        cursor: "pointer",
+      }}
+    >
       <span className={styles.aboutGroupIndex}>{index}</span>
-      <div>
+      <div className={styles.aboutGroupContent}>
         <p>{group}</p>
         <strong>{title}</strong>
         <span>{description}</span>
       </div>
-    </div>
+      <div className={styles.aboutGroupToggle}>
+        <svg
+          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}
+          width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </button>
   );
 }
 
 export function AboutReflowGroups() {
   return (
     <>
-      <section className={styles.aboutGroup} data-about-group="representation">
-        <AboutGroupHeader
-          index="01"
-          group="REPRESENTATION + METHOD"
-          title="How the Lab understands complex systems."
-          description="Representations, recurring failure shapes, mature machinery, and the method used to compare and formalize them."
-        />
+      <CollapsibleSection
+        className={styles.aboutGroup}
+        data-about-group="representation"
+        defaultOpen={true}
+        header={({ isOpen, toggle }) => (
+          <AboutGroupHeader
+            index="01"
+            group="REPRESENTATION + METHOD"
+            title="How the Lab understands complex systems."
+            description="Representations, recurring failure shapes, mature machinery, and the method used to compare and formalize them."
+            isOpen={isOpen}
+            toggle={toggle}
+          />
+        )}
+      >
 
         <ReflowField
           className={[styles.aboutGroupGrid, styles.aboutRepresentationGrid].join(" ")}
@@ -310,15 +346,23 @@ export function AboutReflowGroups() {
             </>
           </AboutContextCard>
         </ReflowField>
-      </section>
+      </CollapsibleSection>
 
-      <section className={styles.aboutGroup} data-about-group="agency">
-        <AboutGroupHeader
-          index="02"
-          group="AGENCY + STEWARDSHIP"
-          title="What the machinery should preserve for people."
-          description="Agency, repair, capability transfer, responsibility, and the obligations created by consequential systems."
-        />
+      <CollapsibleSection
+        className={styles.aboutGroup}
+        data-about-group="agency"
+        defaultOpen={false}
+        header={({ isOpen, toggle }) => (
+          <AboutGroupHeader
+            index="02"
+            group="AGENCY + STEWARDSHIP"
+            title="What the machinery should preserve for people."
+            description="Agency, repair, capability transfer, responsibility, and the obligations created by consequential systems."
+            isOpen={isOpen}
+            toggle={toggle}
+          />
+        )}
+      >
 
         <ReflowField
           className={[styles.aboutGroupGrid, styles.aboutAgencyGrid].join(" ")}
@@ -419,15 +463,23 @@ export function AboutReflowGroups() {
             </div>
           </AboutContextCard>
         </ReflowField>
-      </section>
+      </CollapsibleSection>
 
-      <section className={styles.aboutGroup} data-about-group="institution">
-        <AboutGroupHeader
-          index="03"
-          group="INSTITUTIONAL PRACTICE"
-          title="How Boundary First Labs should behave as an institution."
-          description="Apparatus, criticism, collaboration, public-interest work, and the discipline required to remain answerable."
-        />
+      <CollapsibleSection
+        className={styles.aboutGroup}
+        data-about-group="institution"
+        defaultOpen={false}
+        header={({ isOpen, toggle }) => (
+          <AboutGroupHeader
+            index="03"
+            group="INSTITUTIONAL PRACTICE"
+            title="How Boundary First Labs should behave as an institution."
+            description="Apparatus, criticism, collaboration, public-interest work, and the discipline required to remain answerable."
+            isOpen={isOpen}
+            toggle={toggle}
+          />
+        )}
+      >
 
         <ReflowField
           className={[styles.aboutGroupGrid, styles.aboutInstitutionGrid].join(" ")}
@@ -528,7 +580,7 @@ export function AboutReflowGroups() {
             </div>
           </AboutContextCard>
         </ReflowField>
-      </section>
+      </CollapsibleSection>
     </>
   );
 }

@@ -16,6 +16,7 @@ import {
   type OpenLabSubmissionType,
 } from "./content/openLab";
 import { OpenLabContextSection } from "./sections/OpenLabContextSection";
+import { OpenLabContractCard } from "./sections/OpenLabContractCard";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 
 const styles = composeCssModules(
@@ -111,55 +112,7 @@ export function InstitutionalOpenLabPage({
 
         <div className={styles.openLabContractGrid}>
           {participationContracts.map((contract) => (
-            <article
-              className={styles.openLabContractCard}
-              data-open-lab-tone={contract.tone}
-              key={contract.title}
-            >
-              <div className={styles.openLabContractTopline}>
-                <span className={styles.openLabContractCode}>{contract.code}</span>
-                <code>{contract.type}</code>
-              </div>
-
-              <h3>{contract.title}</h3>
-              <p className={styles.openLabContractSubtitle}>
-                {contract.subtitle}
-              </p>
-              <p className={styles.openLabContractDescription}>
-                {contract.description}
-              </p>
-
-              <div className={styles.openLabOrdinaryLanguage}>
-                <span>WHAT WE ASK IN ORDINARY LANGUAGE</span>
-                <ul>
-                  {contract.ordinaryLanguage.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className={styles.openLabOutcome}>
-                <span>POSSIBLE ROUTING / OUTCOME</span>
-                <p>{contract.possibleOutcomes}</p>
-              </div>
-
-              <div className={styles.openLabBoundary}>
-                <span>BOUNDARY</span>
-                <p>{contract.boundary}</p>
-              </div>
-
-              <Link
-                className={styles.openLabContractAction}
-                href={
-                  "/v3/open-lab?type=" +
-                  encodeURIComponent(contract.type) +
-                  "#open-lab-intake"
-                }
-              >
-                Inspect this intake route{" "}
-                <span aria-hidden="true">-&gt;</span>
-              </Link>
-            </article>
+            <OpenLabContractCard key={contract.title} contract={contract} />
           ))}
         </div>
       </section>

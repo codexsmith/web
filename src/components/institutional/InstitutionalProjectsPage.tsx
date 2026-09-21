@@ -9,6 +9,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 
 import { projects } from "./content/projects";
 import { ProjectContextSection } from "./sections/ProjectContextSection";
+import { FeaturedProjectCard } from "./sections/FeaturedProjectCard";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -42,68 +43,13 @@ export function InstitutionalProjectsPage() {
             />
 
           <div className={styles.projectCaseGrid}>
-            {projects.map((project) => {
-              const content = (
-                <>
-                  <LabObjectIdentity
-                    identifier={project.code}
-                    identifierLabel="CODE"
-                    kind="project"
-                    status={project.status}
-                    statusLabel="SOURCE STATUS"
-                    variant="compact"
-                  />
-
-                  <p className={styles.projectCaseType}>{project.type}</p>
-                  <h3>{project.title}</h3>
-
-                  <div className={styles.projectCaseFacts}>
-                    <div>
-                      <span>NATIVE DOMAIN</span>
-                      <strong>{project.domain}</strong>
-                    </div>
-                    <div>
-                      <span>PRIMARY STRESS</span>
-                      <strong>{project.stress}</strong>
-                    </div>
-                  </div>
-
-                  <blockquote>{project.question}</blockquote>
-
-                  <div className={styles.projectCaseResult}>
-                    <span>WHAT EXISTS / CURRENT RESULT</span>
-                    <p>{project.result}</p>
-                  </div>
-
-                  <div className={styles.projectConsequenceGrid}>
-                    <div>
-                      <span>AGENCY</span>
-                      <p>{project.agency}</p>
-                    </div>
-                    <div>
-                      <span>STEWARDSHIP</span>
-                      <p>{project.stewardship}</p>
-                    </div>
-                  </div>
-
-                  <div className={styles.projectTransferSignal}>
-                    <span>TRANSFER SIGNAL</span>
-                    {project.transfer}
-                  </div>
-                </>
-              );
-
-              return (
-                <Link
-                  className={styles.projectCaseCard}
-                  data-project-tone={project.tone}
-                  href={project.href}
-                  key={project.title}
-                >
-                  {content}
-                </Link>
-              );
-            })}
+            {projects.map((project) => (
+              <FeaturedProjectCard
+                key={project.code}
+                project={project}
+                styles={styles}
+              />
+            ))}
           </div>
         </section>
 

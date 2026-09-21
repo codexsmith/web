@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./styles/LabObjectIdentity.module.css";
 
 export type LabObjectKind =
@@ -14,6 +15,7 @@ export type LabObjectKind =
 export type LabObjectIdentityProps = {
   kind: LabObjectKind;
   kindLabel?: string;
+  hideKind?: boolean;
   identifier?: string;
   identifierLabel?: string;
   status: string;
@@ -43,7 +45,7 @@ function IdentityField({
   className,
 }: {
   label: string;
-  value: string;
+  value: React.ReactNode;
   className?: string;
 }) {
   return (
@@ -66,6 +68,7 @@ export function LabObjectIdentity({
   variant = "band",
   appearance = "light",
   ariaLabel,
+  hideKind,
 }: LabObjectIdentityProps) {
   const resolvedKindLabel = kindLabel ?? kindLabels[kind];
 
@@ -77,11 +80,13 @@ export function LabObjectIdentity({
       data-variant={variant}
       aria-label={ariaLabel ?? `${resolvedKindLabel} object identity`}
     >
-      <IdentityField
-        className={styles.kindField}
-        label="OBJECT"
-        value={resolvedKindLabel}
-      />
+      {!hideKind && (
+        <IdentityField
+          className={styles.kindField}
+          label="OBJECT"
+          value={resolvedKindLabel}
+        />
+      )}
 
       {identifier ? (
         <IdentityField
@@ -93,7 +98,16 @@ export function LabObjectIdentity({
       <IdentityField
         className={styles.statusField}
         label={statusLabel}
-        value={status}
+        value={
+          typeof status === "string" 
+            ? status.split("_").map((part, i, arr) => (
+                <React.Fragment key={i}>
+                  {part}
+                  {i < arr.length - 1 && <br />}
+                </React.Fragment>
+              ))
+            : status
+        }
       />
 
       {secondary ? (

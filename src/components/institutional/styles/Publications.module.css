@@ -248,9 +248,57 @@
 .publicationMetaCell {
   min-width: 0;
   padding: 12px 13px;
-  border: 1px solid rgba(7,26,61,.24);
-  background: rgba(255,255,255,.66);
-  box-shadow: inset 0 1px 0 #fff;
+  border: 1px solid var(--bfux-panel-edge);
+  background: rgba(255,255,255,.5);
+}
+
+.publicationHeaderToggle {
+  cursor: pointer;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: left;
+  border: none;
+  background: transparent;
+  appearance: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+.publicationHeaderToggle:focus-visible {
+  outline: 2px solid var(--royal-blue);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.publicationHeaderChevron {
+  align-self: flex-end;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(7,26,61,.15);
+  color: var(--royal-blue-deep);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.publicationHeaderToggle:hover .publicationHeaderChevron {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(7, 26, 61, 0.3);
+}
+
+.publicationDrawerContent {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--bfux-panel-edge);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .publicationMetaCell strong {

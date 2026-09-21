@@ -1,5 +1,4 @@
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
-import { LabObjectIdentity } from "./LabObjectIdentity";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Research.module.css";
@@ -8,6 +7,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 
 import { programs } from "./content/research";
 import { ResearchContextSection } from "./sections/ResearchContextSection";
+import { ResearchProgramCard } from "./sections/ResearchProgramCard";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -67,49 +67,7 @@ export function InstitutionalResearchPage() {
 
           <div className={styles.researchProgramGrid}>
             {programs.map((program) => (
-              <article
-                className={styles.researchProgramCard}
-                data-tone={program.tone}
-                key={program.title}
-              >
-                <LabObjectIdentity
-                  identifier={program.code}
-                  identifierLabel="CODE"
-                  kind="research"
-                  status={program.state}
-                  statusLabel="STATE"
-                  variant="compact"
-                />
-
-                <p className={styles.programRole}>{program.role}</p>
-                <h3>{program.title}</h3>
-                <p className={styles.programSummary}>{program.summary}</p>
-
-                <div className={styles.programStatusGrid}>
-                  <div>
-                    <span>{program.statusLabel}</span>
-                    <strong>{program.status}</strong>
-                  </div>
-                  <div className={styles.programQuestionPanel}>
-                    <span>GOVERNING QUESTION</span>
-                    <p>{program.question}</p>
-                  </div>
-                </div>
-
-                <div className={styles.programWorkingSurface}>
-                  <span>WORKING SURFACE</span>
-                  <div>
-                    {program.workingSurface.map((item) => (
-                      <strong key={item}>{item}</strong>
-                    ))}
-                  </div>
-                </div>
-
-                <div className={styles.programBoundary}>
-                  <span>CLAIM / AUTHORITY BOUNDARY</span>
-                  {program.boundary}
-                </div>
-              </article>
+              <ResearchProgramCard key={program.title} program={program} styles={styles} />
             ))}
           </div>
         </section>

@@ -97,11 +97,12 @@
 }
 
 .identity[data-variant="compact"] {
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
   overflow: visible;
   border: 0;
   background: transparent;
+  justify-content: flex-end;
 }
 
 .identity[data-variant="compact"] .field {
@@ -116,7 +117,7 @@
 }
 
 .identity[data-variant="compact"] .statusField {
-  flex: 1 1 180px;
+  flex: 0 1 auto;
 }
 
 .identity[data-variant="compact"] .secondaryField {
