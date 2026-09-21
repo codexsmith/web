@@ -502,6 +502,8 @@ expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
 expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose its contextual child pages");
+expect(aboutPage.includes("founder-led, single-person"), "About must state the current single-person founder-led operating model");
+expect(aboutPage.includes("computationally leveraged"), "About must state that the Lab is computationally leveraged");
 expect(aboutPage.includes("<AboutReflowGroups />"), "About page must delegate grouped doctrine to the Reflow section component");
 expect(aboutPage.indexOf("<AboutReflowGroups />") < aboutPage.indexOf('className={styles.aboutClose}'), "About closing synthesis must remain outside and after the Reflow chapters");
 expect(fs.existsSync(`${root}/sections/AboutReflowGroups.tsx`), "AboutReflowGroups must exist as the About doctrine composition boundary");
@@ -511,6 +513,8 @@ expect((aboutGroups.match(/<ReflowField(?:\s|>)/g) || []).length === 3, "About m
 expect(aboutGroups.includes('data-about-group="representation"'), "About must preserve Representation + Method");
 expect(aboutGroups.includes('data-about-group="agency"'), "About must preserve Agency + Stewardship");
 expect(aboutGroups.includes('data-about-group="institution"'), "About must preserve Institutional Practice");
+expect(aboutGroups.includes("solopreneur operation"), "About Institutional Practice must explain the solopreneur business model");
+expect(aboutGroups.includes("They are leverage, not staff."), "About must distinguish computational leverage from organizational headcount");
 
 const appliedWorkPage = read(`${root}/InstitutionalAppliedWorkPage.tsx`);
 const appliedWorkContent = read(`${root}/content/appliedWork.ts`);

@@ -3,7 +3,7 @@ import { InstitutionalAboutPage } from "@/components/institutional/Institutional
 
 export const metadata: Metadata = {
   title: "About · Boundary First Labs",
-  description: "What Boundary First Labs is, how the method developed, and the agency and stewardship commitments that guide the work.",
+  description: "What Boundary First Labs is: a founder-led, single-person, computationally leveraged applied systems laboratory and business, plus the method and stewardship commitments that guide the work.",
   alternates: { canonical: "/about" },
 };
 
