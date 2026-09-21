@@ -44,7 +44,7 @@ type LogoStyle = CSSProperties & {
  * Color props set local defaults, while style/className can override them.
  */
 export function BoundaryFirstWaveLogo({
-  boundary = "#1A254B",
+  boundary = "var(--old-gold, #b89a47)",
   field = "#4E7376",
   depth = "#304B5E",
   witness,
