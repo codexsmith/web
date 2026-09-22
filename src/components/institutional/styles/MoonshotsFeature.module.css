@@ -1,213 +1,320 @@
 .moonshotsFeature {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(420px, 1.08fr);
-  gap: clamp(28px, 5vw, 76px);
-  padding: clamp(38px, 5vw, 64px) clamp(30px, 6vw, 96px);
-  overflow: hidden;
-  border-top: 1px solid rgba(184, 154, 71, .55);
-  border-bottom: 1px solid rgba(184, 154, 71, .55);
+  padding: 28px clamp(30px, 6vw, 96px);
+  border-bottom: 1px solid var(--bfux-panel-edge);
   background:
-    linear-gradient(115deg, rgba(184,154,71,.09), transparent 28%),
-    linear-gradient(180deg, #102348, #081a38);
-  color: #fff;
+    linear-gradient(180deg, rgba(255,255,255,.48), transparent 24%),
+    linear-gradient(180deg, #dce5ef, #e8eef4);
 }
 
-.moonshotsFeature::after {
+.moonshotsFrame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--bfux-panel-edge-dark);
+  border-top: 5px solid var(--old-gold);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.78), rgba(247,250,253,.9));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 rgba(7,26,61,.12),
+    0 12px 28px rgba(7,26,61,.08);
+}
+
+.moonshotsFrame::after {
   content: "";
   position: absolute;
-  width: 460px;
-  height: 460px;
-  right: -180px;
-  top: -260px;
-  border: 1px solid rgba(184,154,71,.2);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 44px rgba(184,154,71,.035),
-    0 0 0 88px rgba(184,154,71,.025);
+  inset: 0;
   pointer-events: none;
+  opacity: .4;
+  background:
+    linear-gradient(90deg, transparent 0 69.9%, rgba(7,26,61,.055) 70%, transparent 70.1%),
+    linear-gradient(0deg, transparent 0 49.8%, rgba(7,26,61,.04) 50%, transparent 50.2%);
+  background-size: 100% 100%, 100% 52px;
 }
 
-.signalRail {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 8px;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-}
-
-.signalRail span:nth-child(1) { background: var(--old-gold); }
-.signalRail span:nth-child(2) { background: var(--osha-blue); }
-.signalRail span:nth-child(3) { background: var(--osha-green); }
-
-.moonshotsLead,
-.objectivePanel {
+.moonshotsHeader,
+.objectiveIndex,
+.moonshotsFooter {
   position: relative;
   z-index: 1;
 }
 
-.moonshotsLead > p:first-child {
-  margin: 0 0 13px;
-  color: var(--old-gold-bright);
-  font: 800 .55rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .18em;
+.moonshotsHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(190px, .5fr);
+  gap: 34px;
+  align-items: stretch;
+  padding: 24px 26px 22px;
+  border-bottom: 1px solid var(--bfux-panel-edge);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: var(--old-gold-dark);
+  font: 800 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .16em;
 }
 
 .moonshotsLead h2 {
-  max-width: 720px;
+  max-width: 850px;
   margin: 0;
-  color: #fff;
+  color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.4rem, 3.8vw, 5rem);
+  font-size: clamp(2rem, 2.8vw, 3.45rem);
   font-weight: 500;
-  letter-spacing: -.052em;
-  line-height: .95;
+  letter-spacing: -.045em;
+  line-height: .98;
 }
 
 .moonshotsSummary {
-  max-width: 740px;
-  margin: 20px 0 0;
-  color: #e6edf7;
+  max-width: 880px;
+  margin: 14px 0 0;
+  color: #304762;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1rem;
-  line-height: 1.55;
+  font-size: .94rem;
+  line-height: 1.48;
 }
 
 .moonshotsNote {
-  max-width: 760px;
-  margin: 14px 0 0;
-  color: #aebed3;
-  font-size: .77rem;
-  line-height: 1.58;
+  max-width: 920px;
+  margin: 9px 0 0;
+  color: #5a687a;
+  font-size: .75rem;
+  line-height: 1.52;
 }
 
-.moonshotsLink {
-  width: fit-content;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-  padding: 10px 0 6px;
-  border-bottom: 1px solid var(--old-gold);
-  color: #fff;
+.moonshotsIdentity {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr auto;
+  gap: 5px 12px;
+  align-items: end;
+  padding: 14px 15px;
+  border-left: 1px solid var(--bfux-panel-edge);
+  background: rgba(235,241,247,.72);
+}
+
+.moonshotsIdentity > span {
+  grid-column: 1 / -1;
+  align-self: start;
+  color: #607085;
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .18em;
+}
+
+.moonshotsIdentity > strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.9rem, 4vw, 4.8rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .85;
+}
+
+.moonshotsIdentity > small {
+  max-width: 95px;
+  padding-bottom: 3px;
+  color: #607085;
+  font: 800 .5rem/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
+}
+
+.objectiveIndex {
+  display: grid;
+  grid-template-columns: minmax(190px, .34fr) minmax(0, 1.66fr);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+}
+
+.objectiveIndexHeader {
+  padding: 17px 18px;
+  border-right: 1px solid var(--bfux-panel-edge);
+  background: rgba(235,241,247,.58);
+}
+
+.objectiveIndexHeader span {
+  display: block;
+  color: var(--old-gold-dark);
+  font: 800 .51rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
+}
+
+.objectiveIndexHeader strong {
+  display: block;
+  max-width: 170px;
+  margin-top: 8px;
+  color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
   font-size: .9rem;
   font-weight: 600;
-  text-decoration: none;
+  line-height: 1.3;
 }
 
-.moonshotsLink span {
-  color: var(--old-gold-bright);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-.objectivePanel {
-  align-self: stretch;
-  padding: 18px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-top: 4px solid var(--old-gold);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.1),
-    0 12px 30px rgba(0,0,0,.16);
-}
-
-.objectivePanel > header {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: baseline;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255,255,255,.14);
-}
-
-.objectivePanel > header span {
-  color: var(--old-gold-bright);
-  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .15em;
-}
-
-.objectivePanel > header strong {
-  color: #dbe5f2;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: .88rem;
-  font-weight: 600;
-}
-
-.objectiveRail {
+.objectiveIndex ol {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0,1fr));
   margin: 0;
-  padding: 1px 0 0;
+  padding: 0;
   list-style: none;
-  background: rgba(255,255,255,.1);
 }
 
-.objectiveRail li {
+.objectiveIndex li {
   min-height: 72px;
   display: grid;
   grid-template-columns: auto minmax(0,1fr);
-  gap: 12px;
+  gap: 10px;
   align-items: center;
-  padding: 12px 13px;
-  background: #102348;
+  padding: 13px 14px;
+  border-right: 1px solid var(--bfux-panel-edge);
+  border-bottom: 1px solid var(--bfux-panel-edge);
+  background: rgba(255,255,255,.56);
 }
 
-.objectiveRail li > span {
-  color: var(--old-gold-bright);
-  font: 800 .51rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+.objectiveIndex li:nth-child(3n) {
+  border-right: 0;
 }
 
-.objectiveRail li > strong {
-  color: #f7f9fc;
+.objectiveIndex li:nth-last-child(-n + 3) {
+  border-bottom: 0;
+}
+
+.objectiveIndex li > span {
+  color: var(--old-gold-dark);
+  font: 800 .49rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.objectiveIndex li > strong {
+  color: #243b59;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: .86rem;
-  font-weight: 500;
+  font-size: .82rem;
+  font-weight: 600;
   line-height: 1.2;
 }
 
+.moonshotsFooter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 22px;
+  align-items: center;
+  padding: 13px 18px;
+  background: rgba(247,250,252,.72);
+}
+
 .claimBoundary {
-  margin: 14px 0 0;
-  padding: 11px 12px;
+  margin: 0;
+  padding-left: 12px;
   border-left: 4px solid var(--osha-orange);
-  background: rgba(0,0,0,.12);
-  color: #cbd6e4;
+  color: #5b6878;
   font-size: .68rem;
-  line-height: 1.5;
+  line-height: 1.48;
+}
+
+.moonshotsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0 4px;
+  border-bottom: 1px solid var(--old-gold);
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .78rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.moonshotsLink span {
+  color: var(--old-gold-dark);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .moonshotsLink:hover {
-    color: var(--old-gold-bright);
+    border-bottom-color: var(--royal-blue-deep);
   }
 }
 
 @media (max-width: 980px) {
-  .moonshotsFeature {
+  .moonshotsHeader {
     grid-template-columns: 1fr;
   }
 
-  .objectivePanel {
-    max-width: none;
+  .moonshotsIdentity {
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    align-items: center;
+    border-top: 1px solid var(--bfux-panel-edge);
+    border-left: 0;
+  }
+
+  .moonshotsIdentity > span {
+    grid-column: auto;
+  }
+
+  .moonshotsIdentity > strong {
+    justify-self: end;
+    font-size: 2.6rem;
+  }
+
+  .moonshotsIdentity > small {
+    max-width: 120px;
+  }
+
+  .objectiveIndex {
+    grid-template-columns: 1fr;
+  }
+
+  .objectiveIndexHeader {
+    border-right: 0;
+    border-bottom: 1px solid var(--bfux-panel-edge);
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 760px) {
   .moonshotsFeature {
     padding-left: 22px;
     padding-right: 22px;
   }
 
-  .objectivePanel > header {
-    align-items: flex-start;
-    flex-direction: column;
+  .objectiveIndex ol {
+    grid-template-columns: 1fr;
   }
 
-  .objectiveRail {
+  .objectiveIndex li,
+  .objectiveIndex li:nth-child(3n),
+  .objectiveIndex li:nth-last-child(-n + 3) {
+    border-right: 0;
+    border-bottom: 1px solid var(--bfux-panel-edge);
+  }
+
+  .objectiveIndex li:last-child {
+    border-bottom: 0;
+  }
+
+  .moonshotsFooter {
     grid-template-columns: 1fr;
+  }
+
+  .moonshotsLink {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 540px) {
+  .moonshotsHeader,
+  .moonshotsFooter {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .moonshotsIdentity {
+    grid-template-columns: 1fr auto;
+  }
+
+  .moonshotsIdentity > span {
+    grid-column: 1 / -1;
+  }
+
+  .moonshotsIdentity > small {
+    text-align: right;
   }
 }
