@@ -24,6 +24,28 @@ export type PublicTimelineEvent = {
   unresolved: string | null;
 };
 
+export type ProvenanceArtifact = {
+  id: string;
+  role: string;
+  period: string;
+  title: string;
+  imageSrc: string;
+  alt: string;
+  description: string;
+  establishes: string;
+  publicUse: string;
+  sha256: string;
+  sourcePath: string;
+};
+
+export type ProvenanceGallery = {
+  sourceRepository: string;
+  sourceRevision: string;
+  publicClaim: string;
+  claimCeiling: string;
+  artifacts: ProvenanceArtifact[];
+};
+
 export type PublicStateProjection = {
   schemaVersion: string;
   projectionStatus: string;
@@ -36,6 +58,7 @@ export type PublicStateProjection = {
     note: string;
   };
   temporalViews: TemporalView[];
+  provenanceGallery: ProvenanceGallery;
   timeline: {
     registerId: string;
     registerStatus: string;
@@ -48,3 +71,4 @@ export type PublicStateProjection = {
 export const publicStateProjection = projectionData as PublicStateProjection;
 export const temporalViews = publicStateProjection.temporalViews;
 export const labTimelineEvents = publicStateProjection.timeline.events;
+export const provenanceGallery = publicStateProjection.provenanceGallery;
