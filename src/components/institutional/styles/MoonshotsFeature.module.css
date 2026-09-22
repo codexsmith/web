@@ -151,7 +151,7 @@
 
 .objectiveIndex ol {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
+  grid-template-columns: repeat(4, minmax(0,1fr));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -169,11 +169,11 @@
   background: rgba(255,255,255,.56);
 }
 
-.objectiveIndex li:nth-child(3n) {
+.objectiveIndex li:nth-child(4n) {
   border-right: 0;
 }
 
-.objectiveIndex li:nth-last-child(-n + 3) {
+.objectiveIndex li:nth-last-child(-n + 4) {
   border-bottom: 0;
 }
 
@@ -267,6 +267,25 @@
     border-right: 0;
     border-bottom: 1px solid var(--bfux-panel-edge);
   }
+
+  .objectiveIndex ol {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  .objectiveIndex li,
+  .objectiveIndex li:nth-child(4n),
+  .objectiveIndex li:nth-last-child(-n + 4) {
+    border-right: 1px solid var(--bfux-panel-edge);
+    border-bottom: 1px solid var(--bfux-panel-edge);
+  }
+
+  .objectiveIndex li:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .objectiveIndex li:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
 }
 
 @media (max-width: 760px) {
@@ -280,8 +299,10 @@
   }
 
   .objectiveIndex li,
-  .objectiveIndex li:nth-child(3n),
-  .objectiveIndex li:nth-last-child(-n + 3) {
+  .objectiveIndex li:nth-child(2n),
+  .objectiveIndex li:nth-child(4n),
+  .objectiveIndex li:nth-last-child(-n + 4),
+  .objectiveIndex li:nth-last-child(-n + 2) {
     border-right: 0;
     border-bottom: 1px solid var(--bfux-panel-edge);
   }
