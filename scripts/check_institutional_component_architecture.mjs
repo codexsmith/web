@@ -847,6 +847,10 @@ expect(provenanceArtifactGallery.includes("WHAT THIS ESTABLISHES"), "Provenance 
 expect(provenanceArtifactGallery.includes("<ProvenanceStillStrip"), "Featured room provenance must use the stitched derived-video still strip");
 expect(!provenanceArtifactGallery.includes("github.com"), "Public provenance gallery must not expose private-repository URLs");
 expect(!provenanceArtifactGallery.includes("Inspect source"), "Public provenance gallery must not render private source-inspection links");
+expect(!provenanceArtifactGallery.includes("PUBLIC USE"), "Public provenance cards must not render internal public-use adjudication rows");
+expect(!provenanceArtifactGallery.includes("artifact.publicUse"), "Public provenance cards must keep public-use adjudication internal to projection data");
+expect(labThroughTimeCss.includes(".provenanceMedia img"), "Provenance gallery must own explicit source-image framing");
+expect(labThroughTimeCss.includes("object-fit: contain"), "Provenance images must show the whole source image rather than crop to fill");
 expect(provenanceStillStrip.includes("sequence.frames.map"), "Research-room panorama must render every preserved frame simultaneously");
 expect(!provenanceStillStrip.includes("useState"), "Research-room panorama must remain a static simultaneous evidence strip");
 expect(labThroughTimeCss.includes("grid-template-columns: repeat(5, minmax(0, 1fr))"), "Research-room panorama must stitch all five frames side by side");
