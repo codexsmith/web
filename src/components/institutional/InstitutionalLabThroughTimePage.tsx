@@ -118,6 +118,92 @@ export function InstitutionalLabThroughTimePage() {
         </aside>
       </section>
 
+      <section className={styles.accelerationSection}>
+        <div className={styles.accelerationLead}>
+          <p className={styles.sectionIndex}>THE ACCELERATION BOUNDARY</p>
+          <h2>Commercial AI changed the throughput, not the starting point.</h2>
+          <p>
+            By the time capable commercial language models became broadly usable, the founder
+            was not encountering AI, software systems, or research practice for the first time.
+            Georgia Tech training had already combined computer science, AI, systems,
+            architecture, and academic research; professional work added years of building and
+            delivering software under production constraints; and independent research had
+            already accumulated a substantial pre-generative-AI corpus.
+          </p>
+        </div>
+
+        <div className={styles.accelerationGrid}>
+          <article>
+            <span>01 · TECHNICAL FORMATION</span>
+            <strong>Georgia Tech: CS, AI, systems, architecture, research.</strong>
+            <p>
+              Formal training and undergraduate research supplied machine models, research
+              discipline, and repeated practice testing claims against observed behavior.
+            </p>
+          </article>
+
+          <article>
+            <span>02 · PROFESSIONAL PRACTICE</span>
+            <strong>Software made representation mechanically consequential.</strong>
+            <p>
+              Production engineering, consulting, architecture, Lean/Agile practice, and
+              real delivery constraints turned questions of state, ownership, failure, and
+              repair into everyday operating problems.
+            </p>
+          </article>
+
+          <article>
+            <span>03 · COMMERCIAL AI ARRIVES</span>
+            <strong>A prepared operator met a new class of leverage.</strong>
+            <p>
+              Language models added representational throughput: faster compilation,
+              comparison, search, synthesis, translation, and orchestration across a corpus
+              and software environment that already existed.
+            </p>
+          </article>
+        </div>
+
+        <details className={styles.accelerationDetail}>
+          <summary>
+            <span>WHY THIS MATTERS TO THE CURRENT LAB</span>
+            <strong>The preparation was unusually well matched to the tool.</strong>
+            <small>Expand provenance interpretation</small>
+          </summary>
+          <div>
+            <p>
+              The current Boundary First Labs operating model depends on that convergence.
+              Research training made model outputs something to interrogate rather than
+              simply accept. AI and systems education made the computational substrate
+              legible. Professional software practice made automation, decomposition,
+              interfaces, state, testing, and failure familiar engineering concerns.
+              Independent research supplied years of accumulated questions, artifacts,
+              terminology, diagrams, code, and partially formalized structure waiting to be
+              compiled and connected.
+            </p>
+            <p>
+              Commercial AI therefore did not create the research program from an empty
+              prompt. It changed the economics and speed of working with an unusually large
+              pre-existing body of thought. Tasks that once required repeated manual
+              transcription, comparison, indexing, drafting, and cross-referencing could be
+              delegated to computational machinery while the founder retained responsibility
+              for framing, judgment, promotion, correction, and external commitments.
+            </p>
+            <blockquote>
+              The narrower provenance claim is not “AI generated the Lab.” It is that a
+              founder already trained in AI and research, seasoned in professional systems
+              engineering, and carrying a long independent research corpus was unusually
+              ready to turn capable commercial AI into laboratory machinery.
+            </blockquote>
+            <p>
+              That acceleration explains how a single-person, founder-led organization can
+              now maintain a much larger research and engineering surface than headcount
+              alone would suggest. It does not validate the Lab&apos;s scientific claims;
+              those still have to survive evidence, criticism, comparison, and use.
+            </p>
+          </div>
+        </details>
+      </section>
+
       <section className={styles.timelineClose}>
         <p className={styles.sectionIndex}>THREE TIME SCALES</p>
         <h2>Recent motion. Present posture. Long memory.</h2>
