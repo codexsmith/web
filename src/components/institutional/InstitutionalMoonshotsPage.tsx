@@ -71,7 +71,7 @@ export function InstitutionalMoonshotsPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>OBJECTIVE INDEX</>}
-          title={<>Six directions for capability the Lab has not yet earned.</>}
+          title={<>Long-horizon directions for capability the Lab has not yet earned.</>}
           note={
             <>
               Each objective is a research direction, not a product promise,
