@@ -133,7 +133,44 @@
         "establishes": "Direct visual evidence of a substantial pre-AI room-scale research environment and its spatial organization.",
         "publicUse": "Yes, narrowly. Do not infer exact dates or correctness from the image alone.",
         "sha256": "6d3b4e12a08d67bd0330b5a12c70500b86eb35bbec8947d4fc0449a4e2688eaa",
-        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_01.jpg"
+        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_01.jpg",
+        "sequence": {
+          "sourceVideoPath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_video.mp4",
+          "sourceVideoSha256": "2e5af7f3a03a4041d29c3cb09b83aee546acccfda1543bdf58c1a40a664e8224",
+          "note": "Five derived stills preserved in the provenance package from the original research-room survey video. Exact frame timestamps are not asserted in this web projection.",
+          "frames": [
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-01.jpg",
+              "alt": "Derived still 1 from the research-room survey video.",
+              "sha256": "5314213e45216360078ff06ecfc3b770998170d773cbad054dc2bd156ff27e79",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_01.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-02.jpg",
+              "alt": "Derived still 2 from the research-room survey video.",
+              "sha256": "3a765c9953c2447562aa799f288ad0a0f6bda854aaca651ce9fbc4e777aa1e9a",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_02.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-03.jpg",
+              "alt": "Derived still 3 from the research-room survey video.",
+              "sha256": "f685b1095dc88083fc8b2928066e674358b8eddbfb3c42b410a0f6ab1df309b5",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_03.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-04.jpg",
+              "alt": "Derived still 4 from the research-room survey video.",
+              "sha256": "3804ed0e08f72a8e21091501f9cd63e01b5e5c3b5ba3cf69e56a40f65571f3dc",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_04.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-05.jpg",
+              "alt": "Derived still 5 from the research-room survey video.",
+              "sha256": "9c56afd8659ad563d11005f8af7eb7e3ac453dc26c7581caa21b0f3a86790ade",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_05.jpg"
+            }
+          ]
+        }
       },
       {
         "id": "ARTIFACT-PROV-RED-BOOK",
