@@ -33,5 +33,12 @@ export const institutionalPublicRoutes = [
   "/publications",
   "/representation-atlas",
   "/research",
+  "/research/moonshots",
+  "/research/moonshots/research-operating-system",
+  "/research/moonshots/distributed-scientific-intelligence",
+  "/research/moonshots/mathematical-interoperability",
+  "/research/moonshots/executable-science",
+  "/research/moonshots/formal-representation-mechanics",
+  "/research/moonshots/self-improving-research-infrastructure",
   "/start",
 ] as const;
