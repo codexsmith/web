@@ -17,6 +17,7 @@ import {
 } from "./content/openLab";
 import { OpenLabContextSection } from "./sections/OpenLabContextSection";
 import { OpenLabContractCard } from "./sections/OpenLabContractCard";
+import { MoonshotsFeature } from "./MoonshotsFeature";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 
 const styles = composeCssModules(
@@ -116,6 +117,8 @@ export function InstitutionalOpenLabPage({
           ))}
         </div>
       </section>
+
+      <MoonshotsFeature context="open-lab" />
 
       <OpenLabIntakeInstrument
         initialType={initialType}
