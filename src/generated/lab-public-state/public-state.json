@@ -123,17 +123,17 @@
     "claimCeiling": "The media establishes scale, organization, and chronology of work. It does not establish correctness, priority, or maturity of every mathematical claim.",
     "artifacts": [
       {
-        "id": "ARTIFACT-PROV-ROOM-02",
+        "id": "ARTIFACT-PROV-ROOM-01",
         "role": "EXPANDED PHYSICAL STATE",
         "period": "c. 2019–2021",
-        "title": "Research room 02",
-        "imageSrc": "/provenance/lab-through-time/research-room-02.jpg",
-        "alt": "Dense research-room wall covered with handwritten diagrams, calculations, and spatially organized pages.",
-        "description": "A wall-scale working environment with diagrams, calculations, and externalized research structure.",
+        "title": "Research room 01",
+        "imageSrc": "/provenance/lab-through-time/research-room-01.jpg",
+        "alt": "Research-room view showing wall-mounted handwritten material across the physical working environment.",
+        "description": "A research-room view with wall-mounted handwritten material across the physical working environment.",
         "establishes": "Direct visual evidence of a substantial pre-AI room-scale research environment and its spatial organization.",
         "publicUse": "Yes, narrowly. Do not infer exact dates or correctness from the image alone.",
-        "sha256": "1d245d6665502e5d3393c02da0f4ddfc4c905e941356599e9f899006d45515dd",
-        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_02.jpg"
+        "sha256": "6d3b4e12a08d67bd0330b5a12c70500b86eb35bbec8947d4fc0449a4e2688eaa",
+        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_01.jpg"
       },
       {
         "id": "ARTIFACT-PROV-RED-BOOK",
