@@ -8,10 +8,10 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 import { formatOrdinal } from "./institutionalFormat";
 import { RecentChangesStrip } from "./RecentChangesStrip";
 import { TemporalViewNav } from "./TemporalViewNav";
+import { NowPriorityExplorer } from "./NowPriorityExplorer";
 import { nowRecentChanges } from "./content/changes";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
-  nowPriorityLanes,
   roadmapChangeRules,
   roadmapGates,
   roadmapHorizons,
@@ -55,7 +55,11 @@ export function InstitutionalNowPage() {
 
       <TemporalViewNav activeView="now" />
 
-      <RecentChangesStrip changes={nowRecentChanges} title="What materially changed?" />
+      <RecentChangesStrip
+        changes={nowRecentChanges}
+        title="What materially changed?"
+        compact
+      />
 
       <section className={styles.nowPrioritiesSection}>
         <InstitutionalSectionHeader
@@ -70,36 +74,7 @@ export function InstitutionalNowPage() {
           }
         />
 
-        <div className={styles.nowPriorityStack}>
-          {nowPriorityLanes.map((lane) => (
-            <article
-              className={styles.nowPriorityLane}
-              data-now-tone={lane.tone}
-              key={lane.code}
-            >
-              <header>
-                <span>{lane.code}</span>
-                <div>
-                  <small>{lane.status}</small>
-                  <h3>{lane.title}</h3>
-                  <p>{lane.description}</p>
-                </div>
-              </header>
-
-              <div className={styles.nowPriorityWork}>
-                <span>WORK IN THIS LANE</span>
-                <ul>
-                  {lane.work.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </div>
-
-              <div className={styles.nowPriorityClosure}>
-                <span>CLOSURE CONDITION</span>
-                <p>{lane.closure}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <NowPriorityExplorer />
       </section>
 
       <section className={styles.roadmapHorizonsSection}>
