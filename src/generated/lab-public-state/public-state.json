@@ -50,7 +50,9 @@
         "summary": "An early research-formation event admitted into the current canonical Timeline seed.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
-        "affectedSystems": ["founder research formation"],
+        "affectedSystems": [
+          "founder research formation"
+        ],
         "unresolved": "Primary project artifacts remain recovery targets in the source timeline."
       },
       {
@@ -62,7 +64,10 @@
         "summary": "Documented software-design artifacts enter the current representational-method lineage.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
-        "affectedSystems": ["software design practice", "representational method lineage"],
+        "affectedSystems": [
+          "software design practice",
+          "representational method lineage"
+        ],
         "unresolved": null
       },
       {
@@ -74,7 +79,10 @@
         "summary": "The provenance record marks a period where Agile practice became an explicit delivery architecture in the founder-method lineage.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
-        "affectedSystems": ["software delivery practice", "method lineage"],
+        "affectedSystems": [
+          "software delivery practice",
+          "method lineage"
+        ],
         "unresolved": null
       },
       {
@@ -86,7 +94,9 @@
         "summary": "A documented period of independent research infrastructure before the current public institutional surface.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
-        "affectedSystems": ["independent research infrastructure"],
+        "affectedSystems": [
+          "independent research infrastructure"
+        ],
         "unresolved": "Approximate chronology remains source-owned and may be refined by later provenance recovery."
       },
       {
@@ -98,8 +108,71 @@
         "summary": "The current Timeline seed marks the transition from accumulated work into Boundary First Labs as an explicit institutional research surface.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
-        "affectedSystems": ["Boundary First Labs institution", "research infrastructure"],
+        "affectedSystems": [
+          "Boundary First Labs institution",
+          "research infrastructure"
+        ],
         "unresolved": "Additional 2026 milestones remain to be recovered and adjudicated into durable Event identities."
+      }
+    ]
+  },
+  "provenanceGallery": {
+    "sourceRepository": "codexsmith/boundary-first-labs",
+    "sourceRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f",
+    "publicClaim": "A substantial pre-AI room-scale research environment existed.",
+    "claimCeiling": "The media establishes scale, organization, and chronology of work. It does not establish correctness, priority, or maturity of every mathematical claim.",
+    "artifacts": [
+      {
+        "id": "ARTIFACT-PROV-ROOM-02",
+        "role": "EXPANDED PHYSICAL STATE",
+        "period": "c. 2019–2021",
+        "title": "Research room 02",
+        "imageSrc": "/provenance/lab-through-time/research-room-02.jpg",
+        "alt": "Dense research-room wall covered with handwritten diagrams, calculations, and spatially organized pages.",
+        "description": "A wall-scale working environment with diagrams, calculations, and externalized research structure.",
+        "establishes": "Direct visual evidence of a substantial pre-AI room-scale research environment and its spatial organization.",
+        "publicUse": "Yes, narrowly. Do not infer exact dates or correctness from the image alone.",
+        "sha256": "1d245d6665502e5d3393c02da0f4ddfc4c905e941356599e9f899006d45515dd",
+        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_02.jpg"
+      },
+      {
+        "id": "ARTIFACT-PROV-RED-BOOK",
+        "role": "COMPRESSED / RECONFIGURABLE STATE",
+        "period": "pre-2026",
+        "title": "Red Book binder",
+        "imageSrc": "/provenance/lab-through-time/red-book-binder.jpg",
+        "alt": "Red research binder used to collect and reorder active research material.",
+        "description": "A modular binder used to compile, replace, and reorder active research material after the room-scale phase.",
+        "establishes": "The physical research environment was later compressed into a modular binder; the interpretation remains partly attributed.",
+        "publicUse": "Yes, attributed. Stronger claims about its contents require page-level inventory.",
+        "sha256": "34575c54d7529961e8b9927af1cf4655f7d5a15f95583058d7f14e22f11322c8",
+        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/red_book_binder.jpg"
+      },
+      {
+        "id": "ARTIFACT-PROV-NOTE-01",
+        "role": "WORKING MATERIAL",
+        "period": "pre-2026 corpus",
+        "title": "Research note 01",
+        "imageSrc": "/provenance/lab-through-time/research-note-01.jpg",
+        "alt": "Handwritten geometry and mathematical development on a research page.",
+        "description": "Representative handwritten geometry and mathematical development from the preserved research corpus.",
+        "establishes": "The corpus includes primary handwritten mathematical working material rather than only retrospective summaries.",
+        "publicUse": "Yes as provenance of working material; not as proof that the mathematics is correct.",
+        "sha256": "7757fbeffa28dbc8e14eb43337919f69cc28ddd1590dcdc97be198268e5aabbf",
+        "sourcePath": "organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/03_work_packets/boundary_first_labs_second_order_scientific_method_2026-08-01/source_media/research_note_01.jpg"
+      },
+      {
+        "id": "ARTIFACT-PROV-LIBRARY",
+        "role": "KNOWLEDGE SUBSTRATE",
+        "period": "pre-2026 corpus",
+        "title": "Technical library",
+        "imageSrc": "/provenance/lab-through-time/technical-library.jpg",
+        "alt": "Technical book collection spanning computing, artificial intelligence, mathematics, and physics.",
+        "description": "A technical reading environment spanning computation, AI, mathematics, and physics.",
+        "establishes": "The physical research environment included a broad technical knowledge substrate alongside the notes and diagrams.",
+        "publicUse": "Yes as environmental provenance; it does not establish mastery or correctness of downstream claims.",
+        "sha256": "6f4ae0e66ec77e7e585fec35ea2ca7eb18241832824941637edf2acfa7aa7192",
+        "sourcePath": "organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/03_work_packets/boundary_first_labs_second_order_scientific_method_2026-08-01/source_media/technical_library.jpg"
       }
     ]
   }
