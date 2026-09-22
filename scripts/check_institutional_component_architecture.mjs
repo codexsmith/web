@@ -932,3 +932,26 @@ for (const route of [
 ]) {
   expect(moonshotsReleaseInventory.includes(`"${route}"`), `Release inventory must include ${route}`);
 }
+
+
+const moonshotsPage = read(`${root}/InstitutionalMoonshotsPage.tsx`);
+const moonshotDetailPage = read(`${root}/InstitutionalMoonshotDetailPage.tsx`);
+const moonshotsContent = read(`${root}/content/moonshots.ts`);
+const moonshotsRoute = read("src/app/v3/research/moonshots/page.tsx");
+const moonshotDetailRoute = read("src/app/v3/research/moonshots/[slug]/page.tsx");
+const moonshotsRouteCss = read(`${root}/styles/Moonshots.module.css`);
+
+expect(moonshotsPage.includes("InstitutionalPageShell"), "Moonshots index must use the v3 institutional page shell");
+expect(moonshotsPage.includes("InstitutionalRouteHero"), "Moonshots index must use the v3 institutional route hero");
+expect(moonshotsPage.includes("objectiveLedger"), "Moonshots index must render objectives as a v3 ledger rather than legacy World cards");
+expect(!moonshotsPage.includes("WorldApp"), "Moonshots index must never render through the legacy WorldApp");
+expect(moonshotDetailPage.includes("InstitutionalPageShell"), "Moonshot detail routes must use the v3 institutional page shell");
+expect(moonshotDetailPage.includes("detailBoundaryStrip"), "Moonshot detail routes must preserve an explicit claim boundary");
+expect(!moonshotDetailPage.includes("WorldApp"), "Moonshot detail routes must never render through the legacy WorldApp");
+expect(moonshotsContent.includes('parentId === moonshotsProgram.id'), "Moonshots v3 projection must derive objective membership from the canonical content graph");
+expect(moonshotsRoute.includes("InstitutionalMoonshotsPage"), "Moonshots canonical rewrite target must resolve to the institutional index page");
+expect(moonshotsRoute.includes('canonical: "/research/moonshots"'), "Moonshots route must preserve the canonical public path");
+expect(moonshotDetailRoute.includes("generateStaticParams"), "Moonshot detail route must enumerate the six canonical objective slugs");
+expect(moonshotDetailRoute.includes("InstitutionalMoonshotDetailPage"), "Moonshot objective routes must resolve to the institutional detail page");
+expect(moonshotsRouteCss.includes("var(--bfux-panel-edge-dark)"), "Moonshots route family must use the v3 BFUX panel grammar");
+expect(!moonshotsRouteCss.includes("#081a38"), "Moonshots route family must not regress to the dark v2 World palette");
