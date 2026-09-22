@@ -836,9 +836,9 @@ for (const artifactPath of [
   "/provenance/lab-through-time/video-frame-03.jpg",
   "/provenance/lab-through-time/video-frame-04.jpg",
   "/provenance/lab-through-time/video-frame-05.jpg",
-  "/provenance/lab-through-time/red-book-binder.jpg",
+  "/provenance/lab-through-time/red-book-binder-top-right.jpg",
   "/provenance/lab-through-time/research-note-01.jpg",
-  "/provenance/lab-through-time/technical-library.jpg",
+  "/provenance/lab-through-time/technical-library-right-shelf.jpg",
 ]) {
   expect(publicStateProjection.includes(artifactPath), "Provenance projection must include " + artifactPath);
 }
@@ -851,6 +851,9 @@ expect(!provenanceArtifactGallery.includes("PUBLIC USE"), "Public provenance car
 expect(!provenanceArtifactGallery.includes("artifact.publicUse"), "Public provenance cards must keep public-use adjudication internal to projection data");
 expect(labThroughTimeCss.includes(".provenanceMedia img"), "Provenance gallery must own explicit source-image framing");
 expect(labThroughTimeCss.includes("object-fit: contain"), "Provenance images must show the whole source image rather than crop to fill");
+expect(publicStateProjection.includes("red-book-binder-top-right.jpg"), "Red Book provenance must use the handpicked crop");
+expect(publicStateProjection.includes("technical-library-right-shelf.jpg"), "Technical-library provenance must use the handpicked shelf crop");
+expect(publicStateProjection.includes("ending at Deep Learning"), "Technical-library crop must preserve its declared right-edge framing");
 expect(provenanceStillStrip.includes("sequence.frames.map"), "Research-room panorama must render every preserved frame simultaneously");
 expect(!provenanceStillStrip.includes("useState"), "Research-room panorama must remain a static simultaneous evidence strip");
 expect(labThroughTimeCss.includes("grid-template-columns: repeat(5, minmax(0, 1fr))"), "Research-room panorama must stitch all five frames side by side");
