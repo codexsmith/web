@@ -137,7 +137,7 @@
         "sequence": {
           "sourceVideoPath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_video.mp4",
           "sourceVideoSha256": "2e5af7f3a03a4041d29c3cb09b83aee546acccfda1543bdf58c1a40a664e8224",
-          "note": "Five derived stills preserved in the provenance package from the original research-room survey video. Exact frame timestamps are not asserted in this web projection.",
+          "note": "Five derived stills preserved from the original research-room survey video and presented together as a stitched pan sequence. Exact extraction timestamps are not asserted in this web projection.",
           "frames": [
             {
               "imageSrc": "/provenance/lab-through-time/video-frame-01.jpg",
