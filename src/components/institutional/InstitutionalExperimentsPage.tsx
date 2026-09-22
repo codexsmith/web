@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { LabObjectIdentity } from "./LabObjectIdentity";
@@ -67,6 +68,42 @@ export function InstitutionalExperimentsPage() {
           experiments themselves, while the Lab-wide register owns durable cross-cutting
           identity and evidence routing.
         </p>
+      </section>
+
+      <section className={styles.liveLabsSection}>
+        <InstitutionalSectionHeader
+          styles={styles}
+          eyebrow={<>LIVE LABS</>}
+          title={<>Two interactive instruments carried forward from the v2 lab.</>}
+          note={
+            <>
+              These are live apparatus surfaces, not screenshots or reimplementations. V3 mounts
+              the existing engines so behavior stays continuous with the original lab.
+            </>
+          }
+        />
+
+        <div className={styles.liveLabsGrid}>
+          <Link className={styles.liveLabCard} href="/labs/distinction-space">
+            <span>VISUAL MATHEMATICS</span>
+            <h3>Distinction Space Visual Lab</h3>
+            <p>
+              Explore bounded dynamics, closure, defect, and higher-dimensional structure in
+              the compact instrument workstation developed in v2.
+            </p>
+            <strong>Enter visual lab <span aria-hidden="true">-&gt;</span></strong>
+          </Link>
+
+          <Link className={styles.liveLabCard} href="/labs/representation-lab">
+            <span>REPRESENTATION / AI</span>
+            <h3>Same World, Different Reasoner</h3>
+            <p>
+              The Pac-Man-derived sandbox: hold one grid world steady while changing the task,
+              reasoning method, model inputs, and representational carrier.
+            </p>
+            <strong>Enter representation lab <span aria-hidden="true">-&gt;</span></strong>
+          </Link>
+        </div>
       </section>
 
       <section className={styles.catalogSection}>
