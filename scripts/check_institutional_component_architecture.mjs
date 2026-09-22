@@ -43,7 +43,7 @@ expect(commandPalette.includes("dialog.showModal()"), "Lab command palette must 
 expect(commandPalette.includes('role="listbox"'), "Lab command palette must expose keyboard-search result semantics");
 expect(commandPaletteContent.includes("atlasNodes"), "Lab command search must derive object entries from the public Atlas");
 expect(commandPaletteContent.includes("atlasEdges"), "Lab command search must include only explicit Atlas relationship data");
-expect(commandPaletteContent.includes('/v3/atlas?focus='), "Lab object search results must deep-link to Atlas focus state");
+expect(commandPaletteContent.includes('/atlas?focus='), "Lab object search results must deep-link to the canonical Atlas focus state");
 expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
 expect(labObjectIdentity.includes("data-kind={kind}"), "LabObjectIdentity must expose object-kind semantics to presentation");
 expect(labObjectIdentity.includes("identifierLabel = \"ID\""), "LabObjectIdentity must distinguish source identifiers from local codes");
