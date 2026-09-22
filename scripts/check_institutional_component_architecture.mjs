@@ -824,7 +824,7 @@ expect(publicStateContent.includes("provenanceGallery"), "Public-state projectio
 expect(publicStateProjection.includes('"publicClaim": "A substantial pre-AI room-scale research environment existed."'), "Provenance projection must preserve the adjudicated narrow public claim");
 expect(publicStateProjection.includes('"claimCeiling": "The media establishes scale, organization, and chronology of work.'), "Provenance projection must preserve the media authority ceiling");
 for (const artifactPath of [
-  "/provenance/lab-through-time/research-room-02.jpg",
+  "/provenance/lab-through-time/research-room-01.jpg",
   "/provenance/lab-through-time/red-book-binder.jpg",
   "/provenance/lab-through-time/research-note-01.jpg",
   "/provenance/lab-through-time/technical-library.jpg",
