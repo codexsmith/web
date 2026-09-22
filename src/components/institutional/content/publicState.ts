@@ -24,6 +24,21 @@ export type PublicTimelineEvent = {
   unresolved: string | null;
 };
 
+export type ProvenanceStill = {
+  imageSrc: string;
+  alt: string;
+  sha256: string;
+  sourcePath: string;
+  sequence?: ProvenanceStillSequence;
+};
+
+export type ProvenanceStillSequence = {
+  sourceVideoPath: string;
+  sourceVideoSha256: string;
+  note: string;
+  frames: ProvenanceStill[];
+};
+
 export type ProvenanceArtifact = {
   id: string;
   role: string;
