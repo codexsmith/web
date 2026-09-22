@@ -893,3 +893,37 @@ expect(representationAtlasExplorer.includes('useState<RepresentationMechanicId>(
 expect(representationAtlasExplorer.includes("representationDomains.map"), "Representation Atlas explorer must render all witness domains from the shared model");
 expect(representationAtlasExplorer.includes("representationMechanicSlots.map"), "Representation Atlas explorer must render the fixed mechanics spine");
 expect(representationAtlasExplorer.includes("item.mechanics[mechanic.id]"), "Representation Atlas explorer must compare one selected mechanics role across domains");
+
+
+const moonshotsFeature = read(`${root}/MoonshotsFeature.tsx`);
+const moonshotsFeatureCss = read(`${root}/styles/MoonshotsFeature.module.css`);
+const moonshotsResearchPage = read(`${root}/InstitutionalResearchPage.tsx`);
+const moonshotsProjectsPage = read(`${root}/InstitutionalProjectsPage.tsx`);
+const moonshotsOpenLabPage = read(`${root}/InstitutionalOpenLabPage.tsx`);
+const moonshotsReleaseInventory = read("src/lib/site-release.ts");
+const moonshotsChildRouteSegment = routeRegistry.slice(
+  routeRegistry.indexOf("export const institutionalChildRoutes"),
+  routeRegistry.indexOf("export const institutionalFooterGroups"),
+);
+
+expect(moonshotsFeature.includes('getNode("moonshots")'), "Moonshots feature must derive its parent object from the canonical content graph");
+expect(moonshotsFeature.includes('getChildren("moonshots")'), "Moonshots feature must derive the six objectives from the canonical content graph");
+expect(moonshotsFeature.includes('href="/research/moonshots"'), "Moonshots feature must route to the canonical Moonshots branch");
+expect(moonshotsFeature.includes("Long-horizon objectives are not claims of completion"), "Moonshots feature must preserve the long-horizon claim boundary");
+expect(moonshotsFeatureCss.includes(".moonshotsFeature"), "Moonshots feature must own a distinct visual treatment outside ordinary content-card grids");
+expect(moonshotsResearchPage.includes('<MoonshotsFeature context="research" />'), "Research must feature Moonshots as a standalone band");
+expect(moonshotsProjectsPage.includes('<MoonshotsFeature context="projects" />'), "Projects must feature Moonshots as a standalone band");
+expect(moonshotsOpenLabPage.includes('<MoonshotsFeature context="open-lab" />'), "Open Lab must feature Moonshots as a standalone band");
+expect(routeRegistry.includes('{ label: "Moonshots", href: "/research/moonshots" }'), "Research footer must link Moonshots directly");
+expect(!moonshotsChildRouteSegment.includes("Moonshots"), "Moonshots must not be rendered as a contextual child-route button");
+for (const route of [
+  "/research/moonshots",
+  "/research/moonshots/research-operating-system",
+  "/research/moonshots/distributed-scientific-intelligence",
+  "/research/moonshots/mathematical-interoperability",
+  "/research/moonshots/executable-science",
+  "/research/moonshots/formal-representation-mechanics",
+  "/research/moonshots/self-improving-research-infrastructure",
+]) {
+  expect(moonshotsReleaseInventory.includes(`"${route}"`), `Release inventory must include ${route}`);
+}
