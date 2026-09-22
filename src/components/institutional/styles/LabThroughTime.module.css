@@ -597,3 +597,120 @@
     display: none;
   }
 }
+
+.originBand {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);
+  gap: 12px;
+  align-items: stretch;
+  padding: 22px clamp(30px,6vw,96px);
+  border-bottom: 1px solid var(--timeline-line);
+  background: #fff;
+}
+
+.originBand article {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 15px 16px;
+  border: 1px solid rgba(7,26,61,.18);
+  border-top: 5px solid #607486;
+  background: linear-gradient(180deg,#fff,#f7f9fa);
+}
+
+.originBand article:nth-of-type(2) {
+  border-top-color: var(--old-gold);
+}
+
+.originBand article:nth-of-type(3) {
+  border-top-color: var(--osha-green);
+}
+
+.originBand span,
+.authoritySplit span {
+  color: #5e6d80;
+  font: 800 .48rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing: .13em;
+}
+
+.originBand strong,
+.authoritySplit strong {
+  color: var(--timeline-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.16;
+}
+
+.originBand p,
+.authoritySplit p {
+  margin: 0;
+  color: var(--timeline-muted);
+  font-size: .7rem;
+  line-height: 1.5;
+}
+
+.originArrow {
+  align-self: center;
+  color: var(--old-gold-dark);
+  font: 800 1.2rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.authoritySplit {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px;
+  padding: 14px clamp(30px,6vw,96px) 24px;
+  border-bottom: 1px solid var(--timeline-line);
+  background: #f7f9fb;
+}
+
+.authoritySplit > div {
+  display: grid;
+  grid-template-columns: minmax(155px,.42fr) minmax(180px,.58fr) minmax(0,1.2fr);
+  gap: 14px;
+  align-items: center;
+  padding: 13px 15px;
+  border: 1px solid rgba(7,26,61,.18);
+  background: #fff;
+}
+
+.authoritySplit > div:first-child {
+  border-left: 6px solid #5b63ad;
+}
+
+.authoritySplit > div:last-child {
+  border-left: 6px solid var(--old-gold);
+}
+
+@media (max-width: 980px) {
+  .originBand {
+    grid-template-columns: 1fr;
+  }
+
+  .originArrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+
+  .authoritySplit {
+    grid-template-columns: 1fr;
+  }
+
+  .authoritySplit > div {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 680px) {
+  .originBand,
+  .authoritySplit {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .originBand p {
+    display: none;
+  }
+}
