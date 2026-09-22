@@ -78,15 +78,6 @@ export function ProvenanceArtifactGallery() {
                   <a href={sourceHref} target="_blank" rel="noreferrer">
                     Inspect source at pinned Lab revision <span aria-hidden="true">→</span>
                   </a>
-                  {artifact.sequence ? (
-                    <a
-                      href={`https://github.com/${provenanceGallery.sourceRepository}/blob/${provenanceGallery.sourceRevision}/${artifact.sequence.sourceVideoPath}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Inspect source survey video <span aria-hidden="true">→</span>
-                    </a>
-                  ) : null}
                 </div>
               </div>
             </article>
