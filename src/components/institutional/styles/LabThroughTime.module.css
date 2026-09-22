@@ -811,8 +811,7 @@
   background: #d8dde0;
 }
 
-.provenanceCard[data-featured="true"] .provenanceMedia,
-.provenanceCard[data-featured="true"] .provenanceCarousel {
+.provenanceCard[data-featured="true"] .provenanceMedia {
   min-height: 560px;
 }
 
@@ -912,23 +911,6 @@
   line-height: 1.45;
 }
 
-.provenanceSourceLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px 16px;
-  margin-top: 2px;
-}
-
-.provenanceSourceLinks > a {
-  width: fit-content;
-  padding-bottom: 3px;
-  border-bottom: 1px solid var(--old-gold);
-  color: var(--royal-blue-deep);
-  font-size: .68rem;
-  font-weight: 800;
-  text-decoration: none;
-}
-
 .provenanceNext {
   display: grid;
   grid-template-columns: minmax(170px,.32fr) minmax(260px,.68fr) minmax(0,1fr);
@@ -963,13 +945,8 @@
     display: block;
   }
 
-  .provenanceCard[data-featured="true"] .provenanceMedia,
-  .provenanceCard[data-featured="true"] .provenanceCarousel {
+  .provenanceCard[data-featured="true"] .provenanceMedia {
     min-height: 440px;
-  }
-
-  .provenanceCarouselViewport {
-    min-height: 390px;
   }
 }
 
@@ -988,21 +965,8 @@
   }
 
   .provenanceMedia,
-  .provenanceCard[data-featured="true"] .provenanceMedia,
-  .provenanceCard[data-featured="true"] .provenanceCarousel {
+  .provenanceCard[data-featured="true"] .provenanceMedia {
     min-height: 340px;
-  }
-
-  .provenanceCarouselViewport {
-    min-height: 320px;
-  }
-
-  .provenanceCarouselRail {
-    grid-template-columns: 1fr;
-  }
-
-  .provenanceCarouselRail code {
-    display: none;
   }
 
   .provenanceTopline {
@@ -1011,128 +975,92 @@
   }
 }
 
-
-.provenanceCarousel {
-  display: grid;
-  grid-template-rows: minmax(0,1fr) auto auto;
+.provenancePanorama {
   min-width: 0;
+  margin: 0;
   background: #d8dde0;
 }
 
-.provenanceCarouselViewport {
+.provenancePanoramaFrames {
   position: relative;
-  min-height: 500px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 3px;
+  min-height: 470px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(7,26,61,.18);
+  background: var(--old-gold);
+}
+
+.provenancePanoramaFrame {
+  position: relative;
+  min-width: 0;
   overflow: hidden;
   background: #cfd7df;
 }
 
-.provenanceCarouselViewport img {
-  object-fit: contain;
-  background: #cfd7df;
+.provenancePanoramaFrame img {
+  object-fit: cover;
 }
 
-.provenanceCarouselFrameId {
+.provenancePanoramaFrame > span {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  display: grid;
-  gap: 5px;
-  padding: 9px 10px;
-  border: 1px solid rgba(255,255,255,.5);
-  background: rgba(255,255,255,.9);
-  box-shadow: 0 4px 14px rgba(7,26,61,.08);
-}
-
-.provenanceCarouselFrameId span {
-  color: #67778b;
-  font: 800 .46rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-  letter-spacing: .12em;
-}
-
-.provenanceCarouselFrameId strong {
-  color: var(--royal-blue-deep);
-  font: 800 .58rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-
-.provenanceCarouselPrevious,
-.provenanceCarouselNext {
-  position: absolute;
-  top: 50%;
-  width: 38px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  transform: translateY(-50%);
+  top: 10px;
+  left: 10px;
+  min-width: 28px;
+  padding: 6px 7px;
   border: 1px solid rgba(255,255,255,.52);
-  background: rgba(7,26,61,.78);
-  color: #fff;
-  cursor: pointer;
-  font: 800 1rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-
-.provenanceCarouselPrevious {
-  left: 12px;
-}
-
-.provenanceCarouselNext {
-  right: 12px;
-}
-
-.provenanceCarouselRail {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) auto;
-  gap: 14px;
-  align-items: center;
-  padding: 10px 12px;
-  border-top: 1px solid rgba(7,26,61,.16);
-  background: #f6f8fa;
-}
-
-.provenanceCarouselDots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.provenanceCarouselDots button {
-  min-width: 34px;
-  padding: 7px 8px;
-  border: 1px solid rgba(7,26,61,.2);
-  background: #fff;
-  color: #66768a;
-  cursor: pointer;
-  font: 800 .5rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-
-.provenanceCarouselDots button[data-active="true"] {
-  border-color: var(--old-gold-dark);
-  box-shadow: inset 0 -3px 0 var(--old-gold);
+  background: rgba(255,255,255,.88);
   color: var(--royal-blue-deep);
+  font: 800 .48rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  text-align: center;
 }
 
-.provenanceCarouselRail code {
-  color: #67778b;
-  font: 800 .47rem/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;
-}
-
-.provenanceCarouselNote {
-  margin: 0;
-  padding: 9px 12px 10px;
-  border-top: 1px solid rgba(7,26,61,.12);
+.provenancePanorama figcaption {
+  display: grid;
+  grid-template-columns: auto minmax(0,1fr);
+  gap: 14px;
+  align-items: baseline;
+  padding: 10px 12px 11px;
   background: #eef2f5;
+}
+
+.provenancePanorama figcaption > span {
+  color: var(--old-gold-dark);
+  font: 800 .48rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+
+.provenancePanorama figcaption p {
+  margin: 0;
   color: #617185;
   font-size: .63rem;
   line-height: 1.45;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .provenanceCarouselPrevious:hover,
-  .provenanceCarouselNext:hover {
-    background: var(--royal-blue-deep);
+@media (max-width: 980px) {
+  .provenancePanoramaFrames {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 720px) {
+  .provenancePanoramaFrames {
+    min-height: 250px;
+    gap: 2px;
   }
 
-  .provenanceCarouselDots button:hover {
-    border-color: var(--old-gold-dark);
+  .provenancePanoramaFrame > span {
+    top: 6px;
+    left: 6px;
+    min-width: 22px;
+    padding: 4px 5px;
+    font-size: .42rem;
+  }
+
+  .provenancePanorama figcaption {
+    grid-template-columns: 1fr;
+    gap: 6px;
   }
 }
