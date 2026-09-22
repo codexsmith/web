@@ -43,42 +43,48 @@ export function MoonshotsFeature({
       data-context={context}
       aria-labelledby={`moonshots-feature-${context}`}
     >
-      <div className={styles.signalRail} aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
+      <div className={styles.moonshotsFrame}>
+        <header className={styles.moonshotsHeader}>
+          <div className={styles.moonshotsLead}>
+            <p className={styles.eyebrow}>{copy.eyebrow}</p>
+            <h2 id={`moonshots-feature-${context}`}>{copy.title}</h2>
+            <p className={styles.moonshotsSummary}>{moonshots.summary}</p>
+            <p className={styles.moonshotsNote}>{copy.note}</p>
+          </div>
 
-      <div className={styles.moonshotsLead}>
-        <p>{copy.eyebrow}</p>
-        <h2 id={`moonshots-feature-${context}`}>{copy.title}</h2>
-        <p className={styles.moonshotsSummary}>{moonshots.summary}</p>
-        <p className={styles.moonshotsNote}>{copy.note}</p>
-
-        <Link className={styles.moonshotsLink} href="/research/moonshots">
-          Enter Moonshots <span aria-hidden="true">→</span>
-        </Link>
-      </div>
-
-      <div className={styles.objectivePanel}>
-        <header>
-          <span>06 OBJECTIVES</span>
-          <strong>Ambition stays decomposable.</strong>
+          <div className={styles.moonshotsIdentity} aria-label="Moonshots program scope">
+            <span>MOONSHOTS</span>
+            <strong>{String(objectives.length).padStart(2, "0")}</strong>
+            <small>LONG-HORIZON OBJECTIVES</small>
+          </div>
         </header>
 
-        <ol className={styles.objectiveRail}>
-          {objectives.map((objective, index) => (
-            <li key={objective.id}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{objective.shortLabel ?? objective.label}</strong>
-            </li>
-          ))}
-        </ol>
+        <div className={styles.objectiveIndex}>
+          <div className={styles.objectiveIndexHeader}>
+            <span>OBJECTIVE INDEX</span>
+            <strong>Ambition stays decomposable.</strong>
+          </div>
 
-        <p className={styles.claimBoundary}>
-          Long-horizon objectives are not claims of completion, scientific validation,
-          market value, external adoption, or inevitability.
-        </p>
+          <ol>
+            {objectives.map((objective, index) => (
+              <li key={objective.id}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{objective.shortLabel ?? objective.label}</strong>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <footer className={styles.moonshotsFooter}>
+          <p className={styles.claimBoundary}>
+            Long-horizon objectives are not claims of completion, scientific validation,
+            market value, external adoption, or inevitability.
+          </p>
+
+          <Link className={styles.moonshotsLink} href="/research/moonshots">
+            Explore Moonshots <span aria-hidden="true">→</span>
+          </Link>
+        </footer>
       </div>
     </section>
   );
