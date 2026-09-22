@@ -1,8 +1,8 @@
 .temporalNav {
   display: grid;
-  grid-template-columns: minmax(220px, .52fr) minmax(0, 1.48fr);
+  grid-template-columns: minmax(220px, .42fr) minmax(0, 1.58fr);
   gap: 28px;
-  padding: 28px clamp(30px, 6vw, 96px);
+  padding: 18px clamp(30px, 6vw, 96px);
   border-bottom: 1px solid rgba(7,26,61,.18);
   background: #f7f9fb;
 }
@@ -42,11 +42,11 @@
 }
 
 .temporalCard {
-  min-height: 142px;
+  min-height: 96px;
   display: grid;
   align-content: start;
   gap: 7px;
-  padding: 15px;
+  padding: 12px 13px;
   border: 1px solid rgba(7,26,61,.22);
   border-top: 5px solid #748396;
   background: #fff;
@@ -124,4 +124,12 @@
     padding-left: 22px;
     padding-right: 22px;
   }
+}
+
+.temporalCard:not([data-active="true"]) > small {
+  display: none;
+}
+
+.temporalCard:not([data-active="true"]) {
+  align-content: center;
 }
