@@ -6,6 +6,7 @@ import {
 } from "./InstitutionalPrimitives";
 import { TemporalViewNav } from "./TemporalViewNav";
 import { LabTimelineExplorer } from "./LabTimelineExplorer";
+import { ProvenanceArtifactGallery } from "./ProvenanceArtifactGallery";
 import { labTimelineEvents, publicStateProjection } from "./content/publicState";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
@@ -147,6 +148,8 @@ export function InstitutionalLabThroughTimePage() {
         <LabTimelineExplorer />
       </section>
 
+      <ProvenanceArtifactGallery />
+
       <section className={styles.continuitySection}>
         <div>
           <p className={styles.sectionIndex}>CONTINUITY BEFORE THE CURRENT ACCELERATION</p>
@@ -163,7 +166,7 @@ export function InstitutionalLabThroughTimePage() {
           <span>NEXT PROJECTION WORK</span>
           <ul>
             <li>Recover additional Timeline events from the longer provenance sources.</li>
-            <li>Attach public-safe photographs, documents, diagrams, code, and other evidence.</li>
+            <li>Expand beyond the first four public-safe provenance artifacts now attached here.</li>
             <li>
               Mark the computational-acceleration boundary only when the admitted source
               evidence supports a precise public statement.
