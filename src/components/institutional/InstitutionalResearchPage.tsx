@@ -8,6 +8,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 import { programs } from "./content/research";
 import { ResearchContextSection } from "./sections/ResearchContextSection";
 import { ResearchProgramCard } from "./sections/ResearchProgramCard";
+import { MoonshotsFeature } from "./MoonshotsFeature";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -56,6 +57,8 @@ export function InstitutionalResearchPage() {
             <p>Visible state is descriptive, not a score or endorsement.</p>
           </div>
         </section>
+
+        <MoonshotsFeature context="research" />
 
         <section className={styles.researchPrograms}>
           <InstitutionalSectionHeader
