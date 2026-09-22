@@ -385,3 +385,43 @@
     flex-direction: column;
   }
 }
+
+.timelineProjectionPanel > summary {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  padding-right: 34px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.timelineProjectionPanel > summary::-webkit-details-marker { display: none; }
+
+.timelineProjectionPanel > summary::after {
+  content: "+";
+  position: absolute;
+  top: 0;
+  right: 2px;
+  color: var(--timeline-muted);
+  font: 800 1rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.timelineProjectionPanel[open] > summary::after { content: "−"; }
+
+.timelineProjectionPanel > summary > span {
+  color: #526173;
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+}
+
+.timelineProjectionPanel > summary > small {
+  color: var(--timeline-muted);
+  font: 700 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.timelineProjectionDetails {
+  display: grid;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--timeline-line);
+}
