@@ -22,9 +22,9 @@ const contextCopy: Record<
   },
   "open-lab": {
     eyebrow: "OPEN PROBLEM FIELD",
-    title: "The long-horizon program should be exposed to outside pressure too.",
+    title: "Moonshots — eight long-horizon objectives.",
     note:
-      "Moonshots collects objectives whose open problems are too large for a closed loop. Criticism, counterexamples, specialist knowledge, collaboration, and failed approaches are useful inputs here.",
+      "The Lab invites criticism, counterexamples, specialist knowledge, and collaboration around work that should improve under outside pressure.",
   },
 };
 
@@ -48,9 +48,7 @@ export function MoonshotsFeature({
         <header className={styles.moonshotsHeader}>
           <div className={styles.moonshotsLead}>
             <p className={styles.eyebrow}>{copy.eyebrow}</p>
-            <h2 id={`moonshots-feature-${context}`}>
-              {isOpenLab ? moonshots.summary : copy.title}
-            </h2>
+            <h2 id={`moonshots-feature-${context}`}>{copy.title}</h2>
             {!isOpenLab ? (
               <p className={styles.moonshotsSummary}>{moonshots.summary}</p>
             ) : null}
@@ -61,9 +59,6 @@ export function MoonshotsFeature({
             <span>MOONSHOTS</span>
             <strong>{String(objectives.length).padStart(2, "0")}</strong>
             <small>LONG-HORIZON OBJECTIVES</small>
-            {isOpenLab ? (
-              <p className={styles.moonshotsIdentityTagline}>{copy.title}</p>
-            ) : null}
           </div>
         </header>
 
