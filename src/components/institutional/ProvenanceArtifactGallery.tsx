@@ -66,11 +66,6 @@ export function ProvenanceArtifactGallery() {
                   <p>{artifact.establishes}</p>
                 </div>
 
-                <div className={styles.provenanceUse}>
-                  <span>PUBLIC USE</span>
-                  <strong>{artifact.publicUse}</strong>
-                </div>
-
               </div>
             </article>
           );
