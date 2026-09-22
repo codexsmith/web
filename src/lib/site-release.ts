@@ -40,5 +40,7 @@ export const institutionalPublicRoutes = [
   "/research/moonshots/executable-science",
   "/research/moonshots/formal-representation-mechanics",
   "/research/moonshots/self-improving-research-infrastructure",
+  "/research/moonshots/millennium-problems-research",
+  "/research/moonshots/fine-structure-constant",
   "/start",
 ] as const;
