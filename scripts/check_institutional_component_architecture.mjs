@@ -907,7 +907,7 @@ const moonshotsChildRouteSegment = routeRegistry.slice(
 );
 
 expect(moonshotsFeature.includes('getNode("moonshots")'), "Moonshots feature must derive its parent object from the canonical content graph");
-expect(moonshotsFeature.includes('getChildren("moonshots")'), "Moonshots feature must derive the six objectives from the canonical content graph");
+expect(moonshotsFeature.includes('getChildren("moonshots")'), "Moonshots feature must derive objectives from the canonical content graph");
 expect(moonshotsFeature.includes('href="/research/moonshots"'), "Moonshots feature must route to the canonical Moonshots branch");
 expect(moonshotsFeature.includes("Long-horizon objectives are not claims of completion"), "Moonshots feature must preserve the long-horizon claim boundary");
 expect(moonshotsFeatureCss.includes(".moonshotsFeature"), "Moonshots feature must own a distinct visual treatment outside ordinary content-card grids");
@@ -929,6 +929,8 @@ for (const route of [
   "/research/moonshots/executable-science",
   "/research/moonshots/formal-representation-mechanics",
   "/research/moonshots/self-improving-research-infrastructure",
+  "/research/moonshots/millennium-problems-research",
+  "/research/moonshots/fine-structure-constant",
 ]) {
   expect(moonshotsReleaseInventory.includes(`"${route}"`), `Release inventory must include ${route}`);
 }
@@ -940,6 +942,7 @@ const moonshotsContent = read(`${root}/content/moonshots.ts`);
 const moonshotsRoute = read("src/app/v3/research/moonshots/page.tsx");
 const moonshotDetailRoute = read("src/app/v3/research/moonshots/[slug]/page.tsx");
 const moonshotsRouteCss = read(`${root}/styles/Moonshots.module.css`);
+const moonshotsContentGraph = read("src/lib/content.ts");
 
 expect(moonshotsPage.includes("InstitutionalPageShell"), "Moonshots index must use the v3 institutional page shell");
 expect(moonshotsPage.includes("InstitutionalRouteHero"), "Moonshots index must use the v3 institutional route hero");
@@ -951,7 +954,12 @@ expect(!moonshotDetailPage.includes("WorldApp"), "Moonshot detail routes must ne
 expect(moonshotsContent.includes('parentId === moonshotsProgram.id'), "Moonshots v3 projection must derive objective membership from the canonical content graph");
 expect(moonshotsRoute.includes("InstitutionalMoonshotsPage"), "Moonshots canonical rewrite target must resolve to the institutional index page");
 expect(moonshotsRoute.includes('canonical: "/research/moonshots"'), "Moonshots route must preserve the canonical public path");
-expect(moonshotDetailRoute.includes("generateStaticParams"), "Moonshot detail route must enumerate the six canonical objective slugs");
+expect(moonshotDetailRoute.includes("generateStaticParams"), "Moonshot detail route must enumerate the canonical objective slugs");
 expect(moonshotDetailRoute.includes("InstitutionalMoonshotDetailPage"), "Moonshot objective routes must resolve to the institutional detail page");
 expect(moonshotsRouteCss.includes("var(--bfux-panel-edge-dark)"), "Moonshots route family must use the v3 BFUX panel grammar");
 expect(!moonshotsRouteCss.includes("#081a38"), "Moonshots route family must not regress to the dark v2 World palette");
+expect(moonshotsContentGraph.includes('id: "millennium-problems-research"'), "Moonshots content graph must include the Millennium Problems research program");
+expect(moonshotsContentGraph.includes('id: "fine-structure-constant"'), "Moonshots content graph must include the fine-structure constant program");
+expect(moonshotsContentGraph.includes("terminal success remains a valid mathematical proof"), "Millennium Problems Moonshot must preserve theorem-level proof authority");
+expect(moonshotsContentGraph.includes("It does not yet contain a zero-free-parameter, first-principles derivation"), "Fine-structure Moonshot must preserve the current no-derivation claim ceiling");
+expect(moonshotsContentGraph.includes("normalization obstruction"), "Fine-structure Moonshot must retain its strongest current negative result");
