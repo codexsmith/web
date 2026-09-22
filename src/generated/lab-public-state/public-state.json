@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "0.1",
+  "projectionStatus": "initial_manual_seed",
+  "generatedDate": "2026-09-21",
+  "labRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f",
+  "webBaseRevision": "841953e5f33bb6e27d2a503d162a365604dc33ff",
+  "authority": "Initial public temporal-state seed. The Lab repository remains source authority; this web payload is a bounded downstream projection and does not promote scientific, product, publication, or institutional status.",
+  "automation": {
+    "status": "not_yet_wired",
+    "note": "This seed establishes the web-side contract that future Lab-to-web projection automation will replace without changing the rendering boundary."
+  },
+  "temporalViews": [
+    {
+      "id": "changes",
+      "label": "What Changed",
+      "href": "/changes",
+      "relation": "RECENT MOTION",
+      "question": "What materially changed recently?",
+      "description": "A bounded delta view over consequential state transitions rather than every commit or task."
+    },
+    {
+      "id": "now",
+      "label": "Now",
+      "href": "/now",
+      "relation": "PRESENT POSTURE",
+      "question": "What deserves attention now?",
+      "description": "A public projection of current priorities, dependencies, gates, and closure conditions."
+    },
+    {
+      "id": "timeline",
+      "label": "Lab Through Time",
+      "href": "/lab-through-time",
+      "relation": "LONG MEMORY",
+      "question": "How did the Lab get here?",
+      "description": "A reviewed long-horizon provenance spine of consequential historical and institutional milestones."
+    }
+  ],
+  "timeline": {
+    "registerId": "BFL-TIMELINE",
+    "registerStatus": "active_seed",
+    "authorityStatus": "canonical_lab_timeline_projection",
+    "authorityCeiling": "Durable temporal identity, cross-source historical/state-transition projection, routing, and institutional memory only. Timeline membership does not establish event truth, causal truth, scientific validity, publication promotion, product readiness, or execution authority.",
+    "events": [
+      {
+        "id": "EVENT-TIMELINE-001",
+        "sourceEventId": "EVT-MASTER-001",
+        "period": "2006–2007",
+        "category": "Provenance",
+        "title": "Magnus effect soccer-ball experiment",
+        "summary": "An early research-formation event admitted into the current canonical Timeline seed.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": ["founder research formation"],
+        "unresolved": "Primary project artifacts remain recovery targets in the source timeline."
+      },
+      {
+        "id": "EVENT-TIMELINE-002",
+        "sourceEventId": "EVT-MASTER-009",
+        "period": "2014",
+        "category": "Method",
+        "title": "Process-first software design artifacts",
+        "summary": "Documented software-design artifacts enter the current representational-method lineage.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": ["software design practice", "representational method lineage"],
+        "unresolved": null
+      },
+      {
+        "id": "EVENT-TIMELINE-003",
+        "sourceEventId": "EVT-MASTER-013",
+        "period": "Apr–May 2018",
+        "category": "Method",
+        "title": "Agile becomes explicit delivery architecture",
+        "summary": "The provenance record marks a period where Agile practice became an explicit delivery architecture in the founder-method lineage.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": ["software delivery practice", "method lineage"],
+        "unresolved": null
+      },
+      {
+        "id": "EVENT-TIMELINE-004",
+        "sourceEventId": "EVT-MASTER-019",
+        "period": "2019–2021",
+        "category": "Institution",
+        "title": "Private research room",
+        "summary": "A documented period of independent research infrastructure before the current public institutional surface.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": ["independent research infrastructure"],
+        "unresolved": "Approximate chronology remains source-owned and may be refined by later provenance recovery."
+      },
+      {
+        "id": "EVENT-TIMELINE-005",
+        "sourceEventId": "EVT-MASTER-030",
+        "period": "2026",
+        "category": "Institution",
+        "title": "Boundary First Labs institutionalizes accumulated experiments",
+        "summary": "The current Timeline seed marks the transition from accumulated work into Boundary First Labs as an explicit institutional research surface.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": ["Boundary First Labs institution", "research infrastructure"],
+        "unresolved": "Additional 2026 milestones remain to be recovered and adjudicated into durable Event identities."
+      }
+    ]
+  }
+}
