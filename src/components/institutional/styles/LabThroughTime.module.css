@@ -760,7 +760,6 @@
 
 .provenanceContract span,
 .provenanceEstablishes span,
-.provenanceUse span,
 .provenanceNext > span,
 .provenanceMediaTag span {
   color: var(--old-gold-dark);
@@ -816,7 +815,8 @@
 }
 
 .provenanceMedia img {
-  object-fit: cover;
+  object-fit: contain;
+  background: #d8dde0;
 }
 
 .provenanceMediaTag {
@@ -895,20 +895,6 @@
 
 .provenanceEstablishes p {
   margin-top: 7px;
-}
-
-.provenanceUse {
-  display: grid;
-  grid-template-columns: auto minmax(0,1fr);
-  gap: 12px;
-  align-items: baseline;
-  padding-top: 2px;
-}
-
-.provenanceUse strong {
-  color: #31445d;
-  font-size: .68rem;
-  line-height: 1.45;
 }
 
 .provenanceNext {
@@ -1000,7 +986,8 @@
 }
 
 .provenancePanoramaFrame img {
-  object-fit: cover;
+  object-fit: contain;
+  background: #cfd7df;
 }
 
 .provenancePanoramaFrame > span {
