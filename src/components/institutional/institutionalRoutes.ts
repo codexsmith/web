@@ -278,6 +278,7 @@ export const institutionalFooterGroups = [
     label: "Research",
     routes: [
       { label: "Research", href: "/research" },
+      { label: "Moonshots", href: "/research/moonshots" },
       { label: "Lab Atlas", href: "/atlas" },
       { label: "Representation Atlas", href: "/representation-atlas" },
       { label: "Experiments", href: "/experiments" },
