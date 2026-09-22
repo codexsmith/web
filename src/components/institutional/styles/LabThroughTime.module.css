@@ -811,7 +811,8 @@
   background: #d8dde0;
 }
 
-.provenanceCard[data-featured="true"] .provenanceMedia {
+.provenanceCard[data-featured="true"] .provenanceMedia,
+.provenanceCard[data-featured="true"] .provenanceCarousel {
   min-height: 560px;
 }
 
@@ -911,9 +912,15 @@
   line-height: 1.45;
 }
 
-.provenanceBody > a {
-  width: fit-content;
+.provenanceSourceLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 16px;
   margin-top: 2px;
+}
+
+.provenanceSourceLinks > a {
+  width: fit-content;
   padding-bottom: 3px;
   border-bottom: 1px solid var(--old-gold);
   color: var(--royal-blue-deep);
@@ -956,8 +963,13 @@
     display: block;
   }
 
-  .provenanceCard[data-featured="true"] .provenanceMedia {
+  .provenanceCard[data-featured="true"] .provenanceMedia,
+  .provenanceCard[data-featured="true"] .provenanceCarousel {
     min-height: 440px;
+  }
+
+  .provenanceCarouselViewport {
+    min-height: 390px;
   }
 }
 
@@ -976,12 +988,151 @@
   }
 
   .provenanceMedia,
-  .provenanceCard[data-featured="true"] .provenanceMedia {
+  .provenanceCard[data-featured="true"] .provenanceMedia,
+  .provenanceCard[data-featured="true"] .provenanceCarousel {
     min-height: 340px;
+  }
+
+  .provenanceCarouselViewport {
+    min-height: 320px;
+  }
+
+  .provenanceCarouselRail {
+    grid-template-columns: 1fr;
+  }
+
+  .provenanceCarouselRail code {
+    display: none;
   }
 
   .provenanceTopline {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+
+.provenanceCarousel {
+  display: grid;
+  grid-template-rows: minmax(0,1fr) auto auto;
+  min-width: 0;
+  background: #d8dde0;
+}
+
+.provenanceCarouselViewport {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  background: #cfd7df;
+}
+
+.provenanceCarouselViewport img {
+  object-fit: contain;
+  background: #cfd7df;
+}
+
+.provenanceCarouselFrameId {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  gap: 5px;
+  padding: 9px 10px;
+  border: 1px solid rgba(255,255,255,.5);
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 4px 14px rgba(7,26,61,.08);
+}
+
+.provenanceCarouselFrameId span {
+  color: #67778b;
+  font: 800 .46rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+  letter-spacing: .12em;
+}
+
+.provenanceCarouselFrameId strong {
+  color: var(--royal-blue-deep);
+  font: 800 .58rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.provenanceCarouselPrevious,
+.provenanceCarouselNext {
+  position: absolute;
+  top: 50%;
+  width: 38px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255,255,255,.52);
+  background: rgba(7,26,61,.78);
+  color: #fff;
+  cursor: pointer;
+  font: 800 1rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.provenanceCarouselPrevious {
+  left: 12px;
+}
+
+.provenanceCarouselNext {
+  right: 12px;
+}
+
+.provenanceCarouselRail {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(7,26,61,.16);
+  background: #f6f8fa;
+}
+
+.provenanceCarouselDots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.provenanceCarouselDots button {
+  min-width: 34px;
+  padding: 7px 8px;
+  border: 1px solid rgba(7,26,61,.2);
+  background: #fff;
+  color: #66768a;
+  cursor: pointer;
+  font: 800 .5rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.provenanceCarouselDots button[data-active="true"] {
+  border-color: var(--old-gold-dark);
+  box-shadow: inset 0 -3px 0 var(--old-gold);
+  color: var(--royal-blue-deep);
+}
+
+.provenanceCarouselRail code {
+  color: #67778b;
+  font: 800 .47rem/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.provenanceCarouselNote {
+  margin: 0;
+  padding: 9px 12px 10px;
+  border-top: 1px solid rgba(7,26,61,.12);
+  background: #eef2f5;
+  color: #617185;
+  font-size: .63rem;
+  line-height: 1.45;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .provenanceCarouselPrevious:hover,
+  .provenanceCarouselNext:hover {
+    background: var(--royal-blue-deep);
+  }
+
+  .provenanceCarouselDots button:hover {
+    border-color: var(--old-gold-dark);
   }
 }
