@@ -824,7 +824,8 @@ expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must pr
 expect(labThroughTimePage.includes("Boundary First Labs became practical when decades of accumulated research"), "Lab Through Time hero must explain why the current Lab exists now");
 
 const provenanceArtifactGallery = read(`${root}/ProvenanceArtifactGallery.tsx`);
-const provenanceStillCarousel = read(`${root}/ProvenanceStillCarousel.tsx`);
+const provenanceStillStrip = read(`${root}/ProvenanceStillStrip.tsx`);
+const labThroughTimeCss = read(`${root}/styles/LabThroughTime.module.css`);
 expect(labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must surface the first public provenance gallery");
 expect(publicStateContent.includes("provenanceGallery"), "Public-state projection must type the provenance gallery");
 expect(publicStateProjection.includes('"publicClaim": "A substantial pre-AI room-scale research environment existed."'), "Provenance projection must preserve the adjudicated narrow public claim");
@@ -842,15 +843,17 @@ for (const artifactPath of [
   expect(publicStateProjection.includes(artifactPath), "Provenance projection must include " + artifactPath);
 }
 expect(provenanceArtifactGallery.includes("next/image"), "Provenance gallery must use Next Image for public artifacts");
-expect(provenanceArtifactGallery.includes("Inspect source at pinned Lab revision"), "Provenance artifacts must route back to immutable source");
 expect(provenanceArtifactGallery.includes("WHAT THIS ESTABLISHES"), "Provenance gallery must separate evidence role from interpretation");
-expect(provenanceArtifactGallery.includes("<ProvenanceStillCarousel"), "Featured room provenance must use the derived video still carousel");
-expect(provenanceStillCarousel.startsWith('"use client";'), "Provenance still carousel must own its bounded interaction as a client component");
-expect(provenanceStillCarousel.includes("useState(0)"), "Provenance still carousel must expose deterministic frame navigation");
-expect(provenanceStillCarousel.includes("Next research-room video still"), "Provenance still carousel must expose accessible navigation controls");
+expect(provenanceArtifactGallery.includes("<ProvenanceStillStrip"), "Featured room provenance must use the stitched derived-video still strip");
+expect(!provenanceArtifactGallery.includes("github.com"), "Public provenance gallery must not expose private-repository URLs");
+expect(!provenanceArtifactGallery.includes("Inspect source"), "Public provenance gallery must not render private source-inspection links");
+expect(provenanceStillStrip.includes("sequence.frames.map"), "Research-room panorama must render every preserved frame simultaneously");
+expect(!provenanceStillStrip.includes("useState"), "Research-room panorama must remain a static simultaneous evidence strip");
+expect(labThroughTimeCss.includes("grid-template-columns: repeat(5, minmax(0, 1fr))"), "Research-room panorama must stitch all five frames side by side");
+expect(labThroughTimeCss.includes("gap: 3px"), "Research-room panorama must preserve a small visible divider between frames");
 expect(publicStateProjection.includes('"id": "ARTIFACT-PROV-ROOM-SURVEY"'), "Featured provenance object must identify the survey video rather than a single room photograph");
 expect(publicStateProjection.includes('"sourceVideoSha256": "2e5af7f3a03a4041d29c3cb09b83aee546acccfda1543bdf58c1a40a664e8224"'), "Survey video projection must preserve original SHA-256 identity");
-expect(publicStateProjection.includes("Exact frame timestamps are not asserted"), "Survey still projection must not invent unverified timestamps");
+expect(publicStateProjection.includes("Exact extraction timestamps are not asserted"), "Survey still projection must not invent unverified timestamps");
 
 
 expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
