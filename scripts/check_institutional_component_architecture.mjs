@@ -946,6 +946,11 @@ expect(moonshotsFeatureCss.includes("var(--bfux-panel-edge-dark)"), "Moonshots f
 expect(moonshotsResearchPage.includes('<MoonshotsFeature context="research" />'), "Research must feature Moonshots as a standalone band");
 expect(moonshotsProjectsPage.includes('<MoonshotsFeature context="projects" />'), "Projects must feature Moonshots as a standalone band");
 expect(moonshotsOpenLabPage.includes('<MoonshotsFeature context="open-lab" />'), "Open Lab must feature Moonshots as a standalone band");
+expect(moonshotsFeature.includes('const isOpenLab = context === "open-lab"'), "Open Lab Moonshots must own an explicit hierarchy variant");
+expect(moonshotsFeature.includes("{isOpenLab ? moonshots.summary : copy.title}"), "Open Lab Moonshots must promote the canonical eight-objective summary to the large title");
+expect(moonshotsFeature.includes("moonshotsIdentityTagline"), "Open Lab Moonshots must demote its old long-horizon headline into the side identity");
+expect(moonshotsFeatureCss.includes(".moonshotsIdentityTagline"), "Open Lab Moonshots demoted headline must have an explicit small-scale treatment");
+expect(moonshotsFeatureCss.includes('data-context="open-lab"'), "Open Lab Moonshots hierarchy must remain context-scoped");
 expect(routeRegistry.includes('{ label: "Moonshots", href: "/research/moonshots" }'), "Research footer must link Moonshots directly");
 expect(!moonshotsChildRouteSegment.includes("Moonshots"), "Moonshots must not be rendered as a contextual child-route button");
 for (const route of [
