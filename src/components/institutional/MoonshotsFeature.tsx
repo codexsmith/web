@@ -36,6 +36,7 @@ export function MoonshotsFeature({
   const moonshots = getNode("moonshots");
   const objectives = getChildren("moonshots");
   const copy = contextCopy[context];
+  const isOpenLab = context === "open-lab";
 
   return (
     <section
@@ -47,8 +48,12 @@ export function MoonshotsFeature({
         <header className={styles.moonshotsHeader}>
           <div className={styles.moonshotsLead}>
             <p className={styles.eyebrow}>{copy.eyebrow}</p>
-            <h2 id={`moonshots-feature-${context}`}>{copy.title}</h2>
-            <p className={styles.moonshotsSummary}>{moonshots.summary}</p>
+            <h2 id={`moonshots-feature-${context}`}>
+              {isOpenLab ? moonshots.summary : copy.title}
+            </h2>
+            {!isOpenLab ? (
+              <p className={styles.moonshotsSummary}>{moonshots.summary}</p>
+            ) : null}
             <p className={styles.moonshotsNote}>{copy.note}</p>
           </div>
 
@@ -56,6 +61,9 @@ export function MoonshotsFeature({
             <span>MOONSHOTS</span>
             <strong>{String(objectives.length).padStart(2, "0")}</strong>
             <small>LONG-HORIZON OBJECTIVES</small>
+            {isOpenLab ? (
+              <p className={styles.moonshotsIdentityTagline}>{copy.title}</p>
+            ) : null}
           </div>
         </header>
 
