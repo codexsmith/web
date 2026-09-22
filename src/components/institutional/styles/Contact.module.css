@@ -65,6 +65,17 @@
   line-height: 1.5;
 }
 
+.contactIntakeStatus .contactDirectEmail {
+  margin-top: 10px;
+}
+
+.contactDirectEmail a {
+  color: var(--royal-blue-deep);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .contactRoutesSection,
 .contactProcessSection {
   padding: 44px clamp(30px, 6vw, 96px) 54px;
