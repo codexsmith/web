@@ -796,6 +796,21 @@ expect(labThroughTimePage.includes("Five events are a seed, not the complete his
 expect(labThroughTimePage.includes('<TemporalViewNav activeView="timeline"'), "Lab Through Time must participate in the shared temporal navigation");
 expect(labThroughTimePage.includes("Milestones, not a long changelog."), "Lab Through Time must preserve the long-horizon materiality boundary");
 expect(labThroughTimeRoute.includes('canonical: "/lab-through-time"'), "Lab Through Time must declare the canonical public route");
+const nowPriorityExplorer = read(`${root}/NowPriorityExplorer.tsx`);
+const changesExplorer = read(`${root}/ChangesExplorer.tsx`);
+const labTimelineExplorer = read(`${root}/LabTimelineExplorer.tsx`);
+for (const [name, source] of [
+  ["Now priorities", nowPriorityExplorer],
+  ["What Changed", changesExplorer],
+  ["Lab Through Time", labTimelineExplorer],
+]) {
+  expect(source.includes("ReflowField"), name + " must use the shared BFUX reflow field");
+  expect(source.includes('layoutMode="focus-stage"'), name + " must reallocate space around selected detail");
+  expect(source.includes('restLayout="rectangle"'), name + " must present a compact rest-state field");
+}
+expect(nowPageForChanges.includes("<NowPriorityExplorer"), "Now must collapse priority detail into the reflow explorer");
+expect(changesPage.includes("<ChangesExplorer"), "What Changed must collapse delta detail into the reflow explorer");
+expect(labThroughTimePage.includes("<LabTimelineExplorer"), "Lab Through Time must collapse provenance detail into the reflow explorer");
 
 expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
 expect(atlasContent.includes("feature-frozen bounded public projection"), "Atlas v0.1 must declare feature-frozen status");
