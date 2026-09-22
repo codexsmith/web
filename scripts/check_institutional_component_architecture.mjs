@@ -811,6 +811,12 @@ for (const [name, source] of [
 expect(nowPageForChanges.includes("<NowPriorityExplorer"), "Now must collapse priority detail into the reflow explorer");
 expect(changesPage.includes("<ChangesExplorer"), "What Changed must collapse delta detail into the reflow explorer");
 expect(labThroughTimePage.includes("<LabTimelineExplorer"), "Lab Through Time must collapse provenance detail into the reflow explorer");
+expect(labThroughTimePage.includes("Accumulated practice + research"), "Lab Through Time must expose the pre-acceleration substrate");
+expect(labThroughTimePage.includes("Commercial AI increases throughput"), "Lab Through Time must expose the computational acceleration boundary");
+expect(labThroughTimePage.includes("Computationally leveraged micro-lab"), "Lab Through Time must connect acceleration to the current operating model");
+expect(labThroughTimePage.includes("COMPUTATIONAL CAPABILITY"), "Lab Through Time must distinguish machine capability from authority");
+expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must preserve the founder authority boundary");
+expect(labThroughTimePage.includes("Boundary First Labs became practical when decades of accumulated research"), "Lab Through Time hero must explain why the current Lab exists now");
 
 expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
 expect(atlasContent.includes("feature-frozen bounded public projection"), "Atlas v0.1 must declare feature-frozen status");
