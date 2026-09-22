@@ -5,6 +5,7 @@ import {
   InstitutionalSectionHeader,
 } from "./InstitutionalPrimitives";
 import { TemporalViewNav } from "./TemporalViewNav";
+import { LabTimelineExplorer } from "./LabTimelineExplorer";
 import { labTimelineEvents, publicStateProjection } from "./content/publicState";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
@@ -37,25 +38,30 @@ export function InstitutionalLabThroughTimePage() {
         }
         childLinks={institutionalChildRoutes.labThroughTime}
       >
-        <aside className={styles.timelineProjectionPanel}>
-          <span>PUBLIC TIMELINE PROJECTION</span>
-          <strong>{labTimelineEvents.length} reviewed durable events in the current seed</strong>
-          <dl>
-            <div>
-              <dt>LAB REVISION</dt>
-              <dd>{publicStateProjection.labRevision.slice(0, 12)}</dd>
-            </div>
-            <div>
-              <dt>TIMELINE STATE</dt>
-              <dd>{publicStateProjection.timeline.registerStatus}</dd>
-            </div>
-            <div>
-              <dt>PROJECTION MODE</dt>
-              <dd>{publicStateProjection.projectionStatus}</dd>
-            </div>
-          </dl>
-          <p>{publicStateProjection.timeline.authorityCeiling}</p>
-        </aside>
+        <details className={styles.timelineProjectionPanel}>
+          <summary>
+            <span>PUBLIC TIMELINE PROJECTION</span>
+            <strong>{labTimelineEvents.length} reviewed durable events in the current seed</strong>
+            <small>Inspect authority and source state</small>
+          </summary>
+          <div className={styles.timelineProjectionDetails}>
+            <dl>
+              <div>
+                <dt>LAB REVISION</dt>
+                <dd>{publicStateProjection.labRevision.slice(0, 12)}</dd>
+              </div>
+              <div>
+                <dt>TIMELINE STATE</dt>
+                <dd>{publicStateProjection.timeline.registerStatus}</dd>
+              </div>
+              <div>
+                <dt>PROJECTION MODE</dt>
+                <dd>{publicStateProjection.projectionStatus}</dd>
+              </div>
+            </dl>
+            <p>{publicStateProjection.timeline.authorityCeiling}</p>
+          </div>
+        </details>
       </InstitutionalRouteHero>
 
       <TemporalViewNav activeView="timeline" />
@@ -84,51 +90,7 @@ export function InstitutionalLabThroughTimePage() {
           }
         />
 
-        <div className={styles.timelineStack}>
-          {labTimelineEvents.map((event, index) => (
-            <article
-              className={styles.timelineEvent}
-              data-category={event.category}
-              key={event.id}
-            >
-              <div className={styles.timelineRail}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <time>{event.period}</time>
-              </div>
-
-              <div className={styles.timelineBody}>
-                <div className={styles.timelineTopline}>
-                  <span>{event.category}</span>
-                  <code>{event.id}</code>
-                </div>
-                <h2>{event.title}</h2>
-                <p>{event.summary}</p>
-
-                <div className={styles.timelineMeta}>
-                  <div>
-                    <span>EVIDENCE POSTURE</span>
-                    <strong>{event.epistemicStatus}</strong>
-                  </div>
-                  <div>
-                    <span>SOURCE EVENT</span>
-                    <strong>{event.sourceEventId}</strong>
-                  </div>
-                  <div>
-                    <span>AFFECTED SYSTEMS</span>
-                    <strong>{event.affectedSystems.join(" · ")}</strong>
-                  </div>
-                </div>
-
-                {event.unresolved ? (
-                  <div className={styles.timelineOpen}>
-                    <span>OPEN PROVENANCE</span>
-                    <p>{event.unresolved}</p>
-                  </div>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
+        <LabTimelineExplorer />
       </section>
 
       <section className={styles.continuitySection}>
