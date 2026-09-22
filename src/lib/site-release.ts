@@ -20,6 +20,7 @@ export const institutionalPublicRoutes = [
   "/experiments",
   "/founder",
   "/funding",
+  "/lab-through-time",
   "/now",
   "/open-lab",
   "/products",

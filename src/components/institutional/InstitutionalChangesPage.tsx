@@ -2,6 +2,7 @@ import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { changesProjection, recentChanges } from "./content/changes";
 import { institutionalChildRoutes } from "./institutionalRoutes";
+import { TemporalViewNav } from "./TemporalViewNav";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Changes.module.css";
@@ -48,6 +49,8 @@ export function InstitutionalChangesPage() {
           <p>{changesProjection.authority}</p>
         </aside>
       </InstitutionalRouteHero>
+
+      <TemporalViewNav activeView="changes" />
 
       <section className={styles.changeBoundary}>
         <span>DELTA RULE</span>

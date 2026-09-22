@@ -7,6 +7,7 @@ import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 import { RecentChangesStrip } from "./RecentChangesStrip";
+import { TemporalViewNav } from "./TemporalViewNav";
 import { nowRecentChanges } from "./content/changes";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
@@ -51,6 +52,8 @@ export function InstitutionalNowPage() {
           </p>
         </aside>
       </InstitutionalRouteHero>
+
+      <TemporalViewNav activeView="now" />
 
       <RecentChangesStrip changes={nowRecentChanges} title="What materially changed?" />
 

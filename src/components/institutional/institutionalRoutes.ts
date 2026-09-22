@@ -72,6 +72,13 @@ const institutionalChildPages = {
     kind: "provenance",
     tone: "slate",
   },
+  labThroughTime: {
+    label: "Lab Through Time",
+    href: "/lab-through-time",
+    relation: "HISTORY",
+    kind: "provenance",
+    tone: "slate",
+  },
   aiGovernance: {
     label: "AI Governance",
     href: "/ai-governance",
@@ -105,6 +112,7 @@ const institutionalChildPages = {
 export const institutionalChildRoutes = {
   about: [
     institutionalChildPages.founder,
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.aiGovernance,
     institutionalChildPages.now,
     institutionalChildPages.funding,
@@ -166,6 +174,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.apparatus,
   ],
   founder: [
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.evidence,
     institutionalChildPages.now,
     institutionalChildPages.collaboration,
@@ -178,15 +187,23 @@ export const institutionalChildRoutes = {
   ],
   now: [
     institutionalChildPages.changes,
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.funding,
     institutionalChildPages.appliedWork,
     institutionalChildPages.collaboration,
   ],
   changes: [
     institutionalChildPages.now,
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.atlas,
     institutionalChildPages.evidence,
     institutionalChildPages.apparatus,
+  ],
+  labThroughTime: [
+    institutionalChildPages.founder,
+    institutionalChildPages.now,
+    institutionalChildPages.changes,
+    institutionalChildPages.evidence,
   ],
   apparatus: [
     institutionalChildPages.experiments,
@@ -252,6 +269,7 @@ export const institutionalFooterGroups = [
       { label: "AI Governance", href: "/ai-governance" },
       { label: "Start here", href: "/start" },
       { label: "Founder", href: "/founder" },
+      { label: "Lab Through Time", href: "/lab-through-time" },
       { label: "Now", href: "/now" },
       { label: "What changed", href: "/changes" },
     ],

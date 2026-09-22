@@ -777,6 +777,26 @@ expect(changesContent.includes('labRevision: "3a8c984712ae1d87c7ec714876c356c202
 expect(changesContent.includes("It reports selected material changes"), "Change projection must reject complete-activity-feed semantics");
 expect(homePageForChanges.includes("<RecentChangesStrip"), "Homepage must surface the compact recent-change layer");
 expect(nowPageForChanges.includes('title="What materially changed?"'), "Now page must surface recent material deltas");
+
+const temporalViewNav = read(`${root}/TemporalViewNav.tsx`);
+const publicStateContent = read(`${root}/content/publicState.ts`);
+const publicStateProjection = read("src/generated/lab-public-state/public-state.json");
+const labThroughTimePage = read(`${root}/InstitutionalLabThroughTimePage.tsx`);
+const labThroughTimeRoute = read("src/app/v3/lab-through-time/page.tsx");
+expect(temporalViewNav.includes("three temporal views"), "Temporal view navigation must explain the three time scales");
+expect(temporalViewNav.includes('href={view.href}'), "Temporal view navigation must route from the shared projection model");
+expect(nowPageForChanges.includes('<TemporalViewNav activeView="now"'), "Now must participate in the shared temporal navigation");
+expect(changesPage.includes('<TemporalViewNav activeView="changes"'), "What Changed must participate in the shared temporal navigation");
+expect(publicStateContent.includes("labTimelineEvents"), "Public state content must expose the Lab timeline seed");
+expect(publicStateProjection.includes('"labRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f"'), "Public state seed must pin the Lab source revision");
+expect(publicStateProjection.includes('"projectionStatus": "initial_manual_seed"'), "Public state seed must disclose that cross-repo automation is not wired yet");
+expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-001"'), "Public timeline projection must use durable Timeline identities");
+expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-005"'), "Public timeline projection must preserve the current five-event seed boundary");
+expect(labThroughTimePage.includes("Five events are a seed, not the complete history."), "Lab Through Time must disclose the incomplete seed boundary");
+expect(labThroughTimePage.includes('<TemporalViewNav activeView="timeline"'), "Lab Through Time must participate in the shared temporal navigation");
+expect(labThroughTimePage.includes("Milestones, not a long changelog."), "Lab Through Time must preserve the long-horizon materiality boundary");
+expect(labThroughTimeRoute.includes('canonical: "/lab-through-time"'), "Lab Through Time must declare the canonical public route");
+
 expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
 expect(atlasContent.includes("feature-frozen bounded public projection"), "Atlas v0.1 must declare feature-frozen status");
 
