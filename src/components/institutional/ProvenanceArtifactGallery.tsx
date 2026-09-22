@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { provenanceGallery } from "./content/publicState";
+import { ProvenanceStillCarousel } from "./ProvenanceStillCarousel";
 import styles from "./styles/LabThroughTime.module.css";
 
 export function ProvenanceArtifactGallery() {
@@ -33,19 +34,27 @@ export function ProvenanceArtifactGallery() {
               data-featured={index === 0 ? "true" : undefined}
               key={artifact.id}
             >
-              <div className={styles.provenanceMedia}>
-                <Image
-                  src={artifact.imageSrc}
-                  alt={artifact.alt}
-                  fill
-                  sizes={index === 0 ? "(max-width: 900px) 100vw, 66vw" : "(max-width: 900px) 100vw, 34vw"}
-                  priority={index === 0}
+              {artifact.sequence ? (
+                <ProvenanceStillCarousel
+                  sequence={artifact.sequence}
+                  role={artifact.role}
+                  period={artifact.period}
                 />
-                <div className={styles.provenanceMediaTag}>
-                  <span>{artifact.role}</span>
-                  <small>{artifact.period}</small>
+              ) : (
+                <div className={styles.provenanceMedia}>
+                  <Image
+                    src={artifact.imageSrc}
+                    alt={artifact.alt}
+                    fill
+                    sizes={index === 0 ? "(max-width: 900px) 100vw, 66vw" : "(max-width: 900px) 100vw, 34vw"}
+                    priority={index === 0}
+                  />
+                  <div className={styles.provenanceMediaTag}>
+                    <span>{artifact.role}</span>
+                    <small>{artifact.period}</small>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className={styles.provenanceBody}>
                 <div className={styles.provenanceTopline}>
@@ -65,9 +74,20 @@ export function ProvenanceArtifactGallery() {
                   <strong>{artifact.publicUse}</strong>
                 </div>
 
-                <a href={sourceHref} target="_blank" rel="noreferrer">
-                  Inspect source at pinned Lab revision <span aria-hidden="true">→</span>
-                </a>
+                <div className={styles.provenanceSourceLinks}>
+                  <a href={sourceHref} target="_blank" rel="noreferrer">
+                    Inspect source at pinned Lab revision <span aria-hidden="true">→</span>
+                  </a>
+                  {artifact.sequence ? (
+                    <a
+                      href={`https://github.com/${provenanceGallery.sourceRepository}/blob/${provenanceGallery.sourceRevision}/${artifact.sequence.sourceVideoPath}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Inspect source survey video <span aria-hidden="true">→</span>
+                    </a>
+                  ) : null}
+                </div>
               </div>
             </article>
           );
