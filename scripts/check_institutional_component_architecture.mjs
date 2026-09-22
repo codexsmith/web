@@ -818,6 +818,24 @@ expect(labThroughTimePage.includes("COMPUTATIONAL CAPABILITY"), "Lab Through Tim
 expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must preserve the founder authority boundary");
 expect(labThroughTimePage.includes("Boundary First Labs became practical when decades of accumulated research"), "Lab Through Time hero must explain why the current Lab exists now");
 
+const provenanceArtifactGallery = read(`${root}/ProvenanceArtifactGallery.tsx`);
+expect(labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must surface the first public provenance gallery");
+expect(publicStateContent.includes("provenanceGallery"), "Public-state projection must type the provenance gallery");
+expect(publicStateProjection.includes('"publicClaim": "A substantial pre-AI room-scale research environment existed."'), "Provenance projection must preserve the adjudicated narrow public claim");
+expect(publicStateProjection.includes('"claimCeiling": "The media establishes scale, organization, and chronology of work.'), "Provenance projection must preserve the media authority ceiling");
+for (const artifactPath of [
+  "/provenance/lab-through-time/research-room-02.jpg",
+  "/provenance/lab-through-time/red-book-binder.jpg",
+  "/provenance/lab-through-time/research-note-01.jpg",
+  "/provenance/lab-through-time/technical-library.jpg",
+]) {
+  expect(publicStateProjection.includes(artifactPath), "Provenance projection must include " + artifactPath);
+}
+expect(provenanceArtifactGallery.includes("next/image"), "Provenance gallery must use Next Image for public artifacts");
+expect(provenanceArtifactGallery.includes("Inspect source at pinned Lab revision"), "Provenance artifacts must route back to immutable source");
+expect(provenanceArtifactGallery.includes("WHAT THIS ESTABLISHES"), "Provenance gallery must separate evidence role from interpretation");
+
+
 expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
 expect(atlasContent.includes("feature-frozen bounded public projection"), "Atlas v0.1 must declare feature-frozen status");
 
