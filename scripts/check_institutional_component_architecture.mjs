@@ -947,9 +947,10 @@ expect(moonshotsResearchPage.includes('<MoonshotsFeature context="research" />')
 expect(moonshotsProjectsPage.includes('<MoonshotsFeature context="projects" />'), "Projects must feature Moonshots as a standalone band");
 expect(moonshotsOpenLabPage.includes('<MoonshotsFeature context="open-lab" />'), "Open Lab must feature Moonshots as a standalone band");
 expect(moonshotsFeature.includes('const isOpenLab = context === "open-lab"'), "Open Lab Moonshots must own an explicit hierarchy variant");
-expect(moonshotsFeature.includes("{isOpenLab ? moonshots.summary : copy.title}"), "Open Lab Moonshots must promote the canonical eight-objective summary to the large title");
-expect(moonshotsFeature.includes("moonshotsIdentityTagline"), "Open Lab Moonshots must demote its old long-horizon headline into the side identity");
-expect(moonshotsFeatureCss.includes(".moonshotsIdentityTagline"), "Open Lab Moonshots demoted headline must have an explicit small-scale treatment");
+expect(moonshotsFeature.includes("Moonshots — eight long-horizon objectives."), "Open Lab Moonshots must use the concise eight-objective title");
+expect(moonshotsFeature.includes("The Lab invites criticism, counterexamples, specialist knowledge, and collaboration"), "Open Lab Moonshots must make criticism and collaboration the public invitation");
+expect(!moonshotsFeature.includes("The long-horizon program should be exposed to outside pressure too."), "Open Lab Moonshots must not restore the verbose prior headline");
+expect(!moonshotsFeature.includes("moonshotsIdentityTagline"), "Open Lab Moonshots must keep the simplified side identity free of duplicate tagline copy");
 expect(moonshotsFeatureCss.includes('data-context="open-lab"'), "Open Lab Moonshots hierarchy must remain context-scoped");
 expect(routeRegistry.includes('{ label: "Moonshots", href: "/research/moonshots" }'), "Research footer must link Moonshots directly");
 expect(!moonshotsChildRouteSegment.includes("Moonshots"), "Moonshots must not be rendered as a contextual child-route button");
