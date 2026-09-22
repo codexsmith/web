@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -57,6 +58,9 @@ export function InstitutionalContactPage({
             {intakeEnabled
               ? "Messages are validated, typed, and sent through the server-side inquiry boundary with their source context attached."
               : "No message is accepted or stored on this deployment. The form remains visibly disabled until a receiving endpoint is configured."}
+          </p>
+          <p className={styles.contactDirectEmail}>
+            Direct email: <a href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a>
           </p>
         </aside>
       </InstitutionalRouteHero>
