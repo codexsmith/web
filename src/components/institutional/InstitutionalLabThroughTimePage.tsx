@@ -31,9 +31,10 @@ export function InstitutionalLabThroughTimePage() {
         }
         support={
           <>
-            This first public projection is intentionally conservative. It renders only the
-            durable events currently admitted into the canonical Lab Timeline Register.
-            Five events are a seed, not the complete history.
+            Boundary First Labs became practical when decades of accumulated research and
+            systems practice met computational tools capable of operating over that structure
+            at machine speed. This first public projection remains intentionally conservative:
+            five durable events are a seed, not the complete history.
           </>
         }
         childLinks={institutionalChildRoutes.labThroughTime}
@@ -65,6 +66,59 @@ export function InstitutionalLabThroughTimePage() {
       </InstitutionalRouteHero>
 
       <TemporalViewNav activeView="timeline" />
+
+      <section className={styles.originBand} aria-label="How Boundary First Labs became practical">
+        <article>
+          <span>BEFORE</span>
+          <strong>Accumulated practice + research</strong>
+          <p>
+            Georgia Tech research and AI training, professional systems engineering, and a
+            long independent research corpus established the substrate.
+          </p>
+        </article>
+
+        <div className={styles.originArrow} aria-hidden="true">→</div>
+
+        <article>
+          <span>ACCELERATION</span>
+          <strong>Commercial AI increases throughput</strong>
+          <p>
+            Search, comparison, drafting, classification, synthesis, code execution, and
+            orchestration become dramatically cheaper and faster.
+          </p>
+        </article>
+
+        <div className={styles.originArrow} aria-hidden="true">→</div>
+
+        <article>
+          <span>NOW</span>
+          <strong>Computationally leveraged micro-lab</strong>
+          <p>
+            One founder can operate a much larger research and engineering surface without
+            pretending that computational leverage is organizational headcount.
+          </p>
+        </article>
+      </section>
+
+      <section className={styles.authoritySplit} aria-label="Computational capability and human authority">
+        <div>
+          <span>COMPUTATIONAL CAPABILITY</span>
+          <strong>Machines expand the workbench.</strong>
+          <p>
+            AI and automation can search, compare, draft, classify, execute bounded code,
+            maintain registries, test machinery, and carry structured work across the corpus.
+          </p>
+        </div>
+
+        <div>
+          <span>HUMAN AUTHORITY</span>
+          <strong>The founder retains the decision boundary.</strong>
+          <p>
+            The founder still decides what the Lab believes, promotes, publishes, promises,
+            funds, represents externally, or treats as an institutional commitment.
+          </p>
+        </div>
+      </section>
 
       <section className={styles.timelineBoundary}>
         <span>LONG-HORIZON RULE</span>
