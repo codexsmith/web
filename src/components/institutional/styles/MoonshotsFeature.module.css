@@ -119,17 +119,6 @@
   letter-spacing: .1em;
 }
 
-.moonshotsIdentityTagline {
-  grid-column: 1 / -1;
-  align-self: end;
-  margin: 8px 0 0;
-  padding-top: 10px;
-  border-top: 1px solid var(--bfux-panel-edge);
-  color: #607085;
-  font: 800 .52rem/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .02em;
-}
-
 .moonshotsFeature[data-context="open-lab"] .moonshotsLead h2 {
   max-width: 980px;
 }
