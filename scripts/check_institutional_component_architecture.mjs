@@ -911,6 +911,11 @@ expect(moonshotsFeature.includes('getChildren("moonshots")'), "Moonshots feature
 expect(moonshotsFeature.includes('href="/research/moonshots"'), "Moonshots feature must route to the canonical Moonshots branch");
 expect(moonshotsFeature.includes("Long-horizon objectives are not claims of completion"), "Moonshots feature must preserve the long-horizon claim boundary");
 expect(moonshotsFeatureCss.includes(".moonshotsFeature"), "Moonshots feature must own a distinct visual treatment outside ordinary content-card grids");
+expect(moonshotsFeature.includes("moonshotsFrame"), "Moonshots feature must use the v3 institutional framed-panel grammar");
+expect(moonshotsFeature.includes("objectiveIndex"), "Moonshots feature must present objectives as a restrained index rather than ordinary content cards");
+expect(!moonshotsFeature.includes("signalRail"), "Moonshots feature must not regress to the theatrical v2 signal-rail treatment");
+expect(!moonshotsFeatureCss.includes("#081a38"), "Moonshots feature must not regress to the dark v2 hero palette");
+expect(moonshotsFeatureCss.includes("var(--bfux-panel-edge-dark)"), "Moonshots feature must reuse the v3 BFUX panel edge system");
 expect(moonshotsResearchPage.includes('<MoonshotsFeature context="research" />'), "Research must feature Moonshots as a standalone band");
 expect(moonshotsProjectsPage.includes('<MoonshotsFeature context="projects" />'), "Projects must feature Moonshots as a standalone band");
 expect(moonshotsOpenLabPage.includes('<MoonshotsFeature context="open-lab" />'), "Open Lab must feature Moonshots as a standalone band");
