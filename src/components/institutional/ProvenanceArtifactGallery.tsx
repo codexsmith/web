@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { provenanceGallery } from "./content/publicState";
-import { ProvenanceStillCarousel } from "./ProvenanceStillCarousel";
+import { ProvenanceStillStrip } from "./ProvenanceStillStrip";
 import styles from "./styles/LabThroughTime.module.css";
 
 export function ProvenanceArtifactGallery() {
@@ -25,9 +25,6 @@ export function ProvenanceArtifactGallery() {
 
       <div className={styles.provenanceGrid}>
         {provenanceGallery.artifacts.map((artifact, index) => {
-          const sourceHref =
-            `https://github.com/${provenanceGallery.sourceRepository}/blob/${provenanceGallery.sourceRevision}/${artifact.sourcePath}`;
-
           return (
             <article
               className={styles.provenanceCard}
@@ -35,7 +32,7 @@ export function ProvenanceArtifactGallery() {
               key={artifact.id}
             >
               {artifact.sequence ? (
-                <ProvenanceStillCarousel
+                <ProvenanceStillStrip
                   sequence={artifact.sequence}
                   role={artifact.role}
                   period={artifact.period}
@@ -74,11 +71,6 @@ export function ProvenanceArtifactGallery() {
                   <strong>{artifact.publicUse}</strong>
                 </div>
 
-                <div className={styles.provenanceSourceLinks}>
-                  <a href={sourceHref} target="_blank" rel="noreferrer">
-                    Inspect source at pinned Lab revision <span aria-hidden="true">→</span>
-                  </a>
-                </div>
               </div>
             </article>
           );
