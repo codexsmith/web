@@ -10,6 +10,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 import { projects } from "./content/projects";
 import { ProjectContextSection } from "./sections/ProjectContextSection";
 import { FeaturedProjectCard } from "./sections/FeaturedProjectCard";
+import { MoonshotsFeature } from "./MoonshotsFeature";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -52,6 +53,8 @@ export function InstitutionalProjectsPage() {
             ))}
           </div>
         </section>
+
+        <MoonshotsFeature context="projects" />
 
         <ProjectContextSection />
 
