@@ -50,19 +50,19 @@ expect(labObjectIdentity.includes("identifierLabel = \"ID\""), "LabObjectIdentit
 expect(labObjectIdentity.includes("statusLabel = \"STATUS\""), "LabObjectIdentity must preserve source-native status labeling");
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
 expect(homeContent.includes('title: "Boundary First Weather"'), "Featured work slot four must be Boundary First Weather");
-expect(homeContent.includes('href: "/v3/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
-expect(homeContent.includes('href: "/v3/products/agentic-scientific-method"'), "Featured Agentic Scientific Method must link to its immersive product page");
+expect(homeContent.includes('href: "/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
+expect(homeContent.includes('href: "/products/agentic-scientific-method"'), "Featured Agentic Scientific Method must link to its immersive product page");
 expect(homeContent.includes('title: "YouTube Knowledge Explorer"'), "Featured work must use the YouTube Knowledge Explorer public name");
-expect(homeContent.includes('href: "/v3/products/youtube-knowledge-explorer"'), "Featured YouTube Knowledge Explorer must link to its immersive product page");
+expect(homeContent.includes('href: "/products/youtube-knowledge-explorer"'), "Featured YouTube Knowledge Explorer must link to its immersive product page");
 expect(!homeContent.includes("Projectr"), "v3 homepage public naming must not expose Projectr");
 expect(!homeContent.includes('title: "Public Infrastructure Analysis"'), "Public Infrastructure Analysis must no longer occupy featured work slot four");
 expect(homePage.includes("item.href ?"), "Homepage featured work must support direct product entry links");
 expect(homePage.includes("styles.inMotionSection"), "Homepage must expose the Lab in Motion institutional access layer");
 expect(homeContent.includes("homeNowSnapshot"), "Homepage content must expose a current Now / Roadmap snapshot");
-expect(homeContent.includes('href: "/v3/now"'), "Homepage Now snapshot must link to the public roadmap");
-expect(homeContent.includes('href: "/v3/applied-work"'), "Homepage must expose Applied Work as an institutional front door");
-expect(homeContent.includes('href: "/v3/collaboration"'), "Homepage must expose Collaboration as an institutional front door");
-expect(homeContent.includes('href: "/v3/funding"'), "Homepage must expose Funding as an institutional front door");
+expect(homeContent.includes('href: "/now"'), "Homepage Now snapshot must link to the public roadmap");
+expect(homeContent.includes('href: "/applied-work"'), "Homepage must expose Applied Work as an institutional front door");
+expect(homeContent.includes('href: "/collaboration"'), "Homepage must expose Collaboration as an institutional front door");
+expect(homeContent.includes('href: "/funding"'), "Homepage must expose Funding as an institutional front door");
 expect(homeContent.includes("Externalize → test → repair → repeat → transfer."), "Homepage Now snapshot must preserve the current operating thesis");
 expect(homePage.includes("homeInstitutionalFrontDoors.map"), "Homepage institutional front doors must render from the content model");
 
