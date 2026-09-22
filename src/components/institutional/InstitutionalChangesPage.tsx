@@ -3,6 +3,7 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 import { changesProjection, recentChanges } from "./content/changes";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import { TemporalViewNav } from "./TemporalViewNav";
+import { ChangesExplorer } from "./ChangesExplorer";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Changes.module.css";
@@ -33,21 +34,26 @@ export function InstitutionalChangesPage() {
         }
         childLinks={institutionalChildRoutes.changes}
       >
-        <aside className={styles.projectionPanel}>
-          <span>SOURCE-BOUND DELTA SNAPSHOT</span>
-          <strong>{recentChanges.length} material changes in the current public window</strong>
-          <dl>
-            <div>
-              <dt>WEB HEAD</dt>
-              <dd>{changesProjection.webRevision.slice(0, 12)}</dd>
-            </div>
-            <div>
-              <dt>LAB HEAD</dt>
-              <dd>{changesProjection.labRevision.slice(0, 12)}</dd>
-            </div>
-          </dl>
-          <p>{changesProjection.authority}</p>
-        </aside>
+        <details className={styles.projectionPanel}>
+          <summary>
+            <span>SOURCE-BOUND DELTA SNAPSHOT</span>
+            <strong>{recentChanges.length} material changes in the current public window</strong>
+            <small>Inspect source binding</small>
+          </summary>
+          <div className={styles.projectionDetails}>
+            <dl>
+              <div>
+                <dt>WEB HEAD</dt>
+                <dd>{changesProjection.webRevision.slice(0, 12)}</dd>
+              </div>
+              <div>
+                <dt>LAB HEAD</dt>
+                <dd>{changesProjection.labRevision.slice(0, 12)}</dd>
+              </div>
+            </dl>
+            <p>{changesProjection.authority}</p>
+          </div>
+        </details>
       </InstitutionalRouteHero>
 
       <TemporalViewNav activeView="changes" />
@@ -76,42 +82,7 @@ export function InstitutionalChangesPage() {
           }
         />
 
-        <div className={styles.changeStack}>
-          {recentChanges.map((change) => (
-            <article className={styles.changeCard} data-scope={change.scope} key={change.id}>
-              <div className={styles.changeTopline}>
-                <span>{change.scope}</span>
-                <time dateTime={change.date}>{change.date}</time>
-              </div>
-              <h2>{change.title}</h2>
-              <p>{change.summary}</p>
-              <div className={styles.consequence}>
-                <span>WHAT CHANGED IN PRACTICE</span>
-                <p>{change.consequence}</p>
-              </div>
-              <div className={styles.provenance}>
-                <div>
-                  <span>REPOSITORY</span>
-                  <strong>{change.sourceRepository}</strong>
-                </div>
-                <div>
-                  <span>REVISION</span>
-                  <code>{change.sourceRevision}</code>
-                </div>
-              </div>
-              <nav aria-label={"Links for " + change.title}>
-                <a href={change.sourceHref} target="_blank" rel="noreferrer">
-                  Inspect source revision <span aria-hidden="true">→</span>
-                </a>
-                {change.surfaceHref ? (
-                  <a href={change.surfaceHref}>
-                    Open public surface <span aria-hidden="true">→</span>
-                  </a>
-                ) : null}
-              </nav>
-            </article>
-          ))}
-        </div>
+        <ChangesExplorer />
       </section>
     </InstitutionalPageShell>
   );
