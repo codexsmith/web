@@ -546,7 +546,10 @@ expect(aiGovernancePage.includes("Accelerate bounded assistance. Govern conseque
 expect(aiGovernancePage.includes("PUBLIC DOCTRINE + PRACTICAL REVIEW METHOD"), "AI Governance body must preserve the doctrine status context");
 expect(aiGovernanceCss.includes(".governanceHeroSignalCard"), "AI Governance hero traffic light must sit on a dedicated card");
 expect(aiGovernanceCss.includes(".governanceHeroTags > strong i"), "AI Governance traffic-light tags must carry visible signal indicators");
-expect(aiGovernanceCss.includes("font: 800 clamp(1.2rem, 1.8vw, 1.7rem)"), "AI Governance hero doctrine labels must carry stronger visual weight");
+expect(aiGovernanceCss.includes("font: 800 clamp(1.05rem, 1.45vw, 1.32rem)"), "AI Governance hero doctrine labels must retain strong visual weight without oversized buttons");
+expect(aiGovernanceCss.includes("width: 224px"), "AI Governance traffic-light signals must use one compact shared width sized to Certify");
+expect(aiGovernanceCss.includes("min-height: 50px"), "AI Governance traffic-light signals must stay vertically compact");
+expect(aiGovernanceCss.includes("border-radius: 1px"), "AI Governance traffic-light indicators must render as squares rather than dots");
 expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose internal /v3 public links");
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
