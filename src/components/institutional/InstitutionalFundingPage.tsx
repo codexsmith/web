@@ -159,11 +159,11 @@ export function InstitutionalFundingPage() {
         </p>
 
         <nav className={styles.fundingEvidenceLinks} aria-label="Funding evidence routes">
-          <Link href="/v3/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/research">Inspect the research <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/projects">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/products">Inspect products <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/publications">Inspect publications <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/research">Inspect the research <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/projects">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/products">Inspect products <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/publications">Inspect publications <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
