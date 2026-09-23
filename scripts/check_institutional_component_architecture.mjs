@@ -530,6 +530,12 @@ expect(aiGovernanceCss.includes("grid-template-columns: minmax(0, 1.18fr) minmax
 expect(aiGovernanceCss.includes('font-family: Georgia, "Times New Roman", serif;'), "AI Governance hero headline must use the institutional serif treatment");
 expect(aiGovernanceCss.includes("border-bottom: 2px solid var(--old-gold)"), "AI Governance hero must close with the institutional gold boundary");
 expect(aiGovernanceCss.includes("@media (max-width: 1080px)") && aiGovernanceCss.includes("grid-template-columns: 1fr"), "AI Governance hero must collapse cleanly below desktop width");
+expect(aiGovernancePage.includes("governanceHeroTags"), "AI Governance hero must expose the three doctrine labels as compact tags");
+expect(aiGovernancePage.includes('data-tone="forge">FORGE</strong>') && aiGovernancePage.includes('data-tone="certify">CERTIFY</strong>') && aiGovernancePage.includes('data-tone="forbid">FORBID</strong>'), "AI Governance hero must retain Forge / Certify / Forbid labels");
+expect(!aiGovernancePage.includes("what helps") && !aiGovernancePage.includes("what acts") && !aiGovernancePage.includes("what dominates"), "AI Governance hero must not repeat doctrine explanations inside the tags");
+expect(!aiGovernancePage.includes("Accelerate bounded assistance. Govern consequential agency."), "AI Governance hero must leave doctrine exposition to body content");
+expect(!aiGovernancePage.includes("PUBLIC DOCTRINE + PRACTICAL REVIEW METHOD"), "AI Governance hero must not carry the old doctrine status block");
+expect(aiGovernanceCss.includes(".governanceHeroTags > strong"), "AI Governance doctrine labels must have a dedicated compact tag treatment");
 expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose internal /v3 public links");
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
