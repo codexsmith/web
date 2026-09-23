@@ -35,9 +35,8 @@ export function InstitutionalNowPage() {
         }
         support={
           <>
-            This is a public projection of the active work queue, not a promise calendar
-            and not a copy of every internal task. It shows the priority order, the major
-            dependencies, and what would count as meaningful closure.
+            This is a public projection of priorities, dependencies, and meaningful
+            closure—not a promise calendar or a copy of every internal task.
           </>
         }
         childLinks={institutionalChildRoutes.now}
