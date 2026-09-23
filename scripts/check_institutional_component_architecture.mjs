@@ -530,12 +530,23 @@ expect(aiGovernanceCss.includes("grid-template-columns: minmax(0, 1.18fr) minmax
 expect(aiGovernanceCss.includes('font-family: Georgia, "Times New Roman", serif;'), "AI Governance hero headline must use the institutional serif treatment");
 expect(aiGovernanceCss.includes("border-bottom: 2px solid var(--old-gold)"), "AI Governance hero must close with the institutional gold boundary");
 expect(aiGovernanceCss.includes("@media (max-width: 1080px)") && aiGovernanceCss.includes("grid-template-columns: 1fr"), "AI Governance hero must collapse cleanly below desktop width");
-expect(aiGovernancePage.includes("governanceHeroTags"), "AI Governance hero must expose the three doctrine labels as compact tags");
-expect(aiGovernancePage.includes('data-tone="forge">FORGE</strong>') && aiGovernancePage.includes('data-tone="certify">CERTIFY</strong>') && aiGovernancePage.includes('data-tone="forbid">FORBID</strong>'), "AI Governance hero must retain Forge / Certify / Forbid labels");
-expect(!aiGovernancePage.includes("what helps") && !aiGovernancePage.includes("what acts") && !aiGovernancePage.includes("what dominates"), "AI Governance hero must not repeat doctrine explanations inside the tags");
-expect(!aiGovernancePage.includes("Accelerate bounded assistance. Govern consequential agency."), "AI Governance hero must leave doctrine exposition to body content");
-expect(!aiGovernancePage.includes("PUBLIC DOCTRINE + PRACTICAL REVIEW METHOD"), "AI Governance hero must not carry the old doctrine status block");
-expect(aiGovernanceCss.includes(".governanceHeroTags > strong"), "AI Governance doctrine labels must have a dedicated compact tag treatment");
+const aiGovernanceHeroSlice = aiGovernancePage.slice(
+  aiGovernancePage.indexOf("<InstitutionalRouteHero"),
+  aiGovernancePage.indexOf("</InstitutionalRouteHero>") + "</InstitutionalRouteHero>".length,
+);
+expect(aiGovernanceHeroSlice.includes("governanceHeroSignalCard"), "AI Governance hero must stage the doctrine labels on one visual signal card");
+expect(aiGovernanceHeroSlice.includes("governanceHeroTags"), "AI Governance hero must expose the three doctrine labels as compact tags");
+expect(aiGovernanceHeroSlice.includes('data-tone="forge"') && aiGovernanceHeroSlice.includes(">FORGE</span>"), "AI Governance hero must retain the Forge signal");
+expect(aiGovernanceHeroSlice.includes('data-tone="certify"') && aiGovernanceHeroSlice.includes(">CERTIFY</span>"), "AI Governance hero must retain the Certify signal");
+expect(aiGovernanceHeroSlice.includes('data-tone="forbid"') && aiGovernanceHeroSlice.includes(">FORBID</span>"), "AI Governance hero must retain the Forbid signal");
+expect(!aiGovernanceHeroSlice.includes("what helps") && !aiGovernanceHeroSlice.includes("what acts") && !aiGovernanceHeroSlice.includes("what dominates"), "AI Governance hero must not repeat doctrine explanations inside the traffic-light signal");
+expect(!aiGovernanceHeroSlice.includes("Accelerate bounded assistance. Govern consequential agency."), "AI Governance hero must leave doctrine exposition to body content");
+expect(aiGovernancePage.includes("doctrineInstrument"), "AI Governance body must retain the full dark three-layer doctrine instrument");
+expect(aiGovernancePage.includes("Accelerate bounded assistance. Govern consequential agency. Refuse"), "AI Governance body must preserve the full doctrine synthesis");
+expect(aiGovernancePage.includes("PUBLIC DOCTRINE + PRACTICAL REVIEW METHOD"), "AI Governance body must preserve the doctrine status context");
+expect(aiGovernanceCss.includes(".governanceHeroSignalCard"), "AI Governance hero traffic light must sit on a dedicated card");
+expect(aiGovernanceCss.includes(".governanceHeroTags > strong i"), "AI Governance traffic-light tags must carry visible signal indicators");
+expect(aiGovernanceCss.includes("font: 800 clamp(1.2rem, 1.8vw, 1.7rem)"), "AI Governance hero doctrine labels must carry stronger visual weight");
 expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose internal /v3 public links");
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
