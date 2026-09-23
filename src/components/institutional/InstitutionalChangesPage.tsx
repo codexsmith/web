@@ -43,12 +43,16 @@ export function InstitutionalChangesPage() {
           <div className={styles.projectionDetails}>
             <dl>
               <div>
-                <dt>WEB HEAD</dt>
+                <dt>WEB SOURCE CUTOFF</dt>
                 <dd>{changesProjection.webRevision.slice(0, 12)}</dd>
               </div>
               <div>
-                <dt>LAB HEAD</dt>
+                <dt>LAB SOURCE CUTOFF</dt>
                 <dd>{changesProjection.labRevision.slice(0, 12)}</dd>
+              </div>
+              <div>
+                <dt>ARCHIVE BUILD</dt>
+                <dd>{changesProjection.generatedDate}</dd>
               </div>
             </dl>
             <p>{changesProjection.authority}</p>
