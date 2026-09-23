@@ -58,8 +58,6 @@ export function InstitutionalResearchPage() {
           </div>
         </section>
 
-        <MoonshotsFeature context="research" />
-
         <section className={styles.researchPrograms}>
           <InstitutionalSectionHeader
             styles={styles}
@@ -74,6 +72,8 @@ export function InstitutionalResearchPage() {
             ))}
           </div>
         </section>
+
+        <MoonshotsFeature context="research" />
 
         <ResearchContextSection />
       </InstitutionalPageShell>
