@@ -204,7 +204,7 @@ export function BoundaryFirstWeatherExperience() {
                 <small key={category}>{category}</small>
               ))}
             </div>
-            <Link href="/v3/contact?type=collaboration&source=boundary-first-weather">
+            <Link href="/contact?type=collaboration&source=boundary-first-weather">
               Discuss a bounded Weather pilot <span aria-hidden="true">→</span>
             </Link>
           </aside>
@@ -246,7 +246,7 @@ export function BoundaryFirstWeatherExperience() {
             <Link href="/research/applied-testbeds/weather?detail=record:boundary-first-weather">
               Inspect the full research record <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/v3/products">
+            <Link href="/products">
               Back to Products <span aria-hidden="true">→</span>
             </Link>
           </div>
