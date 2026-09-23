@@ -150,33 +150,6 @@ export function InstitutionalLabThroughTimePage() {
 
       <ProvenanceArtifactGallery />
 
-      <section className={styles.continuitySection}>
-        <div className={styles.continuityLead}>
-          <p className={styles.sectionIndex}>CONTINUITY BEFORE THE CURRENT ACCELERATION</p>
-          <h2>Four admitted milestones precede the 2026 institutionalization event.</h2>
-          <p>
-            The current seed already establishes a dated continuity spine extending well
-            before the public Lab.
-          </p>
-        </div>
-
-        <details className={styles.continuityWork}>
-          <summary>
-            <span>NEXT PROJECTION WORK</span>
-            <strong>Extend the public provenance spine.</strong>
-            <small>Inspect remaining work</small>
-          </summary>
-          <ul>
-            <li>Recover additional Timeline events from the longer provenance sources.</li>
-            <li>Expand beyond the first four public-safe provenance artifacts now attached here.</li>
-            <li>
-              Mark the computational-acceleration boundary only when the admitted source
-              evidence supports a precise public statement.
-            </li>
-          </ul>
-        </details>
-      </section>
-
       <section className={styles.accelerationSection}>
         <div className={styles.accelerationLead}>
           <p className={styles.sectionIndex}>THE ACCELERATION BOUNDARY</p>
