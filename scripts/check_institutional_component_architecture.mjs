@@ -83,7 +83,8 @@ expect(foundationCss.includes(".nowSnapshot"), "Homepage foundation must style t
 expect(foundationCss.includes(".frontDoorStack"), "Homepage foundation must style the Applied Work / Collaboration / Funding entry stack");
 const routeSharedCss = read(`${root}/styles/InstitutionalRouteShared.module.css`);
 expect(routeSharedCss.includes("white-space: normal"), "Child-link titles must be allowed to wrap");
-expect(routeSharedCss.includes("overflow-wrap: anywhere"), "Child-link titles must remain contained at narrow card widths");
+expect(routeSharedCss.includes("overflow-wrap: normal"), "Child-link titles must wrap at ordinary word boundaries");
+expect(routeSharedCss.includes("word-break: normal"), "Child-link titles must not split words to satisfy the card width");
 expect(routeSharedCss.includes("text-wrap: balance"), "Wrapped child-link titles should balance across lines");
 
 const pageShell = read(`${root}/InstitutionalPageShell.tsx`);
