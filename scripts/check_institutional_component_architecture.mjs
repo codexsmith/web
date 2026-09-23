@@ -420,21 +420,21 @@ expect(productContext.includes('id="why-products-matter"'), "Product Context mus
 expect(!productsPage.includes('className={styles.productConversion}'), "Products page must not inline the superseded Research-to-Market section");
 expect(!productsPage.includes('className={styles.productObjectGrammar}'), "Products page must not inline the superseded Public Product Object section");
 expect(fs.existsSync(`${root}/sections/ProductContextSection.tsx`), "ProductContextSection must exist as the route-local composition boundary");
-expect(productsPage.includes('/v3/products/boundary-first-chess'), "Products must link Boundary-First Chess to its immersive product page");
-expect(productsPage.includes('/v3/products/youtube-knowledge-explorer'), "Products must link YouTube Knowledge Explorer to its immersive product page");
+expect(productsPage.includes('/products/boundary-first-chess'), "Products must link Boundary-First Chess to its immersive product page");
+expect(productsPage.includes('/products/youtube-knowledge-explorer'), "Products must link YouTube Knowledge Explorer to its immersive product page");
 expect((productsPage.match(/<Link\s+[\s\S]*?className=\{styles\.primaryProductCard\}/g) || []).length === 2, "Primary product cards must be full-card links");
 expect(!productsPage.includes("<article className={styles.primaryProductCard}"), "Primary product cards must not require a nested detail link for navigation");
 expect(productsPage.includes("<h3>YouTube Knowledge Explorer</h3>"), "Products must use the YouTube Knowledge Explorer public name");
 expect(!productsPage.includes("Projectr"), "Products public surface must not expose the retired Projectr name");
 expect(productsPage.includes('className={styles.researchProducts}'), "Products must distinguish research products from the near-term B2C edge");
-expect(productsPage.includes('/v3/products/boundary-first-weather'), "Products research-product rail must link Boundary First Weather");
-expect(productsPage.includes('/v3/products/agentic-scientific-method'), "Products research-product rail must link Agentic Scientific Method");
+expect(productsPage.includes('/products/boundary-first-weather'), "Products research-product rail must link Boundary First Weather");
+expect(productsPage.includes('/products/agentic-scientific-method'), "Products research-product rail must link Agentic Scientific Method");
 
 const productExperienceShell = read(`${root}/products/ProductExperienceShell.tsx`);
 const chessExperience = read(`${root}/products/BoundaryFirstChessExperience.tsx`);
 const chessBoard = read(`${root}/products/BoundaryFirstChessBoard.tsx`);
 const chessContent = read(`${root}/content/boundaryFirstChess.ts`);
-const chessRoute = read("src/app/v3/products/boundary-first-chess/page.tsx");
+const chessRoute = read("src/app/products/boundary-first-chess/page.tsx");
 expect(productExperienceShell.includes("ProductExperienceShell"), "Product detail pages must share a reusable experience shell");
 expect(productExperienceShell.includes("data-institutional-hero"), "Product experience hero must participate in compact institutional header behavior");
 expect(productExperienceShell.includes("productExperienceNav"), "Product experience shell must expose reusable local product navigation");
@@ -450,7 +450,7 @@ expect(chessRoute.includes("BoundaryFirstChessExperience"), "Boundary-First Ches
 const weatherExperience = read(`${root}/products/BoundaryFirstWeatherExperience.tsx`);
 const weatherField = read(`${root}/products/BoundaryFirstWeatherField.tsx`);
 const weatherContent = read(`${root}/content/boundaryFirstWeather.ts`);
-const weatherRoute = read("src/app/v3/products/boundary-first-weather/page.tsx");
+const weatherRoute = read("src/app/products/boundary-first-weather/page.tsx");
 expect(weatherExperience.includes("<ProductExperienceShell"), "Boundary First Weather must use the shared product experience shell");
 expect(weatherExperience.includes("<BoundaryFirstWeatherField"), "Boundary First Weather must expose an interactive simulation-field instrument");
 expect(weatherExperience.includes("A compelling visualization is not forecast skill."), "Boundary First Weather must keep visualization separate from forecast-skill claims");
@@ -463,7 +463,7 @@ expect(weatherRoute.includes("BoundaryFirstWeatherExperience"), "Boundary First 
 const explorerExperience = read(`${root}/products/YouTubeKnowledgeExplorerExperience.tsx`);
 const explorerInstrument = read(`${root}/products/YouTubeKnowledgeExplorerInstrument.tsx`);
 const explorerContent = read(`${root}/content/youtubeKnowledgeExplorer.ts`);
-const explorerRoute = read("src/app/v3/products/youtube-knowledge-explorer/page.tsx");
+const explorerRoute = read("src/app/products/youtube-knowledge-explorer/page.tsx");
 expect(explorerExperience.includes("<ProductExperienceShell"), "YouTube Knowledge Explorer must use the shared product experience shell");
 expect(explorerExperience.includes("<YouTubeKnowledgeExplorerInstrument"), "YouTube Knowledge Explorer must expose an interactive source-navigation instrument");
 expect(explorerExperience.includes("Ask the video. Make the answer show its work."), "YouTube Knowledge Explorer must foreground evidence-bound answering");
@@ -479,7 +479,7 @@ expect(explorerRoute.includes("YouTubeKnowledgeExplorerExperience"), "YouTube Kn
 const asmExperience = read(`${root}/products/AgenticScientificMethodExperience.tsx`);
 const asmInstrument = read(`${root}/products/AgenticScientificMethodInstrument.tsx`);
 const asmContent = read(`${root}/content/agenticScientificMethod.ts`);
-const asmRoute = read("src/app/v3/products/agentic-scientific-method/page.tsx");
+const asmRoute = read("src/app/products/agentic-scientific-method/page.tsx");
 expect(asmExperience.includes("<ProductExperienceShell"), "Agentic Scientific Method must use the shared product experience shell");
 expect(asmExperience.includes("<AgenticScientificMethodInstrument"), "Agentic Scientific Method must expose an interactive inquiry-machine instrument");
 expect(asmExperience.includes("Scientific method, with the hidden operations opened up."), "ASM must foreground the operational inquiry thesis");
@@ -514,7 +514,7 @@ expect(openLabPage.includes('className={styles.openLabContracts}'), "Open Lab mu
 expect(openLabPage.includes("<OpenLabIntakeInstrument"), "Open Lab must compose the governed intake instrument");
 expect(openLabPage.includes("<OpenLabContextSection />"), "Open Lab must compose supporting sections as one context module");
 expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must keep Institutional Promise directly readable");
-expect(openLabPage.includes('/v3/contact?type=open-lab&source=open-lab'), "Open Lab must preserve a conversational path distinct from formal intake");
+expect(openLabPage.includes('/contact?type=open-lab&source=open-lab'), "Open Lab must preserve a conversational path distinct from formal intake");
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
 expect(fs.existsSync(`${root}/OpenLabIntakeInstrument.tsx`), "OpenLabIntakeInstrument must exist as the governed public-intake boundary");
 
@@ -639,7 +639,7 @@ expect(appliedWorkContent.includes("NO THEORY BUY-IN REQUIRED"), "Applied Work m
 expect(appliedWorkPage.includes("CURRENT COMMERCIAL POSTURE"), "Applied Work must disclose current BFL service maturity");
 expect(appliedWorkPage.includes("appliedServiceFamily"), "Applied Work must group concrete offers inside larger service families");
 expect(appliedWorkPage.includes("childLinks={institutionalChildRoutes.appliedWork}"), "Applied Work hero must expose Evidence as a child page");
-expect(appliedWorkPage.includes('/v3/contact?type=applied-work&source=applied-work'), "Applied Work must expose a contextual Contact route");
+expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work'), "Applied Work must expose a contextual Contact route");
 
 const evidencePage = read(`${root}/InstitutionalEvidencePage.tsx`);
 const evidenceContent = read(`${root}/content/evidence.ts`);
@@ -725,7 +725,7 @@ expect(nowContent.includes("Finish the public institutional boundary"), "Now pri
 expect(nowContent.includes("Turn capability into outside evidence"), "Now priorities must include BFL-native external evidence");
 expect(nowContent.includes("Execute the representational laboratory program"), "Now priorities must include the active laboratory program");
 expect(nowContent.includes("Independent use"), "Now roadmap gates must include transfer beyond the founder");
-expect(nowPage.includes('/v3/contact?type=general&source=now'), "Now must expose a contextual Contact route");
+expect(nowPage.includes('/contact?type=general&source=now'), "Now must expose a contextual Contact route");
 
 const contactPage = read(`${root}/InstitutionalContactPage.tsx`);
 const contactContent = read(`${root}/content/contact.ts`);
@@ -758,7 +758,7 @@ expect(collaborationPage.includes("smallest useful"), "Collaboration hero must p
 expect(collaborationPage.includes("collaborationOutcomes"), "Collaboration page must state concrete business and funding outcomes");
 expect(collaborationPage.includes("How funding works"), "Collaboration page must give potential funders a direct Funding route");
 expect(collaborationPage.includes("childLinks={institutionalChildRoutes.collaboration}"), "Collaboration hero must expose Applied Work as a child page");
-expect(collaborationPage.includes('/v3/contact?type=collaboration&source=collaboration'), "Collaboration must expose a contextual Contact route");
+expect(collaborationPage.includes('/contact?type=collaboration&source=collaboration'), "Collaboration must expose a contextual Contact route");
 
 const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
 const founderCss = read(`${root}/styles/Founder.module.css`);
@@ -780,7 +780,7 @@ expect(fundingPage.includes('className={styles.fundingChannelsSection}'), "Fundi
 expect(fundingPage.includes('className={styles.fundingEvaluation}'), "Funding must expose evaluation and epistemic boundaries directly");
 expect(fundingPage.includes("Fund the conversion, not the theory."), "Funding hero must state the public funding thesis");
 expect(fundingPage.includes("childLinks={institutionalChildRoutes.funding}"), "Funding hero must expose Applied Work and Evidence as child routes");
-expect(fundingPage.includes('/v3/contact?type=funding&source=funding'), "Funding must expose a contextual Contact route");
+expect(fundingPage.includes('/contact?type=funding&source=funding'), "Funding must expose a contextual Contact route");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusMachineryPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
@@ -864,23 +864,23 @@ expect(atlasContent.includes('kind: "claim"'), "Lab Atlas must expose Claim as a
 expect(atlasContent.includes("claimRecords.map"), "Lab Atlas must admit the source-bound Information Mechanics claim cohort");
 expect(atlasContent.includes("claimOwnerEdges"), "Lab Atlas must expose only the source-backed claim owner-program relationship in the initial claim cohort");
 expect(atlasContent.includes('relation: "OWNER PROGRAM"'), "Claim edges must preserve owner-program semantics rather than imply validation");
-expect(atlasContent.includes('/v3/claims#claim-'), "Claim Atlas nodes must route to exact native claim records");
+expect(atlasContent.includes('/claims#claim-'), "Claim Atlas nodes must route to exact native claim records");
 expect(atlasContent.includes("claim.requiresValidation"), "Claim search must preserve validation posture");
 expect(atlasContent.includes("claim.evidence"), "Claim search must preserve source evidence annotations");
 expect(atlasContent.includes("machineryRecords.map"), "Lab Atlas must admit the source-bound machinery component cohort");
-expect(atlasContent.includes('/v3/apparatus#machinery-'), "Machinery Atlas nodes must route to exact native machinery records");
+expect(atlasContent.includes('/apparatus#machinery-'), "Machinery Atlas nodes must route to exact native machinery records");
 expect(atlasContent.includes("machine.authorityCeiling"), "Machinery search must preserve authority ceilings");
 expect(atlasContent.includes("machine.sideEffectClass"), "Machinery search must preserve side-effect classes");
-expect(atlasContent.includes('/v3/publications#publication-'), "Publication Atlas nodes must deep-link exact publication records");
+expect(atlasContent.includes('/publications#publication-'), "Publication Atlas nodes must deep-link exact publication records");
 expect(atlasContent.includes("publication.sourceAuthority"), "Publication search must preserve source authority ceilings");
 expect(atlasContent.includes("publication.dependencies"), "Publication search must preserve declared sequence dependencies");
 expect(atlasContent.includes("publication.evidencePlan"), "Publication search must preserve graph evidence plans");
 expect(atlasContent.includes("experimentResearchEdges"), "Lab Atlas must derive Experiment-to-Research edges from declared lane links");
 expect(atlasContent.includes('relation: lane.role === "primary" ? "PRIMARY RESEARCH LANE" : "RELATED RESEARCH LANE"'), "Experiment edges must preserve primary versus secondary research-lane semantics");
-expect(atlasContent.includes('/v3/experiments#experiment-'), "Experiment Atlas nodes must route to exact native experiment records");
+expect(atlasContent.includes('/experiments#experiment-'), "Experiment Atlas nodes must route to exact native experiment records");
 expect(atlasContent.includes("experiment.acceptancePredicate"), "Experiment search must preserve acceptance predicates where present");
 expect(atlasContent.includes("experiment.firewall"), "Experiment search must preserve authority firewalls");
-expect(atlasContent.includes('/v3/evidence#evidence-'), "Evidence Atlas nodes must route back to their exact native surface");
+expect(atlasContent.includes('/evidence#evidence-'), "Evidence Atlas nodes must route back to their exact native surface");
 expect(atlasContent.includes("searchTerms: [record.evidence, record.boundary]"), "Evidence search must preserve both basis and claim ceiling");
 expect(!atlasContent.includes("identifier: record.surfaceKey"), "Atlas-local evidence routing keys must not become identifiers");
 expect(atlasPage.includes("Research · Experiments · Claims · Machinery · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Claim, Machinery, Experiment, and Evidence object families");
@@ -892,7 +892,7 @@ const atlasRoute = read("src/app/v3/atlas/page.tsx");
 expect(atlasRoute.includes("await searchParams"), "Atlas route must await Next.js searchParams before reading focus");
 expect(atlasRoute.includes("initialFocus={focus}"), "Atlas route must pass focus as routing state into the institutional Atlas");
 expect(atlasExplorer.includes("useRouter"), "Atlas explorer must use App Router navigation for focus-state URLs");
-expect(atlasExplorer.includes("/v3/atlas?focus="), "Atlas explorer selection must preserve exact focus in the URL");
+expect(atlasExplorer.includes("/atlas?focus="), "Atlas explorer selection must preserve exact focus in the URL");
 
 
 const changesPage = read(`${root}/InstitutionalChangesPage.tsx`);
@@ -1010,9 +1010,9 @@ for (const audienceId of ["researcher", "engineer", "funder", "collaborator", "c
   expect(audiencesContent.includes(`id: "${audienceId}"`), `Audience traversal must expose ${audienceId}`);
 }
 expect((audiencesContent.match(/id: "/g) ?? []).length >= 7, "Audience traversal must expose all seven declared visitor paths");
-expect(audiencesContent.includes('href: "/v3/contact?type=research-review&source=start-researcher"'), "Researcher path must terminate in typed research-review contact");
-expect(audiencesContent.includes('href: "/v3/contact?type=applied-work&source=start-client"'), "Client path must terminate in typed applied-work contact");
-expect(audiencesContent.includes('href: "/v3/contact?type=funding&source=start-funder"'), "Funder path must terminate in typed funding contact");
+expect(audiencesContent.includes('href: "/contact?type=research-review&source=start-researcher"'), "Researcher path must terminate in typed research-review contact");
+expect(audiencesContent.includes('href: "/contact?type=applied-work&source=start-client"'), "Client path must terminate in typed applied-work contact");
+expect(audiencesContent.includes('href: "/contact?type=funding&source=start-funder"'), "Funder path must terminate in typed funding contact");
 expect(audienceGrid.includes("journey.steps.map"), "Audience journey grid must render ordered steps from the shared model");
 expect(audienceGrid.includes("@/components/bfux/ReflowField"), "Audience journey UI must use the BFUX ReflowField primitive");
 expect(audienceGrid.includes("<ReflowField"), "Audience journey UI must expose a shared reflow field");
