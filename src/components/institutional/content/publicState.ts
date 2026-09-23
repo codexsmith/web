@@ -51,6 +51,7 @@ export type ProvenanceArtifact = {
   publicUse: string;
   sha256: string;
   sourcePath: string;
+  sequence?: ProvenanceStillSequence;
 };
 
 export type ProvenanceGallery = {
