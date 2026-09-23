@@ -34,7 +34,6 @@ export function InstitutionalMoonshotDetailPage({
         eyebrow={<>MOONSHOTS · {objective.eyebrow}</>}
         title={<>{objective.label}</>}
         lead={<>{objective.summary}</>}
-        support={<>{objective.body?.[0]}</>}
       >
         <div className={styles.detailHeroLedger}>
           <div>
