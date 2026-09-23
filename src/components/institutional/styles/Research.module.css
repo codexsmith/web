@@ -213,7 +213,7 @@
 }
 
 .programSummary {
-  margin: 16px 0 0 0;
+  margin: 0;
   text-align: left;
   width: 100%;
   color: #354967;
@@ -248,13 +248,33 @@
   min-width: 0;
 }
 
+.programIdentityPrimary {
+  width: fit-content;
+  margin-top: 16px;
+}
+
+.programIdentityState {
+  width: min(100%, 220px);
+  margin-top: 24px;
+}
+
+.programIdentityState > div {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.programIdentityState > div > div {
+  flex: 1 1 auto;
+}
+
 .programHeaderRight {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+  align-items: flex-start;
+  text-align: left;
   flex: 1 1 50%;
   min-width: 0;
+  padding-top: 78px;
 }
 
 .programHeaderChevron {
@@ -291,6 +311,15 @@
   .programHeaderRight {
     align-items: flex-start;
     text-align: left;
+    padding-top: 0;
+  }
+
+  .programIdentityPrimary {
+    margin-top: 12px;
+  }
+
+  .programIdentityState {
+    margin-top: 12px;
   }
 }
 
