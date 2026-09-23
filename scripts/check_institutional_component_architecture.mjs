@@ -365,6 +365,22 @@ expect(
 );
 expect(!researchPage.includes('id="reader-agency"'), "Research page must not inline Reflow Field context cards");
 expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchContextSection must exist as the route-local composition boundary");
+const researchProgramCard = read(`${root}/sections/ResearchProgramCard.tsx`);
+const researchCss = read(`${root}/styles/Research.module.css`);
+expect(labObjectIdentity.includes("hideStatus?: boolean"), "LabObjectIdentity must support split identity placement for Research cards");
+expect(researchProgramCard.includes("programIdentityPrimary"), "Research program cards must place OBJECT / CODE beneath the title");
+expect(researchProgramCard.includes("hideStatus"), "Research program primary identity must omit STATE");
+expect(researchProgramCard.includes("programIdentityState"), "Research program cards must place STATE in its own lower-left plate");
+expect(researchProgramCard.includes("hideKind"), "Research program state plate must omit duplicate object identity");
+expect(
+  researchProgramCard.indexOf("programIdentityPrimary") <
+    researchProgramCard.indexOf("programIdentityState") &&
+    researchProgramCard.indexOf("programIdentityState") <
+    researchProgramCard.indexOf("programHeaderRight"),
+  "Research program identity fields must remain in the left column before the summary",
+);
+expect(researchCss.includes(".programIdentityPrimary"), "Research program cards must style the relocated OBJECT / CODE block");
+expect(researchCss.includes(".programIdentityState"), "Research program cards must style the relocated STATE block");
 
 const productsPage = read(`${root}/InstitutionalProductsPage.tsx`);
 expect(productsPage.includes("childLinks={institutionalChildRoutes.products}"), "Products hero must expose its contextual child pages");
