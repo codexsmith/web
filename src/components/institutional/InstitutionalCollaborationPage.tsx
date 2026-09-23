@@ -216,10 +216,10 @@ export function InstitutionalCollaborationPage() {
           of value, there may simply be nothing to do yet—and that is a useful answer too.
         </p>
         <nav className={styles.collaborationCloseLinks} aria-label="Collaboration next steps">
-          <Link href="/v3/contact?type=collaboration&source=collaboration">Start a collaboration conversation <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/open-lab">Explore Open Lab <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/funding">How funding works <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/projects">See current projects <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=collaboration&source=collaboration">Start a collaboration conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/open-lab">Explore Open Lab <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/funding">How funding works <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/projects">See current projects <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
