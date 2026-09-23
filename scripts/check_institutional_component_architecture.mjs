@@ -379,8 +379,20 @@ expect(
     researchProgramCard.indexOf("programHeaderRight"),
   "Research program identity fields must remain in the left column before the summary",
 );
+expect(
+  researchProgramCard.indexOf("programHeaderRight") <
+    researchProgramCard.lastIndexOf("programRole"),
+  "Research program role eyebrow must live in the right column above the summary",
+);
+expect(
+  researchProgramCard.lastIndexOf("programRole") <
+    researchProgramCard.indexOf("programSummary"),
+  "Research program role eyebrow must precede the summary copy",
+);
 expect(researchCss.includes(".programIdentityPrimary"), "Research program cards must style the relocated OBJECT / CODE block");
 expect(researchCss.includes(".programIdentityState"), "Research program cards must style the relocated STATE block");
+expect(researchCss.includes(".programIdentityState {\n  width: 100%;"), "Research program STATE plate must stretch across the left column");
+expect(researchCss.includes("flex: 1 1 100%;\n  text-align: left;"), "Research program STATE field must remain left-aligned while stretching");
 
 const productsPage = read(`${root}/InstitutionalProductsPage.tsx`);
 expect(productsPage.includes("childLinks={institutionalChildRoutes.products}"), "Products hero must expose its contextual child pages");
