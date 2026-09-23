@@ -484,6 +484,145 @@
   line-height: 1.38;
 }
 
+.homeConsultingFeature {
+  display: grid;
+  grid-template-columns: minmax(320px, .82fr) minmax(0, 1.18fr);
+  gap: clamp(30px, 5vw, 72px);
+  align-items: center;
+  padding: 38px clamp(30px, 5vw, 78px) 42px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  border-bottom: 2px solid var(--old-gold);
+  background:
+    radial-gradient(circle at 88% 18%, rgba(214,180,73,.11), transparent 28%),
+    linear-gradient(135deg, #173d7d, #0b2554 70%);
+  color: #fff;
+}
+
+.homeConsultingLead h2 {
+  max-width: 720px;
+  margin: 10px 0 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.35rem, 3.5vw, 4.4rem);
+  font-weight: 500;
+  letter-spacing: -.05em;
+  line-height: .96;
+}
+
+.homeConsultingLead > p:last-of-type {
+  max-width: 690px;
+  margin: 0;
+  color: #dce6f3;
+  font-size: .9rem;
+  line-height: 1.58;
+}
+
+.homeConsultingFeature .sectionIndex {
+  color: var(--old-gold-bright);
+}
+
+.homeConsultingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 22px;
+}
+
+.homeConsultingPrimary,
+.homeConsultingSecondary {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 16px;
+  border: 1px solid rgba(255,255,255,.38);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .82rem;
+}
+
+.homeConsultingPrimary {
+  border-color: var(--old-gold);
+  background: var(--old-gold);
+  color: #2f2813 !important;
+  box-shadow: 0 3px 0 #6f5b23;
+}
+
+.homeConsultingSecondary {
+  background: rgba(255,255,255,.06);
+  color: #fff !important;
+}
+
+.homeConsultingOffers {
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(4,18,45,.2);
+  box-shadow: inset 0 2px 7px rgba(0,0,0,.14);
+}
+
+.homeConsultingOffers article {
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: 42px minmax(0,1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 13px 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.075);
+}
+
+.homeConsultingOffers article + article {
+  margin-top: 7px;
+}
+
+.homeConsultingOffers article > span {
+  color: var(--old-gold-bright);
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.homeConsultingOffers strong {
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.homeConsultingOffers article p {
+  margin: 5px 0 0;
+  color: #cbd8e8;
+  font-size: .7rem;
+  line-height: 1.42;
+}
+
+.homeConsultingNote {
+  margin: 11px 4px 1px;
+  color: #dce6f3;
+  font-size: .72rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  .homeConsultingFeature {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .homeConsultingFeature {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .homeConsultingActions {
+    flex-direction: column;
+  }
+
+  .homeConsultingPrimary,
+  .homeConsultingSecondary {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 .featuredSection {
   padding: 24px clamp(30px, 5vw, 78px) 34px;
   border-bottom: 1px solid var(--institution-line);
