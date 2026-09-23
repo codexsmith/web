@@ -353,6 +353,16 @@ expect(chrome.includes("institutionalFooterGroups.map"), "footer must render gro
 const researchPage = read(`${root}/InstitutionalResearchPage.tsx`);
 expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), "Research hero must expose its contextual child pages");
 expect(researchPage.includes("<ResearchContextSection />"), "Research must compose its contextual bento as a section component");
+expect(
+  researchPage.indexOf('<MoonshotsFeature context="research" />') <
+    researchPage.indexOf("<ResearchContextSection />"),
+  "Research Moonshots must sit immediately before the Research Context section",
+);
+expect(
+  researchPage.indexOf("</section>", researchPage.indexOf("researchProgramGrid")) <
+    researchPage.indexOf('<MoonshotsFeature context="research" />'),
+  "Research active surfaces must precede Moonshots",
+);
 expect(!researchPage.includes('id="reader-agency"'), "Research page must not inline Reflow Field context cards");
 expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchContextSection must exist as the route-local composition boundary");
 
