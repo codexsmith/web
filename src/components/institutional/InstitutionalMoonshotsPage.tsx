@@ -28,7 +28,7 @@ export function InstitutionalMoonshotsPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.moonshotsHero}
-        eyebrow={<>MOONSHOTS · LONG-HORIZON RESEARCH</>}
+        eyebrow={<>MOONSHOTS</>}
         title={<>Long-horizon objectives. Explicit open problems.</>}
         lead={<>{moonshotsProgram.summary}</>}
       >
