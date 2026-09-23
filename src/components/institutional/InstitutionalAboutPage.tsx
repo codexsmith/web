@@ -19,9 +19,13 @@ export function InstitutionalAboutPage() {
           lead={<>Boundary First Labs is a founder-led applied systems laboratory and
               business. It studies how complex systems are represented, transformed, tested,
               measured, and made operational.</>}
-          support={<>Software, automation, AI agents, repositories, and structured research
-              machinery expand what one founder can inspect and build; decision authority,
-              external commitments, and accountability remain with the founder.</>}
+          support={
+          <>
+            Software, automation, AI agents, repositories, and research machinery expand what
+            one founder can inspect and build. Decision authority and external accountability
+            remain with the founder.
+          </>
+        }
           childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
