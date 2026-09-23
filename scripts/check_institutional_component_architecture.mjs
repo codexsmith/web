@@ -1060,6 +1060,29 @@ expect(representationAtlasExplorer.includes("representationMechanicSlots.map"), 
 expect(representationAtlasExplorer.includes("item.mechanics[mechanic.id]"), "Representation Atlas explorer must compare one selected mechanics role across domains");
 
 
+const deepContentPage = read(`${root}/InstitutionalContentNodePage.tsx`);
+const deepContentRoute = read("src/app/v3/[...slug]/page.tsx");
+const deepContentStyles = read(`${root}/styles/ContentNode.module.css`);
+const deepContentInventory = read("src/lib/site-release.ts");
+expect(deepContentPage.includes("<InstitutionalPageShell"), "Migrated deep content nodes must use the institutional v3 shell");
+expect(!deepContentPage.includes("WorldApp"), "Migrated deep content nodes must not regress to the legacy WorldApp");
+expect(deepContentPage.includes("CURRENT PUBLIC RECORD"), "Migrated deep content nodes must expose a restrained public-record section");
+expect(deepContentPage.includes("INSIDE THIS AREA"), "Migrated branch nodes must expose admitted child routes without legacy graph chrome");
+expect(deepContentRoute.includes("institutionalContentNodeRoutes"), "The v3 catch-all must admit only the explicit deep-content migration set");
+expect(deepContentRoute.includes("InstitutionalContentNodePage"), "The v3 catch-all must render migrated nodes through the institutional renderer");
+expect(deepContentStyles.includes(".contentNodeHero"), "Migrated deep content nodes must own a v3 hero treatment");
+for (const route of [
+  "/about/how-we-work",
+  "/products/current/corpus-forge",
+  "/research/software/executable-representation",
+  "/research/software/verification-governance",
+  "/research/formal-theory/boundary-theory",
+  "/research/formal-theory/schemathematics",
+  "/research/foundations/distinction-space",
+]) {
+  expect(deepContentInventory.includes(`"${route}"`), `Deep-content migration inventory must include ${route}`);
+}
+
 const moonshotsFeature = read(`${root}/MoonshotsFeature.tsx`);
 const moonshotsFeatureCss = read(`${root}/styles/MoonshotsFeature.module.css`);
 const moonshotsResearchPage = read(`${root}/InstitutionalResearchPage.tsx`);
