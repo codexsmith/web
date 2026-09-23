@@ -28,9 +28,8 @@ export function InstitutionalAtlasPage({
         title={<>Follow the objects, not the org chart.</>}
         lead={
           <>
-            A bounded public map of how research programs, experiments, claims, machinery
-            components, products, project cases, publication records, and evidence records
-            relate across Boundary First Labs.
+            A public map of how research, experiments, claims, apparatus, products, projects,
+            publications, and evidence relate across the Lab.
           </>
         }
         support={
