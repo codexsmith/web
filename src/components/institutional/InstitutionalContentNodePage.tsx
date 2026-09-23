@@ -110,9 +110,6 @@ export function InstitutionalContentNodePage({
             styles={styles}
             eyebrow={<>CURRENT PUBLIC RECORD</>}
             title={<>{bodyTitle(node)}</>}
-            note={
-              node.status?.detail ? <>{node.status.detail}</> : undefined
-            }
           />
 
           <div className={styles.contentNodeBodyGrid}>
