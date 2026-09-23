@@ -55,8 +55,9 @@ expect(!component.includes("<motion.section"), "the field container must snap ra
 expect(component.includes("layoutId={"), "each plate must expose a stable Motion identity across grid reflow");
 expect(component.includes("<motion.article"), "Reflow items must delegate geometry interpolation to Motion");
 expect(component.includes('layoutAnchor={{ x: 0.5, y: 0.5 }}'), "focus-stage resize should grow around the card center rather than snap from a corner");
-expect(component.includes("duration: 0.52"), "focus-stage card should use a brisk but perceptible translation and resize");
-expect(component.includes("ease: [0.45, 0, 0.55, 1]"), "selected card motion should ease in and out rather than snap toward its destination");
+expect(component.includes('type: "spring"'), "focus-stage card should use a spring layout transition rather than an abrupt resize");
+expect(component.includes("bounce: 0.15"), "focus-stage spring should remain restrained rather than playful");
+expect(component.includes("duration: 0.5"), "focus-stage card should use a brisk but perceptible translation and resize");
 expect(component.includes("const snapLayoutTransition"), "non-selected field objects must have an explicit snap transition");
 expect(component.includes("previousSelectedId"), "Reflow Field must remember the immediately prior focus object for close continuity");
 expect(component.includes("selected || context.previousSelectedId === id"), "opening and closing focus cards must both carry layout motion");
