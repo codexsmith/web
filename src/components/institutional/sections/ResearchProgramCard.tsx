@@ -56,7 +56,7 @@ export function ResearchProgramCard({
                   kind="research"
                   status={program.state}
                   statusLabel="STATE"
-                  variant="compact"
+                  variant="band"
                 />
               </div>
             </div>
