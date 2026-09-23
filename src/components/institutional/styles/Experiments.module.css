@@ -429,3 +429,143 @@
     min-height: 0;
   }
 }
+
+.surveySection,
+.scopeSection,
+.placementSection {
+  padding: 38px clamp(30px, 6vw, 96px) 44px;
+  border-bottom: 1px solid var(--experiment-line);
+}
+
+.surveySection {
+  background: #f7f8f8;
+}
+
+.surveyGrid,
+.scopeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.surveyGrid article,
+.scopeGrid article {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--experiment-line);
+  border-top: 5px solid var(--experiment-accent);
+  background: #fff;
+}
+
+.surveyGrid article:nth-child(2),
+.scopeGrid article:nth-child(2) {
+  border-top-color: var(--osha-blue);
+}
+
+.surveyGrid article:nth-child(3),
+.scopeGrid article:nth-child(3) {
+  border-top-color: var(--osha-green);
+}
+
+.surveyGrid span,
+.scopeGrid span {
+  color: var(--experiment-accent);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.surveyGrid h3 {
+  margin: 9px 0 7px;
+  color: var(--experiment-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.surveyGrid p,
+.scopeGrid p,
+.placementSection > div > p:last-child {
+  margin: 0;
+  color: var(--experiment-muted);
+  font-size: .7rem;
+  line-height: 1.48;
+}
+
+.scopeSection {
+  background: #fff;
+}
+
+.scopeSection > div:first-child,
+.placementSection > div:first-child {
+  max-width: 880px;
+}
+
+.scopeSection h2,
+.placementSection h2 {
+  margin: 9px 0 10px;
+  color: var(--experiment-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.65rem, 2.25vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1;
+}
+
+.scopeGrid strong {
+  display: block;
+  margin: 8px 0 7px;
+  color: var(--experiment-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+}
+
+.placementSection {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+  gap: 28px;
+  align-items: end;
+  background: #eef2f4;
+}
+
+.placementSection nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.placementSection nav a {
+  padding: 10px 11px;
+  border: 1px solid var(--experiment-line);
+  background: #fff;
+  color: var(--experiment-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .78rem;
+  text-decoration: none;
+}
+
+.liveLabCard {
+  min-height: 205px;
+}
+
+@media (max-width: 900px) {
+  .surveyGrid,
+  .scopeGrid,
+  .placementSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .surveySection,
+  .scopeSection,
+  .placementSection {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .placementSection nav {
+    grid-template-columns: 1fr;
+  }
+}
