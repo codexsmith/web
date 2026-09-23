@@ -827,22 +827,23 @@ console.log("Institutional component architecture passed.");
 
 
 const labObjectProductExperienceShell = read(`${root}/products/ProductExperienceShell.tsx`);
-const projectsPageForObjects = read(`${root}/InstitutionalProjectsPage.tsx`);
-const publicationsCatalogForObjects = read(`${root}/sections/PublicationCatalogSection.tsx`);
+const researchProgramCardForObjects = read(`${root}/sections/ResearchProgramCard.tsx`);
+const featuredProjectCardForObjects = read(`${root}/sections/FeaturedProjectCard.tsx`);
+const publicationCardsForObjects = read(`${root}/sections/PublicationCards.tsx`);
 
 expect(labObjectProductExperienceShell.includes("LabObjectIdentity"), "ProductExperienceShell must compose LabObjectIdentity");
 expect(labObjectProductExperienceShell.includes('kind="product"'), "ProductExperienceShell must identify product objects without inventing IDs");
 expect(labObjectProductExperienceShell.includes("status={product.status}"), "ProductExperienceShell must preserve source product status");
-expect(researchPage.includes("LabObjectIdentity"), "Research program cards must compose LabObjectIdentity");
-expect(researchPage.includes('kind="research"'), "Research program cards must identify research objects");
-expect(researchPage.includes("identifier={program.code}"), "Research local codes must remain explicit codes");
-expect(researchPage.includes("status={program.state}"), "Research program identity must preserve source state");
-expect(projectsPageForObjects.includes("LabObjectIdentity"), "Project cards must compose LabObjectIdentity");
-expect(projectsPageForObjects.includes('kind="project"'), "Project cards must identify project objects");
-expect(projectsPageForObjects.includes("identifier={project.code}"), "Project local codes must remain explicit codes");
-expect(projectsPageForObjects.includes("status={project.status}"), "Project identity must preserve source status");
-expect(publicationsCatalogForObjects.includes("LabObjectIdentity"), "Publication records must compose LabObjectIdentity");
-expect(publicationsCatalogForObjects.includes('kind="publication"'), "Publication records must identify publication objects");
+expect(researchProgramCardForObjects.includes("LabObjectIdentity"), "Research program cards must compose LabObjectIdentity");
+expect(researchProgramCardForObjects.includes('kind="research"'), "Research program cards must identify research objects");
+expect(researchProgramCardForObjects.includes("identifier={program.code}"), "Research local codes must remain explicit codes");
+expect(researchProgramCardForObjects.includes("status={program.state}"), "Research program identity must preserve source state");
+expect(featuredProjectCardForObjects.includes("LabObjectIdentity"), "Project cards must compose LabObjectIdentity");
+expect(featuredProjectCardForObjects.includes('kind="project"'), "Project cards must identify project objects");
+expect(featuredProjectCardForObjects.includes("status={project.status}"), "Project identity must preserve source status");
+expect(publicationCardsForObjects.includes("publication.typeCode"), "Publication records must preserve their publication type identity");
+expect(publicationCardsForObjects.includes("publication.sourceState"), "Publication records must preserve source publication state");
+expect(publicationCardsForObjects.includes("publication.sourceRegistryId"), "Publication records must preserve their controlling registry identity");
 expect(publicationsCatalogForObjects.includes("identifier={publication.id}"), "Publication record identifiers must remain source-provided records");
 expect(publicationsCatalogForObjects.includes('identifierLabel="SOURCE ID"'), "Publication identities must disclose source-governed identifiers");
 const publicationContentForObjects = read(`${root}/content/publications.ts`);
