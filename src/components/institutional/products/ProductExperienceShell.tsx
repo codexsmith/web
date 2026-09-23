@@ -45,7 +45,7 @@ export function ProductExperienceShell({
           <div className={styles.productHeroCopy}>
             <Link className={styles.productBreadcrumb} href="/products">
               <span aria-hidden="true">←</span>
-              Products / {product.family}
+              Products
             </Link>
 
             <LabObjectIdentity
