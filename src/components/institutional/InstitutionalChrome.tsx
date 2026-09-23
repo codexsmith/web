@@ -10,6 +10,13 @@ import { institutionalFooterGroups, institutionalRoutes } from "./institutionalR
 import styles from "./styles/InstitutionalFoundation.module.css";
 
 function routeIsActive(pathname: string, href: string) {
+  if (
+    href === "/research" &&
+    (pathname === "/publications" || pathname.startsWith("/publications/"))
+  ) {
+    return true;
+  }
+
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
