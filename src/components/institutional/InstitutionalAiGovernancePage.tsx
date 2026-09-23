@@ -40,30 +40,10 @@ export function InstitutionalAiGovernancePage() {
         childLinks={institutionalChildRoutes.aiGovernance}
       >
         <aside className={styles.governanceHeroInstrument} aria-label="AI governance doctrine">
-          <span className={styles.governanceHeroEyebrow}>THREE-LAYER DOCTRINE</span>
-          <div className={styles.governanceHeroRail}>
-            <div data-tone="forge">
-              <strong>FORGE</strong>
-              <small>what helps</small>
-            </div>
-            <i aria-hidden="true">→</i>
-            <div data-tone="certify">
-              <strong>CERTIFY</strong>
-              <small>what acts</small>
-            </div>
-            <i aria-hidden="true">→</i>
-            <div data-tone="forbid">
-              <strong>FORBID</strong>
-              <small>what dominates</small>
-            </div>
-          </div>
-          <blockquote>
-            Accelerate bounded assistance. Govern consequential agency. Refuse
-            unaccountable domination.
-          </blockquote>
-          <div className={styles.governanceHeroStatus}>
-            <span>PUBLIC DOCTRINE + PRACTICAL REVIEW METHOD</span>
-            <strong>Not a legal certification regime.</strong>
+          <div className={styles.governanceHeroTags}>
+            <strong data-tone="forge">FORGE</strong>
+            <strong data-tone="certify">CERTIFY</strong>
+            <strong data-tone="forbid">FORBID</strong>
           </div>
         </aside>
       </InstitutionalRouteHero>
