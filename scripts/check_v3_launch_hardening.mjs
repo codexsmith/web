@@ -159,6 +159,22 @@ if (
 ) {
   fail("next.config.ts must own canonical institutional rewrites plus /v3 compatibility redirects");
 }
+if (
+  !nextConfig.includes('"/labs/distinction-space"') ||
+  !nextConfig.includes('"/labs/representation-lab"') ||
+  !nextConfig.includes("rewrittenInstitutionalRoutes")
+) {
+  fail("live labs must bypass the v3 rewrite layer and resolve from canonical App Router pages");
+}
+
+for (const nativeLabPage of [
+  "src/app/labs/distinction-space/page.tsx",
+  "src/app/labs/representation-lab/page.tsx",
+]) {
+  if (!fs.existsSync(path.join(root, nativeLabPage))) {
+    fail("missing canonical live-lab route: " + nativeLabPage);
+  }
+}
 for (const header of [
   "X-Content-Type-Options",
   "Referrer-Policy",
