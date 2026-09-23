@@ -368,6 +368,8 @@ expect(fs.existsSync(`${root}/sections/ResearchContextSection.tsx`), "ResearchCo
 const researchProgramCard = read(`${root}/sections/ResearchProgramCard.tsx`);
 const researchCss = read(`${root}/styles/Research.module.css`);
 expect(labObjectIdentity.includes("hideStatus?: boolean"), "LabObjectIdentity must support split identity placement for Research cards");
+expect(labObjectIdentity.includes('status.replaceAll("_", " ")'), "LabObjectIdentity must render source-style underscore statuses as readable inline text");
+expect(!labObjectIdentity.includes('status.split("_")'), "LabObjectIdentity must not use underscores as forced line breaks");
 expect(researchProgramCard.includes("programIdentityPrimary"), "Research program cards must place OBJECT / CODE beneath the title");
 expect(researchProgramCard.includes("hideStatus"), "Research program primary identity must omit STATE");
 expect(researchProgramCard.includes("programIdentityState"), "Research program cards must place STATE in its own lower-left plate");
