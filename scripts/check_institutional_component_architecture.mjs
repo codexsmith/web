@@ -502,6 +502,9 @@ expect(openLabIntake.includes("Add context or links"), "Open Lab must progressiv
 expect(openLabIntake.indexOf('name="publicResponseRequested"') < openLabIntake.indexOf("</details>"), "Open Lab must keep public-response preference inside optional progressive disclosure");
 expect(openLabIntake.includes("AFTER YOU SUBMIT"), "Open Lab must move explanatory routing context after the primary intake experience");
 expect(openLabIntake.includes("HOW THE INTAKE IS GOVERNED"), "Open Lab must keep governance inspectable after the submission surface");
+expect((openLabIntake.match(/<details className=\{styles\.openLabPostIntakeDisclosure\}>/g) ?? []).length === 3, "Open Lab must collapse its three post-intake context sections into native disclosures");
+expect(!openLabIntake.includes('<details className={styles.openLabPostIntakeDisclosure} open'), "Open Lab post-intake disclosures must default closed to keep the submission experience primary");
+expect(openLabIntake.includes("openLabReviewStateList"), "Review-process states must remain inspectable inside the collapsed review section");
 
 expect(openLabRoute.includes("readOpenLabIntakeConfig"), "Open Lab route must derive runtime state from server governance configuration");
 expect(openLabRoute.includes("isOpenLabSubmissionType"), "Open Lab route must deep-link only declared submission types");
