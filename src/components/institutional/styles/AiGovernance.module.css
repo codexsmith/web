@@ -117,17 +117,13 @@
 }
 
 .forgeSection {
-  display: grid;
-  grid-template-columns: minmax(260px,.72fr) minmax(0,1.35fr) minmax(240px,.7fr);
-  gap: 28px;
-  padding: 40px clamp(30px, 5vw, 78px);
+  padding: 38px clamp(30px, 5vw, 78px) 42px;
   border-bottom: 1px solid var(--governance-line);
   background: #fff;
 }
 
 .forgeLead {
-  padding-right: 28px;
-  border-right: 1px solid var(--governance-line);
+  max-width: 520px;
 }
 
 .forgeLead h2,
@@ -157,26 +153,6 @@
   line-height: 1.62;
 }
 
-.forgeQuestions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 8px;
-}
-
-.forgeQuestions span {
-  min-height: 76px;
-  display: flex;
-  align-items: center;
-  padding: 14px 16px;
-  border: 1px solid var(--governance-line);
-  background: linear-gradient(180deg, #fbfdfd, #f1f5f5);
-  color: #30445b;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: .9rem;
-  line-height: 1.35;
-}
-
-.forgeQuote,
 .boundaryQuestion {
   margin: 0;
   align-self: stretch;
@@ -928,7 +904,6 @@
 }
 
 @media (max-width: 1160px) {
-  .forgeSection,
   .boundarySection,
   .certificateSection,
   .selfGovernanceSection,
@@ -936,7 +911,6 @@
     grid-template-columns: 1fr;
   }
 
-  .forgeLead,
   .boundaryLead,
   .certificateLead,
   .selfGovernanceLead,
@@ -945,10 +919,6 @@
     padding-bottom: 20px;
     border-right: 0;
     border-bottom: 1px solid var(--governance-line);
-  }
-
-  .forgeQuote {
-    min-height: 120px;
   }
 
   .doctrineGrid,
@@ -1044,7 +1014,6 @@
     padding-right: 20px;
   }
 
-  .forgeQuestions,
   .distinctionGrid,
   .doctrineGrid,
   .auditGrid,
