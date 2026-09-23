@@ -429,131 +429,138 @@ export function OpenLabIntakeInstrument({
         </form>
       </div>
 
-      <div className={styles.openLabAfterIntake}>
-        <div className={styles.openLabAfterIntakeHeader}>
-          <span>AFTER YOU SUBMIT</span>
-          <h3>We review first, then decide where it belongs.</h3>
-          <p>
-            Your route choice is a starting point, not a test. Submissions begin
-            private, and the Lab can re-route them after reading the substance.
-          </p>
-        </div>
-
-        <div className={styles.openLabIntakeContextGrid}>
-          <article
-            className={styles.openLabSelectedContract}
-            data-open-lab-tone={selected.tone}
-          >
-            <span>ROUTE {selected.code}</span>
-            <h3>{selected.title}</h3>
-            <p>{selected.description}</p>
-            <div>
-              <strong>EXAMPLES</strong>
-              <ul>
-                {selected.ordinaryLanguage.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <blockquote>{selected.boundary}</blockquote>
-          </article>
-
-          <div className={styles.openLabCollectionRuleGrid}>
-            {openLabCollectionRules.map((rule) => (
-              <article key={rule.label}>
-                <span>{rule.label}</span>
-                <p>{rule.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.openLabReviewRail}>
-        <div>
-          <span>REVIEW PROCESS</span>
-          <h3>What happens after your submission arrives.</h3>
-          <p>
-            The Lab records receipt, reviews fit and evidence, then replies,
-            routes, archives, or closes the submission as appropriate.
-          </p>
-        </div>
-        <ol>
-          {openLabReviewStates.map((record, index) => (
-            <li key={record.state}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <strong>{record.state.replaceAll("_", " ")}</strong>
-                <p>{record.meaning}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-      <div className={styles.openLabGovernanceContext}>
-        <div className={styles.openLabGovernanceContextHeader}>
-          <span>HOW THE INTAKE IS GOVERNED</span>
-          <strong>The controls stay visible without getting in your way.</strong>
-          <p>
-            The Lab publishes the operating state, review gates, retention
-            window, and versioned intake boundary separately from the submission
-            experience.
-          </p>
-        </div>
-
-        <div
-          className={styles.openLabReadiness}
-          data-live={runtimeConfig.enabled ? "true" : "false"}
-        >
-          <div className={styles.openLabReadinessLead}>
-            <span>INTAKE STATUS</span>
-            <strong>
-              {runtimeConfig.enabled
-                ? "Intake is open."
-                : "Formal intake is closed."}
-            </strong>
-            <p>
-              {runtimeConfig.enabled
-                ? "The Lab is accepting submissions for private review."
-                : "Submissions stay disabled until the privacy, retention, and review controls are ready."}
+      <div className={styles.openLabPostIntakeAccordion}>
+        <details className={styles.openLabPostIntakeDisclosure}>
+          <summary>
+            <span>AFTER YOU SUBMIT</span>
+            <strong>We review first, then decide where it belongs.</strong>
+          </summary>
+          <div className={styles.openLabDisclosureBody}>
+            <p className={styles.openLabDisclosureLead}>
+              Your route choice is a starting point, not a test. Submissions begin
+              private, and the Lab can re-route them after reading the substance.
             </p>
-          </div>
 
-          <div className={styles.openLabReadinessGrid}>
-            {runtimeConfig.gates.map((gate) => (
-              <article data-ready={gate.ready ? "true" : "false"} key={gate.id}>
-                <span>{gate.ready ? "READY" : "HOLD"}</span>
-                <strong>{gate.label}</strong>
-                <p>{gate.detail}</p>
+            <div className={styles.openLabIntakeContextGrid}>
+              <article
+                className={styles.openLabSelectedContract}
+                data-open-lab-tone={selected.tone}
+              >
+                <span>ROUTE {selected.code}</span>
+                <h3>{selected.title}</h3>
+                <p>{selected.description}</p>
+                <div>
+                  <strong>EXAMPLES</strong>
+                  <ul>
+                    {selected.ordinaryLanguage.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+                <blockquote>{selected.boundary}</blockquote>
               </article>
-            ))}
-          </div>
-        </div>
 
-        <div className={styles.openLabRuntimeBoundary}>
-          <div>
-            <span>ENVELOPE</span>
-            <code>{runtimeConfig.schema}</code>
+              <div className={styles.openLabCollectionRuleGrid}>
+                {openLabCollectionRules.map((rule) => (
+                  <article key={rule.label}>
+                    <span>{rule.label}</span>
+                    <p>{rule.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
-          <div>
-            <span>PINNED SOURCE REVISION</span>
-            <code>{runtimeConfig.sourceRevision.slice(0, 12)}</code>
-          </div>
-          <div>
-            <span>POLICY VERSION</span>
-            <code>{runtimeConfig.policyVersion ?? "not configured"}</code>
-          </div>
-          <div>
-            <span>RETENTION</span>
-            <code>
-              {runtimeConfig.retentionDays
-                ? String(runtimeConfig.retentionDays) + " days"
-                : "not configured"}
-            </code>
-          </div>
-        </div>
+        </details>
 
+        <details className={styles.openLabPostIntakeDisclosure}>
+          <summary>
+            <span>REVIEW PROCESS</span>
+            <strong>What happens after your submission arrives.</strong>
+          </summary>
+          <div className={styles.openLabDisclosureBody}>
+            <p className={styles.openLabDisclosureLead}>
+              The Lab records receipt, reviews fit and evidence, then replies,
+              routes, archives, or closes the submission as appropriate.
+            </p>
+            <ol className={styles.openLabReviewStateList}>
+              {openLabReviewStates.map((record, index) => (
+                <li key={record.state}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <strong>{record.state.replaceAll("_", " ")}</strong>
+                    <p>{record.meaning}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </details>
 
+        <details className={styles.openLabPostIntakeDisclosure}>
+          <summary>
+            <span>HOW THE INTAKE IS GOVERNED</span>
+            <strong>The controls stay visible without getting in your way.</strong>
+          </summary>
+          <div className={styles.openLabDisclosureBody}>
+            <p className={styles.openLabDisclosureLead}>
+              The Lab publishes the operating state, review gates, retention
+              window, and versioned intake boundary separately from the submission
+              experience.
+            </p>
+
+            <div
+              className={styles.openLabReadiness}
+              data-live={runtimeConfig.enabled ? "true" : "false"}
+            >
+              <div className={styles.openLabReadinessLead}>
+                <span>INTAKE STATUS</span>
+                <strong>
+                  {runtimeConfig.enabled
+                    ? "Intake is open."
+                    : "Formal intake is closed."}
+                </strong>
+                <p>
+                  {runtimeConfig.enabled
+                    ? "The Lab is accepting submissions for private review."
+                    : "Submissions stay disabled until the privacy, retention, and review controls are ready."}
+                </p>
+              </div>
+
+              <div className={styles.openLabReadinessGrid}>
+                {runtimeConfig.gates.map((gate) => (
+                  <article data-ready={gate.ready ? "true" : "false"} key={gate.id}>
+                    <span>{gate.ready ? "READY" : "HOLD"}</span>
+                    <strong>{gate.label}</strong>
+                    <p>{gate.detail}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.openLabRuntimeBoundary}>
+              <div>
+                <span>ENVELOPE</span>
+                <code>{runtimeConfig.schema}</code>
+              </div>
+              <div>
+                <span>PINNED SOURCE REVISION</span>
+                <code>{runtimeConfig.sourceRevision.slice(0, 12)}</code>
+              </div>
+              <div>
+                <span>POLICY VERSION</span>
+                <code>{runtimeConfig.policyVersion ?? "not configured"}</code>
+              </div>
+              <div>
+                <span>RETENTION</span>
+                <code>
+                  {runtimeConfig.retentionDays
+                    ? String(runtimeConfig.retentionDays) + " days"
+                    : "not configured"}
+                </code>
+              </div>
+            </div>
+          </div>
+        </details>
       </div>
 
     </section>
