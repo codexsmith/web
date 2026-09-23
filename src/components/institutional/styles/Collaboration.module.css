@@ -28,7 +28,9 @@
 
 .collaborationExchange {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+  margin-top: 22px;
   padding: 10px;
   border: 1px solid var(--bfux-panel-edge-dark);
   background: linear-gradient(180deg, #b9c8da, #d1dce8);
@@ -72,11 +74,16 @@
   line-height: 1.45;
 }
 
+.collaborationExchangeSection,
 .collaborationModesSection,
 .collaborationMapSection,
 .collaborationProcessSection {
   padding: 44px clamp(30px, 6vw, 96px) 54px;
   border-bottom: 1px solid var(--bfux-panel-edge);
+}
+
+.collaborationExchangeSection {
+  background: #fff;
 }
 
 .collaborationModesSection {
@@ -524,6 +531,7 @@
 
 @media (max-width: 680px) {
   .collaborationHero,
+  .collaborationExchangeSection,
   .collaborationModesSection,
   .collaborationMapSection,
   .collaborationProcessSection,
@@ -537,6 +545,7 @@
     font-size: clamp(3rem, 13vw, 4.4rem);
   }
 
+  .collaborationExchange,
   .collaborationModeBand,
   .collaborationLegend,
   .collaborationBoundaryGrid,
