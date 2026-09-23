@@ -9,6 +9,32 @@ const indexingOverride =
 export const institutionalIndexingEnabled =
   vercelEnvironment === "production" || indexingOverride;
 
+export const institutionalContentNodeRoutes = [
+  "/about/how-we-work",
+  "/products/current",
+  "/products/current/corpus-forge",
+  "/products/current/agency-representation-audit",
+  "/research/software",
+  "/research/software/boundary-first-engineering",
+  "/research/software/ontological-software",
+  "/research/software/executable-representation",
+  "/research/software/boundary-first-architecture",
+  "/research/software/boundary-first-ux",
+  "/research/software/verification-governance",
+  "/research/applied-testbeds",
+  "/research/applied-testbeds/weather",
+  "/research/applied-testbeds/chess",
+  "/research/applied-testbeds/soccer",
+  "/research/formal-theory",
+  "/research/formal-theory/boundary-theory",
+  "/research/formal-theory/schemathematics",
+  "/research/foundations",
+  "/research/foundations/distinction",
+  "/research/foundations/bound-distinction",
+  "/research/foundations/bit",
+  "/research/foundations/distinction-space",
+] as const;
+
 export const institutionalPublicRoutes = [
   "/",
   "/about",
@@ -39,6 +65,8 @@ export const institutionalPublicRoutes = [
   "/publications",
   "/representation-atlas",
   "/research",
+  "/research/paper-mine",
+  ...institutionalContentNodeRoutes,
   "/research/moonshots",
   "/research/moonshots/research-operating-system",
   "/research/moonshots/distributed-scientific-intelligence",
