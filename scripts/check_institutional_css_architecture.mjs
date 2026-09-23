@@ -111,9 +111,10 @@ expect(labObjectIdentity.includes('[data-kind="claim"]'), "Lab object identity m
 expect(routeShared.includes("grid-template-rows: repeat(3, auto)"), "child-page navigation must cap desktop stacks at three cards tall");
 expect(routeShared.includes("grid-auto-flow: column"), "child-page navigation must flow additional links into new columns");
 expect(routeShared.includes(".routeChildLinks:has(> .routeChildLink:nth-child(4):last-child)"), "exactly four child-page links must rebalance into a two-by-two grid");
-expect(routeShared.includes("min-height: 58px"), "child-page cards must remain compact enough for dense contextual navigation");
-expect(routeShared.includes("grid-auto-columns: minmax(200px, 1fr)"), "child-page columns must preserve a hard readable minimum width");
-expect(routeShared.includes("min-width: 200px"), "child-page links must not collapse below their readable label width");
+expect(routeShared.includes("min-height: 64px"), "child-page cards must leave enough vertical room for readable wrapped titles");
+expect(routeShared.includes("grid-auto-columns: minmax(0, 1fr)"), "child-page columns must flex inside the available hero width");
+expect(routeShared.includes("min-width: 0"), "child-page links must be allowed to shrink inside their grid tracks without overflow");
+expect(routeShared.includes("width: min(100%, 480px)"), "child-page navigation must remain bounded while giving longer labels usable width");
 expect(routeShared.includes("white-space: normal"), "child-page labels must be allowed to wrap when a title needs a second line");
 expect(routeShared.includes("overflow-wrap: normal"), "child-page labels must wrap at word boundaries");
 expect(routeShared.includes("word-break: normal"), "child-page labels must remain intact rather than breaking inside words");
