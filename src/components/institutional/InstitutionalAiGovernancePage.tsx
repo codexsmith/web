@@ -40,10 +40,22 @@ export function InstitutionalAiGovernancePage() {
         childLinks={institutionalChildRoutes.aiGovernance}
       >
         <aside className={styles.governanceHeroInstrument} aria-label="AI governance doctrine">
-          <div className={styles.governanceHeroTags}>
-            <strong data-tone="forge">FORGE</strong>
-            <strong data-tone="certify">CERTIFY</strong>
-            <strong data-tone="forbid">FORBID</strong>
+          <div className={styles.governanceHeroSignalCard}>
+            <span className={styles.governanceHeroSignalLabel}>THREE-LAYER DOCTRINE</span>
+            <div className={styles.governanceHeroTags}>
+              <strong data-tone="forge">
+                <i aria-hidden="true" />
+                <span>FORGE</span>
+              </strong>
+              <strong data-tone="certify">
+                <i aria-hidden="true" />
+                <span>CERTIFY</span>
+              </strong>
+              <strong data-tone="forbid">
+                <i aria-hidden="true" />
+                <span>FORBID</span>
+              </strong>
+            </div>
           </div>
         </aside>
       </InstitutionalRouteHero>
@@ -75,6 +87,34 @@ export function InstitutionalAiGovernancePage() {
           title={<>Forge what helps. Certify what acts. Forbid what dominates.</>}
           note={<>Different uses deserve different governance burdens.</>}
         />
+
+        <aside className={styles.doctrineInstrument} aria-label="Three-layer AI governance doctrine">
+          <span className={styles.doctrineInstrumentEyebrow}>THREE-LAYER DOCTRINE</span>
+          <div className={styles.doctrineInstrumentRail}>
+            <div data-tone="forge">
+              <strong>FORGE</strong>
+              <small>what helps</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div data-tone="certify">
+              <strong>CERTIFY</strong>
+              <small>what acts</small>
+            </div>
+            <i aria-hidden="true">→</i>
+            <div data-tone="forbid">
+              <strong>FORBID</strong>
+              <small>what dominates</small>
+            </div>
+          </div>
+          <blockquote>
+            Accelerate bounded assistance. Govern consequential agency. Refuse
+            unaccountable domination.
+          </blockquote>
+          <div className={styles.doctrineInstrumentStatus}>
+            <span>PUBLIC DOCTRINE + PRACTICAL REVIEW METHOD</span>
+            <strong>Not a legal certification regime.</strong>
+          </div>
+        </aside>
 
         <div className={styles.doctrineGrid}>
           {aiGovernanceDoctrine.map((region) => (
