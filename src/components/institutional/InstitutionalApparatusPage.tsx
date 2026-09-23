@@ -21,16 +21,10 @@ export function InstitutionalApparatusPage() {
           eyebrow={<>APPARATUS</>}
           title={<>Operational tools for knowledge infrastructure.</>}
           lead={<>Research creates more structure than a paper can hold.</>}
-          support={<>Boundary First Labs builds apparatus for preserving, inspecting, and
-              transferring questions, experiments, claims, evidence, provenance,
-              criticism, defects, authority, repair, and forward state. Lean–Agile flow
-              keeps work and capacity visible; scientific method supplies evidence and
-              falsification discipline; agentic reasoning supplies bounded search,
-              decomposition, tool use, and critique. The apparatus makes those loops
-              durable enough to inspect and hand off. That is intellectual stewardship made
-              operational; when the machinery reaches people, institutions, infrastructure,
-              or the physical world, humanist and ecological stewardship bound what
-              technically successful operation is allowed to mean.</>}
+          support={<>Boundary First Labs builds apparatus for moving questions, experiments,
+              claims, evidence, provenance, criticism, defects, and repair through explicit
+              workflows. The aim is to make research inspectable, executable, and
+              transferable without hiding authority or state.</>}
           childLinks={institutionalChildRoutes.apparatus}
           >
           <blockquote className={styles.apparatusThesis}>
