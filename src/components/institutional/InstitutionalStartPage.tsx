@@ -98,8 +98,8 @@ export function InstitutionalStartPage() {
           also valid when the institutional lane is not obvious yet.
         </p>
         <div>
-          <Link href="/v3/atlas">Browse the Lab Atlas <span aria-hidden="true">→</span></Link>
-          <Link href="/v3/contact?type=general&source=start">General contact <span aria-hidden="true">→</span></Link>
+          <Link href="/atlas">Browse the Lab Atlas <span aria-hidden="true">→</span></Link>
+          <Link href="/contact?type=general&source=start">General contact <span aria-hidden="true">→</span></Link>
         </div>
       </section>
     </InstitutionalPageShell>
