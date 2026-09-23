@@ -342,16 +342,15 @@ export function OpenLabIntakeInstrument({
                 </label>
 
 
+                <label className={styles.openLabCheckRow}>
+                  <input name="publicResponseRequested" type="checkbox" />
+                  <span>
+                    A public response could be useful. This does not give
+                    permission to publish my submission.
+                  </span>
+                </label>
               </div>
             </details>
-
-            <label className={styles.openLabCheckRow}>
-              <input name="publicResponseRequested" type="checkbox" />
-              <span>
-                A public response could be useful. This does not give permission
-                to publish my submission.
-              </span>
-            </label>
 
             <div className={styles.openLabConsentStack}>
               <label>
@@ -445,7 +444,7 @@ export function OpenLabIntakeInstrument({
             className={styles.openLabSelectedContract}
             data-open-lab-tone={selected.tone}
           >
-            <span>{selected.type}</span>
+            <span>ROUTE {selected.code}</span>
             <h3>{selected.title}</h3>
             <p>{selected.description}</p>
             <div>
@@ -472,12 +471,11 @@ export function OpenLabIntakeInstrument({
 
       <div className={styles.openLabReviewRail}>
         <div>
-          <span>REVIEW STATE MODEL</span>
-          <h3>Receipt is a state transition, not a verdict.</h3>
+          <span>REVIEW PROCESS</span>
+          <h3>What happens after your submission arrives.</h3>
           <p>
-            The public contract distinguishes transport, triage, review,
-            disposition, and closure so a message cannot disappear into an
-            undifferentiated inbox.
+            The Lab records receipt, reviews fit and evidence, then replies,
+            routes, archives, or closes the submission as appropriate.
           </p>
         </div>
         <ol>
