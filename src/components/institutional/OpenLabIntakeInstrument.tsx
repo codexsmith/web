@@ -151,7 +151,7 @@ export function OpenLabIntakeInstrument({
               or sensitive material out of the first message.
             </p>
           </div>
-          <Link href="/v3/contact?type=open-lab&source=open-lab">
+          <Link href="/contact?type=open-lab&source=open-lab">
             Start a conversation <span aria-hidden="true">-&gt;</span>
           </Link>
         </div>
