@@ -30,6 +30,15 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/v3", destination: "/", permanent: true },
+      { source: "/about/the-lab", destination: "/about", permanent: true },
+      { source: "/about/provenance", destination: "/lab-through-time", permanent: true },
+      { source: "/about/contact", destination: "/contact", permanent: true },
+      { source: "/products/tools-experiments", destination: "/experiments", permanent: true },
+      {
+        source: "/products/pipeline/youtube-knowledge-explorer",
+        destination: "/products/youtube-knowledge-explorer",
+        permanent: true,
+      },
       ...institutionalChildRoutes.map((route) => ({
         source: `/v3${route}`,
         destination: route,
