@@ -19,6 +19,7 @@ import { OpenLabContextSection } from "./sections/OpenLabContextSection";
 import { OpenLabContractCard } from "./sections/OpenLabContractCard";
 import { MoonshotsFeature } from "./MoonshotsFeature";
 import { institutionalChildRoutes } from "./institutionalRoutes";
+import { ArchitectureProjectionSection } from "./ArchitectureProjectionSection";
 
 const styles = composeCssModules(
   foundationStyles,
@@ -95,6 +96,17 @@ export function InstitutionalOpenLabPage({
           </blockquote>
         </div>
       </InstitutionalRouteHero>
+
+      <ArchitectureProjectionSection
+        eyebrow="SHOW THE MACHINERY"
+        title="Inspection starts with the structure behind the claim."
+        copy={[
+          "Open Lab should not mean an unstructured file dump. It means giving people a governed path into the machinery relevant to the thing they are inspecting: its source, status, research lane, claims, experiments, evidence, revision history, apparatus, and correction route where those surfaces exist.",
+          "The registrar architecture supplies that orientation. It lets a visitor move from a public page toward the object that page represents without confusing public presentation with source authority.",
+        ]}
+        variant="public-projection"
+        pullLine="Open does not mean context-free. Inspectability requires orientation, provenance, and a route back to authority."
+      />
 
       <section className={styles.openLabContracts}>
         <InstitutionalSectionHeader
