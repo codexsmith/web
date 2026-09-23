@@ -2,8 +2,12 @@ export const siteOrigin = new URL(
   process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://boundaryfirstlabs.com",
 );
 
-export const institutionalIndexingEnabled =
+const vercelEnvironment = process.env.VERCEL_ENV?.trim().toLowerCase();
+const indexingOverride =
   process.env.BFL_V3_INDEXABLE?.trim().toLowerCase() === "true";
+
+export const institutionalIndexingEnabled =
+  vercelEnvironment === "production" || indexingOverride;
 
 export const institutionalPublicRoutes = [
   "/",
