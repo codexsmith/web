@@ -240,6 +240,8 @@ expect(!homeOrientation.includes("audienceEntryLead"), "Choose Your Own Path det
 expect(homeOrientation.includes("homeOrientationSummaryAction"), "Choose Your Own Path must expose its all-paths action in the selected header");
 expect(homeOrientation.includes("homeOrientationAudienceDetail"), "Choose Your Own Path audience grid must use the full expanded detail width");
 expect(homeCss.includes(".homeOrientationMosaic"), "Choose Your Own Path must expose a mosaic preview");
+expect(homeCss.includes("height: 116px") && homeCss.includes("max-height: 116px"), "Homepage REST miniatures must share one fixed preview height so both card rows align");
+expect(homeCss.includes("grid-template-rows: repeat(4, minmax(0, 1fr))"), "Our Approach miniature must compress its four steps inside the shared preview height");
 expect(homeCss.includes(".homeOrientationStack"), "Our Approach must expose stacked-row preview");
 expect(homeCss.includes(".homeOrientationBraidMini"), "Operating Braid must expose a three-to-one preview");
 expect(homeCss.includes(".homeOrientationStewardMini"), "Stewardship must expose a three-box preview");
