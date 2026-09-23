@@ -72,7 +72,7 @@ expect(reflowCss.includes("column-gap: 0"), "60-track virtual grids must not mul
 expect(reflowCss.includes("margin-inline: calc(var(--reflow-gap, 14px) / 2)"), "virtual-grid cards must restore authored visual spacing without widening the field");
 expect(reflowCss.includes("row-gap: var(--reflow-gap, 14px)"), "virtual-grid rows must retain the authored vertical gap");
 expect(component.includes('layoutMode?: ReflowLayoutMode'), "Reflow Field must expose a reusable layout-mode contract");
-expect(component.includes("Math.ceil(remainingIds.length / 2)"), "focus-stage must balance remaining items above and below the selected object");
+expect(!component.includes("focusPeerPlacement"), "Reflow must expose one selected-first ordering invariant rather than per-surface peer placement overrides");
 expect(research.includes('<div className={styles.researchProgramGrid}>'), "Active Surfaces must remain ordinary always-visible substantive content");
 expect(research.includes("<ResearchContextSection />"), "Research page must compose the contextual field as one modular section");
 expect(researchContext.includes('className={styles.researchContextGrid}'), "supporting Research context must own the Reflow Field");
@@ -205,19 +205,22 @@ expect(reflowCss.includes('> .item:not([data-reflow-state="selected"])'), "Reflo
 expect(reflow.includes("MAX_FOCUS_PEER_ROW_ITEMS = 4"), "Focus-stage peer rail must cap compact rows at four cards");
 expect(reflow.includes("focusPeerTileForIndex"), "Focus-stage must compute balanced peer tiles");
 expect(reflow.includes('"--reflow-peer-row-count": peerRowCount'), "Reflow must publish the active peer row count");
-expect(reflow.includes('"--reflow-selected-row": peerRowCount + 1'), "Selected content must begin after every compact peer row");
+expect(reflow.includes('"--reflow-selected-row": 1'), "Selected content must own the first focus-stage row");
 expect(reflowCss.includes("repeat(60, minmax(0, 1fr))"), "Focus-stage peer tiling must use a divisible full-width grid");
-expect(reflowCss.includes("grid-row: var(--reflow-peer-row, 1)"), "Shrunk peers must use their computed compact row");
+expect(reflow.includes('"--reflow-peer-row": peerTile.rowIndex + 2'), "Compact peers must begin on the row after the selected card");
+expect(reflowCss.includes("grid-row: var(--reflow-peer-row, 2)"), "Shrunk peers must use their computed rows beneath the selected card");
 expect(reflowCss.includes("grid-column: span var(--reflow-peer-span, 15)"), "Shrunk peers must stretch each compact row edge to edge");
-expect(reflowCss.includes("grid-row: var(--reflow-selected-row, 2)"), "Selected Reflow content must follow the complete peer rail");
+expect(reflowCss.includes("grid-row: var(--reflow-selected-row, 1)"), "Selected Reflow content must occupy the first focus-stage row");
 expect(reflowCss.includes("grid-column: 1 / -1;"), "Selected Reflow content must span the full peer grid before applying its bounded width");
-expect(reflowCss.includes("--reflow-selected-width, 83.333333%"), "Selected Reflow content must retain a bounded second-row stage");
+expect(reflowCss.includes('data-reflow-mode="flow"][data-reflow-active="true"]'), "Flow-mode Reflows must also apply selected-first ordering");
+expect(reflowCss.includes('> .item:not([data-reflow-state="selected"]) {\n  order: 2;'), "Unselected Reflow peers must follow the selected card");
+expect(reflowCss.includes("--reflow-selected-width, 83.333333%"), "Selected Reflow content must retain a bounded first-row stage");
 expect(reflowCss.includes('data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item'), "Rectangle layout rules must not leak into nested Reflow fields");
 expect(audienceJourneys.includes('restLayout="rectangle"'), "Audience journey REST cards must tile into a complete rectangle");
 
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
 expect(homeOrientation.includes("animatePeers"), "Homepage orientation must animate context peers with the selected card");
-expect(homeOrientation.includes('focusPeerPlacement="before"'), "Homepage orientation must keep all three context peers together before the selected card");
+expect(!homeOrientation.includes("focusPeerPlacement"), "Homepage orientation must inherit the shared selected-first Reflow ordering");
 expect(homeOrientation.includes("itemOrder={homeOrientationOrder}"), "Homepage orientation must declare stable source ordering");
 expect((homeOrientation.match(/<ReflowFieldItem/g) || []).length === 4, "Homepage orientation must expose exactly four Reflow sections");
 for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) {
@@ -243,7 +246,7 @@ expect(homeCss.includes(".homeOrientationStewardMini"), "Stewardship must expose
 expect(homeCss.includes("--reflow-columns: 12"), "Homepage orientation REST state must use a twelve-column field");
 expect(homeCss.includes("--reflow-span: 6"), "Homepage orientation REST state must compose as a two-by-two field");
 expect(homeCss.includes("--reflow-focus-span: 4"), "Homepage focus-stage must fit all three desktop context cards on one row");
-expect(homeCss.includes("order: 1"), "Homepage non-selected context cards must share one row before the selected card");
+expect(!homeCss.includes('.homeOrientationCard[data-reflow-state="selected"] {\n  order: 2;'), "Homepage must not override the shared selected-first Reflow ordering");
 expect(homeCss.includes("height: 112px"), "Homepage focus-stage peers must contract to compact context plates");
 expect(homeCss.includes('.homeOrientationCard[data-reflow-state="selected"]'), "Homepage selected section must have an explicit committed-inspection state");
 
