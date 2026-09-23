@@ -59,7 +59,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  margin-top: 22px;
+  margin-top: 10px;
   align-items: start;
 }
 
@@ -865,9 +865,45 @@
   min-width: 0;
 }
 
+.openLabQuickIntake {
+  margin-top: 18px;
+}
+
+.openLabRoutePrompt {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 5px 14px;
+  align-items: baseline;
+  margin-bottom: 9px;
+}
+
+.openLabRoutePrompt > span,
+.openLabAfterIntakeHeader > span,
+.openLabGovernanceContextHeader > span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
+}
+
+.openLabRoutePrompt > strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  font-weight: 600;
+}
+
+.openLabRoutePrompt > p {
+  grid-column: 2;
+  max-width: 760px;
+  margin: 0;
+  color: #607086;
+  font-size: .7rem;
+  line-height: 1.45;
+}
+
 .openLabRouteSelector {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
+  grid-template-columns: repeat(4, minmax(0,1fr));
   gap: 7px;
 }
 
@@ -875,7 +911,7 @@
   display: grid;
   grid-template-columns: auto minmax(0,1fr);
   gap: 5px 9px;
-  min-height: 88px;
+  min-height: 76px;
   padding: 11px;
   border: 1px solid rgba(7,26,61,.24);
   border-left: 5px solid #93a3b4;
@@ -993,6 +1029,7 @@
 }
 
 .openLabIntakeForm {
+  margin-top: 10px;
   padding: 13px;
   border: 1px solid var(--bfux-panel-edge-dark);
   border-top: 6px solid var(--old-gold);
@@ -1013,7 +1050,10 @@
   margin: 8px 0 6px;
   overflow-wrap: anywhere;
   color: var(--royal-blue-deep);
-  font: 800 .72rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.15;
 }
 
 .openLabFormHeader p {
@@ -1090,6 +1130,40 @@
 .openLabWideField {
   grid-column: 1 / -1;
   margin-top: 8px;
+}
+
+.openLabOptionalDetails {
+  margin-top: 10px;
+  border: 1px solid rgba(7,26,61,.2);
+  background: rgba(255,255,255,.68);
+}
+
+.openLabOptionalDetails > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 11px 12px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.openLabOptionalDetails > summary small {
+  color: #6c788b;
+  font: 700 .55rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.openLabOptionalDetailsFields {
+  padding: 0 12px 12px;
+  border-top: 1px solid rgba(7,26,61,.12);
+}
+
+.openLabOptionalDetailsFields > .openLabWideField:first-child {
+  margin-top: 12px;
 }
 
 .openLabCheckRow,
@@ -1213,6 +1287,74 @@
   margin: 0;
 }
 
+.openLabAfterIntake {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(7,26,61,.18);
+}
+
+.openLabAfterIntakeHeader {
+  max-width: 820px;
+}
+
+.openLabAfterIntakeHeader h3 {
+  margin: 8px 0 6px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.openLabAfterIntakeHeader p {
+  margin: 0;
+  color: #5e6c82;
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.openLabIntakeContextGrid {
+  display: grid;
+  grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.openLabIntakeContextGrid .openLabSelectedContract,
+.openLabIntakeContextGrid .openLabCollectionRuleGrid {
+  margin-top: 0;
+}
+
+.openLabIntakeContextGrid .openLabCollectionRuleGrid {
+  align-content: start;
+}
+
+.openLabGovernanceContext {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(7,26,61,.18);
+}
+
+.openLabGovernanceContextHeader {
+  max-width: 820px;
+}
+
+.openLabGovernanceContextHeader > strong {
+  display: block;
+  margin: 8px 0 6px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.openLabGovernanceContextHeader > p {
+  margin: 0;
+  color: #617086;
+  font-size: .68rem;
+  line-height: 1.46;
+}
+
 .openLabReviewRail {
   display: grid;
   grid-template-columns: minmax(240px,.55fr) minmax(0,1.45fr);
@@ -1278,6 +1420,7 @@
 
 .openLabContractAction:focus-visible,
 .openLabHeaderToggle:focus-visible,
+.openLabOptionalDetails > summary:focus-visible,
 .openLabClosedNotice > a:focus-visible,
 .openLabRouteSelector button:focus-visible,
 .openLabSubmitRow button:focus-visible {
@@ -1289,11 +1432,16 @@
   .openLabReadinessGrid {
     grid-template-columns: repeat(3, minmax(0,1fr));
   }
+
+  .openLabRouteSelector {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
 }
 
 @media (max-width: 980px) {
   .openLabReadiness,
   .openLabIntakeLayout,
+  .openLabIntakeContextGrid,
   .openLabReviewRail {
     grid-template-columns: 1fr;
   }
@@ -1320,6 +1468,14 @@
   .openLabCollectionRuleGrid,
   .openLabReviewRail ol {
     grid-template-columns: 1fr;
+  }
+
+  .openLabRoutePrompt {
+    grid-template-columns: 1fr;
+  }
+
+  .openLabRoutePrompt > p {
+    grid-column: 1;
   }
 
   .openLabClosedNotice {
