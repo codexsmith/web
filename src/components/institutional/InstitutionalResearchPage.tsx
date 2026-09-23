@@ -11,6 +11,7 @@ import { ResearchContextSection } from "./sections/ResearchContextSection";
 import { ResearchProgramCard } from "./sections/ResearchProgramCard";
 import { MoonshotsFeature } from "./MoonshotsFeature";
 import { institutionalChildRoutes } from "./institutionalRoutes";
+import { ArchitectureProjectionSection } from "./ArchitectureProjectionSection";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalResearchPage() {
@@ -77,6 +78,17 @@ export function InstitutionalResearchPage() {
             </div>
           </aside>
         </section>
+
+        <ArchitectureProjectionSection
+          eyebrow="BEHIND THE PAPER"
+          title="A research result is one projection of a larger object."
+          copy={[
+            "A serious research lane may contain governing questions, definitions, claims, sources, experiments, code, datasets, counterexamples, open defects, formal artifacts, publications, and revision history.",
+            "Boundary First Labs uses the Research Lane as a continuity spine for that work. A paper may summarize the lane. It does not replace it.",
+          ]}
+          variant="research-lane"
+          pullLine="Research should increase the reader's ability to inspect the claim, not merely the reader's exposure to the claim."
+        />
 
         <section className={styles.researchPrograms}>
           <InstitutionalSectionHeader
