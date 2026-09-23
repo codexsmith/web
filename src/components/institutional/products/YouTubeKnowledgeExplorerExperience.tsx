@@ -19,7 +19,7 @@ export function YouTubeKnowledgeExplorerExperience() {
       actions={[
         { href: "#source", label: "See how it works" },
         {
-          href: "/v3/contact?type=product&source=youtube-knowledge-explorer",
+          href: "/contact?type=product&source=youtube-knowledge-explorer",
           label: "Help test the MVP",
           kind: "secondary",
         },
@@ -267,10 +267,10 @@ export function YouTubeKnowledgeExplorerExperience() {
           </div>
 
           <div className={styles.explorerCloseActions}>
-            <Link href="/v3/contact?type=product&source=youtube-knowledge-explorer">
+            <Link href="/contact?type=product&source=youtube-knowledge-explorer">
               Test, review, or collaborate on the Explorer <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/v3/products">
+            <Link href="/products">
               Back to Products <span aria-hidden="true">→</span>
             </Link>
           </div>
