@@ -5,6 +5,15 @@ const institutionalChildRoutes = institutionalPublicRoutes.filter(
   (route) => route !== "/",
 );
 
+const nativeInstitutionalRoutes = new Set<string>([
+  "/labs/distinction-space",
+  "/labs/representation-lab",
+]);
+
+const rewrittenInstitutionalRoutes = institutionalChildRoutes.filter(
+  (route) => !nativeInstitutionalRoutes.has(route),
+);
+
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -30,7 +39,7 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return {
-      beforeFiles: institutionalChildRoutes.map((route) => ({
+      beforeFiles: rewrittenInstitutionalRoutes.map((route) => ({
         source: route,
         destination: `/v3${route}`,
       })),
