@@ -89,14 +89,6 @@ export const homeNowSnapshot = {
 
 export const homeInstitutionalFrontDoors = [
   {
-    eyebrow: "APPLIED WORK",
-    title: "Bring one system that is expensive to misunderstand.",
-    note: "Ready to scope · case-study evidence still growing",
-    href: "/applied-work",
-    cta: "See Applied Work",
-    tone: "applied",
-  },
-  {
     eyebrow: "COLLABORATION",
     title: "Bring a real problem, capability, audience, or resource.",
     note: "Review · test · build · distribute · transfer",
