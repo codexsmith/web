@@ -114,7 +114,10 @@ expect(routeShared.includes(".routeChildLinks:has(> .routeChildLink:nth-child(4)
 expect(routeShared.includes("min-height: 58px"), "child-page cards must remain compact enough for dense contextual navigation");
 expect(routeShared.includes("grid-auto-columns: minmax(200px, 1fr)"), "child-page columns must preserve a hard readable minimum width");
 expect(routeShared.includes("min-width: 200px"), "child-page links must not collapse below their readable label width");
-expect(routeShared.includes("white-space: nowrap"), "child-page labels must remain intact rather than hyphenating across lines");
+expect(routeShared.includes("white-space: normal"), "child-page labels must be allowed to wrap when a title needs a second line");
+expect(routeShared.includes("overflow-wrap: normal"), "child-page labels must wrap at word boundaries");
+expect(routeShared.includes("word-break: normal"), "child-page labels must remain intact rather than breaking inside words");
+expect(routeShared.includes("text-wrap: balance"), "two-line child-page labels should keep balanced line lengths");
 const products = read(`${stylesRoot}/Products.module.css`);
 const productExperience = read(`${stylesRoot}/ProductExperience.module.css`);
 const boundaryFirstChess = read(`${stylesRoot}/BoundaryFirstChess.module.css`);
