@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
-import { LabObjectIdentity } from "./LabObjectIdentity";
 import { experimentProjection, experimentRecords } from "./content/experiments";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
@@ -10,6 +10,21 @@ import { composeCssModules } from "./styles/composeCssModules";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
+const experimentPrograms = [...new Set(experimentRecords.map((record) => record.program))];
+const experimentLanes = [
+  ...new Map(
+    experimentRecords
+      .flatMap((record) => record.researchLanes)
+      .map((lane) => [lane.laneId, lane.label] as const),
+  ).entries(),
+];
+const completedExperiments = experimentRecords.filter((record) =>
+  record.status.startsWith("completed"),
+).length;
+const plannedExperiments = experimentRecords.filter((record) =>
+  record.status.includes("planned"),
+).length;
+
 export function InstitutionalExperimentsPage() {
   return (
     <InstitutionalPageShell mainClassName={styles.experimentsPage}>
@@ -17,192 +32,148 @@ export function InstitutionalExperimentsPage() {
         styles={styles}
         className={styles.experimentsHero}
         eyebrow={<>EXPERIMENTS</>}
-        title={<>What has the Lab actually tried?</>}
+        title={<>How does the Lab test its work?</>}
         lead={
           <>
-            Experiments are bounded evidence-bearing operations: computational runs,
-            formal stress tests, comparisons, simulations, controls, falsification attempts,
-            and planned tests with explicit predicates.
+            Experiments are bounded operations attached to research programs, products,
+            projects, or apparatus. Their meaning comes from the thing being tested.
           </>
         }
         support={
           <>
-            This is a static public projection of the Lab-wide Experiment Register.
-            Registration preserves identity, status, provenance, and evidence routing. It does
-            not promote a scientific claim, turn a planned run into a completed one, or make a
-            positive result dispositive.
+            This page is the survey and scope boundary for Experiment objects. Detailed
+            experiment lists will live with their owning research lanes and operating surfaces.
           </>
         }
         childLinks={institutionalChildRoutes.experiments}
       >
         <div className={styles.sourcePanel}>
-          <span>SOURCE-BOUND SNAPSHOT</span>
+          <span>CURRENT RECOVERY</span>
           <strong>{experimentRecords.length} durable EXP-* records</strong>
           <p>{experimentProjection.sourceStatus}</p>
           <dl>
             <div>
-              <dt>REVISION</dt>
-              <dd>{experimentProjection.sourceRevision.slice(0, 12)}</dd>
+              <dt>PROGRAMS</dt>
+              <dd>{experimentPrograms.length}</dd>
             </div>
             <div>
-              <dt>DATED</dt>
-              <dd>{experimentProjection.sourceRevisionDate}</dd>
+              <dt>RESEARCH LANES</dt>
+              <dd>{experimentLanes.length}</dd>
             </div>
           </dl>
-          <a
-            href={experimentProjection.sourceHref}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Inspect canonical register <span aria-hidden="true">-&gt;</span>
-          </a>
         </div>
       </InstitutionalRouteHero>
 
       <section className={styles.authorityBand}>
-        <span>REGISTER AUTHORITY</span>
-        <strong>{experimentProjection.authority}</strong>
+        <span>SCOPE RULE</span>
+        <strong>An experiment is not meaningful in isolation.</strong>
         <p>
-          The website is a projection. Domain/project packages remain canonical owners of the
-          experiments themselves, while the Lab-wide register owns durable cross-cutting
-          identity and evidence routing.
+          Registration preserves identity, status, provenance, and evidence routing. The
+          owning lane, product, project, or apparatus supplies the question, boundary, and
+          interpretation.
         </p>
       </section>
 
-      <section className={styles.catalogSection}>
+      <section className={styles.surveySection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>SOURCE-BOUND EXPERIMENT RECORDS</>}
-          title={<>Completed, planned, mixed, and provisional work stays visibly different.</>}
-          note={
-            <>
-              Result posture is copied from the Lab register. No website scoring or maturity
-              translation is applied.
-            </>
-          }
+          eyebrow={<>EXPERIMENT OBJECT</>}
+          title={<>A test belongs to the system that gives it a question.</>}
+          note={<>The global route explains the object family. Contextual routes will carry the records.</>}
         />
 
-        <div className={styles.experimentStack}>
-          {experimentRecords.map((experiment) => (
-            <article
-              className={styles.experimentCard}
-              id={"experiment-" + experiment.id.toLowerCase()}
-              key={experiment.id}
-            >
-              <LabObjectIdentity
-                kind="experiment"
-                identifier={experiment.id}
-                identifierLabel="EXPERIMENT"
-                status={experiment.status}
-                statusLabel="STATUS"
-                secondary={experiment.resultPosture}
-                secondaryLabel="RESULT POSTURE"
-              />
-
-              <div className={styles.experimentHeading}>
-                <div>
-                  <span>PROGRAM</span>
-                  <strong>{experiment.program}</strong>
-                </div>
-                <h2>{experiment.title}</h2>
-              </div>
-
-              <div className={styles.laneRow}>
-                {experiment.researchLanes.map((lane) => (
-                  <div data-role={lane.role} key={experiment.id + "-" + lane.laneId}>
-                    <span>{lane.role === "primary" ? "PRIMARY LANE" : "SECONDARY LANE"}</span>
-                    <strong>{lane.laneId}</strong>
-                    <small>{lane.label}</small>
-                  </div>
-                ))}
-              </div>
-
-              <div className={styles.questionBlock}>
-                <span>QUESTION / PURPOSE</span>
-                <p>{experiment.questionOrPurpose}</p>
-              </div>
-
-              <div className={styles.detailGrid}>
-                {experiment.carrierOrTestbed ? (
-                  <div>
-                    <span>CARRIER / TESTBED</span>
-                    <p>{experiment.carrierOrTestbed}</p>
-                  </div>
-                ) : null}
-                {experiment.control ? (
-                  <div>
-                    <span>CONTROL</span>
-                    <p>{experiment.control}</p>
-                  </div>
-                ) : null}
-                {experiment.method ? (
-                  <div>
-                    <span>METHOD</span>
-                    <p>{experiment.method}</p>
-                  </div>
-                ) : null}
-                {experiment.acceptancePredicate ? (
-                  <div>
-                    <span>ACCEPTANCE PREDICATE</span>
-                    <p>{experiment.acceptancePredicate}</p>
-                  </div>
-                ) : null}
-                {experiment.resultSummary ? (
-                  <div className={styles.resultBlock}>
-                    <span>RESULT SUMMARY</span>
-                    <p>{experiment.resultSummary}</p>
-                  </div>
-                ) : null}
-                {experiment.limitations ? (
-                  <div className={styles.limitationsBlock}>
-                    <span>LIMITATIONS</span>
-                    <p>{experiment.limitations}</p>
-                  </div>
-                ) : null}
-              </div>
-
-              <div className={styles.provenanceGrid}>
-                <div>
-                  <span>CANONICAL SOURCE</span>
-                  <code>{experiment.canonicalSource}</code>
-                </div>
-                {experiment.implementation ? (
-                  <div>
-                    <span>IMPLEMENTATION</span>
-                    <code>{experiment.implementation}</code>
-                  </div>
-                ) : null}
-                {experiment.evidence ? (
-                  <div>
-                    <span>EVIDENCE</span>
-                    <p>{experiment.evidence}</p>
-                  </div>
-                ) : null}
-                {experiment.nextOperation ? (
-                  <div>
-                    <span>NEXT DISCRIMINATING OPERATION</span>
-                    <p>{experiment.nextOperation}</p>
-                  </div>
-                ) : null}
-              </div>
-
-              <div className={styles.firewall}>
-                <span>AUTHORITY FIREWALL</span>
-                <p>{experiment.firewall}</p>
-              </div>
-            </article>
-          ))}
+        <div className={styles.surveyGrid}>
+          <article>
+            <span>WHAT IT IS</span>
+            <h3>Bounded test.</h3>
+            <p>
+              A computational run, formal stress test, comparison, simulation, control,
+              falsification attempt, or planned test with an explicit predicate.
+            </p>
+          </article>
+          <article>
+            <span>WHERE IT BELONGS</span>
+            <h3>Attached to an owner.</h3>
+            <p>
+              Research lanes own scientific questions. Products and projects own operational
+              tests. Apparatus owns instrument behavior and conformance checks.
+            </p>
+          </article>
+          <article>
+            <span>WHAT THIS PAGE DOES</span>
+            <h3>Survey, not flat catalog.</h3>
+            <p>
+              This route defines the object family, reports recovered scope, and points toward
+              the contexts where experiment records will be inspected.
+            </p>
+          </article>
         </div>
       </section>
 
-      <section className={styles.closeSection}>
-        <span>EXPERIMENT REGISTER RULE</span>
-        <h2>Negative, null, blocked, contradictory, and superseded work belongs here too.</h2>
-        <p>
-          The current public snapshot is only a seeded recovery. Its incompleteness is part
-          of the record: a missing experiment is not silently reconstructed from papers,
-          source folders, or website language.
-        </p>
+      <section className={styles.scopeSection}>
+        <div>
+          <p className={styles.sectionIndex}>CURRENT RECOVERED SCOPE</p>
+          <h2>The register already crosses multiple programs and lanes.</h2>
+        </div>
+        <div className={styles.scopeGrid}>
+          <article>
+            <span>RECORDS</span>
+            <strong>{experimentRecords.length}</strong>
+            <p>{completedExperiments} completed · {plannedExperiments} planned or partially planned</p>
+          </article>
+          <article>
+            <span>PROGRAMS</span>
+            <strong>{experimentPrograms.length}</strong>
+            <p>{experimentPrograms.join(" · ")}</p>
+          </article>
+          <article>
+            <span>LANES</span>
+            <strong>{experimentLanes.length}</strong>
+            <p>{experimentLanes.map(([id, label]) => `${id} · ${label}`).join(" · ")}</p>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.liveLabsSection}>
+        <InstitutionalSectionHeader
+          styles={styles}
+          eyebrow={<>LIVE LABS</>}
+          title={<>Two experiment surfaces can be entered directly.</>}
+          note={<>These are apparatus surfaces, not the global experiment catalog.</>}
+        />
+
+        <div className={styles.liveLabsGrid}>
+          <Link className={styles.liveLabCard} href="/labs/distinction-space">
+            <span>VISUAL MATHEMATICS</span>
+            <h3>Distinction Space Visual Lab</h3>
+            <p>Bounded dynamics, closure, defect, and higher-dimensional structure.</p>
+            <strong>Enter visual lab <span aria-hidden="true">-&gt;</span></strong>
+          </Link>
+
+          <Link className={styles.liveLabCard} href="/labs/representation-lab">
+            <span>REPRESENTATION / AI</span>
+            <h3>Same World, Different Reasoner</h3>
+            <p>One grid world; changing task, reasoning method, inputs, and representation.</p>
+            <strong>Enter representation lab <span aria-hidden="true">-&gt;</span></strong>
+          </Link>
+        </div>
+      </section>
+
+      <section className={styles.placementSection}>
+        <div>
+          <p className={styles.sectionIndex}>NEXT PLACEMENT PASS</p>
+          <h2>Put experiment records where the research question lives.</h2>
+          <p>
+            The next pass will attach filtered experiment lists to research lanes, products,
+            and projects rather than asking this global route to carry every record.
+          </p>
+        </div>
+        <nav aria-label="Experiment placement destinations">
+          <Link href="/research">Research <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/products">Products <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/projects">Projects <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/apparatus">Apparatus <span aria-hidden="true">-&gt;</span></Link>
+        </nav>
       </section>
     </InstitutionalPageShell>
   );

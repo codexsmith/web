@@ -1,0 +1,135 @@
+.temporalNav {
+  display: grid;
+  grid-template-columns: minmax(220px, .42fr) minmax(0, 1.58fr);
+  gap: 28px;
+  padding: 18px clamp(30px, 6vw, 96px);
+  border-bottom: 1px solid rgba(7,26,61,.18);
+  background: #f7f9fb;
+}
+
+.temporalNav > header {
+  align-self: center;
+}
+
+.temporalNav > header > span,
+.temporalCard > span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .14em;
+}
+
+.temporalNav > header > strong {
+  display: block;
+  margin: 8px 0;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.22rem;
+  font-weight: 600;
+}
+
+.temporalNav > header > p {
+  max-width: 380px;
+  margin: 0;
+  color: #5a687d;
+  font-size: .72rem;
+  line-height: 1.5;
+}
+
+.temporalGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.temporalCard {
+  min-height: 96px;
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  padding: 12px 13px;
+  border: 1px solid rgba(7,26,61,.22);
+  border-top: 5px solid #748396;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 5px 15px rgba(7,26,61,.05);
+}
+
+.temporalCard:nth-child(1) { border-top-color: var(--osha-green); }
+.temporalCard:nth-child(2) { border-top-color: var(--osha-blue); }
+.temporalCard:nth-child(3) { border-top-color: #748396; }
+
+.temporalCard[data-active="true"] {
+  border-color: var(--royal-blue-deep);
+  background: linear-gradient(180deg, #fff, #edf3f9);
+  box-shadow: 0 3px 0 rgba(7,26,61,.18), 0 9px 20px rgba(7,26,61,.08);
+}
+
+.temporalCard > strong {
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.temporalCard > p,
+.temporalCard > small {
+  margin: 0;
+  color: #52627b;
+  line-height: 1.42;
+}
+
+.temporalCard > p {
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.temporalCard > small {
+  font-size: .65rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .temporalCard:hover {
+    transform: translateY(-1px);
+    border-color: rgba(7,26,61,.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .temporalCard {
+    transition: none;
+  }
+
+  .temporalCard:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .temporalNav {
+    grid-template-columns: 1fr;
+  }
+
+  .temporalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .temporalCard {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .temporalNav {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+.temporalCard:not([data-active="true"]) > small {
+  display: none;
+}
+
+.temporalCard:not([data-active="true"]) {
+  align-content: center;
+}

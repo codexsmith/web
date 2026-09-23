@@ -5,10 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
 import { LabCommandPalette } from "./LabCommandPalette";
+import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 import { institutionalFooterGroups, institutionalRoutes } from "./institutionalRoutes";
 import styles from "./styles/InstitutionalFoundation.module.css";
 
 function routeIsActive(pathname: string, href: string) {
+  if (
+    href === "/research" &&
+    (pathname === "/publications" || pathname.startsWith("/publications/"))
+  ) {
+    return true;
+  }
+
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -115,6 +123,7 @@ export function InstitutionalFooter() {
       </nav>
 
       <div className={styles.footerMeta}>
+        <a href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a>
         <span>© 2026 Boundary First Labs</span>
       </div>
     </footer>

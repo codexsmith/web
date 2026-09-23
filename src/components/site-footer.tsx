@@ -8,6 +8,7 @@ import {
   DOMAINS_HREF,
 } from "@/lib/site-navigation";
 import { phase12Launch } from "@/lib/phase12-launch";
+import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 
 export function SiteFooter() {
   return (
@@ -77,8 +78,8 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:contact@boundaryfirstlabs.com" className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground">
-                  contact@boundaryfirstlabs.com
+                <a href={PUBLIC_CONTACT_MAILTO} className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground">
+                  {PUBLIC_CONTACT_EMAIL}
                 </a>
               </li>
               <li>

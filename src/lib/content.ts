@@ -863,7 +863,7 @@ export const nodes: ContentNode[] = [
     kind: "research",
     eyebrow: "Long-horizon research objectives",
     summary:
-      "Six long-horizon objectives that organize where the Lab's research machinery is pointed without treating ambition as present-tense capability.",
+      "Eight long-horizon objectives that organize where the Lab's research machinery is pointed without treating ambition as present-tense capability.",
     body: [
       "Moonshots are long-horizon research objectives, not claims of completion. Each one must remain decomposable into bounded programs, measurable work, explicit open problems, and evidence that can survive criticism.",
       "The shared test is practical: current footholds should be visible now, progress should be measurable, and stronger capability claims should wait for prototypes, adversarial review, replication, and broader deployment evidence.",
@@ -1161,6 +1161,104 @@ export const nodes: ContentNode[] = [
           "Preserve provenance across versions so changed behavior remains reconstructable.",
           "Retain rollback and human authority for consequential changes.",
         ],
+      },
+    ],
+  },
+  {
+    id: "millennium-problems-research",
+    label: "Millennium Problems Research",
+    shortLabel: "Millennium Problems",
+    path: "research/moonshots/millennium-problems-research",
+    parentId: "moonshots",
+    kind: "research",
+    eyebrow: "Adversarial theorem and proof-program calibration",
+    summary:
+      "Use the seven Clay Millennium Prize Problems as heterogeneous stress tests for theorem-facing derivation, proof-program analysis, computational probes, and explicit closure and defect machinery.",
+    body: [
+      "The program does not treat the Millennium Problems as one problem or one proof technique. It maintains a seven-problem research instrument, problem-specific branches, specialist computational packages, and a comparative layer for studying representations, proof grammars, closure obligations, persistent defects, candidate repairs, and possible regime transitions.",
+      "The Lab's working label Millennium Problem Theory names the comparative study of attempted proof grammars. It is internal research-program vocabulary, not a recognized external field and never a substitute for theorem-level proof. For every open Millennium Prize Problem, terminal success remains a valid mathematical proof of the exact theorem statement together with appropriate external verification.",
+    ],
+    links: [
+      {
+        label: "Formal Representation Mechanics",
+        href: "/research/moonshots/formal-representation-mechanics",
+        eyebrow: "Cross-problem formal machinery",
+        summary:
+          "The grammar, admissibility, closure, defect, and recomposition machinery being stress-tested against resistant theorem obligations.",
+      },
+      {
+        label: "Mathematical Interoperability",
+        href: "/research/moonshots/mathematical-interoperability",
+        eyebrow: "Cross-disciplinary formal translation",
+        summary:
+          "A neighboring objective for making mathematical structure more explicitly translatable without collapsing equivalence, analogy, or reduction.",
+      },
+    ],
+    inspection: [
+      {
+        id: "millennium-problems-claim-firewall",
+        label: "What would count as progress",
+        eyebrow: "Proof authority remains external to the Lab machinery",
+        summary:
+          "The research program can produce useful comparative structure without promoting analysis, computation, or candidate repair into a solved-problem claim.",
+        bullets: [
+          "Maintain the exact theorem statement and native mathematical validation standard for each problem.",
+          "Use the solved Poincare case as a calibration environment rather than evidence that the same machinery solves the open cases.",
+          "Separate finite computation, structural correspondence, closure analysis, defect localization, and candidate repair from theorem-level proof.",
+          "Treat failed proof programs and negative results as useful only when their obstruction is localized and typed.",
+          "Require a valid proof and appropriate external mathematical verification before any solved-problem claim.",
+        ],
+        sourceRef:
+          "Boundary First Labs — 03_Domains/01_formal_systems__domain_family/03_millennium_problems__research_program/README.md + 00_MILLENNIUM_PROBLEMS_INDEX.md",
+      },
+    ],
+  },
+  {
+    id: "fine-structure-constant",
+    label: "Fine-Structure Constant Program",
+    shortLabel: "Fine-Structure Constant",
+    path: "research/moonshots/fine-structure-constant",
+    parentId: "moonshots",
+    kind: "research",
+    eyebrow: "Fundamental-constant derivation under falsification pressure",
+    summary:
+      "Use the fine-structure constant as a stringent calibration problem for whether geometric and representational hypotheses can become a parameter prediction without hiding normalization freedom, scale dependence, or fitted structure.",
+    body: [
+      "The current corpus contains an exact variational parameterization of electromagnetic coupling, sensitivity and identifiability results, several numerical conjectures, and strong negative results. It does not yet contain a zero-free-parameter, first-principles derivation of the low-energy fine-structure constant.",
+      "The research target has therefore moved from finding a compact expression near 137 to a harder question: whether the electromagnetic direction can cease to be independently free on a globally admissible trajectory in coupling space, with the low-energy coupling appearing as an infrared projection of that deeper structure.",
+    ],
+    links: [
+      {
+        label: "Formal Representation Mechanics",
+        href: "/research/moonshots/formal-representation-mechanics",
+        eyebrow: "Reduction, observability, and admissible forgetting",
+        summary:
+          "The alpha program supplies concrete tests for exact versus projected reductions, universality, and representation-induced defect.",
+      },
+      {
+        label: "Mathematical Interoperability",
+        href: "/research/moonshots/mathematical-interoperability",
+        eyebrow: "Physics / geometry / RG translation",
+        summary:
+          "The program requires disciplined translation among gauge theory, renormalization-group flow, geometry, and the Lab's internal representational vocabulary.",
+      },
+    ],
+    inspection: [
+      {
+        id: "fine-structure-constant-claim-firewall",
+        label: "Current claim ceiling",
+        eyebrow: "A difficult calibration target, not a derived constant",
+        summary:
+          "The strongest present result is a sharper statement of what a successful derivation would have to remove or determine, together with explicit branches that have already failed.",
+        bullets: [
+          "Retain the exact Coulomb-plus-surface parameterization and its identifiability and sensitivity results.",
+          "Preserve the normalization obstruction: isolated U(1) cover, topology, and charge data do not fix the positive gauge-metric normalization modulus.",
+          "Treat compact expressions and correction series near the measured value as numerical conjectures until generated by a declared action or operator model.",
+          "Do not promote truncation residuals, cover cardinalities, or numerical proximity into fundamental-constant derivations.",
+          "Require a declared scale, renormalization prescription, closure mechanism, and independently constrained parameter-selection rule for a first-principles claim.",
+        ],
+        sourceRef:
+          "Boundary First Labs — 03_Domains/02_natural_systems__domain_family/01_physics__domain/fine_structure_alpha_vertical_slice/finestructurealpha-README.md + finestructurealpha-canonical_position.md",
       },
     ],
   },

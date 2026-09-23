@@ -16,6 +16,7 @@ export type LabObjectIdentityProps = {
   kind: LabObjectKind;
   kindLabel?: string;
   hideKind?: boolean;
+  hideStatus?: boolean;
   identifier?: string;
   identifierLabel?: string;
   status: string;
@@ -69,6 +70,7 @@ export function LabObjectIdentity({
   appearance = "light",
   ariaLabel,
   hideKind,
+  hideStatus,
 }: LabObjectIdentityProps) {
   const resolvedKindLabel = kindLabel ?? kindLabels[kind];
 
@@ -95,20 +97,17 @@ export function LabObjectIdentity({
         />
       ) : null}
 
-      <IdentityField
-        className={styles.statusField}
-        label={statusLabel}
-        value={
-          typeof status === "string" 
-            ? status.split("_").map((part, i, arr) => (
-                <React.Fragment key={i}>
-                  {part}
-                  {i < arr.length - 1 && <br />}
-                </React.Fragment>
-              ))
-            : status
-        }
-      />
+      {!hideStatus ? (
+        <IdentityField
+          className={styles.statusField}
+          label={statusLabel}
+          value={
+            typeof status === "string"
+              ? status.replaceAll("_", " ")
+              : status
+          }
+        />
+      ) : null}
 
       {secondary ? (
         <IdentityField

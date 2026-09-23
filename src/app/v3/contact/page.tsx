@@ -8,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: "Contact · Boundary First Labs",
   description:
-    "Start a conversation with Boundary First Labs about applied work, collaboration, funding, research review, products, media, education, or an unusual Open Lab case.",
+    "Get in touch with Boundary First Labs about a question, critique, practical problem, collaboration, research, funding, media, education, or something that does not fit neatly elsewhere.",
   alternates: { canonical: "/contact" },
 };
 

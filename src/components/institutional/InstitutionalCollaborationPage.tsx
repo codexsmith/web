@@ -31,23 +31,27 @@ export function InstitutionalCollaborationPage() {
         title={<>Work together where each side brings something the other needs.</>}
         lead={
           <>
-            Boundary First Labs develops research, software, methods, and prototypes. It
-            looks for people and organizations who can test them, challenge them, put them
-            to work, reach users, or help them scale.
-          </>
-        }
-        support={
-          <>
-            A collaboration can be as small as one expert review or as substantial as a
-            funded pilot, co-developed product, publication, licensing arrangement, or
-            transfer to a better long-term home. We start with the smallest useful
-            relationship and expand only when the work earns it. Stewardship stays explicit:
-            who tends the knowledge, who answers to affected people, and who maintains,
-            transfers, or retires the work after the active collaboration ends.
+            Boundary First Labs develops research, software, methods, and prototypes.
+            Collaboration puts that work against real expertise, users, infrastructure, and
+            constraints.
           </>
         }
         childLinks={institutionalChildRoutes.collaboration}
-      >
+      />
+
+      <section className={styles.collaborationExchangeSection}>
+        <InstitutionalSectionHeader
+          styles={styles}
+          eyebrow={<>WHAT EACH SIDE BRINGS</>}
+          title={<>BFL brings developed work. Collaborators bring real-world capability.</>}
+          note={
+            <>
+              Start with the smallest useful relationship. Each side should contribute
+              something the other should not have to duplicate.
+            </>
+          }
+        />
+
         <div className={styles.collaborationExchange}>
           {collaborationExchange.map((side) => (
             <article key={side.label}>
@@ -59,7 +63,7 @@ export function InstitutionalCollaborationPage() {
             </article>
           ))}
         </div>
-      </InstitutionalRouteHero>
+      </section>
 
       <section className={styles.collaborationModesSection}>
         <InstitutionalSectionHeader
@@ -212,10 +216,10 @@ export function InstitutionalCollaborationPage() {
           of value, there may simply be nothing to do yet—and that is a useful answer too.
         </p>
         <nav className={styles.collaborationCloseLinks} aria-label="Collaboration next steps">
-          <Link href="/v3/contact?type=collaboration&source=collaboration">Start a collaboration conversation <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/open-lab">Explore Open Lab <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/funding">How funding works <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/projects">See current projects <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=collaboration&source=collaboration">Start a collaboration conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/open-lab">Explore Open Lab <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/funding">How funding works <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/projects">See current projects <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>

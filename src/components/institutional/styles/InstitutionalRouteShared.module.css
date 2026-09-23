@@ -138,11 +138,11 @@
 }
 
 .routeChildLinks {
-  width: min(440px, max(100%, 407px));
+  width: min(100%, 480px);
   display: grid;
   grid-template-rows: repeat(3, auto);
   grid-auto-flow: column;
-  grid-auto-columns: minmax(200px, 1fr);
+  grid-auto-columns: minmax(0, 1fr);
   gap: 7px;
 }
 
@@ -155,8 +155,8 @@
   --child-accent-ink: #244f9a;
   --child-wash: rgba(38, 91, 177, .08);
   width: 100%;
-  min-width: 200px;
-  min-height: 58px;
+  min-width: 0;
+  min-height: 64px;
   display: grid;
   grid-template-columns: 30px minmax(0, 1fr) auto;
   align-items: center;
@@ -241,20 +241,21 @@
 
 .routeChildCopy small {
   color: var(--child-accent-ink);
-  font: 800 .48rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .16em;
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .13em;
 }
 
 .routeChildCopy strong {
   min-width: 0;
-  white-space: nowrap;
+  white-space: normal;
   overflow-wrap: normal;
-  text-wrap: nowrap;
+  word-break: normal;
+  text-wrap: balance;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: .9rem;
+  font-size: .86rem;
   font-weight: 600;
-  line-height: 1.08;
+  line-height: 1.12;
 }
 
 .routeChildArrow {

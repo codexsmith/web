@@ -119,7 +119,7 @@ export function RepresentationIntro({
       ) : (
         <header className={s.intro}>
           <div className={s.introCopy}>
-            <a href="/">Boundary First Labs / Playground</a>
+            <a href="/research">Boundary First Labs / Representation Lab</a>
             <p className={s.kicker}>INTERACTIVE INTRODUCTION · ABOUT 3 MINUTES</p>
             <h1>Same World, Different Reasoner</h1>
             <p className={s.lede}>A computer can only reason about the version of a problem we give it.</p>

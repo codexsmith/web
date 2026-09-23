@@ -22,29 +22,21 @@ const homeOrientationSummaries = {
   "choose-path": {
     eyebrow: "CHOOSE YOUR OWN PATH",
     title: "Start with why you came.",
-    description:
-      "Find the right front door for research, engineering, funding, collaboration, critique, or orientation.",
     tone: "entry",
   },
   approach: {
     eyebrow: "OUR APPROACH",
     title: "What the Lab does.",
-    description:
-      "See what the Lab produces and the four-step working method behind it.",
     tone: "method",
   },
   "operating-braid": {
     eyebrow: "OPERATING BRAID",
     title: "Three lineages become one method.",
-    description:
-      "Lean–Agile, scientific method, and agentic reasoning converge through state-based reasoning.",
     tone: "braid",
   },
   stewardship: {
     eyebrow: "STEWARDSHIP",
     title: "What succeeds still has to be cared for.",
-    description:
-      "See the obligations that keep knowledge, capability, and wider consequences inside the frame.",
     tone: "stewardship",
   },
 } as const;
@@ -109,9 +101,8 @@ function HomeOrientationMiniature({
         className={[styles.homeOrientationMiniature, styles.homeOrientationStack].join(" ")}
         aria-hidden="true"
       >
-        {["Explore", "Synthesize", "Build", "Transfer"].map((label, index) => (
+        {["Explore", "Synthesize", "Build", "Transfer"].map((label) => (
           <span key={label}>
-            <b>{String(index + 1).padStart(2, "0")}</b>
             <em>{label}</em>
             <i>→</i>
           </span>
@@ -126,20 +117,36 @@ function HomeOrientationMiniature({
         className={[styles.homeOrientationMiniature, styles.homeOrientationBraidMini].join(" ")}
         aria-hidden="true"
       >
-        <div className={styles.homeOrientationBraidLabels}>
-          <span data-stream="lean">Lean–Agile</span>
-          <span data-stream="science">Scientific method</span>
-          <span data-stream="agentic">Agentic reasoning</span>
+        <div className={styles.homeOrientationBraidIcons}>
+          <span data-stream="lean">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 7h8.5M15.5 7l-2.5-2.5M15.5 7 13 9.5M17 17H8.5M8.5 17 11 14.5M8.5 17 11 19.5" />
+            </svg>
+          </span>
+          <span data-stream="science">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 4h6M10 4v5l-4 7.5A2.4 2.4 0 0 0 8.1 20h7.8a2.4 2.4 0 0 0 2.1-3.5L14 9V4M8.7 15h6.6" />
+            </svg>
+          </span>
+          <span data-stream="agentic">
+            <svg viewBox="0 0 24 24">
+              <circle cx="7" cy="7" r="2" />
+              <circle cx="17" cy="7" r="2" />
+              <circle cx="12" cy="17" r="2" />
+              <path d="M8.8 8.2 11 15M15.2 8.2 13 15M9 7h6" />
+            </svg>
+          </span>
         </div>
         <svg
           className={styles.homeOrientationBraidFlow}
           viewBox="0 0 120 96"
           preserveAspectRatio="none"
         >
-          <path data-stream="lean" d="M0 16 C 48 16, 52 47, 103 48" />
-          <path data-stream="science" d="M0 48 C 48 48, 55 48, 103 48" />
-          <path data-stream="agentic" d="M0 80 C 48 80, 52 50, 103 48" />
-          <path className={styles.homeOrientationBraidArrow} d="M98 39 L118 48 L98 57 Z" />
+          <path data-stream="lean" d="M0 18 C 42 18, 48 47, 88 48" />
+          <path data-stream="science" d="M0 48 C 42 48, 52 48, 88 48" />
+          <path data-stream="agentic" d="M0 78 C 42 78, 48 49, 88 48" />
+          <path className={styles.homeOrientationBraidTrunk} d="M87 48 H105" />
+          <path className={styles.homeOrientationBraidArrow} d="M102 38 L119 48 L102 58 Z" />
         </svg>
         <strong>
           <svg viewBox="0 0 24 24">
@@ -159,7 +166,6 @@ function HomeOrientationMiniature({
         <svg viewBox="0 0 24 24">
           <path d="M12 4.2c2.2 1.6 4.6 2.2 6.4 2.4-.2 5.8-2.2 9.9-6.4 12.5-4.2-2.6-6.2-6.7-6.4-12.5 1.8-.2 4.2-.8 6.4-2.4z" />
         </svg>
-        <b>I</b>
       </span>
       <span data-kind="humanist">
         <svg viewBox="0 0 24 24">
@@ -167,13 +173,11 @@ function HomeOrientationMiniature({
           <circle cx="16.5" cy="9" r="2.1" />
           <path d="M4.8 18c.5-3 2-4.6 4.5-4.6s4 1.6 4.5 4.6M13.7 14.1c.8-.6 1.7-.9 2.8-.9 2.2 0 3.5 1.4 3.9 4.2" />
         </svg>
-        <b>H</b>
       </span>
       <span data-kind="ecological">
         <svg viewBox="0 0 24 24">
           <path d="M12 19v-7M12 14c-4.1-.2-6.1-2.2-6.3-6.1 4 .2 6 2.2 6.3 6.1zM12 11.5c.3-3.8 2.2-5.7 5.8-5.8-.1 3.7-2 5.6-5.8 5.8z" />
         </svg>
-        <b>E</b>
       </span>
     </div>
   );
@@ -191,7 +195,6 @@ function HomeOrientationSummary({
       <div className={styles.homeOrientationSummaryCopy}>
         <span>{summary.eyebrow}</span>
         <h3>{summary.title}</h3>
-        <p>{summary.description}</p>
         {id === "choose-path" ? (
           <Link
             className={styles.homeOrientationSummaryAction}
@@ -216,7 +219,6 @@ export function HomeOrientationSection() {
         ariaLabel="Choose a homepage section to inspect"
         layoutMode="focus-stage"
         itemOrder={homeOrientationOrder}
-        focusPeerPlacement="before"
         animatePeers
       >
         <ReflowFieldItem

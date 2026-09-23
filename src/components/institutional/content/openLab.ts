@@ -127,6 +127,8 @@ export const participationContracts = [
   },
 ] as const;
 
+export type OpenLabParticipationContract = (typeof participationContracts)[number];
+
 export const stewardshipGates = [
   "Privacy and retention",
   "Confidential-material boundaries",

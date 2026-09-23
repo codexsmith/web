@@ -8,7 +8,7 @@ export function ResearchProgramCard({
   program,
   styles,
 }: {
-  program: (typeof programs)[0];
+  program: (typeof programs)[number];
   styles: Record<string, string>;
 }) {
   return (
@@ -37,18 +37,31 @@ export function ResearchProgramCard({
         >
           <div className={styles.programHeaderContent}>
             <div className={styles.programHeaderLeft}>
-              <p className={styles.programRole}>{program.role}</p>
               <h3>{program.title}</h3>
+
+              <div className={styles.programIdentityPrimary}>
+                <LabObjectIdentity
+                  identifier={program.code}
+                  identifierLabel="CODE"
+                  kind="research"
+                  status={program.state}
+                  hideStatus
+                  variant="compact"
+                />
+              </div>
+
+              <div className={styles.programIdentityState}>
+                <LabObjectIdentity
+                  hideKind
+                  kind="research"
+                  status={program.state}
+                  statusLabel="STATE"
+                  variant="band"
+                />
+              </div>
             </div>
             <div className={styles.programHeaderRight}>
-              <LabObjectIdentity
-                identifier={program.code}
-                identifierLabel="CODE"
-                kind="research"
-                status={program.state}
-                statusLabel="STATE"
-                variant="compact"
-              />
+              <p className={styles.programRole}>{program.role}</p>
               <p className={styles.programSummary}>{program.summary}</p>
             </div>
           </div>

@@ -19,9 +19,9 @@ export function InstitutionalPublicationsPage() {
         className={styles.publicationsHero}
         eyebrow={<>PUBLICATIONS</>}
         title={<>Read the argument. Inspect the machinery behind it.</>}
-        lead={<>Boundary First Labs publishes papers, technical reports, research notes,
-          formal specifications, experiment reports, public-interest analyses,
-          reference implementations, and Research Deployment Packets.</>}
+        lead={<>Boundary First Labs publishes papers, technical reports, formal
+          specifications, experiment reports, reference implementations, and Research
+          Deployment Packets.</>}
         support={<>A publication is an important artifact. It is not automatically the whole
           research object.</>}
         childLinks={institutionalChildRoutes.publications}

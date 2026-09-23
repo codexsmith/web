@@ -33,12 +33,9 @@ export function InstitutionalFundingPage() {
         }
         support={
           <>
-            The near-term funding problem is narrower: convert an existing body of
-            research, software, methods, prototypes, and product candidates into public,
-            reviewable, useful work that can meet external evidence. Funding is also a
-            stewardship problem: scarce time, attention, infrastructure, and material
-            capacity should leave behind durable public value rather than hidden dependency
-            or displaced cost.
+            Near-term support converts existing research, software, methods, prototypes,
+            and product candidates into public, reviewable work that can meet external
+            evidence and leave behind durable value.
           </>
         }
         childLinks={institutionalChildRoutes.funding}
@@ -159,11 +156,11 @@ export function InstitutionalFundingPage() {
         </p>
 
         <nav className={styles.fundingEvidenceLinks} aria-label="Funding evidence routes">
-          <Link href="/v3/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/research">Inspect the research <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/projects">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/products">Inspect products <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/publications">Inspect publications <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/research">Inspect the research <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/projects">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/products">Inspect products <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/publications">Inspect publications <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>

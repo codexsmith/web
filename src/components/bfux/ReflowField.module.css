@@ -28,9 +28,16 @@
   z-index: var(--reflow-motion-z, 100);
 }
 
-.field[data-reflow-mode="flow"] > .item[data-reflow-state="selected"] {
+.field[data-reflow-mode="flow"][data-reflow-active="true"]
+  > .item[data-reflow-state="selected"] {
+  order: 1;
   grid-column: 1 / -1;
   z-index: 2;
+}
+
+.field[data-reflow-mode="flow"][data-reflow-active="true"]
+  > .item:not([data-reflow-state="selected"]) {
+  order: 2;
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
@@ -44,30 +51,23 @@
 
 /*
  * Focus-stage invariant:
- * - 1–4 peers share one full-width row.
- * - 5+ peers tile into balanced full-width rows, max four cards per row.
- * - the selected card begins on the row immediately after the peer rail.
+ * - the selected card owns the first full-width row.
+ * - 1–4 peers share the next full-width row.
+ * - 5+ peers tile into balanced full-width rows below, max four cards per row.
  */
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
   > .item:not([data-reflow-state="selected"]) {
-  order: 1;
+  order: 2;
   min-width: 0;
-  grid-row: var(--reflow-peer-row, 1);
+  grid-row: var(--reflow-peer-row, 2);
   grid-column: span var(--reflow-peer-span, 15);
   margin-inline: calc(var(--reflow-gap, 14px) / 2);
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  > .item[data-reflow-placement="before"],
-.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
-  > .item[data-reflow-placement="after"] {
-  order: 1;
-}
-
-.field[data-reflow-mode="focus-stage"][data-reflow-active="true"]
   > .item[data-reflow-placement="selected"] {
-  order: 2;
-  grid-row: var(--reflow-selected-row, 2);
+  order: 1;
+  grid-row: var(--reflow-selected-row, 1);
   grid-column: 1 / -1;
   width: var(--reflow-selected-width, 83.333333%);
   max-width: 100%;

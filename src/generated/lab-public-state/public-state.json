@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "0.1",
+  "projectionStatus": "initial_manual_seed",
+  "generatedDate": "2026-09-21",
+  "labRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f",
+  "webBaseRevision": "841953e5f33bb6e27d2a503d162a365604dc33ff",
+  "authority": "Initial public temporal-state seed. The Lab repository remains source authority; this web payload is a bounded downstream projection and does not promote scientific, product, publication, or institutional status.",
+  "automation": {
+    "status": "not_yet_wired",
+    "note": "This seed establishes the web-side contract that future Lab-to-web projection automation will replace without changing the rendering boundary."
+  },
+  "temporalViews": [
+    {
+      "id": "changes",
+      "label": "What Changed",
+      "href": "/changes",
+      "relation": "RECENT MOTION",
+      "question": "What materially changed recently?",
+      "description": "A bounded delta view over consequential state transitions rather than every commit or task."
+    },
+    {
+      "id": "now",
+      "label": "Now",
+      "href": "/now",
+      "relation": "PRESENT POSTURE",
+      "question": "What deserves attention now?",
+      "description": "A public projection of current priorities, dependencies, gates, and closure conditions."
+    },
+    {
+      "id": "timeline",
+      "label": "Lab Through Time",
+      "href": "/lab-through-time",
+      "relation": "LONG MEMORY",
+      "question": "How did the Lab get here?",
+      "description": "A reviewed long-horizon provenance spine of consequential historical and institutional milestones."
+    }
+  ],
+  "timeline": {
+    "registerId": "BFL-TIMELINE",
+    "registerStatus": "active_seed",
+    "authorityStatus": "canonical_lab_timeline_projection",
+    "authorityCeiling": "Durable temporal identity, cross-source historical/state-transition projection, routing, and institutional memory only. Timeline membership does not establish event truth, causal truth, scientific validity, publication promotion, product readiness, or execution authority.",
+    "events": [
+      {
+        "id": "EVENT-TIMELINE-001",
+        "sourceEventId": "EVT-MASTER-001",
+        "period": "2006–2007",
+        "category": "Provenance",
+        "title": "Magnus effect soccer-ball experiment",
+        "summary": "An early research-formation event admitted into the current canonical Timeline seed.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": [
+          "founder research formation"
+        ],
+        "unresolved": "Primary project artifacts remain recovery targets in the source timeline."
+      },
+      {
+        "id": "EVENT-TIMELINE-002",
+        "sourceEventId": "EVT-MASTER-009",
+        "period": "2014",
+        "category": "Method",
+        "title": "Process-first software design artifacts",
+        "summary": "Documented software-design artifacts enter the current representational-method lineage.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": [
+          "software design practice",
+          "representational method lineage"
+        ],
+        "unresolved": null
+      },
+      {
+        "id": "EVENT-TIMELINE-003",
+        "sourceEventId": "EVT-MASTER-013",
+        "period": "Apr–May 2018",
+        "category": "Method",
+        "title": "Agile becomes explicit delivery architecture",
+        "summary": "The provenance record marks a period where Agile practice became an explicit delivery architecture in the founder-method lineage.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": [
+          "software delivery practice",
+          "method lineage"
+        ],
+        "unresolved": null
+      },
+      {
+        "id": "EVENT-TIMELINE-004",
+        "sourceEventId": "EVT-MASTER-019",
+        "period": "2019–2021",
+        "category": "Institution",
+        "title": "Private research room",
+        "summary": "A documented period of independent research infrastructure before the current public institutional surface.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": [
+          "independent research infrastructure"
+        ],
+        "unresolved": "Approximate chronology remains source-owned and may be refined by later provenance recovery."
+      },
+      {
+        "id": "EVENT-TIMELINE-005",
+        "sourceEventId": "EVT-MASTER-030",
+        "period": "2026",
+        "category": "Institution",
+        "title": "Boundary First Labs institutionalizes accumulated experiments",
+        "summary": "The current Timeline seed marks the transition from accumulated work into Boundary First Labs as an explicit institutional research surface.",
+        "temporalStatus": "historical_observed",
+        "epistemicStatus": "reported",
+        "affectedSystems": [
+          "Boundary First Labs institution",
+          "research infrastructure"
+        ],
+        "unresolved": "Additional 2026 milestones remain to be recovered and adjudicated into durable Event identities."
+      }
+    ]
+  },
+  "provenanceGallery": {
+    "sourceRepository": "codexsmith/boundary-first-labs",
+    "sourceRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f",
+    "publicClaim": "A substantial pre-AI room-scale research environment existed.",
+    "claimCeiling": "The media establishes scale, organization, and chronology of work. It does not establish correctness, priority, or maturity of every mathematical claim.",
+    "artifacts": [
+      {
+        "id": "ARTIFACT-PROV-ROOM-SURVEY",
+        "role": "EXPANDED PHYSICAL STATE",
+        "period": "c. 2019–2021",
+        "title": "Research-room survey",
+        "imageSrc": "/provenance/lab-through-time/video-frame-01.jpg",
+        "alt": "Derived still from the research-room survey video showing the physical working environment.",
+        "description": "A five-still sequence derived from the preserved research-room survey video, showing the physical environment as a moving spatial record rather than a single page or wall crop.",
+        "establishes": "Direct moving-image evidence of a substantial pre-AI room-scale research environment and its spatial organization.",
+        "publicUse": "Yes, narrowly. The sequence establishes environment, scale, and organization; it does not establish exact dates or correctness of the mathematical work.",
+        "sha256": "2e5af7f3a03a4041d29c3cb09b83aee546acccfda1543bdf58c1a40a664e8224",
+        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_video.mp4",
+        "sequence": {
+          "sourceVideoPath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/research_room_video.mp4",
+          "sourceVideoSha256": "2e5af7f3a03a4041d29c3cb09b83aee546acccfda1543bdf58c1a40a664e8224",
+          "note": "Five derived stills preserved from the original research-room survey video and presented together as a stitched pan sequence. Exact extraction timestamps are not asserted in this web projection.",
+          "frames": [
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-01.jpg",
+              "alt": "Derived still 1 from the research-room survey video.",
+              "sha256": "5314213e45216360078ff06ecfc3b770998170d773cbad054dc2bd156ff27e79",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_01.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-02.jpg",
+              "alt": "Derived still 2 from the research-room survey video.",
+              "sha256": "3a765c9953c2447562aa799f288ad0a0f6bda854aaca651ce9fbc4e777aa1e9a",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_02.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-03.jpg",
+              "alt": "Derived still 3 from the research-room survey video.",
+              "sha256": "f685b1095dc88083fc8b2928066e674358b8eddbfb3c42b410a0f6ab1df309b5",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_03.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-04.jpg",
+              "alt": "Derived still 4 from the research-room survey video.",
+              "sha256": "3804ed0e08f72a8e21091501f9cd63e01b5e5c3b5ba3cf69e56a40f65571f3dc",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_04.jpg"
+            },
+            {
+              "imageSrc": "/provenance/lab-through-time/video-frame-05.jpg",
+              "alt": "Derived still 5 from the research-room survey video.",
+              "sha256": "9c56afd8659ad563d11005f8af7eb7e3ac453dc26c7581caa21b0f3a86790ade",
+              "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/derived/video_frame_05.jpg"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ARTIFACT-PROV-RED-BOOK",
+        "role": "COMPRESSED / RECONFIGURABLE STATE",
+        "period": "pre-2026",
+        "title": "Red Book binder",
+        "imageSrc": "/provenance/lab-through-time/red-book-binder-top-right.jpg",
+        "alt": "Cropped view of the Red Book binder emphasizing the upper-right portion of the physical research binder.",
+        "description": "A handpicked crop of the Red Book binder emphasizing the compact, layered physical research apparatus.",
+        "establishes": "The physical research environment was later compressed into a modular binder; the interpretation remains partly attributed.",
+        "publicUse": "Yes, attributed. Stronger claims about its contents require page-level inventory.",
+        "sha256": "34575c54d7529961e8b9927af1cf4655f7d5a15f95583058d7f14e22f11322c8",
+        "sourcePath": "organized_library_curated/999_Library/01_Foundations/04_biography_origin_method__provenance_collection/04_provenance_packages/research_room_circa_2018__provenance_collection/originals/red_book_binder.jpg"
+      },
+      {
+        "id": "ARTIFACT-PROV-NOTE-01",
+        "role": "WORKING MATERIAL",
+        "period": "pre-2026 corpus",
+        "title": "Research note 01",
+        "imageSrc": "/provenance/lab-through-time/research-note-01.jpg",
+        "alt": "Handwritten geometry and mathematical development on a research page.",
+        "description": "Representative handwritten geometry and mathematical development from the preserved research corpus.",
+        "establishes": "The corpus includes primary handwritten mathematical working material rather than only retrospective summaries.",
+        "publicUse": "Yes as provenance of working material; not as proof that the mathematics is correct.",
+        "sha256": "7757fbeffa28dbc8e14eb43337919f69cc28ddd1590dcdc97be198268e5aabbf",
+        "sourcePath": "organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/03_work_packets/boundary_first_labs_second_order_scientific_method_2026-08-01/source_media/research_note_01.jpg"
+      },
+      {
+        "id": "ARTIFACT-PROV-LIBRARY",
+        "role": "KNOWLEDGE SUBSTRATE",
+        "period": "pre-2026 corpus",
+        "title": "Technical library",
+        "imageSrc": "/provenance/lab-through-time/technical-library-right-shelf.jpg",
+        "alt": "Cropped technical-library shelf ending at the book Deep Learning.",
+        "description": "A handpicked shelf crop of the technical library, ending at Deep Learning and emphasizing the computation and AI reading environment.",
+        "establishes": "The physical research environment included a broad technical knowledge substrate alongside the notes and diagrams.",
+        "publicUse": "Yes as environmental provenance; it does not establish mastery or correctness of downstream claims.",
+        "sha256": "6f4ae0e66ec77e7e585fec35ea2ca7eb18241832824941637edf2acfa7aa7192",
+        "sourcePath": "organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/03_work_packets/boundary_first_labs_second_order_scientific_method_2026-08-01/source_media/technical_library.jpg"
+      }
+    ]
+  }
+}

@@ -31,9 +31,8 @@ export function InstitutionalStartPage() {
         }
         support={
           <>
-            These are suggested traversals, not separate versions of the institution.
-            Nothing changes truth, status, evidence, or authority because a different
-            audience entered through a different door.
+            These are suggested paths through the same public Lab. Truth, status, evidence,
+            and authority do not change with the audience.
           </>
         }
         childLinks={institutionalChildRoutes.start}
@@ -98,8 +97,8 @@ export function InstitutionalStartPage() {
           also valid when the institutional lane is not obvious yet.
         </p>
         <div>
-          <Link href="/v3/atlas">Browse the Lab Atlas <span aria-hidden="true">→</span></Link>
-          <Link href="/v3/contact?type=general&source=start">General contact <span aria-hidden="true">→</span></Link>
+          <Link href="/atlas">Browse the Lab Atlas <span aria-hidden="true">→</span></Link>
+          <Link href="/contact?type=general&source=start">General contact <span aria-hidden="true">→</span></Link>
         </div>
       </section>
     </InstitutionalPageShell>

@@ -21,6 +21,9 @@ const publicationCss = fs.readFileSync("src/components/institutional/styles/Publ
 const openLab = fs.readFileSync("src/components/institutional/InstitutionalOpenLabPage.tsx", "utf8");
 const openLabContext = fs.readFileSync("src/components/institutional/sections/OpenLabContextSection.tsx", "utf8");
 const openLabCss = fs.readFileSync("src/components/institutional/styles/OpenLab.module.css", "utf8");
+const aiGovernance = fs.readFileSync("src/components/institutional/InstitutionalAiGovernancePage.tsx", "utf8");
+const aiGovernanceContext = fs.readFileSync("src/components/institutional/sections/AiGovernanceContextSection.tsx", "utf8");
+const aiGovernanceCss = fs.readFileSync("src/components/institutional/styles/AiGovernance.module.css", "utf8");
 const about = fs.readFileSync("src/components/institutional/InstitutionalAboutPage.tsx", "utf8");
 const aboutGroups = fs.readFileSync("src/components/institutional/sections/AboutReflowGroups.tsx", "utf8");
 const aboutCss = fs.readFileSync("src/components/institutional/styles/About.module.css", "utf8");
@@ -52,8 +55,9 @@ expect(!component.includes("<motion.section"), "the field container must snap ra
 expect(component.includes("layoutId={"), "each plate must expose a stable Motion identity across grid reflow");
 expect(component.includes("<motion.article"), "Reflow items must delegate geometry interpolation to Motion");
 expect(component.includes('layoutAnchor={{ x: 0.5, y: 0.5 }}'), "focus-stage resize should grow around the card center rather than snap from a corner");
-expect(component.includes("duration: 0.52"), "focus-stage card should use a brisk but perceptible translation and resize");
-expect(component.includes("ease: [0.45, 0, 0.55, 1]"), "selected card motion should ease in and out rather than snap toward its destination");
+expect(component.includes('type: "spring"'), "focus-stage card should use a spring layout transition rather than an abrupt resize");
+expect(component.includes("bounce: 0.15"), "focus-stage spring should remain restrained rather than playful");
+expect(component.includes("duration: 0.5"), "focus-stage card should use a brisk but perceptible translation and resize");
 expect(component.includes("const snapLayoutTransition"), "non-selected field objects must have an explicit snap transition");
 expect(component.includes("previousSelectedId"), "Reflow Field must remember the immediately prior focus object for close continuity");
 expect(component.includes("selected || context.previousSelectedId === id"), "opening and closing focus cards must both carry layout motion");
@@ -72,7 +76,7 @@ expect(reflowCss.includes("column-gap: 0"), "60-track virtual grids must not mul
 expect(reflowCss.includes("margin-inline: calc(var(--reflow-gap, 14px) / 2)"), "virtual-grid cards must restore authored visual spacing without widening the field");
 expect(reflowCss.includes("row-gap: var(--reflow-gap, 14px)"), "virtual-grid rows must retain the authored vertical gap");
 expect(component.includes('layoutMode?: ReflowLayoutMode'), "Reflow Field must expose a reusable layout-mode contract");
-expect(component.includes("Math.ceil(remainingIds.length / 2)"), "focus-stage must balance remaining items above and below the selected object");
+expect(!component.includes("focusPeerPlacement"), "Reflow must expose one selected-first ordering invariant rather than per-surface peer placement overrides");
 expect(research.includes('<div className={styles.researchProgramGrid}>'), "Active Surfaces must remain ordinary always-visible substantive content");
 expect(research.includes("<ResearchContextSection />"), "Research page must compose the contextual field as one modular section");
 expect(researchContext.includes('className={styles.researchContextGrid}'), "supporting Research context must own the Reflow Field");
@@ -145,6 +149,17 @@ expect(openLabContext.includes('id="capability-transfer"'), "Open Lab Context mu
 expect(openLabCss.includes("--reflow-focus-span: 6"), "five-card Open Lab focus-stage must place two compact cards per wide row");
 expect(openLabCss.includes(".openLabContextAgency { --reflow-span: 5; }"), "Open Lab Context REST state must retain authored magazine spans");
 expect(openLabCss.includes(".openLabContextCapability { --reflow-span: 6; }"), "Open Lab capability transfer must participate in the authored REST composition");
+expect(aiGovernance.includes("<AiGovernanceContextSection />"), "AI Governance must move supporting governance machinery into one modular Reflow section");
+expect(aiGovernanceContext.includes('layoutMode="focus-stage"'), "AI Governance Context must use focus-stage reflow");
+expect(aiGovernanceContext.includes("itemOrder={governanceContextOrder}"), "AI Governance Context must declare stable source ordering");
+expect((aiGovernanceContext.match(/<GovernanceCard/g) || []).length === 6, "AI Governance Context must expose six inspectable supporting surfaces");
+for (const id of ["governance-boundary", "accountable-consequence", "deployment-claim", "review-surfaces", "lab-self-governance", "claim-firewall"]) {
+  expect(aiGovernanceContext.includes(`id="${id}"`), `AI Governance Context must retain ${id}`);
+}
+expect(aiGovernanceCss.includes(".governanceContextGrid"), "AI Governance must style a dedicated Reflow context field");
+expect(aiGovernanceCss.includes("--reflow-columns: 12"), "AI Governance Reflow must use an authored twelve-column rest field");
+expect(aiGovernanceCss.includes("height: 112px"), "AI Governance focus-stage peers must contract to compact plates");
+expect(!aiGovernance.includes('href="/v3/'), "AI Governance public actions must use canonical public paths");
 expect(about.includes("<AboutReflowGroups />"), "About page must compose its three doctrine chapters as Reflow groups");
 expect((aboutGroups.match(/<ReflowField(?:\s|>)/g) || []).length === 3, "About must expose one independent Reflow field per narrative chapter");
 expect((aboutGroups.match(/layoutMode="focus-stage"/g) || []).length === 3, "All About chapter fields must use focus-stage reflow");
@@ -170,6 +185,7 @@ for (const [name, source] of [
   ["Apparatus", apparatusContext],
   ["Publications", publicationContext],
   ["Open Lab", openLabContext],
+  ["AI Governance", aiGovernanceContext],
 ]) {
   expect(!/index="\d+"/.test(source), `${name} Reflow summaries must not render ordinal number plates`);
 }
@@ -205,19 +221,22 @@ expect(reflowCss.includes('> .item:not([data-reflow-state="selected"])'), "Reflo
 expect(reflow.includes("MAX_FOCUS_PEER_ROW_ITEMS = 4"), "Focus-stage peer rail must cap compact rows at four cards");
 expect(reflow.includes("focusPeerTileForIndex"), "Focus-stage must compute balanced peer tiles");
 expect(reflow.includes('"--reflow-peer-row-count": peerRowCount'), "Reflow must publish the active peer row count");
-expect(reflow.includes('"--reflow-selected-row": peerRowCount + 1'), "Selected content must begin after every compact peer row");
+expect(reflow.includes('"--reflow-selected-row": 1'), "Selected content must own the first focus-stage row");
 expect(reflowCss.includes("repeat(60, minmax(0, 1fr))"), "Focus-stage peer tiling must use a divisible full-width grid");
-expect(reflowCss.includes("grid-row: var(--reflow-peer-row, 1)"), "Shrunk peers must use their computed compact row");
+expect(reflow.includes('"--reflow-peer-row": peerTile.rowIndex + 2'), "Compact peers must begin on the row after the selected card");
+expect(reflowCss.includes("grid-row: var(--reflow-peer-row, 2)"), "Shrunk peers must use their computed rows beneath the selected card");
 expect(reflowCss.includes("grid-column: span var(--reflow-peer-span, 15)"), "Shrunk peers must stretch each compact row edge to edge");
-expect(reflowCss.includes("grid-row: var(--reflow-selected-row, 2)"), "Selected Reflow content must follow the complete peer rail");
+expect(reflowCss.includes("grid-row: var(--reflow-selected-row, 1)"), "Selected Reflow content must occupy the first focus-stage row");
 expect(reflowCss.includes("grid-column: 1 / -1;"), "Selected Reflow content must span the full peer grid before applying its bounded width");
-expect(reflowCss.includes("--reflow-selected-width, 83.333333%"), "Selected Reflow content must retain a bounded second-row stage");
+expect(reflowCss.includes('data-reflow-mode="flow"][data-reflow-active="true"]'), "Flow-mode Reflows must also apply selected-first ordering");
+expect(reflowCss.includes('> .item:not([data-reflow-state="selected"]) {\n  order: 2;'), "Unselected Reflow peers must follow the selected card");
+expect(reflowCss.includes("--reflow-selected-width, 83.333333%"), "Selected Reflow content must retain a bounded first-row stage");
 expect(reflowCss.includes('data-reflow-rest-layout="rectangle"][data-reflow-active="false"] > .item'), "Rectangle layout rules must not leak into nested Reflow fields");
 expect(audienceJourneys.includes('restLayout="rectangle"'), "Audience journey REST cards must tile into a complete rectangle");
 
 expect(homeOrientation.includes('layoutMode="focus-stage"'), "Homepage orientation must use focus-stage reflow");
 expect(homeOrientation.includes("animatePeers"), "Homepage orientation must animate context peers with the selected card");
-expect(homeOrientation.includes('focusPeerPlacement="before"'), "Homepage orientation must keep all three context peers together before the selected card");
+expect(!homeOrientation.includes("focusPeerPlacement"), "Homepage orientation must inherit the shared selected-first Reflow ordering");
 expect(homeOrientation.includes("itemOrder={homeOrientationOrder}"), "Homepage orientation must declare stable source ordering");
 expect((homeOrientation.match(/<ReflowFieldItem/g) || []).length === 4, "Homepage orientation must expose exactly four Reflow sections");
 for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) {
@@ -225,6 +244,14 @@ for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) 
 }
 expect(homeCss.includes(".homeOrientationGrid"), "Homepage orientation must style a dedicated Reflow field");
 expect(homeOrientation.includes("HomeOrientationMiniature"), "Homepage orientation summaries must preview their internal content grammar");
+expect(!homeOrientation.includes("description:"), "Homepage orientation REST summaries must not carry redundant descriptive paragraphs");
+expect(!homeOrientation.includes("padStart(2"), "Our Approach miniature must keep the four method verbs without ordinal numbers");
+expect(homeOrientation.includes("homeOrientationBraidIcons"), "Operating Braid miniature must use icon-only lineage inputs");
+expect(!homeOrientation.includes(">Lean–Agile<") && !homeOrientation.includes(">Scientific method<") && !homeOrientation.includes(">Agentic reasoning<"), "Operating Braid miniature must not retain lineage text labels");
+expect(homeOrientation.includes("homeOrientationBraidTrunk") && homeOrientation.includes("homeOrientationBraidArrow"), "Operating Braid miniature must preserve a visible confluence trunk and arrow");
+expect(!homeOrientation.includes("<b>I</b>") && !homeOrientation.includes("<b>H</b>") && !homeOrientation.includes("<b>E</b>"), "Stewardship miniature must remain icon-only");
+expect(homeCss.includes("clamp(1.08rem, 1.35vw, 1.36rem)"), "Homepage orientation module names must be the dominant title scale");
+expect(homeCss.includes("clamp(.98rem, 1.15vw, 1.16rem)"), "Homepage orientation sentence subheads must remain smaller than module titles");
 expect(!homeOrientation.includes("Start with why you came, not with the Lab&apos;s org chart."), "Expanded homepage Reflow details must not repeat the selected summary title");
 expect(!homeOrientation.includes("<h2>Three practical lineages braid into one recursive method.</h2>"), "Operating Braid detail must not repeat its selected summary title");
 expect(!homeOrientation.includes("<h2>What succeeds still has to be cared for.</h2>"), "Stewardship detail must not repeat its selected summary title");
@@ -237,13 +264,15 @@ expect(!homeOrientation.includes("audienceEntryLead"), "Choose Your Own Path det
 expect(homeOrientation.includes("homeOrientationSummaryAction"), "Choose Your Own Path must expose its all-paths action in the selected header");
 expect(homeOrientation.includes("homeOrientationAudienceDetail"), "Choose Your Own Path audience grid must use the full expanded detail width");
 expect(homeCss.includes(".homeOrientationMosaic"), "Choose Your Own Path must expose a mosaic preview");
+expect(homeCss.includes("height: 116px") && homeCss.includes("max-height: 116px"), "Homepage REST miniatures must share one fixed preview height so both card rows align");
+expect(homeCss.includes("grid-template-rows: repeat(4, minmax(0, 1fr))"), "Our Approach miniature must compress its four steps inside the shared preview height");
 expect(homeCss.includes(".homeOrientationStack"), "Our Approach must expose stacked-row preview");
 expect(homeCss.includes(".homeOrientationBraidMini"), "Operating Braid must expose a three-to-one preview");
 expect(homeCss.includes(".homeOrientationStewardMini"), "Stewardship must expose a three-box preview");
 expect(homeCss.includes("--reflow-columns: 12"), "Homepage orientation REST state must use a twelve-column field");
 expect(homeCss.includes("--reflow-span: 6"), "Homepage orientation REST state must compose as a two-by-two field");
 expect(homeCss.includes("--reflow-focus-span: 4"), "Homepage focus-stage must fit all three desktop context cards on one row");
-expect(homeCss.includes("order: 1"), "Homepage non-selected context cards must share one row before the selected card");
+expect(!homeCss.includes('.homeOrientationCard[data-reflow-state="selected"] {\n  order: 2;'), "Homepage must not override the shared selected-first Reflow ordering");
 expect(homeCss.includes("height: 112px"), "Homepage focus-stage peers must contract to compact context plates");
 expect(homeCss.includes('.homeOrientationCard[data-reflow-state="selected"]'), "Homepage selected section must have an explicit committed-inspection state");
 

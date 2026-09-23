@@ -12,6 +12,9 @@ const previewAlias = read("src/app/institutional-preview/page.tsx");
 const switcher = read("src/components/version-switch/DevProductSwitch.tsx");
 const institutionalHome = read("src/components/institutional/InstitutionalHomePage.tsx");
 const institutionalChrome = read("src/components/institutional/InstitutionalChrome.tsx");
+const contentGraph = read("src/lib/content.ts");
+const siteRelease = read("src/lib/site-release.ts");
+const nextConfig = read("next.config.ts");
 
 expect(
   rootPage.includes("InstitutionalHomePage") &&
@@ -52,6 +55,40 @@ expect(
     !institutionalHome.includes("Enter the Lab") &&
     !institutionalChrome.includes("Enter the Lab"),
   "the institutional surface must keep /v2 available by route without publicly advertising the Lab engine",
+);
+
+
+const contentNodePaths = [
+  ...new Set(
+    [...contentGraph.matchAll(/\bpath:\s*"([^"]+)"/g)]
+      .map((match) => `/${match[1]}`)
+      .filter((route) => route !== "/"),
+  ),
+];
+const institutionalRoutes = new Set(
+  [...siteRelease.matchAll(/"([^"]+)"/g)]
+    .map((match) => match[1])
+    .filter((route) => route.startsWith("/")),
+);
+const legacyRedirectSources = new Set(
+  [...nextConfig.matchAll(/source:\s*"([^"]+)"/g)]
+    .map((match) => match[1]),
+);
+const uncoveredContentNodePaths = contentNodePaths.filter(
+  (route) => !institutionalRoutes.has(route) && !legacyRedirectSources.has(route),
+);
+
+expect(
+  uncoveredContentNodePaths.length === 0,
+  `every canonical content-node route must resolve through v3 or an explicit canonical redirect; uncovered: ${uncoveredContentNodePaths.join(", ")}`,
+);
+expect(
+  read("src/app/v3/[...slug]/page.tsx").includes("InstitutionalContentNodePage"),
+  "the v3 catch-all must render admitted content nodes through the institutional content-node surface",
+);
+expect(
+  !read("src/app/v3/[...slug]/page.tsx").includes("WorldApp"),
+  "admitted v3 content-node routes must never fall back to the legacy WorldApp",
 );
 
 console.log("Version route contracts passed.");

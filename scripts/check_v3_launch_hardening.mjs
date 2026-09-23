@@ -29,7 +29,7 @@ function routeFromPage(file) {
 }
 
 function canonicalRouteFromPage(file) {
-  const route = file === rootPageFile ? "/" : canonicalRouteFromPage(file);
+  const route = file === rootPageFile ? "/" : routeFromPage(file);
   if (route === "/v3") return "/";
   return route.startsWith("/v3/") ? route.slice(3) : route;
 }
@@ -46,9 +46,35 @@ const routeInventory = read("src/lib/site-release.ts");
 const routeBlock = routeInventory.match(
   /institutionalPublicRoutes\s*=\s*\[([\s\S]*?)\]\s*as const/,
 )?.[1];
-const inventoryRoutes = new Set(
-  routeBlock ? [...routeBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1]) : [],
-);
+const contentNodeRouteBlock = routeInventory.match(
+  /institutionalContentNodeRoutes\s*=\s*\[([\s\S]*?)\]\s*as const/,
+)?.[1];
+const contentNodeRoutes = contentNodeRouteBlock
+  ? [...contentNodeRouteBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1])
+  : [];
+const inventoryRoutes = new Set([
+  ...(routeBlock ? [...routeBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1]) : []),
+  ...contentNodeRoutes,
+]);
+
+const dynamicContentRouteFile = path.join(root, "src/app/v3/[...slug]/page.tsx");
+if (contentNodeRoutes.length) {
+  if (!fs.existsSync(dynamicContentRouteFile)) {
+    fail("institutional content-node routes require the v3 catch-all renderer");
+  } else {
+    const dynamicContentRoute = fs.readFileSync(dynamicContentRouteFile, "utf8");
+    if (!dynamicContentRoute.includes("InstitutionalContentNodePage")) {
+      fail("v3 catch-all must render admitted content nodes through InstitutionalContentNodePage");
+    }
+    if (!dynamicContentRoute.includes("institutionalContentNodeRoutes")) {
+      fail("v3 catch-all must be bounded by institutionalContentNodeRoutes");
+    }
+    if (!dynamicContentRoute.includes("generateMetadata")) {
+      fail("v3 catch-all must generate metadata for admitted content nodes");
+    }
+  }
+  contentNodeRoutes.forEach((route) => routeSet.add(route));
+}
 
 for (const route of [...routeSet].sort()) {
   if (!inventoryRoutes.has(route)) {
@@ -158,6 +184,22 @@ if (
   !nextConfig.includes("async rewrites()")
 ) {
   fail("next.config.ts must own canonical institutional rewrites plus /v3 compatibility redirects");
+}
+if (
+  !nextConfig.includes('"/labs/distinction-space"') ||
+  !nextConfig.includes('"/labs/representation-lab"') ||
+  !nextConfig.includes("rewrittenInstitutionalRoutes")
+) {
+  fail("live labs must bypass the v3 rewrite layer and resolve from canonical App Router pages");
+}
+
+for (const nativeLabPage of [
+  "src/app/labs/distinction-space/page.tsx",
+  "src/app/labs/representation-lab/page.tsx",
+]) {
+  if (!fs.existsSync(path.join(root, nativeLabPage))) {
+    fail("missing canonical live-lab route: " + nativeLabPage);
+  }
 }
 for (const header of [
   "X-Content-Type-Options",

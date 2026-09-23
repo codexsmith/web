@@ -9,127 +9,121 @@
 }
 
 .aiGovernanceHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(420px, .82fr);
+  gap: clamp(42px, 6vw, 96px);
+  align-items: stretch;
+  padding: clamp(62px, 7vw, 108px) clamp(30px, 7vw, 112px);
+  border-bottom: 2px solid var(--old-gold);
   background:
     radial-gradient(circle at 78% 18%, rgba(61, 119, 145, .1), transparent 30%),
     linear-gradient(180deg, #fbfcfc, #eef3f3);
 }
 
-.governanceHeroInstrument {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 22px;
-  padding: clamp(30px, 4vw, 56px);
-  border-left: 1px solid var(--governance-line);
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255,255,255,.035) 0 1px,
-      transparent 1px 40px
-    ),
-    linear-gradient(145deg, #173047, #0d1d2b 78%);
-  color: #eef5f7;
+.aiGovernanceHero > div:first-child {
+  align-self: center;
+  max-width: 920px;
 }
 
-.governanceHeroEyebrow {
-  color: #9fc0d0;
-  font: 800 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+.aiGovernanceHero h1 {
+  max-width: 980px;
+  margin: 14px 0 22px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.65rem, 5.4vw, 6.8rem);
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .92;
+}
+
+.governanceHeroInstrument {
+  width: min(100%, 286px);
+  min-height: 0;
+  align-self: center;
+  justify-self: end;
+}
+
+.governanceHeroSignalCard {
+  width: fit-content;
+  padding: 14px;
+  border: 1px solid rgba(16,32,54,.24);
+  border-top: 6px solid var(--royal-blue);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(239,244,247,.98));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 4px 0 rgba(16,32,54,.12),
+    0 18px 34px rgba(16,32,54,.12);
+}
+
+.governanceHeroSignalLabel {
+  display: block;
+  margin-bottom: 10px;
+  color: #5f6e82;
+  font: 800 .52rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .16em;
 }
 
-.governanceHeroRail {
+.governanceHeroTags {
   display: grid;
-  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);
+  justify-items: start;
+  gap: 7px;
+}
+
+.governanceHeroTags > strong {
+  width: 224px;
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  padding: 0 14px;
+  border: 1px solid rgba(16,32,54,.2);
+  border-left: 8px solid #63a6c1;
+  background: color-mix(in srgb, #63a6c1 13%, white);
+  color: #214f65;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 2px 0 rgba(16,32,54,.09),
+    0 8px 16px rgba(16,32,54,.05);
 }
 
-.governanceHeroRail > div {
-  min-height: 138px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 16px;
-  border: 1px solid rgba(224,237,244,.2);
-  background: rgba(255,255,255,.035);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+.governanceHeroTags > strong i {
+  width: 11px;
+  height: 11px;
+  border: 2px solid color-mix(in srgb, currentColor 76%, transparent);
+  border-radius: 1px;
+  background: currentColor;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, currentColor 10%, transparent),
+    inset 0 1px 1px rgba(255,255,255,.35);
 }
 
-.governanceHeroRail > div[data-tone="forge"] {
-  border-top: 5px solid #63a6c1;
-}
-
-.governanceHeroRail > div[data-tone="certify"] {
-  border-top: 5px solid #d1a34e;
-}
-
-.governanceHeroRail > div[data-tone="forbid"] {
-  border-top: 5px solid #c86a6a;
-}
-
-.governanceHeroRail span,
-.governanceHeroRail small {
-  color: #9db2c0;
-  font: 700 .52rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .08em;
-}
-
-.governanceHeroRail strong {
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
-  font-weight: 500;
-}
-
-.governanceHeroRail > i {
-  color: #8199a8;
-  font-style: normal;
-}
-
-.governanceHeroInstrument blockquote {
-  margin: 0;
-  padding: 16px 0 16px 18px;
-  border-left: 5px solid #d1a34e;
-  color: #f2e0aa;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.05rem, 1.45vw, 1.4rem);
-  line-height: 1.3;
-}
-
-.governanceHeroStatus {
-  display: grid;
-  gap: 5px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(224,237,244,.16);
-}
-
-.governanceHeroStatus span {
-  color: #8da6b5;
-  font: 800 .5rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+.governanceHeroTags > strong span {
+  font: 800 clamp(1.05rem, 1.45vw, 1.32rem)/1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .12em;
 }
 
-.governanceHeroStatus strong {
-  color: #dce8ed;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: .92rem;
-  font-weight: 500;
+.governanceHeroTags > strong[data-tone="certify"] {
+  border-left-color: #d1a34e;
+  background: color-mix(in srgb, #d1a34e 15%, white);
+  color: #775915;
+}
+
+.governanceHeroTags > strong[data-tone="forbid"] {
+  border-left-color: #c86a6a;
+  background: color-mix(in srgb, #c86a6a 13%, white);
+  color: #7b3434;
 }
 
 .forgeSection {
-  display: grid;
-  grid-template-columns: minmax(260px,.72fr) minmax(0,1.35fr) minmax(240px,.7fr);
-  gap: 28px;
-  padding: 40px clamp(30px, 5vw, 78px);
+  padding: 38px clamp(30px, 5vw, 78px) 42px;
   border-bottom: 1px solid var(--governance-line);
   background: #fff;
 }
 
 .forgeLead {
-  padding-right: 28px;
-  border-right: 1px solid var(--governance-line);
+  max-width: 520px;
 }
 
 .forgeLead h2,
@@ -147,7 +141,6 @@
   line-height: .98;
 }
 
-.forgeLead > p:last-child,
 .boundaryLead > p:last-child,
 .certificateLead > p,
 .selfGovernanceLead > p:last-child,
@@ -159,26 +152,6 @@
   line-height: 1.62;
 }
 
-.forgeQuestions {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 8px;
-}
-
-.forgeQuestions span {
-  min-height: 76px;
-  display: flex;
-  align-items: center;
-  padding: 14px 16px;
-  border: 1px solid var(--governance-line);
-  background: linear-gradient(180deg, #fbfdfd, #f1f5f5);
-  color: #30445b;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: .9rem;
-  line-height: 1.35;
-}
-
-.forgeQuote,
 .boundaryQuestion {
   margin: 0;
   align-self: stretch;
@@ -198,6 +171,104 @@
   padding: 38px clamp(30px, 5vw, 78px) 44px;
   border-bottom: 1px solid var(--governance-line);
   background: var(--governance-paper);
+}
+
+.doctrineInstrument {
+  max-width: 1040px;
+  margin: 20px auto 22px;
+  padding: clamp(26px, 3vw, 42px);
+  border: 1px solid rgba(224,237,244,.18);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,.035) 0 1px,
+      transparent 1px 40px
+    ),
+    linear-gradient(145deg, #173047, #0d1d2b 78%);
+  color: #eef5f7;
+  box-shadow:
+    0 4px 0 rgba(16,32,54,.18),
+    0 16px 32px rgba(16,32,54,.14);
+}
+
+.doctrineInstrumentEyebrow {
+  display: block;
+  margin-bottom: 16px;
+  color: #9fc0d0;
+  font: 800 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .16em;
+}
+
+.doctrineInstrumentRail {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.doctrineInstrumentRail > div {
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid rgba(224,237,244,.2);
+  background: rgba(255,255,255,.035);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.doctrineInstrumentRail > div[data-tone="forge"] { border-top: 5px solid #63a6c1; }
+.doctrineInstrumentRail > div[data-tone="certify"] { border-top: 5px solid #d1a34e; }
+.doctrineInstrumentRail > div[data-tone="forbid"] { border-top: 5px solid #c86a6a; }
+
+.doctrineInstrumentRail strong {
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+  font-weight: 500;
+}
+
+.doctrineInstrumentRail small {
+  color: #9db2c0;
+  font: 700 .52rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+}
+
+.doctrineInstrumentRail > i {
+  color: #8199a8;
+  font-style: normal;
+}
+
+.doctrineInstrument blockquote {
+  margin: 18px 0 0;
+  padding: 16px 0 16px 18px;
+  border-left: 5px solid #d1a34e;
+  color: #f2e0aa;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.4rem);
+  line-height: 1.3;
+}
+
+.doctrineInstrumentStatus {
+  display: grid;
+  gap: 5px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(224,237,244,.16);
+}
+
+.doctrineInstrumentStatus span {
+  color: #8da6b5;
+  font: 800 .5rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .12em;
+}
+
+.doctrineInstrumentStatus strong {
+  color: #dce8ed;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: .92rem;
+  font-weight: 500;
 }
 
 .doctrineGrid {
@@ -643,6 +714,131 @@
   line-height: 1.48;
 }
 
+.governanceContext {
+  padding: 38px clamp(30px, 5vw, 78px) 46px;
+  border-bottom: 1px solid var(--governance-line);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.48), transparent 18%),
+    #e7edef;
+}
+
+.governanceContextFrame {
+  min-width: 0;
+}
+
+.governanceContextGrid {
+  --reflow-columns: 12;
+  --reflow-gap: 12px;
+  --reflow-focus-span: 4;
+  --reflow-selected-start: 2;
+  --reflow-selected-span: 10;
+  margin-top: 20px;
+}
+
+.governanceContextCard {
+  min-height: 166px;
+  padding: 16px;
+  border: 1px solid rgba(16,32,54,.24);
+  border-top: 6px solid var(--governance-forge);
+  background: linear-gradient(180deg, #fff, #f1f5f6);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 rgba(16,32,54,.12),
+    0 10px 22px rgba(16,32,54,.08);
+}
+
+.governanceContextCard[data-tone="boundary"] { border-top-color: var(--governance-certify); }
+.governanceContextCard[data-tone="consequence"] { border-top-color: var(--governance-forge); }
+.governanceContextCard[data-tone="certificate"] { border-top-color: var(--governance-certify); }
+.governanceContextCard[data-tone="audit"] { border-top-color: var(--osha-blue); }
+.governanceContextCard[data-tone="self"] { border-top-color: var(--osha-green); }
+.governanceContextCard[data-tone="firewall"] { border-top-color: var(--governance-forbid); }
+
+.contextBoundary { --reflow-span: 5; }
+.contextConsequence { --reflow-span: 7; }
+.contextCertificate { --reflow-span: 7; }
+.contextAudit { --reflow-span: 5; }
+.contextSelfGovernance { --reflow-span: 6; }
+.contextFirewall { --reflow-span: 6; }
+
+.governanceContextSummary h3 {
+  margin: 8px 0 8px;
+  color: var(--governance-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.22rem, 1.55vw, 1.62rem);
+  font-weight: 500;
+  letter-spacing: -.025em;
+  line-height: 1.05;
+}
+
+.governanceContextSummary > p:last-child {
+  max-width: 620px;
+  margin: 0;
+  color: var(--governance-muted);
+  font-size: .76rem;
+  line-height: 1.48;
+}
+
+.governanceContextGrid[data-reflow-active="true"]
+  .governanceContextCard:not([data-reflow-state="selected"]) {
+  height: 112px;
+  min-height: 112px;
+  padding: 10px 12px;
+  overflow: hidden;
+}
+
+.governanceContextGrid[data-reflow-active="true"]
+  .governanceContextCard:not([data-reflow-state="selected"])
+  .sectionIndex {
+  margin-bottom: 5px;
+  font-size: .48rem;
+}
+
+.governanceContextGrid[data-reflow-active="true"]
+  .governanceContextCard:not([data-reflow-state="selected"])
+  .governanceContextSummary h3 {
+  margin: 4px 0 0;
+  font-size: clamp(.9rem, 1vw, 1.05rem);
+}
+
+.governanceContextGrid[data-reflow-active="true"]
+  .governanceContextCard:not([data-reflow-state="selected"])
+  .governanceContextSummary > p:last-child {
+  display: none;
+}
+
+.governanceContextCard[data-reflow-state="selected"] {
+  min-height: 0;
+  border-top-width: 8px;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 4px 0 rgba(16,32,54,.16),
+    0 16px 30px rgba(16,32,54,.13);
+}
+
+.governanceDetail {
+  display: grid;
+  gap: 14px;
+}
+
+.contextGovernanceQuote {
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid rgba(16,32,54,.18);
+  border-left: 6px solid var(--governance-forge);
+  background: #e8f1f4;
+  color: #234c5f;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.42;
+}
+
+.contextGovernanceQuote[data-tone="certificate"] {
+  border-left-color: var(--governance-certify);
+  background: #f5efe3;
+  color: #654713;
+}
+
 .governanceClose {
   padding: 48px clamp(30px, 8vw, 120px) 56px;
   background:
@@ -692,8 +888,21 @@
   outline-offset: 3px;
 }
 
+@media (max-width: 1080px) {
+  .aiGovernanceHero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-left: clamp(26px, 6vw, 72px);
+    padding-right: clamp(26px, 6vw, 72px);
+  }
+
+  .aiGovernanceHero > div:first-child {
+    max-width: none;
+  }
+
+}
+
 @media (max-width: 1160px) {
-  .forgeSection,
   .boundarySection,
   .certificateSection,
   .selfGovernanceSection,
@@ -701,7 +910,6 @@
     grid-template-columns: 1fr;
   }
 
-  .forgeLead,
   .boundaryLead,
   .certificateLead,
   .selfGovernanceLead,
@@ -710,10 +918,6 @@
     padding-bottom: 20px;
     border-right: 0;
     border-bottom: 1px solid var(--governance-line);
-  }
-
-  .forgeQuote {
-    min-height: 120px;
   }
 
   .doctrineGrid,
@@ -735,19 +939,65 @@
   }
 }
 
-@media (max-width: 760px) {
-  .governanceHeroInstrument {
-    border-top: 1px solid var(--governance-line);
-    border-left: 0;
+@media (max-width: 1100px) {
+  .governanceContextGrid {
+    --reflow-columns: 6;
+    --reflow-focus-span: 2;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 6;
   }
 
-  .governanceHeroRail {
+  .governanceContextCard {
+    --reflow-span: 3;
+  }
+}
+
+@media (max-width: 760px) {
+  .governanceHeroSignalCard {
+    padding: 14px;
+  }
+
+  .governanceHeroTags > strong {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .governanceHeroTags > strong span {
+    font-size: 1.02rem;
+  }
+
+  .doctrineInstrumentRail {
     grid-template-columns: 1fr;
   }
 
-  .governanceHeroRail > i {
+  .doctrineInstrumentRail > i {
     display: none;
   }
+
+  .aiGovernanceHero {
+    padding: 46px 20px 34px;
+  }
+
+  .aiGovernanceHero h1 {
+    font-size: clamp(2.8rem, 12vw, 4.2rem);
+  }
+
+  .governanceHeroInstrument {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .governanceContextGrid {
+    --reflow-columns: 1;
+    --reflow-focus-span: 1;
+    --reflow-selected-start: 1;
+    --reflow-selected-span: 1;
+  }
+
+  .governanceContextCard {
+    --reflow-span: 1;
+  }
+
 
   .forgeSection,
   .doctrineSection,
@@ -757,12 +1007,12 @@
   .auditSection,
   .selfGovernanceSection,
   .firewallSection,
+  .governanceContext,
   .governanceClose {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  .forgeQuestions,
   .distinctionGrid,
   .doctrineGrid,
   .auditGrid,

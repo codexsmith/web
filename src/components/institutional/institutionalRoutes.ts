@@ -3,7 +3,7 @@ export const institutionalRoutes = [
   { label: "Research", href: "/research" },
   { label: "Products", href: "/products" },
   { label: "Projects", href: "/projects" },
-  { label: "Publications", href: "/publications" },
+  { label: "Applied Work", href: "/applied-work" },
   { label: "Open Lab", href: "/open-lab" },
 ] as const;
 
@@ -26,21 +26,21 @@ const institutionalChildPages = {
   evidence: {
     label: "Evidence",
     href: "/evidence",
-    relation: "EVIDENCE",
+    relation: "VALIDATION",
     kind: "evidence",
     tone: "green",
   },
   experiments: {
     label: "Experiments",
     href: "/experiments",
-    relation: "EXPERIMENTS",
+    relation: "TESTING",
     kind: "experiment",
     tone: "orange",
   },
   claims: {
     label: "Claims",
     href: "/claims",
-    relation: "CLAIMS",
+    relation: "ASSERTIONS",
     kind: "claim",
     tone: "gold",
   },
@@ -72,17 +72,24 @@ const institutionalChildPages = {
     kind: "provenance",
     tone: "slate",
   },
+  labThroughTime: {
+    label: "Lab Through Time",
+    href: "/lab-through-time",
+    relation: "HISTORY",
+    kind: "provenance",
+    tone: "slate",
+  },
   aiGovernance: {
     label: "AI Governance",
     href: "/ai-governance",
-    relation: "GOVERNANCE",
+    relation: "AI CONTROL",
     kind: "governance",
     tone: "orange",
   },
   apparatus: {
     label: "Apparatus",
     href: "/apparatus",
-    relation: "APPARATUS",
+    relation: "MACHINERY",
     kind: "apparatus",
     tone: "indigo",
   },
@@ -105,9 +112,9 @@ const institutionalChildPages = {
 export const institutionalChildRoutes = {
   about: [
     institutionalChildPages.founder,
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.aiGovernance,
     institutionalChildPages.now,
-    institutionalChildPages.funding,
     institutionalChildPages.collaboration,
     institutionalChildPages.appliedWork,
   ],
@@ -166,6 +173,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.apparatus,
   ],
   founder: [
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.evidence,
     institutionalChildPages.now,
     institutionalChildPages.collaboration,
@@ -178,15 +186,23 @@ export const institutionalChildRoutes = {
   ],
   now: [
     institutionalChildPages.changes,
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.funding,
     institutionalChildPages.appliedWork,
     institutionalChildPages.collaboration,
   ],
   changes: [
     institutionalChildPages.now,
+    institutionalChildPages.labThroughTime,
     institutionalChildPages.atlas,
     institutionalChildPages.evidence,
     institutionalChildPages.apparatus,
+  ],
+  labThroughTime: [
+    institutionalChildPages.founder,
+    institutionalChildPages.now,
+    institutionalChildPages.changes,
+    institutionalChildPages.evidence,
   ],
   apparatus: [
     institutionalChildPages.experiments,
@@ -252,6 +268,7 @@ export const institutionalFooterGroups = [
       { label: "AI Governance", href: "/ai-governance" },
       { label: "Start here", href: "/start" },
       { label: "Founder", href: "/founder" },
+      { label: "Lab Through Time", href: "/lab-through-time" },
       { label: "Now", href: "/now" },
       { label: "What changed", href: "/changes" },
     ],
@@ -260,6 +277,7 @@ export const institutionalFooterGroups = [
     label: "Research",
     routes: [
       { label: "Research", href: "/research" },
+      { label: "Moonshots", href: "/research/moonshots" },
       { label: "Lab Atlas", href: "/atlas" },
       { label: "Representation Atlas", href: "/representation-atlas" },
       { label: "Experiments", href: "/experiments" },
@@ -272,9 +290,9 @@ export const institutionalFooterGroups = [
   {
     label: "Work",
     routes: [
+      { label: "Applied Work", href: "/applied-work" },
       { label: "Products", href: "/products" },
       { label: "Projects", href: "/projects" },
-      { label: "Applied Work", href: "/applied-work" },
     ],
   },
   {

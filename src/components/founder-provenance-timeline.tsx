@@ -301,7 +301,7 @@ export function FounderProvenanceTimeline({ data }: { data: FounderProvenanceTim
     <div className={styles.root}>
       <header className={styles.topBoundary}>
         <div className={styles.identityBlock}>
-          <Link className={styles.backLink} href="/about/provenance">← About / Provenance</Link>
+          <Link className={styles.backLink} href="/lab-through-time">← Lab Through Time</Link>
           <p className={styles.eyebrow}>Boundary First Labs · Web projection</p>
           <h1>{data.artifact.title}</h1>
           <p className={styles.subhead}>{data.artifact.claim_posture}</p>

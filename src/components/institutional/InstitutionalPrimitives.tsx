@@ -167,10 +167,8 @@ export function InstitutionalRouteHero({
           ) : null}
 
           {visibleChildLinks?.length ? (
-            <nav className={styles.routeChildNav} aria-label="Child pages">
-              <span className={styles.routeChildLabel}>
-                {visibleChildLinks.length === 1 ? "CHILD PAGE" : "CHILD PAGES"}
-              </span>
+            <nav className={styles.routeChildNav} aria-label="Related pages">
+              <span className={styles.routeChildLabel}>RELATED</span>
               <div className={styles.routeChildLinks}>
                 {visibleChildLinks.map((link) => (
                   <a

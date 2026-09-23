@@ -803,8 +803,6 @@
 }
 
 .aboutAgencyGrid[data-reflow-active="true"]
-  .aboutContextCard[data-reflow-placement="before"],
-.aboutAgencyGrid[data-reflow-active="true"]
   .aboutContextCard[data-reflow-placement="after"] {
   grid-column: 4 / span 6;
 }
@@ -907,8 +905,6 @@
   }
 
   .aboutAgencyGrid[data-reflow-active="true"]
-    .aboutContextCard[data-reflow-placement="before"],
-  .aboutAgencyGrid[data-reflow-active="true"]
     .aboutContextCard[data-reflow-placement="after"],
   .aboutInstitutionGrid[data-reflow-active="true"]
     .aboutContextCard[data-reflow-placement="after"] {
@@ -942,8 +938,6 @@
     --reflow-span: 1;
   }
 
-  .aboutAgencyGrid[data-reflow-active="true"]
-    .aboutContextCard[data-reflow-placement="before"],
   .aboutAgencyGrid[data-reflow-active="true"]
     .aboutContextCard[data-reflow-placement="after"],
   .aboutInstitutionGrid[data-reflow-active="true"]

@@ -24,34 +24,37 @@ export function InstitutionalAppliedWorkPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.appliedWorkHero}
-        eyebrow={<>APPLIED WORK</>}
-        title={<>What can Boundary First Labs help your organization do?</>}
+        eyebrow={<>CONSULTING / APPLIED WORK</>}
+        title={<>Consulting for difficult systems.</>}
         lead={
           <>
-            Diagnose difficult systems. Repair software and architecture. Review AI
-            used in consequential decisions and workflows. Design small pilots. Make research
-            and institutional knowledge easier to inspect, operate, and hand off.
+            Scoped consulting for software architecture, AI and operational governance,
+            research infrastructure, technical diagnosis, and bounded pilots.
           </>
         }
         support={
           <>
-            The commercial work is deliberately practical. A client does not need to buy
-            the Lab&apos;s theory or vocabulary. The engagement has to produce something
-            useful enough to inspect, use, test, or make a decision from.
+            Bring a system, workflow, decision, or failure that is expensive to misunderstand.
+            Start with the smallest engagement that can produce a useful artifact, evidence,
+            or decision.
           </>
         }
         childLinks={institutionalChildRoutes.appliedWork}
       >
         <aside className={styles.appliedWorkStatus}>
-          <span>CURRENT COMMERCIAL POSTURE</span>
-          <strong>Ready to scope. Still building BFL-specific case studies and repeat-client evidence.</strong>
+          <span>CONSULTING AVAILABILITY</span>
+          <strong>Available for scoped reviews, working sessions, pilots, and fractional technical advisory.</strong>
           <p>
-            These offers grow out of prior professional work in software engineering,
-            architecture, consulting, Lean–Agile delivery, scientific-method discipline,
-            agentic problem solving, startup iteration, and systems diagnosis. The public site does
-            not imply that Boundary First Labs already has repeat external service revenue
-            or a mature client case-study portfolio.
+            The work draws on prior professional experience in software engineering,
+            architecture, consulting, Lean–Agile delivery, startup iteration, and systems
+            diagnosis. BFL-specific client case studies are still being built.
           </p>
+          <Link
+            className={styles.appliedWorkHeroCta}
+            href="/contact?type=applied-work&source=applied-work-hero"
+          >
+            Start a consulting conversation <span aria-hidden="true">→</span>
+          </Link>
         </aside>
       </InstitutionalRouteHero>
 
@@ -59,7 +62,7 @@ export function InstitutionalAppliedWorkPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>WHEN TO CALL</>}
-          title={<>Good applied work starts with a problem you can already feel.</>}
+          title={<>Good consulting starts with a problem you can already feel.</>}
           note={<>These are the kinds of conditions where the Lab&apos;s systems practice is most useful.</>}
         />
 
@@ -156,7 +159,7 @@ export function InstitutionalAppliedWorkPage() {
 
       <section className={styles.appliedBoundariesSection}>
         <div className={styles.appliedBoundariesLead}>
-          <p className={styles.sectionIndex}>WORKING BOUNDARIES</p>
+          <p className={styles.sectionIndex}>CONSULTING PRINCIPLES</p>
           <h2>Useful consulting should reduce ambiguity without manufacturing certainty.</h2>
           <p>
             Boundary First Labs is most useful when the engagement can make state,
@@ -184,7 +187,7 @@ export function InstitutionalAppliedWorkPage() {
         </p>
 
         <nav className={styles.appliedWorkCloseLinks} aria-label="Applied work next steps">
-          <Link href="/contact?type=applied-work&source=applied-work">Start an applied-work conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=applied-work&source=applied-work">Start a consulting conversation <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/collaboration">Explore collaboration <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/projects">See applied projects <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/funding">See the funding model <span aria-hidden="true">-&gt;</span></Link>

@@ -1,22 +1,13 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
-import { LabObjectIdentity } from "./LabObjectIdentity";
+import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
+import { formatOrdinal } from "./institutionalFormat";
+import { institutionalChildRoutes } from "./institutionalRoutes";
+import { evidenceClasses, evidenceLadder } from "./content/evidence";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Evidence.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
-import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
-import { formatOrdinal } from "./institutionalFormat";
-import { institutionalChildRoutes } from "./institutionalRoutes";
-import { EpistemicChainSection } from "./sections/EpistemicChainSection";
-import {
-  evidenceClasses,
-  evidenceLadder,
-  evidenceNonImplications,
-  evidenceToEarn,
-  nativeEvidence,
-  priorExecution,
-} from "./content/evidence";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
@@ -26,19 +17,19 @@ export function InstitutionalEvidencePage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.evidenceHero}
-        eyebrow={<>EVIDENCE / TRACK RECORD</>}
-        title={<>What has actually been demonstrated?</>}
+        eyebrow={<>EVIDENCE</>}
+        title={<>What supports a claim, product, project, or research result?</>}
         lead={
           <>
-            Boundary First Labs has real prior execution, a large body of inspectable
-            current work, and important evidence it still has to earn.
+            Evidence is contextual. A source, artifact, reproduction, user outcome, or
+            external review only means something relative to the object it supports.
           </>
         }
         support={
           <>
-            This page keeps those categories separate. Shipped software is not scientific
-            validation. A prototype is not product-market fit. A founder&apos;s career is not
-            the same thing as BFL customer traction.
+            This page defines the Lab&apos;s evidence vocabulary and strength ladder. Detailed
+            evidence lists will live beside the research lanes, products, projects, and
+            publications they actually support.
           </>
         }
         childLinks={institutionalChildRoutes.evidence}
@@ -47,95 +38,69 @@ export function InstitutionalEvidencePage() {
           {evidenceClasses.map((item) => (
             <article key={item.label}>
               <span>{item.label}</span>
-              <p>{item.description}</p>
             </article>
           ))}
         </div>
       </InstitutionalRouteHero>
 
-      <section className={styles.priorExecutionSection}>
+      <section className={styles.surveySection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>PRIOR EXECUTION</>}
-          title={<>The Lab began with research practice, shipped systems, startups, and repeated delivery.</>}
-          note={
-            <>
-              Historical work can establish capability, research formation, and method provenance.
-              It remains separate from current BFL traction and from validation of later theory.
-            </>
-          }
+          eyebrow={<>EVIDENCE OBJECT</>}
+          title={<>Evidence should travel with the thing it supports.</>}
+          note={<>The global route defines classes and strength; contextual routes carry the actual evidence.</>}
         />
 
-        <div className={styles.priorExecutionStack}>
-          {priorExecution.map((item, index) => (
-            <article
-              className={styles.priorExecutionCard}
-              id={`evidence-${item.surfaceKey}`}
-              key={item.title}
-            >
-              <header>
-                <LabObjectIdentity
-                  kind="evidence"
-                  status={item.status}
-                  statusLabel="EVIDENCE CLASS"
-                  secondary="Prior execution"
-                  secondaryLabel="COHORT"
-                  variant="compact"
-                />
-                <span>{formatOrdinal(index)}</span>
-                <h3>{item.title}</h3>
-                <p>{item.summary}</p>
-              </header>
-
-              <div className={styles.priorEvidenceField}>
-                <span>EVIDENCE BASIS</span>
-                <p>{item.evidence}</p>
-              </div>
-
-              <div className={styles.priorBoundaryField}>
-                <span>WHAT THIS DOES NOT PROVE</span>
-                <p>{item.boundary}</p>
-              </div>
-            </article>
-          ))}
+        <div className={styles.surveyGrid}>
+          <article>
+            <span>WHAT IT IS</span>
+            <h3>Support with a boundary.</h3>
+            <p>
+              Evidence may be a source, artifact, execution record, external review,
+              reproduction, adoption signal, or other observation tied to a specific question.
+            </p>
+          </article>
+          <article>
+            <span>WHERE IT BELONGS</span>
+            <h3>Attached to an object.</h3>
+            <p>
+              Research claims need scientific evidence. Products need use and adoption
+              evidence. Projects need delivery evidence. Publications need cited artifacts and review state.
+            </p>
+          </article>
+          <article>
+            <span>WHAT THIS PAGE DOES</span>
+            <h3>Vocabulary and calibration.</h3>
+            <p>
+              This route explains evidence classes and relative strength without flattening
+              every supporting artifact into one long institutional list.
+            </p>
+          </article>
         </div>
       </section>
 
-      <section className={styles.nativeEvidenceSection}>
-        <InstitutionalSectionHeader
-          styles={styles}
-          eyebrow={<>INSPECTABLE NOW</>}
-          title={<>BFL-native evidence starts with objects another person can inspect.</>}
-          note={
-            <>
-              These surfaces prove that work exists, has structure, and can be examined.
-              They do not automatically establish market, scientific, or institutional authority.
-            </>
-          }
-        />
-
-        <div className={styles.nativeEvidenceGrid}>
-          {nativeEvidence.map((item, index) => (
-            <article key={item.title}>
-              <span>{formatOrdinal(index)}</span>
-              <h3>{item.title}</h3>
+      <section className={styles.classSection}>
+        <div>
+          <p className={styles.sectionIndex}>EVIDENCE CLASSES</p>
+          <h2>Different evidence answers different questions.</h2>
+        </div>
+        <div className={styles.classGrid}>
+          {evidenceClasses.map((item) => (
+            <article key={item.label}>
+              <span>{item.label}</span>
               <p>{item.description}</p>
-              <Link href={item.href}>{item.linkLabel} <span aria-hidden="true">-&gt;</span></Link>
             </article>
           ))}
         </div>
       </section>
-
-      <EpistemicChainSection />
 
       <section className={styles.evidenceLadderSection}>
         <div className={styles.evidenceLadderLead}>
           <p className={styles.sectionIndex}>EVIDENCE LADDER</p>
           <h2>Existence is the beginning of evidence, not the end.</h2>
           <p>
-            Different questions require different proof. A software artifact may need a
-            user. A scientific claim may need independent reproduction. A service may need a
-            client case study. A method may need successful transfer to another operator.
+            Stronger questions require stronger forms of support. The ladder is a calibration
+            aid, not a universal score.
           </p>
         </div>
 
@@ -152,66 +117,20 @@ export function InstitutionalEvidencePage() {
         </ol>
       </section>
 
-      <section className={styles.evidenceToEarnSection}>
-        <InstitutionalSectionHeader
-          styles={styles}
-          eyebrow={<>EVIDENCE STILL TO EARN</>}
-          title={<>The next proof points are concrete.</>}
-          note={
-            <>
-              The gaps are not an embarrassment to hide. They are the work required to
-              turn accumulated capability into an externally tested institution.
-            </>
-          }
-        />
-
-        <div className={styles.evidenceToEarnGrid}>
-          {evidenceToEarn.map((item, index) => (
-            <article key={item.title}>
-              <span>{formatOrdinal(index)}</span>
-              <strong>{item.title}</strong>
-              <p>{item.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.nonImplicationSection}>
-        <div className={styles.nonImplicationLead}>
-          <p className={styles.sectionIndex}>DO NOT INFER</p>
-          <h2>Good evidence gets weaker when its boundaries are blurred.</h2>
+      <section className={styles.placementSection}>
+        <div>
+          <p className={styles.sectionIndex}>NEXT PLACEMENT PASS</p>
+          <h2>Put evidence next to the claim or artifact it actually supports.</h2>
           <p>
-            The Lab would rather present a narrower claim with a clear source than borrow
-            authority from something adjacent.
+            The next pass will project filtered evidence into research lanes, products,
+            projects, and publications. This route will remain the shared evidence vocabulary.
           </p>
         </div>
-
-        <div className={styles.nonImplicationGrid}>
-          {evidenceNonImplications.map(([title, description]) => (
-            <article key={title}>
-              <span>{title}</span>
-              <p>{description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className={styles.evidenceClose}>
-        <p className={styles.sectionIndex}>HOW TO EVALUATE BFL</p>
-        <h2>Inspect the object that corresponds to the claim.</h2>
-        <p>
-          If the question is commercial capability, inspect Applied Work and prior execution.
-          If the question is what exists now, inspect Projects, Products, and Apparatus. If
-          the question is scientific authority, inspect Research and Publications—and pay
-          attention to what is still awaiting external review.
-        </p>
-
-        <nav className={styles.evidenceCloseLinks} aria-label="Evidence next steps">
-          <Link href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/projects">Projects <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/research">Research <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/publications">Publications <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
+        <nav aria-label="Evidence placement destinations">
+          <Link href="/research">Research <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/products">Products <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/projects">Projects <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/publications">Publications <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>

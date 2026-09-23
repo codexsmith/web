@@ -19,7 +19,7 @@ export function YouTubeKnowledgeExplorerExperience() {
       actions={[
         { href: "#source", label: "See how it works" },
         {
-          href: "/v3/contact?type=product&source=youtube-knowledge-explorer",
+          href: "/contact?type=product&source=youtube-knowledge-explorer",
           label: "Help test the MVP",
           kind: "secondary",
         },
@@ -33,9 +33,9 @@ export function YouTubeKnowledgeExplorerExperience() {
           <p>THE PRODUCT THESIS</p>
           <h2>Make the source easier to use without making it disappear.</h2>
           <span>
-            Long-form video contains useful explanation, argument, demonstration, and context,
-            but the default interface makes precise retrieval expensive. The Explorer turns one
-            source into a navigable knowledge object while keeping a path back to the original moment.
+            Long-form video carries explanation, argument, demonstration, and context, but
+            precise retrieval is expensive. The Explorer turns one source into a navigable
+            knowledge object without losing the path back to the original moment.
           </span>
         </div>
 
@@ -126,10 +126,9 @@ export function YouTubeKnowledgeExplorerExperience() {
           <p>EVIDENCE-BOUND ANSWERING</p>
           <h2>Ask the video. Make the answer show its work.</h2>
           <span>
-            Hosted synthesis can help write the answer, but it cannot invent its evidence graph.
-            The Explorer retrieves candidate source segments first, constrains the answer to those
-            segment IDs, reconstructs excerpts and timestamps from its own source state, and validates
-            the result again before display.
+            Hosted synthesis may write the answer, but it cannot invent its evidence. Candidate
+            source segments are retrieved first; claims stay bound to those IDs; excerpts and
+            timestamps are reconstructed from source state and validated before display.
           </span>
         </div>
 
@@ -267,10 +266,10 @@ export function YouTubeKnowledgeExplorerExperience() {
           </div>
 
           <div className={styles.explorerCloseActions}>
-            <Link href="/v3/contact?type=product&source=youtube-knowledge-explorer">
+            <Link href="/contact?type=product&source=youtube-knowledge-explorer">
               Test, review, or collaborate on the Explorer <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/v3/products">
+            <Link href="/products">
               Back to Products <span aria-hidden="true">→</span>
             </Link>
           </div>

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { InstitutionalAppliedWorkPage } from "@/components/institutional/InstitutionalAppliedWorkPage";
 
 export const metadata: Metadata = {
-  title: "Applied Work · Boundary First Labs",
+  title: "Applied Work & Consulting · Boundary First Labs",
   description:
-    "Applied systems work from Boundary First Labs: software and architecture review, AI governance, bounded pilots, systems diagnosis, research infrastructure, workshops, and technical advisory.",
+    "Systems consulting from Boundary First Labs for software architecture, AI and operational governance, research infrastructure, technical diagnosis, bounded pilots, workshops, and fractional advisory.",
   alternates: { canonical: "/applied-work" },
 };
 

@@ -474,7 +474,7 @@ export function AboutReflowGroups() {
             index="03"
             group="INSTITUTIONAL PRACTICE"
             title="How Boundary First Labs should behave as an institution."
-            description="Apparatus, criticism, collaboration, public-interest work, and the discipline required to remain answerable."
+            description="Operating model, apparatus, criticism, collaboration, public-interest work, and the discipline required to remain answerable."
             isOpen={isOpen}
             toggle={toggle}
           />
@@ -492,7 +492,7 @@ export function AboutReflowGroups() {
             label="Why a Lab?"
             eyebrow="WHY A LAB?"
             title="Because ideas need apparatus."
-            description="A laboratory turns questions into inspectable, improvable, transferable operational objects."
+            description="A laboratory is an operating posture, not a headcount. BFL currently uses a founder-led solopreneur model with computational leverage."
             className={styles.aboutContextWhyLab}
             tone="lab"
           >
@@ -501,7 +501,25 @@ export function AboutReflowGroups() {
                 A laboratory is an environment where questions become operational. Boundary
                 First Labs applies that posture to reasoning systems: make difficult ideas
                 inspectable enough to improve and transferable enough that they do not remain
-                trapped inside one person&apos;s head.
+                trapped inside one person&apos;s head. The &quot;Labs&quot; in the name describes
+                this apparatus and method, not an implied employee count.
+              </p>
+              <div className={styles.collaborationQuestions}>
+                <blockquote>
+                  In business terms, BFL is currently a solopreneur operation: one founder
+                  owns operating decisions, external commitments, and accountability.
+                </blockquote>
+                <blockquote>
+                  Software, automation, AI agents, repositories, registries, and executable
+                  research machinery expand capacity. They are leverage, not staff.
+                </blockquote>
+              </div>
+              <p>
+                That operating model keeps the human authority boundary legible while giving
+                a one-person organization a much larger computational workbench. When the work
+                needs expertise, infrastructure, review, capital, distribution, or stewardship
+                beyond that boundary, the Lab uses bounded collaboration rather than pretending
+                those capabilities are internal.
               </p>
               <div className={styles.labInstrumentRail}>
                 {labInstruments.map((instrument, index) => (

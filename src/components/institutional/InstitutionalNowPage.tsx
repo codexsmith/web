@@ -7,10 +7,11 @@ import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 import { RecentChangesStrip } from "./RecentChangesStrip";
+import { TemporalViewNav } from "./TemporalViewNav";
+import { NowPriorityExplorer } from "./NowPriorityExplorer";
 import { nowRecentChanges } from "./content/changes";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
-  nowPriorityLanes,
   roadmapChangeRules,
   roadmapGates,
   roadmapHorizons,
@@ -34,9 +35,8 @@ export function InstitutionalNowPage() {
         }
         support={
           <>
-            This is a public projection of the active work queue, not a promise calendar
-            and not a copy of every internal task. It shows the priority order, the major
-            dependencies, and what would count as meaningful closure.
+            This is a public projection of priorities, dependencies, and meaningful
+            closure—not a promise calendar or a copy of every internal task.
           </>
         }
         childLinks={institutionalChildRoutes.now}
@@ -52,7 +52,13 @@ export function InstitutionalNowPage() {
         </aside>
       </InstitutionalRouteHero>
 
-      <RecentChangesStrip changes={nowRecentChanges} title="What materially changed?" />
+      <TemporalViewNav activeView="now" />
+
+      <RecentChangesStrip
+        changes={nowRecentChanges}
+        title="What materially changed?"
+        compact
+      />
 
       <section className={styles.nowPrioritiesSection}>
         <InstitutionalSectionHeader
@@ -67,36 +73,7 @@ export function InstitutionalNowPage() {
           }
         />
 
-        <div className={styles.nowPriorityStack}>
-          {nowPriorityLanes.map((lane) => (
-            <article
-              className={styles.nowPriorityLane}
-              data-now-tone={lane.tone}
-              key={lane.code}
-            >
-              <header>
-                <span>{lane.code}</span>
-                <div>
-                  <small>{lane.status}</small>
-                  <h3>{lane.title}</h3>
-                  <p>{lane.description}</p>
-                </div>
-              </header>
-
-              <div className={styles.nowPriorityWork}>
-                <span>WORK IN THIS LANE</span>
-                <ul>
-                  {lane.work.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </div>
-
-              <div className={styles.nowPriorityClosure}>
-                <span>CLOSURE CONDITION</span>
-                <p>{lane.closure}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <NowPriorityExplorer />
       </section>
 
       <section className={styles.roadmapHorizonsSection}>
@@ -187,12 +164,12 @@ export function InstitutionalNowPage() {
         </p>
 
         <nav className={styles.nowCloseLinks} aria-label="Roadmap next steps">
-          <Link href="/v3/contact?type=general&source=now">Start a conversation <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=general&source=now">Start a conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>

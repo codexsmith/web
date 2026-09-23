@@ -16,11 +16,16 @@ export function InstitutionalAboutPage() {
           className={styles.aboutHero}
           eyebrow={<>ABOUT BOUNDARY FIRST LABS</>}
           title={<>A laboratory for the machinery beneath knowledge.</>}
-          lead={<>Boundary First Labs studies how complex systems are represented,
-              transformed, tested, measured, and made operational.</>}
-          support={<>The technical question is paired with a human one: what happens to people&apos;s
-              ability to understand, choose, contest, repair, and act when those
-              representations become consequential?</>}
+          lead={<>Boundary First Labs is a founder-led applied systems laboratory and
+              business. It studies how complex systems are represented, transformed, tested,
+              measured, and made operational.</>}
+          support={
+          <>
+            Software, automation, AI agents, repositories, and research machinery expand what
+            one founder can inspect and build. Decision authority and external accountability
+            remain with the founder.
+          </>
+        }
           childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
@@ -34,9 +39,10 @@ export function InstitutionalAboutPage() {
         <section className={styles.aboutClose}>
           <p className={styles.sectionIndex}>THE LAB IN ONE SENTENCE</p>
           <h2>
-            Boundary First Labs is an applied systems research laboratory studying the
-            machinery by which knowledge is represented, transformed, tested, and made
-            operational.
+            Boundary First Labs is a founder-led solopreneur operation: a single-person,
+            computationally leveraged applied systems research laboratory and business
+            studying the machinery by which knowledge is represented, transformed, tested,
+            and made operational.
           </h2>
           <p>
             The deeper ambition: build systems that help people and institutions understand

@@ -3,10 +3,10 @@ export const agenticScientificMethodProduct = {
   name: "Agentic Scientific Method",
   tagline: "Make the inquiry itself inspectable.",
   lead:
-    "A research protocol for making goals, boundaries, state spaces, action choices, evidence, criticism, repair, authority, and closure explicit enough for humans and agents to work together without confusing activity with scientific progress.",
+    "An operational research protocol that makes goals, boundaries, state, evidence, criticism, repair, authority, and closure explicit enough for humans and agents to work together.",
   status: "RESEARCH PRODUCT · OPERATIONAL SUITE V0.1",
   statusNote:
-    "A canonical definition, end-to-end protocol, authority state machine, templates, validation ladder, self-hosting run, and machine-readable transition contract exist. External user pilots, baseline comparisons, formal validation, cross-domain replication, and a fully executed Theory Machine runtime remain incomplete.",
+    "The protocol, authority model, templates, validation ladder, and transition contract exist. External user pilots, comparative benchmarks, cross-domain replication, and formal validation remain open.",
   theme: "asm",
 } as const;
 

@@ -126,52 +126,32 @@ export const appliedWorkBoundaries = [
   {
     label: "LEAN–AGILE BY PRACTICE, NOT CEREMONY",
     description:
-      "The delivery lineage favors visible state, bounded work, real capacity, small coherent increments, short evidence loops, and adaptation from observed results. Clients are not required to adopt Scrum rituals, BFL vocabulary, or a process brand.",
+      "Use visible state, bounded work, real capacity, small coherent increments, and short evidence loops. Test important assumptions instead of requiring clients to adopt a process brand.",
   },
   {
-    label: "SCIENTIFIC METHOD AS DELIVERY DISCIPLINE",
+    label: "HUMAN AUTHORITY STAYS VISIBLE",
     description:
-      "Treat important assumptions as testable. Define what evidence would change the decision, distinguish observation from interpretation, preserve negative results, and prefer a bounded pilot when a larger commitment would merely hide uncertainty.",
-  },
-  {
-    label: "AGENTIC REASONING, HUMAN AUTHORITY",
-    description:
-      "AI and automation may search, decompose, compare, simulate, draft, or critique. They do not silently acquire decision rights, domain authority, or the power to promote a consequential conclusion without the evidence and human gate the engagement requires.",
+      "AI may search, compare, simulate, draft, or critique, but consequential decisions remain with the people and domain experts who actually hold the relevant authority.",
   },
   {
     label: "STEWARDSHIP OUTLIVES DELIVERY",
     description:
-      "A successful engagement still leaves obligations behind. Intellectual stewardship preserves provenance and handoff; humanist stewardship preserves agency and local knowledge; ecological stewardship keeps material, infrastructural, and environmental costs inside the consequence model.",
+      "Account for maintenance, repair, transfer, retirement, affected people, and material consequences. Useful work should remain operable after the engagement ends.",
   },
   {
     label: "NO THEORY BUY-IN REQUIRED",
     description:
-      "Clients do not need to adopt Boundary First terminology or agree with the Lab's broader research program. The engagement has to stand on the usefulness of the work itself.",
+      "Clients do not need Boundary First terminology or agreement with the Lab's research program. The engagement has to stand on the usefulness of the work itself.",
   },
   {
     label: "SCOPE BEFORE SCALE",
     description:
-      "Prefer a review, workshop, prototype, or pilot that can finish and teach something before proposing a large transformation program.",
-  },
-  {
-    label: "REVIEW IS NOT CERTIFICATION",
-    description:
-      "A BFL architecture or governance review is technical and operational analysis. It is not legal advice, regulatory certification, or a substitute for qualified domain specialists where those are required.",
-  },
-  {
-    label: "DOMAIN AUTHORITY STAYS VISIBLE",
-    description:
-      "The client and relevant domain experts remain authoritative about facts, operating constraints, law, policy, and local consequences that BFL does not independently possess.",
+      "Prefer a review, workshop, prototype, or pilot that can finish and create evidence before proposing a large transformation.",
   },
   {
     label: "EVIDENCE OVER PERFORMANCE",
     description:
-      "The goal is not to produce a confident-looking deck. Findings should expose assumptions, uncertainty, disagreement, and the evidence required for the next decision.",
-  },
-  {
-    label: "DESIGNED FOR HANDOFF",
-    description:
-      "Useful work should leave the organization with clearer machinery, artifacts, and decisions—not a permanent dependency on the consultant.",
+      "Findings should expose assumptions, uncertainty, disagreement, and the evidence needed for the next decision—not merely produce a confident-looking deck.",
   },
 ] as const;
 

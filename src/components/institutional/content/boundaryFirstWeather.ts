@@ -6,7 +6,8 @@ export const boundaryFirstWeatherProduct = {
   family: "COMPUTATIONAL RESEARCH / DECISION SUPPORT",
   name: "Boundary First Weather",
   tagline: weatherRecord.program.primaryLine,
-  lead: weatherRecord.hero.deck,
+  lead:
+    "Weather changes unevenly. Boundary First Weather tests whether tracking boundaries, fluxes, and defects can focus computation where forecast-relevant structure is actually changing.",
   status: weatherRecord.program.statusLabel.toUpperCase(),
   statusNote: weatherRecord.program.claimBoundary,
   theme: "weather",

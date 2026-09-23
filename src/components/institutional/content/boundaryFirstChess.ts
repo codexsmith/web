@@ -6,7 +6,7 @@ export const boundaryFirstChessProduct = {
     "A visual teaching framework for players who know the rules of chess but still struggle to see what changed after a move.",
   status: "RESEARCH PRODUCT · PUBLIC PREVIEW",
   statusNote:
-    "Developed teaching manuscript, pedagogy, worked examples, analyzer research, and evaluation plan exist. Pedagogical efficacy, rating improvement, market demand, and engine superiority remain unestablished.",
+    "A developed manuscript, pedagogy, worked examples, analyzer research, and evaluation plan exist. Learning efficacy, rating improvement, market demand, and analyzer superiority remain unestablished.",
   theme: "chess",
 } as const;
 

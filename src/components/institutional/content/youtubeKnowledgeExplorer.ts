@@ -6,7 +6,7 @@ export const youtubeKnowledgeExplorerProduct = {
     "Start with the source. Preserve timestamps. Search evidence, inspect concepts, and ask questions whose claims stay bound to the transcript.",
   status: "ACTIVE BUILD · PORTABLE MVP",
   statusNote:
-    "The executable core already supports YouTube source parsing, metadata enrichment, transcript normalization, deterministic outlines, concept-linked search, evidence-bound answering, browser-local persistence, and portable interchange. Repeated use, retention, pricing, market demand, and product-market fit remain unestablished.",
+    "A working portable core exists for source parsing, transcripts, outlines, search, evidence-bound answers, persistence, and interchange. Repeated use, retention, pricing, and product-market fit remain unestablished.",
   theme: "explorer",
 } as const;
 

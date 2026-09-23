@@ -8,6 +8,7 @@ import { RecentChangesStrip } from "./RecentChangesStrip";
 
 import {
   featuredWork,
+  homeAppliedWorkFeature,
   homeInstitutionalFrontDoors,
   homeNowSnapshot,
   postureCommitments,
@@ -29,8 +30,8 @@ export function InstitutionalHomePage() {
               We build research, methods, products, and operational tools for making consequential systems more legible, reasoning more inspectable, and useful capability easier to transfer.
             </p>
             <div className={styles.heroActions}>
-              <Link className={styles.primaryAction} href="#featured-work">
-                See Featured Work
+              <Link className={styles.primaryAction} href="/applied-work">
+                Explore Applied Work
                 <span aria-hidden="true">→</span>
               </Link>
               <Link className={styles.secondaryAction} href="/research">
@@ -54,6 +55,37 @@ export function InstitutionalHomePage() {
         <RecentChangesStrip changes={homeRecentChanges} compact />
 
         <HomeOrientationSection />
+
+        <section className={styles.homeConsultingFeature} aria-labelledby="home-consulting-title">
+          <div className={styles.homeConsultingLead}>
+            <p className={styles.sectionIndex}>{homeAppliedWorkFeature.eyebrow}</p>
+            <h2 id="home-consulting-title">{homeAppliedWorkFeature.title}</h2>
+            <p>{homeAppliedWorkFeature.summary}</p>
+            <div className={styles.homeConsultingActions}>
+              <Link className={styles.homeConsultingPrimary} href={homeAppliedWorkFeature.href}>
+                {homeAppliedWorkFeature.cta}
+                <span aria-hidden="true">→</span>
+              </Link>
+              <Link className={styles.homeConsultingSecondary} href={homeAppliedWorkFeature.contactHref}>
+                {homeAppliedWorkFeature.contactCta}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className={styles.homeConsultingOffers}>
+            {homeAppliedWorkFeature.offers.map((offer) => (
+              <article key={offer.code}>
+                <span>{offer.code}</span>
+                <div>
+                  <strong>{offer.title}</strong>
+                  <p>{offer.detail}</p>
+                </div>
+              </article>
+            ))}
+            <p className={styles.homeConsultingNote}>{homeAppliedWorkFeature.note}</p>
+          </div>
+        </section>
 
         <section className={styles.featuredSection} id="featured-work">
           <InstitutionalSectionHeader
@@ -92,11 +124,6 @@ export function InstitutionalHomePage() {
           <div className={styles.inMotionLead}>
             <p className={styles.sectionIndex}>THE LAB IN MOTION</p>
             <h2>See the current state. Choose a way in.</h2>
-            <p>
-              The public site should not stop at describing what Boundary First Labs is.
-              It should also show what is active now and how an outside person or institution
-              can enter the work without having to understand the entire Lab first.
-            </p>
           </div>
 
           <div className={styles.inMotionGrid}>
@@ -107,8 +134,6 @@ export function InstitutionalHomePage() {
               </div>
 
               <h3>{homeNowSnapshot.title}</h3>
-              <p>{homeNowSnapshot.description}</p>
-
               <blockquote>{homeNowSnapshot.thesis}</blockquote>
 
               <div className={styles.nowLaneGrid} aria-label="Current Lab priority lanes">
@@ -139,7 +164,6 @@ export function InstitutionalHomePage() {
                     <small>{door.note}</small>
                   </div>
                   <h3>{door.title}</h3>
-                  <p>{door.description}</p>
                   <strong>
                     {door.cta}
                     <span aria-hidden="true">→</span>

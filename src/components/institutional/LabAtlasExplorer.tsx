@@ -53,7 +53,7 @@ export function LabAtlasExplorer({
   const selectNode = (atlasId: string) => {
     if (!findNode(atlasId)) return;
     setSelectedId(atlasId);
-    router.push(`/v3/atlas?focus=${encodeURIComponent(atlasId)}`, {
+    router.push(`/atlas?focus=${encodeURIComponent(atlasId)}`, {
       scroll: false,
     });
   };

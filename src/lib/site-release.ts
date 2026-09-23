@@ -2,8 +2,50 @@ export const siteOrigin = new URL(
   process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://boundaryfirstlabs.com",
 );
 
-export const institutionalIndexingEnabled =
+const vercelEnvironment = process.env.VERCEL_ENV?.trim().toLowerCase();
+const indexingOverride =
   process.env.BFL_V3_INDEXABLE?.trim().toLowerCase() === "true";
+
+export const institutionalIndexingEnabled =
+  vercelEnvironment === "production" || indexingOverride;
+
+export const institutionalContentNodeRoutes = [
+  "/about/how-we-work",
+  "/people",
+  "/people/mission",
+  "/people/principles",
+  "/people/augusta-civic-infrastructure",
+  "/people/goals-aspirations",
+  "/products/pipeline",
+  "/products/pipeline/projectr",
+  "/products/pipeline/cross-platform-bookshelf",
+  "/products/pipeline/need-capacity-map",
+  "/products/shipped",
+  "/products/shipped/citywatch",
+  "/products/current",
+  "/products/current/corpus-forge",
+  "/products/current/agency-representation-audit",
+  "/research/software",
+  "/research/software/boundary-first-engineering",
+  "/research/software/ontological-software",
+  "/research/software/executable-representation",
+  "/research/software/boundary-first-architecture",
+  "/research/software/boundary-first-ux",
+  "/research/software/verification-governance",
+  "/research/applied-testbeds",
+  "/research/applied-testbeds/weather",
+  "/research/applied-testbeds/chess",
+  "/research/applied-testbeds/soccer",
+  "/research/applied-testbeds/law",
+  "/research/formal-theory",
+  "/research/formal-theory/boundary-theory",
+  "/research/formal-theory/schemathematics",
+  "/research/foundations",
+  "/research/foundations/distinction",
+  "/research/foundations/bound-distinction",
+  "/research/foundations/bit",
+  "/research/foundations/distinction-space",
+] as const;
 
 export const institutionalPublicRoutes = [
   "/",
@@ -18,8 +60,11 @@ export const institutionalPublicRoutes = [
   "/contact",
   "/evidence",
   "/experiments",
+  "/labs/distinction-space",
+  "/labs/representation-lab",
   "/founder",
   "/funding",
+  "/lab-through-time",
   "/now",
   "/open-lab",
   "/products",
@@ -32,5 +77,16 @@ export const institutionalPublicRoutes = [
   "/publications",
   "/representation-atlas",
   "/research",
+  "/research/paper-mine",
+  ...institutionalContentNodeRoutes,
+  "/research/moonshots",
+  "/research/moonshots/research-operating-system",
+  "/research/moonshots/distributed-scientific-intelligence",
+  "/research/moonshots/mathematical-interoperability",
+  "/research/moonshots/executable-science",
+  "/research/moonshots/formal-representation-mechanics",
+  "/research/moonshots/self-improving-research-infrastructure",
+  "/research/moonshots/millennium-problems-research",
+  "/research/moonshots/fine-structure-constant",
   "/start",
 ] as const;

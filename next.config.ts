@@ -5,6 +5,15 @@ const institutionalChildRoutes = institutionalPublicRoutes.filter(
   (route) => route !== "/",
 );
 
+const nativeInstitutionalRoutes = new Set<string>([
+  "/labs/distinction-space",
+  "/labs/representation-lab",
+]);
+
+const rewrittenInstitutionalRoutes = institutionalChildRoutes.filter(
+  (route) => !nativeInstitutionalRoutes.has(route),
+);
+
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -21,6 +30,15 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/v3", destination: "/", permanent: true },
+      { source: "/about/the-lab", destination: "/about", permanent: true },
+      { source: "/about/provenance", destination: "/lab-through-time", permanent: true },
+      { source: "/about/contact", destination: "/contact", permanent: true },
+      { source: "/products/tools-experiments", destination: "/experiments", permanent: true },
+      {
+        source: "/products/pipeline/youtube-knowledge-explorer",
+        destination: "/products/youtube-knowledge-explorer",
+        permanent: true,
+      },
       ...institutionalChildRoutes.map((route) => ({
         source: `/v3${route}`,
         destination: route,
@@ -30,7 +48,7 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return {
-      beforeFiles: institutionalChildRoutes.map((route) => ({
+      beforeFiles: rewrittenInstitutionalRoutes.map((route) => ({
         source: route,
         destination: `/v3${route}`,
       })),

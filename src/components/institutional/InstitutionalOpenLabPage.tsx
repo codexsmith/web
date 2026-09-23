@@ -17,6 +17,7 @@ import {
 } from "./content/openLab";
 import { OpenLabContextSection } from "./sections/OpenLabContextSection";
 import { OpenLabContractCard } from "./sections/OpenLabContractCard";
+import { MoonshotsFeature } from "./MoonshotsFeature";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 
 const styles = composeCssModules(
@@ -44,11 +45,9 @@ export function InstitutionalOpenLabPage({
         }
         support={
           <>
-            The public should be able to bring consequential systems, criticism,
-            expertise, collaboration, failed reproductions, counterexamples, and
-            unusual work to the Lab without first learning the Lab&apos;s internal
-            vocabulary. Scientific method needs disconfirming evidence; agentic
-            reasoning needs outside observations it did not generate for itself.
+            Bring criticism, failed reproductions, counterexamples, specialist knowledge,
+            consequential systems, or unusual work. You should not need the Lab&apos;s
+            vocabulary before you can challenge or contribute to it.
           </>
         }
         childLinks={institutionalChildRoutes.openLab}
@@ -117,6 +116,8 @@ export function InstitutionalOpenLabPage({
         </div>
       </section>
 
+      <MoonshotsFeature context="open-lab" />
+
       <OpenLabIntakeInstrument
         initialType={initialType}
         runtimeConfig={intakeConfig}
@@ -142,7 +143,7 @@ export function InstitutionalOpenLabPage({
           className={styles.openLabCloseLinks}
           aria-label="Open Lab next steps"
         >
-          <Link href="/v3/contact?type=open-lab&source=open-lab">
+          <Link href="/contact?type=open-lab&source=open-lab">
             Start a conversation without formal intake{" "}
             <span aria-hidden="true">-&gt;</span>
           </Link>

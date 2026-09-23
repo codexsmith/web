@@ -24,17 +24,15 @@ export function InstitutionalAugustaMaintenanceDebtPage() {
         title={<>What does a city owe its own infrastructure?</>}
         lead={
           <>
-            Maintenance debt is easy to say and surprisingly easy to miscount. This case asks
-            whether Augusta&apos;s unresolved lifecycle obligations can be reconstructed from
+            Can Augusta&apos;s unresolved infrastructure obligations be reconstructed from
             public records without collapsing maintenance, renewal, new capacity, financing,
-            depreciation, and external shock into one rhetorical number.
+            depreciation, and external shock into one rhetorical number?
           </>
         }
         support={
           <>
-            The target is not the largest possible estimate. The target is a ledger another
-            person can inspect, reproduce, correct, and eventually hand back to the institutions
-            that own the physical systems.
+            The target is an inspectable ledger: reproducible, correctable, and useful to the
+            institutions that own the physical systems.
           </>
         }
       >
@@ -82,8 +80,8 @@ export function InstitutionalAugustaMaintenanceDebtPage() {
         </div>
 
         <nav className={styles.successLinks} aria-label="Augusta case next steps">
-          <Link href="/v3/projects">Back to Projects <span aria-hidden="true">→</span></Link>
-          <Link href="/v3/collaboration">Explore civic collaboration <span aria-hidden="true">→</span></Link>
+          <Link href="/projects">Back to Projects <span aria-hidden="true">→</span></Link>
+          <Link href="/collaboration">Explore civic collaboration <span aria-hidden="true">→</span></Link>
           <a
             href="https://github.com/codexsmith/boundary-first-labs/tree/main/organized_library_curated/999_Library/03_Domains/04_linguistic_systems__domain_family/07_civilizational_systems__domain/01_civilization_mechanics__product/civic_change_infrastructure/cases/augusta_ga_maintenance_debt"
             rel="noreferrer"

@@ -15,12 +15,22 @@ const routeSource = fs.readFileSync("src/lib/site-release.ts", "utf8");
 const routeBlock = routeSource.match(
   /institutionalPublicRoutes\s*=\s*\[([\s\S]*?)\]\s*as const/,
 )?.[1];
+const contentNodeRouteBlock = routeSource.match(
+  /institutionalContentNodeRoutes\s*=\s*\[([\s\S]*?)\]\s*as const/,
+)?.[1];
 
 if (!routeBlock) {
   throw new Error("Could not read institutionalPublicRoutes from src/lib/site-release.ts");
 }
 
-const publicRoutes = [...routeBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
+const publicRoutes = [
+  ...new Set([
+    ...[...routeBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1]),
+    ...(contentNodeRouteBlock
+      ? [...contentNodeRouteBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1])
+      : []),
+  ]),
+];
 
 const viewports = {
   desktop: { width: 1440, height: 1000 },
@@ -328,11 +338,12 @@ async function visit(browser, config) {
   page.on("pageerror", (error) => pageErrors.push(String(error).slice(0, 500)));
 
   const response = await page.goto(`${base}${config.route}`, {
-    waitUntil: "networkidle",
+    waitUntil: "domcontentloaded",
     timeout: 30_000,
   });
+  await page.waitForLoadState("load", { timeout: 15_000 }).catch(() => undefined);
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(80);
+  await page.waitForTimeout(120);
 
   const metrics = await inspectPage(page);
   const issues = [];

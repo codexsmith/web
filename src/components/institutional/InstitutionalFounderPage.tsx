@@ -21,20 +21,18 @@ export function InstitutionalFounderPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.founderHero}
-        eyebrow={<>FOUNDER — NICHOLAS T. SMITH</>}
-        title={<>Nick.</>}
+        eyebrow={<>FOUNDER</>}
+        title={<>Nicholas T. Smith</>}
         lead={
           <>
-            Nicholas T. Smith is a computer scientist, systems engineer, and the founder
-            of Boundary First Labs.
+            Computer scientist, systems engineer, and founder of Boundary First Labs.
           </>
         }
         support={
           <>
-            His work sits where software engineering, Lean–Agile practice, scientific method,
-            agentic reasoning, formal systems, and institutional consequence meet:
-            understand the representation, make state explicit, build the smallest coherent
-            test, inspect what happens, and repair what fails.
+            His work connects software engineering, scientific method, agentic reasoning,
+            formal systems, and institutional consequence through a recurring practice:
+            make state explicit, test coherently, inspect the result, and repair what fails.
           </>
         }
         childLinks={institutionalChildRoutes.founder}
@@ -43,8 +41,8 @@ export function InstitutionalFounderPage() {
           <div className={styles.founderMonogram} aria-hidden="true">N</div>
           <div>
             <span>FOUNDER / BUILDER / RESEARCHER</span>
-            <strong>Nicholas T. Smith</strong>
-            <p>Georgia Tech–trained computer scientist · systems engineer · independent researcher</p>
+            <strong>Computer scientist · systems engineer</strong>
+            <p>Georgia Tech–trained · independent researcher · Boundary First Labs</p>
           </div>
         </div>
       </InstitutionalRouteHero>
