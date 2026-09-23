@@ -28,9 +28,16 @@
   z-index: var(--reflow-motion-z, 100);
 }
 
-.field[data-reflow-mode="flow"] > .item[data-reflow-state="selected"] {
+.field[data-reflow-mode="flow"][data-reflow-active="true"]
+  > .item[data-reflow-state="selected"] {
+  order: 1;
   grid-column: 1 / -1;
   z-index: 2;
+}
+
+.field[data-reflow-mode="flow"][data-reflow-active="true"]
+  > .item:not([data-reflow-state="selected"]) {
+  order: 2;
 }
 
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
