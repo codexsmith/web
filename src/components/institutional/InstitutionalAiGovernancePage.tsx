@@ -65,19 +65,6 @@ export function InstitutionalAiGovernancePage() {
           <p className={styles.sectionIndex}>AI IS A FORGE, NOT AN ORACLE</p>
           <h2>Capability can amplify craft without becoming authority.</h2>
         </div>
-
-        <div className={styles.forgeQuestions}>
-          <span>What source material entered the process?</span>
-          <span>What came from evidence versus inference?</span>
-          <span>What defects did the AI expose or introduce?</span>
-          <span>Which invariants must survive transformation?</span>
-          <span>Who reviews the result?</span>
-          <span>Who owns publication or deployment?</span>
-        </div>
-
-        <blockquote className={styles.forgeQuote}>
-          Do not confuse fluency with temper.
-        </blockquote>
       </section>
 
       <section className={styles.doctrineSection}>
