@@ -43,7 +43,7 @@ export function ProductExperienceShell({
       <div className={styles.productExperienceFrame} data-product-theme={product.theme}>
         <section className={styles.productExperienceHero} data-institutional-hero>
           <div className={styles.productHeroCopy}>
-            <Link className={styles.productBreadcrumb} href="/v3/products">
+            <Link className={styles.productBreadcrumb} href="/products">
               <span aria-hidden="true">←</span>
               Products / {product.family}
             </Link>
@@ -88,7 +88,7 @@ export function ProductExperienceShell({
         </section>
 
         <nav className={styles.productExperienceNav} aria-label={`${product.name} page sections`}>
-          <Link className={styles.productNavHome} href="/v3/products">
+          <Link className={styles.productNavHome} href="/products">
             PRODUCT INDEX
           </Link>
           <div>
