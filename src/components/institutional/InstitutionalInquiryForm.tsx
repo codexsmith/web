@@ -64,7 +64,7 @@ export function InstitutionalInquiryForm({
 
       setState({
         kind: "success",
-        message: "Received. Your message has entered the Boundary First Labs inquiry route.",
+        message: "Thanks — your message was received.",
       });
       form.reset();
       setInquiryType(initialType);
@@ -90,11 +90,10 @@ export function InstitutionalInquiryForm({
     >
       {!intakeEnabled ? (
         <div className={styles.inquiryUnavailable} role="status">
-          <span>DIRECT SUBMISSION NOT LIVE ON THIS DEPLOYMENT</span>
+          <span>WEB FORM NOT CONNECTED YET</span>
           <p>
-            The routing form and server boundary are ready, but no receiving endpoint is
-            configured here. The form is disabled so a message cannot appear to send and
-            then disappear.
+            Direct email is already live. This form stays disabled until its receiver is
+            connected so nothing can appear to send and then disappear.
           </p>
         </div>
       ) : null}
@@ -131,17 +130,17 @@ export function InstitutionalInquiryForm({
         </div>
 
         <div className={styles.inquiryTypePrompt}>
-          <span>USEFUL FRAMING</span>
+          <span>OPTIONAL PROMPT</span>
           <strong>{selected.label}</strong>
           <p>{selected.prompt}</p>
         </div>
 
         <label className={styles.inquiryWideField}>
-          <span>Desired outcome <small>optional</small></span>
+          <span>What would be useful? <small>optional</small></span>
           <input
             maxLength={300}
             name="desiredOutcome"
-            placeholder="Example: a fit conversation, technical review, pilot, or funding discussion..."
+            placeholder="Example: a quick answer, a conversation, a review, an introduction, or a pilot..."
           />
         </label>
 
@@ -151,7 +150,7 @@ export function InstitutionalInquiryForm({
             maxLength={6000}
             minLength={10}
             name="message"
-            placeholder="A short, concrete message is enough. Start with the real problem or reason for contact."
+            placeholder="A short note is enough. Tell us what brought you here and anything you think we should know."
             required
             rows={8}
           />
@@ -164,11 +163,11 @@ export function InstitutionalInquiryForm({
 
         <div className={styles.inquirySubmitRow}>
           <button type="submit">
-            {state.kind === "sending" ? "Sending..." : "Send inquiry"}
+            {state.kind === "sending" ? "Sending..." : "Send message"}
           </button>
           <p>
-            Initial contact is for routing and fit. Do not include confidential or sensitive
-            material until an appropriate handling boundary has been agreed.
+            Please do not include confidential or sensitive material in the first message.
+            We can arrange an appropriate way to handle it later if needed.
           </p>
         </div>
       </fieldset>
