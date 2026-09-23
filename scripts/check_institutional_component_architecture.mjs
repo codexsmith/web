@@ -929,6 +929,12 @@ expect(labThroughTimePage.includes("Computationally leveraged micro-lab"), "Lab 
 expect(labThroughTimePage.includes("COMPUTATIONAL CAPABILITY"), "Lab Through Time must distinguish machine capability from authority");
 expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must preserve the founder authority boundary");
 expect(labThroughTimePage.includes("Boundary First Labs became practical when decades of accumulated research"), "Lab Through Time hero must explain why the current Lab exists now");
+expect(labThroughTimePage.includes('className={styles.continuityLead}'), "Lab Through Time continuity statement must own the section rather than compete with a side panel");
+expect(labThroughTimePage.includes('className={styles.continuityWork}'), "Lab Through Time remaining projection work must be progressively disclosed");
+expect(labThroughTimePage.includes("<details className={styles.continuityWork}>"), "Lab Through Time projection work must default to a compact disclosure");
+expect(!labThroughTimePage.includes("<aside>\n          <span>NEXT PROJECTION WORK"), "Lab Through Time must not restore the oversized projection-work aside");
+expect(labThroughTimeCss.includes(".continuityLead {\n  max-width: 1080px;"), "Lab Through Time continuity statement must use a bounded readable measure");
+expect(labThroughTimeCss.includes(".continuityWork > summary"), "Lab Through Time projection-work disclosure must have an explicit compact summary treatment");
 
 const provenanceArtifactGallery = read(`${root}/ProvenanceArtifactGallery.tsx`);
 const provenanceStillStrip = read(`${root}/ProvenanceStillStrip.tsx`);
