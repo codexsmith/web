@@ -108,7 +108,7 @@ export const instruments = [
     code: "MACH",
     title: "Lab Machinery Registry",
     verb: "PROJECTS",
-    status: "HUMAN-REVIEWED SEED REGISTRY",
+    status: "HUMAN-REVIEWED RECONCILIATION v0.2",
     tone: "machine",
     question: "What executable or operational capabilities exist?",
     summary:
