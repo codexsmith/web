@@ -44,13 +44,12 @@ export function InstitutionalAppliedWorkPage() {
       >
         <aside className={styles.appliedWorkStatus}>
           <span>CURRENT COMMERCIAL POSTURE</span>
-          <strong>Ready to scope. Still building BFL-specific case studies and repeat-client evidence.</strong>
+          <strong>Ready to scope. Building BFL-specific case studies and repeat-client evidence.</strong>
           <p>
             These offers grow out of prior professional work in software engineering,
-            architecture, consulting, Lean–Agile delivery, scientific-method discipline,
-            agentic problem solving, startup iteration, and systems diagnosis. The public site does
-            not imply that Boundary First Labs already has repeat external service revenue
-            or a mature client case-study portfolio.
+            architecture, consulting, Lean–Agile delivery, agentic problem solving, startup
+            iteration, and systems diagnosis. The public site does not imply a mature BFL
+            client portfolio.
           </p>
         </aside>
       </InstitutionalRouteHero>
