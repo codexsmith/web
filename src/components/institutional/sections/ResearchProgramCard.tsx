@@ -8,7 +8,7 @@ export function ResearchProgramCard({
   program,
   styles,
 }: {
-  program: (typeof programs)[0];
+  program: (typeof programs)[number];
   styles: Record<string, string>;
 }) {
   return (
