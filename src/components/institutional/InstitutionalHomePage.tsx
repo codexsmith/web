@@ -8,6 +8,7 @@ import { RecentChangesStrip } from "./RecentChangesStrip";
 
 import {
   featuredWork,
+  homeAppliedWorkFeature,
   homeInstitutionalFrontDoors,
   homeNowSnapshot,
   postureCommitments,
@@ -54,6 +55,37 @@ export function InstitutionalHomePage() {
         <RecentChangesStrip changes={homeRecentChanges} compact />
 
         <HomeOrientationSection />
+
+        <section className={styles.homeConsultingFeature} aria-labelledby="home-consulting-title">
+          <div className={styles.homeConsultingLead}>
+            <p className={styles.sectionIndex}>{homeAppliedWorkFeature.eyebrow}</p>
+            <h2 id="home-consulting-title">{homeAppliedWorkFeature.title}</h2>
+            <p>{homeAppliedWorkFeature.summary}</p>
+            <div className={styles.homeConsultingActions}>
+              <Link className={styles.homeConsultingPrimary} href={homeAppliedWorkFeature.href}>
+                {homeAppliedWorkFeature.cta}
+                <span aria-hidden="true">→</span>
+              </Link>
+              <Link className={styles.homeConsultingSecondary} href={homeAppliedWorkFeature.contactHref}>
+                {homeAppliedWorkFeature.contactCta}
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className={styles.homeConsultingOffers}>
+            {homeAppliedWorkFeature.offers.map((offer) => (
+              <article key={offer.code}>
+                <span>{offer.code}</span>
+                <div>
+                  <strong>{offer.title}</strong>
+                  <p>{offer.detail}</p>
+                </div>
+              </article>
+            ))}
+            <p className={styles.homeConsultingNote}>{homeAppliedWorkFeature.note}</p>
+          </div>
+        </section>
 
         <section className={styles.featuredSection} id="featured-work">
           <InstitutionalSectionHeader
