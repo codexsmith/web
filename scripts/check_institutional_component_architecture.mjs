@@ -807,16 +807,21 @@ expect(!publicationsPage.includes('className={styles.publicationCovenant}'), "Pu
 expect(fs.existsSync(`${root}/sections/PublicationCatalogSection.tsx`), "PublicationCatalogSection must exist as the substantive publication-object boundary");
 expect(fs.existsSync(`${root}/sections/PublicationContextSection.tsx`), "PublicationContextSection must exist as the route-local composition boundary");
 const publicationCatalog = read(`${root}/sections/PublicationCatalogSection.tsx`);
+const publicationCards = read(`${root}/sections/PublicationCards.tsx`);
 expect(publicationCatalog.includes("selectedPublications"), "Publication catalog must render the curated source-bound publication selection");
 expect(publicationCatalog.includes("SOURCE-BOUND RECORDS"), "Publication catalog must expose that its visible records are source-bound");
 expect(publicationCatalog.includes("selectedPublications.length"), "Publication catalog must derive its bound-record count from the selected publication source");
-expect(publicationCatalog.includes("publicationClaimCeiling"), "Publication catalog must keep claim ceilings attached to visible records");
+expect(publicationCards.includes("publicationClaimCeiling"), "Publication cards must keep claim ceilings attached to visible records");
 expect(publicationCatalog.includes("publicationProjection"), "Publication catalog must expose the pinned publication-control projection");
 expect(publicationCatalog.includes("publicationProjection.sources.map"), "Publication catalog must expose all three publication-control authorities");
-expect(publicationCatalog.includes("PublicationSourceContract"), "Publication catalog must bind every visible record back to its controlling source");
-expect(publicationCatalog.includes("PublicationControlDetails"), "Publication catalog must expose source dependencies, gates, or evidence plans where declared");
-expect(publicationCatalog.includes("PublicationAuthorityFirewall"), "Publication catalog must preserve the controlling registry authority ceiling");
-expect(publicationCatalog.includes('id={"publication-" + publication.id}'), "Publication catalog records must support exact deep links");
+expect(publicationCards.includes("PublicationSourceContract"), "Publication cards must bind every visible record back to its controlling source");
+expect(publicationCards.includes("PublicationControlDetails"), "Publication cards must expose source dependencies, gates, or evidence plans where declared");
+expect(publicationCards.includes("PublicationAuthorityFirewall"), "Publication cards must preserve the controlling registry authority ceiling");
+expect(
+  publicationCatalog.includes('id={"publication-" + featuredPublication.id}') &&
+    publicationCards.includes('id={"publication-" + publication.id}'),
+  "Publication catalog records must support exact deep links",
+);
 
 console.log("Institutional component architecture passed.");
 
