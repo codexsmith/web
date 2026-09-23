@@ -515,6 +515,18 @@ expect(openLabRoute.includes("isOpenLabSubmissionType"), "Open Lab route must de
 expect(environmentExample.includes("BFL_OPEN_LAB_GOVERNANCE_ACK"), "Open Lab deployment variables must document the governance acknowledgement");
 expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928cba69"), "Open Lab env example must document the exact pinned-source acknowledgement");
 
+const aiGovernancePage = read(`${root}/InstitutionalAiGovernancePage.tsx`);
+const aiGovernanceContext = read(`${root}/sections/AiGovernanceContextSection.tsx`);
+expect(aiGovernancePage.includes("<AiGovernanceContextSection />"), "AI Governance page must delegate supporting governance machinery to the Reflow context section");
+expect(!aiGovernancePage.includes('className={styles.boundarySection}'), "AI Governance must not restore the old always-expanded governance-boundary section");
+expect(!aiGovernancePage.includes('className={styles.consequenceSection}'), "AI Governance must not restore the old always-expanded consequence section");
+expect(!aiGovernancePage.includes('className={styles.certificateSection}'), "AI Governance must not restore the old always-expanded certificate section");
+expect(!aiGovernancePage.includes('className={styles.auditSection}'), "AI Governance must not restore the old always-expanded review-surfaces section");
+expect(!aiGovernancePage.includes('className={styles.selfGovernanceSection}'), "AI Governance must not restore the old always-expanded self-governance section");
+expect(!aiGovernancePage.includes('className={styles.firewallSection}'), "AI Governance must not restore the old always-expanded firewall section");
+expect(aiGovernanceContext.includes("Open the part you need."), "AI Governance Reflow context must explicitly orient the reader toward selective inspection");
+expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose internal /v3 public links");
+
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
 expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose its contextual child pages");
 expect(aboutPage.includes("founder-led solopreneur operation"), "About may use solopreneur as shorthand for the current founder-led operating model");
