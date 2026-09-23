@@ -30,6 +30,7 @@ expect(chrome.includes("usePathname"), "Institutional header must derive active 
 expect(chrome.includes("IntersectionObserver"), "Institutional header must observe the route hero before compacting the brand");
 expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
 expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
+expect(chrome.includes('href === "/research"') && chrome.includes('pathname === "/publications"'), "Publications must inherit the Research active-navigation state");
 expect(chrome.includes("<LabCommandPalette />"), "Institutional header must mount global Lab command navigation");
 expect(!chrome.includes('href="/v3/start"'), "Institutional header must not duplicate the homepage audience traversal entry");
 expect(!chrome.includes("Start here"), "Institutional header must not render the retired Start here control");
@@ -660,6 +661,9 @@ expect(appliedWorkPage.includes("CONSULTING AVAILABILITY"), "Applied Work must d
 expect(appliedWorkPage.includes("appliedServiceFamily"), "Applied Work must group concrete offers inside larger service families");
 expect(appliedWorkPage.includes("childLinks={institutionalChildRoutes.appliedWork}"), "Applied Work hero must expose Evidence as a child page");
 expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work'), "Applied Work must expose a contextual Contact route");
+expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work-hero'), "Applied Work hero must expose a direct consulting CTA");
+expect(appliedWorkContent.includes("HUMAN AUTHORITY STAYS VISIBLE"), "Applied Work consulting principles must keep human authority explicit");
+expect(!appliedWorkContent.includes("REVIEW IS NOT CERTIFICATION"), "Applied Work must not restore the overlong ten-card boundary set");
 
 const evidencePage = read(`${root}/InstitutionalEvidencePage.tsx`);
 const evidenceContent = read(`${root}/content/evidence.ts`);
