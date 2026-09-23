@@ -3357,14 +3357,8 @@
 
 .homeOrientationGrid[data-reflow-active="true"]
   .homeOrientationCard:not([data-reflow-state="selected"]) {
-  order: 1;
   height: 112px;
   min-height: 112px;
-}
-
-.homeOrientationGrid[data-reflow-active="true"]
-  .homeOrientationCard[data-reflow-state="selected"] {
-  order: 2;
 }
 
 .homeOrientationGrid[data-reflow-active="true"]
