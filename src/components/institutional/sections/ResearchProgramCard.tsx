@@ -37,7 +37,6 @@ export function ResearchProgramCard({
         >
           <div className={styles.programHeaderContent}>
             <div className={styles.programHeaderLeft}>
-              <p className={styles.programRole}>{program.role}</p>
               <h3>{program.title}</h3>
 
               <div className={styles.programIdentityPrimary}>
@@ -62,6 +61,7 @@ export function ResearchProgramCard({
               </div>
             </div>
             <div className={styles.programHeaderRight}>
+              <p className={styles.programRole}>{program.role}</p>
               <p className={styles.programSummary}>{program.summary}</p>
             </div>
           </div>
