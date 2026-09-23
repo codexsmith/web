@@ -18,7 +18,7 @@ export function BoundaryFirstChessExperience() {
       actions={[
         { href: "#method", label: "See the lens" },
         {
-          href: "/v3/contact?type=product&source=boundary-first-chess",
+          href: "/contact?type=product&source=boundary-first-chess",
           label: "Help test it",
           kind: "secondary",
         },
@@ -159,10 +159,10 @@ export function BoundaryFirstChessExperience() {
           </p>
 
           <div className={styles.chessReleaseActions}>
-            <Link href="/v3/contact?type=product&source=boundary-first-chess">
+            <Link href="/contact?type=product&source=boundary-first-chess">
               Test, teach, review, or partner around Chess <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/v3/products">
+            <Link href="/products">
               Back to Products <span aria-hidden="true">→</span>
             </Link>
           </div>
