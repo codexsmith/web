@@ -32,9 +32,9 @@ export function InstitutionalLabThroughTimePage() {
         }
         support={
           <>
-            The work predates today&apos;s AI tools. This first public projection shows five
-            durable milestones from a much larger history and intentionally makes no claim to
-            completeness.
+            Boundary First Labs became practical when decades of accumulated research and
+            systems practice met computational tools able to work across that structure at
+            machine speed. This five-event public projection is only a seed.
           </>
         }
         childLinks={institutionalChildRoutes.labThroughTime}
