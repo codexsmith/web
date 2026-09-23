@@ -16,15 +16,12 @@ export function InstitutionalAboutPage() {
           className={styles.aboutHero}
           eyebrow={<>ABOUT BOUNDARY FIRST LABS</>}
           title={<>A laboratory for the machinery beneath knowledge.</>}
-          lead={<>Boundary First Labs is a founder-led solopreneur operation: a
-              single-person applied systems laboratory and business. It studies how complex
-              systems are represented, transformed, tested, measured, and made operational.</>}
-          support={<>The Lab is computationally leveraged: software, automation, AI agents,
-              repositories, and structured research machinery expand what one founder can
-              inspect and build while decision authority, external commitments, and
-              accountability remain with the founder. The technical question is paired with
-              a human one: what happens to people&apos;s ability to understand, choose, contest,
-              repair, and act when those representations become consequential?</>}
+          lead={<>Boundary First Labs is a founder-led applied systems laboratory and
+              business. It studies how complex systems are represented, transformed, tested,
+              measured, and made operational.</>}
+          support={<>Software, automation, AI agents, repositories, and structured research
+              machinery expand what one founder can inspect and build; decision authority,
+              external commitments, and accountability remain with the founder.</>}
           childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
