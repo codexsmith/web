@@ -29,7 +29,7 @@ function routeFromPage(file) {
 }
 
 function canonicalRouteFromPage(file) {
-  const route = file === rootPageFile ? "/" : canonicalRouteFromPage(file);
+  const route = file === rootPageFile ? "/" : routeFromPage(file);
   if (route === "/v3") return "/";
   return route.startsWith("/v3/") ? route.slice(3) : route;
 }
@@ -123,9 +123,16 @@ for (const file of scanFiles) {
   }
 }
 
+const siteRelease = read("src/lib/site-release.ts");
+if (
+  !siteRelease.includes('vercelEnvironment === "production" || indexingOverride')
+) {
+  fail("Vercel production must be indexable by default while non-production indexing remains opt-in");
+}
+
 const v3Layout = read("src/app/v3/layout.tsx");
 if (!v3Layout.includes("institutionalIndexingEnabled")) {
-  fail("v3 layout must own the centralized indexing release gate");
+  fail("v3 layout must consume the centralized indexing posture");
 }
 
 const robots = read("src/app/robots.ts");
@@ -133,7 +140,7 @@ if (
   !robots.includes('disallow.push("/v3/")') ||
   !robots.includes("institutionalPublicRoutes.filter")
 ) {
-  fail("robots.ts must keep legacy and canonical institutional child routes closed while the release gate is false");
+  fail("robots.ts must close internal/canonical routes only when the environment-aware indexing posture is disabled");
 }
 
 const sitemap = read("src/app/sitemap.ts");
