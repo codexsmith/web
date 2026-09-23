@@ -360,7 +360,7 @@ expect(primitives.includes("visibleChildLinks.map"), "Shared route hero must ren
 expect(primitives.includes("routeChildNav"), "shared route hero must render child-page navigation");
 expect(primitives.includes("routeChildIcon"), "child-page cards must expose typed relationship icons");
 expect(primitives.includes("<small>{link.relation}</small>"), "child-page cards must render their relationship label");
-expect(primitives.includes('aria-label="Child pages"'), "child-page navigation must expose semantic navigation labeling");
+expect(primitives.includes('aria-label="Related pages"'), "contextual navigation must expose semantic related-page labeling");
 expect(read(`${root}/InstitutionalPublicationsPage.tsx`).includes("childLinks={institutionalChildRoutes.publications}"), "Publications hero must expose relevant contextual children");
 expect(read(`${root}/InstitutionalAtlasPage.tsx`).includes("childLinks={institutionalChildRoutes.atlas}"), "Lab Atlas hero must expose relevant contextual children");
 expect(read(`${root}/InstitutionalContactPage.tsx`).includes("childLinks={institutionalChildRoutes.contact}"), "Contact hero must expose relevant contextual children");
