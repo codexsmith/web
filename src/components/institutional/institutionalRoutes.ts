@@ -115,7 +115,6 @@ export const institutionalChildRoutes = {
     institutionalChildPages.labThroughTime,
     institutionalChildPages.aiGovernance,
     institutionalChildPages.now,
-    institutionalChildPages.funding,
     institutionalChildPages.collaboration,
     institutionalChildPages.appliedWork,
   ],
