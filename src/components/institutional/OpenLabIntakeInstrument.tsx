@@ -130,79 +130,25 @@ export function OpenLabIntakeInstrument({
       <InstitutionalSectionHeader
         styles={styles}
         eyebrow={<>GOVERNED INTAKE</>}
-        title={<>Preserve the submission before deciding where it belongs.</>}
+        title={<>Tell the Lab what you&apos;re bringing.</>}
         note={
           <>
-            Four public contracts share one versioned transport envelope without
-            collapsing into a generic contact message. Collection activates only
-            when the deployment satisfies every declared governance gate.
+            Choose the closest route and start in ordinary language. You do not
+            need to learn the Lab&apos;s internal categories before reaching out.
+            If the fit is imperfect, we can sort that out after we understand the
+            substance.
           </>
         }
       />
 
-      <div
-        className={styles.openLabReadiness}
-        data-live={runtimeConfig.enabled ? "true" : "false"}
-      >
-        <div className={styles.openLabReadinessLead}>
-          <span>OPERATING STATE</span>
-          <strong>
-            {runtimeConfig.enabled
-              ? "Governed submission receiver active."
-              : "Submission machinery staged; collection closed."}
-          </strong>
-          <p>
-            {runtimeConfig.enabled
-              ? "The receiver, authentication, policy version, retention window, and pinned-source review acknowledgement are all declared for this deployment."
-              : "The form remains inspectable, but the site will not accept material until every activation gate is explicitly satisfied."}
-          </p>
-        </div>
-
-        <div className={styles.openLabReadinessGrid}>
-          {runtimeConfig.gates.map((gate) => (
-            <article data-ready={gate.ready ? "true" : "false"} key={gate.id}>
-              <span>{gate.ready ? "READY" : "HOLD"}</span>
-              <strong>{gate.label}</strong>
-              <p>{gate.detail}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-
-      <div className={styles.openLabRuntimeBoundary}>
-        <div>
-          <span>ENVELOPE</span>
-          <code>{runtimeConfig.schema}</code>
-        </div>
-        <div>
-          <span>PINNED SOURCE REVISION</span>
-          <code>{runtimeConfig.sourceRevision.slice(0, 12)}</code>
-        </div>
-        <div>
-          <span>POLICY VERSION</span>
-          <code>{runtimeConfig.policyVersion ?? "not configured"}</code>
-        </div>
-        <div>
-          <span>RETENTION</span>
-          <code>
-            {runtimeConfig.retentionDays
-              ? String(runtimeConfig.retentionDays) + " days"
-              : "not configured"}
-          </code>
-        </div>
-      </div>
-
       {!runtimeConfig.enabled ? (
         <div className={styles.openLabClosedNotice} role="status">
           <div>
-            <span>NO PUBLIC COLLECTION ON THIS DEPLOYMENT</span>
-            <strong>
-              You can inspect the contract now without submitting material.
-            </strong>
+            <span>FORMAL INTAKE IS CURRENTLY CLOSED</span>
+            <strong>Start with a conversation instead.</strong>
             <p>
-              For a normal conversation that does not attempt formal Open Lab
-              intake, use the existing Contact route and keep confidential or
-              sensitive material out of the first message.
+              You can still contact the Lab. Please keep confidential, private,
+              or sensitive material out of the first message.
             </p>
           </div>
           <Link href="/v3/contact?type=open-lab&source=open-lab">
@@ -211,56 +157,36 @@ export function OpenLabIntakeInstrument({
         </div>
       ) : null}
 
-      <div className={styles.openLabIntakeLayout}>
-        <div className={styles.openLabIntakeGuide}>
-          <div
-            className={styles.openLabRouteSelector}
-            role="group"
-            aria-label="Open Lab submission type"
-          >
-            {participationContracts.map((contract) => (
-              <button
-                aria-pressed={submissionType === contract.type}
-                data-selected={
-                  submissionType === contract.type ? "true" : "false"
-                }
-                key={contract.type}
-                onClick={() => setSubmissionType(contract.type)}
-                type="button"
-              >
-                <span>{contract.code}</span>
-                <strong>{contract.title}</strong>
-                <small>{contract.subtitle}</small>
-              </button>
-            ))}
-          </div>
+      <div className={styles.openLabQuickIntake}>
+        <div className={styles.openLabRoutePrompt}>
+          <span>START HERE</span>
+          <strong>What are you bringing?</strong>
+          <p>
+            Pick the closest fit. It does not have to be perfect; the Lab can
+            re-route it after review.
+          </p>
+        </div>
 
-          <article
-            className={styles.openLabSelectedContract}
-            data-open-lab-tone={selected.tone}
-          >
-            <span>{selected.type}</span>
-            <h3>{selected.title}</h3>
-            <p>{selected.description}</p>
-            <div>
-              <strong>ORDINARY-LANGUAGE PROMPTS</strong>
-              <ul>
-                {selected.ordinaryLanguage.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <blockquote>{selected.boundary}</blockquote>
-          </article>
-
-          <div className={styles.openLabCollectionRuleGrid}>
-            {openLabCollectionRules.map((rule) => (
-              <article key={rule.label}>
-                <span>{rule.label}</span>
-                <p>{rule.description}</p>
-              </article>
-            ))}
-          </div>
+        <div
+          className={styles.openLabRouteSelector}
+          role="group"
+          aria-label="Open Lab submission type"
+        >
+          {participationContracts.map((contract) => (
+            <button
+              aria-pressed={submissionType === contract.type}
+              data-selected={
+                submissionType === contract.type ? "true" : "false"
+              }
+              key={contract.type}
+              onClick={() => setSubmissionType(contract.type)}
+              type="button"
+            >
+              <span>{contract.code}</span>
+              <strong>{contract.title}</strong>
+              <small>{contract.subtitle}</small>
+            </button>
+          ))}
         </div>
 
         <form
@@ -271,19 +197,19 @@ export function OpenLabIntakeInstrument({
           onSubmit={submit}
         >
           <div className={styles.openLabFormHeader}>
-            <span>FORMAL INTAKE ENVELOPE</span>
-            <strong>{selected.type}</strong>
+            <span>OPEN LAB SUBMISSION</span>
+            <strong>{selected.title}</strong>
             <p>
-              Text and public links only. Do not submit credentials, private keys,
-              protected personal information, confidential proprietary material,
-              or other sensitive payloads.
+              Start with what matters. Public links are welcome. Please do not
+              include secrets, private credentials, protected personal
+              information, or confidential material.
             </p>
           </div>
 
           <fieldset disabled={state.kind === "sending"}>
             <div className={styles.openLabFieldGrid}>
               <label>
-                <span>Submitter type</span>
+                <span>You&apos;re reaching out as</span>
                 <select defaultValue="individual" name="submitterType">
                   <option value="individual">Individual</option>
                   <option value="team">Team</option>
@@ -293,14 +219,14 @@ export function OpenLabIntakeInstrument({
               </label>
 
               <label>
-                <span>Reply path</span>
+                <span>Would you like a reply?</span>
                 <select
                   name="contactMode"
                   onChange={(event) => setContactMode(event.target.value)}
                   value={contactMode}
                 >
-                  <option value="reply_requested">Reply requested</option>
-                  <option value="no_reply">No reply path</option>
+                  <option value="reply_requested">Yes, a reply is welcome</option>
+                  <option value="no_reply">No reply needed</option>
                 </select>
               </label>
 
@@ -327,95 +253,103 @@ export function OpenLabIntakeInstrument({
                 />
               </label>
 
-              <label className={styles.openLabWideField}>
-                <span>
-                  Affiliation <small>optional</small>
-                </span>
-                <input
-                  autoComplete="organization"
-                  maxLength={180}
-                  name="affiliation"
-                />
-              </label>
             </div>
 
             <label className={styles.openLabWideField}>
-              <span>System, claim, work, or relationship</span>
+              <span>What are you bringing?</span>
               <input
                 maxLength={320}
                 minLength={5}
                 name="subject"
-                placeholder="Name the thing you are bringing as concretely as you can."
+                placeholder="A short name for the system, claim, work, idea, or issue."
                 required
               />
             </label>
 
             <label className={styles.openLabWideField}>
-              <span>What should the Lab understand first?</span>
+              <span>What should we know?</span>
               <textarea
                 maxLength={2200}
                 minLength={20}
                 name="summary"
-                placeholder="Start in ordinary language. What is happening, what is wrong or unusual, and why does it matter?"
+                placeholder="In ordinary language: what is happening, what matters, and what would you like the Lab to understand?"
                 required
-                rows={6}
+                rows={5}
               />
             </label>
 
-            <label className={styles.openLabWideField}>
-              <span>
-                Details <small>optional</small>
-              </span>
-              <textarea
-                maxLength={8000}
-                name="details"
-                placeholder="Add the argument, history, reproduction details, actors, constraints, failed attempts, or other context that should survive routing."
-                rows={8}
-              />
-            </label>
+            <details className={styles.openLabOptionalDetails}>
+              <summary>Add context or links <small>optional</small></summary>
+              <div className={styles.openLabOptionalDetailsFields}>
+                <label className={styles.openLabWideField}>
+                  <span>
+                    Affiliation <small>optional</small>
+                  </span>
+                  <input
+                    autoComplete="organization"
+                    maxLength={180}
+                    name="affiliation"
+                  />
+                </label>
 
-            <label className={styles.openLabWideField}>
-              <span>
-                Public evidence or artifact links{" "}
-                <small>optional · one URL per line · max 8</small>
-              </span>
-              <textarea
-                maxLength={9600}
-                name="evidenceLinks"
-                placeholder={"https://...\nhttps://..."}
-                rows={4}
-              />
-            </label>
+                <label className={styles.openLabWideField}>
+                  <span>
+                    More context <small>optional</small>
+                  </span>
+                  <textarea
+                    maxLength={8000}
+                    name="details"
+                    placeholder="Add history, reproduction details, constraints, failed attempts, or anything else that would help us understand the submission."
+                    rows={6}
+                  />
+                </label>
 
-            <label className={styles.openLabWideField}>
-              <span>
-                Requested outcome <small>optional</small>
-              </span>
-              <textarea
-                maxLength={800}
-                name="requestedOutcome"
-                placeholder="What would a useful response, review, routing decision, experiment, or next step look like?"
-                rows={3}
-              />
-            </label>
+                <label className={styles.openLabWideField}>
+                  <span>
+                    Public links{" "}
+                    <small>optional · one URL per line · max 8</small>
+                  </span>
+                  <textarea
+                    maxLength={9600}
+                    name="evidenceLinks"
+                    placeholder={"https://...\nhttps://..."}
+                    rows={4}
+                  />
+                </label>
 
-            <label className={styles.openLabWideField}>
-              <span>
-                Conflict / relationship disclosure <small>optional</small>
-              </span>
-              <textarea
-                maxLength={1200}
-                name="conflictDisclosure"
-                placeholder="Disclose a relevant financial, professional, personal, institutional, or authorship relationship if it materially changes how the submission should be read."
-                rows={3}
-              />
-            </label>
+                <label className={styles.openLabWideField}>
+                  <span>
+                    What would be useful? <small>optional</small>
+                  </span>
+                  <textarea
+                    maxLength={800}
+                    name="requestedOutcome"
+                    placeholder="A reply, review, introduction, experiment, collaboration, or another next step."
+                    rows={3}
+                  />
+                </label>
+
+                <label className={styles.openLabWideField}>
+                  <span>
+                    Relevant relationship or conflict <small>optional</small>
+                  </span>
+                  <textarea
+                    maxLength={1200}
+                    name="conflictDisclosure"
+                    placeholder="Share any relationship or conflict that materially changes how we should read the submission."
+                    rows={3}
+                  />
+                </label>
+
+
+              </div>
+            </details>
 
             <label className={styles.openLabCheckRow}>
               <input name="publicResponseRequested" type="checkbox" />
               <span>
-                A public response would be useful. This is a routing preference,
-                not publication consent for my submission.
+                A public response could be useful. This does not give permission
+                to publish my submission.
               </span>
             </label>
 
@@ -424,17 +358,15 @@ export function OpenLabIntakeInstrument({
                 <input name="noSensitiveMaterial" required type="checkbox" />
                 <span>
                   I have not included secrets, credentials, protected personal
-                  data, confidential proprietary material, or other sensitive
-                  payloads.
+                  data, or confidential material.
                 </span>
               </label>
               <label>
                 <input name="reviewConsent" required type="checkbox" />
                 <span>
-                  I authorize bounded private review and routing of this
-                  submission. I understand this does not grant publication
-                  permission or imply acceptance, endorsement, collaboration, or
-                  investigation.
+                  I authorize private review and routing of this submission.
+                  This does not authorize publication or imply acceptance,
+                  endorsement, collaboration, or investigation.
                 </span>
               </label>
               <label>
@@ -475,9 +407,9 @@ export function OpenLabIntakeInstrument({
                     : "Submission closed"}
               </button>
               <p>
-                A successful receipt means only that the governed receiver
-                accepted the envelope. It does not mean the Lab accepted the
-                claim, opened an investigation, or committed to reply.
+                A receipt confirms delivery for private review. It does not mean
+                the Lab accepted the claim, opened an investigation, or committed
+                to reply.
               </p>
             </div>
           </fieldset>
@@ -498,6 +430,46 @@ export function OpenLabIntakeInstrument({
             )}
           </div>
         </form>
+      </div>
+
+      <div className={styles.openLabAfterIntake}>
+        <div className={styles.openLabAfterIntakeHeader}>
+          <span>AFTER YOU SUBMIT</span>
+          <h3>We review first, then decide where it belongs.</h3>
+          <p>
+            Your route choice is a starting point, not a test. Submissions begin
+            private, and the Lab can re-route them after reading the substance.
+          </p>
+        </div>
+
+        <div className={styles.openLabIntakeContextGrid}>
+          <article
+            className={styles.openLabSelectedContract}
+            data-open-lab-tone={selected.tone}
+          >
+            <span>{selected.type}</span>
+            <h3>{selected.title}</h3>
+            <p>{selected.description}</p>
+            <div>
+              <strong>EXAMPLES</strong>
+              <ul>
+                {selected.ordinaryLanguage.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <blockquote>{selected.boundary}</blockquote>
+          </article>
+
+          <div className={styles.openLabCollectionRuleGrid}>
+            {openLabCollectionRules.map((rule) => (
+              <article key={rule.label}>
+                <span>{rule.label}</span>
+                <p>{rule.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className={styles.openLabReviewRail}>
@@ -522,6 +494,72 @@ export function OpenLabIntakeInstrument({
           ))}
         </ol>
       </div>
+      <div className={styles.openLabGovernanceContext}>
+        <div className={styles.openLabGovernanceContextHeader}>
+          <span>HOW THE INTAKE IS GOVERNED</span>
+          <strong>The controls stay visible without getting in your way.</strong>
+          <p>
+            The Lab publishes the operating state, review gates, retention
+            window, and versioned intake boundary separately from the submission
+            experience.
+          </p>
+        </div>
+
+        <div
+          className={styles.openLabReadiness}
+          data-live={runtimeConfig.enabled ? "true" : "false"}
+        >
+          <div className={styles.openLabReadinessLead}>
+            <span>OPERATING STATE</span>
+            <strong>
+              {runtimeConfig.enabled
+                ? "Governed submission receiver active."
+                : "Submission machinery staged; collection closed."}
+            </strong>
+            <p>
+              {runtimeConfig.enabled
+                ? "The receiver, authentication, policy version, retention window, and pinned-source review acknowledgement are all declared for this deployment."
+                : "The form remains inspectable, but the site will not accept material until every activation gate is explicitly satisfied."}
+            </p>
+          </div>
+
+          <div className={styles.openLabReadinessGrid}>
+            {runtimeConfig.gates.map((gate) => (
+              <article data-ready={gate.ready ? "true" : "false"} key={gate.id}>
+                <span>{gate.ready ? "READY" : "HOLD"}</span>
+                <strong>{gate.label}</strong>
+                <p>{gate.detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.openLabRuntimeBoundary}>
+          <div>
+            <span>ENVELOPE</span>
+            <code>{runtimeConfig.schema}</code>
+          </div>
+          <div>
+            <span>PINNED SOURCE REVISION</span>
+            <code>{runtimeConfig.sourceRevision.slice(0, 12)}</code>
+          </div>
+          <div>
+            <span>POLICY VERSION</span>
+            <code>{runtimeConfig.policyVersion ?? "not configured"}</code>
+          </div>
+          <div>
+            <span>RETENTION</span>
+            <code>
+              {runtimeConfig.retentionDays
+                ? String(runtimeConfig.retentionDays) + " days"
+                : "not configured"}
+            </code>
+          </div>
+        </div>
+
+
+      </div>
+
     </section>
   );
 }
