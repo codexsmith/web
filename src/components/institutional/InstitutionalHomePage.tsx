@@ -92,11 +92,6 @@ export function InstitutionalHomePage() {
           <div className={styles.inMotionLead}>
             <p className={styles.sectionIndex}>THE LAB IN MOTION</p>
             <h2>See the current state. Choose a way in.</h2>
-            <p>
-              The public site should not stop at describing what Boundary First Labs is.
-              It should also show what is active now and how an outside person or institution
-              can enter the work without having to understand the entire Lab first.
-            </p>
           </div>
 
           <div className={styles.inMotionGrid}>
@@ -107,8 +102,6 @@ export function InstitutionalHomePage() {
               </div>
 
               <h3>{homeNowSnapshot.title}</h3>
-              <p>{homeNowSnapshot.description}</p>
-
               <blockquote>{homeNowSnapshot.thesis}</blockquote>
 
               <div className={styles.nowLaneGrid} aria-label="Current Lab priority lanes">
@@ -139,7 +132,6 @@ export function InstitutionalHomePage() {
                     <small>{door.note}</small>
                   </div>
                   <h3>{door.title}</h3>
-                  <p>{door.description}</p>
                   <strong>
                     {door.cta}
                     <span aria-hidden="true">→</span>
