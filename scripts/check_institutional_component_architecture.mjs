@@ -698,8 +698,10 @@ expect(apparatusMachineryPage.includes("identifier={machine.machineId}"), "Machi
 expect(apparatusMachineryPage.includes("status={machine.maturity}"), "Machinery identity must preserve source maturity");
 expect(apparatusMachineryPage.includes("secondary={machine.integrationLevel}"), "Machinery identity must preserve source integration level");
 expect(machineryContent.includes('"BFL-MACH-CORPUS-FORGE"'), "Machinery projection must include Corpus Forge");
-expect(machineryContent.includes('"BFL-MACH-UX-RECIPE-ADMISSION-PILOT"'), "Machinery projection must include the full ten-component seed cohort");
-expect(machineryContent.includes('"sourceRevision": "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Machinery projection must pin the Lab source revision");
+expect(machineryContent.includes('"BFL-MACH-UX-RECIPE-ADMISSION-PILOT"'), "Machinery projection must retain the admission-gate pilot");
+expect(machineryContent.includes('"BFL-MACH-AGENT-CONTROL"'), "Machinery projection must include reconciled Agent Control");
+expect(machineryContent.includes('"BFL-MACH-ARCHITECTURE-OBSERVATORY"'), "Machinery projection must include reconciled Architecture Observatory");
+expect(machineryContent.includes('"sourceRevision": "5dafabd14f8904f4002b404f115b4969f4b79e0c"'), "Machinery projection must pin the v0.2 reconciliation source revision");
 expect(machineryContent.includes("does not supersede component-local contracts"), "Machinery projection must preserve the registry authority ceiling");
 
 const claimsPage = read(`${root}/InstitutionalClaimsPage.tsx`);
@@ -931,8 +933,8 @@ const homePageForChanges = read(`${root}/InstitutionalHomePage.tsx`);
 const nowPageForChanges = read(`${root}/InstitutionalNowPage.tsx`);
 expect(changesPage.includes("./content/changes"), "What changed route must consume the curated delta projection");
 expect(changesPage.includes("State changes, not activity theater."), "What changed route must state its material-delta boundary");
-expect(changesContent.includes('webRevision: "f6fc94a7dc84225c2718f16adef32b260775eb4f"'), "Change projection must pin the public web source revision");
-expect(changesContent.includes('labRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Change projection must pin the Lab source revision");
+expect(changesContent.includes('webRevision: "0944f1352f12cc1a9a2ec395feb5172217474aee"'), "Change archive must pin the canonical web source cutoff");
+expect(changesContent.includes('labRevision: "f5b8b063349bdf92fb8f5f138df52fcf4482b0ee"'), "Change archive must pin the canonical Lab source cutoff");
 expect(changesContent.includes("It reports selected material changes"), "Change projection must reject complete-activity-feed semantics");
 expect(homePageForChanges.includes("<RecentChangesStrip"), "Homepage must surface the compact recent-change layer");
 expect(nowPageForChanges.includes('title="What materially changed?"'), "Now page must surface recent material deltas");

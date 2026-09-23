@@ -1,6 +1,6 @@
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
-import { changesProjection, recentChanges } from "./content/changes";
+import { allChanges, changesProjection } from "./content/changes";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import { TemporalViewNav } from "./TemporalViewNav";
 import { ChangesExplorer } from "./ChangesExplorer";
@@ -37,18 +37,22 @@ export function InstitutionalChangesPage() {
         <details className={styles.projectionPanel}>
           <summary>
             <span>SOURCE-BOUND DELTA SNAPSHOT</span>
-            <strong>{recentChanges.length} material changes in the current public window</strong>
+            <strong>{allChanges.length} material changes in the curated public archive</strong>
             <small>Inspect source binding</small>
           </summary>
           <div className={styles.projectionDetails}>
             <dl>
               <div>
-                <dt>WEB HEAD</dt>
+                <dt>WEB SOURCE CUTOFF</dt>
                 <dd>{changesProjection.webRevision.slice(0, 12)}</dd>
               </div>
               <div>
-                <dt>LAB HEAD</dt>
+                <dt>LAB SOURCE CUTOFF</dt>
                 <dd>{changesProjection.labRevision.slice(0, 12)}</dd>
+              </div>
+              <div>
+                <dt>ARCHIVE BUILD</dt>
+                <dd>{changesProjection.generatedDate}</dd>
               </div>
             </dl>
             <p>{changesProjection.authority}</p>
@@ -72,12 +76,13 @@ export function InstitutionalChangesPage() {
       <section className={styles.changeCatalog}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>RECENT MATERIAL DELTAS</>}
-          title={<>A small state-transition log over a large moving corpus.</>}
+          eyebrow={<>MATERIAL DELTA ARCHIVE</>}
+          title={<>A curated state-transition history over a large moving corpus.</>}
           note={
             <>
-              Each item points back to an exact repository revision. Interpretation remains
-              bounded to what that revision actually changed.
+              Each item points back to an exact repository revision. Recent entries are joined
+              by selected earlier milestones so the page can show institutional development
+              without pretending to be a complete GitHub activity feed.
             </>
           }
         />

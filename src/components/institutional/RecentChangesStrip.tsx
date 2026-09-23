@@ -22,7 +22,7 @@ export function RecentChangesStrip({
           <span>RECENT DELTA</span>
           <strong>{title}</strong>
         </div>
-        <Link href="/v3/changes">See all changes <span aria-hidden="true">→</span></Link>
+        <Link href="/changes">See all changes <span aria-hidden="true">→</span></Link>
       </header>
 
       <div className={styles.items}>

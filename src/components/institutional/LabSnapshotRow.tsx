@@ -33,11 +33,26 @@ export type LabSnapshotBreakdownItem = {
   tags?: readonly string[];
 };
 
+export type LabSnapshotSummaryStat = {
+  value: string;
+  label: string;
+  detail?: string;
+};
+
+export type LabSnapshotSecondaryDisclosure = {
+  value: string;
+  label: string;
+  detail: string;
+  tags?: readonly string[];
+};
+
 export type LabSnapshotBreakdown = {
   title: string;
   intro: string;
   items: readonly LabSnapshotBreakdownItem[];
   variant?: "grid" | "flow" | "single-row" | "split-tags" | "corpus-split" | "taxonomy";
+  summaryStats?: readonly LabSnapshotSummaryStat[];
+  secondaryDisclosures?: readonly LabSnapshotSecondaryDisclosure[];
   note?: string;
   source?: string;
 };
@@ -182,6 +197,18 @@ export function LabSnapshotRow({
             </button>
           </header>
 
+          {breakdown.summaryStats?.length ? (
+            <div className={styles.breakdownSummary} aria-label="Machinery measurement hierarchy">
+              {breakdown.summaryStats.map((stat) => (
+                <div className={styles.breakdownSummaryItem} key={stat.label} title={stat.detail}>
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                  {stat.detail ? <p>{stat.detail}</p> : null}
+                </div>
+              ))}
+            </div>
+          ) : null}
+
           <div className={styles.breakdownGrid}>
             {breakdown.items.map((item) => (
               <article className={styles.breakdownItem} key={item.label}>
@@ -201,6 +228,25 @@ export function LabSnapshotRow({
               </article>
             ))}
           </div>
+
+          {breakdown.secondaryDisclosures?.length ? (
+            <div className={styles.breakdownSecondary} aria-label="Machinery inventory context">
+              {breakdown.secondaryDisclosures.map((item) => (
+                <article className={styles.breakdownSecondaryItem} key={item.label}>
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                  <p>{item.detail}</p>
+                  {item.tags?.length ? (
+                    <div className={styles.breakdownTags} aria-label={item.label + " details"}>
+                      {item.tags.map((tag) => (
+                        <span className={styles.breakdownTag} key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          ) : null}
 
           {(breakdown.note || breakdown.source) ? (
             <footer className={styles.breakdownFooter}>
