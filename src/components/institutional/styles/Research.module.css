@@ -255,7 +255,7 @@
 
 .programIdentityState {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .programIdentityState > div {
@@ -264,8 +264,12 @@
 }
 
 .programIdentityState > div > div {
+  width: 100%;
   flex: 1 1 100%;
   text-align: left;
+  padding: 10px 12px;
+  border-left: 4px solid #5b63ad;
+  background: rgba(255,255,255,.72);
 }
 
 .programHeaderRight {
