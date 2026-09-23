@@ -579,6 +579,7 @@ expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928
 
 const aiGovernancePage = read(`${root}/InstitutionalAiGovernancePage.tsx`);
 const aiGovernanceContext = read(`${root}/sections/AiGovernanceContextSection.tsx`);
+const aiGovernanceCss = read(`${root}/styles/AiGovernance.module.css`);
 expect(aiGovernancePage.includes("<AiGovernanceContextSection />"), "AI Governance page must delegate supporting governance machinery to the Reflow context section");
 expect(aiGovernancePage.includes("AI IS A FORGE, NOT AN ORACLE"), "AI Governance must preserve the Forge thesis block");
 expect(aiGovernancePage.includes("Capability can amplify craft without becoming authority."), "AI Governance Forge thesis must retain its core statement");
@@ -594,7 +595,6 @@ expect(!aiGovernancePage.includes('className={styles.auditSection}'), "AI Govern
 expect(!aiGovernancePage.includes('className={styles.selfGovernanceSection}'), "AI Governance must not restore the old always-expanded self-governance section");
 expect(!aiGovernancePage.includes('className={styles.firewallSection}'), "AI Governance must not restore the old always-expanded firewall section");
 expect(aiGovernanceContext.includes("Open the part you need."), "AI Governance Reflow context must explicitly orient the reader toward selective inspection");
-const aiGovernanceCss = read(`${root}/styles/AiGovernance.module.css`);
 expect(aiGovernanceCss.includes("grid-template-columns: minmax(0, 1.18fr) minmax(420px, .82fr)"), "AI Governance hero must render as a two-column institutional hero on desktop");
 expect(aiGovernanceCss.includes('font-family: Georgia, "Times New Roman", serif;'), "AI Governance hero headline must use the institutional serif treatment");
 expect(aiGovernanceCss.includes("border-bottom: 2px solid var(--old-gold)"), "AI Governance hero must close with the institutional gold boundary");
