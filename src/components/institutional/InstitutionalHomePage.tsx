@@ -30,8 +30,8 @@ export function InstitutionalHomePage() {
               We build research, methods, products, and operational tools for making consequential systems more legible, reasoning more inspectable, and useful capability easier to transfer.
             </p>
             <div className={styles.heroActions}>
-              <Link className={styles.primaryAction} href="#featured-work">
-                See Featured Work
+              <Link className={styles.primaryAction} href="/applied-work">
+                Explore Applied Work
                 <span aria-hidden="true">→</span>
               </Link>
               <Link className={styles.secondaryAction} href="/research">
