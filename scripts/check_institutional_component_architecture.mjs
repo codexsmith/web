@@ -493,12 +493,13 @@ expect(openLabIntake.includes("Anonymous / pseudonymous"), "Open Lab must suppor
 expect(openLabIntake.includes("No reply path"), "Open Lab must support intake without a forced response identity");
 expect(openLabIntake.includes("does not give permission") && openLabIntake.includes("publish my submission"), "Open Lab must distinguish public-response preference from publication consent");
 expect(openLabIntake.includes("Submission closed"), "Open Lab submit action must visibly close when governance gates are incomplete");
-expect(openLabIntake.includes("Receipt is a state transition, not a verdict."), "Open Lab must expose the review state model");
+expect(openLabIntake.includes("What happens after your submission arrives."), "Open Lab must expose the review process in public-facing language");
 expect(openLabIntake.includes("Tell the Lab what you&apos;re bringing."), "Open Lab governed intake must lead with ordinary public-facing language");
 expect(!openLabIntake.includes("Preserve the submission before deciding where it belongs."), "Open Lab intake must not expose internal routing language as its public headline");
 expect(openLabIntake.includes("openLabQuickIntake"), "Open Lab must promote the submission experience ahead of explanatory machinery");
 expect(openLabIntake.indexOf("openLabQuickIntake") < openLabIntake.indexOf("openLabReadiness"), "Open Lab form and route choice must precede governance/readiness detail");
 expect(openLabIntake.includes("Add context or links"), "Open Lab must progressively disclose optional context rather than front-load every field");
+expect(openLabIntake.indexOf('name="publicResponseRequested"') < openLabIntake.indexOf("</details>"), "Open Lab must keep public-response preference inside optional progressive disclosure");
 expect(openLabIntake.includes("AFTER YOU SUBMIT"), "Open Lab must move explanatory routing context after the primary intake experience");
 expect(openLabIntake.includes("HOW THE INTAKE IS GOVERNED"), "Open Lab must keep governance inspectable after the submission surface");
 
