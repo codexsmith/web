@@ -10,7 +10,7 @@ export function FeaturedProjectCard({
   project,
   styles,
 }: {
-  project: (typeof projects)[0];
+  project: (typeof projects)[number];
   styles: Record<string, string>;
 }) {
   return (
