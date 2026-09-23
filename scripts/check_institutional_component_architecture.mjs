@@ -372,6 +372,7 @@ expect(researchProgramCard.includes("programIdentityPrimary"), "Research program
 expect(researchProgramCard.includes("hideStatus"), "Research program primary identity must omit STATE");
 expect(researchProgramCard.includes("programIdentityState"), "Research program cards must place STATE in its own lower-left plate");
 expect(researchProgramCard.includes("hideKind"), "Research program state plate must omit duplicate object identity");
+expect(researchProgramCard.includes('statusLabel="STATE"') && researchProgramCard.includes('variant="band"'), "Research program STATE must use the full-width identity treatment rather than the compact badge variant");
 expect(
   researchProgramCard.indexOf("programIdentityPrimary") <
     researchProgramCard.indexOf("programIdentityState") &&
@@ -392,7 +393,8 @@ expect(
 expect(researchCss.includes(".programIdentityPrimary"), "Research program cards must style the relocated OBJECT / CODE block");
 expect(researchCss.includes(".programIdentityState"), "Research program cards must style the relocated STATE block");
 expect(researchCss.includes(".programIdentityState {\n  width: 100%;"), "Research program STATE plate must stretch across the left column");
-expect(researchCss.includes("flex: 1 1 100%;\n  text-align: left;"), "Research program STATE field must remain left-aligned while stretching");
+expect(researchCss.includes("width: 100%;\n  flex: 1 1 100%;\n  text-align: left;"), "Research program STATE field must remain left-aligned while stretching");
+expect(researchCss.includes("border-left: 4px solid #5b63ad"), "Research program STATE bar must keep a visible research-object accent");
 
 const productsPage = read(`${root}/InstitutionalProductsPage.tsx`);
 expect(productsPage.includes("childLinks={institutionalChildRoutes.products}"), "Products hero must expose its contextual child pages");
