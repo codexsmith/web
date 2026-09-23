@@ -78,6 +78,10 @@ expect(foundationCss.includes('.header[data-header-compact="true"] .logo {\n  wi
 expect(foundationCss.includes(".inMotionSection"), "Homepage foundation must style the Lab in Motion layer");
 expect(foundationCss.includes(".nowSnapshot"), "Homepage foundation must style the current-state roadmap surface");
 expect(foundationCss.includes(".frontDoorStack"), "Homepage foundation must style the Applied Work / Collaboration / Funding entry stack");
+const routeSharedCss = read(`${root}/styles/InstitutionalRouteShared.module.css`);
+expect(routeSharedCss.includes("white-space: normal"), "Child-link titles must be allowed to wrap");
+expect(routeSharedCss.includes("overflow-wrap: anywhere"), "Child-link titles must remain contained at narrow card widths");
+expect(routeSharedCss.includes("text-wrap: balance"), "Wrapped child-link titles should balance across lines");
 
 const pageShell = read(`${root}/InstitutionalPageShell.tsx`);
 expect(pageShell.includes("<InstitutionalHeader />"), "PageShell must own the shared header");
@@ -242,6 +246,15 @@ expect(!topLevelRouteRegistry.includes('/atlas'), "Lab Atlas must remain a conte
 expect(!topLevelRouteRegistry.includes('/representation-atlas'), "Representation Atlas must remain a contextual route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/start'), "Start here must remain a utility route rather than top-level navigation");
 expect(routeRegistry.includes("institutionalChildRoutes"), "route registry must expose contextual child-page navigation");
+expect(routeRegistry.includes('relation: "VALIDATION"'), "Evidence child links must describe their relationship rather than repeat the page title");
+expect(routeRegistry.includes('relation: "TESTING"'), "Experiments child links must describe their relationship rather than repeat the page title");
+expect(routeRegistry.includes('relation: "ASSERTIONS"'), "Claims child links must describe their relationship rather than repeat the page title");
+expect(routeRegistry.includes('relation: "MACHINERY"'), "Apparatus child links must describe their relationship rather than repeat the page title");
+expect(routeRegistry.includes('relation: "AI CONTROL"'), "AI Governance child links must use a compact relational eyebrow");
+expect(!routeRegistry.includes('relation: "EVIDENCE"'), "Evidence child links must not duplicate title and eyebrow");
+expect(!routeRegistry.includes('relation: "EXPERIMENTS"'), "Experiments child links must not duplicate title and eyebrow");
+expect(!routeRegistry.includes('relation: "CLAIMS"'), "Claims child links must not duplicate title and eyebrow");
+expect(!routeRegistry.includes('relation: "APPARATUS"'), "Apparatus child links must not duplicate title and eyebrow");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
 expect(routeRegistry.includes('{ label: "Apparatus", href: "/apparatus" }'), "footer route collection must include Apparatus");
 expect(routeRegistry.includes('{ label: "Lab Atlas", href: "/atlas" }'), "footer route collection must include Lab Atlas");
