@@ -33,10 +33,9 @@ export function AgenticScientificMethodExperience() {
           <p>THE METHOD</p>
           <h2>Scientific method, with the hidden operations opened up.</h2>
           <span>
-            “Form a hypothesis” hides a lot of machinery. What is the goal? What counts as
-            the system? Which states matter? Which actions are allowed? Which alternative
-            models exist? What observation would distinguish them? Who may change the test?
-            What happens when the representation and the world disagree?
+            “Form a hypothesis” hides a lot of machinery: the goal, system boundary, relevant
+            states, allowed actions, alternatives, distinguishing observations, authority to
+            change the test, and what counts as mismatch.
           </span>
         </div>
 
@@ -246,10 +245,9 @@ export function AgenticScientificMethodExperience() {
             <span>FIRST OPERATIONAL RUN · SELF-HOSTING</span>
             <h3>Use the method to criticize and repair the method.</h3>
             <p>
-              The first bounded ASM run applies the constructor, memory, critic, and repair
-              machinery to its own specification: stabilize sources, extract claims, compare
-              prior art, run an independent critic, preserve defects, repair v0.1, and promote
-              only what survives.
+              The first bounded ASM run applies the method to itself: stabilize sources,
+              extract claims, compare prior art, run an independent critic, preserve defects,
+              repair v0.1, and promote only what survives.
             </p>
           </div>
           <div className={styles.asmSelfHostRule}>
@@ -285,9 +283,8 @@ export function AgenticScientificMethodExperience() {
             <span>CURRENT PRODUCT STATE</span>
             <strong>Research product with a candidate executable specification.</strong>
             <p>
-              The operational suite, governance contracts, Theory Transformation work, and
-              machine-readable transition model provide substantial internal machinery.
-              That is implementation evidence. It is not yet an executed and externally
+              The operational suite, governance contracts, and machine-readable transition
+              model are implementation evidence. They are not yet an executed, externally
               validated scientific research machine.
             </p>
             <div>
