@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
-import { LabObjectIdentity } from "./LabObjectIdentity";
 import { claimProjection, claimRecords } from "./content/claims";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
@@ -10,17 +10,8 @@ import { composeCssModules } from "./styles/composeCssModules";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
-function validationLabel(value: boolean | null) {
-  if (value === true) return "REQUIRED";
-  if (value === false) return "NOT REQUIRED";
-  return "NOT DECLARED";
-}
-
-function noveltyLabel(value: boolean | null) {
-  if (value === true) return "CLAIMED";
-  if (value === false) return "NOT CLAIMED";
-  return "NOT DECLARED";
-}
+const validationRequired = claimRecords.filter((claim) => claim.requiresValidation === true).length;
+const sourceLinkedClaims = claimRecords.filter((claim) => Boolean(claim.source)).length;
 
 export function InstitutionalClaimsPage() {
   return (
@@ -29,147 +20,125 @@ export function InstitutionalClaimsPage() {
         styles={styles}
         className={styles.claimsHero}
         eyebrow={<>CLAIMS</>}
-        title={<>What is the Lab actually asserting?</>}
+        title={<>How does the Lab bound what it asserts?</>}
         lead={
           <>
-            Claims are not prose emphasis. They are bounded research objects with identity,
-            status, validation posture, provenance, and an authority ceiling.
+            A Claim is a research-control object: an assertion with identity, state,
+            provenance, validation posture, and a declared authority ceiling.
           </>
         }
         support={
           <>
-            This first public cohort is intentionally narrow: the owner-local Information
-            Mechanics Claim Ledger already has durable IM-C* identities and is admitted by
-            the Lab Registry Registrar. No Lab-global claim namespace is inferred.
+            Claims belong to research lanes and other owning contexts. This route defines the
+            object family; it is not intended to become one flattened Lab-wide claim ledger.
           </>
         }
         childLinks={institutionalChildRoutes.claims}
       >
         <div className={styles.sourcePanel}>
-          <span>SOURCE-BOUND CLAIM SNAPSHOT</span>
-          <strong>{claimRecords.length} owner-local IM-C* claims</strong>
-          <p>
-            Ledger: {claimProjection.ledgerStatus} · Registrar: {claimProjection.registrarStatus}
-          </p>
+          <span>CURRENT RECOVERED COHORT</span>
+          <strong>{claimProjection.ownerResearch.title}</strong>
+          <p>{claimRecords.length} owner-local {claimProjection.idNamespace} claims</p>
           <dl>
             <div>
               <dt>OWNER</dt>
-              <dd>{claimProjection.authorityOwner}</dd>
+              <dd>{claimProjection.ownerResearch.code}</dd>
             </div>
             <div>
-              <dt>LAB REVISION</dt>
-              <dd>{claimProjection.sourceRevision.slice(0, 12)}</dd>
+              <dt>LEDGER STATE</dt>
+              <dd>{claimProjection.ledgerStatus}</dd>
             </div>
           </dl>
-          <a href={claimProjection.sourceHref} target="_blank" rel="noreferrer">
-            Inspect canonical claim ledger <span aria-hidden="true">-&gt;</span>
-          </a>
         </div>
       </InstitutionalRouteHero>
 
       <section className={styles.authorityBand}>
         <span>AUTHORITY CEILING</span>
-        <strong>{claimProjection.authority}</strong>
-        <p>
-          Registrar admission says this claim ledger exists and identifies its owner. It does
-          not make any row true, proved, novel, publication-ready, or authoritative outside
-          Information Mechanics.
-        </p>
+        <strong>Registration is not truth.</strong>
+        <p>{claimProjection.authority}</p>
       </section>
 
-      <section className={styles.claimCatalog}>
+      <section className={styles.surveySection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>INFORMATION MECHANICS CLAIM LEDGER</>}
-          title={<>Status stays native. Missing fields stay missing.</>}
-          note={
-            <>
-              Validation and novelty are rendered independently from claim status. Evidence
-              notes remain support annotations unless a durable Evidence object is explicitly
-              identified.
-            </>
-          }
+          eyebrow={<>CLAIM OBJECT</>}
+          title={<>Claims should be read beside the research that owns them.</>}
+          note={<>The global route explains the object family; contextual routes supply scientific meaning.</>}
         />
 
-        <div className={styles.claimStack}>
-          {claimRecords.map((claim) => (
-            <article
-              className={styles.claimCard}
-              id={"claim-" + claim.id.toLowerCase()}
-              key={claim.id}
-            >
-              <LabObjectIdentity
-                kind="claim"
-                identifier={claim.id}
-                identifierLabel="CLAIM"
-                status={claim.status}
-                statusLabel="STATUS"
-                secondary={claimProjection.ownerResearch.title}
-                secondaryLabel="OWNER PROGRAM"
-              />
-
-              <div className={styles.claimStatement}>
-                <span>CLAIM STATEMENT</span>
-                <h2>{claim.claim}</h2>
-              </div>
-
-              <div className={styles.claimStateGrid}>
-                <div data-state={claim.requiresValidation === true ? "open" : "neutral"}>
-                  <span>VALIDATION</span>
-                  <strong>{validationLabel(claim.requiresValidation)}</strong>
-                </div>
-                <div>
-                  <span>NOVELTY CLAIM</span>
-                  <strong>{noveltyLabel(claim.noveltyClaim)}</strong>
-                </div>
-                <div>
-                  <span>OWNER RESEARCH</span>
-                  <strong>{claimProjection.ownerResearch.code}</strong>
-                  <p>{claimProjection.ownerResearch.title}</p>
-                </div>
-              </div>
-
-              <div className={styles.claimEvidenceGrid}>
-                <div>
-                  <span>EVIDENCE / SUPPORT NOTES</span>
-                  {claim.evidence.length ? (
-                    <ul>
-                      {claim.evidence.map((item) => <li key={item}>{item}</li>)}
-                    </ul>
-                  ) : (
-                    <p>No evidence annotation is declared on this ledger row.</p>
-                  )}
-                </div>
-                <div>
-                  <span>SOURCE LOCATOR</span>
-                  {claim.source ? (
-                    <code>{claim.source}</code>
-                  ) : (
-                    <p>No source locator is declared on this ledger row.</p>
-                  )}
-                </div>
-              </div>
-
-              <div className={styles.claimFirewall}>
-                <span>DO NOT INFER</span>
-                <p>
-                  Claim registration and status are research-control state. They are not truth,
-                  theorem proof, novelty, publication promotion, or cross-domain authority.
-                </p>
-              </div>
-            </article>
-          ))}
+        <div className={styles.surveyGrid}>
+          <article>
+            <span>WHAT IT IS</span>
+            <h3>Bounded assertion.</h3>
+            <p>
+              A claim records what is being asserted, its current status, whether validation
+              remains open, and what source or evidence relationships are actually declared.
+            </p>
+          </article>
+          <article>
+            <span>WHERE IT BELONGS</span>
+            <h3>Owned by a research context.</h3>
+            <p>
+              Foundational claims belong with research lanes. Product and project claims
+              should appear beside the artifacts, tests, and decisions that give them meaning.
+            </p>
+          </article>
+          <article>
+            <span>WHAT THIS PAGE DOES</span>
+            <h3>Scope, not universal ledger.</h3>
+            <p>
+              This route defines Claim as an institutional object and reports which claim
+              cohorts are currently safe to project publicly.
+            </p>
+          </article>
         </div>
       </section>
 
-      <section className={styles.claimClose}>
-        <span>CURRENT PUBLIC BOUNDARY</span>
-        <h2>One owner-local ledger is better than a fictional universal claim database.</h2>
-        <p>
-          Other Lab packages contain claim ledgers, theorem registers, and evidence surfaces.
-          They should join this public graph only when their identity, authority, and
-          relationships are explicit enough to project without flattening local semantics.
-        </p>
+      <section className={styles.scopeSection}>
+        <div>
+          <p className={styles.sectionIndex}>CURRENT PUBLIC RECOVERY</p>
+          <h2>Information Mechanics is one admitted cohort, not “the Lab’s claims.”</h2>
+          <p>
+            The current public source is owner-local to {claimProjection.ownerResearch.title}.
+            Its presence demonstrates the claim machinery without pretending other research
+            programs share the same namespace or ledger semantics.
+          </p>
+        </div>
+
+        <div className={styles.scopeGrid}>
+          <article>
+            <span>CLAIMS</span>
+            <strong>{claimRecords.length}</strong>
+            <p>{claimProjection.idNamespace} namespace</p>
+          </article>
+          <article>
+            <span>VALIDATION OPEN</span>
+            <strong>{validationRequired}</strong>
+            <p>Rows explicitly marked as requiring validation.</p>
+          </article>
+          <article>
+            <span>SOURCE LOCATORS</span>
+            <strong>{sourceLinkedClaims}</strong>
+            <p>Rows with a declared source locator in the current ledger.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.placementSection}>
+        <div>
+          <p className={styles.sectionIndex}>NEXT PLACEMENT PASS</p>
+          <h2>Put claims beside their owners, evidence, and tests.</h2>
+          <p>
+            The next pass will attach filtered claim views to research lanes, products, and
+            projects. This route will remain the institutional explanation of Claim objects.
+          </p>
+        </div>
+        <nav aria-label="Claim placement destinations">
+          <Link href="/research">Research <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/experiments">Experiments <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/publications">Publications <span aria-hidden="true">-&gt;</span></Link>
+        </nav>
       </section>
     </InstitutionalPageShell>
   );
