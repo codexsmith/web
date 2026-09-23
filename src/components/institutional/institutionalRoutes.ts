@@ -290,9 +290,9 @@ export const institutionalFooterGroups = [
   {
     label: "Work",
     routes: [
+      { label: "Applied Work", href: "/applied-work" },
       { label: "Products", href: "/products" },
       { label: "Projects", href: "/projects" },
-      { label: "Applied Work", href: "/applied-work" },
     ],
   },
   {
