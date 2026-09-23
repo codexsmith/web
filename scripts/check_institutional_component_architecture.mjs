@@ -525,6 +525,11 @@ expect(!aiGovernancePage.includes('className={styles.auditSection}'), "AI Govern
 expect(!aiGovernancePage.includes('className={styles.selfGovernanceSection}'), "AI Governance must not restore the old always-expanded self-governance section");
 expect(!aiGovernancePage.includes('className={styles.firewallSection}'), "AI Governance must not restore the old always-expanded firewall section");
 expect(aiGovernanceContext.includes("Open the part you need."), "AI Governance Reflow context must explicitly orient the reader toward selective inspection");
+const aiGovernanceCss = read(`${root}/styles/AiGovernance.module.css`);
+expect(aiGovernanceCss.includes("grid-template-columns: minmax(0, 1.18fr) minmax(420px, .82fr)"), "AI Governance hero must render as a two-column institutional hero on desktop");
+expect(aiGovernanceCss.includes('font-family: Georgia, "Times New Roman", serif;'), "AI Governance hero headline must use the institutional serif treatment");
+expect(aiGovernanceCss.includes("border-bottom: 2px solid var(--old-gold)"), "AI Governance hero must close with the institutional gold boundary");
+expect(aiGovernanceCss.includes("@media (max-width: 1080px)") && aiGovernanceCss.includes("grid-template-columns: 1fr"), "AI Governance hero must collapse cleanly below desktop width");
 expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose internal /v3 public links");
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
