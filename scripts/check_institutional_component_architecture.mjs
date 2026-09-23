@@ -518,6 +518,13 @@ expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928
 const aiGovernancePage = read(`${root}/InstitutionalAiGovernancePage.tsx`);
 const aiGovernanceContext = read(`${root}/sections/AiGovernanceContextSection.tsx`);
 expect(aiGovernancePage.includes("<AiGovernanceContextSection />"), "AI Governance page must delegate supporting governance machinery to the Reflow context section");
+expect(aiGovernancePage.includes("AI IS A FORGE, NOT AN ORACLE"), "AI Governance must preserve the Forge thesis block");
+expect(aiGovernancePage.includes("Capability can amplify craft without becoming authority."), "AI Governance Forge thesis must retain its core statement");
+expect(!aiGovernancePage.includes("What source material entered the process?"), "AI Governance Forge thesis must not restore the removed question matrix");
+expect(!aiGovernancePage.includes("Do not confuse fluency with temper."), "AI Governance Forge thesis must not restore the removed quote panel");
+expect(!aiGovernanceCss.includes(".forgeQuestions"), "AI Governance must not retain dead Forge question-grid styling");
+expect(!aiGovernanceCss.includes(".forgeQuote"), "AI Governance must not retain dead Forge quote styling");
+expect(aiGovernanceCss.includes(".forgeLead {\n  max-width: 520px;"), "AI Governance Forge thesis must remain a compact single-column statement");
 expect(!aiGovernancePage.includes('className={styles.boundarySection}'), "AI Governance must not restore the old always-expanded governance-boundary section");
 expect(!aiGovernancePage.includes('className={styles.consequenceSection}'), "AI Governance must not restore the old always-expanded consequence section");
 expect(!aiGovernancePage.includes('className={styles.certificateSection}'), "AI Governance must not restore the old always-expanded certificate section");
