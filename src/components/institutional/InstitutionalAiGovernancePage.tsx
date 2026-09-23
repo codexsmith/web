@@ -25,9 +25,9 @@ export function InstitutionalAiGovernancePage() {
         title={<>AI should expand human agency without escaping human accountability.</>}
         lead={
           <>
-            Boundary First Labs uses artificial intelligence extensively. The governing
-            distinction is not “AI yes” or “AI no.” It is whether a system is helping a
-            person work—or exercising consequential delegated agency across a real boundary.
+            Boundary First Labs uses artificial intelligence extensively. The question is not
+            “AI yes” or “AI no,” but where AI assists human work and where it exercises
+            consequential delegated agency.
           </>
         }
         support={
