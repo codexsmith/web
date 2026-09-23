@@ -277,7 +277,7 @@ expect(routeRegistry.includes('{ label: "Start here", href: "/start" }'), "foote
 expect(routeRegistry.includes('{ label: "Contact", href: "/contact" }'), "footer route collection must include Contact");
 
 const childRouteContracts = [
-  ["about", ["founder", "aiGovernance", "now", "funding", "collaboration", "appliedWork"]],
+  ["about", ["founder", "labThroughTime", "aiGovernance", "now", "collaboration", "appliedWork"]],
   ["research", ["atlas", "representationAtlas", "aiGovernance", "experiments", "claims", "apparatus"]],
   ["products", ["appliedWork", "evidence", "collaboration", "now"]],
   ["projects", ["appliedWork", "aiGovernance", "evidence", "now", "collaboration", "apparatus"]],
@@ -286,10 +286,11 @@ const childRouteContracts = [
   ["collaboration", ["appliedWork", "funding", "evidence", "now"]],
   ["appliedWork", ["aiGovernance", "evidence", "collaboration", "funding", "now"]],
   ["aiGovernance", ["appliedWork", "evidence", "collaboration", "apparatus"]],
-  ["founder", ["evidence", "now", "collaboration"]],
+  ["founder", ["labThroughTime", "evidence", "now", "collaboration"]],
   ["evidence", ["claims", "experiments", "atlas", "now"]],
-  ["now", ["changes", "funding", "appliedWork", "collaboration"]],
-  ["changes", ["now", "atlas", "evidence", "apparatus"]],
+  ["now", ["changes", "labThroughTime", "funding", "appliedWork", "collaboration"]],
+  ["changes", ["now", "labThroughTime", "atlas", "evidence", "apparatus"]],
+  ["labThroughTime", ["founder", "now", "changes", "evidence"]],
   ["apparatus", ["experiments", "atlas", "evidence", "claims"]],
   ["experiments", ["evidence", "claims", "apparatus", "atlas", "representationAtlas"]],
   ["claims", ["evidence", "experiments", "atlas", "representationAtlas"]],
@@ -310,6 +311,7 @@ const contextualChildPageKeys = [
   "changes",
   "collaboration",
   "founder",
+  "labThroughTime",
   "aiGovernance",
   "apparatus",
   "atlas",
