@@ -19,7 +19,7 @@ export function AgenticScientificMethodExperience() {
       actions={[
         { href: "#method", label: "Enter the method" },
         {
-          href: "/v3/contact?type=collaboration&source=agentic-scientific-method",
+          href: "/contact?type=collaboration&source=agentic-scientific-method",
           label: "Discuss a pilot",
           kind: "secondary",
         },
@@ -316,16 +316,16 @@ export function AgenticScientificMethodExperience() {
           </div>
 
           <div>
-            <Link href="/v3/contact?type=collaboration&source=agentic-scientific-method">
+            <Link href="/contact?type=collaboration&source=agentic-scientific-method">
               Discuss an ASM pilot or benchmark <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/v3/research">
+            <Link href="/research">
               Explore the research program <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/v3/ai-governance">
+            <Link href="/ai-governance">
               See the AI Governance boundary <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/v3/products">
+            <Link href="/products">
               Back to Products <span aria-hidden="true">→</span>
             </Link>
           </div>
