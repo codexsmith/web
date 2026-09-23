@@ -2951,7 +2951,7 @@
 .homeOrientationSummaryCopy > span {
   display: block;
   color: color-mix(in srgb, var(--orientation-accent) 76%, #26384b);
-  font: 800 clamp(.92rem, 1.15vw, 1.18rem)/1.05 ui-monospace, SFMono-Regular, Menlo, monospace;
+  font: 800 clamp(1.08rem, 1.35vw, 1.36rem)/1.02 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .1em;
 }
 
@@ -2959,7 +2959,7 @@
   margin: 12px 0 0;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.02rem, 1.3vw, 1.28rem);
+  font-size: clamp(.98rem, 1.15vw, 1.16rem);
   font-weight: 500;
   letter-spacing: -.025em;
   line-height: 1.08;
@@ -3350,20 +3350,14 @@
 .homeOrientationGrid[data-reflow-active="true"]
   .homeOrientationCard:not([data-reflow-state="selected"])
   .homeOrientationSummaryCopy > span {
-  font-size: .72rem;
+  font-size: .8rem;
 }
 
 .homeOrientationGrid[data-reflow-active="true"]
   .homeOrientationCard:not([data-reflow-state="selected"])
   .homeOrientationSummary h3 {
-  margin: 8px 0 0;
-  font-size: .82rem;
-}
-
-.homeOrientationGrid[data-reflow-active="true"]
-  .homeOrientationCard:not([data-reflow-state="selected"])
-  .homeOrientationSummary p {
-  display: none;
+  margin: 7px 0 0;
+  font-size: .74rem;
 }
 
 .homeOrientationGrid[data-reflow-active="true"]
@@ -3404,12 +3398,12 @@
 }
 
 .homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummaryCopy > span {
-  font-size: clamp(1rem, 1.35vw, 1.3rem);
+  font-size: clamp(1.16rem, 1.5vw, 1.45rem);
 }
 
 .homeOrientationCard[data-reflow-state="selected"] .homeOrientationSummary h3 {
-  margin: 10px 0 0;
-  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  margin: 9px 0 0;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
 }
 
 .homeOrientationCard[data-reflow-state="selected"] .homeOrientationMiniature {
