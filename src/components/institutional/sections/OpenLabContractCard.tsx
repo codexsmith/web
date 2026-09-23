@@ -44,7 +44,7 @@ export function OpenLabContractCard({
             <Link
               className={styles.openLabContractAction}
               href={
-                "/v3/open-lab?type=" +
+                "/open-lab?type=" +
                 encodeURIComponent(contract.type) +
                 "#open-lab-intake"
               }
