@@ -31,9 +31,8 @@ export function InstitutionalStartPage() {
         }
         support={
           <>
-            These are suggested traversals, not separate versions of the institution.
-            Nothing changes truth, status, evidence, or authority because a different
-            audience entered through a different door.
+            These are suggested paths through the same public Lab. Truth, status, evidence,
+            and authority do not change with the audience.
           </>
         }
         childLinks={institutionalChildRoutes.start}
