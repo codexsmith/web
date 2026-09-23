@@ -22,7 +22,7 @@ export function InstitutionalLabThroughTimePage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.timelineHero}
-        eyebrow={<>LAB THROUGH TIME — PUBLIC PROVENANCE SEED</>}
+        eyebrow={<>LAB THROUGH TIME</>}
         title={<>The Lab has a history.</>}
         lead={
           <>
