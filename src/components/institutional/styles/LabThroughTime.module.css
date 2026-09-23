@@ -39,8 +39,7 @@
 .timelineBoundary > span,
 .timelineTopline > span,
 .timelineMeta span,
-.timelineOpen > span,
-.continuitySection aside > span {
+.timelineOpen > span {
   color: #526173;
   font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .13em;
