@@ -45,11 +45,9 @@ export function InstitutionalOpenLabPage({
         }
         support={
           <>
-            The public should be able to bring consequential systems, criticism,
-            expertise, collaboration, failed reproductions, counterexamples, and
-            unusual work to the Lab without first learning the Lab&apos;s internal
-            vocabulary. Scientific method needs disconfirming evidence; agentic
-            reasoning needs outside observations it did not generate for itself.
+            Bring criticism, failed reproductions, counterexamples, specialist knowledge,
+            consequential systems, or unusual work. You should not need the Lab&apos;s
+            vocabulary before you can challenge or contribute to it.
           </>
         }
         childLinks={institutionalChildRoutes.openLab}
