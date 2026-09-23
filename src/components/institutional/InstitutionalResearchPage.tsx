@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -34,28 +35,47 @@ export function InstitutionalResearchPage() {
           </blockquote>
         </InstitutionalRouteHero>
 
-        <section className={styles.researchOrientation}>
-          <div>
-            <p className={styles.sectionIndex}>HOW TO READ THIS PAGE</p>
-            <h2>Different objects. Different maturity.</h2>
+        <section className={styles.researchGatewayBand}>
+          <div className={styles.researchOrientation}>
+            <div>
+              <p className={styles.sectionIndex}>HOW TO READ THIS PAGE</p>
+              <h2>Different objects. Different maturity.</h2>
+            </div>
+            <div className={styles.orientationCopy}>
+              <p>
+                The Lab maintains research programs, working theories, registered research
+                lanes, experiments, implementations, and publication candidates at different
+                stages.
+              </p>
+              <p>
+                Status is shown so a reader does not have to infer confidence from tone,
+                credentials, design, or institutional authority.
+              </p>
+            </div>
+            <div className={styles.orientationRule}>
+              <span className={styles.routeSignal} aria-hidden="true" />
+              <strong>SOURCE-GOVERNED STATUS</strong>
+              <p>Visible state is descriptive, not a score or endorsement.</p>
+            </div>
           </div>
-          <div className={styles.orientationCopy}>
+
+          <aside className={styles.researchPublicationsFeature}>
+            <p className={styles.sectionIndex}>PUBLICATIONS</p>
+            <h2>Read the argument. Inspect the machinery behind it.</h2>
             <p>
-              The Lab maintains research programs, working theories, registered research
-              lanes, experiments, implementations, and publication candidates at different
-              stages.
+              Working papers, technical reports, formal specifications, experiment reports,
+              reference implementations, and Research Deployment Packets remain connected to
+              their source and status.
             </p>
-            <p>
-              A public page may summarize those objects, but it does not promote them.
-              Status is shown so a reader does not have to infer confidence from tone,
-              credentials, design, or institutional authority.
-            </p>
-          </div>
-          <div className={styles.orientationRule}>
-            <span className={styles.routeSignal} aria-hidden="true" />
-            <strong>SOURCE-GOVERNED STATUS</strong>
-            <p>Visible state is descriptive, not a score or endorsement.</p>
-          </div>
+            <div className={styles.researchPublicationsActions}>
+              <Link href="/publications">
+                Explore Publications <span aria-hidden="true">→</span>
+              </Link>
+              <Link href="/research/paper-mine">
+                Open Paper Mine <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </aside>
         </section>
 
         <section className={styles.researchPrograms}>
