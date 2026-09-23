@@ -844,8 +844,8 @@ expect(featuredProjectCardForObjects.includes("status={project.status}"), "Proje
 expect(publicationCardsForObjects.includes("publication.typeCode"), "Publication records must preserve their publication type identity");
 expect(publicationCardsForObjects.includes("publication.sourceState"), "Publication records must preserve source publication state");
 expect(publicationCardsForObjects.includes("publication.sourceRegistryId"), "Publication records must preserve their controlling registry identity");
-expect(publicationsCatalogForObjects.includes("identifier={publication.id}"), "Publication record identifiers must remain source-provided records");
-expect(publicationsCatalogForObjects.includes('identifierLabel="SOURCE ID"'), "Publication identities must disclose source-governed identifiers");
+expect(publicationCardsForObjects.includes('id={"publication-" + publication.id}'), "Publication record identifiers must remain source-provided records");
+expect(publicationCardsForObjects.includes("publication.sourceRef"), "Publication identities must disclose their source-governed record reference");
 const publicationContentForObjects = read(`${root}/content/publications.ts`);
 expect(publicationContentForObjects.includes('id: "PUB-001"'), "Publication source IDs must replace website-local publication aliases");
 expect(publicationContentForObjects.includes('id: "PUB-002"'), "Publication source IDs must preserve the second sequence artifact");
@@ -855,7 +855,7 @@ expect(publicationContentForObjects.includes('sourceRevision: "3a8c984712ae1d87c
 expect(publicationContentForObjects.includes('"REG-PUBLICATION-SEQUENCE"'), "Publication projection must include Publication Sequence authority");
 expect(publicationContentForObjects.includes('"REG-PUBLICATION-GRAPH"'), "Publication projection must include Publication Graph authority");
 expect(publicationContentForObjects.includes('"REG-PUBLICATION-SOURCES"'), "Publication projection must include Publication Source Registry authority");
-expect(publicationsCatalogForObjects.includes("status={publication.recordState}"), "Publication identity must preserve record state");
+expect(publicationCardsForObjects.includes("publication.sourceState"), "Publication identity must preserve source record state");
 
 
 const atlasPage = read(`${root}/InstitutionalAtlasPage.tsx`);
