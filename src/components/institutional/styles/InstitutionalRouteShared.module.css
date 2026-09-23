@@ -248,7 +248,8 @@
 .routeChildCopy strong {
   min-width: 0;
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
   text-wrap: balance;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
