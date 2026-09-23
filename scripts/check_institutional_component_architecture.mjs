@@ -64,6 +64,12 @@ expect(homePage.includes("styles.inMotionSection"), "Homepage must expose the La
 expect(homeContent.includes("homeNowSnapshot"), "Homepage content must expose a current Now / Roadmap snapshot");
 expect(homeContent.includes('href: "/now"'), "Homepage Now snapshot must link to the public roadmap");
 expect(homeContent.includes('href: "/applied-work"'), "Homepage must expose Applied Work as an institutional front door");
+expect(homeContent.includes("homeAppliedWorkFeature"), "Homepage content must define a prominent consulting offer");
+expect(homePage.includes("styles.homeConsultingFeature"), "Homepage must render a dedicated consulting feature above Featured Work");
+expect(
+  homePage.indexOf("styles.homeConsultingFeature") < homePage.indexOf("styles.featuredSection"),
+  "Homepage consulting offer must appear before Featured Work",
+);
 expect(homeContent.includes('href: "/collaboration"'), "Homepage must expose Collaboration as an institutional front door");
 expect(homeContent.includes('href: "/funding"'), "Homepage must expose Funding as an institutional front door");
 expect(homeContent.includes("Externalize → test → repair → repeat → transfer."), "Homepage Now snapshot must preserve the current operating thesis");
@@ -81,6 +87,7 @@ expect(foundationCss.includes('.header[data-header-compact="true"] .logo {\n  wi
 expect(foundationCss.includes(".inMotionSection"), "Homepage foundation must style the Lab in Motion layer");
 expect(foundationCss.includes(".nowSnapshot"), "Homepage foundation must style the current-state roadmap surface");
 expect(foundationCss.includes(".frontDoorStack"), "Homepage foundation must style the Applied Work / Collaboration / Funding entry stack");
+expect(foundationCss.includes(".homeConsultingFeature"), "Homepage foundation must style the prominent consulting offer");
 const routeSharedCss = read(`${root}/styles/InstitutionalRouteShared.module.css`);
 expect(routeSharedCss.includes("white-space: normal"), "Child-link titles must be allowed to wrap");
 expect(routeSharedCss.includes("overflow-wrap: normal"), "Child-link titles must wrap at ordinary word boundaries");
@@ -240,7 +247,8 @@ expect(!topLevelRouteRegistry.includes('/funding'), "Funding must remain a conte
 expect(!topLevelRouteRegistry.includes('/apparatus'), "Apparatus must stay out of the primary header route set");
 expect(!topLevelRouteRegistry.includes('/founder'), "Founder must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
-expect(!topLevelRouteRegistry.includes('/applied-work'), "Applied Work must remain a contextual child route rather than top-level navigation");
+expect(topLevelRouteRegistry.includes('{ label: "Applied Work", href: "/applied-work" }'), "Applied Work must be a primary top-level consulting route");
+expect(!topLevelRouteRegistry.includes('{ label: "Publications", href: "/publications" }'), "Publications must be discovered from Research rather than occupying primary top navigation");
 expect(!topLevelRouteRegistry.includes('/ai-governance'), "AI Governance must remain a first-class secondary route rather than primary top navigation");
 expect(!topLevelRouteRegistry.includes('/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/experiments'), "Experiments must remain a contextual child route rather than top-level navigation");
@@ -372,6 +380,10 @@ expect(chrome.includes("institutionalFooterGroups.map"), "footer must render gro
 
 const researchPage = read(`${root}/InstitutionalResearchPage.tsx`);
 expect(researchPage.includes("childLinks={institutionalChildRoutes.research}"), "Research hero must expose its contextual child pages");
+expect(researchPage.includes("styles.researchGatewayBand"), "Research must split its orientation row into a gateway band");
+expect(researchPage.includes("styles.researchPublicationsFeature"), "Research must feature Publications beside the reading orientation");
+expect(researchPage.includes('href="/publications"'), "Research Publications feature must link to the publication catalog");
+expect(researchPage.includes('href="/research/paper-mine"'), "Research Publications feature must expose Paper Mine");
 expect(researchPage.includes("<ResearchContextSection />"), "Research must compose its contextual bento as a section component");
 expect(
   researchPage.indexOf('<MoonshotsFeature context="research" />') <
@@ -641,9 +653,9 @@ expect(aboutGroups.includes("They are leverage, not staff."), "About must distin
 const appliedWorkPage = read(`${root}/InstitutionalAppliedWorkPage.tsx`);
 const appliedWorkContent = read(`${root}/content/appliedWork.ts`);
 expect(appliedWorkPage.includes("./content/appliedWork"), "Applied Work page must own a route-local content model");
-expect(appliedWorkPage.includes("What can Boundary First Labs help your organization do?"), "Applied Work hero must lead with the ordinary commercial question");
+expect(appliedWorkPage.includes("Consulting for difficult systems."), "Applied Work hero must explicitly present the consulting offer");
 expect(appliedWorkContent.includes("NO THEORY BUY-IN REQUIRED"), "Applied Work must separate service value from theory adoption");
-expect(appliedWorkPage.includes("CURRENT COMMERCIAL POSTURE"), "Applied Work must disclose current BFL service maturity");
+expect(appliedWorkPage.includes("CONSULTING AVAILABILITY"), "Applied Work must disclose current consulting availability and maturity");
 expect(appliedWorkPage.includes("appliedServiceFamily"), "Applied Work must group concrete offers inside larger service families");
 expect(appliedWorkPage.includes("childLinks={institutionalChildRoutes.appliedWork}"), "Applied Work hero must expose Evidence as a child page");
 expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work'), "Applied Work must expose a contextual Contact route");
