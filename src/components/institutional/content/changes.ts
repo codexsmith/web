@@ -163,7 +163,7 @@ export const historicalChanges: readonly PublicChange[] = [
       "A visitor can see how information, mathematics, physics, computation, and language sit inside a broader representational-domain frame.",
     sourceRepository: "codexsmith/web",
     sourceRevision: "f6fc94a7dc84225c2718f16adef32b260775eb4f",
-    sourceLabel: "Expose representational taxonomy in the Lab Snapshot",
+    sourceLabel: "Style representational domain taxonomy",
     sourceHref:
       "https://github.com/codexsmith/web/commit/f6fc94a7dc84225c2718f16adef32b260775eb4f",
     surfaceHref: "/",
