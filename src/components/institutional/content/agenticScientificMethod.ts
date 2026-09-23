@@ -6,7 +6,7 @@ export const agenticScientificMethodProduct = {
     "An operational research protocol that makes goals, boundaries, state, evidence, criticism, repair, authority, and closure explicit enough for humans and agents to work together.",
   status: "RESEARCH PRODUCT · OPERATIONAL SUITE V0.1",
   statusNote:
-    "The protocol, authority model, templates, validation ladder, and transition contract exist. External pilots, comparative benchmarks, cross-domain replication, and formal validation remain open.",
+    "The protocol, authority model, templates, validation ladder, and transition contract exist. External user pilots, comparative benchmarks, cross-domain replication, and formal validation remain open.",
   theme: "asm",
 } as const;
 
