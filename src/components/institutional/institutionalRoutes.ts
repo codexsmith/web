@@ -3,7 +3,7 @@ export const institutionalRoutes = [
   { label: "Research", href: "/research" },
   { label: "Products", href: "/products" },
   { label: "Projects", href: "/projects" },
-  { label: "Publications", href: "/publications" },
+  { label: "Applied Work", href: "/applied-work" },
   { label: "Open Lab", href: "/open-lab" },
 ] as const;
 
