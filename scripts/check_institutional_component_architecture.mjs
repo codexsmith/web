@@ -45,6 +45,9 @@ expect(commandPaletteContent.includes("atlasNodes"), "Lab command search must de
 expect(commandPaletteContent.includes("atlasEdges"), "Lab command search must include only explicit Atlas relationship data");
 expect(commandPaletteContent.includes('/atlas?focus='), "Lab object search results must deep-link to the canonical Atlas focus state");
 expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
+expect(primitives.includes('aria-label="Related pages"'), "Contextual route navigation must use public-facing Related pages language");
+expect(primitives.includes(">RELATED</span>"), "Contextual route navigation must not expose CHILD PAGE implementation language");
+expect(!primitives.includes("CHILD PAGES"), "Shared route navigation must not restore implementation-facing child-page copy");
 expect(labObjectIdentity.includes("data-kind={kind}"), "LabObjectIdentity must expose object-kind semantics to presentation");
 expect(labObjectIdentity.includes("identifierLabel = \"ID\""), "LabObjectIdentity must distinguish source identifiers from local codes");
 expect(labObjectIdentity.includes("statusLabel = \"STATUS\""), "LabObjectIdentity must preserve source-native status labeling");
@@ -196,6 +199,7 @@ for (const [file, slug] of routeContracts) {
   expect(routeOwnsContent || sectionOwnsContent, `${file} or its route-local section must import the content model`);
   expect(fs.existsSync(`${root}/content/${slug}.ts`), `missing content model for ${file}`);
   expect(!source.includes('padStart(2, "0")'), `${file} must use formatOrdinal rather than inline formatting`);
+  expect(!source.includes('href="/v3/'), `${file} must not expose legacy /v3 public hrefs`);
 }
 
 for (const file of [
