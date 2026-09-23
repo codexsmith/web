@@ -377,12 +377,10 @@ export function OpenLabIntakeInstrument({
                 />
                 <span>
                   {runtimeConfig.retentionDays
-                    ? "I understand this deployment declares an intake retention window of " +
+                    ? "I understand submissions may be retained for up to " +
                       String(runtimeConfig.retentionDays) +
-                      " days under policy " +
-                      (runtimeConfig.policyVersion ?? "the configured policy") +
-                      "."
-                    : "No governed retention window is configured, so formal submission remains disabled."}
+                      " days under the current intake policy."
+                    : "Formal submission is unavailable because no retention policy is configured."}
                 </span>
               </label>
             </div>
@@ -510,16 +508,16 @@ export function OpenLabIntakeInstrument({
           data-live={runtimeConfig.enabled ? "true" : "false"}
         >
           <div className={styles.openLabReadinessLead}>
-            <span>OPERATING STATE</span>
+            <span>INTAKE STATUS</span>
             <strong>
               {runtimeConfig.enabled
-                ? "Governed submission receiver active."
-                : "Submission machinery staged; collection closed."}
+                ? "Intake is open."
+                : "Formal intake is closed."}
             </strong>
             <p>
               {runtimeConfig.enabled
-                ? "The receiver, authentication, policy version, retention window, and pinned-source review acknowledgement are all declared for this deployment."
-                : "The form remains inspectable, but the site will not accept material until every activation gate is explicitly satisfied."}
+                ? "The Lab is accepting submissions for private review."
+                : "Submissions stay disabled until the privacy, retention, and review controls are ready."}
             </p>
           </div>
 
