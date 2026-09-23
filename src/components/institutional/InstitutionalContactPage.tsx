@@ -34,33 +34,28 @@ export function InstitutionalContactPage({
       <InstitutionalRouteHero
         styles={styles}
         className={styles.contactHero}
-        eyebrow={<>CONTACT / START A CONVERSATION</>}
-        title={<>Start with why you are reaching out.</>}
+        eyebrow={<>CONTACT</>}
+        title={<>Start with what brought you here.</>}
         lead={
           <>
-            One public front door should be enough. Boundary First Labs can route the
-            conversation after it understands the problem, opportunity, or reason for contact.
-          </>
-        }
-        support={
-          <>
-            You do not need to know the Lab&apos;s internal structure first. Choose the closest
-            reason, give enough context to make the first decision useful, and keep sensitive
-            material out of the initial message.
+            A question, critique, practical problem, collaboration idea, introduction, or
+            strange edge case is enough. You do not need a polished pitch or the right
+            internal category.
           </>
         }
         childLinks={institutionalChildRoutes.contact}
       >
-        <aside className={styles.contactIntakeStatus} data-live={intakeEnabled ? "true" : "false"}>
-          <span>INTAKE STATUS</span>
-          <strong>{intakeEnabled ? "Direct inquiry receiver connected." : "Routing surface ready; receiver not connected."}</strong>
+        <aside className={styles.contactIntakeStatus} data-live="true">
+          <span>EMAIL IS LIVE</span>
+          <strong><a href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a></strong>
           <p>
-            {intakeEnabled
-              ? "Messages are validated, typed, and sent through the server-side inquiry boundary with their source context attached."
-              : "No message is accepted or stored on this deployment. The form remains visibly disabled until a receiving endpoint is configured."}
+            A short note is enough. Tell us what caught your attention, what you are working
+            on, or what you think would be useful to talk about.
           </p>
           <p className={styles.contactDirectEmail}>
-            Direct email: <a href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a>
+            {intakeEnabled
+              ? "Prefer a form? The structured contact form below is live too."
+              : "Email is the live contact route right now. The web form will appear here when its receiver is connected."}
           </p>
         </aside>
       </InstitutionalRouteHero>
@@ -68,12 +63,11 @@ export function InstitutionalContactPage({
       <section className={styles.contactRoutesSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>CHOOSE THE CLOSEST DOOR</>}
-          title={<>Three reasons to enter, with smaller routes inside them.</>}
+          eyebrow={<>WHAT BRINGS YOU HERE</>}
+          title={<>Pick whatever is closest. It does not have to be exact.</>}
           note={
             <>
-              Pick the best fit, not the perfect category. The message can be rerouted later
-              without asking you to restate the whole context.
+              This only helps us understand the message and point it toward the right work.
             </>
           }
         />
@@ -99,7 +93,7 @@ export function InstitutionalContactPage({
                   if (!type) return null;
 
                   return (
-                    <Link href={`/v3/contact?type=${type.id}`} key={type.id}>
+                    <Link href={`/contact?type=${type.id}`} key={type.id}>
                       <strong>{type.label}</strong>
                       <p>{type.short}</p>
                       <span aria-hidden="true">-&gt;</span>
@@ -114,11 +108,11 @@ export function InstitutionalContactPage({
 
       <section className={styles.contactFormSection}>
         <div className={styles.contactFormLead}>
-          <p className={styles.sectionIndex}>THE FIRST MESSAGE</p>
-          <h2>Enough context to route it. No intake essay required.</h2>
+          <p className={styles.sectionIndex}>WRITE A NOTE</p>
+          <h2>A few useful details are enough.</h2>
           <p>
-            The form stays intentionally small. A strong first message says what is real,
-            why the Lab is relevant, and what a useful next step would look like.
+            Tell us what you are thinking about, point us to anything relevant, and say what
+            kind of response would be useful. Save sensitive material for later.
           </p>
 
           <div className={styles.contactHelpfulContext}>
@@ -129,22 +123,34 @@ export function InstitutionalContactPage({
           </div>
         </div>
 
-        <InstitutionalInquiryForm
-          initialType={initialType}
-          intakeEnabled={intakeEnabled}
-          sourceContext={sourceContext}
-        />
+        {intakeEnabled ? (
+          <InstitutionalInquiryForm
+            initialType={initialType}
+            intakeEnabled={intakeEnabled}
+            sourceContext={sourceContext}
+          />
+        ) : (
+          <aside className={styles.contactEmailFallback}>
+            <span>EMAIL INSTEAD</span>
+            <h3>The web form is not connected yet.</h3>
+            <p>
+              Email is already live, so there is no need to wait for the form. A short,
+              ordinary message is welcome.
+            </p>
+            <a href={PUBLIC_CONTACT_MAILTO}>Write {PUBLIC_CONTACT_EMAIL} <span aria-hidden="true">-&gt;</span></a>
+          </aside>
+        )}
       </section>
 
       <section className={styles.contactProcessSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>WHAT HAPPENS AFTER CONTACT</>}
-          title={<>The inbox is a boundary, not the relationship database.</>}
+          eyebrow={<>WHAT HAPPENS NEXT</>}
+          title={<>If there is a useful next step, we will make it concrete.</>}
           note={
             <>
-              Serious contact should move into the appropriate work or relationship system
-              once it becomes more than an initial message.
+              Sometimes that is a conversation, review, introduction, pilot, or pointer
+              elsewhere. Sometimes the useful answer is simply that there is not a fit yet.
             </>
           }
         />
@@ -162,11 +168,11 @@ export function InstitutionalContactPage({
 
       <section className={styles.contactBoundariesSection}>
         <div className={styles.contactBoundariesLead}>
-          <p className={styles.sectionIndex}>FIRST-CONTACT BOUNDARIES</p>
-          <h2>Make the first boundary easy to cross without making it careless.</h2>
+          <p className={styles.sectionIndex}>A FEW PRACTICAL BOUNDARIES</p>
+          <h2>Keep first contact simple and safe.</h2>
           <p>
-            Contact should be low-friction, but it should not erase confidentiality,
-            endorsement, provenance, or routing distinctions before a relationship even exists.
+            You can be informal. Just avoid sending secrets or protected material before
+            there is an appropriate way to handle it.
           </p>
         </div>
 
@@ -181,20 +187,20 @@ export function InstitutionalContactPage({
       </section>
 
       <section className={styles.contactClose}>
-        <p className={styles.sectionIndex}>BEFORE YOU WRITE</p>
-        <h2>A short, specific message beats a polished pitch.</h2>
+        <p className={styles.sectionIndex}>NOT SURE YET?</p>
+        <h2>You can still just write.</h2>
         <p>
-          If you are still deciding whether there is a fit, the pages below show how the
-          Lab works with clients, collaborators, funders, and external reviewers before you
-          commit to a conversation.
+          If something here made you curious, skeptical, excited, confused, or useful to
+          talk to, that is enough reason to send a note. These pages are here if you want
+          more context first.
         </p>
 
         <nav className={styles.contactCloseLinks} aria-label="Contact context routes">
-          <Link href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
