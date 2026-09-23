@@ -925,7 +925,7 @@ const publicStateContent = read(`${root}/content/publicState.ts`);
 const publicStateProjection = read("src/generated/lab-public-state/public-state.json");
 const labThroughTimePage = read(`${root}/InstitutionalLabThroughTimePage.tsx`);
 const labThroughTimeRoute = read("src/app/v3/lab-through-time/page.tsx");
-expect(temporalViewNav.includes("three temporal views"), "Temporal view navigation must explain the three time scales");
+expect(temporalViewNav.includes("THREE TIME SCALES"), "Temporal view navigation must explain the three time scales");
 expect(temporalViewNav.includes('href={view.href}'), "Temporal view navigation must route from the shared projection model");
 expect(nowPageForChanges.includes('<TemporalViewNav activeView="now"'), "Now must participate in the shared temporal navigation");
 expect(changesPage.includes('<TemporalViewNav activeView="changes"'), "What Changed must participate in the shared temporal navigation");
@@ -934,7 +934,7 @@ expect(publicStateProjection.includes('"labRevision": "4be0a745d4e6f8148495c75ba
 expect(publicStateProjection.includes('"projectionStatus": "initial_manual_seed"'), "Public state seed must disclose that cross-repo automation is not wired yet");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-001"'), "Public timeline projection must use durable Timeline identities");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-005"'), "Public timeline projection must preserve the current five-event seed boundary");
-expect(labThroughTimePage.includes("Five events are a seed, not the complete history."), "Lab Through Time must disclose the incomplete seed boundary");
+expect(labThroughTimePage.includes("This five-event public projection is only a seed."), "Lab Through Time must disclose the incomplete seed boundary");
 expect(labThroughTimePage.includes('<TemporalViewNav activeView="timeline"'), "Lab Through Time must participate in the shared temporal navigation");
 expect(labThroughTimePage.includes("Milestones, not a long changelog."), "Lab Through Time must preserve the long-horizon materiality boundary");
 expect(labThroughTimeRoute.includes('canonical: "/lab-through-time"'), "Lab Through Time must declare the canonical public route");
