@@ -31,7 +31,6 @@ export function InstitutionalMoonshotsPage() {
         eyebrow={<>MOONSHOTS · LONG-HORIZON RESEARCH</>}
         title={<>Long-horizon objectives. Explicit open problems.</>}
         lead={<>{moonshotsProgram.summary}</>}
-        support={<>{moonshotsProgram.body?.[0]}</>}
       >
         <div className={styles.moonshotsHeroLedger}>
           <div>
