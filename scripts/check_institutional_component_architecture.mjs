@@ -65,6 +65,10 @@ expect(homeContent.includes('href: "/collaboration"'), "Homepage must expose Col
 expect(homeContent.includes('href: "/funding"'), "Homepage must expose Funding as an institutional front door");
 expect(homeContent.includes("Externalize → test → repair → repeat → transfer."), "Homepage Now snapshot must preserve the current operating thesis");
 expect(homePage.includes("homeInstitutionalFrontDoors.map"), "Homepage institutional front doors must render from the content model");
+expect(!homePage.includes("The public site should not stop at describing what Boundary First Labs is."), "Lab in Motion must not carry explanatory site-meta prose");
+expect(!homePage.includes("homeNowSnapshot.description"), "Lab in Motion Now card must stay focused on state, thesis, lanes, and action");
+expect(!homePage.includes("door.description"), "Lab in Motion front doors must stay focused on title, compact note, and action");
+expect(!homeContent.includes("The immediate problem is not generating more ideas."), "Removed Lab in Motion descriptive prose must not remain in the homepage content model");
 
 const foundationCss = read(`${root}/styles/InstitutionalFoundation.module.css`);
 expect(foundationCss.includes('border-color: rgba(184, 154, 71, .46)'), "Institutional header must carry a muted antique-gold perimeter");
