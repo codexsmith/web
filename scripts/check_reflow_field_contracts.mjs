@@ -21,6 +21,9 @@ const publicationCss = fs.readFileSync("src/components/institutional/styles/Publ
 const openLab = fs.readFileSync("src/components/institutional/InstitutionalOpenLabPage.tsx", "utf8");
 const openLabContext = fs.readFileSync("src/components/institutional/sections/OpenLabContextSection.tsx", "utf8");
 const openLabCss = fs.readFileSync("src/components/institutional/styles/OpenLab.module.css", "utf8");
+const aiGovernance = fs.readFileSync("src/components/institutional/InstitutionalAiGovernancePage.tsx", "utf8");
+const aiGovernanceContext = fs.readFileSync("src/components/institutional/sections/AiGovernanceContextSection.tsx", "utf8");
+const aiGovernanceCss = fs.readFileSync("src/components/institutional/styles/AiGovernance.module.css", "utf8");
 const about = fs.readFileSync("src/components/institutional/InstitutionalAboutPage.tsx", "utf8");
 const aboutGroups = fs.readFileSync("src/components/institutional/sections/AboutReflowGroups.tsx", "utf8");
 const aboutCss = fs.readFileSync("src/components/institutional/styles/About.module.css", "utf8");
@@ -145,6 +148,17 @@ expect(openLabContext.includes('id="capability-transfer"'), "Open Lab Context mu
 expect(openLabCss.includes("--reflow-focus-span: 6"), "five-card Open Lab focus-stage must place two compact cards per wide row");
 expect(openLabCss.includes(".openLabContextAgency { --reflow-span: 5; }"), "Open Lab Context REST state must retain authored magazine spans");
 expect(openLabCss.includes(".openLabContextCapability { --reflow-span: 6; }"), "Open Lab capability transfer must participate in the authored REST composition");
+expect(aiGovernance.includes("<AiGovernanceContextSection />"), "AI Governance must move supporting governance machinery into one modular Reflow section");
+expect(aiGovernanceContext.includes('layoutMode="focus-stage"'), "AI Governance Context must use focus-stage reflow");
+expect(aiGovernanceContext.includes("itemOrder={governanceContextOrder}"), "AI Governance Context must declare stable source ordering");
+expect((aiGovernanceContext.match(/<GovernanceCard/g) || []).length === 6, "AI Governance Context must expose six inspectable supporting surfaces");
+for (const id of ["governance-boundary", "accountable-consequence", "deployment-claim", "review-surfaces", "lab-self-governance", "claim-firewall"]) {
+  expect(aiGovernanceContext.includes(`id="${id}"`), `AI Governance Context must retain ${id}`);
+}
+expect(aiGovernanceCss.includes(".governanceContextGrid"), "AI Governance must style a dedicated Reflow context field");
+expect(aiGovernanceCss.includes("--reflow-columns: 12"), "AI Governance Reflow must use an authored twelve-column rest field");
+expect(aiGovernanceCss.includes("height: 112px"), "AI Governance focus-stage peers must contract to compact plates");
+expect(!aiGovernance.includes('href="/v3/'), "AI Governance public actions must use canonical public paths");
 expect(about.includes("<AboutReflowGroups />"), "About page must compose its three doctrine chapters as Reflow groups");
 expect((aboutGroups.match(/<ReflowField(?:\s|>)/g) || []).length === 3, "About must expose one independent Reflow field per narrative chapter");
 expect((aboutGroups.match(/layoutMode="focus-stage"/g) || []).length === 3, "All About chapter fields must use focus-stage reflow");
@@ -170,6 +184,7 @@ for (const [name, source] of [
   ["Apparatus", apparatusContext],
   ["Publications", publicationContext],
   ["Open Lab", openLabContext],
+  ["AI Governance", aiGovernanceContext],
 ]) {
   expect(!/index="\d+"/.test(source), `${name} Reflow summaries must not render ordinal number plates`);
 }
