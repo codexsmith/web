@@ -33,12 +33,9 @@ export function InstitutionalFundingPage() {
         }
         support={
           <>
-            The near-term funding problem is narrower: convert an existing body of
-            research, software, methods, prototypes, and product candidates into public,
-            reviewable, useful work that can meet external evidence. Funding is also a
-            stewardship problem: scarce time, attention, infrastructure, and material
-            capacity should leave behind durable public value rather than hidden dependency
-            or displaced cost.
+            Near-term support converts existing research, software, methods, prototypes,
+            and product candidates into public, reviewable work that can meet external
+            evidence and leave behind durable value.
           </>
         }
         childLinks={institutionalChildRoutes.funding}
