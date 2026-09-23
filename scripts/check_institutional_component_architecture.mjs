@@ -556,7 +556,7 @@ expect(openLabApi.indexOf("await fetch(receiver") < openLabApi.indexOf("submissi
 
 expect(openLabIntake.includes("FORMAL INTAKE IS CURRENTLY CLOSED"), "Open Lab UI must make a closed collection boundary explicit in public-facing language");
 expect(openLabIntake.includes("Anonymous / pseudonymous"), "Open Lab must support non-prestige-gated submitter identity");
-expect(openLabIntake.includes("No reply path"), "Open Lab must support intake without a forced response identity");
+expect(openLabIntake.includes("No reply needed"), "Open Lab must support intake without a forced response identity");
 expect(openLabIntake.includes("does not give permission") && openLabIntake.includes("publish my submission"), "Open Lab must distinguish public-response preference from publication consent");
 expect(openLabIntake.includes("Submission closed"), "Open Lab submit action must visibly close when governance gates are incomplete");
 expect(openLabIntake.includes("What happens after your submission arrives."), "Open Lab must expose the review process in public-facing language");
