@@ -744,9 +744,15 @@ expect(collaborationPage.includes("childLinks={institutionalChildRoutes.collabor
 expect(collaborationPage.includes('/v3/contact?type=collaboration&source=collaboration'), "Collaboration must expose a contextual Contact route");
 
 const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
+const founderCss = read(`${root}/styles/Founder.module.css`);
 expect(founderPage.includes("./content/founder"), "Founder page must own a route-local content model");
-expect(founderPage.includes("Nicholas T. Smith"), "Founder page must identify Nicholas T. Smith");
-expect(founderPage.includes("computer scientist, systems engineer"), "Founder hero must state the requested professional identity");
+expect((founderPage.match(/Nicholas T\. Smith/g) ?? []).length === 1, "Founder hero must identify Nicholas T. Smith exactly once");
+expect(founderPage.includes("title={<>Nicholas T. Smith</>}"), "Founder hero must use the canonical full name as the H1");
+expect(founderPage.includes("eyebrow={<>FOUNDER</>}"), "Founder hero eyebrow must not repeat the founder name");
+expect(!founderPage.includes("title={<>Nick.</>}"), "Founder hero must not restore the informal Nick. splash title");
+expect(founderPage.includes("Computer scientist, systems engineer, and founder of Boundary First Labs."), "Founder hero must state the professional identity without repeating the name");
+expect(!founderPage.includes("<strong>Nicholas T. Smith</strong>"), "Founder identity plate must not duplicate the founder name");
+expect(founderCss.includes("font-size: clamp(3.8rem, 6.2vw, 7.4rem)"), "Founder H1 must use the normalized institutional name scale");
 expect(founderPage.includes('className={styles.founderBoundary}'), "Founder page must state the founder-dependence boundary");
 expect(founderPage.includes("childLinks={institutionalChildRoutes.founder}"), "Founder hero must expose Evidence as a child page");
 
