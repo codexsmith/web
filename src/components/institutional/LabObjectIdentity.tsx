@@ -103,12 +103,7 @@ export function LabObjectIdentity({
           label={statusLabel}
           value={
             typeof status === "string"
-              ? status.split("_").map((part, i, arr) => (
-                  <React.Fragment key={i}>
-                    {part}
-                    {i < arr.length - 1 && <br />}
-                  </React.Fragment>
-                ))
+              ? status.replaceAll("_", " ")
               : status
           }
         />
