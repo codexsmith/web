@@ -338,11 +338,12 @@ async function visit(browser, config) {
   page.on("pageerror", (error) => pageErrors.push(String(error).slice(0, 500)));
 
   const response = await page.goto(`${base}${config.route}`, {
-    waitUntil: "networkidle",
+    waitUntil: "domcontentloaded",
     timeout: 30_000,
   });
+  await page.waitForLoadState("load", { timeout: 15_000 }).catch(() => undefined);
   await page.evaluate(() => document.fonts.ready);
-  await page.waitForTimeout(80);
+  await page.waitForTimeout(120);
 
   const metrics = await inspectPage(page);
   const issues = [];
