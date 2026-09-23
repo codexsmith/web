@@ -10,6 +10,7 @@ import { machineryProjection, machineryRecords } from "./content/machinery";
 import { LabObjectIdentity } from "./LabObjectIdentity";
 import { ApparatusContextSection } from "./sections/ApparatusContextSection";
 import { institutionalChildRoutes } from "./institutionalRoutes";
+import { ArchitectureProjectionSection } from "./ArchitectureProjectionSection";
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
 
 export function InstitutionalApparatusPage() {
@@ -34,6 +35,17 @@ export function InstitutionalApparatusPage() {
             Agent proposes. Machine verifies. World adjudicates.
           </blockquote>
         </InstitutionalRouteHero>
+
+        <ArchitectureProjectionSection
+          eyebrow="THE LAB MACHINE"
+          title="Instruments for making complex work addressable, inspectable, and transferable."
+          copy={[
+            "The apparatus is federated rather than monolithic. Source material remains in its owning research, product, publication, or operational home. Registries provide addressability. Typed relations and transforms connect objects where their contracts allow it.",
+            "Instruments read and operate over that structure without silently becoming the authority they observe. This is why the Lab builds bounded registrars, evidence controls, experiments, provenance, Corpus Forge, the Architecture Observatory, deployment packets, validators, and queues.",
+          ]}
+          variant="apparatus-stack"
+          pullLine="Legible by humans. Executable by machines. Repairable under critique."
+        />
 
         <section className={styles.machineryRegistry}>
           <InstitutionalSectionHeader
