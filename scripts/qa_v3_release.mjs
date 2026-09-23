@@ -15,12 +15,22 @@ const routeSource = fs.readFileSync("src/lib/site-release.ts", "utf8");
 const routeBlock = routeSource.match(
   /institutionalPublicRoutes\s*=\s*\[([\s\S]*?)\]\s*as const/,
 )?.[1];
+const contentNodeRouteBlock = routeSource.match(
+  /institutionalContentNodeRoutes\s*=\s*\[([\s\S]*?)\]\s*as const/,
+)?.[1];
 
 if (!routeBlock) {
   throw new Error("Could not read institutionalPublicRoutes from src/lib/site-release.ts");
 }
 
-const publicRoutes = [...routeBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
+const publicRoutes = [
+  ...new Set([
+    ...[...routeBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1]),
+    ...(contentNodeRouteBlock
+      ? [...contentNodeRouteBlock.matchAll(/"([^"]+)"/g)].map((match) => match[1])
+      : []),
+  ]),
+];
 
 const viewports = {
   desktop: { width: 1440, height: 1000 },
