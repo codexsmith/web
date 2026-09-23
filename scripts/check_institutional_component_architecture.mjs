@@ -441,7 +441,7 @@ const productExperienceShell = read(`${root}/products/ProductExperienceShell.tsx
 const chessExperience = read(`${root}/products/BoundaryFirstChessExperience.tsx`);
 const chessBoard = read(`${root}/products/BoundaryFirstChessBoard.tsx`);
 const chessContent = read(`${root}/content/boundaryFirstChess.ts`);
-const chessRoute = read("src/app/products/boundary-first-chess/page.tsx");
+const chessRoute = read("src/app/v3/products/boundary-first-chess/page.tsx");
 expect(productExperienceShell.includes("ProductExperienceShell"), "Product detail pages must share a reusable experience shell");
 expect(productExperienceShell.includes("data-institutional-hero"), "Product experience hero must participate in compact institutional header behavior");
 expect(productExperienceShell.includes("productExperienceNav"), "Product experience shell must expose reusable local product navigation");
@@ -457,7 +457,7 @@ expect(chessRoute.includes("BoundaryFirstChessExperience"), "Boundary-First Ches
 const weatherExperience = read(`${root}/products/BoundaryFirstWeatherExperience.tsx`);
 const weatherField = read(`${root}/products/BoundaryFirstWeatherField.tsx`);
 const weatherContent = read(`${root}/content/boundaryFirstWeather.ts`);
-const weatherRoute = read("src/app/products/boundary-first-weather/page.tsx");
+const weatherRoute = read("src/app/v3/products/boundary-first-weather/page.tsx");
 expect(weatherExperience.includes("<ProductExperienceShell"), "Boundary First Weather must use the shared product experience shell");
 expect(weatherExperience.includes("<BoundaryFirstWeatherField"), "Boundary First Weather must expose an interactive simulation-field instrument");
 expect(weatherExperience.includes("A compelling visualization is not forecast skill."), "Boundary First Weather must keep visualization separate from forecast-skill claims");
@@ -470,7 +470,7 @@ expect(weatherRoute.includes("BoundaryFirstWeatherExperience"), "Boundary First 
 const explorerExperience = read(`${root}/products/YouTubeKnowledgeExplorerExperience.tsx`);
 const explorerInstrument = read(`${root}/products/YouTubeKnowledgeExplorerInstrument.tsx`);
 const explorerContent = read(`${root}/content/youtubeKnowledgeExplorer.ts`);
-const explorerRoute = read("src/app/products/youtube-knowledge-explorer/page.tsx");
+const explorerRoute = read("src/app/v3/products/youtube-knowledge-explorer/page.tsx");
 expect(explorerExperience.includes("<ProductExperienceShell"), "YouTube Knowledge Explorer must use the shared product experience shell");
 expect(explorerExperience.includes("<YouTubeKnowledgeExplorerInstrument"), "YouTube Knowledge Explorer must expose an interactive source-navigation instrument");
 expect(explorerExperience.includes("Ask the video. Make the answer show its work."), "YouTube Knowledge Explorer must foreground evidence-bound answering");
@@ -486,7 +486,7 @@ expect(explorerRoute.includes("YouTubeKnowledgeExplorerExperience"), "YouTube Kn
 const asmExperience = read(`${root}/products/AgenticScientificMethodExperience.tsx`);
 const asmInstrument = read(`${root}/products/AgenticScientificMethodInstrument.tsx`);
 const asmContent = read(`${root}/content/agenticScientificMethod.ts`);
-const asmRoute = read("src/app/products/agentic-scientific-method/page.tsx");
+const asmRoute = read("src/app/v3/products/agentic-scientific-method/page.tsx");
 expect(asmExperience.includes("<ProductExperienceShell"), "Agentic Scientific Method must use the shared product experience shell");
 expect(asmExperience.includes("<AgenticScientificMethodInstrument"), "Agentic Scientific Method must expose an interactive inquiry-machine instrument");
 expect(asmExperience.includes("Scientific method, with the hidden operations opened up."), "ASM must foreground the operational inquiry thesis");
