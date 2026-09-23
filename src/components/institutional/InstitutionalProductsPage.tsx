@@ -42,7 +42,7 @@ export function InstitutionalProductsPage() {
             <Link
               className={styles.primaryProductCard}
               data-product="chess"
-              href="/v3/products/boundary-first-chess"
+              href="/products/boundary-first-chess"
             >
               <div className={styles.productCardTopline}>
                 <span className={styles.productOrdinal}>01</span>
@@ -106,7 +106,7 @@ export function InstitutionalProductsPage() {
             <Link
               className={styles.primaryProductCard}
               data-product="explorer"
-              href="/v3/products/youtube-knowledge-explorer"
+              href="/products/youtube-knowledge-explorer"
             >
               <div className={styles.productCardTopline}>
                 <span className={styles.productOrdinal}>02</span>
@@ -175,7 +175,7 @@ export function InstitutionalProductsPage() {
           />
 
           <div className={styles.researchProductGrid}>
-            <Link className={styles.researchProductCard} data-product="weather" href="/v3/products/boundary-first-weather">
+            <Link className={styles.researchProductCard} data-product="weather" href="/products/boundary-first-weather">
               <div>
                 <span>03 · RESEARCH PRODUCT</span>
                 <strong>Boundary First Weather</strong>
@@ -187,7 +187,7 @@ export function InstitutionalProductsPage() {
               <small>Enter Weather <i aria-hidden="true">→</i></small>
             </Link>
 
-            <Link className={styles.researchProductCard} data-product="asm" href="/v3/products/agentic-scientific-method">
+            <Link className={styles.researchProductCard} data-product="asm" href="/products/agentic-scientific-method">
               <div>
                 <span>04 · RESEARCH PRODUCT</span>
                 <strong>Agentic Scientific Method</strong>
