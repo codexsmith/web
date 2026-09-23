@@ -242,100 +242,6 @@
   line-height: 1.5;
 }
 
-.continuitySection {
-  padding: 50px clamp(30px,6vw,96px);
-  border-bottom: 1px solid var(--timeline-line);
-  background: #fff;
-}
-
-.continuityLead {
-  max-width: 1080px;
-}
-
-.continuitySection h2,
-.timelineClose h2 {
-  margin: 10px 0 14px;
-  color: var(--royal-blue-deep);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.15rem,3vw,3.7rem);
-  font-weight: 500;
-  letter-spacing: -.045em;
-  line-height: .98;
-}
-
-.continuityLead > p:last-child,
-.timelineClose > p {
-  margin: 0;
-  color: #435470;
-  font-size: .9rem;
-  line-height: 1.6;
-}
-
-.continuityWork {
-  margin-top: 22px;
-  border: 1px solid rgba(7,26,61,.2);
-  border-left: 5px solid var(--old-gold);
-  background: #f7f9fb;
-}
-
-.continuityWork > summary {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(180px,.42fr) minmax(0,1fr) auto;
-  gap: 16px;
-  align-items: center;
-  padding: 13px 46px 13px 15px;
-  cursor: pointer;
-  list-style: none;
-}
-
-.continuityWork > summary::-webkit-details-marker {
-  display: none;
-}
-
-.continuityWork > summary::after {
-  content: "+";
-  position: absolute;
-  right: 16px;
-  color: var(--old-gold-dark);
-  font: 800 1rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-.continuityWork[open] > summary::after {
-  content: "−";
-}
-
-.continuityWork > summary > span {
-  color: var(--old-gold-dark);
-  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .13em;
-}
-
-.continuityWork > summary > strong {
-  color: var(--timeline-ink);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: .92rem;
-  font-weight: 600;
-}
-
-.continuityWork > summary > small {
-  color: var(--timeline-muted);
-  font: 700 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-
-.continuityWork ul {
-  margin: 0;
-  padding: 14px 20px 16px 34px;
-  border-top: 1px solid var(--timeline-line);
-  color: #52627b;
-  font-size: .74rem;
-  line-height: 1.55;
-}
-
-.continuityWork li + li {
-  margin-top: 8px;
-}
-
 .timelineClose {
   padding: 54px clamp(30px,7vw,112px) 66px;
   background: linear-gradient(180deg,#173d7d,var(--royal-blue-deep));
@@ -389,7 +295,6 @@
   .timelineHero,
   .timelineBoundary,
   .timelineCatalog,
-  .continuitySection,
   .timelineClose {
     padding-left: 22px;
     padding-right: 22px;
@@ -398,16 +303,6 @@
   .timelineHero h1 {
     font-size: clamp(3rem,13.5vw,4.6rem);
   }
-
-  .continuityWork > summary {
-    grid-template-columns: 1fr;
-    gap: 6px;
-  }
-
-  .continuityWork > summary > small {
-    display: none;
-  }
-
 
   .timelineStack::before {
     left: 19px;
