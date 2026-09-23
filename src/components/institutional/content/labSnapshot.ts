@@ -1,12 +1,12 @@
 import type { LabSnapshotRowProps } from "../LabSnapshotRow";
 
-const registrySource = "Source: Lab Registry Catalog · Sep 16, 2026 · 57 registered descriptors.";
-const machinerySource = "Source: Lab Machinery Registry · Sep 5, 2026 · 10 registered machinery components.";
+const registrySource = "Source: Lab Registry Catalog · Sep 23, 2026 carry-forward · 58 registered descriptors / 46 active / 29 software-readable.";
+const machinerySource = "Source: Lab Machinery Registry Reconciliation v0.2 · Sep 23, 2026 · 12 registered machinery components.";
 const taxonomySource = "Source: Representation Modality Kernel · Sep 13, 2026 + Representational Quadrature · Sep 15, 2026 + current Library domain-family layout.";
 
 export const homeLabSnapshot = {
   label: "Lab snapshot",
-  updated: "Sep 17, 2026",
+  updated: "Sep 23, 2026",
   note:
     "Point-in-time view of corpus scale and the machinery used to keep work routed, inspectable, tested, and persistent without relying on one person's memory. Not live telemetry.",
   metrics: [
@@ -117,55 +117,48 @@ export const homeLabSnapshot = {
     },
     {
       id: "active",
-      value: "7",
-      label: "core machines",
+      value: "8",
+      label: "stable machines",
       icon: "active",
-      detail: "7 of 10 registered Lab machinery components are marked stable in the current Machinery Registry.",
+      detail: "8 of 12 registered Lab machinery components are marked stable in Machinery Registry Reconciliation v0.2.",
       breakdown: {
-        title: "Seven stable machines carry the recurring operational load.",
+        title: "Eight stable machines carry the recurring operational load.",
         variant: "single-row",
         intro:
-          "The Lab is not operated by manually tending dozens of independent files or registers. A smaller set of stable machinery handles recurring jobs such as routing, intake, research refinement, provenance, management rollups, and publication control.",
+          "The Lab currently recognizes 12 independently addressable machinery components. Eight form the stable operating kernel; two are candidate, one is prototype, and one is pilot. Those components realize a broader inventory of 40 recurring machinery families.",
+        summaryStats: [
+          { value: "40", label: "machinery families", detail: "Recurring capability and mechanism families; family count is not machine count." },
+          { value: "12", label: "registered machines", detail: "Independently addressable BFL-MACH-* components." },
+          { value: "8", label: "stable machines", detail: "The maturity-filtered stable operating kernel." },
+          { value: "6", label: "operating functions", detail: "Store, Route, Transform, Test, Govern, and Project classify what machinery does." },
+        ],
         items: [
+          { value: "01", label: "Control Plane", detail: "Keeps structural maps, routing, derived measurements, freshness checks, and health surfaces coherent." },
+          { value: "02", label: "Intake Audit & Commit", detail: "Moves new material into the Library through auditable ingest, adjudication, commit, refresh, and re-check." },
+          { value: "03", label: "Corpus Forge", detail: "Runs bounded corpus refinement, criticism, evidence production, and candidate repair without crossing human promotion gates." },
+          { value: "04", label: "Agentic Artifact Protocol", detail: "Makes opted-in research objects addressable and testable by software while preserving local authority." },
+          { value: "05", label: "Supporting Capture", detail: "Preserves provenance, integrity, and supporting source material without silently promoting it into current theory." },
+          { value: "06", label: "Management Control", detail: "Rolls up and routes cross-Lab work while leaving domain-local work and authority with their owners." },
+          { value: "07", label: "Publication Control & Paper Mine", detail: "Tracks publication dependencies, sources, queues, public projections, measurements, and history." },
+          { value: "08", label: "Agent Control", detail: "Admits, schedules, dispatches, evidences, and verifies bounded automated work while preserving packet scope, capability limits, independent verification, and human consequence gates." },
+        ],
+        secondaryDisclosures: [
           {
-            value: "01",
-            label: "Control Plane",
-            detail: "Keeps structural maps, routing, derived measurements, freshness checks, and health surfaces coherent.",
+            value: "12 total",
+            label: "Registered machinery",
+            detail: "8 stable · 2 candidate · 1 prototype · 1 pilot",
+            tags: ["BLF Translation · candidate", "Architecture Observatory · candidate", "Executable Sandbox / Workbench · prototype", "UX Recipe Admission Gate · pilot"],
           },
           {
-            value: "02",
-            label: "Intake audit & commit",
-            detail: "Moves new material into the Library through an auditable ingest, adjudication, commit, refresh, and re-check cycle.",
-          },
-          {
-            value: "03",
-            label: "Corpus Forge",
-            detail: "Runs bounded corpus refinement, criticism, evidence production, and candidate repair without crossing human promotion gates.",
-          },
-          {
-            value: "04",
-            label: "Agentic Artifact Protocol",
-            detail: "Makes opted-in research objects addressable and testable by software while preserving their local authority.",
-          },
-          {
-            value: "05",
-            label: "Supporting Capture",
-            detail: "Preserves provenance, integrity, and supporting source material without silently promoting it into current theory.",
-          },
-          {
-            value: "06",
-            label: "Management Control",
-            detail: "Rolls up and routes cross-Lab work while leaving domain-local work and authority with their owners.",
-          },
-          {
-            value: "07",
-            label: "Publication Control & Paper Mine",
-            detail: "Tracks publication dependencies, sources, queues, projections, measurements, and history.",
+            value: "40 total",
+            label: "Capability families",
+            detail: "15 enrolled · 7 partial · 15 distributed · 3 candidate-component",
+            tags: ["family ≠ component", "component ≠ maturity", "function ≠ machine", "registered ≠ authorized"],
           },
         ],
         note:
-          "This is the first answer to how one person can operate all this: most persistent state is memory around a much smaller operating core. The operator works through the machines and their control surfaces rather than holding the corpus in working memory.",
-        source: machinerySource + ' Derived from maturity === "stable".',
+          "Families describe recurring capabilities. Components give independently addressable machinery an identity. Maturity tells us which components form the stable operating kernel. Functions describe what that machinery does.",
+        source: machinerySource + ' Stable subset is maturity === "stable"; family distribution comes from the v0.2 family/component crosswalk.',
       },
     },
     {
@@ -177,7 +170,7 @@ export const homeLabSnapshot = {
       breakdown: {
         title: "The machinery takes six recurring jobs off the operator's plate.",
         intro:
-          "These are not scores, departments, or six separate tools. They are the recurring kinds of work that appear across the Lab. Different machines can perform several of them; the point is that the operator can reason about the whole system through one small vocabulary.",
+          "These six functions classify work performed across machinery families and registered components. They are not six departments, six scores, or six separate tools. Different machines can perform several of them; the point is that the operator can reason about the whole system through one small vocabulary.",
         variant: "flow",
         items: [
           {
@@ -227,7 +220,7 @@ export const homeLabSnapshot = {
       value: "29",
       label: "software-readable",
       icon: "machine",
-      detail: "29 of 57 registered state surfaces expose structured state that software can inspect directly.",
+      detail: "29 of 58 registered state surfaces expose structured state that software can inspect directly.",
       breakdown: {
         title: "What software can see — and what still lives in human-first documents.",
         intro:
@@ -260,7 +253,7 @@ export const homeLabSnapshot = {
             ],
           },
           {
-            value: "28",
+            value: "29",
             label: "Human-first",
             detail: "The authoritative surface remains primarily written, reviewed, and interpreted by a person.",
             tags: [
