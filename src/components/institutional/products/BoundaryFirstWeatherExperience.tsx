@@ -16,7 +16,7 @@ export function BoundaryFirstWeatherExperience() {
       actions={[
         { href: "#instrument", label: "Enter the Weather Lab" },
         {
-          href: "/research/applied-testbeds/weather?detail=record:boundary-first-weather",
+          href: "/research/applied-testbeds/weather",
           label: "Open research record",
           kind: "secondary",
         },
