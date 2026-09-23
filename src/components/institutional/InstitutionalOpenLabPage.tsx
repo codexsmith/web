@@ -145,7 +145,7 @@ export function InstitutionalOpenLabPage({
           className={styles.openLabCloseLinks}
           aria-label="Open Lab next steps"
         >
-          <Link href="/v3/contact?type=open-lab&source=open-lab">
+          <Link href="/contact?type=open-lab&source=open-lab">
             Start a conversation without formal intake{" "}
             <span aria-hidden="true">-&gt;</span>
           </Link>
