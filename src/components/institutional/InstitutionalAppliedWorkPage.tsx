@@ -24,32 +24,30 @@ export function InstitutionalAppliedWorkPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.appliedWorkHero}
-        eyebrow={<>APPLIED WORK</>}
-        title={<>What can Boundary First Labs help your organization do?</>}
+        eyebrow={<>CONSULTING / APPLIED WORK</>}
+        title={<>Consulting for difficult systems.</>}
         lead={
           <>
-            Diagnose difficult systems. Repair software and architecture. Review consequential
-            AI. Design bounded pilots. Make institutional knowledge easier to inspect, operate,
-            and hand off.
+            Scoped consulting for software architecture, AI and operational governance,
+            research infrastructure, technical diagnosis, and bounded pilots.
           </>
         }
         support={
           <>
-            The commercial work is deliberately practical. A client does not need to buy
-            the Lab&apos;s theory or vocabulary. The engagement has to produce something
-            useful enough to inspect, use, test, or make a decision from.
+            Bring a system, workflow, decision, or failure that is expensive to misunderstand.
+            Start with the smallest engagement that can produce a useful artifact, evidence,
+            or decision.
           </>
         }
         childLinks={institutionalChildRoutes.appliedWork}
       >
         <aside className={styles.appliedWorkStatus}>
-          <span>CURRENT COMMERCIAL POSTURE</span>
-          <strong>Ready to scope. Building BFL-specific case studies and repeat-client evidence.</strong>
+          <span>CONSULTING AVAILABILITY</span>
+          <strong>Available for scoped reviews, working sessions, pilots, and fractional technical advisory.</strong>
           <p>
-            These offers grow out of prior professional work in software engineering,
-            architecture, consulting, Lean–Agile delivery, agentic problem solving, startup
-            iteration, and systems diagnosis. The public site does not imply a mature BFL
-            client portfolio.
+            The work draws on prior professional experience in software engineering,
+            architecture, consulting, Lean–Agile delivery, startup iteration, and systems
+            diagnosis. BFL-specific client case studies are still being built.
           </p>
         </aside>
       </InstitutionalRouteHero>
