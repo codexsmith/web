@@ -21,7 +21,6 @@ import {
 import styles from "./ReflowField.module.css";
 
 type ReflowLayoutMode = "flow" | "focus-stage";
-type ReflowFocusPeerPlacement = "split" | "before" | "after";
 type ReflowRestLayout = "natural" | "rectangle";
 
 type ReflowFieldContextValue = {
@@ -31,7 +30,6 @@ type ReflowFieldContextValue = {
   layoutMode: ReflowLayoutMode;
   itemOrder: readonly string[];
   animatePeers: boolean;
-  focusPeerPlacement: ReflowFocusPeerPlacement;
   restLayout: ReflowRestLayout;
   setSelection: (id: string | null) => void;
 };
@@ -155,7 +153,8 @@ const detailTransition = {
  *
  * Motion owns geometry interpolation. CSS owns final layout.
  * Focus-stage rests tile into a closed rectangle by default.
- * Selected focus peers use one row through four peers, then balanced rows of at most four.
+ * Selected content owns the first row; compact peers follow beneath it.
+ * Focus peers use one row through four peers, then balanced rows of at most four.
  * Selection reallocates representational bandwidth; it does not mutate,
  * promote, rank, or otherwise change the represented object.
  */
@@ -167,7 +166,6 @@ export function ReflowField({
   layoutMode = "flow",
   itemOrder = [],
   animatePeers = false,
-  focusPeerPlacement = "split",
   restLayout,
 }: {
   children: ReactNode;
@@ -177,7 +175,6 @@ export function ReflowField({
   layoutMode?: ReflowLayoutMode;
   itemOrder?: readonly string[];
   animatePeers?: boolean;
-  focusPeerPlacement?: ReflowFocusPeerPlacement;
   restLayout?: ReflowRestLayout;
 }) {
   const [selectedId, setSelectedId] = useState<string | null>(defaultSelectedId);
@@ -211,7 +208,7 @@ export function ReflowField({
   const fieldStyle = {
     "--reflow-peer-count": peerCount,
     "--reflow-peer-row-count": peerRowCount,
-    "--reflow-selected-row": peerRowCount + 1,
+    "--reflow-selected-row": 1,
   } as CSSProperties;
 
   const context = useMemo(
@@ -222,7 +219,6 @@ export function ReflowField({
       layoutMode,
       itemOrder,
       animatePeers,
-      focusPeerPlacement,
       restLayout: resolvedRestLayout,
       setSelection,
     }),
@@ -233,7 +229,6 @@ export function ReflowField({
       layoutMode,
       itemOrder,
       animatePeers,
-      focusPeerPlacement,
       resolvedRestLayout,
       setSelection,
     ],
@@ -300,7 +295,6 @@ export function ReflowFieldItem({
     ? context.itemOrder.filter((itemId) => itemId !== context.selectedId)
     : [];
   const remainingIndex = remainingIds.indexOf(id);
-  const splitIndex = Math.ceil(remainingIds.length / 2);
   const itemIndex = context.itemOrder.indexOf(id);
   const rectangleTile =
     context.restLayout === "rectangle"
@@ -319,7 +313,7 @@ export function ReflowFieldItem({
     ...(peerTile
       ? {
           "--reflow-peer-span": peerTile.span,
-          "--reflow-peer-row": peerTile.rowIndex + 1,
+          "--reflow-peer-row": peerTile.rowIndex + 2,
         }
       : {}),
   } as CSSProperties;
@@ -328,13 +322,7 @@ export function ReflowFieldItem({
       ? "rest"
       : selected
         ? "selected"
-        : context.focusPeerPlacement === "before"
-          ? "before"
-          : context.focusPeerPlacement === "after"
-            ? "after"
-            : remainingIndex >= 0 && remainingIndex < splitIndex
-              ? "before"
-              : "after";
+        : "after";
 
   const handleSurfaceClick = (event: ReactMouseEvent<HTMLElement>) => {
     if (clickBelongsToNestedReflowField(event)) return;
