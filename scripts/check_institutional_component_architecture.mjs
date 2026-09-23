@@ -488,12 +488,19 @@ expect(openLabApi.includes("authorization: `Bearer ${token}`"), "Open Lab receiv
 expect(openLabApi.includes("OL-"), "Open Lab must issue a stable receipt identifier after accepted handoff");
 expect(openLabApi.indexOf("await fetch(receiver") < openLabApi.indexOf("submissionId,\n      state: \"received\""), "Open Lab receipt response must follow receiver acceptance");
 
-expect(openLabIntake.includes("NO PUBLIC COLLECTION ON THIS DEPLOYMENT"), "Open Lab UI must make a closed collection boundary explicit");
+expect(openLabIntake.includes("FORMAL INTAKE IS CURRENTLY CLOSED"), "Open Lab UI must make a closed collection boundary explicit in public-facing language");
 expect(openLabIntake.includes("Anonymous / pseudonymous"), "Open Lab must support non-prestige-gated submitter identity");
 expect(openLabIntake.includes("No reply path"), "Open Lab must support intake without a forced response identity");
-expect(openLabIntake.includes("not publication consent"), "Open Lab must distinguish public-response preference from publication consent");
+expect(openLabIntake.includes("does not give permission") && openLabIntake.includes("publish my submission"), "Open Lab must distinguish public-response preference from publication consent");
 expect(openLabIntake.includes("Submission closed"), "Open Lab submit action must visibly close when governance gates are incomplete");
 expect(openLabIntake.includes("Receipt is a state transition, not a verdict."), "Open Lab must expose the review state model");
+expect(openLabIntake.includes("Tell the Lab what you&apos;re bringing."), "Open Lab governed intake must lead with ordinary public-facing language");
+expect(!openLabIntake.includes("Preserve the submission before deciding where it belongs."), "Open Lab intake must not expose internal routing language as its public headline");
+expect(openLabIntake.includes("openLabQuickIntake"), "Open Lab must promote the submission experience ahead of explanatory machinery");
+expect(openLabIntake.indexOf("openLabQuickIntake") < openLabIntake.indexOf("openLabReadiness"), "Open Lab form and route choice must precede governance/readiness detail");
+expect(openLabIntake.includes("Add context or links"), "Open Lab must progressively disclose optional context rather than front-load every field");
+expect(openLabIntake.includes("AFTER YOU SUBMIT"), "Open Lab must move explanatory routing context after the primary intake experience");
+expect(openLabIntake.includes("HOW THE INTAKE IS GOVERNED"), "Open Lab must keep governance inspectable after the submission surface");
 
 expect(openLabRoute.includes("readOpenLabIntakeConfig"), "Open Lab route must derive runtime state from server governance configuration");
 expect(openLabRoute.includes("isOpenLabSubmissionType"), "Open Lab route must deep-link only declared submission types");
