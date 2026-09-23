@@ -29,7 +29,7 @@ function routeFromPage(file) {
 }
 
 function canonicalRouteFromPage(file) {
-  const route = file === rootPageFile ? "/" : canonicalRouteFromPage(file);
+  const route = file === rootPageFile ? "/" : routeFromPage(file);
   if (route === "/v3") return "/";
   return route.startsWith("/v3/") ? route.slice(3) : route;
 }
