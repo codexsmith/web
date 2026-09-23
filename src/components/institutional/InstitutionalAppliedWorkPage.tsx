@@ -28,9 +28,9 @@ export function InstitutionalAppliedWorkPage() {
         title={<>What can Boundary First Labs help your organization do?</>}
         lead={
           <>
-            Diagnose difficult systems. Repair software and architecture. Review AI
-            used in consequential decisions and workflows. Design small pilots. Make research
-            and institutional knowledge easier to inspect, operate, and hand off.
+            Diagnose difficult systems. Repair software and architecture. Review consequential
+            AI. Design bounded pilots. Make institutional knowledge easier to inspect, operate,
+            and hand off.
           </>
         }
         support={
