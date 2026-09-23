@@ -39,16 +39,29 @@ export function ResearchProgramCard({
             <div className={styles.programHeaderLeft}>
               <p className={styles.programRole}>{program.role}</p>
               <h3>{program.title}</h3>
+
+              <div className={styles.programIdentityPrimary}>
+                <LabObjectIdentity
+                  identifier={program.code}
+                  identifierLabel="CODE"
+                  kind="research"
+                  status={program.state}
+                  hideStatus
+                  variant="compact"
+                />
+              </div>
+
+              <div className={styles.programIdentityState}>
+                <LabObjectIdentity
+                  hideKind
+                  kind="research"
+                  status={program.state}
+                  statusLabel="STATE"
+                  variant="compact"
+                />
+              </div>
             </div>
             <div className={styles.programHeaderRight}>
-              <LabObjectIdentity
-                identifier={program.code}
-                identifierLabel="CODE"
-                kind="research"
-                status={program.state}
-                statusLabel="STATE"
-                variant="compact"
-              />
               <p className={styles.programSummary}>{program.summary}</p>
             </div>
           </div>
