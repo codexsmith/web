@@ -5,6 +5,7 @@ import { InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
 import { LabSnapshotRow } from "./LabSnapshotRow";
 import { RecentChangesStrip } from "./RecentChangesStrip";
+import { MachineryDetailSurface } from "./MachineryDetailSurface";
 
 import {
   featuredWork,
@@ -51,6 +52,7 @@ export function InstitutionalHomePage() {
         </section>
 
         <LabSnapshotRow {...homeLabSnapshot} />
+        <MachineryDetailSurface />
 
         <RecentChangesStrip changes={homeRecentChanges} compact />
 
