@@ -228,6 +228,14 @@ for (const id of ["choose-path", "approach", "operating-braid", "stewardship"]) 
 }
 expect(homeCss.includes(".homeOrientationGrid"), "Homepage orientation must style a dedicated Reflow field");
 expect(homeOrientation.includes("HomeOrientationMiniature"), "Homepage orientation summaries must preview their internal content grammar");
+expect(!homeOrientation.includes("description:"), "Homepage orientation REST summaries must not carry redundant descriptive paragraphs");
+expect(!homeOrientation.includes("padStart(2"), "Our Approach miniature must keep the four method verbs without ordinal numbers");
+expect(homeOrientation.includes("homeOrientationBraidIcons"), "Operating Braid miniature must use icon-only lineage inputs");
+expect(!homeOrientation.includes(">Lean–Agile<") && !homeOrientation.includes(">Scientific method<") && !homeOrientation.includes(">Agentic reasoning<"), "Operating Braid miniature must not retain lineage text labels");
+expect(homeOrientation.includes("homeOrientationBraidTrunk") && homeOrientation.includes("homeOrientationBraidArrow"), "Operating Braid miniature must preserve a visible confluence trunk and arrow");
+expect(!homeOrientation.includes("<b>I</b>") && !homeOrientation.includes("<b>H</b>") && !homeOrientation.includes("<b>E</b>"), "Stewardship miniature must remain icon-only");
+expect(homeCss.includes("clamp(1.08rem, 1.35vw, 1.36rem)"), "Homepage orientation module names must be the dominant title scale");
+expect(homeCss.includes("clamp(.98rem, 1.15vw, 1.16rem)"), "Homepage orientation sentence subheads must remain smaller than module titles");
 expect(!homeOrientation.includes("Start with why you came, not with the Lab&apos;s org chart."), "Expanded homepage Reflow details must not repeat the selected summary title");
 expect(!homeOrientation.includes("<h2>Three practical lineages braid into one recursive method.</h2>"), "Operating Braid detail must not repeat its selected summary title");
 expect(!homeOrientation.includes("<h2>What succeeds still has to be cared for.</h2>"), "Stewardship detail must not repeat its selected summary title");
