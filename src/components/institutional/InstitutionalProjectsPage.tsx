@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
-import { LabObjectIdentity } from "./LabObjectIdentity";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Projects.module.css";
