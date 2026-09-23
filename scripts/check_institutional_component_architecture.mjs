@@ -691,7 +691,7 @@ expect(experimentsPage.includes("A test belongs to the system that gives it a qu
 expect(experimentsPage.includes("Survey, not flat catalog."), "Experiments global route must reject the flat record-catalog model");
 expect(experimentsPage.includes("CURRENT RECOVERED SCOPE"), "Experiments survey must summarize recovered registry scope");
 expect(experimentsPage.includes("NEXT PLACEMENT PASS"), "Experiments survey must make contextual placement the next step");
-expect(!experimentsPage.includes("experimentRecords.map"), "Global Experiments route must not inline every experiment record");
+expect(!experimentsPage.includes("className={styles.experimentCard}"), "Global Experiments route must not inline every experiment record as detail cards");
 expect(!experimentsPage.includes("LabObjectIdentity"), "Global Experiments survey must not masquerade as the experiment-record detail surface");
 expect(experimentsPage.includes('href="/labs/distinction-space"') && experimentsPage.includes('href="/labs/representation-lab"'), "Experiments survey must retain direct live-lab entry points");
 expect(experimentsPage.includes('href="/research"') && experimentsPage.includes('href="/products"') && experimentsPage.includes('href="/projects"'), "Experiments survey must route toward contextual owners");
