@@ -165,12 +165,12 @@ export function InstitutionalNowPage() {
         </p>
 
         <nav className={styles.nowCloseLinks} aria-label="Roadmap next steps">
-          <Link href="/v3/contact?type=general&source=now">Start a conversation <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/v3/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/contact?type=general&source=now">Start a conversation <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/funding">Funding <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/open-lab">Open Lab <span aria-hidden="true">-&gt;</span></Link>
         </nav>
       </section>
     </InstitutionalPageShell>
