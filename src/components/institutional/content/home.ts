@@ -40,6 +40,37 @@ export const featuredWork = [
 ] as const;
 
 
+export const homeAppliedWorkFeature = {
+  eyebrow: "CONSULTING / APPLIED WORK",
+  title: "Bring one system that is expensive to misunderstand.",
+  summary:
+    "Boundary First Labs offers scoped consulting for software architecture, AI and operational governance, research infrastructure, technical diagnosis, and bounded pilots.",
+  offers: [
+    {
+      code: "01",
+      title: "Software + systems",
+      detail: "Architecture review · rescue / modernization · prototype / pilot design",
+    },
+    {
+      code: "02",
+      title: "AI + operational governance",
+      detail: "AI governance review · process boundary audit · failure postmortem",
+    },
+    {
+      code: "03",
+      title: "Research + institutional infrastructure",
+      detail: "Provenance systems · working sessions · fractional technical advisory",
+    },
+  ],
+  note:
+    "Start with a review, workshop, prototype, pilot, or advisory scope small enough to finish and teach you something.",
+  href: "/applied-work",
+  cta: "Explore consulting services",
+  contactHref: "/contact?type=applied-work&source=home-consulting",
+  contactCta: "Start a conversation",
+} as const;
+
+
 export const homeNowSnapshot = {
   eyebrow: "NOW / ROADMAP",
   status: "SEPTEMBER 2026 · CURRENT CYCLE",
