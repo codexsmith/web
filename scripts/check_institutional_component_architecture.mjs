@@ -63,7 +63,8 @@ expect(homePage.includes("item.href ?"), "Homepage featured work must support di
 expect(homePage.includes("styles.inMotionSection"), "Homepage must expose the Lab in Motion institutional access layer");
 expect(homeContent.includes("homeNowSnapshot"), "Homepage content must expose a current Now / Roadmap snapshot");
 expect(homeContent.includes('href: "/now"'), "Homepage Now snapshot must link to the public roadmap");
-expect(homeContent.includes('href: "/applied-work"'), "Homepage must expose Applied Work as an institutional front door");
+expect(homeContent.includes('href: "/applied-work"'), "Homepage must expose Applied Work as the prominent consulting route");
+expect(homePage.includes('className={styles.primaryAction} href="/applied-work"'), "Homepage primary action must point to Applied Work");
 expect(homeContent.includes("homeAppliedWorkFeature"), "Homepage content must define a prominent consulting offer");
 expect(homePage.includes("styles.homeConsultingFeature"), "Homepage must render a dedicated consulting feature above Featured Work");
 expect(
@@ -86,7 +87,7 @@ expect(foundationCss.includes('.header[data-header-compact="true"] {\n  min-heig
 expect(foundationCss.includes('.header[data-header-compact="true"] .logo {\n  width: 28px;\n  height: 28px;'), "Compact header must shrink the persistent logo");
 expect(foundationCss.includes(".inMotionSection"), "Homepage foundation must style the Lab in Motion layer");
 expect(foundationCss.includes(".nowSnapshot"), "Homepage foundation must style the current-state roadmap surface");
-expect(foundationCss.includes(".frontDoorStack"), "Homepage foundation must style the Applied Work / Collaboration / Funding entry stack");
+expect(foundationCss.includes(".frontDoorStack"), "Homepage foundation must style the Collaboration / Funding participation stack");
 expect(foundationCss.includes(".homeConsultingFeature"), "Homepage foundation must style the prominent consulting offer");
 const routeSharedCss = read(`${root}/styles/InstitutionalRouteShared.module.css`);
 expect(routeSharedCss.includes("white-space: normal"), "Child-link titles must be allowed to wrap");
