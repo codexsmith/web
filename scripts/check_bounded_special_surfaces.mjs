@@ -12,25 +12,29 @@ const expect = (condition, message) => {
 
 const paperMineRoute = read("src/app/research/paper-mine/page.tsx");
 const timelineRoute = read("src/app/about/provenance/timeline/page.tsx");
-const wrapper = read("src/components/bounded-standalone-surface.tsx");
+const instrumentShell = read("src/components/institutional/InstitutionalInstrumentShell.tsx");
 const css = read("src/app/p9-bounded-special-surfaces.css");
 const layout = read("src/app/layout.tsx");
 
 expect(
-  paperMineRoute.includes("BoundedStandaloneSurface") && paperMineRoute.includes('parentNodeId="research"'),
-  "Paper Mine must render inside the bounded standalone BFUX frame rooted in Research.",
+  paperMineRoute.includes("InstitutionalInstrumentShell") &&
+    paperMineRoute.includes('canonical: "/research/paper-mine"'),
+  "Paper Mine must render inside the institutional instrument shell with its canonical route.",
 );
 expect(
-  timelineRoute.includes("BoundedStandaloneSurface") && timelineRoute.includes('parentNodeId="provenance"'),
-  "Founder timeline must render inside the bounded standalone BFUX frame rooted in Provenance.",
+  timelineRoute.includes("InstitutionalInstrumentShell") &&
+    timelineRoute.includes("index: false"),
+  "Founder timeline must render inside the institutional instrument shell and retain its noindex boundary.",
 );
 expect(
-  wrapper.includes("<BoundaryFrame") && wrapper.includes("<SearchPanel"),
-  "Standalone surfaces must carry the shared Boundary frame and global search instrument.",
+  instrumentShell.includes("<InstitutionalHeader") &&
+    instrumentShell.includes("<InstitutionalFooter"),
+  "Institutional instruments must retain the shared institutional header and footer.",
 );
 expect(
-  wrapper.includes("getAncestors(parentNode.id)") && wrapper.includes("traversalPath"),
-  "Standalone surfaces must bootstrap a canonical trace into the special surface.",
+  instrumentShell.includes('href="#institutional-main"') &&
+    instrumentShell.includes('id="institutional-main"'),
+  "Institutional instruments must retain skip navigation and a stable main landmark.",
 );
 expect(
   css.includes('a[href="/research/paper-mine"]') && css.includes('a[href="/about/provenance/timeline"]'),

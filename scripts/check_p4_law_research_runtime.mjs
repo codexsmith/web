@@ -66,38 +66,28 @@ try {
 
   const html = await detail.text();
   const expected = [
-    "data-detail-kind=\"record\"",
-    "Authority should close in responsibility.",
-    "Research and educational material",
-    "not legal advice",
-    "Authority baseline",
-    "Claim-status crosswalk",
-    "Every legal claim gets a type.",
-    "The complete legal complement",
-    "Current doctrine + analogy",
-    "Limited analogy",
-    "Proposed maxims",
-    "The appeal existed.",
-    "repair path",
-    "Authority register",
-    "Professional boundary",
-    "What Boundary First Law does not claim",
-    "Return to object",
+    "Constitutional Law",
+    "Legal research testbed",
+    "Developed working research program",
+    "A public legal research program using representation, authority, admissibility, standing, consequence, contest, and repair as bounded comparative lenses.",
+    "PUBLIC STATUS",
+    "RELATED WORK",
+    "Open the law research program",
   ];
 
   for (const marker of expected) {
     if (!html.includes(marker)) {
-      throw new Error(`Law detail route did not contain expected marker: ${marker}`);
+      throw new Error(`Canonical Law research route did not contain expected marker: ${marker}`);
     }
   }
 
   for (const forbidden of ["Structured retained record", "Governed public landing", "aria-modal=\"true\""]) {
     if (html.includes(forbidden)) {
-      throw new Error(`Law detail route contained forbidden fallback/modal marker: ${forbidden}`);
+      throw new Error(`Canonical Law research route contained forbidden fallback/modal marker: ${forbidden}`);
     }
   }
 
-  console.log("P4 Law production provenance research instrument: pass");
+  console.log("P4 Law canonical research surface: pass");
 } finally {
   await stopServer();
 }
