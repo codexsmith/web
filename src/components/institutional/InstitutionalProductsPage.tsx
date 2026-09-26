@@ -201,15 +201,39 @@ export function InstitutionalProductsPage() {
         <section className={styles.researchProducts}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>RESEARCH PRODUCTS</>}
-            title={<>Useful machinery can remain research-bounded.</>}
-            note={<>These products are built to be used and tested without turning internal implementation evidence into scientific validation.</>}
+            eyebrow={<>FIRST-CLASS SOFTWARE MACHINERY</>}
+            title={<>Software Before Code.</>}
+            note={<>Define the software object before committing it to code. Closure-Driven Software remains a secondary technical / historical alias, not a competing product identity.</>}
+          />
+
+          <div className={styles.researchProductGrid}>
+            <Link className={styles.researchProductCard} data-product="asm" href="/software-before-code">
+              <div>
+                <span>SOURCE_DEVELOPMENT · SOFTWARE-ENGINEERING MACHINERY</span>
+                <strong>Software Before Code</strong>
+              </div>
+              <p>
+                Methods, formal models, translation machinery, engineering instruments, and
+                practitioner material for making semantic obligations, boundaries, invariants,
+                construction, witnesses, and closure explicit before implementation details dominate.
+              </p>
+              <small>Enter Software Before Code <i aria-hidden="true">→</i></small>
+            </Link>
+          </div>
+        </section>
+
+        <section className={styles.researchProducts}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>TESTBEDS + CALIBRATION</>}
+            title={<>Different domains. The same machinery under pressure.</>}
+            note={<>These surfaces test transportability and research depth. They do not imply equal product maturity or validate the strongest underlying theory claims.</>}
           />
 
           <div className={styles.researchProductGrid}>
             <Link className={styles.researchProductCard} data-product="weather" href="/products/boundary-first-weather">
               <div>
-                <span>03 · RESEARCH PRODUCT</span>
+                <span>SCIENTIFIC / COMPUTATIONAL TESTBED</span>
                 <strong>Boundary First Weather</strong>
               </div>
               <p>
@@ -221,7 +245,7 @@ export function InstitutionalProductsPage() {
 
             <Link className={styles.researchProductCard} data-product="asm" href="/products/agentic-scientific-method">
               <div>
-                <span>04 · RESEARCH PRODUCT</span>
+                <span>RESEARCH PRODUCT · INQUIRY PROTOCOL</span>
                 <strong>Agentic Scientific Method</strong>
               </div>
               <p>
@@ -229,6 +253,31 @@ export function InstitutionalProductsPage() {
                 authority, defect, repair, closure, and scientific memory inspectable.
               </p>
               <small>Enter Agentic Scientific Method <i aria-hidden="true">→</i></small>
+            </Link>
+
+            <Link className={styles.researchProductCard} data-product="asm" href="/research/moonshots/millennium-problems-research">
+              <div>
+                <span>FRONTIER MATHEMATICAL CALIBRATION</span>
+                <strong>Millennium Problems Research</strong>
+              </div>
+              <p>
+                Solved-control and resistant-theorem work used to stress-test representation,
+                flow, scale, singularity, continuation, defect, closure, and proof-program machinery
+                without converting resemblance or computation into a solved-problem claim.
+              </p>
+              <small>Inspect the calibration program <i aria-hidden="true">→</i></small>
+            </Link>
+
+            <Link className={styles.researchProductCard} data-product="asm" href="/apparatus">
+              <div>
+                <span>INSTITUTIONAL MACHINERY</span>
+                <strong>Registrar · Workbench · Representation Observatory</strong>
+              </div>
+              <p>
+                Machinery for canonical identity and provenance, bounded human/agent work and
+                promotion authority, and inspection of semantic change across representations.
+              </p>
+              <small>Inspect the apparatus <i aria-hidden="true">→</i></small>
             </Link>
           </div>
         </section>
