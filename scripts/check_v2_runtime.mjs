@@ -33,6 +33,67 @@ async function waitForServer() {
     }
 
     try {
+      const response = await fetchWithTimeout(base);
+      if (response.status >= 200 && response.status < 500) return;
+    } catch (error) {
+      lastError = error;
+    }
+
+    await sleep(350);
+  }
+
+  throw new Error(`Timed out waiting for production server${lastError ? `: ${lastError}` : ""}\n${output}`);
+}
+
+async function expectPage(path, expectedStrings, forbiddenStrings = []) {
+  const response = await fetchWithTimeout(`${base}${path}`);
+  if (response.status !== 200) {
+    throw new Error(`${path} returned HTTP ${response.status}`);
+  }
+
+  const html = await response.text();
+  for (const expected of expectedStrings) {
+    if (!html.includes(expected)) {
+      throw new Error(`${path} did not contain expected public marker: ${expected}`);
+    }
+  }
+
+  for (const forbidden of forbiddenStrings) {
+    if (html.includes(forbidden)) {
+      throw new Error(`${path} contained forbidden public marker: ${forbidden}`);
+    }
+  }
+}
+
+async function expectRedirect(path, expectedLocation) {
+  const response = await fetchWithTimeout(`${base}${path}`);
+  if (response.status !== 308) {
+    throw new Error(`${path} returned HTTP ${response.status}; expected permanent redirect`);
+  }
+
+  if (response.headers.get("location") !== expectedLocation) {
+    throw new Error(`${path} redirected to ${response.headers.get("location")}; expected ${expectedLocation}`);
+  }
+}
+
+async function stopServer() {
+  if (server.exitCode !== null) return;
+
+  const gracefulExit = new Promise((resolve) => server.once("exit", resolve));
+  server.kill("SIGTERM");
+  await Promise.race([
+    gracefulExit,
+    sleep(2_000),
+  ]);
+
+  if (server.exitCode === null) {
+    const forcedExit = new Promise((resolve) => server.once("exit", resolve));
+    server.kill("SIGKILL");
+    await Promise.race([forcedExit, sleep(2_000)]);
+  }
+}
+
+try {
   await waitForServer();
 
   // The canonical public root is the institutional site.
@@ -86,6 +147,7 @@ async function waitForServer() {
   await expectRedirect("/v3/research", "/research");
 
   console.log("current routing production runtime smoke: pass");
+
 } finally {
   await stopServer();
 }
