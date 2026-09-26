@@ -1,73 +1,73 @@
 export const appliedWorkFamilies = [
   {
     code: "01",
-    title: "Software + systems",
+    title: "Systems / Architecture Review",
     description:
-      "For software that is hard to change, hard to explain, or carrying more consequence than its architecture was designed for.",
+      "For consequential systems that are difficult to understand, modernize, integrate, migrate, or repair because the structure itself has become part of the problem.",
     tone: "software",
     offers: [
       {
-        title: "Architecture review",
+        title: "System / architecture reconstruction",
         description:
-          "Map state, interfaces, ownership, dependencies, failure paths, and the decisions the current architecture makes difficult.",
+          "Map state, interfaces, dependencies, ownership, boundaries, invariants, and failure paths so the system can be reasoned about before changes are proposed.",
       },
       {
-        title: "Rescue / modernization",
+        title: "Modernization / migration review",
         description:
-          "Find the smallest structural changes that reduce risk and make an aging or tangled system easier to change, test, operate, and hand off.",
+          "Compare repair and migration paths against the behavior, constraints, and semantic obligations that must survive the change.",
       },
       {
-        title: "Prototype / pilot design",
+        title: "Bounded implementation / pilot",
         description:
-          "Turn an uncertain idea into a bounded technical experiment with a working artifact, explicit assumptions, and a clear test for what happens next.",
+          "Turn one selected repair into an inspectable prototype or pilot with explicit assumptions, acceptance conditions, and handoff state.",
       },
     ],
   },
   {
     code: "02",
-    title: "AI + operational governance",
+    title: "Agency / AI Governance Audit",
     description:
-      "For organizations introducing automation into decisions, workflows, or services where authority and accountability matter.",
+      "For systems where people, software, AI, policy, and automation interact but decision rights, review, escalation, or accountable authority are unclear.",
     tone: "governance",
     offers: [
       {
-        title: "AI governance + agency review",
+        title: "Agency + authority map",
         description:
-          "Trace where an AI-enabled system recommends, ranks, approves, denies, escalates, or acts—and whether people can inspect, contest, repair, or override the result.",
+          "Trace who or what recommends, ranks, approves, denies, escalates, acts, verifies, and promotes—and where capability and permission have drifted apart.",
       },
       {
-        title: "Process / institutional boundary audit",
+        title: "Governance + promotion controls",
         description:
-          "Find places where responsibility, authority, information, or maintenance cross teams and systems without a reliable owner or handoff.",
+          "Define Forge / Certify / Forbid boundaries, human gates, verifier requirements, contestability, provenance, and repair paths for consequential actions.",
       },
       {
-        title: "Failure postmortem",
+        title: "Decision-chain / failure reconstruction",
         description:
-          "Reconstruct a consequential failure as a system: what was represented, what was assumed, where the boundary failed, and what repair would prevent recurrence.",
+          "Reconstruct a consequential outcome across people, software, policy, and evidence to locate authority gaps and the smallest credible repair.",
       },
     ],
   },
   {
     code: "03",
-    title: "Research + institutional infrastructure",
+    title: "Knowledge / Representation Infrastructure Diagnostic",
     description:
-      "For teams with valuable knowledge or research that is difficult to verify, navigate, transfer, or operate as a shared system.",
+      "For organizations that need durable provenance, state, evidence, handoff, and authority across research, documents, schemas, software, and AI transformations.",
     tone: "research",
     offers: [
       {
-        title: "Research / provenance infrastructure",
+        title: "Source / claim / evidence architecture",
         description:
-          "Set up source, claim, evidence, status, decision, and handoff structures so a body of work can be inspected and continued without relying on oral memory.",
+          "Map how source material becomes claims, decisions, artifacts, and promoted institutional state—and where provenance or authority is currently lost.",
       },
       {
-        title: "Workshop / working session",
+        title: "Representation + handoff analysis",
         description:
-          "Use a bounded live session to map a difficult system, clarify a decision, surface hidden assumptions, or establish a shared operating model.",
+          "Identify semantic loss, hidden projection choices, reconstruction risk, and continuation failures across documents, schemas, interfaces, reports, and teams.",
       },
       {
-        title: "Retained or fractional technical advisory",
+        title: "Knowledge infrastructure pilot",
         description:
-          "Ongoing support for architecture, software, AI, research systems, technical risk, and difficult cross-boundary decisions when a full-time role is not the right shape.",
+          "Design a bounded provenance, research-operations, or shared-knowledge pilot using the smallest useful combination of workflow and machinery.",
       },
     ],
   },
