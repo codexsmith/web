@@ -625,12 +625,22 @@
     grid-template-columns: 1fr;
   }
 
-  .openLabContractTopline {
-    display: grid;
+  .openLabContractCard {
+    min-width: 0;
   }
 
-  .openLabContractTopline code {
+  .openLabContractTitleRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .openLabContractTitleRow code {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
     text-align: left;
+    overflow-wrap: anywhere;
   }
 }
 
