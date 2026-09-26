@@ -66,33 +66,29 @@ try {
 
   const html = await detail.text();
   const expected = [
-    "data-detail-kind=\"record\"",
-    "Compute where the weather is changing.",
-    "Established infrastructure",
-    "Experimental layer",
-    "Core hypothesis",
-    "Claim ladder",
-    "Watch a forecast lose the boundary.",
-    "Matched-baseline measures",
-    "Validation ladder",
-    "A well-bounded negative result is still a successful research pilot.",
-    "Not allowed yet",
-    "Return to object",
+    "Boundary First Weather",
+    "Weather simulation research",
+    "Pilot-ready research",
+    "CURRENT PUBLIC RECORD",
+    "A boundary-aware computational research program testing diagnostics, structural error, compression, ensemble comparison, and selective refinement alongside established weather science.",
+    "A research program with a planned computational demonstrator and bounded pilot question. It does not claim improved operational forecasts, speed, or external validation.",
+    "RELATED WORK",
+    "Open Boundary First Weather",
   ];
 
   for (const marker of expected) {
     if (!html.includes(marker)) {
-      throw new Error(`Weather detail route did not contain expected marker: ${marker}`);
+      throw new Error(`Canonical Weather research route did not contain expected marker: ${marker}`);
     }
   }
 
   for (const forbidden of ["Structured retained record", "Governed public landing"]) {
     if (html.includes(forbidden)) {
-      throw new Error(`Weather detail route contained forbidden fallback marker: ${forbidden}`);
+      throw new Error(`Canonical Weather research route contained forbidden fallback marker: ${forbidden}`);
     }
   }
 
-  console.log("P4 Weather production research testbed: pass");
+  console.log("P4 Weather canonical research surface: pass");
 } finally {
   await stopServer();
 }
