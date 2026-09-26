@@ -119,11 +119,12 @@ export function InstitutionalProductsPage() {
                 </div>
               </div>
 
-              <p className={styles.productRole}>FIRST ACTIVE-BUILD CONSUMER SOFTWARE WEDGE</p>
+              <p className={styles.productRole}>PROJECTR · CURRENT ACTIVE-BUILD IMPLEMENTATION</p>
               <h3>YouTube Knowledge Explorer</h3>
               <p className={styles.productPromise}>
-                Turn long-form YouTube into searchable, timestamped, structured knowledge
-                while preserving a direct path back to the source.
+                Projectr&apos;s current bounded implementation turns long-form YouTube into
+                searchable, timestamped, persistent knowledge while preserving a direct path
+                back to the source.
               </p>
 
               <div className={styles.explorerPipeline}>
@@ -155,16 +156,44 @@ export function InstitutionalProductsPage() {
                 </div>
               </div>
 
+              <div className={styles.productMiniPanel}>
+                <span>PRODUCT FAMILY</span>
+                <strong>Projectr — public knowledge infrastructure / project-based constructive social media</strong>
+              </div>
+
               <div className={styles.productTruth}>
                 <span>NOT YET ESTABLISHED</span>
-                Availability, recurring use, pricing, market validation, retention, or
-                product-market fit.
+                Public availability, recurring use, pricing, market validation, retention,
+                product-market fit, or the broader multi-source / social Projectr roadmap.
               </div>
 
               <span className={styles.productDetailLink}>
                 Enter YouTube Knowledge Explorer
                 <span aria-hidden="true">→</span>
               </span>
+            </Link>
+          </div>
+        </section>
+
+        <section className={styles.researchProducts}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>SIBLING KNOWLEDGE INFRASTRUCTURE</>}
+            title={<>Projectr organizes public knowledge. Corpus Forge governs bounded research execution.</>}
+            note={<>They can exchange typed work and artifact state, but public planning is not scientific promotion and neither product is merely the other&apos;s front end or back end.</>}
+          />
+
+          <div className={styles.researchProductGrid}>
+            <Link className={styles.researchProductCard} data-product="asm" href="/products/current/corpus-forge">
+              <div>
+                <span>PROJECTR SIBLING · RESEARCH_PRODUCT</span>
+                <strong>Corpus Forge</strong>
+              </div>
+              <p>
+                Source-to-claim state, bounded execution, evidence, criticism, verification,
+                reproducibility, repair, and explicit promotion authority.
+              </p>
+              <small>Enter Corpus Forge <i aria-hidden="true">→</i></small>
             </Link>
           </div>
         </section>
