@@ -73,7 +73,7 @@ export function CorpusForgeLanding() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
           <Link
             className="inline-flex min-h-9 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted hover:text-foreground"
-            href="/work/index"
+            href="/applied-work"
           >
             Work / research operations
           </Link>
