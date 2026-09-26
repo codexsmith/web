@@ -244,3 +244,52 @@ export function InstitutionalSectionLead({
     </div>
   );
 }
+
+
+export function InstitutionalEvidenceStatus({
+  styles,
+  status,
+  whatExists,
+  externalEvidence,
+  canonicalSource,
+  limitations,
+  nextTest,
+}: {
+  styles: CssModule;
+  status: ReactNode;
+  whatExists: ReactNode;
+  externalEvidence: ReactNode;
+  canonicalSource: ReactNode;
+  limitations: ReactNode;
+  nextTest: ReactNode;
+}) {
+  const fields = [
+    ["STATUS", status],
+    ["WHAT EXISTS", whatExists],
+    ["EXTERNAL EVIDENCE", externalEvidence],
+    ["CANONICAL SOURCE", canonicalSource],
+    ["KNOWN LIMITATIONS", limitations],
+    ["NEXT TEST", nextTest],
+  ] as const;
+
+  return (
+    <section className={styles.evidenceStatus} aria-label="Status and evidence projection">
+      <div className={styles.evidenceStatusLead}>
+        <p className={styles.sectionIndex}>STATUS / EVIDENCE</p>
+        <h2>What exists, what is supported, and what remains open.</h2>
+        <p>
+          This is a public projection of upstream lifecycle and evidence state. It does not
+          promote canonical maturity by itself.
+        </p>
+      </div>
+      <div className={styles.evidenceStatusGrid}>
+        {fields.map(([label, value]) => (
+          <article key={label}>
+            <span>{label}</span>
+            <p>{value}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
