@@ -284,7 +284,7 @@ function RangeControl({
   );
 }
 
-export function BoundaryFascinatorInstrument({ open, onClose }: { open: boolean; onClose: () => void }) {
+export function BoundaryFascinatorInstrument({ open, onClose, titleAsH1 = false }: { open: boolean; onClose: () => void; titleAsH1?: boolean }) {
   const [mounted, setMounted] = useState(false);
   const [tab, setTab] = useState<Tab>("explore");
   const [meta, setMeta] = useState<SimulationMeta>(fallbackMeta);
@@ -693,7 +693,7 @@ export function BoundaryFascinatorInstrument({ open, onClose }: { open: boolean;
         <header className={styles.instrumentHeader}>
           <div className={styles.titleBlock}>
             <small>INSTRUMENT · VISUAL MATHEMATICS</small>
-            <h2>Boundary Attractor</h2>
+            {titleAsH1 ? <h1>Boundary Attractor</h1> : <h2>Boundary Attractor</h2>}
             <p>Control the dynamics. Inspect the observables. Preserve the recipe.</p>
           </div>
           <div className={styles.statusBus}>
