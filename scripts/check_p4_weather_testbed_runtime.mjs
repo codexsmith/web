@@ -69,7 +69,6 @@ try {
     "Boundary First Weather",
     "Weather simulation research",
     "Pilot-ready research",
-    "CURRENT PUBLIC RECORD",
     "A boundary-aware computational research program testing diagnostics, structural error, compression, ensemble comparison, and selective refinement alongside established weather science.",
     "A research program with a planned computational demonstrator and bounded pilot question. It does not claim improved operational forecasts, speed, or external validation.",
     "RELATED WORK",
