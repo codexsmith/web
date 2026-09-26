@@ -4,6 +4,7 @@ import { nodes } from "@/lib/content";
 import { institutionalContentNodeRoutes } from "@/lib/site-release";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import {
+  InstitutionalEvidenceStatus,
   InstitutionalRouteHero,
   InstitutionalSectionHeader,
 } from "./InstitutionalPrimitives";
@@ -73,6 +74,7 @@ export function InstitutionalContentNodePage({
   const body = node.body ?? [];
   const inspections = node.inspection ?? [];
   const related = node.links ?? [];
+  const evidence = node.evidence;
   const topLevel = topLevelRoute(node);
 
   return (
@@ -103,6 +105,18 @@ export function InstitutionalContentNodePage({
           ) : null}
         </aside>
       </InstitutionalRouteHero>
+
+      {evidence ? (
+        <InstitutionalEvidenceStatus
+          styles={styles}
+          status={evidence.status}
+          whatExists={evidence.whatExists}
+          externalEvidence={evidence.externalEvidence}
+          canonicalSource={evidence.canonicalSource}
+          limitations={evidence.limitations}
+          nextTest={evidence.nextTest}
+        />
+      ) : null}
 
       {body.length ? (
         <section className={styles.contentNodeBody}>
