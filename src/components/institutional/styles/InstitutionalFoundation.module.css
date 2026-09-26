@@ -4096,9 +4096,18 @@
     max-width: 100%;
     justify-self: stretch;
     justify-content: flex-start;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-x: visible;
+    overscroll-behavior-inline: auto;
+    row-gap: 6px;
     padding: 5px 0 2px;
+  }
+
+  .navLink {
+    min-height: 24px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
