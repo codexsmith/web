@@ -11,7 +11,7 @@ export function DistinctionSpaceSandboxSurface({ closeHref = "/" }: { closeHref?
       aria-label="Distinction Space visual mathematics sandbox"
       style={{ minHeight: "100vh", background: "#06080a" }}
     >
-      <BoundaryFascinatorInstrument open onClose={() => router.push(closeHref)} />
+      <BoundaryFascinatorInstrument open titleAsH1 onClose={() => router.push(closeHref)} />
     </main>
   );
 }

@@ -2665,6 +2665,9 @@
 
 .footerNavLinks a {
   position: relative;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
   color: rgba(244,247,251,.84);
   font-family: Georgia, "Times New Roman", serif;
   font-size: .76rem;
@@ -4096,9 +4099,18 @@
     max-width: 100%;
     justify-self: stretch;
     justify-content: flex-start;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-x: visible;
+    overscroll-behavior-inline: auto;
+    row-gap: 6px;
     padding: 5px 0 2px;
+  }
+
+  .navLink {
+    min-height: 24px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
