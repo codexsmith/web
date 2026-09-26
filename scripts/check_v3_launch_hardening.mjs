@@ -76,6 +76,29 @@ if (contentNodeRoutes.length) {
   contentNodeRoutes.forEach((route) => routeSet.add(route));
 }
 
+const moonshotDetailRoutes = [...inventoryRoutes].filter((route) =>
+  route.startsWith("/research/moonshots/"),
+);
+const dynamicMoonshotRouteFile = path.join(
+  root,
+  "src/app/v3/research/moonshots/[slug]/page.tsx",
+);
+if (moonshotDetailRoutes.length) {
+  if (!fs.existsSync(dynamicMoonshotRouteFile)) {
+    fail("institutional Moonshot detail routes require the dynamic Moonshot renderer");
+  } else {
+    const dynamicMoonshotRoute = fs.readFileSync(dynamicMoonshotRouteFile, "utf8");
+    if (
+      !dynamicMoonshotRoute.includes("generateStaticParams") ||
+      !dynamicMoonshotRoute.includes("getMoonshotObjectiveBySlug") ||
+      !dynamicMoonshotRoute.includes('canonical: `/research/moonshots/${slug}`')
+    ) {
+      fail("dynamic Moonshot renderer must bind admitted objectives to canonical public routes");
+    }
+  }
+  moonshotDetailRoutes.forEach((route) => routeSet.add(route));
+}
+
 for (const route of [...routeSet].sort()) {
   if (!inventoryRoutes.has(route)) {
     fail("v3 route missing from institutional public inventory: " + route);
@@ -89,7 +112,7 @@ for (const route of [...inventoryRoutes].sort()) {
 }
 
 for (const file of publicPageFiles) {
-  const route = routeFromPage(file);
+  const route = canonicalRouteFromPage(file);
   const source = fs.readFileSync(file, "utf8");
 
   if (!/export const metadata\s*:\s*Metadata\s*=/.test(source)) {
@@ -135,8 +158,14 @@ for (const file of scanFiles) {
   const source = fs.readFileSync(file, "utf8");
   for (const pattern of staticHrefPatterns) {
     for (const match of source.matchAll(pattern)) {
-      const target =
+      const compatibilityTarget =
         match[1].split(/[?#]/, 1)[0].replace(/\/$/, "") || "/v3";
+      const target =
+        compatibilityTarget === "/v3"
+          ? "/"
+          : compatibilityTarget.startsWith("/v3/")
+            ? compatibilityTarget.slice(3)
+            : compatibilityTarget;
       if (!routeSet.has(target)) {
         fail(
           "broken institutional link " +
