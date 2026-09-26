@@ -123,20 +123,20 @@ export const nodes: ContentNode[] = [
     path: "products/current/corpus-forge",
     parentId: "current-work",
     kind: "product",
-    eyebrow: "Research operations software and method",
+    eyebrow: "Executable scientific / research-operation infrastructure",
     summary:
-      "A governed memory and research-operations system for provenance, typed claims, contradiction, review, promotion, supersession, and repair.",
+      "A governed research-operations system for bounded execution, provenance, typed claims, evidence, criticism, verification, promotion, supersession, reproducibility, and repair.",
     status: {
       stage: "active-development",
-      label: "Active development",
+      label: "Research product / active development",
       detail:
-        "A current research-operations program and software-development effort. The retained public record explicitly does not claim a complete or production-ready knowledge-management platform.",
-      sourceStatus: "active-development",
-      provenance: "Product landing manifest and Corpus Forge public record",
+        "The canonical Product Register classifies Corpus Forge as a research product with substantial internal machinery. That internal operability does not establish an externally validated or production-ready platform.",
+      sourceStatus: "research_product",
+      provenance: "BFL Product Register + Corpus Forge owner-local product and machinery records",
     },
     body: [
-      "Corpus Forge treats a corpus as a governed memory system rather than a pile of documents. Sources, claims, evidence, contradictions, review decisions, and supersession remain distinguishable so consequential claims can be reconstructed and repaired.",
-      "Its current lifecycle is explicit: ingest, extract, relate, review, promote, then supersede or repair. Human promotion gates remain part of the operating model where authority or evidence requires them.",
+      "Corpus Forge is the executable scientific / research-operation projection of the Lab's broader knowledge program. Sources, claims, evidence, contradictions, review decisions, and supersession remain distinguishable so bounded work can be challenged, reproduced, repaired, and promoted under explicit authority.",
+      "Projectr is its sibling public/social projection: Projectr organizes knowledge, projects, planning, and collaboration; Corpus Forge governs bounded research execution, verification, criticism, and promotion. They may exchange typed work and artifact state, but neither is merely the other's front end or back end.",
     ],
     links: [
       {
@@ -144,6 +144,12 @@ export const nodes: ContentNode[] = [
         href: "/corpus-forge",
         eyebrow: "Retained public product record",
         summary: "Method, lifecycle, worked example, validation targets, and claim boundary.",
+      },
+      {
+        label: "See Projectr",
+        href: "/products/pipeline/projectr",
+        eyebrow: "Sibling public knowledge projection",
+        summary: "Public knowledge, project planning, collaboration, and constructive social coordination.",
       },
     ],
     inspection: [
@@ -266,20 +272,35 @@ export const nodes: ContentNode[] = [
     path: "products/pipeline/projectr",
     parentId: "planned-products",
     kind: "product",
-    eyebrow: "Constructive media and knowledge platform",
+    eyebrow: "Public knowledge infrastructure / project-based constructive social media",
     summary:
-      "A structured knowledge platform for creating, sharing, revising, and coordinating projects, plans, learning paths, evidence, progress, and reusable public knowledge.",
+      "A source-linked public knowledge and project platform for organizing, planning, revising, collaborating around, and reusing durable knowledge instead of optimizing for disposable feed engagement.",
     status: {
-      stage: "developed",
-      label: "Developed concept - not shipped",
+      stage: "active-development",
+      label: "Active build",
       detail:
-        "The portfolio records a developed concept and architecture. It remains concept-development work rather than a claim of a deployed product.",
-      sourceStatus: "developed concept and architecture",
-      provenance: "work_portfolio.json migration seed",
+        "The canonical Product Register marks Projectr as active_build. Its current bounded implementation is YouTube Knowledge Explorer; the broader multi-source and social product vision remains roadmap direction rather than shipped capability.",
+      sourceStatus: "active_build",
+      provenance: "BFL Product Register + Projectr product home + codexsmith/amp-projectr",
     },
     body: [
-      "Projectr is the long-running constructive-media platform concept behind several related learning and knowledge products. Its primary objects are intended to be constructive and revisable rather than disposable posts.",
-      "The retained portfolio identifies subscriptions, institutional hosting, and creator/education/community tooling as possible business models; these are opportunity hypotheses, not current revenue claims.",
+      "Projectr's durable product vision is public knowledge infrastructure: the social object is the project, and useful source-linked knowledge should remain navigable, revisable, attributable, and reusable over time.",
+      "YouTube Knowledge Explorer is the current bounded implementation. It tests persistent, source-linked knowledge on long-form video without implying that the later multi-source, collaboration, or social surfaces already exist.",
+      "Corpus Forge is a sibling executable-scientific projection. Projectr may hand selected sources, questions, plans, or execution requests into Corpus Forge; Corpus Forge may return verified artifacts, evidence, revisions, and provenance state. Public planning is not scientific promotion, and navigation is not verification.",
+    ],
+    links: [
+      {
+        label: "Open YouTube Knowledge Explorer",
+        href: "/products/youtube-knowledge-explorer",
+        eyebrow: "Current bounded implementation",
+        summary: "The active-build long-form video knowledge wedge.",
+      },
+      {
+        label: "See Corpus Forge",
+        href: "/products/current/corpus-forge",
+        eyebrow: "Sibling executable research projection",
+        summary: "Bounded execution, evidence, criticism, verification, reproducibility, and repair.",
+      },
     ],
   },
   {
@@ -289,17 +310,28 @@ export const nodes: ContentNode[] = [
     path: "products/pipeline/youtube-knowledge-explorer",
     parentId: "planned-products",
     kind: "product",
-    eyebrow: "Learning wrapper and educational media tool",
+    eyebrow: "Current Projectr implementation",
     summary:
-      "A learning layer over YouTube that turns playlists, channels, and selected videos into structured learning paths with notes, dependencies, progress, summaries, and reasons for what to watch next.",
+      "The active-build Projectr wedge for turning long-form YouTube into searchable, timestamped, persistent, source-linked knowledge while preserving a direct path back to the original material.",
     status: {
-      stage: "planned",
-      label: "Planned - bounded product concept",
+      stage: "active-development",
+      label: "Active build - bounded implementation",
       detail:
-        "A confirmed bounded product concept in the retained portfolio; no shipped or public-availability claim is made here.",
-      sourceStatus: "bounded product concept",
-      provenance: "work_portfolio.json migration seed",
+        "Working implementation evidence applies to the YouTube Knowledge Explorer wedge. It does not establish public availability, retention, willingness to pay, or the broader future Projectr platform.",
+      sourceStatus: "active_build",
+      provenance: "BFL Product Register + codexsmith/amp-projectr",
     },
+    body: [
+      "The summary is not the product. The product value is a persistent, navigable knowledge object that helps a person search, revisit, organize, and return to the source.",
+      "Multi-source knowledge, broader collaboration, and constructive social mechanics belong to the Projectr roadmap and should not be described as current YouTube Knowledge Explorer capability until implemented.",
+    ],
+    links: [
+      {
+        label: "See the Projectr product family",
+        href: "/products/pipeline/projectr",
+        eyebrow: "Durable product identity",
+      },
+    ],
   },
   {
     id: "cross-platform-bookshelf",
