@@ -481,8 +481,8 @@ export const nodes: ContentNode[] = [
       stage: "developed",
       label: "Developed doctrine",
       detail:
-        "The software lane has two substantial public practitioner expressions: Software Before Code is a working public method and Closure-Driven Software Development is an advanced practitioner draft.",
-      provenance: "Software Before Code + Closure-Driven Software Development retained public records",
+        "Software Before Code is the preferred public practitioner expression and first-class software-engineering machinery program. Closure-Driven Software Development is retained as a secondary technical / historical advanced draft.",
+      provenance: "Software Before Code canonical product record + retained Closure-Driven Software Development draft",
     },
     body: [
       "Boundary First Engineering treats architecture as an invariant-preserving representation problem. Interfaces, abstract classes, services, modules, and deployment boundaries are mechanisms; the primary question is whether the chosen representation is coherent and consistently enforced.",
@@ -498,8 +498,8 @@ export const nodes: ContentNode[] = [
       {
         label: "Open Closure-Driven Software Development",
         href: "/closure-driven-software-development",
-        eyebrow: "Advanced practitioner draft",
-        summary: "Turn uncertainty into executable evidence before it hardens into architecture.",
+        eyebrow: "Secondary technical / historical alias",
+        summary: "An advanced retained draft within the broader Software Before Code lineage.",
       },
     ],
   },
