@@ -61,6 +61,15 @@ export type Inspection = {
   links?: ContentLink[];
 };
 
+export type EvidenceProjection = {
+  status: string;
+  whatExists: string;
+  externalEvidence: string;
+  canonicalSource: string;
+  limitations: string;
+  nextTest: string;
+};
+
 export type ContentNode = {
   id: string;
   label: string;
@@ -72,6 +81,7 @@ export type ContentNode = {
   summary: string;
   body?: string[];
   status?: WorkStatus;
+  evidence?: EvidenceProjection;
   links?: ContentLink[];
   inspection?: Inspection[];
 };
@@ -138,6 +148,19 @@ export const nodes: ContentNode[] = [
       "Corpus Forge is the executable scientific / research-operation projection of the Lab's broader knowledge program. Sources, claims, evidence, contradictions, review decisions, and supersession remain distinguishable so bounded work can be challenged, reproduced, repaired, and promoted under explicit authority.",
       "Projectr is its sibling public/social projection: Projectr organizes knowledge, projects, planning, and collaboration; Corpus Forge governs bounded research execution, verification, criticism, and promotion. They may exchange typed work and artifact state, but neither is merely the other's front end or back end.",
     ],
+    evidence: {
+      status: "research_product · active internal machinery",
+      whatExists:
+        "Schemas, ledgers, pipeline/engine, operator surfaces, source-to-claim state, verification paths, and human promotion gates.",
+      externalEvidence:
+        "No external-use, transaction, retention, or independent-transfer evidence is promoted on this public record yet.",
+      canonicalSource:
+        "PROD-CORPUS-FORGE-001 · BFL-MACH-CORPUS-FORGE",
+      limitations:
+        "Internal operability does not establish production readiness or an externally validated knowledge-management platform.",
+      nextTest:
+        "Close a bounded external pilot or reproduction path and capture independent operator evidence.",
+    },
     links: [
       {
         label: "Open the full Corpus Forge record",
@@ -288,6 +311,19 @@ export const nodes: ContentNode[] = [
       "YouTube Knowledge Explorer is the current bounded implementation. It tests persistent, source-linked knowledge on long-form video without implying that the later multi-source, collaboration, or social surfaces already exist.",
       "Corpus Forge is a sibling executable-scientific projection. Projectr may hand selected sources, questions, plans, or execution requests into Corpus Forge; Corpus Forge may return verified artifacts, evidence, revisions, and provenance state. Public planning is not scientific promotion, and navigation is not verification.",
     ],
+    evidence: {
+      status: "active_build",
+      whatExists:
+        "A working YouTube Knowledge Explorer vertical slice with source parsing, transcript normalization, outlines, search, source navigation, persistence, and portable interchange.",
+      externalEvidence:
+        "No repeat-use, transaction, retention, or product-market evidence is promoted on this public record yet.",
+      canonicalSource:
+        "PROD-PROJECTR-001 · codexsmith/amp-projectr",
+      limitations:
+        "The current implementation is the YouTube wedge; broader multi-source, collaboration, and constructive-social capabilities remain roadmap direction.",
+      nextTest:
+        "Measure repeated voluntary return to persistent source-linked knowledge, then test willingness to pay for the bounded capability.",
+    },
     links: [
       {
         label: "Open YouTube Knowledge Explorer",
@@ -325,6 +361,19 @@ export const nodes: ContentNode[] = [
       "The summary is not the product. The product value is a persistent, navigable knowledge object that helps a person search, revisit, organize, and return to the source.",
       "Multi-source knowledge, broader collaboration, and constructive social mechanics belong to the Projectr roadmap and should not be described as current YouTube Knowledge Explorer capability until implemented.",
     ],
+    evidence: {
+      status: "active_build · current Projectr implementation",
+      whatExists:
+        "Source parsing, transcript normalization, outlines, concept-linked search, evidence-bound answers, local persistence, portable interchange, and direct source return.",
+      externalEvidence:
+        "Working implementation evidence is internal. Repeat use, payment, retention, and public availability are not yet promoted claims.",
+      canonicalSource:
+        "PROD-PROJECTR-001 · codexsmith/amp-projectr",
+      limitations:
+        "Evidence for the YouTube wedge does not establish the broader future Projectr platform or social/multi-source roadmap.",
+      nextTest:
+        "Put the bounded implementation in front of external users and measure return to saved/source-linked knowledge over time.",
+    },
     links: [
       {
         label: "See the Projectr product family",
