@@ -43,7 +43,7 @@ export function InstitutionalAppliedWorkPage() {
       >
         <aside className={styles.appliedWorkStatus}>
           <span>CONSULTING AVAILABILITY</span>
-          <strong>Available for scoped reviews, working sessions, pilots, and fractional technical advisory.</strong>
+          <strong>Available for scoped reviews, working sessions, and bounded technical advisory. Pilots follow a defined diagnostic or design boundary.</strong>
           <p>
             The work draws on prior professional experience in software engineering,
             architecture, consulting, Lean–Agile delivery, startup iteration, and systems
