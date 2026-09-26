@@ -2665,6 +2665,9 @@
 
 .footerNavLinks a {
   position: relative;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
   color: rgba(244,247,251,.84);
   font-family: Georgia, "Times New Roman", serif;
   font-size: .76rem;
