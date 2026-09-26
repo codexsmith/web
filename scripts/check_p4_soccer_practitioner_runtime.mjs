@@ -66,38 +66,28 @@ try {
 
   const html = await detail.text();
   const expected = [
-    "data-detail-kind=\"record\"",
-    "Before asking where the ball should go, ask what boundary must change.",
-    "Field rule",
-    "Current team state",
-    "Actionable space is relational.",
-    "Phase-reading rail",
-    "Worked possession trace",
-    "Pressure authored",
-    "Repair action",
-    "Promotion test",
-    "constructed tactical teaching phase",
-    "Candidate observation layer",
-    "Match-evidence boundary",
-    "External evidence condition",
-    "Video, event data, tracking data, coaching interpretation, and established tactical frameworks remain authoritative witnesses.",
-    "Not established",
-    "Return to object",
+    "Boundary First Soccer",
+    "Continuous multi-agent testbed",
+    "Developed working doctrine",
+    "A continuous, noisy, multi-agent public on-ramp for testing whether boundary reasoning remains useful beyond discrete game state.",
+    "PUBLIC STATUS",
+    "RELATED WORK",
+    "Open Boundary First Soccer",
   ];
 
   for (const marker of expected) {
     if (!html.includes(marker)) {
-      throw new Error(`Soccer detail route did not contain expected marker: ${marker}`);
+      throw new Error(`Canonical Soccer research route did not contain expected marker: ${marker}`);
     }
   }
 
   for (const forbidden of ["Structured retained record", "Governed public landing", "aria-modal=\"true\""]) {
     if (html.includes(forbidden)) {
-      throw new Error(`Soccer detail route contained forbidden fallback/modal marker: ${forbidden}`);
+      throw new Error(`Canonical Soccer research route contained forbidden fallback/modal marker: ${forbidden}`);
     }
   }
 
-  console.log("P4 Soccer production spatial practitioner field: pass");
+  console.log("P4 Soccer canonical research surface: pass");
 } finally {
   await stopServer();
 }
