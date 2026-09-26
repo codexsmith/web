@@ -46,9 +46,20 @@ requireMatch(
   "Legacy Record URLs must resolve to their canonical World or Provenance destination",
 );
 
-// The Lab Machine remains available as the versioned development surface. The
-// retired hero / ?world=1 threshold state must not reappear as a parallel root
-// state machine.
+// Routing boundary: the canonical public root is the institutional homepage,
+// /v2 retains the Lab Machine as a versioned development surface, and deep World
+// content continues through the catch-all without reviving the retired root hero
+// / ?world=1 state machine.
+requireMatch(
+  "src/app/page.tsx",
+  /InstitutionalHomePage/,
+  "The canonical root must render the institutional homepage",
+);
+forbidMatch(
+  "src/app/page.tsx",
+  /LabMachineHomeRoute|LabMachineHomeExperience/,
+  "The canonical root must not revive the Lab Machine development surface",
+);
 requireMatch(
   "src/app/v2/page.tsx",
   /LabMachineHomeRoute/,
@@ -57,7 +68,7 @@ requireMatch(
 requireMatch(
   "src/app/world/page.tsx",
   /permanentRedirect\(params\.size[\s\S]*:\s*"\/"\)/,
-  "Legacy /world URLs must redirect into the canonical root Lab Machine",
+  "Legacy /world URLs must redirect into the canonical institutional root",
 );
 requireMatch(
   "src/app/[...slug]/page.tsx",
@@ -72,7 +83,7 @@ forbidMatch(
 requireMatch(
   "src/components/world-app.tsx",
   /const navigateHome = useCallback\(\(\) => \{[\s\S]*?router\.push\("\/"\);[\s\S]*?\}, \[router\]\)/,
-  "The standard content frame logo must return to the canonical root Lab Machine",
+  "The standard content frame logo must return to the canonical institutional root",
 );
 requireMatch(
   "src/components/bfux/LabMachineWorld.tsx",
