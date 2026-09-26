@@ -66,37 +66,28 @@ try {
 
   const html = await detail.text();
   const expected = [
-    "data-detail-kind=\"record\"",
-    "See the position before you calculate the move.",
-    "Decision rule",
-    "Position state",
-    "Reachable futures under adversarial constraint",
-    "Commitment rail",
-    "Candidate move consequence trace",
-    "Material gain",
-    "Defender leaves its post",
-    "Closure test",
-    "constructed teaching pattern",
-    "Validation board",
-    "External truth condition",
-    "Agreement with established chess analysis on the actual position.",
-    "Not established",
-    "Return to object",
+    "Boundary First Chess",
+    "Discrete strategy testbed",
+    "Developed working doctrine",
+    "A practitioner-facing testbed for boundaries, state, admissible moves, possibility spaces, witness, consequence, and strategic closure in a familiar formal game.",
+    "PUBLIC STATUS",
+    "RELATED WORK",
+    "Open Boundary First Chess",
   ];
 
   for (const marker of expected) {
     if (!html.includes(marker)) {
-      throw new Error(`Chess detail route did not contain expected marker: ${marker}`);
+      throw new Error(`Canonical Chess research route did not contain expected marker: ${marker}`);
     }
   }
 
   for (const forbidden of ["Structured retained record", "Governed public landing", "aria-modal=\"true\""]) {
     if (html.includes(forbidden)) {
-      throw new Error(`Chess detail route contained forbidden fallback/modal marker: ${forbidden}`);
+      throw new Error(`Canonical Chess research route contained forbidden fallback/modal marker: ${forbidden}`);
     }
   }
 
-  console.log("P4 Chess production practitioner decision board: pass");
+  console.log("P4 Chess canonical research surface: pass");
 } finally {
   await stopServer();
 }
