@@ -25,18 +25,18 @@ export function InstitutionalAppliedWorkPage() {
         styles={styles}
         className={styles.appliedWorkHero}
         eyebrow={<>CONSULTING / APPLIED WORK</>}
-        title={<>Consulting for difficult systems.</>}
+        title={<>Three bounded ways to make a difficult system legible.</>}
         lead={
           <>
-            Scoped consulting for software architecture, AI and operational governance,
-            research infrastructure, technical diagnosis, and bounded pilots.
+            Systems / Architecture Review. Agency / AI Governance Audit. Knowledge /
+            Representation Infrastructure Diagnostic.
           </>
         }
         support={
           <>
             Bring a system, workflow, decision, or failure that is expensive to misunderstand.
-            Start with the smallest engagement that can produce a useful artifact, evidence,
-            or decision.
+            We start with the buyer&apos;s problem, leave behind durable artifacts, and introduce
+            deeper machinery only where the diagnosis justifies it.
           </>
         }
         childLinks={institutionalChildRoutes.appliedWork}
@@ -85,8 +85,8 @@ export function InstitutionalAppliedWorkPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>SERVICES</>}
-          title={<>Three kinds of work. Nine concrete ways to start.</>}
-          note={<>The outer category tells you the problem family; the inner cards are actual engagement shapes.</>}
+          title={<>Three offers. Nine bounded engagement shapes.</>}
+          note={<>Choose the buyer problem first. The inner cards show concrete ways the work can begin.</>}
         />
 
         <div className={styles.appliedServiceStack}>
