@@ -44,28 +44,28 @@ export const homeAppliedWorkFeature = {
   eyebrow: "CONSULTING / APPLIED WORK",
   title: "Bring one system that is expensive to misunderstand.",
   summary:
-    "Boundary First Labs offers scoped consulting for software architecture, AI and operational governance, research infrastructure, technical diagnosis, and bounded pilots.",
+    "Three bounded entry points for systems architecture, agency and AI governance, and knowledge / representation infrastructure.",
   offers: [
     {
       code: "01",
-      title: "Software + systems",
-      detail: "Architecture review · rescue / modernization · prototype / pilot design",
+      title: "Systems / Architecture Review",
+      detail: "Reconstruct the system · expose defects and invariants · compare repair / migration paths",
     },
     {
       code: "02",
-      title: "AI + operational governance",
-      detail: "AI governance review · process boundary audit · failure postmortem",
+      title: "Agency / AI Governance Audit",
+      detail: "Map decision rights · define human / agent gates · repair authority and provenance gaps",
     },
     {
       code: "03",
-      title: "Research + institutional infrastructure",
-      detail: "Provenance systems · working sessions · fractional technical advisory",
+      title: "Knowledge / Representation Infrastructure Diagnostic",
+      detail: "Map source / claim / evidence state · find representation loss · design durable handoff infrastructure",
     },
   ],
   note:
-    "Start with a review, workshop, prototype, pilot, or advisory scope small enough to finish and teach you something.",
+    "Offers describe the buyer problem. Capabilities and machinery come underneath only when the diagnosis calls for them.",
   href: "/applied-work",
-  cta: "Explore consulting services",
+  cta: "Explore Applied Work",
   contactHref: "/contact?type=applied-work&source=home-consulting",
   contactCta: "Start a conversation",
 } as const;
