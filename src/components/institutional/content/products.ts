@@ -9,13 +9,6 @@ export const productEvidence = [
 
 export const secondaryProducts = [
   {
-    name: "Software Before Code",
-    state: "SOURCE DEVELOPMENT",
-    description:
-      "Possible book, training product, field guide, templates, and educational tooling for software engineers.",
-    next: "Package the source into a bounded offer and test whether practitioners want it.",
-  },
-  {
     name: "ToddlerTalk",
     state: "MVP RECONSTRUCTION",
     description:
