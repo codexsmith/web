@@ -70,7 +70,6 @@ try {
     "Weather simulation research",
     "Pilot-ready research",
     "A boundary-aware computational research program testing diagnostics, structural error, compression, ensemble comparison, and selective refinement alongside established weather science.",
-    "A research program with a planned computational demonstrator and bounded pilot question. It does not claim improved operational forecasts, speed, or external validation.",
     "RELATED WORK",
     "Open Boundary First Weather",
   ];
