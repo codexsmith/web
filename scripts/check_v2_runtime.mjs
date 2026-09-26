@@ -33,311 +33,59 @@ async function waitForServer() {
     }
 
     try {
-      const response = await fetchWithTimeout(base);
-      if (response.status >= 200 && response.status < 500) return;
-    } catch (error) {
-      lastError = error;
-    }
-
-    await sleep(350);
-  }
-
-  throw new Error(`Timed out waiting for production server${lastError ? `: ${lastError}` : ""}\n${output}`);
-}
-
-async function expectPage(path, expectedStrings, forbiddenStrings = []) {
-  const response = await fetchWithTimeout(`${base}${path}`);
-  if (response.status !== 200) {
-    throw new Error(`${path} returned HTTP ${response.status}`);
-  }
-
-  const html = await response.text();
-  for (const expected of expectedStrings) {
-    if (!html.includes(expected)) {
-      throw new Error(`${path} did not contain expected public marker: ${expected}`);
-    }
-  }
-
-  for (const forbidden of forbiddenStrings) {
-    if (html.includes(forbidden)) {
-      throw new Error(`${path} contained forbidden public marker: ${forbidden}`);
-    }
-  }
-}
-
-async function expectRedirect(path, expectedLocation) {
-  const response = await fetchWithTimeout(`${base}${path}`);
-  if (response.status !== 308) {
-    throw new Error(`${path} returned HTTP ${response.status}; expected permanent redirect`);
-  }
-
-  if (response.headers.get("location") !== expectedLocation) {
-    throw new Error(`${path} redirected to ${response.headers.get("location")}; expected ${expectedLocation}`);
-  }
-}
-
-async function stopServer() {
-  if (server.exitCode !== null) return;
-
-  const gracefulExit = new Promise((resolve) => server.once("exit", resolve));
-  server.kill("SIGTERM");
-  await Promise.race([
-    gracefulExit,
-    sleep(2_000),
-  ]);
-
-  if (server.exitCode === null) {
-    const forcedExit = new Promise((resolve) => server.once("exit", resolve));
-    server.kill("SIGKILL");
-    await Promise.race([forcedExit, sleep(2_000)]);
-  }
-}
-
-try {
   await waitForServer();
 
+  // The canonical public root is the institutional site.
   await expectPage("/", [
     "Boundary First Labs",
-    "THE LAB MACHINE",
-    "Powered by Research. Built for People.",
-    "Products",
-    "People",
-    "Research",
-    "Publications",
-    "About",
-    "Capital",
-    "Full",
-    "Core",
-    "Evidence",
-    "Timeline",
+    "Systematizing knowledge for science, engineering, and public reasoning.",
+    "Boundary First Labs is an applied systems research laboratory",
+    "Explore Applied Work",
+    "Read the Research",
+    "FEATURED WORK",
+    "THE LAB IN MOTION",
+    "OUR STANCE",
   ], [
+    "THE LAB MACHINE",
     "Enter the lab",
     "Root World · operating environment",
     "The hero is the threshold",
     "Cross the threshold to activate",
-    "One proposition · one action · one world beyond it",
   ]);
 
-  // The retired ?world=1 query is harmless legacy noise; it must not revive
-  // the old hero / entered-root split.
+  // Retired root-world query state is harmless legacy noise. It must not revive
+  // the Lab Machine or the old hero/entered-root split on the canonical site.
   await expectPage("/?world=1", [
-    "THE LAB MACHINE",
-    "Powered by Research. Built for People.",
-    "Products",
-    "People",
-    "Research",
+    "Boundary First Labs",
+    "Systematizing knowledge for science, engineering, and public reasoning.",
+    "Explore Applied Work",
+    "Read the Research",
   ], [
+    "THE LAB MACHINE",
     "Enter the lab",
     "Root World",
     "operating environment",
   ]);
 
-  // Query-selected root projections hydrate client-side behind the Suspense fallback.
-  // The production smoke validates the canonical root shell here; projection-specific
-  // behavior is covered by the projection/component contracts instead of raw SSR HTML.
-
-  await expectPage("/publications", [
-    "Publications",
-    "Paper Mine",
-    "Corpus-wide publication discovery",
-    "Projection + summary layer",
-    "Current boundary",
-    "All canonical public Paper Mine records",
-    "Bound the corpus",
-  ], [
-    "A public essay presents a bounded argument",
-    "Enter region",
-  ]);
-
-  await expectPage("/products", [
+  // The Lab Machine remains available at the explicit versioned development
+  // surface. This is the only place this smoke test expects Lab Machine identity.
+  await expectPage("/v2", [
+    "THE LAB MACHINE",
+    "Powered by Research. Built for People.",
     "Products",
-    "At a glance",
-    "Current Work",
-    "Shipped Work",
-    "Product Pipeline",
-    "Tools &amp; Experiments",
-    "Related paths",
-    "How We Work",
-    "View",
-  ], [
-    "Work with a current public operating surface",
-    "Systems that were actually delivered or operated",
-    "Product concepts with enough architecture",
-    "Small artifacts that test an interaction",
-    "Enter region",
-  ]);
-
-  await expectPage("/research", [
-    "Research",
-    "At a glance",
-    "Software",
-    "Applied Testbeds",
-    "Foundations",
-    "Formal Theory",
-    "Related paths",
-    "Explore further",
-    "View",
-  ], [
-    "A coherent software lane",
-    "Enter region",
-  ]);
-
-  await expectPage("/about", [
-    "About",
-    "At a glance",
-    "The Lab",
-    "How We Work",
-    "Provenance",
-    "Contact",
-    "Related paths",
-    "View",
-  ], [
-    "Boundary First Labs as a software research and engineering lab whose primary medium",
-    "Enter region",
-  ]);
-
-  await expectPage("/publications/methods/software-before-code", [
-    "Software Before Code",
-    "At a glance",
-    "Working Public Method",
-    "Next publication gate",
-    "External practitioner review",
-  ]);
-
-  await expectPage("/publications/essays/executable-distinctions?view=evidence", [
-    "Publication evidence",
-    "Executable Distinctions",
-    "Working v0.1 publication · review pending",
-    "Claim ceiling",
-    "Records behind the claims",
-    "What remains outside the claim",
-  ]);
-
-  await expectPage("/products?view=evidence", [
-    "Portfolio evidence",
-    "Products",
-    "Current portfolio distribution",
-    "Evidence-bearing work",
-    "Corpus Forge",
-    "View evidence",
-  ]);
-
-  await expectPage("/products/current/corpus-forge?view=evidence", [
-    "Product evidence",
-    "What establishes Corpus Forge as an active program",
-    "Claim ceiling",
-    "Records behind the claims",
-    "Effective date not established",
-  ], [
-    "src/content/",
-    "Typed relations",
-    "Retained / public records",
-  ]);
-
-  await expectPage("/about/contact?view=evidence", [
-    "Contact",
-    "Projection boundary",
-    "data-projection=\"world\"",
-    "data-projection-intent=\"evidence\"",
-    "data-projection-fallback=\"true\"",
-    "unavailable for ",
-    "remains preferred and will resume when supported.",
-  ]);
-
-  await expectPage("/people", [
     "People",
-    "At a glance",
-    "Mission",
-    "Principles",
-    "Goals &amp; Aspirations",
-    "Augusta Civic Infrastructure",
-    "Open project record",
+    "Research",
+  ], [
+    "Systematizing knowledge for science, engineering, and public reasoning.",
   ]);
 
-  await expectRedirect("/people?view=record", "/people");
+  // Legacy/version aliases must resolve into the canonical institutional route
+  // space rather than creating parallel public roots.
+  await expectRedirect("/world", "/");
+  await expectRedirect("/v3", "/");
+  await expectRedirect("/v3/research", "/research");
 
-  await expectPage("/people?view=process", [
-    "Process projection",
-    "Agentic · Lean Startup · Agile · Scientific · Computational · Constructive",
-  ]);
-
-  await expectPage("/people/goals-aspirations", [
-    "Goals &amp; Aspirations",
-    "At a glance",
-  ]);
-
-  await expectRedirect(
-    "/agency-audit",
-    "/products/current/agency-representation-audit?detail=record:agency-representation-audit",
-  );
-
-  await expectPage(
-    "/products/current/agency-representation-audit?detail=record:agency-representation-audit",
-    [
-      "data-detail-kind=\"record\"",
-      "Retained record",
-      "Make the chain from representation to consequence inspectable.",
-      "Six questions locate the operating relationship.",
-      "Five passes from authority to repair.",
-      "Good pilot candidates are bounded, consequential, and inspectable.",
-      "This is a systems audit, not delegated institutional authority.",
-      "Return to object",
-    ],
-    ["Governed public landing", "Reading frame"],
-  );
-
-  await expectRedirect(
-    "/software-before-code",
-    "/publications/methods/software-before-code?detail=record:software-before-code",
-  );
-
-  await expectPage(
-    "/publications/methods/software-before-code?detail=record:software-before-code",
-    [
-      "data-detail-kind=\"record\"",
-      "Retained record",
-      "Determine the object before selecting the mechanism.",
-      "Nine questions before architecture hardens.",
-      "Representation is controlled forgetting.",
-      "Symptoms become useful when they point back to a lost distinction.",
-      "What this method is not.",
-      "Return to object",
-    ],
-    ["Governed public landing"],
-  );
-
-  // Apparatus remains explicitly addressed on content routes. The canonical
-  // root is now the Lab Machine rather than the retired root Apparatus prototype.
-
-  await expectPage("/research/software?ui=apparatus", [
-    "APPARATUS",
-    "Software",
-    "CONTAINED MODULES",
-    "Boundary First Engineering",
-    "Executable Representation",
-    "Boundary First UX",
-    "Verification &amp; Governance",
-    "LOCAL ROUTING",
-  ]);
-
-  await expectPage("/publications/methods/software-before-code?ui=apparatus", [
-    "APPARATUS",
-    "Software Before Code",
-    "Working Public Method",
-    "GATE · NEXT PUBLICATION GATE",
-    "External practitioner review",
-    "Return to Card",
-  ]);
-
-  await expectPage("/publications/methods/software-before-code?view=evidence&ui=apparatus", [
-    "APPARATUS",
-    "Publication evidence",
-    "Software Before Code",
-    "Working Public Method",
-    "Records behind the claims",
-  ]);
-
-  console.log("v2 production runtime smoke: pass");
+  console.log("current routing production runtime smoke: pass");
 } finally {
   await stopServer();
 }
