@@ -66,30 +66,30 @@ try {
 
   const html = await detail.text();
   const expected = [
-    "data-detail-kind=\"record\"",
-    "Research-operations workbench",
-    "Six stages from source to durable corpus.",
-    "Keep unlike things unlike.",
-    "Illustrative trace: when a design claim and an incident disagree.",
-    "Maturity is a state transition, not a formatting choice.",
-    "A governed corpus should be testable as an information system.",
-    "Active development, not a claim of solved knowledge management.",
-    "Return to object",
+    "Corpus Forge",
+    "Research operations software and method",
+    "Active development",
+    "CURRENT PUBLIC RECORD",
+    "What this work currently says.",
+    "A governed memory and research-operations system for provenance, typed claims, contradiction, review, promotion, supersession, and repair.",
+    "What exists now",
+    "The six-stage source-to-repair lifecycle is specified and public.",
+    "The current public claim is a developed research-operations method plus an active software program, not a claim of finished platform deployment.",
   ];
 
   for (const marker of expected) {
     if (!html.includes(marker)) {
-      throw new Error(`Corpus Forge detail route did not contain expected marker: ${marker}`);
+      throw new Error(`Canonical Corpus Forge route did not contain expected marker: ${marker}`);
     }
   }
 
   for (const forbidden of ["Structured retained record", "Governed public landing"]) {
     if (html.includes(forbidden)) {
-      throw new Error(`Corpus Forge detail route contained forbidden fallback marker: ${forbidden}`);
+      throw new Error(`Canonical Corpus Forge route contained forbidden fallback marker: ${forbidden}`);
     }
   }
 
-  console.log("P4 Corpus Forge production runtime: pass");
+  console.log("P4 Corpus Forge canonical production surface: pass");
 } finally {
   await stopServer();
 }
