@@ -16,7 +16,7 @@
     },
     "secondaryCta": {
       "label": "Explore applied work",
-      "href": "/work/index"
+      "href": "/applied-work"
     }
   },
   "definition": {
@@ -180,6 +180,6 @@
   },
   "cta": {
     "label": "Explore applied work",
-    "href": "/work/index"
+    "href": "/applied-work"
   }
 }
