@@ -274,6 +274,7 @@ function RangeControl({
       <span><b>{label}</b><output>{formatControl(name, value)}</output></span>
       <input
         type="range"
+        aria-label={label}
         min={bound.min}
         max={bound.max}
         step={controlSteps[name]}
