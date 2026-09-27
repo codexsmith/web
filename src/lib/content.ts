@@ -2,6 +2,7 @@ export type NodeKind =
   | "root"
   | "branch"
   | "product"
+  | "wedge"
   | "service"
   | "project"
   | "research"
@@ -345,7 +346,7 @@ export const nodes: ContentNode[] = [
     shortLabel: "YouTube Explorer",
     path: "products/pipeline/youtube-knowledge-explorer",
     parentId: "planned-products",
-    kind: "product",
+    kind: "wedge",
     eyebrow: "Current Projectr implementation",
     summary:
       "The active-build Projectr wedge for turning long-form YouTube into searchable, timestamped, persistent, source-linked knowledge while preserving a direct path back to the original material.",
