@@ -158,7 +158,7 @@ export function InstitutionalProductsPage() {
 
               <div className={styles.productMiniPanel}>
                 <span>PRODUCT FAMILY</span>
-                <strong>Projectr — public knowledge infrastructure / project-based constructive social media</strong>
+                <strong>Public knowledge infrastructure / project-based constructive social media</strong>
               </div>
 
               <div className={styles.productTruth}>
@@ -179,7 +179,7 @@ export function InstitutionalProductsPage() {
           <InstitutionalSectionHeader
             styles={styles}
             eyebrow={<>SIBLING KNOWLEDGE INFRASTRUCTURE</>}
-            title={<>Projectr organizes public knowledge. Corpus Forge governs bounded research execution.</>}
+            title={<>Public knowledge infrastructure organizes durable source-linked knowledge. Corpus Forge governs bounded research execution.</>}
             note={<>They can exchange typed work and artifact state, but public planning is not scientific promotion and neither product is merely the other&apos;s front end or back end.</>}
           />
 
