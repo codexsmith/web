@@ -765,7 +765,7 @@ expect(contactPage.includes("EMAIL IS LIVE"), "Contact hero must make the live e
 expect(contactPage.includes("PUBLIC_CONTACT_EMAIL"), "Contact must expose the canonical public email address");
 expect(contactPage.includes("contactEmailFallback"), "Contact must provide a live-email fallback when the web form receiver is unavailable");
 expect(contactContent.includes("Applied work / consulting"), "Contact must route applied-work inquiries");
-expect(contactContent.includes("Funding / sponsorship"), "Contact must route funding inquiries");
+expect(contactContent.includes("Funding / capitalization / sponsorship"), "Contact must route funding inquiries");
 expect(contactContent.includes("Research review / technical critique"), "Contact must route research-review inquiries");
 expect(contactContent.includes("Media / speaking / education"), "Contact must route media and education inquiries");
 expect(inquiryForm.startsWith('"use client";'), "Inquiry form must own its browser interaction boundary");
