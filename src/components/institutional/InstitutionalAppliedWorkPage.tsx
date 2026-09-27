@@ -14,6 +14,7 @@ import {
   appliedWorkGoodFit,
   appliedWorkOutputs,
   appliedWorkProcess,
+  systemsArchitectureReviewDemo,
 } from "./content/appliedWork";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
@@ -43,7 +44,7 @@ export function InstitutionalAppliedWorkPage() {
       >
         <aside className={styles.appliedWorkStatus}>
           <span>CONSULTING AVAILABILITY</span>
-          <strong>Available for scoped reviews, working sessions, and bounded technical advisory. Pilots follow a defined diagnostic or design boundary.</strong>
+          <strong>Currently prioritizing bounded Systems / Architecture Reviews, with governance and knowledge-infrastructure diagnostics available where the problem calls for them.</strong>
           <p>
             The work draws on prior professional experience in software engineering,
             architecture, consulting, Lean–Agile delivery, startup iteration, and systems
@@ -114,6 +115,83 @@ export function InstitutionalAppliedWorkPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className={styles.appliedDemoSection}>
+        <InstitutionalSectionHeader
+          styles={styles}
+          eyebrow={<>{systemsArchitectureReviewDemo.eyebrow}</>}
+          title={<>See the first review shape before you buy one.</>}
+          note={<>Synthetic example, not a customer case.</>}
+        />
+
+        <div className={styles.appliedDemoFrame}>
+          <article className={styles.appliedDemoLead}>
+            <span>01 / PROBLEM</span>
+            <h3>{systemsArchitectureReviewDemo.title}</h3>
+            <p>{systemsArchitectureReviewDemo.summary}</p>
+            <blockquote>{systemsArchitectureReviewDemo.question}</blockquote>
+
+            <div className={styles.appliedDemoStateCompare}>
+              <div>
+                <small>COARSE STATUS</small>
+                {systemsArchitectureReviewDemo.coarseStates.map((state) => (
+                  <strong key={state}>{state}</strong>
+                ))}
+              </div>
+              <div>
+                <small>RECONSTRUCTED LIFECYCLE</small>
+                {systemsArchitectureReviewDemo.reconstructedStates.map((state) => (
+                  <span key={state}>{state}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+
+          <div className={styles.appliedDemoAnalysis}>
+            <div className={styles.appliedDemoDefects}>
+              <span>02 / CONSEQUENTIAL DEFECTS</span>
+              <div>
+                {systemsArchitectureReviewDemo.defectClasses.map((defect) => (
+                  <article key={defect.title}>
+                    <strong>{defect.title}</strong>
+                    <p>{defect.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.appliedDemoRepair}>
+              <span>03 / REPAIR PATH</span>
+              <ol>
+                {systemsArchitectureReviewDemo.repairPath.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.appliedDemoFooter}>
+          <div>
+            <span>WHAT THE REVIEW LEAVES BEHIND</span>
+            <div className={styles.appliedDemoDeliverables}>
+              {systemsArchitectureReviewDemo.deliverables.map((deliverable) => (
+                <strong key={deliverable}>{deliverable}</strong>
+              ))}
+            </div>
+          </div>
+          <div>
+            <span>CLAIM CEILING</span>
+            <p>{systemsArchitectureReviewDemo.claim}</p>
+          </div>
+          <Link
+            className={styles.appliedDemoCta}
+            href="/contact?type=applied-work&source=systems-architecture-demo"
+          >
+            Bring a system to review <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 
