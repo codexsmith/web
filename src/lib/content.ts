@@ -226,7 +226,7 @@ export const nodes: ContentNode[] = [
       {
         label: "Open the full Agency / AI Governance Audit record",
         href: "/agency-audit",
-        eyebrow: "Pilot service record",
+        eyebrow: "Available service record",
         summary: "Scope, five-pass method, candidate work, deliverables, and claim firewall.",
       },
     ],
