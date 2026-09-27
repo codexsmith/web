@@ -118,9 +118,9 @@ export const inquiryBoundaries = [
       "The page you came from and the reason you wrote stay attached so the conversation can move to the right place without losing what you meant.",
   },
   {
-    label: "NO HIDDEN SALES FUNNEL",
+    label: "NO DISGUISED MAILING LIST",
     description:
-      "Contact is for conversation, not a disguised mailing list or sales-qualification funnel.",
+      "Contact does not subscribe you to a marketing list. If you contact us about Applied Work, we may ask a few qualification questions so we can tell whether there is a real bounded problem and a responsible next step.",
   },
 ] as const;
 
