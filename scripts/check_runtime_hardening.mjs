@@ -88,6 +88,37 @@ if (!fs.existsSync(instrumentationPath)) {
   }
 }
 
+
+const serverObservabilityPath = "src/lib/server-observability.ts";
+if (!fs.existsSync(serverObservabilityPath)) {
+  fail("Structured server observability helper must exist");
+} else {
+  const serverObservability = fs.readFileSync(serverObservabilityPath, "utf8");
+  if (!serverObservability.includes('request.headers.get("x-vercel-id")')) {
+    fail("Structured request logs must preserve the Vercel request correlation id");
+  }
+  if (!serverObservability.includes('msg: "start"') || !serverObservability.includes('msg: "done"') || !serverObservability.includes('msg: "failed"')) {
+    fail("Structured server observability must retain start/done/failed lifecycle logs");
+  }
+}
+
+for (const routePath of [
+  "src/app/api/bfux/layout-studio/route.ts",
+  "src/app/api/inquiry/route.ts",
+  "src/app/api/open-lab/route.ts",
+  "src/app/api/simulate/route.ts",
+]) {
+  const routeSource = fs.readFileSync(routePath, "utf8");
+  if (!routeSource.includes("observeRequest(")) {
+    fail(`${routePath} must retain structured request observability`);
+  }
+}
+
+const bridgeActions = fs.readFileSync("src/app/ops/bridges/actions.ts", "utf8");
+if (!bridgeActions.includes("startServerActionObservation(")) {
+  fail("Bridge server actions must retain structured action observability");
+}
+
 const floors = [
   ["node_modules/@vercel/otel", "2.1.3", "Vercel OTel"],
   ["node_modules/@opentelemetry/api", "1.9.0", "OpenTelemetry API"],
