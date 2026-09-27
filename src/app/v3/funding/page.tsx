@@ -4,7 +4,7 @@ import { InstitutionalFundingPage } from "@/components/institutional/Institution
 export const metadata: Metadata = {
   title: "Funding · Boundary First Labs",
   description:
-    "How Boundary First Labs uses funding to convert existing research capacity into inspectable evidence, useful artifacts, external review, and sustainable operations.",
+    "Boundary First Labs funding and capitalization: how runway, earned services, product capital, research funding, and later credit convert existing capacity into external evidence and durable operations.",
   alternates: { canonical: "/funding" },
 };
 
