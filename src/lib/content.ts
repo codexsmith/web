@@ -133,12 +133,12 @@ export const nodes: ContentNode[] = [
     path: "products/current/corpus-forge",
     parentId: "current-work",
     kind: "product",
-    eyebrow: "Executable scientific / research-operation infrastructure",
+    eyebrow: "Research operations software and method",
     summary:
-      "A governed research-operations system for bounded execution, provenance, typed claims, evidence, criticism, verification, promotion, supersession, reproducibility, and repair.",
+      "A governed memory and research-operations system for provenance, typed claims, contradiction, review, promotion, supersession, and repair.",
     status: {
       stage: "active-development",
-      label: "Research product / active development",
+      label: "Active development",
       detail:
         "The canonical Product Register classifies Corpus Forge as a research product with substantial internal machinery. That internal operability does not establish an externally validated or production-ready platform.",
       sourceStatus: "research_product",
