@@ -30,6 +30,7 @@ function kindLabel(kind: ContentNode["kind"]) {
     root: "Institution",
     branch: "Program area",
     product: "Product",
+    wedge: "Product wedge",
     service: "Service",
     project: "Project",
     research: "Research",
