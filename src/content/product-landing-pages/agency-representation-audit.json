@@ -2,17 +2,17 @@
   "version": "0.2.0",
   "id": "agency-representation-audit",
   "slug": "agency-audit",
-  "title": "Agency and Representation Audit",
+  "title": "Agency / AI Governance Audit",
   "pageType": "public-professional-service",
   "status": "pilot-intake",
   "visibility": "public",
   "hero": {
-    "eyebrow": "AGENCY + REPRESENTATION AUDIT · PILOT INTAKE",
+    "eyebrow": "AGENCY / AI GOVERNANCE AUDIT · PILOT INTAKE",
     "headline": "Make the chain from representation to consequence inspectable.",
     "support": "A bounded diagnostic for consequential software, AI, and institutional processes. Map who can act, what representation informs or authorizes the action, how consequences propagate, whether the process can be contested, and who owns repair.",
     "primaryCta": {
       "label": "Start an audit inquiry",
-      "href": "/collaborate"
+      "href": "/contact?type=applied-work&source=agency-ai-governance-audit"
     },
     "secondaryCta": {
       "label": "See the audit method",
@@ -136,12 +136,12 @@
     "claimRule": "Findings describe observed or reconstructable agency, representation, consequence, contest, and repair conditions inside the declared scope. They should not be promoted into claims about the institution as a whole without additional evidence."
   },
   "closing": {
-    "eyebrow": "AGENCY + REPRESENTATION AUDIT",
+    "eyebrow": "AGENCY / AI GOVERNANCE AUDIT",
     "title": "If the system can act, the path from authority to repair should be reconstructable.",
     "finalLine": "Make the representation visible. Follow the consequence. Preserve the contest path. Assign the repair."
   },
   "cta": {
     "label": "Start an audit inquiry",
-    "href": "/collaborate"
+    "href": "/contact?type=applied-work&source=agency-ai-governance-audit"
   }
 }
