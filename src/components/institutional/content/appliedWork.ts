@@ -163,3 +163,63 @@ export const appliedWorkAudiences = [
   "Institutions with complex workflows",
   "Teams deploying consequential AI",
 ] as const;
+
+
+export const systemsArchitectureReviewDemo = {
+  eyebrow: "SYNTHETIC REVIEW EXAMPLE",
+  title: "A system can be “paid” before it is paid.",
+  summary:
+    "A synthetic invoice workflow shows the review shape without pretending to be a customer case. Coarse statuses hide consequential transitions, outside repair, and ambiguous completion.",
+  question:
+    "What is this representation allowed to forget without changing a consequential decision?",
+  coarseStates: ["APPROVED", "PAID", "FAILED"],
+  reconstructedStates: [
+    "Accounting approved",
+    "Payment authorized",
+    "Submitted",
+    "Gateway acknowledged",
+    "Settled",
+    "Reconciled",
+    "Closed",
+  ],
+  defectClasses: [
+    {
+      title: "Authority collapse",
+      description: "Accounting approval and payment authority are treated as the same state.",
+    },
+    {
+      title: "Acknowledgment / settlement collapse",
+      description: "An integration acknowledgment is allowed to stand in for business completion.",
+    },
+    {
+      title: "Hidden repair",
+      description: "Spreadsheet, email, or direct-data fixes make the workflow succeed outside its represented process.",
+    },
+    {
+      title: "Retry / duplicate ambiguity",
+      description: "Recovery can create a second financial action because replay semantics are not explicit.",
+    },
+    {
+      title: "Policy-version drift",
+      description: "The system cannot reliably reconstruct which rule set governed an earlier decision.",
+    },
+  ],
+  repairPath: [
+    "Declare protected distinctions",
+    "Locate ownership + authority",
+    "Separate canonical state from projections",
+    "Represent repair explicitly",
+    "Define closure",
+    "Migrate incrementally",
+  ],
+  deliverables: [
+    "System reconstruction",
+    "Boundary / ownership map",
+    "Defect + invariant registers",
+    "Repair / migration options",
+    "Decision packet",
+    "Handoff context",
+  ],
+  claim:
+    "The synthetic case demonstrates the review workflow and durable artifact package. It is not a customer case and does not establish unique superiority, field effectiveness, cost savings, or product-market fit.",
+} as const;
