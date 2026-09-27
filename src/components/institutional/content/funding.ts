@@ -1,100 +1,178 @@
 export const fundingConversionStages = [
   {
-    title: "Existing capacity",
+    title: "Existing productive inventory",
     description:
-      "Research corpus, methods, software, prototypes, manuscripts, product candidates, and institutional machinery already exist. Funding does not begin the work at zero.",
+      "Research, software, methods, manuscripts, product candidates, service capability, and institutional machinery already exist. Capital is not being asked to create the institution from zero.",
   },
   {
-    title: "Protected conversion",
+    title: "Constraint diagnosed",
     description:
-      "Resources buy concentrated time, external review, specialist support, bounded experiments, publication work, product preparation, and the operational capacity to finish what is already latent.",
+      "Name the actual blocked boundary first: fragmented conversion bandwidth, specialist review, legal or IP work, production, compute, access, distribution, or another explicit constraint.",
   },
   {
-    title: "Inspectable artifacts",
+    title: "Resource matched",
     description:
-      "Private accumulation becomes public code, research packets, papers, demonstrations, pilots, products, datasets, methods, or documented procedures that other people can inspect.",
+      "Use the resource that can actually remove that constraint: protected time, sponsorship, earned revenue, grant support, patient product capital, expertise, infrastructure, access, or working capital.",
   },
   {
-    title: "External contact",
+    title: "Capability ready",
     description:
-      "Reviewers, users, customers, collaborators, datasets, and operating environments create evidence that can disagree with the Lab and force revision.",
+      "The resource has to become usable institutional capability before it counts: protected time exists, a reviewer is engaged, tooling is provisioned, a funded program can run, or a contract can be delivered.",
+  },
+  {
+    title: "External closure",
+    description:
+      "The next bounded action produces evidence: a sale, contract, grant submission or award, public artifact, review, product test, publication, handoff, negative result, or other declared closure.",
   },
   {
     title: "Renewed capacity",
     description:
-      "Useful results can generate earned revenue, grants, sponsorship, membership, product income, stronger partnerships, or transfer to a better steward. Negative results narrow the program rather than disappearing.",
+      "Useful conversion should leave behind revenue, evidence, reusable machinery, stronger partnerships, external operators, or a narrower program—reducing dependence on the next unrestricted funding event.",
   },
 ] as const;
 
 export const fundingOutputs = [
-  "Reviewable public artifacts",
-  "Independent criticism",
-  "Bounded experiments and pilots",
-  "Reusable research infrastructure",
-  "Durable products and services",
-  "More sustainable research operations",
+  "Paid engagements and contracts",
+  "Product market tests",
+  "Grant submissions and dispositions",
+  "Publications and independent review",
+  "Externally usable machinery",
+  "Documented handoff and delegation",
+  "Negative closures that stop bad bets",
+] as const;
+
+export const fundingCapitalRoles = [
+  {
+    name: "Runway / conversion capital",
+    purpose: "Protect the continuity required to close already-existing work.",
+    bestFor:
+      "Founder conversion bandwidth, legal/IP cleanup, publication and product closure, administration, specialist review, infrastructure, and the work required to make internal capability externally inspectable.",
+    boundary:
+      "Runway should be bounded by declared closure targets. It is not an unlimited research subsidy and it does not guarantee that the selected products, grants, or hypotheses succeed.",
+  },
+  {
+    name: "Earned services",
+    purpose: "Generate unrestricted revenue while testing the method on real systems.",
+    bestFor:
+      "Systems / Architecture Review, Agency / AI Governance Audit, Knowledge / Representation Infrastructure Diagnostic, and justified implementation or retained follow-on work.",
+    boundary:
+      "A consulting engagement should leave durable client state, case evidence, or reusable capability. Revenue does not validate unrelated research claims.",
+  },
+  {
+    name: "Product / company capital",
+    purpose: "Turn repeated capability into reusable software, IP, products, and distribution.",
+    bestFor:
+      "Defined scalable products or commercialization vehicles whose engineering, packaging, distribution, and market testing require investment beyond founder-delivered services.",
+    boundary:
+      "Investment or patient capital should attach to a defined commercial object. The research institution as a whole is not a substitute for a product, vehicle, rights boundary, or market thesis.",
+  },
+  {
+    name: "Research / public-good capital",
+    purpose: "Finance work whose public value or research horizon should not be forced through near-term customer revenue.",
+    bestFor:
+      "Grants, sponsored research, research philanthropy, open science, reproducibility, education, public-interest technology, academic collaboration, and bounded public campaigns.",
+    boundary:
+      "Funding can make research admissible and reviewable; it cannot raise a mathematical or scientific claim ceiling or turn collaboration into endorsement.",
+  },
+  {
+    name: "Working capital / credit",
+    purpose: "Finance timing gaps after stronger economic evidence exists.",
+    bestFor:
+      "Signed contracts or awards, eligible receivables, reimbursement timing, demonstrated cash flow, recurring revenue, or separately appraisable and transferable assets where appropriate.",
+    boundary:
+      "Latent IP is not a receivable. A proposal is not an award. Product value is not automatically collateral value. Debt should follow underwritable evidence rather than replace it.",
+  },
 ] as const;
 
 export const fundingChannels = [
   {
-    name: "Founding sponsorship / patronage",
-    purpose: "Buy concentrated runway for translation and institutionalization.",
+    name: "Founding sponsorship",
+    purpose: "Buy a bounded period of protected conversion capacity.",
     bestFor:
-      "Public-facing artifacts, research packaging, publication infrastructure, product preparation, and a bounded conversion sprint.",
+      "Public translation, product and service preparation, selected research closure, publication work, outreach, specialist support, and institutional readiness.",
     boundary:
-      "Support should be tied to visible outputs and closure events rather than open-ended belief in the entire research program.",
+      "Support should be tied to visible outputs, closure events, and reporting rather than open-ended belief in the entire program.",
   },
   {
-    name: "Grants / research philanthropy",
-    purpose: "Finance public-good research, open infrastructure, review, and larger bounded programs.",
+    name: "Recoverable sponsorship",
+    purpose: "Provide early runway with a defined path for repayment from future unrestricted earned revenue.",
     bestFor:
-      "Responsible technology, public-interest systems, open science, education, research infrastructure, and domain work with a mature reviewable object.",
+      "Bounded conversion periods where a sponsor wants capital to recycle if later services or products create sufficient unrestricted revenue.",
     boundary:
-      "A grant can make work admissible; it cannot raise the scientific claim ceiling of the result.",
+      "Repayment terms require a separate agreement, reserve protection, and explicit repayment source. The website does not imply that a recoverable structure already exists.",
   },
   {
-    name: "Paid pilots / applied services",
-    purpose: "Create earned support while testing the method against real institutional problems.",
+    name: "Consulting prepayment / applied services",
+    purpose: "Convert existing professional capability directly into earned revenue and external evidence.",
     bestFor:
-      "Bounded audits, advisory work, prototypes, workshops, systems analysis, integration, and partner-specific experiments.",
+      "Bounded reviews, diagnostics, implementation, or retained work where the buyer problem and delivery boundary are already concrete.",
     boundary:
-      "The engagement should produce a concrete outcome, evidence, or reusable capability rather than a vague consulting relationship.",
+      "Prepayment purchases defined services. It is not patronage, an investment in the whole Lab, or proof of repeatable demand.",
   },
   {
-    name: "Open science / public campaigns",
-    purpose: "Fund scoped public artifacts while making the work visible and inspectable.",
+    name: "Grants / sponsored research",
+    purpose: "Fund public-good research, open infrastructure, external review, collaboration, and larger bounded programs.",
     bestFor:
-      "Reproducible experiments, educational material, public diagnostic tools, open research infrastructure, and clearly declared studies.",
+      "Responsible technology, public-interest systems, open science, research infrastructure, education, and mature domain-specific research objects.",
     boundary:
-      "Public enthusiasm is demand evidence or participation; it is not scientific validation.",
+      "Awards can be restricted, reimbursable, or program-specific. Awarded capital is not automatically unrestricted operating cash or debt-service capacity.",
   },
   {
-    name: "Academic / institutional collaboration",
-    purpose: "Bring domain criticism, data, facilities, expertise, review, and grant bridges into the work.",
+    name: "Public campaigns / product revenue",
+    purpose: "Test whether specific public artifacts and products can earn direct support.",
     bestFor:
-      "Specific claims, experiments, paper candidates, replication work, and programs that require authority or infrastructure BFL should not reproduce.",
+      "Crowdfunding tied to declared milestones, memberships around recurring public-lab work, product preorders, books, software, educational material, and other bounded outputs.",
     boundary:
-      "Collaboration should test or extend a bounded object, not ask another institution to endorse the whole Lab.",
+      "Public enthusiasm, a preorder, or one transaction does not establish retention, scientific validity, or product-market fit.",
   },
   {
-    name: "Products / memberships / product-specific capital",
-    purpose: "Diversify recurring support around useful outputs that can stand on their own.",
+    name: "Product-specific patient capital / investment",
+    purpose: "Finance a defined scalable commercial object once its rights, product boundary, market thesis, and evidence path are legible.",
     bestFor:
-      "Products, software, publications, recurring public-lab work, and patient capital tied to a defined commercial object.",
+      "Reusable software, product families, licensable machinery, or another specific company/product vehicle that can be diligenced independently of the entire research portfolio.",
     boundary:
-      "Investment belongs to a specific scalable product or vehicle; the research program itself is not a substitute for a commercial object.",
+      "Investment should not be used to launder an unbounded research program into a single-company valuation. Each vehicle needs its own evidence and governance.",
+  },
+] as const;
+
+export const fundingClosureHorizons = [
+  {
+    name: "0–90 days",
+    purpose: "Close readiness and externalization gaps.",
+    bestFor:
+      "Freeze bounded offers, launch selected market tests, move selected products and publications toward external contact, submit appropriate funding applications, repair transaction-readiness gaps, and convert founder-only procedures into reusable state.",
+    boundary:
+      "These are funded closure targets, not promised outcomes. The period should also record explicit failure, deferral, or reprioritization.",
+  },
+  {
+    name: "3–6 months",
+    purpose: "Accumulate external evidence.",
+    bestFor:
+      "Paid engagement or negative market evidence, external product use, grant disposition history, independent criticism, externally usable tooling, improved rights/license readiness, and measurable handoff or delegation.",
+    boundary:
+      "Do not promote internal activity into demand, efficacy, or independent-transfer claims without the corresponding external event.",
+  },
+  {
+    name: "6–12 months",
+    purpose: "Test whether the institution is becoming less capital-fragile.",
+    bestFor:
+      "Repeat or recurring earned revenue in at least one lane—or clear evidence to stop—multiple active capital channels, stronger grant/collaboration history, external operation of selected machinery, and reduced founder-only state.",
+    boundary:
+      "The correct result may be a narrower portfolio. More capital is not the default answer when a conversion lane fails to close.",
   },
 ] as const;
 
 export const fundingEvaluationQuestions = [
-  "Is the problem real and consequential?",
-  "Is the proposed work bounded enough to finish, fail, or revise?",
-  "What already exists that makes the Lab prepared to do it?",
-  "What evidence, artifact, or capability will the support produce?",
-  "What would count as failure, revision, or successful closure?",
-  "Who can inspect, criticize, reproduce, use, or reject the result?",
-  "What useful value remains if the strongest hypothesis fails?",
-  "What human, institutional, or ecological cost could apparent success push outside the funded metric?",
+  "What already exists, and what evidence shows that it exists?",
+  "Which specific constraint is blocking the next useful closure?",
+  "Why is this resource class capable of removing that constraint?",
+  "What action becomes admissible after the resource is supplied?",
+  "What evidence, artifact, transaction, review, or capability should close next?",
+  "What would count as failure, no effect, revision, or successful closure?",
+  "What remains blocked even after the capital is supplied?",
+  "Who can inspect, criticize, reproduce, buy, fund, use, or reject the result?",
+  "What useful value remains if the strongest hypothesis or market thesis fails?",
+  "How does the funded period reduce future dependence on one founder or one capital source?",
 ] as const;
 
 export const fundingBoundaries = [
@@ -104,6 +182,16 @@ export const fundingBoundaries = [
       "A grant, sponsorship, purchase, contract, or resource commitment may unlock work. It may not directly make a mathematical, scientific, or engineering claim more true.",
   },
   {
+    label: "PRODUCT VALUE != CREDIT VALUE",
+    description:
+      "Software, IP, methods, manuscripts, or research machinery can be strategically valuable while still receiving no lender recognition until ownership, transferability, contract, receivable, cash-flow, or other underwriting evidence exists.",
+  },
+  {
+    label: "INVESTMENT != WHOLE-LAB ENDORSEMENT",
+    description:
+      "Patient or investment capital should attach to a defined product, vehicle, or commercialization object. It does not require treating every research lane as one investable company thesis.",
+  },
+  {
     label: "SUPPORT != WHOLE-LAB ENDORSEMENT",
     description:
       "A funder can support one bounded program, artifact, pilot, or public-interest build while remaining agnostic about every other domain and stronger claim.",
@@ -111,16 +199,11 @@ export const fundingBoundaries = [
   {
     label: "NEGATIVE RESULTS CAN CLOSE WORK",
     description:
-      "A well-run experiment that falsifies a path, exposes a boundary, or prevents wasted scale is a legitimate output when the evidence and reasoning remain inspectable.",
-  },
-  {
-    label: "CAPITAL IS A STEWARDSHIP INPUT",
-    description:
-      "Funding allocates scarce time, attention, infrastructure, and material capacity. A good funding structure should preserve intellectual independence, human agency, and the ecological or infrastructural conditions on which the work depends rather than externalizing those costs.",
+      "A funded test that falsifies a path, exposes a boundary, rejects a market thesis, or prevents wasted scale can be a successful conversion if the evidence remains inspectable.",
   },
   {
     label: "DEPENDENCY IS NOT THE GOAL",
     description:
-      "Good support should leave behind more capability, evidence, infrastructure, revenue options, or better stewardship—not permanent dependence on the same source of capital.",
+      "Good capital conversion should leave behind more revenue options, evidence, infrastructure, transferable operations, or better stewardship—not permanent dependence on the same source of capital.",
   },
 ] as const;
