@@ -21,9 +21,9 @@ export const nowPriorityLanes = [
     description:
       "Move from founder history and inspectable internal artifacts to BFL-native pilots, client work, external review, and repeat use.",
     work: [
-      "Scope the first Applied Work engagements and bounded pilots.",
-      "Capture case-study evidence without inflating prototypes or historical work into current traction.",
-      "Use product behavior, collaborator feedback, and failed engagements as evidence about what should continue.",
+      "Prioritize the first Systems / Architecture Review as the current Applied Work market test.",
+      "Run cold-reader legibility review and a small outbound/referral campaign without treating model feedback or founder history as customer traction.",
+      "Capture real qualification, use, transaction, criticism, handoff, and failed-fit evidence as separate events.",
     ],
     closure:
       "At least one BFL-native external engagement or pilot produces inspectable evidence that can be separated from the founder's prior career.",
@@ -66,7 +66,7 @@ export const nowPriorityLanes = [
     description:
       "Use the work already assembled to test real collaboration, funding, commercialization, and distribution routes.",
     work: [
-      "Advance ready-now local, technical, research, and founder-network relationships.",
+      "Run a small first outreach/referral batch around the selected Systems / Architecture Review offer.",
       "Use bounded briefs, demos, pilots, and evidence packets instead of whole-Lab persuasion.",
       "Pursue patronage, grants, paid work, sponsorship, licensing, and product revenue according to the kind of work being funded.",
     ],
@@ -98,7 +98,7 @@ export const roadmapHorizons = [
     title: "Externalize, test, and close the obvious gaps.",
     items: [
       "Finish the public institutional interface.",
-      "Package and scope Applied Work.",
+      "Run the first Systems / Architecture Review conversion test.",
       "Execute the active laboratory and corpus-coherence work.",
       "Advance ready-now collaboration and funding routes.",
       "Prepare publication objects for bounded review.",
