@@ -201,8 +201,8 @@ export const nodes: ContentNode[] = [
   },
   {
     id: "agency-audit",
-    label: "Agency & Representation Audit",
-    shortLabel: "Agency Audit",
+    label: "Agency / AI Governance Audit",
+    shortLabel: "AI Governance Audit",
     path: "products/current/agency-representation-audit",
     parentId: "current-work",
     kind: "service",
@@ -215,7 +215,7 @@ export const nodes: ContentNode[] = [
       detail:
         "Available as a bounded pilot engagement. It is a systems audit, not legal advice, regulatory certification, fairness certification, or a security assessment.",
       sourceStatus: "pilot-intake",
-      provenance: "Product landing manifest and Agency & Representation Audit public record",
+      provenance: "Agency / AI Governance Audit service record; legacy Agency & Representation Audit public record",
     },
     body: [
       "The audit follows five passes: map authority, inspect representation, trace consequence, test contestability, and assign repair.",
@@ -223,7 +223,7 @@ export const nodes: ContentNode[] = [
     ],
     links: [
       {
-        label: "Open the full Agency Audit record",
+        label: "Open the full Agency / AI Governance Audit record",
         href: "/agency-audit",
         eyebrow: "Pilot service record",
         summary: "Scope, five-pass method, candidate work, deliverables, and claim firewall.",
