@@ -9,7 +9,9 @@ import { formatOrdinal } from "./institutionalFormat";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   fundingBoundaries,
+  fundingCapitalRoles,
   fundingChannels,
+  fundingClosureHorizons,
   fundingConversionStages,
   fundingEvaluationQuestions,
   fundingOutputs,
@@ -23,19 +25,21 @@ export function InstitutionalFundingPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.fundingHero}
-        eyebrow={<>FUNDING</>}
-        title={<>Fund the conversion, not the theory.</>}
+        eyebrow={<>FUNDING / CAPITALIZATION</>}
+        title={<>Capitalize the conversion engine, not the theory.</>}
         lead={
           <>
-            Boundary First Labs is not asking a funder to underwrite belief in one
-            unbounded research program.
+            Boundary First Labs already has research, software, methods, product candidates,
+            service capability, and institutional machinery. The near-term capital question is
+            what resource removes which constraint — and what closes afterward.
           </>
         }
         support={
           <>
-            Near-term support converts existing research, software, methods, prototypes,
-            and product candidates into public, reviewable work that can meet external
-            evidence and leave behind durable value.
+            Runway protects conversion capacity. Services earn revenue. Product/company
+            capital builds reusable commercial leverage. Research capital funds public-good
+            inquiry and review. Working capital should follow contracts, awards, receivables,
+            cash flow, or other underwritable evidence.
           </>
         }
         childLinks={institutionalChildRoutes.funding}
@@ -51,11 +55,11 @@ export function InstitutionalFundingPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>THE FUNDING MODEL</>}
-          title={<>Capital should turn latent capacity into inspectable work.</>}
+          title={<>Capital should remove a named constraint and produce a named closure.</>}
           note={
             <>
-              Existing capacity -&gt; bounded conversion -&gt; evidence -&gt; external
-              contact -&gt; renewed capacity.
+              Existing productive inventory -&gt; constraint -&gt; matched resource -&gt;
+              capability -&gt; external closure -&gt; renewed capacity.
             </>
           }
         />
@@ -80,15 +84,53 @@ export function InstitutionalFundingPage() {
         </div>
       </section>
 
+
       <section className={styles.fundingChannelsSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>FUNDING CHANNELS</>}
-          title={<>Different work needs different kinds of support.</>}
+          eyebrow={<>THE CAPITAL STACK</>}
+          title={<>Different capital has different jobs.</>}
           note={
             <>
-              The Lab uses a portfolio model rather than depending on one funder type,
-              one product, or one speculative revenue stream.
+              BFL does not ask one funder, one product, or one financing instrument to carry
+              the entire institution. Each capital source should be matched to the boundary it
+              can actually move.
+            </>
+          }
+        />
+
+        <div className={styles.fundingChannelGrid}>
+          {fundingCapitalRoles.map((role, index) => (
+            <article className={styles.fundingChannelCard} key={role.name}>
+              <div className={styles.fundingChannelTopline}>
+                <span>{formatOrdinal(index)}</span>
+                <small>CAPITAL JOB</small>
+              </div>
+              <h3>{role.name}</h3>
+              <p className={styles.fundingChannelPurpose}>{role.purpose}</p>
+              <div className={styles.fundingChannelField}>
+                <span>WHAT IT SHOULD FINANCE</span>
+                <p>{role.bestFor}</p>
+              </div>
+              <div className={styles.fundingChannelBoundary}>
+                <span>EVIDENCE BOUNDARY</span>
+                <p>{role.boundary}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className={styles.fundingChannelsSection}>
+        <InstitutionalSectionHeader
+          styles={styles}
+          eyebrow={<>CAPITAL STRUCTURES</>}
+          title={<>Match the structure to the economic job.</>}
+          note={
+            <>
+              Sponsorship, prepayment, grants, public support, product capital, and later
+              credit can all be legitimate — but they create different obligations and prove
+              different things.
             </>
           }
         />
@@ -98,7 +140,7 @@ export function InstitutionalFundingPage() {
             <article className={styles.fundingChannelCard} key={channel.name}>
               <div className={styles.fundingChannelTopline}>
                 <span>{formatOrdinal(index)}</span>
-                <small>CHANNEL</small>
+                <small>STRUCTURE</small>
               </div>
               <h3>{channel.name}</h3>
               <p className={styles.fundingChannelPurpose}>{channel.purpose}</p>
@@ -109,6 +151,43 @@ export function InstitutionalFundingPage() {
               <div className={styles.fundingChannelBoundary}>
                 <span>BOUNDARY</span>
                 <p>{channel.boundary}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+
+      <section className={styles.fundingChannelsSection}>
+        <InstitutionalSectionHeader
+          styles={styles}
+          eyebrow={<>THE FUNDED-PERIOD TEST</>}
+          title={<>Judge the capital by what crosses into external evidence.</>}
+          note={
+            <>
+              The Lab does not promise an arbitrary productivity multiple. A bounded funded
+              period should declare closure targets in advance, record success and failure, and
+              update the capital thesis when reality disagrees.
+            </>
+          }
+        />
+
+        <div className={styles.fundingChannelGrid}>
+          {fundingClosureHorizons.map((horizon, index) => (
+            <article className={styles.fundingChannelCard} key={horizon.name}>
+              <div className={styles.fundingChannelTopline}>
+                <span>{formatOrdinal(index)}</span>
+                <small>MEASUREMENT HORIZON</small>
+              </div>
+              <h3>{horizon.name}</h3>
+              <p className={styles.fundingChannelPurpose}>{horizon.purpose}</p>
+              <div className={styles.fundingChannelField}>
+                <span>CANDIDATE CLOSURES</span>
+                <p>{horizon.bestFor}</p>
+              </div>
+              <div className={styles.fundingChannelBoundary}>
+                <span>CLAIM CEILING</span>
+                <p>{horizon.boundary}</p>
               </div>
             </article>
           ))}
@@ -158,7 +237,7 @@ export function InstitutionalFundingPage() {
         <nav className={styles.fundingEvidenceLinks} aria-label="Funding evidence routes">
           <Link href="/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/research">Inspect the research <span aria-hidden="true">-&gt;</span></Link>
-          <Link href="/projects">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
+          <Link href="/applied-work">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/products">Inspect products <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/publications">Inspect publications <span aria-hidden="true">-&gt;</span></Link>
         </nav>
