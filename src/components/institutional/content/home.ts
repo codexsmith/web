@@ -14,7 +14,7 @@ export const methodSteps = [
 
 export const featuredWork = [
   {
-    tag: "PRODUCT",
+    tag: "RESEARCH PRODUCT",
     title: "Boundary-First Chess",
     description: "A book-length teaching asset and developed pedagogy for making structural change on the board more legible.",
     href: "/products/boundary-first-chess",
