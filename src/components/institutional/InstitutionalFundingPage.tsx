@@ -226,12 +226,12 @@ export function InstitutionalFundingPage() {
 
       <section className={styles.fundingClose}>
         <p className={styles.sectionIndex}>CURRENT FUNDING POSTURE</p>
-        <h2>Fund the institution&apos;s ability to turn difficult work into inspectable evidence and durable capability.</h2>
+        <h2>Use capital to make the institution less capital-fragile.</h2>
         <p>
-          The objective is not indefinite sponsorship. It is a bounded conversion process:
-          private corpus into public laboratory; public laboratory into useful artifacts;
-          useful artifacts into external review, products, services, partnerships, and
-          sustainable research operations.
+          The objective is not indefinite sponsorship. It is to convert already-existing
+          productive inventory into contracts, products, funded research, publications,
+          external review, reusable machinery, and transferable operations — while learning
+          which lanes deserve more capital and which should narrow or stop.
         </p>
 
         <nav className={styles.fundingEvidenceLinks} aria-label="Funding evidence routes">
