@@ -13,9 +13,9 @@ export const inquiryTypes = [
   },
   {
     id: "funding",
-    label: "Funding / sponsorship",
-    short: "Grant, philanthropic, patronage, sponsorship, or other support for a defined conversion of existing capacity.",
-    prompt: "What work are you interested in supporting or learning more about?",
+    label: "Funding / capitalization / sponsorship",
+    short: "Runway, sponsorship, research/public-good funding, product-specific capital, or another bounded resource for converting existing capacity.",
+    prompt: "Which capital role or bounded conversion are you interested in, and what outcome or evidence should the support make possible?",
   },
   {
     id: "research-review",
@@ -68,7 +68,7 @@ export const inquiryFamilies = [
     code: "02",
     title: "Evaluate, challenge, or support the work",
     description:
-      "Technical criticism, research discussion, funding, sponsorship, or institutional support.",
+      "Technical criticism, research discussion, funding, capitalization, sponsorship, or institutional support.",
     types: ["research-review", "funding"] as const,
     tone: "evaluate",
   },
