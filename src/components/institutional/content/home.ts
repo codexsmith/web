@@ -97,9 +97,9 @@ export const homeInstitutionalFrontDoors = [
     tone: "collaboration",
   },
   {
-    eyebrow: "FUNDING",
-    title: "Fund the conversion, not the theory.",
-    note: "Capital can change capacity. It does not change truth.",
+    eyebrow: "FUNDING / CAPITALIZATION",
+    title: "Capitalize the conversion engine, not the theory.",
+    note: "Runway · earned services · product capital · research capital · evidence-gated credit",
     href: "/funding",
     cta: "See the Funding model",
     tone: "funding",
