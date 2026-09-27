@@ -4,7 +4,7 @@ import { BoundaryFirstWeatherExperience } from "@/components/institutional/produ
 export const metadata: Metadata = {
   title: "Boundary First Weather · Boundary First Labs",
   description:
-    "Boundary First Weather is a computational research and decision-support product for testing boundary-aware diagnostics, forecast disagreement, and selective refinement.",
+    "Boundary First Weather is a computational research testbed and decision-support surface for testing boundary-aware diagnostics, forecast disagreement, and selective refinement.",
   alternates: { canonical: "/products/boundary-first-weather" },
 };
 
