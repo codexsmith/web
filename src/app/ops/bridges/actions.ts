@@ -95,18 +95,21 @@ export async function logoutBridgeOpsAction() {
   redirect("/ops/bridges");
 }
 
-async function requireSession(
-  observation: ReturnType<typeof startServerActionObservation>,
-) {
+async function requireSession() {
   if (!(await hasBridgeOpsSession())) {
-    observation.done("session_required");
+    console.log(JSON.stringify({
+      level: "info",
+      msg: "blocked",
+      action: "bridge.mutate",
+      outcome: "session_required",
+    }));
     redirect(destination("Operator session required", true));
   }
 }
 
 export async function mutateBridgeAction(formData: FormData) {
+  await requireSession();
   const observation = startServerActionObservation("bridge.mutate");
-  await requireSession(observation);
 
   const id = text(formData, "id");
   const operationText = text(formData, "operation");
