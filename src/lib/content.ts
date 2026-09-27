@@ -286,9 +286,9 @@ export const nodes: ContentNode[] = [
     path: "products/pipeline",
     parentId: "products",
     kind: "branch",
-    eyebrow: "Developed concepts and planned products",
+    eyebrow: "Active builds and developed product directions",
     summary:
-      "Product concepts with enough architecture or recurring definition to retain, but without a shipped-product claim.",
+      "Active-build wedges and developed product directions that remain distinct from shipped-product claims.",
   },
   {
     id: "projectr",
