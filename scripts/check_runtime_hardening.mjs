@@ -62,7 +62,36 @@ if (!nextDeclared || !atLeast(nextDeclared, "16.3.3")) {
   fail("package.json must require Next.js 16.3.3 or newer");
 }
 
+const otelDeclared = packageJson.dependencies?.["@vercel/otel"];
+const otelApiDeclared = packageJson.dependencies?.["@opentelemetry/api"];
+const otelLogsDeclared = packageJson.dependencies?.["@opentelemetry/api-logs"];
+if (!otelDeclared || !atLeast(otelDeclared, "2.1.3")) {
+  fail("package.json must require @vercel/otel 2.1.3 or newer");
+}
+if (!otelApiDeclared || !atLeast(otelApiDeclared, "1.9.0")) {
+  fail("package.json must require @opentelemetry/api 1.9.0 or newer");
+}
+if (!otelLogsDeclared || !atLeast(otelLogsDeclared, "0.222.0")) {
+  fail("package.json must require @opentelemetry/api-logs 0.222.0 or newer");
+}
+
+const instrumentationPath = "src/instrumentation.ts";
+if (!fs.existsSync(instrumentationPath)) {
+  fail("Vercel OpenTelemetry instrumentation must exist at src/instrumentation.ts");
+} else {
+  const instrumentation = fs.readFileSync(instrumentationPath, "utf8");
+  if (!instrumentation.includes('from "@vercel/otel"')) {
+    fail("src/instrumentation.ts must register Vercel OpenTelemetry");
+  }
+  if (!instrumentation.includes('serviceName: "boundary-first-labs-web"')) {
+    fail('src/instrumentation.ts must retain serviceName "boundary-first-labs-web"');
+  }
+}
+
 const floors = [
+  ["node_modules/@vercel/otel", "2.1.3", "Vercel OTel"],
+  ["node_modules/@opentelemetry/api", "1.9.0", "OpenTelemetry API"],
+  ["node_modules/@opentelemetry/api-logs", "0.222.0", "OpenTelemetry Logs API"],
   ["node_modules/next", "16.3.3", "Next.js"],
   ["node_modules/js-yaml", "4.3.2", "js-yaml"],
   ["node_modules/mermaid", "11.16.1", "Mermaid"],
