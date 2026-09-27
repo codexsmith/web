@@ -20,7 +20,7 @@ export const featuredWork = [
     href: "/products/boundary-first-chess",
   },
   {
-    tag: "PRODUCT",
+    tag: "ACTIVE-BUILD WEDGE",
     title: "YouTube Knowledge Explorer",
     description: "A source-linked software tool for turning long-form video into searchable, timestamped, structured knowledge.",
     href: "/products/youtube-knowledge-explorer",
@@ -32,7 +32,7 @@ export const featuredWork = [
     href: "/products/agentic-scientific-method",
   },
   {
-    tag: "RESEARCH PRODUCT",
+    tag: "RESEARCH TESTBED",
     title: "Boundary First Weather",
     description: "A pilot-ready computational testbed for boundary-aware diagnostics, forecast disagreement, and selective refinement.",
     href: "/products/boundary-first-weather",
