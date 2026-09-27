@@ -804,7 +804,7 @@ expect(fundingPage.includes("./content/funding"), "Funding page must own a route
 expect(fundingPage.includes('className={styles.fundingConversion}'), "Funding must expose the conversion model directly");
 expect(fundingPage.includes('className={styles.fundingChannelsSection}'), "Funding must expose channel options directly");
 expect(fundingPage.includes('className={styles.fundingEvaluation}'), "Funding must expose evaluation and epistemic boundaries directly");
-expect(fundingPage.includes("Fund the conversion, not the theory."), "Funding hero must state the public funding thesis");
+expect(fundingPage.includes("Capitalize the conversion engine, not the theory."), "Funding hero must state the public funding thesis");
 expect(fundingPage.includes("childLinks={institutionalChildRoutes.funding}"), "Funding hero must expose Applied Work and Evidence as child routes");
 expect(fundingPage.includes('/contact?type=funding&source=funding'), "Funding must expose a contextual Contact route");
 
