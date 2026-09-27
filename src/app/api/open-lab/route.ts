@@ -1,3 +1,4 @@
+import { observeRequest } from "@/lib/server-observability";
 import {
   isOpenLabSubmissionType,
   participationContracts,
@@ -80,6 +81,7 @@ function makeSubmissionId(now: number) {
 }
 
 export async function POST(request: Request) {
+  return observeRequest(request, "/api/open-lab", async () => {
   const { publicConfig, receiver, token } = readOpenLabServerConfig();
 
   if (!publicConfig.enabled || !receiver || !token) {
@@ -317,4 +319,5 @@ export async function POST(request: Request) {
     },
     { status: 200, headers: { "cache-control": "no-store" } },
   );
+  });
 }
