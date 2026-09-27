@@ -26,7 +26,7 @@ export function InstitutionalAppliedWorkPage() {
         styles={styles}
         className={styles.appliedWorkHero}
         eyebrow={<>CONSULTING / APPLIED WORK</>}
-        title={<>Three bounded ways to make a difficult system legible.</>}
+        title={<>Consulting for difficult systems.</>}
         lead={
           <>
             Systems / Architecture Review. Agency / AI Governance Audit. Knowledge /
