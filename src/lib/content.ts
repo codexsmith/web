@@ -211,11 +211,11 @@ export const nodes: ContentNode[] = [
     summary:
       "A systems audit that reconstructs authority, representation, consequence, contestability, and repair around one consequential process.",
     status: {
-      stage: "pilot",
-      label: "Pilot intake",
+      stage: "developed",
+      label: "Offer ready",
       detail:
-        "Available as a bounded pilot engagement. It is a systems audit, not legal advice, regulatory certification, fairness certification, or a security assessment.",
-      sourceStatus: "pilot-intake",
+        "Available as a bounded professional engagement. A pilot is one possible delivery shape, but no external pilot or outcome evidence is implied. It is a systems audit, not legal advice, regulatory certification, fairness certification, or a security assessment.",
+      sourceStatus: "offer-ready",
       provenance: "Agency / AI Governance Audit service record; legacy Agency & Representation Audit public record",
     },
     body: [
