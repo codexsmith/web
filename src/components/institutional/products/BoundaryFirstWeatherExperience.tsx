@@ -79,7 +79,7 @@ export function BoundaryFirstWeatherExperience() {
           <p>THE PUBLIC INSTRUMENT</p>
           <h2>Show what changed between forecasts—not just another weather map.</h2>
           <span>
-            The first product position is representation and decision support: a
+            The first public instrument position is representation and decision support: a
             time-indexed event navigator for seeing transition boundaries, uncertainty,
             disagreement, local exposure, and what became newly admissible or inadmissible.
           </span>
@@ -239,7 +239,7 @@ export function BoundaryFirstWeatherExperience() {
         </div>
 
         <div className={styles.weatherClosing}>
-          <span>CURRENT PRODUCT STATE</span>
+          <span>CURRENT RESEARCH / TESTBED STATE</span>
           <h2>{weatherRecord.closing.title}</h2>
           <p>{weatherRecord.closing.finalLine}</p>
           <div>
