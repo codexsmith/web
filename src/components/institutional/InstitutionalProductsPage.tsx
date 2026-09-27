@@ -119,10 +119,10 @@ export function InstitutionalProductsPage() {
                 </div>
               </div>
 
-              <p className={styles.productRole}>PROJECTR · CURRENT ACTIVE-BUILD IMPLEMENTATION</p>
+              <p className={styles.productRole}>CURRENT ACTIVE-BUILD CONSUMER SOFTWARE WEDGE</p>
               <h3>YouTube Knowledge Explorer</h3>
               <p className={styles.productPromise}>
-                Projectr&apos;s current bounded implementation turns long-form YouTube into
+                The current bounded implementation turns long-form YouTube into
                 searchable, timestamped, persistent knowledge while preserving a direct path
                 back to the source.
               </p>
@@ -164,7 +164,7 @@ export function InstitutionalProductsPage() {
               <div className={styles.productTruth}>
                 <span>NOT YET ESTABLISHED</span>
                 Public availability, recurring use, pricing, market validation, retention,
-                product-market fit, or the broader multi-source / social Projectr roadmap.
+                product-market fit, or the broader multi-source / social roadmap.
               </div>
 
               <span className={styles.productDetailLink}>
@@ -186,7 +186,7 @@ export function InstitutionalProductsPage() {
           <div className={styles.researchProductGrid}>
             <Link className={styles.researchProductCard} data-product="asm" href="/products/current/corpus-forge">
               <div>
-                <span>PROJECTR SIBLING · RESEARCH_PRODUCT</span>
+                <span>SIBLING RESEARCH INFRASTRUCTURE · RESEARCH_PRODUCT</span>
                 <strong>Corpus Forge</strong>
               </div>
               <p>
