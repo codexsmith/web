@@ -3,7 +3,7 @@ export const inquiryTypes = [
     id: "applied-work",
     label: "Applied work / consulting",
     short: "A software, systems, AI-governance, architecture, workshop, or advisory problem.",
-    prompt: "What are you working on, and where do you think Boundary First Labs could help?",
+    prompt: "What system are you working on, what is going wrong or becoming difficult to trust, what happens if it stays unresolved, and what decision do you need to make next?",
   },
   {
     id: "collaboration",
