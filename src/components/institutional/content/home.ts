@@ -63,7 +63,7 @@ export const homeAppliedWorkFeature = {
     },
   ],
   note:
-    "Offers describe the buyer problem. Capabilities and machinery come underneath only when the diagnosis calls for them.",
+    "Systems / Architecture Review is the current first-engagement focus. The other two offers remain available when authority/governance or knowledge/provenance is the primary problem.",
   href: "/applied-work",
   cta: "Explore Applied Work",
   contactHref: "/contact?type=applied-work&source=home-consulting",
