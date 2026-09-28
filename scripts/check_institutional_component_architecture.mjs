@@ -630,7 +630,7 @@ expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About
 expect(aboutPage.includes("fifteen years") && aboutPage.includes("mathematics and physics"), "About hero must preserve the founder-to-lab mathematics and physics convergence");
 expect(aboutPage.includes("className={styles.aboutOperatingModel}"), "About must move the operating-model definition into a dedicated section immediately after the hero");
 expect(aboutPage.includes("solo, technical-founder-led applied systems laboratory"), "About operating-model section must define the current solo technical-founder model in plain language");
-expect(aboutPage.includes("AI-enabled, digital-first"), "About operating-model section must state the Lab's AI-enabled digital-first posture");
+expect(aboutPage.includes("AI-enabled, digital-native"), "About operating-model section must state the Lab's AI-enabled digital-native posture");
 expect(aboutPage.includes("executable") && aboutPage.includes("institutional machine"), "About operating-model section must describe the Lab as an executable institutional machine");
 expect(aboutPage.includes("repositories, automation, and AI"), "About operating-model section must explain the computational leverage behind the solo model");
 expect(aboutPage.includes("fourth startup its founder has been involved in"), "About operating-model section must preserve the founder's fourth-startup context");
