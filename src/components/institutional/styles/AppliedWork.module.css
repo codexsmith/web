@@ -464,8 +464,8 @@
 .appliedWorkEvidenceReflowGrid {
   --reflow-gap: 14px;
   --reflow-split-rail-rest-span: 30;
-  --reflow-split-rail-selected-span: 53;
-  --reflow-split-rail-peer-span: 7;
+  --reflow-split-rail-selected-span: 55;
+  --reflow-split-rail-peer-span: 5;
   min-height: clamp(620px, 72vh, 820px);
 }
 
@@ -494,6 +494,17 @@
   box-shadow:
     0 5px 0 rgba(7,26,61,.2),
     0 24px 44px rgba(7,26,61,.14);
+}
+
+.appliedWorkReflowCard[data-reflow-rail="true"] {
+  min-height: 0;
+  height: clamp(390px, 48vh, 500px);
+  align-self: start;
+}
+
+.appliedWorkReflowCard[data-reflow-rail="true"] > [data-reflow-rail-summary] {
+  height: 100%;
+  flex: 0 0 auto;
 }
 
 .appliedWorkReflowCard > div:first-of-type {
@@ -550,7 +561,7 @@
   margin: 0;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 1.05vw, 1.12rem);
+  font-size: clamp(1.28rem, 1.45vw, 1.55rem);
   font-weight: 500;
   letter-spacing: -.025em;
   line-height: 1;
@@ -781,6 +792,12 @@
   .appliedWorkEvidenceReflowGrid,
   .appliedWorkReflowCard {
     min-height: auto;
+  }
+
+  .appliedWorkReflowCard[data-reflow-rail="true"] {
+    height: auto;
+    max-height: none;
+    align-self: stretch;
   }
 
   .appliedWorkReflowSummary {
