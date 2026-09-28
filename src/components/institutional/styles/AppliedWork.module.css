@@ -496,8 +496,6 @@
 
 .appliedWorkReflowCard[data-reflow-rail="true"] {
   min-height: 0;
-  height: clamp(390px, 48vh, 500px);
-  align-self: start;
 }
 
 .appliedWorkReflowCard[data-reflow-rail="true"] > [data-reflow-rail-summary] {
