@@ -112,11 +112,17 @@ export function InstitutionalFooter() {
           <div className={styles.footerNavGroup} key={group.label}>
             <p className={styles.footerNavLabel}>{group.label}</p>
             <div className={styles.footerNavLinks}>
-              {group.routes.map((route) => (
-                <Link key={route.href} href={route.href}>
-                  {route.label}
-                </Link>
-              ))}
+              {group.routes.map((route) =>
+                route.href.startsWith("mailto:") ? (
+                  <a key={route.href} href={route.href}>
+                    {route.label}
+                  </a>
+                ) : (
+                  <Link key={route.href} href={route.href}>
+                    {route.label}
+                  </Link>
+                ),
+              )}
             </div>
           </div>
         ))}
