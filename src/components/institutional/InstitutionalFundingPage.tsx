@@ -54,6 +54,19 @@ export function InstitutionalFundingPage() {
       </InstitutionalRouteHero>
 
       <section className={styles.fundingConversion}>
+        <div className={styles.fundingUseIntro}>
+          <span>DIGITAL-NATIVE INSTITUTION</span>
+          <div>
+            <h3>Born computational. Human-governed. Machine-executable.</h3>
+            <p>
+              Boundary First Labs is not a digital twin of a conventional organization. Its
+              institutional machinery was designed computationally from inception: research state,
+              provenance, work, authority, validation, publication control, and public projection.
+              That substrate is part of what funding can strengthen, while human and external
+              authority remain distinct from machine capability.
+            </p>
+          </div>
+        </div>
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>CURRENT FUNDING LANES</>}
