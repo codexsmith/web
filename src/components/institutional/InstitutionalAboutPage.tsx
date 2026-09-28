@@ -15,24 +15,28 @@ export function InstitutionalAboutPage() {
           styles={styles}
           className={styles.aboutHero}
           eyebrow={<>ABOUT BOUNDARY FIRST LABS</>}
-          title={<>Boundary First Labs.</>}
+          title={
+            <>
+              A software engineer spent fifteen years studying mathematics and physics.
+              Boundary First Labs grew out of the convergence.
+            </>
+          }
           lead={
             <>
               Boundary First Labs is a solo, technical-founder-led applied systems laboratory
               and business: AI-enabled, digital-first, and engineered as an executable
-              institutional machine. Research, software, methods, products, operations,
-              provenance, work state, and decision authority are represented as inspectable
-              machinery rather than left as tacit founder memory.
+              institutional machine. It studies how complex systems are represented,
+              transformed, tested, measured, repaired, and made operational.
             </>
           }
           support={
             <>
-              The through-line is concrete: a software engineer spent roughly fifteen years
-              studying mathematics and physics while also building software, data systems,
-              startups, and public infrastructure. BFL grew from that convergence. Computation,
-              repositories, automation, and AI agents extend what one person can inspect and
-              build, while human judgment, promotion authority, and external accountability
-              remain explicit.
+              The organization itself is part of the engineering problem. Research lanes,
+              claims, experiments, software, products, provenance, work state, and authority
+              are represented as inspectable objects that repositories, automation, and AI
+              agents can help operate. That lets one founder work across an unusually broad
+              surface without pretending the machine replaces human judgment, scientific
+              validation, promotion authority, or external accountability.
             </>
           }
         }
