@@ -995,15 +995,15 @@ expect(labThroughTimePage.includes("Boundary First Labs became practical when de
 expect(!labThroughTimePage.includes("continuitySection"), "Lab Through Time must not restore the redundant continuity interstitial");
 expect(!labThroughTimePage.includes("NEXT PROJECTION WORK"), "Lab Through Time must keep projection backlog out of the public narrative flow");
 expect(
-  labThroughTimePage.indexOf("<ProvenanceArtifactGallery />") <
+  labThroughTimePage.indexOf("<LabTimelineExplorer") <
     labThroughTimePage.indexOf('className={styles.accelerationSection}'),
-  "Lab Through Time must flow directly from provenance artifacts into the acceleration boundary",
+  "Lab Through Time must flow from the durable timeline into the acceleration boundary",
 );
 
 const provenanceArtifactGallery = read(`${root}/ProvenanceArtifactGallery.tsx`);
 const provenanceStillStrip = read(`${root}/ProvenanceStillStrip.tsx`);
 const labThroughTimeCss = read(`${root}/styles/LabThroughTime.module.css`);
-expect(labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must surface the first public provenance gallery");
+expect(!labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must not render the public provenance image gallery");
 expect(publicStateContent.includes("provenanceGallery"), "Public-state projection must type the provenance gallery");
 expect(publicStateProjection.includes('"publicClaim": "A substantial pre-AI room-scale research environment existed."'), "Provenance projection must preserve the adjudicated narrow public claim");
 expect(publicStateProjection.includes('"claimCeiling": "The media establishes scale, organization, and chronology of work.'), "Provenance projection must preserve the media authority ceiling");
