@@ -14,6 +14,7 @@ import {
   fundingClosureHorizons,
   fundingConversionStages,
   fundingEvaluationQuestions,
+  fundingLanes,
   fundingOutputs,
 } from "./content/funding";
 
@@ -54,15 +55,46 @@ export function InstitutionalFundingPage() {
       <section className={styles.fundingConversion}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>THE FUNDING MODEL</>}
-          title={<>Capital should remove a named constraint and produce a named closure.</>}
+          eyebrow={<>HOW BFL EXPECTS TO CAPITALIZE</>}
+          title={<>Several independent paths can turn existing work into revenue or funded research.</>}
           note={
             <>
-              Existing productive inventory -&gt; constraint -&gt; matched resource -&gt;
-              capability -&gt; external closure -&gt; renewed capacity.
+              Services can earn near-term revenue. Chess and related games can sell directly or
+              through partners. Projectr / Knowledge Explorer can test lightweight recurring
+              software revenue. Weather can anchor grants, sponsored research, and public-interest
+              partnerships.
             </>
           }
         />
+
+        <div className={styles.fundingLaneGrid}>
+          {fundingLanes.map((lane, index) => (
+            <Link className={styles.fundingLaneCard} href={lane.href} key={lane.title}>
+              <div className={styles.fundingLaneTopline}>
+                <span>{formatOrdinal(index)}</span>
+                <small>{lane.shorthand}</small>
+              </div>
+              <p className={styles.fundingLaneModel}>{lane.model}</p>
+              <h3>{lane.title}</h3>
+              <strong>{lane.example}</strong>
+              <p>{lane.description}</p>
+              <div className={styles.fundingLaneEvidence}>
+                <span>NEXT EVIDENCE</span>
+                <p>{lane.nextEvidence}</p>
+              </div>
+              <em>Inspect this lane <span aria-hidden="true">-&gt;</span></em>
+            </Link>
+          ))}
+        </div>
+
+        <div className={styles.fundingMechanismIntro}>
+          <span>HOW CAPITAL GETS USED</span>
+          <p>
+            Whatever lane supplies the resource, BFL uses the same discipline: name the blocked
+            constraint, match the resource to it, and require an external closure rather than
+            treating funding itself as success.
+          </p>
+        </div>
 
         <div className={styles.fundingConversionRail}>
           {fundingConversionStages.map((stage, index) => (
