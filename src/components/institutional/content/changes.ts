@@ -13,15 +13,114 @@ export type PublicChange = {
 };
 
 export const changesProjection = {
-  generatedDate: "2026-09-23",
-  webRevision: "0944f1352f12cc1a9a2ec395feb5172217474aee",
-  labRevision: "f5b8b063349bdf92fb8f5f138df52fcf4482b0ee",
+  generatedDate: "2026-09-28",
+  webRevision: "e30f35f0fb9cf62f4dc70556e2df6d97c34286e5",
+  labRevision: "2040584c19c8202215bdb83e46d1df05df37dafe",
   authority:
     "This is a curated public delta archive over canonical repository state. It reports selected material changes and backfilled milestones; it is not a complete commit log, activity feed, or claim-promotion surface.",
 } as const;
 
 export const recentChanges: readonly PublicChange[] = [
   {
+    id: "chg-registry-control-plane-620",
+    date: "2026-09-27",
+    scope: "Institution",
+    title: "The whole-Lab registry census closed into a 620-registry control plane.",
+    summary:
+      "The completed discovery census, normalized Registrar projection, ownership graph, authority audit, maintenance contracts, compact read interface, and transaction-based maintenance protocol were integrated as one source-safe registry stack.",
+    consequence:
+      "Registry discovery is no longer a folder-memory exercise: the Lab now has a typed, transaction-maintained institutional control graph with equalized identity sets, explicit authority ownership, and zero hard authority or maintenance errors at the recorded cutoff.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "989e3737b1d5d748c1976779664023999a2d8c87",
+    sourceLabel: "Registry discovery census and control-plane integration",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/989e3737b1d5d748c1976779664023999a2d8c87",
+    surfaceHref: "/apparatus",
+  },
+  {
+    id: "chg-observatory-impact-run-004",
+    date: "2026-09-26",
+    scope: "Institution",
+    title: "The Observatory gained bounded institutional dependency-impact sensing.",
+    summary:
+      "Run 004 added downstream impact and staleness propagation over validated typed relations while preserving witness paths, source semantic direction, open-world uncertainty, and source immutability.",
+    consequence:
+      "The executable institution can now inspect likely downstream consequences of a source change without silently promoting reachability into a new direct dependency assertion.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "c3b88670e6dfeb9ca218508c21096d27f74c4823",
+    sourceLabel: "Observatory: institutional dependency impact Run 004",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/c3b88670e6dfeb9ca218508c21096d27f74c4823",
+    surfaceHref: "/apparatus",
+  },
+  {
+    id: "chg-web-v3-release-qa",
+    date: "2026-09-26",
+    scope: "Public interface",
+    title: "Website v3 cleared a release-QA accessibility and narrow-layout pass.",
+    summary:
+      "The canonical web main repaired route headings, control names, mobile navigation, narrow-screen Registrar/Open Lab layouts, Paper Mine navigation targets, and temporal-summary clipping semantics.",
+    consequence:
+      "The institutional surface is more usable on narrow screens and more inspectable by assistive technology without weakening the existing release-QA thresholds.",
+    sourceRepository: "codexsmith/web",
+    sourceRevision: "e30f35f0fb9cf62f4dc70556e2df6d97c34286e5",
+    sourceLabel: "Merge PR #103: clear Website v3 release QA findings",
+    sourceHref:
+      "https://github.com/codexsmith/web/commit/e30f35f0fb9cf62f4dc70556e2df6d97c34286e5",
+    surfaceHref: "/",
+  },
+  {
+    id: "chg-reduction-assessment-live-gate",
+    date: "2026-09-25",
+    scope: "Method",
+    title: "ReductionAssessmentProfile became a live bounded promotion-prerequisite gate.",
+    summary:
+      "The shared reduction-assessment profile was integrated into Corpus Forge after a six-carrier A/B benchmark showed detection parity with native checks and a smaller mapping/change-management surface, while explicitly rejecting a less-code claim.",
+    consequence:
+      "The Lab gained a reusable engineering interface for blocking readiness on missing evidence, claim ceilings, witness integrity, or re-verification without confusing the gate with human promotion authority or new cross-domain semantics.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "c4f208e10614548f4ea6dca67b55bab9028e4ec9",
+    sourceLabel: "Integrate ReductionAssessmentProfile v0.1 live gate",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/c4f208e10614548f4ea6dca67b55bab9028e4ec9",
+    surfaceHref: "/apparatus",
+  },
+  {
+    id: "chg-im04-paperization",
+    date: "2026-09-25",
+    scope: "Research",
+    title: "Observation, identifiability, and bounded warrant became a canonical working manuscript.",
+    summary:
+      "IM04 was paperized with explicit separation between observation, identifiability, measurement/evidence, inference, and warrant, plus a machine-readable WarrantEnvelope and a narrowed related-work/novelty posture.",
+    consequence:
+      "A previously distributed research thread now has a specific manuscript object, source/claim boundaries, and a clearer route to review without claiming a new general theory of knowledge or statistical sufficiency.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "e409a9c09077538bd6dc69da1a74c091eccb4d81",
+    sourceLabel: "Paperize IM04 Observation, Identifiability, and Bounded Warrant",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/e409a9c09077538bd6dc69da1a74c091eccb4d81",
+    surfaceHref: "/publications",
+  },
+  {
+    id: "chg-observatory-minimum-institution",
+    date: "2026-09-24",
+    scope: "Institution",
+    title: "The Observatory executed a minimum bounded institution.",
+    summary:
+      "Run 001 added a deterministic institutional state machine with authority and human-gate enforcement, projection loss contracts, replay, committed adversarial tests, and a machine-readable run receipt.",
+    consequence:
+      "The executable-institution idea moved from architecture alone to a replayable finite fixture whose authority boundaries and failure cases can be inspected directly.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "a34529a3f079063f05fb7f43746e69266e3a24ee",
+    sourceLabel: "Observatory: execute minimum institution Run 001",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/a34529a3f079063f05fb7f43746e69266e3a24ee",
+    surfaceHref: "/apparatus",
+  },
+] as const;
+
+export const historicalChanges: readonly PublicChange[] = [
+{
     id: "chg-architecture-observatory-carryforward",
     date: "2026-09-23",
     scope: "Institution",
@@ -117,9 +216,7 @@ export const recentChanges: readonly PublicChange[] = [
       "https://github.com/codexsmith/boundary-first-labs/commit/9de9b9e9964230254c0b3a84994f436d8e8db5fe",
     surfaceHref: "/apparatus",
   },
-] as const;
 
-export const historicalChanges: readonly PublicChange[] = [
   {
     id: "chg-canonical-institutional-routes",
     date: "2026-09-19",
