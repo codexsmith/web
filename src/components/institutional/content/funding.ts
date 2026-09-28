@@ -41,36 +41,42 @@ export const fundingLanes = [
   },
 ] as const;
 
-export const fundingConversionStages = [
+export const fundingNearTermUses = [
   {
-    title: "Existing productive inventory",
+    eyebrow: "B2B SERVICES",
+    lane: "Applied systems work",
+    use: "Sales and delivery capacity",
     description:
-      "Research, software, methods, manuscripts, product candidates, service capability, and institutional machinery already exist. Capital is not being asked to create the institution from zero.",
+      "Package the bounded offers, reach qualified buyers, deliver the work well, and turn completed engagements into reusable case evidence.",
+    closure:
+      "A paid engagement, repeat work, or a clear decision that the offer needs to change.",
   },
   {
-    title: "Constraint diagnosed",
+    eyebrow: "B2C / B2B2C PRODUCTS",
+    lane: "Chess, sports, and games",
+    use: "Production, launch, and distribution",
     description:
-      "Name the actual blocked boundary first: fragmented conversion bandwidth, specialist review, legal or IP work, production, compute, access, distribution, or another explicit constraint.",
+      "External review, editing, design, production, pricing, preorder or publication, licensing outreach, and partner pilots around the strongest current product objects.",
+    closure:
+      "A sale, preorder, license, partner pilot, or concrete negative market evidence.",
   },
   {
-    title: "Resource matched",
+    eyebrow: "PRODUCT SOFTWARE",
+    lane: "Projectr / Knowledge Explorer",
+    use: "Product hardening and paid-use testing",
     description:
-      "Use the resource that can actually remove that constraint: protected time, sponsorship, earned revenue, grant support, patient product capital, expertise, infrastructure, access, or working capital.",
+      "Finish a usable product surface, support hosting and operations, instrument real use, and test pricing or packaging only after people choose to return.",
+    closure:
+      "Repeated voluntary use, willingness to pay, retention, or a narrower product thesis.",
   },
   {
-    title: "Capability ready",
+    eyebrow: "RESEARCH",
+    lane: "Weather and public-interest research",
+    use: "Research execution and external scientific contact",
     description:
-      "The resource has to become usable institutional capability before it counts: protected time exists, a reviewer is engaged, tooling is provisioned, a funded program can run, or a contract can be delivered.",
-  },
-  {
-    title: "External closure",
-    description:
-      "The next bounded action produces evidence: a sale, contract, grant submission or award, public artifact, review, product test, publication, handoff, negative result, or other declared closure.",
-  },
-  {
-    title: "Renewed capacity",
-    description:
-      "Useful conversion should leave behind revenue, evidence, reusable machinery, stronger partnerships, external operators, or a narrower program—reducing dependence on the next unrestricted funding event.",
+      "Proposal development, compute and data, research runs, reproducibility work, specialist review, collaboration, and public research artifacts.",
+    closure:
+      "A submitted or awarded program, external collaborator, independent review, or usable research artifact.",
   },
 ] as const;
 
