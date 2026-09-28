@@ -466,12 +466,10 @@
   --reflow-split-rail-rest-span: 30;
   --reflow-split-rail-selected-span: 55;
   --reflow-split-rail-peer-span: 5;
-  min-height: clamp(620px, 72vh, 820px);
 }
 
 .appliedWorkReflowCard {
   --reflow-item-radius: 0px;
-  min-height: clamp(620px, 72vh, 820px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -765,11 +763,6 @@
 }
 
 @media (max-width: 1050px) {
-  .appliedWorkEvidenceReflowGrid,
-  .appliedWorkReflowCard {
-    min-height: 560px;
-  }
-
   .appliedWorkReflowSummary h2 {
     font-size: clamp(2rem, 4vw, 3rem);
   }
@@ -787,11 +780,6 @@
   .appliedWorkEvidenceReflowSection {
     padding-left: 22px;
     padding-right: 22px;
-  }
-
-  .appliedWorkEvidenceReflowGrid,
-  .appliedWorkReflowCard {
-    min-height: auto;
   }
 
   .appliedWorkReflowCard[data-reflow-rail="true"] {
