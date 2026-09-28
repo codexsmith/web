@@ -78,7 +78,7 @@
 .field[data-reflow-mode="split-focus-rail"] {
   display: grid;
   grid-template-columns: repeat(60, minmax(0, 1fr));
-  grid-template-rows: 1fr;
+  grid-template-rows: auto;
   grid-auto-flow: row;
   column-gap: 0;
   row-gap: 0;
