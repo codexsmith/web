@@ -530,6 +530,8 @@ const openLabRoute = read("src/app/v3/open-lab/page.tsx");
 const environmentExample = read(".env.example");
 expect(openLabPage.includes("childLinks={institutionalChildRoutes.openLab}"), "Open Lab hero must expose its contextual child pages");
 expect(openLabPage.includes("openLabHeroIntake"), "Open Lab must surface Intake Status in the hero");
+expect(!openLabPage.includes("ArchitectureProjectionSection"), "Open Lab must not restore the interim Show the Machinery architecture panel while Lab Snapshot is becoming the stronger machinery surface");
+expect(!openLabPage.includes("SHOW THE MACHINERY"), "Open Lab must not restore the retired Show the Machinery section copy");
 expect(!openLabPage.includes('className={styles.openLabAvailability}'), "Open Lab must not keep Intake Status as a body section");
 expect(openLabPage.includes('className={styles.openLabContracts}'), "Open Lab must keep Public Participation directly readable");
 expect(openLabPage.includes("<OpenLabIntakeInstrument"), "Open Lab must compose the governed intake instrument");
@@ -988,6 +990,7 @@ expect(changesPage.includes("<ChangesExplorer"), "What Changed must collapse del
 expect(labThroughTimePage.includes("<LabTimelineExplorer"), "Lab Through Time must collapse provenance detail into the reflow explorer");
 expect(labTimelineExplorer.includes("See before / after"), "Lab Through Time milestone cards must advertise useful before/after detail");
 expect(labTimelineExplorer.includes("<strong>Before:</strong>"), "Lab Through Time expanded milestones must explain the before state");
+expect(labTimelineExplorer.includes("The fascination of watching a ball curve in flight."), "Magnus milestone must begin with the motivating physical curiosity rather than registry-state language");
 expect(labTimelineExplorer.includes("<strong>After:</strong>"), "Lab Through Time expanded milestones must explain the after state");
 expect(!labTimelineExplorer.includes("DURABLE EVENT"), "Lab Through Time expanded milestones must not expose registry metadata as primary reader content");
 expect(!labTimelineExplorer.includes("SOURCE EVENT"), "Lab Through Time expanded milestones must not expose source IDs as primary reader content");
