@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { AppliedWorkFitGraph } from "./AppliedWorkFitGraph";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -57,17 +56,6 @@ export function InstitutionalAppliedWorkPage() {
           </Link>
         </aside>
       </InstitutionalRouteHero>
-
-      <section className={styles.appliedFitSection}>
-        <header className={styles.appliedFitHeader}>
-          <h2>WHEN TO CALL</h2>
-          <p>Good consulting starts with a problem you can already feel.</p>
-        </header>
-
-        <h3 className={styles.appliedFitSubhead}>Common problem patterns</h3>
-
-        <AppliedWorkFitGraph />
-      </section>
 
       <section className={styles.appliedServicesSection}>
         <InstitutionalSectionHeader
