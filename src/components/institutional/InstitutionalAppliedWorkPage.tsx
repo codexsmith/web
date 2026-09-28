@@ -97,26 +97,38 @@ export function InstitutionalAppliedWorkPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>{systemsArchitectureReviewDemo.eyebrow}</>}
-          title={<>See the first review shape before you buy one.</>}
-          note={<>Synthetic example, not a customer case.</>}
+          title={<>See exactly what a Systems / Architecture Review is doing.</>}
+          note={<>Synthetic example, not a customer case. Read the setup first, then follow the analysis from representation gap to repair.</>}
         />
+
+        <div className={styles.appliedDemoSetup} aria-label="Synthetic review setup">
+          {systemsArchitectureReviewDemo.setup.map((item, index) => (
+            <article key={item.label}>
+              <span>{formatOrdinal(index)}</span>
+              <div>
+                <strong>{item.label}</strong>
+                <p>{item.copy}</p>
+              </div>
+            </article>
+          ))}
+        </div>
 
         <div className={styles.appliedDemoFrame}>
           <article className={styles.appliedDemoLead}>
-            <span>01 / PROBLEM</span>
+            <span>01 / REPRESENTATION GAP</span>
             <h3>{systemsArchitectureReviewDemo.title}</h3>
             <p>{systemsArchitectureReviewDemo.summary}</p>
             <blockquote>{systemsArchitectureReviewDemo.question}</blockquote>
 
             <div className={styles.appliedDemoStateCompare}>
               <div>
-                <small>COARSE STATUS</small>
+                <small>CURRENT SYSTEM VIEW</small>
                 {systemsArchitectureReviewDemo.coarseStates.map((state) => (
                   <strong key={state}>{state}</strong>
                 ))}
               </div>
               <div>
-                <small>RECONSTRUCTED LIFECYCLE</small>
+                <small>ACTUAL PAYMENT LIFECYCLE</small>
                 {systemsArchitectureReviewDemo.reconstructedStates.map((state) => (
                   <span key={state}>{state}</span>
                 ))}
@@ -126,7 +138,7 @@ export function InstitutionalAppliedWorkPage() {
 
           <div className={styles.appliedDemoAnalysis}>
             <div className={styles.appliedDemoDefects}>
-              <span>02 / CONSEQUENTIAL DEFECTS</span>
+              <span>02 / WHAT BREAKS WHEN STATES COLLAPSE</span>
               <div>
                 {systemsArchitectureReviewDemo.defectClasses.map((defect) => (
                   <article key={defect.title}>
@@ -138,7 +150,7 @@ export function InstitutionalAppliedWorkPage() {
             </div>
 
             <div className={styles.appliedDemoRepair}>
-              <span>03 / REPAIR PATH</span>
+              <span>03 / REPAIR THE REPRESENTATION</span>
               <ol>
                 {systemsArchitectureReviewDemo.repairPath.map((step) => (
                   <li key={step}>{step}</li>
