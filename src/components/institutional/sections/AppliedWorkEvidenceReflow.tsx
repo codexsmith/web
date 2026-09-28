@@ -113,8 +113,8 @@ export function AppliedWorkEvidenceReflow() {
           summary={<SyntheticReviewSummary />}
           railSummary={
             <AppliedWorkRailSummary
-              eyebrow={systemsArchitectureReviewDemo.eyebrow}
-              title="See exactly what a Systems / Architecture Review is doing."
+              eyebrow="REVIEW"
+              title="Systems / Architecture Review"
             />
           }
           detail={
@@ -138,8 +138,8 @@ export function AppliedWorkEvidenceReflow() {
           summary={<DeliverablesSummary />}
           railSummary={
             <AppliedWorkRailSummary
-              eyebrow="WHAT YOU SHOULD GET"
-              title="The work should leave behind artifacts, not just conversation."
+              eyebrow="DELIVERABLES"
+              title="Artifacts, not just conversation."
             />
           }
           detail={
