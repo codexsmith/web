@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -47,12 +48,12 @@ export function InstitutionalAppliedWorkPage() {
             architecture, consulting, Lean–Agile delivery, startup iteration, and systems
             diagnosis. BFL-specific client case studies are still being built.
           </p>
-          <Link
+          <a
             className={styles.appliedWorkHeroCta}
-            href="/contact?type=applied-work&source=applied-work-hero"
+            href={publicContactMailto("Boundary First Labs — Applied Work")}
           >
             Start a consulting conversation <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </aside>
       </InstitutionalRouteHero>
 
@@ -143,7 +144,7 @@ export function InstitutionalAppliedWorkPage() {
         </p>
 
         <nav className={styles.appliedWorkCloseLinks} aria-label="Applied work next steps">
-          <Link href="/contact?type=applied-work&source=applied-work">Start a consulting conversation <span aria-hidden="true">-&gt;</span></Link>
+          <a href={publicContactMailto("Boundary First Labs — Applied Work")}>Start a consulting conversation <span aria-hidden="true">-&gt;</span></a>
           <Link href="/collaboration">Explore collaboration <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/projects">See applied projects <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/funding">See the funding model <span aria-hidden="true">-&gt;</span></Link>
