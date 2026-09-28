@@ -28,7 +28,7 @@ export function InstitutionalHomePage() {
               Boundary First Labs is an applied systems research laboratory studying how complex systems are represented, transformed, tested, and improved.
             </p>
             <p className={styles.bodyCopy}>
-              We build research, methods, products, and operational tools for making consequential systems more legible, reasoning more inspectable, and useful capability easier to transfer.
+              We build research, methods, products, and operational tools for making systems and their consequences more legible, reasoning more inspectable, and useful capability easier to transfer.
             </p>
             <div className={styles.heroActions}>
               <Link className={styles.primaryAction} href="/applied-work">
