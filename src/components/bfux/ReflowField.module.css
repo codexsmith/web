@@ -105,6 +105,12 @@
   grid-column: span var(--reflow-split-rail-peer-span, 8);
 }
 
+.field[data-reflow-mode="split-focus-rail"][data-reflow-active="true"]
+  > .item[data-reflow-rail="true"] {
+  height: var(--reflow-rest-height, auto);
+  align-self: start;
+}
+
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
   display: grid;
   grid-template-columns: repeat(60, minmax(0, 1fr));
@@ -164,6 +170,12 @@
     grid-row: auto;
     grid-column: 1;
     margin-inline: 0;
+  }
+
+  .field[data-reflow-mode="split-focus-rail"]
+    > .item[data-reflow-rail="true"] {
+    height: auto;
+    align-self: stretch;
   }
 
   .field[data-reflow-mode="split-focus-rail"]
