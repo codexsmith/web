@@ -66,6 +66,10 @@ expect(component.includes("previousSelectedId"), "Reflow Field must remember the
 expect(component.includes("selected || context.previousSelectedId === id"), "opening and closing focus cards must both carry layout motion");
 expect(component.includes("reducedMotion || !carriesMotion"), "only the entering or exiting focus card should receive animated layout continuity");
 expect(component.includes("AnimatePresence"), "expanded detail should use a maintained enter/exit primitive");
+expect(component.includes("data-reflow-summary"), "summary surface must expose a state hook for replacement during inspection");
+expect(component.includes("data-reflow-detail"), "detail surface must expose a state hook for expanded ownership");
+expect(reflowCss.includes('.item[data-reflow-state="selected"] > [data-reflow-summary]'), "selected Reflow cards must remove the REST summary from layout");
+expect(reflowCss.includes('.item[data-reflow-state="selected"] > [data-reflow-detail]'), "selected Reflow cards must let expanded detail own the card surface");
 expect(component.includes('mode="popLayout"'), "detail exit must not hold the parent card in its expanded geometry");
 expect(component.includes("delay: 0.12"), "detail content should stage shortly after opening motion begins");
 expect(component.includes("duration: 0.12"), "detail content should clear immediately when closing begins");
