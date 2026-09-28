@@ -8,6 +8,24 @@ import styles from "../styles/AppliedWork.module.css";
 
 const appliedWorkEvidenceOrder = ["synthetic-review", "deliverables"] as const;
 
+function AppliedWorkRailSummary({
+  eyebrow,
+  title,
+}: {
+  eyebrow: string;
+  title: string;
+}) {
+  return (
+    <div className={styles.appliedWorkReflowRailSummary} aria-hidden="true">
+      <span>{eyebrow}</span>
+      <h2>{title}</h2>
+      <em>
+        Select <span aria-hidden="true">→</span>
+      </em>
+    </div>
+  );
+}
+
 function SyntheticReviewSummary() {
   return (
     <div
@@ -83,7 +101,7 @@ export function AppliedWorkEvidenceReflow() {
       <ReflowField
         className={styles.appliedWorkEvidenceReflowGrid}
         ariaLabel="Choose the synthetic review example or engagement deliverables to inspect"
-        layoutMode="split-focus"
+        layoutMode="split-focus-rail"
         itemOrder={appliedWorkEvidenceOrder}
         animatePeers
       >
@@ -93,6 +111,12 @@ export function AppliedWorkEvidenceReflow() {
           className={styles.appliedWorkReflowCard}
           dataTone="review"
           summary={<SyntheticReviewSummary />}
+          railSummary={
+            <AppliedWorkRailSummary
+              eyebrow={systemsArchitectureReviewDemo.eyebrow}
+              title="See exactly what a Systems / Architecture Review is doing."
+            />
+          }
           detail={
             <div
               className={styles.appliedWorkReflowDetail}
@@ -112,6 +136,12 @@ export function AppliedWorkEvidenceReflow() {
           className={styles.appliedWorkReflowCard}
           dataTone="deliverables"
           summary={<DeliverablesSummary />}
+          railSummary={
+            <AppliedWorkRailSummary
+              eyebrow="WHAT YOU SHOULD GET"
+              title="The work should leave behind artifacts, not just conversation."
+            />
+          }
           detail={
             <div
               className={styles.appliedWorkReflowDetail}
