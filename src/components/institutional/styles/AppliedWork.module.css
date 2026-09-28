@@ -1179,6 +1179,39 @@
   line-height: 1.45;
 }
 
+.appliedDemoCoarseView {
+  max-width: 760px;
+  display: grid;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid rgba(7,26,61,.18);
+  background: #eef3f8;
+}
+
+.appliedDemoCoarseView small {
+  color: #66768d;
+  font: 800 .47rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
+}
+
+.appliedDemoCoarseView > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.appliedDemoCoarseView strong {
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid rgba(7,26,61,.18);
+  border-left: 4px solid var(--osha-orange);
+  background: #fff;
+  color: var(--royal-blue-deep);
+  font-size: .72rem;
+  line-height: 1.25;
+}
+
 .appliedDemoLifecycle {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -1385,6 +1418,7 @@
 }
 
 @media (max-width: 760px) {
+  .appliedDemoCoarseView > div,
   .appliedDemoLifecycle,
   .appliedDemoDefectsGrid,
   .appliedDemoRepairList {
