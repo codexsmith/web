@@ -80,25 +80,22 @@ export function AppliedWorkSyntheticReviewSequence() {
               <p>{systemsArchitectureReviewDemo.summary}</p>
               <blockquote>{systemsArchitectureReviewDemo.question}</blockquote>
 
-              <div className={styles.appliedDemoStateCompare}>
+              <div className={styles.appliedDemoCoarseView}>
+                <small>REPRESENTED SYSTEM STATE</small>
                 <div>
-                  <small>CURRENT SYSTEM VIEW</small>
                   {systemsArchitectureReviewDemo.coarseStates.map((state) => (
                     <strong key={state}>{state}</strong>
-                  ))}
-                </div>
-                <div>
-                  <small>ACTUAL PAYMENT LIFECYCLE</small>
-                  {systemsArchitectureReviewDemo.reconstructedStates.map((state) => (
-                    <span key={state}>{state}</span>
                   ))}
                 </div>
               </div>
 
               <div className={styles.appliedDemoNext}>
-                <p>The visible status model is simple, but it hides transitions that matter.</p>
+                <p>
+                  These three labels are useful only if the distinctions they erase cannot change a
+                  consequential decision.
+                </p>
                 <button type="button" onClick={() => revealStep(2)}>
-                  See the actual payment lifecycle <span aria-hidden="true">→</span>
+                  Reconstruct the hidden lifecycle <span aria-hidden="true">→</span>
                 </button>
               </div>
             </div>
