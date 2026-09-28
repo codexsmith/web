@@ -5,15 +5,13 @@ import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/AppliedWork.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
-import { AppliedWorkSyntheticReviewSequence } from "./AppliedWorkSyntheticReviewSequence";
+import { AppliedWorkEvidenceReflow } from "./sections/AppliedWorkEvidenceReflow";
 import { formatOrdinal } from "./institutionalFormat";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   appliedWorkBoundaries,
   appliedWorkFamilies,
-  appliedWorkOutputs,
   appliedWorkProcess,
-  systemsArchitectureReviewDemo,
 } from "./content/appliedWork";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
@@ -94,37 +92,7 @@ export function InstitutionalAppliedWorkPage() {
         </div>
       </section>
 
-      <section className={styles.appliedDemoSection}>
-        <InstitutionalSectionHeader
-          styles={styles}
-          eyebrow={<>{systemsArchitectureReviewDemo.eyebrow}</>}
-          title={<>See exactly what a Systems / Architecture Review is doing.</>}
-          note={<>Synthetic example, not a customer case. Read the setup first, then follow the analysis from representation gap to repair.</>}
-        />
-
-        <AppliedWorkSyntheticReviewSequence />
-      </section>
-
-      <section className={styles.appliedOutputsSection}>
-        <div className={styles.appliedOutputsLead}>
-          <p className={styles.sectionIndex}>WHAT YOU SHOULD GET</p>
-          <h2>The work should leave behind artifacts, not just conversation.</h2>
-          <p>
-            The exact deliverables depend on the engagement, but the output should make the
-            problem clearer, the decision easier, or the system more operable after BFL is gone.
-          </p>
-        </div>
-
-        <div className={styles.appliedOutputGrid}>
-          {appliedWorkOutputs.map((output, index) => (
-            <article key={output.title}>
-              <span>{formatOrdinal(index)}</span>
-              <strong>{output.title}</strong>
-              <p>{output.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <AppliedWorkEvidenceReflow />
 
       <section className={styles.appliedProcessSection}>
         <InstitutionalSectionHeader
