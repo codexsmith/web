@@ -164,11 +164,11 @@ export const systemsArchitectureReviewDemo = {
         "Reconstruct the hidden lifecycle, find where collapsed states can change a consequential decision, then define the smallest repair that makes the system trustworthy again.",
     },
   ],
-  title: "The system says PAID before the business process is actually complete.",
+  title: "A system can be “paid” before it is paid.",
   summary:
-    "The problem is not that the three statuses are simple. The problem is that they collapse distinctions that matter to money movement, authority, retry behavior, auditability, and operational closure.",
+    "A synthetic invoice workflow shows the review shape without pretending to be a customer case. Coarse statuses hide consequential transitions, outside repair, and ambiguous completion.",
   question:
-    "Which transitions must stay distinct so that “PAID” means what operators, accounting, and downstream systems think it means?",
+    "What is this representation allowed to forget without changing a consequential decision?",
   coarseStates: ["APPROVED", "PAID", "FAILED"],
   reconstructedStates: [
     "Accounting approved",
