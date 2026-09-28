@@ -1,7 +1,6 @@
 export const fundingLanes = [
   {
-    model: "Professional services",
-    shorthand: "B2B",
+    eyebrow: "B2B · PROFESSIONAL SERVICES",
     title: "Applied systems work",
     example: "Systems / Architecture Review",
     description:
@@ -11,8 +10,7 @@ export const fundingLanes = [
     href: "/applied-work",
   },
   {
-    model: "Consumer + partner products",
-    shorthand: "B2C / B2B2C",
+    eyebrow: "B2C / B2B2C · CONSUMER + PARTNER PRODUCTS",
     title: "Chess, sports, and games",
     example: "Boundary-First Chess",
     description:
@@ -22,8 +20,7 @@ export const fundingLanes = [
     href: "/products/boundary-first-chess",
   },
   {
-    model: "Knowledge Infrastructure & Software",
-    shorthand: "SOFTWARE / PRODUCT REVENUE",
+    eyebrow: "SOFTWARE · KNOWLEDGE INFRASTRUCTURE",
     title: "Projectr / Knowledge Explorer",
     example: "YouTube Knowledge Explorer",
     description:
@@ -33,8 +30,7 @@ export const fundingLanes = [
     href: "/products/youtube-knowledge-explorer",
   },
   {
-    model: "Research funding",
-    shorthand: "GRANTS / SPONSORED RESEARCH",
+    eyebrow: "RESEARCH · GRANTS / SPONSORED RESEARCH",
     title: "Weather and public-interest research",
     example: "Boundary First Weather",
     description:
