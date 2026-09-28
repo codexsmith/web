@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState, type FormEvent } from "react";
+import { PUBLIC_CONTACT_EMAIL, publicContactMailto } from "@/lib/site-contact";
 import {
   openLabCollectionRules,
   openLabReviewStates,
@@ -144,16 +144,16 @@ export function OpenLabIntakeInstrument({
       {!runtimeConfig.enabled ? (
         <div className={styles.openLabClosedNotice} role="status">
           <div>
-            <span>FORMAL INTAKE IS CURRENTLY CLOSED</span>
-            <strong>Start with a conversation instead.</strong>
+            <span>EMAIL IS THE CURRENT OPEN LAB ROUTE</span>
+            <strong>{PUBLIC_CONTACT_EMAIL}</strong>
             <p>
-              You can still contact the Lab. Please keep confidential, private,
-              or sensitive material out of the first message.
+              Start with a short note. Please keep confidential, private, or sensitive
+              material out of the first message.
             </p>
           </div>
-          <Link href="/contact?type=open-lab&source=open-lab">
-            Start a conversation <span aria-hidden="true">-&gt;</span>
-          </Link>
+          <a href={publicContactMailto("Boundary First Labs — Open Lab")}>
+            Email the Open Lab <span aria-hidden="true">-&gt;</span>
+          </a>
         </div>
       ) : null}
 
