@@ -1,6 +1,6 @@
 export const fundingLanes = [
   {
-    eyebrow: "B2B · PROFESSIONAL SERVICES",
+    eyebrow: "B2B · SERVICES",
     title: "Applied systems work",
     example: "Systems / Architecture Review",
     description:
@@ -10,7 +10,7 @@ export const fundingLanes = [
     href: "/applied-work",
   },
   {
-    eyebrow: "B2C / B2B2C · CONSUMER + PARTNER PRODUCTS",
+    eyebrow: "B2C / B2B2C · PRODUCTS",
     title: "Chess, sports, and games",
     example: "Boundary-First Chess",
     description:
@@ -20,7 +20,7 @@ export const fundingLanes = [
     href: "/products/boundary-first-chess",
   },
   {
-    eyebrow: "SOFTWARE · KNOWLEDGE INFRASTRUCTURE",
+    eyebrow: "PRODUCT SOFTWARE · KNOWLEDGE INFRASTRUCTURE",
     title: "Projectr / Knowledge Explorer",
     example: "YouTube Knowledge Explorer",
     description:
@@ -30,7 +30,7 @@ export const fundingLanes = [
     href: "/products/youtube-knowledge-explorer",
   },
   {
-    eyebrow: "RESEARCH · GRANTS / SPONSORED RESEARCH",
+    eyebrow: "RESEARCH · GRANTS / SPONSORSHIP",
     title: "Weather and public-interest research",
     example: "Boundary First Weather",
     description:
