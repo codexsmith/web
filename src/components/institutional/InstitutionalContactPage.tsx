@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
+import { PUBLIC_CONTACT_EMAIL, publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/Contact.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
-import { InstitutionalInquiryForm } from "./InstitutionalInquiryForm";
 import { formatOrdinal } from "./institutionalFormat";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
@@ -22,13 +21,15 @@ const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyle
 
 export function InstitutionalContactPage({
   initialType,
-  sourceContext,
-  intakeEnabled,
 }: {
   initialType: InquiryTypeId;
-  sourceContext: string;
-  intakeEnabled: boolean;
 }) {
+  const selectedInquiry =
+    inquiryTypes.find((item) => item.id === initialType) ?? inquiryTypes[0];
+  const selectedMailto = publicContactMailto(
+    `Boundary First Labs — ${selectedInquiry.label}`,
+  );
+
   return (
     <InstitutionalPageShell mainClassName={styles.contactPage}>
       <InstitutionalRouteHero
@@ -46,16 +47,15 @@ export function InstitutionalContactPage({
         childLinks={institutionalChildRoutes.contact}
       >
         <aside className={styles.contactIntakeStatus} data-live="true">
-          <span>EMAIL IS LIVE</span>
-          <strong><a href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a></strong>
+          <span>DIRECT EMAIL</span>
+          <strong><a href={selectedMailto}>{PUBLIC_CONTACT_EMAIL}</a></strong>
           <p>
             A short note is enough. Tell us what caught your attention, what you are working
-            on, or what you think would be useful to talk about.
+            on, and what kind of response would be useful.
           </p>
           <p className={styles.contactDirectEmail}>
-            {intakeEnabled
-              ? "Prefer a form? The structured contact form below is live too."
-              : "Email is the live contact route right now. The web form will appear here when its receiver is connected."}
+            Applied work, research review, funding, collaboration, media, Open Lab, and general
+            inquiries all begin here.
           </p>
         </aside>
       </InstitutionalRouteHero>
@@ -93,11 +93,14 @@ export function InstitutionalContactPage({
                   if (!type) return null;
 
                   return (
-                    <Link href={`/contact?type=${type.id}`} key={type.id}>
+                    <a
+                      href={publicContactMailto(`Boundary First Labs — ${type.label}`)}
+                      key={type.id}
+                    >
                       <strong>{type.label}</strong>
                       <p>{type.short}</p>
                       <span aria-hidden="true">-&gt;</span>
-                    </Link>
+                    </a>
                   );
                 })}
               </div>
@@ -123,23 +126,14 @@ export function InstitutionalContactPage({
           </div>
         </div>
 
-        {intakeEnabled ? (
-          <InstitutionalInquiryForm
-            initialType={initialType}
-            intakeEnabled={intakeEnabled}
-            sourceContext={sourceContext}
-          />
-        ) : (
-          <aside className={styles.contactEmailFallback}>
-            <span>EMAIL INSTEAD</span>
-            <h3>The web form is not connected yet.</h3>
-            <p>
-              Email is already live, so there is no need to wait for the form. A short,
-              ordinary message is welcome.
-            </p>
-            <a href={PUBLIC_CONTACT_MAILTO}>Write {PUBLIC_CONTACT_EMAIL} <span aria-hidden="true">-&gt;</span></a>
-          </aside>
-        )}
+        <aside className={styles.contactEmailFallback}>
+          <span>EMAIL THE LAB</span>
+          <h3>{selectedInquiry.label}</h3>
+          <p>{selectedInquiry.prompt}</p>
+          <a href={selectedMailto}>
+            Write {PUBLIC_CONTACT_EMAIL} <span aria-hidden="true">-&gt;</span>
+          </a>
+        </aside>
       </section>
 
       <section className={styles.contactProcessSection}>
