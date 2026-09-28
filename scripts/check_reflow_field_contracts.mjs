@@ -227,6 +227,8 @@ expect(reflow.includes('context.layoutMode === "split-focus-rail"'), "split-focu
 expect(reflow.includes("railSummary?: ReactNode"), "Reflow items must support an alternate compressed rail representation");
 expect(reflow.includes('data-reflow-rail={showsRailSummary ? "true" : "false"}'), "compressed rail state must be explicit in DOM");
 expect(reflow.includes("data-reflow-rail-summary"), "compressed rail summaries must expose a stable rendering hook");
+expect(reflow.includes("new ResizeObserver(captureRestHeight)"), "rail cards must observe their stable REST height before compression");
+expect(reflow.includes('"--reflow-rest-height": `${restHeight}px`'), "rail cards must publish their measured REST height to CSS");
 expect(reflowCss.includes('data-reflow-mode="split-focus"'), "split-focus must own shared BFUX geometry instead of route-local width animation");
 expect(reflowCss.includes("--reflow-split-rest-span, 30"), "standard split-focus REST geometry must remain 50/50");
 expect(reflowCss.includes("--reflow-split-selected-span, 45"), "standard split-focus selected geometry must remain 75 percent");
@@ -236,6 +238,7 @@ expect(reflowCss.includes("--reflow-split-rail-rest-span, 30"), "rail split-focu
 expect(reflowCss.includes("--reflow-split-rail-selected-span, 52"), "rail split-focus must give the selected card most horizontal bandwidth");
 expect(reflowCss.includes("--reflow-split-rail-peer-span, 8"), "rail split-focus must compress the peer into a narrow book-spine rail");
 expect(reflowCss.includes('grid-template-rows: auto'), "rail split-focus must let content determine row height instead of forcing a full-height track");
+expect(reflowCss.includes("height: var(--reflow-rest-height, auto)"), "shrunk rail cards must preserve the height they had in REST state");
 expect(appliedWork.includes("<AppliedWorkEvidenceReflow />"), "Applied Work must compose review evidence and deliverables through one Reflow surface");
 expect(appliedWorkEvidenceReflow.includes('layoutMode="split-focus-rail"'), "Applied Work evidence must use the book-spine rail Reflow preset");
 expect(appliedWorkEvidenceReflow.includes("itemOrder={appliedWorkEvidenceOrder}"), "Applied Work rail split-focus must preserve explicit two-card source order");
@@ -249,7 +252,7 @@ expect(appliedWorkCss.includes(".appliedWorkReflowRailSummary"), "Applied Work m
 expect(appliedWorkCss.includes("writing-mode: vertical-rl"), "Applied Work rail title must read vertically like a book spine");
 expect(appliedWorkCss.includes("--reflow-split-rail-selected-span: 55"), "Applied Work must make the active surface wider than the reusable rail default");
 expect(appliedWorkCss.includes("--reflow-split-rail-peer-span: 5"), "Applied Work must compress the inactive card to a slimmer book-spine rail");
-expect(appliedWorkCss.includes('height: clamp(390px, 48vh, 500px)'), "Applied Work compressed rail must stop well above the selected card floor");
+expect(!appliedWorkCss.includes('height: clamp(390px, 48vh, 500px)'), "Applied Work must not replace preserved REST height with an arbitrary rail height clamp");
 expect(appliedWorkCss.includes("font-size: clamp(1.28rem, 1.45vw, 1.55rem)"), "Applied Work book-spine title must use a larger vertical display size");
 expect(appliedWorkEvidenceReflow.includes('title="Systems / Architecture Review"'), "Applied Work review rail must use a short spine-safe title");
 expect(appliedWorkEvidenceReflow.includes('title="Artifacts, not just conversation."'), "Applied Work deliverables rail must use a short spine-safe title");
