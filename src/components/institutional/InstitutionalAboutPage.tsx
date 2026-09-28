@@ -15,16 +15,26 @@ export function InstitutionalAboutPage() {
           styles={styles}
           className={styles.aboutHero}
           eyebrow={<>ABOUT BOUNDARY FIRST LABS</>}
-          title={<>A laboratory for the machinery beneath knowledge.</>}
-          lead={<>Boundary First Labs is a founder-led applied systems laboratory and
-              business. It studies how complex systems are represented, transformed, tested,
-              measured, and made operational.</>}
+          title={<>Boundary First Labs.</>}
+          lead={
+            <>
+              Boundary First Labs is a solo, technical-founder-led applied systems laboratory
+              and business: AI-enabled, digital-first, and engineered as an executable
+              institutional machine. Research, software, methods, products, operations,
+              provenance, work state, and decision authority are represented as inspectable
+              machinery rather than left as tacit founder memory.
+            </>
+          }
           support={
-          <>
-            Software, automation, AI agents, repositories, and research machinery expand what
-            one founder can inspect and build. Decision authority and external accountability
-            remain with the founder.
-          </>
+            <>
+              The through-line is concrete: a software engineer spent roughly fifteen years
+              studying mathematics and physics while also building software, data systems,
+              startups, and public infrastructure. BFL grew from that convergence. Computation,
+              repositories, automation, and AI agents extend what one person can inspect and
+              build, while human judgment, promotion authority, and external accountability
+              remain explicit.
+            </>
+          }
         }
           childLinks={institutionalChildRoutes.about}
           >
@@ -36,19 +46,6 @@ export function InstitutionalAboutPage() {
 
         <AboutReflowGroups />
 
-        <section className={styles.aboutClose}>
-          <p className={styles.sectionIndex}>THE LAB IN ONE SENTENCE</p>
-          <h2>
-            Boundary First Labs is a founder-led solopreneur operation: a single-person,
-            computationally leveraged applied systems research laboratory and business
-            studying the machinery by which knowledge is represented, transformed, tested,
-            and made operational.
-          </h2>
-          <p>
-            The deeper ambition: build systems that help people and institutions understand
-            more clearly, act more capably, exercise power more accountably, and repair what fails.
-          </p>
-        </section>
       </InstitutionalPageShell>
   );
 }
