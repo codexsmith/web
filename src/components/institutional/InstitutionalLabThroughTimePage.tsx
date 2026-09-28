@@ -31,9 +31,8 @@ export function InstitutionalLabThroughTimePage() {
         }
         support={
           <>
-            Boundary First Labs became practical when decades of accumulated research and
-            systems practice met computational tools able to work across that structure at
-            machine speed. This five-event public projection is only a seed.
+            Five milestones mark the route from early experimental work to the current
+            institution. The point is continuity, not completeness.
           </>
         }
         childLinks={institutionalChildRoutes.labThroughTime}
@@ -69,10 +68,10 @@ export function InstitutionalLabThroughTimePage() {
       <section className={styles.originBand} aria-label="How Boundary First Labs became practical">
         <article>
           <span>BEFORE</span>
-          <strong>Accumulated practice + research</strong>
+          <strong>Research + systems practice already existed.</strong>
           <p>
-            Georgia Tech research and AI training, professional systems engineering, and a
-            long independent research corpus established the substrate.
+            Academic research, professional engineering, and independent work predate the
+            current institution.
           </p>
         </article>
 
@@ -80,10 +79,10 @@ export function InstitutionalLabThroughTimePage() {
 
         <article>
           <span>ACCELERATION</span>
-          <strong>Commercial AI increases throughput</strong>
+          <strong>AI lowers the cost of working across the corpus.</strong>
           <p>
-            Search, comparison, drafting, classification, synthesis, code execution, and
-            orchestration become dramatically cheaper and faster.
+            Search, comparison, coding, synthesis, and cross-referencing become fast enough
+            to operate at corpus scale.
           </p>
         </article>
 
@@ -91,10 +90,10 @@ export function InstitutionalLabThroughTimePage() {
 
         <article>
           <span>NOW</span>
-          <strong>Computationally leveraged micro-lab</strong>
+          <strong>One founder can operate a wider surface.</strong>
           <p>
-            One founder can operate a much larger research and engineering surface without
-            pretending that computational leverage is organizational headcount.
+            The leverage becomes a computational micro-lab with explicit machinery, not
+            simulated organizational headcount.
           </p>
         </article>
       </section>
@@ -152,12 +151,10 @@ export function InstitutionalLabThroughTimePage() {
           <p className={styles.sectionIndex}>THE ACCELERATION BOUNDARY</p>
           <h2>Commercial AI changed the throughput, not the starting point.</h2>
           <p>
-            By the time capable commercial language models became broadly usable, the founder
-            was not encountering AI, software systems, or research practice for the first time.
-            Georgia Tech training had already combined computer science, AI, systems,
-            architecture, and academic research; professional work added years of building and
-            delivering software under production constraints; and independent research had
-            already accumulated a substantial pre-generative-AI corpus.
+            The chronology is the point. The room-scale research period and much of the
+            underlying corpus predate the current AI-accelerated Lab. Commercial AI changed the
+            cost of searching, comparing, coding, and reorganizing that material; it did not
+            supply the starting point.
           </p>
         </div>
 
@@ -166,8 +163,8 @@ export function InstitutionalLabThroughTimePage() {
             <span>01 · TECHNICAL FORMATION</span>
             <strong>Georgia Tech: CS, AI, systems, architecture, research.</strong>
             <p>
-              Formal training and undergraduate research supplied machine models, research
-              discipline, and repeated practice testing claims against observed behavior.
+              Formal training and undergraduate research supplied computational models,
+              research practice, and repeated contact with evidence.
             </p>
           </article>
 
@@ -175,9 +172,8 @@ export function InstitutionalLabThroughTimePage() {
             <span>02 · PROFESSIONAL PRACTICE</span>
             <strong>Software made representation mechanically consequential.</strong>
             <p>
-              Production engineering, consulting, architecture, Lean/Agile practice, and
-              real delivery constraints turned questions of state, ownership, failure, and
-              repair into everyday operating problems.
+              Production systems made state, ownership, failure, and repair practical
+              engineering concerns rather than abstract vocabulary.
             </p>
           </article>
 
@@ -185,9 +181,8 @@ export function InstitutionalLabThroughTimePage() {
             <span>03 · COMMERCIAL AI ARRIVES</span>
             <strong>A prepared operator met a new class of leverage.</strong>
             <p>
-              Language models added representational throughput: faster compilation,
-              comparison, search, synthesis, translation, and orchestration across a corpus
-              and software environment that already existed.
+              Language models made comparison, translation, drafting, coding, and
+              orchestration cheap enough to become routine laboratory operations.
             </p>
           </article>
         </div>
@@ -195,39 +190,19 @@ export function InstitutionalLabThroughTimePage() {
         <details className={styles.accelerationDetail}>
           <summary>
             <span>WHY THIS MATTERS TO THE CURRENT LAB</span>
-            <strong>The preparation was unusually well matched to the tool.</strong>
-            <small>Expand provenance interpretation</small>
+            <strong>What changed was leverage, not authorship.</strong>
+            <small>Expand the distinction</small>
           </summary>
           <div>
             <p>
-              The current Boundary First Labs operating model depends on that convergence.
-              Research training made model outputs something to interrogate rather than
-              simply accept. AI and systems education made the computational substrate
-              legible. Professional software practice made automation, decomposition,
-              interfaces, state, testing, and failure familiar engineering concerns.
-              Independent research supplied years of accumulated questions, artifacts,
-              terminology, diagrams, code, and partially formalized structure waiting to be
-              compiled and connected.
+              The sequence matters: training and engineering practice supplied judgment;
+              independent research supplied the material; AI and automation lowered the cost
+              of transforming, comparing, and coordinating it.
             </p>
             <p>
-              Commercial AI therefore did not create the research program from an empty
-              prompt. It changed the economics and speed of working with an unusually large
-              pre-existing body of thought. Tasks that once required repeated manual
-              transcription, comparison, indexing, drafting, and cross-referencing could be
-              delegated to computational machinery while the founder retained responsibility
-              for framing, judgment, promotion, correction, and external commitments.
-            </p>
-            <blockquote>
-              The narrower provenance claim is not “AI generated the Lab.” It is that a
-              founder already trained in AI and research, seasoned in professional systems
-              engineering, and carrying a long independent research corpus was unusually
-              ready to turn capable commercial AI into laboratory machinery.
-            </blockquote>
-            <p>
-              That acceleration explains how a single-person, founder-led organization can
-              now maintain a much larger research and engineering surface than headcount
-              alone would suggest. It does not validate the Lab&apos;s scientific claims;
-              those still have to survive evidence, criticism, comparison, and use.
+              That leverage helps explain the Lab&apos;s scale. It does not validate the
+              research. Claims still have to survive evidence, comparison, criticism, and
+              explicit human promotion.
             </p>
           </div>
         </details>
