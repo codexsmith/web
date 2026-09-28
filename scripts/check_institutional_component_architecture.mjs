@@ -759,10 +759,12 @@ expect(nowPage.includes("./content/now"), "Now / Roadmap page must own a route-l
 expect(nowPage.includes("What is Boundary First Labs doing now?"), "Now hero must lead with the current-work question");
 expect(nowPage.includes("NOW → NEXT → LATER"), "Now page must expose the roadmap horizon sequence");
 expect(nowPage.includes("WHAT CAN CHANGE THE ROADMAP?"), "Now page must make reprioritization rules explicit");
-expect(nowContent.includes("Finish the public institutional boundary"), "Now priorities must include public institutional conversion");
-expect(nowContent.includes("Turn capability into outside evidence"), "Now priorities must include BFL-native external evidence");
-expect(nowContent.includes("Execute the representational laboratory program"), "Now priorities must include the active laboratory program");
-expect(nowContent.includes("Independent use"), "Now roadmap gates must include transfer beyond the founder");
+expect(nowContent.includes("Close the public and commercial interface"), "Now priorities must include public/commercial institutional conversion");
+expect(nowContent.includes("Turn four funding lanes into outside evidence"), "Now priorities must include BFL-native external evidence across the current funding lanes");
+expect(nowContent.includes("Audit the population behind the Registrar"), "Now priorities must include the post-census registry population audit");
+expect(nowContent.includes("Run the research benchmarks that can falsify the stack"), "Now priorities must include active falsifiable research benchmarking");
+expect(nowContent.includes("Turn mature research into reviewable publication objects"), "Now priorities must include publication conversion");
+expect(nowContent.includes("Independent operation"), "Now roadmap gates must include transfer beyond the founder");
 expect(nowPage.includes('/contact?type=general&source=now'), "Now must expose a contextual Contact route");
 
 const contactPage = read(`${root}/InstitutionalContactPage.tsx`);
