@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { institutionalChildRoutes } from "./institutionalRoutes";
@@ -138,12 +139,12 @@ export function InstitutionalAiGovernancePage() {
           <Link href="/products/agentic-scientific-method">
             Explore Agentic Scientific Method <span aria-hidden="true">→</span>
           </Link>
-          <Link href="/contact?type=applied-work&source=ai-governance">
+          <a href={publicContactMailto("Boundary First Labs — AI Governance Review")}>
             Discuss a bounded AI governance review <span aria-hidden="true">→</span>
-          </Link>
-          <Link href="/open-lab?type=BFL_CRITIQUE#open-lab-intake">
+          </a>
+          <a href={publicContactMailto("Boundary First Labs — Technical critique — AI Governance")}>
             Critique this doctrine <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </div>
       </section>
     </InstitutionalPageShell>
