@@ -337,7 +337,7 @@ export function ReflowFieldItem({
     context.layoutMode === "split-focus-rail" &&
     context.selectedId !== null &&
     !selected &&
-    railSummary !== undefined;
+    railSummary != null;
 
   const handleSurfaceClick = (event: ReactMouseEvent<HTMLElement>) => {
     if (clickBelongsToNestedReflowField(event)) return;
