@@ -73,9 +73,9 @@ export function SiteFooter() {
             <h2 className="font-mono text-[11px] uppercase tracking-widest text-primary-foreground-muted">Contact</h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li>
-                <Link href="/inquire" className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground">
-                  Contextual inquiry
-                </Link>
+                <a href={PUBLIC_CONTACT_MAILTO} className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground">
+                  Email the Lab
+                </a>
               </li>
               <li>
                 <a href={PUBLIC_CONTACT_MAILTO} className="inline-flex min-h-10 items-center text-primary-foreground-secondary transition-colors hover:text-primary-foreground">
