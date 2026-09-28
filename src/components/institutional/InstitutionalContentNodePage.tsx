@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ContentNode } from "@/lib/content";
 import { nodes } from "@/lib/content";
 import { institutionalContentNodeRoutes } from "@/lib/site-release";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import {
   InstitutionalEvidenceStatus,
@@ -235,9 +236,9 @@ export function InstitutionalContentNodePage({
           <Link href="/atlas">
             Lab Atlas <span aria-hidden="true">→</span>
           </Link>
-          <Link href="/contact">
+          <a href={publicContactMailto("Boundary First Labs — Public record inquiry")}>
             Contact <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </nav>
       </section>
     </InstitutionalPageShell>
