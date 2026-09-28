@@ -7,7 +7,6 @@ import {
   useEffect,
   useId,
   useMemo,
-  useRef,
   useState,
   type CSSProperties,
   type MouseEvent as ReactMouseEvent,
@@ -283,8 +282,6 @@ export function ReflowFieldItem({
 }) {
   const context = useContext(ReflowFieldContext);
   const reducedMotion = useReducedMotion();
-  const itemRef = useRef<HTMLElement | null>(null);
-  const [restHeight, setRestHeight] = useState<number | null>(null);
 
   if (!context) {
     throw new Error("ReflowFieldItem must be rendered inside ReflowField.");
@@ -292,35 +289,6 @@ export function ReflowFieldItem({
 
   const selected = context.selectedId === id;
   const detailId = `${context.fieldId}-${safeFragment(id)}-detail`;
-
-  useEffect(() => {
-    if (
-      context.layoutMode !== "split-focus-rail" ||
-      context.selectedId !== null ||
-      context.previousSelectedId !== null
-    ) {
-      return;
-    }
-
-    const node = itemRef.current;
-    if (!node) return;
-
-    const captureRestHeight = () => {
-      const nextHeight = Math.round(node.getBoundingClientRect().height);
-      if (nextHeight <= 0) return;
-      setRestHeight((current) => (current === nextHeight ? current : nextHeight));
-    };
-
-    captureRestHeight();
-    const observer = new ResizeObserver(captureRestHeight);
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, [
-    context.layoutMode,
-    context.previousSelectedId,
-    context.selectedId,
-  ]);
 
   const carriesMotion =
     context.animatePeers || selected || context.previousSelectedId === id;
@@ -355,9 +323,6 @@ export function ReflowFieldItem({
           "--reflow-peer-row": peerTile.rowIndex + 2,
         }
       : {}),
-    ...(restHeight !== null
-      ? { "--reflow-rest-height": `${restHeight}px` }
-      : {}),
   } as CSSProperties;
   const usesFocusPlacement =
     context.layoutMode === "focus-stage" ||
@@ -387,7 +352,6 @@ export function ReflowFieldItem({
 
   return (
     <motion.article
-      ref={itemRef}
       layout
       layoutId={`${context.fieldId}-${safeFragment(id)}`}
       layoutAnchor={{ x: 0.5, y: 0.5 }}
