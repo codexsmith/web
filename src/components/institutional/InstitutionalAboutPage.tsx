@@ -39,7 +39,6 @@ export function InstitutionalAboutPage() {
               validation, promotion authority, or external accountability.
             </>
           }
-        }
           childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
