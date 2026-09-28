@@ -36,6 +36,7 @@ const augustaCss = fs.readFileSync("src/components/institutional/styles/AugustaM
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
 const appliedWork = fs.readFileSync("src/components/institutional/InstitutionalAppliedWorkPage.tsx", "utf8");
 const appliedWorkEvidenceReflow = fs.readFileSync("src/components/institutional/sections/AppliedWorkEvidenceReflow.tsx", "utf8");
+const appliedWorkReviewSequence = fs.readFileSync("src/components/institutional/AppliedWorkSyntheticReviewSequence.tsx", "utf8");
 const appliedWorkCss = fs.readFileSync("src/components/institutional/styles/AppliedWork.module.css", "utf8");
 
 const expect = (condition, message) => {
@@ -237,6 +238,13 @@ expect(appliedWorkCss.includes(".appliedWorkReflowDetailTitle"), "Applied Work m
 expect(appliedWorkCss.includes(".appliedWorkEvidenceReflowGrid"), "Applied Work must style its dedicated split-focus field");
 expect(appliedWorkCss.includes("--reflow-split-selected-span: 45"), "Applied Work must retain the canonical 75/25 split-focus expansion");
 expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work split-focus cards must share a full-height desktop work surface");
+const representationGapPanel = appliedWorkReviewSequence.slice(
+  appliedWorkReviewSequence.indexOf('id="applied-demo-step-1"'),
+  appliedWorkReviewSequence.indexOf("ref={stepTwoRef}"),
+);
+expect(representationGapPanel.includes("appliedDemoCoarseView"), "Applied Work representation-gap panel must show only the represented coarse state");
+expect(!representationGapPanel.includes("reconstructedStates"), "Applied Work representation-gap panel must not reveal the reconstructed lifecycle before step 2");
+expect(appliedWorkReviewSequence.includes("Reconstruct the hidden lifecycle"), "Applied Work representation gap must hand off explicitly to lifecycle reconstruction");
 expect(reflow.includes('type ReflowRestLayout = "natural" | "rectangle"'), "Reflow must expose an explicit rectangle REST layout rule");
 expect(reflow.includes('restLayout ?? (layoutMode === "focus-stage" ? "rectangle" : "natural")'), "Focus-stage Reflows must tile into a complete rectangle by default");
 expect(reflow.includes("rectangleTileForIndex"), "Rectangle Reflow must compute balanced full-width rows");
