@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -275,7 +276,7 @@ export function InstitutionalFundingPage() {
         </p>
 
         <nav className={styles.fundingEvidenceLinks} aria-label="Funding evidence routes">
-          <Link href="/contact?type=funding&source=funding">Start a funding conversation <span aria-hidden="true">-&gt;</span></Link>
+          <a href={publicContactMailto("Boundary First Labs — Funding")}>Start a funding conversation <span aria-hidden="true">-&gt;</span></a>
           <Link href="/research">Inspect the research <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/applied-work">Inspect applied work <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/products">Inspect products <span aria-hidden="true">-&gt;</span></Link>
