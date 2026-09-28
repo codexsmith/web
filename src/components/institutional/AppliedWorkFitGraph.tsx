@@ -293,7 +293,7 @@ export function AppliedWorkFitGraph() {
     function fitProjection() {
       if (!graph) return;
       graph.resize();
-      graph.fit(graph.elements(), 20);
+      graph.fit(graph.elements(), 14);
     }
 
     async function mountGraph() {
