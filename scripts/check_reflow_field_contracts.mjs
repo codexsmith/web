@@ -221,23 +221,34 @@ for (const [name, source] of [
 expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choose Your Own Path through Stewardship as one Reflow field");
 expect(!home.includes("\\n\\n"), "Homepage must not render escaped newline literals around the orientation field");
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
-expect(reflow.includes('type ReflowLayoutMode = "flow" | "focus-stage" | "split-focus"'), "Reflow must expose split-focus as a first-class layout mode");
+expect(reflow.includes('type ReflowLayoutMode = "flow" | "focus-stage" | "split-focus" | "split-focus-rail"'), "Reflow must expose both standard and rail split-focus modes");
 expect(reflow.includes('context.layoutMode === "split-focus"'), "split-focus must participate in explicit focus placement state");
+expect(reflow.includes('context.layoutMode === "split-focus-rail"'), "split-focus-rail must participate in explicit focus placement state");
+expect(reflow.includes("railSummary?: ReactNode"), "Reflow items must support an alternate compressed rail representation");
+expect(reflow.includes('data-reflow-rail={showsRailSummary ? "true" : "false"}'), "compressed rail state must be explicit in DOM");
+expect(reflow.includes("data-reflow-rail-summary"), "compressed rail summaries must expose a stable rendering hook");
 expect(reflowCss.includes('data-reflow-mode="split-focus"'), "split-focus must own shared BFUX geometry instead of route-local width animation");
-expect(reflowCss.includes("--reflow-split-rest-span, 30"), "split-focus REST geometry must divide the field 50/50");
-expect(reflowCss.includes("--reflow-split-selected-span, 45"), "split-focus selected geometry must expand to 75 percent");
-expect(reflowCss.includes("--reflow-split-peer-span, 15"), "split-focus peer geometry must contract to 25 percent");
+expect(reflowCss.includes("--reflow-split-rest-span, 30"), "standard split-focus REST geometry must remain 50/50");
+expect(reflowCss.includes("--reflow-split-selected-span, 45"), "standard split-focus selected geometry must remain 75 percent");
+expect(reflowCss.includes("--reflow-split-peer-span, 15"), "standard split-focus peer geometry must remain 25 percent");
+expect(reflowCss.includes('data-reflow-mode="split-focus-rail"'), "rail split-focus must be a separate reusable BFUX preset");
+expect(reflowCss.includes("--reflow-split-rail-rest-span, 30"), "rail split-focus must preserve the canonical 50/50 REST state");
+expect(reflowCss.includes("--reflow-split-rail-selected-span, 52"), "rail split-focus must give the selected card most horizontal bandwidth");
+expect(reflowCss.includes("--reflow-split-rail-peer-span, 8"), "rail split-focus must compress the peer into a narrow book-spine rail");
 expect(appliedWork.includes("<AppliedWorkEvidenceReflow />"), "Applied Work must compose review evidence and deliverables through one Reflow surface");
-expect(appliedWorkEvidenceReflow.includes('layoutMode="split-focus"'), "Applied Work evidence must use the split-focus Reflow type");
-expect(appliedWorkEvidenceReflow.includes("itemOrder={appliedWorkEvidenceOrder}"), "Applied Work split-focus must preserve explicit two-card source order");
-expect((appliedWorkEvidenceReflow.match(/<ReflowFieldItem/g) || []).length === 2, "Applied Work split-focus must contain exactly two cards");
-expect(appliedWorkEvidenceReflow.includes('id="synthetic-review"'), "Applied Work split-focus must retain the Synthetic Review card");
-expect(appliedWorkEvidenceReflow.includes('id="deliverables"'), "Applied Work split-focus must retain the What You Should Get card");
+expect(appliedWorkEvidenceReflow.includes('layoutMode="split-focus-rail"'), "Applied Work evidence must use the book-spine rail Reflow preset");
+expect(appliedWorkEvidenceReflow.includes("itemOrder={appliedWorkEvidenceOrder}"), "Applied Work rail split-focus must preserve explicit two-card source order");
+expect((appliedWorkEvidenceReflow.match(/<ReflowFieldItem/g) || []).length === 2, "Applied Work rail split-focus must contain exactly two cards");
+expect((appliedWorkEvidenceReflow.match(/railSummary=\{/g) || []).length === 2, "Both Applied Work cards must provide a compressed rail identity");
+expect(appliedWorkEvidenceReflow.includes('id="synthetic-review"'), "Applied Work rail split-focus must retain the Synthetic Review card");
+expect(appliedWorkEvidenceReflow.includes('id="deliverables"'), "Applied Work rail split-focus must retain the What You Should Get card");
 expect((appliedWorkEvidenceReflow.match(/appliedWorkReflowDetailTitle/g) || []).length === 2, "Applied Work expanded cards must retain their REST title for visual continuity");
 expect(appliedWorkCss.includes(".appliedWorkReflowDetailTitle"), "Applied Work must style the expanded continuity title");
-expect(appliedWorkCss.includes(".appliedWorkEvidenceReflowGrid"), "Applied Work must style its dedicated split-focus field");
-expect(appliedWorkCss.includes("--reflow-split-selected-span: 45"), "Applied Work must retain the canonical 75/25 split-focus expansion");
-expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work split-focus cards must share a full-height desktop work surface");
+expect(appliedWorkCss.includes(".appliedWorkReflowRailSummary"), "Applied Work must style the compressed book-spine identity");
+expect(appliedWorkCss.includes("writing-mode: vertical-rl"), "Applied Work rail title must read vertically like a book spine");
+expect(appliedWorkCss.includes("--reflow-split-rail-selected-span: 53"), "Applied Work must make the active surface wider than the reusable rail default");
+expect(appliedWorkCss.includes("--reflow-split-rail-peer-span: 7"), "Applied Work must compress the inactive card to a narrow rail");
+expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work rail split-focus cards must share a full-height desktop work surface");
 const representationGapPanel = appliedWorkReviewSequence.slice(
   appliedWorkReviewSequence.indexOf('id="applied-demo-step-1"'),
   appliedWorkReviewSequence.indexOf("ref={stepTwoRef}"),
