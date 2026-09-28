@@ -12,8 +12,8 @@ import {
   fundingCapitalRoles,
   fundingChannels,
   fundingClosureHorizons,
-  fundingConversionStages,
   fundingEvaluationQuestions,
+  fundingNearTermUses,
   fundingLanes,
   fundingOutputs,
 } from "./content/funding";
@@ -87,27 +87,35 @@ export function InstitutionalFundingPage() {
           ))}
         </div>
 
-        <div className={styles.fundingMechanismIntro}>
-          <span>HOW CAPITAL GETS USED</span>
-          <p>
-            Whatever lane supplies the resource, BFL uses the same discipline: name the blocked
-            constraint, match the resource to it, and require an external closure rather than
-            treating funding itself as success.
-          </p>
+        <div className={styles.fundingUseIntro}>
+          <span>WHAT FUNDING UNLOCKS NOW</span>
+          <div>
+            <h3>Move the lead objects into external contact.</h3>
+            <p>
+              Different lanes need different things. The useful question is concrete: what does
+              the money pay for next, and what market, partner, customer, or research event should
+              exist because of it?
+            </p>
+          </div>
         </div>
 
-        <div className={styles.fundingConversionRail}>
-          {fundingConversionStages.map((stage, index) => (
-            <article className={styles.fundingConversionStage} key={stage.title}>
-              <span>{formatOrdinal(index)}</span>
-              <h3>{stage.title}</h3>
-              <p>{stage.description}</p>
+        <div className={styles.fundingUseGrid}>
+          {fundingNearTermUses.map((item) => (
+            <article className={styles.fundingUseCard} key={item.lane}>
+              <span>{item.eyebrow}</span>
+              <h3>{item.lane}</h3>
+              <strong>{item.use}</strong>
+              <p>{item.description}</p>
+              <div>
+                <span>SHOULD CLOSE AS</span>
+                <p>{item.closure}</p>
+              </div>
             </article>
           ))}
         </div>
 
         <div className={styles.fundingOutputBand}>
-          <span>WHAT SUPPORT SHOULD PRODUCE</span>
+          <span>WHAT SHOULD EXIST AFTERWARD</span>
           <div>
             {fundingOutputs.map((output) => (
               <strong key={output}>{output}</strong>
