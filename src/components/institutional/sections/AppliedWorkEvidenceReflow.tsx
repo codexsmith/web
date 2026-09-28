@@ -98,6 +98,9 @@ export function AppliedWorkEvidenceReflow() {
               className={styles.appliedWorkReflowDetail}
               data-reflow-stop-toggle
             >
+              <h2 className={styles.appliedWorkReflowDetailTitle}>
+                See exactly what a Systems / Architecture Review is doing.
+              </h2>
               <AppliedWorkSyntheticReviewSequence />
             </div>
           }
@@ -114,6 +117,9 @@ export function AppliedWorkEvidenceReflow() {
               className={styles.appliedWorkReflowDetail}
               data-reflow-stop-toggle
             >
+              <h2 className={styles.appliedWorkReflowDetailTitle}>
+                The work should leave behind artifacts, not just conversation.
+              </h2>
               <div className={styles.appliedWorkReflowDetailLead}>
                 <p>
                   The exact deliverables depend on the engagement, but the output should make the
