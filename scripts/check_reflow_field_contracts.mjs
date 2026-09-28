@@ -232,6 +232,8 @@ expect(appliedWorkEvidenceReflow.includes("itemOrder={appliedWorkEvidenceOrder}"
 expect((appliedWorkEvidenceReflow.match(/<ReflowFieldItem/g) || []).length === 2, "Applied Work split-focus must contain exactly two cards");
 expect(appliedWorkEvidenceReflow.includes('id="synthetic-review"'), "Applied Work split-focus must retain the Synthetic Review card");
 expect(appliedWorkEvidenceReflow.includes('id="deliverables"'), "Applied Work split-focus must retain the What You Should Get card");
+expect((appliedWorkEvidenceReflow.match(/appliedWorkReflowDetailTitle/g) || []).length === 2, "Applied Work expanded cards must retain their REST title for visual continuity");
+expect(appliedWorkCss.includes(".appliedWorkReflowDetailTitle"), "Applied Work must style the expanded continuity title");
 expect(appliedWorkCss.includes(".appliedWorkEvidenceReflowGrid"), "Applied Work must style its dedicated split-focus field");
 expect(appliedWorkCss.includes("--reflow-split-selected-span: 45"), "Applied Work must retain the canonical 75/25 split-focus expansion");
 expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work split-focus cards must share a full-height desktop work surface");
