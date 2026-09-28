@@ -16,7 +16,7 @@ const PROBLEM_ROWS = [
 const PROBLEM_ORDER = PROBLEM_ROWS.flat();
 
 const GRAPH_WIDTH = 1200;
-const PROBLEM_ROW_Y = [72, 216] as const;
+const PROBLEM_ROW_Y = [58, 158] as const;
 const AUDIENCE_Y = 458;
 
 const TONE = {
@@ -82,14 +82,9 @@ function iconDataUri(body: string, tone: RelationTone) {
   const palette = TONE[tone];
   const svg =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">' +
-    '<rect x="1.5" y="1.5" width="37" height="37" fill="' +
-    palette.wash +
-    '" stroke="' +
-    palette.accent +
-    '" stroke-opacity=".48"/>' +
     '<g fill="none" stroke="' +
     palette.accent +
-    '" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">' +
+    '" stroke-opacity=".82" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">' +
     body +
     "</g></svg>";
 
@@ -300,14 +295,14 @@ export function AppliedWorkFitGraph() {
               selector: "node.problem",
               style: {
                 width: 264,
-                height: 108,
+                height: 84,
                 shape: "rectangle",
                 "background-color": "#ffffff",
                 "background-image": "data(icon)",
                 "background-fit": "none",
-                "background-width": 34,
-                "background-height": 34,
-                "background-position-x": "15%",
+                "background-width": 64,
+                "background-height": 64,
+                "background-position-x": "12%",
                 "background-position-y": "50%",
                 "background-repeat": "no-repeat",
                 "border-width": 1.35,
@@ -315,14 +310,14 @@ export function AppliedWorkFitGraph() {
                 label: "data(label)",
                 color: "#071a3d",
                 "font-family": 'Georgia, "Times New Roman", serif',
-                "font-size": 14.25,
+                "font-size": 14,
                 "font-weight": 600,
                 "text-wrap": "wrap",
-                "text-max-width": 186,
+                "text-max-width": 184,
                 "text-valign": "center",
                 "text-halign": "center",
                 "text-justification": "center",
-                "text-margin-x": 26,
+                "text-margin-x": 34,
                 "line-height": 1.2,
                 "z-index": 10,
               },
@@ -343,14 +338,14 @@ export function AppliedWorkFitGraph() {
               selector: "node.audience",
               style: {
                 width: 174,
-                height: 74,
+                height: 68,
                 shape: "rectangle",
                 "background-color": "#ffffff",
                 "background-image": "data(icon)",
                 "background-fit": "none",
-                "background-width": 30,
-                "background-height": 30,
-                "background-position-x": "17%",
+                "background-width": 46,
+                "background-height": 46,
+                "background-position-x": "13%",
                 "background-position-y": "50%",
                 "background-repeat": "no-repeat",
                 "border-width": 1.2,
@@ -361,11 +356,11 @@ export function AppliedWorkFitGraph() {
                 "font-size": 12.25,
                 "font-weight": 600,
                 "text-wrap": "wrap",
-                "text-max-width": 112,
+                "text-max-width": 108,
                 "text-valign": "center",
                 "text-halign": "center",
                 "text-justification": "center",
-                "text-margin-x": 20,
+                "text-margin-x": 24,
                 "line-height": 1.16,
                 "z-index": 10,
               },

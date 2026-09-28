@@ -197,11 +197,11 @@
   --relation-accent: var(--osha-blue);
   min-width: 0;
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
-  gap: 11px;
+  grid-template-columns: 46px minmax(0, 1fr);
+  gap: 8px;
   align-items: center;
-  margin-bottom: 9px;
-  padding: 11px 12px 11px 10px;
+  margin-bottom: 7px;
+  padding: 6px 12px 6px 8px;
   border: 1px solid var(--bfux-panel-edge-dark);
   border-left: 6px solid var(--relation-accent);
   background:
@@ -219,8 +219,8 @@
 }
 
 .appliedFitCardIcon {
-  width: 30px;
-  height: 30px;
+  width: 44px;
+  height: 44px;
   display: block;
   background-position: center;
   background-repeat: no-repeat;
@@ -241,7 +241,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin: 3px 0 0 43px;
+  margin: 2px 0 0 54px;
 }
 
 .appliedFitRelationLabels > span {
@@ -268,10 +268,10 @@
   min-width: 0;
   min-height: 72px;
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-columns: 44px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
-  padding: 10px;
+  padding: 7px 10px;
   border: 1px solid var(--bfux-panel-edge-dark);
   border-left: 5px solid var(--relation-accent);
   background:
