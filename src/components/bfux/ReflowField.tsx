@@ -20,7 +20,7 @@ import {
 } from "motion/react";
 import styles from "./ReflowField.module.css";
 
-type ReflowLayoutMode = "flow" | "focus-stage";
+type ReflowLayoutMode = "flow" | "focus-stage" | "split-focus";
 type ReflowRestLayout = "natural" | "rectangle";
 
 type ReflowFieldContextValue = {
@@ -155,6 +155,8 @@ const detailTransition = {
  * Focus-stage rests tile into a closed rectangle by default.
  * Selected content owns the first row; compact peers follow beneath it.
  * Focus peers use one row through four peers, then balanced rows of at most four.
+ * Split-focus is a two-card horizontal mode: cards split the field at rest,
+ * then the selected card expands in place while its companion compresses.
  * Selection reallocates representational bandwidth; it does not mutate,
  * promote, rank, or otherwise change the represented object.
  */
@@ -317,8 +319,11 @@ export function ReflowFieldItem({
         }
       : {}),
   } as CSSProperties;
+  const usesFocusPlacement =
+    context.layoutMode === "focus-stage" ||
+    context.layoutMode === "split-focus";
   const placement =
-    context.layoutMode !== "focus-stage" || context.selectedId === null
+    !usesFocusPlacement || context.selectedId === null
       ? "rest"
       : selected
         ? "selected"
