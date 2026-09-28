@@ -246,9 +246,13 @@ expect((appliedWorkEvidenceReflow.match(/appliedWorkReflowDetailTitle/g) || []).
 expect(appliedWorkCss.includes(".appliedWorkReflowDetailTitle"), "Applied Work must style the expanded continuity title");
 expect(appliedWorkCss.includes(".appliedWorkReflowRailSummary"), "Applied Work must style the compressed book-spine identity");
 expect(appliedWorkCss.includes("writing-mode: vertical-rl"), "Applied Work rail title must read vertically like a book spine");
-expect(appliedWorkCss.includes("--reflow-split-rail-selected-span: 53"), "Applied Work must make the active surface wider than the reusable rail default");
-expect(appliedWorkCss.includes("--reflow-split-rail-peer-span: 7"), "Applied Work must compress the inactive card to a narrow rail");
-expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work rail split-focus cards must share a full-height desktop work surface");
+expect(appliedWorkCss.includes("--reflow-split-rail-selected-span: 55"), "Applied Work must make the active surface wider than the reusable rail default");
+expect(appliedWorkCss.includes("--reflow-split-rail-peer-span: 5"), "Applied Work must compress the inactive card to a slimmer book-spine rail");
+expect(appliedWorkCss.includes('height: clamp(390px, 48vh, 500px)'), "Applied Work compressed rail must stop well above the selected card floor");
+expect(appliedWorkCss.includes("font-size: clamp(1.28rem, 1.45vw, 1.55rem)"), "Applied Work book-spine title must use a larger vertical display size");
+expect(appliedWorkEvidenceReflow.includes('title="Systems / Architecture Review"'), "Applied Work review rail must use a short spine-safe title");
+expect(appliedWorkEvidenceReflow.includes('title="Artifacts, not just conversation."'), "Applied Work deliverables rail must use a short spine-safe title");
+expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work selected surfaces must retain the full-height desktop work surface");
 const representationGapPanel = appliedWorkReviewSequence.slice(
   appliedWorkReviewSequence.indexOf('id="applied-demo-step-1"'),
   appliedWorkReviewSequence.indexOf("ref={stepTwoRef}"),
