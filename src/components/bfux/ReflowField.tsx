@@ -371,6 +371,7 @@ export function ReflowFieldItem({
         layout="position"
         transition={transition}
         className={styles.summary}
+        data-reflow-summary
       >
         {summary}
       </motion.div>
@@ -381,6 +382,7 @@ export function ReflowFieldItem({
             key="detail"
             id={detailId}
             className={styles.detail}
+            data-reflow-detail
             initial={reducedMotion ? false : { opacity: 0 }}
             animate={{
               opacity: 1,
