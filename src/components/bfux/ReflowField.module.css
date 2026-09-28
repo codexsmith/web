@@ -107,7 +107,10 @@
 
 .field[data-reflow-mode="split-focus-rail"][data-reflow-active="true"]
   > .item[data-reflow-rail="true"] {
-  height: var(--reflow-rest-height, auto);
+  height: var(
+    --reflow-split-rail-height,
+    min(744px, calc(100dvh - 96px))
+  );
   align-self: start;
 }
 
