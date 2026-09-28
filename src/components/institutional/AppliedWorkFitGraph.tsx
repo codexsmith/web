@@ -184,9 +184,9 @@ function buildGraphElements() {
       if (!audience || !target) return;
 
       const sourcePort =
-        30 + ((relationIndex + 1) * 40) / (orderedTargets.length + 1);
+        -20 + ((relationIndex + 1) * 40) / (orderedTargets.length + 1);
       const targetPort =
-        30 + ((inboundIndex + 1) * 40) / (inboundSources.length + 1);
+        -20 + ((inboundIndex + 1) * 40) / (inboundSources.length + 1);
 
       elements.push({
         data: {
@@ -197,8 +197,8 @@ function buildGraphElements() {
           kind: "relation",
           bend: clamp((target.x - source.x) * 0.11, -92, 92),
           weight: rowIndex === 0 ? 0.57 : 0.48,
-          sourcePort: sourcePort.toFixed(1) + "% 100%",
-          targetPort: targetPort.toFixed(1) + "% 0%",
+          sourcePort: sourcePort.toFixed(1) + "% 50%",
+          targetPort: targetPort.toFixed(1) + "% -50%",
         },
         classes: "relation",
       });
@@ -326,8 +326,8 @@ export function AppliedWorkFitGraph() {
                 "background-fit": "none",
                 "background-width": 54,
                 "background-height": 54,
-                "background-position-x": "11%",
-                "background-position-y": "50%",
+                "background-position-x": "9.5%",
+                "background-position-y": "47%",
                 "background-repeat": "no-repeat",
                 "border-width": 1.05,
                 "border-color": "#aebdce",
@@ -451,8 +451,11 @@ export function AppliedWorkFitGraph() {
                 "curve-style": "unbundled-bezier",
                 "control-point-distances": "data(bend)",
                 "control-point-weights": "data(weight)",
+                "edge-distances": "endpoints",
                 "source-endpoint": "data(sourcePort)",
                 "target-endpoint": "data(targetPort)",
+                "source-distance-from-node": 0,
+                "target-distance-from-node": 0,
                 "line-color": TONE.blue.accent,
                 "source-arrow-color": TONE.blue.accent,
                 "target-arrow-color": TONE.blue.accent,
