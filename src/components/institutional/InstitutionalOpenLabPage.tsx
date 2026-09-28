@@ -8,13 +8,11 @@ import {
   InstitutionalRouteHero,
   InstitutionalSectionHeader,
 } from "./InstitutionalPrimitives";
-import { OpenLabIntakeInstrument } from "./OpenLabIntakeInstrument";
+import { participationContracts } from "./content/openLab";
 import {
-  openLabSourceProjection,
-  participationContracts,
-  type OpenLabRuntimeConfig,
-  type OpenLabSubmissionType,
-} from "./content/openLab";
+  PUBLIC_CONTACT_EMAIL,
+  publicContactMailto,
+} from "@/lib/site-contact";
 import { OpenLabContextSection } from "./sections/OpenLabContextSection";
 import { OpenLabContractCard } from "./sections/OpenLabContractCard";
 import { MoonshotsFeature } from "./MoonshotsFeature";
@@ -26,13 +24,7 @@ const styles = composeCssModules(
   routeStyles,
 );
 
-export function InstitutionalOpenLabPage({
-  initialType,
-  intakeConfig,
-}: {
-  initialType: OpenLabSubmissionType;
-  intakeConfig: OpenLabRuntimeConfig;
-}) {
+export function InstitutionalOpenLabPage() {
   return (
     <InstitutionalPageShell mainClassName={styles.openLabPage}>
       <InstitutionalRouteHero
@@ -55,31 +47,23 @@ export function InstitutionalOpenLabPage({
         <div className={styles.openLabHeroAsideStack}>
           <aside
             className={styles.openLabHeroIntake}
-            data-live={intakeConfig.enabled ? "true" : "false"}
-            aria-label="Open Lab intake status"
+            data-live="true"
+            aria-label="Open Lab contact"
           >
             <div className={styles.openLabHeroIntakeSignal} aria-hidden="true" />
             <div>
-              <span>INTAKE STATUS</span>
+              <span>OPEN LAB CONTACT</span>
               <strong>
-                {intakeConfig.enabled
-                  ? "Governed submission receiver active."
-                  : "Submission machinery staged; collection closed."}
+                <a href={publicContactMailto("Boundary First Labs — Open Lab")}>
+                  {PUBLIC_CONTACT_EMAIL}
+                </a>
               </strong>
               <p>
-                {intakeConfig.enabled
-                  ? "This deployment declares the receiver, authenticated handoff, policy version, retention window, and source-review acknowledgement required by the intake boundary."
-                  : "The four contracts and transport machinery are implemented, but public collection stays closed until every deployment-level governance gate is explicitly satisfied."}
+                Email the Lab with the closest description of what you are bringing.
+                Critique, counterexamples, public systems, collaboration ideas, and unusual
+                work are all welcome.
               </p>
-              <small>
-                SOURCE PROJECTION:{" "}
-                {openLabSourceProjection.pageProjection.lifecycle.toUpperCase()} ·{" "}
-                {openLabSourceProjection.pageProjection.institutionalStage.toUpperCase()} ·
-                HUMAN REVIEW FLAG:{" "}
-                {openLabSourceProjection.pageProjection.humanReviewed
-                  ? "TRUE"
-                  : "FALSE"}
-              </small>
+              <small>KEEP SECRETS, PRIVATE DATA, AND CONFIDENTIAL MATERIAL OUT OF THE FIRST NOTE.</small>
             </div>
           </aside>
 
@@ -103,8 +87,9 @@ export function InstitutionalOpenLabPage({
           title={<>Four routes. Four different relationships.</>}
           note={
             <>
-              Shared infrastructure can route them, but the public contracts stay
-              distinct all the way into the versioned intake envelope.
+              The distinction matters because criticism, collaboration, public-system
+              inspection, and unusual work create different expectations even when they
+              begin at the same email address.
             </>
           }
         />
@@ -118,11 +103,6 @@ export function InstitutionalOpenLabPage({
 
       <MoonshotsFeature context="open-lab" />
 
-      <OpenLabIntakeInstrument
-        initialType={initialType}
-        runtimeConfig={intakeConfig}
-      />
-
       <OpenLabContextSection />
 
       <section className={styles.openLabClose}>
@@ -133,23 +113,21 @@ export function InstitutionalOpenLabPage({
           wrong category first.
         </h2>
         <p>
-          Open Lab is the designed public boundary of the institution. The four
-          contracts now have a typed transport envelope, explicit collection
-          controls, and a visible review-state model. Activation remains separate
-          from implementation: the deployment must declare the stewardship
-          conditions under which it is actually prepared to collect material.
+          Open Lab is the designed public boundary of the institution. For now,
+          first contact is intentionally simple: write the Lab, give enough context
+          to understand what you are bringing, and keep sensitive material out of the
+          first message. If the work needs a more structured review, consent, or
+          retention boundary, establish that before sending more.
         </p>
         <nav
           className={styles.openLabCloseLinks}
           aria-label="Open Lab next steps"
         >
-          <Link href="/contact?type=open-lab&source=open-lab">
-            Start a conversation without formal intake{" "}
-            <span aria-hidden="true">-&gt;</span>
-          </Link>
-          <Link href="#open-lab-intake">
-            Inspect the governed intake boundary{" "}
-            <span aria-hidden="true">-&gt;</span>
+          <a href={publicContactMailto("Boundary First Labs — Open Lab")}>
+            Email the Open Lab <span aria-hidden="true">-&gt;</span>
+          </a>
+          <Link href="/collaboration">
+            Explore collaboration <span aria-hidden="true">-&gt;</span>
           </Link>
         </nav>
       </section>
