@@ -55,28 +55,29 @@ export function InstitutionalFundingPage() {
       <section className={styles.fundingConversion}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>HOW BFL EXPECTS TO CAPITALIZE</>}
-          title={<>Several independent paths can turn existing work into revenue or funded research.</>}
+          eyebrow={<>CURRENT FUNDING LANES</>}
+          title={<>BFL is building multiple paths to revenue and funded research.</>}
           note={
             <>
-              Services can earn near-term revenue. Chess and related games can sell directly or
-              through partners. Projectr / Knowledge Explorer can test lightweight recurring
-              software revenue. Weather can anchor grants, sponsored research, and public-interest
-              partnerships.
+              These are the current lead objects at the top of four funding lanes, not a permanent
+              ceiling on the portfolio. More services, products, software, and fundable research
+              can emerge from the corpus as they become ready for external tests.
             </>
           }
         />
 
         <div className={styles.fundingLaneGrid}>
-          {fundingLanes.map((lane, index) => (
+          {fundingLanes.map((lane) => (
             <Link className={styles.fundingLaneCard} href={lane.href} key={lane.title}>
               <div className={styles.fundingLaneTopline}>
-                <span>{formatOrdinal(index)}</span>
-                <small>{lane.shorthand}</small>
+                <small>FUNDING LANE · {lane.shorthand}</small>
               </div>
               <p className={styles.fundingLaneModel}>{lane.model}</p>
               <h3>{lane.title}</h3>
-              <strong>{lane.example}</strong>
+              <div className={styles.fundingLaneLead}>
+                <span>CURRENT LEAD OBJECT</span>
+                <strong>{lane.example}</strong>
+              </div>
               <p>{lane.description}</p>
               <div className={styles.fundingLaneEvidence}>
                 <span>NEXT EVIDENCE</span>
