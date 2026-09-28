@@ -12,7 +12,7 @@
     "support": "A bounded diagnostic for consequential software, AI, and institutional processes. Map who can act, what representation informs or authorizes the action, how consequences propagate, whether the process can be contested, and who owns repair.",
     "primaryCta": {
       "label": "Start an audit inquiry",
-      "href": "/contact?type=applied-work&source=agency-ai-governance-audit"
+      "href": "mailto:admin@boundaryfirstlabs.com?subject=Boundary%20First%20Labs%20-%20Agency%20%2F%20AI%20Governance%20Audit"
     },
     "secondaryCta": {
       "label": "See the audit method",
@@ -142,6 +142,6 @@
   },
   "cta": {
     "label": "Start an audit inquiry",
-    "href": "/contact?type=applied-work&source=agency-ai-governance-audit"
+    "href": "mailto:admin@boundaryfirstlabs.com?subject=Boundary%20First%20Labs%20-%20Agency%20%2F%20AI%20Governance%20Audit"
   }
 }
