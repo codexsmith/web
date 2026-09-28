@@ -22,12 +22,12 @@ export const fundingLanes = [
     href: "/products/boundary-first-chess",
   },
   {
-    model: "Lightweight recurring software",
-    shorthand: "SaaS-LITE",
+    model: "Knowledge Infrastructure & Software",
+    shorthand: "SOFTWARE / PRODUCT REVENUE",
     title: "Projectr / Knowledge Explorer",
     example: "YouTube Knowledge Explorer",
     description:
-      "Projectr and the Knowledge Explorer family can test a small recurring-software business around searchable, source-linked, persistent knowledge rather than a large enterprise SaaS motion.",
+      "Projectr and the Knowledge Explorer family can test paid knowledge software around searchable, source-linked, persistent knowledge. Subscription, seat-based, paid-tooling, or other lightweight software revenue should follow demonstrated use rather than be assumed in advance.",
     nextEvidence:
       "Repeated voluntary use first, then willingness to pay, retention, and only afterward broader packaging.",
     href: "/products/youtube-knowledge-explorer",
