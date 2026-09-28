@@ -16,8 +16,8 @@ const PROBLEM_ROWS = [
 const PROBLEM_ORDER = PROBLEM_ROWS.flat();
 
 const GRAPH_WIDTH = 1200;
-const PROBLEM_ROW_Y = [58, 158] as const;
-const AUDIENCE_Y = 458;
+const PROBLEM_ROW_Y = [48, 132] as const;
+const AUDIENCE_Y = 294;
 
 const TONE = {
   blue: { accent: "#2d6fc4", wash: "#eef4fb" },
@@ -127,6 +127,15 @@ function buildGraphElements() {
   });
 
   const audiencePositions = new Map<AppliedAudienceId, { x: number; y: number }>();
+  const audienceSources = new Map<AppliedAudienceId, number[]>();
+
+  appliedWorkGoodFit.forEach((signal, problemIndex) => {
+    signal.audiences.forEach((audienceId) => {
+      const sources = audienceSources.get(audienceId) ?? [];
+      sources.push(problemIndex);
+      audienceSources.set(audienceId, sources);
+    });
+  });
 
   appliedWorkAudiences.forEach((audience, audienceIndex) => {
     const position = {
@@ -158,13 +167,26 @@ function buildGraphElements() {
 
     if (!source) return;
 
-    orderAudiences(signal.audiences).forEach((audienceId) => {
+    const orderedTargets = orderAudiences(signal.audiences);
+
+    orderedTargets.forEach((audienceId, relationIndex) => {
       const audience = appliedWorkAudiences.find(
         (candidate) => candidate.id === audienceId,
       );
       const target = audiencePositions.get(audienceId);
+      const inboundSources = [...(audienceSources.get(audienceId) ?? [])].sort(
+        (left, right) =>
+          (problemPositions.get(left)?.x ?? 0) -
+          (problemPositions.get(right)?.x ?? 0),
+      );
+      const inboundIndex = inboundSources.indexOf(problemIndex);
 
       if (!audience || !target) return;
+
+      const sourcePort =
+        30 + ((relationIndex + 1) * 40) / (orderedTargets.length + 1);
+      const targetPort =
+        30 + ((inboundIndex + 1) * 40) / (inboundSources.length + 1);
 
       elements.push({
         data: {
@@ -173,8 +195,10 @@ function buildGraphElements() {
           target: audienceNodeId(audienceId),
           tone: audience.tone,
           kind: "relation",
-          bend: clamp((target.x - source.x) * 0.055, -46, 46),
-          weight: rowIndex === 0 ? 0.67 : 0.57,
+          bend: clamp((target.x - source.x) * 0.11, -92, 92),
+          weight: rowIndex === 0 ? 0.57 : 0.48,
+          sourcePort: sourcePort.toFixed(1) + "% 100%",
+          targetPort: targetPort.toFixed(1) + "% 0%",
         },
         classes: "relation",
       });
@@ -294,31 +318,37 @@ export function AppliedWorkFitGraph() {
             {
               selector: "node.problem",
               style: {
-                width: 264,
-                height: 84,
+                width: 270,
+                height: 72,
                 shape: "rectangle",
-                "background-color": "#ffffff",
+                "background-color": "#fbfcfe",
                 "background-image": "data(icon)",
                 "background-fit": "none",
-                "background-width": 64,
-                "background-height": 64,
-                "background-position-x": "12%",
+                "background-width": 54,
+                "background-height": 54,
+                "background-position-x": "11%",
                 "background-position-y": "50%",
                 "background-repeat": "no-repeat",
-                "border-width": 1.35,
+                "border-width": 1.05,
                 "border-color": "#aebdce",
                 label: "data(label)",
                 color: "#071a3d",
                 "font-family": 'Georgia, "Times New Roman", serif',
-                "font-size": 14,
-                "font-weight": 600,
+                "font-size": 13.25,
+                "font-weight": 500,
                 "text-wrap": "wrap",
-                "text-max-width": 184,
+                "text-max-width": 172,
                 "text-valign": "center",
                 "text-halign": "center",
                 "text-justification": "center",
-                "text-margin-x": 34,
-                "line-height": 1.2,
+                "text-margin-x": 44,
+                "line-height": 1.17,
+                "background-image-opacity": 0.7,
+                "shadow-blur": 7,
+                "shadow-opacity": 0.08,
+                "shadow-offset-x": 0,
+                "shadow-offset-y": 2,
+                "shadow-color": "#071a3d",
                 "z-index": 10,
               },
             },
@@ -337,31 +367,37 @@ export function AppliedWorkFitGraph() {
             {
               selector: "node.audience",
               style: {
-                width: 174,
-                height: 68,
+                width: 178,
+                height: 58,
                 shape: "rectangle",
                 "background-color": "#ffffff",
                 "background-image": "data(icon)",
                 "background-fit": "none",
-                "background-width": 46,
-                "background-height": 46,
-                "background-position-x": "13%",
+                "background-width": 38,
+                "background-height": 38,
+                "background-position-x": "12%",
                 "background-position-y": "50%",
                 "background-repeat": "no-repeat",
-                "border-width": 1.2,
+                "border-width": 1,
                 "border-color": "#aebdce",
                 label: "data(label)",
                 color: "#071a3d",
                 "font-family": 'Georgia, "Times New Roman", serif',
-                "font-size": 12.25,
+                "font-size": 11.6,
                 "font-weight": 600,
                 "text-wrap": "wrap",
-                "text-max-width": 108,
+                "text-max-width": 110,
                 "text-valign": "center",
                 "text-halign": "center",
                 "text-justification": "center",
-                "text-margin-x": 24,
-                "line-height": 1.16,
+                "text-margin-x": 23,
+                "line-height": 1.14,
+                "background-image-opacity": 0.76,
+                "shadow-blur": 6,
+                "shadow-opacity": 0.07,
+                "shadow-offset-x": 0,
+                "shadow-offset-y": 2,
+                "shadow-color": "#071a3d",
                 "z-index": 10,
               },
             },
@@ -410,36 +446,62 @@ export function AppliedWorkFitGraph() {
             {
               selector: "edge.relation",
               style: {
-                width: 1.35,
-                opacity: 0.52,
+                width: 1.18,
+                opacity: 0.44,
                 "curve-style": "unbundled-bezier",
                 "control-point-distances": "data(bend)",
                 "control-point-weights": "data(weight)",
+                "source-endpoint": "data(sourcePort)",
+                "target-endpoint": "data(targetPort)",
                 "line-color": TONE.blue.accent,
-                "target-arrow-shape": "none",
-                "source-arrow-shape": "none",
+                "source-arrow-color": TONE.blue.accent,
+                "target-arrow-color": TONE.blue.accent,
+                "source-arrow-shape": "circle",
+                "target-arrow-shape": "circle",
+                "arrow-scale": 0.42,
+                "line-cap": "round",
                 "z-index": 1,
               },
             },
             {
               selector: 'edge.relation[tone = "gold"]',
-              style: { "line-color": TONE.gold.accent },
+              style: {
+                "line-color": TONE.gold.accent,
+                "source-arrow-color": TONE.gold.accent,
+                "target-arrow-color": TONE.gold.accent,
+              },
             },
             {
               selector: 'edge.relation[tone = "green"]',
-              style: { "line-color": TONE.green.accent },
+              style: {
+                "line-color": TONE.green.accent,
+                "source-arrow-color": TONE.green.accent,
+                "target-arrow-color": TONE.green.accent,
+              },
             },
             {
               selector: 'edge.relation[tone = "orange"]',
-              style: { "line-color": TONE.orange.accent },
+              style: {
+                "line-color": TONE.orange.accent,
+                "source-arrow-color": TONE.orange.accent,
+                "target-arrow-color": TONE.orange.accent,
+              },
             },
             {
               selector: 'edge.relation[tone = "teal"]',
-              style: { "line-color": TONE.teal.accent },
+              style: {
+                "line-color": TONE.teal.accent,
+                "source-arrow-color": TONE.teal.accent,
+                "target-arrow-color": TONE.teal.accent,
+              },
             },
             {
               selector: 'edge.relation[tone = "indigo"]',
-              style: { "line-color": TONE.indigo.accent },
+              style: {
+                "line-color": TONE.indigo.accent,
+                "source-arrow-color": TONE.indigo.accent,
+                "target-arrow-color": TONE.indigo.accent,
+              },
             },
           ],
         });

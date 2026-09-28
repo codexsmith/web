@@ -63,7 +63,7 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  margin-top: 18px;
+  margin-top: 14px;
   padding: 7px 0 4px;
   border-bottom: 1px solid var(--old-gold-bright);
   color: #fff;
@@ -133,8 +133,8 @@
 
 .appliedFitGraphShell {
   position: relative;
-  min-height: 522px;
-  padding: 8px 10px 10px;
+  min-height: 350px;
+  padding: 6px 8px 8px;
   border: 1px solid rgba(7,26,61,.15);
   background: rgba(255,255,255,.42);
   box-shadow:
@@ -145,12 +145,12 @@
 
 .appliedFitGraphCanvas {
   width: 100%;
-  height: 502px;
+  height: 336px;
 }
 
 .appliedFitGraphLoading {
   position: absolute;
-  inset: 8px 10px 10px;
+  inset: 6px 8px 8px;
   display: grid;
   place-items: center;
   background: rgba(239,244,249,.82);
@@ -197,13 +197,13 @@
   --relation-accent: var(--osha-blue);
   min-width: 0;
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-columns: 42px minmax(0, 1fr);
   gap: 8px;
   align-items: center;
-  margin-bottom: 7px;
-  padding: 6px 12px 6px 8px;
+  margin-bottom: 6px;
+  padding: 6px 11px 6px 8px;
   border: 1px solid var(--bfux-panel-edge-dark);
-  border-left: 6px solid var(--relation-accent);
+  border-left: 5px solid var(--relation-accent);
   background:
     linear-gradient(180deg, rgba(255,255,255,.98), color-mix(in srgb, var(--relation-accent) 7%, #f4f7fa));
   box-shadow:
@@ -219,8 +219,8 @@
 }
 
 .appliedFitCardIcon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: block;
   background-position: center;
   background-repeat: no-repeat;
@@ -231,8 +231,8 @@
   margin: 0;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: .9rem;
-  font-weight: 600;
+  font-size: .88rem;
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -241,7 +241,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin: 2px 0 0 54px;
+  margin: 2px 0 0 50px;
 }
 
 .appliedFitRelationLabels > span {
@@ -266,12 +266,12 @@
 .appliedAudienceNode {
   --relation-accent: var(--osha-blue);
   min-width: 0;
-  min-height: 72px;
+  min-height: 64px;
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr);
+  grid-template-columns: 40px minmax(0, 1fr);
   gap: 10px;
   align-items: center;
-  padding: 7px 10px;
+  padding: 6px 9px;
   border: 1px solid var(--bfux-panel-edge-dark);
   border-left: 5px solid var(--relation-accent);
   background:
