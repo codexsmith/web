@@ -61,10 +61,17 @@ function AudienceJourneyDetail({ journey }: { journey: AudienceJourney }) {
         ))}
       </ol>
 
-      <Link className={styles.action} href={journey.action.href}>
-        {journey.action.label}
-        <span aria-hidden="true">→</span>
-      </Link>
+      {journey.action.href.startsWith("mailto:") ? (
+        <a className={styles.action} href={journey.action.href}>
+          {journey.action.label}
+          <span aria-hidden="true">→</span>
+        </a>
+      ) : (
+        <Link className={styles.action} href={journey.action.href}>
+          {journey.action.label}
+          <span aria-hidden="true">→</span>
+        </Link>
+      )}
     </div>
   );
 }
