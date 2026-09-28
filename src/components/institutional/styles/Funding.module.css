@@ -100,9 +100,10 @@
 }
 
 .fundingLaneTopline {
+  min-height: 2.3em;
   color: var(--royal-blue-deep);
-  font: 800 clamp(.64rem, .72vw, .74rem)/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .1em;
+  font: 800 clamp(.68rem, .76vw, .8rem)/1.25 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .09em;
 }
 
 .fundingLaneTopline small {
@@ -112,16 +113,8 @@
   letter-spacing: inherit;
 }
 
-.fundingLaneModel {
-  margin: 24px 0 7px;
-  color: #52627b;
-  font: 800 clamp(.68rem, .78vw, .8rem)/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
 .fundingLaneCard h3 {
-  margin: 0 0 9px;
+  margin: 20px 0 9px;
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.45rem;
@@ -151,7 +144,7 @@
   line-height: 1.3;
 }
 
-.fundingLaneCard > p:not(.fundingLaneModel) {
+.fundingLaneCard > p {
   margin: 10px 0 16px;
   color: #52627b;
   font-size: .75rem;
