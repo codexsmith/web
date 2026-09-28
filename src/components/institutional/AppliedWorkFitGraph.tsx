@@ -81,10 +81,10 @@ function clamp(value: number, minimum: number, maximum: number) {
 function iconDataUri(body: string, tone: RelationTone) {
   const palette = TONE[tone];
   const svg =
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 44 44">' +
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">' +
     '<g fill="none" stroke="' +
     palette.accent +
-    '" stroke-opacity=".82" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.8 -0.8)">' +
+    '" stroke-opacity=".82" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">' +
     body +
     "</g></svg>";
 
