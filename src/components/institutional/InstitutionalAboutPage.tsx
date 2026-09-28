@@ -38,9 +38,17 @@ export function InstitutionalAboutPage() {
           <div className={styles.aboutOperatingCopy}>
             <p>
               Boundary First Labs is a solo, technical-founder-led applied systems laboratory
-              and business: AI-enabled, digital-first, and engineered as an executable
-              institutional machine. It studies how complex systems are represented,
-              transformed, tested, measured, repaired, and made operational.
+              and business: AI-enabled, digital-native, and engineered as an executable
+              institutional machine. It was not first built as a conventional institution and
+              later mirrored in software; its institutional machinery is computationally
+              represented by construction.
+            </p>
+            <p>
+              That makes the Lab different from a digital twin. A twin is a representation of
+              something that exists elsewhere. Here, governed state, provenance, work,
+              experiments, claims, authority, validation, and projection are part of how the
+              institution operates. Websites, dashboards, reports, graphs, and simulations are
+              projections over that state rather than substitutes for it.
             </p>
             <p>
               The organization itself is part of the engineering problem. Research lanes,
