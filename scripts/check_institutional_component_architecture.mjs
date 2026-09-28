@@ -967,7 +967,7 @@ expect(publicStateProjection.includes('"labRevision": "4be0a745d4e6f8148495c75ba
 expect(publicStateProjection.includes('"projectionStatus": "initial_manual_seed"'), "Public state seed must disclose that cross-repo automation is not wired yet");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-001"'), "Public timeline projection must use durable Timeline identities");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-005"'), "Public timeline projection must preserve the current five-event seed boundary");
-expect(labThroughTimePage.includes("This five-event public projection is only a seed."), "Lab Through Time must disclose the incomplete seed boundary");
+expect(labThroughTimePage.includes("The point is continuity, not completeness."), "Lab Through Time must disclose the incomplete seed boundary without repeating projection jargon");
 expect(labThroughTimePage.includes('<TemporalViewNav activeView="timeline"'), "Lab Through Time must participate in the shared temporal navigation");
 expect(labThroughTimePage.includes("Milestones, not a long changelog."), "Lab Through Time must preserve the long-horizon materiality boundary");
 expect(labThroughTimeRoute.includes('canonical: "/lab-through-time"'), "Lab Through Time must declare the canonical public route");
@@ -986,12 +986,17 @@ for (const [name, source] of [
 expect(nowPageForChanges.includes("<NowPriorityExplorer"), "Now must collapse priority detail into the reflow explorer");
 expect(changesPage.includes("<ChangesExplorer"), "What Changed must collapse delta detail into the reflow explorer");
 expect(labThroughTimePage.includes("<LabTimelineExplorer"), "Lab Through Time must collapse provenance detail into the reflow explorer");
-expect(labThroughTimePage.includes("Accumulated practice + research"), "Lab Through Time must expose the pre-acceleration substrate");
-expect(labThroughTimePage.includes("Commercial AI increases throughput"), "Lab Through Time must expose the computational acceleration boundary");
-expect(labThroughTimePage.includes("Computationally leveraged micro-lab"), "Lab Through Time must connect acceleration to the current operating model");
+expect(labTimelineExplorer.includes("See before / after"), "Lab Through Time milestone cards must advertise useful before/after detail");
+expect(labTimelineExplorer.includes("<strong>Before:</strong>"), "Lab Through Time expanded milestones must explain the before state");
+expect(labTimelineExplorer.includes("<strong>After:</strong>"), "Lab Through Time expanded milestones must explain the after state");
+expect(!labTimelineExplorer.includes("DURABLE EVENT"), "Lab Through Time expanded milestones must not expose registry metadata as primary reader content");
+expect(!labTimelineExplorer.includes("SOURCE EVENT"), "Lab Through Time expanded milestones must not expose source IDs as primary reader content");
+expect(labThroughTimePage.includes("Research + systems practice already existed."), "Lab Through Time must expose the pre-acceleration substrate");
+expect(labThroughTimePage.includes("AI lowers the cost of working across the corpus."), "Lab Through Time must expose the computational acceleration boundary");
+expect(labThroughTimePage.includes("One founder can operate a wider surface."), "Lab Through Time must connect acceleration to the current operating model");
 expect(labThroughTimePage.includes("COMPUTATIONAL CAPABILITY"), "Lab Through Time must distinguish machine capability from authority");
 expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must preserve the founder authority boundary");
-expect(labThroughTimePage.includes("Boundary First Labs became practical when decades of accumulated research"), "Lab Through Time hero must explain why the current Lab exists now");
+expect(labThroughTimePage.includes("Five milestones mark the route from early experimental work"), "Lab Through Time hero must explain the bounded continuity story without repeating the acceleration section");
 expect(!labThroughTimePage.includes("continuitySection"), "Lab Through Time must not restore the redundant continuity interstitial");
 expect(!labThroughTimePage.includes("NEXT PROJECTION WORK"), "Lab Through Time must keep projection backlog out of the public narrative flow");
 expect(
