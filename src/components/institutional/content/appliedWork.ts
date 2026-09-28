@@ -147,11 +147,28 @@ export const appliedWorkBoundaries = [
 
 export const systemsArchitectureReviewDemo = {
   eyebrow: "SYNTHETIC REVIEW EXAMPLE",
-  title: "A system can be “paid” before it is paid.",
+  setup: [
+    {
+      label: "WHAT THE SOFTWARE EXPOSES",
+      copy:
+        "Imagine an invoice-and-payment workflow that exposes only three statuses to the rest of the organization: APPROVED, PAID, and FAILED.",
+    },
+    {
+      label: "WHAT REALITY CONTAINS",
+      copy:
+        "“PAID” is not one event. Authorization, submission, gateway acknowledgement, settlement, reconciliation, and closure happen separately and may have different owners.",
+    },
+    {
+      label: "WHAT THE REVIEW DOES",
+      copy:
+        "Reconstruct the hidden lifecycle, find where collapsed states can change a consequential decision, then define the smallest repair that makes the system trustworthy again.",
+    },
+  ],
+  title: "The system says PAID before the business process is actually complete.",
   summary:
-    "A synthetic invoice workflow shows the review shape without pretending to be a customer case. Coarse statuses hide consequential transitions, outside repair, and ambiguous completion.",
+    "The problem is not that the three statuses are simple. The problem is that they collapse distinctions that matter to money movement, authority, retry behavior, auditability, and operational closure.",
   question:
-    "What is this representation allowed to forget without changing a consequential decision?",
+    "Which transitions must stay distinct so that “PAID” means what operators, accounting, and downstream systems think it means?",
   coarseStates: ["APPROVED", "PAID", "FAILED"],
   reconstructedStates: [
     "Accounting approved",
