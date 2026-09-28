@@ -24,6 +24,7 @@ const commandPalette = read(`${root}/LabCommandPalette.tsx`);
 const commandPaletteContent = read(`${root}/content/commandPalette.ts`);
 const homePage = read(`${root}/InstitutionalHomePage.tsx`);
 const homeContent = read(`${root}/content/home.ts`);
+const siteContact = read("src/lib/site-contact.ts");
 
 expect(chrome.startsWith('"use client";'), "Institutional chrome must own route/scroll interaction as a client boundary");
 expect(chrome.includes("usePathname"), "Institutional header must derive active navigation from the current route");
@@ -284,7 +285,7 @@ expect(routeRegistry.includes('{ label: "Evidence", href: "/evidence" }'), "foot
 expect(routeRegistry.includes('{ label: "Now", href: "/now" }'), "footer route collection must include Now / Roadmap");
 expect(routeRegistry.includes('{ label: "What changed", href: "/changes" }'), "footer route collection must include What changed");
 expect(routeRegistry.includes('{ label: "Start here", href: "/start" }'), "footer route collection must include Start here");
-expect(routeRegistry.includes('{ label: "Contact", href: "/contact" }'), "footer route collection must include Contact");
+expect(routeRegistry.includes('{ label: "Contact", href: PUBLIC_CONTACT_MAILTO }'), "footer Contact must route directly to the canonical public email");
 
 const childRouteContracts = [
   ["about", ["founder", "labThroughTime", "aiGovernance", "now", "collaboration", "appliedWork"]],
@@ -529,17 +530,19 @@ const openLabApi = read("src/app/api/open-lab/route.ts");
 const openLabRoute = read("src/app/v3/open-lab/page.tsx");
 const environmentExample = read(".env.example");
 expect(openLabPage.includes("childLinks={institutionalChildRoutes.openLab}"), "Open Lab hero must expose its contextual child pages");
-expect(openLabPage.includes("openLabHeroIntake"), "Open Lab must surface Intake Status in the hero");
+expect(openLabPage.includes("openLabHeroIntake"), "Open Lab must surface its direct public contact boundary in the hero");
+expect(openLabPage.includes("PUBLIC_CONTACT_EMAIL"), "Open Lab must expose the canonical public email");
+expect(openLabPage.includes('publicContactMailto("Boundary First Labs — Open Lab")'), "Open Lab contact CTAs must route directly to the canonical email");
+expect(!openLabPage.includes("INTAKE STATUS"), "Open Lab must not expose deployment intake status signage on the public page");
+expect(!openLabPage.includes("collection closed"), "Open Lab must not present contact as closed while email is live");
+expect(!openLabPage.includes("<OpenLabIntakeInstrument"), "Open Lab must not mount the dormant structured intake form while email is the public boundary");
 expect(!openLabPage.includes("ArchitectureProjectionSection"), "Open Lab must not restore the interim Show the Machinery architecture panel while Lab Snapshot is becoming the stronger machinery surface");
 expect(!openLabPage.includes("SHOW THE MACHINERY"), "Open Lab must not restore the retired Show the Machinery section copy");
-expect(!openLabPage.includes('className={styles.openLabAvailability}'), "Open Lab must not keep Intake Status as a body section");
 expect(openLabPage.includes('className={styles.openLabContracts}'), "Open Lab must keep Public Participation directly readable");
-expect(openLabPage.includes("<OpenLabIntakeInstrument"), "Open Lab must compose the governed intake instrument");
 expect(openLabPage.includes("<OpenLabContextSection />"), "Open Lab must compose supporting sections as one context module");
 expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must keep Institutional Promise directly readable");
-expect(openLabPage.includes('/contact?type=open-lab&source=open-lab'), "Open Lab must preserve a conversational path distinct from formal intake");
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
-expect(fs.existsSync(`${root}/OpenLabIntakeInstrument.tsx`), "OpenLabIntakeInstrument must exist as the governed public-intake boundary");
+expect(fs.existsSync(`${root}/OpenLabIntakeInstrument.tsx`), "Dormant governed intake machinery must remain available for later activation");
 
 expect(openLabContent.includes('sourceRevision: "1dbd3f5b53e55c8feff5230836ce11dc928cba69"'), "Open Lab must pin the governing Lab source revision");
 expect(openLabContent.includes('lifecycle: "candidate"'), "Open Lab must preserve the candidate lifecycle of the page projection");
@@ -570,26 +573,11 @@ expect(openLabApi.includes("authorization: `Bearer ${token}`"), "Open Lab receiv
 expect(openLabApi.includes("OL-"), "Open Lab must issue a stable receipt identifier after accepted handoff");
 expect(openLabApi.indexOf("await fetch(receiver") < openLabApi.indexOf("submissionId,\n      state: \"received\""), "Open Lab receipt response must follow receiver acceptance");
 
-expect(openLabIntake.includes("FORMAL INTAKE IS CURRENTLY CLOSED"), "Open Lab UI must make a closed collection boundary explicit in public-facing language");
-expect(openLabIntake.includes("Anonymous / pseudonymous"), "Open Lab must support non-prestige-gated submitter identity");
-expect(openLabIntake.includes("No reply needed"), "Open Lab must support intake without a forced response identity");
-expect(openLabIntake.includes("does not give") && openLabIntake.includes("permission to") && openLabIntake.includes("publish my submission"), "Open Lab must distinguish public-response preference from publication consent");
-expect(openLabIntake.includes("Submission closed"), "Open Lab submit action must visibly close when governance gates are incomplete");
-expect(openLabIntake.includes("What happens after your submission arrives."), "Open Lab must expose the review process in public-facing language");
-expect(openLabIntake.includes("Tell the Lab what you&apos;re bringing."), "Open Lab governed intake must lead with ordinary public-facing language");
-expect(!openLabIntake.includes("Preserve the submission before deciding where it belongs."), "Open Lab intake must not expose internal routing language as its public headline");
-expect(openLabIntake.includes("openLabQuickIntake"), "Open Lab must promote the submission experience ahead of explanatory machinery");
-expect(openLabIntake.indexOf("openLabQuickIntake") < openLabIntake.indexOf("openLabReadiness"), "Open Lab form and route choice must precede governance/readiness detail");
-expect(openLabIntake.includes("Add context or links"), "Open Lab must progressively disclose optional context rather than front-load every field");
-expect(openLabIntake.indexOf('name="publicResponseRequested"') < openLabIntake.indexOf("</details>"), "Open Lab must keep public-response preference inside optional progressive disclosure");
-expect(openLabIntake.includes("AFTER YOU SUBMIT"), "Open Lab must move explanatory routing context after the primary intake experience");
-expect(openLabIntake.includes("HOW THE INTAKE IS GOVERNED"), "Open Lab must keep governance inspectable after the submission surface");
-expect((openLabIntake.match(/<details className=\{styles\.openLabPostIntakeDisclosure\}>/g) ?? []).length === 3, "Open Lab must collapse its three post-intake context sections into native disclosures");
-expect(!openLabIntake.includes('<details className={styles.openLabPostIntakeDisclosure} open'), "Open Lab post-intake disclosures must default closed to keep the submission experience primary");
-expect(openLabIntake.includes("openLabReviewStateList"), "Review-process states must remain inspectable inside the collapsed review section");
-
-expect(openLabRoute.includes("readOpenLabIntakeConfig"), "Open Lab route must derive runtime state from server governance configuration");
-expect(openLabRoute.includes("isOpenLabSubmissionType"), "Open Lab route must deep-link only declared submission types");
+expect(openLabIntake.includes("Anonymous / pseudonymous"), "Dormant Open Lab intake machinery must preserve non-prestige-gated submitter identity");
+expect(openLabIntake.includes("No reply needed"), "Dormant Open Lab intake machinery must support intake without a forced response identity");
+expect(openLabIntake.includes("does not give") && openLabIntake.includes("permission to") && openLabIntake.includes("publish my submission"), "Dormant Open Lab intake machinery must distinguish public-response preference from publication consent");
+expect(openLabRoute.includes("<InstitutionalOpenLabPage />"), "Open Lab route must render the email-first public boundary without deployment-gate branching");
+expect(!openLabRoute.includes("readOpenLabIntakeConfig"), "Open Lab public route must not expose dormant receiver readiness as page state");
 expect(environmentExample.includes("BFL_OPEN_LAB_GOVERNANCE_ACK"), "Open Lab deployment variables must document the governance acknowledgement");
 expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928cba69"), "Open Lab env example must document the exact pinned-source acknowledgement");
 
@@ -674,8 +662,8 @@ expect(appliedWorkContent.includes("NO THEORY BUY-IN REQUIRED"), "Applied Work m
 expect(appliedWorkPage.includes("CONSULTING AVAILABILITY"), "Applied Work must disclose current consulting availability and maturity");
 expect(appliedWorkPage.includes("appliedServiceFamily"), "Applied Work must group concrete offers inside larger service families");
 expect(appliedWorkPage.includes("childLinks={institutionalChildRoutes.appliedWork}"), "Applied Work hero must expose Evidence as a child page");
-expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work'), "Applied Work must expose a contextual Contact route");
-expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work-hero'), "Applied Work hero must expose a direct consulting CTA");
+expect(appliedWorkPage.includes('publicContactMailto("Boundary First Labs — Applied Work")'), "Applied Work CTAs must route directly to the canonical email");
+expect(!appliedWorkPage.includes("/contact?type=applied-work"), "Applied Work must not route consulting CTAs through the web contact form");
 expect(appliedWorkContent.includes("HUMAN AUTHORITY STAYS VISIBLE"), "Applied Work consulting principles must keep human authority explicit");
 expect(!appliedWorkContent.includes("REVIEW IS NOT CERTIFICATION"), "Applied Work must not restore the overlong ten-card boundary set");
 
@@ -767,7 +755,7 @@ expect(nowContent.includes("Audit the population behind the Registrar"), "Now pr
 expect(nowContent.includes("Run the research benchmarks that can falsify the stack"), "Now priorities must include active falsifiable research benchmarking");
 expect(nowContent.includes("Turn mature research into reviewable publication objects"), "Now priorities must include publication conversion");
 expect(nowContent.includes("Independent operation"), "Now roadmap gates must include transfer beyond the founder");
-expect(nowPage.includes('/contact?type=general&source=now'), "Now must expose a contextual Contact route");
+expect(nowPage.includes('publicContactMailto("Boundary First Labs — General inquiry")'), "Now must expose a direct email conversation CTA");
 
 const contactPage = read(`${root}/InstitutionalContactPage.tsx`);
 const contactContent = read(`${root}/content/contact.ts`);
@@ -776,10 +764,13 @@ const inquiryApi = read("src/app/api/inquiry/route.ts");
 expect(contactPage.includes("./content/contact"), "Contact page must own a route-local content model");
 expect(contactPage.includes("Start with what brought you here."), "Contact hero must open with a low-friction invitation");
 expect(contactPage.includes("contactFamilyStack"), "Contact routing must group smaller inquiry routes inside larger families");
-expect(contactPage.includes("<InstitutionalInquiryForm"), "Contact must compose the reusable inquiry form");
-expect(contactPage.includes("EMAIL IS LIVE"), "Contact hero must make the live email route explicit");
+expect(!contactPage.includes("<InstitutionalInquiryForm"), "Contact public page must not mount the dormant web form while email is the canonical route");
+expect(contactPage.includes("DIRECT EMAIL"), "Contact hero must make the direct email route explicit");
 expect(contactPage.includes("PUBLIC_CONTACT_EMAIL"), "Contact must expose the canonical public email address");
-expect(contactPage.includes("contactEmailFallback"), "Contact must provide a live-email fallback when the web form receiver is unavailable");
+expect(contactPage.includes("contactEmailFallback"), "Contact must provide a direct typed email invitation");
+expect(!contactPage.includes("not connected"), "Contact must not display setup-state signage while email is live");
+expect(siteContact.includes('admin@boundaryfirstlabs.com'), "Site contact helper must bind the canonical public email");
+expect(siteContact.includes("publicContactMailto"), "Site contact helper must provide subject-aware mailto routing");
 expect(contactContent.includes("Applied work / consulting"), "Contact must route applied-work inquiries");
 expect(contactContent.includes("Funding / capitalization / sponsorship"), "Contact must route funding inquiries");
 expect(contactContent.includes("Research review / technical critique"), "Contact must route research-review inquiries");
@@ -800,7 +791,7 @@ expect(collaborationPage.includes("smallest useful"), "Collaboration hero must p
 expect(collaborationPage.includes("collaborationOutcomes"), "Collaboration page must state concrete business and funding outcomes");
 expect(collaborationPage.includes("How funding works"), "Collaboration page must give potential funders a direct Funding route");
 expect(collaborationPage.includes("childLinks={institutionalChildRoutes.collaboration}"), "Collaboration hero must expose Applied Work as a child page");
-expect(collaborationPage.includes('/contact?type=collaboration&source=collaboration'), "Collaboration must expose a contextual Contact route");
+expect(collaborationPage.includes('publicContactMailto("Boundary First Labs — Collaboration")'), "Collaboration must expose a direct email CTA");
 
 const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
 const founderCss = read(`${root}/styles/Founder.module.css`);
@@ -822,7 +813,7 @@ expect(fundingPage.includes('className={styles.fundingChannelsSection}'), "Fundi
 expect(fundingPage.includes('className={styles.fundingEvaluation}'), "Funding must expose evaluation and epistemic boundaries directly");
 expect(fundingPage.includes("Capitalize the conversion engine, not the theory."), "Funding hero must state the public funding thesis");
 expect(fundingPage.includes("childLinks={institutionalChildRoutes.funding}"), "Funding hero must expose Applied Work and Evidence as child routes");
-expect(fundingPage.includes('/contact?type=funding&source=funding'), "Funding must expose a contextual Contact route");
+expect(fundingPage.includes('publicContactMailto("Boundary First Labs — Funding")'), "Funding must expose a direct email CTA");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusMachineryPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
@@ -1064,9 +1055,9 @@ for (const audienceId of ["researcher", "engineer", "funder", "collaborator", "c
   expect(audiencesContent.includes(`id: "${audienceId}"`), `Audience traversal must expose ${audienceId}`);
 }
 expect((audiencesContent.match(/id: "/g) ?? []).length >= 7, "Audience traversal must expose all seven declared visitor paths");
-expect(audiencesContent.includes('href: "/contact?type=research-review&source=start-researcher"'), "Researcher path must terminate in typed research-review contact");
-expect(audiencesContent.includes('href: "/contact?type=applied-work&source=start-client"'), "Client path must terminate in typed applied-work contact");
-expect(audiencesContent.includes('href: "/contact?type=funding&source=start-funder"'), "Funder path must terminate in typed funding contact");
+expect(audiencesContent.includes('publicContactMailto("Boundary First Labs — Research review")'), "Researcher path must terminate in direct research-review email");
+expect(audiencesContent.includes('publicContactMailto("Boundary First Labs — Applied Work")'), "Client path must terminate in direct applied-work email");
+expect(audiencesContent.includes('publicContactMailto("Boundary First Labs — Funding")'), "Funder path must terminate in direct funding email");
 expect(audienceGrid.includes("journey.steps.map"), "Audience journey grid must render ordered steps from the shared model");
 expect(audienceGrid.includes("@/components/bfux/ReflowField"), "Audience journey UI must use the BFUX ReflowField primitive");
 expect(audienceGrid.includes("<ReflowField"), "Audience journey UI must expose a shared reflow field");
