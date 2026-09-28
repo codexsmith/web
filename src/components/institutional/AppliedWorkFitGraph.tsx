@@ -81,10 +81,10 @@ function clamp(value: number, minimum: number, maximum: number) {
 function iconDataUri(body: string, tone: RelationTone) {
   const palette = TONE[tone];
   const svg =
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">' +
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 44 44">' +
     '<g fill="none" stroke="' +
     palette.accent +
-    '" stroke-opacity=".82" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">' +
+    '" stroke-opacity=".82" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.8 -0.8)">' +
     body +
     "</g></svg>";
 
@@ -326,8 +326,8 @@ export function AppliedWorkFitGraph() {
                 "background-fit": "none",
                 "background-width": 54,
                 "background-height": 54,
-                "background-position-x": "9.5%",
-                "background-position-y": "47%",
+                "background-position-x": "11%",
+                "background-position-y": "50%",
                 "background-repeat": "no-repeat",
                 "border-width": 1.05,
                 "border-color": "#aebdce",
