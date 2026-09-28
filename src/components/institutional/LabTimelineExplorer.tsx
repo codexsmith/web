@@ -7,9 +7,9 @@ import styles from "./styles/TemporalReflow.module.css";
 const eventNarratives: Record<string, { before: string; after: string }> = {
   "EVENT-TIMELINE-001": {
     before:
-      "The current provenance record has no earlier admitted experimental milestone.",
+      "The fascination of watching a ball curve in flight.",
     after:
-      "The Magnus-effect project provides an early concrete example of turning a physical question into an experiment and preserving it as part of the founder's research formation.",
+      "That curiosity became a concrete Magnus-effect experiment: a physical question turned into something that could be modeled, built, observed, and tested.",
   },
   "EVENT-TIMELINE-002": {
     before:
