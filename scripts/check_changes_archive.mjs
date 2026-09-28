@@ -9,6 +9,9 @@ const changes = read("src/components/institutional/content/changes.ts");
 const explorer = read("src/components/institutional/ChangesExplorer.tsx");
 const page = read("src/components/institutional/InstitutionalChangesPage.tsx");
 const strip = read("src/components/institutional/RecentChangesStrip.tsx");
+const now = read("src/components/institutional/content/now.ts");
+const nowPage = read("src/components/institutional/InstitutionalNowPage.tsx");
+const institutionalReadme = read("src/components/institutional/README.md");
 
 requireText(changes, 'generatedDate: "2026-09-28"', "Changes projection must carry the archive build date");
 requireText(changes, 'webRevision: "e30f35f0fb9cf62f4dc70556e2df6d97c34286e5"', "Changes projection must bind the canonical web head");
@@ -34,4 +37,16 @@ requireText(page, "allChanges.length", "Hero count must describe the complete cu
 requireText(strip, 'href="/changes"', "Recent changes strip must use the canonical archive route");
 if (strip.includes('/v3/changes')) throw new Error("Recent changes strip must not restore the legacy /v3/changes route");
 
-console.log("changes archive contracts: pass");
+requireText(now, 'title: "Close the public and commercial interface"', "Now must expose the current public/commercial closure lane");
+requireText(now, 'title: "Turn four funding lanes into outside evidence"', "Now must expose the four-lane externalization program");
+requireText(now, 'title: "Audit the population behind the Registrar"', "Now must expose the post-census registry population audit");
+requireText(now, 'title: "Run the research benchmarks that can falsify the stack"', "Now must keep falsifiable research benchmarking in the current cycle");
+requireText(now, 'title: "Turn mature research into reviewable publication objects"', "Now must expose publication conversion as a current lane");
+requireText(now, 'title: "Make the executable institution transferable"', "Now must expose transfer beyond founder memory as a roadmap lane");
+requireText(now, "Experiment → Research Lane completeness", "Now must preserve the Experiment-to-Research-Lane completeness invariant");
+requireText(nowPage, "Six priority lanes, each with a closure condition.", "Now page must preserve bounded six-lane public compression");
+requireText(institutionalReadme, "Temporal surface maintenance — Now / What Changed", "Institutional architecture docs must preserve temporal maintenance guidance");
+requireText(institutionalReadme, "manual, source-bound projections", "Temporal maintenance guidance must state the current manual projection boundary");
+requireText(institutionalReadme, "Do not publish branch-local work as completed state.", "What Changed maintenance must reject branch-local completion claims");
+
+console.log("temporal state/archive contracts: pass");
