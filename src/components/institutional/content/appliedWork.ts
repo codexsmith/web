@@ -185,11 +185,6 @@ export const appliedWorkBoundaries = [
 
 export const appliedWorkAudiences = [
   {
-    id: "engineering",
-    label: "CTOs + engineering leaders",
-    tone: "blue",
-  },
-  {
     id: "founders",
     label: "Founders + product teams",
     tone: "gold",
@@ -200,14 +195,19 @@ export const appliedWorkAudiences = [
     tone: "teal",
   },
   {
-    id: "public-interest",
-    label: "Public-interest organizations",
-    tone: "orange",
+    id: "engineering",
+    label: "CTOs + engineering leaders",
+    tone: "blue",
   },
   {
     id: "institutions",
     label: "Institutions with complex workflows",
     tone: "green",
+  },
+  {
+    id: "public-interest",
+    label: "Public-interest organizations",
+    tone: "orange",
   },
   {
     id: "ai",
