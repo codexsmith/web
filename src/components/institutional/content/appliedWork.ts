@@ -74,13 +74,41 @@ export const appliedWorkFamilies = [
 ] as const;
 
 export const appliedWorkGoodFit = [
-  "The system works, but nobody can clearly explain where state, ownership, or responsibility lives.",
-  "A modernization effort keeps moving code without resolving the underlying architecture.",
-  "AI or automation changes who can decide, approve, deny, rank, or act, and governance has not caught up.",
-  "A critical workflow depends on spreadsheets, meetings, memory, or manual glue to preserve context.",
-  "Research or institutional knowledge exists, but provenance, status, handoff, or reproducibility are weak.",
-  "You need a pilot small enough to learn something before committing to a large transformation.",
-  "A local success metric is hiding maintenance, labor, infrastructure, community, resource, or ecological costs outside the frame.",
+  {
+    copy: "Nobody can clearly say who owns what.",
+    tone: "blue",
+    audiences: ["engineering", "institutions", "ai"],
+  },
+  {
+    copy: "The modernization keeps moving, but the architecture does not.",
+    tone: "gold",
+    audiences: ["engineering", "founders"],
+  },
+  {
+    copy: "AI is changing decisions faster than governance can keep up.",
+    tone: "green",
+    audiences: ["engineering", "public-interest", "ai"],
+  },
+  {
+    copy: "Critical work still depends on spreadsheets, meetings, and memory.",
+    tone: "blue",
+    audiences: ["founders", "institutions"],
+  },
+  {
+    copy: "Knowledge exists, but handoff and reproducibility are weak.",
+    tone: "gold",
+    audiences: ["research", "public-interest", "institutions"],
+  },
+  {
+    copy: "You need a pilot before betting on a full transformation.",
+    tone: "green",
+    audiences: ["engineering", "founders", "research"],
+  },
+  {
+    copy: "A local win is hiding bigger costs somewhere else.",
+    tone: "blue",
+    audiences: ["public-interest", "institutions", "ai"],
+  },
 ] as const;
 
 export const appliedWorkOutputs = [
@@ -156,12 +184,36 @@ export const appliedWorkBoundaries = [
 ] as const;
 
 export const appliedWorkAudiences = [
-  "CTOs + engineering leaders",
-  "Founders + product teams",
-  "Research groups",
-  "Public-interest organizations",
-  "Institutions with complex workflows",
-  "Teams deploying consequential AI",
+  {
+    id: "engineering",
+    label: "CTOs + engineering leaders",
+    tone: "blue",
+  },
+  {
+    id: "founders",
+    label: "Founders + product teams",
+    tone: "gold",
+  },
+  {
+    id: "research",
+    label: "Research groups",
+    tone: "teal",
+  },
+  {
+    id: "public-interest",
+    label: "Public-interest organizations",
+    tone: "orange",
+  },
+  {
+    id: "institutions",
+    label: "Institutions with complex workflows",
+    tone: "green",
+  },
+  {
+    id: "ai",
+    label: "Teams deploying consequential AI",
+    tone: "indigo",
+  },
 ] as const;
 
 
