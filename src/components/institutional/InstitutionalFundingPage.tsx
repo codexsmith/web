@@ -70,9 +70,8 @@ export function InstitutionalFundingPage() {
           {fundingLanes.map((lane) => (
             <Link className={styles.fundingLaneCard} href={lane.href} key={lane.title}>
               <div className={styles.fundingLaneTopline}>
-                <small>FUNDING LANE · {lane.shorthand}</small>
+                <small>{lane.eyebrow}</small>
               </div>
-              <p className={styles.fundingLaneModel}>{lane.model}</p>
               <h3>{lane.title}</h3>
               <div className={styles.fundingLaneLead}>
                 <span>CURRENT LEAD OBJECT</span>
