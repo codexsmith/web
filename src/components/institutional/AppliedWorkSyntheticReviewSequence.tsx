@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
+import { publicContactMailto } from "@/lib/site-contact";
 import { systemsArchitectureReviewDemo } from "./content/appliedWork";
 import styles from "./styles/AppliedWork.module.css";
 
@@ -222,9 +222,9 @@ export function AppliedWorkSyntheticReviewSequence() {
 
               <div className={styles.appliedDemoNext}>
                 <p>A review should end with named repairs, bounded options, and handoff-ready artifacts.</p>
-                <Link href="/contact?type=applied-work&source=systems-architecture-demo">
+                <a href={publicContactMailto("Boundary First Labs — Systems / Architecture Review")}>
                   Bring a system to review <span aria-hidden="true">→</span>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
