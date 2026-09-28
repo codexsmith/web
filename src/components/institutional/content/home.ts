@@ -1,3 +1,5 @@
+import { publicContactMailto } from "@/lib/site-contact";
+
 export const capabilityStrip = [
   ["01", "Research & experiments"],
   ["02", "Tools & working systems"],
@@ -66,7 +68,7 @@ export const homeAppliedWorkFeature = {
     "Systems / Architecture Review is the current first-engagement focus. The other two offers remain available when authority/governance or knowledge/provenance is the primary problem.",
   href: "/applied-work",
   cta: "Explore Applied Work",
-  contactHref: "/contact?type=applied-work&source=home-consulting",
+  contactHref: publicContactMailto("Boundary First Labs — Applied Work"),
   contactCta: "Start a conversation",
 } as const;
 
