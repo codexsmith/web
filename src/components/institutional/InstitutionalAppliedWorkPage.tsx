@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AppliedWorkFitGraph } from "./AppliedWorkFitGraph";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -8,130 +9,14 @@ import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./Institutio
 import { formatOrdinal } from "./institutionalFormat";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
-  appliedWorkAudiences,
   appliedWorkBoundaries,
   appliedWorkFamilies,
-  appliedWorkGoodFit,
   appliedWorkOutputs,
   appliedWorkProcess,
   systemsArchitectureReviewDemo,
 } from "./content/appliedWork";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
-
-type AppliedAudienceId = (typeof appliedWorkAudiences)[number]["id"];
-
-// Exact constrained layout for the current 4 + 3 problem rows and 6 audience nodes.
-// The 4! * 3! * 6! = 103,680 legal permutations were scored by pairwise
-// straight-line edge crossings, then total horizontal wire travel.
-// This ordering minimizes that objective while preserving the current row membership.
-const appliedFitProblemLayout = [
-  { problemIndex: 1, slot: 1, x: 150, y: 150 },
-  { problemIndex: 3, slot: 2, x: 450, y: 150 },
-  { problemIndex: 0, slot: 3, x: 750, y: 150 },
-  { problemIndex: 2, slot: 4, x: 1050, y: 150 },
-  { problemIndex: 5, slot: 5, x: 300, y: 314 },
-  { problemIndex: 4, slot: 6, x: 650, y: 314 },
-  { problemIndex: 6, slot: 7, x: 1000, y: 314 },
-] as const;
-
-const appliedFitAudienceAnchors = [100, 300, 500, 700, 900, 1100] as const;
-
-function getAppliedFitProblemAnchor(problemIndex: number) {
-  const layout = appliedFitProblemLayout.find(
-    (candidate) => candidate.problemIndex === problemIndex,
-  );
-
-  if (!layout) {
-    throw new Error(`Missing Applied Work graph layout for problem ${problemIndex}`);
-  }
-
-  return layout;
-}
-
-function orderAppliedFitAudiences(audienceIds: readonly AppliedAudienceId[]) {
-  return [...audienceIds].sort(
-    (left, right) =>
-      appliedWorkAudiences.findIndex((audience) => audience.id === left) -
-      appliedWorkAudiences.findIndex((audience) => audience.id === right),
-  );
-}
-
-function buildAppliedFitRelationPath(
-  problemIndex: number,
-  audienceIndex: number,
-  relationIndex: number,
-  relationCount: number,
-) {
-  const source = getAppliedFitProblemAnchor(problemIndex);
-  const targetX = appliedFitAudienceAnchors[audienceIndex];
-  const targetY = 512;
-  const sourceOffset = (relationIndex - (relationCount - 1) / 2) * 18;
-  const sourceX = source.x + sourceOffset;
-  const firstControlY = source.y + (source.y < 200 ? 132 : 72) + relationIndex * 8;
-  const secondControlY = targetY - 92 - ((problemIndex + relationIndex) % 3) * 16;
-
-  return `M ${sourceX} ${source.y} C ${sourceX} ${firstControlY}, ${targetX} ${secondControlY}, ${targetX} ${targetY}`;
-}
-
-function AppliedAudienceIcon({ kind }: { kind: AppliedAudienceId }) {
-  const common = {
-    viewBox: "0 0 28 28",
-    role: "presentation" as const,
-    "aria-hidden": true,
-  };
-
-  switch (kind) {
-    case "engineering":
-      return (
-        <svg {...common}>
-          <path d="m9 7-5 7 5 7M19 7l5 7-5 7M16.5 5 11.5 23" />
-        </svg>
-      );
-    case "founders":
-      return (
-        <svg {...common}>
-          <circle cx="14" cy="9" r="3" />
-          <circle cx="7.5" cy="11" r="2.3" />
-          <circle cx="20.5" cy="11" r="2.3" />
-          <path d="M8 22c.5-4.2 2.5-6.3 6-6.3s5.5 2.1 6 6.3M2.8 21c.4-3.3 2-5 4.7-5M25.2 21c-.4-3.3-2-5-4.7-5" />
-        </svg>
-      );
-    case "research":
-      return (
-        <svg {...common}>
-          <path d="M6 4.5h11l4 4v9" />
-          <path d="M17 4.5v4h4M6 4.5v19h9" />
-          <circle cx="18.5" cy="18.5" r="4" />
-          <path d="m21.5 21.5 3 3" />
-        </svg>
-      );
-    case "public-interest":
-      return (
-        <svg {...common}>
-          <path d="m4 10 10-5 10 5M6 11h16M7.5 11v10M12 11v10M16 11v10M20.5 11v10M4 23h20" />
-        </svg>
-      );
-    case "institutions":
-      return (
-        <svg {...common}>
-          <rect x="11" y="4" width="6" height="5" rx="1" />
-          <rect x="3" y="19" width="6" height="5" rx="1" />
-          <rect x="11" y="19" width="6" height="5" rx="1" />
-          <rect x="19" y="19" width="6" height="5" rx="1" />
-          <path d="M14 9v5M6 19v-5h16v5M14 14v5" />
-        </svg>
-      );
-    case "ai":
-      return (
-        <svg {...common}>
-          <rect x="5" y="8" width="18" height="14" rx="3" />
-          <path d="M14 4v4M11 4h6M9 15h.01M19 15h.01M10 19h8" />
-          <path d="M5 13H3M25 13h-2" />
-        </svg>
-      );
-  }
-}
 
 export function InstitutionalAppliedWorkPage() {
   return (
@@ -181,100 +66,7 @@ export function InstitutionalAppliedWorkPage() {
 
         <h3 className={styles.appliedFitSubhead}>Common problem patterns</h3>
 
-        <div className={styles.appliedFitMap}>
-          <svg
-            className={styles.appliedFitRelations}
-            viewBox="0 0 1200 606"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            {appliedFitProblemLayout.flatMap(({ problemIndex }) => {
-              const signal = appliedWorkGoodFit[problemIndex];
-              const audienceIds = orderAppliedFitAudiences(signal.audiences);
-
-              return audienceIds.map((audienceId, relationIndex) => {
-                const audienceIndex = appliedWorkAudiences.findIndex(
-                  (audience) => audience.id === audienceId,
-                );
-                const audience = appliedWorkAudiences[audienceIndex];
-
-                return (
-                  <path
-                    data-tone={audience.tone}
-                    d={buildAppliedFitRelationPath(
-                      problemIndex,
-                      audienceIndex,
-                      relationIndex,
-                      audienceIds.length,
-                    )}
-                    key={`${problemIndex}-${audienceId}`}
-                  />
-                );
-              });
-            })}
-          </svg>
-
-          {appliedFitProblemLayout.map(({ problemIndex, slot }) => {
-            const signal = appliedWorkGoodFit[problemIndex];
-            const audienceIds = orderAppliedFitAudiences(signal.audiences);
-
-            return (
-              <article
-                className={styles.appliedFitProblem}
-                data-slot={slot}
-                data-tone={signal.tone}
-                key={signal.copy}
-              >
-                <span className={styles.appliedFitNumber}>
-                  {formatOrdinal(problemIndex)}
-                </span>
-                <p>{signal.copy}</p>
-
-                <div className={styles.appliedFitPorts} aria-hidden="true">
-                  {audienceIds.map((audienceId) => {
-                    const audience = appliedWorkAudiences.find(
-                      (candidate) => candidate.id === audienceId,
-                    );
-
-                    return audience ? (
-                      <span data-tone={audience.tone} key={audience.id} />
-                    ) : null;
-                  })}
-                </div>
-
-                <div className={styles.appliedFitRelationLabels}>
-                  {audienceIds.map((audienceId) => {
-                    const audience = appliedWorkAudiences.find(
-                      (candidate) => candidate.id === audienceId,
-                    );
-
-                    return audience ? (
-                      <span data-tone={audience.tone} key={audience.id}>
-                        {audience.label}
-                      </span>
-                    ) : null;
-                  })}
-                </div>
-              </article>
-            );
-          })}
-
-          <div className={styles.appliedAudienceNodes}>
-            {appliedWorkAudiences.map((audience) => (
-              <article
-                className={styles.appliedAudienceNode}
-                data-tone={audience.tone}
-                key={audience.id}
-              >
-                <span className={styles.appliedAudiencePort} aria-hidden="true" />
-                <span className={styles.appliedAudienceMark} aria-hidden="true">
-                  <AppliedAudienceIcon kind={audience.id} />
-                </span>
-                <strong>{audience.label}</strong>
-              </article>
-            ))}
-          </div>
-        </div>
+        <AppliedWorkFitGraph />
       </section>
 
       <section className={styles.appliedServicesSection}>
