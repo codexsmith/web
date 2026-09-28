@@ -235,6 +235,7 @@ expect(reflowCss.includes('data-reflow-mode="split-focus-rail"'), "rail split-fo
 expect(reflowCss.includes("--reflow-split-rail-rest-span, 30"), "rail split-focus must preserve the canonical 50/50 REST state");
 expect(reflowCss.includes("--reflow-split-rail-selected-span, 52"), "rail split-focus must give the selected card most horizontal bandwidth");
 expect(reflowCss.includes("--reflow-split-rail-peer-span, 8"), "rail split-focus must compress the peer into a narrow book-spine rail");
+expect(reflowCss.includes('grid-template-rows: auto'), "rail split-focus must let content determine row height instead of forcing a full-height track");
 expect(appliedWork.includes("<AppliedWorkEvidenceReflow />"), "Applied Work must compose review evidence and deliverables through one Reflow surface");
 expect(appliedWorkEvidenceReflow.includes('layoutMode="split-focus-rail"'), "Applied Work evidence must use the book-spine rail Reflow preset");
 expect(appliedWorkEvidenceReflow.includes("itemOrder={appliedWorkEvidenceOrder}"), "Applied Work rail split-focus must preserve explicit two-card source order");
@@ -252,7 +253,8 @@ expect(appliedWorkCss.includes('height: clamp(390px, 48vh, 500px)'), "Applied Wo
 expect(appliedWorkCss.includes("font-size: clamp(1.28rem, 1.45vw, 1.55rem)"), "Applied Work book-spine title must use a larger vertical display size");
 expect(appliedWorkEvidenceReflow.includes('title="Systems / Architecture Review"'), "Applied Work review rail must use a short spine-safe title");
 expect(appliedWorkEvidenceReflow.includes('title="Artifacts, not just conversation."'), "Applied Work deliverables rail must use a short spine-safe title");
-expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work selected surfaces must retain the full-height desktop work surface");
+expect(!appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work Reflow must not force viewport-scaled card height");
+expect(!appliedWorkCss.includes("min-height: 560px"), "Applied Work Reflow must not restore a fixed tablet-height floor");
 const representationGapPanel = appliedWorkReviewSequence.slice(
   appliedWorkReviewSequence.indexOf('id="applied-demo-step-1"'),
   appliedWorkReviewSequence.indexOf("ref={stepTwoRef}"),
