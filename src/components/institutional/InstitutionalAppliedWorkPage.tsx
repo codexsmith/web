@@ -21,17 +21,41 @@ const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyle
 
 type AppliedAudienceId = (typeof appliedWorkAudiences)[number]["id"];
 
-const appliedFitProblemAnchors = [
-  { x: 150, y: 150 },
-  { x: 450, y: 150 },
-  { x: 750, y: 150 },
-  { x: 1050, y: 150 },
-  { x: 300, y: 314 },
-  { x: 650, y: 314 },
-  { x: 1000, y: 314 },
+// Exact constrained layout for the current 4 + 3 problem rows and 6 audience nodes.
+// The 4! * 3! * 6! = 103,680 legal permutations were scored by pairwise
+// straight-line edge crossings, then total horizontal wire travel.
+// This ordering minimizes that objective while preserving the current row membership.
+const appliedFitProblemLayout = [
+  { problemIndex: 1, slot: 1, x: 150, y: 150 },
+  { problemIndex: 3, slot: 2, x: 450, y: 150 },
+  { problemIndex: 0, slot: 3, x: 750, y: 150 },
+  { problemIndex: 2, slot: 4, x: 1050, y: 150 },
+  { problemIndex: 5, slot: 5, x: 300, y: 314 },
+  { problemIndex: 4, slot: 6, x: 650, y: 314 },
+  { problemIndex: 6, slot: 7, x: 1000, y: 314 },
 ] as const;
 
 const appliedFitAudienceAnchors = [100, 300, 500, 700, 900, 1100] as const;
+
+function getAppliedFitProblemAnchor(problemIndex: number) {
+  const layout = appliedFitProblemLayout.find(
+    (candidate) => candidate.problemIndex === problemIndex,
+  );
+
+  if (!layout) {
+    throw new Error(`Missing Applied Work graph layout for problem ${problemIndex}`);
+  }
+
+  return layout;
+}
+
+function orderAppliedFitAudiences(audienceIds: readonly AppliedAudienceId[]) {
+  return [...audienceIds].sort(
+    (left, right) =>
+      appliedWorkAudiences.findIndex((audience) => audience.id === left) -
+      appliedWorkAudiences.findIndex((audience) => audience.id === right),
+  );
+}
 
 function buildAppliedFitRelationPath(
   problemIndex: number,
@@ -39,7 +63,7 @@ function buildAppliedFitRelationPath(
   relationIndex: number,
   relationCount: number,
 ) {
-  const source = appliedFitProblemAnchors[problemIndex];
+  const source = getAppliedFitProblemAnchor(problemIndex);
   const targetX = appliedFitAudienceAnchors[audienceIndex];
   const targetY = 512;
   const sourceOffset = (relationIndex - (relationCount - 1) / 2) * 18;
@@ -164,8 +188,11 @@ export function InstitutionalAppliedWorkPage() {
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            {appliedWorkGoodFit.flatMap((signal, problemIndex) =>
-              signal.audiences.map((audienceId, relationIndex) => {
+            {appliedFitProblemLayout.flatMap(({ problemIndex }) => {
+              const signal = appliedWorkGoodFit[problemIndex];
+              const audienceIds = orderAppliedFitAudiences(signal.audiences);
+
+              return audienceIds.map((audienceId, relationIndex) => {
                 const audienceIndex = appliedWorkAudiences.findIndex(
                   (audience) => audience.id === audienceId,
                 );
@@ -178,52 +205,59 @@ export function InstitutionalAppliedWorkPage() {
                       problemIndex,
                       audienceIndex,
                       relationIndex,
-                      signal.audiences.length,
+                      audienceIds.length,
                     )}
                     key={`${problemIndex}-${audienceId}`}
                   />
                 );
-              }),
-            )}
+              });
+            })}
           </svg>
 
-          {appliedWorkGoodFit.map((signal, index) => (
-            <article
-              className={styles.appliedFitProblem}
-              data-problem={index + 1}
-              data-tone={signal.tone}
-              key={signal.copy}
-            >
-              <span className={styles.appliedFitNumber}>{formatOrdinal(index)}</span>
-              <p>{signal.copy}</p>
+          {appliedFitProblemLayout.map(({ problemIndex, slot }) => {
+            const signal = appliedWorkGoodFit[problemIndex];
+            const audienceIds = orderAppliedFitAudiences(signal.audiences);
 
-              <div className={styles.appliedFitPorts} aria-hidden="true">
-                {signal.audiences.map((audienceId) => {
-                  const audience = appliedWorkAudiences.find(
-                    (candidate) => candidate.id === audienceId,
-                  );
+            return (
+              <article
+                className={styles.appliedFitProblem}
+                data-slot={slot}
+                data-tone={signal.tone}
+                key={signal.copy}
+              >
+                <span className={styles.appliedFitNumber}>
+                  {formatOrdinal(problemIndex)}
+                </span>
+                <p>{signal.copy}</p>
 
-                  return audience ? (
-                    <span data-tone={audience.tone} key={audience.id} />
-                  ) : null;
-                })}
-              </div>
+                <div className={styles.appliedFitPorts} aria-hidden="true">
+                  {audienceIds.map((audienceId) => {
+                    const audience = appliedWorkAudiences.find(
+                      (candidate) => candidate.id === audienceId,
+                    );
 
-              <div className={styles.appliedFitRelationLabels}>
-                {signal.audiences.map((audienceId) => {
-                  const audience = appliedWorkAudiences.find(
-                    (candidate) => candidate.id === audienceId,
-                  );
+                    return audience ? (
+                      <span data-tone={audience.tone} key={audience.id} />
+                    ) : null;
+                  })}
+                </div>
 
-                  return audience ? (
-                    <span data-tone={audience.tone} key={audience.id}>
-                      {audience.label}
-                    </span>
-                  ) : null;
-                })}
-              </div>
-            </article>
-          ))}
+                <div className={styles.appliedFitRelationLabels}>
+                  {audienceIds.map((audienceId) => {
+                    const audience = appliedWorkAudiences.find(
+                      (candidate) => candidate.id === audienceId,
+                    );
+
+                    return audience ? (
+                      <span data-tone={audience.tone} key={audience.id}>
+                        {audience.label}
+                      </span>
+                    ) : null;
+                  })}
+                </div>
+              </article>
+            );
+          })}
 
           <div className={styles.appliedAudienceNodes}>
             {appliedWorkAudiences.map((audience) => (
