@@ -100,26 +100,23 @@
 }
 
 .fundingLaneTopline {
-  display: flex;
-  justify-content: space-between;
-  gap: 14px;
-  color: var(--old-gold-dark);
-  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .09em;
+  color: var(--royal-blue-deep);
+  font: 800 clamp(.64rem, .72vw, .74rem)/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
 }
 
 .fundingLaneTopline small {
-  color: #65758c;
+  display: block;
+  color: var(--royal-blue-deep);
   font: inherit;
-  letter-spacing: .08em;
-  text-align: right;
+  letter-spacing: inherit;
 }
 
 .fundingLaneModel {
-  margin: 26px 0 6px;
-  color: #65758c;
-  font: 800 .51rem/1.15 ui-monospace, SFMono-Regular, Menlo, monospace;
-  letter-spacing: .12em;
+  margin: 24px 0 7px;
+  color: #52627b;
+  font: 800 clamp(.68rem, .78vw, .8rem)/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .1em;
   text-transform: uppercase;
 }
 
@@ -132,10 +129,25 @@
   line-height: 1.05;
 }
 
-.fundingLaneCard > strong {
+.fundingLaneLead {
+  display: grid;
+  gap: 6px;
+  margin: 2px 0 0;
+  padding: 11px 12px;
+  border-left: 4px solid var(--old-gold);
+  background: rgba(255,255,255,.68);
+}
+
+.fundingLaneLead > span {
+  color: var(--old-gold-dark);
+  font: 800 .5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .11em;
+}
+
+.fundingLaneLead > strong {
   color: var(--royal-blue-deep);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: .9rem;
+  font-size: .94rem;
   line-height: 1.3;
 }
 
