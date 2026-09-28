@@ -5,6 +5,7 @@ import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/AppliedWork.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
+import { AppliedWorkSyntheticReviewSequence } from "./AppliedWorkSyntheticReviewSequence";
 import { formatOrdinal } from "./institutionalFormat";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
@@ -101,85 +102,7 @@ export function InstitutionalAppliedWorkPage() {
           note={<>Synthetic example, not a customer case. Read the setup first, then follow the analysis from representation gap to repair.</>}
         />
 
-        <div className={styles.appliedDemoSetup} aria-label="Synthetic review setup">
-          {systemsArchitectureReviewDemo.setup.map((item, index) => (
-            <article key={item.label}>
-              <span>{formatOrdinal(index)}</span>
-              <div>
-                <strong>{item.label}</strong>
-                <p>{item.copy}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className={styles.appliedDemoFrame}>
-          <article className={styles.appliedDemoLead}>
-            <span>01 / REPRESENTATION GAP</span>
-            <h3>{systemsArchitectureReviewDemo.title}</h3>
-            <p>{systemsArchitectureReviewDemo.summary}</p>
-            <blockquote>{systemsArchitectureReviewDemo.question}</blockquote>
-
-            <div className={styles.appliedDemoStateCompare}>
-              <div>
-                <small>CURRENT SYSTEM VIEW</small>
-                {systemsArchitectureReviewDemo.coarseStates.map((state) => (
-                  <strong key={state}>{state}</strong>
-                ))}
-              </div>
-              <div>
-                <small>ACTUAL PAYMENT LIFECYCLE</small>
-                {systemsArchitectureReviewDemo.reconstructedStates.map((state) => (
-                  <span key={state}>{state}</span>
-                ))}
-              </div>
-            </div>
-          </article>
-
-          <div className={styles.appliedDemoAnalysis}>
-            <div className={styles.appliedDemoDefects}>
-              <span>02 / WHAT BREAKS WHEN STATES COLLAPSE</span>
-              <div>
-                {systemsArchitectureReviewDemo.defectClasses.map((defect) => (
-                  <article key={defect.title}>
-                    <strong>{defect.title}</strong>
-                    <p>{defect.description}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className={styles.appliedDemoRepair}>
-              <span>03 / REPAIR THE REPRESENTATION</span>
-              <ol>
-                {systemsArchitectureReviewDemo.repairPath.map((step) => (
-                  <li key={step}>{step}</li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.appliedDemoFooter}>
-          <div>
-            <span>WHAT THE REVIEW LEAVES BEHIND</span>
-            <div className={styles.appliedDemoDeliverables}>
-              {systemsArchitectureReviewDemo.deliverables.map((deliverable) => (
-                <strong key={deliverable}>{deliverable}</strong>
-              ))}
-            </div>
-          </div>
-          <div>
-            <span>CLAIM CEILING</span>
-            <p>{systemsArchitectureReviewDemo.claim}</p>
-          </div>
-          <Link
-            className={styles.appliedDemoCta}
-            href="/contact?type=applied-work&source=systems-architecture-demo"
-          >
-            Bring a system to review <span aria-hidden="true">→</span>
-          </Link>
-        </div>
+        <AppliedWorkSyntheticReviewSequence />
       </section>
 
       <section className={styles.appliedOutputsSection}>
