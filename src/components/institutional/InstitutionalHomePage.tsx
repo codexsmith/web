@@ -68,10 +68,10 @@ export function InstitutionalHomePage() {
                 {homeAppliedWorkFeature.cta}
                 <span aria-hidden="true">→</span>
               </Link>
-              <Link className={styles.homeConsultingSecondary} href={homeAppliedWorkFeature.contactHref}>
+              <a className={styles.homeConsultingSecondary} href={homeAppliedWorkFeature.contactHref}>
                 {homeAppliedWorkFeature.contactCta}
                 <span aria-hidden="true">→</span>
-              </Link>
+              </a>
             </div>
           </div>
 
