@@ -132,7 +132,9 @@ export function InstitutionalAiGovernancePage() {
         <h2>Pro-capability. Anti-unaccountable consequence.</h2>
         <p>
           AI can expand what people and small institutions are able to build, inspect,
-          understand, and repair. Consequential authority should remain bounded and answerable.
+          understand, and repair. Boundary First Labs is digital-native, but that does not make
+          it machine-sovereign: capability is not authority, execution is not promotion, and
+          automation is not legitimacy. Consequential authority should remain bounded and answerable.
         </p>
 
         <div className={styles.governanceCloseActions}>
