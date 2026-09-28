@@ -34,6 +34,9 @@ const augusta = fs.readFileSync("src/components/institutional/InstitutionalAugus
 const augustaCycle = fs.readFileSync("src/components/institutional/sections/AugustaCaseCycleSection.tsx", "utf8");
 const augustaCss = fs.readFileSync("src/components/institutional/styles/AugustaMaintenanceDebt.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
+const appliedWork = fs.readFileSync("src/components/institutional/InstitutionalAppliedWorkPage.tsx", "utf8");
+const appliedWorkEvidenceReflow = fs.readFileSync("src/components/institutional/sections/AppliedWorkEvidenceReflow.tsx", "utf8");
+const appliedWorkCss = fs.readFileSync("src/components/institutional/styles/AppliedWork.module.css", "utf8");
 
 const expect = (condition, message) => {
   if (!condition) throw new Error(`BFUX Reflow Field contract failed: ${message}`);
@@ -213,6 +216,21 @@ for (const [name, source] of [
 expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choose Your Own Path through Stewardship as one Reflow field");
 expect(!home.includes("\\n\\n"), "Homepage must not render escaped newline literals around the orientation field");
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
+expect(reflow.includes('type ReflowLayoutMode = "flow" | "focus-stage" | "split-focus"'), "Reflow must expose split-focus as a first-class layout mode");
+expect(reflow.includes('context.layoutMode === "split-focus"'), "split-focus must participate in explicit focus placement state");
+expect(reflowCss.includes('data-reflow-mode="split-focus"'), "split-focus must own shared BFUX geometry instead of route-local width animation");
+expect(reflowCss.includes("--reflow-split-rest-span, 30"), "split-focus REST geometry must divide the field 50/50");
+expect(reflowCss.includes("--reflow-split-selected-span, 45"), "split-focus selected geometry must expand to 75 percent");
+expect(reflowCss.includes("--reflow-split-peer-span, 15"), "split-focus peer geometry must contract to 25 percent");
+expect(appliedWork.includes("<AppliedWorkEvidenceReflow />"), "Applied Work must compose review evidence and deliverables through one Reflow surface");
+expect(appliedWorkEvidenceReflow.includes('layoutMode="split-focus"'), "Applied Work evidence must use the split-focus Reflow type");
+expect(appliedWorkEvidenceReflow.includes("itemOrder={appliedWorkEvidenceOrder}"), "Applied Work split-focus must preserve explicit two-card source order");
+expect((appliedWorkEvidenceReflow.match(/<ReflowFieldItem/g) || []).length === 2, "Applied Work split-focus must contain exactly two cards");
+expect(appliedWorkEvidenceReflow.includes('id="synthetic-review"'), "Applied Work split-focus must retain the Synthetic Review card");
+expect(appliedWorkEvidenceReflow.includes('id="deliverables"'), "Applied Work split-focus must retain the What You Should Get card");
+expect(appliedWorkCss.includes(".appliedWorkEvidenceReflowGrid"), "Applied Work must style its dedicated split-focus field");
+expect(appliedWorkCss.includes("--reflow-split-selected-span: 45"), "Applied Work must retain the canonical 75/25 split-focus expansion");
+expect(appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work split-focus cards must share a full-height desktop work surface");
 expect(reflow.includes('type ReflowRestLayout = "natural" | "rectangle"'), "Reflow must expose an explicit rectangle REST layout rule");
 expect(reflow.includes('restLayout ?? (layoutMode === "focus-stage" ? "rectangle" : "natural")'), "Focus-stage Reflows must tile into a complete rectangle by default");
 expect(reflow.includes("rectangleTileForIndex"), "Rectangle Reflow must compute balanced full-width rows");
