@@ -206,10 +206,11 @@
 
 .appliedFitPorts {
   position: absolute;
-  left: 18px;
+  left: 50%;
   bottom: 12px;
   display: flex;
   gap: 10px;
+  transform: translateX(-50%);
 }
 
 .appliedFitPorts > span,
