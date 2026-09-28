@@ -637,13 +637,22 @@ expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose 
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
 expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose its contextual child pages");
-expect(aboutPage.includes("solo, technical-founder-led applied systems laboratory"), "About hero must define the current solo technical-founder operating model in plain language");
-expect(aboutPage.includes("AI-enabled, digital-first"), "About hero must state the Lab's AI-enabled digital-first posture");
-expect(aboutPage.includes("executable") && aboutPage.includes("institutional machine"), "About hero must describe the Lab as an executable institutional machine");
 expect(aboutPage.includes("fifteen years") && aboutPage.includes("mathematics and physics"), "About hero must preserve the founder-to-lab mathematics and physics convergence");
-expect(aboutPage.includes("repositories, automation, and AI"), "About hero must explain the computational leverage behind the solo operating model");
+expect(aboutPage.includes("className={styles.aboutOperatingModel}"), "About must move the operating-model definition into a dedicated section immediately after the hero");
+expect(aboutPage.includes("solo, technical-founder-led applied systems laboratory"), "About operating-model section must define the current solo technical-founder model in plain language");
+expect(aboutPage.includes("AI-enabled, digital-first"), "About operating-model section must state the Lab's AI-enabled digital-first posture");
+expect(aboutPage.includes("executable") && aboutPage.includes("institutional machine"), "About operating-model section must describe the Lab as an executable institutional machine");
+expect(aboutPage.includes("repositories, automation, and AI"), "About operating-model section must explain the computational leverage behind the solo model");
+expect(aboutPage.includes("fourth startup its founder has been involved in"), "About operating-model section must preserve the founder's fourth-startup context");
+expect(
+  aboutPage.indexOf("</InstitutionalRouteHero>") <
+    aboutPage.indexOf("className={styles.aboutOperatingModel}") &&
+    aboutPage.indexOf("className={styles.aboutOperatingModel}") <
+      aboutPage.indexOf("<AboutReflowGroups />"),
+  "About operating model must sit directly between the hero and the Reflow chapters",
+);
 expect(!aboutPage.includes("A laboratory for the machinery beneath knowledge."), "About must not restore the retired generic machinery-beneath-knowledge headline");
-expect(!aboutPage.includes("THE LAB IN ONE SENTENCE"), "About must not duplicate the hero identity in a closing one-sentence section");
+expect(!aboutPage.includes("THE LAB IN ONE SENTENCE"), "About must not duplicate the institutional identity in a closing one-sentence section");
 expect(aboutPage.includes("<AboutReflowGroups />"), "About page must delegate grouped doctrine to the Reflow section component");
 expect(fs.existsSync(`${root}/sections/AboutReflowGroups.tsx`), "AboutReflowGroups must exist as the About doctrine composition boundary");
 const aboutGroups = read(`${root}/sections/AboutReflowGroups.tsx`);
