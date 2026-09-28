@@ -90,7 +90,7 @@ export function OpenLabContextSection() {
           styles={styles}
           eyebrow={<>OPEN LAB CONTEXT</>}
           title={<>The governance machinery around a permeable boundary.</>}
-          note={<>Public participation stays visible; these supporting rules explain how intake, routing, stewardship, and transfer remain bounded.</>}
+          note={<>Public participation stays simple at the boundary; these supporting rules explain how stewardship and transfer stay bounded as a relationship deepens.</>}
         />
 
         <ReflowField
@@ -130,15 +130,16 @@ export function OpenLabContextSection() {
             id="stewardship"
             label="Stewardship Begins at Collection"
             eyebrow="STEWARDSHIP BEGINS AT COLLECTION"
-            title="Intake creates obligations before it creates opportunities."
-            description="Collection should not go live until privacy, consent, retention, security, moderation, and response controls are ready."
+            title="Collection creates obligations before it creates opportunities."
+            description="Any structured collection path should make privacy, consent, retention, security, moderation, and response controls explicit."
             className={styles.openLabContextStewardship}
             tone="stewardship"
           >
             <div className={styles.openLabContextDetail}>
               <p>
-                The site should not invite disclosure merely because a form can technically
-                accept it. These controls must exist before public submission goes live.
+                Email is the current first-contact boundary. If a relationship moves into
+                structured collection or review, these controls should be established before
+                asking for more material.
               </p>
               <div className={styles.openLabGateGrid}>
                 {stewardshipGates.map((gate, index) => (
