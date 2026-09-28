@@ -21,24 +21,6 @@ export function InstitutionalAboutPage() {
               Boundary First Labs grew out of the convergence.
             </>
           }
-          lead={
-            <>
-              Boundary First Labs is a solo, technical-founder-led applied systems laboratory
-              and business: AI-enabled, digital-first, and engineered as an executable
-              institutional machine. It studies how complex systems are represented,
-              transformed, tested, measured, repaired, and made operational.
-            </>
-          }
-          support={
-            <>
-              The organization itself is part of the engineering problem. Research lanes,
-              claims, experiments, software, products, provenance, work state, and authority
-              are represented as inspectable objects that repositories, automation, and AI
-              agents can help operate. That lets one founder work across an unusually broad
-              surface without pretending the machine replaces human judgment, scientific
-              validation, promotion authority, or external accountability.
-            </>
-          }
           childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
@@ -46,6 +28,36 @@ export function InstitutionalAboutPage() {
             What happens to human agency when a system&apos;s representation becomes operational?
           </blockquote>
         </InstitutionalRouteHero>
+
+        <section className={styles.aboutOperatingModel}>
+          <div className={styles.aboutOperatingLead}>
+            <p className={styles.sectionIndex}>THE OPERATING MODEL</p>
+            <h2>Solo by headcount. Institutional by design.</h2>
+          </div>
+
+          <div className={styles.aboutOperatingCopy}>
+            <p>
+              Boundary First Labs is a solo, technical-founder-led applied systems laboratory
+              and business: AI-enabled, digital-first, and engineered as an executable
+              institutional machine. It studies how complex systems are represented,
+              transformed, tested, measured, repaired, and made operational.
+            </p>
+            <p>
+              The organization itself is part of the engineering problem. Research lanes,
+              claims, experiments, software, products, provenance, work state, and authority
+              are represented as inspectable objects that repositories, automation, and AI
+              agents can help operate. That lets one founder work across an unusually broad
+              surface without pretending the machine replaces human judgment, scientific
+              validation, promotion authority, or external accountability.
+            </p>
+            <p>
+              Boundary First Labs is the fourth startup its founder has been involved in.
+              Earlier startup work supplied practical experience with product formation,
+              technical delivery, customer-facing systems, and the difference between having
+              an idea and building an institution that can repeatedly execute on it.
+            </p>
+          </div>
+        </section>
 
         <AboutReflowGroups />
 
