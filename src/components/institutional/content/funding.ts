@@ -1,3 +1,50 @@
+export const fundingLanes = [
+  {
+    model: "Professional services",
+    shorthand: "B2B",
+    title: "Applied systems work",
+    example: "Systems / Architecture Review",
+    description:
+      "Bounded reviews, diagnostics, implementation, and follow-on work can generate near-term earned revenue while producing external case evidence.",
+    nextEvidence:
+      "A paid bounded engagement, repeat work, or clear negative market evidence.",
+    href: "/applied-work",
+  },
+  {
+    model: "Consumer + partner products",
+    shorthand: "B2C / B2B2C",
+    title: "Chess, sports, and games",
+    example: "Boundary-First Chess",
+    description:
+      "Books, teaching products, licensing, partnerships, and adjacent sports/game formats can sell directly to people or reach them through organizations and distribution partners.",
+    nextEvidence:
+      "Preorders, sales, licensing interest, partner pilots, repeat use, or a decision to narrow the lane.",
+    href: "/products/boundary-first-chess",
+  },
+  {
+    model: "Lightweight recurring software",
+    shorthand: "SaaS-LITE",
+    title: "Projectr / Knowledge Explorer",
+    example: "YouTube Knowledge Explorer",
+    description:
+      "Projectr and the Knowledge Explorer family can test a small recurring-software business around searchable, source-linked, persistent knowledge rather than a large enterprise SaaS motion.",
+    nextEvidence:
+      "Repeated voluntary use first, then willingness to pay, retention, and only afterward broader packaging.",
+    href: "/products/youtube-knowledge-explorer",
+  },
+  {
+    model: "Research funding",
+    shorthand: "GRANTS / SPONSORED RESEARCH",
+    title: "Weather and public-interest research",
+    example: "Boundary First Weather",
+    description:
+      "Weather provides a concrete scientific and computational testbed for grants, sponsored research, public-interest partnerships, open infrastructure, and external scientific collaboration.",
+    nextEvidence:
+      "Submitted programs, funding dispositions, external collaborators, independent review, and usable research artifacts.",
+    href: "/products/boundary-first-weather",
+  },
+] as const;
+
 export const fundingConversionStages = [
   {
     title: "Existing productive inventory",
