@@ -995,14 +995,16 @@ expect(!labThroughTimePage.includes("continuitySection"), "Lab Through Time must
 expect(!labThroughTimePage.includes("NEXT PROJECTION WORK"), "Lab Through Time must keep projection backlog out of the public narrative flow");
 expect(
   labThroughTimePage.indexOf("<LabTimelineExplorer") <
-    labThroughTimePage.indexOf('className={styles.accelerationSection}'),
-  "Lab Through Time must flow from the durable timeline into the acceleration boundary",
+    labThroughTimePage.indexOf("<ProvenanceArtifactGallery") &&
+    labThroughTimePage.indexOf("<ProvenanceArtifactGallery") <
+      labThroughTimePage.indexOf('className={styles.accelerationSection}'),
+  "Lab Through Time must flow from the durable timeline through the research-room evidence panel into the acceleration boundary",
 );
 
 const provenanceArtifactGallery = read(`${root}/ProvenanceArtifactGallery.tsx`);
 const provenanceStillStrip = read(`${root}/ProvenanceStillStrip.tsx`);
 const labThroughTimeCss = read(`${root}/styles/LabThroughTime.module.css`);
-expect(!labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must not render the public provenance image gallery");
+expect(labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must render the bounded research-room evidence panel");
 expect(publicStateContent.includes("provenanceGallery"), "Public-state projection must type the provenance gallery");
 expect(publicStateProjection.includes('"publicClaim": "A substantial pre-AI room-scale research environment existed."'), "Provenance projection must preserve the adjudicated narrow public claim");
 expect(publicStateProjection.includes('"claimCeiling": "The media establishes scale, organization, and chronology of work.'), "Provenance projection must preserve the media authority ceiling");
@@ -1018,9 +1020,14 @@ for (const artifactPath of [
 ]) {
   expect(publicStateProjection.includes(artifactPath), "Provenance projection must include " + artifactPath);
 }
-expect(provenanceArtifactGallery.includes("next/image"), "Provenance gallery must use Next Image for public artifacts");
-expect(provenanceArtifactGallery.includes("WHAT THIS ESTABLISHES"), "Provenance gallery must separate evidence role from interpretation");
+expect(provenanceStillStrip.includes("next/image"), "Research-room survey must use Next Image for public artifacts");
+expect(provenanceArtifactGallery.includes("WHAT THE IMAGES ESTABLISH"), "Research-room panel must separate evidence role from interpretation");
 expect(provenanceArtifactGallery.includes("<ProvenanceStillStrip"), "Featured room provenance must use the stitched derived-video still strip");
+expect(provenanceArtifactGallery.includes('artifact.id === "ARTIFACT-PROV-ROOM-SURVEY"'), "Lab Through Time provenance panel must be bounded to the research-room survey");
+expect(!provenanceArtifactGallery.includes("provenanceGallery.artifacts.map"), "Lab Through Time must not restore the broad multi-artifact provenance gallery");
+expect(!provenanceArtifactGallery.includes("NEXT PROVENANCE STRATA"), "Research-room panel must not restore provenance-backlog copy");
+expect(provenanceArtifactGallery.includes("The research had a room before it had a Lab."), "Research-room panel must keep the concise physical-history framing");
+expect(provenanceStillStrip.includes("caption ?? sequence.note"), "Research-room still strip must allow concise reader-facing captioning");
 expect(!provenanceArtifactGallery.includes("github.com"), "Public provenance gallery must not expose private-repository URLs");
 expect(!provenanceArtifactGallery.includes("Inspect source"), "Public provenance gallery must not render private source-inspection links");
 expect(!provenanceArtifactGallery.includes("PUBLIC USE"), "Public provenance cards must not render internal public-use adjudication rows");
