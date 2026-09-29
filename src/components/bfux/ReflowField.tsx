@@ -20,7 +20,7 @@ import {
 } from "motion/react";
 import styles from "./ReflowField.module.css";
 
-type ReflowLayoutMode = "flow" | "focus-stage";
+type ReflowLayoutMode = "flow" | "focus-stage" | "split-focus" | "split-focus-rail";
 type ReflowRestLayout = "natural" | "rectangle";
 
 type ReflowFieldContextValue = {
@@ -155,6 +155,10 @@ const detailTransition = {
  * Focus-stage rests tile into a closed rectangle by default.
  * Selected content owns the first row; compact peers follow beneath it.
  * Focus peers use one row through four peers, then balanced rows of at most four.
+ * Split-focus is a two-card horizontal mode: cards split the field at rest,
+ * then the selected card expands in place while its companion compresses.
+ * Split-focus-rail preserves that REST state but compresses the companion into
+ * a narrow book-spine rail with an optional alternate summary.
  * Selection reallocates representational bandwidth; it does not mutate,
  * promote, rank, or otherwise change the represented object.
  */
@@ -264,6 +268,7 @@ export function ReflowFieldItem({
   label,
   summary,
   detail,
+  railSummary,
   className,
   dataTone,
 }: {
@@ -271,6 +276,7 @@ export function ReflowFieldItem({
   label: string;
   summary: ReactNode;
   detail: ReactNode;
+  railSummary?: ReactNode;
   className?: string;
   dataTone?: string;
 }) {
@@ -283,6 +289,7 @@ export function ReflowFieldItem({
 
   const selected = context.selectedId === id;
   const detailId = `${context.fieldId}-${safeFragment(id)}-detail`;
+
   const carriesMotion =
     context.animatePeers || selected || context.previousSelectedId === id;
   const transition =
@@ -317,12 +324,21 @@ export function ReflowFieldItem({
         }
       : {}),
   } as CSSProperties;
+  const usesFocusPlacement =
+    context.layoutMode === "focus-stage" ||
+    context.layoutMode === "split-focus" ||
+    context.layoutMode === "split-focus-rail";
   const placement =
-    context.layoutMode !== "focus-stage" || context.selectedId === null
+    !usesFocusPlacement || context.selectedId === null
       ? "rest"
       : selected
         ? "selected"
         : "after";
+  const showsRailSummary =
+    context.layoutMode === "split-focus-rail" &&
+    context.selectedId !== null &&
+    !selected &&
+    railSummary != null;
 
   const handleSurfaceClick = (event: ReactMouseEvent<HTMLElement>) => {
     if (clickBelongsToNestedReflowField(event)) return;
@@ -349,6 +365,7 @@ export function ReflowFieldItem({
       data-reflow-row-size={rectangleTile?.rowSize}
       data-reflow-peer-row={peerTile?.rowIndex}
       data-reflow-peer-row-size={peerTile?.rowSize}
+      data-reflow-rail={showsRailSummary ? "true" : "false"}
       data-tone={dataTone}
       style={{ borderRadius: "var(--reflow-item-radius, 22px)", ...itemStyle }}
       onClick={handleSurfaceClick}
@@ -366,9 +383,27 @@ export function ReflowFieldItem({
         layout="position"
         transition={transition}
         className={styles.summary}
+        data-reflow-summary
       >
         {summary}
       </motion.div>
+
+      <AnimatePresence initial={false}>
+        {showsRailSummary ? (
+          <motion.div
+            key="rail-summary"
+            layout="position"
+            transition={transition}
+            className={styles.railSummary}
+            data-reflow-rail-summary
+            initial={reducedMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {railSummary}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
 
       <AnimatePresence initial={false} mode="popLayout">
         {selected ? (
@@ -376,6 +411,7 @@ export function ReflowFieldItem({
             key="detail"
             id={detailId}
             className={styles.detail}
+            data-reflow-detail
             initial={reducedMotion ? false : { opacity: 0 }}
             animate={{
               opacity: 1,

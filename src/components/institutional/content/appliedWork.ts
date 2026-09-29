@@ -1,86 +1,76 @@
 export const appliedWorkFamilies = [
   {
     code: "01",
-    title: "Software + systems",
+    title: "Systems / Architecture Review",
     description:
-      "For software that is hard to change, hard to explain, or carrying more consequence than its architecture was designed for.",
+      "For consequential systems that are difficult to understand, modernize, integrate, migrate, or repair because the structure itself has become part of the problem.",
     tone: "software",
     offers: [
       {
-        title: "Architecture review",
+        title: "System / architecture reconstruction",
         description:
-          "Map state, interfaces, ownership, dependencies, failure paths, and the decisions the current architecture makes difficult.",
+          "Map state, interfaces, dependencies, ownership, boundaries, invariants, and failure paths so the system can be reasoned about before changes are proposed.",
       },
       {
-        title: "Rescue / modernization",
+        title: "Modernization / migration review",
         description:
-          "Find the smallest structural changes that reduce risk and make an aging or tangled system easier to change, test, operate, and hand off.",
+          "Compare repair and migration paths against the behavior, constraints, and semantic obligations that must survive the change.",
       },
       {
-        title: "Prototype / pilot design",
+        title: "Bounded implementation / pilot",
         description:
-          "Turn an uncertain idea into a bounded technical experiment with a working artifact, explicit assumptions, and a clear test for what happens next.",
+          "Turn one selected repair into an inspectable prototype or pilot with explicit assumptions, acceptance conditions, and handoff state.",
       },
     ],
   },
   {
     code: "02",
-    title: "AI + operational governance",
+    title: "Agency / AI Governance Audit",
     description:
-      "For organizations introducing automation into decisions, workflows, or services where authority and accountability matter.",
+      "For systems where people, software, AI, policy, and automation interact but decision rights, review, escalation, or accountable authority are unclear.",
     tone: "governance",
     offers: [
       {
-        title: "AI governance + agency review",
+        title: "Agency + authority map",
         description:
-          "Trace where an AI-enabled system recommends, ranks, approves, denies, escalates, or acts—and whether people can inspect, contest, repair, or override the result.",
+          "Trace who or what recommends, ranks, approves, denies, escalates, acts, verifies, and promotes—and where capability and permission have drifted apart.",
       },
       {
-        title: "Process / institutional boundary audit",
+        title: "Governance + promotion controls",
         description:
-          "Find places where responsibility, authority, information, or maintenance cross teams and systems without a reliable owner or handoff.",
+          "Define Forge / Certify / Forbid boundaries, human gates, verifier requirements, contestability, provenance, and repair paths for consequential actions.",
       },
       {
-        title: "Failure postmortem",
+        title: "Decision-chain / failure reconstruction",
         description:
-          "Reconstruct a consequential failure as a system: what was represented, what was assumed, where the boundary failed, and what repair would prevent recurrence.",
+          "Reconstruct a consequential outcome across people, software, policy, and evidence to locate authority gaps and the smallest credible repair.",
       },
     ],
   },
   {
     code: "03",
-    title: "Research + institutional infrastructure",
+    title: "Knowledge / Representation Infrastructure Diagnostic",
     description:
-      "For teams with valuable knowledge or research that is difficult to verify, navigate, transfer, or operate as a shared system.",
+      "For organizations that need durable provenance, state, evidence, handoff, and authority across research, documents, schemas, software, and AI transformations.",
     tone: "research",
     offers: [
       {
-        title: "Research / provenance infrastructure",
+        title: "Source / claim / evidence architecture",
         description:
-          "Set up source, claim, evidence, status, decision, and handoff structures so a body of work can be inspected and continued without relying on oral memory.",
+          "Map how source material becomes claims, decisions, artifacts, and promoted institutional state—and where provenance or authority is currently lost.",
       },
       {
-        title: "Workshop / working session",
+        title: "Representation + handoff analysis",
         description:
-          "Use a bounded live session to map a difficult system, clarify a decision, surface hidden assumptions, or establish a shared operating model.",
+          "Identify semantic loss, hidden projection choices, reconstruction risk, and continuation failures across documents, schemas, interfaces, reports, and teams.",
       },
       {
-        title: "Retained or fractional technical advisory",
+        title: "Knowledge infrastructure pilot",
         description:
-          "Ongoing support for architecture, software, AI, research systems, technical risk, and difficult cross-boundary decisions when a full-time role is not the right shape.",
+          "Design a bounded provenance, research-operations, or shared-knowledge pilot using the smallest useful combination of workflow and machinery.",
       },
     ],
   },
-] as const;
-
-export const appliedWorkGoodFit = [
-  "The system works, but nobody can clearly explain where state, ownership, or responsibility lives.",
-  "A modernization effort keeps moving code without resolving the underlying architecture.",
-  "AI or automation changes who can decide, approve, deny, rank, or act, and governance has not caught up.",
-  "A critical workflow depends on spreadsheets, meetings, memory, or manual glue to preserve context.",
-  "Research or institutional knowledge exists, but provenance, status, handoff, or reproducibility are weak.",
-  "You need a pilot small enough to learn something before committing to a large transformation.",
-  "A local success metric is hiding maintenance, labor, infrastructure, community, resource, or ecological costs outside the frame.",
 ] as const;
 
 export const appliedWorkOutputs = [
@@ -155,11 +145,78 @@ export const appliedWorkBoundaries = [
   },
 ] as const;
 
-export const appliedWorkAudiences = [
-  "CTOs + engineering leaders",
-  "Founders + product teams",
-  "Research groups",
-  "Public-interest organizations",
-  "Institutions with complex workflows",
-  "Teams deploying consequential AI",
-] as const;
+export const systemsArchitectureReviewDemo = {
+  eyebrow: "SYNTHETIC REVIEW EXAMPLE",
+  setup: [
+    {
+      label: "WHAT THE SOFTWARE EXPOSES",
+      copy:
+        "Imagine an invoice-and-payment workflow that exposes only three statuses to the rest of the organization: APPROVED, PAID, and FAILED.",
+    },
+    {
+      label: "WHAT REALITY CONTAINS",
+      copy:
+        "“PAID” is not one event. Authorization, submission, gateway acknowledgement, settlement, reconciliation, and closure happen separately and may have different owners.",
+    },
+    {
+      label: "WHAT THE REVIEW DOES",
+      copy:
+        "Reconstruct the hidden lifecycle, find where collapsed states can change a consequential decision, then define the smallest repair that makes the system trustworthy again.",
+    },
+  ],
+  title: "A system can be “paid” before it is paid.",
+  summary:
+    "A synthetic invoice workflow shows the review shape without pretending to be a customer case. Coarse statuses hide consequential transitions, outside repair, and ambiguous completion.",
+  question:
+    "What is this representation allowed to forget without changing a consequential decision?",
+  coarseStates: ["APPROVED", "PAID", "FAILED"],
+  reconstructedStates: [
+    "Accounting approved",
+    "Payment authorized",
+    "Submitted",
+    "Gateway acknowledged",
+    "Settled",
+    "Reconciled",
+    "Closed",
+  ],
+  defectClasses: [
+    {
+      title: "Authority collapse",
+      description: "Accounting approval and payment authority are treated as the same state.",
+    },
+    {
+      title: "Acknowledgment / settlement collapse",
+      description: "An integration acknowledgment is allowed to stand in for business completion.",
+    },
+    {
+      title: "Hidden repair",
+      description: "Spreadsheet, email, or direct-data fixes make the workflow succeed outside its represented process.",
+    },
+    {
+      title: "Retry / duplicate ambiguity",
+      description: "Recovery can create a second financial action because replay semantics are not explicit.",
+    },
+    {
+      title: "Policy-version drift",
+      description: "The system cannot reliably reconstruct which rule set governed an earlier decision.",
+    },
+  ],
+  repairPath: [
+    "Declare protected distinctions",
+    "Locate ownership + authority",
+    "Separate canonical state from projections",
+    "Represent repair explicitly",
+    "Define closure",
+    "Migrate incrementally",
+  ],
+  deliverables: [
+    "System reconstruction",
+    "Boundary / ownership map",
+    "Defect + invariant registers",
+    "Repair / migration options",
+    "Decision packet",
+    "Handoff context",
+  ],
+  claim:
+    "The synthetic case demonstrates the review workflow and durable artifact package. It is not a customer case and does not establish unique superiority, field effectiveness, cost savings, or product-market fit.",
+} as const;

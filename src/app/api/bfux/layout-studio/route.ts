@@ -1,3 +1,4 @@
+import { observeRequest } from "@/lib/server-observability";
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
@@ -9,6 +10,7 @@ import {
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
+  return observeRequest(request, "/api/bfux/layout-studio", async () => {
   if (process.env.NODE_ENV !== "development") {
     return NextResponse.json(
       { ok: false, error: "LOCAL_DEV_ONLY" },
@@ -44,5 +46,6 @@ export async function POST(request: Request) {
   return NextResponse.json({
     ok: true,
     path: bfuxAuthoredLayoutSourcePath,
+  });
   });
 }

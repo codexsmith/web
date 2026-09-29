@@ -34,6 +34,10 @@ const augusta = fs.readFileSync("src/components/institutional/InstitutionalAugus
 const augustaCycle = fs.readFileSync("src/components/institutional/sections/AugustaCaseCycleSection.tsx", "utf8");
 const augustaCss = fs.readFileSync("src/components/institutional/styles/AugustaMaintenanceDebt.module.css", "utf8");
 const researchCss = fs.readFileSync("src/components/institutional/styles/Research.module.css", "utf8");
+const appliedWork = fs.readFileSync("src/components/institutional/InstitutionalAppliedWorkPage.tsx", "utf8");
+const appliedWorkEvidenceReflow = fs.readFileSync("src/components/institutional/sections/AppliedWorkEvidenceReflow.tsx", "utf8");
+const appliedWorkReviewSequence = fs.readFileSync("src/components/institutional/AppliedWorkSyntheticReviewSequence.tsx", "utf8");
+const appliedWorkCss = fs.readFileSync("src/components/institutional/styles/AppliedWork.module.css", "utf8");
 
 const expect = (condition, message) => {
   if (!condition) throw new Error(`BFUX Reflow Field contract failed: ${message}`);
@@ -63,6 +67,10 @@ expect(component.includes("previousSelectedId"), "Reflow Field must remember the
 expect(component.includes("selected || context.previousSelectedId === id"), "opening and closing focus cards must both carry layout motion");
 expect(component.includes("reducedMotion || !carriesMotion"), "only the entering or exiting focus card should receive animated layout continuity");
 expect(component.includes("AnimatePresence"), "expanded detail should use a maintained enter/exit primitive");
+expect(component.includes("data-reflow-summary"), "summary surface must expose a state hook for replacement during inspection");
+expect(component.includes("data-reflow-detail"), "detail surface must expose a state hook for expanded ownership");
+expect(reflowCss.includes('.item[data-reflow-state="selected"] > [data-reflow-summary]'), "selected Reflow cards must remove the REST summary from layout");
+expect(reflowCss.includes('.item[data-reflow-state="selected"] > [data-reflow-detail]'), "selected Reflow cards must let expanded detail own the card surface");
 expect(component.includes('mode="popLayout"'), "detail exit must not hold the parent card in its expanded geometry");
 expect(component.includes("delay: 0.12"), "detail content should stage shortly after opening motion begins");
 expect(component.includes("duration: 0.12"), "detail content should clear immediately when closing begins");
@@ -213,6 +221,50 @@ for (const [name, source] of [
 expect(home.includes("<HomeOrientationSection />"), "Homepage must compose Choose Your Own Path through Stewardship as one Reflow field");
 expect(!home.includes("\\n\\n"), "Homepage must not render escaped newline literals around the orientation field");
 expect(!home.includes('className={styles.audienceEntrySection}'), "Homepage orientation bands must no longer render as standalone sections");
+expect(reflow.includes('type ReflowLayoutMode = "flow" | "focus-stage" | "split-focus" | "split-focus-rail"'), "Reflow must expose both standard and rail split-focus modes");
+expect(reflow.includes('context.layoutMode === "split-focus"'), "split-focus must participate in explicit focus placement state");
+expect(reflow.includes('context.layoutMode === "split-focus-rail"'), "split-focus-rail must participate in explicit focus placement state");
+expect(reflow.includes("railSummary?: ReactNode"), "Reflow items must support an alternate compressed rail representation");
+expect(reflow.includes('data-reflow-rail={showsRailSummary ? "true" : "false"}'), "compressed rail state must be explicit in DOM");
+expect(reflow.includes("data-reflow-rail-summary"), "compressed rail summaries must expose a stable rendering hook");
+expect(!reflow.includes("ResizeObserver"), "rail compression must not preserve per-card REST height");
+expect(reflowCss.includes('data-reflow-mode="split-focus"'), "split-focus must own shared BFUX geometry instead of route-local width animation");
+expect(reflowCss.includes("--reflow-split-rest-span, 30"), "standard split-focus REST geometry must remain 50/50");
+expect(reflowCss.includes("--reflow-split-selected-span, 45"), "standard split-focus selected geometry must remain 75 percent");
+expect(reflowCss.includes("--reflow-split-peer-span, 15"), "standard split-focus peer geometry must remain 25 percent");
+expect(reflowCss.includes('data-reflow-mode="split-focus-rail"'), "rail split-focus must be a separate reusable BFUX preset");
+expect(reflowCss.includes("--reflow-split-rail-rest-span, 30"), "rail split-focus must preserve the canonical 50/50 REST state");
+expect(reflowCss.includes("--reflow-split-rail-selected-span, 52"), "rail split-focus must give the selected card most horizontal bandwidth");
+expect(reflowCss.includes("--reflow-split-rail-peer-span, 8"), "rail split-focus must compress the peer into a narrow book-spine rail");
+expect(reflowCss.includes('grid-template-rows: auto'), "rail split-focus must let content determine row height instead of forcing a full-height track");
+expect(reflowCss.includes("--reflow-split-rail-height"), "rail split-focus must expose a reusable compressed-height control");
+expect(reflowCss.includes("min(744px, calc(100dvh - 96px))"), "shrunk rail cards must stay viewport-bounded so the whole spine is normally visible");
+expect(appliedWork.includes("<AppliedWorkEvidenceReflow />"), "Applied Work must compose review evidence and deliverables through one Reflow surface");
+expect(appliedWorkEvidenceReflow.includes('layoutMode="split-focus-rail"'), "Applied Work evidence must use the book-spine rail Reflow preset");
+expect(appliedWorkEvidenceReflow.includes("itemOrder={appliedWorkEvidenceOrder}"), "Applied Work rail split-focus must preserve explicit two-card source order");
+expect((appliedWorkEvidenceReflow.match(/<ReflowFieldItem/g) || []).length === 2, "Applied Work rail split-focus must contain exactly two cards");
+expect((appliedWorkEvidenceReflow.match(/railSummary=\{/g) || []).length === 2, "Both Applied Work cards must provide a compressed rail identity");
+expect(appliedWorkEvidenceReflow.includes('id="synthetic-review"'), "Applied Work rail split-focus must retain the Synthetic Review card");
+expect(appliedWorkEvidenceReflow.includes('id="deliverables"'), "Applied Work rail split-focus must retain the What You Should Get card");
+expect((appliedWorkEvidenceReflow.match(/appliedWorkReflowDetailTitle/g) || []).length === 2, "Applied Work expanded cards must retain their REST title for visual continuity");
+expect(appliedWorkCss.includes(".appliedWorkReflowDetailTitle"), "Applied Work must style the expanded continuity title");
+expect(appliedWorkCss.includes(".appliedWorkReflowRailSummary"), "Applied Work must style the compressed book-spine identity");
+expect(appliedWorkCss.includes("writing-mode: vertical-rl"), "Applied Work rail title must read vertically like a book spine");
+expect(appliedWorkCss.includes("--reflow-split-rail-selected-span: 55"), "Applied Work must make the active surface wider than the reusable rail default");
+expect(appliedWorkCss.includes("--reflow-split-rail-peer-span: 5"), "Applied Work must compress the inactive card to a slimmer book-spine rail");
+expect(!appliedWorkCss.includes('height: clamp(390px, 48vh, 500px)'), "Applied Work must not replace preserved REST height with an arbitrary rail height clamp");
+expect(appliedWorkCss.includes("font-size: clamp(1.28rem, 1.45vw, 1.55rem)"), "Applied Work book-spine title must use a larger vertical display size");
+expect(appliedWorkEvidenceReflow.includes('title="Systems / Architecture Review"'), "Applied Work review rail must use a short spine-safe title");
+expect(appliedWorkEvidenceReflow.includes('title="Artifacts, not just conversation."'), "Applied Work deliverables rail must use a short spine-safe title");
+expect(!appliedWorkCss.includes("min-height: clamp(620px, 72vh, 820px)"), "Applied Work Reflow must not force viewport-scaled card height");
+expect(!appliedWorkCss.includes("min-height: 560px"), "Applied Work Reflow must not restore a fixed tablet-height floor");
+const representationGapPanel = appliedWorkReviewSequence.slice(
+  appliedWorkReviewSequence.indexOf('id="applied-demo-step-1"'),
+  appliedWorkReviewSequence.indexOf("ref={stepTwoRef}"),
+);
+expect(representationGapPanel.includes("appliedDemoCoarseView"), "Applied Work representation-gap panel must show only the represented coarse state");
+expect(!representationGapPanel.includes("reconstructedStates"), "Applied Work representation-gap panel must not reveal the reconstructed lifecycle before step 2");
+expect(appliedWorkReviewSequence.includes("Reconstruct the hidden lifecycle"), "Applied Work representation gap must hand off explicitly to lifecycle reconstruction");
 expect(reflow.includes('type ReflowRestLayout = "natural" | "rectangle"'), "Reflow must expose an explicit rectangle REST layout rule");
 expect(reflow.includes('restLayout ?? (layoutMode === "focus-stage" ? "rectangle" : "natural")'), "Focus-stage Reflows must tile into a complete rectangle by default");
 expect(reflow.includes("rectangleTileForIndex"), "Rectangle Reflow must compute balanced full-width rows");

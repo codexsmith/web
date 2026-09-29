@@ -119,11 +119,12 @@ export function InstitutionalProductsPage() {
                 </div>
               </div>
 
-              <p className={styles.productRole}>FIRST ACTIVE-BUILD CONSUMER SOFTWARE WEDGE</p>
+              <p className={styles.productRole}>CURRENT ACTIVE-BUILD CONSUMER SOFTWARE WEDGE</p>
               <h3>YouTube Knowledge Explorer</h3>
               <p className={styles.productPromise}>
-                Turn long-form YouTube into searchable, timestamped, structured knowledge
-                while preserving a direct path back to the source.
+                The current bounded implementation turns long-form YouTube into
+                searchable, timestamped, persistent knowledge while preserving a direct path
+                back to the source.
               </p>
 
               <div className={styles.explorerPipeline}>
@@ -155,10 +156,15 @@ export function InstitutionalProductsPage() {
                 </div>
               </div>
 
+              <div className={styles.productMiniPanel}>
+                <span>PRODUCT FAMILY</span>
+                <strong>Public knowledge infrastructure / project-based constructive social media</strong>
+              </div>
+
               <div className={styles.productTruth}>
                 <span>NOT YET ESTABLISHED</span>
-                Availability, recurring use, pricing, market validation, retention, or
-                product-market fit.
+                Public availability, recurring use, pricing, market validation, retention,
+                product-market fit, or the broader multi-source / social roadmap.
               </div>
 
               <span className={styles.productDetailLink}>
@@ -172,15 +178,62 @@ export function InstitutionalProductsPage() {
         <section className={styles.researchProducts}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>RESEARCH PRODUCTS</>}
-            title={<>Useful machinery can remain research-bounded.</>}
-            note={<>These products are built to be used and tested without turning internal implementation evidence into scientific validation.</>}
+            eyebrow={<>SIBLING KNOWLEDGE INFRASTRUCTURE</>}
+            title={<>Public knowledge infrastructure organizes durable source-linked knowledge. Corpus Forge governs bounded research execution.</>}
+            note={<>They can exchange typed work and artifact state, but public planning is not scientific promotion and neither product is merely the other&apos;s front end or back end.</>}
+          />
+
+          <div className={styles.researchProductGrid}>
+            <Link className={styles.researchProductCard} data-product="asm" href="/products/current/corpus-forge">
+              <div>
+                <span>SIBLING RESEARCH INFRASTRUCTURE · RESEARCH_PRODUCT</span>
+                <strong>Corpus Forge</strong>
+              </div>
+              <p>
+                Source-to-claim state, bounded execution, evidence, criticism, verification,
+                reproducibility, repair, and explicit promotion authority.
+              </p>
+              <small>Enter Corpus Forge <i aria-hidden="true">→</i></small>
+            </Link>
+          </div>
+        </section>
+
+        <section className={styles.researchProducts}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>FIRST-CLASS SOFTWARE MACHINERY</>}
+            title={<>Software Before Code.</>}
+            note={<>Define the software object before committing it to code. Closure-Driven Software remains a secondary technical / historical alias, not a competing product identity.</>}
+          />
+
+          <div className={styles.researchProductGrid}>
+            <Link className={styles.researchProductCard} data-product="asm" href="/software-before-code">
+              <div>
+                <span>SOURCE_DEVELOPMENT · SOFTWARE-ENGINEERING MACHINERY</span>
+                <strong>Software Before Code</strong>
+              </div>
+              <p>
+                Methods, formal models, translation machinery, engineering instruments, and
+                practitioner material for making semantic obligations, boundaries, invariants,
+                construction, witnesses, and closure explicit before implementation details dominate.
+              </p>
+              <small>Enter Software Before Code <i aria-hidden="true">→</i></small>
+            </Link>
+          </div>
+        </section>
+
+        <section className={styles.researchProducts}>
+          <InstitutionalSectionHeader
+            styles={styles}
+            eyebrow={<>TESTBEDS + CALIBRATION</>}
+            title={<>Different domains. The same machinery under pressure.</>}
+            note={<>These surfaces test transportability and research depth. They do not imply equal product maturity or validate the strongest underlying theory claims.</>}
           />
 
           <div className={styles.researchProductGrid}>
             <Link className={styles.researchProductCard} data-product="weather" href="/products/boundary-first-weather">
               <div>
-                <span>03 · RESEARCH PRODUCT</span>
+                <span>SCIENTIFIC / COMPUTATIONAL TESTBED</span>
                 <strong>Boundary First Weather</strong>
               </div>
               <p>
@@ -192,7 +245,7 @@ export function InstitutionalProductsPage() {
 
             <Link className={styles.researchProductCard} data-product="asm" href="/products/agentic-scientific-method">
               <div>
-                <span>04 · RESEARCH PRODUCT</span>
+                <span>RESEARCH PRODUCT · INQUIRY PROTOCOL</span>
                 <strong>Agentic Scientific Method</strong>
               </div>
               <p>
@@ -200,6 +253,31 @@ export function InstitutionalProductsPage() {
                 authority, defect, repair, closure, and scientific memory inspectable.
               </p>
               <small>Enter Agentic Scientific Method <i aria-hidden="true">→</i></small>
+            </Link>
+
+            <Link className={styles.researchProductCard} data-product="asm" href="/research/moonshots/millennium-problems-research">
+              <div>
+                <span>FRONTIER MATHEMATICAL CALIBRATION</span>
+                <strong>Millennium Problems Research</strong>
+              </div>
+              <p>
+                Solved-control and resistant-theorem work used to stress-test representation,
+                flow, scale, singularity, continuation, defect, closure, and proof-program machinery
+                without converting resemblance or computation into a solved-problem claim.
+              </p>
+              <small>Inspect the calibration program <i aria-hidden="true">→</i></small>
+            </Link>
+
+            <Link className={styles.researchProductCard} data-product="asm" href="/apparatus">
+              <div>
+                <span>INSTITUTIONAL MACHINERY</span>
+                <strong>Registrar · Workbench · Representation Observatory</strong>
+              </div>
+              <p>
+                Machinery for canonical identity and provenance, bounded human/agent work and
+                promotion authority, and inspection of semantic change across representations.
+              </p>
+              <small>Inspect the apparatus <i aria-hidden="true">→</i></small>
             </Link>
           </div>
         </section>

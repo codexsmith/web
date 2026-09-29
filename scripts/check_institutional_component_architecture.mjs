@@ -24,6 +24,7 @@ const commandPalette = read(`${root}/LabCommandPalette.tsx`);
 const commandPaletteContent = read(`${root}/content/commandPalette.ts`);
 const homePage = read(`${root}/InstitutionalHomePage.tsx`);
 const homeContent = read(`${root}/content/home.ts`);
+const siteContact = read("src/lib/site-contact.ts");
 
 expect(chrome.startsWith('"use client";'), "Institutional chrome must own route/scroll interaction as a client boundary");
 expect(chrome.includes("usePathname"), "Institutional header must derive active navigation from the current route");
@@ -284,7 +285,7 @@ expect(routeRegistry.includes('{ label: "Evidence", href: "/evidence" }'), "foot
 expect(routeRegistry.includes('{ label: "Now", href: "/now" }'), "footer route collection must include Now / Roadmap");
 expect(routeRegistry.includes('{ label: "What changed", href: "/changes" }'), "footer route collection must include What changed");
 expect(routeRegistry.includes('{ label: "Start here", href: "/start" }'), "footer route collection must include Start here");
-expect(routeRegistry.includes('{ label: "Contact", href: "/contact" }'), "footer route collection must include Contact");
+expect(routeRegistry.includes('{ label: "Contact", href: PUBLIC_CONTACT_MAILTO }'), "footer Contact must route directly to the canonical public email");
 
 const childRouteContracts = [
   ["about", ["founder", "labThroughTime", "aiGovernance", "now", "collaboration", "appliedWork"]],
@@ -529,15 +530,19 @@ const openLabApi = read("src/app/api/open-lab/route.ts");
 const openLabRoute = read("src/app/v3/open-lab/page.tsx");
 const environmentExample = read(".env.example");
 expect(openLabPage.includes("childLinks={institutionalChildRoutes.openLab}"), "Open Lab hero must expose its contextual child pages");
-expect(openLabPage.includes("openLabHeroIntake"), "Open Lab must surface Intake Status in the hero");
-expect(!openLabPage.includes('className={styles.openLabAvailability}'), "Open Lab must not keep Intake Status as a body section");
+expect(openLabPage.includes("openLabHeroIntake"), "Open Lab must surface its direct public contact boundary in the hero");
+expect(openLabPage.includes("PUBLIC_CONTACT_EMAIL"), "Open Lab must expose the canonical public email");
+expect(openLabPage.includes('publicContactMailto("Boundary First Labs — Open Lab")'), "Open Lab contact CTAs must route directly to the canonical email");
+expect(!openLabPage.includes("INTAKE STATUS"), "Open Lab must not expose deployment intake status signage on the public page");
+expect(!openLabPage.includes("collection closed"), "Open Lab must not present contact as closed while email is live");
+expect(!openLabPage.includes("<OpenLabIntakeInstrument"), "Open Lab must not mount the dormant structured intake form while email is the public boundary");
+expect(!openLabPage.includes("ArchitectureProjectionSection"), "Open Lab must not restore the interim Show the Machinery architecture panel while Lab Snapshot is becoming the stronger machinery surface");
+expect(!openLabPage.includes("SHOW THE MACHINERY"), "Open Lab must not restore the retired Show the Machinery section copy");
 expect(openLabPage.includes('className={styles.openLabContracts}'), "Open Lab must keep Public Participation directly readable");
-expect(openLabPage.includes("<OpenLabIntakeInstrument"), "Open Lab must compose the governed intake instrument");
 expect(openLabPage.includes("<OpenLabContextSection />"), "Open Lab must compose supporting sections as one context module");
 expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must keep Institutional Promise directly readable");
-expect(openLabPage.includes('/contact?type=open-lab&source=open-lab'), "Open Lab must preserve a conversational path distinct from formal intake");
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
-expect(fs.existsSync(`${root}/OpenLabIntakeInstrument.tsx`), "OpenLabIntakeInstrument must exist as the governed public-intake boundary");
+expect(fs.existsSync(`${root}/OpenLabIntakeInstrument.tsx`), "Dormant governed intake machinery must remain available for later activation");
 
 expect(openLabContent.includes('sourceRevision: "1dbd3f5b53e55c8feff5230836ce11dc928cba69"'), "Open Lab must pin the governing Lab source revision");
 expect(openLabContent.includes('lifecycle: "candidate"'), "Open Lab must preserve the candidate lifecycle of the page projection");
@@ -568,26 +573,11 @@ expect(openLabApi.includes("authorization: `Bearer ${token}`"), "Open Lab receiv
 expect(openLabApi.includes("OL-"), "Open Lab must issue a stable receipt identifier after accepted handoff");
 expect(openLabApi.indexOf("await fetch(receiver") < openLabApi.indexOf("submissionId,\n      state: \"received\""), "Open Lab receipt response must follow receiver acceptance");
 
-expect(openLabIntake.includes("FORMAL INTAKE IS CURRENTLY CLOSED"), "Open Lab UI must make a closed collection boundary explicit in public-facing language");
-expect(openLabIntake.includes("Anonymous / pseudonymous"), "Open Lab must support non-prestige-gated submitter identity");
-expect(openLabIntake.includes("No reply needed"), "Open Lab must support intake without a forced response identity");
-expect(openLabIntake.includes("does not give") && openLabIntake.includes("permission to") && openLabIntake.includes("publish my submission"), "Open Lab must distinguish public-response preference from publication consent");
-expect(openLabIntake.includes("Submission closed"), "Open Lab submit action must visibly close when governance gates are incomplete");
-expect(openLabIntake.includes("What happens after your submission arrives."), "Open Lab must expose the review process in public-facing language");
-expect(openLabIntake.includes("Tell the Lab what you&apos;re bringing."), "Open Lab governed intake must lead with ordinary public-facing language");
-expect(!openLabIntake.includes("Preserve the submission before deciding where it belongs."), "Open Lab intake must not expose internal routing language as its public headline");
-expect(openLabIntake.includes("openLabQuickIntake"), "Open Lab must promote the submission experience ahead of explanatory machinery");
-expect(openLabIntake.indexOf("openLabQuickIntake") < openLabIntake.indexOf("openLabReadiness"), "Open Lab form and route choice must precede governance/readiness detail");
-expect(openLabIntake.includes("Add context or links"), "Open Lab must progressively disclose optional context rather than front-load every field");
-expect(openLabIntake.indexOf('name="publicResponseRequested"') < openLabIntake.indexOf("</details>"), "Open Lab must keep public-response preference inside optional progressive disclosure");
-expect(openLabIntake.includes("AFTER YOU SUBMIT"), "Open Lab must move explanatory routing context after the primary intake experience");
-expect(openLabIntake.includes("HOW THE INTAKE IS GOVERNED"), "Open Lab must keep governance inspectable after the submission surface");
-expect((openLabIntake.match(/<details className=\{styles\.openLabPostIntakeDisclosure\}>/g) ?? []).length === 3, "Open Lab must collapse its three post-intake context sections into native disclosures");
-expect(!openLabIntake.includes('<details className={styles.openLabPostIntakeDisclosure} open'), "Open Lab post-intake disclosures must default closed to keep the submission experience primary");
-expect(openLabIntake.includes("openLabReviewStateList"), "Review-process states must remain inspectable inside the collapsed review section");
-
-expect(openLabRoute.includes("readOpenLabIntakeConfig"), "Open Lab route must derive runtime state from server governance configuration");
-expect(openLabRoute.includes("isOpenLabSubmissionType"), "Open Lab route must deep-link only declared submission types");
+expect(openLabIntake.includes("Anonymous / pseudonymous"), "Dormant Open Lab intake machinery must preserve non-prestige-gated submitter identity");
+expect(openLabIntake.includes("No reply needed"), "Dormant Open Lab intake machinery must support intake without a forced response identity");
+expect(openLabIntake.includes("does not give") && openLabIntake.includes("permission to") && openLabIntake.includes("publish my submission"), "Dormant Open Lab intake machinery must distinguish public-response preference from publication consent");
+expect(openLabRoute.includes("<InstitutionalOpenLabPage />"), "Open Lab route must render the email-first public boundary without deployment-gate branching");
+expect(!openLabRoute.includes("readOpenLabIntakeConfig"), "Open Lab public route must not expose dormant receiver readiness as page state");
 expect(environmentExample.includes("BFL_OPEN_LAB_GOVERNANCE_ACK"), "Open Lab deployment variables must document the governance acknowledgement");
 expect(environmentExample.includes("reviewed:1dbd3f5b53e55c8feff5230836ce11dc928cba69"), "Open Lab env example must document the exact pinned-source acknowledgement");
 
@@ -637,11 +627,23 @@ expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose 
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
 expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose its contextual child pages");
-expect(aboutPage.includes("founder-led solopreneur operation"), "About may use solopreneur as shorthand for the current founder-led operating model");
-expect(aboutPage.includes("single-person"), "About must define the operating model in plain language rather than relying on the solopreneur label");
-expect(aboutPage.includes("computationally leveraged"), "About must state that the Lab is computationally leveraged");
+expect(aboutPage.includes("fifteen years") && aboutPage.includes("mathematics and physics"), "About hero must preserve the founder-to-lab mathematics and physics convergence");
+expect(aboutPage.includes("className={styles.aboutOperatingModel}"), "About must move the operating-model definition into a dedicated section immediately after the hero");
+expect(aboutPage.includes("solo, technical-founder-led applied systems laboratory"), "About operating-model section must define the current solo technical-founder model in plain language");
+expect(aboutPage.includes("AI-enabled, digital-native"), "About operating-model section must state the Lab's AI-enabled digital-native posture");
+expect(aboutPage.includes("executable") && aboutPage.includes("institutional machine"), "About operating-model section must describe the Lab as an executable institutional machine");
+expect(aboutPage.includes("repositories, automation, and AI"), "About operating-model section must explain the computational leverage behind the solo model");
+expect(aboutPage.includes("fourth startup its founder has been involved in"), "About operating-model section must preserve the founder's fourth-startup context");
+expect(
+  aboutPage.indexOf("</InstitutionalRouteHero>") <
+    aboutPage.indexOf("className={styles.aboutOperatingModel}") &&
+    aboutPage.indexOf("className={styles.aboutOperatingModel}") <
+      aboutPage.indexOf("<AboutReflowGroups />"),
+  "About operating model must sit directly between the hero and the Reflow chapters",
+);
+expect(!aboutPage.includes("A laboratory for the machinery beneath knowledge."), "About must not restore the retired generic machinery-beneath-knowledge headline");
+expect(!aboutPage.includes("THE LAB IN ONE SENTENCE"), "About must not duplicate the institutional identity in a closing one-sentence section");
 expect(aboutPage.includes("<AboutReflowGroups />"), "About page must delegate grouped doctrine to the Reflow section component");
-expect(aboutPage.indexOf("<AboutReflowGroups />") < aboutPage.indexOf('className={styles.aboutClose}'), "About closing synthesis must remain outside and after the Reflow chapters");
 expect(fs.existsSync(`${root}/sections/AboutReflowGroups.tsx`), "AboutReflowGroups must exist as the About doctrine composition boundary");
 const aboutGroups = read(`${root}/sections/AboutReflowGroups.tsx`);
 expect((aboutGroups.match(/className={styles.aboutGroup}/g) || []).length === 3, "About Reflow component must preserve three narrative groups");
@@ -660,8 +662,8 @@ expect(appliedWorkContent.includes("NO THEORY BUY-IN REQUIRED"), "Applied Work m
 expect(appliedWorkPage.includes("CONSULTING AVAILABILITY"), "Applied Work must disclose current consulting availability and maturity");
 expect(appliedWorkPage.includes("appliedServiceFamily"), "Applied Work must group concrete offers inside larger service families");
 expect(appliedWorkPage.includes("childLinks={institutionalChildRoutes.appliedWork}"), "Applied Work hero must expose Evidence as a child page");
-expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work'), "Applied Work must expose a contextual Contact route");
-expect(appliedWorkPage.includes('/contact?type=applied-work&source=applied-work-hero'), "Applied Work hero must expose a direct consulting CTA");
+expect(appliedWorkPage.includes('publicContactMailto("Boundary First Labs — Applied Work")'), "Applied Work CTAs must route directly to the canonical email");
+expect(!appliedWorkPage.includes("/contact?type=applied-work"), "Applied Work must not route consulting CTAs through the web contact form");
 expect(appliedWorkContent.includes("HUMAN AUTHORITY STAYS VISIBLE"), "Applied Work consulting principles must keep human authority explicit");
 expect(!appliedWorkContent.includes("REVIEW IS NOT CERTIFICATION"), "Applied Work must not restore the overlong ten-card boundary set");
 
@@ -747,11 +749,13 @@ expect(nowPage.includes("./content/now"), "Now / Roadmap page must own a route-l
 expect(nowPage.includes("What is Boundary First Labs doing now?"), "Now hero must lead with the current-work question");
 expect(nowPage.includes("NOW → NEXT → LATER"), "Now page must expose the roadmap horizon sequence");
 expect(nowPage.includes("WHAT CAN CHANGE THE ROADMAP?"), "Now page must make reprioritization rules explicit");
-expect(nowContent.includes("Finish the public institutional boundary"), "Now priorities must include public institutional conversion");
-expect(nowContent.includes("Turn capability into outside evidence"), "Now priorities must include BFL-native external evidence");
-expect(nowContent.includes("Execute the representational laboratory program"), "Now priorities must include the active laboratory program");
-expect(nowContent.includes("Independent use"), "Now roadmap gates must include transfer beyond the founder");
-expect(nowPage.includes('/contact?type=general&source=now'), "Now must expose a contextual Contact route");
+expect(nowContent.includes("Close the public and commercial interface"), "Now priorities must include public/commercial institutional conversion");
+expect(nowContent.includes("Turn four funding lanes into outside evidence"), "Now priorities must include BFL-native external evidence across the current funding lanes");
+expect(nowContent.includes("Audit the population behind the Registrar"), "Now priorities must include the post-census registry population audit");
+expect(nowContent.includes("Run the research benchmarks that can falsify the stack"), "Now priorities must include active falsifiable research benchmarking");
+expect(nowContent.includes("Turn mature research into reviewable publication objects"), "Now priorities must include publication conversion");
+expect(nowContent.includes("Independent operation"), "Now roadmap gates must include transfer beyond the founder");
+expect(nowPage.includes('publicContactMailto("Boundary First Labs — General inquiry")'), "Now must expose a direct email conversation CTA");
 
 const contactPage = read(`${root}/InstitutionalContactPage.tsx`);
 const contactContent = read(`${root}/content/contact.ts`);
@@ -760,12 +764,15 @@ const inquiryApi = read("src/app/api/inquiry/route.ts");
 expect(contactPage.includes("./content/contact"), "Contact page must own a route-local content model");
 expect(contactPage.includes("Start with what brought you here."), "Contact hero must open with a low-friction invitation");
 expect(contactPage.includes("contactFamilyStack"), "Contact routing must group smaller inquiry routes inside larger families");
-expect(contactPage.includes("<InstitutionalInquiryForm"), "Contact must compose the reusable inquiry form");
-expect(contactPage.includes("EMAIL IS LIVE"), "Contact hero must make the live email route explicit");
+expect(!contactPage.includes("<InstitutionalInquiryForm"), "Contact public page must not mount the dormant web form while email is the canonical route");
+expect(contactPage.includes("DIRECT EMAIL"), "Contact hero must make the direct email route explicit");
 expect(contactPage.includes("PUBLIC_CONTACT_EMAIL"), "Contact must expose the canonical public email address");
-expect(contactPage.includes("contactEmailFallback"), "Contact must provide a live-email fallback when the web form receiver is unavailable");
+expect(contactPage.includes("contactEmailFallback"), "Contact must provide a direct typed email invitation");
+expect(!contactPage.includes("not connected"), "Contact must not display setup-state signage while email is live");
+expect(siteContact.includes('admin@boundaryfirstlabs.com'), "Site contact helper must bind the canonical public email");
+expect(siteContact.includes("publicContactMailto"), "Site contact helper must provide subject-aware mailto routing");
 expect(contactContent.includes("Applied work / consulting"), "Contact must route applied-work inquiries");
-expect(contactContent.includes("Funding / sponsorship"), "Contact must route funding inquiries");
+expect(contactContent.includes("Funding / capitalization / sponsorship"), "Contact must route funding inquiries");
 expect(contactContent.includes("Research review / technical critique"), "Contact must route research-review inquiries");
 expect(contactContent.includes("Media / speaking / education"), "Contact must route media and education inquiries");
 expect(inquiryForm.startsWith('"use client";'), "Inquiry form must own its browser interaction boundary");
@@ -784,7 +791,7 @@ expect(collaborationPage.includes("smallest useful"), "Collaboration hero must p
 expect(collaborationPage.includes("collaborationOutcomes"), "Collaboration page must state concrete business and funding outcomes");
 expect(collaborationPage.includes("How funding works"), "Collaboration page must give potential funders a direct Funding route");
 expect(collaborationPage.includes("childLinks={institutionalChildRoutes.collaboration}"), "Collaboration hero must expose Applied Work as a child page");
-expect(collaborationPage.includes('/contact?type=collaboration&source=collaboration'), "Collaboration must expose a contextual Contact route");
+expect(collaborationPage.includes('publicContactMailto("Boundary First Labs — Collaboration")'), "Collaboration must expose a direct email CTA");
 
 const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
 const founderCss = read(`${root}/styles/Founder.module.css`);
@@ -804,9 +811,9 @@ expect(fundingPage.includes("./content/funding"), "Funding page must own a route
 expect(fundingPage.includes('className={styles.fundingConversion}'), "Funding must expose the conversion model directly");
 expect(fundingPage.includes('className={styles.fundingChannelsSection}'), "Funding must expose channel options directly");
 expect(fundingPage.includes('className={styles.fundingEvaluation}'), "Funding must expose evaluation and epistemic boundaries directly");
-expect(fundingPage.includes("Fund the conversion, not the theory."), "Funding hero must state the public funding thesis");
+expect(fundingPage.includes("Capitalize the conversion engine, not the theory."), "Funding hero must state the public funding thesis");
 expect(fundingPage.includes("childLinks={institutionalChildRoutes.funding}"), "Funding hero must expose Applied Work and Evidence as child routes");
-expect(fundingPage.includes('/contact?type=funding&source=funding'), "Funding must expose a contextual Contact route");
+expect(fundingPage.includes('publicContactMailto("Boundary First Labs — Funding")'), "Funding must expose a direct email CTA");
 
 const apparatusPage = read(`${root}/InstitutionalApparatusPage.tsx`);
 expect(apparatusMachineryPage.includes("<ApparatusContextSection />"), "Apparatus must compose its supporting machinery as a section component");
@@ -933,8 +940,8 @@ const homePageForChanges = read(`${root}/InstitutionalHomePage.tsx`);
 const nowPageForChanges = read(`${root}/InstitutionalNowPage.tsx`);
 expect(changesPage.includes("./content/changes"), "What changed route must consume the curated delta projection");
 expect(changesPage.includes("State changes, not activity theater."), "What changed route must state its material-delta boundary");
-expect(changesContent.includes('webRevision: "0944f1352f12cc1a9a2ec395feb5172217474aee"'), "Change archive must pin the canonical web source cutoff");
-expect(changesContent.includes('labRevision: "f5b8b063349bdf92fb8f5f138df52fcf4482b0ee"'), "Change archive must pin the canonical Lab source cutoff");
+expect(changesContent.includes('webRevision: "e30f35f0fb9cf62f4dc70556e2df6d97c34286e5"'), "Change archive must pin the canonical web source cutoff");
+expect(changesContent.includes('labRevision: "2040584c19c8202215bdb83e46d1df05df37dafe"'), "Change archive must pin the canonical Lab source cutoff");
 expect(changesContent.includes("It reports selected material changes"), "Change projection must reject complete-activity-feed semantics");
 expect(homePageForChanges.includes("<RecentChangesStrip"), "Homepage must surface the compact recent-change layer");
 expect(nowPageForChanges.includes('title="What materially changed?"'), "Now page must surface recent material deltas");
@@ -953,7 +960,7 @@ expect(publicStateProjection.includes('"labRevision": "4be0a745d4e6f8148495c75ba
 expect(publicStateProjection.includes('"projectionStatus": "initial_manual_seed"'), "Public state seed must disclose that cross-repo automation is not wired yet");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-001"'), "Public timeline projection must use durable Timeline identities");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-005"'), "Public timeline projection must preserve the current five-event seed boundary");
-expect(labThroughTimePage.includes("This five-event public projection is only a seed."), "Lab Through Time must disclose the incomplete seed boundary");
+expect(labThroughTimePage.includes("The point is continuity, not completeness."), "Lab Through Time must disclose the incomplete seed boundary without repeating projection jargon");
 expect(labThroughTimePage.includes('<TemporalViewNav activeView="timeline"'), "Lab Through Time must participate in the shared temporal navigation");
 expect(labThroughTimePage.includes("Milestones, not a long changelog."), "Lab Through Time must preserve the long-horizon materiality boundary");
 expect(labThroughTimeRoute.includes('canonical: "/lab-through-time"'), "Lab Through Time must declare the canonical public route");
@@ -972,24 +979,38 @@ for (const [name, source] of [
 expect(nowPageForChanges.includes("<NowPriorityExplorer"), "Now must collapse priority detail into the reflow explorer");
 expect(changesPage.includes("<ChangesExplorer"), "What Changed must collapse delta detail into the reflow explorer");
 expect(labThroughTimePage.includes("<LabTimelineExplorer"), "Lab Through Time must collapse provenance detail into the reflow explorer");
-expect(labThroughTimePage.includes("Accumulated practice + research"), "Lab Through Time must expose the pre-acceleration substrate");
-expect(labThroughTimePage.includes("Commercial AI increases throughput"), "Lab Through Time must expose the computational acceleration boundary");
-expect(labThroughTimePage.includes("Computationally leveraged micro-lab"), "Lab Through Time must connect acceleration to the current operating model");
+expect(labTimelineExplorer.includes("See before / after"), "Lab Through Time milestone cards must advertise useful before/after detail");
+expect(labTimelineExplorer.includes("<strong>Before:</strong>"), "Lab Through Time expanded milestones must explain the before state");
+expect(labTimelineExplorer.includes("The fascination of watching a ball curve in flight."), "Magnus milestone must begin with the motivating physical curiosity rather than registry-state language");
+expect(labTimelineExplorer.includes("<strong>After:</strong>"), "Lab Through Time expanded milestones must explain the after state");
+expect(!labTimelineExplorer.includes("DURABLE EVENT"), "Lab Through Time expanded milestones must not expose registry metadata as primary reader content");
+expect(!labTimelineExplorer.includes("SOURCE EVENT"), "Lab Through Time expanded milestones must not expose source IDs as primary reader content");
+expect(labThroughTimePage.includes("Research + systems practice already existed."), "Lab Through Time must expose the pre-acceleration substrate");
+expect(labThroughTimePage.includes("AI lowers the cost of working across the corpus."), "Lab Through Time must expose the computational acceleration boundary");
+expect(labThroughTimePage.includes("One founder can operate a wider surface."), "Lab Through Time must connect acceleration to the current operating model");
 expect(labThroughTimePage.includes("COMPUTATIONAL CAPABILITY"), "Lab Through Time must distinguish machine capability from authority");
 expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must preserve the founder authority boundary");
-expect(labThroughTimePage.includes("Boundary First Labs became practical when decades of accumulated research"), "Lab Through Time hero must explain why the current Lab exists now");
+expect(labThroughTimePage.includes("Five milestones mark the route from early experimental work"), "Lab Through Time hero must explain the bounded continuity story without repeating the acceleration section");
+expect(labThroughTimePage.includes("FIVE TURNING POINTS"), "Lab Through Time milestone section must use public-facing turning-point language");
+expect(labThroughTimePage.includes("How the Lab took shape."), "Lab Through Time milestone section must use a plain-language public title");
+expect(labThroughTimePage.includes("This is not a year-by-year biography."), "Lab Through Time milestone section must explain its selectivity without registry jargon");
+expect(labThroughTimePage.includes("founder&apos;s fourth startup"), "Lab Through Time milestone section must preserve the founder's startup experience");
+expect(!labThroughTimePage.includes("CURRENT DURABLE SEED"), "Lab Through Time must not expose internal seed terminology as the milestone-section eyebrow");
+expect(!labThroughTimePage.includes("A small temporal spine over a much larger history."), "Lab Through Time must not expose internal temporal-spine phrasing as the public milestone headline");
 expect(!labThroughTimePage.includes("continuitySection"), "Lab Through Time must not restore the redundant continuity interstitial");
 expect(!labThroughTimePage.includes("NEXT PROJECTION WORK"), "Lab Through Time must keep projection backlog out of the public narrative flow");
 expect(
-  labThroughTimePage.indexOf("<ProvenanceArtifactGallery />") <
-    labThroughTimePage.indexOf('className={styles.accelerationSection}'),
-  "Lab Through Time must flow directly from provenance artifacts into the acceleration boundary",
+  labThroughTimePage.indexOf("<LabTimelineExplorer") <
+    labThroughTimePage.indexOf("<ProvenanceArtifactGallery") &&
+    labThroughTimePage.indexOf("<ProvenanceArtifactGallery") <
+      labThroughTimePage.indexOf('className={styles.accelerationSection}'),
+  "Lab Through Time must flow from the durable timeline through the research-room evidence panel into the acceleration boundary",
 );
 
 const provenanceArtifactGallery = read(`${root}/ProvenanceArtifactGallery.tsx`);
 const provenanceStillStrip = read(`${root}/ProvenanceStillStrip.tsx`);
 const labThroughTimeCss = read(`${root}/styles/LabThroughTime.module.css`);
-expect(labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must surface the first public provenance gallery");
+expect(labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must render the bounded research-room evidence panel");
 expect(publicStateContent.includes("provenanceGallery"), "Public-state projection must type the provenance gallery");
 expect(publicStateProjection.includes('"publicClaim": "A substantial pre-AI room-scale research environment existed."'), "Provenance projection must preserve the adjudicated narrow public claim");
 expect(publicStateProjection.includes('"claimCeiling": "The media establishes scale, organization, and chronology of work.'), "Provenance projection must preserve the media authority ceiling");
@@ -1005,9 +1026,14 @@ for (const artifactPath of [
 ]) {
   expect(publicStateProjection.includes(artifactPath), "Provenance projection must include " + artifactPath);
 }
-expect(provenanceArtifactGallery.includes("next/image"), "Provenance gallery must use Next Image for public artifacts");
-expect(provenanceArtifactGallery.includes("WHAT THIS ESTABLISHES"), "Provenance gallery must separate evidence role from interpretation");
+expect(provenanceStillStrip.includes("next/image"), "Research-room survey must use Next Image for public artifacts");
+expect(provenanceArtifactGallery.includes("WHAT THE IMAGES ESTABLISH"), "Research-room panel must separate evidence role from interpretation");
 expect(provenanceArtifactGallery.includes("<ProvenanceStillStrip"), "Featured room provenance must use the stitched derived-video still strip");
+expect(provenanceArtifactGallery.includes('artifact.id === "ARTIFACT-PROV-ROOM-SURVEY"'), "Lab Through Time provenance panel must be bounded to the research-room survey");
+expect(!provenanceArtifactGallery.includes("provenanceGallery.artifacts.map"), "Lab Through Time must not restore the broad multi-artifact provenance gallery");
+expect(!provenanceArtifactGallery.includes("NEXT PROVENANCE STRATA"), "Research-room panel must not restore provenance-backlog copy");
+expect(provenanceArtifactGallery.includes("The research had a room before it had a Lab."), "Research-room panel must keep the concise physical-history framing");
+expect(provenanceStillStrip.includes("caption ?? sequence.note"), "Research-room still strip must allow concise reader-facing captioning");
 expect(!provenanceArtifactGallery.includes("github.com"), "Public provenance gallery must not expose private-repository URLs");
 expect(!provenanceArtifactGallery.includes("Inspect source"), "Public provenance gallery must not render private source-inspection links");
 expect(!provenanceArtifactGallery.includes("PUBLIC USE"), "Public provenance cards must not render internal public-use adjudication rows");
@@ -1042,9 +1068,9 @@ for (const audienceId of ["researcher", "engineer", "funder", "collaborator", "c
   expect(audiencesContent.includes(`id: "${audienceId}"`), `Audience traversal must expose ${audienceId}`);
 }
 expect((audiencesContent.match(/id: "/g) ?? []).length >= 7, "Audience traversal must expose all seven declared visitor paths");
-expect(audiencesContent.includes('href: "/contact?type=research-review&source=start-researcher"'), "Researcher path must terminate in typed research-review contact");
-expect(audiencesContent.includes('href: "/contact?type=applied-work&source=start-client"'), "Client path must terminate in typed applied-work contact");
-expect(audiencesContent.includes('href: "/contact?type=funding&source=start-funder"'), "Funder path must terminate in typed funding contact");
+expect(audiencesContent.includes('publicContactMailto("Boundary First Labs — Research review")'), "Researcher path must terminate in direct research-review email");
+expect(audiencesContent.includes('publicContactMailto("Boundary First Labs — Applied Work")'), "Client path must terminate in direct applied-work email");
+expect(audiencesContent.includes('publicContactMailto("Boundary First Labs — Funding")'), "Funder path must terminate in direct funding email");
 expect(audienceGrid.includes("journey.steps.map"), "Audience journey grid must render ordered steps from the shared model");
 expect(audienceGrid.includes("@/components/bfux/ReflowField"), "Audience journey UI must use the BFUX ReflowField primitive");
 expect(audienceGrid.includes("<ReflowField"), "Audience journey UI must expose a shared reflow field");

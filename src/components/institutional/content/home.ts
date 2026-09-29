@@ -1,3 +1,5 @@
+import { publicContactMailto } from "@/lib/site-contact";
+
 export const capabilityStrip = [
   ["01", "Research & experiments"],
   ["02", "Tools & working systems"],
@@ -14,13 +16,13 @@ export const methodSteps = [
 
 export const featuredWork = [
   {
-    tag: "PRODUCT",
+    tag: "RESEARCH PRODUCT",
     title: "Boundary-First Chess",
     description: "A book-length teaching asset and developed pedagogy for making structural change on the board more legible.",
     href: "/products/boundary-first-chess",
   },
   {
-    tag: "PRODUCT",
+    tag: "ACTIVE-BUILD WEDGE",
     title: "YouTube Knowledge Explorer",
     description: "A source-linked software tool for turning long-form video into searchable, timestamped, structured knowledge.",
     href: "/products/youtube-knowledge-explorer",
@@ -32,7 +34,7 @@ export const featuredWork = [
     href: "/products/agentic-scientific-method",
   },
   {
-    tag: "RESEARCH PRODUCT",
+    tag: "RESEARCH TESTBED",
     title: "Boundary First Weather",
     description: "A pilot-ready computational testbed for boundary-aware diagnostics, forecast disagreement, and selective refinement.",
     href: "/products/boundary-first-weather",
@@ -44,29 +46,29 @@ export const homeAppliedWorkFeature = {
   eyebrow: "CONSULTING / APPLIED WORK",
   title: "Bring one system that is expensive to misunderstand.",
   summary:
-    "Boundary First Labs offers scoped consulting for software architecture, AI and operational governance, research infrastructure, technical diagnosis, and bounded pilots.",
+    "Three bounded entry points for systems architecture, agency and AI governance, and knowledge / representation infrastructure.",
   offers: [
     {
       code: "01",
-      title: "Software + systems",
-      detail: "Architecture review · rescue / modernization · prototype / pilot design",
+      title: "Systems / Architecture Review",
+      detail: "Reconstruct the system · expose defects and invariants · compare repair / migration paths",
     },
     {
       code: "02",
-      title: "AI + operational governance",
-      detail: "AI governance review · process boundary audit · failure postmortem",
+      title: "Agency / AI Governance Audit",
+      detail: "Map decision rights · define human / agent gates · repair authority and provenance gaps",
     },
     {
       code: "03",
-      title: "Research + institutional infrastructure",
-      detail: "Provenance systems · working sessions · fractional technical advisory",
+      title: "Knowledge / Representation Infrastructure Diagnostic",
+      detail: "Map source / claim / evidence state · find representation loss · design durable handoff infrastructure",
     },
   ],
   note:
-    "Start with a review, workshop, prototype, pilot, or advisory scope small enough to finish and teach you something.",
+    "Systems / Architecture Review is the current first-engagement focus. The other two offers remain available when authority/governance or knowledge/provenance is the primary problem.",
   href: "/applied-work",
-  cta: "Explore consulting services",
-  contactHref: "/contact?type=applied-work&source=home-consulting",
+  cta: "Explore Applied Work",
+  contactHref: publicContactMailto("Boundary First Labs — Applied Work"),
   contactCta: "Start a conversation",
 } as const;
 
@@ -97,9 +99,9 @@ export const homeInstitutionalFrontDoors = [
     tone: "collaboration",
   },
   {
-    eyebrow: "FUNDING",
-    title: "Fund the conversion, not the theory.",
-    note: "Capital can change capacity. It does not change truth.",
+    eyebrow: "FUNDING / CAPITALIZATION",
+    title: "Capitalize the conversion engine, not the theory.",
+    note: "Runway · earned services · product capital · research capital · evidence-gated credit",
     href: "/funding",
     cta: "See the Funding model",
     tone: "funding",

@@ -40,6 +40,80 @@
   order: 2;
 }
 
+.field[data-reflow-mode="split-focus"] {
+  display: grid;
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+  grid-auto-flow: row;
+  column-gap: 0;
+  row-gap: 0;
+  align-items: stretch;
+}
+
+.field[data-reflow-mode="split-focus"] > .item {
+  grid-row: 1;
+  margin-inline: calc(var(--reflow-gap, 14px) / 2);
+}
+
+.field[data-reflow-mode="split-focus"][data-reflow-active="false"] > .item {
+  grid-column: span var(--reflow-split-rest-span, 30);
+}
+
+.field[data-reflow-mode="split-focus"][data-reflow-active="true"]
+  > .item[data-reflow-state="selected"] {
+  grid-column: span var(--reflow-split-selected-span, 45);
+  z-index: 2;
+}
+
+.field[data-reflow-mode="split-focus"][data-reflow-active="true"]
+  > .item:not([data-reflow-state="selected"]) {
+  grid-column: span var(--reflow-split-peer-span, 15);
+}
+
+/*
+ * Split-focus-rail keeps the canonical 50/50 REST composition, then turns the
+ * non-selected card into a narrow book-spine rail while the selected card owns
+ * the remaining horizontal bandwidth.
+ */
+.field[data-reflow-mode="split-focus-rail"] {
+  display: grid;
+  grid-template-columns: repeat(60, minmax(0, 1fr));
+  grid-template-rows: auto;
+  grid-auto-flow: row;
+  column-gap: 0;
+  row-gap: 0;
+  align-items: stretch;
+}
+
+.field[data-reflow-mode="split-focus-rail"] > .item {
+  grid-row: 1;
+  margin-inline: calc(var(--reflow-gap, 14px) / 2);
+}
+
+.field[data-reflow-mode="split-focus-rail"][data-reflow-active="false"] > .item {
+  grid-column: span var(--reflow-split-rail-rest-span, 30);
+}
+
+.field[data-reflow-mode="split-focus-rail"][data-reflow-active="true"]
+  > .item[data-reflow-state="selected"] {
+  grid-column: span var(--reflow-split-rail-selected-span, 52);
+  z-index: 2;
+}
+
+.field[data-reflow-mode="split-focus-rail"][data-reflow-active="true"]
+  > .item:not([data-reflow-state="selected"]) {
+  grid-column: span var(--reflow-split-rail-peer-span, 8);
+}
+
+.field[data-reflow-mode="split-focus-rail"][data-reflow-active="true"]
+  > .item[data-reflow-rail="true"] {
+  height: var(
+    --reflow-split-rail-height,
+    min(744px, calc(100dvh - 96px))
+  );
+  align-self: start;
+}
+
 .field[data-reflow-mode="focus-stage"][data-reflow-active="true"] {
   display: grid;
   grid-template-columns: repeat(60, minmax(0, 1fr));
@@ -74,6 +148,50 @@
   justify-self: center;
   margin-inline: 0;
   z-index: 2;
+}
+
+@media (max-width: 760px) {
+  .field[data-reflow-mode="split-focus"],
+  .field[data-reflow-mode="split-focus-rail"] {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    row-gap: var(--reflow-gap, 14px);
+  }
+
+  .field[data-reflow-mode="split-focus"] > .item,
+  .field[data-reflow-mode="split-focus"][data-reflow-active="false"] > .item,
+  .field[data-reflow-mode="split-focus"][data-reflow-active="true"]
+    > .item[data-reflow-state="selected"],
+  .field[data-reflow-mode="split-focus"][data-reflow-active="true"]
+    > .item:not([data-reflow-state="selected"]),
+  .field[data-reflow-mode="split-focus-rail"] > .item,
+  .field[data-reflow-mode="split-focus-rail"][data-reflow-active="false"] > .item,
+  .field[data-reflow-mode="split-focus-rail"][data-reflow-active="true"]
+    > .item[data-reflow-state="selected"],
+  .field[data-reflow-mode="split-focus-rail"][data-reflow-active="true"]
+    > .item:not([data-reflow-state="selected"]) {
+    grid-row: auto;
+    grid-column: 1;
+    margin-inline: 0;
+  }
+
+  .field[data-reflow-mode="split-focus-rail"]
+    > .item[data-reflow-rail="true"] {
+    height: auto;
+    align-self: stretch;
+  }
+
+  .field[data-reflow-mode="split-focus-rail"]
+    > .item[data-reflow-rail="true"]
+    > [data-reflow-summary] {
+    display: block;
+  }
+
+  .field[data-reflow-mode="split-focus-rail"]
+    > .item[data-reflow-rail="true"]
+    > [data-reflow-rail-summary] {
+    display: none;
+  }
 }
 
 @media (max-width: 760px) {
@@ -132,9 +250,28 @@
   min-width: 0;
 }
 
+.railSummary {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.item[data-reflow-state="selected"] > [data-reflow-summary],
+.item[data-reflow-rail="true"] > [data-reflow-summary] {
+  display: none;
+}
+
 .detail {
   overflow: hidden;
   margin-top: 18px;
+}
+
+.item[data-reflow-state="selected"] > [data-reflow-detail] {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-top: 0;
 }
 @media (prefers-reduced-motion: reduce) {
   .item {

@@ -239,7 +239,7 @@ export function AgencyAuditLanding() {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]">
             <div>
               <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
-                Pilot boundary
+                Engagement boundary
               </p>
               <h2 className="mt-4 font-serif text-4xl font-semibold sm:text-5xl">{candidateWork.title}</h2>
               <p className="mt-5 text-sm leading-7 text-foreground-muted">
@@ -295,7 +295,7 @@ export function AgencyAuditLanding() {
         <div className="mx-auto max-w-7xl">
           <div className="max-w-4xl">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
-              Pilot intake
+              Engagement intake
             </p>
             <h2 className="mt-4 font-serif text-4xl font-semibold sm:text-5xl">{firstAsk.title}</h2>
             <p className="mt-5 text-base leading-8 text-foreground-muted">{firstAsk.shape}</p>

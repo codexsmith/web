@@ -30,7 +30,9 @@ requireText(snapshotCss, "repeat(8, minmax(180px, 1fr))", "Stable machine rail m
 requireText(home, "<MachineryDetailSurface />", "Home must expose progressive machinery detail");
 requireText(research, 'variant="research-lane"', "Research must reuse Research Lane anatomy");
 requireText(apparatus, 'variant="apparatus-stack"', "Apparatus must reuse apparatus layer stack");
-requireText(openLab, 'variant="public-projection"', "Open Lab must reuse public projection pipeline");
+if (openLab.includes('variant="public-projection"') || openLab.includes("SHOW THE MACHINERY")) {
+  throw new Error("Open Lab must not restore the interim public-projection machinery panel while Lab Snapshot owns progressive machinery detail");
+}
 
 for (const variant of ["registrar-overview","core-relationships","public-projection","research-lane","apparatus-stack"]) {
   requireText(diagram, '"' + variant + '"', "Missing architecture diagram variant");

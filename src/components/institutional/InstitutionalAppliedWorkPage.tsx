@@ -1,18 +1,17 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
 import routeStyles from "./styles/AppliedWork.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
+import { AppliedWorkEvidenceReflow } from "./sections/AppliedWorkEvidenceReflow";
 import { formatOrdinal } from "./institutionalFormat";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
-  appliedWorkAudiences,
   appliedWorkBoundaries,
   appliedWorkFamilies,
-  appliedWorkGoodFit,
-  appliedWorkOutputs,
   appliedWorkProcess,
 } from "./content/appliedWork";
 
@@ -28,65 +27,42 @@ export function InstitutionalAppliedWorkPage() {
         title={<>Consulting for difficult systems.</>}
         lead={
           <>
-            Scoped consulting for software architecture, AI and operational governance,
-            research infrastructure, technical diagnosis, and bounded pilots.
+            Systems / Architecture Review. Agency / AI Governance Audit. Knowledge /
+            Representation Infrastructure Diagnostic.
           </>
         }
         support={
           <>
             Bring a system, workflow, decision, or failure that is expensive to misunderstand.
-            Start with the smallest engagement that can produce a useful artifact, evidence,
-            or decision.
+            We start with the buyer&apos;s problem, leave behind durable artifacts, and introduce
+            deeper machinery only where the diagnosis justifies it.
           </>
         }
         childLinks={institutionalChildRoutes.appliedWork}
       >
         <aside className={styles.appliedWorkStatus}>
           <span>CONSULTING AVAILABILITY</span>
-          <strong>Available for scoped reviews, working sessions, pilots, and fractional technical advisory.</strong>
+          <strong>Currently prioritizing bounded Systems / Architecture Reviews, with governance and knowledge-infrastructure diagnostics available where the problem calls for them.</strong>
           <p>
             The work draws on prior professional experience in software engineering,
             architecture, consulting, Lean–Agile delivery, startup iteration, and systems
             diagnosis. BFL-specific client case studies are still being built.
           </p>
-          <Link
+          <a
             className={styles.appliedWorkHeroCta}
-            href="/contact?type=applied-work&source=applied-work-hero"
+            href={publicContactMailto("Boundary First Labs — Applied Work")}
           >
             Start a consulting conversation <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </aside>
       </InstitutionalRouteHero>
-
-      <section className={styles.appliedFitSection}>
-        <InstitutionalSectionHeader
-          styles={styles}
-          eyebrow={<>WHEN TO CALL</>}
-          title={<>Good consulting starts with a problem you can already feel.</>}
-          note={<>These are the kinds of conditions where the Lab&apos;s systems practice is most useful.</>}
-        />
-
-        <div className={styles.appliedFitGrid}>
-          {appliedWorkGoodFit.map((signal, index) => (
-            <article key={signal}>
-              <span>{formatOrdinal(index)}</span>
-              <p>{signal}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className={styles.appliedAudienceBand}>
-          <span>COMMON COUNTERPARTS</span>
-          <div>{appliedWorkAudiences.map((audience) => <strong key={audience}>{audience}</strong>)}</div>
-        </div>
-      </section>
 
       <section className={styles.appliedServicesSection}>
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>SERVICES</>}
-          title={<>Three kinds of work. Nine concrete ways to start.</>}
-          note={<>The outer category tells you the problem family; the inner cards are actual engagement shapes.</>}
+          title={<>Three offers. Nine bounded engagement shapes.</>}
+          note={<>Choose the buyer problem first. The inner cards show concrete ways the work can begin.</>}
         />
 
         <div className={styles.appliedServiceStack}>
@@ -117,26 +93,7 @@ export function InstitutionalAppliedWorkPage() {
         </div>
       </section>
 
-      <section className={styles.appliedOutputsSection}>
-        <div className={styles.appliedOutputsLead}>
-          <p className={styles.sectionIndex}>WHAT YOU SHOULD GET</p>
-          <h2>The work should leave behind artifacts, not just conversation.</h2>
-          <p>
-            The exact deliverables depend on the engagement, but the output should make the
-            problem clearer, the decision easier, or the system more operable after BFL is gone.
-          </p>
-        </div>
-
-        <div className={styles.appliedOutputGrid}>
-          {appliedWorkOutputs.map((output, index) => (
-            <article key={output.title}>
-              <span>{formatOrdinal(index)}</span>
-              <strong>{output.title}</strong>
-              <p>{output.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <AppliedWorkEvidenceReflow />
 
       <section className={styles.appliedProcessSection}>
         <InstitutionalSectionHeader
@@ -187,7 +144,7 @@ export function InstitutionalAppliedWorkPage() {
         </p>
 
         <nav className={styles.appliedWorkCloseLinks} aria-label="Applied work next steps">
-          <Link href="/contact?type=applied-work&source=applied-work">Start a consulting conversation <span aria-hidden="true">-&gt;</span></Link>
+          <a href={publicContactMailto("Boundary First Labs — Applied Work")}>Start a consulting conversation <span aria-hidden="true">-&gt;</span></a>
           <Link href="/collaboration">Explore collaboration <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/projects">See applied projects <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/funding">See the funding model <span aria-hidden="true">-&gt;</span></Link>

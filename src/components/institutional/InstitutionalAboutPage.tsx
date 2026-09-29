@@ -15,17 +15,12 @@ export function InstitutionalAboutPage() {
           styles={styles}
           className={styles.aboutHero}
           eyebrow={<>ABOUT BOUNDARY FIRST LABS</>}
-          title={<>A laboratory for the machinery beneath knowledge.</>}
-          lead={<>Boundary First Labs is a founder-led applied systems laboratory and
-              business. It studies how complex systems are represented, transformed, tested,
-              measured, and made operational.</>}
-          support={
-          <>
-            Software, automation, AI agents, repositories, and research machinery expand what
-            one founder can inspect and build. Decision authority and external accountability
-            remain with the founder.
-          </>
-        }
+          title={
+            <>
+              A software engineer spent fifteen years studying mathematics and physics.
+              Boundary First Labs grew out of the convergence.
+            </>
+          }
           childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
@@ -34,21 +29,46 @@ export function InstitutionalAboutPage() {
           </blockquote>
         </InstitutionalRouteHero>
 
+        <section className={styles.aboutOperatingModel}>
+          <div className={styles.aboutOperatingLead}>
+            <p className={styles.sectionIndex}>THE OPERATING MODEL</p>
+            <h2>Solo by headcount. Institutional by design.</h2>
+          </div>
+
+          <div className={styles.aboutOperatingCopy}>
+            <p>
+              Boundary First Labs is a solo, technical-founder-led applied systems laboratory
+              and business: AI-enabled, digital-native, and engineered as an executable
+              institutional machine. It was not first built as a conventional institution and
+              later mirrored in software; its institutional machinery is computationally
+              represented by construction.
+            </p>
+            <p>
+              That makes the Lab different from a digital twin. A twin is a representation of
+              something that exists elsewhere. Here, governed state, provenance, work,
+              experiments, claims, authority, validation, and projection are part of how the
+              institution operates. Websites, dashboards, reports, graphs, and simulations are
+              projections over that state rather than substitutes for it.
+            </p>
+            <p>
+              The organization itself is part of the engineering problem. Research lanes,
+              claims, experiments, software, products, provenance, work state, and authority
+              are represented as inspectable objects that repositories, automation, and AI
+              agents can help operate. That lets one founder work across an unusually broad
+              surface without pretending the machine replaces human judgment, scientific
+              validation, promotion authority, or external accountability.
+            </p>
+            <p>
+              Boundary First Labs is the fourth startup its founder has been involved in.
+              Earlier startup work supplied practical experience with product formation,
+              technical delivery, customer-facing systems, and the difference between having
+              an idea and building an institution that can repeatedly execute on it.
+            </p>
+          </div>
+        </section>
+
         <AboutReflowGroups />
 
-        <section className={styles.aboutClose}>
-          <p className={styles.sectionIndex}>THE LAB IN ONE SENTENCE</p>
-          <h2>
-            Boundary First Labs is a founder-led solopreneur operation: a single-person,
-            computationally leveraged applied systems research laboratory and business
-            studying the machinery by which knowledge is represented, transformed, tested,
-            and made operational.
-          </h2>
-          <p>
-            The deeper ambition: build systems that help people and institutions understand
-            more clearly, act more capably, exercise power more accountably, and repair what fails.
-          </p>
-        </section>
       </InstitutionalPageShell>
   );
 }

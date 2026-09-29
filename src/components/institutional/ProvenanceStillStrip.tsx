@@ -6,10 +6,12 @@ export function ProvenanceStillStrip({
   sequence,
   role,
   period,
+  caption,
 }: {
   sequence: ProvenanceStillSequence;
   role: string;
   period: string;
+  caption?: string;
 }) {
   return (
     <figure className={styles.provenancePanorama}>
@@ -38,7 +40,7 @@ export function ProvenanceStillStrip({
 
       <figcaption>
         <span>VIDEO-DERIVED PAN SEQUENCE</span>
-        <p>{sequence.note}</p>
+        <p>{caption ?? sequence.note}</p>
       </figcaption>
     </figure>
   );

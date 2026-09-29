@@ -2,8 +2,10 @@ import Link from "next/link";
 import type { ContentNode } from "@/lib/content";
 import { nodes } from "@/lib/content";
 import { institutionalContentNodeRoutes } from "@/lib/site-release";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import {
+  InstitutionalEvidenceStatus,
   InstitutionalRouteHero,
   InstitutionalSectionHeader,
 } from "./InstitutionalPrimitives";
@@ -29,6 +31,7 @@ function kindLabel(kind: ContentNode["kind"]) {
     root: "Institution",
     branch: "Program area",
     product: "Product",
+    wedge: "Product wedge",
     service: "Service",
     project: "Project",
     research: "Research",
@@ -73,6 +76,7 @@ export function InstitutionalContentNodePage({
   const body = node.body ?? [];
   const inspections = node.inspection ?? [];
   const related = node.links ?? [];
+  const evidence = node.evidence;
   const topLevel = topLevelRoute(node);
 
   return (
@@ -103,6 +107,18 @@ export function InstitutionalContentNodePage({
           ) : null}
         </aside>
       </InstitutionalRouteHero>
+
+      {evidence ? (
+        <InstitutionalEvidenceStatus
+          styles={styles}
+          status={evidence.status}
+          whatExists={evidence.whatExists}
+          externalEvidence={evidence.externalEvidence}
+          canonicalSource={evidence.canonicalSource}
+          limitations={evidence.limitations}
+          nextTest={evidence.nextTest}
+        />
+      ) : null}
 
       {body.length ? (
         <section className={styles.contentNodeBody}>
@@ -220,9 +236,9 @@ export function InstitutionalContentNodePage({
           <Link href="/atlas">
             Lab Atlas <span aria-hidden="true">→</span>
           </Link>
-          <Link href="/contact">
+          <a href={publicContactMailto("Boundary First Labs — Public record inquiry")}>
             Contact <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </nav>
       </section>
     </InstitutionalPageShell>

@@ -2,91 +2,91 @@ export const nowPriorityLanes = [
   {
     code: "01",
     status: "ACTIVE",
-    title: "Finish the public institutional boundary",
+    title: "Close the public and commercial interface",
     description:
-      "Make the Lab understandable to people who do not already know the vocabulary, while keeping the deeper corpus available for inspection.",
+      "Finish the current website, offer, funding, and inquiry surfaces so an outsider can understand the Lab and reach a concrete next action without founder narration.",
     work: [
-      "Finish the institutional website's remaining trust/governance surface and connect the contextual inquiry receiver.",
-      "Keep Funding, Collaboration, Applied Work, Evidence, Contact, and the roadmap connected to the substantive work beneath them.",
-      "Verify the full path from public explanation to inquiry, routing, evidence capture, and repair without turning the site into a marketing shell detached from the corpus.",
+      "Finish the current Website v3 commercial-execution pass across About, Applied Work, Funding, Now, and related entry surfaces.",
+      "Keep the public story connected to real products, services, research objects, evidence, and contact paths instead of allowing a separate marketing canon to form.",
+      "Use release QA, cold-reader review, and actual inquiry behavior to repair what remains confusing.",
     ],
     closure:
-      "A first-time visitor can understand what BFL is, what it does, what is still uncertain, and where to go next without founder narration.",
+      "A first-time visitor can explain what BFL is, identify a relevant lane, inspect the evidence boundary, and take a real next step without a live founder walkthrough.",
     tone: "public",
   },
   {
     code: "02",
     status: "ACTIVE",
-    title: "Turn capability into outside evidence",
+    title: "Turn four funding lanes into outside evidence",
     description:
-      "Move from founder history and inspectable internal artifacts to BFL-native pilots, client work, external review, and repeat use.",
+      "Move the current lead objects in services, products, knowledge software, and research funding into contact with customers, partners, users, reviewers, and funders.",
     work: [
-      "Scope the first Applied Work engagements and bounded pilots.",
-      "Capture case-study evidence without inflating prototypes or historical work into current traction.",
-      "Use product behavior, collaborator feedback, and failed engagements as evidence about what should continue.",
+      "Use Systems / Architecture Review as the near-term B2B services test.",
+      "Advance Boundary-First Chess and adjacent sports/game products through direct and partner-distributed market tests.",
+      "Test Projectr / Knowledge Explorer as paid knowledge infrastructure only after repeated voluntary use, and advance Weather through grants, sponsored research, and scientific collaboration.",
     ],
     closure:
-      "At least one BFL-native external engagement or pilot produces inspectable evidence that can be separated from the founder's prior career.",
-    tone: "evidence",
+      "At least one lane produces a real external event—paid work, product use or sale, partner distribution, funded research, or clear negative evidence that narrows the lane.",
+    tone: "external",
   },
   {
     code: "03",
     status: "ACTIVE",
-    title: "Execute the representational laboratory program",
+    title: "Audit the population behind the Registrar",
     description:
-      "Test whether shared representational machinery survives materially different domains instead of assuming that a common vocabulary is already justified.",
+      "The whole-Lab registry census is closed; the current question is whether durable object populations and their projections are actually complete, linked, and executable enough to support the institution.",
     work: [
-      "Complete acceptance and integration work for the active representation laboratories.",
-      "Bring multiple domain-specific labs under a shared runtime only where cross-domain evidence earns the abstraction.",
-      "Preserve replay, provenance, accessibility, claim ceilings, and negative results as part of the apparatus.",
+      "Continue the Registry Population & Projection Audit without reopening the completed 620-registry discovery census.",
+      "Use Experiments as a test of Research Lane completeness: every durable Experiment must resolve to a durable Research Lane, including not-ready and not-started execution states.",
+      "Repair omissions in Research Lanes, Experiments, machine projections, and owner-local registries while preserving source authority and transaction history.",
     ],
     closure:
-      "Multiple materially different laboratories execute under an evidence-backed shared apparatus without erasing domain-native semantics.",
+      "Durable research objects can be enumerated from source authorities with explicit ownership, machine projection, and no experiment left orphaned from a Research Lane.",
     tone: "apparatus",
   },
   {
     code: "04",
-    status: "NEXT",
-    title: "Bind publications and invite criticism",
+    status: "ACTIVE",
+    title: "Run the research benchmarks that can falsify the stack",
     description:
-      "Convert substantial manuscript and research material into canonical public objects with explicit review and authority states.",
+      "Push Boundary Theory, Distinction Space, Information Mechanics, and related machinery through bounded comparisons against established mathematics, physics, computation, and native domain methods.",
     work: [
-      "Select bounded publication candidates by claim maturity rather than manuscript volume.",
-      "Bind source, claim, evidence, status, and review metadata to each released object.",
-      "Route appropriate work to domain experts, technical reviewers, collaborators, and critics.",
+      "Advance the statistical-mechanics / representational-entropy program through exact projection, memory, lumpability, and coarse-graining benchmarks.",
+      "Continue the fine-structure program only where normalization, resolution, RG, and parameter-selection claims survive explicit no-go and native-theory controls.",
+      "Preserve negative results and record 'added value: none' when Boundary First vocabulary does not outperform or clarify the established account.",
     ],
     closure:
-      "Publications can be evaluated as specific objects with clear claims, sources, review state, and correction paths rather than as a large undifferentiated corpus.",
-    tone: "publication",
+      "The strongest active research programs have executable or proof-facing tests that can keep, narrow, rename, or reject claims rather than merely extend the vocabulary.",
+    tone: "evidence",
   },
   {
     code: "05",
     status: "ACTIVE",
-    title: "Advance ready relationships, funding, and distribution",
+    title: "Turn mature research into reviewable publication objects",
     description:
-      "Use the work already assembled to test real collaboration, funding, commercialization, and distribution routes.",
+      "Convert the strongest paper candidates and already-paperized programs into specific manuscripts with claim ceilings, provenance, related-work boundaries, and correction paths.",
     work: [
-      "Advance ready-now local, technical, research, and founder-network relationships.",
-      "Use bounded briefs, demos, pilots, and evidence packets instead of whole-Lab persuasion.",
-      "Pursue patronage, grants, paid work, sponsorship, licensing, and product revenue according to the kind of work being funded.",
+      "Continue the Information Mechanics / Information + Physics paperization sequence from the canonical working manuscripts already created.",
+      "Use normalized publication mines as routing maps rather than treating candidate volume as publication maturity.",
+      "Select external reviewers by the claims actually made and preserve negative review, revision, and supersession as durable publication state.",
     ],
     closure:
-      "High-fit counterparties have a declared stage and next action, and at least some routes produce real review, use, funding, distribution, or a clean reason to stop.",
-    tone: "external",
+      "A bounded set of manuscripts can be reviewed as specific objects with stable identity, source basis, novelty posture, evidence state, and correction path.",
+    tone: "publication",
   },
   {
     code: "06",
-    status: "ACTIVE",
-    title: "Keep one coherent body of work",
+    status: "NEXT",
+    title: "Make the executable institution transferable",
     description:
-      "Continue consolidating the research library so public pages, experiments, publications, and tools point back to stable source objects rather than parallel versions.",
+      "Use the Observatory, Registrar, work protocols, and durable projections to reduce dependence on founder memory without pretending automation is institutional authority.",
     work: [
-      "Consolidate overlapping domain and theory surfaces without deleting distinct evidence or failed reasoning.",
-      "Keep canonical records, historical lineage, generated artifacts, and live runtime state distinguishable.",
-      "Make more of the corpus machine-addressable and executable without pretending every indexed object is already an autonomous machine.",
+      "Keep revision, contradiction, dependency-impact, projection-loss, and authority semantics inspectable inside the Observatory and control plane.",
+      "Turn recurring founder procedures into explicit artifacts, transactions, verifier states, and handoffable operating surfaces.",
+      "Test whether bounded parts of the Lab can be inspected or operated by another person without losing provenance, claim ceilings, or promotion authority.",
     ],
     closure:
-      "The Lab can change quickly without creating multiple competing sources of truth or losing the provenance needed to reconstruct why a decision was made.",
+      "At least one meaningful institutional workflow can be followed or operated by a non-founder from durable state, with human authority boundaries still explicit.",
     tone: "coherence",
   },
 ] as const;
@@ -95,25 +95,25 @@ export const roadmapHorizons = [
   {
     label: "NOW",
     horizon: "Current cycle",
-    title: "Externalize, test, and close the obvious gaps.",
+    title: "Externalize the institution and finish the next bounded audits.",
     items: [
-      "Finish the public institutional interface.",
-      "Package and scope Applied Work.",
-      "Execute the active laboratory and corpus-coherence work.",
-      "Advance ready-now collaboration and funding routes.",
-      "Prepare publication objects for bounded review.",
+      "Finish the current Website v3 public/commercial execution pass.",
+      "Advance the four funding lanes into real external contact.",
+      "Continue the Registry Population & Projection Audit, with Experiment → Research Lane completeness as an explicit invariant.",
+      "Run the next statistical-mechanics, admissibility, and fine-structure control work.",
+      "Move the strongest paperized research objects toward bounded external review.",
     ],
   },
   {
     label: "NEXT",
-    horizon: "After the first external loops",
-    title: "Turn contact into evidence.",
+    horizon: "After the current closures",
+    title: "Turn contact and machinery into evidence another person can inspect.",
     items: [
-      "Complete external pilots, reviews, or paid engagements.",
-      "Bind the first strong BFL-native case studies.",
-      "Release publication objects with explicit review state.",
-      "Collect repeat product-use and distribution evidence.",
-      "Repair the public story from what outsiders actually misunderstand.",
+      "Bind paid work, product use, funding dispositions, collaboration, and failed-fit events as separate evidence.",
+      "Promote only the research machinery that survives native-theory and adversarial controls.",
+      "Release a small first cohort of manuscripts with explicit review and correction state.",
+      "Exercise Observatory and Registrar projections against live institutional changes rather than only finite fixtures.",
+      "Test non-founder use of selected tools, methods, or operating procedures.",
     ],
   },
   {
@@ -121,11 +121,11 @@ export const roadmapHorizons = [
     horizon: "After repeated evidence",
     title: "Promote repeatable capability into durable programs.",
     items: [
-      "Move from one-off projects to programs only where repeated capability is demonstrated.",
-      "Train non-founder operators, facilitators, reviewers, and contributors.",
-      "Expand institutional partnerships and larger public-interest funding routes.",
-      "Transfer mature products or methods when another steward can operate them better.",
-      "Make release, correction, governance, and contributor development sustainable beyond one person's active memory.",
+      "Scale only funding lanes that have repeatable external evidence.",
+      "Move from one-off review and product tests to durable programs where demand or research value is demonstrated.",
+      "Train non-founder operators, reviewers, collaborators, and maintainers around bounded machinery.",
+      "Expand institutional partnerships and larger public-interest funding routes where the evidence warrants them.",
+      "Transfer mature products, methods, or infrastructure when another steward can operate them better.",
     ],
   },
 ] as const;
@@ -134,32 +134,32 @@ export const roadmapGates = [
   {
     title: "Legible institution",
     description:
-      "A new reader can explain what the Lab is, distinguish method from theory, inspect evidence, and find a relevant path without reading the entire corpus.",
+      "A new reader can explain what the Lab is, distinguish research from products and services, inspect the evidence boundary, and find a relevant path without reading the entire corpus.",
   },
   {
-    title: "External evidence",
+    title: "External transaction or use",
     description:
-      "At least one BFL-native pilot, engagement, review, or product interaction produces evidence that did not originate inside the Lab.",
+      "At least one BFL-native service, product, software, funding, or collaboration lane produces evidence that originated outside the Lab.",
+  },
+  {
+    title: "Registry population completeness",
+    description:
+      "Durable Research Lanes, Experiments, research packets, and other audited object populations are source-bound, machine-projectable, and free of known orphan identities in the audited scope.",
+  },
+  {
+    title: "Executable research benchmark",
+    description:
+      "A major theoretical claim or method survives—or is narrowed by—a preregistered proof-facing, computational, or native-domain comparison with preserved negative results.",
   },
   {
     title: "Canonical publication",
     description:
-      "A released research object has bound claims, sources, status, review state, correction path, and a stable public identity.",
+      "A released research object has bound claims, sources, status, related-work boundary, review state, correction path, and a stable public identity.",
   },
   {
-    title: "Cross-domain apparatus",
+    title: "Independent operation",
     description:
-      "Shared machinery is demonstrated across multiple materially different laboratories rather than asserted from one example.",
-  },
-  {
-    title: "Independent use",
-    description:
-      "At least one non-founder practitioner can use a bounded method or tool on a new case without ordinary delivery requiring founder interpretation.",
-  },
-  {
-    title: "Repeatable external loop",
-    description:
-      "Public projection leads to contact, contact leads to use or review, and the resulting evidence changes the work, roadmap, or public representation.",
+      "At least one non-founder can inspect or operate a bounded method, tool, or institutional workflow from durable state without ordinary execution depending on founder memory.",
   },
 ] as const;
 

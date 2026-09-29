@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 import {
   inquiryTypes,
   type InquiryTypeId,
@@ -90,10 +91,10 @@ export function InstitutionalInquiryForm({
     >
       {!intakeEnabled ? (
         <div className={styles.inquiryUnavailable} role="status">
-          <span>WEB FORM NOT CONNECTED YET</span>
+          <span>EMAIL IS THE CURRENT CONTACT ROUTE</span>
           <p>
-            Direct email is already live. This form stays disabled until its receiver is
-            connected so nothing can appear to send and then disappear.
+            Write <a href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a>. A short note is
+            enough, and sensitive material can wait until there is an appropriate handling path.
           </p>
         </div>
       ) : null}

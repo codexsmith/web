@@ -1,3 +1,5 @@
+import { publicContactMailto } from "@/lib/site-contact";
+
 export type AudienceJourneyStep = {
   label: string;
   title: string;
@@ -97,7 +99,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     ],
     action: {
       label: "Offer technical review",
-      href: "/contact?type=research-review&source=start-researcher",
+      href: publicContactMailto("Boundary First Labs — Research review"),
     },
   },
   {
@@ -142,7 +144,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     ],
     action: {
       label: "Bring an engineering problem",
-      href: "/contact?type=applied-work&source=start-engineer",
+      href: publicContactMailto("Boundary First Labs — Applied Work"),
     },
   },
   {
@@ -181,7 +183,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     ],
     action: {
       label: "Discuss funding",
-      href: "/contact?type=funding&source=start-funder",
+      href: publicContactMailto("Boundary First Labs — Funding"),
     },
   },
   {
@@ -220,7 +222,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     ],
     action: {
       label: "Propose a collaboration",
-      href: "/contact?type=collaboration&source=start-collaborator",
+      href: publicContactMailto("Boundary First Labs — Collaboration"),
     },
   },
   {
@@ -259,7 +261,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     ],
     action: {
       label: "Scope applied work",
-      href: "/contact?type=applied-work&source=start-client",
+      href: publicContactMailto("Boundary First Labs — Applied Work"),
     },
   },
   {
@@ -298,7 +300,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     ],
     action: {
       label: "Send a technical critique",
-      href: "/contact?type=research-review&source=start-critic",
+      href: publicContactMailto("Boundary First Labs — Technical critique"),
     },
   },
   {

@@ -131,6 +131,7 @@ function regionGlyph(node: ContentNode): BfuxIconName {
     case "root": return "root";
     case "branch": return "contexture";
     case "product": return "object";
+    case "wedge": return "object";
     case "service": return "gate";
     case "project": return "transition";
     case "research": return "witness";

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -216,7 +217,7 @@ export function InstitutionalCollaborationPage() {
           of value, there may simply be nothing to do yet—and that is a useful answer too.
         </p>
         <nav className={styles.collaborationCloseLinks} aria-label="Collaboration next steps">
-          <Link href="/contact?type=collaboration&source=collaboration">Start a collaboration conversation <span aria-hidden="true">-&gt;</span></Link>
+          <a href={publicContactMailto("Boundary First Labs — Collaboration")}>Start a collaboration conversation <span aria-hidden="true">-&gt;</span></a>
           <Link href="/open-lab">Explore Open Lab <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/funding">How funding works <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/projects">See current projects <span aria-hidden="true">-&gt;</span></Link>

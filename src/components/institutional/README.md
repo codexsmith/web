@@ -100,6 +100,27 @@ The Evidence route is the institutional proof boundary rather than a brag sheet.
 The Now / Roadmap route is a dated public projection of the canonical active work queue and major program roadmaps, not a second operational backlog or a promise calendar. It compresses current work into six public priority lanes with explicit closure conditions, then separates NOW / NEXT / LATER so later institutional scale remains dependent on evidence earned earlier. The page also makes roadmap mutability explicit: negative results, external criticism, dependencies, finite capacity, funding, and transfer opportunities can change sequence or scope without changing claim standards.
 
 
+### Temporal surface maintenance — Now / What Changed
+
+The temporal surfaces are deliberately **manual, source-bound projections** today. PR #96 established the rendering/data contract and explicitly left Lab -> web automation for later; do not imply that an automated cross-repository feed exists.
+
+Maintain them as two different projections:
+
+- **Now / Roadmap** (`content/now.ts`) answers **what deserves current public attention and what would close it**. Derive it from the canonical Active Work Queue, source-owned program roadmaps, and clearly active bounded workstreams. Compress the source state into a small number of public lanes. Do not copy TODO lists, every open branch, or every research idea. A lane needs a public description, concrete current work, and a closure condition.
+- **What Changed** (`content/changes.ts`) answers **which material state transitions already happened**. Admit only changes that reached canonical repository state and materially altered what exists, what is canonical, what is publicly inspectable, research continuity, or institutional machinery. Every record must bind an exact repository, commit SHA, commit subject, date, consequence, and relevant public surface.
+
+Refresh procedure:
+
+1. Read the current Lab and web canonical heads plus the Lab Active Work Queue before editing.
+2. For **What Changed**, curate from merged/canonical revisions only. Do not publish branch-local work as completed state. Update `changesProjection` cutoffs and build date, replace the current window, and move the previous current-window records into `historicalChanges` so the archive remains monotonic.
+3. For **Now**, reconcile the public lanes against current source state rather than mechanically preserving the previous six. It is valid to rename, merge, demote, or replace lanes when the institution changes. Preserve the distinction between current attention, NEXT work, and later scale.
+4. Keep **Now** and **What Changed** consistent without making them identical: Now may include active unfinished work; What Changed may include only completed canonical state transitions.
+5. Run the temporal/archive contract checks through the normal `contracts:check` / Review Gate path. `scripts/check_changes_archive.mjs` pins the current source cutoffs and key provenance milestones and should be updated in the same transaction as `changes.ts`.
+6. After the website branch itself merges, treat that merge as eligible for a **future** What Changed refresh rather than pre-declaring the working branch as canonical.
+
+This maintenance rule is intentionally curation-first. Automation may later collect candidate deltas or source snapshots, but human/publication authority still decides which changes are material enough to project and how current work is compressed for public reading.
+
+
 The Contact route at `/v3/contact` is the contextual inquiry boundary. It is deliberately a direct footer destination rather than another top-level header route or another hero-card dependency on every page. Applied Work, Collaboration, Funding, Open Lab, and Now link into Contact with typed query context so the reason for contact survives navigation. The form is intentionally small: name, email, optional affiliation, inquiry type, optional desired outcome, and message.
 
 Contact submission is server-mediated through `/api/inquiry`. The public form is enabled only when the server-only `BFL_INQUIRY_WEBHOOK_URL` is configured; an optional `BFL_INQUIRY_WEBHOOK_TOKEN` can authenticate the receiver. If no receiver exists, the UI remains visibly disabled so the site cannot appear to accept and then lose messages. The API validates field length and type, preserves source context, uses a honeypot and lightweight per-process rate limiting, and forwards no requester IP or browser fingerprint to the receiver. Formal Open Lab submission remains separate and closed until its stronger privacy, consent, retention, moderation, and stewardship controls are ready.

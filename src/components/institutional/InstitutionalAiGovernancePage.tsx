@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { institutionalChildRoutes } from "./institutionalRoutes";
@@ -131,19 +132,21 @@ export function InstitutionalAiGovernancePage() {
         <h2>Pro-capability. Anti-unaccountable consequence.</h2>
         <p>
           AI can expand what people and small institutions are able to build, inspect,
-          understand, and repair. Consequential authority should remain bounded and answerable.
+          understand, and repair. Boundary First Labs is digital-native, but that does not make
+          it machine-sovereign: capability is not authority, execution is not promotion, and
+          automation is not legitimacy. Consequential authority should remain bounded and answerable.
         </p>
 
         <div className={styles.governanceCloseActions}>
           <Link href="/products/agentic-scientific-method">
             Explore Agentic Scientific Method <span aria-hidden="true">→</span>
           </Link>
-          <Link href="/contact?type=applied-work&source=ai-governance">
+          <a href={publicContactMailto("Boundary First Labs — AI Governance Review")}>
             Discuss a bounded AI governance review <span aria-hidden="true">→</span>
-          </Link>
-          <Link href="/open-lab?type=BFL_CRITIQUE#open-lab-intake">
+          </a>
+          <a href={publicContactMailto("Boundary First Labs — Technical critique — AI Governance")}>
             Critique this doctrine <span aria-hidden="true">→</span>
-          </Link>
+          </a>
         </div>
       </section>
     </InstitutionalPageShell>

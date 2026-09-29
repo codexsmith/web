@@ -2,17 +2,17 @@
   "version": "0.2.0",
   "id": "agency-representation-audit",
   "slug": "agency-audit",
-  "title": "Agency and Representation Audit",
+  "title": "Agency / AI Governance Audit",
   "pageType": "public-professional-service",
-  "status": "pilot-intake",
+  "status": "offer-ready",
   "visibility": "public",
   "hero": {
-    "eyebrow": "AGENCY + REPRESENTATION AUDIT · PILOT INTAKE",
+    "eyebrow": "AGENCY / AI GOVERNANCE AUDIT · AVAILABLE ENGAGEMENT",
     "headline": "Make the chain from representation to consequence inspectable.",
     "support": "A bounded diagnostic for consequential software, AI, and institutional processes. Map who can act, what representation informs or authorizes the action, how consequences propagate, whether the process can be contested, and who owns repair.",
     "primaryCta": {
       "label": "Start an audit inquiry",
-      "href": "/collaborate"
+      "href": "mailto:admin@boundaryfirstlabs.com?subject=Boundary%20First%20Labs%20-%20Agency%20%2F%20AI%20Governance%20Audit"
     },
     "secondaryCta": {
       "label": "See the audit method",
@@ -78,7 +78,7 @@
     "closureTest": "The audit is not complete when the decision is explained. It closes only when the scoped authority, representation, consequence, contest, and repair paths can be reconstructed well enough to expose unresolved defects and ownership gaps."
   },
   "candidateWork": {
-    "title": "Good pilot candidates are bounded, consequential, and inspectable.",
+    "title": "Good engagement candidates are bounded, consequential, and inspectable.",
     "goodFit": [
       "one identifiable process or decision path",
       "a real representation such as a record, score, model output, category, case file, or eligibility state",
@@ -103,8 +103,8 @@
     ]
   },
   "firstAsk": {
-    "title": "Pilot one bounded process.",
-    "shape": "Start with one process whose inputs, decision path, affected parties, and downstream consequences can be named. The pilot is intended to produce a reconstructable map and a prioritized defect register, not a universal verdict on the institution.",
+    "title": "Start with one bounded process.",
+    "shape": "Start with one process whose inputs, decision path, affected parties, and downstream consequences can be named. The engagement is intended to produce a reconstructable map and a prioritized defect register, not a universal verdict on the institution.",
     "whatYouBring": [
       "the process or decision path to examine",
       "known actors, systems, policies, vendors, and handoffs",
@@ -136,12 +136,12 @@
     "claimRule": "Findings describe observed or reconstructable agency, representation, consequence, contest, and repair conditions inside the declared scope. They should not be promoted into claims about the institution as a whole without additional evidence."
   },
   "closing": {
-    "eyebrow": "AGENCY + REPRESENTATION AUDIT",
+    "eyebrow": "AGENCY / AI GOVERNANCE AUDIT",
     "title": "If the system can act, the path from authority to repair should be reconstructable.",
     "finalLine": "Make the representation visible. Follow the consequence. Preserve the contest path. Assign the repair."
   },
   "cta": {
     "label": "Start an audit inquiry",
-    "href": "/collaborate"
+    "href": "mailto:admin@boundaryfirstlabs.com?subject=Boundary%20First%20Labs%20-%20Agency%20%2F%20AI%20Governance%20Audit"
   }
 }

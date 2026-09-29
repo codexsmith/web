@@ -31,6 +31,7 @@ import {
   type BridgeEventOperation,
 } from "@/lib/bridge-event-ledger";
 import { validateProductLandingManifest } from "@/lib/product-landing-routing";
+import { startServerActionObservation } from "@/lib/server-observability";
 
 type BridgeMutationOperation = Exclude<BridgeEventOperation, "register">;
 
@@ -76,31 +77,44 @@ function requireBridgeMutationOperation(value: string): BridgeMutationOperation 
 }
 
 export async function loginBridgeOpsAction(formData: FormData) {
+  const observation = startServerActionObservation("bridge.login");
   const candidate = text(formData, "password");
   if (!isBridgeOpsPassword(candidate)) {
+    observation.done("rejected");
     redirect(destination("Invalid operator password", true));
   }
   await createBridgeOpsSession();
+  observation.done("session_opened");
   redirect(destination("Operator session opened"));
 }
 
 export async function logoutBridgeOpsAction() {
+  const observation = startServerActionObservation("bridge.logout");
   await clearBridgeOpsSession();
+  observation.done("session_closed");
   redirect("/ops/bridges");
 }
 
 async function requireSession() {
   if (!(await hasBridgeOpsSession())) {
+    console.log(JSON.stringify({
+      level: "info",
+      msg: "blocked",
+      action: "bridge.mutate",
+      outcome: "session_required",
+    }));
     redirect(destination("Operator session required", true));
   }
 }
 
 export async function mutateBridgeAction(formData: FormData) {
   await requireSession();
+  const observation = startServerActionObservation("bridge.mutate");
 
   const id = text(formData, "id");
   const operationText = text(formData, "operation");
   if (!id || !operationText) {
+    observation.done("invalid_request");
     redirect(destination("Bridge id and operation are required", true));
   }
 
@@ -198,6 +212,12 @@ export async function mutateBridgeAction(formData: FormData) {
     successMessage = `${id}: ${operation} committed (${result.commitSha.slice(0, 8)})`;
   } catch (error) {
     errorMessage = error instanceof Error ? error.message : "Bridge mutation failed";
+  }
+
+  if (errorMessage) {
+    observation.failed(new Error("Bridge mutation failed"));
+  } else {
+    observation.done("committed");
   }
 
   redirect(destination(errorMessage ?? successMessage ?? "Bridge operation completed", Boolean(errorMessage)));

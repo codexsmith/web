@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -164,7 +165,7 @@ export function InstitutionalNowPage() {
         </p>
 
         <nav className={styles.nowCloseLinks} aria-label="Roadmap next steps">
-          <Link href="/contact?type=general&source=now">Start a conversation <span aria-hidden="true">-&gt;</span></Link>
+          <a href={publicContactMailto("Boundary First Labs — General inquiry")}>Start a conversation <span aria-hidden="true">-&gt;</span></a>
           <Link href="/evidence">Evidence <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/applied-work">Applied Work <span aria-hidden="true">-&gt;</span></Link>
           <Link href="/collaboration">Collaboration <span aria-hidden="true">-&gt;</span></Link>

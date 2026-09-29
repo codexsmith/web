@@ -1,3 +1,5 @@
+import { PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
+
 export const institutionalRoutes = [
   { label: "About", href: "/about" },
   { label: "Research", href: "/research" },
@@ -301,7 +303,7 @@ export const institutionalFooterGroups = [
       { label: "Open Lab", href: "/open-lab" },
       { label: "Collaboration", href: "/collaboration" },
       { label: "Funding", href: "/funding" },
-      { label: "Contact", href: "/contact" },
+      { label: "Contact", href: PUBLIC_CONTACT_MAILTO },
     ],
   },
 ] as const;

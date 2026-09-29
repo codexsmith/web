@@ -1,3 +1,4 @@
+import { observeRequest } from "@/lib/server-observability";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
@@ -360,7 +361,8 @@ async function simulate(p: Parameters) {
   };
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  return observeRequest(request, "/api/simulate", async () => {
   return NextResponse.json({
     ok: true,
     engine_version: ENGINE_VERSION,
@@ -369,9 +371,11 @@ export async function GET() {
     defaults: DEFAULTS,
     presets: PRESETS,
   }, { headers: { "Cache-Control": "no-store" } });
+  });
 }
 
 export async function POST(request: Request) {
+  return observeRequest(request, "/api/simulate", async () => {
   try {
     const text = await request.text();
     if (!text.length || text.length > 65_536) throw new Error("request body must be between 1 byte and 64 KB");
@@ -382,4 +386,5 @@ export async function POST(request: Request) {
     const status = message.includes("must") || message.includes("unknown preset") || message.includes("too large") || message.includes("request body") ? 422 : 500;
     return NextResponse.json({ ok: false, error: status === 500 ? "simulation failed" : message, detail: status === 500 ? message.slice(0, 180) : undefined }, { status });
   }
+  });
 }

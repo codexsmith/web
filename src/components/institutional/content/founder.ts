@@ -42,7 +42,7 @@ export const founderTimeline = [
     period: "INDEPENDENT LAB",
     title: "The questions stayed alive across domains.",
     description:
-      "Years of independent study and a dedicated research environment accumulated work across computation, mathematics, physics, cognition, institutions, and formal systems. The workspace itself became an instrument for externalizing and repairing representations.",
+      "Years of independent study included mathematical physics—Einstein’s framework, statistical mechanics, and the fine-structure constant—alongside computation, mathematics, cognition, institutions, and formal systems. A dedicated research environment became an instrument for externalizing and repairing representations.",
   },
   {
     period: "BOUNDARY FIRST LABS",

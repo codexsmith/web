@@ -3,7 +3,7 @@ export const inquiryTypes = [
     id: "applied-work",
     label: "Applied work / consulting",
     short: "A software, systems, AI-governance, architecture, workshop, or advisory problem.",
-    prompt: "What are you working on, and where do you think Boundary First Labs could help?",
+    prompt: "What system are you working on, what is going wrong or becoming difficult to trust, what happens if it stays unresolved, and what decision do you need to make next?",
   },
   {
     id: "collaboration",
@@ -13,9 +13,9 @@ export const inquiryTypes = [
   },
   {
     id: "funding",
-    label: "Funding / sponsorship",
-    short: "Grant, philanthropic, patronage, sponsorship, or other support for a defined conversion of existing capacity.",
-    prompt: "What work are you interested in supporting or learning more about?",
+    label: "Funding / capitalization / sponsorship",
+    short: "Runway, sponsorship, research/public-good funding, product-specific capital, or another bounded resource for converting existing capacity.",
+    prompt: "Which capital role or bounded conversion are you interested in, and what outcome or evidence should the support make possible?",
   },
   {
     id: "research-review",
@@ -68,7 +68,7 @@ export const inquiryFamilies = [
     code: "02",
     title: "Evaluate, challenge, or support the work",
     description:
-      "Technical criticism, research discussion, funding, sponsorship, or institutional support.",
+      "Technical criticism, research discussion, funding, capitalization, sponsorship, or institutional support.",
     types: ["research-review", "funding"] as const,
     tone: "evaluate",
   },
@@ -118,9 +118,9 @@ export const inquiryBoundaries = [
       "The page you came from and the reason you wrote stay attached so the conversation can move to the right place without losing what you meant.",
   },
   {
-    label: "NO HIDDEN SALES FUNNEL",
+    label: "NO DISGUISED MAILING LIST",
     description:
-      "Contact is for conversation, not a disguised mailing list or sales-qualification funnel.",
+      "Contact does not subscribe you to a marketing list. If you contact us about Applied Work, we may ask a few qualification questions so we can tell whether there is a real bounded problem and a responsible next step.",
   },
 ] as const;
 

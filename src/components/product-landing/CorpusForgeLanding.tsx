@@ -17,6 +17,34 @@ import content from "@/content/product-landing-pages/corpus-forge.json";
 
 const lifecycleIcons = [Database, FileText, GitMerge, UserCheck, BadgeCheck, History] as const;
 
+const corpusForgeSourceChain = [
+  {
+    label: "Canonical product home",
+    detail: "Owner-level product identity, routing, implementation bridge, exclusions, and institutional machine relationship.",
+    href: "https://github.com/codexsmith/boundary-first-labs/blob/main/organized_library_curated/999_Library/03_Domains/03_engineered_systems__domain_family/01_software_engineering__domain/04_corpus_forge__product/README.md",
+  },
+  {
+    label: "Current release boundary",
+    detail: "What is already real, what remains internal, and the bounded path from Local Starter Kit to external reproducibility.",
+    href: "https://github.com/codexsmith/boundary-first-labs/blob/main/organized_library_curated/999_Library/01_Foundations/09_lab_funding__strategy/14_corpus_forge_release_boundary_audit__2026-09-16.md",
+  },
+  {
+    label: "Runnable starter documentation",
+    detail: "Local Starter Kit installation, pipeline operation, intake, provenance, claim/citation audit, artifact extraction, and Workbench outputs.",
+    href: "https://github.com/codexsmith/boundary-first-labs/blob/main/organized_library_curated/999_Library/03_Domains/03_engineered_systems__domain_family/01_software_engineering__domain/04_corpus_forge__product/07_Local_Starter_Kit/README.md",
+  },
+  {
+    label: "Reproducible vertical slice",
+    detail: "A bounded source-to-consequence case with typed records, contradictions, human-scoped promotion, provenance exports, and a reproducer.",
+    href: "https://github.com/codexsmith/boundary-first-labs/blob/main/organized_library_curated/999_Library/04_Operations/02_pipeline_tooling__operations/corpus_forge/corpus_forge_vertical_slice/README.md",
+  },
+  {
+    label: "Evidence + limitations",
+    detail: "Matched baseline comparison showing declared control coverage, surviving contribution hypothesis, burden, and explicit negative-result branch.",
+    href: "https://github.com/codexsmith/boundary-first-labs/blob/main/organized_library_curated/999_Library/04_Operations/02_pipeline_tooling__operations/corpus_forge/corpus_forge_matched_comparison.md",
+  },
+] as const;
+
 function displayStatus(value: string) {
   return value
     .replace(/[-_]/g, " ")
@@ -45,9 +73,9 @@ export function CorpusForgeLanding() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
           <Link
             className="inline-flex min-h-9 items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted hover:text-foreground"
-            href="/work/index"
+            href="/applied-work"
           >
-            Work / research operations
+            Applied Work
           </Link>
           <span className="inline-flex items-center gap-2 font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
             <ShieldCheck aria-hidden="true" className="h-3.5 w-3.5" />
@@ -242,6 +270,51 @@ export function CorpusForgeLanding() {
               <p className="border-l-2 border-accent pl-4 text-sm leading-7 text-foreground-muted">{relationship.boundary}</p>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="border-b border-border bg-card/45 px-5 py-14 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-4xl">
+            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-foreground-muted">
+              Canonical source chain
+            </p>
+            <h2 className="mt-4 font-serif text-4xl font-semibold sm:text-6xl">
+              Inspect the Boundary First Labs implementation, not a namesake repository.
+            </h2>
+            <p className="mt-5 text-base leading-8 text-foreground-muted">
+              Canonical product identity: <code>PROD-CORPUS-FORGE-001</code>. Canonical machine:
+              {" "}<code>BFL-MACH-CORPUS-FORGE</code>. These links separate owner identity,
+              current release state, runnable documentation, reproducible evidence, and known limitations.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+            {corpusForgeSourceChain.map((item, index) => (
+              <a
+                className="group flex min-h-56 flex-col border border-border bg-background p-5 transition-colors hover:border-foreground/35"
+                href={item.href}
+                key={item.label}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <span className="font-mono text-[9px] font-semibold text-foreground-muted">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <strong className="mt-6 font-serif text-xl font-semibold">{item.label}</strong>
+                <p className="mt-3 flex-1 text-sm leading-7 text-foreground-muted">{item.detail}</p>
+                <span className="mt-5 inline-flex items-center font-mono text-[9px] font-semibold uppercase tracking-[0.12em] text-foreground-muted group-hover:text-foreground">
+                  Open canonical source
+                  <ArrowRight aria-hidden="true" className="ml-2 h-3.5 w-3.5" />
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <p className="mt-6 border-l-2 border-accent pl-5 text-sm leading-7 text-foreground-muted">
+            The runnable starter and vertical slice establish inspectable implementation and bounded reproduction.
+            They do not establish production readiness, lower research cost, general superiority, or external adoption.
+          </p>
         </div>
       </section>
 

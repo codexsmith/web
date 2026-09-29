@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { publicContactMailto } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { AudienceJourneyGrid } from "./AudienceJourneyGrid";
@@ -98,7 +99,7 @@ export function InstitutionalStartPage() {
         </p>
         <div>
           <Link href="/atlas">Browse the Lab Atlas <span aria-hidden="true">→</span></Link>
-          <Link href="/contact?type=general&source=start">General contact <span aria-hidden="true">→</span></Link>
+          <a href={publicContactMailto("Boundary First Labs — General inquiry")}>General contact <span aria-hidden="true">→</span></a>
         </div>
       </section>
     </InstitutionalPageShell>

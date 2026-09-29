@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { CollapsibleSection } from "../CollapsibleSection";
 import foundationStyles from "../styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "../styles/InstitutionalRouteShared.module.css";
 import routeStyles from "../styles/OpenLab.module.css";
 import { composeCssModules } from "../styles/composeCssModules";
 import { type OpenLabParticipationContract } from "../content/openLab";
+import { publicContactMailto } from "@/lib/site-contact";
 
 const styles = composeCssModules(
   foundationStyles,
@@ -41,17 +41,15 @@ export function OpenLabContractCard({
           </p>
 
           <div className={styles.openLabContractHeaderFooter}>
-            <Link
+            <a
               className={styles.openLabContractAction}
-              href={
-                "/open-lab?type=" +
-                encodeURIComponent(contract.type) +
-                "#open-lab-intake"
-              }
+              href={publicContactMailto(
+                `Boundary First Labs — Open Lab — ${contract.title}`,
+              )}
             >
-              Inspect this intake route{" "}
+              Email the Lab about this{" "}
               <span aria-hidden="true">-&gt;</span>
-            </Link>
+            </a>
 
             <button
               className={styles.openLabHeaderToggle}

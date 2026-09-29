@@ -1,3 +1,4 @@
+import { observeRequest } from "@/lib/server-observability";
 import {
   inquiryTypes,
   isInquiryTypeId,
@@ -47,6 +48,7 @@ function allowRequest(key: string, now: number) {
 }
 
 export async function POST(request: Request) {
+  return observeRequest(request, "/api/inquiry", async () => {
   const receiver = process.env.BFL_INQUIRY_WEBHOOK_URL;
 
   if (!receiver) {
@@ -191,4 +193,5 @@ export async function POST(request: Request) {
       headers: { "cache-control": "no-store" },
     },
   );
+  });
 }
