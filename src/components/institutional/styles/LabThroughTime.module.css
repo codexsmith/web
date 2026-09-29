@@ -678,6 +678,15 @@
   margin-bottom: 24px;
 }
 
+.provenanceGallerySection[data-room-survey="true"] .provenanceGalleryHeader {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 980px;
+}
+
+.provenanceGallerySection[data-room-survey="true"] .provenanceGrid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .provenanceGalleryHeader h2 {
   max-width: 880px;
   margin: 10px 0 12px;
