@@ -132,16 +132,27 @@ export function InstitutionalLabThroughTimePage() {
       <section className={styles.timelineCatalog}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>CURRENT DURABLE SEED</>}
-          title={<>A small temporal spine over a much larger history.</>}
+          eyebrow={<>FIVE TURNING POINTS</>}
+          title={<>How the Lab took shape.</>}
           note={
             <>
-              The seed deliberately preserves uncertainty. Approximate dates remain
-              approximate; unresolved provenance remains visible until the source machinery
-              earns a stronger statement.
+              This is not a year-by-year biography. These are a few moments that changed how
+              the work was approached, organized, tested, or carried forward.
             </>
           }
         />
+
+        <aside className={styles.timelineStartupContext}>
+          <span>STARTUP EXPERIENCE</span>
+          <div>
+            <strong>Boundary First Labs is the founder&apos;s fourth startup.</strong>
+            <p>
+              Earlier startup work brought repeated experience with product formation,
+              technical delivery, customers, iteration, and the difference between building
+              a project and building an organization that can keep executing.
+            </p>
+          </div>
+        </aside>
 
         <LabTimelineExplorer />
       </section>
