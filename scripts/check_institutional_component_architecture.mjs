@@ -991,6 +991,12 @@ expect(labThroughTimePage.includes("One founder can operate a wider surface."), 
 expect(labThroughTimePage.includes("COMPUTATIONAL CAPABILITY"), "Lab Through Time must distinguish machine capability from authority");
 expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must preserve the founder authority boundary");
 expect(labThroughTimePage.includes("Five milestones mark the route from early experimental work"), "Lab Through Time hero must explain the bounded continuity story without repeating the acceleration section");
+expect(labThroughTimePage.includes("FIVE TURNING POINTS"), "Lab Through Time milestone section must use public-facing turning-point language");
+expect(labThroughTimePage.includes("How the Lab took shape."), "Lab Through Time milestone section must use a plain-language public title");
+expect(labThroughTimePage.includes("This is not a year-by-year biography."), "Lab Through Time milestone section must explain its selectivity without registry jargon");
+expect(labThroughTimePage.includes("founder&apos;s fourth startup"), "Lab Through Time milestone section must preserve the founder's startup experience");
+expect(!labThroughTimePage.includes("CURRENT DURABLE SEED"), "Lab Through Time must not expose internal seed terminology as the milestone-section eyebrow");
+expect(!labThroughTimePage.includes("A small temporal spine over a much larger history."), "Lab Through Time must not expose internal temporal-spine phrasing as the public milestone headline");
 expect(!labThroughTimePage.includes("continuitySection"), "Lab Through Time must not restore the redundant continuity interstitial");
 expect(!labThroughTimePage.includes("NEXT PROJECTION WORK"), "Lab Through Time must keep projection backlog out of the public narrative flow");
 expect(
