@@ -6,6 +6,7 @@ import {
 } from "./InstitutionalPrimitives";
 import { TemporalViewNav } from "./TemporalViewNav";
 import { LabTimelineExplorer } from "./LabTimelineExplorer";
+import { ProvenanceArtifactGallery } from "./ProvenanceArtifactGallery";
 import { labTimelineEvents, publicStateProjection } from "./content/publicState";
 import { institutionalChildRoutes } from "./institutionalRoutes";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
@@ -145,6 +146,7 @@ export function InstitutionalLabThroughTimePage() {
         <LabTimelineExplorer />
       </section>
 
+      <ProvenanceArtifactGallery />
 
       <section className={styles.accelerationSection}>
         <div className={styles.accelerationLead}>
