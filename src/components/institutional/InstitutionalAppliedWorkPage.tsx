@@ -27,22 +27,23 @@ export function InstitutionalAppliedWorkPage() {
         title={<>Consulting for difficult systems.</>}
         lead={
           <>
-            Systems / Architecture Review. Agency / AI Governance Audit. Knowledge /
-            Representation Infrastructure Diagnostic.
+            Systems & Architecture Review. AI & Decision Governance Review. Knowledge &
+            Research Infrastructure Review.
           </>
         }
         support={
           <>
             Bring a system, workflow, decision, or failure that is expensive to misunderstand.
-            We start with the buyer&apos;s problem, leave behind durable artifacts, and introduce
-            deeper machinery only where the diagnosis justifies it.
+            We start with the problem you need solved, leave behind useful maps, decisions,
+            prototypes, or operating artifacts, and introduce deeper technical machinery only
+            when the work actually requires it.
           </>
         }
         childLinks={institutionalChildRoutes.appliedWork}
       >
         <aside className={styles.appliedWorkStatus}>
           <span>CONSULTING AVAILABILITY</span>
-          <strong>Currently prioritizing bounded Systems / Architecture Reviews, with governance and knowledge-infrastructure diagnostics available where the problem calls for them.</strong>
+          <strong>Currently prioritizing focused systems and architecture reviews, with AI governance and knowledge-infrastructure work available where the problem calls for it.</strong>
           <p>
             The work draws on prior professional experience in software engineering,
             architecture, consulting, Lean–Agile delivery, startup iteration, and systems
@@ -61,8 +62,8 @@ export function InstitutionalAppliedWorkPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>SERVICES</>}
-          title={<>Three offers. Nine bounded engagement shapes.</>}
-          note={<>Choose the buyer problem first. The inner cards show concrete ways the work can begin.</>}
+          title={<>Three ways to start, each with concrete first steps.</>}
+          note={<>Choose the problem first. The cards show practical ways an engagement can begin.</>}
         />
 
         <div className={styles.appliedServiceStack}>
@@ -99,8 +100,8 @@ export function InstitutionalAppliedWorkPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>HOW AN ENGAGEMENT STARTS</>}
-          title={<>Start with the smallest piece of work that can change the next decision.</>}
-          note={<>Pricing and duration belong after the problem and deliverable are bounded, not before.</>}
+          title={<>Start with the smallest piece of work that can improve the next decision.</>}
+          note={<>Pricing and duration make more sense after the problem and expected deliverable are clear.</>}
         />
 
         <div className={styles.appliedProcessRail}>
