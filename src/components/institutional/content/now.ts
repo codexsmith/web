@@ -6,12 +6,12 @@ export const nowPriorityLanes = [
     description:
       "Keep the website, service offers, funding pages, and contact paths clear enough that a first-time visitor can understand the Lab and choose a concrete next step without a founder walkthrough.",
     work: [
-      "Keep the newly reconciled website current as research, products, services, and funding work change."
-      "Keep public claims tied to real products, services, research, evidence, and contact paths instead of creating a separate marketing story."
-      "Use first-time-reader feedback, accessibility checks, and actual inquiries to find and repair confusing language or navigation."
+      "Keep the newly reconciled website current as research, products, services, and funding work change.",
+      "Keep public claims tied to real products, services, research, evidence, and contact paths instead of creating a separate marketing story.",
+      "Use first-time-reader feedback, accessibility checks, and actual inquiries to find and repair confusing language or navigation.",
     ],
     closure:
-      "A first-time visitor can explain what BFL is, find the work relevant to them, understand what is established versus still being tested, and take a real next step."
+      "A first-time visitor can explain what BFL is, find the work relevant to them, understand what is established versus still being tested, and take a real next step.",
     tone: "public",
   },
   {
@@ -19,7 +19,7 @@ export const nowPriorityLanes = [
     status: "ACTIVE",
     title: "Get real-world evidence from customers, users, partners, reviewers, and funders",
     description:
-      "Move the Lab's current service, product, software, and research-funding opportunities into contact with people outside the Lab."
+      "Move the Lab's current service, product, software, and research-funding opportunities into contact with people outside the Lab.",
     work: [
       "Use Systems / Architecture Review as the near-term B2B services test.",
       "Advance Boundary-First Chess and adjacent sports/game products through direct and partner-distributed market tests.",
@@ -34,14 +34,14 @@ export const nowPriorityLanes = [
     status: "ACTIVE",
     title: "Make sure the Lab's records actually cover the work they claim to cover",
     description:
-      "The Lab now has a complete directory of its durable record systems. The next question is whether those records actually contain all the research programs, experiments, publications, products, and other durable objects they are supposed to contain."
+      "The Lab now has a complete directory of its durable record systems. The next question is whether those records actually contain all the research programs, experiments, publications, products, and other durable objects they are supposed to contain.",
     work: [
-      "Continue checking record completeness without reopening the already completed whole-Lab registry discovery work."
-      "Use experiments as a concrete test: every durable experiment should link to the research program it belongs to, including work that has not started or is not yet ready to run."
-      "Repair missing or broken links while preserving the original source records and change history."
+      "Continue checking record completeness without reopening the already completed whole-Lab registry discovery work.",
+      "Use experiments as a concrete test: every durable experiment should link to the research program it belongs to, including work that has not started or is not yet ready to run.",
+      "Repair missing or broken links while preserving the original source records and change history.",
     ],
     closure:
-      "The Lab can reliably list its durable research objects from their source records, identify who owns each record, and find no experiment detached from its research program."
+      "The Lab can reliably list its durable research objects from their source records, identify who owns each record, and find no experiment detached from its research program.",
     tone: "apparatus",
   },
   {
@@ -49,14 +49,14 @@ export const nowPriorityLanes = [
     status: "ACTIVE",
     title: "Run tests that can prove the Lab's strongest ideas wrong",
     description:
-      "Compare Boundary Theory, Distinction Space, Information Mechanics, and related methods against established mathematics, physics, computer science, and the native methods of each field."
+      "Compare Boundary Theory, Distinction Space, Information Mechanics, and related methods against established mathematics, physics, computer science, and the native methods of each field.",
     work: [
       "Advance the statistical-mechanics / representational-entropy program through exact projection, memory, lumpability, and coarse-graining benchmarks.",
       "Continue the fine-structure program only where normalization, resolution, RG, and parameter-selection claims survive explicit no-go and native-theory controls.",
       "Preserve negative results and record 'added value: none' when Boundary First vocabulary does not outperform or clarify the established account.",
     ],
     closure:
-      "The strongest active research programs have tests strong enough to preserve, narrow, rename, or reject claims rather than simply creating more terminology."
+      "The strongest active research programs have tests strong enough to preserve, narrow, rename, or reject claims rather than simply creating more terminology.",
     tone: "evidence",
   },
   {
@@ -64,7 +64,7 @@ export const nowPriorityLanes = [
     status: "ACTIVE",
     title: "Turn mature research into specific papers people can review",
     description:
-      "Convert the strongest research into specific manuscripts with clear claims, sources, related work, evidence limits, and a visible path for correction."
+      "Convert the strongest research into specific manuscripts with clear claims, sources, related work, evidence limits, and a visible path for correction.",
     work: [
       "Continue the Information Mechanics / Information + Physics paperization sequence from the canonical working manuscripts already created.",
       "Use normalized publication mines as routing maps rather than treating candidate volume as publication maturity.",
@@ -79,7 +79,7 @@ export const nowPriorityLanes = [
     status: "NEXT",
     title: "Make more of the Lab operable by someone other than its founder",
     description:
-      "Turn recurring Lab procedures into durable records and tools so another person can understand and operate bounded parts of the institution without depending on founder memory."
+      "Turn recurring Lab procedures into durable records and tools so another person can understand and operate bounded parts of the institution without depending on founder memory.",
     work: [
       "Keep revision, contradiction, dependency-impact, projection-loss, and authority semantics inspectable inside the Observatory and control plane.",
       "Turn recurring founder procedures into explicit artifacts, transactions, verifier states, and handoffable operating surfaces.",
@@ -97,9 +97,9 @@ export const roadmapHorizons = [
     horizon: "Current cycle",
     title: "Externalize the institution and finish the next bounded audits.",
     items: [
-      "Keep the public website synchronized with current Lab doctrine, products, services, and evidence."
+      "Keep the public website synchronized with current Lab doctrine, products, services, and evidence.",
       "Advance the four funding lanes into real external contact.",
-      "Continue the record-completeness audit, including the rule that every durable experiment belongs to a durable research program."
+      "Continue the record-completeness audit, including the rule that every durable experiment belongs to a durable research program.",
       "Run the next statistical-mechanics, admissibility, and fine-structure control work.",
       "Move the strongest paperized research objects toward bounded external review.",
     ],
@@ -112,7 +112,7 @@ export const roadmapHorizons = [
       "Bind paid work, product use, funding dispositions, collaboration, and failed-fit events as separate evidence.",
       "Promote only the research machinery that survives native-theory and adversarial controls.",
       "Release a small first cohort of manuscripts with explicit review and correction state.",
-      "Test the Lab's architecture and record-keeping tools against real institutional changes rather than only controlled examples."
+      "Test the Lab's architecture and record-keeping tools against real institutional changes rather than only controlled examples.",
       "Test non-founder use of selected tools, methods, or operating procedures.",
     ],
   },
@@ -144,7 +144,7 @@ export const roadmapGates = [
   {
     title: "Complete and connected records",
     description:
-      "Durable research programs, experiments, packets, and other audited records can be listed from their sources, connected correctly, and contain no known orphan records in the audited scope."
+      "Durable research programs, experiments, packets, and other audited records can be listed from their sources, connected correctly, and contain no known orphan records in the audited scope.",
   },
   {
     title: "A research test that could change the conclusion",
