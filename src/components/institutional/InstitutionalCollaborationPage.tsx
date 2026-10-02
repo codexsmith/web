@@ -32,9 +32,9 @@ export function InstitutionalCollaborationPage() {
         title={<>Work together where each side brings something the other needs.</>}
         lead={
           <>
-            Boundary First Labs develops research, software, methods, and prototypes.
-            Collaboration puts that work against real expertise, users, infrastructure, and
-            constraints.
+            Boundary First Labs develops research, software, methods, products, and prototypes.
+            Collaboration connects that work with real expertise, users, infrastructure,
+            distribution, funding, and constraints that the Lab should not try to reproduce alone.
           </>
         }
         childLinks={institutionalChildRoutes.collaboration}
@@ -107,64 +107,32 @@ export function InstitutionalCollaborationPage() {
       <section className={styles.collaborationMapSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>WHO WE ARE DESIGNED TO WORK WITH</>}
-          title={<>Different collaborators bring different kinds of reality to the work.</>}
+          eyebrow={<>WHO COLLABORATION IS FOR</>}
+          title={<>Bring expertise, users, infrastructure, distribution, funding, or a hard question.</>}
           note={
             <>
-              Some can test research. Some have users, customers, data, or infrastructure.
-              Some can distribute products, fund public-interest work, or simply tell us
-              where an idea is wrong.
+              The public page is organized around collaborator types rather than a list of
+              organizations BFL may someday contact.
             </>
           }
         />
 
-        <aside className={styles.collaborationMapDisclaimer}>
-          <span>POSSIBLE FITS, NOT AFFILIATIONS</span>
-          <p>
-            These names come from BFL&apos;s collaboration and outreach planning. Inclusion
-            does not mean we have contacted them, they have expressed interest, or they
-            endorse the Lab. The status badge describes what BFL still needs before a serious
-            approach; every route should be checked again before use.
-          </p>
-        </aside>
-
         <div className={styles.collaborationMapFrame}>
-          {collaborationLanes.map((lane) => (
-            <section
-              className={styles.collaborationLane}
-              data-collaboration-tone={lane.tone}
-              key={lane.code}
-            >
-              <header>
-                <span>{lane.code}</span>
-                <div>
-                  <h3>{lane.title}</h3>
-                  <p>{lane.description}</p>
-                </div>
-              </header>
-
-              <div className={styles.collaborationEntityGrid}>
-                {lane.entries.map((entry) => (
-                  <article key={entry.name}>
-                    <div>
-                      <strong>{entry.name}</strong>
-                      <p>{entry.role}</p>
-                    </div>
-                    <span data-stage={entry.stage}>{collaborationStageLabels[entry.stage]}</span>
-                  </article>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-
-        <div className={styles.collaborationLegend}>
-          {collaborationStageLegend.map(([stage, description]) => (
-            <div key={stage}>
-              <strong>{collaborationStageLabels[stage]}</strong>
-              <p>{description}</p>
-            </div>
-          ))}
+          <section className={styles.collaborationLane} data-collaboration-tone="local">
+            <header><span>01</span><div><h3>Domain experts + practitioners</h3><p>People who know the field well enough to expose errors, constraints, missing context, or better methods.</p></div></header>
+          </section>
+          <section className={styles.collaborationLane} data-collaboration-tone="application">
+            <header><span>02</span><div><h3>Users, customers + communities</h3><p>People who can test whether a product, method, explanation, or system is actually useful in practice.</p></div></header>
+          </section>
+          <section className={styles.collaborationLane} data-collaboration-tone="research">
+            <header><span>03</span><div><h3>Research + technical institutions</h3><p>Organizations that can review methods, reproduce work, provide stronger test environments, or collaborate on a defined research question.</p></div></header>
+          </section>
+          <section className={styles.collaborationLane} data-collaboration-tone="public">
+            <header><span>04</span><div><h3>Funders, sponsors + public-interest partners</h3><p>Organizations that can support a clearly scoped program, experiment, product, or public-interest build.</p></div></header>
+          </section>
+          <section className={styles.collaborationLane} data-collaboration-tone="mirror">
+            <header><span>05</span><div><h3>Reviewers, educators + communicators</h3><p>People who can challenge, explain, visualize, teach, or translate specific work for wider audiences.</p></div></header>
+          </section>
         </div>
       </section>
 
@@ -209,7 +177,7 @@ export function InstitutionalCollaborationPage() {
       </section>
 
       <section className={styles.collaborationClose}>
-        <p className={styles.sectionIndex}>A GOOD FIRST CONVERSATION</p>
+        <p className={styles.sectionIndex}>A GOOD FIRST STEP</p>
         <h2>Bring a real problem, capability, audience, or resource. We will look for the smallest useful thing we can do together.</h2>
         <p>
           That might be a review, pilot, workshop, co-developed artifact, funding
