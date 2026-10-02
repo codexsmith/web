@@ -11,12 +11,12 @@ function LaneSummary({ lane }: { lane: Lane }) {
     <div className={styles.summary}>
       <div className={styles.summaryTopline}>
         <span>{lane.status}</span>
-        <small>LANE {lane.code}</small>
+        <small>PRIORITY {lane.code}</small>
       </div>
       <h2>{lane.title}</h2>
       <p className={styles.summaryDescription}>{lane.description}</p>
       <strong className={styles.inspectCue}>
-        Inspect lane <span aria-hidden="true">↗</span>
+        Inspect priority <span aria-hidden="true">↗</span>
       </strong>
     </div>
   );
@@ -27,13 +27,13 @@ function LaneDetail({ lane }: { lane: Lane }) {
     <div className={styles.detail}>
       <div className={styles.detailGrid}>
         <div className={[styles.detailBlock, styles.detailWide].join(" ")}>
-          <span className={styles.detailLabel}>WORK IN THIS LANE</span>
+          <span className={styles.detailLabel}>WHAT WE ARE DOING</span>
           <ul>
             {lane.work.map((item) => <li key={item}>{item}</li>)}
           </ul>
         </div>
         <div className={[styles.detailBlock, styles.detailWide].join(" ")}>
-          <span className={styles.detailLabel}>CLOSURE CONDITION</span>
+          <span className={styles.detailLabel}>WHAT WOULD COUNT AS PROGRESS</span>
           <p>{lane.closure}</p>
         </div>
       </div>
