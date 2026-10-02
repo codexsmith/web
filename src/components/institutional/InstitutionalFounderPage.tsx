@@ -30,9 +30,10 @@ export function InstitutionalFounderPage() {
         }
         support={
           <>
-            His work connects software engineering, scientific method, agentic reasoning,
-            formal systems, and institutional consequence through a recurring practice:
-            make state explicit, test coherently, inspect the result, and repair what fails.
+            His work connects software engineering, scientific method, AI-assisted reasoning,
+            formal systems, and institution-building through a recurring practice:
+            make the important structure explicit, test it against reality, inspect what
+            failed, and repair the model.
           </>
         }
         childLinks={institutionalChildRoutes.founder}
@@ -52,7 +53,7 @@ export function InstitutionalFounderPage() {
           styles={styles}
           eyebrow={<>THREE WORKING IDENTITIES</>}
           title={<>The Lab grew from engineering and research practiced together.</>}
-          note={<>Different labels for one recurring operation: make the system legible enough to act on and repair.</>}
+          note={<>Across roles, the recurring goal is the same: understand a system well enough to change it responsibly and repair it when the model is wrong.</>}
         />
 
         <div className={styles.founderRoleGrid}>
@@ -73,8 +74,8 @@ export function InstitutionalFounderPage() {
           <h2>The method was not invented all at once.</h2>
           <p>
             It accumulated through research, production software, consulting, independent
-            study, and repeated encounters with representations that stopped carrying the
-            reality they were supposed to describe.
+            study, and repeated encounters with models, requirements, schemas, and explanations
+            that no longer matched the reality they were supposed to describe.
           </p>
         </div>
 
@@ -96,7 +97,7 @@ export function InstitutionalFounderPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>THE RECURRING METHOD</>}
-          title={<>The domain changes. The operation persists.</>}
+          title={<>Different domains, the same basic discipline.</>}
           note={<>A compact version of the practice that eventually became Boundary First.</>}
         />
 
@@ -124,16 +125,15 @@ export function InstitutionalFounderPage() {
           <p className={styles.sectionIndex}>THE FOUNDER BOUNDARY</p>
           <h2>The Lab has to survive contact with people other than its founder.</h2>
           <p>
-            Founder history explains where the machinery came from. It does not establish
-            the machinery as correct. The work has to survive independent criticism,
-            reproduce useful results, expose its defects, and become transferable enough
-            that other people can inspect, operate, repair, reject, or extend it.
+            Founder history explains where the methods came from. It does not prove that
+            they are correct. The work has to survive independent criticism, reproduce useful
+            results, expose its failures, and become transferable enough that other people
+            can inspect, operate, repair, reject, or extend it.
           </p>
         </div>
 
         <blockquote>
-          The founder is evidence of one path through the machinery. He is not the
-          justification for the machinery.
+          The founder explains the origin of the method. He is not the evidence that the method works.
         </blockquote>
       </section>
     </InstitutionalPageShell>
