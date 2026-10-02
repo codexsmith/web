@@ -1,72 +1,72 @@
 export const projectGrammar = [
   ["01", "System", "What bounded environment are we working in?"],
   ["02", "Problem", "What is difficult, opaque, inconsistent, inaccessible, or unresolved?"],
-  ["03", "Representation", "How is the system actually represented?"],
-  ["04", "Consequential distinction", "What distinction must remain visible for the task to work?"],
+  ["03", "Working model", "How is the system actually being described or modeled?"],
+  ["04", "What must remain visible", "What distinction or condition matters enough that losing it would break the task?"],
   ["05", "Intervention", "What did the Lab actually change, build, test, or introduce?"],
   ["06", "Artifact", "What inspectable thing now exists?"],
   ["07", "Result", "What can we responsibly say happened?"],
-  ["08", "Research consequence", "What did the project teach the Lab?"],
-  ["09", "Agency consequence", "Who becomes more or less capable afterward?"],
-  ["10", "Stewardship consequence", "Who maintains, corrects, transfers, supersedes, or retires the result?"],
+  ["08", "What we learned", "What did the project teach the Lab?"],
+  ["09", "Who gains capability", "Who becomes more or less capable afterward?"],
+  ["10", "Who carries it forward", "Who maintains, corrects, transfers, replaces, or retires the result?"],
 ] as const;
 
 export const projects = [
   {
     code: "CHESS",
     title: "Boundary-First Chess",
-    type: "Registered research product / product family",
+    type: "Learning product / research testbed",
     status: "research_product",
     tone: "product",
     href: "/products/boundary-first-chess",
     domain: "Game / education / media / analysis",
-    stress: "Bounded state, explanation, pedagogy, audience legibility",
+    stress: "Teaching clarity, learner understanding, and faithful chess explanation",
     transfer:
-      "One domain producing book, video, tooling, commentary, and licensing candidates without pretending each is already a standalone product.",
+      "A developed teaching method that could support a book, video, software, commentary, or licensing only where outside use justifies those extensions.",
     question:
-      "Can a state-and-constraint-oriented grammar make chess reasoning more explicit, useful, and narratively legible without replacing established chess theory or engine evaluation?",
+      "Can one consistent teaching language help players see what changed in a position without replacing established chess concepts or engine analysis?",
     result:
       "A substantial manuscript, developed pedagogy, explainable-analysis architecture, executable engine research, worked games, and deployment material exist.",
     agency:
-      "Intended gains are learner inspectability and audience comprehension rather than greater obedience to an engine.",
+      "The intended benefit is clearer learner understanding and explanation, not greater dependence on an engine or on BFL terminology.",
     stewardship:
       "Useful surfaces should become teachable and operable by players, coaches, educators, creators, commentators, publishers, platforms, and production teams without hidden BFL interpretation.",
   },
   {
     code: "ASM",
     title: "Agentic Scientific Method",
-    type: "Agentic reasoning × scientific-method research product",
+    type: "Research method / AI-assisted scientific workflow",
     status: "research_product",
     tone: "research",
     href: "/products/agentic-scientific-method",
     domain: "Scientific research / AI / research automation",
-    stress: "Theory representation, evaluation, repair, authority",
+    stress: "Research transparency, testing, criticism, revision, and responsibility",
     transfer:
-      "Research machinery becoming executable while preserving provenance, authority ceilings, human gates, and handoff context.",
+      "A research workflow becoming executable while preserving source history, human review, criticism, and handoff context.",
     question:
-      "How can agentic search, scientific testing, and typed theory transformation work together without confusing computational success, model fluency, or automated agreement with scientific truth?",
+      "How can AI-assisted search and scientific testing work together without confusing fluent output or successful computation with scientific truth?",
     result:
       "Theory Transformation work completed a bounded six-case comparative series and produced a candidate v0.2 executable specification; the next control is a small deterministic runtime.",
     agency:
-      "Automation is intended to expand search, comparison, and criticism while preserving human control over evidence, candidate transforms, schema revision, and promotion.",
+      "Automation is intended to expand search, comparison, and criticism while people remain responsible for evidence, changes to the method, and consequential conclusions.",
     stewardship:
-      "No executable operator should silently inherit scientific authority.",
+      "No automated tool should gain scientific decision authority simply because it can perform the work.",
   },
   {
     code: "PROJECTR",
-    title: "Projectr / YouTube Knowledge Explorer",
-    type: "Registered software product family",
+    title: "Projectr",
+    type: "Knowledge-exploration software product",
     status: "active_build",
     tone: "build",
     href: "/products/youtube-knowledge-explorer",
     domain: "Software / media knowledge",
-    stress: "Representation change, navigation, provenance",
+    stress: "Search, navigation, source traceability, and persistent knowledge",
     transfer:
-      "A bounded YouTube wedge nested inside a broader source-linked knowledge-exploration vision.",
+      "YouTube Knowledge Explorer is the current implementation inside a broader source-linked knowledge product.",
     question:
-      "Can source-linked derived structure make long-form knowledge easier to navigate and reuse without becoming an opaque substitute for the source?",
+      "Can long-form sources become easier to search, navigate, save, and reuse without losing the path back to the original?",
     result:
-      "The current wedge is long-form YouTube → timestamped transcript → structured topic map → search → source return → persistent knowledge object.",
+      "The current YouTube implementation supports timestamped transcripts, structured outlines, search, source return, and persistent exploration state.",
     agency:
       "The user gains search, orientation, retrieval, source return, and potentially portable organized knowledge.",
     stewardship:
@@ -74,19 +74,19 @@ export const projects = [
   },
   {
     code: "WEATHER",
-    title: "Boundary-First Weather / WeatherSim",
-    type: "Applied computational research scaffold / benchmark program / pilot candidate",
+    title: "Boundary First Weather",
+    type: "Weather research testbed / pilot candidate",
     status: "NO ADMITTED PROD-* IDENTITY",
     tone: "scaffold",
     href: "/products/boundary-first-weather",
     domain: "Atmospheric computation / public science",
-    stress: "Physical baselines, flux, multiscale closure, computational evidence",
+    stress: "Forecast change, model disagreement, computational cost, and scientific comparison",
     transfer:
-      "Product-shaped research and pilot surfaces that remain research until benchmark evidence earns a stronger identity.",
+      "A public research and pilot surface that remains a testbed until benchmark evidence justifies stronger product claims.",
     question:
-      "Can boundary-aware representations improve selected diagnostics, adaptivity, compression, or forecast-relevant tasks under explicit conventional baselines?",
+      "Can boundary-aware diagnostics improve selected weather-analysis or computation tasks when compared with clear conventional baselines?",
     result:
-      "The program currently asks bounded benchmark questions. Candidate visualizations, simulation components, diagnostics, and public-science surfaces are not admitted products.",
+      "The program currently defines benchmark questions, visualizations, simulation ideas, diagnostics, and a pilot path. Better forecast skill or efficiency has not yet been established.",
     agency:
       "Public-facing work should improve understanding of model boundaries, uncertainty, repair, and atmospheric structure without pretending to hold operational forecast authority.",
     stewardship:
@@ -95,14 +95,14 @@ export const projects = [
   {
     code: "AUGUSTA",
     title: "Augusta Maintenance Debt Civic Case",
-    type: "Active public-interest research case",
+    type: "Public-interest infrastructure research case",
     status: "CASE_CANDIDATE / RESEARCH_ACTIVE / NOT_PROMOTED",
     tone: "civic",
     href: "/projects/augusta-maintenance-debt",
     domain: "Public infrastructure / institutions",
-    stress: "Provenance, accounting distinctions, uncertainty, public consequence",
+    stress: "Public records, lifecycle obligations, accounting distinctions, uncertainty, and public consequence",
     transfer:
-      "Public analysis and lifecycle instrumentation designed for accountable handoff rather than a single rhetorical total.",
+      "A source-grounded public analysis designed to make maintenance obligations visible without collapsing them into one unsupported headline number.",
     question:
       "Can a lifecycle ledger make unresolved public obligations more visible without manufacturing a false single number?",
     result:

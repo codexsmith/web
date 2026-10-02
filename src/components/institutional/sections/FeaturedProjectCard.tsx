@@ -47,18 +47,18 @@ export function FeaturedProjectCard({
                 kind="project"
                 hideKind={true}
                 status={project.status}
-                statusLabel="SOURCE STATUS"
+                statusLabel="CURRENT STATUS"
                 variant="compact"
               />
             </div>
 
             <div className={styles.projectCaseFacts}>
               <div>
-                <span>NATIVE DOMAIN</span>
+                <span>DOMAIN</span>
                 <strong>{project.domain}</strong>
               </div>
               <div>
-                <span>PRIMARY STRESS</span>
+                <span>WHAT THIS PROJECT TESTS</span>
                 <strong>{project.stress}</strong>
               </div>
             </div>
@@ -92,28 +92,28 @@ export function FeaturedProjectCard({
       <div className={styles.projectDrawerContent}>
         <div className={styles.projectExploreAction}>
           <Link href={project.href} className={styles.projectExploreLink}>
-            Explore Project <span aria-hidden="true">→</span>
+            Open project <span aria-hidden="true">→</span>
           </Link>
         </div>
 
         <div className={styles.projectCaseResult}>
-          <span>WHAT EXISTS / CURRENT RESULT</span>
+          <span>WHAT EXISTS / WHAT WE KNOW SO FAR</span>
           <p>{project.result}</p>
         </div>
 
         <div className={styles.projectConsequenceGrid}>
           <div>
-            <span>AGENCY</span>
+            <span>WHO THIS SHOULD HELP</span>
             <p>{project.agency}</p>
           </div>
           <div>
-            <span>STEWARDSHIP</span>
+            <span>WHO CAN CARRY IT FORWARD</span>
             <p>{project.stewardship}</p>
           </div>
         </div>
 
         <div className={styles.projectTransferSignal}>
-          <span>TRANSFER SIGNAL</span>
+          <span>WHAT COULD TRANSFER BEYOND BFL</span>
           {project.transfer}
         </div>
       </div>

@@ -88,9 +88,9 @@ export function ProductContextSection() {
       <div className={styles.productContextFrame}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>PRODUCT CONTEXT</>}
-          title={<>The machinery around commercialization.</>}
-          note={<>Select any plate to inspect the product discipline without leaving the page context.</>}
+          eyebrow={<>HOW TO READ THE PRODUCT PORTFOLIO</>}
+          title={<>A product should be useful before the Lab makes a big market claim.</>}
+          note={<>These sections explain how BFL separates a working artifact from user evidence, market evidence, scientific evidence, and a durable product business.</>}
         />
 
         <ReflowField
@@ -103,8 +103,8 @@ export function ProductContextSection() {
             id="why-products-matter"
             label="Why Products Matter"
             eyebrow="WHY PRODUCTS MATTER"
-            title="Usefulness should meet reality."
-            description="Direct products turn usefulness into observable evidence rather than an internal judgment."
+            title="Real users provide evidence that internal enthusiasm cannot."
+            description="Use, confusion, criticism, return visits, adoption, and payment all reveal whether a product is actually useful."
             className={styles.productContextWhy}
             tone="evidence"
           >
@@ -128,10 +128,10 @@ export function ProductContextSection() {
 
           <ProductContextCard
             id="research-market"
-            label="Research to Market"
-            eyebrow="RESEARCH → MARKET"
-            title="One body of work can support several bounded product tests."
-            description="Do not count every conceivable extension as a separate product before evidence exists."
+            label="From Research to Product"
+            eyebrow="RESEARCH → PRODUCT"
+            title="One body of work can support several small product tests."
+            description="Do not turn every possible extension into a separate product before users provide evidence."
             className={styles.productContextResearchMarket}
             tone="conversion"
           >
@@ -152,10 +152,10 @@ export function ProductContextSection() {
 
           <ProductContextCard
             id="secondary-pipeline"
-            label="Secondary Pipeline"
-            eyebrow="SECONDARY PIPELINE"
-            title="Product-shaped work, not yet the near-term edge."
-            description="Additional product candidates retain explicit next gates instead of being promoted early."
+            label="Other Candidates"
+            eyebrow="OTHER CANDIDATES"
+            title="Some work looks product-shaped but is not yet a current offer."
+            description="Additional candidates keep a clear next test instead of being presented as ready too early."
             className={styles.productContextPipeline}
             tone="pipeline"
           >
@@ -169,7 +169,7 @@ export function ProductContextSection() {
                   <h3>{product.name}</h3>
                   <p>{product.description}</p>
                   <div className={styles.nextGate}>
-                    <span>NEXT GATE</span>
+                    <span>NEXT TEST</span>
                     {product.next}
                   </div>
                 </article>
@@ -179,10 +179,10 @@ export function ProductContextSection() {
 
           <ProductContextCard
             id="consumer-ethos"
-            label="Consumer Ethos"
-            eyebrow="CONSUMER ETHOS"
-            title="A good product leaves the user more capable than it found them."
-            description="The product should transfer useful capability rather than merely retain attention."
+            label="User Benefit"
+            eyebrow="USER BENEFIT"
+            title="A good product should leave the user more capable."
+            description="The aim is useful capability, not merely attention or dependence."
             className={styles.productContextEthos}
             tone="ethos"
           >
@@ -197,10 +197,10 @@ export function ProductContextSection() {
 
           <ProductContextCard
             id="commercial-truth"
-            label="Commercial Truth"
-            eyebrow="COMMERCIAL TRUTH"
-            title="Do not confuse a promising artifact with a validated market."
-            description="Product evidence, market evidence, and scientific validation remain different claims."
+            label="What the Market Has Not Proven"
+            eyebrow="MARKET EVIDENCE"
+            title="A promising artifact is not the same as a validated market."
+            description="Working software, user value, willingness to pay, retention, and scientific validation remain different claims."
             className={styles.productContextTruth}
             tone="truth"
           >
@@ -217,18 +217,18 @@ export function ProductContextSection() {
 
           <ProductContextCard
             id="public-product-object"
-            label="Public Product Object"
-            eyebrow="PUBLIC PRODUCT OBJECT"
-            title="What a product page should answer."
-            description="Enough state for a user or partner to understand the offer without guessing."
+            label="What Every Product Page Should Answer"
+            eyebrow="PRODUCT PAGE CHECKLIST"
+            title="A visitor should not have to guess what exists."
+            description="Every product page should make the offer, audience, current state, evidence, uncertainty, next milestone, and ownership clear."
             className={styles.productContextObject}
             tone="object"
           >
             <div className={styles.productObjectDetail}>
               <p>
-                The product counterpart to the Lab&apos;s research-object grammar: expose the
-                offer, current state, evidence, uncertainty, next milestone, and stewardship
-                boundary together.
+                A strong product page should show the offer, who it is for, what exists now,
+                what users have or have not demonstrated, what comes next, and who is
+                responsible for maintaining it.
               </p>
               <div className={styles.productQuestionGrid}>
                 {productPageQuestions.map((question, index) => (

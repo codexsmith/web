@@ -30,12 +30,12 @@ export function AgenticScientificMethodExperience() {
     >
       <section className={styles.asmMethodSection} id="method">
         <div className={styles.asmMethodLead}>
-          <p>THE METHOD</p>
-          <h2>Scientific method, with the hidden operations opened up.</h2>
+          <p>WHAT THE METHOD ADDS</p>
+          <h2>Make the research process explicit enough to inspect, criticize, and continue.</h2>
           <span>
-            “Form a hypothesis” hides a lot of machinery: the goal, system boundary, relevant
-            states, allowed actions, alternatives, distinguishing observations, authority to
-            change the test, and what counts as mismatch.
+            A research instruction like “form a hypothesis and test it” hides many practical
+            decisions: what question is being asked, what is in scope, what alternatives matter,
+            what would distinguish them, who may change the test, and what counts as a mismatch.
           </span>
         </div>
 
@@ -70,19 +70,19 @@ export function AgenticScientificMethodExperience() {
 
       <section className={styles.asmCorrespondenceSection} id="correspondence">
         <div className={styles.asmCorrespondenceLead}>
-          <p>THE SCIENTIFIC OBJECT</p>
-          <h2>Put the representation and the observation side by side.</h2>
+          <p>MODEL VS. OBSERVATION</p>
+          <h2>Write down what the model says, then compare it with what actually happened.</h2>
           <span>
-            An ASM inquiry works over two coupled spaces. One describes what the current
-            representation says is possible, necessary, impossible, expected, prohibited, or
-            unknown. The other contains what was actually observed under declared conditions.
+            An ASM inquiry keeps the model and the observation record distinct. One describes
+            what the current explanation expects or allows; the other records what actually
+            happened under the declared test conditions.
           </span>
         </div>
 
         <div className={styles.asmTwinSpaces}>
           <article data-space="represented">
             <div className={styles.asmSpaceTopline}>
-              <span>REPRESENTED STATE SPACE</span>
+              <span>MODEL / EXPECTATION</span>
               <strong>MODEL</strong>
             </div>
 
@@ -112,7 +112,7 @@ export function AgenticScientificMethodExperience() {
 
           <article data-space="observed">
             <div className={styles.asmSpaceTopline}>
-              <span>OBSERVED STATE SPACE</span>
+              <span>OBSERVATION RECORD</span>
               <strong>TRACE</strong>
             </div>
 
@@ -135,8 +135,8 @@ export function AgenticScientificMethodExperience() {
 
         <div className={styles.asmDefectWorkbench}>
           <div>
-            <span>DEFECT LOCALIZATION</span>
-            <h3>A mismatch does not tell you what failed.</h3>
+            <span>FIND THE SOURCE OF THE MISMATCH</span>
+            <h3>A failed prediction does not automatically tell you what was wrong.</h3>
             <p>
               It may be the hypothesis. It may also be the boundary, instrument, action,
               correspondence rule, or closure criterion. ASM treats localization as a
@@ -158,11 +158,11 @@ export function AgenticScientificMethodExperience() {
       <section className={styles.asmAuthoritySection} id="authority">
         <div className={styles.asmAuthorityLead}>
           <div>
-            <p>AUTHORITY + MULTI-AGENT WORK</p>
-            <h2>Separate who can do the work from who can authorize the consequence.</h2>
+            <p>HUMANS, AI, AND RESPONSIBILITY</p>
+            <h2>Separate who performs a task from who is responsible for approving the result.</h2>
           </div>
           <blockquote>
-            Capability is not authority, and authority is not evidence.
+            Being able to perform a task does not grant decision authority, and approval does not make a claim true.
           </blockquote>
         </div>
 
@@ -217,8 +217,8 @@ export function AgenticScientificMethodExperience() {
 
       <section className={styles.asmMemorySection} id="memory">
         <div className={styles.asmMemoryLead}>
-          <p>DURABLE SCIENTIFIC MEMORY</p>
-          <h2>No consequential transition should depend only on chat memory.</h2>
+          <p>DURABLE RESEARCH MEMORY</p>
+          <h2>Important research decisions should survive beyond one chat, person, or tool.</h2>
           <span>
             Each phase emits an inspectable artifact. The point is not paperwork for its own
             sake. It is to let another person reconstruct what was believed, what was tested,
@@ -260,8 +260,8 @@ export function AgenticScientificMethodExperience() {
       <section className={styles.asmValidationSection} id="validation">
         <div className={styles.asmValidationLead}>
           <div>
-            <p>VALIDATION LADDER</p>
-            <h2>The immediate test is usefulness, not universality.</h2>
+            <p>HOW THE METHOD SHOULD BE TESTED</p>
+            <h2>The immediate question is whether it improves real research work.</h2>
           </div>
           <blockquote>
             Does the protocol improve bounded inquiry compared with the baseline practice?
@@ -298,8 +298,8 @@ export function AgenticScientificMethodExperience() {
           </article>
 
           <aside className={styles.asmClaimFirewall}>
-            <span>CLAIM FIREWALL</span>
-            <strong>What this page does not promote.</strong>
+            <span>NOT ESTABLISHED</span>
+            <strong>What this page is not claiming.</strong>
             {asmClaimFirewall.map((claim) => (
               <p key={claim}>{claim}</p>
             ))}
@@ -308,8 +308,8 @@ export function AgenticScientificMethodExperience() {
 
         <div className={styles.asmClose}>
           <div>
-            <span>NEXT CONTACT WITH REALITY</span>
-            <h2>Give the method a bounded inquiry, a baseline, an independent critic, and someone else’s hands.</h2>
+            <span>NEXT REAL-WORLD TEST</span>
+            <h2>Give the method to an independent user, compare it with a baseline, and preserve what breaks.</h2>
           </div>
 
           <div>

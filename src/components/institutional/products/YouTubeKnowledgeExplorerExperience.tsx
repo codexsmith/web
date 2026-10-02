@@ -30,8 +30,8 @@ export function YouTubeKnowledgeExplorerExperience() {
     >
       <section className={styles.explorerSourceSection} id="source">
         <div className={styles.explorerSourceLead}>
-          <p>THE PRODUCT THESIS</p>
-          <h2>Make the source easier to use without making it disappear.</h2>
+          <p>WHAT PROJECTR DOES</p>
+          <h2>Make a long source easier to search, revisit, and understand without hiding the original.</h2>
           <span>
             Long-form video carries explanation, argument, demonstration, and context, but
             precise retrieval is expensive. The Explorer turns one source into a navigable
@@ -40,8 +40,8 @@ export function YouTubeKnowledgeExplorerExperience() {
         </div>
 
         <blockquote className={styles.explorerSourceQuote}>
-          The useful unit is not a feed item. It is a source with searchable segments,
-          navigable topics, provenance, and a path back to the original evidence.
+          The useful unit is not just a feed item. It is a source you can search, navigate,
+          save, revisit, and trace back to the original moment.
         </blockquote>
 
         <div className={styles.explorerPipeline}>
@@ -57,11 +57,11 @@ export function YouTubeKnowledgeExplorerExperience() {
 
       <section className={styles.explorerWorkspaceSection} id="workspace">
         <div className={styles.explorerWorkspaceLead}>
-          <p>THE WORKSPACE</p>
-          <h2>A 90-minute video should behave more like a document you can inspect.</h2>
+          <p>THE CURRENT YOUTUBE IMPLEMENTATION</p>
+          <h2>A 90-minute video should be easier to work with than a scrub bar.</h2>
           <span>
-            Outline, transcript, concepts, search, and source navigation are different projections
-            over the same evidence object. None of them gets to silently replace the source.
+            Outline, transcript, concepts, search, and source navigation are different views
+            over the same source. None of them replaces the original video.
           </span>
         </div>
 
@@ -72,8 +72,8 @@ export function YouTubeKnowledgeExplorerExperience() {
               <i aria-hidden="true" />
               <i aria-hidden="true" />
             </div>
-            <span>YOUTUBE KNOWLEDGE EXPLORER · SAVED EXPLORATION</span>
-            <strong>source-bound</strong>
+            <span>PROJECTR · YOUTUBE KNOWLEDGE EXPLORER</span>
+            <strong>linked to source</strong>
           </div>
 
           <div className={styles.explorerWorkspaceGrid}>
@@ -123,12 +123,11 @@ export function YouTubeKnowledgeExplorerExperience() {
 
       <section className={styles.explorerAnswersSection} id="answers">
         <div className={styles.explorerAnswersLead}>
-          <p>EVIDENCE-BOUND ANSWERING</p>
-          <h2>Ask the video. Make the answer show its work.</h2>
+          <p>ASK THE SOURCE</p>
+          <h2>Ask a question and keep the answer tied to the moments that support it.</h2>
           <span>
-            Hosted synthesis may write the answer, but it cannot invent its evidence. Candidate
-            source segments are retrieved first; claims stay bound to those IDs; excerpts and
-            timestamps are reconstructed from source state and validated before display.
+            A model may help write the answer, but the supporting moments must come from the
+            loaded source. If the source does not support the answer, the product should say so.
           </span>
         </div>
 
@@ -181,11 +180,11 @@ export function YouTubeKnowledgeExplorerExperience() {
 
       <section className={styles.explorerPortableSection} id="portable">
         <div className={styles.explorerPortableLead}>
-          <p>PORTABLE CORE</p>
-          <h2>The product model should outlive its current stack.</h2>
+          <p>HOW IT IS BUILT</p>
+          <h2>Your saved knowledge should not be trapped in one interface or AI provider.</h2>
           <blockquote>
-            The product model must not be owned by its implementation language, UI framework,
-            cloud provider, database, or AI provider.
+            The useful knowledge object should survive changes in interface, storage, hosting,
+            or AI provider.
           </blockquote>
         </div>
 
@@ -202,7 +201,7 @@ export function YouTubeKnowledgeExplorerExperience() {
         <div className={styles.explorerBoundaryRail}>
           <span>YOUTUBE / CAPTIONS</span>
           <i>→</i>
-          <span>PORTABLE CORE</span>
+          <span>PORTABLE PROJECTR CORE</span>
           <i>→</i>
           <span>BROWSER / FILE / DATABASE</span>
           <i>→</i>
@@ -216,17 +215,17 @@ export function YouTubeKnowledgeExplorerExperience() {
         <div className={styles.explorerStateHeader}>
           <div>
             <p>CURRENT PRODUCT STATE</p>
-            <h2>There is already a working vertical slice. The market still has to answer back.</h2>
+            <h2>The core works. The next question is whether people choose to keep using it.</h2>
           </div>
           <blockquote>
-            Build the capability first. Treat repeated voluntary use as evidence.
+            Build something useful first. Treat repeated voluntary use as the next evidence.
           </blockquote>
         </div>
 
         <div className={styles.explorerStateGrid}>
           <article data-state="exists">
             <span>EXISTS NOW</span>
-            <strong>Executable product core</strong>
+            <strong>Working Projectr core</strong>
             <ul>
               <li>YouTube URL parsing and portable source metadata</li>
               <li>Authorized caption acquisition plus VTT/SRT import</li>
@@ -239,12 +238,12 @@ export function YouTubeKnowledgeExplorerExperience() {
 
           <article data-state="next">
             <span>NEXT COMMERCIAL TEST</span>
-            <strong>Do people choose to come back?</strong>
+            <strong>Do people return because the product is useful?</strong>
             <ul>
-              <li>Polish the bounded SaaS experience</li>
+              <li>Polish the current YouTube product experience</li>
               <li>Run real source and user sessions</li>
               <li>Measure repeated voluntary use and failure modes</li>
-              <li>Then test pricing or willingness to pay</li>
+              <li>Then test willingness to pay and packaging</li>
             </ul>
           </article>
 
@@ -262,12 +261,12 @@ export function YouTubeKnowledgeExplorerExperience() {
         <div className={styles.explorerClose}>
           <div>
             <span>PRODUCT DIRECTION</span>
-            <h2>Source first. Structure second. Synthesis only when the evidence closes.</h2>
+            <h2>Keep the source. Add structure. Use AI without losing the trail back.</h2>
           </div>
 
           <div className={styles.explorerCloseActions}>
             <Link href="/contact?type=product&source=youtube-knowledge-explorer">
-              Test, review, or collaborate on the Explorer <span aria-hidden="true">→</span>
+              Test, review, or collaborate on Projectr <span aria-hidden="true">→</span>
             </Link>
             <Link href="/products">
               Back to Products <span aria-hidden="true">→</span>
