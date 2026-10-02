@@ -17,29 +17,29 @@ export function InstitutionalProductsPage() {
           styles={styles}
           className={styles.productsHero}
           eyebrow={<>PRODUCTS</>}
-          title={<>Research should sometimes become something a person can use.</>}
-          lead={<>Boundary First Labs is a research laboratory. It is also a place that makes things.</>}
+          title={<>What can someone actually use?</>}
+          lead={<>Boundary First Labs turns selected research and engineering work into books,
+            software, tools, methods, and public testbeds.</>}
           support={
           <>
-            Research may become a paper, method, dataset, executable model, instrument, or
-            product. Products test whether a bounded representation and capability remain useful,
-            comprehensible, maintainable, and repairable with real users.
+            A product page should make the offer concrete: who it is for, what exists now,
+            what is still experimental, and what evidence would justify the next step.
           </>
         }
           childLinks={institutionalChildRoutes.products}
           >
           <blockquote className={styles.productThesis}>
-            <span>PRODUCT DISCIPLINE</span>
-            Show the user capability before claiming the market.
+            <span>PRODUCT RULE</span>
+            Show what the user can do before making claims about the market.
           </blockquote>
         </InstitutionalRouteHero>
 
         <section className={styles.primaryProducts}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>NEAR-TERM B2C EDGE</>}
-            title={<>Two concrete product tests.</>}
-            note={<>What exists now is separated from what still has to be earned.</>}
+            eyebrow={<>CURRENT PRODUCT EDGE</>}
+            title={<>Two concrete products closest to outside use.</>}
+            note={<>Each card separates what already exists from what users and the market still have to prove.</>}
             />
 
           <div className={styles.primaryProductGrid}>
@@ -52,11 +52,11 @@ export function InstitutionalProductsPage() {
                 <span className={styles.productOrdinal}>01</span>
                 <div className={styles.productState}>
                   <span className={styles.productStateLamp} aria-hidden="true" />
-                  RESEARCH_PRODUCT
+                  RESEARCH PRODUCT
                 </div>
               </div>
 
-              <p className={styles.productRole}>FIRST CONCRETE COMMERCIALIZATION CANDIDATE</p>
+              <p className={styles.productRole}>BOOK / LEARNING PRODUCT</p>
               <h3>Boundary-First Chess</h3>
               <p className={styles.productPromise}>
                 A book-length teaching asset and developed pedagogy for helping learners ask
@@ -73,7 +73,7 @@ export function InstitutionalProductsPage() {
                   </p>
                 </div>
                 <div>
-                  <span>NEXT COMMERCIAL TEST</span>
+                  <span>NEXT OUTSIDE TEST</span>
                   <strong>Package the existing asset</strong>
                   <p>
                     External review, production, pricing, preorder/publication, pilot,
@@ -120,12 +120,12 @@ export function InstitutionalProductsPage() {
                 </div>
               </div>
 
-              <p className={styles.productRole}>PROJECTR · CURRENT ACTIVE-BUILD SOFTWARE WEDGE</p>
-              <h3>Projectr / YouTube Knowledge Explorer</h3>
+              <p className={styles.productRole}>PROJECTR · ACTIVE SOFTWARE PRODUCT</p>
+              <h3>Projectr</h3>
               <p className={styles.productPromise}>
-                Projectr is the durable public knowledge product family. Its current bounded
-                implementation turns long-form YouTube into searchable, timestamped, persistent
-                knowledge while preserving a direct path back to the source.
+                Projectr is a knowledge-exploration product for turning long-form sources into
+                searchable, persistent knowledge without losing the path back to the original.
+                YouTube Knowledge Explorer is the current working implementation.
               </p>
 
               <div className={styles.explorerPipeline}>
@@ -148,7 +148,7 @@ export function InstitutionalProductsPage() {
                   </p>
                 </div>
                 <div>
-                  <span>NEXT COMMERCIAL TEST</span>
+                  <span>NEXT OUTSIDE TEST</span>
                   <strong>Repeated voluntary use</strong>
                   <p>
                     Build a usable MVP, see whether people return, and only then test willingness
@@ -159,7 +159,7 @@ export function InstitutionalProductsPage() {
 
               <div className={styles.productMiniPanel}>
                 <span>PRODUCT FAMILY</span>
-                <strong>Public knowledge infrastructure / project-based constructive social media</strong>
+                <strong>Source-linked knowledge exploration and persistent research/workspace tools</strong>
               </div>
 
               <div className={styles.productTruth}>
@@ -169,7 +169,7 @@ export function InstitutionalProductsPage() {
               </div>
 
               <span className={styles.productDetailLink}>
-                Enter YouTube Knowledge Explorer
+                Open Projectr / YouTube Explorer
                 <span aria-hidden="true">→</span>
               </span>
             </Link>
@@ -179,20 +179,20 @@ export function InstitutionalProductsPage() {
         <section className={styles.researchProducts}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>SIBLING KNOWLEDGE INFRASTRUCTURE</>}
-            title={<>Public knowledge infrastructure organizes durable source-linked knowledge. Corpus Forge governs bounded research execution.</>}
-            note={<>They can exchange typed work and artifact state, but public planning is not scientific promotion and neither product is merely the other&apos;s front end or back end.</>}
+            eyebrow={<>RESEARCH INFRASTRUCTURE</>}
+            title={<>Corpus Forge helps make research work inspectable and repeatable.</>}
+            note={<>Projectr helps people explore and preserve knowledge. Corpus Forge supports the research process itself. They can exchange artifacts without becoming the same product.</>}
           />
 
           <div className={styles.researchProductGrid}>
             <Link className={styles.researchProductCard} data-product="asm" href="/products/current/corpus-forge">
               <div>
-                <span>SIBLING RESEARCH INFRASTRUCTURE · RESEARCH_PRODUCT</span>
+                <span>RESEARCH INFRASTRUCTURE · RESEARCH PRODUCT</span>
                 <strong>Corpus Forge</strong>
               </div>
               <p>
-                Source-to-claim state, bounded execution, evidence, criticism, verification,
-                reproducibility, repair, and explicit promotion authority.
+                Tools for organizing sources, claims, evidence, criticism, verification,
+                reproducibility, revision, and human review across a research workflow.
               </p>
               <small>Enter Corpus Forge <i aria-hidden="true">→</i></small>
             </Link>
@@ -202,21 +202,20 @@ export function InstitutionalProductsPage() {
         <section className={styles.researchProducts}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>FIRST-CLASS SOFTWARE MACHINERY</>}
-            title={<>Software Before Code is the engineering center.</>}
-            note={<>Scientific software modeling before implementation mechanism: determine the bounded object, state, lawful transformations, invariants, authority, witness, and consequence before code hardens the representation. Closure-Driven Software remains a secondary technical / historical alias.</>}
+            eyebrow={<>ENGINEERING METHOD</>}
+            title={<>Software Before Code is the Lab&apos;s core engineering doctrine.</>}
+            note={<>Understand the system, the information it must preserve, the changes it must support, and the consequences that matter before implementation choices harden the model.</>}
           />
 
           <div className={styles.researchProductGrid}>
             <Link className={styles.researchProductCard} data-product="asm" href="/software-before-code">
               <div>
-                <span>SOURCE_DEVELOPMENT · SOFTWARE-ENGINEERING MACHINERY</span>
+                <span>SOFTWARE ENGINEERING METHOD</span>
                 <strong>Software Before Code</strong>
               </div>
               <p>
-                Methods, formal models, translation machinery, engineering instruments, and
-                practitioner material for making semantic obligations, boundaries, invariants,
-                construction, witnesses, and closure explicit before implementation details dominate.
+                Methods and tools for making system meaning, state, constraints, decisions,
+                and expected consequences explicit before implementation details dominate.
               </p>
               <small>Enter Software Before Code <i aria-hidden="true">→</i></small>
             </Link>
@@ -226,39 +225,39 @@ export function InstitutionalProductsPage() {
         <section className={styles.researchProducts}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>TESTBEDS + CALIBRATION</>}
-            title={<>Different domains. The same machinery under pressure.</>}
-            note={<>These surfaces test transportability and research depth. They do not imply equal product maturity or validate the strongest underlying theory claims.</>}
+            eyebrow={<>RESEARCH TESTBEDS</>}
+            title={<>Some product-shaped surfaces exist primarily to test the research.</>}
+            note={<>Weather, ASM, mathematical calibration work, and institutional tools are shown here because they are usable or inspectable artifacts—not because they have equal commercial maturity.</>}
           />
 
           <div className={styles.researchProductGrid}>
             <Link className={styles.researchProductCard} data-product="weather" href="/products/boundary-first-weather">
               <div>
-                <span>SCIENTIFIC / COMPUTATIONAL TESTBED</span>
+                <span>WEATHER RESEARCH TESTBED</span>
                 <strong>Boundary First Weather</strong>
               </div>
               <p>
-                A computational weather testbed and decision-support surface for boundary-aware
-                diagnostics, forecast disagreement, and selective refinement.
+                A computational weather research program testing whether boundary-aware
+                diagnostics can improve how forecast change, disagreement, and computation are inspected.
               </p>
               <small>Enter Weather <i aria-hidden="true">→</i></small>
             </Link>
 
             <Link className={styles.researchProductCard} data-product="asm" href="/products/agentic-scientific-method">
               <div>
-                <span>RESEARCH PRODUCT · INQUIRY PROTOCOL</span>
+                <span>RESEARCH METHOD / PROTOCOL</span>
                 <strong>Agentic Scientific Method</strong>
               </div>
               <p>
-                An operational inquiry protocol for making goals, evidence, action, criticism,
-                authority, defect, repair, closure, and scientific memory inspectable.
+                A structured research protocol for making questions, evidence, tests,
+                criticism, revision, responsibility, and scientific memory inspectable.
               </p>
               <small>Enter Agentic Scientific Method <i aria-hidden="true">→</i></small>
             </Link>
 
             <Link className={styles.researchProductCard} data-product="asm" href="/research/moonshots/millennium-problems-research">
               <div>
-                <span>FRONTIER MATHEMATICAL CALIBRATION</span>
+                <span>MATHEMATICAL CALIBRATION PROGRAM</span>
                 <strong>Millennium Problems Research</strong>
               </div>
               <p>
@@ -271,12 +270,12 @@ export function InstitutionalProductsPage() {
 
             <Link className={styles.researchProductCard} data-product="asm" href="/apparatus">
               <div>
-                <span>INSTITUTIONAL MACHINERY</span>
+                <span>LAB OPERATING TOOLS</span>
                 <strong>Registrar · Workbench · Representation Observatory</strong>
               </div>
               <p>
-                Machinery for canonical identity and provenance, bounded human/agent work and
-                promotion authority, and inspection of semantic change across representations.
+                Tools for durable identity, source history, human/AI work, review, and
+                inspecting how important representations change over time.
               </p>
               <small>Inspect the apparatus <i aria-hidden="true">→</i></small>
             </Link>
