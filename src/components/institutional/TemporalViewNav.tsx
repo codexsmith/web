@@ -7,7 +7,7 @@ export function TemporalViewNav({ activeView }: { activeView: TemporalViewId }) 
     <section className={styles.temporalNav} aria-label="Lab temporal views">
       <header>
         <span>THREE TIME SCALES</span>
-        <strong>Recent motion. Present posture. Long memory.</strong>
+        <strong>Recent changes. Current priorities. Long-term history.</strong>
       </header>
 
       <div className={styles.temporalGrid}>
