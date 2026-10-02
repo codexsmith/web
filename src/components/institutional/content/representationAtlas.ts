@@ -34,12 +34,12 @@ export type RepresentationDomain = {
 };
 
 export const representationAtlasProjection = {
-  status: "working comparative lens",
-  sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15",
+  status: "working comparative tool",
+  sourceRevision: "b543145845450821cefe0c401c73d814a01d81c0",
   authority:
-    "The Atlas compares recurring analytical roles across witness domains. Similar placement does not establish formal equivalence, empirical validation, or transfer of authority between domains.",
+    "The Atlas compares recurring analytical roles across different domains. Similar placement does not establish formal equivalence, empirical validation, or permission to transfer conclusions from one domain to another.",
   witnessDomainsSource:
-    "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/09_Witness_Domains.md",
+    "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/01_Foundations/01_institutional_core__foundation/09_Witness_Domains.md",
   representationMechanicsSource:
     "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/03_work_packets/boundary_first_labs_representation_transport_breakthrough_v0_1/03_representation_mechanics_spine_patch_v0_1.md",
 } as const;
