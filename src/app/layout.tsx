@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     template: "%s | Boundary First Labs",
   },
   description:
-    "Software for difficult systems, public-interest projects, publications, and research into executable representation.",
+    "Scientific software modeling, executable representation, applied systems research, products, publications, and public-interest work.",
   referrer: "strict-origin-when-cross-origin",
   formatDetection: {
     telephone: false,
@@ -103,14 +103,14 @@ export const metadata: Metadata = {
     siteName: "Boundary First Labs",
     title: "Boundary First Labs",
     description:
-      "Applied research, research apparatus, products, projects, and public-interest systems work.",
+      "Scientific software modeling, executable representation, applied systems research, products, and public-interest systems work.",
     url: "/",
   },
   twitter: {
     card: "summary",
     title: "Boundary First Labs",
     description:
-      "Applied research, research apparatus, products, projects, and public-interest systems work.",
+      "Scientific software modeling, executable representation, applied systems research, products, and public-interest systems work.",
   },
 };
 
