@@ -88,9 +88,9 @@ export function OpenLabContextSection() {
       <div className={styles.openLabContextFrame}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>OPEN LAB CONTEXT</>}
-          title={<>The governance machinery around a permeable boundary.</>}
-          note={<>Public participation stays simple at the boundary; these supporting rules explain how stewardship and transfer stay bounded as a relationship deepens.</>}
+          eyebrow={<>WHAT HAPPENS AFTER FIRST CONTACT</>}
+          title={<>Simple entry, clearer rules as the relationship deepens.</>}
+          note={<>The first email is intentionally lightweight. More structured review, data handling, publication, or collaboration should add clearer consent, privacy, ownership, and responsibility rules as needed.</>}
         />
 
         <ReflowField
@@ -101,10 +101,10 @@ export function OpenLabContextSection() {
         >
           <OpenLabContextCard
             id="agency"
-            label="Agency in Both Directions"
-            eyebrow="AGENCY IN BOTH DIRECTIONS"
-            title="Permeability with governance."
-            description="The Lab can receive criticism and local knowledge without pretending every submission is correct, actionable, or within scope."
+            label="Challenge and Response"
+            eyebrow="CHALLENGE AND RESPONSE"
+            title="The Lab can be challenged without treating every submission as correct."
+            description="Criticism and local knowledge should be reviewable, while the Lab still distinguishes evidence, scope, and responsibility."
             className={styles.openLabContextAgency}
             tone="agency"
           >
@@ -128,10 +128,10 @@ export function OpenLabContextSection() {
 
           <OpenLabContextCard
             id="stewardship"
-            label="Stewardship Begins at Collection"
-            eyebrow="STEWARDSHIP BEGINS AT COLLECTION"
-            title="Collection creates obligations before it creates opportunities."
-            description="Any structured collection path should make privacy, consent, retention, security, moderation, and response controls explicit."
+            label="Privacy and Consent"
+            eyebrow="PRIVACY AND CONSENT"
+            title="Collecting information creates obligations immediately."
+            description="Any structured intake should make privacy, consent, retention, security, moderation, and response expectations explicit."
             className={styles.openLabContextStewardship}
             tone="stewardship"
           >
@@ -154,10 +154,10 @@ export function OpenLabContextSection() {
 
           <OpenLabContextCard
             id="shared-infrastructure"
-            label="Shared Infrastructure, Distinct Contracts"
-            eyebrow="SHARED INFRASTRUCTURE, DISTINCT CONTRACTS"
-            title="One envelope can route four typed intents."
-            description="Shared identity, consent, provenance, privacy, and routing machinery should preserve the relationship the person actually requested."
+            label="Keep the Request Intact"
+            eyebrow="KEEP THE REQUEST INTACT"
+            title="One contact system should not erase what the person actually asked for."
+            description="Shared routing can support multiple kinds of participation while preserving whether the person brought a critique, system, collaboration idea, or other work."
             className={styles.openLabContextInfrastructure}
             tone="infrastructure"
           >
@@ -178,10 +178,10 @@ export function OpenLabContextSection() {
 
           <OpenLabContextCard
             id="humanist-interface"
-            label="Humanist Interface Rule"
-            eyebrow="HUMANIST INTERFACE RULE"
-            title="The institution owns the burden of routing."
-            description="People should not need to translate themselves into the Lab's internal taxonomies before the Lab is willing to understand them."
+            label="Plain-Language Intake"
+            eyebrow="PLAIN-LANGUAGE INTAKE"
+            title="The Lab should do the categorizing, not the visitor."
+            description="People should be able to describe what happened, what they have, what keeps failing, or what they are trying to do in ordinary language."
             className={styles.openLabContextInterface}
             tone="interface"
           >
@@ -202,10 +202,10 @@ export function OpenLabContextSection() {
 
           <OpenLabContextCard
             id="capability-transfer"
-            label="Capability, Not Dependence"
-            eyebrow="CAPABILITY, NOT DEPENDENCE"
-            title="Useful work should leave something behind."
-            description="The preferred outcome is durable capability rather than manufactured dependence on Boundary First Labs."
+            label="Leave Capability Behind"
+            eyebrow="LEAVE CAPABILITY BEHIND"
+            title="Useful work should make the other side stronger."
+            description="The preferred outcome is durable knowledge, tools, documentation, or process rather than dependence on Boundary First Labs."
             className={styles.openLabContextCapability}
             tone="capability"
           >
