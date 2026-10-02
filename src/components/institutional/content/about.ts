@@ -36,27 +36,34 @@ export const oldMachinery = [
 ] as const;
 
 export const recurringStructures = [
+  "Domain",
+  "Obligation",
+  "Distinction",
   "State",
   "Boundary",
-  "Distinction",
   "Transformation",
-  "Constraint",
   "Invariant",
+  "Admissibility",
+  "Projection",
+  "Authority",
+  "Provenance",
+  "Witness",
+  "Consequence",
   "Closure",
-  "Information loss",
-  "Failure",
-  "Revision",
+  "Defect",
+  "Repair",
+  "Handoff",
 ] as const;
 
 export const methodCycle = [
-  ["01", "Practice", "Start with a real system and a real failure or need."],
-  ["02", "Comparison", "Look sideways into neighboring disciplines and working machinery."],
-  ["03", "Systematization", "Identify the recurring structure without erasing local meaning."],
-  ["04", "Formalization", "State the pattern precisely enough to fail."],
-  ["05", "Instrumentation", "Build ways to inspect, test, compare, or execute it."],
-  ["06", "Deployment", "Put the machinery into a bounded real environment."],
-  ["07", "Observation", "Watch what survives contact and what breaks."],
-  ["08", "Revision", "Repair the representation and repeat."],
+  ["01", "Observe", "Start with the real system, its language, artifacts, behavior, and consequences."],
+  ["02", "Bound", "Name the smallest coherent obligation, protected distinctions, and authority boundary."],
+  ["03", "Represent", "Construct continuation-sufficient state, lawful transitions, invariants, and projections."],
+  ["04", "Execute", "Run the smallest useful transformation that can expose whether the representation is adequate."],
+  ["05", "Witness", "Collect domain-recognized evidence instead of treating implementation or ticket state as closure."],
+  ["06", "Criticize", "Search for counterexamples, hidden distinctions, invalid authority, and representation loss."],
+  ["07", "Repair", "Change the model, boundary, transformation, or machinery where the evidence locates defect."],
+  ["08", "Transfer", "Leave durable state, provenance, decisions, and capability for the next lawful continuation."],
 ] as const;
 
 export const agencyRoutes = [
