@@ -2,16 +2,16 @@ export const nowPriorityLanes = [
   {
     code: "01",
     status: "ACTIVE",
-    title: "Make the Lab understandable and usable from the outside",
+    title: "Keep the public institution current and useful",
     description:
-      "Keep the website, service offers, funding pages, and contact paths clear enough that a first-time visitor can understand the Lab and choose a concrete next step without a founder walkthrough.",
+      "The core website reconciliation is complete. The current job is to keep the public site synchronized with real Lab state and use it as an active interface for readers, collaborators, clients, funders, and reviewers.",
     work: [
-      "Keep the newly reconciled website current as research, products, services, and funding work change.",
-      "Keep public claims tied to real products, services, research, evidence, and contact paths instead of creating a separate marketing story.",
-      "Use first-time-reader feedback, accessibility checks, and actual inquiries to find and repair confusing language or navigation.",
+      "Keep Now and What Changed current as doctrine, research, products, services, and institutional priorities materially move.",
+      "Use first-time-reader feedback, accessibility checks, and actual inquiries to repair confusing language, missing context, or dead-end navigation.",
+      "Treat the website as a maintained public record: new claims should point to real evidence, and completed work should stop appearing as unfinished.",
     ],
     closure:
-      "A first-time visitor can explain what BFL is, find the work relevant to them, understand what is established versus still being tested, and take a real next step.",
+      "A first-time visitor can understand what BFL is today, see what changed recently, distinguish established work from active research, and reach a useful next action without a founder walkthrough.",
     tone: "public",
   },
   {
@@ -21,7 +21,7 @@ export const nowPriorityLanes = [
     description:
       "Move the Lab's current service, product, software, and research-funding opportunities into contact with people outside the Lab.",
     work: [
-      "Use Systems / Architecture Review as the near-term B2B services test.",
+      "Use Systems & Architecture Review as the near-term B2B services test.",
       "Advance Boundary-First Chess and adjacent sports/game products through direct and partner-distributed market tests.",
       "Test Projectr / Knowledge Explorer as paid knowledge infrastructure only after repeated voluntary use, and advance Weather through grants, sponsored research, and scientific collaboration.",
     ],
@@ -95,23 +95,23 @@ export const roadmapHorizons = [
   {
     label: "NOW",
     horizon: "Current cycle",
-    title: "Externalize the institution and finish the next bounded audits.",
+    title: "Keep the public institution current while pushing the strongest work into outside contact and hard tests.",
     items: [
-      "Keep the public website synchronized with current Lab doctrine, products, services, and evidence.",
-      "Advance the four funding lanes into real external contact.",
+      "Keep Now, What Changed, services, products, and research descriptions synchronized with the Lab's current state.",
+      "Move services, products, collaboration, and funding opportunities into real outside contact.",
+      "Execute at least one end-to-end research or institutional loop using the machinery that now exists.",
       "Continue the record-completeness audit, including the rule that every durable experiment belongs to a durable research program.",
-      "Run the next statistical-mechanics, admissibility, and fine-structure control work.",
-      "Move the strongest paperized research objects toward bounded external review.",
+      "Run hard native-domain research tests and move the strongest manuscripts toward external review.",
     ],
   },
   {
     label: "NEXT",
     horizon: "After the current closures",
-    title: "Turn contact and machinery into evidence another person can inspect.",
+    title: "Turn outside contact and internal machinery into evidence another person can inspect and continue.",
     items: [
-      "Bind paid work, product use, funding dispositions, collaboration, and failed-fit events as separate evidence.",
-      "Promote only the research machinery that survives native-theory and adversarial controls.",
-      "Release a small first cohort of manuscripts with explicit review and correction state.",
+      "Record paid work, product use, funding decisions, collaboration, review, and failed-fit events as distinct kinds of outside evidence.",
+      "Keep only the research machinery that survives comparison with established field methods and adversarial testing.",
+      "Release a small first cohort of manuscripts with clear review status and correction paths.",
       "Test the Lab's architecture and record-keeping tools against real institutional changes rather than only controlled examples.",
       "Test non-founder use of selected tools, methods, or operating procedures.",
     ],

@@ -14,22 +14,70 @@ export type PublicChange = {
 
 export const changesProjection = {
   generatedDate: "2026-10-02",
-  webRevision: "d2cc509bfa2583e0ae9648905bbbf59258f1e23c",
+  webRevision: "1d90fd2fa62c0313ef83be313f71ebd3e2ec5a9d",
   labRevision: "b543145845450821cefe0c401c73d814a01d81c0",
   authority:
-    "This is a curated public delta archive over canonical repository state. It reports selected material changes and backfilled milestones; it is not a complete commit log, activity feed, or claim-promotion surface.",
+    "This is a curated public record of meaningful changes in the Lab and website. It highlights durable changes and selected earlier milestones; it is not a complete commit log or activity feed.",
 } as const;
 
 export const recentChanges: readonly PublicChange[] = [
   {
+    id: "chg-public-doctrine-language-reconciliation",
+    date: "2026-10-02",
+    scope: "Public interface",
+    title: "The public website was brought into line with the Lab's current doctrine.",
+    summary:
+      "The institutional site now presents scientific software modeling as the central framing, Software Before Code as the engineering doctrine, and Boundary-First Engineering as the practice. Deeper routes were also rewritten so first-time readers encounter plain English before internal machinery vocabulary.",
+    consequence:
+      "The public site now better matches the Lab's current state and is easier to understand without a founder walkthrough, while technical detail remains available for readers who want to inspect it.",
+    sourceRepository: "codexsmith/web",
+    sourceRevision: "1d90fd2fa62c0313ef83be313f71ebd3e2ec5a9d",
+    sourceLabel: "Production-ready doctrine and public-language reconciliation",
+    sourceHref:
+      "https://github.com/codexsmith/web/commit/1d90fd2fa62c0313ef83be313f71ebd3e2ec5a9d",
+    surfaceHref: "/",
+  },
+  {
+    id: "chg-post-critical-mass-execution-frontier",
+    date: "2026-10-01",
+    scope: "Institution",
+    title: "The Lab's internal priority shifted from adding components to closing complete loops.",
+    summary:
+      "The post-critical-mass execution frontier names the current institutional task: connect existing research records, Corpus Forge, verification tools, Observatory machinery, publication surfaces, and local execution into complete research and operating loops.",
+    consequence:
+      "The next test is whether the Lab can reconstruct its own priorities from durable state, carry at least one real research object end to end, and use the result to update the institution rather than merely describe it.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "d585f7372e8de9e6ba2818a4c7b937092eae4f89",
+    sourceLabel: "Capture post-critical-mass execution frontier",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/d585f7372e8de9e6ba2818a4c7b937092eae4f89",
+    surfaceHref: "/now",
+  },
+  {
+    id: "chg-dependency-aware-evidence-composition",
+    date: "2026-10-01",
+    scope: "Research",
+    title: "The Lab added an executable check against double-counting dependent evidence.",
+    summary:
+      "Observatory Run 021 preserves independent, duplicate, conditionally dependent, and unknown evidence relationships during information updates. Duplicate reuse contributes no new information, and missing dependency state fails closed rather than being treated as independent by default.",
+    consequence:
+      "In the bounded experiment, treating dependent evidence as independent could change a downstream governance choice. The result strengthens the rule that more evidence records do not necessarily mean more independent support, while remaining a finite experiment rather than a universal statistical theory.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "0816d56d68a60da18efcf4b9d21b6ed09727c88e",
+    sourceLabel: "Observatory Run 021: dependency-aware corroboration information composition",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/0816d56d68a60da18efcf4b9d21b6ed09727c88e",
+    surfaceHref: "/research",
+  },
+  {
     id: "chg-authority-provenance-consequence-grammar",
     date: "2026-10-01",
     scope: "Method",
-    title: "Authority provenance became distinct from execution provenance.",
+    title: "The Lab now separates who did something from who had the authority to approve it.",
     summary:
-      "The Systems Kernel now explicitly separates who performed a transformation from the authority under which that transformation is allowed to count, while keeping source, verification, adjudication, and consequence provenance distinct.",
+      "A new Systems Kernel refinement distinguishes the person, software, or AI that performed an action from the person or governed source whose authority made that action admissible. Source, verification, review, and consequence histories remain separate as well.",
     consequence:
-      "Human, software, and AI participation can be represented without silently treating causal participation as decision authority; the refinement remains a working synthesis rather than a universal theory of agency or authority.",
+      "This gives the Lab a clearer way to represent human, software, and AI participation without assuming that performing an action also grants decision authority. The refinement remains a working synthesis, not a universal theory of agency or authority.",
     sourceRepository: "codexsmith/boundary-first-labs",
     sourceRevision: "b543145845450821cefe0c401c73d814a01d81c0",
     sourceLabel: "Authority Provenance, Consequence, and Agent Participation — Systems Kernel Refinement v0.1",
@@ -41,11 +89,11 @@ export const recentChanges: readonly PublicChange[] = [
     id: "chg-end-to-end-research-pipeline",
     date: "2026-10-01",
     scope: "Institution",
-    title: "The Lab defined an end-to-end institutional research pipeline.",
+    title: "The Lab connected its research process from question to public result.",
     summary:
-      "A bounded pipeline now connects research work across explicit stages rather than relying on disconnected local workflows, with promotion and authority crossings kept distinct from execution.",
+      "A defined end-to-end pipeline now connects research questions, experiments, evidence, review, publication, and later consequences instead of leaving those stages as disconnected local workflows.",
     consequence:
-      "The Lab has a clearer route for applying its own machinery to its research lifecycle while preserving human promotion authority and owner-local scientific standards.",
+      "The Lab can now test whether one real research object can move through the full institutional lifecycle while keeping scientific standards and consequential decisions with the people or source systems responsible for them.",
     sourceRepository: "codexsmith/boundary-first-labs",
     sourceRevision: "55b588c30a5a709eaa9fd3ab499c2294e9e7f71a",
     sourceLabel: "Define end-to-end institutional research pipeline v0.1",
@@ -57,11 +105,11 @@ export const recentChanges: readonly PublicChange[] = [
     id: "chg-scientific-model-state-contract",
     date: "2026-09-29",
     scope: "Method",
-    title: "Scientific model architecture and state-contract reasoning converged.",
+    title: "The Lab clarified how much of a system must be modeled before implementation begins.",
     summary:
-      "The working synthesis treats state as the information required for lawful continuation and separates state, transition, persistence, and projection rather than assuming one representation must play every role.",
+      "The current working model defines state as the information needed for the next valid step and separates the working state of a system from how that state changes, where it is stored, and how different audiences see it.",
     consequence:
-      "Software Before Code can begin from a bounded continuation-sufficient representation, then promote ontology, persistence, and specialized projections when execution shows that additional structure has become consequential.",
+      "Software Before Code no longer implies that every project needs a complete ontology or database model before work can start. A team can begin with the smallest model that safely supports the next step and add structure when real execution shows that it matters.",
     sourceRepository: "codexsmith/boundary-first-labs",
     sourceRevision: "f03bf02f10e04e18e5e3ad8d23338368dc52414f",
     sourceLabel: "Scientific Model Architecture and the State Contract",
@@ -73,11 +121,11 @@ export const recentChanges: readonly PublicChange[] = [
     id: "chg-registrar-native-verifier-621",
     date: "2026-09-29",
     scope: "Institution",
-    title: "The applied Registrar/control-plane state reached 621 durable identities.",
+    title: "The Lab's central directory reached 621 durable record systems.",
     summary:
-      "RTX-2026-09-29-001 admitted the native-verifier adapter registry and regenerated the synchronized control-plane surfaces with validation PASS.",
+      "A validated registry transaction added the native-verifier adapter registry and refreshed the synchronized institutional directory.",
     consequence:
-      "The public snapshot can distinguish the latest applied Registrar state from later proposed or preflight-only changes rather than presenting candidate state as already promoted.",
+      "The public snapshot can now distinguish the latest applied record state from later proposed or preflight-only changes instead of presenting candidate work as already complete.",
     sourceRepository: "codexsmith/boundary-first-labs",
     sourceRevision: "537028601d6335b6fe09e0569092ec72b4ab6f8f",
     sourceLabel: "Close native verifier Registrar transaction",
@@ -89,11 +137,11 @@ export const recentChanges: readonly PublicChange[] = [
     id: "chg-registry-control-plane-620",
     date: "2026-09-27",
     scope: "Institution",
-    title: "The whole-Lab registry census closed into a 620-registry control plane.",
+    title: "The Lab completed a whole-institution inventory of its durable record systems.",
     summary:
-      "The completed discovery census, normalized Registrar projection, ownership graph, authority audit, maintenance contracts, compact read interface, and transaction-based maintenance protocol were integrated as one source-safe registry stack.",
+      "The discovery census, ownership map, maintenance rules, read interface, and transaction-based update process were integrated into one institutional directory covering 620 record systems at the recorded cutoff.",
     consequence:
-      "Registry discovery is no longer a folder-memory exercise: the Lab now has a typed, transaction-maintained institutional control graph with equalized identity sets, explicit authority ownership, and zero hard authority or maintenance errors at the recorded cutoff.",
+      "Finding durable institutional state no longer depends on remembering where folders live. The Lab now has an explicit directory showing which record systems exist, who owns them, and how changes should be maintained.",
     sourceRepository: "codexsmith/boundary-first-labs",
     sourceRevision: "989e3737b1d5d748c1976779664023999a2d8c87",
     sourceLabel: "Registry discovery census and control-plane integration",
@@ -105,11 +153,11 @@ export const recentChanges: readonly PublicChange[] = [
     id: "chg-observatory-impact-run-004",
     date: "2026-09-26",
     scope: "Institution",
-    title: "The Observatory gained bounded institutional dependency-impact sensing.",
+    title: "The Lab can now trace which other records may be affected when a source changes.",
     summary:
-      "Run 004 added downstream impact and staleness propagation over validated typed relations while preserving witness paths, source semantic direction, open-world uncertainty, and source immutability.",
+      "Observatory Run 004 added a bounded way to follow validated dependency relationships and identify downstream records that may need review after a source changes.",
     consequence:
-      "The executable institution can now inspect likely downstream consequences of a source change without silently promoting reachability into a new direct dependency assertion.",
+      "The Lab can inspect likely ripple effects without pretending that every reachable record is automatically a direct dependency or silently rewriting the source records it is observing.",
     sourceRepository: "codexsmith/boundary-first-labs",
     sourceRevision: "c3b88670e6dfeb9ca218508c21096d27f74c4823",
     sourceLabel: "Observatory: institutional dependency impact Run 004",

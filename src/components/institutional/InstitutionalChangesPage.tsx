@@ -18,36 +18,36 @@ export function InstitutionalChangesPage() {
         styles={styles}
         className={styles.changesHero}
         eyebrow={<>WHAT CHANGED?</>}
-        title={<>State changes, not activity theater.</>}
+        title={<>What materially changed?</>}
         lead={
           <>
-            A dated public delta stream for material changes to the Lab corpus and its
-            institutional interface.
+            A dated public record of changes that altered the Lab&apos;s research, methods,
+            institution, or public interface.
           </>
         }
         support={
           <>
-            This is not every commit, task, or idea. It is a curated projection of changes
-            that altered canonical state, public legibility, research continuity, or
-            institutional machinery.
+            This is not every commit, task, or idea. It highlights changes that materially
+            changed what the Lab knows, how it works, what is publicly understandable, or
+            what another person can now inspect or do.
           </>
         }
         childLinks={institutionalChildRoutes.changes}
       >
         <details className={styles.projectionPanel}>
           <summary>
-            <span>SOURCE-BOUND DELTA SNAPSHOT</span>
+            <span>ARCHIVE SNAPSHOT</span>
             <strong>{allChanges.length} material changes in the curated public archive</strong>
-            <small>Inspect source binding</small>
+            <small>Inspect source details</small>
           </summary>
           <div className={styles.projectionDetails}>
             <dl>
               <div>
-                <dt>WEB SOURCE CUTOFF</dt>
+                <dt>WEB REVISION</dt>
                 <dd>{changesProjection.webRevision.slice(0, 12)}</dd>
               </div>
               <div>
-                <dt>LAB SOURCE CUTOFF</dt>
+                <dt>LAB REVISION</dt>
                 <dd>{changesProjection.labRevision.slice(0, 12)}</dd>
               </div>
               <div>
@@ -63,26 +63,26 @@ export function InstitutionalChangesPage() {
       <TemporalViewNav activeView="changes" />
 
       <section className={styles.changeBoundary}>
-        <span>DELTA RULE</span>
-        <strong>Changed means canonical state moved.</strong>
+        <span>WHAT COUNTS AS A CHANGE?</span>
+        <strong>A change belongs here when the Lab is meaningfully different afterward.</strong>
         <p>
-          CSS polish, intermediate replay commits, queue motion, and speculative notes are not
-          automatically public changes. A record belongs here when it materially changes what
-          exists, what is canonical, what is publicly inspectable, or what another person can
-          now do.
+          Routine polish, intermediate commits, task movement, and speculative notes do not
+          automatically qualify. A record belongs here when it changes the durable research
+          record, an institutional capability, a public explanation, or what another person
+          can now inspect, test, use, or continue.
         </p>
       </section>
 
       <section className={styles.changeCatalog}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>MATERIAL DELTA ARCHIVE</>}
-          title={<>A curated state-transition history over a large moving corpus.</>}
+          eyebrow={<>MATERIAL CHANGE ARCHIVE</>}
+          title={<>A curated history of changes that moved the Lab forward.</>}
           note={
             <>
               Each item points back to an exact repository revision. Recent entries are joined
-              by selected earlier milestones so the page can show institutional development
-              without pretending to be a complete GitHub activity feed.
+              by selected earlier milestones so readers can follow institutional development
+              without wading through a complete GitHub activity feed.
             </>
           }
         />
