@@ -5,14 +5,14 @@ export const instruments = [
     verb: "GOVERNS",
     status: "REVIEWABLE v0.1 SEED CONTRACT",
     tone: "control",
-    question: "What registries exist, where do they live, and what are they allowed to say?",
+    question: "What durable records exist, where do they live, and which source is responsible for each one?",
     summary:
-      "Makes the Lab's registry, register, ledger, catalog, queue, map, and index surfaces discoverable without absorbing their contents or ownership.",
-    observes: "Registry surfaces, canonical homes, semantic owners, authority ceilings, maintenance and projection roles.",
-    prevents: "A generated index or discovery surface being mistaken for the authority that owns the object.",
-    authority: "Institutional discovery and meta-control over registry descriptions.",
-    noAuthority: "Does not rewrite or promote the objects contained in those registries.",
-    handoff: "Preserves where authoritative state lives and who owns its semantics.",
+      "Acts as a directory for the Lab's registers, ledgers, catalogs, queues, maps, and indexes without taking ownership of the records inside them.",
+    observes: "Which record systems exist, where their source of truth lives, who owns them, and how they are maintained.",
+    prevents: "A search index, generated page, or convenience view being mistaken for the source of truth.",
+    authority: "May describe and route people or software to the Lab's record systems.",
+    noAuthority: "May not rewrite the underlying research, product, publication, or operational records simply because it can find them.",
+    handoff: "Makes it clear where the current record lives and who is responsible for its meaning."
   },
   {
     code: "LANE",
@@ -22,11 +22,11 @@ export const instruments = [
     tone: "research",
     question: "What durable questions is the Lab pursuing?",
     summary:
-      "Preserves continuing inquiries that can survive many experiments, conversations, papers, failures, revisions, splits, merges, and supersessions.",
+      "Keeps a long-running research question identifiable across experiments, conversations, papers, failures, revisions, and changes of direction."
     observes: "Governing question, inquiry boundary, posture, sources, experiments, publications, dependencies, lineage, and next targets.",
     prevents: "A long-running inquiry collapsing into disconnected papers, chats, or short-term memory.",
-    authority: "Records the durable identity and continuity of a research lane.",
-    noAuthority: "Registration does not establish that the lane's hypothesis is correct.",
+    authority: "May record the identity, history, and current state of a research program.",
+    noAuthority: "Being registered does not make the hypothesis correct."
     handoff: "Lets another researcher recover the question, lineage, sources, and current next work.",
   },
   {
@@ -37,11 +37,11 @@ export const instruments = [
     tone: "experiment",
     question: "What has the Lab actually tried?",
     summary:
-      "Preserves empirical and computational experiments, formal stress tests, simulations, benchmarks, replications, adversarial tests, falsification attempts, and negative or inconclusive work.",
+      "Keeps a durable record of experiments, simulations, benchmarks, replications, stress tests, attempts to disprove a claim, and negative or inconclusive results."
     observes: "Bounded evidence-bearing operations and their outcomes.",
     prevents: "Failed or inconvenient experiments disappearing from the institutional record.",
-    authority: "Registration and evidence routing.",
-    noAuthority: "Experiment registration does not promote scientific claim status.",
+    authority: "May record what was tried and connect the result to the relevant research.",
+    noAuthority: "Recording an experiment does not make a scientific claim established."
     handoff: "Shows another reviewer what has already been tried, including null, negative, blocked, and superseded work.",
   },
   {
@@ -52,12 +52,12 @@ export const instruments = [
     tone: "local",
     question: "What exactly are we asserting?",
     summary:
-      "Keeps structured claim state outside polished prose: supported claims, hypotheses, tests, dependencies, evidence relationships, objections, promotion gates, and supersession.",
-    observes: "Claim maturity and evidence relationships appropriate to the local domain.",
-    prevents: "A polished paragraph silently inheriting more authority than the underlying claim state supports.",
-    authority: "Local claim-state control where the owning research object defines it.",
-    noAuthority: "There is not one Lab-wide canonical Claim Ledger, and the taxonomy is not universal across domains.",
-    handoff: "Lets a new reader distinguish current claim state from historical wording and presentation.",
+      "Keeps the status of a claim separate from polished prose: what is supported, still hypothetical, under test, disputed, revised, or superseded.",
+    observes: "What a claim currently says, what supports it, what challenges it, and how confident the owning research program is allowed to be.",
+    prevents: "Confident writing from sounding stronger than the underlying evidence.",
+    authority: "May record claim status inside the research object that owns that claim.",
+    noAuthority: "There is no single Lab-wide claim scale that overrides the standards of every field.",
+    handoff: "Lets a new reader distinguish the current claim from older wording and presentation."
   },
   {
     code: "SRC",
@@ -67,12 +67,12 @@ export const instruments = [
     tone: "local",
     question: "Where did this come from?",
     summary:
-      "Tracks literature, data, software, standards, internal artifacts, conversations, authorities, historical material, and criticism behind a research object.",
-    observes: "Origin, provenance, and source relationships.",
-    prevents: "Derived interpretation being confused with source authority or provenance disappearing during reuse.",
-    authority: "Establishes where material came from and how it entered the research object.",
-    noAuthority: "A source record does not prove every interpretation of that source is correct; there is no universal Lab-wide Source Register.",
-    handoff: "Shows what was received, transformed, added, and where stronger authority lives.",
+      "Tracks the literature, data, software, standards, historical material, conversations, and criticism that a piece of research depends on.",
+    observes: "Where material came from, how it was used, and how it relates to the current work.",
+    prevents: "The Lab's interpretation from being confused with what the original source actually said.",
+    authority: "May record source history and how material entered the work.",
+    noAuthority: "A source record does not prove that every interpretation of that source is correct.",
+    handoff: "Shows what came from elsewhere, what the Lab changed or added, and where to inspect the stronger source."
   },
   {
     code: "FORGE",
@@ -80,29 +80,29 @@ export const instruments = [
     verb: "TRANSFORMS",
     status: "ACTIVE OPERATIONAL SUBSYSTEM",
     tone: "machine",
-    question: "How does bounded source material become a reviewable research artifact?",
+    question: "How can software and AI help turn source material into research that a person can review?",
     summary:
-      "Transforms bounded source material into traceable candidate artifacts through controlled refinement, criticism, comparison, repair, review, and explicit promotion boundaries.",
-    observes: "Bounded job packets, schemas, claim/evidence maps, critic packets, provenance, comparison results, and review state.",
-    prevents: "The shortcut 'model writes text → text becomes canon.'",
-    authority: "Source-bounded refinement, criticism, evidence production, and candidate repair.",
-    noAuthority: "Tool output, critic agreement, a green validator, or coherent structure never promotes a claim automatically.",
-    handoff: "Machine-readable lifecycle and review context preserves why a candidate exists and what human decision remains.",
+      "Helps organize, compare, criticize, revise, and package clearly scoped research while preserving where it came from and what still requires human judgment.",
+    observes: "The assigned task, source material, claim-and-evidence relationships, criticism, comparison results, revision history, and review state.",
+    prevents: "The shortcut 'an AI wrote it, therefore the Lab accepts it.'",
+    authority: "May perform clearly scoped research operations such as organizing, comparing, criticizing, and proposing repairs.",
+    noAuthority: "Tool output, critic agreement, or a passing validator never makes a scientific claim official on its own.",
+    handoff: "Preserves what the tool did, why the candidate exists, and which human decision is still required."
   },
   {
     code: "RDP",
     title: "Research Deployment Packet",
     verb: "TRANSFERS",
-    status: "STRONG PRODUCTION FORMAT CANDIDATE",
+    status: "DEVELOPED TRANSFER FORMAT",
     tone: "transfer",
     question: "How does research leave the environment in which it was developed?",
     summary:
-      "Packages bounded research state so another person, laboratory, organization, or machine can recover and continue the work without reconstructing the originating conversation.",
-    observes: "Orientation, canonical editable state, claims, provenance, handoff context, next work, inventory, and projection separation.",
-    prevents: "Research becoming inseparable from the originating chat, machine, or researcher.",
-    authority: "Packages and transfers declared research state.",
-    noAuthority: "Packet completeness does not establish the truth of its contents, and current convergence evidence does not create a universal global type.",
-    handoff: "Recoverability is the invariant: what we think, why, what could falsify it, what happens next, and who stewards it.",
+      "Packages a clearly scoped body of research so another person, laboratory, organization, or machine can understand and continue it without reconstructing the original conversation.",
+    observes: "The current editable work, claims, sources, context, open questions, next steps, and file inventory.",
+    prevents: "Research becoming inseparable from one chat, one computer, or one researcher.",
+    authority: "May package and transfer the declared research record.",
+    noAuthority: "A complete packet does not make the claims inside it true.",
+    handoff: "The test is recoverability: what we think, why, what could change our mind, what happens next, and who is responsible for the work."
   },
   {
     code: "MACH",
@@ -112,12 +112,12 @@ export const instruments = [
     tone: "machine",
     question: "What executable or operational capabilities exist?",
     summary:
-      "Records independently addressable machinery, canonical homes, functional roles, maturity, integration level, entrypoints, side-effect class, authority ceiling, and next integration step.",
-    observes: "Operational capabilities and their integration state.",
-    prevents: "Capability discovery from being confused with permission to execute or scientific authority.",
-    authority: "Discovery, routing, interoperability planning, and integration state.",
-    noAuthority: "A machinery entry grants neither scientific authority nor runtime authority by itself.",
-    handoff: "Makes operational capability addressable while preserving who may authorize action, stop it, and own repair.",
+      "Keeps a technical directory of the Lab's software and operational tools: where each one lives, what it does, how mature it is, and what limits apply.",
+    observes: "Which tools exist and how they fit into the Lab's operating system.",
+    prevents: "Knowing that a tool exists from being confused with permission to run it or trust its output automatically.",
+    authority: "May support discovery, routing, integration planning, and technical maintenance.",
+    noAuthority: "Being listed does not give a tool permission to run or decide scientific questions.",
+    handoff: "Makes each capability findable while preserving who may authorize its use and who owns repair."
   },
   {
     code: "MET",
@@ -125,31 +125,31 @@ export const instruments = [
     verb: "OBSERVES",
     status: "WORKING INSTRUMENTATION LAYER",
     tone: "metrology",
-    question: "What hidden structure can we make observable without manufacturing false precision?",
+    question: "What important features of a reasoning system can we make visible without pretending everything has one meaningful score?",
     summary:
-      "A working name for instrumenting reasoning systems through traceability, visibility, coverage, loss, closure, revision, freshness, authority, repair, stewardship, and contestability observables.",
-    observes: "Properties such as claim traceability, dependency visibility, defects, representational loss, revision state, authority boundaries, and repair paths.",
-    prevents: "Important structural questions being ignored because they do not reduce cleanly to a single score.",
-    authority: "Trace, classify, compare, witness, bound, and measure where justified.",
-    noAuthority: "Not every property becomes a number; metrology is not a universal score of research quality.",
-    handoff: "Makes hidden structure visible enough to contest, maintain, transfer, and repair.",
+      "A working program for measuring and inspecting things such as traceability, coverage, information loss, revision history, responsibility, repair paths, and whether a result can be challenged.",
+    observes: "Whether claims can be traced, dependencies can be seen, information was lost, revisions are current, responsibilities are clear, and repair paths exist.",
+    prevents: "Important structural questions being ignored simply because they do not collapse into one number.",
+    authority: "May trace, classify, compare, and measure where a meaningful measurement is available.",
+    noAuthority: "Not every important property is numeric, and this is not a universal score of research quality.",
+    handoff: "Makes otherwise hidden structure visible enough to challenge, maintain, transfer, and repair."
   },
 ] as const;
 
 export const apparatusPath = [
   ["01", "Research question", "Durable inquiry begins"],
-  ["02", "Research lane", "Inquiry identity persists"],
-  ["03", "Experiment / probe / implementation", "Bounded evidence-bearing operation"],
-  ["04", "Claim + source control", "What is asserted, supported, open, rejected, or gated"],
-  ["05", "Corpus Forge", "Refinement, criticism, repair, review"],
-  ["06", "Human promote / stop / revise", "Authority-bearing decision"],
-  ["07", "Research Deployment Packet", "Transferable research state"],
-  ["08", "Publication / website / implementation / collaboration", "Public or operational projection"],
+  ["02", "Research program", "The question keeps a stable identity over time"],
+  ["03", "Experiment / probe / implementation", "A clearly scoped attempt produces evidence"],
+  ["04", "Claims + sources", "Record what is being said, what supports it, and what remains open"],
+  ["05", "Corpus Forge", "Organize, compare, criticize, revise, and prepare for review"],
+  ["06", "Human review", "A responsible person accepts, revises, pauses, or rejects the result"],
+  ["07", "Research Deployment Packet", "Package the work so someone else can recover it"],
+  ["08", "Publication / website / implementation / collaboration", "Share the appropriate public or operational view"],
 ] as const;
 
 export const publicExposure = [
   {
-    title: "Publicly legible",
+    title: "Public detail",
     tone: "green",
     items: [
       "Research Lane Register concept",
@@ -163,7 +163,7 @@ export const publicExposure = [
     ],
   },
   {
-    title: "Public summary",
+    title: "Public overview",
     tone: "yellow",
     items: [
       "Machine-readable registry catalogs",
@@ -176,7 +176,7 @@ export const publicExposure = [
     ],
   },
   {
-    title: "Source-governed / internal",
+    title: "Private or source-controlled",
     tone: "red",
     items: [
       "Sensitive or private source material",
@@ -192,8 +192,8 @@ export const publicExposure = [
 export const designQuestions = [
   "What does it observe or control?",
   "What problem does it prevent?",
-  "What authority does it have?",
-  "What authority does it explicitly not have?",
+  "What decisions may it make?",
+  "What decisions must remain with someone else?",
   "Who can challenge, correct, or stop it?",
   "How does its state survive handoff?",
 ] as const;
