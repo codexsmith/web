@@ -19,7 +19,7 @@ export function RecentChangesStrip({
     >
       <header className={styles.header}>
         <div>
-          <span>RECENT DELTA</span>
+          <span>RECENT CHANGES</span>
           <strong>{title}</strong>
         </div>
         <Link href="/changes">See all changes <span aria-hidden="true">→</span></Link>
