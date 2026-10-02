@@ -19,7 +19,7 @@ function ChangeSummary({ change }: { change: PublicChange }) {
       <h2>{change.title}</h2>
       <p className={styles.summaryDescription}>{change.consequence}</p>
       <strong className={styles.inspectCue}>
-        Inspect delta <span aria-hidden="true">↗</span>
+        Inspect change <span aria-hidden="true">↗</span>
       </strong>
     </div>
   );
@@ -96,11 +96,11 @@ export function ChangesExplorer() {
     <div className={styles.archive}>
       <section className={styles.archiveGroup} aria-labelledby="changes-current-window">
         <header className={styles.archiveHeader}>
-          <span>CURRENT WINDOW</span>
-          <strong id="changes-current-window">Canonical changes from the latest repository state.</strong>
+          <span>RECENT CHANGES</span>
+          <strong id="changes-current-window">The latest material changes in the Lab and website.</strong>
           <p>
-            These are recent material transitions selected from current main in the Lab and
-            web repositories. The compact Home and Now surfaces draw from this same window.
+            These are the recent changes most worth knowing about. The compact Home and Now
+            surfaces draw from this same set.
           </p>
         </header>
         <ChangeField
@@ -112,11 +112,11 @@ export function ChangesExplorer() {
       <section className={styles.archiveGroup} aria-labelledby="changes-earlier-milestones">
         <header className={styles.archiveHeader}>
           <span>EARLIER MILESTONES</span>
-          <strong id="changes-earlier-milestones">Backfilled from canonical GitHub history.</strong>
+          <strong id="changes-earlier-milestones">Selected earlier moments that changed the shape of the Lab.</strong>
           <p>
-            Earlier merges are included when they created a durable research object,
-            institutional capability, public surface, canonical route, or provenance boundary.
-            This remains a curated state-transition archive, not a mirror of the commit log.
+            Earlier entries are included when they created a durable research object,
+            institutional capability, public surface, important route, or responsibility
+            boundary. This remains a curated history, not a mirror of the commit log.
           </p>
         </header>
         <ChangeField
