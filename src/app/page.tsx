@@ -16,7 +16,7 @@ export default function HomePage() {
     name: "Boundary First Labs",
     url: "https://boundaryfirstlabs.com",
     description:
-      "An applied research laboratory building inspectable research machinery, products, projects, and public-interest systems work.",
+      "An applied systems laboratory for scientific software modeling, executable representation, inspectable research machinery, products, and public-interest work.",
   };
 
   return (
