@@ -86,7 +86,7 @@ export function InstitutionalNowPage() {
           note={
             <>
               Later work becomes credible only after earlier work produces the evidence,
-              capability, or institutional machinery it depends on.
+              capability, or infrastructure it depends on.
             </>
           }
         />
