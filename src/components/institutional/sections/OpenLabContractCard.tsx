@@ -30,7 +30,6 @@ export function OpenLabContractCard({
           <div className={styles.openLabContractTitleRow}>
             <span className={styles.openLabContractCode}>{contract.code}</span>
             <h3>{contract.title}</h3>
-            <code>{contract.type}</code>
           </div>
 
           <p className={styles.openLabContractSubtitle}>
@@ -91,12 +90,12 @@ export function OpenLabContractCard({
         </div>
 
         <div className={styles.openLabOutcome}>
-          <span>POSSIBLE ROUTING / OUTCOME</span>
+          <span>WHAT COULD HAPPEN NEXT</span>
           <p>{contract.possibleOutcomes}</p>
         </div>
 
         <div className={styles.openLabBoundary}>
-          <span>BOUNDARY</span>
+          <span>WHAT THIS DOES NOT PROMISE</span>
           <p>{contract.boundary}</p>
         </div>
       </div>
