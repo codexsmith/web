@@ -117,7 +117,7 @@ export function InstitutionalFundingPage() {
               <strong>{item.use}</strong>
               <p>{item.description}</p>
               <div>
-                <span>SHOULD CLOSE AS</span>
+                <span>WHAT SUCCESS COULD LOOK LIKE</span>
                 <p>{item.closure}</p>
               </div>
             </article>
@@ -198,7 +198,7 @@ export function InstitutionalFundingPage() {
                 <p>{channel.bestFor}</p>
               </div>
               <div className={styles.fundingChannelBoundary}>
-                <span>BOUNDARY</span>
+                <span>LIMITS</span>
                 <p>{channel.boundary}</p>
               </div>
             </article>
