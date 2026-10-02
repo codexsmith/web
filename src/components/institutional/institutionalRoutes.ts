@@ -102,6 +102,13 @@ const institutionalChildPages = {
     kind: "atlas",
     tone: "indigo",
   },
+  paperMine: {
+    label: "Paper Mine",
+    href: "/research/paper-mine",
+    relation: "FULL CATALOG",
+    kind: "apparatus",
+    tone: "indigo",
+  },
   representationAtlas: {
     label: "Representation Atlas",
     href: "/representation-atlas",
@@ -143,6 +150,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.apparatus,
   ],
   publications: [
+    institutionalChildPages.paperMine,
     institutionalChildPages.evidence,
     institutionalChildPages.claims,
     institutionalChildPages.experiments,

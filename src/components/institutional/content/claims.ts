@@ -11,17 +11,17 @@ export type ClaimRecord = {
 export const claimProjection = {
   "sourceRepository": "codexsmith/boundary-first-labs",
   "sourcePath": "organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/01_engine_modules/information_mechanics/machine/CLAIM_LEDGER.json",
-  "sourceRevision": "3a8c984712ae1d87c7ec714876c356c20242cb15",
-  "sourceRevisionDate": "2026-09-18",
+  "sourceRevision": "b543145845450821cefe0c401c73d814a01d81c0",
+  "sourceRevisionDate": "2026-10-01",
   "ledgerProgram": "information_mechanics",
   "ledgerStatus": "working",
   "registrarId": "REG-IM-CLAIMS",
   "registrarStatus": "active",
   "authorityOwner": "Information Mechanics Research Program",
-  "authority": "owner-local claim/evidence status and validation posture only; no claim truth, theorem proof, novelty, publication promotion, or cross-domain authority",
+  "authority": "This page reports the current claim status recorded by the Information Mechanics research program. Listing a claim does not make it true, novel, proved, published, or authoritative outside that program.",
   "sourceRelationship": "source_owner",
   "idNamespace": "IM-C*",
-  "sourceHref": "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/01_engine_modules/information_mechanics/machine/CLAIM_LEDGER.json",
+  "sourceHref": "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/02_Core_Theory/02_engine_core__theory/01_engine_modules/information_mechanics/machine/CLAIM_LEDGER.json",
   "ownerResearch": {
     "atlasId": "research-im",
     "code": "IM",
@@ -103,5 +103,25 @@ export const claimRecords: readonly ClaimRecord[] = [
     "noveltyClaim": false,
     "evidence": [],
     "source": "research/STATE_TO_BOUNDARY_SCALE_BRIDGE_PROTOCOL.md"
+  },
+  {
+    "id": "IM-C009",
+    "claim": "A typed ReductionAssessment profile may provide engineering value by standardizing machine-readable handoff metadata across native research records while leaving native semantics authoritative.",
+    "status": "durable_engineering_interchange_profile_bounded",
+    "requiresValidation": true,
+    "noveltyClaim": false,
+    "evidence": [
+      "Runs 004–008 calibration and live-gate results"
+    ],
+    "source": "papers/development/IM02_PAPERIZATION_PACKET_2026_09_24.md"
+  },
+  {
+    "id": "IM-C010",
+    "claim": "A typed WarrantEnvelope may improve cross-domain claim control by keeping observation regime, identifiability, evidence scope, inference bridge, assumptions, uncertainty, and claim ceiling distinct.",
+    "status": "methodological_engineering_candidate",
+    "requiresValidation": true,
+    "noveltyClaim": false,
+    "evidence": [],
+    "source": "papers/development/IM04_PAPERIZATION_PACKET_2026_09_24.md"
   }
 ];

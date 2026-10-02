@@ -6,7 +6,7 @@ import { paperMineSnapshot } from "@/lib/paper-mine";
 export const metadata: Metadata = {
   title: "Paper Mine · Boundary First Labs",
   description:
-    "A bounded public workbench for controlled publication objects and paper-shaped candidates across Boundary First Labs.",
+    "A searchable August 24, 2026 snapshot of Boundary First Labs publication records and paper candidates, preserved as a discovery workbench rather than a live publication count.",
   alternates: { canonical: "/research/paper-mine" },
 };
 

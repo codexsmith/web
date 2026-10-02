@@ -27,9 +27,9 @@ export function InstitutionalEvidencePage() {
         }
         support={
           <>
-            This page defines the Lab&apos;s evidence vocabulary and strength ladder. Detailed
-            evidence lists will live beside the research lanes, products, projects, and
-            publications they actually support.
+            This page explains the Lab&apos;s evidence vocabulary and a rough strength ladder.
+            Specific evidence should stay beside the research, product, project, or publication
+            it actually supports.
           </>
         }
         childLinks={institutionalChildRoutes.evidence}
@@ -46,15 +46,15 @@ export function InstitutionalEvidencePage() {
       <section className={styles.surveySection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>EVIDENCE OBJECT</>}
-          title={<>Evidence should travel with the thing it supports.</>}
-          note={<>The global route defines classes and strength; contextual routes carry the actual evidence.</>}
+          eyebrow={<>HOW TO READ EVIDENCE</>}
+          title={<>Evidence should stay attached to the question it actually answers.</>}
+          note={<>A source that proves a project existed may say nothing about whether a theory is correct. Context matters.</>}
         />
 
         <div className={styles.surveyGrid}>
           <article>
             <span>WHAT IT IS</span>
-            <h3>Support with a boundary.</h3>
+            <h3>Support for a specific question.</h3>
             <p>
               Evidence may be a source, artifact, execution record, external review,
               reproduction, adoption signal, or other observation tied to a specific question.
@@ -72,8 +72,8 @@ export function InstitutionalEvidencePage() {
             <span>WHAT THIS PAGE DOES</span>
             <h3>Vocabulary and calibration.</h3>
             <p>
-              This route explains evidence classes and relative strength without flattening
-              every supporting artifact into one long institutional list.
+              This route gives readers a shared vocabulary for evidence without flattening
+              every source, test, review, and use signal into one undifferentiated list.
             </p>
           </article>
         </div>
@@ -119,11 +119,11 @@ export function InstitutionalEvidencePage() {
 
       <section className={styles.placementSection}>
         <div>
-          <p className={styles.sectionIndex}>NEXT PLACEMENT PASS</p>
-          <h2>Put evidence next to the claim or artifact it actually supports.</h2>
+          <p className={styles.sectionIndex}>WHERE EVIDENCE BELONGS</p>
+          <h2>Put evidence next to the claim, product, project, or publication it actually supports.</h2>
           <p>
-            The next pass will project filtered evidence into research lanes, products,
-            projects, and publications. This route will remain the shared evidence vocabulary.
+            This route remains the shared evidence vocabulary. Contextual pages should show
+            the evidence relevant to their own claims and make the remaining gaps visible.
           </p>
         </div>
         <nav aria-label="Evidence placement destinations">

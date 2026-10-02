@@ -28,23 +28,23 @@ export function PublicationCatalogSection() {
       <InstitutionalSectionHeader
         styles={styles}
         eyebrow={<>PUBLICATION INDEX</>}
-        title={<>Research artifacts, with their controlling state attached.</>}
+        title={<>Selected research artifacts, with status and limits visible.</>}
         note={
           <>
-            Curated first-contact projection over three publication-control authorities.
-            Selection here does not promote publication maturity, peer review, truth,
-            novelty, or scientific authority.
+            This is a curated first look at current publication records. Being shown here
+            does not mean a paper has been published, peer reviewed, proven correct, or
+            approved for release.
           </>
         }
       />
 
       <div className={styles.publicationCatalogState} aria-label="Publication catalog source state">
         <div>
-          <span>CATALOG MODE</span>
-          <strong>SOURCE-GOVERNED SELECTION</strong>
+          <span>CATALOG</span>
+          <strong>CURATED PUBLIC SELECTION</strong>
         </div>
         <div>
-          <span>SOURCE-BOUND RECORDS</span>
+          <span>SELECTED RECORDS</span>
           <strong>{selectedPublications.length} BOUND</strong>
         </div>
         <div>
@@ -63,23 +63,23 @@ export function PublicationCatalogSection() {
             <p>{source.role}</p>
             <dl>
               <div>
-                <dt>VISIBLE SOURCE SCALE</dt>
+                <dt>CURRENT SOURCE SCALE</dt>
                 <dd>{source.recordCount} records</dd>
               </div>
               <div>
-                <dt>AUTHORITY</dt>
+                <dt>WHAT THIS SOURCE CONTROLS</dt>
                 <dd>{source.authority}</dd>
               </div>
             </dl>
             <a href={source.href} target="_blank" rel="noreferrer">
-              Inspect registry <span aria-hidden="true">-&gt;</span>
+              Inspect source record <span aria-hidden="true">-&gt;</span>
             </a>
           </article>
         ))}
       </div>
 
       <div className={styles.publicationProjectionFirewall}>
-        <span>PUBLIC PROJECTION FIREWALL</span>
+        <span>PUBLICATION STATUS BOUNDARY</span>
         <strong>{publicationProjection.authority}</strong>
       </div>
 
