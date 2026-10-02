@@ -25,7 +25,7 @@ export const featuredWork = [
     tag: "ACTIVE-BUILD PRODUCT FAMILY",
     title: "Projectr",
     description: "Public knowledge infrastructure for durable, source-linked knowledge; YouTube Knowledge Explorer is the current bounded implementation.",
-    href: "/products/youtube-knowledge-explorer",
+    href: "/products/pipeline/projectr",
   },
   {
     tag: "RESEARCH INFRASTRUCTURE",
