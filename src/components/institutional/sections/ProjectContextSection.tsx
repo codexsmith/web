@@ -86,9 +86,9 @@ export function ProjectContextSection() {
       <div className={styles.projectContextFrame}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>PROJECT CONTEXT</>}
-          title={<>The machinery around transfer.</>}
-          note={<>Select any plate to inspect the project discipline without leaving the project field.</>}
+          eyebrow={<>HOW TO READ A PROJECT</>}
+          title={<>A project should show more than a polished outcome.</>}
+          note={<>These sections explain how the Lab separates a project's domain, result, status, evidence, responsibility, and handoff.</>}
         />
 
         <ReflowField
@@ -99,10 +99,10 @@ export function ProjectContextSection() {
         >
           <ProjectContextCard
             id="transfer-evidence"
-            label="Transfer Evidence"
-            eyebrow="TRANSFER EVIDENCE"
-            title="Deployment is another experiment."
-            description="Usefulness, burden, ambiguity, failure, agency, maintenance, and transfer become visible in bounded systems."
+            label="Reality Test"
+            eyebrow="REALITY TEST"
+            title="Putting work into use creates new evidence."
+            description="Usefulness, burden, ambiguity, failure, maintenance, and handoff become visible when the work meets a real system."
             className={styles.projectContextTransfer}
             tone="transfer"
           >
@@ -114,21 +114,21 @@ export function ProjectContextSection() {
               </p>
               <div className={styles.deploymentLoop}>
                 <span>Research</span>
-                <span>Instrument</span>
+                <span>Tool / method</span>
                 <span>Project</span>
                 <span>Use / test / failure</span>
-                <span>Human &amp; system consequence</span>
-                <span>Revised research / product state</span>
+                <span>What happened</span>
+                <span>Update the research or product</span>
               </div>
             </div>
           </ProjectContextCard>
 
           <ProjectContextCard
             id="project-page-grammar"
-            label="Project-Page Grammar"
-            eyebrow="PROJECT-PAGE GRAMMAR"
-            title="Ten questions keep a project honest."
-            description="Describe the native domain before translating it into Boundary First language."
+            label="Ten Project Questions"
+            eyebrow="TEN PROJECT QUESTIONS"
+            title="A consistent set of questions keeps a project honest."
+            description="Start with the real domain, problem, intervention, and result before introducing Boundary First interpretation."
             className={styles.projectContextGrammar}
             tone="grammar"
           >
@@ -144,10 +144,10 @@ export function ProjectContextSection() {
 
           <ProjectContextCard
             id="status-rule"
-            label="Status Rule"
-            eyebrow="STATUS RULE"
-            title="Normalize the display. Preserve the meaning."
-            description="Different project types can expose status without pretending they share one lifecycle."
+            label="Status"
+            eyebrow="STATUS"
+            title="Different kinds of work need different status language."
+            description="A product, research program, civic case, and experiment can all show status without pretending they move through the same lifecycle."
             className={styles.projectContextStatus}
             tone="status"
           >
@@ -183,10 +183,10 @@ export function ProjectContextSection() {
 
           <ProjectContextCard
             id="permanent-firewall"
-            label="Permanent Firewall"
-            eyebrow="PERMANENT FIREWALL"
-            title="Products are not research results."
-            description="Research maturity, adoption, validation, agency benefit, and stewardship transfer remain distinct claims."
+            label="Keep Claims Separate"
+            eyebrow="KEEP CLAIMS SEPARATE"
+            title="A useful product does not prove a theory."
+            description="Research maturity, product maturity, adoption, scientific evidence, human benefit, and successful handoff remain different claims."
             className={styles.projectContextFirewall}
             tone="firewall"
           >
@@ -204,10 +204,10 @@ export function ProjectContextSection() {
 
           <ProjectContextCard
             id="capability-transfer"
-            label="Capability Transfer"
-            eyebrow="CAPABILITY TRANSFER"
-            title="What can someone else do after BFL leaves?"
-            description="Permanent dependence on Boundary First Labs is not the default success condition."
+            label="Handoff"
+            eyebrow="HANDOFF"
+            title="What can someone else do after BFL steps away?"
+            description="A strong project should leave behind useful knowledge, tools, documentation, or operating capability rather than permanent dependence on the Lab."
             className={styles.projectContextCapability}
             tone="capability"
           >
