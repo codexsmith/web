@@ -22,11 +22,11 @@ export const instruments = [
     tone: "research",
     question: "What durable questions is the Lab pursuing?",
     summary:
-      "Keeps a long-running research question identifiable across experiments, conversations, papers, failures, revisions, and changes of direction."
+      "Keeps a long-running research question identifiable across experiments, conversations, papers, failures, revisions, and changes of direction.",
     observes: "Governing question, inquiry boundary, posture, sources, experiments, publications, dependencies, lineage, and next targets.",
     prevents: "A long-running inquiry collapsing into disconnected papers, chats, or short-term memory.",
     authority: "May record the identity, history, and current state of a research program.",
-    noAuthority: "Being registered does not make the hypothesis correct."
+    noAuthority: "Being registered does not make the hypothesis correct.",
     handoff: "Lets another researcher recover the question, lineage, sources, and current next work.",
   },
   {
@@ -37,11 +37,11 @@ export const instruments = [
     tone: "experiment",
     question: "What has the Lab actually tried?",
     summary:
-      "Keeps a durable record of experiments, simulations, benchmarks, replications, stress tests, attempts to disprove a claim, and negative or inconclusive results."
+      "Keeps a durable record of experiments, simulations, benchmarks, replications, stress tests, attempts to disprove a claim, and negative or inconclusive results.",
     observes: "Bounded evidence-bearing operations and their outcomes.",
     prevents: "Failed or inconvenient experiments disappearing from the institutional record.",
     authority: "May record what was tried and connect the result to the relevant research.",
-    noAuthority: "Recording an experiment does not make a scientific claim established."
+    noAuthority: "Recording an experiment does not make a scientific claim established.",
     handoff: "Shows another reviewer what has already been tried, including null, negative, blocked, and superseded work.",
   },
   {
