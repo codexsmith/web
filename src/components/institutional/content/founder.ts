@@ -3,19 +3,19 @@ export const founderRoles = [
     label: "COMPUTER SCIENTIST",
     title: "Computation as a way of making structure executable.",
     description:
-      "Georgia Tech training in computer science, with emphasis in artificial intelligence, systems, architecture, and research practice. The recurring question is how a representation becomes operational without losing what matters.",
+      "Georgia Tech training in computer science, including artificial intelligence, systems, architecture, and research practice. The recurring question is how to turn a model of a problem into working software without losing the distinctions that matter."
   },
   {
     label: "SYSTEMS ENGINEER",
     title: "Build and repair systems under real constraints.",
     description:
-      "More than a decade of software work across applications, APIs, cloud infrastructure, databases, consulting, startup delivery, and consequence-bearing environments shaped a practice centered on state, interfaces, invariants, failure, and repair.",
+      "More than a decade of software work across applications, APIs, cloud infrastructure, databases, consulting, startups, and high-consequence environments shaped a practice centered on understanding what a system must preserve, where it can fail, and how it can be repaired."
   },
   {
     label: "FOUNDER-RESEARCHER",
     title: "Turn a private method into public infrastructure.",
     description:
-      "Boundary First Labs exists to make a long-running systems method inspectable, testable, useful, criticizable, and transferable beyond the person who developed it.",
+      "Boundary First Labs exists to make a long-running systems method visible, testable, useful, open to criticism, and transferable beyond the person who developed it."
   },
 ] as const;
 
@@ -28,9 +28,9 @@ export const founderTimeline = [
   },
   {
     period: "SOFTWARE + SYSTEMS",
-    title: "Representation met production reality.",
+    title: "Models met production reality.",
     description:
-      "Professional engineering work repeatedly turned vague domain language into schemas, state models, interfaces, services, deployments, and maintained systems. Many apparent coding problems proved to be upstream representation problems.",
+      "Professional engineering work repeatedly turned vague domain language into schemas, workflows, interfaces, services, deployments, and maintained systems. Many apparent coding problems turned out to begin earlier, with an incomplete or misleading model of the problem."
   },
   {
     period: "CONSULTING + DELIVERY",
@@ -48,7 +48,7 @@ export const founderTimeline = [
     period: "BOUNDARY FIRST LABS",
     title: "The private method became a public laboratory.",
     description:
-      "The current institution turns that accumulated practice into research objects, software, publications, products, experiments, and public-interest systems that other people can inspect, criticize, use, and improve.",
+      "The current institution turns that accumulated practice into research, software, publications, products, experiments, and public-interest systems that other people can inspect, criticize, use, and improve."
   },
 ] as const;
 
@@ -85,9 +85,9 @@ export const founderPrinciples = [
       "Research apprenticeship and later independent work supplied the evidence discipline: literature, explicit hypotheses, measurement, controls, null results, competing explanations, falsification conditions, and conclusions bounded by what was actually tested.",
   },
   {
-    label: "AGENTIC REASONING",
+    label: "AI-ASSISTED REASONING",
     description:
-      "AI and systems training supplied a search-and-action grammar: agents perceive bounded state, choose among admissible actions, use tools, compare alternatives, evaluate results, and revise policy. Later human–AI work makes that loop explicit while preserving authority boundaries.",
+      "AI and systems work supplied a disciplined search-and-action loop: understand the current situation, consider allowed actions, use tools, compare alternatives, inspect results, and revise the next move. Human–AI work at the Lab keeps that loop explicit while preserving human responsibility for consequential decisions.",
   },
   {
     label: "STEWARDSHIP",
@@ -97,6 +97,6 @@ export const founderPrinciples = [
   {
     label: "FORMALLY GENERALIZED",
     description:
-      "Patterns are promoted only when they can be stated precisely enough to recover prior cases, expose assumptions, preserve invariants, and fail under test.",
+      "Patterns are generalized only when they can be stated precisely enough to explain earlier cases, expose assumptions, preserve what matters, and fail under a meaningful test."
   },
 ] as const;
