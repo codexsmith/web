@@ -286,7 +286,7 @@ const experimentResearchEdges: AtlasEdge[] = experimentRecords.flatMap((experime
     from: `experiment-${experiment.id.toLowerCase()}`,
     to: lane.atlasId,
     relation: lane.role === "primary" ? "PRIMARY RESEARCH LANE" : "RELATED RESEARCH LANE",
-    note: `The Lab-wide Experiment Register explicitly links ${experiment.id} to ${lane.laneId} — ${lane.label}.`,
+    note: `This selected public experiment record links ${experiment.id} to ${lane.laneId} — ${lane.label}.`,
   })),
 );
 
@@ -320,7 +320,7 @@ export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
   research: "Research programs",
   experiment: "Experiment records",
   claim: "Claim records",
-  apparatus: "Machinery components",
+  apparatus: "Lab tools",
   product: "Products",
   project: "Project cases",
   publication: "Publication records",
@@ -329,12 +329,12 @@ export const atlasKindLabels: Partial<Record<LabObjectKind, string>> = {
 
 export const atlasProjection = {
   version: "0.1",
-  status: "feature-frozen bounded public projection",
-  closedDate: "2026-09-18",
+  status: "a maintained, bounded public map",
+  closedDate: "2026-10-02",
   boundary:
     "Research, Experiments, Claims, Machinery, Products, Projects, Publications, and Evidence.",
   omissionRule:
-    "Unmodeled object families and undeclared relationships remain absent until a later feature has a concrete need and a source-governed contract.",
+    "It shows selected public objects and declared connections, not every durable Lab record or every possible relationship.",
 } as const;
 
 export const atlasStats = {
