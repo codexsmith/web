@@ -2,24 +2,24 @@ export const nowPriorityLanes = [
   {
     code: "01",
     status: "ACTIVE",
-    title: "Close the public and commercial interface",
+    title: "Make the Lab understandable and usable from the outside",
     description:
-      "Finish the current website, offer, funding, and inquiry surfaces so an outsider can understand the Lab and reach a concrete next action without founder narration.",
+      "Keep the website, service offers, funding pages, and contact paths clear enough that a first-time visitor can understand the Lab and choose a concrete next step without a founder walkthrough.",
     work: [
-      "Finish the current Website v3 commercial-execution pass across About, Applied Work, Funding, Now, and related entry surfaces.",
-      "Keep the public story connected to real products, services, research objects, evidence, and contact paths instead of allowing a separate marketing canon to form.",
-      "Use release QA, cold-reader review, and actual inquiry behavior to repair what remains confusing.",
+      "Keep the newly reconciled website current as research, products, services, and funding work change."
+      "Keep public claims tied to real products, services, research, evidence, and contact paths instead of creating a separate marketing story."
+      "Use first-time-reader feedback, accessibility checks, and actual inquiries to find and repair confusing language or navigation."
     ],
     closure:
-      "A first-time visitor can explain what BFL is, identify a relevant lane, inspect the evidence boundary, and take a real next step without a live founder walkthrough.",
+      "A first-time visitor can explain what BFL is, find the work relevant to them, understand what is established versus still being tested, and take a real next step."
     tone: "public",
   },
   {
     code: "02",
     status: "ACTIVE",
-    title: "Turn four funding lanes into outside evidence",
+    title: "Get real-world evidence from customers, users, partners, reviewers, and funders",
     description:
-      "Move the current lead objects in services, products, knowledge software, and research funding into contact with customers, partners, users, reviewers, and funders.",
+      "Move the Lab's current service, product, software, and research-funding opportunities into contact with people outside the Lab."
     work: [
       "Use Systems / Architecture Review as the near-term B2B services test.",
       "Advance Boundary-First Chess and adjacent sports/game products through direct and partner-distributed market tests.",
@@ -32,39 +32,39 @@ export const nowPriorityLanes = [
   {
     code: "03",
     status: "ACTIVE",
-    title: "Audit the population behind the Registrar",
+    title: "Make sure the Lab's records actually cover the work they claim to cover",
     description:
-      "The whole-Lab registry census is closed; the current question is whether durable object populations and their projections are actually complete, linked, and executable enough to support the institution.",
+      "The Lab now has a complete directory of its durable record systems. The next question is whether those records actually contain all the research programs, experiments, publications, products, and other durable objects they are supposed to contain."
     work: [
-      "Continue the Registry Population & Projection Audit without reopening the completed 620-registry discovery census.",
-      "Use Experiments as a test of Research Lane completeness: every durable Experiment must resolve to a durable Research Lane, including not-ready and not-started execution states.",
-      "Repair omissions in Research Lanes, Experiments, machine projections, and owner-local registries while preserving source authority and transaction history.",
+      "Continue checking record completeness without reopening the already completed whole-Lab registry discovery work."
+      "Use experiments as a concrete test: every durable experiment should link to the research program it belongs to, including work that has not started or is not yet ready to run."
+      "Repair missing or broken links while preserving the original source records and change history."
     ],
     closure:
-      "Durable research objects can be enumerated from source authorities with explicit ownership, machine projection, and no experiment left orphaned from a Research Lane.",
+      "The Lab can reliably list its durable research objects from their source records, identify who owns each record, and find no experiment detached from its research program."
     tone: "apparatus",
   },
   {
     code: "04",
     status: "ACTIVE",
-    title: "Run the research benchmarks that can falsify the stack",
+    title: "Run tests that can prove the Lab's strongest ideas wrong",
     description:
-      "Push Boundary Theory, Distinction Space, Information Mechanics, and related machinery through bounded comparisons against established mathematics, physics, computation, and native domain methods.",
+      "Compare Boundary Theory, Distinction Space, Information Mechanics, and related methods against established mathematics, physics, computer science, and the native methods of each field."
     work: [
       "Advance the statistical-mechanics / representational-entropy program through exact projection, memory, lumpability, and coarse-graining benchmarks.",
       "Continue the fine-structure program only where normalization, resolution, RG, and parameter-selection claims survive explicit no-go and native-theory controls.",
       "Preserve negative results and record 'added value: none' when Boundary First vocabulary does not outperform or clarify the established account.",
     ],
     closure:
-      "The strongest active research programs have executable or proof-facing tests that can keep, narrow, rename, or reject claims rather than merely extend the vocabulary.",
+      "The strongest active research programs have tests strong enough to preserve, narrow, rename, or reject claims rather than simply creating more terminology."
     tone: "evidence",
   },
   {
     code: "05",
     status: "ACTIVE",
-    title: "Turn mature research into reviewable publication objects",
+    title: "Turn mature research into specific papers people can review",
     description:
-      "Convert the strongest paper candidates and already-paperized programs into specific manuscripts with claim ceilings, provenance, related-work boundaries, and correction paths.",
+      "Convert the strongest research into specific manuscripts with clear claims, sources, related work, evidence limits, and a visible path for correction."
     work: [
       "Continue the Information Mechanics / Information + Physics paperization sequence from the canonical working manuscripts already created.",
       "Use normalized publication mines as routing maps rather than treating candidate volume as publication maturity.",
@@ -77,9 +77,9 @@ export const nowPriorityLanes = [
   {
     code: "06",
     status: "NEXT",
-    title: "Make the executable institution transferable",
+    title: "Make more of the Lab operable by someone other than its founder",
     description:
-      "Use the Observatory, Registrar, work protocols, and durable projections to reduce dependence on founder memory without pretending automation is institutional authority.",
+      "Turn recurring Lab procedures into durable records and tools so another person can understand and operate bounded parts of the institution without depending on founder memory."
     work: [
       "Keep revision, contradiction, dependency-impact, projection-loss, and authority semantics inspectable inside the Observatory and control plane.",
       "Turn recurring founder procedures into explicit artifacts, transactions, verifier states, and handoffable operating surfaces.",
@@ -97,9 +97,9 @@ export const roadmapHorizons = [
     horizon: "Current cycle",
     title: "Externalize the institution and finish the next bounded audits.",
     items: [
-      "Finish the current Website v3 public/commercial execution pass.",
+      "Keep the public website synchronized with current Lab doctrine, products, services, and evidence."
       "Advance the four funding lanes into real external contact.",
-      "Continue the Registry Population & Projection Audit, with Experiment → Research Lane completeness as an explicit invariant.",
+      "Continue the record-completeness audit, including the rule that every durable experiment belongs to a durable research program."
       "Run the next statistical-mechanics, admissibility, and fine-structure control work.",
       "Move the strongest paperized research objects toward bounded external review.",
     ],
@@ -112,7 +112,7 @@ export const roadmapHorizons = [
       "Bind paid work, product use, funding dispositions, collaboration, and failed-fit events as separate evidence.",
       "Promote only the research machinery that survives native-theory and adversarial controls.",
       "Release a small first cohort of manuscripts with explicit review and correction state.",
-      "Exercise Observatory and Registrar projections against live institutional changes rather than only finite fixtures.",
+      "Test the Lab's architecture and record-keeping tools against real institutional changes rather than only controlled examples."
       "Test non-founder use of selected tools, methods, or operating procedures.",
     ],
   },
@@ -142,19 +142,19 @@ export const roadmapGates = [
       "At least one BFL-native service, product, software, funding, or collaboration lane produces evidence that originated outside the Lab.",
   },
   {
-    title: "Registry population completeness",
+    title: "Complete and connected records",
     description:
-      "Durable Research Lanes, Experiments, research packets, and other audited object populations are source-bound, machine-projectable, and free of known orphan identities in the audited scope.",
+      "Durable research programs, experiments, packets, and other audited records can be listed from their sources, connected correctly, and contain no known orphan records in the audited scope."
   },
   {
-    title: "Executable research benchmark",
+    title: "A research test that could change the conclusion",
     description:
-      "A major theoretical claim or method survives—or is narrowed by—a preregistered proof-facing, computational, or native-domain comparison with preserved negative results.",
+      "A major claim or method survives—or is narrowed by—a defined mathematical, computational, experimental, or field-native comparison whose negative results are preserved."
   },
   {
-    title: "Canonical publication",
+    title: "A publication with a clear record",
     description:
-      "A released research object has bound claims, sources, status, related-work boundary, review state, correction path, and a stable public identity.",
+      "A released paper or research object has clear claims, sources, status, related work, review state, correction path, and a stable public identity."
   },
   {
     title: "Independent operation",
