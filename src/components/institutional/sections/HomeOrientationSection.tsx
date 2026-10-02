@@ -247,9 +247,10 @@ export function HomeOrientationSection() {
               <div className={styles.methodSection}>
                 <div className={styles.sectionLead}>
                   <p>
-                    We make complex systems easier to understand, test, improve, and explain.
-                    The basic move is simple: show the structure, track what changes, follow the
-                    change, and find where it breaks.
+                    Software comes before code: first determine the model, the bounded obligation,
+                    and the state required for lawful continuation. Then execute the smallest useful
+                    transformation, let consequence answer the claim, and deepen the representation
+                    only where reality proves the missing distinction matters.
                   </p>
                 </div>
 
@@ -292,10 +293,11 @@ export function HomeOrientationSection() {
               <div className={styles.practiceLineage}>
                 <div className={styles.practiceLineageLead}>
                   <p>
-                    The braid is recursive: make work visible, formulate a discriminating question,
-                    let agents search or act, then inspect the resulting state before the next move.
-                    Boundary First supplies the shared state model, admissibility boundaries, and
-                    handoff discipline that let those loops compose.
+                    The braid is recursive: observe, bound, represent, execute, witness, criticize,
+                    repair, and transfer. Agents may search or act inside that loop, but performance,
+                    authority, verification, and consequence remain distinct. Boundary First supplies
+                    the state contracts, admissibility boundaries, provenance, and handoff discipline
+                    that let those loops compose.
                   </p>
                 </div>
 
