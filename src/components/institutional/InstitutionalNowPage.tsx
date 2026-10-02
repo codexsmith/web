@@ -26,7 +26,7 @@ export function InstitutionalNowPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.nowHero}
-        eyebrow={<>NOW / ROADMAP — SEPTEMBER 2026</>}
+        eyebrow={<>NOW / ROADMAP — OCTOBER 2026</>}
         title={<>What is Boundary First Labs doing now?</>}
         lead={
           <>
@@ -36,19 +36,20 @@ export function InstitutionalNowPage() {
         }
         support={
           <>
-            This is a public projection of priorities, dependencies, and meaningful
-            closure—not a promise calendar or a copy of every internal task.
+            This is a public view of the Lab&apos;s current priorities, what they depend on,
+            and what would count as meaningful progress. It is not a promise calendar or a
+            copy of every internal task.
           </>
         }
         childLinks={institutionalChildRoutes.now}
       >
         <aside className={styles.nowOperatingThesis}>
           <span>CURRENT OPERATING THESIS</span>
-          <strong>Externalize → test → repair → repeat → transfer.</strong>
+          <strong>Make it public → let people use it → learn → repair → transfer.</strong>
           <p>
-            The immediate problem is not generating more ideas. It is converting existing
-            capability into bounded artifacts, outside evidence, criticism, revenue,
-            publication, and repeatable institutional practice.
+            The immediate problem is not generating more ideas. It is turning existing
+            research, software, methods, and products into things people outside the Lab can
+            inspect, use, criticize, fund, buy, review, or help improve.
           </p>
         </aside>
       </InstitutionalRouteHero>
@@ -65,11 +66,11 @@ export function InstitutionalNowPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>CURRENT PRIORITIES</>}
-          title={<>Six priority lanes, each with a closure condition.</>}
+          title={<>Six priorities, each with a clear definition of progress.</>}
           note={
             <>
-              Priority means the Lab is allocating current attention or near-term conversion
-              capacity here. It does not mean every item inside the lane runs simultaneously.
+              Priority means the Lab is spending current attention here. It does not mean
+              every task in that area is happening at the same time.
             </>
           }
         />
@@ -81,7 +82,7 @@ export function InstitutionalNowPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>NOW → NEXT → LATER</>}
-          title={<>The sequence matters more than the date.</>}
+          title={<>The order matters more than an artificial deadline.</>}
           note={
             <>
               Later work becomes credible only after earlier work produces the evidence,
@@ -114,9 +115,9 @@ export function InstitutionalNowPage() {
           <p className={styles.sectionIndex}>WHAT WOULD COUNT AS PROGRESS?</p>
           <h2>The roadmap closes on evidence, not activity.</h2>
           <p>
-            A busy queue is not the objective. The useful question is whether the Lab can
-            point to new states that did not exist before: a clearer institution, outside
-            evidence, a bound publication, independent use, or machinery that transfers.
+            Activity is not the objective. Progress means something changed in the outside
+            world: a clearer public institution, independent use, a paid engagement, a
+            reviewed publication, stronger evidence, or a process another person can operate.
           </p>
         </div>
 
@@ -157,11 +158,11 @@ export function InstitutionalNowPage() {
 
       <section className={styles.nowClose}>
         <p className={styles.sectionIndex}>CURRENT PUBLIC QUESTION</p>
-        <h2>Can accumulated capability become an institution that other people can inspect, use, challenge, fund, and eventually operate?</h2>
+        <h2>Can the Lab become useful to people who did not build it?</h2>
         <p>
-          The next year is less about widening the Lab than about closing that conversion
-          loop. Funding increases the available capacity. Collaboration introduces outside
-          reality. Evidence decides what deserves to continue.
+          The next phase is less about adding new areas than about proving which existing
+          areas are genuinely useful. Funding increases capacity. Collaboration and customers
+          introduce outside reality. Evidence decides what deserves to grow, change, or stop.
         </p>
 
         <nav className={styles.nowCloseLinks} aria-label="Roadmap next steps">
