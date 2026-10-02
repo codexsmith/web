@@ -20,50 +20,51 @@ export function InstitutionalApparatusPage() {
           styles={styles}
           className={styles.apparatusHero}
           eyebrow={<>APPARATUS</>}
-          title={<>Operational tools for knowledge infrastructure.</>}
-          lead={<>Research creates more structure than a paper can hold.</>}
-          support={<>Boundary First Labs builds apparatus for moving questions, experiments,
-              claims, evidence, provenance, criticism, defects, and repair through explicit
-              workflows. The aim is to make research inspectable, executable, and
-              transferable without hiding authority or state.</>}
+          title={<>Tools that keep research inspectable, testable, and transferable.</>}
+          lead={<>A paper can show the result. Serious research also needs a durable record of how that result was reached.</>}
+          support={<>Boundary First Labs builds tools for tracking questions, sources, experiments,
+              claims, evidence, criticism, failures, revisions, and responsibility. The goal is
+              simple: another person should be able to see what happened, challenge it, and
+              continue the work without depending on hidden context.</>}
           childLinks={institutionalChildRoutes.apparatus}
           >
           <blockquote className={styles.apparatusThesis}>
             <span>DESIGN POSTURE</span>
-            Legible by humans. Executable by machines. Repairable under critique.
+            Human-readable. Machine-checkable. Open to correction.
             Transferable without hidden dependence.<br />
-            Agent proposes. Machine verifies. World adjudicates.
+            AI can propose. Tools can check. Evidence decides.
           </blockquote>
         </InstitutionalRouteHero>
 
         <ArchitectureProjectionSection
-          eyebrow="THE LAB MACHINE"
-          title="Instruments for making complex work addressable, inspectable, and transferable."
+          eyebrow="HOW THE LAB KEEPS TRACK"
+          title="Separate sources of truth, connected deliberately."
           copy={[
-            "The apparatus is federated rather than monolithic. Source material remains in its owning research, product, publication, or operational home. Registries provide addressability. Typed relations and transforms connect objects where their contracts allow it.",
-            "Instruments read and operate over that structure without silently becoming the authority they observe. This is why the Lab builds bounded registrars, evidence controls, experiments, provenance, Corpus Forge, the Architecture Observatory, deployment packets, validators, and queues.",
+            "The Lab does not force every kind of research state into one master database. Papers, experiments, products, source records, and operations keep their own responsible homes, while shared directories and links make them easier to find.",
+            "Tools can search, compare, validate, transform, and summarize that material, but using a tool does not give the tool authority to declare a scientific claim true or make a consequential decision on its own.",
           ]}
           variant="apparatus-stack"
-          pullLine="Legible by humans. Executable by machines. Repairable under critique."
+          pullLine="Make the work easy to inspect without making the machinery the authority."
         />
 
         <section className={styles.machineryRegistry}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>REGISTERED MACHINERY</>}
-            title={<>Addressable components, not a fictional master machine.</>}
+            eyebrow={<>TECHNICAL MACHINERY DIRECTORY</>}
+            title={<>What tools exist, what they do, and where they stop.</>}
             note={
               <>
-                This source-bound projection preserves component identity, maturity,
-                integration state, side effects, and authority ceilings without turning
-                registry membership into runtime permission.
+                The detailed registry below is for readers who want the engineering view.
+                It records each tool&apos;s source location, maturity, inputs, outputs, and
+                limits. Being listed here does not mean a tool may run automatically or make
+                scientific or institutional decisions.
               </>
             }
           />
 
           <div className={styles.machinerySnapshot}>
             <div>
-              <span>SOURCE-BOUND SNAPSHOT</span>
+              <span>TECHNICAL SNAPSHOT</span>
               <strong>{machineryRecords.length} registered BFL-MACH-* components</strong>
               <p>{machineryProjection.sourceStatus}</p>
             </div>
@@ -112,23 +113,23 @@ export function InstitutionalApparatusPage() {
 
                 <div className={styles.machineryMeta}>
                   <div>
-                    <span>MANIFEST</span>
+                    <span>DECLARED CONFIGURATION</span>
                     <strong>{machine.manifestStatus}</strong>
                   </div>
                   <div>
-                    <span>SIDE EFFECT CLASS</span>
+                    <span>CHANGE TYPE</span>
                     <strong>{machine.sideEffectClass}</strong>
                   </div>
                 </div>
 
                 <div className={styles.machineryHome}>
-                  <span>CANONICAL HOME</span>
+                  <span>SOURCE LOCATION</span>
                   <code>{machine.canonicalHome}</code>
                 </div>
 
                 <div className={styles.machineryIoGrid}>
                   <div>
-                    <span>ENTRYPOINTS</span>
+                    <span>HOW IT IS USED</span>
                     <ul>
                       {machine.entrypoints.map((entrypoint, index) => (
                         <li key={entrypoint.kind + "-" + index}>
@@ -139,7 +140,7 @@ export function InstitutionalApparatusPage() {
                     </ul>
                   </div>
                   <div>
-                    <span>DURABLE PROJECTIONS</span>
+                    <span>DURABLE OUTPUTS / VIEWS</span>
                     {machine.durableProjections.length ? (
                       <ul>
                         {machine.durableProjections.map((projection) => (
@@ -154,18 +155,18 @@ export function InstitutionalApparatusPage() {
 
                 <div className={styles.machineryAuthorityGrid}>
                   <div>
-                    <span>AUTHORITY CEILING</span>
+                    <span>WHAT IT MAY DO</span>
                     <p>{machine.authorityCeiling}</p>
                   </div>
                   <div>
-                    <span>NEXT INTEGRATION STEP</span>
+                    <span>WHAT COMES NEXT</span>
                     <p>{machine.nextIntegrationStep}</p>
                   </div>
                 </div>
 
                 {machine.projectionPolicy ? (
                   <div className={styles.machineryProjectionPolicy}>
-                    <span>PROJECTION POLICY</span>
+                    <span>HOW DERIVED VIEWS ARE HANDLED</span>
                     <p>{machine.projectionPolicy}</p>
                   </div>
                 ) : null}
@@ -177,9 +178,9 @@ export function InstitutionalApparatusPage() {
         <section className={styles.instrumentBench}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>INSTRUMENT BENCH</>}
-            title={<>Different tools. Explicit authority ceilings.</>}
-            note={<>The Instrument Bench names the public apparatus vocabulary; registered BFL-MACH-* components above are the independently addressable machinery.</>}
+            eyebrow={<>WHAT THE TOOLS ARE FOR</>}
+            title={<>Different tools, different jobs, clear limits.</>}
+            note={<>This section explains the public-facing purpose of the Lab&apos;s main research tools. The technical registry above preserves their internal engineering identities.</>}
             />
 
           <div className={styles.instrumentGrid}>
@@ -201,25 +202,25 @@ export function InstitutionalApparatusPage() {
 
                 <div className={styles.instrumentDetailGrid}>
                   <div>
-                    <span>OBSERVES / CONTROLS</span>
+                    <span>WHAT IT TRACKS OR CHANGES</span>
                     <p>{instrument.observes}</p>
                   </div>
                   <div>
-                    <span>PREVENTS</span>
+                    <span>WHY IT EXISTS</span>
                     <p>{instrument.prevents}</p>
                   </div>
                   <div className={styles.instrumentAuthority}>
-                    <span>AUTHORITY</span>
+                    <span>WHAT IT MAY DO</span>
                     <p>{instrument.authority}</p>
                   </div>
                   <div className={styles.instrumentNoAuthority}>
-                    <span>DOES NOT HAVE AUTHORITY TO</span>
+                    <span>WHAT IT MAY NOT DECIDE</span>
                     <p>{instrument.noAuthority}</p>
                   </div>
                 </div>
 
                 <div className={styles.instrumentHandoff}>
-                  <span>HANDOFF / STEWARDSHIP</span>
+                  <span>HANDOFF / OWNERSHIP</span>
                   {instrument.handoff}
                 </div>
               </article>
