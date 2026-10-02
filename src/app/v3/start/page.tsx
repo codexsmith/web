@@ -4,7 +4,7 @@ import { InstitutionalStartPage } from "@/components/institutional/Institutional
 export const metadata: Metadata = {
   title: "Start Here · Boundary First Labs",
   description:
-    "Choose a path through Boundary First Labs based on what you want to understand, inspect, build, fund, challenge, or use.",
+    "Start with what you want to do: understand Boundary First Labs, evaluate the research, solve a systems problem, collaborate, fund specific work, or challenge a claim.",
   alternates: { canonical: "/start" },
 };
 
