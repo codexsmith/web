@@ -14,25 +14,25 @@
       "id": "changes",
       "label": "What Changed",
       "href": "/changes",
-      "relation": "RECENT MOTION",
+      "relation": "RECENT CHANGES",
       "question": "What materially changed recently?",
-      "description": "A bounded delta view over consequential state transitions rather than every commit or task."
+      "description": "A curated record of meaningful changes, rather than every commit, task, or idea."
     },
     {
       "id": "now",
       "label": "Now",
       "href": "/now",
-      "relation": "PRESENT POSTURE",
+      "relation": "CURRENT PRIORITIES",
       "question": "What deserves attention now?",
-      "description": "A public projection of current priorities, dependencies, gates, and closure conditions."
+      "description": "The Lab's current priorities, what they depend on, and what would count as real progress."
     },
     {
       "id": "timeline",
       "label": "Lab Through Time",
       "href": "/lab-through-time",
-      "relation": "LONG MEMORY",
+      "relation": "LAB HISTORY",
       "question": "How did the Lab get here?",
-      "description": "A reviewed long-horizon provenance spine of consequential historical and institutional milestones."
+      "description": "Selected historical and institutional milestones that explain how the current Lab developed."
     }
   ],
   "timeline": {
