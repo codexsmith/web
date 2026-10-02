@@ -23,18 +23,18 @@
     "eyebrow": "SOFTWARE BEFORE CODE · BOUNDARY-FIRST ENGINEERING",
     "title": "Determine the object before selecting the mechanism.",
     "deck": "Teams often choose frameworks, schemas, services, APIs, queues, classes, tickets, and deployment structures before agreeing on what the system must preserve. Software Before Code reverses that order.",
-    "support": "Discover the domain, consequential distinctions, admissible transformations, protected invariants, boundaries, witnesses, and closure conditions; then choose implementation structure.",
+    "support": "Bound the problem, recover continuation-sufficient state, make lawful transformations, invariants, authority, provenance, witnesses, and consequence explicit; then choose implementation structure and deepen the model only where execution proves it necessary.",
     "primaryCta": { "label": "See the method", "target": "method" },
     "secondaryCta": { "label": "Start with a software problem", "href": "/software" }
   },
   "opening": {
     "title": "Code is not the first software artifact.",
-    "body": "Software engineering begins with a representation of a domain and a theory of lawful change inside it. Implementation is where that representation becomes executable."
+    "body": "Software engineering begins with a bounded representation of a domain and a theory of lawful change inside it. State is the information required for lawful continuation; implementation is where that representation becomes executable."
   },
   "coreObject": {
-    "proposition": "Software is a computational representation of a domain and an executable process acting inside that domain. Code is the material in which that representation is made operational; it is not the whole object being engineered.",
+    "proposition": "Software is a computational representation of a domain joined to lawful executable transformation. The representation must preserve enough state for the protected continuation; code is the material in which that model becomes operational, not the whole object being engineered.",
     "chain": ["DOMAIN", "REPRESENTATION", "EXECUTABLE TRANSFORMATION", "DELIVERED ARTIFACT", "WITNESS / CONSEQUENCE"],
-    "qualityRule": "Good software is a representation whose declared invariants survive admissible execution, composition, deployment, use, failure, and repair."
+    "qualityRule": "Good software is a representation whose required state and declared invariants survive admissible execution, composition, deployment, use, failure, consequence, and repair."
   },
   "problem": {
     "title": "Most software arguments begin downstream.",
@@ -50,7 +50,7 @@
   },
   "notBigDesignUpFront": {
     "title": "Before code does not mean before learning.",
-    "body": "The method does not demand perfect requirements before implementation. It asks what must be known before a particular commitment becomes safe, and it learns through probes, prototypes, artifacts, execution, observation, and witness."
+    "body": "The method does not demand perfect requirements or a complete global ontology before implementation. It asks what state, distinctions, authority, and invariants must be known before a particular commitment becomes safe, then learns through probes, prototypes, execution, observation, witness, and repair."
   },
   "nineQuestions": [
     { "name": "Representation", "question": "What world does the system claim to represent, and what does it omit?" },
@@ -97,6 +97,9 @@
     "Booleans are claims of binary adequacy.",
     "Interfaces are admissibility boundaries.",
     "Architecture protects distinctions under composition.",
+    "State contracts precede global ontology.",
+    "Persistence and projection are not the represented state itself.",
+    "Performer and authority principal are distinct roles.",
     "Completion is not closure.",
     "Defects often reveal forgotten distinctions.",
     "Good translation is selective, not total.",
@@ -157,7 +160,7 @@
   ],
   "architecture": {
     "title": "Architecture is invariant protection.",
-    "body": "Architecture is justified when it protects consequential distinctions, responsibilities, admissible composition, observability, and repair across execution boundaries."
+    "body": "Architecture is justified when it protects continuation-sufficient state, consequential distinctions, responsibilities, admissible composition, authority, observability, and repair across execution boundaries. State, transition, persistence, and projection may share one implementation in a small system, but they should not be assumed identical."
   },
   "agile": {
     "title": "Iteration is an observational system.",
