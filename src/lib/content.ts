@@ -100,9 +100,9 @@ export const nodes: ContentNode[] = [
     label: "Boundary First Labs",
     path: "",
     kind: "root",
-    eyebrow: "Software research and engineering lab",
+    eyebrow: "Scientific software modeling and applied systems laboratory",
     summary:
-      "Software for difficult systems, public-interest projects, and research into executable representation.",
+      "Practice-born research, engineering, products, and public-interest work centered on executable representation, lawful transformation, consequence, and repair.",
   },
   {
     id: "products",
@@ -515,7 +515,7 @@ export const nodes: ContentNode[] = [
     kind: "research",
     eyebrow: "Software doctrine",
     summary:
-      "A coherent software lane: boundaries, ontology, executable representation, architecture, UX, state, verification, and governance.",
+      "A coherent scientific software-modeling lane: domain, obligation, state, boundaries, executable representation, architecture, UX, verification, authority, provenance, consequence, and repair.",
   },
   {
     id: "boundary-first-engineering",
@@ -562,10 +562,10 @@ export const nodes: ContentNode[] = [
     kind: "method",
     eyebrow: "Ontology-driven software synthesis",
     summary:
-      "Determine what exists, how it relates, what states are admissible, and what transitions preserve meaning before deciding how the code should be shaped.",
+      "Make consequential domain structure explicit where execution requires it, without requiring one globally complete ontology before bounded work can begin.",
     body: [
-      "A sufficiently explicit ontology can drive schemas, validation, APIs, workflows, state machines, tests, documentation, permissions, and portions of UI structure.",
-      "The ambition is not code generation for its own sake. It is to reduce representational drift by deriving executable surfaces from a shared domain grammar.",
+      "State-contract reasoning narrows the strongest ontology-first claim: domain-model completeness is not an entry condition for execution. A bounded system needs enough state, lawful transition semantics, invariants, and boundary contracts for the protected continuation.",
+      "Explicit ontology remains valuable where distinctions are known and consequential. Execution, observation, and failure may reveal which additional distinctions deserve promotion into shared schemas, validation, APIs, workflows, permissions, tests, and UI structure.",
     ],
   },
   {
@@ -580,7 +580,8 @@ export const nodes: ContentNode[] = [
       "Software is an executable representation of a domain: primitives, admissible constructions, transitions, invariants, and operational semantics made runnable.",
     body: [
       "A representation is itself a boundary. It exposes distinctions, hides others, constrains what can be expressed, and determines which operations are lawful.",
-      "This creates direct bridges to formal grammars, programming-language semantics, DSLs, schemas, protocols, parsers, compilers, interpreters, and model-driven systems.",
+      "The current working bridge treats state as the information required for lawful continuation. Representations may therefore be physically polymorphic—documents, tuples, graphs, JSON, databases, tensors, files, or domain-native objects—so long as they preserve what the protected continuation requires.",
+      "This creates direct bridges to formal grammars, programming-language semantics, DSLs, schemas, protocols, parsers, compilers, interpreters, model-driven systems, and scientific modeling.",
     ],
     inspection: [
       {
@@ -698,10 +699,10 @@ export const nodes: ContentNode[] = [
     kind: "method",
     eyebrow: "Closure, authority, accountability",
     summary:
-      "Testing, observability, provenance, permissions, auditability, and lifecycle responsibility as parts of the same executable system boundary.",
+      "Testing, observability, authority provenance, source provenance, permissions, auditability, consequence, and lifecycle responsibility as parts of the same executable system boundary.",
     body: [
-      "Verification explores admissible and failure states, then traces defects back to missing contracts, boundary errors, violated invariants, or unobserved consequences.",
-      "Governance asks who may cause which state transition, under what authority, with what evidence, which consequence channel can disagree, and who owns repair when the claim fails.",
+      "Verification explores admissible and failure states, then traces defects back to missing contracts, boundary errors, violated invariants, invalid provenance, or unobserved consequences.",
+      "Governance separates performer from authority principal: who executed a transformation may differ from whose authority allowed it to count. A stronger account records what changed, from which sources, under whose authority, across which boundary, verified by whom, and with consequence to which independently governed state.",
     ],
     inspection: [
       {
@@ -1362,7 +1363,7 @@ export const nodes: ContentNode[] = [
     kind: "about",
     eyebrow: "Institution",
     summary:
-      "Boundary First Labs as a software research and engineering lab whose primary medium is executable systems and computational analysis.",
+      "Boundary First Labs as a scientific software-modeling and applied systems lab whose primary medium is executable representation, computational analysis, and inspectable institutional machinery.",
   },
   {
     id: "how-we-work",
@@ -1372,7 +1373,7 @@ export const nodes: ContentNode[] = [
     kind: "about",
     eyebrow: "Practice",
     summary:
-      "Start from the domain boundary, make state and constraints explicit, build the smallest coherent representation, then test it against reality.",
+      "Observe the real system, bound the obligation, construct the smallest continuation-sufficient representation, execute it, let evidence and consequence answer, then criticize, repair, and transfer.",
   },
   {
     id: "provenance",
