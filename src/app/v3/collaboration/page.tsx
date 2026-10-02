@@ -4,7 +4,7 @@ import { InstitutionalCollaborationPage } from "@/components/institutional/Insti
 export const metadata: Metadata = {
   title: "Collaboration · Boundary First Labs",
   description:
-    "Ways researchers, businesses, funders, creators, institutions, and domain experts can work with Boundary First Labs—from review and pilots to funding, distribution, and co-development.",
+    "Ways to work with Boundary First Labs through expert review, pilots, workshops, co-development, funding, distribution, research collaboration, or stewardship.",
   alternates: { canonical: "/collaboration" },
 };
 
