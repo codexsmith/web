@@ -120,8 +120,8 @@ export function ApparatusContextSection() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>APPARATUS CONTEXT</>}
-          title={<>The operating discipline around the instrument bench.</>}
-          note={<>Select any plate to inspect the surrounding authority, publication, transfer, and stewardship machinery.</>}
+          title={<>How the Lab keeps tools useful without letting tools become the authority.</>}
+          note={<>These sections explain ownership, review, publication, automation, transfer, and correction in plain language.</>}
         />
 
         <ReflowField
@@ -160,24 +160,24 @@ export function ApparatusContextSection() {
             id="federated-architecture"
             label="Federated Architecture"
             eyebrow="FEDERATED ARCHITECTURE"
-            title="No universal research database."
-            description="Different instruments own different state and preserve separate authority boundaries."
+            title="There is no single master database for all research."
+            description="Different kinds of work keep their own source records, and shared tools connect them without taking ownership."
             className={styles.apparatusContextFederation}
             tone="federation"
           >
             <div className={styles.apparatusContextDetail}>
               <p>
-                Different instruments own different kinds of state. Discovery,
-                registration, validation, publication, execution, and promotion are
-                intentionally separate authority boundaries.
+                Different tools are responsible for different jobs. Finding a record,
+                registering it, checking it, publishing it, running code, and accepting a
+                result are intentionally separate actions with separate responsibility.
               </p>
               <div className={styles.authorityFirewall}>
-                <code>visibility ≠ authority</code>
-                <code>validation ≠ truth</code>
-                <code>registration ≠ promotion</code>
-                <code>publication ≠ closure</code>
-                <code>capability ≠ permission</code>
-                <code>transfer ≠ abandonment</code>
+                <code>visible ≠ authoritative</code>
+                <code>validated ≠ true</code>
+                <code>registered ≠ accepted</code>
+                <code>published ≠ finished</code>
+                <code>capable ≠ permitted</code>
+                <code>transferred ≠ abandoned</code>
               </div>
             </div>
           </ApparatusContextCard>
@@ -187,7 +187,7 @@ export function ApparatusContextSection() {
             label="How It Works Together"
             eyebrow="HOW IT WORKS TOGETHER"
             title="A simplified research path."
-            description="No box silently inherits the authority of the next one."
+            description="Each step does its own job; no tool or record silently gains the decision rights of the next step."
             className={styles.apparatusContextPath}
             tone="path"
           >
@@ -204,18 +204,18 @@ export function ApparatusContextSection() {
               <div className={styles.apparatusSurround}>
                 <div>
                   <span>AROUND THE PATH</span>
-                  <strong>Registry Registrar</strong>
-                  <p>Which institutional state surfaces exist?</p>
+                  <strong>Lab record directory</strong>
+                  <p>Which durable record systems exist, and where is their source of truth?</p>
                 </div>
                 <div>
                   <span>AROUND THE PATH</span>
-                  <strong>Lab Machinery Registry</strong>
-                  <p>Which operational capabilities exist?</p>
+                  <strong>Tool directory</strong>
+                  <p>Which operational tools exist, and what are they designed to do?</p>
                 </div>
                 <div>
                   <span>ACROSS THE PATH</span>
-                  <strong>Steward / authority / correction path</strong>
-                  <p>Who may act, repair, stop, and remain responsible through transfer?</p>
+                  <strong>Owner / decision / correction path</strong>
+                  <p>Who may act, who may stop the process, who corrects errors, and who remains responsible after handoff?</p>
                 </div>
               </div>
             </>
@@ -225,17 +225,18 @@ export function ApparatusContextSection() {
             id="human-gates"
             label="Human Gates"
             eyebrow="HUMAN GATES"
-            title="Human gates are not anti-automation."
-            description="Automation can extend capability aggressively without silently absorbing responsibility."
+            title="Human review does not mean avoiding automation."
+            description="Automation can do substantial work while consequential decisions remain with the people responsible for them."
             className={styles.apparatusContextHuman}
             tone="human"
           >
             <div className={styles.apparatusHumanDetail}>
               <p>
                 Search, indexing, comparison, extraction, transformation, checking,
-                routing, synthesis, and bounded execution can be automated aggressively.
-                The gate appears where an operation changes authority, public claim state,
-                irreversible consequence, or stewardship.
+                routing, synthesis, and clearly scoped execution can be automated heavily.
+                Human review becomes essential when an action changes an official claim,
+                affects another person or system, creates an irreversible consequence, or
+                changes who is responsible.
               </p>
               <blockquote>
                 Automation may extend capability without silently absorbing responsibility.
@@ -247,8 +248,8 @@ export function ApparatusContextSection() {
             id="publication-model"
             label="Publication Model"
             eyebrow="PUBLICATION MODEL"
-            title="A paper is one view of the machine."
-            description="Readable publication can remain the front door while apparatus preserves inspectable research state."
+            title="A paper is the readable result, not the entire research record."
+            description="The article can remain the front door while supporting records preserve how the result was produced, challenged, and revised."
             className={styles.apparatusContextPublication}
             tone="publication"
           >
@@ -270,8 +271,8 @@ export function ApparatusContextSection() {
             id="public-exposure"
             label="Public Exposure"
             eyebrow="PUBLIC EXPOSURE"
-            title="Inspectability needs boundaries too."
-            description="Transparency is not indiscriminate disclosure; stewardship needs both legibility and boundary discipline."
+            title="Transparency still needs boundaries."
+            description="Being inspectable does not mean publishing private, sensitive, security-relevant, or poorly contextualized material."
             className={styles.apparatusContextExposure}
             tone="exposure"
           >
@@ -295,8 +296,8 @@ export function ApparatusContextSection() {
             id="design-posture"
             label="Design Posture"
             eyebrow="DESIGN POSTURE"
-            title="Every instrument should answer six questions quickly."
-            description="An instrument should expose what it observes, prevents, may do, may not do, and how responsibility survives handoff."
+            title="Every tool should answer six questions quickly."
+            description="A reader should be able to tell what a tool tracks, why it exists, what decisions it may make, what decisions remain human, and who owns it after handoff."
             className={styles.apparatusContextDesign}
             tone="design"
           >
@@ -314,20 +315,20 @@ export function ApparatusContextSection() {
             id="trust-stewardship"
             label="Trust and Stewardship"
             eyebrow="TRUST + STEWARDSHIP"
-            title="No instrument promotes itself. Launch is not closure."
-            description="Validation, visibility, publication, and completeness never erase authority ceilings or maintenance obligations."
+            title="No tool gets to declare its own success."
+            description="Passing a check, becoming visible, being published, or looking complete never removes the need for responsible review, maintenance, and correction."
             className={styles.apparatusContextTrust}
             tone="trust"
           >
             <div className={styles.instrumentTrustGrid}>
               <div>
                 <p className={styles.sectionIndex}>TRUST PRINCIPLE</p>
-                <h3>No instrument is allowed to promote itself.</h3>
+                <h3>No tool is allowed to approve its own conclusions.</h3>
                 <p>
-                  A validator cannot declare a theory true because its schema passed. A registry
-                  cannot promote an object because it indexed it. A generated page cannot become
-                  source authority because it is public. A complete packet cannot establish the
-                  truth of its contents merely because it is complete.
+                  A validator cannot declare a theory true because a schema passed. A directory
+                  cannot accept a claim simply because it indexed it. A generated page does not
+                  become the source of truth merely because it is public. A complete packet does
+                  not make the claims inside it correct.
                 </p>
               </div>
 
@@ -346,8 +347,8 @@ export function ApparatusContextSection() {
             id="closing-test"
             label="Closing Test"
             eyebrow="CLOSING TEST"
-            title="Research becomes durable when its state can survive transfer."
-            description="The apparatus preserves questions, sources, defects, criticism, repair, authority, and forward state—not only conclusions."
+            title="Research becomes durable when another person can pick it up."
+            description="The Lab tries to preserve questions, sources, failed attempts, criticism, revisions, responsibility, and next steps—not only conclusions."
             className={styles.apparatusContextClosing}
             tone="closing"
           >
