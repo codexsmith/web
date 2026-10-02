@@ -59,11 +59,11 @@ export const audienceTraversalPrinciples = [
 export const audienceJourneys: readonly AudienceJourney[] = [
   {
     id: "researcher",
-    label: "Researcher / technical reviewer",
+    label: "Researcher or technical reviewer",
     shortLabel: "Researcher",
     question: "I want to evaluate the research.",
     description:
-      "Start with the program boundaries, then inspect claims, experiments, publication state, and evidence before deciding what deserves deeper review.",
+      "Start with the active research programs, then inspect claims, experiments, publications, and evidence before deciding what deserves deeper review.",
     tone: "research",
     steps: [
       {
@@ -73,10 +73,10 @@ export const audienceJourneys: readonly AudienceJourney[] = [
         reason: "See active programs, states, boundaries, and the method braid before evaluating individual claims.",
       },
       {
-        label: "02 · ASSERTIONS",
+        label: "02 · CLAIMS",
         title: "Claims",
         href: "/claims",
-        reason: "Inspect what is actually being asserted, including native validation and authority posture.",
+        reason: "Inspect what is actually being asserted, how mature each claim is, and what testing remains open.",
       },
       {
         label: "03 · TESTS",
@@ -88,7 +88,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
         label: "04 · RELEASE",
         title: "Publications",
         href: "/publications",
-        reason: "See which research objects have been shaped into bounded publication records and what state they are in.",
+        reason: "See which research objects have become publication records and what status they currently have.",
       },
       {
         label: "05 · SUPPORT",
@@ -108,7 +108,7 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     shortLabel: "Engineer",
     question: "I want to see how this behaves as engineering.",
     description:
-      "Begin with things that run or can be applied, then inspect the project cases and machinery that make the work operational.",
+      "Begin with things that run or can be applied, then inspect project cases and the tools that make the work operational.",
     tone: "practice",
     steps: [
       {
@@ -124,10 +124,10 @@ export const audienceJourneys: readonly AudienceJourney[] = [
         reason: "Inspect bounded project cases, implementation context, and what each case actually demonstrated.",
       },
       {
-        label: "03 · MACHINERY",
+        label: "03 · TOOLS",
         title: "Apparatus",
         href: "/apparatus",
-        reason: "See the registered components, entrypoints, side effects, integration state, and authority ceilings behind the work.",
+        reason: "See what Lab tools exist, what they do, how mature they are, and what decisions they may or may not make.",
       },
       {
         label: "04 · APPLY",
@@ -153,20 +153,20 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     shortLabel: "Funder",
     question: "I want to know what support would accelerate.",
     description:
-      "Start with the funding model, then inspect current priorities, evidence, and project surfaces before deciding whether a bounded conversion is worth supporting.",
+      "Start with what the Lab is trying to fund, then inspect current priorities, evidence, and concrete work before deciding whether a specific effort is worth supporting.",
     tone: "funding",
     steps: [
       {
-        label: "01 · MODEL",
+        label: "01 · SUPPORT",
         title: "Funding",
         href: "/funding",
-        reason: "See what kinds of support the Lab is asking for and what funding is not allowed to imply.",
+        reason: "See what kinds of work can be supported, what funding would enable, and what support does not imply.",
       },
       {
         label: "02 · PRIORITY",
         title: "Now / Roadmap",
         href: "/now",
-        reason: "See where current capacity is being allocated and what would count as meaningful closure.",
+        reason: "See what the Lab is prioritizing now and what would count as real progress.",
       },
       {
         label: "03 · EVIDENCE",
@@ -175,10 +175,10 @@ export const audienceJourneys: readonly AudienceJourney[] = [
         reason: "Inspect demonstrated capability separately from future promise.",
       },
       {
-        label: "04 · DEPLOYMENT",
+        label: "04 · WORK",
         title: "Projects",
         href: "/projects",
-        reason: "See the concrete work that funding, sponsorship, or partnership could help move across a boundary.",
+        reason: "See concrete projects that funding, sponsorship, or partnership could help move forward.",
       },
     ],
     action: {
@@ -192,20 +192,20 @@ export const audienceJourneys: readonly AudienceJourney[] = [
     shortLabel: "Collaborator",
     question: "I want to work with the Lab on something real.",
     description:
-      "Start with the collaboration contract, then inspect what is active and where your domain, capability, or audience could intersect with existing work.",
+      "Start with the ways collaboration can work, then inspect current priorities and the research or projects that overlap with your expertise, users, infrastructure, or audience.",
     tone: "collaboration",
     steps: [
       {
-        label: "01 · CONTRACT",
+        label: "01 · OPTIONS",
         title: "Collaboration",
         href: "/collaboration",
-        reason: "See the Lab's preferred shapes for review, pilots, co-development, distribution, and transfer.",
+        reason: "See practical ways to begin: review, pilot, workshop, co-development, distribution, funding, or transfer.",
       },
       {
-        label: "02 · TIMING",
+        label: "02 · NOW",
         title: "Now / Roadmap",
         href: "/now",
-        reason: "Find the lanes where an outside relationship could matter now rather than someday.",
+        reason: "Find the work where an outside relationship could matter now rather than someday.",
       },
       {
         label: "03 · DOMAIN",
@@ -227,24 +227,24 @@ export const audienceJourneys: readonly AudienceJourney[] = [
   },
   {
     id: "client",
-    label: "Prospective client / applied-work buyer",
+    label: "Prospective client",
     shortLabel: "Client",
     question: "I have a consequential system that is expensive to misunderstand.",
     description:
-      "Start with how the Lab works on outside systems, then inspect relevant products, evidence, and project cases before deciding whether there is a practical fit.",
+      "Start with the kinds of outside systems problems BFL can help with, then inspect evidence and adjacent work before deciding whether there is a practical fit.",
     tone: "client",
     steps: [
       {
         label: "01 · FIT",
         title: "Applied Work",
         href: "/applied-work",
-        reason: "See the kinds of systems problems the Lab is prepared to scope and the boundaries around an engagement.",
+        reason: "See the kinds of systems problems the Lab is prepared to scope and what a first engagement can look like.",
       },
       {
         label: "02 · CAPABILITY",
         title: "Products",
         href: "/products",
-        reason: "Inspect reusable tools and productized capabilities that may shorten the path to a useful intervention.",
+        reason: "Inspect reusable products and tools that may shorten the path to a useful result.",
       },
       {
         label: "03 · PROOF",
@@ -266,24 +266,24 @@ export const audienceJourneys: readonly AudienceJourney[] = [
   },
   {
     id: "critic",
-    label: "Critic / adversarial reviewer",
+    label: "Critic or skeptical reviewer",
     shortLabel: "Critic",
     question: "I think something here may be wrong, overstated, or incomplete.",
     description:
-      "Start with the participation boundary, identify the specific claim or evidence surface, then trace it back into the research before sending a critique.",
+      "Start with how criticism enters the Lab, identify the specific claim or evidence at issue, then trace it back into the research before sending a critique.",
     tone: "critique",
     steps: [
       {
-        label: "01 · BOUNDARY",
+        label: "01 · START",
         title: "Open Lab",
         href: "/open-lab",
-        reason: "See how criticism, counterexamples, failed reproductions, and unusual submissions are meant to enter the institution.",
+        reason: "See how criticism, counterexamples, failed reproductions, and other challenges can be sent to the Lab.",
       },
       {
         label: "02 · TARGET",
         title: "Claims",
         href: "/claims",
-        reason: "Identify the exact assertion and its native status rather than arguing against a broad description of the Lab.",
+        reason: "Identify the exact statement and its current status rather than arguing against a broad description of the Lab.",
       },
       {
         label: "03 · SUPPORT",
@@ -328,13 +328,13 @@ export const audienceJourneys: readonly AudienceJourney[] = [
         label: "03 · MAP",
         title: "Lab Atlas",
         href: "/atlas",
-        reason: "See how research, experiments, claims, machinery, products, projects, publications, and evidence connect.",
+        reason: "See how research, experiments, claims, tools, products, projects, publications, and evidence connect.",
       },
       {
         label: "04 · NOW",
         title: "What changed?",
         href: "/changes",
-        reason: "See recent material state changes rather than reading a generic news feed.",
+        reason: "See the latest material changes rather than a generic news feed.",
       },
     ],
     action: {
