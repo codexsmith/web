@@ -21,8 +21,9 @@ export function InstitutionalProductsPage() {
           lead={<>Boundary First Labs is a research laboratory. It is also a place that makes things.</>}
           support={
           <>
-            Research may become a paper, method, dataset, instrument, or product. Products
-            test whether a bounded capability remains useful and maintainable with real users.
+            Research may become a paper, method, dataset, executable model, instrument, or
+            product. Products test whether a bounded representation and capability remain useful,
+            comprehensible, maintainable, and repairable with real users.
           </>
         }
           childLinks={institutionalChildRoutes.products}
@@ -119,12 +120,12 @@ export function InstitutionalProductsPage() {
                 </div>
               </div>
 
-              <p className={styles.productRole}>CURRENT ACTIVE-BUILD CONSUMER SOFTWARE WEDGE</p>
-              <h3>YouTube Knowledge Explorer</h3>
+              <p className={styles.productRole}>PROJECTR · CURRENT ACTIVE-BUILD SOFTWARE WEDGE</p>
+              <h3>Projectr / YouTube Knowledge Explorer</h3>
               <p className={styles.productPromise}>
-                The current bounded implementation turns long-form YouTube into
-                searchable, timestamped, persistent knowledge while preserving a direct path
-                back to the source.
+                Projectr is the durable public knowledge product family. Its current bounded
+                implementation turns long-form YouTube into searchable, timestamped, persistent
+                knowledge while preserving a direct path back to the source.
               </p>
 
               <div className={styles.explorerPipeline}>
@@ -202,8 +203,8 @@ export function InstitutionalProductsPage() {
           <InstitutionalSectionHeader
             styles={styles}
             eyebrow={<>FIRST-CLASS SOFTWARE MACHINERY</>}
-            title={<>Software Before Code.</>}
-            note={<>Define the software object before committing it to code. Closure-Driven Software remains a secondary technical / historical alias, not a competing product identity.</>}
+            title={<>Software Before Code is the engineering center.</>}
+            note={<>Scientific software modeling before implementation mechanism: determine the bounded object, state, lawful transformations, invariants, authority, witness, and consequence before code hardens the representation. Closure-Driven Software remains a secondary technical / historical alias.</>}
           />
 
           <div className={styles.researchProductGrid}>
