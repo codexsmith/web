@@ -177,15 +177,15 @@ export type PublicationRecord = {
 };
 
 export const publicationProjection = {
-  sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15",
-  sourceRevisionDate: "2026-09-18",
+  sourceRevision: "b543145845450821cefe0c401c73d814a01d81c0",
+  sourceRevisionDate: "2026-10-01",
   authority:
-    "The public catalog is a curated projection. Sequence position, graph readiness, source registration, and website selection do not establish publication, peer review, truth, novelty, or release authorization.",
+    "This page is a curated public view of current publication records. Being listed, sequenced, or marked ready does not mean a paper has been published, peer reviewed, proven correct, or authorized for release.",
   sources: [
     {
       registryId: "REG-PUBLICATION-SEQUENCE",
       label: "Publication Sequence",
-      recordCount: 24,
+      recordCount: 45,
       role: "Governance / dependency state",
       authority:
         "publication planning, sequence, and dependency-control state only; no scientific validity, readiness guarantee, publication promotion, truth, novelty, or release authorization",
@@ -195,7 +195,7 @@ export const publicationProjection = {
     {
       registryId: "REG-PUBLICATION-GRAPH",
       label: "Global Publication Graph",
-      recordCount: 112,
+      recordCount: 149,
       role: "Routing / readiness projection",
       authority:
         "operational publication routing, dependency, and readiness analysis only; no local scientific authority, publication promotion, institutional promotion, or source-state replacement",
@@ -205,7 +205,7 @@ export const publicationProjection = {
     {
       registryId: "REG-PUBLICATION-SOURCES",
       label: "Publication Source Registry",
-      recordCount: 10,
+      recordCount: 68,
       role: "Identity / provenance routing",
       authority:
         "source identity, provenance, import decision, local/canonical correspondence, and routing metadata only; local publication-control artifacts remain authoritative and registration does not promote publication state",
