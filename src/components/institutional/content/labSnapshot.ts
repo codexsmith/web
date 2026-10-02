@@ -1,14 +1,14 @@
 import type { LabSnapshotRowProps } from "../LabSnapshotRow";
 
-const registrySource = "Source: Lab Registry Catalog · Sep 23, 2026 carry-forward · 58 registered descriptors / 46 active / 29 software-readable.";
+const registrySource = "Source: Lab Registry Transaction Ledger · Sep 29, 2026 · RTX-2026-09-29-001 · Registrar 620 → 621 identities · validation PASS.";
 const machinerySource = "Source: Lab Machinery Registry Reconciliation v0.2 · Sep 23, 2026 · 12 registered machinery components.";
 const taxonomySource = "Source: Representation Modality Kernel · Sep 13, 2026 + Representational Quadrature · Sep 15, 2026 + current Library domain-family layout.";
 
 export const homeLabSnapshot = {
   label: "Lab snapshot",
-  updated: "Sep 23, 2026",
+  updated: "Sep 29, 2026",
   note:
-    "Point-in-time view of corpus scale and the machinery used to keep work routed, inspectable, tested, and persistent without relying on one person's memory. Not live telemetry.",
+    "Point-in-time composite view. Corpus-size measurements retain their dated September baselines; the Registrar count reflects the latest applied, validated control-plane state through Sep 29. Later proposed/preflight changes are not counted as applied state. Not live telemetry.",
   metrics: [
     {
       id: "files",
@@ -217,73 +217,11 @@ export const homeLabSnapshot = {
     },
     {
       id: "machine",
-      value: "29",
-      label: "software-readable",
+      value: "621",
+      label: "durable registries",
       icon: "machine",
-      detail: "29 of 58 registered state surfaces expose structured state that software can inspect directly.",
-      breakdown: {
-        title: "What software can see — and what still lives in human-first documents.",
-        intro:
-          "The same Lab uses both. Structured surfaces make state directly queryable by tools; human-first surfaces preserve work whose authoritative form is still a document, ledger, or reviewed queue.",
-        variant: "split-tags",
-        items: [
-          {
-            value: "29",
-            label: "Machine-facing",
-            detail: "Structured state is available for software to parse, query, validate, or route.",
-            tags: [
-              "Product Register",
-              "Lab Machinery Registry",
-              "Publication Graph",
-              "Publication Routing Queue",
-              "Publication Sources",
-              "Timeline",
-              "Agentic Artifact Registry",
-              "Supporting Capture Registry",
-              "Durable Object Types",
-              "Relation Types",
-              "Attribute Vocabulary",
-              "Claim Ledger",
-              "Theorem Register",
-              "Reference Register",
-              "Agent Registry",
-              "Work Packet Registry",
-              "Cadence State",
-              "Management Routing",
-            ],
-          },
-          {
-            value: "29",
-            label: "Human-first",
-            detail: "The authoritative surface remains primarily written, reviewed, and interpreted by a person.",
-            tags: [
-              "Research Lane Register",
-              "Experiment Register",
-              "Atlas of Atlases",
-              "Research State Review",
-              "Live Research Queue",
-              "Adjudication Register",
-              "Contradiction Register",
-              "Delta Register",
-              "Primitive Register",
-              "Pipeline Work Queue",
-              "KTG Queue",
-              "Machinery Integration Queue",
-              "Daily Operations Queue",
-              "Partner Pipeline",
-              "Contact Tracker",
-              "Risk Register",
-              "Decision Register",
-              "Open Questions",
-              "Founding Network Ledger",
-              "Boundary Theory Claim Ledger",
-            ],
-          },
-        ],
-        note:
-          "Examples are drawn from the current registry and shortened for public readability. Machine-facing does not mean machine-owned or autonomous; many structured surfaces remain human-maintained and consequential authority stays gated.",
-        source: registrySource + " Split by machine_readable === true / false.",
-      },
+      detail:
+        "621 synchronized Registrar/control-plane identities after validated admission of REG-NATIVE-VERIFIER-ADAPTERS on 2026-09-29. Whole-Lab registry discovery is closed at the Registrar level; population completeness inside aggregate registries remains a separate audit problem. " + registrySource,
     },
     {
       id: "semantic",
