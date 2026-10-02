@@ -16,7 +16,7 @@ export function BoundaryFirstChessExperience() {
   return (
     <ProductExperienceShell
       actions={[
-        { href: "#method", label: "See the lens" },
+        { href: "#method", label: "See the method" },
         {
           href: "/contact?type=product&source=boundary-first-chess",
           label: "Help test it",
@@ -29,13 +29,14 @@ export function BoundaryFirstChessExperience() {
     >
       <section className={styles.chessMethodSection} id="method">
         <div className={styles.chessStatement}>
-          <p>THE CENTRAL QUESTION</p>
+          <p>THE TEACHING QUESTION</p>
           <blockquote>
-            What boundary did this move create, repair, weaken, exploit, or transform?
+            What changed in the position, and what does that change make possible or dangerous?
           </blockquote>
           <span>
-            The point is not to rename chess. It is to give familiar ideas a shared
-            structural language that makes change easier to point at.
+            The point is not to replace chess vocabulary. It is to help learners connect
+            familiar ideas—king safety, weak squares, open lines, overloaded defenders,
+            initiative, and repair—into a clearer picture of what changed after a move.
           </span>
         </div>
 
@@ -50,20 +51,20 @@ export function BoundaryFirstChessExperience() {
         </div>
 
         <div className={styles.chessSeeingCourse}>
-          <span>POSITIONING</span>
-          <strong>This is not a Grandmaster course.</strong>
-          <em>It is a seeing course.</em>
+          <span>WHO IT IS FOR</span>
+          <strong>Players who know the rules but still struggle to see the board.</strong>
+          <em>The product teaches a way to notice structural change before calculating deeper.</em>
         </div>
       </section>
 
       <section className={styles.chessFieldGuideSection} id="field-guide">
         <div className={styles.chessSectionLead}>
-          <p>THE PRODUCT OBJECT</p>
-          <h2>A field guide large enough to teach a method. Small enough to test one.</h2>
+          <p>THE BOOK</p>
+          <h2>A developed field guide for learning how to see positional change.</h2>
           <span>
-            The first release should prove clarity before scale. Book, course, software,
-            video, and classroom extensions only become separate product claims when use
-            and evidence earn the split.
+            The manuscript already exists. The next step is to improve the diagrams,
+            editing, outside chess review, learner testing, and release packaging before
+            expanding into courses, software, video, or classroom products.
           </span>
         </div>
 
@@ -90,11 +91,12 @@ export function BoundaryFirstChessExperience() {
 
       <section className={styles.chessAnalyzerSection} id="analyzer">
         <div className={styles.chessAnalyzerLead}>
-          <p>THE ANALYZER CONCEPT</p>
-          <h2>An explainer first. Not a competitive engine.</h2>
+          <p>THE ANALYZER IDEA</p>
+          <h2>Explain the position; do not pretend to replace a chess engine.</h2>
           <span>
-            The research architecture keeps four authority layers separate so a new
-            explanation cannot silently overwrite legal board truth or established chess analysis.
+            Any future analyzer should keep legal board state, ordinary engine analysis,
+            Boundary-First interpretation, and disagreement separate so the new explanation
+            cannot overwrite established chess facts.
           </span>
         </div>
 
@@ -115,8 +117,8 @@ export function BoundaryFirstChessExperience() {
       <section className={styles.chessEvidenceSection} id="evidence">
         <div className={styles.chessEvidenceHeader}>
           <div>
-            <p>THE RESEARCH GATE</p>
-            <h2>Make the teaching claim answerable to reality.</h2>
+            <p>WHAT STILL NEEDS TO BE TESTED</p>
+            <h2>The teaching method has to prove that it actually helps learners.</h2>
           </div>
           <blockquote>
             A term that fails comparison should be repaired or retired.
@@ -146,7 +148,7 @@ export function BoundaryFirstChessExperience() {
       <section className={styles.chessReleaseSection} id="release">
         <div className={styles.chessReleaseState}>
           <span>CURRENT STATE</span>
-          <strong>Research product / developed source / external validation pending</strong>
+          <strong>Developed manuscript and teaching method · outside learner validation still needed</strong>
         </div>
 
         <div className={styles.chessReleaseCopy}>
