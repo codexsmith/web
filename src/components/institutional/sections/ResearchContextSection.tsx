@@ -94,8 +94,8 @@ export function ResearchContextSection() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>RESEARCH CONTEXT</>}
-          title={<>The machinery around the research.</>}
-          note={<>Select any plate to inspect it without leaving the page context.</>}
+          title={<>How to read and evaluate the Lab&apos;s research.</>}
+          note={<>These sections explain how claims, evidence, uncertainty, review, and handoff are handled.</>}
         />
 
         <ReflowField
@@ -108,8 +108,8 @@ export function ResearchContextSection() {
             id="reader-agency"
             label="Reader Agency"
             eyebrow="READER AGENCY"
-            title="Research should increase epistemic agency."
-            description="What a reader should be able to inspect, challenge, and judge independently."
+            title="Research should help readers make their own judgment."
+            description="A reader should be able to see what is claimed, what supports it, what remains uncertain, and what could change the conclusion."
             className={styles.contextReader}
             tone="agency"
           >
@@ -150,8 +150,8 @@ export function ResearchContextSection() {
             id="operating-braid"
             label="Operating Braid"
             eyebrow="THREE RECURSIVE DISCIPLINES"
-            title="Flow, evidence, and search constrain one another."
-            description="Lean–Agile practice, scientific method, and agentic reasoning are distinct lineages that meet in the Lab's operating loop."
+            title="Project discipline, scientific testing, and AI-assisted search each play a different role."
+            description="The Lab combines delivery discipline, scientific method, and tool-assisted search without treating them as interchangeable."
             className={styles.contextPrinciples}
             tone="principles"
           >
@@ -184,13 +184,13 @@ export function ResearchContextSection() {
                 <p>
                   Flow decides what can be attempted next. Evidence decides what was
                   learned. Agentic search decides what alternatives deserve attention.
-                  Boundary First records the representation, consequence, defect, repair,
-                  and successor state that connect the loop.
+                  Boundary First records what was represented, what happened, what failed,
+                  what was repaired, and what the next person needs to continue.
                 </p>
               </article>
             </div>
             <blockquote className={styles.contextQuote}>
-              “Agent proposes; machine verifies; world adjudicates.”
+              “AI can propose. Tools can check. Evidence decides.”
             </blockquote>
           </ContextCard>
 
@@ -246,8 +246,8 @@ export function ResearchContextSection() {
             id="equivalence-firewall"
             label="Permanent Firewall"
             eyebrow="PERMANENT FIREWALL"
-            title="Common role is not equivalence."
-            description="Cross-domain comparison must not silently become a theorem or shared ontology."
+            title="Similar language does not mean two fields are the same."
+            description="Cross-domain comparison is useful only when analogy is kept separate from proof, equivalence, or shared ontology."
             className={styles.contextFirewall}
             tone="firewall"
           >
@@ -336,8 +336,8 @@ export function ResearchContextSection() {
             id="closing-test"
             label="Closing Test"
             eyebrow="CLOSING TEST"
-            title="A theory should survive instrumentation."
-            description="Can another person represent, test, criticize, reconstruct, and continue the work?"
+            title="A theory should survive being made explicit and tested."
+            description="Can another person understand the model, test it, criticize it, reconstruct what was done, and continue the work?"
             className={styles.contextClosing}
             tone="closing"
           >
