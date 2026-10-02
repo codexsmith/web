@@ -11,13 +11,13 @@
   },
   "hero": {
     "eyebrow": "RESEARCH ENGINEERING",
-    "headline": "A distinction should earn its representational cost.",
-    "support": "This bridge connects Boundary First Labs' current research program to the empirical research-engineering discipline that helped shape it: make the representation explicit, test it against a baseline, preserve the null result, and let the evidence decide whether the distinction survives."
+    "headline": "Test the representation. Keep the null result.",
+    "support": "This unlisted brief proposes a small research-engineering collaboration: make one representation explicit, compare it with a strong baseline, preserve negative results, and let the evidence determine whether the added structure is useful."
   },
   "whyThisBridge": [
-    "The founder's Georgia Tech research history includes contributing within a computer-architecture / HPC / NUMA research direction rather than leading the lab agenda.",
-    "The current Research Deployment Packet routes Georgia Tech/GTRI toward empirical research engineering and the discipline of null results.",
-    "The relevant contribution is not a request to validate Boundary Theory; it is a bounded program of formalization, benchmark construction, computational experiments, provenance recovery, and adversarial reduction."
+    "The founder has prior Georgia Tech research experience in computer architecture and high-performance computing, which makes rigorous experimental comparison a natural point of contact.",
+    "The current BFL work includes formalization, benchmark construction, computational experiments, provenance recovery, and deliberate attempts to reduce new language to established methods.",
+    "The ask is not institutional validation of Boundary First Labs. It is independent technical criticism of one bounded research object."
   ],
   "candidateWork": [
     "Recover and narrow the historical NUMA experiment into an inspectable technical note whose claim remains tied to the actual workload and hardware regime.",
@@ -37,14 +37,16 @@
     "Relevant expertise in computing, systems, modeling, formal methods, or applied research engineering.",
     "A benchmark environment or bounded problem where representation choice is consequential."
   ],
-  "firstAsk": "Review one bounded research object and tell us what the existing field already explains, what the proposed representation adds, and what experiment would falsify the added layer.",
+  "firstAsk": "Review one bounded research object: tell us what the existing field already explains, what—if anything—the proposed representation adds, and what experiment would falsify that added layer.",
   "claimBoundary": [
     "This page does not imply Georgia Tech or GTRI endorsement, affiliation, sponsorship, or active collaboration.",
     "Historical founder research participation must remain scoped as contributing work inside an existing research direction.",
     "The precise historical NUMA performance claim remains unpublished until supporting experiment artifacts are recovered and independently checked.",
     "A successful collaboration would validate only the bounded result studied, not Boundary Theory as a whole."
   ],
-  "cta": {"label": "Review the research object"},
+  "cta": {
+    "label": "Review one research object"
+  },
   "notes": [
     "Use as an unlisted direct-outreach page only.",
     "Primary routing from the Research Deployment Packet: empirical research engineering / discipline of null results."
