@@ -65,7 +65,7 @@ function compactPath(path: string) {
 }
 
 function corpusLabel(paper: PaperMinePaper) {
-  return paper.record_class === "controlled_publication" ? "Controlled publication" : "Mined candidate";
+  return paper.record_class === "controlled_publication" ? "Controlled publication record" : "Mined candidate";
 }
 
 function stageLabel(paper: PaperMinePaper) {
@@ -367,14 +367,14 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
     <main className={styles.shell}>
       <header className={styles.topFrame}>
         <div>
-          <div className={styles.eyebrow}>Boundary First Labs · Research · Corpus-wide publication discovery</div>
+          <div className={styles.eyebrow}>Boundary First Labs · Research · Publication discovery snapshot</div>
           <h1>Paper Mine</h1>
           <p>
-            A bounded public projection of controlled publications and paper-shaped candidates across the Lab corpus. Every canonical paper now carries a metadata-grounded catalog summary; manuscript abstracts remain a separate source-reading upgrade rather than being implied by the catalog.
+            A searchable snapshot of 152 publication records and paper-shaped candidates captured on {data.generated_on}. The Lab&apos;s publication system has continued to evolve since this snapshot, so use this workbench for discovery rather than as a live count of every current publication record. Catalog summaries are descriptive aids, not manuscript abstracts.
           </p>
         </div>
         <div className={styles.provenanceBlock}>
-          <span>Projection + summary layer</span>
+          <span>SNAPSHOT CAPTURED</span>
           <strong>{data.generated_on}</strong>
           <code>papers {sourceRevision}</code>
           <code>summaries {summaryRevision}</code>
@@ -384,8 +384,8 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
 
       <section className={styles.boundaryBar} aria-live="polite">
         <div>
-          <span>Current boundary</span>
-          <strong>{activeBoundary.length ? activeBoundary.join(" · ") : "All canonical public Paper Mine records"}</strong>
+          <span>Current view</span>
+          <strong>{activeBoundary.length ? activeBoundary.join(" · ") : "All records in this Paper Mine snapshot"}</strong>
         </div>
         <div className={styles.boundaryCounts}>
           <span><b>{visible.length}</b> visible</span>
@@ -407,7 +407,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
             <Link href="/">Lab home</Link>
           </nav>
 
-          <div className={styles.frameLabel}>Bound the corpus</div>
+          <div className={styles.frameLabel}>Filter this snapshot</div>
           <label>
             Search
             <input
@@ -420,8 +420,8 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
           <label>
             Corpus class
             <select value={view.corpus} onChange={(event) => changeFilter({ corpus: event.target.value as CorpusFilter })}>
-              <option value="all">Controlled + mined</option>
-              <option value="controlled">Controlled publications</option>
+              <option value="all">Publication records + mined candidates</option>
+              <option value="controlled">Controlled publication records</option>
               <option value="mined">Mined candidates</option>
             </select>
           </label>
@@ -471,21 +471,21 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
             <input type="checkbox" checked={view.frontierOnly} onChange={(event) => changeFilter({ frontierOnly: event.target.checked })} />
             Paperization frontier only
           </label>
-          <button className={styles.resetButton} type="button" onClick={resetView}>Reset boundary</button>
+          <button className={styles.resetButton} type="button" onClick={resetView}>Reset filters</button>
 
           <section className={styles.authorityCard}>
-            <div className={styles.frameLabel}>Authority boundary</div>
-            <p>{data.authority.scope}. The private Lab remains authoritative; summaries are descriptive catalog aids and cannot promote a paper or scientific claim.</p>
-            <code>discover → summarize → canonicalize → control → paperize → human gate → publish</code>
+            <div className={styles.frameLabel}>How to use this snapshot</div>
+            <p>This is a discovery tool built from a controlled Lab snapshot. Newer publication records may exist outside it. Summaries help readers orient; they do not publish a paper, establish a scientific result, or replace the underlying research record.</p>
+            <code>discover → inspect sources → test → review → publish</code>
           </section>
         </aside>
 
         <div className={styles.workbench}>
           <section className={styles.metrics} aria-label="Paper Mine metrics">
-            <article><strong>{data.summary.canonical_paper_count}</strong><span>canonical papers</span></article>
+            <article><strong>{data.summary.canonical_paper_count}</strong><span>snapshot records</span></article>
             <article><strong>{data.summary_catalog.paper_count}</strong><span>catalog summaries</span></article>
             <article><strong>{data.summary_catalog.source_reading_priority_count}</strong><span>source-read priority</span></article>
-            <article><strong>{data.summary.controlled_publication_count}</strong><span>controlled publications</span></article>
+            <article><strong>{data.summary.controlled_publication_count}</strong><span>controlled records</span></article>
             <article><strong>{data.summary.mined_candidate_count}</strong><span>mined candidates</span></article>
             <article><strong>{data.summary.frontier_count}</strong><span>paperization frontier</span></article>
           </section>
@@ -521,7 +521,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
 
           <section className={styles.panel}>
             <header>
-              <div><span>Corpus field</span><h2>Canonical paper field</h2></div>
+              <div><span>Snapshot catalog</span><h2>Publication records and candidates</h2></div>
               <p>{displayedPaperCount} of {visible.length} matching papers shown. Card copy is the public catalog summary, not a manuscript abstract.</p>
             </header>
             <div className={styles.fieldGroups}>
@@ -579,8 +579,8 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
 
           <section className={styles.panel}>
             <header>
-              <div><span>Provenance boundary</span><h2>Authority and source reservoirs</h2></div>
-              <p>Paths identify private Lab provenance or control registries; they are not public source links.</p>
+              <div><span>Source context</span><h2>Where these records came from</h2></div>
+              <p>These paths identify internal Lab source records used to build the snapshot. They are shown for provenance, not as public document links.</p>
             </header>
             <div className={styles.sourceGrid}>
               {sourceCounts.length ? sourceCounts.map(([path, count]) => (
@@ -594,7 +594,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
         </div>
 
         <aside className={styles.rightFrame} aria-label="Selected paper object">
-          <div className={styles.frameLabel}>Selected paper boundary</div>
+          <div className={styles.frameLabel}>Selected record</div>
           {selected ? (
             <div className={styles.detail}>
               <span className={styles.detailStage}>
@@ -625,9 +625,9 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
                   <li>Catalog summary is descriptive metadata synthesis, not a manuscript abstract.</li>
                 </ul>
               </section>
-              <section><h3>Claim ceiling</h3><p>{selectedFrontier?.claim_ceiling ?? selected.claim_ceiling}</p></section>
-              <section><h3>Prior-art boundary</h3><p>{selected.prior_art_requirement}</p></section>
-              <section><h3>Evidence contract</h3><p>{selected.evidence_requirement}</p></section>
+              <section><h3>What this record can responsibly claim</h3><p>{selectedFrontier?.claim_ceiling ?? selected.claim_ceiling}</p></section>
+              <section><h3>Prior work still to check</h3><p>{selected.prior_art_requirement}</p></section>
+              <section><h3>Evidence still required</h3><p>{selected.evidence_requirement}</p></section>
               {selected.aliases.length ? (
                 <section><h3>Canonical aliases</h3><ul>{selected.aliases.map((alias) => <li key={alias}><code>{alias}</code></li>)}</ul></section>
               ) : null}
@@ -649,7 +649,7 @@ export function PaperMineView({ data }: { data: PaperMineSnapshot }) {
       </div>
 
       <footer className={styles.bottomFrame}>
-        <span>152 catalog summaries · 37 source-read abstract priorities · scientific authority remains in the private Lab</span>
+        <span>{data.summary_catalog.paper_count} snapshot summaries · {data.summary_catalog.source_reading_priority_count} source-reading priorities · captured {data.generated_on}</span>
         <span>papers {sourceRevision}/{contentHash} · summaries {summaryRevision}/{summaryHash}</span>
       </footer>
     </main>
