@@ -30,13 +30,18 @@ export const experimentProjection = {
   sourceRepository: "codexsmith/boundary-first-labs",
   sourcePath:
     "organized_library_curated/999_Library/04_Operations/02_pipeline_tooling__operations/02_registers_and_queues/experiment_register.md",
-  sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15",
-  sourceRevisionDate: "2026-09-18",
-  sourceStatus: "active durable Lab register; seeded, not yet exhaustively recovered",
+  sourceRevision: "b543145845450821cefe0c401c73d814a01d81c0",
+  sourceRevisionDate: "2026-10-01",
+  sourceStatus: "active durable Lab register; 57 registered experiments at the current public cutoff",
+  registeredCount: 57,
+  completedCount: 35,
+  plannedCount: 19,
+  otherCount: 3,
+  registeredLaneCount: 8,
   authority:
-    "Registration and evidence routing only. Experiment registration does not promote scientific claim status.",
+    "Registration records what was tested, planned, blocked, or completed and where the evidence lives. It does not make a scientific claim true or promote a result beyond the scope of the experiment.",
   sourceHref:
-    "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/02_pipeline_tooling__operations/02_registers_and_queues/experiment_register.md",
+    "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/02_pipeline_tooling__operations/02_registers_and_queues/experiment_register.md",
 } as const;
 
 const atlasLane: ExperimentLaneLink = {
