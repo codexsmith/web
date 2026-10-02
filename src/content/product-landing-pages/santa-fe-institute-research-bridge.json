@@ -11,8 +11,8 @@
   },
   "hero": {
     "eyebrow": "COMPLEX SYSTEMS",
-    "headline": "When does local structure survive promotion to the next scale?",
-    "support": "Boundary First Labs is studying emergence as invariant-preserving promotion across changing representations and scales. The useful question for complex-systems research is not whether the vocabulary sounds compatible, but whether it yields measurable structure that survives comparison with established multiscale methods."
+    "headline": "Does the proposed structure add anything to an already well-understood multiscale system?",
+    "support": "This unlisted brief proposes a deliberately adversarial comparison between Boundary First language and established complex-systems methods. A clean reduction or null result is a useful outcome."
   },
   "researchBridge": [
     "Distinction spaces ask how meaningful states become available and how those distinctions are sourced.",
@@ -26,14 +26,16 @@
     "Study when two representations of the same system are formally adequate but operationally asymmetric in the transitions they expose.",
     "Build a small cross-scale casebook in which local closure, mesoscopic residue, promotion, and macro-interface formation can be independently annotated and criticized."
   ],
-  "firstAsk": "Choose one multiscale system where the relevant coarse-graining is already well understood and test whether the Boundary First promotion language adds anything measurable, compressive, or explanatory.",
+  "firstAsk": "Choose one well-understood multiscale system and test whether the proposed Boundary First description adds measurable, compressive, or explanatory value beyond established methods.",
   "claimBoundary": [
     "This page does not imply Santa Fe Institute endorsement, partnership, affiliation, or review.",
     "Compatibility with complex-systems language is not evidence of a new result.",
     "Boundary First must benchmark against established multiscale, network, dynamical-systems, information-theoretic, and statistical approaches appropriate to the selected system.",
     "A clean reduction or null result is a valid outcome and should narrow the theory."
   ],
-  "cta": {"label": "Test the promotion rule"},
+  "cta": {
+    "label": "Test one bounded comparison"
+  },
   "notes": [
     "Use as an unlisted direct-outreach page only.",
     "Research Deployment Packet routing: complex systems; distinction/escape/constructive spaces and representation variants."

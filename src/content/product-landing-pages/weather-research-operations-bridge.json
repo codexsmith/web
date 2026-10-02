@@ -11,8 +11,8 @@
   },
   "hero": {
     "eyebrow": "WEATHER RESEARCH + OPERATIONS",
-    "headline": "Follow the boundary. Measure the defect.",
-    "support": "Boundary First Weather does not propose to replace operational numerical weather prediction. It proposes a bounded research layer for identifying where structural error concentrates, where ensemble disagreement matters, and where computational or observational attention may be most valuable."
+    "headline": "Pick one archived forecast problem and test whether the extra representation earns its cost.",
+    "support": "Boundary First Weather is not an operational forecast system. This unlisted brief proposes a bounded comparison: track one meaningful weather boundary across forecasts and observations, then test whether the representation adds useful information beyond standard diagnostics."
   },
   "bridge": [
     "Operational forecasting already depends on mature numerical models, data assimilation, observations, ensembles, verification, and expert interpretation.",
@@ -32,14 +32,16 @@
       "operational usefulness review by a domain expert"
     ]
   },
-  "firstAsk": "Give us one archived weather problem where structural error, computational cost, forecast uncertainty, or local consequence is expensive enough to measure.",
+  "firstAsk": "Bring one archived weather event where forecast error, ensemble disagreement, computational cost, or local consequence is clear enough to measure.",
   "claimBoundary": [
     "This page does not imply NOAA, NWS, ECMWF, WRF, MPAS, GraphCast, any emergency-management organization, or any weather institution endorses or collaborates with Boundary First Labs.",
     "Boundary First Weather is an experimental representation and diagnostic program, not an operational forecast authority.",
     "No claim of forecast superiority should be made without benchmark evidence on held-out cases.",
     "A null result or reduction to existing diagnostics is a valid outcome and should narrow the program."
   ],
-  "cta": {"label": "Bring one archived event"},
+  "cta": {
+    "label": "Bring one archived weather event"
+  },
   "notes": [
     "Use as an unlisted target-class bridge until a specific weather organization is selected.",
     "Complements the public Boundary First Weather landing page without duplicating its product narrative."

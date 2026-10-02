@@ -10,21 +10,21 @@ const contextCopy: Record<
 > = {
   research: {
     eyebrow: "LONG-HORIZON RESEARCH",
-    title: "Where the machinery is pointed.",
+    title: "What the Lab is trying to become capable of doing.",
     note:
-      "The active research surface describes work under present pressure. Moonshots names the longer objectives that organize what capabilities the Lab is trying to earn over time.",
+      "The active research pages describe current work. Moonshots names the longer goals that organize which capabilities the Lab is trying to earn over time.",
   },
   projects: {
     eyebrow: "BEYOND THE CURRENT PROJECT SET",
-    title: "Projects are pressure tests. Moonshots are the longer vector.",
+    title: "Projects test things now. Moonshots show the longer direction.",
     note:
-      "Current projects test bounded systems now. The Moonshots program makes visible the larger research infrastructure those tests may eventually support without treating ambition as achieved capability.",
+      "Current projects test concrete systems. Moonshots shows what larger capabilities those projects may eventually support without pretending those capabilities already exist.",
   },
   "open-lab": {
-    eyebrow: "OPEN PROBLEM FIELD",
-    title: "Moonshots — eight long-horizon objectives.",
+    eyebrow: "OPEN PROBLEMS",
+    title: "Eight long-horizon research goals.",
     note:
-      "The Lab invites criticism, counterexamples, specialist knowledge, and collaboration around work that should improve under outside pressure.",
+      "The Lab welcomes criticism, counterexamples, specialist knowledge, and collaboration around work that should improve under outside pressure.",
   },
 };
 
@@ -65,7 +65,7 @@ export function MoonshotsFeature({
         <div className={styles.objectiveIndex}>
           <div className={styles.objectiveIndexHeader}>
             <span>OBJECTIVE INDEX</span>
-            <strong>Ambition stays decomposable.</strong>
+            <strong>Big goals must break into smaller tests.</strong>
           </div>
 
           <ol>
@@ -80,7 +80,7 @@ export function MoonshotsFeature({
 
         <footer className={styles.moonshotsFooter}>
           <p className={styles.claimBoundary}>
-            Long-horizon objectives are not claims of completion, scientific validation,
+            Long-horizon goals are not claims of completion, scientific validation,
             market value, external adoption, or inevitability.
           </p>
 

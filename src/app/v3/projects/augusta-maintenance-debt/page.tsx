@@ -4,7 +4,7 @@ import { InstitutionalAugustaMaintenanceDebtPage } from "@/components/institutio
 export const metadata: Metadata = {
   title: "Augusta Maintenance Debt Civic Case · Boundary First Labs",
   description:
-    "A public-interest lifecycle-accounting case studying Augusta–Richmond County infrastructure obligations without manufacturing a false citywide maintenance-debt total.",
+    "A public-record study of Augusta–Richmond County infrastructure obligations: what is documented, what appears overdue, what is funded, what remains uncertain, and what evidence is still missing.",
   alternates: { canonical: "/projects/augusta-maintenance-debt" },
 };
 

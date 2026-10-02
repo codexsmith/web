@@ -4,7 +4,7 @@ import { InstitutionalMoonshotsPage } from "@/components/institutional/Instituti
 export const metadata: Metadata = {
   title: "Moonshots · Boundary First Labs",
   description:
-    "Eight long-horizon research objectives that make Boundary First Labs' longer capability direction explicit without presenting ambition as achieved capability.",
+    "Eight long-horizon Boundary First Labs research goals, each kept separate from claims of completed capability, scientific validation, adoption, or inevitability.",
   alternates: { canonical: "/research/moonshots" },
 };
 

@@ -11,8 +11,8 @@
   },
   "hero": {
     "eyebrow": "FORMAL SYSTEMS",
-    "headline": "Which structure survives the translation?",
-    "support": "Boundary First Labs is developing Schemathematics and related representational machinery under a strict reduction rule: import mature formalism where it is sufficient, expose the residual defect where it is not, and do not mistake new vocabulary for new mathematics."
+    "headline": "Reduce the new machinery to established formalism first.",
+    "support": "This unlisted brief proposes a simple test: represent one Boundary First object using the strongest relevant existing categorical or formal machinery, identify exact equivalences, and keep only the residue that genuinely survives."
   },
   "bridge": {
     "bflSide": [
@@ -39,14 +39,16 @@
     ],
     "successCondition": "A useful result includes clean reduction. The collaboration is successful if it tells us what not to invent."
   },
-  "firstAsk": "Try to reduce the proposed machinery to established category-theoretic or compositional systems language and identify the smallest residue, if any, that survives.",
+  "firstAsk": "Take one proposed Boundary First object and try to reduce it to established category-theoretic or compositional systems language. If nothing essential remains, that is a successful result.",
   "claimBoundary": [
     "This page does not imply Topos Institute endorsement, partnership, affiliation, or review.",
     "Schemathematics is a research program with an active novelty burden, not a declared replacement for category theory or existing formal methods.",
     "Categorical Turing Machines and related compositional computation work remain open research directions.",
     "Any claim of novelty must follow documented attempted reduction against established mathematics."
   ],
-  "cta": {"label": "Try to reduce the machinery"},
+  "cta": {
+    "label": "Try one formal reduction"
+  },
   "notes": [
     "Use as an unlisted direct-outreach page only.",
     "Research Deployment Packet routing: formal systems + mathematical knowledge; compositional computation / representation / distinction-space variants."

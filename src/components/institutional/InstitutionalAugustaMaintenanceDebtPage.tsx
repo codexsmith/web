@@ -20,37 +20,38 @@ export function InstitutionalAugustaMaintenanceDebtPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.augustaHero}
-        eyebrow={<>CIVIC CASE · AUGUSTA–RICHMOND COUNTY</>}
-        title={<>What does a city owe its own infrastructure?</>}
+        eyebrow={<>PUBLIC-INFRASTRUCTURE RESEARCH · AUGUSTA–RICHMOND COUNTY</>}
+        title={<>Which infrastructure obligations are actually overdue—and what do the public records support?</>}
         lead={
           <>
-            Can Augusta&apos;s unresolved infrastructure obligations be reconstructed from
-            public records without collapsing maintenance, renewal, new capacity, financing,
-            depreciation, and external shock into one rhetorical number?
+            This case studies roads, drainage, vehicles, facilities, and other public assets
+            without collapsing maintenance, replacement, new construction, financing,
+            depreciation, and storm recovery into one headline number.
           </>
         }
         support={
           <>
-            The target is an inspectable ledger: reproducible, correctable, and useful to the
-            institutions that own the physical systems.
+            The goal is a reproducible public-record account that separates what is known,
+            what is overdue, what is funded, what remains uncertain, and what additional records
+            would be needed for a stronger conclusion.
           </>
         }
       >
         <aside className={styles.caseControl}>
           <div className={styles.caseControlTopline}>
-            <span>CASE CONTROL</span>
+            <span>CASE STATUS</span>
             <strong>{augustaCase.state}</strong>
           </div>
 
           <dl>
             <div><dt>CASE ID</dt><dd>{augustaCase.id}</dd></div>
             <div><dt>OPENED</dt><dd>{augustaCase.opened}</dd></div>
-            <div><dt>BOUNDARY</dt><dd>{augustaCase.location}</dd></div>
-            <div><dt>EVIDENCE</dt><dd>PUBLIC-INSTITUTIONAL FIRST</dd></div>
+            <div><dt>PLACE</dt><dd>{augustaCase.location}</dd></div>
+            <div><dt>PRIMARY SOURCES</dt><dd>PUBLIC INSTITUTIONAL RECORDS</dd></div>
           </dl>
 
           <blockquote>
-            <span>CURRENT CLAIM CEILING</span>
+            <span>STRONGEST CURRENT CONCLUSION</span>
             {augustaCase.conclusion}
           </blockquote>
 
@@ -67,11 +68,11 @@ export function InstitutionalAugustaMaintenanceDebtPage() {
       <section className={styles.successSection}>
         <div>
           <p>WHAT SUCCESS LOOKS LIKE</p>
-          <h2>A reproducible civic account, even if the honest result is still incomplete.</h2>
+          <h2>A useful public account can still be incomplete.</h2>
           <p>
-            The case succeeds when another reader can see the state of the obligations and the
-            state of the evidence separately—and can tell exactly what would have to change
-            before a stronger aggregate becomes admissible.
+            The case succeeds when another reader can see the infrastructure obligations and
+            the evidence separately—and can tell exactly which missing records or classifications
+            prevent a stronger citywide estimate.
           </p>
         </div>
 
@@ -81,7 +82,7 @@ export function InstitutionalAugustaMaintenanceDebtPage() {
 
         <nav className={styles.successLinks} aria-label="Augusta case next steps">
           <Link href="/projects">Back to Projects <span aria-hidden="true">→</span></Link>
-          <Link href="/collaboration">Explore civic collaboration <span aria-hidden="true">→</span></Link>
+          <Link href="/collaboration">Discuss public-interest collaboration <span aria-hidden="true">→</span></Link>
           <a
             href="https://github.com/codexsmith/boundary-first-labs/tree/main/organized_library_curated/999_Library/03_Domains/04_linguistic_systems__domain_family/07_civilizational_systems__domain/01_civilization_mechanics__product/civic_change_infrastructure/cases/augusta_ga_maintenance_debt"
             rel="noreferrer"

@@ -29,21 +29,21 @@ export function InstitutionalMoonshotsPage() {
         styles={styles}
         className={styles.moonshotsHero}
         eyebrow={<>MOONSHOTS</>}
-        title={<>Long-horizon objectives. Explicit open problems.</>}
+        title={<>Big research goals, with the open problems left visible.</>}
         lead={<>{moonshotsProgram.summary}</>}
       >
         <div className={styles.moonshotsHeroLedger}>
           <div>
-            <span>PROGRAM CLASS</span>
-            <strong>Long-horizon research objectives</strong>
+            <span>WHAT THIS IS</span>
+            <strong>Long-horizon research goals</strong>
           </div>
           <div>
             <span>OBJECTIVES</span>
             <strong>{String(moonshotObjectives.length).padStart(2, "0")}</strong>
           </div>
           <div>
-            <span>CLAIM BOUNDARY</span>
-            <strong>Ambition is not achieved capability.</strong>
+            <span>IMPORTANT LIMIT</span>
+            <strong>A goal is not an achieved capability.</strong>
           </div>
         </div>
       </InstitutionalRouteHero>
@@ -51,17 +51,17 @@ export function InstitutionalMoonshotsPage() {
       <section className={styles.moonshotsOrientation}>
         <div>
           <p className={styles.sectionIndex}>HOW TO READ THIS PAGE</p>
-          <h2>Direction is visible. Status stays earned.</h2>
+          <h2>Show where the Lab wants to go without pretending it is already there.</h2>
         </div>
         <p>
           {moonshotsProgram.body?.[1]}
         </p>
         <aside>
-          <span>EVIDENCE BEFORE RHETORIC</span>
-          <strong>Every objective must decompose into bounded work.</strong>
+          <span>HOW PROGRESS SHOULD WORK</span>
+          <strong>Every big objective must break down into smaller testable work.</strong>
           <p>
-            Progress should leave inspectable intermediate capability, explicit open
-            problems, and evidence another person can challenge.
+            Progress should leave behind concrete intermediate capabilities, explicit open
+            problems, and evidence another person can inspect or challenge.
           </p>
         </aside>
       </section>
@@ -69,11 +69,11 @@ export function InstitutionalMoonshotsPage() {
       <section className={styles.objectiveSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>OBJECTIVE INDEX</>}
-          title={<>Long-horizon directions for capability the Lab has not yet earned.</>}
+          eyebrow={<>RESEARCH DIRECTIONS</>}
+          title={<>Eight things the Lab is trying to become capable of doing.</>}
           note={
             <>
-              Each objective is a research direction, not a product promise,
+              Each item is a long-horizon research direction, not a product promise,
               scientific result, or forecast.
             </>
           }
@@ -126,23 +126,23 @@ export function InstitutionalMoonshotsPage() {
 
       <section className={styles.moonshotsBoundary}>
         <div>
-          <p className={styles.sectionIndex}>PROGRAM BOUNDARY</p>
-          <h2>Moonshots is a coordination surface for difficult work.</h2>
+          <p className={styles.sectionIndex}>HOW TO READ THE PROGRAM</p>
+          <h2>Moonshots organizes difficult work without turning aspiration into evidence.</h2>
         </div>
 
         <LabObjectIdentity
           kind="research"
           status="Long-horizon objectives"
-          statusLabel="PROGRAM STATE"
-          secondary="Evidence before rhetoric"
-          secondaryLabel="RELEASE RULE"
+          statusLabel="CURRENT STATUS"
+          secondary="Evidence before stronger claims"
+          secondaryLabel="CLAIM RULE"
           variant="compact"
         />
 
         <p>
-          The program is useful only insofar as its objectives produce smaller,
-          falsifiable, inspectable work. Negative results, demotions, and exposed
-          limits count as progress when they prevent stronger false claims.
+          The program is useful only when its objectives produce smaller, testable,
+          inspectable work. Negative results and exposed limits count as progress when
+          they prevent stronger claims that the evidence cannot support.
         </p>
       </section>
 

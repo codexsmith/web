@@ -49,19 +49,19 @@ export function InstitutionalMoonshotDetailPage({
           </div>
           <div>
             <span>STATUS</span>
-            <strong>Long-horizon objective</strong>
+            <strong>Long-horizon research goal</strong>
           </div>
         </div>
       </InstitutionalRouteHero>
 
       <section className={styles.detailBoundaryStrip}>
         <div>
-          <span>CLAIM BOUNDARY</span>
-          <strong>Direction, not completion.</strong>
+          <span>IMPORTANT LIMIT</span>
+          <strong>This is a direction, not a completed result.</strong>
         </div>
         <p>
-          This page describes an objective, present footholds, and open burdens. It
-          does not claim scientific validation, deployed capability, external
+          This page describes the goal, work that already exists, and the main unresolved
+          problems. It does not claim scientific validation, deployed capability, external
           adoption, market value, or inevitability.
         </p>
         <Link href="/research/moonshots">
@@ -72,12 +72,11 @@ export function InstitutionalMoonshotDetailPage({
       <section className={styles.detailBodySection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>WORKING DIRECTION</>}
-          title={<>What the objective currently means.</>}
+          eyebrow={<>WHAT THIS GOAL MEANS TODAY</>}
+          title={<>The current interpretation, footholds, and open problems.</>}
           note={
             <>
-              The description remains provisional where the research burden is
-              unresolved.
+              Where the research is unresolved, the description remains provisional.
             </>
           }
         />
@@ -111,7 +110,7 @@ export function InstitutionalMoonshotDetailPage({
 
           {inspection.sourceRef ? (
             <div className={styles.sourceField}>
-              <span>SOURCE REFERENCE</span>
+              <span>RESEARCH SOURCE</span>
               <code>{inspection.sourceRef}</code>
             </div>
           ) : null}
@@ -122,8 +121,8 @@ export function InstitutionalMoonshotDetailPage({
         <section className={styles.relatedSection}>
           <InstitutionalSectionHeader
             styles={styles}
-            eyebrow={<>CURRENT FOOTHOLDS / RELATED WORK</>}
-            title={<>Where this objective touches work that already exists.</>}
+            eyebrow={<>WORK THAT ALREADY EXISTS</>}
+            title={<>Current projects and research that move this goal forward.</>}
           />
 
           <div className={styles.relatedLedger}>
@@ -145,7 +144,7 @@ export function InstitutionalMoonshotDetailPage({
       <section className={styles.detailClose}>
         <div>
           <p className={styles.sectionIndex}>PROGRAM CONTEXT</p>
-          <h2>One objective inside a larger long-horizon program.</h2>
+          <h2>One research goal inside a larger long-horizon program.</h2>
         </div>
         <nav aria-label="Moonshots navigation">
           <Link href="/research/moonshots">

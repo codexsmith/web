@@ -3,7 +3,7 @@ export const augustaCase = {
   location: "Augusta–Richmond County, Georgia",
   state: "CASE_CANDIDATE / RESEARCH_ACTIVE / NOT_PROMOTED",
   opened: "2026-08-14",
-  evidence: "Primarily public institutional records; working analysis remains bounded by the case controls.",
+  evidence: "Primarily public institutional records; conclusions remain limited by coverage, classification, and missing joins.",
   question:
     "What lifecycle obligations does Augusta already carry in public infrastructure and public-service assets, which are demonstrably overdue, what consequences are produced by deferral, and what changes if unresolved obligations are carried forward in a lifecycle ledger?",
   conclusion:
@@ -11,12 +11,12 @@ export const augustaCase = {
 } as const;
 
 export const augustaCaseNav = [
-  ["#finding", "01 Bound"],
-  ["#ledger", "02 Join"],
-  ["#evidence", "03 Classify"],
+  ["#finding", "01 What records support"],
+  ["#ledger", "02 Join duplicate records"],
+  ["#evidence", "03 Separate categories"],
   ["#fleet-test", "04 Measure"],
-  ["#controls", "05 Control"],
-  ["#next-gate", "06 Reopen"],
+  ["#controls", "05 Check the total"],
+  ["#next-gate", "06 Get missing evidence"],
 ] as const;
 
 export const augustaCaseCycle = [
