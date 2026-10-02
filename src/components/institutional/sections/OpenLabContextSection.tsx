@@ -119,8 +119,8 @@ export function OpenLabContextSection() {
                 The institution should be able to receive information without pretending every
                 submission is correct, actionable, or within scope.
               </blockquote>
-              <Link className={styles.openLabGovernanceBridge} href="/v3/ai-governance">
-                Inspect the Lab&apos;s AI agency and accountability doctrine
+              <Link className={styles.openLabGovernanceBridge} href="/ai-governance">
+                See how the Lab handles AI responsibility and accountability
                 <span aria-hidden="true">→</span>
               </Link>
             </div>
