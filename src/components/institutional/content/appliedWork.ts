@@ -1,13 +1,13 @@
 export const appliedWorkFamilies = [
   {
     code: "01",
-    title: "Systems / Architecture Review",
+    title: "Systems & Architecture Review",
     description:
       "For consequential systems that are difficult to understand, modernize, integrate, migrate, or repair because their operative model is distributed across code, data, interfaces, workflow, permissions, and institutional memory.",
     tone: "software",
     offers: [
       {
-        title: "System / architecture reconstruction",
+        title: "System reconstruction",
         description:
           "Reconstruct the minimum continuation-sufficient model: state, interfaces, dependencies, authority, boundaries, invariants, projections, and failure paths required for the bounded change.",
       },
@@ -25,23 +25,23 @@ export const appliedWorkFamilies = [
   },
   {
     code: "02",
-    title: "Agency / AI Governance Audit",
+    title: "AI & Decision Governance Review",
     description:
       "For systems where people, software, AI, policy, and automation interact but decision rights, review, escalation, or accountable authority are unclear.",
     tone: "governance",
     offers: [
       {
-        title: "Agency + authority map",
+        title: "Decision + responsibility map",
         description:
           "Trace who or what recommends, ranks, approves, denies, escalates, acts, verifies, and promotes—and where capability and permission have drifted apart.",
       },
       {
-        title: "Governance + promotion controls",
+        title: "Governance + approval controls",
         description:
           "Define Forge / Certify / Forbid boundaries, human gates, verifier requirements, contestability, provenance, and repair paths for consequential actions.",
       },
       {
-        title: "Decision-chain / failure reconstruction",
+        title: "Decision-chain / failure review",
         description:
           "Reconstruct a consequential outcome across people, software, policy, and evidence to locate authority gaps and the smallest credible repair.",
       },
@@ -49,20 +49,20 @@ export const appliedWorkFamilies = [
   },
   {
     code: "03",
-    title: "Knowledge / Representation Infrastructure Diagnostic",
+    title: "Knowledge & Research Infrastructure Review",
     description:
       "For organizations that need durable provenance, state, evidence, handoff, and authority across research, documents, schemas, software, and AI transformations.",
     tone: "research",
     offers: [
       {
-        title: "Source / claim / evidence architecture",
+        title: "Source + evidence architecture",
         description:
           "Map how source material becomes claims, decisions, artifacts, and promoted institutional state—and where provenance or authority is currently lost.",
       },
       {
-        title: "Representation + handoff analysis",
+        title: "Information + handoff analysis",
         description:
-          "Identify semantic loss, hidden projection choices, reconstruction risk, and continuation failures across documents, schemas, interfaces, reports, and teams.",
+          "Identify where meaning is lost, important views hide assumptions, handoffs require reconstruction, or documents, schemas, interfaces, reports, and teams no longer agree."
       },
       {
         title: "Knowledge infrastructure pilot",
@@ -131,7 +131,7 @@ export const appliedWorkBoundaries = [
   {
     label: "NO THEORY BUY-IN REQUIRED",
     description:
-      "Clients do not need Boundary First terminology or agreement with the Lab's research program. The engagement has to stand on the usefulness of the work itself.",
+      "Clients do not need to learn Boundary First terminology or agree with the Lab's research program. The engagement has to stand on the usefulness of the work itself."
   },
   {
     label: "SCOPE BEFORE SCALE",
