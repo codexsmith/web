@@ -97,9 +97,9 @@ export function PublicationContextSection() {
       <div className={styles.publicationContextFrame}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>PUBLICATION CONTEXT</>}
-          title={<>The machinery around public research artifacts.</>}
-          note={<>The selected records above are source-bound public projections. This field explains the publication discipline that keeps visibility, maturity, evidence, and authority from collapsing into one another.</>}
+          eyebrow={<>HOW TO READ THESE PUBLICATIONS</>}
+          title={<>A publication should make its status and uncertainty easier to see.</>}
+          note={<>The sections below explain how the Lab separates visibility, maturity, evidence, review, and correction so readers can judge the work without inheriting confidence from presentation alone.</>}
         />
 
         <ReflowField
@@ -110,18 +110,18 @@ export function PublicationContextSection() {
         >
           <PublicationContextCard
             id="projection-authority"
-            label="Projection and Authority"
-            eyebrow="PROJECTION ≠ AUTHORITY"
-            title="Publications are views of research state."
-            description="Visibility, polish, execution, and release never silently promote scientific authority."
+            label="Publication Status"
+            eyebrow="PUBLICATION ≠ PROOF"
+            title="Publishing something does not make it correct."
+            description="Visibility, polish, execution, and release do not automatically increase scientific validity."
             className={styles.publicationContextProjection}
             tone="authority"
           >
             <div className={styles.publicationContextDetail}>
               <p>
-                Editing a public page does not change scientific state. A polished PDF does
-                not promote a claim. A merged pull request does not prove a theorem.
-                Executable evidence does not automatically establish general validity.
+                Editing a public page does not make a claim stronger. A polished PDF does not
+                prove a result. A merged pull request does not prove a theorem, and a successful
+                implementation does not automatically establish that a broader theory is correct.
               </p>
               <div className={styles.publicationBoundaryGrid}>
                 <code>public visibility ≠ publication authority</code>
@@ -153,10 +153,10 @@ export function PublicationContextSection() {
 
           <PublicationContextCard
             id="source-owned-status"
-            label="Source-Owned Status"
-            eyebrow="SOURCE-OWNED STATUS"
-            title="Publication state should be visible."
-            description="The website may render status, but it does not invent or promote it."
+            label="Current Status"
+            eyebrow="STATUS SHOULD BE VISIBLE"
+            title="The website reports status; it does not invent it."
+            description="Where the research or publication record has a more precise status, that source takes precedence."
             className={styles.publicationContextStatus}
             tone="status"
           >
@@ -178,10 +178,10 @@ export function PublicationContextSection() {
 
           <PublicationContextCard
             id="reader-agency"
-            label="Reader Agency"
-            eyebrow="READER AGENCY"
-            title="Do not make the reader inherit confidence from typography."
-            description="Expose the distinctions that let a reader tell observation, inference, conjecture, result, and deployment apart."
+            label="Reader Judgment"
+            eyebrow="HELP THE READER JUDGE"
+            title="Typography should not substitute for evidence."
+            description="Readers should be able to distinguish observation, interpretation, conjecture, formal result, empirical support, and deployment evidence."
             className={styles.publicationContextReader}
             tone="reader"
           >
@@ -226,8 +226,8 @@ export function PublicationContextSection() {
             id="critique-route"
             label="Critique This Work"
             eyebrow="CRITIQUE THIS WORK"
-            title="A criticism-friendly publication is one whose state can change."
-            description="Corrections and objections should enter research machinery instead of disappearing into a generic inbox."
+            title="A useful publication can be corrected."
+            description="Substantive criticism, counterexamples, and failed reproductions should have a route back into the research record."
             className={styles.publicationContextCritique}
             tone="critique"
           >
@@ -252,8 +252,8 @@ export function PublicationContextSection() {
             id="public-index"
             label="Public Index"
             eyebrow="PUBLIC INDEX"
-            title="Simple outside. Richer underneath."
-            description="The public index should aid discovery without becoming the Lab's internal operations dashboard."
+            title="Simple to browse; detailed when needed."
+            description="The public index should help readers find work without forcing them through the Lab's internal operations system."
             className={styles.publicationContextIndex}
             tone="index"
           >
@@ -306,8 +306,8 @@ export function PublicationContextSection() {
             id="flagship-pattern"
             label="Flagship Research-Object Pattern"
             eyebrow="FLAGSHIP RESEARCH-OBJECT PATTERN"
-            title="A reusable public research page."
-            description="Representational Mechanics establishes a first pattern; the site should generalize the grammar rather than duplicate a one-off."
+            title="A reusable pattern for public research pages."
+            description="Important research pages should expose the same basic information: status, claims, evidence, uncertainty, related work, and correction history."
             className={styles.publicationContextFlagship}
             tone="flagship"
           >
