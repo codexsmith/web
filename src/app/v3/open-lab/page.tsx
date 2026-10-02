@@ -4,7 +4,7 @@ import { InstitutionalOpenLabPage } from "@/components/institutional/Institution
 export const metadata: Metadata = {
   title: "Open Lab · Boundary First Labs",
   description:
-    "The public participation boundary for critique, collaboration, public-system inspection, and unusual work at Boundary First Labs.",
+    "Bring Boundary First Labs a critique, a consequential public system, a collaboration idea, or technical and research work that does not fit neatly elsewhere.",
   alternates: { canonical: "/open-lab" },
 };
 

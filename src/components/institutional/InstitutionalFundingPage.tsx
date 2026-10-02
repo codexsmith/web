@@ -27,55 +27,52 @@ export function InstitutionalFundingPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.fundingHero}
-        eyebrow={<>FUNDING / CAPITALIZATION</>}
-        title={<>Capitalize the conversion engine, not the theory.</>}
+        eyebrow={<>FUNDING</>}
+        title={<>Support specific work with a clear next result.</>}
         lead={
           <>
-            Boundary First Labs already has research, software, methods, product candidates,
-            service capability, and institutional machinery. The near-term capital question is
-            what resource removes which constraint — and what closes afterward.
+            Boundary First Labs already has research, software, products, service capability,
+            and public-interest work in progress. Funding is most useful when it helps move a
+            specific piece of that work into external use, review, publication, or delivery.
           </>
         }
         support={
           <>
-            Runway protects conversion capacity. Services earn revenue. Product/company
-            capital builds reusable commercial leverage. Research capital funds public-good
-            inquiry and review. Working capital should follow contracts, awards, receivables,
-            cash flow, or other underwritable evidence.
+            Different kinds of support fit different jobs: operating runway, paid services,
+            product development, sponsored research, grants, public campaigns, or later
+            investment in a clearly defined commercial product.
           </>
         }
         childLinks={institutionalChildRoutes.funding}
       >
         <blockquote className={styles.fundingThesis}>
-          <span>CAPITAL FIREWALL</span>
-          Resources can make an inquiry, experiment, review, or build admissible.
-          They cannot make its conclusion true.
+          <span>FUNDING DOES NOT DETERMINE TRUTH</span>
+          Money can make research, review, product work, or delivery possible.
+          It cannot make a scientific or technical conclusion correct.
         </blockquote>
       </InstitutionalRouteHero>
 
       <section className={styles.fundingConversion}>
         <div className={styles.fundingUseIntro}>
-          <span>DIGITAL-NATIVE INSTITUTION</span>
+          <span>WHAT ALREADY EXISTS</span>
           <div>
-            <h3>Born computational. Human-governed. Machine-executable.</h3>
+            <h3>There is already work to move forward.</h3>
             <p>
-              Boundary First Labs is not a digital twin of a conventional organization. Its
-              institutional machinery was designed computationally from inception: research state,
-              provenance, work, authority, validation, publication control, and public projection.
-              That substrate is part of what funding can strengthen, while human and external
-              authority remain distinct from machine capability.
+              The Lab is not raising money around an empty concept. Current work includes
+              research programs, software, products, publications, service capability, and
+              operating tools. Funding should help one of those existing lines reach a clearer
+              external result.
             </p>
           </div>
         </div>
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>CURRENT FUNDING LANES</>}
-          title={<>BFL is building multiple paths to revenue and funded research.</>}
+          title={<>Four current ways support can move work forward.</>}
           note={
             <>
-              These are the current lead objects at the top of four funding lanes, not a permanent
-              ceiling on the portfolio. More services, products, software, and fundable research
-              can emerge from the corpus as they become ready for external tests.
+              These are current examples, not a permanent limit on the portfolio. Each one has
+              a concrete next test that outside support can help make possible.
             </>
           }
         />
@@ -88,12 +85,12 @@ export function InstitutionalFundingPage() {
               </div>
               <h3>{lane.title}</h3>
               <div className={styles.fundingLaneLead}>
-                <span>CURRENT LEAD OBJECT</span>
+                <span>CURRENT EXAMPLE</span>
                 <strong>{lane.example}</strong>
               </div>
               <p>{lane.description}</p>
               <div className={styles.fundingLaneEvidence}>
-                <span>NEXT EVIDENCE</span>
+                <span>WHAT WE NEED TO LEARN NEXT</span>
                 <p>{lane.nextEvidence}</p>
               </div>
               <em>Inspect this lane <span aria-hidden="true">-&gt;</span></em>
@@ -106,9 +103,8 @@ export function InstitutionalFundingPage() {
           <div>
             <h3>Move the lead objects into external contact.</h3>
             <p>
-              Different lanes need different things. The useful question is concrete: what does
-              the money pay for next, and what market, partner, customer, or research event should
-              exist because of it?
+              The useful question is concrete: what will the support pay for, and what customer,
+              user, partner, publication, review, or research result should exist afterward?
             </p>
           </div>
         </div>
@@ -121,7 +117,7 @@ export function InstitutionalFundingPage() {
               <strong>{item.use}</strong>
               <p>{item.description}</p>
               <div>
-                <span>SHOULD CLOSE AS</span>
+                <span>WHAT SUCCESS COULD LOOK LIKE</span>
                 <p>{item.closure}</p>
               </div>
             </article>
@@ -142,13 +138,12 @@ export function InstitutionalFundingPage() {
       <section className={styles.fundingChannelsSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>THE CAPITAL STACK</>}
-          title={<>Different capital has different jobs.</>}
+          eyebrow={<>TYPES OF SUPPORT</>}
+          title={<>Different kinds of funding fit different kinds of work.</>}
           note={
             <>
-              BFL does not ask one funder, one product, or one financing instrument to carry
-              the entire institution. Each capital source should be matched to the boundary it
-              can actually move.
+              The Lab does not expect one funder or financing method to support everything.
+              Support should be matched to the specific work it is actually meant to advance.
             </>
           }
         />
@@ -158,16 +153,16 @@ export function InstitutionalFundingPage() {
             <article className={styles.fundingChannelCard} key={role.name}>
               <div className={styles.fundingChannelTopline}>
                 <span>{formatOrdinal(index)}</span>
-                <small>CAPITAL JOB</small>
+                <small>ROLE</small>
               </div>
               <h3>{role.name}</h3>
               <p className={styles.fundingChannelPurpose}>{role.purpose}</p>
               <div className={styles.fundingChannelField}>
-                <span>WHAT IT SHOULD FINANCE</span>
+                <span>BEST USED FOR</span>
                 <p>{role.bestFor}</p>
               </div>
               <div className={styles.fundingChannelBoundary}>
-                <span>EVIDENCE BOUNDARY</span>
+                <span>WHAT IT DOES NOT PROVE</span>
                 <p>{role.boundary}</p>
               </div>
             </article>
@@ -178,8 +173,8 @@ export function InstitutionalFundingPage() {
       <section className={styles.fundingChannelsSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>CAPITAL STRUCTURES</>}
-          title={<>Match the structure to the economic job.</>}
+          eyebrow={<>WAYS SUPPORT CAN BE STRUCTURED</>}
+          title={<>Choose the funding arrangement that matches the work.</>}
           note={
             <>
               Sponsorship, prepayment, grants, public support, product capital, and later
@@ -203,7 +198,7 @@ export function InstitutionalFundingPage() {
                 <p>{channel.bestFor}</p>
               </div>
               <div className={styles.fundingChannelBoundary}>
-                <span>BOUNDARY</span>
+                <span>LIMITS</span>
                 <p>{channel.boundary}</p>
               </div>
             </article>
@@ -215,8 +210,8 @@ export function InstitutionalFundingPage() {
       <section className={styles.fundingChannelsSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>THE FUNDED-PERIOD TEST</>}
-          title={<>Judge the capital by what crosses into external evidence.</>}
+          eyebrow={<>HOW TO JUDGE A FUNDED PERIOD</>}
+          title={<>Judge support by what becomes real outside the Lab.</>}
           note={
             <>
               The Lab does not promise an arbitrary productivity multiple. A bounded funded
@@ -231,16 +226,16 @@ export function InstitutionalFundingPage() {
             <article className={styles.fundingChannelCard} key={horizon.name}>
               <div className={styles.fundingChannelTopline}>
                 <span>{formatOrdinal(index)}</span>
-                <small>MEASUREMENT HORIZON</small>
+                <small>TIME HORIZON</small>
               </div>
               <h3>{horizon.name}</h3>
               <p className={styles.fundingChannelPurpose}>{horizon.purpose}</p>
               <div className={styles.fundingChannelField}>
-                <span>CANDIDATE CLOSURES</span>
+                <span>WHAT PROGRESS COULD LOOK LIKE</span>
                 <p>{horizon.bestFor}</p>
               </div>
               <div className={styles.fundingChannelBoundary}>
-                <span>CLAIM CEILING</span>
+                <span>WHAT SHOULD NOT BE OVERCLAIMED</span>
                 <p>{horizon.boundary}</p>
               </div>
             </article>
@@ -250,12 +245,12 @@ export function InstitutionalFundingPage() {
 
       <section className={styles.fundingEvaluation}>
         <div className={styles.fundingEvaluationIntro}>
-          <p className={styles.sectionIndex}>HOW TO EVALUATE A BOUNDED ASK</p>
-          <h2>A funder should be able to judge the work without buying the worldview.</h2>
+          <p className={styles.sectionIndex}>HOW TO EVALUATE A FUNDING REQUEST</p>
+          <h2>You should be able to judge the work without endorsing the whole Lab.</h2>
           <p>
-            Boundary First Labs spans multiple witness domains. That breadth does not require
-            any supporter to endorse every domain, every theory, or the strongest claim in the
-            corpus. The useful evaluation unit is the bounded conversion being proposed now.
+            Boundary First Labs works across several domains. Supporting one project, paper,
+            product, or public-interest effort does not require endorsing every other part of
+            the Lab. Evaluate the specific work being proposed now.
           </p>
         </div>
 
@@ -279,8 +274,8 @@ export function InstitutionalFundingPage() {
       </section>
 
       <section className={styles.fundingClose}>
-        <p className={styles.sectionIndex}>CURRENT FUNDING POSTURE</p>
-        <h2>Use capital to make the institution less capital-fragile.</h2>
+        <p className={styles.sectionIndex}>CURRENT FUNDING GOAL</p>
+        <h2>Use support to create more independent evidence, revenue, and capability.</h2>
         <p>
           The objective is not indefinite sponsorship. It is to convert already-existing
           productive inventory into contracts, products, funded research, publications,

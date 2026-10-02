@@ -31,15 +31,15 @@ export function InstitutionalOpenLabPage() {
         styles={styles}
         className={styles.openLabHero}
         eyebrow={<>OPEN LAB</>}
-        title={<>A research institution should have a permeable boundary.</>}
+        title={<>Bring us a problem, a critique, or work that does not fit neatly anywhere else.</>}
         lead={
-          <>Boundary First Labs should not be a one-way publishing machine.</>
+          <>Open Lab is the public door into Boundary First Labs.</>
         }
         support={
           <>
-            Bring criticism, failed reproductions, counterexamples, specialist knowledge,
-            consequential systems, or unusual work. You should not need the Lab&apos;s
-            vocabulary before you can challenge or contribute to it.
+            You can challenge our work, point us toward a consequential public system,
+            propose a collaboration, or bring unusual technical or research work for review.
+            You do not need to learn BFL terminology before writing.
           </>
         }
         childLinks={institutionalChildRoutes.openLab}
@@ -52,30 +52,30 @@ export function InstitutionalOpenLabPage() {
           >
             <div className={styles.openLabHeroIntakeSignal} aria-hidden="true" />
             <div>
-              <span>OPEN LAB CONTACT</span>
+              <span>FIRST CONTACT</span>
               <strong>
                 <a href={publicContactMailto("Boundary First Labs — Open Lab")}>
                   {PUBLIC_CONTACT_EMAIL}
                 </a>
               </strong>
               <p>
-                Email the Lab with the closest description of what you are bringing.
+                Tell us what you are bringing, why it matters, and what you hope happens next.
                 Critique, counterexamples, public systems, collaboration ideas, and unusual
-                work are all welcome.
+                work are all valid starting points.
               </p>
               <small>KEEP SECRETS, PRIVATE DATA, AND CONFIDENTIAL MATERIAL OUT OF THE FIRST NOTE.</small>
             </div>
           </aside>
 
           <blockquote className={styles.openLabThesis}>
-            <span>FOUR PUBLIC CONTRACTS</span>
-            We inspect public systems.
+            <span>FOUR WAYS IN</span>
+            Point us at a system.
             <br />
-            Inspect us.
+            Challenge our work.
             <br />
-            Build with us.
+            Work with us.
             <br />
-            Bring us what does not fit.
+            Bring something unusual.
           </blockquote>
         </div>
       </InstitutionalRouteHero>
@@ -83,13 +83,12 @@ export function InstitutionalOpenLabPage() {
       <section className={styles.openLabContracts}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>PUBLIC PARTICIPATION</>}
-          title={<>Four routes. Four different relationships.</>}
+          eyebrow={<>WAYS TO PARTICIPATE</>}
+          title={<>Four simple starting points.</>}
           note={
             <>
-              The distinction matters because criticism, collaboration, public-system
-              inspection, and unusual work create different expectations even when they
-              begin at the same email address.
+              They all begin with the same email address, but they lead to different kinds of
+              review, responsibility, and follow-up.
             </>
           }
         />
@@ -106,18 +105,16 @@ export function InstitutionalOpenLabPage() {
       <OpenLabContextSection />
 
       <section className={styles.openLabClose}>
-        <p className={styles.sectionIndex}>INSTITUTIONAL PROMISE</p>
+        <p className={styles.sectionIndex}>OPEN LAB PROMISE</p>
         <h2>
-          Make the boundary permeable enough that valuable observations,
-          criticism, people, and work can enter—without forcing them into the
-          wrong category first.
+          Valuable criticism, knowledge, people, and work should be able to reach the Lab
+          without being forced into the wrong category first.
         </h2>
         <p>
-          Open Lab is the designed public boundary of the institution. For now,
-          first contact is intentionally simple: write the Lab, give enough context
-          to understand what you are bringing, and keep sensitive material out of the
-          first message. If the work needs a more structured review, consent, or
-          retention boundary, establish that before sending more.
+          First contact is intentionally simple: write the Lab, give enough context to
+          understand what you are bringing, and keep sensitive or confidential material out
+          of the first message. If the work needs a more structured review, consent, or data
+          boundary, establish that before sending more.
         </p>
         <nav
           className={styles.openLabCloseLinks}
