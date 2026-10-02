@@ -20,23 +20,25 @@ export function InstitutionalClaimsPage() {
         styles={styles}
         className={styles.claimsHero}
         eyebrow={<>CLAIMS</>}
-        title={<>How does the Lab bound what it asserts?</>}
+        title={<>What is the Lab actually claiming?</>}
         lead={
           <>
-            A Claim is a research-control object: an assertion with identity, state,
-            provenance, validation posture, and a declared authority ceiling.
+            A claim is a specific statement the Lab is willing to track separately from the
+            prose around it, along with its current status, supporting evidence, and unresolved
+            tests.
           </>
         }
         support={
           <>
-            Claims belong to research lanes and other owning contexts. This route defines the
-            object family; it is not intended to become one flattened Lab-wide claim ledger.
+            Claims stay with the research program, product, or project that gives them meaning.
+            This page shows one current research cohort and explains how to read it; it is not
+            a single master list of everything the Lab believes.
           </>
         }
         childLinks={institutionalChildRoutes.claims}
       >
         <div className={styles.sourcePanel}>
-          <span>CURRENT RECOVERED COHORT</span>
+          <span>CURRENT PUBLIC COHORT</span>
           <strong>{claimProjection.ownerResearch.title}</strong>
           <p>{claimRecords.length} owner-local {claimProjection.idNamespace} claims</p>
           <dl>
@@ -45,7 +47,7 @@ export function InstitutionalClaimsPage() {
               <dd>{claimProjection.ownerResearch.code}</dd>
             </div>
             <div>
-              <dt>LEDGER STATE</dt>
+              <dt>RECORD STATUS</dt>
               <dd>{claimProjection.ledgerStatus}</dd>
             </div>
           </dl>
@@ -53,42 +55,42 @@ export function InstitutionalClaimsPage() {
       </InstitutionalRouteHero>
 
       <section className={styles.authorityBand}>
-        <span>AUTHORITY CEILING</span>
-        <strong>Registration is not truth.</strong>
+        <span>CLAIM STATUS BOUNDARY</span>
+        <strong>Being listed does not make a claim true.</strong>
         <p>{claimProjection.authority}</p>
       </section>
 
       <section className={styles.surveySection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>CLAIM OBJECT</>}
-          title={<>Claims should be read beside the research that owns them.</>}
-          note={<>The global route explains the object family; contextual routes supply scientific meaning.</>}
+          eyebrow={<>HOW TO READ A CLAIM</>}
+          title={<>Read the statement together with its status, evidence, and open tests.</>}
+          note={<>A claim makes the most sense beside the research that owns it; this page provides a shared orientation layer.</>}
         />
 
         <div className={styles.surveyGrid}>
           <article>
             <span>WHAT IT IS</span>
-            <h3>Bounded assertion.</h3>
+            <h3>A specific statement.</h3>
             <p>
-              A claim records what is being asserted, its current status, whether validation
-              remains open, and what source or evidence relationships are actually declared.
+              A claim records what is being asserted, how mature the statement currently is,
+              whether testing remains open, and which sources or evidence are actually linked to it.
             </p>
           </article>
           <article>
             <span>WHERE IT BELONGS</span>
-            <h3>Owned by a research context.</h3>
+            <h3>Kept with the work that gives it meaning.</h3>
             <p>
-              Foundational claims belong with research lanes. Product and project claims
-              should appear beside the artifacts, tests, and decisions that give them meaning.
+              Research claims belong with their research program. Product and project claims
+              should appear beside the artifacts, tests, use, and decisions that give them meaning.
             </p>
           </article>
           <article>
             <span>WHAT THIS PAGE DOES</span>
-            <h3>Scope, not universal ledger.</h3>
+            <h3>One example, not a universal ledger.</h3>
             <p>
-              This route defines Claim as an institutional object and reports which claim
-              cohorts are currently safe to project publicly.
+              This route explains the Lab's claim-tracking approach and reports one cohort
+              that is currently suitable for public inspection.
             </p>
           </article>
         </div>
@@ -96,12 +98,12 @@ export function InstitutionalClaimsPage() {
 
       <section className={styles.scopeSection}>
         <div>
-          <p className={styles.sectionIndex}>CURRENT PUBLIC RECOVERY</p>
-          <h2>Information Mechanics is one admitted cohort, not “the Lab’s claims.”</h2>
+          <p className={styles.sectionIndex}>CURRENT PUBLIC EXAMPLE</p>
+          <h2>Information Mechanics is one research program&apos;s claim set—not “everything BFL claims.”</h2>
           <p>
-            The current public source is owner-local to {claimProjection.ownerResearch.title}.
-            Its presence demonstrates the claim machinery without pretending other research
-            programs share the same namespace or ledger semantics.
+            The current source belongs to {claimProjection.ownerResearch.title}. It shows how
+            one research program records claims without implying that every BFL program uses
+            the same IDs, statuses, or evidence structure.
           </p>
         </div>
 
@@ -126,11 +128,12 @@ export function InstitutionalClaimsPage() {
 
       <section className={styles.placementSection}>
         <div>
-          <p className={styles.sectionIndex}>NEXT PLACEMENT PASS</p>
-          <h2>Put claims beside their owners, evidence, and tests.</h2>
+          <p className={styles.sectionIndex}>WHERE CLAIMS BELONG</p>
+          <h2>Keep claims beside the research, evidence, and tests that can change them.</h2>
           <p>
-            The next pass will attach filtered claim views to research lanes, products, and
-            projects. This route will remain the institutional explanation of Claim objects.
+            This route remains the shared explanation of claim tracking. More specific claim
+            views should live beside the research programs, products, and projects they actually
+            describe.
           </p>
         </div>
         <nav aria-label="Claim placement destinations">
