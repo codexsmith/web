@@ -18,10 +18,10 @@ const experimentLanes = [
       .map((lane) => [lane.laneId, lane.label] as const),
   ).entries(),
 ];
-const completedExperiments = experimentRecords.filter((record) =>
+const publicCompletedExperiments = experimentRecords.filter((record) =>
   record.status.startsWith("completed"),
 ).length;
-const plannedExperiments = experimentRecords.filter((record) =>
+const publicPlannedExperiments = experimentRecords.filter((record) =>
   record.status.includes("planned"),
 ).length;
 
@@ -32,79 +32,81 @@ export function InstitutionalExperimentsPage() {
         styles={styles}
         className={styles.experimentsHero}
         eyebrow={<>EXPERIMENTS</>}
-        title={<>How does the Lab test its work?</>}
+        title={<>What has the Lab actually tested?</>}
         lead={
           <>
-            Experiments are bounded operations attached to research programs, products,
-            projects, or apparatus. Their meaning comes from the thing being tested.
+            Experiments include computational runs, formal stress tests, comparisons,
+            simulations, replications, falsification attempts, operational tests, and negative
+            or inconclusive results.
           </>
         }
         support={
           <>
-            This page is the survey and scope boundary for Experiment objects. Detailed
-            experiment lists will live with their owning research lanes and operating surfaces.
+            The Lab&apos;s register now contains {experimentProjection.registeredCount} durable
+            experiment records. This page shows a smaller public sample in detail and points
+            readers toward the research programs and tools that give those tests meaning.
           </>
         }
         childLinks={institutionalChildRoutes.experiments}
       >
         <div className={styles.sourcePanel}>
-          <span>CURRENT RECOVERY</span>
-          <strong>{experimentRecords.length} durable EXP-* records</strong>
+          <span>LAB-WIDE REGISTER</span>
+          <strong>{experimentProjection.registeredCount} durable EXP-* records</strong>
           <p>{experimentProjection.sourceStatus}</p>
           <dl>
             <div>
-              <dt>PROGRAMS</dt>
-              <dd>{experimentPrograms.length}</dd>
+              <dt>PUBLIC SAMPLE</dt>
+              <dd>{experimentRecords.length} detailed records</dd>
             </div>
             <div>
-              <dt>RESEARCH LANES</dt>
-              <dd>{experimentLanes.length}</dd>
+              <dt>REGISTERED RESEARCH LANES</dt>
+              <dd>{experimentProjection.registeredLaneCount}</dd>
             </div>
           </dl>
         </div>
       </InstitutionalRouteHero>
 
       <section className={styles.authorityBand}>
-        <span>SCOPE RULE</span>
-        <strong>An experiment is not meaningful in isolation.</strong>
+        <span>HOW TO READ AN EXPERIMENT</span>
+        <strong>A test only means something relative to the question it was designed to answer.</strong>
         <p>
-          Registration preserves identity, status, provenance, and evidence routing. The
-          owning lane, product, project, or apparatus supplies the question, boundary, and
-          interpretation.
+          The register preserves identity, status, source, and evidence links. The owning
+          research program, product, project, or tool provides the actual question, method,
+          controls, and interpretation.
         </p>
       </section>
 
       <section className={styles.surveySection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>EXPERIMENT OBJECT</>}
-          title={<>A test belongs to the system that gives it a question.</>}
-          note={<>The global route explains the object family. Contextual routes will carry the records.</>}
+          eyebrow={<>EXPERIMENT RECORD</>}
+          title={<>A test should expose the question, method, result, and limits.</>}
+          note={<>The register keeps tests durable; the surrounding research context explains why they matter.</>}
         />
 
         <div className={styles.surveyGrid}>
           <article>
             <span>WHAT IT IS</span>
-            <h3>Bounded test.</h3>
+            <h3>A specific test with a stated scope.</h3>
             <p>
               A computational run, formal stress test, comparison, simulation, control,
-              falsification attempt, or planned test with an explicit predicate.
+              falsification attempt, or planned test with a stated success or failure condition.
             </p>
           </article>
           <article>
             <span>WHERE IT BELONGS</span>
-            <h3>Attached to an owner.</h3>
+            <h3>Attached to the work it is testing.</h3>
             <p>
-              Research lanes own scientific questions. Products and projects own operational
-              tests. Apparatus owns instrument behavior and conformance checks.
+              Research programs own scientific questions. Products and projects own operational
+              tests. Lab tools own implementation and conformance checks.
             </p>
           </article>
           <article>
             <span>WHAT THIS PAGE DOES</span>
-            <h3>Survey, not flat catalog.</h3>
+            <h3>A public sample, not the whole register.</h3>
             <p>
-              This route defines the object family, reports recovered scope, and points toward
-              the contexts where experiment records will be inspected.
+              This page reports the Lab-wide register size and presents a smaller detailed
+              sample. The complete register remains in the Lab repository.
             </p>
           </article>
         </div>
@@ -112,24 +114,24 @@ export function InstitutionalExperimentsPage() {
 
       <section className={styles.scopeSection}>
         <div>
-          <p className={styles.sectionIndex}>CURRENT RECOVERED SCOPE</p>
-          <h2>The register already crosses multiple programs and lanes.</h2>
+          <p className={styles.sectionIndex}>CURRENT REGISTER</p>
+          <h2>The experiment register now spans dozens of tests across multiple research programs.</h2>
         </div>
         <div className={styles.scopeGrid}>
           <article>
-            <span>RECORDS</span>
+            <span>REGISTERED EXPERIMENTS</span>
+            <strong>{experimentProjection.registeredCount}</strong>
+            <p>{experimentProjection.completedCount} completed · {experimentProjection.plannedCount} planned · {experimentProjection.otherCount} other active states</p>
+          </article>
+          <article>
+            <span>DETAILED PUBLIC SAMPLE</span>
             <strong>{experimentRecords.length}</strong>
-            <p>{completedExperiments} completed · {plannedExperiments} planned or partially planned</p>
+            <p>{publicCompletedExperiments} completed · {publicPlannedExperiments} planned or partially planned</p>
           </article>
           <article>
-            <span>PROGRAMS</span>
-            <strong>{experimentPrograms.length}</strong>
-            <p>{experimentPrograms.join(" · ")}</p>
-          </article>
-          <article>
-            <span>LANES</span>
-            <strong>{experimentLanes.length}</strong>
-            <p>{experimentLanes.map(([id, label]) => `${id} · ${label}`).join(" · ")}</p>
+            <span>REGISTERED RESEARCH LANES</span>
+            <strong>{experimentProjection.registeredLaneCount}</strong>
+            <p>Current register entries resolve across {experimentProjection.registeredLaneCount} durable research-lane identities where ownership has been assigned.</p>
           </article>
         </div>
       </section>
@@ -138,8 +140,8 @@ export function InstitutionalExperimentsPage() {
         <InstitutionalSectionHeader
           styles={styles}
           eyebrow={<>LIVE LABS</>}
-          title={<>Two experiment surfaces can be entered directly.</>}
-          note={<>These are apparatus surfaces, not the global experiment catalog.</>}
+          title={<>Two interactive experiment surfaces can be entered directly.</>}
+          note={<>These are hands-on Lab tools, not a complete catalog of registered experiments.</>}
         />
 
         <div className={styles.liveLabsGrid}>
@@ -161,11 +163,12 @@ export function InstitutionalExperimentsPage() {
 
       <section className={styles.placementSection}>
         <div>
-          <p className={styles.sectionIndex}>NEXT PLACEMENT PASS</p>
-          <h2>Put experiment records where the research question lives.</h2>
+          <p className={styles.sectionIndex}>WHERE EXPERIMENTS BELONG</p>
+          <h2>Keep detailed experiment records beside the question they were designed to test.</h2>
           <p>
-            The next pass will attach filtered experiment lists to research lanes, products,
-            and projects rather than asking this global route to carry every record.
+            This page remains the Lab-wide orientation layer. Research, product, project, and
+            apparatus pages should carry the detailed experiments that directly support or
+            challenge their own claims.
           </p>
         </div>
         <nav aria-label="Experiment placement destinations">
