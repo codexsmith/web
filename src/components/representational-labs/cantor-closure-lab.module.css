@@ -1,0 +1,531 @@
+.controlPanel,
+.stagePanel {
+  min-width: 0;
+}
+
+.controlPanel h2,
+.stagePanel h2,
+.escapeHeader h3 {
+  margin: 0;
+}
+
+.controlPanel h2 {
+  max-width: 19ch;
+  margin-bottom: 1rem;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.05;
+}
+
+.regimeCard {
+  margin-top: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--rl-line);
+  border-left: 3px solid var(--rl-accent);
+  background: #080f14;
+}
+
+.regimeCard>span {
+  color: var(--rl-accent);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+}
+
+.regimeCard p {
+  margin: 0.25rem 0 0;
+  color: var(--rl-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.regimeCard[data-regime="width-forced"],
+.regimeCard[data-regime="obstructed"] {
+  border-left-color: var(--rl-warning);
+}
+
+.regimeCard[data-regime="width-forced"]>span,
+.regimeCard[data-regime="obstructed"]>span {
+  color: var(--rl-warning);
+}
+
+.transport {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.transport button,
+.modeControl button,
+.escapeMember,
+.admissionLane button {
+  min-height: 42px;
+  border: 1px solid var(--rl-line);
+  background: #0a1218;
+  color: var(--rl-text);
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  cursor: pointer;
+}
+
+.transport button:hover,
+.transport button:focus-visible,
+.modeControl button:hover,
+.modeControl button:focus-visible,
+.escapeMember:hover,
+.escapeMember:focus-visible,
+.admissionLane button:hover,
+.admissionLane button:focus-visible,
+.cell:focus-visible {
+  outline: 2px solid var(--rl-accent);
+  outline-offset: 2px;
+}
+
+.transport button:disabled,
+.admissionLane button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.transport .playButton {
+  border-color: var(--rl-accent);
+  background: var(--rl-accent);
+  color: #04110e;
+}
+
+.phaseRail {
+  margin-top: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--rl-line);
+  background: #070d12;
+}
+
+.phaseRail>div {
+  min-width: 0;
+  padding: 0.6rem;
+  display: grid;
+  gap: 0.15rem;
+  border-right: 1px solid var(--rl-line);
+  opacity: 0.42;
+}
+
+.phaseRail>div:last-child {
+  border-right: 0;
+}
+
+.phaseRail>div[data-active="true"] {
+  opacity: 1;
+  background: var(--rl-accent-soft);
+}
+
+.phaseRail span {
+  color: var(--rl-muted);
+  font-size: 0.6rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.phaseRail strong {
+  color: var(--rl-accent);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.modeControl {
+  margin: 1rem 0 0;
+  padding: 0.7rem;
+  border: 1px solid var(--rl-line);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.modeControl legend {
+  padding-inline: 0.3rem;
+  color: var(--rl-muted);
+  font-size: 0.64rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.modeControl button[data-active="true"] {
+  color: var(--rl-accent);
+  border-color: color-mix(in srgb, var(--rl-accent) 55%, var(--rl-line));
+  background: var(--rl-accent-soft);
+}
+
+.breakpointControl {
+  margin-top: 0.7rem;
+  padding: 0.7rem;
+  border: 1px solid var(--rl-line);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.breakpointControl input {
+  margin-top: 0.15rem;
+  accent-color: var(--rl-accent);
+}
+
+.breakpointControl span {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.breakpointControl strong {
+  color: var(--rl-text);
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+}
+
+.breakpointControl small {
+  color: var(--rl-muted);
+  line-height: 1.35;
+}
+
+.ruleCard {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rl-line);
+}
+
+.ruleCard p {
+  margin: 0;
+  color: var(--rl-muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.ruleCard dl {
+  margin: 0.8rem 0 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.ruleCard dl>div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--rl-line) 55%, transparent);
+}
+
+.ruleCard dt {
+  color: var(--rl-muted);
+}
+
+.ruleCard dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.ruleCard dd strong {
+  color: var(--rl-accent);
+}
+
+.stageHeader,
+.escapeHeader,
+.admissionLane {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.stageHeader {
+  margin-bottom: 0.9rem;
+}
+
+.stageHeader h2 {
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+}
+
+.liveIndicator {
+  flex: 0 0 auto;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--rl-line);
+  color: var(--rl-muted);
+  font-size: 0.64rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.liveIndicator[data-running="true"] {
+  color: var(--rl-accent);
+  border-color: color-mix(in srgb, var(--rl-accent) 55%, var(--rl-line));
+}
+
+.matrix {
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+}
+
+.matrixHeader,
+.matrixRow {
+  min-width: max-content;
+  display: grid;
+}
+
+.matrixHeader {
+  margin-bottom: 0.3rem;
+  color: var(--rl-muted);
+  font-size: 0.65rem;
+  text-align: center;
+}
+
+.rowLabel {
+  display: grid;
+  place-items: center start;
+  color: var(--rl-muted);
+  font-size: 0.7rem;
+  font-weight: 850;
+}
+
+.cell {
+  min-width: 3rem;
+  height: 3.15rem;
+  border: 1px solid var(--rl-line);
+  background: #081016;
+  color: var(--rl-text);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background: #111c23;
+}
+
+.cell[data-classic="true"] {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rl-accent) 20%, transparent);
+}
+
+.cell[data-selector="true"] {
+  color: var(--rl-accent);
+  border-color: color-mix(in srgb, var(--rl-accent) 58%, var(--rl-line));
+  background: var(--rl-accent-soft);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rl-accent) 30%, transparent);
+}
+
+.matrix[data-phase="scan"] .cell[data-selector="true"] {
+  animation: cantorPulse 1s ease-in-out infinite alternate;
+}
+
+.escapeZone {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--rl-defect) 45%, var(--rl-line));
+  background: color-mix(in srgb, var(--rl-defect) 4%, #070d12);
+  opacity: 0.18;
+  transform: translateY(0.25rem);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.escapeZone[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.escapeHeader h3 {
+  margin-top: 0.1rem;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+}
+
+.escapeHeader>span {
+  color: var(--rl-muted);
+  font-size: 0.7rem;
+}
+
+.escapeSentence {
+  margin: 0.55rem 0 0;
+  color: var(--rl-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.escapeFamily {
+  margin-top: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.escapeMember {
+  min-width: 0;
+  min-height: 64px;
+  padding: 0.55rem;
+  display: grid;
+  align-content: center;
+  gap: 0.15rem;
+  text-align: left;
+}
+
+.escapeMember code {
+  overflow-wrap: anywhere;
+  color: var(--rl-text);
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.escapeMember small {
+  color: var(--rl-muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+.escapeMember[data-certified="true"] {
+  border-left: 3px solid color-mix(in srgb, var(--rl-accent) 60%, var(--rl-line));
+}
+
+.escapeMember[data-canonical="true"] {
+  border-left: 3px solid var(--rl-accent);
+}
+
+.escapeMember[data-canonical="true"] small,
+.escapeMember[data-certified="true"] small {
+  color: var(--rl-accent);
+}
+
+.escapeMember[data-selected="true"] {
+  border-color: var(--rl-defect);
+  background: color-mix(in srgb, var(--rl-defect) 9%, #0a1218);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rl-defect) 28%, transparent);
+}
+
+.moreMembers {
+  min-height: 64px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--rl-line);
+  color: var(--rl-muted);
+  font-size: 0.75rem;
+}
+
+.growthNotice {
+  margin-top: 0.8rem;
+  padding: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--rl-warning) 55%, var(--rl-line));
+  background: color-mix(in srgb, var(--rl-warning) 7%, #0a1218);
+}
+
+.growthNotice strong {
+  color: var(--rl-warning);
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+}
+
+.growthNotice p {
+  margin: 0.3rem 0 0;
+  color: var(--rl-muted);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.admissionLane {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--rl-line);
+}
+
+.admissionLane>span {
+  color: var(--rl-muted);
+  font-size: 0.64rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.admissionLane code {
+  min-width: 0;
+  color: var(--rl-text);
+  font-size: 0.9rem;
+  font-weight: 850;
+  overflow-wrap: anywhere;
+}
+
+.admissionLane strong {
+  color: var(--rl-defect);
+  font-size: 0.66rem;
+  letter-spacing: 0.07em;
+}
+
+.admissionLane button {
+  color: #04110e;
+  border-color: var(--rl-accent);
+  background: var(--rl-accent);
+}
+
+.stageCaption {
+  margin: 0.8rem 0 0;
+  color: var(--rl-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+@keyframes cantorPulse {
+  from {
+    box-shadow: inset 0 0 0 0 color-mix(in srgb, var(--rl-accent) 0%, transparent);
+  }
+
+  to {
+    box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--rl-accent) 55%, transparent);
+  }
+}
+
+@media (max-width: 1120px) {
+  .escapeFamily {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .controlPanel h2 {
+    max-width: none;
+  }
+
+  .transport,
+  .phaseRail,
+  .modeControl {
+    max-width: 680px;
+  }
+
+  .escapeFamily {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+
+  .transport,
+  .modeControl,
+  .escapeFamily {
+    grid-template-columns: 1fr;
+  }
+
+  .stageHeader,
+  .escapeHeader,
+  .admissionLane {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admissionLane button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .matrix[data-phase="scan"] .cell[data-selector="true"] {
+    animation: none;
+  }
+
+  .escapeZone {
+    transition: none;
+  }
+}
