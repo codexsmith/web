@@ -4,7 +4,7 @@ import { AgenticScientificMethodExperience } from "@/components/institutional/pr
 export const metadata: Metadata = {
   title: "Agentic Scientific Method · Boundary First Labs",
   description:
-    "An operational research protocol for making goals, boundaries, state spaces, action selection, evidence, criticism, repair, authority, and closure explicit.",
+    "A structured research method for making questions, tests, evidence, criticism, revision, human responsibility, and durable research memory explicit.",
   alternates: { canonical: "/products/agentic-scientific-method" },
 };
 
