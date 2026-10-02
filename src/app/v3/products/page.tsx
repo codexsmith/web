@@ -3,7 +3,7 @@ import { InstitutionalProductsPage } from "@/components/institutional/Institutio
 
 export const metadata: Metadata = {
   title: "Products · Boundary First Labs",
-  description: "Products and product-shaped work being developed at Boundary First Labs.",
+  description: "Books, software, research tools, engineering methods, and public testbeds from Boundary First Labs, with current state and unproven claims kept visible.",
   alternates: { canonical: "/products" },
 };
 
