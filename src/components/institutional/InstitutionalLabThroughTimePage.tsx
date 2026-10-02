@@ -23,26 +23,27 @@ export function InstitutionalLabThroughTimePage() {
         styles={styles}
         className={styles.timelineHero}
         eyebrow={<>LAB THROUGH TIME</>}
-        title={<>The Lab has a history.</>}
+        title={<>How did Boundary First Labs get here?</>}
         lead={
           <>
-            A long-horizon, source-bound timeline of consequential milestones in the work
-            that became Boundary First Labs.
+            A selective history of the experiments, software practice, independent research,
+            and institution-building that eventually became Boundary First Labs.
           </>
         }
         support={
           <>
-            Five milestones mark the route from early experimental work to the current
-            institution. The point is continuity, not completeness.
+            This public view contains five reviewed turning points from the Lab&apos;s canonical
+            timeline. They show continuity across the work without pretending to be a complete
+            biography or a complete history of every project.
           </>
         }
         childLinks={institutionalChildRoutes.labThroughTime}
       >
         <details className={styles.timelineProjectionPanel}>
           <summary>
-            <span>PUBLIC TIMELINE PROJECTION</span>
-            <strong>{labTimelineEvents.length} reviewed durable events in the current seed</strong>
-            <small>Inspect authority and source state</small>
+            <span>TIMELINE SOURCE DETAILS</span>
+            <strong>{labTimelineEvents.length} reviewed turning points in this public view</strong>
+            <small>Inspect source and review status</small>
           </summary>
           <div className={styles.timelineProjectionDetails}>
             <dl>
@@ -51,11 +52,11 @@ export function InstitutionalLabThroughTimePage() {
                 <dd>{publicStateProjection.labRevision.slice(0, 12)}</dd>
               </div>
               <div>
-                <dt>TIMELINE STATE</dt>
+                <dt>SOURCE STATUS</dt>
                 <dd>{publicStateProjection.timeline.registerStatus}</dd>
               </div>
               <div>
-                <dt>PROJECTION MODE</dt>
+                <dt>WEB VIEW STATUS</dt>
                 <dd>{publicStateProjection.projectionStatus}</dd>
               </div>
             </dl>
@@ -91,10 +92,10 @@ export function InstitutionalLabThroughTimePage() {
 
         <article>
           <span>NOW</span>
-          <strong>One founder can operate a wider surface.</strong>
+          <strong>One founder can operate a much wider research surface.</strong>
           <p>
-            The leverage becomes a computational micro-lab with explicit machinery, not
-            simulated organizational headcount.
+            AI and automation make it practical to search, compare, test, document, and
+            maintain more of the Lab&apos;s work without pretending that software is a staff.
           </p>
         </article>
       </section>
@@ -111,21 +112,23 @@ export function InstitutionalLabThroughTimePage() {
 
         <div>
           <span>HUMAN AUTHORITY</span>
-          <strong>The founder retains the decision boundary.</strong>
+          <strong>The founder remains responsible for consequential decisions.</strong>
           <p>
-            The founder still decides what the Lab believes, promotes, publishes, promises,
-            funds, represents externally, or treats as an institutional commitment.
+            AI and automation can perform substantial work, but the founder still decides
+            what the Lab adopts, publishes, promises, funds, represents externally, or treats
+            as an institutional commitment.
           </p>
         </div>
       </section>
 
       <section className={styles.timelineBoundary}>
-        <span>LONG-HORIZON RULE</span>
-        <strong>Milestones, not a long changelog.</strong>
+        <span>WHAT BELONGS ON THIS TIMELINE?</span>
+        <strong>Turning points, not every event.</strong>
         <p>
-          Timeline membership means the Lab has admitted a durable temporal witness with
-          source provenance. It does not turn chronology into causation, or a historical
-          milestone into scientific validation, product readiness, or external recognition.
+          A milestone appears here only after the Lab has reviewed it as part of its durable
+          institutional history. Inclusion records that the event matters to the history; it
+          does not prove that the event caused later work, validate a scientific claim, or
+          establish product success or outside recognition.
         </p>
       </section>
 
@@ -161,8 +164,8 @@ export function InstitutionalLabThroughTimePage() {
 
       <section className={styles.accelerationSection}>
         <div className={styles.accelerationLead}>
-          <p className={styles.sectionIndex}>THE ACCELERATION BOUNDARY</p>
-          <h2>Commercial AI changed the throughput, not the starting point.</h2>
+          <p className={styles.sectionIndex}>WHAT AI CHANGED</p>
+          <h2>AI changed the speed and scale of the work, not where it came from.</h2>
           <p>
             The chronology is the point. The room-scale research period and much of the
             underlying corpus predate the current AI-accelerated Lab. Commercial AI changed the
@@ -183,16 +186,16 @@ export function InstitutionalLabThroughTimePage() {
 
           <article>
             <span>02 · PROFESSIONAL PRACTICE</span>
-            <strong>Software made representation mechanically consequential.</strong>
+            <strong>Software made models consequential in practice.</strong>
             <p>
-              Production systems made state, ownership, failure, and repair practical
-              engineering concerns rather than abstract vocabulary.
+              Production systems made incomplete requirements, hidden state, ownership,
+              failure, and repair practical engineering problems rather than abstract ideas.
             </p>
           </article>
 
           <article>
             <span>03 · COMMERCIAL AI ARRIVES</span>
-            <strong>A prepared operator met a new class of leverage.</strong>
+            <strong>Existing skills met a new class of leverage.</strong>
             <p>
               Language models made comparison, translation, drafting, coding, and
               orchestration cheap enough to become routine laboratory operations.
@@ -223,12 +226,12 @@ export function InstitutionalLabThroughTimePage() {
 
       <section className={styles.timelineClose}>
         <p className={styles.sectionIndex}>THREE TIME SCALES</p>
-        <h2>Recent motion. Present posture. Long memory.</h2>
+        <h2>Recent changes. Current priorities. Long-term history.</h2>
         <p>
-          <strong>What Changed</strong> records consequential recent transitions.{" "}
-          <strong>Now</strong> projects current priorities and closure conditions.{" "}
-          <strong>Lab Through Time</strong> preserves the longer provenance spine that
-          explains how the current institution accumulated.
+          <strong>What Changed</strong> records the latest material changes.{" "}
+          <strong>Now</strong> shows what the Lab is prioritizing and what would count as
+          progress. <strong>Lab Through Time</strong> preserves the longer history that
+          explains how the current institution developed.
         </p>
         <nav aria-label="Temporal views">
           <Link href="/changes">What Changed <span aria-hidden="true">→</span></Link>

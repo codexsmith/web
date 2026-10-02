@@ -1,13 +1,13 @@
 {
   "schemaVersion": "0.1",
-  "projectionStatus": "initial_manual_seed",
-  "generatedDate": "2026-09-21",
-  "labRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f",
-  "webBaseRevision": "841953e5f33bb6e27d2a503d162a365604dc33ff",
-  "authority": "Initial public temporal-state seed. The Lab repository remains source authority; this web payload is a bounded downstream projection and does not promote scientific, product, publication, or institutional status.",
+  "projectionStatus": "reviewed_manual_projection",
+  "generatedDate": "2026-10-02",
+  "labRevision": "b543145845450821cefe0c401c73d814a01d81c0",
+  "webBaseRevision": "585776d8bc8e7bf82232ca14fba28b28131e7a18",
+  "authority": "This public history is a reviewed web projection of the Lab's canonical Timeline Register and selected provenance material. The Lab repository remains the source of record. Inclusion on this page records historical significance; it does not by itself establish scientific validity, causal priority, product readiness, or outside recognition.",
   "automation": {
-    "status": "not_yet_wired",
-    "note": "This seed establishes the web-side contract that future Lab-to-web projection automation will replace without changing the rendering boundary."
+    "status": "manual_review_required",
+    "note": "Timeline admission remains human-reviewed. The website may refresh from canonical Lab state, but it does not automatically create or admit historical milestones."
   },
   "temporalViews": [
     {
@@ -39,15 +39,15 @@
     "registerId": "BFL-TIMELINE",
     "registerStatus": "active_seed",
     "authorityStatus": "canonical_lab_timeline_projection",
-    "authorityCeiling": "Durable temporal identity, cross-source historical/state-transition projection, routing, and institutional memory only. Timeline membership does not establish event truth, causal truth, scientific validity, publication promotion, product readiness, or execution authority.",
+    "authorityCeiling": "The Timeline Register preserves reviewed institutional history and durable event identity. Being included means an event matters to the Lab's history; it does not prove causation, scientific correctness, product success, or future fulfillment.",
     "events": [
       {
         "id": "EVENT-TIMELINE-001",
         "sourceEventId": "EVT-MASTER-001",
         "period": "2006–2007",
         "category": "Provenance",
-        "title": "Magnus effect soccer-ball experiment",
-        "summary": "An early research-formation event admitted into the current canonical Timeline seed.",
+        "title": "Early physics experiment: why a soccer ball curves",
+        "summary": "An early research project turned curiosity about a curving soccer ball into a concrete Magnus-effect experiment.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
         "affectedSystems": [
@@ -60,8 +60,8 @@
         "sourceEventId": "EVT-MASTER-009",
         "period": "2014",
         "category": "Method",
-        "title": "Process-first software design artifacts",
-        "summary": "Documented software-design artifacts enter the current representational-method lineage.",
+        "title": "Software design becomes process-first",
+        "summary": "Documented software-design work began treating workflow and system representation as things to design explicitly, not just implementation details.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
         "affectedSystems": [
@@ -75,8 +75,8 @@
         "sourceEventId": "EVT-MASTER-013",
         "period": "Apr–May 2018",
         "category": "Method",
-        "title": "Agile becomes explicit delivery architecture",
-        "summary": "The provenance record marks a period where Agile practice became an explicit delivery architecture in the founder-method lineage.",
+        "title": "Agile becomes an explicit delivery method",
+        "summary": "Software consulting and delivery experience developed into a more deliberate method for sequencing work, feedback, inspection, and completion.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
         "affectedSystems": [
@@ -90,8 +90,8 @@
         "sourceEventId": "EVT-MASTER-019",
         "period": "2019–2021",
         "category": "Institution",
-        "title": "Private research room",
-        "summary": "A documented period of independent research infrastructure before the current public institutional surface.",
+        "title": "Independent research grows into a room-scale workbench",
+        "summary": "By roughly 2019–2021, independent research had a dedicated physical environment of notes, books, whiteboards, diagrams, and active research surfaces.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
         "affectedSystems": [
@@ -104,8 +104,8 @@
         "sourceEventId": "EVT-MASTER-030",
         "period": "2026",
         "category": "Institution",
-        "title": "Boundary First Labs institutionalizes accumulated experiments",
-        "summary": "The current Timeline seed marks the transition from accumulated work into Boundary First Labs as an explicit institutional research surface.",
+        "title": "Boundary First Labs becomes an explicit institution",
+        "summary": "In 2026, accumulated research, software, experiments, methods, and product work were organized under Boundary First Labs as a public institution.",
         "temporalStatus": "historical_observed",
         "epistemicStatus": "reported",
         "affectedSystems": [
@@ -118,9 +118,9 @@
   },
   "provenanceGallery": {
     "sourceRepository": "codexsmith/boundary-first-labs",
-    "sourceRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f",
-    "publicClaim": "A substantial pre-AI room-scale research environment existed.",
-    "claimCeiling": "The media establishes scale, organization, and chronology of work. It does not establish correctness, priority, or maturity of every mathematical claim.",
+    "sourceRevision": "b543145845450821cefe0c401c73d814a01d81c0",
+    "publicClaim": "A substantial room-scale independent research environment existed before the current AI-accelerated Lab.",
+    "claimCeiling": "The preserved media establishes the scale and organization of that research environment. It does not establish the correctness, originality, or maturity of every mathematical or scientific claim visible in it.",
     "artifacts": [
       {
         "id": "ARTIFACT-PROV-ROOM-SURVEY",

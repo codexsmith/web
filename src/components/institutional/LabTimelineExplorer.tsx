@@ -13,15 +13,15 @@ const eventNarratives: Record<string, { before: string; after: string }> = {
   },
   "EVENT-TIMELINE-002": {
     before:
-      "Software delivery existed, but process and state were not yet represented as explicit method objects in the admitted lineage.",
+      "Software delivery was already part of the work, but the process itself was not yet being treated as something to design explicitly.",
     after:
-      "Documented process-first design artifacts made workflow, representation, and system behavior things to design directly rather than leave implicit in code.",
+      "Documented process-first design artifacts made workflow, system behavior, and the model behind the software things to design directly rather than leave implicit in code.",
   },
   "EVENT-TIMELINE-003": {
     before:
       "Agile was part of practical software delivery and consulting work.",
     after:
-      "It became an explicit delivery architecture for sequencing work, feedback, inspection, and closure in the founder's method lineage.",
+      "It became a more explicit way to sequence work, feedback, inspection, and completion across software delivery and consulting.",
   },
   "EVENT-TIMELINE-004": {
     before:
@@ -33,7 +33,7 @@ const eventNarratives: Record<string, { before: string; after: string }> = {
     before:
       "Research, software, experiments, methods, and product ideas existed as accumulated founder work across projects and repositories.",
     after:
-      "Boundary First Labs gave that body of work an explicit institutional identity with durable research lanes, registries, operating machinery, products, publications, and a public accountability surface.",
+      "Boundary First Labs gave that accumulated work an institutional identity, with durable research programs, records, tools, products, publications, and a public surface that other people can inspect."
   },
 };
 
