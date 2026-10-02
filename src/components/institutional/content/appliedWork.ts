@@ -3,13 +3,13 @@ export const appliedWorkFamilies = [
     code: "01",
     title: "Systems / Architecture Review",
     description:
-      "For consequential systems that are difficult to understand, modernize, integrate, migrate, or repair because the structure itself has become part of the problem.",
+      "For consequential systems that are difficult to understand, modernize, integrate, migrate, or repair because their operative model is distributed across code, data, interfaces, workflow, permissions, and institutional memory.",
     tone: "software",
     offers: [
       {
         title: "System / architecture reconstruction",
         description:
-          "Map state, interfaces, dependencies, ownership, boundaries, invariants, and failure paths so the system can be reasoned about before changes are proposed.",
+          "Reconstruct the minimum continuation-sufficient model: state, interfaces, dependencies, authority, boundaries, invariants, projections, and failure paths required for the bounded change.",
       },
       {
         title: "Modernization / migration review",
@@ -19,7 +19,7 @@ export const appliedWorkFamilies = [
       {
         title: "Bounded implementation / pilot",
         description:
-          "Turn one selected repair into an inspectable prototype or pilot with explicit assumptions, acceptance conditions, and handoff state.",
+          "Turn one selected repair into an executable model, prototype, or pilot with explicit assumptions, authority, witness conditions, failure paths, and handoff state.",
       },
     ],
   },
@@ -105,8 +105,8 @@ export const appliedWorkOutputs = [
 ] as const;
 
 export const appliedWorkProcess = [
-  ["Bring a real problem", "Start with the system, decision, failure, or opportunity—not a request for a fashionable methodology."],
-  ["Inspect what exists", "Review the software, workflow, documents, data, people, constraints, and prior attempts that already shape the problem."],
+  ["Bring a real problem", "Start with the system, decision, failure, or opportunity—not a request for a fashionable methodology or predetermined implementation mechanism."],
+  ["Inspect what exists", "Review the software, workflow, documents, data, people, constraints, authority, prior attempts, and the representations through which the system currently knows itself."],
   ["Bound the engagement", "Respect actual capacity and agree on the smallest coherent review, workshop, prototype, pilot, or advisory scope that can finish, produce evidence, and change the next decision."],
   ["Make the work inspectable", "Deliver maps, artifacts, findings, code, decisions, or evidence that someone other than the consultant can examine."],
   ["Inspect and adapt", "Treat the result as new system state: repair, build, continue, transfer, pause, or stop based on what the engagement actually revealed."],

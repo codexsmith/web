@@ -21,18 +21,19 @@ export function InstitutionalResearchPage() {
           styles={styles}
           className={styles.researchHero}
           eyebrow={<>RESEARCH</>}
-          title={<>Research as inspectable machinery.</>}
-          lead={<>Boundary First Labs develops theories, experiments, computational models,
-              formal artifacts, and working systems.</>}
-          support={<>Research stays inspectable from question through handoff: evidence,
-              search, representation, defect, and repair remain visible. The machinery
-              supports scientific work; it does not substitute for validation.</>}
+          title={<>Research as executable, inspectable representation.</>}
+          lead={<>Boundary First Labs develops theories, experiments, scientific models,
+              formal artifacts, software, and working systems.</>}
+          support={<>The Lab treats scientific modeling as a representation problem before it
+              becomes a calculation problem: state, transformations, invariants, projections,
+              evidence, authority, and repair should remain explicit enough to inspect. Execution
+              can test a representation; it does not substitute for domain-native validation.</>}
           childLinks={institutionalChildRoutes.research}
           >
           <blockquote className={styles.researchQuestion}>
             <span>GOVERNING QUESTION</span>
-            Can the machinery used to reason about complex systems itself be made more
-            explicit, testable, comparable, and operational?
+            Can a scientific or engineered model be made explicit enough to execute, test,
+            compare, criticize, and repair without erasing the native standards of the domain?
           </blockquote>
         </InstitutionalRouteHero>
 

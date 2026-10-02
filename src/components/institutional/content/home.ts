@@ -1,43 +1,43 @@
 import { publicContactMailto } from "@/lib/site-contact";
 
 export const capabilityStrip = [
-  ["01", "Research & experiments"],
-  ["02", "Tools & working systems"],
-  ["03", "Analysis for public systems"],
-  ["04", "Measurement & verification"],
+  ["01", "Scientific software modeling"],
+  ["02", "Research & experiments"],
+  ["03", "Products & working systems"],
+  ["04", "Measurement, verification & transfer"],
 ] as const;
 
 export const methodSteps = [
-  ["01", "Show the structure", "Representation", "Make the important parts, relationships, and boundaries visible."],
-  ["02", "Track what changes", "State", "Know where the system is now, what can change, and what must remain true."],
-  ["03", "Follow the change", "Transform", "See how one valid condition becomes another, and what rules govern the move."],
-  ["04", "Find where it fails", "Defect", "Expose breakdowns, missing cases, and places where the model or system stops working."],
+  ["01", "Bound the obligation", "Domain", "Name the real system, bounded change, and consequence the model must preserve."],
+  ["02", "Represent lawful continuation", "State", "Retain the distinctions, invariants, and boundary contracts required for the next valid move."],
+  ["03", "Execute under authority", "Transform", "Run a bounded transition while keeping authority, provenance, projection, and observation visible."],
+  ["04", "Let consequence answer", "Witness + repair", "Use evidence and affected state to criticize the model, localize defects, repair it, and transfer what survives."],
 ] as const;
 
 export const featuredWork = [
+  {
+    tag: "METHOD + ENGINEERING DOCTRINE",
+    title: "Software Before Code",
+    description: "A scientific software-modeling doctrine for constructing executable models that remain adequate under real-world consequence.",
+    href: "/software-before-code",
+  },
+  {
+    tag: "ACTIVE-BUILD PRODUCT FAMILY",
+    title: "Projectr",
+    description: "Public knowledge infrastructure for durable, source-linked knowledge; YouTube Knowledge Explorer is the current bounded implementation.",
+    href: "/products/pipeline/projectr",
+  },
+  {
+    tag: "RESEARCH INFRASTRUCTURE",
+    title: "Corpus Forge",
+    description: "Executable scientific and research-operations machinery for bounded work, evidence, criticism, verification, repair, and promotion.",
+    href: "/products/current/corpus-forge",
+  },
   {
     tag: "RESEARCH PRODUCT",
     title: "Boundary-First Chess",
     description: "A book-length teaching asset and developed pedagogy for making structural change on the board more legible.",
     href: "/products/boundary-first-chess",
-  },
-  {
-    tag: "ACTIVE-BUILD WEDGE",
-    title: "YouTube Knowledge Explorer",
-    description: "A source-linked software tool for turning long-form video into searchable, timestamped, structured knowledge.",
-    href: "/products/youtube-knowledge-explorer",
-  },
-  {
-    tag: "RESEARCH PRODUCT",
-    title: "Agentic Scientific Method",
-    description: "An operational inquiry protocol for research, evidence, criticism, defect localization, repair, authority, and closure.",
-    href: "/products/agentic-scientific-method",
-  },
-  {
-    tag: "RESEARCH TESTBED",
-    title: "Boundary First Weather",
-    description: "A pilot-ready computational testbed for boundary-aware diagnostics, forecast disagreement, and selective refinement.",
-    href: "/products/boundary-first-weather",
   },
 ] as const;
 
@@ -46,7 +46,7 @@ export const homeAppliedWorkFeature = {
   eyebrow: "CONSULTING / APPLIED WORK",
   title: "Bring one system that is expensive to misunderstand.",
   summary:
-    "Three bounded entry points for systems architecture, agency and AI governance, and knowledge / representation infrastructure.",
+    "Three bounded entry points grounded in scientific software modeling: systems architecture, agency / AI governance, and knowledge / representation infrastructure.",
   offers: [
     {
       code: "01",
@@ -75,9 +75,9 @@ export const homeAppliedWorkFeature = {
 
 export const homeNowSnapshot = {
   eyebrow: "NOW / ROADMAP",
-  status: "SEPTEMBER 2026 · CURRENT CYCLE",
-  title: "Externalize, test, and close the obvious gaps.",
-  thesis: "Externalize → test → repair → repeat → transfer.",
+  status: "OCTOBER 2026 · CURRENT CYCLE",
+  title: "Externalize the clarified doctrine, test it, and close the obvious gaps.",
+  thesis: "Observe → bound → represent → execute → witness → criticize → repair → transfer.",
   href: "/now",
   lanes: [
     "Public institutional interface",
@@ -166,7 +166,7 @@ export const practiceLineage = [
   {
     label: "Boundary First",
     description:
-      "Synthesizes those practices through state-based and dynamical-systems reasoning: make state explicit, track lawful change, preserve consequential boundaries, localize defect, repair representations, and leave enough state for the next handoff.",
+      "Synthesizes those practices through scientific software modeling and executable representation: make consequential state explicit, track lawful change, preserve authority and provenance, localize defect, repair representations, and leave enough state for the next handoff.",
   },
 ] as const;
 

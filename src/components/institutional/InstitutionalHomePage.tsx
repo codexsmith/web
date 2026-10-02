@@ -25,10 +25,10 @@ export function InstitutionalHomePage() {
             <p className={styles.eyebrow}>Practice-born. Research-backed. Formally generalized.</p>
             <h1>Systematizing knowledge for science, engineering, and public reasoning.</h1>
             <p className={styles.lead}>
-              Boundary First Labs is an applied systems research laboratory studying how complex systems are represented, transformed, tested, and improved.
+              Boundary First Labs is an applied systems research laboratory studying scientific software modeling: how representations become executable, testable, and consequential.
             </p>
             <p className={styles.bodyCopy}>
-              We build research, methods, products, and operational tools for making systems and their consequences more legible, reasoning more inspectable, and useful capability easier to transfer.
+              Software Before Code is the center doctrine. Boundary-First Engineering turns it into practice; the Lab&apos;s research, products, and institutional machinery test how state, transition, invariants, authority, evidence, and repair survive real execution.
             </p>
             <div className={styles.heroActions}>
               <Link className={styles.primaryAction} href="/applied-work">

@@ -17,10 +17,12 @@ export function InstitutionalAboutPage() {
           eyebrow={<>ABOUT BOUNDARY FIRST LABS</>}
           title={
             <>
-              A software engineer spent fifteen years studying mathematics and physics.
-              Boundary First Labs grew out of the convergence.
+              A practice-born lab for scientific software modeling, executable representation,
+              and consequential systems.
             </>
           }
+          lead={<>Software Before Code is the center doctrine. Boundary-First Engineering is the practice used to construct, execute, test, and repair bounded models of real systems.</>}
+          support={<>The work grew from software delivery and consulting, then expanded through mathematics, physics, scientific method, formal grammars, and agentic computation. The recurring question is what a representation must preserve for the next lawful transformation to remain adequate under consequence.</>}
           childLinks={institutionalChildRoutes.about}
           >
           <blockquote className={styles.aboutAgencyQuestion}>
