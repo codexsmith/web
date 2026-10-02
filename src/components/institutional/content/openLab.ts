@@ -6,9 +6,9 @@ export const openLabSourceProjection = {
     "These source documents guide public participation design. They do not by themselves authorize new data collection, promise response capacity, or permit sensitive-material intake.",
   pageProjection: {
     path: "organized_library_curated/06_Website_Content/0602_Public_Projection/open_lab_participation_v3_v0_1.md",
-    lifecycle: "publicly implemented with further structured-intake work pending",
-    institutionalStage: "live email-first participation boundary",
-    humanReviewed: true,
+    lifecycle: "candidate",
+    institutionalStage: "design / backlog",
+    humanReviewed: false,
   },
   privacyProtocol: {
     path: "organized_library_curated/999_Library/03_Domains/00_socio_technical_systems__cross_domain_program/08_bfl_participation_protocol__socio_technical_system/03_PRIVACY_DIGITAL_RIGHTS_AND_DISCLOSURE.md",
