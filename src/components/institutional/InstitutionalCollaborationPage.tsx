@@ -11,13 +11,10 @@ import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   collaborationBoundaries,
   collaborationExchange,
-  collaborationLanes,
   collaborationModes,
   collaborationOutcomes,
   collaborationProcess,
   collaborationRoles,
-  collaborationStageLabels,
-  collaborationStageLegend,
 } from "./content/collaboration";
 
 const styles = composeCssModules(foundationStyles, routeSharedStyles, routeStyles);
