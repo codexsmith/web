@@ -14,13 +14,61 @@ export type PublicChange = {
 
 export const changesProjection = {
   generatedDate: "2026-10-02",
-  webRevision: "d2cc509bfa2583e0ae9648905bbbf59258f1e23c",
+  webRevision: "1d90fd2fa62c0313ef83be313f71ebd3e2ec5a9d",
   labRevision: "b543145845450821cefe0c401c73d814a01d81c0",
   authority:
-    "This is a curated public delta archive over canonical repository state. It reports selected material changes and backfilled milestones; it is not a complete commit log, activity feed, or claim-promotion surface.",
+    "This is a curated public record of meaningful changes in the Lab and website. It highlights durable changes and selected earlier milestones; it is not a complete commit log or activity feed.",
 } as const;
 
 export const recentChanges: readonly PublicChange[] = [
+  {
+    id: "chg-public-doctrine-language-reconciliation",
+    date: "2026-10-02",
+    scope: "Public interface",
+    title: "The public website was brought into line with the Lab's current doctrine.",
+    summary:
+      "The institutional site now presents scientific software modeling as the central framing, Software Before Code as the engineering doctrine, and Boundary-First Engineering as the practice. Deeper routes were also rewritten so first-time readers encounter plain English before internal machinery vocabulary.",
+    consequence:
+      "The public site now better matches the Lab's current state and is easier to understand without a founder walkthrough, while technical detail remains available for readers who want to inspect it.",
+    sourceRepository: "codexsmith/web",
+    sourceRevision: "1d90fd2fa62c0313ef83be313f71ebd3e2ec5a9d",
+    sourceLabel: "Production-ready doctrine and public-language reconciliation",
+    sourceHref:
+      "https://github.com/codexsmith/web/commit/1d90fd2fa62c0313ef83be313f71ebd3e2ec5a9d",
+    surfaceHref: "/",
+  },
+  {
+    id: "chg-post-critical-mass-execution-frontier",
+    date: "2026-10-01",
+    scope: "Institution",
+    title: "The Lab's internal priority shifted from adding components to closing complete loops.",
+    summary:
+      "The post-critical-mass execution frontier names the current institutional task: connect existing research records, Corpus Forge, verification tools, Observatory machinery, publication surfaces, and local execution into complete research and operating loops.",
+    consequence:
+      "The next test is whether the Lab can reconstruct its own priorities from durable state, carry at least one real research object end to end, and use the result to update the institution rather than merely describe it.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "d585f7372e8de9e6ba2818a4c7b937092eae4f89",
+    sourceLabel: "Capture post-critical-mass execution frontier",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/d585f7372e8de9e6ba2818a4c7b937092eae4f89",
+    surfaceHref: "/now",
+  },
+  {
+    id: "chg-dependency-aware-evidence-composition",
+    date: "2026-10-01",
+    scope: "Research",
+    title: "The Lab added an executable check against double-counting dependent evidence.",
+    summary:
+      "Observatory Run 021 preserves independent, duplicate, conditionally dependent, and unknown evidence relationships during information updates. Duplicate reuse contributes no new information, and missing dependency state fails closed rather than being treated as independent by default.",
+    consequence:
+      "In the bounded experiment, treating dependent evidence as independent could change a downstream governance choice. The result strengthens the rule that more evidence records do not necessarily mean more independent support, while remaining a finite experiment rather than a universal statistical theory.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "0816d56d68a60da18efcf4b9d21b6ed09727c88e",
+    sourceLabel: "Observatory Run 021: dependency-aware corroboration information composition",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/0816d56d68a60da18efcf4b9d21b6ed09727c88e",
+    surfaceHref: "/research",
+  },
   {
     id: "chg-authority-provenance-consequence-grammar",
     date: "2026-10-01",
