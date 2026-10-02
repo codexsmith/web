@@ -19,17 +19,17 @@ export function InstitutionalProjectsPage() {
           styles={styles}
           className={styles.projectsHero}
           eyebrow={<>PROJECTS</>}
-          title={<>Theory should travel.</>}
-          lead={<>A method becomes more interesting when it survives outside the environment
-              in which it was developed.</>}
-          support={<>Projects put ideas, representations, instruments, and workflows under
-              different kinds of pressure in bounded real systems.</>}
+          title={<>Show the work in a real system.</>}
+          lead={<>Projects are where Boundary First Labs puts research, software, methods,
+              and public-interest questions into contact with concrete domains.</>}
+          support={<>Each project should make four things visible: what problem is being
+              worked on, what actually exists, what the work has shown so far, and what still
+              needs to be tested.</>}
           childLinks={institutionalChildRoutes.projects}
           >
           <blockquote className={styles.projectHeroQuestion}>
             <span>PROJECT QUESTION</span>
-            What happened — or what are we preparing to test — when the Lab&apos;s
-            machinery encountered an actual bounded system?
+            What did the Lab build, test, learn, or discover when this work met a real domain?
           </blockquote>
         </InstitutionalRouteHero>
 
@@ -37,8 +37,8 @@ export function InstitutionalProjectsPage() {
           <InstitutionalSectionHeader
             styles={styles}
             eyebrow={<>FEATURED PROJECTS</>}
-            title={<>Five different places for the machinery to succeed, bend, or fail.</>}
-            note={<>Status comes from the source object. These projects do not share one lifecycle.</>}
+            title={<>Five projects at different stages of use, testing, and research.</>}
+            note={<>The projects do not share one lifecycle. Each card preserves its own current status and evidence limits.</>}
             />
 
           <div className={styles.projectCaseGrid}>
@@ -57,15 +57,15 @@ export function InstitutionalProjectsPage() {
         <ProjectContextSection />
 
         <section className={styles.projectsClose}>
-          <p className={styles.sectionIndex}>CLOSING TEST</p>
+          <p className={styles.sectionIndex}>WHY PROJECTS MATTER</p>
           <h2>
-            Research becomes more credible when it has somewhere to fail.
+            A method becomes more credible when reality can disagree with it.
           </h2>
           <p>
-            Sometimes the machinery becomes a paper, product, benchmark, or better
-            instrument. Sometimes the domain forces a repair. Sometimes established
-            practice wins. All of those outcomes are useful when evidence, status, and
-            consequence remain visible.
+            Sometimes a project becomes a product, paper, benchmark, tool, or better method.
+            Sometimes the domain exposes a bad assumption or shows that established practice
+            already works better. Those are all useful outcomes when the evidence and limits
+            remain visible.
           </p>
         </section>
       </InstitutionalPageShell>
