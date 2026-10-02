@@ -1,12 +1,12 @@
 export const youtubeKnowledgeExplorerProduct = {
-  family: "KNOWLEDGE NAVIGATION / CONSUMER SOFTWARE",
-  name: "YouTube Knowledge Explorer",
-  tagline: "Turn a long video into navigable knowledge.",
+  family: "KNOWLEDGE EXPLORATION SOFTWARE",
+  name: "Projectr",
+  tagline: "Turn long-form sources into knowledge you can navigate and keep.",
   lead:
-    "Start with the source. Preserve timestamps. Search evidence, inspect concepts, and ask questions whose claims stay bound to the transcript.",
-  status: "ACTIVE BUILD · PORTABLE MVP",
+    "Projectr is a durable knowledge-exploration product. YouTube Knowledge Explorer is its current working implementation: preserve the source, keep timestamps, search evidence, follow concepts, and ask questions that point back to the original material.",
+  status: "ACTIVE BUILD · WORKING MVP CORE",
   statusNote:
-    "A working portable core exists for source parsing, transcripts, outlines, search, evidence-bound answers, persistence, and interchange. Repeated use, retention, pricing, and product-market fit remain unestablished.",
+    "The current YouTube implementation has a working core for source parsing, transcripts, outlines, search, evidence-linked answers, persistence, and interchange. Repeated use, retention, pricing, and product-market fit remain unestablished.",
   theme: "explorer",
 } as const;
 
@@ -14,7 +14,7 @@ export const youtubeKnowledgeExplorerNav = [
   { href: "#source", label: "Source" },
   { href: "#workspace", label: "Workspace" },
   { href: "#answers", label: "Evidence answers" },
-  { href: "#portable", label: "Portable core" },
+  { href: "#portable", label: "How it is built" },
   { href: "#evidence", label: "Product state" },
 ] as const;
 
@@ -22,7 +22,7 @@ export const explorerModes = [
   {
     id: "outline",
     label: "Outline",
-    kicker: "KNOWLEDGE MAP",
+    kicker: "SOURCE OUTLINE",
     title: "Turn time into structure.",
     description:
       "A deterministic outline groups timestamped transcript segments into navigable sections without requiring a language model.",
@@ -31,7 +31,7 @@ export const explorerModes = [
   {
     id: "search",
     label: "Search",
-    kicker: "EVIDENCE RETRIEVAL",
+    kicker: "SOURCE SEARCH",
     title: "Search the source, not a detached summary.",
     description:
       "Text and concept search return matching transcript segments with timestamps and a direct path back to the original video.",
@@ -40,7 +40,7 @@ export const explorerModes = [
   {
     id: "concepts",
     label: "Concepts",
-    kicker: "ENRICHMENT LAYER",
+    kicker: "RECURRING IDEAS",
     title: "See recurring ideas without losing provenance.",
     description:
       "Concepts are portable enrichment objects linked to the transcript segments and outline topics that support them.",
@@ -49,7 +49,7 @@ export const explorerModes = [
   {
     id: "ask",
     label: "Ask",
-    kicker: "EVIDENCE-BOUND ANSWER",
+    kicker: "SOURCE-LINKED ANSWER",
     title: "Let synthesis point back to evidence.",
     description:
       "An answer is a set of claims plus evidence segment IDs—not a free-floating chat string. Unsupported evidence references are rejected.",
@@ -58,7 +58,7 @@ export const explorerModes = [
   {
     id: "trace",
     label: "Trace",
-    kicker: "SOURCE CLOSURE",
+    kicker: "TRACE BACK TO SOURCE",
     title: "Keep every answer one click from the source.",
     description:
       "Source identity, transcript excerpts, timestamps, topics, concepts, claims, and exported artifacts remain connected by explicit references.",
@@ -74,8 +74,8 @@ export const explorerPipeline = [
   ["03", "Timestamped segments", "Normalized evidence units with start and end times."],
   ["04", "Knowledge map", "A deterministic topic / outline projection over the source."],
   ["05", "Concepts + search", "Portable enrichment and evidence-linked retrieval."],
-  ["06", "Evidence answers", "Claims that must cite source segments or return insufficient evidence."],
-  ["07", "Saved exploration", "A portable source + transcript + map + enrichment artifact."],
+  ["06", "Source-linked answers", "Answers cite supporting source segments or say that the source does not contain enough evidence."],
+  ["07", "Saved exploration", "A portable package containing the source, transcript, outline, concepts, and exploration state."],
 ] as const;
 
 export const explorerWorkspace = [
