@@ -4,7 +4,7 @@ import { InstitutionalExperimentsPage } from "@/components/institutional/Institu
 export const metadata: Metadata = {
   title: "Experiments · Boundary First Labs",
   description:
-    "Experiments, reproductions, witnesses, and bounded tests used to challenge and refine Boundary First Labs research.",
+    "A public orientation to the Boundary First Labs experiment register: computational tests, comparisons, simulations, falsification attempts, operational experiments, and their result boundaries.",
   alternates: { canonical: "/experiments" },
 };
 
