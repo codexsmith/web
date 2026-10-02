@@ -18,18 +18,19 @@ export function InstitutionalPublicationsPage() {
         styles={styles}
         className={styles.publicationsHero}
         eyebrow={<>PUBLICATIONS</>}
-        title={<>Read the argument. Inspect the machinery behind it.</>}
-        lead={<>Boundary First Labs publishes papers, technical reports, formal
-          specifications, experiment reports, reference implementations, and Research
-          Deployment Packets.</>}
-        support={<>A publication is an important artifact. It is not automatically the whole
-          research object.</>}
+        title={<>Read the work. See what it claims and what still needs to be tested.</>}
+        lead={<>Boundary First Labs publishes working papers, research notes, technical
+          reports, formal specifications, experiment reports, reference implementations,
+          and other research artifacts.</>}
+        support={<>Each public record should make its status, claim limits, evidence,
+          open questions, and correction path easier to inspect. A polished document is not
+          presented as stronger evidence than the work behind it.</>}
         childLinks={institutionalChildRoutes.publications}
       >
         <blockquote className={styles.publicationCovenantLead}>
           <span>PUBLICATION PRINCIPLE</span>
-          Publication should increase the reader&apos;s ability to inspect the work,
-          not merely increase the author&apos;s authority.
+          A reader should be able to tell what is established, what is still being tested,
+          what evidence matters, and what could change the conclusion.
         </blockquote>
       </InstitutionalRouteHero>
 
