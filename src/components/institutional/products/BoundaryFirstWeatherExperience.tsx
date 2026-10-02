@@ -27,7 +27,7 @@ export function BoundaryFirstWeatherExperience() {
     >
       <section className={styles.weatherHypothesisSection} id="hypothesis">
         <div className={styles.weatherHypothesisLead}>
-          <p>THE OPENING HYPOTHESIS</p>
+          <p>THE RESEARCH QUESTION</p>
           <h2>Weather does not change uniformly.</h2>
           <p>
             A weather model represents a volume of atmosphere, but the most consequential
@@ -39,9 +39,9 @@ export function BoundaryFirstWeatherExperience() {
         <div className={styles.weatherHypothesisStatement}>
           <blockquote>{weatherRecord.openingClaim.callout}</blockquote>
           <span>
-            Boundary First Weather asks whether explicit boundary, transport, and defect
-            information can help decide where additional computation or attention is worth
-            spending.
+            Boundary First Weather asks whether tracking moving boundaries, transport, and
+            model disagreement can help identify where additional computation or analyst
+            attention would be most useful.
           </span>
         </div>
 
@@ -63,8 +63,8 @@ export function BoundaryFirstWeatherExperience() {
           </div>
 
           <article>
-            <span>EXPERIMENTAL BOUNDARY-FIRST LAYER</span>
-            <strong>Things that still have to earn their value.</strong>
+            <span>EXPERIMENTAL LAYER</span>
+            <strong>Ideas that still have to earn their value in comparison.</strong>
             <div>
               {weatherRecord.scientificPosture.boundaryFirstLayer.map((item) => (
                 <small key={item}>{item}</small>
@@ -76,12 +76,12 @@ export function BoundaryFirstWeatherExperience() {
 
       <section className={styles.weatherInstrumentSection} id="instrument">
         <div className={styles.weatherSectionLead}>
-          <p>THE PUBLIC INSTRUMENT</p>
-          <h2>Show what changed between forecasts—not just another weather map.</h2>
+          <p>THE PUBLIC WEATHER VIEW</p>
+          <h2>Show what changed between forecasts, where models disagree, and why it matters.</h2>
           <span>
-            The first public instrument position is representation and decision support: a
-            time-indexed event navigator for seeing transition boundaries, uncertainty,
-            disagreement, local exposure, and what became newly admissible or inadmissible.
+            The first public instrument is a decision-support view for comparing forecast
+            changes over time, seeing uncertainty and model disagreement, and connecting those
+            changes to a location or decision that matters.
           </span>
         </div>
 
@@ -131,11 +131,11 @@ export function BoundaryFirstWeatherExperience() {
 
       <section className={styles.weatherResearchSection} id="research">
         <div className={styles.weatherResearchLead}>
-          <p>THE RESEARCH LADDER</p>
-          <h2>Six claims. Six separate ceilings.</h2>
+          <p>WHAT THE RESEARCH MUST PROVE, STEP BY STEP</p>
+          <h2>Six research questions that should be tested separately.</h2>
           <span>
-            Structural description does not automatically promote into transition
-            prediction, ensemble ranking, compression benefit, or simulation acceleration.
+            Showing a useful structure does not automatically prove better prediction,
+            better ensemble ranking, useful compression, or faster simulation.
           </span>
         </div>
 
@@ -178,8 +178,8 @@ export function BoundaryFirstWeatherExperience() {
 
       <section className={styles.weatherPilotSection} id="pilot">
         <div className={styles.weatherPilotQuestion}>
-          <p>BOUNDED PILOT</p>
-          <h2>Pick one historical event. Make one useful comparison.</h2>
+          <p>A PRACTICAL PILOT</p>
+          <h2>Pick one historical weather event and compare the method against a clear baseline.</h2>
           <blockquote>{weatherRecord.pilot.primaryQuestion}</blockquote>
           <strong>{weatherRecord.pilot.important}</strong>
         </div>
@@ -196,8 +196,8 @@ export function BoundaryFirstWeatherExperience() {
           </div>
 
           <aside className={styles.weatherPartnerCall}>
-            <span>COLLABORATION FIT</span>
-            <h3>Domain contact matters more than endorsement.</h3>
+            <span>WHO COULD HELP TEST THIS</span>
+            <h3>Weather expertise and real data matter more than endorsement.</h3>
             <p>{weatherRecord.partners.ask}</p>
             <div>
               {weatherRecord.partners.categories.map((category) => (
@@ -214,8 +214,8 @@ export function BoundaryFirstWeatherExperience() {
       <section className={styles.weatherEvidenceSection} id="evidence">
         <div className={styles.weatherFirewallHeader}>
           <div>
-            <p>CLAIM FIREWALL</p>
-            <h2>A compelling visualization is not forecast skill.</h2>
+            <p>WHAT WE CAN AND CANNOT SAY YET</p>
+            <h2>A compelling visualization is not the same as a better forecast.</h2>
           </div>
           <blockquote>
             No lower rung licenses a higher claim.
@@ -224,14 +224,14 @@ export function BoundaryFirstWeatherExperience() {
 
         <div className={styles.weatherFirewallGrid}>
           <article data-kind="allowed">
-            <span>ALLOWED NOW</span>
+            <span>SUPPORTED DESCRIPTION TODAY</span>
             {weatherRecord.claimFirewall.allowed.map((claim) => (
               <p key={claim}>{claim}</p>
             ))}
           </article>
 
           <article data-kind="blocked">
-            <span>NOT ALLOWED YET</span>
+            <span>NOT ESTABLISHED YET</span>
             {weatherRecord.claimFirewall.notAllowedYet.map((claim) => (
               <p key={claim}>{claim}</p>
             ))}
