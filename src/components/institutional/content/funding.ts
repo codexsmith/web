@@ -4,7 +4,7 @@ export const fundingLanes = [
     title: "Applied systems work",
     example: "Systems & Architecture Review",
     description:
-      "Focused reviews, diagnostics, implementation, and follow-on work can generate near-term earned revenue while producing outside case evidence."
+      "Focused reviews, diagnostics, implementation, and follow-on work can generate near-term earned revenue while producing outside case evidence.",
     nextEvidence:
       "A paid bounded engagement, repeat work, or clear negative market evidence.",
     href: "/applied-work",
@@ -26,7 +26,7 @@ export const fundingLanes = [
     description:
       "Projectr and the Knowledge Explorer family can test paid knowledge software around searchable, source-linked, persistent knowledge. Subscription, seat-based, paid-tooling, or other lightweight software revenue should follow demonstrated use rather than be assumed in advance.",
     nextEvidence:
-      "Repeated voluntary use first, then willingness to pay and return, and only afterward broader packaging."
+      "Repeated voluntary use first, then willingness to pay and return, and only afterward broader packaging.",
     href: "/products/youtube-knowledge-explorer",
   },
   {
@@ -36,7 +36,7 @@ export const fundingLanes = [
     description:
       "Weather provides a concrete scientific and computational testbed for grants, sponsored research, public-interest partnerships, open infrastructure, and external scientific collaboration.",
     nextEvidence:
-      "Submitted proposals, funding decisions, external collaborators, independent review, and usable research artifacts."
+      "Submitted proposals, funding decisions, external collaborators, independent review, and usable research artifacts.",
     href: "/products/boundary-first-weather",
   },
 ] as const;
@@ -47,7 +47,7 @@ export const fundingNearTermUses = [
     lane: "Applied systems work",
     use: "Reach buyers and deliver strong work",
     description:
-      "Package focused offers, reach qualified buyers, deliver the work well, and turn completed engagements into reusable case evidence."
+      "Package focused offers, reach qualified buyers, deliver the work well, and turn completed engagements into reusable case evidence.",
     closure:
       "A paid engagement, repeat work, or a clear decision that the offer needs to change.",
   },
@@ -95,7 +95,7 @@ export const fundingCapitalRoles = [
     name: "Operating runway",
     purpose: "Protect the time and continuity required to finish already-existing work.",
     bestFor:
-      "Founder delivery time, legal and IP cleanup, publication and product completion, administration, specialist review, infrastructure, and the work required to make internal capability usable outside the Lab."
+      "Founder delivery time, legal and IP cleanup, publication and product completion, administration, specialist review, infrastructure, and the work required to make internal capability usable outside the Lab.",
     boundary:
       "Runway should be tied to clear deliverables and review points. It does not guarantee that the selected products, grants, or research ideas succeed."
   },
@@ -103,7 +103,7 @@ export const fundingCapitalRoles = [
     name: "Paid services",
     purpose: "Generate unrestricted revenue while testing the method on real systems.",
     bestFor:
-      "Systems & Architecture Review, AI & Decision Governance Review, Knowledge & Research Infrastructure Review, and justified implementation or retained follow-on work."
+      "Systems & Architecture Review, AI & Decision Governance Review, Knowledge & Research Infrastructure Review, and justified implementation or retained follow-on work.",
     boundary:
       "A consulting engagement should leave useful client documentation, case evidence, or reusable capability. Revenue does not validate unrelated research claims."
   },
@@ -146,7 +146,7 @@ export const fundingChannels = [
     name: "Recoverable sponsorship or advance",
     purpose: "Provide early runway with a defined path for repayment from future unrestricted earned revenue.",
     bestFor:
-      "Defined work periods where a sponsor wants some or all support repaid if later services or products create sufficient unrestricted revenue."
+      "Defined work periods where a sponsor wants some or all support repaid if later services or products create sufficient unrestricted revenue.",
     boundary:
       "Repayment terms require a separate agreement, reserve protection, and explicit repayment source. The website does not imply that a recoverable structure already exists.",
   },
@@ -189,7 +189,7 @@ export const fundingClosureHorizons = [
     name: "0–90 days",
     purpose: "Finish work that is close to outside use.",
     bestFor:
-      "Finalize focused offers, launch selected market tests, move products and publications toward outside use, submit appropriate funding applications, repair transaction-readiness gaps, and document procedures that currently depend on founder memory."
+      "Finalize focused offers, launch selected market tests, move products and publications toward outside use, submit appropriate funding applications, repair transaction-readiness gaps, and document procedures that currently depend on founder memory.",
     boundary:
       "These are funded closure targets, not promised outcomes. The period should also record explicit failure, deferral, or reprioritization.",
   },
@@ -197,7 +197,7 @@ export const fundingClosureHorizons = [
     name: "3–6 months",
     purpose: "Build outside evidence.",
     bestFor:
-      "Paid engagement or negative market evidence, external product use, grant decision history, independent criticism, externally usable tools, clearer rights and licensing, and measurable handoff or delegation."
+      "Paid engagement or negative market evidence, external product use, grant decision history, independent criticism, externally usable tools, clearer rights and licensing, and measurable handoff or delegation.",
     boundary:
       "Do not promote internal activity into demand, efficacy, or independent-transfer claims without the corresponding external event.",
   },
@@ -205,7 +205,7 @@ export const fundingClosureHorizons = [
     name: "6–12 months",
     purpose: "Test whether the Lab is becoming more financially resilient.",
     bestFor:
-      "Repeat or recurring earned revenue in at least one area—or clear evidence to stop—multiple active funding channels, stronger grant and collaboration history, outside use of selected tools, and less dependence on founder-only knowledge."
+      "Repeat or recurring earned revenue in at least one area—or clear evidence to stop—multiple active funding channels, stronger grant and collaboration history, outside use of selected tools, and less dependence on founder-only knowledge.",
     boundary:
       "The correct result may be a narrower portfolio. More capital is not the default answer when a conversion lane fails to close.",
   },
