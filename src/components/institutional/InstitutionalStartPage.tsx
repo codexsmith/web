@@ -21,25 +21,25 @@ export function InstitutionalStartPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.startHero}
-        eyebrow={<>START HERE / AUDIENCE PATHS</>}
-        title={<>You do not need to understand the whole Lab first.</>}
+        eyebrow={<>START HERE</>}
+        title={<>What are you here to do?</>}
         lead={
           <>
-            Choose what you came here to do. Each path reorders the same public Lab around a
-            different question: evaluate it, use it, fund it, work with it, challenge it, or
-            simply understand it.
+            You do not need to understand the whole Lab first. Choose the question closest to
+            yours—evaluate the research, solve a systems problem, collaborate, fund a specific
+            piece of work, challenge a claim, or simply explore.
           </>
         }
         support={
           <>
-            These are suggested paths through the same public Lab. Truth, status, evidence,
-            and authority do not change with the audience.
+            Every path leads through the same public research, products, evidence, and current
+            work. The order changes to save you time; the underlying record does not.
           </>
         }
         childLinks={institutionalChildRoutes.start}
       >
         <aside className={styles.pathIndex}>
-          <span>SEVEN WAYS IN</span>
+          <span>CHOOSE A STARTING POINT</span>
           <nav aria-label="Audience path index">
             {audienceJourneys.map((journey) => (
               <a href={"#" + journey.id} key={journey.id}>
@@ -53,12 +53,12 @@ export function InstitutionalStartPage() {
       <section className={styles.principlesSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>TRAVERSAL CONTRACT</>}
-          title={<>Different questions. One underlying institution.</>}
+          eyebrow={<>HOW THESE PATHS WORK</>}
+          title={<>Different needs. The same underlying Lab.</>}
           note={
             <>
-              Audience routing is a navigation convenience. It must never become audience-specific
-              claims, hidden evidence, or a forked representation of Lab state.
+              These paths only change the order in which pages are suggested. They do not create
+              different versions of the research, evidence, products, or institutional state.
             </>
           }
         />
@@ -77,12 +77,12 @@ export function InstitutionalStartPage() {
       <section className={styles.journeysSection}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>CHOOSE YOUR OWN PATH</>}
-          title={<>Start with intent, then follow the smallest useful sequence.</>}
+          eyebrow={<>PICK THE PATH THAT FITS</>}
+          title={<>Start with the smallest useful sequence.</>}
           note={
             <>
-              Each step is an ordinary public route. The sequence is meant to reduce orientation
-              cost, not constrain exploration.
+              Each suggestion is an ordinary public page. Follow the sequence if it helps, or
+              branch anywhere once you find the object or question you care about.
             </>
           }
         />
@@ -92,10 +92,10 @@ export function InstitutionalStartPage() {
 
       <section className={styles.startClose}>
         <p className={styles.sectionIndex}>NONE OF THESE FIT?</p>
-        <h2>Search the Lab, or just tell us why you are here.</h2>
+        <h2>Browse freely, or tell us what you are trying to do.</h2>
         <p>
-          The global search can jump directly to public objects and pages. General contact is
-          also valid when the institutional lane is not obvious yet.
+          The Lab Atlas can help you browse public work directly. General contact is also fine
+          when you know the problem or question but not which BFL page it belongs on.
         </p>
         <div>
           <Link href="/atlas">Browse the Lab Atlas <span aria-hidden="true">→</span></Link>
