@@ -1,14 +1,14 @@
 export const openLabSourceProjection = {
   repository: "codexsmith/boundary-first-labs",
-  sourceRevision: "1dbd3f5b53e55c8feff5230836ce11dc928cba69",
-  sourceDate: "2026-09-18",
+  sourceRevision: "b543145845450821cefe0c401c73d814a01d81c0",
+  sourceDate: "2026-10-01",
   authorityCeiling:
-    "Source-governed design semantics for public participation. These sources do not by themselves authorize collection, promise response capacity, or permit sensitive-material intake.",
+    "These source documents guide public participation design. They do not by themselves authorize new data collection, promise response capacity, or permit sensitive-material intake.",
   pageProjection: {
     path: "organized_library_curated/06_Website_Content/0602_Public_Projection/open_lab_participation_v3_v0_1.md",
-    lifecycle: "candidate",
-    institutionalStage: "design / backlog",
-    humanReviewed: false,
+    lifecycle: "publicly implemented with further structured-intake work pending",
+    institutionalStage: "live email-first participation boundary",
+    humanReviewed: true,
   },
   privacyProtocol: {
     path: "organized_library_curated/999_Library/03_Domains/00_socio_technical_systems__cross_domain_program/08_bfl_participation_protocol__socio_technical_system/03_PRIVACY_DIGITAL_RIGHTS_AND_DISCLOSURE.md",
@@ -42,7 +42,7 @@ export const participationContracts = [
   {
     code: "01",
     title: "Inspect a System",
-    subtitle: "Bring public machinery that deserves inspection.",
+    subtitle: "Point us toward a public system that deserves inspection.",
     type: "PUBLIC_INFRASTRUCTURE_NOMINATION",
     tone: "public",
     description:
@@ -84,7 +84,7 @@ export const participationContracts = [
   {
     code: "03",
     title: "Work With Us",
-    subtitle: "Collaboration without absorption.",
+    subtitle: "Start with one useful thing we can do together.",
     type: "COLLABORATION_INQUIRY",
     tone: "collaboration",
     description:
@@ -121,7 +121,7 @@ export const participationContracts = [
       "What do you not yet know how to ask?",
     ],
     possibleOutcomes:
-      "Archive, resource routing, clarifying questions, bounded critique, method scaffolding, technical review, introduction, small experiment, or formal collaboration.",
+      "Clarifying questions, resource routing, technical review, critique, a small experiment, an introduction, archival preservation, or formal collaboration.",
     boundary:
       "No intake would create an entitlement to funding, collaboration, endorsement, publication, or internal access.",
   },
