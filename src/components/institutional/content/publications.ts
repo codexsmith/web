@@ -190,7 +190,7 @@ export const publicationProjection = {
       authority:
         "publication planning, sequence, and dependency-control state only; no scientific validity, readiness guarantee, publication promotion, truth, novelty, or release authorization",
       href:
-        "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
+        "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
     },
     {
       registryId: "REG-PUBLICATION-GRAPH",
@@ -200,7 +200,7 @@ export const publicationProjection = {
       authority:
         "operational publication routing, dependency, and readiness analysis only; no local scientific authority, publication promotion, institutional promotion, or source-state replacement",
       href:
-        "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+        "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
     },
     {
       registryId: "REG-PUBLICATION-SOURCES",
@@ -210,7 +210,7 @@ export const publicationProjection = {
       authority:
         "source identity, provenance, import decision, local/canonical correspondence, and routing metadata only; local publication-control artifacts remain authoritative and registration does not promote publication state",
       href:
-        "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_SOURCE_REGISTRY.json",
+        "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_SOURCE_REGISTRY.json",
     },
   ],
 } as const;
@@ -243,7 +243,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     sourceRef:
       "04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json#PUB-001",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
     sourceAuthority: sequenceAuthority,
     wave: 1,
     dependencies: [
@@ -274,7 +274,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     sourceRef:
       "04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json#PUB-002",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/04_publication_governance__operations/publication_program/publication_sequence.json",
     sourceAuthority: sequenceAuthority,
     wave: 1,
     dependencies: [
@@ -307,7 +307,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     sourceRef:
       "PUBLICATION_SOURCE_REGISTRY.json#src_system_kernel_publications / canonical_id=systems_interface_contracts",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_SOURCE_REGISTRY.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_SOURCE_REGISTRY.json",
     sourceAuthority: sourceRegistryAuthority,
     readinessHint: 3,
     priority: "highest",
@@ -334,7 +334,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#im_database_calibration",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
     sourceAuthority: graphAuthority,
     stage: "C",
     readiness: 5,
@@ -362,7 +362,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#im_admissible_forgetting",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
     sourceAuthority: graphAuthority,
     stage: "C",
     readiness: 5,
@@ -390,7 +390,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#math_quotient_spaces",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
     sourceAuthority: graphAuthority,
     stage: "A",
     readiness: 4,
@@ -424,7 +424,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#phys_partial_trace",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
     sourceAuthority: graphAuthority,
     stage: "A",
     readiness: 5,
@@ -463,7 +463,7 @@ export const selectedPublications: readonly PublicationRecord[] = [
     statusLabel: "ROUTING STATE",
     sourceRef: "PUBLICATION_GRAPH.json#phys_maxwell_gauss",
     sourceHref:
-      "https://github.com/codexsmith/boundary-first-labs/blob/3a8c984712ae1d87c7ec714876c356c20242cb15/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
+      "https://github.com/codexsmith/boundary-first-labs/blob/b543145845450821cefe0c401c73d814a01d81c0/organized_library_curated/999_Library/04_Operations/01_daily_operations__operations/publication_graph/PUBLICATION_GRAPH.json",
     sourceAuthority: graphAuthority,
     stage: "A",
     readiness: 4,
