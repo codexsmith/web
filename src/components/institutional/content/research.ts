@@ -10,7 +10,7 @@ export const programs = [
     question:
       "What must a representation preserve when people or systems actually use it, change it, combine it, break it, and repair it?",
     summary:
-      "Studies how models, schemas, documents, software state, and other representations behave when they are put under real operational pressure."
+      "Studies how models, schemas, documents, software state, and other representations behave when they are put under real operational pressure.",
     workingSurface: [
       "Representation & forgetting audits",
       "Admissibility & invariant testing",
@@ -32,7 +32,7 @@ export const programs = [
     question:
       "Can one small set of concepts help compare how different fields handle boundaries, change, evidence, error, and repair without pretending those fields are the same?",
     summary:
-      "Tests whether a shared structural vocabulary can help compare systems across domains while keeping the mathematics, science, engineering, or institutional rules of each domain authoritative."
+      "Tests whether a shared structural vocabulary can help compare systems across domains while keeping the mathematics, science, engineering, or institutional rules of each domain authoritative.",
     workingSurface: [
       "Distinctions & obligations",
       "Evidence & authority",
@@ -54,7 +54,7 @@ export const programs = [
     question:
       "What information can a system discard without changing the behavior, observation, inference, or future action that matters?",
     summary:
-      "Studies which distinctions must be preserved, which may be safely compressed or forgotten, and how to test those claims."
+      "Studies which distinctions must be preserved, which may be safely compressed or forgotten, and how to test those claims.",
     workingSurface: [
       "Admissible configurations & paths",
       "Reachability",
@@ -76,7 +76,7 @@ export const programs = [
     question:
       "Can mathematical structures be organized and compared by their operations and behavior, not only by their names or traditional categories?",
     summary:
-      "Builds structured descriptions of mathematical objects for comparison, search, and transformation while leaving proofs and native mathematics fully authoritative."
+      "Builds structured descriptions of mathematical objects for comparison, search, and transformation while leaving proofs and native mathematics fully authoritative.",
     workingSurface: [
       "Entities & relations",
       "Admissibility",
@@ -99,7 +99,7 @@ export const programs = [
     question:
       "What tools and safeguards are needed for people and AI systems to build, test, criticize, and revise scientific theories responsibly?",
     summary:
-      "Studies workflows for making theories explicit, searching alternatives, tracking evidence and sources, locating failure, and proposing revisions without giving automation authority to declare scientific truth."
+      "Studies workflows for making theories explicit, searching alternatives, tracking evidence and sources, locating failure, and proposing revisions without giving automation authority to declare scientific truth.",
     workingSurface: [
       "Theory reification",
       "Possibility-space search",
@@ -122,7 +122,7 @@ export const programs = [
     question:
       "How should systems be designed when the people affected by them can judge, disagree, refuse, appeal, correct, and repair?",
     summary:
-      "Develops methods for preserving human agency, dignity, contestability, responsibility, and meaningful choices in consequential systems."
+      "Develops methods for preserving human agency, dignity, contestability, responsibility, and meaningful choices in consequential systems.",
     workingSurface: [
       "Human representation",
       "Reachable action & refusal",
@@ -145,7 +145,7 @@ export const programs = [
     question:
       "Can statistical mechanics and computation clarify or constrain one another without treating them as the same subject?",
     summary:
-      "Runs a bounded comparison using ideas such as state, transition, coarse-graining, reachability, and representation rather than claiming a mature unified theory."
+      "Runs a bounded comparison using ideas such as state, transition, coarse-graining, reachability, and representation rather than claiming a mature unified theory.",
     workingSurface: [
       "State & ensemble",
       "Transition",
