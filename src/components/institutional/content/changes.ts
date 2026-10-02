@@ -13,14 +13,78 @@ export type PublicChange = {
 };
 
 export const changesProjection = {
-  generatedDate: "2026-09-28",
-  webRevision: "e30f35f0fb9cf62f4dc70556e2df6d97c34286e5",
-  labRevision: "2040584c19c8202215bdb83e46d1df05df37dafe",
+  generatedDate: "2026-10-02",
+  webRevision: "d2cc509bfa2583e0ae9648905bbbf59258f1e23c",
+  labRevision: "b543145845450821cefe0c401c73d814a01d81c0",
   authority:
     "This is a curated public delta archive over canonical repository state. It reports selected material changes and backfilled milestones; it is not a complete commit log, activity feed, or claim-promotion surface.",
 } as const;
 
 export const recentChanges: readonly PublicChange[] = [
+  {
+    id: "chg-authority-provenance-consequence-grammar",
+    date: "2026-10-01",
+    scope: "Method",
+    title: "Authority provenance became distinct from execution provenance.",
+    summary:
+      "The Systems Kernel now explicitly separates who performed a transformation from the authority under which that transformation is allowed to count, while keeping source, verification, adjudication, and consequence provenance distinct.",
+    consequence:
+      "Human, software, and AI participation can be represented without silently treating causal participation as decision authority; the refinement remains a working synthesis rather than a universal theory of agency or authority.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "b543145845450821cefe0c401c73d814a01d81c0",
+    sourceLabel: "Authority Provenance, Consequence, and Agent Participation — Systems Kernel Refinement v0.1",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/b543145845450821cefe0c401c73d814a01d81c0",
+    surfaceHref: "/research",
+  },
+  {
+    id: "chg-end-to-end-research-pipeline",
+    date: "2026-10-01",
+    scope: "Institution",
+    title: "The Lab defined an end-to-end institutional research pipeline.",
+    summary:
+      "A bounded pipeline now connects research work across explicit stages rather than relying on disconnected local workflows, with promotion and authority crossings kept distinct from execution.",
+    consequence:
+      "The Lab has a clearer route for applying its own machinery to its research lifecycle while preserving human promotion authority and owner-local scientific standards.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "55b588c30a5a709eaa9fd3ab499c2294e9e7f71a",
+    sourceLabel: "Define end-to-end institutional research pipeline v0.1",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/55b588c30a5a709eaa9fd3ab499c2294e9e7f71a",
+    surfaceHref: "/apparatus",
+  },
+  {
+    id: "chg-scientific-model-state-contract",
+    date: "2026-09-29",
+    scope: "Method",
+    title: "Scientific model architecture and state-contract reasoning converged.",
+    summary:
+      "The working synthesis treats state as the information required for lawful continuation and separates state, transition, persistence, and projection rather than assuming one representation must play every role.",
+    consequence:
+      "Software Before Code can begin from a bounded continuation-sufficient representation, then promote ontology, persistence, and specialized projections when execution shows that additional structure has become consequential.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "f03bf02f10e04e18e5e3ad8d23338368dc52414f",
+    sourceLabel: "Scientific Model Architecture and the State Contract",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/f03bf02f10e04e18e5e3ad8d23338368dc52414f",
+    surfaceHref: "/software-before-code",
+  },
+  {
+    id: "chg-registrar-native-verifier-621",
+    date: "2026-09-29",
+    scope: "Institution",
+    title: "The applied Registrar/control-plane state reached 621 durable identities.",
+    summary:
+      "RTX-2026-09-29-001 admitted the native-verifier adapter registry and regenerated the synchronized control-plane surfaces with validation PASS.",
+    consequence:
+      "The public snapshot can distinguish the latest applied Registrar state from later proposed or preflight-only changes rather than presenting candidate state as already promoted.",
+    sourceRepository: "codexsmith/boundary-first-labs",
+    sourceRevision: "537028601d6335b6fe09e0569092ec72b4ab6f8f",
+    sourceLabel: "Close native verifier Registrar transaction",
+    sourceHref:
+      "https://github.com/codexsmith/boundary-first-labs/commit/537028601d6335b6fe09e0569092ec72b4ab6f8f",
+    surfaceHref: "/apparatus",
+  },
   {
     id: "chg-registry-control-plane-620",
     date: "2026-09-27",
