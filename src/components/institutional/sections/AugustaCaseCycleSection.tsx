@@ -88,12 +88,12 @@ export function AugustaCaseCycleSection() {
       <div className={styles.caseCycleFrame}>
         <InstitutionalSectionHeader
           styles={styles}
-          eyebrow={<>THE CIVIC ACCOUNTING LOOP</>}
-          title={<>One case. Six linked state transitions.</>}
+          eyebrow={<>HOW THE CASE IS BUILT</>}
+          title={<>Six steps from public records to a defensible conclusion.</>}
           note={
             <>
-              Read the collapsed field as the method. Select any stage to inspect its
-              evidence without losing the rest of the cycle.
+              Open any step to see the evidence and controls behind it. The method is designed
+              to keep uncertainty visible rather than forcing every record into one total.
             </>
           }
         />
@@ -101,15 +101,15 @@ export function AugustaCaseCycleSection() {
         <div className={styles.caseCycleThesis}>
           <span>PUBLIC RECORD</span>
           <i>→</i>
-          <span>BOUNDED CLAIM</span>
+          <span>SUPPORTED FINDING</span>
           <i>→</i>
-          <span>CANONICAL OBLIGATION</span>
+          <span>ONE PHYSICAL OBLIGATION</span>
           <i>→</i>
-          <span>NATIVE MEASURE</span>
+          <span>PHYSICAL / TIME MEASURE</span>
           <i>→</i>
-          <span>ADMISSIBLE ACCOUNT</span>
+          <span>DEFENSIBLE ACCOUNT</span>
           <i>→</i>
-          <span>NEW EVIDENCE</span>
+          <span>MISSING RECORDS / NEW EVIDENCE</span>
           <i>↺</i>
         </div>
 
