@@ -4,7 +4,7 @@ import { InstitutionalAtlasPage } from "@/components/institutional/Institutional
 export const metadata: Metadata = {
   title: "Lab Atlas | Boundary First Labs",
   description:
-    "A bounded public relationship atlas across Boundary First Labs research, products, projects, and publication records.",
+    "A curated public map of selected Boundary First Labs research programs, experiments, claims, tools, products, projects, publications, evidence, and their declared connections.",
   alternates: { canonical: "/atlas" },
 };
 

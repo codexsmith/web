@@ -35,8 +35,8 @@ export function RepresentationAtlasExplorer() {
     >
       <div className={styles.controlRail}>
         <div className={styles.controlLead}>
-          <span>01 · CHOOSE A WITNESS DOMAIN</span>
-          <strong>Change the subject. Keep the structural questions fixed.</strong>
+          <span>01 · CHOOSE A DOMAIN</span>
+          <strong>Change the subject. Keep the comparison questions fixed.</strong>
         </div>
 
         <div className={styles.domainTabs} role="group" aria-label="Witness domains">
@@ -58,7 +58,7 @@ export function RepresentationAtlasExplorer() {
 
       <div className={styles.domainSignal}>
         <div>
-          <span>ACTIVE WITNESS DOMAIN</span>
+          <span>SELECTED DOMAIN</span>
           <strong>{domain.label}</strong>
           <small>{domain.domainClass}</small>
         </div>
@@ -67,11 +67,11 @@ export function RepresentationAtlasExplorer() {
 
       <div className={styles.circuitHeader}>
         <div>
-          <span>02 · TRACE THE MECHANICS</span>
-          <strong>Click a structural slot to compare that role across all five domains.</strong>
+          <span>02 · CHOOSE A QUESTION</span>
+          <strong>Select one recurring role to compare it across all five domains.</strong>
         </div>
         <p>
-          The positions are analytical roles, not claims that the domains are formally equivalent.
+          These are comparison roles, not claims that the domains are formally equivalent.
         </p>
       </div>
 
@@ -116,7 +116,7 @@ export function RepresentationAtlasExplorer() {
 
         <article className={styles.crossDomain}>
           <header>
-            <span>03 · COMPARE ONE ROLE ACROSS DOMAINS</span>
+            <span>03 · COMPARE THAT ROLE ACROSS DOMAINS</span>
             <h2>{mechanic.label}</h2>
             <p>{mechanic.prompt}</p>
           </header>
@@ -144,7 +144,7 @@ export function RepresentationAtlasExplorer() {
 
       <aside className={styles.authorityNote}>
         <div>
-          <span>COMPARATIVE-LENS FIREWALL</span>
+          <span>COMPARISON BOUNDARY</span>
           <strong>{representationAtlasProjection.status}</strong>
         </div>
         <p>{representationAtlasProjection.authority}</p>
@@ -154,14 +154,14 @@ export function RepresentationAtlasExplorer() {
             target="_blank"
             rel="noreferrer"
           >
-            Witness Domains ↗
+            Domain source ↗
           </a>
           <a
             href={representationAtlasProjection.representationMechanicsSource}
             target="_blank"
             rel="noreferrer"
           >
-            Candidate mechanics spine ↗
+            Comparison-method source ↗
           </a>
         </nav>
       </aside>

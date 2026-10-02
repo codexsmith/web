@@ -96,8 +96,8 @@ export function LabAtlasExplorer({
 
       <aside className={styles.inspector} aria-live="polite">
         <div className={styles.inspectorTopline}>
-          <span>FOCUS OBJECT</span>
-          <small>{relations.length} typed relationship{relations.length === 1 ? "" : "s"}</small>
+          <span>SELECTED ITEM</span>
+          <small>{relations.length} declared connection{relations.length === 1 ? "" : "s"}</small>
         </div>
 
         <h2>{selected.title}</h2>
@@ -114,13 +114,13 @@ export function LabAtlasExplorer({
         />
 
         <Link className={styles.openObject} href={selected.href}>
-          Open object surface <span aria-hidden="true">→</span>
+          Open this item <span aria-hidden="true">→</span>
         </Link>
 
         <div className={styles.relationships}>
           <div className={styles.relationshipHeader}>
-            <span>DECLARED RELATIONSHIPS</span>
-            <small>Absence of an edge does not imply absence of a relationship.</small>
+            <span>DECLARED CONNECTIONS</span>
+            <small>If a connection is missing here, the public Atlas is simply not asserting one.</small>
           </div>
 
           {relations.length ? (
@@ -144,8 +144,8 @@ export function LabAtlasExplorer({
             })
           ) : (
             <p className={styles.noRelationships}>
-              No relationship is declared for this object in the first public Atlas boundary.
-              The Atlas does not infer one from wording, layout, or conceptual similarity.
+              No connection is declared for this item in the current public Atlas.
+              The map does not infer one from wording, layout, or conceptual similarity.
             </p>
           )}
         </div>

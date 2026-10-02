@@ -4,7 +4,7 @@ import { InstitutionalRepresentationAtlasPage } from "@/components/institutional
 export const metadata: Metadata = {
   title: "Representation Atlas · Boundary First Labs",
   description:
-    "Trace recurring representation, state, transformation, boundary, defect, evidence, agency, and stewardship patterns across Lab work.",
+    "Compare six recurring representation questions across five different domains without treating structural similarity as proof of equivalence.",
   alternates: { canonical: "/representation-atlas" },
 };
 
