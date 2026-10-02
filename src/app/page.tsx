@@ -4,7 +4,7 @@ import { InstitutionalHomePage } from "@/components/institutional/InstitutionalH
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },
   description:
-    "Boundary First Labs is an applied research laboratory building inspectable research machinery, products, projects, and public-interest systems work.",
+    "Boundary First Labs is an applied systems laboratory for scientific software modeling, executable representation, research machinery, products, and public-interest systems work.",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
