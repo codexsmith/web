@@ -11,8 +11,8 @@
   },
   "hero": {
     "eyebrow": "LEGAL SYSTEMS + DIGITAL MODERNIZATION",
-    "headline": "Modernize the system without modernizing the defect.",
-    "support": "Digital modernization changes interfaces, workflows, records, automation, and decision paths. Boundary First asks whether the distinctions that legal consequence depends on remain represented, contestable, traceable, and repairable after the transformation."
+    "headline": "Modernize one workflow without losing the distinctions that make it legally and operationally meaningful.",
+    "support": "This unlisted brief proposes systems analysis for one bounded legal or court-administration workflow. The goal is to make records, statuses, authority, deadlines, consequences, contest, and repair explicit before software changes harden the process."
   },
   "legalNotice": "Boundary First Labs is not a law firm. Nicholas Smith is not a licensed attorney. This page presents independent systems research, modernization analysis, and proposed collaboration methods; it does not provide legal advice or create an attorney-client relationship.",
   "problemFrame": [
@@ -40,14 +40,16 @@
       "implementation questions requiring licensed counsel or controlling authority"
     ]
   },
-  "firstAsk": "Give us one bounded legal or court-administration workflow where modernization is underway, planned, or painful enough that representation loss can be measured before and after the change.",
+  "firstAsk": "Bring one bounded legal or court-administration workflow where modernization is planned, underway, or producing enough friction that representation loss can be inspected.",
   "claimBoundary": [
     "This page does not imply an existing relationship with the State of South Carolina, its judiciary, any legal-services organization, or any modernization program.",
     "Boundary First systems analysis does not determine controlling law, jurisdiction-specific legal duties, litigation strategy, or legal advice.",
     "Any real legal implementation requires current primary authority and qualified legal review.",
     "The objective is not to impose novel jurisprudence on a modernization project; it is to distinguish established requirements from proposed systems diagnostics and identify where each belongs."
   ],
-  "cta": {"label": "Bring one workflow"},
+  "cta": {
+    "label": "Bring one workflow"
+  },
   "notes": [
     "Use as an unlisted target-class bridge rather than a named partnership page until a specific institution or modernization program is selected.",
     "Designed to connect the existing Constitutional Law & Jurisprudence program with software modernization and public-system engineering."
