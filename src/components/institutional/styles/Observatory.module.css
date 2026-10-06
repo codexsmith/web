@@ -1,0 +1,281 @@
+.observatoryPage {
+  --observatory-ink: #102036;
+  --observatory-muted: #52627b;
+  --observatory-line: rgba(16, 32, 54, 0.16);
+  background: #f4f5f3;
+}
+
+.observatoryHero {
+  min-height: 460px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(360px, 0.78fr);
+  border-bottom: 1px solid var(--observatory-line);
+  background:
+    radial-gradient(circle at 84% 18%, rgba(91, 99, 173, 0.14), transparent 25rem),
+    linear-gradient(180deg, #ffffff, #f7f9fb);
+}
+
+.observatoryHero > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(50px, 6vw, 92px) clamp(30px, 5vw, 78px);
+}
+
+.observatoryHero h1 {
+  max-width: 900px;
+  margin: 14px 0 20px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.2rem, 5vw, 6.1rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.93;
+}
+
+.observatoryHeroNote {
+  min-height: 190px;
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid rgba(16, 32, 54, 0.2);
+  border-left: 6px solid #5b63ad;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.94), rgba(236,240,248,.96));
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 10px 28px rgba(16, 32, 54, 0.08);
+}
+
+.observatoryHeroNote > span,
+.roleCard > span,
+.lensCard > span {
+  color: #5b63ad;
+  font: 800 0.5rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.observatoryHeroNote strong {
+  color: var(--observatory-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.observatoryHeroNote p {
+  margin: 0;
+  color: var(--observatory-muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.roleSection,
+.lensSection {
+  padding: 42px clamp(30px, 5vw, 78px) 52px;
+  border-bottom: 1px solid var(--observatory-line);
+  background: #fff;
+}
+
+.roleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--observatory-line);
+  border-left: 1px solid var(--observatory-line);
+}
+
+.roleCard {
+  min-height: 190px;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 22px;
+  border-right: 1px solid var(--observatory-line);
+  border-bottom: 1px solid var(--observatory-line);
+  background: #fff;
+}
+
+.roleCard[data-current="true"] {
+  background:
+    linear-gradient(180deg, rgba(91, 99, 173, 0.1), rgba(91, 99, 173, 0.035)),
+    #fff;
+  box-shadow: inset 5px 0 0 #5b63ad;
+}
+
+.roleCard h3,
+.lensCard h3 {
+  margin: 0;
+  color: var(--observatory-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+.roleCard h3 {
+  font-size: 1.45rem;
+}
+
+.roleCard p,
+.lensCard p {
+  margin: 0;
+  color: var(--observatory-muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.lensSection {
+  background: #f4f5f3;
+}
+
+.lensGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lensCard {
+  min-width: 0;
+  display: grid;
+  align-content: start;
+  gap: 11px;
+  padding: 20px;
+  border: 1px solid var(--observatory-line);
+  border-top: 5px solid #748396;
+  background: #fff;
+}
+
+.lensCard[data-lens="maps"] { border-top-color: #5b63ad; }
+.lensCard[data-lens="evidence"] { border-top-color: #3c7e57; }
+.lensCard[data-lens="time"] { border-top-color: #356f9f; }
+.lensCard[data-lens="machinery"] { border-top-color: #916b3f; }
+.lensCard[data-lens="institution"] { border-top-color: #748396; }
+
+.lensCard h3 {
+  font-size: 1.25rem;
+  line-height: 1.08;
+}
+
+.lensCard nav {
+  display: grid;
+  gap: 6px;
+  margin-top: 3px;
+  padding-top: 10px;
+  border-top: 1px solid var(--observatory-line);
+}
+
+.lensCard a,
+.boundaryActions a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--royal-blue-deep);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.lensCard a {
+  min-height: 34px;
+  padding: 6px 0;
+  font-size: 0.78rem;
+}
+
+.lensCard a span,
+.boundaryActions a span {
+  color: var(--old-gold-dark);
+}
+
+.boundarySection {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: clamp(26px, 5vw, 72px);
+  padding: 48px clamp(30px, 5vw, 78px) 58px;
+  background:
+    linear-gradient(180deg, #f9fbff, #eaf0f8);
+}
+
+.boundarySection h2 {
+  max-width: 760px;
+  margin: 10px 0 14px;
+  color: var(--observatory-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3.3vw, 3.7rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.boundarySection > div > p:last-child {
+  max-width: 760px;
+  margin: 0;
+  color: var(--observatory-muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.boundaryActions {
+  align-self: end;
+  display: grid;
+  gap: 8px;
+}
+
+.boundaryActions a {
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid rgba(16, 32, 54, 0.3);
+  background: rgba(255,255,255,.88);
+  font-size: 0.84rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lensCard a:hover,
+  .boundaryActions a:hover {
+    color: #5b63ad;
+  }
+}
+
+@media (max-width: 1180px) {
+  .lensGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .observatoryHero,
+  .boundarySection {
+    grid-template-columns: 1fr;
+  }
+
+  .roleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .boundaryActions {
+    align-self: start;
+  }
+}
+
+@media (max-width: 720px) {
+  .roleSection,
+  .lensSection,
+  .boundarySection {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .roleGrid,
+  .lensGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .observatoryHero h1 {
+    font-size: clamp(2.8rem, 13vw, 4.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lensCard a,
+  .boundaryActions a {
+    transition: none;
+  }
+}

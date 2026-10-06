@@ -16,7 +16,8 @@ type ChildLinkKind =
   | "apparatus"
   | "experiment"
   | "claim"
-  | "atlas";
+  | "atlas"
+  | "observatory";
 
 function ChildLinkIcon({
   kind,
@@ -119,6 +120,14 @@ function ChildLinkIcon({
           <circle cx="21" cy="7" r="2.5" />
           <circle cx="14" cy="21" r="2.5" />
           <path d="M9.4 8.6 18.5 7.4M8.4 11l4.4 7.7M19.8 9.1l-4.4 9.5" />
+        </svg>
+      );
+    case "observatory":
+      return (
+        <svg {...common}>
+          <path d="M4.5 14c2.7-4.8 5.9-7.2 9.5-7.2s6.8 2.4 9.5 7.2c-2.7 4.8-5.9 7.2-9.5 7.2S7.2 18.8 4.5 14Z" />
+          <circle cx="14" cy="14" r="3.2" />
+          <path d="M14 4.5v2.3M14 21.2v2.3" />
         </svg>
       );
   }

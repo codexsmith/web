@@ -1,14 +1,26 @@
 import { PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 
 export const institutionalRoutes = [
-  { label: "About", href: "/about" },
   { label: "Research", href: "/research" },
+  { label: "Observatory", href: "/observatory" },
   { label: "Products", href: "/products" },
   { label: "Projects", href: "/projects" },
   { label: "Applied Work", href: "/applied-work" },
   { label: "Open Lab", href: "/open-lab" },
 ] as const;
 
+export const observatoryRoutePrefixes = [
+  "/observatory",
+  "/atlas",
+  "/representation-atlas",
+  "/experiments",
+  "/claims",
+  "/evidence",
+  "/apparatus",
+  "/now",
+  "/changes",
+  "/lab-through-time",
+] as const;
 
 const institutionalChildPages = {
   funding: {
@@ -116,6 +128,13 @@ const institutionalChildPages = {
     kind: "atlas",
     tone: "teal",
   },
+  observatory: {
+    label: "Observatory",
+    href: "/observatory",
+    relation: "INSPECTION",
+    kind: "observatory",
+    tone: "indigo",
+  },
 } as const;
 
 export const institutionalChildRoutes = {
@@ -123,14 +142,14 @@ export const institutionalChildRoutes = {
     institutionalChildPages.founder,
     institutionalChildPages.labThroughTime,
     institutionalChildPages.aiGovernance,
+    institutionalChildPages.observatory,
     institutionalChildPages.now,
     institutionalChildPages.collaboration,
-    institutionalChildPages.appliedWork,
   ],
   research: [
+    institutionalChildPages.observatory,
     institutionalChildPages.atlas,
     institutionalChildPages.representationAtlas,
-    institutionalChildPages.aiGovernance,
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
     institutionalChildPages.apparatus,
@@ -150,12 +169,12 @@ export const institutionalChildRoutes = {
     institutionalChildPages.apparatus,
   ],
   publications: [
+    institutionalChildPages.observatory,
     institutionalChildPages.paperMine,
     institutionalChildPages.evidence,
     institutionalChildPages.claims,
     institutionalChildPages.experiments,
     institutionalChildPages.atlas,
-    institutionalChildPages.apparatus,
   ],
   funding: [
     institutionalChildPages.now,
@@ -185,16 +204,19 @@ export const institutionalChildRoutes = {
   founder: [
     institutionalChildPages.labThroughTime,
     institutionalChildPages.evidence,
+    institutionalChildPages.observatory,
     institutionalChildPages.now,
     institutionalChildPages.collaboration,
   ],
   evidence: [
+    institutionalChildPages.observatory,
     institutionalChildPages.claims,
     institutionalChildPages.experiments,
     institutionalChildPages.atlas,
     institutionalChildPages.now,
   ],
   now: [
+    institutionalChildPages.observatory,
     institutionalChildPages.changes,
     institutionalChildPages.labThroughTime,
     institutionalChildPages.funding,
@@ -202,6 +224,7 @@ export const institutionalChildRoutes = {
     institutionalChildPages.collaboration,
   ],
   changes: [
+    institutionalChildPages.observatory,
     institutionalChildPages.now,
     institutionalChildPages.labThroughTime,
     institutionalChildPages.atlas,
@@ -209,18 +232,21 @@ export const institutionalChildRoutes = {
     institutionalChildPages.apparatus,
   ],
   labThroughTime: [
+    institutionalChildPages.observatory,
     institutionalChildPages.founder,
     institutionalChildPages.now,
     institutionalChildPages.changes,
     institutionalChildPages.evidence,
   ],
   apparatus: [
+    institutionalChildPages.observatory,
     institutionalChildPages.experiments,
     institutionalChildPages.atlas,
     institutionalChildPages.evidence,
     institutionalChildPages.claims,
   ],
   experiments: [
+    institutionalChildPages.observatory,
     institutionalChildPages.evidence,
     institutionalChildPages.claims,
     institutionalChildPages.apparatus,
@@ -228,12 +254,14 @@ export const institutionalChildRoutes = {
     institutionalChildPages.representationAtlas,
   ],
   claims: [
+    institutionalChildPages.observatory,
     institutionalChildPages.evidence,
     institutionalChildPages.experiments,
     institutionalChildPages.atlas,
     institutionalChildPages.representationAtlas,
   ],
   atlas: [
+    institutionalChildPages.observatory,
     institutionalChildPages.representationAtlas,
     institutionalChildPages.apparatus,
     institutionalChildPages.experiments,
@@ -241,18 +269,27 @@ export const institutionalChildRoutes = {
     institutionalChildPages.evidence,
   ],
   representationAtlas: [
+    institutionalChildPages.observatory,
     institutionalChildPages.atlas,
     institutionalChildPages.apparatus,
     institutionalChildPages.experiments,
     institutionalChildPages.collaboration,
   ],
+  observatory: [
+    institutionalChildPages.atlas,
+    institutionalChildPages.representationAtlas,
+    institutionalChildPages.experiments,
+    institutionalChildPages.evidence,
+    institutionalChildPages.apparatus,
+    institutionalChildPages.now,
+  ],
   openLab: [
+    institutionalChildPages.observatory,
     institutionalChildPages.collaboration,
     institutionalChildPages.aiGovernance,
     institutionalChildPages.experiments,
     institutionalChildPages.claims,
     institutionalChildPages.evidence,
-    institutionalChildPages.apparatus,
   ],
   contact: [
     institutionalChildPages.collaboration,
@@ -263,24 +300,20 @@ export const institutionalChildRoutes = {
     institutionalChildPages.appliedWork,
     institutionalChildPages.funding,
     institutionalChildPages.collaboration,
-    institutionalChildPages.evidence,
+    institutionalChildPages.observatory,
     institutionalChildPages.atlas,
     institutionalChildPages.now,
   ],
 } as const;
-
 
 export const institutionalFooterGroups = [
   {
     label: "Institution",
     routes: [
       { label: "About", href: "/about" },
-      { label: "AI Governance", href: "/ai-governance" },
       { label: "Start here", href: "/start" },
       { label: "Founder", href: "/founder" },
-      { label: "Lab Through Time", href: "/lab-through-time" },
-      { label: "Now", href: "/now" },
-      { label: "What changed", href: "/changes" },
+      { label: "AI Governance", href: "/ai-governance" },
     ],
   },
   {
@@ -288,13 +321,22 @@ export const institutionalFooterGroups = [
     routes: [
       { label: "Research", href: "/research" },
       { label: "Moonshots", href: "/research/moonshots" },
+      { label: "Publications", href: "/publications" },
+    ],
+  },
+  {
+    label: "Observe",
+    routes: [
+      { label: "Observatory", href: "/observatory" },
       { label: "Lab Atlas", href: "/atlas" },
       { label: "Representation Atlas", href: "/representation-atlas" },
       { label: "Experiments", href: "/experiments" },
       { label: "Claims", href: "/claims" },
-      { label: "Publications", href: "/publications" },
       { label: "Evidence", href: "/evidence" },
       { label: "Apparatus", href: "/apparatus" },
+      { label: "Now", href: "/now" },
+      { label: "What changed", href: "/changes" },
+      { label: "Lab Through Time", href: "/lab-through-time" },
     ],
   },
   {
