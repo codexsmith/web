@@ -190,6 +190,10 @@ const routeContracts = [
   [
     "InstitutionalRepresentationAtlasPage.tsx",
     "representationAtlas"
+  ],
+  [
+    "InstitutionalObservatoryPage.tsx",
+    "observatory"
   ]
 ];
 

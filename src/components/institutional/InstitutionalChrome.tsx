@@ -6,10 +6,23 @@ import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
 import { LabCommandPalette } from "./LabCommandPalette";
 import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
-import { institutionalFooterGroups, institutionalRoutes } from "./institutionalRoutes";
+import {
+  institutionalFooterGroups,
+  institutionalRoutes,
+  observatoryRoutePrefixes,
+} from "./institutionalRoutes";
 import styles from "./styles/InstitutionalFoundation.module.css";
 
 function routeIsActive(pathname: string, href: string) {
+  if (
+    href === "/observatory" &&
+    observatoryRoutePrefixes.some(
+      (route) => pathname === route || pathname.startsWith(`${route}/`),
+    )
+  ) {
+    return true;
+  }
+
   if (
     href === "/research" &&
     (pathname === "/publications" || pathname.startsWith("/publications/"))

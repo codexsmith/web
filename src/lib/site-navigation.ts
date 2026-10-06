@@ -20,7 +20,7 @@ export const PRIMARY_NAV_ITEMS: SiteNavigationItem[] = [
   { label: "Software", href: "/software" },
   { label: "Work", href: "/work" },
   { label: "Research", href: "/research" },
-  { label: "Laboratory", href: "/about" },
+  { label: "Observatory", href: "/observatory" },
   { label: "Collaborate", href: "/collaborate" },
 ];
 
@@ -49,7 +49,8 @@ export function isNavigationItemActive(
   const routeGroups: Record<string, string[]> = {
     "/software": ["/software", "/learn", "/audience", "/problem", "/practice", "/methods"],
     "/work": ["/work", "/help", "/business", "/artifact", "/publications"],
-    "/research": ["/research", "/evidence", "/theory", "/sandbox", "/domains", "/domain", "/map", "/relations", LANGUAGE_HREF],
+    "/research": ["/research", "/theory", "/sandbox", "/domains", "/domain", "/map", "/relations", LANGUAGE_HREF],
+    "/observatory": ["/observatory", "/atlas", "/representation-atlas", "/experiments", "/claims", "/evidence", "/apparatus", "/now", "/changes", "/lab-through-time"],
     "/about": ["/about", "/mission", "/governance", "/people", "/trust", "/accessibility"],
     "/collaborate": ["/collaborate", "/inquire", "/outreach"],
   };
