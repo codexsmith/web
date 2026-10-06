@@ -1,4 +1,11 @@
-export const observatoryRoles = [
+export type ObservatoryRole = {
+  label: string;
+  verb: string;
+  summary: string;
+  current?: boolean;
+};
+
+export const observatoryRoles: readonly ObservatoryRole[] = [
   {
     label: "Institution",
     verb: "exists",
