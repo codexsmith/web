@@ -66,9 +66,12 @@ export function primaryNavigationOwner(pathname: string): string | undefined {
   // Compatibility for older immersive product landing pages not in the
   // Website v3 route matrix. Canonical public routes always win above.
   const landingGroup = getProductLandingNavigationGroup(pathname);
-  if (landingGroup === "software") return "/products";
-  if (landingGroup === "work") return "/collaboration";
-  if (landingGroup === "research") return "/observatory";
+  // The older "work" group contains Chess, Corpus Forge, and other product
+  // landings; it did not mean "contact the Lab for custom work".
+  if (landingGroup === "work" || pathname === "/weather") return "/products";
+  if (landingGroup === "software" || landingGroup === "research") {
+    return "/observatory";
+  }
   return undefined;
 }
 
