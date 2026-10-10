@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { InstitutionalCollaborationPage } from "@/components/institutional/InstitutionalCollaborationPage";
 
 export const metadata: Metadata = {
-  title: "Collaboration · Boundary First Labs",
+  title: "Work With Us · Boundary First Labs",
   description:
-    "Ways to work with Boundary First Labs through expert review, pilots, workshops, co-development, funding, distribution, research collaboration, or stewardship.",
+    "Hire Boundary First Labs for systems consulting, propose a research partnership, submit expert criticism, or support a defined project or research milestone.",
   alternates: { canonical: "/collaboration" },
 };
 
