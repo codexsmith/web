@@ -25,13 +25,14 @@ const commandPaletteContent = read(`${root}/content/commandPalette.ts`);
 const homePage = read(`${root}/InstitutionalHomePage.tsx`);
 const homeContent = read(`${root}/content/home.ts`);
 const siteContact = read("src/lib/site-contact.ts");
+const primaryNavigation = read("src/lib/site-navigation.ts");
 
 expect(chrome.startsWith('"use client";'), "Institutional chrome must own route/scroll interaction as a client boundary");
 expect(chrome.includes("usePathname"), "Institutional header must derive active navigation from the current route");
 expect(chrome.includes("IntersectionObserver"), "Institutional header must observe the route hero before compacting the brand");
 expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
-expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
-expect(chrome.includes('href === "/research"') && chrome.includes('pathname === "/publications"'), "Publications must inherit the Research active-navigation state");
+expect(chrome.includes('pathname === route.href ? "page" : "location"'), "Institutional navigation must distinguish exact current page from an active deep-route location");
+expect(chrome.includes("isNavigationItemActive(pathname, route.href)"), "Institutional header must use the shared single-owner route resolver");
 expect(chrome.includes("<LabCommandPalette />"), "Institutional header must mount global Lab command navigation");
 expect(!chrome.includes('href="/v3/start"'), "Institutional header must not duplicate the homepage audience traversal entry");
 expect(!chrome.includes("Start here"), "Institutional header must not render the retired Start here control");
@@ -253,8 +254,8 @@ expect(!topLevelRouteRegistry.includes('/apparatus'), "Apparatus must remain a c
 expect(!topLevelRouteRegistry.includes('/funding'), "Funding must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/apparatus'), "Apparatus must stay out of the primary header route set");
 expect(!topLevelRouteRegistry.includes('/founder'), "Founder must remain a contextual child route rather than top-level navigation");
-expect(!topLevelRouteRegistry.includes('/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
-expect(topLevelRouteRegistry.includes('{ label: "Applied Work", href: "/applied-work" }'), "Applied Work must be a primary top-level consulting route");
+expect(topLevelRouteRegistry.includes("institutionalRoutes = PRIMARY_NAV_ITEMS"), "Institutional header must consume the shared visitor-intent navigation");
+expect(primaryNavigation.includes('{ label: "Products", href: "/products" }') && primaryNavigation.includes('{ label: "Observatory", href: "/observatory" }') && primaryNavigation.includes('{ label: "Work With Us", href: "/collaboration" }'), "Primary nav must have use, inspect, engage entry points");
 expect(!topLevelRouteRegistry.includes('{ label: "Publications", href: "/publications" }'), "Publications must be discovered from Research rather than occupying primary top navigation");
 expect(!topLevelRouteRegistry.includes('/ai-governance'), "AI Governance must remain a first-class secondary route rather than primary top navigation");
 expect(!topLevelRouteRegistry.includes('/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
@@ -788,13 +789,13 @@ expect(inquiryApi.includes("sourceContext"), "Inquiry API must preserve inquiry 
 
 const collaborationPage = read(`${root}/InstitutionalCollaborationPage.tsx`);
 expect(collaborationPage.includes("./content/collaboration"), "Collaboration page must own a route-local content model");
-expect(collaborationPage.includes("POSSIBLE FITS, NOT AFFILIATIONS"), "Collaboration map must explicitly prevent endorsement inference");
+expect(collaborationPage.includes("collaborationBoundaries"), "Collaboration page must preserve clear authority, ownership, and disclosure boundaries");
 expect(collaborationPage.includes('className={styles.collaborationMapFrame}'), "Collaboration page must expose the named relationship map as a primary surface");
-expect(collaborationPage.includes("collaborationStageLegend"), "Collaboration page must explain readiness semantics");
+expect(collaborationPage.includes("collaborationModes"), "Collaboration page must describe bounded relationship types");
 expect(collaborationPage.includes("smallest useful"), "Collaboration hero must preserve the smallest-useful-relationship doctrine");
 expect(collaborationPage.includes("collaborationOutcomes"), "Collaboration page must state concrete business and funding outcomes");
 expect(collaborationPage.includes("How funding works"), "Collaboration page must give potential funders a direct Funding route");
-expect(collaborationPage.includes("childLinks={institutionalChildRoutes.collaboration}"), "Collaboration hero must expose Applied Work as a child page");
+expect(collaborationPage.includes('className={styles.engagementHeroNav}') && collaborationPage.includes('href="/applied-work"') && collaborationPage.includes('href="/open-lab"') && collaborationPage.includes('href="/funding"') && collaborationPage.includes('Boundary First Labs — Research Partnership'), "Work With Us hero must expose hire, partner, critique, and support as separate first-screen paths");
 expect(collaborationPage.includes('publicContactMailto("Boundary First Labs — Collaboration")'), "Collaboration must expose a direct email CTA");
 
 const founderPage = read(`${root}/InstitutionalFounderPage.tsx`);
