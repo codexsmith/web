@@ -908,3 +908,15 @@
     display: block;
   }
 }
+
+/* State the source boundary; never expose a broken Inspect link to a private repo. */
+.privateSourceNote {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 10px 12px;
+  border-left: 4px solid var(--old-gold);
+  background: #f8f4ea;
+  color: #52627b;
+  font-size: .71rem;
+  line-height: 1.5;
+}

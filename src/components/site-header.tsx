@@ -55,7 +55,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
           >
             {desktopNavItems.map((item) => (
               <Link
-                aria-current={isActive(item.href) ? "page" : undefined}
+                aria-current={isActive(item.href) ? (pathname === item.href ? "page" : "location") : undefined}
                 className={`transition-colors hover:text-foreground ${
                   isActive(item.href) ? "text-foreground" : ""
                 }`}
@@ -122,7 +122,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps) {
             <div className="flex flex-col gap-1 p-4">
               {HEADER_NAV_ITEMS.map((item) => (
                 <Link
-                  aria-current={isActive(item.href) ? "page" : undefined}
+                  aria-current={isActive(item.href) ? (pathname === item.href ? "page" : "location") : undefined}
                   key={item.label}
                   href={item.href}
                   className={`rounded-sm px-4 py-3 font-mono text-[11px] uppercase tracking-widest transition-colors hover:bg-muted ${

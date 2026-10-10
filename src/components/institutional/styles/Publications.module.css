@@ -1428,3 +1428,15 @@
     padding: 16px;
   }
 }
+
+/* Controlled public summaries must not masquerade as readable private GitHub sources. */
+.privateSourceNote {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 9px 11px;
+  border-left: 3px solid var(--old-gold);
+  background: rgba(242, 235, 217, .58);
+  color: #52627b;
+  font-size: .68rem;
+  line-height: 1.5;
+}

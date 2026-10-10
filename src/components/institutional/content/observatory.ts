@@ -47,6 +47,19 @@ export const observatoryRoles: readonly ObservatoryRole[] = [
 
 export const observatoryLensGroups = [
   {
+    id: "research",
+    eyebrow: "RESEARCH & METHODS",
+    title: "What are we investigating, and how?",
+    description:
+      "Begin with the questions, engineering methods, and formal programs. Evidence and limits remain inspectable alongside every result.",
+    links: [
+      { label: "Research overview", href: "/research" },
+      { label: "Boundary-First Engineering", href: "/research/software/boundary-first-engineering" },
+      { label: "Boundary Theory", href: "/research/formal-theory/boundary-theory" },
+      { label: "Schemathematics", href: "/research/formal-theory/schemathematics" },
+    ],
+  },
+  {
     id: "maps",
     eyebrow: "MAPS",
     title: "See structure from more than one angle.",
@@ -55,7 +68,6 @@ export const observatoryLensGroups = [
     links: [
       { label: "Lab Atlas", href: "/atlas" },
       { label: "Representation Atlas", href: "/representation-atlas" },
-      { label: "Formal theory", href: "/research/formal-theory" },
     ],
   },
   {
@@ -69,6 +81,7 @@ export const observatoryLensGroups = [
       { label: "Claims", href: "/claims" },
       { label: "Evidence", href: "/evidence" },
       { label: "Publications", href: "/publications" },
+      { label: "Paper Mine", href: "/research/paper-mine" },
     ],
   },
   {
@@ -91,8 +104,8 @@ export const observatoryLensGroups = [
       "The apparatus exposes how work is made addressable, testable, reconstructible, and transferable.",
     links: [
       { label: "Apparatus", href: "/apparatus" },
-      { label: "Research", href: "/research" },
-      { label: "Paper Mine", href: "/research/paper-mine" },
+      { label: "Corpus Forge", href: "/products/current/corpus-forge" },
+      { label: "Representation Lab", href: "/labs/representation-lab" },
     ],
   },
   {
@@ -105,7 +118,6 @@ export const observatoryLensGroups = [
       { label: "About the Lab", href: "/about" },
       { label: "Founder", href: "/founder" },
       { label: "AI Governance", href: "/ai-governance" },
-      { label: "Open Lab", href: "/open-lab" },
     ],
   },
 ] as const;

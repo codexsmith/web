@@ -71,9 +71,10 @@ export function PublicationCatalogSection() {
                 <dd>{source.authority}</dd>
               </div>
             </dl>
-            <a href={source.href} target="_blank" rel="noreferrer">
-              Inspect source record <span aria-hidden="true">-&gt;</span>
-            </a>
+            <p className={styles.privateSourceNote}>
+              Private Lab control source. This dated public projection shows its
+              declared role and source scale without granting direct repository access.
+            </p>
           </article>
         ))}
       </div>

@@ -7,7 +7,6 @@ import routeStyles from "./styles/Collaboration.module.css";
 import { composeCssModules } from "./styles/composeCssModules";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { formatOrdinal } from "./institutionalFormat";
-import { institutionalChildRoutes } from "./institutionalRoutes";
 import {
   collaborationBoundaries,
   collaborationExchange,
@@ -25,17 +24,49 @@ export function InstitutionalCollaborationPage() {
       <InstitutionalRouteHero
         styles={styles}
         className={styles.collaborationHero}
-        eyebrow={<>COLLABORATION</>}
-        title={<>Work together where each side brings something the other needs.</>}
+        eyebrow={<>WORK WITH US</>}
+        title={<>Choose the work we can do together.</>}
         lead={
           <>
-            Boundary First Labs develops research, software, methods, products, and prototypes.
-            Collaboration connects that work with real expertise, users, infrastructure,
-            distribution, funding, and constraints that the Lab should not try to reproduce alone.
+            Hire the Lab, partner on research, challenge a result, or support a
+            defined program. You should not need to understand our internal
+            organization to find the right conversation.
           </>
         }
-        childLinks={institutionalChildRoutes.collaboration}
-      />
+        support={
+          <>
+            Start with one clear question, a bounded first step, and an honest
+            account of what each side can contribute.
+          </>
+        }
+      >
+        <nav className={styles.engagementHeroNav} aria-label="Choose how to work with Boundary First Labs">
+          <Link href="/applied-work">
+            <span>01 / HIRE OR COMMISSION</span>
+            <strong>Bring us a difficult system</strong>
+            <small>Systems consulting, technical diagnosis, architecture, and scoped pilots.</small>
+            <span aria-hidden="true">→</span>
+          </Link>
+          <a href={publicContactMailto("Boundary First Labs — Research Partnership")}>
+            <span>02 / PARTNER</span>
+            <strong>Build or investigate together</strong>
+            <small>Research collaboration, domain expertise, tools, and shared validation.</small>
+            <span aria-hidden="true">→</span>
+          </a>
+          <Link href="/open-lab">
+            <span>03 / CRITIQUE OR CONTRIBUTE</span>
+            <strong>Challenge or extend the work</strong>
+            <small>Counterexamples, expert review, public-interest questions, and proposals.</small>
+            <span aria-hidden="true">→</span>
+          </Link>
+          <Link href="/funding">
+            <span>04 / SUPPORT OR FUND</span>
+            <strong>Help a bounded program happen</strong>
+            <small>Funding, sponsorship, support, or a clearly defined milestone.</small>
+            <span aria-hidden="true">→</span>
+          </Link>
+        </nav>
+      </InstitutionalRouteHero>
 
       <section className={styles.collaborationExchangeSection}>
         <InstitutionalSectionHeader
