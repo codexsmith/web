@@ -32,6 +32,11 @@ jobs:
       - name: Install application dependencies
         run: npm ci
 
+      - name: Verify visitor-intent navigation contracts
+        run: |
+          node scripts/check_primary_navigation_intents.mjs
+          node scripts/check_institutional_component_architecture.mjs
+
       - name: Build production application
         run: npm run build
 
