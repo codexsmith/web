@@ -295,6 +295,7 @@ export const institutionalChildRoutes = {
   ],
 } as const;
 
+// Contextual footers retain deep links while mirroring the three visitor actions.
 export const institutionalFooterGroups = [
   {
     label: "Institution",
@@ -306,41 +307,34 @@ export const institutionalFooterGroups = [
     ],
   },
   {
-    label: "Research",
+    label: "Products",
     routes: [
-      { label: "Research", href: "/research" },
-      { label: "Moonshots", href: "/research/moonshots" },
-      { label: "Publications", href: "/publications" },
+      { label: "Products", href: "/products" },
+      { label: "Boundary-First Chess", href: "/products/boundary-first-chess" },
+      { label: "Projectr / Knowledge Explorer", href: "/products/youtube-knowledge-explorer" },
+      { label: "Boundary First Weather", href: "/products/boundary-first-weather" },
     ],
   },
   {
-    label: "Observe",
+    label: "Observatory",
     routes: [
       { label: "Observatory", href: "/observatory" },
-      { label: "Lab Atlas", href: "/atlas" },
-      { label: "Representation Atlas", href: "/representation-atlas" },
+      { label: "Research & Methods", href: "/research" },
+      { label: "Projects", href: "/projects" },
+      { label: "Publications", href: "/publications" },
       { label: "Experiments", href: "/experiments" },
-      { label: "Claims", href: "/claims" },
-      { label: "Evidence", href: "/evidence" },
+      { label: "Claims & Evidence", href: "/evidence" },
       { label: "Apparatus", href: "/apparatus" },
-      { label: "Now", href: "/now" },
-      { label: "What changed", href: "/changes" },
+      { label: "Now / Roadmap", href: "/now" },
       { label: "Lab Through Time", href: "/lab-through-time" },
     ],
   },
   {
-    label: "Work",
+    label: "Work With Us",
     routes: [
+      { label: "Work With Us", href: "/collaboration" },
       { label: "Applied Work", href: "/applied-work" },
-      { label: "Products", href: "/products" },
-      { label: "Projects", href: "/projects" },
-    ],
-  },
-  {
-    label: "Participate",
-    routes: [
-      { label: "Open Lab", href: "/open-lab" },
-      { label: "Collaboration", href: "/collaboration" },
+      { label: "Open Lab / Critique", href: "/open-lab" },
       { label: "Funding", href: "/funding" },
       { label: "Contact", href: PUBLIC_CONTACT_MAILTO },
     ],
