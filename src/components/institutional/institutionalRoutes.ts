@@ -1,28 +1,17 @@
 import { PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
+import { PRIMARY_NAV_ITEMS } from "@/lib/site-navigation";
 
-export const institutionalRoutes = [
-  { label: "Research", href: "/research" },
-  { label: "Observatory", href: "/observatory" },
-  { label: "Products", href: "/products" },
-  { label: "Projects", href: "/projects" },
-  { label: "Applied Work", href: "/applied-work" },
-  { label: "Open Lab", href: "/open-lab" },
-] as const;
-
-export const observatoryRoutePrefixes = [
-  "/observatory",
-  "/atlas",
-  "/representation-atlas",
-  "/experiments",
-  "/claims",
-  "/evidence",
-  "/apparatus",
-  "/now",
-  "/changes",
-  "/lab-through-time",
-] as const;
+// The institutional header and legacy/immersive headers share one menu owner.
+export const institutionalRoutes = PRIMARY_NAV_ITEMS;
 
 const institutionalChildPages = {
+  research: {
+    label: "Research & Methods",
+    href: "/research",
+    relation: "QUESTIONS",
+    kind: "observatory",
+    tone: "indigo",
+  },
   funding: {
     label: "Funding",
     href: "/funding",
@@ -276,8 +265,8 @@ export const institutionalChildRoutes = {
     institutionalChildPages.collaboration,
   ],
   observatory: [
+    institutionalChildPages.research,
     institutionalChildPages.atlas,
-    institutionalChildPages.representationAtlas,
     institutionalChildPages.experiments,
     institutionalChildPages.evidence,
     institutionalChildPages.apparatus,
