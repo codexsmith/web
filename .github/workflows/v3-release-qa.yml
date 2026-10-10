@@ -37,8 +37,14 @@ jobs:
 
       - name: Install pinned browser QA harness
         run: |
-          npm install --no-save --package-lock=false playwright@1.55.0
-          npx playwright install --with-deps chromium
+          # Do not mutate app dependencies after building. In particular, an
+          # unlocked npm install here can upgrade Next and invalidate .next.
+          next_version_before="$(node -p 'require("next/package.json").version')"
+          mkdir -p .qa-tools
+          npm install --prefix .qa-tools --no-save --package-lock=false playwright@1.55.0
+          ln -s ../.qa-tools/node_modules/playwright node_modules/playwright
+          test "$(node -p 'require("next/package.json").version')" = "$next_version_before"
+          node .qa-tools/node_modules/playwright/cli.js install --with-deps chromium
 
       - name: Run Website v3 release QA
         run: node scripts/qa_v3_release.mjs
