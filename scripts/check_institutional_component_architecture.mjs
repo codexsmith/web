@@ -55,13 +55,25 @@ expect(labObjectIdentity.includes("data-kind={kind}"), "LabObjectIdentity must e
 expect(labObjectIdentity.includes("identifierLabel = \"ID\""), "LabObjectIdentity must distinguish source identifiers from local codes");
 expect(labObjectIdentity.includes("statusLabel = \"STATUS\""), "LabObjectIdentity must preserve source-native status labeling");
 expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
-expect(homeContent.includes('title: "Boundary First Weather"'), "Featured work slot four must be Boundary First Weather");
-expect(homeContent.includes('href: "/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
-expect(homeContent.includes('href: "/products/agentic-scientific-method"'), "Featured Agentic Scientific Method must link to its immersive product page");
-expect(homeContent.includes('title: "YouTube Knowledge Explorer"'), "Featured work must use the YouTube Knowledge Explorer public name");
-expect(homeContent.includes('href: "/products/youtube-knowledge-explorer"'), "Featured YouTube Knowledge Explorer must link to its immersive product page");
-expect(!homeContent.includes("Projectr"), "v3 homepage public naming must not expose Projectr");
-expect(!homeContent.includes('title: "Public Infrastructure Analysis"'), "Public Infrastructure Analysis must no longer occupy featured work slot four");
+// Homepage now intentionally groups doctrine, an active-build product family,
+// research infrastructure and a research product. Weather and ASM retain their
+// deeper product identities without being forced into an obsolete featured slot.
+const featuredSource = homeContent.match(/export const featuredWork = \[([\s\S]*?)\] as const;/)?.[1];
+expect(Boolean(featuredSource), "Homepage must expose source-owned featured work");
+const featuredEntries = [...featuredSource.matchAll(/title: "([^"]+)",[\s\S]*?href: "([^"]+)",/g)].map(
+  ([, title, href]) => ({ title, href }),
+);
+const intendedFeaturedEntries = [
+  { title: "Software Before Code", href: "/software-before-code" },
+  { title: "Projectr", href: "/products/pipeline/projectr" },
+  { title: "Corpus Forge", href: "/products/current/corpus-forge" },
+  { title: "Boundary-First Chess", href: "/products/boundary-first-chess" },
+];
+expect(
+  JSON.stringify(featuredEntries) === JSON.stringify(intendedFeaturedEntries),
+  "Homepage must preserve four intentional source-mature featured entries and their actual destinations",
+);
+expect(!featuredSource.includes('title: "Public Infrastructure Analysis"'), "Retired infrastructure placeholder must not reappear as featured work");
 expect(homePage.includes("item.href ?"), "Homepage featured work must support direct product entry links");
 expect(homePage.includes("styles.inMotionSection"), "Homepage must expose the Lab in Motion institutional access layer");
 expect(homeContent.includes("homeNowSnapshot"), "Homepage content must expose a current Now / Roadmap snapshot");
@@ -76,7 +88,7 @@ expect(
 );
 expect(homeContent.includes('href: "/collaboration"'), "Homepage must expose Collaboration as an institutional front door");
 expect(homeContent.includes('href: "/funding"'), "Homepage must expose Funding as an institutional front door");
-expect(homeContent.includes("Externalize → test → repair → repeat → transfer."), "Homepage Now snapshot must preserve the current operating thesis");
+expect(homeContent.includes("Observe → bound → represent → execute → witness → criticize → repair → transfer."), "Homepage Now snapshot must preserve the owner-authored observation-to-transfer operating thesis");
 expect(homePage.includes("homeInstitutionalFrontDoors.map"), "Homepage institutional front doors must render from the content model");
 expect(!homePage.includes("The public site should not stop at describing what Boundary First Labs is."), "Lab in Motion must not carry explanatory site-meta prose");
 expect(!homePage.includes("homeNowSnapshot.description"), "Lab in Motion Now card must stay focused on state, thesis, lanes, and action");
