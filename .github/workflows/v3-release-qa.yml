@@ -35,6 +35,9 @@ jobs:
       - name: Verify visitor-intent navigation contracts
         run: node scripts/check_primary_navigation_intents.mjs
 
+      - name: Verify candidate research digest source and privacy controls
+        run: node scripts/check_research_refresh_candidate.mjs
+
       - name: Build production application
         run: npm run build
 
