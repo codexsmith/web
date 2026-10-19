@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "bfl.public.changes.candidate.v0.1",
+  "projectionStatus": "candidate_editorial_review_not_released",
+  "cutoffDate": "2026-10-18",
+  "sourceRepository": "codexsmith/boundary-first-labs",
+  "sourceRevision": "fbb5cfa40e87efa034615a9298e9d89383ff22c7",
+  "publicationApproval": "pending",
+  "intent": "Canonical material state transitions, not activity or planned work.",
+  "events": [
+    {
+      "id": "factorization-finite-verifier-2026-10-17",
+      "date": "2026-10-17",
+      "scope": "Research",
+      "sourceId": "RL-RM-001 / epistemic-factorization-2026-10-17",
+      "sourceRepository": "codexsmith/boundary-first-labs",
+      "sourceRevision": "9552945d76dd7b17aab40b04e98bba2c8d32be48",
+      "sourceState": "canonical_at_cutoff",
+      "title": "A finite quotient-preservation verifier gained recorded test evidence",
+      "change": "The owner-local packet now includes executable synthetic quotient/congruence checks, recorded outputs, and an explicit prior-art crosswalk.",
+      "consequence": "A bounded verifier makes violations and repair obligations inspectable; it does not prove the wider epistemic-factorization hypothesis.",
+      "claimCeiling": "Internal synthetic calibration of existing mathematical criteria; no independent validation, generalized theorem or novelty admission.",
+      "relatedResearchId": "rm-factorization",
+      "publicHref": "/research"
+    },
+    {
+      "id": "executor-candidate-record-2026-10-12",
+      "date": "2026-10-12",
+      "scope": "Method",
+      "sourceId": "BEX-CAND-001",
+      "sourceRepository": "codexsmith/boundary-first-labs",
+      "sourceRevision": "862529c0a4701fa1eeaa0ff0a0ee4aace7e3c84b",
+      "sourceState": "canonical_at_cutoff",
+      "title": "The Boundary Executor became an explicit research candidate",
+      "change": "An owner-local machine-design packet now records interface obligations, research ownership, provenance and tests still required.",
+      "consequence": "The Lab gained a concrete object to critique or implement, not an operational general executor.",
+      "claimCeiling": "Proposed, unimplemented, unverified; no new registered Lab Machine or validated computation capability.",
+      "relatedResearchId": "boundary-executor",
+      "publicHref": "/research"
+    },
+    {
+      "id": "observatory-main-2026-10-06",
+      "date": "2026-10-06",
+      "scope": "Public interface",
+      "sourceId": "WEB-OBSERVATORY-MAIN",
+      "sourceRepository": "codexsmith/web",
+      "sourceRevision": "893cfaecb35f77b7081793be658469bd77bfb905",
+      "sourceState": "canonical_at_cutoff",
+      "title": "The Observatory joined the canonical public website",
+      "change": "The existing web main revision introduced a public inspection hub grouping maps, evidence, research machinery, time and institutional entry points.",
+      "consequence": "Visitors gained a route for inspection without promoting the website above the source owner.",
+      "claimCeiling": "Public interface change; not a claim that every Lab record or research result is publicly accessible or verified.",
+      "relatedResearchId": null,
+      "publicHref": "/observatory"
+    }
+  ]
+}
