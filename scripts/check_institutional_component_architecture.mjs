@@ -288,21 +288,34 @@ expect(!routeRegistry.includes('relation: "EVIDENCE"'), "Evidence child links mu
 expect(!routeRegistry.includes('relation: "EXPERIMENTS"'), "Experiments child links must not duplicate title and eyebrow");
 expect(!routeRegistry.includes('relation: "CLAIMS"'), "Claims child links must not duplicate title and eyebrow");
 expect(!routeRegistry.includes('relation: "APPARATUS"'), "Apparatus child links must not duplicate title and eyebrow");
-expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
-expect(routeRegistry.includes('{ label: "Apparatus", href: "/apparatus" }'), "footer route collection must include Apparatus");
-expect(routeRegistry.includes('{ label: "Lab Atlas", href: "/atlas" }'), "footer route collection must include Lab Atlas");
-expect(routeRegistry.includes('{ label: "Representation Atlas", href: "/representation-atlas" }'), "footer route collection must include Representation Atlas");
-expect(routeRegistry.includes('{ label: "Experiments", href: "/experiments" }'), "footer route collection must include Experiments");
-expect(routeRegistry.includes('{ label: "Claims", href: "/claims" }'), "footer route collection must include Claims");
-expect(routeRegistry.includes('{ label: "Founder", href: "/founder" }'), "footer route collection must include Founder");
-expect(routeRegistry.includes('{ label: "AI Governance", href: "/ai-governance" }'), "footer route collection must include AI Governance");
-expect(routeRegistry.includes('{ label: "Collaboration", href: "/collaboration" }'), "footer route collection must include Collaboration");
-expect(routeRegistry.includes('{ label: "Applied Work", href: "/applied-work" }'), "footer route collection must include Applied Work");
-expect(routeRegistry.includes('{ label: "Evidence", href: "/evidence" }'), "footer route collection must include Evidence");
-expect(routeRegistry.includes('{ label: "Now", href: "/now" }'), "footer route collection must include Now / Roadmap");
-expect(routeRegistry.includes('{ label: "What changed", href: "/changes" }'), "footer route collection must include What changed");
-expect(routeRegistry.includes('{ label: "Start here", href: "/start" }'), "footer route collection must include Start here");
-expect(routeRegistry.includes('{ label: "Contact", href: PUBLIC_CONTACT_MAILTO }'), "footer Contact must route directly to the canonical public email");
+// The W0 footer is intentionally grouped by visitor intent. The deep Atlas
+// and Claims identities remain reachable contextually rather than occupying
+// every footer; do not recreate obsolete single-flat-list requirements.
+expect(routeRegistry.includes("institutionalFooterGroups"), "footer must group navigable resources by reader purpose");
+expect(routeRegistry.includes("institutionalFooterGroups.flatMap"), "footer must derive its flattened link collection from the governed groups");
+const footerContract = routeRegistry.slice(routeRegistry.indexOf("export const institutionalFooterGroups = ["), routeRegistry.indexOf("export const institutionalFooterRoutes"));
+for (const group of ['label: "Institution"', 'label: "Products"', 'label: "Observatory"', 'label: "Work With Us"']) {
+  expect(footerContract.includes(group), `W0 footer must retain ${group}`);
+}
+for (const route of [
+  '{ label: "Founder", href: "/founder" }',
+  '{ label: "AI Governance", href: "/ai-governance" }',
+  '{ label: "Products", href: "/products" }',
+  '{ label: "Research & Methods", href: "/research" }',
+  '{ label: "Experiments", href: "/experiments" }',
+  '{ label: "Claims & Evidence", href: "/evidence" }',
+  '{ label: "Apparatus", href: "/apparatus" }',
+  '{ label: "Now / Roadmap", href: "/now" }',
+  '{ label: "Work With Us", href: "/collaboration" }',
+  '{ label: "Applied Work", href: "/applied-work" }',
+  '{ label: "Funding", href: "/funding" }',
+  '{ label: "Contact", href: PUBLIC_CONTACT_MAILTO }',
+]) {
+  expect(footerContract.includes(route), `W0 grouped footer missing ${route}`);
+}
+expect(!footerContract.includes('href: "/atlas"'), "Deep Atlas must remain in Observatory contextual navigation, not duplicated in footer");
+expect(!footerContract.includes('href: "/representation-atlas"'), "Representation Atlas must remain in contextual navigation");
+expect(footerContract.includes('{ label: "Contact", href: PUBLIC_CONTACT_MAILTO }'), "footer Contact must route directly to the canonical public email");
 
 const childRouteContracts = [
   ["about", ["founder", "labThroughTime", "aiGovernance", "now", "collaboration", "appliedWork"]],
