@@ -160,8 +160,8 @@ for (const packageName of [
   "@next/swc-win32-x64-msvc",
 ]) {
   const actual = packageLock.packages?.[`node_modules/${packageName}`]?.version;
-  if (actual !== "16.3.3") {
-    fail(`${packageName} must stay aligned to Next.js 16.3.3; locked ${actual ?? "missing"}`);
+  if (actual !== packageLock.packages?.["node_modules/next"]?.version) {
+    fail(`${packageName} must stay aligned to the locked Next.js version ${packageLock.packages?.["node_modules/next"]?.version ?? "missing"}; locked ${actual ?? "missing"}`);
   }
 }
 
