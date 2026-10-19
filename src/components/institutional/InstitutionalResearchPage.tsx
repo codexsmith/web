@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ResearchRefreshPreview } from "./ResearchRefreshPreview";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -105,6 +106,8 @@ export function InstitutionalResearchPage() {
             ))}
           </div>
         </section>
+
+        <ResearchRefreshPreview />
 
         <MoonshotsFeature context="research" />
 
