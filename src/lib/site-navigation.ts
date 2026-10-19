@@ -16,12 +16,12 @@ export const RELATION_INDEX_HREF = "/relations";
 export const RELATIONS_HREF =
   "/map?mode=halo&node=boundary-theory&view=domains";
 
+// One menu per visitor action: use an output, inspect the work, or engage the Lab.
+// Website v3's institutional and immersive headers consume this same list.
 export const PRIMARY_NAV_ITEMS: SiteNavigationItem[] = [
-  { label: "Software", href: "/software" },
-  { label: "Work", href: "/work" },
-  { label: "Research", href: "/research" },
+  { label: "Products", href: "/products" },
   { label: "Observatory", href: "/observatory" },
-  { label: "Collaborate", href: "/collaborate" },
+  { label: "Work With Us", href: "/collaboration" },
 ];
 
 export const IMMERSIVE_NAV_ITEMS = PRIMARY_NAV_ITEMS;
@@ -30,36 +30,53 @@ export function destinationPath(href: string): string {
   return href.split(/[?#]/, 1)[0] || "/";
 }
 
-export function isNavigationItemActive(
-  pathname: string,
-  href: string,
-): boolean {
-  const destination = destinationPath(href);
-  if (pathname === destination) return true;
+// Deep URLs do not move when their public navigation owner changes.
+// Keep each prefix in exactly one group: a visitor with a specific action
+// should never see two active primary navigation items.
+export const PRIMARY_NAV_ROUTE_GROUPS: Readonly<Record<string, readonly string[]>> = {
+  "/products": [
+    "/products", "/software", "/learn", "/audience", "/problem",
+    "/practice", "/methods",
+  ],
+  "/observatory": [
+    "/observatory", "/research", "/publications", "/projects",
+    "/atlas", "/representation-atlas", "/experiments", "/claims",
+    "/evidence", "/apparatus", "/now", "/changes", "/lab-through-time",
+    "/about", "/founder", "/ai-governance", "/people", "/mission",
+    "/governance", "/trust", "/accessibility", "/labs", "/theory",
+    "/sandbox", "/domains", "/domain", "/map", "/relations", LANGUAGE_HREF,
+  ],
+  "/collaboration": [
+    "/collaboration", "/applied-work", "/open-lab", "/funding", "/contact",
+    "/work", "/help", "/business", "/artifact", "/inquire", "/outreach",
+  ],
+};
 
-  const landingGroup = getProductLandingNavigationGroup(pathname);
-  if (landingGroup) {
-    return (
-      (landingGroup === "software" && destination === "/software") ||
-      (landingGroup === "work" && destination === "/work") ||
-      (landingGroup === "research" && destination === "/research")
-    );
+function matchesPublicRoute(pathname: string, prefix: string): boolean {
+  return pathname === prefix || pathname.startsWith(`${prefix}/`);
+}
+
+export function primaryNavigationOwner(pathname: string): string | undefined {
+  for (const [owner, routes] of Object.entries(PRIMARY_NAV_ROUTE_GROUPS)) {
+    if (routes.some((route) => matchesPublicRoute(pathname, route))) {
+      return owner;
+    }
   }
 
-  const routeGroups: Record<string, string[]> = {
-    "/software": ["/software", "/learn", "/audience", "/problem", "/practice", "/methods"],
-    "/work": ["/work", "/help", "/business", "/artifact", "/publications"],
-    "/research": ["/research", "/theory", "/sandbox", "/domains", "/domain", "/map", "/relations", LANGUAGE_HREF],
-    "/observatory": ["/observatory", "/atlas", "/representation-atlas", "/experiments", "/claims", "/evidence", "/apparatus", "/now", "/changes", "/lab-through-time"],
-    "/about": ["/about", "/mission", "/governance", "/people", "/trust", "/accessibility"],
-    "/collaborate": ["/collaborate", "/inquire", "/outreach"],
-  };
-  const group = routeGroups[destination];
-  return Boolean(
-    group?.some(
-      (route) => pathname === route || pathname.startsWith(`${route}/`),
-    ),
-  );
+  // Compatibility for older immersive product landing pages not in the
+  // Website v3 route matrix. Canonical public routes always win above.
+  const landingGroup = getProductLandingNavigationGroup(pathname);
+  // The older "work" group contains Chess, Corpus Forge, and other product
+  // landings; it did not mean "contact the Lab for custom work".
+  if (landingGroup === "work" || pathname === "/weather") return "/products";
+  if (landingGroup === "software" || landingGroup === "research") {
+    return "/observatory";
+  }
+  return undefined;
+}
+
+export function isNavigationItemActive(pathname: string, href: string): boolean {
+  return primaryNavigationOwner(pathname) === destinationPath(href);
 }
 
 export function domainHref(nodeId: string, domainsReturnHref?: string): string {

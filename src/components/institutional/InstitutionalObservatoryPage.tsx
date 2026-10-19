@@ -29,11 +29,11 @@ export function InstitutionalObservatoryPage() {
         styles={styles}
         className={styles.observatoryHero}
         eyebrow={<>OBSERVATORY</>}
-        title={<>A public window into the current state of the Lab.</>}
+        title={<>Explore the research and evidence behind the Lab.</>}
         lead={
           <>
-            Explore the research, maps, experiments, evidence, machinery, and history behind
-            Boundary First Labs without learning the internal filing system first.
+            Start with a research question, a method, an experiment, or a public result.
+            Follow the evidence, maps, machinery, and history as far as you need.
           </>
         }
         support={
@@ -48,13 +48,45 @@ export function InstitutionalObservatoryPage() {
       >
         <aside className={styles.observatoryHeroNote}>
           <span>PUBLIC INSPECTION SURFACE</span>
-          <strong>Start with the map. Descend only when you need more resolution.</strong>
+          <strong>Start with a question. Go deeper when the evidence calls for it.</strong>
           <p>
             The Registrar tells us what exists. Atlases map selected structures. Apparatus
             operates. Observatory lets people look. Open Lab lets them answer back.
           </p>
         </aside>
       </InstitutionalRouteHero>
+
+      <section className={styles.lensSection}>
+        <InstitutionalSectionHeader
+          styles={styles}
+          eyebrow={<>CHOOSE A LENS</>}
+          title={<>Inspect the question you actually have.</>}
+          note={
+            <>
+              Existing pages remain canonical public deep links. The Observatory gives them a
+              shared parent so you do not have to infer how they fit together.
+            </>
+          }
+        />
+
+        <div className={styles.lensGrid}>
+          {observatoryLensGroups.map((group) => (
+            <article className={styles.lensCard} data-lens={group.id} key={group.id}>
+              <span>{group.eyebrow}</span>
+              <h3>{group.title}</h3>
+              <p>{group.description}</p>
+              <nav aria-label={group.eyebrow + " Observatory routes"}>
+                {group.links.map((link) => (
+                  <Link href={link.href} key={link.href}>
+                    {link.label}
+                    <span aria-hidden="true">→</span>
+                  </Link>
+                ))}
+              </nav>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className={styles.roleSection}>
         <InstitutionalSectionHeader
@@ -95,38 +127,6 @@ export function InstitutionalObservatoryPage() {
         pullLine="Observatory observes. Owners own."
       />
 
-      <section className={styles.lensSection}>
-        <InstitutionalSectionHeader
-          styles={styles}
-          eyebrow={<>CHOOSE A LENS</>}
-          title={<>Inspect the question you actually have.</>}
-          note={
-            <>
-              Existing pages remain canonical public deep links. The Observatory gives them a
-              shared parent so you do not have to infer how they fit together.
-            </>
-          }
-        />
-
-        <div className={styles.lensGrid}>
-          {observatoryLensGroups.map((group) => (
-            <article className={styles.lensCard} data-lens={group.id} key={group.id}>
-              <span>{group.eyebrow}</span>
-              <h3>{group.title}</h3>
-              <p>{group.description}</p>
-              <nav aria-label={group.eyebrow + " Observatory routes"}>
-                {group.links.map((link) => (
-                  <Link href={link.href} key={link.href}>
-                    {link.label}
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                ))}
-              </nav>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className={styles.boundarySection}>
         <div>
           <p className={styles.sectionIndex}>{observatoryBoundary.eyebrow}</p>
@@ -135,12 +135,8 @@ export function InstitutionalObservatoryPage() {
         </div>
 
         <nav className={styles.boundaryActions} aria-label="Observatory participation boundary">
-          <Link href="/open-lab">
-            Talk back through Open Lab
-            <span aria-hidden="true">→</span>
-          </Link>
           <Link href="/collaboration">
-            Explore collaboration
+            Work with us, submit a critique, or offer support
             <span aria-hidden="true">→</span>
           </Link>
         </nav>

@@ -1,4 +1,76 @@
 /* Collaboration child route */
+/* First decision: one clear engagement action, not overlapping global links. */
+.engagementHeroNav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.engagementHeroNav a {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 164px;
+  padding: 16px;
+  border: 1px solid rgba(7,26,61,.25);
+  border-top: 4px solid var(--old-gold);
+  background: rgba(255,255,255,.94);
+  color: var(--royal-blue-deep);
+  text-decoration: none;
+  transition: border-color 140ms ease, background-color 140ms ease;
+}
+
+.engagementHeroNav a:nth-child(2) { border-top-color: var(--osha-blue); }
+.engagementHeroNav a:nth-child(3) { border-top-color: var(--osha-green); }
+.engagementHeroNav a:nth-child(4) { border-top-color: var(--osha-orange); }
+
+.engagementHeroNav a > span:first-child {
+  color: var(--old-gold-dark);
+  font: 800 .56rem/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .08em;
+}
+
+.engagementHeroNav a strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.18;
+}
+
+.engagementHeroNav a small {
+  color: #52627b;
+  font-size: .72rem;
+  line-height: 1.4;
+}
+
+.engagementHeroNav a > span:last-child {
+  justify-self: end;
+  align-self: end;
+  color: var(--old-gold-dark);
+  font-size: 1.1rem;
+}
+
+.engagementHeroNav a:focus-visible {
+  outline: 3px solid var(--old-gold-dark);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .engagementHeroNav a:hover {
+    border-color: var(--royal-blue);
+    background: #fff;
+  }
+}
+
+@media (max-width: 680px) {
+  .engagementHeroNav { grid-template-columns: 1fr; }
+  .engagementHeroNav a { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engagementHeroNav a { transition: none; }
+}
+
 .collaborationPage {
   background:
     linear-gradient(180deg, rgba(255,255,255,.84), rgba(232,240,248,.97)),
