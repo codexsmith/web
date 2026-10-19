@@ -38,6 +38,9 @@ jobs:
       - name: Verify candidate research digest source and privacy controls
         run: node scripts/check_research_refresh_candidate.mjs
 
+      - name: Verify candidate Now, Changes and Observatory source manifest
+        run: node scripts/check_public_projection_candidate.mjs
+
       - name: Build production application
         run: npm run build
 

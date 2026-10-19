@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "bfl.public.projection-manifest.candidate.v0.1",
+  "projectionStatus": "candidate_editorial_review_not_released",
+  "cutoffDate": "2026-10-18",
+  "sourceRepository": "codexsmith/boundary-first-labs",
+  "sourceRevision": "fbb5cfa40e87efa034615a9298e9d89383ff22c7",
+  "webBaseRevision": "893cfaecb35f77b7081793be658469bd77bfb905",
+  "generatedBy": {
+    "method": "manual_curated_source_selection",
+    "version": "0.1",
+    "automatedLabFeed": false,
+    "notes": "This manifest verifies web artifact bytes and source cross-references. It does not certify publication authority or independently verify private Lab source ancestry."
+  },
+  "review": {
+    "publicationApproval": "pending",
+    "sourceOwnerReview": "pending",
+    "editorialClaimReview": "pending",
+    "privacyReview": "pending",
+    "releaseReview": "pending",
+    "approvedBy": null,
+    "approvedAt": null
+  },
+  "projections": [
+    {
+      "role": "research",
+      "path": "src/generated/lab-public-state/research-refresh-candidate.json",
+      "gitBlobSha1": "d9f0476a68f09a7a3805f2120b84067af2b75ebb",
+      "itemIds": [
+        "rm-factorization",
+        "boundary-executor",
+        "math-foundations"
+      ]
+    },
+    {
+      "role": "now",
+      "path": "src/generated/lab-public-state/candidates/PUBLIC_NOW.json",
+      "gitBlobSha1": "4bb2e230183722cbb740a102d446df42c636cdf1",
+      "itemIds": [
+        "source-governed-public-interface",
+        "verify-representation-preservation",
+        "executor-specific-obligations"
+      ]
+    },
+    {
+      "role": "changes",
+      "path": "src/generated/lab-public-state/candidates/PUBLIC_CHANGES.json",
+      "gitBlobSha1": "e53aff5a850f6e4a6b0d82e156a1cb76428f107a",
+      "itemIds": [
+        "factorization-finite-verifier-2026-10-17",
+        "executor-candidate-record-2026-10-12",
+        "observatory-main-2026-10-06"
+      ]
+    }
+  ],
+  "sourceRecords": [
+    {
+      "sourceId": "BFL-WEB / W0-W1",
+      "sourceRepository": "codexsmith/boundary-first-labs",
+      "sourceRevision": "fbb5cfa40e87efa034615a9298e9d89383ff22c7",
+      "authority": "canonical_lab_website_backlog",
+      "claimCeiling": "Release-incomplete design/implementation plan; no W0 deployment implied."
+    },
+    {
+      "sourceId": "RL-RM-001 / epistemic-factorization-2026-10-17",
+      "sourceRepository": "codexsmith/boundary-first-labs",
+      "sourceRevision": "9552945d76dd7b17aab40b04e98bba2c8d32be48",
+      "authority": "owner_local_research_candidate_in_canonical_commit",
+      "claimCeiling": "Standard finite quotient/congruence verification only; wider interpretation unproved."
+    },
+    {
+      "sourceId": "BEX-CAND-001",
+      "sourceRepository": "codexsmith/boundary-first-labs",
+      "sourceRevision": "862529c0a4701fa1eeaa0ff0a0ee4aace7e3c84b",
+      "authority": "owner_local_machine_architecture_candidate_in_canonical_commit",
+      "claimCeiling": "Proposed, unimplemented, unverified."
+    },
+    {
+      "sourceId": "RL-PRIM-001 / mathematics-tree-2026-10-18",
+      "sourceRepository": "codexsmith/boundary-first-labs",
+      "sourceRevision": "71a1e3e640a44bec9c11d01484c3a535995d8c6e",
+      "authority": "unpromoted_source_capture_in_canonical_commit",
+      "claimCeiling": "Foundational comparison, not a new established primitive/theorem."
+    },
+    {
+      "sourceId": "WEB-OBSERVATORY-MAIN",
+      "sourceRepository": "codexsmith/web",
+      "sourceRevision": "893cfaecb35f77b7081793be658469bd77bfb905",
+      "authority": "merged_web_main",
+      "claimCeiling": "Public inspection UI change only; not validation or release of private Lab content."
+    }
+  ],
+  "governance": {
+    "now": "Unfinished priorities remain unfinished; a source record is not a closure.",
+    "changes": "Only material transitions from canonical commits at the pinned cutoff, not draft website code or raw commit count.",
+    "observatory": "Read-only combined view; labels and data are derived from Now, Changes and Research candidates. It does not write back to Lab registries.",
+    "previousReviewedArchiveCutoff": "2026-10-02",
+    "promotion": "Source owner + editorial/claim review + privacy review + passing website release/security gates + separately approved production merge are required."
+  }
+}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PublicStateReviewPreview } from "./PublicStateReviewPreview";
 import { ArchitectureProjectionSection } from "./ArchitectureProjectionSection";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import {
@@ -55,6 +56,8 @@ export function InstitutionalObservatoryPage() {
           </p>
         </aside>
       </InstitutionalRouteHero>
+
+      <PublicStateReviewPreview view="observatory" />
 
       <section className={styles.lensSection}>
         <InstitutionalSectionHeader
