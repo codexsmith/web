@@ -44,6 +44,9 @@ jobs:
       - name: Verify Lab-to-web importer replay and rejection cases
         run: node scripts/check_lab_to_web_importer.mjs
 
+      - name: Enforce private candidate publication boundary
+        run: node scripts/check_public_projection_visibility.mjs
+
       - name: Build production application
         run: npm run build
 
