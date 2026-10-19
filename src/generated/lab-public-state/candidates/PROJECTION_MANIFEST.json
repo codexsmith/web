@@ -6,10 +6,10 @@
   "sourceRevision": "fbb5cfa40e87efa034615a9298e9d89383ff22c7",
   "webBaseRevision": "893cfaecb35f77b7081793be658469bd77bfb905",
   "generatedBy": {
-    "method": "manual_curated_source_selection",
-    "version": "0.1",
+    "method": "lab_owned_deterministic_compiler",
+    "version": "0.1.0",
     "automatedLabFeed": false,
-    "notes": "This manifest verifies web artifact bytes and source cross-references. It does not certify publication authority or independently verify private Lab source ancestry."
+    "notes": "Data are manually curated in Lab, then compiled reproducibly; no automatic approval or independent private-GitHub ancestry assertion."
   },
   "review": {
     "publicationApproval": "pending",
@@ -95,5 +95,13 @@
     "observatory": "Read-only combined view; labels and data are derived from Now, Changes and Research candidates. It does not write back to Lab registries.",
     "previousReviewedArchiveCutoff": "2026-10-02",
     "promotion": "Source owner + editorial/claim review + privacy review + passing website release/security gates + separately approved production merge are required."
+  },
+  "handoff": {
+    "protocol": "bfl.lab-to-web.handoff.v0.1",
+    "decisionId": "BFL-WEB-W1-HANDOFF-2026-10-18",
+    "mode": "candidate",
+    "inputDigestSha256": "004709cf1beb9865538087708b638f0853ac526b7f988d1ec5c495b5ef33fd3d",
+    "approvedContentSha256": null,
+    "canonicalLabRevisionRequired": null
   }
 }
