@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "bfl.public.research-digest.candidate.v0.1",
+  "projectionStatus": "candidate_editorial_review_not_released",
+  "cutoffDate": "2026-10-18",
+  "sourceRepository": "codexsmith/boundary-first-labs",
+  "sourceRevision": "fbb5cfa40e87efa034615a9298e9d89383ff22c7",
+  "sourceVisibility": "private",
+  "publicationApproval": "pending",
+  "items": [
+    {
+      "id": "rm-factorization",
+      "sourceId": "RL-RM-001 / epistemic-factorization-2026-10-17",
+      "date": "2026-10-17",
+      "scope": "Research",
+      "title": "What does an abstraction need to preserve?",
+      "status": "Owner-local research candidate; finite synthetic tests",
+      "summary": "The Lab is testing whether abstractions can be understood relative to the questions and continuations they must support. Exact quotient and transition-congruence criteria are established mathematics; an internal finite verifier exercised those cases.",
+      "limitation": "The broader epistemic-factorization thesis remains a hypothesis. Internal synthetic checks do not establish novelty, universal adequacy or independent external validation.",
+      "sourceRevision": "9552945d76dd7b17aab40b04e98bba2c8d32be48",
+      "surfaceHref": "/research"
+    },
+    {
+      "id": "boundary-executor",
+      "sourceId": "BEX-CAND-001",
+      "date": "2026-10-12",
+      "scope": "Method",
+      "title": "A proposed machine for testing representations",
+      "status": "Architecture candidate — unimplemented, unverified",
+      "summary": "The Boundary Executor design describes an interface for bounded checks of state, admissibility, preserved consequences, evidence, and repair obligations.",
+      "limitation": "This proposed general machine is not a registered or validated Lab Machine; existing narrow instruments do not establish a universal executor.",
+      "sourceRevision": "862529c0a4701fa1eeaa0ff0a0ee4aace7e3c84b",
+      "surfaceHref": "/research"
+    },
+    {
+      "id": "math-foundations",
+      "sourceId": "RL-PRIM-001 / mathematics-tree-2026-10-18",
+      "date": "2026-10-18",
+      "scope": "Research",
+      "title": "Comparing the assumptions beneath mathematical foundations",
+      "status": "Unpromoted research source capture",
+      "summary": "A new research capture frames comparisons among existing mathematical foundational systems and the proposed bound-distinction construction.",
+      "limitation": "This is a comparison program, not a theorem replacing set theory or establishing a more fundamental mathematics.",
+      "sourceRevision": "71a1e3e640a44bec9c11d01484c3a535995d8c6e",
+      "surfaceHref": "/research/formal-theory"
+    }
+  ]
+}

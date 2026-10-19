@@ -79,9 +79,10 @@ export function InstitutionalApparatusPage() {
               </div>
             </dl>
             <p className={styles.machineryAuthority}>{machineryProjection.authority}</p>
-            <a href={machineryProjection.sourceHref} target="_blank" rel="noreferrer">
-              Inspect canonical machinery registry <span aria-hidden="true">-&gt;</span>
-            </a>
+            <p className={styles.privateSourceNote}>
+              Canonical machinery registry is private. This dated public snapshot
+              exposes selected identities, responsibilities, and declared limits.
+            </p>
           </div>
 
           <div className={styles.machineryGrid}>

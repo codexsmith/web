@@ -6,32 +6,9 @@ import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
 import { LabCommandPalette } from "./LabCommandPalette";
 import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
-import {
-  institutionalFooterGroups,
-  institutionalRoutes,
-  observatoryRoutePrefixes,
-} from "./institutionalRoutes";
+import { isNavigationItemActive } from "@/lib/site-navigation";
+import { institutionalFooterGroups, institutionalRoutes } from "./institutionalRoutes";
 import styles from "./styles/InstitutionalFoundation.module.css";
-
-function routeIsActive(pathname: string, href: string) {
-  if (
-    href === "/observatory" &&
-    observatoryRoutePrefixes.some(
-      (route) => pathname === route || pathname.startsWith(`${route}/`),
-    )
-  ) {
-    return true;
-  }
-
-  if (
-    href === "/research" &&
-    (pathname === "/publications" || pathname.startsWith("/publications/"))
-  ) {
-    return true;
-  }
-
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
 
 export function InstitutionalHeader() {
   const pathname = usePathname();
@@ -83,14 +60,14 @@ export function InstitutionalHeader() {
 
       <nav className={styles.nav} aria-label="Boundary First Labs">
         {institutionalRoutes.map((route) => {
-          const active = routeIsActive(pathname, route.href);
+          const active = isNavigationItemActive(pathname, route.href);
 
           return (
             <Link
               key={route.href}
               href={route.href}
               className={styles.navLink}
-              aria-current={active ? "page" : undefined}
+              aria-current={active ? (pathname === route.href ? "page" : "location") : undefined}
             >
               {route.label}
             </Link>

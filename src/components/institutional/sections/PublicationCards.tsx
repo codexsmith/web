@@ -59,9 +59,10 @@ export function PublicationSourceContract({
         <span>SOURCE RECORD</span>
         <code>{publication.sourceRef}</code>
       </div>
-      <a href={publication.sourceHref} target="_blank" rel="noreferrer">
-        Inspect pinned source <span aria-hidden="true">-&gt;</span>
-      </a>
+      <p className={styles.privateSourceNote}>
+        Canonical record held in the private Lab repository. The public record
+        above is a bounded, dated projection—not an open source link.
+      </p>
     </div>
   );
 }

@@ -170,3 +170,17 @@ The Representation Atlas at `/v3/representation-atlas` is a separate public comp
 
 
 The v3 publication catalog is now source-governed across three distinct control authorities rather than website-local status shorthand. `REG-PUBLICATION-SEQUENCE` supplies governance/dependency state, `REG-PUBLICATION-GRAPH` supplies routing/readiness projections, and `REG-PUBLICATION-SOURCES` supplies source identity/provenance routing. The public selection may orient and prioritize records for first contact, but it must preserve the source identity and authority ceiling of the controlling registry. Sequence status, graph readiness, source registration, and website selection must never be rendered as synonymous with published, peer reviewed, true, novel, or release-authorized. Publication cards deep-link by source record ID and expose pinned source revisions, control fields, and authority ceilings.
+
+
+### Source-governed research/public-state editorial preview — 2026-10-18
+
+W1 PR #123 deliberately adds an **unapproved** source-governed preview alongside the previously reviewed manual Now / Changes archive. **It does not replace the published archive and must not be merged until review and W0 security/contract gates are complete.** The existing public-state projection was reviewed as of 2026-10-02; its historical status must not be relabeled as current.
+
+- `src/generated/lab-public-state/research-refresh-candidate.json` is the limited research digest.
+- `src/generated/lab-public-state/candidates/PUBLIC_NOW.json` contains ongoing work with closure gates. The PR and security debt are *not completed changes*.
+- `src/generated/lab-public-state/candidates/PUBLIC_CHANGES.json` contains material canonical transitions selected at the pinned source cutoff, not draft PR work or a GitHub activity feed.
+- `src/generated/lab-public-state/candidates/PROJECTION_MANIFEST.json` binds exact git-blob SHA1 fingerprints of all three outputs to one canonical Lab snapshot and enumerates review controls and source IDs. It intentionally does not contain private Lab source paths or download URLs.
+- `scripts/check_public_projection_candidate.mjs` checks fingerprints, payload shape, cross-view provenance, data privacy and route binding. It cannot establish the human editorial decision or prove private Lab commit ancestry independently. Website QA runs this check before building.
+- The Lab source register and owner status live in the existing `06_Website_Content` control/public-projection lanes. Do not duplicate that authority in the web repository.
+
+**Promotion sequence:** source/claim/privacy owner review -> stable public-safe artifact updates + checks -> W0 security/contract clear and Website v3 QA -> approved PR merge. Until then all candidate previews carry `publicationApproval: pending`. Promote only intentionally; no raw auto-feed or direct source-to-live write.

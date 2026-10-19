@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { publicContactMailto } from "@/lib/site-contact";
+import { PublicStateReviewPreview } from "./PublicStateReviewPreview";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import foundationStyles from "./styles/InstitutionalFoundation.module.css";
 import routeSharedStyles from "./styles/InstitutionalRouteShared.module.css";
@@ -55,6 +56,8 @@ export function InstitutionalNowPage() {
       </InstitutionalRouteHero>
 
       <TemporalViewNav activeView="now" />
+
+      <PublicStateReviewPreview view="now" />
 
       <RecentChangesStrip
         changes={nowRecentChanges}

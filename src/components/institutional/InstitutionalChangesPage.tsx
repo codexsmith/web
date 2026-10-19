@@ -1,3 +1,4 @@
+import { PublicStateReviewPreview } from "./PublicStateReviewPreview";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { InstitutionalRouteHero, InstitutionalSectionHeader } from "./InstitutionalPrimitives";
 import { allChanges, changesProjection } from "./content/changes";
@@ -61,6 +62,8 @@ export function InstitutionalChangesPage() {
       </InstitutionalRouteHero>
 
       <TemporalViewNav activeView="changes" />
+
+      <PublicStateReviewPreview view="changes" />
 
       <section className={styles.changeBoundary}>
         <span>WHAT COUNTS AS A CHANGE?</span>

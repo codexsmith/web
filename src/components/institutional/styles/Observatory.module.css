@@ -130,7 +130,7 @@
 
 .lensGrid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -145,6 +145,7 @@
   background: #fff;
 }
 
+.lensCard[data-lens="research"] { border-top-color: var(--old-gold-dark); }
 .lensCard[data-lens="maps"] { border-top-color: #5b63ad; }
 .lensCard[data-lens="evidence"] { border-top-color: #3c7e57; }
 .lensCard[data-lens="time"] { border-top-color: #356f9f; }
@@ -236,7 +237,7 @@
 
 @media (max-width: 1180px) {
   .lensGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "bfl.public.now.candidate.v0.1",
+  "projectionStatus": "candidate_editorial_review_not_released",
+  "cutoffDate": "2026-10-18",
+  "sourceRepository": "codexsmith/boundary-first-labs",
+  "sourceRevision": "fbb5cfa40e87efa034615a9298e9d89383ff22c7",
+  "publicationApproval": "pending",
+  "intent": "What currently deserves attention, not what has already shipped.",
+  "lanes": [
+    {
+      "id": "source-governed-public-interface",
+      "sourceId": "BFL-WEB / W0-W1",
+      "sourceRevision": "fbb5cfa40e87efa034615a9298e9d89383ff22c7",
+      "priority": "NOW",
+      "maturity": "Release-gated implementation",
+      "title": "Make the public site follow source authority",
+      "summary": "Close the three-intent Website v3 navigation release before moving the approved source-governed research refresh into public production.",
+      "work": "Reconcile security advisories, stale architecture contracts, exact publication permissions and release QA; keep unfinished branches out of What Changed.",
+      "closureCriterion": "W0 is merged only after required gates pass, the production revision is verified, and candidate research copy has completed separate owner/editorial review.",
+      "publicHref": "/observatory",
+      "relatedResearchIds": []
+    },
+    {
+      "id": "verify-representation-preservation",
+      "sourceId": "RL-RM-001 / epistemic-factorization-2026-10-17",
+      "sourceRevision": "9552945d76dd7b17aab40b04e98bba2c8d32be48",
+      "priority": "NOW",
+      "maturity": "Finite synthetic controls only",
+      "title": "Compare abstraction-preservation tests against native mathematics",
+      "summary": "The finite quotient and transition verifier is internally exercised. General statements about knowledge, cross-domain applicability and novelty remain research questions.",
+      "work": "Run matched controls and counterexamples for stochastic/approximate cases, then preserve failures and 'no added value' results.",
+      "closureCriterion": "A repeatable matched-baseline packet reports success, failure and novelty boundaries without converting finite controls into a universal theory.",
+      "publicHref": "/research",
+      "relatedResearchIds": [
+        "rm-factorization"
+      ]
+    },
+    {
+      "id": "executor-specific-obligations",
+      "sourceId": "BEX-CAND-001",
+      "sourceRevision": "862529c0a4701fa1eeaa0ff0a0ee4aace7e3c84b",
+      "priority": "NEXT",
+      "maturity": "Proposed/unimplemented/unverified",
+      "title": "Test a candidate executor against bounded instrument contracts",
+      "summary": "The Boundary Executor is a proposed interface for witnesses and lawful continuation checks, not a completed general-purpose machine.",
+      "work": "Identify the smallest implementable typed reference kernel, compare with existing narrow instruments and define falsifiable validation obligations.",
+      "closureCriterion": "A scoped implementation and independent tests exist, or a recorded counterexample narrows or rejects the candidate design.",
+      "publicHref": "/research",
+      "relatedResearchIds": [
+        "boundary-executor"
+      ]
+    }
+  ]
+}
