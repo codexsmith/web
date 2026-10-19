@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { mayRenderPublicStateProjection } from "./content/publicProjectionRelease";
 import digest from "@/generated/lab-public-state/research-refresh-candidate.json";
 import styles from "./styles/ResearchRefreshPreview.module.css";
 
 export function ResearchRefreshPreview() {
+  if (!mayRenderPublicStateProjection()) return null;
   return (
     <section className={styles.section} aria-labelledby="research-refresh-title">
       <header className={styles.header}>

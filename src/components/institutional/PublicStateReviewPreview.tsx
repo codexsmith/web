@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { mayRenderPublicStateProjection } from "./content/publicProjectionRelease";
 import now from "@/generated/lab-public-state/candidates/PUBLIC_NOW.json";
 import changes from "@/generated/lab-public-state/candidates/PUBLIC_CHANGES.json";
 import research from "@/generated/lab-public-state/research-refresh-candidate.json";
@@ -15,6 +16,7 @@ const views = {
 } as const;
 
 export function PublicStateReviewPreview({ view }: { view: View }) {
+  if (!mayRenderPublicStateProjection()) return null;
   const headingId = "source-state-preview-" + view;
   const copy = views[view];
   return (
