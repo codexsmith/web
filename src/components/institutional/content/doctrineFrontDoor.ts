@@ -733,10 +733,10 @@ export const doctrineFrontDoor = {
     "slug": "observatory",
     "name": "Observatory",
     "eyebrow": "Public research exhibition",
-    "tagline": "Explore the structures beneath the systems.",
+    "tagline": "What representations preserve, and what they leave out.",
     "lead": "Selected research questions, demonstrations and methods from mathematics, computation, physics, institutions and economics.",
     "support": "The working laboratory remains private. Each public exhibit states the scope of its evidence and what it can establish.",
-    "foundationsHeading": "Where the work begins.",
+    "foundationsHeading": "Intellectual foundations",
     "foundationsIntro": "Established disciplines supply the standards of reasoning and evidence.",
     "foundations": [
       {
@@ -760,7 +760,7 @@ export const doctrineFrontDoor = {
         "body": "Economics, governance, social inquiry and human experience help locate obligations, access, responsibility and the conditions under which people can continue."
       }
     ],
-    "architectureHeading": "One research practice. Several layers of capability.",
+    "architectureHeading": "Research architecture",
     "architectureIntro": "A functional overview of the Lab, not a dependency graph, formal derivation or implementation specification.",
     "architecture": [
       {
@@ -785,8 +785,8 @@ export const doctrineFrontDoor = {
       }
     ],
     "architectureNote": "A common structure is a research opportunity, not proof that disciplines reduce to one theory.",
-    "researchHeading": "The questions we investigate.",
-    "researchIntro": "Research directions, not established results or announced breakthroughs.",
+    "researchHeading": "Research directions",
+    "researchIntro": "Questions under investigation, not established results or announced breakthroughs.",
     "research": [
       {
         "title": "Formal foundations and representation",
@@ -829,7 +829,7 @@ export const doctrineFrontDoor = {
         "body": "Record evidence, uncertainty, failures and corrections. Evaluate possible repairs and preserve evidence needed to inspect the result."
       }
     ],
-    "evidenceHeading": "Know what is known. Preserve what is not.",
+    "evidenceHeading": "Evidence: know what is known. Preserve what is not.",
     "evidenceIntro": "Distinguish background knowledge, hypotheses, deductions, observations, verified results and independent findings. A demonstration is not a general theorem; public release is not independent validation.",
     "evidence": [
       {
@@ -880,7 +880,7 @@ export const doctrineFrontDoor = {
       "takeaway": "The label cannot establish whether the person received the service. Local correctness can be inadequate for a consequential question; identify the missing evidence and repair path.",
       "limit": "This is an invented teaching example, not a measured finding about a real institution, a proprietary algorithm, or validation of a general theory."
     },
-    "releaseHeading": "A curated record, not an open workbench.",
+    "releaseHeading": "Public release: a curated record, not an open workbench.",
     "releaseBody": "Exhibits are selected individually. Unpublished derivations, dependency maps, working datasets, private logs and execution controls remain outside this exhibition. Claims are limited when supporting evidence is not available.",
     "releaseNote": "This overview does not announce a new scientific result, external certification or released application. Review and publication status belong to each artifact.",
     "links": [
@@ -1292,6 +1292,7 @@ export const doctrineFrontDoor = {
       "slug": "observatory/intellectual-lineage",
       "name": "Intellectual lineage",
       "eyebrow": "Observatory · Exhibit 01 · Historical orientation",
+      "directoryLabel": "01 · Historical orientation",
       "tagline": "Engineering practice shaped the research questions.",
       "lead": "Boundary First begins in the work of understanding and repairing systems. Its intellectual foundations are inherited from established disciplines; its research questions arise where their representations meet consequential practice.",
       "support": "This is a selective account of the intellectual formation of the laboratory, not an exhaustive bibliography, a claim of priority, or proof of a scientific theory.",
@@ -1344,6 +1345,7 @@ export const doctrineFrontDoor = {
       "slug": "observatory/research-architecture",
       "name": "Research architecture",
       "eyebrow": "Observatory · Exhibit 02 · Research-program orientation",
+      "directoryLabel": "02 · Research-program orientation",
       "tagline": "Depth tests validity. Breadth tests relevance.",
       "lead": "The laboratory investigates the relationships between representation, transformation and consequence through several interacting research directions. The aim is to develop reusable understanding without erasing the distinct requirements of each domain.",
       "support": "The diagram and categories here describe functional roles and questions, not the private dependency graph, a complete theory, or an assertion that the domains reduce to one another.",
@@ -1416,6 +1418,7 @@ export const doctrineFrontDoor = {
       "slug": "observatory/computational-inquiry",
       "name": "Computationally leveraged inquiry",
       "eyebrow": "Observatory · Exhibit 03 · Functional architecture",
+      "directoryLabel": "03 · Functional architecture",
       "tagline": "Make inquiry persistent, inspectable and correctable.",
       "lead": "Boundary First Labs is currently a solo-operated institution. Its computational tools are intended to extend what one person can research, build and verify, while keeping direction and responsibility with people.",
       "support": "This exhibit explains the functions that a durable research environment must support, not its internal software design, data model, automation contracts or performance specifications.",
@@ -1472,6 +1475,7 @@ export const doctrineFrontDoor = {
       "slug": "observatory/demonstrations",
       "name": "Selected demonstrations",
       "eyebrow": "Observatory · Exhibit 04 · Illustrative demonstrations",
+      "directoryLabel": "04 · Illustrative demonstrations",
       "tagline": "Small examples. Explicit assumptions. Limited conclusions.",
       "lead": "A carefully chosen example can make a research question tangible without revealing unpublished research. The three examples here use elementary arithmetic and fictional records; each is independently checkable from the information shown.",
       "support": "These are teaching constructions prepared for the exhibition, not demonstrations of a proprietary algorithm, live client data, an empirical performance benchmark or newly established scientific results.",
@@ -2173,7 +2177,7 @@ export const doctrineFrontDoor = {
           "id": "education",
           "audience": "Educators and learners",
           "question": "Can the learner inspect the structure, not just the result?",
-          "body": "Explore teaching instruments and counterexamples that make structure accessible.",
+          "body": "Counterexamples make hidden structure inspectable.",
           "links": [
             {
               "href": "/observatory/instruments",
