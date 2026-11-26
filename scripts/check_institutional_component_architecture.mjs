@@ -2,9 +2,22 @@ import fs from "node:fs";
 
 const root = "src/components/institutional";
 const read = (path) => fs.readFileSync(path, "utf8");
+const failures = [];
+let assertionCount = 0;
 const expect = (condition, message) => {
-  if (!condition) throw new Error(`Institutional component architecture failed: ${message}`);
+  assertionCount += 1;
+  if (!condition) failures.push(message);
 };
+
+// Preserve the blocking exit status while reporting all assertions reached, even
+// if a subsequent structural read raises an unexpected exception.
+process.on("exit", () => {
+  if (failures.length) {
+    console.error(`Institutional component architecture failed: ${failures.length} assertion(s) of ${assertionCount} evaluated`);
+    for (const failure of failures) console.error(`- ${failure}`);
+    process.exitCode = 1;
+  }
+});
 
 for (const required of [
   "InstitutionalChrome.tsx",
@@ -449,8 +462,10 @@ expect(productsPage.includes('/products/boundary-first-chess'), "Products must l
 expect(productsPage.includes('/products/youtube-knowledge-explorer'), "Products must link YouTube Knowledge Explorer to its immersive product page");
 expect((productsPage.match(/<Link\s+[\s\S]*?className=\{styles\.primaryProductCard\}/g) || []).length === 2, "Primary product cards must be full-card links");
 expect(!productsPage.includes("<article className={styles.primaryProductCard}"), "Primary product cards must not require a nested detail link for navigation");
-expect(productsPage.includes("<h3>YouTube Knowledge Explorer</h3>"), "Products must use the YouTube Knowledge Explorer public name");
-expect(!productsPage.includes("Projectr"), "Products public surface must not expose the retired Projectr name");
+// Projectr was explicitly restored as the durable product identity; the Explorer is its bounded implementation.
+expect(productsPage.includes("<h3>Projectr</h3>"), "Products must use the durable Projectr public name");
+expect(productsPage.includes("YouTube Knowledge Explorer is the current working implementation.") && productsPage.includes("Open Projectr / YouTube Explorer"), "Products must distinguish Projectr from its current YouTube implementation");
+expect(productsPage.includes("NOT YET ESTABLISHED") && productsPage.includes("Public availability, recurring use, pricing, market validation"), "Projectr card must preserve its current commercial evidence ceiling");
 expect(productsPage.includes('className={styles.researchProducts}'), "Products must distinguish research products from the near-term B2C edge");
 expect(productsPage.includes('/products/boundary-first-weather'), "Products research-product rail must link Boundary First Weather");
 expect(productsPage.includes('/products/agentic-scientific-method'), "Products research-product rail must link Agentic Scientific Method");
@@ -491,14 +506,16 @@ const explorerContent = read(`${root}/content/youtubeKnowledgeExplorer.ts`);
 const explorerRoute = read("src/app/v3/products/youtube-knowledge-explorer/page.tsx");
 expect(explorerExperience.includes("<ProductExperienceShell"), "YouTube Knowledge Explorer must use the shared product experience shell");
 expect(explorerExperience.includes("<YouTubeKnowledgeExplorerInstrument"), "YouTube Knowledge Explorer must expose an interactive source-navigation instrument");
-expect(explorerExperience.includes("Ask the video. Make the answer show its work."), "YouTube Knowledge Explorer must foreground evidence-bound answering");
-expect(explorerExperience.includes("The product model should outlive its current stack."), "YouTube Knowledge Explorer must expose portability as a product property");
+expect(explorerExperience.includes("Ask a question and keep the answer tied to the moments that support it."), "YouTube Knowledge Explorer must foreground evidence-bound answering");
+expect(explorerExperience.includes("Your saved knowledge should not be trapped in one interface or AI provider."), "YouTube Knowledge Explorer must expose portability as a product property");
 expect(explorerInstrument.startsWith('"use client";'), "YouTube Knowledge Explorer instrument must own its client boundary");
 expect(explorerInstrument.includes("aria-pressed"), "YouTube Knowledge Explorer modes and source moments must expose pressed state accessibly");
 expect(explorerContent.includes("insufficient evidence") || explorerContent.includes("Insufficient evidence"), "YouTube Knowledge Explorer must preserve insufficient-evidence as a valid answer state");
 expect(explorerContent.includes("timestamp"), "YouTube Knowledge Explorer must preserve timestamped source navigation");
-expect(!explorerContent.includes("Projectr"), "YouTube Knowledge Explorer public content model must not expose Projectr");
-expect(!explorerExperience.includes("Projectr"), "YouTube Knowledge Explorer public experience must not expose Projectr");
+expect(explorerContent.includes('name: "Projectr"') && explorerContent.includes("YouTube Knowledge Explorer is its current working implementation"), "Explorer model must preserve the durable Projectr identity and bounded YouTube implementation");
+expect(explorerContent.includes("Repeated use, retention, pricing, and product-market fit remain unestablished."), "Projectr product model must retain the commercial claim ceiling");
+expect(explorerExperience.includes("product={youtubeKnowledgeExplorerProduct}") && explorerExperience.includes("Working Projectr core") && explorerExperience.includes("Keep the product claim smaller than the vision."), "Explorer experience must render the canonical product identity and bounded claim");
+expect(explorerRoute.includes('title: "Projectr / YouTube Knowledge Explorer · Boundary First Labs"') && explorerRoute.includes('canonical: "/products/youtube-knowledge-explorer"'), "Projectr metadata must preserve the product identity and canonical implementation URL");
 expect(explorerRoute.includes("YouTubeKnowledgeExplorerExperience"), "YouTube Knowledge Explorer route must render the product experience");
 
 const asmExperience = read(`${root}/products/AgenticScientificMethodExperience.tsx`);
@@ -1211,3 +1228,5 @@ expect(moonshotsContentGraph.includes('id: "fine-structure-constant"'), "Moonsho
 expect(moonshotsContentGraph.includes("terminal success remains a valid mathematical proof"), "Millennium Problems Moonshot must preserve theorem-level proof authority");
 expect(moonshotsContentGraph.includes("It does not yet contain a zero-free-parameter, first-principles derivation"), "Fine-structure Moonshot must preserve the current no-derivation claim ceiling");
 expect(moonshotsContentGraph.includes("normalization obstruction"), "Fine-structure Moonshot must retain its strongest current negative result");
+
+if (!failures.length) console.log(`Institutional component architecture passed (${assertionCount} assertions).`);
