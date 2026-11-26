@@ -629,6 +629,60 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.equal(await page.locator("[data-civic-case-limit]").textContent(),doctrineFrontDoor.civicRecord.caseNote);
       await fit(page);
     });
+    await scenario("Observatory editorial economy and contextual identity", async (_checkFocus, capture) => {
+      await open(page, base, "/observatory");
+      const model = doctrineFrontDoor.observatory;
+      const gallery = page.locator("[data-observatory-gallery]");
+      assert.equal(await gallery.locator(":scope > h2").textContent(), "Four research exhibits");
+      assert.equal(await gallery.locator(":scope > [data-reader-heading-meta]").count(), 0,
+        "a collection title need not be repeated as an eyebrow");
+      const entries = doctrineFrontDoor.observatoryExhibits;
+      const rows = await gallery.locator("[data-exhibit-card]").evaluateAll(nodes => nodes.map(node => ({
+        slug: node.getAttribute("data-exhibit-card"),
+        title: node.querySelector("h3").textContent,
+        label: node.querySelector("[data-exhibit-directory-label]").textContent,
+        description: node.querySelector("[data-reader-path-content] p").textContent,
+        href: node.querySelector("a").getAttribute("href"),
+        action: node.querySelector("a").getAttribute("aria-label"),
+      })));
+      assert.deepEqual(rows, entries.map(item => ({
+        slug: item.slug, title: item.name, label: item.directoryLabel, description: item.tagline,
+        href: "/" + item.slug, action: "Explore exhibit: " + item.name,
+      })), "contextual labels preserve distinguishing metadata and destination identity");
+      assert.deepEqual(entries.map(item => "Observatory · Exhibit " + item.directoryLabel),
+        entries.map(item => item.eyebrow), "local labels preserve the complete standalone identity");
+      for (const [id, heading, intro] of [
+        ["foundations", model.foundationsHeading, model.foundationsIntro],
+        ["architecture", model.architectureHeading, model.architectureIntro],
+        ["research", model.researchHeading, model.researchIntro],
+        ["method", model.methodHeading, model.methodIntro],
+        ["evidence", model.evidenceHeading, model.evidenceIntro],
+        ["release", model.releaseHeading, model.releaseBody],
+      ]) {
+        const section = page.locator(`[data-observatory-section="${id}"]`);
+        assert.equal(await section.locator(":scope > h2").textContent(), heading);
+        assert.deepEqual(await section.locator(":scope > [data-reader-heading-meta] > p").allTextContents(), [intro]);
+      }
+      const demo = page.locator('[data-observatory-section="demonstration"]');
+      const release = page.locator('[data-observatory-section="release"]');
+      assert.deepEqual(await demo.locator(":scope > [data-reader-heading-meta] > p").allTextContents(),
+        [model.exhibit.eyebrow, model.exhibit.intro]);
+      assert.equal(await demo.locator(":scope > p").last().textContent(), model.exhibit.limit);
+      assert.equal(await release.locator(":scope > p").textContent(), model.releaseNote);
+      assert.ok(await demo.locator(":scope > p").last().isVisible() &&
+        await release.locator(":scope > p").isVisible(), "editorial compression must not erase local claim boundaries");
+      await capture("editorial-economy-observatory-gallery", gallery.locator("h2"));
+      await fit(page);
+      for (const entry of entries) {
+        await open(page, base, "/" + entry.slug);
+        const hero = page.locator("[data-institutional-hero]");
+        assert.equal(await hero.locator("h1").textContent(), entry.name);
+        assert.deepEqual(await hero.locator(":scope > [data-reader-heading-meta] > p").allTextContents(),
+          [entry.eyebrow, entry.tagline]);
+        assert.equal(await page.locator("[data-exhibit-limit] > p").textContent(), entry.limit,
+          "standalone exhibit retains full context and claim boundary");
+      }
+    });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
       await page.locator('[data-instrument-collection][data-bfux-ready="true"]').waitFor();
