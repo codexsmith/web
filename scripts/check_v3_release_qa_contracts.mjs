@@ -41,6 +41,7 @@ expect(readerUx.includes("repair gauge geometry and numeric readout must agree")
 const readerStyle = fs.readFileSync("src/components/institutional/styles/DoctrineFrontDoor.module.css", "utf8");
 expect((readerStyle.match(/--df-reader-paper\s*:/g) ?? []).length === 1 && (readerStyle.match(/--df-ink\s*:/g) ?? []).length === 1, "curated reader tokens must have a single local owner");
 expect(readerUx.includes("repair gauge must be an unanimated, unpadded state projection") && readerUx.includes("100 * 900 / 2100"), "repair gauge acceptance must exercise stable geometry and non-integral coverage");
+expect(readerUx.includes("nameplate text contrast must preserve reading and system-color choice") && readerUx.includes("data-science-caption-band") && readerStyle.includes("--df-reader-chassis:"), "operational and scientific contrast must preserve readable text and forced-color agency");
 expect(readerUx.includes("focusWitness") && readerUx.includes("focusSamples") && readerUx.includes("focus obligation failed") && workflow.includes("name: v3-reader-review"), "reader QA must preserve focus diagnostics and a compact human-review artifact");
 expect(qa.includes("await checkPublicationDiscovery()") && qa.includes("sitemap.xml") && qa.includes("robots.txt") && qa.includes('["x-robots-tag"]'), "release QA must exercise live discovery policy and reference response headers");
 expect(workflow.includes('BFL_V3_INDEXABLE: "true"'), "release QA must exercise production indexing policy on the isolated build");

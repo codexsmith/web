@@ -101,7 +101,7 @@ export function ReaderScientificFigure({ kind, number }: { kind: ScientificFigur
         )}
       </svg>
       <figcaption>
-        <span className={styles.figureCaptionHeading}>
+        <span className={styles.figureCaptionHeading} data-science-caption-band>
           <span className={styles.figureOrdinal}>Figure {String(number).padStart(2, "0")}</span>
           <strong>{copy.title}</strong>
         </span>

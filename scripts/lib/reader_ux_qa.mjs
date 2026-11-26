@@ -41,6 +41,38 @@ async function key(locator, keyName) {
   await locator.focus();
   await locator.press(keyName);
 }
+// Test the actual solid-color text substrate, rather than token names.
+// Computed Chromium sRGB colors are expected here; reject transparency
+// or an unsupported serialization rather than assuming a contrast ratio.
+const contrastWitness = locator => locator.evaluate(node => {
+  const channels = color => {
+    const match = color.match(/^rgba?\(([^)]+)\)$/);
+    if (!match) return null;
+    const values = match[1].split(",").map(Number);
+    return values.length === 3 || (values.length === 4 && values[3] === 1) ? values.slice(0, 3) : null;
+  };
+  const luminance = values => values.map(x => x / 255).map(x =>
+    x <= .04045 ? x / 12.92 : ((x + .055) / 1.055) ** 2.4
+  ).reduce((sum, x, i) => sum + x * [.2126, .7152, .0722][i], 0);
+  const style = getComputedStyle(node);
+  const bg = channels(style.backgroundColor);
+  const checks = [...node.querySelectorAll("strong,span")].filter(el => el.childElementCount === 0).map(el => {
+    const color = getComputedStyle(el).color;
+    const fg = channels(color);
+    if (!fg || !bg) return {color, ratio: 0};
+    const values = [luminance(fg), luminance(bg)].sort((a,b) => b-a);
+    return {color, ratio: (values[0] + .05) / (values[1] + .05)};
+  });
+  return {background: style.backgroundColor, image: style.backgroundImage,
+    forcedColorAdjust: style.forcedColorAdjust, checks};
+});
+async function checkNameplateContrast(locator) {
+  assert.ok(await locator.isVisible());
+  const witness = await contrastWitness(locator);
+  assert.ok(witness.image === "none" && witness.forcedColorAdjust === "auto" &&
+    witness.checks.length > 0 && witness.checks.every(item => item.ratio >= 4.5),
+    "nameplate text contrast must preserve reading and system-color choice: " + JSON.stringify(witness));
+}
 export async function verifyReaderUx(browser, base, mode, reviewDir) {
   const results = [];
   const context = await browser.newContext({
@@ -261,6 +293,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         assert.ok(await svg.isVisible());
         assert.ok((await svg.getAttribute("aria-label"))?.trim());
         assert.ok((await figure.locator("figcaption").innerText()).trim());
+        await checkNameplateContrast(figure.locator("[data-science-caption-band]"));
         assert.equal(await figure.locator("button,a,input,select,textarea,[tabindex]").count(), 0);
         assert.ok(await svg.evaluate(node => {
           const bounds = node.getBoundingClientRect();
@@ -357,6 +390,15 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
       await page.locator('[data-instrument-collection][data-bfux-ready="true"]').waitFor();
+      const faces = page.locator("[data-instrument-face]");
+      assert.deepEqual(await faces.evaluateAll(nodes => nodes.map(node => node.getAttribute("data-instrument-face"))),
+        ["sufficiency", "repair", "authority"]);
+      for (const face of await faces.all()) {
+        await checkNameplateContrast(face);
+        assert.ok((await face.innerText()).includes("Local teaching model"));
+        assert.equal(await face.locator("a,button,input,[tabindex]").count(), 0);
+      }
+      await capture("instrument-nameplate", faces.first());
       const amount = page.locator('input[name="bfl-observation"][value="amount"]');
       const status = page.locator('input[name="bfl-observation"][value="status"]');
       await textIs(page, "[data-suff-title]", "Insufficient representation");
