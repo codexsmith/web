@@ -279,29 +279,32 @@ expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].inc
 expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/start"'), "Curated footer does not promote Start here");
 expect(routeRegistry.includes('{ label: "Contact", href: "/contact" }') && routeRegistry.includes('{ label: "Direct email", href: PUBLIC_CONTACT_MAILTO }'), "Footer exposes contact and direct email");
 
+// Explicit ordered expectations for the retained contextual navigation registry.
+// These are independent of the implementation, including the Observatory and Paper Mine paths.
 const childRouteContracts = [
-  ["about", ["founder", "labThroughTime", "aiGovernance", "now", "collaboration", "appliedWork"]],
-  ["research", ["atlas", "representationAtlas", "aiGovernance", "experiments", "claims", "apparatus"]],
+  ["about", ["founder", "labThroughTime", "aiGovernance", "observatory", "now", "collaboration"]],
+  ["research", ["observatory", "atlas", "representationAtlas", "experiments", "claims", "apparatus"]],
   ["products", ["appliedWork", "evidence", "collaboration", "now"]],
   ["projects", ["appliedWork", "aiGovernance", "evidence", "now", "collaboration", "apparatus"]],
-  ["publications", ["evidence", "claims", "experiments", "atlas", "apparatus"]],
+  ["publications", ["observatory", "paperMine", "evidence", "claims", "experiments", "atlas"]],
   ["funding", ["now", "appliedWork", "evidence", "collaboration"]],
   ["collaboration", ["appliedWork", "funding", "evidence", "now"]],
   ["appliedWork", ["aiGovernance", "evidence", "collaboration", "funding", "now"]],
   ["aiGovernance", ["appliedWork", "evidence", "collaboration", "apparatus"]],
-  ["founder", ["labThroughTime", "evidence", "now", "collaboration"]],
-  ["evidence", ["claims", "experiments", "atlas", "now"]],
-  ["now", ["changes", "labThroughTime", "funding", "appliedWork", "collaboration"]],
-  ["changes", ["now", "labThroughTime", "atlas", "evidence", "apparatus"]],
-  ["labThroughTime", ["founder", "now", "changes", "evidence"]],
-  ["apparatus", ["experiments", "atlas", "evidence", "claims"]],
-  ["experiments", ["evidence", "claims", "apparatus", "atlas", "representationAtlas"]],
-  ["claims", ["evidence", "experiments", "atlas", "representationAtlas"]],
-  ["atlas", ["representationAtlas", "apparatus", "experiments", "claims", "evidence"]],
-  ["representationAtlas", ["atlas", "apparatus", "experiments", "collaboration"]],
-  ["openLab", ["collaboration", "aiGovernance", "experiments", "claims", "evidence", "apparatus"]],
+  ["founder", ["labThroughTime", "evidence", "observatory", "now", "collaboration"]],
+  ["evidence", ["observatory", "claims", "experiments", "atlas", "now"]],
+  ["now", ["observatory", "changes", "labThroughTime", "funding", "appliedWork", "collaboration"]],
+  ["changes", ["observatory", "now", "labThroughTime", "atlas", "evidence", "apparatus"]],
+  ["labThroughTime", ["observatory", "founder", "now", "changes", "evidence"]],
+  ["apparatus", ["observatory", "experiments", "atlas", "evidence", "claims"]],
+  ["experiments", ["observatory", "evidence", "claims", "apparatus", "atlas", "representationAtlas"]],
+  ["claims", ["observatory", "evidence", "experiments", "atlas", "representationAtlas"]],
+  ["atlas", ["observatory", "representationAtlas", "apparatus", "experiments", "claims", "evidence"]],
+  ["representationAtlas", ["observatory", "atlas", "apparatus", "experiments", "collaboration"]],
+  ["observatory", ["atlas", "representationAtlas", "experiments", "evidence", "apparatus", "now"]],
+  ["openLab", ["observatory", "collaboration", "aiGovernance", "experiments", "claims", "evidence"]],
   ["contact", ["collaboration", "appliedWork", "funding"]],
-  ["start", ["appliedWork", "funding", "collaboration", "evidence", "atlas", "now"]],
+  ["start", ["appliedWork", "funding", "collaboration", "observatory", "atlas", "now"]],
 ];
 
 const contextualChildPageKeys = [
@@ -319,9 +322,17 @@ const contextualChildPageKeys = [
   "apparatus",
   "atlas",
   "representationAtlas",
+  "observatory",
+  "paperMine",
 ];
 
 const coveredChildPages = new Set();
+const childRegistrySource = routeRegistry.split("export const institutionalChildRoutes = {")[1]?.split("} as const;")[0] ?? "";
+const declaredRouteKeys = [...childRegistrySource.matchAll(/^\s{2}(\w+): \[/gm)].map(match => match[1]);
+expect(
+  JSON.stringify(declaredRouteKeys) === JSON.stringify(childRouteContracts.map(([key]) => key)),
+  "contextual navigation must account for every declared route exactly once and in registry order",
+);
 
 for (const [routeKey, childKeys] of childRouteContracts) {
   const routeStart = routeRegistry.indexOf(`  ${routeKey}: [`);
@@ -337,8 +348,8 @@ for (const [routeKey, childKeys] of childRouteContracts) {
     `${routeKey} hero must expose at most six contextual child pages`,
   );
   expect(
-    declaredChildKeys.length === childKeys.length,
-    `${routeKey} hero child-page set must stay deliberately curated`,
+    JSON.stringify(declaredChildKeys) === JSON.stringify(childKeys),
+    `${routeKey} hero child-page sequence must stay deliberately curated: expected ${childKeys.join(", ")}; found ${declaredChildKeys.join(", ")}`,
   );
 
   for (const childKey of childKeys) {
