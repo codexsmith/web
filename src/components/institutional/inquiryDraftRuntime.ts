@@ -45,7 +45,9 @@ export function mountInquiryDraft(root: HTMLElement): () => void {
   copy.addEventListener("click", copyDraft);
   clear.addEventListener("click", clearDraft);
   refresh();
+  root.dataset.bfuxReady = "true";
   return () => {
+    delete root.dataset.bfuxReady;
     generation += 1;
     category.removeEventListener("change", refresh);
     message.removeEventListener("input", refresh);

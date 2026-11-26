@@ -137,7 +137,8 @@ export function DoctrineHomePage() {
           <p className={styles.support}>{home.support}</p>
           <p className={styles.identityLine} data-institutional-descriptor>{institutionalIdentity.descriptor}</p>
         </section>
-        <section className={styles.section} data-home-entry-paths aria-label="Three ways into the Lab">
+        <section className={styles.section} data-home-entry-paths aria-labelledby="home-entry-title">
+          <h2 id="home-entry-title" className={styles.entryHeading}>Three ways into the Lab</h2>
           <div className={styles.cards}>{home.paths.map(path => <Link className={styles.card} key={path.href} href={path.href}><span className={styles.num}>{path.tagline}</span><h3>{path.title}</h3><p>{path.body}</p><span className={styles.arrow}>{path.label} <span aria-hidden="true">→</span></span></Link>)}</div>
           <p className={styles.smallPrint}>{home.commitmentLine}</p>
         </section>

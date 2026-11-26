@@ -3,6 +3,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { doctrineNavigationIssues, verifyDoctrineTraversals } from "./lib/doctrine_navigation_qa.mjs";
+import { verifyReaderUx } from "./lib/reader_ux_qa.mjs";
 import { institutionalPublicationEntries, institutionalDiscoveryRoutes, supportingPublicationEntries } from "../src/lib/site-publication.ts";
 
 const harnessModule = process.env.V3_RELEASE_QA_PLAYWRIGHT_MODULE;
@@ -57,6 +58,7 @@ const stressRoutes = new Set([
   "/codexware/civic-record",
   "/observatory",
   "/work-with-us",
+  "/contact",
   "/digital-native-institution",
   "/evidence-and-trust",
   "/consequential-systems",
@@ -802,6 +804,17 @@ try {
   await checkCommandPalette(browser, "desktop");
   await checkCommandPalette(browser, "mobile");
   await checkNotFound(browser);
+  for (const mode of [
+    { name: "desktop", viewport: viewports.desktop },
+    { name: "mobile", viewport: viewports.mobile },
+    { name: "narrow forced-colors", viewport: viewports.narrow, forcedColors: "active" },
+  ]) {
+    const ux = await verifyReaderUx(browser, base, mode);
+    for (const result of ux) {
+      recordFailure(result.name, result.issues);
+      results.push(result);
+    }
+  }
   for (const viewportName of ["desktop", "mobile"]) {
     const issues = await verifyDoctrineTraversals(browser, base, viewports[viewportName]);
     recordFailure(`Doctrine navigation traversal @ ${viewportName}`, issues);

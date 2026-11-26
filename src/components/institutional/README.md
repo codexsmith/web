@@ -189,3 +189,17 @@ Contract ownership: institutional identity/public interface contracts own the ho
 #### Editorial ownership and coherence
 
 Each curated reader now declares its public purpose in `site-publication.ts`. Supporting readers declare a single institutional parent (Codexware, Observatory, or Work With Us), without forbidding relevant cross-links. The rendered parent must expose a visible main-content link to each supporting reader, and the reader must provide a visible return to that parent. The institutional homepage must not directly promote retained reference routes. These rules distinguish contextual accessibility from institutional prominence; they do not imply that the work is a released product or a verified scientific result. Reference material remains available and independently tested. The publication policy governs presentation; capability and provenance contracts do not determine the Lab's editorial identity.
+
+
+#### Boundary First UX — public reader projection
+
+The retained normative reference is [Boundary First UX Conformance Surface Contract](../../../docs/boundary-first-ux-conformance-contract.md). The public institutional face applies its laws rather than importing the experimental workbench visual treatment. This is an application of the documented principles, not a claim of BFUX certification or canonical conformance levels.
+
+- **Orient:** preserve semantic headings, the three entry paths, and named contextual navigation.
+- **Inspect / reveal:** native disclosures expand only the selected reading context; the order, identity, provenance and claim ceiling survive opening and closing.
+- **Reframe:** desktop, mobile and forced-color representations retain the same content, controls, outcomes and return paths.
+- **Stress / trace:** run the public teaching models with keyboard controls; the visible output must expose actual model state and effective authority, not simply the selected flags.
+- **Repair / closure:** distinguish accessible restoration from a remaining gap, and distinguish a prepared local inquiry from explicit copy and from transmission. Reset and clear are reversible local operations, not claims of real-world closure.
+- **Accessibility:** native controls, visible focus, named links, currency value text, non-color-only results and reduced-motion operation are semantic obligations.
+
+The release harness executes these obligations on the actual built site via `scripts/lib/reader_ux_qa.mjs`, including all eight policy combinations, mathematical reveal parity, numeric keyboard transitions, and the local draft boundary. No new route, promotion, remote operation, or mandatory interaction is introduced. Visual and assistive-technology review by people remains necessary; automated checks are bounded witnesses.

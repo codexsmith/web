@@ -29,6 +29,8 @@ expect(qa.includes("Skip to main content"), "v3 release QA must exercise the ski
 expect(qa.includes("Control+K"), "v3 release QA must exercise keyboard command-palette access");
 expect(qa.includes("__release-qa-missing__"), "v3 release QA must exercise the institutional 404 state");
 expect(qa.includes("horizontalOverflow"), "v3 release QA must check horizontal overflow");
+const readerUx = fs.readFileSync("scripts/lib/reader_ux_qa.mjs", "utf8");
+expect(qa.includes("await verifyReaderUx(browser, base, mode)") && qa.includes('forcedColors: "active"') && readerUx.includes("all eight authority states") && readerUx.includes("local draft boundary") && readerUx.includes("reversible reader disclosure"), "release QA must execute BFUX reader behavior, including forced colors and protected local state");
 expect(qa.includes("await checkPublicationDiscovery()") && qa.includes("sitemap.xml") && qa.includes("robots.txt") && qa.includes('["x-robots-tag"]'), "release QA must exercise live discovery policy and reference response headers");
 expect(workflow.includes('BFL_V3_INDEXABLE: "true"'), "release QA must exercise production indexing policy on the isolated build");
 expect(qa.includes('page.locator("main a[href]")') && qa.includes("supportingPublicationEntries") && qa.includes("supporting reader lacks a visible contextual return") && qa.includes("homepage directly promotes retained reference route"), "release QA must verify editorial parent/child traversal and homepage prominence");

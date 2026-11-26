@@ -15,7 +15,8 @@ export function policyModel(read: boolean, analyze: boolean, draft: boolean) {
 
 export function mountPublicInstruments(root: HTMLElement) {
   const get = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector);
-  const put = (selector: string, value: string) => { const el = get(selector); if (el) el.textContent = value; };
+  // Avoid announcing unchanged state every time another control is adjusted.
+  const put = (selector: string, value: string) => { const el = get(selector); if (el && el.textContent !== value) el.textContent = value; };
   const money = (n: number) => "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
   const checked = (selector: string) => Boolean(get<HTMLInputElement>(selector)?.checked);
   const amount = (name: string, fallback: number) => {
@@ -33,14 +34,22 @@ export function mountPublicInstruments(root: HTMLElement) {
     put('[data-suff-formula]', obs.sufficient ? 'ker(O) ⊆ ker(K)' : 'ker(O) ⊄ ker(K)');
     const c = amount('cost', 2000), r = amount('resources', 1200), p = amount('protected', 300);
     const result = repairModel(c,r,p);
-    for (const [key, val] of Object.entries({cost:c,resources:r,protected:p})) put(`[data-repair-value="${key}"]`,money(val));
+    for (const [key, val] of Object.entries({cost:c,resources:r,protected:p})) {
+      put(`[data-repair-value="${key}"]`, money(val));
+      const input = get<HTMLInputElement>(`[data-repair="${key}"]`);
+      if (input && input.getAttribute("aria-valuetext") !== money(val)) input.setAttribute("aria-valuetext", money(val));
+    }
     put('[data-repair-available]', money(result.available)); put('[data-repair-gap]', money(result.gap));
     const meter = get('[data-repair-meter]'); if (meter) meter.style.width = `${100 * result.fraction}%`;
     put('[data-repair-title]', result.accessible ? 'Repair is accessible under these conditions.' : 'Restoration remains inaccessible.');
     put('[data-repair-detail]', `${money(result.available)} available toward an indivisible ${money(c)} repair; ${money(result.gap)} still unfunded. Protected-obligation shortfall: ${money(result.shortfall)}.`);
     const policy = policyModel(checked('[data-policy="read"]'),checked('[data-policy="analyze"]'),checked('[data-policy="draft"]'));
     for (const [key, allowed] of Object.entries(policy)) put(`[data-operation="${key}"]`, allowed ? 'Permitted in model' : 'Denied');
-    put('[data-policy-detail]', `${Object.values(policy).filter(Boolean).length} of 7 modeled operations permitted. This changes a fictional policy, not actual permissions. Analysis requires inspection; recommendations require both.`);
+    const blocked = [
+      checked('[data-policy="analyze"]') && !policy.analyze ? "Analysis is selected but blocked until inspection is permitted." : "",
+      checked('[data-policy="draft"]') && !policy.draft ? "Drafting is selected but blocked until inspection and analysis are permitted." : "",
+    ].filter(Boolean).join(" ");
+    put('[data-policy-detail]', `${Object.values(policy).filter(Boolean).length} of 7 modeled operations permitted. This changes a fictional policy, not actual permissions. Analysis requires inspection; recommendations require both.${blocked ? " " + blocked : ""}`);
   }
   const reset = (event: Event) => {
     const target = event.target;
@@ -52,5 +61,6 @@ export function mountPublicInstruments(root: HTMLElement) {
   };
   root.addEventListener('input',render); root.addEventListener('change',render); root.addEventListener('click',reset);
   render();
-  return () => { root.removeEventListener('input',render); root.removeEventListener('change',render); root.removeEventListener('click',reset); };
+  root.dataset.bfuxReady = 'true';
+  return () => { delete root.dataset.bfuxReady; root.removeEventListener('input',render); root.removeEventListener('change',render); root.removeEventListener('click',reset); };
 }

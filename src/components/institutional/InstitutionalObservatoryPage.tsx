@@ -21,7 +21,7 @@ export function InstitutionalObservatoryPage() {
           <div data-observatory-exhibit="public">
             <section className={styles.section} data-observatory-gallery>
               <p className={styles.eyebrow}>Explore the exhibits</p><h2>Four ways to understand the work.</h2>
-              <div className={styles.pathGrid}>{doctrineFrontDoor.observatoryExhibits.map(item => <article className={styles.pathCard} key={item.slug} data-exhibit-card={item.slug}><p className={styles.workStatus}>{item.eyebrow}</p><h3>{item.name}</h3><p>{item.tagline}</p><Link className={styles.textLink} href={`/${item.slug}`}>Explore exhibit <span aria-hidden="true">→</span></Link></article>)}</div>
+              <div className={styles.pathGrid}>{doctrineFrontDoor.observatoryExhibits.map(item => <article className={styles.pathCard} key={item.slug} data-exhibit-card={item.slug}><p className={styles.workStatus}>{item.eyebrow}</p><h3>{item.name}</h3><p>{item.tagline}</p><Link className={styles.textLink} href={`/${item.slug}`} aria-label={`Explore exhibit: ${item.name}`}>Explore exhibit <span aria-hidden="true">→</span></Link></article>)}</div>
             </section>
             <section className={styles.section} data-observatory-section="foundations">
               <p className={styles.eyebrow}>Intellectual foundations</p>
