@@ -242,6 +242,63 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         await capture("masthead-" + kind, hero);
       }
     });
+    await scenario("title-first compact heading metadata", async (_checkFocus, capture) => {
+      const samples = ["/", "/observatory", "/codexware", "/work-with-us", "/constructive-human-agency",
+        "/digital-native-institution", "/evidence-and-trust", "/observatory/intellectual-lineage",
+        "/observatory/instruments", "/codexware/civic-record", "/codexware/economic-maintenance",
+        "/work-with-us/paper-auditing", "/contact"];
+      for (const route of samples) {
+        await open(page, base, route);
+        const rows = page.locator("main [data-reader-heading-meta]");
+        assert.ok(await rows.count() > 0, "reader must contain heading metadata: " + route);
+        const hero = page.locator("main [data-institutional-hero]");
+        assert.equal(await hero.locator(":scope > h1 + [data-reader-heading-meta]").count(), 1,
+          "title precedes hero metadata in document order");
+        for (const row of await rows.all()) {
+          const witness = await row.evaluate(node => {
+            const parent = node.previousElementSibling;
+            const bounds = node.getBoundingClientRect();
+            const title = parent?.getBoundingClientRect();
+            const items = [...node.children].map(el => {
+              const rect = el.getBoundingClientRect();
+              return {text: el.textContent.trim(), top: rect.top, bottom: rect.bottom,
+                left: rect.left, right: rect.right, width: rect.width, height: rect.height};
+            });
+            const style = getComputedStyle(node);
+            return {
+              heading: parent?.tagName,
+              follows: !!title && bounds.top >= title.bottom - 1,
+              layout: style.display,
+              wrap: style.flexWrap,
+              bounded: items.every(x => x.text && x.height > 0 && x.width > 0 &&
+                x.left >= bounds.left - 1 && x.right <= bounds.right + 1 &&
+                x.top >= bounds.top - 1 && x.bottom <= bounds.bottom + 1),
+              nonoverlap: items.length < 2 || items[1].top >= items[0].bottom - 1 || items[1].left >= items[0].right - 1,
+              items,
+            };
+          });
+          assert.ok(["H1","H2"].includes(witness.heading) && witness.follows &&
+            witness.layout === "flex" && witness.wrap === "wrap" && witness.bounded && witness.nonoverlap,
+            "heading metadata remains below its title, legible and naturally wrapping: " + JSON.stringify(witness));
+        }
+        if (route === "/observatory") {
+          const meta = hero.locator(":scope > [data-reader-heading-meta]");
+          assert.deepEqual(await meta.locator(":scope > p").allTextContents(),
+            [doctrineFrontDoor.observatory.eyebrow, doctrineFrontDoor.observatory.tagline]);
+          const sameLine = await meta.evaluate(node => {
+            const [a,b] = [...node.children].map(el => el.getBoundingClientRect());
+            return b.left >= a.right && b.top < a.bottom && a.top < b.bottom;
+          });
+          if (mode.viewport.width >= 1280) assert.ok(sameLine,
+            "short Observatory hero metadata shares a single line when there is room");
+          if (mode.viewport.width <= 390) assert.ok(!sameLine,
+            "compact Observatory metadata wraps instead of forcing overflow");
+          await capture("title-first-observatory-hero", hero);
+          await capture("title-first-observatory-section", page.locator('[data-audience-paths="observatory"] h2'));
+        }
+        await fit(page);
+      }
+    });
     await scenario("editorial chapter sequence and caption identity", async (_checkFocus, capture) => {
       // Chapter ordinals are presentation-local. Check the canonical editorial
       // text, not just the presence or sequentiality of the decoration.

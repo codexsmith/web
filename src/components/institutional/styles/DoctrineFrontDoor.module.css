@@ -943,11 +943,11 @@
  * of institutional age or endorsement. Warm paper is used only for the
  * existing founder account, purpose, lineage and stewardship material.
  * Scientific plates and operational nameplates keep their cooler substrate. */
-.surface [data-reader-heritage="origin"] > .eyebrow,
+.surface [data-reader-heritage="origin"] > .headingMeta > .eyebrow,
 .surface [data-reader-heritage="lineage-exhibit"] [data-reader-chapter-ordinal] {
   color: var(--old-gold-dark, #776126);
 }
-.surface [data-reader-heritage="origin"] > .eyebrow::before {
+.surface [data-reader-heritage="origin"] > .headingMeta > .eyebrow::before {
   content: "";
   display: inline-block;
   width: 18px;
@@ -990,7 +990,7 @@
   font-variant-numeric: lining-nums tabular-nums;
 }
 @media (forced-colors: active) {
-  .surface [data-reader-heritage="origin"] > .eyebrow::before {
+  .surface [data-reader-heritage="origin"] > .headingMeta > .eyebrow::before {
     display: none;
   }
   .surface :is([data-reader-heritage="purpose"],[data-reader-heritage="stewardship"]),
@@ -1002,4 +1002,49 @@
   .surface [data-trust-detail="lineage"] .exhibitLayers {
     border-color: CanvasText;
   }
+}
+
+
+/* Title-first reading hierarchy. Metadata is a natural flex line, not a
+ * fixed-column grid or visual reordering of the semantic document.
+ * The eyebrow and short tagline/intro share a line only if both fit.
+ * Long text takes its own line at the established reading measure. */
+.surface :is(h1,h2):has(+ .headingMeta) {
+  margin-bottom: 8px;
+}
+.surface .headingMeta {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  gap: 5px 16px;
+  max-width: 750px;
+  min-width: 0;
+  margin: 0 0 18px;
+}
+.surface .hero > .headingMeta {
+  max-width: 850px;
+  margin-bottom: 18px;
+}
+.surface .headingMeta > :is(.eyebrow,.tagline,.sectionIntro) {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.surface .headingMeta > .eyebrow {
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+}
+.surface .headingMeta > .tagline {
+  line-height: 1.45;
+}
+.surface .headingMeta > .sectionIntro {
+  line-height: 1.55;
+}
+@media (max-width: 480px) {
+  .surface .headingMeta { column-gap: 10px; }
 }

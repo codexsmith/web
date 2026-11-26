@@ -11,7 +11,7 @@ export function CodexwareCivicRecordPage() {
       <div className={styles.wrap}>
         <section className={`${styles.hero} ${styles.doctrineHero}`} data-institutional-hero>
           <Link className={styles.back} href="/codexware">Back to Codexware</Link>
-          <p className={styles.eyebrow}>{c.eyebrow}</p><h1>{c.name}</h1><p className={styles.tagline}>{c.tagline}</p>
+          <h1>{c.name}</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{c.eyebrow}</p><p className={styles.tagline}>{c.tagline}</p></div>
           <p className={styles.lead}>{c.lead}</p><p className={styles.support}>{c.support}</p>
         </section>
         <section className={styles.section} data-civic-status><p className={styles.eyebrow}>Development status</p><p className={styles.sectionIntro}>{c.status}</p></section>

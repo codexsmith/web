@@ -11,7 +11,7 @@ export function CodexwareEconomicMaintenancePage() {
       <div className={styles.wrap}>
         <section className={`${styles.hero} ${styles.doctrineHero}`} data-institutional-hero>
           <Link className={styles.back} href="/codexware">Back to Codexware</Link>
-          <p className={styles.eyebrow}>{e.eyebrow}</p><h1>{e.name}</h1><p className={styles.tagline}>{e.tagline}</p>
+          <h1>{e.name}</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{e.eyebrow}</p><p className={styles.tagline}>{e.tagline}</p></div>
           <p className={styles.lead}>{e.lead}</p><p className={styles.support}>{e.support}</p>
         </section>
         <section className={styles.section} data-economic-status><p className={styles.eyebrow}>Research status</p><p className={styles.sectionIntro}>{e.status}</p></section>
