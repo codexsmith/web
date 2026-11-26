@@ -93,7 +93,36 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.equal(await paths.locator("h2").innerText(), "Three ways into the Lab");
       assert.deepEqual(await paths.locator("a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href"))),
         ["/codexware", "/observatory", "/work-with-us"]);
+      // Decorative symbols must follow route identity, not become a parallel
+      // navigation system or independent accessible controls.
+      const checkGlyphs = async (region, expected) => {
+        const entries = await region.locator("a").evaluateAll(links => links.map(link => {
+          const marks = [...link.querySelectorAll("[data-reader-glyph]")];
+          const mark = marks[0];
+          const rect = mark?.getBoundingClientRect();
+          return {
+            href: link.getAttribute("href"),
+            glyph: mark?.getAttribute("data-reader-glyph"),
+            decorative: marks.length === 1 && mark.getAttribute("aria-hidden") === "true" &&
+              mark.getAttribute("focusable") === "false",
+            visible: !!rect && rect.width > 0 && rect.height > 0,
+            title: link.querySelector("h3")?.textContent.trim(),
+          };
+        }));
+        assert.deepEqual(entries.map(({href,glyph}) => [href,glyph]), expected);
+        assert.ok(entries.every(entry => entry.decorative && entry.visible && entry.title),
+          "reader glyphs preserve written labels and decorative semantics");
+      };
+      await checkGlyphs(paths, [
+        ["/codexware", "operation"], ["/observatory", "observation"], ["/work-with-us", "collaboration"],
+      ]);
       await capture("home-entry-paths", paths);
+      const doctrines = page.locator('main [data-doctrine-links="home"]');
+      await checkGlyphs(doctrines, [
+        ["/consequential-systems", "consequence"], ["/ai-governance", "governance"],
+        ["/constructive-human-agency", "agency"],
+      ]);
+      await capture("doctrine-glyphs", doctrines);
       await open(page, base, "/observatory");
       const details = page.locator("main [data-reader-detail]");
       assert.equal(await details.count(), 4);

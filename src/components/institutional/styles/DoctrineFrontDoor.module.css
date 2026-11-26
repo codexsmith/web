@@ -331,3 +331,90 @@
     color: CanvasText;
   }
 }
+
+
+/* Institutional ornament — seam and witness. The existing wordmark is
+ * untouched; the six route glyphs are supporting editorial cues only. */
+.surface .hero {
+  position: relative;
+}
+.surface .hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 46px;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--df-gold) 0 33px, transparent 33px 40px, var(--df-deep) 40px 46px);
+  pointer-events: none;
+}
+.surface [data-reader-kicker] {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.surface [data-reader-glyph] {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  color: var(--df-accent);
+}
+/* A restrained engraved rule distinguishes the doctrine bank's common
+   institutional context without assigning each doctrine its own brand. */
+.surface [data-doctrine-links] .eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  margin-right: 9px;
+  vertical-align: middle;
+  background: var(--df-gold);
+}
+.surface .humanPurpose {
+  border-left-color: var(--df-reader-rail, var(--df-gold));
+}
+/* Feedback is local to the operated control. No motion or semantic
+   status change is implied by hover or momentary press. */
+@media (hover: hover) and (pointer: fine) {
+  .surface a.card:hover {
+    box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.16), 0 6px 16px rgba(7,26,61,.10);
+  }
+  .surface .readerDetails > summary:hover,
+  .surface a.textLink:hover {
+    text-decoration-thickness: 2px;
+  }
+}
+.surface a.card:active,
+.surface a.action:active,
+.surface [data-demo-controls] button:active,
+.surface .inquiryDraft button:not(:disabled):active {
+  box-shadow: inset 0 2px 5px rgba(7,26,61,.24);
+}
+.surface .readerDetails > summary:active {
+  color: var(--df-deep);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (forced-colors: active) {
+  .surface .hero::after,
+  .surface [data-doctrine-links] .eyebrow::before {
+    display: none;
+  }
+  .surface [data-reader-glyph] {
+    color: LinkText;
+  }
+  .surface .humanPurpose {
+    border-left-color: CanvasText;
+  }
+  .surface a.card:active,
+  .surface a.action:active,
+  .surface [data-demo-controls] button:active,
+  .surface .inquiryDraft button:not(:disabled):active {
+    border-color: Highlight;
+    box-shadow: none;
+  }
+}

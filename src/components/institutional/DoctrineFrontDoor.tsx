@@ -2,6 +2,7 @@ import Link from "next/link";
 import { institutionalIdentity } from "@/lib/institutional-identity";
 import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import { ReaderRouteGlyph } from "./ReaderRouteGlyph";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
 
@@ -13,7 +14,7 @@ function DoctrineCards({ exclude }: { exclude?: Doctrine["slug"] }) {
     <div className={styles.cards}>
       {content.doctrines.filter((d) => d.slug !== exclude).map((d) => (
         <Link className={styles.card} href={`/${d.slug}`} key={d.slug}>
-          <span className={styles.num}>DOCTRINE {d.number}</span>
+          <span className={styles.num} data-reader-kicker><ReaderRouteGlyph href={`/${d.slug}`} /><span>DOCTRINE {d.number}</span></span>
           <h3>{d.name}</h3>
           <p>{d.summary}</p>
           <span className={styles.arrow}>Read the doctrine <span aria-hidden="true">→</span></span>
@@ -139,7 +140,7 @@ export function DoctrineHomePage() {
         </section>
         <section className={styles.section} data-home-entry-paths aria-labelledby="home-entry-title">
           <h2 id="home-entry-title" className={styles.entryHeading}>Three ways into the Lab</h2>
-          <div className={styles.cards}>{home.paths.map(path => <Link className={styles.card} key={path.href} href={path.href}><span className={styles.num}>{path.tagline}</span><h3>{path.title}</h3><p>{path.body}</p><span className={styles.arrow}>{path.label} <span aria-hidden="true">→</span></span></Link>)}</div>
+          <div className={styles.cards}>{home.paths.map(path => <Link className={styles.card} key={path.href} href={path.href}><span className={styles.num} data-reader-kicker><ReaderRouteGlyph href={path.href} /><span>{path.tagline}</span></span><h3>{path.title}</h3><p>{path.body}</p><span className={styles.arrow}>{path.label} <span aria-hidden="true">→</span></span></Link>)}</div>
           <p className={styles.smallPrint}>{home.commitmentLine}</p>
         </section>
         <section className={`${styles.section} ${styles.callout}`} aria-labelledby="maintenance-title">
