@@ -1092,3 +1092,119 @@
 @media (forced-colors: active) {
   .surface .audienceLinks { border-color: CanvasText; }
 }
+
+
+/* Collection syntax: the semantic role selects the appropriate representation.
+ * Gateways and pathways remain bounded choices. References form a readable
+ * field, directories expose destinations, comparisons preserve paired limits,
+ * and sequences preserve ordered traversal. No CSS visual reordering. */
+.surface [data-reader-collection] {
+  min-width: 0;
+}
+.surface [data-reader-collection="gateway"]:has(> :nth-child(2):last-child) {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+.surface :is([data-reader-collection="reference"],[data-reader-collection="directory"],[data-reader-collection="comparison"]) {
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  gap: 0;
+  border-top: 1px solid var(--df-reader-seam);
+}
+.surface :is([data-reader-collection="reference"],[data-reader-collection="directory"],[data-reader-collection="comparison"]) > article {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  align-items: start;
+  gap: var(--df-space-attached);
+  padding: 16px 0;
+  border: 0;
+  border-bottom: 1px solid var(--df-reader-seam);
+  background: transparent;
+  box-shadow: none;
+  overflow-wrap: anywhere;
+}
+.surface :is([data-reader-collection="reference"],[data-reader-collection="directory"],[data-reader-collection="comparison"]) > article h3 {
+  font-size: var(--df-type-subhead);
+  line-height: 1.24;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.surface :is([data-reader-collection="reference"],[data-reader-collection="directory"],[data-reader-collection="comparison"]) > article p {
+  margin: 0;
+  min-width: 0;
+  line-height: 1.55;
+}
+.surface [data-reader-collection="directory"] [data-reader-path-identity] > .workStatus {
+  margin-top: var(--df-space-attached);
+}
+.surface [data-reader-collection="directory"] [data-reader-path-content] > a {
+  margin-top: var(--df-space-attached);
+}
+.surface [data-reader-collection="comparison"] [data-evidence-type-limit] {
+  border-inline-start: 2px solid var(--df-reader-edge);
+  padding-inline-start: var(--df-space-related);
+}
+.surface [data-reader-collection="comparison"] + [data-reader-collection="reference"],
+.surface .exhibitLayers + [data-reader-collection="reference"] {
+  margin-top: var(--df-space-group);
+}
+/* Native ordered lists expose sequence without separate card containers. */
+.surface [data-reader-collection="sequence"] {
+  grid-template-columns: minmax(0,1fr);
+  gap: 0;
+  margin-block: var(--df-space-related);
+  border-top: 1px solid var(--df-reader-seam);
+}
+.surface [data-reader-collection="sequence"] > li {
+  border: 0;
+  border-bottom: 1px solid var(--df-reader-seam);
+  background: transparent;
+  padding: 16px 0;
+  min-width: 0;
+  box-shadow: none;
+}
+.surface [data-reader-collection="sequence"] > li h3 {
+  font-size: var(--df-type-subhead);
+  font-weight: 700;
+}
+/* Primary contact actions are not made visually equivalent to reference links.
+ * Preserve the existing actual action target and its accessible focus clearance. */
+.surface :is([data-work-section="contact"],[data-guide-contact]) a.action {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+.surface [data-guide-contact] > .links + .links {
+  padding-top: var(--df-space-related);
+  border-top: 1px solid var(--df-reader-seam);
+}
+@media (min-width: 960px) {
+  .surface :is([data-reader-collection="reference"],[data-reader-collection="directory"]) > article {
+    grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr);
+    align-items: baseline;
+    column-gap: var(--df-space-group);
+  }
+}
+@media (min-width: 1200px) {
+  .surface [data-audience-paths="observatory"] [data-reader-collection="pathways"],
+  .surface [data-civic-cases] [data-reader-collection="cases"] {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+  .surface [data-reader-collection="comparison"] > article {
+    grid-template-columns: minmax(0,.65fr) minmax(0,1fr) minmax(0,1fr);
+    align-items: baseline;
+    column-gap: var(--df-space-group);
+  }
+}
+@media (max-width: 800px) {
+  .surface [data-reader-collection="gateway"]:has(> :nth-child(2):last-child) {
+    grid-template-columns: minmax(0,1fr);
+  }
+}
+@media (forced-colors: active) {
+  .surface :is([data-reader-collection="reference"],[data-reader-collection="directory"],[data-reader-collection="comparison"],[data-reader-collection="sequence"]),
+  .surface :is([data-reader-collection="reference"],[data-reader-collection="directory"],[data-reader-collection="comparison"],[data-reader-collection="sequence"]) > :is(article,li),
+  .surface [data-reader-collection="comparison"] [data-evidence-type-limit],
+  .surface [data-guide-contact] > .links + .links {
+    border-color: CanvasText;
+  }
+}

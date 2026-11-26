@@ -533,6 +533,100 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.equal(await engagement.getAttribute("open"), null);
       await capture("work-paths-compact", page.locator('[data-work-group="commission"]'));
     });
+    await scenario("semantic collection syntax and scope preservation", async (_checkFocus, capture) => {
+      const checkCollection = async (collection, role, expected) => {
+        assert.equal(await collection.count(), 1);
+        const witness = await collection.evaluate((node, role) => {
+          const frame = node.getBoundingClientRect();
+          const style = getComputedStyle(node);
+          const rects = [...node.children].map(el => {
+            const box = el.getBoundingClientRect(), css = getComputedStyle(el);
+            return {x:box.x,y:box.y,right:box.right,bottom:box.bottom,width:box.width,height:box.height,
+              borderTop:parseFloat(css.borderTopWidth),borderBottom:parseFloat(css.borderBottomWidth),
+              borderLeft:parseFloat(css.borderLeftWidth),borderRight:parseFloat(css.borderRightWidth),
+              shadow:css.boxShadow, links:[...el.querySelectorAll("a")].map(a=>({href:a.getAttribute("href"),height:a.getBoundingClientRect().height}))};
+          });
+          const strip = ["reference","directory","comparison","sequence"].includes(role);
+          return {
+            role:node.getAttribute("data-reader-collection"), display:style.display,
+            columns:style.gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+            count:rects.length, bounded:rects.every(r=>r.width>0&&r.height>0&&r.x>=frame.left-1&&r.right<=frame.right+1&&r.y>=frame.top-1&&r.bottom<=frame.bottom+1),
+            strips:!strip||rects.every(r=>r.borderTop===0&&r.borderLeft===0&&r.borderRight===0&&r.borderBottom>=1&&r.shadow==="none"),
+            ordered:!strip||rects.every((r,i)=>i===0||r.y>=rects[i-1].bottom-1),
+            targets:rects.flatMap(r=>r.links),
+          };
+        }, role);
+        assert.ok(witness.role===role&&witness.count===expected&&witness.display==="grid"&&witness.bounded&&witness.strips&&witness.ordered,
+          "collection role determines containment and row/peer structure: "+JSON.stringify(witness));
+        assert.ok(witness.targets.every(t=>t.height>=24),"collection actions retain visible usable targets");
+        return witness;
+      };
+      const normalize = s => s.trim().replace(/\s+/g," ");
+      await open(page, base, "/");
+      const gateways=page.locator('[data-home-entry-paths] [data-reader-collection="gateway"]');
+      const primary=await checkCollection(gateways,"gateway",3);
+      assert.deepEqual(primary.targets.map(t=>t.href),doctrineFrontDoor.home.paths.map(x=>x.href));
+      await open(page, base, "/observatory");
+      const paths=await checkCollection(page.locator('[data-audience-paths="observatory"] [data-reader-collection="pathways"]'),"pathways",3);
+      assert.equal(paths.columns,mode.viewport.width>=1200?3:1,"peer pathways recompose by available reading width");
+      const gallery=page.locator('[data-observatory-gallery] [data-reader-collection="directory"]');
+      const exhibits=await checkCollection(gallery,"directory",4);
+      assert.deepEqual(exhibits.targets.map(t=>t.href),doctrineFrontDoor.observatoryExhibits.map(x=>"/"+x.slug));
+      const directions=page.locator('[data-observatory-section="research"] [data-reader-collection="reference"]');
+      await checkCollection(directions,"reference",doctrineFrontDoor.observatory.research.length);
+      assert.deepEqual(await directions.locator("article h3").allTextContents(),doctrineFrontDoor.observatory.research.map(x=>x.title));
+      assert.equal(await directions.locator("a,button,input,select,textarea,[tabindex]").count(),0,"reference material is not an invented interactive destination");
+      await capture("collection-reference-directory",directions);
+      await fit(page);
+      await open(page,base,"/work-with-us");
+      for(const group of doctrineFrontDoor.workWithUs.groups){
+        const directory=page.locator(`[data-work-group="${group.id}"] [data-reader-collection="directory"]`);
+        const observed=await checkCollection(directory,"directory",group.cards.length);
+        assert.deepEqual(observed.targets.map(t=>t.href),group.cards.map(x=>x.href));
+        const rows=await directory.locator(":scope > article").evaluateAll(nodes=>nodes.map(n=>({
+          title:n.querySelector("h3").textContent.trim(),
+          status:n.querySelector("[data-reader-path-identity] p").textContent.trim(),
+          body:n.querySelector("[data-reader-path-content] p").textContent.trim()
+        })));
+        assert.deepEqual(rows,group.cards.map(x=>({title:x.title,status:x.status,body:x.body})));
+      }
+      const engagement=page.locator("[data-engagement-detail]");
+      await key(engagement.locator("summary"),"Enter");
+      const sequence=engagement.locator('[data-reader-collection="sequence"]');
+      await checkCollection(sequence,"sequence",4);
+      assert.deepEqual(await sequence.locator("li h3").allTextContents(),doctrineFrontDoor.workWithUs.engagement.steps.map(x=>x.title));
+      await capture("collection-work-directory",page.locator('[data-work-group="commission"] [data-reader-collection="directory"]'));
+      await fit(page);
+      await open(page,base,"/evidence-and-trust");
+      const detail=page.locator('[data-trust-detail="evidence"]');
+      await key(detail.locator("summary"),"Enter");
+      const comparison=detail.locator('[data-reader-collection="comparison"]');
+      await checkCollection(comparison,"comparison",11);
+      const rows=await comparison.locator(":scope > article").evaluateAll(nodes=>nodes.map(n=>{
+        const [heading,positive,negative]=n.children;
+        const a=heading.getBoundingClientRect(),b=positive.getBoundingClientRect(),c=negative.getBoundingClientRect();
+        return {id:n.getAttribute("data-evidence-type"),title:heading.textContent,
+          establishes:positive.textContent,limit:negative.textContent,
+          parallel:a.right<=b.left+1&&b.right<=c.left+1&&b.top<c.bottom&&c.top<b.bottom,
+          stacked:b.top>=a.bottom-1&&c.top>=b.bottom-1};
+      }));
+      const model=doctrineFrontDoor.trustCenter.evidenceTypes;
+      assert.deepEqual(rows.map(r=>[r.id,normalize(r.title),normalize(r.establishes),normalize(r.limit)]),
+        model.map(r=>[r.id,normalize(r.title),normalize("Can establish: "+r.establishes),normalize("Does not establish: "+r.limit)]),
+        "evidence comparison must retain both the positive and negative claim boundary in each row");
+      assert.ok(rows.every(r=>mode.viewport.width>=1200?r.parallel:r.stacked),
+        "evidence comparisons are parallel only when wide enough, otherwise complete stacked rows");
+      assert.equal(await comparison.locator("a,button,input,select,textarea,[tabindex]").count(),0);
+      await capture("collection-evidence-comparison",comparison.locator("article").first());
+      await fit(page);
+      await open(page,base,"/codexware/civic-record");
+      const cases=page.locator('[data-civic-cases] [data-reader-collection="cases"]');
+      await checkCollection(cases,"cases",3);
+      assert.equal(await cases.locator("[data-civic-case]").count(),3);
+      assert.ok(await page.locator("[data-civic-case-limit]").isVisible());
+      assert.equal(await page.locator("[data-civic-case-limit]").textContent(),doctrineFrontDoor.civicRecord.caseNote);
+      await fit(page);
+    });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
       await page.locator('[data-instrument-collection][data-bfux-ready="true"]').waitFor();
