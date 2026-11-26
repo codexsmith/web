@@ -118,3 +118,50 @@
     border-color: CanvasText;
   }
 }
+
+/* Reduced representational density, not reduced evidence or navigation. */
+.surface [data-trust-detail] > summary,
+.surface [data-engagement-detail] > summary,
+.surface [data-draft-disclosure] > summary {
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+.surface [data-draft-disclosure] .inquiryDraft {
+  max-width: none;
+  border: 0;
+  padding: 0;
+}
+.surface [data-draft-disclosure] + h3 {
+  margin-top: 24px;
+}
+.surface [data-direct-contact] {
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  /* Work paths remain fully readable and directly navigable. The narrow
+     projection is a compact ordered list rather than a wall of equal panels. */
+  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathGrid {
+    gap: 0;
+  }
+  .surface :is([data-work-path],[data-audience-path]) {
+    min-width: 0;
+  }
+  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard {
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--df-line);
+    box-shadow: none;
+    padding: 16px 0 14px;
+  }
+  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard p {
+    margin-bottom: 8px;
+  }
+  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard .workStatus {
+    font-size: .72rem;
+  }
+}

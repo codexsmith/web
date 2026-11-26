@@ -81,7 +81,7 @@ export function InstitutionalHeader() {
     >
       <Link className={styles.brand} href="/" aria-label="Boundary First Labs home">
         <BoundaryFirstWaveLogo className={styles.logo} variant="compact" decorative />
-        <span className={styles.brandCopy} aria-hidden={heroPassed ? "true" : undefined}>
+        <span className={styles.brandCopy} data-institutional-wordmark aria-hidden={heroPassed ? "true" : undefined}>
           <strong>Boundary First Labs</strong>
         </span>
       </Link>

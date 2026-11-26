@@ -75,6 +75,10 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
   try {
     await scenario("orientation and reversible reader disclosure", async (checkFocus, capture) => {
       await open(page, base, "/");
+      const wordmark = page.locator("header [data-institutional-wordmark]");
+      assert.ok(await wordmark.isVisible(), "institutional wordmark must remain visible on arrival");
+      assert.equal(await wordmark.innerText(), "Boundary First Labs");
+      await fit(page);
       const paths = page.locator("main [data-home-entry-paths]");
       assert.equal(await paths.locator("h2").innerText(), "Three ways into the Lab");
       assert.deepEqual(await paths.locator("a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href"))),
@@ -100,6 +104,50 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         assert.equal(await item.getAttribute("open"), null);
         assert.deepEqual(await item.locator("h3").allTextContents(), original);
       }
+    });
+    await scenario("bounded reader density and preserved engagement paths", async (checkFocus, capture) => {
+      await open(page, base, "/evidence-and-trust");
+      const details = page.locator("main [data-trust-detail]");
+      assert.equal(await details.count(), 6);
+      assert.equal(await page.locator("main [data-evidence-type]").count(), 11);
+      assert.equal(await page.locator("main [data-status-dimension]").count(), 6);
+      const compactHeight = await page.locator("main").evaluate(node => node.scrollHeight);
+      await capture("trust-compact", page.locator("[data-trust-section=credibility]"));
+      for (const id of ["credibility", "lineage", "method", "ai", "evidence", "status"]) {
+        const detail = page.locator(`[data-trust-detail="${id}"]`);
+        const summary = detail.locator("summary");
+        const original = await detail.locator("h3").allTextContents();
+        assert.ok(original.length > 0);
+        assert.equal(await detail.getAttribute("open"), null);
+        await key(summary, "Enter");
+        assert.notEqual(await detail.getAttribute("open"), null);
+        assert.ok(await detail.locator("h3").first().isVisible());
+        assert.deepEqual(await detail.locator("h3").allTextContents(), original);
+        await checkFocus(summary, "trust " + id);
+        await fit(page);
+        if (id === "evidence") await capture("trust-evidence-expanded", summary);
+        assert.ok(await page.locator("main").evaluate(node => node.scrollHeight) > compactHeight);
+        await key(summary, "Space");
+        assert.equal(await detail.getAttribute("open"), null);
+        assert.deepEqual(await detail.locator("h3").allTextContents(), original);
+      }
+      assert.ok(await page.locator("[data-lineage-limit]").isVisible());
+      assert.ok(await page.locator("[data-status-illustrative]").isVisible());
+      assert.ok(await page.locator("[data-public-evidence-card]").isVisible());
+      assert.ok(await page.locator('[data-trust-section="correction"] a[href="/contact"]').isVisible());
+      await open(page, base, "/work-with-us");
+      assert.equal(await page.locator("main [data-work-path]").count(), 14);
+      for (const link of await page.locator("main [data-work-path] a").all()) assert.ok(await link.isVisible(), "engagement destination cannot be hidden by disclosure");
+      const engagement = page.locator("[data-engagement-detail]");
+      const summary = engagement.locator("summary");
+      assert.equal(await engagement.getAttribute("open"), null);
+      await key(summary, "Enter");
+      assert.equal(await engagement.locator("li:visible").count(), 4);
+      await checkFocus(summary, "engagement stages");
+      await fit(page);
+      await key(summary, "Space");
+      assert.equal(await engagement.getAttribute("open"), null);
+      await capture("work-paths-compact", page.locator('[data-work-group="commission"]'));
     });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
@@ -166,6 +214,16 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
     await scenario("local draft boundary and explicit copy", async (checkFocus, capture) => {
       await open(page, base, "/contact");
       await page.locator('[data-inquiry-composer][data-bfux-ready="true"]').waitFor();
+      const direct = page.locator('[data-direct-contact] a[href^="mailto:"]');
+      assert.ok(await direct.isVisible(), "direct email must precede optional composition");
+      const disclosure = page.locator("[data-draft-disclosure]");
+      const summary = disclosure.locator("summary");
+      assert.equal(await disclosure.getAttribute("open"), null);
+      assert.equal(await page.locator("[data-draft-message]").isVisible(), false);
+      await capture("contact-direct", direct);
+      await key(summary, "Enter");
+      assert.ok(await page.locator("[data-draft-message]").isVisible());
+      await checkFocus(summary, "optional draft disclosure");
       const marker = "BFL synthetic UX witness only 694271";
       const sent = [];
       const observe = request => {
@@ -187,6 +245,12 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         assert.ok((await output.inputValue()).includes("Technical paper audit"));
         assert.ok(await copy.isEnabled());
         assert.equal(await output.getAttribute("readonly"), "");
+        const prepared = await output.inputValue();
+        await key(summary, "Space");
+        assert.equal(await disclosure.getAttribute("open"), null);
+        await key(summary, "Enter");
+        assert.equal(await message.inputValue(), marker);
+        assert.equal(await output.inputValue(), prepared, "closing a local representation must not erase the draft");
         await context.grantPermissions(["clipboard-read", "clipboard-write"], {origin: base});
         await key(copy, "Enter");
         await textIs(page, "[data-draft-status]", "Draft copied. Nothing was sent.");

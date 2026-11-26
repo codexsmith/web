@@ -286,7 +286,7 @@ export function WorkWithUsPage() {
         <section className={styles.section} data-work-section="engagement" aria-labelledby="work-engagement">
           <p className={styles.eyebrow}>How an engagement works</p><h2 id="work-engagement">{work.engagement.title}</h2>
           <p className={styles.sectionIntro}>{work.engagement.intro}</p>
-          <ol className={styles.workSteps}>{work.engagement.steps.map((step, index) => <li key={step.title}><span className={styles.num}>0{index+1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
+          <details className={styles.readerDetails} data-engagement-detail><summary>Read the four engagement stages</summary><ol className={styles.workSteps}>{work.engagement.steps.map((step, index) => <li key={step.title}><span className={styles.num}>0{index+1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol></details>
           <div className={styles.workNotes}><article><h3>What you might receive</h3><p>{work.engagement.outputs}</p></article><article><h3>What we agree before proceeding</h3><p>{work.engagement.limits}</p></article></div>
         </section>
         <section className={styles.section} data-work-section="know" aria-labelledby="work-know">
