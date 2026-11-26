@@ -59,8 +59,7 @@ function DigitalNativeInstitutionLink({ context }: { context: "home" | "work-wit
   return (
     <section className={styles.section} data-institution-link={context}>
       <h2>{copy.title}</h2>
-      <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>How the Lab works</p>
-      <p className={styles.sectionIntro}>{copy.body}</p></div>
+      <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{copy.body}</p></div>
       <Link className={styles.textLink} href={copy.href}>{copy.label} <span aria-hidden="true">→</span></Link>
     </section>
   );
@@ -143,28 +142,27 @@ export function DoctrineHomePage() {
         </section>
         <section className={styles.section} data-home-entry-paths aria-labelledby="home-entry-title">
           <h2 id="home-entry-title" className={styles.entryHeading}>Three ways into the Lab</h2>
-          <div className={styles.cards} data-reader-collection="gateway">{home.paths.map(path => <Link className={styles.card} key={path.href} href={path.href}><span className={styles.num} data-reader-kicker><ReaderRouteGlyph href={path.href} /><span>{path.tagline}</span></span><h3>{path.title}</h3><p>{path.body}</p><span className={styles.arrow}>{path.label} <span aria-hidden="true">→</span></span></Link>)}</div>
+          <div className={styles.cards} data-reader-collection="gateway">{home.paths.map(path => <Link className={styles.card} key={path.href} href={path.href}><span className={styles.num} data-reader-kicker><ReaderRouteGlyph href={path.href} /><span>{path.tagline}</span></span><h3>{path.title}</h3><p data-reader-gateway-description>{path.body}</p><span className={styles.arrow} data-reader-gateway-action>{path.label} <span aria-hidden="true">→</span></span></Link>)}</div>
           <p className={styles.smallPrint}>{home.commitmentLine}</p>
         </section>
         <section className={`${styles.section} ${styles.callout}`} aria-labelledby="maintenance-title">
           <div>
             <h2 id="maintenance-title">{maintenance.title}</h2>
-            <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Our purpose</p></div>
           </div>
           <p className={styles.calloutText}>{maintenance.body}</p>
         </section>
         <section className={`${styles.section} ${styles.split}`} aria-label="Our foundations and history">
           <article>
-            <h2>{foundation.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Research</p></div><p>{foundation.body}</p>
+            <h2>{foundation.title}</h2><p>{foundation.body}</p>
             <Link className={styles.textLink} href="/observatory">Explore the Observatory</Link>
           </article>
           <article data-reader-heritage="origin">
-            <h2>{history.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Our story</p></div><p>{history.body}</p>
+            <h2>{history.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Founder-attributed history</p></div><p>{history.body}</p>
             <Link className={styles.textLink} href="/observatory/intellectual-lineage">Discover our story</Link>
           </article>
         </section>
         <section className={styles.section} aria-labelledby="public-good-title">
-          <h2 id="public-good-title">{mission.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>The institution</p><p className={styles.sectionIntro}>{mission.body}</p></div>
+          <h2 id="public-good-title">{mission.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{mission.body}</p></div>
           <blockquote className={styles.humanPurpose} data-reader-heritage="purpose">{mission.humanPurpose}</blockquote>
           <p className={`${styles.identityLine} ${styles.agencyLine}`}>{mission.closing}</p>
           <div className={styles.links}>
@@ -222,19 +220,18 @@ export function CodexwareIntroductionPage() {
           <div><p className={styles.calloutText}>{c.civicIntro.body}</p><p className={styles.status}>{c.civicIntro.status}</p><Link className={styles.textLink} href={c.civicIntro.href}>{c.civicIntro.label} →</Link></div>
         </section>
         <section className={styles.section} data-codexware-examples>
-          <h2>{c.examples.heading}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>What and why</p><p className={styles.sectionIntro}>{c.examples.intro}</p></div>
+          <h2>{c.examples.heading}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{c.examples.intro}</p></div>
           <div className={styles.pathGrid} data-reader-collection="cases">{c.examples.items.map(item => <article className={styles.pathCard} key={item.id} data-codexware-example={item.id}><p className={styles.workStatus}>Intended use</p><h3>{item.title}</h3><p><strong>{item.question}</strong></p><p>{item.body}</p></article>)}</div>
           <p className={styles.smallPrint} data-example-limit>{c.examples.limit}</p>
           <p className={styles.sectionIntro}>{c.examples.linkIntro}</p><Link className={styles.textLink} href={c.examples.href}>{c.examples.label} →</Link>
         </section>
         <div className={styles.reading}>
           <details className={styles.readerDetails} data-reader-detail="codexware-design"><summary>Explore application design and interoperability</summary><ReadingSections sections={c.sections} /></details>
-          <aside className={styles.example}><h2>Application vision</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Development status</p></div><p>{c.status}</p></aside>
+          <aside className={styles.example} data-codexware-status><h2>Development status</h2><p>{c.status}</p></aside>
         </div>
         <section className={styles.section} data-codexware-commitments>
           <h2>{c.commitments.heading}</h2>
-          <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Governance by construction</p>
-          <p className={styles.sectionIntro}>{c.commitments.intro}</p></div>
+          <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{c.commitments.intro}</p></div>
           <div className={styles.pathGrid} data-reader-collection="reference">
             {c.commitments.items.map((item) => (
               <article className={styles.pathCard} key={item.title}>
@@ -281,26 +278,25 @@ export function WorkWithUsPage() {
           <ReaderMastheadField kind="collaboration" />
         </section>
         <AudiencePathways context="work-with-us" />
-        {work.groups.map((group, index) => (
+        {work.groups.map(group => (
           <section className={styles.section} data-work-group={group.id} key={group.id} aria-labelledby={`work-${group.id}`}>
             <h2 id={`work-${group.id}`}>{group.title}</h2>
-            <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Engagement path {index + 1}</p><p className={styles.sectionIntro}>{group.intro}</p></div>
+            <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{group.intro}</p></div>
             <div className={styles.pathGrid} data-reader-collection="directory">{group.cards.map(path => <WorkPathCard path={path} key={path.id} />)}</div>
           </section>
         ))}
         <section className={styles.section} data-work-section="engagement" aria-labelledby="work-engagement">
-          <h2 id="work-engagement">{work.engagement.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>How an engagement works</p>
-          <p className={styles.sectionIntro}>{work.engagement.intro}</p></div>
+          <h2 id="work-engagement">{work.engagement.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.engagement.intro}</p></div>
           <details className={styles.readerDetails} data-engagement-detail><summary>Read the four engagement stages</summary><ol className={styles.workSteps} data-reader-collection="sequence">{work.engagement.steps.map((step, index) => <li key={step.title}><span className={styles.num}>0{index+1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol></details>
           <div className={styles.workNotes}><article><h3>What you might receive</h3><p>{work.engagement.outputs}</p></article><article><h3>What we agree before proceeding</h3><p>{work.engagement.limits}</p></article></div>
         </section>
         <section className={styles.section} data-work-section="know" aria-labelledby="work-know">
-          <h2 id="work-know">{work.know.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Get to know us</p><p className={styles.sectionIntro}>{work.know.intro}</p></div>
+          <h2 id="work-know">{work.know.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.know.intro}</p></div>
           <div className={styles.pathGrid} data-reader-collection="directory">{work.know.cards.map(path => <WorkPathCard key={path.id} path={path} />)}</div>
         </section>
         <blockquote className={styles.principle}>{work.principle}</blockquote>
         <section className={styles.section} data-work-section="contact" aria-labelledby="work-contact">
-          <h2 id="work-contact">{work.contact.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Contact the Lab</p><p className={styles.sectionIntro}>{work.contact.body}</p></div>
+          <h2 id="work-contact">{work.contact.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.contact.body}</p></div>
           <p className={styles.smallPrint}>{work.contact.privacy}</p>
           <div className={styles.links}><Link className={styles.action} href={work.contact.href}>{work.contact.label} <span aria-hidden="true">→</span></Link><a className={styles.textLink} href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a></div>
         </section>
