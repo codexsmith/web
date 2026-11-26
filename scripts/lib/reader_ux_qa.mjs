@@ -76,6 +76,34 @@ async function checkNameplateContrast(locator) {
     witness.checks.length > 0 && witness.checks.every(item => item.ratio >= 4.5),
     "nameplate text contrast must preserve reading and system-color choice: " + JSON.stringify(witness));
 }
+// Frame selected editorial evidence beneath the actual sticky rail, without
+// clearing focus, changing styles, or pretending an oversized region fits.
+async function frameReviewStart(locator) {
+  await locator.scrollIntoViewIfNeeded();
+  return locator.evaluate(async element => {
+    const settle = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const railBottom = () => {
+      const primary = Math.max(0, document.querySelector("header[data-header-compact]")?.getBoundingClientRect().bottom ?? 0);
+      const local = document.querySelector("[data-reader-section-nav]");
+      const rect = local?.getBoundingClientRect();
+      return rect && !local.contains(element) && rect.top <= primary + 1 && rect.bottom > primary ? rect.bottom : primary;
+    };
+    const active = document.activeElement;
+    // The header itself may recompose after the initial scroll.
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const delta = element.getBoundingClientRect().top - railBottom() - 12;
+      if (Math.abs(delta) <= 1) break;
+      window.scrollBy({top: delta, behavior: "instant"});
+      await settle();
+    }
+    const rect = element.getBoundingClientRect(), rail = railBottom();
+    return {
+      top: rect.top, railBottom: rail, height: rect.height,
+      visible: Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, rail)),
+      focusPreserved: active === document.activeElement,
+    };
+  });
+}
 export async function verifyReaderUx(browser, base, mode, reviewDir) {
   const results = [];
   const context = await browser.newContext({
@@ -87,6 +115,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
     const issues = [];
     const focusSamples = [];
     const captures = [];
+    const captureFrames = [];
     // A missing focus ring remains a blocking issue, but must not prevent the
     // remaining model transitions and privacy obligations from being exercised.
     const checkFocus = async (locator, name) => {
@@ -97,16 +126,23 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         issues.push(name + ": focus obligation failed: " + JSON.stringify(sample));
       }
     };
-    const capture = async (name, locator) => {
+    const capture = async (name, locator, {frameStart = false} = {}) => {
       if (!reviewDir) return;
-      if (locator) await locator.scrollIntoViewIfNeeded();
+      if (locator && frameStart) {
+        const frame = await frameReviewStart(locator);
+        captureFrames.push({name, ...frame});
+        if (!frame.focusPreserved || frame.top < frame.railBottom - 1 ||
+          frame.visible < Math.min(frame.height, 80) - 1) {
+          issues.push("editorial capture must expose the region start below the sticky rail without moving focus: " + JSON.stringify({name, ...frame}));
+        }
+      } else if (locator) await locator.scrollIntoViewIfNeeded();
       const file = modeSlug + "--" + name + ".png";
       await page.screenshot({path: path.join(reviewDir, file), fullPage: false, animations: "disabled"});
       captures.push(file);
     };
     try { await run(checkFocus, capture); }
     catch (error) { issues.push(String(error)); }
-    results.push({name: "BFUX reader: " + label + " @ " + mode.name, issues, focusSamples, captures});
+    results.push({name: "BFUX reader: " + label + " @ " + mode.name, issues, focusSamples, captures, captureFrames});
   }
   try {
     await scenario("orientation and reversible reader disclosure", async (checkFocus, capture) => {
@@ -240,6 +276,115 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         assert.equal(await hero.locator("h1").count(), 1);
         await fit(page);
         await capture("masthead-" + kind, hero);
+      }
+    });
+    await scenario("title-first compact heading metadata", async (_checkFocus, capture) => {
+      const samples = ["/", "/observatory", "/codexware", "/work-with-us", "/constructive-human-agency",
+        "/digital-native-institution", "/evidence-and-trust", "/observatory/intellectual-lineage",
+        "/observatory/instruments", "/codexware/civic-record", "/codexware/economic-maintenance",
+        "/work-with-us/paper-auditing", "/contact"];
+      for (const route of samples) {
+        await open(page, base, route);
+        const rows = page.locator("main [data-reader-heading-meta]");
+        assert.ok(await rows.count() > 0, "reader must contain heading metadata: " + route);
+        const hero = page.locator("main [data-institutional-hero]");
+        assert.equal(await hero.locator(":scope > h1 + [data-reader-heading-meta]").count(), 1,
+          "title precedes hero metadata in document order");
+        for (const row of await rows.all()) {
+          const witness = await row.evaluate(node => {
+            const parent = node.previousElementSibling;
+            const bounds = node.getBoundingClientRect();
+            const title = parent?.getBoundingClientRect();
+            const items = [...node.children].map(el => {
+              const rect = el.getBoundingClientRect();
+              return {text: el.textContent.trim(), top: rect.top, bottom: rect.bottom,
+                left: rect.left, right: rect.right, width: rect.width, height: rect.height};
+            });
+            const style = getComputedStyle(node);
+            return {
+              heading: parent?.tagName,
+              follows: !!title && bounds.top >= title.bottom - 1,
+              layout: style.display,
+              wrap: style.flexWrap,
+              bounded: items.every(x => x.text && x.height > 0 && x.width > 0 &&
+                x.left >= bounds.left - 1 && x.right <= bounds.right + 1 &&
+                x.top >= bounds.top - 1 && x.bottom <= bounds.bottom + 1),
+              nonoverlap: items.length < 2 || items[1].top >= items[0].bottom - 1 || items[1].left >= items[0].right - 1,
+              items,
+            };
+          });
+          assert.ok(["H1","H2"].includes(witness.heading) && witness.follows &&
+            witness.layout === "flex" && witness.wrap === "wrap" && witness.bounded && witness.nonoverlap,
+            "heading metadata remains below its title, legible and naturally wrapping: " + JSON.stringify(witness));
+        }
+        if (route === "/observatory") {
+          const meta = hero.locator(":scope > [data-reader-heading-meta]");
+          assert.deepEqual(await meta.locator(":scope > p").allTextContents(),
+            [doctrineFrontDoor.observatory.eyebrow, doctrineFrontDoor.observatory.tagline]);
+          const sameLine = await meta.evaluate(node => {
+            const [a,b] = [...node.children].map(el => el.getBoundingClientRect());
+            return b.left >= a.right && b.top < a.bottom && a.top < b.bottom;
+          });
+          if (mode.viewport.width >= 1280) assert.ok(sameLine,
+            "short Observatory hero metadata shares a single line when there is room");
+          if (mode.viewport.width <= 390) assert.ok(!sameLine,
+            "compact Observatory metadata wraps instead of forcing overflow");
+          await capture("title-first-observatory-hero", hero);
+          await capture("title-first-observatory-section", page.locator('[data-audience-paths="observatory"] h2'));
+          const panel = page.locator('[data-audience-paths="observatory"]');
+          assert.equal(await panel.locator("[data-audience-intro], [data-reader-heading-meta]").count(), 0,
+            "Observatory audience heading should not repeat its invitation or hero scope");
+          assert.equal(await panel.locator(":scope > h2").textContent(), doctrineFrontDoor.audiencePaths.observatory.title);
+          const cards = panel.locator("[data-audience-card]");
+          assert.equal(await cards.count(), doctrineFrontDoor.audiencePaths.observatory.cards.length);
+          for (const [index, card] of (await cards.all()).entries()) {
+            const model = doctrineFrontDoor.audiencePaths.observatory.cards[index];
+            const witness = await card.evaluate(node => {
+              const [title, label, description, actions] = node.children;
+              const type = el => {
+                const style = getComputedStyle(el);
+                return {size: parseFloat(style.fontSize), weight: parseFloat(style.fontWeight),
+                  line: parseFloat(style.lineHeight), family: style.fontFamily};
+              };
+              const gap = (a,b) => b.getBoundingClientRect().top - a.getBoundingClientRect().bottom;
+              const style = getComputedStyle(node);
+              const panel = node.closest("[data-audience-paths]");
+              const sectionStyle = getComputedStyle(panel);
+              const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+              return {
+                heading: title.tagName, title: title.textContent.trim(),
+                label: label.textContent.trim(), description: description.textContent.trim(),
+                titleType: type(title), labelType: type(label), bodyType: type(description),
+                actionType: type(actions.querySelector("a")), rootSize,
+                targets: [...actions.querySelectorAll("a")].map(a => ({
+                  height: a.getBoundingClientRect().height,
+                  decoration: getComputedStyle(a).textDecorationLine,
+                  href: a.getAttribute("href"),
+                })),
+                titleGap: gap(title,label), bodyGap: gap(description,actions),
+                panelPadding: parseFloat(style.paddingTop),
+                sectionPadding: parseFloat(sectionStyle.paddingTop),
+              };
+            });
+            assert.deepEqual([witness.heading, witness.title, witness.label, witness.description],
+              ["H3", model.question, model.audience, model.body]);
+            assert.deepEqual(witness.targets.map(t=>t.href), model.links.map(l=>l.href));
+            assert.ok(witness.titleType.size >= witness.bodyType.size * 1.49 &&
+              witness.labelType.size <= witness.bodyType.size * .8 &&
+              witness.bodyType.size >= witness.rootSize &&
+              witness.titleType.weight >= 600 && witness.actionType.weight >= 600 &&
+              witness.bodyType.line >= witness.bodyType.size * 1.5 &&
+              witness.targets.every(t=>t.height >= 24 && t.decoration.includes("underline")),
+              "typographic roles must be distinctly readable without smaller body copy or targets: " + JSON.stringify(witness));
+            assert.ok(witness.titleGap >= 0 && witness.titleGap <= 7 &&
+              witness.bodyGap >= 0 && witness.bodyGap <= 13 &&
+              witness.panelPadding >= 16 && witness.panelPadding <= 20 &&
+              witness.sectionPadding >= 20 && witness.sectionPadding <= 36,
+              "related text and actions must use the bounded spacing hierarchy: " + JSON.stringify(witness));
+          }
+          await capture("type-and-space-observatory-card", cards.first());
+        }
+        await fit(page);
       }
     });
     await scenario("editorial chapter sequence and caption identity", async (_checkFocus, capture) => {
@@ -423,6 +568,340 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       await key(summary, "Space");
       assert.equal(await engagement.getAttribute("open"), null);
       await capture("work-paths-compact", page.locator('[data-work-group="commission"]'));
+    });
+    await scenario("semantic collection syntax and scope preservation", async (_checkFocus, capture) => {
+      const checkCollection = async (collection, role, expected) => {
+        assert.equal(await collection.count(), 1);
+        const witness = await collection.evaluate((node, role) => {
+          const frame = node.getBoundingClientRect();
+          const style = getComputedStyle(node);
+          const rects = [...node.children].map(el => {
+            const box = el.getBoundingClientRect(), css = getComputedStyle(el);
+            // A gateway is itself an anchor; a directory or pathway contains anchors.
+            const links = [...(el.matches("a") ? [el] : []), ...el.querySelectorAll("a")];
+            return {x:box.x,y:box.y,right:box.right,bottom:box.bottom,width:box.width,height:box.height,
+              borderTop:parseFloat(css.borderTopWidth),borderBottom:parseFloat(css.borderBottomWidth),
+              borderLeft:parseFloat(css.borderLeftWidth),borderRight:parseFloat(css.borderRightWidth),
+              shadow:css.boxShadow, links:links.map(a=>({href:a.getAttribute("href"),height:a.getBoundingClientRect().height}))};
+          });
+          const strip = ["reference","directory","comparison","sequence"].includes(role);
+          const peer = ["pathways","cases","parallel"].includes(role);
+          return {
+            role:node.getAttribute("data-reader-collection"), display:style.display,
+            columns:style.gridTemplateColumns.split(/\s+/).filter(Boolean).length,
+            count:rects.length, bounded:rects.every(r=>r.width>0&&r.height>0&&r.x>=frame.left-1&&r.right<=frame.right+1&&r.y>=frame.top-1&&r.bottom<=frame.bottom+1),
+            strips:!strip||(parseFloat(style.borderTopWidth)>=1&&rects.every(r=>r.borderTop===0&&r.borderLeft===0&&r.borderRight===0&&r.borderBottom>=1&&r.shadow==="none")),
+            peerBoundaries:!peer||rects.every(r=>[r.borderTop,r.borderBottom,r.borderLeft,r.borderRight].every(width=>width>=1)),
+            memberMaterial:rects.map(({borderTop,borderBottom,borderLeft,borderRight,shadow})=>({borderTop,borderBottom,borderLeft,borderRight,shadow})),
+            ordered:!strip||rects.every((r,i)=>i===0||r.y>=rects[i-1].bottom-1),
+            targets:rects.flatMap(r=>r.links),
+          };
+        }, role);
+        assert.ok(witness.role===role&&witness.count===expected&&witness.display==="grid"&&witness.bounded&&witness.strips&&witness.ordered&&witness.peerBoundaries,
+          "collection role determines containment and row/peer structure: "+JSON.stringify(witness));
+        assert.ok(witness.targets.every(t=>t.height>=24),"collection actions retain visible usable targets");
+        return witness;
+      };
+      const normalize = s => s.trim().replace(/\s+/g," ");
+      await open(page, base, "/");
+      const gateways=page.locator('[data-home-entry-paths] [data-reader-collection="gateway"]');
+      const primary=await checkCollection(gateways,"gateway",3);
+      assert.deepEqual(primary.targets.map(t=>t.href),doctrineFrontDoor.home.paths.map(x=>x.href));
+      await open(page, base, "/observatory");
+      const paths=await checkCollection(page.locator('[data-audience-paths="observatory"] [data-reader-collection="pathways"]'),"pathways",3);
+      assert.equal(paths.columns,mode.viewport.width>=1200?3:1,"peer pathways recompose by available reading width");
+      const gallery=page.locator('[data-observatory-gallery] [data-reader-collection="directory"]');
+      const exhibits=await checkCollection(gallery,"directory",4);
+      assert.deepEqual(exhibits.targets.map(t=>t.href),doctrineFrontDoor.observatoryExhibits.map(x=>"/"+x.slug));
+      const directions=page.locator('[data-observatory-section="research"] [data-reader-collection="reference"]');
+      await checkCollection(directions,"reference",doctrineFrontDoor.observatory.research.length);
+      assert.deepEqual(await directions.locator("article h3").allTextContents(),doctrineFrontDoor.observatory.research.map(x=>x.title));
+      assert.equal(await directions.locator("a,button,input,select,textarea,[tabindex]").count(),0,"reference material is not an invented interactive destination");
+      await capture("collection-reference-directory",directions);
+      await fit(page);
+      await open(page,base,"/work-with-us");
+      const workPathModel=doctrineFrontDoor.audiencePaths["work-with-us"].cards;
+      const workPathways=page.locator('[data-audience-paths="work-with-us"] [data-reader-collection="pathways"]');
+      const peerChoices=await checkCollection(workPathways,"pathways",workPathModel.length);
+      assert.deepEqual(peerChoices.targets.map(t=>t.href),workPathModel.flatMap(x=>x.links.map(l=>l.href)),
+        "narrow pathways retain independent peer boundaries and explicit destinations");
+      await capture("collection-work-pathways",workPathways.locator("article").first(), {frameStart:true});
+      for(const group of doctrineFrontDoor.workWithUs.groups){
+        const directory=page.locator(`[data-work-group="${group.id}"] [data-reader-collection="directory"]`);
+        const observed=await checkCollection(directory,"directory",group.cards.length);
+        assert.deepEqual(observed.targets.map(t=>t.href),group.cards.map(x=>x.href));
+        const rows=await directory.locator(":scope > article").evaluateAll(nodes=>nodes.map(n=>({
+          title:n.querySelector("h3").textContent.trim(),
+          status:n.querySelector("[data-reader-path-identity] p").textContent.trim(),
+          body:n.querySelector("[data-reader-path-content] p").textContent.trim()
+        })));
+        assert.deepEqual(rows,group.cards.map(x=>({title:x.title,status:x.status,body:x.body})));
+      }
+      const know=page.locator('[data-work-section="know"] [data-reader-collection="directory"]');
+      const contextDirectory=await checkCollection(know,"directory",doctrineFrontDoor.workWithUs.know.cards.length);
+      assert.deepEqual(contextDirectory.targets.map(t=>t.href),doctrineFrontDoor.workWithUs.know.cards.map(x=>x.href),
+        "institutional background uses the same directory grammar");
+      const engagement=page.locator("[data-engagement-detail]");
+      await key(engagement.locator("summary"),"Enter");
+      const sequence=engagement.locator('[data-reader-collection="sequence"]');
+      await checkCollection(sequence,"sequence",4);
+      assert.deepEqual(await sequence.locator("li h3").allTextContents(),doctrineFrontDoor.workWithUs.engagement.steps.map(x=>x.title));
+      await capture("collection-work-directory",page.locator('[data-work-group="commission"]'), {frameStart:true});
+      await fit(page);
+      await open(page,base,"/evidence-and-trust");
+      const detail=page.locator('[data-trust-detail="evidence"]');
+      await key(detail.locator("summary"),"Enter");
+      const comparison=detail.locator('[data-reader-collection="comparison"]');
+      await checkCollection(comparison,"comparison",11);
+      const rows=await comparison.locator(":scope > article").evaluateAll(nodes=>nodes.map(n=>{
+        const [heading,positive,negative]=n.children;
+        const a=heading.getBoundingClientRect(),b=positive.getBoundingClientRect(),c=negative.getBoundingClientRect();
+        return {id:n.getAttribute("data-evidence-type"),title:heading.textContent,
+          establishes:positive.textContent,limit:negative.textContent,
+          parallel:a.right<=b.left+1&&b.right<=c.left+1&&b.top<c.bottom&&c.top<b.bottom,
+          stacked:b.top>=a.bottom-1&&c.top>=b.bottom-1};
+      }));
+      const model=doctrineFrontDoor.trustCenter.evidenceTypes;
+      assert.deepEqual(rows.map(r=>[r.id,normalize(r.title),normalize(r.establishes),normalize(r.limit)]),
+        model.map(r=>[r.id,normalize(r.title),normalize("Can establish: "+r.establishes),normalize("Does not establish: "+r.limit)]),
+        "evidence comparison must retain both the positive and negative claim boundary in each row");
+      assert.ok(rows.every(r=>mode.viewport.width>=1200?r.parallel:r.stacked),
+        "evidence comparisons are parallel only when wide enough, otherwise complete stacked rows");
+      assert.equal(await comparison.locator("a,button,input,select,textarea,[tabindex]").count(),0);
+      await capture("collection-evidence-comparison",comparison.locator("article").first());
+      await fit(page);
+      await open(page,base,"/codexware/civic-record");
+      const cases=page.locator('[data-civic-cases] [data-reader-collection="cases"]');
+      await checkCollection(cases,"cases",3);
+      assert.equal(await cases.locator("[data-civic-case]").count(),3);
+      assert.ok(await page.locator("[data-civic-case-limit]").isVisible());
+      assert.equal(await page.locator("[data-civic-case-limit]").textContent(),doctrineFrontDoor.civicRecord.caseNote);
+      await fit(page);
+    });
+    await scenario("Observatory editorial economy and contextual identity", async (_checkFocus, capture) => {
+      await open(page, base, "/observatory");
+      const model = doctrineFrontDoor.observatory;
+      const gallery = page.locator("[data-observatory-gallery]");
+      assert.equal(await gallery.locator(":scope > h2").textContent(), "Four research exhibits");
+      assert.equal(await gallery.locator(":scope > [data-reader-heading-meta]").count(), 0,
+        "a collection title need not be repeated as an eyebrow");
+      const entries = doctrineFrontDoor.observatoryExhibits;
+      const rows = await gallery.locator("[data-exhibit-card]").evaluateAll(nodes => nodes.map(node => ({
+        slug: node.getAttribute("data-exhibit-card"),
+        title: node.querySelector("h3").textContent,
+        label: node.querySelector("[data-exhibit-directory-label]").textContent,
+        description: node.querySelector("[data-reader-path-content] p").textContent,
+        href: node.querySelector("a").getAttribute("href"),
+        action: node.querySelector("a").getAttribute("aria-label"),
+      })));
+      assert.deepEqual(rows, entries.map(item => ({
+        slug: item.slug, title: item.name, label: item.directoryLabel, description: item.tagline,
+        href: "/" + item.slug, action: "Explore exhibit: " + item.name,
+      })), "contextual labels preserve distinguishing metadata and destination identity");
+      assert.deepEqual(entries.map(item => "Observatory · Exhibit " + item.directoryLabel),
+        entries.map(item => item.eyebrow), "local labels preserve the complete standalone identity");
+      for (const [id, heading, intro] of [
+        ["foundations", model.foundationsHeading, model.foundationsIntro],
+        ["architecture", model.architectureHeading, model.architectureIntro],
+        ["research", model.researchHeading, model.researchIntro],
+        ["method", model.methodHeading, model.methodIntro],
+        ["evidence", model.evidenceHeading, model.evidenceIntro],
+        ["release", model.releaseHeading, model.releaseBody],
+      ]) {
+        const section = page.locator(`[data-observatory-section="${id}"]`);
+        assert.equal(await section.locator(":scope > h2").textContent(), heading);
+        assert.deepEqual(await section.locator(":scope > [data-reader-heading-meta] > p").allTextContents(), [intro]);
+      }
+      const demo = page.locator('[data-observatory-section="demonstration"]');
+      const release = page.locator('[data-observatory-section="release"]');
+      assert.deepEqual(await demo.locator(":scope > [data-reader-heading-meta] > p").allTextContents(),
+        [model.exhibit.eyebrow, model.exhibit.intro]);
+      assert.equal(await demo.locator(":scope > p").last().textContent(), model.exhibit.limit);
+      assert.equal(await release.locator(":scope > p").textContent(), model.releaseNote);
+      assert.ok(await demo.locator(":scope > p").last().isVisible() &&
+        await release.locator(":scope > p").isVisible(), "editorial compression must not erase local claim boundaries");
+      await capture("editorial-economy-observatory-gallery", gallery, {frameStart:true});
+      await fit(page);
+      for (const entry of entries) {
+        await open(page, base, "/" + entry.slug);
+        const hero = page.locator("[data-institutional-hero]");
+        assert.equal(await hero.locator("h1").textContent(), entry.name);
+        assert.deepEqual(await hero.locator(":scope > [data-reader-heading-meta] > p").allTextContents(),
+          [entry.eyebrow, entry.tagline]);
+        assert.equal(await page.locator("[data-exhibit-limit] > p").textContent(), entry.limit,
+          "standalone exhibit retains full context and claim boundary");
+      }
+    });
+    await scenario("primary reader editorial economy and engagement choice", async (checkFocus, capture) => {
+      const model = doctrineFrontDoor;
+      await open(page, base, "/");
+      const home = page.locator("[data-institutional-hero]");
+      assert.equal(await home.locator("h1").textContent(), model.identity.tagline);
+      assert.equal(await home.locator("[data-institutional-descriptor]").textContent(), model.identity.descriptor);
+      assert.deepEqual(await home.locator(":scope > p").allTextContents(),
+        [model.identity.mission, model.home.support, model.identity.descriptor]);
+      const gateways = page.locator("[data-home-entry-paths] [data-reader-collection='gateway']");
+      const entries = await gateways.locator(":scope > a").evaluateAll(nodes => nodes.map(n=>({
+        href:n.getAttribute("href"), title:n.querySelector("h3").textContent,
+        kicker:n.querySelector("[data-reader-kicker] > span").textContent,
+        description:n.querySelector("[data-reader-gateway-description]").textContent,
+        action:n.querySelector("[data-reader-gateway-action]").textContent.replace(/\s*→\s*$/, ""),
+      })));
+      assert.deepEqual(entries, model.home.paths.map(p=>({href:p.href,title:p.title,kicker:p.tagline,description:p.body,action:p.label})),
+        "gateway classifications, descriptions and actions remain distinct and addressable");
+      assert.equal(new Set(entries.map(e=>e.kicker)).size, 3);
+      assert.equal(await page.locator('[aria-labelledby="maintenance-title"] [data-reader-heading-meta]').count(),0);
+      await capture("editorial-home-gateways", page.locator("[data-home-entry-paths]"), {frameStart:true});
+      await fit(page);
+
+      await open(page, base, "/codexware");
+      const c = model.codexware;
+      const civic = page.locator("[data-civic-record-entry]");
+      assert.equal(await civic.locator("h2").textContent(), c.civicIntro.title);
+      assert.ok((await civic.textContent()).includes(c.civicIntro.status));
+      const status = page.locator("[data-codexware-status]");
+      assert.equal(await status.locator("h2").textContent(), "Development status");
+      assert.equal(await status.locator("p").textContent(), c.status);
+      assert.ok(await status.isVisible());
+      const examples = page.locator("[data-codexware-examples]");
+      assert.deepEqual(await examples.locator(":scope > [data-reader-heading-meta] > p").allTextContents(), [c.examples.intro]);
+      assert.equal(await examples.locator("[data-example-limit]").textContent(), c.examples.limit);
+      assert.ok(await examples.locator("[data-example-limit]").isVisible());
+      const commitments = page.locator("[data-codexware-commitments]");
+      assert.deepEqual(await commitments.locator(":scope > [data-reader-heading-meta] > p").allTextContents(), [c.commitments.intro]);
+      assert.equal(await commitments.locator("[data-deployment-limit]").textContent(), c.commitments.note);
+      assert.ok(await commitments.locator("[data-deployment-limit]").isVisible());
+      assert.deepEqual(await commitments.locator("article p").allTextContents(), c.commitments.items.map(x=>x.body),
+        "editorial economy preserves Codexware authorization, execution and assurance limits");
+      const design = page.locator('details[data-reader-detail="codexware-design"]');
+      const summary = design.locator("summary");
+      const chapters = design.locator("[data-reader-chapter]");
+      const authored = c.sections.map(s=>({title:s.title,body:s.body}));
+      const readChapters = () => chapters.evaluateAll(nodes=>nodes.map(n=>({
+        title:n.querySelector("h2").textContent,body:n.querySelector("p").textContent,
+      })));
+      const disclosureGeometry = () => design.evaluate(async node => {
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        const box = node.getBoundingClientRect(), summary = node.querySelector("summary").getBoundingClientRect();
+        const style = getComputedStyle(node);
+        const frame = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth) +
+          parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+        return {open:node.open,height:box.height,summaryHeight:summary.height,surplus:box.height-summary.height-frame};
+      });
+      const collapsed = await disclosureGeometry();
+      assert.ok(!collapsed.open && collapsed.summaryHeight >= 24 && Math.abs(collapsed.surplus) <= 2,
+        "closed disclosure height belongs to its own summary, not an adjacent panel: " + JSON.stringify(collapsed));
+      assert.deepEqual(await readChapters(), authored);
+      assert.equal(await design.locator("[data-reader-chapter]:visible").count(),0);
+      await capture("editorial-codexware-status", status.locator(".."), {frameStart:true});
+      await key(summary, "Enter");
+      const expanded = await disclosureGeometry();
+      assert.ok(expanded.open && expanded.height > collapsed.height);
+      assert.equal(await design.locator("[data-reader-chapter]:visible").count(),authored.length);
+      assert.deepEqual(await readChapters(),authored);
+      await checkFocus(summary,"Codexware application design disclosure");
+      await capture("codexware-design-expanded",summary,{frameStart:true});
+      await key(summary, "Space");
+      await page.waitForFunction(() => !document.querySelector('details[data-reader-detail="codexware-design"]')?.open);
+      const restored = await disclosureGeometry();
+      assert.ok(!restored.open && Math.abs(restored.height-collapsed.height)<=1,
+        "closing the disclosure must recover its original compact geometry: " + JSON.stringify({collapsed, restored}));
+      assert.deepEqual(await readChapters(),authored);
+      assert.equal(await status.locator("p").textContent(),c.status);
+      await fit(page);
+
+      await open(page, base, "/work-with-us");
+      const work = model.workWithUs;
+      for (const group of work.groups) {
+        const section = page.locator(`[data-work-group="${group.id}"]`);
+        assert.equal(await section.locator(":scope > h2").textContent(), group.title);
+        assert.deepEqual(await section.locator(":scope > [data-reader-heading-meta] > p").allTextContents(),[group.intro],
+          "independent engagement choices must not imply a numbered procedure");
+        assert.deepEqual(await section.locator("[data-reader-path-identity] > p").allTextContents(),group.cards.map(x=>x.status));
+      }
+      const engagement = page.locator('[data-work-section="engagement"]');
+      assert.equal(await engagement.locator(":scope > h2").textContent(),work.engagement.title);
+      assert.equal(await engagement.locator("[data-reader-collection='sequence'] li").count(),work.engagement.steps.length);
+      const contact = page.locator('[data-work-section="contact"]');
+      assert.equal(await contact.locator(":scope > h2").textContent(),work.contact.title);
+      assert.ok((await contact.textContent()).includes(work.contact.privacy));
+      assert.ok(await contact.locator('a[href="/contact"]').isVisible() && await contact.locator('a[href^="mailto:"]').isVisible(),
+        "editorial economy preserves direct contact and initial inquiry privacy");
+      await capture("editorial-work-choices",page.locator('[data-work-group="commission"]'), {frameStart:true});
+      await fit(page);
+    });
+    await scenario("compact sticky section navigation and local identity", async (checkFocus, capture) => {
+      for (const route of ["/", "/contact"]) {
+        await open(page, base, route);
+        assert.equal(await page.locator("[data-reader-section-nav]").count(), 0, "entry surfaces use a simple divider without navigation height");
+      }
+      for (const route of ["/observatory", "/observatory/intellectual-lineage", "/codexware", "/work-with-us", "/evidence-and-trust", "/observatory/instruments"]) {
+        await open(page, base, route);
+        const rail = page.locator("[data-reader-section-nav]");
+        await rail.locator(":scope").waitFor({state:"visible"});
+        await page.waitForFunction(() => document.querySelector("[data-section-nav-ready='true']"));
+        const summary = rail.locator("summary"), menu = rail.locator("details");
+        const links = rail.locator("a[href^='#']");
+        const hrefs = await links.evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
+        assert.ok(hrefs.length >= 3 && new Set(hrefs).size === hrefs.length);
+        assert.equal(await menu.getAttribute("open"), null);
+        assert.ok((await summary.boundingBox()).height <= 56, "closed local navigation must occupy one compact rail");
+        const baseline = await page.locator("main").evaluate(node => node.scrollHeight);
+        await key(summary, "Enter");
+        assert.notEqual(await menu.getAttribute("open"), null);
+        await checkFocus(summary, "section menu");
+        assert.equal(await page.locator("main").evaluate(node => node.scrollHeight), baseline, "section menu must not expand the reading flow");
+        const index = Math.min(2, hrefs.length - 1), href = hrefs[index];
+        const link = links.nth(index);
+        await key(link, "Enter");
+        await page.waitForURL(url => url.hash === href);
+        const target = page.locator(href);
+        await page.waitForFunction(({href, expectedCount}) => {
+          const target = document.getElementById(href.slice(1));
+          const primary = document.querySelector("header[data-header-compact]")?.getBoundingClientRect();
+          const rail = document.querySelector("[data-reader-section-nav]")?.getBoundingClientRect();
+          return target && primary && rail &&
+            Math.abs(rail.top - primary.bottom) <= 2 &&
+            Math.abs(target.getBoundingClientRect().top - rail.bottom - 10) <= 3 &&
+            document.querySelector("[data-reader-section-nav] a[aria-current='location']")?.getAttribute("href") === href &&
+            document.querySelector("[data-section-nav-count]")?.textContent === expectedCount;
+        }, {href, expectedCount: `${index + 1} / ${hrefs.length}`});
+        assert.equal(await menu.getAttribute("open"), null);
+        assert.equal(await target.evaluate(node => document.activeElement === node), true, "section activation moves focus to its real fragment destination");
+        const verifySettledLocation = async () => {
+          const witness = await page.evaluate(async ({href, expectedCount}) => {
+            // Inspect several painted frames; a transient correct aria-current is
+            // insufficient when the header or fragment position subsequently changes.
+            const samples = [];
+            for (let frame = 0; frame < 5; frame++) {
+              await new Promise(resolve => requestAnimationFrame(resolve));
+              const primary = document.querySelector("header[data-header-compact]").getBoundingClientRect();
+              const rail = document.querySelector("[data-reader-section-nav]").getBoundingClientRect();
+              const target = document.getElementById(href.slice(1)).getBoundingClientRect();
+              const active = document.querySelector("[data-reader-section-nav] a[aria-current='location']");
+              samples.push({current:active?.getAttribute("href"),
+                count:document.querySelector("[data-section-nav-count]").textContent,
+                labelMatches:document.querySelector("[data-section-nav-label]").textContent === active?.textContent,
+                railGap:rail.top-primary.bottom, targetGap:target.top-rail.bottom,
+                focus:document.activeElement?.id === href.slice(1)});
+            }
+            return {samples, expectedCount};
+          }, {href, expectedCount: `${index + 1} / ${hrefs.length}`});
+          assert.ok(witness.samples.every(sample => sample.current === href &&
+            sample.count === witness.expectedCount && sample.labelMatches && sample.focus &&
+            Math.abs(sample.railGap) <= 2 && Math.abs(sample.targetGap - 10) <= 3),
+            "settled fragment identity must survive header compaction and evidence capture: " + JSON.stringify(witness));
+        };
+        await verifySettledLocation();
+        // Already aligned: do not re-scroll a correctly framed section for evidence.
+        await capture("section-nav-" + route.replace(/[^a-z0-9]+/g,"-"));
+        await verifySettledLocation();
+        await key(summary, "Enter");
+        await key(links.first(), "Escape");
+        assert.equal(await menu.getAttribute("open"), null);
+        assert.ok(await summary.evaluate(node => document.activeElement === node), "Escape closes only the local menu and restores trigger focus");
+        await fit(page);
+      }
     });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");

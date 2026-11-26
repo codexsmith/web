@@ -1,16 +1,32 @@
 // Browser acceptance checks shared by the release harness. No new dependencies.
+import { sectionNavRoutes } from "../../src/components/institutional/content/readerSectionNavigation.ts";
 const guideRoutes = ["/work-with-us/professional-services", "/work-with-us/paper-auditing", "/work-with-us/public-service", "/work-with-us/funding"];
 const exhibitRoutes = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations"];
 const principal = { "/evidence-and-trust": "evidence-and-trust", "/observatory/instruments": "observatory/instruments", "/codexware/civic-record": "codexware/civic-record", "/codexware/economic-maintenance": "codexware/economic-maintenance", ...Object.fromEntries(exhibitRoutes.map(route => [route, route.slice(1)])), ...Object.fromEntries(guideRoutes.map(route => [route, route.slice(1)])), "/digital-native-institution": "digital-native-institution", "/": "home", "/codexware": "codexware", "/observatory": "observatory", "/work-with-us": "work-with-us" };
 const doctrines = ["/consequential-systems", "/ai-governance", "/constructive-human-agency"];
 const navRoutes = ["/codexware", "/observatory", "/work-with-us"];
 const navLabels = ["Codexware", "Observatory", "Work With Us"];
-export function closingIssues({ route, context, expectedLinks, navRoutes, navLabels }, doc = document) {
+export function closingIssues({ route, context, expectedLinks, navRoutes, navLabels, sectionNavExpected }, doc = document) {
   const issues = [];
   const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
   const main = doc.querySelector("main#institutional-main");
   const header = doc.querySelector("header nav[aria-label='Boundary First Labs']");
   const currentTagline = "Trace what follows. Design for repair.";
+  const rails = main?.querySelectorAll("[data-reader-section-nav]") ?? [];
+  if (typeof sectionNavExpected === "boolean" && rails.length !== (sectionNavExpected ? 1 : 0)) issues.push("page-local navigation must be explicitly admitted on long readers only");
+  if (rails.length === 1) {
+    const rail = rails[0], hero = main.querySelector("[data-institutional-hero]");
+    const links = Array.from(rail.querySelectorAll("a[href]"));
+    const ids = links.map(a => a.getAttribute("href"));
+    const targets = ids.map(href => href?.startsWith("#") ? doc.getElementById(href.slice(1)) : null);
+    const closingTargets = Array.from(main.querySelectorAll("[data-trust-link] h2, [data-doctrine-links] > h2")).map(heading => "#" + heading.id);
+    if (!same(ids.slice(-closingTargets.length), closingTargets)) issues.push("section navigation must cover every rendered closing section in its declared order");
+    if (hero?.nextElementSibling !== rail || rail.tagName !== "NAV" || rail.getAttribute("aria-label") !== "On this page" ||
+        links.length < 2 || new Set(ids).size !== ids.length || targets.some(t => !t || !main.contains(t) || rail.contains(t)) ||
+        targets.some((t, i) => i > 0 && !(targets[i-1]?.compareDocumentPosition(t) & 4)) ||
+        links.some(a => !a.textContent.trim())) issues.push("section navigation must preserve unique same-page destinations in document order immediately after the hero");
+  }
+  const bodyLinks = () => Array.from(main?.querySelectorAll("a") ?? []).filter(a => !a.closest("[data-reader-section-nav]"));
   if (doc.querySelector('footer [data-institutional-tagline="footer"]')?.textContent.trim() !== currentTagline) issues.push("shared footer institutional tagline mismatch");
   if (/practice-born\.\s*research-backed\.\s*formally generalized\./i.test(main?.textContent ?? "")) issues.push("superseded institutional slogan in active content");
   if (route === "/") {
@@ -91,7 +107,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     if (!demo?.textContent.includes("fictional records") || !demo?.textContent.includes("invented teaching example")) issues.push("observatory example must be explicitly fictional");
     const allowed = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations", "/digital-native-institution", "/codexware", "/work-with-us", "/observatory/instruments", "/evidence-and-trust"];
     if (!same(Array.from(exhibit[0]?.querySelectorAll("[data-exhibit-card] a") ?? []).map(a=>a.getAttribute("href")), allowed.slice(0,4))) issues.push("public Observatory gallery must expose four exhibits in order");
-    const nonDoctrineLinks = Array.from(main?.querySelectorAll("a") ?? []).filter(a => !a.closest("[data-doctrine-links], [data-audience-paths]"));
+    const nonDoctrineLinks = bodyLinks().filter(a => !a.closest("[data-doctrine-links], [data-audience-paths]"));
     if (!same(nonDoctrineLinks.map(a => a.getAttribute("href")), allowed)) issues.push("observatory body exposes unapproved link or misses public destination");
     if (exhibit[0]?.querySelector("form,iframe,embed,object,input,textarea,button,select")) issues.push("observatory must be a read-only exhibition");
     if (!exhibit[0]?.querySelector('[data-observatory-section="release"]')?.textContent.includes("does not announce a new scientific result")) issues.push("observatory release claim ceiling missing");
@@ -102,7 +118,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     const refs = Array.from(main?.querySelectorAll("[data-exhibit-references] a[href^='https:']") ?? []).map(a=>a.getAttribute("href"));
     const allowedReferences = ["https://github.com/codexsmith/boundary-first-labs-public/blob/main/INTELLECTUAL_PROVENANCE.md", "https://github.com/codexsmith/boundary-first-labs-public/blob/main/PUBLICATION_POLICY.md", "https://github.com/codexsmith/boundary-first-labs-public/blob/main/method/README.md", "https://github.com/codexsmith/boundary-first-labs-public/blob/main/research/README.md", "https://github.com/codexsmith/boundary-first-labs-public/blob/main/theory/README.md"];
     if (refs.length !== 2 || refs.some(href => !allowedReferences.includes(href))) issues.push("exhibit references must use reviewed public addresses");
-    const links = Array.from(main?.querySelectorAll("a") ?? []).filter(a=>!a.closest("[data-doctrine-links]")).map(a=>a.getAttribute("href"));
+    const links = bodyLinks().filter(a=>!a.closest("[data-doctrine-links]")).map(a=>a.getAttribute("href"));
     if (links.filter(href=>href === "/observatory").length !== 2 || links.some(href=>href !== "/observatory" && !allowedReferences.includes(href) && !(["/observatory/demonstrations", "/observatory/research-architecture"].includes(route) && href === "/observatory/instruments"))) issues.push("exhibit requires two return links and no unapproved links");
     if (main?.querySelector("form,iframe,embed,object,input,textarea,button,select")) issues.push("exhibit must remain a static reader");
   }
@@ -162,7 +178,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     if (main?.querySelector('form,iframe,embed,object,input,textarea,button,select')) issues.push("trust page must be read-only");
     if (!doc.querySelector('footer a[href="/evidence-and-trust"]')) issues.push("footer trust entry required");
     const allowed = ['/','/observatory/instruments','/codexware','/codexware/civic-record','/ai-governance','/contact','/work-with-us','/digital-native-institution','/observatory','/observatory/intellectual-lineage','/consequential-systems','/constructive-human-agency',...refs];
-    if (Array.from(main?.querySelectorAll('a') ?? []).some(a=>!allowed.includes(a.getAttribute('href')))) issues.push("unapproved trust destination");
+    if (bodyLinks().some(a=>!allowed.includes(a.getAttribute('href')))) issues.push("unapproved trust destination");
   }
   if (!context) return issues;
   const panels = main?.querySelectorAll("[data-doctrine-links]") ?? [];
@@ -191,7 +207,7 @@ export async function doctrineNavigationIssues(page, route) {
   if (!context) return [];
   const expectedLinks = doctrines.filter(d => d !== route);
   // Playwright serializes this self-contained function into the browser.
-  return page.evaluate(closingIssues, { route, context, expectedLinks, navRoutes, navLabels });
+  return page.evaluate(closingIssues, { route, context, expectedLinks, navRoutes, navLabels, sectionNavExpected: sectionNavRoutes.includes(route) });
 }
 // Client navigation can commit the URL before Next has replaced route metadata.
 // Require the real destination canonical link rather than sampling the old head.

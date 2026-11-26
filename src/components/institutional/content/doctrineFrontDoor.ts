@@ -4,29 +4,29 @@ export const doctrineFrontDoor = {
     "eyebrow": "Independent · Founder-led · Digital-native",
     "title": "Trace what follows. Design for repair.",
     "lead": "We study the boundaries where systems become real.",
-    "support": "Boundary First Labs is an independent, founder-led digital-native research and engineering institution in service of the public good. We develop mathematics, computational tools and engineering practices to make consequential systems more understandable, accountable, maintainable and responsive to the people who depend on them.",
+    "support": "In service of the public good, we develop mathematics, computational tools and practices that make systems understandable, accountable, maintainable and responsive to the people who depend on them.",
     "identityLine": "Research and engineering for consequential systems.",
     "paths": [
       {
         "title": "Codexware",
-        "tagline": "Use what we build.",
-        "body": "Explore the computational tools we are developing to preserve evidence, support human agency and make consequential systems easier to navigate.",
+        "tagline": "Computational tools",
+        "body": "Developing tools to preserve evidence, support human agency and navigate consequential systems.",
         "href": "/codexware",
-        "label": "Explore Codexware"
+        "label": "View the application vision"
       },
       {
         "title": "Observatory",
-        "tagline": "Explore what we know.",
-        "body": "Discover the Lab’s research directions, selected demonstrations, intellectual foundations and the evidence behind cleared public results.",
+        "tagline": "Research & evidence",
+        "body": "Research directions, selected demonstrations, intellectual foundations and evidence behind cleared public results.",
         "href": "/observatory",
-        "label": "Explore the Observatory"
+        "label": "Inspect the research"
       },
       {
         "title": "Work With Us",
-        "tagline": "Build something together.",
-        "body": "Bring us a difficult problem. Explore research-driven engineering, scientific collaboration, evidence review and the design of accountable, repairable systems.",
+        "tagline": "Collaboration & services",
+        "body": "Research-driven engineering, scientific collaboration, evidence review and the design of accountable, repairable systems.",
         "href": "/work-with-us",
-        "label": "Work with us"
+        "label": "Find an engagement"
       }
     ],
     "commitmentLine": "Public good · Constructive human agency · Scientific integrity · Maintenance and repair"
@@ -44,39 +44,48 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "When assumptions become executable",
-          "body": "Long before electronic computers, laws, contracts, accounting systems and administrative procedures represented reality through distinctions, constraints and rules for change. In a computational sense, these structures organize what can happen next. Digitization can make existing assumptions executable without making their representations more faithful. When an omitted distinction matters, the resulting failure may be borne by someone outside the system’s own account. Boundary First Labs investigates these failures so they can be understood and repaired."
+          "body": "Long before electronic computers, laws, contracts, accounting systems and administrative procedures represented reality through distinctions, constraints and rules for change. In a computational sense, these structures organize what can happen next. Digitization can make existing assumptions executable without making their representations more faithful. When an omitted distinction matters, the resulting failure may be borne by someone outside the system’s own account. Boundary First Labs investigates these failures so they can be understood and repaired.",
+          "anchorId": "reader-chapter-executable-assumptions"
         },
         {
           "title": "Begin with the system, not its implementation",
-          "body": "Every useful representation leaves something out. A dashboard, a database record, an institutional classification and a scientific model each preserve distinctions for a purpose. The question is whether they preserve what the next consequential operation requires. A calculation tested in simulation does not establish that a live deployment is safe. A completed record does not establish that the underlying obligation has been fulfilled. Begin by identifying the actual concern, the relevant state, the people and systems affected, and the boundary at which the conditions for responsible continuation change. A model can be right and still be wrong for the task it is being used to perform. Internal correctness is not the same as external adequacy. A representation can be valid for the question it was designed to answer and inadequate for a different consequential question."
+          "body": "Every useful representation leaves something out. A dashboard, a database record, an institutional classification and a scientific model each preserve distinctions for a purpose. The question is whether they preserve what the next consequential operation requires. A calculation tested in simulation does not establish that a live deployment is safe. A completed record does not establish that the underlying obligation has been fulfilled. Begin by identifying the actual concern, the relevant state, the people and systems affected, and the boundary at which the conditions for responsible continuation change. A model can be right and still be wrong for the task it is being used to perform. Internal correctness is not the same as external adequacy. A representation can be valid for the question it was designed to answer and inadequate for a different consequential question.",
+          "anchorId": "reader-chapter-system-first"
         },
         {
           "title": "Follow the consequence beyond the account",
-          "body": "A financial or operational account has a legitimate scope. Its accuracy within that scope does not establish the full consequences of the activity it describes. An organization may reduce administrative expenditure because work has been eliminated, or because it has moved elsewhere. Distinguish the accounting boundary, the causal path and the obligations that persist. Examine who receives a benefit, who supplies resources and time, who bears a cost or risk, and when those effects occur. A good investigation can establish genuine improvement just as readily as it can identify displaced burdens. The boundary of calculability is not the boundary of responsibility: a consequence that cannot yet be measured completely must not be silently counted as zero."
+          "body": "A financial or operational account has a legitimate scope. Its accuracy within that scope does not establish the full consequences of the activity it describes. An organization may reduce administrative expenditure because work has been eliminated, or because it has moved elsewhere. Distinguish the accounting boundary, the causal path and the obligations that persist. Examine who receives a benefit, who supplies resources and time, who bears a cost or risk, and when those effects occur. A good investigation can establish genuine improvement just as readily as it can identify displaced burdens. The boundary of calculability is not the boundary of responsibility: a consequence that cannot yet be measured completely must not be silently counted as zero.",
+          "anchorId": "reader-chapter-consequences"
         },
         {
           "title": "Make undocumented human responsibilities visible",
-          "body": "Missed system requirements become undocumented human responsibilities when people must compensate for what the system failed to accommodate. A person may spend hours reconstructing records, mediating between departments or repairing inconsistencies that a process has failed to accommodate. This is different from a legitimate human responsibility such as judgment, consent or contextual interpretation. Investigate whether the person is equipped with the information, authority, resources, time and route to repair needed for the assigned work. Do not mistake the fact that someone managed to compensate for a defect for evidence that the system is sound."
+          "body": "Missed system requirements become undocumented human responsibilities when people must compensate for what the system failed to accommodate. A person may spend hours reconstructing records, mediating between departments or repairing inconsistencies that a process has failed to accommodate. This is different from a legitimate human responsibility such as judgment, consent or contextual interpretation. Investigate whether the person is equipped with the information, authority, resources, time and route to repair needed for the assigned work. Do not mistake the fact that someone managed to compensate for a defect for evidence that the system is sound.",
+          "anchorId": "reader-chapter-human-responsibilities"
         },
         {
           "title": "Constructive disruption",
-          "body": "We distinguish disrupting a functioning structure from challenging a defective representation of it. An institutional record is not necessarily the reality it describes; procedural compliance is not necessarily substantive correctness; administrative complexity is not necessarily necessary complexity. Where evidence exposes a mismatch, we seek to repair the conditions that produce it. The objective is greater institutional fidelity, accountability and viability, not destabilization. Collaboration by construction. Repair over unnecessary replacement."
+          "body": "We distinguish disrupting a functioning structure from challenging a defective representation of it. An institutional record is not necessarily the reality it describes; procedural compliance is not necessarily substantive correctness; administrative complexity is not necessarily necessary complexity. Where evidence exposes a mismatch, we seek to repair the conditions that produce it. The objective is greater institutional fidelity, accountability and viability, not destabilization. Collaboration by construction. Repair over unnecessary replacement.",
+          "anchorId": "reader-chapter-constructive-disruption"
         },
         {
           "title": "Distinguish necessity from inherited constraint.",
-          "body": "An existing implementation is not a law of nature. The absence of a known alternative does not establish that none exists; the desire for an alternative does not establish its feasibility. Identify physical, mathematical, legal, organizational and resource constraints at their proper scopes. Investigate admissible alternatives and preserve the evidence when they fail. Demonstrated impossibility is earned closure, not a failed research outcome."
+          "body": "An existing implementation is not a law of nature. The absence of a known alternative does not establish that none exists; the desire for an alternative does not establish its feasibility. Identify physical, mathematical, legal, organizational and resource constraints at their proper scopes. Investigate admissible alternatives and preserve the evidence when they fail. Demonstrated impossibility is earned closure, not a failed research outcome.",
+          "anchorId": "reader-chapter-necessity"
         },
         {
           "title": "Preserve viability before optimizing",
-          "body": "Speed, cost and throughput are useful objectives within an adequately justified set of alternatives. They are not permission to sacrifice safety, lawful obligations or the practical conditions under which people and systems can continue. Compare prevention, maintenance, repair, replacement, redesign and nonintervention over an appropriate lifecycle horizon. Preserve differences in time, risk, resource use, accessibility and the distribution of consequences rather than assuming every effect can be collapsed into a single monetary score. Maintenance is an obligation to investigate and preserve necessary conditions, not a commitment to preserve every existing implementation."
+          "body": "Speed, cost and throughput are useful objectives within an adequately justified set of alternatives. They are not permission to sacrifice safety, lawful obligations or the practical conditions under which people and systems can continue. Compare prevention, maintenance, repair, replacement, redesign and nonintervention over an appropriate lifecycle horizon. Preserve differences in time, risk, resource use, accessibility and the distribution of consequences rather than assuming every effect can be collapsed into a single monetary score. Maintenance is an obligation to investigate and preserve necessary conditions, not a commitment to preserve every existing implementation.",
+          "anchorId": "reader-chapter-viability"
         },
         {
           "title": "Make work knowable before making it bigger",
-          "body": "Engineering begins with recovering the work and requirements that already exist. When the causal explanation or governing constraint is uncertain, investigate it rather than turning uncertainty into a delivery promise. A research increment can establish a supported, contradicted or unresolved finding; a delivery increment must fulfill its own acceptance conditions. Iterative practice is valuable because it makes the actual state of work observable. Build to learn before building to scale. This makes the choice to repair, replace or leave a functioning system alone an accountable engineering decision. Institutions must maintain what they know, including assumptions, measurements and procedures. Diagnose systems, not presumed motives; investigate the evidence and requirements before assigning explanations."
+          "body": "Engineering begins with recovering the work and requirements that already exist. When the causal explanation or governing constraint is uncertain, investigate it rather than turning uncertainty into a delivery promise. A research increment can establish a supported, contradicted or unresolved finding; a delivery increment must fulfill its own acceptance conditions. Iterative practice is valuable because it makes the actual state of work observable. Build to learn before building to scale. This makes the choice to repair, replace or leave a functioning system alone an accountable engineering decision. Institutions must maintain what they know, including assumptions, measurements and procedures. Diagnose systems, not presumed motives; investigate the evidence and requirements before assigning explanations.",
+          "anchorId": "reader-chapter-knowable-work"
         },
         {
           "title": "Earn closure through evidence and repair",
-          "body": "A handoff is not complete because the sender stopped working. A ticket is not proof that the service recovered. Identify what obligation is satisfied, the witness that supports it, the residual obligations and the actor with capacity to address them. Recovery may restore one affected case; structural repair changes the conditions that made the failure recur. Verify both at their own scopes, record limitations and keep a route to reopen the question when evidence changes. A narrower successful operation can be reported honestly without claiming that the containing system is repaired. A closed transaction is not necessarily a closed consequence. The payment, restored asset, renewed service and recovery of affected people can have different closure conditions. A failure should have a path toward repair. A corrected record is not necessarily a restored service; evaluate repair against the consequence it is meant to address. Institutions also need a lawful way to discover defects in their own rules, revise the relevant representation and verify the consequences of revision. Governance is part of maintenance."
+          "body": "A handoff is not complete because the sender stopped working. A ticket is not proof that the service recovered. Identify what obligation is satisfied, the witness that supports it, the residual obligations and the actor with capacity to address them. Recovery may restore one affected case; structural repair changes the conditions that made the failure recur. Verify both at their own scopes, record limitations and keep a route to reopen the question when evidence changes. A narrower successful operation can be reported honestly without claiming that the containing system is repaired. A closed transaction is not necessarily a closed consequence. The payment, restored asset, renewed service and recovery of affected people can have different closure conditions. A failure should have a path toward repair. A corrected record is not necessarily a restored service; evaluate repair against the consequence it is meant to address. Institutions also need a lawful way to discover defects in their own rules, revise the relevant representation and verify the consequences of revision. Governance is part of maintenance.",
+          "anchorId": "reader-chapter-closure"
         }
       ],
       "example": {
@@ -137,27 +146,33 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "AI is a forge, not an oracle",
-          "body": "Use computational assistance to explore, draft, compare, organize, program and challenge. A generated explanation can be useful without being correct; an apparent agreement is not evidence of a scientific result. Keep the original observations, uncertainty, reasoning and verification obligations visible. Human judgment and domain-native evidence remain necessary when a claim is relied upon. The purpose of computational capability is to expand inquiry, not to replace the conditions through which knowledge earns trust."
+          "body": "Use computational assistance to explore, draft, compare, organize, program and challenge. A generated explanation can be useful without being correct; an apparent agreement is not evidence of a scientific result. Keep the original observations, uncertainty, reasoning and verification obligations visible. Human judgment and domain-native evidence remain necessary when a claim is relied upon. The purpose of computational capability is to expand inquiry, not to replace the conditions through which knowledge earns trust.",
+          "anchorId": "reader-chapter-forge"
         },
         {
           "title": "Capability, permission, authority and responsibility are distinct",
-          "body": "A system may be able to send a message, update a record or trigger another operation. Technical access to that operation does not establish legitimate authorization. The provider, delegating principal, operator, affected person and party capable of repair may be different. Identify which role actually grants authority, for what purpose and duration, which conditions must be preserved, and who remains answerable for the consequence. Operational agency is a functional property of a deployment; it does not settle questions of personhood, moral standing or legal status."
+          "body": "A system may be able to send a message, update a record or trigger another operation. Technical access to that operation does not establish legitimate authorization. The provider, delegating principal, operator, affected person and party capable of repair may be different. Identify which role actually grants authority, for what purpose and duration, which conditions must be preserved, and who remains answerable for the consequence. Operational agency is a functional property of a deployment; it does not settle questions of personhood, moral standing or legal status.",
+          "anchorId": "reader-chapter-authority"
         },
         {
           "title": "Capability carries responsibility",
-          "body": "General-purpose mathematical and computational reasoning can be dual-use: the same capacity that exposes a defect may reveal ways to exploit it. Governance belongs alongside research, not merely after release. Computational capability does not confer authorization; recoverability does not confer permission to recover; reachability does not confer permission to act. Research disclosure, capability release and operational deployment are distinct consequential decisions. Their boundaries must be evaluated separately."
+          "body": "General-purpose mathematical and computational reasoning can be dual-use: the same capacity that exposes a defect may reveal ways to exploit it. Governance belongs alongside research, not merely after release. Computational capability does not confer authorization; recoverability does not confer permission to recover; reachability does not confer permission to act. Research disclosure, capability release and operational deployment are distinct consequential decisions. Their boundaries must be evaluated separately.",
+          "anchorId": "reader-chapter-responsibility"
         },
         {
           "title": "Govern the transition from information to action",
-          "body": "Recommendation, decision, authorization and execution are different operations. For systems with delegated execution, explicit, scoped opt-in is a necessary governance condition, not sufficient permission by itself. Codexware’s proposed deployment appliances follow a narrower boundary: they may analyze and prepare proposed changes, but independent external execution is outside their authority. Information may inform a decision without conferring authority. Preserve action provenance, permissions, constraints, monitoring and an effective way to revoke or suspend authority. These are design and verification obligations, not a claim that every proposed safeguard is already implemented or sufficient."
+          "body": "Recommendation, decision, authorization and execution are different operations. For systems with delegated execution, explicit, scoped opt-in is a necessary governance condition, not sufficient permission by itself. Codexware’s proposed deployment appliances follow a narrower boundary: they may analyze and prepare proposed changes, but independent external execution is outside their authority. Information may inform a decision without conferring authority. Preserve action provenance, permissions, constraints, monitoring and an effective way to revoke or suspend authority. These are design and verification obligations, not a claim that every proposed safeguard is already implemented or sufficient.",
+          "anchorId": "reader-chapter-information-to-action"
         },
         {
           "title": "Alignment must account for the containing system",
-          "body": "A locally successful automated process may transfer delay, cost or risk to another person or system. Two individually permitted operations can also violate a shared constraint when composed. Inspect effects outside the optimization target, including the agency gained and lost by affected people. This extends the governance question beyond model outputs to deployment architecture, institutions, incentives and feedback. It is a proposed engineering posture, not a claim to have solved AI alignment."
+          "body": "A locally successful automated process may transfer delay, cost or risk to another person or system. Two individually permitted operations can also violate a shared constraint when composed. Inspect effects outside the optimization target, including the agency gained and lost by affected people. This extends the governance question beyond model outputs to deployment architecture, institutions, incentives and feedback. It is a proposed engineering posture, not a claim to have solved AI alignment.",
+          "anchorId": "reader-chapter-alignment"
         },
         {
           "title": "Make accountability actionable",
-          "body": "A consequential deployment should retain an intelligible record of the action, authority, evidence and affected state. Affected people should have appropriate routes to question, contest and obtain correction. A log is useful but cannot repair a defect by itself. The person responsible for the consequence must have access to a capable repair path, or the unresolved gap should remain visible. A scoped assurance or readiness review is not universal safety, legal compliance, or an issued statutory certificate."
+          "body": "A consequential deployment should retain an intelligible record of the action, authority, evidence and affected state. Affected people should have appropriate routes to question, contest and obtain correction. A log is useful but cannot repair a defect by itself. The person responsible for the consequence must have access to a capable repair path, or the unresolved gap should remain visible. A scoped assurance or readiness review is not universal safety, legal compliance, or an issued statutory certificate.",
+          "anchorId": "reader-chapter-accountability"
         }
       ],
       "example": {
@@ -224,43 +239,53 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "From necessity to mastery",
-          "body": "Boundary First Labs grew from lived experience, professional software engineering and a commitment to education as mastery rather than certification. Investigations across mathematics, physics, cognition, computation and human factors began with a practical question: how can we better understand and reason about the systems we depend on? The objective is not simply to accumulate knowledge, but to make it independently examinable, computationally useful and accessible to others. Mastery is demonstrated competence, not merely certification. Observe, understand, reconstruct, verify, explain and teach; preserve the qualifications and domain standards appropriate to each task. Education should strengthen a person’s independent judgment and capacity to continue."
+          "body": "Boundary First Labs grew from lived experience, professional software engineering and a commitment to education as mastery rather than certification. Investigations across mathematics, physics, cognition, computation and human factors began with a practical question: how can we better understand and reason about the systems we depend on? The objective is not simply to accumulate knowledge, but to make it independently examinable, computationally useful and accessible to others. Mastery is demonstrated competence, not merely certification. Observe, understand, reconstruct, verify, explain and teach; preserve the qualifications and domain standards appropriate to each task. Education should strengthen a person’s independent judgment and capacity to continue.",
+          "anchorId": "reader-chapter-mastery"
         },
         {
           "title": "I am not the one. I am one.",
-          "body": "The capacity to perceive, distinguish, reason, construct and revise is not the exclusive property of a founder, profession or institution. People have different circumstances, resources, knowledge, abilities and opportunities. Respecting their agency does not require pretending those differences do not exist. Useful systems should help people pursue their own work and goals, not reduce them to the roles they hold."
+          "body": "The capacity to perceive, distinguish, reason, construct and revise is not the exclusive property of a founder, profession or institution. People have different circumstances, resources, knowledge, abilities and opportunities. Respecting their agency does not require pretending those differences do not exist. Useful systems should help people pursue their own work and goals, not reduce them to the roles they hold.",
+          "anchorId": "reader-chapter-one-among-many"
         },
         {
           "title": "People are more than their records.",
-          "body": "No system can fully represent a person, and responsible assistance does not require it to. Use only the information relevant to a legitimate, authorized purpose; keep it grounded in evidence, open to correction and limited to that purpose. Knowing more about someone does not grant greater authority over them. Software should respect the limits of what it knows and what it is permitted to do."
+          "body": "No system can fully represent a person, and responsible assistance does not require it to. Use only the information relevant to a legitimate, authorized purpose; keep it grounded in evidence, open to correction and limited to that purpose. Knowing more about someone does not grant greater authority over them. Software should respect the limits of what it knows and what it is permitted to do.",
+          "anchorId": "reader-chapter-people-and-records"
         },
         {
           "title": "Independent judgment takes more than access to information",
-          "body": "Information access alone is insufficient. A person needs a reasonable opportunity to inspect relevant evidence, governing rules, assumptions, uncertainty and the reasoning behind consequential claims. Independence does not mean possessing all expertise or distrusting every institution. It means being able to ask questions, seek qualified help, evaluate the scope of an answer, disagree and obtain a meaningful route to correction. Access to expertise should help people make better-informed judgments of their own, not make decisions for them."
+          "body": "Information access alone is insufficient. A person needs a reasonable opportunity to inspect relevant evidence, governing rules, assumptions, uncertainty and the reasoning behind consequential claims. Independence does not mean possessing all expertise or distrusting every institution. It means being able to ask questions, seek qualified help, evaluate the scope of an answer, disagree and obtain a meaningful route to correction. Access to expertise should help people make better-informed judgments of their own, not make decisions for them.",
+          "anchorId": "reader-chapter-judgment"
         },
         {
           "title": "Give the capability to people first",
-          "body": "Institutions often have records, analytical tools and administrative support that individuals cannot readily access. We want to make the kinds of computational tools institutions rely on useful to people in their own lives. People should not have to wait for an institution to adopt a tool before they can benefit from it. Even a tool that helps a person understand a form’s requirements or check supporting evidence can expand practical agency. Codexware is our proposed engineering realization of that direction. Its benefit must be demonstrated, not presumed."
+          "body": "Institutions often have records, analytical tools and administrative support that individuals cannot readily access. We want to make the kinds of computational tools institutions rely on useful to people in their own lives. People should not have to wait for an institution to adopt a tool before they can benefit from it. Even a tool that helps a person understand a form’s requirements or check supporting evidence can expand practical agency. Codexware is our proposed engineering realization of that direction. Its benefit must be demonstrated, not presumed.",
+          "anchorId": "reader-chapter-capability-first"
         },
         {
           "title": "Preserve human responsibility where it belongs",
-          "body": "Our goal is not to remove people from institutions. It is to free people from unnecessary institutional machinery. Consent, interpretation, deliberation and responsibility often belong with people. Repetitive work caused by missing infrastructure need not. Let software perform the tasks it can responsibly support while the appropriate people retain authority, choice and judgment. The goal is neither to automate everything nor to make people do everything themselves."
+          "body": "Our goal is not to remove people from institutions. It is to free people from unnecessary institutional machinery. Consent, interpretation, deliberation and responsibility often belong with people. Repetitive work caused by missing infrastructure need not. Let software perform the tasks it can responsibly support while the appropriate people retain authority, choice and judgment. The goal is neither to automate everything nor to make people do everything themselves.",
+          "anchorId": "reader-chapter-human-responsibility"
         },
         {
           "title": "Build capacities, not artificial dependence",
-          "body": "Collaboration should leave people more capable of continuing their work. Preserve the process, progress, sources, decisions and artifacts of constructive activity. Make accumulated knowledge portable where rights and legitimate protections permit; design for consent, a way to challenge decisions and the freedom to leave. A service may responsibly restrict its own powerful execution capabilities without seeking ownership of a person’s information or conclusions. The Lab should earn participation through useful work and should remain open to criticism. Collaboration by construction means enabling people, institutions and computational tools to exchange information and coordinate work without silently transferring authority or responsibility. The ability to transmit knowledge and reconstruct useful work is a measure of constructive collaboration. We aspire to leave an inspectable handoff, not a monopoly over understanding."
+          "body": "Collaboration should leave people more capable of continuing their work. Preserve the process, progress, sources, decisions and artifacts of constructive activity. Make accumulated knowledge portable where rights and legitimate protections permit; design for consent, a way to challenge decisions and the freedom to leave. A service may responsibly restrict its own powerful execution capabilities without seeking ownership of a person’s information or conclusions. The Lab should earn participation through useful work and should remain open to criticism. Collaboration by construction means enabling people, institutions and computational tools to exchange information and coordinate work without silently transferring authority or responsibility. The ability to transmit knowledge and reconstruct useful work is a measure of constructive collaboration. We aspire to leave an inspectable handoff, not a monopoly over understanding.",
+          "anchorId": "reader-chapter-independence"
         },
         {
           "title": "Practice the institution we seek to build",
-          "body": "In 2019, Projectr attempted to organize constructive social activity around projects, process, progress and artifacts. The founder’s experience with recursive schema migration motivated a return to foundational inquiry. Years of contemplation gave way to sustained conversational research, followed by corpus stewardship, formalization, experiments and executable machinery. The Lab itself became a one-person practice of the earlier vision. This is first-party historical experience and an internal use case, not evidence that a multi-user product has been validated."
+          "body": "In 2019, Projectr attempted to organize constructive social activity around projects, process, progress and artifacts. The founder’s experience with recursive schema migration motivated a return to foundational inquiry. Years of contemplation gave way to sustained conversational research, followed by corpus stewardship, formalization, experiments and executable machinery. The Lab itself became a one-person practice of the earlier vision. This is first-party historical experience and an internal use case, not evidence that a multi-user product has been validated.",
+          "anchorId": "reader-chapter-institutional-practice"
         },
         {
           "title": "Judge improvement by what people can actually do",
-          "body": "A successful interface, larger corpus or faster model does not by itself show that people's lives or work have improved. Ask what people can now understand or accomplish, what new burdens they carry, whether they retain meaningful options, and whether the capability can survive a change of provider or institutional conditions. Evaluate claims against appropriate evidence and competent baselines. Constructive Human Agency is a guiding purpose; the effectiveness of any particular intervention must be established rather than presumed."
+          "body": "A successful interface, larger corpus or faster model does not by itself show that people's lives or work have improved. Ask what people can now understand or accomplish, what new burdens they carry, whether they retain meaningful options, and whether the capability can survive a change of provider or institutional conditions. Evaluate claims against appropriate evidence and competent baselines. Constructive Human Agency is a guiding purpose; the effectiveness of any particular intervention must be established rather than presumed.",
+          "anchorId": "reader-chapter-practical-improvement"
         },
         {
           "title": "Tools that serve people",
-          "body": "Boundary First Labs is an independent, founder-led, one-person digital-native institution that uses carefully governed computational tools. Our purpose is public good. We do not want to become another authority people must rely on to understand the world. We want to give people tools to investigate it for themselves. Software provides computational capabilities. People retain the authority to decide how those capabilities are used, within the limits of consent and legitimate authorization. The architecture must preserve that distinction. Technology should extend human agency, not diminish it. Our goal is to make people more capable through software."
+          "body": "Boundary First Labs is an independent, founder-led, one-person digital-native institution that uses carefully governed computational tools. Our purpose is public good. We do not want to become another authority people must rely on to understand the world. We want to give people tools to investigate it for themselves. Software provides computational capabilities. People retain the authority to decide how those capabilities are used, within the limits of consent and legitimate authorization. The architecture must preserve that distinction. Technology should extend human agency, not diminish it. Our goal is to make people more capable through software.",
+          "anchorId": "reader-chapter-tools-for-people"
         }
       ],
       "example": {
@@ -310,7 +335,7 @@ export const doctrineFrontDoor = {
     "slug": "codexware",
     "name": "Codexware",
     "tagline": "Putting institutional computational tools into individual hands.",
-    "lead": "Research made operational: tools to help people understand requirements, preserve evidence and examine consequential decisions.",
+    "lead": "The intended tools help people understand requirements, preserve evidence and examine consequential decisions.",
     "support": "Codexware is a developing application and governed deployment architecture. Reusable reasoning, verification and evidence components are composed within declared boundaries.",
     "sections": [
       {
@@ -327,7 +352,7 @@ export const doctrineFrontDoor = {
       },
       {
         "title": "Research broadly. Deploy narrowly.",
-        "body": "Separate research machinery from deployment machinery. Each appliance receives only the capabilities needed for its declared purpose. Research broadly. Verify rigorously. Release selectively. Deploy narrowly. Govern continuously."
+        "body": "Separate research machinery from deployment machinery. Each appliance receives only the capabilities needed for its declared purpose. Verify rigorously. Release selectively. Govern continuously."
       },
       {
         "title": "Represent only what the purpose requires",
@@ -342,7 +367,7 @@ export const doctrineFrontDoor = {
     "status": "In development. This page describes intended capabilities and formal design and verification requirements, not a product release, availability promise, MCP integration, or claim of verified safeguards.",
     "commitments": {
       "heading": "Computational capability. Human authority.",
-      "intro": "Five design requirements define the proposed deployment boundary.",
+      "intro": "Governance by construction begins with five design requirements for the proposed deployment boundary.",
       "items": [
         {
           "title": "Procedurally verifiable opt-in",
@@ -369,8 +394,8 @@ export const doctrineFrontDoor = {
       "closing": "Distribute computational competence without distributing unchecked computational authority."
     },
     "examples": {
-      "heading": "What would you want to know?",
-      "intro": "Five ordinary problems illustrate the intended uses of governed computational instruments.",
+      "heading": "Intended uses",
+      "intro": "Five ordinary problems illustrate how governed computational instruments could support human decisions.",
       "items": [
         {
           "id": "requirements",
@@ -409,7 +434,7 @@ export const doctrineFrontDoor = {
       "linkIntro": "Explore the research connecting financial records to material viability."
     },
     "civicIntro": {
-      "title": "Meet Civic Record",
+      "title": "Civic Record",
       "tagline": "Your records. Your evidence. Your agency.",
       "body": "A proposed local workspace to preserve originals, document events and organize selected evidence. Core utility is intended to be free at the MVP stage, without AI, an external account, subscription or research participation.",
       "status": "Private prototype · Synthetic-data development · Not publicly available",
@@ -419,7 +444,7 @@ export const doctrineFrontDoor = {
   },
   "foundation": {
     "title": "Inquiry before implementation.",
-    "body": "We study the boundaries where systems become real. Our inquiries draw on mathematics, physics, computer science and engineering. From computation beneath disciplines to computation between them, we seek ways for specialized knowledge to work together without erasing its native meaning. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise."
+    "body": "Our inquiries draw on mathematics, physics, computer science and engineering. From computation beneath disciplines to computation between them, we seek ways for specialized knowledge to work together without erasing its native meaning. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise."
   },
   "history": {
     "title": "From practice to research.",
@@ -545,15 +570,15 @@ export const doctrineFrontDoor = {
     "slug": "work-with-us",
     "name": "Work With Us",
     "eyebrow": "Research · Engineering · Public service",
-    "tagline": "Bring a problem worth solving.",
-    "lead": "Bring a difficult problem, research question or capability. You do not need a complete specification or a predetermined solution.",
-    "support": "A solo-operated, computationally leveraged research and engineering institution. We work through scoped engagements and complementary expertise in architecture, research, evidence, governance and repair.",
+    "tagline": "Start with the problem, not a specification.",
+    "lead": "A research question, an unresolved problem or a capability you want to develop is enough to begin.",
+    "support": "We work through scoped engagements and complementary expertise in architecture, research, evidence, governance and repair.",
     "principle": "Useful work should leave more capability behind.",
     "groups": [
       {
         "id": "commission",
         "title": "Commission work",
-        "intro": "Start with a system, difficult decision or unresolved obligation—not a predetermined implementation.",
+        "intro": "Scope work around a system, difficult decision or unresolved obligation.",
         "cards": [
           {
             "id": "systems",
@@ -583,7 +608,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "collaborate",
-        "title": "Collaborate with us",
+        "title": "Collaborate",
         "intro": "Begin with one question, review, test or artifact. Independent criticism is welcome.",
         "cards": [
           {
@@ -660,7 +685,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "engagement": {
-      "title": "From a problem to a bounded engagement.",
+      "title": "How an engagement works",
       "intro": "Explore without obligation. An initial conversation can establish whether useful, feasible work exists; a research question need not become a sales lead.",
       "steps": [
         {
@@ -684,8 +709,8 @@ export const doctrineFrontDoor = {
       "limits": "No predetermined result, timeline before scope and capacity, or substitution for authorized decision-makers. Agree confidentiality, ownership, review and disclosure."
     },
     "know": {
-      "title": "Know who you are working with.",
-      "intro": "Explore the founder-attributed history, research practice and institutional commitments.",
+      "title": "Institutional background",
+      "intro": "Founder-attributed history, research practice and institutional commitments.",
       "cards": [
         {
           "id": "founder",
@@ -722,8 +747,8 @@ export const doctrineFrontDoor = {
       ]
     },
     "contact": {
-      "title": "What are you trying to understand, build or repair?",
-      "body": "A short, non-confidential description is enough. Choose an inquiry or use direct email.",
+      "title": "Start a conversation",
+      "body": "A short, non-confidential description of what you want to understand, build or repair is enough. Choose an inquiry or use direct email.",
       "privacy": "Please do not send sensitive personal records, credentials or confidential material in an initial message. We can discuss the appropriate boundaries before exchanging anything consequential.",
       "href": "/contact",
       "label": "Prepare an inquiry"
@@ -733,11 +758,11 @@ export const doctrineFrontDoor = {
     "slug": "observatory",
     "name": "Observatory",
     "eyebrow": "Public research exhibition",
-    "tagline": "Explore the structures beneath the systems.",
-    "lead": "Explore selected questions, demonstrations and research methods across mathematics, computation, physics, institutions and economics.",
-    "support": "A curated exhibition, not the working laboratory. Questions, evidence and limitations are public only within the scope of each selected exhibit.",
-    "foundationsHeading": "Where the work begins.",
-    "foundationsIntro": "Established disciplines supply the standards of reasoning and evidence. Explore their roles below.",
+    "tagline": "What representations preserve, and what they leave out.",
+    "lead": "Selected research questions, demonstrations and methods from mathematics, computation, physics, institutions and economics.",
+    "support": "The working laboratory remains private. Each public exhibit states the scope of its evidence and what it can establish.",
+    "foundationsHeading": "Intellectual foundations",
+    "foundationsIntro": "Established disciplines supply the standards of reasoning and evidence.",
     "foundations": [
       {
         "title": "Mathematics and logic",
@@ -760,7 +785,7 @@ export const doctrineFrontDoor = {
         "body": "Economics, governance, social inquiry and human experience help locate obligations, access, responsibility and the conditions under which people can continue."
       }
     ],
-    "architectureHeading": "One research practice. Several layers of capability.",
+    "architectureHeading": "Research architecture",
     "architectureIntro": "A functional overview of the Lab, not a dependency graph, formal derivation or implementation specification.",
     "architecture": [
       {
@@ -785,8 +810,8 @@ export const doctrineFrontDoor = {
       }
     ],
     "architectureNote": "A common structure is a research opportunity, not proof that disciplines reduce to one theory.",
-    "researchHeading": "The questions we investigate.",
-    "researchIntro": "Research directions, not established results or announced breakthroughs.",
+    "researchHeading": "Research directions",
+    "researchIntro": "Questions under investigation, not established results or announced breakthroughs.",
     "research": [
       {
         "title": "Formal foundations and representation",
@@ -829,7 +854,7 @@ export const doctrineFrontDoor = {
         "body": "Record evidence, uncertainty, failures and corrections. Evaluate possible repairs and preserve evidence needed to inspect the result."
       }
     ],
-    "evidenceHeading": "Know what is known. Preserve what is not.",
+    "evidenceHeading": "Evidence: know what is known. Preserve what is not.",
     "evidenceIntro": "Distinguish background knowledge, hypotheses, deductions, observations, verified results and independent findings. A demonstration is not a general theorem; public release is not independent validation.",
     "evidence": [
       {
@@ -880,7 +905,7 @@ export const doctrineFrontDoor = {
       "takeaway": "The label cannot establish whether the person received the service. Local correctness can be inadequate for a consequential question; identify the missing evidence and repair path.",
       "limit": "This is an invented teaching example, not a measured finding about a real institution, a proprietary algorithm, or validation of a general theory."
     },
-    "releaseHeading": "A curated record, not an open workbench.",
+    "releaseHeading": "Public release: a curated record, not an open workbench.",
     "releaseBody": "Exhibits are selected individually. Unpublished derivations, dependency maps, working datasets, private logs and execution controls remain outside this exhibition. Claims are limited when supporting evidence is not available.",
     "releaseNote": "This overview does not announce a new scientific result, external certification or released application. Review and publication status belong to each artifact.",
     "links": [
@@ -904,8 +929,8 @@ export const doctrineFrontDoor = {
     "name": "A Digital-Native Institution",
     "eyebrow": "How Boundary First Labs works",
     "tagline": "One person, supported by carefully governed computational tools.",
-    "lead": "Boundary First Labs is an independent, founder-led research and engineering institution organized around durable digital knowledge, computational instruments and explicit human responsibility.",
-    "support": "We are currently a solo-operated organization. Our institutional capacity is developed through years of accumulated work, software and governed computational assistance, rather than a large staff or a traditional departmental structure.",
+    "lead": "We organize research and engineering around durable digital knowledge, computational instruments and explicit human responsibility.",
+    "support": "Our institutional capacity comes from years of accumulated work, software and governed computational assistance rather than a large staff or traditional departmental structure.",
     "homeIntro": {
       "title": "A digital-native research institution.",
       "body": "The Lab is built around persistent knowledge, computational instruments and accountable human direction. Explore the values, stewardship and continuity commitments behind our solo-operated institution.",
@@ -921,31 +946,38 @@ export const doctrineFrontDoor = {
     "sections": [
       {
         "title": "Digital-native, not merely digital.",
-        "body": "An organization can conduct its business online while retaining the same operating structure as a conventional institution. By digital-native, we mean something more fundamental: the knowledge, workflows, evidence and instruments through which the institution operates are designed to be digitally represented, maintained and carried forward. The digital environment is not just a communication channel. It is part of the institutional architecture."
+        "body": "An organization can conduct its business online while retaining the same operating structure as a conventional institution. By digital-native, we mean something more fundamental: the knowledge, workflows, evidence and instruments through which the institution operates are designed to be digitally represented, maintained and carried forward. The digital environment is not just a communication channel. It is part of the institutional architecture.",
+        "anchorId": "reader-chapter-digital-native"
       },
       {
         "title": "Institutional capacity beyond headcount.",
-        "body": "Boundary First Labs is currently run by its founder. Computational tools assist with research, representation, implementation, documentation and verification. They are tools, not an independent governing body or a substitute for human responsibility. The goal is not to imitate a large organization, but to build useful institutional capabilities while operating as a one-person organization."
+        "body": "Boundary First Labs is currently run by its founder. Computational tools assist with research, representation, implementation, documentation and verification. They are tools, not an independent governing body or a substitute for human responsibility. The goal is not to imitate a large organization, but to build useful institutional capabilities while operating as a one-person organization.",
+        "anchorId": "reader-chapter-capacity"
       },
       {
         "title": "Research as living infrastructure.",
-        "body": "The Lab preserves the process, progress and artifacts of constructive work. Rather than treat research as isolated final papers, we develop and use interconnected infrastructure intended to keep questions, hypotheses, mathematical constructions, computational experiments, source evidence, negative results, corrections and verification obligations traceable as the work evolves. A living body of research should be capable of remembering how it came to know what it knows. The laboratory is itself a longitudinal demonstration of durable research practice, not independent validation of a multi-user commercial platform."
+        "body": "The Lab preserves the process, progress and artifacts of constructive work. Rather than treat research as isolated final papers, we develop and use interconnected infrastructure intended to keep questions, hypotheses, mathematical constructions, computational experiments, source evidence, negative results, corrections and verification obligations traceable as the work evolves. A living body of research should be capable of remembering how it came to know what it knows. The laboratory is itself a longitudinal demonstration of durable research practice, not independent validation of a multi-user commercial platform.",
+        "anchorId": "reader-chapter-living-infrastructure"
       },
       {
         "title": "Governance belongs in the architecture.",
-        "body": "The same doctrines that guide our research guide our operations. Consequential work should have a declared purpose, a bounded scope, explicit authority, evidence of what changed and a responsible route for correction. Computational capability does not confer permission to act. Research conclusions remain subject to their own evidence and review; a successful workflow is not proof of a successful scientific result. Our institutional commitments are public good, human agency, scientific integrity, explicit authority, maintenance, repair, continuity and collaboration. They guide the work rather than certify every implementation."
+        "body": "The same doctrines that guide our research guide our operations. Consequential work should have a declared purpose, a bounded scope, explicit authority, evidence of what changed and a responsible route for correction. Computational capability does not confer permission to act. Research conclusions remain subject to their own evidence and review; a successful workflow is not proof of a successful scientific result. Our institutional commitments are public good, human agency, scientific integrity, explicit authority, maintenance, repair, continuity and collaboration. They guide the work rather than certify every implementation.",
+        "anchorId": "reader-chapter-governance"
       },
       {
         "title": "An institution must be capable of repairing itself.",
-        "body": "Governance includes more than following existing rules. It includes examining whether the rules and representations remain adequate to their purpose, who can revise them lawfully, what evidence would justify a change, and how the consequences of that change will be verified. We intend to apply the same standard to our own institution: preserve rationale, expose failures, retain criticism and keep a responsible path to correction."
+        "body": "Governance includes more than following existing rules. It includes examining whether the rules and representations remain adequate to their purpose, who can revise them lawfully, what evidence would justify a change, and how the consequences of that change will be verified. We intend to apply the same standard to our own institution: preserve rationale, expose failures, retain criticism and keep a responsible path to correction.",
+        "anchorId": "reader-chapter-self-repair"
       },
       {
         "title": "Continuity is a design requirement.",
-        "body": "The objective is to make accumulated knowledge and useful capabilities increasingly inspectable, teachable, transferable and repairable. A digital-native institution should preserve its ability to continue when an instrument changes, a hypothesis fails or a participant leaves. Founder dependence, operational resilience and independent reproduction remain real challenges that the institution must address, not achievements assumed from its architecture. Build institutions that can survive their founders. Preserve the knowledge, rationale, instruments, evidence and responsibilities needed for a qualified successor to carry the work forward or rebuild a lost capability. We are developing toward this condition; succession and independent regeneration are not yet established."
+        "body": "The objective is to make accumulated knowledge and useful capabilities increasingly inspectable, teachable, transferable and repairable. A digital-native institution should preserve its ability to continue when an instrument changes, a hypothesis fails or a participant leaves. Founder dependence, operational resilience and independent reproduction remain real challenges that the institution must address, not achievements assumed from its architecture. Build institutions that can survive their founders. Preserve the knowledge, rationale, instruments, evidence and responsibilities needed for a qualified successor to carry the work forward or rebuild a lost capability. We are developing toward this condition; succession and independent regeneration are not yet established.",
+        "anchorId": "reader-chapter-continuity"
       },
       {
         "title": "Collaboration by construction.",
-        "body": "A small institution need not do every kind of work itself. We welcome domain expertise, independent criticism, applied problems and partnerships. Engagements should define the contribution, authority, deliverables, review and handoff appropriate to the work. Our aim is to leave useful knowledge and capability with the people we work with, not manufacture dependence on the Lab. We prefer interfaces that let collaborators coordinate while preserving their appropriate authority, expertise, information and responsibility."
+        "body": "A small institution need not do every kind of work itself. We welcome domain expertise, independent criticism, applied problems and partnerships. Engagements should define the contribution, authority, deliverables, review and handoff appropriate to the work. Our aim is to leave useful knowledge and capability with the people we work with, not manufacture dependence on the Lab. We prefer interfaces that let collaborators coordinate while preserving their appropriate authority, expertise, information and responsibility.",
+        "anchorId": "reader-chapter-collaboration"
       }
     ],
     "statusTitle": "Current institutional form",
@@ -1065,19 +1097,23 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "Bring the problem, not a procurement specification",
-          "body": "An operational symptom, decision, costly workaround or failed migration can be enough to begin. We first establish the concern and the system boundary, identify evidence and the people affected, and make assumptions explicit. Software Before Code treats requirements, constraints, interfaces and consequences as first-class design objects. A system cannot reliably satisfy a requirement it has failed to represent. A scoped review may inventory requirements, compare schemas and semantic crosswalks, identify information loss across migrations, and examine the cognitive and administrative responsibilities transferred by an interface. Small teams and founders may need specialized research and engineering capacity for a particular question without establishing an internal research division. Interface contracts, semantic migrations, data lineage and user burden are possible scoped investigations."
+          "body": "An operational symptom, decision, costly workaround or failed migration can be enough to begin. We first establish the concern and the system boundary, identify evidence and the people affected, and make assumptions explicit. Software Before Code treats requirements, constraints, interfaces and consequences as first-class design objects. A system cannot reliably satisfy a requirement it has failed to represent. A scoped review may inventory requirements, compare schemas and semantic crosswalks, identify information loss across migrations, and examine the cognitive and administrative responsibilities transferred by an interface. Small teams and founders may need specialized research and engineering capacity for a particular question without establishing an internal research division. Interface contracts, semantic migrations, data lineage and user burden are possible scoped investigations.",
+          "anchorId": "reader-chapter-problem"
         },
         {
           "title": "From diagnosis to delivery",
-          "body": "A scoped engagement may produce a system map, evidence-backed findings, defect register, decision package, repair plan, prototype or implementation increment. We define how the result will be evaluated before undertaking consequential work."
+          "body": "A scoped engagement may produce a system map, evidence-backed findings, defect register, decision package, repair plan, prototype or implementation increment. We define how the result will be evaluated before undertaking consequential work.",
+          "anchorId": "reader-chapter-diagnosis-delivery"
         },
         {
           "title": "Maintenance and total consequence",
-          "body": "Compare direct costs, displaced human effort, risk, lifecycle obligations and the effects of delay. Prefer proportionate repair when justified; replacement, redesign or retirement remain legitimate alternatives."
+          "body": "Compare direct costs, displaced human effort, risk, lifecycle obligations and the effects of delay. Prefer proportionate repair when justified; replacement, redesign or retirement remain legitimate alternatives.",
+          "anchorId": "reader-chapter-maintenance"
         },
         {
           "title": "Transfer capability rather than dependence",
-          "body": "Document rationale, unresolved questions, accepted evidence and ownership. The intended outcome is a useful artifact another qualified person can examine, maintain or extend. Confidentiality, rights and access are agreed for each engagement. Boundary First UX treats interfaces as consequential engineering: reduce the work transferred to the user, preserve recoverability, and expose the state a person needs to act."
+          "body": "Document rationale, unresolved questions, accepted evidence and ownership. The intended outcome is a useful artifact another qualified person can examine, maintain or extend. Confidentiality, rights and access are agreed for each engagement. Boundary First UX treats interfaces as consequential engineering: reduce the work transferred to the user, preserve recoverability, and expose the state a person needs to act.",
+          "anchorId": "reader-chapter-transfer"
         }
       ],
       "exampleTitle": "Illustrative engagement",
@@ -1127,19 +1163,23 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "Start with a precise claim",
-          "body": "Identify the manuscript version, a particular question or result, relevant dependencies and available evidence. Determine whether a meaningful check is feasible before promising a result. A paper is a compressed representation of a larger intellectual process. Make the structure of the argument visible by inventorying assumptions, intermediate constructions, dependencies and unresolved obligations. A computational reproducibility review may inventory source identity, inputs, environments, assumptions, execution findings and unresolved differences. Authors and computational scientists can ask for review of source inputs, environment, reproducibility, assumptions and dependencies; the evidence and limits of the particular review remain inspectable."
+          "body": "Identify the manuscript version, a particular question or result, relevant dependencies and available evidence. Determine whether a meaningful check is feasible before promising a result. A paper is a compressed representation of a larger intellectual process. Make the structure of the argument visible by inventorying assumptions, intermediate constructions, dependencies and unresolved obligations. A computational reproducibility review may inventory source identity, inputs, environments, assumptions, execution findings and unresolved differences. Authors and computational scientists can ask for review of source inputs, environment, reproducibility, assumptions and dependencies; the evidence and limits of the particular review remain inspectable.",
+          "anchorId": "reader-chapter-precise-claim"
         },
         {
           "title": "A preliminary review is not a sales trap",
-          "body": "A selected preliminary review returns the findings actually established within its agreed scope. Material defects already identified are not withheld to induce a purchase. Further work is a separate decision."
+          "body": "A selected preliminary review returns the findings actually established within its agreed scope. Material defects already identified are not withheld to induce a purchase. Further work is a separate decision.",
+          "anchorId": "reader-chapter-preliminary-review"
         },
         {
           "title": "Commissioned depth",
-          "body": "An extended engagement can examine additional dependencies, run available experiments, construct independent checks, or produce a reproducibility and evidence packet. Scope, authorized access, confidentiality, reviewer qualifications, fees and acceptance conditions are agreed in advance."
+          "body": "An extended engagement can examine additional dependencies, run available experiments, construct independent checks, or produce a reproducibility and evidence packet. Scope, authorized access, confidentiality, reviewer qualifications, fees and acceptance conditions are agreed in advance.",
+          "anchorId": "reader-chapter-commissioned-depth"
         },
         {
           "title": "Report what the evidence supports",
-          "body": "Return the source version, scope, examined claims, methods, evidence, findings, unresolved obligations and limits. Distinguish observed discrepancies, candidate counterexamples, verified results and questions requiring expert review. Findings remain open to correction; no payment buys a favorable conclusion. Where within scope, deliver explanatory reconstruction and counterexample or failure-mode analysis. The proposed service does not replace peer review or independent scientific judgment."
+          "body": "Return the source version, scope, examined claims, methods, evidence, findings, unresolved obligations and limits. Distinguish observed discrepancies, candidate counterexamples, verified results and questions requiring expert review. Findings remain open to correction; no payment buys a favorable conclusion. Where within scope, deliver explanatory reconstruction and counterexample or failure-mode analysis. The proposed service does not replace peer review or independent scientific judgment.",
+          "anchorId": "reader-chapter-evidence-report"
         }
       ],
       "exampleTitle": "Illustrative audit",
@@ -1189,19 +1229,23 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "Begin with an observable problem",
-          "body": "Identify the public service, operating constraint, affected people, available records and the actual decision a partner can make. Use evidence to separate hypotheses from established defects. A scoped consequence assessment may map processes, evidence flow, burdens and responsibilities, and evaluate the sufficiency of internal metrics for external outcomes. Community organizations, advocates, public finance teams, transparency organizations and institutional leaders can bring recurring shared problems. We seek to reduce work for service providers and recipients while preserving individual evidence control and appropriate domain authority."
+          "body": "Identify the public service, operating constraint, affected people, available records and the actual decision a partner can make. Use evidence to separate hypotheses from established defects. A scoped consequence assessment may map processes, evidence flow, burdens and responsibilities, and evaluate the sufficiency of internal metrics for external outcomes. Community organizations, advocates, public finance teams, transparency organizations and institutional leaders can bring recurring shared problems. We seek to reduce work for service providers and recipients while preserving individual evidence control and appropriate domain authority.",
+          "anchorId": "reader-chapter-observable-problem"
         },
         {
           "title": "Measure beyond the institution’s account",
-          "body": "A local cost saving may remove work or transfer it elsewhere. Examine time, repeated effort, service access, safety and the distribution of burdens. Count genuine benefits under the same standard. Fiscal accountability and material accountability are related but distinct; budget allocation, expenditure and continued service are different observations."
+          "body": "A local cost saving may remove work or transfer it elsewhere. Examine time, repeated effort, service access, safety and the distribution of burdens. Count genuine benefits under the same standard. Fiscal accountability and material accountability are related but distinct; budget allocation, expenditure and continued service are different observations.",
+          "anchorId": "reader-chapter-measurement"
         },
         {
           "title": "Protect standing, rights and practical access",
-          "body": "Respect lawful authority, data minimization, accessibility and the ability to challenge a result. Start with public, synthetic or explicitly authorized data. Sensitive records require a separately agreed, lawful and secure process."
+          "body": "Respect lawful authority, data minimization, accessibility and the ability to challenge a result. Start with public, synthetic or explicitly authorized data. Sensitive records require a separately agreed, lawful and secure process.",
+          "anchorId": "reader-chapter-rights-and-access"
         },
         {
           "title": "Develop repair with competent partners",
-          "body": "A pilot may produce a process map, evidence inventory, consequence assessment, options analysis or bounded demonstration. Decisions and implementation remain with authorized people and institutions; required professional review and procurement processes remain in force."
+          "body": "A pilot may produce a process map, evidence inventory, consequence assessment, options analysis or bounded demonstration. Decisions and implementation remain with authorized people and institutions; required professional review and procurement processes remain in force.",
+          "anchorId": "reader-chapter-repair"
         }
       ],
       "exampleTitle": "Illustrative service investigation",
@@ -1229,7 +1273,7 @@ export const doctrineFrontDoor = {
       "name": "Funding, Investment and Sponsorship",
       "eyebrow": "Support the institution · Discussion only",
       "tagline": "Sustain independent inquiry by making its discoveries useful.",
-      "lead": "Boundary First Labs seeks to sustain a digital-native research institution through useful applied work, independent research support and responsibly developed computational capabilities.",
+      "lead": "Useful applied work, independent research support and responsibly developed computational capabilities are the proposed means of sustaining Boundary First Labs.",
       "support": "We are currently solo-operated. We seek capacity for bounded investigations, engineering, qualified external review, reproducibility, knowledge transfer and public-interest infrastructure—not headcount growth for its own sake.",
       "statusTitle": "A conversation, not an investment offering",
       "status": "No financing round, securities terms, valuation, grant eligibility, tax status, revenue or investment return is represented here. Any sponsorship, grant or investment must be separately structured, reviewed and agreed with the appropriate parties.",
@@ -1251,19 +1295,23 @@ export const doctrineFrontDoor = {
       "sections": [
         {
           "title": "One institution, one developing application",
-          "body": "Boundary First Labs conducts fundamental and applied inquiry. Codexware is the intended application through which suitable capabilities can become accessible. We do not present the individual research instruments as separate launched products."
+          "body": "Boundary First Labs conducts fundamental and applied inquiry. Codexware is the intended application through which suitable capabilities can become accessible. We do not present the individual research instruments as separate launched products.",
+          "anchorId": "reader-chapter-institution-application"
         },
         {
           "title": "Sustain the purpose rather than maximize scale.",
-          "body": "Applied engagements can produce revenue and external evidence of utility. Research support can preserve time for investigation without a predetermined commercial conclusion. Future software and publications may diversify earned support when readiness and demand justify them. Commercial capability in service of public purpose: paid engagements may sustain independent research and freely accessible public-interest tools, through shared research and engineering infrastructure. Public benefit should not depend upon the permanent exhaustion of the people producing it. Growth is a design decision, not a default success condition. We seek sufficient resources for responsible research, engineering and public service. Scale is justified when it adds useful capability and the resulting obligations can be supported. Capacity before expansion; preserve the ability to stop, maintain and repair. Commercial success should sustain the purpose, not replace it."
+          "body": "Applied engagements can produce revenue and external evidence of utility. Research support can preserve time for investigation without a predetermined commercial conclusion. Future software and publications may diversify earned support when readiness and demand justify them. Commercial capability in service of public purpose: paid engagements may sustain independent research and freely accessible public-interest tools, through shared research and engineering infrastructure. Public benefit should not depend upon the permanent exhaustion of the people producing it. Growth is a design decision, not a default success condition. We seek sufficient resources for responsible research, engineering and public service. Scale is justified when it adds useful capability and the resulting obligations can be supported. Capacity before expansion; preserve the ability to stop, maintain and repair. Commercial success should sustain the purpose, not replace it.",
+          "anchorId": "reader-chapter-purpose"
         },
         {
           "title": "Accessible civic capacity",
-          "body": "The initial civic workbench for people is intended to be free at its proposed MVP stage. We seek sustainable support that does not require selling private civic records or compulsory participation in research. This is a design and funding objective, not an operational or perpetual pricing guarantee. Beneficiaries need not become paying customers or data suppliers. The proposed exchange connects free-at-MVP civic utility and public knowledge with scoped commercial services, research collaborations, independent scrutiny and sustainable support. No established revenue, pricing of optional services or validated market is implied."
+          "body": "The initial civic workbench for people is intended to be free at its proposed MVP stage. We seek sustainable support that does not require selling private civic records or compulsory participation in research. This is a design and funding objective, not an operational or perpetual pricing guarantee. Beneficiaries need not become paying customers or data suppliers. The proposed exchange connects free-at-MVP civic utility and public knowledge with scoped commercial services, research collaborations, independent scrutiny and sustainable support. No established revenue, pricing of optional services or validated market is implied.",
+          "anchorId": "reader-chapter-civic-capacity"
         },
         {
           "title": "Independence is a condition of partnership",
-          "body": "Neither customers nor funders should buy preferred scientific findings. Agree scope, stewardship, rights, disclosure, reporting and conflicts of interest. Evaluate continuation against actual evidence of utility, maintenance obligations and capacity; retain the ability to stop."
+          "body": "Neither customers nor funders should buy preferred scientific findings. Agree scope, stewardship, rights, disclosure, reporting and conflicts of interest. Evaluate continuation against actual evidence of utility, maintenance obligations and capacity; retain the ability to stop.",
+          "anchorId": "reader-chapter-independence"
         }
       ],
       "exampleTitle": "What support could make possible",
@@ -1292,25 +1340,30 @@ export const doctrineFrontDoor = {
       "slug": "observatory/intellectual-lineage",
       "name": "Intellectual lineage",
       "eyebrow": "Observatory · Exhibit 01 · Historical orientation",
+      "directoryLabel": "01 · Historical orientation",
       "tagline": "Engineering practice shaped the research questions.",
       "lead": "Boundary First begins in the work of understanding and repairing systems. Its intellectual foundations are inherited from established disciplines; its research questions arise where their representations meet consequential practice.",
       "support": "This is a selective account of the intellectual formation of the laboratory, not an exhaustive bibliography, a claim of priority, or proof of a scientific theory.",
       "sections": [
         {
           "title": "Practice is a source of questions",
-          "body": "Software engineering brings models into contact with requirements, real data, interfaces, people and changing constraints. The founder’s experience with systems reconstruction, evolving schemas and maintenance helped motivate the question of how a representation remains adequate as the system changes. The history is a founder account, not evidence of mathematical novelty."
+          "body": "Software engineering brings models into contact with requirements, real data, interfaces, people and changing constraints. The founder’s experience with systems reconstruction, evolving schemas and maintenance helped motivate the question of how a representation remains adequate as the system changes. The history is a founder account, not evidence of mathematical novelty.",
+          "anchorId": "reader-chapter-practice"
         },
         {
           "title": "Inherit the standards of the disciplines",
-          "body": "Mathematics and logic contribute rigorous definitions, proofs and counterexamples. Physics contributes models, measurement and empirical constraints. Computer science contributes representation, algorithms, types and computation. Engineering contributes the discipline of construction, delivery, failure and repair. Social inquiry and economics bring their own methods for investigating human and institutional consequences."
+          "body": "Mathematics and logic contribute rigorous definitions, proofs and counterexamples. Physics contributes models, measurement and empirical constraints. Computer science contributes representation, algorithms, types and computation. Engineering contributes the discipline of construction, delivery, failure and repair. Social inquiry and economics bring their own methods for investigating human and institutional consequences.",
+          "anchorId": "reader-chapter-disciplines"
         },
         {
           "title": "Build, inspect, revise",
-          "body": "The scientific method, Lean and Agile practice, and the tradition of learning through construction inform the laboratory’s way of working. The aim is not to replace established methods, but to make the work inspectable and capable of being corrected when evidence disagrees."
+          "body": "The scientific method, Lean and Agile practice, and the tradition of learning through construction inform the laboratory’s way of working. The aim is not to replace established methods, but to make the work inspectable and capable of being corrected when evidence disagrees.",
+          "anchorId": "reader-chapter-build-inspect-revise"
         },
         {
           "title": "The contribution must be identified separately",
-          "body": "A known theorem, a new explanation of it, a useful integration of existing tools and a genuinely new result are different contributions. A new diagram is not automatically a new theorem. Each substantive release should attribute the inherited work and establish the particular addition on its own merits."
+          "body": "A known theorem, a new explanation of it, a useful integration of existing tools and a genuinely new result are different contributions. A new diagram is not automatically a new theorem. Each substantive release should attribute the inherited work and establish the particular addition on its own merits.",
+          "anchorId": "reader-chapter-contribution"
         }
       ],
       "keyHeading": "Three objects that should not be confused.",
@@ -1344,29 +1397,35 @@ export const doctrineFrontDoor = {
       "slug": "observatory/research-architecture",
       "name": "Research architecture",
       "eyebrow": "Observatory · Exhibit 02 · Research-program orientation",
+      "directoryLabel": "02 · Research-program orientation",
       "tagline": "Depth tests validity. Breadth tests relevance.",
       "lead": "The laboratory investigates the relationships between representation, transformation and consequence through several interacting research directions. The aim is to develop reusable understanding without erasing the distinct requirements of each domain.",
       "support": "The diagram and categories here describe functional roles and questions, not the private dependency graph, a complete theory, or an assertion that the domains reduce to one another.",
       "sections": [
         {
           "title": "Foundations and native domains",
-          "body": "Foundational research examines how distinctions, structures and transformations can be represented. Mathematical and physical research then asks what can actually be established under the relevant formal or empirical constraints. Similarity of language is a reason to investigate, not a reason to infer equivalence."
+          "body": "Foundational research examines how distinctions, structures and transformations can be represented. Mathematical and physical research then asks what can actually be established under the relevant formal or empirical constraints. Similarity of language is a reason to investigate, not a reason to infer equivalence.",
+          "anchorId": "reader-chapter-native-domains"
         },
         {
           "title": "Inquiry before predetermined conclusions.",
-          "body": "Fundamental research is valuable because results cannot always be specified in advance. We develop research infrastructure that allows questions to evolve while retaining evidence, uncertainty, counterexamples and the native standards of each discipline. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise. Shared structures do not establish a universal reduction of the domains they connect."
+          "body": "Fundamental research is valuable because results cannot always be specified in advance. We develop research infrastructure that allows questions to evolve while retaining evidence, uncertainty, counterexamples and the native standards of each discipline. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise. Shared structures do not establish a universal reduction of the domains they connect.",
+          "anchorId": "reader-chapter-inquiry"
         },
         {
           "title": "Computation as a means of inquiry",
-          "body": "Software can make models explicit and allow repeatable examinations of bounded questions. A computed result establishes only what its assumptions, implementation and test conditions permit. Native proof and empirical validation remain distinct from successful execution."
+          "body": "Software can make models explicit and allow repeatable examinations of bounded questions. A computed result establishes only what its assumptions, implementation and test conditions permit. Native proof and empirical validation remain distinct from successful execution.",
+          "anchorId": "reader-chapter-computation"
         },
         {
           "title": "Consequences as a research subject",
-          "body": "Institutional and engineered systems introduce additional obligations: who depends on a system, what its representation omits, who is authorized to act and whether a repair actually restores the intended outcome. Domain expertise and evidence remain indispensable."
+          "body": "Institutional and engineered systems introduce additional obligations: who depends on a system, what its representation omits, who is authorized to act and whether a repair actually restores the intended outcome. Domain expertise and evidence remain indispensable.",
+          "anchorId": "reader-chapter-consequences"
         },
         {
           "title": "An architecture that learns",
-          "body": "Research questions inform tools; tools expose new questions; counterexamples constrain the model; useful results can become teaching materials or applied capabilities. The research program is deliberately cross-disciplinary, but discovery is not predetermined."
+          "body": "Research questions inform tools; tools expose new questions; counterexamples constrain the model; useful results can become teaching materials or applied capabilities. The research program is deliberately cross-disciplinary, but discovery is not predetermined.",
+          "anchorId": "reader-chapter-learning-architecture"
         }
       ],
       "keyHeading": "Research directions: questions, not announced results.",
@@ -1416,25 +1475,30 @@ export const doctrineFrontDoor = {
       "slug": "observatory/computational-inquiry",
       "name": "Computationally leveraged inquiry",
       "eyebrow": "Observatory · Exhibit 03 · Functional architecture",
+      "directoryLabel": "03 · Functional architecture",
       "tagline": "Make inquiry persistent, inspectable and correctable.",
       "lead": "Boundary First Labs is currently a solo-operated institution. Its computational tools are intended to extend what one person can research, build and verify, while keeping direction and responsibility with people.",
       "support": "This exhibit explains the functions that a durable research environment must support, not its internal software design, data model, automation contracts or performance specifications.",
       "sections": [
         {
           "title": "Research is more than a final paper",
-          "body": "Questions, assumptions, experiments, rejected explanations, intermediate artifacts and corrections can all matter to later inquiry. A research environment should preserve enough of that work to make the next justified step possible, rather than forcing every investigation to begin again from the final summary. A living body of research should be capable of remembering how it came to know what it knows. Preserve hypotheses, sources, negative results and verification obligations as the work evolves."
+          "body": "Questions, assumptions, experiments, rejected explanations, intermediate artifacts and corrections can all matter to later inquiry. A research environment should preserve enough of that work to make the next justified step possible, rather than forcing every investigation to begin again from the final summary. A living body of research should be capable of remembering how it came to know what it knows. Preserve hypotheses, sources, negative results and verification obligations as the work evolves.",
+          "anchorId": "reader-chapter-research-record"
         },
         {
           "title": "Artifacts are instruments of learning",
-          "body": "A model, test, diagram or proof attempt is useful when it makes a question more discriminating. The result may be a construction, a counterexample, a better experiment or a reason to stop. The aim is to accumulate justified understanding, not merely a larger collection of documents."
+          "body": "A model, test, diagram or proof attempt is useful when it makes a question more discriminating. The result may be a construction, a counterexample, a better experiment or a reason to stop. The aim is to accumulate justified understanding, not merely a larger collection of documents.",
+          "anchorId": "reader-chapter-artifacts"
         },
         {
           "title": "Computational capability is not scientific authority",
-          "body": "Computational assistance can support search, representation, comparison, drafting and bounded execution. Human responsibility, appropriate permissions and native evidentiary standards still govern consequential decisions. An attractive answer or successful run is not sufficient evidence of a scientific claim."
+          "body": "Computational assistance can support search, representation, comparison, drafting and bounded execution. Human responsibility, appropriate permissions and native evidentiary standards still govern consequential decisions. An attractive answer or successful run is not sufficient evidence of a scientific claim.",
+          "anchorId": "reader-chapter-scientific-authority"
         },
         {
           "title": "Research made transferable",
-          "body": "A result should be accompanied by enough context for another qualified person to evaluate the relevant claim, within its disclosed scope. Selected methods, teaching examples and governed applications may translate research into useful capability. Codexware is the application direction in development, not a representation of unrestricted internal machinery. Formal verification can establish correctness relative to a declared logical system; explanatory reconstruction asks which constructions, assumptions and dependencies make the result intelligible. Neither substitutes for the other. A result should become teachable and reconstructable, not merely reproducible as a sequence of instructions. A failed conjecture or a counterexample can leave a better question, a useful test or a new instrument behind."
+          "body": "A result should be accompanied by enough context for another qualified person to evaluate the relevant claim, within its disclosed scope. Selected methods, teaching examples and governed applications may translate research into useful capability. Codexware is the application direction in development, not a representation of unrestricted internal machinery. Formal verification can establish correctness relative to a declared logical system; explanatory reconstruction asks which constructions, assumptions and dependencies make the result intelligible. Neither substitutes for the other. A result should become teachable and reconstructable, not merely reproducible as a sequence of instructions. A failed conjecture or a counterexample can leave a better question, a useful test or a new instrument behind.",
+          "anchorId": "reader-chapter-transfer"
         }
       ],
       "keyHeading": "Functions of a research environment.",
@@ -1472,21 +1536,25 @@ export const doctrineFrontDoor = {
       "slug": "observatory/demonstrations",
       "name": "Selected demonstrations",
       "eyebrow": "Observatory · Exhibit 04 · Illustrative demonstrations",
+      "directoryLabel": "04 · Illustrative demonstrations",
       "tagline": "Small examples. Explicit assumptions. Limited conclusions.",
       "lead": "A carefully chosen example can make a research question tangible without revealing unpublished research. The three examples here use elementary arithmetic and fictional records; each is independently checkable from the information shown.",
       "support": "These are teaching constructions prepared for the exhibition, not demonstrations of a proprietary algorithm, live client data, an empirical performance benchmark or newly established scientific results.",
       "sections": [
         {
           "title": "Geometry: one quantity does not determine another",
-          "body": "Assume ordinary Euclidean rectangles with positive side lengths. The 2 × 6 and 3 × 4 rectangles both have area 12 square units, but their perimeters are 16 and 14 units. An area-only representation cannot determine perimeter for all rectangles. This is elementary mathematics, not a new theorem or a result about arbitrary shapes."
+          "body": "Assume ordinary Euclidean rectangles with positive side lengths. The 2 × 6 and 3 × 4 rectangles both have area 12 square units, but their perimeters are 16 and 14 units. An area-only representation cannot determine perimeter for all rectangles. This is elementary mathematics, not a new theorem or a result about arbitrary shapes.",
+          "anchorId": "reader-chapter-geometry"
         },
         {
           "title": "Computation: same total, different useful state",
-          "body": "Assume a fictional inventory in which reserved items cannot be allocated to a new order. Record A has 10 items, 0 reserved; record B has 10 items, 7 reserved. Available stock is total minus reserved, so availability is 10 and 3. A report showing total stock alone cannot answer the availability question in this example. It does not establish a real inventory system’s behavior."
+          "body": "Assume a fictional inventory in which reserved items cannot be allocated to a new order. Record A has 10 items, 0 reserved; record B has 10 items, 7 reserved. Available stock is total minus reserved, so availability is 10 and 3. A report showing total stock alone cannot answer the availability question in this example. It does not establish a real inventory system’s behavior.",
+          "anchorId": "reader-chapter-computation"
         },
         {
           "title": "Institutions: process completion is not outcome completion",
-          "body": "Assume two fictional service records have the same label, Complete. In A the service was delivered; in B a transfer was completed but the service remains pending. The label answers the local workflow question but not the outcome question. Distinguishing these states requires additional evidence; the example does not show how often any real institution fails."
+          "body": "Assume two fictional service records have the same label, Complete. In A the service was delivered; in B a transfer was completed but the service remains pending. The label answers the local workflow question but not the outcome question. Distinguishing these states requires additional evidence; the example does not show how often any real institution fails.",
+          "anchorId": "reader-chapter-institutions"
         }
       ],
       "keyHeading": "Compare the representations.",
@@ -1529,7 +1597,7 @@ export const doctrineFrontDoor = {
     "name": "Economic Maintenance",
     "eyebrow": "Codexware · Research behind the application",
     "tagline": "What does it cost to sustain a life?",
-    "lead": "What does it cost to sustain a life? Our Economic Water Model research examines stocks, flows, access constraints, institutional obligations and material consequences. We investigate how monetary resources relate to the conditions they are intended to support.",
+    "lead": "Our Economic Water Model research examines stocks, flows, access constraints, institutional obligations and material consequences. We investigate how monetary resources relate to the conditions they are intended to support.",
     "support": "These are reasons to build individual-directed computational tools: to make requirements, resources, obligations, evidence and the consequences of decisions more legible. This is a research and application-design exhibit, not a released economic product. A balanced transaction does not necessarily produce a viable outcome. A repair can be technically possible while remaining inaccessible under a household’s resource and obligation constraints. Maintaining a life is work: access to transportation, housing, connectivity and essential services can be interdependent. Investigate when resources become available, not only how much exists.",
     "status": "Working research program and application motivation. The proposed atlas study window is 1960–2025; coverage differs by indicator and source. The historical series, case findings and numerical estimates require source-vintage, methodology and specialist review before publication. This exhibit does not report a validated national index, causal conclusion or individualized financial advice.",
     "topicsHeading": "Eight questions behind the work.",
@@ -2135,7 +2203,7 @@ export const doctrineFrontDoor = {
     },
     "observatory": {
       "title": "Find a question you recognize.",
-      "intro": "Choose a research question or a bounded example. Private working machinery remains outside the exhibition.",
+      "intro": "",
       "cards": [
         {
           "id": "formal-science",
@@ -2173,7 +2241,7 @@ export const doctrineFrontDoor = {
           "id": "education",
           "audience": "Educators and learners",
           "question": "Can the learner inspect the structure, not just the result?",
-          "body": "Explore teaching instruments and counterexamples that make structure accessible.",
+          "body": "Counterexamples make hidden structure inspectable.",
           "links": [
             {
               "href": "/observatory/instruments",
@@ -2188,14 +2256,14 @@ export const doctrineFrontDoor = {
       ]
     },
     "work-with-us": {
-      "title": "Bring us the problem you are trying to solve.",
-      "intro": "Choose a starting point. Inspection is open; engagement is voluntary.",
+      "title": "Where we can help.",
+      "intro": "Inspection is open; engagement is voluntary.",
       "cards": [
         {
           "id": "engineering",
           "audience": "Engineers, architects, founders and small teams",
           "question": "Recurring exceptions, migrations or interface failures?",
-          "body": "Investigate an evolving schema, interface, verification obligation or recurring failure.",
+          "body": "Scope the failure, its verification obligations and a repair path.",
           "links": [
             {
               "href": "/work-with-us/professional-services",
@@ -2339,7 +2407,7 @@ export const doctrineFrontDoor = {
     "name": "Evidence & Trust",
     "eyebrow": "Institutional foundations · Inspect the work",
     "tagline": "An institution answerable to evidence.",
-    "lead": "You should be able to examine the work. Trust should follow from the work, not precede it.",
+    "lead": "You should be able to examine the work before deciding whether to trust it.",
     "support": "Boundary First Labs is an independent, founder-led, digital-native research and engineering institution. We distinguish what we have constructed, what we have investigated, what the evidence supports, and what remains unresolved. Intellectual independence is not exemption from evidence.",
     "credibility": [
       {
@@ -2454,7 +2522,7 @@ export const doctrineFrontDoor = {
         "body": "The people directing, reviewing and authorizing the work remain responsible for institutional decisions, release and the claims made about it."
       }
     ],
-    "evidenceIntro": "Different claims require different evidence. The following categories answer different questions; none is a universal credibility score or an automatic substitute for another.",
+    "evidenceIntro": "These categories answer different questions; none is a universal credibility score or an automatic substitute for another.",
     "evidenceTypes": [
       {
         "id": "testimony",
