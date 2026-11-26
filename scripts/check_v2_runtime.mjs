@@ -135,7 +135,7 @@ try {
   await expectPage("/contact", ["data-inquiry-composer", "Start with what brought you here.", "Copy inquiry draft"]);
   await expectPage("/", ['href="/digital-native-institution"']);
   await expectPage("/work-with-us", ['href="/digital-native-institution"']);
-  await expectPage("/digital-native-institution", ["A Digital-Native Institution", "One human. Governed computational leverage."]);
+  await expectPage("/digital-native-institution", ["A Digital-Native Institution", "One person, supported by carefully governed computational tools."], ["One human. Governed computational leverage."]);
 
   // The Lab Machine remains available at the explicit versioned development
   // surface. This is the only place this smoke test expects Lab Machine identity.
