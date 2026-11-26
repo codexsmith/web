@@ -41,6 +41,16 @@ expect(
   "v3 release QA workflow must use the repository Node 24 runtime",
 );
 expect(
+  workflow.includes("runs-on: ubuntu-24.04"),
+  "v3 release QA must use the Ubuntu 24.04 runner supported by its pinned browser harness",
+);
+expect(
+  workflow.includes('npm install --prefix "$RUNNER_TEMP/v3-release-qa"') &&
+    workflow.includes("V3_RELEASE_QA_PLAYWRIGHT_MODULE:") &&
+    qa.includes("process.env.V3_RELEASE_QA_PLAYWRIGHT_MODULE"),
+  "v3 release QA must install its browser harness outside the application dependency tree",
+);
+expect(
   workflow.includes("playwright@1.55.0"),
   "v3 release QA workflow must pin its Playwright harness",
 );

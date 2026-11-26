@@ -1,8 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
-import { chromium } from "playwright";
+import { pathToFileURL } from "node:url";
 import { doctrineNavigationIssues, verifyDoctrineTraversals } from "./lib/doctrine_navigation_qa.mjs";
+
+const harnessModule = process.env.V3_RELEASE_QA_PLAYWRIGHT_MODULE;
+const { chromium } = await import(harnessModule ? pathToFileURL(harnessModule).href : "playwright");
 
 const port = Number(process.env.V3_RELEASE_QA_PORT ?? 3237);
 const base = `http://127.0.0.1:${port}`;
