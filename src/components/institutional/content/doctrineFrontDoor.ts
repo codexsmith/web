@@ -546,8 +546,8 @@ export const doctrineFrontDoor = {
     "name": "Work With Us",
     "eyebrow": "Research · Engineering · Public service",
     "tagline": "Bring a problem worth solving.",
-    "lead": "Bring a difficult problem, research question or capability. You do not need a complete specification or a predetermined solution.",
-    "support": "A solo-operated, computationally leveraged research and engineering institution. We work through scoped engagements and complementary expertise in architecture, research, evidence, governance and repair.",
+    "lead": "You do not need a complete specification or a predetermined solution. We can begin with a research question, an unresolved problem or a capability you want to develop.",
+    "support": "We work through scoped engagements and complementary expertise in architecture, research, evidence, governance and repair.",
     "principle": "Useful work should leave more capability behind.",
     "groups": [
       {
@@ -734,10 +734,10 @@ export const doctrineFrontDoor = {
     "name": "Observatory",
     "eyebrow": "Public research exhibition",
     "tagline": "Explore the structures beneath the systems.",
-    "lead": "Explore selected questions, demonstrations and research methods across mathematics, computation, physics, institutions and economics.",
-    "support": "A curated exhibition, not the working laboratory. Questions, evidence and limitations are public only within the scope of each selected exhibit.",
+    "lead": "Selected research questions, demonstrations and methods from mathematics, computation, physics, institutions and economics.",
+    "support": "The working laboratory remains private. Each public exhibit states the scope of its evidence and what it can establish.",
     "foundationsHeading": "Where the work begins.",
-    "foundationsIntro": "Established disciplines supply the standards of reasoning and evidence. Explore their roles below.",
+    "foundationsIntro": "Established disciplines supply the standards of reasoning and evidence.",
     "foundations": [
       {
         "title": "Mathematics and logic",
@@ -904,8 +904,8 @@ export const doctrineFrontDoor = {
     "name": "A Digital-Native Institution",
     "eyebrow": "How Boundary First Labs works",
     "tagline": "One person, supported by carefully governed computational tools.",
-    "lead": "Boundary First Labs is an independent, founder-led research and engineering institution organized around durable digital knowledge, computational instruments and explicit human responsibility.",
-    "support": "We are currently a solo-operated organization. Our institutional capacity is developed through years of accumulated work, software and governed computational assistance, rather than a large staff or a traditional departmental structure.",
+    "lead": "We organize research and engineering around durable digital knowledge, computational instruments and explicit human responsibility.",
+    "support": "Our institutional capacity comes from years of accumulated work, software and governed computational assistance rather than a large staff or traditional departmental structure.",
     "homeIntro": {
       "title": "A digital-native research institution.",
       "body": "The Lab is built around persistent knowledge, computational instruments and accountable human direction. Explore the values, stewardship and continuity commitments behind our solo-operated institution.",
@@ -1229,7 +1229,7 @@ export const doctrineFrontDoor = {
       "name": "Funding, Investment and Sponsorship",
       "eyebrow": "Support the institution · Discussion only",
       "tagline": "Sustain independent inquiry by making its discoveries useful.",
-      "lead": "Boundary First Labs seeks to sustain a digital-native research institution through useful applied work, independent research support and responsibly developed computational capabilities.",
+      "lead": "Useful applied work, independent research support and responsibly developed computational capabilities are the proposed means of sustaining Boundary First Labs.",
       "support": "We are currently solo-operated. We seek capacity for bounded investigations, engineering, qualified external review, reproducibility, knowledge transfer and public-interest infrastructure—not headcount growth for its own sake.",
       "statusTitle": "A conversation, not an investment offering",
       "status": "No financing round, securities terms, valuation, grant eligibility, tax status, revenue or investment return is represented here. Any sponsorship, grant or investment must be separately structured, reviewed and agreed with the appropriate parties.",
@@ -1529,7 +1529,7 @@ export const doctrineFrontDoor = {
     "name": "Economic Maintenance",
     "eyebrow": "Codexware · Research behind the application",
     "tagline": "What does it cost to sustain a life?",
-    "lead": "What does it cost to sustain a life? Our Economic Water Model research examines stocks, flows, access constraints, institutional obligations and material consequences. We investigate how monetary resources relate to the conditions they are intended to support.",
+    "lead": "Our Economic Water Model research examines stocks, flows, access constraints, institutional obligations and material consequences. We investigate how monetary resources relate to the conditions they are intended to support.",
     "support": "These are reasons to build individual-directed computational tools: to make requirements, resources, obligations, evidence and the consequences of decisions more legible. This is a research and application-design exhibit, not a released economic product. A balanced transaction does not necessarily produce a viable outcome. A repair can be technically possible while remaining inaccessible under a household’s resource and obligation constraints. Maintaining a life is work: access to transportation, housing, connectivity and essential services can be interdependent. Investigate when resources become available, not only how much exists.",
     "status": "Working research program and application motivation. The proposed atlas study window is 1960–2025; coverage differs by indicator and source. The historical series, case findings and numerical estimates require source-vintage, methodology and specialist review before publication. This exhibit does not report a validated national index, causal conclusion or individualized financial advice.",
     "topicsHeading": "Eight questions behind the work.",
@@ -2135,7 +2135,7 @@ export const doctrineFrontDoor = {
     },
     "observatory": {
       "title": "Find a question you recognize.",
-      "intro": "Choose a research question or a bounded example. Private working machinery remains outside the exhibition.",
+      "intro": "",
       "cards": [
         {
           "id": "formal-science",
@@ -2188,8 +2188,8 @@ export const doctrineFrontDoor = {
       ]
     },
     "work-with-us": {
-      "title": "Bring us the problem you are trying to solve.",
-      "intro": "Choose a starting point. Inspection is open; engagement is voluntary.",
+      "title": "Where we can help.",
+      "intro": "Inspection is open; engagement is voluntary.",
       "cards": [
         {
           "id": "engineering",
@@ -2339,7 +2339,7 @@ export const doctrineFrontDoor = {
     "name": "Evidence & Trust",
     "eyebrow": "Institutional foundations · Inspect the work",
     "tagline": "An institution answerable to evidence.",
-    "lead": "You should be able to examine the work. Trust should follow from the work, not precede it.",
+    "lead": "You should be able to examine the work before deciding whether to trust it.",
     "support": "Boundary First Labs is an independent, founder-led, digital-native research and engineering institution. We distinguish what we have constructed, what we have investigated, what the evidence supports, and what remains unresolved. Intellectual independence is not exemption from evidence.",
     "credibility": [
       {
@@ -2454,7 +2454,7 @@ export const doctrineFrontDoor = {
         "body": "The people directing, reviewing and authorizing the work remain responsible for institutional decisions, release and the claims made about it."
       }
     ],
-    "evidenceIntro": "Different claims require different evidence. The following categories answer different questions; none is a universal credibility score or an automatic substitute for another.",
+    "evidenceIntro": "These categories answer different questions; none is a universal credibility score or an automatic substitute for another.",
     "evidenceTypes": [
       {
         "id": "testimony",

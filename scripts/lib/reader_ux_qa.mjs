@@ -296,6 +296,9 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
           await capture("title-first-observatory-hero", hero);
           await capture("title-first-observatory-section", page.locator('[data-audience-paths="observatory"] h2'));
           const panel = page.locator('[data-audience-paths="observatory"]');
+          assert.equal(await panel.locator("[data-audience-intro], [data-reader-heading-meta]").count(), 0,
+            "Observatory audience heading should not repeat its invitation or hero scope");
+          assert.equal(await panel.locator(":scope > h2").textContent(), doctrineFrontDoor.audiencePaths.observatory.title);
           const cards = panel.locator("[data-audience-card]");
           assert.equal(await cards.count(), doctrineFrontDoor.audiencePaths.observatory.cards.length);
           for (const [index, card] of (await cards.all()).entries()) {
