@@ -4,7 +4,10 @@ import assert from "node:assert/strict";
 import path from "node:path";
 import { doctrineFrontDoor } from "../../src/components/institutional/content/doctrineFrontDoor.ts";
 
-const focusWitness = async locator => locator.evaluate(element => {
+const focusWitness = async locator => locator.evaluate(async element => {
+  // Inspect the painted focus state after layout; still require both actual
+  // DOM focus and the full visible outline, without retries or relaxed bounds.
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
   const style = getComputedStyle(element);
   const active = document.activeElement;
   const rect = element.getBoundingClientRect();

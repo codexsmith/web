@@ -330,6 +330,10 @@
   background: #fff;
   border-color: var(--df-reader-edge);
   box-shadow: inset 0 1px 2px rgba(7,26,61,.07);
+  /* Programmatic focus restoration must not interpolate its visible outline
+     through the previous unfocused state, including reduced-motion mode. */
+  transition: none !important;
+  animation: none !important;
 }
 .surface a.textLink {
   text-decoration-thickness: 1px;
