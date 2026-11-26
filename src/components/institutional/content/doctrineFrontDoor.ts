@@ -925,7 +925,7 @@ export const doctrineFrontDoor = {
       },
       {
         "title": "Institutional capacity beyond headcount.",
-        "body": "Boundary First Labs is presently operated by one human founder. Software and computational collaborators assist with inquiry, representation, implementation, documentation and verification. They are instruments, not an independent governing body or a substitute for human responsibility. The point is not to simulate a large organization, but to construct useful institutional capability with a small human footprint."
+        "body": "Boundary First Labs is currently run by its founder. Computational tools assist with research, representation, implementation, documentation and verification. They are tools, not an independent governing body or a substitute for human responsibility. The goal is not to imitate a large organization, but to build useful institutional capabilities while operating as a one-person organization."
       },
       {
         "title": "Research as living infrastructure.",
@@ -949,7 +949,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "statusTitle": "Current institutional form",
-    "status": "One human founder directs the work and retains responsibility for the Lab. Computational assistance is used within defined work and review boundaries. Institutional continuity, independent validation and collaboration practices are ongoing development obligations. We do not represent computational collaborators as human employees.",
+    "status": "The founder directs the work and remains responsible for the Lab. Computational tools are used within defined work and review boundaries. Institutional continuity, independent validation and collaboration practices remain ongoing commitments. We do not present software as employees.",
     "principle": "Build the institution so that useful work can survive the person who began it.",
     "links": [
       {
