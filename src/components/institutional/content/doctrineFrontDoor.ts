@@ -182,7 +182,7 @@ export const doctrineFrontDoor = {
       "framework": [
         {
           "title": "Forge what helps",
-          "body": "Accelerate bounded assistance. Preserve evidence, uncertainty and the human ability to evaluate the result."
+          "body": "Speed up assistance within defined limits. Preserve the evidence and uncertainty so people can evaluate the result."
         },
         {
           "title": "Certify what acts",
@@ -219,36 +219,36 @@ export const doctrineFrontDoor = {
       "tagline": "Collaboration by construction.",
       "summary": "Expand people’s practical capacity to know, choose, create, cooperate and participate in improving the world they inhabit.",
       "question": "What can people meaningfully understand, choose and do?",
-      "lead": "The human being precedes the institutional role. People may be encountered as workers, customers, patients, citizens or users, but no such representation exhausts the person it represents.",
-      "support": "Constructive Human Agency is the positive purpose of our work: expanding the practical capacity of people to understand, decide, create, collaborate, refuse, contest and repair. It is not limited to AI, and it does not require agreement with the Lab.",
+      "lead": "Institutions depend on people, regardless of their role. We may be workers, customers, patients, citizens or users, but none of those roles defines who we are.",
+      "support": "Constructive Human Agency is the positive purpose of our work: helping people understand, decide, create, collaborate, say no, challenge decisions and make repairs. It is not limited to AI, and it does not require agreement with the Lab.",
       "sections": [
         {
           "title": "From necessity to mastery",
-          "body": "Boundary First Labs grew from lived experience, professional software engineering and a commitment to education as mastery rather than certification. Investigations across mathematics, physics, cognition, computation and human factors began with a practical question: how can we reason more faithfully about systems upon which our lives depend? The objective is not simply to accumulate knowledge, but to make it independently examinable, computationally useful and accessible to others. Mastery is demonstrated competence, not merely certification. Observe, understand, reconstruct, verify, explain and teach; preserve the qualifications and domain standards appropriate to each task. Education should strengthen a person’s independent judgment and capacity to continue."
+          "body": "Boundary First Labs grew from lived experience, professional software engineering and a commitment to education as mastery rather than certification. Investigations across mathematics, physics, cognition, computation and human factors began with a practical question: how can we better understand and reason about the systems we depend on? The objective is not simply to accumulate knowledge, but to make it independently examinable, computationally useful and accessible to others. Mastery is demonstrated competence, not merely certification. Observe, understand, reconstruct, verify, explain and teach; preserve the qualifications and domain standards appropriate to each task. Education should strengthen a person’s independent judgment and capacity to continue."
         },
         {
           "title": "I am not the one. I am one.",
-          "body": "The capacity to perceive, distinguish, reason, construct and revise is not the exclusive property of a founder, profession or institution. People have different circumstances, resources, knowledge and physical affordances; recognition of human agency does not depend on pretending those are identical. The point of building useful systems is to support people in their own constructive activity, not reduce them to the roles through which systems encounter them."
+          "body": "The capacity to perceive, distinguish, reason, construct and revise is not the exclusive property of a founder, profession or institution. People have different circumstances, resources, knowledge, abilities and opportunities. Respecting their agency does not require pretending those differences do not exist. Useful systems should help people pursue their own work and goals, not reduce them to the roles they hold."
         },
         {
-          "title": "The human boundary",
-          "body": "A machine cannot exhaustively represent a human being, nor does responsible assistance require it to do so. Represent only the distinctions relevant to a legitimate, authorized purpose; keep those representations evidence-based, refinable, corrigible and appropriately limited. Greater knowledge of a person does not confer greater authority over that person. The machine need not contain the human. It must respect the boundary at which it encounters the human."
+          "title": "People are more than their records.",
+          "body": "No system can fully represent a person, and responsible assistance does not require it to. Use only the information relevant to a legitimate, authorized purpose; keep it grounded in evidence, open to correction and limited to that purpose. Knowing more about someone does not grant greater authority over them. Software should respect the limits of what it knows and what it is permitted to do."
         },
         {
-          "title": "Epistemic independence is practical capacity",
-          "body": "Information access alone is insufficient. A person needs a reasonable opportunity to inspect relevant evidence, governing rules, assumptions, uncertainty and the reasoning behind consequential claims. Independence does not mean possessing all expertise or distrusting every institution. It means being able to ask questions, seek qualified help, evaluate the scope of an answer, disagree and obtain a meaningful route to correction. Access to expertise should enlarge judgment rather than replace it. Assistance should strengthen the capacity for independent judgment."
+          "title": "Independent judgment takes more than access to information",
+          "body": "Information access alone is insufficient. A person needs a reasonable opportunity to inspect relevant evidence, governing rules, assumptions, uncertainty and the reasoning behind consequential claims. Independence does not mean possessing all expertise or distrusting every institution. It means being able to ask questions, seek qualified help, evaluate the scope of an answer, disagree and obtain a meaningful route to correction. Access to expertise should help people make better-informed judgments of their own, not make decisions for them."
         },
         {
           "title": "Give the capability to people first",
-          "body": "Institutions often have records, analytical tools and administrative support that individuals cannot readily access. We seek to reduce that asymmetry by making institutional-grade computational capabilities useful to people in their own lives. Institutional adoption should not be a prerequisite for individual benefit. Even a tool that helps a person understand a form’s requirements or check supporting evidence can expand practical agency. Codexware is our proposed engineering realization of that direction. Its benefit must be demonstrated, not presumed."
+          "body": "Institutions often have records, analytical tools and administrative support that individuals cannot readily access. We want to make the kinds of computational tools institutions rely on useful to people in their own lives. People should not have to wait for an institution to adopt a tool before they can benefit from it. Even a tool that helps a person understand a form’s requirements or check supporting evidence can expand practical agency. Codexware is our proposed engineering realization of that direction. Its benefit must be demonstrated, not presumed."
         },
         {
           "title": "Preserve human responsibility where it belongs",
-          "body": "The purpose is not to remove humans from institutions. It is to remove unnecessary institutional machinery from humans. Consent, interpretation, deliberation and responsibility are often essential human functions. Repetitive reconstruction and reconciliation caused by missing infrastructure may not be. Design for appropriate allocation of work: let machinery support what it can responsibly perform while keeping authority, choice and contextual judgment with the appropriate people. Neither maximal automation nor maximal human labor is the goal."
+          "body": "Our goal is not to remove people from institutions. It is to free people from unnecessary institutional machinery. Consent, interpretation, deliberation and responsibility often belong with people. Repetitive work caused by missing infrastructure need not. Let software perform the tasks it can responsibly support while the appropriate people retain authority, choice and judgment. The goal is neither to automate everything nor to make people do everything themselves."
         },
         {
           "title": "Build capacities, not artificial dependence",
-          "body": "Collaboration should leave people more capable of continuing their work. Preserve the process, progress, sources, decisions and artifacts of constructive activity. Make accumulated knowledge portable where rights and legitimate protections permit; design for consent, contestability and meaningful exit. A service may responsibly restrict its own powerful execution capabilities without seeking ownership of a person’s information or conclusions. The Lab should earn participation through useful work and should remain open to criticism. Collaboration by construction means enabling people, institutions and computational tools to exchange information and coordinate work without silently transferring authority or responsibility. The ability to transmit knowledge and reconstruct useful work is a measure of constructive collaboration. We aspire to leave an inspectable handoff, not a monopoly over understanding."
+          "body": "Collaboration should leave people more capable of continuing their work. Preserve the process, progress, sources, decisions and artifacts of constructive activity. Make accumulated knowledge portable where rights and legitimate protections permit; design for consent, a way to challenge decisions and the freedom to leave. A service may responsibly restrict its own powerful execution capabilities without seeking ownership of a person’s information or conclusions. The Lab should earn participation through useful work and should remain open to criticism. Collaboration by construction means enabling people, institutions and computational tools to exchange information and coordinate work without silently transferring authority or responsibility. The ability to transmit knowledge and reconstruct useful work is a measure of constructive collaboration. We aspire to leave an inspectable handoff, not a monopoly over understanding."
         },
         {
           "title": "Practice the institution we seek to build",
@@ -256,16 +256,16 @@ export const doctrineFrontDoor = {
         },
         {
           "title": "Judge improvement by what people can actually do",
-          "body": "A successful interface, larger corpus or faster model is not sufficient evidence of human benefit. Ask what people can now understand or accomplish, what new burdens they carry, whether they retain meaningful options, and whether the capability can survive a change of provider or institutional conditions. Evaluate claims against appropriate evidence and competent baselines. Constructive Human Agency is a guiding purpose; the effectiveness of any particular intervention must be established rather than presumed."
+          "body": "A successful interface, larger corpus or faster model does not by itself show that people's lives or work have improved. Ask what people can now understand or accomplish, what new burdens they carry, whether they retain meaningful options, and whether the capability can survive a change of provider or institutional conditions. Evaluate claims against appropriate evidence and competent baselines. Constructive Human Agency is a guiding purpose; the effectiveness of any particular intervention must be established rather than presumed."
         },
         {
-          "title": "An instrument, not a sovereign",
-          "body": "Boundary First Labs is an independent, founder-led, solo-operated digital-native institution built around governed computational leverage. Our purpose is public good. We do not seek to become another authority through which people must understand their world. We seek to give people instruments with which they can investigate it themselves. The machine possesses computational capability. The human possesses agency. The architecture must preserve the distinction. Technology should extend human agency, not absorb it. The objective is to make people more capable through software."
+          "title": "Tools that serve people",
+          "body": "Boundary First Labs is an independent, founder-led, one-person digital-native institution that uses carefully governed computational tools. Our purpose is public good. We do not want to become another authority people must rely on to understand the world. We want to give people tools to investigate it for themselves. Software provides computational capabilities. People retain the authority to decide how those capabilities are used, within the limits of consent and legitimate authorization. The architecture must preserve that distinction. Technology should extend human agency, not diminish it. Our goal is to make people more capable through software."
         }
       ],
       "example": {
         "title": "The person at the other end of the portal",
-        "body": "Return to the fictional rejected-document case. A person should be able to distinguish an actual missing requirement from a recognition failure, retain their evidence, obtain an intelligible explanation and decide whether to pursue correction through an appropriate route. An instrument may help them assemble a record and understand their options; it should not impersonate their judgment or the institution’s authority. Success includes a feasible human continuation, not just an improved internal metric."
+        "body": "Return to the fictional rejected-document case. A person should be able to distinguish an actual missing requirement from a recognition failure, retain their evidence, obtain an intelligible explanation and decide whether to pursue correction through an appropriate route. An instrument may help them assemble a record and understand their options; it should not impersonate their judgment or the institution’s authority. Success means people have a practical way to move forward, not just that an internal metric has improved."
       },
       "principle": "Capability should accumulate with people, not above them.",
       "depth": [
@@ -291,16 +291,16 @@ export const doctrineFrontDoor = {
         "note": "A longer sourcebook has a complete first-draft structure in private editorial review. The public doctrine is an introduction, not the released manuscript.",
         "topics": [
           {
-            "title": "The human purpose",
-            "body": "Recognition of the person, constructive activity, epistemic independence and collaboration."
+            "title": "Why this work matters to people",
+            "body": "Respect for people, constructive activity, independent judgment and collaboration."
           },
           {
             "title": "Agency in consequential systems",
-            "body": "Practical capacity, the distribution of obligations, responsibility and affected-party participation."
+            "body": "What people can do, who carries the obligations, who is responsible and how the people affected can participate."
           },
           {
             "title": "Constructive instruments and evaluation",
-            "body": "Maintenance, person-directed computational tools, meaningful exit and evidence of actual benefit."
+            "body": "Maintenance, computational tools people control, the freedom to leave and evidence that the tools actually help."
           }
         ]
       }
@@ -318,8 +318,8 @@ export const doctrineFrontDoor = {
         "body": "Useful computational tools preserve the evidence, assumptions and meaning needed by the next operation. Shared components can reduce repeated construction of that infrastructure."
       },
       {
-        "title": "Begin at the individual boundary",
-        "body": "Start with the individual: check a form against stated requirements, organize evidence or prepare a proposed correction without submitting it. Institutional adoption should not be required for individual benefit. These are design directions, not available services."
+        "title": "Start with the people who need these tools.",
+        "body": "Help people check a form against stated requirements, organize evidence or prepare a proposed correction without submitting it. They should not have to wait for institutions to adopt the tools to benefit from them. These are design directions, not available services."
       },
       {
         "title": "Capability without captivity.",
@@ -428,7 +428,7 @@ export const doctrineFrontDoor = {
   "mission": {
     "title": "Public service. Independent inquiry.",
     "body": "Public good is a central reason for our research, not an incidental application. We seek to make consequential decisions understandable, preserve individual evidence and improve institutions’ ability to detect and repair failures. Commercial work should sustain independent inquiry, not determine its conclusions. Public-interest infrastructure should reduce the work required of the people it serves.",
-    "humanPurpose": "The purpose is not to remove humans from institutions. It is to remove unnecessary institutional machinery from humans.",
+    "humanPurpose": "Our goal is not to remove people from institutions. It is to free people from unnecessary institutional machinery.",
     "closing": "Systems should serve the people who depend on them. We are building the research, engineering and institutional infrastructure to help make that possible."
   },
   "maintenance": {
@@ -458,7 +458,7 @@ export const doctrineFrontDoor = {
     "codexware": {
       "eyebrow": "Design foundations",
       "title": "Three doctrines inform the application.",
-      "intro": "The systems we study, the computation we govern, and the human agency we seek to expand shape the application’s design requirements."
+      "intro": "The systems we study, the way we govern computation and our goal of expanding what people can do shape the application's design requirements."
     },
     "observatory": {
       "eyebrow": "Institutional foundations",
@@ -528,7 +528,7 @@ export const doctrineFrontDoor = {
     "codexware/civic-record": {
       "eyebrow": "Design foundations",
       "title": "The doctrines behind Civic Record.",
-      "intro": "The individual-first evidence workspace is intended to embody these institutional commitments."
+      "intro": "The proposed evidence workspace puts people in control of their own records. It is intended to put these institutional commitments into practice."
     },
     "observatory/instruments": {
       "eyebrow": "Institutional foundations",
@@ -698,7 +698,7 @@ export const doctrineFrontDoor = {
         {
           "id": "method",
           "title": "Our method",
-          "body": "How human-directed, computationally assisted inquiry preserves evidence and revises failed constructions.",
+          "body": "How people use computational tools to investigate questions, preserve evidence and revise constructions that do not work.",
           "label": "Explore computational inquiry",
           "href": "/observatory/computational-inquiry",
           "status": "Practice"
@@ -903,7 +903,7 @@ export const doctrineFrontDoor = {
     "href": "/digital-native-institution",
     "name": "A Digital-Native Institution",
     "eyebrow": "How Boundary First Labs works",
-    "tagline": "One human. Governed computational leverage.",
+    "tagline": "One person, supported by carefully governed computational tools.",
     "lead": "Boundary First Labs is an independent, founder-led research and engineering institution organized around durable digital knowledge, computational instruments and explicit human responsibility.",
     "support": "We are currently a solo-operated organization. Our institutional capacity is developed through years of accumulated work, software and governed computational assistance, rather than a large staff or a traditional departmental structure.",
     "homeIntro": {
@@ -925,7 +925,7 @@ export const doctrineFrontDoor = {
       },
       {
         "title": "Institutional capacity beyond headcount.",
-        "body": "Boundary First Labs is presently operated by one human founder. Software and computational collaborators assist with inquiry, representation, implementation, documentation and verification. They are instruments, not an independent governing body or a substitute for human responsibility. The point is not to simulate a large organization, but to construct useful institutional capability with a small human footprint."
+        "body": "Boundary First Labs is currently run by its founder. Computational tools assist with research, representation, implementation, documentation and verification. They are tools, not an independent governing body or a substitute for human responsibility. The goal is not to imitate a large organization, but to build useful institutional capabilities while operating as a one-person organization."
       },
       {
         "title": "Research as living infrastructure.",
@@ -949,7 +949,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "statusTitle": "Current institutional form",
-    "status": "One human founder directs the work and retains responsibility for the Lab. Computational assistance is used within defined work and review boundaries. Institutional continuity, independent validation and collaboration practices are ongoing development obligations. We do not represent computational collaborators as human employees.",
+    "status": "The founder directs the work and remains responsible for the Lab. Computational tools are used within defined work and review boundaries. Institutional continuity, independent validation and collaboration practices remain ongoing commitments. We do not present software as employees.",
     "principle": "Build the institution so that useful work can survive the person who began it.",
     "links": [
       {
@@ -1010,7 +1010,7 @@ export const doctrineFrontDoor = {
         },
         {
           "id": "authority",
-          "pursue": "Computational leverage",
+          "pursue": "Useful, governed computational tools",
           "not": "Autonomous computational authority."
         },
         {
@@ -1175,7 +1175,7 @@ export const doctrineFrontDoor = {
       "offers": [
         {
           "title": "Institutional repair and service delivery",
-          "body": "Map handoffs, information loss, unclear responsibilities, repeated submissions and the burdens placed on residents and staff. Compare repair hypotheses using operational evidence and affected-party input."
+          "body": "Map handoffs, information loss, unclear responsibilities, repeated submissions and the burdens placed on residents and staff. Compare repair hypotheses using operational evidence and input from the people affected."
         },
         {
           "title": "Infrastructure, maintenance and economics",
@@ -1259,7 +1259,7 @@ export const doctrineFrontDoor = {
         },
         {
           "title": "Accessible civic capacity",
-          "body": "The initial individual-first civic workbench is intended to be free at its proposed MVP stage. We seek sustainable support that does not require selling private civic records or compulsory participation in research. This is a design and funding objective, not an operational or perpetual pricing guarantee. Beneficiaries need not become paying customers or data suppliers. The proposed exchange connects free-at-MVP civic utility and public knowledge with scoped commercial services, research collaborations, independent scrutiny and sustainable support. No established revenue, pricing of optional services or validated market is implied."
+          "body": "The initial civic workbench for people is intended to be free at its proposed MVP stage. We seek sustainable support that does not require selling private civic records or compulsory participation in research. This is a design and funding objective, not an operational or perpetual pricing guarantee. Beneficiaries need not become paying customers or data suppliers. The proposed exchange connects free-at-MVP civic utility and public knowledge with scoped commercial services, research collaborations, independent scrutiny and sustainable support. No established revenue, pricing of optional services or validated market is implied."
         },
         {
           "title": "Independence is a condition of partnership",
@@ -1417,7 +1417,7 @@ export const doctrineFrontDoor = {
       "name": "Computationally leveraged inquiry",
       "eyebrow": "Observatory · Exhibit 03 · Functional architecture",
       "tagline": "Make inquiry persistent, inspectable and correctable.",
-      "lead": "Boundary First Labs is currently a solo-operated institution. Its computational leverage is intended to extend the capacity for research, construction and verification while preserving human direction and responsibility.",
+      "lead": "Boundary First Labs is currently a solo-operated institution. Its computational tools are intended to extend what one person can research, build and verify, while keeping direction and responsibility with people.",
       "support": "This exhibit explains the functions that a durable research environment must support, not its internal software design, data model, automation contracts or performance specifications.",
       "sections": [
         {
@@ -1716,7 +1716,7 @@ export const doctrineFrontDoor = {
         "body": "Prepare an inspectable record package for your own review. Selection and disclosure remain your decision."
       },
       {
-        "title": "Free individual-first core",
+        "title": "A free core for people's own use",
         "body": "The initial MVP core is intended to work locally, without required AI, an external account, a subscription, payment or research participation. This is a design requirement, not an availability or perpetual pricing promise."
       }
     ],
@@ -2103,7 +2103,7 @@ export const doctrineFrontDoor = {
           "id": "individuals",
           "audience": "Individuals and advocates",
           "question": "My records disagree with an institution’s records.",
-          "body": "Preserve evidence and conflicts under person-directed control; no legal representation or adjudication.",
+          "body": "Keep evidence and conflicting records under people's control; no legal representation or adjudication.",
           "links": [
             {
               "href": "/codexware/civic-record",
