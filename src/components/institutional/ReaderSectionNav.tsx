@@ -141,7 +141,7 @@ export function ReaderSectionNav({ sections }: { sections: readonly ReaderSectio
   return <nav ref={rail} className={styles.sectionNav} data-reader-section-nav data-section-nav-ready={ready ? "true" : "false"} aria-label="On this page" onKeyDown={escape}>
     <details ref={details}>
       <summary ref={summary}>
-        <span>On this page</span>
+        <span data-section-nav-prompt>On this page</span>
         <span className={styles.sectionNavCurrent} data-section-nav-label>{active >= 0 ? sections[active]?.label : "Choose a section"}</span>
         <span className={styles.sectionNavCount} data-section-nav-count>{active >= 0 ? `${active + 1} / ${sections.length}` : `${sections.length} sections`}</span>
       </summary>

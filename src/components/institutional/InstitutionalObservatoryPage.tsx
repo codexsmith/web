@@ -12,7 +12,7 @@ export function InstitutionalObservatoryPage() {
   return (
     <InstitutionalPageShell>
       <div className={styles.surface}>
-        <div className={styles.wrap}>
+        <div className={styles.wrap} data-observatory-reader>
           <section className={`${styles.hero} ${styles.doctrineHero}`} data-institutional-hero>
             <h1>{exhibit.name}</h1>
             <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{exhibit.eyebrow}</p>
