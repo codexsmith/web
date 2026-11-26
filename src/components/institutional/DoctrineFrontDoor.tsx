@@ -2,6 +2,8 @@ import Link from "next/link";
 import { institutionalIdentity } from "@/lib/institutional-identity";
 import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import { ReaderSectionNav } from "./ReaderSectionNav";
+import { chapterSectionEntries } from "./content/readerSectionNavigation";
 import { ReaderRouteGlyph } from "./ReaderRouteGlyph";
 import { ReaderMastheadField } from "./ReaderMastheadField";
 import { ReaderChapter } from "./ReaderChapter";
@@ -9,7 +11,7 @@ import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
 
 type Doctrine = (typeof content.doctrines)[number];
-type Section = { readonly title: string; readonly body: string };
+type Section = { readonly title: string; readonly body: string; readonly anchorId?: string };
 
 function DoctrineCards({ exclude }: { exclude?: Doctrine["slug"] }) {
   return (
@@ -33,9 +35,9 @@ export function DoctrineLinksSection({ context = "related", exclude }: { context
   const trust = content.trustLinks.find(item => item.context === context);
   return (
     <>
-    {trust && <section className={styles.section} data-trust-link={context}><h2>{trust.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Evidence &amp; Trust</p><p className={styles.sectionIntro}>{trust.body}</p></div><Link className={styles.textLink} href={trust.href}>{trust.label} <span aria-hidden="true">→</span></Link></section>}
+    {trust && <section className={styles.section} data-trust-link={context}><h2 id="reader-trust" tabIndex={-1} data-reader-section-target>{trust.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Evidence &amp; Trust</p><p className={styles.sectionIntro}>{trust.body}</p></div><Link className={styles.textLink} href={trust.href}>{trust.label} <span aria-hidden="true">→</span></Link></section>}
     <section className={`${styles.section} ${styles.doctrineSection}`} aria-label={copy.title} data-doctrine-links={context}>
-      <h2>{copy.title}</h2>
+      <h2 id="reader-doctrines" tabIndex={-1} data-reader-section-target>{copy.title}</h2>
       <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{copy.eyebrow}</p>
       <p className={styles.sectionIntro}>{copy.intro}</p></div>
       <DoctrineCards exclude={exclude} />
@@ -58,7 +60,7 @@ function DigitalNativeInstitutionLink({ context }: { context: "home" | "work-wit
   const copy = context === "home" ? content.digitalNativeInstitution.homeIntro : content.digitalNativeInstitution.workIntro;
   return (
     <section className={styles.section} data-institution-link={context}>
-      <h2>{copy.title}</h2>
+      <h2 id="reader-institution" tabIndex={-1} data-reader-section-target>{copy.title}</h2>
       <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{copy.body}</p></div>
       <Link className={styles.textLink} href={copy.href}>{copy.label} <span aria-hidden="true">→</span></Link>
     </section>
@@ -67,13 +69,13 @@ function DigitalNativeInstitutionLink({ context }: { context: "home" | "work-wit
 
 export function InstrumentCollectionLink({ context }: { context: keyof typeof content.instrumentLinks }) {
   const copy=content.instrumentLinks[context];
-  return <section className={styles.section} data-instrument-link={context}><h2>{copy.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Instruments · Teaching examples</p><p className={styles.sectionIntro}>{copy.body}</p></div><Link className={styles.textLink} href={copy.href}>{copy.label} →</Link></section>;
+  return <section className={styles.section} data-instrument-link={context}><h2 id="reader-instruments" tabIndex={-1} data-reader-section-target>{copy.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Instruments · Teaching examples</p><p className={styles.sectionIntro}>{copy.body}</p></div><Link className={styles.textLink} href={copy.href}>{copy.label} →</Link></section>;
 }
 
 export function AudiencePathways({ context }: { context: keyof typeof content.audiencePaths }) {
   const copy = content.audiencePaths[context];
   return <section className={styles.section} data-audience-paths={context} aria-labelledby={`audience-${context}`}>
-    <h2 id={`audience-${context}`}>{copy.title}</h2>{copy.intro && <p className={styles.sectionIntro} data-audience-intro>{copy.intro}</p>}
+    <h2 id={`audience-${context}`} tabIndex={-1} data-reader-section-target>{copy.title}</h2>{copy.intro && <p className={styles.sectionIntro} data-audience-intro>{copy.intro}</p>}
     <div className={styles.pathGrid} data-reader-collection="pathways">{copy.cards.map(card => <article className={styles.pathCard} key={card.id} data-audience-card={card.id}>
       <h3>{card.question}</h3><p className={styles.workStatus}>{card.audience}</p><p data-reader-card-description>{card.body}</p>
       <div className={styles.audienceLinks}>{card.links.map(item => <Link className={styles.textLink} key={item.label} href={item.href}>{item.label} <span aria-hidden="true">→</span></Link>)}</div>
@@ -82,14 +84,14 @@ export function AudiencePathways({ context }: { context: keyof typeof content.au
 }
 
 function ReadingSections({ sections }: { sections: readonly Section[] }) {
-  return <>{sections.map((s, index) => <ReaderChapter key={s.title} number={index + 1} title={s.title} body={s.body} />)}</>;
+  return <>{sections.map((s, index) => <ReaderChapter key={s.title} number={index + 1} title={s.title} body={s.body} anchorId={s.anchorId} />)}</>;
 }
 
 function DoctrineReaderGuide({ doctrine }: { doctrine: Doctrine }) {
   const guide = doctrine.guide;
   return (
     <section className={styles.readerGuide} data-reader-guide>
-      <h2>{guide.title}</h2>
+      <h2 id="reader-guide" tabIndex={-1} data-reader-section-target>{guide.title}</h2>
       <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Reading pathways</p>
       <p className={styles.sectionIntro}>{guide.note}</p></div>
       <div className={styles.guideGrid} data-reader-collection="reference">
@@ -188,11 +190,12 @@ export function DoctrineLandingPage({ slug }: { slug: "consequential-systems" | 
           <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Doctrine {doctrine.number}</p><p className={styles.tagline}>{doctrine.tagline}</p></div>
           <p className={styles.lead}>{doctrine.lead}</p><p className={styles.support}>{doctrine.support}</p>
         </section>
+        <ReaderSectionNav sections={[...chapterSectionEntries(doctrine.sections), ...("framework" in doctrine ? [{ id: "reader-framework", label: "Governance in practice" }] : []), { id: "reader-guide", label: doctrine.guide.title }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
         <DoctrineEditorialBody doctrine={doctrine} />
-        {"framework" in doctrine && <section className={styles.section} data-governance-framework><h2>Different capabilities, different obligations.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Governance in practice</p></div><div className={styles.frameworkGrid} data-reader-collection="parallel">{doctrine.framework.map(item => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>}
+        {"framework" in doctrine && <section className={styles.section} data-governance-framework><h2 id="reader-framework" tabIndex={-1} data-reader-section-target>Different capabilities, different obligations.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Governance in practice</p></div><div className={styles.frameworkGrid} data-reader-collection="parallel">{doctrine.framework.map(item => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>}
         <DoctrineReaderGuide doctrine={doctrine} />
         <section className={styles.section}>
-          <h2>Explore the work.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Go deeper</p></div>
+          <h2 id="reader-explore" tabIndex={-1} data-reader-section-target>Explore the work.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Go deeper</p></div>
           <div className={styles.links}>{doctrine.depth.map((link) => <Link key={link.href} className={styles.textLink} href={link.href}>{link.label}</Link>)}</div>
         </section>
         <InstrumentCollectionLink context={slug} />
@@ -214,23 +217,24 @@ export function CodexwareIntroductionPage() {
           <p className={styles.lead}>{c.lead}</p><p className={styles.support}>{c.support}</p>
           <ReaderMastheadField kind="operation" />
         </section>
+        <ReaderSectionNav sections={[{ id: "audience-codexware", label: "Find your starting point" }, { id: "reader-civic-record", label: "Civic Record" }, { id: "reader-intended-uses", label: "Intended uses" }, { id: "reader-application-design", label: "Design & development status" }, { id: "reader-commitments", label: "Governance requirements" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-trust", label: "Evidence & trust" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
         <AudiencePathways context="codexware" />
         <section className={`${styles.section} ${styles.callout}`} data-civic-record-entry>
-          <div><h2>{c.civicIntro.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Codexware Civic</p><p className={styles.tagline}>{c.civicIntro.tagline}</p></div></div>
+          <div><h2 id="reader-civic-record" tabIndex={-1} data-reader-section-target>{c.civicIntro.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Codexware Civic</p><p className={styles.tagline}>{c.civicIntro.tagline}</p></div></div>
           <div><p className={styles.calloutText}>{c.civicIntro.body}</p><p className={styles.status}>{c.civicIntro.status}</p><Link className={styles.textLink} href={c.civicIntro.href}>{c.civicIntro.label} →</Link></div>
         </section>
         <section className={styles.section} data-codexware-examples>
-          <h2>{c.examples.heading}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{c.examples.intro}</p></div>
+          <h2 id="reader-intended-uses" tabIndex={-1} data-reader-section-target>{c.examples.heading}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{c.examples.intro}</p></div>
           <div className={styles.pathGrid} data-reader-collection="cases">{c.examples.items.map(item => <article className={styles.pathCard} key={item.id} data-codexware-example={item.id}><p className={styles.workStatus}>Intended use</p><h3>{item.title}</h3><p><strong>{item.question}</strong></p><p>{item.body}</p></article>)}</div>
           <p className={styles.smallPrint} data-example-limit>{c.examples.limit}</p>
           <p className={styles.sectionIntro}>{c.examples.linkIntro}</p><Link className={styles.textLink} href={c.examples.href}>{c.examples.label} →</Link>
         </section>
         <div className={styles.reading}>
-          <details className={styles.readerDetails} data-reader-detail="codexware-design"><summary>Explore application design and interoperability</summary><ReadingSections sections={c.sections} /></details>
-          <aside className={styles.example} data-codexware-status><h2>Development status</h2><p>{c.status}</p></aside>
+          <details className={styles.readerDetails} data-reader-detail="codexware-design"><summary id="reader-application-design" data-reader-section-target>Explore application design and interoperability</summary><ReadingSections sections={c.sections} /></details>
+          <aside className={styles.example} data-codexware-status><h2 id="reader-development-status" tabIndex={-1} data-reader-section-target>Development status</h2><p>{c.status}</p></aside>
         </div>
         <section className={styles.section} data-codexware-commitments>
-          <h2>{c.commitments.heading}</h2>
+          <h2 id="reader-commitments" tabIndex={-1} data-reader-section-target>{c.commitments.heading}</h2>
           <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{c.commitments.intro}</p></div>
           <div className={styles.pathGrid} data-reader-collection="reference">
             {c.commitments.items.map((item) => (
@@ -277,26 +281,27 @@ export function WorkWithUsPage() {
           <Link className={styles.action} href="/contact">Start a conversation <span aria-hidden="true">→</span></Link>
           <ReaderMastheadField kind="collaboration" />
         </section>
+        <ReaderSectionNav sections={[{ id: "audience-work-with-us", label: "Find your starting point" }, ...work.groups.map(group => ({ id: `work-${group.id}`, label: group.title })), { id: "work-engagement", label: work.engagement.title }, { id: "work-know", label: work.know.title }, { id: "work-contact", label: work.contact.title }, { id: "reader-institution", label: "The institution" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-trust", label: "Evidence & trust" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
         <AudiencePathways context="work-with-us" />
         {work.groups.map(group => (
           <section className={styles.section} data-work-group={group.id} key={group.id} aria-labelledby={`work-${group.id}`}>
-            <h2 id={`work-${group.id}`}>{group.title}</h2>
+            <h2 id={`work-${group.id}`} tabIndex={-1} data-reader-section-target>{group.title}</h2>
             <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{group.intro}</p></div>
             <div className={styles.pathGrid} data-reader-collection="directory">{group.cards.map(path => <WorkPathCard path={path} key={path.id} />)}</div>
           </section>
         ))}
         <section className={styles.section} data-work-section="engagement" aria-labelledby="work-engagement">
-          <h2 id="work-engagement">{work.engagement.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.engagement.intro}</p></div>
+          <h2 id="work-engagement" tabIndex={-1} data-reader-section-target>{work.engagement.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.engagement.intro}</p></div>
           <details className={styles.readerDetails} data-engagement-detail><summary>Read the four engagement stages</summary><ol className={styles.workSteps} data-reader-collection="sequence">{work.engagement.steps.map((step, index) => <li key={step.title}><span className={styles.num}>0{index+1}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol></details>
           <div className={styles.workNotes}><article><h3>What you might receive</h3><p>{work.engagement.outputs}</p></article><article><h3>What we agree before proceeding</h3><p>{work.engagement.limits}</p></article></div>
         </section>
         <section className={styles.section} data-work-section="know" aria-labelledby="work-know">
-          <h2 id="work-know">{work.know.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.know.intro}</p></div>
+          <h2 id="work-know" tabIndex={-1} data-reader-section-target>{work.know.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.know.intro}</p></div>
           <div className={styles.pathGrid} data-reader-collection="directory">{work.know.cards.map(path => <WorkPathCard key={path.id} path={path} />)}</div>
         </section>
         <blockquote className={styles.principle}>{work.principle}</blockquote>
         <section className={styles.section} data-work-section="contact" aria-labelledby="work-contact">
-          <h2 id="work-contact">{work.contact.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.contact.body}</p></div>
+          <h2 id="work-contact" tabIndex={-1} data-reader-section-target>{work.contact.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{work.contact.body}</p></div>
           <p className={styles.smallPrint}>{work.contact.privacy}</p>
           <div className={styles.links}><Link className={styles.action} href={work.contact.href}>{work.contact.label} <span aria-hidden="true">→</span></Link><a className={styles.textLink} href={PUBLIC_CONTACT_MAILTO}>{PUBLIC_CONTACT_EMAIL}</a></div>
         </section>
@@ -319,23 +324,24 @@ export function DigitalNativeInstitutionPage() {
           <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{institution.eyebrow}</p><p className={styles.tagline}>{institution.tagline}</p></div>
           <p className={styles.lead}>{institution.lead}</p><p className={styles.support}>{institution.support}</p>
         </section>
+        <ReaderSectionNav sections={[...chapterSectionEntries(institution.sections), { id: "stewardship-values", label: "Stewardship values" }, { id: "institutional-nongoals", label: "Institutional limits" }, { id: "reader-institution-work", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
         <div className={styles.reading}>
           <div><ReadingSections sections={institution.sections} /></div>
           <aside className={styles.example}><h2>{institution.statusTitle}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Institutional status</p></div><p>{institution.status}</p></aside>
         </div>
         <section className={styles.section} data-stewardship-values aria-labelledby="stewardship-values">
-          <h2 id="stewardship-values">{institution.stewardship.heading}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Institutional commitments</p>
+          <h2 id="stewardship-values" tabIndex={-1} data-reader-section-target>{institution.stewardship.heading}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Institutional commitments</p>
           <p className={styles.sectionIntro}>{institution.stewardship.intro}</p></div>
           <div className={styles.pathGrid} data-reader-collection="reference">{institution.stewardship.values.map(value => <article className={styles.pathCard} key={value.id} data-charter-value={value.id}><h3>{value.title}</h3><p>{value.body}</p></article>)}</div>
         </section>
         <section className={styles.section} data-institutional-nongoals aria-labelledby="institutional-nongoals">
-          <h2 id="institutional-nongoals">{institution.stewardship.limitsHeading}</h2><p className={styles.sectionIntro}>{institution.stewardship.limitsIntro}</p>
+          <h2 id="institutional-nongoals" tabIndex={-1} data-reader-section-target>{institution.stewardship.limitsHeading}</h2><p className={styles.sectionIntro}>{institution.stewardship.limitsIntro}</p>
           <div className={styles.pathGrid} data-reader-collection="reference">{institution.stewardship.limits.map(item => <article className={styles.pathCard} key={item.id} data-institutional-limit={item.id}><h3>{item.pursue}</h3><p><strong>Not:</strong> {item.not}</p></article>)}</div>
           <p className={styles.smallPrint} data-stewardship-limit>{institution.stewardship.note}</p>
         </section>
         <blockquote className={styles.principle} data-reader-heritage="stewardship">{institution.principle}</blockquote>
         <section className={styles.section}>
-          <h2>Get to know the work.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Participate or inspect</p></div>
+          <h2 id="reader-institution-work" tabIndex={-1} data-reader-section-target>Get to know the work.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Participate or inspect</p></div>
           <div className={styles.links}>{institution.links.map((item) => <Link key={item.href} className={styles.textLink} href={item.href}>{item.label}</Link>)}</div>
         </section>
         <InstrumentCollectionLink context="digital-native-institution" />
@@ -357,15 +363,16 @@ export function EngagementGuidePage({ slug }: { slug: EngagementGuideSlug }) {
           <h1>{guide.name}</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{guide.eyebrow}</p>
           <p className={styles.tagline}>{guide.tagline}</p></div><p className={styles.lead}>{guide.lead}</p><p className={styles.support}>{guide.support}</p>
         </section>
+        <ReaderSectionNav sections={[{ id: "reader-offers", label: guide.offerHeading }, ...chapterSectionEntries(guide.sections), { id: "reader-example", label: guide.exampleTitle }, { id: "reader-guide-contact", label: "Contact" }, ...(slug !== "work-with-us/funding" ? [{ id: "reader-instruments", label: "Instruments" }] : []), { id: "reader-doctrines", label: "Related doctrines" }]} />
         <section className={styles.section} data-guide-offers>
-          <h2>{guide.offerHeading}</h2><div className={styles.frameworkGrid} data-reader-collection="parallel">{guide.offers.map((offer) => <article key={offer.title}><h3>{offer.title}</h3><p>{offer.body}</p></article>)}</div>
+          <h2 id="reader-offers" tabIndex={-1} data-reader-section-target>{guide.offerHeading}</h2><div className={styles.frameworkGrid} data-reader-collection="parallel">{guide.offers.map((offer) => <article key={offer.title}><h3>{offer.title}</h3><p>{offer.body}</p></article>)}</div>
         </section>
         <div className={styles.reading} data-guide-method><div><ReadingSections sections={guide.sections} /></div>
           <aside className={styles.example} data-guide-status><h2>{guide.statusTitle}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Engagement status</p></div><p>{guide.status}</p></aside>
         </div>
-        <section className={styles.section} data-guide-example><h2>{guide.exampleTitle}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Example, not a completed engagement</p><p className={styles.sectionIntro}>{guide.example}</p></div></section>
+        <section className={styles.section} data-guide-example><h2 id="reader-example" tabIndex={-1} data-reader-section-target>{guide.exampleTitle}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Example, not a completed engagement</p><p className={styles.sectionIntro}>{guide.example}</p></div></section>
         <blockquote className={styles.principle}>{guide.principle}</blockquote>
-        <section className={styles.section} data-guide-contact><h2>Start a conversation.</h2><p className={styles.sectionIntro}>{guide.ask}</p>
+        <section className={styles.section} data-guide-contact><h2 id="reader-guide-contact" tabIndex={-1} data-reader-section-target>Start a conversation.</h2><p className={styles.sectionIntro}>{guide.ask}</p>
           <div className={styles.links}><Link className={styles.action} href="/contact">Contact the Lab</Link><a className={styles.textLink} href={`${PUBLIC_CONTACT_MAILTO}?subject=${encodeURIComponent(guide.subject)}`}>{PUBLIC_CONTACT_EMAIL}</a></div>
           <div className={styles.links}>{guide.links.map((item) => <Link key={item.href} className={styles.textLink} href={item.href}>{item.label}</Link>)}<Link className={styles.textLink} href="/work-with-us">All engagement paths</Link></div>
         </section>

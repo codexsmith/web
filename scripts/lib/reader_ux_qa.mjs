@@ -82,7 +82,12 @@ async function frameReviewStart(locator) {
   await locator.scrollIntoViewIfNeeded();
   return locator.evaluate(async element => {
     const settle = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-    const railBottom = () => Math.max(0, document.querySelector("header[data-header-compact]")?.getBoundingClientRect().bottom ?? 0);
+    const railBottom = () => {
+      const primary = Math.max(0, document.querySelector("header[data-header-compact]")?.getBoundingClientRect().bottom ?? 0);
+      const local = document.querySelector("[data-reader-section-nav]");
+      const rect = local?.getBoundingClientRect();
+      return rect && !local.contains(element) && rect.top <= primary + 1 && rect.bottom > primary ? rect.bottom : primary;
+    };
     const active = document.activeElement;
     // The header itself may recompose after the initial scroll.
     for (let attempt = 0; attempt < 3; attempt++) {
@@ -775,7 +780,8 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       const readChapters = () => chapters.evaluateAll(nodes=>nodes.map(n=>({
         title:n.querySelector("h2").textContent,body:n.querySelector("p").textContent,
       })));
-      const disclosureGeometry = () => design.evaluate(node => {
+      const disclosureGeometry = () => design.evaluate(async node => {
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         const box = node.getBoundingClientRect(), summary = node.querySelector("summary").getBoundingClientRect();
         const style = getComputedStyle(node);
         const frame = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth) +
@@ -796,9 +802,10 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       await checkFocus(summary,"Codexware application design disclosure");
       await capture("codexware-design-expanded",summary,{frameStart:true});
       await key(summary, "Space");
+      await page.waitForFunction(() => !document.querySelector('details[data-reader-detail="codexware-design"]')?.open);
       const restored = await disclosureGeometry();
       assert.ok(!restored.open && Math.abs(restored.height-collapsed.height)<=1,
-        "closing the disclosure must recover its original compact geometry");
+        "closing the disclosure must recover its original compact geometry: " + JSON.stringify({collapsed, restored}));
       assert.deepEqual(await readChapters(),authored);
       assert.equal(await status.locator("p").textContent(),c.status);
       await fit(page);
@@ -822,6 +829,49 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         "editorial economy preserves direct contact and initial inquiry privacy");
       await capture("editorial-work-choices",page.locator('[data-work-group="commission"]'), {frameStart:true});
       await fit(page);
+    });
+    await scenario("compact sticky section navigation and local identity", async (checkFocus, capture) => {
+      for (const route of ["/", "/contact"]) {
+        await open(page, base, route);
+        assert.equal(await page.locator("[data-reader-section-nav]").count(), 0, "entry surfaces use a simple divider without navigation height");
+      }
+      for (const route of ["/observatory", "/observatory/intellectual-lineage", "/codexware", "/work-with-us", "/evidence-and-trust", "/observatory/instruments"]) {
+        await open(page, base, route);
+        const rail = page.locator("[data-reader-section-nav]");
+        await rail.locator(":scope").waitFor({state:"visible"});
+        await page.waitForFunction(() => document.querySelector("[data-section-nav-ready='true']"));
+        const summary = rail.locator("summary"), menu = rail.locator("details");
+        const links = rail.locator("a[href^='#']");
+        const hrefs = await links.evaluateAll(nodes => nodes.map(node => node.getAttribute("href")));
+        assert.ok(hrefs.length >= 3 && new Set(hrefs).size === hrefs.length);
+        assert.equal(await menu.getAttribute("open"), null);
+        assert.ok((await summary.boundingBox()).height <= 56, "closed local navigation must occupy one compact rail");
+        const baseline = await page.locator("main").evaluate(node => node.scrollHeight);
+        await key(summary, "Enter");
+        assert.notEqual(await menu.getAttribute("open"), null);
+        await checkFocus(summary, "section menu");
+        assert.equal(await page.locator("main").evaluate(node => node.scrollHeight), baseline, "section menu must not expand the reading flow");
+        const index = Math.min(2, hrefs.length - 1), href = hrefs[index];
+        const link = links.nth(index);
+        await key(link, "Enter");
+        await page.waitForURL(url => url.hash === href);
+        const target = page.locator(href);
+        await page.waitForFunction(id => {
+          const target = document.getElementById(id);
+          const primary = document.querySelector("header[data-header-compact]")?.getBoundingClientRect();
+          const rail = document.querySelector("[data-reader-section-nav]")?.getBoundingClientRect();
+          return target && primary && rail && target.getBoundingClientRect().top >= rail.bottom - 1 && rail.top >= primary.bottom - 1 && Math.abs(rail.top - primary.bottom) <= 2;
+        }, href.slice(1));
+        assert.equal(await menu.getAttribute("open"), null);
+        assert.equal(await target.evaluate(node => document.activeElement === node), true, "section activation moves focus to its real fragment destination");
+        await page.waitForFunction(href => document.querySelector("[data-reader-section-nav] a[aria-current='location']")?.getAttribute("href") === href, href);
+        await capture("section-nav-" + route.replace(/[^a-z0-9]+/g,"-"),target);
+        await key(summary, "Enter");
+        await key(links.first(), "Escape");
+        assert.equal(await menu.getAttribute("open"), null);
+        assert.ok(await summary.evaluate(node => document.activeElement === node), "Escape closes only the local menu and restores trigger focus");
+        await fit(page);
+      }
     });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
