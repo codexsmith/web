@@ -18,6 +18,9 @@ jobs:
   browser-release-qa:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
+    # Isolated local CI build only; this does not publish or deploy the PR.
+    env:
+      BFL_V3_INDEXABLE: "true"
 
     steps:
       - name: Check out repository

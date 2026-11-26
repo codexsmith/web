@@ -29,6 +29,8 @@ expect(qa.includes("Skip to main content"), "v3 release QA must exercise the ski
 expect(qa.includes("Control+K"), "v3 release QA must exercise keyboard command-palette access");
 expect(qa.includes("__release-qa-missing__"), "v3 release QA must exercise the institutional 404 state");
 expect(qa.includes("horizontalOverflow"), "v3 release QA must check horizontal overflow");
+expect(qa.includes("await checkPublicationDiscovery()") && qa.includes("sitemap.xml") && qa.includes("robots.txt") && qa.includes('["x-robots-tag"]'), "release QA must exercise live discovery policy and reference response headers");
+expect(workflow.includes('BFL_V3_INDEXABLE: "true"'), "release QA must exercise production indexing policy on the isolated build");
 expect(qa.includes("doctrineNavigationIssues(page, config.route)"), "release QA must check the doctrine closing section in rendered pages");
 expect(qa.includes("verifyDoctrineTraversals(browser, base"), "release QA must traverse all twelve principal-page doctrine links");
 expect(qa.includes("clippedText"), "v3 release QA must check clipped text");

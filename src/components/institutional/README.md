@@ -170,3 +170,17 @@ The Representation Atlas at `/v3/representation-atlas` is a separate public comp
 
 
 The v3 publication catalog is now source-governed across three distinct control authorities rather than website-local status shorthand. `REG-PUBLICATION-SEQUENCE` supplies governance/dependency state, `REG-PUBLICATION-GRAPH` supplies routing/readiness projections, and `REG-PUBLICATION-SOURCES` supplies source identity/provenance routing. The public selection may orient and prioritize records for first contact, but it must preserve the source identity and authority ceiling of the controlling registry. Sequence status, graph readiness, source registration, and website selection must never be rendered as synonymous with published, peer reviewed, true, novel, or release-authorized. Publication cards deep-link by source record ID and expose pinned source revisions, control fields, and authority ceilings.
+
+
+### Publication governance — institutional identity before inventory
+
+The public institution is defined by its mission, three doctrines, and three public entry points: Codexware, Observatory, and Work With Us. A research program, demonstrator, product, or historical artifact does not acquire institutional prominence merely because it is implemented, testable, or retained.
+
+- **Institutional:** the ten defining readers, including the front door, doctrines, three entry points, stewardship, trust, and contact. Only this tier can be promoted into the global header/footer (subject to the existing narrower navigation contract).
+- **Supporting:** eleven deliberately curated service, product, exhibition, and instrument readers. These may appear in public search and the sitemap, with contextual placement under the relevant entry point.
+- **Reference:** every other admitted canonical route. Remains addressable and included in the full release QA matrix, but is omitted from curated search and the production sitemap and receives `X-Robots-Tag: noindex, follow`. Links from contextually relevant material remain permissible; no homepage placement is implied.
+- **Internal/unadmitted:** work outside the public route inventory. This policy does not expose it or grant access. Actual confidentiality requires repository/access-control enforcement; noindex is not a privacy mechanism.
+
+`src/lib/site-publication.ts` is the single editorial admission list for curated discovery; `src/lib/site-release.ts` retains the broader technical route inventory. Production crawlers must be allowed to receive the reference-route noindex header. Preview indexing remains governed by the existing release gate.
+
+Contract ownership: institutional identity/public interface contracts own the homepage, doctrines, header/footer, discoverability, and accessibility; capability contracts own local tools and demonstrations; evidence/provenance contracts own claim ceilings, source identities, and approval; retained/history contracts own compatibility and truthful preservation. Historical exact-copy tests must not force promotion, placement, or superseded wording into the current institutional surface. Changing discovery tiers requires an explicit editorial decision and matching policy tests. All existing technical and safety gates remain blocking in this transition; no capability is automatically deleted or silently exempted.

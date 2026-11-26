@@ -3,6 +3,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { doctrineNavigationIssues, verifyDoctrineTraversals } from "./lib/doctrine_navigation_qa.mjs";
+import { institutionalPublicationEntries, institutionalDiscoveryRoutes } from "../src/lib/site-publication.ts";
 
 const harnessModule = process.env.V3_RELEASE_QA_PLAYWRIGHT_MODULE;
 const { chromium } = await import(harnessModule ? pathToFileURL(harnessModule).href : "playwright");
@@ -35,6 +36,11 @@ const publicRoutes = [
       : []),
   ]),
 ];
+
+const discoveryRoutes = new Set(institutionalDiscoveryRoutes);
+const referenceRoutes = publicRoutes.filter(route => !discoveryRoutes.has(route));
+const publicationTiers = new Map(institutionalPublicationEntries.map(entry => [entry.href, entry.tier]));
+const indexingEnabled = process.env.VERCEL_ENV?.trim().toLowerCase() === "production" || process.env.BFL_V3_INDEXABLE?.trim().toLowerCase() === "true";
 
 const viewports = {
   desktop: { width: 1440, height: 1000 },
@@ -371,6 +377,15 @@ async function visit(browser, config) {
   const issues = await doctrineNavigationIssues(page, config.route);
 
   if (!response?.ok()) issues.push(`HTTP ${response?.status() ?? "no response"}`);
+  const publicationTier = publicationTiers.get(config.route) ?? "reference";
+  const robotsHeader = response?.headers()["x-robots-tag"] ?? "";
+  const headerNoindex = /\bnoindex\b/i.test(robotsHeader);
+  if (publicationTier === "reference" && !headerNoindex) issues.push("reference route must return a crawl-visible noindex response");
+  if (publicationTier !== "reference" && indexingEnabled && headerNoindex) issues.push("curated route is unexpectedly excluded from search indexing");
+  if (publicationTier !== "reference" && indexingEnabled) {
+    const directives = await page.locator('meta[name="robots"], meta[name="googlebot"]').evaluateAll(nodes => nodes.map(node => node.getAttribute("content") ?? ""));
+    if (directives.some(value => /\bnoindex\b/i.test(value))) issues.push("curated route carries an unexpected noindex meta directive");
+  }
   if (metrics.horizontalOverflow) {
     issues.push(
       `horizontal page overflow: document ${metrics.documentWidth}px / body ${metrics.bodyWidth}px > viewport ${metrics.viewport[0]}px`,
@@ -427,6 +442,8 @@ async function visit(browser, config) {
     route: config.route,
     viewportName: config.viewportName,
     responseStatus: response?.status() ?? null,
+    publicationTier,
+    robotsHeader,
     metrics,
     consoleErrors,
     pageErrors,
@@ -643,11 +660,44 @@ async function checkNotFound(browser) {
   await context.close();
 }
 
+async function checkPublicationDiscovery() {
+  const issues = [];
+  const expected = indexingEnabled ? [...institutionalDiscoveryRoutes] : ["/"];
+  const [sitemapResponse, robotsResponse] = await Promise.all([
+    fetch(`${base}/sitemap.xml`),
+    fetch(`${base}/robots.txt`),
+  ]);
+  if (!sitemapResponse.ok) issues.push(`sitemap HTTP ${sitemapResponse.status}`);
+  if (!robotsResponse.ok) issues.push(`robots HTTP ${robotsResponse.status}`);
+  const sitemap = await sitemapResponse.text();
+  const robots = await robotsResponse.text();
+  const actual = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => new URL(loc).pathname);
+  const actualSet = new Set(actual);
+  if (actual.length !== actualSet.size) issues.push("sitemap contains duplicate canonical routes");
+  for (const route of expected) if (!actualSet.has(route)) issues.push("missing discovery route: " + route);
+  for (const route of actual) if (!expected.includes(route)) issues.push("unexpected sitemap promotion: " + route);
+  const disallowed = [...robots.matchAll(/^Disallow:\s*(\S+)/gmi)].map(([, route]) => route);
+  if (indexingEnabled) {
+    // The noindex header must remain readable by crawlers; noindex is not access control.
+    for (const route of publicRoutes) {
+      if (disallowed.some(prefix => route.startsWith(prefix))) issues.push("production robots rule prevents policy discovery for " + route);
+    }
+  } else if (!disallowed.includes("/v3/")) {
+    issues.push("preview robots rules must retain the legacy route crawl boundary");
+  }
+  const name = "publication discovery policy";
+  recordFailure(name, issues);
+  results.push({ name, indexingEnabled, expected, actual, disallowed, issues });
+}
+
 function writeReport() {
   const report = {
     generatedAt: new Date().toISOString(),
     base,
     publicRouteCount: publicRoutes.length,
+    discoveryRouteCount: discoveryRoutes.size,
+    referenceRouteCount: referenceRoutes.length,
+    indexingEnabled,
     visitCount: visits.length,
     failureCount: failures.reduce((sum, failure) => sum + failure.issues.length, 0),
     failures,
@@ -664,6 +714,9 @@ function writeReport() {
     "",
     `Generated: ${report.generatedAt}`,
     `Public routes: **${report.publicRouteCount}**`,
+    `Curated discovery routes: **${report.discoveryRouteCount}**`,
+    `Reference routes: **${report.referenceRouteCount}**`,
+    `Production indexing policy enabled: **${report.indexingEnabled}**`,
     `Viewport route visits: **${report.visitCount}**`,
     `Critical failures: **${report.failureCount}**`,
     "",
@@ -713,6 +766,7 @@ server.stderr.on("data", (chunk) => {
 let browser;
 try {
   await waitForServer(server);
+  await checkPublicationDiscovery();
   browser = await chromium.launch({ headless: true });
 
   for (const visitConfig of visits) {

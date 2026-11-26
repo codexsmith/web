@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 import {
   institutionalIndexingEnabled,
-  institutionalPublicRoutes,
+  institutionalDiscoveryRoutes,
   siteOrigin,
 } from "@/lib/site-release";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = institutionalIndexingEnabled
-    ? institutionalPublicRoutes
+    ? institutionalDiscoveryRoutes
     : ["/"];
 
   return routes.map((route) => ({

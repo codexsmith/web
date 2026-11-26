@@ -1,3 +1,6 @@
+import { institutionalDiscoveryRoutes } from "./site-publication";
+export { institutionalDiscoveryRoutes } from "./site-publication";
+
 export const siteOrigin = new URL(
   process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://boundaryfirstlabs.com",
 );
@@ -108,3 +111,10 @@ export const institutionalPublicRoutes = [
   "/research/moonshots/fine-structure-constant",
   "/start",
 ] as const;
+
+// Route admission is not publication promotion. The remainder stays reachable for
+// compatibility, contextual reading, and full acceptance testing, but is not indexed.
+const discoveryRouteSet = new Set<string>(institutionalDiscoveryRoutes);
+export const institutionalReferenceRoutes = institutionalPublicRoutes.filter(
+  (route) => !discoveryRouteSet.has(route),
+);

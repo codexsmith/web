@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { institutionalPublicRoutes } from "./src/lib/site-release";
+import { institutionalPublicRoutes, institutionalReferenceRoutes } from "./src/lib/site-release";
 
 const institutionalChildRoutes = institutionalPublicRoutes.filter(
   (route) => route !== "/",
@@ -60,6 +60,12 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
+      // Reference routes remain available but are excluded from public search indexing.
+      // Do not block crawling of these routes in production: crawlers must see noindex.
+      ...institutionalReferenceRoutes.map((route) => ({
+        source: route,
+        headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }],
+      })),
     ];
   },
 };

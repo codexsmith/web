@@ -192,8 +192,8 @@ if (
 }
 
 const sitemap = read("src/app/sitemap.ts");
-if (!sitemap.includes("institutionalPublicRoutes")) {
-  fail("sitemap.ts must consume the institutional public route inventory");
+if (!sitemap.includes("institutionalDiscoveryRoutes") || sitemap.includes("institutionalPublicRoutes")) {
+  fail("sitemap.ts must consume only the curated publication discovery inventory");
 }
 
 const shell = read(
