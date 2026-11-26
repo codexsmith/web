@@ -4,6 +4,7 @@ import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact"
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { ReaderRouteGlyph } from "./ReaderRouteGlyph";
 import { ReaderMastheadField } from "./ReaderMastheadField";
+import { ReaderChapter } from "./ReaderChapter";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
 
@@ -82,7 +83,7 @@ export function AudiencePathways({ context }: { context: keyof typeof content.au
 }
 
 function ReadingSections({ sections }: { sections: readonly Section[] }) {
-  return <>{sections.map((s) => <article key={s.title}><h2>{s.title}</h2><p>{s.body}</p></article>)}</>;
+  return <>{sections.map((s, index) => <ReaderChapter key={s.title} number={index + 1} title={s.title} body={s.body} />)}</>;
 }
 
 function DoctrineReaderGuide({ doctrine }: { doctrine: Doctrine }) {

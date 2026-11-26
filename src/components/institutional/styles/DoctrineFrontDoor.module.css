@@ -566,3 +566,109 @@
     display: none;
   }
 }
+
+
+/* Editorial craft: ordered chapters, captions and explicit scope notes.
+ * Keep the existing serif/sans pairing, reading columns, and content order.
+ * Page-local numbering is not a claim registry or a maturity scale. */
+.surface .chapterOrdinal {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  color: var(--old-gold-dark, #776126);
+  font: 600 .72rem/1.45 Arial, Helvetica, sans-serif;
+  letter-spacing: .12em;
+  font-variant-numeric: lining-nums tabular-nums;
+  margin-bottom: 7px;
+}
+.surface .chapterOrdinal::after {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--df-reader-rail);
+}
+.surface .reading [data-reader-chapter] > h2 {
+  text-wrap: balance;
+  line-height: 1.24;
+  letter-spacing: -.025em;
+}
+.surface .reading [data-reader-chapter] > p {
+  text-wrap: pretty;
+  line-height: 1.72;
+}
+.surface .reading [data-reader-chapter] {
+  border-bottom-color: var(--df-reader-seam);
+}
+.surface .reading [data-reader-chapter]:last-child {
+  border-bottom: 0;
+}
+.surface .figureCaptionHeading {
+  display: block;
+  color: var(--df-deep);
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+.surface .figureOrdinal {
+  display: inline-block;
+  color: var(--old-gold-dark, #776126);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  font-variant-numeric: lining-nums tabular-nums;
+  text-transform: uppercase;
+  margin-inline-end: 9px;
+}
+.surface .figureCaptionHeading strong {
+  font-size: .87rem;
+  font-weight: 600;
+}
+.surface .figureCaptionNote {
+  display: block;
+  text-wrap: pretty;
+  color: var(--df-muted);
+}
+.surface .figureLabel,
+.surface .figureMuted,
+.surface [data-instrument-collection] output,
+.surface [data-policy-results] dd {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+/* These notes retain their full written limitations; a rail is an editorial
+ * cue, never a replacement for the scope text or an assurance signal. */
+.surface .smallPrint {
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+.surface :is([data-example-limit],[data-deployment-limit],[data-stewardship-limit],
+  [data-lineage-limit],[data-status-illustrative]) {
+  padding-inline-start: 12px;
+  border-inline-start: 2px solid var(--df-reader-rail);
+}
+.surface [data-evidence-type-limit] {
+  border-top: 1px solid var(--df-reader-seam);
+  padding-top: 9px;
+}
+.surface .reading .example {
+  border-top: 1px solid var(--df-reader-seam);
+}
+.surface .principle {
+  text-wrap: pretty;
+  font-style: normal;
+}
+@media (forced-colors: active) {
+  .surface .chapterOrdinal,
+  .surface .figureOrdinal,
+  .surface .figureCaptionHeading,
+  .surface .figureCaptionNote {
+    color: CanvasText;
+  }
+  .surface .chapterOrdinal::after {
+    background: CanvasText;
+  }
+  .surface :is([data-example-limit],[data-deployment-limit],[data-stewardship-limit],
+    [data-lineage-limit],[data-status-illustrative],[data-evidence-type-limit]),
+  .surface .reading .example {
+    border-color: CanvasText;
+  }
+}

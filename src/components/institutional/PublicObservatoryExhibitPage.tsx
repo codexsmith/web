@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { ReaderScientificFigure, demonstrationFigureByTitle } from "./ReaderScientificFigure";
+import { ReaderChapter } from "./ReaderChapter";
 import { DoctrineLinksSection, InstrumentCollectionLink } from "./DoctrineFrontDoor";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
@@ -18,9 +19,9 @@ export function PublicObservatoryExhibitPage({ slug }: { slug: Exhibit["slug"] }
           <p className={styles.tagline}>{exhibit.tagline}</p><p className={styles.lead}>{exhibit.lead}</p><p className={styles.support}>{exhibit.support}</p>
         </section>
         <section className={styles.section} data-exhibit-body>
-          <div className={styles.reading}><div>{exhibit.sections.map(item => {
+          <div className={styles.reading}><div>{exhibit.sections.map((item, index) => {
             const figureKind = slug === "observatory/demonstrations" ? demonstrationFigureByTitle[item.title] : undefined;
-            return <article key={item.title}><h2>{item.title}</h2><p>{item.body}</p>{figureKind && <ReaderScientificFigure kind={figureKind} />}</article>;
+            return <ReaderChapter key={item.title} number={index + 1} title={item.title} body={item.body}>{figureKind && <ReaderScientificFigure kind={figureKind} number={index + 1} />}</ReaderChapter>;
           })}</div><aside className={styles.example} data-exhibit-limit><p className={styles.eyebrow}>Scope and limitations</p><h2>What this establishes.</h2><p>{exhibit.limit}</p></aside></div>
         </section>
         <section className={styles.section} data-exhibit-comparison><h2>{exhibit.keyHeading}</h2><div className={styles.pathGrid}>{exhibit.cards.map(item => <article className={styles.pathCard} key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>

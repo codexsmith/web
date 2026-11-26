@@ -2,6 +2,7 @@
 // This is not a certification score. Test actual reader state rather than visual resemblance.
 import assert from "node:assert/strict";
 import path from "node:path";
+import { doctrineFrontDoor } from "../../src/components/institutional/content/doctrineFrontDoor.ts";
 
 const focusWitness = async locator => locator.evaluate(element => {
   const style = getComputedStyle(element);
@@ -197,6 +198,58 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         await capture("masthead-" + kind, hero);
       }
     });
+    await scenario("editorial chapter sequence and caption identity", async (_checkFocus, capture) => {
+      // Chapter ordinals are presentation-local. Check the canonical editorial
+      // text, not just the presence or sequentiality of the decoration.
+      const samples = [
+        ["/consequential-systems", doctrineFrontDoor.doctrines.find(item => item.slug === "consequential-systems").sections],
+        ["/ai-governance", doctrineFrontDoor.doctrines.find(item => item.slug === "ai-governance").sections],
+        ["/constructive-human-agency", doctrineFrontDoor.doctrines.find(item => item.slug === "constructive-human-agency").sections],
+        ["/digital-native-institution", doctrineFrontDoor.digitalNativeInstitution.sections],
+        ["/work-with-us/paper-auditing", doctrineFrontDoor.engagementGuides.find(item => item.slug === "work-with-us/paper-auditing").sections],
+        ["/observatory/demonstrations", doctrineFrontDoor.observatoryExhibits.find(item => item.slug === "observatory/demonstrations").sections],
+      ];
+      const normalize = text => text.trim().replace(/\s+/g, " ");
+      for (const [route, sections] of samples) {
+        await open(page, base, route);
+        const chapters = page.locator("main [data-reader-chapter]");
+        const witnesses = await chapters.evaluateAll(nodes => nodes.map(node => {
+          const marker = node.querySelector("[data-reader-chapter-ordinal]");
+          const rect = marker?.getBoundingClientRect();
+          return {
+            number: Number(node.getAttribute("data-reader-chapter")),
+            ordinal: marker?.textContent.trim(),
+            redundant: marker?.getAttribute("aria-hidden") === "true",
+            visible: !!rect && rect.width > 0 && rect.height > 0,
+            title: node.querySelector(":scope > h2")?.textContent.trim(),
+            body: node.querySelector(":scope > p")?.textContent.trim(),
+          };
+        }));
+        assert.equal(witnesses.length, sections.length);
+        for (const [index, witness] of witnesses.entries()) {
+          assert.equal(witness.number, index + 1);
+          assert.equal(witness.ordinal, String(index + 1).padStart(2, "0"));
+          assert.ok(witness.redundant && witness.visible, "chapter ordinals must be visible but redundant");
+          assert.equal(normalize(witness.title), normalize(sections[index].title), "chapter heading identity must survive editorial numbering");
+          assert.equal(normalize(witness.body), normalize(sections[index].body), "chapter body must remain unchanged");
+        }
+        await fit(page);
+        if (route === "/consequential-systems") await capture("editorial-chapters", chapters.first());
+        if (route === "/observatory/demonstrations") {
+          const figures = page.locator("main [data-reader-scientific-figure]");
+          const captions = await figures.evaluateAll(nodes => nodes.map(node => ({
+            number: Number(node.getAttribute("data-reader-figure-number")),
+            caption: node.querySelector("figcaption")?.textContent.replace(/\s+/g, " ").trim(),
+          })));
+          assert.deepEqual(captions.map(item => item.number), [1,2,3]);
+          for (const [index, item] of captions.entries()) {
+            assert.ok(item.caption.startsWith("Figure " + String(index + 1).padStart(2, "0")),
+              "scientific figure caption must preserve page-local numbering");
+          }
+          await capture("editorial-caption", figures.first());
+        }
+      }
+    });
     await scenario("scientific illustration fidelity and accessible projection", async (_checkFocus, capture) => {
       await open(page, base, "/observatory/demonstrations");
       const figures = page.locator("main [data-reader-scientific-figure]");
@@ -254,6 +307,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.equal(await overview.count(), 1);
       assert.ok(await overview.isVisible());
       assert.equal(await overview.locator('[data-figure-observation="Complete"]').count(), 1);
+      assert.equal(await overview.getAttribute("data-reader-figure-number"), "1", "reused figure numbering belongs to the local reader");
       await fit(page);
     });
     await scenario("bounded reader density and preserved engagement paths", async (checkFocus, capture) => {

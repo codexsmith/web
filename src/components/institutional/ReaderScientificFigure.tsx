@@ -39,10 +39,10 @@ export const demonstrationFigureByTitle: Readonly<Partial<Record<string, Scienti
   "Institutions: process completion is not outcome completion": "outcome",
 };
 
-export function ReaderScientificFigure({ kind }: { kind: ScientificFigureKind }) {
+export function ReaderScientificFigure({ kind, number }: { kind: ScientificFigureKind; number: number }) {
   const copy = descriptions[kind];
   return (
-    <figure className={styles.scientificFigure} data-reader-scientific-figure={kind}>
+    <figure className={styles.scientificFigure} data-reader-scientific-figure={kind} data-reader-figure-number={number}>
       <svg viewBox="0 0 320 158" role="img" aria-label={copy.description} focusable="false">
         <title>{copy.title}</title>
         {kind === "geometry" && (
@@ -100,7 +100,13 @@ export function ReaderScientificFigure({ kind }: { kind: ScientificFigureKind })
           </>
         )}
       </svg>
-      <figcaption>{copy.caption}</figcaption>
+      <figcaption>
+        <span className={styles.figureCaptionHeading}>
+          <span className={styles.figureOrdinal}>Figure {String(number).padStart(2, "0")}</span>
+          <strong>{copy.title}</strong>
+        </span>
+        <span className={styles.figureCaptionNote}>{copy.caption}</span>
+      </figcaption>
     </figure>
   );
 }
