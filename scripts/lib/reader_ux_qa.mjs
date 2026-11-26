@@ -549,16 +549,19 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
               shadow:css.boxShadow, links:links.map(a=>({href:a.getAttribute("href"),height:a.getBoundingClientRect().height}))};
           });
           const strip = ["reference","directory","comparison","sequence"].includes(role);
+          const peer = ["pathways","cases","parallel"].includes(role);
           return {
             role:node.getAttribute("data-reader-collection"), display:style.display,
             columns:style.gridTemplateColumns.split(/\s+/).filter(Boolean).length,
             count:rects.length, bounded:rects.every(r=>r.width>0&&r.height>0&&r.x>=frame.left-1&&r.right<=frame.right+1&&r.y>=frame.top-1&&r.bottom<=frame.bottom+1),
-            strips:!strip||rects.every(r=>r.borderTop===0&&r.borderLeft===0&&r.borderRight===0&&r.borderBottom>=1&&r.shadow==="none"),
+            strips:!strip||(parseFloat(style.borderTopWidth)>=1&&rects.every(r=>r.borderTop===0&&r.borderLeft===0&&r.borderRight===0&&r.borderBottom>=1&&r.shadow==="none")),
+            peerBoundaries:!peer||rects.every(r=>[r.borderTop,r.borderBottom,r.borderLeft,r.borderRight].every(width=>width>=1)),
+            memberMaterial:rects.map(({borderTop,borderBottom,borderLeft,borderRight,shadow})=>({borderTop,borderBottom,borderLeft,borderRight,shadow})),
             ordered:!strip||rects.every((r,i)=>i===0||r.y>=rects[i-1].bottom-1),
             targets:rects.flatMap(r=>r.links),
           };
         }, role);
-        assert.ok(witness.role===role&&witness.count===expected&&witness.display==="grid"&&witness.bounded&&witness.strips&&witness.ordered,
+        assert.ok(witness.role===role&&witness.count===expected&&witness.display==="grid"&&witness.bounded&&witness.strips&&witness.ordered&&witness.peerBoundaries,
           "collection role determines containment and row/peer structure: "+JSON.stringify(witness));
         assert.ok(witness.targets.every(t=>t.height>=24),"collection actions retain visible usable targets");
         return witness;
@@ -581,6 +584,12 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       await capture("collection-reference-directory",directions);
       await fit(page);
       await open(page,base,"/work-with-us");
+      const workPathModel=doctrineFrontDoor.audiencePaths["work-with-us"].cards;
+      const workPathways=page.locator('[data-audience-paths="work-with-us"] [data-reader-collection="pathways"]');
+      const peerChoices=await checkCollection(workPathways,"pathways",workPathModel.length);
+      assert.deepEqual(peerChoices.targets.map(t=>t.href),workPathModel.flatMap(x=>x.links.map(l=>l.href)),
+        "narrow pathways retain independent peer boundaries and explicit destinations");
+      await capture("collection-work-pathways",workPathways.locator("article").first());
       for(const group of doctrineFrontDoor.workWithUs.groups){
         const directory=page.locator(`[data-work-group="${group.id}"] [data-reader-collection="directory"]`);
         const observed=await checkCollection(directory,"directory",group.cards.length);
@@ -592,6 +601,10 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         })));
         assert.deepEqual(rows,group.cards.map(x=>({title:x.title,status:x.status,body:x.body})));
       }
+      const know=page.locator('[data-work-section="know"] [data-reader-collection="directory"]');
+      const contextDirectory=await checkCollection(know,"directory",doctrineFrontDoor.workWithUs.know.cards.length);
+      assert.deepEqual(contextDirectory.targets.map(t=>t.href),doctrineFrontDoor.workWithUs.know.cards.map(x=>x.href),
+        "institutional background uses the same directory grammar");
       const engagement=page.locator("[data-engagement-detail]");
       await key(engagement.locator("summary"),"Enter");
       const sequence=engagement.locator('[data-reader-collection="sequence"]');
