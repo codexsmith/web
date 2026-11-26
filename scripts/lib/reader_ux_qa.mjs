@@ -76,6 +76,29 @@ async function checkNameplateContrast(locator) {
     witness.checks.length > 0 && witness.checks.every(item => item.ratio >= 4.5),
     "nameplate text contrast must preserve reading and system-color choice: " + JSON.stringify(witness));
 }
+// Frame selected editorial evidence beneath the actual sticky rail, without
+// clearing focus, changing styles, or pretending an oversized region fits.
+async function frameReviewStart(locator) {
+  await locator.scrollIntoViewIfNeeded();
+  return locator.evaluate(async element => {
+    const settle = () => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const railBottom = () => Math.max(0, document.querySelector("header[data-header-compact]")?.getBoundingClientRect().bottom ?? 0);
+    const active = document.activeElement;
+    // The header itself may recompose after the initial scroll.
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const delta = element.getBoundingClientRect().top - railBottom() - 12;
+      if (Math.abs(delta) <= 1) break;
+      window.scrollBy({top: delta, behavior: "instant"});
+      await settle();
+    }
+    const rect = element.getBoundingClientRect(), rail = railBottom();
+    return {
+      top: rect.top, railBottom: rail, height: rect.height,
+      visible: Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, rail)),
+      focusPreserved: active === document.activeElement,
+    };
+  });
+}
 export async function verifyReaderUx(browser, base, mode, reviewDir) {
   const results = [];
   const context = await browser.newContext({
@@ -87,6 +110,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
     const issues = [];
     const focusSamples = [];
     const captures = [];
+    const captureFrames = [];
     // A missing focus ring remains a blocking issue, but must not prevent the
     // remaining model transitions and privacy obligations from being exercised.
     const checkFocus = async (locator, name) => {
@@ -97,16 +121,23 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         issues.push(name + ": focus obligation failed: " + JSON.stringify(sample));
       }
     };
-    const capture = async (name, locator) => {
+    const capture = async (name, locator, {frameStart = false} = {}) => {
       if (!reviewDir) return;
-      if (locator) await locator.scrollIntoViewIfNeeded();
+      if (locator && frameStart) {
+        const frame = await frameReviewStart(locator);
+        captureFrames.push({name, ...frame});
+        if (!frame.focusPreserved || frame.top < frame.railBottom - 1 ||
+          frame.visible < Math.min(frame.height, 80) - 1) {
+          issues.push("editorial capture must expose the region start below the sticky rail without moving focus: " + JSON.stringify({name, ...frame}));
+        }
+      } else if (locator) await locator.scrollIntoViewIfNeeded();
       const file = modeSlug + "--" + name + ".png";
       await page.screenshot({path: path.join(reviewDir, file), fullPage: false, animations: "disabled"});
       captures.push(file);
     };
     try { await run(checkFocus, capture); }
     catch (error) { issues.push(String(error)); }
-    results.push({name: "BFUX reader: " + label + " @ " + mode.name, issues, focusSamples, captures});
+    results.push({name: "BFUX reader: " + label + " @ " + mode.name, issues, focusSamples, captures, captureFrames});
   }
   try {
     await scenario("orientation and reversible reader disclosure", async (checkFocus, capture) => {
@@ -589,7 +620,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       const peerChoices=await checkCollection(workPathways,"pathways",workPathModel.length);
       assert.deepEqual(peerChoices.targets.map(t=>t.href),workPathModel.flatMap(x=>x.links.map(l=>l.href)),
         "narrow pathways retain independent peer boundaries and explicit destinations");
-      await capture("collection-work-pathways",workPathways.locator("article").first());
+      await capture("collection-work-pathways",workPathways.locator("article").first(), {frameStart:true});
       for(const group of doctrineFrontDoor.workWithUs.groups){
         const directory=page.locator(`[data-work-group="${group.id}"] [data-reader-collection="directory"]`);
         const observed=await checkCollection(directory,"directory",group.cards.length);
@@ -610,7 +641,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       const sequence=engagement.locator('[data-reader-collection="sequence"]');
       await checkCollection(sequence,"sequence",4);
       assert.deepEqual(await sequence.locator("li h3").allTextContents(),doctrineFrontDoor.workWithUs.engagement.steps.map(x=>x.title));
-      await capture("collection-work-directory",page.locator('[data-work-group="commission"] [data-reader-collection="directory"]'));
+      await capture("collection-work-directory",page.locator('[data-work-group="commission"]'), {frameStart:true});
       await fit(page);
       await open(page,base,"/evidence-and-trust");
       const detail=page.locator('[data-trust-detail="evidence"]');
@@ -684,7 +715,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.equal(await release.locator(":scope > p").textContent(), model.releaseNote);
       assert.ok(await demo.locator(":scope > p").last().isVisible() &&
         await release.locator(":scope > p").isVisible(), "editorial compression must not erase local claim boundaries");
-      await capture("editorial-economy-observatory-gallery", gallery.locator("h2"));
+      await capture("editorial-economy-observatory-gallery", gallery, {frameStart:true});
       await fit(page);
       for (const entry of entries) {
         await open(page, base, "/" + entry.slug);
@@ -696,7 +727,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
           "standalone exhibit retains full context and claim boundary");
       }
     });
-    await scenario("primary reader editorial economy and engagement choice", async (_checkFocus, capture) => {
+    await scenario("primary reader editorial economy and engagement choice", async (checkFocus, capture) => {
       const model = doctrineFrontDoor;
       await open(page, base, "/");
       const home = page.locator("[data-institutional-hero]");
@@ -715,7 +746,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         "gateway classifications, descriptions and actions remain distinct and addressable");
       assert.equal(new Set(entries.map(e=>e.kicker)).size, 3);
       assert.equal(await page.locator('[aria-labelledby="maintenance-title"] [data-reader-heading-meta]').count(),0);
-      await capture("editorial-home-gateways", gateways);
+      await capture("editorial-home-gateways", page.locator("[data-home-entry-paths]"), {frameStart:true});
       await fit(page);
 
       await open(page, base, "/codexware");
@@ -737,7 +768,39 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.ok(await commitments.locator("[data-deployment-limit]").isVisible());
       assert.deepEqual(await commitments.locator("article p").allTextContents(), c.commitments.items.map(x=>x.body),
         "editorial economy preserves Codexware authorization, execution and assurance limits");
-      await capture("editorial-codexware-status", status);
+      const design = page.locator('details[data-reader-detail="codexware-design"]');
+      const summary = design.locator("summary");
+      const chapters = design.locator("[data-reader-chapter]");
+      const authored = c.sections.map(s=>({title:s.title,body:s.body}));
+      const readChapters = () => chapters.evaluateAll(nodes=>nodes.map(n=>({
+        title:n.querySelector("h2").textContent,body:n.querySelector("p").textContent,
+      })));
+      const disclosureGeometry = () => design.evaluate(node => {
+        const box = node.getBoundingClientRect(), summary = node.querySelector("summary").getBoundingClientRect();
+        const style = getComputedStyle(node);
+        const frame = parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth) +
+          parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+        return {open:node.open,height:box.height,summaryHeight:summary.height,surplus:box.height-summary.height-frame};
+      });
+      const collapsed = await disclosureGeometry();
+      assert.ok(!collapsed.open && collapsed.summaryHeight >= 24 && Math.abs(collapsed.surplus) <= 2,
+        "closed disclosure height belongs to its own summary, not an adjacent panel: " + JSON.stringify(collapsed));
+      assert.deepEqual(await readChapters(), authored);
+      assert.equal(await design.locator("[data-reader-chapter]:visible").count(),0);
+      await capture("editorial-codexware-status", status.locator(".."), {frameStart:true});
+      await key(summary, "Enter");
+      const expanded = await disclosureGeometry();
+      assert.ok(expanded.open && expanded.height > collapsed.height);
+      assert.equal(await design.locator("[data-reader-chapter]:visible").count(),authored.length);
+      assert.deepEqual(await readChapters(),authored);
+      await checkFocus(summary,"Codexware application design disclosure");
+      await capture("codexware-design-expanded",summary,{frameStart:true});
+      await key(summary, "Space");
+      const restored = await disclosureGeometry();
+      assert.ok(!restored.open && Math.abs(restored.height-collapsed.height)<=1,
+        "closing the disclosure must recover its original compact geometry");
+      assert.deepEqual(await readChapters(),authored);
+      assert.equal(await status.locator("p").textContent(),c.status);
       await fit(page);
 
       await open(page, base, "/work-with-us");
@@ -757,7 +820,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       assert.ok((await contact.textContent()).includes(work.contact.privacy));
       assert.ok(await contact.locator('a[href="/contact"]').isVisible() && await contact.locator('a[href^="mailto:"]').isVisible(),
         "editorial economy preserves direct contact and initial inquiry privacy");
-      await capture("editorial-work-choices",page.locator('[data-work-group="commission"]'));
+      await capture("editorial-work-choices",page.locator('[data-work-group="commission"]'), {frameStart:true});
       await fit(page);
     });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {

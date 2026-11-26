@@ -236,6 +236,12 @@
   border-color: var(--df-reader-edge);
   box-shadow: inset 0 1px 0 #fff, 0 2px 3px rgba(7,26,61,.07);
 }
+/* A disclosure owns its height; the neighboring reading column cannot
+ * make a closed control look like an empty content panel. */
+.surface .reading > .readerDetails {
+  align-self: start;
+  margin-block-start: 0;
+}
 .surface .readerDetails > summary {
   color: var(--df-deep);
 }
