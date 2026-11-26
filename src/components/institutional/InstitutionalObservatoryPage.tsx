@@ -23,33 +23,33 @@ export function InstitutionalObservatoryPage() {
           <AudiencePathways context="observatory" />
           <div data-observatory-exhibit="public">
             <section className={styles.section} data-observatory-gallery>
-              <h2>Four ways to understand the work.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Explore the exhibits</p></div>
-              <div className={styles.pathGrid} data-reader-collection="directory">{doctrineFrontDoor.observatoryExhibits.map(item => <article className={styles.pathCard} key={item.slug} data-exhibit-card={item.slug}><div data-reader-path-identity><h3>{item.name}</h3><p className={styles.workStatus}>{item.eyebrow}</p></div><div data-reader-path-content><p>{item.tagline}</p><Link className={styles.textLink} href={`/${item.slug}`} aria-label={`Explore exhibit: ${item.name}`}>Explore exhibit <span aria-hidden="true">→</span></Link></div></article>)}</div>
+              <h2>Four research exhibits</h2>
+              <div className={styles.pathGrid} data-reader-collection="directory">{doctrineFrontDoor.observatoryExhibits.map(item => <article className={styles.pathCard} key={item.slug} data-exhibit-card={item.slug}><div data-reader-path-identity><h3>{item.name}</h3><p className={styles.workStatus} data-exhibit-directory-label>{item.directoryLabel}</p></div><div data-reader-path-content><p>{item.tagline}</p><Link className={styles.textLink} href={`/${item.slug}`} aria-label={`Explore exhibit: ${item.name}`}>Explore exhibit <span aria-hidden="true">→</span></Link></div></article>)}</div>
             </section>
             <section className={styles.section} data-observatory-section="foundations">
               <h2>{exhibit.foundationsHeading}</h2>
-              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Intellectual foundations</p><p className={styles.sectionIntro}>{exhibit.foundationsIntro}</p></div>
-              <details className={styles.readerDetails} data-reader-detail="foundations"><summary>Read the five intellectual foundations</summary><div className={styles.pathGrid} data-reader-collection="reference">{exhibit.foundations.map(item => <article className={styles.pathCard} key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></details>
+              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{exhibit.foundationsIntro}</p></div>
+              <details className={styles.readerDetails} data-reader-detail="foundations"><summary>Read the five foundations</summary><div className={styles.pathGrid} data-reader-collection="reference">{exhibit.foundations.map(item => <article className={styles.pathCard} key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></details>
             </section>
             <section className={styles.section} data-observatory-section="architecture">
               <h2>{exhibit.architectureHeading}</h2>
-              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Functional architecture</p><p className={styles.sectionIntro}>{exhibit.architectureIntro}</p></div>
+              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{exhibit.architectureIntro}</p></div>
               <details className={styles.readerDetails} data-reader-detail="architecture"><summary>Read the five functional layers</summary><ol className={styles.exhibitLayers} data-reader-collection="sequence">{exhibit.architecture.map((item, index) => <li key={item.title}><span className={styles.num}>0{index + 1}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}</ol></details>
               <p className={styles.smallPrint}>{exhibit.architectureNote}</p>
             </section>
             <section className={styles.section} data-observatory-section="research">
               <h2>{exhibit.researchHeading}</h2>
-              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Research directions</p><p className={styles.sectionIntro}>{exhibit.researchIntro}</p></div>
+              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{exhibit.researchIntro}</p></div>
               <div className={styles.pathGrid} data-reader-collection="reference">{exhibit.research.map(item => <article className={styles.pathCard} key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
             </section>
             <section className={styles.section} data-observatory-section="method">
               <h2>{exhibit.methodHeading}</h2>
-              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Research practice</p><p className={styles.sectionIntro}>{exhibit.methodIntro}</p></div>
+              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{exhibit.methodIntro}</p></div>
               <details className={styles.readerDetails} data-reader-detail="method"><summary>Read the four research steps</summary><ol className={styles.workSteps} data-reader-collection="sequence">{exhibit.method.map((item, index) => <li key={item.title}><span className={styles.num}>0{index + 1}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></li>)}</ol></details>
             </section>
             <section className={styles.section} data-observatory-section="evidence">
               <h2>{exhibit.evidenceHeading}</h2>
-              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Evidence and claim status</p><p className={styles.sectionIntro}>{exhibit.evidenceIntro}</p></div>
+              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{exhibit.evidenceIntro}</p></div>
               <details className={styles.readerDetails} data-reader-detail="evidence"><summary>Read the seven status definitions</summary><div className={styles.pathGrid} data-reader-collection="reference">{exhibit.evidence.map(item => <article className={styles.pathCard} key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></details>
             </section>
             <section className={styles.section} data-observatory-section="demonstration">
@@ -61,7 +61,7 @@ export function InstitutionalObservatoryPage() {
             </section>
             <section className={styles.section} data-observatory-section="release">
               <h2>{exhibit.releaseHeading}</h2>
-              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Public exhibits and release boundary</p><p className={styles.sectionIntro}>{exhibit.releaseBody}</p></div><p className={styles.smallPrint}>{exhibit.releaseNote}</p>
+              <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{exhibit.releaseBody}</p></div><p className={styles.smallPrint}>{exhibit.releaseNote}</p>
               <nav className={styles.links} aria-label="Explore the public institution">{exhibit.links.map(item => <Link className={styles.textLink} key={item.href} href={item.href}>{item.label} <span aria-hidden="true">→</span></Link>)}</nav>
             </section>
           </div>
