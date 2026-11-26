@@ -1281,3 +1281,49 @@
     border-inline-start-color: CanvasText;
   }
 }
+
+
+/* Observatory regional containment: the section, not each of its children,
+ * owns the outer reading boundary. Preserve the established text measure by
+ * spending part of the existing page gutter on the frame and its inset. */
+.surface [data-observatory-reader] {
+  --observatory-region-inset: clamp(10px, 2vw, 24px);
+}
+.surface [data-observatory-reader] > [data-observatory-exhibit] {
+  display: flow-root;
+}
+.surface [data-observatory-reader] > section:not([data-institutional-hero]),
+.surface [data-observatory-reader] > [data-observatory-exhibit] > section {
+  display: flow-root;
+  min-width: 0;
+  margin-block: var(--df-space-related) 0;
+  margin-inline: calc(-1 * var(--observatory-region-inset));
+  padding-block: var(--df-space-section) clamp(16px, 2vw, 24px);
+  padding-inline: calc(var(--observatory-region-inset) - 2px);
+  border: 1px solid var(--df-reader-edge);
+  border-block-start: 2px solid var(--df-accent);
+  border-inline-start: 2px solid var(--df-accent);
+  background: var(--df-white);
+}
+.surface [data-observatory-reader] > section[data-doctrine-links] {
+  margin-block-end: var(--df-space-related);
+}
+/* A compact reader must retain the current section's name, not only its
+ * ordinal. The enclosing nav retains the "On this page" accessible name. */
+@media (max-width: 820px) {
+  .surface [data-observatory-reader] .sectionNav [data-section-nav-prompt] {
+    display: none;
+  }
+  .surface [data-observatory-reader] .sectionNavCurrent {
+    display: block;
+    flex: 1 1 auto;
+    font-weight: 700;
+  }
+}
+@media (forced-colors: active) {
+  .surface [data-observatory-reader] > section:not([data-institutional-hero]),
+  .surface [data-observatory-reader] > [data-observatory-exhibit] > section {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+}

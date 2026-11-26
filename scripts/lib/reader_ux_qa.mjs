@@ -830,6 +830,66 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       await capture("editorial-work-choices",page.locator('[data-work-group="commission"]'), {frameStart:true});
       await fit(page);
     });
+    await scenario("Observatory regional containment and mobile orientation", async (checkFocus, capture) => {
+      await open(page, base, "/observatory");
+      const reader = page.locator("[data-observatory-reader]");
+      const regions = reader.locator(":scope > section:not([data-institutional-hero]), :scope > [data-observatory-exhibit] > section");
+      const rail = reader.locator("[data-reader-section-nav]");
+      const destinations = await rail.locator("a[href^='#']").evaluateAll(nodes => nodes.map(node => node.getAttribute("href").slice(1)));
+      assert.equal(await regions.count(), destinations.length);
+      const sample = () => regions.evaluateAll(nodes => nodes.map(node => {
+        const box = node.getBoundingClientRect(), style = getComputedStyle(node);
+        const heading = node.querySelector(":scope > h2");
+        const children = Array.from(node.children).filter(child => child.getBoundingClientRect().height > 0);
+        const content = children.map(child => child.getBoundingClientRect());
+        return {
+          id:heading?.id, title:heading?.textContent.trim(),
+          top:box.top,bottom:box.bottom,left:box.left,right:box.right,
+          border:[style.borderTopWidth,style.borderRightWidth,style.borderBottomWidth,style.borderLeftWidth].map(parseFloat),
+          styles:[style.borderTopStyle,style.borderRightStyle,style.borderBottomStyle,style.borderLeftStyle],
+          background:style.backgroundColor, parentColor:style.borderTopColor,
+          contains:content.every(rect=>rect.left>=box.left+7 && rect.right<=box.right-7 && rect.top>=box.top && rect.bottom<=box.bottom),
+          childKinds:Array.from(node.querySelectorAll("[data-reader-collection]")).map(el=>el.getAttribute("data-reader-collection")),
+        };
+      }));
+      const verify = async () => {
+        const rows = await sample();
+        assert.deepEqual(rows.map(row=>row.id), destinations, "every contextual destination owns exactly one complete section region");
+        for (let i=0;i<rows.length;i++) {
+          const row=rows[i], prior=rows[i-1];
+          assert.ok(row.title && row.contains && row.border.every(width=>width>=1) &&
+            row.border[0]>=2 && row.border[3]>=2 && row.styles.every(style=>style==="solid") &&
+            row.background!=="rgba(0, 0, 0, 0)" && row.left>=0 &&
+            (!prior || (row.top-prior.bottom>=10 && Math.abs(row.left-prior.left)<=1 && Math.abs(row.right-prior.right)<=1)),
+            "section-level containment must remain continuous and stronger than internal collection seams: " + JSON.stringify({row,prior}));
+        }
+        assert.deepEqual(rows.find(row=>row.id==="reader-exhibits")?.childKinds,["directory"]);
+        assert.deepEqual(rows.find(row=>row.id==="reader-research")?.childKinds,["reference"]);
+        assert.deepEqual(rows.find(row=>row.id==="reader-architecture")?.childKinds,["sequence"]);
+        assert.deepEqual(rows.find(row=>row.id==="reader-demonstration")?.childKinds,["cases"]);
+        return rows;
+      };
+      await verify();
+      const foundation=reader.locator('[data-observatory-section="foundations"]');
+      const architecture=reader.locator('[data-observatory-section="architecture"]');
+      const evidence=reader.locator('[data-observatory-section="evidence"]');
+      const demo=reader.locator('[data-observatory-section="demonstration"]');
+      await capture("observatory-region-foundations",foundation,{frameStart:true});
+      const disclosure=architecture.locator("details");
+      const summary=disclosure.locator("summary");
+      await key(summary,"Enter");
+      await page.waitForFunction(()=>document.querySelector('[data-reader-detail="architecture"]')?.open===true);
+      await checkFocus(summary,"Observatory architecture disclosure");
+      await verify();
+      await capture("observatory-region-architecture-expanded",architecture,{frameStart:true});
+      await key(summary,"Space");
+      await page.waitForFunction(()=>document.querySelector('[data-reader-detail="architecture"]')?.open===false);
+      await verify();
+      await capture("observatory-region-evidence",evidence,{frameStart:true});
+      await capture("observatory-region-demonstration",demo,{frameStart:true});
+      await capture("observatory-region-release",reader.locator('[data-observatory-section="release"]'),{frameStart:true});
+      await fit(page);
+    });
     await scenario("compact sticky section navigation and local identity", async (checkFocus, capture) => {
       for (const route of ["/", "/contact"]) {
         await open(page, base, route);
@@ -893,6 +953,12 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
             "settled fragment identity must survive header compaction and evidence capture: " + JSON.stringify(witness));
         };
         await verifySettledLocation();
+        if (route === "/observatory") {
+          assert.ok(await rail.locator("[data-section-nav-label]").isVisible(),
+            "Observatory current section name must remain visible at narrow widths");
+          assert.ok((await summary.boundingBox()).height <= 56,
+            "visible section identity must fit the compact rail");
+        }
         // Already aligned: do not re-scroll a correctly framed section for evidence.
         await capture("section-nav-" + route.replace(/[^a-z0-9]+/g,"-"));
         await verifySettledLocation();
