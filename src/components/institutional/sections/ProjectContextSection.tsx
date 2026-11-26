@@ -88,7 +88,7 @@ export function ProjectContextSection() {
           styles={styles}
           eyebrow={<>HOW TO READ A PROJECT</>}
           title={<>A project should show more than a polished outcome.</>}
-          note={<>These sections explain how the Lab separates a project's domain, result, status, evidence, responsibility, and handoff.</>}
+          note={<>These sections explain how the Lab separates a project&apos;s domain, result, status, evidence, responsibility, and handoff.</>}
         />
 
         <ReflowField

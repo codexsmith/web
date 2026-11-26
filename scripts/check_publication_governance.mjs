@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import assert from "node:assert/strict";
-import { institutionalPublicationEntries, curatedReaderRoutes, institutionalDiscoveryRoutes } from "../src/lib/site-publication.ts";
+import { institutionalPublicationEntries, curatedReaderRoutes, institutionalDiscoveryRoutes, supportingPublicationEntries } from "../src/lib/site-publication.ts";
 
 const read = (path) => fs.readFileSync(path, "utf8");
 const expectedInstitutional = [
@@ -35,9 +35,28 @@ assert.equal(paths.length, new Set(paths).size, "Publication routes must be uniq
 for (const entry of institutionalPublicationEntries) {
   assert.ok(entry.label.trim() && entry.href.startsWith("/"), "Each editorial admission must name a canonical public route");
   assert.ok(["institutional", "supporting"].includes(entry.tier), "Unrecognized discovery tier");
+  assert.ok(entry.purpose.trim().length > 20, "Every reader must have a specific editorial purpose: " + entry.href);
+  if (entry.tier === "institutional") assert.ok(!("parent" in entry), "Institutional readers do not inherit identity from a supporting product");
 }
 compare(institutionalPublicationEntries.filter(entry => entry.tier === "institutional").map(entry => entry.href), expectedInstitutional, "Explicit institutional identity scope");
 compare(institutionalPublicationEntries.filter(entry => entry.tier === "supporting").map(entry => entry.href), expectedSupporting, "Explicit supporting-reader scope");
+const expectedOwners = {
+  "/codexware/economic-maintenance": "/codexware",
+  "/codexware/civic-record": "/codexware",
+  "/observatory/intellectual-lineage": "/observatory",
+  "/observatory/research-architecture": "/observatory",
+  "/observatory/computational-inquiry": "/observatory",
+  "/observatory/demonstrations": "/observatory",
+  "/observatory/instruments": "/observatory",
+  "/work-with-us/professional-services": "/work-with-us",
+  "/work-with-us/paper-auditing": "/work-with-us",
+  "/work-with-us/public-service": "/work-with-us",
+  "/work-with-us/funding": "/work-with-us"
+};
+assert.deepEqual(Object.fromEntries(supportingPublicationEntries.map(entry => [entry.href, entry.parent])), expectedOwners, "Every supporting reader must have an explicitly approved institutional parent");
+for (const entry of supportingPublicationEntries) {
+  assert.ok(expectedInstitutional.includes(entry.parent) && entry.href.startsWith(entry.parent + "/"), "Supporting reader must belong to its canonical parent: " + entry.href);
+}
 assert.deepEqual(curatedReaderRoutes.map(entry => entry.href), paths, "Reader search must share the discovery policy");
 assert.deepEqual(institutionalDiscoveryRoutes, paths, "Sitemap discovery must share the discovery policy");
 const release = read("src/lib/site-release.ts");

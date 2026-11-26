@@ -3,7 +3,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { doctrineNavigationIssues, verifyDoctrineTraversals } from "./lib/doctrine_navigation_qa.mjs";
-import { institutionalPublicationEntries, institutionalDiscoveryRoutes } from "../src/lib/site-publication.ts";
+import { institutionalPublicationEntries, institutionalDiscoveryRoutes, supportingPublicationEntries } from "../src/lib/site-publication.ts";
 
 const harnessModule = process.env.V3_RELEASE_QA_PLAYWRIGHT_MODULE;
 const { chromium } = await import(harnessModule ? pathToFileURL(harnessModule).href : "playwright");
@@ -386,6 +386,29 @@ async function visit(browser, config) {
     const directives = await page.locator('meta[name="robots"], meta[name="googlebot"]').evaluateAll(nodes => nodes.map(node => node.getAttribute("content") ?? ""));
     if (directives.some(value => /\bnoindex\b/i.test(value))) issues.push("curated route carries an unexpected noindex meta directive");
   }
+  // Editorial ownership must be realized by navigable links in main content,
+  // not merely a sitemap entry or the shared footer/header.
+  let contextualLinks = [];
+  if (publicationTier !== "reference") {
+    contextualLinks = await page.locator("main a[href]").evaluateAll(anchors =>
+      [...new Set(anchors.filter(anchor => anchor.getClientRects().length > 0)
+        .map(anchor => new URL(anchor.href, document.baseURI))
+        .filter(url => url.origin === window.location.origin)
+        .map(url => url.pathname))]
+    );
+    const supportingEntry = supportingPublicationEntries.find(entry => entry.href === config.route);
+    if (supportingEntry && !contextualLinks.includes(supportingEntry.parent)) {
+      issues.push("supporting reader lacks a visible contextual return to " + supportingEntry.parent);
+    }
+    for (const entry of supportingPublicationEntries.filter(entry => entry.parent === config.route)) {
+      if (!contextualLinks.includes(entry.href)) issues.push("institutional entry point lacks a visible path to " + entry.href);
+    }
+    if (config.route === "/") {
+      for (const route of contextualLinks) {
+        if (referenceRoutes.includes(route)) issues.push("homepage directly promotes retained reference route " + route);
+      }
+    }
+  }
   if (metrics.horizontalOverflow) {
     issues.push(
       `horizontal page overflow: document ${metrics.documentWidth}px / body ${metrics.bodyWidth}px > viewport ${metrics.viewport[0]}px`,
@@ -444,6 +467,7 @@ async function visit(browser, config) {
     responseStatus: response?.status() ?? null,
     publicationTier,
     robotsHeader,
+    contextualLinks,
     metrics,
     consoleErrors,
     pageErrors,

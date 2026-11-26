@@ -31,6 +31,7 @@ expect(qa.includes("__release-qa-missing__"), "v3 release QA must exercise the i
 expect(qa.includes("horizontalOverflow"), "v3 release QA must check horizontal overflow");
 expect(qa.includes("await checkPublicationDiscovery()") && qa.includes("sitemap.xml") && qa.includes("robots.txt") && qa.includes('["x-robots-tag"]'), "release QA must exercise live discovery policy and reference response headers");
 expect(workflow.includes('BFL_V3_INDEXABLE: "true"'), "release QA must exercise production indexing policy on the isolated build");
+expect(qa.includes('page.locator("main a[href]")') && qa.includes("supportingPublicationEntries") && qa.includes("supporting reader lacks a visible contextual return") && qa.includes("homepage directly promotes retained reference route"), "release QA must verify editorial parent/child traversal and homepage prominence");
 expect(qa.includes("doctrineNavigationIssues(page, config.route)"), "release QA must check the doctrine closing section in rendered pages");
 expect(qa.includes("verifyDoctrineTraversals(browser, base"), "release QA must traverse all twelve principal-page doctrine links");
 expect(qa.includes("clippedText"), "v3 release QA must check clipped text");

@@ -60,7 +60,7 @@ export const doctrineFrontDoor = {
         },
         {
           "title": "Constructive disruption",
-          "body": "We distinguish disrupting a functioning structure from challenging a defective representation of it. An institutional record is not necessarily the reality it describes; procedural compliance is not necessarily substantive correctness; administrative complexity is not necessarily necessary complexity. Where evidence exposes a mismatch, we seek to repair the conditions that produce it. The objective is greater institutional fidelity, accountability and viability, not destabilization. Collaboration over domination. Repair over unnecessary replacement."
+          "body": "We distinguish disrupting a functioning structure from challenging a defective representation of it. An institutional record is not necessarily the reality it describes; procedural compliance is not necessarily substantive correctness; administrative complexity is not necessarily necessary complexity. Where evidence exposes a mismatch, we seek to repair the conditions that produce it. The objective is greater institutional fidelity, accountability and viability, not destabilization. Collaboration by construction. Repair over unnecessary replacement."
         },
         {
           "title": "Distinguish necessity from inherited constraint.",
@@ -216,7 +216,7 @@ export const doctrineFrontDoor = {
       "slug": "constructive-human-agency",
       "number": "03",
       "name": "Constructive Human Agency",
-      "tagline": "Collaboration over domination.",
+      "tagline": "Collaboration by construction.",
       "summary": "Expand people’s practical capacity to know, choose, create, cooperate and participate in improving the world they inhabit.",
       "question": "What can people meaningfully understand, choose and do?",
       "lead": "The human being precedes the institutional role. People may be encountered as workers, customers, patients, citizens or users, but no such representation exhausts the person it represents.",
@@ -2332,7 +2332,7 @@ export const doctrineFrontDoor = {
     },
     "nextTitle": "A useful conversation, not an obligation.",
     "nextBody": "Explore without obligation. If you choose to write, we can discuss whether there is a useful, feasible relationship. Any work requires a separate agreement on scope, access, authority, responsibilities, deliverables, verification and terms. A first note is not a project, a pilot enrollment or a guarantee of a response.",
-    "closing": "Collaboration over domination."
+    "closing": "Collaboration by construction."
   },
   "trustCenter": {
     "slug": "evidence-and-trust",
