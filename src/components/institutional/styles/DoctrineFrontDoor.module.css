@@ -672,3 +672,188 @@
     border-color: CanvasText;
   }
 }
+
+
+/* Instrument craftsmanship: native input control, observed field, derived
+ * readout and fixed scope are different regions of the same bounded model.
+ * Text and numbers, not color or material, remain authoritative. */
+.surface [data-instrument-collection] [data-instrument-readout-label] {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  max-width: none;
+  margin: 20px 0 8px;
+  color: var(--df-deep);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+.surface [data-demo-controls] legend {
+  color: var(--df-deep);
+}
+.surface [data-demo-controls] label:has(input:is([type="radio"],[type="checkbox"])) {
+  box-sizing: border-box;
+  min-height: 44px;
+  padding-inline: 10px;
+  border: 1px solid transparent;
+  overflow-wrap: anywhere;
+}
+.surface [data-demo-controls] label:has(input:is([type="radio"],[type="checkbox"]):checked) {
+  background: var(--df-reader-plate);
+  border-color: var(--df-reader-edge);
+  box-shadow: inset 2px 0 0 var(--df-accent);
+}
+.surface [data-demo-controls] label:has(input:focus-visible) {
+  border-color: var(--df-accent);
+}
+.surface [data-demo-card] > small {
+  letter-spacing: .045em;
+  font-weight: 600;
+}
+.surface [data-demo-card] > output[data-observed] {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 42px;
+  margin-top: 7px;
+  padding: 10px 12px;
+  border: 1px solid var(--df-reader-edge);
+  background: var(--df-reader-well);
+  color: var(--df-deep);
+  font-size: 1.08rem;
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+  overflow-wrap: anywhere;
+  box-shadow: inset 0 1px 3px rgba(7,26,61,.10);
+}
+.surface [data-model-result] {
+  border-inline-start-width: 4px;
+}
+/* The two states use different edge styles in addition to the existing
+ * explicit conclusion. No traffic-light success or assurance badge. */
+.surface [data-model-result]:is([data-model-state="collision"],[data-model-state="unfunded"]) {
+  border-inline-start-color: var(--old-gold-dark, #776126);
+  border-inline-start-style: double;
+  border-inline-start-width: 6px;
+}
+.surface [data-model-result]:is([data-model-state="distinguished"],[data-model-state="accessible"],[data-model-state="bounded"]) {
+  border-inline-start-color: var(--df-accent);
+  border-inline-start-style: solid;
+}
+.surface [data-suff-criterion],
+.surface [data-suff-formula] {
+  font-variant-numeric: tabular-nums;
+  font-family: Georgia, "Times New Roman", serif;
+  overflow-wrap: anywhere;
+}
+.surface [data-repair-channel] + [data-repair-channel] {
+  margin-top: 10px;
+  padding-top: 7px;
+  border-top: 1px solid var(--df-reader-seam);
+}
+.surface [data-repair-channel] label {
+  flex-wrap: wrap;
+  overflow-wrap: anywhere;
+}
+.surface [data-repair-channel] label output {
+  color: var(--df-deep);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.surface [data-repair-channel] input[type="range"] {
+  margin-bottom: 0;
+}
+.surface :is([data-repair-scale],[data-gauge-scale]) {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--df-muted);
+  font-size: .78rem;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.surface [data-repair-gauge] {
+  border: 1px solid var(--df-reader-edge);
+  padding: 12px;
+  background: var(--df-reader-plate);
+}
+.surface [data-instrument-collection] [data-repair-gauge] [data-instrument-readout-label] {
+  margin: 0 0 8px;
+}
+.surface [data-repair-coverage] {
+  color: var(--df-deep);
+  font-size: 1rem;
+  letter-spacing: 0;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.surface [data-repair-gauge] [data-demo-meter] {
+  height: 12px;
+  margin: 6px 0;
+  border: 1px solid var(--df-reader-edge);
+  background: var(--df-reader-well);
+  box-shadow: inset 0 1px 2px rgba(7,26,61,.12);
+}
+.surface [data-repair-gauge] [data-repair-meter] {
+  background: var(--df-accent);
+}
+.surface [data-policy-results] {
+  margin-top: 8px;
+  background: var(--df-reader-plate);
+  border: 1px solid var(--df-reader-edge);
+}
+.surface [data-policy-results] dt,
+.surface [data-policy-results] dd {
+  min-width: 0;
+}
+.surface [data-policy-results] [data-effective-state] {
+  font-variant-numeric: tabular-nums;
+  color: var(--df-deep);
+  border-inline-start: 3px solid var(--df-accent);
+}
+.surface [data-policy-results] [data-effective-state="denied"] {
+  border-inline-start-style: double;
+  border-inline-start-color: var(--df-muted);
+}
+.surface [data-policy-results] [data-fixed-denial="true"] {
+  background: var(--df-reader-well);
+  border-inline-start-style: double;
+}
+.surface [data-instrument-collection] [data-instrument-policy-limit] {
+  font-size: .85rem;
+  line-height: 1.5;
+  color: var(--df-muted);
+  margin: 0 0 12px;
+}
+@media (forced-colors: active) {
+  .surface [data-demo-controls] label:has(input:is([type="radio"],[type="checkbox"]):checked),
+  .surface [data-demo-card] > output[data-observed],
+  .surface [data-repair-gauge],
+  .surface [data-policy-results],
+  .surface [data-policy-results] [data-fixed-denial="true"] {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+  .surface [data-model-result],
+  .surface [data-policy-results] [data-effective-state],
+  .surface [data-repair-channel] + [data-repair-channel] {
+    border-color: CanvasText;
+  }
+  .surface [data-repair-gauge] [data-demo-meter] {
+    forced-color-adjust: none;
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+  .surface [data-repair-gauge] [data-repair-meter] {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+  .surface [data-instrument-collection] [data-instrument-readout-label],
+  .surface [data-repair-coverage],
+  .surface :is([data-repair-scale],[data-gauge-scale]) {
+    color: CanvasText;
+  }
+}

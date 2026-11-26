@@ -360,11 +360,15 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       const amount = page.locator('input[name="bfl-observation"][value="amount"]');
       const status = page.locator('input[name="bfl-observation"][value="status"]');
       await textIs(page, "[data-suff-title]", "Insufficient representation");
+      const observationResult = page.locator('[data-model-result="observation"]');
+      assert.equal(await observationResult.getAttribute("data-model-state"), "collision");
       await key(amount, "ArrowRight");
       assert.ok(await status.isChecked(), "radio selection must work by keyboard");
       await textIs(page, '[data-observed="a"]', "$100 · paid");
       await textIs(page, '[data-observed="b"]', "$100 · unpaid");
       await textIs(page, "[data-suff-title]", "Sufficient in this two-state model");
+      assert.equal(await observationResult.getAttribute("data-model-state"), "distinguished");
+      await capture("instrument-observed-readouts", page.locator('[data-instrument-id="sufficiency"] [data-demo-grid]'));
       const summary = page.locator('[data-instrument-id="sufficiency"] details summary');
       await key(summary, "Enter");
       await textIs(page, "[data-suff-formula]", "ker(O) ⊆ ker(K)");
@@ -375,24 +379,51 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       await key(status, "ArrowLeft");
       await textIs(page, "[data-suff-formula]", "ker(O) ⊄ ker(K)");
       await textIs(page, "[data-suff-title]", "Insufficient representation");
+      assert.equal(await observationResult.getAttribute("data-model-state"), "collision");
       await key(summary, "Space");
     });
     await scenario("repair state and all eight authority states", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
       await page.locator('[data-instrument-collection][data-bfux-ready="true"]').waitFor();
       const resources = page.locator('[data-repair="resources"]');
+      const repairResult = page.locator('[data-model-result="repair"]');
+      const gauge = async (percent, state) => {
+        await textIs(page, "[data-repair-coverage]", percent + "%");
+        assert.equal(await repairResult.getAttribute("data-model-state"), state);
+        const witness = await page.locator("[data-demo-meter]").evaluate(node => {
+          const bar = node.querySelector("[data-repair-meter]");
+          return { track: node.clientWidth, bar: bar.getBoundingClientRect().width,
+            style: Number.parseFloat(bar.style.width), hidden: node.getAttribute("aria-hidden") };
+        });
+        assert.ok(witness.track > 0 && witness.hidden === "true");
+        assert.ok(Math.abs(witness.style - percent) < .06 &&
+          Math.abs(witness.bar - witness.track * percent / 100) <= 1.5,
+          "repair gauge geometry and numeric readout must agree");
+      };
+      for (const control of await page.locator("[data-repair-channel]").all()) {
+        const input = control.locator('input[type="range"]');
+        const limits = await control.locator("[data-repair-scale] span").allTextContents();
+        assert.deepEqual(limits, ["$" + Number(await input.getAttribute("min")).toLocaleString("en-US"),
+          "$" + Number(await input.getAttribute("max")).toLocaleString("en-US")],
+          "engraved scale endpoints must match native control bounds");
+      }
       await textIs(page, "[data-repair-gap]", "$1,100");
+      await gauge(45, "unfunded");
+      await capture("instrument-repair-initial", page.locator("[data-repair-gauge]"));
       await key(resources, "End");
       await textIs(page, "[data-repair-gap]", "$0");
       await textIs(page, "[data-repair-title]", "Repair is accessible under these conditions.");
+      await gauge(100, "accessible");
       assert.equal(await resources.getAttribute("aria-valuetext"), "$5,000");
       await checkFocus(resources, "repair resources slider");
       await capture("repair-accessible", resources);
       await key(resources, "Home");
       await textIs(page, "[data-repair-gap]", "$2,000");
       await textIs(page, "[data-repair-title]", "Restoration remains inaccessible.");
+      await gauge(0, "unfunded");
       await key(page.locator('[data-reset="repair"]'), "Enter");
       await textIs(page, "[data-repair-gap]", "$1,100");
+      await gauge(45, "unfunded");
       for (let bits = 0; bits < 8; bits++) {
         const flags = [Boolean(bits & 1), Boolean(bits & 2), Boolean(bits & 4)];
         for (const [i, op] of ["read", "analyze", "draft"].entries()) {
@@ -403,13 +434,21 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         const effective = [flags[0], flags[0] && flags[1], flags.every(Boolean)];
         for (const [i, op] of ["read", "analyze", "draft"].entries()) {
           await textIs(page, `[data-operation="${op}"]`, effective[i] ? "Permitted in model" : "Denied");
+          assert.equal(await page.locator(`[data-operation="${op}"]`).getAttribute("data-effective-state"), effective[i] ? "permitted" : "denied",
+            "effective visual state must derive from effective authority, not selected flags");
         }
-        for (const op of ["modify", "send", "transact", "expand"]) await textIs(page, `[data-operation="${op}"]`, "Denied");
+        for (const op of ["modify", "send", "transact", "expand"]) {
+          await textIs(page, `[data-operation="${op}"]`, "Denied");
+          const row = page.locator(`[data-operation="${op}"]`);
+          assert.equal(await row.getAttribute("data-effective-state"), "denied");
+          assert.equal(await row.getAttribute("data-fixed-denial"), "true");
+        }
         const detail = await page.locator("[data-policy-detail]").innerText();
         if (flags[1] && !effective[1]) assert.ok(detail.includes("Analysis is selected but blocked"));
         if (flags[2] && !effective[2]) assert.ok(detail.includes("Drafting is selected but blocked"));
       }
       await capture("authority-bounded", page.locator("[data-policy-detail]"));
+      await capture("instrument-effective-authority", page.locator("[data-policy-results]"));
       await key(page.locator('[data-reset="authority"]'), "Enter");
       await textIs(page, '[data-operation="read"]', "Permitted in model");
       await textIs(page, '[data-operation="analyze"]', "Permitted in model");

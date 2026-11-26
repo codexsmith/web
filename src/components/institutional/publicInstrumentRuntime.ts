@@ -17,6 +17,11 @@ export function mountPublicInstruments(root: HTMLElement) {
   const get = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector);
   // Avoid announcing unchanged state every time another control is adjusted.
   const put = (selector: string, value: string) => { const el = get(selector); if (el && el.textContent !== value) el.textContent = value; };
+  // Material treatment follows computed state; it never determines the result.
+  const state = (selector: string, attribute: string, value: string) => {
+    const el = get(selector);
+    if (el && el.getAttribute(attribute) !== value) el.setAttribute(attribute, value);
+  };
   const money = (n: number) => "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
   const checked = (selector: string) => Boolean(get<HTMLInputElement>(selector)?.checked);
   const amount = (name: string, fallback: number) => {
@@ -32,6 +37,7 @@ export function mountPublicInstruments(root: HTMLElement) {
     put('[data-suff-result]', obs.sufficient ? 'The observations now distinguish the two target states.' : 'Two different consequential states appear identical to the observer.');
     put('[data-suff-criterion]', obs.sufficient ? 'O(A) ≠ O(B); the target can be recovered.' : 'O(A) = O(B), but K(A) ≠ K(B).');
     put('[data-suff-formula]', obs.sufficient ? 'ker(O) ⊆ ker(K)' : 'ker(O) ⊄ ker(K)');
+    state('[data-model-result="observation"]', 'data-model-state', obs.sufficient ? 'distinguished' : 'collision');
     const c = amount('cost', 2000), r = amount('resources', 1200), p = amount('protected', 300);
     const result = repairModel(c,r,p);
     for (const [key, val] of Object.entries({cost:c,resources:r,protected:p})) {
@@ -40,11 +46,17 @@ export function mountPublicInstruments(root: HTMLElement) {
       if (input && input.getAttribute("aria-valuetext") !== money(val)) input.setAttribute("aria-valuetext", money(val));
     }
     put('[data-repair-available]', money(result.available)); put('[data-repair-gap]', money(result.gap));
-    const meter = get('[data-repair-meter]'); if (meter) meter.style.width = `${100 * result.fraction}%`;
+    const coverage = 100 * result.fraction;
+    const meter = get('[data-repair-meter]'); if (meter) meter.style.width = `${coverage}%`;
+    put('[data-repair-coverage]', `${Math.round(coverage * 10) / 10}%`);
+    state('[data-model-result="repair"]', 'data-model-state', result.accessible ? 'accessible' : 'unfunded');
     put('[data-repair-title]', result.accessible ? 'Repair is accessible under these conditions.' : 'Restoration remains inaccessible.');
     put('[data-repair-detail]', `${money(result.available)} available toward an indivisible ${money(c)} repair; ${money(result.gap)} still unfunded. Protected-obligation shortfall: ${money(result.shortfall)}.`);
     const policy = policyModel(checked('[data-policy="read"]'),checked('[data-policy="analyze"]'),checked('[data-policy="draft"]'));
-    for (const [key, allowed] of Object.entries(policy)) put(`[data-operation="${key}"]`, allowed ? 'Permitted in model' : 'Denied');
+    for (const [key, allowed] of Object.entries(policy)) {
+      put(`[data-operation="${key}"]`, allowed ? 'Permitted in model' : 'Denied');
+      state(`[data-operation="${key}"]`, 'data-effective-state', allowed ? 'permitted' : 'denied');
+    }
     const blocked = [
       checked('[data-policy="analyze"]') && !policy.analyze ? "Analysis is selected but blocked until inspection is permitted." : "",
       checked('[data-policy="draft"]') && !policy.draft ? "Drafting is selected but blocked until inspection and analysis are permitted." : "",
