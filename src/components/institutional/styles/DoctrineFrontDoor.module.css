@@ -59,7 +59,7 @@
 
 .historyLineage{margin:18px 0 14px!important;font-size:.71rem!important;letter-spacing:.09em;color:var(--df-accent)!important;line-height:1.6}.humanPurpose{max-width:850px;border-left:3px solid var(--df-gold);margin:26px 0;padding:4px 0 4px 22px;font:400 clamp(1.28rem,2.6vw,1.95rem)/1.35 Georgia,serif;letter-spacing:-.015em;color:var(--df-ink)}.agencyLine{font-size:.95rem;line-height:1.6;margin:0 0 20px}
 
-.pathCard .workStatus{color:var(--df-accent);font-size:var(--df-type-label);font-weight:700;line-height:1.45;text-transform:uppercase;letter-spacing:.11em;margin:0 0 var(--df-space-related)}.workSteps{list-style:none;margin:24px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.workSteps li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:22px 20px;border-top:2px solid var(--df-accent);background:#fff}.workSteps h3,.workNotes h3{font:400 1.36rem/1.24 Georgia,serif;margin:0 0 9px}.workSteps p,.workNotes p{color:var(--df-muted);margin:0}.workNotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.workNotes article{background:#e8edf5;border-left:3px solid var(--df-gold);padding:20px}.surface [data-work-section=contact] .links{align-items:center;overflow-wrap:anywhere}.surface [data-work-section=contact] .action{margin-top:0}.surface [data-work-group=support] .pathGrid{grid-template-columns:minmax(0,1fr)}@media(max-width:800px){.workSteps,.workNotes{grid-template-columns:1fr}.workSteps li,.workNotes article{padding:18px}.surface [data-work-section=contact] .links{align-items:flex-start;flex-direction:column}}
+.pathCard .workStatus{color:var(--df-accent);font-size:var(--df-type-label);font-weight:700;line-height:1.45;text-transform:uppercase;letter-spacing:.11em;margin:0 0 var(--df-space-related)}.workSteps{list-style:none;margin:24px 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.workSteps li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;padding:22px 20px;border-top:2px solid var(--df-accent);background:#fff}.workSteps h3,.workNotes h3{font:400 1.36rem/1.24 Georgia,serif;margin:0 0 9px}.workSteps p,.workNotes p{color:var(--df-muted);margin:0}.workNotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.workNotes article{background:#e8edf5;border-left:3px solid var(--df-gold);padding:20px}.surface [data-work-section=contact] .links{align-items:center;overflow-wrap:anywhere}.surface [data-work-section=contact] .action{margin-top:0}@media(max-width:800px){.workSteps,.workNotes{grid-template-columns:1fr}.workSteps li,.workNotes article{padding:18px}.surface [data-work-section=contact] .links{align-items:flex-start;flex-direction:column}}
 
 .exhibitLayers{list-style:none;padding:0;margin:25px 0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px}.exhibitLayers li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:18px;align-items:start;border:1px solid var(--df-line);border-left:3px solid var(--df-accent);background:#fff;padding:20px 24px}.exhibitLayers h3{font:400 1.4rem/1.25 Georgia,serif;margin:0 0 5px}.exhibitLayers p{margin:0;color:var(--df-muted)}.exhibitLayers .num{padding-top:5px}.exhibitTakeaway{max-width:790px;margin:24px 0 14px;color:var(--df-ink);font-size:1.08rem}.surface [data-observatory-section] .pathCard{min-height:0}.surface [data-observatory-section] .pathCard p:last-child{margin-bottom:0}@media(max-width:800px){.exhibitLayers li{grid-template-columns:28px minmax(0,1fr);gap:10px;padding:16px}.exhibitLayers h3{font-size:1.3rem}}
 
@@ -174,33 +174,6 @@
 .surface [data-direct-contact] {
   margin-top: 12px;
   overflow-wrap: anywhere;
-}
-@media (max-width: 640px) {
-  /* Work paths remain fully readable and directly navigable. The narrow
-     projection is a compact ordered list rather than a wall of equal panels. */
-  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathGrid {
-    gap: 0;
-  }
-  .surface :is([data-work-path],[data-audience-path]) {
-    min-width: 0;
-  }
-  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard {
-    background: transparent;
-    border: 0;
-    border-top: 1px solid var(--df-reader-seam);
-    box-shadow: none;
-    padding: 16px 0 14px;
-  }
-  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard h3 {
-    font-size: 1.25rem;
-    margin-bottom: 8px;
-  }
-  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard p {
-    margin-bottom: 8px;
-  }
-  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard .workStatus {
-    font-size: .72rem;
-  }
 }
 
 
@@ -1098,7 +1071,8 @@
  * Gateways and pathways remain bounded choices. References form a readable
  * field, directories expose destinations, comparisons preserve paired limits,
  * and sequences preserve ordered traversal. No CSS visual reordering. */
-.surface [data-reader-collection] {
+.surface [data-reader-collection],
+.surface [data-reader-collection] > * {
   min-width: 0;
 }
 .surface [data-reader-collection="gateway"]:has(> :nth-child(2):last-child) {
