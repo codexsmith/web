@@ -150,6 +150,15 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         ["/codexware", "operation"], ["/observatory", "observation"], ["/work-with-us", "collaboration"],
       ]);
       await capture("home-entry-paths", paths);
+      const origin = page.locator('[data-reader-heritage="origin"]');
+      assert.equal(await origin.locator("h2").textContent(), doctrineFrontDoor.history.title);
+      assert.equal(await origin.locator("p").last().textContent(), doctrineFrontDoor.history.body);
+      assert.ok(await origin.locator('a[href="/observatory/intellectual-lineage"]').isVisible());
+      const purpose = page.locator('[data-reader-heritage="purpose"]');
+      assert.ok(await purpose.isVisible());
+      assert.equal(await purpose.textContent(), doctrineFrontDoor.mission.humanPurpose,
+        "human purpose remains the existing authored text");
+      await capture("heritage-purpose", purpose);
       const doctrines = page.locator('main [data-doctrine-links="home"]');
       await checkGlyphs(doctrines, [
         ["/consequential-systems", "consequence"], ["/ai-governance", "governance"],
@@ -239,6 +248,7 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         ["/constructive-human-agency", doctrineFrontDoor.doctrines.find(item => item.slug === "constructive-human-agency").sections],
         ["/digital-native-institution", doctrineFrontDoor.digitalNativeInstitution.sections],
         ["/work-with-us/paper-auditing", doctrineFrontDoor.engagementGuides.find(item => item.slug === "work-with-us/paper-auditing").sections],
+        ["/observatory/intellectual-lineage", doctrineFrontDoor.observatoryExhibits.find(item => item.slug === "observatory/intellectual-lineage").sections],
         ["/observatory/demonstrations", doctrineFrontDoor.observatoryExhibits.find(item => item.slug === "observatory/demonstrations").sections],
       ];
       const normalize = text => text.trim().replace(/\s+/g, " ");
@@ -267,6 +277,19 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         }
         await fit(page);
         if (route === "/consequential-systems") await capture("editorial-chapters", chapters.first());
+        if (route === "/digital-native-institution") {
+          const principle = page.locator('[data-reader-heritage="stewardship"]');
+          assert.ok(await principle.isVisible());
+          assert.equal(normalize(await principle.textContent()), normalize(doctrineFrontDoor.digitalNativeInstitution.principle));
+          await capture("heritage-stewardship", principle);
+        }
+        if (route === "/observatory/intellectual-lineage") {
+          const lineage = doctrineFrontDoor.observatoryExhibits.find(item => item.slug === "observatory/intellectual-lineage");
+          const scope = page.locator('[data-reader-heritage="lineage-exhibit"] [data-exhibit-limit]');
+          assert.ok(await scope.isVisible());
+          assert.equal(normalize(await scope.locator("p").last().textContent()), normalize(lineage.limit));
+          await capture("heritage-intellectual-lineage", scope);
+        }
         if (route === "/observatory/demonstrations") {
           const figures = page.locator("main [data-reader-scientific-figure]");
           const captions = await figures.evaluateAll(nodes => nodes.map(node => ({
@@ -364,6 +387,17 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         await checkFocus(summary, "trust " + id);
         await fit(page);
         if (id === "evidence") await capture("trust-evidence-expanded", summary);
+        if (id === "lineage") {
+          const stages = await detail.locator("ol > li").evaluateAll(nodes => nodes.map(node => ({
+            title: node.querySelector("h3").textContent.trim(),
+            body: node.querySelector("p").textContent.trim(),
+          })));
+          assert.deepEqual(stages, doctrineFrontDoor.trustCenter.lineage,
+            "heritage rendering must preserve the founder-attributed ordered account");
+          assert.ok(await page.locator("[data-lineage-limit]").isVisible());
+          assert.equal(await page.locator("[data-lineage-limit]").textContent(), doctrineFrontDoor.trustCenter.lineageLimit);
+          await capture("heritage-lineage", detail.locator("ol > li").first());
+        }
         assert.ok(await page.locator("main").evaluate(node => node.scrollHeight) > compactHeight);
         await key(summary, "Space");
         assert.equal(await detail.getAttribute("open"), null);
@@ -395,7 +429,14 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         ["sufficiency", "repair", "authority"]);
       for (const face of await faces.all()) {
         await checkNameplateContrast(face);
-        assert.ok((await face.innerText()).includes("Local teaching model"));
+        // innerText includes CSS text-transform; verify both the canonical
+        // written label and the visible rendered label without requiring case parity.
+        const scope = face.locator("span");
+        assert.equal(await scope.count(), 1);
+        assert.ok(await scope.isVisible());
+        assert.equal((await scope.textContent()).trim(), "Local teaching model");
+        assert.equal((await scope.innerText()).trim().toLowerCase(), "local teaching model",
+          "instrument scope remains visible independently of letter case");
         assert.equal(await face.locator("a,button,input,[tabindex]").count(), 0);
       }
       await capture("instrument-nameplate", faces.first());

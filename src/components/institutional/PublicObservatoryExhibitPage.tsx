@@ -12,7 +12,7 @@ export function PublicObservatoryExhibitPage({ slug }: { slug: Exhibit["slug"] }
   const exhibit = content.observatoryExhibits.find(item => item.slug === slug)!;
   return (
     <InstitutionalPageShell mainClassName={styles.surface}>
-      <div className={styles.wrap}>
+      <div className={styles.wrap} data-reader-heritage={slug === "observatory/intellectual-lineage" ? "lineage-exhibit" : undefined}>
         <section className={`${styles.hero} ${styles.doctrineHero}`} data-institutional-hero>
           <Link className={styles.back} href="/observatory">Back to Observatory</Link>
           <p className={styles.eyebrow}>{exhibit.eyebrow}</p><h1>{exhibit.name}</h1>

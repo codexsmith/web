@@ -21,6 +21,8 @@
   --df-reader-chassis: #0b2554;
   --df-reader-chassis-text: #f7f9fc;
   --df-reader-chassis-secondary: #e2e9f4;
+  --df-reader-heritage-paper: #f7f3e9;
+  --df-reader-heritage-edge: #b8a77d;
   color: var(--df-ink);
   background: linear-gradient(180deg, #ffffff 0, var(--df-reader-paper) 20rem, #edf2f8 100%);
   font-family: Arial, Helvetica, sans-serif;
@@ -929,5 +931,71 @@
   .surface [data-repair-coverage],
   .surface :is([data-repair-scale],[data-gauge-scale]) {
     color: CanvasText;
+  }
+}
+
+
+/* Heritage and human purpose are distinct editorial registers, not claims
+ * of institutional age or endorsement. Warm paper is used only for the
+ * existing founder account, purpose, lineage and stewardship material.
+ * Scientific plates and operational nameplates keep their cooler substrate. */
+.surface [data-reader-heritage="origin"] > .eyebrow,
+.surface [data-reader-heritage="lineage-exhibit"] [data-reader-chapter-ordinal] {
+  color: var(--old-gold-dark, #776126);
+}
+.surface [data-reader-heritage="origin"] > .eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  margin-inline-end: 8px;
+  background: var(--df-reader-heritage-edge);
+  vertical-align: middle;
+}
+.surface :is([data-reader-heritage="purpose"],[data-reader-heritage="stewardship"]) {
+  box-sizing: border-box;
+  background: var(--df-reader-heritage-paper);
+  border-inline-start: 3px solid var(--df-reader-rail);
+  padding: clamp(16px, 3vw, 26px) clamp(18px, 3vw, 30px);
+  line-height: 1.42;
+}
+.surface [data-reader-heritage="stewardship"] {
+  margin-block: 24px;
+}
+.surface [data-reader-heritage="lineage-exhibit"] [data-exhibit-limit] {
+  background: var(--df-reader-heritage-paper);
+  border-inline-start-color: var(--df-reader-heritage-edge);
+}
+/* An ordered account, not a dated time axis. Stage identity and original
+ * prose remain intact, and the visible attribution stays outside disclosure. */
+.surface [data-trust-detail="lineage"] .exhibitLayers {
+  gap: 0;
+  margin-block: 12px;
+  border-inline-start: 2px solid var(--df-reader-heritage-edge);
+}
+.surface [data-trust-detail="lineage"] .exhibitLayers li {
+  background: var(--df-reader-heritage-paper);
+  border: 0;
+  border-bottom: 1px solid var(--df-reader-heritage-edge);
+  box-shadow: none;
+}
+.surface [data-trust-detail="lineage"] .exhibitLayers li:first-child {
+  border-top: 1px solid var(--df-reader-heritage-edge);
+}
+.surface [data-trust-detail="lineage"] .exhibitLayers .num {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+@media (forced-colors: active) {
+  .surface [data-reader-heritage="origin"] > .eyebrow::before {
+    display: none;
+  }
+  .surface :is([data-reader-heritage="purpose"],[data-reader-heritage="stewardship"]),
+  .surface [data-reader-heritage="lineage-exhibit"] [data-exhibit-limit],
+  .surface [data-trust-detail="lineage"] .exhibitLayers li {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+  .surface [data-trust-detail="lineage"] .exhibitLayers {
+    border-color: CanvasText;
   }
 }

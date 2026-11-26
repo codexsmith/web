@@ -158,14 +158,14 @@ export function DoctrineHomePage() {
             <p className={styles.eyebrow}>Research</p><h2>{foundation.title}</h2><p>{foundation.body}</p>
             <Link className={styles.textLink} href="/observatory">Explore the Observatory</Link>
           </article>
-          <article>
+          <article data-reader-heritage="origin">
             <p className={styles.eyebrow}>Our story</p><h2>{history.title}</h2><p>{history.body}</p>
             <Link className={styles.textLink} href="/observatory/intellectual-lineage">Discover our story</Link>
           </article>
         </section>
         <section className={styles.section} aria-labelledby="public-good-title">
           <p className={styles.eyebrow}>The institution</p><h2 id="public-good-title">{mission.title}</h2><p className={styles.sectionIntro}>{mission.body}</p>
-          <blockquote className={styles.humanPurpose}>{mission.humanPurpose}</blockquote>
+          <blockquote className={styles.humanPurpose} data-reader-heritage="purpose">{mission.humanPurpose}</blockquote>
           <p className={`${styles.identityLine} ${styles.agencyLine}`}>{mission.closing}</p>
           <div className={styles.links}>
             <Link className={styles.textLink} href="/work-with-us">Work with us</Link>
@@ -338,7 +338,7 @@ export function DigitalNativeInstitutionPage() {
           <div className={styles.pathGrid}>{institution.stewardship.limits.map(item => <article className={styles.pathCard} key={item.id} data-institutional-limit={item.id}><h3>{item.pursue}</h3><p><strong>Not:</strong> {item.not}</p></article>)}</div>
           <p className={styles.smallPrint} data-stewardship-limit>{institution.stewardship.note}</p>
         </section>
-        <blockquote className={styles.principle}>{institution.principle}</blockquote>
+        <blockquote className={styles.principle} data-reader-heritage="stewardship">{institution.principle}</blockquote>
         <section className={styles.section}>
           <p className={styles.eyebrow}>Participate or inspect</p><h2>Get to know the work.</h2>
           <div className={styles.links}>{institution.links.map((item) => <Link key={item.href} className={styles.textLink} href={item.href}>{item.label}</Link>)}</div>
