@@ -1,7 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
-import { chromium } from "playwright";
+import { pathToFileURL } from "node:url";
+import { doctrineNavigationIssues, verifyDoctrineTraversals } from "./lib/doctrine_navigation_qa.mjs";
+import { verifyReaderUx } from "./lib/reader_ux_qa.mjs";
+import { institutionalPublicationEntries, institutionalDiscoveryRoutes, supportingPublicationEntries } from "../src/lib/site-publication.ts";
+
+const harnessModule = process.env.V3_RELEASE_QA_PLAYWRIGHT_MODULE;
+const { chromium } = await import(harnessModule ? pathToFileURL(harnessModule).href : "playwright");
 
 const port = Number(process.env.V3_RELEASE_QA_PORT ?? 3237);
 const base = `http://127.0.0.1:${port}`;
@@ -10,6 +16,8 @@ const artifactDir = path.resolve(
 );
 const screenshotDir = path.join(artifactDir, "screenshots");
 fs.mkdirSync(screenshotDir, { recursive: true });
+const readerReviewDir = path.join(artifactDir, "reader-review");
+fs.mkdirSync(readerReviewDir, { recursive: true });
 
 const routeSource = fs.readFileSync("src/lib/site-release.ts", "utf8");
 const routeBlock = routeSource.match(
@@ -32,6 +40,11 @@ const publicRoutes = [
   ]),
 ];
 
+const discoveryRoutes = new Set(institutionalDiscoveryRoutes);
+const referenceRoutes = publicRoutes.filter(route => !discoveryRoutes.has(route));
+const publicationTiers = new Map(institutionalPublicationEntries.map(entry => [entry.href, entry.tier]));
+const indexingEnabled = process.env.VERCEL_ENV?.trim().toLowerCase() === "production" || process.env.BFL_V3_INDEXABLE?.trim().toLowerCase() === "true";
+
 const viewports = {
   desktop: { width: 1440, height: 1000 },
   compact: { width: 1180, height: 900 },
@@ -42,6 +55,25 @@ const viewports = {
 
 const stressRoutes = new Set([
   "/",
+  "/codexware",
+  "/codexware/economic-maintenance",
+  "/codexware/civic-record",
+  "/observatory",
+  "/work-with-us",
+  "/contact",
+  "/digital-native-institution",
+  "/evidence-and-trust",
+  "/consequential-systems",
+  "/constructive-human-agency",
+  "/work-with-us/professional-services",
+  "/work-with-us/paper-auditing",
+  "/work-with-us/public-service",
+  "/work-with-us/funding",
+  "/observatory/intellectual-lineage",
+  "/observatory/research-architecture",
+  "/observatory/computational-inquiry",
+  "/observatory/demonstrations",
+  "/observatory/instruments",
   "/research",
   "/projects",
   "/publications",
@@ -346,9 +378,41 @@ async function visit(browser, config) {
   await page.waitForTimeout(120);
 
   const metrics = await inspectPage(page);
-  const issues = [];
+  const issues = await doctrineNavigationIssues(page, config.route);
 
   if (!response?.ok()) issues.push(`HTTP ${response?.status() ?? "no response"}`);
+  const publicationTier = publicationTiers.get(config.route) ?? "reference";
+  const robotsHeader = response?.headers()["x-robots-tag"] ?? "";
+  const headerNoindex = /\bnoindex\b/i.test(robotsHeader);
+  if (publicationTier === "reference" && !headerNoindex) issues.push("reference route must return a crawl-visible noindex response");
+  if (publicationTier !== "reference" && indexingEnabled && headerNoindex) issues.push("curated route is unexpectedly excluded from search indexing");
+  if (publicationTier !== "reference" && indexingEnabled) {
+    const directives = await page.locator('meta[name="robots"], meta[name="googlebot"]').evaluateAll(nodes => nodes.map(node => node.getAttribute("content") ?? ""));
+    if (directives.some(value => /\bnoindex\b/i.test(value))) issues.push("curated route carries an unexpected noindex meta directive");
+  }
+  // Editorial ownership must be realized by navigable links in main content,
+  // not merely a sitemap entry or the shared footer/header.
+  let contextualLinks = [];
+  if (publicationTier !== "reference") {
+    contextualLinks = await page.locator("main a[href]").evaluateAll(anchors =>
+      [...new Set(anchors.filter(anchor => anchor.getClientRects().length > 0)
+        .map(anchor => new URL(anchor.href, document.baseURI))
+        .filter(url => url.origin === window.location.origin)
+        .map(url => url.pathname))]
+    );
+    const supportingEntry = supportingPublicationEntries.find(entry => entry.href === config.route);
+    if (supportingEntry && !contextualLinks.includes(supportingEntry.parent)) {
+      issues.push("supporting reader lacks a visible contextual return to " + supportingEntry.parent);
+    }
+    for (const entry of supportingPublicationEntries.filter(entry => entry.parent === config.route)) {
+      if (!contextualLinks.includes(entry.href)) issues.push("institutional entry point lacks a visible path to " + entry.href);
+    }
+    if (config.route === "/") {
+      for (const route of contextualLinks) {
+        if (referenceRoutes.includes(route)) issues.push("homepage directly promotes retained reference route " + route);
+      }
+    }
+  }
   if (metrics.horizontalOverflow) {
     issues.push(
       `horizontal page overflow: document ${metrics.documentWidth}px / body ${metrics.bodyWidth}px > viewport ${metrics.viewport[0]}px`,
@@ -363,7 +427,7 @@ async function visit(browser, config) {
   }
   if (metrics.targetSpacingViolations.length) {
     issues.push(
-      `${metrics.targetSpacingViolations.length} undersized interactive target(s) violate 24px spacing`,
+      `${metrics.targetSpacingViolations.length} undersized interactive target(s) violate 24px spacing: ${metrics.targetSpacingViolations.map((target) => `${target.tag} "${target.name}" (${target.width}x${target.height})`).join("; ")}`,
     );
   }
   if (metrics.horizontalOverflow && metrics.overflowElements.length) {
@@ -391,6 +455,13 @@ async function visit(browser, config) {
   const shouldCapture =
     screenshotRoutes.has(config.route) || issues.length > 0;
   let screenshot = null;
+  if (publicationTier === "institutional" && ["desktop", "mobile"].includes(config.viewportName)) {
+    // Compact first-viewport samples for the institutional identity review.
+    await page.screenshot({
+      path: path.join(readerReviewDir, "reader--" + (slug(config.route) || "home") + "--" + config.viewportName + ".png"),
+      fullPage: false, animations: "disabled",
+    });
+  }
   if (shouldCapture) {
     const filename = `${slug(config.route)}--${config.viewportName}.png`;
     const screenshotPath = path.join(screenshotDir, filename);
@@ -405,6 +476,9 @@ async function visit(browser, config) {
     route: config.route,
     viewportName: config.viewportName,
     responseStatus: response?.status() ?? null,
+    publicationTier,
+    robotsHeader,
+    contextualLinks,
     metrics,
     consoleErrors,
     pageErrors,
@@ -499,7 +573,7 @@ async function checkSkipAndFocus(browser, viewportName) {
   );
   if (invisibleFocus.length) {
     issues.push(
-      `${invisibleFocus.length} keyboard focus sample(s) had no visible outline or focus shadow`,
+      `${invisibleFocus.length} keyboard focus sample(s) had no visible outline or focus shadow: ${invisibleFocus.map((sample) => `${sample.tag} "${sample.name}"`).join("; ")}`,
     );
   }
 
@@ -518,7 +592,7 @@ async function checkCommandPalette(browser, viewportName) {
   const issues = [];
 
   await page.goto(`${base}/`, { waitUntil: "networkidle" });
-  const trigger = page.getByRole("button", { name: /Search Lab objects and pages/i });
+  const trigger = page.getByRole("button", { name: /Search curated Lab pages/i });
   await trigger.focus();
   await page.keyboard.press("Enter");
   await page.waitForTimeout(80);
@@ -531,7 +605,7 @@ async function checkCommandPalette(browser, viewportName) {
   const inputFocused = await page.evaluate(
     () =>
       document.activeElement?.getAttribute("aria-label") ===
-      "Search Lab objects, relationships, and pages",
+      "Search curated Lab pages",
   );
   if (!inputFocused) issues.push("command palette did not focus the search input");
 
@@ -554,7 +628,7 @@ async function checkCommandPalette(browser, viewportName) {
   const triggerRestored = await page.evaluate(
     () =>
       document.activeElement?.getAttribute("aria-label") ===
-      "Search Lab objects and pages. Keyboard shortcut Command or Control K.",
+      "Search curated Lab pages. Keyboard shortcut Command or Control K.",
   );
   if (!triggerRestored) {
     issues.push("closing a trigger-opened command palette did not restore focus to its trigger");
@@ -565,7 +639,19 @@ async function checkCommandPalette(browser, viewportName) {
   if (!(await dialog.isVisible().catch(() => false))) {
     issues.push("Control+K did not open the Lab command palette");
   } else {
-    await page.keyboard.press("Escape");
+    const search = dialog.getByLabel("Search curated Lab pages");
+    await search.fill("Civic Record");
+    const matches = dialog.getByRole("option");
+    if ((await matches.count()) !== 1 || !(await matches.first().textContent())?.includes("Civic Record")) {
+      issues.push("curated search did not identify exactly the Civic Record reader");
+    } else if (await matches.first().getAttribute("data-entry-type") !== "page") {
+      issues.push("curated search unexpectedly returned an internal object");
+    } else {
+      await search.press("Enter");
+      await page.waitForURL("**/codexware/civic-record", { timeout: 5000 }).catch(() => null);
+      if (new URL(page.url()).pathname !== "/codexware/civic-record") issues.push("curated search did not navigate to the canonical Civic Record route");
+    }
+    if (await dialog.count()) await page.keyboard.press("Escape");
   }
 
   const name = `command palette @ ${viewportName}`;
@@ -609,11 +695,44 @@ async function checkNotFound(browser) {
   await context.close();
 }
 
+async function checkPublicationDiscovery() {
+  const issues = [];
+  const expected = indexingEnabled ? [...institutionalDiscoveryRoutes] : ["/"];
+  const [sitemapResponse, robotsResponse] = await Promise.all([
+    fetch(`${base}/sitemap.xml`),
+    fetch(`${base}/robots.txt`),
+  ]);
+  if (!sitemapResponse.ok) issues.push(`sitemap HTTP ${sitemapResponse.status}`);
+  if (!robotsResponse.ok) issues.push(`robots HTTP ${robotsResponse.status}`);
+  const sitemap = await sitemapResponse.text();
+  const robots = await robotsResponse.text();
+  const actual = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => new URL(loc).pathname);
+  const actualSet = new Set(actual);
+  if (actual.length !== actualSet.size) issues.push("sitemap contains duplicate canonical routes");
+  for (const route of expected) if (!actualSet.has(route)) issues.push("missing discovery route: " + route);
+  for (const route of actual) if (!expected.includes(route)) issues.push("unexpected sitemap promotion: " + route);
+  const disallowed = [...robots.matchAll(/^Disallow:\s*(\S+)/gmi)].map(([, route]) => route);
+  if (indexingEnabled) {
+    // The noindex header must remain readable by crawlers; noindex is not access control.
+    for (const route of publicRoutes) {
+      if (disallowed.some(prefix => route.startsWith(prefix))) issues.push("production robots rule prevents policy discovery for " + route);
+    }
+  } else if (!disallowed.includes("/v3/")) {
+    issues.push("preview robots rules must retain the legacy route crawl boundary");
+  }
+  const name = "publication discovery policy";
+  recordFailure(name, issues);
+  results.push({ name, indexingEnabled, expected, actual, disallowed, issues });
+}
+
 function writeReport() {
   const report = {
     generatedAt: new Date().toISOString(),
     base,
     publicRouteCount: publicRoutes.length,
+    discoveryRouteCount: discoveryRoutes.size,
+    referenceRouteCount: referenceRoutes.length,
+    indexingEnabled,
     visitCount: visits.length,
     failureCount: failures.reduce((sum, failure) => sum + failure.issues.length, 0),
     failures,
@@ -630,6 +749,9 @@ function writeReport() {
     "",
     `Generated: ${report.generatedAt}`,
     `Public routes: **${report.publicRouteCount}**`,
+    `Curated discovery routes: **${report.discoveryRouteCount}**`,
+    `Reference routes: **${report.referenceRouteCount}**`,
+    `Production indexing policy enabled: **${report.indexingEnabled}**`,
     `Viewport route visits: **${report.visitCount}**`,
     `Critical failures: **${report.failureCount}**`,
     "",
@@ -679,6 +801,7 @@ server.stderr.on("data", (chunk) => {
 let browser;
 try {
   await waitForServer(server);
+  await checkPublicationDiscovery();
   browser = await chromium.launch({ headless: true });
 
   for (const visitConfig of visits) {
@@ -690,7 +813,29 @@ try {
   await checkCommandPalette(browser, "desktop");
   await checkCommandPalette(browser, "mobile");
   await checkNotFound(browser);
+  for (const mode of [
+    { name: "desktop", viewport: viewports.desktop },
+    { name: "mobile", viewport: viewports.mobile },
+    { name: "narrow forced-colors", viewport: viewports.narrow, forcedColors: "active" },
+  ]) {
+    const ux = await verifyReaderUx(browser, base, mode, readerReviewDir);
+    for (const result of ux) {
+      recordFailure(result.name, result.issues);
+      results.push(result);
+    }
+  }
+  for (const viewportName of ["desktop", "mobile"]) {
+    const issues = await verifyDoctrineTraversals(browser, base, viewports[viewportName]);
+    recordFailure(`Doctrine navigation traversal @ ${viewportName}`, issues);
+    results.push({ name: `Doctrine navigation traversal @ ${viewportName}`, viewportName, issues });
+  }
 
+  fs.writeFileSync(path.join(readerReviewDir, "review.json"), JSON.stringify({
+    commit: process.env.GITHUB_SHA ?? null,
+    scope: "Viewport captures of curated institutional readers and exercised BFUX states; not human visual approval.",
+    readers: institutionalPublicationEntries,
+    scenarios: results.filter(result => result.name?.startsWith("BFUX reader: ")),
+  }, null, 2) + "\n");
   writeReport();
 } finally {
   await browser?.close();

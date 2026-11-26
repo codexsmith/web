@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { institutionalIdentity } from "@/lib/institutional-identity";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import styles from "./styles/InstitutionalFoundation.module.css";
 import { InstitutionalSectionHeader } from "./InstitutionalPrimitives";
@@ -22,13 +23,13 @@ export function InstitutionalHomePage() {
     <InstitutionalPageShell>
         <section className={styles.hero} data-institutional-hero>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Practice-born. Research-backed. Formally generalized.</p>
+            <p className={styles.eyebrow}>{institutionalIdentity.tagline}</p>
             <h1>Systematizing knowledge for science, engineering, and public reasoning.</h1>
             <p className={styles.lead}>
               Boundary First Labs is an applied systems research laboratory studying scientific software modeling: how representations become executable, testable, and consequential.
             </p>
             <p className={styles.bodyCopy}>
-              Software Before Code is the center doctrine. Boundary-First Engineering turns it into practice; the Lab&apos;s research, products, and institutional machinery test how state, transition, invariants, authority, evidence, and repair survive real execution.
+              Software Before Code is an engineering doctrine. Boundary-First Engineering turns it into practice; the Lab&apos;s research, products, and institutional machinery test how state, transition, invariants, authority, evidence, and repair survive real execution.
             </p>
             <div className={styles.heroActions}>
               <Link className={styles.primaryAction} href="/applied-work">

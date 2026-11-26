@@ -173,7 +173,7 @@ export function LabCommandPalette() {
         className={styles.trigger}
         onClick={openPalette}
         aria-haspopup="dialog"
-        aria-label="Search Lab objects and pages. Keyboard shortcut Command or Control K."
+        aria-label="Search curated Lab pages. Keyboard shortcut Command or Control K."
         title="Search Lab (⌘/Ctrl K)"
       >
         <svg
@@ -197,7 +197,7 @@ export function LabCommandPalette() {
         <div className={styles.shell}>
           <header className={styles.searchHeader}>
             <div className={styles.searchTitle}>
-              <span>GLOBAL OBJECT NAVIGATION</span>
+              <span>PUBLIC READER NAVIGATION</span>
               <strong id="lab-command-title">Search the Lab</strong>
             </div>
             <button
@@ -223,8 +223,8 @@ export function LabCommandPalette() {
                 setActiveIndex(0);
               }}
               onKeyDown={handleInputKeyDown}
-              placeholder="Object, code, status, relationship, or page…"
-              aria-label="Search Lab objects, relationships, and pages"
+              placeholder="Find a page, capability, or topic…"
+              aria-label="Search curated Lab pages"
               aria-controls="lab-command-results"
               aria-activedescendant={
                 activeEntry ? `lab-command-${activeEntry.id.replace(/[^a-zA-Z0-9_-]/g, "-")}` : undefined
@@ -242,7 +242,7 @@ export function LabCommandPalette() {
                 : "Quick navigation"}
             </span>
             <small>
-              {commandPaletteStats.objects} objects · {commandPaletteStats.relationships} declared relationships · {commandPaletteStats.pages} pages
+              {commandPaletteStats.pages} curated pages
             </small>
           </div>
 
@@ -288,10 +288,9 @@ export function LabCommandPalette() {
               ))
             ) : (
               <div className={styles.emptyState}>
-                <strong>No declared object or page matches.</strong>
+                <strong>No curated page matches.</strong>
                 <span>
-                  Search is deterministic over public Lab Objects, their explicit Atlas
-                  relationships, and institutional routes. It does not infer semantic links.
+                  Search covers the curated website readers. It does not search the private research workspace.
                 </span>
               </div>
             )}

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
 import { LabCommandPalette } from "./LabCommandPalette";
 import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
+import { institutionalIdentity } from "@/lib/institutional-identity";
 import {
   institutionalFooterGroups,
   institutionalRoutes,
@@ -24,8 +25,10 @@ function routeIsActive(pathname: string, href: string) {
   }
 
   if (
-    href === "/research" &&
-    (pathname === "/publications" || pathname.startsWith("/publications/"))
+    href === "/work-with-us" &&
+    ["/applied-work", "/collaboration", "/funding", "/contact", "/open-lab"].some(
+      (route) => pathname === route || pathname.startsWith(`${route}/`),
+    )
   ) {
     return true;
   }
@@ -35,6 +38,8 @@ function routeIsActive(pathname: string, href: string) {
 
 export function InstitutionalHeader() {
   const pathname = usePathname();
+  // Public institutional URLs rewrite internally to /v3; navigation belongs to the public route.
+  const publicPathname = pathname.replace(/^\/v3(?=\/|$)/, "") || "/";
   const [heroPassed, setHeroPassed] = useState(false);
 
   useEffect(() => {
@@ -76,14 +81,14 @@ export function InstitutionalHeader() {
     >
       <Link className={styles.brand} href="/" aria-label="Boundary First Labs home">
         <BoundaryFirstWaveLogo className={styles.logo} variant="compact" decorative />
-        <span className={styles.brandCopy} aria-hidden={heroPassed ? "true" : undefined}>
+        <span className={styles.brandCopy} data-institutional-wordmark aria-hidden={heroPassed ? "true" : undefined}>
           <strong>Boundary First Labs</strong>
         </span>
       </Link>
 
       <nav className={styles.nav} aria-label="Boundary First Labs">
         {institutionalRoutes.map((route) => {
-          const active = routeIsActive(pathname, route.href);
+          const active = routeIsActive(publicPathname, route.href);
 
           return (
             <Link
@@ -107,7 +112,7 @@ export function InstitutionalHeader() {
 
 export function InstitutionalFooter() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-institutional-footer>
       <Link
         className={styles.footerBrand}
         href="/"
@@ -116,7 +121,8 @@ export function InstitutionalFooter() {
         <BoundaryFirstWaveLogo className={styles.footerLogo} variant="compact" decorative />
         <div>
           <strong>Boundary First Labs</strong>
-          <span>Practice-born. Research-backed. Formally generalized.</span>
+          <span>{institutionalIdentity.institutionalDescriptor}</span>
+          <span data-institutional-tagline="footer">{institutionalIdentity.tagline}</span>
         </div>
       </Link>
 

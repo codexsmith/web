@@ -89,7 +89,7 @@ export function InstitutionalClaimsPage() {
             <span>WHAT THIS PAGE DOES</span>
             <h3>One example, not a universal ledger.</h3>
             <p>
-              This route explains the Lab's claim-tracking approach and reports one cohort
+              This route explains the Lab&apos;s claim-tracking approach and reports one cohort
               that is currently suitable for public inspection.
             </p>
           </article>

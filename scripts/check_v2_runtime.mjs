@@ -96,37 +96,46 @@ async function stopServer() {
 try {
   await waitForServer();
 
-  // The canonical public root is the institutional site.
-  await expectPage("/", [
-    "Boundary First Labs",
-    "Systematizing knowledge for science, engineering, and public reasoning.",
-    "Boundary First Labs is an applied systems research laboratory",
-    "Explore Applied Work",
-    "Read the Research",
-    "FEATURED WORK",
-    "THE LAB IN MOTION",
-    "OUR STANCE",
-  ], [
-    "THE LAB MACHINE",
-    "Enter the lab",
-    "Root World · operating environment",
-    "The hero is the threshold",
-    "Cross the threshold to activate",
-  ]);
+  // The canonical root is the new doctrine-led institutional introduction.
+  const homeMarkers = [
+    "Boundary First Labs", "Research and engineering for consequential systems.",
+    "We study the boundaries where systems become real.",
+    "Trace what follows. Design for repair.", "Boundary First Labs is maintenance.",
+    'data-doctrine-links="home"',
+  ];
+  await expectPage("/", homeMarkers, ["THE LAB MACHINE", "Root World · operating environment"]);
 
   // Retired root-world query state is harmless legacy noise. It must not revive
   // the Lab Machine or the old hero/entered-root split on the canonical site.
-  await expectPage("/?world=1", [
-    "Boundary First Labs",
-    "Systematizing knowledge for science, engineering, and public reasoning.",
-    "Explore Applied Work",
-    "Read the Research",
-  ], [
+  await expectPage("/?world=1", homeMarkers, [
     "THE LAB MACHINE",
     "Enter the lab",
     "Root World",
     "operating environment",
   ]);
+
+  for (const [path, context] of [
+    ["/codexware", "codexware"], ["/observatory", "observatory"], ["/work-with-us", "work-with-us"],
+    ["/codexware/economic-maintenance", "codexware/economic-maintenance"],
+    ["/codexware/civic-record", "codexware/civic-record"],
+    ["/digital-native-institution", "digital-native-institution"], ["/evidence-and-trust", "evidence-and-trust"],
+    ["/work-with-us/professional-services", "work-with-us/professional-services"],
+    ["/work-with-us/paper-auditing", "work-with-us/paper-auditing"],
+    ["/work-with-us/public-service", "work-with-us/public-service"],
+    ["/work-with-us/funding", "work-with-us/funding"],
+    ["/observatory/intellectual-lineage", "observatory/intellectual-lineage"],
+    ["/observatory/research-architecture", "observatory/research-architecture"],
+    ["/observatory/computational-inquiry", "observatory/computational-inquiry"],
+    ["/observatory/demonstrations", "observatory/demonstrations"], ["/observatory/instruments", "observatory/instruments"],
+    ["/consequential-systems", "related"], ["/ai-governance", "related"], ["/constructive-human-agency", "related"],
+  ]) {
+    await expectPage(path, [`data-doctrine-links="${context}"`]);
+    await expectRedirect(`/v3${path}`, path);
+  }
+  await expectPage("/contact", ["data-inquiry-composer", "Start with what brought you here.", "Copy inquiry draft"]);
+  await expectPage("/", ['href="/digital-native-institution"']);
+  await expectPage("/work-with-us", ['href="/digital-native-institution"']);
+  await expectPage("/digital-native-institution", ["A Digital-Native Institution", "One human. Governed computational leverage."]);
 
   // The Lab Machine remains available at the explicit versioned development
   // surface. This is the only place this smoke test expects Lab Machine identity.

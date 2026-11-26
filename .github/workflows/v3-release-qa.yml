@@ -16,8 +16,11 @@ concurrency:
 
 jobs:
   browser-release-qa:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
+    # Isolated local CI build only; this does not publish or deploy the PR.
+    env:
+      BFL_V3_INDEXABLE: "true"
 
     steps:
       - name: Check out repository
@@ -37,10 +40,12 @@ jobs:
 
       - name: Install pinned browser QA harness
         run: |
-          npm install --no-save --package-lock=false playwright@1.55.0
-          npx playwright install --with-deps chromium
+          npm install --prefix "$RUNNER_TEMP/v3-release-qa" --no-save --package-lock=false --ignore-scripts playwright@1.55.0
+          "$RUNNER_TEMP/v3-release-qa/node_modules/.bin/playwright" install --with-deps chromium
 
       - name: Run Website v3 release QA
+        env:
+          V3_RELEASE_QA_PLAYWRIGHT_MODULE: ${{ runner.temp }}/v3-release-qa/node_modules/playwright/index.mjs
         run: node scripts/qa_v3_release.mjs
 
       - name: Upload Website v3 release QA artifacts
@@ -49,5 +54,14 @@ jobs:
         with:
           name: v3-release-qa
           path: qa-artifacts/v3-release
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Upload compact institutional reader review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v3-reader-review
+          path: qa-artifacts/v3-release/reader-review
           if-no-files-found: warn
           retention-days: 14

@@ -1,16 +1,18 @@
 import { PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 
 export const institutionalRoutes = [
-  { label: "Research", href: "/research" },
+  { label: "Codexware", href: "/codexware" },
   { label: "Observatory", href: "/observatory" },
-  { label: "Products", href: "/products" },
-  { label: "Projects", href: "/projects" },
-  { label: "Applied Work", href: "/applied-work" },
-  { label: "Open Lab", href: "/open-lab" },
+  { label: "Work With Us", href: "/work-with-us" },
 ] as const;
 
 export const observatoryRoutePrefixes = [
   "/observatory",
+  "/research",
+  "/publications",
+  "/projects",
+  "/products",
+  "/labs",
   "/atlas",
   "/representation-atlas",
   "/experiments",
@@ -307,56 +309,26 @@ export const institutionalChildRoutes = {
 } as const;
 
 export const institutionalFooterGroups = [
-  {
-    label: "Institution",
-    routes: [
-      { label: "About", href: "/about" },
-      { label: "Start here", href: "/start" },
-      { label: "Founder", href: "/founder" },
-      { label: "AI Governance", href: "/ai-governance" },
-    ],
-  },
-  {
-    label: "Research",
-    routes: [
-      { label: "Research", href: "/research" },
-      { label: "Moonshots", href: "/research/moonshots" },
-      { label: "Publications", href: "/publications" },
-    ],
-  },
-  {
-    label: "Observe",
-    routes: [
-      { label: "Observatory", href: "/observatory" },
-      { label: "Lab Atlas", href: "/atlas" },
-      { label: "Representation Atlas", href: "/representation-atlas" },
-      { label: "Experiments", href: "/experiments" },
-      { label: "Claims", href: "/claims" },
-      { label: "Evidence", href: "/evidence" },
-      { label: "Apparatus", href: "/apparatus" },
-      { label: "Now", href: "/now" },
-      { label: "What changed", href: "/changes" },
-      { label: "Lab Through Time", href: "/lab-through-time" },
-    ],
-  },
-  {
-    label: "Work",
-    routes: [
-      { label: "Applied Work", href: "/applied-work" },
-      { label: "Products", href: "/products" },
-      { label: "Projects", href: "/projects" },
-    ],
-  },
-  {
-    label: "Participate",
-    routes: [
-      { label: "Open Lab", href: "/open-lab" },
-      { label: "Collaboration", href: "/collaboration" },
-      { label: "Funding", href: "/funding" },
-      { label: "Contact", href: PUBLIC_CONTACT_MAILTO },
-    ],
-  },
+  { label: "Explore", routes: [
+    { label: "Codexware", href: "/codexware" },
+    { label: "Observatory", href: "/observatory" },
+    { label: "Work With Us", href: "/work-with-us" },
+  ] },
+  { label: "Doctrines", routes: [
+    { label: "Consequential Systems", href: "/consequential-systems" },
+    { label: "AI Governance", href: "/ai-governance" },
+    { label: "Constructive Human Agency", href: "/constructive-human-agency" },
+  ] },
+  { label: "Institution", routes: [
+    { label: "Digital-Native Institution", href: "/digital-native-institution" },
+    { label: "Evidence & Trust", href: "/evidence-and-trust" },
+    { label: "Contact", href: "/contact" },
+    { label: "Direct email", href: PUBLIC_CONTACT_MAILTO },
+  ] },
 ] as const;
+
+// Curated discovery is governed by the independent publication policy.
+export { curatedReaderRoutes } from "@/lib/site-publication";
 
 export const institutionalFooterRoutes = institutionalFooterGroups.flatMap<{
   readonly label: string;
