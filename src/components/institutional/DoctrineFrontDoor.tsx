@@ -76,7 +76,7 @@ export function AudiencePathways({ context }: { context: keyof typeof content.au
   return <section className={styles.section} data-audience-paths={context} aria-labelledby={`audience-${context}`}>
     <h2 id={`audience-${context}`}>{copy.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Find your starting point</p><p className={styles.sectionIntro}>{copy.intro}</p></div>
     <div className={styles.pathGrid}>{copy.cards.map(card => <article className={styles.pathCard} key={card.id} data-audience-card={card.id}>
-      <p className={styles.workStatus}>{card.audience}</p><h3>{card.question}</h3><p>{card.body}</p>
+      <h3>{card.question}</h3><p className={styles.workStatus}>{card.audience}</p><p data-reader-card-description>{card.body}</p>
       <div className={styles.audienceLinks}>{card.links.map(item => <Link className={styles.textLink} key={item.label} href={item.href}>{item.label} <span aria-hidden="true">→</span></Link>)}</div>
     </article>)}</div>
   </section>;

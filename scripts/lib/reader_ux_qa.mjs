@@ -295,6 +295,55 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
             "compact Observatory metadata wraps instead of forcing overflow");
           await capture("title-first-observatory-hero", hero);
           await capture("title-first-observatory-section", page.locator('[data-audience-paths="observatory"] h2'));
+          const panel = page.locator('[data-audience-paths="observatory"]');
+          const cards = panel.locator("[data-audience-card]");
+          assert.equal(await cards.count(), doctrineFrontDoor.audiencePaths.observatory.cards.length);
+          for (const [index, card] of (await cards.all()).entries()) {
+            const model = doctrineFrontDoor.audiencePaths.observatory.cards[index];
+            const witness = await card.evaluate(node => {
+              const [title, label, description, actions] = node.children;
+              const type = el => {
+                const style = getComputedStyle(el);
+                return {size: parseFloat(style.fontSize), weight: parseFloat(style.fontWeight),
+                  line: parseFloat(style.lineHeight), family: style.fontFamily};
+              };
+              const gap = (a,b) => b.getBoundingClientRect().top - a.getBoundingClientRect().bottom;
+              const style = getComputedStyle(node);
+              const panel = node.closest("[data-audience-paths]");
+              const sectionStyle = getComputedStyle(panel);
+              const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+              return {
+                heading: title.tagName, title: title.textContent.trim(),
+                label: label.textContent.trim(), description: description.textContent.trim(),
+                titleType: type(title), labelType: type(label), bodyType: type(description),
+                actionType: type(actions.querySelector("a")), rootSize,
+                targets: [...actions.querySelectorAll("a")].map(a => ({
+                  height: a.getBoundingClientRect().height,
+                  decoration: getComputedStyle(a).textDecorationLine,
+                  href: a.getAttribute("href"),
+                })),
+                titleGap: gap(title,label), bodyGap: gap(description,actions),
+                panelPadding: parseFloat(style.paddingTop),
+                sectionPadding: parseFloat(sectionStyle.paddingTop),
+              };
+            });
+            assert.deepEqual([witness.heading, witness.title, witness.label, witness.description],
+              ["H3", model.question, model.audience, model.body]);
+            assert.deepEqual(witness.targets.map(t=>t.href), model.links.map(l=>l.href));
+            assert.ok(witness.titleType.size >= witness.bodyType.size * 1.49 &&
+              witness.labelType.size <= witness.bodyType.size * .8 &&
+              witness.bodyType.size >= witness.rootSize &&
+              witness.titleType.weight >= 600 && witness.actionType.weight >= 600 &&
+              witness.bodyType.line >= witness.bodyType.size * 1.5 &&
+              witness.targets.every(t=>t.height >= 24 && t.decoration.includes("underline")),
+              "typographic roles must be distinctly readable without smaller body copy or targets: " + JSON.stringify(witness));
+            assert.ok(witness.titleGap >= 0 && witness.titleGap <= 7 &&
+              witness.bodyGap >= 0 && witness.bodyGap <= 13 &&
+              witness.panelPadding >= 16 && witness.panelPadding <= 20 &&
+              witness.sectionPadding >= 20 && witness.sectionPadding <= 36,
+              "related text and actions must use the bounded spacing hierarchy: " + JSON.stringify(witness));
+          }
+          await capture("type-and-space-observatory-card", cards.first());
         }
         await fit(page);
       }
