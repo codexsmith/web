@@ -683,6 +683,70 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
           "standalone exhibit retains full context and claim boundary");
       }
     });
+    await scenario("primary reader editorial economy and engagement choice", async (_checkFocus, capture) => {
+      const model = doctrineFrontDoor;
+      await open(page, base, "/");
+      const home = page.locator("[data-institutional-hero]");
+      assert.equal(await home.locator("h1").textContent(), model.identity.tagline);
+      assert.equal(await home.locator("[data-institutional-descriptor]").textContent(), model.identity.descriptor);
+      assert.deepEqual(await home.locator(":scope > p").allTextContents(),
+        [model.identity.mission, model.home.support, model.identity.descriptor]);
+      const gateways = page.locator("[data-home-entry-paths] [data-reader-collection='gateway']");
+      const entries = await gateways.locator(":scope > a").evaluateAll(nodes => nodes.map(n=>({
+        href:n.getAttribute("href"), title:n.querySelector("h3").textContent,
+        kicker:n.querySelector("[data-reader-kicker] > span").textContent,
+        description:n.querySelector("[data-reader-gateway-description]").textContent,
+        action:n.querySelector("[data-reader-gateway-action]").textContent.replace(/\s*→\s*$/, ""),
+      })));
+      assert.deepEqual(entries, model.home.paths.map(p=>({href:p.href,title:p.title,kicker:p.tagline,description:p.body,action:p.label})),
+        "gateway classifications, descriptions and actions remain distinct and addressable");
+      assert.equal(new Set(entries.map(e=>e.kicker)).size, 3);
+      assert.equal(await page.locator('[aria-labelledby="maintenance-title"] [data-reader-heading-meta]').count(),0);
+      await capture("editorial-home-gateways", gateways);
+      await fit(page);
+
+      await open(page, base, "/codexware");
+      const c = model.codexware;
+      const civic = page.locator("[data-civic-record-entry]");
+      assert.equal(await civic.locator("h2").textContent(), c.civicIntro.title);
+      assert.ok((await civic.textContent()).includes(c.civicIntro.status));
+      const status = page.locator("[data-codexware-status]");
+      assert.equal(await status.locator("h2").textContent(), "Development status");
+      assert.equal(await status.locator("p").textContent(), c.status);
+      assert.ok(await status.isVisible());
+      const examples = page.locator("[data-codexware-examples]");
+      assert.deepEqual(await examples.locator(":scope > [data-reader-heading-meta] > p").allTextContents(), [c.examples.intro]);
+      assert.equal(await examples.locator("[data-example-limit]").textContent(), c.examples.limit);
+      assert.ok(await examples.locator("[data-example-limit]").isVisible());
+      const commitments = page.locator("[data-codexware-commitments]");
+      assert.deepEqual(await commitments.locator(":scope > [data-reader-heading-meta] > p").allTextContents(), [c.commitments.intro]);
+      assert.equal(await commitments.locator("[data-deployment-limit]").textContent(), c.commitments.note);
+      assert.ok(await commitments.locator("[data-deployment-limit]").isVisible());
+      assert.deepEqual(await commitments.locator("article p").allTextContents(), c.commitments.items.map(x=>x.body),
+        "editorial economy preserves Codexware authorization, execution and assurance limits");
+      await capture("editorial-codexware-status", status);
+      await fit(page);
+
+      await open(page, base, "/work-with-us");
+      const work = model.workWithUs;
+      for (const group of work.groups) {
+        const section = page.locator(`[data-work-group="${group.id}"]`);
+        assert.equal(await section.locator(":scope > h2").textContent(), group.title);
+        assert.deepEqual(await section.locator(":scope > [data-reader-heading-meta] > p").allTextContents(),[group.intro],
+          "independent engagement choices must not imply a numbered procedure");
+        assert.deepEqual(await section.locator("[data-reader-path-identity] > p").allTextContents(),group.cards.map(x=>x.status));
+      }
+      const engagement = page.locator('[data-work-section="engagement"]');
+      assert.equal(await engagement.locator(":scope > h2").textContent(),work.engagement.title);
+      assert.equal(await engagement.locator("[data-reader-collection='sequence'] li").count(),work.engagement.steps.length);
+      const contact = page.locator('[data-work-section="contact"]');
+      assert.equal(await contact.locator(":scope > h2").textContent(),work.contact.title);
+      assert.ok((await contact.textContent()).includes(work.contact.privacy));
+      assert.ok(await contact.locator('a[href="/contact"]').isVisible() && await contact.locator('a[href^="mailto:"]').isVisible(),
+        "editorial economy preserves direct contact and initial inquiry privacy");
+      await capture("editorial-work-choices",page.locator('[data-work-group="commission"]'));
+      await fit(page);
+    });
     await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
       await page.locator('[data-instrument-collection][data-bfux-ready="true"]').waitFor();
