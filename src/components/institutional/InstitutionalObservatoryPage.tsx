@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { ReaderScientificFigure } from "./ReaderScientificFigure";
+import { ReaderMastheadField } from "./ReaderMastheadField";
 import { DoctrineLinksSection, InstrumentCollectionLink, AudiencePathways } from "./DoctrineFrontDoor";
 import { observatoryExhibit as exhibit } from "./content/observatory";
 import { doctrineFrontDoor } from "./content/doctrineFrontDoor";
@@ -17,6 +18,7 @@ export function InstitutionalObservatoryPage() {
             <p className={styles.tagline}>{exhibit.tagline}</p>
             <p className={styles.lead}>{exhibit.lead}</p>
             <p className={styles.support}>{exhibit.support}</p>
+            <ReaderMastheadField kind="observation" />
           </section>
           <AudiencePathways context="observatory" />
           <div data-observatory-exhibit="public">

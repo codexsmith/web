@@ -3,6 +3,7 @@ import { institutionalIdentity } from "@/lib/institutional-identity";
 import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { ReaderRouteGlyph } from "./ReaderRouteGlyph";
+import { ReaderMastheadField } from "./ReaderMastheadField";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
 
@@ -137,6 +138,7 @@ export function DoctrineHomePage() {
           <p className={styles.lead}>{institutionalIdentity.mission}</p>
           <p className={styles.support}>{home.support}</p>
           <p className={styles.identityLine} data-institutional-descriptor>{institutionalIdentity.descriptor}</p>
+          <ReaderMastheadField kind="boundary" />
         </section>
         <section className={styles.section} data-home-entry-paths aria-labelledby="home-entry-title">
           <h2 id="home-entry-title" className={styles.entryHeading}>Three ways into the Lab</h2>
@@ -211,6 +213,7 @@ export function CodexwareIntroductionPage() {
           <p className={styles.eyebrow}>Application vision · In development</p>
           <h1>{c.name}</h1><p className={styles.tagline}>{c.tagline}</p>
           <p className={styles.lead}>{c.lead}</p><p className={styles.support}>{c.support}</p>
+          <ReaderMastheadField kind="operation" />
         </section>
         <AudiencePathways context="codexware" />
         <section className={`${styles.section} ${styles.callout}`} data-civic-record-entry>
@@ -275,6 +278,7 @@ export function WorkWithUsPage() {
           <h1>{work.name}</h1><p className={styles.tagline}>{work.tagline}</p>
           <p className={styles.lead}>{work.lead}</p><p className={styles.support}>{work.support}</p>
           <Link className={styles.action} href="/contact">Start a conversation <span aria-hidden="true">→</span></Link>
+          <ReaderMastheadField kind="collaboration" />
         </section>
         <AudiencePathways context="work-with-us" />
         {work.groups.map((group, index) => (

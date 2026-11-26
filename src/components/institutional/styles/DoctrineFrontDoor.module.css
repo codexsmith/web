@@ -513,3 +513,56 @@
     fill: CanvasText;
   }
 }
+
+
+/* Atmospheric engravings occupy existing negative space only. No grid,
+ * padding, measure, height, or heading size is changed. Ordinary text
+ * retains its existing 790px measure. The ornament yields at compact
+ * widths, under forced colors, and whenever its allocated width is small. */
+.surface .mastheadField {
+  display: none;
+  pointer-events: none;
+}
+@media (min-width: 1280px) and (forced-colors: none) {
+  .surface .hero > .mastheadField {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: clamp(38px, 4vw, 58px);
+    width: clamp(0px, calc(100% - 825px), 184px);
+    height: auto;
+    max-height: 148px;
+    overflow: hidden;
+    color: var(--df-accent);
+  }
+}
+.surface .mastheadGuide,
+.surface .mastheadContour,
+.surface .mastheadAccented {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: .9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.surface .mastheadGuide {
+  opacity: .28;
+  stroke-width: .7;
+}
+.surface .mastheadContour {
+  opacity: .67;
+}
+.surface .mastheadAccented {
+  stroke: var(--old-gold-dark, #776126);
+  stroke-width: 1.45;
+}
+.surface .mastheadWitness {
+  fill: var(--df-gold);
+  stroke: var(--old-gold-dark, #776126);
+  stroke-width: .65;
+}
+@media (forced-colors: active) {
+  .surface .mastheadField {
+    display: none;
+  }
+}

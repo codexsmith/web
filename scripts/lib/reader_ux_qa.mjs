@@ -144,6 +144,59 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         assert.deepEqual(await item.locator("h3").allTextContents(), original);
       }
     });
+    await scenario("masthead engraving containment and projection", async (_checkFocus, capture) => {
+      const cases = [
+        ["/", "boundary"],
+        ["/codexware", "operation"],
+        ["/observatory", "observation"],
+        ["/work-with-us", "collaboration"],
+      ];
+      for (const [route, kind] of cases) {
+        await open(page, base, route);
+        const hero = page.locator("main [data-institutional-hero]");
+        const mark = hero.locator(`[data-reader-masthead="${kind}"]`);
+        assert.equal(await mark.count(), 1);
+        assert.equal(await mark.getAttribute("aria-hidden"), "true");
+        assert.equal(await mark.getAttribute("focusable"), "false");
+        const wide = mode.viewport.width >= 1280 && mode.forcedColors !== "active";
+        assert.equal(await mark.isVisible(), wide, "ornament must yield in compact and forced-color projections");
+        if (wide) {
+          const witness = await mark.evaluate(node => {
+            const parent = node.parentElement;
+            const area = node.getBoundingClientRect();
+            const frame = parent.getBoundingClientRect();
+            const contains = area.width > 0 && area.height > 0 &&
+              area.left >= frame.left && area.right <= frame.right + 1 &&
+              area.top >= frame.top && area.bottom <= frame.bottom;
+            const overlaps = rect => rect.width > 0 && rect.height > 0 &&
+              rect.left < area.right && rect.right > area.left &&
+              rect.top < area.bottom && rect.bottom > area.top;
+            const collisions = [];
+            const walker = document.createTreeWalker(parent, NodeFilter.SHOW_TEXT);
+            for (let text = walker.nextNode(); text; text = walker.nextNode()) {
+              if (node.contains(text) || !text.textContent.trim()) continue;
+              const range = document.createRange();
+              range.selectNodeContents(text);
+              if ([...range.getClientRects()].some(overlaps)) collisions.push(text.textContent.trim());
+            }
+            for (const control of parent.querySelectorAll("a,button,input,select,textarea,summary")) {
+              if (overlaps(control.getBoundingClientRect())) collisions.push("interactive region");
+            }
+            return {
+              contains, collisions,
+              pointerEvents: getComputedStyle(node).pointerEvents,
+              position: getComputedStyle(node).position,
+            };
+          });
+          assert.ok(witness.contains && witness.collisions.length === 0 &&
+            witness.pointerEvents === "none" && witness.position === "absolute",
+            "masthead ornament must occupy only unclaimed reading space: " + JSON.stringify(witness));
+        }
+        assert.equal(await hero.locator("h1").count(), 1);
+        await fit(page);
+        await capture("masthead-" + kind, hero);
+      }
+    });
     await scenario("scientific illustration fidelity and accessible projection", async (_checkFocus, capture) => {
       await open(page, base, "/observatory/demonstrations");
       const figures = page.locator("main [data-reader-scientific-figure]");
