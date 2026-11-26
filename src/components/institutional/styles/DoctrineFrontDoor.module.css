@@ -1180,6 +1180,7 @@
 
 /* Local reader navigation: one compact sticky control, independent of global route navigation. */
 .surface .sectionNav {
+  --reader-local-sticky: 1;
   position: relative;
   z-index: 550;
   min-width: 0;
@@ -1263,6 +1264,7 @@
   .surface .sectionNavCurrent { display: none; }
 }
 @media (max-height: 360px) {
+  .surface .sectionNav { --reader-local-sticky: 0; }
   .surface .sectionNav[data-section-nav-ready="true"] { position: relative; top: auto; }
   .surface .sectionNav ul { position: static; max-height: none; }
 }

@@ -104,3 +104,6 @@ The institutional rail owns inter-page route identity. A long reader may add one
 
 
 Closing navigation is derived from the same contextual admission decision as the closing renderer. The local table of contents includes the Evidence & Trust section if and only if that context renders it, followed by related doctrines. Validate the complete ordered closing tail, not merely the validity of listed fragment links. Parallel side notes are not separate linear reading stages; their scope stays attached to their corresponding reading section.
+
+
+Fragment placement and current-section identity share one measured reading edge, with the existing 10px reading clearance. A changing institutional rail can move the destination too far below the edge as well as obscure it; reconcile both directions during the explicit fragment transition. Clamp at the document boundary, cease alignment on independent reader movement, and retain native fragment/history behavior. The short-height CSS projection contributes no sticky local height. Verify the current label, ordinal, focus and measured gaps over painted frames before and after capturing the actual viewport; the capture must not re-scroll an already aligned destination. A passing transient assertion is not evidence of a correct settled presentation.

@@ -856,16 +856,46 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         await key(link, "Enter");
         await page.waitForURL(url => url.hash === href);
         const target = page.locator(href);
-        await page.waitForFunction(id => {
-          const target = document.getElementById(id);
+        await page.waitForFunction(({href, expectedCount}) => {
+          const target = document.getElementById(href.slice(1));
           const primary = document.querySelector("header[data-header-compact]")?.getBoundingClientRect();
           const rail = document.querySelector("[data-reader-section-nav]")?.getBoundingClientRect();
-          return target && primary && rail && target.getBoundingClientRect().top >= rail.bottom - 1 && rail.top >= primary.bottom - 1 && Math.abs(rail.top - primary.bottom) <= 2;
-        }, href.slice(1));
+          return target && primary && rail &&
+            Math.abs(rail.top - primary.bottom) <= 2 &&
+            Math.abs(target.getBoundingClientRect().top - rail.bottom - 10) <= 3 &&
+            document.querySelector("[data-reader-section-nav] a[aria-current='location']")?.getAttribute("href") === href &&
+            document.querySelector("[data-section-nav-count]")?.textContent === expectedCount;
+        }, {href, expectedCount: `${index + 1} / ${hrefs.length}`});
         assert.equal(await menu.getAttribute("open"), null);
         assert.equal(await target.evaluate(node => document.activeElement === node), true, "section activation moves focus to its real fragment destination");
-        await page.waitForFunction(href => document.querySelector("[data-reader-section-nav] a[aria-current='location']")?.getAttribute("href") === href, href);
-        await capture("section-nav-" + route.replace(/[^a-z0-9]+/g,"-"),target);
+        const verifySettledLocation = async () => {
+          const witness = await page.evaluate(async ({href, expectedCount}) => {
+            // Inspect several painted frames; a transient correct aria-current is
+            // insufficient when the header or fragment position subsequently changes.
+            const samples = [];
+            for (let frame = 0; frame < 5; frame++) {
+              await new Promise(resolve => requestAnimationFrame(resolve));
+              const primary = document.querySelector("header[data-header-compact]").getBoundingClientRect();
+              const rail = document.querySelector("[data-reader-section-nav]").getBoundingClientRect();
+              const target = document.getElementById(href.slice(1)).getBoundingClientRect();
+              const active = document.querySelector("[data-reader-section-nav] a[aria-current='location']");
+              samples.push({current:active?.getAttribute("href"),
+                count:document.querySelector("[data-section-nav-count]").textContent,
+                labelMatches:document.querySelector("[data-section-nav-label]").textContent === active?.textContent,
+                railGap:rail.top-primary.bottom, targetGap:target.top-rail.bottom,
+                focus:document.activeElement?.id === href.slice(1)});
+            }
+            return {samples, expectedCount};
+          }, {href, expectedCount: `${index + 1} / ${hrefs.length}`});
+          assert.ok(witness.samples.every(sample => sample.current === href &&
+            sample.count === witness.expectedCount && sample.labelMatches && sample.focus &&
+            Math.abs(sample.railGap) <= 2 && Math.abs(sample.targetGap - 10) <= 3),
+            "settled fragment identity must survive header compaction and evidence capture: " + JSON.stringify(witness));
+        };
+        await verifySettledLocation();
+        // Already aligned: do not re-scroll a correctly framed section for evidence.
+        await capture("section-nav-" + route.replace(/[^a-z0-9]+/g,"-"));
+        await verifySettledLocation();
         await key(summary, "Enter");
         await key(links.first(), "Escape");
         assert.equal(await menu.getAttribute("open"), null);
