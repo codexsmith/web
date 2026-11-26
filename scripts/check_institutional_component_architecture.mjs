@@ -480,7 +480,7 @@ expect(productExperienceShell.includes("data-institutional-hero"), "Product expe
 expect(productExperienceShell.includes("productExperienceNav"), "Product experience shell must expose reusable local product navigation");
 expect(chessExperience.includes("<ProductExperienceShell"), "Boundary-First Chess must use the shared product experience shell");
 expect(chessExperience.includes("<BoundaryFirstChessBoard"), "Boundary-First Chess must expose an interactive board as its hero instrument");
-expect(chessExperience.includes("This is not a Grandmaster course."), "Boundary-First Chess must preserve learner-facing positioning");
+expect(chessExperience.includes("A developed field guide for learning how to see positional change.") && chessExperience.includes("The teaching method has to prove that it actually helps learners.") && chessExperience.includes("outside learner validation still needed"), "Boundary-First Chess must preserve learner-facing positioning");
 expect(chessBoard.startsWith('"use client";'), "Boundary-First Chess board interaction must own its client boundary");
 expect(chessBoard.includes("aria-pressed"), "Boundary-First Chess lenses must expose pressed state accessibly");
 expect(chessContent.includes("Create") && chessContent.includes("Repair") && chessContent.includes("Weaken") && chessContent.includes("Exploit") && chessContent.includes("Transform"), "Boundary-First Chess must preserve the five-operation learner grammar");
@@ -493,7 +493,7 @@ const weatherContent = read(`${root}/content/boundaryFirstWeather.ts`);
 const weatherRoute = read("src/app/v3/products/boundary-first-weather/page.tsx");
 expect(weatherExperience.includes("<ProductExperienceShell"), "Boundary First Weather must use the shared product experience shell");
 expect(weatherExperience.includes("<BoundaryFirstWeatherField"), "Boundary First Weather must expose an interactive simulation-field instrument");
-expect(weatherExperience.includes("A compelling visualization is not forecast skill."), "Boundary First Weather must keep visualization separate from forecast-skill claims");
+expect(weatherExperience.includes("A compelling visualization is not the same as a better forecast.") && weatherExperience.includes("No lower rung licenses a higher claim.") && weatherExperience.includes("weatherRecord.claimFirewall.notAllowedYet.map"), "Boundary First Weather must keep visualization separate from forecast-skill claims");
 expect(weatherField.startsWith('"use client";'), "Boundary First Weather field interaction must own its client boundary");
 expect(weatherField.includes("aria-pressed"), "Boundary First Weather diagnostic modes must expose pressed state accessibly");
 expect(weatherContent.includes("Matched baseline") || weatherContent.includes("MATCHED BASELINE"), "Boundary First Weather must preserve matched-baseline comparison");
@@ -524,9 +524,9 @@ const asmContent = read(`${root}/content/agenticScientificMethod.ts`);
 const asmRoute = read("src/app/v3/products/agentic-scientific-method/page.tsx");
 expect(asmExperience.includes("<ProductExperienceShell"), "Agentic Scientific Method must use the shared product experience shell");
 expect(asmExperience.includes("<AgenticScientificMethodInstrument"), "Agentic Scientific Method must expose an interactive inquiry-machine instrument");
-expect(asmExperience.includes("Scientific method, with the hidden operations opened up."), "ASM must foreground the operational inquiry thesis");
-expect(asmExperience.includes("Capability is not authority, and authority is not evidence."), "ASM must preserve its authority firewall");
-expect(asmExperience.includes("No consequential transition should depend only on chat memory."), "ASM must expose durable scientific memory as a product property");
+expect(asmExperience.includes("Make the research process explicit enough to inspect, criticize, and continue."), "ASM must foreground the operational inquiry thesis");
+expect(asmExperience.includes("Separate who performs a task from who is responsible for approving the result.") && asmExperience.includes("Being able to perform a task does not grant decision authority, and approval does not make a claim true."), "ASM must preserve its authority firewall");
+expect(asmExperience.includes("DURABLE RESEARCH MEMORY") && asmExperience.includes("Important research decisions should survive beyond one chat, person, or tool."), "ASM must expose durable scientific memory as a product property");
 expect(asmInstrument.startsWith('"use client";'), "ASM inquiry-machine interaction must own its client boundary");
 expect(asmInstrument.includes("aria-pressed"), "ASM phase transitions must expose pressed state accessibly");
 expect(asmContent.includes("Orient") && asmContent.includes("Declare") && asmContent.includes("Bind") && asmContent.includes("Map") && asmContent.includes("Close") && asmContent.includes("Preserve"), "ASM must preserve the controlled inquiry lifecycle");
@@ -564,7 +564,7 @@ expect(openLabPage.includes('className={styles.openLabClose}'), "Open Lab must k
 expect(fs.existsSync(`${root}/sections/OpenLabContextSection.tsx`), "OpenLabContextSection must exist as the route-local composition boundary");
 expect(fs.existsSync(`${root}/OpenLabIntakeInstrument.tsx`), "Dormant governed intake machinery must remain available for later activation");
 
-expect(openLabContent.includes('sourceRevision: "1dbd3f5b53e55c8feff5230836ce11dc928cba69"'), "Open Lab must pin the governing Lab source revision");
+expect(openLabContent.includes("sourceRevision: \"b543145845450821cefe0c401c73d814a01d81c0\"") && openLabContent.includes("sourceDate: \"2026-10-01\""), "Open Lab must pin the governing Lab source revision");
 expect(openLabContent.includes('lifecycle: "candidate"'), "Open Lab must preserve the candidate lifecycle of the page projection");
 expect(openLabContent.includes("humanReviewed: false"), "Open Lab must not rewrite the source projection as human-reviewed");
 expect(openLabContent.includes('OPEN_LAB_INTAKE_SCHEMA = "bfl.open-lab-intake.v1"'), "Open Lab must version its intake envelope");
@@ -647,7 +647,7 @@ expect(!aiGovernancePage.includes('href="/v3/'), "AI Governance must not expose 
 
 const aboutPage = read(`${root}/InstitutionalAboutPage.tsx`);
 expect(aboutPage.includes("childLinks={institutionalChildRoutes.about}"), "About hero must expose its contextual child pages");
-expect(aboutPage.includes("fifteen years") && aboutPage.includes("mathematics and physics"), "About hero must preserve the founder-to-lab mathematics and physics convergence");
+expect(aboutPage.includes("The work grew from software delivery and consulting") && aboutPage.includes("mathematics, physics, scientific method, formal grammars, and agentic computation."), "About hero must preserve the founder-to-lab mathematics and physics convergence");
 expect(aboutPage.includes("className={styles.aboutOperatingModel}"), "About must move the operating-model definition into a dedicated section immediately after the hero");
 expect(aboutPage.includes("solo, technical-founder-led applied systems laboratory"), "About operating-model section must define the current solo technical-founder model in plain language");
 expect(aboutPage.includes("AI-enabled, digital-native"), "About operating-model section must state the Lab's AI-enabled digital-native posture");
@@ -691,11 +691,11 @@ const evidencePage = read(`${root}/InstitutionalEvidencePage.tsx`);
 const evidenceContent = read(`${root}/content/evidence.ts`);
 expect(evidencePage.includes("./content/evidence"), "Evidence page must own a route-local content model");
 expect(evidencePage.includes("What supports a claim, product, project, or research result?"), "Evidence hero must frame Evidence as a contextual support object");
-expect(evidencePage.includes("Evidence should travel with the thing it supports."), "Evidence survey must state the contextual-placement rule");
+expect(evidencePage.includes("Evidence should stay attached to the question it actually answers."), "Evidence survey must state the contextual-placement rule");
 expect(evidencePage.includes("Vocabulary and calibration."), "Evidence global route must identify itself as vocabulary and calibration rather than a flat catalog");
 expect(evidencePage.includes("EVIDENCE CLASSES"), "Evidence survey must retain the evidence-class vocabulary");
 expect(evidencePage.includes("EVIDENCE LADDER"), "Evidence survey must retain the evidence-strength calibration ladder");
-expect(evidencePage.includes("NEXT PLACEMENT PASS"), "Evidence survey must make the contextual-placement migration explicit");
+expect(evidencePage.includes("WHERE EVIDENCE BELONGS") && evidencePage.includes("Put evidence next to the claim, product, project, or publication it actually supports.") && evidencePage.includes("aria-label=\"Evidence placement destinations\""), "Evidence survey must make the contextual-placement migration explicit");
 expect(!evidencePage.includes("<EpistemicChainSection />"), "Global Evidence route must not inline a long publication-local epistemic chain");
 expect(!evidencePage.includes("priorExecution.map"), "Global Evidence route must not inline the long prior-execution catalog");
 expect(!evidencePage.includes("evidenceToEarn.map"), "Global Evidence route must not inline the long evidence-to-earn catalog");
@@ -729,29 +729,29 @@ expect(machineryContent.includes("does not supersede component-local contracts")
 const claimsPage = read(`${root}/InstitutionalClaimsPage.tsx`);
 const claimsContent = read(`${root}/content/claims.ts`);
 expect(claimsPage.includes("./content/claims"), "Claims page must own a route-local content model");
-expect(claimsPage.includes("How does the Lab bound what it asserts?"), "Claims hero must frame Claim as an institutional object family");
-expect(claimsPage.includes("Claims should be read beside the research that owns them."), "Claims survey must state contextual ownership");
-expect(claimsPage.includes("Scope, not universal ledger."), "Claims global route must explicitly reject the flat universal-ledger model");
-expect(claimsPage.includes("Information Mechanics is one admitted cohort, not “the Lab’s claims.”"), "Claims survey must identify Information Mechanics as one recovered cohort");
-expect(claimsPage.includes("NEXT PLACEMENT PASS"), "Claims survey must make contextual placement the next step");
+expect(claimsPage.includes("What is the Lab actually claiming?"), "Claims hero must frame Claim as an institutional object family");
+expect(claimsPage.includes("Kept with the work that gives it meaning.") && claimsPage.includes("Keep claims beside the research, evidence, and tests that can change them."), "Claims survey must state contextual ownership");
+expect(claimsPage.includes("One example, not a universal ledger."), "Claims global route must explicitly reject the flat universal-ledger model");
+expect(claimsPage.includes("Information Mechanics is one research program&apos;s claim set—not “everything BFL claims.”") && claimsPage.includes("without implying that every BFL program uses"), "Claims survey must identify Information Mechanics as one recovered cohort");
+expect(claimsPage.includes("WHERE CLAIMS BELONG") && claimsPage.includes("Keep claims beside the research, evidence, and tests that can change them.") && claimsPage.includes("aria-label=\"Claim placement destinations\""), "Claims survey must make contextual placement the next step");
 expect(!claimsPage.includes("claimRecords.map"), "Global Claims route must not inline the owner-local claim catalog");
 expect(!claimsPage.includes("LabObjectIdentity"), "Global Claims survey must not masquerade as the claim-record detail surface");
 expect(claimsPage.includes('href="/research"') && claimsPage.includes('href="/evidence"') && claimsPage.includes('href="/experiments"'), "Claims survey must route toward owner and support contexts");
 expect(claimsPage.includes("childLinks={institutionalChildRoutes.claims}"), "Claims hero must expose contextual child pages");
 expect(claimsContent.includes('"IM-C001"'), "Claims projection must preserve the first Information Mechanics claim for later contextual views");
 expect(claimsContent.includes('"IM-C008"'), "Claims projection must preserve the full eight-claim Information Mechanics cohort");
-expect(claimsContent.includes('"sourceRevision": "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Claims projection must pin the Lab source revision");
-expect(claimsContent.includes("no claim truth, theorem proof, novelty, publication promotion, or cross-domain authority"), "Claims projection must preserve the registrar authority ceiling");
+expect(claimsContent.includes("\"sourceRevision\": \"b543145845450821cefe0c401c73d814a01d81c0\"") && claimsContent.includes("\"sourceRevisionDate\": \"2026-10-01\""), "Claims projection must pin the Lab source revision");
+expect(claimsContent.includes("This page reports the current claim status recorded by the Information Mechanics research program.") && claimsContent.includes("Listing a claim does not make it true, novel, proved, published, or authoritative outside that program."), "Claims projection must preserve the registrar authority ceiling");
 expect(claimsContent.includes('"atlasId": "research-im"'), "Claims projection must bind only to the declared Information Mechanics owner program");
 
 const experimentsPage = read(`${root}/InstitutionalExperimentsPage.tsx`);
 const experimentsContent = read(`${root}/content/experiments.ts`);
 expect(experimentsPage.includes("./content/experiments"), "Experiments page must own a route-local content model");
-expect(experimentsPage.includes("How does the Lab test its work?"), "Experiments hero must frame Experiment as a contextual test object");
-expect(experimentsPage.includes("A test belongs to the system that gives it a question."), "Experiments survey must state contextual ownership");
-expect(experimentsPage.includes("Survey, not flat catalog."), "Experiments global route must reject the flat record-catalog model");
-expect(experimentsPage.includes("CURRENT RECOVERED SCOPE"), "Experiments survey must summarize recovered registry scope");
-expect(experimentsPage.includes("NEXT PLACEMENT PASS"), "Experiments survey must make contextual placement the next step");
+expect(experimentsPage.includes("What has the Lab actually tested?"), "Experiments hero must frame Experiment as a contextual test object");
+expect(experimentsPage.includes("A test only means something relative to the question it was designed to answer.") && experimentsPage.includes("Attached to the work it is testing."), "Experiments survey must state contextual ownership");
+expect(experimentsPage.includes("A public sample, not the whole register."), "Experiments global route must reject the flat record-catalog model");
+expect(experimentsPage.includes("CURRENT REGISTER") && experimentsPage.includes("experimentProjection.registeredCount") && experimentsPage.includes("experimentProjection.registeredLaneCount") && experimentsPage.includes("experimentRecords.length"), "Experiments survey must summarize recovered registry scope");
+expect(experimentsPage.includes("WHERE EXPERIMENTS BELONG") && experimentsPage.includes("Keep detailed experiment records beside the question they were designed to test.") && experimentsPage.includes("aria-label=\"Experiment placement destinations\""), "Experiments survey must make contextual placement the next step");
 expect(!experimentsPage.includes("className={styles.experimentCard}"), "Global Experiments route must not inline every experiment record as detail cards");
 expect(!experimentsPage.includes("LabObjectIdentity"), "Global Experiments survey must not masquerade as the experiment-record detail surface");
 expect(experimentsPage.includes('href="/labs/distinction-space"') && experimentsPage.includes('href="/labs/representation-lab"'), "Experiments survey must retain direct live-lab entry points");
@@ -759,8 +759,8 @@ expect(experimentsPage.includes('href="/research"') && experimentsPage.includes(
 expect(experimentsPage.includes("childLinks={institutionalChildRoutes.experiments}"), "Experiments hero must expose contextual child pages");
 expect(experimentsContent.includes('id: "EXP-ATLAS-001"'), "Experiment projection must preserve Atlas seed experiments for later contextual views");
 expect(experimentsContent.includes('id: "EXP-ASM-004"'), "Experiment projection must preserve ASM seed experiments through EXP-ASM-004");
-expect(experimentsContent.includes('sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Experiment projection must pin the Lab source revision");
-expect(experimentsContent.includes("Registration and evidence routing only"), "Experiment projection must preserve the register authority ceiling");
+expect(experimentsContent.includes("sourceRevision: \"b543145845450821cefe0c401c73d814a01d81c0\"") && experimentsContent.includes("sourceRevisionDate: \"2026-10-01\""), "Experiment projection must pin the Lab source revision");
+expect(experimentsContent.includes("Registration records what was tested, planned, blocked, or completed and where the evidence lives.") && experimentsContent.includes("It does not make a scientific claim true or promote a result beyond the scope of the experiment."), "Experiment projection must preserve the register authority ceiling");
 expect(evidenceContent.includes('surfaceKey: "citywatch"'), "Evidence source must preserve admitted evidence records for later contextual views");
 
 const nowPage = read(`${root}/InstitutionalNowPage.tsx`);
@@ -769,11 +769,11 @@ expect(nowPage.includes("./content/now"), "Now / Roadmap page must own a route-l
 expect(nowPage.includes("What is Boundary First Labs doing now?"), "Now hero must lead with the current-work question");
 expect(nowPage.includes("NOW → NEXT → LATER"), "Now page must expose the roadmap horizon sequence");
 expect(nowPage.includes("WHAT CAN CHANGE THE ROADMAP?"), "Now page must make reprioritization rules explicit");
-expect(nowContent.includes("Close the public and commercial interface"), "Now priorities must include public/commercial institutional conversion");
-expect(nowContent.includes("Turn four funding lanes into outside evidence"), "Now priorities must include BFL-native external evidence across the current funding lanes");
-expect(nowContent.includes("Audit the population behind the Registrar"), "Now priorities must include the post-census registry population audit");
-expect(nowContent.includes("Run the research benchmarks that can falsify the stack"), "Now priorities must include active falsifiable research benchmarking");
-expect(nowContent.includes("Turn mature research into reviewable publication objects"), "Now priorities must include publication conversion");
+expect(nowContent.includes("Keep the public institution current and useful") && nowContent.includes("active interface for readers, collaborators, clients, funders, and reviewers."), "Now priorities must include public/commercial institutional conversion");
+expect(nowContent.includes("Get real-world evidence from customers, users, partners, reviewers, and funders") && nowContent.includes("service, product, software, and research-funding opportunities") && nowContent.includes("At least one lane produces a real external event"), "Now priorities must include BFL-native external evidence across the current funding lanes");
+expect(nowContent.includes("Make sure the Lab's records actually cover the work they claim to cover") && nowContent.includes("Continue checking record completeness without reopening the already completed whole-Lab registry discovery work."), "Now priorities must include the post-census registry population audit");
+expect(nowContent.includes("Run tests that can prove the Lab's strongest ideas wrong") && nowContent.includes("Preserve negative results") && nowContent.includes("tests strong enough to preserve, narrow, rename, or reject claims"), "Now priorities must include active falsifiable research benchmarking");
+expect(nowContent.includes("Turn mature research into specific papers people can review") && nowContent.includes("clear claims, sources, related work, evidence limits, and a visible path for correction."), "Now priorities must include publication conversion");
 expect(nowContent.includes("Independent operation"), "Now roadmap gates must include transfer beyond the founder");
 expect(nowPage.includes('publicContactMailto("Boundary First Labs — General inquiry")'), "Now must expose a direct email conversation CTA");
 
@@ -804,9 +804,9 @@ expect(inquiryApi.includes("sourceContext"), "Inquiry API must preserve inquiry 
 
 const collaborationPage = read(`${root}/InstitutionalCollaborationPage.tsx`);
 expect(collaborationPage.includes("./content/collaboration"), "Collaboration page must own a route-local content model");
-expect(collaborationPage.includes("POSSIBLE FITS, NOT AFFILIATIONS"), "Collaboration map must explicitly prevent endorsement inference");
+expect(collaborationPage.includes("organized around collaborator types rather than a list of") && collaborationPage.includes("These are possible collaborator roles, not claims of affiliation or endorsement."), "Collaboration map must explicitly prevent endorsement inference");
 expect(collaborationPage.includes('className={styles.collaborationMapFrame}'), "Collaboration page must expose the named relationship map as a primary surface");
-expect(collaborationPage.includes("collaborationStageLegend"), "Collaboration page must explain readiness semantics");
+expect(collaborationPage.includes("Readiness depends on a defined exchange of value, clear scope, and agreement by both sides.") && collaborationPage.includes("Start small. Define success. Expand only if the work earns it."), "Collaboration page must explain readiness semantics");
 expect(collaborationPage.includes("smallest useful"), "Collaboration hero must preserve the smallest-useful-relationship doctrine");
 expect(collaborationPage.includes("collaborationOutcomes"), "Collaboration page must state concrete business and funding outcomes");
 expect(collaborationPage.includes("How funding works"), "Collaboration page must give potential funders a direct Funding route");
@@ -831,7 +831,7 @@ expect(fundingPage.includes("./content/funding"), "Funding page must own a route
 expect(fundingPage.includes('className={styles.fundingConversion}'), "Funding must expose the conversion model directly");
 expect(fundingPage.includes('className={styles.fundingChannelsSection}'), "Funding must expose channel options directly");
 expect(fundingPage.includes('className={styles.fundingEvaluation}'), "Funding must expose evaluation and epistemic boundaries directly");
-expect(fundingPage.includes("Capitalize the conversion engine, not the theory."), "Funding hero must state the public funding thesis");
+expect(fundingPage.includes("Support specific work with a clear next result.") && fundingPage.includes("external use, review, publication, or delivery.") && fundingPage.includes("FUNDING DOES NOT DETERMINE TRUTH") && fundingPage.includes("It cannot make a scientific or technical conclusion correct."), "Funding hero must state the public funding thesis");
 expect(fundingPage.includes("childLinks={institutionalChildRoutes.funding}"), "Funding hero must expose Applied Work and Evidence as child routes");
 expect(fundingPage.includes('publicContactMailto("Boundary First Labs — Funding")'), "Funding must expose a direct email CTA");
 
@@ -855,7 +855,7 @@ expect(fs.existsSync(`${root}/sections/PublicationContextSection.tsx`), "Publica
 const publicationCatalog = read(`${root}/sections/PublicationCatalogSection.tsx`);
 const publicationCards = read(`${root}/sections/PublicationCards.tsx`);
 expect(publicationCatalog.includes("selectedPublications"), "Publication catalog must render the curated source-bound publication selection");
-expect(publicationCatalog.includes("SOURCE-BOUND RECORDS"), "Publication catalog must expose that its visible records are source-bound");
+expect(publicationCatalog.includes("SELECTED RECORDS") && publicationCatalog.includes("{selectedPublications.length} BOUND") && publicationCatalog.includes("LAB SOURCE REVISION") && publicationCatalog.includes("publicationProjection.sourceRevision"), "Publication catalog must expose that its visible records are source-bound");
 expect(publicationCatalog.includes("selectedPublications.length"), "Publication catalog must derive its bound-record count from the selected publication source");
 expect(publicationCards.includes("publicationClaimCeiling"), "Publication cards must keep claim ceilings attached to visible records");
 expect(publicationCatalog.includes("publicationProjection"), "Publication catalog must expose the pinned publication-control projection");
@@ -869,7 +869,7 @@ expect(
   "Publication catalog records must support exact deep links",
 );
 
-console.log("Institutional component architecture passed.");
+// The final success message is emitted only after all assertions have run.
 
 
 const labObjectProductExperienceShell = read(`${root}/products/ProductExperienceShell.tsx`);
@@ -897,7 +897,7 @@ expect(publicationContentForObjects.includes('id: "PUB-001"'), "Publication sour
 expect(publicationContentForObjects.includes('id: "PUB-002"'), "Publication source IDs must preserve the second sequence artifact");
 expect(publicationContentForObjects.includes('id: "systems_interface_contracts"'), "Publication Source Registry canonical IDs must remain intact");
 expect(!publicationContentForObjects.includes('id: "pub-closure-driven-development"'), "Website-local publication aliases must not survive as canonical publication IDs");
-expect(publicationContentForObjects.includes('sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Publication projection must pin the Lab source revision");
+expect(publicationContentForObjects.includes("sourceRevision: \"b543145845450821cefe0c401c73d814a01d81c0\"") && publicationContentForObjects.includes("sourceRevisionDate: \"2026-10-01\""), "Publication projection must pin the Lab source revision");
 expect(publicationContentForObjects.includes('"REG-PUBLICATION-SEQUENCE"'), "Publication projection must include Publication Sequence authority");
 expect(publicationContentForObjects.includes('"REG-PUBLICATION-GRAPH"'), "Publication projection must include Publication Graph authority");
 expect(publicationContentForObjects.includes('"REG-PUBLICATION-SOURCES"'), "Publication projection must include Publication Source Registry authority");
@@ -942,7 +942,7 @@ expect(atlasContent.includes("experiment.firewall"), "Experiment search must pre
 expect(atlasContent.includes('/evidence#evidence-'), "Evidence Atlas nodes must route back to their exact native surface");
 expect(atlasContent.includes("searchTerms: [record.evidence, record.boundary]"), "Evidence search must preserve both basis and claim ceiling");
 expect(!atlasContent.includes("identifier: record.surfaceKey"), "Atlas-local evidence routing keys must not become identifiers");
-expect(atlasPage.includes("Research · Experiments · Claims · Machinery · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Claim, Machinery, Experiment, and Evidence object families");
+expect(atlasPage.includes("Research · Experiments · Claims · Tools · Products · Projects · Publications · Evidence") && atlasPage.includes("The map intentionally leaves undeclared connections blank rather than guessing them.") && atlasContent.includes("Research, Experiments, Claims, Machinery, Products, Projects, Publications, and Evidence."), "Lab Atlas boundary copy must disclose the current Claim, Machinery, Experiment, and Evidence object families");
 expect(commandPaletteContent.includes("route.label"), "Curated search indexes page labels");
 expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");
 
@@ -959,10 +959,10 @@ const changesContent = read(`${root}/content/changes.ts`);
 const homePageForChanges = read(`${root}/InstitutionalHomePage.tsx`);
 const nowPageForChanges = read(`${root}/InstitutionalNowPage.tsx`);
 expect(changesPage.includes("./content/changes"), "What changed route must consume the curated delta projection");
-expect(changesPage.includes("State changes, not activity theater."), "What changed route must state its material-delta boundary");
-expect(changesContent.includes('webRevision: "e30f35f0fb9cf62f4dc70556e2df6d97c34286e5"'), "Change archive must pin the canonical web source cutoff");
-expect(changesContent.includes('labRevision: "2040584c19c8202215bdb83e46d1df05df37dafe"'), "Change archive must pin the canonical Lab source cutoff");
-expect(changesContent.includes("It reports selected material changes"), "Change projection must reject complete-activity-feed semantics");
+expect(changesPage.includes("What materially changed?") && changesPage.includes("This is not every commit, task, or idea.") && changesPage.includes("A change belongs here when the Lab is meaningfully different afterward."), "What changed route must state its material-delta boundary");
+expect(changesContent.includes("webRevision: \"1d90fd2fa62c0313ef83be313f71ebd3e2ec5a9d\""), "Change archive must pin the canonical web source cutoff");
+expect(changesContent.includes("labRevision: \"b543145845450821cefe0c401c73d814a01d81c0\""), "Change archive must pin the canonical Lab source cutoff");
+expect(changesContent.includes("It highlights durable changes and selected earlier milestones;") && changesContent.includes("it is not a complete commit log or activity feed."), "Change projection must reject complete-activity-feed semantics");
 expect(homePageForChanges.includes("<RecentChangesStrip"), "Retained legacy homepage component preserves the former material-change projection");
 expect(nowPageForChanges.includes('title="What materially changed?"'), "Now page must surface recent material deltas");
 
@@ -976,13 +976,13 @@ expect(temporalViewNav.includes('href={view.href}'), "Temporal view navigation m
 expect(nowPageForChanges.includes('<TemporalViewNav activeView="now"'), "Now must participate in the shared temporal navigation");
 expect(changesPage.includes('<TemporalViewNav activeView="changes"'), "What Changed must participate in the shared temporal navigation");
 expect(publicStateContent.includes("labTimelineEvents"), "Public state content must expose the Lab timeline seed");
-expect(publicStateProjection.includes('"labRevision": "4be0a745d4e6f8148495c75ba727e04c1f21b21f"'), "Public state seed must pin the Lab source revision");
-expect(publicStateProjection.includes('"projectionStatus": "initial_manual_seed"'), "Public state seed must disclose that cross-repo automation is not wired yet");
+expect(publicStateProjection.includes("\"labRevision\": \"b543145845450821cefe0c401c73d814a01d81c0\""), "Public state seed must pin the Lab source revision");
+expect(publicStateProjection.includes("\"projectionStatus\": \"reviewed_manual_projection\""), "Public state must disclose its reviewed manual projection status");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-001"'), "Public timeline projection must use durable Timeline identities");
 expect(publicStateProjection.includes('"id": "EVENT-TIMELINE-005"'), "Public timeline projection must preserve the current five-event seed boundary");
-expect(labThroughTimePage.includes("The point is continuity, not completeness."), "Lab Through Time must disclose the incomplete seed boundary without repeating projection jargon");
+expect(labThroughTimePage.includes("They show continuity across the work without pretending to be a complete") && labThroughTimePage.includes("biography or a complete history of every project."), "Lab Through Time must disclose the incomplete seed boundary without repeating projection jargon");
 expect(labThroughTimePage.includes('<TemporalViewNav activeView="timeline"'), "Lab Through Time must participate in the shared temporal navigation");
-expect(labThroughTimePage.includes("Milestones, not a long changelog."), "Lab Through Time must preserve the long-horizon materiality boundary");
+expect(labThroughTimePage.includes("Turning points, not every event.") && labThroughTimePage.includes("does not prove that the event caused later work, validate a scientific claim"), "Lab Through Time must preserve the long-horizon materiality boundary");
 expect(labThroughTimeRoute.includes('canonical: "/lab-through-time"'), "Lab Through Time must declare the canonical public route");
 const nowPriorityExplorer = read(`${root}/NowPriorityExplorer.tsx`);
 const changesExplorer = read(`${root}/ChangesExplorer.tsx`);
@@ -1007,10 +1007,10 @@ expect(!labTimelineExplorer.includes("DURABLE EVENT"), "Lab Through Time expande
 expect(!labTimelineExplorer.includes("SOURCE EVENT"), "Lab Through Time expanded milestones must not expose source IDs as primary reader content");
 expect(labThroughTimePage.includes("Research + systems practice already existed."), "Lab Through Time must expose the pre-acceleration substrate");
 expect(labThroughTimePage.includes("AI lowers the cost of working across the corpus."), "Lab Through Time must expose the computational acceleration boundary");
-expect(labThroughTimePage.includes("One founder can operate a wider surface."), "Lab Through Time must connect acceleration to the current operating model");
+expect(labThroughTimePage.includes("One founder can operate a much wider research surface."), "Lab Through Time must connect acceleration to the current operating model");
 expect(labThroughTimePage.includes("COMPUTATIONAL CAPABILITY"), "Lab Through Time must distinguish machine capability from authority");
 expect(labThroughTimePage.includes("HUMAN AUTHORITY"), "Lab Through Time must preserve the founder authority boundary");
-expect(labThroughTimePage.includes("Five milestones mark the route from early experimental work"), "Lab Through Time hero must explain the bounded continuity story without repeating the acceleration section");
+expect(labThroughTimePage.includes("This public view contains five reviewed turning points") && labThroughTimePage.includes("They show continuity across the work without pretending to be a complete"), "Lab Through Time hero must explain the bounded continuity story without repeating the acceleration section");
 expect(labThroughTimePage.includes("FIVE TURNING POINTS"), "Lab Through Time milestone section must use public-facing turning-point language");
 expect(labThroughTimePage.includes("How the Lab took shape."), "Lab Through Time milestone section must use a plain-language public title");
 expect(labThroughTimePage.includes("This is not a year-by-year biography."), "Lab Through Time milestone section must explain its selectivity without registry jargon");
@@ -1032,8 +1032,8 @@ const provenanceStillStrip = read(`${root}/ProvenanceStillStrip.tsx`);
 const labThroughTimeCss = read(`${root}/styles/LabThroughTime.module.css`);
 expect(labThroughTimePage.includes("<ProvenanceArtifactGallery"), "Lab Through Time must render the bounded research-room evidence panel");
 expect(publicStateContent.includes("provenanceGallery"), "Public-state projection must type the provenance gallery");
-expect(publicStateProjection.includes('"publicClaim": "A substantial pre-AI room-scale research environment existed."'), "Provenance projection must preserve the adjudicated narrow public claim");
-expect(publicStateProjection.includes('"claimCeiling": "The media establishes scale, organization, and chronology of work.'), "Provenance projection must preserve the media authority ceiling");
+expect(publicStateProjection.includes("\"publicClaim\": \"A substantial room-scale independent research environment existed before the current AI-accelerated Lab.\""), "Provenance projection must preserve the adjudicated narrow public claim");
+expect(publicStateProjection.includes("The preserved media establishes the scale and organization of that research environment.") && publicStateProjection.includes("It does not establish the correctness, originality, or maturity of every mathematical or scientific claim visible in it."), "Provenance projection must preserve the media authority ceiling");
 for (const artifactPath of [
   "/provenance/lab-through-time/video-frame-01.jpg",
   "/provenance/lab-through-time/video-frame-02.jpg",
@@ -1073,7 +1073,7 @@ expect(publicStateProjection.includes("Exact extraction timestamps are not asser
 
 
 expect(atlasContent.includes('version: "0.1"'), "Atlas must declare its frozen v0.1 public projection");
-expect(atlasContent.includes("feature-frozen bounded public projection"), "Atlas v0.1 must declare feature-frozen status");
+expect(atlasContent.includes("status: \"a maintained, bounded public map\"") && atlasContent.includes("It shows selected public objects and declared connections, not every durable Lab record or every possible relationship."), "Atlas v0.1 must declare its maintained, bounded projection status and omission rule");
 
 
 const startPage = read(`${root}/InstitutionalStartPage.tsx`);
@@ -1106,7 +1106,7 @@ expect(!homeOrientationSection.includes("The same institution looks different de
 
 
 expect(homeOrientationSection.includes("CHOOSE YOUR OWN PATH"), "Homepage audience layer must identify the reflow surface as Choose your own path");
-expect(startPage.includes("CHOOSE YOUR OWN PATH"), "Start route must identify the full audience reflow surface as Choose your own path");
+expect(startPage.includes("PICK THE PATH THAT FITS") && startPage.includes("Start with the smallest useful sequence."), "Start route must identify the full audience reflow surface with a clear path-selection invitation");
 
 
 const representationAtlasPage = read(`${root}/InstitutionalRepresentationAtlasPage.tsx`);
@@ -1114,9 +1114,9 @@ const representationAtlasContent = read(`${root}/content/representationAtlas.ts`
 const representationAtlasExplorer = read(`${root}/RepresentationAtlasExplorer.tsx`);
 expect(representationAtlasPage.includes("./content/representationAtlas"), "Representation Atlas route must own its comparative content model");
 expect(representationAtlasPage.includes("<RepresentationAtlasExplorer"), "Representation Atlas route must mount the interactive explorer");
-expect(representationAtlasPage.includes("One structural lens. Five very different worlds."), "Representation Atlas hero must lead with cross-domain structural comparison");
-expect(representationAtlasPage.includes("mathematically equivalent."), "Representation Atlas hero must expose the non-equivalence firewall");
-expect(representationAtlasContent.includes('sourceRevision: "3a8c984712ae1d87c7ec714876c356c20242cb15"'), "Representation Atlas must pin the Lab source revision");
+expect(representationAtlasPage.includes("Ask the same six questions in five very different domains."), "Representation Atlas hero must lead with cross-domain structural comparison");
+expect(representationAtlasPage.includes("The purpose is comparison, not unification.") && representationAtlasPage.includes("they do not mean the domains are mathematically or scientifically") && representationAtlasPage.includes("equivalent."), "Representation Atlas hero must expose the non-equivalence firewall");
+expect(representationAtlasContent.includes("sourceRevision: \"b543145845450821cefe0c401c73d814a01d81c0\""), "Representation Atlas must pin the Lab source revision");
 for (const domainId of ["social", "knowledge", "strategy", "agency", "physical"]) {
   expect(representationAtlasContent.includes(`id: "${domainId}"`), `Representation Atlas must expose ${domainId} witness domain`);
 }
@@ -1168,7 +1168,7 @@ const moonshotsChildRouteSegment = routeRegistry.slice(
 expect(moonshotsFeature.includes('getNode("moonshots")'), "Moonshots feature must derive its parent object from the canonical content graph");
 expect(moonshotsFeature.includes('getChildren("moonshots")'), "Moonshots feature must derive objectives from the canonical content graph");
 expect(moonshotsFeature.includes('href="/research/moonshots"'), "Moonshots feature must route to the canonical Moonshots branch");
-expect(moonshotsFeature.includes("Long-horizon objectives are not claims of completion"), "Moonshots feature must preserve the long-horizon claim boundary");
+expect(moonshotsFeature.includes("Long-horizon goals are not claims of completion, scientific validation,") && moonshotsFeature.includes("market value, external adoption, or inevitability."), "Moonshots feature must preserve the long-horizon claim boundary");
 expect(moonshotsFeatureCss.includes(".moonshotsFeature"), "Moonshots feature must own a distinct visual treatment outside ordinary content-card grids");
 expect(moonshotsFeature.includes("moonshotsFrame"), "Moonshots feature must use the v3 institutional framed-panel grammar");
 expect(moonshotsFeature.includes("objectiveIndex"), "Moonshots feature must present objectives as a restrained index rather than ordinary content cards");
@@ -1179,8 +1179,8 @@ expect(moonshotsResearchPage.includes('<MoonshotsFeature context="research" />')
 expect(moonshotsProjectsPage.includes('<MoonshotsFeature context="projects" />'), "Projects must feature Moonshots as a standalone band");
 expect(moonshotsOpenLabPage.includes('<MoonshotsFeature context="open-lab" />'), "Open Lab must feature Moonshots as a standalone band");
 expect(moonshotsFeature.includes('const isOpenLab = context === "open-lab"'), "Open Lab Moonshots must own an explicit hierarchy variant");
-expect(moonshotsFeature.includes("Moonshots — eight long-horizon objectives."), "Open Lab Moonshots must use the concise eight-objective title");
-expect(moonshotsFeature.includes("The Lab invites criticism, counterexamples, specialist knowledge, and collaboration"), "Open Lab Moonshots must make criticism and collaboration the public invitation");
+expect(moonshotsFeature.includes("Eight long-horizon research goals."), "Open Lab Moonshots must use the concise eight-objective title");
+expect(moonshotsFeature.includes("The Lab welcomes criticism, counterexamples, specialist knowledge, and collaboration"), "Open Lab Moonshots must make criticism and collaboration the public invitation");
 expect(!moonshotsFeature.includes("The long-horizon program should be exposed to outside pressure too."), "Open Lab Moonshots must not restore the verbose prior headline");
 expect(!moonshotsFeature.includes("moonshotsIdentityTagline"), "Open Lab Moonshots must keep the simplified side identity free of duplicate tagline copy");
 expect(moonshotsFeatureCss.includes('data-context="open-lab"'), "Open Lab Moonshots hierarchy must remain context-scoped");

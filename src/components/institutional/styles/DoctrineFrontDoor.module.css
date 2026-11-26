@@ -61,3 +61,18 @@
   padding-block: 3px;
   overflow-wrap: anywhere;
 }
+
+/* Preserve visible keyboard focus on reader links, including the homepage split articles. */
+.surface a.textLink:focus,
+.surface .split article a.textLink:focus {
+  outline: 3px solid #153a78 !important;
+  outline-offset: 3px !important;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 5px #153a78 !important;
+}
+@media (forced-colors: active) {
+  .surface a.textLink:focus,
+  .surface .split article a.textLink:focus {
+    outline: 3px solid CanvasText !important;
+    box-shadow: none !important;
+  }
+}

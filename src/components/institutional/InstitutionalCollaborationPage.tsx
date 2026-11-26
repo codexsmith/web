@@ -109,7 +109,8 @@ export function InstitutionalCollaborationPage() {
           note={
             <>
               The public page is organized around collaborator types rather than a list of
-              organizations BFL may someday contact.
+              organizations BFL may someday contact. These are possible collaborator roles, not claims of affiliation or endorsement.
+              Readiness depends on a defined exchange of value, clear scope, and agreement by both sides.
             </>
           }
         />
