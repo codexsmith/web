@@ -4,29 +4,29 @@ export const doctrineFrontDoor = {
     "eyebrow": "Independent · Founder-led · Digital-native",
     "title": "Trace what follows. Design for repair.",
     "lead": "We study the boundaries where systems become real.",
-    "support": "Boundary First Labs is an independent, founder-led digital-native research and engineering institution in service of the public good. We develop mathematics, computational tools and engineering practices to make consequential systems more understandable, accountable, maintainable and responsive to the people who depend on them.",
+    "support": "In service of the public good, we develop mathematics, computational tools and practices that make systems understandable, accountable, maintainable and responsive to the people who depend on them.",
     "identityLine": "Research and engineering for consequential systems.",
     "paths": [
       {
         "title": "Codexware",
-        "tagline": "Use what we build.",
-        "body": "Explore the computational tools we are developing to preserve evidence, support human agency and make consequential systems easier to navigate.",
+        "tagline": "Computational tools",
+        "body": "Developing tools to preserve evidence, support human agency and navigate consequential systems.",
         "href": "/codexware",
-        "label": "Explore Codexware"
+        "label": "View the application vision"
       },
       {
         "title": "Observatory",
-        "tagline": "Explore what we know.",
-        "body": "Discover the Lab’s research directions, selected demonstrations, intellectual foundations and the evidence behind cleared public results.",
+        "tagline": "Research & evidence",
+        "body": "Research directions, selected demonstrations, intellectual foundations and evidence behind cleared public results.",
         "href": "/observatory",
-        "label": "Explore the Observatory"
+        "label": "Inspect the research"
       },
       {
         "title": "Work With Us",
-        "tagline": "Build something together.",
-        "body": "Bring us a difficult problem. Explore research-driven engineering, scientific collaboration, evidence review and the design of accountable, repairable systems.",
+        "tagline": "Collaboration & services",
+        "body": "Research-driven engineering, scientific collaboration, evidence review and the design of accountable, repairable systems.",
         "href": "/work-with-us",
-        "label": "Work with us"
+        "label": "Find an engagement"
       }
     ],
     "commitmentLine": "Public good · Constructive human agency · Scientific integrity · Maintenance and repair"
@@ -310,7 +310,7 @@ export const doctrineFrontDoor = {
     "slug": "codexware",
     "name": "Codexware",
     "tagline": "Putting institutional computational tools into individual hands.",
-    "lead": "Research made operational: tools to help people understand requirements, preserve evidence and examine consequential decisions.",
+    "lead": "The intended tools help people understand requirements, preserve evidence and examine consequential decisions.",
     "support": "Codexware is a developing application and governed deployment architecture. Reusable reasoning, verification and evidence components are composed within declared boundaries.",
     "sections": [
       {
@@ -327,7 +327,7 @@ export const doctrineFrontDoor = {
       },
       {
         "title": "Research broadly. Deploy narrowly.",
-        "body": "Separate research machinery from deployment machinery. Each appliance receives only the capabilities needed for its declared purpose. Research broadly. Verify rigorously. Release selectively. Deploy narrowly. Govern continuously."
+        "body": "Separate research machinery from deployment machinery. Each appliance receives only the capabilities needed for its declared purpose. Verify rigorously. Release selectively. Govern continuously."
       },
       {
         "title": "Represent only what the purpose requires",
@@ -342,7 +342,7 @@ export const doctrineFrontDoor = {
     "status": "In development. This page describes intended capabilities and formal design and verification requirements, not a product release, availability promise, MCP integration, or claim of verified safeguards.",
     "commitments": {
       "heading": "Computational capability. Human authority.",
-      "intro": "Five design requirements define the proposed deployment boundary.",
+      "intro": "Governance by construction begins with five design requirements for the proposed deployment boundary.",
       "items": [
         {
           "title": "Procedurally verifiable opt-in",
@@ -369,8 +369,8 @@ export const doctrineFrontDoor = {
       "closing": "Distribute computational competence without distributing unchecked computational authority."
     },
     "examples": {
-      "heading": "What would you want to know?",
-      "intro": "Five ordinary problems illustrate the intended uses of governed computational instruments.",
+      "heading": "Intended uses",
+      "intro": "Five ordinary problems illustrate how governed computational instruments could support human decisions.",
       "items": [
         {
           "id": "requirements",
@@ -409,7 +409,7 @@ export const doctrineFrontDoor = {
       "linkIntro": "Explore the research connecting financial records to material viability."
     },
     "civicIntro": {
-      "title": "Meet Civic Record",
+      "title": "Civic Record",
       "tagline": "Your records. Your evidence. Your agency.",
       "body": "A proposed local workspace to preserve originals, document events and organize selected evidence. Core utility is intended to be free at the MVP stage, without AI, an external account, subscription or research participation.",
       "status": "Private prototype · Synthetic-data development · Not publicly available",
@@ -419,7 +419,7 @@ export const doctrineFrontDoor = {
   },
   "foundation": {
     "title": "Inquiry before implementation.",
-    "body": "We study the boundaries where systems become real. Our inquiries draw on mathematics, physics, computer science and engineering. From computation beneath disciplines to computation between them, we seek ways for specialized knowledge to work together without erasing its native meaning. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise."
+    "body": "Our inquiries draw on mathematics, physics, computer science and engineering. From computation beneath disciplines to computation between them, we seek ways for specialized knowledge to work together without erasing its native meaning. The discoveries are not predetermined; their potential for cross-disciplinary application is the premise."
   },
   "history": {
     "title": "From practice to research.",
@@ -545,15 +545,15 @@ export const doctrineFrontDoor = {
     "slug": "work-with-us",
     "name": "Work With Us",
     "eyebrow": "Research · Engineering · Public service",
-    "tagline": "Bring a problem worth solving.",
-    "lead": "You do not need a complete specification or a predetermined solution. We can begin with a research question, an unresolved problem or a capability you want to develop.",
+    "tagline": "Start with the problem, not a specification.",
+    "lead": "A research question, an unresolved problem or a capability you want to develop is enough to begin.",
     "support": "We work through scoped engagements and complementary expertise in architecture, research, evidence, governance and repair.",
     "principle": "Useful work should leave more capability behind.",
     "groups": [
       {
         "id": "commission",
         "title": "Commission work",
-        "intro": "Start with a system, difficult decision or unresolved obligation—not a predetermined implementation.",
+        "intro": "Scope work around a system, difficult decision or unresolved obligation.",
         "cards": [
           {
             "id": "systems",
@@ -583,7 +583,7 @@ export const doctrineFrontDoor = {
       },
       {
         "id": "collaborate",
-        "title": "Collaborate with us",
+        "title": "Collaborate",
         "intro": "Begin with one question, review, test or artifact. Independent criticism is welcome.",
         "cards": [
           {
@@ -660,7 +660,7 @@ export const doctrineFrontDoor = {
       }
     ],
     "engagement": {
-      "title": "From a problem to a bounded engagement.",
+      "title": "How an engagement works",
       "intro": "Explore without obligation. An initial conversation can establish whether useful, feasible work exists; a research question need not become a sales lead.",
       "steps": [
         {
@@ -684,8 +684,8 @@ export const doctrineFrontDoor = {
       "limits": "No predetermined result, timeline before scope and capacity, or substitution for authorized decision-makers. Agree confidentiality, ownership, review and disclosure."
     },
     "know": {
-      "title": "Know who you are working with.",
-      "intro": "Explore the founder-attributed history, research practice and institutional commitments.",
+      "title": "Institutional background",
+      "intro": "Founder-attributed history, research practice and institutional commitments.",
       "cards": [
         {
           "id": "founder",
@@ -722,8 +722,8 @@ export const doctrineFrontDoor = {
       ]
     },
     "contact": {
-      "title": "What are you trying to understand, build or repair?",
-      "body": "A short, non-confidential description is enough. Choose an inquiry or use direct email.",
+      "title": "Start a conversation",
+      "body": "A short, non-confidential description of what you want to understand, build or repair is enough. Choose an inquiry or use direct email.",
       "privacy": "Please do not send sensitive personal records, credentials or confidential material in an initial message. We can discuss the appropriate boundaries before exchanging anything consequential.",
       "href": "/contact",
       "label": "Prepare an inquiry"
@@ -2199,7 +2199,7 @@ export const doctrineFrontDoor = {
           "id": "engineering",
           "audience": "Engineers, architects, founders and small teams",
           "question": "Recurring exceptions, migrations or interface failures?",
-          "body": "Investigate an evolving schema, interface, verification obligation or recurring failure.",
+          "body": "Scope the failure, its verification obligations and a repair path.",
           "links": [
             {
               "href": "/work-with-us/professional-services",
