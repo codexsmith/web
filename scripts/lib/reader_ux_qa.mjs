@@ -388,17 +388,40 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       const resources = page.locator('[data-repair="resources"]');
       const repairResult = page.locator('[data-model-result="repair"]');
       const gauge = async (percent, state) => {
-        await textIs(page, "[data-repair-coverage]", percent + "%");
+        await textIs(page, "[data-repair-coverage]", Math.round(percent * 10) / 10 + "%");
         assert.equal(await repairResult.getAttribute("data-model-state"), state);
-        const witness = await page.locator("[data-demo-meter]").evaluate(node => {
+        const witness = await page.locator("[data-demo-meter]").evaluate(async node => {
+          // Observe the settled rendered geometry, not an integer-rounded
+          // clientWidth or the previous slider event's layout.
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
           const bar = node.querySelector("[data-repair-meter]");
-          return { track: node.clientWidth, bar: bar.getBoundingClientRect().width,
-            style: Number.parseFloat(bar.style.width), hidden: node.getAttribute("aria-hidden") };
+          const trackStyle = getComputedStyle(node);
+          const barStyle = getComputedStyle(bar);
+          const track = node.getBoundingClientRect();
+          const fill = bar.getBoundingClientRect();
+          const left = Number.parseFloat(trackStyle.borderLeftWidth) || 0;
+          const right = Number.parseFloat(trackStyle.borderRightWidth) || 0;
+          return {
+            track: track.width - left - right,
+            bar: fill.width,
+            offset: fill.left - track.left - left,
+            style: Number.parseFloat(bar.style.width),
+            hidden: node.getAttribute("aria-hidden"),
+            transition: barStyle.transitionDuration,
+            animation: barStyle.animationName,
+            position: barStyle.position,
+            padding: [trackStyle.paddingLeft, trackStyle.paddingRight],
+          };
         });
-        assert.ok(witness.track > 0 && witness.hidden === "true");
-        assert.ok(Math.abs(witness.style - percent) < .06 &&
-          Math.abs(witness.bar - witness.track * percent / 100) <= 1.5,
-          "repair gauge geometry and numeric readout must agree");
+        assert.ok(witness.track > 0 && witness.hidden === "true" &&
+          witness.position === "absolute" && witness.padding.every(value => value === "0px") &&
+          witness.transition.split(",").every(value => Number.parseFloat(value) === 0) &&
+          witness.animation === "none",
+          "repair gauge must be an unanimated, unpadded state projection: " + JSON.stringify(witness));
+        assert.ok(Math.abs(witness.style - percent) < .001 &&
+          Math.abs(witness.bar - witness.track * percent / 100) <= 1.0 &&
+          Math.abs(witness.offset) <= 1.0,
+          "repair gauge geometry and numeric readout must agree: " + JSON.stringify({percent, ...witness}));
       };
       for (const control of await page.locator("[data-repair-channel]").all()) {
         const input = control.locator('input[type="range"]');
@@ -423,6 +446,13 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       await gauge(0, "unfunded");
       await key(page.locator('[data-reset="repair"]'), "Enter");
       await textIs(page, "[data-repair-gap]", "$1,100");
+      await gauge(45, "unfunded");
+      // A non-integral fraction distinguishes the displayed rounded value
+      // from the physical fill, which retains the actual model fraction.
+      await key(page.locator('[data-repair="cost"]'), "ArrowRight");
+      await textIs(page, "[data-repair-gap]", "$1,200");
+      await gauge(100 * 900 / 2100, "unfunded");
+      await key(page.locator('[data-reset="repair"]'), "Enter");
       await gauge(45, "unfunded");
       for (let bits = 0; bits < 8; bits++) {
         const flags = [Boolean(bits & 1), Boolean(bits & 2), Boolean(bits & 4)];
