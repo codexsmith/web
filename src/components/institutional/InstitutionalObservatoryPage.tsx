@@ -3,7 +3,7 @@ import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { ReaderSectionNav } from "./ReaderSectionNav";
 import { ReaderScientificFigure } from "./ReaderScientificFigure";
 import { ReaderMastheadField } from "./ReaderMastheadField";
-import { DoctrineLinksSection, InstrumentCollectionLink, AudiencePathways } from "./DoctrineFrontDoor";
+import { doctrineClosingSectionEntries, DoctrineLinksSection, InstrumentCollectionLink, AudiencePathways } from "./DoctrineFrontDoor";
 import { observatoryExhibit as exhibit } from "./content/observatory";
 import { doctrineFrontDoor } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
@@ -21,7 +21,7 @@ export function InstitutionalObservatoryPage() {
             <p className={styles.support}>{exhibit.support}</p>
             <ReaderMastheadField kind="observation" />
           </section>
-        <ReaderSectionNav sections={[{ id: "audience-observatory", label: "Find your starting point" }, { id: "reader-exhibits", label: "Research exhibits" }, { id: "reader-foundations", label: "Intellectual foundations" }, { id: "reader-architecture", label: "Research architecture" }, { id: "reader-research", label: "Research directions" }, { id: "reader-method", label: "Research method" }, { id: "reader-evidence", label: "Evidence & claim status" }, { id: "reader-demonstration", label: "Demonstration" }, { id: "reader-release", label: "Public release" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[{ id: "audience-observatory", label: "Find your starting point" }, { id: "reader-exhibits", label: "Research exhibits" }, { id: "reader-foundations", label: "Intellectual foundations" }, { id: "reader-architecture", label: "Research architecture" }, { id: "reader-research", label: "Research directions" }, { id: "reader-method", label: "Research method" }, { id: "reader-evidence", label: "Evidence & claim status" }, { id: "reader-demonstration", label: "Demonstration" }, { id: "reader-release", label: "Public release" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("observatory")]} />
           <AudiencePathways context="observatory" />
           <div data-observatory-exhibit="public">
             <section className={styles.section} data-observatory-gallery>

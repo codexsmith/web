@@ -4,7 +4,7 @@ import { ReaderSectionNav } from "./ReaderSectionNav";
 import { chapterSectionEntries } from "./content/readerSectionNavigation";
 import { ReaderScientificFigure, demonstrationFigureByTitle } from "./ReaderScientificFigure";
 import { ReaderChapter } from "./ReaderChapter";
-import { DoctrineLinksSection, InstrumentCollectionLink } from "./DoctrineFrontDoor";
+import { doctrineClosingSectionEntries, DoctrineLinksSection, InstrumentCollectionLink } from "./DoctrineFrontDoor";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
 
@@ -20,7 +20,7 @@ export function PublicObservatoryExhibitPage({ slug }: { slug: Exhibit["slug"] }
           <h1>{exhibit.name}</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{exhibit.eyebrow}</p>
           <p className={styles.tagline}>{exhibit.tagline}</p></div><p className={styles.lead}>{exhibit.lead}</p><p className={styles.support}>{exhibit.support}</p>
         </section>
-        <ReaderSectionNav sections={[...chapterSectionEntries(exhibit.sections), { id: "reader-exhibit-comparison", label: exhibit.keyHeading }, { id: "reader-exhibit-references", label: "Public reading paths" }, ...(slug === "observatory/demonstrations" || slug === "observatory/research-architecture" ? [{ id: "reader-instruments", label: "Instruments" }] : []), { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[...chapterSectionEntries(exhibit.sections), { id: "reader-exhibit-comparison", label: exhibit.keyHeading }, { id: "reader-exhibit-references", label: "Public reading paths" }, ...(slug === "observatory/demonstrations" || slug === "observatory/research-architecture" ? [{ id: "reader-instruments", label: "Instruments" }] : []), ...doctrineClosingSectionEntries(slug)]} />
         <section className={styles.section} data-exhibit-body>
           <div className={styles.reading}><div>{exhibit.sections.map((item, index) => {
             const figureKind = slug === "observatory/demonstrations" ? demonstrationFigureByTitle[item.title] : undefined;

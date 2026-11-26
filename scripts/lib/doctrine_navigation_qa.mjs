@@ -19,6 +19,8 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     const links = Array.from(rail.querySelectorAll("a[href]"));
     const ids = links.map(a => a.getAttribute("href"));
     const targets = ids.map(href => href?.startsWith("#") ? doc.getElementById(href.slice(1)) : null);
+    const closingTargets = Array.from(main.querySelectorAll("[data-trust-link] h2, [data-doctrine-links] > h2")).map(heading => "#" + heading.id);
+    if (!same(ids.slice(-closingTargets.length), closingTargets)) issues.push("section navigation must cover every rendered closing section in its declared order");
     if (hero?.nextElementSibling !== rail || rail.tagName !== "NAV" || rail.getAttribute("aria-label") !== "On this page" ||
         links.length < 2 || new Set(ids).size !== ids.length || targets.some(t => !t || !main.contains(t) || rail.contains(t)) ||
         targets.some((t, i) => i > 0 && !(targets[i-1]?.compareDocumentPosition(t) & 4)) ||

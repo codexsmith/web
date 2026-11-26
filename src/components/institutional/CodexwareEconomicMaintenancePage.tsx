@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
 import { ReaderSectionNav } from "./ReaderSectionNav";
-import { DoctrineLinksSection, InstrumentCollectionLink } from "./DoctrineFrontDoor";
+import { doctrineClosingSectionEntries, DoctrineLinksSection, InstrumentCollectionLink } from "./DoctrineFrontDoor";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
 
@@ -15,7 +15,7 @@ export function CodexwareEconomicMaintenancePage() {
           <h1>{e.name}</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{e.eyebrow}</p><p className={styles.tagline}>{e.tagline}</p></div>
           <p className={styles.lead}>{e.lead}</p><p className={styles.support}>{e.support}</p>
         </section>
-        <ReaderSectionNav sections={[{ id: "reader-economic-status", label: "Research status" }, { id: "reader-economic-topics", label: "Research topics" }, { id: "reader-economic-cases", label: "Cases" }, { id: "reader-economic-method", label: "Research method" }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[{ id: "reader-economic-status", label: "Research status" }, { id: "reader-economic-topics", label: "Research topics" }, { id: "reader-economic-cases", label: "Cases" }, { id: "reader-economic-method", label: "Research method" }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("codexware/economic-maintenance")]} />
         <section className={styles.section} data-economic-status><p id="reader-economic-status" tabIndex={-1} data-reader-section-target className={styles.eyebrow}>Research status</p><p className={styles.sectionIntro}>{e.status}</p></section>
         <section className={styles.section} data-economic-topics><h2 id="reader-economic-topics" tabIndex={-1} data-reader-section-target>{e.topicsHeading}</h2><div className={styles.pathGrid} data-reader-collection="reference">{e.topics.map(item => <article className={styles.pathCard} key={item.id}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>
         <section className={styles.section} data-economic-cases><h2 id="reader-economic-cases" tabIndex={-1} data-reader-section-target>{e.casesHeading}</h2><p className={styles.sectionIntro}>{e.casesIntro}</p><div className={styles.pathGrid} data-reader-collection="cases">{e.cases.map(item => <article className={styles.pathCard} key={item.id} data-economic-case={item.id}><p className={styles.workStatus} data-case-status>{item.status}</p><h3>{item.title}</h3><p>{item.body}</p><p className={styles.smallPrint} data-case-limit>{item.limit}</p></article>)}</div></section>

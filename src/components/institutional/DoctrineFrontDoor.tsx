@@ -30,9 +30,22 @@ function DoctrineCards({ exclude }: { exclude?: Doctrine["slug"] }) {
 
 type DoctrineContext = keyof typeof content.doctrineContexts;
 
+// The section navigator and the closing renderer consume the same contextual
+// admission decision. A trust section is not a separate route in the local rail.
+function doctrineClosingContent(context: DoctrineContext) {
+  return { copy: content.doctrineContexts[context], trust: content.trustLinks.find(item => item.context === context) };
+}
+
+export function doctrineClosingSectionEntries(context: DoctrineContext) {
+  const { trust } = doctrineClosingContent(context);
+  return [
+    ...(trust ? [{ id: "reader-trust", label: "Evidence & trust" }] : []),
+    { id: "reader-doctrines", label: "Related doctrines" },
+  ];
+}
+
 export function DoctrineLinksSection({ context = "related", exclude }: { context?: DoctrineContext; exclude?: Doctrine["slug"] }) {
-  const copy = content.doctrineContexts[context];
-  const trust = content.trustLinks.find(item => item.context === context);
+  const { copy, trust } = doctrineClosingContent(context);
   return (
     <>
     {trust && <section className={styles.section} data-trust-link={context}><h2 id="reader-trust" tabIndex={-1} data-reader-section-target>{trust.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Evidence &amp; Trust</p><p className={styles.sectionIntro}>{trust.body}</p></div><Link className={styles.textLink} href={trust.href}>{trust.label} <span aria-hidden="true">→</span></Link></section>}
@@ -190,7 +203,7 @@ export function DoctrineLandingPage({ slug }: { slug: "consequential-systems" | 
           <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Doctrine {doctrine.number}</p><p className={styles.tagline}>{doctrine.tagline}</p></div>
           <p className={styles.lead}>{doctrine.lead}</p><p className={styles.support}>{doctrine.support}</p>
         </section>
-        <ReaderSectionNav sections={[...chapterSectionEntries(doctrine.sections), ...("framework" in doctrine ? [{ id: "reader-framework", label: "Governance in practice" }] : []), { id: "reader-guide", label: doctrine.guide.title }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[...chapterSectionEntries(doctrine.sections), ...("framework" in doctrine ? [{ id: "reader-framework", label: "Governance in practice" }] : []), { id: "reader-guide", label: doctrine.guide.title }, { id: "reader-explore", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("related")]} />
         <DoctrineEditorialBody doctrine={doctrine} />
         {"framework" in doctrine && <section className={styles.section} data-governance-framework><h2 id="reader-framework" tabIndex={-1} data-reader-section-target>Different capabilities, different obligations.</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Governance in practice</p></div><div className={styles.frameworkGrid} data-reader-collection="parallel">{doctrine.framework.map(item => <article key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>}
         <DoctrineReaderGuide doctrine={doctrine} />
@@ -217,7 +230,7 @@ export function CodexwareIntroductionPage() {
           <p className={styles.lead}>{c.lead}</p><p className={styles.support}>{c.support}</p>
           <ReaderMastheadField kind="operation" />
         </section>
-        <ReaderSectionNav sections={[{ id: "audience-codexware", label: "Find your starting point" }, { id: "reader-civic-record", label: "Civic Record" }, { id: "reader-intended-uses", label: "Intended uses" }, { id: "reader-application-design", label: "Design & development status" }, { id: "reader-commitments", label: "Governance requirements" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-trust", label: "Evidence & trust" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[{ id: "audience-codexware", label: "Find your starting point" }, { id: "reader-civic-record", label: "Civic Record" }, { id: "reader-intended-uses", label: "Intended uses" }, { id: "reader-application-design", label: "Design & development status" }, { id: "reader-commitments", label: "Governance requirements" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("codexware")]} />
         <AudiencePathways context="codexware" />
         <section className={`${styles.section} ${styles.callout}`} data-civic-record-entry>
           <div><h2 id="reader-civic-record" tabIndex={-1} data-reader-section-target>{c.civicIntro.title}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Codexware Civic</p><p className={styles.tagline}>{c.civicIntro.tagline}</p></div></div>
@@ -281,7 +294,7 @@ export function WorkWithUsPage() {
           <Link className={styles.action} href="/contact">Start a conversation <span aria-hidden="true">→</span></Link>
           <ReaderMastheadField kind="collaboration" />
         </section>
-        <ReaderSectionNav sections={[{ id: "audience-work-with-us", label: "Find your starting point" }, ...work.groups.map(group => ({ id: `work-${group.id}`, label: group.title })), { id: "work-engagement", label: work.engagement.title }, { id: "work-know", label: work.know.title }, { id: "work-contact", label: work.contact.title }, { id: "reader-institution", label: "The institution" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-trust", label: "Evidence & trust" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[{ id: "audience-work-with-us", label: "Find your starting point" }, ...work.groups.map(group => ({ id: `work-${group.id}`, label: group.title })), { id: "work-engagement", label: work.engagement.title }, { id: "work-know", label: work.know.title }, { id: "work-contact", label: work.contact.title }, { id: "reader-institution", label: "The institution" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("work-with-us")]} />
         <AudiencePathways context="work-with-us" />
         {work.groups.map(group => (
           <section className={styles.section} data-work-group={group.id} key={group.id} aria-labelledby={`work-${group.id}`}>
@@ -324,7 +337,7 @@ export function DigitalNativeInstitutionPage() {
           <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{institution.eyebrow}</p><p className={styles.tagline}>{institution.tagline}</p></div>
           <p className={styles.lead}>{institution.lead}</p><p className={styles.support}>{institution.support}</p>
         </section>
-        <ReaderSectionNav sections={[...chapterSectionEntries(institution.sections), { id: "stewardship-values", label: "Stewardship values" }, { id: "institutional-nongoals", label: "Institutional limits" }, { id: "reader-institution-work", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[...chapterSectionEntries(institution.sections), { id: "stewardship-values", label: "Stewardship values" }, { id: "institutional-nongoals", label: "Institutional limits" }, { id: "reader-institution-work", label: "Explore the work" }, { id: "reader-instruments", label: "Instruments" }, ...doctrineClosingSectionEntries("digital-native-institution")]} />
         <div className={styles.reading}>
           <div><ReadingSections sections={institution.sections} /></div>
           <aside className={styles.example}><h2>{institution.statusTitle}</h2><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>Institutional status</p></div><p>{institution.status}</p></aside>
@@ -363,7 +376,7 @@ export function EngagementGuidePage({ slug }: { slug: EngagementGuideSlug }) {
           <h1>{guide.name}</h1><div className={styles.headingMeta} data-reader-heading-meta><p className={styles.eyebrow}>{guide.eyebrow}</p>
           <p className={styles.tagline}>{guide.tagline}</p></div><p className={styles.lead}>{guide.lead}</p><p className={styles.support}>{guide.support}</p>
         </section>
-        <ReaderSectionNav sections={[{ id: "reader-offers", label: guide.offerHeading }, ...chapterSectionEntries(guide.sections), { id: "reader-example", label: guide.exampleTitle }, { id: "reader-guide-contact", label: "Contact" }, ...(slug !== "work-with-us/funding" ? [{ id: "reader-instruments", label: "Instruments" }] : []), { id: "reader-doctrines", label: "Related doctrines" }]} />
+        <ReaderSectionNav sections={[{ id: "reader-offers", label: guide.offerHeading }, ...chapterSectionEntries(guide.sections), { id: "reader-example", label: guide.exampleTitle }, { id: "reader-guide-contact", label: "Contact" }, ...(slug !== "work-with-us/funding" ? [{ id: "reader-instruments", label: "Instruments" }] : []), ...doctrineClosingSectionEntries(slug)]} />
         <section className={styles.section} data-guide-offers>
           <h2 id="reader-offers" tabIndex={-1} data-reader-section-target>{guide.offerHeading}</h2><div className={styles.frameworkGrid} data-reader-collection="parallel">{guide.offers.map((offer) => <article key={offer.title}><h3>{offer.title}</h3><p>{offer.body}</p></article>)}</div>
         </section>
