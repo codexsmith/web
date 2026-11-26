@@ -4254,3 +4254,18 @@
     align-items: center;
   }
 }
+
+/* Forced colors suppress gradients. The sticky rail must still occlude the
+ * scrolling reader beneath it, using the user's own system colors. */
+@media (forced-colors: active) {
+  .header {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+  .header .nav a[aria-current="page"]::after {
+    background: Highlight;
+    box-shadow: none;
+  }
+}

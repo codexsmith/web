@@ -78,6 +78,16 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
       const wordmark = page.locator("header [data-institutional-wordmark]");
       assert.ok(await wordmark.isVisible(), "institutional wordmark must remain visible on arrival");
       assert.equal(await wordmark.innerText(), "Boundary First Labs");
+      if (mode.forcedColors === "active") {
+        assert.ok(await page.evaluate(() => matchMedia("(forced-colors: active)").matches), "forced-colors emulation is required");
+        const rail = await page.locator("header[data-header-compact]").evaluate(node => {
+          const style = getComputedStyle(node);
+          const color = style.backgroundColor;
+          const opaque = color.startsWith("rgb(") || (color.startsWith("rgba(") && Number(color.slice(5, -1).split(",").at(-1)) === 1);
+          return { color, image: style.backgroundImage, opaque };
+        });
+        assert.ok(rail.opaque && rail.image === "none", "forced-color sticky rail must have an opaque system-color background: " + JSON.stringify(rail));
+      }
       await fit(page);
       const paths = page.locator("main [data-home-entry-paths]");
       assert.equal(await paths.locator("h2").innerText(), "Three ways into the Lab");

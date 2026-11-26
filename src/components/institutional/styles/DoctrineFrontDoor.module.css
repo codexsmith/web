@@ -165,3 +165,169 @@
     font-size: .72rem;
   }
 }
+
+
+/* Reader finish — BFUX material distinctions, without a layout migration.
+ * Paper supports reading; plates bound inspectable material; controls invite
+ * deliberate action; instrument wells expose a local computational boundary.
+ * No surface treatment implies validation, authority or completion. */
+.surface {
+  --df-reader-paper: #f7f9fc;
+  --df-reader-edge: #aab9cb;
+  --df-reader-seam: #d1dbe6;
+  --df-reader-plate: #fcfdff;
+  --df-reader-well: #e4ebf4;
+  --df-reader-rail: #c6a75b;
+  background: linear-gradient(180deg, #ffffff 0, var(--df-reader-paper) 20rem, #edf2f8 100%);
+}
+.surface .hero h1,
+.surface .section h2,
+.surface .readerGuide h2 {
+  color: var(--df-deep);
+  text-rendering: optimizeLegibility;
+}
+.surface .eyebrow,
+.surface .num,
+.surface .status {
+  color: var(--old-gold-dark, #776126);
+}
+.surface .hero,
+.surface .section,
+.surface .reading,
+.surface .readerGuide {
+  border-bottom-color: var(--df-reader-seam);
+}
+
+/* Informational plates are matte. The three entry cards remain recognizable
+   as whole-card actions, not as three separately branded products. */
+.surface .pathCard,
+.surface .frameworkGrid article {
+  background: var(--df-reader-plate);
+  border-color: var(--df-reader-edge);
+  box-shadow: inset 0 1px 0 #fff;
+}
+.surface a.card {
+  background: linear-gradient(180deg, #fff, #f3f6fa);
+  border-color: var(--df-reader-edge);
+  border-top-color: var(--df-accent);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 0 rgba(7,26,61,.12), 0 5px 12px rgba(7,26,61,.07);
+}
+.surface a.card:nth-child(2) {
+  border-top-color: var(--df-gold);
+}
+.surface a.card:hover,
+.surface a.card:focus-visible {
+  background: #edf3fb;
+  border-color: var(--df-accent);
+}
+.surface a.card .arrow {
+  color: var(--df-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Disclosures are controls for changing representation, not flat articles.
+   Their native markers continue to convey closed/open state independently
+   of the recessed material treatment. */
+.surface .readerDetails {
+  background: var(--df-reader-plate);
+  border-color: var(--df-reader-edge);
+  box-shadow: inset 0 1px 0 #fff, 0 2px 3px rgba(7,26,61,.07);
+}
+.surface .readerDetails > summary {
+  color: var(--df-deep);
+}
+.surface .readerDetails > summary::marker {
+  color: var(--df-accent);
+}
+.surface .readerDetails > summary:hover {
+  color: var(--df-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.surface .readerDetails[open] {
+  background: #edf3fa;
+  box-shadow: inset 0 1px 4px rgba(7,26,61,.10);
+}
+.surface .readerDetails[open] > summary {
+  border-bottom-color: var(--df-reader-rail);
+}
+
+/* Evidence and operations: distinguish the observation bed, the state cards
+   and the bounded output. A neutral output does not assert scientific success. */
+.surface .example,
+.surface .workNotes article {
+  background: #edf2f8;
+  box-shadow: inset 1px 0 0 rgba(7,26,61,.06);
+}
+.surface [data-demo-controls] {
+  background: var(--df-reader-well);
+  border-color: var(--df-reader-edge);
+  box-shadow: inset 0 2px 5px rgba(7,26,61,.10);
+}
+.surface [data-demo-card] {
+  background: var(--df-reader-plate);
+  border-color: var(--df-reader-edge);
+  box-shadow: inset 0 1px 0 #fff;
+}
+.surface [data-demo-result] {
+  background: #fff;
+  box-shadow: inset 0 1px 0 #fff, 0 1px 3px rgba(7,26,61,.08);
+}
+.surface [data-demo-controls] button,
+.surface .inquiryDraft button {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 1px 2px rgba(7,26,61,.14);
+}
+.surface .inquiryDraft button:disabled {
+  box-shadow: none;
+}
+.surface .inquiryDraft :is(select, textarea) {
+  background: #fff;
+  border-color: var(--df-reader-edge);
+  box-shadow: inset 0 1px 2px rgba(7,26,61,.07);
+}
+.surface a.textLink {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.surface a.textLink:hover {
+  color: var(--df-deep);
+  text-decoration-thickness: 2px;
+}
+
+/* The already-approved narrow editorial list remains a list, not a panel. */
+@media (max-width: 640px) {
+  .surface :is([data-work-group],[data-work-section="know"],[data-audience-paths="work-with-us"]) .pathCard {
+    background: transparent;
+    border: 0;
+    border-top: 1px solid var(--df-reader-seam);
+    box-shadow: none;
+  }
+}
+
+/* Material decoration may disappear. Semantic boundaries may not. */
+@media (forced-colors: active) {
+  .surface,
+  .surface a.card,
+  .surface .pathCard,
+  .surface .frameworkGrid article,
+  .surface .readerDetails,
+  .surface .readerDetails[open],
+  .surface .example,
+  .surface .workNotes article,
+  .surface [data-demo-controls],
+  .surface [data-demo-card],
+  .surface [data-demo-result],
+  .surface .inquiryDraft :is(select, textarea) {
+    background: Canvas;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+  .surface .readerDetails[open] > summary {
+    border-bottom-color: Highlight;
+  }
+  .surface .readerDetails > summary::marker {
+    color: CanvasText;
+  }
+}
