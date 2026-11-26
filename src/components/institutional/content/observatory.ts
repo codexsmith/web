@@ -1,3 +1,8 @@
+import { doctrineFrontDoor } from "./doctrineFrontDoor";
+
+// Curated public exhibition. Legacy descriptions below are not used by the public renderer.
+export const observatoryExhibit = doctrineFrontDoor.observatory;
+
 export type ObservatoryRole = {
   label: string;
   verb: string;

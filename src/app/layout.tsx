@@ -91,7 +91,7 @@ export const metadata: Metadata = {
     template: "%s | Boundary First Labs",
   },
   description:
-    "Scientific software modeling, executable representation, applied systems research, products, publications, and public-interest work.",
+    "Independent research and engineering for consequential systems, AI governance and constructive human agency.",
   referrer: "strict-origin-when-cross-origin",
   formatDetection: {
     telephone: false,
@@ -103,14 +103,14 @@ export const metadata: Metadata = {
     siteName: "Boundary First Labs",
     title: "Boundary First Labs",
     description:
-      "Scientific software modeling, executable representation, applied systems research, products, and public-interest systems work.",
+      "Independent research and engineering for consequential systems, AI governance and constructive human agency.",
     url: "/",
   },
   twitter: {
     card: "summary",
     title: "Boundary First Labs",
     description:
-      "Scientific software modeling, executable representation, applied systems research, products, and public-interest systems work.",
+      "Independent research and engineering for consequential systems, AI governance and constructive human agency.",
   },
 };
 

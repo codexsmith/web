@@ -4,7 +4,7 @@ import { InstitutionalObservatoryPage } from "@/components/institutional/Institu
 export const metadata: Metadata = {
   title: "Observatory · Boundary First Labs",
   description:
-    "A public inspection surface for Boundary First Labs research, maps, experiments, evidence, machinery, institutional state, and history.",
+    "A curated exhibition of Boundary First Labs research foundations, architecture, methods, and selected public demonstrations.",
   alternates: { canonical: "/observatory" },
 };
 

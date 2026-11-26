@@ -29,6 +29,8 @@ expect(qa.includes("Skip to main content"), "v3 release QA must exercise the ski
 expect(qa.includes("Control+K"), "v3 release QA must exercise keyboard command-palette access");
 expect(qa.includes("__release-qa-missing__"), "v3 release QA must exercise the institutional 404 state");
 expect(qa.includes("horizontalOverflow"), "v3 release QA must check horizontal overflow");
+expect(qa.includes("doctrineNavigationIssues(page, config.route)"), "release QA must check the doctrine closing section in rendered pages");
+expect(qa.includes("verifyDoctrineTraversals(browser, base"), "release QA must traverse all twelve principal-page doctrine links");
 expect(qa.includes("clippedText"), "v3 release QA must check clipped text");
 expect(qa.includes("unnamedInteractive"), "v3 release QA must check interactive accessible names");
 expect(qa.includes("targetSpacingViolations"), "v3 release QA must check minimum target size and spacing");

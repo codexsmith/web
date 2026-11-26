@@ -52,8 +52,8 @@ requireMatch(
 // / ?world=1 state machine.
 requireMatch(
   "src/app/page.tsx",
-  /InstitutionalHomePage/,
-  "The canonical root must render the institutional homepage",
+  /DoctrineHomePage/,
+  "The canonical root must render the doctrine-led institutional homepage",
 );
 forbidMatch(
   "src/app/page.tsx",

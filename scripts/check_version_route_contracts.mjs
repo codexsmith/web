@@ -6,6 +6,8 @@ const expect = (condition, message) => {
 };
 
 const rootPage = read("src/app/page.tsx");
+const frontDoor = read("src/components/institutional/DoctrineFrontDoor.tsx");
+expect(!frontDoor.includes("DevProductSwitch") && !frontDoor.includes('href="/v2"'), "the new public front door must not advertise the development engine");
 const v2Page = read("src/app/v2/page.tsx");
 const v3Page = read("src/app/v3/page.tsx");
 const previewAlias = read("src/app/institutional-preview/page.tsx");
@@ -17,10 +19,10 @@ const siteRelease = read("src/lib/site-release.ts");
 const nextConfig = read("next.config.ts");
 
 expect(
-  rootPage.includes("InstitutionalHomePage") &&
+  rootPage.includes("DoctrineHomePage") &&
     rootPage.includes('canonical: "/"') &&
     !rootPage.includes("LabMachineHomeRoute"),
-  "root must own the Product / institutional Website v3 home after cutover",
+  "root must own the doctrine-led institutional Website v3 home after cutover",
 );
 expect(
   v2Page.includes("LabMachineHomeRoute") &&

@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { chromium } from "playwright";
+import { doctrineNavigationIssues, verifyDoctrineTraversals } from "./lib/doctrine_navigation_qa.mjs";
 
 const port = Number(process.env.V3_RELEASE_QA_PORT ?? 3237);
 const base = `http://127.0.0.1:${port}`;
@@ -42,6 +43,24 @@ const viewports = {
 
 const stressRoutes = new Set([
   "/",
+  "/codexware",
+  "/codexware/economic-maintenance",
+  "/codexware/civic-record",
+  "/observatory",
+  "/work-with-us",
+  "/digital-native-institution",
+  "/evidence-and-trust",
+  "/consequential-systems",
+  "/constructive-human-agency",
+  "/work-with-us/professional-services",
+  "/work-with-us/paper-auditing",
+  "/work-with-us/public-service",
+  "/work-with-us/funding",
+  "/observatory/intellectual-lineage",
+  "/observatory/research-architecture",
+  "/observatory/computational-inquiry",
+  "/observatory/demonstrations",
+  "/observatory/instruments",
   "/research",
   "/projects",
   "/publications",
@@ -346,7 +365,7 @@ async function visit(browser, config) {
   await page.waitForTimeout(120);
 
   const metrics = await inspectPage(page);
-  const issues = [];
+  const issues = await doctrineNavigationIssues(page, config.route);
 
   if (!response?.ok()) issues.push(`HTTP ${response?.status() ?? "no response"}`);
   if (metrics.horizontalOverflow) {
@@ -518,7 +537,7 @@ async function checkCommandPalette(browser, viewportName) {
   const issues = [];
 
   await page.goto(`${base}/`, { waitUntil: "networkidle" });
-  const trigger = page.getByRole("button", { name: /Search Lab objects and pages/i });
+  const trigger = page.getByRole("button", { name: /Search curated Lab pages/i });
   await trigger.focus();
   await page.keyboard.press("Enter");
   await page.waitForTimeout(80);
@@ -531,7 +550,7 @@ async function checkCommandPalette(browser, viewportName) {
   const inputFocused = await page.evaluate(
     () =>
       document.activeElement?.getAttribute("aria-label") ===
-      "Search Lab objects, relationships, and pages",
+      "Search curated Lab pages",
   );
   if (!inputFocused) issues.push("command palette did not focus the search input");
 
@@ -554,7 +573,7 @@ async function checkCommandPalette(browser, viewportName) {
   const triggerRestored = await page.evaluate(
     () =>
       document.activeElement?.getAttribute("aria-label") ===
-      "Search Lab objects and pages. Keyboard shortcut Command or Control K.",
+      "Search curated Lab pages. Keyboard shortcut Command or Control K.",
   );
   if (!triggerRestored) {
     issues.push("closing a trigger-opened command palette did not restore focus to its trigger");
@@ -565,7 +584,19 @@ async function checkCommandPalette(browser, viewportName) {
   if (!(await dialog.isVisible().catch(() => false))) {
     issues.push("Control+K did not open the Lab command palette");
   } else {
-    await page.keyboard.press("Escape");
+    const search = dialog.getByLabel("Search curated Lab pages");
+    await search.fill("Civic Record");
+    const matches = dialog.getByRole("option");
+    if ((await matches.count()) !== 1 || !(await matches.first().textContent())?.includes("Civic Record")) {
+      issues.push("curated search did not identify exactly the Civic Record reader");
+    } else if (await matches.first().getAttribute("data-entry-type") !== "page") {
+      issues.push("curated search unexpectedly returned an internal object");
+    } else {
+      await search.press("Enter");
+      await page.waitForURL("**/codexware/civic-record", { timeout: 5000 }).catch(() => null);
+      if (new URL(page.url()).pathname !== "/codexware/civic-record") issues.push("curated search did not navigate to the canonical Civic Record route");
+    }
+    if (await dialog.count()) await page.keyboard.press("Escape");
   }
 
   const name = `command palette @ ${viewportName}`;
@@ -690,6 +721,11 @@ try {
   await checkCommandPalette(browser, "desktop");
   await checkCommandPalette(browser, "mobile");
   await checkNotFound(browser);
+  for (const viewportName of ["desktop", "mobile"]) {
+    const issues = await verifyDoctrineTraversals(browser, base, viewports[viewportName]);
+    recordFailure(`Doctrine navigation traversal @ ${viewportName}`, issues);
+    results.push({ name: `Doctrine navigation traversal @ ${viewportName}`, viewportName, issues });
+  }
 
   writeReport();
 } finally {

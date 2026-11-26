@@ -31,7 +31,8 @@ expect(chrome.includes("usePathname"), "Institutional header must derive active 
 expect(chrome.includes("IntersectionObserver"), "Institutional header must observe the route hero before compacting the brand");
 expect(chrome.includes('data-header-compact={heroPassed ? "true" : "false"}'), "Institutional header must expose compact state to CSS");
 expect(chrome.includes('aria-current={active ? "page" : undefined}'), "Institutional navigation must expose current-page semantics");
-expect(chrome.includes('href === "/research"') && chrome.includes('pathname === "/publications"'), "Publications must inherit the Research active-navigation state");
+expect(chrome.includes('href === "/observatory"') && chrome.includes("observatoryRoutePrefixes.some"), "Observatory descendants must inherit the Observatory active-navigation state");
+expect(chrome.includes('href === "/work-with-us"') && chrome.includes('"/applied-work", "/collaboration", "/funding", "/contact", "/open-lab"'), "Participation routes must inherit the Work With Us active-navigation state");
 expect(chrome.includes("<LabCommandPalette />"), "Institutional header must mount global Lab command navigation");
 expect(!chrome.includes('href="/v3/start"'), "Institutional header must not duplicate the homepage audience traversal entry");
 expect(!chrome.includes("Start here"), "Institutional header must not render the retired Start here control");
@@ -43,9 +44,9 @@ expect(commandPalette.startsWith('"use client";'), "Lab command palette must own
 expect(commandPalette.includes("event.metaKey || event.ctrlKey"), "Lab command palette must support Command/Ctrl-K");
 expect(commandPalette.includes("dialog.showModal()"), "Lab command palette must use a modal dialog boundary");
 expect(commandPalette.includes('role="listbox"'), "Lab command palette must expose keyboard-search result semantics");
-expect(commandPaletteContent.includes("atlasNodes"), "Lab command search must derive object entries from the public Atlas");
-expect(commandPaletteContent.includes("atlasEdges"), "Lab command search must include only explicit Atlas relationship data");
-expect(commandPaletteContent.includes('/atlas?focus='), "Lab object search results must deep-link to the canonical Atlas focus state");
+expect(commandPaletteContent.includes("curatedReaderRoutes") && !commandPaletteContent.includes("atlasNodes"), "Lab command search must derive entries only from the curated reader inventory");
+expect(!commandPaletteContent.includes("atlasEdges"), "Curated public search does not enumerate Atlas relationships");
+expect(!commandPaletteContent.includes('/atlas?focus='), "Curated search does not route into legacy Atlas objects");
 expect(primitives.includes("data-institutional-hero"), "Shared route heroes must identify themselves to the sticky header");
 expect(primitives.includes('aria-label="Related pages"'), "Contextual route navigation must use public-facing Related pages language");
 expect(primitives.includes(">RELATED</span>"), "Contextual route navigation must not expose CHILD PAGE implementation language");
@@ -53,34 +54,19 @@ expect(!primitives.includes("CHILD PAGES"), "Shared route navigation must not re
 expect(labObjectIdentity.includes("data-kind={kind}"), "LabObjectIdentity must expose object-kind semantics to presentation");
 expect(labObjectIdentity.includes("identifierLabel = \"ID\""), "LabObjectIdentity must distinguish source identifiers from local codes");
 expect(labObjectIdentity.includes("statusLabel = \"STATUS\""), "LabObjectIdentity must preserve source-native status labeling");
-expect(homePage.includes("data-institutional-hero"), "Homepage hero must identify itself to the sticky header");
-expect(homeContent.includes('title: "Boundary First Weather"'), "Featured work slot four must be Boundary First Weather");
-expect(homeContent.includes('href: "/products/boundary-first-weather"'), "Featured Boundary First Weather must link to its immersive product page");
-expect(homeContent.includes('href: "/products/agentic-scientific-method"'), "Featured Agentic Scientific Method must link to its immersive product page");
-expect(homeContent.includes('title: "YouTube Knowledge Explorer"'), "Featured work must use the YouTube Knowledge Explorer public name");
-expect(homeContent.includes('href: "/products/youtube-knowledge-explorer"'), "Featured YouTube Knowledge Explorer must link to its immersive product page");
-expect(!homeContent.includes("Projectr"), "v3 homepage public naming must not expose Projectr");
-expect(!homeContent.includes('title: "Public Infrastructure Analysis"'), "Public Infrastructure Analysis must no longer occupy featured work slot four");
-expect(homePage.includes("item.href ?"), "Homepage featured work must support direct product entry links");
-expect(homePage.includes("styles.inMotionSection"), "Homepage must expose the Lab in Motion institutional access layer");
-expect(homeContent.includes("homeNowSnapshot"), "Homepage content must expose a current Now / Roadmap snapshot");
-expect(homeContent.includes('href: "/now"'), "Homepage Now snapshot must link to the public roadmap");
-expect(homeContent.includes('href: "/applied-work"'), "Homepage must expose Applied Work as the prominent consulting route");
-expect(homePage.includes('className={styles.primaryAction} href="/applied-work"'), "Homepage primary action must point to Applied Work");
-expect(homeContent.includes("homeAppliedWorkFeature"), "Homepage content must define a prominent consulting offer");
-expect(homePage.includes("styles.homeConsultingFeature"), "Homepage must render a dedicated consulting feature above Featured Work");
-expect(
-  homePage.indexOf("styles.homeConsultingFeature") < homePage.indexOf("styles.featuredSection"),
-  "Homepage consulting offer must appear before Featured Work",
-);
-expect(homeContent.includes('href: "/collaboration"'), "Homepage must expose Collaboration as an institutional front door");
-expect(homeContent.includes('href: "/funding"'), "Homepage must expose Funding as an institutional front door");
-expect(homeContent.includes("Externalize → test → repair → repeat → transfer."), "Homepage Now snapshot must preserve the current operating thesis");
-expect(homePage.includes("homeInstitutionalFrontDoors.map"), "Homepage institutional front doors must render from the content model");
-expect(!homePage.includes("The public site should not stop at describing what Boundary First Labs is."), "Lab in Motion must not carry explanatory site-meta prose");
-expect(!homePage.includes("homeNowSnapshot.description"), "Lab in Motion Now card must stay focused on state, thesis, lanes, and action");
-expect(!homePage.includes("door.description"), "Lab in Motion front doors must stay focused on title, compact note, and action");
-expect(!homeContent.includes("The immediate problem is not generating more ideas."), "Removed Lab in Motion descriptive prose must not remain in the homepage content model");
+// The former homepage is retained as source history, not the canonical reader.
+expect(homePage.includes("InstitutionalPageShell") && homeContent.includes("homeNowSnapshot"), "Retained legacy homepage source remains inspectable");
+const replacementRoot = read("src/app/page.tsx");
+const replacementFrontDoor = read(`${root}/DoctrineFrontDoor.tsx`);
+const replacementHome = replacementFrontDoor.split("export function DoctrineHomePage(")[1]?.split("export function ")[0] ?? "";
+const replacementModel = JSON.parse(read(`${root}/content/doctrineFrontDoor.ts`).match(/export const doctrineFrontDoor = (\{[\s\S]+\}) as const;/)?.[1] ?? "null");
+expect(replacementRoot.includes("<DoctrineHomePage />") && !replacementRoot.includes("<InstitutionalHomePage />"), "Canonical root must render only the replacement homepage");
+expect(replacementHome.includes("data-institutional-hero") && replacementHome.includes("institutionalIdentity.tagline"), "Canonical homepage must use native sticky hero and shared identity");
+expect(replacementHome.includes("data-home-entry-paths") && replacementHome.includes("home.paths.map"), "Homepage must render the three entry cards from the content model");
+expect(JSON.stringify(replacementModel?.home.paths.map((item) => item.href)) === JSON.stringify(["/codexware", "/observatory", "/work-with-us"]), "Home entry cards must match the three primary destinations");
+expect(replacementHome.includes('<DigitalNativeInstitutionLink context="home" />'), "Home must make stewardship accessible");
+expect(replacementHome.includes('<DoctrineLinksSection context="home" />'), "Homepage must end with the three doctrine entries");
+expect(!replacementHome.includes("homeNowSnapshot") && !replacementHome.includes("HomeOrientationSection"), "Canonical home must not mount the retired parallel homepage architecture");
 
 const foundationCss = read(`${root}/styles/InstitutionalFoundation.module.css`);
 expect(foundationCss.includes('border-color: rgba(184, 154, 71, .46)'), "Institutional header must carry a muted antique-gold perimeter");
@@ -248,13 +234,15 @@ expect(
 );
 
 const routeRegistry = read(`${root}/institutionalRoutes.ts`);
-const topLevelRouteRegistry = routeRegistry.slice(0, routeRegistry.indexOf("const institutionalChildPages"));
+const topLevelRouteRegistry = routeRegistry.match(/export const institutionalRoutes = \[([\s\S]*?)\] as const;/)?.[1] ?? "";
+const primaryReaderLinks = [...topLevelRouteRegistry.matchAll(/\{ label: "([^"]+)", href: "([^"]+)" \}/g)].map((match) => [match[1], match[2]]);
+expect(JSON.stringify(primaryReaderLinks) === JSON.stringify([["Codexware", "/codexware"], ["Observatory", "/observatory"], ["Work With Us", "/work-with-us"]]), "Primary header must contain exactly the three curated reader paths in order");
 expect(!topLevelRouteRegistry.includes('/apparatus'), "Apparatus must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/funding'), "Funding must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/apparatus'), "Apparatus must stay out of the primary header route set");
 expect(!topLevelRouteRegistry.includes('/founder'), "Founder must remain a contextual child route rather than top-level navigation");
 expect(!topLevelRouteRegistry.includes('/collaboration'), "Collaboration must remain a contextual child route rather than top-level navigation");
-expect(topLevelRouteRegistry.includes('{ label: "Applied Work", href: "/applied-work" }'), "Applied Work must be a primary top-level consulting route");
+expect(!topLevelRouteRegistry.includes('{ label: "Applied Work", href: "/applied-work" }'), "Applied Work must remain reachable under Work With Us, not occupy primary navigation");
 expect(!topLevelRouteRegistry.includes('{ label: "Publications", href: "/publications" }'), "Publications must be discovered from Research rather than occupying primary top navigation");
 expect(!topLevelRouteRegistry.includes('/ai-governance'), "AI Governance must remain a first-class secondary route rather than primary top navigation");
 expect(!topLevelRouteRegistry.includes('/evidence'), "Evidence must remain a contextual child route rather than top-level navigation");
@@ -276,20 +264,20 @@ expect(!routeRegistry.includes('relation: "EXPERIMENTS"'), "Experiments child li
 expect(!routeRegistry.includes('relation: "CLAIMS"'), "Claims child links must not duplicate title and eyebrow");
 expect(!routeRegistry.includes('relation: "APPARATUS"'), "Apparatus child links must not duplicate title and eyebrow");
 expect(routeRegistry.includes("institutionalFooterRoutes"), "route registry must expose an explicit footer route collection");
-expect(routeRegistry.includes('{ label: "Apparatus", href: "/apparatus" }'), "footer route collection must include Apparatus");
-expect(routeRegistry.includes('{ label: "Lab Atlas", href: "/atlas" }'), "footer route collection must include Lab Atlas");
-expect(routeRegistry.includes('{ label: "Representation Atlas", href: "/representation-atlas" }'), "footer route collection must include Representation Atlas");
-expect(routeRegistry.includes('{ label: "Experiments", href: "/experiments" }'), "footer route collection must include Experiments");
-expect(routeRegistry.includes('{ label: "Claims", href: "/claims" }'), "footer route collection must include Claims");
-expect(routeRegistry.includes('{ label: "Founder", href: "/founder" }'), "footer route collection must include Founder");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/apparatus"'), "Curated footer does not promote Apparatus");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/atlas"'), "Curated footer does not promote Lab Atlas");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/representation-atlas"'), "Curated footer does not promote Representation Atlas");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/experiments"'), "Curated footer does not promote Experiments");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/claims"'), "Curated footer does not promote Claims");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/founder"'), "Curated footer does not promote Founder");
 expect(routeRegistry.includes('{ label: "AI Governance", href: "/ai-governance" }'), "footer route collection must include AI Governance");
-expect(routeRegistry.includes('{ label: "Collaboration", href: "/collaboration" }'), "footer route collection must include Collaboration");
-expect(routeRegistry.includes('{ label: "Applied Work", href: "/applied-work" }'), "footer route collection must include Applied Work");
-expect(routeRegistry.includes('{ label: "Evidence", href: "/evidence" }'), "footer route collection must include Evidence");
-expect(routeRegistry.includes('{ label: "Now", href: "/now" }'), "footer route collection must include Now / Roadmap");
-expect(routeRegistry.includes('{ label: "What changed", href: "/changes" }'), "footer route collection must include What changed");
-expect(routeRegistry.includes('{ label: "Start here", href: "/start" }'), "footer route collection must include Start here");
-expect(routeRegistry.includes('{ label: "Contact", href: PUBLIC_CONTACT_MAILTO }'), "footer Contact must route directly to the canonical public email");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/collaboration"'), "Curated footer does not promote Collaboration");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/applied-work"'), "Curated footer does not promote Applied Work");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/evidence"'), "Curated footer does not promote Evidence");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/now"'), "Curated footer does not promote Now");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/changes"'), "Curated footer does not promote What changed");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/start"'), "Curated footer does not promote Start here");
+expect(routeRegistry.includes('{ label: "Contact", href: "/contact" }') && routeRegistry.includes('{ label: "Direct email", href: PUBLIC_CONTACT_MAILTO }'), "Footer exposes contact and direct email");
 
 const childRouteContracts = [
   ["about", ["founder", "labThroughTime", "aiGovernance", "now", "collaboration", "appliedWork"]],
@@ -927,7 +915,7 @@ expect(atlasContent.includes('/evidence#evidence-'), "Evidence Atlas nodes must 
 expect(atlasContent.includes("searchTerms: [record.evidence, record.boundary]"), "Evidence search must preserve both basis and claim ceiling");
 expect(!atlasContent.includes("identifier: record.surfaceKey"), "Atlas-local evidence routing keys must not become identifiers");
 expect(atlasPage.includes("Research · Experiments · Claims · Machinery · Products · Projects · Publications · Evidence"), "Lab Atlas boundary copy must disclose the current Claim, Machinery, Experiment, and Evidence object families");
-expect(commandPaletteContent.includes("node.searchTerms"), "Global object search must admit bounded object-specific search terms without inferring edges");
+expect(commandPaletteContent.includes("route.label"), "Curated search indexes page labels");
 expect(!atlasContent.includes("similarity"), "Lab Atlas content model must not infer semantic edges from similarity");
 
 
@@ -947,7 +935,7 @@ expect(changesPage.includes("State changes, not activity theater."), "What chang
 expect(changesContent.includes('webRevision: "e30f35f0fb9cf62f4dc70556e2df6d97c34286e5"'), "Change archive must pin the canonical web source cutoff");
 expect(changesContent.includes('labRevision: "2040584c19c8202215bdb83e46d1df05df37dafe"'), "Change archive must pin the canonical Lab source cutoff");
 expect(changesContent.includes("It reports selected material changes"), "Change projection must reject complete-activity-feed semantics");
-expect(homePageForChanges.includes("<RecentChangesStrip"), "Homepage must surface the compact recent-change layer");
+expect(homePageForChanges.includes("<RecentChangesStrip"), "Retained legacy homepage component preserves the former material-change projection");
 expect(nowPageForChanges.includes('title="What materially changed?"'), "Now page must surface recent material deltas");
 
 const temporalViewNav = read(`${root}/TemporalViewNav.tsx`);
@@ -1083,7 +1071,7 @@ expect(audienceGrid.includes("itemOrder={itemOrder}"), "Audience journey reflow 
 expect(audienceGrid.includes("<ReflowFieldItem"), "Each audience path must be an inspectable reflow item");
 expect(audienceGrid.includes("summary={<AudienceJourneySummary"), "Audience reflow must separate compact summary from expanded detail");
 expect(audienceGrid.includes("detail={<AudienceJourneyDetail"), "Audience reflow must reveal ordered path detail only after selection");
-expect(homeForAudienceTraversal.includes("<HomeOrientationSection"), "Homepage must delegate orientation content to HomeOrientationSection");
+expect(homeForAudienceTraversal.includes("<HomeOrientationSection"), "Retained legacy homepage component preserves its historical orientation renderer");
 expect(homeOrientationSection.includes("homeAudienceJourneys"), "Homepage orientation section must reuse the same canonical audience traversal model");
 expect(homeOrientationSection.includes("<AudienceJourneyGrid"), "Homepage orientation section must expose compact audience-specific traversal");
 expect(!homeOrientationSection.includes("The same institution looks different depending on whether you came"), "Homepage audience lead must not repeat the audience-explanation paragraph");
@@ -1168,7 +1156,7 @@ expect(moonshotsFeature.includes("The Lab invites criticism, counterexamples, sp
 expect(!moonshotsFeature.includes("The long-horizon program should be exposed to outside pressure too."), "Open Lab Moonshots must not restore the verbose prior headline");
 expect(!moonshotsFeature.includes("moonshotsIdentityTagline"), "Open Lab Moonshots must keep the simplified side identity free of duplicate tagline copy");
 expect(moonshotsFeatureCss.includes('data-context="open-lab"'), "Open Lab Moonshots hierarchy must remain context-scoped");
-expect(routeRegistry.includes('{ label: "Moonshots", href: "/research/moonshots" }'), "Research footer must link Moonshots directly");
+expect(!routeRegistry.split("export const institutionalFooterGroups = [")[1].includes('href: "/research/moonshots"'), "Curated footer does not promote Moonshots");
 expect(!moonshotsChildRouteSegment.includes("Moonshots"), "Moonshots must not be rendered as a contextual child-route button");
 for (const route of [
   "/research/moonshots",

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { InstitutionalHomePage } from "@/components/institutional/InstitutionalHomePage";
+import { DoctrineHomePage } from "@/components/institutional/DoctrineFrontDoor";
 
 export const metadata: Metadata = {
   title: { absolute: "Boundary First Labs" },
   description:
-    "Boundary First Labs is an applied systems laboratory for scientific software modeling, executable representation, research machinery, products, and public-interest systems work.",
+    "Independent, founder-led research and engineering for public good: understanding, maintaining and improving consequential systems.",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
@@ -16,7 +16,7 @@ export default function HomePage() {
     name: "Boundary First Labs",
     url: "https://boundaryfirstlabs.com",
     description:
-      "An applied systems laboratory for scientific software modeling, executable representation, inspectable research machinery, products, and public-interest work.",
+      "Independent founder-led research and engineering for consequential systems, AI governance and constructive human agency.",
   };
 
   return (
@@ -27,7 +27,7 @@ export default function HomePage() {
           __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
         }}
       />
-      <InstitutionalHomePage />
+      <DoctrineHomePage />
     </>
   );
 }

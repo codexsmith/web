@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { BoundaryFirstWaveLogo } from "@/components/BoundaryFirstWaveLogo";
 import { LabCommandPalette } from "./LabCommandPalette";
 import { PUBLIC_CONTACT_EMAIL, PUBLIC_CONTACT_MAILTO } from "@/lib/site-contact";
+import { institutionalIdentity } from "@/lib/institutional-identity";
 import {
   institutionalFooterGroups,
   institutionalRoutes,
@@ -24,8 +25,10 @@ function routeIsActive(pathname: string, href: string) {
   }
 
   if (
-    href === "/research" &&
-    (pathname === "/publications" || pathname.startsWith("/publications/"))
+    href === "/work-with-us" &&
+    ["/applied-work", "/collaboration", "/funding", "/contact", "/open-lab"].some(
+      (route) => pathname === route || pathname.startsWith(`${route}/`),
+    )
   ) {
     return true;
   }
@@ -116,7 +119,8 @@ export function InstitutionalFooter() {
         <BoundaryFirstWaveLogo className={styles.footerLogo} variant="compact" decorative />
         <div>
           <strong>Boundary First Labs</strong>
-          <span>Practice-born. Research-backed. Formally generalized.</span>
+          <span>{institutionalIdentity.institutionalDescriptor}</span>
+          <span data-institutional-tagline="footer">{institutionalIdentity.tagline}</span>
         </div>
       </Link>
 

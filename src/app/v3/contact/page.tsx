@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { InstitutionalContactPage } from "@/components/institutional/InstitutionalContactPage";
+import { CuratedContactPage } from "@/components/institutional/CuratedContactPage";
 import {
   isInquiryTypeId,
   type InquiryTypeId,
@@ -30,5 +30,5 @@ export default async function Page({
   const initialType: InquiryTypeId = isInquiryTypeId(requestedType)
     ? requestedType
     : "general";
-  return <InstitutionalContactPage initialType={initialType} />;
+  return <CuratedContactPage initialType={initialType} />;
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { InstitutionalAiGovernancePage } from "@/components/institutional/InstitutionalAiGovernancePage";
+import { DoctrineLandingPage } from "@/components/institutional/DoctrineFrontDoor";
 
 export const metadata: Metadata = {
   title: "AI Governance · Boundary First Labs",
@@ -9,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <InstitutionalAiGovernancePage />;
+  return <DoctrineLandingPage slug="ai-governance" />;
 }
