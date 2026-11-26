@@ -179,9 +179,11 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
       }
     }
   }
-  const footer = doc.querySelector("footer");
+  // The search dialog has its own footer. Select the shared site footer explicitly.
+  const footers = doc.querySelectorAll("footer[data-institutional-footer]");
+  const footer = footers[0];
   // DOCUMENT_POSITION_FOLLOWING = 4; avoid a global Node reference in unit tests.
-  if (!footer || !(panel.compareDocumentPosition(footer) & 4)) issues.push("general footer must follow the doctrine closing section");
+  if (footers.length !== 1 || !footer?.getBoundingClientRect().height || !(panel.compareDocumentPosition(footer) & 4)) issues.push("general footer must follow the doctrine closing section");
   return issues;
 }
 export async function doctrineNavigationIssues(page, route) {
@@ -191,6 +193,15 @@ export async function doctrineNavigationIssues(page, route) {
   // Playwright serializes this self-contained function into the browser.
   return page.evaluate(closingIssues, { route, context, expectedLinks, navRoutes, navLabels });
 }
+// Client navigation can commit the URL before Next has replaced route metadata.
+// Require the real destination canonical link rather than sampling the old head.
+async function waitForDestinationMetadata(page, route) {
+  await page.waitForFunction((expected) => {
+    const canonical = document.querySelector('link[rel="canonical"]');
+    return canonical && new URL(canonical.href, document.baseURI).pathname === expected;
+  }, route, { timeout: 10000 });
+}
+
 export async function verifyDoctrineTraversals(browser, base, viewport) {
   const context = await browser.newContext({ viewport, reducedMotion: "reduce" });
   const page = await context.newPage();
@@ -202,7 +213,8 @@ export async function verifyDoctrineTraversals(browser, base, viewport) {
         if (!response?.ok()) throw Error(`source HTTP ${response?.status()}`);
         const link = page.locator(source==="/" ? 'footer a[href="/evidence-and-trust"]' : 'main [data-trust-link] a[href="/evidence-and-trust"]');
         await link.click(); await page.waitForURL(url=>url.pathname==="/evidence-and-trust");
-        const failures=await doctrineNavigationIssues(page,"/evidence-and-trust");
+        await waitForDestinationMetadata(page, "/evidence-and-trust");
+         const failures=await doctrineNavigationIssues(page,"/evidence-and-trust");
         if(failures.length)throw Error(failures.join("; "));
         await page.goBack(); await page.waitForURL(url=>url.pathname===source); await link.waitFor({state:"visible"});
       }catch(error){issues.push(`${source} -> /evidence-and-trust -> ${source}: ${String(error)}`);}
@@ -215,7 +227,8 @@ export async function verifyDoctrineTraversals(browser, base, viewport) {
         await link.click();
         await page.waitForURL(url => url.pathname === "/digital-native-institution");
         await page.locator("main h1").waitFor({ state: "visible" });
-        const failures = await doctrineNavigationIssues(page, "/digital-native-institution");
+        await waitForDestinationMetadata(page, "/digital-native-institution");
+         const failures = await doctrineNavigationIssues(page, "/digital-native-institution");
         if (failures.length) throw Error(failures.join("; "));
         await page.goBack();
         await page.waitForURL(url => url.pathname === source);
@@ -228,7 +241,8 @@ export async function verifyDoctrineTraversals(browser, base, viewport) {
         if (!response?.ok()) throw Error(`source HTTP ${response?.status()}`);
         await page.locator(`main [data-exhibit-card] a[href="${dest}"]`).click();
         await page.waitForURL(url => url.pathname === dest);
-        const failures = await doctrineNavigationIssues(page, dest);
+        await waitForDestinationMetadata(page, dest);
+         const failures = await doctrineNavigationIssues(page, dest);
         if (failures.length) throw Error(failures.join("; "));
         await page.goBack();
         await page.waitForURL(url => url.pathname === "/observatory");
@@ -240,7 +254,8 @@ export async function verifyDoctrineTraversals(browser, base, viewport) {
         if (!response?.ok()) throw Error(`source HTTP ${response?.status()}`);
         await page.locator(`main [data-work-path] a[href="${dest}"]`).first().click();
         await page.waitForURL(url => url.pathname === dest);
-        const failures = await doctrineNavigationIssues(page, dest);
+        await waitForDestinationMetadata(page, dest);
+         const failures = await doctrineNavigationIssues(page, dest);
         if (failures.length) throw Error(failures.join("; "));
         await page.goBack();
         await page.waitForURL(url => url.pathname === "/work-with-us");
@@ -255,7 +270,8 @@ export async function verifyDoctrineTraversals(browser, base, viewport) {
           await link.click();
           await page.waitForURL(url => url.pathname === dest);
           await page.locator("main h1").waitFor({ state: "visible" });
-          const failures = await doctrineNavigationIssues(page, dest);
+          await waitForDestinationMetadata(page, dest);
+         const failures = await doctrineNavigationIssues(page, dest);
           if (failures.length) throw Error(failures.join("; "));
           await page.goBack();
           await page.waitForURL(url => url.pathname === source);

@@ -148,6 +148,8 @@ for (const [path, minimum, label] of floors) {
   }
 }
 
+const lockedNextVersion = packageLock.packages?.["node_modules/next"]?.version;
+
 for (const packageName of [
   "@next/env",
   "@next/swc-darwin-arm64",
@@ -160,8 +162,8 @@ for (const packageName of [
   "@next/swc-win32-x64-msvc",
 ]) {
   const actual = packageLock.packages?.[`node_modules/${packageName}`]?.version;
-  if (actual !== "16.3.3") {
-    fail(`${packageName} must stay aligned to Next.js 16.3.3; locked ${actual ?? "missing"}`);
+  if (!lockedNextVersion || actual !== lockedNextVersion) {
+    fail(`${packageName} must stay aligned to locked Next.js ${lockedNextVersion ?? "missing"}; locked ${actual ?? "missing"}`);
   }
 }
 

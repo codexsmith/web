@@ -38,6 +38,8 @@ function routeIsActive(pathname: string, href: string) {
 
 export function InstitutionalHeader() {
   const pathname = usePathname();
+  // Public institutional URLs rewrite internally to /v3; navigation belongs to the public route.
+  const publicPathname = pathname.replace(/^\/v3(?=\/|$)/, "") || "/";
   const [heroPassed, setHeroPassed] = useState(false);
 
   useEffect(() => {
@@ -86,7 +88,7 @@ export function InstitutionalHeader() {
 
       <nav className={styles.nav} aria-label="Boundary First Labs">
         {institutionalRoutes.map((route) => {
-          const active = routeIsActive(pathname, route.href);
+          const active = routeIsActive(publicPathname, route.href);
 
           return (
             <Link
@@ -110,7 +112,7 @@ export function InstitutionalHeader() {
 
 export function InstitutionalFooter() {
   return (
-    <footer className={styles.footer}>
+    <footer className={styles.footer} data-institutional-footer>
       <Link
         className={styles.footerBrand}
         href="/"

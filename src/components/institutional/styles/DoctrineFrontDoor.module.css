@@ -50,3 +50,14 @@
 .surface .example,.surface .workNotes article{background:var(--df-soft);border-left-color:var(--df-gold)}
 .surface a.action{background:var(--df-deep);border-color:var(--df-deep);color:var(--df-white);font-family:Georgia,"Times New Roman",serif;font-weight:500;min-height:46px}.surface a.action:hover{background:var(--df-accent)}
 .surface a.textLink{color:var(--df-accent)}.surface :is(a,button,summary):focus-visible{outline:3px solid var(--old-gold-bright,#d2b75f);outline-offset:3px}
+
+/* Standalone reader navigation must provide a minimum 24px target. */
+.surface a.textLink,
+.surface a.back {
+  display: inline-block;
+  min-height: 24px;
+  max-width: 100%;
+  line-height: 1.5;
+  padding-block: 3px;
+  overflow-wrap: anywhere;
+}

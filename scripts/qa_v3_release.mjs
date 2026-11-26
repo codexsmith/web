@@ -385,7 +385,7 @@ async function visit(browser, config) {
   }
   if (metrics.targetSpacingViolations.length) {
     issues.push(
-      `${metrics.targetSpacingViolations.length} undersized interactive target(s) violate 24px spacing`,
+      `${metrics.targetSpacingViolations.length} undersized interactive target(s) violate 24px spacing: ${metrics.targetSpacingViolations.map((target) => `${target.tag} "${target.name}" (${target.width}x${target.height})`).join("; ")}`,
     );
   }
   if (metrics.horizontalOverflow && metrics.overflowElements.length) {
@@ -521,7 +521,7 @@ async function checkSkipAndFocus(browser, viewportName) {
   );
   if (invisibleFocus.length) {
     issues.push(
-      `${invisibleFocus.length} keyboard focus sample(s) had no visible outline or focus shadow`,
+      `${invisibleFocus.length} keyboard focus sample(s) had no visible outline or focus shadow: ${invisibleFocus.map((sample) => `${sample.tag} "${sample.name}"`).join("; ")}`,
     );
   }
 
