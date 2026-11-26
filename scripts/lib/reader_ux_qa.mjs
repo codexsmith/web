@@ -541,10 +541,12 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
           const style = getComputedStyle(node);
           const rects = [...node.children].map(el => {
             const box = el.getBoundingClientRect(), css = getComputedStyle(el);
+            // A gateway is itself an anchor; a directory or pathway contains anchors.
+            const links = [...(el.matches("a") ? [el] : []), ...el.querySelectorAll("a")];
             return {x:box.x,y:box.y,right:box.right,bottom:box.bottom,width:box.width,height:box.height,
               borderTop:parseFloat(css.borderTopWidth),borderBottom:parseFloat(css.borderBottomWidth),
               borderLeft:parseFloat(css.borderLeftWidth),borderRight:parseFloat(css.borderRightWidth),
-              shadow:css.boxShadow, links:[...el.querySelectorAll("a")].map(a=>({href:a.getAttribute("href"),height:a.getBoundingClientRect().height}))};
+              shadow:css.boxShadow, links:links.map(a=>({href:a.getAttribute("href"),height:a.getBoundingClientRect().height}))};
           });
           const strip = ["reference","directory","comparison","sequence"].includes(role);
           return {
