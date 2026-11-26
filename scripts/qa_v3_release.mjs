@@ -16,6 +16,8 @@ const artifactDir = path.resolve(
 );
 const screenshotDir = path.join(artifactDir, "screenshots");
 fs.mkdirSync(screenshotDir, { recursive: true });
+const readerReviewDir = path.join(artifactDir, "reader-review");
+fs.mkdirSync(readerReviewDir, { recursive: true });
 
 const routeSource = fs.readFileSync("src/lib/site-release.ts", "utf8");
 const routeBlock = routeSource.match(
@@ -453,6 +455,13 @@ async function visit(browser, config) {
   const shouldCapture =
     screenshotRoutes.has(config.route) || issues.length > 0;
   let screenshot = null;
+  if (publicationTier === "institutional" && ["desktop", "mobile"].includes(config.viewportName)) {
+    // Compact first-viewport samples for the institutional identity review.
+    await page.screenshot({
+      path: path.join(readerReviewDir, "reader--" + (slug(config.route) || "home") + "--" + config.viewportName + ".png"),
+      fullPage: false, animations: "disabled",
+    });
+  }
   if (shouldCapture) {
     const filename = `${slug(config.route)}--${config.viewportName}.png`;
     const screenshotPath = path.join(screenshotDir, filename);
@@ -809,7 +818,7 @@ try {
     { name: "mobile", viewport: viewports.mobile },
     { name: "narrow forced-colors", viewport: viewports.narrow, forcedColors: "active" },
   ]) {
-    const ux = await verifyReaderUx(browser, base, mode);
+    const ux = await verifyReaderUx(browser, base, mode, readerReviewDir);
     for (const result of ux) {
       recordFailure(result.name, result.issues);
       results.push(result);
@@ -821,6 +830,12 @@ try {
     results.push({ name: `Doctrine navigation traversal @ ${viewportName}`, viewportName, issues });
   }
 
+  fs.writeFileSync(path.join(readerReviewDir, "review.json"), JSON.stringify({
+    commit: process.env.GITHUB_SHA ?? null,
+    scope: "Viewport captures of curated institutional readers and exercised BFUX states; not human visual approval.",
+    readers: institutionalPublicationEntries,
+    scenarios: results.filter(result => result.name?.startsWith("BFUX reader: ")),
+  }, null, 2) + "\n");
   writeReport();
 } finally {
   await browser?.close();

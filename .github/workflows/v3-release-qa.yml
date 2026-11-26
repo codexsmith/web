@@ -56,3 +56,12 @@ jobs:
           path: qa-artifacts/v3-release
           if-no-files-found: warn
           retention-days: 14
+
+      - name: Upload compact institutional reader review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v3-reader-review
+          path: qa-artifacts/v3-release/reader-review
+          if-no-files-found: warn
+          retention-days: 14

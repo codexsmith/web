@@ -77,7 +77,9 @@
   }
 }
 
-/* BFUX reader projection: hierarchy, reversible disclosure and keyboard parity. */
+/* BFUX reader projection: hierarchy, reversible disclosure and keyboard parity.
+   Native reader controls retain a visible indicator for actual DOM focus, including
+   programmatic focus restoration, regardless of input-modality heuristics. */
 .surface .entryHeading {
   font-size: clamp(1.4rem, 2.4vw, 2rem);
   margin-bottom: 20px;
@@ -89,7 +91,8 @@
   color: var(--df-deep);
   border-bottom: 2px solid var(--df-accent);
 }
-.surface :is(a,button,summary,input,select,textarea):focus-visible {
+.surface :is(a[href],button,summary,input,select,textarea):focus,
+.surface :is(a[href],button,summary,input,select,textarea):focus-visible {
   outline: 3px solid var(--df-deep) !important;
   outline-offset: 3px !important;
   box-shadow: 0 0 0 2px #fff, 0 0 0 5px var(--df-deep) !important;
@@ -104,7 +107,8 @@
   overflow-wrap: anywhere;
 }
 @media (forced-colors: active) {
-  .surface :is(a,button,summary,input,select,textarea):focus-visible {
+  .surface :is(a[href],button,summary,input,select,textarea):focus,
+.surface :is(a[href],button,summary,input,select,textarea):focus-visible {
     outline: 3px solid CanvasText !important;
     outline-offset: 3px !important;
     box-shadow: none !important;

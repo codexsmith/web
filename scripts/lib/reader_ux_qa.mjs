@@ -1,10 +1,26 @@
 // Behavioral witnesses derived from docs/boundary-first-ux-conformance-contract.md.
 // This is not a certification score. Test actual reader state rather than visual resemblance.
 import assert from "node:assert/strict";
+import path from "node:path";
 
-const visibleFocus = async locator => locator.evaluate(element => {
-  const s = getComputedStyle(element);
-  return document.activeElement === element && s.outlineStyle !== "none" && parseFloat(s.outlineWidth) >= 2;
+const focusWitness = async locator => locator.evaluate(element => {
+  const style = getComputedStyle(element);
+  const active = document.activeElement;
+  const rect = element.getBoundingClientRect();
+  const transparent = color => !color || color === "transparent" || /^rgba\([^)]*,\s*0(?:\.0+)?\)$/.test(color);
+  const outline = style.outlineStyle !== "none" && style.outlineStyle !== "hidden" &&
+    parseFloat(style.outlineWidth) >= 2 && !transparent(style.outlineColor);
+  return {
+    tag: element.tagName, id: element.id,
+    activeTag: active?.tagName, activeId: active?.id,
+    hasFocus: active === element, focusVisible: element.matches(":focus-visible"),
+    outline: {style: style.outlineStyle, width: style.outlineWidth, color: style.outlineColor, offset: style.outlineOffset},
+    boxShadow: style.boxShadow, forcedColors: matchMedia("(forced-colors: active)").matches,
+    rect: [rect.x, rect.y, rect.width, rect.height],
+    inViewport: rect.width > 0 && rect.height > 0 && rect.right > 0 &&
+      rect.left < innerWidth && rect.bottom > 0 && rect.top < innerHeight,
+    passes: active === element && outline && rect.width > 0 && rect.height > 0,
+  };
 });
 const fit = async page => assert.ok(await page.evaluate(() =>
   Math.max(document.documentElement.scrollWidth, document.body.scrollWidth) <= window.innerWidth + 1
@@ -17,30 +33,53 @@ const open = async (page, base, route) => {
   const response = await page.goto(base + route, {waitUntil: "load"});
   assert.ok(response?.ok(), route + " is not available");
   await page.evaluate(() => document.fonts.ready);
+  // Establish keyboard modality via a real keyboard event before targeted focus.
+  await page.keyboard.press("Tab");
 };
 async function key(locator, keyName) {
   await locator.focus();
   await locator.press(keyName);
 }
-export async function verifyReaderUx(browser, base, mode) {
+export async function verifyReaderUx(browser, base, mode, reviewDir) {
   const results = [];
   const context = await browser.newContext({
     viewport: mode.viewport, reducedMotion: "reduce", forcedColors: mode.forcedColors ?? "none",
   });
   const page = await context.newPage();
+  const modeSlug = mode.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
   async function scenario(label, run) {
     const issues = [];
-    try { await run(); }
+    const focusSamples = [];
+    const captures = [];
+    // A missing focus ring remains a blocking issue, but must not prevent the
+    // remaining model transitions and privacy obligations from being exercised.
+    const checkFocus = async (locator, name) => {
+      await locator.scrollIntoViewIfNeeded();
+      const sample = await focusWitness(locator);
+      focusSamples.push({name, ...sample});
+      if (!sample.passes || !sample.inViewport) {
+        issues.push(name + ": focus obligation failed: " + JSON.stringify(sample));
+      }
+    };
+    const capture = async (name, locator) => {
+      if (!reviewDir) return;
+      if (locator) await locator.scrollIntoViewIfNeeded();
+      const file = modeSlug + "--" + name + ".png";
+      await page.screenshot({path: path.join(reviewDir, file), fullPage: false, animations: "disabled"});
+      captures.push(file);
+    };
+    try { await run(checkFocus, capture); }
     catch (error) { issues.push(String(error)); }
-    results.push({name: "BFUX reader: " + label + " @ " + mode.name, issues});
+    results.push({name: "BFUX reader: " + label + " @ " + mode.name, issues, focusSamples, captures});
   }
   try {
-    await scenario("orientation and reversible reader disclosure", async () => {
+    await scenario("orientation and reversible reader disclosure", async (checkFocus, capture) => {
       await open(page, base, "/");
       const paths = page.locator("main [data-home-entry-paths]");
       assert.equal(await paths.locator("h2").innerText(), "Three ways into the Lab");
       assert.deepEqual(await paths.locator("a").evaluateAll(nodes => nodes.map(a => a.getAttribute("href"))),
         ["/codexware", "/observatory", "/work-with-us"]);
+      await capture("home-entry-paths", paths);
       await open(page, base, "/observatory");
       const details = page.locator("main [data-reader-detail]");
       assert.equal(await details.count(), 4);
@@ -54,14 +93,15 @@ export async function verifyReaderUx(browser, base, mode) {
         assert.notEqual(await item.getAttribute("open"), null);
         assert.ok(await item.locator("h3").first().isVisible());
         assert.deepEqual(await item.locator("h3").allTextContents(), original);
-        assert.ok(await visibleFocus(summary), "keyboard focus is not visible on disclosure");
+        await checkFocus(summary, name + " disclosure");
+        if (name === "foundations") await capture("observatory-disclosure", summary);
         await fit(page);
         await key(summary, "Space");
         assert.equal(await item.getAttribute("open"), null);
         assert.deepEqual(await item.locator("h3").allTextContents(), original);
       }
     });
-    await scenario("observation and mathematical projection parity", async () => {
+    await scenario("observation and mathematical projection parity", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
       await page.locator('[data-instrument-collection][data-bfux-ready="true"]').waitFor();
       const amount = page.locator('input[name="bfl-observation"][value="amount"]');
@@ -76,14 +116,15 @@ export async function verifyReaderUx(browser, base, mode) {
       await key(summary, "Enter");
       await textIs(page, "[data-suff-formula]", "ker(O) ⊆ ker(K)");
       assert.ok(await page.locator("[data-suff-formula]").isVisible());
-      assert.ok(await visibleFocus(summary));
+      await checkFocus(summary, "mathematical disclosure");
+      await capture("observation-math", summary);
       await fit(page);
       await key(status, "ArrowLeft");
       await textIs(page, "[data-suff-formula]", "ker(O) ⊄ ker(K)");
       await textIs(page, "[data-suff-title]", "Insufficient representation");
       await key(summary, "Space");
     });
-    await scenario("repair state and all eight authority states", async () => {
+    await scenario("repair state and all eight authority states", async (checkFocus, capture) => {
       await open(page, base, "/observatory/instruments");
       await page.locator('[data-instrument-collection][data-bfux-ready="true"]').waitFor();
       const resources = page.locator('[data-repair="resources"]');
@@ -92,7 +133,8 @@ export async function verifyReaderUx(browser, base, mode) {
       await textIs(page, "[data-repair-gap]", "$0");
       await textIs(page, "[data-repair-title]", "Repair is accessible under these conditions.");
       assert.equal(await resources.getAttribute("aria-valuetext"), "$5,000");
-      assert.ok(await visibleFocus(resources));
+      await checkFocus(resources, "repair resources slider");
+      await capture("repair-accessible", resources);
       await key(resources, "Home");
       await textIs(page, "[data-repair-gap]", "$2,000");
       await textIs(page, "[data-repair-title]", "Restoration remains inaccessible.");
@@ -114,13 +156,14 @@ export async function verifyReaderUx(browser, base, mode) {
         if (flags[1] && !effective[1]) assert.ok(detail.includes("Analysis is selected but blocked"));
         if (flags[2] && !effective[2]) assert.ok(detail.includes("Drafting is selected but blocked"));
       }
+      await capture("authority-bounded", page.locator("[data-policy-detail]"));
       await key(page.locator('[data-reset="authority"]'), "Enter");
       await textIs(page, '[data-operation="read"]', "Permitted in model");
       await textIs(page, '[data-operation="analyze"]', "Permitted in model");
       await textIs(page, '[data-operation="draft"]', "Denied");
       await fit(page);
     });
-    await scenario("local draft boundary and explicit copy", async () => {
+    await scenario("local draft boundary and explicit copy", async (checkFocus, capture) => {
       await open(page, base, "/contact");
       await page.locator('[data-inquiry-composer][data-bfux-ready="true"]').waitFor();
       const marker = "BFL synthetic UX witness only 694271";
@@ -155,7 +198,8 @@ export async function verifyReaderUx(browser, base, mode) {
         assert.equal(await output.inputValue(), "");
         assert.ok(await copy.isDisabled());
         await textIs(page, "[data-draft-status]", "Draft cleared.");
-        assert.ok(await visibleFocus(message));
+        await checkFocus(message, "focus restored after clearing draft");
+        await capture("inquiry-cleared", message);
         assert.equal(await page.evaluate(value => [localStorage, sessionStorage].some(store =>
           Object.keys(store).some(key => key.includes(value) || (store.getItem(key) ?? "").includes(value))), marker), false);
         assert.deepEqual(sent, [], "local preparation or copy initiated a network write");
