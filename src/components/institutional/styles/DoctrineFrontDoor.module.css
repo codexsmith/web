@@ -418,3 +418,98 @@
     box-shadow: none;
   }
 }
+
+
+/* Scientific plates: static, inspectable illustrations of bounded public
+ * examples. Geometry and explicit labels carry meaning without color. */
+.surface .scientificFigure {
+  max-width: 460px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 20px 0;
+  padding: 12px;
+  border: 1px solid var(--df-reader-edge);
+  border-top: 2px solid var(--df-reader-rail);
+  background: var(--df-reader-plate);
+}
+.surface .scientificFigure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.surface .scientificFigure figcaption {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--df-reader-seam);
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--df-muted);
+  overflow-wrap: anywhere;
+}
+.surface .figureField {
+  fill: #e4ebf4;
+  stroke: var(--df-accent);
+  stroke-width: 1.2;
+}
+.surface .figureGridline {
+  fill: none;
+  stroke: #849ab7;
+  stroke-width: .8;
+}
+.surface .figureReserved {
+  fill: #eef0f2;
+  stroke: var(--df-accent);
+  stroke-width: 1.2;
+}
+.surface .figureCross {
+  fill: none;
+  stroke: var(--df-deep);
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.surface .figureObserved {
+  fill: #f7f4e8;
+  stroke: var(--df-deep);
+  stroke-width: 1.3;
+}
+.surface .figureRule {
+  stroke: var(--df-reader-edge);
+  stroke-width: 1;
+}
+.surface .figureLabel,
+.surface .figureMuted {
+  font: 600 11px/1.25 Arial, Helvetica, sans-serif;
+  fill: var(--df-deep);
+}
+.surface .figureMuted {
+  font-weight: 400;
+  fill: var(--df-muted);
+}
+@media (forced-colors: active) {
+  .surface .scientificFigure {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+  .surface .scientificFigure figcaption {
+    border-color: CanvasText;
+    color: CanvasText;
+  }
+  .surface .figureField,
+  .surface .figureReserved,
+  .surface .figureObserved {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+  .surface .figureGridline,
+  .surface .figureCross,
+  .surface .figureRule {
+    stroke: CanvasText;
+  }
+  .surface .figureLabel,
+  .surface .figureMuted {
+    fill: CanvasText;
+  }
+}

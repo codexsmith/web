@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import { ReaderScientificFigure, demonstrationFigureByTitle } from "./ReaderScientificFigure";
 import { DoctrineLinksSection, InstrumentCollectionLink } from "./DoctrineFrontDoor";
 import { doctrineFrontDoor as content } from "./content/doctrineFrontDoor";
 import styles from "./styles/DoctrineFrontDoor.module.css";
@@ -17,7 +18,10 @@ export function PublicObservatoryExhibitPage({ slug }: { slug: Exhibit["slug"] }
           <p className={styles.tagline}>{exhibit.tagline}</p><p className={styles.lead}>{exhibit.lead}</p><p className={styles.support}>{exhibit.support}</p>
         </section>
         <section className={styles.section} data-exhibit-body>
-          <div className={styles.reading}><div>{exhibit.sections.map(item => <article key={item.title}><h2>{item.title}</h2><p>{item.body}</p></article>)}</div><aside className={styles.example} data-exhibit-limit><p className={styles.eyebrow}>Scope and limitations</p><h2>What this establishes.</h2><p>{exhibit.limit}</p></aside></div>
+          <div className={styles.reading}><div>{exhibit.sections.map(item => {
+            const figureKind = slug === "observatory/demonstrations" ? demonstrationFigureByTitle[item.title] : undefined;
+            return <article key={item.title}><h2>{item.title}</h2><p>{item.body}</p>{figureKind && <ReaderScientificFigure kind={figureKind} />}</article>;
+          })}</div><aside className={styles.example} data-exhibit-limit><p className={styles.eyebrow}>Scope and limitations</p><h2>What this establishes.</h2><p>{exhibit.limit}</p></aside></div>
         </section>
         <section className={styles.section} data-exhibit-comparison><h2>{exhibit.keyHeading}</h2><div className={styles.pathGrid}>{exhibit.cards.map(item => <article className={styles.pathCard} key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div></section>
         <section className={styles.section} data-exhibit-references><h2>Public reading paths.</h2><p className={styles.sectionIntro}>These references establish context and attribution, not proof of an unpublished result.</p><div className={styles.links}>{exhibit.sources.map(item => <a className={styles.textLink} href={item.sourceUrl} key={item.sourceUrl}>{item.label} ↗</a>)}</div><Link className={styles.textLink} href="/observatory">Return to Observatory →</Link></section>

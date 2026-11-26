@@ -144,6 +144,65 @@ export async function verifyReaderUx(browser, base, mode, reviewDir) {
         assert.deepEqual(await item.locator("h3").allTextContents(), original);
       }
     });
+    await scenario("scientific illustration fidelity and accessible projection", async (_checkFocus, capture) => {
+      await open(page, base, "/observatory/demonstrations");
+      const figures = page.locator("main [data-reader-scientific-figure]");
+      assert.deepEqual(await figures.evaluateAll(nodes => nodes.map(node => node.getAttribute("data-reader-scientific-figure"))),
+        ["geometry", "inventory", "outcome"]);
+      for (const figure of await figures.all()) {
+        const svg = figure.locator('svg[role="img"][focusable="false"]');
+        assert.equal(await svg.count(), 1);
+        assert.ok(await svg.isVisible());
+        assert.ok((await svg.getAttribute("aria-label"))?.trim());
+        assert.ok((await figure.locator("figcaption").innerText()).trim());
+        assert.equal(await figure.locator("button,a,input,select,textarea,[tabindex]").count(), 0);
+        assert.ok(await svg.evaluate(node => {
+          const bounds = node.getBoundingClientRect();
+          const width = node.viewBox.baseVal.width;
+          return bounds.width > 0 && width === 320 &&
+            [...node.querySelectorAll("text")].every(text => {
+              const box = text.getBBox();
+              return box.x >= -1 && box.x + box.width <= width + 1;
+            });
+        }), "scientific labels must remain inside their viewBox");
+      }
+      const rectangles = await page.locator("[data-figure-rectangle]").evaluateAll(nodes => nodes.map(node => {
+        const rect = node.querySelector("rect");
+        return {
+          width: Number(node.getAttribute("data-width")),
+          height: Number(node.getAttribute("data-height")),
+          area: Number(node.getAttribute("data-area")),
+          perimeter: Number(node.getAttribute("data-perimeter")),
+          drawnWidth: Number(rect.getAttribute("width")),
+          drawnHeight: Number(rect.getAttribute("height")),
+        };
+      }));
+      assert.deepEqual(rectangles, [
+        {width:6,height:2,area:12,perimeter:16,drawnWidth:84,drawnHeight:28},
+        {width:4,height:3,area:12,perimeter:14,drawnWidth:56,drawnHeight:42},
+      ], "equal-area rectangles must preserve the same length scale");
+      const inventory = await page.locator("[data-figure-inventory]").evaluateAll(nodes => nodes.map(node => ({
+        total: node.querySelectorAll("[data-figure-stock]").length,
+        reserved: node.querySelectorAll('[data-figure-stock="reserved"]').length,
+        available: node.querySelectorAll('[data-figure-stock="available"]').length,
+        crossed: node.querySelectorAll('[data-figure-stock="reserved"] path').length,
+      })));
+      assert.deepEqual(inventory, [
+        {total:10,reserved:0,available:10,crossed:0},
+        {total:10,reserved:7,available:3,crossed:7},
+      ], "inventory cells and non-color-only reservation markers must match the fictional example");
+      assert.equal(await page.locator('[data-figure-observation="Complete"]').count(), 1);
+      for (const kind of ["geometry", "inventory", "outcome"]) {
+        await capture("science-" + kind, page.locator(`[data-reader-scientific-figure="${kind}"]`));
+      }
+      await fit(page);
+      await open(page, base, "/observatory");
+      const overview = page.locator('[data-observatory-section="demonstration"] [data-reader-scientific-figure="outcome"]');
+      assert.equal(await overview.count(), 1);
+      assert.ok(await overview.isVisible());
+      assert.equal(await overview.locator('[data-figure-observation="Complete"]').count(), 1);
+      await fit(page);
+    });
     await scenario("bounded reader density and preserved engagement paths", async (checkFocus, capture) => {
       await open(page, base, "/evidence-and-trust");
       const details = page.locator("main [data-trust-detail]");

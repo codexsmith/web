@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { InstitutionalPageShell } from "./InstitutionalPageShell";
+import { ReaderScientificFigure } from "./ReaderScientificFigure";
 import { DoctrineLinksSection, InstrumentCollectionLink, AudiencePathways } from "./DoctrineFrontDoor";
 import { observatoryExhibit as exhibit } from "./content/observatory";
 import { doctrineFrontDoor } from "./content/doctrineFrontDoor";
@@ -53,6 +54,7 @@ export function InstitutionalObservatoryPage() {
               <p className={styles.eyebrow}>{exhibit.exhibit.eyebrow}</p>
               <h2>{exhibit.exhibit.title}</h2><p className={styles.sectionIntro}>{exhibit.exhibit.intro}</p>
               <div className={styles.pathGrid}>{exhibit.exhibit.cases.map(item => <article className={styles.pathCard} key={item.label}><p className={styles.workStatus}>{item.label}</p><h3>{item.display}</h3><p>{item.detail}</p></article>)}</div>
+              <ReaderScientificFigure kind="outcome" />
               <p className={styles.exhibitTakeaway}>{exhibit.exhibit.takeaway}</p><p className={styles.smallPrint}>{exhibit.exhibit.limit}</p>
             </section>
             <section className={styles.section} data-observatory-section="release">
