@@ -43,6 +43,7 @@ export function InstitutionalObservatoryPage() {
               <h2 id="reader-research" tabIndex={-1} data-reader-section-target>{exhibit.researchHeading}</h2>
               <div className={styles.headingMeta} data-reader-heading-meta><p className={styles.sectionIntro}>{exhibit.researchIntro}</p></div>
               <div className={styles.pathGrid} data-reader-collection="reference">{exhibit.research.map(item => <article className={styles.pathCard} key={item.title}><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>
+              <div data-applied-product-pathway="observatory"><p className={styles.sectionIntro}>{doctrineFrontDoor.appliedProducts.pathways.observatory.body}</p><Link className={styles.textLink} href={`${doctrineFrontDoor.appliedProducts.href}#${doctrineFrontDoor.appliedProducts.anchorId}`}>{doctrineFrontDoor.appliedProducts.pathways.observatory.label} <span aria-hidden="true">→</span></Link></div>
             </section>
             <section className={styles.section} data-observatory-section="method">
               <h2 id="reader-method" tabIndex={-1} data-reader-section-target>{exhibit.methodHeading}</h2>
