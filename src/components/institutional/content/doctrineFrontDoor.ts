@@ -9,10 +9,10 @@ export const doctrineFrontDoor = {
     "paths": [
       {
         "title": "Codexware",
-        "tagline": "Computational tools",
-        "body": "Developing tools to preserve evidence, support human agency and navigate consequential systems.",
+        "tagline": "Flagship application",
+        "body": "Our developing software application for preserving evidence, supporting human agency and navigating consequential systems.",
         "href": "/codexware",
-        "label": "View the application vision"
+        "label": "Explore Codexware"
       },
       {
         "title": "Observatory",
@@ -335,12 +335,12 @@ export const doctrineFrontDoor = {
     "slug": "codexware",
     "name": "Codexware",
     "tagline": "Putting institutional computational tools into individual hands.",
-    "lead": "The intended tools help people understand requirements, preserve evidence and examine consequential decisions.",
-    "support": "Codexware is a developing application and governed deployment architecture. Reusable reasoning, verification and evidence components are composed within declared boundaries.",
+    "lead": "Codexware is Boundary First Labs’ flagship software application and computational platform.",
+    "support": "It is being developed to help people understand requirements, preserve evidence, examine consequential decisions and exercise greater agency in the systems they depend on.",
     "sections": [
       {
         "title": "Because data is consequential.",
-        "body": "Useful computational tools preserve the evidence, assumptions and meaning needed by the next operation. Shared components can reduce repeated construction of that infrastructure."
+        "body": "Codexware combines a developing application with a governed deployment architecture. Reusable reasoning, verification and evidence components are composed within declared boundaries. Useful computational tools preserve the evidence, assumptions and meaning needed by the next operation."
       },
       {
         "title": "Start with the people who need these tools.",
@@ -653,7 +653,7 @@ export const doctrineFrontDoor = {
           {
             "id": "funding",
             "title": "Funding, investment and sponsorship",
-            "body": "Discuss grants, sponsored work, philanthropy, investment or in-kind support. Terms are separate; support cannot purchase conclusions.",
+            "body": "Discuss grants, sponsored work, philanthropy, investment or in-kind support for independent research, public-interest infrastructure and applied product development. Terms are separate; support cannot purchase conclusions.",
             "label": "Explore funding and sustainability",
             "href": "/work-with-us/funding",
             "status": "Inquiry only"
@@ -1289,13 +1289,13 @@ export const doctrineFrontDoor = {
         },
         {
           "title": "Patient investment and in-kind collaboration",
-          "body": "Discuss potential investment in responsibly developed Codexware capabilities, or provide compute, facilities, datasets, specialist expertise or distribution. Commercial terms and product evidence are separate from scientific warrant."
+          "body": "Discuss potential investment in responsibly developed Codexware capabilities or applied products, or provide compute, facilities, datasets, specialist expertise or distribution. Commercial terms and product evidence are separate from scientific warrant."
         }
       ],
       "sections": [
         {
-          "title": "One institution, one developing application",
-          "body": "Boundary First Labs conducts fundamental and applied inquiry. Codexware is the intended application through which suitable capabilities can become accessible. We do not present the individual research instruments as separate launched products.",
+          "title": "One institution, a shared product foundation",
+          "body": "Boundary First Labs conducts fundamental and applied inquiry. Codexware is our flagship application and computational platform. The same research and engineering foundations can inform other applied products and integrations. These are development directions, not separate launched products or claims of market readiness.",
           "anchorId": "reader-chapter-institution-application"
         },
         {
@@ -2783,5 +2783,49 @@ export const doctrineFrontDoor = {
       "href": "/evidence-and-trust",
       "label": "Explore Evidence & Trust"
     }
-  ]
+  ],
+  "appliedProducts": {
+    "href": "/work-with-us/funding",
+    "anchorId": "reader-example",
+    "heading": "From foundational research to applied products",
+    "intro": "Support can help turn research and engineering into accessible software, independently evaluated capabilities and practical integrations. The following are proposed development directions, not available products or validated commercial offerings.",
+    "items": [
+      {
+        "id": "weather",
+        "title": "Boundary First Weather",
+        "status": "Research & development",
+        "body": "Investigate atmospheric modeling, simulation, computational efficiency and distributed scientific computation. Support could enable further modeling, evaluation against observations and usable weather tools."
+      },
+      {
+        "id": "chess",
+        "title": "Boundary First Chess",
+        "status": "Education & product development",
+        "body": "Explore explainable analysis, educational tools, coaching and commentary grounded in legal moves, admissible paths and the structure of positions."
+      },
+      {
+        "id": "sports",
+        "title": "Boundary First Sports",
+        "status": "Applied research",
+        "body": "Explore tactical analysis, spatial reasoning and computational tools for understanding competitive play."
+      },
+      {
+        "id": "integrations",
+        "title": "Codexware Integrations",
+        "status": "Application & integration development",
+        "body": "Develop composable reasoning, evidence, verification and governed computational capabilities for integration into existing software and workflows."
+      }
+    ],
+    "closing": "Potential engagements include research sponsorship, commissioned development, pilot programs, publishing, licensing and technical integration partnerships, subject to readiness, scope and agreement.",
+    "pathways": {
+      "home": {
+        "heading": "From research to products",
+        "body": "Boundary First Weather and Boundary First Chess are proposed applied products that could bring the Lab’s research into everyday use.",
+        "label": "Explore what support could make possible"
+      },
+      "observatory": {
+        "body": "Atmospheric modeling and the structure of legal chess play offer distinct settings for applied computational inquiry. Boundary First Weather and Boundary First Chess are proposed product directions, not released demonstrations.",
+        "label": "Explore support for Weather and Chess"
+      }
+    }
+  }
 } as const;
