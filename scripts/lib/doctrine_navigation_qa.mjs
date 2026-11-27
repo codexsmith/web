@@ -89,6 +89,16 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     if (Array.from(main?.querySelectorAll('[data-economic-case]') ?? []).some(a => !['Research question','Constructed teaching example'].includes(a.querySelector('[data-case-status]')?.textContent.trim()) || !a.querySelector('[data-case-limit]')?.textContent.trim())) issues.push("economic case status and limitations required");
     if (!main?.querySelector('a[href="/codexware"]') || main?.querySelector('form,button,input,select,textarea,iframe,embed,object')) issues.push("economic page must return to Codexware and stay editorial");
   }
+  if (route === "/" || route === "/observatory") {
+    const pathway = main?.querySelector(`[data-applied-product-pathway="${route === "/" ? "home" : "observatory"}"]`);
+    if (!pathway?.textContent.includes("Boundary First Weather") || !pathway?.textContent.includes("Boundary First Chess") || pathway.querySelectorAll('a[href="/work-with-us/funding#reader-example"]').length !== 1) issues.push("applied product pathway must identify Weather and Chess and resolve to the funding section");
+  }
+  if (route === "/work-with-us/funding") {
+    const portfolio = main?.querySelector('[data-guide-example] [data-applied-product-portfolio]');
+    if (!same(Array.from(portfolio?.querySelectorAll('[data-applied-product]') ?? []).map(el => el.getAttribute("data-applied-product")), ["weather","chess","sports","integrations"]) || !portfolio?.textContent.includes("not available products")) issues.push("funding section requires four explicitly bounded applied product directions");
+    if (!main?.querySelector('[data-guide-example] > #reader-example')) issues.push("funding product destination must retain its section anchor");
+  }
+  if (route === "/codexware" && !main?.querySelector('[data-institutional-hero]')?.textContent.includes("flagship software application and computational platform")) issues.push("Codexware identity must be explicit at the masthead");
   const audienceRoutes = {"/codexware": ["/codexware/civic-record", "/observatory/instruments", "/codexware/economic-maintenance", "/observatory/instruments"], "/observatory": ["/observatory/research-architecture", "/observatory/instruments", "/observatory/computational-inquiry", "/observatory/research-architecture", "/observatory/instruments", "/observatory/demonstrations"], "/work-with-us": ["/work-with-us/professional-services", "/observatory/instruments", "/work-with-us/public-service", "/codexware/economic-maintenance", "/ai-governance", "/work-with-us/professional-services", "/work-with-us/paper-auditing", "/observatory/instruments", "/work-with-us/funding", "/digital-native-institution"]};
   if (route in audienceRoutes) {
     const panel = main?.querySelectorAll(`[data-audience-paths="${route.slice(1)}"]`) ?? [];
@@ -105,7 +115,7 @@ export function closingIssues({ route, context, expectedLinks, navRoutes, navLab
     for (const [name,[selector,count]] of Object.entries(expected)) if (exhibit[0]?.querySelectorAll(`[data-observatory-section="${name}"] ${selector}`).length !== count) issues.push(`observatory ${name} exhibit incomplete`);
     const demo = exhibit[0]?.querySelector('[data-observatory-section="demonstration"]');
     if (!demo?.textContent.includes("fictional records") || !demo?.textContent.includes("invented teaching example")) issues.push("observatory example must be explicitly fictional");
-    const allowed = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations", "/digital-native-institution", "/codexware", "/work-with-us", "/observatory/instruments", "/evidence-and-trust"];
+    const allowed = ["/observatory/intellectual-lineage", "/observatory/research-architecture", "/observatory/computational-inquiry", "/observatory/demonstrations", "/work-with-us/funding#reader-example", "/digital-native-institution", "/codexware", "/work-with-us", "/observatory/instruments", "/evidence-and-trust"];
     if (!same(Array.from(exhibit[0]?.querySelectorAll("[data-exhibit-card] a") ?? []).map(a=>a.getAttribute("href")), allowed.slice(0,4))) issues.push("public Observatory gallery must expose four exhibits in order");
     const nonDoctrineLinks = bodyLinks().filter(a => !a.closest("[data-doctrine-links], [data-audience-paths]"));
     if (!same(nonDoctrineLinks.map(a => a.getAttribute("href")), allowed)) issues.push("observatory body exposes unapproved link or misses public destination");
