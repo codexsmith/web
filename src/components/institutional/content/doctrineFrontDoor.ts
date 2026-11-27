@@ -4,7 +4,7 @@ export const doctrineFrontDoor = {
     "eyebrow": "Independent · Founder-led · Digital-native",
     "title": "Trace what follows. Design for repair.",
     "lead": "We study the boundaries where systems become real.",
-    "support": "In service of the public good, we develop mathematics, computational tools and practices that make systems understandable, accountable, maintainable and responsive to the people who depend on them.",
+    "support": "We develop mathematics, software and practices for the public good: to make systems easier to understand, maintain and hold accountable to the people who depend on them.",
     "identityLine": "Research and engineering for consequential systems.",
     "paths": [
       {
@@ -39,8 +39,8 @@ export const doctrineFrontDoor = {
       "tagline": "Trace consequences. Repair defects. Maintain systems.",
       "summary": "Understand what systems do, who bears their consequences, and how maintenance and repair can preserve their legitimate purposes.",
       "question": "What must remain true when a system changes?",
-      "lead": "A representation becomes consequential when its use changes what someone else must understand, decide, do or endure. A system can succeed according to its own rules while leaving the problem it was meant to solve unresolved.",
-      "support": "Consequential Systems is our doctrine for understanding and improving systems whose effects extend beyond the context in which they are modeled or operated. We examine the relationship between representation, authority, evidence, material consequences and repair.",
+      "lead": "A representation becomes consequential when its use changes what someone must understand, decide, do or endure. A system can follow its rules and still fail to solve the problem.",
+      "support": "We study how representations, authority and evidence shape real outcomes, and how to repair failures.",
       "sections": [
         {
           "title": "When assumptions become executable",
@@ -141,8 +141,8 @@ export const doctrineFrontDoor = {
       "tagline": "Powerful computation. Accountable execution.",
       "summary": "Distinguish computational capability from authority. Keep consequential action bounded, accountable and open to correction.",
       "question": "Who is authorized to do what, and what must remain preserved?",
-      "lead": "Artificial intelligence can extend what people are able to investigate, understand and construct. That capability becomes consequential when a system can change real conditions, influence meaningful choices or exercise delegated authority.",
-      "support": "Our governance doctrine distinguishes what a computational system can do from what it may legitimately do. We seek to make the boundary between assistance and consequential operation explicit, testable, accountable and repairable.",
+      "lead": "AI can help people investigate, understand and build. Its use becomes consequential when it changes real conditions, shapes choices or exercises delegated authority.",
+      "support": "We distinguish what a system can do from what it may do. Our goal is to make the boundary between assistance and action explicit, testable, accountable and repairable.",
       "sections": [
         {
           "title": "AI is a forge, not an oracle",
@@ -234,8 +234,8 @@ export const doctrineFrontDoor = {
       "tagline": "Collaboration by construction.",
       "summary": "Expand people’s practical capacity to know, choose, create, cooperate and participate in improving the world they inhabit.",
       "question": "What can people meaningfully understand, choose and do?",
-      "lead": "Institutions depend on people, regardless of their role. We may be workers, customers, patients, citizens or users, but none of those roles defines who we are.",
-      "support": "Constructive Human Agency is the positive purpose of our work: helping people understand, decide, create, collaborate, say no, challenge decisions and make repairs. It is not limited to AI, and it does not require agreement with the Lab.",
+      "lead": "Institutions depend on people. Whether we are workers, customers, patients, citizens or users, no single role defines us.",
+      "support": "We want people to be able to understand, decide, create, collaborate, refuse, challenge decisions and make repairs. This goes beyond AI and does not require agreement with the Lab.",
       "sections": [
         {
           "title": "From necessity to mastery",
@@ -336,7 +336,7 @@ export const doctrineFrontDoor = {
     "name": "Codexware",
     "tagline": "Institutional tools, in your hands.",
     "lead": "Codexware is Boundary First Labs’ flagship software application and computational platform.",
-    "support": "It is being developed to help people understand requirements, preserve evidence, examine consequential decisions and exercise greater agency in the systems they depend on.",
+    "support": "We are developing tools to help you understand requirements, preserve your evidence and examine decisions that affect your life.",
     "sections": [
       {
         "title": "Because data is consequential.",
@@ -571,8 +571,8 @@ export const doctrineFrontDoor = {
     "name": "Work With Us",
     "eyebrow": "Research · Engineering · Public service",
     "tagline": "Start with the problem, not a specification.",
-    "lead": "A research question, an unresolved problem or a capability you want to develop is enough to begin.",
-    "support": "We work through scoped engagements and complementary expertise in architecture, research, evidence, governance and repair.",
+    "lead": "Bring a research question, an unresolved problem or a capability you want to develop.",
+    "support": "We agree on the scope of the work and seek complementary expertise in architecture, research, evidence, governance and repair.",
     "principle": "Useful work should leave more capability behind.",
     "groups": [
       {
@@ -759,8 +759,8 @@ export const doctrineFrontDoor = {
     "name": "Observatory",
     "eyebrow": "Public research exhibits",
     "tagline": "What models show. What they leave out.",
-    "lead": "Selected research questions, demonstrations and methods from mathematics, computation, physics, institutions and economics.",
-    "support": "The working laboratory remains private. Each public exhibit states the scope of its evidence and what it can establish.",
+    "lead": "Explore questions in mathematics, computing, physics, institutions and economics.",
+    "support": "The working Lab remains private. Each exhibit explains its methods, evidence and limits.",
     "foundationsHeading": "Intellectual foundations",
     "foundationsIntro": "Established disciplines supply the standards of reasoning and evidence.",
     "foundations": [
@@ -929,8 +929,8 @@ export const doctrineFrontDoor = {
     "name": "A Digital-Native Institution",
     "eyebrow": "How the Lab works",
     "tagline": "One person, with tools under human control.",
-    "lead": "We organize research and engineering around durable digital knowledge, computational instruments and explicit human responsibility.",
-    "support": "Our institutional capacity comes from years of accumulated work, software and governed computational assistance rather than a large staff or traditional departmental structure.",
+    "lead": "We organize research and engineering around lasting digital records, computational tools and clear human responsibility.",
+    "support": "Years of accumulated work, software and governed computational assistance provide capacity without a large staff or traditional departments.",
     "homeIntro": {
       "title": "A digital-native research institution.",
       "body": "The Lab is built around persistent knowledge, computational instruments and accountable human direction. Explore the values, stewardship and continuity commitments behind our solo-operated institution.",
@@ -1075,8 +1075,8 @@ export const doctrineFrontDoor = {
       "name": "Professional Services",
       "eyebrow": "Commissioned work · Inquiries open",
       "tagline": "Understand the system before deciding what to change.",
-      "lead": "Bring a system that is expensive to misunderstand. We help reconstruct how it works, where it fails, what must be preserved, and which intervention is worth undertaking.",
-      "support": "Boundary First Labs is a solo-operated, computationally leveraged research and engineering institution. Engagements are sized to actual capacity and agreed deliverables; specialist collaborators are sought when the work requires them.",
+      "lead": "Bring us a system that is costly to misunderstand. We help reconstruct how it works, where it fails and what needs to be preserved.",
+      "support": "The Lab operates with one person and computational tools. We agree on deliverables within our capacity and seek specialists when needed.",
       "statusTitle": "Start with a bounded diagnostic",
       "status": "An initial discussion can establish whether a focused review, workshop, research task or prototype is appropriate. No implementation, schedule, fee or production access is assumed until scope and authority are agreed.",
       "offerHeading": "Three ways to commission work",
@@ -1141,8 +1141,8 @@ export const doctrineFrontDoor = {
       "name": "Scientific Paper Auditing",
       "eyebrow": "Commissioned work · Pilot inquiries",
       "tagline": "Make claims traceable and results reproducible.",
-      "lead": "We are developing an independent, computationally assisted research review practice that traces claims to their definitions, assumptions, evidence and dependencies.",
-      "support": "Authors, laboratories, journals and research organizations can discuss a bounded review. This is a pilot offering, not a released automated service, peer review or accredited certification.",
+      "lead": "Our developing independent review practice uses computational tools to trace research claims to their definitions, assumptions, evidence and dependencies.",
+      "support": "Authors, labs, journals and research organizations can discuss a scoped review. This is a pilot offering, not a released automated service, peer review or accredited certification.",
       "statusTitle": "Pilot review model",
       "status": "Subject to fit and capacity, a selected preliminary check may be offered at no charge. A targeted or extended audit can be separately commissioned with explicit scope and fees. No turnaround, coverage or acceptance guarantee is implied.",
       "offerHeading": "What a review can examine",
@@ -1207,8 +1207,8 @@ export const doctrineFrontDoor = {
       "name": "Government and Public Service",
       "eyebrow": "Public partnerships · Inquiries open",
       "tagline": "Make public systems understandable, accountable and repairable.",
-      "lead": "We seek collaborations with public agencies, civic organizations, researchers and communities to investigate consequential failures and support practical, lawful improvements.",
-      "support": "The concern is public good: make the consequences of institutional and technical systems visible, reduce unnecessary human compensation and preserve the capacity of people to participate in decisions affecting them.",
+      "lead": "We seek collaborations with public agencies, civic organizations, researchers and communities to investigate failures and develop practical, lawful improvements.",
+      "support": "The aim is to show who bears the consequences, reduce the extra work people must do to compensate for system failures, and preserve their ability to participate in decisions that affect them.",
       "statusTitle": "A bounded public-interest pilot",
       "status": "Start with public or appropriately authorized evidence, a named domain partner and a defined question. BFL is not a government agency, official adjudicator or legal representative. No access, affiliation, procurement award or intervention is presumed.",
       "offerHeading": "Potential areas of collaboration",
@@ -1273,8 +1273,8 @@ export const doctrineFrontDoor = {
       "name": "Funding, Investment and Sponsorship",
       "eyebrow": "Support inquiries · Discussion only",
       "tagline": "Useful discoveries sustain independent research.",
-      "lead": "Useful applied work, independent research support and responsibly developed computational capabilities are the proposed means of sustaining Boundary First Labs.",
-      "support": "We are currently solo-operated. We seek capacity for bounded investigations, engineering, qualified external review, reproducibility, knowledge transfer and public-interest infrastructure—not headcount growth for its own sake.",
+      "lead": "We aim to sustain the Lab through applied work, independent research support and responsibly developed software.",
+      "support": "As a solo-operated Lab, we seek capacity for focused research, engineering, qualified external review, reproducible work, knowledge sharing and public-interest infrastructure—not growth for its own sake.",
       "statusTitle": "A conversation, not an investment offering",
       "status": "No financing round, securities terms, valuation, grant eligibility, tax status, revenue or investment return is represented here. Any sponsorship, grant or investment must be separately structured, reviewed and agreed with the appropriate parties.",
       "offerHeading": "Different resources, different obligations",
@@ -1342,8 +1342,8 @@ export const doctrineFrontDoor = {
       "eyebrow": "Observatory · Exhibit 01 · Origins",
       "directoryLabel": "01 · Origins",
       "tagline": "Engineering practice shaped the research questions.",
-      "lead": "Boundary First begins in the work of understanding and repairing systems. Its intellectual foundations are inherited from established disciplines; its research questions arise where their representations meet consequential practice.",
-      "support": "This is a selective account of the intellectual formation of the laboratory, not an exhaustive bibliography, a claim of priority, or proof of a scientific theory.",
+      "lead": "Boundary First draws on established disciplines and grew from the practice of understanding and repairing systems. Our questions arise where representations meet real-world demands.",
+      "support": "This is a selective account of the Lab’s intellectual origins, not a complete bibliography, claim of priority or proof of a scientific theory.",
       "sections": [
         {
           "title": "Practice is a source of questions",
@@ -1399,8 +1399,8 @@ export const doctrineFrontDoor = {
       "eyebrow": "Observatory · Exhibit 02 · Research directions",
       "directoryLabel": "02 · Research directions",
       "tagline": "Depth tests validity. Breadth tests relevance.",
-      "lead": "The laboratory investigates the relationships between representation, transformation and consequence through several interacting research directions. The aim is to develop reusable understanding without erasing the distinct requirements of each domain.",
-      "support": "The diagram and categories here describe functional roles and questions, not the private dependency graph, a complete theory, or an assertion that the domains reduce to one another.",
+      "lead": "We study how representations change and what follows, across several fields. Our aim is to find reusable ideas while respecting what each field requires.",
+      "support": "The diagram shows roles and questions, not the private dependency graph, a complete theory or a claim that all fields reduce to one another.",
       "sections": [
         {
           "title": "Foundations and native domains",
@@ -1477,8 +1477,8 @@ export const doctrineFrontDoor = {
       "eyebrow": "Observatory · Exhibit 03 · Research functions",
       "directoryLabel": "03 · Research functions",
       "tagline": "Preserve research. Make it checkable and correctable.",
-      "lead": "Boundary First Labs is currently a solo-operated institution. Its computational tools are intended to extend what one person can research, build and verify, while keeping direction and responsibility with people.",
-      "support": "This exhibit explains the functions that a durable research environment must support, not its internal software design, data model, automation contracts or performance specifications.",
+      "lead": "The Lab is currently run by one person. Its tools aim to extend what that person can investigate, build and verify while keeping direction and responsibility with people.",
+      "support": "This exhibit explains the functions a lasting research environment needs, not its internal software design, data model, automation contracts or performance specifications.",
       "sections": [
         {
           "title": "Research is more than a final paper",
@@ -1538,8 +1538,8 @@ export const doctrineFrontDoor = {
       "eyebrow": "Observatory · Exhibit 04 · Teaching examples",
       "directoryLabel": "04 · Teaching examples",
       "tagline": "Small examples. Clear assumptions. Limited conclusions.",
-      "lead": "A carefully chosen example can make a research question tangible without revealing unpublished research. The three examples here use elementary arithmetic and fictional records; each is independently checkable from the information shown.",
-      "support": "These are teaching constructions prepared for the exhibition, not demonstrations of a proprietary algorithm, live client data, an empirical performance benchmark or newly established scientific results.",
+      "lead": "Explore three examples using elementary arithmetic and fictional records. Each can be checked from the information shown.",
+      "support": "These teaching examples do not disclose unpublished research, demonstrate a proprietary algorithm, use live client data, benchmark performance or establish new scientific results.",
       "sections": [
         {
           "title": "Geometry: one quantity does not determine another",
@@ -1597,8 +1597,8 @@ export const doctrineFrontDoor = {
     "name": "Economic Maintenance",
     "eyebrow": "Codexware · Behind the application",
     "tagline": "What does it cost to sustain a life?",
-    "lead": "Our Economic Water Model research examines stocks, flows, access constraints, institutional obligations and material consequences. We investigate how monetary resources relate to the conditions they are intended to support.",
-    "support": "These are reasons to build individual-directed computational tools: to make requirements, resources, obligations, evidence and the consequences of decisions more legible. This is a research and application-design exhibit, not a released economic product. A balanced transaction does not necessarily produce a viable outcome. A repair can be technically possible while remaining inaccessible under a household’s resource and obligation constraints. Maintaining a life is work: access to transportation, housing, connectivity and essential services can be interdependent. Investigate when resources become available, not only how much exists.",
+    "lead": "Our Economic Water Model studies how money accumulates and moves, who can access it, and how obligations and resources affect real living conditions.",
+    "support": "The goal is tools that help people understand requirements, resources, obligations, evidence and the effects of decisions. This is research and application design, not a released economic product.",
     "status": "Working research program and application motivation. The proposed atlas study window is 1960–2025; coverage differs by indicator and source. The historical series, case findings and numerical estimates require source-vintage, methodology and specialist review before publication. This exhibit does not report a validated national index, causal conclusion or individualized financial advice.",
     "topicsHeading": "Eight questions behind the work.",
     "topics": [
@@ -1615,7 +1615,7 @@ export const doctrineFrontDoor = {
       {
         "id": "maintenance",
         "title": "Maintenance debt",
-        "body": "What is still owed to a functioning system? Distinguish maintenance obligations, funding, spending, work performed and verified service restoration."
+        "body": "What is still owed to a functioning system? Distinguish maintenance obligations, funding, spending, work performed and verified service restoration. A balanced transaction need not restore a service. Even a technically possible repair can be inaccessible when resources are committed elsewhere."
       },
       {
         "id": "value",
@@ -1630,7 +1630,7 @@ export const doctrineFrontDoor = {
       {
         "id": "time",
         "title": "Temporal access",
-        "body": "How long, and how reliably, can people use money, transport, housing, energy or other essential capabilities? Time and continuity matter independently of transaction price."
+        "body": "How long, and how reliably, can people use money, transport, housing, energy or other essential capabilities? Time and continuity matter independently of transaction price. Transport, housing, connectivity and other essential services can depend on each other. Investigate when resources become available, not only how much exists."
       },
       {
         "id": "crises",
@@ -1766,8 +1766,8 @@ export const doctrineFrontDoor = {
     "name": "Civic Record",
     "eyebrow": "Codexware Civic · Private prototype",
     "tagline": "Your records. Your evidence. Your agency.",
-    "lead": "Civic Record is being developed as a person-operated local evidence workspace to help you preserve and understand the records of your interactions with consequential systems. Your ability to demonstrate what happened should not depend entirely on an institution’s ability to remember it.",
-    "support": "When bills, notices, receipts and correspondence disagree, people are often left to reconstruct what happened. The workspace is intended to reduce that burden without claiming authority to decide the matter on their behalf. Development also investigates selected disclosure, portable recovery, and local storage protection. Independent security, accessibility, platform and real-data qualification remain necessary.",
+    "lead": "Civic Record is a developing local workspace for keeping and understanding records of your dealings with institutions and other consequential systems. You should not have to rely on an institution’s memory to show what happened.",
+    "support": "When bills, notices, receipts or messages disagree, the tool is intended to help you reconstruct what happened, not decide the matter for you. Development explores selective sharing, portable recovery and local storage protection; independent security, accessibility, platform and real-data reviews remain necessary.",
     "status": "Private synthetic-data development. Bounded development work exists; no public release, approved real-data intake, production-readiness claim or independently established human-benefit claim is made. Security, accessibility, usability, distribution and stewardship reviews remain outstanding. Please do not send sensitive records for testing.",
     "commitmentsHeading": "Useful without surrendering control.",
     "commitments": [
@@ -1843,8 +1843,8 @@ export const doctrineFrontDoor = {
     "eyebrow": "Observatory · Teaching collection",
     "name": "Instruments",
     "tagline": "From mathematics to practical problems.",
-    "lead": "Explore what a system can distinguish, what its records preserve, what it takes to make repair accessible, and how computational authority can be bounded.",
-    "support": "Six small exhibits: three interactive teaching models and three worked examples. Each starts with a recognizable problem and states precisely what its evidence can establish.",
+    "lead": "Explore what systems can distinguish, what their records preserve, what makes repair accessible and how computational authority can be limited.",
+    "support": "Six small exhibits: three interactive teaching models and three worked examples. Each begins with a recognizable problem and explains what its evidence can establish.",
     "intro": "Different problems. Shared computational foundations. We develop general capabilities through specific, inspectable problems. These public exhibits are deliberately simplified constructions, not interfaces to private research engines.",
     "boundary": "Every input is fictional or elementary. The controls only change local teaching models. No personal records, uploads, account access, stored data, remote computation or external execution. These are not released Codexware applications, completed customer engagements or security certifications.",
     "capabilities": [
@@ -2408,7 +2408,7 @@ export const doctrineFrontDoor = {
     "eyebrow": "Our standards",
     "tagline": "An institution answerable to evidence.",
     "lead": "You should be able to examine the work before deciding whether to trust it.",
-    "support": "Boundary First Labs is an independent, founder-led, digital-native research and engineering institution. We distinguish what we have constructed, what we have investigated, what the evidence supports, and what remains unresolved. Intellectual independence is not exemption from evidence.",
+    "support": "As an independent, founder-led, digital-native lab, we distinguish what we have built, what we have investigated, what the evidence supports and what remains unresolved. Intellectual independence is not exemption from evidence.",
     "credibility": [
       {
         "title": "Provenance",
