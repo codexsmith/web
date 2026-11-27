@@ -10,21 +10,21 @@ export const doctrineFrontDoor = {
       {
         "title": "Codexware",
         "tagline": "Flagship application",
-        "body": "Our developing software application for preserving evidence, supporting human agency and navigating consequential systems.",
+        "body": "Keep your evidence, understand requirements and examine decisions that affect you.",
         "href": "/codexware",
         "label": "Explore Codexware"
       },
       {
         "title": "Observatory",
         "tagline": "Research & evidence",
-        "body": "Research directions, selected demonstrations, intellectual foundations and evidence behind cleared public results.",
+        "body": "Explore research questions, worked examples and the evidence behind public results.",
         "href": "/observatory",
-        "label": "Inspect the research"
+        "label": "Browse the exhibits"
       },
       {
         "title": "Work With Us",
         "tagline": "Collaboration & services",
-        "body": "Research-driven engineering, scientific collaboration, evidence review and the design of accountable, repairable systems.",
+        "body": "Bring a difficult system, research question or repair to investigate together.",
         "href": "/work-with-us",
         "label": "Find an engagement"
       }
@@ -367,7 +367,7 @@ export const doctrineFrontDoor = {
     "status": "In development. This page describes intended capabilities and formal design and verification requirements, not a product release, availability promise, MCP integration, or claim of verified safeguards.",
     "commitments": {
       "heading": "Computational capability. Human authority.",
-      "intro": "Governance by construction begins with five design requirements for the proposed deployment boundary.",
+      "intro": "Five requirements guide the design of deployment boundaries.",
       "items": [
         {
           "title": "Procedurally verifiable opt-in",
@@ -395,48 +395,48 @@ export const doctrineFrontDoor = {
     },
     "examples": {
       "heading": "Intended uses",
-      "intro": "Five ordinary problems illustrate how governed computational instruments could support human decisions.",
+      "intro": "Five everyday questions illustrate where the tools could help.",
       "items": [
         {
           "id": "requirements",
-          "title": "Understand the requirements",
+          "title": "Form requirements",
           "question": "Why was my form rejected, and what is actually required?",
-          "body": "Compare a proposed submission with requirements; identify missing or conflicting evidence before preparing a correction."
+          "body": "Compare a draft submission with the stated requirements and identify missing or conflicting evidence before preparing a correction."
         },
         {
           "id": "affordability",
-          "title": "Understand the cost of sustaining a life",
+          "title": "Essential services",
           "question": "Can I maintain the services I depend on, not just afford the next payment?",
-          "body": "Connect income, obligations, essential services and the duration of access."
+          "body": "Connect income, obligations, essential services and how long access lasts."
         },
         {
           "id": "value",
-          "title": "Compare what a transaction delivers",
+          "title": "Value for money",
           "question": "Am I paying more for less usable service?",
-          "body": "Compare price, quantity, durability, maintenance and delivered service—not just the transaction price."
+          "body": "Compare quantity, durability, maintenance and delivered service alongside price."
         },
         {
           "id": "repair",
-          "title": "Know whether the problem was repaired",
-          "question": "The claim is settled. Has my transportation, housing or access actually been restored?",
-          "body": "Distinguish the obligation, payment, physical repair, restored service and unresolved consequences."
+          "title": "Repair and recovery",
+          "question": "The claim is settled. Is my transport, housing or access restored?",
+          "body": "Distinguish the obligation, payment, physical repair, restored service and remaining consequences."
         },
         {
           "id": "public",
-          "title": "Understand how public resources become public services",
+          "title": "Public spending and services",
           "question": "What was funded, what was done, and what obligation remains?",
-          "body": "Relate budgets and work records to evidence of delivered service; expenditure is not proof of restoration."
+          "body": "Connect budgets and work records to evidence of delivered service. Spending is not proof of restoration."
         }
       ],
       "limit": "Illustrative intended uses. Codexware is in development. These examples do not promise functionality, determine eligibility, provide individualized financial or legal advice, or authorize submission, payment or external action.",
       "href": "/codexware/economic-maintenance",
       "label": "Explore Economic Maintenance",
-      "linkIntro": "Explore the research connecting financial records to material viability."
+      "linkIntro": "Learn how financial records relate to real living conditions."
     },
     "civicIntro": {
       "title": "Civic Record",
       "tagline": "Your records. Your evidence. Your agency.",
-      "body": "A proposed local workspace to preserve originals, document events and organize selected evidence. Core utility is intended to be free at the MVP stage, without AI, an external account, subscription or research participation.",
+      "body": "Keep original records, document events and organize evidence on your own device. The initial core is intended to be free, without AI, an external account, subscription or research participation.",
       "status": "Private prototype · Synthetic-data development · Not publicly available",
       "href": "/codexware/civic-record",
       "label": "Explore Civic Record"
@@ -478,27 +478,27 @@ export const doctrineFrontDoor = {
     "home": {
       "eyebrow": "Institutional foundations",
       "title": "Three doctrines. One purpose.",
-      "intro": "These are the principles through which we pursue public good: understand the system, govern the machinery and expand human agency."
+      "intro": "Understand systems, govern computation and expand human agency in service of the public good."
     },
     "codexware": {
       "eyebrow": "Design foundations",
       "title": "Three doctrines inform the application.",
-      "intro": "The systems we study, the way we govern computation and our goal of expanding what people can do shape the application's design requirements."
+      "intro": "Understand the systems people rely on, govern the tools and preserve human agency."
     },
     "observatory": {
       "eyebrow": "Institutional foundations",
       "title": "The doctrines behind the work.",
-      "intro": "These three doctrines explain why we investigate consequential systems, how we govern computational capability, and whose agency the work is intended to support."
+      "intro": "These principles guide what we investigate, how we use computation and whom the work serves."
     },
     "work-with-us": {
       "eyebrow": "Principles of engagement",
-      "title": "The doctrines that guide our work together.",
-      "intro": "We bring consequence accounting, accountable computation and respect for individual agency to our engagements."
+      "title": "Principles for working together",
+      "intro": "Account for consequences, govern computation and respect individual agency."
     },
     "related": {
       "eyebrow": "Related institutional doctrines",
-      "title": "Explore the other doctrines.",
-      "intro": "Each doctrine addresses a distinct part of the same institutional purpose."
+      "title": "Explore the other doctrines",
+      "intro": "Each addresses a different part of our public purpose."
     },
     "digital-native-institution": {
       "eyebrow": "Our institutional commitments",
@@ -507,48 +507,48 @@ export const doctrineFrontDoor = {
     },
     "work-with-us/professional-services": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines that guide this work.",
-      "intro": "Our engagements are grounded in the same three doctrines as the institution itself."
+      "title": "Principles for this work",
+      "intro": "Account for consequences, govern computation and respect individual agency."
     },
     "work-with-us/paper-auditing": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines that guide this work.",
-      "intro": "Our engagements are grounded in the same three doctrines as the institution itself."
+      "title": "Principles for this work",
+      "intro": "Account for consequences, govern computation and respect individual agency."
     },
     "work-with-us/public-service": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines that guide this work.",
-      "intro": "Our engagements are grounded in the same three doctrines as the institution itself."
+      "title": "Principles for this work",
+      "intro": "Account for consequences, govern computation and respect individual agency."
     },
     "work-with-us/funding": {
       "eyebrow": "Institutional foundations",
-      "title": "The doctrines that guide this work.",
-      "intro": "Our engagements are grounded in the same three doctrines as the institution itself."
+      "title": "Principles for this work",
+      "intro": "Account for consequences, govern computation and respect individual agency."
     },
     "observatory/intellectual-lineage": {
       "eyebrow": "Institutional foundations",
       "title": "The doctrines behind the work.",
-      "intro": "Consequential Systems, AI Governance and Constructive Human Agency guide the laboratory’s inquiry and its public purpose."
+      "intro": "Understand systems, govern computation and expand human agency."
     },
     "observatory/research-architecture": {
       "eyebrow": "Institutional foundations",
       "title": "The doctrines behind the work.",
-      "intro": "Consequential Systems, AI Governance and Constructive Human Agency guide the laboratory’s inquiry and its public purpose."
+      "intro": "Understand systems, govern computation and expand human agency."
     },
     "observatory/computational-inquiry": {
       "eyebrow": "Institutional foundations",
       "title": "The doctrines behind the work.",
-      "intro": "Consequential Systems, AI Governance and Constructive Human Agency guide the laboratory’s inquiry and its public purpose."
+      "intro": "Understand systems, govern computation and expand human agency."
     },
     "observatory/demonstrations": {
       "eyebrow": "Institutional foundations",
       "title": "The doctrines behind the work.",
-      "intro": "Consequential Systems, AI Governance and Constructive Human Agency guide the laboratory’s inquiry and its public purpose."
+      "intro": "Understand systems, govern computation and expand human agency."
     },
     "codexware/economic-maintenance": {
       "eyebrow": "Design foundations",
       "title": "The doctrines behind these questions.",
-      "intro": "Consequential systems, governed computation and constructive human agency inform the instruments we seek to build."
+      "intro": "These principles guide the research and the tools we aim to build."
     },
     "codexware/civic-record": {
       "eyebrow": "Design foundations",
@@ -558,7 +558,7 @@ export const doctrineFrontDoor = {
     "observatory/instruments": {
       "eyebrow": "Institutional foundations",
       "title": "The principles behind these instruments.",
-      "intro": "Explore the three doctrines that connect the research questions, bounded computation and human purpose."
+      "intro": "The research questions, limits on computation and purpose of the tools belong together."
     },
     "evidence-and-trust": {
       "eyebrow": "Institutional foundations",
@@ -578,29 +578,29 @@ export const doctrineFrontDoor = {
       {
         "id": "commission",
         "title": "Commission work",
-        "intro": "Scope work around a system, difficult decision or unresolved obligation.",
+        "intro": "Begin with a system, difficult decision or unresolved obligation.",
         "cards": [
           {
             "id": "systems",
             "title": "Professional services",
-            "body": "Review architecture, technical debt, migrations and maintenance; compare interventions and scope a practical repair.",
-            "label": "Explore professional services",
+            "body": "Review architecture, technical debt, migrations and maintenance. Compare options and scope a repair.",
+            "label": "See service options",
             "href": "/work-with-us/professional-services",
             "status": "Available for discussion"
           },
           {
             "id": "governance-review",
             "title": "Governance and consequence review",
-            "body": "Examine authority, evidence, failure modes and human consequences. Scope a diagnostic with domain specialists where needed.",
-            "label": "Explore review engagements",
+            "body": "Examine authority, evidence, failure modes and their effects on people. Involve specialists when needed.",
+            "label": "See review options",
             "href": "/work-with-us/professional-services",
             "status": "Available for discussion"
           },
           {
             "id": "paper-review",
-            "title": "Scientific paper auditing and verification",
-            "body": "Scoped manuscript review: assumptions, dependencies, reproducibility, counterexamples and open obligations. A pilot inquiry, not peer review or certification.",
-            "label": "Explore paper audit pilots",
+            "title": "Scientific paper auditing",
+            "body": "Review assumptions, dependencies, reproducibility, counterexamples and open obligations. Not peer review or certification.",
+            "label": "See the pilot",
             "href": "/work-with-us/paper-auditing",
             "status": "Pilot inquiry"
           }
@@ -609,37 +609,37 @@ export const doctrineFrontDoor = {
       {
         "id": "collaborate",
         "title": "Collaborate",
-        "intro": "Begin with one question, review, test or artifact. Independent criticism is welcome.",
+        "intro": "Begin with one question, test or artifact. Independent criticism is welcome.",
         "cards": [
           {
             "id": "research",
-            "title": "Scientific and research collaboration",
-            "body": "Discuss a proof attempt, experiment, dataset or counterexample; agree on a bounded investigation and inspectable artifact.",
-            "label": "Discuss research collaboration",
+            "title": "Research collaboration",
+            "body": "Bring a proof attempt, experiment, dataset or counterexample. Agree on a focused investigation and inspectable artifact.",
+            "label": "Propose an investigation",
             "href": "/contact",
             "status": "Collaboration inquiry"
           },
           {
             "id": "public-service",
             "title": "Government and public service",
-            "body": "Explore civic evidence, administrative repair, accessibility, infrastructure maintenance and economic analysis under lawful authority.",
-            "label": "Explore public-service collaboration",
+            "body": "Investigate civic evidence, administrative repair, accessibility, infrastructure maintenance or economic questions under lawful authority.",
+            "label": "See public-service opportunities",
             "href": "/work-with-us/public-service",
             "status": "Collaboration inquiry"
           },
           {
             "id": "partnerships",
-            "title": "Strategic and institutional partnerships",
-            "body": "Combine domain expertise, facilities or institutional access with research and engineering; preserve autonomy, attribution and exit paths.",
-            "label": "Discuss a partnership",
+            "title": "Institutional partnerships",
+            "body": "Combine expertise, facilities or access while preserving autonomy, attribution and the ability to leave.",
+            "label": "Propose a partnership",
             "href": "/contact",
             "status": "Partnership inquiry"
           },
           {
             "id": "education",
-            "title": "Education and knowledge transfer",
-            "body": "Discuss lectures, workshops and demonstrations that build transferable mastery, not a Lab-issued credential.",
-            "label": "Discuss an educational collaboration",
+            "title": "Education and knowledge sharing",
+            "body": "Develop lectures, workshops or demonstrations for transferable mastery, not a Lab-issued credential.",
+            "label": "Propose a learning project",
             "href": "/contact",
             "status": "Invitation to discuss"
           }
@@ -648,13 +648,13 @@ export const doctrineFrontDoor = {
       {
         "id": "support",
         "title": "Support the institution",
-        "intro": "Earned work and independent support can sustain research and public-interest infrastructure.",
+        "intro": "Help sustain the capacity to do the work.",
         "cards": [
           {
             "id": "funding",
             "title": "Funding, investment and sponsorship",
-            "body": "Discuss grants, sponsored work, philanthropy, investment or in-kind support for independent research, public-interest infrastructure and applied product development. Terms are separate; support cannot purchase conclusions.",
-            "label": "Explore funding and sustainability",
+            "body": "Grants, commissioned work, philanthropy, investment and in-kind resources can support independent inquiry, public infrastructure and product development. Terms are separate; funding cannot buy conclusions.",
+            "label": "See what support enables",
             "href": "/work-with-us/funding",
             "status": "Inquiry only"
           }
@@ -668,16 +668,16 @@ export const doctrineFrontDoor = {
           {
             "id": "open-lab",
             "title": "Open Lab",
-            "body": "Bring a public-system question, defect, counterexample or test. Criticism is welcome; contributions follow applicable publication, licensing and review conditions.",
-            "label": "Bring a question or critique",
+            "body": "Bring a public-system question, defect, counterexample or test. Contributions follow publication, licensing and review requirements.",
+            "label": "Share a question or critique",
             "href": "/contact",
             "status": "Public participation"
           },
           {
             "id": "media",
-            "title": "Speaking, media and publications",
-            "body": "Discuss a talk, interview, workshop or public explanation of the work and its consequences.",
-            "label": "Discuss an invitation",
+            "title": "Speaking and media",
+            "body": "Discuss a talk, interview, workshop or publication about the work and its consequences.",
+            "label": "Send an invitation",
             "href": "/contact",
             "status": "Invitation to discuss"
           }
@@ -685,23 +685,23 @@ export const doctrineFrontDoor = {
       }
     ],
     "engagement": {
-      "title": "How an engagement works",
-      "intro": "Explore without obligation. An initial conversation can establish whether useful, feasible work exists; a research question need not become a sales lead.",
+      "title": "How we work together",
+      "intro": "An initial conversation can establish whether useful, feasible work exists. A research question need not become a sales lead.",
       "steps": [
         {
           "title": "Understand the concern",
           "body": "Identify the system, affected people, decision and constraints. No predefined technology is required."
         },
         {
-          "title": "Agree the boundary",
+          "title": "Agree on the scope",
           "body": "Agree scope, evidence, access, authority, responsibilities, resources, deliverables, acceptance criteria, cost and timing. Pilots require voluntary participation, privacy, failure and evaluation conditions; real-data access and external action need separate authority."
         },
         {
-          "title": "Investigate and construct",
+          "title": "Investigate and build",
           "body": "Recover existing work, test assumptions, expose defects and compare options; construct an inspectable artifact with explicit uncertainty."
         },
         {
-          "title": "Verify, hand off and repair",
+          "title": "Verify and hand off",
           "body": "Check agreed obligations and preserve evidence, open issues and repair paths. Pilot findings do not establish broader readiness or social impact."
         }
       ],
@@ -710,29 +710,29 @@ export const doctrineFrontDoor = {
     },
     "know": {
       "title": "Institutional background",
-      "intro": "Founder-attributed history, research practice and institutional commitments.",
+      "intro": "How the Lab began, how it works and what guides it.",
       "cards": [
         {
           "id": "founder",
           "title": "Our founder",
-          "body": "Engineering practice and the Projectr origins of the Lab, with founder-attributed developmental history.",
-          "label": "Explore intellectual lineage",
+          "body": "The engineering experience and Projectr origins of the Lab, as recounted by its founder.",
+          "label": "Read the origin story",
           "href": "/observatory/intellectual-lineage",
           "status": "Background"
         },
         {
           "id": "method",
           "title": "Our method",
-          "body": "How people use computational tools to investigate questions, preserve evidence and revise constructions that do not work.",
-          "label": "Explore computational inquiry",
+          "body": "How we investigate, preserve evidence and revise constructions that fail.",
+          "label": "See the research process",
           "href": "/observatory/computational-inquiry",
           "status": "Practice"
         },
         {
           "id": "independence",
           "title": "Institutional independence",
-          "body": "Support sustainable research without purchasing predetermined conclusions.",
-          "label": "Read our funding and independence principles",
+          "body": "Sustain research without buying predetermined conclusions.",
+          "label": "Read the funding principles",
           "href": "/work-with-us/funding",
           "status": "Commitment"
         },
@@ -740,7 +740,7 @@ export const doctrineFrontDoor = {
           "id": "principles",
           "title": "Collaboration principles",
           "body": "Critique the work. Preserve the person. Repair what failed. Continue. Agree roles, attribution, confidentiality and handoff.",
-          "label": "Read institutional commitments",
+          "label": "Read our commitments",
           "href": "/digital-native-institution",
           "status": "Commitment"
         }
@@ -748,10 +748,10 @@ export const doctrineFrontDoor = {
     },
     "contact": {
       "title": "Start a conversation",
-      "body": "A short, non-confidential description of what you want to understand, build or repair is enough. Choose an inquiry or use direct email.",
+      "body": "Tell us what you want to understand, build or repair. Choose an inquiry or email us directly.",
       "privacy": "Please do not send sensitive personal records, credentials or confidential material in an initial message. We can discuss the appropriate boundaries before exchanging anything consequential.",
       "href": "/contact",
-      "label": "Prepare an inquiry"
+      "label": "Send an inquiry"
     }
   },
   "observatory": {
@@ -834,7 +834,7 @@ export const doctrineFrontDoor = {
         "body": "Accessible teaching instruments and bounded testbeds; transfer to other settings requires evidence."
       }
     ],
-    "methodHeading": "Boundary First: begin where the distinction becomes consequential.",
+    "methodHeading": "How Boundary First investigates",
     "methodIntro": "Ask what a representation distinguishes, preserves, excludes and permits. Test against native standards and preserve evidence, including failures.",
     "method": [
       {
@@ -854,7 +854,7 @@ export const doctrineFrontDoor = {
         "body": "Record evidence, uncertainty, failures and corrections. Evaluate possible repairs and preserve evidence needed to inspect the result."
       }
     ],
-    "evidenceHeading": "Evidence: know what is known. Preserve what is not.",
+    "evidenceHeading": "What the evidence supports",
     "evidenceIntro": "Distinguish background knowledge, hypotheses, deductions, observations, verified results and independent findings. A demonstration is not a general theorem; public release is not independent validation.",
     "evidence": [
       {
@@ -905,7 +905,7 @@ export const doctrineFrontDoor = {
       "takeaway": "The label cannot establish whether the person received the service. Local correctness can be inadequate for a consequential question; identify the missing evidence and repair path.",
       "limit": "This is an invented teaching example, not a measured finding about a real institution, a proprietary algorithm, or validation of a general theory."
     },
-    "releaseHeading": "Public release: a curated record, not an open workbench.",
+    "releaseHeading": "What we make public",
     "releaseBody": "Exhibits are selected individually. Unpublished derivations, dependency maps, working datasets, private logs and execution controls remain outside this exhibition. Claims are limited when supporting evidence is not available.",
     "releaseNote": "This overview does not announce a new scientific result, external certification or released application. Review and publication status belong to each artifact.",
     "links": [
@@ -1600,7 +1600,7 @@ export const doctrineFrontDoor = {
     "lead": "Our Economic Water Model studies how money accumulates and moves, who can access it, and how obligations and resources affect real living conditions.",
     "support": "The goal is tools that help people understand requirements, resources, obligations, evidence and the effects of decisions. This is research and application design, not a released economic product.",
     "status": "Working research program and application motivation. The proposed atlas study window is 1960–2025; coverage differs by indicator and source. The historical series, case findings and numerical estimates require source-vintage, methodology and specialist review before publication. This exhibit does not report a validated national index, causal conclusion or individualized financial advice.",
-    "topicsHeading": "Eight questions behind the work.",
+    "topicsHeading": "Eight research questions",
     "topics": [
       {
         "id": "historical",
@@ -1643,7 +1643,7 @@ export const doctrineFrontDoor = {
         "body": "Which consequences are identifiable from the available observations? Distinguish measured effects, bounded estimates and unresolved human impacts without treating uncertainty as absence."
       }
     ],
-    "casesHeading": "Ten cases and teaching examples.",
+    "casesHeading": "Ten cases and teaching examples",
     "casesIntro": "These case descriptions are research questions or explicitly constructed teaching examples. Historical findings, figures and named-company allegations are deliberately withheld pending evidence review.",
     "cases": [
       {
@@ -1717,7 +1717,7 @@ export const doctrineFrontDoor = {
         "limit": "No current deficit figure, combined total, official partnership or completed finding is asserted."
       }
     ],
-    "methodHeading": "From requirements to verified repair.",
+    "methodHeading": "From requirements to verified repair",
     "methodIntro": "A computational instrument should support the investigation, not invent the missing evidence or decide the outcome for the person.",
     "method": [
       {
@@ -2788,42 +2788,42 @@ export const doctrineFrontDoor = {
     "href": "/work-with-us/funding",
     "anchorId": "reader-example",
     "heading": "Applied product development",
-    "intro": "Support can help turn research and engineering into accessible software, independently evaluated capabilities and practical integrations. The following are proposed development directions, not available products or validated commercial offerings.",
+    "intro": "Support could turn research into useful software, independently evaluated capabilities and integrations. These are proposed directions, not available products or validated commercial offerings.",
     "items": [
       {
         "id": "weather",
         "title": "Boundary First Weather",
         "status": "Research & development",
-        "body": "Investigate atmospheric modeling, simulation, computational efficiency and distributed scientific computation. Support could enable further modeling, evaluation against observations and usable weather tools."
+        "body": "Develop atmospheric models and efficient distributed simulations, test them against observations and explore useful weather tools."
       },
       {
         "id": "chess",
         "title": "Boundary First Chess",
         "status": "Education & product development",
-        "body": "Explore explainable analysis, educational tools, coaching and commentary grounded in legal moves, admissible paths and the structure of positions."
+        "body": "Explore explainable analysis, coaching, learning and commentary grounded in legal moves and the structure of positions."
       },
       {
         "id": "sports",
         "title": "Boundary First Sports",
         "status": "Applied research",
-        "body": "Explore tactical analysis, spatial reasoning and computational tools for understanding competitive play."
+        "body": "Explore tactical analysis and spatial reasoning tools for understanding competitive play."
       },
       {
         "id": "integrations",
         "title": "Codexware Integrations",
         "status": "Application & integration development",
-        "body": "Develop composable reasoning, evidence, verification and governed computational capabilities for integration into existing software and workflows."
+        "body": "Bring reusable reasoning, evidence, verification and governed computation into existing software and workflows."
       }
     ],
     "closing": "Potential engagements include research sponsorship, commissioned development, pilot programs, publishing, licensing and technical integration partnerships, subject to readiness, scope and agreement.",
     "pathways": {
       "home": {
         "heading": "From research to products",
-        "body": "Boundary First Weather and Boundary First Chess are proposed applied products that could bring the Lab’s research into everyday use.",
+        "body": "Proposed products like Boundary First Weather and Boundary First Chess could bring our research into everyday use.",
         "label": "Explore what support could make possible"
       },
       "observatory": {
-        "body": "Atmospheric modeling and the structure of legal chess play offer distinct settings for applied computational inquiry. Boundary First Weather and Boundary First Chess are proposed product directions, not released demonstrations.",
+        "body": "Atmospheric modeling and legal chess play offer different settings for computational inquiry. Boundary First Weather and Boundary First Chess are proposed products, not released demonstrations.",
         "label": "Explore support for Weather and Chess"
       }
     }
